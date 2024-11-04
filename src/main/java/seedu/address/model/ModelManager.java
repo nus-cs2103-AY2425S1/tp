@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -26,7 +28,7 @@ public class ModelManager implements Model {
     private final EventManager eventManager;
     private final FilteredList<Person> filteredPersons;
 
-    private boolean searchMode = false;
+    private BooleanProperty searchMode = new SimpleBooleanProperty(false);
     private Predicate<Person> lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
 
     /**
@@ -169,16 +171,22 @@ public class ModelManager implements Model {
      * Checks the search mode of the model.
      */
     public boolean getSearchMode() {
-        return searchMode;
+        return searchMode.get();
     }
 
     /**
      * Sets the search mode of the model.
      */
     public void setSearchMode(boolean searchMode) {
-        this.searchMode = searchMode;
+        this.searchMode.set(searchMode);
     }
 
+    /**
+     * Returns the search mode object.
+     */
+    public BooleanProperty searchModeProperty() {
+        return searchMode;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -198,5 +206,9 @@ public class ModelManager implements Model {
     }
 
 
+    @Override
+    public ObservableList<Person> getAllPersons() {
+        return addressBook.getPersonList();
+    }
 
 }

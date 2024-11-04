@@ -128,6 +128,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void searchModeProperty() {
+        assertEquals(false, modelManager.searchModeProperty().get());
+    }
+
+    @Test
+    public void getAllPersons() {
+        assertEquals(modelManager.getAddressBook().getPersonList(), modelManager.getAllPersons());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

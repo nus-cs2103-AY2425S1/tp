@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -193,6 +194,19 @@ public class AddCommandTest {
         public Predicate<Person> getLastPredicate() {
             throw new AssertionError("This method should not be called.");
         }
+
+
+
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public BooleanProperty searchModeProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
