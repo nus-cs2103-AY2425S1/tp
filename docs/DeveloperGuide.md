@@ -194,7 +194,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-User inputs are parsed through `AbcliParser` to create executable `Command` objects. The parsing done by `AbcliParser` is determined by its mode of parsing, which is either the Buyer mode, MeetUp mode, or Property mode. For example, in the Buyer mode, AbcliParser will create a `BuyerCommandParser` object to parse the input, and create a command that is of type `Buyer`. 
+User inputs are parsed through `AbcliParser` to create executable `Command` objects. The parsing done by `AbcliParser` is determined by its mode of parsing, which is either the Buyer mode, MeetUp mode, or Property mode. For example, in the Buyer mode, AbcliParser will create a `BuyerCommandParser` object to parse the input, and create a command that is of type `Buyer`.
 
 The mode of `AbcliParser` can be switched by executing a `SwitchParserModeCommand`. An example of switching to the MeetUp mode:
 1. User inputs `switch m`, which is then passed to the `AbcliParser` class.
@@ -457,7 +457,7 @@ testers are expected to do more *exploratory* testing.
 1. Multiple launches
 
     1. Prerequisites: List all buyers using the `view` command. At least two buyers in the list.
-   
+
     1. Launching the app two times by double-clicking the jar file twice.  
      Expected: A new instance of the application should open with each double click
 
