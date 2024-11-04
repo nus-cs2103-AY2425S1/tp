@@ -81,9 +81,10 @@ public class EditOrderCommand extends Command {
         Order orderToEdit = lastShownOrderList.get(index.getZeroBased());
         Order editedOrder = createEditedOrder(orderToEdit, editOrderDescriptor);
 
+        model.setOrder(orderToEdit, editedOrder);
+
         OrderList orderList = model.getSelectedOrderList();
-        String feedbackToUser = !orderToEdit.equals(editedOrder) // ensure that some field(s) is changed
-                && orderList.contains(editedOrder)
+        String feedbackToUser = orderList.containsDuplicateOrder(editedOrder)
                 ? String.format(MESSAGE_DUPLICATE_ORDER_WARNING,
                 editedOrder.getStatus().getValue())
                 : "";
@@ -91,7 +92,6 @@ public class EditOrderCommand extends Command {
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
 
-        model.setOrder(orderToEdit, editedOrder);
         return new CommandResult(feedbackToUser
                 + String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
     }

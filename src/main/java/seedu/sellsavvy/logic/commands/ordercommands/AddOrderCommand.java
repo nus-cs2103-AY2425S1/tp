@@ -69,15 +69,16 @@ public class AddOrderCommand extends Command {
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = personToAddUnder.getOrderList();
-        String feedbackToUser = orderList.contains(toAdd)
+        orderList.add(toAdd);
+        model.updateSelectedPerson(personToAddUnder);
+        personToAddUnder.resetFilteredOrderList();
+
+        String feedbackToUser = orderList.containsDuplicateOrder(toAdd)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
         feedbackToUser += toAdd.hasDateElapsed()
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
-        orderList.add(toAdd);
-        model.updateSelectedPerson(personToAddUnder);
-        personToAddUnder.resetFilteredOrderList();
 
         return new CommandResult(feedbackToUser
                 + String.format(MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd)));
