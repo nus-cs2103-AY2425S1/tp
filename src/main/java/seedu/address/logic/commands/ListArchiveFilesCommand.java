@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 /**
  * Lists all archive files in the archive folder.
@@ -30,10 +31,7 @@ public class ListArchiveFilesCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        Path source = model.getAddressBookFilePath();
-        assert source != null : "Address book file path is null";
-
-        Path archiveDir = Paths.get(source.getParent().toString(), "archive");
+        Path archiveDir = model.getArchiveDirectoryPath();
         if (!Files.exists(archiveDir)) {
             logger.info("No archive directory found.");
             return new CommandResult(MESSAGE_NO_ARCHIVE);

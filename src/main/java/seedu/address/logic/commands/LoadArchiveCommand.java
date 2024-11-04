@@ -40,10 +40,7 @@ public class LoadArchiveCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        Path source = model.getAddressBookFilePath();
-        assert source != null : "Address book file path is null";
-
-        Path archiveFile = Paths.get(source.getParent().toString(), "archive", archiveFilename.toString());
+        Path archiveFile = Paths.get(model.getArchiveDirectoryPath().toString(), archiveFilename.toString());
         if (!Files.exists(archiveFile)) {
             logger.info("Archive file not found: " + archiveFilename);
             return new CommandResult(String.format(MESSAGE_NOT_FOUND, archiveFilename));
