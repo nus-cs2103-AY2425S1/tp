@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.

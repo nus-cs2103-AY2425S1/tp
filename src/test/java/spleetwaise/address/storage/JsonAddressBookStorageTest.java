@@ -10,11 +10,11 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");

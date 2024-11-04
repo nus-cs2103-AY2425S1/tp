@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -17,6 +16,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 /**
  * Jackson-friendly version of {@link Person}.

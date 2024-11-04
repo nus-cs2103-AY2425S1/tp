@@ -6,11 +6,11 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.UserPrefs;
+import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.storage.TransactionBookStorage;
 

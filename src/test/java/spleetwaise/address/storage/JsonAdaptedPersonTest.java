@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -17,6 +16,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 public class JsonAdaptedPersonTest {
 

@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import spleetwaise.address.commons.core.GuiSettings;
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 public class JsonUserPrefsStorageTest {
 

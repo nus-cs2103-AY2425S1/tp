@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import spleetwaise.address.commons.core.Config;
-import spleetwaise.address.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 /**
  * A class for accessing the Config File.
