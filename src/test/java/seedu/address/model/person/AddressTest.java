@@ -57,4 +57,33 @@ public class AddressTest {
         // different values -> returns false
         assertFalse(address.equals(new Address("Other Valid Address #12-345")));
     }
+    @Test
+    public void hashCode_sameAddress_returnsSameHashCode() {
+        Address address1 = new Address("123 Main St");
+        Address address2 = new Address("123 Main St");
+
+        assertTrue(address1.hashCode() == address2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentAddress_returnsDifferentHashCode() {
+        Address address1 = new Address("123 Main St");
+        Address address2 = new Address("456 Main St");
+
+        assertFalse(address1.hashCode() == address2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentValues_returnsDifferentHashCode() {
+        Address address1 = new Address("#10-34 Main St");
+        Address address2 = new Address("#11-34 Main St");
+
+        assertFalse(address1.hashCode() == address2.hashCode());
+    }
+
+    @Test
+    public void hashCode_sameObject_returnsSameHashCode() {
+        Address address = new Address("123 Main St");
+        assertTrue(address.hashCode() == address.hashCode());
+    }
 }
