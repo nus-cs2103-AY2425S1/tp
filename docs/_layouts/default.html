@@ -70,6 +70,24 @@
     flex: 1; /* Take up remaining space */
     padding: 20px;
   }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .content-container {
+      flex-direction: column; /* Stack sidebar on top of main content */
+    }
+    .sidebar {
+      position: relative; /* Sidebar no longer fixed */
+      width: 100%; /* Full width of the viewport */
+      height: auto; /* Auto height to fit content */
+      border-right: none; /* Remove the right border */
+      border-bottom: 1px solid #ccc; /* Optional: Add a bottom border */
+    }
+    .page-content {
+      margin-left: 0; /* Remove sidebar spacing */
+    }
+  }
+
 </style>
 
 </body>
