@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureW
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalClientHub;
 
 import java.util.Arrays;
@@ -36,7 +38,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNameUnfilteredList_success() {
         // Retrieve the person to delete based on the first index of the unfiltered list
-        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getDisplayPersons().get(INDEX_THIRD_PERSON.getZeroBased() + 1);
 
         // Create the predicate to match the person based on the name
         NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
@@ -70,7 +72,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validNameFilteredList_success() {
-        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getDisplayPersons().get(INDEX_THIRD_PERSON.getZeroBased() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsDeletePredicate(
                 Arrays.asList(personToDelete.getName().fullName.split("\\s+"))));
 
@@ -163,7 +165,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_caseInsensitiveNameMatching_success() {
         // Get the first person in the unfiltered list
-        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getDisplayPersons().get(INDEX_THIRD_PERSON.getZeroBased() + 1);
 
         // Create a predicate using a different case
         NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
@@ -196,6 +198,20 @@ public class DeleteCommandTest {
 
         // Expect a CommandException for vague delete message
         assertCommandFailureWithNewList(deleteCommand, name, model, Messages.MESSAGE_VAGUE_DELETE);
+    }
+
+    @Test
+    public void execute_personHasReminder_throwsCommandException() {
+        // Get the first person in the list
+        Person personToDelete = model.getDisplayPersons().get(INDEX_SECOND_PERSON.getZeroBased());
+        String name = personToDelete.getName().fullName.split("\\s+")[0];
+
+        // Create a DeleteCommand for the person
+        DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsDeletePredicate(
+                Arrays.asList(name)));
+
+        // Expect a CommandException for the person having reminders
+        assertCommandFailureWithNewList(deleteCommand, name, model, Messages.MESSAGE_TARGET_DELETE_HAS_REMINDER);
     }
 
 }
