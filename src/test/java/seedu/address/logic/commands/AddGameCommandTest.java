@@ -47,6 +47,7 @@ public class AddGameCommandTest {
 
         assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
         assertEquals(expectedGame.getGameName(), VALID_GAME);
+        addCommand.undo(model);
     }
 
     @Test
