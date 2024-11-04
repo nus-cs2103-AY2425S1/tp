@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
+import static seedu.address.model.person.Reminder.formatter;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -39,6 +41,11 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION, PREFIX_LAST_SEEN);
 
         String reminderDate = ParserUtil.parseReminderDate(argMultimap.getValue(PREFIX_LAST_SEEN).get());
+
+        if (LocalDate.now().isAfter(LocalDate.parse(reminderDate, formatter))) {
+            throw new ParseException("Reminder date must be in the future");
+        }
+
         String reminderDescription = ParserUtil
                 .parseReminderDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
 
