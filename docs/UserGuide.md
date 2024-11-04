@@ -15,6 +15,7 @@ title: AcademyAssist User Guide
    * [Deleting a student](#deleting-a-student--delete)
    * [Editing a student](#editing-a-student--edit)
    * [Viewing all student](#viewing-all-students--view)
+   * [Viewing a student's detail](#viewing-a-students-detail--detail)
    * [Finding a student](#finding-a-student--find)
    * [Sorting students](#sorting-students--sort)
    * [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
@@ -148,6 +149,18 @@ Examples:
 Shows a list of all students in the system.
 
 Format: `view`
+
+### Viewing a student's detail : `detail`
+
+Shows the details of a specific student.
+
+Format: `detail STUDENT_ID`
+
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
+
+Examples:
+* `detail S00001`
 
 ![View Success Message](/images/view.png)
 
@@ -289,7 +302,8 @@ the data of your previous AcademyAssist folder.
 | **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
 | **Delete**        | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
 | **Edit**          | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
-| **View**          | `view`                                                                                                                                                                                  |
+| **View**          | `view`  
+| **Detail** | `detail STUDENT_ID`<br> e.g., `detail S00001`  |
 | **Find**          | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
 | **Add Class**     | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
 | **Sort**          | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
