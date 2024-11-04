@@ -31,19 +31,11 @@ public class TagTest {
         Tag tag2 = new Tag("friend");
         Tag tag3 = new Tag("family");
 
-        // same object -> returns true
+        
         assertTrue(tag1.equals(tag1));
-
-        // same values -> returns true
         assertTrue(tag1.equals(tag2));
-
-        // different values -> returns false
         assertFalse(tag1.equals(tag3));
-
-        // null -> returns false
         assertFalse(tag1.equals(null));
-
-        // different type -> returns false
         assertFalse(tag1.equals("friend"));
     }
 
