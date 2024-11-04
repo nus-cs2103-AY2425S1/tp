@@ -166,7 +166,7 @@ Adds the specified person's tag.
 
 Format: `addtag INDEX t/KEYWORD [t/MORE_TAGS]`
 
-* Deletes the tag with the specified name `KEYWORD` of the person at the specified `INDEX`.
+* Adds the tags with the specified name `KEYWORD` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Multiple tags can be added at a time.
