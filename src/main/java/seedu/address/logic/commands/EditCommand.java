@@ -12,6 +12,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -89,9 +90,10 @@ public class EditCommand extends Command {
         Github updatedGithub = editPersonDescriptor.getGithub().orElse(personToEdit.getGithub());
         Set<Integer> updatedWeeksPresent = editPersonDescriptor
                 .getWeeksPresent().orElse(personToEdit.getWeeksPresent());
+        Map<String, Assignment> assignment = personToEdit.getAssignment();
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedTelegram, updatedGithub, updatedWeeksPresent, updatedTags);
+                updatedTelegram, updatedGithub, assignment, updatedWeeksPresent, updatedTags);
 
     }
 
