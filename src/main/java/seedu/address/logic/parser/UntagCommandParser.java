@@ -69,8 +69,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
     private void checkIndex(String indexStr) throws ParseException {
         if (!indexStr.matches(VALIDATION_REGEX)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UntagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
     }
 

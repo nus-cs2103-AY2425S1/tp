@@ -76,8 +76,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
     private void checkIndex(String indexStr) throws ParseException {
         if (!indexStr.matches(VALIDATION_REGEX)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
     }
 
