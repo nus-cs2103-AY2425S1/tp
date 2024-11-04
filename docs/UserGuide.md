@@ -3,7 +3,21 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Welcome to ResearchRoster! **Your Research, Simplified.**
+
+Designed with researchers in mind. ResearchRoster simplifies participant management so you can focus on what matters most: your research. Easily add and delete participants as required, conduct random sampling with a simple command, and export contacts for seamless communication.
+
+This user guide will walk you through: (this section will link to the individual sections in our UG)​
+- [Setting up](#quick-start) your ResearchRoster application​
+
+- Familiarising with the [Graphical User Interface (GUI)](#introduction-to-the-gui) and [Command Line Interface (CLI)​](#cli-tutorial)
+
+- Learning [different commands available](#features) on the application​
+
+- Utilizing [advanced features](#advanced-features) like Sample Assignment and Filtering​
+
+By the end of this guide, you'll be a ResearchRoster pro, saving time and streamlining your research process.​
+
 
 * Table of Contents
 {:toc}
@@ -23,7 +37,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    <br>3.2 For _Windows_: Select `Open in Terminal`.
    <br>&ensp;&ensp;&ensp;&nbsp;For _MacOS_: Select `Services` > `New Terminal at Folder`.
 
-4. Ensure that _Java 17_ is installed in your computer. 
+4. Ensure that _Java 17_ is installed in your computer.
    <br>4.1 Type in `java –version`.
    <br>4.2 Press `Enter` to run the command.
    <br>4.3 Check the installed Java version, as circled below:
@@ -70,6 +84,19 @@ _Refer to the [Features](#features) section for details of each command!_
 
 ## Features
 
+#### Basic Features
+  * [Viewing help : `help`](#viewing-help--help)
+  * [Adding a person: `add`](#adding-a-person-add)
+  * [Listing all persons : `list`](#listing-all-persons--list)
+  * [Editing a person : `edit`](#editing-a-person--edit)
+  * [Deleting persons : `delete`](#deleting-persons--delete)
+
+#### Advanced Features
+  * [Locating persons by criteria: `find`](#locating-persons-by-criteria-find)
+  * [Clearing listed persons : `clear`](#clearing-listed-persons--clear)
+  * [Exporting persons' emails : `export`](#exporting-persons-emails--export)
+  * [Assigning persons to Study Groups (randomly) : `assign`](#assigning-persons-to-study-groups-randomly--assign)
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -99,7 +126,6 @@ Shows a popup window with a clickable link to the User Guide.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -132,11 +158,11 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD-TAG] [-t/DELETE
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * When editing tags:
-  * Prefix:`[t/ADD-TAG]` 
+  * Prefix:`[t/ADD-TAG]`
     - the added tags will be **appended** to the list of existing tags i.e adding of tags does not overwrite existing tags.
     - if the tag name you entered to add **already exists**, the edit will be successful but you will get the warning:
       `You tried adding an already existing study group tag.`
-  * Prefix: `[-t/DELETE-TAG]` 
+  * Prefix: `[-t/DELETE-TAG]`
     - the tags specified will be **deleted** from the list of existing tags.
     - if the tag name you entered to delete **does not exist**, the edit will be successful but you will get the warning:
       `You tried removing a nonexistent study group tag.`
@@ -145,6 +171,27 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD-TAG] [-t/DELETE
 Examples:
 *  `edit 1 a/29 e/johndoe@example.com` Edits the age and email address of the 1st person to be `29` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`
+
+### Deleting persons : `delete`
+
+Deletes the specified persons from the address book.
+
+Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
+
+* Deletes the person at the specified `INDEX` or range of indices
+* The index must be within the range
+* When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
+
+Examples:
+* `delete 2` deletes the 2nd person in the displayed list.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
+
+### Exiting the program : `exit`
+
+Displays an exit message, then exits the program.
+
+Format: `exit`
 
 ### Locating persons by criteria: `find`
 
@@ -167,22 +214,7 @@ Examples:
 
 * `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
 
-### Deleting persons : `delete`
-
-Deletes the specified persons from the address book.
-
-Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
-
-* Deletes the person at the specified `INDEX` or range of indices
-* The index must be within the range
-* When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
-
-Examples:
-* `delete 2` deletes the 2nd person in the displayed list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
-
-### Clearing listed persons : clear
+### Clearing listed persons : `clear`
 
 Clears current listed persons from the address book.
 
@@ -196,7 +228,7 @@ Examples:
 * `list` followed by `clear` then `confirm` clears the entire address book.
 * `find g/f` followed by `clear` then `confirm` clears only female persons.
 
-### Exporting persons' emails : export
+### Exporting persons' emails : `export`
 
 Exports the current listed persons' emails to a .txt file.
 
@@ -228,12 +260,6 @@ Examples:
 
 * `find g/M` followed by `assign Male-Group` assigns every male in the addressbook to `Male-Group` study group.<br>
   ![result for 'assign Male-Group'](images/assignMaleGroupResult.png)
-
-### Exiting the program : `exit`
-
-Displays an exit message, then exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
