@@ -26,7 +26,8 @@ public class ListPoliciesCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Policies listed for client: %1$s\n%2$s";
     public static final String MESSAGE_NO_POLICIES = "No policies found for client: %1$s";
-    public static final String MESSAGE_INVALID_CLIENT_INDEX = "The client index provided is invalid.";
+    public static final String MESSAGE_INVALID_CLIENT_INDEX = "The index you provided exceeds the total number of "
+            + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
 
     private final Index clientIndex;
 
