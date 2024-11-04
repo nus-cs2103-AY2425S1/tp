@@ -28,16 +28,7 @@ import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.CustomerOrderListStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonCustomerOrderListStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.JsonSupplyOrderListStorage;
-import seedu.address.storage.SupplyOrderListStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.*;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -112,6 +103,16 @@ public class MainApp extends Application {
             logger.warning("Could not load ingredient catalogue data. Using default sample catalogue.");
             ingredientCatalogue = SampleDataUtil.getSampleIngredientCatalogue();
         }
+
+        // Initialize PastryCatalogue
+        PastryCatalogue pastryCatalogue;
+        try {
+            pastryCatalogue = storage.readPastryCatalogue().orElseGet(SampleDataUtil::getSamplePastryCatalogue);
+        } catch (DataLoadingException e) {
+            logger.warning("Could not load pastry catalogue data. Using default sample catalogue.");
+            pastryCatalogue = SampleDataUtil.getSamplePastryCatalogue();
+        }
+
         Optional<CustomerOrderList> customerOrderListOptional;
         CustomerOrderList initialCustomerOrderListData;
         try {
@@ -142,23 +143,8 @@ public class MainApp extends Application {
             initialSupplyOrderListData = new SupplyOrderList();
         }
 
-        return new ModelManager(initialData, userPrefs, initialCustomerOrderListData, initialSupplyOrderListData);
+        return new ModelManager(initialData, userPrefs, ingredientCatalogue, pastryCatalogue, storage, initialCustomerOrderListData, initialSupplyOrderListData);
     }
-
-        // Initialize PastryCatalogue
-        PastryCatalogue pastryCatalogue;
-        try {
-            pastryCatalogue = storage.readPastryCatalogue().orElseGet(SampleDataUtil::getSamplePastryCatalogue);
-        } catch (DataLoadingException e) {
-            logger.warning("Could not load pastry catalogue data. Using default sample catalogue.");
-            pastryCatalogue = SampleDataUtil.getSamplePastryCatalogue();
-        }
-
-        // Return the ModelManager with the loaded data
-        return new ModelManager(initialData, userPrefs, ingredientCatalogue, pastryCatalogue, storage);
-    }
-
-
 
 
     private Config initConfig(Path configFilePath) {
