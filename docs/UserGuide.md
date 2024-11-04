@@ -3,37 +3,12 @@ layout: page
 title: User Guide
 ---
 
-## Why AdmiNUS?
-
 AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
 
----
+* Table of Contents
+  {:toc}
 
-* [Quick start](#Quick-start)
-* [Features](#Features)
-  * [Basic Commands](#basic-commands)
-    * [Viewing help: `help`](#viewing-help-help)
-    * [Link to the user guide: `helpwindow`](#link-to-the-user-guide-helpwindow)
-    * [Listing all contacts: `list`](#listing-all-contacts-list)
-    * [Viewing a contact: `view`](#viewing-a-contact-view)
-    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
-    * [Exiting the program: `exit`](#exiting-the-program-exit)
-  * [Contact Management](#contact-management)
-    * [Adding a student: `student`](#adding-a-student-student-)
-    * [Adding a company: `company`](#adding-a-company-company)
-    * [Editing a contact: `edit`](#editing-a-contact-edit)
-    * [Deleting contact(s): `delete`](#deleting-contacts-delete)
-  * [Advanced Commands](#advanced-commands)
-    * [Locating persons by name: `find`](#locating-persons-by-name-find)
-    * [Filtering contacts by tag: `filtertag`](#filtering-contacts-by-tags-filtertag)
-    * [Tracking contacts by category: `track`](#tracking-contacts-by-category-track)
-    * [Adding tag(s) to contact: `tag`](#adding-tags-to-contact-tag)
-    * [Deleting tag(s) from contact: `deletetag`](#deleting-tags-from-contact-deletetag)
-  * [File Operations](#file-operations)
-    * [Importing CSV files: `import`](#importing-csv-files-import)
-    * [Exporting CSV files: `export`](#exporting-csv-files)
-
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
