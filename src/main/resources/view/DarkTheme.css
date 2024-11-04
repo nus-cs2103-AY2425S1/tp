@@ -369,7 +369,7 @@
 
 #weekLabel .label {
     -fx-text-fill: white;
-    -fx-font-size: 11;
+    -fx-font-size: 20;
 }
 
 #weekLabel .week-number {

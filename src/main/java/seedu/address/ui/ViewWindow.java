@@ -47,16 +47,16 @@ public class ViewWindow extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        telegram.setText(person.getTelegram().value);
+        phone.setText("Phone Number: " + person.getPhone().value);
+        email.setText("Email: " + person.getEmail().value);
+        telegram.setText("Telegram: " + person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         setAssignmentText(person.getAssignment());
 
         if (person.getGithub() != null) {
-            github.setText(person.getGithub().toString());
+            github.setText("Github: " + person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
         }
@@ -83,9 +83,9 @@ public class ViewWindow extends UiPart<Region> {
         }
         StringBuilder sb = new StringBuilder(assignmentMap.size());
         for (Assignment eachAssignment : assignmentMap.values()) {
-            sb.append(eachAssignment.toString()).append(", ");
+            sb.append(eachAssignment.toString()).append(", \n");
         }
-        sb.setLength(sb.length() - 2); //remove the last ,
+        sb.setLength(sb.length() - 3); //remove the last ,
         assignment.setText(sb.toString());
     }
 }
