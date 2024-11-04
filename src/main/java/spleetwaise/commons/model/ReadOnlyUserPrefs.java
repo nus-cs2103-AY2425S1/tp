@@ -2,7 +2,7 @@ package spleetwaise.commons.model;
 
 import java.nio.file.Path;
 
-import spleetwaise.address.commons.core.GuiSettings;
+import spleetwaise.commons.core.GuiSettings;
 
 /**
  * Unmodifiable view of user prefs.

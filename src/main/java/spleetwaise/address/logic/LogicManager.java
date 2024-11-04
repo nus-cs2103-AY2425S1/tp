@@ -8,10 +8,10 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.logic.parser.AddressBookParser;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.commons.logic.commands.Command;

@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.ReadOnlyUserPrefs;

@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import spleetwaise.address.commons.core.GuiSettings;
+import spleetwaise.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

@@ -8,11 +8,11 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;

@@ -3,10 +3,10 @@ package spleetwaise.address.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;

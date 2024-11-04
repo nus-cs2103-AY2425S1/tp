@@ -11,11 +11,11 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.AddressBookBuilder;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.model.UserPrefs;
 
 public class ModelManagerTest {

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.logic.commands.AddCommand;
 import spleetwaise.address.logic.commands.CommandTestUtil;
 import spleetwaise.address.logic.commands.ListCommand;
@@ -23,6 +22,7 @@ import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
