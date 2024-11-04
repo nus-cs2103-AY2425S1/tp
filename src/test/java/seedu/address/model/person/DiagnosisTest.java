@@ -13,24 +13,18 @@ public class DiagnosisTest {
     }
 
     @Test
-    public void constructor_invalidDiagnosis_throwsIllegalArgumentException() {
-        String invalidDiagnosis = "";
-        assertThrows(IllegalArgumentException.class, () -> new Diagnosis(invalidDiagnosis));
-    }
-
-    @Test
     public void isValidDiagnosis() {
         // null Diagnosis
         assertThrows(NullPointerException.class, () -> Diagnosis.isValidDiagnosis(null));
 
         // invalid Diagnosis
-        assertFalse(Diagnosis.isValidDiagnosis("")); // empty string
         assertFalse(Diagnosis.isValidDiagnosis("    ")); // spaces only
         assertFalse(Diagnosis.isValidDiagnosis("()-3351!*#&$!#")); // only non-alphabetic characters
         assertFalse(Diagnosis.isValidDiagnosis("This diagnosis is super duper duper duper duper duper duper "
                 + "long and is most definitely longer than 100 characters")); // longer than 100 characters
 
         // valid Diagnosis
+        assertTrue(Diagnosis.isValidDiagnosis("")); // empty string
         assertTrue(Diagnosis.isValidDiagnosis("coughing and bleeding")); // only lowercase alphabetic characters
         assertTrue(Diagnosis.isValidDiagnosis("Coughing and Bleeding")); // mix of upper and lower case
         assertTrue(Diagnosis.isValidDiagnosis("Coughing, Bleeding and Wheezing!")); // with special characters
