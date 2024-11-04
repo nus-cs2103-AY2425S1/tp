@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 public class DateTest {
     @Test
@@ -62,38 +64,80 @@ public class DateTest {
     }
 
 
-    //Valid date parsing test
+    //Valid date and time parsing test
     @Test
-    public void isValidDate() {
-        //null date
-        assertFalse(Date.isValidDateAndTime(" "));
-        //february 29 not leap year
-        assertFalse(Date.isValidDateAndTime("29/2/2023 1800"));
-        //invalid day for given month
-        assertFalse(Date.isValidDateAndTime("31/4/2024 1200"));
-        assertFalse(Date.isValidDateAndTime("31/6/2024 1200"));
-        assertFalse(Date.isValidDateAndTime("31/9/2024 1200"));
-        assertFalse(Date.isValidDateAndTime("31/11/2024 1200"));
-        assertFalse(Date.isValidDateAndTime("31/2/2024 1200"));
-        //invalid format
-        assertFalse(Date.isValidDateAndTime("12-31-2024 12am"));
-        //invalid time
-        assertFalse(Date.isValidDateAndTime("31/2/2024 2700"));
-        //invalid leading zeros
-        assertFalse(Date.isValidDateAndTime("0/2/2024 1400"));
-        assertFalse(Date.isValidDateAndTime("10/0/2024 1400"));
-        assertFalse(Date.isValidDateAndTime("0/00/2024 1400"));
+    public void isValidDateTime() {
+        // Null date
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime(" "));
 
-        //Valid dates
-        assertTrue(Date.isValidDateAndTime("18/2/2024 1800"));
-        assertTrue(Date.isValidDateAndTime("18/02/2024 1800"));
-        assertTrue(Date.isValidDateAndTime("01/2/2024 1800"));
-        //february 29 leap year
-        assertTrue(Date.isValidDateAndTime("29/2/2024 1800"));
+        // February 29 not a leap year
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("29/2/2023 1800"));
 
+        // Invalid day for given month
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/4/2024 1200"));
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/6/2024 1200"));
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/9/2024 1200")); // September has 30 days
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/11/2024 1200")); // November has 30 days
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/2/2024 1200")); // February has 28/29 days
 
+        // Invalid format
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("12-31-2024 12am"));
+
+        // Invalid time
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("31/2/2024 2700")); // Invalid hour (2700)
+
+        // Invalid leading zeros
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("0/2/2024 1400")); // Invalid day
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("10/0/2024 1400")); // Invalid month
+        assertThrows(ParseException.class, () -> Date.checkDateAndTime("0/00/2024 1400")); // Invalid day and month
+
+        // Valid dates
+        assertDoesNotThrow(() -> Date.checkDateAndTime("18/2/2024 1800")); // Valid date and time
+        assertDoesNotThrow(() -> Date.checkDateAndTime("18/02/2024 1800")); // Valid date with leading zero
+        assertDoesNotThrow(() -> Date.checkDateAndTime("01/2/2024 1800")); // Valid date with leading zero for day
+
+        // February 29 leap year
+        assertDoesNotThrow(() -> Date.checkDateAndTime("29/2/2024 1800")); // Valid leap year date
+
+        // Testing checkDate method
+        assertThrows(ParseException.class, () -> Date.checkDate(" ")); // Empty string
+        assertThrows(ParseException.class, () -> Date.checkDate("32/12/2024")); // Invalid day
+        assertThrows(ParseException.class, () -> Date.checkDate("2/13/2024")); // Invalid month
+        assertThrows(ParseException.class, () -> Date.checkDate("29/2/2023")); // Invalid leap year
+        assertDoesNotThrow(() -> Date.checkDate("29/2/2024")); // Valid leap year date
     }
 
+    @Test
+    public void isValidDate() {
+        // Null date
+        assertThrows(ParseException.class, () -> Date.checkDate(" "));
+
+        // Invalid day for given month
+        assertThrows(ParseException.class, () -> Date.checkDate("31/4/2024")); // April has 30 days
+        assertThrows(ParseException.class, () -> Date.checkDate("31/6/2024")); // June has 30 days
+        assertThrows(ParseException.class, () -> Date.checkDate("31/9/2024")); // September has 30 days
+        assertThrows(ParseException.class, () -> Date.checkDate("31/11/2024")); // November has 30 days
+        assertThrows(ParseException.class, () -> Date.checkDate("31/2/2024")); // February has 28/29 days
+
+        // Invalid month
+        assertThrows(ParseException.class, () -> Date.checkDate("2/13/2024")); // Invalid month
+
+        // Invalid leap year
+        assertThrows(ParseException.class, () -> Date.checkDate("29/2/2023")); // February 29 not a leap year
+
+        // Invalid leading zeros
+        assertThrows(ParseException.class, () -> Date.checkDate("0/2/2024")); // Invalid day
+        assertThrows(ParseException.class, () -> Date.checkDate("10/0/2024")); // Invalid month
+        assertThrows(ParseException.class, () -> Date.checkDate("0/00/2024")); // Invalid day and month
+
+        // Valid dates
+        assertDoesNotThrow(() -> Date.checkDate("18/2/2024")); // Valid date
+        assertDoesNotThrow(() -> Date.checkDate("18/02/2024")); // Valid date with leading zero
+        assertDoesNotThrow(() -> Date.checkDate("01/2/2024")); // Valid date with leading zero for day
+
+        // Valid leap year date
+        assertDoesNotThrow(() -> Date.checkDate("29/2/2024")); // Valid leap year date
+    }
     // Valid date parsing test
     @Test
     public void parseDateTime_validDate_returnsLocalDateTime() throws ParseException {
