@@ -39,16 +39,16 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check coverage
 
-      - name: Upload tests artifact
+      - name: Upload tests pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'build/reports/tests/test/index.html'
 
-      - name: Upload checkstyle artifact
+      - name: Upload checkstyle pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'build/reports/checkstyle/main.html'
-      
+  
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
