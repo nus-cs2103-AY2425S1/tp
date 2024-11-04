@@ -228,12 +228,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Feature
+### Add Person Feature
 
-#### `AddCommand` Implementation Sequence Diagram
-The sequence diagram below illustrates the process of adding a person into TalentSG.
+#### **Command Feature**
 
-<img src="images/AddCommandSequenceDiagram.png" width="550" />
+`add n/NAME p/PHONE NUMBER e/EMAIL ADDRESS a/ADDRESS s/SKILLS st/STATUS ex/EXPERIENCE dr/DESIRED ROLE note/[NOTE] t/[TAG]`,
+where note and tag are optional fields
+
+#### **Command Feature Purpose**
+
+The `add` command allows users to add a `Person` to the `HRPlatform`.
 
 #### Key Components
 - `AddCommand`: Executes the addition operation based on the user's input.
@@ -241,10 +245,15 @@ The sequence diagram below illustrates the process of adding a person into Talen
 - `LogicManager`: Invokes the `AddCommand` to execute the addition operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `AddCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `AddCommand` object based on the user input.
 
-#### Component Interaction Details
-1. The user executes the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
+### **Sequence of action**
+
+To help you understand how the `add` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
+
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
 2. The `AddCommandParser` interprets the input.
 3. An `AddCommand` object is created.
 4. The `LogicManager` invokes the execute method of AddCommand.
@@ -252,8 +261,105 @@ The sequence diagram below illustrates the process of adding a person into Talen
 6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
 7. The UI reflects this new list with added `Person`.
 
+:information_source: **Note**:
+
+- For step 2, if the user does not have any arguments, the `AddCommand` object will NOT be created!
+
+#### `AddCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of adding a person into TalentSG.
+
+<img src="images/AddCommandSequenceDiagram.png" width="550" />
 
 ---
+
+### Delete Person Feature
+
+#### **Command Feature**
+
+`delete INDEX`
+
+#### **Command Feature Purpose**
+
+The `delete` command allows users to delete a `Person` from the `HRPlatform`.
+
+#### Key Components
+- `DeleteCommand`: Executes the deletion operation based on the user's input.
+- `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
+- `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
+
+### **Sequence of action**
+
+To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `delete 1` as an example.
+
+1. The user inputs the command `delete 2`, intending to delete a person with index 2 in the contact list.
+2. The `DeleteCommandParser` interprets the input.
+3. A `DeleteCommand` object is created.
+4. The `LogicManager` invokes the execute method of DeleteCommand.
+5. The execute method of `DeleteCommand` invokes the `deletePerson` method in `Model` property to delete the contact of the `Person` object.
+6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
+7. The UI reflects this new list with deleted `Person`.
+
+:information_source: **Note**:
+
+- At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+
+#### `Delete Command` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of deleting a person from TalentSG.
+
+<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+
+---
+
+### Edit Person Feature
+
+#### **Command Feature**
+
+`edit INDEX n/[NAME] p/[PHONE NUMBER] e/[EMAIL ADDRESS] a/[ADDRESS] s/[SKILLS] st/[STATUS] ex/[EXPERIENCE] dr/[DESIRED ROLE] note/[NOTE] t/[TAG]`
+where all the fields are optional.
+
+#### **Command Feature Purpose**
+
+The `edit` command allows users to edit a `Person` in the `HRPlatform`.
+
+#### Key Components
+- `EditCommand`: Executes the edit operation based on the user's input.
+- `EditCommandParser`: Parses user input to create an `EditCommand` object.
+- `LogicManager`: Invokes the `EditCommand` to execute the edit operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
+
+### **Sequence of action**
+
+To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
+2. The `EditCommandParser` interprets the input.
+3. An `EditCommand` object is created.
+4. The `LogicManager` invokes the execute method of `EditCommand`.
+5. The execute method of `EditCommand` invokes the `setPerson` method in the `Model` to update the details of the existing `Person` object with the new values.
+6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
+7. The UI reflects this updated list with the edited `Person`.
+
+:information_source: **Note**:
+
+- At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), a matching error will be shown on the screen and the sequence of action is terminated.
+- At step 3, if the user provides a category to edit to, and it is found that there is no such category in FastTrack, an error will be shown and the sequence of action is terminated.
+
+#### `EditCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of editing a person's details in TalentSG.
+
+<img src="images/EditCommandSequenceDiagram.png" width="550" />
+
+---
+
 ### List Feature
 
 #### `ListCommand` Implementation Sequence Diagram
@@ -277,56 +383,6 @@ The sequence diagram below illustrates the process of executing the `list` comma
 6. The UI reflects the updated list of persons.
 
 ---
-### Edit Feature
-
-#### `EditCommand` Implementation Sequence Diagram
-The sequence diagram below illustrates the process of editing a person's details in TalentSG.
-
-<img src="images/EditCommandSequenceDiagram.png" width="550" />
-
-#### Key Components
-- `EditCommand`: Executes the edit operation based on the user's input.
-- `EditCommandParser`: Parses user input to create an `EditCommand` object.
-- `LogicManager`: Invokes the `EditCommand` to execute the edit operation.
-- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
-- `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
-
-#### Component Interaction Details
-1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
-2. The `EditCommandParser` interprets the input.
-3. An `EditCommand` object is created.
-4. The `LogicManager` invokes the execute method of `EditCommand`.
-5. The execute method of `EditCommand` invokes the `setPerson` method in the `Model` to update the details of the existing `Person` object with the new values.
-6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
-7. The UI reflects this updated list with the edited `Person`.
-
-
-
----
-### Delete Feature ###
-
-#### `Delete Command` Implementation Sequence Diagram
-The sequence diagram below illustrates the process of deleting a person from TalentSG.
-
-<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
-
-#### Key Components
-- `DeleteCommand`: Executes the deletion operation based on the user's input.
-- `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
-- `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
-- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
-- `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
-
-#### Component Interaction Details
-1. The user executes the command `delete 2`, intending to delete a person with index 2 in the contact list.
-2. The `DeleteCommandParser` interprets the input.
-3. A `DeleteCommand` object is created.
-4. The `LogicManager` invokes the execute method of DeleteCommand.
-5. The execute method of `DeleteCommand` invokes the `deletePerson` method in `Model` property to delete the contact of the `Person` object.
-6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
-7. The UI reflects this new list with deleted `Person`.
 
 ### Find Feature ###
 #### `FindCommand` Implementation Sequence Diagram
