@@ -20,10 +20,16 @@ public class PersonPredicateBuilder {
     private final List<String> monthPaidKeywords;
     private final List<String> notMonthPaidKeywords;
     private final List<String> tagKeywords;
+    private final List<String> addressKeywords;
+    private final List<String> phoneKeywords;
+    private final List<String> emailKeywords;
     private boolean isSetName;
     private boolean isSetClassId;
     private boolean isSetMonthPaid;
     private boolean isSetNotMonthPaid;
+    private boolean isSetEmail;
+    private boolean isSetAddress;
+    private boolean isSetPhone;
     private boolean isSetTag;
 
     /**
@@ -35,11 +41,17 @@ public class PersonPredicateBuilder {
         monthPaidKeywords = new ArrayList<>();
         notMonthPaidKeywords = new ArrayList<>();
         tagKeywords = new ArrayList<>();
+        addressKeywords = new ArrayList<>();
+        emailKeywords = new ArrayList<>();
+        phoneKeywords = new ArrayList<>();
         isSetName = false;
         isSetClassId = false;
         isSetMonthPaid = false;
         isSetNotMonthPaid = false;
         isSetTag = false;
+        isSetAddress = false;
+        isSetPhone = false;
+        isSetEmail = false;
     }
 
     /**
@@ -52,6 +64,7 @@ public class PersonPredicateBuilder {
         monthPaidKeywords = new ArrayList<>(personPredicateBuilder.monthPaidKeywords);
         notMonthPaidKeywords = new ArrayList<>(personPredicateBuilder.notMonthPaidKeywords);
         tagKeywords = new ArrayList<>(personPredicateBuilder.tagKeywords);
+        
         isSetName = personPredicateBuilder.isSetName;
         isSetClassId = personPredicateBuilder.isSetClassId;
         isSetMonthPaid = personPredicateBuilder.isSetMonthPaid;
