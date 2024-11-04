@@ -37,14 +37,7 @@ public class Time {
      */
     public LocalTime getLocalTimeValue() {
         assert !value.isEmpty();
-        try {
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-                    .withResolverStyle(ResolverStyle.STRICT);
-            LocalTime parsedTime = LocalTime.parse(value, timeFormatter);
-            return parsedTime;
-        } catch (DateTimeParseException e) {
-            throw new AssertionError("Time value is not strictly valid: " + value);
-        }
+        return LocalTime.parse(value, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**

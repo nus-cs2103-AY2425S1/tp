@@ -46,14 +46,7 @@ public class Date {
      */
     public LocalDate getLocalDateValue() {
         assert !value.isEmpty();
-        try {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
-                    .withResolverStyle(ResolverStyle.STRICT);
-            LocalDate parsedDate = LocalDate.parse(value, dateFormatter);
-            return parsedDate;
-        } catch (DateTimeParseException e) {
-            throw new AssertionError("Date value is not strictly valid: " + value);
-        }
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
     /**
