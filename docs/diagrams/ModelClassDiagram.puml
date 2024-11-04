@@ -27,6 +27,7 @@ Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
 
+
 Enum PolicyType <<enumeration>> {
     + LIFE
     + HEALTH
@@ -39,6 +40,9 @@ Enum ClaimStatus <<enumeration>> {
     + REJECTED
 }
 
+Class PremiumAmount
+Class CoverageAmount
+Class ExpiryDate
 Class I #FFFFFF
 
 }
@@ -69,8 +73,11 @@ PolicySet --> "0..1" EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
-Policy --> ClaimList
-ClaimList --> "*" Claim
+Policy *--> ClaimList
+Policy *--> PremiumAmount
+Policy *--> CoverageAmount
+Policy *--> ExpiryDate
+ClaimList *--> "*" Claim
 
 LifePolicy --> PolicyType
 HealthPolicy --> PolicyType
