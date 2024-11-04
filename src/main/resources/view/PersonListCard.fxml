@@ -32,6 +32,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+            <ImageView fx:id="pinIcon" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="grey-image">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </ImageView>
       </HBox>
       <FlowPane fx:id="tags" />
       <HBox prefHeight="0.0" prefWidth="111.0">
