@@ -149,6 +149,42 @@ public class UntagCommandTest {
     }
 
     @Test
+    public void execute_undoUntagCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag tag = new Tag("friends");
+        Person personToUntag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertTrue(personToUntag.getTags().contains(tag));
+
+        Set<Tag> tags = new HashSet<>();
+        List<Index> indexes = new ArrayList<>();
+        tags.add(tag);
+        indexes.add(INDEX_FIRST_PERSON);
+        UntagCommand untagCommand = new UntagCommand(indexes, tags);
+
+        Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
+        updatedTags.remove(tag);
+
+        Person modifiedPerson = new Person(
+                personToUntag.getName(),
+                personToUntag.getPhone(),
+                personToUntag.getEmail(),
+                personToUntag.getRsvpStatus(),
+                updatedTags
+        );
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToUntag, modifiedPerson);
+
+        String expectedMessage = UntagCommand.MESSAGE_UNTAG_PERSON_SUCCESS + Messages.format(modifiedPerson);
+
+        assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(untagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
+    @Test
     public void equals() {
         Tag anotherTag = new Tag("anotherTag");
 

@@ -120,4 +120,26 @@ public class SetRsvpCommandTest {
         // different person -> returns false
         assertFalse(setRsvpFirstCommand.equals(setRsvpSecondCommand));
     }
+
+    @Test
+    public void execute_undoSetRsvpCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personToUpdate = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        SetRsvpCommand setRsvpCommand = new SetRsvpCommand(INDEX_SECOND_PERSON, 3);
+
+        Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
+                personToUpdate.getEmail(), RsvpStatus.PENDING, personToUpdate.getTags());
+
+        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS
+                + updatedPerson.getName().fullName + " (" + RsvpStatus.PENDING + ")");
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToUpdate, updatedPerson);
+
+        assertCommandSuccess(setRsvpCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(setRsvpCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
 }

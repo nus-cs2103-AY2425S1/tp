@@ -175,4 +175,26 @@ public class FilterCommandTest {
         FilterCommand nextFilterCommand = new FilterCommand(tagSet, statuses);
         assertCommandSuccess(nextFilterCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_undoFilterCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        model.addTag(FRIENDS);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(new Predicate<Person>() {
+            @Override
+            public boolean test(Person person) {
+                return person.getTags().contains(FRIENDS);
+            }
+        });
+        Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(FRIENDS);
+        FilterCommand filterCommand = new FilterCommand(tagSet, new HashSet<>());
+        assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(filterCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
 }

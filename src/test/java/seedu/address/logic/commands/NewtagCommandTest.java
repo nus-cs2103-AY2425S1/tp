@@ -139,4 +139,24 @@ public class NewtagCommandTest {
 
         assertCommandFailure(newTagCommand, model, expectedMessage);
     }
+
+    @Test
+    public void execute_undoNewTag_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag newTag = TypicalTags.BRIDES_SIDE;
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addTag(newTag);
+
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS;
+
+        assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(newTagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
 }

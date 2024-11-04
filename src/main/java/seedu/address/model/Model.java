@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -71,6 +72,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given person at the specified index.
+     * {@code person} must not already exist in the address book.
+     */
+    void addPerson(int index, Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -147,7 +154,7 @@ public interface Model {
     /**
      * Removes the deleted {@code Tag} from all persons in the address book.
      */
-    void removeTagFromPersons(Tag tag);
+    Set<Person> removeTagFromPersons(Tag tag);
 
     /**
      * Edits the specified all persons in the address book with the tag.
@@ -184,4 +191,10 @@ public interface Model {
      * Updates the tag list in the model.
      */
     void updateTagList();
+
+    void updatePreviousCommand(Command nextCommand);
+
+    Predicate<Person> getCurrentPredicate();
+
+    Command getPreviousCommand();
 }

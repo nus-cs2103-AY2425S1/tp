@@ -127,6 +127,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPerson(int index, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -215,7 +220,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void removeTagFromPersons(Tag tag) {
+        public Set<Person> removeTagFromPersons(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -226,6 +231,21 @@ public class AddCommandTest {
 
         @Override
         public boolean checkAcceptableTagListSize(int additionalTags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePreviousCommand(Command nextCommand) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Command getPreviousCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Person> getCurrentPredicate() {
             throw new AssertionError("This method should not be called.");
         }
     }
