@@ -49,6 +49,8 @@ public class Messages {
                     .map(tag -> tag.toString())
                     .collect(Collectors.joining(", "));
             builder.append(tagsString);
+        } else {
+            builder.append("None");
         }
         return builder.toString();
     }
