@@ -50,6 +50,7 @@ public class CommandTestUtil {
     public static final String VALID_CLIENT_STATUS_UNRESPONSIVE = "unresponsive";
     public static final String VALID_CLIENT_STATUS_POTENTIAL = "potential";
     public static final String VALID_CLIENT_STATUS_OLD = "old";
+    public static final String VALID_CLIENT_STATUS_BLACKLISTED = "blacklisted";
     public static final String VALID_DEADLINE_AMY = "10-10-2024";
     public static final String VALID_DEADLINE_BOB = "10-11-2024";
 

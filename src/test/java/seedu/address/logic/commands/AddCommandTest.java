@@ -263,6 +263,7 @@ public class AddCommandTest {
         public void setIsArchivedList(boolean value) {
             value = value;
         }
+
         @Override
         public boolean hasArchivedPerson(Person person) {
             requireNonNull(person);

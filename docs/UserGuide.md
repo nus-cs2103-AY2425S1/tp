@@ -129,8 +129,8 @@ Examples:
 
 Allows updating of various statuses of an existing client.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
-[ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEADLINE]
+[t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * `NAME` Acceptable values are same as in add command
 * `PHONE_NUMBER` Acceptable values are same as in add command
@@ -160,7 +160,7 @@ The deadline field will show an `OVERDUE` label if the deadline has passed and t
 
 Finds persons in client list who match parameters specified.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * All values matched for any parameter are **case-insensitive**.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -178,7 +178,18 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Delete Client Details: `delete`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+#### Shortcuts: Finding blacklisted/whitelisted clients
+
+To find all clients that are blacklisted (with no other parameters), the command `blacklist` can be entered.
+
+Similarly, the `whitelist` command can be entered to find all clients who are whitelisted.
+
+_Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
+</div>
+
+### Delete Client Details : `delete`
 
 Deletes the specified person from Clientele+.
 
@@ -212,9 +223,15 @@ Format: `blacklist INDEX`
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
-### Whitelist a Client: `whitelist`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
+</div>
+
+### Whitelist a Client : `whitelist`
 
 Whitelists a previously-blacklisted client.
+
+_Note: a client is considered to be on the whitelist if their client status is **not** "blacklisted"_
 
 Format: `whitelist INDEX cs/NEW_CLIENT_STATUS`
 
@@ -227,7 +244,11 @@ Examples:
 * `whitelist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
 * `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
 
-### Sort Client list: `sort`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Entering `whitelist` on its own without any other parameters will filter and display all clients who have been whitelisted.
+</div>
+
+### Sort Client list : `sort`
 
 Sorts the client list in ascending order by the specified field.
 
@@ -320,6 +341,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, and the filter may need to be applied again. This is to work around the issue that rises when the client that is added or edited may not match the filter and would not be shown to you which makes it confusing to understand if the command has been executed successfully.
 
 --------------------------------------------------------------------------------------------------------------------
 
