@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_TOO_MANY_INDEXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.tag.Tag.MAX_CHARACTER_LENGTH;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -19,7 +18,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
+
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.tag.Tag;
 
@@ -88,7 +87,7 @@ public class TagCommandParserTest {
     public void parse_tooLongTag_throwsParseException() {
         String longTag = "veryveryveryveryveryveryveryveryveryveryverylongtagthatshouldexceedthecharacterlimit";
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + longTag;
-        String expectedMessage = String.format(Messages.MESSAGE_INPUT_LENGTH_EXCEEDED, MAX_CHARACTER_LENGTH);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
