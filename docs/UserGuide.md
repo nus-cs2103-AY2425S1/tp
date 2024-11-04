@@ -241,7 +241,7 @@ Refer to the table below for more details.
 | `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
 | `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
 | `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non-urgent                               | ❌                    |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                               | ❌                    |
 
 > 💡 **Pro Tip:**
 >
@@ -745,7 +745,7 @@ Ensure that the command syntax is correct, and note that the `rn/` and `ra/` fla
 Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each client.
 
 ### What do the different status colors represent in the UI?
-Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non-urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
+Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
 
 --------------------------------------------------------------------------------------------------------------------
 
