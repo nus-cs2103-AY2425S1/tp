@@ -187,6 +187,16 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void test_parseWithValidArgsWithAddress_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withAddressKeywords(Arrays.asList("Greenwood", "Str")));
+        assertParseSuccess(parser, " a/Greenwood Str", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " a/ \n Greenwood Str  \t", expectedFindCommand);
+    }
+
+    @Test
     public void test_parseWithValidArgsWithPhone_success() {
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonPredicateBuilder().withPhoneKeywords(Arrays.asList("12345678", "87654321")));
