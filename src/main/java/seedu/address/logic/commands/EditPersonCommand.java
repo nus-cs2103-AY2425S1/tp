@@ -89,10 +89,10 @@ public class EditPersonCommand extends EditCommand {
         }
 
         Phone phone = editedPerson.getPhone();
-        if (model.hasPhoneNumber(phone)) {
+
+        if (!personToEdit.hasSamePhoneNumber(editedPerson) && model.hasPhoneNumber(phone)) {
             throw new CommandException(MESSAGE_DUPLICATE_PHONE_NUMBER);
         }
-
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

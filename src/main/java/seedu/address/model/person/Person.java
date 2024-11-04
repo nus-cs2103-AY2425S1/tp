@@ -82,6 +82,18 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same phone number.
+     */
+    public boolean hasSamePhoneNumber(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
