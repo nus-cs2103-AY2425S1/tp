@@ -177,18 +177,4 @@ public class ModelManagerTest {
     public void getFilteredGoods() {
         // TODO: Implement this
     }
-
-    @Test
-    public void deleteGoods_removedGoods() {
-        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
-                .withGoodsName(new GoodsName("Calbee"))
-                .withSupplierName(ALICE.getName())
-                .build();
-        modelManager.addPerson(ALICE);
-        modelManager.addGoods(goodsReceipt);
-        modelManager.deleteGoods(goodsReceipt.getGoods().getGoodsName());
-        List<GoodsReceipt> goodsList = modelManager
-                .getFilteredGoods(r -> r.getGoods().getGoodsName().equals("Calbee"));
-        assertEquals(goodsList.size(), 0);
-    }
 }

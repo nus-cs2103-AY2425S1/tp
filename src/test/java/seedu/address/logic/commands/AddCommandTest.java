@@ -190,10 +190,15 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteGoods(GoodsName goodsName) {
+        public void deleteGoodsReceipt(GoodsReceipt goodsReceipt) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        
         @Override
         public ObservableList<GoodsReceipt> getFilteredReceiptsList() {
             throw new AssertionError("This method should not be called.");

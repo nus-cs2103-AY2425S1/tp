@@ -2,35 +2,58 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Optional;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.goods.GoodsName;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Deletes all goods that match the given goodsName.
  */
 public class DeleteGoodsCommand extends Command {
+
     public static final String COMMAND_WORD = "deletegoods";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all goods that match the specified name."
+//    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all goods that match the specified name."
+//            + "Parameters: "
+//            + PREFIX_GOODS_NAME + "GOODS_NAME"
+//            + "Example: " + COMMAND_WORD + " "
+//            + PREFIX_GOODS_NAME + "Calbee Seaweed Chips";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the specified goods from the specified supplier.\n"
             + "Parameters: "
-            + PREFIX_GOODS_NAME + "GOODS_NAME"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_GOODS_NAME + "GOODS_NAME \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GOODS_NAME + "Calbee Seaweed Chips";
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_GOODS_NAME + "Gardenia Milk Bread";
 
     public static final String MESSAGE_SUCCESS = "%1$s has been deleted.";
 
+    private final Name supplierName;
     private final GoodsName goodsName;
 
-    public DeleteGoodsCommand(String goodsName) {
-        this.goodsName = new GoodsName(goodsName);
+
+    public DeleteGoodsCommand(Name supplierName, GoodsName goodsName) {
+        this.supplierName = supplierName;
+        this.goodsName = goodsName;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.deleteGoods(goodsName);
-
+        GoodsReceipt receipt = model
+                .findGoodsReceipt(r -> r.isFromSupplier(supplierName) && r.getGoods().getGoodsName().equals(goodsName))
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND));
+        model.deleteGoodsReceipt(receipt);
         return new CommandResult(String.format(MESSAGE_SUCCESS, goodsName));
     }
 
