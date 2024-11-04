@@ -125,7 +125,7 @@ public class UpdateCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = VALID_NAME_AMY + PHONE_DESC_BOB + SUBJECT_DESC_MATH
+        String userInput = PHONE_DESC_BOB + SUBJECT_DESC_MATH
                 + ADDRESS_DESC_AMY + NAME_DESC_AMY + SUBJECT_DESC_ENGLISH + LESSON_TIME_SUN_DESC;
 
         UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -133,7 +133,19 @@ public class UpdateCommandParserTest {
                 .withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).withLessonTimes(VALID_LESSON_TIME_SUN).build();
         UpdateCommand expectedCommand = new UpdateCommand(new Name(VALID_NAME_AMY), descriptor);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, VALID_NAME_AMY + userInput, expectedCommand);
+
+        // multiple spaces in name
+        String multiSpaceName = "Amy   Bee   ";
+        assertParseSuccess(parser, multiSpaceName + userInput, expectedCommand);
+
+        // different casing in name
+        String differentCasingName = "AmY bEe";
+        assertParseSuccess(parser, differentCasingName + userInput, expectedCommand);
+
+        // multiple spaces and different casing in name
+        String validName = "   aMy    BEe  ";
+        assertParseSuccess(parser, validName + userInput, expectedCommand);
     }
 
     @Test
