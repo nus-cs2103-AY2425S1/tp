@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.DateUtil.getFilterDateString;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> filteredAppointments;
     private final SortedList<Person> sortedAppointments;
+    private AppointmentContainsDatePredicate filterPredicate;
     private final FilteredList<Person> allAppointmentsList;
 
 
@@ -137,6 +139,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getFilteredAppointmentDate() {
+        return getFilterDateString(filterPredicate.getDate());
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -146,6 +153,7 @@ public class ModelManager implements Model {
 
     private void initializeAppointmentList() {
         AppointmentContainsDatePredicate predicate = new AppointmentContainsDatePredicate(LocalDate.now());
+        filterPredicate = predicate;
         updateFilteredAppointmentList(predicate);
     }
 
@@ -163,8 +171,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAppointmentList(Predicate<Person> predicate) {
+    public void updateFilteredAppointmentList(AppointmentContainsDatePredicate predicate) {
         requireNonNull(predicate);
+        filterPredicate = predicate;
         filteredAppointments.setPredicate(predicate);
     }
 
