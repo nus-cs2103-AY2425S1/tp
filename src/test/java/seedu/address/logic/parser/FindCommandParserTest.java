@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIND_KEYWORD;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -13,6 +12,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
@@ -63,22 +63,23 @@ public class FindCommandParserTest {
     public void parse_invalidArg_throwsParseException() {
         // 1
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(FindCommandParser.MESSAGE_MISSING_SEARCH_KEYWORD,
+                        FindCommand.MESSAGE_USAGE));
         // 2
         assertParseFailure(parser, "Alice " + PREFIX_MODULE + "CS2103T",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
         // 3
         assertParseFailure(parser, "CS2103T " + PREFIX_NAME + "Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
         // 4
         assertParseFailure(parser, "random string " + PREFIX_NAME + "Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE, FindCommand.MESSAGE_USAGE));
         // 5
         assertParseFailure(parser, " " + PREFIX_NAME + " ",
-                MESSAGE_EMPTY_FIND_KEYWORD);
+                Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
         // 6
         assertParseFailure(parser, " " + PREFIX_MODULE + " ",
-                MESSAGE_EMPTY_FIND_KEYWORD);
+                Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD, FindCommand.MESSAGE_USAGE));
     }
 
     @Test

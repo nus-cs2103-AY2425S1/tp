@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.edit.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.edit.EditModuleRoleOperation;
@@ -41,13 +42,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
 
         if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    Messages.getErrorMessageWithUsage(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE));
         }
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(pe.getMessage(), EditCommand.MESSAGE_USAGE));
+            throw new ParseException(Messages.getErrorMessageWithUsage(pe.getMessage(), EditCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

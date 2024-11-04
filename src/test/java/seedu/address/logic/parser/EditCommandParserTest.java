@@ -62,9 +62,9 @@ public class EditCommandParserTest {
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_INDEX_FOR_EDIT =
-            String.format(MESSAGE_INVALID_INDEX, EditCommand.MESSAGE_USAGE);
+            Messages.getErrorMessageWithUsage(MESSAGE_INVALID_INDEX, EditCommand.MESSAGE_USAGE);
     private static final String MESSAGE_MISSING_INDEX_FOR_EDIT =
-            String.format(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE);
+            Messages.getErrorMessageWithUsage(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE);
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
