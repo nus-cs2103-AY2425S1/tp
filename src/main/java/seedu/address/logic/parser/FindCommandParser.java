@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOT_MONTHPAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 
@@ -25,11 +26,12 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CLASSID, PREFIX_MONTHPAID,
-                PREFIX_NOT_MONTHPAID);
+                PREFIX_NOT_MONTHPAID, PREFIX_TAG);
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CLASSID, PREFIX_MONTHPAID, PREFIX_NOT_MONTHPAID);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CLASSID,
+                PREFIX_MONTHPAID, PREFIX_NOT_MONTHPAID, PREFIX_TAG);
 
         PersonPredicateBuilder personPredicateBuilder = new PersonPredicateBuilder();
 
@@ -64,6 +66,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             personPredicateBuilder = personPredicateBuilder
                     .withNotMonthPaidKeywords(Arrays.asList(notMonthPaidKeywords));
+        }
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).get().split("\\s+");
+            if (tagKeywords[0].isEmpty()) {
+                throw new ParseException(FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
+            }
+            personPredicateBuilder = personPredicateBuilder
+                    .withTagsKeywords(Arrays.asList(tagKeywords));
+
         }
 
         if (personPredicateBuilder.isEmpty()) {

@@ -19,10 +19,12 @@ public class PersonPredicateBuilder {
     private final List<String> classIdKeywords;
     private final List<String> monthPaidKeywords;
     private final List<String> notMonthPaidKeywords;
+    private final List<String> tagKeywords;
     private boolean isSetName;
     private boolean isSetClassId;
     private boolean isSetMonthPaid;
     private boolean isSetNotMonthPaid;
+    private boolean isSetTag;
 
     /**
      * Creates an empty {@code PersonPredicateBuilder}.
@@ -32,10 +34,12 @@ public class PersonPredicateBuilder {
         classIdKeywords = new ArrayList<>();
         monthPaidKeywords = new ArrayList<>();
         notMonthPaidKeywords = new ArrayList<>();
+        tagKeywords = new ArrayList<>();
         isSetName = false;
         isSetClassId = false;
         isSetMonthPaid = false;
         isSetNotMonthPaid = false;
+        isSetTag = false;
     }
 
     /**
@@ -83,6 +87,17 @@ public class PersonPredicateBuilder {
     }
 
     /**
+     * Adds all strings in {@code tagKeywords} into this object's {@code tagKeywords} field.
+     * @return this object
+     */
+    public PersonPredicateBuilder withTagsKeywords(List<String> tagKeywords) {
+        requireNonNull(tagKeywords);
+        this.tagKeywords.addAll(tagKeywords);
+        isSetTag = true;
+        return this;
+    }
+
+    /**
      * Converts this object into a {@code Predicate<Person>} object that tests a {@code Person} for all fields set
      * in this object.
      */
@@ -92,18 +107,21 @@ public class PersonPredicateBuilder {
         List<String> classIdKeywordsCopy = new ArrayList<>(classIdKeywords);
         List<String> monthPaidKeywordsCopy = new ArrayList<>(monthPaidKeywords);
         List<String> notMonthPaidKeywordsCopy = new ArrayList<>(notMonthPaidKeywords);
+        List<String> tagKeywordsCopy = new ArrayList<>(tagKeywords);
         boolean isSetNameCopy = isSetName;
         boolean isSetClassIdCopy = isSetClassId;
         boolean isSetMonthPaidCopy = isSetMonthPaid;
         boolean isSetNotMonthPaidCopy = isSetNotMonthPaid;
+        boolean isSetTagCopy = isSetTag;
         return person -> {
             boolean nameMatch = nameContainsKeywords(person, isSetNameCopy, nameKeywordsCopy);
             boolean classIdMatch = classIdContainsKeywords(person, isSetClassIdCopy, classIdKeywordsCopy);
             boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaidCopy, monthPaidKeywordsCopy);
             boolean notMonthPaidMatch = notMonthPaidContainsKeywords(
                     person, isSetNotMonthPaidCopy, notMonthPaidKeywordsCopy);
+            boolean tagMatch = tagContainsKeywords(person, isSetTagCopy, tagKeywordsCopy);
 
-            return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch;
+            return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch && tagMatch;
         };
     }
 
@@ -141,6 +159,14 @@ public class PersonPredicateBuilder {
                 .noneMatch(keyword -> regexMatch(person.getMonthsPaid().toString(), keyword));
     }
 
+    private static boolean tagContainsKeywords(Person person, boolean isSetTag, List<String> tagKeywords) {
+        if (!isSetTag) {
+            return true;
+        }
+        return tagKeywords.stream()
+                .anyMatch(keyword -> regexMatch(person.getTags().toString(), keyword));
+    }
+
     private static boolean regexMatch(String value, String keyword) {
         Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
         return pattern.matcher(value).find();
@@ -150,7 +176,7 @@ public class PersonPredicateBuilder {
      * Returns true if no {@code with} functions of this object has been executed yet.
      */
     public boolean isEmpty() {
-        return !isSetName && !isSetClassId && !isSetMonthPaid && !isSetNotMonthPaid;
+        return !isSetName && !isSetClassId && !isSetMonthPaid && !isSetNotMonthPaid && !isSetTag;
     }
     @Override
     public boolean equals(Object other) {
@@ -168,10 +194,12 @@ public class PersonPredicateBuilder {
                 && isCollectionEqual(classIdKeywords, otherPersonPredicateBuilder.classIdKeywords)
                 && isCollectionEqual(monthPaidKeywords, otherPersonPredicateBuilder.monthPaidKeywords)
                 && isCollectionEqual(notMonthPaidKeywords, otherPersonPredicateBuilder.notMonthPaidKeywords)
+                && isCollectionEqual(tagKeywords, otherPersonPredicateBuilder.tagKeywords)
                 && isSetName == otherPersonPredicateBuilder.isSetName
                 && isSetClassId == otherPersonPredicateBuilder.isSetClassId
                 && isSetMonthPaid == otherPersonPredicateBuilder.isSetMonthPaid
-                && isSetNotMonthPaid == otherPersonPredicateBuilder.isSetNotMonthPaid;
+                && isSetNotMonthPaid == otherPersonPredicateBuilder.isSetNotMonthPaid
+                && isSetTag == otherPersonPredicateBuilder.isSetTag;
     }
     @Override
     public String toString() {
@@ -180,10 +208,12 @@ public class PersonPredicateBuilder {
                 .add("classIdKeywords", classIdKeywords)
                 .add("monthPaidKeywords", monthPaidKeywords)
                 .add("notMonthPaidKeywords", notMonthPaidKeywords)
+                .add("tagKeywords", tagKeywords)
                 .add("isSetName", isSetName)
                 .add("isSetClassId", isSetClassId)
                 .add("isSetMonthPaid", isSetMonthPaid)
                 .add("isSetNotMonthPaid", isSetNotMonthPaid)
+                .add("isSetTag", isSetTag)
                 .toString();
     }
 }
