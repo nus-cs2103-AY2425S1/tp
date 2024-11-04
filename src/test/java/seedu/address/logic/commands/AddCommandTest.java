@@ -54,15 +54,6 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
-        AddCommand addCommand = new AddCommand(validStudent, TUTORIAL_ID);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
     public void execute_duplicateStudentId_throwsCommandException() {
         // Setup model with existing student having the same ID
         Student existingStudent = new StudentBuilder().withStudentId("A1001000U").build();
