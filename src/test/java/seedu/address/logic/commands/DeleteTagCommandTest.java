@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_SOME_NONEXISTENT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 import static seedu.address.testutil.TypicalTags.COLLEAGUES;
@@ -79,7 +81,7 @@ public class DeleteTagCommandTest {
         List<Tag> nonExistentTags = List.of(nonExistentTag);
 
         DeleteTagCommand newTagCommand = new DeleteTagCommand(nonExistentTags, false);
-        String expectedMessage = BRIDES_SIDE + " " + DeleteTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = DeleteTagCommand.MESSAGE_ALL_NONEXISTENT + nonExistentTags;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -98,8 +100,7 @@ public class DeleteTagCommandTest {
         model.addTag(existingTag);
 
         DeleteTagCommand newTagCommand = new DeleteTagCommand(mixedTags, false);
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS + " " + FRIENDS + " " + COLLEAGUES
-                + " " + DeleteTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = MESSAGE_SOME_NONEXISTENT + List.of(newFriendsTag, newColleaguesTag);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(mixedTags);
@@ -145,8 +146,7 @@ public class DeleteTagCommandTest {
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_TAGS_IN_USE, model.getTagsInUse());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(deleteTagCommand, model, expectedMessage);
     }
 
     /**

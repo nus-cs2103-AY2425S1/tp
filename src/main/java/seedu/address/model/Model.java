@@ -122,12 +122,12 @@ public interface Model {
     boolean deleteTag(Tag tag);
 
     /**
-     * Deletes a tag from the tag list.
+     * Deletes a variable number of tags from the tag list.
      *
      * @param tags The tags to be deleted.
-     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     * @return the set of tags which were deleted successfully (could be none).
      */
-    boolean deleteTags(List<Tag> tags);
+    Set<Tag> deleteTags(List<Tag> tags);
 
     /**
      * Renames a tag from the tag list.

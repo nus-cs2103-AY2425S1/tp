@@ -25,7 +25,7 @@ public class NewtagCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "New tag(s) created.\n";
-    public static final String MESSAGE_ALL_DUPLICATE = "The following tag(s) already exist:\n";
+    public static final String MESSAGE_ALL_DUPLICATE = "The following tag(s) already exist(s):\n";
 
     public static final String MESSAGE_SOME_DUPLICATE = "Non-duplicate tag(s) has/have been created successfully.\n"
             + "The following tag(s) already exist(s):\n";
