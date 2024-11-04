@@ -49,6 +49,8 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
   - [Additional Features](#additional-features)
     - [Command history: Up and Down arrow keys](#command-history-up-and-down-arrow-keys)
     - [Highlighting of command errors](#highlighting-of-command-errors)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
