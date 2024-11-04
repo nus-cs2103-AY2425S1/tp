@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import hallpointer.address.model.AddressBook;
+import hallpointer.address.model.HallPointer;
 import hallpointer.address.model.member.Member;
 
 /**
@@ -64,10 +64,10 @@ public class TypicalMembers {
     private TypicalMembers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical members.
+     * Returns an {@code HallPointer} with all the typical members.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static HallPointer getTypicalHallPointer() {
+        HallPointer ab = new HallPointer();
         for (Member member : getTypicalMembers()) {
             ab.addMember(member);
         }
