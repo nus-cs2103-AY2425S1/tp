@@ -145,6 +145,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> goods categories} into a {@code Set<GoodsCategories>}.
+     */
+    public static Set<GoodsCategories> parseGoodsCategories(Collection<String> goodCategories) throws ParseException {
+        requireNonNull(goodCategories);
+        final Set<GoodsCategories> goodsCategoriesSet = new HashSet<>();
+        for (String goodCategory : goodCategories) {
+            goodsCategoriesSet.add(parseGoodsCategory(goodCategory));
+        }
+        return goodsCategoriesSet;
+    }
+
+    /**
      * Parses {@code String dateTime} into a {@code Date}
      * @param dateTime A string containing the datetime string
      *
