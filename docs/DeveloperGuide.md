@@ -222,107 +222,20 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ## **Implementation of main features**
 
-### Add person feature
+## **Implementation of Entity Commands**
+Entity commands include `add`, `delete`, `find`, `clear` commands.
+So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Edit person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Delete person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Find person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### List person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Clear person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Add appointment feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Edit appointment feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Delete appointment feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-## Implementation of Entity Commands
-Entity commands include `add`, `delete`, `find`, `clear` commands
-
-**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`, followed by appropriate arguments and prefixes.
-**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command
-**Step 3**. The `AddressBookParser` then creates a `xyzEntityCommand` by passing string to `xyzCommandParser` and is returned to the `LogicManager`.
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
+**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
+**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`.
 **Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
-### Find appointment feature
+<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram" />
+- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindApptCommand` because we have two entities called person and appointment on which operations can be performed.
 
-#### Implementation
-When a user types a `find appt` command, the DocTrack application will 
-find the appointment based on the parameters provided.
-
-**Step 1**. The user types the `find appt` command in the `CommandBox` followed by the name or a date
-The date is specified using a `d/` prefix and the name is specified using `n/` prefix.
-
-**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand`
-method to parse the `find appt` command
-
-**Step 3**. The `AddressBookParser` creates a `FindAppointmentCommand` by passing the string to `FindCommandParser` 
-and is then returned to the `LogicManager`.
-
-**Step 4**. The `LogicManager` calls the `FindAppointmentCommand:execute` method which creates a new `CommandResult` Object
-
-**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
-
-#### Design considerations
+#### Find Appointment Command
 **Aspect: How to show find appointment.**
 
 - **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
@@ -338,20 +251,6 @@ and is then returned to the `LogicManager`.
 ### List appointment feature
 
 #### Implementation
-When a user types a `list appt` command, the DocTrack application will
-return a list of all the appointments in the appointment book.
-
-**Step 1**. The user types the `list` command in the `CommandBox`. The command is passed to the `LogicManager`. 
-
-**Step 2**. `LogicManager` then calls the `AddressBookParser::parseCommand`
-method to parse the `list appt` command
-
-**Step 3**. The `AddressBookParser` creates a `ListAppointmentCommand` by passing the string to `ListCommandParser`
-and is then returned to the `LogicManager`.
-
-**Step 4**. The `LogicManager` calls the `ListAppointmentCommand:execute` method which creates a new `CommandResult` Object
-
-**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
 **Aspect**: How to show list 
 
@@ -366,28 +265,12 @@ and is then returned to the `LogicManager`.
 
 ### Clear appointment feature
 
-#### Implementation
-When a user types a `clear appt` command, the DocTrack application will
-return a list of all the appointments in the appointment book.
 
-**Step 1**. The user types the `clear appt` command in the `CommandBox`. The command is passed to the `LogicManager`.
-
-**Step 2**. `LogicManager` then calls the `AddressBookParser::parseCommand`
-method to parse the `clear appt` command
-
-**Step 3**. The `AddressBookParser` creates a `ClearAppointmentCommand` by passing the string to `CLearAppointmentCommandParser`
-and is then returned to the `LogicManager`.
-
-**Step 4**. The `LogicManager` calls the `ClearAppointmentCommand:execute` method which creates a new `CommandResult` Object
-
-**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
+#### Design considerations
 
 **Aspect**: How to show list
 
 - **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
-
-
-#### Design considerations
 
 <br>
 
