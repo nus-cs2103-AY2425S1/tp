@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Schedule;
@@ -40,7 +41,7 @@ public class ReminderCommand extends Command {
     public static final String MESSAGE_INVALID_APPOINTMENT = "Appointment not found.\n"
             + "Please schedule an appointment first.";
     public static final String MESSAGE_REMINDER_EXISTS = "This reminder already exists";
-    private String name;
+    private Name name;
     private String reminderTime;
 
     /**
@@ -49,7 +50,7 @@ public class ReminderCommand extends Command {
      * @param name The name of the person.
      * @param reminderTime The reminder time.
      */
-    public ReminderCommand(String name, String reminderTime) {
+    public ReminderCommand(Name name, String reminderTime) {
         this.name = name;
         this.reminderTime = reminderTime;
     }
@@ -58,7 +59,7 @@ public class ReminderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToEdit = findPersonByName(lastShownList, name);
+        Person personToEdit = findPersonByName(lastShownList, name.toString());
 
         if (personToEdit == null) {
             throw new CommandException(MESSAGE_INVALID_NAME);

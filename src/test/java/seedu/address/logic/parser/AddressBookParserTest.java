@@ -147,8 +147,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_reminder() throws Exception {
+        Name name = new Name("Jane");
         String reminderTime = "1 day";
-        ReminderCommand expectedCommand = new ReminderCommand("Jane", reminderTime);
+        ReminderCommand expectedCommand = new ReminderCommand(name, reminderTime);
 
         ReminderCommand actualCommand = (ReminderCommand) parser.parseCommand(
                 ReminderCommand.COMMAND_WORD + " Jane" + " r/" + reminderTime);
