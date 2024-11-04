@@ -54,7 +54,7 @@ public class EditPersonCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone is already used by another person "
+    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number is already used by another person "
             + "in the address book.";
 
     private final Index index;

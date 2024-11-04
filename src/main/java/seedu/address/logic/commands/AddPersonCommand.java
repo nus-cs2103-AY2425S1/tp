@@ -40,7 +40,7 @@ public class AddPersonCommand extends AddCommand {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone is already used by another person "
+    public static final String MESSAGE_DUPLICATE_PHONE_NUMBER = "This phone number is already used by another person "
             + "in the address book.";
     private final Person toAdd;
 

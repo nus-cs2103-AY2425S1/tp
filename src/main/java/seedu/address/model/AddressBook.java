@@ -85,7 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a {@code person} in the address book use this phone number.
      */
-    public boolean hasPhone(Phone phone) {
+    public boolean hasPhoneNumber(Phone phone) {
         requireNonNull(phone);
         for (Person p : persons) {
             if (p.getPhone().equals(phone)) {
