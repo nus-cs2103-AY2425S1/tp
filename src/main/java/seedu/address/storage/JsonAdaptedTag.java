@@ -26,6 +26,14 @@ class JsonAdaptedTag {
     }
 
     /**
+     * Overloaded constructor for default tag creation.
+     */
+    @JsonCreator
+    public JsonAdaptedTag(String tagName) {
+        this(tagName, "GENERAL");
+    }
+
+    /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {

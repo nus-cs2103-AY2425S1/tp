@@ -25,19 +25,19 @@ public enum TagCategory {
      */
     public static TagCategory fromString(String category) throws IllegalValueException {
         switch (category) {
-        case "acads":
+        case "ACADEMICS":
             return ACADEMICS;
 
-        case "activity":
+        case "ACTIVITIES":
             return ACTIVITIES;
 
-        case "networking":
+        case "NETWORKING":
             return NETWORKING;
 
-        case "mentor":
+        case "MENTORSHIP":
             return MENTORSHIP;
 
-        case "general":
+        case "GENERAL":
             return GENERAL;
 
         default:

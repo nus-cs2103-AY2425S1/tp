@@ -59,9 +59,9 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing tags with the names and categories specified.
      * @param names Array of names for the tags.
-     * @param categories Array of categories to be attached to the respective name.
-     * @exception IllegalValueException thrown when a tag category is not valid.
+     * @param categories Array of categories to be attached to the respective names.
      * @return Set containing the tags.
+     * @throws IllegalValueException thrown when a tag category is not valid.
      */
     public static Set<Tag> getTagSet(String[] names, String[] categories) throws IllegalValueException {
         List<Tag> resultTags = new ArrayList<>();
