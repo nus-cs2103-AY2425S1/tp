@@ -118,6 +118,15 @@ public class Person {
     }
 
     /**
+     * Returns the role as a lowercase string.
+     *
+     * @return the role name in lowercase format
+     */
+    public String getRoleAsLowerCaseString() {
+        return Role.PERSON.toLowerCaseString();
+    }
+
+    /**
      * Compares this person's name with another person's name lexicographically, ignoring case considerations.
      *
      * @param otherPerson The other person whose name is to be compared.

@@ -106,4 +106,9 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
     public Role getRole() {
         return Role.VOLUNTEER;
     }
+
+    @Override
+    public String getRoleAsLowerCaseString() {
+        return Role.VOLUNTEER.toLowerCaseString();
+    }
 }

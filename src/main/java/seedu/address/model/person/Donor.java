@@ -88,6 +88,11 @@ public class Donor extends Person implements Comparable<Donor> {
         return Role.DONOR;
     }
 
+    @Override
+    public String getRoleAsLowerCaseString() {
+        return Role.DONOR.toLowerCaseString();
+    }
+
     /**
      * Compares this Donor to another Donor based on donated amount
      *
