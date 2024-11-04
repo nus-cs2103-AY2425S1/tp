@@ -132,7 +132,7 @@ The `Model` component,
 {: .alert .alert-info}
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has an `Allergy` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Allergy` object per unique Allergy, instead of each `Person` needing their own `Allergy` objects.
 
-![](images/BetterModelClassDiagram.png){:width="450"}
+![](images/BetterModelClassDiagram.png){:width="740"}
 
 [Back to Table of Contents](#table-of-contents)
 ### Storage component
