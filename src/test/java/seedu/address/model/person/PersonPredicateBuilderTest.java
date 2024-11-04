@@ -17,7 +17,7 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonPredicateBuilderTest {
 
     @Test
-    public void test_equals() {
+    public void equalsMethod() {
         PersonPredicateBuilder builder1 = new PersonPredicateBuilder()
                 .withNameKeywords(Arrays.asList("Alice", "Bob"))
                 .withClassIdKeywords(Arrays.asList("1", "2"))
@@ -72,7 +72,7 @@ public class PersonPredicateBuilderTest {
     }
 
     @Test
-    public void test_toString() {
+    public void toStringMethod() {
         PersonPredicateBuilder builder = new PersonPredicateBuilder()
                 .withNameKeywords(Arrays.asList("Alice", "Bob"))
                 .withClassIdKeywords(Arrays.asList("1", "2"))
