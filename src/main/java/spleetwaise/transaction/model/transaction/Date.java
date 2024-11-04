@@ -14,7 +14,7 @@ import spleetwaise.address.commons.util.AppUtil;
  * {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String MESSAGE_CONSTRAINTS = "Date should only in the format of DDMMYYYY";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be valid and in the format of DDMMYYYY";
 
     public static final DateTimeFormatter VALIDATION_FORMATTER = DateTimeFormatter.ofPattern("ddMMuuuu")
             .withResolverStyle(ResolverStyle.STRICT);
