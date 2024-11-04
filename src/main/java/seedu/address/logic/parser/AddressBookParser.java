@@ -59,6 +59,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
+
         case AddCommand.COMMAND_WORD:
         case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
@@ -85,7 +86,7 @@ public class AddressBookParser {
 
         case ListAttendanceCommand.COMMAND_WORD:
         case ListAttendanceCommand.COMMAND_ALIAS:
-            return new ListAttendanceCommand();
+            return new ListAttendanceCommandParser().parse(arguments);
 
         case MarkAttendanceCommand.COMMAND_WORD:
         case MarkAttendanceCommand.COMMAND_ALIAS:
