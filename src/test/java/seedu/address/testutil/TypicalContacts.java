@@ -88,7 +88,7 @@ public class TypicalContacts {
     public static final Contact BOBNICK = new ContactBuilder().withName(VALID_NAME_BOB)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "3")
             .withEmail(VALID_EMAIL_BOB + "3").withStudentStatus(VALID_STUDENT_STATUS_BOB)
-            .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
+            .withRoles(VALID_ROLE_ADMIN)
             .withNickname(BOB_NICKNAME)
             .build();
     public static final Contact BOB_HASSAMENICK_BOBNICK = new ContactBuilder().withName(VALID_NAME_BOB)
