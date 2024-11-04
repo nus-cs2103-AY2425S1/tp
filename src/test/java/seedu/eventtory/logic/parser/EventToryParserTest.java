@@ -60,8 +60,8 @@ public class EventToryParserTest {
 
     @Test
     public void parseCommand_unassign() throws Exception {
-        UnassignCommand command = new UnassignCommand(Index.fromOneBased(1), Index.fromOneBased(1));
-        assertEquals(parser.parseCommand(UnassignCommand.COMMAND_WORD + " v/1 e/1"), command);
+        UnassignCommand command = new UnassignCommand(Index.fromOneBased(1));
+        assertEquals(parser.parseCommand(UnassignCommand.COMMAND_WORD + " 1"), command);
     }
 
     @Test
