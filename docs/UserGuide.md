@@ -51,6 +51,10 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 
 ## Feature Categories
 
+<div class="callout callout-important" markdown="span">
+You are strongly recommended to read through [CommandStructure](#CommandStructure) before proceeding with this section
+</div>
+
 This user guide is divided into four main feature categories:
 
 1. **Client Management Commands**
@@ -407,7 +411,7 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### **Add Listing**
-    - **Command:** `AddListingCommand`
+    - **Format:** `AddListingCommand`
     - **Description:** Adds a new property listing with specified details.
     - **Successful Execution:**
       > ---
@@ -446,7 +450,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### **Show Listings**
-    - **Command:** `ShowListingsCommand`
+    - **Format:** `ShowListingsCommand`
     - **Description:** Displays all current listings.
     - **Successful Execution:**
       > ---
@@ -485,7 +489,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### **Add Buyers to Listing**
-    - **Command:** `AddBuyersToListingCommand`
+    - **Format:** `AddBuyersToListingCommand`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
@@ -524,7 +528,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### **Remove Buyers from Listing**
-    - **Command:** `RemoveBuyersFromListingCommand`
+    - **Format:** `RemoveBuyersFromListingCommand`
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
@@ -563,7 +567,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### **Delete Listing**
-    - **Command:** `DeleteListingCommand`
+    - **Format:** `DeleteListingCommand`
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
@@ -602,7 +606,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### **Clear Listing**
-    - **Command:** `ClearListingCommand`
+    - **Format:** `ClearListingCommand`
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
       > ---
@@ -645,7 +649,7 @@ Commands for managing property listings and associating clients with listings.
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
 - #### **Clear**
-    - **Command:** `ClearCommand`
+    - **Format:** `ClearCommand`
     - **Description:** Clears the console or application state.
     - **Successful Execution:**
       > ---
@@ -684,7 +688,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ---
 
 - #### **Exit**
-    - **Command:** `ExitCommand`
+    - **Format:** `ExitCommand`
     - **Description:** Exits the application.
     - **Successful Execution:**
       > ---
@@ -723,7 +727,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ---
 
 - #### **Help**
-    - **Command:** `help`
+    - **Format:** `help`
     - **Description:** Displays a list of available commands and their descriptions.
     - **Successful Execution:**
       > ---
@@ -736,7 +740,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ---
 
 - #### **More Info**
-    - **Command:** `MoreInfoCommand`
+    - **Format:** `MoreInfoCommand`
     - **Description:** Provides additional information about a specific command or feature.
     - **Successful Execution:**
       > ---
@@ -774,12 +778,8 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **List All Commands**
-    - **Command:** `ListCommand`
-    - **Description:** Lists all available commands in the application.
-
 - #### **Chat Window**
-    - **Command:** `ChatWindowCommand`
+    - **Format:** `ChatWindowCommand`
     - **Description:** Opens a chat window for client-agent communication.
     - **Successful Execution:**
       > ---
