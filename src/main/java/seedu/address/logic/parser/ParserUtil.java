@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,11 +37,8 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        try {
-            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-        } catch (CommandException ce) {
-            throw new ParseException(MESSAGE_NON_POSITIVE_INDEX);
-        }
+
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
