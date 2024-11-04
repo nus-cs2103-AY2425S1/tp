@@ -5,7 +5,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSu
 import static hallpointer.address.testutil.TypicalMembers.CARL;
 import static hallpointer.address.testutil.TypicalMembers.ELLE;
 import static hallpointer.address.testutil.TypicalMembers.FIONA;
-import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,8 +24,8 @@ import hallpointer.address.model.member.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindMemberCommand}.
  */
 public class FindMemberCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHallPointer(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalHallPointer(), new UserPrefs());
 
     @Test
     public void equals() {

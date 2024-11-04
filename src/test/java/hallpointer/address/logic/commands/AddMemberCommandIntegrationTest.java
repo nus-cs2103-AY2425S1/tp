@@ -2,7 +2,7 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class AddMemberCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalHallPointer(), new UserPrefs());
     }
 
     @Test
     public void execute_newMember_success() {
         Member validMember = new MemberBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getHallPointer(), new UserPrefs());
         expectedModel.addMember(validMember);
 
         assertCommandSuccess(new AddMemberCommand(validMember), model,
@@ -43,7 +43,7 @@ public class AddMemberCommandIntegrationTest {
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
-        Member memberInList = model.getAddressBook().getMemberList().get(0);
+        Member memberInList = model.getHallPointer().getMemberList().get(0);
         assertCommandFailure(new AddMemberCommand(memberInList), model,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER);
 
