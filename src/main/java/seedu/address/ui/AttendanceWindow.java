@@ -22,7 +22,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
-import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
@@ -34,15 +33,19 @@ import seedu.address.model.student.TutorialGroup;
 
 
 public class AttendanceWindow {
+    private static final String ICON_APPLICATION = "/images/TT_icon.png";
     private final TutorialGroup tutorialGroup;
     private TableView<AttendanceRow> table;
     private ObservableList<AttendanceRow> data;
-    private static final String ICON_APPLICATION = "/images/TT_icon.png";
 
     public AttendanceWindow(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
     }
 
+    /**
+     * Shows the attendance window.
+     * @param model the model to get the data from
+     */
     public void show(Model model) {
         Platform.runLater(() -> {
             Stage stage = new Stage();
@@ -68,7 +71,8 @@ public class AttendanceWindow {
     private void initializeTable(Model model) {
         table = new TableView<>();
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
-        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        studentNameColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
 
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
@@ -140,8 +144,10 @@ public class AttendanceWindow {
     }
 
     private void addDateColumn(LocalDate date) {
-        TableColumn<AttendanceRow, String> dateColumn = new TableColumn<>(DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
-        dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAttendanceForDate(date)));
+        TableColumn<AttendanceRow, String> dateColumn =
+                new TableColumn<>(DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
+        dateColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getAttendanceForDate(date)));
         table.getColumns().add(dateColumn);
     }
 
@@ -184,7 +190,8 @@ public class AttendanceWindow {
         Collections.sort(sortedDates);
         table.getColumns().clear();
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
-        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        studentNameColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
 
         for (LocalDate date : sortedDates) {
