@@ -709,7 +709,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters in the attendance data.
-    * 2a1. System displays an error message asking for valid attendance format, with no special characters.
+    * 2a1. System displays an error message asking for valid attendance format.
       Use case ends.
 
 * 3a. User leaves the absent reason blank (indicating deletion of attendance).
@@ -720,12 +720,196 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays an error message asking for a valid absent date format.
       Use case ends.
 
-* 3c. User enters absent reason in an invalid format.
-    * 3c1. System displays an error message asking for a valid absent reason format.
+* 3c. User enters a date that does not exist (e.g., 30-02-2024).
+    * 3c1. System displays an error message asking for a valid absent date.
+      Use case ends
+
+* 3d. User enters absent reason in an invalid format.
+    * 3d1. System displays an error message asking for a valid absent reason format.
       Use case ends.
 
-* 3d. User tries to add attendance for a student that does not exist.
-    * 3d1. System displays an error message notifying that the student does not exist in the system.
+* 3e. User tries to add attendance for a student that does not exist.
+    * 3e1. System displays an error message notifying that the student does not exist in the system.
+      Use case ends.
+
+* 3f. User tries to add multiple attendances for a student at one go.
+    * 3f1. System displays an error message notifying that input with multiple attendances is not allowed.
+
+**System: StudentManagerPro**
+
+**Use case: UC12 Add Exam**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the exam is added for all students currently in the system with a score of "NIL".
+* If an invalid exam name is given as input, an error message is displayed.
+
+**MSS**
+1. User gives the command to add exam in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the exam data.
+4. System adds the exam to every student currently in the system.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the exam name.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 3a. User tries to add an exam that already exists in the system.
+    * 3a1. System displays an error message telling the user that the exam already exists.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC13 Add Student's Exam Score**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the student's exam score is added to the specified exam in the student's profile and saved in the system.
+* If an invalid exam name or exam score is given as input, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to add the score for a particular exam for a student in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the exam data.
+4. System adds the exam score to the specified exam in the student's profile.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the exam name.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 2b. User enters invalid characters in the exam score.
+    * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100.
+      Use case ends.
+* 3a. User tries to add a score to an exam that does not exist.
+    * 3a1. System displays an error message notifying that the exam does not exist in the system.
+      Use case ends.
+* 3b. User tries to add a score to a student that does not exist.
+    * 3b1. System displays an error message notifying that the student does not exist in the system.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC14 Add a Submission**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the submission is added for all students currently in the system with a status of "NIL".
+* If an invalid submission name is given as input, an error message is displayed.
+
+**MSS**
+1. User gives the command to add submission in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the submission data.
+4. System adds the submission to every student currently in the system.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the submission name.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 3a. User tries to add a submission that already exists in the system.
+    * 3a1. System displays an error message telling the user that the submission already exists.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC15 Add a Student's Submission Status**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the student's submission status is added to the specified submission in the student's profile and saved in the system.
+* If an invalid submission name or submission status is given as input, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to add the status for a particular submission for a student in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the submission data.
+4. System adds the submission status to the specified submission in the student's profile.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the submission name.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 2b. User enters invalid characters in the submission status.
+    * 2b1. System displays an error message asking for valid submission status format, "Y", "N" or "NIL".
+      Use case ends.
+* 3a. User tries to add a status to a submission that does not exist.
+    * 3a1. System displays an error message notifying that the submission does not exist in the system.
+      Use case ends.
+* 3b. User tries to add a status to a student that does not exist.
+    * 3b1. System displays an error message notifying that the student does not exist in the system.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC16 Delete a Submission**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, the submission is deleted from all students currently in the system.
+* If an invalid submission name is given as input, an error message is displayed.
+
+**MSS**
+1. User gives the command to delete submission in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the submission data.
+4. System deletes the submission from every student currently in the system.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the submission name.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
+      Use case ends.
+* 3a. User tries to delete a submission that does not exist in the system.
+    * 3a1. System displays an error message telling the user that the submission does not exist.
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC17 Sort Students**
+
+**Actor: User**
+
+**Preconditions: User is logged in.**
+
+**Guarantees:**
+* If successful, student list displayed will be sorted.
+* If an invalid attribute is given, a corresponding error message is displayed.
+
+**MSS**
+1. User gives the command to sort students based on a particular attribute.
+2. System validates the input attribute.
+3. System sorts the displayed list based on the attribute.
+4. System displays the sorted list.
+5. System confirms the success by displaying a success message.
+   Use case ends.
+
+**Extensions**
+* 2a. System detects an invalid attribute.
+    * 2a1. System displays an error message asking for valid input.
       Use case ends.
 
 

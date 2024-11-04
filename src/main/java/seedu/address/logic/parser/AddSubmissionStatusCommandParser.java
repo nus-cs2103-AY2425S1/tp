@@ -30,6 +30,8 @@ public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionSta
                     AddSubmissionStatusCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBMISSION, PREFIX_SUBMISSION_STATUS);
+
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Submission submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
         String submissionStatus = ParserUtil

@@ -33,12 +33,12 @@ public class AddAttendanceTest {
     public void execute_addAttendanceUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
-        attendances.put(new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+        attendances.put(new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         Person editedPerson = new PersonBuilder(firstPerson)
                 .withAttendance(attendances)
                 .build();
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
-                new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+                new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         String expectedMessage = String.format(AddAttendanceCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
                 Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -94,15 +94,22 @@ public class AddAttendanceTest {
     }
 
     @Test
+    public void execute_deleteAttendanceWhenAttendanceIsEmptyUnfilteredList_failure() {
+        AddAttendanceCommand deleteAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
+                new AbsentDate("10-10-2024"), new AbsentReason(""));
+        assertCommandFailure(deleteAttendanceCommand, model, AddAttendanceCommand.MESSAGE_ABSENT_DATE_NOT_FOUND);
+    }
+
+    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
-        attendances.put(new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+        attendances.put(new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         Person editedPerson = new PersonBuilder(firstPerson)
                 .withAttendance(attendances).build();
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
-                new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+                new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         String expectedMessage = String.format(AddAttendanceCommand.MESSAGE_ADD_ATTENDANCE_SUCCESS,
                 Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -114,7 +121,7 @@ public class AddAttendanceTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(outOfBoundIndex,
-                new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+                new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -124,18 +131,18 @@ public class AddAttendanceTest {
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(outOfBoundIndex,
-                new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+                new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
         final AddAttendanceCommand standardCommand = new AddAttendanceCommand(
-                INDEX_FIRST_PERSON, new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+                INDEX_FIRST_PERSON, new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
 
         // same values -> returns true
         AddAttendanceCommand commandWithSameValues = new AddAttendanceCommand(
-                INDEX_FIRST_PERSON, new AbsentDate("10-12-2024"), new AbsentReason("Sick"));
+                INDEX_FIRST_PERSON, new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -149,14 +156,14 @@ public class AddAttendanceTest {
 
         // different person -> returns false
         assertFalse(standardCommand.equals(new AddAttendanceCommand(INDEX_SECOND_PERSON,
-                new AbsentDate("10-12-2024"), new AbsentReason("Sick"))));
+                new AbsentDate("10-10-2024"), new AbsentReason("Sick"))));
 
         // different absent date -> returns false
         assertFalse(standardCommand.equals(new AddAttendanceCommand(INDEX_FIRST_PERSON,
-                new AbsentDate("11-12-2024"), new AbsentReason("Sick"))));
+                new AbsentDate("11-10-2024"), new AbsentReason("Sick"))));
 
         // different absent reason -> returns false
         assertFalse(standardCommand.equals(new AddAttendanceCommand(INDEX_FIRST_PERSON,
-                new AbsentDate("10-12-2024"), new AbsentReason("Holiday"))));
+                new AbsentDate("10-10-2024"), new AbsentReason("Holiday"))));
     }
 }
