@@ -113,7 +113,7 @@ public class DeleteTagCommand extends UndoableCommand {
         for (Tag tag : tags) {
             if (model.hasTag(tag)) {
                 model.deleteTags(List.of(tag)); // Remove from model tags
-                model.removeTagFromPersons(tag); // Remove from all persons
+                deletedSet.put(tag, model.removeTagFromPersons(tag)); // Remove from all persons
                 hasSuccess = true;
             }
         }
