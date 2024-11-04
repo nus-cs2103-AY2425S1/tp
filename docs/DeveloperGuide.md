@@ -305,6 +305,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
+* 1b. Given search input has invalid or duplicate fields.
+    * 1b1. AddressBook shows an error message.
+
+      Use case ends.
+* 1c. Search input does not match any contact in the AddressBook
+    * 1c1. AddressBook shows an error message and prompts user to try searching under another field
+
+      Use case ends.
 
 **Use case: List all contacts**
 
