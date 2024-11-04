@@ -30,8 +30,9 @@ public class NewtagCommand extends UndoableCommand {
     public static final String MESSAGE_SOME_DUPLICATE = "Non-duplicate tag(s) has/have been created successfully.\n"
             + "The following tag(s) already exist(s):\n";
 
-    public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
-            + " tags.\nPlease remove some using 'deletetag'.\n";
+    public static final String MESSAGE_TOO_MANY_TAGS = "You are attempting to add more than "
+            + TagList.MAXIMUM_TAGLIST_SIZE + " tags in total.\n" +
+            "Please remove some using 'deletetag first'.\n";
 
     private final List<Tag> tags;
 
@@ -50,6 +51,8 @@ public class NewtagCommand extends UndoableCommand {
      *      allowable number if the new tags were to be added.
      */
     private void validateTagListSize(Model model) throws CommandException {
+        requireAllNonNull(model);
+        requireAllNonNull(tags);
         if (!model.checkAcceptableTagListSize(tags.size())) {
             throw new CommandException(MESSAGE_TOO_MANY_TAGS);
         }
@@ -60,6 +63,7 @@ public class NewtagCommand extends UndoableCommand {
      * @param model The model to which tags will be added.
      */
     private Set<Tag> addTagsToModel(Model model) {
+        requireAllNonNull(model);
         Set<Tag> tagsSuccessfullyAdded = model.addTags(tags);
         model.updateTagList();
         return tagsSuccessfullyAdded;
@@ -72,6 +76,7 @@ public class NewtagCommand extends UndoableCommand {
      * @return The corresponding CommandResult.
      */
     private CommandResult createCommandResult(Set<Tag> tagsSuccessfullyAdded) {
+        requireAllNonNull(tagsSuccessfullyAdded);
         List<Tag> tagsNotSuccessfullyAdded = new ArrayList<>(tags);
         tagsNotSuccessfullyAdded.removeAll(tagsSuccessfullyAdded);
 

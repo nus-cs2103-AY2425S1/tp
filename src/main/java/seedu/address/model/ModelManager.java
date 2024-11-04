@@ -185,7 +185,7 @@ public class ModelManager implements Model {
     public boolean deleteTags(List<Tag> tags) {
         boolean isSuccessful = true;
         for (Tag tag : tags) {
-            isSuccessful &= addressBook.deleteTag(tag);
+            isSuccessful &= deleteTag(tag);
         }
         return isSuccessful;
     }
