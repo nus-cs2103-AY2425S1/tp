@@ -225,6 +225,38 @@ The commands in this section are used to delete records on the system
 5.2 Closing a tutorial  
 5.3 Clearing all entries
 
+#### **5.2 Closing a tutorial**
+
+Command:  `closetut`
+
+Usage: `closetut tut/TUTORIAL_NAME`
+
+Fields
+
+* `TUTORIAL_NAME`: Name of the tutorial to close
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Only an existing tutorial can be closed. Use [createtut](#22-creating-a-new-tutorial) to create new tutorials, or check the spelling again.
+</div>
+
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+If there are students in the tutorial to be closed, closing the tutorial will REMOVE all students in that tutorial and their past attendances for that tutorial.
+</div>
+
+Example usages
+* `closetut tut/physics`
+
+Invalid usages
+
+* Closing a tutorial that does not exist
+    * *Error Message: No tutorial class with the name TUTORIAL_NAME  is found.*
+* Format errors, check [here](#11-format-errors)
+
+
+
+
+
 ---
 
 ### **6. Viewing help**
