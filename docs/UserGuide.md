@@ -371,4 +371,3 @@ _Details coming soon ..._
 | **View Contact**       | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
 | **Favourite Contact**  | `favourite [INDEX]`<br> e.g., `favourite 123` or `favourite`                                                                                                             |
 | **Add/Edit Birthday**  | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
-| **Birthday Reminder**  | `birthday INDEX d/DATE`<br> e.g., `birthday 123 d/1990-05-15`                                                                                                            |
