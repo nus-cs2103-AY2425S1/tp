@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -62,6 +64,14 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static CustomerOrderList getSampleCustomerOrderList() {
+        return new CustomerOrderList();
+    }
+
+    public static SupplyOrderList getSampleSupplyOrderList() {
+        return new SupplyOrderList();
     }
 
     /**
