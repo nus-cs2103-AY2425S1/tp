@@ -35,12 +35,6 @@
     "email" : "johndoe@example.com",
     "availableDate" : "2020-10-10",
     "involvedIn" : [ ]
-  }, {
-    "name" : "John Dasdfasfdasfdoe",
-    "phone" : "91234567",
-    "email" : "john@gmail.com",
-    "availableDate" : "2024-02-02",
-    "involvedIn" : [ ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
@@ -90,21 +84,5 @@
     "location" : "here",
     "description" : "",
     "volunteers" : [ "Alice Wong", "Bob Tan" ]
-  }, {
-    "eventName" : "onsavd",
-    "date" : "2022-02-02",
-    "startTime" : "00:00",
-    "endTime" : "00:01",
-    "location" : "aosvn",
-    "description" : "",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "safsadfonsavd",
-    "date" : "2022-02-02",
-    "startTime" : "00:00",
-    "endTime" : "00:01",
-    "location" : "aosvn",
-    "description" : "",
-    "volunteers" : [ ]
   } ]
 }

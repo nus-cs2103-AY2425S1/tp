@@ -232,14 +232,14 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ## Known Issues
 
-1. **Multi-Screen Setup Issue**  
-   **Problem:** If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen when you restart the app.  
+1. **Multi-Screen Setup Issue**
+   **Problem:** If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen when you restart the app.
    **Solution:**
     - To fix this, locate and delete the `preferences.json` file, which stores the app's window position.
     - After deleting the file, restart the application, and the GUI will open correctly on the primary screen.
 
-2. **Help Window Remaining Minimized**  
-   **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.  
+2. **Help Window Remaining Minimized**
+   **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening. 
    **Solution:**
     - Manually restore the Help Window from your taskbar or dock.
     - Alternatively, close the minimized window and run the `help` command again to open a new Help Window.
