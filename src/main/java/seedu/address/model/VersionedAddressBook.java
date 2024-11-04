@@ -76,6 +76,13 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
+     * Clears all states from the Versioned Address Book.
+     */
+    public void clear() {
+        addressBookStateList.clear();
+    }
+
+    /**
      * Clears all states after the current state to prevent redo.
      * This is called when a new state is saved after an undo.
      */

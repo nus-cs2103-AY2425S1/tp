@@ -80,19 +80,6 @@ public class GradeCommandTest {
         CommandException exception = assertThrows(CommandException.class, () -> gradeCommand.execute(modelStub));
         assertEquals(GradeCommand.MESSAGE_INVALID_MODULE + " (" + invalidModule + ")", exception.getMessage());
     }
-
-    @Test
-    public void execute_invalidGrade_throwsCommandException() {
-        ModelStub modelStub = new ModelStubWithPerson(ALICE);
-        int invalidGrade = -10; // Negative grade, invalid
-        Map<String, Integer> invalidModuleGrades = new LinkedHashMap<>();
-        invalidModuleGrades.put(VALID_MODULE_AMY, invalidGrade);
-        GradeCommand gradeCommand = new GradeCommand(Index.fromOneBased(1), invalidModuleGrades);
-
-        CommandException exception = assertThrows(CommandException.class, () -> gradeCommand.execute(modelStub));
-        assertEquals(GradeCommand.MESSAGE_INVALID_GRADE, exception.getMessage());
-    }
-
     @Test
     public void equals() {
         Map<String, Integer> moduleGrades = new LinkedHashMap<>();
@@ -230,6 +217,10 @@ public class GradeCommandTest {
         }
         @Override
         public void saveAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void clearAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 

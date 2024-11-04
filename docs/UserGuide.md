@@ -3,7 +3,13 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+![Logo](images/StoreClass-Logo.png)
+
+<div markdown="block" class="alert alert-info">
+StoreClass (SC) is a desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window.
+</div> 
+
+If you can type fast, StoreClass will become a perfect tools to manage student data.
 
 * Table of Contents
 {:toc}
@@ -13,12 +19,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - For Windows 11, see [here](https://www.youtube.com/watch?v=ykAhL1IoQUM)
+   - For MacOS, see [here](https://www.youtube.com/watch?v=lYKHFz8YaD4)
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Use the terminal to run the jar file
+   - How to run a jar file using Terminal? See [here](https://www.youtube.com/watch?v=j7A7DOZePXs)
+   
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -131,6 +141,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filter persons : `filter`
+
+Filters persons who meet all specified conditions.
+
+Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
+* The filter is case-insensitive. eg `hans` will match `Hans`.
+* At least one of the optional fields must be provided.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Persons matching all the given conditions will be returned (i.e. `AND` search) except for multiple tags and modules.
+* If multiple tags or modules are provided, it will do `OR` search to tags and modules and do `AND` search with rest of the parameters.
+
+Examples:
+* `filter n/John` returns `john` and `John Doe` (filter by name)
+* `filter g/male t/project` returns `Bernice Yu`, `Roy Balakrishnan` and `Gabreil Lim`. (filter by gender and tag)
+* `filter g/female t/family t/friend` returns `Alex Yeoh` and `David Li` (filter by gender and multiple tags)
+* `filter g/male t/project m/cs1101` return `Bernice Yu` (filter by multiple conditions)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -144,6 +171,35 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Undoing the last action: `undo`
+
+Reverts the last action performed in the application, allowing you to recover data that may have been deleted or modified unintentionally.
+
+Format: `undo`
+
+* **Note:** This command does not work with the `list`, `filter`, or `find` commands.
+
+<img src="images/UndoRedoExample1.png" alt="Initial State" width="60%" />
+<img src="images/UndoRedoExample2.png" alt="After Delete Command" width="60%" />
+<img src="images/UndoRedoExample3.png" alt="After Undo Command" width="60%" />
+
+Examples:
+* `undo` will revert the last command executed, restoring the previous state of the address book.
+
+### Redoing the last undone action: `redo`
+
+Restores the last action that was undone, allowing you to recover data after an undo operation.
+
+Format: `redo`
+
+* **Note:** This command does not work with the `list`, `filter`, or `find` commands.
+
+<img src="images/UndoRedoExample4.png" alt="After Redo Command" width="60%" />
+
+Examples:
+* `redo` will reapply the last command that was undone, restoring the previous state of the address book.
+
 
 ### Grading a Module: `grade`
 
@@ -183,9 +239,11 @@ The file name must ends with ".json" and must not contain any slash "/".
 
 There should be only one file name provided.
 
-#### Warning
+<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
+All entries in the current address book will be discarded.
 
-All the entries in the current address book will be cleared.
+Archiving into an existing address book will overwrite the old address book.
+</div>
 
 ### Load data files `load`
 
@@ -203,10 +261,11 @@ The file name must ends with ".json", must not contain any slash "/" and must po
 
 There should be only one file name provided.
 
-#### Warning
+<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
 Avoid loading non-address book .json files as it may result in unexpected behaviours
 
 All the entries in the current address book will be discard. So archiving current address book before loading is recommended.
+</div>
 
 ### Clearing all entries : `clear`
 
@@ -222,16 +281,50 @@ Format: `exit`
 
 ### Autocomplete
 
-When using the program, you might have noticed that suggestions pop up when you are entering in commands. This is the autocomplete feature. 
+The Autocomplete feature provides real-time command suggestions as you type, helping you quickly and accurately enter commands. Autocomplete identifies keywords and suggests matches, allowing you to streamline input by selecting from relevant options instead of typing full commands or field values.
 
-Autocomplete searches for keywords matching the word under the caret position. For example, when you type in `ad`, autocomplete will show a list of commands matching this initial string.
+#### How It Works
+Autocomplete operates based on the word at the caret position:
 
-Autocomplete also supports autocompletion for fields. These include: 
-* Modules `m/`
-* Tags `t/`
-* Gender `g/`
+* As you begin typing a command or field, suggestions will appear that match your input. For example, typing `ad` will display a list of commands beginning with `ad`, like `add`.
+* Autocomplete for command keywords applies only to the first word you type in the command box. This initial word is treated as the command.
+* Autocomplete for student fields applies to all subsequent words after the first word. All subsequent words after the first are treated as student fields with specific prefixes. 
 
-When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields.
+<div markdown="span" class="alert alert-info"> :notebook: **Note:** Autocomplete will **not** match subsequent words after the first word with command keywords! </div>
+
+#### Supported Fields
+Autocomplete currently supports the following fields with these prefixes:
+
+| Prefix   | Field            | Description                                     |
+|----------|------------------|-------------------------------------------------|
+| `m/`     | Modules          | Matches **all existing** module names           |
+| `t/`     | Tags             | Matches **all existing** tags                   |
+| `g/`     | Gender           | Matches gender values: `male` or `female`       |
+| `pa/`    | File Paths       | Matches **all existing** archived file paths    |
+
+When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields. The list of suggestions are generated through the existing list of students inside StoreClass.
+
+#### Example Usage
+If you begin typing `edit 1 m/M`, Autocomplete will provide suggestions for available modules starting with the letter `M`, helping you to quickly select the correct module name. Similarly, typing `t/` after the command will bring up a list of tags, allowing you to specify tags accurately without needing to remember or retype exact names.
+
+<div markdown="span" class="alert alert-secondary">
+:question: **Common Question:**
+Why are there no suggestions when I type in `m/`, `t/` or `pa/`? <br>
+Autocomplete searches for suggestions relevant to these fields based on the existing data in StoreClass. If there are no data or students inside StoreClass, then no suggestions will be 
+generated for these fields. This usually occurs after a `clear` command.
+</div>
+
+<div markdown="block" class="alert alert-primary">
+:bulb: **Tips:** for Efficient Usage <br>
+
+1. **Start with the command**: Autocomplete only activates for commands when typing the first word. <br>
+2. **Remember to use prefixes**: For fields, make sure to use the correct prefix (`m/`, `t/`, `g/`, `pa/`) to activate Autocomplete for those fields. <br>
+3. **Select from suggestions using arrow keys**: Save time by selecting from the suggestion list using arrow keys rather than typing full names or values.<br>
+4. **Typos**: When you accidentally type in the wrong name for an existing field, instead of holding backspace and retyping the entire field, simply move the caret position over to the 
+prefix, and select from the list of suggestions. Autocomplete will replace the entire field with your selection for you.
+</div>
+
+By utilizing Autocomplete, you can input commands more quickly, reduce typos, and improve your overall efficiency in navigating the software!
 
 ![Autocomplete example when keying in gender](images/AutocompleteExample.png)
 
@@ -276,6 +369,10 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/CS2103T s/85`
+**Undo** | `undo`
+**Redo** | `redo`
 **List** | `list`
 **Help** | `help`
-**Archive** | `archive`
+**Archive** | `archive pa/PATH`
+**Load** | `load pa/PATH`
+

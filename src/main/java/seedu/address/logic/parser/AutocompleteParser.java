@@ -16,10 +16,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -47,6 +49,8 @@ public class AutocompleteParser {
         GradeCommand.COMMAND_WORD,
         UndoCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
+        LoadCommand.COMMAND_WORD,
+        FilterCommand.COMMAND_WORD,
     };
 
     /**
@@ -106,6 +110,10 @@ public class AutocompleteParser {
         int startIndex = getPreviousWhitespaceIndex(userInput, caretPosition);
         int endIndex = getNextWhitespaceIndex(userInput, caretPosition);
 
+        if (isCaretOnFirstWord(userInput, caretPosition)) {
+            return getCommandSuggestions(userInput, wordUnderCaret, startIndex, endIndex);
+        }
+
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
             return getModuleSuggestions(userInput, wordUnderCaret, ab, startIndex, endIndex, argMultimap);
         }
@@ -122,7 +130,7 @@ public class AutocompleteParser {
             return getPathSuggestions(userInput, wordUnderCaret, startIndex, endIndex, argMultimap);
         }
 
-        return getCommandSuggestions(userInput, wordUnderCaret, startIndex, endIndex);
+        return new HashMap<>();
     }
 
     /**
@@ -265,11 +273,18 @@ public class AutocompleteParser {
         return text.substring(startIndex + 1);
     }
 
+    private boolean isCaretOnFirstWord(String fullInput, int caretPosition) {
+        int startIndex = getPreviousWhitespaceIndex(fullInput, 0);
+        int endIndex = getNextWhitespaceIndex(fullInput, 0);
+
+        return caretPosition >= startIndex && caretPosition <= endIndex;
+    }
+
     private int getPreviousWhitespaceIndex(String text, int caretPosition) {
         int index = caretPosition - 1;
         while (index >= 0 && !Character.isWhitespace(text.charAt(index))) {
             index--;
-        };
+        }
 
         return index;
     }
@@ -279,7 +294,7 @@ public class AutocompleteParser {
         while (endIndex < text.length()
                 && !Character.isWhitespace(text.charAt(endIndex))) {
             endIndex++;
-        };
+        }
 
         return endIndex;
     }

@@ -6,6 +6,20 @@ header_pages:
   - DeveloperGuide.md
   - AboutUs.md
 
+sidebar:
+  - title: "User Guide"
+    url: UserGuide.html
+    path: "UserGuide.md"
+    toc: true
+  - title: "Developer Guide"
+    url: DeveloperGuide.html
+    path: "DeveloperGuide.md"
+    toc: true
+  - title: "About Us"
+    url: AboutUs.html
+    path: "AboutUs.md"
+    toc: false
+
 markdown: kramdown
 
 repository: "AY2425S1-CS2103T-W10-4/tp"

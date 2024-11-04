@@ -2,6 +2,9 @@
 layout: page
 title: Developer Guide
 ---
+
+![Logo](images/StoreClass-Logo.png)
+
 * Table of Contents
 {:toc}
 
@@ -271,13 +274,13 @@ We will use a simple case where there is one working AddressBook named `addressB
 
 ![ArchiveAndLoadInitialState](images/ArchiveAndLoadInitialState.png)
 
-Scenario 1 Archive to a new file
+**Scenario 1 Archive to a new file**
 
 In this scenario, the user is trying to archive the current address book into a new file named `archiveFile2.json`. He enters the command `archive pa/archiveFile2.json` A new file names `archiveFile2.json` will be created and hold the data of `addressBook.json`. And the data in `addressBook.json` will be discarded.
 
 ![ArchiveToNewFile](images/ArchiveToNewFile.png)
 
-Scenario 2 Archive to a existing file
+**Scenario 2 Archive to a existing file**
 
 In this scenario, the user is trying to archive the current address book into the existing file named `archiveFile1.json`. He enters the command `archive pa/archiveFile1.json` A file names `archiveFile1.json` will be overwritten and hold the data of `addressBook.json`. And the data in `addressBook.json` will be discarded.
 
@@ -289,7 +292,7 @@ The following sequence diagram illustrate how an archive operation is processed 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
 
-Scenario 3 Loading from a file
+**Scenario 3 Loading from a file**
 
 In this scenario, the user is trying to load the an address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
 ![Load](images/Load.png)
