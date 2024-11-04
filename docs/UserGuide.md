@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-MedDict is a **desktop application designed for physiotherapists** who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application supports a streamlined process for tracking medical history, patient appointments, and treatment progress.
+MedDict is a _desktop application designed for physiotherapists_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application supports a streamlined process for tracking medical history, patient appointments, and treatment progress.
 
 * Table of Contents
 {:toc}
@@ -41,14 +41,14 @@ MedDict is a **desktop application designed for physiotherapists** who manage a 
 
 ## Quick start (detailed)
 
-1. Make sure Java **17** or higher is installed on your computer.
+1. Make sure Java 17 or higher is installed on your computer.
 
-    - **To Check if Java is Installed:**
+   * To Check if Java is Installed:
 
         1. Open your terminal:
-            - **Windows**: Press `Windows + R`, type `cmd`, and press Enter.
-            - **Mac**: Press `Command + Space`, type `Terminal`, and press Enter.
-            - **Linux**: Press `Ctrl + Alt + T`, or look for "Terminal" in your applications menu.
+            - Windows: Press `Windows + R`, type `cmd`, and press **Enter**.
+            - Mac: Press `Command + Space`, type `Terminal`, and press **Enter**.
+            - Linux: Press `Ctrl + Alt + T`, or look for "Terminal" in your applications menu.
 
         2. In the terminal, enter the following command and press Enter:
 
@@ -56,77 +56,80 @@ MedDict is a **desktop application designed for physiotherapists** who manage a 
            java -version
            ```
 
-        3. If Java **17** or higher is installed, you should see a version similar to this:
+        3. If Java 17 or higher is installed, you should see a version similar to this:
 
            ```bash
            java version "17.0.x" 2024-xx-xx LTS
            ```
 
-        4. If the version is below **17**, continue with the next steps to install Java.
+        4. If the version is below 17, continue with the next steps to install Java.
 
-    - **To Install Java 17 (if Needed):**
+   * To Install Java 17 (if Needed):
 
         1. Visit [Oracle’s Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
         2. Download and install the correct Java Development Kit (JDK) for your operating system by following the on-screen instructions.
         3. Once installed, run the `java -version` command again to confirm that Java is installed correctly.
 
+
 2. Download the latest `.jar` file as follows:
 
     1. Go to the [GitHub releases page](https://github.com/) for the latest version.
-    2. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
+    1. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
     3. Save the `.jar` file in the folder where you want to keep your MedDict project.
+
 
 3. Copy the `.jar` file to the folder you want to use as the home folder for MedDict.
 
-    1. **Windows:**
-        - Open the **Downloads** folder and locate the `.jar` file.
-        - Right-click on the `.jar` file and select **Copy**.
-        - Go to the folder where you want to store MedDict, right-click, and select **Paste**.
+    * Windows:
+      1. Open the **Downloads** folder and locate the `.jar` file. 
+      2. Right-click on the `.jar` file and select **Copy**. 
+      3. Go to the folder where you want to store MedDict, right-click, and select **Paste**.
 
-    2. **Mac:**
-        - Open **Finder** and navigate to your **Downloads** folder.
-        - Right-click (or use `Control + Click`) on the `.jar` file and choose **Copy**.
-        - Go to the folder where you want to keep the file, right-click, and select **Paste**.
+    * Mac
+      1. Open Finder and navigate to your **Downloads** folder.
+      2. Right-click (or use `Control + Click`) on the `.jar` file and choose **Copy**.
+      3. Go to the folder where you want to keep the file, right-click, and select **Paste**.
 
-    3. **Linux:**
-        - Open your file manager and go to the **Downloads** directory.
-        - Right-click on the `.jar` file and choose **Copy**.
-        - Go to the destination folder, right-click, and select **Paste**.
+    * Linux:
+      1. Open your file manager and go to the **Downloads** directory.
+      2. Right-click on the `.jar` file and choose **Copy**.
+      3. Go to the destination folder, right-click, and select **Paste**.
+
 
 4. Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.
 
-    1. **Windows:**
-        - Open the folder where the `.jar` file is saved.
-        - To get the full path of this folder:
-            1. Right-click on the folder and select **Properties**.
-            2. In the **General** tab, locate the **Location** field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`).
-        - Open the **Command Prompt**:
-            - Press `Windows + R`, type `cmd`, and press Enter.
-        - Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
+   * Windows:
+     1. Open the folder where the `.jar` file is saved.
+     2. To get the full path of this folder:
+        1. Right-click on the folder and select **Properties**.
+        2. In the **General** tab, locate the **Location** field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`). 
+     3. Open the **Command Prompt**:
+           1. Press `Windows + R`, type `cmd`, and press Enter.
+        2. Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
 
           ```bash
           cd C:\Users\YourName\Documents\MedDict
           ```
 
-        - Run the application with:
+     4. Run the application with:
 
           ```bash
           java -jar MedDict.jar
           ```
 
-    2. **Mac/Linux:**
-        - Open the **Terminal** by searching for it or by pressing `Ctrl + Alt + T`.
-        - To get the full path of the folder where the `.jar` file is located:
-            - Open **Finder** (Mac) or **File Explorer** (Linux).
-            - Navigate to the folder where you saved the `.jar` file.
-            - Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
-        - Use the `cd` command and paste the copied path to go to the folder where the `.jar` file is saved. For example:
+    * Mac/Linux:
+      1. Open the **Terminal** by searching for it or by pressing `Ctrl + Alt + T`.
+      2. To get the full path of the folder where the `.jar` file is located:
+         1. Open **Finder** (Mac) or **File Explorer** (Linux).
+         2. Navigate to the folder where you saved the `.jar` file.
+         3. Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
+      3. Use the `cd` command and paste the copied path to go to the folder where the `.jar` file is saved. For example:
 
           ```bash
           cd /Users/YourName/Documents/MedDict
           ```
 
-        - Run the application with:
+      4. Run the application with:
 
           ```bash
           java -jar MedDict.jar
@@ -147,6 +150,7 @@ After a few seconds, a GUI similar to the one below should appear:
     * `clear` : Deletes all contacts.
 
     * `exit` : Exits the app.
+
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -253,11 +257,11 @@ Examples:
   **Output**: <br>
   Unable to delete a patient, check the id entered!
 
-### Add Remarks to a Patient : `addNotes`
+### Add Remarks to a Patient : `addR`
 
 Add remarks to an existing patient with the specified `PatientId` in the MedDict database in address book.
 
-Format: `addNotes [z/PatientId] [r/Remarks]`
+Format: `addR [z/PatientId] [r/Remarks]`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * A _notification message_ will be output if there is failure in adding notes to the patient.
@@ -307,7 +311,7 @@ Examples:
   **Output**: <br>
   This person already exists in the address book.
 
-### Getting Id of Doctor or Patient by Name: `getId`
+### Getting Id of Doctor or Patient by Name: `get`
 
 Get id of a doctor or patient whose names contain any of the given keywords.
 
