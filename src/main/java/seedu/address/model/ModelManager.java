@@ -54,6 +54,7 @@ public class ModelManager implements Model {
         this.customerOrderList = customerOrderList;
         this.supplyOrderObservableList = supplyOrderList.getOrders();
         this.customerOrderObservableList = customerOrderList.getOrders();
+        associateOrdersWithPersons();
     }
 
     public ModelManager() {
@@ -128,6 +129,18 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    public void associateOrdersWithPersons() {
+        for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
+            addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())
+                    .ifPresent(person -> person.addOrder(customerOrder));
+        }
+
+        for (SupplyOrder supplyOrder : supplyOrderList.getOrders()) {
+            addressBook.findPersonByPhone(supplyOrder.getPerson().getPhone())
+                    .ifPresent(person -> person.addOrder(supplyOrder));
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
