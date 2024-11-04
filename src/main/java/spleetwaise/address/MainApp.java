@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import spleetwaise.address.commons.core.Version;
 import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.LogicManager;
 import spleetwaise.address.model.AddressBook;
@@ -26,6 +25,7 @@ import spleetwaise.address.ui.UiManager;
 import spleetwaise.commons.AppParameters;
 import spleetwaise.commons.core.Config;
 import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.core.Version;
 import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.model.ReadOnlyUserPrefs;
