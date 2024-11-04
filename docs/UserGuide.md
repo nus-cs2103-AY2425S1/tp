@@ -68,6 +68,25 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Input parameters
+
+**Notes about parameters:**<br>
+
+Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
+- `n/` -> parameter symbol<br>
+- `John Doe` -> parameter.
+
+### Parameters
+
+Symbol     | Parameter                  | Constraints
+-----------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**`n`**| name                       |- can include alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.<br> - It must contain at least 1 alphabetic character and has a character limit of 50.
+**`i`**| id                         |- can include alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets. <br> - It must have at least 1 alphanumeric character and has a character limit of 36.
+**`w`**| ward                       |- 
+**`d`**| diagnosis (if specified)   | - must contain at least 1 alphabetic character, and has a limit of 80 characters.
+**`m`**| medication (if specified)  |- can include alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.<br> - must contain at least 1 alphanumeric character and has a character limit of 100.
+
+
 ## Features
 
 <box type="info" seamless>
@@ -81,10 +100,6 @@ There are 5 CLI command formats as shown below:
 3) `COMMAND_WORD PARAMETER`
 3) `COMMAND_WORD PARAMETERS`
 4) `COMMAND_WORD INDEX PARAMETERS`
-
-Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
-- `n/` -> parameter symbol<br>
-- `John Doe` -> parameter.
 
 **Other things to note in this User Guide:**
 1) Items in square brackets are optional.<br>
