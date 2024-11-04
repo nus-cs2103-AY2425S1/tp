@@ -43,9 +43,9 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) for command details. 
+6. Refer to the [Features](#features) for command details.
 
-### Command Structure 
+### Command Structure
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,19 +72,19 @@ Commands for creating, updating, and deleting buyers and sellers.
 ![showClients](images/showClients.png)
 
 - #### **Add Buyer Command**
-    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
+    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
       > ---
-      > 
+      >
       > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `john123@gmail.com`
       >
       > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
       >
-      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: 
-      > 
+      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+      >
       > ---
-      > 
+      >
       > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
       >
       > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
@@ -95,19 +95,19 @@ Commands for creating, updating, and deleting buyers and sellers.
 
     - **Failed Execution:**
       > ---
-      > 
-      > **User Error #1**: Missing `NAME` field 
+      >
+      > **User Error #1**: Missing `NAME` field
       >
       > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
       >
       > **Output**: <br>
       Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br> 
+      buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
       >
       > ---
-      > 
+      >
       > **User Error #2**: Missing `PHONE` field
       >
       > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
@@ -116,10 +116,10 @@ Commands for creating, updating, and deleting buyers and sellers.
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com> 
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
       >
       > ---
-      > 
+      >
       > **User Error #3**: Missing `EMAIL` field
       >
       > **Input**: `buyer n/Bobby p/91124444`
@@ -129,7 +129,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
-      > 
+      >
       > ---
 - #### **Add Seller Command**
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
@@ -143,7 +143,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
       >
       > ---
-      > 
+      >
       > **Use Case #2**: Adding a seller named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
       >
       > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
@@ -163,9 +163,9 @@ Commands for creating, updating, and deleting buyers and sellers.
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
-      > 
+      >
       > ---
-      > 
+      >
       > **User Error #2**: Missing `PHONE` field
       >
       > **Input**: `seller n/Bobby e/bobby123@gmail.com`
@@ -175,7 +175,7 @@ Commands for creating, updating, and deleting buyers and sellers.
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
-      > 
+      >
       > ---
       > **User Error #3**: Missing `EMAIL` field
       >
@@ -199,17 +199,17 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: 1 persons listed!
       >
       > ![bob](images/bob.png)
-      > 
+      >
       > ---
       >
       > **Use Case #2**: Finding `Bob` OR `Winter`
-      > 
+      >
       > **Input**: `find Bob Winter`
       >
       > **Output**: 2 persons listed!
-      > 
+      >
       > ![bobwinter](images/bob_winter.png)
-      > 
+      >
       > ---
 
     - **Failed Execution:** NIL
@@ -220,7 +220,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Changing name of `Bob` to `Bobby`   
+      > **Use Case #1**: Changing name of `Bob` to `Bobby`  
       >
       > **Input**: `edit 1 n/Bobby`
       >
@@ -250,7 +250,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Input**: `edit -1 n/Bobby`
       >
-      > **Output**: 
+      > **Output**:
       <br> Invalid command format!
       <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
       <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
@@ -265,11 +265,11 @@ Commands for creating, updating, and deleting buyers and sellers.
       <br>Example: edit 1 e/johndoe@example.comp/91234567
       >
       > ---
-      > 
+      >
       > **User Error #2**: Entering non-numerical index
-      > 
+      >
       > **Input**: `edit a#2 n/Bobby`
-      > 
+      >
       > **Output**:
       <br> Invalid command format!
       <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
@@ -283,9 +283,9 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -330,25 +330,25 @@ Commands for managing appointments between user and clients.
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
-      >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -369,15 +369,7 @@ Commands for managing appointments between user and clients.
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
-      >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
+      > **Use Case #1**:
       >
       > **Input**:
       >
@@ -385,9 +377,17 @@ Commands for managing appointments between user and clients.
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -418,15 +418,15 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #2**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -457,7 +457,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -465,7 +465,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -473,7 +473,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #3**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -496,7 +496,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -504,15 +504,15 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #3**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -533,7 +533,7 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
       > **Input**:
       >
@@ -541,17 +541,17 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
       >
-      > **Use Case #2**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #3**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -572,25 +572,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
-      >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -611,25 +611,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
-      >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -654,25 +654,25 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Clears the console or application state.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
-      >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -693,25 +693,25 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Exits the application.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
-      >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -732,7 +732,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Displays a list of available commands and their descriptions.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Accessing help 
+      > **Use Case #1**: Accessing help
       >
       > **Input**: `help`
       >
@@ -753,17 +753,17 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
       >
-      > **Use Case #2**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #3**:
       >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
@@ -784,25 +784,25 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Opens a chat window for client-agent communication.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: 
+      > **Use Case #1**:
       >
-      > **Input**: 
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: 
-      >
-      > **Input**: 
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: 
+      > **Use Case #2**:
       >
-      > **Input**: 
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
