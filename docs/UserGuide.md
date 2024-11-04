@@ -52,7 +52,7 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 ## Feature Categories
 
 <div class="alert" markdown="span">
-You are strongly recommended to read through [Command Structure]() before proceeding with this section!
+You are strongly recommended to read through [Command Structure](#CommandStructure) before proceeding with this section!
 </div>
 
 <br>

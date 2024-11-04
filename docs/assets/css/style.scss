@@ -18,32 +18,22 @@
   padding: 10px 15px;
   border-radius: 10px;
   border-left-width: 10px;
-  display: flex;
-  align-items: center;
 }
 
-/* Individual styles with ::before for icons */
 .note {
   border-left-color: #5c95f7;
-  position: relative;
 }
 
 .note::before {
   content: '💡';
   margin-right: 10px;
-  position: absolute;
-  left: 15px;
 }
 
 .alert {
   border-left-color: #ed2c0e;
-  position: relative;
 }
 
 .alert::before {
   content: '❗';
   margin-right: 10px;
-  position: absolute;
-  left: 15px;
 }
-Explanation
