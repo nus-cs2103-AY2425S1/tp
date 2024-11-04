@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
+import tuteez.commons.core.LogsCenter;
 import tuteez.model.person.Person;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
@@ -21,6 +22,12 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     private static final int REFRESH_TIME = 60;
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
+    public final Person person;
+    private Timeline refreshTimeline;
+    private Lesson lastDisplayedLesson = null;
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -28,10 +35,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final Person person;
-    private Timeline refreshTimeline;
-    private Lesson lastDisplayedLesson = null;
     @FXML
     private Label name;
     @FXML
@@ -70,6 +73,9 @@ public class PersonCard extends UiPart<Region> {
      * Starts the timeline that checks the lesson status every second and updates if necessary.
      */
     private void startRefreshTimeline() {
+        if (refreshTimeline != null) {
+            refreshTimeline.stop();
+        }
         refreshTimeline = new Timeline(
                 new KeyFrame(Duration.seconds(REFRESH_TIME), event -> refreshNextLesson())
         );
@@ -83,8 +89,21 @@ public class PersonCard extends UiPart<Region> {
     private void refreshNextLesson() {
         Lesson currentLesson = person.nextLessonBasedOnCurrentTime();
         if (currentLesson != lastDisplayedLesson) {
+            logger.info(String.format("Next lesson for %s updated to: %s",
+                    person.getName().fullName,
+                    currentLesson.getDayAndTime()));
             setNextLesson(person);
             lastDisplayedLesson = currentLesson; // Update to keep track of the last displayed lesson
+        }
+    }
+
+    /**
+     * Stops the refresh timeline for updating the next lesson.
+     * This method should be called when the {@code PersonCard} is no longer needed.
+     */
+    public void stopRefreshTimeline() {
+        if (refreshTimeline != null) {
+            refreshTimeline.stop();
         }
     }
 
