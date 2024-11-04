@@ -448,6 +448,8 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 <img src="images/FindCommandSequenceDiagram.png" width="550" />
 
+---
+
 ### Filter Person Feature ###
 
 #### **Command Feature**
@@ -489,6 +491,48 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 <img src="images/FindCommandSequenceDiagram.png" width="550" />
 
+---
+
+### View Person Feature
+
+#### **Command Feature**
+
+`view INDEX`
+
+#### **Command Feature Purpose**
+
+The `view` command allows users to view a `Person` in the `HRPlatform`.
+
+#### Key Components
+- `ViewCommand`: Executes the viewing operation based on the user's input.
+- `ViewCommandParser`: Parses user input to create a `ViewCommand` object.
+- `PersonDataReceiver`: Updates the overview panel with the correct `Person` data
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `HRPlatformParser`: Creates an `DeleteCommand` object based on the user input.
+
+### **Sequence of action**
+
+To help you understand how the `view` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `delete 2` as an example.
+
+1. The user inputs the command `view 2`, intending to view a person with index 2 in the contact list.
+2. The `ViewCommandParser` interprets the input.
+3. A `ViewCommand` object is created.
+4. The execute method of `ViewCommand` causes the `MainWindow` to invoke the `receivePersonData` method in `PersonDataReceiver` property to view the contact of the `Person` object.
+5. The execute method of `ViewCommand` returns a `CommandResult` object which stores the data regarding the completion of the `ViewCommand`.
+6. The UI reflects the `OverviewPanel` with the selected `Person`.
+
+:information_source: **Note**:
+
+- At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+
+#### `View Command` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of deleting a person from TalentSG.
+
+<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+
+---
 
 ### \[Proposed\] Undo/redo feature
 
