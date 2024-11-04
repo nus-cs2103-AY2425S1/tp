@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.EditClaimDescriptor;
 import seedu.address.model.policy.PolicyType;
 
@@ -31,6 +32,9 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX,
                         PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE, PREFIX_CLAIM_INDEX,
+                PREFIX_CLAIM_STATUS, PREFIX_CLAIM_DESC);
 
         validateRequiredFields(argMultimap);
 
@@ -78,7 +82,11 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
 
         if (argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()
                 && !argMultimap.getValue(PREFIX_CLAIM_DESC).get().trim().isEmpty()) {
-            descriptor.setDescription(argMultimap.getValue(PREFIX_CLAIM_DESC).get());
+            String desc = argMultimap.getValue(PREFIX_CLAIM_DESC).get();
+            if (!Claim.isValidClaim(desc)) {
+                throw new ParseException(Claim.MESSAGE_CONSTRAINTS);
+            }
+            descriptor.setDescription(desc);
         }
         return descriptor;
     }
