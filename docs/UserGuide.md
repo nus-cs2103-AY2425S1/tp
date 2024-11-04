@@ -3,7 +3,12 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+BakeBuddy is an intuitive Command Line Interface (CLI)-based desktop application, tailor-made to empower home-based 
+bakery owners to efficiently manage their customers, suppliers, pastries, ingredients, customer and supply orders. 
+By combining the speed of a CLI with the user-friendliness of a simple Graphical User Interface (GUI), BakeBuddy offers 
+the perfect balance between efficiency and usability. BakeBuddy is an address book solution designed for users who 
+prefer quick and efficient commands over traditional GUI-based apps, making orders, customer and supplier management 
+seamless for busy home-based bakery owners.
 
 * Table of Contents
 {:toc}
@@ -200,13 +205,16 @@ Action | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 ## Key New Features
--Add functionality to add new customers and new suppliers to the Bake Buddy address book
--Add a PastryCatalogue that stores pastry item names, including its price and ingredients used
--Add commands to add and remove pastries from catalogue
--Add an IngredientCatalogue that stores ingredient names, including their prices
--Add commands to add and remove ingredients from catalogue
--Add order tracking functionality such as adding a SupplyOrder, CustomerOrder and viewing a master list of current orders
+- Add functionality to add new customers and new suppliers to the BakeBuddy address book application
+- Add a PastryCatalogue that stores pastry item names, including its price and ingredients used
+- Add commands to add and remove pastries from catalogue
+- Add an IngredientCatalogue that stores ingredient names, including their prices
+- Add commands to add and remove ingredients from catalogue
+- Add order tracking functionality such as adding a SupplyOrder, CustomerOrder and viewing a master list of current orders
 - Create custom tags for customer and supplier for easy identification (red for customer, green for supplier)
+- Add a stock inventory to keep track of pastries and ingredients
+- Add commands to check the stock of pastries and ingredients from inventory
+- Mark CustomerOrder and SupplyOrder as done when the order is completed
 
 ## New Commands Added
 
@@ -435,15 +443,30 @@ viewInventory
 ```
 <img width="1191" alt="Screenshot 2024-10-24 at 6 05 21 PM" src="https://github.com/user-attachments/assets/e6dfd68d-f05e-4f2d-8a36-ac8fb272af49">
 
-### 15. **check Ingredient Stock Command**
-Check the stock in inventory for a certain ingredient.
+### 15. **check Pastry Stock Command**
+Check the stock in the inventory for a certain pastry.
+
+```bash
+checkPastryStock PASTRY
+```
+- **Parameters:**
+    - `PASTRY`: The name of the pastry to be checked.
+
+**Example:**
+```bash
+checkPastryStock Croissant
+```
+This command checks the inventory to confirm if enough pastries are available, 
+helping ensure customer order fulfillment.
+
+### 16. **check Ingredient Stock Command**
+Check the stock in the inventory for a certain ingredient.
 
 ```bash
 checkIngredientStock INGREDIENT
 ```
 - **Parameters:**
-    - `INGREDIENT`: The Ingredient to be checked.
-
+    - `INGREDIENT`: The name of the ingredient to be checked.
 
 **Example:**
 ```bash
@@ -451,8 +474,11 @@ checkIngredientStock Flour
 ```
 <img width="1195" alt="Screenshot 2024-10-24 at 6 13 59 PM" src="https://github.com/user-attachments/assets/a0f1c909-fb2e-44ed-82dc-24b87f1eb432">
 
-### 16. **MarkCustomer Command**
-Check the stock in inventory for a certain ingredient.
+This command checks the inventory to confirm if sufficient ingredients are available to make a pastry, 
+helping ensure supplier order fulfillment.
+
+### 17. **Mark Customer Order Command**
+Mark the customer order as done.
 
 ```bash
 markCustomerOrder INDEX
@@ -460,22 +486,20 @@ markCustomerOrder INDEX
 - **Parameters:**
     - `INDEX`: The Order Index for CustomerOrder.
 
-
 **Example:**
 ```bash
 markCustomerOrder 1
 ```
 <img width="1193" alt="Screenshot 2024-10-24 at 6 28 08 PM" src="https://github.com/user-attachments/assets/76bb74ac-0871-499f-b475-04a2f9bcdd14">
 
-### 17. **MarkSupplier Command**
-Check the stock in inventory for a certain ingredient.
+### 17. **Mark Supplier Order Command**
+Mark the supplier order as done.
 
 ```bash
 markSupplierOrder INDEX
 ```
 - **Parameters:**
     - `INDEX`: The Order Index for SupplierOrder.
-
 -----------------------------------------------------------------------------------------
 
 ## Key New Features Summary
@@ -496,6 +520,7 @@ Action | Format, Examples
 **View Ingredient Catalogue** | viewIngredientCatalogue
 **View Pastry Catalogue** | viewPastryCatalogue
 **View Inventory** | viewInventory
+**Check Pastry Stock** | checkPastryStock PASTRY <br> e.g., checkPastryStock Croissant
 **Check Ingredient Stock** | checkIngredientStock INGREDIENT <br> e.g., checkIngredientStock Flour
 **Mark Customer Order** | markCustomerOrder INDEX <br> e.g., markCustomerOrder 1
 **Mark Supplier Order** | markSupplierOrder INDEX <br> e.g., markSupplierOrder 1
