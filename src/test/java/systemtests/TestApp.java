@@ -16,11 +16,11 @@ import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.JsonAddressBookStorage;
-import spleetwaise.address.storage.UserPrefsStorage;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.model.UserPrefs;
+import spleetwaise.commons.storage.UserPrefsStorage;
 
 /**
  * TestApp extends MainApp to facilitate testing by setting up the application with configurable data and user

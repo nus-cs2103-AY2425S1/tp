@@ -1,13 +1,13 @@
-package spleetwaise.address.storage;
+package spleetwaise.commons.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import spleetwaise.address.commons.util.JsonUtil;
-import spleetwaise.address.model.ReadOnlyUserPrefs;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.model.ReadOnlyUserPrefs;
+import spleetwaise.commons.model.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

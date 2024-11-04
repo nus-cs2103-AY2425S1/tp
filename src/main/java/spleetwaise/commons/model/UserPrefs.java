@@ -1,4 +1,4 @@
-package spleetwaise.address.model;
+package spleetwaise.commons.model;
 
 import static java.util.Objects.requireNonNull;
 

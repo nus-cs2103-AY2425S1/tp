@@ -16,6 +16,7 @@ import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.AddressBookBuilder;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.UserPrefs;
 
 public class ModelManagerTest {
 

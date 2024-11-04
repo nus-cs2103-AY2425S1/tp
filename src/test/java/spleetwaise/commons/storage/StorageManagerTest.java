@@ -1,4 +1,4 @@
-package spleetwaise.address.storage;
+package spleetwaise.commons.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,9 +14,10 @@ import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.address.storage.JsonAddressBookStorage;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
