@@ -4,9 +4,17 @@ title: Developer Guide
 ---
 # **Table of Contents**
 {:toc}
-1. [Introduction to TalentSG] (#talentsg)
-2. [Purpose of this guide] (#purpose-of-this-guide)
-3. [How to use this guide] (#how-to-use-this-guide)
+1. [Introduction to TalentSG](#talentsg)
+2. [Purpose of this guide](#purpose-of-this-guide)
+3. [How to use this guide](#how-to-use-this-guide)
+4. [Acknowledgements](#acknowledgements)
+5. [Setting up and getting started](#setting-up-getting-started)
+6. [Design](#design)
+    1. [Architecture](#architecture)
+    2. [UI Component](#ui-component)
+    3. [Logic Component](#logic-component)
+    4. [Model Component](#model-component)
+    5. [Storage Component](#storage-component)
 
 ---
 
