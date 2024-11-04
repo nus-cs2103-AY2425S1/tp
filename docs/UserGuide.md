@@ -57,9 +57,6 @@ InSUREance is a **desktop app for managing contacts, optimized for use via a  Li
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -108,7 +105,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
-* Insurance plans and claims cannot be modified directly using this command. You may use other features such as `addInsurance`, `deleteInsurance`, `closeClaim` to make any necessary updates.
+* Insurance plans and claims cannot be modified directly using this command. You may use other features such as `addInsurance`, `deleteInsurance`, `addClaim`, `deleteClaim` and `closeClaim` to make any necessary updates.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -209,7 +206,7 @@ IDs for insurance plans:
 same ID here to delete the claim.
 
 * If the `CLIENT_ID` is invalid, or the client does not have the insurance plan `INSURANCE_ID`, the
-  user will be informed with an error message.
+  user will be informed with an appropriate error message.
 
 Examples:
 * `deleteClaim 1 iid/1 cid/B1234` deletes the claim of CLAIM_ID B1234 from a client at INDEX 1 which is tagged
