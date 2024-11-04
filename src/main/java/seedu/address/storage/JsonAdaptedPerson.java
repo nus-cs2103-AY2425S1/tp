@@ -10,11 +10,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Supplier;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +34,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String remark;
+    private final String information; // Customer-specific
+    private final List<String> ingredientsSupplied; // Supplier-specific
+
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -40,12 +48,16 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark,
+                             @JsonProperty("information") String information,
+                             @JsonProperty("ingredientsSupplied") List<String> ingredientsSupplied,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.information = information;
+        this.ingredientsSupplied = ingredientsSupplied != null ? new ArrayList<>(ingredientsSupplied) : null;
         if (tagged != null) {
             tagged.addAll(tags);
         }
@@ -60,6 +72,10 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
+        information = source instanceof Customer ? ((Customer) source).getInformation().value : null;
+        ingredientsSupplied = source instanceof Supplier
+                ? ((Supplier) source).getIngredientsSupplied().getIngredientNames()
+                : null;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -124,6 +140,17 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (information != null) {
+            final Information modelInformation = new Information(information);
+            return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelInformation, modelRemark, modelTags);
+        } else if (ingredientsSupplied != null) {
+            List<Ingredient> ingredientList = new ArrayList<>();
+            for (String name : ingredientsSupplied) {
+                ingredientList.add(new Ingredient(0, name, 0.0)); // Default productId and cost
+            }
+            final Ingredients modelIngredients = new Ingredients(ingredientList);
+            return new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelIngredients, modelRemark, modelTags);
+        }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
     }
