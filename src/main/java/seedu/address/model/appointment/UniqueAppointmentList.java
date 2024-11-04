@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -88,6 +89,15 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         if (!internalList.remove(toRemove)) {
             throw new AppointmentNotFoundException();
         }
+    }
+
+    /**
+     * Removes the equivalent appointment from the list.
+     * The appointment must exist in the list.
+     */
+    public void removeAppointmentsForPerson(Person toRemove) {
+        requireNonNull(toRemove);
+        internalList.removeIf(appointment -> appointment.getPerson().equals(toRemove));
     }
 
     public void setAppointments(UniqueAppointmentList replacement) {
