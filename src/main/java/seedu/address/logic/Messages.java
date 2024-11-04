@@ -15,7 +15,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
+    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid. "
+            + "Please provide a valid index from the currently displayed student list.";
     public static final String MESSAGE_INVALID_ASSIGNMENT_INDEX = "The assignment index provided is invalid";
     public static final String MESSAGE_SCORE_EXCEEDS_MAX_SCORE = "The score exceeds the assignment's maximum score";
     public static final String MESSAGE_NEGATIVE_SCORE = "The score you have submitted is negative. "

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.exceptions.AssignmentIndexOutOfRangeException;
@@ -185,14 +186,20 @@ public class Student {
         newAssignmentlist.add(assignmentToAdd);
         return new Student(this.name, this.phone, this.email, this.tags, newAssignmentlist, this.remark);
     }
+
     /**
-     * Deletes the Assignment at {@code index} in the student's assignmentList
+     * Updates the Assignment at {@code index} to a new Assignment in the student's assignmentList
      */
-    public void deleteAssignment(int index) {
-        if (assignmentList.size() < (index - 1) || index <= 0) {
+    public Student updateAssignment(Index index, Assignment assignmentToUpdate)
+            throws AssignmentIndexOutOfRangeException {
+        int indexZeroBased = index.getZeroBased();
+        if (indexZeroBased < 0 || indexZeroBased >= assignmentList.size()) {
             throw new AssignmentIndexOutOfRangeException();
         }
-        assignmentList.remove(index - 1);
+        List<Assignment> newAssignmentList = new ArrayList<Assignment>(assignmentList);
+        newAssignmentList.set(indexZeroBased, assignmentToUpdate);
+        assignmentList = newAssignmentList;
+        return this;
     }
 
 }

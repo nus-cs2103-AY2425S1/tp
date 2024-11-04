@@ -65,7 +65,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -406,28 +406,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: Very high (must have) - `****`,  High (good to have) - `***`, Medium (should have) - `**`, Low (unlikely to have) -  `*`,
 
-| Priority | As a …​                             | I want to …​                                                                  | So that I can…​                                            |
-|----------|-------------------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------|
-| `****`   | teacher with multiple students      | add a new student                                                             | store <br/>important data about my students                |
-| `****`   | teacher with multiple students      | view my students                                                              | see who is in my class                                     |
-| `****`   | teacher                             | delete a student's information                                                | remove students who are no longer part of my class         |
-| `****`   | teacher                             | add assignments                                                               | track assignments for students                             |
-| `****`   | teacher                             | add an assignment score to a student                                          | grade my students                                          |
-| `****`   | teacher                             | delete assignments                                                            | remove old assignments                                     |
-| `****`   | teacher                             | save data locally                                                             | access them at a later time                                |
-| `****`   | teacher  who grades assignments     | edit status of submitted assignments                                          | keep track if a student has submitted an assignment        |
-| `***`    | teacher                             | create remark for individual students                                         | not forget any special consideration for certain students  |
-| `***`    | teacher                             | edit assignments                                                              | ensure that the assignments are up to date                 |
-| `***`    | teacher                             | view my student's student information                                         | know how I can student them if there are any issues        |
-| `***`    | teacher                             | view the submission deadlines                                                 | know when to remind my students                            |
-| `***`    | forgetful teacher                   | be reminded on deadlines due in 2 days                                        | prioritize which assignments to mark                       |
-| `***`    | teacher                             | sort an assignment by score                                                   | see the best and worst performers                          |
-| `**`     | teacher                             | link scanned PDF files (URL) to a student                                     | keep track of previous assignments for each student        |
-| `**`     | teacher                             | view all the files (or just file names) submitted by the student before       | not waste time finding them somewhere else                 |
-| `**`     | teacher who wants to improve grades | create a priority list of students who need the most attention                | allocate my time effectively                               |
-| `*`      | teacher                             | view a student's attendance history                                           | mark their attendance scores throughout the whole semester |
-| `*`      | teacher                             | mark attendance and manage participation marks for different students in real time | not need to update from paper every time                   |
-
+| Priority | As a …​                             | I want to …​                                                                       | So that I can…​                                            |
+|----------|-------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------|
+| `****`   | teacher with multiple students      | add a new student                                                                  | store <br/>important data about my students                |
+| `****`   | teacher with multiple students      | view each student's details                                                        | have a view on each student's progress                     |
+| `****`   | teacher                             | delete a student's information                                                     | remove students who are no longer part of my class         |
+| `****`   | teacher                             | add assignments                                                                    | track assignments for students                             |
+| `****`   | teacher                             | add an assignment score to a student                                               | grade my students                                          |
+| `****`   | teacher                             | delete assignments                                                                 | remove old assignments                                     |
+| `****`   | teacher                             | save data locally                                                                  | access them at a later time                                |
+| `****`   | teacher  who grades assignments     | edit status of submitted assignments                                               | keep track if a student has submitted an assignment        |
+| `***`    | teacher                             | create remark for individual students                                              | not forget any special consideration for certain students  |
+| `***`    | teacher                             | edit assignments                                                                   | ensure that the assignments are up to date                 |
 *{More to be added}*
 
 ### Use cases
@@ -465,7 +455,7 @@ unless specified otherwise)
 
 1. Teacher requests to list the students
 2. Teacher requests to delete a student by index
-3TAchy deletes the student from the student list
+3. TAchy deletes the student from the student list
 
     Use case ends.
 
@@ -677,80 +667,6 @@ unless specified otherwise)
 
 ---
 
-**Use case: Sort students by an assignment score**
-
-**MSS**
-
-1. Teacher requests to sort students by the score of an assignment.
-2. TAchy sorts the assignment results by score in ascending or descending order.
-
-   Use case ends.
-
-**Extensions**
-* 1a. The assignment does not exist.
-    * 1a1. TAchy shows an error message.
-
-      Use case ends.
-* 1b. The assignment has not been graded for all students.
-    * 1b1. TAchy shows a warning message.
-    * 1b2. TAchy asks if the Teacher wants to proceed.
-    * 1b3. Teacher confirms the action.
-
-      Use case resumes at step 2.
-* 1c. The assignment has not been graded for any student.
-    * 1c1. TAchy shows an error message.
-
-      Use case ends.
-
----
-
-**Use case: Link scanned PDF to a student**
-
-**MSS**
-
-1. Teacher requests to list all documents stored in a file directory.
-2. TAchy displays the list of documents.
-3. Teacher requests to link a document to a student by index by name.
-4. TAchy records the link.
-
-   Use case ends.
-
-**Extensions**
-* 1a. No documents found in the directory.
-    * 1a1. TAchy displays a "no documents found" message.
-
-      Use case ends.
-* 3a. The student name is not in the list.
-    * 3a1. TAchy displays a "no students found" message.
-
-      Use case ends.
-* 3b. There are multiple students with the name.
-    * 3b1. TAchy shows a list of students with the same name with indices.
-    * 3b2. Teacher links the document to one of them by index.
-
-      Use case resumes at step 4.
-
----
-
-**Use case: Create student priority list**
-
-**MSS**
-
-1. Teacher requests to list students
-2. Teacher requests to create a list of students who need the most attention by indices.
-3. TAchy generates a list of selected students.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The student index is invalid.
-    * 2a1. TAchy shows an error message.
-
-      Use case ends.
-
----
-
 **Use case: Add remark for individual student**
 
 **MSS**
@@ -783,21 +699,20 @@ unless specified otherwise)
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Each student must be uniquely identifiable by their student ID, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the Teacher
+- Business/domain rules: Each student must be uniquely identifiable by their full name, Assignments must have deadlines that  cannot be set on a date that has passed, Each class should not exceed 50 students, Assignments must be submitted by students up to the deadline set by the Teacher
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
 - Quality requirements: The system should be usable by a novice who has never used AB3 before, The system should have clear user documentation to guide users through its features, Intuitive error messages will be displayed to the user so that they know what is the correct method of using the system
 - Process requirements: The project is expected to adhere to the milestones which are added every week
 - Notes about project scope: The system is not required to integrate with third-party systems (e.g. Canvas), The system is not required to generate or print detailed reports of class performance or assignment scores, The system will only support English as the user interface language, The system will not be deployed on the cloud and will only run locally
-- Any other noteworthy points: The system must ensure data privary by adhering to relevant data protection regulations, The system should not use any langauge or imagery that may be offensive to students or faculty members from different cultural backgrounds.
+- Any other noteworthy points: The system must ensure data privacy by adhering to relevant data protection regulations, The system should not use any langauge or imagery that may be offensive to students or faculty members from different cultural backgrounds.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private student detail**: A student detail that is not meant to be shared with others
-* **Teacher** : Abbreviation of Teaching Assistant, a student responsible for assisting instructors in managing courses
-* **Class**: A group of students taking the same course assigned to a specific tutorial, sectional, laboratory or recitation which a Teacher is responsible for.
+* **Teacher** : Interchangeable with Tutor. This app is meant for Private tutors who teach multiple students
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -806,10 +721,8 @@ unless specified otherwise)
 Given below are instructions to test the app manually.
 
 <box type="info" seamless>
-
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </box>
 
 ### Launch and shutdown
@@ -835,13 +748,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete_student 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete_student 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

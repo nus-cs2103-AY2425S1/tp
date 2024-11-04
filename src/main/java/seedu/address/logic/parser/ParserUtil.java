@@ -23,7 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer"
+            + " and should not be blank.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -31,7 +32,7 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
+        String trimmedIndex = oneBasedIndex.replaceAll("\\s+", "");
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -120,7 +121,7 @@ public class ParserUtil {
     public static int parseMaxScore(String maxScore) throws ParseException {
         requireNonNull(maxScore);
         String trimmedMaxScore = maxScore.trim();
-        if (!StringUtil.isUnsignedInteger(trimmedMaxScore)) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMaxScore)) {
             throw new ParseException(Assignment.MAX_SCORE_MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedMaxScore);

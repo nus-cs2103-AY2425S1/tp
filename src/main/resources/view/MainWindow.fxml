@@ -50,7 +50,7 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="studentListPanelPlaceholder" styleClass="pane-with-border" />
+          <StackPane fx:id="studentListPanelPlaceholder" styleClass="results-pane" />
           <StackPane fx:id="studentDetailsPanelPlaceholder" styleClass="details-pane" />
         </SplitPane>
 
