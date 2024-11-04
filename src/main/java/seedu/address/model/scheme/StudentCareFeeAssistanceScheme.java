@@ -12,6 +12,8 @@ public class StudentCareFeeAssistanceScheme extends Scheme {
     private static final int FAMILY_SIZE_THRESHOLD = 4;
     private static final int INCOME_PER_CAPITA_THRESHOLD = 1125;
 
+    public static final String SCHEME_NAME_SHORT = "SCFA";
+
     @Override
     public boolean isEligible(double income, int familySize, int incomePerCapita) {
         requireAllNonNull(income, familySize, incomePerCapita);
@@ -29,6 +31,11 @@ public class StudentCareFeeAssistanceScheme extends Scheme {
     public boolean equals(Object other) {
         // short circuit if same object
         return other instanceof StudentCareFeeAssistanceScheme; // instanceof handles nulls
+    }
+
+    @Override
+    public String getSchemeNameShort() {
+        return SCHEME_NAME_SHORT;
     }
 
 }

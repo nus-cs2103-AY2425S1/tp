@@ -23,6 +23,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,6 +43,8 @@ class JsonAdaptedPerson {
     private final Double income;
     private final Integer familySize;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+
+    private final List<JsonAdaptedScheme> schemes = new ArrayList<>();
     private final String updatedAt;
 
     /**
@@ -59,6 +62,7 @@ class JsonAdaptedPerson {
             @JsonProperty("income") Double income,
             @JsonProperty("familySize") Integer familySize,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("schemes") ArrayList<JsonAdaptedScheme> schemes,
             @JsonProperty("updatedAt") String updatedAt) {
         this.name = name;
         this.phone = phone;
@@ -71,6 +75,9 @@ class JsonAdaptedPerson {
         this.familySize = familySize;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (!schemes.isEmpty()) {
+            this.schemes.addAll(schemes);
         }
         this.updatedAt = updatedAt;
     }
@@ -92,6 +99,9 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .toList());
         updatedAt = source.getUpdatedAt().getValue().toString();
+        schemes.addAll(source.getSchemes().stream()
+                .map(JsonAdaptedScheme::new)
+                .toList());
     }
 
     /**
@@ -103,6 +113,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Scheme> personSchemes = new ArrayList<>();
+        for (JsonAdaptedScheme scheme : schemes) {
+            personSchemes.add(scheme.toModelType());
         }
 
         if (name == null) {
@@ -180,13 +195,15 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        final ArrayList<Scheme> modelSchemes = new ArrayList<>(personSchemes);
+
         final UpdatedAt modelUpdatedAt = Optional.ofNullable(updatedAt)
                 .flatMap(JsonAdaptedPerson::parseDateTime)
                 .map(UpdatedAt::new)
                 .orElseGet(UpdatedAt::now);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark,
-                modelDateOfBirth, modelIncome, modelFamilySize, modelTags, modelUpdatedAt);
+                modelDateOfBirth, modelIncome, modelFamilySize, modelTags, modelUpdatedAt, modelSchemes);
     }
 
     private static Optional<LocalDateTime> parseDateTime(String datetime) {
