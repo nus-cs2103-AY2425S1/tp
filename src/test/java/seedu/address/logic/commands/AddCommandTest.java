@@ -26,6 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReceiptLog;
+import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -194,7 +195,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteGoods(String goodsName) {
+        public void deleteGoods(GoodsName goodsName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -210,6 +211,15 @@ public class AddCommandTest {
 
         @Override
         public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredGoodsQuantityStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public double getFilteredGoodsCostStatistics() {
             throw new AssertionError("This method should not be called.");
         }
     }

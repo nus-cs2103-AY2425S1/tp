@@ -44,13 +44,13 @@ public class GoodsCard extends UiPart<Region> {
         super(FXML);
         this.goodsReceipt = goodsReceipt;
         id.setText(displayedIndex + ". ");
-        goodsName.setText(goodsReceipt.getGoods().getReadableGoodsName());
+        goodsName.setText(goodsReceipt.getGoods().toString());
         goodsCategory.setText(goodsReceipt.getGoods().getCategory().toString());
-        supplierName.setText(goodsReceipt.getSupplierName().toString());
-        procurementDate.setText(goodsReceipt.getProcurementDate().toString());
-        arrivalDate.setText(goodsReceipt.getArrivalDate().toString());
-        isDelivered.setText(goodsReceipt.isDelivered() ? "Delivered" : "Undelivered");
-        quantity.setText(String.valueOf(goodsReceipt.getQuantity()));
-        price.setText(String.valueOf(goodsReceipt.getPriceTotal()));
+        supplierName.setText("From: " + goodsReceipt.getSupplierName().toString());
+        procurementDate.setText("Ordered on " + goodsReceipt.getProcurementDate().getReadableDateTimeString());
+        arrivalDate.setText("Arriving on " + goodsReceipt.getArrivalDate().getReadableDateTimeString());
+        isDelivered.setText("Delivery Status: " + (goodsReceipt.isDelivered() ? "Delivered" : "Pending"));
+        quantity.setText("Quantity: " + String.valueOf(goodsReceipt.getQuantity()));
+        price.setText("Cost: " + String.valueOf(goodsReceipt.getPriceTotal()));
     }
 }

@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
@@ -124,7 +125,7 @@ public interface Model {
      * Deletes all the goods which match the GoodsName given.
      * @param goodsName The GoodsName indicating the goods to be deleted.
      */
-    void deleteGoods(String goodsName);
+    void deleteGoods(GoodsName goodsName);
 
     /** Returns an unmodifiable view of the filtered goodsReceipt list */
     ObservableList<GoodsReceipt> getFilteredReceiptsList();
@@ -139,4 +140,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate);
+
+    /**
+     * Returns the total quantity of the filtered goods list.
+     */
+    public int getFilteredGoodsQuantityStatistics();
+
+    /**
+     * Returns the total cost of the filtered goods list.
+     */
+    public double getFilteredGoodsCostStatistics();
 }

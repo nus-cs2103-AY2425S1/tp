@@ -42,8 +42,8 @@ public class UniqueGoodsReceiptListTest {
     public void contains_receiptWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGoodsReceiptList.add(ALICE_RECEIPT);
         GoodsReceipt editedAlice = new GoodsReceiptBuilder().withSupplierName(ALICE.getName()).build();
-        boolean wat = uniqueGoodsReceiptList.contains(editedAlice);
-        assertTrue(uniqueGoodsReceiptList.contains(editedAlice));
+        boolean isPresent = uniqueGoodsReceiptList.contains(editedAlice);
+        assertTrue(isPresent);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class UniqueGoodsReceiptListTest {
     }
 
     @Test
-    public void setReceipt_list_replacesOwnListWithProvidedList() {
+    public void setReceipt_populatedList_replacesOwnListWithProvidedList() {
         uniqueGoodsReceiptList.add(ALICE_RECEIPT);
         List<GoodsReceipt> goodsReceipts = Collections.singletonList(BOB_RECEIPT);
         uniqueGoodsReceiptList.setReceipts(goodsReceipts);

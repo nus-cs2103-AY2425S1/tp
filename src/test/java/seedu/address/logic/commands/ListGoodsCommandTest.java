@@ -25,6 +25,7 @@ import seedu.address.model.person.Name;
 
 /**
  * Contains integration tests for {@code ListGoodsCommand}
+ * For all success cases below, default quantity of 1 and default price of 10 is assumed.
  */
 public class ListGoodsCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
@@ -35,7 +36,8 @@ public class ListGoodsCommandTest {
         Predicate<GoodsReceipt> predicate = unused -> true;
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS);
+        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 10, 100.00);
+        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS + statisticsString);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
@@ -44,36 +46,40 @@ public class ListGoodsCommandTest {
         Predicate<GoodsReceipt> predicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS);
+        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 10, 100.00);
+        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS + statisticsString);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_supplierNameKeyword_matchingGoodsReturned() {
-        Predicate<GoodsReceipt> predicate = new SupplierNamePredicate(new Name("SupplierName"));
+        Predicate<GoodsReceipt> predicate = new SupplierNamePredicate(new Name("Supplier"));
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS);
+        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 10, 100.00);
+        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS + statisticsString);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_goodsNameKeyword_matchingGoodsReturned() {
-        Predicate<GoodsReceipt> predicate = new GoodsNamePredicate("GoodsName");
+        Predicate<GoodsReceipt> predicate = new GoodsNamePredicate("Apple");
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS);
+        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 1, 10.00);
+        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS + statisticsString);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_multipleKeywords_matchingGoodsReturned() {
-        Predicate<GoodsReceipt> predicate1 = new GoodsNamePredicate("GoodsName");
-        Predicate<GoodsReceipt> predicate2 = new SupplierNamePredicate(new Name("SupplierName"));
+        Predicate<GoodsReceipt> predicate1 = new GoodsNamePredicate("Apple");
+        Predicate<GoodsReceipt> predicate2 = new SupplierNamePredicate(new Name("Supplier"));
         Predicate<GoodsReceipt> predicate = predicate1.and(predicate2);
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS);
+        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 1, 10.00);
+        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS + statisticsString);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
@@ -84,7 +90,7 @@ public class ListGoodsCommandTest {
         Predicate<GoodsReceipt> predicate = predicate1.and(predicate2);
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS);
+        CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_EMPTY);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredReceiptsList());
     }

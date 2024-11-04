@@ -19,7 +19,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
  * Adds trackable goods linked to contacted suppliers.
  */
 public class AddGoodsCommand extends Command {
-    public static final String COMMAND_WORD = "goods";
+    public static final String COMMAND_WORD = "addgoods";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds linked goods to the address book. "
             + "Parameters: "

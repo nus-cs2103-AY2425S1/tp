@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
 
 import seedu.address.model.Model;
+import seedu.address.model.goods.GoodsName;
 
 /**
  * Deletes all goods that match the given goodsName.
@@ -19,10 +20,10 @@ public class DeleteGoodsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$s has been deleted.";
 
-    private final String goodsName;
+    private final GoodsName goodsName;
 
     public DeleteGoodsCommand(String goodsName) {
-        this.goodsName = goodsName;
+        this.goodsName = new GoodsName(goodsName);
     }
 
     @Override
