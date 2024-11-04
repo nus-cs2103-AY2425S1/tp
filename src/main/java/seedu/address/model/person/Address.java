@@ -41,9 +41,7 @@ public class Address {
             return false;
         }
 
-        boolean isAlphanumeric = trimmedInput.matches(".*[a-zA-Z0-9].*");
-
-        return trimmedInput.matches(VALIDATION_REGEX) && isAlphanumeric;
+        return trimmedInput.matches(VALIDATION_REGEX);
     }
 
     @Override
