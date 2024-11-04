@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -57,6 +58,16 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tagNames} and the respective {@tagCategories} into a {@code Set<Tag>} and
+     * set it to the {@code Person} that we are building.
+     * @throws IllegalValueException thrown when a tag category is invalid
+     */
+    public PersonBuilder withTags(String[] tags, String[] categories) throws IllegalValueException {
+        this.tags = SampleDataUtil.getTagSet(tags, categories);
         return this;
     }
 

@@ -1,16 +1,18 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//import seedu.address.model.CampusConnect;
-//import seedu.address.model.ReadOnlyCampusConnect;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * Contains utility methods for populating {@code CampusConnect} with sample data.
@@ -44,11 +46,33 @@ public class SampleDataUtil {
     }*/
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a tag set containing the list of name strings given.
+     * @param names Varargs array containing the names of the tags.
+     * @return Set containing the tags.
      */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
+    public static Set<Tag> getTagSet(String... names) {
+        return Arrays.stream(names)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a tag set containing tags with the names and categories specified.
+     * @param names Array of names for the tags.
+     * @param categories Array of categories to be attached to the respective name.
+     * @exception IllegalValueException thrown when a tag category is not valid.
+     * @return Set containing the tags.
+     */
+    public static Set<Tag> getTagSet(String[] names, String[] categories) throws IllegalValueException {
+        List<Tag> resultTags = new ArrayList<>();
+        TagCategory tagCat;
+
+        // assume both arrays same length, since this is a helper for test functions
+        // so no need to test for inconsistent length
+        for (int i = 0; i < names.length; i++) {
+            tagCat = TagCategory.fromString(categories[i]);
+            resultTags.add(new Tag(names[i], tagCat));
+        }
+        return resultTags.stream().collect(Collectors.toSet());
     }
 }
