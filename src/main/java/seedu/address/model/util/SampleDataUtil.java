@@ -86,21 +86,21 @@ public class SampleDataUtil {
 
     public static Concert[] getSampleConcerts() {
         return new Concert[] {
-                SAMPLE_CONCERT_COACHELLA,
-                SAMPLE_CONCERT_GLASTONBURY,
-                SAMPLE_CONCERT_JUSTICEWORLD,
-                SAMPLE_CONCERT_THEERAS,
-                SAMPLE_CONCERT_TOMORROWLAND
+            SAMPLE_CONCERT_COACHELLA,
+            SAMPLE_CONCERT_GLASTONBURY,
+            SAMPLE_CONCERT_JUSTICEWORLD,
+            SAMPLE_CONCERT_THEERAS,
+            SAMPLE_CONCERT_TOMORROWLAND
         };
     }
 
     public static ConcertContact[] getSampleConcertContacts() {
         return new ConcertContact[] {
-                SAMPLE_CONCERTCONTACT_ALEX_COACHELLA,
-                SAMPLE_CONCERTCONTACT_ALEX_GLASTONBURY,
-                SAMPLE_CONCERTCONTACT_BERNICE_COACHELLA,
-                SAMPLE_CONCERTCONTACT_CHARLOTTE_THEERAS,
-                SAMPLE_CONCERTCONTACT_CHARLOTTE_TOMORROWLAND
+            SAMPLE_CONCERTCONTACT_ALEX_COACHELLA,
+            SAMPLE_CONCERTCONTACT_ALEX_GLASTONBURY,
+            SAMPLE_CONCERTCONTACT_BERNICE_COACHELLA,
+            SAMPLE_CONCERTCONTACT_CHARLOTTE_THEERAS,
+            SAMPLE_CONCERTCONTACT_CHARLOTTE_TOMORROWLAND
         };
     }
 
@@ -124,8 +124,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
 }
