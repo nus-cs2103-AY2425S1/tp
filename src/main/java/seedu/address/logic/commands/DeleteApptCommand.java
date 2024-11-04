@@ -46,7 +46,7 @@ public class DeleteApptCommand extends Command {
             + PREFIX_DATE + "DATE (of appointment), "
             + PREFIX_TIMEPERIOD + "TIME_PERIOD (in HHMM-HHMM, chronological order).\n"
             + "Example: "
-            + COMMAND_WORD
+            + COMMAND_WORD + " "
             + PREFIX_NRIC + "S1234567Z "
             + PREFIX_DATE + "2024-10-24 "
             + PREFIX_TIMEPERIOD + "1235-1400";

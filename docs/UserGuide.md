@@ -5,17 +5,14 @@ title: MediBase3 User Guide
 
 MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
 
-
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
-
-{: style="page-break-after: always"}
 
 ## Table of Contents
 
 * Table of Contents
 {:toc}
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## How to use this User Guide
 Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
@@ -79,7 +76,7 @@ The following annotated text-boxes are used throught this guide to provide usefu
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -236,7 +233,7 @@ For additional assistance or common questions, please refer to our [FAQ](#faq) s
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -296,7 +293,7 @@ the constraints of each parameter when used in a command.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Patient
 
@@ -380,7 +377,7 @@ to `91234567` and `johndoe@example.com` respectively.
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Appointments
 
@@ -405,9 +402,10 @@ Format: `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME
 > * Earliest valid appointment time is `0000`, and latest is `2359`.
 > * Appointments cannot span beyond date boundaries
 
-
 Example:
 * `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` will schedule an appointment for the patient with NRIC `S1234567A` on `2024-10-27`, from `1100` to `1200` titled `Dental`. 
+
+![result for addAppt command example](images/addApptCommand.png)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -457,7 +455,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Medical Conditions
 
@@ -479,6 +477,8 @@ Format: `addMedCon i/NRIC c/CONDITION...`
 
 Example: 
 * `addMedCon i/S1234567A c/High Blood Pressure` will add medical condition `High Blood Pressure` to patient with NRIC `S1234567A`.   
+
+![result for addMedCon command example](images/addMedConCommand.png)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -515,7 +515,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Allergies
 
@@ -537,6 +537,8 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 
 Example:
 * `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+
+![result for addAllergy command example](images/addAllergyCommand.png)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -573,7 +575,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Priority
 
@@ -594,9 +596,11 @@ Format: `setPriority i/NRIC !/PRIORITY`
 Example: 
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
 
+![result for setPriority command example](images/setPriorityCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Finding Patients
 
@@ -658,7 +662,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'find alex david'](images/findCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -682,6 +686,8 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
+![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Locating patient by NRIC: `findNric`
@@ -702,9 +708,11 @@ Format: `findNric NRIC`
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
 
+![result for 'findNric S1234567A'](images/findNricCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### General Features
 
@@ -768,7 +776,7 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -867,14 +875,14 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
