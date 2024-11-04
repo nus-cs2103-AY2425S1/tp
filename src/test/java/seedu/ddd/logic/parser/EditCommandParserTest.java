@@ -25,6 +25,8 @@ import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_PHONE_AR
 import static seedu.ddd.logic.parser.CommandParserTestUtil.VALID_VENDOR_SERVICE_ARGUMENT;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ddd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ddd.logic.parser.ParserUtil.MESSAGE_INVALID_ID;
+import static seedu.ddd.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
@@ -67,7 +69,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_CLIENT_NAME, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_CLIENT_NAME, MESSAGE_INVALID_INDEX);
 
         // no field specified
         assertParseFailure(parser, "1", EditContactCommand.MESSAGE_NOT_EDITED);
@@ -79,28 +81,47 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " -5 " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "  0" + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
+
+        // float index
+        assertParseFailure(parser, " 0.1 " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 1 some random string", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 1 i/ string", MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_invalidId_failure() {
+        // negative ID
+        assertParseFailure(parser, " id/-1 " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_ID);
+
+        // float ID
+        assertParseFailure(parser, " id/0.1 " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_ID);
+    }
+
+    @Test
+    public void parse_invalidIdOrIndex_failure() {
+        // either index or id/ parameter must be specified
+        assertParseFailure(parser, " " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 1 id/1 " + VALID_CLIENT_NAME_ARGUMENT, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1 " + INVALID_CLIENT_NAME_ARGUMENT, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 " + INVALID_CLIENT_PHONE_ARGUMENT, Phone.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 " + INVALID_CLIENT_EMAIL_ARGUMENT, Email.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 " + INVALID_CLIENT_ADDRESS_ARGUMENT, Address.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 " + INVALID_TAG_ARGUMENT, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " 1 " + INVALID_CLIENT_NAME_ARGUMENT, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " 1 " + INVALID_CLIENT_PHONE_ARGUMENT, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " 1 " + INVALID_CLIENT_EMAIL_ARGUMENT, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " 1 " + INVALID_CLIENT_ADDRESS_ARGUMENT, Address.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " 1 " + INVALID_TAG_ARGUMENT, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1 " + INVALID_CLIENT_PHONE_ARGUMENT + " "
+        assertParseFailure(parser, " 1 " + INVALID_CLIENT_PHONE_ARGUMENT + " "
                 + VALID_CLIENT_EMAIL_ARGUMENT, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
