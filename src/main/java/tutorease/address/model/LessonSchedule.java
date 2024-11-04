@@ -1,5 +1,7 @@
 package tutorease.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -54,15 +56,17 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
      * @throws NullPointerException If the specified lesson is null.
      */
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessons.add(lesson);
     }
 
     /**
-     * Deletes the lesson from the lesson list.
+     * Deletes the specified lesson from the lesson list.
      *
-     * @param lesson The lesson to be removed.
+     * @param lesson The lesson to be removed. Must exist in the lesson list.
      */
     public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessons.remove(lesson);
     }
 
