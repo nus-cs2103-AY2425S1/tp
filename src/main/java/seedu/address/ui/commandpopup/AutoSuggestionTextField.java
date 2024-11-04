@@ -232,7 +232,7 @@ public class AutoSuggestionTextField extends TextField {
     }
 
     /**
-     * Sets the CommandBox object that processes commands entered in the TextField.
+     * Sets the CommandBox object that processes commands entered into the TextField.
      *
      * @param commandBox The CommandBox object to be set.
      */
@@ -352,6 +352,7 @@ public class AutoSuggestionTextField extends TextField {
 
         }
     }
+
 
     /**
      * Build TextFlow with selected text. Return "case" dependent.
