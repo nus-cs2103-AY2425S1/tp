@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Meeting` object residing in the `Model`.
 
 ### Logic component
 
@@ -169,6 +169,12 @@ Using `FindCommand`, we list contacts which are in the meeting based on UID.
 Using `AddScheduleCommand`, we add a meeting to a schedule.
 
 <puml src="diagrams/AddScheduleSequenceDiagram.puml"/>
+
+### Delete meetings from the current schedule feature
+
+Using `DeleteScheduleCommand`, we delete a meeting from the current schedule.
+
+<puml src="diagrams/DeleteScheduleSequenceDiagram.puml"/>
 
 ### Load schedule storage
 
@@ -590,29 +596,29 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a Schedule
 
-1. Test case: add-schedule c/1 n/Team Meeting d/x t/1400 OR add-schedule c/1 n/Team Meeting d/11-10-2024 t/x
+1. Test case: `add-schedule c/1 n/Team Meeting d/x t/1400` OR `add-schedule c/1 n/Team Meeting d/11-10-2024 t/x`
 
     1. Expected: Invalid command format!
        add-schedule: Adds a schedule to a contact. Parameters: c/CONTACT_INDEX n/NAME d/DATE t/TIME
        Example: add-schedule c/1 n/Dinner d/10-10-2024 t/1800
 
-2. Test case: add-schedule c/1 n/Team Meeting d/11-10-2024 t/1400
+2. Test case: `add-schedule c/1 n/Team Meeting d/11-10-2024 t/1400`
 
     1. Expected: New schedule added: Team Meeting on 2024-10-11 at 14:00
 
-3. Test case: add-schedule c/1 n/Team Meeting d/10-10-2024 t/1400 (duplicated command)
+3. Test case: `add-schedule c/1 n/Team Meeting d/10-10-2024 t/1400` (duplicated command)
 
     1. Expected: This schedule conflicts with an existing schedule.
 
 ### View schedule
 
-1. Test case: see d/
+1. Test case: `see d/`
 
     1. Expected: Invalid command format!
        see: See your schedule for the week. Parameters: d/
        Example: see d/10-10-2024
 
-2. Test case: see d/11-10-2024
+2. Test case: `see d/11-10-2024`
 
     1. Expected: Sun 06-10-2024 to Sat 12-10-2024 schedule listed!
 
@@ -624,6 +630,29 @@ testers are expected to do more *exploratory* testing.
 
 ### Delete schedule
 
-1. Test case:
+1. Deleting a meeting from the current schedule
 
-    1. Expected: 
+    1. Prerequisites: There should be meetings scheduled in the current week.
+
+    1. Test case: `delete-schedule 1`
+    1. Expected: First scheduled meeting of the week is deleted from the list. Details of the deleted meeting shown in the status message. Timestamp in the status bar is updated.
+   
+    1. Test case: `delete-schedule 0`
+    1. Expected: No meeting is deleted. Error details shown in the status message. Status bar remains the same.
+   
+    1. Other incorrect delete commands to try `delete`, `delete x`, `delete words` (where x is larger than list size)
+    1. Expected: Similar to previous
+
+2. Deleting a meeting from any week
+
+    1. Prerequisites: List the given weeks schedule using `see d\date` (where date is within the week to be tested). There should be meetings scheduled in that week.
+   
+    1. Test Cases: Similar to Scenario 1
+    1. Expected: Similar to Scenario 1
+
+3. Deleting a meeting while all meetings are shown
+
+    1. Prerequisites: List all meetings using the `list-schedule` command. There should be meetings scheduled.
+   
+    1. Test Cases: Similar to Scenario 1
+    1. Expected: Similar to Scenario 1
