@@ -69,27 +69,87 @@ Commands for creating, updating, and deleting buyers and sellers.
 - #### **Add Buyer Command**
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
     - **Description:** Creates a new buyer profile with specified details.
-    - **Example**:  `buyer n/Bobby p/91432277 e/bobby123@gmail.com`
+    - **Successful Execution:**
+      > **Use Case**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      
+      **Failed Execution**
+      > **User Error**:
+      >
+      > **Input**:
+      >
+      > **Output**:
 
 - #### **Add Seller Command**
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new seller profile with specified details.
-    - **Example**:  `seller n/Johnny p/92341556 e/johnny456@gmail.com`
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
+
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
 - #### **Find Command**
     - **Format:** `find KEYWORD [KEYWORD...]`
     - **Description:** Finds the specified client(s) based on the provided keywords.
-    - **Example**:  `find Bobby Winter`
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
+
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
 - #### **Edit Command**
     - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
     - **Description:** Edits the details of the specified client.
-    - **Example**:  `edit 1 n/BobbyTan e/bobbytan123@gmail.com`
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
+
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
 - #### **Delete Client Command**
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL>`
     - **Description:** Creates a new client profile with specified details
-    - **Example**:  `buyer n/Bobby p/91432222 e/bobby123@gmail.com`
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
+
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
 ---
 
@@ -101,12 +161,38 @@ Commands for managing appointments between user and clients.
 
 - #### **Schedule Appointment**
     - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
-    - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).
+    - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
+  <br> **Successful Execution:**
+  > **Use Case**:
+  >
+  > **Input**:
+  >
+  > **Output**:
+
+  **Failed Execution**
+  > **User Error**:
+  >
+  > **Input**:
+  >
+  > **Output**:
+  > --- 
 
 - #### **Delete Appointment**
     - **Format:** `delapt n/<NAME>`
     - **Description:** Deletes an appointment with the specified client.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 ---
 
 ### 3. Listing Management
@@ -118,27 +204,99 @@ Commands for managing property listings and associating clients with listings.
 - #### **Add Listing**
     - **Command:** `AddListingCommand`
     - **Description:** Adds a new property listing with specified details.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Show Listings**
     - **Command:** `ShowListingsCommand`
     - **Description:** Displays all current listings.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Add Buyers to Listing**
     - **Command:** `AddBuyersToListingCommand`
     - **Description:** Associates buyers with a specified listing.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Remove Buyers from Listing**
     - **Command:** `RemoveBuyersFromListingCommand`
     - **Description:** Removes buyers associated with a specified listing.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Delete Listing**
     - **Command:** `DeleteListingCommand`
     - **Description:** Deletes a specified listing.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Clear Listing**
     - **Command:** `ClearListingCommand`
     - **Description:** Deletes ALL listings.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 ---
 
 ### 4. Utility Commands
@@ -148,27 +306,99 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 - #### **Clear**
     - **Command:** `ClearCommand`
     - **Description:** Clears the console or application state.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Exit**
     - **Command:** `ExitCommand`
     - **Description:** Exits the application.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Help**
     - **Command:** `HelpCommand`
     - **Description:** Displays a list of available commands and their descriptions.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **More Info**
     - **Command:** `MoreInfoCommand`
     - **Description:** Provides additional information about a specific command or feature.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **List All Commands**
     - **Command:** `ListCommand`
     - **Description:** Lists all available commands in the application.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 - #### **Chat Window**
     - **Command:** `ChatWindowCommand`
     - **Description:** Opens a chat window for client-agent communication.
+  - **Successful Execution:**
+    > **Use Case**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 
+    **Failed Execution**
+    > **User Error**:
+    >
+    > **Input**:
+    >
+    > **Output**:
 ---
 
 ### Viewing help : `help`
@@ -191,21 +421,7 @@ Adds a person to the address book.
 add n/NAME p/PHONE_NUMBER e/EMAIL
 </div>
 
-#### Successful Execution
-**Example**
-> **Use Case**: Adding a client named `John Doe` with phone number `98765432` and email `johnd@example.com`.
->
-> **Input**:  `add n/John Doe p/98765432 e/johnd@example.com`
->
-> **Output**:
 
-#### Failed Execution
-**Example**
-> **User Error**: Missing a `PHONE` field.
->
-> **Input**: `add n/Betsy Crowe e/betsycrowe@example.com`
->
-> **Output**:
 
 
 ### Listing all Persons : `list`
