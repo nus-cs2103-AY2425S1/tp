@@ -11,7 +11,7 @@ public class Diagnosis {
     public static final String MESSAGE_CONSTRAINTS =
             "Diagnosis (if specified) must contain at least 1 alphabetic character, and has a limit of 80 characters.\n"
             + "It cannot be empty.";
-    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z]).{1,100}$";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z]).{1,80}$";
     public final String value;
 
     /**
