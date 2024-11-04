@@ -74,6 +74,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+## Student Commands
 
 ### Adding a student: `add`
 
@@ -160,6 +161,104 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+# Lessons
+
+The lesson list is shown on the right side of TAHub.
+You can create new lessons and add students to lessons.
+You can mark students' attendance and participation.
+
+Lessons that have already passed (when your computer's time is after
+the lesson's time) will be displayed in red.
+
+## Lesson Commands
+
+### Adding a Lesson : `addlesson`
+
+Adds a lesson to TAHub.
+
+Format: `addlesson d/DATE t/TIME`
+
+* `DATE` must be in the format `YYYY-MM-DD`, and must be a valid date.
+* `TIME` must be in the format `HH:mm`, and must be a valid time.
+
+### Deleting a lesson : `deletelesson`
+
+Deletes lesson(s) from TAHub.
+
+Format: `deletelesson LESSON_INDEX[;LESSON_INDEX]…`
+
+* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+
+Examples:
+* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the list
+
+### Adding a student to a lesson : `addtolesson`
+
+Adds student(s) to a lesson.
+
+Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
+
+* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* At least one of the optional arguments must be provided. There must be at least one name or index.
+* `NAME` must be the full name of a student exactly as shown in the student list.
+* `STUDENT_INDEX` is the index of a student as displayed in the list.
+
+Examples:
+* `addtolesson 1 n/John Doe` adds `John Doe` to lesson number 1.
+* `addtolesson 1 n/John Doe i/3 i/5` adds `John Doe` and students numbered 3 and 5 to lesson number 1.
+
+### Removing a student from a lesson : `removefromlesson`
+
+Removes student(s) from a lesson.
+
+Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
+
+* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `NAME` must be the full name of a student in the lesson.
+
+Examples:
+* `removefromlesson 1 n/John Doe n/Jane Doe` removes `John Doe` and `Jane Doe` from lesson number 1.
+
+### Marking a student's attendance : `marka`
+
+Marks student(s)' attendance in a lesson.
+
+Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
+
+* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `NAME` must be the full name of a student in the lesson.
+* If multiple names are provided, all their attendances will be set to the given value.
+* `ATTENDANCE` must be one of the following: `Y`,`y`or`1` for yes (student is present) and `N`,`n`or`0` for no (student is absent).
+* There must be exactly 1 `ATTENDANCE` argument, e.g. `a/1 a/1` is not allowed.
+
+Examples:
+* `marka 1 n/John Doe a/y` marks `John Doe` as present for lesson number 1.
+* `marka 2 n/John Doe n/Jane Doe a/N` marks `John Doe` and `Jane Doe` as absent for lesson number 2.
+
+### Marking a student's participation : `markp`
+
+Marks student(s)' participation in a lesson.
+
+Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
+
+* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `NAME` must be the full name of a student in the lesson.
+* If multiple names are provided, all their participation points will be set to the given value.
+* `PARTICIPATION` must be an integer between 0 and 100 inclusive.
+* There must be exactly 1 `PARTICIPATION` argument, e.g. `pt/3 pt/3` is not allowed.
+* The participation score is set **exactly** to the given value. It does not add onto students' existing score.
+
+Examples:
+* `markp 1 n/John Doe pt/3` marks `John Doe` as having 3 participation marks for lesson number 1.
+* `markp 2 n/John Doe n/Jane Doe pt/5` marks `John Doe` and `Jane Doe` as having 5 participation marks for lesson number 2.
+
+### Refreshing the lesson list : `listlessons`
+
+Refreshes and displays the lesson list.
+Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
+
+## Storage Operations
 
 ### Saving the data
 
