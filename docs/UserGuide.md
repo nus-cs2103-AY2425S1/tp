@@ -426,6 +426,15 @@ The following image is the result of executing `view 1`.
 
 <img src="images/viewResult.png" alt="Result for 'view 1'" width="500" height="340">
 
+
+<box type="info" seamless>
+
+**Note:** The client's details in the `view` window will remain unchanged even if the client's information is updated. This is intentional as it allows users to reference the client's details before the update.
+
+The `correct as of` timestamp at the top right corner of the `view` window shows the time when the window was opened, helping to avoid any confusion.
+
+</box>
+
 ---
 
 <h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
