@@ -59,7 +59,7 @@
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <StackPane fx:id="personListPanelPlaceholder" alignment="CENTER_LEFT" VBox.vgrow="NEVER" />
+                <StackPane fx:id="personListPanelPlaceholder" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS" />
               </VBox>
                  <StackPane fx:id="taskListPanelPlaceholder" alignment="CENTER_RIGHT" styleClass="pane-with-border" GridPane.columnIndex="1">
                 <padding>
