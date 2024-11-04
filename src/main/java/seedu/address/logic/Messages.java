@@ -51,9 +51,7 @@ public class Messages {
                 .append(person.getNotes().toString().isEmpty() ? "-" : person.getNotes())
                 .append("\n Appointment: ")
                 .append(person.getAppointment() == null ? "-" : person.getAppointment().toString());
-        // .append("; Tags: ");
 
-        // person.getTags().forEach(builder::append);
         return builder.toString();
     }
 
