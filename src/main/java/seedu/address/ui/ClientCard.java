@@ -90,7 +90,7 @@ public class ClientCard extends UiPart<Region> {
         switch (status) {
         case URGENT -> statusLabel.getStyleClass().add("urgent-status");
         case NON_URGENT -> statusLabel.getStyleClass().add("nonUrgent-status");
-        case NA -> statusLabel.getStyleClass().add("none-status");
+        case NA -> statusLabel = null;
         default -> statusLabel = null;
         }
         if (statusLabel != null) {
