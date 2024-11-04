@@ -37,6 +37,8 @@ public class AttendanceWindow {
     private final TutorialGroup tutorialGroup;
     private TableView<AttendanceRow> table;
     private ObservableList<AttendanceRow> data;
+    private static final String ICON_APPLICATION = "/images/TT_icon.png";
+
 
     /**
      * Creates a new AttendanceWindow for the specified tutorial group.
@@ -51,9 +53,10 @@ public class AttendanceWindow {
      * @param model The model to get the student data from.
      */
     public void show(Model model) {
-        Platform.runLater(() -> { });
+        Platform.runLater(() -> {
         Stage stage = new Stage();
         stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
+        stage.getIcons().add(new javafx.scene.image.Image(ICON_APPLICATION));
         table = new TableView<>();
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
         studentNameColumn.setCellValueFactory(cellData ->
@@ -76,9 +79,24 @@ public class AttendanceWindow {
         stage.show();
 
         model.getFilteredStudentList().addListener((ListChangeListener<Student>) change -> {
-            System.out.println("Student list changed");
-            refreshTable(model);
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Student newStudent : change.getAddedSubList()) {
+                        System.out.println("New student added: " + newStudent.getName());
+                        AttendanceRow newRow = new AttendanceRow(newStudent);
+                        for (AttendanceRecord record : newStudent.getAttendanceRecord()) {
+                            newRow.addAttendance(record.getDate(), record.getAttendance().toString());
+                        }
+                        data.add(newRow);
+                        addAttendanceListener(newRow, getAllAttendanceDates(model), model);
+                    }
+                }
+                if (change.wasRemoved()) {
+                    refreshTable(model);  // Refresh table if students are removed
+                }
+            }
         });
+
 
         for (AttendanceRow row : data) {
             addAttendanceListener(row, attendanceDates, model);
@@ -86,6 +104,8 @@ public class AttendanceWindow {
                 record.addListener(observable -> refreshTable(model));
             }
         }
+
+        });
 
     }
 
@@ -99,6 +119,7 @@ public class AttendanceWindow {
                             addDateColumn(newRecord.getDate());
                         }
                         row.addNewAttendanceRecord(newRecord);
+                        newRecord.addListener(observable -> refreshTable(model));
                     }
                     refreshTable(model);
                 }
@@ -107,6 +128,7 @@ public class AttendanceWindow {
                         attendanceDates.remove(removedRecord.getDate());
                         removeDateColumn(removedRecord.getDate());
                     }
+                    refreshTable(model);
                 }
             }
         });
