@@ -8,8 +8,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import spleetwaise.address.MainApp;
-import spleetwaise.address.logic.Logic;
 import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.logic.Logic;
 import spleetwaise.commons.util.StringUtil;
 
 /**

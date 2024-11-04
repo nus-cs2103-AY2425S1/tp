@@ -4,8 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import spleetwaise.address.logic.Logic;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
+import spleetwaise.commons.logic.Logic;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
