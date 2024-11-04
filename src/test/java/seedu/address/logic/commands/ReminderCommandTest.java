@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -113,7 +114,7 @@ public class ReminderCommandTest {
         ReminderCommand command = new ReminderCommand(personWithSchedule.getName(),
                 invalidReminder.getReminderTime());
 
-        assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_REMINDER_TIME);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_REMINDER_FORMAT);
     }
 
     @Test

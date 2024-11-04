@@ -19,7 +19,8 @@ public class ReminderCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no reminder specified
-        assertParseFailure(parser, VALID_NAME, MESSAGE_INVALID_REMINDER_FORMAT);
+        assertParseFailure(parser, VALID_NAME,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReminderCommand.MESSAGE_USAGE));
     }
 
     @Test

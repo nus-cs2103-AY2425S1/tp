@@ -25,7 +25,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format! "
             + "Please use the format: yyyy-MM-dd HHmm\nMonths must be between 01-12, and days between 01-31.";
     public static final String MESSAGE_INVALID_REMINDER_FORMAT = "Invalid reminder time! "
-            + "Please enter either: n day/hour(s)";
+            + "Please enter either: n day/hour(s).\n"
+            + "Days must be between 1-7 and Hours must be between 1-23.";
     public static final String MESSAGE_INVALID_DATE = "Given date does not exist!";
     public static final String MESSAGE_NO_REMINDER = "No reminder set for this person!";
 

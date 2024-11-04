@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -31,8 +32,6 @@ public class ReminderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Reminder set successfully for: %s. "
             + "You will be reminded %s before.";
-    public static final String MESSAGE_INVALID_REMINDER_TIME = "Invalid reminder time: "
-            + "Days must be between 1-7 and Hours must be between 1-23";
     public static final String MESSAGE_SINGULAR_FORMAT_ERROR = "Error: "
             + "should not have 's' for '1 day' or '1 hour'.";
     public static final String MESSAGE_PLURAL_FORMAT_ERROR = "Error: "
@@ -73,7 +72,7 @@ public class ReminderCommand extends Command {
 
         // Check if the reminder time is valid (e.g 1 hour or 1 day)
         if (!isValidReminderTime(reminderTime)) {
-            throw new CommandException(MESSAGE_INVALID_REMINDER_TIME);
+            throw new CommandException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 
         // Check if the reminder already exists

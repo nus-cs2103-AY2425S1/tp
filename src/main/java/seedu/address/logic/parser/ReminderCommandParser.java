@@ -31,6 +31,13 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMINDER);
         Name name = ParserUtil.parseName(argMultimap.getPreamble());
+
+        //Check for reminder prefix
+        if (!argMultimap.getValue(PREFIX_REMINDER).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ReminderCommand.MESSAGE_USAGE));
+        }
+
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
         // Check for missing reminder
