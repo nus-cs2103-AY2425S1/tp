@@ -15,12 +15,13 @@ public class PostalContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream().anyMatch(keyword -> person.getPostalCode().value.contains(keyword));
+        return keywords.stream().anyMatch(keyword ->
+                person.getPostalCode().toString().contains(keyword));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) {
+        if (other == this) {
             return true;
         }
 
@@ -35,4 +36,5 @@ public class PostalContainsKeywordsPredicate implements Predicate<Person> {
     public int hashCode() {
         return keywords.hashCode();
     }
+
 }

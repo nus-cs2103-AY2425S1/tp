@@ -145,6 +145,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
     }
+
     private Predicate<Person> preparePredicate(String userInput) {
         String[] keywords = userInput.split("\\s+");
 

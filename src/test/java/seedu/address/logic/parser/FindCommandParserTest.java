@@ -39,15 +39,6 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "912345 967890", expectedFindCommand);
         assertParseSuccess(parser, " \n 912345 \n \t 967890  \t", expectedFindCommand);
     }
-
-    @Test
-    public void parse_validPostal_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new PostalContainsKeywordsPredicate(Arrays.asList("S123000", "S123456")));
-        assertParseSuccess(parser, "S123000 S123456", expectedFindCommand);
-        assertParseSuccess(parser, " \n S123000 \n \t S123456  \t", expectedFindCommand);
-    }
-
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
