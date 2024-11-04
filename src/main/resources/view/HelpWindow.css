@@ -1,5 +1,6 @@
 #copyButton, #helpMessage {
     -fx-text-fill: white;
+    -fx-font-size: 14px;
 }
 
 #copyButton {
@@ -16,4 +17,14 @@
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#helpMessage {
+    -fx-padding: 5 0 0 0;
+}
+
+#ugLink {
+    -fx-border-color: transparent;
+    -fx-padding: 5 10 0 0;
+    -fx-font-size: 14px;
 }
