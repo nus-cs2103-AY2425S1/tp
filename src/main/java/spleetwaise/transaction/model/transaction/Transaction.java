@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import spleetwaise.address.model.person.Person;
-import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.util.CollectionUtil;
+import spleetwaise.commons.util.IdUtil;
 
 /**
  * Represents a Transaction in the transaction book. Guarantees: details are present and not null, field values are
