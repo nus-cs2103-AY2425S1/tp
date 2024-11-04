@@ -6,9 +6,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.SPORTS_FESTIVAL;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +29,8 @@ import seedu.address.logic.commands.contact.commands.FindCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
+import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
+import seedu.address.logic.commands.event.commands.DeleteEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.event.commands.ViewEventCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
@@ -166,5 +170,22 @@ public class AddressBookParserTest {
         Command expected = new ViewEventCommand(SPORTS_FESTIVAL);
         assertEquals(expected, new AddressBookParser()
                 .parseCommand(ViewEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
+    }
+
+    @Test
+    public void parseCommand_addPersonToEvent() throws ParseException {
+        HashSet<Index> attendees = new HashSet<>();
+        attendees.add(INDEX_FIRST_PERSON);
+        Command expected = new AddPersonToEventCommand(INDEX_FIRST_EVENT, attendees, new HashSet<>(),
+                new HashSet<>(), new HashSet<>());
+        assertEquals(expected, new AddressBookParser()
+                .parseCommand(AddPersonToEventCommand.COMMAND_WORD + " ei/1 a/1"));
+    }
+
+    @Test
+    public void parseCommand_deleteEvent() throws ParseException {
+        Command expected = new DeleteEventCommand(INDEX_FIRST_EVENT);
+        assertEquals(expected, new AddressBookParser()
+                .parseCommand(DeleteEventCommand.COMMAND_WORD + " 1"));
     }
 }
