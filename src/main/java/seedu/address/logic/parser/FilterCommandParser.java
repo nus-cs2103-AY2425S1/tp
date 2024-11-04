@@ -14,7 +14,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -96,18 +101,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Set<String> errors = new LinkedHashSet<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName
-                    , errors));
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseName(
+                    argMultimap.getValue(PREFIX_NAME).get()).fullName, errors));
             predicates.add(new NameContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()).value
-                    , errors));
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parsePhone(
+                            argMultimap.getValue(PREFIX_PHONE).get()).value, errors));
             predicates.add(new PhoneContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()).value
-                    , errors));
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> ParserUtil.parseEmail(
+                    argMultimap.getValue(PREFIX_EMAIL).get()).value, errors));
             predicates.add(new EmailContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
@@ -123,7 +128,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             String operatorAndIncome = argMultimap.getValue(PREFIX_INCOME).get();
             try {
-                IncomeComparisonOperator operator = ParserUtil.parseIncomeComparisonOperator(operatorAndIncome.substring(0, 1));
+                IncomeComparisonOperator operator =
+                        ParserUtil.parseIncomeComparisonOperator(operatorAndIncome.substring(0, 1));
                 int income = ParserUtil.parseIncome(operatorAndIncome.substring(1)).value;
                 predicates.add(new IncomeComparisonPredicate(operator, income));
             } catch (StringIndexOutOfBoundsException e) {
@@ -139,13 +145,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             predicates.add(new RemarkContainsSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
-            String substring = parseFieldForFilterCommand(
-                    () -> parseField(() -> argMultimap.getValue(PREFIX_TIER).get(), errors));
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> argMultimap.getValue(
+                    PREFIX_TIER).get(), errors));
             predicates.add(new TierStartsWithSubstringPredicate(substring));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            String substring = parseFieldForFilterCommand(
-                    () -> parseField(() -> argMultimap.getValue(PREFIX_STATUS).get(), errors));
+            String substring = parseFieldForFilterCommand(() -> parseField(() -> argMultimap.getValue(
+                    PREFIX_STATUS).get(), errors));
             predicates.add(new StatusStartsWithSubstringPredicate(substring));
         }
         if (!errors.isEmpty()) {
