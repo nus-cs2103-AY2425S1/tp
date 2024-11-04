@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -24,13 +26,15 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String EMPTY_FIELD_FORMAT = "%EMPTY-FIELD%";
+    public static final String EMPTY_FIELD_FORMAT = "";
 
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
     private final String notes;
+    private final String income;
+    private final String age;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -39,11 +43,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("notes") String notes, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("notes") String notes, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("income") String income, @JsonProperty("age") String age) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.income = income;
+        this.age = age;
         this.notes = notes == null ? EMPTY_FIELD_FORMAT : notes;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -62,6 +69,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        income = source.getIncome().isEmpty() ? EMPTY_FIELD_FORMAT : source.getIncome().toString();
+        age = source.getAge().isEmpty() ? EMPTY_FIELD_FORMAT : source.getAge().toString();
     }
 
     private boolean isFieldEmpty(String value) {
@@ -118,6 +127,31 @@ class JsonAdaptedPerson {
         } else {
             modelAddress = new Address(address);
         }
+
+        final Income modelIncome;
+        if (income == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Income.class.getSimpleName()));
+        }
+        if (isFieldEmpty(income)) {
+            modelIncome = Income.createEmpty();
+        } else if (!Income.isValidIncome(income)) {
+            throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
+        } else {
+            modelIncome = new Income(income);
+        }
+
+        final Age modelAge;
+        if (age == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
+        }
+        if (isFieldEmpty(age)) {
+            modelAge = Age.createEmpty();
+        } else if (!Age.isValidAge(age)) {
+            throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAge = new Age(age);
+        }
+
         final Notes modelNotes;
         if (isFieldEmpty(notes)) {
             modelNotes = Notes.createEmpty();
@@ -128,7 +162,8 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNotes, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+            modelNotes, modelTags, modelIncome, modelAge);
     }
 
 }

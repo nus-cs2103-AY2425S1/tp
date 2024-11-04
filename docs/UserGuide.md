@@ -76,28 +76,43 @@ Format: `help`
 
 Adds a person to the address book. People with same names are allowed.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy d/o Crowe t/boss e/betsycrowe@example.com a/Jurong West Street p/+651234567 t/golf`
-* `add n/Mary Jane t/client p/+651234567`
+* `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01 i/high age/33`
+* `add n/Betsy d/o Crowe t/boss e/betsycrowe@example.com a/Jurong West Street p/+651234567 t/golf i/MID age/56`
+* `add n/Mary Jane t/client p/+651234567 i/low age/24`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. The list can be optionally sorted by specified fields.
 
-Format: `list`
+Format: `list [s/SORT_FIELD] [r/]`
+
+Parameters:
+* `s/SORT_FIELD`: The field to sort by. Valid values are `name`, `email`, `income`, or `age`. If not provided, no sorting will be applied.
+* `r/`: If present, the sort order will be reversed (descending). If not present, the sort order will be ascending.
+
+Examples:
+* `list`: Lists all persons without any sorting.
+* `list s/name`: Lists all persons sorted by name in ascending order.
+* `list s/email r/`: Lists all persons sorted by email in descending order.
+* `list s/income`: Lists all persons sorted by income in ascending order.
+* `list s/age r/`: Lists all persons sorted by age in descending order.
+
+Notes:
+* If `s/SORT_FIELD` is provided without `r/`, the list will be sorted in ascending order.
+* If `r/` is provided without `s/SORT_FIELD`, it will have no effect.
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -134,23 +149,25 @@ Examples:
 
 Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
 
-Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG...`
+Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG... i/INCOME_GROUP... age/AGE_CRITERIA...`
 
 Parameters:
-* p/PHONE: The phone number criteria to filter by.
-* e/EMAIL: The email criteria to filter by.
-* a/ADDRESS: The address criteria to filter by.
-* t/TAG...: The tags to filter by.
+* `p/PHONE`: The phone number criteria to filter by.
+* `e/EMAIL`: The email criteria to filter by.
+* `a/ADDRESS`: The address criteria to filter by.
+* `t/TAG...`: The tags to filter by.
+* `i/INCOME_GROUP...`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high`.
+* `age/AGE_CRITERIA...`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria, it checks if all age criteria are satisfied.
 
-Examples:
-* `filter p/+65 e/example.com a/Clementi t/Inactive`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, and have the tag Inactive.
-* `filter p/987 e/johndoe@example.com a/Street`: Filters the list to include all persons whose phone number contains `987`, email is `johndoe@example.com`, and address contains `Street`.
+**Examples**:
+* `filter p/+65 e/example.com a/Clementi t/Inactive i/low age/>20 <60`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, have the tag `Inactive`, belong to the `low` income group, and are aged between 21 and 59.
+* `filter p/987 e/johndoe@example.com a/Street i/medium high age/30`: Filters the list to include all persons whose phone number contains `987`, email is `johndoe@example.com`, address contains `Street`, belong to either the `medium` or `high` income group, and are exactly 30 years old.
 
-Notes:
-* At least one of p/PHONE, e/EMAIL, or a/ADDRESS must be provided.
-* Multiple criteria for phone, email, address and tags can be specified, separated by spaces.
+**Notes**:
+* At least one of `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `i/INCOME_GROUP`, `age/AGE_CRITERIA` or `t/TAG...` must be provided.
+* Multiple criteria for phone, email, address, tags, income group, and age can be specified, separated by spaces.
 * The criteria for phone, email, and address are case-insensitive and can be partial matches.
-* The criteria for tags only checks for exact matches.
+* The criteria for tags and income group only checks for exact matches.
 
 ### Deleting a person : `delete`
 
@@ -183,6 +200,19 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Command History : `↑` `↓` 
+Allows users to quickly access previously entered commands without retyping them using arrow keys.
+
+Format: `↑` or `↓`
+
+- Up Arrow `↑`: Displays the last command you entered. Press multiple times to view older commands in reverse order.
+- Down Arrow `↓`: Moves forward through the command history, displaying newer commands. Once you reach the most recent 
+command, pressing `↓` again will clear the command box.
+
+Examples:
+- `↑` : Retrieve previous command in the command box.
+- `↓` : Retrieve next command in the command box.
 
 ### Exiting the program : `exit`
 
@@ -229,7 +259,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`

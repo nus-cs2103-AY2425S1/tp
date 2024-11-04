@@ -91,11 +91,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagrams below illustrate the interactions within the `Logic` component, taking `execute("delete 1")` and `execute("filter age/>20 <60")` API call as examples.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+![Interactions Inside the Logic Component for the `filter age/>20 <60` Command](images/FilterSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for `DeleteCommandParser` and `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines continue till the end of diagram.
 </div>
 
 How the `Logic` component works:
@@ -432,6 +434,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The search result or list is empty.
 
   Use case ends.
+
+**Use case: Filter persons**
+
+**MSS**
+
+1. User requests to filter persons by multiple criteria.
+2. AddressBook shows a list of persons that match the criteria.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given criteria is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The filter result or list is empty.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 

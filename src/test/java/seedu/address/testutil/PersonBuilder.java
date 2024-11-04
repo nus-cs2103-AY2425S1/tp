@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -22,6 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTES = "";
+    public static final String DEFAULT_INCOME = "low";
+    public static final String DEFAULT_AGE = "21";
 
     private Name name;
     private Phone phone;
@@ -29,6 +33,8 @@ public class PersonBuilder {
     private Address address;
     private Notes notes;
     private Set<Tag> tags;
+    private Income income;
+    private Age age;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +46,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         notes = Notes.createEmpty();
         tags = new HashSet<>();
+        income = new Income(DEFAULT_INCOME);
+        age = new Age(DEFAULT_AGE);
     }
 
     /**
@@ -52,6 +60,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         notes = personToCopy.getNotes();
         tags = new HashSet<>(personToCopy.getTags());
+        income = personToCopy.getIncome();
+        age = personToCopy.getAge();
     }
 
     /**
@@ -126,8 +136,40 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Income} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIncome(String income) {
+        this.income = new Income(income);
+        return this;
+    }
+
+    /**
+     * Sets an empty {@code Income} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmptyIncome() {
+        this.income = Income.createEmpty();
+        return this;
+    }
+
+    /**
+     * Sets the {@code Age} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAge(String age) {
+        this.age = new Age(age);
+        return this;
+    }
+
+    /**
+     * Sets an empty {@code Age} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmptyAge() {
+        this.age = Age.createEmpty();
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, notes, tags);
+        return new Person(name, phone, email, address, notes, tags, income, age);
     }
 
 }

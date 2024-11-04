@@ -31,7 +31,7 @@ public class ListCommand extends Command {
     /**
      * Constructs a new ListCommand with specified sorting parameters.
      *
-     * @param sortField The field to sort by. Valid values are "firstname", "lastname", or "email".
+     * @param sortField The field to sort by. Valid values are "name","email", "income", or "age".
      *                  If null, no sorting will be applied.
      * @param isReverse If true, the sort order will be reversed (descending).
      *                  If false, the sort order will be ascending.
@@ -66,6 +66,10 @@ public class ListCommand extends Command {
             return Comparator.comparing(person -> person.getName().fullName);
         case "email":
             return Comparator.comparing(person -> person.getEmail().value);
+        case "income":
+            return Comparator.comparing(person -> person.getIncome().value);
+        case "age":
+            return Comparator.comparing(person -> person.getAge().value);
         default:
             throw new CommandException(MESSAGE_INVALID_SORT_FIELD);
         }

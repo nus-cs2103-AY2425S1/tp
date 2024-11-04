@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -25,11 +27,15 @@ public class FilterCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_INCOME + "INCOME GROUP "
+            + PREFIX_AGE + "AGE     "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "+65"
             + PREFIX_EMAIL + "example.com "
             + PREFIX_ADDRESS + "Clementi"
+            + PREFIX_INCOME + "low"
+            + PREFIX_AGE + "24"
             + PREFIX_TAG + "Inactive";
 
     private final PersonMeetsCriteriaPredicate predicate;

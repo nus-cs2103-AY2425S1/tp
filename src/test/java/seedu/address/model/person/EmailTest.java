@@ -75,7 +75,7 @@ public class EmailTest {
 
         assertEquals(email.toString(), "<REPRESENTATION FOR EMPTY EMAIL>");
 
-        assertEquals(email.getValueForUI(), "No email provided");
+        assertEquals(email.getValueForUi(), "No email provided");
     }
 
     @Test

@@ -59,6 +59,22 @@ public class ListCommandTest {
     }
 
     @Test
+    public void execute_listSortedByIncome_success() {
+        ListCommand listCommand = new ListCommand("income", false);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> person.getIncome().value));
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listSortedByAge_success() {
+        ListCommand listCommand = new ListCommand("age", false);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> person.getAge().value));
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
     public void execute_listSortedByNameReversed_success() {
         ListCommand listCommand = new ListCommand("name", true);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -74,6 +90,26 @@ public class ListCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.sortFilteredPersonList(
             Comparator.comparing((Person person) -> person.getEmail().value).reversed()
+        );
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listSortedByIncomeReversed_success() {
+        ListCommand listCommand = new ListCommand("income", true);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.sortFilteredPersonList(
+            Comparator.comparing((Person person) -> person.getIncome().value).reversed()
+        );
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listSortedByAgeReversed_success() {
+        ListCommand listCommand = new ListCommand("age", true);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.sortFilteredPersonList(
+            Comparator.comparing((Person person) -> person.getAge().value).reversed()
         );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }

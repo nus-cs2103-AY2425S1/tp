@@ -16,6 +16,8 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
     private final List<String> phoneCriteria;
     private final List<String> emailCriteria;
     private final List<String> addressCriteria;
+    private final List<String> incomeCriteria;
+    private final List<String> ageCriteria;
     private final Set<Tag> tags;
 
     /**
@@ -30,10 +32,14 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
         List<String> phoneCriteria,
         List<String> emailCriteria,
         List<String> addressCriteria,
+        List<String> incomeCriteria,
+        List<String> ageCriteria,
         Set<Tag> tags) {
         this.phoneCriteria = phoneCriteria;
         this.emailCriteria = emailCriteria;
         this.addressCriteria = addressCriteria;
+        this.incomeCriteria = incomeCriteria;
+        this.ageCriteria = ageCriteria;
         this.tags = tags;
     }
 
@@ -43,6 +49,8 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
         boolean tagsMatch = person.getTags().containsAll(tags);
         boolean emailMatch = true;
         boolean addressMatch = true;
+        boolean incomeMatch = true;
+        boolean ageMatch = true;
 
         if (!phoneCriteria.isEmpty()) {
             phoneMatch = phoneCriteria.stream()
@@ -59,7 +67,26 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
                 .anyMatch(searchTerm -> StringUtil.containsSubstringIgnoreCase(person.getAddress().value, searchTerm));
         }
 
-        return phoneMatch && emailMatch && addressMatch && tagsMatch;
+        if (!incomeCriteria.isEmpty() && !person.getIncome().isEmpty()) {
+            incomeMatch = incomeCriteria.stream()
+                .anyMatch(searchTerm ->
+                    StringUtil.containsSubstringIgnoreCase(person.getIncome().toString(), searchTerm));
+        }
+
+        if (!ageCriteria.isEmpty() && !person.getAge().isEmpty()) {
+            ageMatch = ageCriteria.stream()
+                .allMatch(searchTerm -> {
+                    if (searchTerm.charAt(0) == '>') {
+                        return person.getAge().value > Integer.parseInt(searchTerm.substring(1));
+                    } else if (searchTerm.charAt(0) == '<') {
+                        return person.getAge().value < Integer.parseInt(searchTerm.substring(1));
+                    } else {
+                        return person.getAge().value == Integer.parseInt(searchTerm);
+                    }
+                });
+        }
+
+        return phoneMatch && emailMatch && addressMatch && incomeMatch && ageMatch && tagsMatch;
     }
 
     @Override
@@ -76,6 +103,8 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
         return phoneCriteria.equals(otherPersonMeetsCriteriaPredicate.phoneCriteria)
             && emailCriteria.equals(otherPersonMeetsCriteriaPredicate.emailCriteria)
             && addressCriteria.equals(otherPersonMeetsCriteriaPredicate.addressCriteria)
+            && incomeCriteria.equals(otherPersonMeetsCriteriaPredicate.incomeCriteria)
+            && ageCriteria.equals(otherPersonMeetsCriteriaPredicate.ageCriteria)
             && tags.equals(otherPersonMeetsCriteriaPredicate.tags);
     }
 
@@ -85,6 +114,8 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
             .add("phone", phoneCriteria)
             .add("email", emailCriteria)
             .add("address", addressCriteria)
+            .add("income", incomeCriteria)
+            .add("age", ageCriteria)
             .add("tags", tags).toString();
     }
 }

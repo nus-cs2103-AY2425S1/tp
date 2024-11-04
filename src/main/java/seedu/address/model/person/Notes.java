@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Notes implements OptionalField {
     public static final String MESSAGE_CONSTRAINTS = "Notes can take any values, and can be empty";
-    public static final String EMPTY_FIELD_FORMAT = "%EMPTY-FIELD%";
 
     public final String value;
 
@@ -25,11 +24,7 @@ public class Notes implements OptionalField {
     public Notes(String notes) {
         requireNonNull(notes);
         checkArgument(isValidNotes(notes), MESSAGE_CONSTRAINTS);
-        if (notes.equals(EMPTY_FIELD_FORMAT)) {
-            value = "";
-        } else {
-            value = notes.trim();
-        }
+        value = notes.trim();
     }
 
     /**
@@ -60,7 +55,7 @@ public class Notes implements OptionalField {
             return false;
         }
         Notes otherNotes = (Notes) other;
-        // Treat empty string and EMPTY_FIELD_FORMAT as equivalent
+        // Treat empty notes as equivalent
         if (this.isEmpty() && otherNotes.isEmpty()) {
             return true;
         }
@@ -74,11 +69,11 @@ public class Notes implements OptionalField {
 
     @Override
     public boolean isEmpty() {
-        return value.isEmpty() || value.equals(EMPTY_FIELD_FORMAT);
+        return value.isBlank();
     }
 
     @Override
-    public String getValueForUI() {
+    public String getValueForUi() {
         return isEmpty() ? "No" : "Yes";
     }
 }

@@ -41,6 +41,10 @@
         <ImageView fx:id="emailIcon" fitHeight="13" fitWidth="13" pickOnBounds="true" preserveRatio="true"/>
         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       </HBox>
+      <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <ImageView fx:id="incomeIcon" fitHeight="13" fitWidth="13" pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="income" styleClass="cell_small_label" text="\$income" />
+      </HBox>
     </VBox>
     <FlowPane fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="TOP_RIGHT" prefWidth="10">
       <padding>

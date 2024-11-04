@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -91,19 +93,25 @@ public class AddressBookParserTest {
         String phoneCriteria = "+65";
         String emailCriteria = "example.com";
         String addressCriteria = "Clementi";
+        String incomeCriteria = "low";
+        String ageCriteria = ">25";
         String tagCriteria = "Inactive";
 
-        String userInput = String.format("%s %s%s %s%s %s%s %s%s",
+        String userInput = String.format("%s %s%s %s%s %s%s %s%s %s%s %s%s",
                 FilterCommand.COMMAND_WORD,
                 PREFIX_PHONE, phoneCriteria,
                 PREFIX_EMAIL, emailCriteria,
                 PREFIX_ADDRESS, addressCriteria,
+                PREFIX_INCOME, incomeCriteria,
+                PREFIX_AGE, ageCriteria,
                 PREFIX_TAG, tagCriteria);
 
         PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
                 Arrays.asList(phoneCriteria),
                 Arrays.asList(emailCriteria),
                 Arrays.asList(addressCriteria),
+                Arrays.asList(incomeCriteria),
+                Arrays.asList(ageCriteria),
                 new HashSet<>(Arrays.asList(new Tag(tagCriteria)))
         );
 

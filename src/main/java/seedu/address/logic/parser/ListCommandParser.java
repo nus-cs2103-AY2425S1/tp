@@ -24,7 +24,8 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         if (argMultimap.getValue(PREFIX_SORT).isPresent()) {
             sortField = argMultimap.getValue(PREFIX_SORT).get();
-            if (!sortField.equals("name") && !sortField.equals("email")) {
+            if (!sortField.equals("name") && !sortField.equals("email")
+                && !sortField.equals("income") && !sortField.equals("age")) {
                 throw new ParseException(ListCommand.MESSAGE_INVALID_SORT_FIELD);
             }
         }
