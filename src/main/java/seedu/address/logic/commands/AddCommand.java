@@ -59,7 +59,7 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
 
-        if (toAdd.wardContainsSpecialCharacters()) {
+        if (toAdd.hasSpecialCharactersInWard()) {
             return new CommandResult(String.format(Ward.WARNING_SPECIAL_CHARACTER
                     + MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {

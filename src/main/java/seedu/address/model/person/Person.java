@@ -148,7 +148,7 @@ public class Person {
     /**
      * Returns true if the ward contains at least one non-alphanumeric character.
      */
-    public boolean wardContainsSpecialCharacters() {
+    public boolean hasSpecialCharactersInWard() {
         return ward.containsSpecialChar();
     }
 
