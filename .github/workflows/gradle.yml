@@ -42,11 +42,13 @@ jobs:
       - name: Upload tests artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: 'test'
           path: 'build/reports/tests/test'
 
       - name: Upload checkstyle artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: 'checkstyle'
           path: 'build/reports/checkstyle'
 
       - name: Deploy to GitHub Pages
