@@ -26,11 +26,11 @@ public class EditClaimCommandParserTest {
     public void parse_validArgs_returnsEditClaimCommand() throws Exception {
         // Example of valid input
         String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "2 "
-                + PREFIX_CLAIM_STATUS + "approved " + PREFIX_CLAIM_DESC + "Updated claim details.";
+                + PREFIX_CLAIM_STATUS + "approved " + PREFIX_CLAIM_DESC + "Updated claim details";
 
         EditClaimDescriptor descriptor = new EditClaimDescriptor();
         descriptor.setStatus(ClaimStatus.APPROVED);
-        descriptor.setDescription("Updated claim details.");
+        descriptor.setDescription("Updated claim details");
 
         EditClaimCommand expectedCommand = new EditClaimCommand(
                 Index.fromOneBased(1), PolicyType.HEALTH, Index.fromOneBased(2), descriptor);
