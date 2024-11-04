@@ -23,8 +23,8 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_JOB = "Jobs list contains duplicate job(s)";
     public static final String MESSAGE_DUPLICATE_COMPANY = "Company list contains duplicate companies";
+    public static final String MESSAGE_DUPLICATE_JOB = "Job list contains duplicate jobs";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedJob> jobs = new ArrayList<>();

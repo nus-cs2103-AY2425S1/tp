@@ -75,7 +75,7 @@ public class SampleDataUtil {
                 new JobDescription(
                         "As a software engineer, you will work on a specific project critical to Google’s needs with "
                         + "opportunities to switch teams and projects as you and our fast-paced business grow and "
-                        + "evolve. "),
+                        + "evolve."),
                 getRequirements("Go", "Kubernetes", "Docker", "5YOE")
         ), new Job(
                 new Name("Software Engineering Manager II, YouTube"),
@@ -83,13 +83,13 @@ public class SampleDataUtil {
                 new JobSalary("200"),
                 new JobDescription(
                         "As a Software Engineering Manager you manage your project goals, contribute to product "
-                        + "strategy and help develop your team. "),
+                        + "strategy and help develop your team."),
                 getRequirements("Leadership", "AGILE", "SDLC", "CICD")
         ), new Job(
                 new Name("Test Job"),
                 new JobCompany("Test Company"),
                 new JobSalary("300"),
-                new JobDescription(null),
+                new JobDescription("Test Description"),
                 getRequirements("TestRequirements")
         )};
     }
@@ -105,6 +105,11 @@ public class SampleDataUtil {
                 new Address("9 Straits View, Marina One, Singapore 018937"),
                 new BillingDate("2"),
                 new Phone("12345678")
+        ), new Company(
+                new Name("Starbucks"),
+                new Address("230 Victoria Street 01-106 Bugis Junction, 188021"),
+                new BillingDate("25"),
+                new Phone("69101099")
         ), new Company(
                 new Name("Test Company"),
                 new Address("23 Church St, #10-01, Singapore 049481"),

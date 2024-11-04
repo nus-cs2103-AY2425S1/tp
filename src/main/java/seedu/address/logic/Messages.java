@@ -69,10 +69,10 @@ public class Messages {
                 .append(job.getCompany())
                 .append("; Salary: ")
                 .append(job.getSalary())
-                .append("; Requirements: ")
-                .append(job.getRequirements())
                 .append("; Description: ")
-                .append(job.getDescription());
+                .append(job.getDescription())
+                .append("; Requirements: ");
+        job.getRequirements().forEach(builder::append);
         return builder.toString();
     }
 
