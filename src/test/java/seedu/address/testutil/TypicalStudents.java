@@ -8,8 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AMY;
@@ -39,7 +37,6 @@ public class TypicalStudents {
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withLessonTime("tue:12:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -50,7 +47,6 @@ public class TypicalStudents {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withLessonTime("sun:22:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -61,7 +57,6 @@ public class TypicalStudents {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
-            .withLessonTime("mon:22:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -71,7 +66,6 @@ public class TypicalStudents {
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
-            .withLessonTime("sun:22:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -82,7 +76,6 @@ public class TypicalStudents {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
-            .withLessonTime("thu:00:59")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -92,7 +85,6 @@ public class TypicalStudents {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
-            .withLessonTime("sat:19:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -102,7 +94,6 @@ public class TypicalStudents {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
-            .withLessonTime("fri:23:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -112,7 +103,6 @@ public class TypicalStudents {
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india")
-            .withLessonTime("sat:12:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -120,7 +110,6 @@ public class TypicalStudents {
             .withParentEmail("testparent@example.com").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
-            .withLessonTime("mon:14:00")
             .withEducation("Primary")
             .withGrade("0")
             .withParentName("Test parent")
@@ -130,14 +119,14 @@ public class TypicalStudents {
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
-            .withLessonTime(VALID_LESSON_TIME_AMY).withEducation(VALID_EDUCATION_AMY).withGrade(VALID_GRADE_AMY)
+            .withEducation(VALID_EDUCATION_AMY).withGrade(VALID_GRADE_AMY)
             .withParentName(VALID_PARENT_NAME_AMY).withParentPhone(VALID_PARENT_PHONE_AMY)
             .withParentEmail(VALID_PARENT_EMAIL_AMY).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withLessonTime(VALID_LESSON_TIME_BOB).withEducation(VALID_EDUCATION_BOB).withGrade(VALID_GRADE_BOB)
-            .withParentName(VALID_PARENT_NAME_BOB).withParentPhone(VALID_PARENT_PHONE_BOB)
-            .withParentEmail(VALID_PARENT_EMAIL_BOB).build();
+            .withEducation(VALID_EDUCATION_BOB).withGrade(VALID_GRADE_BOB).withParentName(VALID_PARENT_NAME_BOB)
+            .withParentPhone(VALID_PARENT_PHONE_BOB).withParentEmail(VALID_PARENT_EMAIL_BOB)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

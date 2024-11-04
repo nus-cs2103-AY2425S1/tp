@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
@@ -39,7 +38,6 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
-        sb.append(PREFIX_LESSON_TIME + student.getLessonTime().value + " ");
         sb.append(PREFIX_EDUCATION + student.getEducation().educationLevel + " ");
         sb.append(PREFIX_PARENT_NAME + student.getParentName().fullName + " ");
         sb.append(PREFIX_PARENT_PHONE + student.getParentPhone().value + " ");
