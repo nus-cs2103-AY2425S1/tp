@@ -35,10 +35,8 @@ public class EditNotesCommand extends Command {
     private final Note note;
 
     /**
-     * @param personIndex of the person in the filtered person list to edit the
-     *                    notes
-     * @param noteIndex   of the person in the filtered person list to edit the
-     *                    notes
+     * @param personIndex of the person in the filtered person list to edit the notes
+     * @param noteIndex   of the person in the filtered person list to edit the notes
      * @param note        of the person to be updated to
      */
     public EditNotesCommand(Index personIndex, Index noteIndex, Note note) {
@@ -79,8 +77,7 @@ public class EditNotesCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message the remark is added to or
-     * removed from
+     * Generates a command execution success message the remark is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {

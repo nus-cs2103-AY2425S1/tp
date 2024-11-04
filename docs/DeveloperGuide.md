@@ -289,7 +289,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -323,6 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
+| `*`      | user             | use my previous command quickly                                             | avoid retyping a command                                               |
 
 ### Use cases
 
@@ -567,10 +568,11 @@ _Similar to UC10 except without extension 2b._
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  The system should be developed in a modular way for easier updates and bug fixes.
-4.  The system should ensure data consistency accross all instances.
+4.  The system should ensure data consistency across all instances.
 5.  The system should continue functioning in the event of a missing or corrupted save file.
 6.  The system should encrypt sensitive data to follow data protection laws.
 7.  The interface should be intuitive and easy to use.
+8.  The system should allow the user to easily populate their previous command.
 
 _{More to be added}_
 
