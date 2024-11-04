@@ -71,7 +71,7 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a table of commands with their respective descriptions and a link to the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -149,8 +149,8 @@ Finds contacts whose names or/and phone numbers or/and address contain any of th
 
 Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 
-**NOTE:** At least one field MUST be provided  
-  e.g. `find n/Hans` or `find p/82345678` or `find a/wall street` will work  
+**NOTE:** At least one field MUST be provided
+  e.g. `find n/Hans` or `find p/82345678` or `find a/wall street` will work
   e.g. `find Hans` or `find wall street` or `find` will fail
 * The search is case-insensitive. e.g `hans` will match `Hans` or `wall Street` will match `Wall Street`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -162,7 +162,7 @@ Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/alex david'](images/findAlexDavidResult.png) 
+  ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 * `find p/87438807 91031282` returns `Alex Yeoh`, `David Li`
 * `find a/serangoon` returns `David Li`
 * `find n/alex p/87438807 a/geylang` returns `Alex Yeoh`
@@ -184,7 +184,7 @@ Examples:
 
 ### Adding remarks to person : `remark`
 
-Add remarks to an existing person in the address book. 
+Add remarks to an existing person in the address book.
 
 Format: `remark INDEX r/REMARK`
 
@@ -251,7 +251,7 @@ _Details coming soon ..._
 
 ### Phone
 * Phone numbers can only contain 8 numbers, and must begin with a 6, 8, or 9.
-* Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523). 
+* Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523).
 * Spaces in unusual locations will render the phone number invalid (eg. 912 34523).
 
 --------------------------------------------------------------------------------------------------------------------
