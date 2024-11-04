@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderListByIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
@@ -19,30 +21,32 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
+import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.Person;
 
 public class UnmarkOrderCommandTest {
 
     private Model model;
+    private Person personToUnmarkOrderUnder;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        Person personToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+        personToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
         model.updateSelectedPerson(personToUnmarkOrderUnder);
     }
 
     @Test
-    public void execute_validIndexOrderList_success() {
+    public void execute_validIndexUnfilteredOrderList_success() {
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_SECOND_ORDER);
 
         Model expectedModel = model.createCopy();
-        Order orderToBeUnmarked = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased())
-                .getOrderList().get(INDEX_SECOND_ORDER.getZeroBased());
-        Order unmarkedOrder = UnmarkOrderCommand.createUnmarkedOrder(orderToBeUnmarked);
+        Order orderToBeUnmarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_SECOND_ORDER);
+        Order unmarkedOrder = UnmarkOrderCommand.createUnmarkedOrder(orderToBeUnmarkedInUnfilteredList);
 
-        expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased()).getOrderList()
-                .setOrder(orderToBeUnmarked, unmarkedOrder);
+        getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON)
+                .setOrder(orderToBeUnmarkedInUnfilteredList, unmarkedOrder);
         String expectedMessage = String.format(UnmarkOrderCommand.MESSAGE_UNMARK_ORDER_SUCCESS,
                 Messages.format(unmarkedOrder));
 
@@ -50,10 +54,34 @@ public class UnmarkOrderCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexOrderList_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        model.updateSelectedPerson(person);
-        Index outOfBoundIndex = Index.fromOneBased(person.getOrderList().size() + 1);
+    public void execute_validIndexFilteredOrderList_success() {
+        personToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
+
+        Model expectedModel = model.createCopy();
+        Order orderToBeUnmarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
+        Order unmarkedOrder = UnmarkOrderCommand.createUnmarkedOrder(orderToBeUnmarkedInUnfilteredList);
+
+        getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON)
+                .setOrder(orderToBeUnmarkedInUnfilteredList, unmarkedOrder);
+        String expectedMessage = String.format(UnmarkOrderCommand.MESSAGE_UNMARK_ORDER_SUCCESS,
+                Messages.format(unmarkedOrder));
+
+        assertCommandSuccess(unmarkOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredOrderList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(outOfBoundIndex);
+
+        assertCommandFailure(unmarkOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        personToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(unmarkOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
