@@ -121,8 +121,8 @@ public class MarkLessonParticipationCommandTest {
         MarkLessonParticipationCommand command2 = new MarkLessonParticipationCommand(
                 VALID_INDEX, List.of(ALICE.getName()), 101);
 
-        assertThrows(CommandException.class, () -> command.execute(model));
-        assertThrows(CommandException.class, () -> command2.execute(model));
+        assertThrows(AssertionError.class, () -> command.execute(model));
+        assertThrows(AssertionError.class, () -> command2.execute(model));
     }
 
     @Test

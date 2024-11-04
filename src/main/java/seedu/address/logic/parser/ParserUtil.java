@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.lesson.MarkLessonParticipationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.course.Course;
 import seedu.address.model.datetime.Date;
@@ -24,7 +25,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_ATTENDANCE =
             "Invalid attendance entry. Please enter 1/Y/y for yes and 0/N/n for no.";
-    public static final String MESSAGE_INVALID_POINTS = "Points must be an integer between -2147483548 and 2147483647.";
+    public static final String MESSAGE_INVALID_PARTICIPATION =
+            "Participation should be between 0-100 inclusive.";
 
     /**
      * Parses a {@code String date} into a {@code Date}.
@@ -179,10 +181,15 @@ public class ParserUtil {
     public static int parsePoints(String points) throws ParseException {
         requireNonNull(points);
         String trimmedPoints = points.trim();
+        int participationPoints = -1; // default invalid number
         try {
-            return Integer.parseInt(trimmedPoints);
+            participationPoints = Integer.parseInt(trimmedPoints);
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_POINTS);
+            throw new ParseException(MESSAGE_INVALID_PARTICIPATION);
         }
+        if (!MarkLessonParticipationCommand.isValidParticipation(participationPoints)) {
+            throw new ParseException(MESSAGE_INVALID_PARTICIPATION);
+        }
+        return participationPoints;
     }
 }

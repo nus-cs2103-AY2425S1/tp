@@ -42,8 +42,6 @@ public class MarkLessonParticipationCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Marked the participation of %s as %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_ADDRESS_BOOK = "Student not found in TAHub: %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_LESSON = "Student not found in the lesson: %s";
-    public static final String MESSAGE_INVALID_PARTICIPATION =
-            "Participation should be between 0-100 inclusive.";
 
     private final Index index;
     private final List<Name> studentNames;
@@ -62,6 +60,13 @@ public class MarkLessonParticipationCommand extends Command {
         this.participationScore = participationScore;
     }
 
+    /**
+     * Returns true if the participation score is valid, defined as being within the bounds.
+     */
+    public static boolean isValidParticipation(int score) {
+        return LOWER_BOUND <= score && score <= UPPER_BOUND;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -72,9 +77,8 @@ public class MarkLessonParticipationCommand extends Command {
             throw new CommandException(String.format(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX, index.getOneBased()));
         }
 
-        if (!isWithinBounds(participationScore)) {
-            throw new CommandException(MESSAGE_INVALID_PARTICIPATION);
-        }
+        // this should have been checked in the parser
+        assert MarkLessonParticipationCommand.isValidParticipation(participationScore);
 
         Lesson targetLesson = lastShownLessonList.get(index.getZeroBased());
         Lesson newLesson = new Lesson(targetLesson);
@@ -100,13 +104,6 @@ public class MarkLessonParticipationCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, names, participationScore),
                 COMMAND_TYPE);
-    }
-
-    /**
-     * Returns true if the participation score is valid, defined as being within the bounds.
-     */
-    private boolean isWithinBounds(int score) {
-        return LOWER_BOUND <= score && score <= UPPER_BOUND;
     }
 
     @Override
