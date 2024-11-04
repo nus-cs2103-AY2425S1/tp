@@ -8,6 +8,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -32,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PersonListPanel allPersonListPanel;
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -69,6 +72,28 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        logic.getSearchMode().addListener((observable, oldValue, newValue) -> updateUiBasedOnSearchMode(newValue));
+
+    }
+
+    private void updateUiBasedOnSearchMode(boolean isSearchMode) {
+        HBox hbox = new HBox();
+        HBox.setHgrow(hbox, Priority.ALWAYS);
+        hbox.setPrefWidth(personListPanelPlaceholder.getWidth());
+        hbox.setPrefHeight(personListPanelPlaceholder.getHeight());
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        HBox.setHgrow(personListPanel.getRoot(), Priority.ALWAYS);
+        hbox.getChildren().add(personListPanel.getRoot());
+
+        if (isSearchMode) {
+            allPersonListPanel = new PersonListPanel(logic.getAllPersons());
+            HBox.setHgrow(allPersonListPanel.getRoot(), Priority.ALWAYS);
+            hbox.getChildren().add(allPersonListPanel.getRoot());
+        }
+
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(hbox);
     }
 
     public Stage getPrimaryStage() {
@@ -113,8 +138,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        updateUiBasedOnSearchMode(logic.getSearchMode().get());
+        //        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        //        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        //        if (logic.getSearchMode()) {
+        //            allPersonListPanel = new PersonListPanel(logic.getAllPersons());
+        //            personListPanelPlaceholder.getChildren().add(allPersonListPanel.getRoot());
+        //        }
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
