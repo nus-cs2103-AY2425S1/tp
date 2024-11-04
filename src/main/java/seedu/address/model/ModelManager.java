@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.commons.util.DateUtil.getDisplayableDate;
+import static seedu.address.commons.util.DateUtil.getFilterDateString;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -135,8 +135,7 @@ public class ModelManager implements Model {
 
     @Override
     public String getFilteredAppointmentDate() {
-        String date = getDisplayableDate(filterPredicate.getDate());
-        return date == "null" ? "All" : date;
+        return getFilterDateString(filterPredicate.getDate());
     }
 
     @Override
@@ -163,9 +162,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAppointmentList(Predicate<Person> predicate) {
+    public void updateFilteredAppointmentList(AppointmentContainsDatePredicate predicate) {
         requireNonNull(predicate);
-        filterPredicate = (AppointmentContainsDatePredicate) predicate;
+        filterPredicate = predicate;
         filteredAppointments.setPredicate(predicate);
     }
 

@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,9 +23,7 @@ public class DateUtil {
      * @return String containing date in "dd MMMM yyyy" format
      */
     public static String getDisplayableDate(LocalDate date) {
-        if (date == null) {
-            return "null";
-        }
+        requireNonNull(date);
         return date.format(DATE_DISPLAY_FORMATTER);
     }
 
@@ -34,6 +34,28 @@ public class DateUtil {
      * @return String containing dateTime in "dd MMMM yyyy, hh:mm a" format
      */
     public static String getDisplayableDateTime(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
         return dateTime.format(DATE_TIME_DISPLAY_FORMATTER);
+    }
+
+    /**
+     * Check if date is current date
+     */
+    public static boolean isToday(LocalDate date) {
+        return date != null && date.equals(LocalDate.now());
+    }
+
+
+    /**
+     * Check date content for usage in appointment label
+     */
+    public static String getFilterDateString(LocalDate date) {
+        if (date == null) {
+            return "All";
+        } else if (isToday(date)) {
+            return "Today's";
+        } else {
+            return getDisplayableDate(date);
+        }
     }
 }
