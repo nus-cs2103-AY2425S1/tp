@@ -140,6 +140,7 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
     * Have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))<br>
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
+    * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
     * Only perfect matches returned
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
     * Can be used at most once e.g. `find n/Hans n/Bo` &rarr; invalid
@@ -193,8 +194,9 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <box type="warning" seamless>
 
-    **Caution:**
-    If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+    Caution:
+
+    If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
     Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -226,6 +228,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/Admin r/Vice President nn/jl`
+**Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`
 **List**   | `list`
 **Help**   | `help`
