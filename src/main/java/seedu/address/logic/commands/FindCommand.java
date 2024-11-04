@@ -27,10 +27,10 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive), and displays them as a list with index numbers.\n"
             + "Searching by goods categories is optional.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]... "
+            + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie "
-            + PREFIX_CATEGORY + "Consumables";
+            + PREFIX_CATEGORY + "CONSUMABLES";
 
     private final List<String> keywords;
     private final Set<GoodsCategories> categoriesSet;
