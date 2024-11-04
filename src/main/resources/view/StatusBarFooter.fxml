@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -9,11 +10,19 @@
     <ColumnConstraints percentWidth="50" minWidth="5"/>
     <ColumnConstraints percentWidth="50" minWidth="5"/>
   </columnConstraints>
-  <GridPane GridPane.columnIndex="0" style="-fx-padding: 5;">
-    <Label fx:id="addressBookSaveLocationStatus"/>
+  <padding>
+    <Insets top="3.0" bottom="3.0" left="6.0" right="6.0"/>
+  </padding>
+  <GridPane GridPane.columnIndex="0" alignment="CENTER_LEFT">
+    <padding>
+      <Insets left="15.0"/>
+    </padding>
+    <Label fx:id="addressBookSaveLocationStatus" styleClass="status-text"/>
   </GridPane>
-
-  <GridPane GridPane.columnIndex="1" style="-fx-padding: 5;">
-      <Label fx:id="appointmentBookSaveLocationStatus"/>
+  <GridPane GridPane.columnIndex="1" alignment="CENTER_LEFT">
+    <padding>
+      <Insets left="11.0"/>
+    </padding>
+    <Label fx:id="appointmentBookSaveLocationStatus" styleClass="status-text"/>
   </GridPane>
 </GridPane>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <Label styleClass="panel-label" stylesheets="@LightTheme.css" text="Appointments">
+   <Label styleClass="panel-label" stylesheets="@LightTheme.css" text="APPOINTMENTS">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
