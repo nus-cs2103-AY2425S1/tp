@@ -4,13 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's github account in the address book.
+ * Represents a Person's GitHub account in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidGithubUsername(String)}
  */
 public class Github {
     public static final String MESSAGE_CONSTRAINTS =
-            "Github usernames should only contain - and alphanumeric characters";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$";
+            "GitHub usernames can contain only alphanumeric characters and hyphens ('-').\n"
+                    + "Hyphens cannot appear at the start or end, nor consecutively within the username.\n"
+                    + "Length of GitHub usernames must be 1 and 39.\n"
+                    + "Refer to the user guide for more information.";
+
+    public static final String VALIDATION_REGEX = "^(?=.{1,39}$)[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$";
     public final String username;
 
     /**

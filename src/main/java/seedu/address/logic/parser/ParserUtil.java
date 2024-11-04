@@ -145,7 +145,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a GitHub {@code String username} into an {@code Github}.
+     * Parses a GitHub username into an {@code Github} instance.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code username} is invalid.
