@@ -21,15 +21,15 @@ public class WhitelistListCommand extends WhitelistCommand {
     public WhitelistListCommand() {
         // this is irrelevant but necessary
         super(Index.fromZeroBased(0), new ClientStatus("old"));
-
-        // the main predicate
-        // this.argPredToFail = argPredToFail;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        // here, the predicate dictates that the client status should be blacklisted;
+        // hence if the predicate fails (ensured by the ArgumentPredicateToFail object),
+        // the client is not blacklisted => they are whitelisted
         model.updateFilteredPersonList(ArgumentPredicateToFail.getNotBlacklistedPredicate());
 
         return new CommandResult(

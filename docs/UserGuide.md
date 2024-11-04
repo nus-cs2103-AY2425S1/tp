@@ -129,8 +129,8 @@ Examples:
 
 Allows updating of various statuses of an existing client.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
-[ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEADLINE]
+[t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * `NAME` Acceptable values are same as in add command
 * `PHONE_NUMBER` Acceptable values are same as in add command
@@ -160,7 +160,7 @@ The deadline field will show an `OVERDUE` label if the deadline has passed and t
 
 Finds persons in client list who match parameters specified.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * All values matched for any parameter are **case-insensitive**.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.

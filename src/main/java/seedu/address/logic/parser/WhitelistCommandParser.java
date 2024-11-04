@@ -43,17 +43,6 @@ public class WhitelistCommandParser implements Parser<WhitelistCommand> {
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
             if (preamble.equals("") && !argMultimap.getValue(PREFIX_CLIENT_STATUS).isPresent()) {
-                // Map<String, Object> parameterMap = new HashMap<>();
-
-                // parameterMap.put(ClientStatus.CLIENT_STATUS_KEY, new ClientStatus("blacklisted"));
-
-                // Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-                // parameterMap.put(Tag.TAG_KEY, tagList);
-
-                // here, the predicate dictates that the client status should be blacklisted;
-                // hence if the predicate fails (ensured by the ArgumentPredicateToFail object)
-                // the client is not blacklisted => they are whitelisted
-                // return new WhitelistListCommand(new ArgumentPredicateToFail(parameterMap));
                 return new WhitelistListCommand();
             } else {
                 throw new ParseException(
