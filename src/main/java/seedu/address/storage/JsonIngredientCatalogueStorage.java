@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.product.IngredientCatalogue;
@@ -13,6 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class JsonIngredientCatalogueStorage implements IngredientCatalogueStorage {
 
     private final Path filePath;
+    private static final Logger logger = LogsCenter.getLogger(JsonIngredientCatalogueStorage.class);
 
     public JsonIngredientCatalogueStorage(Path filePath) {
         this.filePath = filePath;
@@ -31,7 +34,8 @@ public class JsonIngredientCatalogueStorage implements IngredientCatalogueStorag
     @Override
     public Optional<IngredientCatalogue> readIngredientCatalogue(Path filePath) throws DataLoadingException {
         if (!Files.exists(filePath)) {
-            // If the file does not exist, create it and initialize with sample data
+            // Log here to confirm when the default sample data is used
+            logger.info("Ingredient catalogue file not found. Initializing with sample data.");
             IngredientCatalogue sampleCatalogue = SampleDataUtil.getSampleIngredientCatalogue();
             try {
                 saveIngredientCatalogue(sampleCatalogue, filePath);
@@ -42,6 +46,7 @@ public class JsonIngredientCatalogueStorage implements IngredientCatalogueStorag
         }
         return JsonUtil.readJsonFile(filePath, IngredientCatalogue.class);
     }
+
 
     @Override
     public void saveIngredientCatalogue(IngredientCatalogue ingredientCatalogue) throws IOException {

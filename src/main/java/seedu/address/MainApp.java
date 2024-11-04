@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,6 +22,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.SampleDataUtil;
@@ -89,25 +91,19 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        // Initialize IngredientCatalogue and PastryCatalogue
+        // Initialize IngredientCatalogue
         IngredientCatalogue ingredientCatalogue;
-        PastryCatalogue pastryCatalogue;
-
         try {
-            ingredientCatalogue = storage.readIngredientCatalogue().orElseGet(() -> {
-                logger.info("Ingredient catalogue file not found. Initializing with sample data.");
-                return SampleDataUtil.getSampleIngredientCatalogue();
-            });
+            ingredientCatalogue = storage.readIngredientCatalogue().orElseGet(SampleDataUtil::getSampleIngredientCatalogue);
         } catch (DataLoadingException e) {
             logger.warning("Could not load ingredient catalogue data. Using default sample catalogue.");
             ingredientCatalogue = SampleDataUtil.getSampleIngredientCatalogue();
         }
 
+        // Initialize PastryCatalogue
+        PastryCatalogue pastryCatalogue;
         try {
-            pastryCatalogue = storage.readPastryCatalogue().orElseGet(() -> {
-                logger.info("Pastry catalogue file not found. Initializing with sample data.");
-                return SampleDataUtil.getSamplePastryCatalogue();
-            });
+            pastryCatalogue = storage.readPastryCatalogue().orElseGet(SampleDataUtil::getSamplePastryCatalogue);
         } catch (DataLoadingException e) {
             logger.warning("Could not load pastry catalogue data. Using default sample catalogue.");
             pastryCatalogue = SampleDataUtil.getSamplePastryCatalogue();
@@ -116,6 +112,7 @@ public class MainApp extends Application {
         // Return the ModelManager with the loaded data
         return new ModelManager(initialData, userPrefs, ingredientCatalogue, pastryCatalogue, storage);
     }
+
 
 
 

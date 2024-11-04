@@ -172,11 +172,13 @@ public class ModelManager implements Model {
     @Override
     public void addPastry(Pastry pastry) {
         pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
-        try {
-            storage.savePastryCatalogue(pastryCatalogue); // Ensure catalogue is saved immediately
-            logger.info("Pastry catalogue saved successfully after adding pastry: " + pastry.getName());
-        } catch (IOException e) {
-            logger.warning("Failed to save pastry catalogue after adding pastry: " + e.getMessage());
+        if (storage != null) {
+            try {
+                storage.savePastryCatalogue(pastryCatalogue);
+                logger.info("Pastry catalogue saved successfully after adding pastry: " + pastry.getName());
+            } catch (IOException e) {
+                logger.warning("Failed to save pastry catalogue: " + e.getMessage());
+            }
         }
     }
 
@@ -191,6 +193,7 @@ public class ModelManager implements Model {
         if (storage != null) {
             try {
                 storage.saveIngredientCatalogue(ingredientCatalogue);
+                logger.info("Ingredient catalogue saved successfully after adding ingredient: " + ingredient.getName());
             } catch (IOException e) {
                 logger.warning("Failed to save ingredient catalogue: " + e.getMessage());
             }
