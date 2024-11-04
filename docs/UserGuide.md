@@ -220,7 +220,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Changing name of `Bob` to `Bobby`  
+      > **Use Case #1**: Changing name of `Bob` to `Bobby` 
       >
       > **Input**: `edit 1 n/Bobby`
       >
