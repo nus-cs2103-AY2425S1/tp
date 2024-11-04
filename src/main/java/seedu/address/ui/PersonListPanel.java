@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -8,6 +10,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
 /**
@@ -19,12 +22,14 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Person> personListView;
+    private Map<Event, ArrayList<Person>> personEventAssociationMap;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, Map<Event, ArrayList<Person>> personEventAssociationMap) {
         super(FXML);
+        this.personEventAssociationMap = personEventAssociationMap;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
@@ -41,9 +46,26 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                String eventName = findEventNameForPerson(person);
+                setGraphic(new PersonCard(person, getIndex() + 1, eventName).getRoot());
             }
         }
     }
 
+    /**
+     * Finds the event name associated with the given person.
+     */
+    private String findEventNameForPerson(Person person) {
+        for (Event event : personEventAssociationMap.keySet()) {
+            ArrayList<Person> persons = personEventAssociationMap.get(event);
+            if (persons != null && persons.contains(person)) {
+                return event.getEventName(); // Assuming Event has a getEventName() method
+            }
+        }
+        return "No Event";
+    }
+
+    public void refreshPersonListView() {
+        personListView.refresh();
+    }
 }

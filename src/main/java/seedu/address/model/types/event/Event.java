@@ -110,4 +110,7 @@ public class Event {
                 .toString();
     }
 
+    public String getEventName() {
+        return this.name.toString();
+    }
 }
