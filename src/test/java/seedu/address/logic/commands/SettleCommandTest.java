@@ -86,7 +86,8 @@ public class SettleCommandTest {
     @Test
     public void execute_invalidAmount_failure() {
         Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        SettleAmount invalidAmount = new SettleAmount(student.getOwedAmountValue() + 1.0); // More than what is owed
+        String amountString = Double.toString(student.getOwedAmountValue() + 1.0);
+        SettleAmount invalidAmount = new SettleAmount(amountString); // More than what is owed
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, invalidAmount);
 
         assertCommandFailure(settleCommand, model, SettleCommand.MESSAGE_INVALID_AMOUNT);
@@ -111,7 +112,8 @@ public class SettleCommandTest {
     @Test
     public void createUpdatedStudent_amountExceedsOwed_throwsCommandException() {
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        SettleAmount amountToSettle = new SettleAmount(studentToUpdate.getOwedAmountValue() + 10.0); // more than owed
+        String amountString = Double.toString(studentToUpdate.getOwedAmountValue() + 10.0);
+        SettleAmount amountToSettle = new SettleAmount(amountString); // more than owed
 
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
 
@@ -122,7 +124,9 @@ public class SettleCommandTest {
     @Test
     public void createUpdatedStudent_fullSettlement_updatesOwedToZero() throws Exception {
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        SettleAmount fullSettlementAmount = new SettleAmount(studentToUpdate.getOwedAmountValue());
+        String amountString = Double.toString(studentToUpdate.getOwedAmountValue());
+
+        SettleAmount fullSettlementAmount = new SettleAmount(amountString);
 
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, fullSettlementAmount);
         Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
@@ -136,7 +140,9 @@ public class SettleCommandTest {
     @Test
     public void createUpdatedStudent_partialSettlement_updatesCorrectly() throws Exception {
         Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        SettleAmount partialPayment = new SettleAmount(studentToUpdate.getOwedAmountValue() / 2);
+        String amountString = Double.toString(studentToUpdate.getOwedAmountValue() / 2);
+
+        SettleAmount partialPayment = new SettleAmount(amountString);
 
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, partialPayment);
         Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);

@@ -14,10 +14,6 @@ public class SettleAmount extends Fee {
         super(amount);
     }
 
-    public SettleAmount(double amount) {
-        super(Double.toString(amount));
-    }
-
     /**
      * Returns true if a given string is a valid settle amount.
      */
@@ -30,7 +26,19 @@ public class SettleAmount extends Fee {
         return settleAmount > 0 && settleAmount <= MAX_VALUE;
     }
 
-    public double getValue() {
-        return value;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SettleAmount)) {
+            return false;
+        }
+
+        SettleAmount otherSettleAmount = (SettleAmount) other;
+
+        return value == otherSettleAmount.value;
     }
+
 }

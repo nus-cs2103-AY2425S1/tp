@@ -115,7 +115,7 @@ public class SettleCommand extends Command {
 
         SettleCommand otherSettleCommand = (SettleCommand) other;
         return index.equals(otherSettleCommand.index)
-                && amount.value == otherSettleCommand.amount.value;
+                && amount.equals(otherSettleCommand.amount);
     }
 
     @Override

@@ -56,10 +56,11 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        SettleAmount amount = new SettleAmount("100.0"); // Example amount
+        double amount = 100.00;
+        SettleAmount settleAmount = new SettleAmount(Double.toString(amount));
         String userInput = INDEX_SECOND_STUDENT.getOneBased() + " " + PREFIX_AMOUNT + amount;
 
-        SettleCommand expectedCommand = new SettleCommand(INDEX_SECOND_STUDENT, amount);
+        SettleCommand expectedCommand = new SettleCommand(INDEX_SECOND_STUDENT, settleAmount);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
