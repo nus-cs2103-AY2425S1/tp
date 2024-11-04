@@ -42,8 +42,9 @@ public class TagCommandTest {
 
     @Test
     public void execute_addNewTagStudent_success() {
+        Tag newTag = new Tag("newTag");
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(new Tag("newTag"));
+        tagsToAdd.add(newTag);
 
         TagCommand addTagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
 
@@ -56,7 +57,8 @@ public class TagCommandTest {
 
         Person updatedPerson = new StudentBuilder((Student) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, newTag, updatedPerson);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
 
@@ -66,8 +68,9 @@ public class TagCommandTest {
 
     @Test
     public void execute_addNewTagCompany_success() {
+        Tag newTag = new Tag("newTag");
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(new Tag("newTag"));
+        tagsToAdd.add(newTag);
 
         TagCommand addTagCommand = new TagCommand(INDEX_FOURTH_PERSON, tagsToAdd);
 
@@ -80,7 +83,8 @@ public class TagCommandTest {
 
         Person updatedPerson = new CompanyBuilder((Company) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, newTag, updatedPerson);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
 
@@ -91,24 +95,30 @@ public class TagCommandTest {
     @Test
     public void execute_addDuplicateTag_failure() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
         Set<Tag> existingTags = personToEdit.getTags();
 
+        // Add duplicate tag
         Set<Tag> tagsToAdd = new HashSet<>(existingTags);
+        Tag duplicateTag = existingTags.iterator().next();
+        String duplicateTagName = duplicateTag.tagName;
 
-        String duplicateTagName = existingTags.iterator().next().tagName;
+        // Add duplicate tag with case-insensitivity
+        Tag upperDuplicateTag = new Tag(duplicateTagName.toUpperCase());
+        Set<Tag> upperTagsToAdd = Set.of(upperDuplicateTag);
 
         TagCommand addTagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        TagCommand upperAddTagCommand = new TagCommand(INDEX_FIRST_PERSON, upperTagsToAdd);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, duplicateTagName);
+        String expectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, duplicateTag);
+        String lowerExpectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, upperDuplicateTag);
 
         assertCommandFailure(addTagCommand, model, expectedMessage);
+        assertCommandFailure(upperAddTagCommand, model, lowerExpectedMessage);
     }
 
     @Test
     public void execute_invalidPersonIndex_failure() {
-        Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(new Tag("newTag"));
+        Set<Tag> tagsToAdd = Set.of(new Tag("newTag"));
 
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         TagCommand addTagCommand = new TagCommand(invalidIndex, tagsToAdd);
