@@ -120,12 +120,33 @@ Adds a person to KonTActs.
 A person can have any number of tags (including 0)
   </box>
 
+<box type="warning" icon=":fa-solid-circle-exclamation:" light>
+
+<md>**GitHub username restrictions**</md>
+* Length of username must between 1 and 39 characters
+* Can contain only alphanumeric characters and hyphens ('-').
+* Hyphens cannot appear at the start or end, nor consecutively within the username
+
+**Valid examples**
+
+`user123`, `user-name`, `username456`
+
+**Invalid examples**
+
+`very-mega-ultra-super-duper-long-username`, `-username`, `username-`, `user--name`, `username_with_special$chars`
+</box>
+
+
+
+
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 * `add n/John Doe p/98765432 e/johnd@example.com telegram/@john github/swag-john33`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 telegram/@Betsy t/criminal github/betsy-29`
 </box>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
