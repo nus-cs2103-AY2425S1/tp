@@ -30,6 +30,7 @@ public class StudentListPanel extends UiPart<Region> {
         studentListView.setCellFactory(listView -> new StudentListViewCell());
     }
 
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
