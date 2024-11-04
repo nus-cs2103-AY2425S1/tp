@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -212,7 +213,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredClients.equals(otherModelManager.filteredClients)
                 && clients.equals(otherModelManager.clients)
-                && visibleRentalInformationList.equals(otherModelManager.visibleRentalInformationList);
+                && visibleRentalInformationList.equals(otherModelManager.visibleRentalInformationList)
+                && Objects.equals(lastViewedClient.get(), otherModelManager.lastViewedClient.get());
     }
 
 }
