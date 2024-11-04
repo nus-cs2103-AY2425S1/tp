@@ -115,14 +115,15 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn p/PHONE_NUMBER amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
+Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
 
-* The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
+* The `INDEX` refers to the index of the person currently displayed in the address book panel.
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces.
 
+:bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
 :bulb: **Tip:** A person can have any number of categories (including 0)<br>
 :bulb: **Tip:** Positive Amount Transaction indicates someone owes <ins>_the user_</ins> an amount.<br>
