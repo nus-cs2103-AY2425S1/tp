@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -139,9 +140,11 @@ public class Person {
      * Removes the appointment of the given {@code appointment}.
      */
     public void removeAppointment(Schedule appointment) {
-        for (Schedule schedule : schedules) {
+        Iterator<Schedule> iterator = schedules.iterator();
+        while (iterator.hasNext()) {
+            Schedule schedule = iterator.next();
             if (schedule.equals(appointment)) {
-                schedules.remove(appointment);
+                iterator.remove();
                 break;
             }
         }
