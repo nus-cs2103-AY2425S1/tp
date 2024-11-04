@@ -187,10 +187,12 @@ public class ModelManager implements Model {
         for (Person person : allAppointmentsList) {
             LocalDateTime existingStart = person.getAppointmentStart();
             LocalDateTime existingEnd = person.getAppointmentEnd();
+
             boolean startsBeforeExistingEnds = newStart.isBefore(existingEnd);
             boolean endsAfterExistingStarts = newEnd.isAfter(existingStart);
             boolean startsAtSameTime = newStart.isEqual(existingStart);
             boolean endsAtSameTime = newEnd.isEqual(existingEnd);
+
             if ((startsBeforeExistingEnds && endsAfterExistingStarts) || startsAtSameTime || endsAtSameTime) {
                 return true;
             }
