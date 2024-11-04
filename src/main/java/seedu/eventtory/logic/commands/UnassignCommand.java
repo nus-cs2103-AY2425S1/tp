@@ -3,8 +3,8 @@ package seedu.eventtory.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import javafx.beans.value.ObservableValue;
 
+import javafx.beans.value.ObservableValue;
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
