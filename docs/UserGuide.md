@@ -41,7 +41,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.2.1 [Adding a Client](#5-2-1-adding-a-client-add)
         - 5.2.2 [Listing All Clients](#5-2-2-listing-all-clients-list)
         - 5.2.3 [Filtering Clients](#5-2-3-filtering-clients-find-client)
-        - 5.2.4 [Editing a Client’s Details](#5-2-4-editing-a-client's-details-edit)
+        - 5.2.4 [Editing a Client](#5-2-4-editing-a-client-edit)
         - 5.2.5 [Deleting a Client](#5-2-5-deleting-a-client-delete)
     - 5.3 [Policy Management Commands](#5-3-policy-management-commands)
         - 5.3.1 [Adding a Policy](#5-3-1-adding-a-policy-add-policy)
@@ -356,7 +356,7 @@ Examples:
                This means that if Prudy has 2 clients: <code>Alex</code> and <code>Bernice</code> given in that order, and you did <code>find-client n/bernice</code> to filter out <code>Alex</code>. An INDEX of <code>1</code> will refer to <code>Bernice</code> instead of <code>Alex</code>.
   </box>
 
-### 5.2.4 Editing a Client’s Details: `edit`
+### 5.2.4 Editing a Client: `edit`
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -442,9 +442,10 @@ Lists **all policies** stored in Prudy.
 Format: `list-policies`
 
 #### Details:
-* This command displays a complete list of all policies associated with every client in Prudy.
-* The policies are listed in the order they were added.
-* No filtering or sorting is applied by this command; it shows all existing policies.
+* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
+* This command displays a complete list of all claims associated with the policy type of the particular client.
+* The claims are listed in the order they were added.
+* No filtering or sorting is applied by this command; it shows all existing claims for the policy.
 
 #### Examples:
 * `list-policies` Displays all policies currently stored in Prudy, regardless of their type or expiry date.
@@ -537,6 +538,21 @@ Edits a specific claim in a policy for the client identified by the specified IN
 
 - `edit-claim 2 pt/life c/2 s/pending`  
   Updates the status of the second claim in the life policy of the 2nd client to "pending."
+
+### 5.4.4 Listing All Claims: `list-claims`
+Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
+
+**Format:**  
+`list-claims INDEX pt/POLICY_TYPE`
+
+**Details:**
+- This command displays a complete list of all policies associated with every client in Prudy.
+- The policies are listed in the order they were added.
+- No filtering or sorting is applied by this command; it shows all existing policies.
+
+**Examples:**
+- `list-claims 1 pt/health`
+  Lists all claims of the first client of the health policy
 
 --------------------------------------------------------------------------------------------------------------------
 
