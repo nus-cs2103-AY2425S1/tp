@@ -52,6 +52,6 @@ deactivate CommandResult
 XYZCommand --> LogicManager : r
 deactivate XYZCommand
 
-[<--LogicManager
+[<--LogicManager : Model
 deactivate LogicManager
 @enduml

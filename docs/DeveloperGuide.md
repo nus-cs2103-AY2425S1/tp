@@ -232,7 +232,7 @@ So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 **Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
-<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram" />
+<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
 - The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindApptCommand` because we have two entities called person and appointment on which operations can be performed.
 
 #### Find Appointment Command
