@@ -175,12 +175,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPinnedPersonList(Person person) {
+        public void pinPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removePinnedPersonList(Person person) {
+        public boolean canUndo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unpinPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveAddressBookVersion() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void revertAddressBookVersion() {
             throw new AssertionError("This method should not be called.");
         }
     }

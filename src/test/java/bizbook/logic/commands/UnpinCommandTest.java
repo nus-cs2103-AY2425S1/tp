@@ -27,7 +27,7 @@ public class UnpinCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person pinnedPerson = model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased());
-        model.addPinnedPersonList(pinnedPerson);
+        model.pinPerson(pinnedPerson);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class UnpinCommandTest {
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_PERSON_SUCCESS,
                 Messages.formatShort(personToUnpin));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
     }
