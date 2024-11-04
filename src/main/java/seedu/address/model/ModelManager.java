@@ -98,6 +98,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void refreshCampusConnect() {
+        this.setCampusConnect(campusConnect);
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return campusConnect.hasPerson(person);

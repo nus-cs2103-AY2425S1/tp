@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagCategory;
 
+
 /**
  * Implements command to categorize all occurrences of specified tags.
  * Format: cattag t/TAG1 t/TAG2 ... t/TAGn CATEGORY
@@ -53,6 +54,7 @@ public class CategorizeTagCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_CATEGORY, targetTag, updatedCategory));
             }
             model.setTagsCategory(targetTag, updatedCategory);
+            model.refreshCampusConnect();
         }
 
         return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTags));
