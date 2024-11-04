@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.util;
+package spleetwaise.commons.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

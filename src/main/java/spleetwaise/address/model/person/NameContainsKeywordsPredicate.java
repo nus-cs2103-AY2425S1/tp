@@ -3,8 +3,8 @@ package spleetwaise.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import spleetwaise.address.commons.util.StringUtil;
-import spleetwaise.address.commons.util.ToStringBuilder;
+import spleetwaise.commons.util.StringUtil;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.

@@ -2,8 +2,8 @@ package spleetwaise.transaction.model;
 
 import java.util.function.Predicate;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Represents the result of a command execution.

@@ -1,4 +1,4 @@
-package spleetwaise.address;
+package spleetwaise.commons;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,9 +8,9 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.commons.util.FileUtil;
-import spleetwaise.address.commons.util.ToStringBuilder;
+import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.util.FileUtil;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Represents the parsed command-line parameters given to the application.

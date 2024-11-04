@@ -2,7 +2,7 @@ package spleetwaise.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Person's email in the address book. Guarantees: immutable; is valid as declared in

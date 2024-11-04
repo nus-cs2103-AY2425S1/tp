@@ -1,11 +1,11 @@
-package spleetwaise.address.commons.core;
+package spleetwaise.commons.core;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Config values used by the app
@@ -62,5 +62,4 @@ public class Config {
                 .add("userPrefsFilePath", userPrefsFilePath)
                 .toString();
     }
-
 }

@@ -1,10 +1,10 @@
-package spleetwaise.address.commons.util;
+package spleetwaise.commons.util;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import spleetwaise.address.commons.core.Config;
+import spleetwaise.commons.core.Config;
 import spleetwaise.commons.exceptions.DataLoadingException;
 
 /**

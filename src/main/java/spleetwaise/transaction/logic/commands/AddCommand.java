@@ -6,11 +6,11 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
