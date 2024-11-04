@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "del_appt";
+    public static final String COMMAND_WORD = "delappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person's appointment identified by the index number used in the displayed person list.\n"
