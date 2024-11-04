@@ -432,42 +432,106 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+#### Initial Launch
 
-   1. Download the jar file and copy into an empty folder
+1. **Step**: Download the jar file and copy it into an empty folder.
+2. **Step**: Double-click the jar file to launch the application.
+3. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+### Saving Window Preferences
 
-1. Saving window preferences
+1. **Step**: Resize the window to a comfortable size.
+2. **Step**: Move the window to a different location on your screen.
+3. **Step**: Close the window.
+4. **Step**: Re-open the app by double-clicking the jar file.
+5. **Expected**: The window should open in the last used size and location.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+---
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Client Management
 
-1. _{ more test cases …​ }_
+#### Deleting a Client
 
-### Deleting a client
+1. **Prerequisites**: Ensure there are multiple clients listed using `list-client`.
+2. **Test Case**: `delete-client 1`
+    - **Expected**: Deletes the first client in the list. The status message displays details of the deletion, and the timestamp updates.
+3. **Test Case**: `delete-client 0`
+    - **Expected**: No client is deleted. An error message is shown, and the status bar remains unchanged.
+4. **Incorrect Commands**:
+    - `delete-client` (no index specified)
+    - `delete-client x` (where `x` is greater than the number of clients)
+    - **Expected**: An error message for invalid input or index.
 
-1. Deleting a client while all clients are being shown
+---
 
-   1. Prerequisites: List all clients using the `list-client` command. Multiple clients in the list.
+### Policy and Claim Management
 
-   1. Test case: `delete-client 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### Listing Policies
 
-   1. Test case: `delete-client 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+1. **Prerequisites**: Ensure `list-client` is used to verify that the client has policies.
+2. **Test Case**: `list-policies 1`
+    - **Expected**: Lists all policies for the first client. If there are no policies, an appropriate message is displayed.
 
-   1. Other incorrect delete commands to try: `delete-client`, `delete-client x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+---
 
-1. _{ more test cases …​ }_
+### Claim Management
 
-### Saving data
+#### Listing Claims
 
-1. Dealing with missing/corrupted data files
+1. **Prerequisites**: Ensure policies with claims are present by using `list-client` and `list-policies`.
+2. **Test Case**: `list-claims 1 pt/health`
+    - **Expected**: Lists all claims under the health policy for the first client. If no claims are found, an appropriate message is shown.
+3. **Invalid Policy Type**: `list-claims 2 pt/lifee`
+    - **Expected**: An error indicating an invalid policy type, not a generic format error.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+#### Adding a Claim
 
-1. _{ more test cases …​ }_
+1. **Prerequisites**: Ensure there is a valid policy for the client using `list-policies`.
+2. **Test Case**: `add-claim 1 pt/health s/PENDING d/Medical Expenses`
+    - **Expected**: Adds a new claim to the health policy. Success message is displayed.
+3. **Invalid Inputs**: Test with incorrect claim statuses, policy types, or invalid claim descriptions.
+    - **Expected**: Validation error messages are displayed.
+
+---
+
+### Data Persistence
+
+#### Saving Data
+
+1. **Step**: Perform various add/delete operations on clients or policies.
+2. **Expected**: Data should save automatically and persist when the application is closed and reopened.
+
+---
+
+### Handling Missing/Corrupted Data Files
+
+1. **Simulating Missing Data File**:
+    - **Step**: Navigate to the app's data directory and remove the data file.
+    - **Step**: Re-launch the app.
+    - **Expected**: The app should load with default data and display a warning about missing data.
+
+2. **Simulating Corrupted Data File**:
+    - **Step**: Open the data file and corrupt the contents (e.g., remove part of the JSON structure).
+    - **Step**: Re-launch the app.
+    - **Expected**: The app should show an error message and initialize with default data.
+
+---
+
+### Error Handling and Edge Cases
+
+1. **Extreme Input Values**:
+    - **Test Case**: Enter long strings or special characters in client or claim fields.
+    - **Expected**: Proper validation errors and handling without app crashes.
+2. **Invalid Command Inputs**:
+    - **Test Case**: Commands like `add-client` with missing parameters.
+    - **Expected**: Informative error messages are displayed.
+
+---
+
+### Exploratory Testing Tips
+
+- Try boundary values for indices and numeric inputs.
+- Ensure the app remains responsive when handling multiple sequential commands.
+- Check how the app handles rapid commands and actions in succession.
+
+---
