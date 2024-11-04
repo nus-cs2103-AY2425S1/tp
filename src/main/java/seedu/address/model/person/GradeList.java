@@ -50,6 +50,14 @@ public class GradeList {
         for (Grade g : newGrades.values()) {
             totalWeightage += g.getWeightage();
         }
+
+        // If there is already a grade for this exam, subtract the old weightage
+        Grade existingGrade = newGrades.get(grade.getTestName());
+        if (existingGrade != null) {
+            totalWeightage -= existingGrade.getWeightage();
+        }
+
+        // Add weightage of new grade
         totalWeightage += grade.getWeightage();
 
         // Check if the total weightage exceeds 100%
