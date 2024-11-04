@@ -49,6 +49,10 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_VAGUE_DELETE);
         }
         Person personToDelete = model.getDisplayPersons().get(0);
+        if (!personToDelete.getReminders().isEmpty()) {
+            model.updateFilteredPersonList(predicate);
+            throw new CommandException(Messages.MESSAGE_TARGET_DELETE_HAS_REMINDER);
+        }
         model.deletePerson(personToDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
