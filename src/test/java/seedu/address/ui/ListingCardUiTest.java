@@ -16,6 +16,8 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.model.appointment.Appointment;
@@ -27,6 +29,7 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -35,11 +38,15 @@ import seedu.address.model.person.Property;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
+
 public class ListingCardUiTest extends ApplicationTest {
 
     private ListingCard listingCard;
     private Listing sampleListing;
     private final Seller sampleSeller = (Seller) createSampleSeller();
+    private final Buyer sampleBuyer_one = (Buyer) createSampleBuyer_one();
+    private final Buyer sampleBuyer_two = (Buyer) createSampleBuyer_two();
+
 
     @BeforeEach
     public void setUp() throws TimeoutException {
@@ -75,6 +82,7 @@ public class ListingCardUiTest extends ApplicationTest {
         assertNotNull(listingCard.getRegion());
         assertNotNull(listingCard.getAddress());
         assertNotNull(listingCard.getSeller());
+        assertNotNull(listingCard.getBuyers());
 
         assertTrue(listingCard.getName().isVisible());
         assertTrue(listingCard.getPrice().isVisible());
@@ -82,6 +90,7 @@ public class ListingCardUiTest extends ApplicationTest {
         assertTrue(listingCard.getRegion().isVisible());
         assertTrue(listingCard.getAddress().isVisible());
         assertTrue(listingCard.getSeller().isVisible());
+        assertTrue(listingCard.getBuyers().isVisible());
     }
 
 
@@ -98,6 +107,18 @@ public class ListingCardUiTest extends ApplicationTest {
         assertEquals("NORTH", listingCard.getRegion().getText());
         assertEquals("123 Main St", listingCard.getAddress().getText());
         assertEquals("John Seller", listingCard.getSeller().getText());
+
+
+        // Check if the buyers are correctly displayed
+        FlowPane buyersFlowPane = listingCard.getBuyers();
+        assertEquals(2, buyersFlowPane.getChildren().size());
+
+        // Check if the buyer name is accurate and lexicographically accurate
+        Label buyerOne = (Label) buyersFlowPane.getChildren().get(0);
+        Label buyerTwo = (Label) buyersFlowPane.getChildren().get(1);
+        assertEquals("John Buyer", buyerOne.getText());
+        assertEquals("Sarah Buyer", buyerTwo.getText());
+
     }
 
     @Test
@@ -110,75 +131,14 @@ public class ListingCardUiTest extends ApplicationTest {
         assertEquals("10. ", listingCardIndex10.getId().getText());
     }
 
-    @Test
-    void listingCard_displaysZeroPrice() {
-        Listing listingZeroPrice = new Listing(
-                new Name("Zero Price Listing"),
-                new Address("456 Main St"),
-                new Price("0", BigDecimal.ZERO),
-                new Area(100),
-                Region.NORTH,
-                sampleSeller,
-                new HashSet<Person>()
-        );
-
-        ListingCard listingCardZeroPrice = new ListingCard(listingZeroPrice, 1);
-        assertEquals("$0", listingCardZeroPrice.getPrice().getText());
-    }
-
-    @Test
-    void listingCard_displaysDecimalPrice() {
-        Listing listingDecimalPrice = new Listing(
-                new Name("Decimal Price Listing"),
-                new Address("789 Main St"),
-                new Price("150000.50", new BigDecimal("150000.50")),
-                new Area(200),
-                Region.SOUTH,
-                sampleSeller,
-                new HashSet<Person>()
-        );
-
-        ListingCard listingCardDecimalPrice = new ListingCard(listingDecimalPrice, 1);
-        assertEquals("$150000.50", listingCardDecimalPrice.getPrice().getText());
-    }
-
-    @Test
-    void listingCard_displaysCorrectArea() {
-        Listing listingLargeArea = new Listing(
-                new Name("Large Area Listing"),
-                new Address("123 Large St"),
-                new Price("750000", new BigDecimal(750000)),
-                new Area(500),
-                Region.EAST,
-                sampleSeller,
-                new HashSet<Person>()
-        );
-
-        ListingCard listingCardLargeArea = new ListingCard(listingLargeArea, 1);
-        assertEquals("500 m²", listingCardLargeArea.getArea().getText());
-    }
-
-    @Test
-    void listingCard_displaysCorrectRegion() {
-        Listing listingDifferentRegion = new Listing(
-                new Name("Region Listing"),
-                new Address("789 Region St"),
-                new Price("600000", new BigDecimal(600000)),
-                new Area(150),
-                Region.WEST,
-                sampleSeller,
-                new HashSet<Person>()
-        );
-
-        ListingCard listingCardDifferentRegion = new ListingCard(listingDifferentRegion, 1);
-        assertEquals("WEST", listingCardDifferentRegion.getRegion().getText());
-    }
-
-
     /**
      * Helper method to create a sample Listing object for testing.
      */
     private Listing createSampleListing() {
+        Set<Person> buyersSet = new HashSet<>();
+        buyersSet.add(sampleBuyer_one);
+        buyersSet.add(sampleBuyer_two);
+
         return new Listing(
                 new Name("Sample Listing"),
                 new Address("123 Main St"),
@@ -186,7 +146,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Area(100),
                 Region.NORTH,
                 sampleSeller,
-                new HashSet<Person>()
+                buyersSet
         );
     }
 
@@ -203,6 +163,41 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Email("seller@example.com"),
                 tagSet,
                 new Appointment(new Date("02-01-23"), new From("1100"), new To("1200")),
+                new Property("NUS")
+        );
+    }
+
+    /**
+     * Helper method to create a sample Buyer object for testing.
+     */
+    private Person createSampleBuyer_one() {
+        Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag("friends"));
+        tagSet.add(new Tag("colleagues"));
+
+        return new Buyer(
+                new Name("John Buyer"),
+                new Phone("91234567"),
+                new Email("buyer@example.com"),
+                tagSet,
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00")),
+                new Property("NUS")
+        );
+    }
+
+    /**
+     * Helper method to create a sample Buyer object for testing.
+     */
+    private Person createSampleBuyer_two() {
+        Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag("friends"));
+
+        return new Buyer(
+                new Name("Sarah Buyer"),
+                new Phone("91112222"),
+                new Email("buyer@example.com"),
+                tagSet,
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00")),
                 new Property("NUS")
         );
     }

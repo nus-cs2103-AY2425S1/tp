@@ -130,4 +130,8 @@ public class ListingCard extends UiPart<Region> {
     public Label getSeller() {
         return seller;
     }
+
+    public FlowPane getBuyers() {
+        return buyers;
+    }
 }
