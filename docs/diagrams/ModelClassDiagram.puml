@@ -26,10 +26,25 @@ Class EducationPolicy
 Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
+
+
+Enum PolicyType <<enumeration>> {
+    + LIFE
+    + HEALTH
+    + EDUCATION
+}
+
+Enum ClaimStatus <<enumeration>> {
+    + PENDING
+    + APPROVED
+    + REJECTED
+}
+
 Class PremiumAmount
 Class CoverageAmount
 Class ExpiryDate
 Class I #FFFFFF
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -52,9 +67,9 @@ Client *--> Email
 Client *--> Address
 Client *--> "*" Tag
 Client *--> PolicySet
-PolicySet *--> LifePolicy
-PolicySet *--> HealthPolicy
-PolicySet *--> EducationPolicy
+PolicySet --> "0..1" LifePolicy
+PolicySet --> "0..1" HealthPolicy
+PolicySet --> "0..1" EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
@@ -63,6 +78,12 @@ Policy *--> PremiumAmount
 Policy *--> CoverageAmount
 Policy *--> ExpiryDate
 ClaimList *--> "*" Claim
+
+LifePolicy --> PolicyType
+HealthPolicy --> PolicyType
+EducationPolicy --> PolicyType
+
+Claim --> ClaimStatus
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I
