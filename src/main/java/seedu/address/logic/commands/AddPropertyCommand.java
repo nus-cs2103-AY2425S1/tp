@@ -34,7 +34,7 @@ public class AddPropertyCommand extends Command {
             + PREFIX_TOWN + "TOWN "
             + PREFIX_TYPE + "PROPERTY_TYPE "
             + PREFIX_SIZE + "SIZE "
-            + PREFIX_BEDROOMS + "NUMBER_OF_BEDROOMS"
+            + PREFIX_BEDROOMS + "NUMBER_OF_BEDROOMS "
             + PREFIX_BATHROOMS + "NUMBER_OF_BATHROOMS "
             + PREFIX_PRICE + "PRICE\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -111,7 +111,15 @@ public class AddPropertyCommand extends Command {
                 size, numberOfBedrooms, numberOfBathrooms, price);
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        PropertyList editedPropertyList = PropertyList.addProperty(personToEdit.getPropertyList(), newProperty);
+        PropertyList existingProperties = personToEdit.getPropertyList();
+
+        for (Property property : existingProperties.getProperties()) {
+            if (property.equals(newProperty)) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_PROPERTIES);
+            }
+        }
+
+        PropertyList editedPropertyList = PropertyList.addProperty(existingProperties, newProperty);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
