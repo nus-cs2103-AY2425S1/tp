@@ -4,15 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Optional;
-
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Deletes all goods that match the given goodsName.
@@ -20,12 +17,6 @@ import seedu.address.model.person.Person;
 public class DeleteGoodsCommand extends Command {
 
     public static final String COMMAND_WORD = "deletegoods";
-
-//    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all goods that match the specified name."
-//            + "Parameters: "
-//            + PREFIX_GOODS_NAME + "GOODS_NAME"
-//            + "Example: " + COMMAND_WORD + " "
-//            + PREFIX_GOODS_NAME + "Calbee Seaweed Chips";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified goods from the specified supplier.\n"
@@ -42,6 +33,10 @@ public class DeleteGoodsCommand extends Command {
     private final GoodsName goodsName;
 
 
+    /**
+     * Constructs a delete goods command that deletes the goods receipt
+     * with the specified supplier name and goods name.
+     */
     public DeleteGoodsCommand(Name supplierName, GoodsName goodsName) {
         this.supplierName = supplierName;
         this.goodsName = goodsName;

@@ -26,7 +26,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReceiptLog;
-import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -198,7 +197,7 @@ public class AddCommandTest {
         public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
         public ObservableList<GoodsReceipt> getFilteredReceiptsList() {
             throw new AssertionError("This method should not be called.");
