@@ -147,8 +147,6 @@ public class EditOrderCommandTest {
                 Messages.format(editedOrder));
 
         Model expectedModel = model.createCopy();
-        //TODO: removed the line below after createCopy gets updated
-        expectedModel.getSelectedPerson().updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
         expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND_ORDER), editedOrder);
 
         assertCommandSuccess(editOrderCommand, model, expectedMessage, expectedModel);
@@ -185,8 +183,6 @@ public class EditOrderCommandTest {
                 + String.format(EditOrderCommand.MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(firstOrder));
 
         Model expectedModel = model.createCopy();
-        //TODO: removed the line below after createCopy gets updated
-        expectedModel.getSelectedPerson().updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
         expectedModel.setOrder(getOrderByIndex(expectedModel, INDEX_SECOND_ORDER),
                 getOrderByIndex(expectedModel, INDEX_FIRST_ORDER));
 
