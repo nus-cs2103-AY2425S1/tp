@@ -106,4 +106,9 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
     public Role getRole() {
         return Role.VOLUNTEER;
     }
+
+    @Override
+    public boolean isRole(Role role) {
+        return getRole().equals(role);
+    }
 }

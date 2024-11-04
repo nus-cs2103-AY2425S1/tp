@@ -117,6 +117,10 @@ public class Person {
         return Role.PERSON;
     }
 
+    public boolean isRole(Role role) {
+        return getRole().equals(role);
+    }
+
     /**
      * Compares this person's name with another person's name lexicographically, ignoring case considerations.
      *
