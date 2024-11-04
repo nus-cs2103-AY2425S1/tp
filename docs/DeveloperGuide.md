@@ -6,6 +6,7 @@ title: Developer Guide
 {:toc}
 1. [Introduction to TalentSG] (#talentsg)
 2. [Purpose of this guide] (#purpose-of-this-guide)
+3. [How to use this guide] (#how-to-use-this-guide)
 
 ---
 
@@ -31,11 +32,27 @@ section where we cover the product scope, user stories, as well as use cases.
 
 If you are lost, please refer to the [set-up](#setting-up-getting-started) section of the guide.
 
+---
+
+## How to use this guide
+
+Here are some notations used in this guide.
+
+### Format
+
+- `Command` is used to label commands and components.
+- {Placeholder} are used to label placeholders.
+- [Optional], square brackets are used to notate optional fields.
+- :information_source: **Note** is used to provide additional information that you should know.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* TalentSG is based on the existing AddressBook3 (AB3) project created by the [SE-EDU Initiative](https://se-education.org).
+* Libraries used:
+  * [JavaFX](https://se-education.org)
+  * [JUnit5](https://se-education.org)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +64,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
+This section gives an overview of the different components of TalentSG and how they interact with one another.
+
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -54,17 +73,16 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+The ***Architecture Diagram*** given below explains the high-level design of TalentSG and how the components work
+together.
+
 <img src="images/ArchitectureDiagram.png" width="280" />
-
-The ***Architecture Diagram*** given above explains the high-level design of the App.
-
-Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+**`Main`** consists of two classes: [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
+* At app launch: it initializes the other components in the correct sequence, and connects them up with each other.
+* At shut down: it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
@@ -94,11 +112,25 @@ The sections below give more details of each component.
 
 ### UI component
 
+This component is responsible for displaying the graphical elements of TalentSG's GUI to the user.
+
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of the following parts:
+
+- `Help Window`
+- `OverviewPanel`
+  - `OverviewListCard`
+- `ReportBugWindow`
+- `ResultDisplay`
+- `PersonListPanel`
+  - `PersonCard`
+- `CommandBox`
+- `StatusBarFooter` 
+
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
