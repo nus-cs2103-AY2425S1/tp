@@ -38,7 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_INDEX_2 = "2";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_TELEGRAM = "elephant";
-    private static final String VALID_ROOM = "8/7/23";
+    private static final String VALID_ROOM = "8-7-23";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SESSION_NAME = "Session 1";
@@ -182,6 +182,7 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
+    @Test
     public void parseTags_collectionWithValidDuplicateTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2, VALID_TAG_1));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));

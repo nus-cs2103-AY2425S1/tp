@@ -33,8 +33,8 @@ public class DeleteMemberCommandTest {
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String expectedMessage = String.format(
-                DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
-                memberToDelete.getName().fullName,
+                DeleteMemberCommand.MESSAGE_SUCCESS,
+                memberToDelete.getName().value,
                 memberToDelete.getRoom().value,
                 memberToDelete.getTelegram().value
         );
@@ -61,8 +61,8 @@ public class DeleteMemberCommandTest {
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
         String expectedMessage = String.format(
-                DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
-                memberToDelete.getName().fullName,
+                DeleteMemberCommand.MESSAGE_SUCCESS,
+                memberToDelete.getName().value,
                 memberToDelete.getRoom().value,
                 memberToDelete.getTelegram().value
         );

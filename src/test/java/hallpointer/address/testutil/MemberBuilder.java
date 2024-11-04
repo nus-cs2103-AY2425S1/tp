@@ -7,7 +7,6 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
-import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.model.util.SampleDataUtil;
@@ -19,13 +18,12 @@ public class MemberBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TELEGRAM = "beeHappy";
-    public static final String DEFAULT_ROOM = "5/2/207";
+    public static final String DEFAULT_ROOM = "5-2-207";
 
     private Name name;
     private Telegram telegram;
     private Room room;
     private Set<Tag> tags;
-    private Point points = new Point("0");
     private Set<Session> sessions;
     /**
      * Creates a {@code MemberBuilder} with the default details.
@@ -35,7 +33,6 @@ public class MemberBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         room = new Room(DEFAULT_ROOM);
         tags = new HashSet<>();
-        points = new Point("0");
         sessions = new HashSet<>();
     }
 
@@ -47,7 +44,6 @@ public class MemberBuilder {
         telegram = memberToCopy.getTelegram();
         room = memberToCopy.getRoom();
         tags = new HashSet<>(memberToCopy.getTags());
-        points = memberToCopy.getTotalPoints();
         sessions = new HashSet<>(memberToCopy.getSessions());
     }
 

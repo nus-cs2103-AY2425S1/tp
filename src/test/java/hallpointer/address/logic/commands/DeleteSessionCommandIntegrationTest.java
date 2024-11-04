@@ -45,7 +45,7 @@ public class DeleteSessionCommandIntegrationTest {
 
         // Check that the session is deleted
         assertEquals(
-                String.format(DeleteSessionCommand.MESSAGE_DELETE_SESSION_SUCCESS, sessionName.toString(), 1),
+                String.format(DeleteSessionCommand.MESSAGE_SUCCESS, sessionName.toString(), 1),
                 commandResult.getFeedbackToUser()
         );
         assertFalse(member.getSessions().contains(defaultSession)); // Session should no longer exist

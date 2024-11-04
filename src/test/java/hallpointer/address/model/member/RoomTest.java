@@ -26,31 +26,31 @@ public class RoomTest {
 
         // invalid rooms
         assertFalse(Room.isValidRoom("")); // empty string
-        assertFalse(Room.isValidRoom("//")); // slashes only
-        assertFalse(Room.isValidRoom("-1/2/3")); // invalid number
-        assertFalse(Room.isValidRoom("1/0.2/3")); // invalid decimal
+        assertFalse(Room.isValidRoom("--")); // dashes only
+        assertFalse(Room.isValidRoom("-1-2-3")); // invalid number
+        assertFalse(Room.isValidRoom("1-0.2-3")); // invalid decimal
 
-        assertFalse(Room.isValidRoom("1/2/")); // missing numbers
-        assertFalse(Room.isValidRoom("1/2")); // insufficient input
-        assertFalse(Room.isValidRoom("3 2 3")); // no slashes
+        assertFalse(Room.isValidRoom("1-2-")); // missing numbers
+        assertFalse(Room.isValidRoom("1-2")); // insufficient input
+        assertFalse(Room.isValidRoom("3 2 3")); // no dashes
 
-        assertFalse(Room.isValidRoom("/1/2/3/")); // too many slashes
-        assertFalse(Room.isValidRoom("1/2/3/4")); // incorrect extra input
-        assertFalse(Room.isValidRoom("3/2/3 0")); // also incorrect extra input
+        assertFalse(Room.isValidRoom("-1-2-3-")); // too many dashes
+        assertFalse(Room.isValidRoom("1-2-3-4")); // incorrect extra input
+        assertFalse(Room.isValidRoom("3-2-3 0")); // also incorrect extra input
 
         // valid rooms
-        assertTrue(Room.isValidRoom("1/2/3"));
-        assertTrue(Room.isValidRoom("1/2/0")); // 0 is also acceptable here
-        assertTrue(Room.isValidRoom("1000/2000/3000")); // long room numbers
-        assertTrue(Room.isValidRoom("1000000000000/9/9")); // duplicate numbers
+        assertTrue(Room.isValidRoom("1-2-3"));
+        assertTrue(Room.isValidRoom("1-2-0")); // 0 is also acceptable here
+        assertTrue(Room.isValidRoom("1000-2000-3000")); // long room numbers
+        assertTrue(Room.isValidRoom("1000000000000-9-9")); // duplicate numbers
     }
 
     @Test
     public void equals() {
-        Room room = new Room("1/2/3");
+        Room room = new Room("1-2-3");
 
         // same values -> returns true
-        assertTrue(room.equals(new Room("1/2/3")));
+        assertTrue(room.equals(new Room("1-2-3")));
 
         // same object -> returns true
         assertTrue(room.equals(room));
@@ -62,6 +62,6 @@ public class RoomTest {
         assertFalse(room.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(room.equals(new Room("2/3/4")));
+        assertFalse(room.equals(new Room("2-3-4")));
     }
 }

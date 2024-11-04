@@ -32,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list_members` : Lists all contacts.
 
-   * `add_member n/John Doe r/4/3/301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to the Address Book.
+   * `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete_member 3` : Deletes the 3rd contact shown in the current list.
 
@@ -89,8 +89,8 @@ Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]
 </box>
 
 Examples:
-* `add_member n/John Doe r/4/3/301 t/johndoe123`
-* `add_member n/Betsy Crowe r/2/5/120 t/betsy_crowe tag/logistics`
+* `add_member n/John Doe r/4-3-301 t/johndoe123`
+* `add_member n/Betsy Crowe r/2-5-120 t/betsy_crowe tag/logistics`
 
 ### Listing all members : ` list_members`
 
@@ -102,7 +102,7 @@ Format: `list_members `
 
 Updates an existing member in the address book.
 
-Format: `update_member INDEX [n/NAME] [r/BLOCK/FLOOR/ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
+Format: `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
 * Updates the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -225,10 +225,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add_member**    | `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4/3/301 t/jamesho123 tag/friend tag/colleague`
+**Add_member**    | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague`
 **Clear**  | `clear`
 **Delete_member** | `delete_member INDEX`<br> e.g., `delete_member 3`
-**Update member**   | `update_member INDEX [n/NAME] [r/BLOCK/FLOOR/ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​…​`<br> e.g.,`update_member 2 n/James Lee r/5/2/203 t/jameslee99`
+**Update member**   | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`
 **Find**   | `find_members KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_members James Jake`
 **List**   | `list_members`
 **Help**   | `help`

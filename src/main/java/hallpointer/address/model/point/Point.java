@@ -3,6 +3,8 @@ package hallpointer.address.model.point;
 import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+import hallpointer.address.commons.util.StringUtil;
+
 /**
  * Represents points earned by a member.
  * Guarantees: immutable; points are valid as declared in {@link #isValidPoints(String)}
@@ -11,7 +13,6 @@ public class Point {
 
     public static final String MESSAGE_CONSTRAINTS = "Points must be a non-negative integer.";
 
-    public static final String VALIDATION_REGEX = "^\\d+$";
     public final String points;
 
     /**
@@ -28,13 +29,8 @@ public class Point {
     /**
      * Returns true if the given points value is valid.
      */
-    public static boolean isValidPoints(String test) {
-        try {
-            int dummy = Integer.parseInt(test);
-            return test.matches(VALIDATION_REGEX); // Points must be non-negative
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    public static boolean isValidPoints(String point) {
+        return StringUtil.isNonNegativeUnsignedInteger(point);
     }
     /**
      * Takes in a Point object and returns a new Point object with the points added.

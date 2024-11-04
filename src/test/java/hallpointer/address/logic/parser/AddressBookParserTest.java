@@ -19,7 +19,7 @@ import hallpointer.address.logic.commands.DeleteMemberCommand;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.HelpCommand;
-import hallpointer.address.logic.commands.ListMembersCommand;
+import hallpointer.address.logic.commands.ListCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
 import hallpointer.address.logic.parser.exceptions.ParseException;
@@ -84,8 +84,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listMembers() throws Exception {
-        assertTrue(parser.parseCommand(ListMembersCommand.COMMAND_WORD) instanceof ListMembersCommand);
-        assertTrue(parser.parseCommand(ListMembersCommand.COMMAND_WORD + " 3") instanceof ListMembersCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test

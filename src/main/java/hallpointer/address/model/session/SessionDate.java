@@ -22,18 +22,18 @@ public class SessionDate {
     public final LocalDate fullDate;
 
     /**
-     * Constructs a {@code Date}.
+     * Constructs a {@code SessionDate}.
      *
      * @param date A valid date string.
      */
     public SessionDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        fullDate = parseDate(date);
+        fullDate = LocalDate.parse(date, DATE_FORMATTER);
     }
 
     /**
-     * Returns true if a given string is a valid date according to the specified format.
+     * Returns true if a given string is a valid date and has the expected format.
      */
     public static boolean isValidDate(String test) {
         try {
@@ -44,18 +44,6 @@ public class SessionDate {
         }
     }
 
-    /**
-     * Parses a valid date string into a LocalDate object.
-     * @param date A valid date string.
-     * @return A LocalDate object.
-     */
-    public static LocalDate parseDate(String date) {
-        return LocalDate.parse(date, DATE_FORMATTER);
-    }
-
-    /**
-     * Returns the date as a formatted string.
-     */
     @Override
     public String toString() {
         return fullDate.format(DATE_FORMATTER);

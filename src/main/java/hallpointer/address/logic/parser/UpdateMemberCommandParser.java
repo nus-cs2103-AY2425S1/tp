@@ -19,14 +19,14 @@ import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new UpdateMemberCommand object
+ * Parses input arguments and creates a new UpdateMemberCommand object.
  */
 public class UpdateMemberCommandParser implements Parser<UpdateMemberCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the UpdateMemberCommand
      * and returns an UpdateMemberCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public UpdateMemberCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -34,7 +34,6 @@ public class UpdateMemberCommandParser implements Parser<UpdateMemberCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_ROOM, PREFIX_TAG);
 
         Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -71,12 +70,12 @@ public class UpdateMemberCommandParser implements Parser<UpdateMemberCommand> {
      * {@code Set<Tag>} containing zero tags.
      */
     private Optional<Set<Tag>> parseTagsForUpdate(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        requireNonNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = (tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags);
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
