@@ -23,7 +23,10 @@ public class Room {
     public Room(String room) {
         requireNonNull(room);
         checkArgument(isValidRoom(room), MESSAGE_CONSTRAINTS);
-        value = room;
+
+        // remove zero-padding of block or floor or room number
+        String[] arr = room.split("-");
+        value = Integer.parseInt(arr[0]) + "-" + Integer.parseInt(arr[1]) + "-" + Integer.parseInt(arr[2]);
     }
 
     /**
