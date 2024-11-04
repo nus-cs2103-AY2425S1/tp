@@ -13,7 +13,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Like an {@code ArgumentPredicate}, but instead tests to see if the Person fails the predicate
+ * Like an {@code ArgumentPredicate}, but instead tests to see if the Person <i>fails</i> the predicate.
+ * Essentially a logical NOT for {@code ArgumentPredicate}.
  */
 public class ArgumentPredicateToFail extends ArgumentPredicate {
 
@@ -106,7 +107,7 @@ public class ArgumentPredicateToFail extends ArgumentPredicate {
     @Override
     public boolean test(Person person) {
         List<Boolean> validParameters = getValidParameters(person);
-        return validParameters.stream().allMatch(Boolean::booleanValue);
+        return validParameters.stream().anyMatch(Boolean::booleanValue);
     }
 
     @Override
