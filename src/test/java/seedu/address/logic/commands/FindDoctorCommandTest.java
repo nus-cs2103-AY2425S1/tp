@@ -52,7 +52,7 @@ public class FindDoctorCommandTest {
     }
 
     @Test
-    public void execute_zeroKeyword_noPersonFound() {
+    public void execute_twoKeyword_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_DOCTORS_LISTED_OVERVIEW, 0);
         FindDoctorPredicate predicate = preparePredicate("Karen KENNEDY");
         FindDoctorCommand command = new FindDoctorCommand(predicate);

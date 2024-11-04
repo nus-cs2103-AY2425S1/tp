@@ -187,11 +187,11 @@ Finds persons whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
+* Persons matching all keywords will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
