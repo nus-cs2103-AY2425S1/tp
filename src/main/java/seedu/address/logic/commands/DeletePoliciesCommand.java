@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class DeletePoliciesCommand extends Command {
             + ": Deletes the specified policy from the client identified "
             + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/POLICY_TYPE...\n"
+            + PREFIX_POLICY_TYPE + "[POLICY_TYPE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "pt/life";
     public static final String POLICY_DELETE_CLIENT_SUCCESS = "Policies Left: %1$s";
