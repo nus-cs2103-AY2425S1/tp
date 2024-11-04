@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-VolunSync is a **desktop app for keeping track of volunteers and volunteering events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
+VolunSync is a desktop app for **Non-Governmental Organisations** that require keeping track of volunteers and volunteering events, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -22,7 +22,8 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
     - On Mac/Linux: Open the Terminal from your Applications.
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file, then run the following command:
-   java -jar volunsync.jar
+   `java -jar volunsync.jar`
+1. After entering the command, the window should appear as shown below:
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
@@ -65,7 +66,7 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 * When copying multi-line commands from this guide, make sure the spaces between lines remain intact, especially if you're using a PDF version.
 </div>
 
-### General Commands
+## General Commands
 
 ### Viewing help : `help`
 
@@ -84,7 +85,7 @@ Examples:
 
 ### Export database to a CSV file : `export`
 
-Exports all records within the database to a CSV file.
+Exports all records within the database to a Comma Separated Value (.csv) file.
 
 Format : `export`
 
@@ -130,7 +131,7 @@ Format: `/v del VOLUNTEER_INDEX`
 
 * Deletes the volunteer at the specified `VOLUNTEER_INDEX`.
 * The index refers to the number before the volunteer's name in the displayed volunteer list.
-* The index **must be a non-negative integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Deleting a volunteer removes the volunteer from the list of participants of all events which the volunteer
@@ -174,7 +175,6 @@ Adds an event to the database.
 Format: `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`
 
 Examples:
-* `/e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12`
 * `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`
 
 ### Locating events by name : `/e find`
@@ -217,9 +217,9 @@ Format: `/e view EVENT_INDEX`
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-### Saving the data
+## Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+VolunSync's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ AddressBook data are saved in the hard disk automatically after any command that
    **Solution:**
     - To fix this, locate and delete the `preferences.json` file, which stores the app's window position.
     - After deleting the file, restart the application, and the GUI will open correctly on the primary screen.
-
+ 
 2. **Help Window Remaining Minimized**  
    **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.  
    **Solution:**
@@ -250,18 +250,32 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ## Command summary
 
-| Action                                       | Format, Examples                                                                                                                                                                                                                                                                   |
-|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIME e/ END_TIME`<br/>`e.g. /v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`                                                                                                |
-| **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`<br/>`e.g. /v del 1`                                                                                                                                                                                                                                           |
-| **Find Volunteer**                           | `/v find KEYWORD`<br/>`e.g. /v find Yeoh`                                                                                                                                                                                                                                          |
-| **Add Event**                                | `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`<br/>`e.g. /e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`<br/>`e.g. /e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12` |
-| **Delete Event**                             | `/e del EVENT_INDEX`<br/>`e.g. /e del 1`                                                                                                                                                                                                                                           |
-| **Find Event**                               | `/e find KEYWORD`<br/>`e.g. /e find Forest`                                                                                                                                                                                                                                        |
-| **Add Volunteer to Event**                   | `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. assign v/ 1 e/ 2`                                                                                                                                                                                                             |
-| **Remove Volunteer from Event**              | `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. unassign v/ 1 e/ 2`                                                                                                                                                                                                         |
-| **View all Volunteers involved in an Event** | `view e/ EVENT_INDEX`<br/>`e.g. view e/ 1`                                                                                                                                                                                                                                         |
-| **List all Volunteers and Events**           | `list`                                                                                                                                                                                                                                                                             |
-| **Export database to csv file**              | `export`                                                                                                                                                                                                                                                                           |
-| **Help**                                     | `help`                                                                                                                                                                                                                                                                             |
-| **Exit**                                     | `exit`                                                                                                                                                                                                                                                                             |
+### General Commands
+
+| Action                                       | Format   |
+|----------------------------------------------|----------|
+| **List all Volunteers and Events**           | `list`   |
+| **Export database to csv file**              | `export` |
+| **Help**                                     | `help`   |
+| **Exit**                                     | `exit`   |
+
+### Volunteer Commands
+
+| Action                                       | Format                                                       | Examples                                                          |
+|----------------------------------------------|--------------------------------------------------------------|-------------------------------------------------------------------|
+| **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE` | `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02` | 
+| **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`                                     | `/v del 1`                                                        |
+| **Find Volunteer**                           | `/v find KEYWORD`                                            | `/v find Yeoh`                                                    |
+
+
+
+### Event Commands
+
+| Action                                       | Format                                                                                  | Examples                                                                         |
+|----------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Add Event**                                | `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]` | `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam` |
+| **Delete Event**                             | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
+| **Find Event**                               | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
+| **Add Volunteer to Event**                   | `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`                                              | `assign v/ 1 e/ 2`                                                               |
+| **Remove Volunteer from Event**              | `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`                                            | `unassign v/ 1 e/ 2`                                                             |
+| **View all Volunteers involved in an Event** | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
