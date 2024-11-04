@@ -41,6 +41,10 @@ public class CommandHistoryTest {
         assertEquals("second command", history.getPrevious());
         assertEquals("first command", history.getPrevious());
         assertEquals("first command", history.getPrevious()); // Stay at earliest command
+
+        // Empty command history
+        history = new CommandHistory();
+        assertEquals("", history.getPrevious());
     }
 
     @Test
