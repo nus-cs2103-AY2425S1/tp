@@ -172,13 +172,22 @@ public class ParserUtil {
      */
     public static boolean isValidNumberOfPropertyTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        return tags.size() <= 3;
+    }
+
+    /**
+     * Checks if the length of property tags is valid.
+     */
+    public static boolean isValidLengthPropertyTags(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
         for (String tagName : tags) {
             if (tagName.length() > 10) {
                 return false;
             }
         }
-        return tags.size() <= 3;
+        return true;
     }
+
 
     /**
      * Parses a {@code String housingType} into a {@code HousingType}.
