@@ -315,6 +315,10 @@ Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 * The contact index refers to the index number of the contact in the particular wedding you are viewing.
 * The contact index **must be a positive integer** 1, 2, 3, ...
 
+**Caution:**
+You must be viewing a wedding to unassign contacts from that wedding. You can only input contact index's
+from that wedding to be unassigned.
+
 Examples: 
 * `unassign c/1` unassigns the contact at index 1 from the wedding you are currently viewing.
 
@@ -404,8 +408,8 @@ Action     | Format, Examples
 **Add Wedding** | `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CONTACT2_INDEX ...]`<br> e.g., `addw n/Daniel and Jane Wedding d/23/09/2025 c/1 3 4`
 **View Wedding** | `view WEDDING_INDEX`<br> e.g., `view 3`
 **Edit Wedding** | `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`<br> e.g., `editw 1 d/12/11/2025`
-**Assign Contact to Wedding** | `assign WEDDING_INDEX c/CONTACT1_INDEX CONTACT2_INDEX ...`<br> e.g., `assign 2 c/1 2 3`
-**Unassign Contact from Wedding** | `unassign WEDDING_INDEX c/CONTACT1_INDEX CONTACT2_INDEX ...`<br> e.g., `unassign 4 c/3 5`
+**Assign Contact to Wedding** | `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX ...]`<br> e.g., `assign 2 c/1 2 3`
+**Unassign Contact from Wedding** | `unassign c/CONTACT1_INDEX [CONTACT2_INDEX ...]`<br> e.g., `unassign c/3 5`
 **Delete Wedding** | `deletew WEDDING_INDEX`<br> e.g., `deletew 3`
 **Get List of (Active) Tags** | `taglist`
 **Exit**   | `exit`
