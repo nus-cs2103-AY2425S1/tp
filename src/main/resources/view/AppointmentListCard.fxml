@@ -31,8 +31,8 @@
       <Label fx:id="patientId" styleClass="cell_small_label" text="\$patientId" />
       <Label fx:id="ward" styleClass="cell_small_label" text="\$ward" />
       <VBox fx:id="appointmentBox">
-        <Label fx:id="appointmentDescription" styleClass="blueLabel"/>
-        <Label fx:id="appointmentDuration" styleClass="purpleLabel"/>
+        <Label fx:id="appointmentDescription" styleClass="grayLabel"/>
+        <Label fx:id="appointmentDuration" styleClass="lightBlueLabel"/>
         <padding>
           <Insets top="5" />
         </padding>

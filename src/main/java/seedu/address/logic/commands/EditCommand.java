@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.ID_SPECIAL_CHARACTER;
+import static seedu.address.logic.Messages.WARD_ID_SPECIAL_CHARACTER;
+import static seedu.address.logic.Messages.WARD_SPECIAL_CHARACTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
@@ -84,7 +87,19 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        if (editedPerson.hasSpecialCharactersInWard() && editedPerson.hasSpecialCharactersInId()) {
+            return new CommandResult(String.format(WARD_ID_SPECIAL_CHARACTER
+                    + MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else if (editedPerson.hasSpecialCharactersInWard()) {
+            return new CommandResult(String.format(WARD_SPECIAL_CHARACTER
+                    + MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else if (editedPerson.hasSpecialCharactersInId()) {
+            return new CommandResult(String.format(ID_SPECIAL_CHARACTER
+                    + MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        }
     }
 
     /**

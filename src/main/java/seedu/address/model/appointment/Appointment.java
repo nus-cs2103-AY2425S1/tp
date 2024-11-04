@@ -1,5 +1,7 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.DateUtil.DATE_TIME_DISPLAY_FORMATTER;
 
 import java.time.LocalDateTime;
@@ -10,10 +12,9 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class Appointment {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Appointment must contain at least 1 alphabetic character, and has a limit of 50 characters.\n"
-                    + "It cannot be empty.";
-    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z]).{1,50}$";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment description cannot be empty and has a "
+            + "character limit of 100";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,50}$";
     private final String description;
     private final LocalDateTime start;
     private final LocalDateTime end;
@@ -26,6 +27,10 @@ public class Appointment {
      * @param end the end time in dd-MM-yyyy-HH-mm format.
      */
     public Appointment(String description, LocalDateTime start, LocalDateTime end) {
+        requireNonNull(description);
+        requireNonNull(start);
+        requireNonNull(end);
+        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
         this.description = description;
         this.start = start;
         this.end = end;

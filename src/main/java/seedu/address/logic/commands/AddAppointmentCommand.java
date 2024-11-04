@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  * Add the appointment details of an existing person in the address book.
  */
 public class AddAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "make_appt";
+    public static final String COMMAND_WORD = "makeappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment details of the patient specified "
             + "by the index number used in the displayed patient list.\n"
@@ -37,6 +37,8 @@ public class AddAppointmentCommand extends Command {
             + "\n Datetime is in the form of dd-MM-yyyy-HH-mm";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Person: \n\n%1$s";
+    public static final String MESSAGE_OVERLAPPING_APPOINTMENT =
+            "Appointment overlaps with another pre-existing appointment! Please check your schedule and try again";
     private final Index index;
     private final Appointment appointment;
     /**
@@ -59,6 +61,7 @@ public class AddAppointmentCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -69,6 +72,10 @@ public class AddAppointmentCommand extends Command {
                 personToEdit.getNotes(),
                 appointment
         );
+
+        if (model.hasOverlappingAppointment(editedPerson)) {
+            throw new CommandException(MESSAGE_OVERLAPPING_APPOINTMENT);
+        }
 
         // Update the person in the model
         model.setPerson(personToEdit, editedPerson);

@@ -34,22 +34,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID,
                         PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
-        /*
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        */
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_WARD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
-        /*
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-         */
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID,
                 PREFIX_WARD, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
@@ -63,12 +52,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get())
                 : ParserUtil.parseMedication("");
         Notes notes = new Notes("");
-        /*
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-         */
 
         Person person = new Person(name, id, ward, diagnosis, medication, notes);
 

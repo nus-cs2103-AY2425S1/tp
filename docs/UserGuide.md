@@ -11,7 +11,8 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 <!-- * Table of Contents -->
 # Table of Contents
 1. [Quick Start](#quick-start)
-2. [Features](#features)
+2. [Input Parameters](#Input-parameters)
+3. [Features](#features)
     - [Viewing help](#viewing-help--help)
     - [Adding a person](#adding-a-person--add)
     - [Listing all patients](#listing-all-patients--list)
@@ -28,10 +29,10 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Archiving data files](#archiving-data-files-coming-in-v20)
-3. [FAQ](#faq)
-4. [Glossary](#glossary)
-4. [Known Issues](#known-issues)
-5. [Command Summary](#command-summary)
+4. [FAQ](#faq)
+5. [Glossary](#glossary)
+6. [Known Issues](#known-issues)
+7. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,6 +69,33 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Input parameters
+
+**Notes about parameters:**<br>
+
+Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
+- `n/` -> parameter symbol<br>
+- `John Doe` -> parameter.
+
+### Parameters
+
+Symbol     | Parameter                    | Constraints
+-----------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**-**  | `INDEX`                      |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `DATE`                       |- **Must be of the form `DD-MM-YYYY`**.
+**`n`**| `NAME`                       |- Can include alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.<br> - Must contain at least 1 alphabetic character and has a character limit of 50.
+**`i`**| `ID`                         |- Can include alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets. <br> - It Must have at least 1 alphanumeric character and has a character limit of 36.
+**`w`**| `WARD`                       |- Must contain at least 1 alphanumeric character, and has a character limit of 50.
+**`d`**| `DIAGNOSIS` (if specified)   |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
+**`m`**| `MEDICATION` (if specified)  |- Can include alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.<br> - Must contain at least 1 alphanumeric character and has a character limit of 80.
+**`a`**| `APPOINTMENT`                |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
+**`s`**| `START`                      |- A singular `DATE`.
+**`e`**| `END`                        |- A singular `DATE`.
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <box type="info" seamless>
@@ -82,22 +110,19 @@ There are 5 CLI command formats as shown below:
 3) `COMMAND_WORD PARAMETERS`
 4) `COMMAND_WORD INDEX PARAMETERS`
 
-Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
-- `n/` -> parameter symbol<br>
-- `John Doe` -> parameter.
-
 **Other things to note in this User Guide:**
 1) Items in square brackets are optional.<br>
   e.g `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
 2) Parameters can be in any order:<br>
   `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`
-
 3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored:<br>
   `help 123` is interpreted as `help`.
-
-4) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+4) Command word is not case-sensitive.<br>
+  e.g. `list` and `LIST` are both valid commands.
+5) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Viewing help : `help`
@@ -108,6 +133,7 @@ Shows a pop-up message explaining how to access the help page.
 
 Format: `help`
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding a person: `add`
@@ -118,7 +144,6 @@ Format: `add n/NAME i/ID w/WARD d/DIAGNOSIS m/MEDICATION`
 
 * `ID` must be in the form of `PXXXXX` where `XXXXX` is a 5 digit integer.
 * `ID` of patients must be unique.
-* `Ward` must take the form of `WX` where `X` is an integer.
 
 
 [//]: # (<box type="tip" seamless>)
@@ -130,6 +155,7 @@ Examples:
 * `add n/John Doe i/P12345 w/A1 d/TYPE 1 DIABETES m/METFORMIN `
 * `add n/Nicky Lam i/P17777 w/A5 d/Gastritis m/Proton pump inhibitors `
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Listing all patients : `list`
@@ -138,6 +164,7 @@ Shows a list of all patients in WardWatch.
 
 Format: `list`
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient : `edit`
@@ -154,6 +181,7 @@ Examples:
 *  `edit 1 i/P12345 w/A2` Edits the patient ID and ward of the 1st person to be `P12345` and `A2` respectively.
 *  `edit 2 n/Betsy Crower m/Paracetamol` Edits the name and medication of the 2nd person to be `Betsy Crower` and `Panadol`
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding notes to a patient : `addnotes`
@@ -168,6 +196,7 @@ Examples:
 *  `addnotes 1 pn/Patient is prone to falling`
 *  `addnotes 2 pn/Patient requires frequent checkups`
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting notes from a patient : `delnotes`
@@ -182,6 +211,7 @@ Format: `delnotes INDEX`
 Examples:
 *  `delnotes 1`
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Viewing a patient's details: `view`
@@ -196,6 +226,9 @@ Format: `view INDEX`
 Examples:
 * `view 2` to view the 2nd patient's details.
 ![result for 'view 2'](images/viewResult.png)
+
+[Back to Input parameters](#input-parameters)<br>
+[Back to Table of Contents](#table-of-contents)
 
 ### Searching patients by field: `find`
 
@@ -225,6 +258,7 @@ Examples:
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
 ![result for 'find n/ alice benson'](images/findAliceBensonResult.png)
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting a person : `delete`
@@ -241,6 +275,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding an Appointment to a person: `make_appt`
@@ -261,6 +296,7 @@ Examples:
 * `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
   1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting an Appointment from a person: `del_appt`
@@ -273,8 +309,8 @@ Format: `del_appt INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
-
 
 ### Show appointments on a specific date: `schedule_date`
 
@@ -288,6 +324,7 @@ Format: `schedule_date DATE`
 Examples:
 * `schedule_date 01-01-2020` returns all the appointments that takes place on 1 January 2020.
 
+[Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### List all patient appointment: `schedule_all`

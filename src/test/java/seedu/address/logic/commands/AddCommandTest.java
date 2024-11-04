@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -159,14 +160,33 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public String getFilteredAppointmentDate() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void updateFilteredAppointmentList(Predicate<Person> predicate) {
+        public void updateFilteredAppointmentList(AppointmentContainsDatePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Person> getSortedAppointmentList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Person> getAllAppointmentsList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateAllAppointmentsList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasOverlappingAppointment(Person newAppointmentPerson) {
             throw new AssertionError("This method should not be called");
         }
     }
