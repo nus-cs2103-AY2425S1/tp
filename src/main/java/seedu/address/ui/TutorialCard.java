@@ -35,6 +35,10 @@ public class TutorialCard extends UiPart<Region> {
         updateStudentCount();
     }
 
+    /**
+     * Updates the old participation list to the updated one
+     * @param newParticipationList updated participation list
+     */
     public void updateParticipationList(List<Participation> newParticipationList) {
         this.participationList = newParticipationList;
         updateStudentCount();

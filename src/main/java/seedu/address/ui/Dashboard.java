@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.participation.Participation;
@@ -77,7 +76,7 @@ public class Dashboard extends UiPart<Region> {
         List<Participation> initialParticipationList = getParticipationListForTutorial(tutorial);
         TutorialCard card = new TutorialCard(tutorial.getSubject(), initialParticipationList);
         tutorials.getChildren().add(card.getRoot());
-        tutorialCards.put(tutorial, card);  // Store the card in the map for future reference
+        tutorialCards.put(tutorial, card);
     }
 
     private void addParticipationListListener() {
@@ -105,15 +104,15 @@ public class Dashboard extends UiPart<Region> {
             while (change.next()) {
                 if (change.wasAdded()) {
                     for (Tutorial addedTutorial : change.getAddedSubList()) {
-                        createAndAddTutorialCard(addedTutorial);  // Add new TutorialCard for each new tutorial
+                        createAndAddTutorialCard(addedTutorial);
                     }
                 }
 
                 if (change.wasRemoved()) {
                     for (Tutorial removedTutorial : change.getRemoved()) {
-                        TutorialCard card = tutorialCards.remove(removedTutorial);  // Remove from map
+                        TutorialCard card = tutorialCards.remove(removedTutorial);
                         if (card != null) {
-                            tutorials.getChildren().remove(card.getRoot());  // Remove from HBox
+                            tutorials.getChildren().remove(card.getRoot());
                         }
                     }
                 }
