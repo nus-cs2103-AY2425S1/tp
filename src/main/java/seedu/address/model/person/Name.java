@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS = "Names can include alphabetic characters, spaces,"
-            + " rounded brackets, hyphen, forward-slashes, at symbols, and commas.\n"
+            + " rounded brackets, hyphen, forward-slashes, @, and commas.\n"
             + "It must contain at least 1 alphabet character and has a character limit of 50.\n"
             + "It cannot be empty and must not contain any other special characters or digits.";
 

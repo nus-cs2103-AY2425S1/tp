@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Medication {
     public static final String MESSAGE_CONSTRAINTS =
-            "Medication can include alphanumeric characters, spaces, commas, dashes, "
-                    + ", forward slashes, rounded brackets, periods.\n"
+            "Medication can include alphanumeric characters, spaces, commas, hyphen, "
+                    + ", forward-slashes, rounded brackets, periods.\n"
                     + "It must contain at least 1 alphanumeric character and has a character limit of 100";
     public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9])[A-Za-z0-9\\s.,()/-]{1,100}$";
     public final String value;
