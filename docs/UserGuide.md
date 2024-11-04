@@ -223,9 +223,15 @@ Format: `blacklist INDEX`
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
+</div>
+
 ### Whitelist a Client : `whitelist`
 
 Whitelists a previously-blacklisted client.
+
+_Note: a client is considered to be on the whitelist if their client status is **not** "blacklisted"_
 
 Format: `whitelist INDEX cs/NEW_CLIENT_STATUS`
 
@@ -237,6 +243,10 @@ Format: `whitelist INDEX cs/NEW_CLIENT_STATUS`
 Examples:
 * `whitelist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
 * `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Entering `whitelist` on its own without any other parameters will filter and display all clients who have been whitelisted.
+</div>
 
 ### Sort Client list : `sort`
 
