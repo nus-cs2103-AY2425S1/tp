@@ -1,8 +1,35 @@
 # HireMe User Guide
 
-HireMe is a **desktop application for managing internship applications, optimized for use via a Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, HireMe can get your internship tracking tasks done faster than traditional GUI apps.
+HireMe is a **free desktop application that helps you manage your extensive list of internship applications.**
+
+* [Easy to use] 
+  - Type simple commands: If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
+* [High quality]
+  - User friendly interface: sleek list design to view all of your of internship applications.
+* [Streamlining management] 
+  - Add, delete and update your internship applications: everything you need to manage your list of internship applications.
+* [Insights]
+  - Tailored summary of your list of internship applications so that you can gain hidden insights.
+
+<!-- TOC -->
+* [HireMe User Guide](#hireme-user-guide)
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    * [Viewing help : `/help`](#viewing-help--help)
+    * [Adding an internship application: `/add`](#adding-an-internship-application-add)
+    * [Listing all internship applications : `/list`](#listing-all-internship-applications--list)
+    * [Deleting an internship application : `/delete`](#deleting-an-internship-application--delete)
+    * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
+    * [Updating the status of an internship application : `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application--accept-pending-reject)
+    * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
+    * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
+    * [Clearing all entries : `/clear`](#clearing-all-entries--clear)
+    * [Viewing status chart: `/chart`](#viewing-status-chart-chart)
+    * [Exiting the program : `/exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -149,7 +176,7 @@ Examples:
 
 ### Filtering internship applications by status: `/filter`
 
-Filters all of your existing internship applications with specified status. Using /filter after /find resets the search and are not stackable.
+Filters all of your existing internship applications with specified status.
 
 Format: `/filter STATUS`
 

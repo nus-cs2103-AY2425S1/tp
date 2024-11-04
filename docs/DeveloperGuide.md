@@ -6,7 +6,37 @@
 
 # HireMe Developer Guide
 
-<!-- * Table of Contents -->
+<!-- TOC -->
+* [HireMe Developer Guide](#hireme-developer-guide)
+  * [**Acknowledgements**](#acknowledgements)
+  * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+  * [**Implementation**](#implementation)
+    * [Create new internship application](#create-new-internship-application)
+    * [Find internship applications](#find-internship-applications)
+    * [Filter internship applications](#filter-internship-applications)
+    * [Delete an internship application](#delete-an-internship-application)
+    * [Sort internship application list](#sort-internship-application-list)
+    * [View chart](#view-chart)
+    * [Update the Status of an Internship Application](#update-the-status-of-an-internship-application)
+  * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+  * [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+  * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting an internship application](#deleting-an-internship-application)
+    * [Saving data](#saving-data)
+<!-- TOC -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
