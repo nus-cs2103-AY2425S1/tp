@@ -11,7 +11,7 @@ public class AssignmentTest {
 
     @Test
     public void toStringMethod() {
-        String expected = "Assignment: " + VALID_ASSIGNMENT_ONE + " " + VALID_SCORE;
+        String expected = "Assignment: " + VALID_ASSIGNMENT_ONE + " " + String.format("%.2f", VALID_SCORE);
         assertEquals(expected, assignment.toString());
     }
 }
