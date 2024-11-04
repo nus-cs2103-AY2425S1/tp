@@ -29,21 +29,27 @@ public class GroupNameTest {
         assertFalse(GroupName.isValidName(" ")); // spaces only
         assertFalse(GroupName.isValidName("^")); // only non-alphanumeric characters
         assertFalse(GroupName.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(GroupName.isValidName("peter jack")); // alphabets only
+        assertFalse(GroupName.isValidName("12345")); // numbers only
+        assertFalse(GroupName.isValidName("peter the 2nd")); // alphanumeric characters
+        assertFalse(GroupName.isValidName("Capital Tan")); // with capital letters
+        assertFalse(GroupName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
 
         // valid name
-        assertTrue(GroupName.isValidName("peter jack")); // alphabets only
-        assertTrue(GroupName.isValidName("12345")); // numbers only
-        assertTrue(GroupName.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(GroupName.isValidName("Capital Tan")); // with capital letters
-        assertTrue(GroupName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        // all uppercase
+        assertTrue(GroupName.isValidName("CS2103-F12-4"));
+        // all lowercase
+        assertTrue(GroupName.isValidName("cs2103-a12-4"));
+        // mixed case
+        assertTrue(GroupName.isValidName("cs2103-B12-4"));
     }
 
     @Test
     public void equals() {
-        GroupName groupName = new GroupName("Valid Name");
+        GroupName groupName = new GroupName("CS2103-F12-4");
 
         // same values -> returns true
-        assertTrue(groupName.equals(new GroupName("Valid Name")));
+        assertTrue(groupName.equals(new GroupName("CS2103-F12-4")));
 
         // same object -> returns true
         assertTrue(groupName.equals(groupName));
@@ -55,6 +61,6 @@ public class GroupNameTest {
         assertFalse(groupName.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(groupName.equals(new GroupName("Other Valid Name")));
+        assertFalse(groupName.equals(new GroupName("CS2103-F12-2")));
     }
 }

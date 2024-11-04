@@ -21,7 +21,7 @@ public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
             .anyMatch(keyword -> {
                 GroupName groupName = group.getGroupName();
                 String groupNameString = groupName.getGroupName().toLowerCase();
-                return groupNameString.equalsIgnoreCase(keyword);
+                return groupNameString.contains(keyword.toLowerCase());
             });
     }
 

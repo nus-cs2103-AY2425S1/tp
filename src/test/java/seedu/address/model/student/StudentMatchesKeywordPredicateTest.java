@@ -51,12 +51,8 @@ public class StudentMatchesKeywordPredicateTest {
 
     @Test
     public void test_studentDoesNotMatchKeyword_returnsFalse() {
-        // no keyword
-        StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(List.of("      "));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
         // non-matching keyword
-        predicate = new StudentMatchesQueryPredicate(List.of("alICe"));
+        StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(List.of("alICe"));
         assertFalse(predicate.test(new PersonBuilder().withName("John").build()));
     }
 

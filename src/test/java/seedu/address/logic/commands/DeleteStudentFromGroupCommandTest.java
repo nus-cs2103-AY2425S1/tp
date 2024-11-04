@@ -37,7 +37,7 @@ import seedu.address.testutil.PersonBuilder;
  * {@code DeleteStudentFromGroupCommand}.
  */
 public class DeleteStudentFromGroupCommandTest {
-    private static final Group validGroup = new Group(new GroupName("Team 1"));
+    private static final Group validGroup = new Group(new GroupName("CS2103-F12-2"));
     private static final Student validStudent = new PersonBuilder().build();
     private Model model;
 
@@ -70,15 +70,15 @@ public class DeleteStudentFromGroupCommandTest {
 
     @Test
     public void execute_groupDoesNotExist_throwsCommandException() {
-        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new GroupName("Team 5"),
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new GroupName("CS2103-F12-5"),
             validStudent.getStudentNumber());
         assertThrows(CommandException.class, Messages.MESSAGE_GROUP_NAME_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
     public void equals() {
-        GroupName teamOneName = new GroupName("Team 1");
-        GroupName teamTwoName = new GroupName("Team 2");
+        GroupName teamOneName = new GroupName("CS2103-F12-4");
+        GroupName teamTwoName = new GroupName("CS2103T-F12-4");
         StudentNumber studentNumberOne = new StudentNumber("A0123456Z");
         StudentNumber studentNumberTwo = new StudentNumber("A0654321Z");
 

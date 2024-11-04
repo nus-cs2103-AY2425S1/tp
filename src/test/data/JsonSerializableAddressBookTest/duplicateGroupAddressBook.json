@@ -4,7 +4,7 @@
     "email" : "studentB@u.nus.edu",
     "tags" : [ ],
     "studentNumber" : "A0123456B",
-    "groupName" : "Group 1"
+    "groupName" : "CS2103-F12-2"
   }, {
     "name" : "Student C",
     "email" : "studentA@u.nus.edu",
@@ -16,7 +16,7 @@
     "email" : "studentD@u.nus.edu",
     "tags" : [ ],
     "studentNumber" : "A0123456D",
-    "groupName" : "Group 1"
+    "groupName" : "CS2103-F12-2"
   }, {
     "name" : "Student A",
     "email" : "studentA@u.nus.edu",
@@ -30,7 +30,7 @@
       "email" : "studentD@u.nus.edu",
       "tags" : [ ],
       "studentNumber" : "A0123456D",
-      "groupName" : "Group 1"
+      "groupName" : "CS2103-F12-2"
     }, {
       "name" : "Student B",
       "email" : "studentB@u.nus.edu",
@@ -39,11 +39,11 @@
       "groupName" : "!"
     } ],
     "tasks" : [ ],
-    "groupName" : "Group 1"
+    "groupName" : "CS2103-F12-2"
   },{
     "students" : [ ],
     "tasks" : [ ],
-    "groupName" : "Group 1"
+    "groupName" : "CS2103-F12-2"
   }  ],
   "tasks" : [ ]
 }

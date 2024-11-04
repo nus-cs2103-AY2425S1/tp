@@ -35,13 +35,13 @@ public class CommandTestUtil {
     public static final String VALID_STUDENT_NUMBER_AMY = "A0234567J";
     public static final String VALID_STUDENT_NUMBER_BOB = "A0224466H";
 
-    public static final String TEAM_ONE = "Team1";
-    public static final String TEAM_TWO = "Team2";
-    public static final String TEAM_THREE = "Team3";
-    public static final String TEAM_FOUR = "Team4";
-    public static final String TEAM_FIVE = "Team5";
-    public static final String GROUP_ONE = "Group1";
-    public static final String GROUP_TEN = "Group10";
+    public static final String TEAM_ONE = "CS2103-F12-1";
+    public static final String TEAM_TWO = "CS2103-F12-2";
+    public static final String TEAM_THREE = "CS2103-F12-3";
+    public static final String TEAM_FOUR = "CS2103T-F12-4";
+    public static final String TEAM_FIVE = "CS2103T-F12-5";
+    public static final String GROUP_ONE = "CS2103T-F12-6";
+    public static final String GROUP_TEN = "CS2103T-F12-7";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_STUDENT_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_STUDENT_NAME + VALID_NAME_BOB;

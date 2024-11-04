@@ -20,9 +20,9 @@ public class DeleteStudentFromGroupCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteStudentFromGroupCommand() throws Exception {
-        String input = " " + PREFIX_GROUP_NAME + "Team1 " + PREFIX_STUDENT_NUMBER + "A0123456Z";
+        String input = " " + PREFIX_GROUP_NAME + "CS2103-F12-4 " + PREFIX_STUDENT_NUMBER + "A0123456Z";
         DeleteStudentFromGroupCommand expectedCommand = new DeleteStudentFromGroupCommand(
-                new GroupName("Team1"), new StudentNumber("A0123456Z"));
+                new GroupName("CS2103-F12-4"), new StudentNumber("A0123456Z"));
 
         DeleteStudentFromGroupCommand command = parser.parse(input);
         assertEquals(expectedCommand.toString(), command.toString());
@@ -37,19 +37,19 @@ public class DeleteStudentFromGroupCommandParserTest {
 
     @Test
     public void parse_missingStudentNumber_throwsParseException() {
-        String input = " " + PREFIX_GROUP_NAME + "Team1";
+        String input = " " + PREFIX_GROUP_NAME + "CS2103-F12-4";
         assertThrows(ParseException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_invalidPreamble_throwsParseException() {
-        String input = "randomPreamble " + PREFIX_GROUP_NAME + "Team1 " + PREFIX_STUDENT_NUMBER + "A0123456Z";
+        String input = "randomPreamble " + PREFIX_GROUP_NAME + "CS2103-F12-4 " + PREFIX_STUDENT_NUMBER + "A0123456Z";
         assertThrows(ParseException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_duplicatePrefixes_throwsParseException() {
-        String input = " " + PREFIX_GROUP_NAME + "Team1 " + PREFIX_GROUP_NAME + "Team2 "
+        String input = " " + PREFIX_GROUP_NAME + "CS2103-F12-4 " + PREFIX_GROUP_NAME + "CS2103-F12-3 "
                 + PREFIX_STUDENT_NUMBER + "A0123456Z";
         assertThrows(ParseException.class, () -> parser.parse(input));
     }

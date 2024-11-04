@@ -44,27 +44,27 @@ public class GroupNameContainsKeywordsPredicateTest {
     public void test_groupNameContainsKeywords_returnsTrue() {
         // one keyword
         GroupNameContainsKeywordsPredicate predicate =
-            new GroupNameContainsKeywordsPredicate(Collections.singletonList("group 213"));
-        assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
+            new GroupNameContainsKeywordsPredicate(Collections.singletonList("f12"));
+        assertTrue(predicate.test(new Group(new GroupName("CS2103-F12-4"))));
 
         // only one matching keyword
-        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("group 213", "19312903"));
-        assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
+        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("CS2103", "19312903"));
+        assertTrue(predicate.test(new Group(new GroupName("CS2103-F12-4"))));
 
         // mixed-case keywords
-        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("Group 213", "19312903"));
-        assertTrue(predicate.test(new Group(new GroupName("Group 213"))));
+        predicate = new GroupNameContainsKeywordsPredicate(Arrays.asList("f12", "Cs2103"));
+        assertTrue(predicate.test(new Group(new GroupName("CS2103-F12-4"))));
     }
 
     @Test
     public void test_groupNameDoesNotContainKeywords_returnsFalse() {
         // zero keywords
         GroupNameContainsKeywordsPredicate predicate = new GroupNameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new Group(new GroupName("Group 213"))));
+        assertFalse(predicate.test(new Group(new GroupName("CS2103-F12-4"))));
 
         // non-matching
-        predicate = new GroupNameContainsKeywordsPredicate(List.of("Oup"));
-        assertFalse(predicate.test(new Group(new GroupName("TD-12"))));
+        predicate = new GroupNameContainsKeywordsPredicate(List.of("SF12"));
+        assertFalse(predicate.test(new Group(new GroupName("CS2103-F12-4"))));
     }
 
     @Test

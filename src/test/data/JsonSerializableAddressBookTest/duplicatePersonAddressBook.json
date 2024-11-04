@@ -4,12 +4,12 @@
     "email": "alice@u.nus.edu",
     "tags": [ "friends" ],
     "student number" : "A0111111J",
-    "group": "Team 1"
+    "group": "CS2103-F12-2"
   }, {
     "name": "Alice Pauline",
     "email": "pauline@u.nus.edu",
     "student number" : "A0111111J",
-    "group": "Team 1"
+    "group": "CS2103-F12-2"
   } ],
   "groups" : [ ],
   "tasks" : [ ]
