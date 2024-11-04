@@ -160,8 +160,10 @@ public class AddPropertyCommand extends Command {
      * Generates a command execution success message based on the added property.
      */
     public String generateSuccessMessage(Person personToEdit) {
-        return String.format(Messages.format(personToEdit));
+        return String.format(MESSAGE_ADD_PROPERTY_SUCCESS,
+                personToEdit.getFullName()) + "\n" + personToEdit.getPropertyList();
     }
+
 
     @Override
     public String toString() {
