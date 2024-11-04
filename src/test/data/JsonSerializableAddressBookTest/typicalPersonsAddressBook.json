@@ -88,5 +88,6 @@
     "familySize" : 1,
     "appointment" : null,
     "tags" : [ ]
-  } ]
+  } ],
+  "archivedPersons": [ ]
 }

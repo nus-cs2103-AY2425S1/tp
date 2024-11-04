@@ -54,6 +54,8 @@ public class PersonCard extends UiPart<Region> {
     private Label updatedAt;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label isArchived;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -89,6 +91,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        isArchived.setVisible(person.isArchived());
+        isArchived.setManaged(person.isArchived());
     }
 
     private static int getPersonAge(Person person) {

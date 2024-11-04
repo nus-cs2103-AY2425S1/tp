@@ -18,5 +18,6 @@
     "priority" : "LOW",
     "income": 0,
     "familySize": 3
-  } ]
+  } ],
+  "archivedPersons": [ ]
 }
