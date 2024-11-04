@@ -405,7 +405,7 @@ Action     | Format, Examples
 **Edit Wedding** | `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`<br> e.g., `editw 1 d/12/11/2025`
 **Assign Contact to Wedding** | `assign WEDDING_INDEX c/CONTACT1_INDEX CONTACT2_INDEX ...`<br> e.g., `assign 2 c/1 2 3`
 **Unassign Contact from Wedding** | `unassign WEDDING_INDEX c/CONTACT1_INDEX CONTACT2_INDEX ...`<br> e.g., `unassign 4 c/3 5`
-**Delete Wedding** | `deletew WEDDING_INDEX`<br> e.g., `deleteW 3`
+**Delete Wedding** | `deletew WEDDING_INDEX`<br> e.g., `deletew 3`
 **Get List of (Active) Tags** | `taglist`
 **Exit**   | `exit`
 
