@@ -24,18 +24,19 @@ public class SettleAmountTest {
         assertThrows(NullPointerException.class, () -> SettleAmount.isValidSettleAmount(null));
 
         // invalid settleAmounts
-        assertFalse(PaidAmount.isValidPaidAmount("")); // empty string
-        assertFalse(PaidAmount.isValidPaidAmount(" ")); // spaces only
-        assertFalse(PaidAmount.isValidPaidAmount("1.234")); // more than 2 decimal places
-        assertFalse(PaidAmount.isValidPaidAmount("1.2.3")); // more than 1 decimal point
-        assertFalse(PaidAmount.isValidPaidAmount("-1.23")); // negative number
-        assertFalse(PaidAmount.isValidPaidAmount("10000000.00")); // more than max value
+        assertFalse(SettleAmount.isValidSettleAmount("")); // empty string
+        assertFalse(SettleAmount.isValidSettleAmount(" ")); // spaces only
+        assertFalse(SettleAmount.isValidSettleAmount("1.234")); // more than 2 decimal places
+        assertFalse(SettleAmount.isValidSettleAmount("1.2.3")); // more than 1 decimal point
+        assertFalse(SettleAmount.isValidSettleAmount("-1.23")); // negative number
+        assertFalse(SettleAmount.isValidSettleAmount("10000000.00")); // more than max value
+        assertFalse(SettleAmount.isValidSettleAmount("0"));
 
         // valid paidAmounts
-        assertTrue(PaidAmount.isValidPaidAmount("1")); // 0 decimal places
-        assertTrue(PaidAmount.isValidPaidAmount("1.2")); // 1 decimal place
-        assertTrue(PaidAmount.isValidPaidAmount("123.23")); // 2 decimal places
-        assertTrue(PaidAmount.isValidPaidAmount("9999999.99")); // boundary value
+        assertTrue(SettleAmount.isValidSettleAmount("1")); // 0 decimal places
+        assertTrue(SettleAmount.isValidSettleAmount("1.2")); // 1 decimal place
+        assertTrue(SettleAmount.isValidSettleAmount("123.23")); // 2 decimal places
+        assertTrue(SettleAmount.isValidSettleAmount("9999999.99")); // boundary value
     }
 
     @Test
