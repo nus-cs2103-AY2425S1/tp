@@ -13,15 +13,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.goods.Goods;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
@@ -181,6 +188,38 @@ public class ModelManagerTest {
     @Test
     public void getFilteredGoods() {
         // TODO: Implement this
+    }
+
+    @Test
+    public void getFilteredPersonsWithGoodsCategoryTagsAdded() {
+        modelManager.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.SPECIALTY)
+                .build();
+        Goods banana = new GoodsBuilder()
+                .withName("Banana")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        GoodsReceipt bananaReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(banana)
+                .build();
+        modelManager.addGoods(appleReceipt);
+        modelManager.addGoods(bananaReceipt);
+        modelManager.updateFilteredPersonList(p -> p.equals(ALICE));
+        Person alice = modelManager
+                .getObservableFilteredPersonsWithGoodsCategoryTagsAdded()
+                .stream().findAny().get();
+        Set<Tag> expectedTags = Stream
+                .of(ALICE.getTags(), List.of(new Tag("SPECIALTY"), new Tag("CONSUMABLES")))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+        assertEquals(alice.getTags(), expectedTags);
     }
 
     @Test

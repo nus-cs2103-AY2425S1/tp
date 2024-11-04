@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -68,6 +69,15 @@ public class Person {
     }
 
     /**
+     * Returns a new person with added tags.
+     */
+    public Person addTags(Collection<Tag> addTags) {
+        HashSet<Tag> newTags = new HashSet<>(tags);
+        newTags.addAll(addTags);
+        return new Person(name, phone, address, newTags);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -104,5 +114,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }

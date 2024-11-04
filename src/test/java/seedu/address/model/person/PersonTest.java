@@ -11,8 +11,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -48,6 +55,20 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void addTags() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        List<Tag> addTags = List.of(new Tag("Hello"), new Tag("World"));
+        Person newAlice = ALICE.addTags(addTags);
+        Set<Tag> expectedTags = Stream
+                .of(ALICE.getTags(), addTags)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+
+        assertEquals(ALICE, aliceCopy);
+        assertEquals(newAlice.getTags(), expectedTags);
     }
 
     @Test

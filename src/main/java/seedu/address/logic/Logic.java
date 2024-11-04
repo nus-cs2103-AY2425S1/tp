@@ -34,6 +34,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered person list with Goods Categories Tags Added **/
+    ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded();
+
     /**
      * Returns a list of filtered goods receipts.
      */
