@@ -87,13 +87,15 @@ Underneath each suggested command is the syntax for that command and what parame
 
 ## Command summary
 
-| Action        | Format, Examples                                                                                                                                                                                               |
-|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**      | `help`                                                                                                                                                                                                         |
-| **List**      | `list`                                                                                                                                                                                                         |
-| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130` |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
-| **EditGame**  | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                       |
+| Action         | Format, Examples                                                                                                                                                                                               |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**       | `help`                                                                                                                                                                                                         |
+| **List**       | `list`                                                                                                                                                                                                         |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130` |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
+| **AddGame**    | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                         |
+| **EditGame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                       |
+| **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch u/Potato`                                                                                                                                         |
 | **FavGame**   | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                        |
 | **UnFavGame** | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                    |
 | **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                     |
@@ -159,6 +161,19 @@ Examples:
 *  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
 *  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
 
+### Adding a game : `addgame`
+
+Adds a game to an existing person in the address book.
+
+Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
+
+* Adds a game `GAME` to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* If the game `GAME` already exists for that person, it will not be added. It may be edited using the editgame command instead.
+
+Examples:
+* `addgame 1 g/Overwatch` Adds the game `Overwatch` to the 1st person.
+* `addgame 2 g/League of Legends u/Potato s/Pro r/Support` Adds the game `League of Legends` to the 2nd person with the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
+
 ### Editing a game : `editgame`
 
 Edits the game of an existing person in the address book.
@@ -172,6 +187,17 @@ Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
 Examples:
 *  `editgame 1 g/Overwatch u/Potato` Edits the username of game `Overwatch` of the 1st person to be `Potato`.
 *  `editgame 2 g/League of Legends u/Potato s/Pro r/Support` Edits the game `League of Legends` of the 2nd person to have the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
+
+### Deleting a game : `deletegame`
+
+Deletes the specified game from an existing person in the address book.
+
+Format: `deletegame INDEX g/GAME`
+
+* Deletes the game `GAME` of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 
 ### Favouriting a game : `favgame`
 
