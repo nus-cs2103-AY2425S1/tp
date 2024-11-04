@@ -30,7 +30,7 @@ public class EditPolicyCommand extends Command {
             + ": Updates the specified policy for the client identified "
             + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/[POLICY_TYPE] pa/[PREMIUM_AMOUNT] ca/[COVERAGE_AMOUNT] ed/[EXPIRY_DATE]\n"
+            + "pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]\n"
             + "Example: "
             + COMMAND_WORD
             + " 1 pt/health pa/1500 ca/10000.50 ed/09/14/2024 "
