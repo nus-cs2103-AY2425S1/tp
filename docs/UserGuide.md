@@ -104,7 +104,8 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/acltear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/anklesprain`
+* `add n/Betsy Crowe t/acltear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/ankle sprain`<br>
+  ![add Betsy Crowe](images/addBetsyCrowe.png)
 
 ### Scheduling an appointment: `schedule`
 
@@ -120,8 +121,9 @@ Format: `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`
 
 Examples:
 * `schedule John Doe d/2024-10-14 1200 note/first appointment`
-* `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
-* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting note/not so important meeting`
+* `schedule John Doe d/2024-10-15 1200 d/2024-10-16 1300 note/important meeting note/not so important meeting`
+* `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`<br>
+  ![schedule for Betsy Crowe](images/scheduleBetsyCrowe.png)
 
 
 ### Setting a reminder: `reminder`
@@ -140,7 +142,8 @@ Format: `reminder NAME r/REMINDER_TIME`
 
 Examples:
 * `reminder John Doe r/6 days`
-* `reminder Betsy Crowe r/3 hours`
+* `reminder Betsy Crowe r/3 hours`<br>
+  ![reminder for Betsy Crowe](images/reminderBetsyCrowe.png)
 
 ### Deleting a reminder: `reminder-delete`
 
@@ -153,7 +156,8 @@ Format: `reminder-delete NAME`
 * You can only delete a reminder if the reminder has been set.
 
 Examples:
-* `reminder-delete John Doe`
+* `reminder-delete Betsy Crowe`<br>
+  ![reminder delete Betsy Crowe](images/reminderDeleteBetsyCrowe.png)
 
 ### Deleting an appointment: `appointment-delete`
 
@@ -166,7 +170,8 @@ Format: `appointment-delete NAME d/DATE_AND_TIME`
 * The appointment given must be an existing appointment for the client.
 
 Examples:
-* `appointment-delete John Doe d/2024-11-24 1200`
+* `appointment-delete Betsy Crowe d/2024-10-14 1300`<br>
+  ![appointment delete Betsy Crowe](images/appointmentDeleteBetsyCrowe.png)
 
 ### Viewing upcoming appointments: `appointment-list`
 
@@ -174,13 +179,14 @@ Lists all upcoming appointments in the order of the earliest next upcoming appoi
 
 Format: `appointment-list [d/DATE][TIME]`
 
-* This will only show appointments that are in the future (compared to local time now).
+* This will only show appointments that are in the **future** (compared to local time now).
 * The optional date and time fields act as filters.
 * A time filter cannot be applied without date filter.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
 
 Examples:
-* `appointment-list`
+* `appointment-list`<br>
+  ![appointment list](images/appointmentList.png)<br>
 * `appointment-list d/2024-10-17`
 * `appointment-list d/2024-10-18 1000`
 
@@ -191,11 +197,12 @@ Marks an appointment for a client as paid or unpaid.
 Format: `payment NAME d/DATE_AND_TIME pay/PAYMENT_STATUS`
 
 * Format for the date and time must be in yyyy-MM-dd HHmm.
-* Payment status can be in the format [true/paid or false/unpaid].
+* Payment status can be in the format [paid or unpaid] and will be shown in the client tab.
 
 Examples:
-* `payment John Doe d/2024-10-14 1200 pay/true`
-* `payment Betsy Crowe d/2024-10-14 1300 pay/unpaid`
+* `payment John Doe d/2024-10-14 1200 pay/unpaid`
+* `payment Betsy Crowe d/2024-10-14 1300 pay/paid`<br>
+  ![payment Betsy Crowe](images/paymentBetsyCrowe.png)<br>
 
 ### Listing all persons : `list`
 
@@ -223,9 +230,9 @@ The name must match the full name exactly.
 - Schedule
 
 **Examples:**
-* `view John Doe`<br>
-* ![result for 'view John Doe'](images/viewJohnDoe.png)<br>
-* `view Betsy Crowe`
+* `view John Doe`
+* `view Jamie Chew`<br>
+  ![view Jamie Chew](images/viewJamieChew.png)<br>
 
 ### Editing a person : `edit`
 
@@ -297,7 +304,7 @@ Automatically displays the top 3 upcoming appointments for all contacts when you
 * If there are fewer than three upcoming appointments, the list will show all available appointments.
 
 Example display:
-![display for upcoming appointments](images/upcomingAppointmentDisplay.png)
+![display for upcoming appointments](images/upcomingAppointments.png)
 
 ### Saving the data
 
