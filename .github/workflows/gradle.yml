@@ -59,6 +59,7 @@ jobs:
         if: github.event_name == 'pull_request' && runner.os == 'Linux'
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           script: |
             const artifactLink = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts`
             const commentBody = `:page_facing_up: [Reports available here](${artifactLink})`
@@ -68,7 +69,6 @@ jobs:
               repo: context.repo.repo,
               body: commentBody
             })
-          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
