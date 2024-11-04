@@ -64,7 +64,40 @@ public class AutocompleteParserTest {
         assertEquals(suggestions, new HashMap<>());
     }
 
+    @Test
+    public void parseCommand_invalidPrefix_returnsNoSuggestions() {
+        AutocompleteParser autocompleteParser = new AutocompleteParser();
+        String userInput = "add ummm/";
+
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                userInput.length());
+
+        assertEquals(suggestions, new HashMap<>());
+    }
+
+    @Test
+    public void parseCommand_prefixOnFirstWord_returnsNoSuggestions() {
+        AutocompleteParser autocompleteParser = new AutocompleteParser();
+        String userInput = "m/";
+
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                userInput.length());
+
+        assertEquals(suggestions, new HashMap<>());
+    }
+
     // Test for command parsing
+    @Test
+    public void parseCommand_commandNotOnFirstWord_returnsNoSuggestions() {
+        AutocompleteParser autocompleteParser = new AutocompleteParser();
+        String userInput = "m/MODULE ad";
+
+        HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
+                userInput.length());
+
+        assertEquals(suggestions, new HashMap<>());
+    }
+
     @Test
     public void parseCommand_aInput_returnsAddArchiveCommandSuggestion() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
@@ -95,11 +128,11 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_modulePrefixInput_returnsAllModuleSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "m/";
+        String userInput = "add m/";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("MA1522", "m/MA1522");
-        expectedSuggestions.put("CS1101", "m/CS1101");
-        expectedSuggestions.put("EL1101", "m/EL1101");
+        expectedSuggestions.put("MA1522", "add m/MA1522");
+        expectedSuggestions.put("CS1101", "add m/CS1101");
+        expectedSuggestions.put("EL1101", "add m/EL1101");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
@@ -110,9 +143,9 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_modulePrefixInputStartWithM_returnsOneModuleSuggestion() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "m/M";
+        String userInput = "ed m/M";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("MA1522", "m/MA1522");
+        expectedSuggestions.put("MA1522", "ed m/MA1522");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
@@ -123,11 +156,11 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_modulePrefixInputCaretOnPrefix_returnsAllModuleSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "m/M";
+        String userInput = "add m/M";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("MA1522", "m/MA1522");
-        expectedSuggestions.put("CS1101", "m/CS1101");
-        expectedSuggestions.put("EL1101", "m/EL1101");
+        expectedSuggestions.put("MA1522", "add m/MA1522");
+        expectedSuggestions.put("CS1101", "add m/CS1101");
+        expectedSuggestions.put("EL1101", "add m/EL1101");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length() - 1);
@@ -139,11 +172,11 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_tagPrefixInput_returnsAllTagSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "t/";
+        String userInput = "edit t/";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("friends", "t/friends");
-        expectedSuggestions.put("owesMoney", "t/owesMoney");
-        expectedSuggestions.put("runner", "t/runner");
+        expectedSuggestions.put("friends", "edit t/friends");
+        expectedSuggestions.put("owesMoney", "edit t/owesMoney");
+        expectedSuggestions.put("runner", "edit t/runner");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
@@ -154,9 +187,9 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_tagPrefixInputStartWithF_returnsOneTagSuggestion() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "t/f";
+        String userInput = "edit t/f";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("friends", "t/friends");
+        expectedSuggestions.put("friends", "edit t/friends");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
@@ -167,11 +200,11 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_tagPrefixInputCaretOnPrefix_returnsAllTagSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "t/f";
+        String userInput = "edit t/f";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("friends", "t/friends");
-        expectedSuggestions.put("owesMoney", "t/owesMoney");
-        expectedSuggestions.put("runner", "t/runner");
+        expectedSuggestions.put("friends", "edit t/friends");
+        expectedSuggestions.put("owesMoney", "edit t/owesMoney");
+        expectedSuggestions.put("runner", "edit t/runner");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length() - 1);
@@ -183,10 +216,10 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_genderPrefixInput_returnsAllGenderSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "g/";
+        String userInput = "add g/";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("male", "g/male");
-        expectedSuggestions.put("female", "g/female");
+        expectedSuggestions.put("male", "add g/male");
+        expectedSuggestions.put("female", "add g/female");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
@@ -197,9 +230,9 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_genderPrefixInputStartsWithM_returnsMaleGenderSuggestion() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "g/m";
+        String userInput = "add g/m";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("male", "g/male");
+        expectedSuggestions.put("male", "add g/male");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length());
@@ -210,10 +243,10 @@ public class AutocompleteParserTest {
     @Test
     public void parseCommand_genderPrefixInputCaretOnPrefix_returnsAllGenderSuggestions() {
         AutocompleteParser autocompleteParser = new AutocompleteParser();
-        String userInput = "g/m";
+        String userInput = "add g/m";
         HashMap<String, String> expectedSuggestions = new HashMap<>();
-        expectedSuggestions.put("male", "g/male");
-        expectedSuggestions.put("female", "g/female");
+        expectedSuggestions.put("male", "add g/male");
+        expectedSuggestions.put("female", "add g/female");
 
         HashMap<String, String> suggestions = autocompleteParser.parseCommand(userInput, model.getAddressBook(),
                 userInput.length() - 1);
