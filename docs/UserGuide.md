@@ -8,7 +8,15 @@ title: User Guide
 
 ---
 
-### 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+A person can have any number of tags (including 0)
+</div>
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+A person can have any number of tags (including 0)
+</div>
 
 ### **1. Quick Start** 
 
@@ -53,23 +61,14 @@ Fields
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL_NAME:` Name of the tutorial
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-secondary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-A person can have any number of tags (including 0)
-</div>
 | **Note:** Student can only be enrolled into existing tutorial. Use createtut to create new tutorials
 
 Example usages
 
 * `enroll 1 tut/physics`
 
-<div class="invalid-usage">
-
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Enrolling student in a tutorial that has not been created yet
@@ -81,8 +80,8 @@ Invalid usages
     * *Error Message: This person is already in the tutorial*
 
 * Format errors, check [here](#11-format-errors)
-
 </div>
+{% endraw %}
 
 ### 
 

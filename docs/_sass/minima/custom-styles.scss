@@ -4,8 +4,12 @@ h2, h4, h5, h6 {
   color: #e46c0a;
 }
 
-.invalid-usage {
-    font-size: $base-font-size * 0.875;
+h3 {
+  color: $text-color;
+}
+
+.smaller-text {
+  font-size: $base-font-size * 0.875;
 }
 
 // Bootstrap style alerts
