@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODNAME_AMY;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.Assert;
+
 public class ModuleNameTest {
 
     @Test
@@ -22,8 +24,33 @@ public class ModuleNameTest {
     }
 
     @Test
-    public void emptyModuleNameTest() {
-        assertEquals(new ModuleName(""), new ModuleName(""));
+    public void isValidModuleName() {
+        // null module name
+        Assert.assertThrows(NullPointerException.class, () -> ModuleName.isValidModName(null));
+
+        // blank module name
+        assertFalse(ModuleName.isValidModName("")); // empty string
+        assertFalse(ModuleName.isValidModName(" ")); // spaces only
+
+        // invalid module name
+        assertFalse(ModuleName.isValidModName("C")); // less than 2 alphabets
+        assertFalse(ModuleName.isValidModName("CS")); // missing digits
+        assertFalse(ModuleName.isValidModName("2030")); // missing alphabets
+        assertFalse(ModuleName.isValidModName("2030S")); // missing alphabets with alphabet at the back
+        assertFalse(ModuleName.isValidModName("CS221")); // missing digit
+        assertFalse(ModuleName.isValidModName("C2030")); // missing alphabet
+        assertFalse(ModuleName.isValidModName("C2030S")); // missing alphabet with alphabet at the back
+        assertFalse(ModuleName.isValidModName("C2030-T")); // missing alphabet with hyphen and alphabet at the back
+        assertFalse(ModuleName.isValidModName("CS2030CS")); // multiple alphabets at the back
+        assertFalse(ModuleName.isValidModName("CS2030C-S")); // hyphen after alphabet
+        assertFalse(ModuleName.isValidModName("CS2030-ST")); // 2 alphabets after hyphen
+
+        // valid module name
+        assertTrue(ModuleName.isValidModName("CS2030")); // 2 alphabets and 4 digits
+        assertTrue(ModuleName.isValidModName("CS2030S")); // 2 alphabets, 4 digits and 1 trailing alphabet
+        assertTrue(ModuleName.isValidModName("LSM2251")); // 3 alphabets and 4 digits
+        assertTrue(ModuleName.isValidModName("CS2103-T")); // 2 alphabets, 4 digits, a hyphen and trailing alphabet
+
     }
 
     @Test

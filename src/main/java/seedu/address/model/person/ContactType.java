@@ -60,8 +60,9 @@ public class ContactType {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidContactType(String test) {
-        return test.matches(VALIDATION_REGEX)
-                && test.equalsIgnoreCase("WORK")
-                || test.equalsIgnoreCase("PERSONAL");
+        String trimmedTest = test.trim();
+        return trimmedTest.matches(VALIDATION_REGEX)
+                && (test.equalsIgnoreCase("WORK")
+                || test.equalsIgnoreCase("PERSONAL"));
     }
 }

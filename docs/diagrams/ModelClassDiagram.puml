@@ -20,6 +20,7 @@ Class Email
 Class Name
 Class Phone
 Class TelegramHandle
+Class Remark
 Class Tag
 
 Class I #FFFFFF
@@ -43,6 +44,7 @@ Person *--> "1" ContactType
 Person *--> "1" TelegramHandle
 Person *--> "1" ModuleName
 Person *--> "1" Name
+Person *--> "1" Remark
 Person *--> "0...1"Phone
 Person *--> "0...1"Email
 Person *--> "*" Tag
