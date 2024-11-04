@@ -26,6 +26,10 @@ public class CommandResult {
 
     private Person person;
 
+    private boolean isView;
+
+    private boolean isCloseView;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -33,16 +37,21 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        isView = false;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, Person person) {
+    public CommandResult(String feedbackToUser, Person person, boolean isCloseView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
         this.person = person;
+        this.isView = true;
+        this.isCloseView = isCloseView;
+
+
     }
 
     /**
@@ -65,12 +74,16 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isView() {
-        return person != null;
-    }
-
     public Person getPerson() {
         return person;
+    }
+
+    public boolean isCloseView() {
+        return isCloseView;
+    }
+
+    public boolean isView() {
+        return isView;
     }
 
     @Override

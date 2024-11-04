@@ -15,26 +15,26 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertEquals(commandResult, new CommandResult("feedback"));
+        assertEquals(commandResult, new CommandResult("feedback", false, false));
 
         // same object -> returns true
-        assertTrue(commandResult.equals(commandResult));
+        assertEquals(commandResult, commandResult);
 
         // null -> returns false
-        assertFalse(commandResult.equals(null));
+        assertNotEquals(null, commandResult);
 
         // different types -> returns false
-        assertFalse(commandResult.equals(0.5f));
+        assertNotEquals(0.5f, commandResult, String.valueOf(0.0));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
+        assertNotEquals(commandResult, new CommandResult("different"));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertNotEquals(commandResult, new CommandResult("feedback", true, false));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertNotEquals(commandResult, new CommandResult("feedback", false, true));
 
     }
 
@@ -66,9 +66,9 @@ public class CommandResultTest {
 
     @Test
     public void equalsHandleNUll() {
-        CommandResult test = new CommandResult("feedback", null);
-        assertEquals(test, new CommandResult("feedback", null));
-        assertNotEquals(new CommandResult("feedback", TypicalPersons.ALICE), test);
+        CommandResult test = new CommandResult("feedback", null, false);
+        assertEquals(test, new CommandResult("feedback", null, false));
+        assertNotEquals(new CommandResult("feedback", TypicalPersons.ALICE, false), test);
     }
 
     @Test
@@ -79,13 +79,13 @@ public class CommandResultTest {
 
     @Test
     public void isViewTestTrue() {
-        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE);
+        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE, false);
         assertTrue(test.isView());
     }
 
     @Test
     public void getPersonTest() {
-        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE);
+        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE, false);
         assertEquals(TypicalPersons.ALICE, test.getPerson());
     }
 }

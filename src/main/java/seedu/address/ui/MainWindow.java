@@ -28,13 +28,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -82,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -172,11 +173,17 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the detail of the person.
      */
     @FXML
-    private void handleView(Person person) {
-        ViewWindow viewWindow = new ViewWindow(person);
-        viewWindowPlaceholder.getChildren().clear();
-        viewWindowPlaceholder.getChildren().add(viewWindow.getRoot());
-        viewWindowPlaceholder.setManaged(true);
+    private void handleView(CommandResult commandResult) {
+        if (commandResult.isCloseView()) {
+            closeView();
+        } else {
+
+            Person person = commandResult.getPerson();
+            ViewWindow viewWindow = new ViewWindow(person);
+            viewWindowPlaceholder.getChildren().clear();
+            viewWindowPlaceholder.getChildren().add(viewWindow.getRoot());
+            viewWindowPlaceholder.setManaged(true);
+        }
     }
 
     @FXML
@@ -209,11 +216,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isView()) {
-                handleView(commandResult.getPerson());
-            }
-
-            if (!commandResult.isView()) {
-                closeView();
+                handleView(commandResult);
             }
 
             return commandResult;

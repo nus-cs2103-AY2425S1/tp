@@ -45,7 +45,7 @@ class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(TypicalPersons.ALICE.getName());
         assertEquals(
                 viewCommand.execute(model),
-                new CommandResult(ViewCommand.VIEW_ACKNOWLEDGMENT, TypicalPersons.ALICE));
+                new CommandResult(ViewCommand.VIEW_ACKNOWLEDGMENT, TypicalPersons.ALICE, false));
     }
 
     @Test

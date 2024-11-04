@@ -28,7 +28,7 @@ public class ViewCommand extends Command {
     public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact ";
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact ";
     private static final ViewCommand closeView = new ViewCommand();
-    private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null);
+    private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null, true);
 
     private final Name personName;
     private final boolean isClose;
@@ -65,12 +65,9 @@ public class ViewCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
-        Person person =
-                model.getAddressBook().getPersonList().stream()
-                        .filter(p -> p.getName().equalIgnoreCase(personName))
-                        .findFirst().orElseThrow();
+        Person person = model.getPerson(personName).get();
 
-        return new CommandResult(VIEW_ACKNOWLEDGMENT, person);
+        return new CommandResult(VIEW_ACKNOWLEDGMENT, person, false);
     }
 
     @Override
