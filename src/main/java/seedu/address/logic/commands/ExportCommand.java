@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,10 +25,18 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_SUCCESS = "Contacts exported successfully to: %1$s";
     public static final String MESSAGE_FAILURE = "Failed to export contacts to: %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports contacts to a CSV file.\n"
-            + "Example: " + COMMAND_WORD + " /path/to/export.csv";
+    public static final String MESSAGE_USAGE = "Error: Invalid file path format!\n\n"
+            + "To specify the file path for export, use one of the following formats:\n\n"
+            + "- Absolute Path: The complete path starting from the root directory. Examples:\n"
+            + "  - Windows: C:\\Users\\username\\Documents\\project\\data\\file.csv\n"
+            + "  - macOS/Linux: /home/username/project/data/file.csv\n\n"
+            + "- Relative Path: A path relative to the current working directory of the application. "
+            + "For example, if the application is running in /home/username/project:\n"
+            + "  - data/file.csv will refer to /home/username/project/data/file.csv.\n\n"
+            + "Please ensure the file path format matches one of the above styles.";
 
-    private final String filePath;
+
+    private final Path filePath;
 
     /**
      * Creates an ExportCommand to export contacts to the specified file path.
@@ -35,7 +45,9 @@ public class ExportCommand extends Command {
      */
     public ExportCommand(String filePath) {
         requireNonNull(filePath);
-        this.filePath = filePath;
+        // Use Paths.get() to handle both relative and absolute paths
+        this.filePath = Paths.get(filePath).isAbsolute() ? Paths.get(filePath)
+                : Paths.get(System.getProperty("user.dir"), filePath);
     }
 
     /**
@@ -49,7 +61,7 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
             // Write the header row for the CSV file
             writer.write("name,category,studentId/industry,phone,email,address,tags\n");
 
@@ -73,20 +85,33 @@ public class ExportCommand extends Command {
      */
     private String serializePerson(Person person) {
         StringBuilder sb = new StringBuilder();
-        sb.append(person.getName().fullName).append(","); // Name
+        sb.append(escapeCsv(person.getName().fullName)).append(","); // Name
         if (person instanceof Student) {
             Student student = (Student) person;
-            sb.append("student,").append(student.getStudentId().toString()).append(","); // Category and studentID
+            sb.append("student,").append(escapeCsv(student.getStudentId().toString())).append(","); // studentID
         } else if (person instanceof Company) {
             Company company = (Company) person;
-            sb.append("company,").append(company.getIndustry()).append(","); // Category and industry
+            sb.append("company,").append(escapeCsv(company.getIndustry().toString())).append(","); // industry
         }
-        sb.append(person.getPhone().value).append(","); // Phone
-        sb.append(person.getEmail().value).append(","); // Email
-        sb.append(person.getAddress().value).append(","); // Address
+        sb.append(escapeCsv(person.getPhone().value)).append(","); // Phone
+        sb.append(escapeCsv(person.getEmail().value)).append(","); // Email
+        sb.append(escapeCsv(person.getAddress().value)).append(","); // Address
         sb.append(serializeTags(person.getTags())); // Tags
         return sb.toString();
     }
+
+    /**
+     * Escapes fields for CSV format by wrapping in double quotes if they contain commas or quotes.
+     * Double quotes within fields are doubled according to CSV conventions.
+     */
+    private String escapeCsv(String field) {
+        if (field.contains(",") || field.contains("\"")) {
+            // Escape double quotes within the field by doubling them and wrap the entire field in quotes
+            return "\"" + field.replace("\"", "\"\"") + "\"";
+        }
+        return field;
+    }
+
 
     /**
      * Serializes a set of Tag objects into a space-separated string.
