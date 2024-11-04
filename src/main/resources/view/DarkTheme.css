@@ -39,56 +39,13 @@
     -fx-max-height: 0;
 }
 
-.table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 5;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-size: 35;
-    -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
-    -fx-border-insets: 0 10 1 0;
-}
-
-.table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-alignment: center-left;
-    -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
-}
-
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #fdf5f5;
-    -fx-border-width: 0;
-}
 
 .split-pane {
     -fx-background-color: #fdf5f5;
-    -fx-border-width: 0;
 }
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 5 0 0 5; /* top right bottom left */
     -fx-background-color: #fdf5f5
 }
 
@@ -127,20 +84,20 @@
 
 .cell_big_label {
     -fx-font-family: "Raleway Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 24px;
     -fx-text-fill: derive(#757575, -50%);
 }
 
 .cell_small_label {
     -fx-font-family: "Raleway";
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-text-fill: derive(#757575, -50%);
 }
 
 .card_big_label {
     -fx-font-family: "Raleway Black";
-        -fx-font-size: 26px;
-        -fx-text-fill: derive(#757575, -50%);
+    -fx-font-size: 26px;
+    -fx-text-fill: derive(#757575, -50%);
     -fx-padding: 8 0 5 0;
 }
 
@@ -154,6 +111,13 @@
      -fx-background-color: #fdf5f5;
 }
 
+.split-pane .split-pane-divider {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: default;
+}
+
 .pane-with-border {
      -fx-background-color: #FDF5F5;
      -fx-border-color: #FDF5F5;
@@ -165,14 +129,24 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #F3EDF7;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-border-color: derive(#757575, 90%);
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #5B4A82;
 }
+#resultDisplay {
+    -fx-background-color: #F3EDF7;
+    -fx-padding: 3;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+    -fx-border-width: 0;
+}
 
-.result-display .label {
-    -fx-text-fill: black !important;
+#resultDisplay .content {
+    -fx-background-color: #F3EDF7;
 }
 
 .status-bar .label {
@@ -346,13 +320,6 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content {
-    -fx-background-color: #F2EDF6;
-    -fx-background-radius: 10 10 0 0;
-    -fx-border-radius: 10 10 0 0;
-    -fx-border-color: derive(#757575, 90%);
-}
-
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
@@ -366,38 +333,126 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 12;
+    -fx-font-size: 16;
 }
 
-#lessons {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
-    -fx-margin-top: 10px;
-}
-
-#lessons .label {
+#nextLesson {
     -fx-text-fill: white;
     -fx-background-color: #88c1d0;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 12;
+    -fx-font-size: 16;
 }
 
-#remarks {
-    -fx-spacing: 2;
-    -fx-padding: 5 0 10 0;
+#displayTags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+    -fx-margin-top: 10px;
+    -fx-padding: 5 0 5 0;
 }
 
-#remarks .label {
-    -fx-font-family: "Raleway";
-        -fx-font-style: italic;
-    -fx-font-size: 12px;
-    -fx-text-fill: derive(#e8def8, -50%);
-    -fx-background-color: #fdf5f5;
-    -fx-padding: 3 5 3 5;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-    -fx-border-color: #e0e0e0;
+#displayTags .label {
+    -fx-background-color: #bc9feb;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 24;
+}
+
+.display-scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.student-information {
+    -fx-background-color: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+}
+
+.divider {
+    -fx-background-color: derive(#757575, 90%);
+    -fx-pref-height: 1;
+    -fx-max-height: 1;
+    -fx-min-height: 1;
+}
+
+.header-container {
+    -fx-padding: 32px;
+    -fx-background-color: white;
+    -fx-border-color: derive(#757575, 90%);
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-radius: 5 5 0 0;
+    -fx-border-width: 1 1 0 1;
+}
+
+.section-container {
+    -fx-padding: 32px;
+    -fx-background-color: white;
+    -fx-border-color: derive(#757575, 90%);
+    -fx-border-width: 0 1 0 1;
+}
+
+.bottom-container {
+    -fx-padding: 32px;
+    -fx-background-color: white;
+    -fx-border-color: derive(#757575, 90%);
+    -fx-border-radius: 0 0 5 5;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-width: 0 1 1 1;
+}
+
+.section-heading {
+    -fx-font-size: 32px;
+    -fx-text-fill: #555555;
+    -fx-font-weight: bold;
+}
+
+.label-heading {
+    -fx-text-fill: #555555;
+    -fx-font-size: 24px;
+    -fx-opacity: 0.9;
+    -fx-font-weight: bold;
+}
+
+.content-label {
+    -fx-text-fill: #555555;
+    -fx-font-size: 24px;
+    -fx-opacity: 0.9;
+}
+
+.content-flow-pane {
+    -fx-padding: 8px 0 0 0;
+}
+
+.content-flow-pane .label {
+    -fx-padding: 6px 12px;
+    -fx-text-fill: white;
+}
+
+#displayRemarks {
+    -fx-spacing: 8;
+    -fx-padding: 10;
+}
+
+/* Style for each remark label with numbering */
+#displayRemarks .label {
+    -fx-font-size: 24px;
+    -fx-padding: 5 10;
+    -fx-text-fill: #555555;
+}
+
+#displayLessons {
+    -fx-spacing: 8;
+    -fx-padding: 10;
+}
+
+#displayLessons .label{
+    -fx-padding: 5 10;
+    -fx-text-fill: #555555;
+    -fx-font-size: 24px;
+}
+
+#displayCardContainer {
     -fx-border-width: 1;
 }

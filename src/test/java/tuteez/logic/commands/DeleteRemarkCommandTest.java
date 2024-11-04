@@ -41,6 +41,7 @@ public class DeleteRemarkCommandTest {
     @Test
     public void execute_deleteRemarkUnfilteredList_success() {
         Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String originalPersonName = originalPerson.getName().toString();
         Person personToDeleteRemark = new PersonBuilder(originalPerson).withRemarks(VALID_REMARKLIST).build();
 
         model.setPerson(originalPerson, personToDeleteRemark);
@@ -49,8 +50,7 @@ public class DeleteRemarkCommandTest {
 
         Person updatedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        String expectedMessage = String.format("Deleted remark at index %1$s from Person %2$s",
-                1, 1);
+        String expectedMessage = String.format("Deleted remark at index %1$s from %2$s", 1, originalPersonName);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToDeleteRemark, updatedPerson);
@@ -64,6 +64,7 @@ public class DeleteRemarkCommandTest {
     @Test
     public void execute_deleteRemarkFilteredList_success() {
         Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String originalPersonName = originalPerson.getName().toString();
         Person personToDeleteRemark = new PersonBuilder(originalPerson).withRemarks(VALID_REMARKLIST).build();
 
         model.setPerson(originalPerson, personToDeleteRemark);
@@ -72,8 +73,7 @@ public class DeleteRemarkCommandTest {
 
         Person updatedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        String expectedMessage = String.format("Deleted remark at index %1$s from Person %2$s",
-                1, 1);
+        String expectedMessage = String.format("Deleted remark at index %1$s from %2$s", 1, originalPersonName);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToDeleteRemark, updatedPerson);
@@ -119,6 +119,7 @@ public class DeleteRemarkCommandTest {
     @Test
     public void execute_deleteRemark_updatesLastViewedPerson() {
         Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String originalPersonName = originalPerson.getName().toString();
         Person personToDeleteRemark = new PersonBuilder(originalPerson).withRemarks(VALID_REMARKLIST).build();
 
         model.setPerson(originalPerson, personToDeleteRemark);
@@ -127,7 +128,7 @@ public class DeleteRemarkCommandTest {
 
         Person expectedPerson = new PersonBuilder(personToDeleteRemark).withRemarks(UPDATED_REMARKLIST).build();
 
-        String expectedMessage = String.format("Deleted remark at index %1$s from Person %2$s", 1, 1);
+        String expectedMessage = String.format("Deleted remark at index %1$s from %2$s", 1, originalPersonName);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToDeleteRemark, expectedPerson);
 

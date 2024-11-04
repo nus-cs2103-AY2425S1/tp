@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class TelegramUsername {
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram usernames must be at least 5 characters long, and can only contain a-z/A-Z, 0-9, and underscores."
+            "Telegram usernames must be 5 to 32 characters long, and can only contain a-z/A-Z, 0-9, and underscores."
             + " Telegram usernames are case insensitive, and will be in lowercase. It must start with a letter,"
             + " and should not be blank unless the user is editing.";
 

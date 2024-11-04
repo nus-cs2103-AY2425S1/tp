@@ -1,6 +1,8 @@
 package tuteez.logic.parser;
 
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_NAME;
+import static tuteez.logic.Messages.MESSAGE_MISSING_PHONE;
 import static tuteez.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tuteez.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -173,16 +175,24 @@ public class AddCommandParserTest {
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMissingNameMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_NAME);
+        String expectedMissingPhoneMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PHONE);
 
-        // missing name prefix
+        // Boundary Value Test: Empty input
+        assertParseFailure(parser, "   ", expectedMessage);
+
+        // contains preamble
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
+        // Missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+                expectedMissingPhoneMessage);
 
-        // all prefixes missing
+        // Missing name prefix
+        assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMissingNameMessage);
+
+        // Boundary Value Test: All prefixes are missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
     }

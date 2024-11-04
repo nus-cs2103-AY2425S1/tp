@@ -20,26 +20,38 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_INDEX_FORMAT =
             "Person index must be a single, positive number (eg, '1', '2', '3').";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_MISSING_PERSON_NAME =
+            "Person name is required but missing. Please provide the name of the person using n/.";
+    public static final String MESSAGE_MISSING_PHONE =
+            "Person phone number is required but missing. Please provide the phone of the person using p/.";
 
     public static final String MESSAGE_MISSING_PREFIX_FOR_FIND =
             "Missing a valid prefix. Please input at least one of the following: n/NAME a/ADDRESS t/TAG l/LESSON";
     public static final String MESSAGE_EMPTY_KEYWORD = "Keywords cannot be empty after inputting prefix %1$s";
 
-    public static final String MESSAGE_REMARK_MULTIPLE_OPERATIONS =
-            "Cannot add and delete remarks simultaneously. Please use only one operation at a time.";
-    public static final String MESSAGE_REMARK_MISSING_COMMAND_TYPE =
-            "Please specify whether to add or delete a remark using '-a' or '-d'.";
+    public static final String MESSAGE_MISSING_REMARK_PREFIX = "The remark prefix 'r/' is missing";
+    public static final String MESSAGE_MISSING_REMARK_INDEX_PREFIX = "The remark index prefix 'ri/' is missing";
     public static final String MESSAGE_MISSING_REMARK_INDEX = "Remark index is required for deletion but missing. "
-            + "Please specify which remark to delete (e.g., 'remark 1 -d 1').";
+            + "Please specify which remark to delete (e.g., 'deleteremark 1 ri/1').";
     public static final String MESSAGE_INVALID_REMARK_INDEX_FORMAT =
-            "Remark index must be a single, positive number (e.g., '1', '2', '3').";
-    public static final String MESSAGE_INVALID_REMARK_INDEX = "The remark index provided is invalid";
+            "Remark index must be a single, positive number (eg, '1', '2', '3').";
+    public static final String MESSAGE_INVALID_REMARK_INDEX = "The remark index provided is out of bounds.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME =
                 "No student named %1$s was found, please try again!";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_ADDLESSON_PREFIX =
+            "Add lesson command should use 'l/' prefix, not 'li/'";
+    public static final String MESSAGE_INVALID_DELETELESSON_PREFIX =
+            "Delete lesson command should use 'li/' prefix, not 'l/'";
+    public static final String MESSAGE_MISSING_LESSON_FIELD_PREFIX = "Lesson field prefix 'l/' is missing";
+    public static final String MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX = "Lesson index field prefix 'li/' is missing";
+    public static final String MESSAGE_MISSING_LESSON_INDEX = "Lesson index is required but missing";
+    public static final String MESSAGE_DUPLICATE_LESSON_INDEX = "Duplicate lesson indices are not allowed";
+    public static final String MESSAGE_INVALID_LESSON_INDEX_FORMAT =
+            "Lesson index must be a single, positive number (eg, '1', '2', '3').";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -72,6 +84,13 @@ public class Messages {
         builder.append("; Lessons: ");
         person.getLessons().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the person's {@code name} for display to the user.
+     */
+    public static String formatPersonName(Person person) {
+        return person.getName().fullName;
     }
 
 }

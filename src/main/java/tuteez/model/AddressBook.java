@@ -132,7 +132,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
-        return lessonManager.getClashingLessons(persons, lesson);
+        return lessonManager.findClashingLessonsAcrossAllStudents(persons, lesson);
     }
 
     //// util methods
