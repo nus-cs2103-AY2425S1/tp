@@ -17,6 +17,32 @@ public enum TagCategory {
     }
 
     /**
+     * Returns TagCategory from a String.
+     * @return TagCategory represented by the String.
+     */
+    public static TagCategory fromString(String category) {
+        switch (category) {
+        case "acads":
+            return ACADEMICS;
+
+        case "activity":
+            return ACTIVITIES;
+
+        case "networking":
+            return NETWORKING;
+
+        case "mentor":
+            return MENTORSHIP;
+
+        case "general":
+            return GENERAL;
+
+        default:
+            return GENERAL; // sufficient since no other classes should call this method.
+        }
+    }
+
+    /**
      * Returns the colour code of the {@code TagCategory}.
      * @return String containing the hex code for the colour.
      */
