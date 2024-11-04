@@ -18,6 +18,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 - [Features](#features) 
   - [General Commands](#general-commands)
     - [Viewing help: `help`](#viewing-help--help)
+    - [Viewing overall statistics: `stats`](#viewing-overall-statistics--stats)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Exiting the program: `exit`](#exiting-the-program--exit)
   - [Adding Entries Commands](#adding-entries-commands)
@@ -44,6 +45,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
     - [To mark property already bought: `bought`](#to-mark-property-as-bought-bought)
     - [To mark property already sold: `sold`](#to-mark-property-already-sold-sold)
     - [Pin Contact: `pin`](#pin-contact-pin)
+    - [Unpin Contact: `unpin`](#unpin-contact-unpin)
   - [Additional Features](#additional-features)
     - [Command history: Up and Down arrow keys](#command-history-up-and-down-arrow-keys)
     - [Highlighting of command errors](#highlighting-of-command-errors)
@@ -114,11 +116,19 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Viewing overall statistics : `stats`
+
+Displays a comprehensive summary of the address book, including the total number of people, properties, and other key metrics.
+
+![stats_command](images/statsCommand.png)
+
+Format: `clear`
 
 ### Clearing all entries : `clear`
 
@@ -439,7 +449,8 @@ Examples:
 * `pin 5` moves the contact at index 5 to index 1.
 
 ### Unpin Contact `unpin`
-Unpins a contact that is currently pinned
+
+Unpins a contact at a particular index from the top of the list to its original sorted position.
 
 ![unpin command](images/unpinCommand.png)
 
@@ -447,7 +458,6 @@ Format `unpin INDEX`
 
 * The parameter INDEX must be a positive integer.
 
-Examples:
 * `unpin 1` moves the contact at index 1 back to its sorted position.
 
 ## Additional Features
