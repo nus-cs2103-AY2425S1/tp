@@ -30,7 +30,7 @@ public class Messages {
             "Cannot mark attendance for contact that is not a member. "
                     + "Remove non-member contact from the list and try again.";
     public static final String MESSAGE_NO_ADDITIONAL_PARAMS = "Warning: %1$s command takes in no additional parameters";
-  /**
+    /**
      * Returns an error message indicating the duplicate prefixes.
      */
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
