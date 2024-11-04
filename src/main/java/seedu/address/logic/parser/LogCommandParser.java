@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -53,7 +54,9 @@ public class LogCommandParser implements Parser<LogCommand> {
 
         // Use today's date if no date was provided
         LocalDate finalDate = date.orElse(LocalDate.now());
-
+        if (logMessage.trim().isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_LOG_MESSAGE_EMPTY));
+        }
         return new LogCommand(index, finalDate, logMessage);
     }
 }
