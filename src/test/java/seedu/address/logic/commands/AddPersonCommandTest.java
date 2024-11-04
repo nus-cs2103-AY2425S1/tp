@@ -237,6 +237,14 @@ public class AddPersonCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasPhone(Person person, Phone phone) {
+            requireNonNull(person);
+            requireNonNull(phone);
+            Phone personPhone = this.person.getPhone();
+            return personPhone.equals(phone);
+        }
     }
 
     /**
@@ -249,6 +257,13 @@ public class AddPersonCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasPhone(Person person, Phone phone) {
+            requireNonNull(person);
+            requireNonNull(phone);
+            return personsAdded.stream().anyMatch(p -> p.getPhone().equals(phone));
         }
 
         @Override
