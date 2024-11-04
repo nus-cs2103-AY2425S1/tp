@@ -23,7 +23,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validIndex_returnsDeleteCommand() {
-        String userInput = "1"; // Assuming 1 is a valid index
+        String userInput = "1";
         DeleteCommand expectedCommand = new DeleteCommand(Index.fromOneBased(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -36,8 +36,26 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidName_throwsParseException() {
-        // Assuming names cannot contain special characters, like '@'
-        assertParseFailure(parser, "John @ Doe",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertParseFailure(parser, "John @ Doe", expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        // Test with a negative index
+        assertParseFailure(parser, "-1",
+                ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Test with zero index
+        assertParseFailure(parser, "0",
+                ParserUtil.MESSAGE_INVALID_INDEX);
+
+    }
+
+    @Test
+    public void parse_edgeCaseName_returnsDeleteCommand() {
+        String userInput = "John Doe"; // Valid name case
+        DeleteCommand expectedCommand = new DeleteCommand(new Name(userInput));
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
