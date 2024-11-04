@@ -310,6 +310,30 @@ Examples:
 
 ![findCommand](images/findCommand.png)
 
+### Undoing previous command : `undo`
+
+Undoes the changes from the previous command.
+
+Format: `undo`
+
+Commands that can be undone:
+* `add`
+* `delete`
+* `newtag`
+* `deletetag`
+* `renametag`
+* `tag`
+* `untag`
+* `edit`
+* `filter`
+* `find`
+* `setrsvp`
+
+Only the latest command can be undone. 
+
+Undo will only reverse the changes from the previous command.
+
+
 
 ### Clearing all entries : `clear`
 
@@ -378,7 +402,7 @@ Command | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **NewTag** | `newtag t/TAG…​` <br> e.g. `newtag bride's side`
-**DeleteTag** | `deletetag t/TAG…​` <br> e.g. `deletetag t/bride's side`
+**DeleteTag** | `deletetag t/TAG…​` <br> `deletetag -force t/TAG…​` <br>e.g. `deletetag t/bride's side` <br>e.g. `deletetag -force t/bride's side`
 **RenameTag** | `renametag t/TAG1 t/TAG2` <br> e.g. `renametag t/friends t/colleagues`
 **Tag** | `tag INDEX…​ t/TAG…​` <br> e.g. `tag 1 2 t/groom's side t/family`
 **Untag** | `untag INDEX…​ t/TAG…​` <br> e.g. `untag 1 2 t/bride's side t/family`
@@ -386,5 +410,6 @@ Command | Format, Examples
 **Filter** | `filter [s/STATUS_INDEX] [t/TAG]…​` <br> e.g. `filter s/3 t/neighbours`
 **Find** | `find KEYWORD…​`<br> e.g. `find James Jake`
 **Clear** | `clear`
+**Undo** | `undo`
 **Exit** | `exit`
 

@@ -24,7 +24,7 @@ public class DeleteTagCommandParserTest {
         Tag expectedTag = BRIDES_SIDE;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/bride's side", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side", new DeleteTagCommand(expectedTags, false));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DeleteTagCommandParserTest {
 
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, "  t/ bride's side   ", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, "  t/ bride's side   ", new DeleteTagCommand(expectedTags, false));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class DeleteTagCommandParserTest {
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
 
-        assertParseSuccess(parser, " t/" + maxLengthTagName, new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, " t/" + maxLengthTagName, new DeleteTagCommand(expectedTags, false));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class DeleteTagCommandParserTest {
         Tag expectedTag = new Tag("friend");
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, " t/FRIEND", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, " t/FRIEND", new DeleteTagCommand(expectedTags, false));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class DeleteTagCommandParserTest {
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTagBride);
         expectedTags.add(expectedTagGroom);
-        assertParseSuccess(parser, " t/bride's side t/groom's side", new DeleteTagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's side t/groom's side", new DeleteTagCommand(expectedTags, false));
     }
 
     @Test
