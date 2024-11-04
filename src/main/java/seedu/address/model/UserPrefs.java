@@ -59,7 +59,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setExportFilterGoodsToTrue() {
         this.exportFilterGoods = true;
-
     };
 
     public void setExportFilterGoodsToFalse() {

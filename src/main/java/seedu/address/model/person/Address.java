@@ -14,8 +14,7 @@ public class Address {
                     + " [Building Name] Singapore [Postal Code]";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * E.g. 125 Orchard Road #12-34 ABC Building Singapore 123456
      */
     public static final String VALIDATION_REGEX =
             "^\\d*\\s*+[A-Za-z0-9 ]+\\s*(#\\d+-\\d+)?\\s+[A-Za-z0-9 ]+\\s+Singapore\\s+\\d{6}$";
