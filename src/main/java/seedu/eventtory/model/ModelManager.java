@@ -35,8 +35,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final ObjectProperty<Event> selectedEvent;
     private final ObjectProperty<UiState> currentUiState;
-    private final ObservableIntegerValue startingIndexOfAssignedVendors;
-    private final ObservableIntegerValue startingIndexOfAssignedEvents;
+    private final ObservableIntegerValue startIndexOfAssignedVendors;
+    private final ObservableIntegerValue startIndexOfAssignedEvents;
 
     /**
      * Initializes a ModelManager with the given eventTory and userPrefs.
@@ -54,10 +54,10 @@ public class ModelManager implements Model {
         selectedEvent = new SimpleObjectProperty<>(null);
         currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
         // one-based index
-        startingIndexOfAssignedEvents = Bindings.createIntegerBinding(() -> {
+        startIndexOfAssignedEvents = Bindings.createIntegerBinding(() -> {
             return filteredEvents.size() + 1;
         }, filteredEvents);
-        startingIndexOfAssignedVendors = Bindings.createIntegerBinding(() -> {
+        startIndexOfAssignedVendors = Bindings.createIntegerBinding(() -> {
             return filteredVendors.size() + 1;
         }, filteredVendors);
     }
@@ -217,7 +217,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableIntegerValue getStartingIndexOfAssignedVendors() {
-        return startingIndexOfAssignedVendors;
+        return startIndexOfAssignedVendors;
     }
 
     // =========== Filtered Event List Accessors =============================================================
@@ -239,7 +239,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
-        return startingIndexOfAssignedEvents;
+        return startIndexOfAssignedEvents;
     }
 
     @Override
