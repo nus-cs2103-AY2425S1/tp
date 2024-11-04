@@ -1,5 +1,7 @@
 package seedu.address.model.product;
 
+import seedu.address.model.util.SampleDataUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -9,34 +11,24 @@ import java.util.NoSuchElementException;
  * by ID or name, and initializes with a set of default ingredients.
  */
 public class IngredientCatalogue extends Catalogue {
-    // Static references to default ingredients for direct access
-    public static final Ingredient FLOUR = new Ingredient(1, "Flour", 1.50);
-    public static final Ingredient SUGAR = new Ingredient(2, "Sugar", 0.80);
-    public static final Ingredient STRAWBERRY = new Ingredient(3, "Strawberry", 3.00);
-    public static final Ingredient CHOCOLATE = new Ingredient(4, "Chocolate", 2.50);
-    public static final Ingredient CHEESE = new Ingredient(5, "Cheese", 4.00);
-    public static final Ingredient CREAM = new Ingredient(6, "Cream", 2.00);
 
     private final Map<String, Ingredient> ingredientByName = new HashMap<>();
+    public static Ingredient FLOUR = SampleDataUtil.getDefaultIngredients().get(1);
+    public static Ingredient SUGAR = SampleDataUtil.getDefaultIngredients().get(2);
+    public static Ingredient STRAWBERRY = SampleDataUtil.getDefaultIngredients().get(3);
+    public static Ingredient CHOCOLATE = SampleDataUtil.getDefaultIngredients().get(4);
+    public static Ingredient CHEESE = SampleDataUtil.getDefaultIngredients().get(5);
+    public static Ingredient CREAM = SampleDataUtil.getDefaultIngredients().get(6);
 
     /**
      * Initializes the ingredient catalogue with default ingredients.
      */
     public IngredientCatalogue() {
-        addDefaultProducts();
-    }
-
-    /**
-     * Adds default ingredients to the catalogue.
-     */
-    @Override
-    public void addDefaultProducts() {
-        addIngredient(FLOUR);
-        addIngredient(SUGAR);
-        addIngredient(STRAWBERRY);
-        addIngredient(CHOCOLATE);
-        addIngredient(CHEESE);
-        addIngredient(CREAM);
+        // Populate catalogue with default ingredients from SampleDataUtil
+        Map<Integer, Ingredient> defaultIngredients = SampleDataUtil.getDefaultIngredients();
+        for (Ingredient ingredient : defaultIngredients.values()) {
+            addIngredient(ingredient);
+        }
     }
 
     /**
@@ -80,3 +72,4 @@ public class IngredientCatalogue extends Catalogue {
         throw new NoSuchElementException("Ingredient with ID " + id + " not found.");
     }
 }
+

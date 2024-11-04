@@ -17,8 +17,8 @@ import seedu.address.model.product.IngredientCatalogue;
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddIngredientCommand}.
  */
 public class AddIngredientCommandTest {
-    private static final String INGREDIENT_NAME = "Flour";
-    private static final double INGREDIENT_COST = 1.50;
+    private static final String INGREDIENT_NAME = "Syrup";
+    private static final double INGREDIENT_COST = 2.50;
 
     private Model model;
 
@@ -30,12 +30,14 @@ public class AddIngredientCommandTest {
 
     @Test
     public void execute_newIngredient_success() {
-        // Create the AddIngredientCommand
+        // Create a new AddIngredientCommand
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
 
-        // Retrieve the next product ID to maintain consistency with the model
+        // Use the model's IngredientCatalogue to get the next available ID
         IngredientCatalogue catalogue = model.getIngredientCatalogue();
         int nextProductId = catalogue.getNextProductId();
+
+        // Create the expected ingredient object
         Ingredient expectedIngredient = new Ingredient(nextProductId, INGREDIENT_NAME, INGREDIENT_COST);
 
         // Prepare the expected success message
@@ -43,10 +45,15 @@ public class AddIngredientCommandTest {
 
         // Set up the expected model state
         Model expectedModel = new ModelManager();
-        expectedModel.getIngredientCatalogue().addIngredient(expectedIngredient);
+
+        // Add ingredient manually
+        expectedModel.addIngredient(expectedIngredient);
 
         // Execute the command and verify success
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        // Verify that the ingredient exists in the catalogue
+        assertTrue(model.getIngredientCatalogue().getCatalogue().containsValue(expectedIngredient));
     }
 
     @Test
