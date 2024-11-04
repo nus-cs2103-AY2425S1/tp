@@ -63,8 +63,8 @@ public class Time {
      * @return True if the string represents a valid time, false otherwise.
      */
     public static boolean isValidTime(String test) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm").
-                withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
 
         try {
             LocalTime.parse(test, timeFormatter);
