@@ -51,17 +51,16 @@ public class ExportCommand extends Command {
         if (filePath.matches(".*[<>:\"\\|?*].*")) {
             throw new IllegalArgumentException("Invalid file path provided: " + filePath);
         }
-
-        // Validate the file path using Paths.get()
+        // Attempt to validate the file path and convert to an absolute path if necessary
         try {
-            Paths.get(filePath);
+            Path path = Paths.get(filePath);
+            if (!path.isAbsolute()) {
+                path = Paths.get(System.getProperty("user.dir"), filePath);
+            }
+            this.filePath = path;
         } catch (InvalidPathException e) {
-            throw new IllegalArgumentException("Invalid file path provided: " + filePath, e);
+            throw new IllegalArgumentException("Invalid file path provided: " + filePath);
         }
-
-        // Set the file path as absolute if not already
-        this.filePath = Paths.get(filePath).isAbsolute() ? Paths.get(filePath)
-                : Paths.get(System.getProperty("user.dir"), filePath);
     }
 
 
