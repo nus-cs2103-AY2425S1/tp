@@ -63,11 +63,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// person-level operations
 
+    /**
+     * Searches for a person by id and returns an optional Person
+     */
     public Optional<Person> getPersonById(String id) {
         requireNonNull(id);
         return persons.getPersonById(id);
     }
 
+    /**
+     * Searches for a person by phone and returns an optional Person
+     */
     public Optional<Person> getPersonByPhone(Phone phone) {
         requireNonNull(phone);
 
@@ -76,17 +82,6 @@ public class AddressBook implements ReadOnlyAddressBook {
             return Optional.empty();
         }
         return Optional.of(filteredPersonList.get(0));
-    }
-
-    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
-        requireNonNull(index);
-
-        List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();
-
-        if (lastShownList.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(lastShownList.get(index.getZeroBased()));
     }
 
     /**

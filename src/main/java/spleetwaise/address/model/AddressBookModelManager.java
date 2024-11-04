@@ -149,7 +149,12 @@ public class AddressBookModelManager implements AddressBookModel {
     @Override
     public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
         requireNonNull(index);
-        return addressBook.getPersonByFilteredPersonListIndex(index);
+
+        if (index.getZeroBased() >= filteredPersons.size()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(filteredPersons.get(index.getZeroBased()));
     }
 
     @Override
