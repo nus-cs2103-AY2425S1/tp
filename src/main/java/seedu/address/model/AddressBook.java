@@ -88,9 +88,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPhone(Phone phone) {
         requireNonNull(phone);
         for (Person p : persons) {
-           if (p.getPhone().equals(phone)) {
+            if (p.getPhone().equals(phone)) {
                 return true;
-           }
+            }
         }
         return false;
     }
