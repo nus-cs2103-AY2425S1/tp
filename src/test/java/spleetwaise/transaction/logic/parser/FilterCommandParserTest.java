@@ -1,11 +1,14 @@
 package spleetwaise.transaction.logic.parser;
 
+import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
@@ -40,7 +43,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_personField_success() {
-        String userInput = " p/94351253";
+        String userInput = " 1";
         FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, null, null, null);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
@@ -72,7 +75,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_allFields_success() {
-        String userInput = " p/94351253 amt/9999999999.99  "
+        String userInput = " 1 amt/9999999999.99  "
                 + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024";
         FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, testAmount,
                 testDescription, testDate);
@@ -81,9 +84,21 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPersonField_failure() {
-        String userInput = " p/9435125";
-        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
+    public void parse_noField_failure() {
+        String userInput = " ";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndexField_failure() {
+        String userInput = " 0";
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
+
+        userInput = " invalid";
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
+
+        userInput = " " + abModel.getFilteredPersonList().size() + 1;
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

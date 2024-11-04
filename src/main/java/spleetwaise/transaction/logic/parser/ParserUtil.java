@@ -125,6 +125,13 @@ public class ParserUtil {
         return p.get();
     }
 
+    /**
+     * Finds the corresponding Person displayed on the current Address Book view with the provided index.
+     *
+     * @param index The 1-based index corresponding to the Person entry.
+     * @return A Person who has the specified index in the current Address Book view.
+     * @throws ParseException Invalid index or index is out of bounds.
+     */
     public static Person getPersonFromAddressBookIndex(Index index) throws ParseException {
         requireNonNull(index);
         Optional<Person> p = CommonModel.getInstance().getPersonByFilteredPersonListIndex(index);

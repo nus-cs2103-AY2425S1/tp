@@ -187,14 +187,15 @@ Examples:
 
 ### Filtering transactions: `filterTxn`
 
-Filter transactions with the specified person identified by their phone number, and/or amount and/or description
-and/or date.
+Filter transactions with the specified person identified by their index in the displayed person list, and/or amount 
+and/or description and/or date.
 
-Format: `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
 
 * The command requires at least one of the above optional prefixes to be provided.
 * As more prefixes are provided, the filter becomes more specific.
-* The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
+* The `INDEX` refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
@@ -205,10 +206,12 @@ Examples:<br>
 
 * Given the example transaction book:<br>
   ![Given the example transaction book](images/filterTxnExample.png)
-* `filterTxn p/87438807` returns all transactions with the person `Alex Yeoh`.<br>
-  ![result fpr 'filterTxn p/87438807'](images/filterTxnAlexYeohResult.png)
-* `filterTxn p/99272758 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`.<br>
-  ![result for 'filterTxn p/99272758 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
+* `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in 
+  the displayed person list.<br>
+  ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
+* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Givent that `2` is 
+  the index of `Bernice Yu` in the displayed person list.<br>
+  ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
 ### Adding Remarks for a person : `remark`
 
@@ -382,5 +385,5 @@ _Details coming soon ..._
 | **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN`                                   |
 | **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
 | **List**   | `listTxn`                                                                                                                                                                                                                    |
-| **Filter** | `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn p/99999999`                                                                                                                    |
+| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn 1`                                                                                                                                      |
 | **Clear**  | `clearTxn`                                                                                                                                                                                                                   |

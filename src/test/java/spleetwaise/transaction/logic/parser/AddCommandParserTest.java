@@ -1,6 +1,7 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -11,9 +12,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -36,13 +38,14 @@ public class AddCommandParserTest {
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date(getNowDate());
     private static final Set<Category> testCategories = new HashSet<>(List.of(new Category("FOOD")));
+    private static final AddressBookModel abModel = new AddressBookModelManager();
 
     private final AddCommandParser parser = new AddCommandParser();
 
-    @BeforeEach
-    void setup() {
-        CommonModel.initialise(new AddressBookModelManager(), null);
-        CommonModel.getInstance().addPerson(testPerson);
+    @BeforeAll
+    public static void setUp() {
+        abModel.addPerson(testPerson);
+        CommonModel.initialise(abModel, null);
     }
 
     @Test
@@ -63,11 +66,17 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidIndex_exceptionThrown() {
-        String userInput1 = " 0 amt/1.23 desc/description date/01012024";
-        assertParseFailure(parser, userInput1, MESSAGE_INVALID_FORMAT);
+        String userInput = " 0 amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
 
-        String userInput2 = " -1 amt/1.23 desc/description date/01012024";
-        assertParseFailure(parser, userInput2, MESSAGE_INVALID_FORMAT);
+        userInput = " -1 amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        userInput = " invalid amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+
+        userInput = " " + (abModel.getFilteredPersonList().size() + 1) + " amt/1.23 desc/description date/01012024";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
