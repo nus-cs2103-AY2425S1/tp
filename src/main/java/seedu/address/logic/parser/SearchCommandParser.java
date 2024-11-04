@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.SearchCommand;
@@ -58,13 +60,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         prefixValueMap.put(PREFIX_ROLE, roleArgs);
 
         checkForEmptyInputs(argMultimap, prefixValueMap);
-
-        Predicate<Person> combinedPredicate = combinePredicates(
-                createNamePredicate(nameArgs),
-                createTagPredicate(tagArgs),
-                createPhonePredicate(phoneArgs),
-                createRolePredicate(roleArgs)
-        );
+        Predicate<Person> combinedPredicate = combinePredicates(Arrays.asList(
+                createPredicate("name", nameArgs),
+                createPredicate("tag", tagArgs),
+                createPredicate("phone", phoneArgs),
+                createPredicate("role", roleArgs)
+        ));
 
         if (combinedPredicate == null && groupArgs.isEmpty()) {
             throw new ParseException(
@@ -104,47 +105,36 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         }
     }
 
-    private Predicate<Person> createNamePredicate(String nameArgs) {
-        if (nameArgs.isEmpty()) {
+
+    private Predicate<Person> createPredicate(String type, String args) throws ParseException {
+        if (args.isEmpty()) {
             return null;
         }
-        return new NameContainsKeywordsPredicate(Arrays.asList(nameArgs.split("\\s+")));
-    }
 
-    private Predicate<Person> createTagPredicate(String tagArgs) {
-        if (tagArgs.isEmpty()) {
-            return null;
-        }
-        return new TagContainsKeywordsPredicate(Arrays.asList(tagArgs.split("\\s+")));
-    }
-
-    private Predicate<Person> createPhonePredicate(String phoneArgs) {
-        if (phoneArgs.isEmpty()) {
-            return null;
-        }
-        return new PhoneNumberMatchesPredicate(phoneArgs);
-    }
-
-    private Predicate<Person> createRolePredicate(String roleArgs) throws ParseException {
-        if (roleArgs.isEmpty()) {
-            return null;
-        }
-        try {
-            Role role = Role.fromString(roleArgs);
-            return new RoleMatchesPredicate(role);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(MESSAGE_INVALID_SEARCH_ROLE_INPUT);
-        }
-    }
-
-    @SafeVarargs
-    private Predicate<Person> combinePredicates(Predicate<Person>... predicates) {
-        Predicate<Person> result = null;
-        for (Predicate<Person> predicate : predicates) {
-            if (predicate != null) {
-                result = (result == null) ? predicate : result.and(predicate);
+        switch (type.toLowerCase()) {
+        case "name":
+            return new NameContainsKeywordsPredicate(Arrays.asList(args.split("\\s+")));
+        case "tag":
+            return new TagContainsKeywordsPredicate(Arrays.asList(args.split("\\s+")));
+        case "phone":
+            return new PhoneNumberMatchesPredicate(args);
+        case "role":
+            try {
+                Role role = Role.fromString(args);
+                return new RoleMatchesPredicate(role);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(MESSAGE_INVALID_SEARCH_ROLE_INPUT);
             }
+        default:
+            throw new IllegalArgumentException("Invalid predicate type: " + type);
         }
-        return result;
     }
+
+    private Predicate<Person> combinePredicates(List<Predicate<Person>> predicates) {
+        return predicates.stream()
+                .filter(Objects::nonNull) // Filter out null predicates
+                .reduce(Predicate::and)
+                .orElse(null); // Return null if all predicates are null
+    }
+
 }
