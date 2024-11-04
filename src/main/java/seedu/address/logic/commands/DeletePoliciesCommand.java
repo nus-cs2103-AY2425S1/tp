@@ -28,7 +28,7 @@ public class DeletePoliciesCommand extends Command {
             + ": Deletes the specified policy from the client identified "
             + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/[POLICY_TYPE]\n"
+            + "pt/POLICY_TYPE...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "pt/life";
     public static final String POLICY_DELETE_CLIENT_SUCCESS = "Policies Left: %1$s";

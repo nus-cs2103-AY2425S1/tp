@@ -469,8 +469,70 @@ Examples:
 
 Claims management commands will be available in Prudy version 2.0. This feature will introduce new commands to add, edit, delete, and list claims for clients.
 
-#### Adding Claims `[coming in v2.0]`
-Details coming soon ...
+#### 5.4.1 Adding a claim: `add-claim`
+Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the specified `INDEX`.
+
+**Format:**  
+`add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`
+
+**Details:**
+- `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
+- `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
+- `CLAIM_STATUS` specifies the current status of the claim (e.g., pending, approved).
+- `CLAIM_DESCRIPTION` provides a brief description of the claim details.
+
+> **Note:** This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
+
+**Examples:**
+- `add-claim 1 pt/health s/pending d/stomach surgery`  
+  Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
+
+- `add-claim 2 pt/life s/approved d/accidental coverage`  
+  Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
+
+### 5.4.2 Deleting a Claim: `delete-claim`
+Deletes a specific claim from a policy type for the client identified by the specified INDEX.
+
+**Format:**  
+`delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`
+
+**Details:**
+- `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
+- `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
+- `CLAIM_INDEX` is the position of the claim in the policy's claim list and must be a positive integer.
+- Use the `list-claims` command to find the appropriate claim index for the specified policy type.
+
+> **Note:** If the specified client, policy type, or claim does not exist, an error message will be shown.
+
+**Examples:**
+- `delete-claim 1 pt/health ci/1`  
+  Deletes the claim at index 1 in the health policy of the 1st client.
+
+- `delete-claim 2 pt/life ci/2`  
+  Deletes the claim at index 2 in the life policy of the 2nd client.
+
+### 5.4.3 Editing a Claim: `edit-claim`
+Edits a specific claim in a policy for the client identified by the specified INDEX.
+
+**Format:**  
+`edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`
+
+**Details:**
+- `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
+- `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
+- `CLAIM_INDEX` is the position of the claim in the policy's claim list and must be a positive integer.
+- `NEW_STATUS` updates the claim status (e.g., approved, pending).
+- `NEW_DESCRIPTION` updates the description of the claim.
+- Use the `list-claims` command to find the appropriate claim index for the specified policy type.
+
+> **Note:** At least one of `NEW_STATUS` or `NEW_DESCRIPTION` must be specified. If the claim details are unchanged or duplicate an existing claim, an error message will be shown.
+
+**Examples:**
+- `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`  
+  Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
+
+- `edit-claim 2 pt/life c/2 s/pending`  
+  Updates the status of the second claim in the life policy of the 2nd client to "pending."
 
 --------------------------------------------------------------------------------------------------------------------
 
