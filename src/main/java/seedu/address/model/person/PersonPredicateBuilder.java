@@ -39,6 +39,21 @@ public class PersonPredicateBuilder {
     }
 
     /**
+     * Creates a {@code PersonPredicateBuilder} with a copy of all internal data from the provided
+     * {@code PersonPredicateBuilder}.
+     */
+    public PersonPredicateBuilder(PersonPredicateBuilder personPredicateBuilder) {
+        nameKeywords = new ArrayList<>(personPredicateBuilder.nameKeywords);
+        classIdKeywords = new ArrayList<>(personPredicateBuilder.classIdKeywords);
+        monthPaidKeywords = new ArrayList<>(personPredicateBuilder.monthPaidKeywords);
+        notMonthPaidKeywords = new ArrayList<>(personPredicateBuilder.notMonthPaidKeywords);
+        isSetName = personPredicateBuilder.isSetName;
+        isSetClassId = personPredicateBuilder.isSetClassId;
+        isSetMonthPaid = personPredicateBuilder.isSetMonthPaid;
+        isSetNotMonthPaid = personPredicateBuilder.isSetNotMonthPaid;
+    }
+
+    /**
      * Adds all strings in {@code nameKeywords} into this object's {@code nameKeywords} field.
      * @return this object
      */
