@@ -72,6 +72,7 @@ public class VolunteerParserUtil {
      * @throws ParseException If the given date does not conform to the date constraints.
      */
     public static Date parseDate(String date) throws ParseException {
+        System.out.println(date);
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
