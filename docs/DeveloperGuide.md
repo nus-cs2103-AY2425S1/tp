@@ -21,7 +21,25 @@ title: Developer Guide
     3. [Edit Person Feature](#edit-person-feature)
     4. [List Feature](#list-feature)
     5. [Find Person Feature](#find-person-feature)
-
+    6. [Filter Person Featuer](#filter-person-feature)
+    7. [View Person Feature](#view-person-feature)
+    8. [Summary Feature](#summary-feature)
+    9. [Help Feature](#help-feature)
+8. [Proposed](#proposed)
+    1. [Reminder Feature](#reminder-feature)
+    2. [Multidelete Feature](#multidelete-feature)
+9. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+10. [Appendix: Requirements](#appendix-requirements)
+    1. [Product Scope](#product-scope)
+    2. [User Stories](#user-stories)
+    3. [Use Cases](#use-cases)
+    4. [Non-functional requirements](#non-functional-requirements)
+    5. [Glossary](#glossary)
+11. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    1. [Launch and Shut Down](#launch-and-shutdown)
+    2. [Saving Data](#saving-data)
+12. [Planned Enhancements](#planned-enhancements)
+13. [Effort](#effort)
 ---
 
 ## **TalentSG**
