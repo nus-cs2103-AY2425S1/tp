@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -32,9 +31,6 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Person> personListView;
-    @FXML
-    private Label tutorials;
-
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
@@ -49,7 +45,6 @@ public class PersonListPanel extends UiPart<Region> {
         this.tutorialList = tutorialList;
         this.participationMap = createParticipationMap(personList, participationList);
 
-        setTutorialsLabel();
         addListeners();
     }
 
@@ -123,29 +118,5 @@ public class PersonListPanel extends UiPart<Region> {
                 }
             }
         });
-
-        //Listener to update tutorials Label
-        tutorialList.addListener((ListChangeListener<Tutorial>) change -> {
-            setTutorialsLabel();
-        });
-    }
-
-    /**
-     * Sets the label to display all tutorials currently available.
-     */
-    private void setTutorialsLabel() {
-        if (tutorialList.isEmpty()) {
-            this.tutorials.setText("No tutorials yet");
-            return;
-        }
-
-        StringBuilder tutorials = new StringBuilder();
-        for (int i = 0; i < tutorialList.size(); i++) {
-            tutorials.append(tutorialList.get(i).getSubject());
-            if (i != tutorialList.size() - 1) {
-                tutorials.append(" • ");
-            }
-        }
-        this.tutorials.setText(tutorials.toString());
     }
 }
