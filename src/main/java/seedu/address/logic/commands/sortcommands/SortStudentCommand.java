@@ -35,7 +35,7 @@ public class SortStudentCommand extends Command {
         model.sortPersonList(new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
-                return s1.getName().fullName.compareTo(s2.getName().fullName);
+                return s1.getName().getFullName().compareTo(s2.getName().getFullName());
             }
         });
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

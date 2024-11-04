@@ -19,9 +19,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
-    public static final String MESSAGE_GROUPS_LISTED_OVERVIEW = "%1$d groups listed!";
+    public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d student(s) listed!";
+    public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d task(s) listed!";
+    public static final String MESSAGE_GROUPS_LISTED_OVERVIEW = "%1$d group(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
         "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENT_NO_NOT_FOUND = "The student number provided is not found";
@@ -69,7 +69,7 @@ public class Messages {
      */
     public static String format(StudentNumber studentNumber) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(studentNumber.value);
+        builder.append(studentNumber.getStudentNumber());
         return builder.toString();
     }
 
@@ -78,7 +78,7 @@ public class Messages {
      */
     public static String format(GroupName groupName) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(groupName.fullName);
+        builder.append(groupName.getGroupName());
         return builder.toString();
     }
 

@@ -53,12 +53,12 @@ class JsonAdaptedPerson {
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Student source) {
-        name = source.getName().fullName;
-        email = source.getEmail().value;
+        name = source.getName().getFullName();
+        email = source.getEmail().getEmail();
         tags.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
-        studentNumber = source.getStudentNumber().value;
+        studentNumber = source.getStudentNumber().getStudentNumber();
         groupName = source.getGroupName().isEmpty() ? "!" : source.getGroupName().get().toString();
     }
 

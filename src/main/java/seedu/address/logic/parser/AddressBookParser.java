@@ -21,6 +21,7 @@ import seedu.address.logic.commands.addcommands.AddTaskToGroupCommand;
 import seedu.address.logic.commands.deletecommands.DeleteGroupCommand;
 import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
 import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand;
+import seedu.address.logic.commands.deletecommands.DeleteTaskForAllGroupsCommand;
 import seedu.address.logic.commands.deletecommands.DeleteTaskFromGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
@@ -47,6 +48,7 @@ import seedu.address.logic.parser.addcommands.AddTaskToGroupCommandParser;
 import seedu.address.logic.parser.deletecommands.DeleteGroupCommandParser;
 import seedu.address.logic.parser.deletecommands.DeleteStudentCommandParser;
 import seedu.address.logic.parser.deletecommands.DeleteStudentFromGroupCommandParser;
+import seedu.address.logic.parser.deletecommands.DeleteTaskForAllGroupsCommandParser;
 import seedu.address.logic.parser.deletecommands.DeleteTaskFromGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
@@ -168,6 +170,10 @@ public class AddressBookParser {
         case AddExistingTaskToGroupCommand.COMMAND_WORD_ALIAS:
         case AddExistingTaskToGroupCommand.COMMAND_WORD:
             return new AddExistingTaskToGroupCommandParser().parse(arguments);
+
+        case DeleteTaskForAllGroupsCommand.COMMAND_WORD_ALIAS:
+        case DeleteTaskForAllGroupsCommand.COMMAND_WORD:
+            return new DeleteTaskForAllGroupsCommandParser().parse(arguments);
 
         case DeleteTaskFromGroupCommand.COMMAND_WORD_ALIAS:
         case DeleteTaskFromGroupCommand.COMMAND_WORD:

@@ -51,7 +51,7 @@ public class AddTaskToGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
     public static final String MESSAGE_TASK_EXISTS_GLOBAL = "This task (%1$s) already exists.\n"
-            + " Please use the add existing task command instead.";
+        + " Please use the add existing task command instead.";
 
     private final TaskName taskName;
 
@@ -103,11 +103,11 @@ public class AddTaskToGroupCommand extends Command {
         model.setStateGroupTask();
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
-        if (deadline.time.compareTo(currentTime) < 0) {
+        if (deadline.getTime().isBefore(currentTime)) {
             return new CommandResult(String.format(MESSAGE_SUCCESS + "\n" + MESSAGE_OVERDUE_WARNING,
-                    task.getTaskName().toString(), groupsAdded), LIST_GROUP_TASK_MARKER);
+                task.getTaskName().getTaskName(), groupsAdded), LIST_GROUP_TASK_MARKER);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(),
             groupsAdded), LIST_GROUP_TASK_MARKER);
     }
 

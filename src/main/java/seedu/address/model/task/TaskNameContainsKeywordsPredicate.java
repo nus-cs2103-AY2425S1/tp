@@ -1,11 +1,8 @@
 package seedu.address.model.task;
 
-import static seedu.address.model.UserPrefs.MATCH_RATIO;
-
 import java.util.List;
 import java.util.function.Predicate;
 
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -24,7 +21,7 @@ public class TaskNameContainsKeywordsPredicate implements Predicate<Task> {
         return keywords.stream().anyMatch(keyword -> {
             TaskName taskName = task.getTaskName();
             String taskNameString = taskName.toString().toLowerCase();
-            return FuzzySearch.tokenSortPartialRatio(taskNameString, keyword.toLowerCase()) > MATCH_RATIO;
+            return taskNameString.equalsIgnoreCase(keyword);
         });
     }
 

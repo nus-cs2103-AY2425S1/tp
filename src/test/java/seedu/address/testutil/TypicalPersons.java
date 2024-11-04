@@ -38,7 +38,7 @@ public class TypicalPersons {
     public static final Student GEORGE = new PersonBuilder().withName("George Best")
         .withEmail("anna@u.nus.edu").withStudentNumber("A0888888M").withGroup("GROUP 2").build();
     public static final Student JASON = new PersonBuilder().withName("Jason Derulo")
-        .withEmail("jason@u.nus.edu").withGroup("Group 1").withStudentNumber("A0999999J").withGroup("GROUP 3").build();
+        .withEmail("jason@u.nus.edu").withGroup("Group 1").withStudentNumber("A0999999J").build();
 
     // Manually added
     public static final Student HOON = new PersonBuilder().withName("Hoon Meier")

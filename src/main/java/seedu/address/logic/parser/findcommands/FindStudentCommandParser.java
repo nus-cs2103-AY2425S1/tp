@@ -1,9 +1,16 @@
 package seedu.address.logic.parser.findcommands;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.findcommands.FindStudentCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentMatchesQueryPredicate;
 
@@ -19,10 +26,22 @@ public class FindStudentCommandParser implements Parser<FindStudentCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindStudentCommand parse(String args) throws ParseException {
-        String strippedArgs = args.strip().toLowerCase();
-        if (strippedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUERY);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_QUERY) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
         }
-        return new FindStudentCommand(new StudentMatchesQueryPredicate(strippedArgs));
+
+        String[] queryList = argMultimap.getAllValues(PREFIX_QUERY).toArray(new String[0]);
+        return new FindStudentCommand(new StudentMatchesQueryPredicate(Arrays.asList(queryList)));
     }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
 }

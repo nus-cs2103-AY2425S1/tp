@@ -43,7 +43,7 @@ public class DeleteTaskFromGroupCommand extends Command {
     private final GroupName toDeleteFrom;
 
     /**
-     * Creates an DeleteTaskToGroupCommand to delete the task on {@code index} from the
+     * Creates an DeleteTaskFromGroupCommand to delete the task on {@code index} from the
      * group with {@code groupName}.
      */
     public DeleteTaskFromGroupCommand(Index index, GroupName groupName) {
@@ -67,7 +67,7 @@ public class DeleteTaskFromGroupCommand extends Command {
 
         model.deleteTaskFromGroup(task, group);
         model.decreaseGroupWithTask(task);
-        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
+        model.setMostRecentGroupTaskDisplay(group.getGroupName().getGroupName());
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
         model.setStateGroupTask();
 

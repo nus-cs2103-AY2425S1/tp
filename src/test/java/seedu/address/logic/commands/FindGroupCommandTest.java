@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_GROUPS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.findcommands.FindGroupCommand.NO_GROUPS_FOUND;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -54,17 +54,16 @@ public class FindGroupCommandTest {
 
     @Test
     public void execute_zeroKeywords_noGroupFound() {
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 0);
         GroupNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, NO_GROUPS_FOUND, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredGroupList());
     }
 
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code GroupNameContainsKeywordsPredicate}.
      */
     private GroupNameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new GroupNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));

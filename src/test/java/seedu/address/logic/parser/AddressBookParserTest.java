@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,9 +59,9 @@ public class AddressBookParserTest {
     public void parseCommand_findStudent() throws Exception {
         String keyword = "Alice";
         FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
-            FindStudentCommand.COMMAND_WORD + " " + keyword
+            FindStudentCommand.COMMAND_WORD + " " + PREFIX_QUERY + keyword
         );
-        assertEquals(new FindStudentCommand(new StudentMatchesQueryPredicate("alice")), command);
+        assertEquals(new FindStudentCommand(new StudentMatchesQueryPredicate(List.of("Alice"))), command);
     }
 
     @Test

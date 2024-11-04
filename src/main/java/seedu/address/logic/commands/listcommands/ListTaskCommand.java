@@ -57,7 +57,7 @@ public class ListTaskCommand extends Command {
         if (groupNameOptional.isPresent()) {
             requireNonNull(model);
             model.updateFilteredGroupList(x -> x.getGroupName().equals(groupNameOptional.get()));
-            model.setMostRecentGroupTaskDisplay(groupNameOptional.get().fullName);
+            model.setMostRecentGroupTaskDisplay(groupNameOptional.get().getGroupName());
             model.updateFilteredGroupList(x -> x.getGroupName().equals(groupNameOptional.get()));
             model.setStateGroupTask();
             return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_TASK_MARKER);
