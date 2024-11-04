@@ -94,6 +94,17 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getSearchMode() {
+        assertEquals(false, logic.getSearchMode().get());
+    }
+
+    @Test
+    public void getAllPersons() {
+        assertEquals(model.getAddressBook().getPersonList(), logic.getAllPersons());
+    }
+
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -181,4 +192,6 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+
 }
