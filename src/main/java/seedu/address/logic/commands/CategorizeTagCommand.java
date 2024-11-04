@@ -51,6 +51,7 @@ public class CategorizeTagCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_CATEGORY, targetTag, updatedCategory));
         }
         model.setTagsCategory(targetTag, updatedCategory);
+        model.refreshCampusConnect();
         return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTag));
     }
 
