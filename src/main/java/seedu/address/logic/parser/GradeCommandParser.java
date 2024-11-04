@@ -29,7 +29,11 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE), ive);
         }
-        String gradeIndex = argMultimap.getValue(PREFIX_GRADE).orElse("");
-        return new GradeCommand(index, new Grade(gradeIndex));
+        if (argMultimap.getValue(PREFIX_GRADE).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
+        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GRADE);
+        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
+        return new GradeCommand(index, grade);
     }
 }
