@@ -182,7 +182,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasOverlappingAppointment(Person newAppointmentPerson) {
         LocalDateTime newStart = newAppointmentPerson.getAppointmentStart();
-        LocalDateTime newEnd = newAppointmentPerson.getAppointmentEnd(); // Assuming Person has getAppointmentEnd()
+        LocalDateTime newEnd = newAppointmentPerson.getAppointmentEnd();
 
         for (Person person : allAppointmentsList) {
             LocalDateTime existingStart = person.getAppointmentStart();
