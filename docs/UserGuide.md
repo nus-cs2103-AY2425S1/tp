@@ -52,6 +52,9 @@ faster than traditional GUI apps.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add contact n/NAME`, `NAME` is a parameter which can be used as `add contact n/John Doe`.
 
+* Commands, not including their parameters, are case-insensitive.<br>
+  e.g. if the command specifies `adD CONTact`, it will be interpreted as `add contact`. 
+
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
@@ -61,7 +64,7 @@ faster than traditional GUI apps.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.

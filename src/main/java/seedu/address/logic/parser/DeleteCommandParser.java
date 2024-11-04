@@ -23,13 +23,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
 
         String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, DeleteCommand.MESSAGE_USAGE);
 
-        String entityType = splitArgs[0]; // either "contact, "job" or "company"
+        String entityString = splitArgs[0]; // either "contact, "job" or "company"
         String indexString = splitArgs[1];
 
-        ParserUtil.requireValidEntity(entityType);
+
+        String entity = ParserUtil.parseEntity(entityString);
         Index index = ParserUtil.parseIndex(indexString);
 
-        switch (entityType) {
+        switch (entity) {
         case DeleteContactCommand.ENTITY_WORD:
             return new DeleteContactCommand(index);
         case DeleteJobCommand.ENTITY_WORD:
@@ -38,7 +39,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
             return new DeleteCompanyCommand(index);
         default:
             String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
-                    DeleteCommand.COMMAND_WORD, entityType);
+                    DeleteCommand.COMMAND_WORD, entity);
             throw new ParseException(exceptionMessage);
         }
     }
