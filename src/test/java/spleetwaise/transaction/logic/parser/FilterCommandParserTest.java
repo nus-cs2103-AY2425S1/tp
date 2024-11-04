@@ -1,5 +1,7 @@
 package spleetwaise.transaction.logic.parser;
 
+import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -79,6 +81,12 @@ public class FilterCommandParserTest {
                 testDescription, testDate);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
+    }
+
+    @Test
+    public void parse_noField_failure() {
+        String userInput = " ";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
