@@ -90,7 +90,7 @@ public class SettleCommand extends Command {
                 );
     }
 
-    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, SettleAmount amountPaid) {
+    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, SettleAmount amountPaid) throws CommandException {
         return paidAmount.updateValue(amountPaid);
     }
 

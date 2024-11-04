@@ -57,14 +57,6 @@ public class OwedAmountTest {
     }
 
     @Test
-    public void increaseValue() {
-        OwedAmount owedAmount = new OwedAmount("10.00");
-
-        OwedAmount increasedOwedAmount = owedAmount.increaseValue(new SettleAmount("5.00"));
-        assertEquals("15.00", increasedOwedAmount.toString());
-    }
-
-    @Test
     public void decreaseValue() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 

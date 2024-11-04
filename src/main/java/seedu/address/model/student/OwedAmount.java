@@ -47,17 +47,6 @@ public class OwedAmount extends Fee {
     }
 
     /**
-     * Returns a new {@code OwedAmount} with the increased value by adding the specified amount
-     * to the current owed amount.
-     *
-     * @param amount The amount to be added to the current owed amount.
-     * @return A new {@code OwedAmount} object with the updated owed amount.
-     */
-    public OwedAmount increaseValue(SettleAmount amount) {
-        return new OwedAmount(Double.toString(super.value + amount.value));
-    }
-
-    /**
      * Returns a new {@code OwedAmount} with the decreased value by subtracting the specified amount
      * from the current owed amount.
      *
