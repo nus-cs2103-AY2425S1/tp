@@ -3,9 +3,11 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -53,6 +55,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable tag stream with order, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Stream<Tag> getOrderedTags() {
+        return tags.stream().sorted(Comparator.comparing(tag -> tag.tagName));
     }
 
     /**
