@@ -45,8 +45,9 @@ public class ModelManager implements Model {
 
     // Constructor that accepts IngredientCatalogue, PastryCatalogue, and Storage
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue, Storage storage，CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
-        requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue, storage);
+                        IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue,
+                        Storage storage, CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
+        requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue, storage, customerOrderList, supplyOrderList);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -57,7 +58,6 @@ public class ModelManager implements Model {
         this.customerOrderList = customerOrderList;
         this.supplyOrderObservableList = supplyOrderList.getOrders();
         this.customerOrderObservableList = customerOrderList.getOrders();
-        associateOrdersWithPersons();
 
         // Initialize catalogues and storage
         this.ingredientCatalogue = ingredientCatalogue;
@@ -66,10 +66,15 @@ public class ModelManager implements Model {
 
         // Initialize inventory with the ingredient catalogue
         this.inventory = new Inventory(ingredientCatalogue);
+
+        // Associate orders with persons after all objects are initialized
+        associateOrdersWithPersons();
     }
 
+    // Default constructor with properly initialized parameters
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new IngredientCatalogue(), new PastryCatalogue(), new CustomerOrderList(), new SupplyOrderList());
+        this(new AddressBook(), new UserPrefs(), new IngredientCatalogue(),
+                new PastryCatalogue(), null, new CustomerOrderList(), new SupplyOrderList());
     }
 
     //=========== UserPrefs ==================================================================================
