@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
@@ -137,5 +138,13 @@ public class OrderListTest {
     @Test
     public void toStringMethod() {
         assertEquals(orderList.asUnmodifiableObservableList().toString(), orderList.toString());
+    }
+
+    @Test
+    public void createCopy() {
+        orderList.add(ATLAS);
+        OrderList orderListCopy = orderList.createCopy();
+        assertEquals(orderList, orderListCopy);
+        assertNotSame(orderList, orderListCopy);
     }
 }
