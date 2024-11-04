@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AgentAssist;
 import seedu.address.model.ReadOnlyAgentAssist;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
  * An Immutable AgentAssist that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "agentassist")
 class JsonSerializableAgentAssist {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedClient> clients = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAgentAssist} with the given persons.
+     * Constructs a {@code JsonSerializableAgentAssist} with the given clients.
      */
     @JsonCreator
-    public JsonSerializableAgentAssist(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAgentAssist(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
+        this.clients.addAll(clients);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableAgentAssist {
      * @param source future changes to this will not affect the created {@code JsonSerializableAgentAssist}.
      */
     public JsonSerializableAgentAssist(ReadOnlyAgentAssist source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializableAgentAssist {
      */
     public AgentAssist toModelType() throws IllegalValueException {
         AgentAssist agentAssist = new AgentAssist();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (agentAssist.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedClient jsonAdaptedClient : clients) {
+            Client client = jsonAdaptedClient.toModelType();
+            if (agentAssist.hasClient(client)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
             }
-            agentAssist.addPerson(person);
+            agentAssist.addClient(client);
         }
         return agentAssist;
     }

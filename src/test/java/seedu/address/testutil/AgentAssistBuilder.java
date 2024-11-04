@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AgentAssist;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
  * A utility class to help with building AgentAssist objects.
  * Example usage: <br>
- *     {@code AgentAssist ab = new AgentAssistBuilder().withPerson("John", "Doe").build();}
+ *     {@code AgentAssist ab = new AgentAssistBuilder().withClient("John", "Doe").build();}
  */
 public class AgentAssistBuilder {
 
@@ -21,10 +21,10 @@ public class AgentAssistBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AgentAssist} that we are building.
+     * Adds a new {@code Client} to the {@code AgentAssist} that we are building.
      */
-    public AgentAssistBuilder withPerson(Person person) {
-        agentassist.addPerson(person);
+    public AgentAssistBuilder withClient(Client client) {
+        agentassist.addClient(client);
         return this;
     }
 

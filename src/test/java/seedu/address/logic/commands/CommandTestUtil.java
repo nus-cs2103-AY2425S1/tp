@@ -22,9 +22,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AgentAssist;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.predicates.NameContainsSubstringPredicate;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -89,16 +89,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditClientDescriptor DESC_AMY;
+    public static final EditCommand.EditClientDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withJob(VALID_JOB_AMY).withIncome(Integer.parseInt(VALID_INCOME_AMY))
                 .withTier(VALID_TIER_GOLD).withNewRemark(VALID_REMARK_AMY).build();
 
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withJob(VALID_JOB_BOB).withIncome(Integer.parseInt(VALID_INCOME_BOB))
                 .withTier(VALID_TIER_REJECT).withNewRemark(VALID_REMARK_BOB).build();
@@ -134,31 +134,31 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered client list and selected client in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AgentAssist expectedAgentAssist = new AgentAssist(actualModel.getAgentAssist());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Client> expectedFilteredList = new ArrayList<>(actualModel.getFilteredClientList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAgentAssist, actualModel.getAgentAssist());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showClientAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredClientList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsSubstringPredicate(splitName[0]));
+        Client client = model.getFilteredClientList().get(targetIndex.getZeroBased());
+        final String[] splitName = client.getName().fullName.split("\\s+");
+        model.updateFilteredClientList(new NameContainsSubstringPredicate(splitName[0]));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredClientList().size());
     }
 
 }

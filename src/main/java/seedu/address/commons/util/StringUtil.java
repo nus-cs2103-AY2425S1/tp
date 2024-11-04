@@ -103,10 +103,10 @@ public class StringUtil {
      */
     public static String truncateText(String s) {
         assert s != null;
-        if (s.length() <= 50) {
+        if (s.length() <= 80) {
             return s;
         } else {
-            return s.substring(0, 50) + "...";
+            return s.substring(0, 80) + "...";
         }
     }
 }

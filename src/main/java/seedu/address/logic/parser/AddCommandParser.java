@@ -23,14 +23,14 @@ import seedu.address.commons.util.PrefixCheckResult;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandCommons;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Income;
-import seedu.address.model.person.Job;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Income;
+import seedu.address.model.client.Job;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
@@ -38,7 +38,6 @@ import seedu.address.model.tier.Tier;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -60,6 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOB,
                 PREFIX_INCOME, PREFIX_TIER, PREFIX_REMARK, PREFIX_STATUS);
         Set<String> errors = new LinkedHashSet<>();
@@ -81,11 +81,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     getErrorMessage(errors) + "\n" + AddCommand.MESSAGE_USAGE));
         }
-        Person person = new Person(name, phone, email, address, job, income, tier, remark, status);
-        return new AddCommand(person);
+        Client client = new Client(name, phone, email, address, job, income, tier, remark, status);
+        return new AddCommand(client);
     }
-
-
 
     /**
      * Returns {@code PrefixCheckResult} if none of the prefixes contains empty {@code Optional} values in the given
