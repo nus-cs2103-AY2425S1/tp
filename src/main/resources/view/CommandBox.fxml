@@ -12,6 +12,7 @@
   <TextField
       fx:id="commandTextField"
       onAction="#handleCommandEntered"
+      onKeyPressed="#handleKeyPressed"
       promptText="Enter command here..."
       HBox.hgrow="ALWAYS"
   />
