@@ -117,9 +117,13 @@ Examples:
 
 #### Listing all clients : `list`
 
-Shows a list of all clients in the application.
+Shows a list of all clients in the application, together with their current financial balance.
 
 Format: `list`
+<box type="tip" seamless>
+
+Negative balances are red. Positive balances are green.
+</box>
 
 #### Editing a client : `edit`
 
@@ -194,6 +198,11 @@ Format: `listt INDEX`
 * Lists the transactions for the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list when using `list` or `find` command.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" seamless>
+
+**Note:** `listt` can only be used in person list view.
+</box>
 
 Examples:
 * `list` followed by `listt 1` lists transactions for the 1st client in the application.
@@ -294,11 +303,16 @@ Find | `find KEYWORD [MORE_KEYWORDS]`
 Edit | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 Delete | `delete INDEX`
 
-Transaction Commands | Format
+**Transaction Commands**
+
+For Person List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
 Find Transactions | `findt INDEX KEYWORD [MORE_KEYWORDS]`
+
+For Transaction List View | Format
+--------------------|--------
 Delete Transaction | `deletet INDEX`
 
 General Commands | Format
