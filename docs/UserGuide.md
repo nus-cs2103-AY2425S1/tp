@@ -2,8 +2,14 @@
 layout: page
 title: User Guide
 ---
-![Ui](images/storeclass.png){: width="50" height="50"} <br>
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+
+![Logo](images/StoreClass-Logo.png)
+
+<div markdown="block" class="alert alert-info">
+StoreClass (SC) is a desktop app for educators from private organizations e.g. tuition centers to manage their students. The educators will interact with the app through type while viewing the app through the window.
+</div> 
+
+If you can type fast, StoreClass will become a perfect tools to manage student data.
 
 * Table of Contents
 {:toc}
@@ -13,12 +19,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - For Windows 11, see [here](https://www.youtube.com/watch?v=ykAhL1IoQUM)
+   - For MacOS, see [here](https://www.youtube.com/watch?v=lYKHFz8YaD4)
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Use the terminal to run the jar file
+   - How to run a jar file using Terminal? See [here](https://www.youtube.com/watch?v=j7A7DOZePXs)
+   
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -191,9 +201,11 @@ The file name must ends with ".json" and must not contain any slash "/".
 
 There should be only one file name provided.
 
-#### Warning
+<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
+All entries in the current address book will be discarded.
 
-All the entries in the current address book will be cleared.
+Archiving into an existing address book will overwrite the old address book.
+</div>
 
 ### Load data files `load`
 
@@ -211,10 +223,11 @@ The file name must ends with ".json", must not contain any slash "/" and must po
 
 There should be only one file name provided.
 
-#### Warning
+<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
 Avoid loading non-address book .json files as it may result in unexpected behaviours
 
 All the entries in the current address book will be discard. So archiving current address book before loading is recommended.
+</div>
 
 ### Clearing all entries : `clear`
 
@@ -319,4 +332,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**Archive** | `archive`
+**Archive** | `archive pa/PATH`
+**Load** | `load pa/PATH`
+

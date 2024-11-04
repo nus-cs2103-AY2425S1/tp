@@ -18,7 +18,7 @@ public class ArchiveCommand extends Command {
             + "and not contain any slash `/` \n"
             + "There should be only one path provided.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "mybook.json";
-    public static final String MESSAGE_SUCCESS = "Archive Path changed to: %1$s";
+    public static final String MESSAGE_SUCCESS = "Archive the file to: %1$s";
 
     private Path archivePath;
 
