@@ -3,30 +3,43 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagCategory;
 
 public class CategorizeTagCommandTest {
-    private static final Model model = new ModelManager();
-    private static final String TEST_TAG = "test";
-    private static final String TEST_TAG_SECOND = "test2";
-
-    // TODO: Add more tests
+    private static final String TEST_TAG_1 = "test";
+    private static final String TEST_TAG_2 = "test2";
 
     @Test
     public void equals() {
-        CategorizeTagCommand catTagCommandA = new CategorizeTagCommand(new Tag(TEST_TAG), TagCategory.ACADEMICS);
-        CategorizeTagCommand catTagCommandB = new CategorizeTagCommand(new Tag(TEST_TAG_SECOND), TagCategory.ACADEMICS);
-        CategorizeTagCommand catTagCommandC = new CategorizeTagCommand(new Tag(TEST_TAG), TagCategory.GENERAL);
-        CategorizeTagCommand catTagCommandD = new CategorizeTagCommand(new Tag(TEST_TAG), TagCategory.ACADEMICS);
+        CategorizeTagCommand commandA = new CategorizeTagCommand(List.of(new Tag(TEST_TAG_1)), TagCategory.ACADEMICS);
+        CategorizeTagCommand commandB = new CategorizeTagCommand(List.of(new Tag(TEST_TAG_2)), TagCategory.ACADEMICS);
+        CategorizeTagCommand commandC = new CategorizeTagCommand(List.of(new Tag(TEST_TAG_1)), TagCategory.GENERAL);
+        CategorizeTagCommand commandD = new CategorizeTagCommand(List.of(new Tag(TEST_TAG_1)), TagCategory.ACADEMICS);
+        CategorizeTagCommand commandE = new CategorizeTagCommand(
+                Arrays.asList(new Tag(TEST_TAG_1), new Tag(TEST_TAG_2)), TagCategory.ACADEMICS);
 
-        assertTrue(catTagCommandA.equals(catTagCommandD));
-        assertTrue(catTagCommandA.equals(catTagCommandA));
-        assertFalse(catTagCommandA.equals(catTagCommandB));
-        assertFalse(catTagCommandA.equals(catTagCommandC));
+        // Same object -> returns true
+        assertTrue(commandA.equals(commandA));
+
+        // Same tags and category -> returns true
+        assertTrue(commandA.equals(commandD));
+
+        // Different tags -> returns false
+        assertFalse(commandA.equals(commandB));
+
+        // Different categories -> returns false
+        assertFalse(commandA.equals(commandC));
+
+        // Different number of tags -> returns false
+        assertFalse(commandA.equals(commandE));
+
+        // Different object type -> returns false
+        assertFalse(commandA.equals(new Object()));
     }
 }
