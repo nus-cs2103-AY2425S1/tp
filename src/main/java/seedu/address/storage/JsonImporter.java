@@ -3,15 +3,10 @@ package seedu.address.storage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.UserPrefs;
 
 /**
  * A class that does all the importing of data from a group of .json files to AddressBook.json
