@@ -33,6 +33,7 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private PersonCard personCard;
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -40,8 +41,18 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
+                if (personCard != null) {
+                    personCard.stopRefreshTimeline();
+                }
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                if (personCard == null || personCard.person != person) {
+                    // Create a new PersonCard only if person changes
+                    if (personCard != null) {
+                        personCard.stopRefreshTimeline();
+                    }
+                    personCard = new PersonCard(person, getIndex() + 1);
+                }
+                setGraphic(personCard.getRoot());
             }
         }
     }
