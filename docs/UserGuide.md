@@ -225,7 +225,7 @@ Format: `/e del EVENT_INDEX`
 
 * Deletes the event with the specified `EVENT_INDEX`.
 * The index refers to the number before the event's name in the displayed event list.
-* The index **must be a non-negative integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Deleting an event causes that event to be removed from all participants' list of events which they are involved in.
