@@ -10,9 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENTS_SUPPLIED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -32,6 +34,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Supplier;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
@@ -62,6 +66,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_INVALID_INFORMATION_EDIT = "Cannot edit the information field for a non-customer.";
     public static final String MESSAGE_INVALID_INGREDIENTS_EDIT = "Cannot edit the ingredients supplied field for a non-supplier.";
+    public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. Please add it using the addIngredient command.";
+
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -98,7 +104,9 @@ public class EditCommand extends Command {
         if (!(personToEdit instanceof Supplier) && editPersonDescriptor.getIngredientsSupplied().isPresent()) {
             throw new CommandException(MESSAGE_INVALID_INGREDIENTS_EDIT);
         }
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        // Retrieve the IngredientCatalogue from the model
+        IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, ingredientCatalogue);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -113,27 +121,50 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor, IngredientCatalogue catalogue) throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
+        Remark updatedRemark = personToEdit.getRemark(); // Edit command does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         if (personToEdit instanceof Customer) {
             Information updatedInformation = editPersonDescriptor.getInformation().orElse(((Customer) personToEdit).getInformation());
-            return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                    updatedInformation, updatedRemark, updatedTags);
+            return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation, updatedRemark, updatedTags);
         } else if (personToEdit instanceof Supplier) {
-            Ingredients updatedIngredients = editPersonDescriptor.getIngredientsSupplied().orElse(((Supplier) personToEdit).getIngredientsSupplied());
+            Ingredients updatedIngredients = getUpdatedIngredients(editPersonDescriptor, (Supplier) personToEdit, catalogue);
             return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIngredients, updatedRemark, updatedTags);
         }
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
     }
+    /**
+     * Retrieves and updates the ingredients supplied based on the provided ingredient names.
+     */
+    private static Ingredients getUpdatedIngredients(EditPersonDescriptor editPersonDescriptor, Supplier supplier, IngredientCatalogue catalogue) throws CommandException {
+        if (editPersonDescriptor.getIngredientsSupplied().isEmpty()) {
+            return supplier.getIngredientsSupplied();
+        }
+
+        List<String> ingredientNames = editPersonDescriptor.getIngredientsSupplied().get().getIngredientNames();
+        List<Ingredient> ingredientList = new ArrayList<>();
+
+        for (String name : ingredientNames) {
+            try {
+                Ingredient ingredient = catalogue.getIngredientByName(name);
+                ingredientList.add(ingredient);
+            } catch (NoSuchElementException e) {
+                throw new CommandException(String.format(MESSAGE_INGREDIENT_NOT_FOUND, name));
+            }
+        }
+
+        return new Ingredients(ingredientList);
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
