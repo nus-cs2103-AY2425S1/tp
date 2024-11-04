@@ -6,7 +6,7 @@ package seedu.address.model.person;
  */
 public class UnitNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "Unit numbers should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Unit numbers should be numeric with one hyphen in between";
     public static final String VALIDATION_REGEX = "\\d+-\\d+";
 
     public final String value;
