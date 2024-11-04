@@ -125,6 +125,8 @@ Format: `list`
 Negative balances are red. Positive balances are green.
 </box>
 
+![result for `listt`](images/listResult.png =600x)
+
 #### Editing a client : `edit`
 
 Edits an existing client in the application.
@@ -158,7 +160,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex creative` returns `Alex Yeoh`, `Charlotte Oliveiro`, whose company matches `creative`<br>
-  ![result for 'find alex creative'](images/findAlexCreativeResult.png)
+  ![result for 'find alex creative'](images/findAlexCreativeResult.png =600x)
 
 #### Deleting a client : `delete`
 
@@ -242,7 +244,7 @@ Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
-![result for 'findt 1 materials invest'](images/findt.png)
+![result for 'findt 1 materials invest'](images/findt.png =600x)
 
 ### Data Management
 
