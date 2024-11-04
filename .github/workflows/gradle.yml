@@ -2,12 +2,6 @@ name: Java CI
 
 on: [push, pull_request]
 
-# Add top-level permissions
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   build:
     strategy:
@@ -48,22 +42,34 @@ jobs:
       - name: Upload tests artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: 'test'
+          name: 'test-report'
           path: 'build/reports/tests/test'
 
       - name: Upload checkstyle artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: 'checkstyle'
+          name: 'checkstyle-report'
           path: 'build/reports/checkstyle'
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: 'test-report'
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
