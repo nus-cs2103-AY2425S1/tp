@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_LOG_MESSAGE_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOG_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.LOG_MESSAGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_DATE;
@@ -60,6 +61,13 @@ public class LogCommandParserTest {
         // invalid date
         assertParseFailure(parser, "1" + INVALID_LOG_DATE + LOG_MESSAGE_DESC,
                 MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_emptyLogMessage_failure() {
+        // index specified but log message is empty
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_LOG;
+        assertParseFailure(parser, userInput, MESSAGE_LOG_MESSAGE_EMPTY);
     }
 
     @Test
