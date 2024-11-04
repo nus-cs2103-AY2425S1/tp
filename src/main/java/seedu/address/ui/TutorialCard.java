@@ -16,12 +16,12 @@ import seedu.address.model.participation.Participation;
 public class TutorialCard extends UiPart<Region> {
 
     private static final String FXML = "TutorialCard.fxml";
+    private List<Participation> participationList;
 
     @FXML
     private Label tutorial;
     @FXML
     private Label studentsEnrolled;
-    private List<Participation> participationList;
 
 
     /**
@@ -45,10 +45,6 @@ public class TutorialCard extends UiPart<Region> {
     }
     private void updateStudentCount() {
         this.studentsEnrolled.setText(String.valueOf(participationList.size()));
-    }
-
-    public VBox getRoot() {
-        return (VBox) super.getRoot();
     }
 }
 

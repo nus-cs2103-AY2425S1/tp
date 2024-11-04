@@ -41,7 +41,7 @@ public class Dashboard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code Dashboard} with the given {@code Payment} t0 display.
+     * Creates a {@code Dashboard} with the given {@code Payment} to display.
      */
     public Dashboard(ObservableList<Person> personList, ObservableList<Participation> participationList,
                      ObservableList<Tutorial> tutorialList) {
@@ -59,10 +59,7 @@ public class Dashboard extends UiPart<Region> {
 
     private void initializeTutorialCards() {
         for (Tutorial tutorial : tutorialList) {
-            List<Participation> initialParticipationList = getParticipationListForTutorial(tutorial);
-            TutorialCard card = new TutorialCard(tutorial.getSubject(), initialParticipationList);
-            tutorials.getChildren().add(card.getRoot());
-            tutorialCards.put(tutorial, card);
+            createAndAddTutorialCard(tutorial);
         }
     }
 
@@ -136,9 +133,8 @@ public class Dashboard extends UiPart<Region> {
         total.setText(String.valueOf(personList.size()));
 
         // Calculate and update number of students with overdue fees
-        long studentsWithFeesOverdue = personList.stream()
-                .filter(person -> Integer.parseInt(person.getPayment().overdueAmount) > 0)
-                .count();
+        int studentsWithFeesOverdue = personList.filtered(person ->
+                Integer.parseInt(person.getPayment().overdueAmount) > 0).size();
         feesOverdue.setText(String.valueOf(studentsWithFeesOverdue));
     }
 
