@@ -98,21 +98,26 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the pinned list.
      */
-    public boolean isPinned(Person person);
+    boolean isPinned(Person person);
 
     /**
      * Adds the {@code person} in the pinned contact list.
      *
      * @param person The {@code person} in the contact list to be pinned.
      */
-    public void pinPerson(Person person);
+    void pinPerson(Person person);
 
     /**
      * Remove the {@code person} in the pinned contact list.
      *
      * @param person The {@code person} in the contact list to be unpinned.
      */
-    public void unpinPerson(Person person);
+    void unpinPerson(Person person);
+
+    /**
+     * Checks if there is a version that can be reverted to or not.
+     */
+    boolean canUndo();
 
     /**
      * Saves the current state of the {@code AddressBook} into a version history list.

@@ -180,12 +180,19 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean canUndo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void unpinPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void saveAddressBookVersion() {}
+        public void saveAddressBookVersion() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void revertAddressBookVersion() {

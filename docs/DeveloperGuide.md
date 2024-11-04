@@ -549,7 +549,7 @@ _Similar to UC10 except without extension 2b._
 1.  Actor performs a command that updates the addressbook.
 2.  System executes the command.
 3.  Actor requests to undo the recently executed command.
-4.  System reverts changes made by the user.
+4.  System reverts changes made by the actor.
 
     Use case ends.
 

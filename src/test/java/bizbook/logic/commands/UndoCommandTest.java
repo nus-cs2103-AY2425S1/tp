@@ -35,6 +35,7 @@ public class UndoCommandTest {
 
         try {
             deleteCommand.execute(model);
+            model.saveAddressBookVersion();
         } catch (CommandException err) {
             throw new AssertionError("There should not be an error thrown");
         }

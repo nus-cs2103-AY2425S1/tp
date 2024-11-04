@@ -1,7 +1,5 @@
 package bizbook.logic.commands;
 
-import java.util.NoSuchElementException;
-
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.model.Model;
 
@@ -19,12 +17,12 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
-        try {
-            model.revertAddressBookVersion();
-            return new CommandResult(MESSAGE_UNDO_SUCCESS);
-        } catch (NoSuchElementException undoErr) {
+        if (!model.canUndo()) {
             throw new CommandException(MESSAGE_UNDO_FAILURE);
         }
+
+        model.revertAddressBookVersion();
+        return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 
     @Override
