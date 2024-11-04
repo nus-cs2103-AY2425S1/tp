@@ -18,7 +18,7 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX =
-            "^\\d*\\s+[A-Za-z0-9 ]+\\s*(#\\d+-\\d+)?\\s+[A-Za-z0-9 ]+\\s+Singapore\\s+\\d{6}$";
+            "^\\d*\\s*+[A-Za-z0-9 ]+\\s*(#\\d+-\\d+)?\\s+[A-Za-z0-9 ]+\\s+Singapore\\s+\\d{6}$";
 
     public final String value;
 
