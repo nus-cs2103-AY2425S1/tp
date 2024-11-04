@@ -70,9 +70,12 @@ public class MarkLessonParticipationCommandParserTest {
 
     @Test
     public void parse_invalidParticipation_failure() {
-        assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME + " pt/1.0", MESSAGE_INVALID_PARTICIPATION);
-        assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME + " pt/0.5", MESSAGE_INVALID_PARTICIPATION);
-        assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME + " pt/0.0", MESSAGE_INVALID_PARTICIPATION);
+        assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME
+                + " pt/1.0", MESSAGE_INVALID_PARTICIPATION);
+        assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME
+                + " pt/0.5", MESSAGE_INVALID_PARTICIPATION);
+        assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME
+                + " pt/0.0", MESSAGE_INVALID_PARTICIPATION);
         assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME + " pt/7122647915963579",
                 MESSAGE_INVALID_PARTICIPATION);
         assertParseFailure(parser, " 1 n/" + ALICE_NAME + " n/" + BENSON_NAME + " pt/-712264795963579",
