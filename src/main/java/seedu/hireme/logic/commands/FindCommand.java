@@ -13,7 +13,7 @@ import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "/f";
+    public static final String COMMAND_WORD = "/find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all internship applications whose names contain any of "
@@ -42,11 +42,10 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand otherFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 

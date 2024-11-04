@@ -1,5 +1,6 @@
 package seedu.hireme.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         try {
             boolean isEarliestOrder = ParserUtil.parseSortingOrder(args);
             String order = isEarliestOrder ? "earliest" : "latest";

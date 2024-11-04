@@ -10,8 +10,8 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.hireme.commons.util.CollectionUtil;
-import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipException;
-import seedu.hireme.model.internshipapplication.exceptions.InternshipNotFoundException;
+import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipApplicationException;
+import seedu.hireme.model.internshipapplication.exceptions.InternshipApplicationNotFoundException;
 
 /**
  * A list that enforces uniqueness between its elements and does not allow nulls.
@@ -44,15 +44,16 @@ public class UniqueList implements Iterable<InternshipApplication> {
      * Adds an element to the list.
      * The element must not already exist in the list.
      *
-     * @param toAdd The element to add.
-     * @throws DuplicateInternshipException if the element already exists in the list.
+     * @param item The element to add.
+     * @throws DuplicateInternshipApplicationException if the element already exists in the list.
      */
-    public void add(InternshipApplication toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateInternshipException();
+    public void add(InternshipApplication item) {
+        requireNonNull(item);
+        if (contains(item)) {
+            throw new DuplicateInternshipApplicationException();
         }
-        internalList.add(toAdd);
+
+        internalList.add(item);
     }
 
     /**
@@ -62,19 +63,20 @@ public class UniqueList implements Iterable<InternshipApplication> {
      *
      * @param target The element to replace.
      * @param edited The edited element to replace with.
-     * @throws InternshipNotFoundException if {@code target} does not exist in the list.
-     * @throws DuplicateInternshipException if {@code edited} is the same as another existing element in the list.
+     * @throws InternshipApplicationNotFoundException if {@code target} does not exist in the list.
+     * @throws DuplicateInternshipApplicationException if {@code edited} is the same as another existing element in the
+     *     list.
      */
     public void setItem(InternshipApplication target, InternshipApplication edited) {
         CollectionUtil.requireAllNonNull(target, edited);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new InternshipNotFoundException();
+            throw new InternshipApplicationNotFoundException();
         }
 
         if (!target.isSame(edited) && contains(edited)) {
-            throw new DuplicateInternshipException();
+            throw new DuplicateInternshipApplicationException();
         }
 
         internalList.set(index, edited);
@@ -84,13 +86,13 @@ public class UniqueList implements Iterable<InternshipApplication> {
      * Removes the equivalent element from the list.
      * The element must exist in the list.
      *
-     * @param toRemove The element to remove.
-     * @throws InternshipNotFoundException if the element does not exist in the list.
+     * @param target The element to remove.
+     * @throws InternshipApplicationNotFoundException if the element does not exist in the list.
      */
-    public void remove(InternshipApplication toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new InternshipNotFoundException();
+    public void remove(InternshipApplication target) {
+        requireNonNull(target);
+        if (!internalList.remove(target)) {
+            throw new InternshipApplicationNotFoundException();
         }
     }
 
@@ -110,13 +112,14 @@ public class UniqueList implements Iterable<InternshipApplication> {
      * The {@code items} list must not contain duplicate elements.
      *
      * @param items The new list to replace the existing contents.
-     * @throws DuplicateInternshipException if the {@code items} list contains duplicates.
+     * @throws DuplicateInternshipApplicationException if the {@code items} list contains duplicates.
      */
     public void setItems(List<InternshipApplication> items) {
         CollectionUtil.requireAllNonNull(items);
         if (!areUnique(items)) {
-            throw new DuplicateInternshipException();
+            throw new DuplicateInternshipApplicationException();
         }
+
         internalList.setAll(items);
     }
 
@@ -135,6 +138,7 @@ public class UniqueList implements Iterable<InternshipApplication> {
      * @param predicate The predicate applied on the items
      */
     public int countItems(Predicate<InternshipApplication> predicate) {
+        requireNonNull(predicate);
         return (int) internalList.stream().filter(predicate).count();
     }
 

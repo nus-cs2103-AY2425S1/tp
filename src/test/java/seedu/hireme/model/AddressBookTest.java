@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
-import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipException;
+import seedu.hireme.model.internshipapplication.exceptions.DuplicateInternshipApplicationException;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 
 public class AddressBookTest {
@@ -49,8 +49,8 @@ public class AddressBookTest {
         List<InternshipApplication> newApplications = Arrays.asList(APPLE, editedApple);
         AddressBookStub newData = new AddressBookStub(newApplications);
 
-        assertThrows(DuplicateInternshipException.class, () -> addressBook.resetData(newData));
-        assertThrows(DuplicateInternshipException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateInternshipApplicationException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateInternshipApplicationException.class, () -> addressBook.resetData(newData));
     }
 
     @Test

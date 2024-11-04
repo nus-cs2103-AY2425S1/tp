@@ -1,5 +1,7 @@
 package seedu.hireme.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,7 +20,7 @@ import seedu.hireme.model.internshipapplication.Role;
 import seedu.hireme.model.internshipapplication.Status;
 
 /**
- * Jackson-friendly version of {@link InternshipApplication}.
+ * Represents a Jackson-friendly version of {@link InternshipApplication}.
  */
 class JsonAdaptedInternship {
 
@@ -52,6 +54,7 @@ class JsonAdaptedInternship {
      * Converts a given {@code InternshipApplication} into this class for Jackson use.
      */
     public JsonAdaptedInternship(InternshipApplication source) {
+        requireNonNull(source);
         companyName = source.getCompany().getName().toString();
         companyEmail = source.getCompany().getEmail().toString();
         role = source.getRole().toString();
@@ -111,7 +114,7 @@ class JsonAdaptedInternship {
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.dateString);
-        Status status = Status.valueOf(statusString);
+        Status status = Status.getValueOf(statusString);
 
         return new InternshipApplication(company, date, role, status);
     }

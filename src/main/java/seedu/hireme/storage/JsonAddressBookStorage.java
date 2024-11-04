@@ -15,7 +15,7 @@ import seedu.hireme.commons.util.JsonUtil;
 import seedu.hireme.model.ReadOnlyAddressBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * Represents a class to access AddressBook data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
@@ -23,7 +23,13 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private final Path filePath;
 
+    /**
+     * Stores the AddressBook data at the filepath provided.
+     *
+     * @param filePath The file path where the AddressBook data will be stored at.
+     */
     public JsonAddressBookStorage(Path filePath) {
+        requireNonNull(filePath);
         this.filePath = filePath;
     }
 
@@ -32,7 +38,6 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
 
-    //To-do: edit this readAddressBook() to read data from data file for HireMe
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(filePath);
@@ -44,8 +49,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath)
-            throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
@@ -64,6 +68,8 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        requireNonNull(addressBook);
+        logger.info("Saving data to " + filePath);
         saveAddressBook(addressBook, filePath);
     }
 

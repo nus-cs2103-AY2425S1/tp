@@ -127,6 +127,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        requireNonNull(addressBook);
+        logger.info("Replacing current address book data with new data");
         this.addressBook.resetData(addressBook);
     }
 
@@ -149,6 +151,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasItem(InternshipApplication item) {
         requireNonNull(item);
+        logger.info("Checking if the address book and unique list contain this internship application");
         return addressBook.hasItem(item);
     }
 
@@ -159,6 +162,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void deleteItem(InternshipApplication target) {
+        requireNonNull(target);
+        logger.info("Removing an internship application from the address book and unique list");
         addressBook.removeItem(target);
     }
 
@@ -169,6 +174,8 @@ public class ModelManager implements Model {
      */
     @Override
     public void addItem(InternshipApplication item) {
+        requireNonNull(item);
+        logger.info("Adding an internship application to the address book and unique list");
         addressBook.addItem(item);
         updateFilteredList(PREDICATE_SHOW_ALL);
     }
@@ -182,6 +189,7 @@ public class ModelManager implements Model {
     @Override
     public void setItem(InternshipApplication target, InternshipApplication edited) {
         CollectionUtil.requireAllNonNull(target, edited);
+        logger.info("Replacing an internship application in the address book and unique list with an edited one");
         addressBook.setItem(target, edited);
     }
 
@@ -205,6 +213,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredList(Predicate<InternshipApplication> predicate) {
         requireNonNull(predicate);
+        logger.info("Updating the filtered list");
         filtered.setPredicate(predicate);
     }
 
@@ -216,6 +225,7 @@ public class ModelManager implements Model {
     @Override
     public void sortFilteredList(Comparator<InternshipApplication> comparator) {
         requireNonNull(comparator);
+        logger.info("Sorting the list of internship applications in the address book and unique list");
         addressBook.sortItems(comparator);
     }
 

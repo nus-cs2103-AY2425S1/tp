@@ -14,7 +14,7 @@ import seedu.hireme.model.ReadOnlyAddressBook;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * Represents an Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
@@ -55,6 +55,7 @@ class JsonSerializableAddressBook {
             }
             addressBook.addItem(internship);
         }
+
         return addressBook;
     }
 

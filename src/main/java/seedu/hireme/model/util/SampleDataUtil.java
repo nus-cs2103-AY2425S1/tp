@@ -16,10 +16,12 @@ import seedu.hireme.model.internshipapplication.Role;
  */
 public class SampleDataUtil {
     public static InternshipApplication[] getSampleInternships() {
-        return new InternshipApplication[] { new InternshipApplication(new Company(
-                        new Email("company1@mail.com"), new Name("Company 1")),
-                        new Date(LocalDate.now()), new Role("role 1"))
-        };
+        Email email = new Email("company1@mail.com");
+        Name name = new Name("Company 1");
+        Company company = new Company(email, name);
+        Date date = new Date(LocalDate.now());
+        Role role = new Role("role 1");
+        return new InternshipApplication[] { new InternshipApplication(company, date, role) };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -27,6 +29,7 @@ public class SampleDataUtil {
         for (InternshipApplication sampleInternship : getSampleInternships()) {
             sampleAb.addItem(sampleInternship);
         }
+
         return sampleAb;
     }
 

@@ -2,7 +2,6 @@ package seedu.hireme.logic.validator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.hireme.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ public class EmailValidatorTest {
         EmailValidator validator = EmailValidator.of();
 
         // null email
-        assertThrows(NullPointerException.class, () -> validator.validate(null));
+        assertFalse(validator.validate(null));
 
         // blank email
         assertFalse(validator.validate("")); // empty string

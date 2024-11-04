@@ -10,14 +10,7 @@ import seedu.hireme.logic.validator.RoleValidator;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Role should only contain alphanumeric characters and /.";
-
-    /*
-     * The role should start with an alphanumeric character and may contain single spaces between words.
-     * No leading or trailing spaces or special characters are allowed, and no multiple consecutive spaces are allowed.
-     */
-    public static final String VALIDATION_REGEX = "[ A-Za-z0-9_&/]*";
+    public static final String MESSAGE_CONSTRAINTS = "Role should only contain alphanumeric characters and spaces";
 
     private final String value;
 
@@ -30,7 +23,9 @@ public class Role {
      */
     public Role(String role) {
         requireNonNull(role);
-        checkArgument(RoleValidator.of().validate(role), MESSAGE_CONSTRAINTS);
+        boolean isValidRole = RoleValidator.of().validate(role);
+        checkArgument(isValidRole, MESSAGE_CONSTRAINTS);
+
         this.value = role.trim();
     }
 

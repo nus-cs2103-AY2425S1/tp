@@ -4,6 +4,7 @@ package seedu.hireme.logic.validator;
  * Validates role strings
  */
 public class RoleValidator extends Validator<String> {
+
     public static final String VALIDATION_REGEX = "[ A-Za-z0-9/]*";
     private static RoleValidator instance;
 
@@ -23,6 +24,9 @@ public class RoleValidator extends Validator<String> {
     }
     @Override
     public boolean validate(String input) {
+        if (input == null) {
+            return false;
+        }
         return !input.trim().isEmpty() && input.matches(VALIDATION_REGEX);
     }
 }

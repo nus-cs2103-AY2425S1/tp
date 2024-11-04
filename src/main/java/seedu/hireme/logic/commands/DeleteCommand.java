@@ -18,7 +18,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "/d";
+    public static final String COMMAND_WORD = "/delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the internship application identified by the index number used in the displayed person list.\n"
@@ -56,11 +56,10 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 

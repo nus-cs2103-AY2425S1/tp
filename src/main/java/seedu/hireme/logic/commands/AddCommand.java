@@ -17,7 +17,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "/a";
+    public static final String COMMAND_WORD = "/add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship application to the address book. "
             + "Parameters: "
@@ -65,11 +65,10 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddCommand otherAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
