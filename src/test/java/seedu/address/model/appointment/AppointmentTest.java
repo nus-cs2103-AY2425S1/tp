@@ -76,6 +76,7 @@ public class AppointmentTest {
         // valid description
         assertTrue(Appointment.isValidDescription("Surgery")); // alphabetic characters only
         assertTrue(Appointment.isValidDescription("L4-L5 spine check")); // with special characters and numbers
-        assertTrue(Appointment.isValidDescription("VgV6jNGQ*mz!W7TTE51GX#RH81UOWM0Gadsfdkn8XWKcdrAOss")); // 100 characters
+        // 50 characters
+        assertTrue(Appointment.isValidDescription("VgV6jNGQ*mz!W7TTE51GX#RH81UOWM0Gadsfdkn8XWKcdrAOss"));
     }
 }
