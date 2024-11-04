@@ -32,6 +32,7 @@ public class LoadCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.clearAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, loadPath));
     }
 

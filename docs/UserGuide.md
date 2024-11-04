@@ -172,6 +172,35 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Undoing the last action: `undo`
+
+Reverts the last action performed in the application, allowing you to recover data that may have been deleted or modified unintentionally.
+
+Format: `undo`
+
+* **Note:** This command does not work with the `list`, `filter`, or `find` commands.
+
+<img src="images/UndoRedoExample1.png" alt="Initial State" width="60%" />
+<img src="images/UndoRedoExample2.png" alt="After Delete Command" width="60%" />
+<img src="images/UndoRedoExample3.png" alt="After Undo Command" width="60%" />
+
+Examples:
+* `undo` will revert the last command executed, restoring the previous state of the address book.
+
+### Redoing the last undone action: `redo`
+
+Restores the last action that was undone, allowing you to recover data after an undo operation.
+
+Format: `redo`
+
+* **Note:** This command does not work with the `list`, `filter`, or `find` commands.
+
+<img src="images/UndoRedoExample4.png" alt="After Redo Command" width="60%" />
+
+Examples:
+* `redo` will reapply the last command that was undone, restoring the previous state of the address book.
+
+
 ### Grading a Module: `grade`
 
 Assigns a grade to a module that a student is taking.
@@ -330,6 +359,8 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Undo** | `undo`
+**Redo** | `redo`
 **List** | `list`
 **Help** | `help`
 **Archive** | `archive pa/PATH`

@@ -68,9 +68,14 @@ public class RandomPersonGenerator {
         String baseName = getRandomElement(BASE_NAMES);
         String uniqueName;
 
-        // Ensure the name is unique by appending a number
+        // Ensure the name is unique by appending a 4-letter random suffix
         do {
-            int suffix = RANDOM.nextInt(10000); // Random 4-digit number as suffix
+            StringBuilder suffix = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                // Generate a random letter (A-Z)
+                char randomChar = (char) ('A' + RANDOM.nextInt(26));
+                suffix.append(randomChar);
+            }
             uniqueName = baseName + suffix;
         } while (USED_NAMES.contains(uniqueName));
 
