@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,7 +28,7 @@ public class EditEventCommand extends Command {
     public static final String COMMAND_WORD = "edit_event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of an existing event. "
-            + "Parameters: EVENT_ID "
+            + "Parameters: INDEX "
             + "[" + PREFIX_EVENT_NAME + "EVENT_NAME] "
             + "[" + PREFIX_EVENT_DESCRIPTION + "EVENT_DESCRIPTION] "
             + "[" + PREFIX_EVENT_START_DATE + "EVENT_START_DATE] "
@@ -39,21 +41,20 @@ public class EditEventCommand extends Command {
             + "Dates must be in YYYY-MM-DD format!";
 
     public static final String MESSAGE_SUCCESS = "Event edited: %1$s";
-    public static final String MESSAGE_EVENT_NOT_FOUND = "This event does not exist in the address book";
     public static final String MESSAGE_NO_CHANGES = "No changes specified for the event";
 
-    private final int eventId;
+    private final Index targetIndex;
     private final EditEventDescriptor editEventDescriptor;
 
     /**
      * Creates an EditEventCommand to edit the specified {@code Event}.
      *
-     * @param eventId ID of the event to edit.
+     * @param targetIndex Index of the event to edit.
      * @param editEventDescriptor Details to edit the event with.
      */
-    public EditEventCommand(int eventId, EditEventDescriptor editEventDescriptor) {
+    public EditEventCommand(Index targetIndex, EditEventDescriptor editEventDescriptor) {
         requireNonNull(editEventDescriptor);
-        this.eventId = eventId;
+        this.targetIndex = targetIndex;
         this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
     }
 
@@ -62,17 +63,18 @@ public class EditEventCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on.
      * @return feedback message of the operation result for display.
-     * @throws CommandException if the event ID does not exist or no changes are specified.
+     * @throws CommandException if the index is out of bounds or no changes are specified.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Event> lastShownList = model.getFilteredEventList();
 
-        if (!model.hasEventById(eventId)) {
-            throw new CommandException(MESSAGE_EVENT_NOT_FOUND);
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToEdit = model.getEventById(eventId);
+        Event eventToEdit = lastShownList.get(targetIndex.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         if (eventToEdit.equals(editedEvent)) {
@@ -113,14 +115,14 @@ public class EditEventCommand extends Command {
         }
 
         EditEventCommand otherEditEventCommand = (EditEventCommand) other;
-        return eventId == otherEditEventCommand.eventId
+        return targetIndex.equals(otherEditEventCommand.targetIndex)
                 && editEventDescriptor.equals(otherEditEventCommand.editEventDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("eventId", eventId)
+                .add("targetIndex", targetIndex)
                 .add("editEventDescriptor", editEventDescriptor)
                 .toString();
     }
