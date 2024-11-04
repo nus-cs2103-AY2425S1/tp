@@ -43,8 +43,8 @@ public class DeleteClaimsCommand extends Command {
             + "'%1$s' of client: %2$s.\n\n"
             + "Deleted Claim Details:\nStatus: %3$s | Description: %4$s.\n"
             + "Note: The indexing of remaining claims may have changed due to this deletion.";
-    public static final String MESSAGE_NO_CLAIM_FOUND = "No claim found at the specified index."
-            + "\nPlease use the 'list-claims' command to verify the index of the claim you want to delete!";
+    public static final String MESSAGE_NO_CLAIM_FOUND = "No claim found at the specified index.\n"
+            + "Please use the 'list-claims' command to verify the index of the claim you want to delete!";
     public static final String MESSAGE_INVALID_CLIENT_INDEX = "The index you provided exceeds the total number of"
             + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
