@@ -21,6 +21,7 @@ import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
@@ -73,6 +74,11 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public int getFilteredLessonListSize() {
+            return lessons.size();
+        }
+
+        @Override
         public ReadOnlyTutorEase getTutorEase() {
             return new TutorEase();
         }
@@ -82,6 +88,7 @@ public class DeleteLessonCommandTest {
             return lessons;
         }
     }
+
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -202,6 +209,16 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -223,6 +240,11 @@ public class DeleteLessonCommandTest {
 
         @Override
         public LessonSchedule getLessonSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -263,6 +285,11 @@ public class DeleteLessonCommandTest {
 
         @Override
         public int getLessonScheduleSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
             throw new AssertionError("This method should not be called.");
         }
 

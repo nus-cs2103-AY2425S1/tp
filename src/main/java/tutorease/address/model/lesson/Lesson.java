@@ -9,7 +9,7 @@ import tutorease.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson implements Comparable<Lesson> {
-    private final Person student;
+    private Person student;
     private final Fee fee;
     private final StartDateTime startDateTime;
     private final EndDateTime endDateTime;
@@ -134,11 +134,11 @@ public class Lesson implements Comparable<Lesson> {
         final StringBuilder builder = new StringBuilder();
         builder.append("Student: ")
                 .append(getStudent().getName())
-                .append(" Fee: ")
+                .append("; Fee: ")
                 .append(fee.toString())
-                .append(" Start: ")
+                .append("; Start: ")
                 .append(getStartDateTime())
-                .append(" End: ")
+                .append("; End: ")
                 .append(getEndDateTime());
         return builder.toString();
     }

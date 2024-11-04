@@ -110,7 +110,6 @@ public class UniqueLessonListTest {
     @Test
     public void remove_invalidLesson_throwsLessonNotInList() {
         assertTrue(uniqueLessonList.contains(lesson));
-
         Lesson lesson = uniqueLessonList.get(0);
         uniqueLessonList.remove(lesson);
         assertEquals(0, uniqueLessonList.size());

@@ -22,7 +22,7 @@ public class AddContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Adds a person to TutorEase. "
+            + ": Adds a person to TutorEase.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -39,8 +39,14 @@ public class AddContactCommand extends ContactCommand {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase";
+    public static final String MESSAGE_SUCCESS = "New contact added: %1$s.";
+    public static final String MESSAGE_DUPLICATE_PHONE = "A person with this phone number already exists in the "
+            + "address book!";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "A person with this email already exists in the "
+            + "address book!";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase. If you wish to "
+            + "save an alternative version of a person, "
+            + "you may add a unique identifier to his/her name e.g. Ryan Tan Sec 1";
     private final Person toAdd;
 
     /**
@@ -55,12 +61,24 @@ public class AddContactCommand extends ContactCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        checkDuplicateContacts(model, toAdd);
+
+        model.addPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    private static void checkDuplicateContacts(Model model, Person toAdd) throws CommandException {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        if (model.hasSamePhone(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        }
+
+        if (model.hasSameEmail(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
     }
 
     @Override
