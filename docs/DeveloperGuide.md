@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# NovaCare Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -45,8 +45,7 @@ The bulk of the app's work is done by the following four components:
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+* [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -124,7 +123,9 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -249,11 +250,18 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+The data archiving feature allows for the backup and restoration of data by compressing it into a single archive file (e.g., `.zip`). This feature can be useful for storage and data retrieval.
+
+The main steps to implement this feature are:
+
+1. **Collect Data**: Identify and gather all necessary data files.
+2. **Compress Data**: Compress these files into an archive.
+3. **Store Archive**: Save the archive to a specified location.
+4. **Retrieve Data**: Extract the archive when restoration is required.
+
+In future releases, additional features may be implemented.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -317,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The list is empty.
+* 3a. The patient list is empty.
 
   Use case ends.
 
@@ -335,12 +343,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  Nurse chooses to delete an emergency contact number for a patient.
-2.  NovaCare requests the patient's details to identify the patient.
+2.  Nurse requests the patient's details from NovaCare to identify the patient.
 3.  NovaCare displays the list of current emergency contacts for the patient.
 4.  Nurse selects the contact to delete.
-5.  NovaCare requests confirmation from the nurse to delete the selected contact.
-6.  Nurse confirms the deletion.
-7.  NovaCare deletes the selected emergency contact and displays a confirmation message with the updated emergency contact list.
+5.  NovaCare deletes the selected emergency contact and displays a confirmation message with the updated emergency contact list.
 
 
     Use case ends.
@@ -351,13 +357,124 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. NovaCare detects that the patient does not exist.
+* 3b. NovaCare detects that the patient does not exist.
 
-    * 3a1. NovaCare notifies the nurse that the patient does not exist.
-    * 3a2. Nurse either re-enters the correct patient details or cancels the operation.
+    * 3b1. NovaCare notifies the nurse that the patient does not exist.
+    * 3b2. Nurse either re-enters the correct patient details or cancels the operation.
 
 
       Use case resumes at step 2 if patient details are re-entered.
+
+**Use Case: UC03 - Delete Task**
+
+**MSS**
+
+1. User chooses to delete a task.
+2. NovaCare asks for the Task ID of the task to be deleted.
+3. User inputs the Task ID.
+4. NovaCare outputs a message showing successful deletion of the task.
+
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The task list is empty.
+
+    * Use case ends.
+
+* 3a. NovaCare detects an invalid Task ID.
+
+    * 3a1. NovaCare requests a valid Task ID.
+    * 3a2. User enters a new Task ID.
+
+
+      Steps 3a1-3a2 are repeated until the data entered is correct.
+      Use case resumes at step 2 if patient details are re-entered.
+
+**Use Case: UC04 - Add Patient**
+
+**MSS**
+
+1. User chooses to add a new patient.
+2. NovaCare prompts for the patient's relevant details.
+3. User inputs the required information.
+4. NovaCare outputs a message showing successful patient creation.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. NovaCare detects an invalid phone number or email.
+
+    * 3a1. NovaCare requests valid phone number and/or email.
+    * 3a2. User re-enters the phone number and/or email.
+
+      Steps 3a1-3a2 are repeated until the data entered is correct.
+      Use case resumes at step 3 if the details are re-entered.
+  
+* 3b. User omits one or more required fields (name, phone number, email or address).
+
+    * 3b1. NovaCare prompts the user to enter the missing fields.
+    * 3b2. User provides the missing information.
+
+      Steps 3b1-3b2 are repeated until all required fields are provided.
+      Use case resumes at step 3 once all fields are correctly entered.
+
+**Use Case: UC05 - Delete Patient**
+
+**MSS**
+
+1. User chooses to delete a patient.
+2. NovaCare prompts the user to enter patient details.
+3. User inputs the required patient details.
+4. NovaCare outputs a message showing successful patient deletion.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. NovaCare cannot find the patient.
+
+    * 3a1. NovaCare prompts the user to enter valid patient details.
+    * 3a2. User re-enters the patient details.
+
+      Steps 3a1-3a2 are repeated until a valid patient record is found.
+      Use case resumes at step 3 if the patient details are correct.
+
+**Use Case: UC06 - Add Priority**
+
+**MSS**
+
+1. User chooses to add a priority level to a patient.
+2. NovaCare prompts the user to select the patient.
+3. User selects the relevant patient and chooses the desired priority level.
+4. NovaCare updates the patient record with the chosen priority level.
+5. NovaCare outputs a message showing successful priority update for the patient.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. NovaCare detects an invalid priority level.
+
+    * 3a1. NovaCare prompts the user to enter a valid priority level.
+    * 3a2. User re-enters the priority level.
+
+      Steps 3a1-3a2 are repeated until a valid priority level is provided.
+      Use case resumes at step 3 if the priority level is correct.
+
+**Use Case: UC07 - Reset Priority**
+
+**MSS**
+
+1. User chooses to reset the priority level for a patient.
+2. NovaCare prompts the user to select the patient.
+3. User selects the relevant patient to reset the priority.
+4. NovaCare resets the priority level for the patient to the default setting.
+5. NovaCare outputs a message confirming the successful reset of the patient's priority.
+
+   Use case ends.
 
 
 ### Non-Functional Requirements
@@ -374,6 +491,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Priority level**: A level to rank patients in terms of their severity level
+* **Emergency contact**: A person who is preferably close to the patient and is designated to receive information in case of an emergency
+* **Task**: A task to be done for a specific patient
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -407,20 +527,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a patient while all patients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -428,4 +546,34 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+### Adding a Task
+
+1. Adding a task to a patient while all patients are being shown
+
+    1. Prerequisites: List all tasks using the `list` command. Patient should already exist in the list.
+
+    1. Test case: `addtask 1 d/Eat Medication`  
+       Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `addtask 0 d/Eat Medication`  
+       Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
+
+    1. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)  
+       Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+
+### Changing Priority
+
+1. Changing a priority level of a patient
+
+    1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
+
+    1. Test case: `priority 1 l/2`  
+       Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `priority 0 l/2`  
+       Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
+
+    1. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)  
+       Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+
+For additional commands and further testing guidelines, refer to Help section in NovaCare.
