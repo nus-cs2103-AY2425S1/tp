@@ -23,14 +23,14 @@ public class AddCommand extends Command {
 
     public static final String SHORT_COMMAND_WORD = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to ClientHub.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_CLIENT_TYPE + "CLIENT_TYPE]...\n"
-            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_CLIENT_TYPE + "CLIENT_TYPE...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -58,6 +58,8 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

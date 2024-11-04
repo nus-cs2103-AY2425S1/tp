@@ -16,7 +16,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z()]+[a-zA-Z()\\s]*$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z()/]+[a-zA-Z()/\\s]*$";
 
     public final String fullName;
 
@@ -56,7 +56,11 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+
+        // Compare the full name of the person
+        // John Doe will match john doe
+        // To prevent duplicate names from getting added.
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
