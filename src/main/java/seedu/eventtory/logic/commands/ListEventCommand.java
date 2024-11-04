@@ -20,4 +20,9 @@ public class ListEventCommand extends ListCommand {
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_LIST_EVENT_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof ListEventCommand);
+    }
 }

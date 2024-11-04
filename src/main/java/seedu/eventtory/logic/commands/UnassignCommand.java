@@ -3,11 +3,12 @@ package seedu.eventtory.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-
 import javafx.beans.value.ObservableValue;
+
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
@@ -72,11 +73,8 @@ public class UnassignCommand extends Command {
     }
 
     private CommandResult handleMainView(Model model) throws CommandException {
-        List<Vendor> vendorList = model.getFilteredVendorList();
-        List<Event> eventList = model.getFilteredEventList();
-
-        Vendor vendor = getVendorByIndex(vendorList, vendorIndex);
-        Event event = getEventByIndex(eventList, eventIndex);
+        Vendor vendor = IndexResolverUtil.resolveVendor(model, vendorIndex);
+        Event event = IndexResolverUtil.resolveEvent(model, eventIndex);
 
         if (!model.isVendorAssignedToEvent(vendor, event)) {
             throw new CommandException(Messages.MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT);
@@ -90,9 +88,7 @@ public class UnassignCommand extends Command {
 
     private CommandResult handleVendorDetailsView(Model model) throws CommandException {
         Vendor vendor = model.getViewedVendor().getValue();
-        List<Vendor> vendorList = model.getFilteredVendorList();
-
-        Vendor vendorToUnassign = getVendorByIndex(vendorList, vendorIndex);
+        Vendor vendorToUnassign = IndexResolverUtil.resolveVendor(model, vendorIndex);
 
         if (!vendor.equals(vendorToUnassign)) {
             // Treat as if the user is in main view, to unassign other vendor from main list indexed event
@@ -112,9 +108,7 @@ public class UnassignCommand extends Command {
 
     private CommandResult handleEventDetailsView(Model model) throws CommandException {
         Event event = model.getViewedEvent().getValue();
-        List<Event> eventList = model.getFilteredEventList();
-
-        Event eventToUnassign = getEventByIndex(eventList, eventIndex);
+        Event eventToUnassign = IndexResolverUtil.resolveEvent(model, eventIndex);
 
         if (!event.equals(eventToUnassign)) {
             // Treat as if the user is in main view, to unassign other event from main list indexed vendor

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.eventtory.logic.commands.CommandTestUtil.DESC_BIRTHDAY;
 import static seedu.eventtory.logic.commands.CommandTestUtil.DESC_WEDDING;
 import static seedu.eventtory.logic.commands.CommandTestUtil.VALID_NAME_BIRTHDAY;
+import static seedu.eventtory.logic.commands.CommandTestUtil.VALID_TAG_CHARITY;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.eventtory.logic.commands.CommandTestUtil.showEventAtIndex;
@@ -167,8 +168,14 @@ public class EditEventCommandTest {
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditEventCommand(INDEX_SECOND_EVENT, DESC_WEDDING)));
 
-        // different descriptor -> returns false
+        // different date descriptor -> returns false
         assertFalse(standardCommand.equals(new EditEventCommand(INDEX_FIRST_EVENT, DESC_BIRTHDAY)));
+
+        // different tags descriptor -> returns false
+        EditEventDescriptor differentTag = new EditEventDescriptorBuilder(DESC_WEDDING)
+                .withTags(VALID_TAG_CHARITY)
+                .build();
+        assertFalse(standardCommand.equals(new EditEventCommand(INDEX_FIRST_EVENT, differentTag)));
     }
 
     @Test

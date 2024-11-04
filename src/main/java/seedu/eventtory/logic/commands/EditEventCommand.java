@@ -8,7 +8,6 @@ import static seedu.eventtory.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -18,6 +17,7 @@ import seedu.eventtory.commons.util.CollectionUtil;
 import seedu.eventtory.commons.util.ToStringBuilder;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.commons.name.Name;
 import seedu.eventtory.model.commons.tag.Tag;
@@ -56,13 +56,8 @@ public class EditEventCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-
-        Event eventToEdit = lastShownList.get(index.getZeroBased());
+        Event eventToEdit = IndexResolverUtil.resolveEvent(model, index);
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
@@ -138,7 +133,7 @@ public class EditEventCommand extends EditCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date);
+            return CollectionUtil.isAnyNonNull(name, date, tags);
         }
 
         public void setName(Name name) {

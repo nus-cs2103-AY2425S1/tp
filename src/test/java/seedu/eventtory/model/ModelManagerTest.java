@@ -25,9 +25,9 @@ import seedu.eventtory.commons.core.GuiSettings;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.event.UniqueEventList;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.UniqueVendorList;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.testutil.EventBuilder;
 import seedu.eventtory.testutil.EventToryBuilder;
 import seedu.eventtory.testutil.TypicalEvents;
@@ -267,6 +267,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void testAssignedEventsDisplayStartIdx_updatesWithEventListSize() {
+        assertEquals(1, modelManager.getStartingIndexOfAssignedEvents().get());
+
+        modelManager.addEvent(TypicalEvents.HOON);
+
+        assertEquals(2, modelManager.getStartingIndexOfAssignedEvents().get());
+    }
+
+    @Test
+    public void testAssignedVendorsDisplayStartIdx_updatesWithVendorListSize() {
+        assertEquals(1, modelManager.getStartingIndexOfAssignedVendors().get());
+
+        modelManager.addVendor(TypicalVendors.HOON);
+
+        assertEquals(2, modelManager.getStartingIndexOfAssignedVendors().get());
+    }
+
+    @Test
     public void equals() {
         EventTory eventTory = new EventToryBuilder().withVendor(ALICE).withVendor(BENSON).build();
         EventTory differentEventTory = new EventTory();
@@ -291,7 +309,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredVendorList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredVendorList(new VendorContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(eventTory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
@@ -303,4 +321,3 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(eventTory, differentUserPrefs)));
     }
 }
-

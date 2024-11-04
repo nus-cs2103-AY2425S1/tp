@@ -18,10 +18,10 @@ import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 import seedu.eventtory.model.id.UniqueId;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.testutil.EditEventDescriptorBuilder;
 import seedu.eventtory.testutil.EditVendorDescriptorBuilder;
 
@@ -152,7 +152,7 @@ public class CommandTestUtil {
 
         Vendor vendor = model.getFilteredVendorList().get(targetIndex.getZeroBased());
         final String[] splitName = vendor.getName().fullName.split("\\s+");
-        model.updateFilteredVendorList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredVendorList(new VendorContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredVendorList().size());
     }
@@ -167,7 +167,7 @@ public class CommandTestUtil {
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().fullName.split("\\s+");
-        model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
     }

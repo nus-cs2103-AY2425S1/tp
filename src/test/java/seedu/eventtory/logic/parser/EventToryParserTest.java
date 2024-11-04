@@ -38,9 +38,9 @@ import seedu.eventtory.logic.commands.ViewEventCommand;
 import seedu.eventtory.logic.commands.ViewVendorCommand;
 import seedu.eventtory.logic.parser.exceptions.ParseException;
 import seedu.eventtory.model.event.Event;
-import seedu.eventtory.model.event.EventNameContainsKeywordsPredicate;
-import seedu.eventtory.model.vendor.NameContainsKeywordsPredicate;
+import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
 import seedu.eventtory.testutil.EditEventDescriptorBuilder;
 import seedu.eventtory.testutil.EditVendorDescriptorBuilder;
 import seedu.eventtory.testutil.EventBuilder;
@@ -143,12 +143,12 @@ public class EventToryParserTest {
         FindCommand firstCommand = (FindCommand) parser
                 .parseCommand(FindCommand.COMMAND_WORD + " " + PREFIX_VENDOR
             + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindVendorCommand(new NameContainsKeywordsPredicate(keywords)), firstCommand);
+        assertEquals(new FindVendorCommand(new VendorContainsKeywordsPredicate(keywords)), firstCommand);
 
         FindCommand secondCommand = (FindCommand) parser
                 .parseCommand(FindCommand.COMMAND_WORD + " " + PREFIX_EVENT
             + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindEventCommand(new EventNameContainsKeywordsPredicate(keywords)), secondCommand);
+        assertEquals(new FindEventCommand(new EventContainsKeywordsPredicate(keywords)), secondCommand);
     }
 
     @Test

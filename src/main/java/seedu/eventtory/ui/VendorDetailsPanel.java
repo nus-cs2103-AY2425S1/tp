@@ -3,6 +3,7 @@ package seedu.eventtory.ui;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -46,6 +47,8 @@ public class VendorDetailsPanel extends UiPart<Region> {
 
     private ObservableList<Event> assignedEvents;
 
+    private ObservableIntegerValue startIndexOfAssignedEvents;
+
     /**
      * Creates a {@code VendorDetailsPanel} with the given {@code ObservableObjectValue<Vendor>} and {@code Logic}.
      */
@@ -53,6 +56,7 @@ public class VendorDetailsPanel extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         assignedEvents = FXCollections.observableArrayList();
+        startIndexOfAssignedEvents = logic.getStartingIndexOfAssignedEvents();
 
         ObservableObjectValue<Vendor> observableVendor = logic.getViewedVendor();
         setVendor(observableVendor.get());
@@ -70,7 +74,12 @@ public class VendorDetailsPanel extends UiPart<Region> {
             updateAssignedEvents();
         });
 
-        EventListPanel eventListPanel = new EventListPanel(assignedEvents, "Assigned Events");
+        startIndexOfAssignedEvents.addListener((observable, oldValue, newValue) -> {
+            updateAssignedEvents();
+        });
+
+        EventListPanel eventListPanel = new EventListPanel(assignedEvents, "Assigned Events",
+            startIndexOfAssignedEvents);
         detailsChildrenPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
@@ -82,6 +91,7 @@ public class VendorDetailsPanel extends UiPart<Region> {
             description.setText(vendor.getDescription().value);
             // Empty tags will leave behind the last set of tags,
             // so we clear the tags before adding new tags
+            tags.getChildren().clear();
             vendor.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {

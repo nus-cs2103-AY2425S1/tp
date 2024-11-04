@@ -1,5 +1,7 @@
 package seedu.eventtory.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.eventtory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.eventtory.logic.commands.CommandTestUtil.showVendorAtIndex;
 import static seedu.eventtory.testutil.TypicalIndexes.INDEX_FIRST_VENDOR;
@@ -37,5 +39,19 @@ public class ListVendorCommandTest {
         showVendorAtIndex(model, INDEX_FIRST_VENDOR);
         assertCommandSuccess(new ListVendorCommand(), model,
                 ListVendorCommand.MESSAGE_LIST_VENDOR_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListVendorCommand listVendorCommand = new ListVendorCommand();
+        ListVendorCommand other = new ListVendorCommand();
+        ListEventCommand listEventCommand = new ListEventCommand();
+        ListCommand listCommand = new ListCommand();
+
+        assertTrue(listVendorCommand.equals(listVendorCommand));
+        assertTrue(listVendorCommand.equals(other));
+        // ListVendorCommand != ListEventCommand
+        assertFalse(listVendorCommand.equals(listEventCommand));
+        assertFalse(listVendorCommand.equals(listCommand));
     }
 }

@@ -14,5 +14,5 @@
          <Insets bottom="15.0" left="15.0" top="15.0" />
       </padding>
    </Label>
-  <ListView fx:id="vendorListView" VBox.vgrow="ALWAYS" />
+  <ListView fx:id="vendorListView" styleClass="focusable" stylesheets="@Extensions.css" VBox.vgrow="ALWAYS" />
 </VBox>

@@ -3,11 +3,10 @@ package seedu.eventtory.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_VENDOR;
 
-import java.util.List;
-
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.commons.exceptions.AssociationDeleteException;
 import seedu.eventtory.model.vendor.Vendor;
@@ -42,13 +41,7 @@ public class DeleteVendorCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Vendor> lastShownList = model.getFilteredVendorList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        }
-
-        Vendor vendorToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Vendor vendorToDelete = IndexResolverUtil.resolveVendor(model, targetIndex);
 
         try {
             model.deleteVendor(vendorToDelete);

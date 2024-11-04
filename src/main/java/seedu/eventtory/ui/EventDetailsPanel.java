@@ -3,6 +3,7 @@ package seedu.eventtory.ui;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -43,6 +44,8 @@ public class EventDetailsPanel extends UiPart<Region> {
 
     private ObservableList<Vendor> assignedVendors;
 
+    private ObservableIntegerValue startIndexOfAssignedVendors;
+
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
@@ -50,6 +53,7 @@ public class EventDetailsPanel extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         assignedVendors = FXCollections.observableArrayList();
+        startIndexOfAssignedVendors = logic.getStartingIndexOfAssignedVendors();
 
         ObservableObjectValue<Event> observableEvent = logic.getViewedEvent();
         setEvent(observableEvent.get());
@@ -67,7 +71,12 @@ public class EventDetailsPanel extends UiPart<Region> {
             updateAssignedVendors();
         });
 
-        VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors");
+        startIndexOfAssignedVendors.addListener((observable, oldValue, newValue) -> {
+            updateAssignedVendors();
+        });
+
+        VendorListPanel vendorListPanel = new VendorListPanel(
+            assignedVendors, "Assigned Vendors", startIndexOfAssignedVendors);
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
@@ -78,6 +87,7 @@ public class EventDetailsPanel extends UiPart<Region> {
             date.setText(event.getDate().toString());
             // Empty tags will leave behind the last set of tags,
             // so we clear the tags before adding new tags
+            tags.getChildren().clear();
             event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {

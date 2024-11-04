@@ -8,8 +8,10 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -36,6 +38,8 @@ public class ModelManager implements Model {
     private final ObjectProperty<UiState> currentUiState;
     private final ObjectProperty<Predicate<Vendor>> suppliedVendorFilterPredicate;
     private final ObjectProperty<Predicate<Event>> suppliedEventFilterPredicate;
+    private final ObservableIntegerValue startIndexOfAssignedVendors;
+    private final ObservableIntegerValue startIndexOfAssignedEvents;
 
     /**
      * Initializes a ModelManager with the given eventTory and userPrefs.
@@ -54,6 +58,13 @@ public class ModelManager implements Model {
         currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
         suppliedVendorFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_VENDORS);
         suppliedEventFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_EVENTS);
+        // one-based index
+        startIndexOfAssignedEvents = Bindings.createIntegerBinding(() -> {
+            return filteredEvents.size() + 1;
+        }, filteredEvents);
+        startIndexOfAssignedVendors = Bindings.createIntegerBinding(() -> {
+            return filteredVendors.size() + 1;
+        }, filteredVendors);
     }
 
     public ModelManager() {
@@ -212,6 +223,11 @@ public class ModelManager implements Model {
         applyFiltersBasedOnUiState();
     }
 
+    @Override
+    public ObservableIntegerValue getStartingIndexOfAssignedVendors() {
+        return startIndexOfAssignedVendors;
+    }
+
     // =========== Filtered Event List Accessors =============================================================
 
     /**
@@ -228,6 +244,11 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         suppliedEventFilterPredicate.setValue(predicate);
         applyFiltersBasedOnUiState();
+    }
+
+    @Override
+    public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
+        return startIndexOfAssignedEvents;
     }
 
     @Override

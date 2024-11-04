@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.eventtory.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.List;
-
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.ui.UiState;
@@ -32,13 +31,8 @@ public class ViewVendorCommand extends ViewCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Vendor> lastShownList = model.getFilteredVendorList();
+        Vendor vendorToView = IndexResolverUtil.resolveVendor(model, targetIndex);
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
-        }
-
-        Vendor vendorToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewVendor(vendorToView);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.setUiState(UiState.VENDOR_DETAILS);

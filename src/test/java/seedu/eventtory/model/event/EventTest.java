@@ -125,12 +125,14 @@ public class EventTest {
     @Test
     public void toString_checkFormat() {
         Name name = new Name("Conference");
-        Date date = new Date("2024-10-10");
+        Date date = new Date("2024-12-10");
         UniqueId id = new UniqueId(UUID.randomUUID().toString());
+
         Event event = new Event(id, name, date, tags);
 
         String expected = Event.class.getCanonicalName() + "{id=" + id.toString()
-                + ", name=Conference, date=2024-10-10, tags=[]}";
+                + ", name=Conference, date=10-12-2024, tags=[]}";
+
         assertEquals(expected, event.toString());
     }
 }
