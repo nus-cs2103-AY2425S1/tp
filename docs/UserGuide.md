@@ -39,7 +39,7 @@ Teacher's Pet (TP) is a **desktop app for managing students, tailored for the Na
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -72,24 +72,14 @@ Format: `help`
 
 ---
 
-### Viewing help if user does not have access to internet: `offlinehelp`
+### Adding a student: `add`
 
-Shows you a full list of commands within the jar file.
-
-![offlinehelp message](images/offlinehelp.png)
-
-Format: `offlinehelp`
-
----
-
-### Comment on a student: `add`
-
-Comments on a student in Teacher's Pet.
+Adds a student to Teacher’s Pet
 
 Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can only belong to one group at a time.
+A student can only belong to one group at a time.
 </div>
 
 * NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")
@@ -102,80 +92,34 @@ Examples:
 
 ---
 
-### Listing all persons : `list`
+### Editing a student : `edit`
 
-Shows a list of all persons in Teachers' Pet.
-
-Format: `list`
-
----
-
-### Editing a person : `edit`
-
-Edits an existing person in Teacher's Pet.
+Edits an existing student in Teacher's Pet.
 
 Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st person to be `Science` and `e1234567` respectively.
-*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing groups.
+*  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st student to be `Science` and `e1234567` respectively.
+*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing groups.
 
 ---
 
-### Finding persons by name or student ID: `find`
+### Commenting on a student: `comment`
 
-Finds persons matching the specified criteria.
-
-Format: `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`
-
-* The search is case-insensitive. e.g., `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
-* Only full words will be matched for names. e.g., `Han` will not match `Hans`.
-* Student IDs must match exactly.
-* At least one of the optional prefixes must be provided.
-* Persons matching any of the criteria will be returned (i.e., `OR` search).
-  e.g., `find n/ Hans Bo id/ A1234567E` will return persons whose names contain `Hans` or `Bo`, or whose student ID is `A1234567E`.
-
-Examples:
-* `find n/ John` returns persons with names containing `John`.
-* `find id/ A1234567E A2345678B` returns persons with student IDs `A1234567E` or `A2345678B`.
-* `find n/ alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/ alex david'](images/findAlexDavidResult.png)
-* `find n/ Alice id/ A1234567E` returns persons whose name contains `Alice` or whose student ID is `A1234567E`.
-
----
-
-## Displaying students in a group : `show`
-
-#### You can display members in a group easily
-
-#### <span style="color:#4CAF50;">Format: show GROUP_NUMBER</span>
-
-* The GROUP_NUMBER is the group you would like to search for in your current list. For instance, use `1` (for group 1), `2` (for group 2), …​
-* Ensure that GROUP_NUMBER is an integer greater than or equal to 0.
-
-Examples:
-* `show 1` returns persons with who are in group 1.
-  ![result for 'show 1'](images/show_feature.png)
-
----
-
-### Adding a person: `comment`
-
-Adds a person to Teacher's Pet.
+Comments on a student in Teacher's Pet.
 
 Format: `comment INDEX c/COMMENT`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Each person can only have one comment, to delete a comment use the same command `comment INDEX c/` but without
+Each student can only have one comment, to delete a comment use the same command `comment INDEX c/` but without
 any COMMENT.
 </div>
 
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * The COMMENT refers to any input you want to use as a comment.
 
 Examples:
@@ -184,20 +128,82 @@ Examples:
 
 ---
 
-### Deleting a person : `delete`
+### Listing all students : `list`
 
-Deletes the specified person from the address book.
+Shows a list of all students in Teachers' Pet.
+
+Format: `list`
+
+---
+
+### Displaying students in a group : `show`
+
+Shows a list of students in the same group(s)
+
+<span style="color:#4CAF50;">Format: show KEYWORDS</span>
+
+* The KEYWORDS is the name of the group you would like to search for in your current list. For instance, use `group 1` (for group 1) …​
+* The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
+* The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
+* Only full words will be matched for names. e.g., `gro` will not match `group 1`.
+
+Examples:
+* `show 1` returns students with who are in group 1.
+  ![result for 'show 1'](images/show_feature.png)
+
+---
+
+### Finding students by name or student ID: `find`
+
+Finds students matching the specified criteria.
+
+Format: `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`
+
+* The search is case-insensitive. e.g., `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
+* Only full words will be matched for names. e.g., `Han` will not match `Hans`.
+* Student IDs must match exactly.
+* At least one of the optional prefixes must be provided.
+* Students matching any of the criteria will be returned (i.e., `OR` search).
+  e.g., `find n/ Hans Bo id/ A1234567E` will return students whose names contain `Hans` or `Bo`, or whose student ID is `A1234567E`.
+
+Examples:
+* `find n/ John` returns students with names containing `John`.
+* `find id/ A1234567E A2345678B` returns students with student IDs `A1234567E` or `A2345678B`.
+* `find n/ alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/ alex david'](images/findAlexDavidResult.png)
+* `find n/ Alice id/ A1234567E` returns students whose name contains `Alice` or whose student ID is `A1234567E`.
+
+---
+
+### Selecting a student randomly: `random`
+
+Displays a student randomly selected from the current list of students.
+
+Format: `random`
+
+Example:
+* `random`  
+
+
+  ![result for 'random'](images/random_example.png)
+
+---
+
+### Deleting a student : `delete`
+
+Deletes the specified student from the address book.
 
 Format: `delete INDEX`
 ![result for delete example command](images/delete_example.png)
 
-* The delete command deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The delete command deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the list.
-* `find /n Nic` followed by `delete 1` deletes the 1st person named Nic.
+* `find /n Nic` followed by `delete 1` deletes the 1st student named Nic.
 
 Expected Results:
 * If successful, you will be notified on which student you have deleted.
@@ -231,6 +237,7 @@ Exits from Teacher's Pet.
 Format: `exit`
 
 ---
+## Data Management
 
 ### Saving the data
 
@@ -288,4 +295,3 @@ Action | Format, Examples
 **Show** | `show GROUP_NUMBER`
 **List** | `list`
 **Help** | `help`
-**Offline Help** | `offlinehelp`
