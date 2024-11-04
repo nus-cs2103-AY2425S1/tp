@@ -92,7 +92,7 @@ public class FilterCommandParserTest {
         assertParseFailure(parser, "filter e/", MESSAGE_INCOMPLETE_COMMAND);
     }
 
-        @Test
+    @Test
     void parse_invalidArgs_addressPrefixFilterCommand() {
         assertParseFailure(parser, "filter a/", MESSAGE_INCOMPLETE_COMMAND);
     }
