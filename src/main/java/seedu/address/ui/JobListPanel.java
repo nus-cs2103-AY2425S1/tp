@@ -3,9 +3,11 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.job.Job;
@@ -27,6 +29,8 @@ public class JobListPanel extends UiPart<Region> {
         super(FXML);
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
+        // Ignore mouse press event
+        jobListView.addEventFilter(MouseEvent.MOUSE_PRESSED, Event::consume);
     }
 
     /**
