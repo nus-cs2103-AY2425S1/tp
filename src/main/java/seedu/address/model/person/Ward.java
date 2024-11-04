@@ -9,10 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Ward {
     public static final String MESSAGE_CONSTRAINTS =
-            "WARD must be alphanumeric and have a specific format "
-                    + "(e.g., A capital letter followed by a number) - A2.\n"
-                    + "It should not include special characters or spaces (e.g., 'A 1' would be invalid).\n";
-    public static final String VALIDATION_REGEX = "^[A-Z]\\d$";
+            "WARD field cannot be an empty text";
+    public static final String VALIDATION_REGEX = ".+";
+    public static final String WARNING_SPECIAL_CHARACTER = "Warning! Ward field includes special characters.\n";
     public final String value;
 
     /**
@@ -28,6 +27,15 @@ public class Ward {
     public static boolean isValidWard(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Returns true if the input contains at least one non-alphanumeric character.
+     */
+    public boolean containsSpecialChar() {
+        // Regular expression to match any non-alphanumeric character
+        return value.matches(".*[^a-zA-Z0-9].*");
+    }
+
 
     @Override
     public String toString() {
