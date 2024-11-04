@@ -13,7 +13,8 @@ public class Exam {
     public static final String NAME_MESSAGE_CONSTRAINTS =
             "Exam names should only contain alphanumeric characters and spaces, and it should not be blank.";
     public static final String SCORE_MESSAGE_CONSTRAINTS =
-            "Exam scores should be an integer representing a percentage from 0 to 100.";
+            "Exam scores should be an integer representing a percentage from 0 to 100.\n"
+            + "To delete an exam score, input 'NIL' as the score.";
 
     /**
      * The first character of the exam name must not be a whitespace,
