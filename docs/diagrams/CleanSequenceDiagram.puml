@@ -50,7 +50,7 @@ Model --> CleanCommand
 deactivate Model
 
 loop until no more persons in filtered list
-CleanCommand -> Model : deletePerson(p)
+CleanCommand -> Model : deletePerson(person)
 activate Model
 Model --> CleanCommand
 deactivate Model
