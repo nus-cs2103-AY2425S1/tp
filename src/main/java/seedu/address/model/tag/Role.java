@@ -19,14 +19,23 @@ public class Role {
     public static final String EVENTS_EXTERNAL = "Events (External)";
     public static final String EXTERNAL_RELATIONS = "External Relations";
 
+    private static final int PRESIDENT_INDEX = 1;
+    private static final int VICE_PRESIDENT_INDEX = 2;
+    private static final int ADMIN_INDEX = 3;
+    private static final int MARKETING_INDEX = 4;
+    private static final int EVENTS_INTERNAL_INDEX = 5;
+    private static final int EVENTS_EXTERNAL_INDEX = 6;
+    private static final int EXTERNAL_RELATIONS_INDEX = 7;
+
     public static final String MESSAGE_CONSTRAINTS = "Role must be one of the following: \n"
-            + "1. " + PRESIDENT + "\n"
-            + "2. " + VICE_PRESIDENT + "\n"
-            + "3. " + ADMIN + "\n"
-            + "4. " + MARKETING + "\n"
-            + "5. " + EVENTS_INTERNAL + "\n"
-            + "6. " + EVENTS_EXTERNAL + "\n"
-            + "7. " + EXTERNAL_RELATIONS + "\n";
+            + PRESIDENT_INDEX + ". " + PRESIDENT + "\n"
+            + VICE_PRESIDENT_INDEX + ". " + VICE_PRESIDENT + "\n"
+            + ADMIN_INDEX + ". " + ADMIN + "\n"
+            + MARKETING_INDEX + ". " + MARKETING + "\n"
+            + EVENTS_INTERNAL_INDEX + ". " + EVENTS_INTERNAL + "\n"
+            + EVENTS_EXTERNAL_INDEX + ". " + EVENTS_EXTERNAL + "\n"
+            + EXTERNAL_RELATIONS_INDEX + ". " + EXTERNAL_RELATIONS + "\n";
+
     public static final String[] AVAILABLE_ROLES = {
         PRESIDENT,
         VICE_PRESIDENT,
@@ -38,6 +47,8 @@ public class Role {
 
     public final String roleName;
 
+    private final int roleIndex;
+
     /**
      * Constructs a {@code Role}.
      *
@@ -47,6 +58,7 @@ public class Role {
         requireNonNull(roleName);
         checkArgument(isValidRoleName(roleName), MESSAGE_CONSTRAINTS);
         this.roleName = toOfficialCase(roleName);
+        this.roleIndex = assignRoleIndex(roleName);
     }
 
     /**
@@ -59,11 +71,46 @@ public class Role {
                 .anyMatch(role -> role.equals(test.trim().toLowerCase()));
     }
 
+    public int getRoleIndex() {
+        return this.roleIndex;
+    }
+
     private String toOfficialCase(String input) {
         assert Role.isValidRoleName(input);
         return Arrays.stream(AVAILABLE_ROLES)
                 .filter(role -> role.equalsIgnoreCase(input))
                 .reduce("", (roleToReturn, role) -> roleToReturn + role);
+    }
+
+    private int assignRoleIndex(String roleName) {
+        assert roleName.equalsIgnoreCase(PRESIDENT)
+                || roleName.equalsIgnoreCase(VICE_PRESIDENT)
+                || roleName.equalsIgnoreCase(ADMIN)
+                || roleName.equalsIgnoreCase(MARKETING)
+                || roleName.equalsIgnoreCase(EVENTS_INTERNAL)
+                || roleName.equalsIgnoreCase(EVENTS_EXTERNAL)
+                || roleName.equalsIgnoreCase(EXTERNAL_RELATIONS);
+
+        int errorStatus = -1;
+
+        switch (roleName) {
+        case PRESIDENT:
+            return PRESIDENT_INDEX;
+        case VICE_PRESIDENT:
+            return VICE_PRESIDENT_INDEX;
+        case ADMIN:
+            return ADMIN_INDEX;
+        case MARKETING:
+            return MARKETING_INDEX;
+        case EVENTS_INTERNAL:
+            return EVENTS_INTERNAL_INDEX;
+        case EVENTS_EXTERNAL:
+            return EVENTS_EXTERNAL_INDEX;
+        case EXTERNAL_RELATIONS:
+            return EXTERNAL_RELATIONS_INDEX;
+        default:
+            return errorStatus; // should not happen
+        }
     }
 
     @Override
