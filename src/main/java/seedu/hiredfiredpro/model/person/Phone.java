@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.hiredfiredpro.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the hiredfiredpro.
+ * Represents a Person's phone number in HiredFiredPro.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

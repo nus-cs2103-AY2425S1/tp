@@ -12,7 +12,7 @@ import seedu.hiredfiredpro.model.skill.Skill;
 import seedu.hiredfiredpro.model.tag.Tag;
 
 /**
- * Represents a Person in the hiredfiredpro.
+ * Represents a Person in HiredFiredPro.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {

@@ -26,7 +26,7 @@ public class SortCommandTest {
         CommandResult commandResult = sortCommand.execute(model);
 
         List<Person> sortedList = model.getFilteredPersonList();
-        assertEquals("Sorted person list by interview score in ascending order", commandResult.getFeedbackToUser());
+        assertEquals("Sorted candidate list by interview score in ascending order", commandResult.getFeedbackToUser());
         // Add assertions to check the order of the sorted list
     }
 
@@ -36,7 +36,7 @@ public class SortCommandTest {
         CommandResult commandResult = sortCommand.execute(model);
 
         List<Person> sortedList = model.getFilteredPersonList();
-        assertEquals("Sorted person list by interview score in descending order", commandResult.getFeedbackToUser());
+        assertEquals("Sorted candidate list by interview score in descending order", commandResult.getFeedbackToUser());
         // Add assertions to check the order of the sorted list
     }
 

@@ -12,18 +12,18 @@ import seedu.hiredfiredpro.model.Model;
 import seedu.hiredfiredpro.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the hiredfiredpro.
+ * Deletes a person identified using its displayed index from HiredFiredPro.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the candidate identified by the index number used in the displayed candidate list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted candidate: %1$s";
 
     private final Index targetIndex;
 
