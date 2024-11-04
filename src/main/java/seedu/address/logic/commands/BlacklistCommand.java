@@ -68,7 +68,7 @@ public class BlacklistCommand extends Command {
 
         model.setPerson(personToBlacklist, blacklistedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_BLACKLIST_PERSON_SUCCESS, Messages.format(personToBlacklist)));
+        return new CommandResult(String.format(MESSAGE_BLACKLIST_PERSON_SUCCESS, Messages.format(blacklistedPerson)));
     }
 
     @Override

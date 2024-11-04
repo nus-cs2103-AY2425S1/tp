@@ -30,6 +30,7 @@ public class WhitelistCommand extends Command {
 
     public static final String MESSAGE_WHITELIST_PERSON_SUCCESS = "Whitelisted Person: %1$s";
     public static final String MESSAGE_CANNOT_WHITELIST = "This person is not on the blacklist: %1$s";
+    public static final String MESSAGE_CANNOT_BLACKLIST = "Cannot blacklist a person to the whitelist.";
 
     private final Index index;
     private final ClientStatus clientStatus;
@@ -72,13 +73,18 @@ public class WhitelistCommand extends Command {
 
         Person personToWhitelist = lastShownList.get(index.getZeroBased());
         if (personToWhitelist.isBlacklisted()) {
-            Person whitelistedPerson = createWhitelistedPerson(personToWhitelist);
+            if (clientStatus.isBlacklisted()) {
+                // defensive check; this should ideally be caught by the parser itself
+                throw new CommandException(MESSAGE_CANNOT_BLACKLIST);
+            } else {
+                Person whitelistedPerson = createWhitelistedPerson(personToWhitelist);
 
-            model.setPerson(personToWhitelist, whitelistedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                model.setPerson(personToWhitelist, whitelistedPerson);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-            return new CommandResult(String.format(MESSAGE_WHITELIST_PERSON_SUCCESS,
-                    Messages.format(personToWhitelist)));
+                return new CommandResult(String.format(MESSAGE_WHITELIST_PERSON_SUCCESS,
+                        Messages.format(whitelistedPerson)));
+            }
         } else {
             throw new CommandException(String.format(MESSAGE_CANNOT_WHITELIST,
                     Messages.format(personToWhitelist)));
