@@ -47,7 +47,7 @@ public class DeleteLessonCommand extends LessonCommand {
 
         int listIndex = targetIndex.getZeroBased();
 
-        if (listIndex >= model.getFilteredLessonList().size()) {
+        if (listIndex >= model.getFilteredLessonListSize()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
