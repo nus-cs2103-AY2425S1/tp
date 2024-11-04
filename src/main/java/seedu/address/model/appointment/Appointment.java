@@ -49,7 +49,6 @@ public class Appointment {
     public LocalDateTime getEnd() {
         return this.end;
     }
-
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
