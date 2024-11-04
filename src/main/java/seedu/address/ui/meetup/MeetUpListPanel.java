@@ -3,16 +3,19 @@ package seedu.address.ui.meetup;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.buyer.Buyer;
+import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.ui.UiPart;
 
@@ -21,7 +24,9 @@ import seedu.address.ui.UiPart;
  */
 public class MeetUpListPanel extends UiPart<Region> {
     private static final String FXML = "MeetUpListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(MeetUpListPanel.class);
+    private final Map<MeetUp, Boolean> hasOverlapMap;
+    private final ObservableList<Buyer> buyerList;
+
 
     @FXML
     private ListView<MeetUp> meetUpListView;
@@ -29,14 +34,18 @@ public class MeetUpListPanel extends UiPart<Region> {
     /**
      * Creates a {@code MeetUpListPanel} with the given {@code ObservableList}.
      */
-    public MeetUpListPanel(ObservableList<MeetUp> meetUpList, ObservableList<MeetUp> originalList) {
+    public MeetUpListPanel(ObservableList<MeetUp> meetUpList, ObservableList<MeetUp> originalMeetUpList,
+                           ObservableList<Buyer> buyerList) {
         super(FXML);
-        Map<MeetUp, Boolean> hasOverlapMap = new HashMap<>();
+        requireNonNull(originalMeetUpList);
+        requireNonNull(meetUpList);
+        requireNonNull(buyerList);
 
+        Map<MeetUp, Boolean> hasOverlapMap = new HashMap<>();
         for (int i = 0; i < meetUpList.size(); i++) {
             boolean foundOverlap = false;
             MeetUp meetUp = meetUpList.get(i);
-            for (MeetUp meetUp2 : originalList) {
+            for (MeetUp meetUp2 : originalMeetUpList) {
                 if (!meetUp.isSameMeetUp(meetUp2) && doDateRangesOverlap(meetUp, meetUp2)) {
                     foundOverlap = true;
                     break;
@@ -44,8 +53,11 @@ public class MeetUpListPanel extends UiPart<Region> {
             }
             hasOverlapMap.put(meetUp, foundOverlap);
         }
+
+        this.hasOverlapMap = hasOverlapMap;
+        this.buyerList = buyerList;
         meetUpListView.setItems(meetUpList);
-        meetUpListView.setCellFactory(x -> new MeetUpListViewCell(hasOverlapMap));
+        meetUpListView.setCellFactory(x -> new MeetUpListViewCell());
     }
 
     /**
@@ -67,13 +79,7 @@ public class MeetUpListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
-    class MeetUpListViewCell extends ListCell<MeetUp> {
-        private Map<MeetUp, Boolean> hasOverlapMap;
-
-        public MeetUpListViewCell(Map<MeetUp, Boolean> hasOverlapMap) {
-            requireNonNull(hasOverlapMap);
-            this.hasOverlapMap = hasOverlapMap;
-        }
+    private class MeetUpListViewCell extends ListCell<MeetUp> {
 
         @Override
         protected void updateItem(MeetUp meetUp, boolean empty) {
@@ -83,9 +89,28 @@ public class MeetUpListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                Boolean hasOverlapForThisItem = hasOverlapMap.getOrDefault(meetUp, false);
-                setGraphic(new MeetUpCard(meetUp, getIndex() + 1, hasOverlapForThisItem).getRoot());
+                Boolean doesTimeOverlap = hasOverlapMap.getOrDefault(meetUp, false);
+
+                // Create styled labels for each buyer here
+                List<Label> styledBuyerLabels = meetUp.getAddedBuyers().stream()
+                        .sorted(Comparator.comparing(buyer -> buyer.fullName))
+                        .map(addedBuyer -> createStyledBuyerLabel(addedBuyer))
+                        .toList();
+
+                setGraphic(new MeetUpCard(meetUp, getIndex() + 1, doesTimeOverlap, styledBuyerLabels)
+                        .getRoot());
             }
+        }
+
+        private Label createStyledBuyerLabel(AddedBuyer addedBuyer) {
+            boolean doesItContainName = buyerList.stream()
+                    .anyMatch(buyer -> buyer.getName().equals(addedBuyer));
+
+            Label label = new Label(addedBuyer.fullName);
+            if (!doesItContainName) {
+                label.setStyle("-fx-background-color: red;");
+            }
+            return label;
         }
     }
 }

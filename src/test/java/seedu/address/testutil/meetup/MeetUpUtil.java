@@ -35,7 +35,7 @@ public class MeetUpUtil {
         sb.append(PREFIX_FROM + meetUp.getFrom().toString() + " ");
         sb.append(PREFIX_TO + meetUp.getTo().toString() + " ");
         meetUp.getAddedBuyers().stream().forEach(
-                s -> sb.append(PREFIX_ADDED_BUYER + s.addedBuyerName + " ")
+                s -> sb.append(PREFIX_ADDED_BUYER + s.fullName + " ")
         );
         return sb.toString();
     }
@@ -54,7 +54,7 @@ public class MeetUpUtil {
             if (addedBuyers.isEmpty()) {
                 sb.append(PREFIX_ADDED_BUYER);
             } else {
-                addedBuyers.forEach(s -> sb.append(PREFIX_ADDED_BUYER).append(s.addedBuyerName).append(" "));
+                addedBuyers.forEach(s -> sb.append(PREFIX_ADDED_BUYER).append(s.fullName).append(" "));
             }
         }
         return sb.toString();
