@@ -32,6 +32,7 @@ public class MajorTest {
         assertFalse(Major.isValidMajor("ce")); // incomplete major
         assertFalse(Major.isValidMajor(" cs"));
         assertFalse(Major.isValidMajor("cs   "));
+        assertFalse(Major.isValidMajor("CS")); // uppercase major
 
         // valid majors
         assertTrue(Major.isValidMajor("cs"));
