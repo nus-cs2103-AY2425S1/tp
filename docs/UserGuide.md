@@ -191,72 +191,85 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Input**: `find Bob`
       >
-      > **Output**:
+      > **Output**: 1 persons listed!
       >
-      > ---
-      > 
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
-      >
-      > **Output**:
+      > ![bob](images/bob.png)
       > 
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: Finding `Bob` OR `Winter`
       > 
       > **Input**: `find Bob Winter`
       >
-      > **Output**:
+      > **Output**: 2 persons listed!
+      > 
+      > ![bobwinter](images/bob_winter.png)
       > 
       > ---
 
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**: 
-      > 
-      > **Output**:
-      >
-      > ---
+    - **Failed Execution:** NIL
+
 
 - #### **Edit Command**
     - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: Changing name of `Bob` to `Bobby`   
       >
-      > **Input**: `find Bob`
+      > **Input**: `edit 1 n/Bobby`
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
-      >
-      > **Output**:
+      > **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: Changing phone of `Bobby` to `97774444`
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: `edit 1 p/97774444`
       >
-      > **Output**:
+      > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
+      >
+      > ---
+      >
+      > **Use Case #3**: Removing tags of `Bobby`
+      >
+      > **Input**: `edit 1 t/`
+      >
+      > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
       >
       > ---
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **User Error #1**: Entering non-existent index
       >
-      > **Input**:
+      > **Input**: `edit -1 n/Bobby`
+      >
+      > **Output**: 
+      <br> Invalid command format!
+      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      >
+      > **Input**: `edit 500 n/Bobby`
       >
       > **Output**:
+      <br> Invalid command format!
+      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      >
+      > ---
+      > 
+      > **User Error #2**: Entering non-numerical index
+      > 
+      > **Input**: `edit a#2 n/Bobby`
+      > 
+      > **Output**:
+      <br> Invalid command format!
+      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: edit 1 e/johndoe@example.comp/91234567
       >
       > ---
 
@@ -265,25 +278,25 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**:
       >
-      > **Input**: `find Bob Winter`
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -312,9 +325,9 @@ Commands for managing appointments between user and clients.
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
+      > **Input**: 
       >
       > **Output**:
       >
@@ -398,25 +411,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Adds a new property listing with specified details.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**:
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: 
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
       >
       > **Output**:
       >
@@ -437,25 +450,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Displays all current listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**:
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**:
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**: 
       >
       > **Output**:
       >
@@ -476,25 +489,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**:
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**:
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
       >
       > **Output**:
       >
@@ -515,25 +528,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**:
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: 
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
       >
       > **Output**:
       >
@@ -554,25 +567,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: 
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
       >
       > **Output**:
       >
@@ -593,25 +606,25 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: 
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
       >
       > **Output**:
       >
@@ -636,25 +649,25 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Clears the console or application state.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: 
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
       >
       > **Output**:
       >
@@ -675,25 +688,25 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Exits the application.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Finding `Bob`
+      > **Use Case #1**: 
       >
-      > **Input**: `find Bob`
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Winter`
-      >
-      > **Input**: `find Winter`
+      > **Input**: 
       >
       > **Output**:
       >
       > ---
       >
-      > **Use Case #3**: Finding `Bob` OR `Winter`
+      > **Use Case #2**: 
       >
-      > **Input**: `find Bob Winter`
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
       >
       > **Output**:
       >
