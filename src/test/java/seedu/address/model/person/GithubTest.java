@@ -30,13 +30,13 @@ public class GithubTest {
 
         // invalid username
         assertFalse(Github.isValidGithubUsername("")); // empty string
-        assertFalse(Github.isValidGithubUsername(" ")); // spaces only
+        assertFalse(Github.isValidGithubUsername(" ")); // whitespace only
         assertFalse(Github.isValidGithubUsername("-John")); // Starts with hypen only
         assertFalse(Github.isValidGithubUsername("John-")); // Ends with hypen only
         assertFalse(Github.isValidGithubUsername("-John-Doe")); // Starts with hypen and hyphen in between
         assertFalse(Github.isValidGithubUsername("John--Doe")); //  consecutive hypens only
         assertFalse(Github.isValidGithubUsername("-")); // hypen only
-        // long username (>39 characters)
+        // invalid long username (>39 characters)
         assertFalse(Github.isValidGithubUsername("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ-beepo"));
         assertFalse(Github.isValidGithubUsername("@")); // special character only
         assertFalse(Github.isValidGithubUsername("John Doe")); // whitespace between name
@@ -44,7 +44,7 @@ public class GithubTest {
         // valid username
         assertTrue(Github.isValidGithubUsername("John-Doe"));
         assertTrue(Github.isValidGithubUsername("J")); // one character
-        assertTrue(Github.isValidGithubUsername("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ-beep")); // long username
+        assertTrue(Github.isValidGithubUsername("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ-beep")); // 39 characters
     }
 
     @Test

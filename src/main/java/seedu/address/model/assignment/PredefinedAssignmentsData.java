@@ -84,4 +84,25 @@ public class PredefinedAssignmentsData implements ReadOnlyPredefinedAssignmentsD
         predefinedAssignmentArrayList.add(p);
         return predefinedAssignmentArrayList;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (predefinedAssignmentArrayList.isEmpty()) {
+            return "No assignments specified in database.";
+        }
+        for (PredefinedAssignment p : predefinedAssignmentArrayList) {
+            sb.append(p).append("\n");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof PredefinedAssignmentsData other) {
+            return predefinedAssignmentArrayList.equals(other.predefinedAssignmentArrayList);
+        }
+        return false;
+    }
+
 }

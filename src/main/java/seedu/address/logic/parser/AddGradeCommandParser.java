@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,7 +17,9 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
 
     @Override
     public AddGradeCommand parse(String args) throws ParseException {
-        requireNonNull(args);
+        if (args.isEmpty()) {
+            return AddGradeCommand.showAssignmentDefault();
+        }
 
         // Tokenize the input arguments
         ArgumentMultimap argMultimap =
