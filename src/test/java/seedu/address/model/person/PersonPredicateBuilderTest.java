@@ -2,11 +2,17 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
+
+
 
 public class PersonPredicateBuilderTest {
 
@@ -37,6 +43,32 @@ public class PersonPredicateBuilderTest {
 
         assertEquals(builder1, builder2);
         assertNotEquals(builder1, builder3);
+    }
+
+    @Test
+    public void test_build() {
+        PersonPredicateBuilder builder = new PersonPredicateBuilder();
+
+        // Test isSetName
+        builder.withNameKeywords(Collections.singletonList("Alice"));
+        assertTrue(builder.build().test(new PersonBuilder().withName("Alice").build()));
+
+
+        // Test isSetClassId
+        builder.withClassIdKeywords(Collections.singletonList("1"));
+        assertTrue(builder.build().test(new PersonBuilder().withClassId("1").build()));
+
+
+        // Test isSetMonthPaid
+        builder.withMonthPaidKeywords(Collections.singletonList("2022-12"));
+        assertTrue(builder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+
+
+        // Test isSetTag
+        builder.withTagsKeywords(Collections.singletonList("tag1"));
+        assertTrue(builder.build().test(new PersonBuilder().withTags("tag1").build()));
+
+
     }
 
     @Test

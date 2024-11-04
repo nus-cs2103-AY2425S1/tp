@@ -165,6 +165,27 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void test_nonEmptyPreambleWithValidArgsWithAddress_failure() {
+        assertParseFailure(parser, "asdf a/Test",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+    }
+
+    @Test
+    public void test_nonEmptyPreambleWithValidArgsWithPhone_failure() {
+        assertParseFailure(parser, "asdf p/Test",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+    }
+
+    @Test
+    public void test_nonEmptyPreambleWithValidArgsWithFees_failure() {
+        assertParseFailure(parser, "asdf f/Test",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+    }
+
+    @Test
     public void test_parseWithMonthPaidAndTags_success() {
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonPredicateBuilder().withMonthPaidKeywords(List.of("2022-12"))
@@ -179,7 +200,7 @@ public class FindCommandParserTest {
     public void test_parseWithValidArgsWithEmail_success() {
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonPredicateBuilder()
-                        .withEmailKeywords(Arrays.asList("alice@example.com", "bob@example.com")));
+                        .withEmailKeywords(List.of("alice@example.com", "bob@example.com")));
         assertParseSuccess(parser, " e/alice@example.com bob@example.com", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -189,7 +210,7 @@ public class FindCommandParserTest {
     @Test
     public void test_parseWithValidArgsWithAddress_success() {
         FindCommand expectedFindCommand =
-                new FindCommand(new PersonPredicateBuilder().withAddressKeywords(Arrays.asList("Greenwood", "Str")));
+                new FindCommand(new PersonPredicateBuilder().withAddressKeywords(List.of("Greenwood", "Str")));
         assertParseSuccess(parser, " a/Greenwood Str", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -199,7 +220,7 @@ public class FindCommandParserTest {
     @Test
     public void test_parseWithValidArgsWithPhone_success() {
         FindCommand expectedFindCommand =
-                new FindCommand(new PersonPredicateBuilder().withPhoneKeywords(Arrays.asList("12345678", "87654321")));
+                new FindCommand(new PersonPredicateBuilder().withPhoneKeywords(List.of("12345678", "87654321")));
         assertParseSuccess(parser, " p/12345678 87654321", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -209,7 +230,7 @@ public class FindCommandParserTest {
     @Test
     public void test_parseWithValidArgsWithFees_success() {
         FindCommand expectedFindCommand =
-                new FindCommand(new PersonPredicateBuilder().withFeesKeywords(Arrays.asList("100", "200")));
+                new FindCommand(new PersonPredicateBuilder().withFeesKeywords(List.of("100", "200")));
         assertParseSuccess(parser, " f/100 200", expectedFindCommand);
 
         // multiple whitespaces between keywords
