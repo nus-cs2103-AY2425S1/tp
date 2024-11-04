@@ -1,17 +1,11 @@
-# User Guide
+---
+layout: page
+title: User Guide
+---
 
 ## Why AdmiNUS?
 
 AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
-
-<div markdown="span" class="alert alert-primary">💡 **Example Use Case**: Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
-
- ```shell
- student n/John Doe s/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
- ```
- This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods. </div>
-
-AdmiNUS helps you stay organized and efficient, letting you focus on running successful events.
 
 ---
 
