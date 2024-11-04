@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.core;
+package spleetwaise.commons.core;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
