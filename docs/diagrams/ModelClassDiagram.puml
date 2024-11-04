@@ -43,7 +43,6 @@ Package Model as ModelPackage <<Rectangle>> {
     Class CoverageAmount
     Class ExpiryDate
     Class I #FFFFFF
-
 }
 
 Class HiddenOutside #FFFFFF
