@@ -110,6 +110,7 @@ Shows a list of all students in the T_Assistant.
 This screenshot shows the result of executing `list_s`.
 
 ![list_students](images/screenshots/list_students.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Student: `add_s`, `as`
@@ -126,11 +127,12 @@ Adds a student to T_Assistant.
 
 ##### Usage Scenario
 
-###### Scenario #1: Adding John Doe to T_Assistant
+###### Scenario #1: Adding `James Ho` to T_Assistant
 
-To add a new Student - John Doe into T_Assistant.
+1. You can begin this command on any panel.
+2. Type and execute: `add_s sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`
 
-This screenshot shows the result of executing `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`.
+This screenshot shows the result of executing `add_s sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`.
 
 ![add_student](images/screenshots/add_student.png)
 
@@ -301,8 +303,6 @@ This screenshot shows the result of executing `sort_s`.
 
 --------------------------------------------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------------------
-
 ### Group Commands
 
 --------------------------------------------------------------------------------------------------------------------
@@ -454,7 +454,6 @@ This screenshot shows the result of executing `sort_g`.
 
 --------------------------------------------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Task Commands
 
@@ -550,9 +549,7 @@ The command will stop running the moment it hits an error.
 
 For example `add_et_g i/1 gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
 
-If the group `CS2103-F12-2` already has the task.
-
-The command will only add the task to `CS2103-F11-2` and not `CS2103-F13-1`.
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not `CS2103-F13-1`.
 
 </box>
 
