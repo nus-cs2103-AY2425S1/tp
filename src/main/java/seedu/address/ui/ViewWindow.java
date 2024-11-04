@@ -47,16 +47,16 @@ public class ViewWindow extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
-        phone.setText("Phone Number: " + person.getPhone().value);
-        email.setText("Email: " + person.getEmail().value);
-        telegram.setText("Telegram: " + person.getTelegram().value);
+        phone.setText(person.getPhone().value);
+        email.setText(person.getEmail().value);
+        telegram.setText(person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         setAssignmentText(person.getAssignment());
 
         if (person.getGithub() != null) {
-            github.setText("Github: " + person.getGithub().toString());
+            github.setText(person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
         }

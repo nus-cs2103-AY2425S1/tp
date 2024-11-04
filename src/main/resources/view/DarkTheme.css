@@ -368,7 +368,7 @@
 }
 
 #weekLabel .label {
-    -fx-text-fill: white;
+    -fx-text-fill: D6BD98;
     -fx-font-size: 20;
 }
 
@@ -379,6 +379,10 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 12;
+}
+
+#fieldLabel {
+    -fx-text-fill: D6BD98;
 }
 
 .viewWindow Label {
