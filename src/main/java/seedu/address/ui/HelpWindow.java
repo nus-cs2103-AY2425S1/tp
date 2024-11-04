@@ -47,7 +47,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final CommandDetailCard[] COMMANDS = {
         new CommandDetailCard(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
         new CommandDetailCard(AddGradeCommand.COMMAND_WORD, AddGradeCommand.MESSAGE_USAGE),
-        new CommandDetailCard(ClearCommand.COMMAND_WORD, ""), //TODO: add message usage
+        new CommandDetailCard(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE),
         new CommandDetailCard(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
         new CommandDetailCard(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
         new CommandDetailCard(ExportCommand.COMMAND_WORD, ExportCommand.MESSAGE_USAGE),
@@ -55,12 +55,12 @@ public class HelpWindow extends UiPart<Stage> {
         new CommandDetailCard(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
         new CommandDetailCard(GitHubCommand.COMMAND_WORD, GitHubCommand.MESSAGE_USAGE),
         new CommandDetailCard(ImportCommand.COMMAND_WORD, ImportCommand.MESSAGE_USAGE),
-        new CommandDetailCard(ListCommand.COMMAND_WORD, ""), //TODO: add message usage
+        new CommandDetailCard(ListCommand.COMMAND_WORD, ListCommand.MESSAGE_USAGE),
         new CommandDetailCard(MarkCommand.COMMAND_WORD, MarkCommand.MESSAGE_USAGE),
         new CommandDetailCard(UnmarkCommand.COMMAND_WORD, UnmarkCommand.MESSAGE_USAGE),
         new CommandDetailCard(SortCommand.COMMAND_WORD, SortCommand.MESSAGE_USAGE),
         new CommandDetailCard(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE),
-        new CommandDetailCard(ExitCommand.COMMAND_WORD, ""), //TODO: add message usage
+        new CommandDetailCard(ExitCommand.COMMAND_WORD, ExitCommand.MESSAGE_USAGE),
     };
 
     private final ObservableList<CommandDetailCard> commandList = FXCollections.observableArrayList();
