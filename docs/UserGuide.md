@@ -190,7 +190,8 @@ Format: `filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]`
 
 * At least one field must be provided.
 * Parameters can be in any order.
-* Each field can only contain single word keywords.
+* Each field can only contain single word keywords (except address which can contain multiple words and
+* email which allows partial matches).
 * The search is case-insensitive. e.g. `n/john` will match `John`
 * Different fields are matched with different precision:
     * Name: Exact match only (must be single word)
@@ -227,6 +228,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 </box>
 
 ### Archiving data files `[coming in v2.0]`
