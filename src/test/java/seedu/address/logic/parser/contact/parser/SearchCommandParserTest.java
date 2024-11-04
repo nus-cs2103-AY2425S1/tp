@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.contact.commands.SearchCommand;
-import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Sponsor;
 import seedu.address.model.role.Volunteer;
 

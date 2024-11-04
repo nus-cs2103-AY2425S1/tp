@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Role;
 
 

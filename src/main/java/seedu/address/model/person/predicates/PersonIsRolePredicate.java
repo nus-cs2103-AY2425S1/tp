@@ -1,9 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.model.role.Role;
 
 /**
@@ -35,6 +36,11 @@ public class PersonIsRolePredicate implements Predicate<Person> {
 
         PersonIsRolePredicate otherPersonIsRolePredicate = (PersonIsRolePredicate) other;
         return roles.equals(otherPersonIsRolePredicate.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return roles.hashCode();
     }
 
     @Override

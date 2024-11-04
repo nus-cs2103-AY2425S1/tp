@@ -29,11 +29,13 @@ import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.event.commands.ViewEventCommand;
+import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
+import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.Sponsor;
 import seedu.address.model.role.Volunteer;
@@ -141,6 +143,25 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseSearchCommand_searchModeSearchCommand() throws ParseException {
+        Command expected = new SearchModeSearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy")));
+        assertEquals(expected, new AddressBookParser()
+                .parseSearchCommand(SearchModeSearchCommand.COMMAND_WORD + " n/Amy"));
+    }
+
+    @Test
+    public void parseSearchCommand_exitSearchModeCommand() throws ParseException {
+        Command expected = new ExitSearchModeCommand();
+        assertEquals(expected, new AddressBookParser()
+                .parseSearchCommand(ExitSearchModeCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseSearchCommand_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseSearchCommand(""));
+    }
+
     public void parseCommand_viewEvent() throws ParseException {
         Command expected = new ViewEventCommand(SPORTS_FESTIVAL);
         assertEquals(expected, new AddressBookParser()

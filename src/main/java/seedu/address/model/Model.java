@@ -105,4 +105,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sets the search mode to the given {@code searchMode}.
+     */
+    void setSearchMode(boolean searchMode);
+
+    /**
+     * Returns the search mode.
+     */
+    boolean getSearchMode();
+
+    /**
+     * Returns the last predicate used to filter the person list.
+     */
+    Predicate<Person> getLastPredicate();
+
 }
