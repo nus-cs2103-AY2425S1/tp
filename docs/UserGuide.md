@@ -58,7 +58,7 @@ The following are annotations throughout this user guide that provide additional
 > :bulb: **Tip:** <br>
 > Provide tips to help users understand the command usage better.
 
-> :warning: **Warning:** <br> 
+> :warning: **Warning:** <br>
 > Warns you about potential errors that you may face when using the NovaCare.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ Upon successful execution, you should see the GUI of NovaCare covered in the nex
 ## Overview of GUI
 
 The GUI is broken down into different **sections** as shown in the image below:
-![GUI Overview](images/GUIOverview.png)
+![GUI Overview](images/GUIOverview.jpg)
 1. Command Box: This is where you can type your commands to interact with the application.
 2. Result Display Box: Displays the result of commands.
 3. Patient List: Displays all the patients in the application.
