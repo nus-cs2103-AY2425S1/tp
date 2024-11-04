@@ -27,7 +27,8 @@ public class Messages {
     public static final String MESSAGE_NO_PERSON_FOUND_FOR_VIEW =
             "No clients found please use the list command to see all clients";
     public static final String MESSAGE_INVALID_REMINDER_DISPLAYED_INDEX = "The reminder index provided is invalid";
-    public static final String MESSAGE_TARGET_DELETE_HAS_REMINDER = "The person has reminders, please delete them first";
+    public static final String MESSAGE_TARGET_DELETE_HAS_REMINDER = "The person has reminders, " +
+            "please delete them first";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
