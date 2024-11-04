@@ -44,7 +44,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
     - [To mark property already bought: `bought`](#to-mark-property-as-bought-bought)
     - [To mark property already sold: `sold`](#to-mark-property-already-sold-sold)
     - [Pin Contact: `pin`](#pin-contact-pin)
-    - [Unpin Contact: `unpin`]()
+    - [Unpin Contact: `unpin`](#unpin-contact-unpin)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -446,7 +446,7 @@ Format `unpin INDEX`
 * The parameter INDEX must be a positive integer.
 
 Examples:
-* `unpin 5` moves the contact at index 5 to index 1.
+* `unpin 5` moves the contact at index 5 of pinned list to index 1 of unpinned list.
 
 ### Saving the data
 
