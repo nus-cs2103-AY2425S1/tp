@@ -55,11 +55,17 @@ jobs:
 #          name: 'checkstyle-report-${{ matrix.platform }}'
 #          path: 'build/reports/checkstyle'
 
-      - name: test
+      - name: a
         run: echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
 
+      - name: b
+        run: echo "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: c
+        run: echo "${{ github.token }}"
+
       - name: Comment on PR with artifact link
-        if: github.event_name == 'pull_request_target' && runner.os == 'Linux'
+        if: github.event_name == 'pull_request' && runner.os == 'Linux'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
