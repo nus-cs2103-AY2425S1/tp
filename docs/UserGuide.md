@@ -565,6 +565,10 @@ Edits a specific claim in a policy for the client identified by the specified IN
 | `edit-policy`            | `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]` | `edit-policy 1 pt/health ca/40000`                                                                 |
 | `list-policies`          | `list-policy`                                                                                |                                                                                                    |
 | `List-expiring-policies` | `list-expiring-policies [DAYS]`                                                              | `list-expiring-policies 50`                                                                        |
+| `add-claim`              | `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`                          | `add-claim 1 pt/health s/pending d/stomach surgery`                                                |
+| `delete-claim`           | `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`                                            | `delete-claim 1 pt/health c/1`                                                                     |
+| `edit-claim`             | `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/NEW_STATUS] [d/NEW_DESCRIPTION]`           | `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details`                                  |
+| `list-claims`            | `list-claims INDEX pt/POLICY_TYPE`                                                           | `list-claims 1 pt/health`                                                                          |
 | `clear`                  | `clear`                                                                                      | `clear`                                                                                            |
 | `exit`                   | `exit`                                                                                       | `exit`                                                                                             |
 
