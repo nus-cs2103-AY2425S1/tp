@@ -64,8 +64,12 @@ public class EventCard extends UiPart<Region> {
             venue.getStyleClass().add(NULL_VALUE_STYLE_CLASS);
         }
         celebrity.getChildren().add(new Label(event.getCelebrity().getName().fullName));
-        event.getContacts().stream()
-                .forEach(contact -> contactsBox.getChildren().add(contactCard(contact)));
+        if (!event.getContacts().isEmpty()) {
+            event.getContacts()
+                    .forEach(contact -> contactsBox.getChildren().add(contactCard(contact)));
+        } else {
+            contactsBox.getChildren().add(new Label("No contacts added yet!"));
+        }
     }
 
     /**
