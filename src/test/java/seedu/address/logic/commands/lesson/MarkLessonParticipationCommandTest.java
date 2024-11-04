@@ -18,7 +18,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 import seedu.address.testutil.LessonBuilder;
-import seedu.address.testutil.TypicalStudents;
 
 public class MarkLessonParticipationCommandTest {
 

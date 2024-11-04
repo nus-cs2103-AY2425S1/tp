@@ -170,6 +170,12 @@ public class ParserUtil {
         };
     }
 
+    /**
+     * Parses a {@code points} into an integer. Points should be able to fit within a Java int primitive type.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given point value is invalid.
+     */
     public static int parsePoints(String points) throws ParseException {
         requireNonNull(points);
         String trimmedPoints = points.trim();
