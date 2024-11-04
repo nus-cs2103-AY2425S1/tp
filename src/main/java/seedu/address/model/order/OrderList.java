@@ -31,6 +31,7 @@ public abstract class OrderList<T extends Order> {
      * @return An ObservableList of all customer orders.
      */
     public ObservableList<T> getOrders() {
+        // defensive coding
         return internalUnmodifiableOrders;
     }
 
