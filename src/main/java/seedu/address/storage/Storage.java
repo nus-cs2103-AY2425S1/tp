@@ -10,11 +10,14 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, IngredientCatalogueStorage, PastryCatalogueStorage {
+
+public interface Storage extends AddressBookStorage, UserPrefsStorage, CustomerOrderListStorage, SupplyOrderListStorage，IngredientCatalogueStorage, PastryCatalogueStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -42,4 +45,20 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, Ingredien
 
     @Override
     void savePastryCatalogue(PastryCatalogue pastryCatalogue) throws IOException;
+    Path getCustomerOrderListFilePath();
+
+    @Override
+    Optional<CustomerOrderList> readCustomerOrderList() throws DataLoadingException;
+
+    @Override
+    void saveCustomerOrderList(CustomerOrderList customerOrderList) throws IOException;
+
+    @Override
+    Path getSupplyOrderListFilePath();
+
+    @Override
+    Optional<SupplyOrderList> readSupplyOrderList() throws DataLoadingException;
+
+    @Override
+    void saveSupplyOrderList(SupplyOrderList supplyOrderList) throws IOException;
 }

@@ -25,6 +25,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.*;
 import seedu.address.ui.Ui;
@@ -60,8 +62,10 @@ public class MainApp extends Application {
         IngredientCatalogueStorage ingredientCatalogueStorage = new JsonIngredientCatalogueStorage(config.getIngredientCatalogueFilePath());
         PastryCatalogueStorage pastryCatalogueStorage = new JsonPastryCatalogueStorage(config.getPastryCatalogueFilePath());
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        CustomerOrderListStorage customerOrderListStorage = new JsonCustomerOrderListStorage(userPrefs.getCustomerOrderListFilePath());
+        SupplyOrderListStorage supplyOrderListStorage = new JsonSupplyOrderListStorage(userPrefs.getSupplyOrderListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, ingredientCatalogueStorage, pastryCatalogueStorage, customerOrderListStorage, supplyOrderListStorage);
 
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, ingredientCatalogueStorage, pastryCatalogueStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -99,6 +103,38 @@ public class MainApp extends Application {
             logger.warning("Could not load ingredient catalogue data. Using default sample catalogue.");
             ingredientCatalogue = SampleDataUtil.getSampleIngredientCatalogue();
         }
+        Optional<CustomerOrderList> customerOrderListOptional;
+        CustomerOrderList initialCustomerOrderListData;
+        try {
+            customerOrderListOptional = storage.readCustomerOrderList();
+            if (!customerOrderListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCustomerOrderListFilePath()
+                        + " populated with a sample CustomerOrderList.");
+            }
+            initialCustomerOrderListData = customerOrderListOptional.orElseGet(SampleDataUtil::getSampleCustomerOrderList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getCustomerOrderListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty CustomerOrderList.");
+            initialCustomerOrderListData = new CustomerOrderList();
+        }
+
+        Optional<SupplyOrderList> supplyOrderListOptional;
+        SupplyOrderList initialSupplyOrderListData;
+        try {
+            supplyOrderListOptional = storage.readSupplyOrderList();
+            if (!supplyOrderListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getSupplyOrderListFilePath()
+                        + " populated with a sample SupplyOrderList.");
+            }
+            initialSupplyOrderListData = supplyOrderListOptional.orElseGet(SampleDataUtil::getSampleSupplyOrderList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getSupplyOrderListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty SupplyOrderList.");
+            initialSupplyOrderListData = new SupplyOrderList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialCustomerOrderListData, initialSupplyOrderListData);
+    }
 
         // Initialize PastryCatalogue
         PastryCatalogue pastryCatalogue;
@@ -174,6 +210,8 @@ public class MainApp extends Application {
             storage.saveUserPrefs(model.getUserPrefs());
             storage.saveIngredientCatalogue(model.getIngredientCatalogue());
             storage.savePastryCatalogue(model.getPastryCatalogue());
+            storage.saveCustomerOrderList(model.getCustomerOrderList());
+            storage.saveSupplyOrderList(model.getSupplyOrderList());
         } catch (IOException e) {
             logger.severe("Failed to save data on application stop: " + e.getMessage());
         }

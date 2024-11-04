@@ -42,9 +42,10 @@ public class ModelManager implements Model {
     private final Inventory inventory;
     private final Storage storage;  // Add Storage as a field
 
+
     // Constructor that accepts IngredientCatalogue, PastryCatalogue, and Storage
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue, Storage storage) {
+                        IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue, Storage storage，CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
         requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue, storage);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -52,10 +53,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.supplyOrderList = this.addressBook.getSupplierOrderList();
-        this.customerOrderList = this.addressBook.getCustomerOrderList();
-        this.supplyOrderObservableList = this.supplyOrderList.getOrders();
-        this.customerOrderObservableList = this.customerOrderList.getOrders();
+        this.supplyOrderList = supplyOrderList;
+        this.customerOrderList = customerOrderList;
+        this.supplyOrderObservableList = supplyOrderList.getOrders();
+        this.customerOrderObservableList = customerOrderList.getOrders();
+        associateOrdersWithPersons();
 
         // Initialize catalogues and storage
         this.ingredientCatalogue = ingredientCatalogue;
@@ -67,7 +69,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new IngredientCatalogue(), new PastryCatalogue(), null);
+        this(new AddressBook(), new UserPrefs(), new IngredientCatalogue(), new PastryCatalogue(), new CustomerOrderList(), new SupplyOrderList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -138,6 +140,18 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    public void associateOrdersWithPersons() {
+        for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
+            addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())
+                    .ifPresent(person -> person.addOrder(customerOrder));
+        }
+
+        for (SupplyOrder supplyOrder : supplyOrderList.getOrders()) {
+            addressBook.findPersonByPhone(supplyOrder.getPerson().getPhone())
+                    .ifPresent(person -> person.addOrder(supplyOrder));
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
