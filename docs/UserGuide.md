@@ -112,7 +112,7 @@ Examples:
 [New Volunteer Demo](images/commandDemo/NewVolunteerDemo.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-VolunSync cannot store 2 individuals with the same name and phone number. If you try to add a volunteer with the same name as an existing volunteer, so we recommend storing the volunteer's full name. 
+VolunSync cannot store 2 individuals with the same name and phone number. If you try to add a volunteer with the same name as an existing volunteer, so we recommend storing the volunteer's full name.
 </div>
 
 ### Locating volunteers by name : `/v find`
@@ -265,14 +265,14 @@ VolunSync's data are saved in the hard disk automatically after any command that
 
 ## Known Issues
 
-1. **Multi-Screen Setup Issue**  
-   **Problem:** If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen when you restart the app.  
+1. **Multi-Screen Setup Issue**
+   **Problem:** If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen when you restart the app.
    **Solution:**
     - To fix this, locate and delete the `preferences.json` file, which stores the app's window position.
     - After deleting the file, restart the application, and the GUI will open correctly on the primary screen.
- 
-2. **Help Window Remaining Minimized**  
-   **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.  
+
+2. **Help Window Remaining Minimized**
+   **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.
    **Solution:**
     - Manually restore the Help Window from your taskbar or dock.
     - Alternatively, close the minimized window and run the `help` command again to open a new Help Window.
@@ -296,7 +296,7 @@ These known issues are actively being worked on, and we are continuously improvi
 
 | Action                                       | Format                                                       | Examples                                                          |
 |----------------------------------------------|--------------------------------------------------------------|-------------------------------------------------------------------|
-| **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE` | `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02` | 
+| **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE` | `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02` |
 | **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`                                     | `/v del 1`                                                        |
 | **Find Volunteer**                           | `/v find KEYWORD`                                            | `/v find Yeoh`                                                    |
 
