@@ -59,7 +59,11 @@
                maxWidth="400" />
 
         <!-- Email label -->
-        <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email" />
+        <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
 
         <!-- Add a Region for spacing between Contact and Skills -->
         <Region prefHeight="20" />
