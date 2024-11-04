@@ -19,7 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 
 /**
- * An UI component for displaying information related to attendance.
+ * An UI component that displays information related to attendance.
  */
 public class AttendanceContainer extends UiPart<Region> {
 
@@ -55,7 +55,7 @@ public class AttendanceContainer extends UiPart<Region> {
             }
         });
         setAttendanceList();
-        setDisplayDate();
+        setWeeklyDateRange();
         logger.info("Successfully created attendance container");
     }
 
@@ -81,7 +81,7 @@ public class AttendanceContainer extends UiPart<Region> {
     /**
      * Sets the label to display the current week with the date range.
      */
-    private void setDisplayDate() {
+    private void setWeeklyDateRange() {
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
         LocalDate endOfWeek = startOfWeek.plusDays(6);

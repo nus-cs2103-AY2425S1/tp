@@ -74,6 +74,8 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Creates a participation map to be used for displaying attendance records tagged to each person.
+     *
      * @return Map of participation associated with each person in the personList.
      */
     private HashMap<Person, ObservableList<Participation>> createParticipationMap(

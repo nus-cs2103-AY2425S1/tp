@@ -17,7 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Attendance;
 
 /**
- * An UI component that displays information of a {@code Attendance}.
+ * An UI component that displays attendance of a student for a tutorial.
  */
 public class AttendanceCard extends UiPart<Region> {
 
@@ -39,7 +39,7 @@ public class AttendanceCard extends UiPart<Region> {
     private ImageView attendanceStatusIcon;
 
     /**
-     * Creates a {@code AttendanceCard} of the given tutorial.
+     * Creates a {@code AttendanceCard} of the given tutorial for the student.
      */
     public AttendanceCard(String tutorial, List<Attendance> attendanceList) {
         super(FXML);
