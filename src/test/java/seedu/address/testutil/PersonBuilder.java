@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "LOW";
     public static final String DEFAULT_REMARK = "";
-    public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
+    public static final LocalDate DEFAULT_DATE_OF_BIRTH = LocalDate.of(2000, 1, 1);
     public static final double DEFAULT_INCOME = 0;
     public static final int DEFAULT_FAMILY_SIZE = 1;
     public static final LocalDateTime DEFAULT_UPDATED_AT =
@@ -132,7 +133,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code dateOfBirth} of the {@code Person} that we are building.
      */
-    public PersonBuilder withDateOfBirth(String dateOfBirth) {
+    public PersonBuilder withDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = new DateOfBirth(dateOfBirth);
         return this;
     }

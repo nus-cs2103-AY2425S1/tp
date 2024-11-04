@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -23,6 +24,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -144,6 +146,15 @@ public class EditCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Person beforeEdit = this.getUneditedPerson();
+        Person afterEdit = this.getEditedPerson();
+        model.setPerson(afterEdit, beforeEdit);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_EDIT, beforeEdit.getName());
     }
 
     @Override
