@@ -33,11 +33,15 @@ title: User Guide
 
 The commands in this section are used to add new records to the system, such as students and tutorials.
 
-2.1 Adding a student  
-2.2 Creating a new tutorial  
-2.3 Enrolling student in tutorial
+- [Adding a student](#21-adding-a-student)
+- [Creating a new tutorial](#22-creating-a-new-tutorial)
+- [Enrolling student into a tutorial](#23-enrolling-student-into-a-tutorial)
 
-### **2.3 Enrolling student into a tutorial**
+#### **2.1 Adding a student**
+
+#### **2.2 Creating a new tutorial**
+
+#### **2.3 Enrolling student into a tutorial**
 
 Command:  `enroll`
 
@@ -49,11 +53,22 @@ Fields
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL_NAME:` Name of the tutorial
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+A person can have any number of tags (including 0)
+</div>
+<div markdown="span" class="alert alert-secondary">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+A person can have any number of tags (including 0)
+</div>
 | **Note:** Student can only be enrolled into existing tutorial. Use createtut to create new tutorials
 
 Example usages
 
 * `enroll 1 tut/physics`
+
+<div class="invalid-usage">
 
 Invalid usages
 
@@ -66,6 +81,8 @@ Invalid usages
     * *Error Message: This person is already in the tutorial*
 
 * Format errors, check [here](#11-format-errors)
+
+</div>
 
 ### 
 
