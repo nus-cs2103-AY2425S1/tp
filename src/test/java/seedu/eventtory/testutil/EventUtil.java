@@ -5,8 +5,11 @@ import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+
 import seedu.eventtory.logic.commands.CreateEventCommand;
 import seedu.eventtory.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.eventtory.model.commons.tag.Tag;
 import seedu.eventtory.model.event.Event;
 
 /**
@@ -40,6 +43,14 @@ public class EventUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.toString()).append(" "));
+        if (descriptor.getTags().isPresent()) {
+            Set<Tag> tags = descriptor.getTags().get();
+            if (tags.isEmpty()) {
+                sb.append(PREFIX_TAG);
+            } else {
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
         return sb.toString();
     }
 }

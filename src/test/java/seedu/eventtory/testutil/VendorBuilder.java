@@ -46,7 +46,7 @@ public class VendorBuilder {
         name = vendorToCopy.getName();
         phone = vendorToCopy.getPhone();
         description = vendorToCopy.getDescription();
-        tags = new HashSet<>(vendorToCopy.getTags());
+        tags = vendorToCopy.getTags();
     }
 
     /**

@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
@@ -101,8 +102,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
+        return model.getStartingIndexOfAssignedEvents();
+    }
+
+    @Override
     public ObservableList<Vendor> getAssociatedVendors(Event event) {
         return model.getAssociatedVendors(event);
+    }
+
+    @Override
+    public ObservableIntegerValue getStartingIndexOfAssignedVendors() {
+        return model.getStartingIndexOfAssignedVendors();
     }
 
     @Override

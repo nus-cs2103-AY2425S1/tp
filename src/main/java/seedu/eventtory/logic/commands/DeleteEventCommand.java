@@ -3,11 +3,10 @@ package seedu.eventtory.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_EVENT;
 
-import java.util.List;
-
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
+import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.commons.exceptions.AssociationDeleteException;
 import seedu.eventtory.model.event.Event;
@@ -42,13 +41,7 @@ public class DeleteEventCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Event> lastShownList = model.getFilteredEventList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-
-        Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Event eventToDelete = IndexResolverUtil.resolveEvent(model, targetIndex);
 
         try {
             model.deleteEvent(eventToDelete);

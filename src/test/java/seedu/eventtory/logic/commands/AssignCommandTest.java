@@ -85,6 +85,9 @@ class AssignCommandTest {
         // Same object -> returns true
         assertTrue(assignCommand.equals(assignCommand));
 
+        // different types -> returns false
+        assertFalse(assignCommand.equals(1));
+
         // Same values -> returns true
         assertTrue(assignCommand.equals(new AssignCommand(Index.fromOneBased(1), Index.fromOneBased(1))));
 

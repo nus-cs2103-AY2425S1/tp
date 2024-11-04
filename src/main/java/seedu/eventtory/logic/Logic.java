@@ -2,6 +2,7 @@ package seedu.eventtory.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
@@ -57,6 +58,12 @@ public interface Logic {
 
     /** Returns list of associations */
     ObservableList<Association> getAssociationList();
+
+    /** Return the display index of the first vendor in the assigned list */
+    ObservableIntegerValue getStartingIndexOfAssignedVendors();
+
+    /** Return the display index of the first event in the assigned list */
+    ObservableIntegerValue getStartingIndexOfAssignedEvents();
 
     /**
      * Returns the user prefs' EventTory file path.

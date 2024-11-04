@@ -246,6 +246,32 @@ public class LogicManagerTest {
         assertEquals(observedState.get(), expectedAssociation);
     }
 
+    @Test
+    public void getStartingIndexOfAssignedEvents_setNewIndex_updateSuccessful() {
+        ObjectProperty<Integer> observedState = new SimpleObjectProperty<>();
+        int initialIndex = logic.getStartingIndexOfAssignedEvents().get();
+        logic.getStartingIndexOfAssignedEvents().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue.intValue());
+        });
+
+        model.addEvent(TypicalEvents.HOON);
+
+        assertEquals(initialIndex + 1, observedState.get());
+    }
+
+    @Test
+    public void getStartingIndexOfAssignedVendors_setNewIndex_updateSuccessful() {
+        ObjectProperty<Integer> observedState = new SimpleObjectProperty<>();
+        int initialIndex = logic.getStartingIndexOfAssignedVendors().get();
+        logic.getStartingIndexOfAssignedVendors().addListener((observable, oldValue, newValue) -> {
+            observedState.set(newValue.intValue());
+        });
+
+        model.addVendor(TypicalVendors.AMY);
+
+        assertEquals(initialIndex + 1, observedState.get());
+    }
+
     /**
      * Executes the command and confirms that - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
