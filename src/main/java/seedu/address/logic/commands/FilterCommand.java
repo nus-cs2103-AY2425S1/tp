@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonPredicate;
 
@@ -39,6 +40,8 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Bob "
             + PREFIX_PHONE + "90123445";
 
+    public static final String MESSAGE_INCOMPLETE_COMMAND = "Filter predicate cannot be empty.";
+
     private final PersonPredicate predicate;
 
     public FilterCommand(PersonPredicate predicate) {
@@ -46,7 +49,7 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

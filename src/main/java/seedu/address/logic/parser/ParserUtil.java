@@ -289,7 +289,7 @@ public class ParserUtil {
      */
     public static AbsentReason parseAbsentReason(String absentReason) throws ParseException {
         requireNonNull(absentReason);
-        String trimmedAbsentReason = absentReason.trim();
+        String trimmedAbsentReason = absentReason.trim().replaceAll("\\s+", " ");
         if (!AbsentReason.isValidAbsentReason(trimmedAbsentReason)) {
             throw new ParseException(AbsentReason.MESSAGE_CONSTRAINTS);
         }

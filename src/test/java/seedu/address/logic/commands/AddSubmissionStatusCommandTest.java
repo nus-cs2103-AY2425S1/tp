@@ -37,7 +37,7 @@ public class AddSubmissionStatusCommandTest {
         AddSubmissionStatusCommand addSubmissionStatusCommand = new AddSubmissionStatusCommand(INDEX_FIRST_PERSON,
                 new Submission(VALID_SUBMISSION_ASSIGNMENT_1), VALID_SUBMISSION_STATUS_AMY);
         String expectedMessage = String.format(AddSubmissionStatusCommand.MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getDisplayedName(), VALID_SUBMISSION_ASSIGNMENT_1, VALID_SUBMISSION_STATUS_AMY);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addSubmissionStatusCommand, model, expectedMessage, expectedModel);
