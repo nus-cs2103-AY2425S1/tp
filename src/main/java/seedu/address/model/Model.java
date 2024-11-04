@@ -91,6 +91,16 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates all groups with the person with the edited details of the person.
+     * This method is required because person is stateless, and editing a person creates a new instance
+     * of the person which is not tracked by the respective groups.
+     *
+     * @param target The person object of the existing person
+     * @param editedPerson The new person object created by person factory.
+     */
+    void updateGroupsWithNewPerson(Person target, Person editedPerson);
+
+    /**
      * Adds {@code group} to the groups in the {@code AddressBook}.
      */
     void addGroup(Group group) throws DuplicateGroupException;

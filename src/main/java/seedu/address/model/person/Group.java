@@ -35,6 +35,16 @@ public class Group extends UniquePersonList {
         return name.equals(group.name);
     }
 
+    /**
+     * Creates a copy of the current group, to prevent the group from being mutated.
+     * @return a copy of the current Group, with the same name and users.
+     */
+    public Group copy() {
+        Group newGroup = new Group(this.name);
+        newGroup.setPersons(this.asUnmodifiableObservableList());
+        return newGroup;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Group otherGroup)) {
