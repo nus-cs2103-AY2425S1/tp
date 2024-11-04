@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
@@ -30,8 +31,8 @@ public class DeletePoliciesCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "pt/POLICY_TYPE...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "pt/life";
-    public static final String POLICY_DELETE_CLIENT_SUCCESS = "Policies Left: %1$s";
+            + PREFIX_POLICY_TYPE + "life";
+    public static final String MESSAGE_SUCCESS = "Policies Left: %1$s";
     private final Index index;
     private final Set<PolicyType> policyTypes;
 
@@ -66,7 +67,7 @@ public class DeletePoliciesCommand extends Command {
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        return new CommandResult(String.format(POLICY_DELETE_CLIENT_SUCCESS, Messages.formatPolicies(editedPolicy)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatPolicies(editedPolicy)));
     }
 
     private PolicySet removePolicies(Set<Policy> policies) throws CommandException {

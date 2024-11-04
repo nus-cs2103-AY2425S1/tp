@@ -40,7 +40,7 @@ public class DeletePoliciesCommandTest {
 
         PolicySet expectedPolicies = new PolicySet();
         expectedPolicies.addAll(editedClient.getPolicies());
-        String expectedMessage = String.format(DeletePoliciesCommand.POLICY_DELETE_CLIENT_SUCCESS,
+        String expectedMessage = String.format(DeletePoliciesCommand.MESSAGE_SUCCESS,
                 Messages.formatPolicies(expectedPolicies));
 
         // Create a new expected model with the client having the "health" policy (i.e., the "life" policy is removed)
