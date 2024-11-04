@@ -48,6 +48,36 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
+    public void parse_compulsoryFieldsOnly_success() {
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
+                .withWard(VALID_WARD_BOB).build();
+
+        // name, id, ward present
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_compulsoryFieldsWithDiagnosis_success() {
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
+                .withWard(VALID_WARD_BOB).withDiagnosis(VALID_DIAGNOSIS_BOB).build();
+
+        // name, id, ward, (diagnosis) present
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + DIAGNOSIS_DESC_BOB,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_compulsoryFieldsWithMedication_success() {
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
+                .withWard(VALID_WARD_BOB).withMedication(VALID_MEDICATION_BOB).build();
+
+        // name, id, ward, (medication) present
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + WARD_DESC_BOB + MEDICATION_DESC_BOB,
+                new AddCommand(expectedPerson));
+    }
+
+    @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).build();
 
