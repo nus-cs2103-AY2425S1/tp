@@ -28,10 +28,21 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" />
-      <Label fx:id="github" styleClass="cell_small_label" text="\$github" />
-      <Label fx:id="assignment" styleClass="cell_small_label" text="\$assignment" />
+
+      <HBox>
+        <Label id="fieldLabel" styleClass="cell_small_label" text="Phone Number: " />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
+
+      <HBox>
+        <Label id="fieldLabel" styleClass="cell_small_label" text="Telegram: " />
+        <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" />
+      </HBox>
+
+      <HBox>
+        <Label id="fieldLabel" styleClass="cell_small_label" text="Github: " />
+        <Label fx:id="github" styleClass="cell_small_label" text="\$github" />
+      </HBox>
     <!--Align to the right -->
     </VBox>
   </GridPane>

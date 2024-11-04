@@ -42,8 +42,6 @@ public class PersonCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private Label github;
-    @FXML
-    private Label assignment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,32 +51,16 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone number: " + person.getPhone().value);
-        telegram.setText("Tele: " + person.getTelegram().value);
+        phone.setText(person.getPhone().value);
+        telegram.setText(person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        setAssignmentText(person.getAssignment());
         if (person.getGithub() != null) {
-            github.setText("Github: " + person.getGithub().toString());
+            github.setText(person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
         }
-    }
-
-    private void setAssignmentText(Map<String, Assignment> assignmentMap) {
-        if (assignmentMap.isEmpty()) {
-            assignment.setText("No assignment available");
-            return;
-        }
-        StringBuilder sb = new StringBuilder(assignmentMap.size());
-        assignmentMap
-                .values()
-                .stream()
-                .sorted(Comparator.comparing(Assignment::getAssignmentName))
-                .forEach(assignment -> sb.append(assignment).append(", "));
-        sb.setLength(sb.length() - 2); //remove the last ,
-        assignment.setText(sb.toString());
     }
 
 }
