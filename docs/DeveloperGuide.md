@@ -573,7 +573,7 @@ testers are expected to do more *exploratory* testing.
 
    - Download the jar file and copy it into an empty folder. 
    - Double-click the jar file.<br>
-       **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.
+       **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.<br>
 
 2. Saving window preferences
    - Resize the window to an optimum size. Move the window to a different location. Close the window. 
@@ -585,7 +585,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a contact
    - **Prerequisites:** Enter the all contacts view using the `list` command. You can add contacts while in a wedding view, but you will not be able to see the contact added to the addressbook unless you enter the all contacts view. 
    - Test case: `add n/John Doe p/91234567 e/johnd@example.com a/123 John St.`<br>
-          **Expected:** A new contact with the specified details is added to the list. Confirmation is shown in the status message.
+          **Expected:** A new contact with the specified details is added to the list. Confirmation is shown in the status message.<br>
 
 2. Deleting a contact
 
@@ -595,7 +595,7 @@ testers are expected to do more *exploratory* testing.
    - Test case: `delete 0`<br>
          **Expected:** No contact is deleted. Error details are shown in the status message. 
    - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-         **Expected:** Similar to the previous case, an error message appears.
+         **Expected:** Similar to the previous case, an error message appears.<br>
 
 3. Editing a contact
    - **Prerequisites:** Ensure the contact you want to edit is in the current view.
@@ -607,11 +607,11 @@ testers are expected to do more *exploratory* testing.
 1. Adding a wedding
    - **Prerequisites:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal. To have complete flexibility/access in assigning contacts while adding a wedding, you are recommended to be in the all contacts view. 
    - Test case: `addw n/Emily and John Wedding d/25/12/2024 c/1 2`<br>
-          **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.
+          **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.<br>
 
 2. Viewing wedding details
    - Test case: `view 1`<br>
-       **Expected:** Displays the contacts assigned to the wedding at index 1.
+       **Expected:** Displays the contacts assigned to the wedding at index 1.<br>
 
 3. Assigning and unassigning contacts to/from a wedding
    - Assigning: `assign 1 c/3`<br>
@@ -623,11 +623,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Handling invalid commands
    - Test case: Enter invalid commands, such as `edit`, `delete abc`, `add n/` (missing parameters).<br>
-          **Expected:** Clear error message appears, with no unintended changes to the data.
+          **Expected:** Clear error message appears, with no unintended changes to the data.<br>
 
 2. Testing data persistence
    - After making several changes, close and reopen the application.<br>
-          **Expected:** All recent changes persist, confirming successful data saving.
+          **Expected:** All recent changes persist, confirming successful data saving.<br>
 
 3. Dealing with missing/corrupted data files
    - To simulate a missing data file, go into the folder where your jar file is stored, and delete the folder named 'data'. 
