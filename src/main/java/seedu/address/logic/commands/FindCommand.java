@@ -23,6 +23,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+    public static final String MESSAGE_NO_CONTACTS_FOUND = "No contacts with the specified field found.\n"
+            + "If you are searching by name, perhaps search by nickname.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose details contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
@@ -46,6 +48,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(predicate);
+        if (model.getFilteredContactList().size() == 0) {
+            return new CommandResult(MESSAGE_NO_CONTACTS_FOUND);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
     }
