@@ -14,9 +14,10 @@ import seedu.address.logic.commands.BlacklistListCommand;
 
 public class BlacklistCommandParserTest {
 
-    private BlacklistCommandParser parser = new BlacklistCommandParser();
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, BlacklistCommand.MESSAGE_USAGE);
+
+    private BlacklistCommandParser parser = new BlacklistCommandParser();
 
     @Test
     public void parse_invalidPreamble_failure() {

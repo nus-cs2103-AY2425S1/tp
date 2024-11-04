@@ -13,10 +13,10 @@ import seedu.address.logic.commands.WhitelistListCommand;
 import seedu.address.model.person.ClientStatus;
 
 public class WhitelistCommandParserTest {
-    
-    private WhitelistCommandParser parser = new WhitelistCommandParser();
+
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, WhitelistCommand.MESSAGE_USAGE);
+    private WhitelistCommandParser parser = new WhitelistCommandParser();
 
     @Test
     public void parse_invalidPreamble_failure() {
