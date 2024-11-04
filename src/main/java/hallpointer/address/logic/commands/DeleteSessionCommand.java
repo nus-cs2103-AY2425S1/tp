@@ -19,7 +19,7 @@ import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 
 /**
- * Deletes a session identified using its name from the member(s) specified by the given index number(s).
+ * Deletes a session identified using its name from the member(s) identified using its displayed index number(s).
  */
 
 public class DeleteSessionCommand extends Command {

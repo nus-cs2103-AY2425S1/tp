@@ -12,7 +12,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all members and corresponding sessions.";
+    public static final String MESSAGE_SUCCESS = "Listed all members.";
 
     @Override
     public CommandResult execute(Model model) {
