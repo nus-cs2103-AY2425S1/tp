@@ -104,13 +104,18 @@ public class ExportCommand extends Command {
      * Escapes fields for CSV format by wrapping in double quotes if they contain commas or quotes.
      * Double quotes within fields are doubled according to CSV conventions.
      */
-    private String escapeCsv(String field) {
-        if (field.contains(",") || field.contains("\"")) {
-            // Escape double quotes within the field by doubling them and wrap the entire field in quotes
-            return "\"" + field.replace("\"", "\"\"") + "\"";
+    public String escapeCsv(String field) {
+        // Check if the field contains any commas, quotes, or newline characters
+        if (field.contains(",") || field.contains("\"") || field.contains("\n")) {
+            // Escape any double quotes by doubling them
+            field = field.replace("\"", "\"\"");
+            // Wrap the entire field in double quotes
+            return "\"" + field + "\"";
         }
+        // If no special characters are present, return the field as is
         return field;
     }
+
 
 
     /**
