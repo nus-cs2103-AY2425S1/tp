@@ -139,9 +139,11 @@ public class AdvFilterCommand extends Command {
     }
 
     /**
-     * Compares Person's existing tag value with given filter tag value
-     * using Operator.
-     * Returns true if existing tag value matches filter criteria, false otherwise.
+     * Compares Person's existing tag value with given filter tag value using Operator.
+     * @param operator The operator used for comparison
+     * @param tag The tag whose value will be compared to based on the operator
+     * @param tagValue The value given by the user and used for comparison
+     * @return true if existing tag value matches filter criteria, false otherwise.
      */
     public boolean compare(Operator operator, Tag tag, String tagValue) {
         return switch (operator) {
@@ -214,7 +216,8 @@ public class AdvFilterCommand extends Command {
 
     /**
      * Checks if user's command input contains a valid operator.
-     * Returns matching Operator object if valid, null otherwise.
+     * @param string The operator in the form of a String
+     * @return matching Operator object if valid, null otherwise.
      */
     public static Operator matchOperator(String string) {
         Operator operatorType = null;
@@ -229,7 +232,8 @@ public class AdvFilterCommand extends Command {
 
     /**
      * Tries to parse given String into a Double.
-     * Returns a valid Double object if parsable, null otherwise.
+     * @param value The value given as a String
+     * @return a valid Double object if parsable, null otherwise.
      */
     public Double tryParseDouble(String value) {
         try {

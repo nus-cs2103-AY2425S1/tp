@@ -17,8 +17,8 @@ public class AdvFilterCommandParser implements Parser<AdvFilterCommand> {
             Pattern.compile("(?i)(t\\\\(?<tag>\\S+))\\s+(?<operator>\\S+)\\s+(?<value>\\S+)");
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns a SortCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AdvFilterCommand
+     * and returns a AdvFilterCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
     public AdvFilterCommand parse(String args) throws ParseException {
