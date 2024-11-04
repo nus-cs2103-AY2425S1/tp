@@ -60,7 +60,7 @@
             </VBox>
 
             <VBox fx:id="supplyOrderList" styleClass="pane-with-border" minHeight="300" prefHeight="300" VBox.vgrow="ALWAYS">
-              <Label text="Supplier Orders" styleClass="label-header"/>
+              <Label text="Supply Orders" styleClass="label-header"/>
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
