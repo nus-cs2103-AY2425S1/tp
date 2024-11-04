@@ -148,8 +148,15 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     /**
      * Adds a new Tag to person
      */
-    public void addPersonTags(Person p, Set<? extends Tag> tagList) {
+    public void addPersonTags(Person p, Set<Tag> tagList) {
         persons.addPersonTags(p, tagList);
+    }
+
+    /**
+     * Gets the recorded {@code TagCategory} of {@Tag t}.
+     */
+    public TagCategory getTagCategory(Tag t) {
+        return persons.getTagCategory(t);
     }
 
     //// util methods

@@ -119,13 +119,13 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        tagListPanel = new TagListPanel(logic.getListOfCurrentTags());
+        tagListPanel = new TagListPanel(logic.getListOfCurrentTags(), this);
         tagsListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         if (logic.getFilteredPersonList().isEmpty()) {
-            resultDisplay.setFeedbackToUser(LIST_EMPTY_MESSAGE);
+            updateResultDisplay(LIST_EMPTY_MESSAGE);
         }
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCampusConnectFilePath());
@@ -153,6 +153,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void populateTagsList() {
         tagListPanel.updateTagList(logic.getListOfCurrentTags());
+    }
+
+    /**
+     * Updates the ResultDisplay
+     * @param details the String to be displayed
+     */
+    public void updateResultDisplay(String details) {
+        resultDisplay.setFeedbackToUser(details);
     }
 
     /**
@@ -197,7 +205,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             populateTagsList();
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            updateResultDisplay(commandResult.getFeedbackToUser());
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -209,7 +217,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            updateResultDisplay(e.getMessage());
             throw e;
         }
     }

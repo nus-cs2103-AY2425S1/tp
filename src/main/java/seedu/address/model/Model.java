@@ -76,7 +76,7 @@ public interface Model {
     /**
      * Adds a set of tag to person
      */
-    void addPersonTags(Person p, Set<? extends Tag>t);
+    void addPersonTags(Person p, Set<Tag>t);
 
     /**
      * Adds the given person.
@@ -113,6 +113,11 @@ public interface Model {
      * Sets {@code TagCategory cat} to be the category of {@code Tag t}.
      */
     void setTagsCategory(Tag t, TagCategory cat);
+
+    /**
+     * Gets the recorded {@code TagCategory} of {@Tag t}.
+     */
+    TagCategory getTagCategory(Tag t);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

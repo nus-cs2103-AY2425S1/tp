@@ -116,7 +116,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPersonTags(Person p, Set<? extends Tag> t) {
+    public void addPersonTags(Person p, Set<Tag> t) {
         campusConnect.addPersonTags(p, t);
         refreshTagList();
     }
@@ -180,6 +180,12 @@ public class ModelManager implements Model {
         requireAllNonNull(t, cat);
         campusConnect.setTagCategory(t, cat);
         refreshTagList();
+    }
+
+    @Override
+    public TagCategory getTagCategory(Tag t) {
+        requireNonNull(t);
+        return campusConnect.getTagCategory(t);
     }
 
     @Override

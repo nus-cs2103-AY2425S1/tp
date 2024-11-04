@@ -22,13 +22,16 @@ public class TagListPanel extends UiPart<Region> {
     @FXML
     private ListView<Tag> tagListView;
 
+    private MainWindow mainWindow;
+
     /**
      * Creates a {@code TagListPanel} with the given {@code ObservableList}.
      */
-    public TagListPanel(ObservableList<Tag> tagList) {
+    public TagListPanel(ObservableList<Tag> tagList, MainWindow mainWindow) {
         super(FXML);
         tagListView.setItems(FXCollections.observableArrayList(tagList));
         tagListView.setCellFactory(listView -> new TagListViewCell());
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -52,7 +55,7 @@ public class TagListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TagCard(tag, getIndex()).getRoot());
+                setGraphic(new TagCard(tag, getIndex(), mainWindow).getRoot());
             }
         }
     }

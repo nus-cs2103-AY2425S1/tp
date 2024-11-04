@@ -191,7 +191,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called");
         }
         @Override
-        public void addPersonTags(Person p, Set<? extends Tag> tags) {
+        public void addPersonTags(Person p, Set<Tag> tags) {
             throw new AssertionError("This method should not be called");
         }
 
@@ -202,6 +202,11 @@ public class AddCommandTest {
 
         @Override
         public void setTagsCategory(Tag t, TagCategory cat) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public TagCategory getTagCategory(Tag t) {
             throw new AssertionError("This method should not be called");
         }
     }

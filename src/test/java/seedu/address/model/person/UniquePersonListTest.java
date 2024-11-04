@@ -174,7 +174,7 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void deletePersonTap_list_successfulDeletionOfTag() {
+    public void deletePersonTag_list_successfulDeletionOfTag() {
         Person newAlice = new PersonBuilder(ALICE).withTags("friends", "hello").build();
         uniquePersonList.add(newAlice);
         uniquePersonList.deletePersonTag(newAlice, new Tag("hello"));

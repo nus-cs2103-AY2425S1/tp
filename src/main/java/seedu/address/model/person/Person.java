@@ -110,7 +110,7 @@ public class Person {
     }
 
     /**
-     * Checks whether the person has the tags.
+     * Checks whether the person has the tags with the same tag name.
      */
     public boolean hasTag(Tag t) {
         return this.getTags().contains(t);
@@ -135,6 +135,13 @@ public class Person {
         newTagSet.addAll(this.getTags());
         newTagSet.addAll(tagSet);
         return new Person(this.name, this.phone, this.email, newTagSet);
+    }
+
+    /**
+     * Overwrites the person's tag set.
+     */
+    public Person setAllTags(Set<Tag> tagSet) {
+        return new Person(this.name, this.phone, this.email, tagSet);
     }
 
     /**
