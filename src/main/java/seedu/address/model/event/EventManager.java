@@ -1,10 +1,14 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonInEventPredicate;
 
 /**
  * Wraps all {@code Event} and abstracts away
@@ -87,6 +91,24 @@ public class EventManager implements ReadOnlyEventManager {
     }
 
     /**
+     * Returns a {@PersonInEventPredicate} that tests if a {@code person} is inside a specified {@code event}.
+     *
+     * @param event Event that you want to test whether the person is in.
+     * @return {@code PersonInEventPredicate} object.
+     */
+    public PersonInEventPredicate getPersonInEventPredicate(Event event) {
+        assert this.eventList.contains(event) : "This method should only take in events that exist in the eventList.";
+
+        // Search through the unmodifiable list for the event, else throw EventNotFoundException
+        // Unmodifiable List is not strong enough to ensure that the event is not modified
+        Event equalEvent = this.eventList.asUnmodifiableObservableList().stream().filter(event::equals)
+                .findFirst().orElseThrow(EventNotFoundException::new);
+
+        // Use a defensive copy of the event in the predicate.
+        return new PersonInEventPredicate(new Event(equalEvent));
+    }
+
+    /**
      * Resets the existing data of this {@code EventManager} with {@code newData}.
      */
     public void resetData(ReadOnlyEventManager newData) {
@@ -94,6 +116,26 @@ public class EventManager implements ReadOnlyEventManager {
 
         setEvents(newData.getEventList());
     }
+
+    /**
+     * Edits all the people that match personToEdit in all events
+     * @param personToEdit person that will be edited
+     * @param editedPerson new person that will replace personToEdit
+     */
+    public void editAllPersonsInEvents(Person personToEdit, Person editedPerson) {
+        requireAllNonNull(personToEdit, editedPerson);
+        eventList.forEach(event -> event.editPerson(personToEdit, editedPerson));
+    }
+
+    /**
+     * Edits all the people that match personToEdit in all events
+     * @param personToRemove person that will be edited
+     */
+    public void removeAllPersonsInEvents(Person personToRemove) {
+        requireNonNull(personToRemove);
+        eventList.forEach(event -> event.removePerson(personToRemove));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

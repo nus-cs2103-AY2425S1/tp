@@ -113,6 +113,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAM
 :bulb: **Tip:** You can remove all the person’s roles by typing `r/` without
     specifying any role after it. Likewise for telegram handle, typing `t/` will remove the person's telegram handle
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a contact's information in the address book will cause the information to be updated throughout all events!
+</div>
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Jason Brown t/` Edits the name of the 2nd person to be `Jason Brown` and clears their telegram username.
@@ -145,6 +149,9 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Once you delete a contact from the address book, the contact will automatically be removed from all events as well!
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -161,6 +168,19 @@ Format: `new EVENT NAME`
 Examples:
 * `new Sumo Bot Festival`
 * `new RC Horror Night`
+
+### Viewing an Event: `view`
+
+View the list of Persons in an Event.
+
+Format: `view EVENT NAME`
+
+* Event name cannot be blank
+* Event must exist in PlanPal.
+
+Examples:
+* `view Sumo Bot Festival`
+* `view RC Horror Night`
 
 ### Clearing all entries : `clear`
 
@@ -219,7 +239,8 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**new** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
+**New** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
+**View** | `view EVENT NAME` <br> e.g. `view Sumo Bot Festival`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
