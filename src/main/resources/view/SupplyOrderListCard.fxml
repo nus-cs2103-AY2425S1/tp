@@ -35,8 +35,11 @@
         <Label text="Date:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <Label fx:id="date" styleClass="cell_small_label" text="$date" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <Label text="Items:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <Label fx:id="items" styleClass="cell_small_label" text="$items" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="Remark:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="remark" styleClass="cell_small_label" text="$date" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Items:" styleClass="cell_small_label" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Label fx:id="items" styleClass="cell_small_label" text="$items" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
       </GridPane>
     </VBox>
   </GridPane>

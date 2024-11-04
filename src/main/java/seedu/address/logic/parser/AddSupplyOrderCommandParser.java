@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -13,6 +11,7 @@ import seedu.address.logic.commands.AddSupplyOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.util.Remark;
 
 /**
  * Parses input arguments and creates a new AddSupplyOrderCommand object.
@@ -42,6 +41,7 @@ public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("Guest Supplier"));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         String[] splitArgs = argMultimap.getValue(PREFIX_ORDER).orElse("").split("\\s+");
 
@@ -60,7 +60,7 @@ public class AddSupplyOrderCommandParser implements Parser<AddSupplyOrderCommand
             }
         }
 
-        return new AddSupplyOrderCommand(name, phone, idList);
+        return new AddSupplyOrderCommand(name, phone, idList, remark);
     }
 
     /**

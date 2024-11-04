@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
+import seedu.address.model.util.Remark;
 
 /**
  * Command to add a new customer order to the bakery's order list.
@@ -32,6 +33,7 @@ public class AddCustomerOrderCommand extends Command {
     private final Name name;
     private final Phone phone;
     private final ArrayList<Integer> idList;
+    private final Remark remark;
 
     /**
      * Constructs an {@code AddCustomerOrderCommand} with the specified customer's name, phone number, and product IDs.
@@ -40,11 +42,12 @@ public class AddCustomerOrderCommand extends Command {
      * @param phone  the phone number of the customer (must not be null).
      * @param idList a list of product IDs for the order (must not be null).
      */
-    public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList) {
+    public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList, Remark remark) {
         requireAllNonNull(phone);
         this.name = name;
         this.phone = phone;
         this.idList = idList;
+        this.remark = remark;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class AddCustomerOrderCommand extends Command {
             model.addPerson(person);
         }
 
-        CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING);
+        CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING, remark);
 
         person.addOrder(customerOrder);
 

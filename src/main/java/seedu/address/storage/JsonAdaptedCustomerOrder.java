@@ -8,6 +8,7 @@ import seedu.address.model.order.OrderStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.Product;
+import seedu.address.model.util.Remark;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +17,17 @@ class JsonAdaptedCustomerOrder {
     private final JsonAdaptedPerson person;
     private final List<JsonAdaptedPastry> pastrys;
     private final String status;
+    private final String remark;
 
     @JsonCreator
     public JsonAdaptedCustomerOrder(@JsonProperty("person") JsonAdaptedPerson person,
                                     @JsonProperty("pastrys") List<JsonAdaptedPastry> pastrys,
-                                    @JsonProperty("status") String status) {
+                                    @JsonProperty("status") String status,
+                                    @JsonProperty("remark") String remark) {
         this.person = person;
         this.pastrys = pastrys != null ? pastrys : List.of();
         this.status = status;
+        this.remark = remark;
     }
 
     public JsonAdaptedCustomerOrder(CustomerOrder source) {
@@ -33,6 +37,7 @@ class JsonAdaptedCustomerOrder {
                 .map(JsonAdaptedPastry::new)
                 .collect(Collectors.toList());
         status = source.getStatus().toString().toUpperCase();
+        remark = source.getRemark().toString();
     }
 
     public CustomerOrder toModelType() throws IllegalValueException {
@@ -47,6 +52,6 @@ class JsonAdaptedCustomerOrder {
                 .collect(Collectors.toList());
         Person modelPerson = person.toModelType();
         OrderStatus orderStatus = OrderStatus.valueOf(status);
-        return new CustomerOrder(modelPerson, modelPastrys, orderStatus);
+        return new CustomerOrder(modelPerson, modelPastrys, orderStatus, new Remark(remark));
     }
 }

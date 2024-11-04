@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
 
 /**
  * Represents a Supplier with additional details about the ingredients they supply.

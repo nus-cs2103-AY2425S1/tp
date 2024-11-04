@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
 
 public class CustomerTest {
 
