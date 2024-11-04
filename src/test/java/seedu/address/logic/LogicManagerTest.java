@@ -95,8 +95,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredReminderList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredReminderList().remove(0));
+    public void getSortedReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getSortedReminderList().remove(0));
     }
 
     /**

@@ -149,18 +149,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the reminder at the given {@code targetIndex} in the
-     * {@code model}'s reminder address book.
-     */
-    public static void showReminderAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredReminderList().size());
-
-        String reminderDescription = model.getFilteredReminderList().get(targetIndex.getZeroBased())
-                .getReminderDescription();
-        model.updateFilteredReminderList(r -> r.getReminderDescription().equals(reminderDescription));
-        assertEquals(1, model.getFilteredReminderList().size());
-    }
-
 }

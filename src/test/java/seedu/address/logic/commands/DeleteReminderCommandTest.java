@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showReminderAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalReminders.getTypicalReminderAddressBook;
@@ -29,8 +28,8 @@ public class DeleteReminderCommandTest {
     private Model model = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalReminderAddressBook());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Reminder reminderToDelete = model.getFilteredReminderList().get(INDEX_FIRST_PERSON.getZeroBased());
+    public void execute_validIndex_success() {
+        Reminder reminderToDelete = model.getSortedReminderList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteReminderCommand.MESSAGE_DELETE_REMINDER_SUCCESS,
@@ -45,39 +44,8 @@ public class DeleteReminderCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReminderList().size() + 1);
-        DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteReminderCommand, model, Messages.MESSAGE_INVALID_REMINDER_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showReminderAtIndex(model, INDEX_FIRST_PERSON);
-
-        Reminder reminderToDelete = model.getFilteredReminderList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteReminderCommand.MESSAGE_DELETE_REMINDER_SUCCESS,
-                Messages.format(reminderToDelete));
-
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getReminderAddressBook());
-        expectedModel.deleteReminderInBook(reminderToDelete);
-        showNoReminder(expectedModel);
-
-        assertCommandSuccess(deleteReminderCommand, model, expectedMessage, expectedModel);
-
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showReminderAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of reminder address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getReminderAddressBook().getReminderList().size());
-
+    public void execute_invalidIndex_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedReminderList().size() + 1);
         DeleteReminderCommand deleteReminderCommand = new DeleteReminderCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteReminderCommand, model, Messages.MESSAGE_INVALID_REMINDER_DISPLAYED_INDEX);
@@ -112,14 +80,4 @@ public class DeleteReminderCommandTest {
         String expected = DeleteReminderCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteReminderCommand.toString());
     }
-
-    /**
-     * Updates {@code model}'s filtered reminder list to show no reminders.
-     */
-    private void showNoReminder(Model model) {
-        model.updateFilteredReminderList(p -> false);
-
-        assertTrue(model.getFilteredReminderList().isEmpty());
-    }
-
 }
