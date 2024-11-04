@@ -20,12 +20,4 @@ Client *--> Email
 Client *--> Address
 Client *--> PolicySet
 
-PolicySet --> "0..3" Policy
-
-Policy *--> PremiumAmount
-Policy *--> CoverageAmount
-Policy *--> ExpiryDate
-Policy *--> ClaimList
-
-ClaimList o-- "*" Claim
 @enduml

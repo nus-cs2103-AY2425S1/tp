@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
-import seedu.address.model.policy.Policy;
 
 /**
  * Represents the in-memory model of Prudy's data.
@@ -23,7 +22,6 @@ public class ModelManager implements Model {
     private final Prudy prudy;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
-    private final FilteredList<Policy> filteredPolicies;
 
     /**
      * Initializes a ModelManager with the given prudy and userPrefs.
@@ -36,7 +34,6 @@ public class ModelManager implements Model {
         this.prudy = new Prudy(prudy);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredClients = new FilteredList<>(this.prudy.getClientList());
-        this.filteredPolicies = new FilteredList<>(this.prudy.getPolicyList());
 
     }
 
@@ -130,27 +127,6 @@ public class ModelManager implements Model {
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
-    }
-
-    // =========== Filtered Policy List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Policy} backed by the internal list of
-     * {@code versionedPrudy}.
-     */
-    @Override
-    public ObservableList<Policy> getFilteredPolicyList() {
-        return filteredPolicies;
-    }
-
-    /**
-     * Updates the filter of the filtered policy list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    @Override
-    public void updateFilteredPolicyList(Predicate<Policy> predicate) {
-        requireNonNull(predicate);
-        filteredPolicies.setPredicate(predicate);
     }
 
     @Override

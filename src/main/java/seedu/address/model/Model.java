@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
-import seedu.address.model.policy.Policy;
 
 /**
  * The API of the Model component.
@@ -80,14 +79,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered client list */
     ObservableList<Client> getFilteredClientList();
 
-    /** Returns an unmodifiable view of the filtered policy list */
-    ObservableList<Policy> getFilteredPolicyList();
-
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
-
-    void updateFilteredPolicyList(Predicate<Policy> predicate);
 }
