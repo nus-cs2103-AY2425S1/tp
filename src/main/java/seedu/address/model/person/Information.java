@@ -26,7 +26,6 @@ public class Information {
      */
     public Information(String information) {
         requireNonNull(information);
-        checkArgument(isValidInformation(information), MESSAGE_CONSTRAINTS);
         this.value = information;
     }
 
@@ -38,7 +37,7 @@ public class Information {
      * Returns true if the given string is a valid information string.
      */
     public static boolean isValidInformation(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return true;
     }
 
     @Override

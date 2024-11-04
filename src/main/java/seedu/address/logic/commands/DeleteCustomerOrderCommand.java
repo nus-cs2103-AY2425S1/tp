@@ -6,6 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
 
 /**
  * Deletes a customer order at the specified index.
@@ -40,7 +41,9 @@ public class DeleteCustomerOrderCommand extends Command {
         }
 
         Order order = customerOrderList.getOrder(targetIndex - 1);
-        order.getPerson().removeOrder(order);
+
+        Person person = order.getPerson();
+        person.removeOrder(order);
 
         customerOrderList.removeOrder(targetIndex - 1);
 
