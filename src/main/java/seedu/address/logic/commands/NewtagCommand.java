@@ -31,8 +31,8 @@ public class NewtagCommand extends UndoableCommand {
             + "The following tag(s) already exist(s):\n";
 
     public static final String MESSAGE_TOO_MANY_TAGS = "You are attempting to add more than "
-            + TagList.MAXIMUM_TAGLIST_SIZE + " tags in total.\n" +
-            "Please remove some using 'deletetag first'.\n";
+            + TagList.MAXIMUM_TAGLIST_SIZE + " tags in total.\n"
+            + "Please remove some using 'deletetag first'.\n";
 
     private final List<Tag> tags;
 
