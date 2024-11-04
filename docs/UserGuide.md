@@ -5,7 +5,6 @@ title: MediBase3 User Guide
 
 MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
 
-
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
 {: style="page-break-after: always"}
@@ -405,9 +404,10 @@ Format: `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME
 > * Earliest valid appointment time is `0000`, and latest is `2359`.
 > * Appointments cannot span beyond date boundaries
 
-
 Example:
 * `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` will schedule an appointment for the patient with NRIC `S1234567A` on `2024-10-27`, from `1100` to `1200` titled `Dental`. 
+
+![result for addAppt command example](images/addApptCommand.png)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -480,6 +480,8 @@ Format: `addMedCon i/NRIC c/CONDITION...`
 Example: 
 * `addMedCon i/S1234567A c/High Blood Pressure` will add medical condition `High Blood Pressure` to patient with NRIC `S1234567A`.   
 
+![result for addMedCon command example](images/addMedConCommand.png)
+
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
@@ -538,6 +540,8 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 Example:
 * `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 
+![result for addAllergy command example](images/addAllergyCommand.png)
+
 {: .alert .alert-success}
 > :bulb: **Tip:**
 > 
@@ -593,6 +597,8 @@ Format: `setPriority i/NRIC !/PRIORITY`
 
 Example: 
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
+
+![result for setPriority command example](images/setPriorityCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -658,7 +664,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'find alex david'](images/findCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -682,6 +688,8 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
+![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Locating patient by NRIC: `findNric`
@@ -701,6 +709,8 @@ Format: `findNric NRIC`
 
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
+
+![result for 'findNric S1234567A'](images/findNricCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
