@@ -21,8 +21,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditAppointmentCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.testutil.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentCommandParserTest {
@@ -40,7 +40,8 @@ public class EditAppointmentCommandParserTest {
             Index.MESSAGE_CONSTRAINTS);
 
         // zero index
-        assertParseFailure(parser, APPOINTMENT_ENTITY_STRING + " 0" + APPOINTMENT_TYPE_DESC_AMY, Index.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, APPOINTMENT_ENTITY_STRING + " 0" + APPOINTMENT_TYPE_DESC_AMY,
+            Index.MESSAGE_CONSTRAINTS);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, APPOINTMENT_ENTITY_STRING + " 1 some random string", EditCommand.MESSAGE_NOT_EDITED);
@@ -60,8 +61,9 @@ public class EditAppointmentCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_APPOINTMENT;
-        String userInput = APPOINTMENT_ENTITY_STRING + " " + targetIndex.getOneBased() + APPOINTMENT_TYPE_DESC_AMY + 
-                APPOINTMENT_DATE_TIME_DESC_AMY + SICKNESS_DESC_AMY + MEDICINE_DESC_AMY + PERSON_ID_DESC;
+        String userInput = APPOINTMENT_ENTITY_STRING + " " + targetIndex.getOneBased()
+                + APPOINTMENT_TYPE_DESC_AMY + APPOINTMENT_DATE_TIME_DESC_AMY + SICKNESS_DESC_AMY
+                + MEDICINE_DESC_AMY + PERSON_ID_DESC;
 
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
             .withAppointmentType(VALID_APPOINTMENT_TYPE_AMY)
