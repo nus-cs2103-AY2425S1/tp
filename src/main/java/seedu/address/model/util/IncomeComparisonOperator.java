@@ -11,7 +11,8 @@ import java.util.Objects;
  * Guarantees: comparisonOperator is validated upon creation.
  */
 public class IncomeComparisonOperator {
-    public static final String MESSAGE_CONSTRAINTS = "Income comparison operators can only be '=', '>' or '<'";
+    public static final String MESSAGE_CONSTRAINTS = "Please use a valid comparison operator. "
+            + "Income comparison operators can only be '=', '>' or '<'";
 
     public final String comparisonOperator;
 

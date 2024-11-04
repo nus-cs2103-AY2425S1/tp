@@ -213,8 +213,8 @@ public class AddCommandParserTest {
                 AddCommand.MISSING_PREFIX_MESSAGE_START + "[" + PREFIX_INCOME + "]\n" + expectedMessage);
 
         // all prefixes missing
-        List<Prefix> missingPrefixList = new ArrayList<>(Arrays.asList(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_JOB,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INCOME));
+        List<Prefix> missingPrefixList = new ArrayList<>(Arrays.asList(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_JOB, PREFIX_INCOME));
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                 + VALID_JOB_BOB + VALID_INCOME_BOB,
                 AddCommand.MISSING_PREFIX_MESSAGE_START + missingPrefixList + "\n" + expectedMessage);

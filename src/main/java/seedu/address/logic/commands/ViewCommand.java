@@ -21,7 +21,7 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: '" + COMMAND_WORD + " 1'";
 
     public static final String MESSAGE_VIEW_CLIENT_SUCCESS = "Viewed Client: %1$s";
 
