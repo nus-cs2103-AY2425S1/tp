@@ -51,9 +51,11 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         Client editedClient = new PersonBuilder(ALICE_WITH_RENTAL).withRentalInformation(editedRentalInformation)
                 .build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
+        expectedModel.setLastViewedClient(editedClient);
 
         List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
         expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
@@ -82,7 +84,9 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         expectedModel.setPerson(lastClient, editedClient);
+        expectedModel.setLastViewedClient(editedClient);
 
         List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
         expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
@@ -102,6 +106,8 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        expectedModel.setLastViewedClient(editedClient);
 
         List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
         expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
@@ -129,7 +135,9 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editeRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
+        expectedModel.setLastViewedClient(editedClient);
 
         List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
         expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);

@@ -45,10 +45,13 @@ public class DeleteRentalCommandTest {
                 Messages.formatRentalInformation(rentalToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
         Client editedClient = new PersonBuilder(secondClient)
                 .withRentalInformation(secondClient.getRentalInformation().get(INDEX_SECOND_RENTAL.getZeroBased()))
                 .build();
         expectedModel.setPerson(secondClient, editedClient);
+        expectedModel.setLastViewedClient(editedClient);
+
         List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
         expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
@@ -86,8 +89,10 @@ public class DeleteRentalCommandTest {
                 Messages.formatRentalInformation(rentalToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
         Client editedClient = new PersonBuilder(firstClient).withRentalInformation().build();
         expectedModel.setPerson(firstClient, editedClient);
+        expectedModel.setLastViewedClient(editedClient);
 
         assertCommandPromptsSuccess(deleteRentalCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }
