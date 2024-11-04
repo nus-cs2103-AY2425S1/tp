@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -101,7 +100,8 @@ public class ExportCommandTest {
             Path expectedFilePath = Path.of(relativeFilePath).toAbsolutePath();
 
             // Assert the feedback message matches the expected output
-            assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, expectedFilePath.toString()), result.getFeedbackToUser());
+            assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, expectedFilePath.toString()),
+                    result.getFeedbackToUser());
 
             // Verify file existence as a side check for successful execution
             assertTrue(Files.exists(expectedFilePath));
