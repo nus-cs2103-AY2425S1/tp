@@ -539,18 +539,19 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1. User requests to delete a specific patient in the list.
-2. DocTrack deletes the patient.
+1. DocTrack shows a list of patients [(UC04)](#use-case-uc04-view-all-patients).
+2. User requests to delete a specific patient in the list.
+3. DocTrack deletes the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 1a1. DocTrack shows an error message.
+    * 2a1. DocTrack shows an error message.
 
-      Use case resumes at step 1.
+      Use case resumes at step 2.
 
 <br>
 
@@ -571,7 +572,7 @@ For all use cases below, unless specified otherwise,
 
 <br>
 
-#### Use case (UC05): Find a patient
+#### Use case (UC05): Find a patient by name
 
 **MSS**
 
@@ -660,16 +661,17 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1. User requests to delete a specific appointment in the list.
-2. DocTrack deletes the appointment.
+1. DocTrack shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments).
+2. User requests to delete a specific appointment in the list.
+3. DocTrack deletes the appointment.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 1a1. DocTrack shows an error message.
+    * 2a1. DocTrack shows an error message.
 
       Use case resumes at step 1.
 
