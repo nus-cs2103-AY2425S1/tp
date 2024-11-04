@@ -39,10 +39,15 @@ public enum SubjectEnum {
      * Checks if the given subject is valid.
      * A valid subject matches any of the available subjects, case-insensitive.
      *
-     * @param subject The subject to check.
+     * @param subject The subject to check. Must not be null.
      * @return {@code true} if the subject is valid, {@code false} otherwise.
+     * @throws NullPointerException if the subject parameter is null
      */
     public static boolean isValidSubject(String subject) {
+        if (subject == null) {
+            throw new NullPointerException("Subject cannot be null");
+        }
+
         for (SubjectEnum s : values()) {
             if (s.getSubjectName().equalsIgnoreCase(subject)) {
                 return true;

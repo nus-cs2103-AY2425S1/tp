@@ -197,9 +197,9 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the internal list of persons by their classes in-place. Sort based on lexicographically smallest subject.
+     * Sorts the internal list of persons by their subjects in-place. Sort based on lexicographically smallest subject.
      */
-    public void sortPersonsByClass() {
+    public void sortPersonsBySubject() {
         internalList.sort(Comparator.comparing(person ->
                 person.getSubjects().stream().map(Subject::toString)
                         .sorted()
@@ -213,5 +213,12 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortPersonsById() {
         internalList.sort(Comparator.comparing(person -> person.getStudentId().toString()));
+    }
+
+    /**
+     * Sorts the internal list of persons by their yearGroups in-place.
+     */
+    public void sortPersonsByYearGroup() {
+        internalList.sort(Comparator.comparing(person -> person.getYearGroup().toString()));
     }
 }

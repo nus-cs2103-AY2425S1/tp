@@ -8,8 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.academyassist.commons.core.LogsCenter;
-import seedu.academyassist.logic.commands.AddClassCommand;
 import seedu.academyassist.logic.commands.AddCommand;
+import seedu.academyassist.logic.commands.AddSubjectCommand;
 import seedu.academyassist.logic.commands.ClearCommand;
 import seedu.academyassist.logic.commands.Command;
 import seedu.academyassist.logic.commands.DeleteCommand;
@@ -85,8 +85,8 @@ public class AcademyAssistParser {
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
-        case AddClassCommand.COMMAND_WORD:
-            return new AddClassCommandParser().parse(arguments);
+        case AddSubjectCommand.COMMAND_WORD:
+            return new AddSubjectCommandParser().parse(arguments);
 
         case TrackSubjectCommand.COMMAND_WORD:
             return new TrackSubjectCommand();

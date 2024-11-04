@@ -3,7 +3,7 @@ package seedu.academyassist.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.academyassist.logic.Messages.MESSAGE_NO_STUDENT_FOUND;
-import static seedu.academyassist.logic.commands.AddClassCommand.MESSAGE_DUPLICATE_CLASS;
+import static seedu.academyassist.logic.commands.AddSubjectCommand.MESSAGE_DUPLICATE_SUBJECT;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -25,18 +25,21 @@ import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.testutil.PersonBuilder;
 
-public class AddClassCommandTest {
+/**
+ * Contains tests for {@code AddSubjectCommand}
+ */
+public class AddSubjectCommandTest {
 
     @Test
     public void constructor_nullId_throwsNullPointerException() {
         Set<Subject> subjects = new HashSet<>();
         subjects.add(new Subject("Math"));
-        assertThrows(NullPointerException.class, () -> new AddClassCommand(null, subjects));
+        assertThrows(NullPointerException.class, () -> new AddSubjectCommand(null, subjects));
     }
 
     @Test
     public void constructor_nullSubjects_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddClassCommand(new StudentId("S00001"), null));
+        assertThrows(NullPointerException.class, () -> new AddSubjectCommand(new StudentId("S00001"), null));
     }
 
     @Test
@@ -47,8 +50,8 @@ public class AddClassCommandTest {
         Set<Subject> subjects = new HashSet<>();
         subjects.add(new Subject("Math"));
         subjects.add(new Subject("Chinese"));
-        AddClassCommand addClassCommand = new AddClassCommand(new StudentId("S00008"), subjects);
-        assertThrows(CommandException.class, MESSAGE_DUPLICATE_CLASS, () -> addClassCommand.execute(modelStub));
+        AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_SUBJECT, () -> addSubjectCommand.execute(modelStub));
     }
 
     @Test
@@ -58,8 +61,8 @@ public class AddClassCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
         Set<Subject> subjects = new HashSet<>();
         subjects.add(new Subject("Chinese"));
-        AddClassCommand addClassCommand = new AddClassCommand(new StudentId("S00001"), subjects);
-        assertThrows(CommandException.class, MESSAGE_NO_STUDENT_FOUND, () -> addClassCommand.execute(modelStub));
+        AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00001"), subjects);
+        assertThrows(CommandException.class, MESSAGE_NO_STUDENT_FOUND, () -> addSubjectCommand.execute(modelStub));
     }
 
     @Test
@@ -69,9 +72,9 @@ public class AddClassCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
         Set<Subject> subjects = new HashSet<>();
         subjects.add(new Subject("Chinese"));
-        AddClassCommand addClassCommand = new AddClassCommand(new StudentId("S00008"), subjects);
-        CommandResult commandResult = addClassCommand.execute(modelStub);
-        assertEquals(String.format(AddClassCommand.MESSAGE_SUCCESS, "S00008",
+        AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
+        CommandResult commandResult = addSubjectCommand.execute(modelStub);
+        assertEquals(String.format(AddSubjectCommand.MESSAGE_SUCCESS, "S00008",
                         "Amy Bee", subjects.toString()), commandResult.getFeedbackToUser());
 
     }
@@ -84,9 +87,9 @@ public class AddClassCommandTest {
         Set<Subject> subjects = new HashSet<>();
         subjects.add(new Subject("Chinese"));
         subjects.add(new Subject("Science"));
-        AddClassCommand addClassCommand = new AddClassCommand(new StudentId("S00008"), subjects);
-        CommandResult commandResult = addClassCommand.execute(modelStub);
-        assertEquals(String.format(AddClassCommand.MESSAGE_SUCCESS, "S00008",
+        AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
+        CommandResult commandResult = addSubjectCommand.execute(modelStub);
+        assertEquals(String.format(AddSubjectCommand.MESSAGE_SUCCESS, "S00008",
                 "Amy Bee", subjects.toString()), commandResult.getFeedbackToUser());
 
     }
@@ -192,12 +195,17 @@ public class AddClassCommandTest {
         }
 
         @Override
-        public void sortAcademyAssistByClass() {
+        public void sortAcademyAssistBySubject() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void sortAcademyAssistById() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortAcademyAssistByYearGroup() {
             throw new AssertionError("This method should not be called.");
         }
 

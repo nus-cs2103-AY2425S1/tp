@@ -1,7 +1,6 @@
 package seedu.academyassist.logic.parser;
 
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_FILTER_PARAM;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
@@ -24,14 +23,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         // Tokenize the input arguments
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_FILTER_PARAM,
                 PREFIX_YEARGROUP,
                 PREFIX_SUBJECT);
 
-        // Ensure the f/ prefix is present
-        if (!arePrefixesPresent(argMultimap, PREFIX_FILTER_PARAM) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
 
         // Ensure that either the year group or subject prefix is present, but not both
         boolean hasYearGroup = argMultimap.getValue(PREFIX_YEARGROUP).isPresent();
@@ -40,13 +34,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (hasYearGroup && hasSubject) {
             throw new ParseException("Please specify either a year group or a subject, not both.");
         } else if (!hasYearGroup && !hasSubject) {
-            throw new ParseException("You must specify either a year group or a subject.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        // Extract the filter type (either "yearGroup" or "class")
-        String filterType = argMultimap.getValue(PREFIX_FILTER_PARAM).get();
-        FilterParam filterParam = new FilterParam(filterType);
-
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_YEARGROUP, PREFIX_SUBJECT);
         String filterString;
         Object filterValue;
 
@@ -55,13 +46,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             filterString = argMultimap.getValue(PREFIX_YEARGROUP).get();
             // Call ParserUtil to parse year group
             filterValue = ParserUtil.parseYearGroup(filterString);
-            return new FilterCommand(filterParam, filterValue);
+            return new FilterCommand(new FilterParam("yearGroup"), filterValue);
         } else { // hasSubject must be true
             // Extract the value after s/
             filterString = argMultimap.getValue(PREFIX_SUBJECT).get();
             // Call ParserUtil to parse subject
             filterValue = ParserUtil.parseSubject(filterString);
-            return new FilterCommand(filterParam, filterValue);
+            return new FilterCommand(new FilterParam("subject"), filterValue);
         }
     }
 

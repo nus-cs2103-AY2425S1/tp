@@ -31,6 +31,7 @@
                             <!-- Subject statistics will be added here dynamically -->
                         </VBox>
                     </ScrollPane>
+                    <Label fx:id="closeWindowMessage" styleClass="closeWindow-label" wrapText="true" />
                 </children>
             </VBox>
         </Scene>

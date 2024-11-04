@@ -21,7 +21,7 @@ public class FilterParam {
     /**
      * Constructs a FilterParam
      *
-     * @param filterParamString either "yearGroup" or "class"
+     * @param filterParamString either "yearGroup" or "subject"
      */
     public FilterParam(String filterParamString) {
         requireNonNull(filterParamString);
@@ -61,5 +61,20 @@ public class FilterParam {
         } else {
             return "subject";
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterParam)) {
+            return false;
+        }
+
+        FilterParam otherFilterParam = (FilterParam) other;
+        return field.equals(otherFilterParam.field);
     }
 }
