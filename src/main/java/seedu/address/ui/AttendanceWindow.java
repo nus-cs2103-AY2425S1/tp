@@ -39,64 +39,45 @@ public class AttendanceWindow {
     private ObservableList<AttendanceRow> data;
     private static final String ICON_APPLICATION = "/images/TT_icon.png";
 
-
-    /**
-     * Creates a new AttendanceWindow for the specified tutorial group.
-     * @param tutorialGroup The tutorial group to display attendance for.
-     */
     public AttendanceWindow(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
     }
 
-    /**
-     * Displays the attendance window.
-     * @param model The model to get the student data from.
-     */
     public void show(Model model) {
         Platform.runLater(() -> {
-        Stage stage = new Stage();
-        stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
-        stage.getIcons().add(new javafx.scene.image.Image(ICON_APPLICATION));
+            Stage stage = new Stage();
+            stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
+            stage.getIcons().add(new javafx.scene.image.Image(ICON_APPLICATION));
+
+            initializeTable(model);
+            initializeStudentListListener(model);
+
+            VBox vbox = new VBox(table);
+            vbox.setAlignment(Pos.CENTER);
+            vbox.setFillWidth(true);
+            VBox.setVgrow(table, Priority.ALWAYS);
+            table.setMinHeight(Region.USE_COMPUTED_SIZE);
+            table.setMinWidth(Region.USE_COMPUTED_SIZE);
+
+            Scene scene = new Scene(vbox);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private void initializeTable(Model model) {
         table = new TableView<>();
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
-        studentNameColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getStudentName()));
+        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
+
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
         for (LocalDate date : attendanceDates) {
             addDateColumn(date);
         }
+
         data = getStudentAttendanceRows(model);
         table.setItems(data);
-        VBox vbox = new VBox(table);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.setFillWidth(true);
-        VBox.setVgrow(table, Priority.ALWAYS);
-        table.setMinHeight(Region.USE_COMPUTED_SIZE);
-        table.setMinWidth(Region.USE_COMPUTED_SIZE);
-        Scene scene = new Scene(vbox);
-        stage.setScene(scene);
-        stage.show();
-
-        model.getFilteredStudentList().addListener((ListChangeListener<Student>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    for (Student newStudent : change.getAddedSubList()) {
-                        System.out.println("New student added: " + newStudent.getName());
-                        AttendanceRow newRow = new AttendanceRow(newStudent);
-                        for (AttendanceRecord record : newStudent.getAttendanceRecord()) {
-                            newRow.addAttendance(record.getDate(), record.getAttendance().toString());
-                        }
-                        data.add(newRow);
-                        addAttendanceListener(newRow, getAllAttendanceDates(model), model);
-                    }
-                }
-                if (change.wasRemoved()) {
-                    refreshTable(model);  // Refresh table if students are removed
-                }
-            }
-        });
-
 
         for (AttendanceRow row : data) {
             addAttendanceListener(row, attendanceDates, model);
@@ -104,9 +85,33 @@ public class AttendanceWindow {
                 record.addListener(observable -> refreshTable(model));
             }
         }
+    }
 
+    private void initializeStudentListListener(Model model) {
+        model.getFilteredStudentList().addListener((ListChangeListener<Student>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    handleNewStudents(change.getAddedSubList(), model);
+                }
+                if (change.wasRemoved()) {
+                    refreshTable(model);
+                }
+            }
         });
+    }
 
+    private void handleNewStudents(List<? extends Student> newStudents, Model model) {
+        for (Student newStudent : newStudents) {
+            System.out.println("New student added: " + newStudent.getName());
+            AttendanceRow newRow = new AttendanceRow(newStudent);
+
+            for (AttendanceRecord record : newStudent.getAttendanceRecord()) {
+                newRow.addAttendance(record.getDate(), record.getAttendance().toString());
+            }
+
+            data.add(newRow);
+            addAttendanceListener(newRow, getAllAttendanceDates(model), model);
+        }
     }
 
     private void addAttendanceListener(AttendanceRow row, Set<LocalDate> attendanceDates, Model model) {
@@ -133,14 +138,10 @@ public class AttendanceWindow {
             }
         });
     }
-    private void addDateColumn(LocalDate date) {
-        TableColumn<AttendanceRow, String> dateColumn =
-                new TableColumn<>(DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
 
-        dateColumn.setCellValueFactory(cellData -> {
-            AttendanceRow row = cellData.getValue();
-            return new SimpleStringProperty(row.getAttendanceForDate(date));
-        });
+    private void addDateColumn(LocalDate date) {
+        TableColumn<AttendanceRow, String> dateColumn = new TableColumn<>(DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
+        dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAttendanceForDate(date)));
         table.getColumns().add(dateColumn);
     }
 
@@ -183,9 +184,9 @@ public class AttendanceWindow {
         Collections.sort(sortedDates);
         table.getColumns().clear();
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
-        studentNameColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getStudentName()));
+        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
+
         for (LocalDate date : sortedDates) {
             addDateColumn(date);
         }
@@ -195,4 +196,3 @@ public class AttendanceWindow {
         return tutorialGroup;
     }
 }
-
