@@ -24,7 +24,7 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment: " + assignmentName + " " + score;
+        return "Assignment: " + assignmentName + " " + String.format("%.2f", score);
     }
 
     public float getScore() {
