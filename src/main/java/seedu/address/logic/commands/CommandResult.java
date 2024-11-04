@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javafx.beans.property.ObjectProperty;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -24,7 +25,7 @@ public class CommandResult {
      */
     private final boolean exit;
 
-    private Person person;
+    private ObjectProperty<Person> person;
 
     private boolean isView;
 
@@ -43,7 +44,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, Person person, boolean isCloseView) {
+    public CommandResult(String feedbackToUser, ObjectProperty<Person> person, boolean isCloseView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
@@ -74,7 +75,7 @@ public class CommandResult {
         return exit;
     }
 
-    public Person getPerson() {
+    public ObjectProperty<Person> getPerson() {
         return person;
     }
 
@@ -106,7 +107,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && person.equals(otherCommandResult.person);
+                && person.get().equals(otherCommandResult.person.get());
     }
 
     @Override

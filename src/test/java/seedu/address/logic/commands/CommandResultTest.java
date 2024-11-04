@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.testutil.TypicalPersons;
 
 public class CommandResultTest {
@@ -68,7 +69,7 @@ public class CommandResultTest {
     public void equalsHandleNUll() {
         CommandResult test = new CommandResult("feedback", null, false);
         assertEquals(test, new CommandResult("feedback", null, false));
-        assertNotEquals(new CommandResult("feedback", TypicalPersons.ALICE, false), test);
+        assertNotEquals(new CommandResult("feedback", new SimpleObjectProperty<>(TypicalPersons.ALICE), false), test);
     }
 
     @Test
@@ -79,13 +80,13 @@ public class CommandResultTest {
 
     @Test
     public void isViewTestTrue() {
-        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE, false);
+        CommandResult test = new CommandResult("feedback", new SimpleObjectProperty<>(TypicalPersons.ALICE), false);
         assertTrue(test.isView());
     }
 
     @Test
     public void getPersonTest() {
-        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE, false);
-        assertEquals(TypicalPersons.ALICE, test.getPerson());
+        CommandResult test = new CommandResult("feedback", new SimpleObjectProperty<>(TypicalPersons.ALICE), false);
+        assertEquals(TypicalPersons.ALICE, test.getPerson().get());
     }
 }

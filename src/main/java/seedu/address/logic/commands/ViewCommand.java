@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -65,8 +68,15 @@ public class ViewCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
-        Person person = model.getPerson(personName).get();
-
+        ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
+        model.getAddressBook().getPersonList().addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    person.set(null);
+                    model.getPerson(personName).ifPresentOrElse(person::set, () -> {});
+                }
+            }
+        });
         return new CommandResult(VIEW_ACKNOWLEDGMENT, person, false);
     }
 
