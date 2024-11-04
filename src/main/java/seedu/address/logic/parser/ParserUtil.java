@@ -10,7 +10,17 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Days;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.OwedAmount;
+import seedu.address.model.student.PaidAmount;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Rate;
+import seedu.address.model.student.Schedule;
+import seedu.address.model.student.SettleAmount;
+import seedu.address.model.student.Subject;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

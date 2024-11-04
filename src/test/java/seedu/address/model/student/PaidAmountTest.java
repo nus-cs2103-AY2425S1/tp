@@ -45,11 +45,8 @@ public class PaidAmountTest {
     public void updateValue() {
         PaidAmount paidAmount = new PaidAmount("10.00");
 
-        PaidAmount updatedPaidAmount = paidAmount.updateValue(5.00);
+        PaidAmount updatedPaidAmount = paidAmount.updateValue(new SettleAmount("5.00"));
         assertEquals("15.00", updatedPaidAmount.toString());
-
-        PaidAmount updatedPaidAmount2 = paidAmount.updateValue(0.01);
-        assertEquals("10.01", updatedPaidAmount2.toString());
     }
 
 

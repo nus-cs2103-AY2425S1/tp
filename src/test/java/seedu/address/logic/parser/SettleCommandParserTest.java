@@ -51,7 +51,7 @@ public class SettleCommandParserTest {
 
     @Test
     public void parse_invalidAmount_failure() {
-        assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC, "Amount has to positive");
+        assertParseFailure(parser, "1" + INVALID_AMOUNT_DESC, SettleAmount.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -1,6 +1,9 @@
 package seedu.address.model.student;
 
-public class SettleAmount extends Fee{
+/**
+ * Represents amount student paid to settle owed fees.
+ */
+public class SettleAmount extends Fee {
 
     public static final double MAX_VALUE = 9999999.99;
 
@@ -11,6 +14,13 @@ public class SettleAmount extends Fee{
         super(amount);
     }
 
+    public SettleAmount(double amount) {
+        super(Double.toString(amount));
+    }
+
+    /**
+     * Returns true if a given string is a valid settle amount.
+     */
     public static boolean isValidSettleAmount(String test) {
         if (!Fee.isValidFee(test)) {
             return false;
@@ -18,5 +28,9 @@ public class SettleAmount extends Fee{
 
         double settleAmount = Double.parseDouble(test);
         return settleAmount > 0 && settleAmount <= MAX_VALUE;
+    }
+
+    public double getValue() {
+        return value;
     }
 }

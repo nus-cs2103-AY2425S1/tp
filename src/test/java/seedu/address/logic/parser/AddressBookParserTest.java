@@ -33,6 +33,7 @@ import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Days;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.student.predicates.ScheduleContainsKeywordsPredicate;
@@ -241,7 +242,7 @@ public class AddressBookParserTest {
                         + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_AMOUNT + amount);
 
-        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, new SettleAmount(amount)), command);
     }
 
     @Test
@@ -255,6 +256,6 @@ public class AddressBookParserTest {
                         + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_AMOUNT + amount);
 
-        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, new SettleAmount(amount)), command);
     }
 }

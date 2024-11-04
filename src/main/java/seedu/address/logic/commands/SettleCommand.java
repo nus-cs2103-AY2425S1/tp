@@ -62,7 +62,7 @@ public class SettleCommand extends Command {
         model.setStudent(studentToUpdate, updatedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(String.format(MESSAGE_SETTLE_SUCCESS, amount, studentToUpdate.getName()));
+        return new CommandResult(String.format(MESSAGE_SETTLE_SUCCESS, amount.value, studentToUpdate.getName()));
     }
 
     /**
@@ -115,7 +115,7 @@ public class SettleCommand extends Command {
 
         SettleCommand otherSettleCommand = (SettleCommand) other;
         return index.equals(otherSettleCommand.index)
-                && amount == otherSettleCommand.amount;
+                && amount.value == otherSettleCommand.amount.value;
     }
 
     @Override
