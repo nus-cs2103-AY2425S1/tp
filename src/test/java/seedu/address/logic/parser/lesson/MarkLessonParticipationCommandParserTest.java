@@ -31,6 +31,7 @@ public class MarkLessonParticipationCommandParserTest {
                 VALID_INDEX, VALID_NAMES, 100);
 
         assertParseSuccess(parser, " 1 n/Alice Tan n/Benson Son pt/1", expectedCommand);
+        assertParseSuccess(parser, " 1 n/Alice Tan n/Benson Son pt/001", expectedCommand); // leading 0s ok
         assertParseSuccess(parser, " 1 n/Alice Tan n/Benson Son pt/0", expectedCommand2);
         assertParseSuccess(parser, " 1 n/Alice Tan n/Benson Son pt/100", expectedCommand3);
     }
@@ -60,6 +61,15 @@ public class MarkLessonParticipationCommandParserTest {
         assertParseFailure(parser, " 1 n/Alic*@f n/Benson Son pt/1", expectedMessage);
         // note that use of ; is not yet supported
         assertParseFailure(parser, " 1 n/Alice Tan;Benson Son pt/1", expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidParticipation_failure() {
+        assertParseFailure(parser, " 1 n/Alice Tan n/Benson Son pt/1.0", MESSAGE_INVALID_POINTS);
+        assertParseFailure(parser, " 1 n/Alice Tan n/Benson Son pt/0.5", MESSAGE_INVALID_POINTS);
+        assertParseFailure(parser, " 1 n/Alice Tan n/Benson Son pt/0.0", MESSAGE_INVALID_POINTS);
+        assertParseFailure(parser, " 1 n/Alice Tan n/Benson Son pt/7122647915963579", MESSAGE_INVALID_POINTS);
+        assertParseFailure(parser, " 1 n/Alice Tan n/Benson Son pt/-712264795963579", MESSAGE_INVALID_POINTS);
     }
 
     @Test
