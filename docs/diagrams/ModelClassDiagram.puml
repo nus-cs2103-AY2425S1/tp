@@ -27,7 +27,6 @@ Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
 
-
 Enum PolicyType <<enumeration>> {
     + LIFE
     + HEALTH
@@ -67,23 +66,33 @@ Client *--> Email
 Client *--> Address
 Client *--> "*" Tag
 Client *--> PolicySet
+
 PolicySet --> "0..1" LifePolicy
 PolicySet --> "0..1" HealthPolicy
 PolicySet --> "0..1" EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
-Policy *--> ClaimList
+
+Policy ..> PolicyType
+
 Policy *--> PremiumAmount
 Policy *--> CoverageAmount
 Policy *--> ExpiryDate
-ClaimList *--> "*" Claim
+Policy *--> ClaimList
 
-LifePolicy --> PolicyType
-HealthPolicy --> PolicyType
-EducationPolicy --> PolicyType
+ClaimList *--> "*" Claim
+ClaimList -[hidden]left-> ExpiryDate
+CoverageAmount -[hidden]right-> ExpiryDate
+PremiumAmount -[hidden]right-> CoverageAmount
 
 Claim --> ClaimStatus
+ClaimStatus -[hidden]down-> ExpiryDate
+ClaimStatus -[hidden]right-> Claim
+
+
+Policy -[hidden]down-> ClaimList
+PolicyType -[hidden]left-> Policy
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I
