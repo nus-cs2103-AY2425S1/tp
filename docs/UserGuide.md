@@ -12,21 +12,25 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Quick Start: Get started in 10 minutes!
+
+In this quick start guide, you'll learn how to install EZSTATES. **_(3 min)_**<br>
+<br>
+You'll also learn how our commands work to kickstart the application. **_(7 min)_**
 
 ### Installation
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ezstates.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -39,39 +43,131 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) for command details. 
+
+### Command Structure 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Feature Categories
 
-### Features Overview
+This user guide is divided into four main feature categories:
 
-<div markdown="block" class="alert alert-info">
+1. **Client Management Commands**
+2. **Appointment Management Commands**
+3. **Listing Management Commands**
+4. **Utility Commands**
 
-**:information_source: Notes about the command format:**<br>
+---
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+### 1. Client Management Commands
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+Commands for creating, updating, and deleting buyers and sellers.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- **Add Buyer Command**
+  - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
+  - **Description:** Creates a new buyer profile with specified details.
+  - **Example**:  `buyer n/Bobby p/91432277 e/bobby123@gmail.com`
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- **Add Seller Command**
+  - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+  - **Description:** Creates a new seller profile with specified details.
+  - **Example**:  `seller n/Johnny p/92341556 e/johnny456@gmail.com`
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- **Find Command**
+  - **Format:** `find KEYWORD [KEYWORD...]`
+  - **Description:** Finds the specified client(s) based on the provided keywords.
+  - **Example**:  `find Bobby Winter`
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+- **Edit Command**
+  - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
+  - **Description:** Edits the details of the specified client.
+  - **Example**:  `edit 1 n/BobbyTan e/bobbytan123@gmail.com`
+
+- **Delete Client Command**
+  - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL>`
+  - **Description:** Creates a new client profile with specified details
+  - **Example**:  `buyer n/Bobby p/91432222 e/bobby123@gmail.com`
+
+---
+
+### 2. Appointment Management
+
+Commands for managing appointments between user and clients.
+
+- **Schedule Appointment**
+    - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
+    - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).
+
+- **Delete Appointment**
+    - **Format:** `delapt n/<NAME>`
+    - **Description:** Deletes an appointment with the specified client.
+
+---
+
+### 3. Listing Management
+
+Commands for managing property listings and associating clients with listings.
+
+- **Add Listing**
+    - **Command:** `AddListingCommand`
+    - **Description:** Adds a new property listing with specified details.
+
+- **Clear Listing**
+    - **Command:** `ClearListingCommand`
+    - **Description:** Removes all properties from a specified listing.
+
+- **Show Listings**
+    - **Command:** `ShowListingsCommand`
+    - **Description:** Displays all current listings.
+
+- **Add Buyers to Listing**
+    - **Command:** `AddBuyersToListingCommand`
+    - **Description:** Associates buyers with a specified property listing.
+
+- **Remove Buyers from Listing**
+    - **Command:** `RemoveBuyersFromListingCommand`
+    - **Description:** Removes buyers associated with a specified listing.
+
+- **Delete Listing**
+    - **Command:** `DeleteListingCommand`
+    - **Description:** Deletes a specified listing.
+
+---
+
+### 4. Utility Commands
+
+Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
+
+- **Clear**
+    - **Command:** `ClearCommand`
+    - **Description:** Clears the console or application state.
+
+- **Exit**
+    - **Command:** `ExitCommand`
+    - **Description:** Exits the application.
+
+- **Help**
+    - **Command:** `HelpCommand`
+    - **Description:** Displays a list of available commands and their descriptions.
+
+- **More Info**
+    - **Command:** `MoreInfoCommand`
+    - **Description:** Provides additional information about a specific command or feature.
+
+- **List All Commands**
+    - **Command:** `ListCommand`
+    - **Description:** Lists all available commands in the application.
+
+- **Chat Window**
+    - **Command:** `ChatWindowCommand`
+    - **Description:** Opens a chat window for client-agent communication.
+
+---
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
