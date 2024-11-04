@@ -127,17 +127,11 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        // if contact list is not empty, show first person upon initialisation
-        if (!logic.getFilteredPersonList().isEmpty()) {
-            PersonDetailedView personDetailedView = new PersonDetailedView(logic.getFilteredPersonList().get(0));
-            personDetailedViewPlaceholder.getChildren().add(personDetailedView.getRoot());
-        } else {
-            // show some placeholder - could use better data abstraction for this
-            Label placeholderLabel = new Label("No contacts available, add one now");
-            placeholderLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: gray;");
-            placeholderLabel.setAlignment(Pos.CENTER);
-            personDetailedViewPlaceholder.getChildren().add(placeholderLabel);
-        }
+        // show placeholder upon initialisation
+        Label placeholderLabel = new Label("No contact selected. Add or select one from the list");
+        placeholderLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: gray;");
+        placeholderLabel.setAlignment(Pos.CENTER);
+        personDetailedViewPlaceholder.getChildren().add(placeholderLabel);
     }
 
     /**
@@ -202,7 +196,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

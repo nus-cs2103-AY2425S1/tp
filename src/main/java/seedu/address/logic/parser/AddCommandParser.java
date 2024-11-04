@@ -36,7 +36,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_BIRTHDAY, PREFIX_TAG);
-
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_BIRTHDAY)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -52,7 +51,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Frequency frequency = new Frequency("0"); // default is that customer has no frequency yet
-
         Person person = new Person(name, phone, email, address, birthday, tagList, false, frequency);
 
         return new AddCommand(person);
