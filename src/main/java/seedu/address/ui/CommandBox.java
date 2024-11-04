@@ -3,10 +3,13 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.CommandHistory;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -29,6 +32,7 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setOnKeyPressed(event -> handleKeyEvent(event));
     }
 
     /**
@@ -42,11 +46,41 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            CommandHistory commandHistory = CommandHistory.getInstance();
+            commandHistory.addCommand(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the event when a key is pressed.
+     */
+    private void handleKeyEvent(KeyEvent event) {
+        KeyCode key = event.getCode();
+
+        if (!key.isArrowKey()) {
+            return;
+        }
+
+        handleArrowKeyPressed(key);
+    }
+
+    /**
+     * Handles the event when an arrow key is clicked from {@link #handleKeyEvent(KeyEvent)}.
+     *
+     * @param key keycode of the arrow key input.
+     */
+    private void handleArrowKeyPressed(KeyCode key) {
+        if (!(key == KeyCode.UP || key == KeyCode.DOWN)) {
+            return;
+        }
+
+        CommandHistory commandHistory = CommandHistory.getInstance();
+        String commandToSet = commandHistory.getPastCommand(key);
+        commandTextField.setText(commandToSet);
     }
 
     /**

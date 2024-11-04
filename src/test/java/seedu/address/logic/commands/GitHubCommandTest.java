@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -91,6 +94,11 @@ public class GitHubCommandTest {
      * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public void replaceAllPersons(List<Person> persons) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -187,7 +195,17 @@ public class GitHubCommandTest {
         }
 
         @Override
+        public ReadOnlyPredefinedAssignmentsData getPredefinedAssignments() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public Github getGitHubUsername(Name name) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Optional<Person> getPerson(Name name) {
             throw new AssertionError("This method should not be called");
         }
     }

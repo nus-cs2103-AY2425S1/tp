@@ -2,10 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -84,6 +87,14 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Returns the person in the address book with the given name.
+     *
+     * @param name The name to search for
+     * @return An Optional containing the matched person if that person is found, otherwise an empty Optional
+     */
+    Optional<Person> getPerson(Name name);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
@@ -97,6 +108,7 @@ public interface Model {
 
     /**
      * Updates the filtered person list to be sorted by the given {@code comparator}.
+     *
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedPersonList(Comparator<Person> comparator);
@@ -107,11 +119,18 @@ public interface Model {
     boolean hasAssignment(String name);
 
     float maxScore(String assignment);
+
     String getAssignmentName(String name);
+
     boolean hasName(Name name);
+
+    ReadOnlyPredefinedAssignmentsData getPredefinedAssignments();
 
     /**
      * Returns {@code Github} detials of the specified {@name}
      */
     Github getGitHubUsername(Name name);
+
+    void replaceAllPersons(List<Person> newPersons);
+
 }

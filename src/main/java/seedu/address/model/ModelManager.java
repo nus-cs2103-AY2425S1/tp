@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -33,6 +35,10 @@ public class ModelManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook               the address book
+     * @param userPrefs                 the user prefs
+     * @param predefinedAssignmentsData the predefined assignments data
      */
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyUserPrefs userPrefs,
@@ -48,6 +54,9 @@ public class ModelManager implements Model {
         this.predefinedAssignmentsData = new PredefinedAssignmentsData(predefinedAssignmentsData);
     }
 
+    /**
+     * Instantiates a new Model manager.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new PredefinedAssignmentsData());
     }
@@ -123,6 +132,17 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Optional<Person> getPerson(Name name) {
+        for (Person person : addressBook.getPersonList()) {
+            if (person.getName().equals(name)) {
+                return Optional.of(person); // Return the person if found
+            }
+        }
+
+        // Return an empty Optional if the person is not found
+        return Optional.empty();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -153,11 +173,10 @@ public class ModelManager implements Model {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(other instanceof ModelManager otherModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
@@ -181,7 +200,21 @@ public class ModelManager implements Model {
         return addressBook.hasName(name);
     }
 
+    public ReadOnlyPredefinedAssignmentsData getPredefinedAssignments() {
+        return predefinedAssignmentsData;
+    }
+
     public Github getGitHubUsername(Name name) {
         return addressBook.getGitHubUsername(name);
+    }
+
+    /**
+     * Replace all person in currently with new data
+     */
+    public void replaceAllPersons(List<Person> persons) {
+        AddressBook updatedList = new AddressBook();
+        updatedList.setPersons(persons);
+        addressBook.resetData(updatedList);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 }

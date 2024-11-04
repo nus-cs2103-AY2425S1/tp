@@ -8,8 +8,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
@@ -23,6 +23,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    // Assuming that a typical semester has 13 weeks.
+    public static final int MAX_WEEK = 13;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
@@ -69,21 +71,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -119,9 +106,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code telegram} is invalid.
      */
-    public static Telegram parseTelegram(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedTelegram = address.trim();
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
@@ -158,7 +145,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a GitHub {@code String username} into an {@code Github}.
+     * Parses a GitHub username into an {@code Github} instance.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code username} is invalid.
@@ -171,4 +158,29 @@ public class ParserUtil {
         }
         return new Github(trimmedUsername);
     }
+
+    /**
+     * Parses a {@code String week} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static int parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+        String trimmedWeek = week.trim();
+
+        try {
+            int parsedWeek = Integer.parseInt(trimmedWeek);
+            if (parsedWeek < 0) {
+                throw new ParseException("Week number must be a non-negative integer.");
+            }
+            if (parsedWeek > MAX_WEEK) {
+                throw new ParseException("Week number cannot exceed 13.");
+            }
+            return parsedWeek;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_WEEK);
+        }
+    }
+
 }
