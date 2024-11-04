@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -28,14 +30,14 @@ public class UserPrefsTest {
     public void setExportFilterGoodsToTrue_true_success() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setExportFilterGoodsToTrue();
-        assert userPrefs.getExportFilterGoods();
+        assertTrue(userPrefs.getExportFilterGoods());
     }
 
     @Test
     public void setExportFilterGoodsToFalse_false_success() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setExportFilterGoodsToFalse();
-        assert !userPrefs.getExportFilterGoods();
+        assertFalse(userPrefs.getExportFilterGoods());
     }
 
 }

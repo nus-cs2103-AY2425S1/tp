@@ -28,13 +28,13 @@ public class CsvGoodsStorageTest {
 
     private CsvGoodsStorage csvGoodsStorage;
     private Path filePath;
-    private Path filePath2;
+    private Path tempSavePath;
 
     @BeforeEach
     public void setUp() {
         filePath = testFolder.resolve("TempGoods.csv");
-        filePath2 = testFolder.resolve("TempExportGoods.csv");
-        csvGoodsStorage = new CsvGoodsStorage(filePath, filePath2);
+        tempSavePath = testFolder.resolve("TempExportGoods.csv");
+        csvGoodsStorage = new CsvGoodsStorage(filePath, tempSavePath);
     }
 
     @Test

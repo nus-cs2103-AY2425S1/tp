@@ -43,7 +43,6 @@ public interface Model {
      */
     Boolean getExportFilterGoodsStatus();
 
-
     /**
      * Sets export to true
      */

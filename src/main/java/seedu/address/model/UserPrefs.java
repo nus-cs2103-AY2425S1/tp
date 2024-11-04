@@ -64,7 +64,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setExportFilterGoodsToFalse() {
         this.exportFilterGoods = false;
-
     };
 
     public Path getAddressBookFilePath() {
