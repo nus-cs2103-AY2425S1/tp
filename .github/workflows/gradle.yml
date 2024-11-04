@@ -39,6 +39,21 @@ jobs:
       - name: Build and check with Gradle
         run: ./gradlew check coverage
 
+      - name: Upload tests artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/reports/tests/test/index.html'
+
+      - name: Upload checkstyle artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/reports/checkstyle/main.html'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
         uses: codecov/codecov-action@v4
