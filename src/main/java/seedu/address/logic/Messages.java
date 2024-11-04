@@ -28,6 +28,9 @@ public class Messages {
 
     /**
      * Returns an error message indicating the duplicate prefixes.
+     *
+     * @param duplicatePrefixes the duplicate prefixes
+     * @return the error message
      */
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
         assert duplicatePrefixes.length > 0;
@@ -40,6 +43,9 @@ public class Messages {
 
     /**
      * Formats the {@code person} for display to the user.
+     *
+     * @param person the person to be formatted
+     * @return formatted description of the person
      */
     public static String formatPerson(Person person) {
         return formatPerson(person.getPersonDescriptor());
@@ -47,25 +53,23 @@ public class Messages {
 
     /**
      * Formats the {@code person} for display to the user.
+     *
+     * @param personDescriptor the person descriptor to be formatted
+     * @return formatted description of the person
      */
-    public static String formatPerson(PersonDescriptor person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Status: ")
-                .append(person.getStatus())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
+    public static String formatPerson(PersonDescriptor personDescriptor) {
+        return "\n" + "Name: " + personDescriptor.getName() + "\n"
+                + "Phone: " + personDescriptor.getPhone() + "\n"
+                + "Email: " + personDescriptor.getEmail() + "\n"
+                + "Address: " + personDescriptor.getAddress() + "\n"
+                + "Tags: " + personDescriptor.getTags().toString() + "\n";
     }
 
     /**
      * Formats the {@code appointment} for display to the user.
+     *
+     * @param appointment the appointment to be formatted
+     * @return formatted description of the appointment
      */
     public static String formatAppointment(Appointment appointment) {
         return formatAppointment(appointment.getAppointmentDescriptor());
@@ -73,16 +77,18 @@ public class Messages {
 
     /**
      * Formats the {@code appointment} for display to the user.
+     *
+     * @param appointmentDescriptor the appointment descriptor to be formatted
+     * @return formatted description of the appointment
      */
-    public static String formatAppointment(AppointmentDescriptor appointment) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(appointment.getAppointmentType())
-                .append("; Date and Time: ")
-                .append(formatDateTimeForDisplay(appointment.getAppointmentDateTime()))
-                .append("; Sickness: ")
-                .append(appointment.getSickness())
-                .append("; Medicine: ")
-                .append(appointment.getMedicine());
-        return builder.toString();
+    public static String formatAppointment(AppointmentDescriptor appointmentDescriptor) {
+        return "\n" + "Appointment Type: " +
+                appointmentDescriptor.getAppointmentType() + "\n" +
+                "Date and Time: " +
+                formatDateTimeForDisplay(appointmentDescriptor.getAppointmentDateTime()) + "\n" +
+                "Sickness: " +
+                appointmentDescriptor.getSickness() + "\n" +
+                "Medicine: " +
+                appointmentDescriptor.getMedicine() + "\n";
     }
 }
