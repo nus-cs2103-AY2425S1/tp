@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -60,11 +63,6 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
                 || !argMultimap.getValue(PREFIX_CLAIM_INDEX).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
         }
-
-        String desc = String.valueOf(argMultimap.getValue(PREFIX_CLAIM_DESC));
-        if (!Claim.isValidClaim(desc)) {
-            throw new ParseException(Claim.MESSAGE_CONSTRAINTS);
-        }
     }
 
     /**
@@ -84,7 +82,11 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
 
         if (argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()
                 && !argMultimap.getValue(PREFIX_CLAIM_DESC).get().trim().isEmpty()) {
-            descriptor.setDescription(argMultimap.getValue(PREFIX_CLAIM_DESC).get());
+            String desc = argMultimap.getValue(PREFIX_CLAIM_DESC).get();
+            if (!Claim.isValidClaim(desc)) {
+                throw new ParseException(Claim.MESSAGE_CONSTRAINTS);
+            }
+            descriptor.setDescription(desc);
         }
         return descriptor;
     }
