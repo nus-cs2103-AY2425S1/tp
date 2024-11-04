@@ -115,11 +115,11 @@ There are 5 CLI command formats as shown below:
   e.g `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
 2) Parameters can be in any order:<br>
   `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`
-
 3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored:<br>
   `help 123` is interpreted as `help`.
-
-4) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+4) Command word is not case-sensitive.<br>
+  e.g. `list` and `LIST` are both valid commands.
+5) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 [Back to Input parameters](#input-parameters)<br>
