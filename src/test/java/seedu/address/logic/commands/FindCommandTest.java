@@ -163,6 +163,101 @@ public class FindCommandTest {
     }
 
     @Test
+    public void test_feesContainsKeywordsWithMatchers_returnsTrue() {
+        // Matcher for fees
+        PersonPredicateBuilder predicateBuilder = preparePredicate("100", "fees");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withFees("100").build()));
+
+        // Only one matching keyword
+        predicateBuilder = preparePredicate("100 200", "fees");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withFees("100").build()));
+    }
+
+    @Test
+    public void test_feesContainsKeywordsWithMatchers_returnsFalse() {
+        // Non-matching fees
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withFeesKeywords(Collections.singletonList("200"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withFees("100").build()));
+
+        // Non-matching both fees
+        predicateBuilder =
+                new PersonPredicateBuilder().withFeesKeywords(Arrays.asList("300", "400"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withFees("100").build()));
+    }
+
+    @Test
+    public void test_phoneContainsKeywordsWithMatchers_returnsTrue() {
+        // Matcher for phone
+        PersonPredicateBuilder predicateBuilder = preparePredicate("12345678", "phone");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withPhone("12345678").build()));
+
+        // Only one matching keyword
+        predicateBuilder = preparePredicate("12345678 87654321", "phone");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withPhone("12345678").build()));
+    }
+
+    @Test
+    public void test_phoneContainsKeywordsWithMatchers_returnsFalse() {
+        // Non-matching phone
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withPhoneKeywords(Collections.singletonList("87654321"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withPhone("12345678").build()));
+
+        // Non-matching both phone
+        predicateBuilder =
+                new PersonPredicateBuilder().withPhoneKeywords(Arrays.asList("23456789", "34567890"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withPhone("12345678").build()));
+    }
+
+    @Test
+    public void test_tagsContainsKeywordsWithMatchers_returnsTrue() {
+        // Matcher for tags
+        PersonPredicateBuilder predicateBuilder = preparePredicate("tag1", "tag");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withTags("tag1").build()));
+
+        // Only one matching keyword
+        predicateBuilder = preparePredicate("tag1 tag2", "tag");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withTags("tag1").build()));
+    }
+
+    @Test
+    public void test_tagsContainsKeywordsWithMatchers_returnsFalse() {
+        // Non-matching tags
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withTagsKeywords(Collections.singletonList("tag2"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withTags("tag1").build()));
+
+        // Non-matching both tags
+        predicateBuilder =
+                new PersonPredicateBuilder().withTagsKeywords(Arrays.asList("tag3", "tag4"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withTags("tag1").build()));
+    }
+
+    @Test
+    public void test_emailContainsKeywordsWithMatchers_returnsTrue() {
+        // Matcher for email
+        PersonPredicateBuilder predicateBuilder = preparePredicate("Alice@example.com", "email");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withEmail("Alice@example.com").build()));
+
+        // Only one matching keyword
+        predicateBuilder = preparePredicate("Alice@example.com Bob@example.com", "email");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withEmail("Alice@example.com").build()));
+    }
+
+    @Test
+    public void test_emailContainsKeywordsWithMatchers_returnsFalse() {
+        // Non-matching email
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withEmailKeywords(Collections.singletonList("Alice@example.com"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withEmail("Bob@example.com").build()));
+
+        // Non-matching both email
+        predicateBuilder =
+                new PersonPredicateBuilder().withEmailKeywords(Arrays.asList("Alice@example.com", "Bob@example.com"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withEmail("Kat@example.com").build()));
+    }
+    @Test
     public void test_executeWithMultipleKeywordsMultiplePersonsFound_returnSuccess() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonPredicateBuilder predicate = preparePredicate("Kurz Elle Kunz", "name");
@@ -171,6 +266,7 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
+
 
     /**
      * Parses {@code userInput} into a {@code PredicateBuilder} with specified type keywords.
@@ -187,6 +283,22 @@ public class FindCommandTest {
         }
         if (Objects.equals(type, "notMonthPaid")) {
             return new PersonPredicateBuilder().withNotMonthPaidKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "tag")) {
+            return new PersonPredicateBuilder().withTagsKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "email")) {
+            return new PersonPredicateBuilder().withEmailKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "phone")) {
+            return new PersonPredicateBuilder().withPhoneKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "address")) {
+            return new PersonPredicateBuilder().withAddressKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+
+        if (Objects.equals(type, "fees")) {
+            return new PersonPredicateBuilder().withFeesKeywords(Arrays.asList(userInput.split("\\s+")));
         }
         throw new RuntimeException();
     }
