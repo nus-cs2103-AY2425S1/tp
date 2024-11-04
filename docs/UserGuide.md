@@ -236,16 +236,17 @@ Searches T_Assistant for students with fields that match the search query.
 
 ##### Notes
 
-1. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
-   > i.e. `Do` will not match `Doe` 
+1. This command is case-insensitive.
+2. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
+   > i.e. `Do` will not match `Doe`
 
 2. Searches the following fields that a student has that matches the query:
 
-   * Student name
-   * Student number
-   * Email
-   * Group name
-      * **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
+    * Student name
+    * Student number
+    * Email
+    * Group name
+        * **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
       > `!nogroup` is a special query that searches for students with no groups.
 
 <box type="info" seamless>
@@ -259,11 +260,17 @@ Take note that if any other student with a group happens to have a field that ma
 
 ###### Scenario #1: Find students with the following queries - `TD7` and `Oliveiro`
 
+1. You can begin this command on any panel.
+2. Type and execute: `find_s q/TD7 q/Olveiro`
+
 This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
 ![find_student](images/screenshots/find_s.png)
 
 ###### Scenario #2: Find students with no groups
+
+1. You can begin this command on any panel.
+2. Type and execute: `find_s q/!nogroup`
 
 This screenshot shows the result of executing `find_s q/!nogroup`.
 
@@ -356,13 +363,16 @@ Deletes the specified group from T_Assistant.
 
 1. This command is case-insensitive.
    > `del_g gn/CS2103-F12-2` and `del_g gn/cs2103-f12-2` will delete the same group.
-2. This command will also inform you on the number of students that were affected by this command.
+2. This command will also remove students from the deleted group.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
 ###### Scenario #1: Deleting a group `CS2103-F12-2`
+
+1. Type and execute: `list_g` to see the list of groups.
+2. After finding `CS2103-F12-2`, type and execute: `del_g gn/CS2103-F12-2`
 
 This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
@@ -401,15 +411,19 @@ Searches T_Assistant for groups with fields that match the search query.
 
 ##### Notes
 
-1. The command will match substrings. You may search for part of a group's name such as `F12` to find `CS2103T-F12-10`.
-2. Searches the following field that a group has that matches the query:
-   * Group name
-3. For information on the constraints for each parameter used in this command, go
+1. This command is case-insensitive.
+2. The command will match substrings. You may search for part of a group's name such as `F12` to find `CS2103T-F12-10`.
+3. Searches the following field that a group has that matches the query:
+    * Group name
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
 ###### Scenario #1: Find groups with the following query - `F12`
+
+1. You can begin this command on any panel.
+2. Type and execute: `find_g q/F12`
 
 This screenshot shows the result of executing `find_g q/F12`.
 
@@ -517,24 +531,55 @@ This screenshot shows the result of executing `add_t tn/Submit Postmortem td/202
 
 #### Adding an Existing Task to a Group: `add_et_g`, `aetg`
 
-Explanation of what command does.
+Adds an existing task to the groups specified.
 
 **Format**: `add_et_g i/INDEX gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. This command is case-insensitive.
+   > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
+2. You can add an existing task to multiple groups.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+<box type="warning" seamless>
 
-Add more scenarios if necessary
+**Caution:**
+The command will stop running the moment it hits an error.
 
-###### Scenario #1
+For example `add_et_g i/1 gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
 
-This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F12-3`.
+If the group `CS2103-F12-2` already has the task.
+
+The command will only add the task to `CS2103-F11-2` and not `CS2103-F13-1`.
+
+</box>
+
+##### Usage Scenario
+
+###### Scenario #1: Add task with index `1` to `CS2103-S1-21`
+
+1. Type and execute: `list_t` to see the list of tasks.
+2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
+3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
+4. Type and execute: `add_et_g i/1 gn/CS2103-S1-21`
+
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
+
+![add_existing_task_to_group.png](images/screenshots/add_et_g.png)
+
+###### Scenario #2: Add task that is already in a group
+
+1. Type and execute: `list_t` to see the list of tasks.
+2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
+3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
+4. Type and execute: `add_et_g i/1 gn/CS2103-S1-21`
+5. You will get an error message.
+
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
+
+![add_existing_task_to_group_err.png](images/screenshots/add_et_g_err.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -655,24 +700,24 @@ This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
 
 #### Finding Tasks: `find_t`, `ft`
 
-Explanation of what command does.
+Searches T_Assistant for tasks with fields that match the search query.
 
 **Format**: `find_t q/QUERY [q/QUERY]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. This command is case-insensitive.
+2. The command will match substrings. You may search for part of a group's name such as `tp` to find `tP v1.6 Release`.
+3. Searches the following field that a group has that matches the query:
+    * Task name
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Find task with the following query: `consultation`
 
-###### Scenario #1
-
-This screenshot shows the result of executing `find_t q/v1.3 Release`.
+This screenshot shows the result of executing `find_t q/consulation`.
 
 --------------------------------------------------------------------------------------------------------------------
 
