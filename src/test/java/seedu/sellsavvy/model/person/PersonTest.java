@@ -3,6 +3,7 @@ package seedu.sellsavvy.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_EMAIL_BOB;
@@ -139,6 +140,13 @@ public class PersonTest {
     public void getFilteredOrderList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
                 -> ALICE.getFilteredOrderList().remove(0));
+    }
+
+    @Test
+    public void createCopy() {
+        Person aliceCopy = ALICE.createCopy();
+        assertEquals(ALICE, aliceCopy);
+        assertNotSame(ALICE, aliceCopy);
     }
 
     @Test

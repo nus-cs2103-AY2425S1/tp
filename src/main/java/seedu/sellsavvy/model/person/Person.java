@@ -172,4 +172,25 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Creates a new copy of this {@code Person} with new attributes.
+     * Only the tags are not copied.
+     */
+    public Person createCopy() {
+        Name name = new Name(getName().toString());
+        Address address = new Address(getAddress().toString());
+        Phone phone = new Phone(getPhone().toString());
+        Email email = new Email(getEmail().toString());
+        Set<Tag> tags = getTags();
+        OrderList orderList = getOrderList().createCopy();
+        Person personCopy = new Person(name, phone, email, address, tags, orderList);
+
+        if (filteredOrders.getPredicate() == null) {
+            return personCopy;
+        }
+
+        Predicate<? super Order> filterPredicate = filteredOrders.getPredicate();
+        personCopy.updateFilteredOrderList(filterPredicate);
+        return personCopy;
+    }
 }

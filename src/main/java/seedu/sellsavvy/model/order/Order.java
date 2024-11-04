@@ -105,4 +105,14 @@ public class Order {
                 .toString();
     }
 
+    /**
+     * Creates a new copy of {@code Order} with new attributes.
+     */
+    public Order createCopy() {
+        Item item = new Item(getItem().toString());
+        Date date = new Date(getDate().toString());
+        Quantity quantity = new Quantity(getQuantity().toString());
+        Status status = getStatus();
+        return new Order(item, quantity, date, status);
+    }
 }
