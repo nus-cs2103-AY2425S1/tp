@@ -550,14 +550,23 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a person
 
-1. Editing a person's details
+1. Editing a person's details using INDEX
    1. Prerequisites: List all people using the `list` command. There must be at least one person in the list.
    
    2. Test case: `edit 1 n/Jamus Lim p/97758933`
       Expected: The person at index 1 is updated with the new name (Jamus Lim) and phone number (97758933). The updated details are shown in the list.
    
-   3. Test case: `edit S1486256J a/Lorong 3 Toa Payoh, #12-34`
-      Expected: The person with NRIC S1486256J is updated with the new address (Lorong 3 Toa Payoh). The updated details are shown in the list.
+   3. Test case: `edit 1 i/S1486256J`
+      Expected: The person at index 1 fails to update as the NRIC is already in use. Error message is shown in the status bar.
+   
+2. Editing a person's details using NRIC
+   1. Test case: `edit S1486256J a/Lorong 3 Toa Payoh, #12-34`
+      Prerequisites: There must be an elderly with NRIC S1486256J in the list.
+      Expected: The person with NRIC S1486256J is updated with the new address (Lorong 3 Toa Payoh, #12-34). The updated details are shown in the list.
+   
+   2. Test case: `edit S3916784J n/Tan Ah Kow`
+      Prerequisites: There must not be an elderly with NRIC S3916784J in the list.
+      Expected: The person with NRIC S3916784J is not found. Error message is shown in the status bar.
 
 ### Deleting an elderly
 
