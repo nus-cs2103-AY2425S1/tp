@@ -87,17 +87,23 @@ public class PersonPredicateBuilder {
      * in this object.
      */
     public Predicate<Person> build() {
+        // guarantee immutability: copy all internal fields
+        List<String> nameKeywordsCopy = new ArrayList<>(nameKeywords);
+        List<String> classIdKeywordsCopy = new ArrayList<>(classIdKeywords);
+        List<String> monthPaidKeywordsCopy = new ArrayList<>(monthPaidKeywords);
+        List<String> notMonthPaidKeywordsCopy = new ArrayList<>(notMonthPaidKeywords);
         return person -> {
-            boolean nameMatch = nameContainsKeywords(person);
-            boolean classIdMatch = classIdContainsKeywords(person);
-            boolean monthPaidMatch = monthPaidContainsKeywords(person);
-            boolean notMonthPaidMatch = notMonthPaidContainsKeywords(person);
+            boolean nameMatch = nameContainsKeywords(person, isSetName, nameKeywordsCopy);
+            boolean classIdMatch = classIdContainsKeywords(person, isSetClassId, classIdKeywordsCopy);
+            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaid, monthPaidKeywordsCopy);
+            boolean notMonthPaidMatch = notMonthPaidContainsKeywords(
+                    person, isSetNotMonthPaid, notMonthPaidKeywordsCopy);
 
             return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch;
         };
     }
 
-    private boolean nameContainsKeywords(Person person) {
+    private static boolean nameContainsKeywords(Person person, boolean isSetName, List<String> nameKeywords) {
         if (!isSetName) {
             return true;
         }
@@ -105,7 +111,7 @@ public class PersonPredicateBuilder {
                 .anyMatch(keyword -> regexMatch(person.getName().fullName, keyword));
     }
 
-    private boolean classIdContainsKeywords(Person person) {
+    private static boolean classIdContainsKeywords(Person person, boolean isSetClassId, List<String> classIdKeywords) {
         if (!isSetClassId) {
             return true;
         }
@@ -113,7 +119,8 @@ public class PersonPredicateBuilder {
                 .anyMatch(keyword -> regexMatch(person.getClassId().value, keyword));
     }
 
-    private boolean monthPaidContainsKeywords(Person person) {
+    private static boolean monthPaidContainsKeywords(
+            Person person, boolean isSetMonthPaid, List<String> monthPaidKeywords) {
         if (!isSetMonthPaid) {
             return true;
         }
@@ -121,7 +128,8 @@ public class PersonPredicateBuilder {
                 .anyMatch(keyword -> regexMatch(person.getMonthsPaid().toString(), keyword));
     }
 
-    private boolean notMonthPaidContainsKeywords(Person person) {
+    private static boolean notMonthPaidContainsKeywords(
+            Person person, boolean isSetNotMonthPaid, List<String> notMonthPaidKeywords) {
         if (!isSetNotMonthPaid) {
             return true;
         }
