@@ -18,4 +18,24 @@ public class UserPrefsTest {
         assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
     }
 
+    @Test
+    public void setFilterGoodsFilePath_nullPath_throwsNullPointerException() {
+        UserPrefs userPrefs = new UserPrefs();
+        assertThrows(NullPointerException.class, () -> userPrefs.setFilterGoodsFilePath(null));
+    }
+
+    @Test
+    public void setExportFilterGoodsToTrue_true_success() {
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setExportFilterGoodsToTrue();
+        assert userPrefs.getExportFilterGoods();
+    }
+
+    @Test
+    public void setExportFilterGoodsToFalse_false_success() {
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setExportFilterGoodsToFalse();
+        assert !userPrefs.getExportFilterGoods();
+    }
+
 }
