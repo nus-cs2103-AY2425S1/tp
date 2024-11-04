@@ -22,7 +22,7 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -64,30 +64,32 @@ This user guide is divided into four main feature categories:
 
 Commands for creating, updating, and deleting buyers and sellers.
 
-- **Add Buyer Command**
-  - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
-  - **Description:** Creates a new buyer profile with specified details.
-  - **Example**:  `buyer n/Bobby p/91432277 e/bobby123@gmail.com`
+![showClients](images/showClients.png)
 
-- **Add Seller Command**
-  - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
-  - **Description:** Creates a new seller profile with specified details.
-  - **Example**:  `seller n/Johnny p/92341556 e/johnny456@gmail.com`
+- #### **Add Buyer Command**
+    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]` 
+    - **Description:** Creates a new buyer profile with specified details.
+    - **Example**:  `buyer n/Bobby p/91432277 e/bobby123@gmail.com`
 
-- **Find Command**
-  - **Format:** `find KEYWORD [KEYWORD...]`
-  - **Description:** Finds the specified client(s) based on the provided keywords.
-  - **Example**:  `find Bobby Winter`
+- #### **Add Seller Command**
+    - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Description:** Creates a new seller profile with specified details.
+    - **Example**:  `seller n/Johnny p/92341556 e/johnny456@gmail.com`
 
-- **Edit Command**
-  - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
-  - **Description:** Edits the details of the specified client.
-  - **Example**:  `edit 1 n/BobbyTan e/bobbytan123@gmail.com`
+- #### **Find Command**
+    - **Format:** `find KEYWORD [KEYWORD...]`
+    - **Description:** Finds the specified client(s) based on the provided keywords.
+    - **Example**:  `find Bobby Winter`
 
-- **Delete Client Command**
-  - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL>`
-  - **Description:** Creates a new client profile with specified details
-  - **Example**:  `buyer n/Bobby p/91432222 e/bobby123@gmail.com`
+- #### **Edit Command**
+    - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
+    - **Description:** Edits the details of the specified client.
+    - **Example**:  `edit 1 n/BobbyTan e/bobbytan123@gmail.com`
+
+- #### **Delete Client Command**
+    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL>`
+    - **Description:** Creates a new client profile with specified details
+    - **Example**:  `buyer n/Bobby p/91432222 e/bobby123@gmail.com`
 
 ---
 
@@ -95,11 +97,13 @@ Commands for creating, updating, and deleting buyers and sellers.
 
 Commands for managing appointments between user and clients.
 
-- **Schedule Appointment**
+![appointments](images/appointments.png)
+
+- #### **Schedule Appointment**
     - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).
 
-- **Delete Appointment**
+- #### **Delete Appointment**
     - **Format:** `delapt n/<NAME>`
     - **Description:** Deletes an appointment with the specified client.
 
@@ -109,29 +113,31 @@ Commands for managing appointments between user and clients.
 
 Commands for managing property listings and associating clients with listings.
 
-- **Add Listing**
+![showListings](images/showListings.png)
+
+- #### **Add Listing**
     - **Command:** `AddListingCommand`
     - **Description:** Adds a new property listing with specified details.
 
-- **Clear Listing**
-    - **Command:** `ClearListingCommand`
-    - **Description:** Removes all properties from a specified listing.
-
-- **Show Listings**
+- #### **Show Listings**
     - **Command:** `ShowListingsCommand`
     - **Description:** Displays all current listings.
 
-- **Add Buyers to Listing**
+- #### **Add Buyers to Listing**
     - **Command:** `AddBuyersToListingCommand`
-    - **Description:** Associates buyers with a specified property listing.
+    - **Description:** Associates buyers with a specified listing.
 
-- **Remove Buyers from Listing**
+- #### **Remove Buyers from Listing**
     - **Command:** `RemoveBuyersFromListingCommand`
     - **Description:** Removes buyers associated with a specified listing.
 
-- **Delete Listing**
+- #### **Delete Listing**
     - **Command:** `DeleteListingCommand`
     - **Description:** Deletes a specified listing.
+
+- #### **Clear Listing**
+    - **Command:** `ClearListingCommand`
+    - **Description:** Deletes ALL listings.
 
 ---
 
@@ -139,27 +145,27 @@ Commands for managing property listings and associating clients with listings.
 
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
-- **Clear**
+- #### **Clear**
     - **Command:** `ClearCommand`
     - **Description:** Clears the console or application state.
 
-- **Exit**
+- #### **Exit**
     - **Command:** `ExitCommand`
     - **Description:** Exits the application.
 
-- **Help**
+- #### **Help**
     - **Command:** `HelpCommand`
     - **Description:** Displays a list of available commands and their descriptions.
 
-- **More Info**
+- #### **More Info**
     - **Command:** `MoreInfoCommand`
     - **Description:** Provides additional information about a specific command or feature.
 
-- **List All Commands**
+- #### **List All Commands**
     - **Command:** `ListCommand`
     - **Description:** Lists all available commands in the application.
 
-- **Chat Window**
+- #### **Chat Window**
     - **Command:** `ChatWindowCommand`
     - **Description:** Opens a chat window for client-agent communication.
 
