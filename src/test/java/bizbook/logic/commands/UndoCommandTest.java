@@ -28,17 +28,13 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_undo_success() {
+    public void execute_undo_success() throws CommandException {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        try {
-            deleteCommand.execute(model);
-            model.saveAddressBookVersion();
-        } catch (CommandException err) {
-            throw new AssertionError("There should not be an error thrown");
-        }
+        deleteCommand.execute(model);
+        model.saveAddressBookVersion();
 
         UndoCommand undoCommand = new UndoCommand();
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
