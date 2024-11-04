@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -35,8 +38,11 @@ public class ReminderCard extends UiPart<Region> {
     public ReminderCard(Reminder reminder, int reminderIndex) {
         super(FXML);
         id.setText(reminderIndex + ". ");
-        name.setText(reminder.personToMeet.toString());
-        date.setText(reminder.reminderDate.toString());
+        name.setText(reminder.personToMeet.toString() + ":");
+        LocalDate reminderDate = reminder.reminderDate;
+        LocalDate today = LocalDate.now();
+        long daysBetween = ChronoUnit.DAYS.between(today, reminderDate);
+        date.setText("(" + daysBetween + "d)");
         description.setText(reminder.reminderDescription);
     }
 }

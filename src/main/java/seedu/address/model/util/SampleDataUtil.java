@@ -65,12 +65,12 @@ public class SampleDataUtil {
 
     public static Reminder[] getSampleReminders() {
         return new Reminder[] {
-            new Reminder("10-10-2022", "breakfast", getSamplePersons()[0].getName()),
-            new Reminder("11-10-2022", "lunch", getSamplePersons()[1].getName()),
-            new Reminder("12-10-2022", "dinner", getSamplePersons()[2].getName()),
-            new Reminder("13-10-2022", "meeting", getSamplePersons()[3].getName()),
-            new Reminder("14-10-2022", "gym", getSamplePersons()[4].getName()),
-            new Reminder("15-10-2022", "meeting", getSamplePersons()[5].getName())
+            new Reminder("10-01-2025", "breakfast", getSamplePersons()[0].getName()),
+            new Reminder("11-02-2025", "lunch", getSamplePersons()[1].getName()),
+            new Reminder("12-01-2025", "dinner", getSamplePersons()[2].getName()),
+            new Reminder("13-01-2025", "meeting", getSamplePersons()[3].getName()),
+            new Reminder("14-03-2025", "gym", getSamplePersons()[4].getName()),
+            new Reminder("15-04-2025", "meeting", getSamplePersons()[5].getName())
         };
     }
 

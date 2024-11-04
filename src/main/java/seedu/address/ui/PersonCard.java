@@ -55,7 +55,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         organisation.setText(person.getOrganisation().value);
-        lastSeen.setText(person.getLastSeen().toString());
+        lastSeen.setText("Last seen: " + person.getLastSeen().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
