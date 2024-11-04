@@ -116,7 +116,7 @@ public class AddressBookParserTest {
         String note = "Lumbago";
         Set<Schedule> scheduleSet = new HashSet<>();
         scheduleSet.add(new Schedule(dateTime, ""));
-        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", scheduleSet);
+        ScheduleCommand expectedCommand = new ScheduleCommand(new Name("Jane"), scheduleSet);
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime + " note/" + note);

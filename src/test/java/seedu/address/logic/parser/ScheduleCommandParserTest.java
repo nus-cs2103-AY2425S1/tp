@@ -15,6 +15,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Schedule;
 
 
@@ -45,7 +46,7 @@ public class ScheduleCommandParserTest {
         Schedule expectedSchedule = new Schedule(VALID_DATE, "");
         Set<Schedule> schedules = new HashSet<>();
         schedules.add(expectedSchedule);
-        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, schedules);
+        ScheduleCommand expectedCommand = new ScheduleCommand(new Name(VALID_NAME), schedules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -58,7 +59,7 @@ public class ScheduleCommandParserTest {
         Schedule expectedSchedule = new Schedule(VALID_DATE, "");
         Set<Schedule> schedules = new HashSet<>();
         schedules.add(expectedSchedule);
-        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, schedules);
+        ScheduleCommand expectedCommand = new ScheduleCommand(new Name(VALID_NAME), schedules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

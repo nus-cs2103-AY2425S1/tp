@@ -114,8 +114,7 @@ Format: `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`
 
 * You can schedule multiple appointments using the `d/` prefix for each date and time.
 * If multiple `note/` prefixes are used, each note will correspond to the `d/` in the same order. Same number of notes and dates must be provided.
-* The given date must fall on a weekday.
-* The given time must be on the hour between 0900 and 1700.
+* The given date and time must fall on a weekday and on the hour between 0900 and 1600 inclusive.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
 * When scheduling appointments, the existing schedules of the person will be removed i.e adding of schedules is not cumulative.
 
@@ -123,6 +122,7 @@ Examples:
 * `schedule John Doe d/2024-10-14 1200 note/first appointment`
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
 * `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting note/not so important meeting`
+
 
 ### Setting a reminder: `reminder`
 
@@ -203,11 +203,11 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Viewing a person: `view [NAME]`
+### Viewing a person: `view NAME`
 
 Displays the details of a person in the address book.
 
-**Format:** `view [NAME]`
+**Format:** `view NAME`
 
 <div markdown="span" class="alert alert-primary">
 Tip:
@@ -263,7 +263,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)<br>
 * `find p/88` returns `John Doo` (with phone number `88765432`) <br>
-  ![result for 'find alex david'](images/find88.png)
+  ![result for 'find p/88'](images/find88.png)
 
 ### Deleting a person : `delete`
 
