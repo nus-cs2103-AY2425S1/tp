@@ -82,9 +82,12 @@ public class ViewWindow extends UiPart<Region> {
             return;
         }
         StringBuilder sb = new StringBuilder(assignmentMap.size());
-        for (Assignment eachAssignment : assignmentMap.values()) {
-            sb.append(eachAssignment.toString()).append(", \n");
-        }
+        assignmentMap
+                .values()
+                .stream()
+                .sorted(Comparator.comparing(Assignment::getAssignmentName))
+                .forEach(assignment -> sb.append(assignment).append(", \n"));
+
         sb.setLength(sb.length() - 3); //remove the last ,
         assignment.setText(sb.toString());
     }

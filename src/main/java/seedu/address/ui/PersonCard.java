@@ -72,9 +72,11 @@ public class PersonCard extends UiPart<Region> {
             return;
         }
         StringBuilder sb = new StringBuilder(assignmentMap.size());
-        for (Assignment eachAssignment : assignmentMap.values()) {
-            sb.append(eachAssignment.toString()).append(", ");
-        }
+        assignmentMap
+                .values()
+                .stream()
+                .sorted(Comparator.comparing(Assignment::getAssignmentName))
+                .forEach(assignment -> sb.append(assignment).append(", "));
         sb.setLength(sb.length() - 2); //remove the last ,
         assignment.setText(sb.toString());
     }
