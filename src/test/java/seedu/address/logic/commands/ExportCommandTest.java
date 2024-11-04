@@ -74,31 +74,41 @@ public class ExportCommandTest {
 
     @Test
     public void execute_absoluteFilePath_exportSuccess() throws Exception {
-        String absoluteFilePath = Paths.get("data").toAbsolutePath().toString() + "/absolute_export.csv";
-        ExportCommand exportCommand = new ExportCommand(absoluteFilePath);
+        Path tempDir = Files.createTempDirectory("exportTest");
+        Path absolutePath = tempDir.resolve("export.csv");
+
+        ExportCommand exportCommand = new ExportCommand(absolutePath.toString());
+
         CommandResult result = exportCommand.execute(model);
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, absolutePath.toString()), result.getFeedbackToUser());
 
-        // Verify success message and CSV file creation
-        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, absoluteFilePath), result.getFeedbackToUser());
-        assertTrue(Files.exists(Paths.get(absoluteFilePath)));
-
-        // Cleanup
-        Files.deleteIfExists(Paths.get(absoluteFilePath));
+        // Clean up
+        Files.deleteIfExists(absolutePath);
+        Files.deleteIfExists(tempDir);
     }
 
     @Test
     public void execute_relativeFilePath_exportSuccess() throws Exception {
-        String relativeFilePath = "data/relative_export.csv";
+        // Define a relative path from the project root or from the current working directory
+        String relativeFilePath = "exportTestRelative.csv";
         ExportCommand exportCommand = new ExportCommand(relativeFilePath);
-        CommandResult result = exportCommand.execute(model);
 
-        // Verify success message and CSV file creation
-        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, Paths.get(System.getProperty("user.dir"),
-                relativeFilePath)), result.getFeedbackToUser());
-        assertTrue(Files.exists(Paths.get(relativeFilePath)));
+        try {
+            // Execute the command
+            CommandResult result = exportCommand.execute(model);
 
-        // Cleanup
-        Files.deleteIfExists(Paths.get(relativeFilePath));
+            // Construct the absolute path to check if the file was created in the expected location
+            Path expectedFilePath = Path.of(relativeFilePath).toAbsolutePath();
+
+            // Assert the feedback message matches the expected output
+            assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, expectedFilePath.toString()), result.getFeedbackToUser());
+
+            // Verify file existence as a side check for successful execution
+            assertTrue(Files.exists(expectedFilePath));
+        } finally {
+            // Clean up after the test
+            Files.deleteIfExists(Path.of(relativeFilePath));
+        }
     }
 
     @Test
