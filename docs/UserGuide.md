@@ -83,6 +83,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 ### Viewing help : `help` 💡
 
 Shows a message via a popup window explaining how to access the help page.
+Access the url shown on the popup window to be redirected to the help screen.
 
 ![help message](images/helpMessage.png)
 
@@ -103,6 +104,7 @@ Adds an Udder to the address book.
 **Examples:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/mUdder m/ceg t/potential connection`
+* `add n/Charlie Brown e/snoopy@gmail.com a/Yellow House p/24157842 m/cs r/brUdder t/friend`
 
 ### Listing all Udders : `list` 📜
 
@@ -146,13 +148,14 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 
 Finds Udders by specified keywords for each field.
 
-**Format:** `find [n/]`
+**Format:** `find [n/] [p/] [t/] [a/] [e/] [m/] [r/]
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
 
 **Examples:**
 * `find John` returns `johnny` and `John Doe`<br>
+* `find friend` returns `Charlie Brown` and `Betsy Crowe`<br>
 
 ![result for 'find alex david'](images/findCommand.png)
 
@@ -219,7 +222,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. 
-Solution: delete the `preferences.json` file created by the application before running the application again. 
+Solution: delete the `preferences.json` file created by the application before running the application again to prevent this problem.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. 
 Solution: manually restore the minimized Help Window.
 
