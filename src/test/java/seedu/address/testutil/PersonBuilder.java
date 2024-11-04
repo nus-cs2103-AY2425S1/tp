@@ -53,6 +53,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         transactions = new ArrayList<>();
+        transactions.add(DEFAULT_TRANSACTION_1);
     }
 
     /**
