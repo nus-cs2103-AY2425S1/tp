@@ -176,6 +176,71 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void test_parseWithValidArgsWithEmail_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder()
+                        .withEmailKeywords(Arrays.asList("alice@example.com", "bob@example.com")));
+        assertParseSuccess(parser, " e/alice@example.com bob@example.com", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " e/ \n alice@example.com \n \t bob@example.com  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseWithValidArgsWithPhone_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withPhoneKeywords(Arrays.asList("12345678", "87654321")));
+        assertParseSuccess(parser, " p/12345678 87654321", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " p/ \n 12345678 \n \t 87654321  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseWithValidArgsWithFees_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withFeesKeywords(Arrays.asList("100", "200")));
+        assertParseSuccess(parser, " f/100 200", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " f/ \n 100 \n \t 200  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseWithNameAndEmail_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withNameKeywords(Arrays.asList("Alice", "Bob"))
+                        .withEmailKeywords(Arrays.asList("alice@example.com", "bob@example.com")));
+        assertParseSuccess(parser, " n/Alice Bob e/alice@example.com bob@example.com", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob  \t "
+                + "e/ \n alice@example.com \n \t bob@example.com  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseWithClassIdAndPhone_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withClassIdKeywords(Arrays.asList("1", "2"))
+                        .withPhoneKeywords(Arrays.asList("12345678", "87654321")));
+        assertParseSuccess(parser, " c/1 2 p/12345678 87654321", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " c/ \n 1 \n \t 2  \t p/ \n 12345678 \n \t 87654321  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void test_parseWithMonthPaidAndFees_success() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonPredicateBuilder().withMonthPaidKeywords(List.of("2022-12"))
+                        .withFeesKeywords(Arrays.asList("100", "200")));
+        assertParseSuccess(parser, " m/2022-12 f/100 200", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " m/ \n 2022-12  \t f/ \n 100 \n \t 200  \t", expectedFindCommand);
+    }
+
+    @Test
     public void test_parseWithAllPrefixes_success() {
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonPredicateBuilder()
@@ -183,17 +248,25 @@ public class FindCommandParserTest {
                         .withClassIdKeywords(Arrays.asList("1", "2"))
                         .withMonthPaidKeywords(List.of("2022-12"))
                         .withNotMonthPaidKeywords(List.of("2022-11"))
-                        .withTagsKeywords(List.of("tag1", "tag2")));
-        assertParseSuccess(parser, " n/Alice Bob c/1 2 m/2022-12 !m/2022-11 t/tag1 tag2", expectedFindCommand);
+                        .withTagsKeywords(List.of("tag1", "tag2"))
+                        .withEmailKeywords(Arrays.asList("alice@example.com", "bob@example.com"))
+                        .withPhoneKeywords(Arrays.asList("12345678", "87654321"))
+                        .withFeesKeywords(List.of("100", "200")));
+        assertParseSuccess(parser, " n/Alice Bob c/1 2 m/2022-12 !m/2022-11 t/tag1 tag2 "
+                + "e/alice@example.com bob@example.com p/12345678 87654321 "
+                + "f/100 200", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/ \n Alice \n \t Bob c/ \n 1 \n \t 2  \t m/ "
-                        + "\n 2022-12  \t !m/ \n 2022-11  \t t/ \n tag1 \n \t tag2  \t",
-                expectedFindCommand);
+        assertParseSuccess(parser, " n/ \n Alice \n \t Bob c/ \n 1 \n \t "
+                + "2  \t m/ \n 2022-12  \t !m/ \n 2022-11  \t t/ \n tag1 \n \t tag2  \t e/ \n "
+                + "alice@example.com \n \t bob@example.com  \t p/ \n "
+                + "12345678 \n \t 87654321  \t f/ \n 100 \n \t 200  \t", expectedFindCommand);
     }
 
     @Test
     public void test_parseWithValidPreambleEmptyKeywords_failure() {
+        assertParseFailure(parser, " n/ c/ m/ !m/ t/ e/ p/ f/",
+                FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
         assertParseFailure(parser, " n/ c/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
         assertParseFailure(parser, " n/ m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
         assertParseFailure(parser, " n/ !m/", FindCommand.EMPTY_SEARCH_VALUE_PROVIDED);
