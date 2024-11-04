@@ -1,4 +1,4 @@
-package spleetwaise.address.commons.core.index;
+package spleetwaise.commons.core.index;
 
 import spleetwaise.commons.util.ToStringBuilder;
 

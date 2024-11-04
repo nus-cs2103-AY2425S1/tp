@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.util.StringUtil;

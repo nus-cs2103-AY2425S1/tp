@@ -15,7 +15,6 @@ import static spleetwaise.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
@@ -24,6 +23,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.model.UserPrefs;
 

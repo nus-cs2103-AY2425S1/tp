@@ -5,9 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.index.Index;
 
 /**
  * A utility class for test cases.

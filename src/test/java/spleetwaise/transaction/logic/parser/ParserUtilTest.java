@@ -8,13 +8,13 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.transaction.Amount;
