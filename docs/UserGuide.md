@@ -150,17 +150,24 @@ MediBase3 can be controlled using commands in the **Command Line Interface (CLI)
 
 #### CLI Command Structure
 
-Each command follows this structure:
+Each command in MediBase3 follows a structured format to ensure consistency and ease of use.
+
+The example below demonstrates this structure:
 
 ![CommandPromptFormat.jpg](images/CommandPromptFormat.jpg)
 
-Here’s a breakdown of the parts:
+This example shows how a typical command might look in MediBase3, with three main components:
 
 | **Component** | **Description**                                         |
 |---------------|---------------------------------------------------------|
 | **Command**   | The action you want to perform (e.g., `add`, `edit`)    |
 | **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
 | **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * This example is provided to give a general idea of the command structure. Actual commands may vary depending on the specific action and data required.
 
 #### Example:
 >```
