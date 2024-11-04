@@ -85,6 +85,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
       >
       > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+      >
+      > ---
 
     - **Failed Execution:**
       > ---
@@ -122,7 +124,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
-
+      > 
+      > ---
 - #### **Add Seller Command**
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new seller profile with specified details.
@@ -141,8 +144,10 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
       >
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
-      
-      **Failed Execution**
+      >
+      > ---
+
+    - **Failed Execution**
       > ---
       > **User Error #1**: Missing `NAME` field
       >
@@ -203,6 +208,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**: `find Bob Winter`
       >
       > **Output**:
+      > 
+      > ---
 
     - **Failed Execution:**
       > ---
@@ -211,6 +218,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**: 
       > 
       > **Output**:
+      >
+      > ---
 
 - #### **Edit Command**
     - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
@@ -238,6 +247,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**: `find Bob Winter`
       >
       > **Output**:
+      >
+      > ---
 
     - **Failed Execution:**
       > ---
@@ -246,6 +257,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**:
       >
       > **Output**:
+      >
+      > ---
 
 - #### **Delete Client Command**
     - **Format:** `delete n/<NAME>`
@@ -273,16 +286,18 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Input**: `find Bob Winter`
       >
       > **Output**:
+      >
+      > ---
 
-      - **Failed Execution:**
+    - **Failed Execution:**
       > ---
       > **Use Case #1**:
       >
       > **Input**:
       >
       > **Output**:
-
-   
+      >
+      > ---
 
 ---
 
@@ -295,36 +310,81 @@ Commands for managing appointments between user and clients.
 - #### **Schedule Appointment**
     - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
-  <br> **Successful Execution:**
-  > **Use Case**:
-  >
-  > **Input**:
-  >
-  > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
 
-  **Failed Execution**
-  > **User Error**:
-  >
-  > **Input**:
-  >
-  > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
 - #### **Delete Appointment**
     - **Format:** `delapt n/<NAME>`
     - **Description:** Deletes an appointment with the specified client.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: 
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 ---
 
 ### 3. Listing Management
@@ -334,105 +394,238 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### **Add Listing**
-  - **Command:** `AddListingCommand`
-  - **Description:** Adds a new property listing with specified details.
-  - **Successful Execution:**
-    >   **Use Case**:
-    >
-    >   **Input**:
-    >
-    >   **Output**:
+    - **Command:** `AddListingCommand`
+    - **Description:** Adds a new property listing with specified details.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    >   **User Error**:
-    >
-    >   **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
 - #### **Show Listings**
     - **Command:** `ShowListingsCommand`
     - **Description:** Displays all current listings.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
-    >
-    > 
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **Add Buyers to Listing**
     - **Command:** `AddBuyersToListingCommand`
     - **Description:** Associates buyers with a specified listing.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **Remove Buyers from Listing**
     - **Command:** `RemoveBuyersFromListingCommand`
     - **Description:** Removes buyers associated with a specified listing.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **Delete Listing**
     - **Command:** `DeleteListingCommand`
     - **Description:** Deletes a specified listing.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **Clear Listing**
     - **Command:** `ClearListingCommand`
     - **Description:** Deletes ALL listings.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
----
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
 ### 4. Utility Commands
 
@@ -441,101 +634,176 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 - #### **Clear**
     - **Command:** `ClearCommand`
     - **Description:** Clears the console or application state.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **Exit**
     - **Command:** `ExitCommand`
     - **Description:** Exits the application.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Winter`
+      >
+      > **Input**: `find Winter`
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **Help**
-    - **Command:** `HelpCommand`
+    - **Command:** `help`
     - **Description:** Displays a list of available commands and their descriptions.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Accessing help 
+      >
+      > **Input**: `help`
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
 - #### **More Info**
     - **Command:** `MoreInfoCommand`
     - **Description:** Provides additional information about a specific command or feature.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: 
+      >
+      > **Input**: `
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 - #### **List All Commands**
     - **Command:** `ListCommand`
     - **Description:** Lists all available commands in the application.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
 - #### **Chat Window**
     - **Command:** `ChatWindowCommand`
     - **Description:** Opens a chat window for client-agent communication.
-  - **Successful Execution:**
-    > **Use Case**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**: 
+      >
+      > **Input**: 
+      >
+      > **Output**:
+      >
+      > ---
 
-    **Failed Execution**
-    > **User Error**:
-    >
-    > **Input**:
-    >
-    > **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
----
 
 ### Saving the data
 
