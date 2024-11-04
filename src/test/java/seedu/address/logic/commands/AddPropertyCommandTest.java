@@ -43,7 +43,7 @@ public class AddPropertyCommandTest {
         PropertyList updatedPropertyList = PropertyList.addProperty(personToEdit.getPropertyList(), newProperty);
         Person editedPerson = new PersonBuilder(personToEdit).withPropertyList(updatedPropertyList).build();
 
-        String expectedMessage = String.format(AddPropertyCommand.MESSAGE_ADD_PROPERTY_SUCCESS, editedPerson);
+        String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -65,7 +65,7 @@ public class AddPropertyCommandTest {
                 newProperty);
         Person editedPerson = new PersonBuilder(personInFilteredList).withPropertyList(updatedPropertyList).build();
 
-        String expectedMessage = String.format(AddPropertyCommand.MESSAGE_ADD_PROPERTY_SUCCESS, editedPerson);
+        String expectedMessage = String.format(Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personInFilteredList, editedPerson);
 
