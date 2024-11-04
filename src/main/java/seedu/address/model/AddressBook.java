@@ -224,7 +224,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .filter(x -> x.getCompany().matchesCompanyName(key.getName()));
         // DO NOT CONVERT BELOW TO STREAM, IT BREAKS THE JOB DELETION!!!
         for (Job j : jobsToRemove.toList()) {
-            jobs.remove(j);
+            removeJob(j);
         }
     }
 
