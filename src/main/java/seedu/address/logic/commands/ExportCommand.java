@@ -48,7 +48,7 @@ public class ExportCommand extends Command {
         requireNonNull(filePath);
 
         // Check for universally invalid characters for file paths
-        if (filePath.matches(".*[<>:\"\\|?*].*")) {
+        if (filePath.matches(".*[<>\"\\|?*].*")) {
             throw new IllegalArgumentException("Invalid file path provided: " + filePath);
         }
         // Attempt to validate the file path and convert to an absolute path if necessary
