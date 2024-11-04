@@ -32,6 +32,7 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindTaskCommand;
 import seedu.address.logic.commands.findcommand.FindWeddingCommand;
 import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
@@ -53,6 +54,7 @@ import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredica
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TaskContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
@@ -151,6 +153,14 @@ public class AddressBookParserTest {
         FindWeddingCommand command = (FindWeddingCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " w/" + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindWeddingCommand(new WeddingContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void findTask() throws Exception {
+        List<String> keywords = Arrays.asList("Order wedding cake");
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " tk/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTaskCommand(new TaskContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
