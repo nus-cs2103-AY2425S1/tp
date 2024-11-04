@@ -62,13 +62,13 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}"
 
       - name: c
-        run: echo "${{ github.token }}"
+        run: echo "${{ vars.PAT }}"
 
       - name: Comment on PR with artifact link
         if: github.event_name == 'pull_request' && runner.os == 'Linux'
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          github-token: ${{ vars.PAT }}
           script: |
             const artifactLink = `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts`
             const commentBody = `:page_facing_up: [Reports available here](${artifactLink})`
