@@ -544,25 +544,25 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Adding a person
+### Adding an elderly
 
-1. Adding a person without a tag
+1. Adding an elderly without a tag
    1. Test case: `add i/S6516486H n/James Lim p/91234567 e/james.lim@hotmail.com a/432, Clementi East Ave 4, #13-42 c/7`<br>
-      Expected: A new person is added to the list. The details of the person are shown in the list.
+      Expected: A new elderly is added to the list. The details of the elderly are shown in the list.
 
-2. Adding a person with a tag
+2. Adding an elderly with a tag
    1. Test case: `add i/S1486256J n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 t/wheelchairBound c/7`<br>
-      Expected: A new person is added to the list. The details of the person are shown in the list and the "wheelchairBound" tag is shown.
+      Expected: A new elderly is added to the list. The details of the elderly are shown in the list and the "wheelchairBound" tag is shown.
 
-3. Adding a person with a duplicate NRIC
+3. Adding an elderly with a duplicate NRIC
    1. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
-      Expected: No new person is added. Error message is shown in the status bar.
+      Expected: No new elderly is added. Error message is shown in the status bar.
 
 ### Deleting an elderly
 
-1. Deleting an elderly while all people are listed in the `personList`.
+1. Deleting an elderly while all elderly are listed in the `personList`.
 
-   1. Prerequisites: List all people using the `list` command. There must be at least one elderly in the list.
+   1. Prerequisites: List all elderly using the `list` command. There must be at least one elderly in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
@@ -573,34 +573,34 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
       Expected: Similar to the previous case.
 
-### Finding a person
-1. Finding a person by name
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Finding an elderly
+1. Finding an elderly by name
+    1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
     2. Test case: `find Alice`<br>
-       Expected: Persons with the name Alice are shown in the list. Other persons are hidden.
+       Expected: Elderly with the name `Alice` are shown in the list. Other elderly are hidden.
 
-2. Finding a person by NRIC
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Finding an elderly by NRIC
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `find S6516486H`<br>
-        Expected: The person with the NRIC S6516486H is shown in the list. Other persons are hidden.
+        Expected: The elderly with the NRIC `S6516486H` is shown in the list. Other elderly are hidden.
 
-### Marking a person as called
-1. Mark a person as called by index
-   1. Prerequisites: List all persons using the `list` command.
+### Marking an elderly as called
+1. Mark an elderly as called by index
+   1. Prerequisites: List all elderly using the `list` command.
    2. Test case: `mark 1`<br>
-    Expected: The person at index 1 is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
-2. Mark a person as called by NRIC
+    Expected: The elderly at index 1 is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
+2. Mark an elderly as called by NRIC
     1. Test case: `mark S1486256J o/My test note`<br>
-       Expected: The person with NRIC S1486256J is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
+       Expected: The elderly with NRIC `S1486256J` is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
 
-### Call history of a person
-1. Viewing call history of a person by index
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Call history of an elderly
+1. Viewing call history of an elderly by index
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `history 2`<br>
-      Expected: The list is updated to show the call history of the person at index 2.
-2. Viewing call history of a person by NRIC
+      Expected: The list is updated to show the call history of the elderly at index 2.
+2. Viewing call history of an elderly by NRIC
    1. Test case: `history S1486256J`<br>
-      Expected: The list is updated to show the call history of the person with NRIC S1486256J. One of which contains the note "My test note".
+      Expected: The list is updated to show the call history of the elderly with NRIC `S1486256J`. One of which contains the note "My test note".
 
 ### Navigating through command history
 1. Navigating to previous command
@@ -616,10 +616,10 @@ testers are expected to do more *exploratory* testing.
 1. Data is saved after shutdown
 
    1. Clear data with the `clear` command.
-   2. Add a new person. Refer to the [Adding a person](#adding-a-person) section.
+   2. Add a new elderly. Refer to the [adding an elderly](#adding-an-elderly) section.
    3. Close the app.
-   4. Re-launch the app.<br>
-       Expected: The newly added person is still present.
+   4. Re-launch the app.<br>G
+       Expected: The newly added elderly is still present.
 
 2. Dealing with missing/corrupted data files
 

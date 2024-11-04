@@ -46,7 +46,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the commands:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -64,6 +64,8 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* The `personList` view is the view where the list of elderly is shown. It is the default view when you start the application. Use the `list` command to return to this view if you are in another view.
 </div>
 
 ### Viewing help : `help`
@@ -95,6 +97,8 @@ Examples:
 ### Listing all elderly : `list`
 
 Shows a list of all elderly in ContactMate, sorted by priority of who to call next.
+
+This is known as the `personList` view.
 
 Format: `list`
 
