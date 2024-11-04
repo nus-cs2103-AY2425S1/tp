@@ -26,6 +26,8 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXAM);
+
         Exam exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
         return new AddExamCommand(exam);
     }

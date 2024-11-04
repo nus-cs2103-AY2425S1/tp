@@ -28,6 +28,8 @@ public class AddExamScoreCommandParser implements Parser<AddExamScoreCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamScoreCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXAM, PREFIX_EXAM_SCORE);
+
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Exam exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
         String examScore = ParserUtil.parseExamScore(argMultimap.getValue(PREFIX_EXAM_SCORE).get());
