@@ -402,7 +402,7 @@ Command | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **NewTag** | `newtag t/TAG…​` <br> e.g. `newtag bride's side`
-**DeleteTag** | `deletetag t/TAG…​` <br> e.g. `deletetag t/bride's side`
+**DeleteTag** | `deletetag t/TAG…​` <br> `deletetag -force t/TAG…​` <br>e.g. `deletetag t/bride's side` <br>e.g. `deletetag -force t/bride's side`
 **RenameTag** | `renametag t/TAG1 t/TAG2` <br> e.g. `renametag t/friends t/colleagues`
 **Tag** | `tag INDEX…​ t/TAG…​` <br> e.g. `tag 1 2 t/groom's side t/family`
 **Untag** | `untag INDEX…​ t/TAG…​` <br> e.g. `untag 1 2 t/bride's side t/family`
