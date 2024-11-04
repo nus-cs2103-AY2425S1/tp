@@ -6,7 +6,9 @@
 
 # UniVerse User Guide
 
-UniVerse is a **desktop app for managing contacts**, optimized for use via a **Command Line Interface (CLI)** while incorporating a **Graphical User Interface (GUI)** for ease of use. UniVerse is designed to help you manage detailed contact information, including academic and professional details, quickly and efficiently.
+UniVerse is a **desktop app for managing contacts**, optimized for use via a **Command Line Interface (CLI)** 
+while incorporating a **Graphical User Interface (GUI)** for ease of use. UniVerse is designed to help you manage 
+detailed contact information, including academic and professional details, quickly and efficiently.
 
 <!-- * Table of Contents -->
 
@@ -163,6 +165,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Finding Contacts by Interest: `findi`
+
+Finds contacts with specific interests.
+
+Format:
+```plaintext
+findi i/INTEREST
+```
+
+* `i/INTEREST`: Interest to search for.
+
+Example:
+```plaintext
+findi i/Swimming
+```
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -243,6 +261,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find by Interest** | `findi i/INTEREST` <br> e.g., `findi i/Swimming`
 **Find by University** | `findu u/UNIVERSITY` <br> e.g., `findu u/NUS`
 **List**   | `list`
 **Help**   | `help`
