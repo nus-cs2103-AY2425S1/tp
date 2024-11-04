@@ -63,7 +63,7 @@ public class AdvFilterCommandTest {
         assertFalse(sortFirstCommand.equals(sortSecondCommand));
     }
 
-    // Test case for sorting using tag value more than (numeric)
+    // Test case for advanced filtering using tag value more than (numeric)
     public void execute_tagValue_moreThanOne() {
         String expectedMessage = AdvFilterCommand.constructSuccessMessage("friend", ">=", "1");
         AdvFilterCommand command = new AdvFilterCommand("friend", Operator.GREATER_THAN_OR_EQUAL, "1");
@@ -72,7 +72,7 @@ public class AdvFilterCommandTest {
         assertEquals(Arrays.asList(BOB_CLONE), model.getFilteredPersonList());
     }
 
-    // Test case for sorting using tag value equals (string comparison)
+    // Test case for advanced filtering using tag value equals (string comparison)
     @Test
     public void execute_tagValue_equalsHigh() {
         String expectedMessage = AdvFilterCommand.constructSuccessMessage("priority", "=", "high");
@@ -115,11 +115,14 @@ public class AdvFilterCommandTest {
 
         AdvFilterCommand command =
                 new AdvFilterCommand("priority", Operator.EQUAL, "high");
-        // Test for '='
+        // Tests for '='
         assertTrue(command.compare(Operator.EQUAL, numericTagToTest, numericTagToTest.tagValue));
         assertTrue(command.compare(Operator.EQUAL, stringTagToTest, stringTagToTest.tagValue));
         assertFalse(command.compare(Operator.EQUAL, numericTagToTest, stringTagToTest.tagValue));
         assertFalse(command.compare(Operator.EQUAL, stringTagToTest, numericTagToTest.tagValue));
+        // Empty string tests
+        assertFalse(command.compare(Operator.EQUAL, numericTagToTest, ""));
+        assertFalse(command.compare(Operator.EQUAL, stringTagToTest, ""));
     }
 
     @Test
@@ -131,11 +134,13 @@ public class AdvFilterCommandTest {
 
         AdvFilterCommand command =
                 new AdvFilterCommand("priority", Operator.EQUAL, "high");
-        // Test for '!='
+        // Tests for '!='
         assertTrue(command.compare(Operator.NOT_EQUAL, numericTagToTest, notEqualsNumericTag.tagValue));
         assertTrue(command.compare(Operator.NOT_EQUAL, stringTagToTest, notEqualsStringTag.tagValue));
         assertFalse(command.compare(Operator.NOT_EQUAL, numericTagToTest, numericTagToTest.tagValue));
-        assertFalse(command.compare(Operator.NOT_EQUAL, stringTagToTest, stringTagToTest.tagValue));
+        // Empty string tests
+        assertTrue(command.compare(Operator.NOT_EQUAL, numericTagToTest, ""));
+        assertTrue(command.compare(Operator.NOT_EQUAL, stringTagToTest, ""));
     }
 
     @Test
@@ -147,12 +152,15 @@ public class AdvFilterCommandTest {
 
         AdvFilterCommand command =
                 new AdvFilterCommand("priority", Operator.EQUAL, "high");
-        // Test for '>' for tag values parsed as Double
+        // Tests for '>' for tag values parsed as Double
         assertTrue(command.compare(Operator.GREATER_THAN, numericTagToTest, lesserNumericTag.tagValue));
         assertFalse(command.compare(Operator.GREATER_THAN, lesserNumericTag, numericTagToTest.tagValue));
-        // Test for '>' for tag values parsed as String
+        // Tests for '>' for tag values parsed as String
         assertTrue(command.compare(Operator.GREATER_THAN, stringTagToTest, lesserStringTag.tagValue));
         assertFalse(command.compare(Operator.GREATER_THAN, lesserStringTag, stringTagToTest.tagValue));
+        // Empty string tests
+        assertFalse(command.compare(Operator.GREATER_THAN, numericTagToTest, ""));
+        assertTrue(command.compare(Operator.GREATER_THAN, stringTagToTest, ""));
     }
 
     @Test
@@ -164,12 +172,15 @@ public class AdvFilterCommandTest {
 
         AdvFilterCommand command =
                 new AdvFilterCommand("priority", Operator.EQUAL, "high");
-        // Test for '<' for tag values parsed as Double
+        // Tests for '<' for tag values parsed as Double
         assertTrue(command.compare(Operator.LESS_THAN, numericTagToTest, greaterNumericTag.tagValue));
         assertFalse(command.compare(Operator.LESS_THAN, greaterNumericTag, numericTagToTest.tagValue));
-        // Test for '<' for tag values parsed as String
+        // Tests for '<' for tag values parsed as String
         assertTrue(command.compare(Operator.LESS_THAN, stringTagToTest, greaterStringTag.tagValue));
         assertFalse(command.compare(Operator.LESS_THAN, greaterStringTag, stringTagToTest.tagValue));
+        // Empty string tests
+        assertFalse(command.compare(Operator.LESS_THAN, numericTagToTest, ""));
+        assertFalse(command.compare(Operator.LESS_THAN, stringTagToTest, ""));
     }
 
     @Test
@@ -189,6 +200,9 @@ public class AdvFilterCommandTest {
         assertTrue(command.compare(Operator.GREATER_THAN_OR_EQUAL, stringTagToTest, lesserStringTag.tagValue));
         assertTrue(command.compare(Operator.GREATER_THAN_OR_EQUAL, stringTagToTest, stringTagToTest.tagValue));
         assertFalse(command.compare(Operator.GREATER_THAN_OR_EQUAL, lesserStringTag, stringTagToTest.tagValue));
+        // Empty string tests
+        assertFalse(command.compare(Operator.GREATER_THAN_OR_EQUAL, numericTagToTest, ""));
+        assertTrue(command.compare(Operator.GREATER_THAN_OR_EQUAL, stringTagToTest, ""));
     }
 
     @Test
@@ -208,6 +222,9 @@ public class AdvFilterCommandTest {
         assertTrue(command.compare(Operator.LESS_THAN_OR_EQUAL, stringTagToTest, greaterStringTag.tagValue));
         assertTrue(command.compare(Operator.LESS_THAN_OR_EQUAL, stringTagToTest, stringTagToTest.tagValue));
         assertFalse(command.compare(Operator.LESS_THAN_OR_EQUAL, greaterStringTag, stringTagToTest.tagValue));
+        // Empty string tests
+        assertFalse(command.compare(Operator.LESS_THAN_OR_EQUAL, numericTagToTest, ""));
+        assertFalse(command.compare(Operator.LESS_THAN_OR_EQUAL, stringTagToTest, ""));
     }
 
     @Test
