@@ -130,6 +130,10 @@ public class ContactPredicateBuilder {
         return combinedPredicate;
     }
 
+    protected ArgumentMultimap getArgMultimap() {
+        return this.argMultimap;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n\n%1$s";
     public static final String MESSAGE_INVALID_FLAGS = "No flag or invalid flag specified! Use -c OR -v OR -e %1$s";
+    public static final String MESSAGE_INVALID_PREFIX = "Not allowed to filter by %s when you specify %s";
     public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid.";
     public static final String MESSAGE_DISPLAYED_INDEX_TOO_LARGE = "The index provided goes out of bounds.";
@@ -58,6 +59,12 @@ public class Messages {
                 Stream.of(exclusiveFlags).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_EXCLUSIVE_FLAGS + String.join(", ", exclusiveFields);
+    }
+    /**
+     * Returns an error message indicating which fields are incompatible with the selected flag
+     */
+    public static String getErrorMessageForPrefix(Prefix prefix, Prefix flag) {
+        return String.format(MESSAGE_INVALID_PREFIX, prefix.toString(), flag.toString());
     }
 
     /**

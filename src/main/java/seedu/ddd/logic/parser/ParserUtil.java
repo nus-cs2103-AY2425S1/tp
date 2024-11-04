@@ -1,9 +1,17 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.getErrorMessageForPrefix;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.logic.parser.CommandFlag.CLIENT;
 import static seedu.ddd.logic.parser.CommandFlag.EVENT;
 import static seedu.ddd.logic.parser.CommandFlag.VENDOR;
@@ -221,6 +229,71 @@ public class ParserUtil {
             return EVENT;
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Verifies that the specified ArgumentMultimap does not contain any illegal filters for a client.
+     * Throws a ParseException if a forbidden filter (service, description, or date) is found when
+     * the client flag (-c) is specified.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @throws ParseException if the ArgumentMultimap contains filters for service, description, or date
+     *         when the client flag (-c) is specified.
+     */
+    public static void verifyClientParser(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_SERVICE, FLAG_CLIENT));
+        } else if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DESC, FLAG_CLIENT));
+        } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DATE, FLAG_CLIENT));
+        } else {
+            // All other cases are valid
+        }
+    }
+
+    /**
+     * Verifies that the specified ArgumentMultimap does not contain any illegal filters for a vendor.
+     * Throws a ParseException if a forbidden filter (description or date) is found when
+     * the vendor flag (-v) is specified.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @throws ParseException if the ArgumentMultimap contains filters for description or date
+     *         when the vendor flag (-v) is specified.
+     */
+    public static void verifyVendorParser(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DESC, FLAG_VENDOR));
+        } else if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_DATE, FLAG_VENDOR));
+        } else {
+            // All other cases are valid
+        }
+    }
+
+    /**
+     * Verifies that the specified ArgumentMultimap does not contain any illegal filters for an event.
+     * Throws a ParseException if a forbidden filter (address, phone, service, email, or tags) is found
+     * when the event flag (-e) is specified.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @throws ParseException if the ArgumentMultimap contains filters for address, phone, service, email,
+     *         or tags when the event flag (-e) is specified.
+     */
+    public static void verifyEventParser(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_ADDRESS, FLAG_EVENT));
+        } else if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_PHONE, FLAG_EVENT));
+        } else if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_SERVICE, FLAG_EVENT));
+        } else if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_EMAIL, FLAG_EVENT));
+        } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            throw new ParseException(getErrorMessageForPrefix(PREFIX_TAG, FLAG_EVENT));
+        } else {
+            // All other cases are valid
         }
     }
 }
