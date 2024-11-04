@@ -18,7 +18,6 @@ import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.testutil.TypicalEvents;
 import seedu.eventtory.testutil.TypicalVendors;
-import seedu.eventtory.ui.UiState;
 
 class UnassignCommandTest {
 
