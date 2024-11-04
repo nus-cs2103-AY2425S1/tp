@@ -240,12 +240,11 @@ Here's a reference table for common parameter prefixes and their corresponding p
 |------------------|-------------------------|
 | `n/`             | `STUDENT_NAME`          |
 | `s/`             | `STUDENT_ID`            |
-| `t/`             | `TUTORIAL_NAME`         |
+| `tn/`            | `TUTORIAL_NAME`         |
 | `c/`             | `TUTORIAL_ID`           |
 | `a/`             | `ASSIGNMENT_NAME`       |
 | `d/`             | `ASSIGNMENT_DUE_DATE`   |
 | `e/`             | `ATTENDANCE_DATE`       |
-
 
 
 #### 3.3.2 Parameters:
