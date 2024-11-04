@@ -11,12 +11,26 @@
     width: 21px
 }
 
-.callout {
+.note {
   border: solid #c2c2c2 1px;
   padding: 10px 15px;
   border-radius: 10px;
+  border-left: solid #5c95f7 10px;
 }
 
-.callout-important {
+.note::before {
+  content: '💡';
+  margin-right: 10px;
+}
+
+.alert {
+  border: solid #c2c2c2 1px;
+  padding: 10px 15px;
+  border-radius: 10px;
   border-left: solid #ed2c0e 10px;
+}
+
+.alert::before {
+  content: '❗';
+  margin-right: 10px;
 }

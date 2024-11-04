@@ -51,10 +51,11 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 
 ## Feature Categories
 
-<div class="callout callout-important" markdown="span">
+<div class="alert" markdown="span">
 You are strongly recommended to read through [CommandStructure](#CommandStructure) before proceeding with this section
 </div>
 
+<br>
 This user guide is divided into four main feature categories:
 
 1. **Client Management Commands**
