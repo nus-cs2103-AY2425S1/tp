@@ -166,7 +166,8 @@ public class Person {
                 && familySize.equals(otherPerson.familySize)
                 && tags.equals(otherPerson.tags)
                 && updatedAt.equals(otherPerson.updatedAt)
-                && schemes.equals(otherPerson.schemes);
+                && schemes.containsAll(otherPerson.schemes)
+                && otherPerson.schemes.containsAll(schemes);
     }
 
     @Override
