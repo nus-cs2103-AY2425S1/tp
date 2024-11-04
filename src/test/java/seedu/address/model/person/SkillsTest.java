@@ -31,12 +31,16 @@ public class SkillsTest {
         // invalid skills
         assertFalse(Skills.isValidSkillsString("")); // empty string
         assertFalse(Skills.isValidSkillsString(" ")); // spaces only
+        assertFalse(Skills.isValidSkillsString("   ")); // more spaces only
         assertFalse(Skills.isValidSkillsString("Coding, , Communication")); // double commas
-        assertFalse(Skills.isValidSkillsString("A very long skill name exceeding thirty characters")); // too long
+        assertFalse(Skills.isValidSkillsString("A very long skill name exceeding forty characters")); // too long
 
         // valid skills
         assertTrue(Skills.isValidSkillsString("Coding")); // single valid skill
         assertTrue(Skills.isValidSkillsString("Coding, Communication")); // two valid skills
+        assertTrue(Skills.isValidSkillsString("C#")); // skill with '#'
+        assertTrue(Skills.isValidSkillsString("AWS: Certified Solutions Architect")); // skill with ':'
+        assertTrue(Skills.isValidSkillsString("Time Management")); // skill with space in the middle
         assertTrue(Skills.isValidSkillsString("ProblemSolving, CriticalThinking, Leadership")); // multiple valid skills
     }
 
