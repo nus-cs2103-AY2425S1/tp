@@ -32,7 +32,10 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    public static final String INVALID_HISTORY_DATE = "History contains entries with dates after the date of creation!";
+    public static final String INVALID_HISTORY_DATE_BEFORE_CREATION =
+            "History contains entries with dates before the date of creation!";
+    public static final String INVALID_HISTORY_DATE_IN_FUTURE =
+            "History contains entries with dates in the future!";
     private final String name;
     private final String phone;
     private final String email;
@@ -148,12 +151,20 @@ class JsonAdaptedPerson {
                     DateOfCreation.class.getSimpleName()));
         }
         LocalDate creationDateForChronicleCheck = LocalDate.parse(dateOfCreation);
+        LocalDate today = LocalDate.now();
         boolean hasEntryInTheFuture;
-        Stream<Boolean> isBeforeStream = historyEntries.stream()
-                .map(e -> e.toDate().isBefore(creationDateForChronicleCheck) || e.toDate().isAfter(LocalDate.now()));
-        hasEntryInTheFuture = isBeforeStream.reduce(false, (a, b) -> a || b);
+        Stream<Boolean> isAfterStream = historyEntries.stream()
+                .map(e -> e.toDate().isAfter(today));
+        hasEntryInTheFuture = isAfterStream.reduce(false, (a, b) -> a || b);
         if (hasEntryInTheFuture) {
-            throw new IllegalValueException(INVALID_HISTORY_DATE);
+            throw new IllegalValueException(INVALID_HISTORY_DATE_IN_FUTURE);
+        }
+        boolean hasEntryInBeforeCreation;
+        Stream<Boolean> isBeforeStream = historyEntries.stream()
+                .map(e -> e.toDate().isBefore(creationDateForChronicleCheck));
+        hasEntryInBeforeCreation = isBeforeStream.reduce(false, (a, b) -> a || b);
+        if (hasEntryInBeforeCreation) {
+            throw new IllegalValueException(INVALID_HISTORY_DATE_BEFORE_CREATION);
         }
         final DateOfCreation modalDateOfCreation = new DateOfCreation(LocalDate.parse(dateOfCreation));
         final History modelHistory = History.fromJsonEntries(modalDateOfCreation, historyEntries);
