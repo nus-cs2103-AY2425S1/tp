@@ -53,13 +53,11 @@ public class AppointmentCard extends UiPart<Region> {
     public AppointmentCard(Appointment appointment, int displayedIndex) {
         super(FXML);
         this.appointment = appointment;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a");
 
         id.setText(displayedIndex + ". ");
         appointmentId.setText(String.valueOf(appointment.getAppointmentId()));
         personId.setText(String.valueOf(appointment.getPersonId()));
         appointmentType.setText(appointment.getAppointmentType().value);
-        dateTime.setText(appointment.getAppointmentDateTime().format(formatter));
         dateTime.setText(formatDateTimeForDisplay(appointment.getAppointmentDateTime()));
         personName.setText(appointment.getPerson().getName().fullName);
         sickness.setText(appointment.getSickness() != null ? appointment.getSickness().value : "null");

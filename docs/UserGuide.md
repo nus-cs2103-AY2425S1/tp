@@ -292,6 +292,12 @@ Adds an appointment to the DocTrack.
 - `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
 - `add appt i/2 ty/Follow-up d/2024-02-01 16:40 s/Asthma m/Inhaler` adds an appointment to the person with personId `2`. The appointment has appointment type `Follow-up`, date and time `2024-02-01 16:40`, sickness `Asthma`, and medicine `Inhaler`.
 
+<box type="tip" seamless>
+
+**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, it will be displayed as `Month Date, Year, Time`. For example, `2024-12-10 12:30` will be displayed as `December 10, 2024, 12:30 
+pm`.
+</box>
+
 <br>
 
 ##### Listing all appointments : `list appt`
