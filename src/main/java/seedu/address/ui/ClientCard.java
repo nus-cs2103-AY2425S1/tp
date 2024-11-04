@@ -68,7 +68,7 @@ public class ClientCard extends UiPart<Region> {
 
     private void createTier() {
         String tierText = client.getTier().toParsableString();
-        if (!tierText.isEmpty()) {  // Check if there’s any tier text
+        if (!tierText.isEmpty()) {
             Label tierLabel = new Label(tierText.toUpperCase());
 
             // Apply the existing style classes
@@ -81,8 +81,8 @@ public class ClientCard extends UiPart<Region> {
             // Add the label to the FlowPane
             assignedTier.getChildren().add(tierLabel);
         } else {
-            assignedTier.setVisible(false);  // Hide the FlowPane if it's empty
-            assignedTier.setManaged(false);  // Exclude it from layout calculations
+            assignedTier.setVisible(false); // Hide the FlowPane if it's empty
+            assignedTier.setManaged(false); // Exclude it from layout calculations
         }
     }
 
@@ -108,9 +108,9 @@ public class ClientCard extends UiPart<Region> {
 
     private String getStatusStyleClass(Status.StatusEnum status) {
         return switch (status) {
-            case URGENT -> "urgent-status";
-            case NON_URGENT -> "nonUrgent-status";
-            default -> ""; // This case won’t occur due to the check in createStatus
+        case URGENT -> "urgent-status";
+        case NON_URGENT -> "nonUrgent-status";
+        default -> ""; // This case won’t occur due to the check in createStatus
         };
     }
 }
