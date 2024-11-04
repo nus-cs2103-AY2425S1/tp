@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddGameCommand;
-import seedu.address.logic.commands.AddGameCommand.AddGameDescriptor;
+import seedu.address.logic.commands.AddGameCommand.GameDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -40,7 +40,7 @@ public class AddGameCommandParser implements Parser<AddGameCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GAME, PREFIX_USERNAME, PREFIX_SKILLLEVEL, PREFIX_ROLE);
 
-        AddGameDescriptor addGameDescriptor = new AddGameDescriptor();
+        GameDescriptor addGameDescriptor = new GameDescriptor();
 
         if (argMultimap.getValue(PREFIX_USERNAME).isPresent()) {
             addGameDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get()));

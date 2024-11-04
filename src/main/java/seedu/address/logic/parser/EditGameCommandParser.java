@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddGameCommand.GameDescriptor;
 import seedu.address.logic.commands.EditGameCommand;
-import seedu.address.logic.commands.EditGameCommand.EditGameDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -38,7 +38,7 @@ public class EditGameCommandParser implements Parser<EditGameCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GAME, PREFIX_USERNAME, PREFIX_SKILLLEVEL, PREFIX_ROLE);
 
-        EditGameDescriptor editGameDescriptor = new EditGameDescriptor();
+        GameDescriptor editGameDescriptor = new GameDescriptor();
 
         if (argMultimap.getValue(PREFIX_USERNAME).isPresent()) {
             editGameDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get()));

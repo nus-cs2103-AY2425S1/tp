@@ -47,7 +47,7 @@ public class AddGameCommand extends Command {
     public static final String MESSAGE_GAME_EXISTS = "The game provided already exists for that person.";
 
     private final Index index;
-    private final AddGameDescriptor addGameDescriptor;
+    private final GameDescriptor addGameDescriptor;
     private final String gameName;
 
     private Person personToEdit;
@@ -57,13 +57,13 @@ public class AddGameCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param addGameDescriptor details to edit the person with
      */
-    public AddGameCommand(Index index, String gameName, AddGameDescriptor addGameDescriptor) {
+    public AddGameCommand(Index index, String gameName, GameDescriptor addGameDescriptor) {
         requireNonNull(index);
         requireNonNull(addGameDescriptor);
 
         this.index = index;
         this.gameName = gameName;
-        this.addGameDescriptor = new AddGameDescriptor(addGameDescriptor);
+        this.addGameDescriptor = new GameDescriptor(addGameDescriptor);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class AddGameCommand extends Command {
     /**
      * Creates and returns a {@code Game} with the details of {@code addGameDescriptor}
      */
-    private static Game createNewGame(String gameName, AddGameCommand.AddGameDescriptor addGameDescriptor) {
+    private static Game createNewGame(String gameName, AddGameCommand.GameDescriptor addGameDescriptor) {
         Username updatedUsername = addGameDescriptor.getUsername().orElse(new Username(""));
         SkillLevel updatedSkillLevel = addGameDescriptor.getSkillLevel().orElse(new SkillLevel(""));
         Role updatedRole = addGameDescriptor.getRole().orElse(new Role(""));
@@ -140,18 +140,20 @@ public class AddGameCommand extends Command {
     /**
      * Stores the details for the game to be added.
      */
-    public static class AddGameDescriptor {
+    public static class GameDescriptor {
+        private String game;
         private Username username;
         private SkillLevel skillLevel;
         private Role role;
         private boolean isFavourite;
 
-        public AddGameDescriptor() {}
+        public GameDescriptor() {}
 
         /**
          * Copy constructor.
          */
-        public AddGameDescriptor(AddGameCommand.AddGameDescriptor toCopy) {
+        public GameDescriptor(AddGameCommand.GameDescriptor toCopy) {
+            setGame(toCopy.game);
             setUsername(toCopy.username);
             setSkillLevel(toCopy.skillLevel);
             setRole(toCopy.role);
@@ -162,6 +164,13 @@ public class AddGameCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(username, skillLevel, role);
+        }
+        public void setGame(String game) {
+            this.game = game;
+        }
+
+        public Optional<String> getGame() {
+            return Optional.ofNullable(game);
         }
         public void setUsername(Username username) {
             this.username = username;
@@ -198,14 +207,14 @@ public class AddGameCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof AddGameCommand.AddGameDescriptor)) {
+            if (!(other instanceof AddGameCommand.GameDescriptor)) {
                 return false;
             }
 
-            AddGameCommand.AddGameDescriptor otherAddGameDescriptor = (AddGameCommand.AddGameDescriptor) other;
-            return Objects.equals(username, otherAddGameDescriptor.username)
-                    && Objects.equals(skillLevel, otherAddGameDescriptor.skillLevel)
-                    && Objects.equals(role, otherAddGameDescriptor.role);
+            AddGameCommand.GameDescriptor otherGameDescriptor = (AddGameCommand.GameDescriptor) other;
+            return Objects.equals(username, otherGameDescriptor.username)
+                    && Objects.equals(skillLevel, otherGameDescriptor.skillLevel)
+                    && Objects.equals(role, otherGameDescriptor.role);
         }
 
         @Override
