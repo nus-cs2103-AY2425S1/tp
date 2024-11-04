@@ -10,7 +10,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSu
 import static hallpointer.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
-import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.Messages;
 import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescriptor;
-import hallpointer.address.model.AddressBook;
+import hallpointer.address.model.HallPointer;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
 import hallpointer.address.model.UserPrefs;
@@ -33,7 +33,7 @@ import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
  */
 public class UpdateMemberCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHallPointer(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class UpdateMemberCommandTest {
         String expectedMessage = String.format(
                 UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HallPointer(model.getHallPointer()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), updatedMember);
 
         assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
@@ -67,7 +67,7 @@ public class UpdateMemberCommandTest {
         String expectedMessage = String.format(
                 UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HallPointer(model.getHallPointer()), new UserPrefs());
         expectedModel.setMember(lastMember, updatedMember);
 
         assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
@@ -82,7 +82,7 @@ public class UpdateMemberCommandTest {
         String expectedMessage = String.format(
                 UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HallPointer(model.getHallPointer()), new UserPrefs());
 
         assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
     }
@@ -99,7 +99,7 @@ public class UpdateMemberCommandTest {
         String expectedMessage = String.format(
                 UpdateMemberCommand.MESSAGE_SUCCESS, Messages.format(updatedMember));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new HallPointer(model.getHallPointer()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), updatedMember);
 
         assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
@@ -119,7 +119,7 @@ public class UpdateMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
         // update member in filtered list into a duplicate in address book
-        Member memberInList = model.getAddressBook().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
+        Member memberInList = model.getHallPointer().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
                 new UpdateMemberDescriptorBuilder(memberInList).build());
 
@@ -144,7 +144,7 @@ public class UpdateMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
         Index outOfBoundIndex = INDEX_SECOND_MEMBER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getHallPointer().getMemberList().size());
 
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(outOfBoundIndex,
                 new UpdateMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());

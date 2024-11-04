@@ -13,8 +13,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.commands.exceptions.CommandException;
-import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.HallPointer;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.ModelStub;
@@ -129,8 +129,8 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyHallPointer getHallPointer() {
+            return new HallPointer();
         }
     }
 
