@@ -58,7 +58,7 @@ public class EditCommand extends Command {
     private final EditBuyerDescriptor editBuyerDescriptor;
 
     /**
-     * @param index of the buyer in the filtered buyer list to edit
+     * @param index               of the buyer in the filtered buyer list to edit
      * @param editBuyerDescriptor details to edit the buyer with
      */
     public EditCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
@@ -95,7 +95,8 @@ public class EditCommand extends Command {
      * edited with {@code editBuyerDescriptor}.
      */
     private static Buyer createEditedBuyer(Buyer buyerToEdit, EditBuyerDescriptor editBuyerDescriptor) {
-        assert buyerToEdit != null;
+        requireNonNull(buyerToEdit);
+        requireNonNull(editBuyerDescriptor);
 
         Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
@@ -141,7 +142,8 @@ public class EditCommand extends Command {
         private Budget budget;
         private Set<Tag> tags;
 
-        public EditBuyerDescriptor() {}
+        public EditBuyerDescriptor() {
+        }
 
         /**
          * Copy constructor.

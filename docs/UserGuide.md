@@ -120,7 +120,25 @@ Examples:
 * Upon entering the application, the parser mode is set to `b`.
 * `switch` followed by `m` switches the parser mode to meet-ups.
 
-## Buyer Mode
+<img src="images/SwitchMeetUpBefore.png" width="45%"> <img src="images/SwitchMeetUpAfter.png" width="45%">
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about parser mode-switching:**<br>
+
+* The mode before the switch can be seen at the top bar, where it says `Viewing: Buyers`, after the switch it changes to `Viewing: Meet Ups`.
+
+* The view also automatically changes from showing `Buyers` to `Meet Ups` after the switch command, this view will also change appropriately when switching to `b` or `p`.
+
+* The mode is important for command execution, e.g. to `add` a `Buyer`, you need to be in the `b` mode, to `add` a `MeetUp`, you need to be in the `m` mode, etc.
+</div>
+
+## Buyers
+<div markdown="block" class="alert alert-info">
+
+**:information_source: These commands are for when the parser is in `b` mode (Buyer mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+</div>
+
 In buyer mode, you will be able to store and view the list of buyer's details.
 
 ![buyer_mode display](images/BuyerModeDisplay.png)
@@ -204,6 +222,10 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the displayed results of the `find` command.
 
 ## Meet Up
+<div markdown="block" class="alert alert-info">
+
+**:information_source: These commands are for when the parser is in `m` mode (MeetUp mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+</div>
 ### Adding a meetup: `add`
 
 Adds a meet-up to the meet-up list.
@@ -230,8 +252,7 @@ Format: `view`
 
 <div>
 
-Examples:
-* `view` will show you all meet-ups in the meet-up list.
+Examples: `view` will show you all meet-ups in the meet-up list.
 </div>
 
 ### Editing a meet-up : `edit`
@@ -279,6 +300,10 @@ Examples:
 * `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
 
 ## Properties
+<div markdown="block" class="alert alert-info">
+
+**:information_source: These commands are for when the parser is in `p` mode (Property mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
+</div>
 ### Adding a property: `add`
 
 Adds a property to the property list.
@@ -330,7 +355,10 @@ Examples:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BuyerList home folder.
+**A**: Install the app in the other computer and overwrite the empty data files (`buyerlist.json`, `meetuplist.json`, and `propertylist.json`) it creates with the respective files that contain your previous data (which should be in the old `buyerlist.json`, `meetuplist.json`, and `propertylist.json`).
+
+**Q**: How do I add MeetUps or Properties? I can only add buyers<br>
+**A**: You are likely in the `BuyerMode` indicated by the `Viewing: Buyers` shown at the top bar, to switch to `MeetUpMode`, use `switch m`, and to switch to `Property Mode`, use `switch p`. For more details, see [Switching parser modes](#switching-parser-modes--switch).
 
 --------------------------------------------------------------------------------------------------------------------
 

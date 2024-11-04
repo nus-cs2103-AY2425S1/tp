@@ -53,12 +53,14 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(toAdd);
 
         if (model.hasMeetUp(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETUP);
         }
 
         model.addMeetUp(toAdd);
+        assert(model.hasMeetUp(toAdd)); // verify meet up successfully added
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
                 false, false, true, false, false);
     }
