@@ -120,17 +120,30 @@ Finds persons whose attributes contain any of the given keywords.
 Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. both `filter n/Alex Yeoh` and `filter n/Yeoh Alex` will return the student, Alex Yeoh
+* Only full words will be matched e.g. `Han` will not match `Hans`, `example.com` will not match `alexyeoh@example.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Similar for emergency contact names and addresses
 * As for phone numbers, register numbers and class, the entire number must be provided in the command to filter
+* Multiple predicates can be provided, for example, in terms of multiple names or multiple attributes.
+  e.g. both `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will return both Alex's and Bernice's details
+  e.g. `filter s/F p/99999999` will return a female student with the phone number 99999999
+* When multiple predicates are filtered e.g. `filter s/F p/99999999`, an `AND` search is run to return the student with all of the attributes mentioned
+* When only one predicate is used but multiple values are provided e.g. `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
+* When multiple predicates and multiple values are to be filtered, both an `OR` and an`AND` search is run:
+  * e.g. Student 1 - name: Alex & phone number: 99999999, Student 2 - name: Bernice & phone number: 92443567, Student 3 - name: Christine & phone number: 88888888
+  * e.g. `filter n/Alex Bernice p/99999999 92443567` where the order of the names and phone numbers match, an AND search is run to make sure that the student has matched both a name and a phone number, and an OR search is run to see if multiple students match a name and a phone number. Hence, both Alex and Bernice are returned as depicted in the image below.
+![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)
+  * e.g. `filter n/Alex Bernice p/92443567 99999999` where the order of the phone numbers are reversed, still, both Alex and Bernice are returned. 
+  * e.g. `filter n/Alex Bernice p/99999999 92443567 88888888`, only Alex and Bernice are returned.
+  * e.g. `filter n/Alex Bernice Christine p/99999999 92443567 00000000`, only Alex and Bernice are returned, as depicted in the image below.
+  ![Filter1 - Failure.png](images%2FFilter1%20-%20Failure.png)
 
 Examples:
 * `filter n/John` returns `john` and `John Doe`
-* `filter p/99999999` returns `Alex Yeoh` 
+* `filter p/99999999` returns `Alex Yeoh`
+* `filter n/John Alex` returns `John Doe` and `Alex Yeoh` 
 * This image shows how students can be filtered using their phone number (99999999 - Alex Yeoh)
 ![filter_by_phone.png](images%2Ffilter_by_phone.png)
 
