@@ -333,6 +333,7 @@ public class PersonPredicateBuilder {
                 .add("addressKeywords", addressKeywords)
                 .add("phoneKeywords", phoneKeywords)
                 .add("emailKeywords", emailKeywords)
+                .add("feesKeywords", feesKeywords)
                 .add("isSetName", isSetName)
                 .add("isSetClassId", isSetClassId)
                 .add("isSetMonthPaid", isSetMonthPaid)
@@ -341,6 +342,7 @@ public class PersonPredicateBuilder {
                 .add("isSetAddress", isSetAddress)
                 .add("isSetPhone", isSetPhone)
                 .add("isSetEmail", isSetEmail)
+                .add("isSetFees", isSetFees)
                 .toString();
     }
 }
