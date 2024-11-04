@@ -12,9 +12,10 @@ import static seedu.address.logic.commands.CommandTestUtil.FAMILY_SIZE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAMILY_SIZE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FORMAT_DATE_OF_BIRTH_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FUTURE_DATE_OF_BIRTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -110,7 +111,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_DATE_OF_BIRTH_DESC, DateOfBirth.MESSAGE_CONSTRAINTS); // invalid dob
+        // invalid dob
+        assertParseFailure(parser, "1" + INVALID_FORMAT_DATE_OF_BIRTH_DESC, Messages.MESSAGE_INVALID_DATE_FORMAT);
+        assertParseFailure(parser, "1" + INVALID_FUTURE_DATE_OF_BIRTH_DESC, DateOfBirth.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_INCOME_DESC, Income.MESSAGE_CONSTRAINTS); // invalid income
         assertParseFailure(parser, "1" + INVALID_FAMILY_SIZE_DESC, FamilySize.MESSAGE_CONSTRAINTS); //invalid familySize
 
@@ -246,7 +249,8 @@ public class EditCommandParserTest {
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
                 + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_DATE_OF_BIRTH_DESC + INVALID_DATE_OF_BIRTH_DESC
+                + INVALID_FORMAT_DATE_OF_BIRTH_DESC + INVALID_FUTURE_DATE_OF_BIRTH_DESC
+                + INVALID_FORMAT_DATE_OF_BIRTH_DESC + INVALID_FUTURE_DATE_OF_BIRTH_DESC
                 + INVALID_INCOME_DESC + INVALID_INCOME_DESC
                 + INVALID_FAMILY_SIZE_DESC + INVALID_FAMILY_SIZE_DESC;
 

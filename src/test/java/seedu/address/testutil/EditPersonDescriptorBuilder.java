@@ -109,8 +109,6 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code FamilySize} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withFamilySize(int familySize) {
-        assert FamilySize.isValidFamilySize(familySize);
-
         descriptor.setFamilySize(new FamilySize(familySize));
         return this;
     }
