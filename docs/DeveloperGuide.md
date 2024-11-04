@@ -220,7 +220,7 @@ The following activity diagram summarizes what happens when a user wants to trac
 
 How an OweCommand operation goes through the `Model` component is shown below:
 
-<puml src="diagrams/OweSequenceDiagram-Model.puml" width="500" />
+<puml src="diagrams/OweSequenceDiagram-Model.puml" alt="OweSequenceDiagram-Model" height="1400" />
 
 #### Design considerations:
 
