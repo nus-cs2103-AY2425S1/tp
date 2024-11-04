@@ -34,7 +34,8 @@ public class ListClaimsCommand extends Command {
     public static final String MESSAGE_LIST_CLAIMS_SUCCESS = "Claims listed for policy type '%1$s' of client: "
             + "%2$s\n\n%3$s";
     public static final String MESSAGE_NO_CLAIMS = "No claims found for policy type '%1$s' of client: %2$s";
-    public static final String MESSAGE_INVALID_CLIENT_INDEX = "The client index provided is invalid.";
+    public static final String MESSAGE_INVALID_CLIENT_INDEX = "The index you provided exceeds the total number of "
+            + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
 
     private final Index clientIndex;
