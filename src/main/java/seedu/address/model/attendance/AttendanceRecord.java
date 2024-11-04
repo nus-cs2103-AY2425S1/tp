@@ -1,22 +1,29 @@
 package seedu.address.model.attendance;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
 /**
- * Represents a record of a student's attendance on a particular date.
+ * Represents an attendance record for a single date.
  */
-public class AttendanceRecord {
+public class AttendanceRecord implements Observable {
     private final LocalDate date;
     private Attendance attendance;
+    private final List<InvalidationListener> listeners = new ArrayList<>();
 
     /**
-     *  Constructs an {@code AttendanceRecord} object.
+     * Creates an AttendanceRecord with the specified date and attendance.
      * @param date The date of the attendance record.
-     * @param attendance The attendance status of the student on the date.
+     * @param attendance The attendance status (present/absent).
      */
     public AttendanceRecord(LocalDate date, Attendance attendance) {
         this.date = date;
         this.attendance = attendance;
+        notifyListeners();
     }
 
     public LocalDate getDate() {
@@ -29,27 +36,47 @@ public class AttendanceRecord {
 
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
+        notifyListeners();
     }
 
     @Override
-    public String toString() {
-        return date + " [" + (attendance.value.equals("p") ? "x" : " ") + "]";
+    public void addListener(InvalidationListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        listeners.remove(listener);
+    }
+
+    private void notifyListeners() {
+        List<InvalidationListener> listenersCopy = new ArrayList<>(listeners);
+        for (InvalidationListener listener : listenersCopy) {
+            listener.invalidated(this);
+        }
     }
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) {
+        if (other == this) {
             return true;
         }
         if (!(other instanceof AttendanceRecord)) {
             return false;
         }
         AttendanceRecord otherRecord = (AttendanceRecord) other;
-        return date.equals(otherRecord.date) && attendance.equals(otherRecord.attendance);
+        return otherRecord.getDate().equals(getDate())
+                && otherRecord.getAttendance().equals(getAttendance());
     }
 
     @Override
     public int hashCode() {
         return date.hashCode() + attendance.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return date + ": " + attendance;
+    }
+
 }

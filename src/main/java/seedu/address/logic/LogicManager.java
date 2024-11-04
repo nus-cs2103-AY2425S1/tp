@@ -9,9 +9,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandStack;
-import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,7 +35,6 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final CommandStack commandStack;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -44,7 +43,6 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        commandStack = CommandStack.getInstance();
     }
 
     @Override
@@ -54,9 +52,8 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-        if (!(command instanceof UndoCommand)) {
-            commandStack.push(command);
-        }
+        CommandStack.pushCommand(command);
+        CommandHistory.addCommand(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

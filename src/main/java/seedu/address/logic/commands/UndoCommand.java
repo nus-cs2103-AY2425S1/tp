@@ -15,11 +15,11 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        CommandStack commandStack = CommandStack.getInstance();
-        if (commandStack.isEmpty()) {
+        Command command = CommandStack.popCommand();
+        if (command == null) {
             return new CommandResult("There are no commands to undo");
         }
-        Command command = commandStack.pop();
+
         boolean isUndoable = command.undo(model);
         if (!isUndoable) {
             return new CommandResult("The previous command is not undoable");

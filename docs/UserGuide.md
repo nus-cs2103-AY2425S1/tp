@@ -30,11 +30,11 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `adds n/John Doe p/98765432 tg/G17 sn/A1234567Z` : Adds a student named `John Doe` to the Teletutor contact list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `deletes n/John Doe` : Deletes the contact with the name John Doe.
 
-   * `clear` : Deletes all contacts.
+   * `deleteall` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -49,18 +49,15 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `adds n/NAME`, `NAME` is a parameter which can be used as `adds n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `n/NAME [sn/STUDENT_NUMBER]` can be used as `n/John Doe sn/A1234567Z` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `deleteall`, `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -75,43 +72,58 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a student: `adds`
 
-Adds a person to the address book.
+Adds a student to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/STUDENT_NUMBER`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A student must have a unique student number, so if the same student number is used for a new student, the user will be informed that the student already exists in the list.
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `adds n/John Doe p/98765432 tg/G69 sn/E1234567I`
+* `adds n/Betsy Crowe tg/G16 p/23456789 sn/A1234567Z`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the contact list.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person : `edits`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edits INDEX [n/NAME] [p/PHONE] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person to be `91234567` and `Z19` respectively.
+*  `edits 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+
+### Undoing the previous command : `undo`
+
+Undoes the previous command that changed the data.
+
+Format: `undo`
+
+### Locating person by name: `view`
+
+Views student whose name matches the specified name exactly.
+
+Format: `view NAME`
+
+* The given name must match the student's name exactly. e.g `view John` will not return `John Doe`'s details.
+* If more than one student share the exact same name, all the students with that name will be displayed.
+
+Examples: 
+* `view Alex Yeoh` Displays the details of all students with the name `Alex Yeoh`.
 
 ### Locating persons by name: `find`
 
@@ -131,15 +143,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a specific student : `deletes`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
-Format: `delete INDEX`
+Format: `deletes n/STUDENT_NAME`
+Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the student with the specified details.
+* The student name refers to the student name shown in the displayed list of students.
+* The student number refers to the student number shown in the displayed list of students.
+* The student number **must be in the following format** A1234567B …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -157,11 +171,56 @@ Exits the program.
 
 Format: `exit`
 
+## Attendance Commands
+
+<box type="tip" seamless>
+
+**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+</box>
+
+
 ### Marking Attendance : `markat`
 
-Marks attendance of student for a particular date
+* Marks attendance of student for a particular date with the specified details.
 
-Format: `markat n/STUDENT_NAME d/DATE`
+* Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+
+### Marking Tutorial Group Attendance : `markpresentall`
+
+* Marks all students in a tutorial group as present for a particular date
+
+* Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
+
+### Unmarking Tutorial Group Attendance : `Unmarkpresentall`
+
+* Marks all students in a tutorial group as absent for a particular date
+
+* Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
+
+### Deleting Attendance : `deleteat`
+
+* Deletes attendance of student for a particular date with the specified details.
+
+* Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+
+### Deleting Tutorial Group Attendance : `deleteatall`
+
+* Deletes attendance of all students in a tutorial group for a particular date
+
+* Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
+
+### Getting Attendance : `getat`
+
+* Gets attendance of student for a particular date
+
+* Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+
+### Getting Tutorial Group Attendance : `getattg`
+
+* Opens an attendance window for all students in a tutorial group for a particular date
+
+* Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+
 
 ### Saving the data
 
@@ -202,10 +261,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
+**Add**    | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`
+**Clear**   | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Undo**   | `undo`
