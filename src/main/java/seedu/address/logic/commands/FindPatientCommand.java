@@ -14,11 +14,13 @@ import seedu.address.model.patient.FindPatientPredicate;
  */
 public class FindPatientCommand extends Command {
     public static final String COMMAND_WORD = "find-patient";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "find-patient command not implemented yet";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose names contain "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "The order of the keywords matter and only patients matching all keywords will be returned "
+            + "(i.e AND search). \n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " Hans Bo\n"
+            + "Note: KEYWORDS must only contain alphabets and spaces";
 
     private final FindPatientPredicate predicate;
 
