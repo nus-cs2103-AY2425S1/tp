@@ -21,10 +21,16 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CustomerOrderListStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCustomerOrderListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonSupplyOrderListStorage;
+import seedu.address.storage.SupplyOrderListStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -58,7 +64,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CustomerOrderListStorage customerOrderListStorage = new JsonCustomerOrderListStorage(userPrefs.getCustomerOrderListFilePath());
+        SupplyOrderListStorage supplyOrderListStorage = new JsonSupplyOrderListStorage(userPrefs.getSupplyOrderListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, customerOrderListStorage, supplyOrderListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -90,7 +98,37 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<CustomerOrderList> customerOrderListOptional;
+        CustomerOrderList initialCustomerOrderListData;
+        try {
+            customerOrderListOptional = storage.readCustomerOrderList();
+            if (!customerOrderListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCustomerOrderListFilePath()
+                        + " populated with a sample CustomerOrderList.");
+            }
+            initialCustomerOrderListData = customerOrderListOptional.orElseGet(SampleDataUtil::getSampleCustomerOrderList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getCustomerOrderListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty CustomerOrderList.");
+            initialCustomerOrderListData = new CustomerOrderList();
+        }
+
+        Optional<SupplyOrderList> supplyOrderListOptional;
+        SupplyOrderList initialSupplyOrderListData;
+        try {
+            supplyOrderListOptional = storage.readSupplyOrderList();
+            if (!supplyOrderListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getSupplyOrderListFilePath()
+                        + " populated with a sample SupplyOrderList.");
+            }
+            initialSupplyOrderListData = supplyOrderListOptional.orElseGet(SampleDataUtil::getSampleSupplyOrderList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getSupplyOrderListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty SupplyOrderList.");
+            initialSupplyOrderListData = new SupplyOrderList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialCustomerOrderListData, initialSupplyOrderListData);
     }
 
     private void initLogging(Config config) {
@@ -179,6 +217,8 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping AddressBook ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveCustomerOrderList(model.getCustomerOrderList());
+            storage.saveSupplyOrderList(model.getSupplyOrderList());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
