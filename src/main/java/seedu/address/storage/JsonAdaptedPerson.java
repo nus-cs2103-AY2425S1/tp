@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
@@ -85,7 +87,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         priority = source.getPriority().name();
         remark = source.getRemark().value;
-        dateOfBirth = source.getDateOfBirth().getValue();
+        dateOfBirth = source.getDateOfBirth().getValue().toString();
         income = source.getIncome().getValue();
         familySize = source.getFamilySize().getValue();
         tags.addAll(source.getTags().stream()
@@ -155,10 +157,20 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfBirth.class.getSimpleName()));
         }
-        if (!DateOfBirth.isValidDate(dateOfBirth)) {
+
+        final DateOfBirth modelDateOfBirth;
+        final LocalDate dateOfBirthLocalDate;
+
+        try {
+            dateOfBirthLocalDate = LocalDate.parse(dateOfBirth);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_DATE_FORMAT);
+        }
+
+        if (!DateOfBirth.isValidDate(dateOfBirthLocalDate)) {
             throw new IllegalValueException(DateOfBirth.MESSAGE_CONSTRAINTS);
         }
-        final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
+        modelDateOfBirth = new DateOfBirth(dateOfBirthLocalDate);
 
         final Income modelIncome;
         if (income == null) {

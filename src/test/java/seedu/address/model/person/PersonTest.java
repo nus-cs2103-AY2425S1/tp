@@ -13,6 +13,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -95,7 +97,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different date of birth -> returns false
-        editedAlice = new PersonBuilder(ALICE).withDateOfBirth("28 May 1978").build();
+        editedAlice = new PersonBuilder(ALICE).withDateOfBirth(LocalDate.of(1978, 5, 28)).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different income -> returns false
