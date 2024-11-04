@@ -1,17 +1,17 @@
 package bizbook.logic.commands;
 
+import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
+import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import bizbook.commons.core.index.Index;
 import bizbook.logic.Messages;
 import bizbook.logic.commands.exceptions.CommandException;
 import bizbook.model.Model;
 import bizbook.model.person.Note;
 import bizbook.model.person.Person;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static bizbook.commons.util.CollectionUtil.requireAllNonNull;
-import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits a note of an existing person in the address book.
@@ -35,8 +35,10 @@ public class EditNotesCommand extends Command {
     private final Note note;
 
     /**
-     * @param personIndex of the person in the filtered person list to edit the notes
-     * @param noteIndex   of the person in the filtered person list to edit the notes
+     * @param personIndex of the person in the filtered person list to edit the
+     *                    notes
+     * @param noteIndex   of the person in the filtered person list to edit the
+     *                    notes
      * @param note        of the person to be updated to
      */
     public EditNotesCommand(Index personIndex, Index noteIndex, Note note) {
@@ -77,7 +79,8 @@ public class EditNotesCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message the remark is added to or removed from
+     * Generates a command execution success message the remark is added to or
+     * removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
@@ -94,7 +97,6 @@ public class EditNotesCommand extends Command {
         notesList.set(noteIndex.getZeroBased(), note);
         ArrayList<Note> editedNotes = new ArrayList<>(notesList);
 
-
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedNotes);
     }
@@ -110,9 +112,9 @@ public class EditNotesCommand extends Command {
             return false;
         }
 
-        return personIndex.equals(otherEditNotesCommand.personIndex) &&
-                noteIndex.equals(otherEditNotesCommand.noteIndex) &&
-                note.equals(otherEditNotesCommand.note);
+        return personIndex.equals(otherEditNotesCommand.personIndex)
+                && noteIndex.equals(otherEditNotesCommand.noteIndex)
+                && note.equals(otherEditNotesCommand.note);
     }
 
 }
