@@ -134,6 +134,7 @@ public class ModelManager implements Model {
 
     @Override
     public Map<Person, ArrayList<Lesson>> getClashingLessons(Lesson lesson) {
+        assert lesson != null;
         return addressBook.getClashingLessons(lesson);
     }
 

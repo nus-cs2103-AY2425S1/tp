@@ -87,6 +87,7 @@ public class Lesson {
      *          false otherwise.
      */
     public static boolean isValidLesson(String lesson) {
+        requireNonNull(lesson);
         String[] parts = lesson.split("\\s+", 2);
         if (parts.length != 2) {
             return false;
@@ -132,6 +133,7 @@ public class Lesson {
      *         {@code false} otherwise.
      */
     public static boolean hasClashingLessonWithinList(List<Lesson> lessons) {
+        assert lessons != null;
         return IntStream.range(0, lessons.size())
                 .anyMatch(i -> IntStream.range(i + 1, lessons.size())
                         .anyMatch(j -> isClashingWithOtherLesson(lessons.get(i), lessons.get(j))));
