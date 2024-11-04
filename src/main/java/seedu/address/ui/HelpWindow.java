@@ -101,7 +101,7 @@ public class HelpWindow extends UiPart<Stage> {
                                 + "[t/ <TIER>] [s/ <STATUS>]"
                                 + "[rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>]",
                         "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
-                                + "ra/ Specialist in eye care"),
+                                + "t/ bronze s/ none ra/ Specialist in eye care"),
                 new CommandSummary("Find a Client by Details",
                         "filter <FLAG>/ <FLAG FIELD>",
                         "filter n/ TAN LESHEW"),
