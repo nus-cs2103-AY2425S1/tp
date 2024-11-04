@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POINTS;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,18 +29,22 @@ public class MarkLessonParticipationCommand extends Command {
 
     public static final String COMMAND_WORD = "markp";
     public static final CommandType COMMAND_TYPE = CommandType.LESSON;
+    public static final int LOWER_BOUND = 0;
+    public static final int UPPER_BOUND = 100;
 
-    // TODO
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the attendance of student(s) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the participation of student(s) "
             + "in a lesson at the chosen index in the lesson list to the specified value. "
+            + "\nIf their participation is set to a positive integer, also sets their attendance to true."
             + "\nParameters: LESSON_INDEX (must be a positive integer) "
             + PREFIX_NAME + "NAME "
-            + PREFIX_ATTENDANCE + "ATTENDANCE (1/y/Y or 0/n/N) "
-            + "\nExample: " + COMMAND_WORD + " 1 n/John Doe n/Jane Doe a/y";
+            + PREFIX_POINTS + "PARTICIPATION (integer from 0-100)"
+            + "\nExample: " + COMMAND_WORD + " 1 n/John Doe pt/1";
 
     public static final String MESSAGE_SUCCESS = "Marked the participation of %s as %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_ADDRESS_BOOK = "Student not found in TAHub: %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND_IN_LESSON = "Student not found in the lesson: %s";
+    public static final String MESSAGE_INVALID_PARTICIPATION =
+            "Participation should be between 0-100 inclusive.";
 
     private final Index index;
     private final List<Name> studentNames;
@@ -68,6 +73,10 @@ public class MarkLessonParticipationCommand extends Command {
             throw new CommandException(String.format(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX, index.getOneBased()));
         }
 
+        if (!isWithinBounds(participationScore)) {
+            throw new CommandException(MESSAGE_INVALID_PARTICIPATION);
+        }
+
         Lesson targetLesson = lastShownLessonList.get(index.getZeroBased());
         Lesson newLesson = new Lesson(targetLesson);
 
@@ -77,6 +86,9 @@ public class MarkLessonParticipationCommand extends Command {
                             String.format(MESSAGE_STUDENT_NOT_FOUND_IN_ADDRESS_BOOK, studentName)));
             try {
                 newLesson.setParticipation(student, participationScore);
+                if (participationScore > 0) {
+                    newLesson.setAttendance(student, true);
+                }
             } catch (StudentNotFoundException e) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND_IN_LESSON, studentName));
             }
@@ -89,6 +101,13 @@ public class MarkLessonParticipationCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, names, participationScore),
                 COMMAND_TYPE);
+    }
+
+    /**
+     * Returns true if the participation score is valid, defined as being within the bounds.
+     */
+    private boolean isWithinBounds(int score) {
+        return LOWER_BOUND <= score && score <= UPPER_BOUND;
     }
 
     @Override
