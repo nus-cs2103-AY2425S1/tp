@@ -19,7 +19,7 @@ public class UiUtil {
      * @param person    The {@code Person} whose name is to be displayed.
      */
     public static void setNameText(Label nameLabel, Person person) {
-        assert(person != null);
+        assert(person != null && nameLabel != null);
         nameLabel.setText(person.getName().fullName);
     }
 
@@ -30,7 +30,7 @@ public class UiUtil {
      * @param person     The {@code Person} whose phone number is to be displayed.
      */
     public static void setPhoneText(Label phoneLabel, Person person) {
-        assert(person != null);
+        assert(person != null && phoneLabel != null);
         phoneLabel.setText(person.getPhone().value);
     }
 
@@ -42,7 +42,7 @@ public class UiUtil {
      * @param person      The person whose address to display on the label.
      */
     public static void setAddressText(Label addressLabel, Person person) {
-        assert(person != null);
+        assert(person != null && addressLabel != null);
         if (person.getAddress().value != null) {
             addressLabel.setText(person.getAddress().value);
             addressLabel.setVisible(true);
@@ -59,7 +59,7 @@ public class UiUtil {
      * @param person        The person whose Telegram username to display on the label.
      */
     public static void setTelegramUsernameText(Label telegramLabel, Person person) {
-        assert(person != null);
+        assert(person != null && telegramLabel != null);
         TelegramUsername username = person.getTelegramUsername();
         if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
             telegramLabel.setText("@" + username.telegramUsername);
@@ -77,7 +77,7 @@ public class UiUtil {
      * @param person The {@code Person} whose email is to be displayed.
      */
     public static void setEmailText(Label emailLabel, Person person) {
-        assert(person != null);
+        assert(person != null && emailLabel != null);
         if (person.getEmail().value != null) {
             emailLabel.setText(person.getEmail().value);
             emailLabel.setVisible(true);
@@ -94,7 +94,7 @@ public class UiUtil {
      * @param person   The {@code Person} whose tags are to be displayed.
      */
     public static void setTags(FlowPane tagsPane, Person person) {
-        assert(person != null);
+        assert(person != null && tagsPane != null);
         tagsPane.getChildren().clear(); // Clear previous tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
