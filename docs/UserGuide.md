@@ -354,11 +354,12 @@ save manually.
 ### Editing the data file
 
 - AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`
-- Transaction data are saved automatically as a JSON file `[JAR file location]/data/transaction.json` 
+- TransactionBook data are saved automatically as a JSON file `[JAR file location]/data/transactionbook.json` 
 - Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SpleetWaise will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Transactions with invalid person IDs will not be loaded into the TransactionBook.<br>
 Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
