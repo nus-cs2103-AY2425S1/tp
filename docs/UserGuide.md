@@ -37,7 +37,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
-![Ui](images/Ui.png) 
+![Ui](images/Ui2.png) 
 
 1. Type the command in the command box at the bottom and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -104,7 +104,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
 Shows a message via a popup window explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage2.png)
 
 **Format:** `help`
 
