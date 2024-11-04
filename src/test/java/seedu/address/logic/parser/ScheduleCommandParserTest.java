@@ -32,14 +32,14 @@ public class ScheduleCommandParserTest {
         // no leading and trailing whitespaces
         ScheduleCommand expectedScheduleCommand =
               new ScheduleCommand(new SchedulePredicate(
-                      new Date(LocalDateTime.of(2024, 2, 16, 18, 45))));
-        assertParseSuccess(parser, " d/ 16/2/2024 1845", expectedScheduleCommand);
+                      new Date(LocalDateTime.of(2024, 2, 16, 0, 0))));
+        assertParseSuccess(parser, " d/ 16/2/2024", expectedScheduleCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n d/ 16/2/2024 1845 \n \t", expectedScheduleCommand);
+        assertParseSuccess(parser, " \n d/ 16/2/2024 \n \t", expectedScheduleCommand);
 
         //empty preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " \n d/ 16/2/2024 1845 \n \t",
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " \n d/ 16/2/2024 \n \t",
               expectedScheduleCommand);
     }
 
@@ -57,28 +57,19 @@ public class ScheduleCommandParserTest {
               String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
     }
 
-    // Invalid date format - missing time
-    @Test
-    void parseInvalidDateFormatMissingTime_throwsParseException() {
-        String invalidDate = "2/12/2024";
-        ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
-        assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.",
-                thrown.getMessage());
-    }
-
     // Invalid date format - incorrect delimiter
     @Test
     void parseInvalidDateFormatWrongDelimiter_throwsParseException() {
         String invalidDate = "2-12-2024 1800";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
-        assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.",
+        assertEquals("Invalid date format! Please use 'd/M/yyyy'. For example, '2/12/2024'.",
                 thrown.getMessage());
     }
 
     // Invalid date values - leap year check
     @Test
     void parseInvalidDateValuesNonLeapYear_throwsParseException() {
-        String invalidDate = "29/2/2023 1800"; // 2023 is not a leap year
+        String invalidDate = "29/2/2023"; // 2023 is not a leap year
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
         assertEquals("Invalid date: FEBRUARY 29 is only valid in leap years.", thrown.getMessage());
     }
@@ -86,29 +77,29 @@ public class ScheduleCommandParserTest {
     // Invalid date values - month with 30 days
     @Test
     void parse_invalidDateValues_throwsParseException() {
-        String invalidDate = "31/4/2024 1800"; // April has only 30 days
+        String invalidDate = "31/4/2024"; // April has only 30 days
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
         assertEquals("Invalid date: APRIL cannot have more than 30 days.", thrown.getMessage());
 
-        String invalidDateTemp = "32/8/2024 1800"; // April has only 30 days
+        String invalidDateTemp = "32/8/2024"; // April has only 30 days
         ParseException thrownTemp =
                 assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDateTemp));
-        assertEquals("Invalid date or time values! Ensure day, month, hour, and minute ranges are correct.",
+        assertEquals("Invalid date or time values! Ensure day and month ranges are correct.",
                 thrownTemp.getMessage());
 
-        String invalidDateFeb = "31/2/2024 1800"; // February has only 29 days
+        String invalidDateFeb = "31/2/2024"; // February has only 29 days
         ParseException thrownFeb = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDateFeb));
         assertEquals("Invalid date: FEBRUARY cannot have more than 29 days.", thrownFeb.getMessage());
     }
 
 
 
-    // Invalid time format
+    // Invalid format time is given
     @Test
     void parse_invalidTimeFormat_throwsParseException() {
-        String invalidTime = "2/12/2024 18:00"; // ':' should not be present
+        String invalidTime = "2/12/2024 1800"; // time is not allowed for schedule feature
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidTime));
-        assertEquals("Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'.",
+        assertEquals("Invalid date format! Please use 'd/M/yyyy'. For example, '2/12/2024'.",
                 thrown.getMessage());
     }
 

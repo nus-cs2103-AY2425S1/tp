@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -8,15 +9,15 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s next appointment date {@code Date} is on the specified date.
  */
 public class SchedulePredicate implements Predicate<Person> {
-    private Date date;
+    private LocalDate date;
 
-    public SchedulePredicate(Date date) {
-        this.date = date;
+    public SchedulePredicate(Date dateAndTime) {
+        this.date = dateAndTime.getDateOnly();
     }
 
     @Override
     public boolean test(Person person) {
-        return person.getDate().equals(date);
+        return person.getDate().getDateOnly().equals(date);
     }
 
     @Override
