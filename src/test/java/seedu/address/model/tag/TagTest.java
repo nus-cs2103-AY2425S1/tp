@@ -26,7 +26,7 @@ public class TagTest {
     }
 
     @Test
-    public void equals() {
+    public void equalsMethod() {
         Tag tag1 = new Tag("friend");
         Tag tag2 = new Tag("friend");
         Tag tag3 = new Tag("family");
