@@ -46,7 +46,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_HOURS, PREFIX_DONATED_AMOUNT, PREFIX_PARTNERSHIP_END_DATE);
 
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).orElse(DEFAULT_ROLE));
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
