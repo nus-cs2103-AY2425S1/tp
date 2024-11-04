@@ -55,13 +55,19 @@ Command:  `enroll`
 
 Usage: `enroll INDEX tut/TUTORIAL_NAME`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL_NAME:` Name of the tutorial
+</div>
+{% endraw %}
 
-| **Note:** Student can only be enrolled into existing tutorial. Use createtut to create new tutorials
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+Student can only be enrolled into existing tutorial. Use createtut to create new tutorials
+</div>
 
 Example usages
 
@@ -80,6 +86,7 @@ Invalid usages
     * *Error Message: This person is already in the tutorial*
 
 * Format errors, check [here](#11-format-errors)
+
 </div>
 {% endraw %}
 
