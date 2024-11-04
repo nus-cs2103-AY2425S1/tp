@@ -4,14 +4,13 @@
 
 AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
 
-> 💡 **Example Use Case**: Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
->
-> ```shell
-> student n/John Doe s/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
-> ```
->
-> This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods.
->
+<div markdown="span" class="alert alert-primary">💡 **Example Use Case**: Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
+
+ ```shell
+ student n/John Doe s/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
+ ```
+ This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods. </div>
+
 AdmiNUS helps you stay organized and efficient, letting you focus on running successful events.
 
 ---
@@ -193,7 +192,7 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`   | Physical address                                   | Compulsory  |
 | `t/TAG`       | Tags to categorize contact (cannot contain spaces) | Optional    |
 
-<div markdown="span" class="alert alert-info"> 🔔**Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
+<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
 
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
 A company can have any number of tags (including 0)
@@ -235,6 +234,7 @@ edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 * For company contact, editing student id field is **prohibited**.
 
 * Existing values will be updated to the input values.
+
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
 </div>
