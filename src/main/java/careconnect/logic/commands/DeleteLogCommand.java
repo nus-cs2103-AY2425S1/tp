@@ -128,7 +128,7 @@ public class DeleteLogCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toDeleteLog", deletedLog)
+                .add("deletedLog", deletedLog)
                 .toString();
     }
 }

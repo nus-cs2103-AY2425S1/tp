@@ -85,6 +85,10 @@ public class Log implements Comparable<Log> {
                 && truncateToMinutes(this.date).equals(truncateToMinutes(otherLog.date));
     }
 
+    /**
+     * Truncates the seconds and milliseconds of a date to zero.
+     * This is used to compare dates without considering seconds and milliseconds.
+     */
     private static Date truncateToMinutes(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);

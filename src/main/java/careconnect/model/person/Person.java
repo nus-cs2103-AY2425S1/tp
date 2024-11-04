@@ -72,8 +72,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable log list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a true copy of the logs list, modifying the returned list will not affect the original list.
      */
     public ArrayList<Log> getLogs() {
         return new ArrayList<>(Collections.unmodifiableList(this.logs));
