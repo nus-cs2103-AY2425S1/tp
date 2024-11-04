@@ -87,11 +87,12 @@ public class AddGradeCommand extends Command {
         Set<Tag> tags = person.getTags();
         Telegram telegram = person.getTelegram();
         Github github = person.getGithub();
+        Set<Integer> weeksAttended = person.getWeeksPresent();
 
         Map<String, Assignment> assignment = person.getAssignment();
         assignment.put(assignmentName, new Assignment(assignmentName, score));
 
-        return new Person(name, phone, email, telegram, tags, github, assignment);
+        return new Person(name, phone, email, telegram, github, assignment, weeksAttended, tags);
     }
 
     @Override
