@@ -355,7 +355,7 @@ UGTeach data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-UGTeach data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" header="##### Caution">
 If your changes to the data file makes its format invalid, UGTeach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
