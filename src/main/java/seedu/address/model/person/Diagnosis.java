@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Diagnosis {
     public static final String MESSAGE_CONSTRAINTS =
-            "Diagnosis must contain at least 1 alphabetic character, and has a limit of 100 characters.\n"
+            "Diagnosis (if specified) must contain at least 1 alphabetic character, and has a limit of 80 characters.\n"
             + "It cannot be empty.";
     public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z]).{1,80}$";
     public final String value;
@@ -25,7 +25,7 @@ public class Diagnosis {
     }
 
     public static boolean isValidDiagnosis(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.isEmpty();
     }
 
     @Override

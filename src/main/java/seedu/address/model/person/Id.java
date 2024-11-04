@@ -26,6 +26,14 @@ public class Id {
         this.value = id;
     }
 
+    /**
+     * Returns true if the input contains at least one non-alphanumeric character.
+     */
+    public boolean containsSpecialChar() {
+        // Regular expression to match any non-alphanumeric character
+        return value.matches(".*[^a-zA-Z0-9].*");
+    }
+
     public static boolean isValidId(String test) {
         return test.matches(VALIDATION_REGEX);
     }
