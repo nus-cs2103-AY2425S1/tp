@@ -27,7 +27,6 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n To add schedule: add-schedule"
             + "\n To delete schedule: delete-schedule"
             + "\n To edit schedule: edit-schedule"
-            + "\n To find associated prefixes: find"
             + "\n To view contacts of a meeting: meeting-contacts"
             + "\n To view all listed meetings: list-schedule"
             + "\n To see a week's schedule: see";

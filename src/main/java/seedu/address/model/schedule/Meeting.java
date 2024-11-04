@@ -131,4 +131,21 @@ public class Meeting {
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Meeting)) {
+            return false;
+        }
+        return isSameMeeting((Meeting) other);
+    }
+
+    @Override
+    public String toString() {
+        return "Meeting: " + meetingName + " on " + meetingDate + " at "
+                + meetingTime + " with contacts: " + convertContactUidsToString();
+    }
 }
