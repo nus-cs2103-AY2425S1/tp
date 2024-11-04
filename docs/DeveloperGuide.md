@@ -598,7 +598,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `history 2`<br>
       Expected: The list is updated to show the call history of the elderly at index 2.
-2. Viewing call history of a elderly by NRIC
+2. Viewing call history of an elderly by NRIC
    1. Test case: `history S1486256J`<br>
       Expected: The list is updated to show the call history of the elderly with NRIC `S1486256J`. One of which contains the note "My test note".
 
