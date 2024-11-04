@@ -38,9 +38,6 @@ public class ConsultationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(consultation.getDate().toString() + ", ");
         time.setText(consultation.getTime().toString());
-        consultation.getStudents().stream()
-                .sorted(Comparator.comparing(student -> student.getName().fullName))
-                .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
 
         // Combine date and time for comparison with current date and time
         LocalDateTime consultationDateTime = LocalDateTime.of(
@@ -59,5 +56,9 @@ public class ConsultationCard extends UiPart<Region> {
             date.getStyleClass().add("consultation-card-strikethrough");
             time.getStyleClass().add("consultation-card-strikethrough");
         }
+
+        consultation.getStudents().stream()
+                .sorted(Comparator.comparing(student -> student.getName().fullName))
+                .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
     }
 }
