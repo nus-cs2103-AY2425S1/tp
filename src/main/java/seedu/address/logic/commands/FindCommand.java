@@ -7,14 +7,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.goods.GoodsCategories;
+import seedu.address.model.person.HasCategoryPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -58,12 +57,8 @@ public class FindCommand extends Command {
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
                 new NameContainsKeywordsPredicate(keywords);
 
-        Predicate<Person> hasCategoryPredicate = person -> model
-                .getGoods()
-                .getReceiptList()
-                .stream()
-                .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
-                .anyMatch(goodsReceipt -> categoriesSet.contains(goodsReceipt.getGoods().getCategory()));
+        HasCategoryPredicate hasCategoryPredicate =
+                new HasCategoryPredicate(model, categoriesSet);
 
         model.updateFilteredPersonList(nameContainsKeywordsPredicate.or(hasCategoryPredicate));
 
