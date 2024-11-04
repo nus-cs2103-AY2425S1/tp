@@ -17,7 +17,7 @@ public class RentalDateTest {
 
     @Test
     public void constructor_invalidRentalDate_throwsIllegalArgumentException() {
-        String invalidRentalDate = "";
+        String invalidRentalDate = " ";
         assertThrows(IllegalArgumentException.class, () -> new RentalDate(invalidRentalDate));
     }
 
@@ -27,7 +27,6 @@ public class RentalDateTest {
         assertThrows(NullPointerException.class, () -> RentalDate.isValidRentalDate(null));
 
         // invalid rental date
-        assertFalse(RentalDate.isValidRentalDate("")); // empty string
         assertFalse(RentalDate.isValidRentalDate(" ")); // spaces only
         assertFalse(RentalDate.isValidRentalDate("31/16/2024")); // invalid month
         assertFalse(RentalDate.isValidRentalDate("99/12/2024")); // invalid date
@@ -44,6 +43,7 @@ public class RentalDateTest {
         assertFalse(RentalDate.isValidRentalDate("01-01-2024")); // wrong divider
 
         // valid rental date
+        assertTrue(RentalDate.isValidRentalDate("")); // empty string
         assertTrue(RentalDate.isValidRentalDate("01/01/2024"));
         assertTrue(RentalDate.isValidRentalDate("31/12/2024"));
         assertTrue(RentalDate.isValidRentalDate("06/07/1995"));
@@ -142,6 +142,6 @@ public class RentalDateTest {
 
         // null value in rental date
         rentalDate = new RentalDate();
-        assertEquals("null", rentalDate.toString());
+        assertEquals("—", rentalDate.toString());
     }
 }

@@ -17,7 +17,7 @@ public class DepositTest {
 
     @Test
     public void constructor_invalidDeposit_throwsIllegalArgumentException() {
-        String invalidDeposit = "";
+        String invalidDeposit = " ";
         assertThrows(IllegalArgumentException.class, () -> new Deposit(invalidDeposit));
     }
 
@@ -27,7 +27,6 @@ public class DepositTest {
         assertThrows(NullPointerException.class, () -> Deposit.isValidDeposit(null));
 
         // invalid deposit
-        assertFalse(Deposit.isValidDeposit("")); // empty string
         assertFalse(Deposit.isValidDeposit(" ")); // spaces only
         assertFalse(Deposit.isValidDeposit("123.")); // no decimal values
         assertFalse(Deposit.isValidDeposit("123.2")); // 1 decimal place only
@@ -37,6 +36,7 @@ public class DepositTest {
         assertFalse(Deposit.isValidDeposit("-11")); // negative value
 
         // valid deposit
+        assertTrue(Deposit.isValidDeposit("")); // empty string
         assertTrue(Deposit.isValidDeposit("5")); // small value
         assertTrue(Deposit.isValidDeposit("10.50")); // decimal value
         assertTrue(Deposit.isValidDeposit("100")); // no decimal value
@@ -98,6 +98,6 @@ public class DepositTest {
 
         // null value in deposit
         deposit = new Deposit();
-        assertEquals("null", deposit.toString());
+        assertEquals("—", deposit.toString());
     }
 }

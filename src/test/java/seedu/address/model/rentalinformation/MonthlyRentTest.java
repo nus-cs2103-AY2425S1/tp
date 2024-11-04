@@ -17,7 +17,7 @@ public class MonthlyRentTest {
 
     @Test
     public void constructor_invalidMonthlyRent_throwsIllegalArgumentException() {
-        String invalidMonthlyRent = "";
+        String invalidMonthlyRent = " ";
         assertThrows(IllegalArgumentException.class, () -> new MonthlyRent(invalidMonthlyRent));
     }
 
@@ -27,7 +27,6 @@ public class MonthlyRentTest {
         assertThrows(NullPointerException.class, () -> MonthlyRent.isValidMonthlyRent(null));
 
         // invalid monthly rent
-        assertFalse(MonthlyRent.isValidMonthlyRent("")); // empty string
         assertFalse(MonthlyRent.isValidMonthlyRent(" ")); // spaces only
         assertFalse(MonthlyRent.isValidMonthlyRent("123.")); // no decimal values
         assertFalse(MonthlyRent.isValidMonthlyRent("123.2")); // 1 decimal place only
@@ -37,6 +36,7 @@ public class MonthlyRentTest {
         assertFalse(MonthlyRent.isValidMonthlyRent("-11")); // negative value
 
         // valid monthly rent
+        assertTrue(MonthlyRent.isValidMonthlyRent("")); // empty string
         assertTrue(MonthlyRent.isValidMonthlyRent("5")); // small value
         assertTrue(MonthlyRent.isValidMonthlyRent("10.50")); // decimal value
         assertTrue(MonthlyRent.isValidMonthlyRent("100")); // no decimal value
@@ -98,6 +98,6 @@ public class MonthlyRentTest {
 
         // null value in monthly rent
         monthlyRent = new MonthlyRent();
-        assertEquals("null", monthlyRent.toString());
+        assertEquals("—", monthlyRent.toString());
     }
 }

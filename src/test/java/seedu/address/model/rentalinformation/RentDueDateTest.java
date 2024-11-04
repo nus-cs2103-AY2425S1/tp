@@ -17,7 +17,7 @@ public class RentDueDateTest {
 
     @Test
     public void constructor_invalidRentDueDate_throwsIllegalArgumentException() {
-        String invalidRentDueDate = "";
+        String invalidRentDueDate = " ";
         assertThrows(IllegalArgumentException.class, () -> new RentDueDate(invalidRentDueDate));
     }
 
@@ -27,7 +27,6 @@ public class RentDueDateTest {
         assertThrows(NullPointerException.class, () -> RentDueDate.isValidDueDate(null));
 
         // invalid rent due date
-        assertFalse(RentDueDate.isValidDueDate("")); // empty string
         assertFalse(RentDueDate.isValidDueDate(" ")); // spaces only
         assertFalse(RentDueDate.isValidDueDate("0")); // invalid date
         assertFalse(RentDueDate.isValidDueDate("abc")); // non-numeric
@@ -36,6 +35,7 @@ public class RentDueDateTest {
         assertFalse(RentDueDate.isValidDueDate("99")); // invalid date
 
         // valid rent due date
+        assertTrue(RentDueDate.isValidDueDate("")); // empty string
         assertTrue(RentDueDate.isValidDueDate("1")); // first day
         assertTrue(RentDueDate.isValidDueDate("31")); // last day
         assertTrue(RentDueDate.isValidDueDate("20"));
@@ -95,6 +95,6 @@ public class RentDueDateTest {
 
         // null value in rent due date
         rentDueDate = new RentDueDate();
-        assertEquals("null", rentDueDate.toString());
+        assertEquals("—", rentDueDate.toString());
     }
 }

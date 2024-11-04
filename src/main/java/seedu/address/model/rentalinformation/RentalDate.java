@@ -25,13 +25,19 @@ public class RentalDate {
      */
     public RentalDate(String rentalDate) {
         requireNonNull(rentalDate);
+
+        if (rentalDate.isEmpty()) {
+            this.rentalDate = null;
+            return;
+        }
+
         checkArgument(isValidRentalDate(rentalDate), MESSAGE_CONSTRAINTS);
         checkArgument(isValidDateTime(rentalDate), MESSAGE_CONSTRAINTS);
         this.rentalDate = RentalUtil.convertStringToLocalDate(rentalDate);
     }
 
     /**
-     * Constructs an {@code RentalDate} with rentalDate as null (not provided).
+     * Constructs a {@code RentalDate} with rentalDate as null (not provided).
      */
     public RentalDate() {
         rentalDate = null;
@@ -42,10 +48,13 @@ public class RentalDate {
      * Validates a rental date string against a predefined regex pattern.
      *
      * @param test The string to be validated as a rental date.
-     * @return {@code true} if the string matches the validation regex;
-     *         {@code false} otherwise.
+     * @return {@code true} if the string matches the validation regex or is empty; {@code false} otherwise.
      */
     public static boolean isValidRentalDate(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -53,10 +62,13 @@ public class RentalDate {
      * Validates a rental date string to see if it is a valid date time.
      *
      * @param date The string to be validated as a rental date.
-     * @return {@code true} if the string is a valid date;
-     *         {@code false} otherwise.
+     * @return {@code true} if the string is a valid date or is empty; {@code false} otherwise.
      */
     public static boolean isValidDateTime(String date) {
+        if (date.isEmpty()) {
+            return true;
+        }
+
         try {
             RentalUtil.convertStringToLocalDate(date);
         } catch (RuntimeException e) {
@@ -70,7 +82,8 @@ public class RentalDate {
      * Checks if the current rental date is the same date as the given rental date.
      *
      * @param givenDate The rental date to compare against.
-     * @return True if the current rental date is the same date as the given rental date; false otherwise.
+     * @return {@code true} if the current rental date is the same date as the given rental date;
+     *         {@code false} otherwise.
      */
     public boolean isCurrentDateSameAsGivenDate(RentalDate givenDate) {
         if (this.rentalDate == null || givenDate.rentalDate == null) {
@@ -97,7 +110,7 @@ public class RentalDate {
     @Override
     public String toString() {
         return rentalDate == null
-                ? "null"
+                ? "—"
                 : RentalUtil.convertLocalDateToStringWithFormat(rentalDate, "dd MMM yyyy");
     }
 

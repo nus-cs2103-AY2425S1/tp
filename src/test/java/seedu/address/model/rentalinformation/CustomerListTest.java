@@ -16,7 +16,7 @@ public class CustomerListTest {
 
     @Test
     public void constructor_invalidCustomerList_throwsIllegalArgumentException() {
-        String invalidCustomerList = "";
+        String invalidCustomerList = " ";
         assertThrows(IllegalArgumentException.class, () -> new CustomerList(invalidCustomerList));
     }
 
@@ -26,7 +26,6 @@ public class CustomerListTest {
         assertThrows(NullPointerException.class, () -> CustomerList.isValidCustomerList(null));
 
         // invalid customer list
-        assertFalse(CustomerList.isValidCustomerList("")); // empty string
         assertFalse(CustomerList.isValidCustomerList(" ")); // spaces only
         assertFalse(CustomerList.isValidCustomerList(";David")); // invalid semicolon
         assertFalse(CustomerList.isValidCustomerList("David;")); // invalid semicolon
@@ -34,6 +33,7 @@ public class CustomerListTest {
         assertFalse(CustomerList.isValidCustomerList("David;;Steven")); // double semicolon
 
         // valid customer list
+        assertTrue(CustomerList.isValidCustomerList("")); // empty string
         assertTrue(CustomerList.isValidCustomerList("David")); // exactly 1 name
         assertTrue(CustomerList.isValidCustomerList("David;Steven")); // multiple names
         assertTrue(CustomerList.isValidCustomerList("David;Steven;Andrew")); // multiple names
@@ -94,6 +94,6 @@ public class CustomerListTest {
 
         // null value in customer list
         customerList = new CustomerList();
-        assertEquals("null", customerList.toString());
+        assertEquals("—", customerList.toString());
     }
 }
