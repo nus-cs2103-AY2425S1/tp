@@ -92,12 +92,16 @@ public class PersonPredicateBuilder {
         List<String> classIdKeywordsCopy = new ArrayList<>(classIdKeywords);
         List<String> monthPaidKeywordsCopy = new ArrayList<>(monthPaidKeywords);
         List<String> notMonthPaidKeywordsCopy = new ArrayList<>(notMonthPaidKeywords);
+        boolean isSetNameCopy = isSetName;
+        boolean isSetClassIdCopy = isSetClassId;
+        boolean isSetMonthPaidCopy = isSetMonthPaid;
+        boolean isSetNotMonthPaidCopy = isSetNotMonthPaid;
         return person -> {
-            boolean nameMatch = nameContainsKeywords(person, isSetName, nameKeywordsCopy);
-            boolean classIdMatch = classIdContainsKeywords(person, isSetClassId, classIdKeywordsCopy);
-            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaid, monthPaidKeywordsCopy);
+            boolean nameMatch = nameContainsKeywords(person, isSetNameCopy, nameKeywordsCopy);
+            boolean classIdMatch = classIdContainsKeywords(person, isSetClassIdCopy, classIdKeywordsCopy);
+            boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaidCopy, monthPaidKeywordsCopy);
             boolean notMonthPaidMatch = notMonthPaidContainsKeywords(
-                    person, isSetNotMonthPaid, notMonthPaidKeywordsCopy);
+                    person, isSetNotMonthPaidCopy, notMonthPaidKeywordsCopy);
 
             return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch;
         };
