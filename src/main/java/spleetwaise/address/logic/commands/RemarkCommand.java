@@ -1,15 +1,15 @@
 package spleetwaise.address.logic.commands;
 
-import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static spleetwaise.address.model.AddressBookModel.PREDICATE_SHOW_ALL_PERSONS;
+import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;

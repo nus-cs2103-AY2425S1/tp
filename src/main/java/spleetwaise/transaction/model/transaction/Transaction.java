@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
-import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.util.CollectionUtil;
+import spleetwaise.commons.util.IdUtil;
 
 /**
  * Represents a Transaction in the transaction book. Guarantees: details are present and not null, field values are
@@ -93,6 +93,16 @@ public class Transaction {
     }
 
     /**
+     * Returns a new transaction with specified status.
+     *
+     * @param status The done status to be set
+     * @return new transaction with updated status
+     */
+    public Transaction setStatus(Status status) {
+        return new Transaction(id, person, amount, description, date, categories, status);
+    }
+
+    /**
      * Returns a boolean value if the transaction contains the category
      */
     public boolean containsCategory(Category category) {
@@ -105,16 +115,6 @@ public class Transaction {
      */
     public Set<Category> getCategories() {
         return Collections.unmodifiableSet(categories);
-    }
-
-    /**
-     * Returns a new transaction with specified status.
-     *
-     * @param status The done status to be set
-     * @return new transaction with updated status
-     */
-    public Transaction setStatus(Status status) {
-        return new Transaction(id, person, amount, description, date, categories, status);
     }
 
     /**

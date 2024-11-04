@@ -6,7 +6,7 @@ import java.util.Set;
 
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.util.IdUtil;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;

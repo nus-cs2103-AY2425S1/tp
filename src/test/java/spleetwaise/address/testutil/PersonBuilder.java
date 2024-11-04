@@ -11,7 +11,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.model.util.SampleDataUtil;
-import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.util.IdUtil;
 
 /**
  * A utility class to help with building Person objects.

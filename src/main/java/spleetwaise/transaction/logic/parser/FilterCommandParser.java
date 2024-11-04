@@ -9,11 +9,11 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.stream.Stream;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
 import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.FilterCommand;

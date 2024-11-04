@@ -16,9 +16,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.commons.util.CollectionUtil;
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Address;
@@ -28,10 +25,13 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.util.CollectionUtil;
+import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**

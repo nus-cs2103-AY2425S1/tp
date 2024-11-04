@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Transaction's date in the transaction book. Guarantees: immutable; is valid or declared in

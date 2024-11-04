@@ -5,10 +5,11 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.core.GuiSettings;
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.GuiSettings;
+import spleetwaise.commons.core.index.Index;
+import spleetwaise.commons.model.ReadOnlyUserPrefs;
 
 /**
  * The API of the Model component.

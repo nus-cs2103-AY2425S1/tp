@@ -2,7 +2,7 @@ package spleetwaise.transaction.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Transaction's description in the transaction book. Guarantees: immutable; is valid as declared in

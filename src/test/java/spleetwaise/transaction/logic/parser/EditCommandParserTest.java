@@ -13,14 +13,14 @@ import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.logic.commands.EditCommand;
 import spleetwaise.transaction.model.TransactionBookModel;

@@ -2,7 +2,7 @@ package spleetwaise.transaction.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents the status of a transaction, indicating whether it is done or not.

@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.logic.commands.AddCommand;
 import spleetwaise.address.logic.commands.ClearCommand;
 import spleetwaise.address.logic.commands.DeleteCommand;
@@ -14,6 +13,7 @@ import spleetwaise.address.logic.commands.FindCommand;
 import spleetwaise.address.logic.commands.HelpCommand;
 import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.commands.RemarkCommand;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 
