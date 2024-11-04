@@ -50,7 +50,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
         // Ensure all required prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_SUBJECT, PREFIX_CLASSES, PREFIX_ATTENDANCE) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_SUBJECT, PREFIX_CLASSES) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
@@ -64,7 +64,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
         Set<String> classes = parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
         DaysAttended daysAttended = ParserUtil.parseDaysAttended(
-                Integer.valueOf(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
+                Integer.valueOf(argMultimap.getValue(PREFIX_ATTENDANCE).orElse("0")));
 
         // Create the Student object
         Student student = new Student(name, gender, phone, email, address, tagList, subjectList, classes, daysAttended);
