@@ -40,13 +40,13 @@ jobs:
         run: ./gradlew check coverage --info
 
       - name: Upload tests artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: 'test-report-${{ matrix.platform }}'
           path: 'build/reports/tests/test'
 
       - name: Upload checkstyle artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: 'checkstyle-report-${{ matrix.platform }}'
           path: 'build/reports/checkstyle'
