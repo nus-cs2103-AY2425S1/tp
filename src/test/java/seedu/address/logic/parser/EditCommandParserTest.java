@@ -127,7 +127,7 @@ public class EditCommandParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withClientTypes(VALID_CLIENT_TYPE_B, VALID_CLIENT_TYPE_A)
-                .withDescription(VALID_DESCRIPTION_A).build();
+                .withDescription(VALID_DESCRIPTION_A).build(); // reminders is not edited
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

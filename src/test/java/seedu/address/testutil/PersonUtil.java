@@ -65,6 +65,7 @@ public class PersonUtil {
         }
         descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_DESCRIPTION)
                 .append(description.description).append(" "));
+
         return sb.toString();
     }
 }
