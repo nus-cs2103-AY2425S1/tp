@@ -255,7 +255,7 @@ Format: `archive INDEX`
 Examples:
 * `archive 1` archives the first person in the list, removing it and storing it in an archived list
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 An unarchive feature is in the works and will be available in the future.
 </div>
 
