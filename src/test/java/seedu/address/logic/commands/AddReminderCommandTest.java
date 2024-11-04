@@ -209,13 +209,8 @@ public class AddReminderCommandTest {
         }
 
         @Override
-        public ObservableList<Reminder> getFilteredReminderList() {
+        public ObservableList<Reminder> getSortedReminderList() {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
-            throw new AssertionError("This method should not be called");
         }
     }
 

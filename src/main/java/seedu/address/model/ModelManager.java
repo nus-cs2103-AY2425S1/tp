@@ -30,7 +30,8 @@ public class ModelManager implements Model {
     private final ReminderAddressBook reminderAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Reminder> filteredReminders;
+    private final SortedList<Reminder> sortedReminders;
+
     private final SortedList<Person> sortedPersons;
 
     /**
@@ -47,7 +48,8 @@ public class ModelManager implements Model {
         this.reminderAddressBook = new ReminderAddressBook(reminderAddressBook);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
-        filteredReminders = new FilteredList<>(this.reminderAddressBook.getReminderList());
+        sortedReminders = new SortedList<>(this.reminderAddressBook.getReminderList());
+        sortedReminders.setComparator((self, other) -> self.reminderDate.compareTo(other.reminderDate));
         applySavedSortPreference();
     }
 
@@ -192,11 +194,11 @@ public class ModelManager implements Model {
         reminderAddressBook.addReminder(reminder);
     }
 
-    @Override
-    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
-        requireNonNull(predicate);
-        filteredReminders.setPredicate(predicate);
-    }
+    //    @Override
+    //    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+    //        requireNonNull(predicate);
+    //        filteredReminders.setPredicate(predicate);
+    //    }
 
     @Override
     public boolean hasReminder(Reminder reminder) {
@@ -229,12 +231,17 @@ public class ModelManager implements Model {
 
     //=========== Filtered Reminder List Accessors ===========================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Reminder}
-     */
+    //    /**
+    //     * Returns an unmodifiable view of the list of {@code Reminder}
+    //     */
+    //    @Override
+    //    public ObservableList<Reminder> getFilteredReminderList() {
+    //        return filteredReminders;
+    //    }
+
     @Override
-    public ObservableList<Reminder> getFilteredReminderList() {
-        return filteredReminders;
+    public ObservableList<Reminder> getSortedReminderList() {
+        return sortedReminders;
     }
 
     @Override
@@ -253,7 +260,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && reminderAddressBook.equals(otherModelManager.reminderAddressBook)
-                && filteredReminders.equals(otherModelManager.filteredReminders);
+                && sortedReminders.equals(otherModelManager.sortedReminders);
     }
 
 }

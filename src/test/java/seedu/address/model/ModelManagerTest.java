@@ -127,8 +127,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredReminderList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredReminderList().remove(0));
+    public void getSortedReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getSortedReminderList().remove(0));
     }
 
     @Test

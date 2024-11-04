@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        reminderListDisplay = new ReminderListDisplay(logic.getFilteredReminderList());
+        reminderListDisplay = new ReminderListDisplay(logic.getSortedReminderList());
         reminderListDisplayPlaceholder.getChildren().add(reminderListDisplay.getRoot());
 
         resultDisplay = new ResultDisplay();

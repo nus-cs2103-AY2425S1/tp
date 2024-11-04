@@ -74,8 +74,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Reminder> getFilteredReminderList() {
-        return model.getFilteredReminderList();
+    public ObservableList<Reminder> getSortedReminderList() {
+        return model.getSortedReminderList();
     }
 
     @Override
