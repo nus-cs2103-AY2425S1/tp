@@ -60,38 +60,27 @@ public class Profile {
     }
 
     /**
-     * Checks if the provided file path follows the required format: it must start with "data",
-     * contain exactly one additional path segment representing the profile name, and end with ".json".
+     * Validates if the given path represents a valid profile path.
      * <p>
-     * Example of a valid path: {@code data/addressbook.json}
-     * Example of an invalid path: {@code data/dir/addressbook.json}
-     * </p>
+     * A valid profile path must:
+     * <ul>
+     *   <li>Follow the structure {@code data/{profileName}.json}.</li>
+     *   <li>Contain a valid profile name as specified in {@link Profile} class</li>
+     * </ul>
      *
-     * @param filePath The path to validate.
-     * @return true if the path follows the required format, false otherwise.
+     * @param filePath the file path to validate
+     * @return {@code true} if the path is valid, {@code false} otherwise
      */
-    public static boolean isSimpleProfileFilePath(Path filePath) {
-        // Check if the path ends with "data/addressBook.json" structure
-        int nameCount = filePath.getNameCount();
-        boolean endsWithJson = filePath.toString().endsWith(PROFILE_EXTENSION);
-
-        // Check if the last two segments match "data/{profileName}.json"
-        boolean matchesDataStructure =
-                nameCount >= 2
-                        && "data".equals(filePath.getName(nameCount - 2).toString())
-                        && endsWithJson;
-
-        // Check if the profile name follows constraints if matchesDataStructure is true
-        if (matchesDataStructure) {
-            String profileName = filePath.getName(nameCount - 1).toString();
-            profileName = profileName.substring(0, profileName.length() - PROFILE_EXTENSION.length());
-            return isValidProfileName(profileName);
+    public static boolean isValidProfileFromPath(Path filePath) {
+        if (!isSimpleProfileFilePath(filePath)) {
+            return false;
         }
-        return false;
+        String profileName = extractProfileName(filePath);
+        return isValidProfileName(profileName);
     }
 
     /**
-     * Extracts a profile name from the given file path as a single-element stream if valid;
+     * Extracts the profile name from the given file path as a single-element stream if valid, and
      * returns an empty stream if the path or name is invalid.
      * <p>
      * Intended for use in stream pipelines where invalid paths can be safely ignored.
@@ -101,11 +90,10 @@ public class Profile {
      * @return A stream containing the profile name if valid, or an empty stream if invalid.
      */
     public static Stream<String> extractNameFromPathOrIgnore(Path filePath) {
-        try {
-            return Stream.of(extractProfileNameFromPathOrThrow(filePath));
-        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
-            return Stream.empty();
+        if (isValidProfileFromPath(filePath)) {
+            return Stream.of(extractProfileName(filePath));
         }
+        return Stream.empty();
     }
 
     /**
@@ -126,6 +114,27 @@ public class Profile {
             throw new IllegalProfileNameException();
         }
         return profileName;
+    }
+
+    /**
+     * Checks if the provided file path follows a simple profile structure, i.e., {@code data/{profileName}.json}.
+     * <p>
+     * Example of a valid path: {@code data/addressbook.json}
+     * Example of an invalid path: {@code data/dir/addressbook.json}
+     * </p>
+     *
+     * @param filePath The path to validate.
+     * @return true if the path follows the required format, false otherwise.
+     */
+    private static boolean isSimpleProfileFilePath(Path filePath) {
+        int nameCount = filePath.getNameCount();
+        if (nameCount < 2) {
+            return false;
+        }
+
+        String lastSegment = filePath.getFileName().toString();
+        String secondToLastSegment = filePath.getName(nameCount - 2).toString();
+        return PROFILE_PARENT_DIR.equals(secondToLastSegment) && lastSegment.endsWith(PROFILE_EXTENSION);
     }
 
     /**

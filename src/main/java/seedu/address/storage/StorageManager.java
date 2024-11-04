@@ -1,8 +1,7 @@
 package seedu.address.storage;
 
 import static seedu.address.model.profile.Profile.extractProfileNameFromPathOrThrow;
-import static seedu.address.model.profile.Profile.isSimpleProfileFilePath;
-import static seedu.address.model.profile.Profile.isValidProfileName;
+import static seedu.address.model.profile.Profile.isValidProfileFromPath;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -39,8 +38,7 @@ public class StorageManager implements Storage {
     @Override
     public void deleteOrphanedProfiles(ReadOnlyUserPrefs userPrefs) throws IOException {
         Path currentProfilePath = userPrefs.getAddressBookFilePath();
-        assert isSimpleProfileFilePath(currentProfilePath)
-                && isValidProfileName(currentProfilePath.toString())
+        assert isValidProfileFromPath(currentProfilePath)
                 : "Profile deletion should not happen when the current profile path is invalid";
         String curProfileName = extractProfileNameFromPathOrThrow(currentProfilePath);
 

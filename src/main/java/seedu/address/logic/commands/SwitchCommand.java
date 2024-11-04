@@ -58,13 +58,12 @@ public class SwitchCommand extends Command {
                     .flatMap(Profile::extractNameFromPathOrIgnore)
                     .toList();
             assert profilesList.size() > 0 : "There is no profile to switch to. Message usage should have been thrown";
-            throw new CommandException(
-                    String.format(
-                            MESSAGE_SHOW_PROFILES,
-                            String.join(", ", profilesList),
-                            profilesList.get(0)
-                    )
-            );
+            throw new CommandException(String.format(
+                    MESSAGE_SHOW_PROFILES,
+                    String.join(", ", profilesList),
+                    profilesList.get(0)
+            ));
+
         }
 
         Path filePath = profile.toPath();
@@ -73,9 +72,6 @@ public class SwitchCommand extends Command {
         try {
             curProfileName = extractProfileNameFromPathOrThrow(model.getAddressBookFilePath());
         } catch (IllegalProfilePathException | IllegalProfileNameException e) {
-            throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
-        }
-        if (!Profile.isValidProfileName(curProfileName)) {
             throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
         }
         if (curProfileName.equals(profile.toString())) {

@@ -45,9 +45,6 @@ public class DeleteProfileCommand extends Command {
         } catch (IllegalProfilePathException | IllegalProfileNameException e) {
             throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
         }
-        if (!Profile.isValidProfileName(curProfileName)) {
-            throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
-        }
         if (curProfileName.equals(profileName.toString())) {
             throw new CommandException(MESSAGE_IN_USE);
         }
