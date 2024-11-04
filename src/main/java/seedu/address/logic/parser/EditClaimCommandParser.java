@@ -60,6 +60,7 @@ public class EditClaimCommandParser implements Parser<EditClaimCommand> {
                 || !argMultimap.getValue(PREFIX_CLAIM_INDEX).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
         }
+
         String desc = String.valueOf(argMultimap.getValue(PREFIX_CLAIM_DESC));
         if (!Claim.isValidClaim(desc)) {
             throw new ParseException(Claim.MESSAGE_CONSTRAINTS);
