@@ -15,6 +15,12 @@ title: Developer Guide
     3. [Logic Component](#logic-component)
     4. [Model Component](#model-component)
     5. [Storage Component](#storage-component)
+7. [Implementation](#implementation)
+    1. [Add Person Feature](#add-person-feature)
+    2. [Delete Person Feature](#delete-person-feature)
+    3. [Edit Person Feature](#edit-person-feature)
+    4. [List Feature](#list-feature)
+    5. [Find Person Feature](#find-person-feature)
 
 ---
 
@@ -436,6 +442,47 @@ We will be using the user input `find John` as an example.
 :information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+
+#### `FindCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
+
+<img src="images/FindCommandSequenceDiagram.png" width="550" />
+
+### Filter Person Feature ###
+
+#### **Command Feature**
+
+`filter STATUS`
+
+#### **Command Feature Purpose**
+
+The `filter` command allows users to filter specific people in the `HRPlatform` based on their application status.
+
+#### Key Components
+- `FilterCommand`: Executes the filter operation based on the user's input.
+- `FilterCommandParser`: Parses user input to create an `FilterCommand` object.
+- `LogicManager`: Invokes the `FilterCommand` to execute the filter operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Predicate`: Represents the status for finding persons whose status matches in TalentSG.
+- `HRPlatformParser`: Creates an `FilterCommand` object based on the user input.
+
+### **Sequence of action**
+
+To help you understand how the `filter` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `filter Interviewed` as an example.
+
+1. The user executes the command `filter Interviewed`, intending to find all persons whose name contains the keyword.
+2. The `FilterCommandParser` interprets the input.
+3. An `FilterCommand` object is created.
+4. The `LogicManager` invokes the execute method of FindCommand.
+5. The execute method of `FilterCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
+6. The execute method of `FilterCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
+7. The UI reflects this updated filtered `Person` list.
+
+:information_source: **Note**:
+
+- At step 2, if an invalid status is detected after `filter` (e.g. `filter Helloo`), an error will be shown and the sequence of action is terminated.
 
 #### `FindCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
