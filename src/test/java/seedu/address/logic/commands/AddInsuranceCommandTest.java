@@ -53,7 +53,7 @@ class AddInsuranceCommandTest {
         AddInsuranceCommand addInsuranceCommand = new AddInsuranceCommand(INDEX_FOURTH_CLIENT, validInsuranceId);
 
         String expectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                planToBeAdded, Messages.format(updatedClient));
+                planToBeAdded, updatedClient.getName().toString());
 
         InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.addPlan(planToBeAdded);
@@ -84,7 +84,7 @@ class AddInsuranceCommandTest {
                 .build();
 
         String firstExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                firstPlan, Messages.format(clientWithFirstPlan));
+                firstPlan, clientWithFirstPlan.getName().toString());
 
         InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.addPlan(firstPlan);
@@ -103,7 +103,7 @@ class AddInsuranceCommandTest {
                 .build();
 
         String secondExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                secondPlan, Messages.format(clientWithBothPlans));
+                secondPlan, clientWithBothPlans.getName().toString());
 
         updatedInsurancePlansManager.addPlan(secondPlan);
 
@@ -139,7 +139,7 @@ class AddInsuranceCommandTest {
 
         assertCommandFailure(addInsuranceCommand, model,
                 String.format(DUPLICATE_PLAN_DETECTED_MESSAGE,
-                        basicInsuranceId, Messages.format(BENSON)));
+                        basicInsuranceId, BENSON.getName().toString()));
     }
 
     /**
