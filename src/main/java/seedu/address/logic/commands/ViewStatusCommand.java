@@ -13,15 +13,15 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Views the status of an existing person in the address book.
+ * Views the status of an existing candidate in HiredFiredPro.
  */
 public class ViewStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-    public static final String MESSAGE_VIEW_SUCCESS = "Viewing status of person: %1$s";
-    public static final String MESSAGE_VIEW_FAILURE = "There are no matching persons with name: %1$s"
+    public static final String MESSAGE_VIEW_SUCCESS = "Viewing status of candidate: %1$s";
+    public static final String MESSAGE_VIEW_FAILURE = "There are no matching candidates with name: %1$s"
             + " and job: %2$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a person in the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the status of a candidate in HiredFiredPro. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_JOB + "JOB \n"
@@ -49,6 +49,12 @@ public class ViewStatusCommand extends Command {
         return findMatchingPerson(lastShownList);
     }
 
+    /**
+     * Finds person with matching name and job in lastShownList
+     *
+     * @return CommandResult with success message and message with matching person's name and job or
+     *     failure message
+     */
     private CommandResult findMatchingPerson(List<Person> lastShownList) {
         for (Person person: lastShownList) {
             if (person.hasJobAndStatus(this.name, this.job)) {
@@ -59,13 +65,6 @@ public class ViewStatusCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_VIEW_FAILURE, this.name, this.job));
     }
-
-    /**
-     * Finds person with matching name and job in lastShownList
-     *
-     * @return CommandResult with success message and message with matching person's name and job or
-     *     failure message
-     */
 
     @Override
     public boolean equals(Object other) {
