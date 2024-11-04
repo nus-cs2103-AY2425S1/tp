@@ -52,9 +52,9 @@ Client *--> Email
 Client *--> Address
 Client *--> "*" Tag
 Client *--> PolicySet
-PolicySet --> LifePolicy
-PolicySet --> HealthPolicy
-PolicySet --> EducationPolicy
+PolicySet o--> LifePolicy
+PolicySet o--> HealthPolicy
+PolicySet o--> EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
