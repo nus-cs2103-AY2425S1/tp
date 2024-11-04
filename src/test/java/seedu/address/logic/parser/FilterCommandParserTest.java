@@ -78,21 +78,61 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    void parse_invalidArgs_oneEmptyPrefixFilterCommand() {
+    void parse_invalidArgs_namePrefixFilterCommand() {
         assertParseFailure(parser, "filter n/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter p/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter e/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter a/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter r/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter s/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter c/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter en/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter ep/", MESSAGE_INCOMPLETE_COMMAND);
-        assertParseFailure(parser, "filter t/", MESSAGE_INCOMPLETE_COMMAND);
+    }
 
+    @Test
+    void parse_invalidArgs_phonePrefixFilterCommand() {
+        assertParseFailure(parser, "filter p/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_emailPrefixFilterCommand() {
+        assertParseFailure(parser, "filter e/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+        @Test
+    void parse_invalidArgs_addressPrefixFilterCommand() {
+        assertParseFailure(parser, "filter a/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_regNumPrefixFilterCommand() {
+        assertParseFailure(parser, "filter r/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_sexPrefixFilterCommand() {
+        assertParseFailure(parser, "filter s/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_classPrefixFilterCommand() {
+        assertParseFailure(parser, "filter c/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_ecNamePrefixFilterCommand() {
+        assertParseFailure(parser, "filter en/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_ecPhonePrefixFilterCommand() {
+        assertParseFailure(parser, "filter ep/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_tagPrefixFilterCommand() {
+        assertParseFailure(parser, "filter t/", MESSAGE_INCOMPLETE_COMMAND);
+    }
+
+    @Test
+    void parse_invalidArgs_spacesPrefixFilterCommand() {
         String emptyPreds = "filter n/ p/ e/ a/ r/ s/ c/ en/ ep/ t/";
         assertParseFailure(parser, emptyPreds, MESSAGE_INCOMPLETE_COMMAND);
     }
+
 
     @Test
     void parse_invalidArgs_allEmptyPredicatesFilterCommand() {
