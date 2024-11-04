@@ -291,6 +291,27 @@ You can filter the customer list by tags or shortcuts to view only the relevant 
 
 This guide should help you streamline your tagging process and make filtering contacts more efficient!
 
+---
+
+### **Downloading Data: `download`**  
+Exports Address Book as a CSV file with optional tag-based filtering.
+
+**Format:**  
+`download [t/TAG1] [t/TAG2] ...`
+
+**Details:**
+- Creates a CSV file containing the people that match the specified tags.
+- The exported file will be saved in the same directory as the application.
+- Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
+- If no tags are specified, all data will be exported.
+
+**Examples:**
+- `download` — Exports all contacts or orders.
+- `download t/Vegan` — Exports only the contacts or orders tagged as "Vegan."
+- `download t/friend t/colleague` — Exports contacts or orders tagged as "friend" and "colleague."
+
+---
+
 ### Exiting the program : `exit`
 
 Exits the program.
