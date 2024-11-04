@@ -1,7 +1,7 @@
 package spleetwaise.address;
 
-import static spleetwaise.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
-import static spleetwaise.address.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
+import static spleetwaise.commons.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
+import static spleetwaise.commons.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -11,8 +11,6 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import spleetwaise.address.logic.Logic;
-import spleetwaise.address.logic.LogicManager;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
@@ -27,6 +25,8 @@ import spleetwaise.commons.core.Config;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.core.Version;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.logic.Logic;
+import spleetwaise.commons.logic.LogicManager;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.model.ReadOnlyUserPrefs;
 import spleetwaise.commons.model.UserPrefs;

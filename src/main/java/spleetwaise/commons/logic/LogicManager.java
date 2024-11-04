@@ -1,4 +1,4 @@
-package spleetwaise.address.logic;
+package spleetwaise.commons.logic;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 

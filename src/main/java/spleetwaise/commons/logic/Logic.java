@@ -1,4 +1,4 @@
-package spleetwaise.address.logic;
+package spleetwaise.commons.logic;
 
 import java.nio.file.Path;
 

@@ -1,4 +1,4 @@
-package spleetwaise.address.logic;
+package spleetwaise.commons.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import spleetwaise.address.logic.Messages;
 import spleetwaise.address.logic.commands.AddCommand;
 import spleetwaise.address.logic.commands.CommandTestUtil;
 import spleetwaise.address.logic.commands.ListCommand;
