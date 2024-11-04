@@ -52,13 +52,10 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
-        Boolean export = model.getExportFilterGoodsStatus();
-
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveGoods(model.getGoods());
-            if (export) {
+            if (model.getExportFilterGoodsStatus()) {
                 ReceiptLog receipts = new ReceiptLog();
                 receipts.setReceipts(model.getFilteredReceiptsList().stream().toList());
                 storage.saveFilteredGoods(receipts);
