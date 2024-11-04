@@ -12,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
@@ -39,7 +40,8 @@ public class AddPersonCommand extends AddCommand {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
+    public static final String MESSAGE_DUPLICATE_PHONE = "This phone is already used by another person " +
+            "in the address book.";
     private final Person toAdd;
 
     /**
@@ -56,6 +58,11 @@ public class AddPersonCommand extends AddCommand {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        Phone phone = toAdd.getPhone();
+        if (model.hasPhone(toAdd, phone)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         model.addPerson(toAdd);
