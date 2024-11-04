@@ -111,7 +111,7 @@ Format: `switch PARSER_MODE`
 
 * Switches the parser mode to the specified `PARSER_MODE`.
 * The parser mode takes 3 types:
-* `b` for buyers
+* `b` for [buyers](#buyer-mode)
 * `m` for meet-ups
 * `p` for properties
 * The default parser mode is set to `b`.
@@ -138,19 +138,10 @@ Examples:
 
 **:information_source: These commands are for when the parser is in `b` mode (Buyer mode) see [Switching parser modes](#switching-parser-modes--switch):**<br>
 </div>
-### Adding a buyer: `add`
 
-Adds a buyer to the buyer list.
+In buyer mode, you will be able to store and view the list of buyer's details.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A buyer can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/buyer`
-* `add n/Betsy Crowe t/friend u/seller e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+![buyer_mode display](images/BuyerModeDisplay.png)
 
 ### Viewing all buyers : `view`
 
@@ -158,40 +149,62 @@ Shows a list of all buyers in the buyer list.
 
 Format: `view`
 
+### Adding a buyer: `add`
+
+Adds a buyer to the buyer list.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
+
+* New buyers must have unique names and cannot duplicate names of existing buyers.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A buyer can have any number of tags (including 0)
+</div>
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com b/100,000`
+* `add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7,000,000 p/91234567 t/referred`
+
 ### Editing a buyer : `edit`
 
 Edits an existing buyer in the buyer list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​`
 
-* Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. 
+* The index refers to the index number shown in the **displayed buyer list**.
+* The index must be a positive integer: 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the buyer will be removed i.e adding of tags is not cumulative.
 * You can remove all the buyer’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
 ### Locating buyer contacts: `find`
 
-Finds buyers whose names contain any of the given keywords.
+Finds existing buyers in existing buyer list based on keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find n/KEYWORD [MORE_KEYWORDS]`
 
+* Only the name is searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Buyers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+<div markdown="span" class="alert alert-primary">:rocket: **Future Enhancement:**
+Planned update will allow searches using other attributes, such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG`.
+</div>
+
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a buyer : `delete`
 
@@ -200,12 +213,13 @@ Deletes the specified buyer from the buyer list.
 Format: `delete INDEX`
 
 * Deletes the buyer at the specified `INDEX`.
-* The index refers to the index number shown in the displayed buyer list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the **displayed buyer list**.
+* The index must be a positive integer: 1, 2, 3, …​
+* The index cannot exceed the displayed list's range.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd buyer in the buyer list.
-* `find Betsy` followed by `delete 1` deletes the 1st buyer in the results of the `find` command.
+* `view` followed by `delete 2` deletes the 2nd buyer in the displayed buyer list.
+* `find Betsy` followed by `delete 1` deletes the 1st buyer in the displayed results of the `find` command.
 
 ## Meet Up
 <div markdown="block" class="alert alert-info">
