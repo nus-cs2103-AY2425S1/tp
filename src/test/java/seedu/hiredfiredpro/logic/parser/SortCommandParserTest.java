@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.hiredfiredpro.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.hiredfiredpro.logic.commands.SortCommand;
+import seedu.hiredfiredpro.logic.parser.exceptions.ParseException;
 
 public class SortCommandParserTest {
 
