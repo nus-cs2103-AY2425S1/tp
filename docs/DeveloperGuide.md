@@ -513,7 +513,7 @@ For all use cases below, unless specified otherwise,
 #### Use case (UC02): Edit a patient
 
 **MSS**
-1. DocTrack shows a list of patients [(UC04)](#use-case-uc04-view-all-patients).
+1. DocTrack <ins>shows a list of patients [(UC04)](#use-case-uc04-view-all-patients)</ins>.
 2. User requests to edit a specific patient in the list with new details. 
 3. DocTrack updates the patient with the new details.
 
@@ -539,7 +539,7 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1. DocTrack shows a list of patients [(UC04)](#use-case-uc04-view-all-patients).
+1. DocTrack <ins>shows a list of patients [(UC04)](#use-case-uc04-view-all-patients)</ins>.
 2. User requests to delete a specific patient in the list.
 3. DocTrack deletes the patient.
 
@@ -636,7 +636,7 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1. DocTrack shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments).
+1. DocTrack <ins>shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments)</ins>.
 2. User requests to edit a specific appointment in the list with new details.
 3. DocTrack updates the appointment with the new details.
 
@@ -661,7 +661,7 @@ For all use cases below, unless specified otherwise,
 
 **MSS**
 
-1. DocTrack shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments).
+1. DocTrack <ins>shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments)</ins>.
 2. User requests to delete a specific appointment in the list.
 3. DocTrack deletes the appointment.
 
@@ -734,18 +734,23 @@ For all use cases below, unless specified otherwise,
 2. Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
 3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5. Should not require installation
-6. Must not operate with dependency on any remote server
-7. No usage of DBMS
-8. Main product file must not exceed 100MB
-9. Documentation must not exceed 15MB
-10. Product should be designed for typing-preferred consumers, offering a CLI experience
+5. Should not require installation of additional packages.
+6. Must not operate with dependency on any remote server.
+7. No usage of DBMS.
+8. Main product file must not exceed 100MB.
+9. Documentation must not exceed 15MB.
+10. Product should be designed for typing-preferred consumers, offering a CLI experience.
 11. Product should be designed for a single user.
 12. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
-13. Data must be persistent, with all changes saved immediately to local storage
-14. Data files must be in a format that can be edited manually by advanced users
-15. Data file must remain usable and intact even with invalid input from the application
-16. Errors must trigger clear, user-friendly messages
+13. Data must be persistent, with all changes saved immediately to local storage.
+14. Data files must be in a format that can be edited manually by advanced users.
+15. Data file must remain usable and intact even with invalid input from the application.
+16. Errors must trigger clear, user-friendly messages.
+17. The software architecture must follow a modular design pattern, ensuring separation of concerns (UI, logic, storage) to facilitate future development and maintenance.
+18. The codebase must be well-documented, with appropriate comments and adherence to coding standards.
+19. A comprehensive technical guide should be provided for future developers, including instructions for maintenance and extension.
+20. The product should be designed for users who prefer typing commands, offering a CLI or text-based interface.
+21. The application is designed for a single user. Multi-user or shared usage on the same computer is not allowed, and data files must not be shared between users.
 
 <br>
 
