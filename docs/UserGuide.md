@@ -15,27 +15,34 @@ AgentConnect will help you manage your contacts faster than traditional apps.
 
 ## Table of Contents
 
+## Table of Contents
+
 1. [Quick Start](#quick-start)
-2. [Features](#features)
+2. [Getting Started](#getting-started)
     - [Viewing Help](#viewing-help)
-    - [Adding a Client](#adding-a-client)
-    - [Assigning a Policy](#assigning-a-policy)
-    - [Listing All Clients](#listing-all-clients)
-    - [Editing a Client Details](#editing-a-client)
-    - [Locating Clients by Name](#finding-clients-by-name)
-    - [Searching Appointments](#searching-appointment-by-date)
-    - [Searching Birthdays](#searching-birthday-by-date)
-    - [Searching Policy](#searching-policy-by-policy-name)
-    - [Sorting Clients](#sorting-client-data)
-    - [Deleting a client or policy](#deleting-a-client)
-    - [Undo a command](#undo work)
-    - [Redo a command](#redo work)
-    - [Clearing All Entries](#clearing-all-entries)
-    - [Exiting the Program](#exiting-the-program)
     - [Saving Your Data](#saving-your-data)
-3. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
-4. [Known Issues](#known-issues)
-5. [Command Summary](#command-summary)
+    - [Exiting the Program](#exiting-the-program)
+3. [Client Management](#client-management)
+    - [Adding a Client](#adding-a-client)
+    - [Editing Client Details](#editing-client-details)
+    - [Deleting a Client](#deleting-a-client)
+    - [Listing All Clients](#listing-all-clients)
+    - [Sorting Clients](#sorting-clients)
+4. [Policy Management](#policy-management)
+    - [Assigning a Policy](#assigning-a-policy)
+    - [Deleting a Policy](#deleting-a-policy)
+5. [Search Functions](#search-functions)
+    - [Locating Clients by Name](#locating-clients-by-name)
+    - [Searching Appointments](#searching-appointments)
+    - [Searching Birthdays](#searching-birthdays)
+    - [Searching Policies](#searching-policies)
+6. [Advanced Features](#advanced-features)
+    - [Undo a Command](#undo-a-command)
+    - [Redo a Command](#redo-a-command)
+    - [Clearing All Entries](#clearing-all-entries)
+7. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+8. [Known Issues](#known-issues)
+9. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +65,7 @@ AgentConnect will help you manage your contacts faster than traditional apps.
       ```
       java -jar AgentConnect.jar
       ```
-      Then press **Enter**.
+      Then press **Enter**. To learn more about directory navigation, refer to this [link](https://gomakethings.com/navigating-the-file-system-with-terminal/).
 
 5. **Try It Out:**
     - **Enter a Command:**
