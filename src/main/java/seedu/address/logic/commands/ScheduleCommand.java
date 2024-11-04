@@ -18,7 +18,7 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who have their next appointment "
           + "date on the date keyed in by the user and displays them as a list with index numbers.\n"
           + "Parameters: " + PREFIX_DATE + "DATE \n"
-          + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "12 October 2024";
+          + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "12/08/2024";
 
     private SchedulePredicate predicate;
 
