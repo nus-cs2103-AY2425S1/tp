@@ -307,11 +307,11 @@ Format: `sort <CRITERIA> <ORDER>`
   - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
       - `n/`: Sort by client's name (A-Z by default).
       - `b/`: Sort by client's birthday (earliest to latest by default).
-      - `appt`: Sort by upcoming appointment dates (soonest to latest by default).
-      - `paydate`: Sort by policy payment due date (earliest to latest by default).
+      - `appt/`: Sort by upcoming appointment dates (soonest to latest by default).
+      - `paydate/`: Sort by policy payment due date (earliest to latest by default).
   - `ORDER`: The direction of sort. Available order includes:
     - `asc`: Sort in ascending order
-    - `dsc`: Sort in descending order
+    - `desc`: Sort in descending order
 
 - **Usage**:
   - **Name Sorting**: Orders the client list alphabetically by name.
@@ -330,7 +330,7 @@ Examples:
 
   - **Sort by Birthday in Descending Order**:
     ```
-    sort b/ dsc
+    sort b/ desc
     ```
     *Sorts the client list from the latest to the earliest birthday.*
 
