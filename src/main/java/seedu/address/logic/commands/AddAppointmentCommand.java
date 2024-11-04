@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
@@ -10,6 +11,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -43,6 +45,7 @@ public class AddAppointmentCommand extends Command {
     private final LocalDate date;
     private final LocalTime startTime;
     private final LocalTime endTime;
+    private Appointment appointment;
 
     /**
      * Creates an AddAppointmentCommand to schedule an appointment with a family at the specified index.
@@ -74,7 +77,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         Person person = lastShownList.get(index.getZeroBased());
-        Appointment appointment = new Appointment(person.getName(), date, startTime, endTime);
+        appointment = new Appointment(person.getName(), date, startTime, endTime);
 
         checkForConflictingAppointments(model, appointment);
 
@@ -100,6 +103,15 @@ public class AddAppointmentCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        Appointment appointmentToRemove = this.appointment;
+        int index = model.getFilteredAppointmentList().indexOf(appointmentToRemove);
+        model.deleteAppointment(index);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_ADD_APPOINTMENT, appointmentToRemove);
     }
 
     @Override
