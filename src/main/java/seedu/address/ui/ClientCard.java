@@ -62,7 +62,7 @@ public class ClientCard extends UiPart<Region> {
         email.setFields(ClientCardField.ICON_LITERAL_EMAIL, client.getEmail().value);
         job.setFields(ClientCardField.ICON_LITERAL_JOB, client.getJob().value);
         income.setFields(ClientCardField.ICON_LITERAL_INCOME, client.getIncome().toString());
-        remark.setFields(ClientCardField.ICON_LITERAL_REMARK,client.getRemark().value);
+        remark.setFields(ClientCardField.ICON_LITERAL_REMARK, client.getRemark().value);
         cardFields.getChildren().addAll(phone, address, email, job, income, remark);
     }
 
