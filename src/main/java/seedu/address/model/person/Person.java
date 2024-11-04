@@ -32,11 +32,14 @@ public class Person {
 
     private final UpdatedAt updatedAt;
 
+    private final boolean isArchived;
+
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt,
+                  boolean isArchived) {
         requireAllNonNull(name, phone, email, address, priority, remark,
                 dateOfBirth, income, familySize, tags, updatedAt);
         this.name = name;
@@ -50,6 +53,15 @@ public class Person {
         this.familySize = familySize;
         this.tags.addAll(tags);
         this.updatedAt = updatedAt;
+        this.isArchived = isArchived;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, familySize, tags, updatedAt, false);
     }
 
     public Name getName() {
@@ -100,6 +112,10 @@ public class Person {
         return updatedAt;
     }
 
+    public boolean isArchived() {
+        return this.isArchived;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -136,7 +152,8 @@ public class Person {
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
                 && familySize.equals(otherPerson.familySize)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && isArchived == otherPerson.isArchived;
     }
 
     @Override

@@ -36,9 +36,9 @@ public class ParserUtilTest {
     private static final String INVALID_DATE = "20-10-2024";
     private static final String INVALID_TIME = "1400";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_DATE_1 = "129 March 00021";
+    private static final String INVALID_DATE_1 = "2000-99-99";
     private static final String INVALID_DATE_2 = "zxcvbn";
-    private static final String INVALID_DATE_FUTURE = "19 Mar 2900";
+    private static final String INVALID_DATE_FUTURE = "2900-03-19";
     private static final String INVALID_INCOME = "-21092";
     private static final String INVALID_FAMILY_SIZE_1 = "0";
     private static final String INVALID_FAMILY_SIZE_2 = "99jnksff2";
@@ -53,8 +53,8 @@ public class ParserUtilTest {
     private static final String VALID_TIME = "14:00";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_DATE_1 = "1 Jun 2022";
-    private static final String VALID_DATE_2 = "31 Jul 1954";
+    private static final String VALID_DATE_OF_BIRTH_1 = "2022-07-01";
+    private static final String VALID_DATE_OF_BIRTH_2 = "1954-07-31";
     private static final String VALID_INCOME = "9212.2329";
     private static final String VALID_FAMILY_SIZE = "1";
     private static final String WHITESPACE = " \t\r\n";
@@ -322,16 +322,18 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateOfBirth_validValueWithoutWhitespace_returnsDate() throws Exception {
-        assertEquals(new DateOfBirth(VALID_DATE_1), ParserUtil.parseDateOfBirth(VALID_DATE_1));
-        assertEquals(new DateOfBirth(VALID_DATE_2), ParserUtil.parseDateOfBirth(VALID_DATE_2));
+        assertEquals(new DateOfBirth(LocalDate.parse(VALID_DATE_OF_BIRTH_1)),
+                ParserUtil.parseDateOfBirth(VALID_DATE_OF_BIRTH_1));
+        assertEquals(new DateOfBirth(LocalDate.parse(VALID_DATE_OF_BIRTH_2)),
+                ParserUtil.parseDateOfBirth(VALID_DATE_OF_BIRTH_2));
     }
 
     @Test
     public void parseDateOfBirth_validValueWithWhitespace_returnsDate() throws Exception {
-        assertEquals(new DateOfBirth(VALID_DATE_1),
-                ParserUtil.parseDateOfBirth(WHITESPACE + VALID_DATE_1 + WHITESPACE));
-        assertEquals(new DateOfBirth(VALID_DATE_2),
-                ParserUtil.parseDateOfBirth(WHITESPACE + VALID_DATE_2 + WHITESPACE));
+        assertEquals(new DateOfBirth(LocalDate.parse(VALID_DATE_OF_BIRTH_1)),
+                ParserUtil.parseDateOfBirth(WHITESPACE + VALID_DATE_OF_BIRTH_1 + WHITESPACE));
+        assertEquals(new DateOfBirth(LocalDate.parse(VALID_DATE_OF_BIRTH_2)),
+                ParserUtil.parseDateOfBirth(WHITESPACE + VALID_DATE_OF_BIRTH_2 + WHITESPACE));
     }
 
     @Test

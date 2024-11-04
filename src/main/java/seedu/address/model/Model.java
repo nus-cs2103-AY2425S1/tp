@@ -17,6 +17,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ARCHIVED_PERSONS = Person::isArchived;
+    Predicate<Person> PREDICATE_SHOW_CURRENT_PERSONS = PREDICATE_SHOW_ARCHIVED_PERSONS.negate();
     Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
@@ -103,6 +105,9 @@ public interface Model {
      */
     void updateSortingOrder(Comparator<Person> comparator);
 
+    /** Returns an unmodifiable view of the appointment list */
+    List<Appointment> getAppointments();
+
     /**
      * Adds the given appointment.
      * {@code appointment} must not conflict with any existing appointments.
@@ -123,6 +128,11 @@ public interface Model {
      * Deletes all appointments with the given name.
      */
     void deleteAppointments(Name name);
+
+    /**
+     * Gets the appointments belonging to this person.
+     */
+    ObservableList<Appointment> getPersonsAppointments(Person person);
 
     /** Returns an unmodifiable view of the filtered appointment list */
     ObservableList<Appointment> getFilteredAppointmentList();
