@@ -121,7 +121,7 @@ Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
-* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces.
+* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
 :bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
