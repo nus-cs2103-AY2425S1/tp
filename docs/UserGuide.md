@@ -406,14 +406,22 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
+**A**: Install the app in the other computer by following the instructions in [Quick Start](#quick-start) and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+1. Find the `data` folder created by the application
+![FAQ 1 Step 1](./images/FAQ1Step1.png)
+<br></br>
+2. Transfer the `.json` file in the `data folder
+![FAQ 1 Step 2](./images/FAQ1Step2.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+**Issue 1:** **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. <br>
+**Remedy:** Delete the `preferences.json` file created by the application **in the same folder** before running the application again.
+![Remedy for Known Issue 1](./images/KnownIssuesRemedy1.png)
+<br></br>
+**Issue 2:** **If you minimize the Help Window** and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear.<br> 
+**Remedy:** Manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
