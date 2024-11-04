@@ -7,14 +7,12 @@ MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution 
 
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
-{: style="page-break-after: always"}
-
 ## Table of Contents
 
 * Table of Contents
 {:toc}
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## How to use this User Guide
 Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
@@ -78,7 +76,7 @@ The following annotated text-boxes are used throught this guide to provide usefu
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -235,7 +233,7 @@ For additional assistance or common questions, please refer to our [FAQ](#faq) s
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -295,7 +293,7 @@ the constraints of each parameter when used in a command.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Patient
 
@@ -379,7 +377,7 @@ to `91234567` and `johndoe@example.com` respectively.
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Appointments
 
@@ -457,7 +455,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Medical Conditions
 
@@ -517,7 +515,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Allergies
 
@@ -577,7 +575,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Managing Priority
 
@@ -602,7 +600,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### Finding Patients
 
@@ -714,7 +712,7 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ### General Features
 
@@ -778,7 +776,7 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 
 [Back to Table of Contents](#table-of-contents)
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -877,14 +875,14 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-{: style="page-break-after: always"}
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
