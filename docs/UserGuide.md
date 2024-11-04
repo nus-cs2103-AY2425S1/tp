@@ -239,5 +239,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Meetings**   | `meetings`
 **Delete Meetings**   | `deletem INDEX`<br> e.g., `deletem 1`
-**Edit Meetings**   | `editm INDEX [st/DD-MM-YYYY HH:MM] [et/DD-MM-YYYY HH:MM] [l/LOCATION]…​`<br> e.g., `editm 1 l/The Deck st/09-10-2024 09:30`
+**Edit Meetings**   | `editm INDEX [n/NAME] [st/DD-MM-YYYY HH:MM] [et/DD-MM-YYYY HH:MM] [l/LOCATION]…​`<br> e.g., `editm 1 l/The Deck st/09-10-2024 09:30`
 **Help**   | `help`
