@@ -269,6 +269,29 @@ Examples:
 * `vieww John` shows John's wedding if there's only one matching client named John
 * `vieww Alex` will show a list of all weddings where the client's name contains "Alex" if there are multiple matches
 
+### Assigning a role : `assign`
+
+Assigns a role to an existing person in the address book. Roles help identify the function of each contact (e.g., vendor, client, etc.).
+
+Format: `assign INDEX r/ROLE` or `assign NAME r/ROLE`
+
+* The person can be identified by either their index number or their name
+* When using index: must be a positive integer (1, 2, 3, ...)
+* When using name: matches are case-insensitive
+* If multiple contacts match the name, a list will be shown and you'll be prompted to use the index
+* Each person can only have one role at a time
+* Assigning a new role will replace the existing role
+* Role cannot be blank
+
+Examples:
+* `assign 1 r/vendor` assigns the role "vendor" to the first person in the list
+* `assign John Doe r/photographer` assigns the role "photographer" to John Doe (if there's only one contact with this name)
+* `assign Alex r/florist` will show a list of all contacts named Alex if there are multiple matches
+
+<box type="tip" seamless>
+
+**Tip:** Roles are useful for filtering contacts later using the `filter` command with the `r/` prefix.
+</box>
 
 
 ### Exiting the program : `exit`
@@ -315,6 +338,9 @@ _Details coming soon ..._
 
 **Q**: Can a client have multiple weddings?<br>
 **A**: No, each client can only have one wedding at a time.
+
+**Q**: Can I assign multiple roles to a person?<br>
+**A**: No, each person can only have one role at a time. Assigning a new role will replace the existing one.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -339,4 +365,5 @@ Action     | Format, Examples
 **Addw**   | `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]` <br> e.g., `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
 **Editw**  | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`
 **Vieww**  | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`
+**Assign** | `assign INDEX r/ROLE` or `assign NAME r/ROLE`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer`
 **Help**   | `help`
