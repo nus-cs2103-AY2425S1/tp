@@ -198,18 +198,33 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Filtering persons by tags : `filter`
+### Filtering persons : `filter`
 
-Filters all persons whose tags contain any of the specified keywords. The filtering is case-insensitive.
+Filters and lists all persons in address book whose fields (name, role, email, phone, address) match any of the
+specified keywords (case-insensitive).
 
-Format: `filter t/KEYWORD t/[MORE_KEYWORDS]...`
+Format: `filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]`
 
-* Filters all persons whose tags contain any of the specified keywords.
-* The search is case-insensitive. e.g `t/friend` will match `t/Friend`
-* The order of the keywords does not matter. e.g. `t/friend t/colleague` will match `t/colleague t/friend`
-* Only full words will be matched e.g. `t/col` will not match `t/colleague`
+* At least one field must be provided.
+* Parameters can be in any order.
+* Each field can only contain single word keywords (except address which can contain multiple words and
+* email which allows partial matches).
+* The search is case-insensitive. e.g. `n/john` will match `John`
+* Different fields are matched with different precision:
+    * Name: Exact match only (must be single word)
+    * Role: Exact match only
+    * Email: Partial match allowed
+    * Phone: Exact match only
+    * Address: Partial match allowed
+* When multiple fields are provided, persons matching ANY of the fields will be returned (i.e. `OR` search).
 
-Example: `filter t/friends t/family` Lists all persons in the address book whose tags match any of the specified keywords.
+Examples:
+* `filter n/John` returns `john` and `John`
+* `filter r/vendor` returns persons with role `vendor` (case-insensitive)
+* `filter e/gmail` returns all persons whose email contains "gmail"
+* `filter p/91234567` returns person with exact phone number
+* `filter n/John r/vendor` returns persons who either have name `John` OR role `vendor`
+* `filter e/gmail a/jurong` returns persons whose email contains "gmail" OR address contains "jurong"
 
 ### Exiting the program : `exit`
 
@@ -230,6 +245,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -260,8 +276,9 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | #1: `delete INDEX` or <br> #2: `delete NAME`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`
 **Edit**   | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter t/KEYWORD t/[MORE_KEYWORDS]...`<br> e.g., `filter t/friends
 **View**   | `view NAME`<br> e.g., `view Alex`, `view Alex Tan`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]`<br> e.g., `filter r/friends`
+**View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
 **List**   | `list`
 **Help**   | `help`

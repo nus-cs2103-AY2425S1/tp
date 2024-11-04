@@ -473,6 +473,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+</box>
 
 ### Launch and shutdown
 
@@ -534,6 +535,43 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: A partial list of contacts is shown.
    
    2. Test cases used can be the same since `delete NAME` searches from the entire list of contacts, rather than only the partial list.
+
+### Filtering persons
+
+1. Filtering while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `filter n/John`<br>
+       Expected: All persons with exact name match "John" (case-insensitive) are shown.
+
+    3. Test case: `filter r/vendor e/gmail`<br>
+       Expected: All persons who have role "vendor" OR have "gmail" in their email are shown.
+
+    4. Test case: `filter n/Alex Tan`<br>
+       Expected: Error shown. Error details shown in the status message as name must be a single word.
+
+2. Invalid filter commands to try:
+
+    1. Test case: `filter`<br>
+       Expected: Error shown. At least one filter criteria must be provided.
+
+    2. Test case: `filter n/`<br>
+       Expected: Error shown. Parameter cannot be empty.
+
+    3. Test case: `filter x/value`<br>
+       Expected: Error shown. Unknown prefix.
+
+3. Edge cases to test:
+
+    1. Test case: `filter n/john`<br>
+       Expected: Shows matches regardless of case (e.g., "John", "JOHN").
+
+    2. Test case: `filter e/gmail a/street`<br>
+       Expected: Shows all contacts with either "gmail" in email OR "street" in address.
+
+    3. Test case: `filter p/91234567`<br>
+       Expected: Shows only exact phone number matches.
 
 ### Saving data
 
