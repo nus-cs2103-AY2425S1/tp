@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.PawPatrol;
-import seedu.address.model.person.Person;
+import seedu.address.model.owner.Owner;
 
 /**
  * A utility class to help with building PawPatrol objects.
@@ -21,10 +21,10 @@ public class PawPatrolBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code PawPatrol} that we are building.
+     * Adds a new {@code Owner} to the {@code PawPatrol} that we are building.
      */
-    public PawPatrolBuilder withPerson(Person person) {
-        pawPatrol.addPerson(person);
+    public PawPatrolBuilder withOwner(Owner owner) {
+        pawPatrol.addOwner(owner);
         return this;
     }
 
