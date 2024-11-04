@@ -135,7 +135,7 @@ public class DeletePropertyToBuyCommand extends Command {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedListOfSellingProperties, updatedListOfBuyingProperties,
-                updatedListOfPropertiesSold, updatedListOfPropertiesBought);
+                updatedListOfPropertiesSold, updatedListOfPropertiesBought, personToEdit.isPinned());
     }
 
     @Override

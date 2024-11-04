@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private boolean isPinned = false;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedProperty> sellProperties = new ArrayList<>();
     private final List<JsonAdaptedProperty> buyProperties = new ArrayList<>();
@@ -48,7 +49,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("sellProperties") List<JsonAdaptedProperty> sellProperties,
                              @JsonProperty("buyProperties") List<JsonAdaptedProperty> buyProperties,
                              @JsonProperty("soldProperties") List<JsonAdaptedProperty> soldProperties,
-                             @JsonProperty("boughtProperties") List<JsonAdaptedProperty> boughtProperties) {
+                             @JsonProperty("boughtProperties") List<JsonAdaptedProperty> boughtProperties,
+                             @JsonProperty("isPinned") boolean isPinned) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +70,7 @@ class JsonAdaptedPerson {
         if (boughtProperties != null) {
             this.boughtProperties.addAll(boughtProperties);
         }
+        this.isPinned = isPinned;
     }
 
     /**
@@ -93,6 +96,7 @@ class JsonAdaptedPerson {
         boughtProperties.addAll(source.getListOfPropertiesBought().stream()
                 .map(JsonAdaptedProperty::new)
                 .collect(Collectors.toList()));
+        isPinned = source.isPinned();
     }
 
     /**
@@ -171,7 +175,7 @@ class JsonAdaptedPerson {
 
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelSellProperties, modelBuyProperties, modelSoldProperties, modelBoughtProperties);
+                modelSellProperties, modelBuyProperties, modelSoldProperties, modelBoughtProperties, isPinned);
     }
 
 }

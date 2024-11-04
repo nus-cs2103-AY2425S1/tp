@@ -113,7 +113,7 @@ public class EditCommand extends Command {
                 personToEdit.getListOfPropertiesBought();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, sellingProperties,
-                buyingProperties, propertiesSold, propertiesBought);
+                buyingProperties, propertiesSold, propertiesBought, personToEdit.isPinned());
     }
 
     @Override
