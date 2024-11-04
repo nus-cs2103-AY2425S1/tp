@@ -85,7 +85,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_LENGTH_EMAIL_DESC = " " + PREFIX_EMAIL
             + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
-            + "john.doe.john.doe.john.doe.john.doe@example.com";  // longer than 254 characters
+            + "john.doe.john.doe.john.doe.john.doe@example.com"; // longer than 254 characters
     public static final String INVALID_SCHEDULE_NAME = " " + PREFIX_SCHEDULE_NAME + "appointment!";
     public static final String INVALID_SCHEDULE_DATE = " " + PREFIX_SCHEDULE_DATE + "22-10-2024";
     public static final String INVALID_SCHEDULE_TIME = " " + PREFIX_SCHEDULE_TIME + "4pm";
