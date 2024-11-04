@@ -52,7 +52,7 @@ public class ParserUtil {
         case "contact", "company", "job", "all":
             return normalizedEntity;
         default:
-            String exceptionMessage = String.format(Messages.MESSAGE_INVALID_ENTITY, trimmedEntity);
+            String exceptionMessage = String.format(Messages.MESSAGE_INVALID_ENTITY, normalizedEntity);
             throw new ParseException(exceptionMessage);
         }
     }
