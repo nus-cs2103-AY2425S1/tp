@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.SPORTS_FESTIVAL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
+import seedu.address.logic.commands.event.commands.ViewEventCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -160,4 +162,9 @@ public class AddressBookParserTest {
                 HelpCommand.MESSAGE_USAGE), () -> parser.parseSearchCommand(""));
     }
 
+    public void parseCommand_viewEvent() throws ParseException {
+        Command expected = new ViewEventCommand(SPORTS_FESTIVAL);
+        assertEquals(expected, new AddressBookParser()
+                .parseCommand(ViewEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
+    }
 }
