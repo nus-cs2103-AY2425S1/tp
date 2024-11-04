@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.HallPointer;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
@@ -18,7 +18,7 @@ import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code HallPointer} with sample data.
  */
 public class SampleDataUtil {
 
@@ -58,8 +58,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyHallPointer getSampleHallPointer() {
+        HallPointer sampleAb = new HallPointer();
         for (Member sampleMember : getSampleMembers()) {
             sampleAb.addMember(sampleMember);
         }

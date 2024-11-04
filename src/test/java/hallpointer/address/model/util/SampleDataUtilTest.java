@@ -15,7 +15,7 @@ public class SampleDataUtilTest {
     }
 
     @Test
-    public void getSampleAddressBook_success() {
-        assertDoesNotThrow(SampleDataUtil::getSampleAddressBook);
+    public void getSampleHallPointer_success() {
+        assertDoesNotThrow(SampleDataUtil::getSampleHallPointer);
     }
 }

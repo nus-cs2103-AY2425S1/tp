@@ -9,16 +9,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import hallpointer.address.commons.exceptions.IllegalValueException;
-import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.HallPointer;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.member.Member;
 
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable HallPointer that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "hallpointer")
+class JsonSerializableHallPointer {
 
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
     private static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate session(s).";
@@ -26,10 +26,10 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedMember> members = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given members.
+     * Constructs a {@code JsonSerializableHallPointer} with the given members.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(
+    public JsonSerializableHallPointer(
             @JsonProperty("members") List<JsonAdaptedMember> members,
             @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
         if (members != null) {
@@ -38,29 +38,29 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyHallPointer} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableHallPointer}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableHallPointer(ReadOnlyHallPointer source) {
         members.addAll(source.getMemberList().stream().map(JsonAdaptedMember::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code HallPointer} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public HallPointer toModelType() throws IllegalValueException {
+        HallPointer hallPointer = new HallPointer();
         for (JsonAdaptedMember jsonAdaptedMember : members) {
             Member member = jsonAdaptedMember.toModelType();
-            if (addressBook.hasMembers(member)) {
+            if (hallPointer.hasMembers(member)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
             }
-            addressBook.addMember(member);
+            hallPointer.addMember(member);
         }
-        return addressBook;
+        return hallPointer;
     }
 
 }

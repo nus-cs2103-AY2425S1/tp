@@ -6,7 +6,7 @@ import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.logic.commands.CommandResult;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.logic.parser.exceptions.ParseException;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.member.Member;
 import javafx.collections.ObservableList;
 
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the HallPointer.
      *
-     * @see hallpointer.address.model.Model#getAddressBook()
+     * @see hallpointer.address.model.Model#getHallPointer()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyHallPointer getHallPointer();
 
     /** Returns an unmodifiable view of the filtered list of members */
     ObservableList<Member> getFilteredMemberList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getHallPointerFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

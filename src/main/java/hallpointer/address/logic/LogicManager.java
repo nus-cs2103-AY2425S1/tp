@@ -10,10 +10,10 @@ import hallpointer.address.commons.core.LogsCenter;
 import hallpointer.address.logic.commands.Command;
 import hallpointer.address.logic.commands.CommandResult;
 import hallpointer.address.logic.commands.exceptions.CommandException;
-import hallpointer.address.logic.parser.AddressBookParser;
+import hallpointer.address.logic.parser.HallPointerParser;
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.storage.Storage;
 import javafx.collections.ObservableList;
@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final HallPointerParser hallPointerParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        hallPointerParser = new HallPointerParser();
     }
 
     @Override
@@ -47,11 +47,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = hallPointerParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveHallPointer(model.getHallPointer());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyHallPointer getHallPointer() {
+        return model.getHallPointer();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getHallPointerFilePath() {
+        return model.getHallPointerFilePath();
     }
 
     @Override

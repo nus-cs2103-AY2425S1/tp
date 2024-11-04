@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Member values as in TypicalMembers#getTypicalAddressBook()",
+  "_comment": "HallPointer save file which contains the same Member values as in TypicalMembers#getTypicalHallPointer()",
   "members" : [ {
     "name" : "Alice Pauline",
     "telegram" : "PauLice",

@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.model.Model;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
@@ -37,12 +37,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getHallPointerFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setHallPointerFilePath(Path hallPointerFilePath) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -52,12 +52,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyHallPointer getHallPointer() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook newData) {
+    public void setHallPointer(ReadOnlyHallPointer hallPointer) {
         throw new AssertionError("This method should not be called.");
     }
 
