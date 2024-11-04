@@ -52,7 +52,7 @@ jobs:
           path: 'build/reports/checkstyle'
 
       - name: Comment on PR with artifact link
-        if: github.event_name == 'pull_request' && matrix.platform == 'ubuntu-latest' && matrix.report_type == 'test-report'
+        if: github.event_name == 'pull_request' && runner.os == 'Linux'
         uses: actions/github-script@v6
         with:
           script: |
