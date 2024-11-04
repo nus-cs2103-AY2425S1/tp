@@ -3,20 +3,20 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INPUT;
 
-import seedu.address.logic.commands.TrackCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.CategoryContainsKeywordPredicate;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import seedu.address.logic.commands.TrackCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CategoryContainsKeywordPredicate;
+
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class TrackCommandParser implements Parser<TrackCommand> {
-    private static final Set<String> VALID_CATEGORIES = new HashSet<>(Arrays.asList("student", "company"));
+    private static final Set<String> PREDEFINED_CATEGORIES = new HashSet<>(Arrays.asList("student", "company"));
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -37,8 +37,8 @@ public class TrackCommandParser implements Parser<TrackCommand> {
         String[] words = trimmedArgs.split("\\s+");
         String category = words[0].toLowerCase(Locale.ROOT);
 
-        //Checks if the provided category is one word and is valid
-        if (words.length != 1 || !VALID_CATEGORIES.contains(category)) {
+        // Checks if the provided category to track is in multiple words or not from the predefined list
+        if (words.length != 1 || !PREDEFINED_CATEGORIES.contains(category)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_INPUT, TrackCommand.MESSAGE_INVALID_INPUT_ERROR));
         }

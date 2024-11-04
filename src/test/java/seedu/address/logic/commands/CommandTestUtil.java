@@ -28,6 +28,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+    public static final String VALID_CATEGORY_STUDENT = "student";
     public static final String VALID_CATEGORY_COMPANY = "company";
     public static final String VALID_INDUSTRY_AMY = "Finance"; // Assume Alice is company
     public static final String VALID_INDUSTRY_BOB = "Technology";

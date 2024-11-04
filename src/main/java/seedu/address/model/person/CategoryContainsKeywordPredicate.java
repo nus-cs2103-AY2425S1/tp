@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Category} matches any of the keyword given.
@@ -20,10 +19,8 @@ public class CategoryContainsKeywordPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        // Check if category is null before trying to compare
-        if (person.getCategoryDisplayName() == null) {
-            return false; // If the category is null, it does not match the keyword
-        }
+        assert person.getCategoryDisplayName() != null;
+
         return StringUtil.containsWordIgnoreCase(person.getCategoryDisplayName(), keyword);
     }
 
