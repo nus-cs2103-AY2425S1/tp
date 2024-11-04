@@ -51,10 +51,12 @@ public class PersonPredicateBuilder {
         classIdKeywords = new ArrayList<>(personPredicateBuilder.classIdKeywords);
         monthPaidKeywords = new ArrayList<>(personPredicateBuilder.monthPaidKeywords);
         notMonthPaidKeywords = new ArrayList<>(personPredicateBuilder.notMonthPaidKeywords);
+        tagKeywords = new ArrayList<>(personPredicateBuilder.tagKeywords);
         isSetName = personPredicateBuilder.isSetName;
         isSetClassId = personPredicateBuilder.isSetClassId;
         isSetMonthPaid = personPredicateBuilder.isSetMonthPaid;
         isSetNotMonthPaid = personPredicateBuilder.isSetNotMonthPaid;
+        isSetTag = personPredicateBuilder.isSetTag;
     }
 
     /**
@@ -122,25 +124,14 @@ public class PersonPredicateBuilder {
      */
     public Predicate<Person> build() {
 
-        // guarantee immutability: copy all internal fields
-        List<String> nameKeywordsCopy = new ArrayList<>(nameKeywords);
-        List<String> classIdKeywordsCopy = new ArrayList<>(classIdKeywords);
-        List<String> monthPaidKeywordsCopy = new ArrayList<>(monthPaidKeywords);
-        List<String> notMonthPaidKeywordsCopy = new ArrayList<>(notMonthPaidKeywords);
-        List<String> tagKeywordsCopy = new ArrayList<>(tagKeywords);
-        boolean isSetNameCopy = isSetName;
-        boolean isSetClassIdCopy = isSetClassId;
-        boolean isSetMonthPaidCopy = isSetMonthPaid;
-        boolean isSetNotMonthPaidCopy = isSetNotMonthPaid;
-        boolean isSetTagCopy = isSetTag;
 
         return person -> {
             boolean nameMatch = nameContainsKeywords(person, isSetName, nameKeywords);
             boolean classIdMatch = classIdContainsKeywords(person, isSetClassId, classIdKeywords);
             boolean monthPaidMatch = monthPaidContainsKeywords(person, isSetMonthPaid, monthPaidKeywords);
             boolean notMonthPaidMatch = notMonthPaidContainsKeywords(
-                    person, isSetNotMonthPaidCopy, notMonthPaidKeywordsCopy);
-            boolean tagMatch = tagContainsKeywords(person, isSetTagCopy, tagKeywordsCopy);
+                    person, isSetNotMonthPaid, notMonthPaidKeywords);
+            boolean tagMatch = tagContainsKeywords(person, isSetTag, tagKeywords);
             return nameMatch && classIdMatch && monthPaidMatch && notMonthPaidMatch && tagMatch;
         };
     }
