@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookFilter;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,11 +15,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -35,26 +37,25 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_multipleCriteria_filtersSuccessfully() throws CommandException {
-        // Create a FilterCommand with multiple criteria
-        FilterCommand filterCommand = new FilterCommand("John", "friends", "example@test.com",
-                "94351253", "Main St");
+    public void execute_multipleCriteria_filtersSuccessfullyWithPartialMatches() throws CommandException {
+        // Create filter command with multiple criteria
+        FilterCommand filterCommand = new FilterCommand("john", "", "example@test.com",
+                "94351253", "main st");
 
-        // Set up expected model to filter based on criteria
-        expectedModel.updateFilteredPersonList(person -> new NameContainsKeywordsPredicate(Arrays.asList("John"))
-                    .test(person)
-                && new RoleContainsKeywordsPredicate(Arrays.asList("friends")).test(person)
-                && new EmailContainsKeywordsPredicate(Arrays.asList("example@test.com")).test(person)
-                && new PhoneContainsKeywordsPredicate(Arrays.asList("94351253")).test(person)
-                && new AddressContainsKeywordsPredicate(Arrays.asList("Main St")).test(person));
+        Predicate<Person> multiPredicate = person -> (person.getName().fullName.toLowerCase().contains("john")
+                        || person.getEmail().value.toLowerCase().contains("example@test.com")
+                        || person.getPhone().value.contains("94351253")
+                        || person.getAddress().value.toLowerCase().contains("main st"));
 
-        // Execute the command
+        expectedModel.updateFilteredPersonList(multiPredicate);
+
+        // Execute command
         CommandResult result = filterCommand.execute(model);
 
-        // Check that the filtered list matches the expected result
+
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
-        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                result.getFeedbackToUser());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                model.getFilteredPersonList().size()), result.getFeedbackToUser());
     }
 
     @Test
@@ -101,7 +102,8 @@ public class FilterCommandTest {
     @Test
     public void execute_emailCriteria_filtersByEmail() throws CommandException {
         // Filter by email only
-        FilterCommand filterCommand = new FilterCommand("", "", "example@test.com", "", "");
+        FilterCommand filterCommand = new FilterCommand("", "", "example@test.com", "",
+                "");
 
         // Set up expected model to filter by email only
         expectedModel.updateFilteredPersonList(new EmailContainsKeywordsPredicate(Arrays.asList("example@test.com")));
@@ -134,18 +136,26 @@ public class FilterCommandTest {
 
     @Test
     public void execute_addressCriteria_filtersByAddress() throws CommandException {
-        // Filter by address only
-        FilterCommand filterCommand = new FilterCommand("", "", "", "", "Main St");
+        // Filter by address only - using lowercase since the filter is case-insensitive
+        FilterCommand filterCommand = new FilterCommand("", "", "", "", "main st");
 
-        // Set up expected model to filter by address only
-        expectedModel.updateFilteredPersonList(new AddressContainsKeywordsPredicate(Arrays.asList("Main St")));
+        // Define predicate that matches addresses case-insensitively and with partial matches
+        Predicate<Person> addressPredicate = person ->
+                person.getAddress().value.toLowerCase().contains("main st");
+
+        expectedModel.updateFilteredPersonList(addressPredicate);
 
         // Execute the command
         CommandResult result = filterCommand.execute(model);
 
-        // Check that the filtered list matches the expected result
+        // For debugging
+        System.out.println("Expected filtered list:");
+        expectedModel.getFilteredPersonList().forEach(System.out::println);
+        System.out.println("\nActual filtered list:");
+        model.getFilteredPersonList().forEach(System.out::println);
+
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
-        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                result.getFeedbackToUser());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                model.getFilteredPersonList().size()), result.getFeedbackToUser());
     }
 }

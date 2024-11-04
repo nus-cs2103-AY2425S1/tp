@@ -55,7 +55,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
   e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/florist` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[w/WEDDINGINDEX]…​` can be used as ` ` (i.e. 0 times), `w/1`, `w/1 w/2` etc.
+  e.g. `[w/WEDDING_INDEX]…​` can be used as ` ` (i.e. 0 times), `w/1`, `w/1 w/2` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -79,16 +79,19 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]...​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tips:** 
+* A person can have either 0 or 1 role.
+* A person can have any number of wedding jobs (including 0).
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/12345678 t/criminal`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 r/Florist`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 w/1`
 
 ### Listing all persons : `list`
 
@@ -98,41 +101,80 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. Fields that can be edited: name, phone, address, email.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+If you know the index of the specific contact you want to edit:
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Format #1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` edits the name of the 2nd person to be `Betsy Crower`.
+
+If you do not know the index but know the name of the contact you want to edit:
+
+Format #2: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
+
+* Filters a list of contacts with names that contains the entire NAME keyword
+* If there is only one contact that matches, the contact will be edited directly
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `edit INDEX …​` to specify the contact they want to edit
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
+
+
+Examples:
+*  `edit John Doe p/91234567 e/johndoe@example.com` edits the phone number and email address of `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy n/Betsy Crower` edits the name of `Betsy` to be `Betsy Crower`.
+* `edit Chris p/99998888` returns a filtered list of contacts whose names contain `Chris` and user need to edit their existing command to become
+  `edit [INDEX of specific person] p/99998888` to specify the `Chris` they want to edit.
 
 ### Assigning a person : `assign`
 
-Assigns an existing person in the address book a role or
-to existing wedding(s).
+Assigns an existing person in the address book a role or to existing wedding(s).
 
-Format: `assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX]…​`
+If you know the index of the specific contact you want to assign:
 
-* Person to assign can be specified by `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Person to assign can also be specified by `NAME` keyword. The name refers to the name of the person to assign.
-* The name keyword can be either the full name or partial name (consisting of only one word).
-* When there are more than one contact, of which name contains the keyword, a filtered list containing those contacts
-    will be given. From that list, you can obtain the index of the specific contact you want to assign. With that index,
-    you can rewrite the command to `assign INDEX [r/ROLE]` to assign a role to that specific contact.
-* At least one of the optional fields `r/` or `w/` must be provided.
-* When assigning roles, assigning duplicate roles are not allowed.
+Format #1: `assign INDEX [r/ROLE] [w/WEDDING_INDEX]…​`
+
+* Assigns the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
 * When assigning roles, assigning blank roles e.g `r/` is not allowed.
-* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list. The index **must be a positive integer** 1, 2, 3, …​
-* A person can be assigned to multiple weddings, e.g. `assign Emily Davis w/1 w/2 w/3` to indicate that Emily Davis has been assigned to the 1st, 2nd and 3rd person of the displayed wedding list.
+* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list. 
+The index **must be a positive integer** 1, 2, 3, …​
+* A person can be assigned to multiple weddings.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `assign 1 r/florist` assigns the 1st person to have the role of a `florist`.
+*  `assign 1 w/1 ` assigns the 1st person to the 1st wedding.
+*  `assign 2 r/vendor w/1 w/2` assigns the 2nd person to have the role of a `vendor` as well as to be associated to the 1st and 2nd wedding.
 
+If you do not know the index but know the name of the contact you want to assign:
+
+Format #2: `assign NAME [r/ROLE] [w/WEDDING_INDEX]…​`
+
+* Filters a list of contacts with names that contains the entire NAME keyword
+* If there is only one contact that matches, the contact will be assigned directly
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `assign INDEX …​` to specify the contact they want to edit
+* At least one of the optional fields must be provided.
+* * When assigning roles, assigning blank roles e.g `r/` is not allowed.
+* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list.
+  The index **must be a positive integer** 1, 2, 3, …​
+* A person can be assigned to multiple weddings.
+
+Examples:
+*  `assign John Doe r/florist` assigns `John Doe` to have the role of a `florist`.
+*  `assign Betsy Crower w/1 ` assigns `Betsy Crower` to the 1st wedding.
+*  `assign Chris r/vendor w/1 w/2` if there are more than 1 name that contains `Chris`, 
+a filtered list of contacts whose names contain `Chris` is returned and user need to edit their existing command to become
+   `assign [INDEX of specific person] r/vendor w/1 w/2` to specify the `Chris` they want to assign.
 
 ### Locating persons by name: `find`
 
@@ -156,10 +198,10 @@ Examples:
 
 View the contact of a specified person from the address book.
 
-Format: `view KEYWORD`
+Format: `view NAME`
 
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* The keyword can be either the full name or partial name (consisting of only one word).
+* Returns a filtered list made out of the contacts with names that contains the ENTIRE name keyword
 * Only the name can be used for viewing
 
 Examples:
@@ -172,29 +214,28 @@ Deletes the specified person from the address book.
 
 If you know the index of the specific contact you want to delete:
 
-Format: `delete INDEX`
+Format #1: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Example:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 
 If you do not know the index but know the name of the contact you want to delete:
 
-Format: `delete KEYWORD`
+Format #2: `delete KEYWORD`
 
+* Filters a list of contacts with names that contains the ENTIRE name keyword
+* If there is only one contact that matches, the contact will be edited directly
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `delete INDEX …​` to specify the contact they want to delete
 * This command is case-insensitive. e.g. `alex tan` will match `Alex Tan`
-* The keyword can be either the full name or partial name.
-* When there are more than one contact, of which name contains the keyword, a filtered list containing those contacts
-  will be given. From that list, you can obtain the index of the specific contact you want to delete. With that index,
-  you can do a `delete INDEX` to delete that specific contact.
 
-Example:
+Examples:
 
 * `delete Betsy` will delete the contact of Betsy Tan directly if there are no duplicates.
-* `delete Alex` will give a list of contacts named `Alex`, and user can choose which contact from filtered list to deleted from.
+* `delete Alex Tan` will give a list of contacts whose names contains `Alex Tan`. User will then edit their command into `delete INDEX …​` to specify the `Alex Tan` they want to delete.
 
 ### Clearing all entries : `clear`
 
@@ -202,17 +243,47 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Filtering persons by tags : `filter`
+### Filtering persons : `filter`
 
-Filters all persons whose tags contain any of the specified keywords. The filtering is case-insensitive.
+Filters and lists all persons in address book whose fields (name, role, email, phone, address) match any of the
+specified keywords (case-insensitive).
 
-Format: `filter r/KEYWORD`
+Format: `filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]`
 
-* Filters all persons whose role contain any of the specified keywords.
-* The search is case-insensitive. e.g `r/florist` will match `r/Florist`
-* Only full words will be matched e.g. `r/ven` will not match `r/vendor`
+* At least one field must be provided.
+* Parameters can be in any order.
+* Each field can only contain single word keywords (except address which can contain multiple words and
+* email which allows partial matches).
+* The search is case-insensitive. e.g. `n/john` will match `John`
+* Different fields are matched with different precision:
+    * Name: Exact match only (must be single word)
+    * Role: Exact match only
+    * Email: Partial match allowed
+    * Phone: Exact match only
+    * Address: Partial match allowed
+* When multiple fields are provided, persons matching ANY of the fields will be returned (i.e. `OR` search).
 
-Example: `filter r/vendor` Lists all persons in the address book whose role are vendors.
+Examples:
+* `filter n/John` returns `john` and `John`
+* `filter r/vendor` returns persons with role `vendor` (case-insensitive)
+* `filter e/gmail` returns all persons whose email contains "gmail"
+* `filter p/91234567` returns person with exact phone number
+* `filter n/John r/vendor` returns persons who either have name `John` OR role `vendor`
+* `filter e/gmail a/jurong` returns persons whose email contains "gmail" OR address contains "jurong"
+
+### Adding a wedding : `addw`
+Adds a wedding to the address book.
+
+Format: `addw n/WEDDING NAME c/CLIENT [d/DATE] [v/VENUE]`
+
+Tip: CLIENT can be inputted by index or name.
+
+Examples:
+* `addw n/Alice's Wedding c/Alice`
+* `addw n/Alice's Wedding c/1`
+* `addw n/Bob's Wedding c/Bob d/2024-12-31`
+* `addw n/Bob's Wedding c/Bob v/Sentosa`
+* `addw n/Bob's Wedding c/Bob d/2024-12-31 v/Sentosa`
 
 ### Exiting the program : `exit`
 
@@ -233,6 +304,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -259,12 +331,13 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/florist w/1 w/2`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | #1: `delete INDEX` or <br> #2: `delete NAME`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`
+**Edit**   | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com`
+**View**   | `view NAME`<br> e.g., `view Alex`, `view Alex Tan`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter t/KEYWORD t/[MORE_KEYWORDS]...`<br> e.g., `filter t/friends
+**Filter** | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]`<br> e.g., `filter r/friends`
 **View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
 **List**   | `list`
 **Help**   | `help`
