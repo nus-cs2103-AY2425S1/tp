@@ -121,7 +121,6 @@ public interface Model {
      */
     void setGoods(ReadOnlyReceiptLog goodsReceipts);
 
-
     /**
      * TODO: Add ReadOnly Feature to the parameter
      * Returns the goods list.
@@ -131,7 +130,7 @@ public interface Model {
     /**
      * Returns the filtered goods list.
      */
-    ReadOnlyReceiptLog getFilteredGoods();
+    ReadOnlyReceiptLog getGoodsFiltered();
 
     /**
      * Adds the given goods.
