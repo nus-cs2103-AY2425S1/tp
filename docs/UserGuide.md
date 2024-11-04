@@ -12,7 +12,9 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
+
+### Installation
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -42,6 +44,8 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+### Features Overview
 
 <div markdown="block" class="alert alert-info">
 
