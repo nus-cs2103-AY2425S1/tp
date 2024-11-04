@@ -1,9 +1,24 @@
+.root { -fx-font: 13 "Consolas"; }
+
+.button {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12pt;
+}
 #copyButton, #helpMessage {
     -fx-text-fill: white;
+    -fx-font-family: "Consolas";
 }
 
 #copyButton {
     -fx-background-color: dimgray;
+    -fx-text-fill: white;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12pt;
+    -fx-padding: 10px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
 }
 
 #copyButton:hover {
@@ -17,3 +32,4 @@
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
