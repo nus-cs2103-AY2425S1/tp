@@ -65,9 +65,7 @@ public class FindCommand extends Command {
                 .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
                 .anyMatch(goodsReceipt -> categoriesSet.contains(goodsReceipt.getGoods().getCategory()));
 
-        model.updateFilteredPersonList(person ->
-                nameContainsKeywordsPredicate.test(person)
-                        || hasCategoryPredicate.test(person));
+        model.updateFilteredPersonList(nameContainsKeywordsPredicate.or(hasCategoryPredicate));
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
