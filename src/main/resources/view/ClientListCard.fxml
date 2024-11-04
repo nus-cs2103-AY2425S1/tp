@@ -33,13 +33,13 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+         <FlowPane fx:id="assignedTier" prefWidth="40.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="1.0" />
+               </HBox.margin></FlowPane>
          <FlowPane fx:id="assignedStatus" prefWidth="40.0">
                <HBox.margin>
-                  <Insets left="2.0" top="3.0" />
-               </HBox.margin></FlowPane>
-         <FlowPane fx:id="assignedTier">
-               <HBox.margin>
-                  <Insets left="2.0" top="3.0" />
+                  <Insets left="5.0" top="1.0" />
                </HBox.margin>
             </FlowPane>
       </HBox>

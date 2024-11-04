@@ -14,14 +14,19 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-width: 1;
 }
 
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
+    -fx-border-color: #3c3e3f;
+    -fx-border-width: 1;
 }
 
 .list-cell:filled:odd {
     -fx-background-color: #515658;
+    -fx-border-color: #515658;
+    -fx-border-width: 1;
 }
 
 .list-cell:filled:selected {
@@ -52,10 +57,10 @@
 /** Styling for Tier Tag/Label **/
 #assignedTier .label {
     -fx-text-fillx: white;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-padding: 3 6 4 6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 12;
     -fx-font-weight: bold;
 }
 
@@ -64,7 +69,8 @@
 }
 
 #assignedTier .silver-tier {
-    -fx-background-color: #71706e;
+    -fx-background-color: #C0C0C0;
+    -fx-text-fill: #1A1A1A
 }
 
 #assignedTier .bronze-tier {
@@ -72,24 +78,23 @@
 }
 
 #assignedTier .reject-tier {
-    -fx-background-color: #8B0000;
+    -fx-background-color: #5C0002;
 }
 
 /** Styling for Status Tag/Label **/
+#assignedStatus .label {
+    -fx-text-fillx: white;
+    -fx-padding: 3 6 4 6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+}
+
 #assignedStatus .urgent-status {
-    -fx-background-color: #FF2400;
+    -fx-background-color: #B22222;
 }
 
 #assignedStatus .nonUrgent-status {
-    -fx-background-color: #c46210;
-}
-
-
-#assignedStatus .label {
-    -fx-text-fillx: white;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
-    -fx-font-weight: bold;
+    -fx-background-color: #C46210;
 }
