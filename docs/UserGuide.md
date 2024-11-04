@@ -51,6 +51,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
     - [Highlighting of command errors](#highlighting-of-command-errors)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
