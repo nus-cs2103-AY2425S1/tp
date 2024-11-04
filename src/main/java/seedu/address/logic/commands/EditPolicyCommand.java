@@ -44,7 +44,7 @@ public class EditPolicyCommand extends Command {
             + PREFIX_POLICY_EXPIRY_DATE + "09/14/2024 "
             + " (The last 3 fields are optional but one of them needs to be edited at all times)\n ";
 
-    public static final String MESSAGE_SUCCESS = "Edited Policy:\n\n%1$s";
+    public static final String MESSAGE_SUCCESS = "%1$s policy for %2$s has been changed to:\n\n%3$s";
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
 
