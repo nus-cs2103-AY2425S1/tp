@@ -12,7 +12,18 @@ import seedu.address.model.person.Person;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String DEFAULT_OVERVIEW = """
+            Hmm, did you mean to type any of these instead?:
+            Add: add n/NAME id/STUDENT_ID [nid/NUS_NET_ID] [m/MAJOR] [y/YEAR] [g/GROUP]
+            Edit: edit INDEX [n/NAME] [id/STUDENT_ID] [nid/NUS_NET_ID][[m/MAJOR] [y/YEAR] [g/GROUP]
+            Comment: comment INDEX c/COMMENTFind: find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]
+            Show group: show GROUP_INDEX
+            Delete: delete INDEX
+            List: list INDEX
+            Clear: clear INDEX
+            Help: help""";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command \n%1$s";
+    public static final String MESSAGE_EMPTY_COMMAND_FORMAT = "There needs to be a command and/or arguments! \n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DELETE_EMPTY_INDEX = "Error: The index cannot be empty";
