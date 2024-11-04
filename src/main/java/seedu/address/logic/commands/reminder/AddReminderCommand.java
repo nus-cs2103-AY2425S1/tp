@@ -64,7 +64,8 @@ public class AddReminderCommand extends Command {
         requireNonNull(model);
 
         // Parse input using the NameContainsKeywordsPredicate
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(toAdd.getPersonName()));
+        String[] nameKeywords = toAdd.getPersonName().split("\\s+");
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of(nameKeywords));
         List<Person> matchingPersons = model.getClientHub().getPersonList().filtered(predicate);
 
         // Check if there is exactly one match
