@@ -28,6 +28,9 @@ public class UntagCommandParserTest {
 
     private UntagCommandParser parser = new UntagCommandParser();
 
+    /**
+     * EP: Single valid lowercase argument.
+     */
     @Test
     public void parse_validArgs_success() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + FRIENDS.getTagName();
@@ -39,6 +42,9 @@ public class UntagCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Empty tag, tag length = 0).
+     */
     @Test
     public void parse_missingTag_throwsParseException() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG;
@@ -46,6 +52,9 @@ public class UntagCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Missing prefix).
+     */
     @Test
     public void parse_missingPrefix_throwsParseException() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + FRIENDS.getTagName();
@@ -53,6 +62,9 @@ public class UntagCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Missing index).
+     */
     @Test
     public void parse_missingIndex_throwsParseException() {
         String userInput = " " + PREFIX_TAG + FRIENDS.getTagName();
@@ -60,6 +72,9 @@ public class UntagCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Tag comprised solely of spaces)
+     */
     @Test
     public void parse_emptyTag_throwsParseException() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + " ";
@@ -67,6 +82,9 @@ public class UntagCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Tag length exceeded, tag length > 50)
+     */
     @Test
     public void parse_tooLongTag_throwsParseException() {
         String longTag = "veryveryveryveryveryveryveryveryveryveryverylongtagthatshouldexceedthecharacterlimit";
@@ -75,6 +93,9 @@ public class UntagCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Index is not an integer)
+     */
     @Test
     public void parse_invalidIndex_throwsParseException() {
         String userInput = "a " + PREFIX_TAG + FRIENDS;
@@ -82,6 +103,9 @@ public class UntagCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
+    /**
+     * EP: Invalid argument (i.e. Max number of indexes exceeded, count of indexes > 10)
+     */
     @Test
     public void parse_tooManyIndexes_throwsParseException() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " "
