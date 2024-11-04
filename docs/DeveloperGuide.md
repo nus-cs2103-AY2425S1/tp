@@ -324,37 +324,28 @@ The activity diagram shows the general sequence of steps when a user interacts w
 <br>
 
 ## Implementation of general features
+General commands include the `exit` and `help` commands.
+
+The sequence diagram shows how a general command (`ExitCommand` or `HelpCommand`) is executed:
+<puml src="diagrams/GeneralCommandsSequenceDiagram.puml" width="600"></puml>
+
+**Step 1.** The user types an `xyz` command (`exit` or `help`) in the `CommandBox`, which is then passed to the `LogicManager`.
+
+**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `xyz` command.
+
+**Step 3.** The `AddressBookParser` creates an `XYZCommand` object, which is returned to the 
+`LogicManager`. The `XYZCommand` object can be an `ExitCommand` or a `HelpCommand`.
+
+**Step 4.** The `LogicManager` calls the `XYZCommand::execute` method, which creates a new `CommandResult` 
+object.
+
+**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
+
+<br>
 
 ### Exit feature
 #### Implementation
 When a user types an `exit` command, the DocTrack application will exit.
-
-The sequence diagram shows how an `exit` command is executed:
-<puml src="diagrams/ExitSequenceDiagram.puml" width="600"></puml>
-
-**Step 1.** The user types the `exit` command in the `CommandBox`, which is then passed to the `LogicManager`.
-
-**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `exit` command.
-
-**Step 3.** The `AddressBookParser` creates an `ExitCommand` object, which is returned to the `LogicManager`.
-
-**Step 4.** The `LogicManager` calls the `ExitCommand::execute` method, which creates a new `CommandResult` object.
-
-**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
-
-
-#### Design considerations
-
-**Aspect: How to handle unsaved data on exit:**
-
-* **Alternative 1 (current choice):** Automatically save all changes on exit.
-  * Pros: Simplifies the exit process for the user. Ensures no data is lost.
-  * Cons: May be slow if there are many changes to save.
-
-
-* **Alternative 2:** Prompt the user to save changes before exiting.
-    * Pros: Gives the user more control over the saving process.
-    * Cons: May be annoying for users who do not want an additional step to save changes.
   
 <br>
 
@@ -362,22 +353,6 @@ The sequence diagram shows how an `exit` command is executed:
 #### Implementation
 
 When a user types a `help` command, the DocTrack application will display a `HelpWindow`.
-
-The sequence diagram shows how a `help` command is executed:
-
-<puml src="diagrams/HelpSequenceDiagram.puml" width="600"></puml>
-
-**Step 1.** The user types the `help` command in the `CommandBox`, which is then passed to the `LogicManager`.
-
-**Step 2.** The `LogicManager` calls the `AddressBookParser::parseCommand` method to parse the `help` command.
-
-**Step 3.** The `AddressBookParser` creates a `HelpCommand` object, which is returned to the `LogicManager`.
-
-**Step 4.** The `LogicManager` calls the `HelpCommand::execute` method, which creates a new 
-`CommandResult` object.
-
-**Step 5.** The `CommandResult` object is returned to the `LogicManager`.
-
 
 #### Design considerations
 
@@ -393,111 +368,7 @@ The sequence diagram shows how a `help` command is executed:
 
 <br>
 
----
-
-<br>
-
-## Proposed features
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-**Step 1.** The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0"></puml>
-
-**Step 2.** The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1"></puml>
-
-**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2"></puml>
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-**Step 4.** The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3"></puml>
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic"></puml>
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model"></puml>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-**Step 5.** The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4"></puml>
-
-**Step 6.** The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5"></puml>
-
-Steps 1 to 6 will similarly be implemented for the `Appointment` data. The `VersionedAppointmentBook` will 
-be initialized with the initial appointment book state, and the `currentStatePointer` pointing to that 
-single appointment book state. The `commit`, `undo`, and `redo` operations for `VersionedAppointmentBook` 
-will be implemented in the same way as the `VersionedAddressBook`.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="550"></puml>
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-<br>
-
---------------------------------------------------------------------------------------------------------------------
+--- 
 
 <br>
 
@@ -526,6 +397,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if `Sickness` or `Medicine` 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
+
+#### Design Considerations
+**Aspect: When the data is updated in the `.json` file:**
+
+* **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
+    * Pros: Simplifies the process for the user, without needing to save manually.
+    * Cons: May be slow if there are many changes to save.
+
+
+* **Alternative 2:** Prompt the user to save changes before exiting.
+    * Pros: Gives the user more control over the saving process.
+    * Cons: May be annoying for users who do not want an additional step to save changes.
 
 <br>
 
@@ -686,9 +569,13 @@ For all use cases below, unless specified otherwise,
 
   Use case ends.
 
-<br>
+* 3a. The given index is invalid.
 
-#### Use case (UC05): Find a patient
+    * 3a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add an appointment**
 
 **MSS**
 
@@ -786,7 +673,7 @@ For all use cases below, unless specified otherwise,
 
 * 1a. The given index is invalid.
 
-    * 1a1. DocTrack shows an error message.
+      Use case resumes at step 2.
 
       Use case resumes at step 1.
 
