@@ -286,7 +286,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void testSetUiStateValidStates () {
+    public void testSetUiStateValidStates() {
         modelManager.setUiState(UiState.DEFAULT);
         assertEquals(UiState.DEFAULT, modelManager.getUiState().get());
 
@@ -300,7 +300,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void testSetUiStateInvalidStates () {// Test that an assertion error is thrown for EVENT_DETAILS
+    public void testSetUiStateInvalidStates() {
         assertThrows(AssertionError.class, () -> {
             modelManager.setUiState(UiState.EVENT_DETAILS);
         });
