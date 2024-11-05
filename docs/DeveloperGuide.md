@@ -212,7 +212,13 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
 Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then calls on `model::addItem` to add the internship application into the data.
 
 
-[//]: # (List section here)
+### List all internship applications
+The implementation of the list command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
+<puml src="diagrams/ListSequenceDiagram.puml" alt="ListSequenceDiagram" />
+
+`AddressBookParser` creates `ListCommand`
+Upon execution, `ListCommand` calls on `model::updateFilteredList` to show all internship applications.
 
 
 ### Delete an internship application
@@ -598,6 +604,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **PENDING**: The internship application is currently in progress.
     - **REJECTED**: The user has rejected or been rejected from this internship application.
     - **ACCEPTED**: The user has accepted the offer for this internship.
+  
 
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
@@ -625,7 +632,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch
 
 1. Initial launch
 
@@ -640,7 +647,101 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Help Window
+1. Opening Help window via Command Line
+
+   1. Prerequisite: Help window is not open.
+   
+   2. Test case: `/help` <br>
+   Expected: Help window opens.
+
+1. Opening Help window via `F1`
+
+    1. Prerequisite: Help window is not open.
+   
+    2. Test case: Click the `F1` key on your keyboard. <br>
+       Expected: Help window opens.
+
+1. Opening Help window via Tool Bar
+
+    1. Prerequisite: Help window is not open.
+   
+    2. Test case: Click on the `Help` button on the Tool Bar, and then click on the `Help F1` button on the drop down.<br>
+       Expected: Help window opens.
+   
+1. Minimising the Help window
+
+   1. Prerequisite: Help window is not open.
+   
+   2. Test case: `/help` <br>
+      Expected: Help window opens.
+   
+   3. Test case: Click on the minimise buttn of the Help window.<br>
+   Expected: Help window minimises.
+   
+   4. Test case: `/help` after the Help window is minimised.<br>
+   Expected: Help window does not pop open.
+
+1. Closing the Help window
+
+   1. Prerequisite: Help window is open.
+   
+   2. Test case: Click on the close button on the Help window. <br>
+   Expected: Help window closes.
+
+
+[//]: # (Clear + List section here)
+
+
+### Adding an internship application
+1. Adding an valid internship application
+
+   1. Prerequisite: The exact internship application should not already be in the list.
+   
+   2. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/31/10/24`<br>
+   Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Google`, `google@gmail.com`, `Software Engineer Intern`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`. 
+
+2. Adding another valid internship application
+
+   1. Prerequisite: The exact internship application should not already be in the list.
+   
+   2. Test case: `/add n/Yahoo r/Clerk e/yahoo@yahoo.com d/31/10/24`<br>
+   Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Yahoo`, `yahoo@yahoo.com`, `Clerk`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`.
+   
+3. Adding duplicated internship application
+
+   1. Prerequisite: The exact internship application should already be in the list.
+   
+   2. Test case: `/add n/Yahoo r/Clerk e/yahoo@yahoo.com d/31/10/24`<br>
+   Expected: An error message stating that the internship application already exists in the list.
+   
+4. Adding internship application with invalid fields
+
+   1. Missing/Invalid Company Name test case: `/add n/ r/Software Engineer Intern e/google@gmail.com d/31/10/24` <br>
+   Expected: An error message stating what is considered a valid Company Name.<br>
+   
+      1. Other Invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.
+      
+   2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
+   Expected: An error message stating what is considered a valid Role.<br>
+   
+      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.
+      
+   3. Missing/Invalid Email test case: `/add n/Google r/Software Engineer Intern e/ d/31/10/24`<br>
+   Expected: An error message stating what is considered a valid Email.
+   
+      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.
+      
+   4. Missing/Invalid Date test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/`<br>
+   Expected: An error message stating what is considered a valid Date.
+      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`. 
+      
+5. Adding internship application with missing field(s)
+   1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
+   Expected: An error message stating the valid use of the `/add` command.
+
+
+[//]: # (List section here)
 
 
 ### Deleting an internship application
@@ -679,6 +780,20 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message should be shown which explains how to use the sort command and what parameters are valid.
 
 
+[//]: # (Find section here)
+
+
+[//]: # (Update Status section here)
+
+
+[//]: # (Chart section here)
+
+
+[//]: # (Filter section here)
+
+
+[//]: # (Delete section here)
+
 
 ### Saving data
 
@@ -687,3 +802,12 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Shutdown
+1. Shutdown via Window's close button
+   1. Close the window by clicking on the Window's close button.<br>
+   Expected: The window should close.
+   
+2. Shutdown via Command Line
+   1. Type `/exit` to close the window.<br>
+   Expected: The window should close.

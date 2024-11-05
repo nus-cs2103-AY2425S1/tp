@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(...)
+[-> LogicManager : execute("/find" + keywords)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(...)
+LogicManager -> AddressBookParser : parseCommand("/find" + keywords)
 activate AddressBookParser
 
 create FindCommandParser
@@ -28,11 +28,11 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse(...)
+AddressBookParser -> FindCommandParser : parse(keywords)
 activate FindCommandParser
 
 create NameContainsKeywordsPredicate
-FindCommandParser -> NameContainsKeywordsPredicate : keywords
+FindCommandParser -> NameContainsKeywordsPredicate :
 activate NameContainsKeywordsPredicate
 
 NameContainsKeywordsPredicate -> FindCommandParser
@@ -74,6 +74,9 @@ deactivate CommandResult
 FindCommand --> LogicManager : r
 deactivate FindCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
+destroy FindCommand
+destroy NameContainsKeywordsPredicate
+
 @enduml
