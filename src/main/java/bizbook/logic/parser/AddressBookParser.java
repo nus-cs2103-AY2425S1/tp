@@ -22,6 +22,7 @@ import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.RemoveTagCommand;
 import bizbook.logic.commands.UndoCommand;
 import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
@@ -88,20 +89,23 @@ public class AddressBookParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
+        case RemoveTagCommand.COMMAND_WORD:
+            return new RemoveTagCommandParser().parse(arguments);
+
         case AddNotesCommand.COMMAND_WORD:
             return new AddNotesCommandParser().parse(arguments);
 
         case EditNotesCommand.COMMAND_WORD:
             return new EditNotesCommandParser().parse(arguments);
 
+        case DeleteNotesCommand.COMMAND_WORD:
+            return new DeleteNotesCommandParser().parse(arguments);
+
         case PinCommand.COMMAND_WORD:
             return new PinCommandParser().parse(arguments);
 
         case UnpinCommand.COMMAND_WORD:
             return new UnpinCommandParser().parse(arguments);
-
-        case DeleteNotesCommand.COMMAND_WORD:
-            return new DeleteNotesCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
