@@ -28,7 +28,18 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+
+        String[] words = name.split(" ");
+        String result = "";
+
+        for (String word : words) {
+            if (word.length() > 0) {
+                result += Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase() + " ";
+            }
+        }
+
+        // Remove the extra trailing space and return the result
+        fullName = result.trim();
     }
 
     /**

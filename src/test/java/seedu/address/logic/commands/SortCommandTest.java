@@ -19,7 +19,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,7 +39,7 @@ public class SortCommandTest {
 
     @Test
     public void test_execute() {
-        String expectedMessage = Messages.getMessagePersonsListedOverview(8);
+        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
 
         NameComparator comparator = new NameComparator();
         SortCommand command = new SortCommand();
