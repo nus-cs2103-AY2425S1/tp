@@ -155,7 +155,7 @@ public interface Model {
 
     /** Updates the filter of the filtered wedding list to filter by the given {@code JobContainsKeywordsPredicate}. */
     void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate);
-    
+
     /**
      * Updates the rest of the list of weddings with the editedPerson.
      *
