@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 # Welcome to BakeBuddy
 
 BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
@@ -74,25 +79,83 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
-1. Add your first ingredient:
-   ```
-   addPastry
-   ```
-   ↳ This adds a chocolate cake that costs $45.00 and marks it as a bestseller
-
-2. Add your first customer:
-   ```
-   addCustomer n/Jane Doe p/98765432 e/jane@email.com
-   ```
-   ↳ This adds a customer named Jane with her phone number and email
-
-3. See what you've added:
-    - Type `list pastries` to see your pastry
-    - Type `list customers` to see your customer
-
 Refer to the [Features](#features) below for details of each command.
 
 ## Features
+
+
+### **Add Contact Command**
+Adds a new contact to the bakery’s database.
+
+```bash
+addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]
+```
+- **Parameters:**
+    - `n/NAME`: The person's name.
+    - `p/PHONE_NUMBER`: The person's phone number.
+    - `e/EMAIL`: (Optional) The person's email address.
+    - `a/ADDRESS`: (Optional) The person's address.
+    - `t/TAG`: (Optional) Tags for additional person information.
+
+**Example:**
+```bash
+addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
+```
+![screenshot](images/Screenshot-2.png)
+
+### **Add Customer Command**
+Adds a new customer to the bakery’s customer database.
+
+```bash
+addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
+```
+- **Parameters:**
+    - `n/NAME`: The customer's name.
+    - `p/PHONE_NUMBER`: The customer's phone number.
+    - `e/EMAIL`: (Optional) The customer's email address.
+    - `a/ADDRESS`: (Optional) The customer's address.
+    - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference.
+    - `t/TAG`: (Optional) Tags for additional customer information.
+
+**Example:**
+```bash
+addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 i/Allergic to peanuts
+```
+![screenshot](images/Screenshot-3.png)
+
+### **Add Ingredient Command**
+Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
+
+```bash
+addIngredient NAME COST
+```
+- **Parameters:**
+    - `NAME`: The name of the ingredient.
+    - `COST`: The cost of the ingredient.
+
+**Example:**
+```bash
+addIngredient Syrup 3.50 
+```
+![screenshot](images/Screenshot-1.png)
+
+### **Add Customer Order Command**
+Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
+
+```bash
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYIDS [MORE_PASTRYIDSs...] r/REMARK
+```
+- **Parameters:**
+    - `n/NAME`: (Optional) The customer's name.
+    - `p/PHONE_NUMBER`: The phone number of the customer (new customer will be added with the name if phone number not found in contacts).
+    - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
+    - `r/REMARK`: Information about the 
+
+**Example:**
+```bash
+addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm 
+```
+![screenshot](images/Screenshot-1.png)
 
 ### **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue, along with its ingredients.
@@ -112,7 +175,7 @@ addPastry Croissant 3.50 Flour Cream Sugar
 <img width="1184" alt="Screenshot 2024-10-24 at 5 48 02 PM" src="https://github.com/user-attachments/assets/f9272303-8ce3-442b-83d9-fbe6536a607e">
 
 
-### 2. **Add Supplier Command**
+### **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
@@ -121,9 +184,9 @@ addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TA
 - **Parameters:**
     - `n/NAME`: The supplier's name.
     - `p/PHONE_NUMBER`: The supplier's phone number.
-    - `e/EMAIL`: The supplier's email address.
-    - `a/ADDRESS`: The supplier's address.
-    - `s/INGREDIENTS_SUPPLIED`: List of ingredients supplied, comma separated
+    - `e/EMAIL`: (Optional) The supplier's email address.
+    - `a/ADDRESS`: (Optional) The supplier's address.
+    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated
     - `t/TAG`: (Optional) Tags for additional supplier information.
 
 **Example:**
@@ -133,7 +196,7 @@ addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
 <img width="1503" alt="Screenshot 2024-10-24 at 6 53 16 PM" src="https://github.com/user-attachments/assets/76d7e905-4556-419f-8390-5b3e809db145">
 
 
-### 9. **Add SupplyOrder Command**
+### **Add SupplyOrder Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
 ```bash
