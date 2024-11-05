@@ -93,14 +93,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Remarks**: A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
-
 
 
 ### Clearing all entries : `clear`
@@ -252,7 +251,13 @@ Format: `import FILENAME.json`
 - File **must** be in the same folder as the application JAR file. 
 - File **must** be in the expected format of MediContact data (see [Expected format](#expected format) for more details). 
 - Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary of parameter constraints) for more details).
-- **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal. 
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. It is recommended **not** to manually edit the data file if you are not an expert user.
+</box>
 
 Example:
 
@@ -396,8 +401,7 @@ Format: `sort`
 
 
 
-
-### Starring a person : `star`
+### Adding a person to favourites list : `star`
 
 Stars the specified person from the address book into favourites.
 
@@ -415,8 +419,7 @@ Examples:
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
 
-
-### Unstarring a person : `unstar`
+### Removing a person from favourites list : `unstar`
 
 Unstars the specified person from the address book removing them from favourites.
 
