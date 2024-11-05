@@ -606,7 +606,7 @@ testers are expected to do more *exploratory* testing.
    Expected: The elderly with NRIC S1486256J is deleted from the list. Details of the deleted elderly are displayed in the status message.
 
 4. Deleting an elderly with a non-existent NRIC
-   1. Prerequisite: List all elderly using the `list` command. No elderly with the NRIC S3916784J is in the list.
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC S3916784J is in the list.
    2. Test case: `delete S3916784J`<br>
    Expected: No elderly with the NRIC S3916784J is found. The list remains the same.
 
@@ -627,12 +627,12 @@ testers are expected to do more *exploratory* testing.
         Expected: The elderly with the NRIC `S6516486H` is shown in the list. Other elderly are hidden.
    
 3. Finding an elderly with a non-existent NAME
-   1. Prerequisite: List all elderly using the `list` command. No elderly with the name `John` is in the list.
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the name `John` is in the list.
    2. Test case: `find John`<br>
       Expected: No elderly with the name `John` is found. The list is empty.
    
 4. Finding an elderly with a non-existent NRIC
-   1. Prerequisite: List all elderly using the `list` command. No elderly with the NRIC `S3916784J` is in the list.
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC `S3916784J` is in the list.
    2. Test case: `find S3916784J`<br>
       Expected: No elderly with the NRIC `S3916784J` is found. The list is empty.
 
@@ -652,7 +652,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The elderly with NRIC `S1486256J` is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
 
 4. Mark an elderly with a non-existent NRIC
-   1. Prerequisite: List all elderly using the `list` command. No elderly with the NRIC `S3916784J` is in the list.
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC `S3916784J` is in the list.
    2. Test case: `mark S3916784J`<br>
       Expected: No elderly with the NRIC `S3916784J` is marked as call. Error message is shown in the status bar. The list remains the same.
 
@@ -682,7 +682,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The list is updated to show the call history of the elderly with NRIC `S1486256J`. One of which contains the note "My test note".
 
 4. Viewing call history of an elderly with a non-existent NRIC
-   1. Prerequisite: List all elderly using the `list` command. No elderly with the NRIC `S3916784J` is in the list.
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC `S3916784J` is in the list.
    2. Test case: `history S3916784J`<br>
       Expected: Error message is shown in the status bar.
 
