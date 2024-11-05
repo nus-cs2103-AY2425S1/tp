@@ -21,7 +21,7 @@ public class BlacklistListCommand extends BlacklistCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException{
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         boolean isArchivedList = model.getIsArchivedList();
 
