@@ -40,11 +40,9 @@
           </MenuBar>
         </StackPane>
 
-        <!-- Logo and Command Area -->
-        <HBox>
+        <HBox VBox.vgrow="SOMETIMES" styleClass="stack-pane">
           <!-- Logo Placeholder -->
-          <StackPane VBox.vgrow="NEVER" fx:id="logoPlaceholder" styleClass="stack-pane"
-                     minHeight="200" maxHeight="200" prefHeight="200">
+          <StackPane fx:id="logoPlaceholder" styleClass="stack-pane" minHeight="200" maxHeight="200">
             <padding>
               <Insets top="10" right="10" bottom="20" left="20"/>
             </padding>
@@ -56,29 +54,22 @@
           </StackPane>
 
           <!-- Command and Result Display -->
-          <VBox HBox.hgrow="ALWAYS" minHeight="200" maxHeight="200" prefHeight="200">
+          <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <!-- Command Box Placeholder -->
             <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="stack-pane">
               <padding>
                 <Insets top="10" right="20" bottom="10" left="10"/>
               </padding>
             </StackPane>
 
-            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="stack-pane"
-                       minHeight="135" prefHeight="135" maxHeight="135">
+            <!-- Result Display Placeholder -->
+            <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="stack-pane">
               <padding>
                 <Insets top="10" right="20" bottom="20" left="10"/>
               </padding>
             </StackPane>
           </VBox>
         </HBox>
-
-        <!-- Recent Commands -->
-        <StackPane VBox.vgrow="NEVER" fx:id="recentCommandsPlaceholder" styleClass="stack-pane"
-                   minHeight="50" prefHeight="50" maxHeight="100">
-          <padding>
-            <Insets top="10" right="20" bottom="10" left="20"/>
-          </padding>
-        </StackPane>
 
         <!-- Student Details and List Panel -->
         <HBox VBox.vgrow="ALWAYS">

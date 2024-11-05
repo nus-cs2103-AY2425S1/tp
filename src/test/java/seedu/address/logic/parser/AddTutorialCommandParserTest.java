@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TUT_NAME_DESC
 import static seedu.address.logic.commands.CommandTestUtil.TUT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TUT_NAME_DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddTutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.TutorialId;
+import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 
 public class AddTutorialCommandParserTest {
@@ -22,21 +24,11 @@ public class AddTutorialCommandParserTest {
 
     private static final String VALID_TUTORIAL_ID = "T1001";
     private final AddTutCommandParser parser = new AddTutCommandParser();
-    /*
     @Test
     public void parse_allFieldsPresent_success() {
-        Tut expectedTut = TUT_SAMPLE;
-
+        Tutorial expectedTut = Tutorial.of(new TutName("CS2103T"), TutorialId.of("T1001"));
         assertParseSuccess(parser, " " + TUT_NAME_DESC + TUT_ID_DESC, new AddTutCommand(expectedTut));
     }
-
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-        // Example: If you have optional fields, test scenarios where they are missing
-        Tut expectedTut = new Tut("CS2103T", new TutorialId("1001"));
-        assertParseSuccess(parser, TUT_NAME_DESC + TUT_ID_DESC, new AddTutCommand(expectedTut));
-    }
-    */
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {

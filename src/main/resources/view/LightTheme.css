@@ -109,12 +109,11 @@
     -fx-alignment: center-left;
 }
 
-/* List View IMPORTANT SHUD REMOVE*/
 .list-view {
     -fx-background-color: #f9f9f9;
 }
 
-.list-cell:filled:even {
+.list-cell:filled:even #cardPane {
     -fx-background-color: #ffffff;
     -fx-background-radius: 10px;
     -fx-border-color: #cccccc;
@@ -122,7 +121,7 @@
     -fx-border-radius: 10px;
 }
 
-.list-cell:filled:odd {
+.list-cell:filled:odd #cardPane {
     -fx-background-color: #f4f4f4;
     -fx-background-radius: 10px;
     -fx-border-color: #cccccc;
@@ -130,8 +129,16 @@
     -fx-border-radius: 10px;
 }
 
-.list-cell:filled:selected {
+.list-cell:filled:selected #cardPane {
     -fx-background-color: #d1eaff;
+}
+
+.list-cell:filled {
+    -fx-background-color: #f9f9f9;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #f9f9f9;
 }
 
 .list-cell .label {
@@ -261,4 +268,20 @@
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
+}
+
+.student-card-done {
+    -fx-background-color: #93faa5 !important; /* Green when student completed assignment */
+}
+
+.student-card-not-done {
+    -fx-background-color: #ff828b !important; /* Red when the assignment is not done */
+}
+
+.attendanceFlowPane-done {
+    -fx-background-color: #93faa5 !important; /* Green when student completed assignment */
+}
+
+.attendanceFlowPane-not-done {
+    -fx-background-color: #ff828b !important; /* Red when the assignment is not done */
 }

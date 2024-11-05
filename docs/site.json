@@ -12,7 +12,6 @@
     "_site/*",
     "site.json",
     "*.njk",
-    ".git/*",
     "node_modules/*"
   ],
   "pagesExclude": ["node_modules/*"],

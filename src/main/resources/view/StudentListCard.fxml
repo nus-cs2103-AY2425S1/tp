@@ -27,7 +27,7 @@
       <Label fx:id="tutorialId" styleClass="cell_small_label" text="Tutorial Id: "/>
 
       <!-- Attendance Section with Wrapper Box -->
-      <VBox spacing="5" alignment="TOP_LEFT" styleClass="studentDetailsEntries">
+      <VBox spacing="5" alignment="TOP_LEFT" styleClass="studentDetailsEntries" fx:id="attendanceBox">
         <Label styleClass="studentDetailsLabels" text="Attendance: "/>
         <FlowPane fx:id="attendanceFlowPane" hgap="5" vgap="5" prefWrapLength="250"/>
       </VBox>

@@ -77,4 +77,12 @@ public class StudentTest {
                 + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hasCompletedAssignment_returnsCorrectStatus() {
+        Student alice = new StudentBuilder(ALICE).build();
+        assertFalse(alice.hasCompletedAssignment());
+        alice.setHasCompletedAssignment(true);
+        assertTrue(alice.hasCompletedAssignment());
+    }
 }

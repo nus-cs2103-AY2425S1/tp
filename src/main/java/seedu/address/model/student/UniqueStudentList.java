@@ -53,9 +53,9 @@ public class UniqueStudentList implements Iterable<Student> {
         if (containsStudentId(studentId)) {
             throw new DuplicateStudentException("Student ID already exists: " + studentId);
         }
-        if (contains(toAdd)) {
+        /*if (contains(toAdd)) {
             throw new DuplicateStudentException("This student already exists in the address book");
-        }
+        }*/
         internalList.add(toAdd);
     }
 
