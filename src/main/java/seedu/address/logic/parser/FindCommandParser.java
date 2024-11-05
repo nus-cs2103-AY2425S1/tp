@@ -43,10 +43,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ? argMultimap.getValue(PREFIX_PHONE).get().trim().split("\\s+")
                 : null;
         String[] addressKeywords = argMultimap.isPresent(PREFIX_ADDRESS)
-                ? argMultimap.getValue(PREFIX_ADDRESS).get().trim().split("_")
+                ? Arrays.stream(argMultimap.getValue(PREFIX_ADDRESS).get().trim().split("_"))
+                    .map(String::trim).toArray(String[]::new)
                 : null;
         String[] tagKeywords = argMultimap.isPresent(PREFIX_TAG)
-                ? argMultimap.getValue(PREFIX_TAG).get().trim().split("_")
+                ? Arrays.stream(argMultimap.getValue(PREFIX_TAG).get().trim().split("_"))
+                    .map(String::trim).toArray(String[]::new)
                 : null;
 
         // Create the specific predicates, or pass null if no valid keywords were provided
