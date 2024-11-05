@@ -20,6 +20,8 @@ Class Name
 Class Phone
 Class Role
 Class Attendance
+Class FilteredList
+Class SortedList
 
 Class I #FFFFFF
 }
@@ -34,6 +36,8 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager *-down-> "1" SortedList
+ModelManager *-down-> "1" FilteredList
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -48,9 +52,10 @@ Person *--> "*" Attendance
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+SortedList o-left-> "1" FilteredList
+FilteredList o-> "1" UniquePersonList
+
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
 Telegram -[hidden]right-> Telegram
 
-ModelManager --> "~* filtered" Person
 @enduml

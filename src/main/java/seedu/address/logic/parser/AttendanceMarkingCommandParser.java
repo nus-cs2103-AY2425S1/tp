@@ -32,7 +32,6 @@ public class AttendanceMarkingCommandParser implements Parser<AttendanceMarkingC
      */
     public AttendanceMarkingCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TELEGRAM, PREFIX_DATE);
-
         if (!arePrefixesPresent(argumentMultimap, PREFIX_TELEGRAM, PREFIX_DATE)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             if (markType.equals(MarkAttendanceCommand.COMMAND_WORD)) {
