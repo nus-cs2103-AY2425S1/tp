@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.Main;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
@@ -80,6 +81,10 @@ class JsonAdaptedPerson {
         final List<Module> personModules = new ArrayList<>();
         for (JsonAdaptedModule module : modules) {
             personModules.add(module.toModelType());
+        }
+
+        if (personModules.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
