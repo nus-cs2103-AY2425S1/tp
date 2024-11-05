@@ -13,7 +13,7 @@ public class Transaction {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Amount should have at most 2 decimal places.";
-    public static final String VALIDATION_REGEX = "/^-?\\d+(,\\d{3})*(\\.\\d{1,2})?$/";
+    public static final String VALIDATION_REGEX = "^-?\\d+(,\\d{3})*(\\.\\d{1,2})?$";
     private final String description;
     private final double amount;
     private final String otherParty;
@@ -31,9 +31,9 @@ public class Transaction {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid amount.
      */
-    public static boolean isValidTransaction(String test) {
+    public static boolean isValidAmount(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
