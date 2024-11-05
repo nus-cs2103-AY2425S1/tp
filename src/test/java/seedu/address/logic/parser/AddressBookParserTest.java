@@ -10,9 +10,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DAT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEL_APPT_AMY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDCON_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -43,12 +48,15 @@ import seedu.address.logic.commands.SetPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.AppointmentExistsPredicate;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.MedConContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonBuilder;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.PriorityMatchesPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -129,6 +137,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addMedCon() throws Exception {
+        String commandInput = AddMedConCommand.COMMAND_WORD + " " + NRIC_DESC_AMY
+                              + " " + PREFIX_MEDCON + VALID_MEDCON_AMY;
+        AddMedConCommand command = (AddMedConCommand) parser.parseCommand(commandInput);
+        Set<MedCon> medcons = new HashSet<MedCon>();
+        medcons.add(new MedCon("Insulin"));
+        assertEquals(new AddMedConCommand(new Nric(VALID_NRIC_AMY), medcons), command);
+    }
+
+    @Test
     public void parseCommand_addAppt() throws Exception {
         Person person = new PersonBuilder().withNric(VALID_NRIC_AMY).build();
         AddApptCommand command = (AddApptCommand) parser.parseCommand(AddApptCommand.COMMAND_WORD + " "
@@ -162,6 +180,20 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_listPrio() throws Exception {
+        ListPrioCommand command = (ListPrioCommand) parser.parseCommand(
+                ListPrioCommand.COMMAND_WORD + " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY);
+        assertEquals(new ListPrioCommand(new PriorityMatchesPredicate(new Priority(VALID_PRIORITY_AMY))), command);
+    }
+
+    @Test
+    public void parseCommand_findNric() throws Exception {
+        FindNricCommand command = (FindNricCommand) parser.parseCommand(
+                FindNricCommand.COMMAND_WORD + " " + VALID_NRIC_AMY);
+        assertEquals(new FindNricCommand(new NricMatchesPredicate(AMY.getNric())), command);
     }
 
     @Test
@@ -203,5 +235,15 @@ public class AddressBookParserTest {
         Set<Allergy> allergies = new HashSet<Allergy>();
         allergies.add(new Allergy("Insulin"));
         assertEquals(new DelAllergyCommand(new Nric(VALID_NRIC_AMY), allergies), command);
+    }
+
+    @Test
+    public void parseCommand_delMedCon() throws Exception {
+        String commandInput = DelMedConCommand.COMMAND_WORD + " " + NRIC_DESC_AMY
+                              + " " + PREFIX_MEDCON + VALID_MEDCON_AMY;
+        DelMedConCommand command = (DelMedConCommand) parser.parseCommand(commandInput);
+        Set<MedCon> medcons = new HashSet<MedCon>();
+        medcons.add(new MedCon(VALID_MEDCON_AMY));
+        assertEquals(new DelMedConCommand(new Nric(VALID_NRIC_AMY), medcons), command);
     }
 }
