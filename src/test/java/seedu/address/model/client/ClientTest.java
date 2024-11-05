@@ -17,13 +17,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ClientBuilder;
 
-public class ClientTest {
+import java.math.BigInteger;
 
-    // @Test
-    // public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-    // Client client = new ClientBuilder().build();
-    // assertThrows(UnsupportedOperationException.class, () -> client.getTags().remove(0));
-    // }
+public class ClientTest {
 
     @Test
     public void isSameClient() {
@@ -91,7 +87,7 @@ public class ClientTest {
         assertTrue(ALICE.equals(editedAlice));
 
         // different income -> returns true
-        editedAlice = new ClientBuilder(ALICE).withIncome(0).build();
+        editedAlice = new ClientBuilder(ALICE).withIncome(BigInteger.ZERO).build();
         assertTrue(ALICE.equals(editedAlice));
 
         // different remark -> returns true

@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -130,7 +131,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             try {
                 IncomeComparisonOperator operator =
                         ParserUtil.parseIncomeComparisonOperator(operatorAndIncome.substring(0, 1));
-                int income = ParserUtil.parseIncome(operatorAndIncome.substring(1)).value;
+                BigInteger income = ParserUtil.parseIncome(operatorAndIncome.substring(1)).value;
                 predicates.add(new IncomeComparisonPredicate(operator, income));
             } catch (StringIndexOutOfBoundsException e) {
                 errors.add("i/ has not been provided with a comparison operator.\n"

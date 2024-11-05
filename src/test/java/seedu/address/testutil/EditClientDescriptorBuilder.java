@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.math.BigInteger;
+
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
@@ -84,7 +86,7 @@ public class EditClientDescriptorBuilder {
     /**
      * Sets the {@code Income} of the {@code EditClientDescriptor} that we are building.
      */
-    public EditClientDescriptorBuilder withIncome(int income) {
+    public EditClientDescriptorBuilder withIncome(BigInteger income) {
         descriptor.setIncome(new Income(income));
         return this;
     }

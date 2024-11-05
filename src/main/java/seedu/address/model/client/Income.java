@@ -2,6 +2,8 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigInteger;
+
 /**
  * Represents a Client's income level in SGD per annum in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIncome(String)}
@@ -11,14 +13,14 @@ public class Income {
     public static final String MESSAGE_CONSTRAINTS = "Income levels cannot be negative or have a non-numerical "
             + "character.";
 
-    public final int value;
+    public final BigInteger value;
 
     /**
      * Constructs an {@code Income}.
      *
      * @param value A valid income amount.
      */
-    public Income(int value) {
+    public Income(BigInteger value) {
         requireNonNull(value);
         this.value = value;
     }
@@ -29,8 +31,9 @@ public class Income {
      */
     public static boolean isValidIncome(String incomeStringToBeTested) {
         try {
-            int income = Integer.parseInt(incomeStringToBeTested);
-            return income >= 0;
+            BigInteger tempIncome = new BigInteger(incomeStringToBeTested); // Throws NumberFormatException
+            int comparison = tempIncome.compareTo(BigInteger.ZERO);
+            return comparison >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -38,7 +41,7 @@ public class Income {
 
     @Override
     public String toString() {
-        return String.format("$%d per annum", value);
+        return String.format("$%s per annum", value.toString());
     }
 
     @Override
@@ -48,7 +51,7 @@ public class Income {
         } else if (!(otherObj instanceof Income)) {
             return false;
         }
-        return this.value == ((Income) otherObj).value;
+        return this.value.equals(((Income) otherObj).value);
     }
 
 }

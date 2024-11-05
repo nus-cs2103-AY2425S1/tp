@@ -16,6 +16,8 @@ import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
+import java.math.BigInteger;
+
 /**
  * Jackson-friendly version of {@link Client}.
  */
@@ -64,7 +66,7 @@ class JsonAdaptedClient {
         email = source.getEmail().value;
         address = source.getAddress().value;
         job = source.getJob().value;
-        incomeString = Integer.toString(source.getIncome().value);
+        incomeString = source.getIncome().value.toString();
         remark = source.getRemark().value;
         Tier tier = source.getTier();
         assignedTier = tier != null ? new JsonAdaptedTier(tier) : new JsonAdaptedTier("");
@@ -123,7 +125,7 @@ class JsonAdaptedClient {
         if (!Income.isValidIncome(incomeString)) {
             throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
         }
-        final Income modelIncome = new Income(Integer.parseInt(incomeString));
+        final Income modelIncome = new Income(new BigInteger(incomeString));
 
         if (assignedTier == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tier.class.getSimpleName()));
