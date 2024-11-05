@@ -15,11 +15,11 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.VolunteerParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerDates;
 
 /**
  * Parses input arguments and creates a new VolunteerNewCommand object.
@@ -49,7 +49,8 @@ public class VolunteerNewCommandParser implements Parser<VolunteerNewCommand> {
         Name name = VolunteerParserUtil.parseName(argMultimap.getValue(VOLUNTEER_PREFIX_NAME).get());
         Phone phone = VolunteerParserUtil.parsePhone(argMultimap.getValue(VOLUNTEER_PREFIX_PHONE).get());
         Email email = VolunteerParserUtil.parseEmail(argMultimap.getValue(VOLUNTEER_PREFIX_EMAIL).get());
-        Date availableDate = VolunteerParserUtil.parseDate(argMultimap.getValue(VOLUNTEER_PREFIX_AVAILABLE_DATE).get());
+        VolunteerDates availableDate = VolunteerParserUtil.parseDate(argMultimap
+                .getValue(VOLUNTEER_PREFIX_AVAILABLE_DATE).get());
 
         Volunteer volunteer = new Volunteer(name, phone, email, availableDate);
         return new VolunteerNewCommand(volunteer);
