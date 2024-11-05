@@ -134,7 +134,13 @@ public class AddressBookParser {
         } else if (userInput.startsWith("d")) {
             return getDeleteHint(userInput);
         } else if (userInput.startsWith("e")) {
-            return getEditHint(userInput);
+            if (userInput.startsWith("ed")) {
+                return getEditHint(userInput);
+            } else if (userInput.startsWith("ex")) {
+                return ExitCommand.MESSAGE_USAGE;
+            } else {
+                return EditCommand.MESSAGE_USAGE + "\n" + ExitCommand.MESSAGE_USAGE;
+            }
         } else if (userInput.startsWith("f")) {
             return getFindHint(userInput);
         } else if (userInput.startsWith("s")) {

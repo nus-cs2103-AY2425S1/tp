@@ -20,15 +20,16 @@ public class HelpWindow extends UiPart<Stage> {
             "Refer to the user guide: " + USERGUIDE_URL + "\n"
                     + "\n"
             + "List of commands (type into CLI for explanation)\n"
-                    + "1: Add (p/e)\n"
-                    + "2: Edit (p/e)\n"
-                    + "3: Delete (p/e)\n"
-                    + "4: Find (p/e)\n"
-                    + "5: Search (p/e)\n"
-                    + "6: List (p/e)\n"
-                    + "7: Schedule\n"
-                    + "8: Link\n"
-                    + "9: Clear\n";
+                    + "1: add (p/e)\n"
+                    + "2: edit (p/e)\n"
+                    + "3: delete (p/e)\n"
+                    + "4: find (p/e)\n"
+                    + "5: search (p/e)\n"
+                    + "6: list (p/e)\n"
+                    + "7: schedule\n"
+                    + "8: link\n"
+                    + "9: clear (p/e)\n"
+                    + "10: exit";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -47,6 +48,11 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+
+        // Enable resizing
+        root.setResizable(true);
+        root.setMinWidth(600);
+        root.setMinHeight(380);
     }
 
     /**
