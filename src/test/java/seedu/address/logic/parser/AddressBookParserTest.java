@@ -48,8 +48,8 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
         assertThrows(ParseException.class, () ->
                 parser.parseCommand(ClearCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME));
-        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " " +
-                CliSyntax.PREFIX_NAME + " " + CliSyntax.PREFIX_ADDRESS));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_NAME + " " + CliSyntax.PREFIX_ADDRESS));
     }
 
     @Test
