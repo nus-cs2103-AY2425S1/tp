@@ -174,6 +174,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_list_alt() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.ALT_COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.ALT_COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
