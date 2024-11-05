@@ -147,7 +147,6 @@ public interface Model {
      *
      * @param editedPerson Person whose details have been edited.
      * @param personToEdit Person whose details are currently being edited.
-     * @param model current Model containing necessary wedding address book.
      */
     void updatePersonInWedding(Person personToEdit, Person editedPerson);
 
