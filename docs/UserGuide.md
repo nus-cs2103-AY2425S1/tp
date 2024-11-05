@@ -1,8 +1,3 @@
----
-layout: page
-title: User Guide
----
-
 # Welcome to BakeBuddy
 
 BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
@@ -99,10 +94,98 @@ Refer to the [Features](#features) below for details of each command.
 
 ## Features
 
-### Viewing help : `help`
+### **Add Pastry Command**
+Adds a new pastry to the bakery's pastry catalogue, along with its ingredients.
 
-Shows a message explaining how to access the help page.
+```bash
+addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...]
+```
+- **Parameters:**
+    - `NAME`: The name of the pastry.
+    - `COST`: The cost of the pastry.
+    - `INGREDIENT`: One or more ingredient names.
 
-![help message](images/helpMessage.png)
+**Example:**
+```bash
+addPastry Croissant 3.50 Flour Cream Sugar
+```
+<img width="1184" alt="Screenshot 2024-10-24 at 5 48 02 PM" src="https://github.com/user-attachments/assets/f9272303-8ce3-442b-83d9-fbe6536a607e">
 
-Format: `help`
+
+### 2. **Add Supplier Command**
+Adds a new supplier to the bakery’s supplier database.
+
+```bash
+addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]
+```
+- **Parameters:**
+    - `n/NAME`: The supplier's name.
+    - `p/PHONE_NUMBER`: The supplier's phone number.
+    - `e/EMAIL`: The supplier's email address.
+    - `a/ADDRESS`: The supplier's address.
+    - `s/INGREDIENTS_SUPPLIED`: List of ingredients supplied, comma separated
+    - `t/TAG`: (Optional) Tags for additional supplier information.
+
+**Example:**
+```bash
+addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
+```
+<img width="1503" alt="Screenshot 2024-10-24 at 6 53 16 PM" src="https://github.com/user-attachments/assets/76d7e905-4556-419f-8390-5b3e809db145">
+
+
+### 9. **Add SupplyOrder Command**
+Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
+
+```bash
+addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
+```
+- **Parameters:**
+    - `n/NAME`: The supplier's name.
+    - `p/PHONE_NUMBER`: The phone number of the supplier.
+    - `o/PRODUCTID`: One or more product IDs for the items being supplied.
+
+**Example:**
+```bash
+addSupplyOrder p/98765432 r/Delivery at 6pm o/1 2 3 n/John Doe
+```
+<img width="1194" alt="Screenshot 2024-10-24 at 5 51 43 PM" src="https://github.com/user-attachments/assets/59de6ead-e460-419a-807f-30fa5f17b39a">
+
+
+### **check Ingredient Stock Command**
+Check the stock in the inventory for a certain ingredient.
+
+```bash
+checkIngredientStock INGREDIENT
+```
+- **Parameters:**
+    - `INGREDIENT`: The name of the ingredient to be checked.
+
+**Example:**
+```bash
+checkIngredientStock Flour
+```
+<img width="1195" alt="Screenshot 2024-10-24 at 6 13 59 PM" src="https://github.com/user-attachments/assets/a0f1c909-fb2e-44ed-82dc-24b87f1eb432">
+
+This command checks the inventory to confirm if sufficient ingredients are available to make a pastry,
+helping ensure supplier order fulfillment.
+
+### **check Pastry Stock Command**
+Check the stock in the inventory for a certain pastry.
+
+```bash
+checkPastryStock PASTRY
+```
+- **Parameters:**
+    - `PASTRY`: The name of the pastry to be checked.
+
+**Example:**
+```bash
+checkPastryStock Croissant
+```
+This command checks the inventory to confirm if enough pastries are available,
+helping ensure customer order fulfillment.
+
+### Clearing all entries : `clear`
+Clears all entries from the address book.
+
+Format: `clear`
