@@ -28,7 +28,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CONCERT_CONTACT =
             "ConcertContacts list contains duplicate association(s).";
     public static final String MESSAGE_INVALID_CONCERT_CONTACT =
-            "Invalid concert contact person and/ or concert does not exist.";
+            "Invalid concert contact person and/or concert does not exist.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedConcert> concerts = new ArrayList<>();
