@@ -46,7 +46,7 @@
     "reminders" : []
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822241",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "clientTypes" : [ "A" ],
@@ -54,7 +54,7 @@
     "reminders" : []
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824271",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "clientTypes" : [ "A" ],
@@ -62,7 +62,7 @@
     "reminders" : []
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824421",
     "email" : "anna@example.com",
     "address" : "4th street",
     "clientTypes" : [ "A" ],
@@ -70,7 +70,7 @@
     "reminders" : []
   }, {
     "name" : "Alice Potter",
-    "phone" : "9992442",
+    "phone" : "99924422",
     "email" : "APotter@example.com",
     "address" : "china",
     "clientTypes" : [ "A" ],

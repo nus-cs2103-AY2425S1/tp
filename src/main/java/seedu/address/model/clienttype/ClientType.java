@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ClientType {
 
-    public static final String MESSAGE_CONSTRAINTS = "ClientTypes names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String MESSAGE_CONSTRAINTS = "ClientTypes names should be "
+            + "alphanumeric and only up to 30 characters long(space inclusive)";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]{1,30}";
 
     public final String clientTypeName;
 
