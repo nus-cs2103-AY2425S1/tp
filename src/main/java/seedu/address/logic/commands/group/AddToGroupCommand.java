@@ -101,7 +101,7 @@ public class AddToGroupCommand extends Command {
      */
     private Group createGroupWithNewMembers(Group existingGroup,
                                                      List<Index> members, List<Person> lastShownList) {
-        Group newGroup = existingGroup.copy();
+        Group newGroup = new Group(existingGroup);
         members.stream()
                 .map(member -> lastShownList.get(member.getZeroBased()))
                 .forEach(person -> {

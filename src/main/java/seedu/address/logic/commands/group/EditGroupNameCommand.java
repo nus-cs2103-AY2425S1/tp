@@ -33,7 +33,6 @@ public class EditGroupNameCommand extends Command {
             + "could not be found.";
     public static final String MESSAGE_EDIT_GROUP_SAME_NAME = "The current group already has name %s. "
             + "No changes were made.";
-    public static final String MESSAGE_EDIT_GROUP_NO_NAME = "The new group name is must be at least 1 character long!";
     private final String oldGroupName;
     private final String newGroupName;
 
@@ -50,13 +49,11 @@ public class EditGroupNameCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert !newGroupName.isBlank();
         if (oldGroupName.equals(newGroupName)) {
             throw new CommandException(String.format(MESSAGE_EDIT_GROUP_SAME_NAME, oldGroupName));
         }
 
-        if (newGroupName.isBlank()) {
-            throw new CommandException(MESSAGE_EDIT_GROUP_NO_NAME);
-        }
         Group existingGroup;
         try {
             existingGroup = model.getGroup(oldGroupName);

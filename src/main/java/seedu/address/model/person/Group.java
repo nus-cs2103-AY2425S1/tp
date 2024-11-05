@@ -20,6 +20,18 @@ public class Group extends UniquePersonList {
     }
 
     /**
+     * Creates a group with the same {@code name} and people as the existing group.
+     *
+     * @param existingGroup the existing group to be copied.
+     */
+    public Group(Group existingGroup) {
+        super();
+        requireNonNull(existingGroup);
+        this.name = existingGroup.name;
+        this.setPersons(existingGroup.asUnmodifiableObservableList());
+    }
+
+    /**
      * @return Name of the group.
      */
     public String getName() {
@@ -33,16 +45,6 @@ public class Group extends UniquePersonList {
     public boolean isSameName(Group group) {
         requireNonNull(group);
         return name.equals(group.name);
-    }
-
-    /**
-     * Creates a copy of the current group, to prevent the group from being mutated.
-     * @return a copy of the current Group, with the same name and users.
-     */
-    public Group copy() {
-        Group newGroup = new Group(this.name);
-        newGroup.setPersons(this.asUnmodifiableObservableList());
-        return newGroup;
     }
 
     @Override
