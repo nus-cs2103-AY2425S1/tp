@@ -21,14 +21,14 @@ import seedu.address.model.reminder.Reminder;
 public class AddReminderCommand extends Command {
     public static final String COMMAND_WORD = "ra"; // reminder add
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to the client hub. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE_TIME + "DATE and TIME "
             + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John "
-            + PREFIX_DATE_TIME + "2021-12-31 23:59"
+            + PREFIX_DATE_TIME + "2021-12-31 23:59 "
             + PREFIX_DESCRIPTION + "New Year's Eve";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
