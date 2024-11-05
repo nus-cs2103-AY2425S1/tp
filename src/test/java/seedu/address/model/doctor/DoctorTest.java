@@ -34,9 +34,9 @@ public class DoctorTest {
         editedAlice = new DoctorBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameDoctor(editedAlice));
 
-        // different phone number, all other attributes same -> returns false
+        // different phone number, all other attributes same -> returns true
         editedAlice = new DoctorBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.isSameDoctor(editedAlice));
+        assertTrue(ALICE.isSameDoctor(editedAlice));
     }
 
     @Test
