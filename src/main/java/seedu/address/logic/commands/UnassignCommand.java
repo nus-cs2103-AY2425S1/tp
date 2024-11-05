@@ -23,8 +23,8 @@ public class UnassignCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
     public static final String MESSAGE_NOT_ASSIGNED = "Volunteer is not assigned to this event!";
     private static final String MESSAGE_SUCCESS = "Volunteer unassigned successfully!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a volunteer from an event."
-            + " Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a volunteer from an event.\n"
+            + "Parameters: "
             + UNASSIGN_VOLUNTEER_PREFIX_NAME + "Volunteer Index "
             + UNASSIGN_EVENT_PREFIX_NAME + "Event Index "
             + "Example: " + COMMAND_WORD + " "

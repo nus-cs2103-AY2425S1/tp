@@ -25,7 +25,7 @@ public class AssignCommand extends Command {
     private static final String MESSAGE_OVERLAP_ASSIGN = "This volunteer is already assigned to another event"
             + " during this time slot.";
     private static final String MESSAGE_SUCCESS = "Volunteer assigned successfully!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event.\n"
             + "Parameters: "
             + ASSIGN_VOLUNTEER_PREFIX_NAME + "Volunteer Index "
             + ASSIGN_EVENT_PREFIX_NAME + "Event Index "
