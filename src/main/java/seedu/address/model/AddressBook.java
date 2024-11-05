@@ -252,6 +252,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns wedding object with the same name
+     */
+    public Wedding getWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddings.getWedding(wedding);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */

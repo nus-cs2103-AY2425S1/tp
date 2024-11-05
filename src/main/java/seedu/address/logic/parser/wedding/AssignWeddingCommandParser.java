@@ -65,7 +65,7 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
 
         // Convert wedding values to Wedding objects
         HashSet<Wedding> weddings = new HashSet<>(weddingValues.stream()
-                .map(WeddingName::new) // Convert each string to a TagName object
+                .map(WeddingName::new) // Convert each string to a WeddingName object
                 .map(Wedding::new)
                 .collect(Collectors.toList()));
 
