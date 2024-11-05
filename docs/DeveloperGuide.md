@@ -995,82 +995,136 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
-### Adding a person
+### Adding a student
 
-1. Adding a person into the list
+1. Adding a student into the list
 
     1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/2A`<br>
-       Expected: Person is added to the list. Details of the new contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Student is added to the list. Details of the new contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/L c/2A`<br>
-       Expected: No person is added. Error detail regarding sex is shown in the status message. Status bar remains the same.
+    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/L c/2A`<br>
+       Expected: No student is added. Error detail regarding sex is shown in the status message. Status bar remains the same.
 
-    1. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`<br>
+    3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
+       Expected: No student is added. Error detail regarding class is shown in the status message. Status bar remains the same.
+
+    4. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
-### Adding attendance for a person
+### Adding attendance for a student
 
-1. Adding attendance for a person in the list
+1. Adding attendance for a student in the list
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-    1. Test case: `addAttendance 1 ad/24-09-2024 ar/MC`<br>
-       Expected: Attendance record with date 24-09-2024 and reason MC is added to the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `addAttendance 1 ad/24-09-2024 ar/MC`<br>
+       Expected: Attendance record with date 24-09-2024 and reason MC is added to the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
    
-    1. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
+    3. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
        Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-24 ar/MC`, `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
+    4. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-24 ar/MC`, `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
-### Deleting attendance for a person
+### Deleting attendance for a student
 
-1. Deleting attendance for a person in the list
+1. Deleting attendance for a student in the list
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The test for adding attendance should be done first as the person must have an existing attendance to be deleted.
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding attendance should be done first as the student must have an existing attendance to be deleted.
 
-    1. Test case: `addAttendance 1 ad/24-09-2024 ar/`<br>
-       Expected: Attendance record with date 24-09-2024 is deleted from the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `addAttendance 1 ad/24-09-2024 ar/`<br>
+       Expected: Attendance record with date 24-09-2024 is deleted from the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
+    3. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
        Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+    4. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Adding submission for students
+
+1. Adding submission for all students currently in the list
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `addSubmission sm/Assignment 1`<br>
+       Expected: Submission with submission name Assignment 1 is added to all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `addSubmission sm/Assignment #1`<br>
+       Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect addSubmission commands to try: `addSubmission`, `addSubmission sm/`, `addSubmission sm/#@*`<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Adding submission status for a student
+
+1. Adding submission status for a student in the list
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding submission should be done first as the student must have an existing submission to add a submission status to.
+
+    2. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/Y`<br>
+       Expected: Submission with submission name Assignment 1 is updated with a submission status of Y for the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/A`<br>
+       Expected: No submission status is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect addSubmissionStatus commands to try: `addSubmissionStatus 1 sm/Assignment 1`, `addSubmissionStatus 1 sm/Assignment 1 ss/`, `addSubmissionStatus x sm/Assignment 1 ss/Y` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Deleting submission for students
+
+1. Deleting submission for all students currently in the list
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding submission should be done first as the students must have an existing submission to be deleted.
+
+    2. Test case: `deleteSubmission sm/Assignment 1`<br>
+       Expected: Submission with submission name Assignment 1 is deleted from all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `deleteSubmission sm/Assignment #1`<br>
+       Expected: No submission is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect deleteSubmission commands to try: `deleteSubmission`, `deleteSubmission sm/`, `deleteSubmission sm/#@*`<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -1078,4 +1132,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
