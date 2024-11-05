@@ -16,9 +16,9 @@ import spleetwaise.address.model.person.Name;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.testutil.Assert;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
