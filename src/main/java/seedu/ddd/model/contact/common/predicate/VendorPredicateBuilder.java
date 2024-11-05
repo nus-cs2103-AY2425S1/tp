@@ -1,12 +1,11 @@
 package seedu.ddd.model.contact.common.predicate;
 
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
+import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import seedu.ddd.logic.commands.list.ListCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.Contact;
@@ -30,11 +29,8 @@ public class VendorPredicateBuilder extends ContactPredicateBuilder {
     private Predicate<Contact> addServicePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
-            String trimmedArgs = argMultimap.getValue(PREFIX_SERVICE).get().trim();
-            if (trimmedArgs.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-            }
-            String[] serviceKeywords = trimmedArgs.split("\\s+");
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_SERVICE);
+            String[] serviceKeywords = args.split("\\s+");
             Predicate<Vendor> servicePredicate = new ServiceContainsKeywordsPredicate(Arrays.asList(serviceKeywords));
             //Convert Predicate<Vendor> into Predicate<Contact>
             Predicate<Contact> wrappedServicePredicate = contact ->

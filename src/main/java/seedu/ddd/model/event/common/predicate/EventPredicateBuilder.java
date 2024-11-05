@@ -1,18 +1,19 @@
 package seedu.ddd.model.event.common.predicate;
 
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.logic.commands.list.ListEventCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.common.Id;
+import seedu.ddd.model.event.common.Date;
 import seedu.ddd.model.event.common.Event;
 
 /**
@@ -38,18 +39,15 @@ public class EventPredicateBuilder {
         combinedPredicate = addDescriptionPredicate(argMultimap, combinedPredicate);
         combinedPredicate = addIdPredicate(argMultimap, combinedPredicate);
         combinedPredicate = addNamePredicate(argMultimap, combinedPredicate);
+        combinedPredicate = addDatePredicate(argMultimap, combinedPredicate);
 
         return combinedPredicate;
     }
     private Predicate<Event> addDescriptionPredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
-            String trimmedArgs = argMultimap.getValue(PREFIX_DESC).get().trim();
-            if (trimmedArgs.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
-            }
-            String[] descriptionKeywords = trimmedArgs.split("\\s+");
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_DESC);
+            String[] descriptionKeywords = args.split("\\s+");
             combinedPredicate = combinedPredicate.and(
                     new DescriptionContainsKeywordsPredicate(Arrays.asList(descriptionKeywords)));
         }
@@ -58,12 +56,8 @@ public class EventPredicateBuilder {
     private Predicate<Event> addIdPredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            String trimmedArgs = argMultimap.getValue(PREFIX_ID).get();
-            if (trimmedArgs.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
-            }
-            Id eventId = new Id(trimmedArgs);
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_ID);
+            Id eventId = new Id(args);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));
         }
         return combinedPredicate;
@@ -72,17 +66,23 @@ public class EventPredicateBuilder {
     private Predicate<Event> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String trimmedArgs = argMultimap.getValue(PREFIX_NAME).get();
-            if (trimmedArgs.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_USAGE));
-            }
-            String[] descriptionKeywords = trimmedArgs.split("\\s+");
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_NAME);
+            String[] nameKeywords = args.split("\\s+");
             combinedPredicate = combinedPredicate.and(
-                    new NameContainsKeywordsPredicate(Arrays.asList(descriptionKeywords)));
+                    new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
         return combinedPredicate;
     }
+
+    private Predicate<Event> addDatePredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_DATE);
+            combinedPredicate = combinedPredicate.and(new EventDatePredicate(new Date(args)));
+        }
+        return combinedPredicate;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

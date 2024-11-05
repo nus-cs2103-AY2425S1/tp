@@ -1,6 +1,7 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_PREFIX_EMPTY_INPUT;
 import static seedu.ddd.logic.Messages.getErrorMessageForPrefix;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
@@ -274,8 +275,6 @@ public class ParserUtil {
 
     /**
      * Verifies that the specified ArgumentMultimap does not contain any illegal filters for an event.
-     * Throws a ParseException if a forbidden filter (address, phone, service, email, or tags) is found
-     * when the event flag (-e) is specified.
      *
      * @param argMultimap The ArgumentMultimap containing the parsed arguments.
      * @throws ParseException if the ArgumentMultimap contains filters for address, phone, service, email,
@@ -295,5 +294,25 @@ public class ParserUtil {
         } else {
             // All other cases are valid
         }
+    }
+
+    /**
+     * Verifies that the user input following a specified prefix is not empty.
+     * This method checks if an argument corresponding to a given prefix is present
+     * in the provided ArgumentMultimap and ensures it is not empty.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @param prefix The Prefix to look for in the ArgumentMultimap.
+     * @return The trimmed argument string following the specified prefix.
+     * @throws ParseException if there is no argument or the argument is empty after the prefix.
+     */
+    public static String verifyNoEmptyInput(ArgumentMultimap argMultimap, Prefix prefix)
+            throws ParseException {
+        String trimmedArgs = argMultimap.getValue(prefix).get().trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_PREFIX_EMPTY_INPUT, prefix));
+        }
+        return trimmedArgs;
     }
 }

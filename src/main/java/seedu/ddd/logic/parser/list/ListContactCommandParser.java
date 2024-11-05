@@ -30,6 +30,8 @@ public class ListContactCommandParser implements Parser<ListContactCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DESC);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         ContactPredicateBuilder combinedPredicate = new ContactPredicateBuilder(argMultimap);
         return new ListContactCommand(combinedPredicate.build());
     }
