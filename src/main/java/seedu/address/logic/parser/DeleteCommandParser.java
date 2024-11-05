@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
+import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_OR_NAME;
 import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_WAYS_FORBIDDEN;
+import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
@@ -17,8 +20,8 @@ import seedu.address.model.contact.Name;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
-    public static final String MESSAGE_END_PART = "Command format:\n"
-            + DeleteCommand.MESSAGE_COMMAND_FORMAT
+    public static final String MESSAGE_END_PART = COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE
+            + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
             + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD);
 
@@ -54,7 +57,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (trimmedArgs.isEmpty()) { // String.format()
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Missing index or full name. " + MESSAGE_END_PART));
+                    "Missing index or full name. " + LINE_BREAK +MESSAGE_END_PART));
         }
 
         if (trimmedArgs.matches("^[0-9]+$")) { // should not throw exception

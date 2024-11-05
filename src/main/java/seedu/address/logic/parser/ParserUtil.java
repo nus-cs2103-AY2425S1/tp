@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -132,10 +134,14 @@ public class ParserUtil {
      */
     public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
         requireNonNull(roles);
-        final Set<Role> roleSet = new HashSet<>();
+        //Set<Role> roleSet = new TreeSet<>(Comparator.comparing(role -> role.getRoleIndex()));//Comparator
+        // .comparing(role -> role.getRoleIndex()));
+        Set<Role> roleSet = new HashSet<>();
         for (String roleName : roles) {
+            //placeholder.add(parseRole(roleName));
             roleSet.add(parseRole(roleName));
         }
+        //roleSet.addAll(placeholder);
         return roleSet;
     }
 

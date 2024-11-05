@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -27,14 +28,8 @@ public class FindCommand extends Command {
             + "nickname.";
     public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Finds all contacts whose details contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.";
-    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD + " "
-            + "[" + PREFIX_NAME + "NAME KEYWORDS] "
-            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE KEYWORDS] "
-            + "[" + PREFIX_EMAIL + "EMAIL KEYWORDS] "
-            + "[" + PREFIX_STUDENT_STATUS + "STUDENT STATUS KEYWORDS] "
-            + "[" + PREFIX_ROLE + "ROLE KEYWORDS]... "
-            + "[" + PREFIX_NICKNAME + "NICKNAME KEYWORDS]"
-            + "\nformat in short: `" + COMMAND_WORD + " [PREFIX] [new description]`";
+    public static final String MESSAGE_COMMAND_FORMAT =
+            styleCommand(COMMAND_WORD + " [PREFIX] [new description]");
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Jane Doe" + "\n"
             + "Example 2: " + COMMAND_WORD + " "

@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
+import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -25,8 +28,8 @@ import seedu.address.model.contact.Role;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    public static final String MESSAGE_END_PART = "Command format:\n"
-            + FindCommand.MESSAGE_COMMAND_FORMAT + String.format(MESSAGE_HELP_PROMPT,
+    public static final String MESSAGE_END_PART = COMMAND_FORMAT_PREAMBLE + WHITESPACE
+            + FindCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + FindCommand.COMMAND_WORD);
 
     public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
@@ -49,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (args.trim().isEmpty()) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_NO_PARAMETER_FOUND + ". " + MESSAGE_END_PART));
+                    MESSAGE_NO_PARAMETER_FOUND + "." + LINE_BREAK + MESSAGE_END_PART));
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,

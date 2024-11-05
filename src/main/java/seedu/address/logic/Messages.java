@@ -14,7 +14,9 @@ import seedu.address.model.contact.Contact;
  * Container for user visible messages.
  */
 public class Messages {
-
+    public static final String LINE_BREAK = "\n";
+    public static final String WHITESPACE = " ";
+    public static final String COMMAND_FORMAT_PREAMBLE = "Command Format:";
     public static final String MESSAGE_COMMAND_LIST = "add, edit, delete, find, list, help, clear, exit";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. "
             + "Only the following will be accepted as the first word of the command:\n"
@@ -23,10 +25,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! %1$s";
     public static final String MESSAGE_BLANK_FIELD = "field cannot be blank!";
 
-    public static final String MESSAGE_DUPLICATE_FIELDS =
+    public static final String MESSAGE_DUPLICATE_FIELDS_COMMAND =
             "Multiple values specified for the following single-valued field(s): ";
 
-    public static final String MESSAGE_HELP_PROMPT = "Type `%1$s` for more info";
+    public static final String MESSAGE_HELP_PROMPT = "Type `%1$s` for examples and details";
 
     // find and list
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
@@ -48,6 +50,21 @@ public class Messages {
             + "Command to find :\n`"
             + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %2$s`";
 
+    // edit and add
+    //edits to make, contacts to add // This will result in a contact that
+    public static final String MESSAGE_DUPLICATE_CONTACT = "%1$s already "
+            + "exists in the address book. Check if there are any errors in %2$s or in the " +
+            "details of the existing contacts";
+    public static final String MESSAGE_DUPLICATE_FIELDS_CONTACT =
+            "This will result in more than 1 contact having same President roles," +
+                    " or having same Telegram handles/mobile number/nicknames, or having the same full " +
+                    "names" +
+                    " without distinct nicknames, which are not allowed."
+                    + "\n%1$s";
+
+    public static String styleCommand(String command) {
+        return "`" + command + "`";
+    }
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -57,7 +74,7 @@ public class Messages {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields) + "\nwhich is not allowed.";
+        return MESSAGE_DUPLICATE_FIELDS_COMMAND + String.join(" ", duplicateFields) + "\nwhich is not allowed.";
     }
 
     /**

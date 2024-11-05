@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
+import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_OR_NAME;
 import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_WAYS_FORBIDDEN;
+import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -13,8 +16,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -29,7 +34,7 @@ import seedu.address.model.contact.Role;
  */
 public class EditCommandParser implements Parser<EditCommand> {
 
-    public static final String MESSAGE_END_PART = "Command format:\n"
+    public static final String MESSAGE_END_PART = COMMAND_FORMAT_PREAMBLE + WHITESPACE
             + EditCommand.MESSAGE_COMMAND_FORMAT + "\n"
             + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD);
@@ -57,7 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (str.isEmpty()) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Missing index or Full name. " + MESSAGE_END_PART));
+                    "Missing index or Full name. " + LINE_BREAK + MESSAGE_END_PART));
         }
 
         // for the future where we can apply polymorphism and not worry about .setName() .setHandle() etc
@@ -125,7 +130,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Set<Role>> parseRolesForEdit(Collection<String> roles) throws ParseException {
         assert roles != null;
-
         if (roles.isEmpty()) {
             return Optional.empty();
         }

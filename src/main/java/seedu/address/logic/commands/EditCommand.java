@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.WHITESPACE;
+import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -10,11 +12,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -38,17 +43,10 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_FUNCTION = COMMAND_WORD + ": Edits the details of the contact "
-            + "identified by the full name or the numerical index used in the displayed contact list. "
+            + "identified by the full name or the numerical displayed index. "
             + "Existing values will be overwritten by the input values.";
-    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD + " "
-            + "INDEX (positive integer) OR FULL_NAME "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM_HANDLE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
-            + "[" + PREFIX_ROLE + "ROLE[...]] "
-            + "[" + PREFIX_NICKNAME + "NICKNAME]"
-            + "\nformat in short: `" + COMMAND_WORD + " [INDEX OR FULL_NAME] [PREFIX] [new description]`";
+    public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE + "[INDEX " +
+            "OR FULL_NAME_OF_CONTACT_TO_EDIT]" + WHITESPACE + "[PREFIX] [new description]");
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example One: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
@@ -60,13 +58,6 @@ public class EditCommand extends Command {
             + "is edited. ";
     public static final String MESSAGE_MISSING_PREFIX = "Prefix(es) for editing is missing, at least one must "
             + "be provided. Ensure correct spelling of prefix too (e.g. n/ and not /n)";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This will result in a contact that already "
-            + "exists in the address book. Check if the edits to make or the existing contact details are "
-            + "incorrect";
-    public static final String MESSAGE_DUPLICATE_FIELDS =
-            "One of the fields you want to add/change conflict with another contact. \nNo same email, "
-                    + "telegram, and president role is allowed. Contacts with the same full names must have "
-                    + "one of the contact's unique nickname indicated in the addressbook";
 
     private static final int invalidTargetIndex = -1;
 
@@ -122,12 +113,15 @@ public class EditCommand extends Command {
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "This will result" +
+                    " in a contact that", "edits to make" ));
         }
 
         if (contactToEdit.isSameContact(editedContact)
                 && model.hasDuplicateFieldsWithException(contactToEdit, editedContact)) {
-            throw new CommandException(MESSAGE_DUPLICATE_FIELDS);
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_FIELDS_CONTACT,
+                    "If you are sure these are the changes to make, please edit the conflicting "
+                            + "fields of the other contact(s) to something else first prior to prevent conflicts"));
         }
 
         model.setContact(contactToEdit, editedContact);
@@ -290,6 +284,9 @@ public class EditCommand extends Command {
          */
         public void setRoles(Set<Role> roles) {
             this.roles = (roles != null) ? new HashSet<>(roles) : null;
+            ///Set<Role> placeholder = new HashSet<>(); //(Comparator.comparing(role -> role.getRoleIndex()));
+            //placeholder.addAll(roles);
+            //this.roles = (roles != null) ? placeholder : null;
         }
 
         /**

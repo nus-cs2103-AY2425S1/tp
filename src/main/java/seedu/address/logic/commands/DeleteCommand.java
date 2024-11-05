@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.LINE_BREAK;
+import static seedu.address.logic.Messages.WHITESPACE;
+import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
@@ -22,15 +25,17 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
     public static final String MESSAGE_FUNCTION = COMMAND_WORD
-            + ": Deletes the contact identified by the index number used in the displayed contact list or "
+            + ": Deletes the contact identified by the displayed index number or "
             + "by Full name.";
-    public static final String MESSAGE_COMMAND_FORMAT = "`" + COMMAND_WORD + " "
-            + "INDEX (positive integer) OR FULL_NAME` \nOR `"
-            + COMMAND_WORD + " " + PREFIX_NAME + " FULL_NAME`";
-    public static final String MESSAGE_COMMAND_EXAMPLE = "Example One: "
-            + COMMAND_WORD + " 1\n"
-            + "Example Two: " + COMMAND_WORD + " n/ John Doe\n"
-            + "Example Three: " + COMMAND_WORD + " John Doe";
+    public static final String MESSAGE_COMMAND_FORMAT = "3 possible formats as follow:" + LINE_BREAK
+            + "1. " + styleCommand(COMMAND_WORD + WHITESPACE + "INDEX (positive integer)") + LINE_BREAK
+            + "2. " + styleCommand(COMMAND_WORD + WHITESPACE + "FULL_NAME_OF_CONTACT_TO_DELETE") + LINE_BREAK
+            + "3. " + styleCommand (COMMAND_WORD + WHITESPACE + PREFIX_NAME +
+            "FULL_NAME_OF_CONTACT_TO_DELETE");
+    public static final String MESSAGE_COMMAND_EXAMPLE = "Example One:" + WHITESPACE
+            + COMMAND_WORD + WHITESPACE + "1" + LINE_BREAK
+            + "Example Two: " + COMMAND_WORD + WHITESPACE + "John Doe" + LINE_BREAK
+            + "Example Three: " + COMMAND_WORD + WHITESPACE + PREFIX_NAME + WHITESPACE + "John Doe";
 
     private static final int invalidTargetIndex = -1;
 

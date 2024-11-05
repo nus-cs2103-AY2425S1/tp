@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
+import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -28,7 +31,8 @@ import seedu.address.model.contact.TelegramHandle;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    public static final String MESSAGE_END_PART = "Command format: " + AddCommand.MESSAGE_COMMAND_FORMAT + "\n"
+    public static final String MESSAGE_END_PART =
+            COMMAND_FORMAT_PREAMBLE + WHITESPACE + AddCommand.MESSAGE_COMMAND_FORMAT + "\n"
             + String.format(MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD + " " + AddCommand.COMMAND_WORD);
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -53,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!arePrefixesPresent(argMultimap, compulsoryPrefixes)) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, stringifyAllAbsentPrefix(argMultimap,
-                            compulsoryPrefixes) + " mandatory prefix(es) is/are missing. " + MESSAGE_END_PART));
+                            compulsoryPrefixes) + " mandatory prefix(es) is/are missing." + LINE_BREAK +
+                    MESSAGE_END_PART));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(

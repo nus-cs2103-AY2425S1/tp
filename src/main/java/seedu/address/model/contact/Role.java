@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Represents a Role in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRoleName(String)}
  */
-public class Role {
+public class Role /*implements Comparable<Role>*/{
 
     public static final String PRESIDENT = "President";
     public static final String VICE_PRESIDENT = "Vice President";
@@ -112,6 +112,12 @@ public class Role {
             return errorStatus; // should not happen
         }
     }
+
+    /*
+    public int compareTo(Role role) {
+        //return this.roleName.compareTo(role.roleName);
+        return getRoleIndex() - role.getRoleIndex();
+    }*/
 
     @Override
     public boolean equals(Object other) {

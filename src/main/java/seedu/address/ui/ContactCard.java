@@ -61,7 +61,9 @@ public class ContactCard extends UiPart<Region> {
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
         String nicknameObtained = contact.getNickname().value;
         if (!nicknameObtained.isEmpty()) {
-            nickname.getChildren().add(new Label(nicknamePrelabel + nicknameObtained));
+            Label nicknameLabel = new Label(nicknamePrelabel + nicknameObtained);
+            nicknameLabel.setWrapText(true);
+            nickname.getChildren().add(nicknameLabel);
         }
     }
 

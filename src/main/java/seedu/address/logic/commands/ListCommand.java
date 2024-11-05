@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import seedu.address.model.Model;
@@ -16,7 +17,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_FUNCTION = "List is to show all contacts, as opposed to find command.";
 
-    public static final String MESSAGE_COMMAND_FORMAT = COMMAND_WORD;
+    public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD);
 
     @Override
     public CommandResult execute(Model model) {
