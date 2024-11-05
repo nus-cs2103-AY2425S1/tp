@@ -142,6 +142,20 @@ Format: `tag INDEX t/TAG_NAME`
 
 Example:
 - `tag 1 t/urgent`
+- 
+### Tagging a client: `untag`
+
+Tags a client in the case management system.
+
+Format: `untag INDEX t/TAG`
+
+* Removes the tag from the client at the specific `INDEX`.
+* Only one tag can be removed at once
+* If the tag is not found, a warining will be displayed
+
+Example:
+- `untag 1 t/urgent`
+
 
 ### Locating beneficiaries by name: `find`
 
