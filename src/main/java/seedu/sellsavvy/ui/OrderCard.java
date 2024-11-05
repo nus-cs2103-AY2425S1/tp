@@ -31,8 +31,6 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label heading;
     @FXML
-    private Label quantity;
-    @FXML
     private Label status;
     @FXML
     private Label date;
