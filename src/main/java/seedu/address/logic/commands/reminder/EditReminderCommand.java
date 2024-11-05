@@ -71,7 +71,8 @@ public class EditReminderCommand extends Command {
         Reminder reminderToEdit = lastShownList.get(index.getZeroBased());
         Reminder editedReminder = createEditedReminder(reminderToEdit, editReminderFields);
 
-        if (!reminderToEdit.isSameReminder(editedReminder) && model.hasReminder(editedReminder)) {
+        if (!reminderToEdit.isSameReminder(editedReminder) && model.hasReminder(editedReminder)
+                || !editReminderFields.isAnyFieldEdited()) {
             throw new CommandException(MESSAGE_REMINDER_NOT_EDITED);
         }
 

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -20,6 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -30,6 +33,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyClientHub;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.storage.JsonClientHubStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -174,5 +178,56 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getClientHub_returnsNonNullClientHub() {
+        ReadOnlyClientHub clientHub = logic.getClientHub();
+        assertNotNull(clientHub, "ClientHub should not be null.");
+    }
+
+    @Test
+    public void getClientHub_returnsExpectedData() {
+        // Assuming model initially has an empty ClientHub
+        ReadOnlyClientHub clientHub = logic.getClientHub();
+        assertEquals(0, clientHub.getPersonList().size(), "ClientHub should initially contain no persons.");
+    }
+
+    @Test
+    public void getPersonList_returnsObservableListOfPersons() {
+        ObservableList<Person> personList = logic.getPersonList();
+        assertNotNull(personList, "Person list should not be null.");
+        assertEquals(0, personList.size(), "Initial person list should be empty.");
+    }
+
+    @Test
+    public void getReminderList_returnsObservableListOfReminders() {
+        ObservableList<Reminder> reminderList = logic.getReminderList();
+        assertNotNull(reminderList, "Reminder list should not be null.");
+        assertEquals(0, reminderList.size(), "Initial reminder list should be empty.");
+    }
+
+    @Test
+    public void getClientHubFilePath_returnsCorrectPath() {
+        Path clientHubFilePath = logic.getClientHubFilePath();
+        assertNotNull(clientHubFilePath, "ClientHub file path should not be null.");
+    }
+
+    @Test
+    public void getGuiSettings_returnsDefaultGuiSettings() {
+        GuiSettings guiSettings = logic.getGuiSettings();
+        assertNotNull(guiSettings, "GuiSettings should not be null.");
+        assertEquals(new GuiSettings(), guiSettings, "Initial GuiSettings should match default settings.");
+    }
+
+    @Test
+    public void setGuiSettings_updatesGuiSettings() {
+        GuiSettings newSettings = new GuiSettings(800, 600, 100, 100); // Custom GuiSettings for test
+        logic.setGuiSettings(newSettings);
+        assertEquals(newSettings, logic.getGuiSettings(), "GuiSettings should update to new values.");
+    }
+    @Test
+    public void getReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getReminderList().remove(0));
     }
 }
