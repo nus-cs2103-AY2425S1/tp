@@ -551,4 +551,20 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Efforts**
+## **Appendix: Effort**
+Our goal was to improve AB3 in terms of organisation, finding and tagging to allow for greater functionality.
+
+Our first major change was to modify the `find` command to accept any field as a parameter and allow multiple parameters. This was a moderate effort
+that required us to change how the `FindCommand` class worked by creating new predicate classes and processing the logic for that as well,
+which was aided by the given predicate classes that we used as a template, but it was not trivial.
+
+Our next major change was the `undo` and `redo` commands, which were quite extensive to implement. We had to create the `VersionedCampusConnect` (a 
+variation on the `VersionedAddressBook`) and resolve serious issues related to the undo and redo state, such as logic to process
+when the `undo` and `redo` commands failed and whether non-state affecting commands (like `find`) would affect the `undo` and `redo` result. Overall,
+this was quite difficult.
+
+Finally, our last major change was the tag management and categorisation system, which was more difficult as the `undo` and `redo`. We added a tag management 
+component and several commands, different types of tags, and a tag list component in the UI. Figuring out how to dynamically update the tags and the tag list in the GUI required a major restructuring 
+to our GUI files (under the `ui` folder) and we had faced many issues with the tag categorisation system.
+
+Most commands implemented used the given `Command` classes as a reference, but modified them to adapt the respective `execute()` methods for the command.
