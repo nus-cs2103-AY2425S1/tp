@@ -275,20 +275,20 @@ public class ModelManager implements Model {
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
         List<Wedding> list = new ArrayList<>();
 
-        for (Wedding wedding : model.getFilteredWeddingList()) {
+        for (Wedding wedding : getFilteredWeddingList()) {
             for (String tagName : predicate) {
                 if (wedding.getWeddingName().toString().equals(tagName)) {
                     list.add(wedding);
                 }
             }
         }
-
+        
         return list;
     }
 
     @Override
-    public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> editedTags) {
-        List<Wedding> weddingList = getWeddingFromTags(model, editedTags);
+    public void deletePersonInWedding(Person editedPerson, Set<Tag> editedTags) {
+        List<Wedding> weddingList = getWeddingFromTags(editedTags);
 
         List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
                 .toList();
@@ -299,10 +299,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person personWithAllTagsRemoved(Person personToEdit, Model model) {
+    public Person personWithAllTagsRemoved(Person personToEdit) {
         Set<Tag> currentTags = new HashSet<>(personToEdit.getTags());
 
-        deletePersonInWedding(personToEdit, model, currentTags);
+        deletePersonInWedding(personToEdit, currentTags);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getJob(), Collections.emptySet());
         model.setPerson(personToEdit, editedPerson);
