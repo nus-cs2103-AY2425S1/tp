@@ -26,6 +26,7 @@ public class PersonBuilder {
     private Email email;
     private Role role;
     private Set<Skill> skills;
+    private String match;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,6 +48,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         role = personToCopy.getRole();
         skills = new HashSet<>(personToCopy.getSkills());
+        match = personToCopy.getMatch().orElse(null);
     }
 
     /**
@@ -60,7 +62,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code skill} into a {@code Set<Skill>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withSkills(String ... skills) {
+    public PersonBuilder withSkills(String... skills) {
         this.skills = SampleDataUtil.getSkillSet(skills);
         return this;
     }
@@ -89,8 +91,25 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMatch(String match) {
+        this.match = match;
+        return this;
+    }
+
+    /**
+     * Builds a Person with the initialized attributes.
+     *
+     * @return Persons object.
+     */
     public Person build() {
-        return new Person(name, phone, email, role, skills);
+        if (this.match == null) {
+            return new Person(name, phone, email, role, skills);
+        } else {
+            return new Person(name, phone, email, role, skills, match);
+        }
     }
 
 }

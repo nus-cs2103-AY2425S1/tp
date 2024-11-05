@@ -26,14 +26,8 @@ public class ScreenCommandParser implements Parser<ScreenCommand> {
         }
         String entityType = splitArgs[0];
         String indexString = splitArgs[1];
-        Index index;
+        Index index = ParserUtil.parseIndex(indexString);
 
-        try {
-            index = ParserUtil.parseIndex(indexString);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScreenCommand.MESSAGE_USAGE), pe);
-        }
         switch (entityType) {
         case ScreenJobCommand.ENTITY_WORD:
             return new ScreenJobCommand(index);

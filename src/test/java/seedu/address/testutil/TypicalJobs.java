@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BARISTA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BARISTA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBNAME_BARISTA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REQUIREMENTS_BARISTA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_GOOGLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_COMPANY_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_DESCRIPTION_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_NAME_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_REQUIREMENTS_BARISTA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_SALARY_BARISTA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +21,7 @@ import seedu.address.model.job.Job;
 public class TypicalJobs {
     public static final Job TA = new JobBuilder()
             .withName("CS2103 Teaching Assistant")
-            .withCompany("National University of Singapore")
+            .withCompany(VALID_COMPANY_NAME_NUS)
             .withSalary("2000")
             .withDescription("Conduct weekly tutorial")
             .withRequirements("GradeA", "Year3")
@@ -27,7 +29,7 @@ public class TypicalJobs {
 
     public static final Job SWE = new JobBuilder()
             .withName("Software Engineer, Google Pay, Core")
-            .withCompany("Google, Singapore")
+            .withCompany(VALID_COMPANY_NAME_GOOGLE)
             .withSalary("3000")
             .withDescription(
                     "As a software engineer, you will work on a specific project critical to Google’s needs with "
@@ -38,11 +40,11 @@ public class TypicalJobs {
 
     // Manually added - Job's details found in {@code CommandTestUtil}
     public static final Job BARISTA = new JobBuilder()
-            .withName(VALID_JOBNAME_BARISTA)
-            .withCompany(VALID_COMPANY_BARISTA)
-            .withSalary(VALID_SALARY_BARISTA)
-            .withDescription(VALID_DESCRIPTION_BARISTA)
-            .withRequirements(VALID_REQUIREMENTS_BARISTA)
+            .withName(VALID_JOB_NAME_BARISTA)
+            .withCompany(VALID_JOB_COMPANY_BARISTA)
+            .withSalary(VALID_JOB_SALARY_BARISTA)
+            .withDescription(VALID_JOB_DESCRIPTION_BARISTA)
+            .withRequirements(VALID_JOB_REQUIREMENTS_BARISTA)
             .build();
 
     // prevents instantiation

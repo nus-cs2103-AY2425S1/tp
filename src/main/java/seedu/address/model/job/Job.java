@@ -21,9 +21,7 @@ public class Job {
     private final Set<Tag> requirements = new HashSet<>();
 
     /**
-     * TODO: Implement data validation
-     * TODO: What is meant by this ah ^^?
-     * Every field has no validation for now.
+     * Every field must be present and not null.
      */
     public Job(Name name, JobCompany company, JobSalary salary,
                JobDescription description, Set<Tag> requirements) {

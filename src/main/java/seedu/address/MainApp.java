@@ -11,6 +11,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.exceptions.SampleDataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -83,10 +84,16 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            // line below can throw SampleDataLoadingException
+            ReadOnlyAddressBook sampleAddressBook = SampleDataUtil.getSampleAddressBook();
+            initialData = addressBookOptional.orElse(sampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
+            initialData = new AddressBook();
+        } catch (SampleDataLoadingException e) {
+            logger.warning("Sample AddressBook could not be loaded."
+                    + " Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
 
