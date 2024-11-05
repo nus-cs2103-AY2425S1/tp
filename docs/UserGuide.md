@@ -110,6 +110,24 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 w/Intern,Google,2024 u/NUS m/Computer Science t/friends t/owesMoney i/swimming i/reading b/13-12-2003`
 * `add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12 w/Intern,Meta,2024 u/NTU m/Computer Science t/classmate b/01-01-2001`
 
+### Adding Interests: addi
+
+Adds interest(s) to an existing contact.
+Format:
+```plaintext
+addi in/INDEX i/INTEREST...
+```
+
+
+* in/INDEX: Contact's position in the list.
+* i/INTEREST...: Interests to add. Can add multiple interests.
+
+Example:
+Format:
+```plaintext
+addi in/1 i/Swimming i/Cycling
+```
+
 ### Adding Work Experience to existing contact: `addw`
 
 Adds work experience to an existing contact.
