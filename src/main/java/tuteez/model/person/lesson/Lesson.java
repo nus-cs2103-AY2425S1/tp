@@ -26,6 +26,10 @@ public class Lesson {
             + "Start time cannot be 2359 and end time cannot be 0000\n"
             + "Lesson input must contain a day and a time range separated by a space. "
             + "Example: " + PREFIX_LESSON + " monday 0900-1000";
+    public static final String MESSAGE_INVALID_LESSON_DAY = "Are you sure you have given a valid day of the week? ⊙▂⊙";
+    public static final String MESSAGE_INVALID_LESSON_TIME = "Are you sure you have given valid "
+            + "start and end times? ⊙▂⊙ \n"
+            + "Please give it in HHMM-HHMM (24-hour format)";
     public static final String MESSAGE_INVALID_LESSON_END_TIME = "Unfortunately we do not allow lessons to overflow "
             + "to the next day, the latest a lesson can end is 2359";
     public static final String MESSAGE_INVALID_LESSON_START_TIME = "Lessons have to start earlier than 2359,"
@@ -34,6 +38,7 @@ public class Lesson {
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
     private final Day lessonDay;
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -95,14 +100,12 @@ public class Lesson {
     /**
      * Checks if the specified start time is before the specified end time.
      *
-     * <p>This method verifies that the provided {@code startTime} occurs
-     * earlier in the day than the {@code endTime}, ensuring a valid
-     * chronological order for lesson or event times.</p>
+     * <p>This method verifies that the start time occurs earlier than the end time,
+     * ensuring a valid time order.</p>
      *
-     * @param startTime the {@code LocalTime} representing the start time
-     * @param endTime the {@code LocalTime} representing the end time
-     * @return {@code true} if the {@code startTime} is before the {@code endTime},
-     *         {@code false} otherwise
+     * @param startTime The start time to check.
+     * @param endTime The end time to compare against the start time.
+     * @return {@code true} if the start time is before the end time; {@code false} otherwise.
      */
     public static boolean isValidTimeOrder(LocalTime startTime, LocalTime endTime) {
         return startTime.isBefore(endTime);
@@ -175,6 +178,7 @@ public class Lesson {
      *         {@code false} otherwise.
      */
     public static boolean hasClashingLessonWithinList(List<Lesson> lessons) {
+        assert lessons != null;
         return IntStream.range(0, lessons.size())
                 .anyMatch(i -> IntStream.range(i + 1, lessons.size())
                         .anyMatch(j -> isClashingWithOtherLesson(lessons.get(i), lessons.get(j))));
@@ -248,6 +252,25 @@ public class Lesson {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    /**
+     * Checks if this lesson's time range falls within a specified time range.
+     *
+     * @param otherTimeRange A time range in the format "HHmm-HHmm".
+     * @return true if this lesson's time range is overlapping the specified time range.
+     */
+    public boolean checkOverlappingTimeRange(String otherTimeRange) {
+        String[] times = otherTimeRange.split("-");
+        LocalTime otherStartTime = LocalTime.parse(times[0], TIME_FORMATTER);
+        LocalTime otherEndTime = LocalTime.parse(times[1], TIME_FORMATTER);
+
+        return ((startTime.equals(otherStartTime) || startTime.isBefore(otherStartTime))
+                && endTime.isAfter(otherStartTime))
+                || (startTime.isBefore(otherEndTime)
+                && (endTime.equals(otherEndTime) || endTime.isAfter(otherEndTime)))
+                || ((startTime.equals(otherStartTime) || (startTime.isAfter(otherStartTime))
+                && (endTime.equals(otherEndTime) || endTime.isBefore(otherEndTime))));
     }
 
     /**

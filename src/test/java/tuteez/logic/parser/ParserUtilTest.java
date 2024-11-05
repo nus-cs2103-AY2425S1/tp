@@ -36,6 +36,7 @@ public class ParserUtilTest {
     private static final String INVALID_LESSON_END_TIME = "monday 2300-0000";
     private static final String INVALID_LESSON_START_TIME = "monday 2359-0000";
     private static final String INVALID_LESSON_END_BEFORE_START = "monday 1800-1700";
+    private static final String INVALID_LESSON_TIME = "monday 2500-2670";
     private static final String INVALID_REMARK = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -244,7 +245,16 @@ public class ParserUtilTest {
         try {
             ParserUtil.parseLesson(INVALID_LESSON_DAY);
         } catch (ParseException e) {
-            assertEquals(e.getMessage(), Lesson.MESSAGE_CONSTRAINTS);
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_LESSON_DAY);
+        }
+    }
+
+    @Test
+    public void parseLesson_invalidLessonTime_throwParseException() {
+        try {
+            ParserUtil.parseLesson(INVALID_LESSON_TIME);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), Lesson.MESSAGE_INVALID_LESSON_TIME);
         }
     }
 

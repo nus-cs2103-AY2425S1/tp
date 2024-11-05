@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":LessonManager" as LessonManager #0000FF
+participant "student:Person" as Person #0000FF
+participant "<<class>>\nLesson" as LessonClass #FF0000
+
+[-> LessonManager : findClashingLessonsAcrossAllStudents(personList, proposedLesson)
+activate LessonManager
+
+loop total number of students times in personList
+    LessonManager -> Person : findStudentClashingLessons(proposedLesson)
+    activate Person
+        loop number of student's lesson times
+            Person -> LessonClass : isClashingWithOtherLesson(proposedLesson, oneOfStudentLesson)
+            activate LessonClass
+            LessonClass --> Person
+            deactivate LessonClass
+        end
+        Person --> LessonManager : clashedLessons
+        deactivate Person
+end
+[<-- LessonManager : clashingLessonsMap
+deactivate LessonManager
+@enduml
+
