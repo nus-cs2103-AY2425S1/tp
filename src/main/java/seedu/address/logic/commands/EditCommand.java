@@ -94,6 +94,12 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * If the new tags contain a net worth status tag (either "highnetworth", "midnetworth", or "lownetworth"),
+     * any existing net worth status tags on the person will be removed to ensure that only one net worth status tag
+     * is associated with the person at a time. This logic is enforced to prevent conflicting net worth statuses
+     * (i.e., a person cannot be classified as both "highnetworth" and "lownetworth").
+     *
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -104,6 +110,18 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        Set<String> netWorthTags = Set.of("highnetworth", "midnetworth", "lownetworth");
+
+        Optional<Tag> newNetWorthTag = updatedTags.stream()
+                .filter(tag -> netWorthTags.contains(tag.tagName.toLowerCase()))
+                .findFirst();
+
+        if (newNetWorthTag.isPresent()) {
+            updatedTags.removeIf(tag -> netWorthTags.contains(tag.tagName.toLowerCase()));
+            updatedTags.add(newNetWorthTag.get());
+        }
+
         Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
         ProfilePicFilePath updatedProfilePicFilePath = personToEdit.getProfilePicFilePath(); // edit does not update pic
 

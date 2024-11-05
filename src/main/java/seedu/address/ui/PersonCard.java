@@ -53,7 +53,18 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+
+                    if ("highnetworth".equalsIgnoreCase(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-high");
+                    } else if ("midnetworth".equalsIgnoreCase(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-mid");
+                    } else if ("lownetworth".equalsIgnoreCase(tag.tagName)) {
+                        tagLabel.getStyleClass().add("tag-low");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
     }
 
     /**
