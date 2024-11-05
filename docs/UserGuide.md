@@ -109,7 +109,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
       > ---
       >
@@ -121,7 +121,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
+      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
       > ---
       >
@@ -133,7 +133,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       Invalid command format! <br>
       buyer: Adds a buyer to the address book. <br>
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
       > ---
 - #### **Add Seller Command**
@@ -167,7 +167,7 @@ Commands for creating, updating, and deleting buyers and sellers.
         Invalid command format! <br>
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+        Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
       > ---
       >
@@ -179,7 +179,7 @@ Commands for creating, updating, and deleting buyers and sellers.
         Invalid command format! <br>
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
+        Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
       > ---
       > **User Error #3**: Missing `EMAIL` field
@@ -190,7 +190,7 @@ Commands for creating, updating, and deleting buyers and sellers.
         Invalid command format! <br>
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+        Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 
 - #### **Find Command**
     - **Format:** `find KEYWORD [KEYWORD...]`
@@ -230,14 +230,14 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 
-- #### **Edit Command**
-    - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
+- #### **Edit Client Command**
+    - **Format:** `editclient NAME [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Changing name of `Bob` to `Bobby`
       >
-      > **Input**: `edit 1 n/Bobby`
+      > **Input**: `editclient Bob n/Bobby`
       >
       > **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
@@ -245,7 +245,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Use Case #2**: Changing phone of `Bobby` to `97774444`
       >
-      > **Input**: `edit 1 p/97774444`
+      > **Input**: `editclient Bobby p/97774444`
       >
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
@@ -253,7 +253,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Use Case #3**: Removing tags of `Bobby`
       >
-      > **Input**: `edit 1 t/`
+      > **Input**: `editclient Bobby t/`
       >
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
       >
@@ -261,48 +261,48 @@ Commands for creating, updating, and deleting buyers and sellers.
 
     - **Failed Execution:**
       > ---
-      > **User Error #1**: Entering non-existent index
+      > **User Error #1**: No name found
       >
-      > **Input**: `edit -1 n/Bobby`
-      >
-      > **Output**:
-      <br> Invalid command format!
-      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
-      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: edit 1 e/johndoe@example.comp/91234567
-      >
-      > **Input**: `edit 500 n/Bobby`
+      > **Input**: `editclient n/Bobby`
       >
       > **Output**:
       <br> Invalid command format!
-      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
-      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
+      <br>Parameters: NAME (must be an existing client) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: editclient John Doe e/johndoe@example.com p/91234567
       >
       > ---
       >
-      > **User Error #2**: Entering non-numerical index
+      > **User Error #2**: Entering invalid name
       >
-      > **Input**: `edit a#2 n/Bobby`
+      > **Input**: `editclient a#2 n/Bobby`
       >
       > **Output**:
       <br> Invalid command format!
-      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
-      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
+      <br>Parameters: NAME (must be an existing client) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: editclient John Doe e/johndoe@example.com p/91234567
       >
+      > ---
+      > 
+      > **User Error #3**: Entering a name that does not exist in the address book
+      > 
+      > **Input**: `editclient notInAddressBook n/Bobby`
+      > 
+      > **Output**: This person does not exist in the address book.
+      > 
       > ---
 
 - #### **Delete Client Command**
-    - **Format:** `delete <NAME>`
+    - **Format:** `delete NAME`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case**: Deleting client `Bob`
+      > **Use Case #1**: Delete `Bob` from the address book
       >
       > **Input**: `delete Bob`
       >
-      > **Output**: Successfully deleted Bob with the number: 91124444 and email: bobby123@gmail.com!
+      > **Output**: `Successfully deleted Bob with the number: 97774444 and email: bobby123@gmail.com`
       >
       > ---
     
@@ -312,15 +312,44 @@ Commands for creating, updating, and deleting buyers and sellers.
     `delete Bob` = `delete BOB` = `delete bOb` 
     </div>
     <br>
-  
+      
     - **Failed Execution:**
       > ---
-      > **Use Case**: Attempt to delete client `Bob7` who does not exist
+      > **Use Case #1**: No name found
       >
-      > **Input**: `delete bob7`
+      > **Input**: `delete`
       >
-      > **Output**: Please enter an existing client name!
+      > **Output**: 
+      <br> Invalid command format! 
+      <br>delete: Deletes the client profile corresponding to the client's name.
+      <br>Parameters: CLIENT_NAME (case-insensitive)
+      <br>Example: delete Tan Wen Xuan
       >
+      > ---
+      > **Use Case #2**: Entering invalid name 
+      > 
+      > **Input**: `delete $$`
+      > 
+      > **Output**:
+      <br> Invalid command format!
+      <br>delete: Deletes the client profile corresponding to the client's name.
+      <br>Parameters: CLIENT_NAME (case-insensitive)
+      <br>Example: delete Tan Wen Xuan
+      > 
+      > ---
+      > **Use Case #3**: Deleting a name that does not exist in the address book
+      > 
+      > **Input**: `delete notInAddressBook`
+      > 
+      > **Output**:
+      <br> Invalid command format!
+      <br>delete: Deletes the client profile corresponding to the client's name.
+      <br>Parameters: CLIENT_NAME (case-insensitive)
+      <br>Example: delete Tan Wen Xuan
+      > 
+      > ---
+      > **Use Case #3**:
+      > 
       > ---
 
 ---

@@ -13,7 +13,7 @@ import seedu.address.model.listing.ListingContainsKeywordsPredicate;
  */
 public class FindListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "findListings";
+    public static final String COMMAND_WORD = "findlisting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all listings whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
