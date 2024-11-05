@@ -23,7 +23,7 @@ import seedu.sellsavvy.model.order.Status;
  */
 public class MarkOrderCommand extends Command {
 
-    public static final String COMMAND_WORD = "markOrder";
+    public static final String COMMAND_WORD = "markorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an order identified by "
             + "the index number used in the displayed order list as completed.\n"
