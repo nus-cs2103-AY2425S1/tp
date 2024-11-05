@@ -2,11 +2,11 @@ package seedu.address.testutil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerDates;
 
 /**
  * A test utility class to help with building Volunteer objects.
@@ -23,7 +23,7 @@ public class VolunteerBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Date availableDate;
+    private VolunteerDates availableDate;
     private ObservableList<String> involvedIn;
 
     /**
@@ -33,7 +33,7 @@ public class VolunteerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        availableDate = new Date(DEFAULT_DATE);
+        availableDate = new VolunteerDates(DEFAULT_DATE);
         involvedIn = FXCollections.observableArrayList();
     }
 
@@ -44,7 +44,7 @@ public class VolunteerBuilder {
         name = volunteerToCopy.getName();
         phone = volunteerToCopy.getPhone();
         email = volunteerToCopy.getEmail();
-        availableDate = volunteerToCopy.getAvailableDate();
+        availableDate = volunteerToCopy.getAvailableDates();
         involvedIn = volunteerToCopy.getInvolvedIn();
     }
 
@@ -76,7 +76,7 @@ public class VolunteerBuilder {
      * Sets the {@code Date} of the {@code Volunteer} that we are building.
      */
     public VolunteerBuilder withAvailableDate(String availableDate) {
-        this.availableDate = new Date(availableDate);
+        this.availableDate = new VolunteerDates(availableDate);
         return this;
     }
 

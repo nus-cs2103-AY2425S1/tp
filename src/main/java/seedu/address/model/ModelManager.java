@@ -16,6 +16,8 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventParticipatedByVolunteerPredicate;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.OverlappingAssignException;
+import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
+import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 
@@ -201,6 +203,18 @@ public class ModelManager implements Model {
     @Override
     public void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws CommandException {
         addressBook.unassignVolunteerFromEvent(volunteer, event);
+    }
+
+    @Override
+    public void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws
+            VolunteerDuplicateDateException {
+        addressBook.addDatesToVolunteer(volunteerToAddDate, dateList);
+    }
+
+    @Override
+    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
+            VolunteerDeleteMissingDateException {
+        addressBook.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
     }
 
 

@@ -8,10 +8,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
+import seedu.address.model.volunteer.VolunteerDates;
 
 public class VolunteerParserUtilTest {
 
@@ -136,14 +136,14 @@ public class VolunteerParserUtilTest {
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
-        Date expectedDate = new Date(VALID_DATE);
+        VolunteerDates expectedDate = new VolunteerDates(VALID_DATE);
         assertEquals(expectedDate, VolunteerParserUtil.parseDate(VALID_DATE));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        Date expectedDate = new Date(VALID_DATE);
+        VolunteerDates expectedDate = new VolunteerDates(VALID_DATE);
         assertEquals(expectedDate, VolunteerParserUtil.parseDate(dateWithWhitespace));
     }
 }
