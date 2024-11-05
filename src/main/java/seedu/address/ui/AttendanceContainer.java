@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -13,10 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 
 /**
- * An UI component for displaying information related to attendance.
+ * An UI component that displays information related to attendance.
  */
 public class AttendanceContainer extends UiPart<Region> {
 
@@ -24,6 +27,7 @@ public class AttendanceContainer extends UiPart<Region> {
 
     public final ObservableList<Participation> participationList;
 
+    private final Logger logger = LogsCenter.getLogger(AttendanceContainer.class);
     @FXML
     private Label tutorial;
     @FXML
@@ -43,15 +47,16 @@ public class AttendanceContainer extends UiPart<Region> {
 
         //listener to trigger UI update when participationList changes
         participationList.addListener((ListChangeListener<Participation>) change -> {
+            logger.info("Change observed in participation list");
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     setAttendanceList();
                 }
             }
         });
-
         setAttendanceList();
-        setDisplayDate();
+        setWeeklyDateRange();
+        logger.info("Successfully created attendance container");
     }
 
     /**
@@ -59,20 +64,24 @@ public class AttendanceContainer extends UiPart<Region> {
      * attendanceList to be displayed in the UI.
      */
     private void setAttendanceList() {
+        logger.info("Setting display for the list of participation");
         if (participationList.isEmpty()) {
+            logger.info("No participation to display");
             setEmptyParticipationPlaceholder();
         } else {
             attendanceList.getChildren().clear();
-            participationList.forEach(participation -> attendanceList.getChildren()
+            participationList.stream().sorted(Comparator.comparing(Participation::getTutorialSubject))
+                    .forEach(participation -> attendanceList.getChildren()
                     .add(new AttendanceCard(participation.getTutorialSubject(),
                             participation.getAttendanceList()).getRoot()));
+            logger.info("Successfully set the display for all participation");
         }
     }
 
     /**
      * Sets the label to display the current week with the date range.
      */
-    private void setDisplayDate() {
+    private void setWeeklyDateRange() {
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
         LocalDate endOfWeek = startOfWeek.plusDays(6);

@@ -23,9 +23,22 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Sets the success message to be displayed and the default style on successful command execution.
+     */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
+        setStyleToDefault();
+    }
+
+    /**
+     * Sets the error message to be displayed and the error style on command failure.
+     */
+    public void setFeedbackToUserCommandFailure(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        resultDisplay.setText(feedbackToUser);
+        setStyleToIndicateCommandFailure();
     }
 
     /**

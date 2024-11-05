@@ -19,6 +19,12 @@
     -fx-text-fill: white;
 }
 
+#cardPane .contact-label {
+    -fx-padding: 0 0 0 5;
+    -fx-text-fill: #6C6C6C;
+    -fx-font-size: 12;
+}
+
 .attendance-card {
     -fx-background-color: #f5f9fc;
     -fx-background-radius: 5;
