@@ -17,12 +17,12 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
 /**
- * Panel containing the list of orders of a person.
+ * Panel containing the list of orders of a selected person.
  */
 public class OrderListPanel extends UiPart<Region> {
     private static final String FXML = "OrderListPanel.fxml";
-    private static final String DEFAULT_TITLE = "Order";
-    private static final String TITLE_WITH_SELECTED_PERSON = "Order (%1$s)";
+    private static final String DEFAULT_TITLE = "Orders";
+    private static final String TITLE_WITH_SELECTED_PERSON = "Orders (%1$s";
     private static final String EMPTY_ORDER_LIST_MESSAGE = "This customer does not have any orders currently.";
     private static final String NO_RELATED_ORDERS_FOUND = "No related orders found.";
 
@@ -38,18 +38,21 @@ public class OrderListPanel extends UiPart<Region> {
     private Label orderListEmpty;
     @FXML
     private Label orderListTitle;
+    @FXML
+    private Label closingParenthesis;
+    // closing bracket is separated from the rest of the label title to handle cases where name are too long
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code OrderListPanel} with the given {@code ReadOnlyObjectProperty} of {@code Person}.
      */
-    public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPerson) {
+    public OrderListPanel(ReadOnlyObjectProperty<Person> selectedPersonProperty) {
         super(FXML);
-        orderGuide.setText("Use one of the following commands below to view order:\n" + "1. "
+        orderGuide.setText("Use the following command to view order(s):\n"
                 + ListOrderCommand.MESSAGE_USAGE);
         orderListEmpty.setText(EMPTY_ORDER_LIST_MESSAGE);
-        updateOrderList(selectedPerson.get());
+        updateOrderList(selectedPersonProperty.get());
 
-        selectedPerson.addListener(((observable, oldPerson, newPerson) -> {
+        selectedPersonProperty.addListener(((observable, oldPerson, newPerson) -> {
             updateOrderList(newPerson);
         }));
     }
@@ -66,6 +69,7 @@ public class OrderListPanel extends UiPart<Region> {
 
         this.selectedPerson = person;
         orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, person.getName().fullName));
+        toggleClosingParenthesisDisplay(true);
         FilteredList<Order> orderList = person.getFilteredOrderList();
         moveOrderChangeListenerTo(orderList);
         orderListView.setItems(orderList);
@@ -77,6 +81,16 @@ public class OrderListPanel extends UiPart<Region> {
         }
 
         showOrderList();
+    }
+
+    /**
+     * Toggles the display of the closing parenthesis element in the UI.
+     *
+     * @param shouldDisplay {@code true} to show the closing parenthesis; {@code false} to hide it.
+     */
+    private void toggleClosingParenthesisDisplay(boolean shouldDisplay) {
+        closingParenthesis.setManaged(shouldDisplay);
+        closingParenthesis.setVisible(shouldDisplay);
     }
 
     /**
@@ -97,6 +111,7 @@ public class OrderListPanel extends UiPart<Region> {
         orderGuide.setVisible(true);
 
         orderListTitle.setText(DEFAULT_TITLE);
+        toggleClosingParenthesisDisplay(false);
     }
 
     /**

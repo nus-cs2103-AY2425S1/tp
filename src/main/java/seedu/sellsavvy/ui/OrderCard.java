@@ -31,13 +31,15 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label heading;
     @FXML
+    private Label quantity;
+    @FXML
     private Label status;
     @FXML
     private Label date;
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code OrderCode} with the given {@code Order} and index to display.
      */
     public OrderCard(Order order, int displayedIndex) {
         super(FXML);
