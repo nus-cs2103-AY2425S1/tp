@@ -365,7 +365,7 @@ Student CSV format:
 Name,Phone,Email,Courses
 John Doe,12345678,john@example.com,CS2103T;CS2101
 
-Consultation CSV format:  
+Consultation CSV format:
 Date,Time,Students
 2024-10-20,14:00,John Doe;Jane Doe
 ```
@@ -678,7 +678,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. TA selects consultation by index
 3. TA specifies students to remove by name
 4. System validates student existence in consultation
-5. System removes specified students from consultation 
+5. System removes specified students from consultation
 6. Success message shown
 
 **Extensions**
