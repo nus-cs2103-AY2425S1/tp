@@ -145,7 +145,7 @@ Examples:
 
 ### Adding an insurance plan to a client : `addInsurance`
 
-Adds the insurance plan (given by the `INSURANCE_ID`) to the client at the specified `INDEX`.
+Adds the insurance plan (given by the `INSURANCE_ID`) to the client at the specified `INDEX`. Insurance plans of different types cannot be added by the user and will be added beforehand to ensure that the plans are consistent with market type plans.
 
 Format: `addInsurance INDEX iid/INSURANCE_ID`
 
