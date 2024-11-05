@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
@@ -289,17 +290,42 @@ public class ParserUtilTest {
         assertEquals(expectedOldStatus, ParserUtil.parseClientStatus(oldStatusWithWhitespace));
     }
 
-    // @Test
-    // public void parseDeadline_validValueWithoutWhitespace_returnsDeadline() throws Exception {
-    //     Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
-    //     assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE));
-    // }
+    @Test
+    public void parseDeadline_validValues_returnsDeadline() throws Exception {
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_EASY) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_DIFFERENT_DELIMITERS) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_SHORT_STRINGS) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_BORDER_VALUES) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_MIXED) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+    }
 
-    // @Test
-    // public void parseDeadline_validValueWithWhitespace_returnsTrimmedDeadline() throws Exception {
-    //     String deadlineWithWhitespace = WHITESPACE + VALID_DEADLINE_2 + WHITESPACE;
-    //     Deadline expectedDeadline = new Deadline(VALID_DEADLINE_2);
-    //     assertEquals(expectedDeadline, ParserUtil.parseDeadline(deadlineWithWhitespace));
-    // }
+    @Test
+    public void parseDeadline_validValuesWithWhitespace_returnsDeadline() throws Exception {
+        String[] deadlinesWithWhitespace = new String[] {
+            "  10-10-2024",
+            "10-10-2024  ",
+            " 10/10/2024 ",
+            "\t10|10|2024\n",
+        };
+        Deadline expected = new Deadline("10-10-2024");
+        for (String deadline : deadlinesWithWhitespace) {
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+    }
 
 }
