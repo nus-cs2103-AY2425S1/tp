@@ -21,18 +21,18 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
       - [Clearing all entries](#clearing-all-entries--clear)
       - [Exiting the program](#exiting-the-program--exit)
     - Patient Management
-      - [Adding a patient](#adding-a-person--add)
+      - [Adding a patient](#adding-a-patient--add)
       - [Editing a patient](#editing-a-patient--edit)
-      - [Deleting a patient](#deleting-a-person--delete)
+      - [Deleting a patient](#deleting-a-patient--delete)
       - [Listing all patients](#listing-all-patients--list)
       - [Searching patients by field](#searching-patients-by-field--find)
     - Notes Management
       - [Adding notes to a patient](#adding-notes-to-a-patient--addnotes)
       - [Deleting notes from a patient](#deleting-notes-from-a-patient--delnotes)
     - Appointment Management
-      - [Adding an appointment to a patient](#adding-an-appointment-to-a-person--make_appt)
-      - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-person-del_appt)
-      - [List all patient appointment](#list-all-person-appointment--schedule_all)
+      - [Adding an appointment to a patient](#adding-an-appointment-to-a-patient--make_appt)
+      - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-del_appt)
+      - [List all patient appointment](#list-all-patient-appointment--schedule_all)
 4. [FAQ](#faq)
 5. [Glossary](#glossary)
 6. [Known Issues](#known-issues)
@@ -140,7 +140,9 @@ Format: `help`
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Adding a person: `add`
+### Adding a patient: `add`
+
+![add patient result](images/add.png)
 
 Adds a person to the address book.
 
@@ -164,6 +166,8 @@ Examples:
 
 ### Listing all patients : `list`
 
+![list all patients result'](images/list.png)
+
 Shows a list of all patients in WardWatch.
 
 Format: `list`
@@ -172,6 +176,8 @@ Format: `list`
 [Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient : `edit`
+
+![edit patient result](images/edit.png)
 
 Edits an existing person in the address book.
 
@@ -265,7 +271,9 @@ Examples:
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting a person : `delete`
+### Deleting a patient : `delete`
+
+![delete patient result'](images/delete.png)
 
 Deletes the specified person from the address book.
 
@@ -282,7 +290,9 @@ Examples:
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Adding an Appointment to a person: `make_appt`
+### Adding an Appointment to a patient: `makeappt`
+
+![makeappt for patient result'](images/makeappt.png)
 
 Makes an appointment for a person
 
@@ -295,6 +305,7 @@ Format: `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_
 * `START_DATE_TIME` and `END_DATE_TIME` **must be in the form of `DD-MM-YYYY-HH-MM`.**
 * `START_DATE_TIME` and `END_DATE_TIME` refers to the date and time the appointment starts and ends respectively.
 * The start **must be before** the end date and time.
+* Appointment added **must not overlap** the duration of existing appointments.
 
 Examples:
 * `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
@@ -303,7 +314,7 @@ Examples:
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting an Appointment from a person: `del_appt`
+### Deleting an Appointment from a patient: `del_appt`
 
 Deletes an appointment from a person
 
@@ -318,6 +329,8 @@ Format: `del_appt INDEX`
 
 ### Show appointments on a specific date: `schedule_date`
 
+![scheduledate result](images/scheduledate.png)
+
 Lists all the appointments on a specific date.
 
 Format: `schedule_date DATE`
@@ -331,11 +344,13 @@ Examples:
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### List all patient appointment: `schedule_all`
+### List all patient appointment: `scheduleall`
+
+![scheduleall result](images/scheduleall.png)
 
 Lists all the appointments assigned to every patient.
 
-Format: `schedule_all`
+Format: `scheduleall`
 
 [Back to Table of Contents](#table-of-contents)
 
