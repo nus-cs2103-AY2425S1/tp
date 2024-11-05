@@ -12,8 +12,7 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is evolved from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +49,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_guest 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -314,14 +313,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User creates a new guest with the required details (e.g. name, email, etc.).
+1. User creates a new Guest with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The provided details are incomplete or invalid (e.g. compulsory fields are not furnished).
+* 1a. The provided details are incomplete or invalid.
     * 1a1. System shows an error message and requests the user to re-enter the details.
 
       Use case resumes at step 1.
@@ -335,14 +334,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User creates a new vendor with the required details (e.g. name, email, etc.).
+1. User creates a new Vendor with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The provided details are incomplete or invalid (e.g. compulsory fields are not furnished).
+* 1a. The provided details are incomplete or invalid.
     * 1a1. System shows an error message and requests the user to re-enter the details.
 
       Use case resumes at step 1.
@@ -371,16 +370,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use Case: Delete a Person**
+**Use Case: Delete a Guest**
 
 **MSS**
-1. User requests to delete an entry.
-2. System deletes the entry.
+1. User requests to delete a Guest entry.
+2. System deletes the Guest entry.
 
    Use case ends.
 
 **Extensions**
-* 1a. The provided entry does not exist.
+* 1a. The provided Guest entry does not exist.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
@@ -390,13 +389,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Search and Filter Persons**
+**Use Case: Delete a Vendor**
 
 **MSS**
-1. User requests to search for or filter entries (e.g., by category, name, RSVP status).
-2. System prompts for search or filter criteria.
-3. User provides the criteria.
-4. System displays the matching entries.
+1. User requests to delete a Vendor entry.
+2. System deletes the Vendor entry.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The provided Vendor entry does not exist.
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+**Use Case: Find Guests and Vendor with a particular field**
+
+**MSS**
+1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
+2. System displays the matching Guest and Vendor entries.
 
    Use case ends.
 
@@ -406,8 +422,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 4a. No matching entries are found.
-    * 4a1. System shows a message indicating no results.
+* 2a. No matching entries are found.
+    * 2a1. System shows a message indicating no results.
 
       Use case ends.
 
