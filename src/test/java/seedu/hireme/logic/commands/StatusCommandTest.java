@@ -111,17 +111,29 @@ public class StatusCommandTest {
 
     @Test
     public void equals() {
+        // Create two StatusCommand objects with the same index and status
         StatusCommand statusFirstCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
-        StatusCommand statusSecondCommand = new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.PENDING);
+        StatusCommand statusFirstCommandCopy = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
 
+        // Test: Same object reference should be equal
         assertTrue(statusFirstCommand.equals(statusFirstCommand));
 
-        StatusCommand statusFirstCommandCopy = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
+        // Test: Different objects with the same values should be equal
         assertTrue(statusFirstCommand.equals(statusFirstCommandCopy));
 
+        // Test: Different types should not be equal
         assertFalse(statusFirstCommand.equals(1));
+
+        // Test: Null should not be equal
         assertFalse(statusFirstCommand.equals(null));
+
+        // Test: Objects with different indices should not be equal
+        StatusCommand statusSecondCommand = new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.ACCEPTED);
         assertFalse(statusFirstCommand.equals(statusSecondCommand));
+
+        // Test: Objects with the same index but different statuses should not be equal
+        StatusCommand statusDifferentStatusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING);
+        assertFalse(statusFirstCommand.equals(statusDifferentStatusCommand));
     }
 
     @Test
