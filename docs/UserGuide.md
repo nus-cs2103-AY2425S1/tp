@@ -305,13 +305,13 @@ Format: `sort <CRITERIA> <ORDER>`
 
 - **Parameters**:
   - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
-      - `n/`: Sort by client's name (A-Z by default).
-      - `b/`: Sort by client's birthday (earliest to latest by default).
-      - `appt`: Sort by upcoming appointment dates (soonest to latest by default).
-      - `paydate`: Sort by policy payment due date (earliest to latest by default).
+      - `n/`: Sort by client's name (A-Z or Z-A).
+      - `b/`: Sort by client's birthday (earliest to latest or latest to earliest).
+      - `appt/`: Sort by upcoming appointment dates (soonest to latest or latest to soonest).
+      - `paydate/`: Sort by policy payment due date (earliest to latest).
   - `ORDER`: The direction of sort. Available order includes:
     - `asc`: Sort in ascending order
-    - `dsc`: Sort in descending order
+    - `desc`: Sort in descending order
 
 - **Usage**:
   - **Name Sorting**: Orders the client list alphabetically by name.
@@ -330,7 +330,7 @@ Examples:
 
   - **Sort by Birthday in Descending Order**:
     ```
-    sort b/ dsc
+    sort b/ desc
     ```
     *Sorts the client list from the latest to the earliest birthday.*
 
@@ -358,12 +358,12 @@ Examples:
 
 Marks a policy payment installment as paid for a client.
 
-Format: `paid <INDEX> pon/<POLICY_NAME>`
+Format: `paid <INDEX> po/<POLICY_INDEX>`
 - **Parameters**:
   - `INDEX`: The index of the client in the client list.
-  - `POLICY_NAME`: The name of the policy to be marked as paid.
+  - `POLICY_INDEX`: The index of the policy to be marked as paid.
   - The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-  - The policy name is case-sensitive and must be an exact match.
+  - The policy index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
   
 - **Usage**:
   - **Updating Payment Due Date**: The payment due date of the policy will be updated to the next scheduled date (ie. one year later).
@@ -372,9 +372,9 @@ Format: `paid <INDEX> pon/<POLICY_NAME>`
 Examples:
   - **Marking a Policy Payment Installment as Paid**:
   ```
-  paid 1 pon/PolicyOne
+  paid 1 po/1
   ```
-  *Marks the policy named "PolicyOne" as paid for the client at index 1.*
+  *Marks the policy associated with index 1 as paid for the client at index 1.*
     
   ![Marking a Policy Payment Installment as Paid](images/paidUI.png)
 

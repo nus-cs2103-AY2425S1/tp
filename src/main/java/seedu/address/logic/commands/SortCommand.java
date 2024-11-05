@@ -22,7 +22,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by the specified parameter in the specified order.\n"
-            + "Parameters: PARAMETER (" + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + " or "
+            + "Parameters: CRITERIA (" + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + " or "
             + PREFIX_NEXT_PAYMENT_DATE + ") " + "ORDER (asc, desc)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " asc";
 
@@ -31,6 +31,8 @@ public class SortCommand extends Command {
         + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + ", or " + PREFIX_NEXT_PAYMENT_DATE + ".";
     public static final String MESSAGE_INVALID_ORDER = "Invalid order. Use `asc` for ascending or "
             + "`desc` for descending.";
+    public static final String MESSAGE_INVALID_SORT_COMMAND = "Cannot sort by next payment date in descending order.";
+    public static final String MESSAGE_EMPTY_PERSON_LIST = "There are no contacts to sort.";
 
     private final String parameter;
     private final String order;
@@ -48,6 +50,10 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getFilteredPersonList().isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_PERSON_LIST);
+        }
 
         Comparator<Person> comparator;
         switch (parameter) {
@@ -68,7 +74,7 @@ public class SortCommand extends Command {
         }
 
         if (parameter.equals("paydate/") && order.equals("desc")) {
-            comparator = Person.getReversedPayDateComparator();
+            throw new CommandException(MESSAGE_INVALID_SORT_COMMAND);
         }
 
         if (order.equals("desc")) {
