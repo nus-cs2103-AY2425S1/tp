@@ -167,7 +167,7 @@ public class AddressBookParserTest {
     }
 
     public void parseCommand_viewEvent() throws ParseException {
-        Command expected = new ViewEventCommand(SPORTS_FESTIVAL);
+        Command expected = new ViewEventCommand(INDEX_FIRST_EVENT);
         assertEquals(expected, new AddressBookParser()
                 .parseCommand(ViewEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
     }

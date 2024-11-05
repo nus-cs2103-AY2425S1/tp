@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.event.commands.ViewEventCommand;
-import seedu.address.model.event.Event;
 
 
 public class ViewEventCommandParserTest {
@@ -21,15 +21,15 @@ public class ViewEventCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsViewEventCommand() {
-        ViewEventCommand expectedViewEventCommandNoSpaces = new ViewEventCommand(new Event("test"));
-        ViewEventCommand expectedViewEventCommandWithSpaces = new ViewEventCommand(new Event("test test test"));
+        ViewEventCommand expectedViewEventCommandNoSpaces = new ViewEventCommand(Index.fromOneBased(1));
+        ViewEventCommand expectedViewEventCommandWithSpaces = new ViewEventCommand(Index.fromOneBased(2));
 
         // no trailing whitespaces
-        assertParseSuccess(parser, "test", expectedViewEventCommandNoSpaces);
-        assertParseSuccess(parser, "test test test", expectedViewEventCommandWithSpaces);
+        assertParseSuccess(parser, "1", expectedViewEventCommandNoSpaces);
+        assertParseSuccess(parser, "2", expectedViewEventCommandWithSpaces);
 
         // with trailing whitespaces
-        assertParseSuccess(parser, "  test   ", expectedViewEventCommandNoSpaces);
-        assertParseSuccess(parser, "      test test test     ", expectedViewEventCommandWithSpaces);
+        assertParseSuccess(parser, "  1   ", expectedViewEventCommandNoSpaces);
+        assertParseSuccess(parser, "      2     ", expectedViewEventCommandWithSpaces);
     }
 }
