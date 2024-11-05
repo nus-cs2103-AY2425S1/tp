@@ -13,14 +13,15 @@ public class Exam {
     public static final String NAME_MESSAGE_CONSTRAINTS =
             "Exam names should only contain alphanumeric characters and spaces, and it should not be blank.";
     public static final String SCORE_MESSAGE_CONSTRAINTS =
-            "Exam scores should be an integer representing a percentage from 0 to 100.";
+            "Exam scores should be a percentage accurate to one decimal point (i.e. 0.0 - 100.0).\n"
+            + "To delete an exam score, input 'NIL' as the score.";
 
     /**
      * The first character of the exam name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String SCORE_VALIDATION_REGEX = "^(?:[0-9]|[1-9][0-9]|100|NIL)$";
+    public static final String SCORE_VALIDATION_REGEX = "^(100\\.0|[1-9]?[0-9]\\.[0-9]|0\\.[0-9]|NIL)$";
 
     public final String examName;
     public final String examScore;
