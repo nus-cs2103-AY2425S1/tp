@@ -22,7 +22,7 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -93,7 +93,7 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing Help : `help`
 
 You can view a popup with an overview of all commands, and also a link to this user guide if you need more details.
 
@@ -102,7 +102,7 @@ Format: `help`
 ![help message](images/helpmsg.png)
 
 
-### Adding a person: `add`
+### Adding a Contact: `add`
 
 You can add a person to the list of contacts.
 
@@ -134,7 +134,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer`
 * `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Prison j/Caterer t/stacy & sam`
 
-### Deleting A Contact : `del` followed by `y` or `n`
+### Deleting a Contact : `del` followed by `y` or `n`
 
 You can delete a person from your list of contacts.
 
@@ -154,17 +154,21 @@ Examples:
 * `del n/John Doe` followed by `y` deletes the person named `John Doe` from the address book.
 * `del n/John Doe` followed by `n` cancels the delete operation.
 
-### Editing A Contact : `edit`
+### Editing a Contact : `edit`
 
-You can edit an existing contact's details(name, phone number, email, address and job).
+You can edit an existing contact's details (name, phone number, email, address and job).
 
 Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`
 
 <box type="tip" seamless>
 
-**Tip:** You must provide at least one of the optional fields.
+**Tip:** 
+* You have to provide at least one of the optional fields.
+* If you accidentally type the name of the contact in all capitals or add one too many spaces, don't worry! Knotty Planner will 
+automatically format the name by removing the extra spacing and correctly capitalizing it 🤩
 
-**IMPORTANT:** Tags can only be added or deleted, not edited.
+**IMPORTANT:** Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using 
+['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
 
 </box>
 
@@ -178,13 +182,13 @@ Examples:
 
 ### Listing All Contacts : `list`
 
-You can view all contacts. Contacts are listed in order that they were added.
+You can now view all contacts in the order they were added in!
 
 Format: `list`
 
 ![list message](images/listMsg.png)
 
-### Adding a wedding: `add-wed`
+### Adding a Wedding: `add-wed`
 
 You can add a wedding to the list of weddings.
 
@@ -216,7 +220,7 @@ Examples:
 * `add-wed w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
 * `add-wed w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
 
-### Deleting a wedding: `del-wed`
+### Deleting a Wedding: `del-wed`
 
 You can delete a person from your list of contacts.
 
@@ -240,9 +244,17 @@ Examples:
 * `del-wed w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
 * `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
-### Tagging A Contact : `tag-add` / `tag-del`
+### Listing All Weddings : `list-wed`
 
-### Adding Tag(s) to A Contact
+You can now view all weddings in the order they were added in!
+
+Format: `list-wed`
+
+![list wedding message](images/listWeddingMsg.png)
+
+### Tagging a Contact : `tag-add` / `tag-del`
+
+### Adding Tag(s) to a Contact
 If you need to associate your contacts with a particular wedding, you can use `tag-add` to add them to the wedding.
 
 Format: `tag-add n/NAME t/TAG...`
@@ -263,7 +275,7 @@ Examples:
 *  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
 *  `tag-add n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
 
-### Deleting Tag(s) from A Contact
+### Deleting Tag(s) from a Contact
 If you need to remove your contacts from a particular wedding, you can use `tag-del` to remove them from the wedding.
 
 Format: `tag-del n/NAME t/TAG...`
@@ -324,7 +336,7 @@ Format: `view-wed NAME & NAME`
 Examples:
 * `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
 
-### Clearing all entries : `clear-ab` & `clear-wb`
+### Clearing All Entries : `clear-ab` & `clear-wb`
 
 You can delete ALL contacts in the address book from the application.
 
@@ -340,18 +352,18 @@ Format:
 
 ![clear message](images/clearMsg.png)
 
-### Exiting the program : `exit`
+### Exiting the Program : `exit`
 
 You can exit application and save any new changes.
 
 Format: `exit`
 
-### Saving the data
+### Saving the Data
 
 Knotty Planner data will be saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
-### Editing the data file
+### Editing the Data File
 
 * Knotty Planner data are saved automatically as a JSON file `[JAR file location]/data/knottyplanner.json`.
 * Advanced users are welcome to update data directly by editing that data file.
@@ -363,7 +375,7 @@ There is no need to save manually.
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Archiving Data Files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -391,3 +403,22 @@ _Details coming soon ..._
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command Summary
+
+| Action            | Format, Examples                                                                                                                                                                           |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
+| **Delete Contact** | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                     |
+| **List Contacts** | `list`                                                                                                                                                                                |
+| **Edit Contact**  | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                      |
+| **Add Wedding**   | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                   |
+| **Delete Wedding** | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                        |
+| **Clear**         | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                     |
+| **Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                              |
+| **Deleting Tags** | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                              |
+| **Filter**        | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                         |
+| **View Wedding**  | `view-wed NAME & NAME` <br> e.g., `view-wed John & Sarah`                                                                                                                               |
+| **List Weddings** | `list-wed`                                                                                                                                                                            |
+| **Help**          | `help`                                                                                                                                                                                |
+| **Exit**          | `exit`                                                                                                                                                                                |
