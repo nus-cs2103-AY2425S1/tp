@@ -42,21 +42,21 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_TELEHANDLE, PREFIX_MOD, PREFIX_REMARK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_MOD,
-                PREFIX_REMARK, PREFIX_TELEHANDLE)
+                PREFIX_REMARK)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        //parse required fields
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_TELEHANDLE, PREFIX_CONTACTTYPE, PREFIX_MOD, PREFIX_REMARK);
+
+        // parse required fields
         ContactType contactType = ParserUtil.parseContactType(argMultimap.getValue(PREFIX_CONTACTTYPE).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get());
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MOD).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
-        //parse optional fields
+        // parse optional fields
         Optional<Phone> phone = argMultimap.getValue(PREFIX_PHONE).isPresent()
                 ? Optional.of(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()))
                 : Optional.empty();
@@ -65,7 +65,17 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? Optional.of(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()))
                 : Optional.empty();
 
+        Optional<TelegramHandle> telegramHandle = argMultimap.getValue(PREFIX_TELEHANDLE).isPresent()
+                ? Optional.of(ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get()))
+                : Optional.empty();
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        // check for at least one out of phone, email and telegram handle
+        if (phone.isEmpty() && email.isEmpty() && telegramHandle.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
+        }
 
         Person person = new Person(contactType, name, phone, email, telegramHandle, moduleName, remark, tagList);
         return new AddCommand(person);

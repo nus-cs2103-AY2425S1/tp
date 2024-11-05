@@ -20,7 +20,8 @@ public class TelegramHandleContainsKeywordsPredicate implements Predicate<Person
         String telegramHandle = person.getTelegramHandle().value.toLowerCase();
         return keywords.stream()
                 .map(String::toLowerCase)
-                .anyMatch(telegramHandle::equals);
+                .anyMatch(telegramHandle::equals)
+                .orElse(false);
     }
 
     @Override

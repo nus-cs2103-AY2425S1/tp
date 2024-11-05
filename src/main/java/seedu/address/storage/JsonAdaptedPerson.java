@@ -66,7 +66,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().map(Phone::toString).orElse(null);
         email = source.getEmail().map(Email::toString).orElse(null);
-        telegramHandle = source.getTelegramHandle().value;
+        telegramHandle = source.getTelegramHandle().map(TelegramHandle::toString).orElse(null);
         contactType = source.getContactType().value.toString();
         moduleName = source.getModuleName().toString();
         remark = source.getRemark().toString();
@@ -110,14 +110,12 @@ class JsonAdaptedPerson {
                 ? Optional.empty()
                 : Optional.of(new Email(email));
 
-        if (telegramHandle == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TelegramHandle.class.getSimpleName()));
-        }
-        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+        if (telegramHandle != null && !TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
+        final Optional<TelegramHandle> modelTelegramHandle = telegramHandle == null || telegramHandle.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new TelegramHandle(telegramHandle));
 
         if (contactType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

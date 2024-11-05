@@ -24,7 +24,7 @@ public class Person {
     private final Optional<Email> email;
 
     // Data fields
-    private final TelegramHandle telegramHandle;
+    private final Optional<TelegramHandle> telegramHandle;
     private final ModuleName moduleName;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
@@ -33,7 +33,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(ContactType contactType, Name name, Optional<Phone> phone, Optional<Email> email,
-                  TelegramHandle telegramHandle, ModuleName moduleName, Remark remark, Set<Tag> tags) {
+                  Optional<TelegramHandle> telegramHandle, ModuleName moduleName, Remark remark, Set<Tag> tags) {
         requireAllNonNull(contactType, name, phone, email, telegramHandle, moduleName, tags);
         this.contactType = contactType;
         this.name = name;
@@ -62,7 +62,7 @@ public class Person {
         return email;
     }
 
-    public TelegramHandle getTelegramHandle() {
+    public Optional<TelegramHandle> getTelegramHandle() {
         return telegramHandle;
     }
 
@@ -135,7 +135,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone.map(Phone::toString).orElse(" "))
                 .add("email", email.map(Email::toString).orElse(" "))
-                .add("telegramHandle", telegramHandle)
+                .add("telegramHandle", telegramHandle.map(TelegramHandle::toString).orElse(" "))
                 .add("moduleName", moduleName)
                 .add("remark", remark)
                 .add("tags", tags)

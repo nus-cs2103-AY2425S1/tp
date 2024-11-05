@@ -412,6 +412,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC005 - Switch Theme**
+
+**MSS**
+
+1. User requests to switch theme
+2. UniLink shows switched theme
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given theme is invalid.
+
+    * 1a1. UniLink shows an error message.
+
+      Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
