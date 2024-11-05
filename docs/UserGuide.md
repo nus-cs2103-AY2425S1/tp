@@ -140,48 +140,6 @@ Examples:
 * `edit Chris p/99998888` returns a filtered list of contacts whose names contain `Chris` and user need to edit their existing command to become
   `edit [INDEX of specific person] p/99998888` to specify the `Chris` they want to edit.
 
-### Assigning a person : `assign`
-
-Assigns an existing person in the address book a role or to existing wedding(s).
-
-If you know the index of the specific contact you want to assign:
-
-Format #1: `assign INDEX [r/ROLE] [w/WEDDING_INDEX]…​`
-
-* Assigns the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* When assigning roles, assigning blank roles e.g `r/` is not allowed.
-* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list. 
-The index **must be a positive integer** 1, 2, 3, …​
-* A person can be assigned to multiple weddings.
-
-Examples:
-*  `assign 1 r/florist` assigns the 1st person to have the role of a `florist`.
-*  `assign 1 w/1 ` assigns the 1st person to the 1st wedding.
-*  `assign 2 r/vendor w/1 w/2` assigns the 2nd person to have the role of a `vendor` as well as to be associated to the 1st and 2nd wedding.
-
-If you do not know the index but know the name of the contact you want to assign:
-
-Format #2: `assign NAME [r/ROLE] [w/WEDDING_INDEX]…​`
-
-* Filters a list of contacts with names that contains the entire NAME keyword
-* If there is only one contact that matches, the contact will be assigned directly
-* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `assign INDEX …​` to specify the contact they want to edit
-* At least one of the optional fields must be provided.
-* * When assigning roles, assigning blank roles e.g `r/` is not allowed.
-* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list.
-  The index **must be a positive integer** 1, 2, 3, …​
-* A person can be assigned to multiple weddings.
-
-Examples:
-*  `assign John Doe r/florist` assigns `John Doe` to have the role of a `florist`.
-*  `assign Betsy Crower w/1 ` assigns `Betsy Crower` to the 1st wedding.
-*  `assign Chris r/vendor w/1 w/2` if there are more than 1 name that contains `Chris`, 
-a filtered list of contacts whose names contain `Chris` is returned and user need to edit their existing command to become
-   `assign [INDEX of specific person] r/vendor w/1 w/2` to specify the `Chris` they want to assign.
-
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -331,24 +289,47 @@ Examples:
 * `vieww John` shows John's wedding if there's only one matching client named John
 * `vieww Alex` will show a list of all weddings where the client's name contains "Alex" if there are multiple matches
 
-### Assigning a role : `assign`
 
-Assigns a role to an existing person in the address book. Roles help identify the function of each contact (e.g., vendor, client, etc.).
+### Assigning a person : `assign`
 
-Format: `assign INDEX r/ROLE` or `assign NAME r/ROLE`
+Assigns a person to a role and/or to existing wedding(s) in the address book.
 
-* The person can be identified by either their index number or their name
-* When using index: must be a positive integer (1, 2, 3, ...)
-* When using name: matches are case-insensitive
-* If multiple contacts match the name, a list will be shown and you'll be prompted to use the index
-* Each person can only have one role at a time
-* Assigning a new role will replace the existing role
-* Role cannot be blank
+If you know the index of the specific contact you want to assign:
+
+Format #1: `assign INDEX [r/ROLE] [w/WEDDING_INDEX]…​`
+
+* Assigns the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* When assigning roles:
+    * Each person can only have one role at a time
+    * Assigning a new role will replace the existing role
+    * Assigning blank roles e.g `r/` is not allowed
+* When assigning a person to wedding(s):
+    * The wedding(s) can be specified by `INDEX`. The index refers to the index number shown in the displayed wedding list.
+    * The index **must be a positive integer** 1, 2, 3, …​
+    * A person can be assigned to multiple weddings
 
 Examples:
-* `assign 1 r/vendor` assigns the role "vendor" to the first person in the list
-* `assign John Doe r/photographer` assigns the role "photographer" to John Doe (if there's only one contact with this name)
-* `assign Alex r/florist` will show a list of all contacts named Alex if there are multiple matches
+* `assign 1 r/florist` assigns the 1st person to have the role of a `florist`
+* `assign 1 w/1` assigns the 1st person to the 1st wedding
+* `assign 2 r/vendor w/1 w/2` assigns the 2nd person to have the role of a `vendor` as well as to be associated with the 1st and 2nd wedding
+
+If you do not know the index but know the name of the contact you want to assign:
+
+Format #2: `assign NAME [r/ROLE] [w/WEDDING_INDEX]…​`
+
+* Filters a list of contacts with names that contains the entire NAME keyword
+* If there is only one contact that matches, the contact will be assigned directly
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `assign INDEX …​` to specify the contact they want to assign
+* At least one of the optional fields must be provided
+* The same role and wedding assignment rules from Format #1 apply
+
+Examples:
+* `assign John Doe r/florist` assigns `John Doe` to have the role of a `florist`
+* `assign Betsy Crower w/1` assigns `Betsy Crower` to the 1st wedding
+* `assign Chris r/vendor w/1 w/2` if there are more than 1 name that contains `Chris`, a filtered list of contacts whose names contain `Chris` is returned and user will need to edit their existing command to become `assign [INDEX of specific person] r/vendor w/1 w/2` to specify which `Chris` they want to assign
 
 <box type="tip" seamless>
 
