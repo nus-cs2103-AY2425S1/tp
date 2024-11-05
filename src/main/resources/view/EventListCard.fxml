@@ -28,8 +28,8 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-      <Label fx:id="loc" styleClass="cell_small_label" text="\$location" />
       <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+      <Label fx:id="loc" styleClass="cell_small_label" text="\$location" />
       <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" />
       <Label fx:id="volunteers" styleClass="cell_small_label" text="\$volunteers" wrapText="true" />
     </VBox>
