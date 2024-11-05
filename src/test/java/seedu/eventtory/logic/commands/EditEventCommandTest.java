@@ -19,17 +19,13 @@ import org.junit.jupiter.api.Test;
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.EditEventCommand.EditEventDescriptor;
-import seedu.eventtory.logic.commands.EditVendorCommand.EditVendorDescriptor;
 import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
 import seedu.eventtory.model.event.Event;
-import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.testutil.EditEventDescriptorBuilder;
-import seedu.eventtory.testutil.EditVendorDescriptorBuilder;
 import seedu.eventtory.testutil.EventBuilder;
-import seedu.eventtory.testutil.VendorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditEventCommand.
