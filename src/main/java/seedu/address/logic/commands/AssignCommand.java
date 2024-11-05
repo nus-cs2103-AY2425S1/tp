@@ -48,10 +48,16 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_WEDDING = "Person has already been assigned to wedding(s).";
 
-    public static final String MESSAGE_ASSIGN_EMPTY_PERSON_LIST_ERROR = "There is no person to assign.";
+    public static final String MESSAGE_ASSIGN_EMPTY_PERSON_LIST_ERROR =
+            "There is no person to assign as the person list is empty.\n"
+            + "Please refresh the list with a command (e.g. list, view, filter).";
 
-    public static final String MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR = "There is no person to assign.";
+    public static final String MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR =
+            "There is no wedding to assign as the wedding list is empty.\n"
+            + "Please refresh the list with a command (e.g. list, vieww).";
 
+    public static final String MESSAGE_MISSING_FIELDS = "There is nothing to assign. \n"
+            + "Please specify the role or wedding to assign with r/ROLE or w/WEDDING";
 
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to assign.\n"

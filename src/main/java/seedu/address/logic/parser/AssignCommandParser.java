@@ -57,7 +57,11 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         AssignCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new AssignCommand.PersonWithRoleDescriptor();
 
-        if (isAssignRole & !isAssignWedding) {
+        if (!isAssignRole && !isAssignWedding) {
+            // no role and wedding to assign
+            throw new ParseException(AssignCommand.MESSAGE_MISSING_FIELDS);
+
+        } else if (isAssignRole & !isAssignWedding) {
             // assign role only
             String roleValue = argMultimap.getValue(PREFIX_ROLE).get();
             personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));

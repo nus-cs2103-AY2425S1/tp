@@ -5,8 +5,8 @@ package seedu.address.ui.suggestion;
  * Each command has a name, an example format, and associated prefixes for parameters.
  */
 public enum Commands {
-    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [w/WEDDING...]",
-            new String[]{"n/", "p/", "e/", "a/", "t/", "w/"}),
+    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING...]",
+            new String[]{"n/", "p/", "e/", "a/", "r/", "w/"}),
     DELETE("delete", "delete INDEX/NAME", new String[]{}),
     CLEAR("clear", "clear", new String[]{}),
     VIEW("view", "view NAME", new String[]{}),
