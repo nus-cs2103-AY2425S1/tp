@@ -16,6 +16,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class VersionedAddressBook extends AddressBook {
     public static final String MESSAGE_NO_MORE_HISTORY = "This is the earliest version that user can retrieve";
+    public static final String MESSAGE_NO_MORE_UNDONE_STATES = "There are no more data changes to redo.";
     public static final String MESSAGE_UNSAVED_CHANGES = "There are unsaved changes in the current state. "
             + "Please commit or discard the changes before undoing.";
     private final ArrayList<AddressBook> addressBookStateList;
@@ -78,6 +79,21 @@ public class VersionedAddressBook extends AddressBook {
         current = new AddressBook(addressBookStateList.get(currentStatePointer));
         syncPersonList();
         logger.info("AddressBook state undone, current state pointer at " + currentStatePointer
+                + "\n Data: " + current);
+    }
+
+    /**
+     * Reverts the AddressBook to the next state.
+     */
+    public void redoAddressBook() throws CommandException {
+        if (currentStatePointer >= addressBookStateList.size() - 1) {
+            throw new CommandException(MESSAGE_NO_MORE_UNDONE_STATES);
+        }
+
+        currentStatePointer++;
+        current = new AddressBook(addressBookStateList.get(currentStatePointer));
+        syncPersonList();
+        logger.info("AddressBook state redone, current state pointer at " + currentStatePointer
                 + "\n Data: " + current);
     }
 
