@@ -111,11 +111,11 @@ Format: `exit`
 
 Adds a volunteer to the database.
 
-Format: `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE`
+Format: `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`
 
 Examples:
-* `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02`
-* `/v new n/ Ellen Joe p/ 81234567 em/ ellen@gmail.com d/ 2024-05-23`
+* `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02`
+* `/v new n/Ellen Joe p/81234567 em/ellen@gmail.com d/2024-05-23`
 
 Running the command successfully, you should see:
 
@@ -157,25 +157,25 @@ Examples:
 
 Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
 
-Format: `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
+Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `assign v/ 1 e/ 2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
+* `assign v/1 e/2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
 
 ### Removing a volunteer from an event: `unassign`
 
 Removes a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
 
-Format: `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
+Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unassign v/ 1 e/ 2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
+* `unassign v/1 e/2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
 
 
 ## Event-related Commands
@@ -184,12 +184,11 @@ Examples:
 
 Adds an event to the database.
 
-Format: `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`
+Format: `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`
 
 Examples:
-* `/e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12`
-* `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`
-
+* `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`
+* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00`
 ### Locating events by name : `/e find`
 
 Find events with names containing the given keyword.
@@ -263,18 +262,18 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ## Command summary
 
-| Action                                       | Format, Examples                                                                                                                                                                                                                                                                   |
-|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIME e/ END_TIME`<br/>`e.g. /v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`                                                                                                |
-| **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`<br/>`e.g. /v del 1`                                                                                                                                                                                                                                           |
-| **Find Volunteer**                           | `/v find KEYWORD`<br/>`e.g. /v find Yeoh`                                                                                                                                                                                                                                          |
-| **Add Event**                                | `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`<br/>`e.g. /e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`<br/>`e.g. /e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12` |
-| **Delete Event**                             | `/e del EVENT_INDEX`<br/>`e.g. /e del 1`                                                                                                                                                                                                                                           |
-| **Find Event**                               | `/e find KEYWORD`<br/>`e.g. /e find Forest`                                                                                                                                                                                                                                        |
-| **Add Volunteer to Event**                   | `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. assign v/ 1 e/ 2`                                                                                                                                                                                                             |
-| **Remove Volunteer from Event**              | `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. unassign v/ 1 e/ 2`                                                                                                                                                                                                         |
-| **View all Volunteers involved in an Event** | `view e/ EVENT_INDEX`<br/>`e.g. view e/ 1`                                                                                                                                                                                                                                         |
-| **List all Volunteers and Events**           | `list`                                                                                                                                                                                                                                                                             |
-| **Export database to csv file**              | `export`                                                                                                                                                                                                                                                                           |
-| **Help**                                     | `help`                                                                                                                                                                                                                                                                             |
-| **Exit**                                     | `exit`                                                                                                                                                                                                                                                                             |
+| Action                                       | Format, Examples                                                                                                                                                                                                                                                    |
+|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Volunteer**                            | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE `<br/>`e.g. /v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02`                                                                                                                                    |
+| **Delete Volunteer**                         | `/v del VOLUNTEER_INDEX`<br/>`e.g. /v del 1`                                                                                                                                                                                                                        |
+| **Find Volunteer**                           | `/v find KEYWORD`<br/>`e.g. /v find Yeoh`                                                                                                                                                                                                                           |
+| **Add Event**                                | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION] `<br/>`e.g. /e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/ Final Exam`<br/>`e.g. /e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` |
+| **Delete Event**                             | `/e del EVENT_INDEX`<br/>`e.g. /e del 1`                                                                                                                                                                                                                            |
+| **Find Event**                               | `/e find KEYWORD`<br/>`e.g. /e find Forest`                                                                                                                                                                                                                         |
+| **Add Volunteer to Event**                   | `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`<br/>`e.g. assign v/1 e/2`                                                                                                                                                                                                  |
+| **Remove Volunteer from Event**              | `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`<br/>`e.g. unassign v/1 e/2`                                                                                                                                                                                              |
+| **View all Volunteers involved in an Event** | `/e view EVENT_INDEX`<br/>`e.g. /e view 1`                                                                                                                                                                                                                          |
+| **List all Volunteers and Events**           | `list`                                                                                                                                                                                                                                                              |
+| **Export database to csv file**              | `export`                                                                                                                                                                                                                                                            |
+| **Help**                                     | `help`                                                                                                                                                                                                                                                              |
+| **Exit**                                     | `exit`                                                                                                                                                                                                                                                              |
