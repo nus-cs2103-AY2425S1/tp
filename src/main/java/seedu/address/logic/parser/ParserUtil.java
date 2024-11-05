@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -224,26 +223,25 @@ public class ParserUtil {
      * Returns the year given in a string representing a date.
      * The year can either be a 2 digit number or a 4-digit number.
      * A 1- or 2-digit year is converted to a 4-digit year by adding 2000:
-     *      Ex: 24 is considered as 2024
+     *      Ex: 24 is considered as 2024, 9 is considered as 2009
      * A year with 4+ digits is kept as-is.
      * A 3-digit year is considered invalid.
      */
-    public static Pair<Integer, Boolean> getYear(String date) {
+    public static int getYear(String date) {
         // defensive programming
         Matcher datetimeMatcher = Deadline.PATTERN_DATE.matcher(date);
 
         if (datetimeMatcher.find()) {
-            boolean flag = true;
             int year = Integer.parseInt(datetimeMatcher.group(3));
             if (year >= 0 && year <= 99) {
                 year += 2000;
             } else if (year < 10 || (year > 99 && year < 1000)) {
-                flag = false; // will eventually throw an error
+                return 0; // will eventually cause an error
             }
 
-            return new Pair<>(year, flag);
+            return year;
         } else {
-            return new Pair<>(0, false); // will eventually throw an error
+            return 0; // will eventually cause an error
         }
     }
 }
