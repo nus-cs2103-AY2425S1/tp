@@ -24,7 +24,7 @@ If you can type fast, PawPatrol can manage patient owner and pet data faster tha
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar pawpatrol.jar` command to run the application.<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.jpeg)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -71,13 +71,15 @@ If you can type fast, PawPatrol can manage patient owner and pet data faster tha
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page as shown below.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage.jpeg)
 
 Format: `help`
 
-### Adding an owner: `owner`
+### Adding an entity: `owner` / `pet`
+
+#### <u>Adding an Owner</u>
 
 Adds an owner to PawPatrol.
 
@@ -86,7 +88,7 @@ Format: `owner n/NAME p/PHONE e/EMAIL a/ADDRESS`
 Examples:
 * `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 
-### Adding a pet: `pet`
+#### <u>Adding a pet</u>
 
 Adds a pet to PawPatrol.
 
@@ -100,7 +102,7 @@ Examples:
 * `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
 * `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
 
-### Linking owners and pets: `link`
+### Linking entities: `link`
 
 Links an owner to one or more pets.
 
@@ -114,7 +116,10 @@ Examples:
 * An owner can be linked to 0 or more pets.
 * A pet can be linked to 0 or more owners.
 
-### Unlinking owners and pets: `unlink`
+![link between Tricia and Fluffy](images/linkTriciaFluffy.jpeg)
+<div style="text-align: center;"><em>Link between Tricia (owner) and Fluffy (pet)</em></div>
+
+### Unlinking entities: `unlink`
 
 Unlinks an owner to one or more pets.
 
@@ -139,18 +144,34 @@ Format:
 
 Edits an existing owner or pet in PawPatrol.
 
+#### <u>Editing an owner</u>
+
 Format:
 * `edit oOWNER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`: Edits an existing owner in PawPatrol
+
+#### <u>Editing a pet</u>
+
+Format:
 * `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`: Edits an existing pet in PawPatrol
 
+<div markdown="span" class="alert alert-primary">
+
+:exclamation: **Extra information:**<br>
 
 * Edits the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​
+
 * At least one of the optional fields must be provided.
+
 * IC number cannot be edited.
+
 * Existing values will be updated to the input values.
+
 * When editing tags, the existing tags of the pet will be removed i.e adding of tags is not cumulative.
-* You can remove all the pet’s tags by typing `t/` without
-    specifying any tags after it.
+
+* You can remove all the pet’s tags by typing `t/` without specifying any tags after it.
+
+</div>
+
 
 Examples:
 *  `edit o1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st owner to be `91234567` and `johndoe@example.com` respectively.
@@ -164,18 +185,27 @@ Format:
 * `find owner KEYWORD [MORE_KEYWORDS]`: Finds owners whose names contain any of the given keywords.
 * `find pet KEYWORD [MORE_KEYWORDS]`: Finds pets whose names contain any of the given keywords.
 
+<div markdown="span" class="alert alert-primary">
+
+:exclamation: **Extra information:**<br>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+
 * Only the name is searched.
+
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Owners or pets matching at least one keyword will be returned (i.e. `OR` search).
+
+* Owners or pets matching at least one keyword will be returned (i.e. `OR` search).<br>
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+</div>
 
 Examples:
 * `find owner John` returns `john` and `John Doe` in the owners list panel.
-* `find pet fluffy megatron` returns `Fluffy`, `Megatron`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find pet fluffy megatron` returns `Fluffy`, `Megatron` as shown in the image below.<br>
+  ![result for 'find fluffy megatron'](images/findFluffyMegatron.png)
 
 ### Deleting an entity : `delete`
 
@@ -185,10 +215,17 @@ Format:
 * `delete oOWNER_INDEX`: Deletes the specified owner from PawPatrol.
 * `delete pPET_INDEX`: Deletes the specified pet from PawPatrol.
 
+<div markdown="span" class="alert alert-primary">
+
+:exclamation: **Extra information:**<br>
 
 * Deletes the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively.
+
 * The index refers to the index number shown in the displayed owner or pet list.
+
 * The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
 
 Examples:
 * `list owners` followed by `delete o2` deletes the 2nd person in PawPatrol.
@@ -196,7 +233,7 @@ Examples:
 * `list pets` followed by `delete p2` deletes the 2nd pet in PawPatrol.
 * `find pets Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command.
 
-### Sort : `sort`
+### Sorting : `sort`
 
 Sorts owners or pets in PawPatrol by their names in alphabetical order.
 
@@ -237,7 +274,7 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PawPatrol home folder.
 
 --------------------------------------------------------------------------------------------------------------------
