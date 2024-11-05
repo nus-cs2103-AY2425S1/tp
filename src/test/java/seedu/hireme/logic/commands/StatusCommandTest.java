@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.hireme.commons.core.index.Index;
 import seedu.hireme.logic.Messages;
-import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ModelManager;
 import seedu.hireme.model.UserPrefs;
@@ -88,7 +87,8 @@ public class StatusCommandTest {
     public void execute_lastIndex_success() {
         Index lastIndex = Index.fromOneBased(model.getFilteredList().size());
         Model clonedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
-        InternshipApplication internshipApplicationToUpdate = clonedModel.getFilteredList().get(lastIndex.getZeroBased());
+        InternshipApplication internshipApplicationToUpdate =
+                clonedModel.getFilteredList().get(lastIndex.getZeroBased());
 
         StatusCommand statusCommand = new StatusCommand(lastIndex, Status.ACCEPTED);
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
