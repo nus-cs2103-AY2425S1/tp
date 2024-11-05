@@ -29,7 +29,7 @@ public class TagCommand extends Command {
             + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 t/paidFee t/groupA";
 
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tags to Person: %1$s";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tags %1$s to Person: %2$s";
     public static final String MESSAGE_DUPLICATE_TAG = "The tag %1$s has already been added before.";
 
     private final Index index;
@@ -61,7 +61,8 @@ public class TagCommand extends Command {
 
         model.setPerson(personToEdit, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, updatedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS,
+                tagsToAdd, Messages.format(updatedPerson)));
     }
 
     /**

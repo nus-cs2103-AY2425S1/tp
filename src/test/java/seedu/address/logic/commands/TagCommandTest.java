@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -56,7 +57,8 @@ public class TagCommandTest {
 
         Person updatedPerson = new StudentBuilder((Student) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
+                tagsToAdd, Messages.format(updatedPerson));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
 
@@ -80,7 +82,8 @@ public class TagCommandTest {
 
         Person updatedPerson = new CompanyBuilder((Company) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
+                tagsToAdd, Messages.format(updatedPerson));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
 
