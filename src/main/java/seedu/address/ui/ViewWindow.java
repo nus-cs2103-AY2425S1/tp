@@ -48,7 +48,6 @@ public class ViewWindow extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         telegram.setText(person.getTelegram().value);
         person.getTags().stream()

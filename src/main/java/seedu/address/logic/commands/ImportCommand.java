@@ -29,7 +29,7 @@ public class ImportCommand extends Command {
         + "[" + PREFIX_PATH + "FILE_PATH]\n"
         + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
     public static final String CORRECT_HEADER_USAGE =
-        "Header of CSV file should be Name, Phone, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
+        "Header of CSV file should be Name, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
             + " (Case insensitive, Order sensitive)";
     private static final String MESSAGE_INVALID_CSV = "Invalid CSV format, ensure that all necessary data are present.";
     private static final String MESSAGE_MISSING_PERSON_DATA = "There is no person data present.";
@@ -53,7 +53,7 @@ public class ImportCommand extends Command {
             String[] fields;
 
             // Define the expected headers in this specific order.
-            String[] expectedHeaders = {"Name", "Phone", "Email", "Telegram", "Tags", "Github",
+            String[] expectedHeaders = {"Name", "Email", "Telegram", "Tags", "Github",
                 "Assignments", "WeeksPresent"};
 
             // Read header and ensure it is as expected.

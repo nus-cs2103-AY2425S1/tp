@@ -2,7 +2,6 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "phone" : "94351253",
     "email" : "alice@example.com",
     "telegram": "@Alice",
     "tags" : [ "friends" ],
@@ -10,7 +9,6 @@
     "attendance": [ ]
   }, {
     "name" : "Benson Meier",
-    "phone" : "98765432",
     "email" : "johnd@example.com",
     "telegram": "@Benson",
     "tags" : [ "owesMoney", "friends" ],
@@ -18,7 +16,6 @@
     "attendance": [ ]
   }, {
     "name" : "Carl Kurz",
-    "phone" : "95352563",
     "email" : "heinz@example.com",
     "telegram": "@Carl",
     "tags" : [ ],
@@ -26,7 +23,6 @@
     "attendance": [ ]
   }, {
     "name" : "Daniel Meier",
-    "phone" : "87652533",
     "email" : "cornelia@example.com",
     "telegram": "@Daniel",
     "tags" : [ "friends" ],
@@ -34,7 +30,6 @@
     "attendance": [ ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
     "email" : "werner@example.com",
     "telegram": "@Elle",
     "tags" : [ ],
@@ -42,7 +37,6 @@
     "attendance": [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
     "email" : "lydia@example.com",
     "telegram": "@Fiona",
     "tags" : [ ],
@@ -50,7 +44,6 @@
     "attendance": [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
     "email" : "anna@example.com",
     "telegram": "@George",
     "tags" : [ "husband" ],
