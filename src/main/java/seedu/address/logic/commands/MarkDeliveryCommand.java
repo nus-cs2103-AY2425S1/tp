@@ -46,7 +46,7 @@ public class MarkDeliveryCommand extends Command {
         }
 
 
-        Delivery deliveryToMark = model.getFilteredDeliveryList().get(index.getZeroBased());
+        Delivery deliveryToMark = model.getModifiedDeliveryList().get(index.getZeroBased());
 
         if (deliveryToMark.getDeliveryStatus().equals(status)) {
             throw new CommandException(String.format(Messages.MESSAGE_DELIVERY_ALREADY_HAS_STATUS,
