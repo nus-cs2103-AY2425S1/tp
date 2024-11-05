@@ -1,11 +1,9 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.reminder.ReminderCommandTestUtil;
 import seedu.address.model.clienttype.ClientType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
@@ -14,7 +12,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.reminder.Reminder;
-import seedu.address.model.reminder.ReminderDescription;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -29,13 +26,6 @@ public class PersonBuilder {
     public static final String DEFAULT_DESCRIPTION = "Likes to eat a lot";
     public static final String DEFAULT_CLIENT_TYPE = "A";
 
-    // Reminder for Alice Pauline (used in EditCommandTest)
-    public static final String DEFAULT_REMINDER_TIME = "2024-10-10 11:11";
-    public static final String DEFAULT_REMINDER_DESCRIPTION = "Reminder 1";
-    public static final Reminder DEFAULT_REMINDER = new Reminder("Alice Pauline",
-            LocalDateTime.parse(DEFAULT_REMINDER_TIME, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
-            new ReminderDescription(DEFAULT_REMINDER_DESCRIPTION));
-    public static final Set<Reminder> DEFAULT_REMINDER_SET = new HashSet<>(Collections.singleton(DEFAULT_REMINDER));
 
 
     private Name name;
@@ -82,7 +72,7 @@ public class PersonBuilder {
         Address address = new Address(DEFAULT_ADDRESS);
         Set<ClientType> clientTypes = new HashSet<>(SampleDataUtil.getClientTypeSet(DEFAULT_CLIENT_TYPE));
         Description description = new Description(DEFAULT_DESCRIPTION);
-        Set<Reminder> reminders = DEFAULT_REMINDER_SET;
+        Set<Reminder> reminders = ReminderCommandTestUtil.DEFAULT_REMINDER_SET;
 
         return new Person(name, phone, email, address, clientTypes, description, reminders);
     }

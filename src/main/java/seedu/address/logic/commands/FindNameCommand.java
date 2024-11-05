@@ -18,7 +18,7 @@ public class FindNameCommand extends Command {
 
     public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD + " " + PREFIX_NAME
             + " or " + COMMAND_WORD
-            + ": Finds all persons whose names contain all of "
+            + ": Finds all clients whose names contain all of "
             + "the prefix of the specified NAME and displays them as a list with index numbers.\n"
             + "Parameters: NAME (String & must be non-empty)\n"
             + "Example:\n"

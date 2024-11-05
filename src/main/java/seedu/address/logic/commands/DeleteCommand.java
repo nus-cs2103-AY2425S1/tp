@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
             + "- To delete a client with a common name, please provide fullname or\n"
             + "use / to indicate the end of the name eg Jon snow/";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
 
     private final NameContainsKeywordsDeletePredicate predicate;
 

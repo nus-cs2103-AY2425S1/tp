@@ -15,11 +15,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons whose name, phone number, "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds clients whose name, phone number, "
             + "address or client type contain any of "
             + "all specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/NAME or p/PHONE_NUMBER, or a/ADDRESS or c/CLIENT_TYPE\n"
-            + "Example:\n"
+            + "Examples:\n"
             + "- " + COMMAND_WORD + " alice wong\n"
             + "- " + COMMAND_WORD + " p/91234567\n"
             + "- " + COMMAND_WORD + " a/123, Jurong West Ave 6\n"

@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Comparator;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameComparator;
@@ -24,6 +23,8 @@ public class SortCommand extends Command {
             + ": Sorts the list according to criteria given.\n"
             + "Usage: sort";
 
+    public static final String MESSAGE_SUCCESS = "List sorted successfully!";
+
     private final Comparator<Person> comparator;
 
     /**
@@ -37,8 +38,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateSortedPersonList(comparator);
-        return new CommandResult(
-                Messages.getMessagePersonsListedOverview(model.getDisplayPersons().size()));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

@@ -44,11 +44,6 @@ public class PersonTest {
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test

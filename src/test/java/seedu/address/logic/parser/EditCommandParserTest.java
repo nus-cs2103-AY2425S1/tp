@@ -218,13 +218,9 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetClientTypes_success() {
+    public void parse_resetClientTypes_failure() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + CLIENT_TYPE_EMPTY;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withClientTypes().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_NO_CLIENT_TYPE);
     }
 }

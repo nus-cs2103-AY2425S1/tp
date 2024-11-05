@@ -1,5 +1,8 @@
 package seedu.address.logic.commands.reminder;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -12,8 +15,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
 
-
-
 /**
  * Adds a reminder to the address book.
  */
@@ -22,18 +23,18 @@ public class AddReminderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to the address book. "
             + "Parameters: "
-            + "Person "
-            + "DATE and TIME "
-            + "Description\n"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DATE_TIME + "DATE and TIME "
+            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " "
-            + "John "
-            + "2021-12-31 23:59"
-            + "New Year's Eve";
+            + PREFIX_NAME + "John "
+            + PREFIX_DATE_TIME + "2021-12-31 23:59"
+            + PREFIX_DESCRIPTION + "New Year's Eve";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
-    public static final String MESSAGE_NONEXISTENT_PERSON = "This person doesn't exist in the address book.";
+    public static final String MESSAGE_NONEXISTENT_PERSON = "This person doesn't exist in the client hub.";
     public static final String MESSAGE_MORE_THAN_ONE_PERSON = "There is more than one person with this name in the "
-            + "address book. Please use a more specific name instead.";
+            + "client hub. Please use a more specific name instead.";
 
     private final Reminder toAdd;
 
@@ -80,7 +81,7 @@ public class AddReminderCommand extends Command {
         } else if (matchingPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_PERSON);
         } else {
-            throw new CommandException("More than one person with the specified name found. Please be more specific.");
+            throw new CommandException(MESSAGE_MORE_THAN_ONE_PERSON);
         }
     }
 
@@ -92,8 +93,19 @@ public class AddReminderCommand extends Command {
      */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || other instanceof AddReminderCommand; // instanceof handles nulls
+        // Check if same object
+        if (other == this) {
+            return true;
+        }
+
+        // Check if instance of AddReminderCommand and compare reminders
+        if (other instanceof AddReminderCommand) {
+            AddReminderCommand otherCommand = (AddReminderCommand) other;
+            return toAdd.equals(otherCommand.toAdd);
+        }
+
+        // If neither of the above, return false
+        return false;
     }
 
     /**
@@ -103,6 +115,6 @@ public class AddReminderCommand extends Command {
      */
     @Override
     public String toString() {
-        return "AddReminderCommand";
+        return "AddReminderCommand {" + "toAdd=" + toAdd + '}';
     }
 }
