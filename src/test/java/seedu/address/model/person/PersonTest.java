@@ -116,11 +116,6 @@ public class PersonTest {
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
-        //        // different role -> returns false
-        //        editedAlice = new PersonBuilder(ALICE).withRole(VALID_TAG_HUSBAND).build();
-        //        assertFalse(ALICE.equals(editedAlice));
-        // include after adding Optional
     }
 
     @Test

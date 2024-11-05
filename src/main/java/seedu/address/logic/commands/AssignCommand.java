@@ -198,8 +198,9 @@ public class AssignCommand extends Command {
         Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
         Optional<Role> updatedRole = personWithRoleDescriptor.getRole().or(personToAddRole::getRole);
+        Wedding ownWedding = personToAddRole.getOwnWedding();
         Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
-                null);
+                ownWedding);
         person.setWeddingJobs(personToAddRole.getWeddingJobs());
         if (person.getWeddingJobs().stream().anyMatch(personWithRoleDescriptor.weddingJobs::contains)) {
             throw new CommandException(MESSAGE_DUPLICATE_WEDDING);

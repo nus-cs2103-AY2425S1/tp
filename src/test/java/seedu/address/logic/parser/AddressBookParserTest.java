@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_WEDDING;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletewCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -23,10 +25,12 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewwCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -63,6 +67,20 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deletew() throws Exception {
+        // delete INDEX
+        DeletewCommand command = (DeletewCommand) parser.parseCommand(
+                DeletewCommand.COMMAND_WORD + " " + INDEX_FIRST_WEDDING.getOneBased());
+        assertEquals(new DeletewCommand(INDEX_FIRST_PERSON, null), command);
+
+        // delete KEYWORD
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        command = (DeletewCommand) parser.parseCommand(
+                DeletewCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new DeletewCommand(null, new NameMatchesWeddingPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
@@ -91,6 +109,20 @@ public class AddressBookParserTest {
         ViewCommand command = (ViewCommand) parser.parseCommand(
                 ViewCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new ViewCommand(new NameMatchesKeywordPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_vieww() throws Exception {
+        // vieww INDEX
+        ViewwCommand command = (ViewwCommand) parser.parseCommand(
+                ViewwCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ViewwCommand(INDEX_FIRST_WEDDING, null), command);
+
+        // vieww KEYWORD
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        command = (ViewwCommand) parser.parseCommand(
+                ViewwCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ViewwCommand(null, new NameMatchesWeddingPredicate(keywords)), command);
     }
 
     @Test

@@ -157,6 +157,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeWedding(Wedding key) {
         weddings.remove(key);
+        for (Person person : persons) {
+            person.resetOwnWedding(key);
+
+            if (person.containsWeddingJob(key)) {
+                person.removeWeddingJob(key);
+            }
+        }
     }
 
 

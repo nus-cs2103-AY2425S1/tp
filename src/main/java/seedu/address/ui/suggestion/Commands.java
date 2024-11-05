@@ -19,11 +19,9 @@ public enum Commands {
     EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
             new String[]{"n/", "p/", "e/", "a/"}),
     VIEWWEDDING("vieww", "vieww INDEX/WEDDINGNAME", new String[]{}),
-
     EDITWEDDING("editw", "editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]",
             new String[]{"w/", "n/", "d/", "v/"}),
-
-    DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
+    DELETEWEDDING("deletew", "deletew INDEX/WEDDINGNAME", new String[]{}),
     ASSIGN("assign", "assign INDEX/NAME [r/ROLE] [w/WEDDING...]", new String[]{"w/", "r/"});
 
     private final String commandName;
