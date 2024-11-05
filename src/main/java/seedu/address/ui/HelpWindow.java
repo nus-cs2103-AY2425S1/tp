@@ -67,14 +67,23 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private TextArea commandsArea;
+    private final Desktop desktop;
+
+
+    // Default constructor - uses the OS Desktop by default
+    public HelpWindow(Stage root) {
+        this(root, Desktop.getDesktop());
+    }
 
     /**
      * Creates a new HelpWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the HelpWindow
+     * @param desktop Desktop instance used to open URLs, allowing for dependency injection in tests
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, Desktop desktop) {
         super(FXML, root);
+        this.desktop = desktop;
         helpMessage.setText(HELP_MESSAGE);
         commandsArea.setText(COMMANDS_INFO);
         commandsArea.setEditable(false);
@@ -137,9 +146,9 @@ public class HelpWindow extends UiPart<Stage> {
      * Opens the user guide URL in the default browser.
      */
     @FXML
-    private void openInBrowser() {
+    void openInBrowser() {
         try {
-            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+            desktop.browse(new URI(USERGUIDE_URL));
         } catch (IOException | URISyntaxException e) {
             logger.warning("Error opening URL in browser: " + e.getMessage());
         }
@@ -149,9 +158,9 @@ public class HelpWindow extends UiPart<Stage> {
      * Opens the user guide in the system's default web browser.
      */
     @FXML
-    private void openUserGuide() {
+    void openUserGuide() {
         try {
-            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+            desktop.browse(new URI(USERGUIDE_URL));
         } catch (Exception e) {
             logger.warning("Failed to open the user guide in the browser: " + e.getMessage());
         }
@@ -161,7 +170,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
-    private void copyUrl() {
+    void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);

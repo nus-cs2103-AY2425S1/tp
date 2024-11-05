@@ -3,8 +3,16 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -17,10 +25,12 @@ import javafx.stage.Stage;
 public class HelpWindowUiTest extends ApplicationTest {
 
     private HelpWindow helpWindow;
+    private Desktop mockDesktop;
 
     @Override
     public void start(Stage stage) {
-        helpWindow = new HelpWindow(stage);
+        mockDesktop = mock(Desktop.class);  // Mock the Desktop instance
+        helpWindow = new HelpWindow(stage, mockDesktop);  // Inject the mock into HelpWindow
     }
 
     @AfterEach
@@ -73,7 +83,6 @@ public class HelpWindowUiTest extends ApplicationTest {
         interact(() -> clickOn("#copyButton"));
         WaitForAsyncUtils.waitForFxEvents();
 
-        // Run Clipboard check on JavaFX Application Thread
         Platform.runLater(() -> {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             assertTrue(clipboard.hasString(), "Clipboard should contain text after copyUrl() is called.");
@@ -82,5 +91,26 @@ public class HelpWindowUiTest extends ApplicationTest {
         });
         WaitForAsyncUtils.waitForFxEvents();
     }
-}
 
+    @Test
+    void openInBrowserMethod_opensUserGuideInBrowser_success() throws IOException, URISyntaxException {
+        interact(() -> {
+            helpWindow.show();
+            helpWindow.openInBrowser();
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+
+        verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
+    }
+
+    @Test
+    void openUserGuideMethod_opensUserGuideInBrowser_success() throws IOException, URISyntaxException {
+        interact(() -> {
+            helpWindow.show();
+            helpWindow.openUserGuide();
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+
+        verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
+    }
+}
