@@ -238,7 +238,7 @@ addCustomer n/John Doe p/12345678 e/john@example.com a/456 Pastry Street i/Aller
 ```
 <img width="1492" alt="Screenshot 2024-10-24 at 6 50 40 PM" src="https://github.com/user-attachments/assets/3bcacbc0-9002-492d-9519-5cbaa4d214ab">
 
-### 2. **Add Supplier Command (WIP)**
+### 2. **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
@@ -325,18 +325,19 @@ removePastry Croissant
 
 
 ### 7. **Add CustomerOrder Command**
-Adds a customer order by providing the customer's phone number and the product IDs from the catalogue.
+Adds a customer order by providing the customer's name, phone number and the product IDs from the catalogue.
 
 ```bash
-addCustomerOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...]
+addCustomerOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
 ```
 - **Parameters:**
-    - `PHONE_NUMBER`: The phone number of the customer.
-    - `PRODUCTID`: One or more product IDs for the items being ordered.
+    - `n/NAME`: The customer's name.
+    - `p/PHONE_NUMBER`: The phone number of the customer.
+    - `o/PRODUCTID`: One or more product IDs for the items being ordered.
 
 **Example:**
 ```bash
-addCustomerOrder 12345678 1 2 3
+addCustomerOrder n/John p/12345678 o/1 2 3
 ```
 <img width="1191" alt="Screenshot 2024-10-24 at 5 50 18 PM" src="https://github.com/user-attachments/assets/ebedf898-8319-497e-8f89-e32a9f62c3f3">
 
@@ -357,14 +358,15 @@ deleteCustomerOrder 1
 <img width="1194" alt="Screenshot 2024-10-24 at 5 51 01 PM" src="https://github.com/user-attachments/assets/a30d3276-7a26-4c12-8df7-364d76e7c9dc">
 
 ### 9. **Add SupplyOrder Command**
-Adds a supplier order by providing the supplier's phone number and the product IDs from the ingredient catalogue.
+Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
 ```bash
-addSupplyOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...]
+addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
 ```
 - **Parameters:**
-    - `PHONE_NUMBER`: The phone number of the supplier.
-    - `PRODUCTID`: One or more product IDs for the items being supplied.
+    - `n/NAME`: The supplier's name.
+    - `p/PHONE_NUMBER`: The phone number of the supplier.
+    - `o/PRODUCTID`: One or more product IDs for the items being supplied.
 
 **Example:**
 ```bash
