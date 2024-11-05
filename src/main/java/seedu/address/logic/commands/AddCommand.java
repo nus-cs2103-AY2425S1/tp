@@ -93,7 +93,8 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         setPersonInWedding(toAdd, model);
-        return new CommandResult(tagMsg + "\n" + String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        String successMessage = tagMsg + "\n" + String.format(MESSAGE_SUCCESS, Messages.format(toAdd));
+        return new CommandResult(successMessage.trim());
     }
 
     /**
