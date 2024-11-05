@@ -148,6 +148,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasListingsForBuyer(Person buyer) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Listing> getFilteredListingList() {
         throw new AssertionError("This method should not be called.");
     }
