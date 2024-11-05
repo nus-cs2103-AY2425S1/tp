@@ -46,6 +46,8 @@ public class AddAppointmentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the address book";
+    public static final String MESSAGE_INVALID_PATIENT_DISPLAYED_NAME = "Unable to find patient with name: ";
+    public static final String MESSAGE_INVALID_DOCTOR_DISPLAYED_NAME = "Unable to find doctor with name: ";
 
     private final Name patientName;
     private final Name doctorName;
@@ -76,8 +78,12 @@ public class AddAppointmentCommand extends Command {
                 .filter(person -> person instanceof Doctor && person.getName().equals(doctorName))
                 .findAny();
 
-        Person patientToEdit = patient.get();
-        Person doctorToEdit = doctor.get();
+        Person doctorToEdit = doctor.orElseThrow(() ->
+                new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_NAME + doctorName));
+
+        Person patientToEdit = patient.orElseThrow(() ->
+                new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_NAME + patientName));
+
 
         Person editedPatient;
         Person editedDoctor;
