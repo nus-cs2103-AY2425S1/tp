@@ -39,11 +39,11 @@ public class MarkSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex.getZeroBased() >= model.getFilteredSupplierList().size()) {
+        if (targetIndex.getZeroBased() >= model.getModifiedSupplierList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
 
-        Supplier supplierToMark = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        Supplier supplierToMark = model.getModifiedSupplierList().get(targetIndex.getZeroBased());
         Supplier markedSupplier = new Supplier(
                 supplierToMark.getName(),
                 supplierToMark.getPhone(),

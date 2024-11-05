@@ -29,7 +29,8 @@ public class MarkDeliveryCommandTest {
         MarkDeliveryCommand markDeliveryCommand = new MarkDeliveryCommand(index, Status.DELIVERED);
 
         String expectedMessage = String.format(
-                MarkDeliveryCommand.MESSAGE_MARK_DELIVERY_SUCCESS, Messages.format(deliveryToMark), Status.DELIVERED);
+                MarkDeliveryCommand.MESSAGE_MARK_DELIVERY_SUCCESS,
+                Messages.formatWithoutStatus(deliveryToMark), Status.DELIVERED);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Delivery updatedDelivery = new Delivery(
@@ -50,6 +51,16 @@ public class MarkDeliveryCommandTest {
         MarkDeliveryCommand markDeliveryCommand = new MarkDeliveryCommand(outOfBoundIndex, Status.DELIVERED);
 
         assertCommandFailure(markDeliveryCommand, model, Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_deliveryAlreadyHasStatus_throwsCommandException() {
+        Delivery deliveryToMark = TypicalDeliveries.BREAD;
+        Index index = Index.fromOneBased(model.getFilteredDeliveryList().indexOf(deliveryToMark) + 1);
+        MarkDeliveryCommand markDeliveryCommand = new MarkDeliveryCommand(index, deliveryToMark.getDeliveryStatus());
+
+        assertCommandFailure(markDeliveryCommand, model, String.format(Messages.MESSAGE_DELIVERY_ALREADY_HAS_STATUS,
+                Messages.formatWithoutStatus(deliveryToMark), deliveryToMark.getDeliveryStatus()));
     }
 
     @Test

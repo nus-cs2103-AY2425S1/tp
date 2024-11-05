@@ -73,7 +73,7 @@ public class AddDeliveryCommand extends Command {
      * @throws CommandException If supplier index is invalid.
      */
     public Supplier getSupplierBasedOnIndex(Model model) throws CommandException {
-        List<Supplier> lastShownList = model.getFilteredSupplierList();
+        List<Supplier> lastShownList = model.getModifiedSupplierList();
         SupplierIndex supplierIndex = this.deliveryWrapper.getSupplierIndex();
         if (supplierIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);

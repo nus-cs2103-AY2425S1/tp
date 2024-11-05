@@ -32,6 +32,7 @@ public class Messages {
             + "list    : Lists both suppliers and deliveries (No parameters should be given)\n"
             + "list -d : Lists deliveries to the user\n"
             + "list -s : Lists suppliers to the user";
+    public static final String MESSAGE_DELIVERY_ALREADY_HAS_STATUS = "%1$s is already marked as %2$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -59,8 +60,9 @@ public class Messages {
                 .append(supplier.getCompany())
                 .append("; Tags: ");
         supplier.getTags().forEach(builder::append);
-        builder.append("; Products ");
-        supplier.getProducts().forEach(builder::append);
+        builder.append("; Products: ");
+        supplier.getProducts().forEach(product -> builder.append(String.format("[%s]", product)));
+        builder.append(";");
         return builder.toString();
     }
 
@@ -80,6 +82,23 @@ public class Messages {
                 .append(delivery.getDeliveryCost())
                 .append("; Status: ")
                 .append(delivery.getDeliveryStatus());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code Delivery} without its status for display to the user.
+     */
+    public static String formatWithoutStatus(Delivery delivery) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(delivery.getDeliverySender().getName())
+                .append("; Date & time: ")
+                .append(delivery.getDeliveryDate())
+                .append("; Product: ")
+                .append(delivery.getDeliveryProduct())
+                .append("; Quantity: ")
+                .append(delivery.getDeliveryQuantity())
+                .append("; Cost: ")
+                .append(delivery.getDeliveryCost());
         return builder.toString();
     }
 

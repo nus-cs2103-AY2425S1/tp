@@ -23,9 +23,7 @@ import seedu.address.model.supplier.Supplier;
 /**
  * Finds and lists all deliveries in the address book that match the specified criteria.
  */
-public class FindDeliveryCommand extends Command {
-
-    public static final String COMMAND_WORD = "find";
+public class FindDeliveryCommand extends FindCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
             + " : Finds all deliveries based on the provided filters.\n"
@@ -34,7 +32,7 @@ public class FindDeliveryCommand extends Command {
             + PREFIX_STATUS + " STATUS "
             + PREFIX_SUPPLIER_INDEX + " SUPPLIER INDEX "
             + PREFIX_PRODUCT + " PRODUCT\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + PREFIX_DATETIME + "23-08-2024 20:21 "
             + PREFIX_STATUS + "DELIVERED "
             + PREFIX_PRODUCT + "iPhone";
