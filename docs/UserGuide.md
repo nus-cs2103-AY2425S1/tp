@@ -18,8 +18,6 @@ tasks done faster than traditional GUI apps.
 <page-nav-print />
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -57,11 +55,9 @@ tasks done faster than traditional GUI apps.
 1. Refer to the [Features](#features) below for details of each command.
 1. Once you are familiar with the commands, run the `clear` command to get rid of the sample data and start adding and managing your contacts and weddings with ease!
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -87,16 +83,14 @@ tasks done faster than traditional GUI apps.
 * Commands are executed relative to current view. The current view could either be a list of all contacts saved in your PlanPerfect application (accessed using the `list` command) or only contacts assigned to a particular wedding (accessed using the `view` command).
   * eg1: using the `filter` command to find florists while in the all contacts view will list ALL florists in your contacts. However, if you are in a wedding view, using `filter` to find 
     florists will only list florists assigned to that wedding.
-  * eg2: certain commands like `unassign` can only be used while inside a wedding view. This aligns with the logical flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.<br>
-
+  * eg2: certain commands like `unassign` can only be used while inside a wedding view. This aligns with the logical flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.
+<br><br/>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ### General Features
 
@@ -108,11 +102,9 @@ Shows a message with basic usage instructions for PlanPerfect. The link to this 
 
 ![help message](images/helpMessage.png)
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ### Contact-related Features
 #### Adding a contact: `add`
@@ -168,6 +160,8 @@ Examples:
 
 <br><br/>
 
+<div style="page-break-after: always;"></div>
+
 #### Tagging a contact: `tag`
 
 Format: `tag INDEX t/TAG1 TAG2 ...`
@@ -214,6 +208,8 @@ Lists the active tags across *all* contacts in the address book.
 
 <br></br>
 
+<div style="page-break-after: always;"></div>
+
 #### Locating contacts by name: `find`
 
 Format: `find KEYWORD1 KEYWORD2 ...`
@@ -251,6 +247,8 @@ Examples:
 
 <br><br/>
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a contact : `delete`
 
 Format: `delete INDEX`
@@ -284,11 +282,9 @@ Clears all entries in the address book.
 * After entering the `clear` command, a confirmation message will appear to ask you if you are sure about clearing the address book.
 * If you input `yes` or `y`, the address book will be cleared. If other input is entered, the address book will not be cleared.
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ### Wedding-related Features
 
@@ -328,10 +324,6 @@ Displays contacts assigned to the wedding at the specified `WEDDING_INDEX`.
 
 Examples:
 * `view 2` displays a list of all contacts involved in the 2nd wedding on the wedding list.
-
-<box type="info" seamless>
-Note that using the `view` command to enter a wedding view will result in subsequent operations being performed relative to the current wedding view. See "General Notes" for more details.
-</box>
 
 <br><br/>
 
@@ -400,11 +392,9 @@ Format: `deletew WEDDING_INDEX`
 Examples:
 * `deletew 4` deletes the 4th wedding on the wedding panel.
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ### Other Features
 
@@ -435,11 +425,9 @@ Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e
 
 User preferences are saved in the JSON file `[JAR file location]/preferences.json`. Advanced users are welcome to edit the 'TagColours' field in the JSON with custom hexadecimal values (colour codes) in order to customise the appearance of your tags.<br>
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
@@ -459,18 +447,16 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 **A**: If this happens, delete the `preferences.json` file in the PlanPerfect folder and restart the app to reset the screen position.
 
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
+<br><br/>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -496,6 +482,6 @@ Action     | Format, Examples
 **Delete Wedding** | `deletew WEDDING_INDEX`<br> e.g., `deletew 3`
 **Exit**   | `exit`
 
---------------------------------------------------------------------------------------------------------------------
+
 
 
