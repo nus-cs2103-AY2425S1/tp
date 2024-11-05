@@ -54,18 +54,24 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Populates command box with  {@param text}.
+     */
+    private void autoCompleteText(String text) {
+        commandTextField.setText(text);
+        commandTextField.positionCaret(commandTextField.getText().length()); // Move cursor to end
+    }
+
+    /**
      * Handles the key press event, {@code KeyEvent}.
      */
     @FXML
     private void handleKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
         case UP:
-            commandTextField.setText(commandHistory.getPreviousCommand());
-            commandTextField.positionCaret(commandTextField.getText().length()); // Move cursor to end
+            autoCompleteText(commandHistory.getPreviousCommand());
             break;
         case DOWN:
-            commandTextField.setText(commandHistory.getNextCommand());
-            commandTextField.positionCaret(commandTextField.getText().length()); // Move cursor to end
+            autoCompleteText(commandHistory.getNextCommand());
             break;
         default:
             break;
