@@ -15,7 +15,7 @@ public class FindNameCommand extends Command {
 
     public static final String COMMAND_WORD = "fn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain all of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose names contain all of "
             + "the prefix of the specified keywords and displays them as a list with index numbers. The keywards are "
             + "case-insensitive. They should contain letters,spaces and parenthesis only. They cannot be empty or have "
             + "only spaces\n"

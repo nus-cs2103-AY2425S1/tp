@@ -16,7 +16,7 @@ public class FindClientTypeCommand extends Command {
 
     public static final String COMMAND_WORD = "fc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: CLIENT_TYPE [MORE_CLIENT_TYPES]...\n"
             + "Example: " + COMMAND_WORD + "Investment Plan 1";

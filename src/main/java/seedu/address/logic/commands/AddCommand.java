@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String SHORT_COMMAND_WORD = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to ClientHub.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to ClientHub.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -40,9 +40,9 @@ public class AddCommand extends Command {
             + PREFIX_CLIENT_TYPE + "Plan B "
             + PREFIX_DESCRIPTION + "Likes to eat a lot ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This name already exists in the address book. If the "
-            + "newly added person has the same name, Please add use () to add more information after the name "
+    public static final String MESSAGE_SUCCESS = "New client added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This name already exists in the client hub. If the "
+            + "newly added client has the same name, Please add use () to add more information after the name "
             + "to differentiate the names.";
 
     private final Person toAdd;
