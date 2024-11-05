@@ -14,25 +14,26 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 2. [Input Parameters](#Input-parameters)
 3. [Features](#features)
     - General Commands
-      - [Viewing help](#viewing-help--help)
+      - [Viewing help](#viewing-help-help)
       - [Saving the data](#saving-the-data)
       - [Editing the data file](#editing-the-data-file)
-      - [Archiving data files](#archiving-data-files-coming-in-v20)
-      - [Clearing all entries](#clearing-all-entries--clear)
-      - [Exiting the program](#exiting-the-program--exit)
+      - [Clearing all entries](#clearing-all-entries-clear)
+      - [Exiting the program](#exiting-the-program-exit)
     - Patient Management
-      - [Adding a patient](#adding-a-patient--add)
-      - [Editing a patient](#editing-a-patient--edit)
-      - [Deleting a patient](#deleting-a-patient--delete)
-      - [Listing all patients](#listing-all-patients--list)
-      - [Searching patients by field](#searching-patients-by-field--find)
+      - [Adding a patient](#adding-a-patient-add)
+      - [Editing a patient](#editing-a-patient-edit)
+      - [Deleting a patient](#deleting-a-patient-delete)
+      - [Listing all patients](#listing-all-patients-list)
+      - [Searching patients by field](#searching-patients-by-field-find)
+      - [Viewing a patient's details](#viewing-a-patient-s-details-view)
     - Notes Management
-      - [Adding notes to a patient](#adding-notes-to-a-patient--addnotes)
-      - [Deleting notes from a patient](#deleting-notes-from-a-patient--delnotes)
+      - [Adding notes to a patient](#adding-notes-to-a-patient-addnotes)
+      - [Deleting notes from a patient](#deleting-notes-from-a-patient-delnotes)
     - Appointment Management
-      - [Adding an appointment to a patient](#adding-an-appointment-to-a-patient--make_appt)
-      - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-del_appt)
-      - [List all patient appointment](#list-all-patient-appointment--schedule_all)
+      - [Adding an appointment to a patient](#adding-an-appointment-to-a-patient-makeappt)
+      - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-delappt)
+      - [List all patient appointments on a specific date](#show-appointments-on-a-specific-date-schedule-date)
+      - [List all patient appointments](#list-all-patient-appointment-scheduleall)
 4. [FAQ](#faq)
 5. [Glossary](#glossary)
 6. [Known Issues](#known-issues)
@@ -314,7 +315,7 @@ Examples:
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting an Appointment from a patient: `del_appt`
+### Deleting an Appointment from a patient: `delappt`
 
 Deletes an appointment from a person
 
@@ -327,7 +328,7 @@ Format: `del_appt INDEX`
 [Back to Input parameters](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Show appointments on a specific date: `schedule_date`
+### Show appointments on a specific date: `scheduledate`
 
 ![scheduledate result](images/scheduledate.png)
 
