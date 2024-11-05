@@ -2,11 +2,34 @@
 layout: page
 title: User Guide
 ---
+Hey SoC Students,
 
-NetBook is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NetBook can get your contact management tasks done faster than traditional GUI apps.
+Are you meeting too many people during your internship grind? Struggling to manage your contacts?
 
-* Table of Contents
-{:toc}
+Then NetBook is the application for you!
+
+NetBook is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NetBook can get your contact management tasks done faster than traditional GUI apps.
+
+### Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [Help Command](#viewing-help--help)
+  * [Contact Management](#contact-management)
+    * [Adding a contact](#adding-a-person-add)
+    * [List all contacts](#listing-all-persons--list)
+    * [Find individuals by name or rrganisation](#locating-persons-by-name-and-organization-find-or-f)
+    * [Sorting contacts](#sorting-persons--sort-or-s)
+    * [Saving your sort preference](#save-sort-preference-save-or-svp)
+    * [Delete a contact](#deleting-a-person--delete)
+    * [Add a remark to a contact](#remark-a-person--remark)
+    * [Delete all contacts](#clearing-all-entries--clear)
+  * [Reminder Management](#reminder-management)
+    * [Create a reminder](#create-a-reminder-remind)
+    * [Delete a reminder](#deleting-a-reminder-delete_reminder-or-dr)
+  * [Exit NetBook](#exiting-the-program--exit)
+* [FAQ](#faq)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +66,7 @@ NetBook is a **desktop app for managing contacts, optimized for use via a Comman
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -71,20 +94,25 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Contact Management
 
-### Adding a person: `add`
+### Adding a person: `add` or `a`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]… [pr/PRIORITY] [r/REMARK]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
+* Last Seen defaults to today's date if not specified
+* Priority defaults to low if not specified
+* Remark defaults to "No remarks added yet" if not specified
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com o/nus`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com t/criminal`
 
 ### Listing all persons : `list`
 
@@ -96,7 +124,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -138,6 +166,10 @@ Preference types: `high`, `low`, `recent`, `distant`
 * `recent`: Persons with more recent "last seen" dates rise to the top
 * `distant`: Persons with more distant "last seen" dates rise to the top
 
+Examples:
+* `sort high`
+* `s recent`
+
 ### Save sort preference: `save` or `svp`
 
 Saves the sorting preference specified by the user.
@@ -168,37 +200,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding a reminder: `remind` or `rem`
+### Add a remark to a person : `remark`
 
-Adds a reminder to the address book.
-
-Format: `remind INDEX d/DATE des/DESCRIPTION`
-
-* Adds a reminder allocated to the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `remind 1 d/21-11-2024 des/Meet up for lunch`
-* `remind 2 d/25-12-2024 des/Christmas Date`
-
-### Deleting a reminder: `delete_reminder` or `dr`
-
-Deletes the specified reminder from the address book.
-
-Format: `delete_reminder INDEX` or `dr INDEX`
-
-* Deletes the reminder at the specified `INDEX`.
-* The index refers to the index number shown in the displayed reminder list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
-
-
-### Remark a person : `remark`
-
-Remarks an existing person in the address book.
+Adds a remark to an existing person in the address book.
 
 Format: `remark INDEX [r/REMARK]​`
 
@@ -214,6 +218,37 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+## Reminder Management
+
+### Create a reminder: `remind` or `rem`
+
+Creates a reminder for the specified person in the address book.
+
+Format: `remind INDEX d/DATE des/DESCRIPTION`
+
+* Creates a reminder for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `remind 1 d/21-11-2024 des/Meet up for lunch` will create a reminder with the date 21-11-2024, about meeting the
+person at index 1 for lunch
+* `remind 2 d/25-12-2024 des/Christmas Date` will create a reminder with the date 25-12-2024, about having a 
+Christmas date with the person at index 2
+
+### Deleting a reminder: `delete_reminder` or `dr`
+
+Deletes the specified reminder from the address book.
+
+Format: `delete_reminder INDEX` or `dr INDEX`
+
+* Deletes the reminder at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reminder list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
 
 ### Exiting the program : `exit`
 
@@ -254,12 +289,15 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|------------------
-**Add Person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear Person** | `clear`
-**Delete Person** | `delete INDEX`<br> e.g., `delete 3`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]… [pr/PRIORITY] [r/REMARK]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+**Clear** | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add Reminder** | `remind INDEX d/DATE des/DESCRIPTION` <br> e.g.,`remind 1 d/21-11-2024 des/Meet up for lunch`
+**Find** | `find [n/NAME…] [o/ORGANIZATION…]`<br> e.g., `find n/James Jake o/TikTok`
 **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 2 r/handsome`
+**Sort** | `sort PREFERENCE` <br> e.g., `sort high`
+**Save Sort** | `save PREFERENCE` <br> e.g., `save distant`
+**Create Reminder** | `remind INDEX d/DATE des/DESCRIPTION` <br> e.g., `remind 3 d/22-12-2024 des/Meet up for dinner`
+**Delete Reminder** | `delete_reminder INDEX` <br> e.g., `delete_reminder 4`
 **List** | `list`
 **Help** | `help`
