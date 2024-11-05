@@ -21,8 +21,8 @@ public class FilterOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "filterOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed order list for orders with "
-            + "matching order status (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed order list by"
+            + " order status (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: ORDER_STATUS (" + Status.MESSAGE_CONSTRAINTS + ")\n"
             + "Example: " + COMMAND_WORD + " Completed";
     public static final String MESSAGE_FILTER_ORDERS_SUCCESS = "%1$d %2$s orders listed!";

@@ -26,7 +26,7 @@ public class Date {
     public static final String MESSAGE_INVALID_DATE = "Date provided is not a valid calendar date";
     public static final String MESSAGE_OUTDATED_WARNING = "Note: "
             + "The date provided has already passed, "
-            + "verify if this is a mistake\n";
+            + "verify if this is a mistake.\n";
     private static final String REGEX_DAY = "(0[1-9]|[12][0-9]|3[01])";
     private static final String REGEX_MONTH = "(0[1-9]|1[0-2])";
     private static final String REGEX_YEAR = "(20(0[1-9]|[1-9][0-9])|2100)";
