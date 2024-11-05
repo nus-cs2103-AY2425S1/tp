@@ -23,6 +23,9 @@ public class Participation {
      */
     public Participation(Person student, Tutorial tutorial) {
         requireAllNonNull(student, tutorial);
+        assert student != null : "Student should not be null";
+        assert tutorial != null : "Tutorial should not be null";
+
         this.student = student;
         this.tutorial = tutorial;
         this.attendanceList = new ArrayList<>();
@@ -33,26 +36,35 @@ public class Participation {
      */
     public Participation(Person student, Tutorial tutorial, List<Attendance> attendanceList) {
         requireAllNonNull(student, tutorial, attendanceList);
+        assert student != null : "Student should not be null";
+        assert tutorial != null : "Tutorial should not be null";
+        assert attendanceList != null : "Attendance list should not be null";
+
         this.student = student;
         this.tutorial = tutorial;
         this.attendanceList = attendanceList;
     }
 
     public Person getStudent() {
+        assert student != null : "Student should not be null";
         return student;
     }
 
     public String getStudentName() {
+        assert student.getFullName() != null : "Student name should never be null";
         return student.getFullName();
     }
 
     public Tutorial getTutorial() {
+        assert tutorial != null : "Tutorial should never be null";
         return tutorial;
     }
     public String getTutorialSubject() {
+        assert tutorial.getSubject() != null : "Tutorial subject should never be null";
         return tutorial.getSubject();
     }
     public static Boolean isValidParticipationList(String test) {
+        assert test != null : "Test string for participation list validation should not be null";
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -61,6 +73,7 @@ public class Participation {
      * @return a new List of attendance
      */
     public List<Attendance> getAttendanceList() {
+        assert attendanceList != null : "Attendance list should never be null";
         return attendanceList;
     }
 
