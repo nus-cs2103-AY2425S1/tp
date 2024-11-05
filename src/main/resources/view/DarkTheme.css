@@ -224,14 +224,9 @@
 
 .scroll-bar:vertical .track {
     -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-background-radius: 2em;
+    -fx-background-radius: 1em;
 }
 
-.scroll-bar:vertical .increment-button,
-.scroll-bar:vertical .decrement-button {
-    -fx-background-color: transparent;
-    -fx-padding: 5;
-}
 
 .scroll-bar:vertical .increment-arrow,
 .scroll-bar:vertical .decrement-arrow {

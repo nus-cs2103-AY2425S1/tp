@@ -48,7 +48,6 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="pinContactsPlaceholder" VBox.vgrow="NEVER" minHeight="50" maxHeight="50" />
             <StackPane fx:id="contactDetailsPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
