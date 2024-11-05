@@ -7,13 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
+import org.junit.jupiter.api.Test;
 
 public class GradeListTest {
 
@@ -108,13 +109,31 @@ public class GradeListTest {
         Grade thirdGrade = new Grade("midterm", 86.5F, 25.0F);
         Grade fourthGrade = new Grade("final", 86.4F, 25.0F);
 
+        AtomicReference<Constructor<GradeList>> constructor = new AtomicReference<>();
+
+        assertDoesNotThrow(() -> constructor.set(GradeList.class.getDeclaredConstructor(List.class)));
+        constructor.get().setAccessible(true);
+
         Map<String, Grade> correctMap = Map.of("Midterm", firstGrade, "Final", secondGrade);
-        Map<String, Grade> incorrectMap = Map.of("Midterm", firstGrade, "Final", secondGrade
-                , "midterm", thirdGrade
-                , "final", fourthGrade);
+        Map<String, Grade> incorrectMap = Map.of("Midterm", firstGrade, "Final", secondGrade,
+                                                 "midterm", thirdGrade,
+                                                 "final", fourthGrade);
+
+        List<Grade> correctList = Arrays.asList(firstGrade, secondGrade);
+        List<Grade> incorrectList = Arrays.asList(firstGrade, secondGrade, thirdGrade, fourthGrade);
 
         assertDoesNotThrow(() -> new GradeList(correctMap), "Valid call to GradeList constructor should not throw.");
-        assertThrows(IllegalStateException.class, () -> new GradeList(incorrectMap), "Invalid call to GradeList " +
-                "constructor should throw");
+        assertThrows(IllegalStateException.class, () -> new GradeList(incorrectMap), "Invalid call to GradeList "
+                + "constructor should throw");
+
+        assertDoesNotThrow(() -> constructor.get().newInstance(correctList), "Valid call to Gradelist constructor "
+                + "should not throw");
+        assertThrows(IllegalStateException.class, () -> {
+            try {
+                constructor.get().newInstance(incorrectList);
+            } catch (InvocationTargetException e) {
+                throw e.getCause();
+            }
+        }, "Invalid call to GradeList constructor should throw");
     }
 }
