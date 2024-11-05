@@ -19,8 +19,8 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_VIEW_SUCCESS = "Viewing Note: %1$s";
     public static final String MESSAGE_FIELD_MISSING = "Both index and name must be provided.";
-    public static final String MESSAGE_INDEX_NOT_FOUND = "Invalid index provided..";
-    public static final String MESSAGE_NAME_NOT_FOUND = "Invalid person name provided.";
+    public static final String MESSAGE_INDEX_NOT_FOUND = "Invalid index provided.";
+    public static final String MESSAGE_NAME_NOT_FOUND = "Invalid person's name provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows the details of the person identified "
