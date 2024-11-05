@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_EDIT_PERSON_HAS_REMINDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -83,6 +84,10 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.getReminders().isEmpty() && editPersonDescriptor.isNameEdited()) {
+            throw new CommandException(MESSAGE_EDIT_PERSON_HAS_REMINDER);
+        }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -173,6 +178,10 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, clientTypes, description);
+        }
+
+        public boolean isNameEdited() {
+            return this.name != null;
         }
 
         public void setName(Name name) {

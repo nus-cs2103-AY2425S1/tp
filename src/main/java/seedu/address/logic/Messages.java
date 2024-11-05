@@ -31,6 +31,7 @@ public class Messages {
             + "please delete them first";
     public static final String MESSAGE_NO_CLIENT_TYPE =
             "There should be at least one CLIENT_TYPE at all times";
+    public static final String MESSAGE_EDIT_PERSON_HAS_REMINDER = "The client has reminders, please delete them first!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
