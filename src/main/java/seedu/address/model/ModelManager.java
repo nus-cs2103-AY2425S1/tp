@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
+import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
 import seedu.address.model.person.Person;
 
 /**
@@ -179,7 +180,7 @@ public class ModelManager implements Model {
     @Override
     public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
         requireNonNull(goodsReceipts);
-        this.goodsList.resetData(goodsReceipts);
+        goodsList.resetData(goodsReceipts);
     }
 
     @Override
@@ -187,9 +188,22 @@ public class ModelManager implements Model {
         return goodsList;
     }
 
+    private boolean hasSupplierName(GoodsReceipt goodsReceipt) {
+        return addressBook.getPersonList()
+                .stream()
+                .map(Person::getName)
+                .anyMatch(personName -> personName.equals(goodsReceipt.getSupplierName()));
+    }
+
     @Override
     public void addGoods(GoodsReceipt goodsReceipt) {
-        goodsList.addReceipt(goodsReceipt);
+        requireNonNull(goodsReceipt);
+
+        if (hasSupplierName(goodsReceipt)) {
+            goodsList.addReceipt(goodsReceipt);
+        } else {
+            throw new IllegalSupplierNameException();
+        }
     }
 
     @Override
