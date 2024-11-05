@@ -53,7 +53,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         // parse required fields
         ContactType contactType = ParserUtil.parseContactType(argMultimap.getValue(PREFIX_CONTACTTYPE).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        //TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get());
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MOD).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
@@ -75,7 +74,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         // check for at least one out of phone, email and telegram handle
         if (phone.isEmpty() && email.isEmpty() && telegramHandle.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCommand.MESSAGE_NO_CONTACT_DETAIL));
+                    AddCommand.MESSAGE_USAGE));
         }
 
         Person person = new Person(contactType, name, phone, email, telegramHandle, moduleName, remark, tagList);

@@ -25,7 +25,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_CONTACTTYPE + "CONTACT TYPE"
+            + PREFIX_CONTACTTYPE + "CONTACT TYPE "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_TELEHANDLE + "TELEGRAMHANDLE] "
             + PREFIX_MOD + "MODULE NAME "
@@ -34,20 +34,19 @@ public class AddCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CONTACTTYPE + "work"
+            + PREFIX_CONTACTTYPE + "work "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TELEHANDLE + "@johndoe "
-            + PREFIX_MOD + "CS1101S"
+            + PREFIX_MOD + "CS1101S "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_REMARK + "likes to eat chocolate"
+            + PREFIX_REMARK + "likes to eat chocolate "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney \n"
+            + "Note: At least one field out of phone, email and telegram handle must be provided";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_NO_CONTACT_DETAIL = "At least one field out of phone, email and " +
-            "telegram handle must be provided";
 
     private final Person toAdd;
 
