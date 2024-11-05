@@ -5,13 +5,14 @@ title: MediBase3 User Guide
 
 MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
 
-
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 
 * Table of Contents
 {:toc}
+
+<div style="page-break-after: always;"></div>
 
 ## How to use this User Guide
 Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
@@ -74,6 +75,8 @@ The following annotated text-boxes are used throught this guide to provide usefu
 > Warns you about potential issues or errors that you might encounter while using MediBase3.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -147,17 +150,24 @@ MediBase3 can be controlled using commands in the **Command Line Interface (CLI)
 
 #### CLI Command Structure
 
-Each command follows this structure:
+Each command in MediBase3 follows a structured format to ensure consistency and ease of use.
+
+The example below demonstrates this structure:
 
 ![CommandPromptFormat.jpg](images/CommandPromptFormat.jpg)
 
-Here’s a breakdown of the parts:
+This example shows how a typical command might look in MediBase3, with three main components:
 
 | **Component** | **Description**                                         |
 |---------------|---------------------------------------------------------|
 | **Command**   | The action you want to perform (e.g., `add`, `edit`)    |
 | **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
 | **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * This example is provided to give a general idea of the command structure. Actual commands may vary depending on the specific action and data required.
 
 #### Example:
 >```
@@ -228,8 +238,10 @@ You’re now ready to start using MediBase3.
 For a detailed list of features and instructions, see the [Features](#features) section.  
 For additional assistance or common questions, please refer to our [FAQ](#faq) section.
 
-
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 ### Parameter Details
@@ -242,23 +254,25 @@ the constraints of each parameter when used in a command.
 > Ensure that all parameters adhere to the constraints mentioned below. 
 > Otherwise, the command will not be executed, and an error message will be displayed.
 
-| Parameter         | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                                          | Examples                                                                                                                           |
-|-------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`            | Name of the patient                                                                                        | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of` | :white_check_mark: `John Doe`<br>:x: `$ally`                                                                                       |
-| `NRIC`            | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter.                                                                                                                                       | :white_check_mark: `S1234567A` <br> :white_check_mark: `t1234567b` <br> :x: `1234567A`                                             |
-| `DOB`             | Date of birth (DOB) of the patient.                                                                        | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future.                                                                                                                                                                           | :white_check_mark: `2002-12-12` <br> :x: `2002/11/32`                                                                              |
-| `GENDER`          | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                                                                              | :white_check_mark: `m`<br>:white_check_mark: `F`<br>:x: `Male`                                                                     |
-| `EMAIL`           | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark: `raj@gmail.com`<br>:x: `raj@gmail`                                                                              |
-| `ADDRESS`         | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
-| `PHONE_NUMBER`    | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed.                                                                                                                                         | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
-| `ALLERGY`         | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                   | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
-| `PRIORITY`        | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                        | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
-| `CONDITION`       | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                          | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
-| `DATE`            | Appointment date of the patient.                                                                           | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank.                                                                                                                                                                                                                  | :white_check_mark: `2024-10-27` <br> :x: `2022/10/27`                                                                              |
-| `TIME`            | Appointment time of the patient.                                                                           | - Must be in the HHMM format (24-hour clock). <br> - Must be in interval. <br> - Time format should be (start time - end time) where start time < end time. <br> - The start time should not equal the end time. <br> - Should not be blank.                                         | :white_check_mark: `0900-1100` <br> :white_check_mark: `1400-1600` <br> :x: `0900-0900` <br> :x: `1400-1300`                       |
-| `APPOINTMENTNAME` | Description of the appointment with the patient.                                                           | - Must be less than 30 characters. <br> - Only alphanumeric characters are allowed. <br> - Should not be blank                                                                                                                                                                       | :white_check_mark: `Dental` <br> :white_check_mark: `FollowUp1` <br> :x: `Follow-up#1` <br> :x: `abcde fghijklmnopqrstuvwxyzabcde` |
+| Parameter          | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                                          | Examples                                                                                                                           |
+|--------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`             | Name of the patient                                                                                        | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of` | :white_check_mark: `John Doe`<br>:x: `$ally`                                                                                       |
+| `NRIC`             | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter.                                                                                                                                       | :white_check_mark: `S1234567A` <br> :white_check_mark: `t1234567b` <br> :x: `1234567A`                                             |
+| `DOB`              | Date of birth (DOB) of the patient.                                                                        | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future.                                                                                                                                                                           | :white_check_mark: `2002-12-12` <br> :x: `2002/11/32`                                                                              |
+| `GENDER`           | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                                                                              | :white_check_mark: `m`<br> :white_check_mark: `F`<br> :x: `Male`                                                                   |
+| `EMAIL`            | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark: `raj@gmail.com`<br>:x: `raj@gmail`                                                                              |
+| `ADDRESS`          | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
+| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - There is no limit on the length of phone number accepted, in order to accommodate international phone numbers.                                                              | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
+| `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                   | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
+| `PRIORITY`         | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                        | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
+| `CONDITION`        | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                          | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
+| `APPOINTMENT_DATE` | Appointment date of the patient.                                                                           | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank.                                                                                                                                                                                                                  | :white_check_mark: `2024-10-27` <br> :x: `2022/10/27` <br> :x: `2024-02-31`                                                        |
+| `APPOINTMENT_TIME` | Appointment time of the patient.                                                                           | - Must be in the format `HHMM-HHMM` (24-hour clock interval). <br> - Time format should be (start time - end time) with start time earlier than end time. <br> - Start and end times should not equal. <br> - Should not be blank.                                                   | :white_check_mark: `0900-1100` <br> :white_check_mark: `2330-2359` <br> :x: `0900-0900` <br> :x: `1400-1300` <br> :x: `2200-0000`  |
+| `APPOINTMENT_NAME` | Description of the appointment with the patient.                                                           | - Must be less than 30 characters. <br> - Only alphanumeric characters are allowed. <br> - Should not be blank                                                                                                                                                                       | :white_check_mark: `Dental` <br> :white_check_mark: `FollowUp1` <br> :x: `Follow-up#1` <br> :x: `abcde fghijklmnopqrstuvwxyzabcde` |
 
 [Back to Table of Contents](#table-of-contents)
+
+{: style="page-break-after: always"}
 
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
@@ -285,6 +299,8 @@ the constraints of each parameter when used in a command.
 > e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Patient
 
@@ -351,9 +367,10 @@ Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAI
 > :information_source: **Note:**
 > 
 > * Edits the patient with the specified `NRIC` in MediBase3.
+> * The NRIC provided must be the full NRIC of the patient to be edited. e.g. `S1234567A` and not `S123`.
 > * **At least one** of the optional fields must be provided. e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
-> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
+> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after the patient's details have been edited.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
@@ -367,30 +384,61 @@ to `91234567` and `johndoe@example.com` respectively.
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Managing Appointments
 
 #### Adding Appointments : `addAppt`
 
 Allow doctors to schedule an appointment with a patient.
 
-Format: `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`
+Format: `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
 > * Adds Appointment Time and Appointment Name to the patient with the specified `NRIC` in MediBase3.
-> * Appointment time intervals cannot overlap with other existing appointment time intervals.
 > * You can schedule an appointment to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been added.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
+
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+>
+> * For each patient, appointment time intervals cannot overlap with other existing appointment time intervals.
+> * Earliest valid appointment time is `0000`, and latest is `2359`.
+> * Appointments cannot span beyond date boundaries
+
 Example:
 * `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` will schedule an appointment for the patient with NRIC `S1234567A` on `2024-10-27`, from `1100` to `1200` titled `Dental`. 
+
+![result for addAppt command example](images/addApptCommand.png)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
 > * Appointment List Panel is displayed in chronological order.
+> * Appointment names need not be unique.
+> * Different patients may have overlapping appointment timings, as long as overlapping appointments are not from the same patient 
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> Input two new appointments to represent any appointments that span across date boundaries. 
+> * Input the first ending at `2359`: e.g. `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`; and
+> * Input the next starting on the following date at `0000`: e.g. `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> Appointment end timings are **exclusive** - the next appointment can start immediately after the previous.
+>
+> If the time period of _Appointment A_ is `1200-1300`:
+> * the time period of _Appointment B_ can be `1300-1400`.
+> * the time period of _Appointment B_ can be `1300-1400`.
+> * _Appointment B_'s time period **cannot** start anywhere from `1200` to `1259`.
+> * _Appointment B_'s time period **cannot** end anywhere from `1201` to `1300`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -398,12 +446,12 @@ Example:
 
 Allow doctors to delete an appointment. 
 
-Format: `delAppt i/NRIC @d/DATE @t/TIME`
+Format: `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
-> * Unlike addAppt, there is no need for AppointmentName preamble.
+> * Unlike addAppt, there is no need for `APPOINTMENT_NAME` preamble.
 > * Deletes Appointment from the patient with the specified `NRIC` in MediBase3.
 > * You can delete an appointment from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after their appointment has been deleted.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
@@ -412,37 +460,44 @@ Example:
 * `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` will delete an appointment on `2024-10-27` from `1100` to `1200` for the patient with NRIC `S1234567A`.
 
 
-  [Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Medical Conditions
 
 #### Adding Medical Conditions : `addMedCon`
 
-Adds medical condition to an existing patient in MediBase3.
+Adds medical condition(s) to an existing patient in MediBase3.
 
 Format: `addMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
-> * Adds Medical Condition to the patient with the specified `NRIC` in MediBase3.
+> * Adds the specified `CONDITION` to the patient with the specified `NRIC` in MediBase3.
 > * You can add a medical condition to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been added.
+> * **At least one** `CONDITION` must be provided. e.g. `addMedCon i/S1234567A` is invalid.
+> * `CONDITION` is case-insensitive. e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
+> * You cannot add the same `CONDITION` to a patient more than once.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example: 
 * `addMedCon i/S1234567A c/High Blood Pressure` will add medical condition `High Blood Pressure` to patient with NRIC `S1234567A`.   
 
+![result for addMedCon command example](images/addMedConCommand.png)
+
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> * `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * You can add multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
+> * e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting Medical Conditions : `delMedCon`
 
-Deletes Medical Condition from an existing patient in MediBase3.
+Deletes medical condition(s) from an existing patient in MediBase3.
 
 Format: `delMedCon i/NRIC c/CONDITION...`
 
@@ -451,7 +506,9 @@ Format: `delMedCon i/NRIC c/CONDITION...`
 >
 > * Deletes Medical Condition from the patient with the specified `NRIC` in MediBase3.
 > * You can delete a Medical Condition from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been removed.
-> * Patient must have the Medical Condition in order to be able to be deleted, else an error message will show.
+> * **At least one** `CONDITION` must be provided. e.g. `delMedCon i/S1234567A` is invalid.
+> * `CONDITION` is case-insensitive. e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
+> * Patient must have the given `CONDITION` in order for it to be deleted, else an error message will be displayed.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
@@ -460,10 +517,12 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> * User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
-> * `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+> * You can delete multiple medical conditions from a patient by using multiple `c/CONDITION`parameters
+> * e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Allergies
 
@@ -477,10 +536,16 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > :information_source: **Note:**
 >
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+> * You can add an allergy to a patient even if they are not being currently displayed in the Patient List Panel.
 > * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
-> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * You cannot add the same `ALLERGY` to a patient more than once.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
+Example:
+* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+
+![result for addAllergy command example](images/addAllergyCommand.png)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -488,14 +553,12 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
-Example:
-* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deleting an allergy: `delAllergy`
 
-Deletes an allergy or multiple allergies to an existing patient in MediBase3.
+Deletes an allergy or multiple allergies from an existing patient in MediBase3.
 
 Format: `delAllergy i/NRIC al/ALLERGY…`
 
@@ -505,18 +568,21 @@ Format: `delAllergy i/NRIC al/ALLERGY…`
 > * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
 > * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+> * Patient must have the given `ALLERGY` in order for it to be deleted, else an error message will be displayed.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
-> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 Example:
 * `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> * You can delete multiple allergies from a patient by using multiple `al/ALLERGY` parameters.
+> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Priority
 
@@ -537,7 +603,11 @@ Format: `setPriority i/NRIC !/PRIORITY`
 Example: 
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
 
+![result for setPriority command example](images/setPriorityCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding Patients
 
@@ -557,7 +627,7 @@ Format: `list`
 > :bulb: **Tip:**
 >
 > If you have used any other commands under the [Finding Patients](#finding-patients) section to alter the view of the Patient List Panel, 
-> you can use this command to reset to the default view to view all patients!
+> you can use this command to reset to the default view to view all patients.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -599,7 +669,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'find alex david'](images/findCommand.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -623,27 +693,33 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
+![result for 'findMedCon diabetes arthritis'](images/findMedConCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Locating patient by NRIC: `findNric`
 
 Finds patients based on their NRIC.
 
-Format: `find NRIC`
+Format: `findNric NRIC`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
 > * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
 > * Only the `NRIC` is searched.
-> * Only **full NRIC** will be matched e.g. `S1234567a` will not match `S12345`
+> * The NRIC provided must be the full NRIC of the patient. e.g. `S1234567A` and not `S123`.
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
 > * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
 
+![result for 'findNric S1234567A'](images/findNricCommand.png)
+
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### General Features
 
@@ -706,6 +782,8 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -804,11 +882,14 @@ This means that your machine is running Java version 17.0.11, which means that J
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
+<div style="page-break-after: always;"></div>
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -816,12 +897,12 @@ This means that your machine is running Java version 17.0.11, which means that J
 |------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`                     | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
 | **AddAllergy**   | `addAllergy i/NRIC al/ALLERGY…`                                                         | `addAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **AddAppt**      | `addAppt APPOINTMENTNAME i/NRIC @d/DATE @t/TIME`                                        | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
+| **AddAppt**      | `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`               | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
 | **AddMedCon**    | `addMedCon i/NRIC c/CONDITION...`                                                       | `addMedCon i/S1234567A c/High Blood Pressure`                                                                  |
 | **Clear**        | `clear`                                                                                 | -                                                                                                              |
 | **Delete**       | `delete NRIC`                                                                           | `delete S1234567A`                                                                                             |
 | **DelAllergy**   | `delAllergy i/NRIC al/ALLERGY…`                                                         | `delAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **DelAppt**      | `delAppt i/NRIC @d/DATE @t/TIME`                                                        | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
+| **DelAppt**      | `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`                                | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
 | **DelMedCon**    | `delMedCon i/NRIC c/CONDITION...`                                                       | `delMedCon i/S1234567A c/High Blood Pressure`                                                                  |
 | **Edit**         | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`                                                          | `find James Jake`                                                                                              |

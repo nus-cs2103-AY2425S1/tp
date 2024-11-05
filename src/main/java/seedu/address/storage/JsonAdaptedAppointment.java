@@ -12,6 +12,7 @@ import seedu.address.model.appointment.Appointment;
  */
 class JsonAdaptedAppointment {
 
+    private static final String PARSE_ERROR_1S = "Invalid serialised string: %s.";
     private final String appointmentSerialised;
 
     /**
@@ -44,7 +45,11 @@ class JsonAdaptedAppointment {
     public Appointment toModelType() throws IllegalValueException {
         String[] appointmentDeserialised = appointmentSerialised.split(":");
         if (appointmentDeserialised.length < 3) {
-            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(String.format(PARSE_ERROR_1S, appointmentSerialised));
+        }
+
+        if (appointmentDeserialised[0].isEmpty() || appointmentDeserialised[0].isBlank()) {
+            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS_BLANK);
         }
 
         if (!Appointment.isValidAppointmentName(appointmentDeserialised[0])) {

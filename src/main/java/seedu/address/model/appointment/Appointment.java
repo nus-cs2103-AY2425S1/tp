@@ -22,7 +22,7 @@ public class Appointment implements Comparable<Appointment> {
 
     public static final String MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT = "Appointment date should be in the format"
                                                                             + " of yyyy-MM-dd";
-    public static final String MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1s = "Appointment date [%s] does not exist";
+    public static final String MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1S = "Appointment date [%s] does not exist";
     public static final String MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT = "Appointment time period should be"
                                                                                    + " in 24-Hour Format with start "
                                                                                    + "and end times: HHMM-HHMM";
@@ -30,6 +30,7 @@ public class Appointment implements Comparable<Appointment> {
                                                                                     + "time should be before ending "
                                                                                     + "time of appointment";
     public static final String MESSAGE_CONSTRAINTS = "Appointment names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS_BLANK = "Appointment names cannot be blank";
     public static final String MESSAGE_TOO_LONG_CONSTRAINT = "Appointment names should be less than 30 characters";
     public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
     static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
@@ -49,12 +50,13 @@ public class Appointment implements Comparable<Appointment> {
     public Appointment(String appointmentName, String appointmentDate, String appointmentTimePeriod)
             throws IllegalValueException {
         requireNonNull(appointmentName);
+        checkArgument(!appointmentName.isBlank() && !appointmentName.isEmpty(), MESSAGE_CONSTRAINTS_BLANK);
         checkArgument(isValidAppointmentName(appointmentName), MESSAGE_CONSTRAINTS);
         this.appointmentName = appointmentName;
 
         requireNonNull(appointmentDate);
         checkArgument(isCorrectDateFormat(appointmentDate), MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
-        checkArgument(isValidDate(appointmentDate), String.format(MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1s,
+        checkArgument(isValidDate(appointmentDate), String.format(MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1S,
                                                                   appointmentDate));
         this.appointmentDate = appointmentDate;
 
