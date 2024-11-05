@@ -72,19 +72,23 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `add` or `a`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]… [pr/PRIORITY] [r/REMARK]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
+* Last Seen defaults to today's date if not specified
+* Priority defaults to low if not specified
+* Remark defaults to "No remarks added yet" if not specified
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com o/nus`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com t/criminal`
 
 ### Listing all persons : `list`
 
@@ -96,7 +100,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -240,11 +244,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]… [pr/PRIORITY] [r/REMARK]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find [n/NAME…] [o/ORGANIZATION…]`<br> e.g., `find n/James Jake o/TikTok`
 **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 2 r/handsome`
 **List** | `list`
 **Help** | `help`
