@@ -32,6 +32,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 
 ---
 ## Table of Contents
+- [Command Summary](#command-summary)
 - [Symbols and Tips](#symbols-and-tips)
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -50,12 +51,34 @@ This app is a desktop app for managing candidates and job roles, **optimized for
     - [Archiving Data Files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
 - [Glossary](#glossary)
 - [Feedback and Support](#feedback-and-support)
 
 
 ---
+
+## Command Summary
+
+
+| Action      | Format, Examples                                                                                                                                                                                                           |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
+| **Clear**   | `clear`                                                                                                                                                                                                                    |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                        |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                             |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                      |
+| **List**    | `list`                                                                                                                                                                                                                     |
+| **Help**    | `help`                                                                                                                                                                                                                     |
+| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                            |
+| **Filter**  | `filter st/STATUS`<br> e.g., `filter st/Shortlisted`                                                                                                                                                                       |
+| **Summary** | `summary`                                                                                                                                                                                                                  |
+
+Detailed information can be found under [Features](#features).
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+---
+
 ## Symbols and Tips
 
 Throughout this guide, you'll encounter several symbols. Refer to these symbols as you explore the guide. Each provides quick insights or warnings that can make your experience smoother:
@@ -71,52 +94,43 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 1. **Check Java Installation**: Ensure you have **Java 17** or above installed on your computer.
     - [Check Java version on Windows](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line)
     - [Check Java version on Mac](https://www.wikihow.com/Check-Java-Version-on-a-Mac)
-    - If your computer does not have Java or its version is below Java 17, you may refer to:
-        - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
-        - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
-
-[**Note**]:If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
-2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.3).
-
-![downloadPage.png](images%2FdownloadPage.png)
-[**Tip**] To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
-
-
+    - If your computer does not have Java or its version is below Java 17, you may refer to: 
+      - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
+      - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
+    - 📋:If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
+2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.4).
+![downloadPage.png](images%2FdownloadPage.png)[**Tip**] To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
+   <br><br>
 3. **Set Up Home Folder**: Copy the `TalentSG.jar` file to the Desktop to launch.
-
+   <br><br>
 4. **Run the Application**:
     - Open a command terminal.
 ![locateTerminal.png](images%2FlocateTerminal.png)
-    - Navigate (`cd`) to the folder containing the `.jar` file.
+    - Navigate (`cd`) to the folder containing the `.jar` file. <br> Example: `cd C:\Users\[username]\Downloads`
 ![locateAppFile.png](images%2FlocateAppFile.png)
     - Run the application with the command:
       ```
       java -jar TalentSg.jar
       ```
       ![launch instruction.png](images%2Flaunch%20instruction.png)
-[⚠**Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error.
-   
-<br>🎉A GUI similar to the one below should appear in a few seconds!🎉<br>
+[⚠**Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error. <br><br>
 
-
+5. 🎉 A GUI similar to the one below should appear in a few seconds! 🎉
 <img src="images/successimage.png" alt="imgidk.png" width="800">
+📋:Note how the app contains some sample data. <br><br>
 
-[**Note**]:Note how the app contains some sample data.
-
-
-
-5. **Interact with TalentSG**:
+6. **Interact with TalentSG**:
     - Type your command into the command box and press **Enter** to execute it.
     - For example, typing `help` and pressing Enter will display the help message. ✨
 
-6. **Try Out Example Commands**:
+7. **Try Out Example Commands**:
     - `list` : Lists all contacts.
     - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a contact named `John Doe` to TalentSG.
     - `delete 3` : Deletes the 3rd contact shown in the current list.
     - `clear` : Deletes all contacts.
     - `exit` : Exits the app.
 
-7. **Explore Features**: Refer to the [Features](#features) section for detailed information on each command.
+8. **Explore Features**: Refer to the [Features](#features) section for detailed information on each command.
    
 
 
@@ -124,7 +138,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 ## Features
 
 TalentSG provides a variety of features to help you manage candidates and job roles effectively.
----
+
 ### Notes About the Command Format
 
 - **UPPER_CASE**: Parameters to be supplied by the user.
@@ -164,15 +178,19 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex
 
 #### Constraints
 
-- **NAME**: Up to 20 characters, no special characters.
-- **PHONE_NUMBER**: Numeric.
-- **EMAIL**: Valid email format.
-- **ADDRESS**: Valid address, should not be blank.
-- **SKILLS**: Comma-separated values, e.g. `Java, Python`.
-- **STATUS**: Predefined statuses (Applied, Screening, Interview Scheduled, Interviewed, Offer, Onboarding, Hired, Rejected).
-- **EXPERIENCE**: Valid experience, should not be blank.
-- **DESIRED_ROLE**: Desired job position, should not be blank.
-- **Tags**: Optional and can be multiple, e.g. `t/friends t/owesMoney`.
+| Field            | Constraints                                | Example                                                                                                  |
+|------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **NAME**         | Up to 20 characters, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
+| **PHONE_NUMBER** | Numeric                                    | `98989899`, `81092819`                                                                                   |
+| **EMAIL**        | Valid email format                         | `testing@gmail.com`,`example@gmail.com`                                                                  |
+| **ADDRESS**      | Valid address, should not be blank         | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
+| **SKILLS**       | Comma-separated values                     | `Java, Python`, `C++`                                                                                    |
+| **STATUS**       | Predefined statuses                        | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
+| **EXPERIENCE**   | Valid experience, should not be blank      | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
+| **DESIRED_ROLE** | Desired job position, should not be blank  | `Software Engineer`, `UI/UX Designer`                                                                    |
+| **NOTE**         | Any characters are accepted                | `Very confident`, `Confident`                                                                            |
+| **Tags**         | Optional and can be multiple               | `Must have`                                                                                              |
+
 
 [**Caution**]: The required information except tags cannot be empty.
 
@@ -442,25 +460,6 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command Summary
-
-
-| Action     | Format, Examples                                                                                                                                                                                                            |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
-| **Clear**  | `clear`                                                                                                                                                                                                                     |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                       |
-| **List**   | `list`                                                                                                                                                                                                                      |
-| **Help**   | `help`                                                                                                                                                                                                                      |
-| **View**   | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                             |
-| **Filter** | `filter st/STATUS`<br> e.g., `filter st/Shortlisted`                                                                                                                                                                        |
-
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-
----
 
 ## Glossary
 
