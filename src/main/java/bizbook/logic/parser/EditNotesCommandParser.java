@@ -42,7 +42,6 @@ public class EditNotesCommandParser implements Parser<EditNotesCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditNotesCommand.MESSAGE_USAGE), ive);
         }
-
         return new EditNotesCommand(personIndex, noteIndex, note);
     }
 }

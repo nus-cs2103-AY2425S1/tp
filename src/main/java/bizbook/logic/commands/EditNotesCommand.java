@@ -98,5 +98,4 @@ public class EditNotesCommand extends Command {
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedNotes);
     }
-
 }
