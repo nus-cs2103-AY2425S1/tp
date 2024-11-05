@@ -305,8 +305,8 @@ public class ModelManager implements Model {
         deletePersonInWedding(personToEdit, currentTags);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getJob(), Collections.emptySet());
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        setPerson(personToEdit, editedPerson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return editedPerson;
     }
 
