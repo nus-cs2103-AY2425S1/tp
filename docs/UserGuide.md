@@ -141,16 +141,15 @@ Edits an existing contact in the contacts list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contacts list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Edits the contact at the specified `INDEX`. 
+  - The index is the number displayed next to the contact's name in the list. 
+  - The index **must be a positive number** (starting from 1).
+* You must provide at least one optional field (in [ ]). This means you need to update at least one of the following fields: name, phone, email, role, address, or tag.
+* Editing tags will replace **all** existing ones. If you simply want to remove all tags, type 't/' without specifying any tags after.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` changes the phone number and email address of the 1st contact to `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` changes the name of the 2nd contact to be `Betsy Crower` and clears all of its tags.
 
 **<ins>When in the inspect window**
 
@@ -158,12 +157,12 @@ Edits an existing delivery in the delivery list of a contact.
 
 Format: `edit INDEX [i/ITEM]…​ [e/ETA] [a/ADDRESS] [c/COST] [s/STATUS] [t/TAG]…​`
 
-* Same parameter constraints as mentioned in the main window section of this command.
-* You can not remove all the delivery's items by typing `i/` without specifying any items after it. One item must be present at the least.
+* The same rules apply as in the main window section.
+* At least one item must be specified when editing a delivery. You cannot remove all items by typing `i/` without adding any items after it.
 
 Examples:
-*  `edit 1 i/Speaker c/$50` Edits the items and cost of the 1st delivery to be `Speaker` and `$50` respectively.
-*  `edit 2 s/delivered t/` Edits the status of the 2nd delivery to be `delivered` and clears all existing tags.
+*  `edit 1 i/Speaker c/$50` changes the items and cost of the 1st delivery to be `Speaker` and `$50` respectively.
+*  `edit 2 s/delivered t/` changes the status of the 2nd delivery to be `delivered` and clears all of its tags.
 
 ### Locating contacts or deliveries by name: `find`
 **<ins>When in the main window**
