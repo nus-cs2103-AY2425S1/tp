@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in EventTory.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a Tag in EventTory. Tags will always be lowercase.
+ * Guarantees: immutable; tag is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
@@ -22,7 +22,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = tagName.toLowerCase();
     }
 
     /**
