@@ -60,9 +60,9 @@ This is a general command format, not ALL commands follow this format! For the s
 
 The commands in this section are used to add new records to the system, such as students and tutorials.
 
-- [Adding a student](#21-adding-a-student)
-- [Creating a new tutorial](#22-creating-a-new-tutorial)
-- [Enrolling student into a tutorial](#23-enrolling-student-into-a-tutorial)
+- [Adding a student](#31-adding-a-student)
+- [Creating a new tutorial](#32-creating-a-new-tutorial)
+- [Enrolling student into a tutorial](#33-enrolling-student-into-a-tutorial)
 
 #### **3.1 Adding a student**
 
@@ -72,25 +72,30 @@ Command: `createtut`
 
 Usage: `createtut tut/TUTORIAL_NAME`
 
+{% raw %}
 <div markdown="1" class="smaller-text">
 Fields
 
 * `TUTORIAL_NAME`: Name of the tutorial to create
   * Must only contain alphanumeric characters
 </div>
+{% endraw %}
 
 Example usages
 
 * `createtut tut/physics`
+
+{% raw %}
 <div markdown="1" class="smaller-text">
 Invalid usages
 
 * Creating a tutorial that has been created already
   * *Error Message: This tutorial already exists in the system.*
 
-* Format errors, check [here](#11-format-errors).
+* Format errors, check [here](#12-format-errors).
 
 </div>
+{% endraw %}
 
 #### **3.3 Enrolling student into a tutorial**
 
@@ -128,12 +133,11 @@ Invalid usages
 
     * *Error Message: This person is already in the tutorial*
 
-* Format errors, check [here](#11-format-errors)
+* Format errors, check [here](#12-format-errors)
 
 </div>
 {% endraw %}
 
-### 
 
 ---
 
@@ -141,8 +145,12 @@ Invalid usages
 
 The commands in this section are used to view and retrieve records on the system, such as students, tutorials, and enrollment status.
 
-3.1 Listing all students  
-3.2 Search
+- [Listing all students](#41-listing-all-students)  
+4.2 Search
+
+#### **4.1 Listing all students**
+
+Command: `list`
 
 ---
 
@@ -150,14 +158,62 @@ The commands in this section are used to view and retrieve records on the system
 
 The commands in this section are used edit records on the system, such as student information, tutorial information, payment, and attendance status
 
-4.1 Editing student’s details  
-4.2 Logging fees  
-4.3 Marking payment  
-4.4 Marking attendance of student  
+- [Editing student’s details](#51-editing-a-student)  
+- [Logging fees](#52-logging-fees-for-tutorial)  
+- [Marking payment](#53-marking-a-students-payment)  
+4.4 Marking attendance of student
 4.5 Marking attendance of tutorial  
-4.6 Unenroll a student from tutorial
+- [Unenroll a student from tutorial](#56-unenrolling-student-from-a-tutorial)
+#### **5.1 Editing a student**
 
-### **5.2 Logging fees for tutorial**
+Edit the personal information of students within EduVault
+
+Command: `edit`
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TAG]…​`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields:
+
+* `INDEX`: Index number shown in the displayed person list
+    * Must be a positive integer 1, 2, 3, …​
+* `[ ]:` Fields wrapped in square brackets are optional
+    * At least one of the optional fields must be provided
+    * Existing values will be updated to the input values
+* `PAYMENT`: Updates the absolute value of a student’s overdue amount
+* `TAG:` Existing tag will be replaced by the new tag
+    * Remove a student’s tag by typing  `t/` without specifying any tags
+* `ATTENDANCE`: Field not editable within edit
+* `TUTORIAL`: Field not editable within edit
+* `PAYMENT`: Field not editable within edit
+</div>
+{% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+More information about other prefixes can be found here
+</div>
+
+Example Usage:
+
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Invalid usage:
+
+* None of the option fields are input
+    * *Error message: At least one field to edit must be provided.*
+* Values to edit result in a copy of a student already in EduVault
+    * *Error message: This person already exists in the address book.*
+* `ATTENDANCE` & `TUTORIAL` & `PAYMENT` prefix used
+    * Error message: PREFIX cannot be used in this command
+* Format errors, check [here](#12-format-errors)
+</div>
+{% endraw %}
+
+#### **5.2 Logging fees for tutorial**
 
 *Logging each student's monthly tutorial fees or any other additional fees*
 
@@ -165,24 +221,33 @@ Command:  `addfees`
 
 Usage: addfees `INDEX pay/PAYMENT`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `PAYMENT:` Amount in integer that a student have to pay
+</div>
+{% endraw %}
 
-| **Note:** Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+</div>
 
 Example usages
 
 * `addfees 1 pay/400`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
-* Format errors, check [here](#11-format-errors)
+* Format errors, check [here](#12-format-errors)
+</div>
+{% endraw %}
 
-
-### **5.3 Marking a student’s payment**
+#### **5.3 Marking a student’s payment**
 
 *Recording a student’s payment*
 
@@ -190,49 +255,68 @@ Command:  `markpaid`
 
 Usage: markpaid `INDEX pay/PAYMENT`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
+
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `PAYMENT:` Amount in integer that a student have paid
+</div>
+{% endraw %}
 
-| **Note:** Student’s payment will be shown as a decrease in overdue amount. If student pays extra, it will be shown as advanced payment
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Student’s payment will be shown as a decrease in overdue amount. If student pays extra, it will be shown as advanced payment
+</div>
 
 Example usages
 
 * `markpaid 1 pay/400`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
-* Format errors, check [here](#11-format-errors)
+* Format errors, check [here](#12-format-errors)
+</div>
+{% endraw %}
 
-
-
-### **5.6 Unenrolling student from a tutorial**
+#### **5.6 Unenrolling student from a tutorial**
 
 Command:  `unenroll`
 
 Usage: `unenroll` `INDEX tut/TUTORIAL_NAME`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL_NAME:` Name of the tutorial
+</div>
+{% endraw %}
 
-| **Note:** Student can only be unenrolled from tutorials that they are currently in
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Student can only be unenrolled from tutorials that they are currently in
+</div>
 
 Example usages
 
 * `unenroll 1 tut/physics`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Unenrolling student from a tutorial that they are not in
 
     * *Error Message: Cannot unenroll STUDENT from TUTORIAL, as…*
 
-* Format errors, check [here](#11-format-errors)
+* Format errors, check [here](#12-format-errors)
+</div>
+{% endraw %}
 
 ---
 
@@ -240,9 +324,38 @@ Invalid usages
 
 The commands in this section are used to delete records on the system
 
-5.1 Deleting a student  
-5.2 Closing a tutorial  
-5.3 Clearing all entries
+- [Deleting a student](#61-deleting-a-student)  
+- [Closing a tutorial](#62-closing-a-tutorial)
+- [Clearing all entries](#63-clearing-all-entries)
+
+#### **6.1 Deleting a student**
+
+*Deleting student’s record*
+
+Command:  `delete`
+
+Usage: `delete` `INDEX`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields
+
+* `INDEX:` Index number as shown in the displayed list of the students.
+    * Must be a positive integer 1, 2, 3…
+</div>
+{% endraw %}
+
+Example usages
+
+* `delete 2`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Invalid usages
+
+* Format errors, check [here](#12-format-errors)
+</div>
+{% endraw %}
 
 #### **6.2 Closing a tutorial**
 
@@ -250,15 +363,18 @@ Command:  `closetut`
 
 Usage: `closetut tut/TUTORIAL_NAME`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `TUTORIAL_NAME`: Name of the tutorial to close
   * Must only contain alphanumeric characters
-
+</div>
+{% endraw %}
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
-Only an existing tutorial can be closed. Use [createtut](#22-creating-a-new-tutorial) to create new tutorials, or check the spelling again.
+Only an existing tutorial can be closed. Use [createtut](#32-creating-a-new-tutorial) to create new tutorials, or check the spelling again.
 </div>
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
@@ -268,13 +384,21 @@ If there are students in the tutorial to be closed, closing the tutorial will RE
 Example usages
 * `closetut tut/physics`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Closing a tutorial that does not exist
     * *Error Message: No tutorial class with the name TUTORIAL_NAME  is found.*
-* Format errors, check [here](#11-format-errors)
+* Format errors, check [here](#12-format-errors)
+</div>
+{% endraw %}
 
+#### **6.3 Clearing all entries**
 
+*Deleting all tutorial and student records*
+
+Command:  `clear`
 
 
 
@@ -313,10 +437,10 @@ Format: `exit`
 
 | Error Message | Most Likely Cause |
 | :---- | :---- |
-| *Unknown Command….* | Command misspelled Command not available in the current release |
-| *Invalid Command format…* | Command word is correct but the format entered is wrong Index is missing, or is a negative number Prefix is missing or misspelt Unidentified inputs after the command word and before the first prefix |
-| *The student’s index provided is invalid…* | Index provided is out of range for current displayed list |
-| *Multiple values specified for the following single-valued field(s)...* | Duplicated prefix usage used when it is not allowed |
+| *Unknown Command….* | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul> |
+| *Invalid Command format…* | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li></ul></ul>|
+| *The student’s index provided is invalid…* | <ul><li>Index provided is out of range for the current displayed list</li></ul> |
+| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul> |
 
 ---
 
