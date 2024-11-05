@@ -86,6 +86,20 @@ public class Event {
                 && otherEvent.getName().equals(getName());
     }
 
+    /**
+     * Returns true if both events have the same Unique Id.
+     * @param otherEvent
+     * @return boolean
+     */
+    public boolean isSameId(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getId().equals(getId());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
