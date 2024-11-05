@@ -15,7 +15,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
-import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Panel containing the list of persons.
