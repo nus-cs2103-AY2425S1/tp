@@ -12,8 +12,8 @@ import java.time.format.DateTimeParseException;
  * Represents a Person's insurance payment in the address book.
  */
 public class Payment {
-    public static final String MESSAGE_CONSTRAINTS = "Insurance payments should be in the format 'yyyy-MM-dd amount', "
-            + "where amount is a positive number with up to two decimal places.";
+    public static final String MESSAGE_CONSTRAINTS = "Insurance payments should be in the format 'yyyy-MM-dd amount' "
+            + "\nAmount is a positive number with up to two decimal places!";
 
     /*
      * The insurance payment should be in the format 'yyyy-MM-dd amount'.
@@ -50,9 +50,6 @@ public class Payment {
         }
     }
 
-
-
-
     /**
      * Returns true if a given string is a valid insurance payment.
      */
@@ -76,6 +73,7 @@ public class Payment {
             return false;
         }
     }
+
     /**
      * Updates the payment due date of the insurance payment.
      * @param policy

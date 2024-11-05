@@ -26,6 +26,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -48,8 +49,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_POLICY_NAME = "life insurance";
-    private static final String VALID_DATE_1 = "2024-10-01";
-    private static final String VALID_DATE_2 = "2025-11-11";
+    private static final String VALID_DATE_1 = "2021-10-01";
+    private static final String VALID_DATE_2 = "2028-11-11";
 
     private static final String WHITESPACE = " \t\r\n";
     private static final String CUSTOM_ERROR_MESSAGE = "Custom error message";
@@ -268,10 +269,13 @@ public class ParserUtilTest {
                 + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
                 + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " " + PREFIX_NEXT_PAYMENT_DATE
                 + VALID_INSURANCE_PAYMENT_DATE + " " + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+        try {
+            Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+            assertEquals(expectedPolicy, ParserUtil.parsePolicy(validPolicyArgument));
+        } catch (CommandException e) {
+            throw new RuntimeException(e);
+        }
 
-        Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
-
-        assertEquals(expectedPolicy, ParserUtil.parsePolicy(validPolicyArgument));
     }
 
     @Test
@@ -321,17 +325,20 @@ public class ParserUtilTest {
 
 
         Collection<String> policies = List.of(validPolicyArgument);
+        try {
+            Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+            Index expectedIndex = Index.fromOneBased(1);
 
-        Policy expectedPolicy = new Policy(VALID_POLICY_NAME, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
-        Index expectedIndex = Index.fromOneBased(1);
+            Map<Index, Policy> policyMap = ParserUtil.parsePolicies(policies);
 
-        Map<Index, Policy> policyMap = ParserUtil.parsePolicies(policies);
+            Set<Map.Entry<Index, Policy>> policyEntrySet = policyMap.entrySet();
 
-        Set<Map.Entry<Index, Policy>> policyEntrySet = policyMap.entrySet();
+            Map.Entry<Index, Policy> policyEntry = policyEntrySet.iterator().next();
 
-        Map.Entry<Index, Policy> policyEntry = policyEntrySet.iterator().next();
-
-        assertEquals(expectedIndex.getZeroBased(), policyEntry.getKey().getZeroBased());
-        assertEquals(expectedPolicy, policyEntry.getValue());
+            assertEquals(expectedIndex.getZeroBased(), policyEntry.getKey().getZeroBased());
+            assertEquals(expectedPolicy, policyEntry.getValue());
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
     }
 }

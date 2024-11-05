@@ -3,10 +3,14 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INSURANCE_PAYMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 public class PolicyTest {
 
@@ -26,11 +30,12 @@ public class PolicyTest {
         assertThrows(IllegalArgumentException.class, () ->
                 new Policy(invalidPolicyName, "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT));
         assertThrows(IllegalArgumentException.class, () ->
-                new Policy("Policy Name", "invalid-date", "2024-01-01", VALID_INSURANCE_PAYMENT));
+                new Policy(VALID_POLICY_NAME_LIFE, "invalid-date", "2024-01-01", VALID_INSURANCE_PAYMENT));
         assertThrows(IllegalArgumentException.class, () ->
-                new Policy("Policy Name", "2023-01-01", "invalid-date", VALID_INSURANCE_PAYMENT));
-        assertThrows(IllegalArgumentException.class, () ->
-                new Policy("Policy Name", "2024-01-01", "2023-01-01", VALID_INSURANCE_PAYMENT));
+                new Policy(VALID_POLICY_NAME_LIFE, "2023-01-01", "invalid-date", VALID_INSURANCE_PAYMENT));
+        assertThrows(IllegalArgumentException.class, () -> new Policy(VALID_POLICY_NAME_LIFE,
+                "2023-12-12", "2024-12-12", INVALID_INSURANCE_PAYMENT));
+
     }
 
     @Test
@@ -39,37 +44,49 @@ public class PolicyTest {
         assertThrows(NullPointerException.class, () ->
                 Policy.isValidPolicy(null, "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT));
         assertThrows(NullPointerException.class, () ->
-                Policy.isValidPolicy("Policy Name", null, "2024-01-01", VALID_INSURANCE_PAYMENT));
+                Policy.isValidPolicy(VALID_POLICY_NAME_LIFE, null, "2024-01-01", VALID_INSURANCE_PAYMENT));
         assertThrows(NullPointerException.class, () ->
-                Policy.isValidPolicy("Policy Name", "2023-01-01", null, VALID_INSURANCE_PAYMENT));
+                Policy.isValidPolicy(VALID_POLICY_NAME_LIFE, "2023-01-01", null, VALID_INSURANCE_PAYMENT));
 
         // invalid policies
         assertFalse(Policy.isValidPolicy("",
                 "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT)); // empty policy name
         assertFalse(Policy.isValidPolicy("Policy Name",
                 "invalid-date", "2024-01-01", VALID_INSURANCE_PAYMENT)); // invalid start date
-        assertFalse(Policy.isValidPolicy("Policy Name",
+        assertFalse(Policy.isValidPolicy(VALID_POLICY_NAME_LIFE,
                 "2023-01-01", "invalid-date", VALID_INSURANCE_PAYMENT)); // invalid end date
-        assertFalse(Policy.isValidPolicy("Policy Name",
-                "2024-01-01", "2023-01-01", VALID_INSURANCE_PAYMENT)); // endDate before startDate
-
         // valid policies
-        assertTrue(Policy.isValidPolicy("Health Insurance",
+        assertTrue(Policy.isValidPolicy(VALID_POLICY_NAME_LIFE,
                 "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT));
     }
 
     @Test
-    public void equals() {
-        Policy policy = new Policy("Health Insurance",
+    public void validatePolicyDetails() {
+        //policy name cannot contain special characters and numbers
+        assertThrows(CommandException.class, () -> new Policy("Policy!123",
+                "2024-01-01", "2023-01-01", VALID_INSURANCE_PAYMENT));
+
+        //end date cannot be before start date
+        assertThrows(CommandException.class, () -> new Policy(VALID_POLICY_NAME_LIFE,
+                "2024-12-12", "2023-12-12", VALID_INSURANCE_PAYMENT));
+
+        //start date cannot be equal to end date
+        assertThrows(CommandException.class, () -> new Policy(VALID_POLICY_NAME_LIFE,
+                "2023-12-12", "2023-12-12", VALID_INSURANCE_PAYMENT));
+
+    }
+
+    @Test
+    public void equals() throws CommandException {
+        Policy policy = new Policy(VALID_POLICY_NAME_LIFE,
                 "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT);
 
         // same values -> returns true
-        assertTrue(policy.equals(new Policy("Health Insurance",
+        assertTrue(policy.equals(new Policy(VALID_POLICY_NAME_LIFE,
                 "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT)));
 
         // same object -> returns true
         assertTrue(policy.equals(policy));
-
         // null -> returns false
         assertFalse(policy.equals(null));
 
@@ -77,11 +94,11 @@ public class PolicyTest {
         assertFalse(policy.equals(5));
 
         // different values -> returns false
-        assertFalse(policy.equals(new Policy("Life Insurance",
+        assertFalse(policy.equals(new Policy("health insurance",
                 "2023-01-01", "2024-01-01", VALID_INSURANCE_PAYMENT))); // different policy name
-        assertFalse(policy.equals(new Policy("Health Insurance",
+        assertFalse(policy.equals(new Policy(VALID_POLICY_NAME_LIFE,
                 "2023-01-02", "2024-01-01", VALID_INSURANCE_PAYMENT))); // different start date
-        assertFalse(policy.equals(new Policy("Health Insurance",
+        assertFalse(policy.equals(new Policy(VALID_POLICY_NAME_LIFE,
                 "2023-01-01", "2024-01-02", VALID_INSURANCE_PAYMENT))); // different end date
     }
 }

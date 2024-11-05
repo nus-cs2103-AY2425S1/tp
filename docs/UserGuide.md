@@ -102,7 +102,7 @@ AgentConnect offers a range of features to help you manage your clients effectiv
 
 ---
 
-### Viewing help : `help`
+### Viewing Help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -123,14 +123,14 @@ Format: `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<ADDRESS> b/<BIRTH
   - Appointment should be in `yyyy-mm-dd HH:mm`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
+* `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
+* `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
 
 ---
 
 ### Assigning a policy : `assign`
 
-Assign policies to a client.
+Assigns policies to a client.
 
 Format: `assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>`
 - **Parameters**:
@@ -221,7 +221,7 @@ Examples:
 
 ### Searching appointments : `search a/`
 
-Find clients with appointments on a specific date or within a date range.
+Finds clients with appointments on a specific date or within a date range.
 
 Format: `search a/ <DATETIME>` | `search a/ <DATETIME> to  <DATETIME>`
 - **Parameters**:
@@ -251,7 +251,7 @@ Examples:
 
 ### Searching birthdays : `search b/`
 
-Find clients who have birthdays on a specific date or within a date range.
+Finds clients who have birthdays on a specific date or within a date range.
 
 Format: `search b/ <DATE>` | `search a/ <DATE> to <DATE>`
 
@@ -282,7 +282,7 @@ Examples:
 
 ### Searching policy : `search p/`
 
-Find clients who have currently owns a certain policy.
+Finds clients who have currently owns a certain policy.
 
 Format: `search p/ <POLICY_NAME>`
 
@@ -306,15 +306,16 @@ Examples:
 
 ### Sorting clients : `sort`
 
-Organize your client list based on different criteria for easier management and viewing.
+Organizes your client list based on different criteria for easier management and viewing.
 
 Format: `sort <CRITERIA> <ORDER>`
 
 - **Parameters**:
   - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
-      - `name`: Sort by client's name (A-Z).
-      - `birthday`: Sort by client's birthday (earliest to latest).
-      - `appointment`: Sort by upcoming appointment dates (soonest to latest).
+      - `n/`: Sort by client's name (A-Z by default).
+      - `b/`: Sort by client's birthday (earliest to latest by default).
+      - `appt`: Sort by upcoming appointment dates (soonest to latest by default).
+      - `paydate`: Sort by policy payment due date (earliest to latest by default).
   - `ORDER`: The direction of sort. Available order includes:
     - `asc`: Sort in ascending order
     - `dsc`: Sort in descending order
@@ -328,31 +329,66 @@ Format: `sort <CRITERIA> <ORDER>`
 Examples:
   - **Sort by Name in Ascending Order**:
     ```
-    sort name asc
+    sort n/ asc
     ```
     *Sorts the client list alphabetically by each client's name.*
 
     ![Sort by Name](images/sortnameUI.png)
 
-  - **Sort by Birthday**:
+  - **Sort by Birthday in Descending Order**:
     ```
-    sort birthday dsc
+    sort b/ dsc
     ```
-    *Sorts the client list from the earliest to the latest birthday.*
+    *Sorts the client list from the latest to the earliest birthday.*
 
     ![Sort by Birthday](images/sortUI.png)
 
-  - **Sort by Appointment**:
+  - **Sort by Appointment Date in Ascending Order**:
     ```
-    sort appointment_date asc
+    sort appt/ asc
     ```
-    *Sorts the client list based on the earliest upcoming appointments.*
+    *Sorts the client list based on the earliest to the latest upcoming appointments.*
 
-    ![Sort by Appointment](images/sortapptUI.png)
+    ![Sort by Appointment Date](images/sortapptUI.png)
+
+  - **Sort by Policy Payment Due Date in Ascending Order**:
+  ```
+  sort paydate/ asc
+  ```
+  *Sorts the client list based on the earliest to the latest payment due date of the policy.*
+
+  ![Sort by Policy Payment Due Date](images/sortpaydateUI.png)
+
+---
+
+### Marking a policy payment installment as paid : `paid`
+
+Marks a policy payment installment as paid for a client.
+
+Format: `paid <INDEX> pon/<POLICY_NAME>`
+- **Parameters**:
+  - `INDEX`: The index of the client in the client list.
+  - `POLICY_NAME`: The name of the policy to be marked as paid.
+  - The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+  - The policy name is case-sensitive and must be an exact match.
+  
+- **Usage**:
+  - **Updating Payment Due Date**: The payment due date of the policy will be updated to the next scheduled date (ie. one year later).
+  - **Setting Amount Due to 0**: The amount due will be set to 0 once the final installment of the insurance payment is completed.
+
+Examples:
+  - **Marking a Policy Payment Installment as Paid**:
+  ```
+  paid 1 pon/PolicyOne
+  ```
+  *Marks the policy named "PolicyOne" as paid for the client at index 1.*
+    
+  ![Marking a Policy Payment Installment as Paid](images/paidUI.png)
 
 ---
 
 ### Deleting a client or policy : `delete`
+
 #### Client:
 Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` to confirm deletion.
 
@@ -370,7 +406,6 @@ Examples:
   ![result for 'delete david li'](images/deleteUI.png)
 
 #### Policy:
-
 Deletes the specified policy from the specified client using INDEX of the client and policy.
 
 Format: `delete <INDEX> po/<POLICY_INDEX>`

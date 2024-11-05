@@ -132,9 +132,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withPolicies(String... policies) {
         this.policies = new ArrayList<>();
-        for (String policy : policies) {
-            this.policies.add(new Policy("Policy", "2022-12-12",
-                    "2023-12-12", "2022-12-12 300"));
+        try {
+            for (String policy : policies) {
+                this.policies.add(new Policy("Policy", "2022-12-12",
+                        "2023-12-12", "2022-12-12 300"));
+            }
+            return this;
+        } catch (seedu.address.logic.commands.exceptions.CommandException e) {
+            e.printStackTrace();
         }
         return this;
     }
