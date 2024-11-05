@@ -61,6 +61,21 @@ public class EventTest {
     }
 
     @Test
+    public void isSameEventId_sameEvent_returnsTrue() {
+        assertTrue(WEDDING.isSameId(WEDDING));
+    }
+
+    @Test
+    public void isSameEventId_differentEvent_returnsFalse() {
+        assertFalse(WEDDING.isSameId(BIRTHDAY));
+    }
+
+    @Test
+    public void isSameEventId_nullEvent_returnsFalse() {
+        assertFalse(WEDDING.isSameId(null));
+    }
+
+    @Test
     public void isSameEvent_eventWithSameIdentity_returnsTrue() {
         Event similarWedding = new EventBuilder(WEDDING).withDate(VALID_DATE_BIRTHDAY).build();
         assertTrue(WEDDING.isSameEvent(similarWedding));
@@ -136,4 +151,3 @@ public class EventTest {
         assertEquals(expected, event.toString());
     }
 }
-

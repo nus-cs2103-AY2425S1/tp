@@ -19,10 +19,10 @@ import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.ui.UiState;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteVendorCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteVendorCommand}.
  */
 public class DeleteVendorCommandTest {
 
@@ -92,6 +92,20 @@ public class DeleteVendorCommandTest {
                 Messages.format(vendorToDelete));
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_viewedVendor_changeUiState() {
+        Vendor vendorToDelete = model.getFilteredVendorList().get(INDEX_FIRST_VENDOR.getZeroBased());
+        model.viewVendor(vendorToDelete);
+        DeleteVendorCommand deleteCommand = new DeleteVendorCommand(INDEX_FIRST_VENDOR);
+
+        try {
+            deleteCommand.execute(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertFalse(model.getUiState().get() == UiState.VENDOR_DETAILS);
     }
 
     @Test

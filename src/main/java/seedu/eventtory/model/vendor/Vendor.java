@@ -105,6 +105,16 @@ public class Vendor {
     }
 
     /**
+     * Returns true if both vendors have the same Unique Id.
+     * @param otherVendor
+     * @return boolean
+     */
+    public boolean isSameId(Vendor otherVendor) {
+        return otherVendor != null
+                && otherVendor.getId().equals(getId());
+    }
+
+    /**
      * Returns true if both vendors have the same identity and data fields.
      * This defines a stronger notion of equality between two vendors.
      */

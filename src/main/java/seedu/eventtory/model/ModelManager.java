@@ -143,6 +143,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteVendor(Vendor target) throws AssociationDeleteException {
         eventTory.removeVendor(target);
+        // Only reset view if the deleted vendor is the currently viewed vendor and
+        // deletion is successful (error not thrown)
+        if (currentUiState.get().isVendorDetails() && target.isSameId(selectedVendor.getValue())) {
+            selectedVendor.setValue(null);
+            currentUiState.setValue(UiState.DEFAULT);
+        }
     }
 
     @Override
@@ -167,6 +173,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) throws AssociationDeleteException {
         eventTory.removeEvent(target);
+        // Only reset view if the deleted event is the currently viewed event and
+        // deletion is successful (error not thrown)
+        if (currentUiState.get().isEventDetails() && target.isSameId(selectedEvent.getValue())) {
+            selectedEvent.setValue(null);
+            currentUiState.setValue(UiState.DEFAULT);
+        }
     }
 
     @Override
@@ -294,7 +306,7 @@ public class ModelManager implements Model {
     }
 
     private Predicate<Vendor> evaluateVendorPredicate() {
-        if (currentUiState.getValue() == UiState.EVENT_DETAILS) {
+        if (currentUiState.getValue().isEventDetails()) {
             Predicate<Vendor> notAssociatedPredicate = vendor -> {
                 Event event = selectedEvent.getValue();
                 return event != null && !isVendorAssignedToEvent(vendor, event);
@@ -305,7 +317,7 @@ public class ModelManager implements Model {
     }
 
     private Predicate<Event> evaluateEventPredicate() {
-        if (currentUiState.getValue() == UiState.VENDOR_DETAILS) {
+        if (currentUiState.getValue().isVendorDetails()) {
             Predicate<Event> notAssociatedPredicate = event -> {
                 Vendor vendor = selectedVendor.getValue();
                 return vendor != null && !isVendorAssignedToEvent(vendor, event);
