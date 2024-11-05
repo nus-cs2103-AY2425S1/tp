@@ -256,24 +256,118 @@ public class ChatWindowUiTest extends ApplicationTest {
 
     @Test
     @Order(20)
+    public void getResponse_addBuyersToListing_success() {
+        assertEquals("This is how to add buyers to a listing!\n"
+                        + "addBuyersToListing n/{listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
+                        + "Example: addBuyersToListing n/Warton House buyer/Alice buyer/Bob\n"
+                        + "Adds the specified buyers to the listing identified by its name.",
+                chatWindow.getResponse("add buyer to listing"));
+    }
+
+    @Test
+    @Order(21)
+    public void getResponse_addListing_success() {
+        assertEquals("This is how to add a listing!\n"
+                        + "listing n/{name} p/{price} a/{area} addr/{address} r/{region} seller/{seller} "
+                        + "(Optional: buyer/{buyer1} buyer/{buyer2} ...)",
+                chatWindow.getResponse("add listing"));
+    }
+
+    @Test
+    @Order(22)
+    public void getResponse_editListing_success() {
+        assertEquals("This is how to edit a listing!\n"
+                        + "editListing {listing name} [n/{listing name} p/{price}] [a/{area}]"
+                        + " [addr/{address}] [r/{region}]\n"
+                        + "Note: At least one field must be specified to edit a listing.",
+                chatWindow.getResponse("edit listing"));
+    }
+
+    @Test
+    @Order(23)
+    public void getResponse_deleteListing_success() {
+        assertEquals("This is how to delete a listing!\n"
+                        + "deleteListing n/{name}",
+                chatWindow.getResponse("delete listing"));
+    }
+
+    @Test
+    @Order(24)
+    public void getResponse_editClient_success() {
+        assertEquals("This is how to edit a client!\n"
+                        + "editClient {name} [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
+                        + "Note: At least one field must be specified to edit a client.",
+                chatWindow.getResponse("edit client"));
+    }
+
+    @Test
+    @Order(25)
+    public void getResponse_showClient_success() {
+        assertEquals("This is how to show your clients!\n"
+                        + "showclients\n"
+                        + "Displays all clients in your list. If there are no clients, it will inform you accordingly.",
+                chatWindow.getResponse("show client"));
+    }
+
+    @Test
+    @Order(26)
+    public void getResponse_showListing_success() {
+        assertEquals("This is how to show your listings!\n"
+                        + "showlistings\n"
+                        + "Displays all listings in your system. If there are no listings, it will notify you "
+                        + "accordingly.",
+                chatWindow.getResponse("show listing"));
+    }
+
+    @Test
+    @Order(27)
+    public void getResponse_todaysAppointments_success() {
+        assertEquals("This is how to check today's appointments!\n"
+                        + "Command: today\n"
+                        + "Usage: Shows all clients with appointments scheduled for today.\n"
+                        + "For general listings, you may consider:\n"
+                        + "• showlistings - Displays all listings\n"
+                        + "• showclients - Displays all clients.",
+                chatWindow.getResponse("today's appointments"));
+    }
+
+    @Test
+    @Order(28)
+    public void getResponse_showAmbiguous_success() {
+        assertEquals("It seems you want to show something.\n"
+                        + "Can you specify which you are referring to?\n"
+                        + "• Show clients-showclients\n"
+                        + "• Show listings-showlistings\n"
+                        + "• Show today's appointments-today\n",
+                chatWindow.getResponse("show"));
+    }
+
+    @Test
+    @Order(29)
+    public void getResponse_editAmbiguous_success() {
+        assertEquals("It seems you want to edit something.\n"
+                        + "Can you specify which you are referring to?\n"
+                        + "• Editing a client profile (buyer/seller)\n"
+                        + "• Editing a listing",
+                chatWindow.getResponse("edit"));
+    }
+
+    @Test
+    @Order(30)
     public void handleSendButtonAction_exitOnGoodbye_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);
         robot.write("goodbye");
         robot.type(KeyCode.ENTER);
         waitFor(Duration.seconds(1));
-
         String expectedGoodbyeResponse = "You: goodbye\n"
                 + "Assistant: Goodbye! Have a great day!";
         assertEquals(expectedGoodbyeResponse, chatArea.getText().trim());
-
         assertTrue(isChatWindowClosed(), "The application did not exit as expected.");
     }
-
     private boolean isChatWindowClosed() {
         return FxToolkit.isFXApplicationThreadRunning();
     }
-
     private void waitFor(Duration duration) {
         try {
             Thread.sleep((long) duration.toMillis());
