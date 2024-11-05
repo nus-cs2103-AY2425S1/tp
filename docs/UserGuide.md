@@ -60,7 +60,7 @@ Sellsavvy is a **desktop app for managing contacts, optimized for use via a Comm
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listcustomer`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -326,12 +326,13 @@ _Details coming soon ..._
 | **Delete a person**                   | `deletecustomer`, `deletec` | `deletecustomer INDEX`<br> e.g., `deletecustomer 3`                                                                                                                                 |
 | **Edit a person**                     | `editcustomer`, `editc`     | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                         |
 | **Find person(s)**                    | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
-| **List all persons**                  | `listcustomer`              |                                                                                                                                                                                     |
+| **List all persons**                  | `listcustomer`, `listc`     |                                                                                                                                                                                     |
 | **Add an order**                      | `addorder`, `addo`          | `addorder INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                           |
 | **List all orders**                   | `listorder`, `listo`        | `listorder INDEX`<br> e.g. `listorder 3`                                                                                                                                            |
 | **Delete an order**                   | `deleteorder`, `deleteo`    | `deleteorder ORDER_INDEX`<br> e.g. `deleteorder 2`                                                                                                                                  |
 | **Edit an order**                     | `editorder`, `edito`        | `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> e.g. `editorder 1 i/Light bulb d/21-11-2025`                                                                            |
 | **Mark an order as completed**        | `markorder`, `marko`        | `markorder ORDER_INDEX`<br> e.g. `markorder 2`                                                                                                                                      |                                                                                                                                                                                                                                           
 | **Revert an order to pending status** | `unmarkorder`, `unmarko`    | `unmarkorder ORDER_INDEX`<br> e.g., `unmarkorder 2`                                                                                                                                 |
-| **Filter orders by status**           | `filterorder`, `filtero`     | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
+| **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
 | **Help**                              | `help`                      |                                                                                                                                                                                     |
+| **Exit**                              | `exit`                       |                                                                                                                                                                                     |
