@@ -78,7 +78,7 @@ public class TutorialTest {
 
     @Test
     public void checkToString() {
-        assertEquals(TUTORIAL_SAMPLE.toString(), TUT_NAME + ": Tutorial " + TUTORIAL_ID);
+        assertEquals(TUTORIAL_SAMPLE.toString(), TUT_NAME + "; Tutorial ID: " + TUTORIAL_ID);
     }
 
     @Test

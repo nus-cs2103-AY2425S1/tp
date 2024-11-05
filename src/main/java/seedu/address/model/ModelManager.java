@@ -176,7 +176,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteTutorial(Tutorial tutorial) {
+    public String deleteTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
         tutorials.getTutorials()
                 .stream()
@@ -189,7 +189,7 @@ public class ModelManager implements Model {
                             Student editedStudent = createEditedStudent(s, editStudentDescriptor);
                             addressBook.setStudent(s, editedStudent);
                         }));
-        tutorials.deleteTutorial(tutorial);
+        return tutorials.deleteTutorial(tutorial);
     }
 
     private static Student createEditedStudent(Student studentToEdit,

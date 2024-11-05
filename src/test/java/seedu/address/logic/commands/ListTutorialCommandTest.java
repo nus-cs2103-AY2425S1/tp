@@ -31,9 +31,9 @@ public class ListTutorialCommandTest {
 
         // Update the expected message to match the actual output from the model
         String expectedMessage = "All current tutorials: \n"
-                + "1. TutorialOne: Tutorial T1000\n"
-                + "2. TutorialTwo: Tutorial T1001\n"
-                + "3. TutorialThree: Tutorial T1002\n";
+                + "1. TutorialOne; Tutorial ID: T1000\n"
+                + "2. TutorialTwo; Tutorial ID: T1001\n"
+                + "3. TutorialThree; Tutorial ID: T1002\n";
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }

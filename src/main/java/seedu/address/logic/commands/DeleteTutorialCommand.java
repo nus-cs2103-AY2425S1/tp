@@ -36,9 +36,9 @@ public class DeleteTutorialCommand extends Command {
             throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND);
         }
 
-        model.deleteTutorial(tutorial);
+        String res = model.deleteTutorial(tutorial);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, tutorial.getTutorialId()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, res));
     }
 
     @Override
