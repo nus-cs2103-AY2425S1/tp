@@ -59,7 +59,7 @@ public class AssignmentName {
             return false;
         }
 
-        return assignmentName.equals(otherName.assignmentName);
+        return assignmentName.equalsIgnoreCase(otherName.assignmentName);
     }
 
     @Override
