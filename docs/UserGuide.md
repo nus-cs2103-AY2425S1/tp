@@ -294,8 +294,7 @@ Adds an appointment to the DocTrack.
 
 <box type="tip" seamless>
 
-**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, it will be displayed as `Month Date, Year, Time`. For example, `2024-12-10 12:30` will be displayed as `December 10, 2024, 12:30 
-pm`.
+**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, it will be displayed as `Month Date, Year, Time`. For example, `2024-12-10 12:30` will be displayed as `December 10, 2024, 12:30 PM`.
 </box>
 
 <br>

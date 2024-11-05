@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -45,7 +46,7 @@ public class DateUtil {
      * @return a formatted string.
      */
     public static String formatDateTimeForDisplay(LocalDateTime appointmentDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a").withLocale(Locale.US);
         return appointmentDateTime.format(formatter);
     }
 }
