@@ -76,7 +76,7 @@ public class KeyBindController {
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
 
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event ->
-                    handleKeyEvent(event, focusPersonListView, redoCommand));
+                    handleKeyEvent(event, focusPersonListView));
 
         personListView.addEventFilter(KeyEvent.KEY_PRESSED, event ->
                 handleKeyEvent(event, focusCommandBox, undoCommand, redoCommand));
