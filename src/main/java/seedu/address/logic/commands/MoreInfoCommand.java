@@ -36,7 +36,7 @@ public class MoreInfoCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Open a window to more information "
             + "about the client.\n"
-            + "Example: " + COMMAND_WORD + " n/Amy";
+            + "Example: " + COMMAND_WORD + " Amy";
 
     public static final String SHOWING_MORE_INFO_MESSAGE = "Opened window for client's information.";
 

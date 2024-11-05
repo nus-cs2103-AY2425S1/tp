@@ -49,7 +49,7 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
     public void openMoreInfoWindowUponCommandAndCloses_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn("#commandBoxPlaceholder");
-        robot.write("moreinfo n/" + name);
+        robot.write("moreinfo " + name);
         robot.type(KeyCode.ENTER);
         assertTrue(robot.lookup("#remarkInput").tryQuery().isPresent(),
                 "Command opens more info window successfully");
@@ -62,7 +62,7 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
     public void handleRemarkInputCorrectly_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn("#commandBoxPlaceholder");
-        robot.write("moreinfo n/" + name);
+        robot.write("moreinfo " + name);
         robot.type(KeyCode.ENTER);
         robot.clickOn("#remarkInput");
         robot.write("Test");

@@ -27,12 +27,12 @@ public class AppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to a client "
             + "identified by their distinct client name. "
             + "Existing appointment will be overwritten with the new appointment. \n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + " 20/12/2024 "
+            + "Parameters: NAME (must be an existing name in address book) "
+            + PREFIX_DATE + " [DATE in ddMMyy] "
             + PREFIX_FROM + " [FROM] "
             + PREFIX_TO + " [TO]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "d/ 20/12/2024 fr/ 0800 to/ 1000";
+            + "d/ 201224 fr/ 0800 to/ 1000";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Appointment scheduled for %1$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment scheduled for %1$s";

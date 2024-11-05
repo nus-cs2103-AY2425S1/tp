@@ -17,11 +17,11 @@ import seedu.address.model.person.Person;
  */
 public class AddBuyersToListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "addBuyersToListing";
+    public static final String COMMAND_WORD = "addlistingbuyers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds buyers to the listing identified by its name. "
-            + "Parameters: n/LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES]...\n"
-            + "Example: " + COMMAND_WORD + " n/Warton House buyer/Alice buyer/Bob";
+            + "Parameters: LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES]...\n"
+            + "Example: " + COMMAND_WORD + " Warton House buyer/Alice buyer/Bob";
 
     public static final String MESSAGE_ADD_BUYERS_SUCCESS = "Buyers added to listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
