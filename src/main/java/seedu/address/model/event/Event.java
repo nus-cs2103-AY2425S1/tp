@@ -8,16 +8,9 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
-import seedu.address.model.role.Attendee;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
-import seedu.address.model.role.Sponsor;
-import seedu.address.model.role.Vendor;
-import seedu.address.model.role.Volunteer;
 import seedu.address.model.role.exceptions.InvalidRoleException;
-
-
-
 
 
 /**
@@ -310,22 +303,5 @@ public class Event {
     public boolean isPersonInEvent(Person person) {
         return attendees.contains(person) || volunteers.contains(person)
                 || sponsors.contains(person) || vendors.contains(person);
-    }
-
-    public HashSet<Role> makeRoles(Person person) {
-        HashSet<Role> roles = new HashSet<>();
-        if (this.attendees.contains(person)) {
-            roles.add(new Attendee());
-        }
-        if (this.volunteers.contains(person)) {
-            roles.add(new Volunteer());
-        }
-        if (this.vendors.contains(person)) {
-            roles.add(new Vendor());
-        }
-        if (this.sponsors.contains(person)) {
-            roles.add(new Sponsor());
-        }
-        return roles;
     }
 }
