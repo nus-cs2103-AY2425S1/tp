@@ -3,6 +3,8 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigInteger;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Address;
@@ -15,8 +17,6 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
-
-import java.math.BigInteger;
 
 /**
  * Jackson-friendly version of {@link Client}.

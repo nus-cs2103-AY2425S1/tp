@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Income;
 import seedu.address.model.util.IncomeComparisonOperator;
 
 /**
