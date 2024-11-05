@@ -289,7 +289,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
 | `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -366,11 +365,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
     * 2a2. User enters command with new index.<br>
   Steps 2a1-2a2 are repeated until index entered is correct.<br>
-  Use case resumes from step 3.
+  Use case resumes from step 3.<br><br>
 
 
 * 2b. System detects error in format of entered command.
@@ -412,8 +411,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
-* Use case resumes from step 1.
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.<br>
+  Use case resumes from step 1.<br><br>
 
 * 2a. System detects error in entered command.
     * 2a1. System displays error message and does not clear command line.
@@ -437,15 +436,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System cannot find the specified student.
     * 1a1. User <ins>adds the student to the system (UC01)<ins>.<br>
-  Use case resumes from step 1.
+  Use case resumes from step 1.<br><br>
 
 * 2a. System detects error in entered command.
     * 2a1. System displays error message and does not clear command line.
     * 2a2. User enters new command.<br>
   Steps 2a1-2a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 3.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -637,4 +634,3 @@ testers are expected to do more *exploratory* testing.
    e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
-1. _{ more test cases …​ }_
