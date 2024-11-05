@@ -152,7 +152,7 @@ public class AddressBookParser {
         case SearchModeSearchCommand.COMMAND_WORD:
             return new SearchModeSearchCommandParser().parse(arguments);
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\nUse only search or exitsearch");
         }
     }
 
