@@ -6,9 +6,14 @@
 
 # Dream Day Designer User Guide
 
-Dream Day Designer (DDD) is a **desktop app for wedding planners to keep track of clients' requirements and vendor services, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, DDD can get your contact management tasks done faster than traditional GUI apps.
+Are you a freelance **wedding planner**? Then DDD is just the right tool for you! Managing hundreds of clients and vendors can be troublesome, and Dream Day Designer (DDD) is our answer to your problems.
+
+DDD is a desktop app for **wedding planners** to keep track of their **clients**, **vendors** and **events**, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+DDD is tailored specifically to the needs of **wedding planners**, and is designed to streamline your workflows. If you can type fast, DDD can even help you manage your contacts faster than traditional GUI apps! Furthermore, DDD offers features designed to alleviate the hassle of managing disparate sets of contacts!
 
 <!-- * Table of Contents -->
+<page-nav />
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -46,6 +51,55 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Introduction
+
+Before diving deeper into DDD's features, it will be helpful to explain a bit more about what DDD is trying to achieve. In short, DDD offers a comprehensive way of managing your contacts. As an extension, contacts can be also be tied to events.
+
+### Contacts
+
+Each contact is a record of fields associated with a particular person/company. For each contact, DDD will track the following fields:
+
+- Name
+- Phone number
+- Email
+- Address
+
+DDD also allows you to tag contacts with your own tags. This is quite handy if you want to organize your contacts. For example, when sourcing suitable vendors for an upcoming wedding, you might want to keep track of which vendors are more budget-friendly:
+
+![Budget Tag Demo](images/budgetTagDemo.png)
+
+### Clients
+
+`Client` entries represent a generic contact with no additional fields.
+
+### Vendors
+
+`Vendor` entries contain an extra `service` field. DDD does not currently support vendors providing multiple services.
+
+### Events
+
+`Event` entries represent wedding events. DDD will track the following fields:
+
+- Name
+- Description
+- Date
+- Relevant clients
+- Relevant vendors
+
+Events allow you to group contacts together in a sensible and seamless manner like so:
+
+![Event Demo](images/eventDemo.png)
+
+### Use Case
+
+Here's how you might use our app:
+
+1. You have a new client who has enlisted your help to plan their big day.
+2. You've settled most of the details, but you haven't found a suitable catering service yet.
+3. Use DDD to search your existing catering vendors!
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 **Notes about the command format:**<br>
@@ -55,8 +109,8 @@ Documentation style conventions are based on [Google's guide](https://developers
 * Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
   e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
 
-* `-TYPE_FLAG` can be either `-v` or `-c` or `-e` for commands allowing specifying of type.
-  e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all vendors with `-v` or clients with `-c`
+* `-TYPE_FLAG` can be either `-c`, `v` or `-e` for commands allowing specifying of type.
+  e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all clients with `-c` or vendor with `-v`
 or events with `-e`.
 
 * Parameters wrapped in **square brackets** are optional arguments.<br>
@@ -65,7 +119,7 @@ or events with `-e`.
 * Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
   e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
 
-* `WEDDING_DATE` parameter will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
+* `d/DATE` parameters will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
   e.g. `MM/dd/yyyy`: 10/13/2024; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -258,6 +312,18 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 ## FAQ
 
+**Q**: I accidentally deleted a contact. Is there an undo feature?<br>
+**A**: Nope. Unforunately, undo has not been implemented.
+
+**Q**: How do I edit events?<br>
+**A**: Unforunately, editing events has not been implemented. You will have to delete the existing event and create a new one with your desired details.
+
+**Q**: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
+**A**: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provde 1 single service is so that searches via the `list` command can be more precise.
+
+**Q**: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
+**A**: Yes! While DDD is targetted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
 
@@ -279,10 +345,10 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 | **Create Event**  | `add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]` | `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`                    |
 | **Clear**         | `clear`                                                                                            | `clear`                                                                                     |
 | **Delete**        | `delete INDEX`                                                                                     | `delete 1`                                                                                  |
+| **List Contacts** | `list`                                                                                             | `list`                                                                                      |
 | **List Clients**  | `list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]`                    | `list -c n/Jane`                                                                            |
 | **List Vendors**  | `list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]`        | `list -v s/catering`                                                                        |
 | **List Events**   | `list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]`                                            | `list -e des/wedding`                                                                       |
-| **List Contacts** | `list`                                                                                             | `list`                                                                                      |
 | **Edit by Index** | `edit INDEX [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`                      | `edit 1 p/91234567`                                                                         |
 | **Edit by ID**    | `edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`                      | `edit id/0 p/91234567 e/johndoe@example.com`                                                |
 | **Help**          | `help`                                                                                             | `help`                                                                                      |
