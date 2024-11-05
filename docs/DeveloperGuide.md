@@ -232,17 +232,18 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ### Edit person feature
 
-#### Implementation
-
 #### Design considerations
+**Aspect: Check if the person with person id exists before editing**
+- This is to ensure no unwanted errors occur while editing the person.
 
 <br>
 
 ### Delete person feature
 
-#### Implementation
-
 #### Design considerations
+**Aspect: deleting a person should also remove appointments linked to the person**
+- Alternative 1 (Current choice): Deleting a person will also remove any appointments with the personId of that person, this is to prevent any appointments with person ids that are non-existent.
+- Alternative 2: We assume the user deletes the appointment, however this is not a good assumption since the user might forget doing so.
 
 <br>
 
@@ -263,18 +264,22 @@ The activity diagram shows the general sequence of steps when a user interacts w
 <br>
 
 ### Clear person feature
-
-#### Implementation
-
 #### Design considerations
+**Aspect: Should `clear persons` also delete appointments**
+- Alternative 1 (Current choice): The `clear persons` command should also clear the appointments else there will be alot of appointments inside the application that are linked to person ids that don't exists. Causing confusion for the users.
+- Alternative 2 : We assume the user will run `clear appt` command after they run `clear persons` to remove the previous appointments
 
 <br>
 
 ### Add appointment feature
-
-#### Implementation
-
 #### Design considerations
+**Aspect: Should we implement as `addAppt` or `add appt`**
+- Alternative 1 (Current choice): Implement the add appointment feature as `add appt`
+  - Pros: Allows us to use the existing infrastructure, just have to add code to detect weather the entity is `appt` or not.
+  - Cons: Adds extra code to the file since more arguments need to be parsed, hence there is a chance of SLAP being violated.
+- Alternative 2: Implement the add appointment function as `addAppt`
+  - Pros: Creates a seperate command, so the implementations of `add person` and `add appointment` will be seperated from each other.
+  - Cons: Implementation requires a different parser, so we will be adding a huge amount of additional lines of code. 
 
 <br>
 
@@ -283,6 +288,8 @@ The activity diagram shows the general sequence of steps when a user interacts w
 #### Implementation
 
 #### Design considerations
+**Aspect: Check if the appointment with appointment id exists before editing**
+- This is to ensure no unwanted errors occur while editing the appointment.
 
 <br>
 
