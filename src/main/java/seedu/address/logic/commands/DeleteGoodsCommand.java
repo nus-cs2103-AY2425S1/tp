@@ -19,6 +19,7 @@ public class DeleteGoodsCommand extends Command {
             + PREFIX_GOODS_NAME + "Calbee Seaweed Chips";
 
     public static final String MESSAGE_SUCCESS = "%1$s has been deleted.";
+    public static final String MESSAGE_FAILURE = "%s does not currently exist.";
 
     private final GoodsName goodsName;
 

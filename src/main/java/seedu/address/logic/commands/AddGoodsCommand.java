@@ -75,8 +75,9 @@ public class AddGoodsCommand extends Command {
             return false;
         }
 
-        AddGoodsCommand otherAddCommand = (AddGoodsCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddGoodsCommand otherAddGoodsCommand = (AddGoodsCommand) other;
+        return toAdd.equals(otherAddGoodsCommand.toAdd)
+                && linkToGoods.equals(otherAddGoodsCommand.linkToGoods);
     }
 
     @Override
