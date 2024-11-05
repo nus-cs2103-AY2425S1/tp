@@ -33,7 +33,7 @@ public class StatusCommandParser implements Parser<StatusCommand> {
             // Ensure the status is one of the allowed values (PENDING, ACCEPTED, REJECTED)
             if (status == null || !(status == Status.PENDING || status == Status.ACCEPTED
                     || status == Status.REJECTED)) {
-                throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
             }
 
             return new StatusCommand(index, status);
