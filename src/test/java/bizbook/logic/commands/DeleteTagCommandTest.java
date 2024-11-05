@@ -59,8 +59,9 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_nonExistentTag_throwsCommandException() {
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(VALID_TAG_HUSBAND));
+        String expectedMessage = String.format(DeleteTagCommand.TAG_DOES_NOT_EXIST, VALID_TAG_HUSBAND);
         assertThrows(CommandException.class,
-                DeleteTagCommand.TAG_DOES_NOT_EXIST, () -> deleteTagCommand.execute(model));
+                expectedMessage, () -> deleteTagCommand.execute(model));
     }
 
     @Test

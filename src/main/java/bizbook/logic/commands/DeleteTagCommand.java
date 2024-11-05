@@ -25,7 +25,7 @@ import bizbook.model.tag.Tag;
  */
 public class DeleteTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "removetag";
+    public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag from a specfic person.\n"
@@ -64,7 +64,7 @@ public class DeleteTagCommand extends Command {
         Set<Tag> tagSet = personToEdit.getTags();
 
         if (!tagSet.contains(tagToDelete)) {
-            throw new CommandException(TAG_DOES_NOT_EXIST);
+            throw new CommandException(String.format(TAG_DOES_NOT_EXIST, tagToDelete.tagName));
         }
 
         Set<Tag> updatedTagSet = tagSet.stream()
