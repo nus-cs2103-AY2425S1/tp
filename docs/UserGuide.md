@@ -177,7 +177,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     <div class="alert" markdown="span">
     NAME is case-insensitive: 
     `seller n/Bob` = `seller n/BOB` = `seller n/bOb` _(Not exhaustive)_
-
+    <br>
     If a buyer/seller with the same name already exists, the equivalent commands above cannot be carried out
     </div>
     <br>
@@ -262,8 +262,10 @@ Commands for creating, updating, and deleting buyers and sellers.
     <div class="alert" markdown="span">
     However, NAME is space-sensitive:
     `find Wen Xuan` != `find WenXuan`
-
+    <br>
+    <br>
     First command finds names with `wen` OR `xuan`
+    <br>
     Second command finds names with `wenxuan`
     </div> 
     <br>    
@@ -460,7 +462,7 @@ Commands for managing appointments between user and clients.
     <div class="note" markdown="span">
     NAME is case-insensitive: 
     `apt Bob` = `apt BOB` = `apt bOb` _(Not exhaustive)_
-
+    <br>
     Thus, these commands will set an appointment for the same `Bob` profile
     </div>
     <br>
