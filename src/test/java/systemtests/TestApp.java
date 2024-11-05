@@ -132,7 +132,7 @@ public class TestApp extends MainApp {
      * @return A {@code Model} object representing the current state of the address book.
      */
     public AddressBookModel getAddrModel() {
-        AddressBookModel copy = new AddressBookModelManager((addressBookModel.getAddressBook()), new UserPrefs());
+        AddressBookModel copy = new AddressBookModelManager((addressBookModel.getAddressBook()));
         List<Person> toDisplay = addressBookModel.getFilteredPersonList();
         Optional<Predicate<Person>> predicate = toDisplay.stream()
                 .map(person -> (Predicate<Person>) other -> other.equals(person)).reduce(Predicate::or);

@@ -11,7 +11,6 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.logic.commands.EditCommand.EditTransactionDescriptor;
 import spleetwaise.transaction.model.TransactionBookModel;
@@ -26,7 +25,7 @@ public class EditCommandTest {
     private final TransactionBookModel tbModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook());
     private final AddressBookModel abModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
 
     @BeforeEach
     void setUp() {

@@ -20,7 +20,6 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
@@ -43,7 +42,7 @@ public class AddCommandTest {
     @BeforeEach
     void setup() {
         CommonModel.initialise(
-                new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs()),
+                new AddressBookModelManager(TypicalPersons.getTypicalAddressBook()),
                 new TransactionBookModelManager()
         );
     }

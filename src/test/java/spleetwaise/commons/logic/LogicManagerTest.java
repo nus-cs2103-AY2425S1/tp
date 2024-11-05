@@ -28,7 +28,6 @@ import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.commons.storage.JsonUserPrefsStorage;
 import spleetwaise.commons.storage.StorageManager;
 import spleetwaise.commons.util.IdUtil;
@@ -67,19 +66,19 @@ public class LogicManagerTest {
 
     @Test
     public void getAddressBookFilePath() {
-        assertEquals(addressBookModel.getAddressBookFilePath(), logic.getAddressBookFilePath());
+        assertEquals(CommonModel.getInstance().getAddressBookFilePath(), logic.getAddressBookFilePath());
     }
 
     @Test
     public void getGuiSettings() {
-        assertEquals(addressBookModel.getGuiSettings(), logic.getGuiSettings());
+        assertEquals(CommonModel.getInstance().getGuiSettings(), logic.getGuiSettings());
     }
 
     @Test
     public void setGuiSettings() {
         GuiSettings settings = new GuiSettings();
         logic.setGuiSettings(settings);
-        assertEquals(addressBookModel.getGuiSettings(), settings);
+        assertEquals(CommonModel.getInstance().getGuiSettings(), settings);
     }
 
     @Test
@@ -189,7 +188,7 @@ public class LogicManagerTest {
             String expectedMessage
     ) {
         AddressBookModel expectedAddressBookModel =
-                new AddressBookModelManager(addressBookModel.getAddressBook(), new UserPrefs());
+                new AddressBookModelManager(addressBookModel.getAddressBook());
 
         TransactionBookModel expectedTransactionModel = new TransactionBookModelManager();
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedAddressBookModel,
