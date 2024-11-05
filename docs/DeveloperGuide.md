@@ -297,37 +297,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `ABCLI` and the **Actor** is the `user`, unless specified otherwise)
 
-<details>
-    <summary><b>Use Case 1: Adding a contact</b></summary>
+**Use Case 1: Switching parser modes**
 
 **MSS**
 
-1. User requests to add a contact
-2. ABCLI adds the contact
+1. User requests to switch the parser mode
+2. ABCLI switches to the desired parser mode
 3. ABCLI shows a success message
-4. ABCLI shows the updated list of contacts on its interface
+4. ABCLI shows the corresponding list of items in the new mode
+
+**Extensions**
+
+* 1a. The parser mode is invalid
+  * 1a1. ABCLI shows an error message
+  * Use case ends.
+
+**Use Case 2: Adding a buyer**
+
+**MSS**
+
+1. User requests to add a buyer
+2. ABCLI adds the buyer
+3. ABCLI shows a success message
+4. ABCLI shows the updated list of buyers on its interface
 
 - Use case ends.
 
 **Extensions**
 
-* 1a. The contact format is invalid
+* 1a. The buyer format is invalid
     * 1a1. ABCLI shows an error message
     * Use case ends.
 
-</details>
-
-<details>
-    <summary><b>Use Case 2: Deleting a contact</b></summary>
+**Use Case 3: Deleting a buyer**
 
 **MSS**
 
-1. User requests to list contacts
-2. ABCLI shows the list of contacts on its interface
-3. User requests to delete a specific contact
-4. ABCLI deletes the contact
+1. User requests to list buyers
+2. ABCLI shows the list of buyers on its interface
+3. User requests to delete a specific buyer
+4. ABCLI deletes the buyer
 5. ABCLI shows a success message
-6. ABCLI shows the updated list of contacts on its interface
+6. ABCLI shows the updated list of buyers on its interface
 
 - Use case ends
 
@@ -340,56 +351,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3b1. ABCLI shows an error message
     - Use case ends
 
-</details>
-
-<details>
-    <summary><b>Use Case 3: Adding a meetup</b></summary>
+**Use Case 4: Editing a buyer**
 
 **MSS**
 
-1. User requests to add a meetup
-2. ABCLI adds the meetup
+1. User requests to edit a buyer
+2. ABCLI edits the buyer
 3. ABCLI shows a success message
-4. ABCLI shows the updated list of meetups on its interface
+4. ABCLI shows the updated list of buyers on its interface
 
 - Use case ends
 
 **Extensions**
 
-- 1a. The command is missing a name
+- 1a. The tags for editing are incorrect
     - 1a1. ABCLI shows an error message
     - Use case ends
-
-- 1b. The command is missing a flag
-    - 1b1 ABCLI shows an error message
+- 1b. The index for editing is out of range
+    - 1b1. ABCLI shows an error message
+    - Use case ends
+- 1c. The fields to edit are empty
+    - 1c1. ABCLI shows an error message
     - Use case ends
 
-</details>
-
-<details>
-    <summary><b>Use Case 4: Viewing contacts</b></summary>
+**Use Case 5: Viewing all buyers**
 
 **MSS**
 
-1. User requests to view all contacts
-2. ABCLI shows the list of contacts on its interface
+1. User requests to view all buyers
+2. ABCLI shows the list of buyers on its interface
+
+- Use case ends
+
+**Use Case 6: Finding buyers**
+
+**MSS**
+
+1. User requests to find buyers matching his keywords
+2. ABCLI shows a success message
+3. ABCLI shows the updates list of buyers matching the keywords
 
 - Use case ends
 
 **Extensions**
 
-- 1a. Viewing buyer and seller contacts
-    - 1a1. User requests to view buyer contacts
-    - 1a2. ABCLI shows the list of contacts of buyers on its interface
-    - 1a3. User requests to view seller contacts
-    - 1a4. ABCLI shows the list of contacts of sellers on its interface
-    - Use case ends
+* 1a. The tags for finding are incorrect
+  * 1a1. ABCLI shows an error message
+  * Use case ends
 
-- 1b. t/ flag has invalid contact type
-    - 1b1. ABCLI shows an error message
-    - Use case ends
+**Use Case 7: Adding a meetup**
 
-</details>
+**MSS**
+
+1. Similar to `Use Case 2: Adding a buyer`
+
+**Use Case 8: Deleting a meetup**
+
+**MSS**
+
+1. Similar to `Use Case 3: Deleting a buyer`
+
+**Use Case 9: Editing a meetup**
+
+**MSS**
+
+1. Similar to `Use Case 4: Editing a buyer`
+
+**Use Case 10: Viewing all meetups**
+
+**MSS**
+
+1. Similar to `Use Case 5: Viewing all buyers`
+
+**Use Case 11: Finding meetups**
+
+**MSS**
+
+1. Similar to `Use Case 6: Finding buyers`
+
+**Use Case 12: Adding a property**
+
+**MSS**
+
+1. Similar to `Use Case 2: Adding a buyer`
+
+**Use Case 13: Deleting a property**
+
+**MSS**
+
+1. Similar to `Use Case 3: Deleting a buyer`
+
+**Use Case 14: Editing a property**
+
+**MSS**
+
+1. Similar to `Use Case 4: Editing a buyer`
+
+**Use Case 15: Viewing all properties**
+
+**MSS**
+
+1. Similar to `Use Case 5: Viewing all buyers`
+
+**Use Case 16: Finding properties**
+
+**MSS**
+
+1. Similar to `Use Case 6: Finding buyers`
+
 
 ### Non-Functional Requirements
 1. ABCLI should be a result of evolving/enhancing/morphing the given codebase.

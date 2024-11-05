@@ -113,7 +113,7 @@ Format: `switch PARSER_MODE`
 * The parser mode takes 3 types:
 * `b` for [buyers](#buyer-mode)
 * `m` for meet-ups
-* `p` for properties
+* `p` for properties [properties](#property-mode)
 * The default parser mode is set to `b`.
 
 Examples:
@@ -320,14 +320,10 @@ Examples:
 * Note how the mode is highlighted by `Viewing: Properties` above the command line
 
 </div>
-### Adding a property: `add`
 
-Adds a property to the property list.
+In property mode, you will be able to store and view the list of property's details.
 
-Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
-
-Examples:
-* `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
+![property_mode display](images/PropertyModeDisplay.png)
 
 ### Viewing all properties : `view`
 
@@ -336,6 +332,15 @@ Shows a list of all properties in the property list.
 ![alt text](images/PropertyView.png)
 
 Format: `view`
+
+### Adding a property: `add`
+
+Adds a property to the property list.
+
+Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+
+Examples:
+* `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
 
 ### Editing a property : `edit`
 
@@ -353,19 +358,36 @@ Examples:
 
 ### Locating Properties: `find`
 
-Find property based on its attributes.
+Find existing properties in the property list based on either name or address keywords.
 
-Format: `find [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
+Format: `find n/LANDLORD_NAME`
+Format: `find a/ADDRESS`
 
+* The tags used in searching should only be `n/` or `a/`, but not both.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Buyers matching at least one keyword will be returned (i.e. `OR` search).
+* Properties matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans Bo` will return property linked with `Hans Gruber`, `Bo Yang`.
 
 Examples:
-* `find n/John t/HDB 5 Room` returns `john` and `John Doe`
+* `find n/John` returns `john` and `John Doe`
+* `find a/Pasir Ris` returns `pasir ris east` and `Pasir Ris West`
 
+### Deleting a property: `delete`
+
+Deletes the specified property from the property list
+
+Format: `delete INDEX`
+
+* Deletes the property at the specified `INDEX`.
+* The index refers to the index number shown in the **displayed property list**.
+* The index must be a positive integer: 1, 2, 3, ...
+* The index cannot exceed the displayed list's range
+
+Examples:
+* `view` followed by `delete 4` deletes the 4th property in the displayed property list.
+* `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ

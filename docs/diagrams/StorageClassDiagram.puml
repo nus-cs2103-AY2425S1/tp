@@ -29,8 +29,11 @@ Class JsonSerializablePropertyList
 Class JsonAdaptedProperty
 }
 
-package "PropertyList Storage 2" #F4F6F6{
-Class "<<interface>>\nPropertyListStorage2" as PropertyListStorage2
+package "MeetUpList Storage" #F4F6F6{
+Class "<<interface>>\nMeetUpListStorage" as MeetUpListStorage
+Class JsonMeetUpListStorage
+Class JsonSerializableMeetUpList
+Class JsonAdaptedMeetUp
 }
 
 }
@@ -42,23 +45,27 @@ StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -down--> "1" BuyerListStorage
 StorageManager -down--> "1" PropertyListStorage
-StorageManager -down--> "1" PropertyListStorage2
+StorageManager -down--> "1" MeetUpListStorage
 
 Storage -left--|> UserPrefsStorage
 Storage -down--|> BuyerListStorage
 Storage -down--|> PropertyListStorage
-Storage -down--|> PropertyListStorage2
+Storage -down--|> MeetUpListStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonBuyerListStorage .up.|> BuyerListStorage
+JsonMeetUpListStorage .up.|> MeetUpListStorage
 JsonPropertyListStorage .up.|> PropertyListStorage
 JsonBuyerListStorage ..> JsonSerializableBuyerList
+JsonMeetUpListStorage ..> JsonSerializableMeetUpList
 JsonPropertyListStorage ..> JsonSerializablePropertyList
 JsonSerializableBuyerList --> "*" JsonAdaptedBuyer
+JsonSerializableMeetUpList --> "*" JsonAdaptedMeetUp
 JsonSerializablePropertyList --> "*" JsonAdaptedProperty
+JsonSerializablePropertyList --> "*" JsonAdaptedBuyer
 JsonAdaptedBuyer --> "*" JsonAdaptedTag
 
 'Force relative postions
-BuyerListStorage -right[hidden]- PropertyListStorage2
-PropertyListStorage2 -right[hidden]- PropertyListStorage
+BuyerListStorage -right[hidden]- MeetUpListStorage
+MeetUpListStorage -right[hidden]- PropertyListStorage
 @enduml
