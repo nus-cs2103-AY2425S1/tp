@@ -89,7 +89,8 @@ public class FilterCommandParserTest {
                 + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024 status/"
                 + Status.NOT_DONE_STATUS;
         FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, testAmount,
-                testDescription, testDate, testStatus);
+                testDescription, testDate, testStatus
+        );
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }

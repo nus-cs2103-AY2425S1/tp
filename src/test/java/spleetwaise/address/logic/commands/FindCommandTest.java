@@ -16,7 +16,6 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -24,9 +23,9 @@ import spleetwaise.commons.model.UserPrefs;
 public class FindCommandTest {
 
     private AddressBookModel model = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
     private AddressBookModel expectedModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
 
     @BeforeEach
     void setUp() {

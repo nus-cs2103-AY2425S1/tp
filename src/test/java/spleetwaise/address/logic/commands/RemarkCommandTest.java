@@ -24,7 +24,6 @@ import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.commons.util.IdUtil;
 
 /**
@@ -34,7 +33,7 @@ public class RemarkCommandTest {
 
     private static final String REMARK_STUB = "Some remark";
 
-    private final AddressBookModel model = new AddressBookModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final AddressBookModel model = new AddressBookModelManager(getTypicalAddressBook());
 
     @BeforeEach
     public void setUp() {
@@ -52,7 +51,7 @@ public class RemarkCommandTest {
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
         AddressBookModel expectedModel = new AddressBookModelManager(
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -70,7 +69,7 @@ public class RemarkCommandTest {
         String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
 
         AddressBookModel expectedModel = new AddressBookModelManager(
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -90,7 +89,7 @@ public class RemarkCommandTest {
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
         AddressBookModel expectedModel = new AddressBookModelManager(
-                new AddressBook(model.getAddressBook()), new UserPrefs());
+                new AddressBook(model.getAddressBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);

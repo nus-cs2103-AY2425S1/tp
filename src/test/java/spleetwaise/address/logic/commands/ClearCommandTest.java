@@ -7,7 +7,6 @@ import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 
 public class ClearCommandTest {
 
@@ -24,9 +23,9 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        AddressBookModel model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+        AddressBookModel model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook());
         AddressBookModel expectedModel = new AddressBookModelManager(
-                TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+                TypicalPersons.getTypicalAddressBook());
         expectedModel.setAddressBook(new AddressBook());
 
         CommonModel.initialise(model, null);

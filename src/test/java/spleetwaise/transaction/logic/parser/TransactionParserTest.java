@@ -13,7 +13,6 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.logic.commands.ClearCommand;
 import spleetwaise.transaction.logic.commands.EditCommand;
@@ -28,7 +27,7 @@ public class TransactionParserTest {
     private final TransactionBookModel tbModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook());
     private final AddressBookModel abModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
     private final TransactionParser parser = new TransactionParser();
 
 

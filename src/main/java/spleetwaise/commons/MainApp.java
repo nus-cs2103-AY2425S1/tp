@@ -25,7 +25,6 @@ import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.logic.Logic;
 import spleetwaise.commons.logic.LogicManager;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.ReadOnlyUserPrefs;
 import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.commons.storage.JsonUserPrefsStorage;
 import spleetwaise.commons.storage.Storage;
@@ -54,7 +53,6 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected CommonModel model;
 
     protected AddressBookModel addressBookModel;
     protected TransactionBookModel transactionBookModel;
@@ -77,11 +75,11 @@ public class MainApp extends Application {
                 new JsonTransactionBookStorage(userPrefs.getTransactionBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
-        addressBookModel = initAddressBookModelManager(storage, userPrefs);
+        addressBookModel = initAddressBookModelManager(storage);
         transactionBookModel = initTransactionModelManager(storage, addressBookModel);
 
         // Initialise Common Model
-        CommonModel.initialise(addressBookModel, transactionBookModel);
+        CommonModel.initialise(addressBookModel, transactionBookModel, userPrefs);
 
         logic = new LogicManager(storage);
 
@@ -103,7 +101,7 @@ public class MainApp extends Application {
      * book is not found, or an empty address book will be used instead if errors occur when reading {@code storage}'s
      * address book.
      */
-    private AddressBookModel initAddressBookModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private AddressBookModel initAddressBookModelManager(Storage storage) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -121,7 +119,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new AddressBookModelManager(initialData, userPrefs);
+        return new AddressBookModelManager(initialData);
     }
 
     private TransactionBookModel initTransactionModelManager(Storage storage, AddressBookModel addressBookModel) {
@@ -227,7 +225,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping SpleetWaise ] =============================");
         try {
-            storage.saveUserPrefs(addressBookModel.getUserPrefs());
+            storage.saveUserPrefs(CommonModel.getInstance().getUserPrefs());
             storage.saveAddressBook(addressBookModel.getAddressBook());
             storage.saveTransactionBook(transactionBookModel.getTransactionBook());
         } catch (AccessDeniedException e) {

@@ -17,7 +17,6 @@ import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -31,7 +30,7 @@ import spleetwaise.transaction.model.transaction.Transaction;
 public class DeleteCommandTest {
 
     private final AddressBookModel addressBookModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
     private final TransactionBookModel transactionBookModel = new TransactionBookModelManager();
 
     @BeforeEach
@@ -51,7 +50,7 @@ public class DeleteCommandTest {
         );
 
         AddressBookModelManager expectedModel = new AddressBookModelManager(
-                addressBookModel.getAddressBook(), new UserPrefs());
+                addressBookModel.getAddressBook());
         expectedModel.deletePerson(personToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, addressBookModel, expectedMessage, expectedModel);
@@ -86,7 +85,7 @@ public class DeleteCommandTest {
         );
 
         AddressBookModel expectedModel = new AddressBookModelManager(
-                addressBookModel.getAddressBook(), new UserPrefs());
+                addressBookModel.getAddressBook());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
