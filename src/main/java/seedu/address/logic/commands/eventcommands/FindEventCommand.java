@@ -58,9 +58,6 @@ public class FindEventCommand extends Command {
         }
 
         String resultMessage = String.format(MESSAGE_EVENT_FOUND, filteredEvents.size(), searchString);
-        for (Event event : filteredEvents) {
-            resultMessage += "\n" + event.getName().toString();
-        }
 
         return new CommandResult(resultMessage);
     }

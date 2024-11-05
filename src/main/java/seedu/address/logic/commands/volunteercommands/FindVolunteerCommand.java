@@ -58,9 +58,6 @@ public class FindVolunteerCommand extends Command {
         }
 
         String resultMessage = String.format(MESSAGE_VOLUNTEER_FOUND, filteredVolunteers.size(), searchString);
-        for (Volunteer volunteer : filteredVolunteers) {
-            resultMessage += "\n" + volunteer.getName().toString();
-        }
 
         return new CommandResult(resultMessage);
     }
