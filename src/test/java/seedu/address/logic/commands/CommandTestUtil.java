@@ -128,6 +128,10 @@ public class CommandTestUtil {
     public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_3 = "1100-120";
     public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_4 = "10-12";
     public static final String INVALID_APPOINTMENT_TIMEPERIOD_ORDER = "1500-1200";
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_1 = "0900-1200";
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_2 = "1000-1300";
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_3 = "0900-1300";
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_4 = "1100-1130";
     public static final String INVALID_APPOINTMENT_NAME_DESC = " " + INVALID_APPOINTMENT_NAME + " " + PREFIX_DATE
                                                                + VALID_APPOINTMENT_DATE_PHYSIO + " "
                                                                + PREFIX_TIMEPERIOD
