@@ -365,7 +365,7 @@ Furthermore, certain edits can cause the Clientele+ to behave in unexpected ways
 
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Unarchiving a Client `[coming in v2.0]`
 
 _Details coming soon ..._
 
