@@ -26,6 +26,15 @@ public class AssignCommandParser implements Parser<AssignCommand> {
      */
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        // Check for invalid format where prefix immediately follows number
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.matches("\\d+" + PREFIX_ROLE.getPrefix() + ".*")
+                || trimmedArgs.matches("\\d+" + PREFIX_WEDDING.getPrefix() + ".*")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_WEDDING);
 
         Index personIndex = null;

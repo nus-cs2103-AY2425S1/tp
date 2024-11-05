@@ -142,7 +142,6 @@ public class ViewCommandTest {
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
 
-
     @Test
     public void toStringMethod() {
         NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(Arrays.asList("keyword"));
@@ -150,6 +149,7 @@ public class ViewCommandTest {
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
     }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.

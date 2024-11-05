@@ -38,6 +38,10 @@ public class NameMatchesKeywordPredicate implements Predicate<Person> {
         return keywords.equals(otherNameMatchesKeywordPredicate.keywords);
     }
 
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();

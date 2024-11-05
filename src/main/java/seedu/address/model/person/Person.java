@@ -41,6 +41,14 @@ public class Person {
         this.ownWedding = ownWedding;
     }
 
+    /**
+     * Sets ownWedding to null.
+     * Used for test cases.
+     */
+    public void resetOwnWedding() {
+        this.ownWedding = null;
+    }
+
     public void setOwnWedding(Wedding wedding) {
 
         if (wedding == null) {
@@ -107,6 +115,14 @@ public class Person {
     }
 
     /**
+     * Returns true if person has own wedding.
+     *
+     */
+    public boolean hasOwnWedding() {
+        return ownWedding != null;
+    }
+
+    /**
      * Checks if the {@code weddingJobs} of the person contains the Wedding object.
      *
      * @param target {@code Wedding} object to be found
@@ -120,7 +136,6 @@ public class Person {
         }
         return false;
     }
-
 
     /**
      * Returns true if both persons have the same name, phone, email, address.
@@ -204,7 +219,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("roles", role)
-                .add("wedding", ownWedding == null ? "null" : ownWedding)
+                .add("wedding", ownWedding == null ? "NA" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }
