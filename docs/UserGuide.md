@@ -3,9 +3,13 @@ layout: page
 title: User Guide
 ---
 
-PhysioPal is a **desktop app for managing contacts for physiotherapists, optimized for use via a Command Line Interface**
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PhysioPal can get
-your contact management tasks done faster than traditional GUI apps.
+PhysioPal is an **all-in-one, desktop app** specifically created to streamline daily administrative tasks for physiotherapists,
+allowing them to focus more on patient care and less on paperwork. By seamlessly **combining the efficiency of a Command Line Interface (CLI)
+with the visual ease of a Graphical User Interface (GUI)**, PhysioPal provides a powerful and intuitive way to manage patient records,
+schedule appointments, and track payments all in one place. Designed to resolve common challenges—like long search times, duplicate records,
+and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry, automated reminders, and a clear
+snapshot of all patient details. The result is a faster, more organised workflow that enables physiotherapists to deliver an exceptional
+experience to their clients without being weighed down by administrative burdens.
 
 * Table of Contents
 {:toc}
@@ -69,10 +73,10 @@ your contact management tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/anklesprain` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/ankle sprain` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/anklesprain`, `t/anklesprain t/acltear` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/ankle sprain`, `t/anklesprain t/acl tear` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -362,7 +366,7 @@ strength, flexibility, or overall physical function.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/anklesprain t/acltear`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/ankle sprain t/acl tear`
 **Appointment Delete** | `appointment-delete NAME d/DATE_AND_TIME`<br> e.g., `appointment-delete John Doe d/2024-10-20 1100`
 **Appointment List** | `appointment-list [d/DATE][TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
 **Clear** | `clear`
