@@ -1,5 +1,8 @@
 package seedu.address.logic.commands.reminder;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -22,13 +25,13 @@ public class AddReminderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to the address book. "
             + "Parameters: "
-            + "Person "
-            + "DATE and TIME "
-            + "Description\n"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DATE_TIME + "DATE and TIME "
+            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " "
-            + "John "
-            + "2021-12-31 23:59"
-            + "New Year's Eve";
+            + PREFIX_NAME + "John "
+            + PREFIX_DATE_TIME + "2021-12-31 23:59"
+            + PREFIX_DESCRIPTION + "New Year's Eve";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_NONEXISTENT_PERSON = "This person doesn't exist in the address book.";
