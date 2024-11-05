@@ -62,9 +62,11 @@ Throughout this guide, you'll encounter several symbols.
 Refer to these symbols as you explore the guide.
 Each provides quick insights or warnings that can make your experience smoother:
 
-- [**Tip**]: Useful information to enhance your experience.
-- [**Note**]: Important information you should be aware of.
-- [**Caution**]: Critical information to prevent potential issues.
+[**Tip**]: Useful information to enhance your experience.
+
+[**Note**]: Important information you should be aware of.
+
+[**Caution**]: Critical information to prevent potential issues.
 
 ---
 ## Quick Start
