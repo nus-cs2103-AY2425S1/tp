@@ -411,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.<br>
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
   Use case resumes from step 1.<br><br>
 
 * 2a. System detects error in entered command.
@@ -435,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.<br>
+    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
   Use case resumes from step 1.<br><br>
 
 * 2a. System detects error in entered command.
