@@ -220,9 +220,9 @@ Format: `unfav INDEX`
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Locating companies by name: `find`
+### Locating companies: `find`
 
-Finds companies whose names contain any of the given keywords.
+Finds companies whose names, applications, or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -237,6 +237,10 @@ Examples:
 * `find Inc` returns `inc` and `Apple Inc`
 * `find apple facebook` returns `Apple`, `Facebook`<br>
   ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
+
+* `find hardware SWE` returns `Google`, `Apple` <br>
+  ![result for 'find hardware SWE'](images/findhardwareSWEResult.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
