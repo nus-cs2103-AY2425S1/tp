@@ -6,9 +6,18 @@
 
 # DorManagerPro User Guide
 
-DorManagerPro (DMP) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, DMP can get your contact management tasks done faster than traditional GUI apps.
+DorManagerPro (DMP) is a desktop app tailored for **university dorm managers who prefer to work with a Command Line Interface (CLI)**, 
+designed to allow easy management of dormitory resident details within an address book.
+
+Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
+the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
+
+
+<box type="info" seamless>
+If this is your first time accessing DorManagerPro, please see our [Quick start](#quick-start) for details on how to set up DorManagerPro. 
+</box>
+
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
