@@ -186,18 +186,18 @@ attendance to maintain student's accurate attendance record.
 To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below
 shows the sequence of action users will have to take to add a new Student Profile into the TrackMate Application.
 
-<puml src="diagrams/AddFeatureActivityDiagram.puml" width="600" />
+<puml src="diagrams/AddFeatureActivityDiagram.puml" />
 
 Besides, a class diagram of add student command is given below to demonstrate the interactions among classes.
 
-<puml src="diagrams/AddFeatureClassDiagram.puml" width="400" />
+<puml src="diagrams/AddFeatureClassDiagram.puml" />
 
 #### Add Tutorial
 
 Similar to adding student, the system requires parameters such as Tutorial Name and Tutorial ID. The sequence diagram below demonstrates the interaction
 among various classes to add a new Tutorial into the TrackMate Application.
 
-<puml src="diagrams/AddTutorialSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AddTutorialSequenceDiagram.puml" />
 
 #### Add Attendance
 
@@ -205,14 +205,14 @@ The AttendCommand is responsible for marking the attendance of a student for a s
 with the model to update the attendance record of a given student for a particular tutorial. The sequence diagram below shows how the command
 interact with other classes.
 
-<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AttendCommandSequenceDiagram.puml" />
 
 #### Add Assignment
 
 Users can also add assignments to the TrackMate Application that are shared among all the students in every tutorials. The activity diagram below will
 demonstrate what the users need to do to add assignment for students.
 
-<puml src="diagrams/CreateAssignmentActivityDiagram.puml" width="400" />
+<puml src="diagrams/CreateAssignmentActivityDiagram.puml" />
 
 #### Implementation - Design Considerations:
 
@@ -274,7 +274,7 @@ already exist in the system.
 To maintain accurate and up-to-date student records, the Edit feature allows users to modify existing student information. The sequence diagram below shows
 how it involves specifying the student's index in the displayed list and providing any new values for the student's attributes.
 
-<puml src="diagrams/EditSequenceDiagram.puml" width="400" />
+<puml src="diagrams/EditSequenceDiagram.puml" />
 
 #### Implementation - Design Considerations
 
@@ -346,7 +346,7 @@ Attendance Records: Deleting attendance marks the student as absent for that dat
 To remove a student from the application, the user specifies the student's index in the displayed student list. The system ensures
 that the index is valid and then proceeds to delete the student, updating all related records. Below is the sequence diagram regarding deleting student.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" width="400" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" />
 
 #### Delete Tutorial
 To delete a tutorial, the user provides the tutorial ID. The system verifies the existence of the tutorial and then removes it, updating any students assigned to it.
@@ -356,7 +356,7 @@ The sequence diagram of deleting tuorial is similar to deleting student.
 To delete an assignment, the user specifies the assignment title. The system ensures that the assignment exists before deleting it from the model. The
 activity diagram below illustrates what the series of actions the user should do to delete assignment.
 
-<puml src="diagrams/DeleteAssignmentActivityDiagram.puml" width="400" />
+<puml src="diagrams/DeleteAssignmentActivityDiagram.puml" />
 
 #### Delete Attendance
 To delete a student's attendance record for a specific date and tutorial, the user provides the student ID, tutorial ID, and date. The diagram is
