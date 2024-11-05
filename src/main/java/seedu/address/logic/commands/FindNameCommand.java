@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,12 +16,18 @@ public class FindNameCommand extends Command {
 
     public static final String COMMAND_WORD = "fn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose names contain all of "
-            + "the prefix of the specified keywords and displays them as a list with index numbers. The keywards are "
-            + "case-insensitive. They should contain letters,spaces and parenthesis only. They cannot be empty or have "
-            + "only spaces\n"
-            + "Parameters: KEYWORDS\n"
-            + "Example: " + COMMAND_WORD + "alice";
+    public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD + " " + PREFIX_NAME
+            + " or " + COMMAND_WORD
+            + ": Finds all clients whose names contain all of "
+            + "the prefix of the specified NAME and displays them as a list with index numbers.\n"
+            + "Parameters: NAME (String & must be non-empty)\n"
+            + "Example:\n"
+            + "- " + COMMAND_WORD + " Alice\n"
+            + "- " + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "Alice\n"
+            + "Additional Info: \n"
+            + "- NAME is case-insensitive.\n"
+            + "- It should contain letters, spaces, parenthesis or slashes only.\n"
+            + "- They cannot be empty or have only spaces.";
 
     private final NameContainsKeywordsPredicate predicate;
 

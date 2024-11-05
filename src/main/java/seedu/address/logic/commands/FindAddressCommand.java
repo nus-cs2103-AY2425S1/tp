@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,10 +16,17 @@ public class FindAddressCommand extends Command {
 
     public static final String COMMAND_WORD = "fa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose address contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " tampines";
+    public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS
+            + " or " + COMMAND_WORD
+            + ": Finds all clients whose address contain any of "
+            + "the specified ADDRESS and displays them as a list with index numbers.\n"
+            + "Parameters: ADDRESS\n"
+            + "Example:\n"
+            + "- " + COMMAND_WORD + " tampines\n"
+            + "- " + FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS + "tampines\n"
+            + "Additional Info: \n"
+            + "- ADDRESS is case-insensitive.\n"
+            + "- ADDRESS should not be empty.";
 
     private final AddressContainsKeywordsPredicate predicate;
 

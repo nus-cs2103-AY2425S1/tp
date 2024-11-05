@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,10 +16,17 @@ public class FindPhoneCommand extends Command {
 
     public static final String COMMAND_WORD = "fp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose phone number begins with "
-            + "the specified keywords (integers only with no spacing) and displays them as a list with index numbers.\n"
-            + "Parameters: integers \n"
-            + "Example: " + COMMAND_WORD + " 91234567";
+    public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD + " " + PREFIX_PHONE
+            + " or " + COMMAND_WORD
+            + ": Finds all clients whose phone number begins with "
+            + "the specified PHONE_NUMBER and displays them as a list with index numbers.\n"
+            + "Parameters: PHONE_NUMBER (Contains only 8 digits)\n"
+            + "Example:\n"
+            + "- " + COMMAND_WORD + " 91234567\n"
+            + "- " + FindCommand.COMMAND_WORD + " " + PREFIX_PHONE + "91234567\n"
+            + "Additional Info: \n"
+            + "- PHONE_NUMBER is a sequence of integers with no spacing.";
+
 
     private final PhoneBeginsWithKeywordPredicate predicate;
 
