@@ -334,8 +334,6 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 14px;
-        -fx-text-overrun: ellipsis; /* Enable truncation when label exceeds width */
-        -fx-wrap-text: false; /* Prevent text wrapping */
 }
 
 #nextLesson {
