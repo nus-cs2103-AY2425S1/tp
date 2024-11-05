@@ -30,7 +30,7 @@ public class WhitelistListCommand extends WhitelistCommand {
         // here, the predicate dictates that the client status should be blacklisted;
         // hence if the predicate fails (ensured by the ArgumentPredicateToFail object),
         // the client is not blacklisted => they are whitelisted
-        model.updateFilteredPersonList(ArgumentPredicateToFail.getNotBlacklistedPredicate());
+        model.updateFilteredPersonList(ArgumentPredicateToFail.PREDICATE_NOT_BLACKLISTED);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
