@@ -54,50 +54,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         switch (entityType) {
         case PERSON_ENTITY_STRING:
-            if (!arePrefixesPresent(
-                        argMultimap,
-                        PREFIX_NAME,
-                        PREFIX_ADDRESS,
-                        PREFIX_PHONE,
-                        PREFIX_STATUS,
-                        PREFIX_EMAIL)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
-            }
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_STATUS);
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            PersonDescriptor person = new PersonDescriptor(name, phone, email, address, status, tagList);
-
+            PersonDescriptor person = parseAddPerson(argMultimap);
             return new AddPersonCommand(person);
         case APPOINTMENT_ENTITY_STRING:
-            if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME,
-                    PREFIX_APPOINTMENT_TYPE)) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
-            }
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME,
-                    PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
-            int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
-            LocalDateTime appointmentDateTime = ParserUtil.parseAppointmentDateTime(
-                    argMultimap.getValue(PREFIX_DATETIME).get());
-            AppointmentType appointmentType = ParserUtil.parseAppointmentType(
-                    argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get());
-            Sickness sickness = argMultimap.getValue(PREFIX_SICKNESS).isPresent()
-                    ? ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get())
-                    : null;
-            Medicine medicine = argMultimap.getValue(PREFIX_MEDICINE).isPresent()
-                    ? ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get())
-                    : null;
-            AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
-                    appointmentType, appointmentDateTime, sickness, medicine);
+            AppointmentDescriptor appointmentDescriptor = parseAddAppointment(argMultimap);
+            int personId = extractPersonId(argMultimap);
 
             return new AddAppointmentCommand(appointmentDescriptor, personId);
         default:
@@ -105,6 +66,81 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
+    /**
+     * Parses the addPersonCommand
+     * @param argMultimap
+     * @return
+     * @throws ParseException
+     */
+    public PersonDescriptor parseAddPerson(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(
+                argMultimap,
+                PREFIX_NAME,
+                PREFIX_ADDRESS,
+                PREFIX_PHONE,
+                PREFIX_STATUS,
+                PREFIX_EMAIL)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_STATUS);
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        PersonDescriptor person = new PersonDescriptor(name, phone, email, address, status, tagList);
+        return person;
+    }
+
+    /**
+     * Parses the Add Appointment Command
+     * @param argMultimap
+     * @return
+     * @throws ParseException
+     */
+    public AppointmentDescriptor parseAddAppointment(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME,
+                PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
+        int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
+        LocalDateTime appointmentDateTime = ParserUtil.parseAppointmentDateTime(
+                argMultimap.getValue(PREFIX_DATETIME).get());
+        AppointmentType appointmentType = ParserUtil.parseAppointmentType(
+                argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get());
+        Sickness sickness = argMultimap.getValue(PREFIX_SICKNESS).isPresent()
+                ? ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get())
+                : null;
+        Medicine medicine = argMultimap.getValue(PREFIX_MEDICINE).isPresent()
+                ? ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get())
+                : null;
+        AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
+                appointmentType, appointmentDateTime, sickness, medicine);
+
+        return appointmentDescriptor;
+    };
+
+    /**
+     * Helper function for parseAddAppointment
+     * @param argMultimap
+     * @return
+     * @throws ParseException
+     */
+    public int extractPersonId(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+        }
+
+        return ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
+    }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
