@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +49,8 @@ public class DateUtilTest {
     @Test
     public void formatDateTimeForDisplay_validDateTime_returnsFormattedString() {
         LocalDateTime dateTime = LocalDateTime.of(2023, 10, 1, 10, 0);
-        String expected = "October 01, 2023, 10:00 am";
+        String expected = "October 01, 2023, 10:00 AM";
+        Locale.setDefault(Locale.US);
         assertEquals(expected, DateUtil.formatDateTimeForDisplay(dateTime));
     }
 }
