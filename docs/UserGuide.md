@@ -99,8 +99,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/
   * At most 1 of each field can be edited at a time.(excluding CLIENT_TYPE)
 * Existing values will be updated to the input values.
 * When editing client types, the existing client types of the person will be removed i.e adding of client type is not cumulative.
-* You can remove all the contact’s client types by typing `c/` without
-    specifying any client types after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -230,14 +228,38 @@ ClientHub has a basic reminder list that keeps track of a users commitments to
 specific clients. The reminder list is a list of reminders that can be added,
 deleted, and edited.
 
+
 #### Adding Reminder: `radd` 
 
 Adds a reminder to the reminder list.
 
 Format: 
 
-`radd n/NAME dt/DATETIME r/REMINDER` or
-`ra n/NAME dt/DATETIME r/REMINDER`
+`radd n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
+`ra n/NAME dt/DATETIME r/REMINDER_DESCRIPTION`
+
+A **valid** `NAME` for add should:
+* Not be empty.
+* Be a valid name that exists in the list of clients.
+* For eg. Typing `radd John Doe` when there is no client with the name `John Doe` will throw an error.
+* Be a prefix match of the client name.
+  * Typing `radd John Doe` will **add a reminder** for `John Doe` if there is `John Doe` and `John Doey` in the contact list.
+  * Typing `radd John Doe` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
+  * to add a reminder for `John Doe`, type `radd John Doe/`
+
+A **valid** `DATETIME` for add should:
+
+* Not be empty.
+* Be a valid date and time in the format `yyyy-MM-dd HH:mm`.
+* For eg. Typing `radd John Doe dt/2022-10-10 12:00 d/lunch` will add a reminder for `John Doe` for `lunch` at `2022-10-10 12:00`.
+
+A **valid** `REMINDER_DESCRIPTION` for add should:
+
+* Not be empty.
+* Be limited to 300 characters
+* For eg. Typing `radd John Doe dt/2022-10-10 12:00 d/` will throw an error.
+* For eg. Typing `radd John Doe dt/2022-10-10 12:00 d/Meeting with John at 12pm` will add a reminder for `John Doe` for `Meeting with John at 12pm` at `2022-10-10 12:00`.
+
 
 #### Deleting Reminder: `rdelete`
 
@@ -247,22 +269,17 @@ Format:
 `rdelete INDEX` or
 `rd INDEX`
 
-* Deletes the person with specified NAME
-* / is used to indicate specific name to delete
-    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
-    * However, deleting David Lim does not require / as it is already the **MOST** specific name.
-    * Name written before / must be **EXACT** name of the contact to be deleted.
-    * Order matters when using / to delete a contact.
+* Deletes the person with specified INDEX. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
 
-A **valid** `NAME` for delete should:
+A **valid** `INDEX` for delete should:
 * Not be empty.
-* For eg. Just typing `delete` without providing any `NAME` will throw an error.
-* Be a valid name that exists in the list of contacts.
-* For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
+* For eg. Just typing `delete` without providing any `INDEX` will throw an error.
+* Be a valid index that exists in the list of contacts.
+* For eg. Typing `rdelete 1` when there is no contact at index 1 will throw an error
 
 Examples:
-* `delete John Doe` deletes the person named `John Doe`
-* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
+* `rdelete 1` deletes the person at index 1 of the list
+* `rd 2` will delete the person at index 2 of the list
 
 
 #### Editing Reminder: `redit`
@@ -272,6 +289,23 @@ Edits an existing reminder in the reminder list.
 Format:
 `redit INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]` or
 `re INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]`
+
+* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
+
+A **valid** `INDEX` for edit should:
+* Not be empty.
+* For eg. Just typing `edit` without providing any `INDEX` will throw an error.
+* Be a valid index that exists in the list of contacts.
+* For eg. Typing `redit 1` when there is no contact at index 1 will throw an error
+
+A **valid** `DATETIME`/`REMINDER_DESCRIPTION` for edit should:
+* Have least one of the optional fields must be provided.
+  * At most 1 of each field can be edited at a time.
+* Existing values will be updated to the input values.
+
+Examples:
+* `redit 1 dt/2022-10-10 12:00 d/Meeting with John` Edits the date and time and description of the 1st reminder to be `2022-10-10 12:00` and `Meeting with John` respectively.
+* `re 2 dt/2022-10-10 12:00` Edits the date and time of the 2nd reminder to be `2022-10-10 12:00`
 
 
 ### Sort by name : `sort`
