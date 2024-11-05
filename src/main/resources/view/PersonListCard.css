@@ -1,3 +1,31 @@
+#contentContainer, #contentContainer * {
+    -fx-background-color: #f8d3ca;
+    -fx-background-radius: 10;
+}
+
+#contentContainer {
+    -fx-padding: 5;
+    -fx-background-insets: 0 3 0 0;
+}
+
+#contentContainer .scroll-bar {
+    -fx-opacity: 0;
+    -fx-pref-width: 1;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+    -fx-cursor: null;
+}
+
+#contentContainer {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#contentContainer > .viewport {
+    -fx-background-color: transparent;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;

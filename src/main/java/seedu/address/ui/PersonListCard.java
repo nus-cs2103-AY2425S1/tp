@@ -4,6 +4,10 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -32,6 +36,8 @@ public class PersonListCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private ScrollPane contentContainer;
+    @FXML
     private VBox cardPaneContents;
     @FXML
     private Label name;
@@ -49,7 +55,7 @@ public class PersonListCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonListCard(Person person, int displayedIndex) {
+    public PersonListCard(Person person, int displayedIndex, ListView<Person> personListView) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -77,6 +83,14 @@ public class PersonListCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        contentContainer.setOnMouseClicked(event -> {
+            // Trigger the list cell selection
+            System.out.println(displayedIndex);
+            personListView.getSelectionModel().select(displayedIndex - 1);
+            event.consume();
+        });
+
     }
 
     /**

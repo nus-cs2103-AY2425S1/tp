@@ -13,6 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
@@ -85,7 +86,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    static class PersonListViewCell extends ListCell<Person> {
+    class PersonListViewCell extends ListCell<Person> {
         // Cache each person card
         // Only update the person card if a person is created or changed
         private PersonListCard cachedPersonCard;
@@ -99,7 +100,7 @@ public class PersonListPanel extends UiPart<Region> {
                 cachedPersonCard = null;
 
             } else if (cachedPersonCard == null || !cachedPersonCard.person.equals(person)) {
-                cachedPersonCard = new PersonListCard(person, getIndex() + 1);
+                cachedPersonCard = new PersonListCard(person, getIndex() + 1, personListView);
                 setGraphic(cachedPersonCard.getRoot());
             }
         }
