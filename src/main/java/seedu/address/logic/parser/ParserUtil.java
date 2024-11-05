@@ -154,14 +154,23 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code amount} is invalid.
      */
-    public static Double parseAmount(String amount) throws ParseException {
-        requireNonNull(amount);
-        String trimmedAmount = amount.trim();
+    public static Double parseAmount(String amountStr) throws ParseException {
+        requireNonNull(amountStr);
+        String trimmedAmount = amountStr.trim();
+        Double amount;
+
         if (!Transaction.isValidAmount(trimmedAmount)) {
             logger.fine("ParseException caused by invalid amount.");
             throw new ParseException(Transaction.MESSAGE_CONSTRAINTS);
         }
-        return Double.parseDouble(trimmedAmount);
+
+        try {
+            amount = Double.parseDouble(trimmedAmount);
+        } catch (NumberFormatException e) {
+            logger.fine("ParseException caused by incorrect amount format.");
+            throw new ParseException(Messages.MESSAGE_INCORRECT_AMOUNT_FORMAT);
+        }
+        return amount;
     }
 
 
