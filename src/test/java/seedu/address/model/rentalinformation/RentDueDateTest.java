@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,19 @@ public class RentDueDateTest {
 
     @Test
     public void constructor_invalidRentDueDate_throwsIllegalArgumentException() {
-        String invalidRentDueDate = "";
+        String invalidRentDueDate = " ";
         assertThrows(IllegalArgumentException.class, () -> new RentDueDate(invalidRentDueDate));
+    }
+
+    @Test
+    public void constructor_validRentDueDate_success() {
+        try {
+            new RentDueDate("");
+            new RentDueDate("1");
+            new RentDueDate("31");
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
@@ -27,7 +39,6 @@ public class RentDueDateTest {
         assertThrows(NullPointerException.class, () -> RentDueDate.isValidDueDate(null));
 
         // invalid rent due date
-        assertFalse(RentDueDate.isValidDueDate("")); // empty string
         assertFalse(RentDueDate.isValidDueDate(" ")); // spaces only
         assertFalse(RentDueDate.isValidDueDate("0")); // invalid date
         assertFalse(RentDueDate.isValidDueDate("abc")); // non-numeric
@@ -36,6 +47,7 @@ public class RentDueDateTest {
         assertFalse(RentDueDate.isValidDueDate("99")); // invalid date
 
         // valid rent due date
+        assertTrue(RentDueDate.isValidDueDate("")); // empty string
         assertTrue(RentDueDate.isValidDueDate("1")); // first day
         assertTrue(RentDueDate.isValidDueDate("31")); // last day
         assertTrue(RentDueDate.isValidDueDate("20"));
@@ -95,6 +107,6 @@ public class RentDueDateTest {
 
         // null value in rent due date
         rentDueDate = new RentDueDate();
-        assertEquals("null", rentDueDate.toString());
+        assertEquals("—", rentDueDate.toString());
     }
 }

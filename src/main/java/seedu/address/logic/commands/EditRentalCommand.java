@@ -19,6 +19,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.RentalUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -69,7 +70,8 @@ public class EditRentalCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_RENTAL = "This client already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_RENTAL_INFORMATION =
-            "The editing rental information already exists in the address book";
+            "The editing rental information already exists in the address book.";
+    public static final String MESSAGE_INVALID_RENTAL_DATES = "Rental end date should be after rental start date.";
 
     private final Index clientIndex;
     private final Index rentalIndex;
@@ -99,6 +101,10 @@ public class EditRentalCommand extends Command {
         Client editedClient = createEditedPerson(rentalIndex, clientToEdit, editRentalDescriptor);
         RentalInformation editedRentalInformation = editedClient.getRentalInformation().get(rentalIndex.getZeroBased());
 
+        if (!RentalUtil.areRentalDatesValid(editedRentalInformation.getRentalStartDate(),
+                editedRentalInformation.getRentalEndDate())) {
+            throw new CommandException(MESSAGE_INVALID_RENTAL_DATES);
+        }
         if (model.hasRentalInformation(editedClient, editedRentalInformation)
                 && !rentalInformationToEdit.equals(editedRentalInformation)) {
             throw new CommandException(MESSAGE_DUPLICATE_RENTAL_INFORMATION);

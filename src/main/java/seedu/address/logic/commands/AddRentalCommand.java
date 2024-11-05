@@ -55,8 +55,9 @@ public class AddRentalCommand extends Command {
             + PREFIX_CUSTOMER_LIST + "Steven;David ";
     public static final String MESSAGE_SUCCESS = "New rental information is added to the client: %1$s";
     public static final String MESSAGE_DUPLICATE_RENTAL_INFORMATION =
-            "This rental information already exists in the address book";
-    public static final String MESSAGE_REQUIRE_ADDRESS = "Address field (" + PREFIX_ADDRESS + ") must be provided";
+            "This rental information already exists in the address book.";
+    public static final String MESSAGE_REQUIRE_ADDRESS = "Address field (" + PREFIX_ADDRESS + ") must be provided.";
+    public static final String MESSAGE_INVALID_RENTAL_END_DATE = "Rental end date should be after rental start date.";
 
     private final Index index;
     private final RentalInformation toAdd;
@@ -154,6 +155,13 @@ public class AddRentalCommand extends Command {
          */
         public boolean isAddressFieldEdited() {
             return address != null;
+        }
+
+        /**
+         * Returns true if rental start date field is edited.
+         */
+        public boolean isRentalStartDateFieldEdited() {
+            return rentalStartDate != null;
         }
 
         /**

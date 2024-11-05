@@ -21,12 +21,18 @@ public class RentDueDate {
      */
     public RentDueDate(String rentDueDate) {
         requireNonNull(rentDueDate);
+
+        if (rentDueDate.isEmpty()) {
+            this.rentDueDate = null;
+            return;
+        }
+
         checkArgument(isValidDueDate(rentDueDate), MESSAGE_CONSTRAINTS);
         this.rentDueDate = rentDueDate;
     }
 
     /**
-     * Constructs an {@code RentDueDate} with rentDueDate as null (not provided).
+     * Constructs a {@code RentDueDate} with rentDueDate as null (not provided).
      */
     public RentDueDate() {
         rentDueDate = null;
@@ -37,16 +43,19 @@ public class RentDueDate {
      * Validates a rent due date string against a predefined regex pattern.
      *
      * @param test The string to be validated as a rent due date.
-     * @return {@code true} if the string matches the validation regex;
-     *         {@code false} otherwise.
+     * @return {@code true} if the string matches the validation regex or is empty; {@code false} otherwise.
      */
     public static boolean isValidDueDate(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
+
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return rentDueDate == null ? "null" : rentDueDate;
+        return rentDueDate == null ? "—" : rentDueDate;
     }
 
     @Override
