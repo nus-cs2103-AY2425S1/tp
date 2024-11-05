@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -16,10 +17,20 @@ public class FindClientTypeCommand extends Command {
 
     public static final String COMMAND_WORD = "fc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = FindCommand.COMMAND_WORD + " " + PREFIX_CLIENT_TYPE
+            + " or " + COMMAND_WORD
+            + ": Finds all clients whose names contain any of "
+            + "the specified CLIENT_TYPE and displays them as a list with index numbers.\n"
             + "Parameters: CLIENT_TYPE [MORE_CLIENT_TYPES]...\n"
-            + "Example: " + COMMAND_WORD + "Investment Plan 1";
+            + "Examples: \n"
+            + COMMAND_WORD + " Investment Plan\n"
+            + COMMAND_WORD + " Investment Plan Healthcare\n"
+            + FindCommand.COMMAND_WORD + " " + PREFIX_CLIENT_TYPE + "Investment Plan\n"
+            + FindCommand.COMMAND_WORD + " " + PREFIX_CLIENT_TYPE + "Investment Plan Healthcare\n"
+            + "Additional Info: \n"
+            + "- CLIENT_TYPE is case-insensitive.\n"
+            + "- CLIENT_TYPE should not be empty.\n"
+            + "- Can specify multiple CLIENT_TYPE to have a more specific find.";
 
 
     private final ClientTypeContainsKeywordsPredicate predicate;

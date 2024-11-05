@@ -18,11 +18,14 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons whose name, phone number, "
             + "address or client type contain any of "
             + "all specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice wong"
-            + "Example: " + COMMAND_WORD + " p/91234567"
-            + "Example: " + COMMAND_WORD + " a/123, Jurong West Ave 6"
-            + "Example: " + COMMAND_WORD + " c/Investment Plan 1";
+            + "Parameters: n/NAME or p/PHONE_NUMBER, or a/ADDRESS or c/CLIENT_TYPE\n"
+            + "Example:\n"
+            + "- " + COMMAND_WORD + " alice wong\n"
+            + "- " + COMMAND_WORD + " p/91234567\n"
+            + "- " + COMMAND_WORD + " a/123, Jurong West Ave 6\n"
+            + "- " + COMMAND_WORD + " c/Investment Plan 1\n"
+            + "Additional Info:\n"
+            + "- The command can only take in one prefix at any point of time. (find n/NAME a/Address is invalid)\n";
 
     private final NameContainsKeywordsPredicate predicate;
 
