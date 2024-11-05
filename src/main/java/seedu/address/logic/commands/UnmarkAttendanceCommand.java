@@ -40,7 +40,7 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
     public static final String MESSAGE_UNMARK_MEMBER_SUCCESS =
-            "Successfully unmark the attendance on %1$s for member(s):\n%2$s\n";
+            "Successfully unmarked the attendance on %1$s for member(s):\n%2$s\n";
     public static final String MESSAGE_CONTAIN_UNMARKED_MEMBER =
             "Please note that attendance of %1$s is already unmarked.";
 

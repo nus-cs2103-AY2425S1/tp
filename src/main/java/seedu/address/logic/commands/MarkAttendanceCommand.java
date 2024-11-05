@@ -40,7 +40,7 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
     public static final String MESSAGE_MARK_MEMBER_SUCCESS =
-            "Successfully mark the attendance on %1$s for member(s): \n%2$s\n";
+            "Successfully marked the attendance on %1$s for member(s): \n%2$s\n";
     public static final String MESSAGE_CONTAIN_MARKED_MEMBER =
             "Please note that attendance of %1$s is already marked.";
 
