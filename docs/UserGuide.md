@@ -58,15 +58,12 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 ---
 ## Symbols and Tips
 
-Throughout this guide, you'll encounter several symbols.
-Refer to these symbols as you explore the guide.
-Each provides quick insights or warnings that can make your experience smoother:
+Throughout this guide, you'll encounter several symbols. Refer to these symbols as you explore the guide. Each provides quick insights or warnings that can make your experience smoother:
 
-[**Tip**]: Useful information to enhance your experience.
+- <strong>[Tip]</strong>: Useful information to enhance your experience.
+- <strong>[Note]</strong>: Important information you should be aware of.
+- <strong>[Caution]</strong>: Critical information to prevent potential issues.
 
-[**Note**]: Important information you should be aware of.
-
-[**Caution**]: Critical information to prevent potential issues.
 
 ---
 ## Quick Start
@@ -179,11 +176,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex
 
 [**Caution**]: The required information except tags cannot be empty.
 
-<u>**Example**</u>
+<u>Example</u>
 
 `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dr/Software Engineer s/Java, Python, C++ ex/Project Manager at Google from 2010-2020 st/Interviewed note/Super confident t/friends t/owesMoney`
 
-<u>**Image Example**</u>
+<u>Image Example</u>
 
 Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
 
@@ -202,7 +199,7 @@ Shows a list of all applicants in TalentSG.
 
 Format: `list`
 
-<u>**Image Example**</u>
+<u>Image Example</u>
 
 Command: ` list `
 
@@ -233,12 +230,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STAT
 - **At Least One Field**: Must be provided.
 - **Existing Values**: Will be replaced with new inputs.
 
-<u>**Examples**:<u>
+<u>Examples<u>
 
 - `edit 1 p/91234567 e/johndoe@example.com`: Updates phone and email of the first candidate.
 - `edit 2 n/Betsy Crower t/`: Changes the name and clears all tags of the second candidate.
 
-<u>**Image Example**<u>
+<u>Image Example<u>
 
 Command: ` edit 1 st/Rejected note/arrogant `
 
@@ -275,7 +272,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [**Caution**]:  If you search for "Han," contacts named "Hans" will not appear in the results. Always search by full words.
 
-<u>**Image Example**<u>
+<u>Image Example<u>
 
 Command: ` find John Stanley `
 
@@ -298,12 +295,12 @@ Removes a candidate from TalentSG.
 - **INDEX**: Refers to the candidate's number in the current list.
 - **Positive Integer**: Must be 1, 2, 3, etc.
 
-<u>**Examples**:<u>
+<u>Examples<u>
 
 - `list` followed by `delete 2`: Deletes the second candidate.
 - `find Betsy` followed by `delete 1`: Deletes the first candidate in the search results.
 
-<u>**Image Example**<u>
+<u>Image Example<u>
 
 Command: ` delete 2 `
 
@@ -330,12 +327,12 @@ Filters candidates based on their status.
 - **Case-Insensitive**: The search is case-insensitive.
 - **Available Statuses**: Active, Shortlisted, Hired, etc.
 
-<u>**Examples**:<u>
+<u>Examples<u>
 
 - `filter st/Active`: Displays all active candidates.
 - `filter st/Shortlisted`: Shows candidates marked as shortlisted.
 
-<u>**Image Example**<u>
+<u>Image Example<u>
 
 Command: ` filter screening `
 
@@ -355,7 +352,7 @@ Removes all candidates from TalentSG.
 
 **Format**: `clear`
 
-<u>**Image Example**<u>
+<u>Image Example<u>
 
 Before the clear command ran:
 <img src="images/beforeclear.png" alt="beforeclear.png" width="800">
@@ -374,7 +371,7 @@ Closes the TalentSG application.
 
 **Format**: `exit`
 
-<u>**Image Example**<u>
+<u>Image Example<u>
 
 Running the exit command:
 
