@@ -242,6 +242,12 @@ The `Delete Group` feature allows users to delete an existing group in the addre
 
 Below, we provide an example usage scenario and description of how the delete group code works at each step.
 
+#### Usage 
+
+**Syntax:** `del_g/dg gn/GROUP_NAME`
+
+**Example:** `dg gn/CS2103-F12-2`
+
 #### Implementation details
 
 1. User has the application launched with at least 1 group added.
@@ -263,6 +269,25 @@ This feature will also remove `Students` in the `Group` and reset their `Group`,
 
 The following sequence diagram shows how the above steps for delete group works:
 <puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+
+#### Design considerations 
+
+**Aspect 1:** Usage of GroupName as identifer
+
+1. **Design #1: Use GroupName**
+* Pro: More deliberate and since GroupNames are more complex, the user will be more aware
+* Con: Must type a lot
+
+2. **Design #2:** Use Index
+* Pro: Easy and quick
+* Con: Possible for user to mistype the wrong number
 
 --------------------------------------------------------------------------------------------------------------------
 
