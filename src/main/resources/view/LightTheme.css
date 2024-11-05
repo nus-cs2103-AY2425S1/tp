@@ -134,10 +134,10 @@
                                                                                   double offsetY)*/
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: #CAE9FF;
-    -fx-background-radius: 20px;
-}
+/*.list-cell {*/
+/*    -fx-background-color: #CAE9FF;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/
 
 .list-cell .label {
     -fx-text-fill: #005b96;
