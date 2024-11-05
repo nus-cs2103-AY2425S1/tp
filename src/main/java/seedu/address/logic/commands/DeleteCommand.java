@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Deletes a person identified from the address book, using index or keyword.
@@ -29,15 +30,14 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to delete.\n"
-            + "Find the index from the list below and type delete INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+                    + "Find the index from the list below and type delete INDEX\n"
+                    + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_PERSON_IS_CLIENT = "Cannot delete this person as they are a client in a wedding. "
+            + "Please delete their wedding first.";
 
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
 
-    /**
-     * Creates a Delete Command to delete the specified contact
-     */
     public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
         this.targetIndex = targetIndex;
         this.predicate = predicate;
@@ -49,15 +49,33 @@ public class DeleteCommand extends Command {
 
         if (this.targetIndex != null) {
             Person personToDelete = deleteWithIndex(model);
+            validatePersonIsNotClient(personToDelete, model);
+            model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
 
         } else {
             Person personToDelete = deleteWithKeyword(model);
 
             if (personToDelete != null) {
+                validatePersonIsNotClient(personToDelete, model);
+                model.deletePerson(personToDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
             } else {
                 return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
+            }
+        }
+    }
+
+    /**
+     * Validates that the person to be deleted is not a client in any wedding.
+     *
+     * @throws CommandException if the person is a client in a wedding
+     */
+    private void validatePersonIsNotClient(Person person, Model model) throws CommandException {
+        List<Wedding> weddings = model.getFilteredWeddingList();
+        for (Wedding wedding : weddings) {
+            if (wedding.getClient() != null && wedding.getClient().getPerson().equals(person)) {
+                throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
             }
         }
     }
