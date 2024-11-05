@@ -30,9 +30,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UpdateAppointmentStatusCommand;
 import seedu.address.logic.parser.criteria.NameSearchCriteria;
 import seedu.address.logic.parser.criteria.SearchCriteria;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Status;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -123,6 +125,21 @@ public class AddressBookParserTest {
         );
         assertEquals(new DeleteAppointmentCommand(validNric, LocalDate.parse(validDate, dateFormatter),
             LocalTime.parse(validStartTime, timeFormatter)), command);
+    }
+
+    @Test
+    public void parseCommand_updateAppointmentStatus() throws Exception {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        Nric validNric = new PersonBuilder().build().getNric();
+        String validDate = "22/10/2025";
+        String validStartTime = "10:00";
+        String validStatus = "COMPLETED";
+        UpdateAppointmentStatusCommand command = (UpdateAppointmentStatusCommand) parser.parseCommand(
+                PersonUtil.getUpdateAppointmentStatusCommand(validNric, validDate, validStartTime, validStatus)
+        );
+        assertEquals(new UpdateAppointmentStatusCommand(validNric, LocalDate.parse(validDate, dateFormatter),
+            LocalTime.parse(validStartTime, timeFormatter), Status.COMPLETED), command);
     }
 
     @Test
