@@ -284,7 +284,7 @@ Essentially they are to be supplied by the user.
 |-----------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `STUDENT_NAME`        | `n/`             | Specifies the name of a student. <br/><br/> **Requirements:** <ul><li>Names must contain only alphabetic character and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `STUDENT_ID`          | `s/`             | Specifies the Student ID of a student. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with a letter `A`, followed by exactly 7 digits, and end with a letter.</li><li>Each `STUDENT_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                   |
-| `TUTORIAL_NAME`       | `t/`             | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `TUTORIAL_NAME`       | `tn/`            | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
 | `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                               |
 | `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The Assignment Due Date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
@@ -661,42 +661,42 @@ TO BE CHANGED
 ## 7. Glossary
 <a id="glossary"></a>
 
-| Term           | Definition and or Explanation                                                                                             |
-|----------------|---------------------------------------------------------------------------------------------------------------------------|
-| **CSV**        | Comma-Seperated Values, a file format generally used to import data in Spreadsheets and Do analysis                       |
-| **JSON**       | JavaScript Object Notation, a standard file format for data interchange                                                   |
-| **NUS**        | National University of Singapore , A University Located in Central Singapore                                              |
-| **TA**         | Teaching Assistant, a tutor who will conduct tutorials in National University of Singapore                                |
-| **SoC**        | School of Computing in National University of Singapore                                                                   |
+| Term           | Definition and or Explanation                                                                                                      |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------|
+| **CSV**        | Comma-Separated Values, a file format generally used to import data in Spreadsheets and Do analysis                                |
+| **JSON**       | JavaScript Object Notation, a standard file format for data interchange                                                            |
+| **NUS**        | National University of Singapore , A University Located in Central Singapore                                                       |
+| **TA**         | Teaching Assistant, a tutor who will conduct tutorials in National University of Singapore                                         |
+| **SoC**        | School of Computing in National University of Singapore                                                                            |
 | **Student ID** | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L |
-| **GUI**        | Graphical User Interface , all the part of the application which you can interact with your mouse                         |
-| **CLI**        | Command Line Interface , part of application which can only be used with commands from the Keyboard                       |
+| **GUI**        | Graphical User Interface , all the part of the application which you can interact with your mouse                                  |
+| **CLI**        | Command Line Interface , part of application which can only be used with commands from the Keyboard                                |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 8. Command summary
 <a id="command-summary"></a>
 
-| Action            | Format, Examples                                                                                        |
-|-------------------|---------------------------------------------------------------------------------------------------------|
-| **Add Student**    | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`            |
-| **Edit Student**    | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`      |
-| **Delete Student**  | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                               |
-| **List Students**   | `listStu`                                                                                               |
-| **Add Tutorial**    | `addTut tn/TUTORIAL NAME id/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 id/1011`                           |
-| **Delete Tutorial** | `deleteTut TUTORIAL ID`<br> e.g., `deleteTut 1011`                                                      |
-| **List Tutorials**  | `listTut`                                                                                               |
-| **Add Assignment**  | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`              |
-| **Delete Assignment**| `deleteAsg ASSIGNMENT TITLE`<br> e.g., `deleteAsg Assignment 1`                                         |
-| **List Assignments**| `listAsg`                                                                                               |
-| **Mark Assignment** | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                 |
-| **Unmark Assignment**| `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                             |
-| **Check Assignment**| `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                       |
-| **Mark Attendance** | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/1001 d/2024-02-21`      |
-| **Unmark Attendance**| `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/1001 c/1001 d/2024-02-21` |
-| **Clear**          | `clear`                                                                                                 |
-| **Help**           | `help`                                                                                                  |
-| **Exit**           | `exit`                                                                                                  |
+| Action                | Format, Examples                                                                                        |
+|-----------------------|---------------------------------------------------------------------------------------------------------|
+| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`            |
+| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`      |
+| **Delete Student**    | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                               |
+| **List Students**     | `listStu`                                                                                               |
+| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 c/1011`                             |
+| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g., `deleteTut c/1011`                                                  |
+| **List Tutorials**    | `listTut`                                                                                               |
+| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`              |
+| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g., `deleteAsg n/Assignment 1`                                     |
+| **List Assignments**  | `listAsg`                                                                                               |
+| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                 |
+| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                             |
+| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                       |
+| **Mark Attendance**   | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/1001 d/2024-02-21`      |
+| **Unmark Attendance** | `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/1001 c/1001 d/2024-02-21` |
+| **Clear**             | `clear`                                                                                                 |
+| **Help**              | `help`                                                                                                  |
+| **Exit**              | `exit`                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
