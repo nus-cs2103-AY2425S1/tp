@@ -467,7 +467,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Executing commands
 
-    1. Refer to the User Guide [here](https://ay2425s1-cs2103t-t16-2.github.io/tp/UserGuide.html#faq) for the list of commands.
+    1. Refer to the User Guide [here](https://ay2425s1-cs2103t-t16-2.github.io/tp/UserGuide.html#command-summary) for the list of commands.
 
 4. Closing the application
 
