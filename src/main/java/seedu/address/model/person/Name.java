@@ -11,7 +11,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, "
-            + "should not be blank and must be fewer than 50 characters";
+            + "should not be blank and must be a maximum of 50 characters";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -32,7 +32,6 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        checkArgument(name.length() <= MAX_LENGTH, MESSAGE_CONSTRAINTS);
         fullName = name;
     }
 
@@ -40,7 +39,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
     }
 
 
