@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.WeddingBook;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 import seedu.address.testutil.WeddingBuilder;
@@ -239,11 +241,6 @@ public class AddWeddingCommandTest {
         }
 
         @Override
-        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Wedding> getFilteredWeddingList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -258,6 +255,24 @@ public class AddWeddingCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person personWithAllTagsRemoved( Person personToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void deletePersonInWedding(Person editedPerson, Set<Tag> tagsInBoth) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

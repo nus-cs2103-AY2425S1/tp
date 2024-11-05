@@ -88,10 +88,10 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Tags in Knotty Planners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `Jonus Ho & Izzat Syazani`, `stacy & sam`).
+* Tags in Knotty Planners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`,, `Stacy & Sam` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -100,7 +100,7 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing Help : `help`
 
@@ -117,7 +117,7 @@ You can add a person to the list of contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
-<box type="tip" seamless>
+box type="important" seamless>
 
 **IMPORTANT:**
 
@@ -130,18 +130,19 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 **Tip:**
 * A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
-involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
+  involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
+  
 * To make add person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
-
-    Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
+  
+  Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
 
 </box>
 
 ![add message](images/addMsg.png)
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer`
-* `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Prison j/Caterer t/stacy & sam`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, Blk 123, #01-04 j/Photographer`
+* `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Center j/Caterer t/Stacy & Sam`
 
 ### Deleting a Contact : `del` followed by `y` or `n`
 
@@ -154,10 +155,17 @@ You can delete a person from your list of contacts.
 
 Format: `del n/NAME` followed by `y` or `n`
 
-**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be
-affected.
+<box type="important" seamless>
 
-![delete message](images/deleteMsg.png)
+**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be affected.
+
+</box>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="images/deleteMsg.png" alt="delete message" style="width: 33%;">
+  <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 33%;">
+  <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 33%;">
+</div>
 
 Examples:
 * `del n/John Doe` followed by `y` deletes the person named `John Doe` from the address book.
@@ -171,17 +179,20 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 
 <box type="tip" seamless>
 
-**Tip:** 
+**Tip:**
 * You have to provide at least one of the optional fields.
-* If you accidentally type the name of the contact in all capitals or add one too many spaces, don't worry! Knotty Planner will 
-automatically format the name by removing the extra spacing and correctly capitalizing it 🤩
+* If you accidentally type the name of the contact in all capitals or add one too many spaces, don't worry! Knotty Planner will
+  automatically format the name by removing the extra spacing and correctly capitalizing it 🤩
 
-**IMPORTANT:** Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using 
+**IMPORTANT:** Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
 
 </box>
 
-![edit message](images/editMsg.png)
+<div style="display: flex; justify-content: space-between;">
+  <img src="images/editMsg.png" alt="edit message" style="width: 50%;">
+  <img src="images/editMsg2.png" alt="edit message success" style="width: 50%;">
+</div>
 
 Examples:
 *  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be
@@ -382,6 +393,7 @@ There is no need to save manually.
 **<span style="color: red;">Caution:</span>**
 * If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving Data Files `[coming in v2.0]`
@@ -412,22 +424,3 @@ _Details coming soon ..._
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command Summary
-
-| Action            | Format, Examples                                                                                                                                                                           |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
-| **Delete Contact** | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                     |
-| **List Contacts** | `list`                                                                                                                                                                                |
-| **Edit Contact**  | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                      |
-| **Add Wedding**   | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                   |
-| **Delete Wedding** | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                        |
-| **Clear**         | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                     |
-| **Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                              |
-| **Deleting Tags** | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                              |
-| **Filter**        | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                         |
-| **View Wedding**  | `view-wed NAME & NAME` <br> e.g., `view-wed John & Sarah`                                                                                                                               |
-| **List Weddings** | `list-wed`                                                                                                                                                                            |
-| **Help**          | `help`                                                                                                                                                                                |
-| **Exit**          | `exit`                                                                                                                                                                                |

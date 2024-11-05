@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -83,6 +82,7 @@ public class TagAddCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getJob(), editedTags);
+
 
         model.updatePersonInWedding(personToEdit, editedPerson);
         setPersonInWedding(editedPerson, personToEdit, model);
@@ -176,29 +176,6 @@ public class TagAddCommand extends Command {
     }
 
     /**
-     * Gets a list of weddings whose name matches that of the tags in the set.
-     *
-     * @param model current Model containing necessary wedding address book.
-     * @param tags set of tags input by the user.
-     * @return a List of weddings that match the tag.
-     */
-    private List<Wedding> getWeddingfromTags(Model model, Set<Tag> tags) {
-        List<String> predicate = tags
-                .stream().map(Tag::getTagName).collect(Collectors.toList());
-        List<Wedding> list = new ArrayList<>();
-
-        for (Wedding wedding : model.getFilteredWeddingList()) {
-            for (String tagName : predicate) {
-                if (wedding.getWeddingName().toString().equals(tagName)) {
-                    list.add(wedding);
-                }
-            }
-        }
-
-        return list;
-    }
-
-    /**
      * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
      *
      * @param model current Model containing necessary wedding address book.
@@ -207,7 +184,7 @@ public class TagAddCommand extends Command {
      * @throws CommandException if none of the weddings corresponding to the tags exist.
      */
     private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) throws CommandException {
-        List<Wedding> weddingList = getWeddingfromTags(model, editedTags);
+        List<Wedding> weddingList = model.getWeddingFromTags(editedTags);
 
         if (weddingList.isEmpty()) {
             Set<Tag> tagsDontExist = new HashSet<>(editedTags);
@@ -237,7 +214,7 @@ public class TagAddCommand extends Command {
      * @param model current Model containing necessary wedding address book.
      */
     private void setPersonInWedding(Person editedPerson, Person personToEdit, Model model) {
-        List<Wedding> weddingList = getWeddingfromTags(model, editedPerson.getTags());
+        List<Wedding> weddingList = model.getWeddingFromTags(editedPerson.getTags());
 
         List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
                 .toList();
