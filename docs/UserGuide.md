@@ -421,82 +421,74 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### **Add Listing**
-    - **Format:** `AddListingCommand`
-    - **Description:** Adds a new property listing with specified details.
+    - **Format:** `listing n/NAME price/PRICE area/AREA address/ADDRESS region/REGION seller/SELLER [buyer/BUYER]...`
+    - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
       >
-      > **Input**:
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/Alex Yeoh`
       >
-      > **Output**:
+      > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
       >
+      > ![listing](images/warton_house_listing.png)
+      > 
       > ---
       >
-      > **Use Case #2**:
+      > **Use Case #2**: Adding a listing with no buyers
       >
-      > **Input**:
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu`
       >
-      > **Output**:
+      > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
       >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
+      > ![listing2](images/warton_house_no_buyers.png)
+      > 
       > ---
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Attempting to add a listing for a non-existent seller
       >
-      > **Input**:
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/bob7`
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
+      > ---
+      > 
+      > **Use Case #2**: Attempting to add non-existent buyers to a listing
+      > 
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/bob7`
+      > 
+      > **Output**: Please enter an existing client name!
+      > 
       > ---
 
 - #### **Show Listings**
-    - **Format:** `ShowListingsCommand`
+    - **Format:** `showlistings`
     - **Description:** Displays all current listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: To show all listings in the addressbook
       >
-      > **Input**:
+      > **Input**: showlistings
       >
-      > **Output**:
+      > **Output**: Here are your listings!
       >
+      > ![showlistings](images/showListings.png)
+      > 
       > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
+      > 
+      > **Use Case #2**: To show all listings (when there are none)
+      > 
+      > **Input**: showlistings
+      > 
+      > **Output**: You have no listings available.
+      > 
+      > ![nolistings](images/no_listings.png)
+      > 
       > ---
 
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
+    - **Failed Execution:** NIL
 
 - #### **Add Buyers to Listing**
     - **Format:** `AddBuyersToListingCommand`
