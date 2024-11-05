@@ -39,8 +39,10 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
+                setMouseTransparent(false);
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setMouseTransparent(true);
             }
         }
     }
