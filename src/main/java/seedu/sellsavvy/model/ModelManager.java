@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ReadOnlyObjectWrapper<Person> selectedPersonProperly;
+    private final ReadOnlyObjectWrapper<Person> selectedPersonProperty;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        selectedPersonProperly = new ReadOnlyObjectWrapper<>(); // initially no order is displayed
+        selectedPersonProperty = new ReadOnlyObjectWrapper<>(); // initially no order is displayed
     }
 
     public ModelManager() {
@@ -155,12 +155,12 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyObjectProperty<Person> getSelectedPersonProperty() {
-        return selectedPersonProperly.getReadOnlyProperty();
+        return selectedPersonProperty.getReadOnlyProperty();
     }
 
     @Override
     public void updateSelectedPerson(Person person) {
-        selectedPersonProperly.set(person);
+        selectedPersonProperty.set(person);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class ModelManager implements Model {
 
     @Override
     public Person getSelectedPerson() {
-        return selectedPersonProperly.get();
+        return selectedPersonProperty.get();
     }
 
     @Override
