@@ -12,8 +12,8 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String COMMAND_CONFIRM_WORD = "confirm";
-    public static final String MESSAGE_CONFIRMATION_REQUIRED = "Please confirm the clear action"
-            + "by typing: clear confirm";
+    public static final String MESSAGE_CONFIRMATION_REQUIRED =
+            "Please confirm the clear action by typing: clear confirm";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
     @Override
