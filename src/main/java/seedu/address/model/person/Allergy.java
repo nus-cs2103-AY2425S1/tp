@@ -67,6 +67,15 @@ public class Allergy implements Comparable<Allergy> {
     }
 
     /**
+     * Returns the allergy of the patient.
+     *
+     * @return The allergy of the patient
+     */
+    public String getAllergy() {
+        return allergyName;
+    }
+
+    /**
      * Compares this {@code Allergy} object with the specified {@code Allergy} object for order.
      * Returns a negative integer, zero, or a positive integer if this {@code Allergy}
      * is lexicographically less than, equal to, or greater than the specified {@code Allergy}.
