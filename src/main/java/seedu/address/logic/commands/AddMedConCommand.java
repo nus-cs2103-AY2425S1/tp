@@ -5,8 +5,11 @@ import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -34,7 +37,7 @@ public class AddMedConCommand extends Command {
 
     public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition(s): %1$s to Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
-    public static final String MESSAGE_DUPLICATE_MEDCON = "Condition already assigned: %1$s";
+    public static final String MESSAGE_DUPLICATE_MEDCON = "Condition(s) already assigned: %1$s";
 
     private final Nric nric;
     private final Set<MedCon> medCons;
@@ -54,25 +57,53 @@ public class AddMedConCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
                 .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
-        if (person.getNric().equals(this.nric)) {
-            Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
-            // check for duplicates
-            for (MedCon medCon : medCons) {
-                if (!updatedMedConSet.add(medCon)) {
-                    throw new CommandException(String.format(MESSAGE_DUPLICATE_MEDCON, medCon.medConName));
-                }
-            }
-            Person editedPerson = new Person(
-                    person.getName(), person.getPhone(), person.getEmail(),
-                    person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                    person.getGender(), person.getAllergies(), person.getPriority(), person.getAppointments(),
-                    updatedMedConSet);
-            model.setPerson(person, editedPerson);
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(generateSuccessMessage(editedPerson));
+
+        // if the NRICs do not match, throw exception immediately.
+        if (!person.getNric().equals(this.nric)) {
+            throw new CommandException(PATIENT_DOES_NOT_EXIST);
         }
-        throw new CommandException(PATIENT_DOES_NOT_EXIST);
+
+        Set<MedCon> updatedMedConSet = getUpdatedMedConSet(person);
+
+        // Create the edited person with updated medical conditions.
+        Person editedPerson = new Person(
+                person.getName(), person.getPhone(), person.getEmail(),
+                person.getNric(), person.getAddress(), person.getDateOfBirth(),
+                person.getGender(), person.getAllergies(), person.getPriority(), person.getAppointments(),
+                updatedMedConSet);
+
+        model.setPerson(person, editedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
+
+    /**
+     * Retrieves the updated set of medical conditions for a person, ensuring no duplicate conditions are added.
+     *
+     * @param person The {@code Person} whose medical conditions are being updated.
+     * @return A {@code Set<MedCon>} containing the updated list of medical conditions for the person.
+     * @throws CommandException if there are any duplicate medical conditions in the provided set.
+     */
+    private Set<MedCon> getUpdatedMedConSet(Person person) throws CommandException {
+        Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
+        List<MedCon> duplicateMedCons = new ArrayList<>();
+
+        for (MedCon medCon : medCons) {
+            if (!updatedMedConSet.add(medCon)) {
+                duplicateMedCons.add(medCon);
+            }
+        }
+
+        if (!duplicateMedCons.isEmpty()) {
+            String duplicates = duplicateMedCons.stream()
+                    .map(MedCon::getMedCon)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_MEDCON, duplicates));
+        }
+
+        return updatedMedConSet;
+    }
+
 
     /**
      * Generates a command execution success message based on the added medical conditions.

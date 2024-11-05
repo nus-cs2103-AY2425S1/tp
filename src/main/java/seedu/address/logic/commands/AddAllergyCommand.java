@@ -5,7 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,7 @@ public class AddAllergyCommand extends Command {
 
     public static final String MESSAGE_ADD_ALLERGY_SUCCESS = "Added allergy/allergies: %1$s to Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
-    public static final String MESSAGE_DUPLICATE_ALLERGY = "Allergy already assigned: %1$s";
+    public static final String MESSAGE_DUPLICATE_ALLERGY = "Allergy/allergies already assigned: %1$s";
 
     private final Nric nric;
     private final Set<Allergy> allergies;
@@ -61,14 +63,9 @@ public class AddAllergyCommand extends Command {
             throw new CommandException(PATIENT_DOES_NOT_EXIST);
         }
 
-        // add the allergies.
-        Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
-        for (Allergy allergy : allergies) {
-            if (!updatedAllergySet.add(allergy)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.allergyName));
-            }
-        }
+        Set<Allergy> updatedAllergySet = getUpdatedAllergySet(person);
 
+        // Create the edited person with updated allergies.
         Person editedPerson = new Person(
                 person.getName(), person.getPhone(), person.getEmail(),
                 person.getNric(), person.getAddress(), person.getDateOfBirth(),
@@ -79,6 +76,34 @@ public class AddAllergyCommand extends Command {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
+
+    /**
+     * Retrieves the updated set of allergies for a person, ensuring no duplicate allergies are added.
+     *
+     * @param person The {@code Person} whose allergies are being updated.
+     * @return A {@code Set<Allergy>} containing the updated list of allergies for the person.
+     * @throws CommandException if there are any duplicate allergies in the provided set.
+     */
+    private Set<Allergy> getUpdatedAllergySet(Person person) throws CommandException {
+        Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
+        List<Allergy> duplicateAllergies = new ArrayList<>();
+
+        for (Allergy allergy : allergies) {
+            if (!updatedAllergySet.add(allergy)) {
+                duplicateAllergies.add(allergy);
+            }
+        }
+
+        if (!duplicateAllergies.isEmpty()) {
+            String duplicates = duplicateAllergies.stream()
+                    .map(Allergy::getAllergy)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, duplicates));
+        }
+
+        return updatedAllergySet;
+    }
+
 
     /**
      * Generates a command execution success message based on the added allergies.
