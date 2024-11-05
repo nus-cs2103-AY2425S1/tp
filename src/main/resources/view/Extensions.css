@@ -37,7 +37,7 @@
 
 .attendance-pane .scroll-bar .thumb {
     -fx-background-color: derive(#9b9b9b, 70%);
-    -fx-background-insets: 2.5;
+    -fx-background-insets: 2;
 }
 
 .attendance-pane .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
@@ -65,5 +65,44 @@
 
 #paymentCardPlaceholder {
     -fx-padding : 0 15 0 0;
+}
+
+#dashboardPlaceHolder {
+}
+
+#dashboard {
+    -fx-background-color: white;
+    -fx-padding: 10 0 10 15;
+}
+
+#dashboard #scrollPane {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 0 0 0 0;
+    -fx-border-width: 0;
+}
+
+.tutorial-pane .scroll-bar .thumb {
+    -fx-background-color: derive(#9b9b9b, 70%);
+    -fx-background-insets: 2;
+}
+
+.tutorial-pane .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 4 0 4 0;
+}
+
+#total {
+    -fx-background-color: #F1F1F1;
+    -fx-background-radius: 5;
+    -fx-padding: 2 20;
+    -fx-font-size: 14;
+    -fx-text-fill: #262626;
+}
+
+#feesOverdue {
+    -fx-background-color: #E5F9F9;
+    -fx-background-radius: 5;
+    -fx-padding: 2 20;
+    -fx-font-size: 14;
+    -fx-text-fill: #262626;
 }
 

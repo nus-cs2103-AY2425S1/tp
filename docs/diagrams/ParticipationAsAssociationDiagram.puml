@@ -1,0 +1,19 @@
+@startuml
+
+package Model as ModelPackage<<Rectangle>>{
+
+    class Student
+
+    class Tutorial
+
+    class Participation {
+            - List<Attendance> attendance
+
+            }
+    }
+
+    Student "0..*" -right- "0..*" Tutorial
+    (Student, Tutorial). Participation
+}
+
+@enduml

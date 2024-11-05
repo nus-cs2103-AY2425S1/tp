@@ -2,235 +2,260 @@
 layout: page
 title: User Guide
 ---
+# EduVault User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface**
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type quickly, AB3 can get your
-contact management tasks done faster than traditional GUI apps.
+**EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
-* Table of Contents
-{:toc}
+---
 
---------------------------------------------------------------------------------------------------------------------
-
-## Quick start
-
-1. Ensure you have Java `17` or above installed in your Computer.
-
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-2/tp/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/false attend/true` : Adds a student named `John Doe` to the Address Book, where he has not made payment but has attended the tuition classes.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Features
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+A person can have any number of tags (including 0)
 </div>
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT attend/ATTENDANCE [t/TAG]…​`
-
-- When inputting `pay/PAYMENT` and `attend/ATTENDANCE`, note that `PAYMENT` and `ATTENDANCE` here refers to either `true` or `false`, and it is case-insensitive. Refer to the example below for its usages.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
 A person can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/true attend/true`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 pay/false attend/true t/criminal`
+### **1. Quick Start** 
 
-### Listing all persons : `list`
+1. Ensure you have Java `17` or above installed in your Computer.
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-2/tp/releases).
+3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eduvault.jar` command to run the application.  
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.  
+   ![Ui](images/Ui.png)
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
+   Some example commands you can try:
+    1. `list` : Lists all contacts.
+    2. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/false attend/true` : Adds a student named `John Doe` to the Address Book, where he has not made payment but has attended the tuition classes.
+    3. `delete 3` : Deletes the 3rd contact shown in the current list.
+    4. `clear` : Deletes all contacts.
+    5. `exit` : Exits the app.
+6. Refer to the table below for the general command format
 
-Shows a list of all persons in the address book.
+---
 
-Format: `list`
+### **2. Adding data**
 
-### Editing a person : `edit`
+The commands in this section are used to add new records to the system, such as students and tutorials.
 
-Edits an existing person in the address book.
+- [Adding a student](#21-adding-a-student)
+- [Creating a new tutorial](#22-creating-a-new-tutorial)
+- [Enrolling student into a tutorial](#23-enrolling-student-into-a-tutorial)
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [attend/ATTENDANCE] [t/TAG]…​`
+#### **2.1 Adding a student**
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* When inputting `[pay/PAYMENT]` and `[attend/ATTENDANCE]`, note that `PAYMENT` and `ATTENDANCE` here refers to either `true` or `false`, and it is case-insensitive. Refer to the example below for its usages.
+#### **2.2 Creating a new tutorial**
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com attend/true pay/false` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively. Besides this, edit the payment and attendance of this person to `true` and `false` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+#### **2.3 Enrolling student into a tutorial**
 
-### Locating persons by name: `find`
+Command:  `enroll`
 
-Finds persons whose names contain any of the given keywords.
+Usage: `enroll INDEX tut/TUTORIAL_NAME`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* `INDEX:` Index number as shown in the displayed list of the students.
+    * Must be a positive integer 1, 2, 3…
+* `TUTORIAL_NAME:` Name of the tutorial
+</div>
+{% endraw %}
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+Student can only be enrolled into existing tutorial. Use createtut to create new tutorials
+</div>
 
-### Filtering persons by payment: `filterp`
+Example usages
 
-Finds persons who has or has not made payment.
+* `enroll 1 tut/physics`
 
-Format: `filterp HASPAID`
+{% raw %}
+<div markdown="1" class="smaller-text">
+Invalid usages
 
-* When inputting `HASPAID` refers to either `true` or `false`, and it is case-sensitive. Refer to the example below for its usages.
+* Enrolling student in a tutorial that has not been created yet
 
-Examples:
-* `filterp true`
-* `filterp false`
+    * *Error Message: Tutorial name provided is invalid*
 
-### Marking Payment: `markpaid`
+* Enrolling student in a tutorial that they are already in
 
-Marks whether the fees has been paid for the specified person in the address book.
+    * *Error Message: This person is already in the tutorial*
 
-Format: `markpaid INDEX`
+* Format errors, check [here](#11-format-errors)
 
-* Marks the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+</div>
+{% endraw %}
 
-### Marking Attendance: `markattend`
+### 
 
-Marks the attendance of the specified person from the address book.
+---
 
-Format: `markattend INDEX`
+### **3. Viewing and retrieving data**
 
-* Marks the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+The commands in this section are used to view and retrieve records on the system, such as students, tutorials, and enrollment status.
 
-### Deleting a person : `delete`
+3.1 Listing all students  
+3.2 Search
 
-Deletes the specified person from the address book.
+---
 
-Format: `delete INDEX`
+### **4. Editing and updating data**
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+The commands in this section are used edit records on the system, such as student information, tutorial information, payment, and attendance status
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+4.1 Editing student’s details  
+4.2 Logging fees  
+4.3 Marking payment  
+4.4 Marking attendance of student  
+4.5 Marking attendance of tutorial  
+4.6 Unenroll a student from tutorial
 
-### Clearing all entries : `clear`
+### **4.2 Logging fees for tutorial**
 
-Clears all entries from the address book.
+*Logging each student's monthly tutorial fees or any other additional fees*
 
-Format: `clear`
+Command:  `addfees`
 
-### Exiting the program : `exit`
+Usage: addfees `INDEX pay/PAYMENT`
+
+Fields
+
+* `INDEX:` Index number as shown in the displayed list of the students.
+    * Must be a positive integer 1, 2, 3…
+* `PAYMENT:` Amount in integer that a student have to pay
+
+| **Note:** Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+
+Example usages
+
+* `addfees 1 pay/400`
+
+Invalid usages
+
+* Format errors, check [here](#11-format-errors)
+
+
+### **4.3 Marking a student’s payment**
+
+*Recording a student’s payment*
+
+Command:  `markpaid`
+
+Usage: markpaid `INDEX pay/PAYMENT`
+
+Fields
+
+* `INDEX:` Index number as shown in the displayed list of the students.
+    * Must be a positive integer 1, 2, 3…
+* `PAYMENT:` Amount in integer that a student have paid
+
+| **Note:** Student’s payment will be shown as a decrease in overdue amount. If student pays extra, it will be shown as advanced payment
+
+Example usages
+
+* `markpaid 1 pay/400`
+
+Invalid usages
+
+* Format errors, check [here](#11-format-errors)
+
+
+
+### **4.6 Unenrolling student from a tutorial**
+
+Command:  `unenroll`
+
+Usage: `unenroll` `INDEX tut/TUTORIAL_NAME`
+
+Fields
+
+* `INDEX:` Index number as shown in the displayed list of the students.
+    * Must be a positive integer 1, 2, 3…
+* `TUTORIAL_NAME:` Name of the tutorial
+
+| **Note:** Student can only be unenrolled from tutorials that they are currently in
+
+Example usages
+
+* `unenroll 1 tut/physics`
+
+Invalid usages
+
+* Unenrolling student from a tutorial that they are not in
+
+    * *Error Message: Cannot unenroll STUDENT from TUTORIAL, as…*
+
+* Format errors, check [here](#11-format-errors)
+
+---
+
+### **5. Deleting data**
+
+The commands in this section are used to delete records on the system
+
+5.1 Deleting a student  
+5.2 Closing a tutorial  
+5.3 Clearing all entries
+
+---
+
+### **6. Viewing help**
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Command: `help`
+
+---
+
+### **7. Exiting the program**
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+---
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+### **8. Saving data** 
 
-### Editing the data file
+---
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+### **9. Editing the data file**
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+---
 
-### Archiving data files `[coming in v2.0]`
+### **10. Command summary**
 
-_Details coming soon ..._
+---
 
---------------------------------------------------------------------------------------------------------------------
+### **11. Format Errors**
 
-## FAQ
+| Error Message | Most Likely Cause |
+| :---- | :---- |
+| *Unknown Command….* | Command misspelled Command not available in the current release |
+| *Invalid Command format…* | Command word is correct but the format entered is wrong Index is missing, or is a negative number Prefix is missing or misspelt Unidentified inputs after the command word and before the first prefix |
+| *The student’s index provided is invalid…* | Index provided is out of range for current displayed list |
+| *Multiple values specified for the following single-valued field(s)...* | Duplicated prefix usage used when it is not allowed |
 
-**Q**: How do I transfer my data to another Computer?<br>
+---
+
+### **12. FAQ**
+
+**Q**: How do I transfer my data to another Computer?  
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
-## Known issues
+### **13. Known issues**
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+---
 
---------------------------------------------------------------------------------------------------------------------
+### **14. Archiving data files \[coming in v2.0\]**
 
-## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT attend/ATTENDANCE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pay/true attend/true t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [attend/ATTENDANCE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+
+
