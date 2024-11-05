@@ -111,6 +111,7 @@ public class ModelManager implements Model {
     @Override
     public void setEventTory(ReadOnlyEventTory eventTory) {
         this.eventTory.resetData(eventTory);
+        setUiState(UiState.DEFAULT);
     }
 
     @Override
