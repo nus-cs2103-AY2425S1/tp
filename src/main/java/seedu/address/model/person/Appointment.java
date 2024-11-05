@@ -18,7 +18,7 @@ import seedu.address.model.person.exceptions.TimeParseException;
  */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in a format of \n"
+    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the calendar and in a format of \n"
             + "dd/MM/yyyy HH:mm or dd MM yyyy HH:mm or dd-MM-yyyy HH:mm";
 
     public static final LocalDate TODAY = LocalDate.now();

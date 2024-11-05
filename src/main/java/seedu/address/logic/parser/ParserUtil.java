@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
@@ -45,25 +46,25 @@ public class ParserUtil {
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern(
-            "dd MMMM yyyy",
-            Locale.ENGLISH);
+            "dd MMMM uuuu",
+            Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
 
     public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
-            "dd MMMM yyyy HH:mm",
-            Locale.ENGLISH);
+            "dd MMMM uuuu HH:mm",
+            Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
 
     public static final DateTimeFormatter[] DATE_FORMATTERS = new DateTimeFormatter[]{
         ENGLISH_FORMAT,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-        DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-        DateTimeFormatter.ofPattern("dd MM yyyy")
+        DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT)
     };
 
     public static final DateTimeFormatter[] DATE_TIME_FORMATTERS = new DateTimeFormatter[] {
         ENGLISH_FORMAT_WITH_TIME,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
-        DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
-        DateTimeFormatter.ofPattern("dd MM yyyy HH:mm")
+        DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd MM uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
     };
 
 
