@@ -100,14 +100,12 @@ public interface Model {
     List<Person> getPersonList();
 
     /**
-     * TODO: Add ReadOnly Feature to the parameter
      * Replaces goods data with the data in {@code goodsReceipt}.
      */
     void setGoods(ReadOnlyReceiptLog goodsReceipts);
 
 
     /**
-     * TODO: Add ReadOnly Feature to the parameter
      * Returns the goods list.
      */
     ReadOnlyReceiptLog getGoods();
