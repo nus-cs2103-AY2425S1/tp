@@ -17,7 +17,7 @@ import seedu.sellsavvy.model.person.Person;
  * Lists all orders of a specified person to the user.
  */
 public class ListOrderCommand extends Command {
-    public static final String COMMAND_WORD = "listOrder";
+    public static final String COMMAND_WORD = "listorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List all orders under the person identified by the index number used in the displayed person list.\n"

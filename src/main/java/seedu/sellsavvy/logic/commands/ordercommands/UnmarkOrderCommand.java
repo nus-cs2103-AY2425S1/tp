@@ -23,7 +23,7 @@ import seedu.sellsavvy.model.order.Status;
  */
 public class UnmarkOrderCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmarkOrder";
+    public static final String COMMAND_WORD = "unmarkorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts an order to the pending status."
             + "Parameters: ORDER_INDEX (must be positive integer)\n"
