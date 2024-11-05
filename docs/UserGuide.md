@@ -130,6 +130,19 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
+### Tagging a client: `tag`
+
+Tags a client in the case management system.
+
+Format: `tag INDEX t/TAG_NAME`
+
+* Adds the tag to the client at the specific `INDEX`.
+* The tag must not contain any spaces
+* Only one tag can be added at once
+
+Example:
+- `tag 1 t/urgent`
+
 ### Locating beneficiaries by name: `find`
 
 Finds beneficiaries whose names and address contain any of the given keywords.
