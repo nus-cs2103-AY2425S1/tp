@@ -21,33 +21,30 @@ title: Developer Guide
     3. [Edit Person Feature](#edit-person-feature)
     4. [List Feature](#list-feature)
     5. [Find Person Feature](#find-person-feature)
-    6. [Filter Person Featuer](#filter-person-feature)
+    6. [Filter Person Feature](#filter-person-feature)
     7. [View Person Feature](#view-person-feature)
     8. [Summary Feature](#summary-feature)
     9. [Help Feature](#help-feature)
-8. [Proposed](#proposed)
-    1. [Reminder Feature](#reminder-feature)
-    2. [Multidelete Feature](#multidelete-feature)
-9. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-10. [Appendix: Requirements](#appendix-requirements)
+8. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+9. [Appendix: Requirements](#appendix-requirements)
     1. [Product Scope](#product-scope)
     2. [User Stories](#user-stories)
     3. [Use Cases](#use-cases)
     4. [Non-functional requirements](#non-functional-requirements)
     5. [Glossary](#glossary)
-11. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+10. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     1. [Launch and Shut Down](#launch-and-shutdown)
-    2. [Adding Person](#adding-person)
-    3. [Deleting Person](#deleting-person)
-    4. [Editing Person](#editing-person)
-    5. [Listing People](#listing-people)
-    6. [Finding Person](#finding-person)
-    7. [Viewing Person](#viewing-person)
-    8. [Summary](#summary)
-    9. [Help](#help)
-    10. [Saving Data](#saving-data)
-12. [Appendix: Planned Enhancements](#planned-enhancements)
-13. [Appendix: Effort](#effort)
+    2. [Adding Person](#adding-a-person)
+    3. [Deleting Person](#deleting-a-person)
+    4. [Editing Person](#editing-a-person)
+    5. [Listing People](#listing-all-people)
+    6. [Find a Person](#finding-a-person)
+    7. [Filter People](#filtering-persons)
+    8. [View a Person](#viewing-a-person)
+    9. [Show Summary Details](#summary-of-application-statuses)
+    5. [Saving Data](#saving-data)
+11. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+12. [Appendix: Effort](#appendix-effort)
 ---
 
 ## **TalentSG**
@@ -433,7 +430,7 @@ The sequence diagram below illustrates the above process of executing the `list`
 
 ---
 
-### Find Person Feature ###
+### Find Person Feature
 
 #### **Command Feature**
 
@@ -476,7 +473,7 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 ---
 
-### Filter Person Feature ###
+### Filter Person Feature
 
 #### **Command Feature**
 
@@ -515,7 +512,7 @@ We will be using the user input `filter Interviewed` as an example.
 #### `FindCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
-<img src="images/FindCommandSequenceDiagram.png" width="550" />
+<img src="images/FilterCommandSequenceDiagram.png" width="550" />
 
 ---
 
@@ -556,7 +553,7 @@ We will be using the user input `delete 2` as an example.
 #### `View Command` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
 
-<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+<img src="images/ViewCommandSequenceDiagram.png" width="550" />
 
 ---
 
@@ -599,7 +596,7 @@ We will be using the user input `summary` as an example:
 #### `SummaryCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of executing the `summary` command in TalentSG, which lists all persons in the address book.
 
-![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
+![SummaryCommandSequenceDiagram.png](images%2FSummaryCommandSequenceDiagram.png)
 
 ---
 
@@ -634,11 +631,6 @@ The CommandResult object is then passed to the UI, which opens a panel displayin
 :information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `help` (e.g. `help a123`), an error will be shown and the sequence of action is terminated.
-
-#### `HelpCommand` Implementation Sequence Diagram
-The sequence diagram below illustrates the above process of executing the `summary` command in TalentSG, which lists all persons in the address book.
-
-![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1000,22 +992,143 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a Person
+
+1. **Adding a person while all persons are being shown**
+
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
+
+    2. **Test case**: `add n/John Doe p/12345678 e/johndoe@example.com a/123 Main St s/Java, C++ st/Active ex/2 dr/Software Engineer note/First contact`<br>
+       **Expected**: New contact "John Doe" is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+
+    3. **Test case**: `add`<br>
+       **Expected**: No person is added. Error details shown in the status message. Status bar remains the same.
+
+    4. **Test case**: `add n/John Doe p/12345678`<br>
+       **Expected**: No person is added. Error details about missing email and other required fields shown in the status message. Status bar remains the same.
+
+    5. **Test case**: `add n/John Doe p/abcdefgh e/johndoe@example.com a/123 Main St s/Java, C++ st/Active ex/2 dr/Software Engineer note/Invalid phone`<br>
+       **Expected**: No person is added. Error details about invalid phone number format shown in the status message. Status bar remains the same.
+
+    6. **Test case**: `add n/Jane Doe p/87654321 e/janedoe@example.com a/456 Elm St s/Python, HTML st/Active ex/3 dr/Web Developer note/Second contact`<br>
+       **Expected**: New contact "Jane Doe" is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. **Test case**: `delete 1`<br>
+       **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. **Test case**: `delete 0`<br>
+       **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. **Other incorrect delete commands to try**: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       **Expected**: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a Person
+
+1. **Editing a person while all persons are being shown**
+
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
+
+    2. **Test case**: `edit 1 n/John Smith p/12345678 e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Active ex/4 dr/Project Manager note/Updated contact`<br>
+       **Expected**: The first contact is updated to "John Smith". Details of the updated contact shown in the status message. Timestamp in the status bar is updated.
+
+    3. **Test case**: `edit 0 n/John Smith p/12345678 e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Active ex/4 dr/Project Manager note/Invalid index`<br>
+       **Expected**: No person is edited. Error details shown in the status message. Status bar remains the same.
+
+    4. **Test case**: `edit 1`<br>
+       **Expected**: No person is edited. Error details about missing new details shown in the status message. Status bar remains the same.
+
+    5. **Test case**: `edit 1 n/John Smith p/abcdefgh e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Active ex/4 dr/Project Manager note/Invalid phone`<br>
+       **Expected**: No person is edited. Error details about invalid phone number format shown in the status message. Status bar remains the same.
+
+    6. **Test case**: `edit 3 n/Jane Doe p/23456789 e/janedoe@example.com a/456 Elm St s/Python, HTML st/Active ex/3 dr/Web Developer note/Invalid index`<br>
+       **Expected**: No person is edited. Error details shown in the status message. Status bar remains the same.
+
+### Listing All People
+
+1. **Listing all persons while the application is running**
+
+    1. **Prerequisites**: Ensure there are multiple persons added to the address book using the `add` command.
+
+    2. **Test case**: `list`<br>
+       **Expected**: All persons in the address book are displayed in a numbered list format. The status message confirms the action, and the timestamp in the status bar is updated.
+
+    3. **Test case**: `list` (when no persons are in the list)<br>
+       **Expected**: A message indicates that the address book is empty. The status bar remains unchanged.
+
+    4. **Test case**: `list` (after deleting a person)<br>
+       **Expected**: All remaining persons are displayed in a numbered list format, reflecting the deletion. The status message confirms the action, and the timestamp in the status bar is updated.
+
+    5. **Test case**: `list` (after editing a person)<br>
+       **Expected**: All persons are displayed in a numbered list format, reflecting the changes made to the edited person. The status message confirms the action, and the timestamp in the status bar is updated.
+
+    6. **Test case**: `list` (with special characters in names)<br>
+       **Expected**: Persons with special characters in their names are displayed correctly without errors. The status message confirms the action, and the timestamp in the status bar is updated.
+
+### Finding a Person
+
+1. **Finding a person while all persons are being shown**
+
+    1. **Prerequisites**: List all persons using the `list` command. Ensure there are multiple persons in the list.
+
+    2. **Test case**: `find John`<br>
+       **Expected**: Only persons matching the name "John" are displayed. The status message confirms the action, and the timestamp in the status bar is updated.
+
+    3. **Test case**: `find` (no search criteria provided)<br>
+       **Expected**: An error message is displayed indicating that no search criteria were provided. The status bar remains unchanged.
+
+    4. **Test case**: `find aj;sdlkfjasdkas`<br>
+       **Expected**: A message indicates that no matching persons were found. The status bar remains unchanged.
+
+### Filtering Persons
+
+1. **Filtering persons based on certain criteria**
+
+    1. **Prerequisites**: Ensure multiple persons are added to the address book with varying statuses.
+
+    2. **Test case**: `filter applied`<br>
+       **Expected**: Only persons with the status "applied" are displayed. The status message confirms the action, and the timestamp in the status bar is updated.
+
+    4. **Test case**: `filter` (no filter criteria provided)<br>
+       **Expected**: An error message is displayed indicating that no filter criteria were provided. The status bar remains unchanged.
+
+    5. **Test case**: `filter java`<br>
+       **Expected**: An error message indicates that "java" isn't a valid status and prompts the user to input a valid status. The status bar remains unchanged.
+
+### Viewing a Person
+
+1. **Viewing details of a specific person**
+
+    1. **Prerequisites**: List all persons using the `list` command. Ensure there are multiple persons in the list.
+
+    2. **Test case**: `view 1`<br>
+       **Expected**: Details of the first person are displayed. The status message confirms the action, and the timestamp in the status bar is updated.
+
+    3. **Test case**: `view 0`<br>
+       **Expected**: An error message is displayed indicating that the index is out of range. The status bar remains unchanged.
+
+    4. **Test case**: `view x` (where x is larger than the list size)<br>
+       **Expected**: An error message is displayed indicating that the index is out of range. The status bar remains unchanged.
+
+    5. **Test case**: `view` (no index provided)<br>
+       **Expected**: An error message is displayed indicating that no index was provided. The status bar remains unchanged.
+
+### Summary of Application Statuses
+
+1. **Displaying a summary of application statuses**
+
+    1. **Prerequisites**: Ensure multiple persons with various statuses are added to the address book.
+
+    2. **Test case**: `summary`<br>
+       **Expected**: A summary of all application statuses is displayed, including counts for each status. The total number of applicants is shown, and the status message confirms the action, along with an updated timestamp in the status bar.
+
+    3. **Test case**: `summary` (with no persons in the list)<br>
+       **Expected**: A message indicates that there are no applicants to summarize. The status bar remains unchanged.
 
 
 ### Saving data
