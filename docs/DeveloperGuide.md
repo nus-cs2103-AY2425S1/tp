@@ -552,6 +552,14 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
+## **Future features**
+Features that we feel would further enhance the user experience include
+- Clustering of the tags of the same categories together in the UI's display of the tags list.
+- The feature to pin selected contacts to be constantly shown at the top of the contacts list.
+- The option to customize the colors of the categories.
+- Include more than one number per contact as some people may own multiple contact numbers.
+- The feature to add a custom field to the contacts added.
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 Our goal was to improve AB3 in terms of contact organisation, finding and tagging to allow for greater functionality and flexibility.
