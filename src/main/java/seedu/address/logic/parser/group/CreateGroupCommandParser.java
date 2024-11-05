@@ -19,6 +19,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parser for Commands of type CreateGroup.
  */
 public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
+    static final String GROUP_NAME_EMPTY_ERROR = "Group name cannot be empty.";
+
     @Override
     public CreateGroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -31,6 +33,9 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME, PREFIX_MEMBERS);
         String groupName = argMultimap.getValue(PREFIX_GROUP_NAME).orElse("");
+        if (groupName.trim().isEmpty()) {
+            throw new ParseException(GROUP_NAME_EMPTY_ERROR);
+        }
         String membersString = argMultimap.getValue(PREFIX_MEMBERS).orElse("");
         List<Index> members;
         try {
