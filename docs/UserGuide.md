@@ -336,7 +336,8 @@ Examples:
 
 - `find n/David` returns `David LI` with NRIC `S6483749D`
 - `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
-  ![result for 'delete S6483749D'](images/deleteDavidResult.png)
+![delete command example](images/deleteDavid.png)
+![result for 'delete S6483749D'](images/deleteDavidResult.png)
 
 ### Clearing all entries: `clear confirm`
 
