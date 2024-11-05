@@ -52,7 +52,7 @@ public class FavCommand extends Command {
         model.setCompany(companyToFav, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
 
-        return new CommandResult(String.format(MESSAGE_FAV_COMPANY_SUCCESS, Messages.format(companyToFav)));
+        return new CommandResult(String.format(MESSAGE_FAV_COMPANY_SUCCESS, companyToFav.getName()));
     }
 
     @Override
