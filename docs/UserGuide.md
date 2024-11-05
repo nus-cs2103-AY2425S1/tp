@@ -137,8 +137,9 @@ Fields:
 * `PAYMENT`: Updates the absolute value of a student’s overdue amount
 * `TAG:` Existing tag will be replaced by the new tag
     * Remove a student’s tag by typing  `t/` without specifying any tags
-* ATTENDANCE: Field not editable within edit
-* TUTORIAL: Field not editable within edit
+* `ATTENDANCE`: Field not editable within edit
+* `TUTORIAL`: Field not editable within edit
+* `PAYMENT`: Field not editable within edit
 </div>
 {% endraw %}
 
@@ -159,7 +160,7 @@ Invalid usage:
     * *Error message: At least one field to edit must be provided.*
 * Values to edit result in a copy of a student already in EduVault
     * *Error message: This person already exists in the address book.*
-* ATTENDANCE & TUTORIAL prefix used
+* `ATTENDANCE` & `TUTORIAL` & `PAYMENT` prefix used
     * Error message: PREFIX cannot be used in this command
 * Format errors, check [here](#11-format-errors)
 </div>

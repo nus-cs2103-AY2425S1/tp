@@ -47,6 +47,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_TUTORIAL).isPresent()) {
             throw new ParseException(String.format(MESSAGE_PREFIX_NOT_ALLOWED, PREFIX_TUTORIAL));
         }
+        if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_PREFIX_NOT_ALLOWED, PREFIX_PAYMENT));
+        }
 
         Index index;
 
