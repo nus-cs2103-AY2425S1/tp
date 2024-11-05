@@ -3,8 +3,11 @@ layout: page
 title: User Guide
 ---
 
-PawPatrol is a **desktop app to help veterinary clinics manage their patient inflow and outflow, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, PawPatrol can get your contact management tasks done faster than traditional GUI apps.
+PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit 2 types of 
+entities, owners and pets. PawPatrol also allows the user to link owners to pets, allowing the user
+to easily see at a glance which pets belong to which owner. It is optimised 
+for use via a Command Line Interface** (CLI) which improves use speed while still having the user-friendliness of a Graphical User Interface (GUI). 
+If you can type fast, PawPatrol can manage patient owner and pet data faster than traditional organisation apps.
 
 * Table of Contents
 {:toc}
@@ -17,10 +20,10 @@ If you can type fast, PawPatrol can get your contact management tasks done faste
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/pawpatrol/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your PawPatrol.
+1. Copy the file to the folder you want to use as the _home folder_ for PawPatrol.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar pawpatrol.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
