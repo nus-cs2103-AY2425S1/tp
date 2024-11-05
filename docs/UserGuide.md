@@ -40,8 +40,7 @@ AdmiNUS helps you stay organized and efficient, letting you focus on running suc
     * [Importing CSV files: `import`](#importing-csv-files-import)
     * [Exporting CSV files: `export`](#exporting-csv-files)
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -76,7 +75,7 @@ AdmiNUS helps you stay organized and efficient, letting you focus on running suc
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format**<br>
+🔔 **Notes about the command format**: <br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -155,7 +154,7 @@ Adds a student to AdmiNUS
 
 **Format**: 
 ```shell
-student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
 | Parameter Name | Description                                                                             | Required    |
@@ -167,12 +166,14 @@ student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`    | Physical address                                                                        | Compulsory  |
 | `t/TAG`        | Tags to categorize contact (cannot contain spaces)                                      | Optional    |
 
-<div markdown="span" class="alert alert-primary">**Tip:**
+<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
+
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
 **Examples**:
-* `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a student named John Doe to AdmiNUS
 
 #### Adding a company: `company`
 
@@ -192,12 +193,14 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`   | Physical address                                   | Compulsory  |
 | `t/TAG`       | Tags to categorize contact (cannot contain spaces) | Optional    |
 
-<div markdown="span" class="alert alert-primary">**Tip:**
+<div markdown="span" class="alert alert-info"> 🔔**Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
+
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
 A company can have any number of tags (including 0)
 </div>
 
 Examples:
-* `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`
+* `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility` adds a company name Newgate Prison to AdmiNUS
 
 #### Editing a contact: `edit`
 
@@ -205,7 +208,7 @@ Edits an existing contact in the address book.
 
 **Format**: 
 ```
-edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 ```
 
 | Parameter Name | Description                                                   | Required   |
@@ -219,33 +222,36 @@ edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] 
 | `a/ADDRESS`   | Updated physical address                                      | Optional   |
 | `t/TAG`       | Updated tags (replaces existing tags, cannot contains spaces) | Optional   |
 
-**Notes**:
+<div markdown="block" class="alert alert-info">
 
-* The index refers to the index number shown in the displayed person list. 
-<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: The index must be a positive integer (1, 2, 3, ...). </div>
+🔔 **Notes**: <br>
+
+* The index refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, ...).
 
 * At least one of the optional fields must be provided.
 
-<div markdown="block" class="alert alert-warning">
-
 * For student contact, editing industry field is **prohibited**.
-* For company contact, editing student id field is **prohibited**.
 
-</div>
+* For company contact, editing student id field is **prohibited**.
 
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> 💡 **Tip**: You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">💡 **Tip**:
+
+You can remove all the person’s tags by typing `t/` without
+specifying any tags after it. </div>
 
 
-Examples:
+**Examples**:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 #### Deleting contact(s): `delete`
 
-Deletes the specified contacts from AdmiNUS
+Deletes the contact(s) at the specified indices from AdmiNUS
 
 Format: `delete INDEX [MORE_INDEX]`
 
@@ -254,11 +260,17 @@ Format: `delete INDEX [MORE_INDEX]`
 | `INDEX`            | Index number of the contact to delete                                |Compulsory|	
 | `MORE_INDEX`       | 	Additional index numbers of contacts to delete (separate by spaces) |	Optional|
 
-**Notes**:
-* Deletes the contact(s) at the specified `INDEX`.
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
 * Split the indices by spaces.
-* The index refers to the index number shown in the displayed person list.
-<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: The index must be a positive integer (1, 2, 3, ...). </div>
+
+* The index refers to the index number shown in the displayed person list. 
+
+* The index must be a positive integer (1, 2, 3, ...). 
+
+</div>
 
 **Examples**:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
@@ -273,17 +285,24 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-**Notes**:
+<div markdown="block" class="alert alert-info">
 
-<div markdown="span" class="alert alert-info"> 🔍 **Note**: The search is case-insensitive. For example, `hans` will match `Hans`. </div>
+🔔 **Notes**: <br>
+
+* The search is case-insensitive. For example, `hans` will match `Hans`. 
 
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+
 * Only the name is searched.
+
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+
+* Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+</div>
+
+**Examples**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
