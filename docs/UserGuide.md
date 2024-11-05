@@ -234,6 +234,8 @@ Usage: `closetut tut/TUTORIAL_NAME`
 Fields
 
 * `TUTORIAL_NAME`: Name of the tutorial to close
+  * Must only contain alphanumeric characters
+
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
