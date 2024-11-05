@@ -17,7 +17,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,6 @@ import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddMedConCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DelAllergyCommand;
 import seedu.address.logic.commands.DelMedConCommand;
 import seedu.address.logic.commands.DeleteApptCommand;
@@ -61,8 +59,8 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     private void testCommandInsensitiveCase(String usageMessage, String commandWord) {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, usageMessage),
-                     () -> parser.parseCommand(commandWord.toUpperCase()));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, usageMessage), () ->
+                parser.parseCommand(commandWord.toUpperCase()));
     }
 
     @Test
