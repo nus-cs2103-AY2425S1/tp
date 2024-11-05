@@ -32,6 +32,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 
 ---
 ## Table of Contents
+- [Command Summary](#command-summary)
 - [Symbols and Tips](#symbols-and-tips)
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -50,12 +51,34 @@ This app is a desktop app for managing candidates and job roles, **optimized for
     - [Archiving Data Files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
 - [Glossary](#glossary)
 - [Feedback and Support](#feedback-and-support)
 
 
 ---
+
+## Command Summary
+
+
+| Action      | Format, Examples                                                                                                                                                                                                           |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
+| **Clear**   | `clear`                                                                                                                                                                                                                    |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                        |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                             |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                      |
+| **List**    | `list`                                                                                                                                                                                                                     |
+| **Help**    | `help`                                                                                                                                                                                                                     |
+| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                            |
+| **Filter**  | `filter st/STATUS`<br> e.g., `filter st/Shortlisted`                                                                                                                                                                       |
+| **Summary** | `summary`                                                                                                                                                                                                                  |
+
+Detailed information can be found under [Features](#features).
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+---
+
 ## Symbols and Tips
 
 Throughout this guide, you'll encounter several symbols.
@@ -127,7 +150,7 @@ Each provides quick insights or warnings that can make your experience smoother:
 ## Features
 
 TalentSG provides a variety of features to help you manage candidates and job roles effectively.
----
+
 ### Notes About the Command Format
 
 - **UPPER_CASE**: Parameters to be supplied by the user.
@@ -433,25 +456,6 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command Summary
-
-
-| Action     | Format, Examples                                                                                                                                                                                                            |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
-| **Clear**  | `clear`                                                                                                                                                                                                                     |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                       |
-| **List**   | `list`                                                                                                                                                                                                                      |
-| **Help**   | `help`                                                                                                                                                                                                                      |
-| **View**   | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                             |
-| **Filter** | `filter st/STATUS`<br> e.g., `filter st/Shortlisted`                                                                                                                                                                        |
-
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-
----
 
 ## Glossary
 
