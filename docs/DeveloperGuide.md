@@ -291,17 +291,17 @@ University students meet people from many different places (e.g. different class
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                                                              | So that I can…​                                                        |
-|----------|----------|-------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user | see usage instructions                                                                    | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user     | add new contacts with their details (eg. name, phone number, email, address, tele handle) | keep track of my contacts in the app                                   |
-| `* * *`  | user     | delete a contact                                                                          | remove entries that I no longer need                                   |
-| `* * *`  | user     | find a person by name                                                                     | locate details of persons without having to go through the entire list |
-| `* * *`  | user     | edit contact details (e.g. phone number, email)                                           | so that I can keep the information up to date                          |
-| `* *`    | student  | add a new contact with multiple tags (e.g., CCA, classmate)                               | categorise them based on different associations                        |
-| `* *`    | student  | create custom categories for contacts                                                     | organise people according to my needs (e.g., classmates, CCAs)         |
-| `* *`    | student  | tag contacts with multiple categories                                                     | find them easily in different contexts                                 |
-| `*`      | student  | receive reminders to reach out to contacts I haven’t communicated with in a while         | maintain my connections                                                |
+| Priority | As a …​  | I want to …​                                                                         | So that I can…​                                                        |
+|----------|----------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user | see usage instructions                                                               | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user     | add new contacts with their details (eg. name, phone number, email, telegram handle) | keep track of my contacts in the app                                   |
+| `* * *`  | user     | delete a contact                                                                     | remove entries that I no longer need                                   |
+| `* * *`  | user     | find a person by name or telegram handle                                             | locate details of persons without having to go through the entire list |
+| `* * *`  | user     | edit contact details (e.g. phone number, email)                                      | so that I can keep the information up to date                          |
+| `* *`    | student  | add a new contact with multiple tags (e.g., CCA, classmate)                          | categorise them based on different associations                        |
+| `* *`    | student  | categorise contacts into different contact types (eg. work, personal)                | organise people according to my needs                                  |
+| `* *`    | student  | tag contacts with multiple categories                                                | find them easily in different contexts                                 |
+| `*`      | student  | receive reminders to reach out to contacts I haven’t communicated with in a while    | maintain my connections                                                |
 
 *{More to be added}*
 
@@ -428,6 +428,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. UniLink shows an error message.
 
       Use case resumes at step 1.
+
+**Use case: UC006 - Find contacts by name**
+
+**MSS**
+
+1.  User requests to find contacts by name
+2.  User enters keyword of a specific name
+3.  UniLink shows a list of persons with names containing the keyword
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The entered data is invalid
+    * 2a1. UniLink shows an error message
+    * 2a2. User enters new data
+
+      Steps 2a1-2a2 are repeated until the data entered is correct.
+
+      Use case resumes from step 3.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
