@@ -18,12 +18,18 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w08-4.github.io/tp/UserGuide.html#quick-start";
     public static final String COMMANDS_DESCRIPTION = "Valid Commands:\n"
             + "1. add\n"
-            + "2. clear\n"
-            + "3. delete\n"
-            + "4. edit\n"
+            + "2. delete\n"
+            + "3. tag\n"
+            + "4. untag\n"
             + "6. find\n"
             + "7. help\n"
-            + "8. list\n";
+            + "8. list\n"
+            + "9. group\n"
+            + "10. groups\n"
+            + "11. findGroup\n"
+            + "12. deleteGroup\n"
+            + "13. export\n"
+            + "14. import\n";
     public static final String GUIDE_REFERENCE_STRING = "Refer to the user guide for more details: " + USERGUIDE_URL;
     public static final String HELP_MESSAGE = COMMANDS_DESCRIPTION + "\n" + GUIDE_REFERENCE_STRING;
 
