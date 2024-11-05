@@ -27,7 +27,7 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
-public class AddCommandTest {
+public class AddSupplierCommandTest {
 
     @Test
     public void constructor_nullSupplier_throwsNullPointerException() {

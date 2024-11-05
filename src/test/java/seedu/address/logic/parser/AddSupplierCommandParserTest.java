@@ -52,8 +52,8 @@ import seedu.address.model.supplier.Supplier;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.SupplierBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddSupplierCommandParserTest {
+    private AddSupplierCommandParser parser = new AddSupplierCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

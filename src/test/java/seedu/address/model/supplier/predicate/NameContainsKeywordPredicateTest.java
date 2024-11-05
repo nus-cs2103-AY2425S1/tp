@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.testutil.SupplierBuilder;
 
-public class NameContainsPredicateTest {
+public class NameContainsKeywordPredicateTest {
     @Test
     public void equals() {
 

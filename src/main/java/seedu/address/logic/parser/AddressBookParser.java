@@ -72,7 +72,7 @@ public class AddressBookParser {
 
         case AddSupplierCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
-                return new AddCommandParser().parse(arguments.trim().substring(2));
+                return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
             } else if (arguments.trim().startsWith("-d")) {
                 return new AddDeliveryCommandParser().parse(arguments.trim().substring(2));
             } else {
