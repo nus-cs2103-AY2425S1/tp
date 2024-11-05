@@ -150,4 +150,18 @@ public class EventManager implements ReadOnlyEventManager {
         EventManager otherEventManager = (EventManager) other;
         return eventList.equals(otherEventManager.eventList);
     }
+
+    /**
+     * Updates the UI for each event in the event list.
+     * <p>
+     * This method iterates over all events in the {@code eventList} and calls their
+     * {@code updateUi()} method, ensuring that any changes to event data are reflected
+     * in the user interface.
+     * </p>
+     */
+    public void updateEvents() {
+        for (Event event : this.eventList) {
+            event.updateUi();
+        }
+    }
 }
