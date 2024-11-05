@@ -17,6 +17,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -24,8 +25,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddAllergyCommand;
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddMedConCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DelAllergyCommand;
+import seedu.address.logic.commands.DelMedConCommand;
 import seedu.address.logic.commands.DeleteApptCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -33,8 +37,11 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindMedConCommand;
+import seedu.address.logic.commands.FindNricCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPrioCommand;
+import seedu.address.logic.commands.SetPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.AppointmentExistsPredicate;
@@ -52,6 +59,37 @@ public class AddressBookParserTest {
     private static final Nric nric = new Nric("T1234567A");
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    private void testCommandInsensitiveCase(String usageMessage, String commandWord) {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, usageMessage),
+                     () -> parser.parseCommand(commandWord.toUpperCase()));
+    }
+
+    @Test
+    public void parseCommand_insensitivity() throws ParseException {
+        // test if the uppercase version of command still works
+        // thrown error should indicate command was correctly parsed as valid but wrong format, with appropriate msg
+        testCommandInsensitiveCase(AddCommand.MESSAGE_USAGE, AddCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(EditCommand.MESSAGE_USAGE, EditCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(DeleteCommand.MESSAGE_USAGE, DeleteCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(FindCommand.MESSAGE_USAGE, FindCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(FindNricCommand.MESSAGE_USAGE, FindNricCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(SetPriorityCommand.MESSAGE_USAGE, SetPriorityCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(AddApptCommand.MESSAGE_USAGE, AddApptCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(DeleteApptCommand.MESSAGE_USAGE, DeleteApptCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(AddMedConCommand.MESSAGE_USAGE, AddMedConCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(DelMedConCommand.MESSAGE_USAGE, DelMedConCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(FindMedConCommand.MESSAGE_USAGE, FindMedConCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(AddAllergyCommand.MESSAGE_USAGE, AddAllergyCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(DelAllergyCommand.MESSAGE_USAGE, DelAllergyCommand.COMMAND_WORD);
+        testCommandInsensitiveCase(ListPrioCommand.MESSAGE_USAGE, ListPrioCommand.COMMAND_WORD);
+
+        // these don't fail format, so test if success
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
