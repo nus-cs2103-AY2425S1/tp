@@ -124,15 +124,6 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</box>
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -270,6 +261,9 @@ Upon execution, `StatusCommand`:
 
 Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
 
+<puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
+
+The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
 ### Filter internship applications
 
 The implementation of the filter command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -366,6 +360,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS Undergraduate              | save the internship application data locally                     | I will not lose my data when I exit the application                      |
 | `* * *`  | CS Undergraduate              | load the internship from a saved file                            | I can get back my data when I open the application                       |
 | `* * *`  | CS Undergraduate              | clear the list of internship application I have saved            | I can restart a new list in the next internship application cycle        |
+| `* * *`  | CS Undergraduate              | find internship applications by company name                     | I can quickly locate specific applications for review or updates         |
+| `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can keep track of the progress of each application accurately |
 | `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application  | I can prioritize follow-ups with older applications                      |
 | `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications  | I can update my schedule accordingly                                     |
 | `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them | I can prioritize my time on checking up on these internship applications |
@@ -493,6 +489,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**System**: HireMe application
+**Use Case: UC05 - Find internship applications by company name**
+
+**MSS (Main Success Scenario)**
+
+1. The user requests to find internship applications by entering a search pattern (e.g., `/find Goo`).
+2. HireMe searches for internship applications with company names that contain words starting with the specified pattern.
+3. HireMe displays a list of all matching internship applications.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user provides an empty search pattern.
+    * 1a1. HireMe displays an error message indicating that the search pattern cannot be empty.
+
+      Use case ends.
+
+* 1b. The provided search pattern matches no company names.
+    * 1b1. HireMe shows a message indicating that no matching internship applications were found.
+
+      Use case ends.
+
+**System**: HireMe application
+**Use Case: UC06 - Update the status of an internship application**
+
+**MSS (Main Success Scenario)**
+
+1. The user requests to change the status of an internship application by specifying an index and the desired status (e.g., `/accept 2`, `/reject 3`, `/pending 4`).
+2. HireMe validates the provided index to ensure it is within the range of the current list.
+3. HireMe updates the status of the specified internship application to `ACCEPTED`, `REJECTED`, or `PENDING`.
+4. HireMe displays a confirmation message indicating that the status has been successfully updated.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user provides an invalid index (e.g., non-positive or non-integer value).
+    * 1a1. HireMe displays an error message indicating that the index is invalid.
+
+      Use case ends.
+
+---
 
 **Use Case: Load saved internship applications**
 
@@ -779,6 +818,65 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect sort commands to try: `/sort`, `/sort test`, `/sort earliest latest`, `/sort 1`<br>
        Expected: An error message should be shown which explains how to use the sort command and what parameters are valid.
 
+### Finding internship applications
+
+1. **Find using an exact match**
+
+    1. Prerequisites: The list should have internship applications added with company names such as "Google" and "Yahoo".
+    2. Test case: `/find Google`<br>
+       Expected: The application with the company name "Google" is displayed.
+
+2. **Find using a case-insensitive pattern**
+
+    1. Prerequisites: The list should have applications with company names like "Google" and "Yahoo".
+    2. Test case: `/find goo`<br>
+       Expected: The application with the company name "Google" is displayed, showing that the search is case-insensitive.
+    3. Test case: `/find YAHOO`<br>
+       Expected: The application with the company name "Yahoo" is displayed.
+
+3. **Find with partial matches**
+
+    1. Prerequisites: The list should include applications with company names like "Google" and "Yahoo".
+    2. Test case: `/find Goo`<br>
+       Expected: The application with the company name "Google" is displayed.
+    3. Test case: `/find Y`<br>
+       Expected: The application with the company name "Yahoo" is displayed.
+
+4. **Find when no matches exist**
+
+    1. Prerequisites: The list should not have any applications that match the given pattern.
+    2. Test case: `/find Microsoft`<br>
+       Expected: A message stating that no matching internship applications were found is shown.
+
+5. **Find with an empty pattern**
+
+    1. Prerequisites: The application should be running.
+    2. Test case: `/find`<br>
+       Expected: An error message stating that the search pattern cannot be empty is displayed.
+
+### Updating the status of an internship application
+
+1. **Update status to `ACCEPTED`**
+
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+    2. Test case: `/accept 1`<br>
+       Expected: The status of the 1st application (e.g., "Google") is updated to `ACCEPTED`.
+    3. Test case: `/accept 0`<br>
+       Expected: An error message indicating that the index is invalid.
+
+2. **Update status to `PENDING`**
+
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+    2. Test case: `/pending 2`<br>
+       Expected: The status of the 2nd application (e.g., "Yahoo") is updated to `PENDING`.
+
+3. **Update status to `REJECTED`**
+
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+    2. Test case: `/reject 1`<br>
+       Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`. 
+   3. Test case: `/reject 0`<br>
+      Expected: An error message indicating that the index is invalid.
 
 [//]: # (Find section here)
 
