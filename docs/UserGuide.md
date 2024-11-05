@@ -90,13 +90,13 @@ Format: `exit`
 
 ### Saving the data
 
-BuyerList data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
 All data is saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
 
-Note: By default, the storage folder is set to a folder named `package` in the home folder.
+Note: By default, the storage folder is set to a folder named `data` in the home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, the data files will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -111,17 +111,16 @@ Format: `switch PARSER_MODE`
 
 * Switches the parser mode to the specified `PARSER_MODE`.
 * The parser mode takes 3 types:
-* `b` for [buyers](#buyer-mode)
-* `m` for meet-ups
-* `p` for properties [properties](#property-mode)
+* `b` for [buyers](#buyers)
+* `m` for [meet-ups](#meet-ups)
+* `p` for [properties](#properties)
 * The default parser mode is set to `b`.
 
 Examples:
 * Upon entering the application, the parser mode is set to `b`.
 * `switch` followed by `m` switches the parser mode to meet-ups.
 
-![SwitchMeetUpBefore](images/SwitchMeetUpBefore.png)
-![SwitchMeetUpAfter](images/SwitchMeetUpAfter.png)
+![SwitchBuyerToMeetUp](images/SwitchBuyerToMeetUpSequence.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -146,10 +145,6 @@ Examples:
 
 </div>
 
-In buyer mode, you will be able to store and view the list of buyer's details.
-
-![buyer_mode display](images/BuyerModeDisplay.png)
-
 ### Viewing all buyers : `view`
 
 Shows a list of all buyers in the buyer list.
@@ -162,7 +157,7 @@ Adds a buyer to the buyer list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
 
-* New buyers must have unique names and cannot duplicate names of existing buyers.
+* New buyers must have unique names and must not be duplicate names of existing buyers.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A buyer can have any number of tags (including 0)
@@ -190,7 +185,7 @@ Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Locating buyer contacts: `find`
+### Locating buyers: `find`
 
 Finds existing buyers in existing buyer list based on keywords.
 
@@ -211,7 +206,7 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![FindBuyerSequence](images/FindBuyerSequence.png)
 
 ### Deleting a buyer : `delete`
 
@@ -228,7 +223,7 @@ Examples:
 * `view` followed by `delete 2` deletes the 2nd buyer in the displayed buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the displayed results of the `find` command.
 
-## Meet Up
+## Meet Ups
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
@@ -239,14 +234,21 @@ Examples:
 * Note how the mode is highlighted by `Viewing: Meet Ups` above the command line
 
 </div>
-### Adding a meetup: `add`
+
+### Viewing all meet-ups : `view`
+
+Shows a list of all meet-ups in the meet-up list.
+
+Format: `view`
+
+### Adding a meet-up: `add`
 
 Adds a meet-up to the meet-up list.
 
 Format: `add n/MEETUP_SUBJECT i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
 
 <div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
+MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`
 </div>
 
 Examples:
@@ -257,13 +259,6 @@ Meet Ups with clashing timings will be displayed in red. Otherwise, the default 
 
 ![MeetUpClash](images/MeetUpClash.png)
 
-### Viewing all meet-ups : `view`
-
-Shows a list of all meet-ups in the meet-up list.
-
-Format: `view`
-
-Examples: `view` will show you all meet-ups in the meet-up list.
 
 ### Editing a meet-up : `edit`
 
@@ -272,7 +267,7 @@ Edits an existing meet-up in the meet-up list.
 Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
 
 <div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
+MEETUP_FROM and MEETUP_TO fields should follow the format  `YYYY-MM-DD HH:MM`
 </div>
 
 * Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
@@ -280,20 +275,23 @@ MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
+*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
 ### Locating meet-ups by name: `find`
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
-Format: `find KEYWORD`
+Format: `find s/KEYWORD`
 
 * The search is case-insensitive. e.g `meet` will match `Meet`
 * Only the meet-up name is searched.
 * Keyword will be matched to full words and sentences e.g. `meet` will match `meetup` and `meet with Jack`
 
 Examples:
-* `find Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+* `find s/Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+* `find s/Sales` returns `Sales Meeting`
+
+![FindMeetUpSequence](images/FindMeetUpSequence.png)
 
 ### Deleting a meet-up : `delete`
 
@@ -321,15 +319,9 @@ Examples:
 
 </div>
 
-In property mode, you will be able to store and view the list of property's details.
-
-![property_mode display](images/PropertyModeDisplay.png)
-
 ### Viewing all properties : `view`
 
 Shows a list of all properties in the property list.
-
-![alt text](images/PropertyView.png)
 
 Format: `view`
 
@@ -356,12 +348,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd buyer to be `Betsy Crower`.
 
-### Locating Properties: `find`
+### Locating properties: `find`
 
 Find existing properties in the property list based on either name or address keywords.
 
-Format: `find n/LANDLORD_NAME`
-Format: `find a/ADDRESS`
+Format: `find n/LANDLORD_NAME` or `find a/ADDRESS`
 
 * The tags used in searching should only be `n/` or `a/`, but not both.
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -373,6 +364,8 @@ Format: `find a/ADDRESS`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find a/Pasir Ris` returns `pasir ris east` and `Pasir Ris West`
+
+![FindPropertySequence](images/FindPropertySequence.png)
 
 ### Deleting a property: `delete`
 
@@ -388,6 +381,7 @@ Format: `delete INDEX`
 Examples:
 * `view` followed by `delete 4` deletes the 4th property in the displayed property list.
 * `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
