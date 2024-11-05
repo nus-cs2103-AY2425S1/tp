@@ -4,7 +4,7 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# Client Grid User guide
+# ClientGrid User guide
 
 ClientGrid is an **address book** targeted for English-speaking real estate agents within Singapore to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality. The default language of communication of ClientGrid is English.
 
@@ -35,9 +35,9 @@ ClientGrid is an **address book** targeted for English-speaking real estate agen
 
    * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
    
-   * `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
+   * `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600(thousand) and bid price of $500(thousand).
    
-   * `filterproperty t/HDB gte/500 lte/15000` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than or equal to $500 and less than or equal to $15000.
+   * `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than or equal to $400(thousand) and less than or equal to $700(thousand).
    
    * `deleteproperty c/124894 u/15-20` : Deletes the property with postal code 124894 and unit number #15-20.
 
@@ -115,6 +115,12 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
     * have each domain label start and end with alphanumeric characters
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
+<box type="info" seamless>
+
+**Note:**
+No duplicate buyers are allowed. Duplicate buyers are checked based on whether the buyers have the same phone number.
+</box>
+
 Examples:
 * `addbuyer n/John p/83456789 e/john@gmail.com` adds a buyer whose name is `John`, phone number is `83456789` and email is `john@gmail.com`.
 
@@ -128,6 +134,12 @@ Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 
 * Adds a seller with the specified `SELLER_NAME`, `SELLER_PHONE_NUMBER`, and `SELLER_EMAIL`.
 * The restrictions for the `SELLER_NAME`, `SELLER_PHONE_NUMBER` and `SELLER_EMAIL` are identical to the restrictions for the `BUYER_NAME`, `BUYER_PHONE_NUMBER` and `BUYER_EMAIL` specified in the `addbuyer` feature.
+
+<box type="info" seamless>
+
+**Note:**
+No duplicate sellers are allowed. Similar to the `addbuyer` command, duplicate sellers are checked based on whether the sellers have the same phone number.
+</box>
 
 Examples:
 * `addseller n/Mary p/83456789 e/mary@gmail.com` adds a seller whose name is `Mary`, phone number is `83456789` and email is `mary@gmail.com`.
@@ -155,7 +167,7 @@ Deletes the specified buyer from the client book of ClientGrid.
 Format: `deletebuyer p/PHONE_NUMBER`
 
 * Deletes the buyer with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
+* The `PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
 
 Examples:
 * `deletebuyer p/83456789` deletes the buyer with phone number `83456789` from the client book.
@@ -204,9 +216,9 @@ The Unit parameter for `LANDED` properties will default to 00-00 regardless of t
 </box>
 
 Examples:
-* `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
+* `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600(thousand) and bid price of $500(thousand).
 
-  ![result for 'addproperty c/124894 u/15-20 t/HDB a/50000 b/10000'](images/addproperty.png)
+  ![result for 'addproperty c/124894 u/15-20 t/HDB a/600 b/500'](images/addproperty.png)
 
 ### Filtering properties : `filterproperty`
 
@@ -220,7 +232,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 <box type="definition" seamless>
 
-**Matching Price:** The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
+**Matching Price:** The true price of the property given by the average of the property's lowest `Ask` price and highest `Bid` price.
 </box>
 <box type="warning" seamless>
 
@@ -230,9 +242,9 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 </box>
 
 Examples:
-* `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
+* `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price is greater than or equal to $400(thousand) and less than or equal to $700(thousand).
 
-  ![result for 'filterproperty t/HDB gte/500 lte/60000'](images/filterproperty.png)
+  ![result for 'filterproperty t/HDB gte/400 lte/700'](images/filterproperty.png)
 
 ### Deleting a property : `deleteproperty`
 
@@ -284,7 +296,7 @@ Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 
 
 Examples:
-* `deletemeeting mt/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+* `deletemeeting mt/Meeting 1 d/01-01-2025` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2025`.
 
   ![result for 'deletemeeting mt/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
 

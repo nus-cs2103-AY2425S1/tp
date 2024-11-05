@@ -120,20 +120,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="850" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="850" />
 
 The `Storage` component,
 * can save client book, property book, meeting book, and user preference data in JSON format, and read them back into corresponding objects.
@@ -228,7 +219,8 @@ Use case ends.
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
 2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -254,6 +246,8 @@ MSS:
 1. Real estate agent requests to filter the clients by entering a name prefix.
 2. ClientGrid will filter and display the clients whose names start with the provided prefix.
 
+Use case ends.
+
 Extensions:
 
 * 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
@@ -274,7 +268,8 @@ Guarantees:
 MSS:
 1. Real estate agent requests to delete a buyer/ seller and passes in the buyer/ seller's phone number.
 2. ClientGrid will delete the buyer/ seller with the phone number provided by the real estate agent.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -294,11 +289,12 @@ Extensions:
 
 1.  Real estate agent requests to add a property to ClientGrid and passes in the property's postal code, unit number, housing type, ask price and bid price. 
 2.  ClientGrid will add the property's postal code, unit number, housing type, ask price and bid price specified by the real estate agent.
-    Use case ends.
+    
+Use case ends.
 
 **Extensions**
 
-* 1a. ClientGrid detects an error in the postal code / unit / type / ask / bid format provided by the real estate agent.
+* 1a. ClientGrid detects an error in the postal code/ unit/ type/ ask/ bid format provided by the real estate agent.
 
     * 1a1. ClientGrid requests for the correct data.
 
@@ -320,13 +316,15 @@ MSS:
 1. Real estate agent requests to filter the propertiess by entering property type and matching price bounds.
 2. ClientGrid will filter and display the properties that match the property type and has a matching price within the matching price bounds.
 
+Use case ends.
+
 Extensions:
 
-* 1a. ClientGrid detects an error in the type / matching price format prefix provided by the real estate agent.
+* 1a. ClientGrid detects an error in the type/ matching price format prefix provided by the real estate agent.
 
     * 1a1. ClientGrid detects the error and requests for the correct data
 
-    * 1a2. Real estate agent enters a new type / matching price prefix
+    * 1a2. Real estate agent enters a new type/ matching price prefix
 
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
@@ -340,6 +338,7 @@ Guarantees:
 MSS:
 1. Real estate agent requests to delete a property listing based on the property’s postal code and unit number.
 2. ClientGrid will delete the respective property listing and indicate success.
+
 Use case ends.
 
 Extensions:
@@ -365,7 +364,8 @@ Extensions:
 MSS:
 1. Real estate agent requests to add a meeting based on the meeting’s title and date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
 2. ClientGrid will add the meeting and indicate success.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -399,7 +399,8 @@ Guarantees:
 MSS:
 1. Real estate agent requests to delete a meeting based on the meeting’s meeting title and meeting date.
 2. ClientGrid will delete the respective meeting and indicate success.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -455,16 +456,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Closing the application
+3. Executing commands
+
+    1. Refer to the User Guide [here](https://ay2425s1-cs2103t-t16-2.github.io/tp/UserGuide.html#faq) for the list of commands.
+
+4. Closing the application
 
    1. Use the `exit` command or press the red button at the top left hand corner of the application window to close the application.
 
