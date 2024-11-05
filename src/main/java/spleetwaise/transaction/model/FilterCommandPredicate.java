@@ -1,13 +1,11 @@
 package spleetwaise.transaction.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.util.ToStringBuilder;
-import spleetwaise.transaction.model.transaction.Amount;
-import spleetwaise.transaction.model.transaction.Date;
-import spleetwaise.transaction.model.transaction.Description;
-import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -15,58 +13,27 @@ import spleetwaise.transaction.model.transaction.Transaction;
  */
 public class FilterCommandPredicate implements Predicate<Transaction> {
 
-    private final Person contact;
-    private final Amount amount;
-    private final Description description;
-    private final Date date;
-    private final Status status;
+    private final ArrayList<Predicate<Transaction>> filterSubPredicates;
+
 
     /**
-     * Constructs a {@code FilterCommandPredicate} with the given contact, amount, description and date.
+     * Constructs a {@code FilterCommandPredicate} with the given list of sub-predicates.
      *
-     * @param contact     The person to filter the transaction by.
-     * @param amount      The amount to filter the transaction by.
-     * @param description The description to filter the transaction by.
-     * @param date        The date to filter the transaction by.
-     * @param status      The status to filter the transaction by.
+     * @param filterSubPredicates The list of sub-predicates to filter the transaction by.
+     *                            Must contain at least 1 sub-predicate.
      */
-    public FilterCommandPredicate(Person contact, Amount amount, Description description, Date date, Status status) {
-        if (contact == null && amount == null && description == null && date == null && status == null) {
+    public FilterCommandPredicate(ArrayList<Predicate<Transaction>> filterSubPredicates) {
+        requireNonNull(filterSubPredicates);
+        if (filterSubPredicates.isEmpty()) {
             throw new NullPointerException();
         }
 
-        this.contact = contact;
-        this.amount = amount;
-        this.description = description;
-        this.date = date;
-        this.status = status;
+        this.filterSubPredicates = filterSubPredicates;
     }
 
     @Override
     public boolean test(Transaction txn) {
-        if (contact != null && !txn.getPerson().equals(contact)) {
-            return false;
-        }
-
-        if (amount != null && !txn.getAmount().equals(amount)) {
-            return false;
-        }
-
-        if (description != null
-                && !txn.getDescription().toString().toLowerCase()
-                .contains(description.toString().toLowerCase())) {
-            return false;
-        }
-
-        if (date != null && !txn.getDate().equals(date)) {
-            return false;
-        }
-
-        if (status != null && !txn.getStatus().equals(status)) {
-            return false;
-        }
-
-        return true;
+        return filterSubPredicates.stream().reduce(pred -> true, Predicate::and).test(txn);
     }
 
     @Override
@@ -79,27 +46,15 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
             return false;
         }
 
-        return (contact == null ? otherFilterCommandPredicate.contact == null
-                : contact.equals(otherFilterCommandPredicate.contact))
-                && (amount == null ? otherFilterCommandPredicate.amount == null
-                : amount.equals(otherFilterCommandPredicate.amount))
-                && (description == null ? otherFilterCommandPredicate.description == null
-                : description.equals(otherFilterCommandPredicate.description))
-                && (date == null ? otherFilterCommandPredicate.date == null
-                : date.equals(otherFilterCommandPredicate.date))
-                && (status == null ? otherFilterCommandPredicate.status == null
-                : status.equals(otherFilterCommandPredicate.status));
+        return filterSubPredicates.equals(otherFilterCommandPredicate.filterSubPredicates);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("contact", contact)
-                .add("amount", amount)
-                .add("description", description)
-                .add("date", date)
-                .add("status", status)
-                .toString();
+        ToStringBuilder sb = new ToStringBuilder(this);
+        for (int i = 0; i < filterSubPredicates.size(); i++) {
+            sb.add("pred" + i, filterSubPredicates.get(i));
+        }
+        return sb.toString();
     }
-
 }

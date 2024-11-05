@@ -5,6 +5,9 @@ import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -18,10 +21,16 @@ import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
+import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
+import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class FilterCommandParserTest {
@@ -33,6 +42,11 @@ public class FilterCommandParserTest {
     private static final Status testStatus = TypicalTransactions.SEANOWESME.getStatus();
     private static final AddressBookModel abModel = new AddressBookModelManager();
     private static final TransactionBookModel txnModel = new TransactionBookModelManager();
+    private static final Predicate<Transaction> testPersonPred = new PersonFilterPredicate(testPerson);
+    private static final Predicate<Transaction> testAmountPred = new AmountFilterPredicate(testAmount);
+    private static final Predicate<Transaction> testDescriptionPred = new DescriptionFilterPredicate(testDescription);
+    private static final Predicate<Transaction> testDatePred = new DateFilterPredicate(testDate);
+    private static final Predicate<Transaction> testStatusPred = new StatusFilterPredicate(testStatus);
 
     private final FilterCommandParser parser = new FilterCommandParser();
 
@@ -46,7 +60,9 @@ public class FilterCommandParserTest {
     @Test
     public void parse_personField_success() {
         String userInput = " 1";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, null, null, null, null);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -54,7 +70,9 @@ public class FilterCommandParserTest {
     @Test
     public void parse_amountField_success() {
         String userInput = " amt/9999999999.99";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, testAmount, null, null, null);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testAmountPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -62,7 +80,9 @@ public class FilterCommandParserTest {
     @Test
     public void parse_descriptionField_success() {
         String userInput = " desc/Sean owes me a lot for a landed property in Sentosa";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, testDescription, null, null);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testDescriptionPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -70,7 +90,9 @@ public class FilterCommandParserTest {
     @Test
     public void parse_dateField_success() {
         String userInput = " date/10102024";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, null, testDate, null);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testDatePred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -78,7 +100,9 @@ public class FilterCommandParserTest {
     @Test
     public void parse_statusField_success() {
         String userInput = " status/" + Status.NOT_DONE_STATUS;
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, null, null, testStatus);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testStatusPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -88,9 +112,13 @@ public class FilterCommandParserTest {
         String userInput = " 1 amt/9999999999.99  "
                 + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024 status/"
                 + Status.NOT_DONE_STATUS;
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, testAmount,
-                testDescription, testDate, testStatus
-        );
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        subPredicates.add(testAmountPred);
+        subPredicates.add(testDescriptionPred);
+        subPredicates.add(testDatePred);
+        subPredicates.add(testStatusPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
