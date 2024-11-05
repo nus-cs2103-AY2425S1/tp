@@ -90,7 +90,7 @@ public class EditReminderCommand extends Command {
             person.deleteReminder(reminderToEdit);
             person.addReminder(editedReminder);
             model.setReminder(reminderToEdit, editedReminder);
-            model.updateFilteredReminderList(Model.PREDICATE_SHOW_ALL_REMINDERS);
+            model.updateFilteredReminderList();
             return new CommandResult(String.format(MESSAGE_EDIT_REMINDER_SUCCESS, Messages.format(reminderToEdit)));
         } else {
             throw new CommandException("More than one person with the specified name found. Please be more specific.");

@@ -133,7 +133,7 @@ public interface Model {
      * Updates the current list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredReminderList(Predicate<Reminder> predicate);
+    void updateFilteredReminderList();
 
     /**
      * Updates the current list to sort by the given {@code comparator}.

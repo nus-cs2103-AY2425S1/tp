@@ -206,7 +206,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredReminderList(Predicate<Reminder> predicate) {
+        public void updateFilteredReminderList() {
             throw new AssertionError("This method should not be called.");
         }
 
