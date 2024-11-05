@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 
@@ -26,7 +27,7 @@ import seedu.address.model.client.exceptions.DuplicateClientException;
  */
 public class UniqueClientList implements Iterable<Client> {
 
-    private static final Logger logger = Logger.getLogger(UniqueClientList.class.getName());
+    private static final Logger logger = LogsCenter.getLogger(UniqueClientList.class);
 
     private final ObservableList<Client> internalList = FXCollections.observableArrayList();
     private final ObservableList<Client> internalUnmodifiableList =
@@ -55,6 +56,7 @@ public class UniqueClientList implements Iterable<Client> {
         }
         internalList.add(toAdd);
         assert internalList.contains(toAdd) : "Client was not added successfully!";
+        logger.log(Level.INFO, "Client added: " + toAdd);
     }
 
     /**
@@ -78,6 +80,7 @@ public class UniqueClientList implements Iterable<Client> {
 
         internalList.set(index, editedClient);
         assert internalList.get(index).equals(editedClient) : "Client was not replaced successfully!";
+        logger.log(Level.INFO, "Client replaced: " + target + " with " + editedClient);
     }
 
     /**
@@ -91,6 +94,7 @@ public class UniqueClientList implements Iterable<Client> {
             throw new ClientNotFoundException();
         }
         assert !internalList.contains(toRemove) : "Client was not removed successfully!";
+        logger.log(Level.INFO, "Client removed: " + toRemove);
     }
 
     /**
@@ -102,6 +106,7 @@ public class UniqueClientList implements Iterable<Client> {
         requireNonNull(newClientList, "New client list cannot be null.");
         internalList.setAll(newClientList.internalList);
         assert internalList.equals(newClientList.internalList) : "Clients were not set successfully!";
+        logger.log(Level.INFO, "Client list replaced with new client list.");
     }
 
     /**
@@ -117,6 +122,7 @@ public class UniqueClientList implements Iterable<Client> {
 
         internalList.setAll(clients);
         assert internalList.equals(clients) : "Client list was not replaced successfully!";
+        logger.log(Level.INFO, "Client list replaced with provided list of clients.");
     }
 
     /**
