@@ -135,11 +135,6 @@ public class ModelManager implements Model {
         return filteredContacts;
     }
 
-    // PLACEHOLDER FOR NOW, THIS IS NOT CORRECT
-    public ObservableList<Contact>getAllContactList() {
-        return filteredContacts;
-    } // SHOULD BE REPLACED WITH THE CORRECT ONE AFTER MERGING ANOTHER PR
-
     @Override
     public ObservableList<Contact> getAllContactList() {
         return allContacts;
