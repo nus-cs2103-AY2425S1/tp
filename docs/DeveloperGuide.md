@@ -205,42 +205,19 @@ and more detailed implementation on model changes have been omitted.
 
 </box>
 
-## Template
-
-Separate each feature with dividers
-
-### Feature
-
-#### Implementation details
-
-
-#### Note
-
-For any important information that has been omitted, refer to [Delete Group feature](#delete-group-feature)
-
-#### Activity diagram
-
-#### Sequence diagram
-
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `WHATEVER COMMAND` should end at the destroy marker (X) but due to a limitation of
-PlantUML, the lifeline continues till the end of diagram.
-</box>
-
-#### Design considerations
-
-1. Include if we had any alternative design decisions and why we decided to go with the current one
-
 --------------------------------------------------------------------------------------------------------------------
-
 
 ### Delete Group feature
 
 The `Delete Group` feature allows users to delete an existing group in the address book given a group's name.
 
 Below, we provide an example usage scenario and description of how the delete group code works at each step.
+
+#### Usage 
+
+**Syntax:** `del_g/dg gn/GROUP_NAME`
+
+**Example:** `dg gn/CS2103-F12-2`
 
 #### Implementation details
 
@@ -263,6 +240,25 @@ This feature will also remove `Students` in the `Group` and reset their `Group`,
 
 The following sequence diagram shows how the above steps for delete group works:
 <puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+
+#### Design considerations 
+
+**Aspect 1:** Usage of GroupName as identifer
+
+1. **Design #1: Use GroupName**
+* Pro: More deliberate and since GroupNames are more complex, the user will be more aware
+* Con: Must type a lot
+
+2. **Design #2:** Use Index
+* Pro: Easy and quick
+* Con: Possible for user to mistype the wrong number
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -685,9 +681,11 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Student Number**: Unique identifier for each student
-* **Group Name**: Unique identifier for each group
+| Key Terms      | Definition                                             |
+|----------------|--------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
+| Prefix         | Keyword used in commands to specify the parameter type |
+| Student Number | Unique identifier for a student                        |
 
 --------------------------------------------------------------------------------------------------------------------
 
