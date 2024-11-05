@@ -47,7 +47,7 @@
                     <HBox alignment="CENTER_LEFT">
                         <VBox minWidth="70" spacing="10">
                             <padding>
-                                    <Insets left="8" />
+                                <Insets left="8" />
                             </padding>
                             <Label styleClass="details_field_headers" text="Phone:" />
                         </VBox>
@@ -90,16 +90,18 @@
                         <padding>
                             <Insets bottom="5" left="8" />
                         </padding>
+                        <!-- Assignment container -->
                         <FlowPane fx:id="assignments" alignment="CENTER_LEFT" hgap="10" vgap="10" HBox.hgrow="ALWAYS">
                             <padding>
                                 <Insets bottom="8" left="5" top="10" />
                             </padding>
+                            <!-- Placeholder for assignment details, populated dynamically in code -->
                         </FlowPane>
                     </HBox>
                 </VBox>
-            <rowConstraints>
-               <RowConstraints />
-            </rowConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                </rowConstraints>
             </GridPane>
         </content>
     </ScrollPane>

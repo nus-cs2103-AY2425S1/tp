@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 
 /**
@@ -55,33 +57,41 @@ public class StudentDetailsPanel extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         remark.setText(student.getRemark().remarkName);
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> detailsTags.getChildren().add(new Label(tag.tagName)));
 
-        // Displaying assignments
-        student.getAssignmentList().stream().forEach(assignment -> {
-            VBox assignmentBox = new VBox();
-            assignmentBox.setSpacing(5); // Optional: add spacing between elements
+        // Displaying assignments with ID as index in the list
+        IntStream.range(0, student.getAssignmentList().size())
+                .forEach(i -> {
+                    Assignment assignment = student.getAssignmentList().get(i);
 
-            Label titleLabel = new Label(assignment.getName());
-            titleLabel.getStyleClass().add("assignment-name");
-            Label scoreLabel = new Label("Score: " + assignment.getScore() + "/" + assignment.getMaxScore());
-            Label statusLabel = new Label(assignment.getHasSubmitted() ? "Submitted" : "Not Submitted");
-            if (assignment.getHasSubmitted()) {
-                statusLabel.getStyleClass().add("assignment-status-submitted");
-            } else {
-                statusLabel.getStyleClass().add("assignment-status-unsubmitted");
-            }
+                    VBox assignmentBox = new VBox();
+                    assignmentBox.setSpacing(5); // Optional: add spacing between elements
 
-            // Optionally apply CSS or styling to differentiate the assignment boxes
-            assignmentBox.getStyleClass().add("assignment-box");
+                    Label assignmentIdLabel = new Label("Assignment ID: " + (i + 1));
+                    Label titleLabel = new Label(assignment.getName());
+                    titleLabel.getStyleClass().add("assignment-name");
 
-            // Add all labels to the VBox
-            assignmentBox.getChildren().addAll(titleLabel, scoreLabel, statusLabel);
+                    Label scoreLabel = new Label("Score: " + assignment.getScore() + "/"
+                            + assignment.getMaxScore());
+                    Label statusLabel = new Label(assignment.getHasSubmitted() ? "Submitted" : "Not Submitted");
 
-            // Add the VBox to the assignments FlowPane
-            assignments.getChildren().add(assignmentBox);
-        });
+                    if (assignment.getHasSubmitted()) {
+                        statusLabel.getStyleClass().add("assignment-status-submitted");
+                    } else {
+                        statusLabel.getStyleClass().add("assignment-status-unsubmitted");
+                    }
+
+                    assignmentBox.getStyleClass().add("assignment-box");
+
+                    // Add all labels to the VBox
+                    assignmentBox.getChildren().addAll(assignmentIdLabel, titleLabel, scoreLabel, statusLabel);
+
+                    // Add the VBox to the assignments FlowPane
+                    assignments.getChildren().add(assignmentBox);
+                });
     }
+
 }
