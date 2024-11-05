@@ -33,7 +33,7 @@ activate ViewClientCommandParser
 
 activate ClientUtil
 ViewClientCommandParser -> ClientUtil : parseName("John Doe")
-ClientUtil --> ViewClientCommandParser: "John Doe" name object
+ClientUtil --> ViewClientCommandParser
 deactivate ClientUtil
 
 create ViewClientCommand
