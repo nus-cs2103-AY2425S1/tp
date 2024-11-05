@@ -180,21 +180,37 @@ Examples:
 
 ![Find Success Message](/images/find.png)
 
-### Adding a class to a student : `addc`
+### Filtering the list : `filter`
 
-Adds a class to an existing student's record.
+Shows a list of students filtered by year group or subject.
 
-Format: `addc STUDENT_ID s/SUBJECT`
+Format: `filter FIELD/VALUE`
+
+* You can only filter by EITHER year group or class.
+* You can only filter one value (eg. filter by Science only).
+
+Examples:
+* `filter yg/2` shows only students who belong to year group 2
+* `filter s/Science` shows only students who take Science as a subject
+
+![Filter Success Message](/images/filter.png)
+
+### Adding subject(s) to a student : `addsubject`
+
+Adds one or more subjects to an existing student's record.
+
+Format: `addsubject STUDENT_ID s/SUBJECT`
 
 * `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
   (i.e. science, SCIENCE, Science are treated the same way).
+* Subjects available are English, Math, Chinese, Science
 
 Examples:
-* `addc S00001 s/Science`
+* `addsubject S00001 s/Science`
 
-![addc Success Message](/images/addc.png)
+![Addsubject Success Message](/images/addsubject.png)
 
 ### Sorting students : `sort`
 
@@ -202,11 +218,16 @@ Sorts the list of students based on a specified field.
 
 Format: `sort s/FIELD`
 
-* `FIELD` can be either `name` or `class`.
+* `FIELD` can be either `name`, `subject` or `yearGroup`.
+* Sorting by name will sort students in lexicographical ascending order of their names.
+* Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
+* Sorting by yearGroup will sort students in ascending order based on their year group.
 
 Examples:
 * `sort s/name`
-* `sort s/class`
+* `sort s/subject`
+* `sort s/yearGroup`
+
 
 ![Sort Success Message](/images/sort.png)
 
@@ -302,12 +323,13 @@ the data of your previous AcademyAssist folder.
 | **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
 | **Delete**        | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
 | **Edit**          | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
-| **View**          | `view`  
-| **Detail** | `detail STUDENT_ID`<br> e.g., `detail S00001`  |
+| **View**          | `view`                                                                                                                                                                                  |
+| **Detail**        | `detail STUDENT_ID`<br> e.g., `detail S00001`                                                                                                                                           |
 | **Find**          | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
-| **Add Class**     | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
+| **Filter**        | `filter FIELD/VALUE`<br> e.g., `filter yg/2`                                                                                                                                            |
+| **Add Subject**   | `addsubject STUDENT_ID s/SUBJECT`<br> e.g., `addsubject S00003 Science`                                                                                                                 |
+| **Track Subject** | `tracksubject`                                                                                                                                                                          |
 | **Sort**          | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
-| **Track Subject** | `tracksubject`                                                                                                                                                                           |
 | **Clear**         | `clear`                                                                                                                                                                                 |
 | **Help**          | `help`                                                                                                                                                                                  |
 | **Exit**          | `exit`                                                                                                                                                                                  |
