@@ -68,7 +68,7 @@ Sellsavvy is a **desktop app for managing contacts, optimized for use via a Comm
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -257,6 +257,7 @@ Format: `filterOrder ORDER_STATUS`
 Examples:
 * `filterOrder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected person being displayed.
 * `listOrder 1` followed by `filterOrder completed` displays the list of all completed orders under the 1st person in the address book.
+  ![result for filtering completed order'](images/filterCompletedOrders.png)
 
 ### Clearing all entries : `clear`
 
