@@ -25,13 +25,13 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" minWidth="550" maxWidth="550" prefWidth="550"/>
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true"/>
       </HBox>
       <FlowPane fx:id="nickname" styleClass="cell_medium_label"/>
       <FlowPane fx:id="roles" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" minWidth="550" maxWidth="550" prefWidth="550"/>
-      <Label fx:id="telegramHandle" styleClass="cell_small_label" text="\$telegramHandle" wrapText="true" minWidth="550" maxWidth="550" prefWidth="550"/>
-      <Label fx:id="studentStatus" styleClass="cell_small_label" text="\$studentStatus" wrapText="true" minWidth="550" maxWidth="550" prefWidth="550"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
+      <Label fx:id="telegramHandle" styleClass="cell_small_label" text="\$telegramHandle" wrapText="true" />
+      <Label fx:id="studentStatus" styleClass="cell_small_label" text="\$studentStatus" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>
