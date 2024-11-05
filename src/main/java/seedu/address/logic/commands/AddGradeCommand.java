@@ -17,7 +17,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
@@ -80,7 +79,6 @@ public class AddGradeCommand extends Command {
     private static Person createGradeToAddToPerson(Person person, String assignmentName, float score) {
         assert person != null;
         Name name = person.getName();
-        Phone phone = person.getPhone();
         Email email = person.getEmail();
         Set<Tag> tags = person.getTags();
         Telegram telegram = person.getTelegram();
@@ -90,7 +88,7 @@ public class AddGradeCommand extends Command {
         Map<String, Assignment> assignment = person.getAssignment();
         assignment.put(assignmentName, new Assignment(assignmentName, score));
 
-        return new Person(name, phone, email, telegram, github, assignment, weeksAttended, tags);
+        return new Person(name, email, telegram, github, assignment, weeksAttended, tags);
     }
 
     @Override

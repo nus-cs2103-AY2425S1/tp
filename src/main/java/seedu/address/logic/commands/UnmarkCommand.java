@@ -63,7 +63,6 @@ public class UnmarkCommand extends Command {
 
         Person updatedPerson = new Person(
                 personToUnmark.getName(),
-                personToUnmark.getPhone(),
                 personToUnmark.getEmail(),
                 personToUnmark.getTelegram(),
                 personToUnmark.getGithub(),
