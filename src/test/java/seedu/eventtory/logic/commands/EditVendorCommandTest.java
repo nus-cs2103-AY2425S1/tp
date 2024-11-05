@@ -134,8 +134,7 @@ public class EditVendorCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of EventTory list.
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of EventTory list.
      */
     @Test
     public void execute_invalidVendorIndexFilteredList_failure() {
@@ -148,6 +147,25 @@ public class EditVendorCommandTest {
                 new EditVendorDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editVendorCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_updateSelectedVendor_success() {
+        Vendor editedVendor = new VendorBuilder().build();
+
+        model.viewVendor(editedVendor);
+
+        EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder(editedVendor).build();
+        EditVendorCommand editVendorCommand = new EditVendorCommand(INDEX_FIRST_VENDOR, descriptor);
+        try {
+            editVendorCommand.execute(model);
+        } catch (Exception e) {
+            throw new AssertionError("Execution of command should not fail.", e);
+        }
+
+        model.getViewedVendor().addListener((observable, oldValue, newValue) -> {
+            assertEquals(newValue, editedVendor);
+        });
     }
 
     @Test

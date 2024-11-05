@@ -13,6 +13,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.eventtory.commons.core.GuiSettings;
@@ -65,6 +66,20 @@ public class ModelManager implements Model {
         startIndexOfAssignedVendors = Bindings.createIntegerBinding(() -> {
             return filteredVendors.size() + 1;
         }, filteredVendors);
+
+        // Update selected vendor or event when the list of vendors or events is updated
+        filteredVendors.addListener((ListChangeListener<? super Vendor>) change -> {
+            if (selectedVendor.get() != null) {
+                change.getList().stream().filter(vendor -> vendor.isSameId(selectedVendor.get())).findFirst()
+                        .ifPresent(vendor -> selectedVendor.set(vendor));
+            }
+        });
+        filteredEvents.addListener((ListChangeListener<? super Event>) change -> {
+            if (selectedEvent.get() != null) {
+                change.getList().stream().filter(event -> event.isSameId(selectedEvent.get())).findFirst()
+                        .ifPresent(event -> selectedEvent.set(event));
+            }
+        });
     }
 
     public ModelManager() {
