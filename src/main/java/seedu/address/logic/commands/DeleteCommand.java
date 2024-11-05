@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Deletes a person identified from the address book, using index or keyword.
@@ -29,14 +30,16 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to delete.\n"
-            + "Find the index from the list below and type delete INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+                    + "Find the index from the list below and type delete INDEX\n"
+                    + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_PERSON_IS_CLIENT = "Cannot delete this person as they are a client in a wedding."
+            + "Please delete their wedding first.";
 
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
 
     /**
-     * Creates a Delete Command to delete the specified contact
+     * Creates a DeleteCommand object to delete the person at the specified {@code Index}.
      */
     public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
         this.targetIndex = targetIndex;
@@ -48,16 +51,67 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
 
         if (this.targetIndex != null) {
-            Person personToDelete = deleteWithIndex(model);
+            Person personToDelete = getPersonByIndex(model);
+            validatePersonIsNotClient(personToDelete, model);
+            model.deletePerson(personToDelete);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-
         } else {
-            Person personToDelete = deleteWithKeyword(model);
-
+            Person personToDelete = getPersonByKeyword(model);
             if (personToDelete != null) {
+                validatePersonIsNotClient(personToDelete, model);
+                model.deletePerson(personToDelete);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
             } else {
                 return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
+            }
+        }
+    }
+
+    /**
+     * Gets the person by index without deleting them.
+     */
+    private Person getPersonByIndex(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+        }
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    lastShownList.size()));
+        }
+
+        return lastShownList.get(targetIndex.getZeroBased());
+    }
+
+    /**
+     * Gets the person by keyword without deleting them.
+     */
+    private Person getPersonByKeyword(Model model) throws CommandException {
+        model.updateFilteredPersonList(predicate);
+        List<Person> filteredList = model.getFilteredPersonList();
+
+        if (filteredList.isEmpty()) {
+            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+        } else if (filteredList.size() == 1) {
+            return filteredList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Validates that the person to be deleted is not a client in any wedding.
+     *
+     * @throws CommandException if the person is a client in a wedding
+     */
+    private void validatePersonIsNotClient(Person person, Model model) throws CommandException {
+        List<Wedding> weddings = model.getFilteredWeddingList();
+        for (Wedding wedding : weddings) {
+            if (wedding.getClient() != null && wedding.getClient().getPerson().equals(person)) {
+                throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
             }
         }
     }
