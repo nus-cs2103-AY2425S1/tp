@@ -75,7 +75,7 @@ Prefixes follow the same structure
 `prefix/Value`
 
 and can be either optional or mandatory, and variadic or not variadic.
-The table below showcases the four different possible notations of prefixes
+The table below showcases the four different possible notations of prefixes:
 
 |              | Mandatory       | Optional          |
 |--------------|-----------------|-------------------|
@@ -93,21 +93,21 @@ The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have
 </div>
 <br>
 
-| Prefix   | Meaning | Constraints | Remarks | Example |
-|----------|---------|-------------|---------|---------|
-| n/       | name    |             |         |         |
-| p/       | phone   |             |         |         |
-| e/       | email   |             |         |         |
-| t/       | tag     |             |         |         |
-| d/       | date    |             |         |         |
-| fr/      | from    |             |         |         |
-| to/      | to      |             |         |         |
-| price/   | price   |             |         |         |
-| area/    | area    |             |         |         |
-| address/ | address |             |         |         |
-| region/  | region  |             |         |         |
-| seller/  | seller  |             |         |         |
-| buyer/   | buyer   |             |         |         |
+| Prefix   | Meaning | Location    | Constraints | Remarks | Example |
+|----------|---------|-------------|-------------|---------|---------|
+| n/       | name    | Client      |             |         |         |
+| p/       | phone   | Client      |             |         |         |
+| e/       | email   | Client      |             |         |         |
+| t/       | tag     | Client      |             |         |         |
+| d/       | date    | Appointment |             |         |         |
+| fr/      | from    | Appointment |             |         |         |
+| to/      | to      | Appointment |             |         |         |
+| price/   | price   | Listing     |             |         |         |
+| area/    | area    | Listing     |             |         |         |
+| address/ | address | Listing     |             |         |         |
+| region/  | region  | Listing     |             |         |         |
+| seller/  | seller  | Listing     |             |         |         |
+| buyer/   | buyer   | Listing     |             |         |         |
 
 --------------------------------------------------------------------------------------------------------------------
 
