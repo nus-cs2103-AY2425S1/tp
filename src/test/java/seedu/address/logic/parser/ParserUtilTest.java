@@ -20,8 +20,8 @@ import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Subject;
-
 
 
 public class ParserUtilTest {
@@ -286,22 +286,22 @@ public class ParserUtilTest {
         // Invalid values: negative numbers, zero, and non-numeric values
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount("-10.00")); // negative number
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount("0")); // zero
-        assertThrows(NumberFormatException.class, () -> ParserUtil.parseAmount("abc")); // non-numeric value
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount("abc")); // non-numeric value
     }
 
     @Test
     public void parseAmount_validValueWithoutWhitespace_returnsAmount() throws Exception {
         // Valid amount with no whitespace
-        double expectedAmount = 10.00;
-        assertEquals(expectedAmount, ParserUtil.parseAmount("10.00"), 0.001);
+        SettleAmount expectedAmount = new SettleAmount("10.00");
+        assertEquals(expectedAmount, ParserUtil.parseAmount("10.00"));
     }
 
     @Test
     public void parseAmount_validValueWithWhitespace_returnsTrimmedAmount() throws Exception {
         // Valid amount with leading and trailing whitespace
-        double expectedAmount = 10.00;
+        SettleAmount expectedAmount = new SettleAmount("10.00");
         String amountWithWhitespace = "  10.00  ";
-        assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace), 0.001);
+        assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
     }
 
     @Test
