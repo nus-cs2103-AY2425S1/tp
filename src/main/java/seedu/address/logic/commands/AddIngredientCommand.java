@@ -41,8 +41,8 @@ public class AddIngredientCommand extends Command {
         requireNonNull(model);
 
         // Use the existing ingredient catalogue from the model
-        IngredientCatalogue ingredientCatalogue = IngredientCatalogue.getInstance();
-        int nextProductId = ingredientCatalogue.getNextProductId();
+        IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
+        int nextProductId = model.getNextProductId();
 
         // Create a new ingredient with the next available product ID
         Ingredient newIngredient = new Ingredient(nextProductId, name, cost);

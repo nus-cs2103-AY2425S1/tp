@@ -18,8 +18,8 @@ import seedu.address.model.product.IngredientCatalogue;
  */
 public class AddIngredientCommandTest {
 
-    private static final String INGREDIENT_NAME = "Sweet";
-    private static final double INGREDIENT_COST = 2.50;
+    private static final String INGREDIENT_NAME = "Maple Syrup";
+    private static final double INGREDIENT_COST = 4.00;
 
     private Model model;
 
@@ -35,7 +35,7 @@ public class AddIngredientCommandTest {
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
 
         // Get the next available ID from the model's IngredientCatalogue
-        IngredientCatalogue catalogue = IngredientCatalogue.getInstance();
+        IngredientCatalogue catalogue = model.getIngredientCatalogue();
         int nextProductId = catalogue.getNextProductId();
 
         // Create the expected ingredient object
@@ -50,6 +50,9 @@ public class AddIngredientCommandTest {
 
         // Execute the command and verify success
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        // Ensure that the new ingredient exists in the catalogue
+        assertTrue(IngredientCatalogue.getInstance().getCatalogue().containsValue(expectedIngredient));
     }
 
     @Test
