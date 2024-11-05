@@ -233,7 +233,7 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public ObservableList<Supplier> getFilteredSupplierList() {
+        public ObservableList<Supplier> getModifiedSupplierList() {
             return uniqueSupplierList.asUnmodifiableObservableList();
         }
 
@@ -259,7 +259,7 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public ObservableList<Supplier> getFilteredSupplierList() {
+        public ObservableList<Supplier> getModifiedSupplierList() {
             return uniqueSupplierList.asUnmodifiableObservableList();
         }
 
