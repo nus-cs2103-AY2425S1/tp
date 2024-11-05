@@ -101,7 +101,9 @@ public class EditPersonCommand extends EditCommand {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail().orElse(null));
+        Email updatedEmail = editPersonDescriptor.isEmailEdited()
+                ? editPersonDescriptor.getEmail().orElse(null)
+                : personToEdit.getEmail().orElse(null);
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().orElse(null));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -140,7 +142,9 @@ public class EditPersonCommand extends EditCommand {
         private Name name;
         private Phone phone;
         private Email email;
+        private boolean isEmailEdited;
         private Address address;
+        private boolean isAddressEdited;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -155,13 +159,15 @@ public class EditPersonCommand extends EditCommand {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setEmailEdited(toCopy.isEmailEdited);
+            setAddressEdited(toCopy.isAddressEdited);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags) || isEmailEdited || isAddressEdited;
         }
 
         public void setName(Name name) {
@@ -188,12 +194,28 @@ public class EditPersonCommand extends EditCommand {
             return Optional.ofNullable(email);
         }
 
+        public void setEmailEdited(boolean isEmailEdited) {
+            this.isEmailEdited = isEmailEdited;
+        }
+
+        public boolean isEmailEdited() {
+            return isEmailEdited;
+        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setAddressEdited(boolean isAddressEdited) {
+            this.isAddressEdited = isAddressEdited;
+        }
+
+        public boolean isAddressEdited() {
+            return isAddressEdited;
         }
 
         /**

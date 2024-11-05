@@ -117,7 +117,7 @@ public class EditEventCommand extends EditCommand {
 
         EventName updatedEventName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
-        Venue updatedVenue = editEventDescriptor.isVenueEdited
+        Venue updatedVenue = editEventDescriptor.isVenueEdited()
                 ? editEventDescriptor.getVenue().orElse(null)
                 : eventToEdit.getVenue().orElse(null);
         Person updatedCelebrity = editEventDescriptor.getCelebrity().orElse(eventToEdit.getCelebrity());
