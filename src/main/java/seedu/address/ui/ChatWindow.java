@@ -209,15 +209,16 @@ public class ChatWindow {
             return "This is how to edit a client!\n"
                     + "editClient INDEX [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
                     + "Note: At least one field must be specified to edit a client.";
-        } else if (Pattern.compile("\\b(a+d+d+|adding)\\b.*b+u+y+e+r+s*\\b.*t+o+.*l+i+s+t+i+n+g+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(a+d+d+|adding)\\b.*b+u+y+e+r+s*\\b.*t+o+.*l+i+s+t+i+n+g+\\b")
+                        .matcher(message).find()) {
             return "This is how to add buyers to a listing!\n"
                     + "addBuyersToListing n/{listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
                     + "Example: addBuyersToListing n/Warton House buyer/Alice buyer/Bob\n"
                     + "Adds the specified buyers to the listing identified by its name.";
         } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*l+i+s+t+i+n+g+\\b").matcher(message).find()) {
             return "This is how to edit a listing!\n"
-                    + "editListing n/{listing name} [n/{listing name} p/{price}] [a/{area}]" +
-                    " [addr/{address}] [r/{region}]\n"
+                    + "editListing n/{listing name} [n/{listing name} p/{price}] [a/{area}]"
+                    + " [addr/{address}] [r/{region}]\n"
                     + "Note: At least one field must be specified to edit a listing.";
         } else if (Pattern.compile("\\b(s+h+o+w+|display|view)\\b.*c+l+i+e+n+t+s*\\b").matcher(message).find()) {
             return "This is how to show your clients!\n"

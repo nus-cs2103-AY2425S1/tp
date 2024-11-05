@@ -112,7 +112,7 @@ public class EditListingCommandTest {
         EditListingDescriptor descriptor = new EditListingDescriptorBuilder().build();
 
         EditListingCommand editListingCommand = new EditListingCommand(notInListings.getName(), descriptor);
-        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_INVALID_LISTING_NAME);
+        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class EditListingCommandTest {
         EditListingDescriptor descriptor = new EditListingDescriptorBuilder().build();
         EditListingCommand editListingCommand = new EditListingCommand(notInList.getName(), descriptor);
 
-        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_INVALID_LISTING_NAME);
+        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
