@@ -862,6 +862,40 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding attendance for a person
+
+1. Adding attendance for a person in the list
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `addAttendance 1 ad/24-09-2024 ar/MC`<br>
+       Expected: Attendance record with date 24-09-2024 and reason MC is added to the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+   
+    1. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
+       Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-24 ar/MC`, `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Deleting attendance for a person
+
+1. Deleting attendance for a person in the list
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The person must have an existing attendance to be deleted.
+
+    1. Test case: `addAttendance 1 ad/24-09-2024 ar/`<br>
+       Expected: Attendance record with date 24-09-2024 is deleted from the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
+       Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-2024`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
