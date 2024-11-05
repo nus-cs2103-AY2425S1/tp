@@ -18,4 +18,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Gender
+Person *--> Nric
+Person *--> DateOfBirth
+Person *--> Priority
+Person *--> "*" Appointment
+Person *--> "*" MedCon
 @enduml
