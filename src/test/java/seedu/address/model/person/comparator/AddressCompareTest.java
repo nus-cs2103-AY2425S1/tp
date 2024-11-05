@@ -16,17 +16,20 @@ public class AddressCompareTest {
 
     @Test
     public void compare_equal() {
+        // EP: addresses are equal
         assertTrue(comparator.compare(p1, p1) == 0);
         assertTrue(comparator.compare(p2, p2) == 0);
     }
 
     @Test
     public void compare_lessThan() {
+        // EP: first address is less than second address
         assertTrue(comparator.compare(p1, p2) <= -1);
     }
 
     @Test
     public void compare_greaterThan() {
+        // EP: first address is more than the second address
         assertTrue(comparator.compare(p2, p1) >= 1);
     }
 

@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddEcNumberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EcNumber;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Parses input arguments and creates a new AddEcNumberCommand object.

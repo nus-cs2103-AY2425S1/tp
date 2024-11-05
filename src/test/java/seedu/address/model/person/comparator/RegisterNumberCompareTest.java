@@ -16,17 +16,20 @@ public class RegisterNumberCompareTest {
 
     @Test
     public void compare_equal() {
+        // EP: RegisterNumbers are equal
         assertTrue(comparator.compare(p1, p1) == 0);
         assertTrue(comparator.compare(p2, p2) == 0);
     }
 
     @Test
     public void compare_lessThan() {
+        // EP: first RegisterNumber is less than second RegisterNumber
         assertTrue(comparator.compare(p2, p1) <= -1);
     }
 
     @Test
     public void compare_greaterThan() {
+        // EP: first RegisterNumber is less than second RegisterNumber
         assertTrue(comparator.compare(p1, p2) >= 1);
     }
 
