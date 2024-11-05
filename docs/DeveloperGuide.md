@@ -854,7 +854,7 @@ Team size: 5
 
 **Aspect: How to show appointment and person lists**
 <br>
-Context: There are two entity types (appointment and person) being managed in DocTrack`
+Context: There are two entity types (appointment and person) being managed in DocTrack
 <br>
 * **Alternative 1 (current choice):** Show lists as two separate panels side by side
     * Pros:
