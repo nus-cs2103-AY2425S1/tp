@@ -56,6 +56,7 @@ public class CommandTestUtil {
     public static final String VALID_FIELD_NAME = "name";
     public static final String VALID_FIELD_GITHUB = "github";
     public static final String VALID_FIELD_TELEGRAM = "telegram";
+    public static final String VALID_SORT_RESET = "reset";
 
 
     public static final String VALID_FIELD_IMPORT_CSV =

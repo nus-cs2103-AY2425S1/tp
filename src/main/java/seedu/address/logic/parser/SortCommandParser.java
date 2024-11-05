@@ -24,18 +24,32 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     @Override
     public SortCommand parse(String args) throws ParseException {
+        boolean isReset;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORTORDER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_SORTORDER) || argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
+        SortField sortField = parseSortField(argMultimap.getPreamble());
+        isReset = sortField == SortField.NONE;
+
+        if(isReset && arePrefixesPresent(argMultimap, PREFIX_SORTORDER)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        if (sortField == SortField.NONE) {
+            return new SortCommand(null);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_SORTORDER)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORTORDER);
 
         SortOrder sortOrder = parseSortOrder(argMultimap.getValue(PREFIX_SORTORDER).get());
-        SortField sortField = parseSortField(argMultimap.getPreamble());
-
         PersonComparator comparator = new ComparatorManager().getComparator(sortField, sortOrder);
+
         return new SortCommand(comparator);
     }
 
@@ -71,6 +85,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         case "name" -> SortField.NAME;
         case "github" -> SortField.GITHUB;
         case "telegram" -> SortField.TELEGRAM;
+        case "reset" -> SortField.NONE;
         default ->
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         };

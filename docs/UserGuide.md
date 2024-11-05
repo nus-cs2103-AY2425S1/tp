@@ -391,6 +391,9 @@ Sorts the displayed list based on the given field and order.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `sort FIELD order/ORDER`**</md>
+
+<md>**Reset Format: `sort reset`**</md>
+
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -398,6 +401,7 @@ Sorts the displayed list based on the given field and order.
 * Current FIELD that can be sorted by: `github`, `name`, `telegram`.
 * Current ORDER that is accepted: `asc`, `desc`.
 * The sort order will persist between commands.
+* The sort order will reset when `sort reset` command is given.
 * The sorting is case-insensitive: upper and lower case are treated as the same values.
   </box>
 
@@ -406,6 +410,7 @@ Sorts the displayed list based on the given field and order.
 <md>**Examples:**</md>
 
 * `sort name order/asc` will sort the displayed list based on their name in ascending order.
+* `sort reset` will reset the displayed list to its default order.
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
