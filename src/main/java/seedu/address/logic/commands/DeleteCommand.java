@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
             "Please specify the index of the contact you want to delete.\n"
                     + "Find the index from the list below and type delete INDEX\n"
                     + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_PERSON_IS_CLIENT = "Cannot delete this person as they are a client in a wedding."
+    public static final String MESSAGE_PERSON_IS_CLIENT = "Cannot delete this person as they are a client in a wedding.\n"
             + "Please delete their wedding first.";
 
     private final Index targetIndex;
