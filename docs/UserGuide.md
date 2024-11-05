@@ -122,7 +122,8 @@ Adds a student to T_Assistant.
 ##### Notes
 
 1. `Student Number` is the unique identifier for each student, so no 2 students can have the same student number.
-2. For information on the constraints for each parameter used in this command, go
+2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first instance of the repeated tag.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -238,9 +239,8 @@ Searches T_Assistant for students with fields that match the search query.
 
 ##### Notes
 
-1. This command is case-insensitive.
-2. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
-   > i.e. `Do` will not match `Doe`
+1. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
+   > i.e. `Do` will not match `Doe` and `berniceyu` will not match `berniceyu@u.nus.edu`
 
 2. Searches the following fields that a student has that matches the query:
 
@@ -840,6 +840,10 @@ the data of your previous T_Assistant home folder and also copy over `versionHis
 ### Command Parameters
 
 This section will inform you about what parameters are used in T_Assistant and their restrictions :)
+
+<box type="info">
+All parameters are case-insensitive when used for comparison unless stated otherwise.
+</box>
 
 | Parameter                | Constraints                                                                                                                                                                                                                                                           | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
