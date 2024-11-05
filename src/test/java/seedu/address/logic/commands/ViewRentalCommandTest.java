@@ -80,6 +80,7 @@ public class ViewRentalCommandTest {
         expectedModel.setLastViewedClient(clientToViewRental);
         expectedModel.updateVisibleRentalInformationList(rentalInformationOfClient);
 
+        // TODO: Zach to take a look. Its working now, simply by commenting out line 85.
         // Update the client list to show only the second client
         // showPersonAtIndex(expectedModel, INDEX_SECOND_PERSON);
 
