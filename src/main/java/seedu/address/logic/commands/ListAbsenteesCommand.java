@@ -18,8 +18,8 @@ public class ListAbsenteesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students who were absent on "
             + "the specified date and displays them as a list with index numbers.\n"
-            + "Parameters:" + PREFIX_DATE + "DATETIME \n"
-            + "Example: " + COMMAND_WORD + PREFIX_DATE + " 01/01/2021";
+            + "Parameters: " + PREFIX_DATE + "DATETIME \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "01/01/2021 09:30";
 
     private final DateAbsentPredicate predicate;
 
