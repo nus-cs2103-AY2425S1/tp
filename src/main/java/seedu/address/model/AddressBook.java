@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     * Returns true if a person with the same email as {@code person} exists in the address book.
      */
     public boolean hasEmail(Person person) {
         requireNonNull(person);
