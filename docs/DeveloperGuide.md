@@ -313,13 +313,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Use case resumes from step 2.
 
 
-* 1b. System detects error in parameters.
-    * 1b1. System displays error message and does not clear command line.
-    * 1b2. User enters command with correct parameters.
-* Steps 1b1-1b2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
-
-
 **Use case: UC02 - Read all entries**
 
 **MSS**
@@ -369,17 +362,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters command with new index.
-* Steps 2a1-2a2 are repeated until index entered is correct.
-* Use case resumes from step 3.
-
-
-* 2b. System detects error in format of entered command.
-    * 2b1. System displays error message and does not clear command line.
-    * 2b2. User enters new command.
-* Steps 2b1-2b2 are repeated until all details entered are correct.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
 
