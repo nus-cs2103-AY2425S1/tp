@@ -28,7 +28,7 @@ public class Doctor extends Person {
     }
 
     /**
-     * Returns true if both doctors have the same name and phone number.
+     * Returns true if both doctors have the same name.
      * This defines a weaker notion of equality between two doctors.
      */
     public boolean isSameDoctor(Person otherDoctor) {
@@ -41,8 +41,7 @@ public class Doctor extends Person {
         }
 
         return otherDoctor != null
-                && otherDoctor.getName().equals(getName())
-                && otherDoctor.getPhone().equals(getPhone());
+                && otherDoctor.getName().equals(getName());
     }
 
     /**
