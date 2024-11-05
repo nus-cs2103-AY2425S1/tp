@@ -8,19 +8,17 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.model.tag.Grade;
 
 public class GradeCommandParserTest {
     private final String nonEmptyGradeIndex = "1";
-    private GradeCommandParser parser = new GradeCommandParser();
+    private final GradeCommandParser parser = new GradeCommandParser();
 
     @Test
     public void parse_indexSpecified_success() {
-        // have remark
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_GRADE + nonEmptyGradeIndex;
+        // have grade
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_GRADE + nonEmptyGradeIndex;
         GradeCommand expectedCommand = new GradeCommand(INDEX_FIRST_PERSON, new Grade(nonEmptyGradeIndex));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -30,9 +28,12 @@ public class GradeCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE);
 
         // no parameters
-        assertParseFailure(parser, GradeCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
 
         // no index
-        assertParseFailure(parser, GradeCommand.COMMAND_WORD + " " + nonEmptyGradeIndex, expectedMessage);
+        assertParseFailure(parser, PREFIX_GRADE + nonEmptyGradeIndex, expectedMessage);
+
+        // no grade index
+        assertParseFailure(parser, " " + INDEX_FIRST_PERSON.getOneBased(), expectedMessage);
     }
 }
