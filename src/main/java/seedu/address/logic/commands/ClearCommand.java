@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -23,6 +24,8 @@ public class ClearCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "EduConnect has been cleared of specified tags!";
 
+    public static final String MESSAGE_NO_ACTION = "No matching entries in EduConnect to clear!";
+
     private final PersonContainsKeywordsPredicate predicate;
 
     public ClearCommand(PersonContainsKeywordsPredicate predicate) {
@@ -30,10 +33,19 @@ public class ClearCommand extends Command {
     }
 
     @Override
-    public CommandResult executeCommand(Model model) {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
+
+        int originalSize = model.getAddressBook().getPersonList().size();
         model.updateFilteredPersonList(x -> !predicate.test(x));
         List<Person> remainingPersons = model.getFilteredPersonList();
+        int newSize = remainingPersons.size();
+
+        assert newSize <= originalSize : "New person list should not be bigger than original after clear!";
+
+        if (newSize == originalSize) {
+            throw new CommandException(MESSAGE_NO_ACTION);
+        }
 
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setPersons(remainingPersons);
