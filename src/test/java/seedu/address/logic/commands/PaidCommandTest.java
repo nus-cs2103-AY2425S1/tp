@@ -46,7 +46,7 @@ public class PaidCommandTest {
         Person updatedPerson = new PersonBuilder(personToUpdate).withPolicies(String.valueOf(updatedPolicy)).build();
         model.setPerson(personToUpdate, updatedPerson);
 
-        String expectedMessage = String.format(PaidCommand.MESSAGE_SUCCESS, policyIndex.getOneBased(),
+        String expectedMessage = String.format(PaidCommand.MESSAGE_SUCCESS, policyToUpdate.getPolicyName(),
                 personToUpdate.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToUpdate, updatedPerson);

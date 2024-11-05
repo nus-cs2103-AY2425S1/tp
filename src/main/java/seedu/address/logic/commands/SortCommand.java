@@ -31,6 +31,7 @@ public class SortCommand extends Command {
         + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + ", or " + PREFIX_NEXT_PAYMENT_DATE + ".";
     public static final String MESSAGE_INVALID_ORDER = "Invalid order. Use `asc` for ascending or "
             + "`desc` for descending.";
+    public static final String MESSAGE_INVALID_SORT_COMMAND = "Cannot sort by next payment date in descending order.";
 
     private final String parameter;
     private final String order;
@@ -68,7 +69,7 @@ public class SortCommand extends Command {
         }
 
         if (parameter.equals("paydate/") && order.equals("desc")) {
-            comparator = Person.getReversedPayDateComparator();
+            throw new CommandException(MESSAGE_INVALID_SORT_COMMAND);
         }
 
         if (order.equals("desc")) {

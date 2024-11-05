@@ -168,8 +168,22 @@ public class Policy {
         return payment.getPaymentDueDate().equals(LocalDate.MAX);
     }
 
+    /**
+     * Returns a comparator that compares two policies based on their payment due dates.
+     * Policies that are fully paid will be considered last.
+     */
     public static Comparator<Policy> getPolicyPaymentDueDateComparator() {
-        return Comparator.comparing(policy -> policy.getPolicyPaymentDueDate());
+        return (policy1, policy2) -> {
+            if (policy1.isFullyPaid() && policy2.isFullyPaid()) {
+                return 0;
+            } else if (policy1.isFullyPaid()) {
+                return 1;
+            } else if (policy2.isFullyPaid()) {
+                return -1;
+            } else {
+                return policy1.getPolicyPaymentDueDate().compareTo(policy2.getPolicyPaymentDueDate());
+            }
+        };
     }
 
     /**

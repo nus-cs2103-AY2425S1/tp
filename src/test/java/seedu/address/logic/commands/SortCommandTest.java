@@ -92,13 +92,9 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_sortByPayDateDesc_success() {
+    public void execute_sortByPayDateDesc_throwsCommandException() {
         SortCommand sortCommand = new SortCommand("paydate/", "desc");
-        Comparator<Person> comparator = Person.getReversedPayDateComparator();
-        expectedModel.sortPersonList(comparator);
-
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "next payment date", "desc");
-        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(sortCommand, model, SortCommand.MESSAGE_INVALID_SORT_COMMAND);
     }
 
     @Test
