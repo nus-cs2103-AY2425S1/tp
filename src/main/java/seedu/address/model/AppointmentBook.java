@@ -130,9 +130,11 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     public void removeAppointment(Appointment key) {
         appointments.removeAppointment(key);
     }
+    public void removeAppointmentsForPerson(Person person) {
+        appointments.removeAppointmentsForPerson(person);
+    }
 
-    // util methods
-
+    //// util methods
     @Override
     public String toString() {
         return new ToStringBuilder(this)
