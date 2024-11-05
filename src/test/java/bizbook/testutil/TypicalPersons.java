@@ -84,6 +84,17 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and a pinned person.
+     */
+    public static AddressBook getTypicalAddressBookWithPinned() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
         ab.addPinnedPerson(ALICE);
         return ab;
     }
