@@ -4,13 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javafx.application.Platform;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
-
-import javafx.scene.input.Clipboard;
-import javafx.stage.Stage;
+import org.testfx.util.WaitForAsyncUtils;
 
 public class HelpWindowUiTest extends ApplicationTest {
 
@@ -29,6 +31,7 @@ public class HelpWindowUiTest extends ApplicationTest {
     @Test
     void showMethod_helpWindowIsVisible_success() {
         interact(() -> helpWindow.show());
+        WaitForAsyncUtils.waitForFxEvents();
         assertTrue(helpWindow.isShowing(), "Help window should be visible after show() is called.");
     }
 
@@ -38,6 +41,7 @@ public class HelpWindowUiTest extends ApplicationTest {
             helpWindow.show();
             helpWindow.hide();
         });
+        WaitForAsyncUtils.waitForFxEvents();
         assertFalse(helpWindow.isShowing(), "Help window should not be visible after hide() is called.");
     }
 
@@ -47,12 +51,15 @@ public class HelpWindowUiTest extends ApplicationTest {
             helpWindow.show();
             helpWindow.focus();
         });
+        WaitForAsyncUtils.waitForFxEvents();
         assertTrue(helpWindow.getRoot().isFocused(), "Help window should be focused after focus() is called.");
     }
 
     @Test
     void initialize_helpMessageIsSetCorrectly_success() {
         interact(() -> helpWindow.show());
+        WaitForAsyncUtils.waitForFxEvents();
+
         String expectedMessage = HelpWindow.HELP_MESSAGE;
         String actualMessage = lookup("#helpMessage").queryLabeled().getText();
         assertEquals(expectedMessage, actualMessage, "Help message should be set to the correct value.");
@@ -61,13 +68,18 @@ public class HelpWindowUiTest extends ApplicationTest {
     @Test
     void copyUrlMethod_urlIsCopiedToClipboard_success() {
         interact(() -> helpWindow.show());
-        interact(() -> clickOn("#copyButton"));
+        WaitForAsyncUtils.waitForFxEvents();
 
-        interact(() -> {
+        interact(() -> clickOn("#copyButton"));
+        WaitForAsyncUtils.waitForFxEvents();
+
+        // Run Clipboard check on JavaFX Application Thread
+        Platform.runLater(() -> {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             assertTrue(clipboard.hasString(), "Clipboard should contain text after copyUrl() is called.");
-            assertEquals(HelpWindow.USERGUIDE_URL, clipboard.getString(),
-                    "Clipboard should contain the user guide URL.");
+            assertEquals(HelpWindow.USERGUIDE_URL, clipboard.getString(), "Clipboard should contain the user guide URL.");
         });
+        WaitForAsyncUtils.waitForFxEvents();
     }
 }
+
