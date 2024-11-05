@@ -18,11 +18,15 @@ public class ResultDisplay extends UiPart<Region> {
 
     public ResultDisplay() {
         super(FXML);
+        resultDisplay.setWrapText(true);
+        // Make text area auto-resize
+        resultDisplay.textProperty().addListener((observable, oldValue, newValue) -> {
+            resultDisplay.setPrefRowCount(Math.max(1, newValue.split("\n").length));
+        });
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
     }
-
 }

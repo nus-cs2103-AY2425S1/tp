@@ -383,6 +383,7 @@ _Details coming soon ..._
 
 **Q**: Can I assign multiple roles to a person?<br>
 **A**: No, each person can only have one role at a time. Assigning a new role will replace the existing one.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -408,5 +409,6 @@ Action     | Format, Examples
 **Addw**   | `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]` <br> e.g., `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
 **Editw**  | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`
 **Vieww**  | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`
-**Assign** | `assign INDEX r/ROLE` or `assign NAME r/ROLE`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer`
+**Assign** | `assign INDEX r/ROLE w/WEDDING...` or `assign NAME r/ROLE w/WEDDING...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/2`
 **Help**   | `help`
+**Exit**   | `exit`

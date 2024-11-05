@@ -107,15 +107,27 @@ public class Person {
 
     /**
      * Adds a wedding to the list of wedding jobs.
+     * Throws IllegalArgumentException if attempting to add own wedding as a job.
      *
      * @param wedding {@code Wedding} to be added to the list of wedding jobs
+     * @throws IllegalArgumentException if the wedding is the person's own wedding
      */
     public void addWeddingJob(Wedding wedding) {
-        if (ownWedding == null || !ownWedding.isSameWedding(wedding)) {
-            weddingJobs.add(wedding);
-        } else {
+        if (ownWedding != null && ownWedding.equals(wedding)) {
             throw new IllegalArgumentException("Cannot add own wedding as a job.");
         }
+        weddingJobs.add(wedding);
+    }
+
+    /**
+     * Checks if this person is already assigned to the given wedding.
+     *
+     * @param wedding The wedding to check
+     * @return true if the person is already assigned to the wedding
+     */
+    public boolean isAssignedToWedding(Wedding wedding) {
+        return weddingJobs.contains(wedding) ||
+                (ownWedding != null && ownWedding.equals(wedding));
     }
 
     /**
