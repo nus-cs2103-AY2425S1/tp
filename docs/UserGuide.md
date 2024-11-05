@@ -255,6 +255,7 @@ Format: `undo`
 
 - The undo feature saves the **5 most recent executed commands**.
 - The undo feature only tracks commands that **modifies the address book**.
+- The undo feature will clear the focus person panel upon execution.
 
 Examples of commands tracked by undo:
 - `add`

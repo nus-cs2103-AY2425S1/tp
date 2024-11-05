@@ -64,7 +64,7 @@ public class ContactDetails extends UiPart<Region> {
     private void displayPerson(Person person) {
         clearPanel();
 
-        if (person == null) {
+        if (person.equals(null)) {
             return;
         }
 

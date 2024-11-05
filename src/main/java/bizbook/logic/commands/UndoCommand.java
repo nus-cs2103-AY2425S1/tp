@@ -21,6 +21,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_UNDO_FAILURE);
         }
 
+        model.setFocusPerson(null);
         model.revertAddressBookVersion();
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }

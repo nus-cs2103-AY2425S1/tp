@@ -47,11 +47,9 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        Person focusedPerson = model.getFocusedPerson().get();
-        // Need to clear the person from the contact details panel if we are deleting them
-        if (focusedPerson != null && focusedPerson.equals(personToDelete)) {
-            model.getFocusedPerson().set(null);
-        }
+
+        model.updateFocusPerson(personToDelete, null);
+
         CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.formatShort(personToDelete)), false, false);
         return commandResult;
