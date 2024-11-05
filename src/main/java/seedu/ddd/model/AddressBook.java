@@ -163,8 +163,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void deleteContact(Contact key) {
-        key.getEvents().forEach(event -> {
-            events.get(event.getEventId()).removeContact(key);
+        key.getEventIds().forEach(id -> {
+            events.get(id).removeContact(key);
         });
         contacts.remove(key);
     }

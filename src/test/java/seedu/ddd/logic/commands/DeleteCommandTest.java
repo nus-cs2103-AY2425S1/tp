@@ -10,10 +10,14 @@ import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ddd.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+import static seedu.ddd.testutil.TypicalIndexes.INDEX_THIRD_CONTACT;
 import static seedu.ddd.testutil.event.TypicalEvents.WEDDING_A;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.model.AddressBook;
@@ -81,6 +85,27 @@ public class DeleteCommandTest {
         DeleteCommand deleteSecondClient = new DeleteCommand(INDEX_SECOND_CONTACT);
         String expectedExceptionMessage = String.format(Messages.MESSAGE_DEPENDENT_EVENT, WEDDING_A.getEventId());
         assertCommandFailure(deleteSecondClient, model, expectedExceptionMessage);
+    }
+
+    @Test
+    public synchronized void execute_deleteDependentVendorBeforeEvent_throwsCommandException() {
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        ObservableList<Contact> listToUse = model.getFilteredContactList();
+        Contact contactToDelete = listToUse.get(INDEX_SECOND_CONTACT.getZeroBased());
+        DeleteCommand deleteFirstVendor = new DeleteCommand(INDEX_SECOND_CONTACT);
+
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_CONTACT_SUCCESS,
+                Messages.format(contactToDelete));
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+
+        ArrayList<Contact> contactsList = new ArrayList<>(expectedModel.getFilteredContactList());
+        expectedModel.deleteContact(contactsList.get(INDEX_SECOND_CONTACT.getZeroBased()));
+        assertCommandSuccess(deleteFirstVendor, model, expectedMessage, expectedModel);
+
+        DeleteCommand deleteSecondVendor = new DeleteCommand(INDEX_THIRD_CONTACT);
+        String expectedExceptionMessage = String.format(Messages.MESSAGE_DEPENDENT_EVENT, WEDDING_A.getEventId());
+        assertCommandFailure(deleteSecondVendor, model, expectedExceptionMessage);
     }
 
     @Test
