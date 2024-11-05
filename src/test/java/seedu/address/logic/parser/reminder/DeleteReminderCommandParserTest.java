@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.reminder.DeleteReminderCommand;
 
 
-public class DeleteReminderParserTest {
+public class DeleteReminderCommandParserTest {
     private DeleteReminderCommandParser parser = new DeleteReminderCommandParser();
 
     @Test

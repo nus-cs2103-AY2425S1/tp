@@ -43,7 +43,7 @@ public class SampleDataUtil {
                     + "out of the east"), Collections.EMPTY_SET),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getClientTypeSet("Investment Plan"), new Description("Recently married"), Collections.EMPTY_SET),
+                getClientTypeSet("Investment"), new Description("Recently married"), Collections.EMPTY_SET),
             new Person(new Name("Sarah Lee"), new Phone("89732145"), new Email("sarahlee@example.com"),
                     new Address("Blk 38 Boon Lay Street 43, #32-03"),
                     getClientTypeSet("Healthcare", "Insurance Plan"),
