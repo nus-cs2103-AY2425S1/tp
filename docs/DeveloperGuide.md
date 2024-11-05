@@ -328,7 +328,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | mechanic          | be able to see when marks like "serviced" or "unserviced" were added                  | cover an absent/on-leave coworker if needed                            |
 | `*`      | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
 | `*`      | admin             | track vehicles whose service dates are coming soon                                    | recommend and schedule servicing for car owners                        |
-*{More to be added}*
 
 ### Use cases
 
@@ -575,6 +574,20 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+### List of VRNs to use for testing
+- SJH9514P
+- SH8942L
+- S6780S
+- SHA781D
+- SM563Z
+- S224X
+- SJH81E
+- SL53J
+- S14K
+- SNG9Z
+- SM4X
+- S1Y
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -590,11 +603,60 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+### Adding a Client
 
-1. Deleting a person while all persons are being shown
+1. **Adding a client without a car**
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that no client named `John Doe` exists in the list.
+
+   1. **Test case:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+      **Expected:** A new client named `John Doe` is added to the list. Details of the added client are shown in the status message.
+
+   1. **Test case:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (same command again)  
+      **Expected:** No client is added. Error message displayed indicating that the client already exists.
+
+2. **Adding a client with a car**
+
+   1. **Prerequisites:** Ensure the client list is displayed. Confirm that no client named `Betsy Crowe` exists and no car with VRN `SJH9514P` or VIN `1G6ABC129P5123456` exists.
+
+   1. **Test case:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`  
+      **Expected:** A new client named `Betsy Crowe` with a car is added to the list. Details of the added client and car are shown in the status message.
+
+   1. **Test case:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla` (same command again)  
+      **Expected:** No client is added. Error message indicating that the client already exists.
+
+
+### Adding a Car to a Client
+
+1. **Adding a car to a client without a car**
+
+   1. **Prerequisites:** Ensure there is at least one client without a car in the list. Suppose the client at index `1` is `John Doe` without a car.
+
+   1. **Test case:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`  
+      **Expected:** A car is added to `John Doe`. Details of the added car are shown in the status message.
+
+   1. **Test case:** `add-car 1 vrn/SJL5678B vin/1HGCM82633A004353 make/Ford model/Focus`  
+      **Expected:** No car is added. Error message indicating that the client already has a car.
+
+2. **Adding a car to a client who already has a car**
+
+   1. **Prerequisites:** Ensure that `John Doe` at index `1` now has a car after the previous test.
+
+   1. **Test case:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Ford model/Focus`  
+      **Expected:** No car is added. Error message indicating that the client already has a car.
+
+3. **Adding a car to a non-existent client**
+
+   1. **Prerequisites:** Assume the client list has fewer than 10 clients.
+
+   1. **Test case:** `add-car 10 vrn/SJH9514P vin/1HGCM82633A004355 make/Nissan model/Altima`  
+      **Expected:** No car is added. Error message indicating that the client index is out of bounds.
+
+### Deleting a client
+
+1. Deleting a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `del-client 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
