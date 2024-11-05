@@ -34,8 +34,8 @@ public class MarkLessonParticipationCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the participation of student(s) "
             + "in a lesson at the chosen index in the lesson list to the specified value. "
             + "\nIf their participation is set to a positive integer, also sets their attendance to true."
-            + "\nParameters: LESSON_INDEX (must be a positive integer) "
-            + PREFIX_NAME + "NAME "
+            + "\nParameters: LESSON_INDEX "
+            + PREFIX_NAME + "NAME [" + PREFIX_NAME + "NAME]… "
             + PREFIX_POINTS + "PARTICIPATION (integer from 0-100)"
             + "\nExample: " + COMMAND_WORD + " 1 n/John Doe pt/1";
 

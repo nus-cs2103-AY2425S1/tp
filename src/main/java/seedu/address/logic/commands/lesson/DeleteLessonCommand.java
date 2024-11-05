@@ -27,9 +27,9 @@ public class DeleteLessonCommand extends Command {
     public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the lesson(s) identified by the index number(s) used in the displayed lesson list.\n"
-            + "Parameters: INDEX (must be a positive integer) [;INDEX...]\n"
-            + "Example: " + COMMAND_WORD + " 1" + DEFAULT_DELIMITER + "2";
+            + ": Deletes the lesson(s) identified by the index number(s) used in the displayed lesson list."
+            + "\nParameters: LESSON_INDEX[;LESSON_INDEX]…"
+            + "\nExample: " + COMMAND_WORD + " 1" + DEFAULT_DELIMITER + "2";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson(s):\n%1$s";
 
