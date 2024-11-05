@@ -137,6 +137,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteArchivedPerson(Person person) {
+        archivedAddressBook.removeArchivedPerson(person); // add but no update to filtered list
+    }
+
+    @Override
     public ReadOnlyAddressBook getArchivedAddressBook() {
         return archivedAddressBook;
     }

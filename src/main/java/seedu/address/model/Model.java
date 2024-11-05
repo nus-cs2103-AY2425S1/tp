@@ -137,4 +137,10 @@ public interface Model {
      * Sets the isArchived boolean
      */
     void setIsArchivedList(boolean value);
+
+    /**
+     * Deletes the given person.
+     * The person must exist in the address book.
+     */
+    void deleteArchivedPerson(Person target);
 }
