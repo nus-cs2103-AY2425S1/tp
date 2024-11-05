@@ -90,7 +90,7 @@ Format: `exit`
 
 ### Saving the data
 
-Data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -190,7 +190,7 @@ Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Locating buyer contacts: `find`
+### Locating buyers: `find`
 
 Finds existing buyers in existing buyer list based on keywords.
 
@@ -239,7 +239,14 @@ Examples:
 * Note how the mode is highlighted by `Viewing: Meet Ups` above the command line
 
 </div>
-### Adding a meetup: `add`
+
+### Viewing all meet-ups : `view`
+
+Shows a list of all meet-ups in the meet-up list.
+
+Format: `view`
+
+### Adding a meet-up: `add`
 
 Adds a meet-up to the meet-up list.
 
@@ -257,11 +264,6 @@ Meet Ups with clashing timings will be displayed in red. Otherwise, the default 
 
 ![MeetUpClash](images/MeetUpClash.png)
 
-### Viewing all meet-ups : `view`
-
-Shows a list of all meet-ups in the meet-up list.
-
-Format: `view`
 
 ### Editing a meet-up : `edit`
 
@@ -354,7 +356,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd buyer to be `Betsy Crower`.
 
-### Locating Properties: `find`
+### Locating properties: `find`
 
 Find existing properties in the property list based on either name or address keywords.
 
