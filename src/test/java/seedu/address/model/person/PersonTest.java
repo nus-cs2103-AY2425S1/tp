@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CONVICT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -36,14 +36,14 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns false
         Person sameNameAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_CONVICT)
                 .withDateOfLastVisit(VALID_DATEOFLASTVISIT_BOB)
                 .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
         assertFalse(ALICE.isSamePerson(sameNameAlice));
 
         // same name, same phone number, all other attributes different -> returns true
         Person sameNameNumberAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_CONVICT)
                 .withDateOfLastVisit(VALID_DATEOFLASTVISIT_BOB)
                 .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).build();
         assertTrue(ALICE.isSamePerson(sameNameNumberAlice));
@@ -97,7 +97,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_CONVICT).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different date of last visit -> returns false
