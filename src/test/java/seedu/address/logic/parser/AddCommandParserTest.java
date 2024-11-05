@@ -27,7 +27,6 @@ import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_SUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_TUE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S4_NT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
@@ -250,11 +249,6 @@ public class AddCommandParserTest {
         // adding student with incorrect level NONE IP
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
                 + ADDRESS_DESC_BOB + " l/NONE IP", Level.MESSAGE_CONSTRAINTS);
-
-        // adding student with level but with an incorrect subject
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
-                + ADDRESS_DESC_BOB + LEVEL_DESC_S4_NT + SUBJECT_DESC_MATH,
-                Subject.getValidSubjectMessage(new Level(VALID_LEVEL_S4_NT)));
 
         // adding student with invalid lesson time
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB

@@ -14,6 +14,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -57,6 +58,11 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Validate that the subjects are compatible with the specified level
+        if (!Subject.isValidSubjectsByLevel(toAdd.getLevel(), toAdd.getSubjects())) {
+            throw new CommandException(Subject.getValidSubjectMessage());
+        }
 
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
