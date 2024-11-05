@@ -8,13 +8,15 @@ pageNav: 3
 
 Knotty Planner is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
 
+_Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently._
+
 <!-- * Table of Contents -->
 ## Table of Contents
 - [Quick Start](#quick-start)
+- [Command summary](#Command-summary)
 - [Features](#features)
 - [FAQ](#FAQ)
 - [Known issues](#Known-issues)
-- [Command summary](#Command-summary)
 
 <page-nav-print />
 
@@ -32,26 +34,45 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/gui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
+   *  `help`: Opens the help window.
+   
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer` : Adds a contact named `John Doe` to the Address Book.
 
    * `del n/John Doe` followed by `y` : Deletes the contact named John Doe in the contacts list.
 
-   * `clear-ab` : Deletes all contacts in addressbook.
-
    * `exit` : Exits Knotty Planner.
 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Command summary
 
+| Action                                                    | Format, Examples                                                                                                                                                                             |
+|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**                           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June` |
+| **[Delete](#deleting-a-contact--del-followed-by-y-or-n)** | `del n/NAME` followed by `y` or `n`<br> e.g., `delete n/John Doe` followed by `y`                                                                                                            |
+| **[List](#listing-all-contacts--list)**                   | `list`                                                                                                                                                                                       |
+| **[Edit](#editing-a-contact--edit)**                      | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                             |
+| **[Add Wedding](#adding-a-wedding-add-wed)**              | `add-wed w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add w/ John & June v/Orchard Hotel d/12/12/2030`                                                                                          |
+| **[Delete Wedding](#deleting-a-wedding-del-wed)**         | `del-wed w/NAME & NAME` followed by `y` or `n`                                                                                                                                               |
+| **[Clear](#clearing-all-entries--clear-ab--clear-wb)**    | `clear-ab` for address book or `clear-wb` for wedding book followed by `y` or `n`                                                                                                            |
+| **[Adding Tags](#tagging-a-contact--tag-add--tag-del)**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James`                                                                                                                     |
+| **[Deleting Tags](#tagging-a-contact--tag-add--tag-del)** | `tag-del n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James`                                                                                                                     |
+| **[Filter](#filtering-contacts-by-job-filter)**           | `filter n/KEYWORD` or `filter j/KEYWORD`<br> e.g., `filter n/John` or `filter j/Photographer`                                                                                                |
+| **[View Wedding](#view-wedding-view-wed)**                | `view-wed NAME & NAME` <br> e.g., `view-wed John & Sarah`                                                                                                                                    |
+| **[List Weddings](#listing-all-contacts--list)**          | `list-wed`                                                                                                                                                                                   |
+| **[Help](#viewing-help--help)**                           | `help`                                                                                                                                                                                       |
+| **[Exit](#exiting-the-program--exit)**                    | `exit`                                                                                                                                                                                       |
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
-<box type="info" seamless>
+< type="info" seamless>
 
 **Notes about the command format:**<br>
 
@@ -94,6 +115,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 * If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
 * We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
 
+</box>
+
+<box type="tip" seamless>
+
 **Tip:**
 * A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
 involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
@@ -102,8 +127,6 @@ involved in. Weddings must already exist in the wedding book to successfully tag
     Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
 
 </box>
-
-
 
 ![add message](images/addMsg.png)
 
@@ -169,20 +192,25 @@ Format: `list`
 
 You can add a wedding to the list of weddings.
 
-* Adds a wedding with the specified `NAME & NAME`, `VENUE` and `DATE` to the wedding book.
-* The wedding's details are shown.
-
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
+
 
 <box type="important" seamless>
 
-**IMPORTANT:** Date must be a valid date in the format of **dd/MM/yyyy**
+**IMPORTANT:**
+
+* Date must be a valid date in the format of **dd/MM/yyyy**.
+* If you are worried about adding duplicated weddings, fret not! Knotty Planner will alert you when an identical wedding is added.
+* We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
 
 </box>
 
-<box type = "warning" seamless>
+<box type="tip" seamless>
 
-Limitations of the add-wedding command: Adding James & June for one wedding and James **Tan** & June for another wedding will be treated as separate weddings. Hence, it is important to ensure that the names are consistent.
+**Tip:**
+* To make add wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+
+  Examples: `john & jane`, `JOHN & jane` will all be formatted to `John & Jane`.
 
 </box>
 
@@ -206,7 +234,7 @@ Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 <box type="important" seamless>
 
 **IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
-affected.
+affected. Make sure you follow the format strictly 😲.
 
 </box>
 

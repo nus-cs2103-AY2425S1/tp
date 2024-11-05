@@ -65,10 +65,13 @@ public class Messages {
      */
     public static String format(Wedding wedding) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(wedding.getWeddingName())
-                .append("; Venue: ")
+        builder.append("\nNames: ")
+                .append(wedding.getWeddingName())
+                .append("\n")
+                .append("Venue: ")
                 .append(wedding.getVenue())
-                .append("; Date: ")
+                .append("\n")
+                .append("Date: ")
                 .append(wedding.getDate());
         return builder.toString();
     }
