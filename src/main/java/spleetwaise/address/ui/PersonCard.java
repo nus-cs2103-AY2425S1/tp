@@ -1,4 +1,4 @@
-package spleetwaise.commons.ui;
+package spleetwaise.address.ui;
 
 import java.util.Comparator;
 
@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Person}.

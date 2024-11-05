@@ -1,4 +1,4 @@
-package spleetwaise.commons.ui;
+package spleetwaise.address.ui;
 
 import java.util.logging.Logger;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.ui.UiPart;
 
 /**
  * Panel containing the list of persons.
