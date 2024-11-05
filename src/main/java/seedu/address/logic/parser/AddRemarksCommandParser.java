@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_REMARK;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -10,6 +11,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.AddRemarksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Remark;
 
 
 /**
@@ -29,17 +31,19 @@ public class AddRemarksCommandParser implements Parser<AddRemarksCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRemarksCommand.MESSAGE_USAGE));
         }
-
-        int patientId;
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_REMARK);
+        String remarkInput = argMultimap.getAllValues(PREFIX_REMARK).get(0);
+        if (remarkInput.trim().isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_REMARK);
+        }
+        int patientId;
         try {
             patientId = ParserUtil.parsePersonId(argMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+        Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         return new AddRemarksCommand(patientId, remark);
     }
