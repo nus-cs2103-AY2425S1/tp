@@ -138,7 +138,7 @@ Preference types: `high`, `low`, `recent`, `distant`
 * `recent`: Persons with more recent "last seen" dates rise to the top
 * `distant`: Persons with more distant "last seen" dates rise to the top
 
-### Save sort preference
+### Save sort preference: `save` or `svp`
 
 Saves the sorting preference specified by the user.
 
@@ -168,7 +168,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting a reminder
+### Deleting a reminder: `delete_reminder` or `dr`
 
 Deletes the specified reminder from the address book.
 
