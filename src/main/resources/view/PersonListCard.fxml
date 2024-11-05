@@ -46,7 +46,7 @@
         <Label fx:id="income" styleClass="cell_small_label" text="\$income" />
       </HBox>
     </VBox>
-    <FlowPane fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="TOP_RIGHT" prefWidth="10">
+    <FlowPane fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="TOP_RIGHT" prefWidth="150" hgap="5" vgap="5">
       <padding>
         <Insets top="5" right="5" bottom="5" left="5" />
       </padding>
