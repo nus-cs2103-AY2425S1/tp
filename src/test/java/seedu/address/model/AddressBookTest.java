@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 import seedu.address.model.types.person.exceptions.DuplicatePersonException;
@@ -113,6 +114,12 @@ public class AddressBookTest {
         public ObservableList<Event> getEventList() {
             return events;
         }
+
+        @Override
+        public PersonEventManager getPersonEventManager() {
+            return new PersonEventManager();
+        }
+
     }
 
 }

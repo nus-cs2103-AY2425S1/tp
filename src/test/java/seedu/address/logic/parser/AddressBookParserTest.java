@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -38,7 +40,12 @@ import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.LinkPersonCommand;
 import seedu.address.logic.commands.personcommands.SearchPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.types.common.DateTime;
+import seedu.address.model.types.common.EventInSchedulePredicate;
+import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
+import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
 import seedu.address.model.types.common.NameContainsKeywordsPredicate;
+import seedu.address.model.types.common.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.types.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -47,6 +54,44 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void regex_modelNeither() {
+        Pattern pattern = parser.getParserRegex();
+
+        Matcher matcher = pattern.matcher("cmd  zz  arg");
+        assert matcher.matches();
+
+        String commandWord = matcher.group("commandWord");
+        String modelTypeShortHand = matcher.group("modelType");
+        ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
+        String arguments = (modelType == ModelType.NEITHER)
+                ? matcher.group("combined")
+                : matcher.group("arguments");
+
+        assertEquals("cmd", commandWord);
+        assertEquals(ModelType.NEITHER, modelType);
+        assertEquals("  zz  arg", arguments);
+    }
+
+    @Test
+    public void regex_modelNotNeither() {
+        Pattern pattern = parser.getParserRegex();
+
+        Matcher matcher = pattern.matcher("cmd  p  arg");
+        assert matcher.matches();
+
+        String commandWord = matcher.group("commandWord");
+        String modelTypeShortHand = matcher.group("modelType");
+        ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
+        String arguments = (modelType == ModelType.NEITHER)
+                ? matcher.group("combined")
+                : matcher.group("arguments");
+
+        assertEquals("cmd", commandWord);
+        assertEquals(ModelType.PERSON, modelType);
+        assertEquals("  arg", arguments);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -85,10 +130,44 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                FindPersonCommand.COMMAND_WORD + " p " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        // find person
+        List<String> firstKeywords = Arrays.asList("foo", "bar", "baz");
+        FindPersonCommand firstCommand = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " p " + firstKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(firstKeywords)), firstCommand);
+
+        // find event
+        List<String> secondKeywords = Arrays.asList("foo", "bar", "baz");
+        FindEventCommand secondCommand = (FindEventCommand) parser.parseCommand(
+                FindEventCommand.COMMAND_WORD + " e " + secondKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindEventCommand(new EventNameContainsKeywordsPredicate(secondKeywords)), secondCommand);
+    }
+
+    @Test
+    public void parseCommand_search() throws Exception {
+        // search person
+        List<String> firstKeywords = Arrays.asList("foo", "bar", "baz");
+        SearchPersonCommand firstCommand = (SearchPersonCommand) parser.parseCommand(
+                SearchPersonCommand.COMMAND_WORD + " p " + firstKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchPersonCommand(new PersonTagContainsKeywordsPredicate(firstKeywords)), firstCommand);
+
+        // search event
+        List<String> secondKeywords = Arrays.asList("foo", "bar", "baz");
+        SearchEventCommand secondCommand = (SearchEventCommand) parser.parseCommand(
+                SearchPersonCommand.COMMAND_WORD + " e " + secondKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchEventCommand(new EventTagContainsKeywordsPredicate(secondKeywords)), secondCommand);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        ScheduleCommand firstCommand = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " 7");
+        assertEquals(new ScheduleCommand(new EventInSchedulePredicate(7)), firstCommand);
+
+        ScheduleCommand secondCommand = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " 2024-10-15");
+        assertEquals(new ScheduleCommand(new EventInSchedulePredicate(new DateTime("2024-10-15 00:00"))),
+                secondCommand);
     }
 
     @Test
@@ -104,17 +183,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_searchPerson() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void parseCommand_schedule() throws Exception {
-        // TODO
-    }
-
-    @Test
-    public void parseCommand_linkPerson() throws Exception {
+    public void parseCommand_link() throws Exception {
         // TODO
     }
 

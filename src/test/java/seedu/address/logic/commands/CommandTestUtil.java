@@ -46,8 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOOK_FAIR = "Book Fair";
     public static final String VALID_ADDRESS_ART_EXHIBIT = "101, Art Street";
     public static final String VALID_ADDRESS_BOOK_FAIR = "45, Library Lane";
-    public static final String VALID_START_TIME_ART_EXHIBIT = "2024-11-15 10:00";
-    public static final String VALID_START_TIME_BOOK_FAIR = "2024-11-20 09:00";
+    public static final String VALID_START_TIME_ART_EXHIBIT = "2025-11-15 10:00";
+    public static final String VALID_START_TIME_BOOK_FAIR = "2025-11-20 09:00";
     public static final String VALID_TAG_LITERATURE = "literature";
     public static final String VALID_TAG_CULTURE = "culture";
 

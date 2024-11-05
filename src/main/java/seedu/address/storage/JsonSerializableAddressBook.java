@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.types.common.LinkedPersonsEntry;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -26,6 +27,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
+    private final List<JsonAdaptedLinkedPersonsEntry> linkedPersonsEntries = new ArrayList<>();
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
@@ -33,6 +35,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.persons.addAll(persons);
         this.events.addAll(events);
+        this.linkedPersonsEntries.addAll(linkedPersonsEntries);
     }
 
     /**
@@ -43,6 +46,9 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        linkedPersonsEntries.addAll(source.getPersonEventManager().getLinkedPersonsEntryList().stream()
+                .map(entry -> new JsonAdaptedLinkedPersonsEntry(entry))
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -66,6 +72,11 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
+        }
+
+        for (JsonAdaptedLinkedPersonsEntry jsonAdaptedLinkedPersonsEntry : linkedPersonsEntries) {
+            LinkedPersonsEntry linkedPersonsEntry = jsonAdaptedLinkedPersonsEntry.toModelType();
+            addressBook.addLinkedPersonsEntry(linkedPersonsEntry);
         }
         return addressBook;
     }
