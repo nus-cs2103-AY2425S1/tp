@@ -4,15 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javafx.application.Platform;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
+
+import javafx.application.Platform;
+import javafx.scene.input.Clipboard;
+import javafx.stage.Stage;
 
 public class HelpWindowUiTest extends ApplicationTest {
 
@@ -77,7 +77,8 @@ public class HelpWindowUiTest extends ApplicationTest {
         Platform.runLater(() -> {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             assertTrue(clipboard.hasString(), "Clipboard should contain text after copyUrl() is called.");
-            assertEquals(HelpWindow.USERGUIDE_URL, clipboard.getString(), "Clipboard should contain the user guide URL.");
+            assertEquals(HelpWindow.USERGUIDE_URL, clipboard.getString(),
+                    "Clipboard should contain the user guide URL.");
         });
         WaitForAsyncUtils.waitForFxEvents();
     }
