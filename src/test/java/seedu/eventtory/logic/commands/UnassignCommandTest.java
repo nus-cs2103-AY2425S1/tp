@@ -49,8 +49,8 @@ class UnassignCommandTest {
         UnassignCommand unassignCommand = new UnassignCommand(INDEX_LAST_EVENT);
         CommandResult result = unassignCommand.execute(model);
 
-        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS,
-            vendor1.getName(), event1.getName()), result.getFeedbackToUser());
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_EVENT_SUCCESS,
+                event1.getName(), vendor1.getName()), result.getFeedbackToUser());
         assertFalse(model.isVendorAssignedToEvent(vendor1, event1));
     }
 
@@ -62,8 +62,8 @@ class UnassignCommandTest {
         UnassignCommand unassignCommand = new UnassignCommand(INDEX_LAST_VENDOR);
         CommandResult result = unassignCommand.execute(model);
 
-        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_SUCCESS, vendor1.getName(),
-            event1.getName()), result.getFeedbackToUser());
+        assertEquals(String.format(UnassignCommand.MESSAGE_UNASSIGN_VENDOR_SUCCESS,
+                vendor1.getName(), event1.getName()), result.getFeedbackToUser());
         assertFalse(model.isVendorAssignedToEvent(vendor1, event1));
     }
 
@@ -125,7 +125,7 @@ class UnassignCommandTest {
 
         // Verify that an exception is thrown when the vendor is already unassigned
         CommandException exception = assertThrows(CommandException.class, () -> unassignCommand.execute(model));
-        assertEquals(Messages.MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT, exception.getMessage());
+        assertEquals(Messages.MESSAGE_EVENT_DOES_NOT_CONTAIN_VENDOR, exception.getMessage());
     }
 
     @Test

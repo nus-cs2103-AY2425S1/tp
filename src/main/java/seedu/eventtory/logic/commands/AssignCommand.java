@@ -9,6 +9,7 @@ import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.ui.UiState;
 
 /**
  * Assigns a vendor to an event.
@@ -18,22 +19,22 @@ public class AssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a vendor to an event. "
             + "Parameters: "
-            + "v/<VENDOR_INDEX> e/<EVENT_INDEX> or e/<EVENT_INDEX> v/<VENDOR_INDEX>\n"
-            + "Example: " + COMMAND_WORD + " v/1 e/2";
+            + "INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ASSIGN_SUCCESS = "Vendor %s assigned to Event %s";
+    public static final String MESSAGE_ASSIGN_VENDOR_SUCCESS = "Vendor %s assigned from Event %s";
+    public static final String MESSAGE_ASSIGN_EVENT_SUCCESS = "Event %s assigned from Vendor %s";
+    public static final String MESSAGE_ASSIGN_FAILURE_INVALID_VIEW =
+            "You have to be viewing a vendor or event to use the assign command";
 
-    private final Index vendorIndex;
-    private final Index eventIndex;
+    private final Index selectedIndex;
 
     /**
      * Creates an AssignCommand to assign the specified {@code Vendor} to the specified {@code Event}.
      */
-    public AssignCommand(Index vendorIndex, Index eventIndex) {
-        requireNonNull(vendorIndex);
-        requireNonNull(eventIndex);
-        this.vendorIndex = vendorIndex;
-        this.eventIndex = eventIndex;
+    public AssignCommand(Index selectedIndex) {
+        requireNonNull(selectedIndex);
+        this.selectedIndex = selectedIndex;
     }
 
     @Override
@@ -48,26 +49,53 @@ public class AssignCommand extends Command {
         }
 
         AssignCommand otherCommand = (AssignCommand) other;
-        return vendorIndex.equals(otherCommand.vendorIndex)
-                && eventIndex.equals(otherCommand.eventIndex);
+        return selectedIndex.equals(otherCommand.selectedIndex);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Event event = IndexResolverUtil.resolveEvent(model, eventIndex);
-        Vendor vendor = IndexResolverUtil.resolveVendor(model, vendorIndex);
+        requireNonNull(model);
+
+        UiState uiState = model.getUiState().getValue();
+        switch (uiState) {
+        case VENDOR_DETAILS:
+            return assignEventToVendor(model);
+        case EVENT_DETAILS:
+            return assignVendorToEvent(model);
+        default:
+            return new CommandResult(MESSAGE_ASSIGN_FAILURE_INVALID_VIEW);
+        }
+    }
+
+    private CommandResult assignEventToVendor(Model model) throws CommandException {
+        Vendor vendor = model.getViewedVendor().getValue();
+
+        Event event = IndexResolverUtil.resolveEvent(model, selectedIndex);
 
         if (model.isVendorAssignedToEvent(vendor, event)) {
-            throw new CommandException(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED);
+            throw new CommandException(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED_TO_EVENT);
         }
 
         model.assignVendorToEvent(vendor, event);
 
         return new CommandResult(
-                String.format(MESSAGE_ASSIGN_SUCCESS,
-                        vendorIndex.getOneBased(),
-                        eventIndex.getOneBased()));
+                String.format(MESSAGE_ASSIGN_EVENT_SUCCESS, vendor.getName(), event.getName()));
+    }
+
+    private CommandResult assignVendorToEvent(Model model) throws CommandException {
+        Event event = model.getViewedEvent().getValue();
+
+        Vendor vendor = IndexResolverUtil.resolveVendor(model, selectedIndex);
+
+        if (model.isVendorAssignedToEvent(vendor, event)) {
+            throw new CommandException(Messages.MESSAGE_EVENT_ALREADY_CONTAINS_VENDOR);
+        }
+
+        model.assignVendorToEvent(vendor, event);
+
+        return new CommandResult(
+                String.format(MESSAGE_ASSIGN_VENDOR_SUCCESS, vendor.getName(), event.getName()));
     }
 }
