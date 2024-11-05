@@ -61,6 +61,16 @@
     "clientStatus": "active",
     "deadline": "08-08-2024"
   }, {
+    "name" : "Fiona Kunz",
+    "phone" : "1482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "tags" : [ ],
+    "projectStatus": "in progress",
+    "paymentStatus": "pending",
+    "clientStatus": "active",
+    "deadline": "08-08-2024"
+  }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
