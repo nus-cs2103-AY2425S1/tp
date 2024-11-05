@@ -14,7 +14,6 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_NEED_TO_PROVIDE_INDEX = "You must provide an index";
 
     public static final String MESSAGE_MISSING_PERSON_INDEX =
             "Person index is required but missing. Please provide the index of the person as displayed in the list.";
