@@ -474,8 +474,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Premium Price Label ($$$)**:  
   Expected price per meal per restaurant to be \( \$20 < x <= \$50 \). This is a subjective estimate based on human input.
 
-  * **Very Premium Price Label ($$$$)**:  
-  Expected price per meal per restaurant to be \( x > \$50 \). This is a subjective estimate based on human input.
+* **Very Premium Price Label (\$\$\$\$)**:  
+Expected price per meal per restaurant to be \( x > \$50 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 
