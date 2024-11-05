@@ -104,7 +104,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name and same job.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -113,7 +113,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().isSameName(getName())
+                && otherPerson.getJob().isSameJob(getJob());
     }
 
     public String getStatus() {
@@ -156,6 +157,7 @@ public class Person {
     public boolean isRejected() {
         return tags.contains(TAG_REJECTED);
     }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

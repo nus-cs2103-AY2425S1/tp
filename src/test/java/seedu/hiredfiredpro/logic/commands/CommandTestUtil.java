@@ -68,7 +68,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_SKILL_DESC = " " + PREFIX_SKILLS + "EXC%l"; // '%' not allowed in skills
     public static final String INVALID_INTERVIEW_SCORE_DESC = " " + PREFIX_INTERVIEW_SCORE
-            + "10.9"; // score hgiher than 10.0 not allowed for interview scores
+            + "10.9"; // score higher than 10.0 not allowed for interview scores
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
