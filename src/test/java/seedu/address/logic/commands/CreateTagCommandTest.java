@@ -226,7 +226,12 @@ public class CreateTagCommandTest {
         }
 
         @Override
-        public void deleteWedding(Wedding tag) {
+        public void deleteWedding(Wedding targetWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Wedding getWedding(Wedding targetWedding) {
             throw new AssertionError("This method should not be called.");
         }
 

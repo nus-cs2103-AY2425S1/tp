@@ -51,7 +51,6 @@ public class CreateWeddingCommand extends Command {
         }
 
         model.addWedding(weddingToAdd);
-        model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(weddingToAdd)));
     }
 

@@ -243,6 +243,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public Wedding getWedding(Wedding toGet) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
             throw new AssertionError("This method should not be called.");
         }

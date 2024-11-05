@@ -98,8 +98,7 @@ public class AssignWeddingCommand extends Command {
                     throw new CommandException(
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
-            }
-            else {
+            } else {
                 Wedding weddingToEdit = model.getWedding(wedding);
                 weddingToEdit.increasePeopleCount();
                 updatedWeddings.add(weddingToEdit);
