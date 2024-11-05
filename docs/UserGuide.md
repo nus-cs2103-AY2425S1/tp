@@ -432,7 +432,7 @@ Clears all entries from the address book.
 
 ### <i class="fa-solid fa-file-import"></i> Importing data from CSV file `import`
 
-Imports contacts based on CSV file
+Imports contacts based on CSV file. Importing a file will replace ALL existing contacts
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -441,15 +441,47 @@ Imports contacts based on CSV file
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* File path can be relative or absolute
-  </box>
+* File path can be relative or absolute, but must end with .csv
+</box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
-* `import path/data/tutorial12.csv` will import the contacts found from the comma separated file (tutorial12.csv from relative path given)
+* `import path/data/group12.csv` will import the contacts found from the CSV (group12.csv from relative path given)
   </box>
+
+<box type="definition" icon=":fa-solid-book:" light>
+
+<md>**CSV file formatting:**</md>
+
+* The CSV file must have header with the exact required order {"Name", "Phone", "Email", "Telegram", "Tags", "Github",
+  "Assignments", "WeeksPresent"} (Case-insensitive)
+* The CSV file must contain information about at least 1 person
+* The data fields for Name, Phone, Email, Telegram, Github is compulsory
+* Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within the same entry 
+with commas. (e.g."[tag1],[tag2],[tag3].....")
+  * Duplicate tags will be ignored (e.g."[Group1],[Group1]" will be treated as "[Group1]")
+  * This field can be empty (will be treated as no tags for specific person)
+* Assignment format: Assignment name and assignment score should be separated with "|" (e.g. Ex01|10). If multiple 
+assignments are present for a person, separate them within the same entry using commas. (e.g. Ex01|9, Ex02|5)
+  * If an assignment name appears twice, the later instance will be used (e.g. Ex01|10, Ex01|5 will cause KonTActs
+  to record 5 marks for Assignment Ex01)
+  * This field can be empty (will be treated as no assignments for specified person)
+* WeeksPresent format: Each integer represents a specific week, with each week separated by a comma. (e.g. 1,2,3,4)
+  * Duplicate weeks will be ignored (e.g. 1,2,3,4,1 will be treated as 1,2,3,4)
+  * This field can be empty (will be treated as no weeks attended for specific person)
+</box>
+
+<box type="definition" icon=":fa-solid-book:" light>
+
+<md>**Example of acceptable CSV file:**</md>
+
+![Valid CSV](images/validCSV.png)
+![Valid CSV(excel)](images/validCSV1.png)
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -464,14 +496,15 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* File path can be relative or absolute
+* File path can be relative or absolute but must end with .csv
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
-* `export path/data/tutorial12.csv` will export the contacts in the Address book as a csv file (tutorial12.csv at the relative path given)
+* `export path/data/group12.csv` will export the contacts in the Address book as a csv file (group12.csv at the 
+relative path given)
   </box>
 
 --------------------------------------------------------------------------------------------------------------------

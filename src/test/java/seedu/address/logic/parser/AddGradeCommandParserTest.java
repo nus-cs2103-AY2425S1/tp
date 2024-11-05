@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 public class AddGradeCommandParserTest {
     private final AddGradeCommandParser parser = new AddGradeCommandParser();
@@ -27,7 +28,7 @@ public class AddGradeCommandParserTest {
     public void parse_allFieldsSpecified_success() throws ParseException {
         String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + SCORE_DESC;
         AddGradeCommand expectedCommand = new AddGradeCommand(
-                VALID_NAME_AMY,
+                new Name(VALID_NAME_AMY),
                 VALID_SCORE,
                 VALID_ASSIGNMENT_ONE);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -44,8 +45,7 @@ public class AddGradeCommandParserTest {
     @Test
     public void parse_emptyNameError() throws ParseException {
         String userInput = " " + PREFIX_NAME + ASSIGNMENT_DESC_ONE + SCORE_DESC;
-        String expectedMessage = "Name cannot be empty.";
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, userInput, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

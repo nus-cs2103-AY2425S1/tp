@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new AddGradeCommand object
@@ -31,10 +32,7 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGradeCommand.MESSAGE_USAGE));
         }
         // Parse and validate the name
-        String name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
-        if (name.isEmpty()) {
-            throw new ParseException("Name cannot be empty.");
-        }
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SCORE, PREFIX_ASSIGNMENT);
 
@@ -50,7 +48,7 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
             throw new ParseException("Score cannot be empty.");
         }
 
-        Float score;
+        float score;
         try {
             score = Float.parseFloat(scoreString);
         } catch (NumberFormatException e) {
