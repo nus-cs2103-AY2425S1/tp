@@ -166,6 +166,10 @@ Preference types: `high`, `low`, `recent`, `distant`
 * `recent`: Persons with more recent "last seen" dates rise to the top
 * `distant`: Persons with more distant "last seen" dates rise to the top
 
+Examples:
+* `sort high`
+* `s recent`
+
 ### Save sort preference: `save` or `svp`
 
 Saves the sorting preference specified by the user.
@@ -196,8 +200,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-## Reminder Management
-
 ### Add a remark to a person : `remark`
 
 Adds a remark to an existing person in the address book.
@@ -217,19 +219,23 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Create a reminder: `remind`
+## Reminder Management
+
+### Create a reminder: `remind` or `rem`
 
 Creates a reminder for the specified person in the address book.
 
-Format: `remind INDEX [d/DATE] [des/DESCRIPTION]`
+Format: `remind INDEX d/DATE des/DESCRIPTION`
 
-* Creates a reminder for the person at the specified `INDEX`
-* The index refers to the index number shown in the displayed reminder list.
+* Creates a reminder for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `remind 2 d/22-01-2024 des/Meet for lunch` will create a reminder with the date 22-01-2024, about meeting the person 
-at index 2 for lunch
+* `remind 1 d/21-11-2024 des/Meet up for lunch` will create a reminder with the date 21-11-2024, about meeting the
+person at index 1 for lunch
+* `remind 2 d/25-12-2024 des/Christmas Date` will create a reminder with the date 25-12-2024, about having a 
+Christmas date with the person at index 2
 
 ### Deleting a reminder: `delete_reminder` or `dr`
 
@@ -289,5 +295,9 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/NAME…] [o/ORGANIZATION…]`<br> e.g., `find n/James Jake o/TikTok`
 **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 2 r/handsome`
+**Sort** | `sort PREFERENCE` <br> e.g., `sort high`
+**Save Sort** | `save PREFERENCE` <br> e.g., `save distant`
+**Create Reminder** | `remind INDEX d/DATE des/DESCRIPTION` <br> e.g., `remind 3 d/22-12-2024 des/Meet up for dinner`
+**Delete Reminder** | `delete_reminder INDEX` <br> e.g., `delete_reminder 4`
 **List** | `list`
 **Help** | `help`
