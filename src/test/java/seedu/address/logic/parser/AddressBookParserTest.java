@@ -142,7 +142,7 @@ public class AddressBookParserTest {
                               + " " + PREFIX_MEDCON + VALID_MEDCON_AMY;
         AddMedConCommand command = (AddMedConCommand) parser.parseCommand(commandInput);
         Set<MedCon> medcons = new HashSet<MedCon>();
-        medcons.add(new MedCon("Insulin"));
+        medcons.add(new MedCon(VALID_MEDCON_AMY));
         assertEquals(new AddMedConCommand(new Nric(VALID_NRIC_AMY), medcons), command);
     }
 
