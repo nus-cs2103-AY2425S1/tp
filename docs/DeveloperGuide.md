@@ -647,11 +647,11 @@ Use case ends.
 <br>
 Use case ends.
 
-**Extensions**
+**Extensions:**
 * 2a. One or more input parameters are missing or invalid.
     * 2a1. TAHub shows an error message indicating the missing or invalid fields. 
     <br>
-    Use case ends
+    Use case ends.
 * 2b. Duplicate consultation Exists (Consultation date & time matches an existing consultation)
     * 2b1. TAHub shows a duplicate error message.
     <br>
@@ -670,12 +670,12 @@ Use case ends.
 <br>
 Use case ends.
 
-**Extensions**
-* 2a. Invalid Consultation Index
+**Extensions:**
+* 2a. Invalid Consultation Index.
     * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
     <br>
     Use case ends.
-* 2b. Invalid Student Index
+* 2b. Invalid Student Index.
   * 2b1. TAHub shows an error message stating that the Student Index is invalid.
     <br>
     Use case ends.
@@ -701,8 +701,8 @@ Use case ends.
    <br>
    Use case ends.
 
-**Extensions**
-* 2a. Invalid Consultation Index
+**Extensions:**
+* 2a. Invalid Consultation Index.
   * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
     <br>
     Use case ends.
@@ -710,7 +710,7 @@ Use case ends.
   * 2b1. TAHub shows an error message stating that the Student does not exist.
     <br>
     Use case ends.
-* 2c. Student is not in consultation
+* 2c. Student is not in consultation.
   * 2c1. TAHub shows an error message stating that the Student is not in the consultation.
     <br>
     Use case ends.
@@ -727,14 +727,14 @@ Use case ends.
 <br>
 Use case ends.
 
-**Extensions**
-* 2a. Invalid Consultation Index
+**Extensions:**
+* 2a. Invalid Consultation Index.
   * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
   <br>
   Use case ends.
 
 
-**<u>Use case: UC12 - Export Consultation Data</u>**
+**<u>Use case: UC13 - Export Consultation Data</u>**
 
 **MSS:**
 1. User requests to export consultation data with desired filename.
@@ -749,7 +749,7 @@ Use case ends.
 * [Same extensions as UC6]
 
 
-**<u>Use case: UC13 - Import Consultation Data</u>**
+**<u>Use case: UC14 - Import Consultation Data</u>**
 
 **MSS:**
 1. User requests to import consultation data with CSV filename.
@@ -768,7 +768,7 @@ Use case ends.
     * 2a1. TAHub shows error message about missing file.
     <br>
     Use case ends.
-* 3a. Invalid header format
+* 3a. Invalid header format.
     * 3a1. TAHub shows error message about expected format
     <br>
     Use case ends.
@@ -785,7 +785,7 @@ Use case ends.
   Use case ends.
 
 
-**<u>Use case: UC14 - Refresh Consultation List</u>**
+**<u>Use case: UC15 - Refresh Consultation List</u>**
 
 **Guarantees:**
 1. Overall Consultation List will be displayed.
@@ -797,9 +797,167 @@ Use case ends.
    Use case ends.
 
 
+**<u>Use case: UC16 - Create a Lesson</u>**
+
+**MSS:**
+1. User requests to add a lesson by providing the necessary details (date, time).
+2. TAHub validates the inputs.
+3. TAHub adds the lesson with the provided details.
+4. TAHub displays the updated lesson list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. One or more input parameters are missing or invalid.
+  * 2a1. TAHub shows an error message indicating the missing or invalid fields.
+    <br>
+    Use case ends
+* 2b. Duplicate Lesson Exists (Lesson date & time matches an existing lesson)
+  * 2b1. TAHub shows a duplicate error message.
+    <br>
+    Use case ends.
 
 
-*{More to be added}*
+**<u>Use case: UC17 - Add Student to Lesson</u>**
+
+**Precondition:** The Lesson exists in TAHub.
+
+**MSS:**
+1. User requests to add a specific student to the lesson by providing the necessary details (Lesson Index, Student Index, Student Name)
+2. TAHub validates the inputs.
+3. TAHub adds the student to the lesson.
+4. TAHub displays the updated lesson list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Invalid Student Index.
+  * 2b1. TAHub shows an error message stating that the Student Index is invalid.
+    <br>
+    Use case ends.
+* 2c. Student Name not Found in Student List.
+  * 2c1. TAHub shows an error message stating that the Student does not exist.
+    <br>
+    Use case ends.
+* 2d. Student is already in lesson.
+  * 2d1. TAHub shows an error message stating that the Student is already in the lesson.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC18 - Remove Student from Lesson</u>**
+
+**Precondition:** The Lesson exists in TAHub.
+
+**MSS:**
+1. User requests to remove a specific student from the lesson by providing the necessary details (Lesson Index, Student Name)
+2. TAHub validates the inputs.
+3. TAHub removes the student from the lesson.
+4. TAHub displays the updated lesson list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student Name not Found in Student List.
+  * 2b1. TAHub shows an error message stating that the Student does not exist.
+    <br>
+    Use case ends.
+* 2c. Student is not in lesson
+  * 2c1. TAHub shows an error message stating that the Student is not in the lesson.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC19 - Delete Lesson</u>**
+
+**Precondition:** The Lesson exists in TAHub.
+
+**MSS:**
+1. User requests to delete a specific lesson by providing the necessary details (Lesson Index).
+2. TAHub verifies the Lesson Index.
+3. TAHub deletes the lesson at the index in the Lesson List.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC20 - Mark Student Attendance in Lesson</u>**
+
+**Precondition:** The Student & Lesson exists in TAHub. Student is already in the Lesson.
+
+**MSS:**
+1. User requests to mark a specific student's attendance in the lesson by providing the necessary details (Lesson Index, Student Name, Attendance)
+2. TAHub validates the inputs.
+3. TAHub marks the student's attendance in the lesson.
+4. TAHub displays the updated student attendance.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student is not in lesson.
+  * 2b1. TAHub shows an error message stating that the Student is not in the lesson.
+    <br>
+    Use case ends.
+* 2c. Invalid Attendance.
+  * 2c1. TAHub shows an error message stating that the Attendance is invalid.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC21 - Mark Student Participation in Lesson</u>**
+
+**Precondition:** The Student & Lesson exists in TAHub. Student is already in the Lesson.
+
+**MSS:**
+1. User requests to mark a specific student's participation in the lesson by providing the necessary details (Lesson Index, Student Name, Participation)
+2. TAHub validates the inputs.
+3. TAHub marks the student's participation in the lesson.
+4. TAHub displays the updated student attendance.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student is not in lesson.
+  * 2b1. TAHub shows an error message stating that the Student is not in the lesson.
+    <br>
+    Use case ends.
+* 2c. Invalid Participation.
+  * 2c1. TAHub shows an error message stating that the Participation is invalid.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC22 - Refresh Lesson List</u>**
+
+**Guarantees:**
+1. Overall Lesson List will be displayed.
+
+**MSS:**
+1. User requests to refresh lesson list.
+2. TAHub refreshes and displays the lesson list.
+   <br>
+   Use case ends.
 
 ### Non-Functional Requirements
 
