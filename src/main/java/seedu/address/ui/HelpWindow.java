@@ -2,8 +2,9 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -15,17 +16,18 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f14a-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide at: " + USERGUIDE_URL;
+    public static final String USER_GUIDE_URL = "https://ay2425s1-cs2103t-f14a-4.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Need some help? Refer to our user guide at: ";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-
-    @FXML
-    private Button copyButton;
+    private final Application currApp = new CampusConnectApp();
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Hyperlink ugLink;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +37,9 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        ugLink.setText(USER_GUIDE_URL);
+        ugLink.setOnAction(event -> currApp.getHostServices().showDocument(USER_GUIDE_URL));
+        ugLink.setVisited(false);
     }
 
     /**
@@ -89,14 +94,17 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    private class CampusConnectApp extends Application {
+        private static CampusConnectApp mInstance;
+        public static void main(String[] args) throws Exception { launch(args); }
+
+        public static CampusConnectApp getInstance() {
+            return mInstance;
+        }
+
+        @Override
+        public void start(Stage primaryStage) throws Exception {
+            // your code
+        }
     }
 }

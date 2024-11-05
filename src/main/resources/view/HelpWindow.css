@@ -1,19 +1,17 @@
-#copyButton, #helpMessage {
+#helpMessage {
     -fx-text-fill: white;
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
+#ugLink {
+    -fx-text-fill: #FFA500; /* Orange text */
+    -fx-opacity: 0.9;
+    -fx-border-color: transparent;
 }
 
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: darkgray;
-}
-
+/* Same font, background as the main CampusConnectTheme*/
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #1E90FF;
+    -fx-background-color: #2B3A67;
 }
