@@ -24,6 +24,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.testutil.WeddingBuilder;
 
 public class DeletewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookFilterWithWeddings(), new UserPrefs());
@@ -86,6 +87,15 @@ public class DeletewCommandTest {
     }
 
     @Test
+    public void execute_emptyList_throwsCommandException() {
+        model.updateFilteredWeddingList(p -> false);
+
+        DeletewCommand deletewCommand = new DeletewCommand(INDEX_FIRST_WEDDING, null);
+
+        assertCommandFailure(deletewCommand, model, String.format(DeletewCommand.MESSAGE_DELETE_EMPTY_LIST_ERROR));
+    }
+
+    @Test
     public void execute_validKeyword_success() {
         // unique name
         NameMatchesWeddingPredicate predicate = preparePredicate("Alice");
@@ -104,7 +114,24 @@ public class DeletewCommandTest {
     }
 
     @Test
+    public void execute_validKeywordMultipleMatches_success() {
+        // keyword matches with multiple weddings
+        Wedding toAdd = new WeddingBuilder().build();
+        model.addWedding(toAdd);
+        NameMatchesWeddingPredicate predicate = preparePredicate("Alice");
+        DeletewCommand deletewCommand = new DeletewCommand(null, predicate);
+
+        String expectedMessage = String.format(DeletewCommand.MESSAGE_DUPLICATE_HANDLING);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredWeddingList(predicate);
+
+        assertCommandSuccess(deletewCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidKeyword_throwsCommandException() {
+        // No wedding corresponding to the keyword
         NameMatchesWeddingPredicate predicate = preparePredicate("Alex");
         DeletewCommand deletewCommand = new DeletewCommand(null, predicate);
 
@@ -117,8 +144,14 @@ public class DeletewCommandTest {
 
     @Test
     public void equals() {
-        DeletewCommand deletewFirstCommand = new DeletewCommand(INDEX_FIRST_WEDDING, null);
-        DeletewCommand deletewSecondCommand = new DeletewCommand(INDEX_SECOND_WEDDING, null);
+        DeletewCommand deletewFirstCommand = new DeletewCommand(null, null);
+        DeletewCommand deletewSecondCommand = new DeletewCommand(null, null);
+
+        // same object -> returns true
+        assertTrue(deletewFirstCommand.equals(deletewSecondCommand));
+
+        deletewFirstCommand = new DeletewCommand(INDEX_FIRST_WEDDING, null);
+        deletewSecondCommand = new DeletewCommand(INDEX_SECOND_WEDDING, null);
 
         // same object -> returns true
         assertTrue(deletewFirstCommand.equals(deletewFirstCommand));

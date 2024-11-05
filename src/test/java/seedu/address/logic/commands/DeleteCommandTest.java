@@ -11,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.getAdditionalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -33,6 +34,7 @@ import seedu.address.model.wedding.Wedding;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model additionalModel = new ModelManager(getAdditionalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -139,6 +141,20 @@ public class DeleteCommandTest {
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validKeywordMultipleMatches_success() {
+        // keyword matches with multiple persons
+        NameMatchesKeywordPredicate predicate = preparePredicate("Carl");
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DUPLICATE_HANDLING);
+
+        ModelManager expectedModel = new ModelManager(additionalModel.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(predicate);
+
+        assertCommandSuccess(deleteCommand, additionalModel, expectedMessage, expectedModel);
     }
 
     @Test
