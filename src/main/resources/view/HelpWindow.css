@@ -17,3 +17,12 @@
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+.hyperlink:focused {
+    -fx-focus-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: #0099ce;
+}

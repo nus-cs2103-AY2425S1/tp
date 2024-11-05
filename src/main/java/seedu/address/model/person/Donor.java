@@ -88,6 +88,11 @@ public class Donor extends Person implements Comparable<Donor> {
         return Role.DONOR;
     }
 
+    @Override
+    public boolean isRole(Role role) {
+        return getRole().equals(role);
+    }
+
     /**
      * Compares this Donor to another Donor based on donated amount
      *
