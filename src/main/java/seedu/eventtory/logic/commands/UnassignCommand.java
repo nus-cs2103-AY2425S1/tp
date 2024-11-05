@@ -25,7 +25,7 @@ public class UnassignCommand extends Command {
 
     public static final String MESSAGE_UNASSIGN_SUCCESS = "Vendor %s unassigned from Event %s";
     public static final String MESSAGE_UNASSIGN_FAILURE_INVALID_VIEW =
-        "Have to view vendor or event first to unassign";
+        "You have to be viewing a vendor or event to use the unassign command";
 
     private final Index selectedIndex;
 
