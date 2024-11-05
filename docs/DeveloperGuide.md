@@ -332,13 +332,13 @@ The following sequence diagram explains how the export operation works:
 Design Considerations:
 Aspect: Export Execution and Destination Selection
 
-Alternative 1 (current choice): Use a file chooser dialog to allow the user to select the export location.
+**Alternative 1 (current choice)**: Use a file chooser dialog to allow the user to select the export location.
 
 - Pros: User-friendly, provides flexibility in specifying the export location.
 - Cons: Requires user interaction, which may be cumbersome for repeated exports.
 
 
-Alternative 2: Set a default export location without user input.
+**Alternative 2**: Set a default export location without user input.
 
 - Pros: Streamlined and faster for frequent exports.
 - Cons: Less flexible, as it may overwrite existing files without warning.
