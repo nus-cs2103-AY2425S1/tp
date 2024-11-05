@@ -154,6 +154,10 @@ public interface Model {
      * Checks if the seller has a listing associated with it
      */
     boolean hasListingsForSeller(Person seller);
+    /**
+     * Checks if the buyer has a listing associated with it
+     */
+    boolean hasListingsForBuyer(Person buyer);
 
 
     // Returns the listing with the same name as {@code listing} exists in the address book.

@@ -53,6 +53,10 @@ public class DeleteClientProfileCommand extends Command {
             throw new CommandException(String.format(MESSAGE_HAS_ACTIVE_LISTINGS, personToDelete.getName()));
         }
 
+        if (model.hasListingsForBuyer(personToDelete)) {
+            throw new CommandException(String.format(MESSAGE_HAS_ACTIVE_LISTINGS, personToDelete.getName()));
+        }
+
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail()));

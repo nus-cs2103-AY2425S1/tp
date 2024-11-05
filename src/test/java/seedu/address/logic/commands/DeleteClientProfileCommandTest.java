@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
@@ -23,6 +24,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalListings;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -89,6 +91,32 @@ public class DeleteClientProfileCommandTest {
                                                                             .get(randomIndex + 1));
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
+    }
+
+    @Test
+    public void execute_buyerInListing_throwsCommandException() {
+        Model model =
+                new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+        Person personToDelete = DANIEL;
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
+
+        String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_HAS_ACTIVE_LISTINGS,
+                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_sellerInListing_throwsCommandException() {
+        Model model =
+                new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+        Person personToDelete = ALICE;
+        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
+
+        String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_HAS_ACTIVE_LISTINGS,
+                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
