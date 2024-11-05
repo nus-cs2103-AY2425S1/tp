@@ -60,16 +60,6 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-    }
-
-    @Test
     public void execute_singleKeyword_singlePersonFound() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
         PersonContainsKeywordsPredicate predicate = preparePredicate("/name Benson");

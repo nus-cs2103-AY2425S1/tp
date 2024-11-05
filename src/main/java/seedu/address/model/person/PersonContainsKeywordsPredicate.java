@@ -67,13 +67,25 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         List<String> currentList = null;
 
         for (String keyword : searchQuery) {
-            if (keywordMap.containsKey(new Prefix(keyword))) {
-                currentList = keywordMap.get(new Prefix(keyword));
+            Prefix prefix = new Prefix(keyword);
+
+            if (keywordMap.containsKey(prefix)) {
+                // If switching `currentList` without adding anything in yet
+                if (currentList != null && currentList.isEmpty()) {
+                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+                }
+
+                currentList = keywordMap.get(prefix);
             } else if (currentList != null) {
                 currentList.add(keyword);
             } else {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
+        }
+
+        // Final check if last `currentList` is empty
+        if (currentList != null && currentList.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
