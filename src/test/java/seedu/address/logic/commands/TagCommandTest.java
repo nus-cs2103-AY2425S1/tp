@@ -143,7 +143,6 @@ public class TagCommandTest {
 
     @Test
     public void execute_tagStudentWithNoSubjectsWithLevel_success() {
-
         //Remove subjects of student in address book
         Student studentInList = model.getAddressBook()
                 .getStudentList()
@@ -173,8 +172,6 @@ public class TagCommandTest {
 
     @Test
     public void execute_invalidLevelForStudentSubjects_failure() throws CommandException {
-
-
         Name studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
@@ -242,5 +239,4 @@ public class TagCommandTest {
 
         assertEquals(expected, tagCommand.toString());
     }
-
 }

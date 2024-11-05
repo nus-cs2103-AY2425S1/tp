@@ -59,8 +59,8 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Validate that the subjects are compatible with the specified level
-        if (!Subject.isValidSubjectsByLevel(toAdd.getLevel(), toAdd.getSubjects())) {
+        // Validate that the subjects are compatible with the specified level if subjects are not empty
+        if (!toAdd.getSubjects().isEmpty() && !Subject.isValidSubjectsByLevel(toAdd.getLevel(), toAdd.getSubjects())) {
             throw new CommandException(Subject.getValidSubjectMessage());
         }
 
