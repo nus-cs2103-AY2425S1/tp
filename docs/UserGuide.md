@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-EventfulNUS is a **desktop app for managing contacts and events. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
+EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
+at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -55,13 +56,15 @@ EventfulNUS is a **desktop app for managing contacts and events. While optimised
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/friend`, `r/friend r/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER s/SUBEVENT` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+## Persons
 
 ### Viewing help : `help`
 
@@ -76,7 +79,7 @@ Format: `help`
 
 Adds a person to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/SUBEVENT [r/ROLE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have zero or more roles.
@@ -96,9 +99,10 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SUBEVENT] [r/ROLE]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing roles, the existing roles of the person will be removed i.e adding of roles is not cumulative.
@@ -127,6 +131,20 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by roles: 'filter'
+
+Finds persons whose roles contain any of the given keywords.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `athlete` will match `Athlete`
+* The order of the keywords does not matter. e.g. `athlete student` will match `Student Athlete`
+* Only the roles are searched.
+* Only full words will be matched e.g. `ath` will not match `athlete`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `athlete student` will return `Student Athlete`, `Athlete`
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the database.
@@ -141,6 +159,50 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+## Events
+
+### Adds an event to the database.
+
+Format: `add n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+An event can have zero or more participants.
+Note that the participants must be valid persons in the database.
+</div>
+
+Examples:
+* `add n/Basketball Final s/Basketball Men v/USC pa/John Doe pa/Betsy Crowe`
+* `add n/100m Sprint s/Athletics v/USC pa/John Doe pa/Betsy Crowe pa/Alex Yeoh`
+
+### Edits an event in the database.
+
+Format: `edit INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
+
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing participants, the existing participants of the events will be removed i.e adding of participants is not cumulative.
+* You can remove all the event's participants by typing `pa/` without
+  specifying any participants after it.
+
+Examples:
+*  `edit 1 n/200m sprint` Edits the name of the event to be `200m sprint`.
+*  `edit 2 sp/Basketball Women r/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
+
+### Deletes an event from the database.
+
+... _Details coming soon ..._
+
+### Lists all events in the database.
+
+... _Details coming soon ..._
+
+### Finds events by name.
+
+... _Details coming soon ..._
+
+## More Features
 ### Clearing all entries : `clear`
 
 Clears all entries from the database. But remember, they're gone forever.
