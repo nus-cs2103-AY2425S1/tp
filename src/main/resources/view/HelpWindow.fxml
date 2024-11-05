@@ -41,7 +41,7 @@
           <Insets bottom="0" left="5.0" right="10.0" top="5.0" />
         </padding>
       </HBox>
-      <TableView fx:id="helpTable"></TableView>
+      <TableView fx:id="helpTable" VBox.vgrow="ALWAYS"></TableView>
         <VBox.margin>
           <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
         </VBox.margin>
