@@ -92,9 +92,9 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 ### Viewing help : `help`
 **<ins>When in the main or inspect window**
 
-Shows help window with a list of commands accessible in that window. Clicking the buttons will input the command into the command box. 
+Shows a help window with a list of available commands for the current window. You can click on any command button to automatically enter it into the command box.
 
-**Tip**: The help window is also navigable with TAB, ENTER and ESC keys.
+**Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
 
 Format: `help`
 
