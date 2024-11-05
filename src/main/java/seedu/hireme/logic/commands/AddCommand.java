@@ -33,7 +33,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New internship application added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICATION =
-            "This internship application already exists in the address book";
+            "This internship application already exists in HireMe";
 
     private final InternshipApplication toAdd;
 
