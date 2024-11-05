@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package spleetwaise.commons.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

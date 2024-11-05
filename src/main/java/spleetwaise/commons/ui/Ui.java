@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package spleetwaise.commons.ui;
 
 import javafx.stage.Stage;
 
