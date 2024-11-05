@@ -156,12 +156,12 @@ public class EditContactCommand extends ContactCommand {
     * @param editedPerson The person with updated details.
     * @param model The model containing the list of existing persons.
     * @throws CommandException if the edited person would duplicate another person in the model.
-    *    - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_PERSON} if a person with the same details as
-    *    {@code editedPerson} already exists in the model (excluding {@code personToEdit}).
-    *    - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_EMAIL} if another person in the model has the
-    *    same email as {@code editedPerson}.
-    *    - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_PHONE} if another person in the model has the
-    *    same phone number as {@code editedPerson}.
+    *      - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_PERSON} if a person with the same details as
+    *      {@code editedPerson} already exists in the model (excluding {@code personToEdit}).
+    *      - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_EMAIL} if another person in the model has the
+    *      same email as {@code editedPerson}.
+    *      - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_PHONE} if another person in the model has the
+    *      same phone number as {@code editedPerson}.
     */
     public void hasDuplicates(Person personToEdit, Person editedPerson, Model model) throws CommandException {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
