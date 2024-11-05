@@ -75,6 +75,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Adds all the people from the provided {@Code addressBook} to this address book.
+     * @param addressBook
+     */
     public void addAllPersons(AddressBook addressBook) {
         for (Person p: addressBook.persons) {
             this.addPerson(p);

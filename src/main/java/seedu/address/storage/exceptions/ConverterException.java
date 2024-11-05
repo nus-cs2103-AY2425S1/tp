@@ -1,6 +1,10 @@
 package seedu.address.storage.exceptions;
 
-public class ConverterException extends Exception{
+
+/**
+ * Represents an error which occurs during execution of the {@Code Converter}.
+ */
+public class ConverterException extends Exception {
 
     public ConverterException(String message) {
         super(message);

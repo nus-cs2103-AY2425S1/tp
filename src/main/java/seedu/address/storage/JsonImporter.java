@@ -3,27 +3,15 @@ package seedu.address.storage;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
 import seedu.address.storage.exceptions.ImporterException;
 
 /**
@@ -41,7 +29,7 @@ public class JsonImporter {
         this.jsonFiles.addAll(jsonFiles);
     }
 
-    private final Model importJsonFile(File jsonFile, Model model)  throws ImporterException {
+    private Model importJsonFile(File jsonFile, Model model) throws ImporterException {
         requireNonNull(jsonFile);
 
         Path filePath = jsonFile.toPath().toAbsolutePath();
@@ -65,6 +53,12 @@ public class JsonImporter {
         }
     }
 
+    /**
+     * Imports all .json files converted by the CsvToJsonConverter
+     * @param model model which the .json files should be imported to
+     * @return The model after the .json files have been imported
+     * @throws ImporterException if there was any error during the execution of the importer
+     */
     public final Model importAllJsonFiles(Model model) throws ImporterException {
         for (File file: jsonFiles) {
             importJsonFile(file, model);
@@ -72,7 +66,11 @@ public class JsonImporter {
         return model;
     }
 
-    public static final boolean initImporterSystem() throws IllegalStateException{
+    /**
+     * Inits the necessary folders for the import command to work
+     * @throws IllegalStateException if the "Import" file exists but is not a directory
+     */
+    public static final void initImporterSystem() throws IllegalStateException {
 
         File importer = new File("Import");
 
@@ -81,7 +79,6 @@ public class JsonImporter {
         } else if (!importer.isDirectory()) {
             throw new IllegalStateException("'Import' exists but is not a directory.");
         }
-        return true;
     }
 
 }

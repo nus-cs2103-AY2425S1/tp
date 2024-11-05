@@ -16,7 +16,7 @@ import seedu.address.storage.exceptions.ImporterException;
 /**
  * Imports all .csv files in a directory to the address book
  */
-public class ImportCommand extends Command{
+public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from a .csv file to the address book."
@@ -28,14 +28,9 @@ public class ImportCommand extends Command{
     private final File toImport;
 
     /**
-     * Creates an ImportCommand to import a specified {@Code File}
+     * Creates an ImportCommand to import .csv files from the "Import" folder
      */
-    public ImportCommand(File file) {
-        requireNonNull(file);
-        toImport = file;
-    }
-
-    public ImportCommand(){
+    public ImportCommand() {
         toImport = new File("Import");
         assert toImport.exists();
     }

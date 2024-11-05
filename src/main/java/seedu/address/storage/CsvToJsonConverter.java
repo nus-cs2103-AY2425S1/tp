@@ -1,9 +1,5 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
@@ -47,11 +47,11 @@ public class CsvToJsonConverter {
      * @return A List containing all the successfully converted .json files
      * @throws ConverterException When the provided path contains no .csv files to convert
      */
-    public List<File> convertAllCsvFiles() throws ConverterException{
+    public List<File> convertAllCsvFiles() throws ConverterException {
         List<File> jsonFiles = new ArrayList<>();
         if (directory.getName().endsWith(".csv")) {
             jsonFiles.add(convertCsvFile(directory));
-        } else if (directory.isDirectory()){
+        } else if (directory.isDirectory()) {
             try {
                 File[] files = findAllCsvFiles();
                 for (File csvFile: files) {
@@ -110,7 +110,7 @@ public class CsvToJsonConverter {
         }
     }
 
-    private BufferedReader createNewBufferedReader(File csvFile) throws ConverterException{
+    private BufferedReader createNewBufferedReader(File csvFile) throws ConverterException {
         try {
             FileReader fr = new FileReader(csvFile);
             return new BufferedReader(fr);
@@ -118,8 +118,7 @@ public class CsvToJsonConverter {
             throw new ConverterException("File not found", fnfe);
         }
     }
-    
-    private String[] getHeaders(BufferedReader br) throws IOException{
+    private String[] getHeaders(BufferedReader br) throws IOException {
         String line = br.readLine();
 
         if (line == null) {

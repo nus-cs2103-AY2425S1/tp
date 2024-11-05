@@ -21,6 +21,6 @@ public class CommandException extends Exception {
      * Constructs a new {@code CommandException} with the specified detail {@code cause}.
      */
     public CommandException(Throwable cause) {
-        super( cause);
+        super(cause);
     }
 }
