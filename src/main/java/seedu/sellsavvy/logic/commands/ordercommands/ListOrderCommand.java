@@ -18,6 +18,7 @@ import seedu.sellsavvy.model.person.Person;
  */
 public class ListOrderCommand extends Command {
     public static final String COMMAND_WORD = "listorder";
+    public static final String COMMAND_ALIAS = "listo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List all orders under the customer identified by the index number "

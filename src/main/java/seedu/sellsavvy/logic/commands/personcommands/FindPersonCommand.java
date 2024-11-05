@@ -15,7 +15,8 @@ import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
  */
 public class FindPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findcustomer";
+    public static final String COMMAND_ALIAS = "findc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
