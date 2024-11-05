@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -88,9 +89,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (clientTypes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> clientTypesSet = clientTypes.size() == 1 && clientTypes.contains("")
-                ? Collections.emptySet() : clientTypes;
-        return Optional.of(ParserUtil.parseClientTypes(clientTypesSet));
+        if (clientTypes.size() == 1 && clientTypes.contains("")) {
+            throw new ParseException(Messages.MESSAGE_NO_CLIENT_TYPE);
+        } else {
+            return Optional.of(ParserUtil.parseClientTypes(clientTypes));
+        }
     }
 
 }

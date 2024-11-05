@@ -29,6 +29,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_REMINDER_DISPLAYED_INDEX = "The reminder index provided is invalid";
     public static final String MESSAGE_TARGET_DELETE_HAS_REMINDER = "The person has reminders, "
             + "please delete them first";
+    public static final String MESSAGE_NO_CLIENT_TYPE =
+            "There should be at least one CLIENT_TYPE at all times";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
