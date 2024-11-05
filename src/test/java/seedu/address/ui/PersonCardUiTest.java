@@ -28,7 +28,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Property;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -76,7 +75,6 @@ public class PersonCardUiTest extends ApplicationTest {
         assertEquals("91234567", personCard.getPhone().getText());
         assertEquals("buyer@example.com", personCard.getEmail().getText());
         assertEquals("Date: 01-01-23 (From: 10:00 To: 11:00)", personCard.getAppointment().getText());
-        assertEquals("NUS", personCard.getProperty().getText());
 
         // Check if the tags are correctly displayed
         FlowPane tagsFlowPane = personCard.getTags();
@@ -98,8 +96,7 @@ public class PersonCardUiTest extends ApplicationTest {
                     new Phone("12"), // Invalid phone number (less than 3 digits)
                     new Email("invalid@example.com"),
                     new HashSet<>(),
-                    null,
-                    new Property("Some Property")
+                    null
             );
         });
 
@@ -132,8 +129,7 @@ public class PersonCardUiTest extends ApplicationTest {
                 new Phone("91234567"),
                 new Email("buyer@example.com"),
                 tagSet,
-                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00")),
-                new Property("NUS")
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00"))
         );
     }
 
@@ -149,8 +145,7 @@ public class PersonCardUiTest extends ApplicationTest {
                 new Phone("98765432"),
                 new Email("seller@example.com"),
                 tagSet,
-                new Appointment(new Date("01-02-23"), new From("11:00"), new To("12:00")),
-                new Property("NUS")
+                new Appointment(new Date("01-02-23"), new From("11:00"), new To("12:00"))
         );
     }
 }

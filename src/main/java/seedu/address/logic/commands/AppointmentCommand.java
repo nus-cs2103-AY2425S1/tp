@@ -73,12 +73,12 @@ public class AppointmentCommand extends Command {
         if (personToEdit instanceof Buyer buyer) {
             editedPerson = new Buyer(buyer.getName(), buyer.getPhone(),
                     buyer.getEmail(), buyer.getTags(),
-                    appointment, buyer.getProperty());
+                    appointment);
         } else {
             Seller seller = (Seller) personToEdit;
             editedPerson = new Seller(seller.getName(), seller.getPhone(),
                     seller.getEmail(), seller.getTags(),
-                    appointment, seller.getProperty());
+                    appointment);
         }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

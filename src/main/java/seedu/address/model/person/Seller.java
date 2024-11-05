@@ -11,6 +11,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Seller extends Person {
 
+    private Role role;
+
     /**
      * Creates a Seller with the specified details.
      *
@@ -19,11 +21,11 @@ public class Seller extends Person {
      * @param email The email address of the seller.
      * @param tags The tags associated with the seller.
      * @param appointment The appointment associated with the seller.
-     * @param property The property associated with the seller.
      */
     public Seller(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Appointment appointment, Property property) {
-        super(name, phone, email, tags, appointment, property);
+                  Appointment appointment) {
+        super(name, phone, email, tags, appointment);
+        this.role = Role.SELLER;
     }
 
     /**
@@ -34,17 +36,17 @@ public class Seller extends Person {
      * @param email The email address of the seller.
      * @param tags The tags associated with the seller.
      * @param appointment The appointment associated with the seller.
-     * @param property The property associated with the seller.
      * @param remark The remark associated with the seller.
      */
     public Seller(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Appointment appointment, Property property, String remark) {
-        super(name, phone, email, tags, appointment, property, remark);
+                  Appointment appointment, String remark) {
+        super(name, phone, email, tags, appointment, remark);
+        this.role = Role.SELLER;
     }
 
     @Override
-    public String getRole() {
-        return "seller";
+    public Role getRole() {
+        return this.role;
     }
 
     @Override
@@ -52,12 +54,4 @@ public class Seller extends Person {
         return super.toString();
     }
 
-    /**
-     * Checks if the seller has a property listing.
-     *
-     * @return true if the seller has a property listed, false otherwise.
-     */
-    public boolean hasListing() {
-        return getProperty() != null && !getProperty().toString().isEmpty();
-    }
 }

@@ -51,15 +51,13 @@ public class DeleteAppointmentCommandTest {
                     personToDeleteAppointment.getPhone(),
                     personToDeleteAppointment.getEmail(),
                     personToDeleteAppointment.getTags(),
-                    Appointment.EMPTY_APPOINTMENT,
-                    personToDeleteAppointment.getProperty());
+                    Appointment.EMPTY_APPOINTMENT);
         } else { // Assuming it's a Seller if not a Buyer
             personWithoutAppointment = new Seller(personToDeleteAppointment.getName(),
                     personToDeleteAppointment.getPhone(),
                     personToDeleteAppointment.getEmail(),
                     personToDeleteAppointment.getTags(),
-                    Appointment.EMPTY_APPOINTMENT,
-                    personToDeleteAppointment.getProperty());
+                    Appointment.EMPTY_APPOINTMENT);
         }
         expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
 

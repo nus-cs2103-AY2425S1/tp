@@ -37,8 +37,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private Label property;
-    @FXML
     private Label appointment;
     @FXML
     private Line underline;
@@ -61,7 +59,6 @@ public class PersonCard extends UiPart<Region> {
         initializePhone();
         initializeEmail();
         initializeAppointment();
-        initializeProperty();
         initializeTags();
         initializeRole();
     }
@@ -89,10 +86,6 @@ public class PersonCard extends UiPart<Region> {
 
     private void initializeAppointment() {
         appointment.setText(person.getAppointment().toString());
-    }
-
-    private void initializeProperty() {
-        property.setText(person.getProperty().toString());
     }
 
     private void initializeTags() {
@@ -171,10 +164,6 @@ public class PersonCard extends UiPart<Region> {
 
     public Label getAppointment() {
         return appointment;
-    }
-
-    public Label getProperty() {
-        return property;
     }
 }
 

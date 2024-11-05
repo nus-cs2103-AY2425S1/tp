@@ -34,7 +34,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Property;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -162,8 +161,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Phone("98765432"),
                 new Email("seller@example.com"),
                 tagSet,
-                new Appointment(new Date("02-01-23"), new From("1100"), new To("1200")),
-                new Property("NUS")
+                new Appointment(new Date("02-01-23"), new From("1100"), new To("1200"))
         );
     }
 
@@ -180,8 +178,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Phone("91234567"),
                 new Email("buyer@example.com"),
                 tagSet,
-                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00")),
-                new Property("NUS")
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00"))
         );
     }
 
@@ -197,8 +194,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Phone("91112222"),
                 new Email("buyer@example.com"),
                 tagSet,
-                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00")),
-                new Property("NUS")
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00"))
         );
     }
 }

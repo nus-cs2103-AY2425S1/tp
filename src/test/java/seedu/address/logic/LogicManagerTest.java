@@ -93,9 +93,8 @@ public class LogicManagerTest {
         String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
 
-        // Creating a seller with empty appointment, property, and no tags
+        // Creating a seller with empty appointment, and no tags
         Seller expectedSeller = new PersonBuilder(AMY)
-                .withProperty("") // Empty property
                 .withTags() // No tags
                 .buildSeller();
 
