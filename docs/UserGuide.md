@@ -19,9 +19,8 @@ In this quick start guide, you'll learn how to install EZSTATES.
 <br>
 **(OPTIONAL)** You'll also learn how our commands work to kickstart the application. 
 
-<div class="note"> 
-While learning our command structure is optional, 
-we highly recommend reviewing this section to make using EZSTATES much easier.
+<div class="note" markdown="span"> 
+While learning our command structure is optional, we highly recommend reviewing this section to make using EZSTATES much easier.
 </div>
 
 ### Installation _(~3min)_
