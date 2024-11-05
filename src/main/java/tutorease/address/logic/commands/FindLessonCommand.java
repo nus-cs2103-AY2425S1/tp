@@ -20,7 +20,7 @@ public class FindLessonCommand extends LessonCommand {
 
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD + " " + COMMAND_WORD
             + ": Finds all lessons whose students' names "
-            + "match the specified names (case-insensitive) and displays them in the lesson panel. \n "
+            + "match the specified names (case-insensitive) and displays them in the lesson panel. \n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " alice bob charlie";
 

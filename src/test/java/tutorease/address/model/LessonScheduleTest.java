@@ -89,7 +89,7 @@ public class LessonScheduleTest {
     }
 
     @Test
-    public void deleteLesson_validIndex_removesData() throws ParseException {
+    public void deleteLesson_validLesson_removesData() throws ParseException {
         Lesson lesson = new LessonBuilder().build();
         lessonSchedule.addLesson(lesson);
         lessonSchedule.deleteLesson(lesson);

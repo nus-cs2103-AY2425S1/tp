@@ -24,7 +24,7 @@ public class AddContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Adds a person to TutorEase. "
+            + ": Adds a person to TutorEase.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -40,7 +40,7 @@ public class AddContactCommand extends ContactCommand {
             + PREFIX_ROLE + "Student "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
-
+    
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase. If you wish to "
             + "save an alternative version of a person, "
