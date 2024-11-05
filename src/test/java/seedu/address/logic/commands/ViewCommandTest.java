@@ -43,7 +43,7 @@ public class ViewCommandTest {
     public void execute_invalidStudentName_failure() {
         Name invalidName = new Name("FancyPants");
         ViewCommand viewCommand = new ViewCommand(invalidName);
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_STUDENT_NOT_FOUND);
     }
 
     @Test

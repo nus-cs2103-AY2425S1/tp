@@ -87,7 +87,7 @@ public class DeleteTaskCommandTest {
     public void execute_invalidName_throwsCommandException() {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(new Name("UNKNOWN NAME"), INDEX_FIRST_TASK);
 
-        assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+        assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_STUDENT_NOT_FOUND);
     }
 
     @Test
