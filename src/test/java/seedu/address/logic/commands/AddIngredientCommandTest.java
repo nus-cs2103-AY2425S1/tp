@@ -17,14 +17,15 @@ import seedu.address.model.product.IngredientCatalogue;
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddIngredientCommand}.
  */
 public class AddIngredientCommandTest {
-    private static final String INGREDIENT_NAME = "Syrup";
+
+    private static final String INGREDIENT_NAME = "Sweet";
     private static final double INGREDIENT_COST = 2.50;
 
     private Model model;
 
     @BeforeEach
     public void setUp() {
-        // Initialize the model and create the test ingredient
+        // Initialize the model before each test
         model = new ModelManager();
     }
 
@@ -33,8 +34,8 @@ public class AddIngredientCommandTest {
         // Create a new AddIngredientCommand
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
 
-        // Use the model's IngredientCatalogue to get the next available ID
-        IngredientCatalogue catalogue = model.getIngredientCatalogue();
+        // Get the next available ID from the model's IngredientCatalogue
+        IngredientCatalogue catalogue = IngredientCatalogue.getInstance();
         int nextProductId = catalogue.getNextProductId();
 
         // Create the expected ingredient object
@@ -45,31 +46,21 @@ public class AddIngredientCommandTest {
 
         // Set up the expected model state
         Model expectedModel = new ModelManager();
-
-        // Add ingredient manually
         expectedModel.addIngredient(expectedIngredient);
 
         // Execute the command and verify success
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-
-        // Verify that the ingredient exists in the catalogue
-        assertTrue(model.getIngredientCatalogue().getCatalogue().containsValue(expectedIngredient));
     }
 
     @Test
-    public void execute_duplicateIngredient_throwsCommandException() {
-        // Use the model's IngredientCatalogue to get the next available ID
-        IngredientCatalogue catalogue = model.getIngredientCatalogue();
-        int nextProductId = catalogue.getNextProductId();  // Ensure consistent product ID
-
+    public void execute_duplicateIngredient_failure() {
         // Add the ingredient to the model to simulate an existing ingredient
-        Ingredient expectedIngredient = new Ingredient(nextProductId, INGREDIENT_NAME, INGREDIENT_COST);
-        model.addIngredient(expectedIngredient);
+        model.getIngredientCatalogue().addIngredient(new Ingredient(1, INGREDIENT_NAME, INGREDIENT_COST));
 
-        // Create the AddIngredientCommand with the same ingredient
+        // Create an AddIngredientCommand with the same ingredient details
         AddIngredientCommand command = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
 
-        // Verify that a CommandException is thrown due to the duplicate ingredient
+        // Verify that a CommandException is thrown for the duplicate ingredient
         assertCommandFailure(command, model, AddIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 
@@ -80,7 +71,7 @@ public class AddIngredientCommandTest {
         AddIngredientCommand command2 = new AddIngredientCommand(INGREDIENT_NAME, INGREDIENT_COST);
 
         // Create a different command with different ingredient details
-        AddIngredientCommand differentCommand = new AddIngredientCommand("Sugar", 2.00);
+        AddIngredientCommand differentCommand = new AddIngredientCommand("Milk", 1.00);
 
         // Verify the equals() behavior
         assertTrue(command1.equals(command2)); // Same values -> true

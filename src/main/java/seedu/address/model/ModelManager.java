@@ -23,6 +23,7 @@ import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -41,7 +42,6 @@ public class ModelManager implements Model {
     private final ObservableList<CustomerOrder> customerOrderObservableList;
     private final Inventory inventory;
     private final Storage storage;  // Add Storage as a field
-
 
     // Constructor that accepts IngredientCatalogue, PastryCatalogue, and Storage
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
@@ -74,7 +74,7 @@ public class ModelManager implements Model {
     // Default constructor with properly initialized parameters
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), IngredientCatalogue.getInstance(),
-                new PastryCatalogue(), null, new CustomerOrderList(), new SupplyOrderList());
+                new PastryCatalogue(), new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
     }
 
     //=========== UserPrefs ==================================================================================
