@@ -279,13 +279,42 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void unassignEventFromAllPersons_success() {
+    public void unassignEventFromAllPersons_personsAssignedDeletedEvent() {
+        int eventId = MEETING.getEventId();
+        Set<Integer> aliceEventIds = ALICE.getEventIds();
+        Set<Integer> bobEventIds = BOB.getEventIds();
+        ALICE.addEventId(eventId);
+        BOB.addEventId(eventId);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.unassignEventFromAllPersons(MEETING);
+        assertEquals(aliceEventIds, ALICE.getEventIds());
+        assertEquals(bobEventIds, BOB.getEventIds());
+    }
+
+    @Test
+    public void unassignEventFromAllPersons_personsAssignedDeletedEventAndPersonsNotAssignedDeletedEvent() {
         int eventId = MEETING.getEventId();
         Set<Integer> aliceEventIds = ALICE.getEventIds();
         Set<Integer> bobEventIds = BOB.getEventIds();
         Set<Integer> bensonEventIds = BENSON.getEventIds();
         ALICE.addEventId(eventId);
         BOB.addEventId(eventId);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(BENSON);
+        uniquePersonList.unassignEventFromAllPersons(MEETING);
+        assertEquals(aliceEventIds, ALICE.getEventIds());
+        assertEquals(bobEventIds, BOB.getEventIds());
+        assertEquals(bensonEventIds, BENSON.getEventIds());
+    }
+
+    @Test
+    public void unassignEventFromAllPersons_personsNotAssignedDeletedEvent() {
+        int eventId = MEETING.getEventId();
+        Set<Integer> aliceEventIds = ALICE.getEventIds();
+        Set<Integer> bobEventIds = BOB.getEventIds();
+        Set<Integer> bensonEventIds = BENSON.getEventIds();
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
         uniquePersonList.add(BENSON);
