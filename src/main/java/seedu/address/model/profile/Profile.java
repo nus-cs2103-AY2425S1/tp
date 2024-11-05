@@ -132,10 +132,22 @@ public class Profile {
             return false;
         }
 
-        String lastSegment = filePath.getFileName().toString();
-        String secondToLastSegment = filePath.getName(nameCount - 2).toString();
-        return PROFILE_PARENT_DIR.equals(secondToLastSegment) && lastSegment.endsWith(PROFILE_EXTENSION);
+        // Subdirectories for 'data' is not allowed
+        long dataDirectoryCount = 0;
+        for (int i = 0; i < nameCount; i++) {
+            if (PROFILE_PARENT_DIR.equals(filePath.getName(i).toString())) {
+                dataDirectoryCount++;
+            }
+        }
+        if (dataDirectoryCount > 1) {
+            return false;
+        }
+
+        String fileName = filePath.getFileName().toString();
+        String parentDir = filePath.getName(nameCount - 2).toString();
+        return PROFILE_PARENT_DIR.equals(parentDir) && fileName.endsWith(PROFILE_EXTENSION);
     }
+
 
     /**
      * Helper method to extract the profile name from a file path by removing the
