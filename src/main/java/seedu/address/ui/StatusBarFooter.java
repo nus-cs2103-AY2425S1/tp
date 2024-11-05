@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -21,20 +21,26 @@ public class StatusBarFooter extends UiPart<Region> {
     private Label saveLocationStatus;
 
     @FXML
-    private Label personListStatus;
+    private Label contactListStatus;
 
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation, ObservableList<Person> personList) {
+    public StatusBarFooter(Path saveLocation, ObservableList<Contact> contactListForUi,
+                           ObservableList<Contact> allContactList) { //ObservableList<Contact> fullContacts
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
-        setPersonListStatus(personList.size());
-        personList.addListener((ListChangeListener<? super Person>) unused -> setPersonListStatus(personList.size()));
+        setContactListStatus(contactListForUi.size(), allContactList.size());
+        contactListForUi.addListener(
+                (ListChangeListener<? super Contact>) unused -> setContactListStatus(contactListForUi.size(),
+                        allContactList.size()));
+        allContactList.addListener(
+                (ListChangeListener<? super Contact>) unused -> setContactListStatus(contactListForUi.size(),
+                allContactList.size()));
     }
 
-    private void setPersonListStatus(int totalCount) {
-        String personListStatusPrefix = "Total Count: ";
-        personListStatus.setText(personListStatusPrefix + totalCount);
+    private void setContactListStatus(int contactCountListed, int contactCountAll) {
+        contactListStatus.setText(contactCountListed + " out of " + contactCountAll
+                + " contacts listed");
     }
 }

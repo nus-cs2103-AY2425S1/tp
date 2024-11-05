@@ -49,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane paginationPlaceholder;
+    private StackPane paginationContactPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,14 +111,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        paginationPanel = new PaginationPanel(logic.getFilteredPersonList());
-        paginationPlaceholder.getChildren().add(paginationPanel);
+        paginationPanel = new PaginationPanel(logic.getFilteredContactList());
+        paginationContactPlaceholder.getChildren().add(paginationPanel);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter =
-                new StatusBarFooter(logic.getAddressBookFilePath(), logic.getFilteredPersonList());
+                new StatusBarFooter(logic.getAddressBookFilePath(), logic.getFilteredContactList(),
+                        logic.getAllContactList());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -183,7 +184,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

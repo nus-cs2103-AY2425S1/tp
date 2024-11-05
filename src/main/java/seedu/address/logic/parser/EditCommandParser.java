@@ -10,17 +10,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Collection;
-// import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
-import seedu.address.model.tag.Nickname;
+import seedu.address.model.contact.Name;
 import seedu.address.model.tag.Role;
 
 /**
@@ -43,18 +40,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         String str = null;
         Name name = null;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            str = argMultimap.getPreamble();
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
                 PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditCommand.EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
 
         // for the future where we can apply polymorphism and not worry about .setName() .setHandle() etc
         /*
@@ -63,43 +53,51 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         prefixList.stream()
                 .map(argMultimap::getValue) // Stream<Optional<String>>
-                .map(x -> x.map(editPersonDescriptor.set()))
+                .map(x -> x.map(editContactDescriptor.set()))
          */
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editContactDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).isPresent()) {
-            editPersonDescriptor.setTelegramHandle(ParserUtil
+            editContactDescriptor.setTelegramHandle(ParserUtil
                     .parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editContactDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_STUDENT_STATUS).isPresent()) {
-            editPersonDescriptor.setStudentStatus(
+            editContactDescriptor.setStudentStatus(
                     ParserUtil.parseStudentStatus(argMultimap.getValue(PREFIX_STUDENT_STATUS).get()));
         }
         if (argMultimap.getValue(PREFIX_NICKNAME).isPresent()) {
-            editPersonDescriptor.setNickname(
+            editContactDescriptor.setNickname(
                     ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).get()));
         }
-        parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
+        parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editContactDescriptor::setRoles);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editContactDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+        // parse the index to edit, else parse the name
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            str = argMultimap.getPreamble();
+            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
         if (index == null) {
             try {
                 name = ParserUtil.parseName(str);
             } catch (Exception ex) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ex);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), ex);
             }
-            return new EditCommand(name, editPersonDescriptor);
+            return new EditCommand(name, editContactDescriptor);
         }
-        return new EditCommand(index, editPersonDescriptor);
+
+        return new EditCommand(index, editContactDescriptor);
     }
 
     /**
@@ -115,15 +113,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         return Optional.of(ParserUtil.parseRoles(roles));
     }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Nickname> parseNicknameForEdit(String nickname) throws ParseException {
-        assert nickname != null;
-        return Optional.of(ParserUtil.parseNickname(nickname));
-    }
-
 }
