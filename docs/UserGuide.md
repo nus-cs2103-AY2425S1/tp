@@ -325,23 +325,35 @@ Filters candidates based on their status.
 #### Notes
 
 - **Case-Insensitive**: The search is case-insensitive.
-- **Available Statuses**: Active, Shortlisted, Hired, etc.
+- **Available Statuses**:
+    - Applied
+    - Screening
+    - Interview Scheduled
+    - Interviewed
+    - Offer
+    - Onboarding
+    - Hired
+    - Rejected
 
-<u>Examples<u>
+#### Examples
 
-- `filter st/Active`: Displays all active candidates.
-- `filter st/Shortlisted`: Shows candidates marked as shortlisted.
+- `filter st/Applied`: Displays all candidates marked as "Applied".
+- `filter st/Interviewed`: Shows candidates marked as "Interviewed".
 
-<u>Image Example<u>
+#### Image Example
 
-Command: ` filter screening `
+Command: `filter screening`
 
-Before the find command ran:
+**Before the filter command ran:**
 <img src="images/beforefilter.png" alt="beforefilter.png" width="800">
 
-
-After the find command ran:
+**After the filter command ran:**
 <img src="images/afterfilter.png" alt="afterfilter.png" width="800">
+
+#### Invalid Status
+
+If an invalid status is input (e.g., `filter applying`), an error message will appear:
+> **Invalid status: applying. Valid statuses are: Applied, Screening, Interview Scheduled, Interviewed, Offer, Onboarding, Hired, Rejected**
 
 
 ---
