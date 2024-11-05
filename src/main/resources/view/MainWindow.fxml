@@ -55,7 +55,7 @@
             </padding>
             <HBox VBox.vgrow="ALWAYS">
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
-              <StackPane fx:id ="viewWindowPlaceholder" managed="false" VBox.vgrow="ALWAYS" />
+              <StackPane fx:id ="viewWindowPlaceholder" VBox.vgrow="ALWAYS" />
             </HBox>
           </VBox>
 
