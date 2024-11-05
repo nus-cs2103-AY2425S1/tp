@@ -4,7 +4,7 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# ClientGrid User guide
+# ClientGrid User Guide
 
 ClientGrid is an **address book** targeted for English-speaking real estate agents within Singapore to efficiently manage client contacts, including buyers and sellers. It provides a streamlined way to organize client data and monitor the buying or selling process while maintaining core address book functionality. The default language of communication of ClientGrid is English.
 
