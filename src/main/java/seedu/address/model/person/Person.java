@@ -50,6 +50,16 @@ public class Person {
         wedding.setClient(this);
     }
 
+    public void resetOwnWedding(Wedding wedding) {
+        if (this.ownWedding == null) {
+            return;
+        }
+
+        if (this.ownWedding.equals(wedding)) {
+            this.ownWedding = null;
+        }
+    }
+
     public Name getName() {
         return name;
     }
@@ -104,6 +114,19 @@ public class Person {
         for (Wedding wedding : weddingJobs) {
             this.addWeddingJob(wedding);
         }
+    }
+
+    public boolean containsWeddingJob(Wedding target) {
+        for (Wedding weddingJob : weddingJobs) {
+            if (weddingJob.equals(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeWeddingJob(Wedding weddingJob) {
+        this.weddingJobs.remove(weddingJob);
     }
 
     /**

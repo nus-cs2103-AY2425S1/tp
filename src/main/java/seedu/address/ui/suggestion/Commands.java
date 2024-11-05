@@ -22,7 +22,7 @@ public enum Commands {
     VIEWWEDDING("vieww", "vieww WEDDINGNAME/INDEX", new String[]{}),
 
 
-    DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
+    DELETEWEDDING("deletew", "deletew WEDDINGNAME/INDEX", new String[]{}),
     TAGGING("tag", "tag INDEX/NAME [t/TAG...]", new String[]{"t/"});
 
     private final String commandName;

@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the person identified by the index number used in the displayed person list or keyword.\n"
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " 1" + "or " + COMMAND_WORD + " alex";
 
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
     private final NameMatchesKeywordPredicate predicate;
 
     /**
-     * Creates a DeleteCommand object to delete the person at the specified {@code Index}.
+     * Creates a DeleteCommand object to delete the person at the specified {@code Index} or keyword.
      */
     public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
         this.targetIndex = targetIndex;
@@ -116,52 +116,52 @@ public class DeleteCommand extends Command {
         }
     }
 
-    /**
-     * Performs delete command logic when the input is an index.
-     *
-     * @param model {@code Model} which the command should operate on
-     * @return the person deleted
-     * @throws CommandException if an invalid index is given
-     */
-    public Person deleteWithIndex(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (lastShownList.isEmpty()) {
-            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
-        }
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    lastShownList.size()));
-        }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return personToDelete;
-    }
-
-    /**
-     * Performs delete command logic when the input is a {@code String}.
-     *
-     * @param model {@code Model} which the command should operate on
-     * @return the person deleted
-     * @throws CommandException if the filtered list using {@code predicate} is empty
-     */
-    public Person deleteWithKeyword(Model model) throws CommandException {
-        model.updateFilteredPersonList(predicate);
-        List<Person> filteredList = model.getFilteredPersonList();
-
-        if (filteredList.isEmpty()) {
-            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
-        } else if (filteredList.size() == 1) {
-            Person personToDelete = filteredList.get(0);
-            model.deletePerson(personToDelete);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return personToDelete;
-        } else {
-            return null;
-        }
-    }
+//    /**
+//     * Performs delete command logic when the input is an index.
+//     *
+//     * @param model {@code Model} which the command should operate on
+//     * @return the person deleted
+//     * @throws CommandException if an invalid index is given
+//     */
+//    public Person deleteWithIndex(Model model) throws CommandException {
+//        List<Person> lastShownList = model.getFilteredPersonList();
+//        if (lastShownList.isEmpty()) {
+//            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+//        }
+//
+//        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+//            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+//                    lastShownList.size()));
+//        }
+//
+//        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+//        model.deletePerson(personToDelete);
+//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+//        return personToDelete;
+//    }
+//
+//    /**
+//     * Performs delete command logic when the input is a {@code String}.
+//     *
+//     * @param model {@code Model} which the command should operate on
+//     * @return the person deleted
+//     * @throws CommandException if the filtered list using {@code predicate} is empty
+//     */
+//    public Person deleteWithKeyword(Model model) throws CommandException {
+//        model.updateFilteredPersonList(predicate);
+//        List<Person> filteredList = model.getFilteredPersonList();
+//
+//        if (filteredList.isEmpty()) {
+//            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+//        } else if (filteredList.size() == 1) {
+//            Person personToDelete = filteredList.get(0);
+//            model.deletePerson(personToDelete);
+//            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+//            return personToDelete;
+//        } else {
+//            return null;
+//        }
+//    }
 
     @Override
     public boolean equals(Object other) {
