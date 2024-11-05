@@ -40,6 +40,8 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
+                .append("; NRIC: ")
+                .append(person.getIdentityNumber())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
