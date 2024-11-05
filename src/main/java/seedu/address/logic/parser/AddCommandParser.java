@@ -19,7 +19,7 @@ public class AddCommandParser implements Parser<AddCommand<?>> {
     public AddCommand<?> parse(String args) throws ParseException {
 
         String entity = args.trim().split(" ")[0];
-        String addArgs = args.replace(" " + entity, "");
+        String addArgs = args.replace(entity, "");
 
         switch (entity) {
         case AddContactCommand.ENTITY_WORD:

@@ -32,11 +32,12 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String entity = args.trim().split(" ")[0].toLowerCase();
-        String editArgs = args.replace(" " + entity, "");
+        String editArgs = args.replace(entity, "");
         switch (entity) {
         case "contact":
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(editArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_SKILL);
+                    ArgumentTokenizer.tokenize(editArgs, PREFIX_NAME, PREFIX_PHONE,
+                            PREFIX_EMAIL, PREFIX_ROLE, PREFIX_SKILL);
 
             boolean preambleIsEmpty = argMultimap.getPreamble().trim().isEmpty();
             boolean preambleHasOneArgument = argMultimap.getPreamble().trim().split(" ").length == 1;
