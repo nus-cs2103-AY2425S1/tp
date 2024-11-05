@@ -116,25 +116,39 @@ public class StatusCommandTest {
         StatusCommand statusFirstCommandCopy = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
 
         // Test: Same object reference should be equal
-        assertTrue(statusFirstCommand.equals(statusFirstCommand));
+        assertTrue(statusFirstCommand.equals(statusFirstCommand), "Same object reference should be equal");
 
         // Test: Different objects with the same values should be equal
-        assertTrue(statusFirstCommand.equals(statusFirstCommandCopy));
+        assertTrue(statusFirstCommand.equals(statusFirstCommandCopy), "Objects with the same index and status should be equal");
 
         // Test: Different types should not be equal
-        assertFalse(statusFirstCommand.equals(1));
+        assertFalse(statusFirstCommand.equals(1), "Objects of different types should not be equal");
 
         // Test: Null should not be equal
-        assertFalse(statusFirstCommand.equals(null));
+        assertFalse(statusFirstCommand.equals(null), "Comparison with null should return false");
 
         // Test: Objects with different indices should not be equal
-        StatusCommand statusSecondCommand = new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.ACCEPTED);
-        assertFalse(statusFirstCommand.equals(statusSecondCommand));
+        StatusCommand statusSecondCommand =
+                new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.ACCEPTED);
+        assertFalse(statusFirstCommand.equals(statusSecondCommand),
+                "Objects with different indices should not be equal");
 
         // Test: Objects with the same index but different statuses should not be equal
         StatusCommand statusDifferentStatusCommand =
                 new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING);
-        assertFalse(statusFirstCommand.equals(statusDifferentStatusCommand));
+        assertFalse(statusFirstCommand.equals(statusDifferentStatusCommand),
+                "Objects with the same index but different statuses should not be equal");
+
+        // Test: Objects with different indices and different statuses should not be equal
+        StatusCommand completelyDifferentCommand =
+                new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.REJECTED);
+        assertFalse(statusFirstCommand.equals(completelyDifferentCommand), "Objects with different indices and statuses should not be equal");
+
+        // Test: Ensure reflexive, symmetric, and transitive properties
+        assertTrue(statusFirstCommand.equals(statusFirstCommandCopy)
+                        && statusFirstCommandCopy.equals(statusFirstCommand),
+                "Equality should be symmetric");
+        assertTrue(statusFirstCommand.equals(statusFirstCommandCopy), "Equality should be reflexive");
     }
 
     @Test
