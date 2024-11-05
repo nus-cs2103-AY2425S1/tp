@@ -382,7 +382,7 @@ Format: `sort`
 * No other parameters should be supplied.
 
 
-### Starring a person : `star`
+### Adding a person to favourites list : `star`
 
 Stars the specified person from the address book into favourites.
 
@@ -399,7 +399,7 @@ Examples:
 * `list` followed by `star 2` stars the 2nd person in the address book.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
-### Unstarring a person : `unstar`
+### Removing a person from favourites list : `unstar`
 
 Unstars the specified person from the address book removing them from favourites.
 
