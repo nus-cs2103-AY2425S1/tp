@@ -2,10 +2,11 @@ package spleetwaise.transaction.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
@@ -15,12 +16,15 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
+import spleetwaise.commons.logic.parser.BaseParserUtil;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.testutil.Assert;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
+import spleetwaise.transaction.testutil.TypicalIndexes;
 
 public class ParserUtilTest {
     private static final String INVALID_AMOUNT = "+123.456";
@@ -37,14 +41,45 @@ public class ParserUtilTest {
     private static final Phone TEST_PHONE = TypicalPersons.ALICE.getPhone();
     private static final Index TEST_INDEX = Index.fromOneBased(1);
 
+    @BeforeEach
+    void setUp() {
+        assertTrue(BaseParserUtil.class.isAssignableFrom(ParserUtil.class));
+    }
+
+    @Test
+    public void parseIndex_null_exceptionThrown() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIndex(null));
+    }
+
+    @Test
+    public void parseIndex_invalidInput_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+    }
+
+    @Test
+    public void parseIndex_outOfRangeInput_throwsParseException() {
+        Assert.assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseIndex_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(TypicalIndexes.INDEX_FIRST_TRANSACTION, ParserUtil.parseIndex("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(
+                TypicalIndexes.INDEX_FIRST_TRANSACTION, ParserUtil.parseIndex("  1  "));
+    }
+
     @Test
     public void parseAmount_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
     }
 
     @Test
     public void parseAmount_invalidAmount_exceptionThrown() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT));
     }
 
     @Test
@@ -55,12 +90,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseDescription_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
     }
 
     @Test
     public void parseDescription_invalidDescription_exceptionThrown() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
     }
 
     @Test
@@ -71,12 +106,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
     }
 
     @Test
     public void parseDate_invalidDate_exceptionThrown() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
     }
 
     @Test
@@ -87,12 +122,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseStatus_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus(null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus(null));
     }
 
     @Test
     public void parseStatus_invalidStatus_exceptionThrown() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
     }
 
     @Test
@@ -108,7 +143,7 @@ public class ParserUtilTest {
 
     @Test
     public void getPersonFromPhone_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.getPersonFromPhone(null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.getPersonFromPhone(null));
     }
 
     @Test
@@ -116,7 +151,7 @@ public class ParserUtilTest {
         AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
 
-        assertThrows(ParseException.class, () -> ParserUtil.getPersonFromPhone(TEST_PHONE));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonFromPhone(TEST_PHONE));
     }
 
     @Test
@@ -131,30 +166,30 @@ public class ParserUtilTest {
 
 
     @Test
-    public void getPersonFromIndex_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.getPersonFromAddressBookIndex(null));
+    public void getPersonByFilteredPersonListIndex_null_exceptionThrown() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(null));
     }
 
     @Test
-    public void getPersonFromIndex_personNotFound_exceptionThrown() {
+    public void getPersonByFilteredPersonListIndex_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
 
-        assertThrows(ParseException.class, () -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
     }
 
     @Test
-    public void getPersonFromIndex_personFound_success() {
+    public void getPersonByFilteredPersonListIndex_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
         abModel.addPerson(TypicalPersons.ALICE);
 
-        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ALICE, testPerson);
     }
 
     @Test
-    public void getPersonFromIndexAfterFilter_personNotFound_exceptionThrown() {
+    public void getPersonByFilteredPersonListIndexAfterFilter_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
         CommonModel.initialise(abModel, null);
@@ -163,11 +198,11 @@ public class ParserUtilTest {
 
         CommonModel.getInstance().updateFilteredPersonList(predicate);
 
-        assertThrows(ParseException.class, () -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
     }
 
     @Test
-    public void getPersonFromIndexAfterFilter_personFound_success() {
+    public void getPersonByFilteredPersonListIndexAfterFilter_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
         CommonModel.initialise(abModel, null);
@@ -176,7 +211,7 @@ public class ParserUtilTest {
 
         CommonModel.getInstance().updateFilteredPersonList(predicate);
 
-        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ELLE, testPerson);
     }
 }

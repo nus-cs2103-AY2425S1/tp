@@ -12,12 +12,12 @@ import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
+import spleetwaise.commons.testutil.Assert;
 
 /**
  * Contains helper methods for testing commands.

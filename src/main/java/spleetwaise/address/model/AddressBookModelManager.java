@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.core.LogsCenter;
-import spleetwaise.commons.core.index.Index;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -105,17 +104,6 @@ public class AddressBookModelManager implements AddressBookModel {
     public Optional<Person> getPersonByPhone(Phone phone) {
         requireNonNull(phone);
         return addressBook.getPersonByPhone(phone);
-    }
-
-    @Override
-    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
-        requireNonNull(index);
-
-        if (index.getZeroBased() >= filteredPersons.size()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(filteredPersons.get(index.getZeroBased()));
     }
 
     @Override

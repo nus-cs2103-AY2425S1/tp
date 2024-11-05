@@ -18,9 +18,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.exceptions.DuplicatePersonException;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.testutil.Assert;
 
 public class AddressBookTest {
 

@@ -2,11 +2,9 @@ package spleetwaise.address.logic.commands;
 
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static spleetwaise.address.model.AddressBookModel.PREDICATE_SHOW_ALL_PERSONS;
+import static spleetwaise.commons.logic.commands.CommandUtil.getPersonByFilteredPersonListIndex;
 import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
-
-import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.commons.core.index.Index;
@@ -47,13 +45,8 @@ public class RemarkCommand extends Command {
     public CommandResult execute() throws CommandException {
         CommonModel model = CommonModel.getInstance();
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToEdit = getPersonByFilteredPersonListIndex(model, index);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), remark, personToEdit.getTags()
         );

@@ -1,6 +1,6 @@
 package spleetwaise.address.logic.commands;
 
-import java.util.List;
+import static spleetwaise.commons.logic.commands.CommandUtil.getPersonByFilteredPersonListIndex;
 
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
@@ -35,13 +35,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute() throws CommandException {
         CommonModel model = CommonModel.getInstance();
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = getPersonByFilteredPersonListIndex(model, targetIndex);
         model.deletePerson(personToDelete);
         model.deleteTransactionsOfPersonId(personToDelete.getId());
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));

@@ -11,10 +11,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.model.UserPrefs;
+import spleetwaise.commons.testutil.Assert;
 
 public class JsonUserPrefsStorageTest {
 

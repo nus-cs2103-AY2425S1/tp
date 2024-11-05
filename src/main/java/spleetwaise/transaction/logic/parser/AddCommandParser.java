@@ -63,7 +63,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
 
-        Person person = ParserUtil.getPersonFromAddressBookIndex(index);
+        Person person = ParserUtil.getPersonByFilteredPersonListIndex(index);
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(getNowDate()));
