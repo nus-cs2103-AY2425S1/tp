@@ -104,7 +104,7 @@ public interface Model {
 
     void removeAppointment(Appointment oldAppointment, Person person);
 
-    void editAppointment(Appointment appointment, Person person, Appointment newAppointment);
+    boolean editAppointment(Appointment appointment, Person person, Appointment newAppointment);
 
     List<Appointment> getAllAppointments();
 

@@ -237,7 +237,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void editAppointment(Appointment appointmentToEdit, Person person, Appointment editedAppointment) {
+        public boolean editAppointment(Appointment appointmentToEdit, Person person, Appointment editedAppointment) {
             throw new AssertionError("This method should not be called.");
         }
 

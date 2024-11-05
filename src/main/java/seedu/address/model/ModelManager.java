@@ -197,8 +197,8 @@ public class ModelManager implements Model {
      * @param newAppointment The new appointment to replace the old appointment.
      */
     @Override
-    public void editAppointment(Appointment appointment, Person person, Appointment newAppointment) {
-        appointmentManager.editAppointment(appointment, person, newAppointment);
+    public boolean editAppointment(Appointment appointment, Person person, Appointment newAppointment) {
+        return appointmentManager.editAppointment(appointment, person, newAppointment);
     }
 
     public List<Appointment> getAllAppointments() {
