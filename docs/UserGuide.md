@@ -70,13 +70,13 @@ This user guide is divided into four main feature categories:
 
 ---
 
-### 1. Client Management Commands
+### **1. Client Management Commands**
 
 Commands for creating, updating, and deleting buyers and sellers.
 
 ![showClients](images/Ui.png)
 
-- #### **Add Buyer Command**
+- #### Add Buyer Command
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
@@ -136,7 +136,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
       > ---
-- #### **Add Seller Command**
+- #### Add Seller Command
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new seller profile with specified details.
     - **Successful Execution:**
@@ -192,7 +192,7 @@ Commands for creating, updating, and deleting buyers and sellers.
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 
-- #### **Find Command**
+- #### Find Command
     - **Format:** `find KEYWORD [KEYWORD...]`
     - **Description:** Finds the specified client(s) based on the provided keywords.
     - **Successful Execution:**
@@ -230,7 +230,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 
-- #### **Edit Client Command**
+- #### Edit Client Command
     - **Format:** `editclient NAME [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
@@ -293,7 +293,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 
-- #### **Delete Client Command**
+- #### Delete Client Command
     - **Format:** `delete NAME`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
@@ -351,13 +351,13 @@ Commands for creating, updating, and deleting buyers and sellers.
 
 ---
 
-### 2. Appointment Management
+### **2. Appointment Management**
 
 Commands for managing appointments between user and clients.
 
 ![appointments](images/appointments.png)
 
-- #### **Schedule Appointment**
+- #### Schedule Appointment
     - **Format:** `apt NAME d/<DD-MM-YY> fr/<HHmm> to/<HHmm>`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
@@ -404,7 +404,7 @@ Commands for managing appointments between user and clients.
       > 
       > ---
 
-- #### **Delete Appointment**
+- #### Delete Appointment
     - **Format:** `delapt <NAME>`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
@@ -440,13 +440,13 @@ Commands for managing appointments between user and clients.
 
 ---
 
-### 3. Listing Management
+### **3. Listing Management**
 
 Commands for managing property listings and associating clients with listings.
 
 ![showListings](images/showListings.png)
 
-- #### **Add Listing**
+- #### Add Listing
     - **Format:** `listing n/NAME price/PRICE area/AREA address/ADDRESS region/REGION seller/SELLER [buyer/BUYER]...`
     - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
@@ -489,7 +489,7 @@ Commands for managing property listings and associating clients with listings.
       > 
       > ---
 
-- #### **Show Listings**
+- #### Show Listings
     - **Format:** `showlistings`
     - **Description:** Displays all current listings.
     - **Successful Execution:**
@@ -516,7 +516,7 @@ Commands for managing property listings and associating clients with listings.
 
     - **Failed Execution:** NIL
 
-- #### **Add Buyers to Listing**
+- #### Add Buyers to Listing
     - **Format:** `AddBuyersToListingCommand`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
@@ -555,7 +555,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
 
-- #### **Remove Buyers from Listing**
+- #### Remove Buyers from Listing
     - **Format:** `RemoveBuyersFromListingCommand`
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
@@ -594,7 +594,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
 
-- #### **Delete Listing**
+- #### Delete Listing
     - **Format:** `DeleteListingCommand`
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
@@ -633,7 +633,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
 
-- #### **Clear Listing**
+- #### Clear Listing
     - **Format:** `ClearListingCommand`
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
@@ -672,11 +672,11 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
 
-### 4. Utility Commands
+### **4. Utility Commands**
 
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
-- #### **Clear**
+- #### Clear
     - **Format:** `ClearCommand`
     - **Description:** Clears the console or application state.
     - **Successful Execution:**
@@ -715,7 +715,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **Exit**
+- #### Exit
     - **Format:** `ExitCommand`
     - **Description:** Exits the application.
     - **Successful Execution:**
@@ -754,7 +754,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **Help**
+- #### Help
     - **Format:** `help`
     - **Description:** Displays a list of available commands and their descriptions.
     - **Successful Execution:**
@@ -767,7 +767,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **More Info**
+- #### More Info
     - **Format:** `MoreInfoCommand`
     - **Description:** Provides additional information about a specific command or feature.
     - **Successful Execution:**
@@ -806,7 +806,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **Chat Window**
+- #### Chat Window
     - **Format:** `ChatWindowCommand`
     - **Description:** Opens a chat window for client-agent communication.
     - **Successful Execution:**
