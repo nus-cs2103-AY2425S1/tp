@@ -144,9 +144,9 @@ public class AddLessonCommand extends LessonCommand {
 
     private String formatClashMessage(Lesson lesson, Map<Person, ArrayList<Lesson>> clashingLessons) {
         StringBuilder sb = new StringBuilder();
-        sb.append(lesson.toString()).append(" - Clashes with •");
+        sb.append(lesson.toString()).append(" - Clashes with: \n");
         clashingLessons.forEach((person, lessons) -> {
-            sb.append(person.getName()).append(": ");
+            sb.append("•").append(person.getName()).append(": ");
             lessons.forEach(ls -> sb.append(ls.toString()).append(" "));
         });
         return sb.toString();
