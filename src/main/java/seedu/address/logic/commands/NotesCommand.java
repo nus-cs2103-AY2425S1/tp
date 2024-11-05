@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
+import seedu.address.ui.NotesWindow;
 
 /**
  * Views, adds, or deletes notes of a person identified using the person's name in the address book.
@@ -33,7 +34,7 @@ public class NotesCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_ADD + "John Doe " + PREFIX_NOTES + "Prefers email contact\n"
             + COMMAND_WORD + " " + PREFIX_DELETE + "John Doe";
 
-    public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: %2$s";
+    public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: \n%2$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted notes for %1$s";
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: %2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
@@ -62,7 +63,12 @@ public class NotesCommand extends Command {
         /**
          * Removes the notes of the specified person.
          */
-        DELETE
+        DELETE,
+
+        /**
+         * Edit the notes of the specified person using a pop-up window.
+         */
+        EDIT
     }
 
     /**
@@ -120,6 +126,16 @@ public class NotesCommand extends Command {
             model.setPerson(personToEdit, personWithNewNotes);
             return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS,
                     personToEdit.getName(), newNotes.toString()));
+
+        case EDIT:
+            NotesWindow notesWindow = new NotesWindow();
+            Notes newNotes = new Notes(notesWindow.showNotesWindow(personToEdit));
+            Person personWithEditedNotes = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                    personToEdit.getEmail(), personToEdit.getAddress(), newNotes,
+                    personToEdit.getTags(), personToEdit.getIncome(), personToEdit.getAge());
+            model.setPerson(personToEdit, personWithEditedNotes);
+            return new CommandResult(String.format(MESSAGE_VIEW_NOTES_SUCCESS,
+                    personWithEditedNotes.getName(), personWithEditedNotes.getNotes().toString()));
 
         default:
             throw new AssertionError("Unknown mode: " + mode);
