@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
-import spleetwaise.address.MainApp;
+import spleetwaise.commons.MainApp;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc. It contains a scene graph with

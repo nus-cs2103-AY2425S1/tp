@@ -1,4 +1,4 @@
-package spleetwaise.address;
+package spleetwaise.commons;
 
 import static spleetwaise.commons.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
 import static spleetwaise.commons.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
@@ -20,7 +20,6 @@ import spleetwaise.address.storage.AddressBookStorage;
 import spleetwaise.address.storage.JsonAddressBookStorage;
 import spleetwaise.address.ui.Ui;
 import spleetwaise.address.ui.UiManager;
-import spleetwaise.commons.AppParameters;
 import spleetwaise.commons.core.Config;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.core.Version;

@@ -3,7 +3,7 @@ package spleetwaise.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import javafx.scene.image.Image;
-import spleetwaise.address.MainApp;
+import spleetwaise.commons.MainApp;
 
 /**
  * A container for App specific utility functions

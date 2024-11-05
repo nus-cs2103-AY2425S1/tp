@@ -9,13 +9,13 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import spleetwaise.address.MainApp;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.JsonAddressBookStorage;
+import spleetwaise.commons.MainApp;
 import spleetwaise.commons.core.Config;
 import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.exceptions.DataLoadingException;
