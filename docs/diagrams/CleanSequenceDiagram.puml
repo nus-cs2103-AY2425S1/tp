@@ -38,13 +38,13 @@ activate GradYearPredicate
 GradYearPredicate --> CleanCommand : p
 deactivate GradYearPredicate
 
-CleanCommand --> Model : updateFilteredList(p)
+CleanCommand -> Model : updateFilteredList(p)
 activate Model
 Model --> CleanCommand
 deactivate Model
 
 
-CleanCommand --> Model : getFilteredList()
+CleanCommand -> Model : getFilteredList()
 activate Model
 Model --> CleanCommand
 deactivate Model
@@ -55,6 +55,11 @@ activate Model
 Model --> CleanCommand
 deactivate Model
 end loop
+
+CleanCommand -> Model : updateFilteredList()
+activate Model
+Model --> CleanCommand
+deactivate Model
 
 CleanCommand --> LogicManager : result
 deactivate CleanCommand
