@@ -1006,6 +1006,21 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person into the list
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/2A`<br>
+       Expected: Person is added to the list. Details of the new contact shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/L c/2A`<br>
+       Expected: No person is added. Error detail regarding sex is shown in the status message. Status bar remains the same.
+
+    1. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -1020,6 +1035,40 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Adding attendance for a person
+
+1. Adding attendance for a person in the list
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `addAttendance 1 ad/24-09-2024 ar/MC`<br>
+       Expected: Attendance record with date 24-09-2024 and reason MC is added to the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+   
+    1. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
+       Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-24 ar/MC`, `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Deleting attendance for a person
+
+1. Deleting attendance for a person in the list
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The test for adding attendance should be done first as the person must have an existing attendance to be deleted.
+
+    1. Test case: `addAttendance 1 ad/24-09-2024 ar/`<br>
+       Expected: Attendance record with date 24-09-2024 is deleted from the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+
+    1. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
+       Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
