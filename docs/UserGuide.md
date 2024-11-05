@@ -618,42 +618,87 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### Remove Buyers from Listing
-    - **Format:** `RemoveBuyersFromListingCommand`
+    - **Format:** `removelistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
       >
-      > **Input**:
+      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh` 
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Buyers removed from listing: RC4
       >
       > ---
       >
-      > **Use Case #3**:
+      > **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
       >
-      > **Input**:
+      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh buyer/charlotte oliveiro`
       >
-      > **Output**:
+      > **Output**: Buyers removed from listing: RC4
       >
       > ---
 
+    <br>
+    <div class="note" markdown="span">
+    Listing and buyer names are case-insensitive: 
+    `removelistingbuyers Warton House` 
+    = `removelistingbuyers warton house` 
+    = `removelistingbuyers wArToN HouSe` _(Not exhaustive)_
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, listing/buyer name is space-sensitive:
+    `removelistingbuyers Warton House` != `removelistingbuyers WartonHouse`
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
+    </div> 
+    <br>
+
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **User Error #1**: Listing not found
       >
-      > **Input**:
+      > **Input**: removelistingbuyers rc44444 buyer/alex yeoh
       >
-      > **Output**:
+      > **Output**: The specified listing name does not exist.
+      > 
+      > ---
+      > 
+      > **User Error #2**: Empty set of buyers
       >
+      > **Input**: `removelistingbuyers rc4 buyer/`
+      >
+      > **Output**: Please provide valid buyers
+      > 
+      > ---
+      > 
+      > **User Error #3**: Person specified is not buyer
+      >
+      > **Input**: `removelistingbuyers rc4 buyer/ImASeller`
+      >
+      > **Output**: The client ImASeller is not registered as a buyer.
+      > 
+      > ---
+      > 
+      > **User Error #4**: Person specified is not a buyer for the listing
+      >
+      > **Input**: `removelistingbuyers rc4 buyer/notInterestedBuyer`
+      >
+      > **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
+      > 
+      > ---
+      > 
+      > **User Error #5**: Buyer not found
+      >
+      > **Input**: `removelistingbuyers rc4 buyer/nonExistentBuyer`
+      >
+      > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
+      > 
       > ---
 
 - #### Delete Listing
