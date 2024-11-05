@@ -333,59 +333,68 @@ removefromconsult 1 n/John Doe
     * Cons: Higher memory usage for modifications
 
 
-### \[Proposed\] Data Archiving / Export Feature
+### Data Import / Export Feature
 
-[//]: # (_{Explain here how the data archiving feature will be implemented}_)
+The import/export feature allows TAs to archive and transfer their data in CSV format. This functionality is implemented for both students and consultations.
 
-The export feature allows TAs to export their current list of students to a CSV file for external use. This feature is particularly useful for creating backups, sharing data with other applications, or generating reports.
+#### Implementation
 
-#### Proposed Implementation
+The feature is implemented through four main command classes:
+* `ExportCommand`: Exports student data to CSV
+* `ExportConsultCommand`: Exports consultation data to CSV
+* `ImportCommand`: Imports student data from CSV
+* `ImportConsultCommand`: Imports consultation data from CSV
 
-The export functionality is implemented through the `ExportCommand` class which converts the current student list into CSV format and saves it to a file in the project's `data` folder. It is then ready for further use, which could be in the form of a download/import functionality in a separate feature.
+Each export command follows this workflow:
+1. Validates filename input
+2. Creates `data` directory if needed
+3. Writes data to CSV in `data` directory
+4. Copies file to home directory
+5. Handles file overwrite with force flag
 
-Currently, the exported CSV includes the following student information:
-- Name
-- Phone number
-- Email address
-- Enrolled courses (semicolon separated)
+Each import command follows this workflow:
+1. Validates input file existence and format
+2. Parses CSV header
+3. Processes entries line by line
+4. Validates each entry
+5. Logs errors to `error.csv`
 
-#### Implementation Details
-
-1. File Handling
-The system aims to implement several safety features:
-- Creates a `data` directory if it does not exist
-- Validates filename for illegal characters
-- Prevents accidental file overwriting
-- Properly escapes special characters in CSV output
-2. Force Flag
-The `-f` flag allows overwriting of existing files:
+Example sequences:
 ```
-export students     // Creates a new file students.csv
-export students     // Warns the user
-export -f students  // Overwrites the students.csv file
+Student CSV format:
+Name,Phone,Email,Courses
+John Doe,12345678,john@example.com,CS2103T;CS2101
+
+Consultation CSV format:  
+Date,Time,Students
+2024-10-20,14:00,John Doe;Jane Doe
 ```
 
 #### Design Considerations
 
-**Aspect: Export File Format**
-
+**Aspect: File Format**
 * **Alternative 1 (current choice)**: CSV format
-    * Pros: Wide compatibility, easy to read/edit
-    * Cons: Limited formatting options
-
+    * Pros: Widely compatible, human-readable, easy to edit
+    * Cons: Limited structure, requires careful escaping
 * **Alternative 2**: JSON format
-    * Pros: Preserves data structures better
-    * Cons: Less user-friendly for direct editing
+    * Pros: Maintains data structure, less escaping needed
+    * Cons: Less human-readable, harder to edit manually
+
+**Aspect: Error Handling**
+* **Alternative 1 (current choice)**: Log errors to separate file
+    * Pros: Clear error reporting, allows partial imports
+    * Cons: Requires managing additional files
+* **Alternative 2**: Fail entire import on any error
+    * Pros: Ensures data consistency
+    * Cons: Less flexible, requires perfect input
 
 **Aspect: File Location**
-
-* **Alternative 1 (current choice)**: Fixed `data` directory
-    * Pros: Consistent location, prevents scattered files
-    * Cons: Less flexibility for users
-
-* **Alternative 2**: User-specified directory
-    * Pros: More user control
-    * Cons: More complex input validation needed
+* **Alternative 1 (current choice)**: Both data and home directory
+    * Pros: Convenient access, automatic backup
+    * Cons: Duplicate files, more complex implementation
+* **Alternative 2**: Single location
+    * Pros: Simpler implementation
+    * Cons: Less convenient for users
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -686,6 +695,100 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. System shows error message that student is not in consultation
     * 4a2. Use case resumes from step 3
 
+**<u>Use case: UC11 - Export Student Data</u>**
+
+**MSS**
+
+1. TA enters export command with desired filename
+2. System validates filename
+3. System creates CSV file in data directory
+4. System copies file to home directory
+5. Success message shows number of students exported
+
+**Extensions**
+
+* 2a. Invalid filename
+    * 2a1. System shows error message about invalid characters
+    * 2a2. Use case resumes from step 1
+
+* 3a. File already exists
+    * 3a1. System shows error message suggesting force flag
+    * 3a2. Use case resumes from step 1
+
+* 3b. Directory creation fails
+    * 3b1. System shows error message about directory creation
+    * 3b2. Use case ends
+
+**<u>Use case: UC12 - Export Consultation Data</u>**
+
+**MSS**
+
+1. TA enters exportconsult command with desired filename
+2. System validates filename
+3. System creates CSV file with consultation data
+4. System copies file to home directory
+5. Success message shows number of consultations exported
+
+**Extensions**
+
+* [Same extensions as UC11]
+
+**<u>Use case: UC13 - Import Student Data</u>**
+
+**MSS**
+
+1. TA enters import command with CSV filename
+2. System validates file exists and is readable
+3. System reads CSV header and validates format
+4. System processes each row and adds valid students
+5. Success message shows number of students imported and any errors
+
+**Extensions**
+
+* 2a. File not found
+    * 2a1. System shows error message about missing file
+    * 2a2. Use case ends
+
+* 3a. Invalid header format
+    * 3a1. System shows error message about expected format
+    * 3a2. Use case ends
+
+* 4a. Invalid data in rows
+    * 4a1. System logs invalid entries to error.csv
+    * 4a2. System continues processing remaining rows
+    * 4a3. Success message includes count of errors
+
+**<u>Use case: UC14 - Import Consultation Data</u>**
+
+**MSS**
+
+1. TA enters importconsult command with CSV filename
+2. System validates file exists and is readable
+3. System reads CSV header and validates format
+4. System processes each row:
+    - Validates date and time format
+    - Checks student existence in system
+    - Creates consultation entries
+5. Success message shows number of consultations imported and any errors
+
+**Extensions**
+
+* 2a. File not found
+    * 2a1. System shows error message about missing file
+    * 2a2. Use case ends
+
+* 3a. Invalid header format
+    * 3a1. System shows error message about expected format
+    * 3a2. Use case ends
+
+* 4a. Invalid data in rows
+    * 4a1. System logs invalid entries to error.csv
+    * 4a2. System continues processing remaining rows
+    * 4a3. Error types include:
+        - Invalid date/time format
+        - Student not found in system
+        - Duplicate consultation
+    * 4a4. Success message includes count of errors
 
 *{More to be added}*
 
@@ -800,3 +903,61 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+### Exporting data
+
+#### Exporting student data
+1. Prerequisites: List all students using the `list` command. Multiple students should be in the list.
+
+2. Test case: `export students`<br>
+   Expected: CSV file created in data directory and home directory. Success message shows number of students exported.
+
+3. Test case: `export test.file`<br>
+   Expected: Error message about invalid filename characters.
+
+4. Test case: `export students` (when students.csv already exists)<br>
+   Expected: Error message suggesting force flag usage.
+
+5. Test case: `export -f students`<br>
+   Expected: Existing file overwritten. Success message shows number of students exported.
+
+#### Exporting consultation data
+1. Prerequisites: List all consultations using the `listconsults` command. Multiple consultations should be in the list.
+
+2. Test case: `exportconsult sessions`<br>
+   Expected: CSV file created with consultation data. Success message shows number of consultations exported.
+
+3. Test case: `exportconsult sessions` (when file exists)<br>
+   Expected: Error message suggesting force flag usage.
+
+4. Other incorrect export commands to try: `exportconsult`, `exportconsult /test`, `exportconsult test.csv`<br>
+   Expected: Error messages about invalid format/filename.
+
+### Importing data
+
+#### Importing student data
+1. Prerequisites: Prepare a valid CSV file with header "Name,Phone,Email,Courses"
+
+2. Test case: `import students.csv` (with valid data)<br>
+   Expected: Students imported successfully. Success message shows number of students imported.
+
+3. Test case: `import nonexistent.csv`<br>
+   Expected: Error message about file not found.
+
+4. Test case: Import file with invalid rows (wrong format, duplicate students)<br>
+   Expected: Some students imported. Error.csv created with invalid entries. Success message shows counts of successes and failures.
+
+#### Importing consultation data
+1. Prerequisites: Prepare a valid CSV file with header "Date,Time,Students"
+
+2. Test case: `importconsult sessions.csv` (with valid data)<br>
+   Expected: Consultations imported successfully. Success message shows number of consultations imported.
+
+3. Test case: Import file with invalid dates or times<br>
+   Expected: Invalid entries logged to error.csv. Success message shows counts.
+
+4. Test case: Import file with nonexistent students<br>
+   Expected: Entries with invalid students logged to error.csv. Success message shows counts.
+
+5. Other incorrect import commands to try: `importconsult`, `importconsult /test.csv`, `importconsult ../test.csv`<br>
+   Expected: Error messages about invalid format or file location.

@@ -149,6 +149,63 @@ Examples:
 * `list` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+### Exporting student data : `export`
+
+Exports the current list of students to a CSV file.
+
+Format: `export [-f] FILENAME`
+
+* Exports student data to 'FILENAME.csv' in both the data directory and user's home directory
+* The `-f` flag is optional and allows overwriting of existing files
+* The filename cannot contain periods (.) or slashes (/ or \)
+
+Examples:
+* `export students` creates students.csv containing current student list
+* `export -f backup` overwrites backup.csv if it exists
+
+### Exporting consultation data : `exportconsult`
+
+Exports the current list of consultations to a CSV file.
+
+Format: `exportconsult [-f] FILENAME`
+
+* Exports consultation data to 'FILENAME.csv' in both the data directory and user's home directory
+* The `-f` flag is optional and allows overwriting of existing files
+* The filename cannot contain periods (.) or slashes (/ or \)
+
+Examples:
+* `exportconsult sessions` creates sessions.csv containing current consultation list
+* `exportconsult -f consultbackup` overwrites consultbackup.csv if it exists
+
+### Importing student data : `import`
+
+Imports students from a CSV file into TAHub.
+
+Format: `import FILENAME`
+
+* The CSV file must have the header: Name,Phone,Email,Courses
+* Students with validation errors will be logged in error.csv
+* Duplicate students are skipped and logged
+
+Examples:
+* `import students.csv` imports student data from students.csv
+* `import ~/documents/students.csv` imports from the home directory
+
+### Importing consultation data : `importconsult`
+
+Imports consultations from a CSV file into TAHub.
+
+Format: `importconsult FILENAME`
+
+* The CSV file must have the header: Date,Time,Students
+* Date must be in YYYY-MM-DD format
+* Time must be in HH:mm format (24-hour)
+* Students must be semicolon-separated and exist in TAHub
+* Invalid entries will be logged in error.csv
+
+Examples:
+* `importconsult sessions.csv` imports consultation data from sessions.csv
+* `importconsult ~/documents/consultations.csv` imports from the home directory
 
 ### Clearing all entries : `clear`
 
@@ -262,7 +319,7 @@ Useful to fix minor UI glitches, e.g. the display not updating after adding a st
 
 ### Saving the data
 
-TAHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -304,3 +361,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Export Students** | `export [-f] FILENAME`<br> e.g., `export students`
+**Export Consultations** | `exportconsult [-f] FILENAME`<br> e.g., `exportconsult sessions`
+**Import Students** | `import FILENAME`<br> e.g., `import students.csv`
+**Import Consultations** | `importconsult FILENAME`<br> e.g., `importconsult sessions.csv`
