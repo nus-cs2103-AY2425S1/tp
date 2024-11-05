@@ -23,8 +23,8 @@ public class GroupName {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?i)(?<coursepart>CS2103T?)-(?<tutorialpart>[A-Z]\\d+)-" +
-        "(?<grouppart>\\d+)$";
+    public static final String VALIDATION_REGEX = "^(?i)(?<coursepart>CS2103T?)-(?<tutorialpart>[A-Z]\\d+)-"
+        + "(?<grouppart>\\d+)$";
 
     private final String fullName;
 
