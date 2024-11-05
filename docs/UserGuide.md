@@ -151,12 +151,13 @@ Adds an order under a specified person from the address book.
 
 Format: `addOrder INDEX i/ITEM d/DATE [q/QUANTITY]`
 
-* Add an order under the person at the specified `INDEX`.
+* Add an order under the person at the specified `INDEX`, with a default `pending` status.
 * The index refers to the index number shown in the displayed person list.
 * The index and quantity **must be a positive integer** 1, 2, 3, …​
 * Date must follow the following format: `DD-MM-YYYY`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
-* If there is already a pending order with the same `ITEM`, `DATE` and `QUANTITY` under that person, a warning will be given.
+* If there already exists a pending order with identical parameters under that person, a warning will be given.
+* If the order `DATE` has elapsed the current date, a warning will be given.
 
 Examples:
 * `addOrder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
@@ -202,8 +203,10 @@ Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`
 * Edits the order at the specified `ORDER_INDEX`. The order index refers to the index number shown in the displayed order list.
 * The order index and quantity **must be a positive integer** 1, 2, 3, …​
 * Date must follow the following format: `DD-MM-YYYY`
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* At least one of the optional fields must be provided, and order status cannot be edited by this command.
+* Existing values will be updated to the input values. 
+* If there already exists an order with all parameters identical under that person, a warning will be given.
+* If the order `DATE` has elapsed the current date, a warning will be given.
 
 Examples:
 *  `editOrder 1 i/Light bulb d/21-11-2025` edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
@@ -217,7 +220,7 @@ Marks an order from the selected person's displayed order list as completed.
 Format: `markOrder ORDER_INDEX`
 
 * A person's order list must first be displayed before marking an order from that person.
-* Marks an order under the selected person at the specified `ORDER_INDEX` as completed.
+* Marks a pending order under the selected person at the specified `ORDER_INDEX` as completed.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -232,7 +235,7 @@ Reverts an order from the selected person's displayed order list to pending.
 Format: `unmarkOrder ORDER_INDEX`
 
 * A person's order list must first be displayed before unmarking an order from that person.
-* Reverts an order under the selected person at the specified `ORDER_INDEX` to pending.
+* Reverts a completed order under the selected person at the specified `ORDER_INDEX` to pending.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
