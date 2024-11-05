@@ -84,7 +84,7 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 |   1   |               [`Add`](#adding-a-student)               |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/98765432 e/93838420 a/311, Clementi Ave 2, #02-25 l/S1 NT s/MATH lt/SUN-11:00-13:00` |
 |   2   |            [`Delete`](#deleting-a-student)             |                                                    `delete INDEX`                                                    |                                               `delete 2`                                               |
 |   3   |            [`Update`](#updating-a-student)             | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                               `update Alex Yeoh n/James Lee e/99999999`                                |
-|   4   |              [`Find`](#finding-students)               |                         `find n/KEYWORDS` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                          |                         `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                         |
+|   4   |              [`Find`](#finding-students)               |                       `find n/NAME [NAME]…​` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                       |                         `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                         |
 |   5   |            [`List`](#listing-all-students)             |                                                        `list`                                                        |                                                 `list`                                                 |
 |   6   |              [`Tag`](#tagging-a-student)               |                                         `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`                                         |                                    `tag n/John Doe l/S1 NT s/MATH`                                     |
 |   7   |           [`Record Note`](#recording-notes)            |                                                `note n/NAME nt/NOTE`                                                 |                            `note n/John Doe nt/Doing well in all subjects`                             |
@@ -207,20 +207,22 @@ Updates the details of an existing student in the address book.
 Find students by either their name, level or subject(s).
 
 **Format:**
-1. `find n/KEYWORDS`
+1. `find n/NAME [NAME]…​`
 1. `find l/LEVEL`
 1. `find s/SUBJECT [SUBJECT]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
+* The search is case-insensitive and treats multiple spaces as one space. e.g `hans` will match `Hans` and `s2   nt` will match `S2 NT`
+* For name and subject searches, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* For name and subject searches, students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `MATH CHEMISTRY` will return students with `MATH` or `CHEMISTRY`
 
 **Examples:**
 * `find n/John` returns `john` and `John Doe`
 * `find l/S3 NA` returns all students tagged with level `S3 NA`
 * `find s/MATH` returns all students tagged with subject `MATH`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`
+* `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`<br>
 
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 

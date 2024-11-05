@@ -22,10 +22,12 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students based on either name, subject(s) or"
             + " level, using the specified keywords (case-insensitive) and "
             + "displays them as a list with index numbers.\n"
-            + "Parameters (choose only one): " + PREFIX_NAME + "KEYWORDS or "
+            + "Parameters (choose only one): " + PREFIX_NAME + "NAME [NAME]... or "
             + PREFIX_LEVEL + "LEVEL or "
             + PREFIX_SUBJECT + "SUBJECT [SUBJECT]..." + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Alex David";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Alex David or "
+            + COMMAND_WORD + " " + PREFIX_LEVEL + "S2 NA or "
+            + COMMAND_WORD + " " + PREFIX_SUBJECT + "MATH";
 
     private final ContainsKeywordsPredicate predicate;
 
