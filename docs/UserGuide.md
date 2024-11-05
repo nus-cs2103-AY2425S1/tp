@@ -113,7 +113,10 @@ Schedules an appointment for a client in the address book.
 
 Format: `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`
 
-* You can schedule multiple appointments using the `d/` prefix for each date and time.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can schedule multiple appointments using the `d/` prefix for each date and time
+</div>
+
 * If multiple `note/` prefixes are used, each note will correspond to the `d/` in the same order. Same number of notes and dates must be provided.
 * The given date and time must fall on a weekday and on the hour between 0900 and 1600 inclusive.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
@@ -132,12 +135,15 @@ Sets a reminder for a client before their appointment in the address book.
 
 Format: `reminder NAME r/REMINDER_TIME`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can only set a reminder for a person who already has a scheduled appointment
+</div>
+
 * The NAME refers to the full name of the client you want to set a reminder for.
 * The REMINDER_TIME specifies how early you want to be reminded before the appointment. It must be in the form of either "X day(s)" or "Y hour(s)".
 * ***Allowed reminder times***:
     * Days: You can specify 1 to 7 days (e.g 1 day, 7 days)
     * Hours: You can specify 1 to 23 hours (e.g 1 hour, 23 hours)
-* You can only set a reminder for a person who already has a scheduled appointment.
 * Multiple reminder times (r/) cannot be specified in a single command. Only one reminder time can be set per command.
 
 Examples:
@@ -179,8 +185,11 @@ Lists all upcoming appointments in the order of the earliest next upcoming appoi
 
 Format: `appointment-list [d/DATE][TIME]`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The optional date and time fields act as filters
+</div>
+
 * This will only show appointments that are in the **future** (compared to local time now).
-* The optional date and time fields act as filters.
 * A time filter cannot be applied without date filter.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
 
@@ -216,9 +225,8 @@ Displays the details of a person in the address book.
 
 **Format:** `view NAME`
 
-<div markdown="span" class="alert alert-primary">
-Tip:
-The name must match the full name exactly.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The name must match the full name exactly
 </div>
 
 **On success:** A pop-up window will show the details including:
