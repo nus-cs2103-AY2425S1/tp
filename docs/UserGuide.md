@@ -104,7 +104,7 @@ You can also exit the program by clicking the "x" at the top left corner of the 
 
 </div>
 
-## Client Management:
+## Client Management
 ### Add Client Details: `add`
 
 Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status.
@@ -348,7 +348,7 @@ Reminders shown are only for clients in the main list, not for those in the arch
 
 </div>
 
-## Data Management:
+## Data Management
 ### Saving the Data
 
 Clientele+ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
