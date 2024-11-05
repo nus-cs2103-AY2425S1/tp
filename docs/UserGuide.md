@@ -178,6 +178,7 @@ Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
   3rd student in the app.
 * `add_assignment si/1 an/Assignment 1 ms/100`
+  ![result for 'add_assignment si/1 an/Assignment 1 ms/100'](images/add_assignment_image.jpg)
 
 ### Deleting an assignment: `delete_assignment`
 
