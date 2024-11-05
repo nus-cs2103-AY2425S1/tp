@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
+import seedu.address.model.util.Remark;
 
 /**
  * Abstract class representing a general order in the system.
@@ -15,7 +16,8 @@ public abstract class Order {
     private final LocalDateTime orderDate;
     private final List<? extends Product> items;
     private OrderStatus status;
-    private Person person;
+    private final Person person;
+    private final Remark remark;
 
     /**
      * Constructs an {@code Order} with the specified customer, list of items, and initial status.
@@ -25,11 +27,12 @@ public abstract class Order {
      * @param items The list of products in this order.
      * @param status The initial status of the order.
      */
-    public Order(Person person, List<? extends Product> items, OrderStatus status) {
+    public Order(Person person, List<? extends Product> items, OrderStatus status, Remark remark) {
         this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
         this.person = person;
+        this.remark = remark;
     }
 
     /**
@@ -39,10 +42,6 @@ public abstract class Order {
      */
     public Person getPerson() {
         return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 
     /**
@@ -73,6 +72,15 @@ public abstract class Order {
     }
 
     /**
+     * Returns the remark of this order.
+     *
+     * @return The {@code Remark} of the order.
+     */
+    public Remark getRemark() {
+        return remark;
+    }
+
+    /**
      * Sets the status of this order.
      *
      * @param status The new status to be set for the order.
@@ -98,6 +106,7 @@ public abstract class Order {
         return "Order Type: " + getOrderType() + "\n"
                 + "Order Date: " + getOrderDate() + "\n"
                 + "Status: " + status + "\n"
+                + "Remark: " + remark + "\n"
                 + "Items: " + "\n"
                 + viewOrder();
     }

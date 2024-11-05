@@ -15,6 +15,8 @@ public class PersonContainsTagsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public PersonContainsTagsPredicate(List<String> keywords) {
+        assert keywords != null;
+        assert !keywords.isEmpty();
         this.keywords = keywords;
     }
 

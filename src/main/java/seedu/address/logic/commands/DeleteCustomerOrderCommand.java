@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,12 +40,10 @@ public class DeleteCustomerOrderCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        // Retrieve the customer order
-        CustomerOrder customerOrder = customerOrderList.getOrders().get(targetIndex - 1);
+        Order order = customerOrderList.getOrder(targetIndex - 1);
 
-        // Remove the order from the person's order list
-        Person person = customerOrder.getPerson();
-        person.removeOrder(customerOrder);
+        Person person = order.getPerson();
+        person.removeOrder(order);
 
         customerOrderList.removeOrder(targetIndex - 1);
 
