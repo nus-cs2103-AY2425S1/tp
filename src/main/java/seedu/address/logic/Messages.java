@@ -22,6 +22,7 @@ public class Messages {
             "The wedding index provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PERSONS_LISTED_NAME_OVERVIEW = "%1$d persons listed with name %2$s!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -49,7 +50,7 @@ public class Messages {
                 .append(person.getEmail())
                 .append(" | Address: ")
                 .append(person.getAddress())
-                .append("| Role: ")
+                .append(" | Role: ")
                 .append(person.getRole().map(Role::toString).orElse(null));
         return builder.toString();
     }
@@ -75,7 +76,7 @@ public class Messages {
     public static String format(Set<Wedding> weddingJobs) {
         return weddingJobs.stream()
                 .map(Messages::format) // Calls the static format method in Wedding for each wedding
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", \n"));
     }
 
 

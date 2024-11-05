@@ -17,7 +17,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the contact you want to see "
             + "with the name (case-insensitive).\n"
-            + "Parameters: NAME\n"
+            + "Parameters: NAME (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " alice";
 
     private final NameMatchesKeywordPredicate predicate;
@@ -31,7 +31,9 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                        model.getFilteredPersonList().size(),
+                        String.join(" ", predicate.getKeywords())));
     }
 
     @Override

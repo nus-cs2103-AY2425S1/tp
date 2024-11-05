@@ -16,14 +16,13 @@ public enum Commands {
     HELP("help", "help", new String[]{}),
     ADDWEDDING("addw", "addw n/WEDDINGNAME c/CLIENT [d/DATE] [v/VENUE]",
             new String[]{"d/", "v/", "c/", "n/"}),
-    TAGWEDDING("tagw", "tagw INDEX/NAME w/WEDDING r/ROLE ", new String[]{"w/", "r/"}),
     EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
             new String[]{"n/", "p/", "e/", "a/"}),
-    VIEWWEDDING("vieww", "vieww WEDDINGNAME/INDEX", new String[]{}),
-
-
-    DELETEWEDDING("deletew", "deletew WEDDINGNAME/INDEX", new String[]{}),
-    TAGGING("tag", "tag INDEX/NAME [t/TAG...]", new String[]{"t/"});
+    VIEWWEDDING("vieww", "vieww INDEX/WEDDINGNAME", new String[]{}),
+    EDITWEDDING("editw", "editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]",
+            new String[]{"w/", "n/", "d/", "v/"}),
+    DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
+    ASSIGN("assign", "assign INDEX/NAME [r/ROLE] [w/WEDDING...]", new String[]{"w/", "r/"});
 
     private final String commandName;
     private final String formatExample;

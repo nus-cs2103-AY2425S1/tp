@@ -35,22 +35,24 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": assigns a role and/or wedding(s) to person identified "
             + "by index or name. Weddings are identified by index.\n"
-            + "For example: \n" + COMMAND_WORD
+            + "Parameters: "
+            + "INDEX (must be a positive integer) or KEYWORD (the name of contact) "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_WEDDING + "WEDDING...]\n"
+            + "Example: " + COMMAND_WORD
             + " Alex Yeoh " + PREFIX_ROLE + "food vendor\n"
             + COMMAND_WORD + " Alex Yeoh " + PREFIX_WEDDING + "1\n"
             + COMMAND_WORD + " 1 " + PREFIX_ROLE + "florist " + PREFIX_WEDDING + "1";
 
     public static final String MESSAGE_ASSIGN_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
 
-    public static final String MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS = "Assigned %1$s to wedding(s):\n %2$s";
+    public static final String MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS = "Assigned %1$s to wedding(s):\n%2$s";
 
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
 
     public static final String MESSAGE_DUPLICATE_WEDDING = "Person has already been assigned to wedding(s).";
 
-    public static final String MESSAGE_ASSIGN_EMPTY_PERSON_LIST_ERROR =
-            "There is no person to assign as the person list is empty.\n"
-            + "Please refresh the list with a command (e.g. list, view, filter).";
+    public static final String MESSAGE_ASSIGN_EMPTY_PERSON_LIST_ERROR = "There is no person to assign.";
 
     public static final String MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR =
             "There is no wedding to assign as the wedding list is empty.\n"
@@ -69,7 +71,7 @@ public class AssignCommand extends Command {
     private final Set<Index> weddingIndices;
 
     /**
-     * @param index of the person in the filtered person list to assign role
+     * @param index                    of the person in the filtered person list to assign role
      * @param personWithRoleDescriptor details of the person to assign role
      */
     public AssignCommand(Index index, NameMatchesKeywordPredicate predicate,
@@ -184,10 +186,11 @@ public class AssignCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the role added to {@code personToAddRole}
-     *  with {@code personWithRoleDescriptor}.
+     * with {@code personWithRoleDescriptor}.
      */
     private static Person createPersonWithRole(Person personToAddRole,
-                                           PersonWithRoleDescriptor personWithRoleDescriptor) throws CommandException {
+                                               PersonWithRoleDescriptor personWithRoleDescriptor)
+                                                throws CommandException {
         assert personToAddRole != null;
 
         Name updatedName = personWithRoleDescriptor.getName().orElse(personToAddRole.getName());
