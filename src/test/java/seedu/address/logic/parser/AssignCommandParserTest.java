@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.AssignCommand.MESSAGE_MISSING_FIELDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
@@ -57,10 +58,24 @@ public class AssignCommandParserTest {
     }
 
     @Test
+    public void parse_missingPreambleAndFields_throwsParseException() {
+        String input = "";
+        ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(input));
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), thrown.getMessage());
+    }
+
+    @Test
     public void parse_missingPreamble_throwsParseException() {
         String input = " " + PREFIX_ROLE + "Friend";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(input));
         assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE), thrown.getMessage());
+    }
+
+    @Test
+    public void parse_missingFields_throwsParseException() {
+        String input = "1 ";
+        ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(input));
+        assertEquals(MESSAGE_MISSING_FIELDS, thrown.getMessage());
     }
 
 
