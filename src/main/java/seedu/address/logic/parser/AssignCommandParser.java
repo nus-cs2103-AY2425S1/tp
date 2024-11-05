@@ -26,6 +26,15 @@ public class AssignCommandParser implements Parser<AssignCommand> {
      */
     public AssignCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        // Check for invalid format where prefix immediately follows number
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.matches("\\d+" + PREFIX_ROLE.getPrefix() + ".*")
+                || trimmedArgs.matches("\\d+" + PREFIX_WEDDING.getPrefix() + ".*")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_WEDDING);
 
         Index personIndex = null;
@@ -57,7 +66,11 @@ public class AssignCommandParser implements Parser<AssignCommand> {
 
         AssignCommand.PersonWithRoleDescriptor personWithRoleDescriptor = new AssignCommand.PersonWithRoleDescriptor();
 
-        if (isAssignRole & !isAssignWedding) {
+        if (!isAssignRole && !isAssignWedding) {
+            // no role and wedding to assign
+            throw new ParseException(AssignCommand.MESSAGE_MISSING_FIELDS);
+
+        } else if (isAssignRole & !isAssignWedding) {
             // assign role only
             String roleValue = argMultimap.getValue(PREFIX_ROLE).get();
             personWithRoleDescriptor.setRole(ParserUtil.parseRole(roleValue));

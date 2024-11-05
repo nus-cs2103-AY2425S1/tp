@@ -134,9 +134,10 @@ public class ClientTest {
     @Test
     public void toStringMethod() {
         Person alice = aliceClient.getPerson();
+
         String expected = Person.class.getCanonicalName() + "{name=" + alice.getName() + ", phone=" + alice.getPhone()
                 + ", email=" + alice.getEmail() + ", address=" + alice.getAddress() + ", roles=" + alice.getRole()
-                + ", wedding=" + alice.getOwnWedding() + ", wedding jobs=" + alice.getWeddingJobs() + "}";
+                + ", wedding=NA" + ", wedding jobs=" + alice.getWeddingJobs() + "}";
 
         assertEquals(expected, aliceClient.toString());
 

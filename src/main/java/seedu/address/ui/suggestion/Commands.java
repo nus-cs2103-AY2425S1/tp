@@ -5,15 +5,10 @@ package seedu.address.ui.suggestion;
  * Each command has a name, an example format, and associated prefixes for parameters.
  */
 public enum Commands {
-    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]",
+    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING...]",
             new String[]{"n/", "p/", "e/", "a/", "r/", "w/"}),
-    CLEAR("clear", "clear", new String[]{}),
     DELETE("delete", "delete INDEX/NAME", new String[]{}),
-    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
-            new String[]{"n/", "p/", "e/", "a/"}),
-    FIND("find", "find KEYWORD [MORE_KEYWORDS]", new String[]{}),
-    FILTER("filter", "filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]",
-            new String[]{"n/", "p/", "e/", "a/", "r/"}),
+    CLEAR("clear", "clear", new String[]{}),
     VIEW("view", "view NAME", new String[]{}),
     LIST("list", "list", new String[]{}),
     EXIT("exit", "exit", new String[]{}),
@@ -24,7 +19,7 @@ public enum Commands {
             new String[]{"n/", "d/", "v/", "w/"}),
     VIEWWEDDING("vieww", "vieww INDEX/WEDDING_NAME", new String[]{}),
     DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
-    TAGGING("assign","assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX]",
+    ASSIGN("assign","assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX...]",
             new String[]{"r/", "w/"});
 
     private final String commandName;

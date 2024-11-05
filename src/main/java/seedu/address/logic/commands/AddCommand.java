@@ -26,30 +26,29 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_ROLE + "ROLE]...\n"
-            + "[" + PREFIX_WEDDING + "WEDDING]...\n"
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_WEDDING + "WEDDING...]\n"
 
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_ROLE + "friends "
-            + PREFIX_WEDDING + "1"
-            + PREFIX_ROLE + "Groom "
-            + PREFIX_ADDRESS + "123 Main St ";
-    // + PREFIX_TAG + "Wedding1";
+            + PREFIX_ROLE + "florist "
+            + PREFIX_WEDDING + "1";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
     public static final String MESSAGE_PHONE_EXIST = "This number already exists in the address book";
     public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
+    public static final String MESSAGE_WEDDING_DOES_NOT_EXIST = "Wedding %d is not in the list.";
+
 
     private final Person toAdd;
     private Set<Index> weddingIndices;
@@ -84,13 +83,29 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Checks validity of all provided wedding indexes..
+     *
+     * @param model The model containing the list of weddings.
+     */
+    public void checkWeddingJobs(Model model) throws CommandException {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+
+        for (Index index : weddingIndices) {
+            if (!(index.getZeroBased() >= 0 && index.getZeroBased() < weddingList.size())) {
+                throw new CommandException(String.format(MESSAGE_WEDDING_DOES_NOT_EXIST, index.getOneBased()));
+            }
+        }
+    }
+
+    /**
      * Associates the person with wedding jobs based on the provided indices.
      *
      * @param model The model containing the list of weddings.
      */
-    public void generateWeddingJobs(Model model) {
+    public void generateWeddingJobs(Model model) throws CommandException {
         List<Wedding> weddingList = model.getFilteredWeddingList();
 
+        checkWeddingJobs(model);
         for (Index index : weddingIndices) {
             toAdd.addWeddingJob(weddingList.get(index.getZeroBased()));
         }

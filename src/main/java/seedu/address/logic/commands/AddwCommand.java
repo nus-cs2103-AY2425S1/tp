@@ -25,16 +25,18 @@ import seedu.address.model.wedding.Wedding;
 public class AddwCommand extends Command {
     public static final String COMMAND_WORD = "addw";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a wedding to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a wedding to the address book. \n"
             + "Parameters: "
             + PREFIX_NAME + "WEDDING'S NAME "
-            + PREFIX_CLIENT + "CLIENT"
-            + PREFIX_DATE + "DATE "
-            + PREFIX_VENUE + "VENUE ";
+            + PREFIX_CLIENT + "CLIENT "
+            + "[" + PREFIX_DATE + "DATE" + "] "
+            + "[" + PREFIX_VENUE + "VENUE" + "] ";
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
     public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book";
+    public static final String MESSAGE_ALREADY_A_CLIENT = "This person is already a client for another wedding";
+
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to set as client.\n"
                     + "Find the index from the list below and type edit INDEX ...\n"
@@ -64,6 +66,10 @@ public class AddwCommand extends Command {
             client = selectClientWithIndex(model);
         } else {
             client = selectClientWithKeyword(model);
+        }
+
+        if (client.hasOwnWedding()) {
+            throw new CommandException(MESSAGE_ALREADY_A_CLIENT);
         }
 
         toAdd = new Wedding(toAdd.getName(), new Client(client), toAdd.getDate(), toAdd.getVenue());

@@ -116,11 +116,6 @@ public class PersonTest {
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
-        //        // different role -> returns false
-        //        editedAlice = new PersonBuilder(ALICE).withRole(VALID_TAG_HUSBAND).build();
-        //        assertFalse(ALICE.equals(editedAlice));
-        // include after adding Optional
     }
 
     @Test
@@ -134,7 +129,7 @@ public class PersonTest {
 
         expected = Person.class.getCanonicalName() + "{name=" + BENSON.getName() + ", phone=" + BENSON.getPhone()
                 + ", email=" + BENSON.getEmail() + ", address=" + BENSON.getAddress() + ", roles=" + BENSON.getRole()
-                + ", wedding=" + BENSON.getOwnWedding() + ", wedding jobs=" + BENSON.getWeddingJobs() + "}";
+                + ", wedding=NA" + ", wedding jobs=" + BENSON.getWeddingJobs() + "}";
         assertEquals(expected, BENSON.toString());
     }
 }

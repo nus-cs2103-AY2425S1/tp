@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -68,14 +69,14 @@ public class EditwCommand extends Command {
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
 
         model.setWedding(weddingToEdit, editedWedding);
-        return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, editedWedding));
+        return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
     }
 
     /**
      * Creates and returns a {@code Wedding} with the details of {@code weddingToEdit}
      * edited with {@code editWeddingDescriptor}.
      */
-    private static Wedding createEditedWedding(Wedding weddingToEdit, EditWeddingDescriptor descriptor) {
+    static Wedding createEditedWedding(Wedding weddingToEdit, EditWeddingDescriptor descriptor) {
         assert weddingToEdit != null;
 
         Name updatedName = descriptor.getName().orElse(weddingToEdit.getName());
@@ -108,55 +109,44 @@ public class EditwCommand extends Command {
             return name != null || date != null || venue != null;
         }
 
-        /**
-         * Sets the {@code Name} of the wedding.
-         */
         public void setName(Name name) {
             this.name = name;
         }
 
-        /**
-         * Returns an Optional containing the wedding's {@code Name} if it was set.
-         */
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        /**
-         * Sets the {@code Date} of the wedding.
-         */
         public void setDate(Date date) {
             this.date = date;
         }
 
-        /**
-         * Returns an Optional containing the wedding's {@code Date} if it was set.
-         */
         public Optional<Date> getDate() {
             return Optional.ofNullable(date);
         }
 
-        /**
-         * Sets the {@code Venue} of the wedding.
-         */
         public void setVenue(Venue venue) {
             this.venue = venue;
         }
 
-        /**
-         * Returns an Optional containing the wedding's {@code Venue} if it was set.
-         */
         public Optional<Venue> getVenue() {
             return Optional.ofNullable(venue);
         }
 
         @Override
         public boolean equals(Object other) {
-            return other == this
-                    || (other instanceof EditWeddingDescriptor
-                    && getName().equals(((EditWeddingDescriptor) other).getName())
-                    && getDate().equals(((EditWeddingDescriptor) other).getDate())
-                    && getVenue().equals(((EditWeddingDescriptor) other).getVenue()));
+            if (other == this) {
+                return true;
+            }
+
+            if (!(other instanceof EditWeddingDescriptor)) {
+                return false;
+            }
+
+            EditWeddingDescriptor e = (EditWeddingDescriptor) other;
+            return getName().equals(e.getName())
+                    && getDate().equals(e.getDate())
+                    && getVenue().equals(e.getVenue());
         }
     }
 }
