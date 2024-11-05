@@ -6,37 +6,38 @@
 
 # WardWatch User Guide
 
-WardWatch (WW) is a **desktop app for managing patients information in hospitals, optimized for use via a  Line Interface** (CLI) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, WW can get your patient management tasks done faster than traditional GUI apps.
+WardWatch (WW) is a **desktop app for managing patients information in hospitals**, optimized for use via a [Command Line Interface (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, WW can get your patient management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 # Table of Contents
 1. [Quick Start](#quick-start)
-2. [Input Parameters](#Input-parameters)
-3. [Features](#features)
-    - General Commands
+2. [General Guidelines](#general-guidelines)
+3. [Input Parameters](#input-parameters)
+4. [Features](#features)
+    - **General Commands**
       - [Viewing help](#viewing-help--help)
       - [Saving the data](#saving-the-data)
       - [Editing the data file](#editing-the-data-file)
       - [Archiving data files](#archiving-data-files-coming-in-v20)
       - [Clearing all entries](#clearing-all-entries--clear)
       - [Exiting the program](#exiting-the-program--exit)
-    - Patient Management
+    - **Patient Management**
       - [Adding a patient](#adding-a-patient--add)
       - [Editing a patient](#editing-a-patient--edit)
       - [Deleting a patient](#deleting-a-patient--delete)
       - [Listing all patients](#listing-all-patients--list)
       - [Searching patients by field](#searching-patients-by-field--find)
-    - Notes Management
+    - **Notes Management**
       - [Adding notes to a patient](#adding-notes-to-a-patient--addnotes)
       - [Deleting notes from a patient](#deleting-notes-from-a-patient--delnotes)
-    - Appointment Management
+    - **Appointment Management**
       - [Adding an appointment to a patient](#adding-an-appointment-to-a-patient--make_appt)
       - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-del_appt)
       - [List all patient appointment](#list-all-patient-appointment--schedule_all)
-4. [FAQ](#faq)
-5. [Glossary](#glossary)
-6. [Known Issues](#known-issues)
-7. [Command Summary](#command-summary)
+5. [FAQ](#faq)
+6. [Glossary](#glossary)
+7. [Known Issues](#known-issues)
+8. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,15 +45,16 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-3/tp/releases/).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-3/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
+
+GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all patients.
@@ -67,40 +69,15 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Input parameters
+## General Guidelines
 
-**Notes about parameters:**<br>
-
-Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
-- `n/` -> parameter symbol<br>
-- `John Doe` -> parameter.
-
-### Parameters
-
-Symbol     | Parameter                    | Constraints
------------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**-**  | `INDEX`                      |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
-**-**  | `DATE`                       |- **Must be of the form `DD-MM-YYYY`**.
-**`n`**| `NAME`                       |- Can include alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.<br> - Must contain at least 1 alphabetic character and has a character limit of 50.
-**`i`**| `ID`                         |- Can include alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets. <br> - It Must have at least 1 alphanumeric character and has a character limit of 36.
-**`w`**| `WARD`                       |- Must contain at least 1 alphanumeric character, and has a character limit of 50.
-**`d`**| `DIAGNOSIS` (if specified)   |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
-**`m`**| `MEDICATION` (if specified)  |- Can include alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.<br> - Must contain at least 1 alphanumeric character and has a character limit of 80.
-**`a`**| `APPOINTMENT`                |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
-**`s`**| `START`                      |- A singular `DATE`.
-**`e`**| `END`                        |- A singular `DATE`.
-
-[Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
-## Features
+As a [CLI-based](#glossary) application, users will interact with WardWatch by typing commands.<br> Commands typically begin with a `COMMAND_WORD`, followed by its relevant `PARAMETERS` as necessary.
 
 <box type="info" seamless>
 
@@ -113,21 +90,56 @@ There are 5 CLI command formats as shown below:
 3) `COMMAND_WORD PARAMETER`
 3) `COMMAND_WORD PARAMETERS`
 4) `COMMAND_WORD INDEX PARAMETERS`
-
-**Other things to note in this User Guide:**
-1) Items in square brackets are optional.<br>
-  e.g `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
-2) Parameters can be in any order:<br>
-  `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`
-3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored:<br>
-  `help 123` is interpreted as `help`.
-4) Command word is not case-sensitive.<br>
-  e.g. `list` and `LIST` are both valid commands.
-5) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-[Back to Input parameters](#input-parameters)<br>
+For more information on the formats of `PARAMETERS`, please refer to [Input parameters](#input-parameters).
+
+**Other things to note in this User Guide:**
+1) Items in square brackets are optional:<br>
+   e.g `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
+2) Parameters can be in any order: <br>
+   `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`
+3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored: <br>
+   `help 123` is interpreted as `help`.
+4) Command word is not case-sensitive: <br>
+   e.g. `list` and `LIST` are both valid commands.
+5) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 [Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Input parameters
+
+<box type="info" seamless>
+
+**Notes about parameters:**<br>
+
+Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
+- `n/` -> parameter symbol<br>
+- `John Doe` -> parameter.
+</box>
+
+### Parameters
+
+Symbol     | Parameter                        | Constraints
+-----------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**-**  | `INDEX`                          |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `DATE`                           |- **Must be of the form `DD-MM-YYYY`**.
+**`n`**| `NAME`                           |- Must contain at least 1 alphabetic character and has a character limit of 50. <br> - Can include alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.
+**`i`**| `ID`                             |- Must contain at least 1 alphanumeric character and has a character limit of 36. <br> - Can include alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.
+**`w`**| `WARD`                           |- Must contain at least 1 alphanumeric character, and has a character limit of 50.
+**`d`**| `DIAGNOSIS` <br> (if specified)  |- Must contain at least 1 alphabetic character, and has a character limit of 80.
+**`m`**| `MEDICATION` <br> (if specified) |- Must contain at least 1 alphanumeric character and has a character limit of 80. <br> - Can include alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.
+**`a`**| `APPOINTMENT`                    |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
+**`s`**| `START`                          |- A singular `DATE`.
+**`e`**| `END`                            |- A singular `DATE`.
+
+[Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
 
 ### Viewing help : `help`
 
@@ -402,7 +414,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Glossary
 
-1. **GUI (Graphical User Interface):** A user interface that allows users to interact with electronic devices through graphical elements such as icons, buttons, and windows, rather than text-based commands. GUIs make it easier for users to navigate and use software applications visually.
+1. **CLI (Command Line Interface):** A user interface where users interact with a computer or software by typing text-based commands. Instead of clicking on icons or buttons, users enter specific commands in a terminal or command prompt window to perform tasks.
+
+2. **GUI (Graphical User Interface):** A user interface that allows users to interact with electronic devices through graphical elements such as icons, buttons, and windows, rather than text-based commands. GUIs make it easier for users to navigate and use software applications visually.
 
 [Back to Table of Contents](#table-of-contents)
 
