@@ -28,7 +28,7 @@ public class ViewWeddingCommand extends Command {
             + "Please make sure that the wedding is created and is in the format 'NAME & NAME'.\n"
             + "If you have not created a wedding yet, you can do so using the '"
             + AddWeddingCommand.COMMAND_WORD
-            + "'command.";
+            + "' command.";
     public static final String MESSAGE_NO_PARTICIPANTS_ADDED =
             String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 0)
             + "\n"
