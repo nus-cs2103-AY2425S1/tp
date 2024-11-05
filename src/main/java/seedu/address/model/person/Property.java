@@ -1,9 +1,11 @@
 package seedu.address.model.person;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 
@@ -120,6 +122,25 @@ public abstract class Property {
      */
     public void setActualPrice(Price newPrice) {
         actualPrice = newPrice;
+    }
+
+    /**
+     * Returns the class name of the property in uppercase.
+     */
+    public String getUpperCaseClassName() {
+        return this.getClass().getSimpleName().toUpperCase();
+    }
+
+    /**
+     * Returns true if the property contains the keywords.
+     */
+    public boolean matchesKeywords(List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsNumericWithOptionalHyphen(this.toString(), keyword)
+                    // returns true if keyword is housing type
+                    || this.getUpperCaseClassName().contains(keyword.toUpperCase())
+                    // returns true if keyword is in any of the property tags
+                    || this.getTags().stream().anyMatch(tag -> tag.toString().contains(keyword)));
     }
 
     @Override

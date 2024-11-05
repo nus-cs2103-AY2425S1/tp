@@ -109,11 +109,11 @@ public class CommandBox extends UiPart<Region> {
             errorIndexStart = commandText.indexOf(" ht/") + 1;
             break;
         case Price.MESSAGE_CONSTRAINTS:
-            if (commandText.contains("sp/")) {
+            if (commandText.contains(" sp/")) {
                 errorIndexStart = commandText.indexOf(" sp/") + 1;
-            } else if (commandText.contains("bp/")) {
+            } else if (commandText.contains(" bp/")) {
                 errorIndexStart = commandText.indexOf(" bp/") + 1;
-            } else if (commandText.contains("ap/")) {
+            } else if (commandText.contains(" ap/")) {
                 errorIndexStart = commandText.indexOf(" ap/") + 1;
             }
             break;
@@ -142,8 +142,8 @@ public class CommandBox extends UiPart<Region> {
             errorIndexStart = commandText.indexOf(" ") + 1;
             break;
         case MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX:
-            if ((commandText.contains("sold") && commandText.contains("ap/"))
-                    || (commandText.contains("bought") && commandText.contains("ap/"))) {
+            if ((commandText.contains("sold ") && commandText.contains(" ap/"))
+                    || (commandText.contains("bought ") && commandText.contains(" ap/"))) {
                 errorIndexStart = commandText.substring(0, commandText.trim().lastIndexOf(" "))
                         .trim().lastIndexOf(" ") + 1;
             } else {
@@ -157,11 +157,12 @@ public class CommandBox extends UiPart<Region> {
             errorIndexStart = commandText.indexOf(" o/") + 1;
             break;
         case MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS:
-            errorIndexStart = commandText.indexOf("findp") + 6;
+            errorIndexStart = commandText.indexOf("findp ") + 6;
             break;
         case AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT:
             assert !tagContents.isEmpty() : "tagContents should not be empty here";
-            isTagError = true;
+            isTagError = true; // To handle tags with multiple words
+            // Highlight first tag that appears in the command
             errorIndexStart = commandText.indexOf(tagContents.get(0)) - 2;
             tagLength = tagContents.get(0).length();
             break;
@@ -171,6 +172,7 @@ public class CommandBox extends UiPart<Region> {
             for (String tagContent : tagContents) {
                 assert !tagContent.isEmpty() : "tagContent should not be empty here";
                 if (tagContent.length() > 10) {
+                    // Highlight the tag that exceeds the length limit
                     errorIndexStart = commandText.indexOf(tagContent) - 2;
                     tagLength = tagContent.length();
                     break;
@@ -204,31 +206,45 @@ public class CommandBox extends UiPart<Region> {
                 if (commandHistory.isEmpty() || historyIndex <= 0) {
                     break;
                 }
-                assert !commandHistory.isEmpty() : "commandHistory should not be empty here";
-                assert historyIndex > 0 : "historyIndex should be positive here before decrementing";
-                historyIndex--;
-                commandTextField.setText(commandHistory.get(historyIndex));
+                this.previousCommand();
                 break;
             case DOWN:
                 if (commandHistory.isEmpty() || historyIndex >= commandHistory.size() || historyIndex < 0) {
                     break;
                 }
                 historyIndex++;
-                assert !commandHistory.isEmpty() : "commandHistory should not be empty here";
-                assert historyIndex >= 0 : "historyIndex should not be negative here";
-                assert historyIndex <= commandHistory.size()
-                        : "historyIndex should not exceed the size of commandHistory";
-                if (historyIndex == commandHistory.size()) {
-                    commandTextField.setText("");
-                } else {
-                    commandTextField.setText(commandHistory.get(historyIndex));
-                }
+                this.nextCommand();
                 break;
             default:
                 break;
             }
             logger.log(Level.FINE, "Key pressed: " + event.getCode());
         });
+    }
+
+    /**
+     * Handles the previous command in the command history.
+     */
+    private void previousCommand() {
+        assert !commandHistory.isEmpty() : "commandHistory should not be empty here";
+        assert historyIndex > 0 : "historyIndex should be positive here before decrementing";
+        historyIndex--;
+        commandTextField.setText(commandHistory.get(historyIndex));
+    }
+
+    /**
+     * Handles the next command in the command history.
+     */
+    private void nextCommand() {
+        assert !commandHistory.isEmpty() : "commandHistory should not be empty here";
+        assert historyIndex >= 0 : "historyIndex should not be negative here";
+        assert historyIndex <= commandHistory.size()
+                : "historyIndex should not exceed the size of commandHistory";
+        if (historyIndex == commandHistory.size()) {
+            commandTextField.setText("");
+        } else {
+            commandTextField.setText(commandHistory.get(historyIndex));
+        }
     }
 
     /**
