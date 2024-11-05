@@ -156,7 +156,7 @@ The `Model` component handles the data and state management for the app, storing
 2. **Class Diagram**:
     * Diagram of the `Model` structure:
 
-      <puml src="diagrams/ModelClassDiagram.puml" width="450" />
+      <puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 3. **Responsibilities**:
     * **Data Storage**:
@@ -185,7 +185,7 @@ The `Model` component handles the data and state management for the app, storing
 4. **Class Diagram**:
     * Diagram illustrating `Storage` structure:
 
-      <puml src="diagrams/StorageClassDiagram.puml" width="600" />
+      <puml src="diagrams/StorageClassDiagram.puml" width="900" />
     
 ### Common classes
 
