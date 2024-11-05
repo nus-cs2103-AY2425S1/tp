@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -39,7 +42,9 @@ import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DateTime;
-import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryIsUpcomingAfterPredicate;
+import seedu.address.model.delivery.DeliveryIsUpcomingBeforePredicate;
 import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.supplier.Supplier;
@@ -74,11 +79,19 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_upcoming() throws Exception {
-        DateTime time = new DateTime(VALID_DATE_APPLE);
-        DeliveryIsUpcomingPredicate predicate = new DeliveryIsUpcomingPredicate(time, Status.PENDING);
+        DateTime startTime = new DateTime(VALID_DATE_APPLE);
+        DateTime endTime = new DateTime(VALID_DATE_BREAD);
+        DeliveryIsUpcomingBeforePredicate predicateBefore = new DeliveryIsUpcomingBeforePredicate(endTime,
+                Status.PENDING);
+        DeliveryIsUpcomingAfterPredicate predicateAfter = new DeliveryIsUpcomingAfterPredicate(startTime,
+                Status.PENDING);
+        List<Predicate<Delivery>> predicates = new ArrayList<>();
+        predicates.add(predicateAfter);
+        predicates.add(predicateBefore);
         UpcomingCommand command = (UpcomingCommand) parser.parseCommand(
-                UpcomingCommand.COMMAND_WORD + " " + VALID_DATE_APPLE);
-        assertEquals(new UpcomingCommand(predicate), command);
+                UpcomingCommand.COMMAND_WORD + " " + PREFIX_START_DATE + VALID_DATE_APPLE + " " + PREFIX_END_DATE
+                        + " " + VALID_DATE_BREAD);
+        assertEquals(new UpcomingCommand(predicates), command);
     }
 
     @Test

@@ -5,9 +5,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Delivery}'s is upcoming before a specified date.
+ * Tests that a {@code Delivery} is upcoming before a specified date.
  */
-public class DeliveryIsUpcomingPredicate implements Predicate<Delivery> {
+public class DeliveryIsUpcomingBeforePredicate implements Predicate<Delivery> {
     private final DateTime completionDateTime;
     private final Status deliveryStatus;
 
@@ -18,7 +18,7 @@ public class DeliveryIsUpcomingPredicate implements Predicate<Delivery> {
      * @param completionDateTime Specified delivery date to check.
      * @param deliveryStatus Specified status.
      */
-    public DeliveryIsUpcomingPredicate(DateTime completionDateTime, Status deliveryStatus) {
+    public DeliveryIsUpcomingBeforePredicate(DateTime completionDateTime, Status deliveryStatus) {
         this.completionDateTime = completionDateTime;
         this.deliveryStatus = deliveryStatus;
     }
@@ -42,13 +42,14 @@ public class DeliveryIsUpcomingPredicate implements Predicate<Delivery> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeliveryIsUpcomingPredicate)) {
+        if (!(other instanceof DeliveryIsUpcomingBeforePredicate)) {
             return false;
         }
 
-        DeliveryIsUpcomingPredicate otherDeliveryIsUpcomingPredicate = (DeliveryIsUpcomingPredicate) other;
-        return completionDateTime.equals(otherDeliveryIsUpcomingPredicate.completionDateTime)
-                && deliveryStatus.equals(otherDeliveryIsUpcomingPredicate.deliveryStatus);
+        DeliveryIsUpcomingBeforePredicate otherDeliveryIsUpcomingBeforePredicate =
+                (DeliveryIsUpcomingBeforePredicate) other;
+        return completionDateTime.equals(otherDeliveryIsUpcomingBeforePredicate.completionDateTime)
+                && deliveryStatus.equals(otherDeliveryIsUpcomingBeforePredicate.deliveryStatus);
     }
 
     @Override
