@@ -131,11 +131,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        resultDisplay.setFeedbackToUser("Opening BridalBuddy user guide...");
         PauseTransition pause = new PauseTransition(Duration.seconds(1.3));
         pause.setOnFinished(unused -> {
             try {
                 URI uri = new URI(USER_GUIDE_URl);
                 Desktop.getDesktop().browse(uri);
+                resultDisplay.setFeedbackToUser("Opened BridalBuddy user guide!");
             } catch (Exception e) {
                 logger.severe("Error occurred while opening the help URL:\n" + e);
             }
