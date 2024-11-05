@@ -1,20 +1,24 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.Arrays;
 
 
 /**
  * Represents a Deadline for a Task.
  */
 public class Deadline implements Comparable<Deadline> {
-    public static final String MESSAGE_CONSTRAINTS = "Deadlines must be given in the form YYYY-MM-DD HHmm";
-    public static final String VALIDATION_REGEX = "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2}) (?<hour>\\d{2})(?<minute>\\d{2})";
+    public static final String MESSAGE_CONSTRAINTS = "Deadlines must be given in the form YYYY-MM-DD HHmm.\n";
+    public static final String MESSAGE_INCOMPLETE = "Provided deadline is incomplete.";
+    public static final String MESSAGE_EXCESSIVE = "Provided deadline has excessive parts.";
+    public static final String MESSAGE_INVALID = "Provided deadline is invalid.";
+    public static final String VALIDATION_REGEX = "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2}) (?<hour>\\d{2})" +
+        "(?<minute>\\d{2})";
     // safer to use 'uuuu' vs 'yyyy'
     // https://stackoverflow.com/questions/
     // 41177442/uuuu-versus-yyyy-in-datetimeformatter-formatting-pattern-codes-in-java

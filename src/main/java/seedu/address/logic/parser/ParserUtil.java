@@ -152,7 +152,13 @@ public class ParserUtil {
         requireNonNull(deadline);
         String trimmedName = deadline.trim();
         if (!Deadline.isValidDeadline(trimmedName)) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+            if (trimmedName.length() < Deadline.DATETIME_FORMAT.length()) {
+                throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + Deadline.MESSAGE_INCOMPLETE);
+            } else if (trimmedName.length() > Deadline.DATETIME_FORMAT.length()) {
+                throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + Deadline.MESSAGE_EXCESSIVE);
+            } else {
+                throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + Deadline.MESSAGE_INVALID);
+            }
         }
         return new Deadline(LocalDateTime.parse(trimmedName, Deadline.DATETIME_FORMATTER));
     }
