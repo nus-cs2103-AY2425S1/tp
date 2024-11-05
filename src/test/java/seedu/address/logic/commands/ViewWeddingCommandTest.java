@@ -99,7 +99,7 @@ public class ViewWeddingCommandTest {
 
     @Test
     public void execute_existingWeddingWithNoParticipants_throwsCommandException() {
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("james & charles");
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("James & Charles");
         ViewWeddingCommand command = new ViewWeddingCommand(predicate);
         modelEmpty.updateFilteredPersonList(predicate);
 
@@ -111,7 +111,7 @@ public class ViewWeddingCommandTest {
     @Test
     public void execute_singleMatchingKeyword_oneWeddingFound() throws Exception {
         String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 1);
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("alice & bob");
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("Alice & Bob");
         model.updateFilteredPersonList(predicate);
         ViewWeddingCommand command = new ViewWeddingCommand(predicate);
         CommandResult commandResult = command.execute(model);
@@ -122,7 +122,7 @@ public class ViewWeddingCommandTest {
     @Test
     public void execute_singleMatchingKeyword_multiplePersonsFound() throws Exception {
         String expectedMessage = String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 2);
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("alice & bob");
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("Alice & Bob");
         modelMultiple.updateFilteredPersonList(predicate);
         ViewWeddingCommand command = new ViewWeddingCommand(predicate);
         CommandResult commandResult = command.execute(modelMultiple);

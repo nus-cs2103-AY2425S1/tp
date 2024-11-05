@@ -186,7 +186,7 @@ public class AddressBookParserTest {
         String weddingNameKeyword = "Alice & Bob";
         ViewWeddingCommand command = (ViewWeddingCommand) parser.parseCommand(
                 ViewWeddingCommand.COMMAND_WORD + " " + weddingNameKeyword);
-        assertEquals(new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeyword.toLowerCase())),
+        assertEquals(new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeyword)),
                 command);
     }
 
