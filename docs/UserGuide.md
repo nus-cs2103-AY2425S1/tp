@@ -12,11 +12,7 @@ designed to allow easy management of dormitory resident details within an addres
 Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
 
-
-<box type="info" seamless>
-If this is your first time accessing DorManagerPro, please see our [Quick start](#quick-start) for details on how to set up DorManagerPro. 
-</box>
-
+**Note:** If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
 
 
 <!-- * Table of Contents -->

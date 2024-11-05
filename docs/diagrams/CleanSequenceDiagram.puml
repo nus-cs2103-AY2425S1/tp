@@ -64,8 +64,7 @@ deactivate Model
 CleanCommand --> LogicManager : result
 deactivate CleanCommand
 CleanCommand -[hidden]-> LogicManager : result
-destroy CleanCommand
-destroy GradYearPredicate
+
 
 [<--LogicManager
 deactivate LogicManager

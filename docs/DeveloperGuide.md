@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# DorManagerPro Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -260,7 +260,7 @@ The following sequence diagram shows how a `clean` command goes through the `Log
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `CleanCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** There are no destroy markers (X) for `CleanCommand` and `GradYearPredicate` as they are preserved in the `undo` command stack.
 
 </box>
 
