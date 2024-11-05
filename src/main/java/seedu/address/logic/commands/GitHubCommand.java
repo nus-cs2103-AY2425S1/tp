@@ -21,11 +21,11 @@ import seedu.address.model.person.Name;
 public class GitHubCommand extends Command {
     public static final String COMMAND_WORD = "github";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Launches the github repository of the user. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Launches the github repository of the user.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe ";
+            + PREFIX_NAME + "John Doe";
     public static final String MISSING_PERSON_EXCEPTION = "The person you specified does not exist"
             + " in the address book.\n"
             + "Parameters: "
