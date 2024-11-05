@@ -30,8 +30,8 @@ public class TypicalGroups {
         ab.addGroup(new Group(new GroupName(TEAM_FOUR)));
         ab.addGroup(new Group(new GroupName(TEAM_THREE)));
         ab.addGroup(new Group(new GroupName(TEAM_TWO)));
-        ab.addGroup(new Group(new GroupName(TEAM_ONE)));
         ab.addGroup(new Group(new GroupName(GROUP_ONE)));
+        ab.addGroup(new Group(new GroupName(TEAM_ONE)));
         ab.addGroup(new Group(new GroupName(GROUP_TEN)));
         return ab;
     }

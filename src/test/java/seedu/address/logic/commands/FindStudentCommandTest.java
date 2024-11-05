@@ -62,7 +62,7 @@ public class FindStudentCommandTest {
 
     @Test
     public void execute_singleKeyword_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate(List.of("Alice", "A0888888M"));
         FindStudentCommand command = new FindStudentCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
