@@ -268,17 +268,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseEcNumber_null_throwsNullPointerException() {
+        // EP: null
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEcNumber((String) null));
     }
 
     @Test
     public void parseEcNumber_invalidValue_throwsParseException() {
+        // EP: invalid EcNumber
         assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_CONTACT_NUMBER));
     }
 
     @Test
     public void parseEcNumber_validValueWithoutWhitespace_returnsEcNumber() throws Exception {
         EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_CONTACT_NUMBER);
+        // EP: valid EcNumber, boundary value: with no trailing whitespace
         assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_CONTACT_NUMBER));
     }
 
@@ -286,6 +289,7 @@ public class ParserUtilTest {
     public void parseEcNumber_validValueWithWhitespace_returnsTrimmedEcNumber() throws Exception {
         String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NUMBER + WHITESPACE;
         EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_CONTACT_NUMBER);
+        // EP: valid EcNumber, boundary value: with trailing whitespace
         assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(ecNumberWithWhitespace));
     }
 
