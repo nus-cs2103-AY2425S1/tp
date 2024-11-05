@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.sun.jdi.connect.Connector;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
@@ -276,8 +275,6 @@ public class ParserUtil {
 
     /**
      * Verifies that the specified ArgumentMultimap does not contain any illegal filters for an event.
-     * Throws a ParseException if a forbidden filter (address, phone, service, email, or tags) is found
-     * when the event flag (-e) is specified.
      *
      * @param argMultimap The ArgumentMultimap containing the parsed arguments.
      * @throws ParseException if the ArgumentMultimap contains filters for address, phone, service, email,
@@ -299,6 +296,17 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Verifies that the user input following a specified prefix is not empty.
+     * This method checks if an argument corresponding to a given prefix is present
+     * in the provided ArgumentMultimap and ensures it is not empty.
+     *
+     * @param argMultimap The ArgumentMultimap containing the parsed arguments.
+     * @param prefix The Prefix to look for in the ArgumentMultimap.
+     * @param message The error message to display if the input is empty, used to format the ParseException message.
+     * @return The trimmed argument string following the specified prefix.
+     * @throws ParseException if there is no argument or the argument is empty after the prefix.
+     */
     public static String verifyNoEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String message)
             throws ParseException {
         String trimmedArgs = argMultimap.getValue(prefix).get();

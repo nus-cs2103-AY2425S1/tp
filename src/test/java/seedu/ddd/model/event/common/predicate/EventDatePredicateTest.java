@@ -1,12 +1,13 @@
 package seedu.ddd.model.event.common.predicate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-import seedu.ddd.model.common.Id;
+
 import seedu.ddd.model.event.common.Date;
 import seedu.ddd.testutil.event.EventBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.ddd.testutil.event.TypicalEventFields.VALID_EVENT_DATE;
 
 public class EventDatePredicateTest {
     private String validDate1 = "2000-01-03";
