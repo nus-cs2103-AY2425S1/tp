@@ -1,4 +1,16 @@
 package seedu.address.model.product;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Ingredient.class, name = "Ingredient"),
+        @JsonSubTypes.Type(value = Pastry.class, name = "Pastry")
+})
 
 /**
  * Represents a generic product with a unique ID, name, and cost.

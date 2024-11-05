@@ -11,6 +11,13 @@ import java.util.Comparator;
 public class Pastry extends Product {
     private final ArrayList<Ingredient> ingredients;
 
+    // Default constructor for Jackson
+    public Pastry() {
+        super(0, "", 0.0);  // Set default values for fields
+        this.ingredients = new ArrayList<>();  // Initialize empty list
+    }
+
+
     /**
      * Constructs a {@code Pastry} object with specified ID, name, cost, and ingredients list.
      *

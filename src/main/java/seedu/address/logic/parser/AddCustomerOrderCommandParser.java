@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -14,6 +12,7 @@ import seedu.address.logic.commands.AddCustomerOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.util.Remark;
 
 /**
  * Parses input arguments and creates a new AddCustomerOrderCommand object.
@@ -32,7 +31,7 @@ public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCom
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ORDER);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ORDER, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ORDER, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -42,6 +41,7 @@ public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCom
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("Guest Customer"));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         String[] splitArgs = argMultimap.getValue(PREFIX_ORDER).orElse("").split("\\s+");
 
@@ -60,7 +60,7 @@ public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCom
             }
         }
 
-        return new AddCustomerOrderCommand(name, phone, idList);
+        return new AddCustomerOrderCommand(name, phone, idList, remark);
     }
 
     /**

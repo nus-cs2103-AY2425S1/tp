@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
 
 /**
  * Deletes a customer order at the specified index.
@@ -37,6 +39,11 @@ public class DeleteCustomerOrderCommand extends Command {
         if (targetIndex <= 0 || targetIndex > customerOrderList.getOrders().size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
+
+        Order order = customerOrderList.getOrder(targetIndex - 1);
+
+        Person person = order.getPerson();
+        person.removeOrder(order);
 
         customerOrderList.removeOrder(targetIndex - 1);
 

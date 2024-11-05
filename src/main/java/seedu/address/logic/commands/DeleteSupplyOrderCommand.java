@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 import seedu.address.model.order.SupplyOrderList;
 
 /**
@@ -35,6 +36,9 @@ public class DeleteSupplyOrderCommand extends Command {
         if (targetIndex <= 0 || targetIndex > supplyOrderList.getOrders().size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
+
+        Order order = supplyOrderList.getOrder(targetIndex - 1);
+        order.getPerson().removeOrder(order);
 
         supplyOrderList.removeOrder(targetIndex - 1);
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, targetIndex));

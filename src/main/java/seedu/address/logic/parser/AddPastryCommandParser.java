@@ -57,7 +57,7 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
      */
     private ArrayList<Ingredient> parseIngredients(List<String> ingredientNames) throws ParseException {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        IngredientCatalogue catalogue = new IngredientCatalogue();
+        IngredientCatalogue catalogue = IngredientCatalogue.getInstance();
 
         for (String ingredientName : ingredientNames) {
             try {

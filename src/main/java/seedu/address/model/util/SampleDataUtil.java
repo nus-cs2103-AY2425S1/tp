@@ -14,8 +14,6 @@ import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
@@ -118,6 +116,24 @@ public class SampleDataUtil {
     // Method to retrieve default pastries
     public static List<Pastry> getDefaultPastries() {
         return new ArrayList<>(defaultPastries);  // Defensive copy to prevent modification
+    }
+
+    // Method to retrieve a sample IngredientCatalogue with default ingredients
+    public static IngredientCatalogue getSampleIngredientCatalogue() {
+        IngredientCatalogue ingredientCatalogue = IngredientCatalogue.getInstance();
+        for (Ingredient ingredient : defaultIngredients.values()) {
+            ingredientCatalogue.addIngredient(ingredient);
+        }
+        return ingredientCatalogue;
+    }
+
+    // Method to retrieve a sample PastryCatalogue with default pastries
+    public static PastryCatalogue getSamplePastryCatalogue() {
+        PastryCatalogue pastryCatalogue = new PastryCatalogue();
+        for (Pastry pastry : defaultPastries) {
+            pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+        }
+        return pastryCatalogue;
     }
 
 }

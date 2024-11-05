@@ -31,6 +31,7 @@ public abstract class OrderList<T extends Order> {
      * @return An ObservableList of all customer orders.
      */
     public ObservableList<T> getOrders() {
+        // defensive coding
         return internalUnmodifiableOrders;
     }
 
@@ -46,6 +47,20 @@ public abstract class OrderList<T extends Order> {
         }
         orders.remove(index);
     }
+
+    /**
+     * Get an order of the specified index.
+     *
+     * @param index The index of the order to retrieve (0-based index).
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    public Order getOrder(int index) {
+        if (index < 0 || index >= orders.size()) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+        return orders.get(index);
+    }
+
 
     /**
      * View all orders, with pending orders first, each order numbered, and status displayed.
