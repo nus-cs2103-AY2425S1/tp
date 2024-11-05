@@ -17,8 +17,13 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
-    public static final String MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT = "Vendor is not assigned to this event";
-    public static final String MESSAGE_VENDOR_ALREADY_ASSIGNED = "Vendor is already assigned to this event";
+    public static final String MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT =
+            "The specified event does not contain this vendor";
+    public static final String MESSAGE_EVENT_DOES_NOT_CONTAIN_VENDOR =
+            "The specified vendor is not assigned to this Event";
+    public static final String MESSAGE_VENDOR_ALREADY_ASSIGNED = "The specified event already contains this vendor";
+    public static final String MESSAGE_EVENT_ALREADY_CONTAINS_VENDOR =
+            "The specified vendor is already assigned to this Event";
     public static final String MESSAGE_NO_VENDORS_FOUND = "No vendors found!";
     public static final String MESSAGE_NO_EVENTS_FOUND = "No events found!";
     public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendors listed!";
