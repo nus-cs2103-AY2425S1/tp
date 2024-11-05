@@ -290,7 +290,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
 | `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -434,8 +433,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User enters new command.
 * Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -617,4 +614,3 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
