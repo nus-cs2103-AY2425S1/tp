@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Address.EMPTY_ADDRESS;
 import static seedu.address.model.person.Student.STUDENT_TYPE;
 import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 
@@ -72,6 +73,11 @@ public class PersonCard extends UiPart<Region> {
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + student.getPhone().value);
         address.setText("📍 " + student.getAddress().value);
+
+        if (student.getAddress().value.equals(EMPTY_ADDRESS)) {
+            address.setStyle("-fx-text-fill: #BEBEBE;");
+        }
+
         email.setText("📨 " + student.getEmail().value);
         String formattedSubjects = String.join(" • ", student.getSubjects().stream()
             .map(subject -> subject.subjectName)
@@ -104,6 +110,11 @@ public class PersonCard extends UiPart<Region> {
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + teacher.getPhone().value);
         address.setText("📍 " + teacher.getAddress().value);
+
+        if (teacher.getAddress().value.equals(EMPTY_ADDRESS)) {
+            address.setStyle("-fx-text-fill: #BEBEBE");
+        }
+
         email.setText("📨 " + teacher.getEmail().value);
         String formattedSubjects = String.join(" • ", teacher.getSubjects().stream()
             .map(subject -> subject.subjectName)
