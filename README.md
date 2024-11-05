@@ -10,7 +10,7 @@
   * Example usages:
     * A doctor can track patient information, medical history, and contact details efficiently.
     * Doctors can schedule, update, and delete patient appointments.
-    * Manages and tracks patients' medical conditions and **allergies** to enhance patient safety.
+    * Manages and tracks patients' medical conditions and allergies to enhance patient safety.
 
 * Key features include:
   * **Add, edit, or delete patient details** such as name, NRIC, gender, contact information, and medical records.
