@@ -8,6 +8,8 @@ import java.util.Collections;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 /**
  * Lists all the commands entered by user from the start of app launch.
  */
@@ -30,3 +32,4 @@ public class HistoryCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, String.join("\n", previousCommands)));
     }
 }
+//@@author
