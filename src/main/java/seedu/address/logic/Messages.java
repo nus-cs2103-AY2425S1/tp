@@ -77,7 +77,7 @@ public class Messages {
                 .append("; Amount: ")
                 .append(transaction.getAmount())
                 .append("; Other party: ")
-                .append(transaction.getOtherParty())
+                .append(String.format(".2f",transaction.getOtherParty()))
                 .append("; Date: ")
                 .append(transaction.getDate().format(DateTimeUtil.DEFAULT_DATE_FORMATTER));
 

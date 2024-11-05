@@ -57,7 +57,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.transactions = transactions;
+        this.transactions = new ArrayList<>(transactions);
         this.balance = transactions.stream().map(Transaction::getAmount).reduce(0, Integer::sum);
     }
 

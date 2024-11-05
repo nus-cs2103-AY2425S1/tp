@@ -12,14 +12,14 @@ import seedu.address.logic.Messages;
 public class Transaction {
 
     private final String description;
-    private final int amount;
+    private final double amount;
     private final String otherParty;
     private final LocalDate date;
 
     /**
      * Every field must be present and not null.
      */
-    public Transaction(String description, int amount, String otherParty, LocalDate date) {
+    public Transaction(String description, double amount, String otherParty, LocalDate date) {
         requireAllNonNull(description, amount, otherParty, date);
         this.description = description;
         this.amount = amount;
@@ -30,7 +30,7 @@ public class Transaction {
     public String getDescription() {
         return description;
     }
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
