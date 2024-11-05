@@ -271,17 +271,17 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 ## Command summary
 
-| Action             | Format                                                                                             | Example                                                                                     |
-|--------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| **Create Client**  | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`                                              | `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`                       |
-| **Create Vendor**  | `add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]`                                    | `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget` |
-| **Create Event**   | `add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]` | `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`                    |
-| **Clear**          | `clear`                                                                                            | `clear`                                                                                     |
-| **Delete**         | `delete INDEX`                                                  | `delete 1`                                                                                  |
-| **List Clients**  | `list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]`             | `list -c n/Jane`                                                                            |
-| **List Vendors**  | `list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]` | `list -v s/catering`                                                                        |
-| **List Events**   | `list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]`                                     | `list -e des/wedding`                                                                       |
-| **List Contacts** | `list`                                                                                      | `list`                                                                                      |
-| **Edit by Index** | `edit INDEX [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`               | `edit 1 p/91234567`                                                                         |
-| **Edit by ID**    | `edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`               | `edit id/0 p/91234567 e/johndoe@example.com`                                                |
-| **Help**          | `help`                                                                                      | `help`                                                                                      |
+| Action            | Format                                                                                             | Example                                                                                     |
+|-------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Create Client** | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`                                              | `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`                       |
+| **Create Vendor** | `add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]`                                    | `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget` |
+| **Create Event**  | `add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]` | `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`                    |
+| **Clear**         | `clear`                                                                                            | `clear`                                                                                     |
+| **Delete**        | `delete INDEX`                                                                                     | `delete 1`                                                                                  |
+| **List Clients**  | `list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]`                    | `list -c n/Jane`                                                                            |
+| **List Vendors**  | `list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]`        | `list -v s/catering`                                                                        |
+| **List Events**   | `list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]`                                            | `list -e des/wedding`                                                                       |
+| **List Contacts** | `list`                                                                                             | `list`                                                                                      |
+| **Edit by Index** | `edit INDEX [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`                      | `edit 1 p/91234567`                                                                         |
+| **Edit by ID**    | `edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`                      | `edit id/0 p/91234567 e/johndoe@example.com`                                                |
+| **Help**          | `help`                                                                                             | `help`                                                                                      |
