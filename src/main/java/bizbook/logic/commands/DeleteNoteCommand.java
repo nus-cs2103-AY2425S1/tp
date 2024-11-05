@@ -22,7 +22,7 @@ public class DeleteNoteCommand extends Command {
     public static final String COMMAND_WORD = "deletenote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Delete the note of the person identified "
+            + ": Deletes the note of the person identified "
             + "by the index number used in the person listing and the index of the note.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "i/[NOTE_INDEX]\n"

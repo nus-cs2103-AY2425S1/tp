@@ -21,7 +21,7 @@ public class EditNoteCommand extends Command {
     public static final String COMMAND_WORD = "editnote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edit the note of the person identified "
+            + ": Edits the note of the person identified "
             + "by the person index number used on the left display panel. "
             + "The note will replace the currently stored note at the specified index.\n"
             + "Parameters: INDEX i/[NOTE_INDEX] n/[NOTE]\n"
