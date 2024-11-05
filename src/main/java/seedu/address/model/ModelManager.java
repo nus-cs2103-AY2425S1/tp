@@ -130,6 +130,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        appointmentBook.removeAppointmentsForPerson(target);
         addressBook.removePerson(target);
     }
 

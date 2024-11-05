@@ -222,82 +222,37 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ## **Implementation of main features**
 
-### Add person feature
+## **Implementation of Entity Commands**
+Entity commands include `add`, `delete`, `find`, `clear` commands.
+So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Edit person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Delete person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Find person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### List person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Clear person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Add appointment feature
-
-#### Design considerations
-
-<br>
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
 
 
-### Edit appointment feature
+**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
 
-#### Implementation
 
-#### Design considerations
+**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`. This may be different based on the entity type as commands like `addPersonCommand` and `addApptCommand` have a different set of arguments the user can provide. 
 
-<br>
 
-### Delete appointment feature
+**Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 
-#### Implementation
+**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
-#### Design considerations
+<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
+- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand` because we have two entities called person and appointment on which operations can be performed.
 
-<br>
 
-### Find appointment feature
+#### Find Appointment Command
+**Aspect: How to show find appointment.**
 
-#### Implementation
+- **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+  - Pros: Fast and easy to find by date and name
+  - Cons: Confusing syntax from user's perspective
 
-#### Design considerations
+- **Alternative 2**: Create different find commands, find by date, find by name etc.
+  - Pros: Much easy in terms of user experience
+  - Cons: Harder to implement as more code needs to be written.
 
 <br>
 
@@ -305,15 +260,25 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Implementation
 
+**Aspect**: How to show list 
+
+- **Alternative 1 (Current choice)**: Print them out individually on the listpanel
+  - Pros: Easy to scroll through
+  - Cons: Might look cluttered to some users
+
+
 #### Design considerations
 
 <br>
 
 ### Clear appointment feature
 
-#### Implementation
 
 #### Design considerations
+
+**Aspect**: How to show list
+
+- **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
 
 <br>
 
