@@ -1,12 +1,11 @@
 package seedu.edulog.logic.parser;
 
+import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.edulog.logic.commands.PaidRevenueCommand;
 import seedu.edulog.logic.commands.RevenueCommand;
-import seedu.edulog.logic.commands.UnmarkCommand;
 import seedu.edulog.logic.commands.UnpaidRevenueCommand;
 import seedu.edulog.logic.parser.exceptions.ParseException;
-
-import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguements so RevenueCommand knows whether to show total paid or unpaid

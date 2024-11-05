@@ -1,11 +1,7 @@
 package seedu.edulog.logic.commands;
 
-import seedu.edulog.commons.util.ToStringBuilder;
 import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.edulog.model.Model.*;
 
 /**
  * Calculate total revenue earned
