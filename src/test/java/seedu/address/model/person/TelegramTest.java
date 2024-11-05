@@ -25,15 +25,31 @@ public class TelegramTest {
         assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
         // invalid telegrams
-        assertFalse(Telegram.isValidTelegram("")); // empty string
-        assertFalse(Telegram.isValidTelegram(" ")); // spaces only
+        assertFalse(Telegram.isValidTelegram("")); // EP: empty string
+        assertFalse(Telegram.isValidTelegram(" ")); // EP: space only
+        assertFalse(Telegram.isValidTelegram("*")); // EP: non-alphanumeric or '_' character
         assertFalse(Telegram.isValidTelegram("two words")); // whitespace
-        assertFalse(Telegram.isValidTelegram("*")); // not alphanumeric or '_' character
 
         // valid telegrams
-        assertTrue(Telegram.isValidTelegram("bruceWayne")); // alphabetical characters
-        assertTrue(Telegram.isValidTelegram("a2b34C5")); // numeric characters
+        assertTrue(Telegram.isValidTelegram("bruceWayne")); // EP: alphabetical characters
+        assertTrue(Telegram.isValidTelegram("12345")); // EP: only numeric characters
+        assertTrue(Telegram.isValidTelegram("a2b34C5")); // alphabetical + numeric characters
         assertTrue(Telegram.isValidTelegram("_test")); // '_' character
+    }
+
+    @Test
+    public void isValidTelegramLength() {
+
+        // invalid telegram lengths
+        assertFalse(Telegram.isValidTelegramLength("")); // 0 length string
+        assertFalse(Telegram.isValidTelegramLength("abcd")); // EP: < 5 length
+        assertFalse(Telegram.isValidTelegramLength("abcabcabcabcabcabcabcabcabcabcabc")); // EP: > 32 length
+
+
+        // valid telegram lengths
+        assertTrue(Telegram.isValidTelegramLength("bruceWayne")); // EP: 5 <= length <= 32
+        assertTrue(Telegram.isValidTelegramLength("abcde")); // Boundary: 5 length
+        assertTrue(Telegram.isValidTelegramLength("abcabcabcabcabcabcabcabcabcabcab")); // Boundary: 32 length
     }
 
     @Test

@@ -54,8 +54,8 @@ public class TelegramContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withTelegram("melinda").build()));
 
         // Mixed-case keywords
-        predicate = new TelegramContainsKeywordsPredicate(Arrays.asList("AbCd", "QqQQ"));
-        assertTrue(predicate.test(new PersonBuilder().withTelegram("abcd").build()));
+        predicate = new TelegramContainsKeywordsPredicate(Arrays.asList("AbCdE", "QqQQ"));
+        assertTrue(predicate.test(new PersonBuilder().withTelegram("abcde").build()));
     }
 
     @Test
@@ -65,12 +65,12 @@ public class TelegramContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withTelegram("alisa").build()));
 
         // Non-matching keyword
-        predicate = new TelegramContainsKeywordsPredicate(Arrays.asList("ben"));
-        assertFalse(predicate.test(new PersonBuilder().withTelegram("boy").build()));
+        predicate = new TelegramContainsKeywordsPredicate(Arrays.asList("ben10"));
+        assertFalse(predicate.test(new PersonBuilder().withTelegram("boy12").build()));
 
         // Keywords match name, phone and role, but does not match telegram
-        predicate = new TelegramContainsKeywordsPredicate(Arrays.asList("Alice", "12345678", "alice", "member"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
+        predicate = new TelegramContainsKeywordsPredicate(Arrays.asList("Alice", "92345678", "alice", "member"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("92345678")
                 .withTelegram("alicePauline").withRoles("member").build()));
     }
 

@@ -13,11 +13,20 @@ public class Telegram {
             "Telegram handle must only have characters that are alphanumeric "
                     + "or ‘_’, and cannot be empty";
 
+    public static final String LENGTH_CONSTRAINTS =
+            "Telegram handle must be between 5 to 32 characters";
+
     /*
      * The telegram handle cannot have any whitespaces or be empty, and must
      * only contain characters that are alphanumeric or '_'
      */
     public static final String VALIDATION_REGEX = "^(?=\\S)[a-zA-Z0-9_]+$";
+
+    /*
+     * The telegram handle must be between 5-32 characters in length
+     */
+    public static final int VALIDATION_LENGTH_MIN = 5;
+    public static final int VALIDATION_LENGTH_MAX = 32;
 
     public final String value;
 
@@ -29,14 +38,22 @@ public class Telegram {
     public Telegram(String telegram) {
         requireNonNull(telegram);
         checkArgument(isValidTelegram(telegram), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTelegramLength(telegram), LENGTH_CONSTRAINTS);
         value = telegram;
     }
 
     /**
-     * Returns true if a given string is a valid telegram username.
+     * Returns true if a given string is a valid telegram handle character-wise.
      */
     public static boolean isValidTelegram(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid telegram handle length-wise.
+     */
+    public static boolean isValidTelegramLength(String test) {
+        return test.length() >= VALIDATION_LENGTH_MIN && test.length() <= VALIDATION_LENGTH_MAX;
     }
 
     @Override
