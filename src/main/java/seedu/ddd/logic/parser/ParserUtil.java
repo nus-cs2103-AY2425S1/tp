@@ -1,6 +1,7 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.Messages.getErrorMessageForPrefix;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
@@ -20,6 +21,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sun.jdi.connect.Connector;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
@@ -295,5 +297,15 @@ public class ParserUtil {
         } else {
             // All other cases are valid
         }
+    }
+
+    public static String verifyNoEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String message)
+            throws ParseException {
+        String trimmedArgs = argMultimap.getValue(prefix).get();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, message));
+        }
+        return trimmedArgs;
     }
 }
