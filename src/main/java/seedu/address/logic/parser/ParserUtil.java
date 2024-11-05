@@ -146,6 +146,7 @@ public class ParserUtil {
         return new Experience(trimmedExperience);
     }
 
+
     /**
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
@@ -190,6 +191,7 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
+
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
