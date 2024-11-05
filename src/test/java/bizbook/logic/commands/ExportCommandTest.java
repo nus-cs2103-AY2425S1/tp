@@ -16,9 +16,6 @@ import org.junit.jupiter.api.Test;
 import bizbook.model.Model;
 import bizbook.model.ModelManager;
 
-/**
- * Contains integration tests (interaction with the Model) for {@code ExportCommand}.
- */
 public class ExportCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
@@ -38,8 +35,6 @@ public class ExportCommandTest {
         model.getFilteredPersonList().clear();
         expectedModel.getFilteredPersonList().clear();
 
-        CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, FILE_TYPE_CSV),
-                false, false);
         assertCommandFailure(new ExportCommand(FILE_TYPE_CSV), model, MESSAGE_EMPTY_ADDRESS_BOOK);
     }
 

@@ -4,6 +4,7 @@ import static bizbook.logic.commands.exporter.Exporter.MESSAGE_EMPTY_ADDRESS_BOO
 import static bizbook.testutil.TypicalPersons.AMY;
 import static bizbook.testutil.TypicalPersons.BOB;
 import static bizbook.testutil.TypicalPersons.CHARLIE;
+import static bizbook.testutil.TypicalPersons.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,8 @@ import bizbook.logic.commands.exporter.exceptions.InvalidAddressBookException;
 import bizbook.model.AddressBook;
 import bizbook.model.UserPrefs;
 import bizbook.testutil.TestUtil;
+import ezvcard.Ezvcard;
+import ezvcard.VCard;
 
 public class VcfExporterTest {
     private static final String CHARLIE_VCF_FILE_PATH = "VcfExporterTest/charlie.vcf";
@@ -97,6 +101,19 @@ public class VcfExporterTest {
             assertEquals(expectedValue, actualValue);
         } catch (IOException ie) {
             fail(ie);
+        }
+    }
+
+    @Test
+    public void export_multiplePeople_isValidVcf() throws IOException, InvalidAddressBookException {
+        vcfExporter.exportAddressBook(getTypicalAddressBook());
+
+        Path exportPath = vcfExporter.getExportPath();
+        String contents = FileUtil.readFromFile(exportPath);
+        List<VCard> vCards = Ezvcard.parse(contents).all();
+
+        for (VCard vCard : vCards) {
+            assertTrue(vCard.validate(vCard.getVersion()).isEmpty());
         }
     }
 }

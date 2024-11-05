@@ -12,46 +12,41 @@ import bizbook.model.Model;
 import bizbook.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Unpins a person in pinned list.
  */
-public class DeleteCommand extends Command {
-
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+public class UnpinCommand extends Command {
+    public static final String COMMAND_WORD = "unpin";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpins the person identified by the index number.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_UNPIN_PERSON_SUCCESS = "Unpinned Person: %1$s";
 
     private final Index targetIndex;
 
     /**
-     * Creates a DeleteCommand to delete the specified person.
+     * Creates a Unpin Command to unpin the specified person.
      *
-     * @param targetIndex of the person in the filtered person list to be deleted
+     * @param targetIndex of the person in the pinned person list.
      */
-    public DeleteCommand(Index targetIndex) {
+    public UnpinCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getPinnedPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
+        Person personToUnpin = lastShownList.get(targetIndex.getZeroBased());
 
-        model.updateFocusPerson(personToDelete, null);
-
-        CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.formatShort(personToDelete)), false, false);
+        model.unpinPerson(personToUnpin);
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_UNPIN_PERSON_SUCCESS,
+                Messages.formatShort(personToUnpin)), false, false);
         return commandResult;
     }
 
@@ -62,12 +57,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof UnpinCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        UnpinCommand otherUnpinCommand = (UnpinCommand) other;
+        return targetIndex.equals(otherUnpinCommand.targetIndex);
     }
 
     @Override

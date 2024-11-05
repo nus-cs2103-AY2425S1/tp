@@ -42,7 +42,7 @@ public class ViewCommand extends Command {
         }
 
         Person person = personList.get(targetIndex.getZeroBased());
-        model.getFocusedPerson().set(person);
+        model.setFocusPerson(person);
 
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()), false, false);
     }

@@ -1,7 +1,6 @@
 package bizbook.logic.parser;
 
 import static bizbook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static bizbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static bizbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static bizbook.testutil.TypicalNotes.VALID_NOTE;
 
@@ -11,8 +10,6 @@ import bizbook.logic.commands.EditNotesCommand;
 
 
 public class EditNotesCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditNotesCommand.MESSAGE_USAGE);
