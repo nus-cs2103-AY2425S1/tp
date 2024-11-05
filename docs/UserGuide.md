@@ -123,7 +123,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip:** A contact or delivery can have any number of tags (including 0)
+**Tip:** A contact or delivery can have as many tags as you like — even none!
 </box>
 
 ### Listing all contacts : `list`
