@@ -174,7 +174,8 @@ public class FindCommandTest {
         TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("friends");
 
         FindCommand command = new FindCommand(namePredicate, phonePredicate, addressPredicate, tagPredicate);
-        expectedModel.updateFilteredPersonList(namePredicate.and(phonePredicate).and(addressPredicate).and(tagPredicate));
+        expectedModel.updateFilteredPersonList(namePredicate.and(phonePredicate)
+                .and(addressPredicate).and(tagPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
