@@ -565,7 +565,7 @@ Assuming John Doe has `Ex01` assignment with a score of `5`.
 `removeGrade n/John Doe asgn/Ex01` will remove the `Ex01` assignment from contact John Doe.
 
 Calling `removeGrade n/John Doe asgn/Ex01` again will throw an error since the assignment has already been removed.
-To add a new assignment, refer to `addGrade` command above.
+To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
 
 </box>
 
