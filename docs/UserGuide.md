@@ -45,7 +45,8 @@ The commands follow the general format of `COMMAND INDEX PREFIX/...` .
 * `PREFIX` specifies the type of data we want to alter.
     * Refer to the prefix table below for the usage of each prefix.
 
-<br></br>
+<br>
+
 #### Example
 ![GeneralCommandFormatExample](images/GeneralCommandFormatExample.png)
 
@@ -146,11 +147,102 @@ Invalid usages
 The commands in this section are used to view and retrieve records on the system, such as students, tutorials, and enrollment status.
 
 - [Listing all students](#41-listing-all-students)  
-4.2 Search
+- [Searching students](#42-searching-students)
 
 #### **4.1 Listing all students**
 
 Command: `list`
+
+<br>
+
+#### **4.2 Searching students**
+
+Search for students that match the condition specified by the given prefix.
+
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table-)
+</div>
+
+
+Command:  `find`
+
+Usage: `find [n/NAME] [e/EMAIL] [p/PHONE] [a/ADDRESS] [pay/PAYMENT] [a/ATTENDANCE] [t/TAG] [tut/TUTORIAL_NAME]`
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+1. Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
+2. All searches are case-insensitive.
+3. Search is by partial matching for keyword(s) of prefixes `n/`, `e/`, `p/`, `a/`, `t/`.
+4. Search is by exact matching for keyword(s) of prefix `tut/`.
+
+</div>
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields
+
+* `NAME:` Name of the student to search
+    * Search for multiple keywords is allowed, and students matching at least one keyword will be displayed.
+* `EMAIL:` Email of the student to search
+* `PHONE:` Phone number of the student to search
+* `ADDRESS`: Address of the student to search
+    * Search for multiple keywords is allowed, and students matching at least one keyword will be displayed.
+* `PAYMENT:` Search student based on the payment status (Paid/Unpaid)
+    * If keyword is `true`, it displays all students who has paid.
+    * If keyword is `false`, it displays all students who has not paid.
+* `ATTENDANCE:` Search student based on whether they attended any tutorials within a given period
+    * Keyword must be in the format of `dd/MM/yyyy:dd/MM/yyyy`, first date is the start date and the second date is the end date.
+    * First date must be before the second date.
+* `TAG:` Search based on the tag associated to the student
+    * Allows multiple uses of this prefix together in the command.
+
+* `TUTORIAL_NAME:` Name of the tutorial to search
+    * Search with multiple keywords is allowed, and students matching all keywords will be displayed.
+    * Allows multiple uses of this prefix together in the command.
+
+</div>
+{% endraw %}
+
+
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+Prefixes can be chained to display more specific results. For instance, using `find n/Alex tut/Math t/ADHD` displays all students named “Alex”, in the “Math” tutorial class, and has a tag “ADHD”.
+</div>
+
+
+Example usages
+
+* `find t/ADHD t/scored_A a/Jurong West Ave 5`
+
+* `find p/9123 attend/07/01/2024:07/02/2024 pay/false`
+
+* `find t/ADHD e/a@example.com`
+
+* `find tut/physics tut/math n/Alex Goh`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Invalid usages
+
+* Entering multiple keywords for a prefix that only allows a single keyword
+
+    * *Error Message: At least one of the inputs…*
+
+* Entering only the prefix without providing any keywords
+
+    * *Error Message: Some inputs are missing\! Please…*
+
+* For `a/ATTENDANCE` field, entering the start date after the end date
+
+    * *Error Message: Start date must be before…*
+
+* More format errors, check [here](#12-format-errors).
+
+</div>
+{% endraw %}
 
 ---
 
