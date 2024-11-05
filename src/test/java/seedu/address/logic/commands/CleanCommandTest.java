@@ -4,8 +4,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CleanCommand.MESSAGE_CLEAN_SUCCESS;
-import static seedu.address.logic.commands.CleanCommand.MESSAGE_UNDO_SUCCESS;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -34,7 +33,7 @@ public class CleanCommandTest {
 
     @Test
     public void execute_clean_success() {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_CLEAN_SUCCESS);
+        CommandResult expectedCommandResult = new CommandResult(CleanCommand.MESSAGE_CLEAN_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         List<Person> lastShownList = expectedModel.getFilteredPersonList();
         int listSize = lastShownList.size();
@@ -54,8 +53,28 @@ public class CleanCommandTest {
     }
 
     @Test
+    public void execute_alreadyCleaned_throwsCommandException() {
+        ModelManager testModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Person> lastShownList = testModel.getFilteredPersonList();
+        int listSize = lastShownList.size();
+        for (int i = listSize - 1; i >= 0; i--) {
+            Person p = lastShownList.get(i);
+            Optional<GradYear> graduationYear = p.getGradYear();
+            if (graduationYear.isPresent()) {
+                String year = graduationYear.get().toString();
+                Integer yearValue = Integer.parseInt(year);
+                if (yearValue < Year.now().getValue()) {
+                    testModel.deletePerson(p);
+                }
+            }
+        }
+
+        assertCommandFailure(new CleanCommand(), testModel, CleanCommand.MESSAGE_ALREADY_CLEANED);
+    }
+
+    @Test
     public void undo_commandExecuted_success() throws Exception {
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
+        CommandResult expectedCommandResult = new CommandResult(CleanCommand.MESSAGE_UNDO_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         CleanCommand cleanCommand = new CleanCommand();
         cleanCommand.execute(model);
