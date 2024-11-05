@@ -147,7 +147,7 @@ Examples:
 
 Finds contacts whose names or/and phone numbers or/and address contain any of the given field keywords.
 
-Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
+Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS] [t/TAGKEYWORDS]`
 
 **NOTE:** At least one field MUST be provided
   e.g. `find n/Hans` or `find p/82345678` or `find a/wall street` will work
@@ -158,6 +158,8 @@ Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * If more than one fields are specified, contacts will be matched by multiple fields (i.e. `AND` search).
+* For multiple address or tag keywords, they are separated by "_". e.g `find t/friends_colleague_owes money` or `find a/wall street_michigan`
+* For multiple name or phone keywords, they are separated by " ". e.g `find n/andy ben carl` or `find p/98233211 81212899`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -336,7 +338,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT] [r/REMARK]` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAMEKEYWORD] [p/PHONEKEYWORD] [a/ADDRESSKEYWORD]`<br> e.g., `find n/James Jake a/clementi street_woodlands`
+**Find**   | `find [n/NAMEKEYWORD] [p/PHONEKEYWORD] [a/ADDRESSKEYWORD] [t/TAGKEYWORD]`<br> e.g., `find n/James Jake a/clementi street_woodlands`
 **List**   | `list`
 **View**   | `view INDEX`<br> e.g.,`view 1`
 **Help**   | `help`
