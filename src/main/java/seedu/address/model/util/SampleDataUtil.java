@@ -34,7 +34,8 @@ public class SampleDataUtil {
     public static final Student DAVID = new Student(new Name("David Li"),
             new Phone("91031282"), new Email("lidavid@example.com"),
             getCourseSet("ma1100", "ma2104", "ma2108"));
-    public static final Student IRFAN = new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+    public static final Student IRFAN = new Student(new Name("Irfan Ibrahim"),
+            new Phone("92492021"), new Email("irfan@example.com"),
             getCourseSet("CS3230", "CS3263", "CS3264"));
     public static final Student ROY = new Student(new Name("Roy Balakrishnan"),
             new Phone("92624417"), new Email("royb@example.com"),
@@ -46,34 +47,34 @@ public class SampleDataUtil {
 
     public static Consultation[] getSampleConsultations() {
         return new Consultation[] {
-                new Consultation(new Date("2024-11-02"), new Time("10:00"), List.of(ALEX)),
-                new Consultation(new Date("2024-11-09"), new Time("11:00"), List.of(BERNICE, ROY)),
-                new Consultation(new Date("2024-11-16"), new Time("12:00"), List.of(ALEX, BERNICE, CHARLOTTE)),
-                new Consultation(new Date("2024-11-23"), new Time("13:00"), List.of(DAVID)),
-                new Consultation(new Date("2024-11-30"), new Time("14:00"), List.of(IRFAN, ROY))
+            new Consultation(new Date("2024-11-02"), new Time("10:00"), List.of(ALEX)),
+            new Consultation(new Date("2024-11-09"), new Time("11:00"), List.of(BERNICE, ROY)),
+            new Consultation(new Date("2024-11-16"), new Time("12:00"), List.of(ALEX, BERNICE, CHARLOTTE)),
+            new Consultation(new Date("2024-11-23"), new Time("13:00"), List.of(DAVID)),
+            new Consultation(new Date("2024-11-30"), new Time("14:00"), List.of(IRFAN, ROY))
         };
     }
 
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-                new Lesson(new Date("2024-11-01"), new Time("13:00"), List.of(
-                        new StudentLessonInfo(ALEX, true, 3),
-                        new StudentLessonInfo(BERNICE, true, 3),
-                        new StudentLessonInfo(ROY, false, 0)
-                )),
-                new Lesson(new Date("2024-11-08"), new Time("13:00"), List.of(
-                        new StudentLessonInfo(DAVID, true, 6),
-                        new StudentLessonInfo(IRFAN, true, 4)
-                )),
-                new Lesson(new Date("2024-11-15"), new Time("13:00"), List.of(
-                        new StudentLessonInfo(ALEX, false, 0),
-                        new StudentLessonInfo(IRFAN, false, 0),
-                        new StudentLessonInfo(CHARLOTTE, false, 0)
-                )),
-                new Lesson(new Date("2024-11-22"), new Time("13:00"), List.of(
-                        new StudentLessonInfo(IRFAN, false, 0)
-                )),
-                new Lesson(new Date("2024-11-29"), new Time("13:00"), List.of())
+            new Lesson(new Date("2024-11-01"), new Time("13:00"), List.of(
+                new StudentLessonInfo(ALEX, true, 3),
+                new StudentLessonInfo(BERNICE, true, 3),
+                new StudentLessonInfo(ROY, false, 0)
+            )),
+            new Lesson(new Date("2024-11-08"), new Time("13:00"), List.of(
+                new StudentLessonInfo(DAVID, true, 6),
+                new StudentLessonInfo(IRFAN, true, 4)
+            )),
+            new Lesson(new Date("2024-11-15"), new Time("13:00"), List.of(
+                new StudentLessonInfo(ALEX, false, 0),
+                new StudentLessonInfo(IRFAN, false, 0),
+                new StudentLessonInfo(CHARLOTTE, false, 0)
+            )),
+            new Lesson(new Date("2024-11-22"), new Time("13:00"), List.of(
+                new StudentLessonInfo(IRFAN, false, 0)
+            )),
+            new Lesson(new Date("2024-11-29"), new Time("13:00"), List.of())
         };
     }
 
