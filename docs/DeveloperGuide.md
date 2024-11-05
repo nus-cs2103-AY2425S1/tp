@@ -351,16 +351,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-**Use Case: Delete a Person**
+**Use Case: Delete a Guest**
 
 **MSS**
-1. User requests to delete an entry.
-2. System deletes the entry.
+1. User requests to delete a Guest entry.
+2. System deletes the Guest entry.
 
    Use case ends.
 
 **Extensions**
-* 1a. The provided entry does not exist.
+* 1a. The provided Guest entry does not exist.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
@@ -370,7 +370,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Search and Filter Persons**
+**Use Case: Delete a Vendor**
+
+**MSS**
+1. User requests to delete a Vendor entry.
+2. System deletes the Vendor entry.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The provided Vendor entry does not exist.
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+**Use Case: Find Guests and Vendor with a particular field**
 
 **MSS**
 1. User requests to search for or filter entries (e.g., by category, name, RSVP status).
