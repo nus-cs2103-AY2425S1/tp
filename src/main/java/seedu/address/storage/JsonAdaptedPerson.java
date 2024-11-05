@@ -74,7 +74,7 @@ class JsonAdaptedPerson {
         projectStatus = source.getProjectStatus().toString();
         paymentStatus = source.getPaymentStatus().toString();
         clientStatus = source.getClientStatus().toString();
-        deadline = source.getDeadline().value.format(Deadline.JSON_STORAGE_FORMAT);
+        deadline = source.getDeadline().value.format(Deadline.FORMAT_JSON_STORAGE);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
