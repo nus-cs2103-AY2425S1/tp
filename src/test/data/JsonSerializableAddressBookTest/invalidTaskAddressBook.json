@@ -11,6 +11,7 @@
   "tasks": [
     {
       "description": "",
+      "isComplete": true,
       "patient": {
         "name": "Alice Pauline",
         "phone": "94351253",

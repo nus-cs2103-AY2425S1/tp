@@ -28,7 +28,6 @@ public class JsonSerializableAddressBookTest {
     private static final Path INVALID_TASK_FILE = TEST_DATA_FOLDER.resolve("invalidTaskAddressBook.json");
     private static final Path DUPLICATE_TASK_FILE = TEST_DATA_FOLDER.resolve("duplicateTaskAddressBook.json");
 
-
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
@@ -62,12 +61,13 @@ public class JsonSerializableAddressBookTest {
         AddressBook expectedAddressBook = new AddressBook();
         expectedAddressBook.addPerson(new PersonBuilder(ALICE).build());
         expectedAddressBook.addPerson(new PersonBuilder(BENSON).build());
-        expectedAddressBook.addTask(new Task(new PersonBuilder(ALICE).build(), "Buy medication"));
-        expectedAddressBook.addTask(new Task(new PersonBuilder(BENSON).build(), "Visit doctor"));
+        expectedAddressBook.addTask(new Task(new PersonBuilder(ALICE).build(),
+                "Buy medication", true));
+        expectedAddressBook.addTask(new Task(new PersonBuilder(BENSON).build(),
+                "Visit doctor", false));
 
         assertEquals(expectedAddressBook, addressBookFromFile);
     }
-
 
     @Test
     public void toModelType_invalidTaskFile_throwsIllegalValueException() throws Exception {
@@ -83,5 +83,4 @@ public class JsonSerializableAddressBookTest {
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_TASK,
                 dataFromFile::toModelType);
     }
-
 }
