@@ -97,7 +97,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **Tip:**
 * A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
 involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
-* To make add person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+* To make adding s person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
 
     Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
 

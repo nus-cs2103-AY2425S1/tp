@@ -252,7 +252,7 @@ public class ModelManager implements Model {
                 && filteredWeddings.equals(otherModelManager.filteredWeddings);
     }
 
-    //=========== Person, Wedding and Tag accessors ============================================================
+    //=========== Person, Wedding and Tag related accessors ============================================================
 
     /**
      * Gets a list of weddings whose name matches that of the tags in the set.
