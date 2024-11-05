@@ -64,9 +64,9 @@ public class Messages {
                 .append(" | Client: ")
                 .append(wedding.getClient().getPerson().getName().fullName)
                 .append(" | Date: ")
-                .append(wedding.getDate() == null ? " " : wedding.getDate())
+                .append(wedding.getDate() == null ? "NA" : wedding.getDate())
                 .append(" | Venue: ")
-                .append(wedding.getVenue() == null ? " " : wedding.getVenue());
+                .append(wedding.getVenue() == null ? "NA" : wedding.getVenue());
         return builder.toString();
     }
 
