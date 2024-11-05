@@ -159,6 +159,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_help_alt() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.ALT_COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.ALT_COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);

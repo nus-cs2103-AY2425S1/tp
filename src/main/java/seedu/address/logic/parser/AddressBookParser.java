@@ -79,7 +79,7 @@ public class AddressBookParser {
         case ExitCommand.COMMAND_WORD, ExitCommand.ALT_COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD, HelpCommand.ALT_COMMAND_WORD:
             return new HelpCommand();
 
         case RemarkCommand.COMMAND_WORD:
