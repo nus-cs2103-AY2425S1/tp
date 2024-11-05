@@ -3,7 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_TOTAL_GUEST;
+import static seedu.address.logic.Messages.MESSAGE_TOTAL_VENDOR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGuests.AVA;
 import static seedu.address.testutil.TypicalGuests.BRIAN;
@@ -56,7 +57,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String guestMessage = String.format(MESSAGE_TOTAL_GUEST, 0, 0, 0, 0);
+        String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR, 0);
+        String expectedMessage = FindCommand.MESSAGE_FIND_SUCCESS + guestMessage + vendorMessage;
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -66,7 +69,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String guestMessage = String.format(MESSAGE_TOTAL_GUEST, 3, 1, 1, 1);
+        String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR, 0);
+        String expectedMessage = FindCommand.MESSAGE_FIND_SUCCESS + guestMessage + vendorMessage;
         NameContainsKeywordsPredicate predicate = preparePredicate("Johnson Brian White");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
