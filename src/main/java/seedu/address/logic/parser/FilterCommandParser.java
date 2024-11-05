@@ -32,9 +32,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user enters an invalid prefix
      */
     public FilterCommand parse(String args) throws ParseException {
+        String lowercaseArgs = args.toLowerCase();
         String trimmedArgs = args.trim();
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_RSVP_STATUS, PREFIX_EMAIL,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(lowercaseArgs, PREFIX_TAG, PREFIX_RSVP_STATUS, PREFIX_EMAIL,
                 PREFIX_NAME, PREFIX_PHONE);
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
