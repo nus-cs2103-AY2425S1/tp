@@ -91,18 +91,11 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Jason Smith p/98502457")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete n/ Jason p/ 88502457` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete n/Jason Smith p/98502457` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
-
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("date n/Alex Yeoh d/31/10/2024")` API call as an example.
-
-![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DateCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 
