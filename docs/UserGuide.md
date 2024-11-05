@@ -179,8 +179,8 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-#### Shortcuts: Finding blacklisted/whitelisted clients
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
+**Shortcuts: Finding blacklisted/whitelisted clients**
 <br>
 To find all clients that are blacklisted (with no other parameters), the command `blacklist` can be entered.
 
@@ -231,7 +231,7 @@ Entering `blacklist` on its own without any other parameters will filter and dis
 
 Whitelists a previously-blacklisted client.
 
-_Note: a client is considered to be on the whitelist if their client status is **not** "blacklisted"_
+_Note: a client is considered to be on the whitelist if their client status is **not** "blacklisted"._
 
 Format: `whitelist INDEX cs/NEW_CLIENT_STATUS`
 
@@ -262,7 +262,7 @@ Examples:
 * `sort deadline descending` sorts the client list by project deadline (later dates first).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Clientele+ saves you the hassle of sorting the list every time you open the app, so every time you do a sort, it will save the list
+Clientele+ saves you the hassle of sorting the list every time you open the app. Every time you sort, it will save the list in the sort order specified.
 </div>
 
 ### Archive a Client: `archive`
