@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final EventManager eventManager;
-    private FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredPersons;
 
     private BooleanProperty searchMode = new SimpleBooleanProperty(false);
     private Predicate<Person> lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
