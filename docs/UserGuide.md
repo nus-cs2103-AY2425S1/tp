@@ -18,6 +18,8 @@
     --box-border-color: rgba(255, 130, 21, 0.75);
     --warn-bg-color: rgba(255, 0, 0, 0.2);
     --warn-border-color: rgba(255, 0, 0, 0.4);
+    --info-bg-color: rgba(100, 150, 255, 0.2);
+    --info-border-color: rgba(100, 150, 255, 0.4);
     --border-color: rgb(220, 220, 220);
     --black-color: rgb(0, 0, 0);
   }
@@ -38,6 +40,12 @@
     margin: 16px 0;
     border-radius: 5px;
     border: 2px solid var(--box-border-color);
+  }
+
+  .box-info {
+    background-color: var(--info-bg-color) !important;
+    padding: 16px 32px;
+    border: none;
   }
 
   .box-warn {
@@ -312,7 +320,11 @@
   <br>
   <br>
 
+  <div class="box box-info">
+  
   **Format**: `clear`
+  </div>
+  <br>
 
   <div class="box box-warn" type="warning" seamless>
 
@@ -335,7 +347,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `delete PARAMETER INDEX`
+  </div>
+  <br>
 
   Deletes the potential hire/employee at the specified `INDEX`.
 
@@ -374,7 +391,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `demote INDEX`
+  </div>
+  <br>
 
   `INDEX`: The index number shown in the displayed person list.
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -410,7 +432,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]`
+  </div>
+  <br>
 
   Edits the person at the specified `INDEX`.
 
@@ -448,7 +475,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
+  </div>
+  <br>
 
   <div class="box" type="tip" seamless>
 
@@ -474,7 +506,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `exit`
+  </div>
+  <br>
   </div>
 </div>
 
@@ -492,7 +529,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
+  </div>
+  <br>
 
   `PARAMETER`: 
   * `e` for employees.
@@ -555,9 +597,12 @@
   <br>
   <br>
 
-  ![Ui](images/helpWindow.png)
-
+  <div class="box box-info">
+  
   **Format**: `help`
+  </div>
+
+  ![Ui](images/helpWindow.png)
   </div>
 </div>
 
@@ -575,7 +620,11 @@
   <br>
   <br>
 
+  <div class="box box-info">
+  
   **Format**: `list KEYWORD`
+  </div>
+  <br>
 
   Lists type of persons based on the parameter given.
 
@@ -605,7 +654,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
+  </div>
+  <br>
 
   <div class="box" type="tip" seamless>
 
@@ -631,7 +685,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `promote INDEX CONTRACT_END_DATE`
+  </div>
+  <br>
 
   `INDEX`: The index number shown in the displayed person list.
 
@@ -671,7 +730,12 @@
   <br>
   <br>
 
+
+  <div class="box box-info">
+  
   **Format**: `sort FIELD [ORDER]`
+  </div>
+  <br>
 
   Sorts the list by the given parameter in the given order.
 
