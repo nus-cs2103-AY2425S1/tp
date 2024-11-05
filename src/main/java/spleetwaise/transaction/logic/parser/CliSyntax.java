@@ -13,4 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("date/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("cat/");
     public static final Prefix PREFIX_STATUS = new Prefix("status/");
+    public static final Prefix PREFIX_AMOUNT_SIGN = new Prefix("amtsign/");
 }

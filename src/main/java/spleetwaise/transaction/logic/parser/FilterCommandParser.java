@@ -3,6 +3,7 @@ package spleetwaise.transaction.logic.parser;
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT_SIGN;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -21,6 +22,7 @@ import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
@@ -53,12 +55,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS);
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS)
+                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
+                        PREFIX_AMOUNT_SIGN);
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
+                PREFIX_AMOUNT_SIGN)
                 && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
+                PREFIX_AMOUNT_SIGN);
 
         ArrayList<Predicate<Transaction>> filterSubPredicates = new ArrayList<>();
 
@@ -86,6 +91,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
             filterSubPredicates.add(new StatusFilterPredicate(status));
+        }
+
+        if (argMultimap.getValue(PREFIX_AMOUNT_SIGN).isPresent()) {
+            AmountSignFilterPredicate amtSignPred = ParserUtil.parseAmountSign(
+                    argMultimap.getValue(PREFIX_AMOUNT_SIGN).get());
+            filterSubPredicates.add(amtSignPred);
         }
 
         assert !filterSubPredicates.isEmpty();
