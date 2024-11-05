@@ -40,9 +40,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_AGE, PREFIX_SEX, PREFIX_APPOINTMENT, PREFIX_TAG);
 
         Name name;
+        String nameStr = argMultimap.getPreamble();
 
         try {
-            name = ParserUtil.parseName(argMultimap.getPreamble());
+            name = ParserUtil.parseName(nameStr);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -74,10 +75,6 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         parseAppointmentsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT))
                 .ifPresent(editPersonDescriptor::setAppointments);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
 
         return new EditCommand(name, editPersonDescriptor);
     }

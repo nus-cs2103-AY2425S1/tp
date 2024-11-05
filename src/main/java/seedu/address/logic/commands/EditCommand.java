@@ -78,11 +78,13 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
         if (!model.hasName(name)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToEdit = lastShownList.stream()
                 .filter(person -> person.getName().equals(name))
