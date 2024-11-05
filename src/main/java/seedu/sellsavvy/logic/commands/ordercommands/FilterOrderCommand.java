@@ -20,6 +20,7 @@ import seedu.sellsavvy.model.person.Person;
 public class FilterOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "filterorder";
+    public static final String COMMAND_ALIAS = "filtero";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the displayed order list by"
             + " order status (case-insensitive) and displays them as a list with index numbers.\n"

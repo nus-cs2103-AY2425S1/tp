@@ -22,6 +22,7 @@ import seedu.sellsavvy.model.order.OrderList;
 public class DeleteOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteorder";
+    public static final String COMMAND_ALIAS = "deleteo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes an order identified by the index number used in the displayed order list.\n"
