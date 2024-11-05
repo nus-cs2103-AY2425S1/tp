@@ -9,14 +9,13 @@ import static seedu.eventtory.commons.util.AppUtil.checkArgument;
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names cannot contain '/' and should not be blank";
+            "Names must start with an alphanumeric character and must not contain '/'.";
 
     /*
      * The first character of a name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
-     * Forward slashes are also not allowed as they conflict with command syntax.
      */
-    public static final String VALIDATION_REGEX = "^[^\\s/][^/]*$";
+    public static final String VALIDATION_REGEX = "^\\p{Alnum}[^/]*$";
 
     public final String fullName;
 

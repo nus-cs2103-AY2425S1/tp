@@ -31,6 +31,7 @@ public class NameTest {
         assertFalse(Name.isValidName("/testName")); // with forward slash at start
         assertFalse(Name.isValidName("test/Name")); // with forward slash in middle
         assertFalse(Name.isValidName("testName/")); // with forward slash at end
+        assertFalse(Name.isValidName("{:><;['.?\"}")); // special characters only
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -39,7 +40,9 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
-        assertTrue(Name.isValidName("{:><;['.?\"}")); // special characters (Excluding '/') only
+
+        // special characters (Excluding '/') with leading alphanumeric character
+        assertTrue(Name.isValidName("a{:><;['.?\"}"));
     }
 
     @Test
