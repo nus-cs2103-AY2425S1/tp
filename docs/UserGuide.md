@@ -70,9 +70,9 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Listing address book records: `list`
+### Listing ClientGrid records: `list`
 
-Shows a list of all existing clients (i.e. buyers and sellers), properties, and meetings in the address book.
+Shows a list of all existing buyers, sellers, clients (i.e. buyers and sellers), properties, and meetings in the address book.
 
 Format: `list k/KEY`
 
