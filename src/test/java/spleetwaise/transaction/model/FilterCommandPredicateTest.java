@@ -72,14 +72,23 @@ public class FilterCommandPredicateTest {
     public void equals_samePredicate_returnsTrue() {
         ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
         subPredicates.add(testPersonPred);
+        subPredicates.add(testAmountPred);
         FilterCommandPredicate pred1 = new FilterCommandPredicate(subPredicates);
 
         ArrayList<Predicate<Transaction>> subPredicates2 = new ArrayList<>();
         subPredicates2.add(testPersonPred);
+        subPredicates2.add(testAmountPred);
         FilterCommandPredicate pred2 = new FilterCommandPredicate(subPredicates2);
+
+        // Test different ordering of predicates
+        ArrayList<Predicate<Transaction>> subPredicates3 = new ArrayList<>();
+        subPredicates3.add(testAmountPred);
+        subPredicates3.add(testPersonPred);
+        FilterCommandPredicate pred3 = new FilterCommandPredicate(subPredicates3);
 
         assertEquals(pred1, pred1);
         assertEquals(pred1, pred2);
+        assertEquals(pred1, pred3);
     }
 
     @Test

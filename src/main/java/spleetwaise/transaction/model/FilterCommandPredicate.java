@@ -46,7 +46,8 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
             return false;
         }
 
-        return filterSubPredicates.equals(otherFilterCommandPredicate.filterSubPredicates);
+        return filterSubPredicates.containsAll(otherFilterCommandPredicate.filterSubPredicates)
+                && otherFilterCommandPredicate.filterSubPredicates.containsAll(filterSubPredicates);
     }
 
     @Override
