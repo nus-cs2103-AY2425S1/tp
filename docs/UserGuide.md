@@ -103,7 +103,8 @@ Commands for creating, updating, and deleting buyers and sellers.
     NAME is case-insensitive: 
     `buyer n/Bob` = `buyer n/BOB` = `buyer n/bOb` _(Not exhaustive)_
   
-    If a buyer/seller with the same name already exists, the equivalent commands above cannot be carried out
+    Thus, if a buyer/seller with the same name already exists, the commands above cannot be executed
+    as they result in a duplicate buyer created
     </div>
     <br>
 
@@ -171,6 +172,15 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
       >
       > ---
+
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `seller n/Bob` = `seller n/BOB` = `seller n/bOb` _(Not exhaustive)_
+
+    If a buyer/seller with the same name already exists, the equivalent commands above cannot be carried out
+    </div>
+    <br>
 
     - **Failed Execution**
       > ---
@@ -242,6 +252,22 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > ---
 
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `find Bob` = `find BOB` = `find bOb` _(Not exhaustive)_
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `find Wen Xuan` != `find WenXuan`
+
+    First command finds names with `wen` OR `xuan`
+    Second command finds names with `wenxuan`
+    </div> 
+    <br>    
+
     - **Failed Execution:**
       > ---
       >
@@ -283,6 +309,19 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
       >
       > ---
+
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `editclient Bob` = `editclient BOB` = `editclient bOb` _(Not exhaustive)_
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `editclient Wen Xuan` != `editclient WenXuan`
+    </div> 
+    <br> 
 
     - **Failed Execution:**
       > ---
@@ -335,9 +374,19 @@ Commands for creating, updating, and deleting buyers and sellers.
     <div class="note" markdown="span">
     NAME is case-insensitive: 
     `delete Bob` = `delete BOB` = `delete bOb` _(Not exhaustive)_
+  
+    Thus, these delete commands will delete the same `Bob` profile
     </div>
     <br>
-      
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `delete Wen Xuan` != `delete WenXuan`
+    
+    These commands will delete different client profiles 
+    </div> 
+    <br>
+  
     - **Failed Execution:**
       > ---
       > **Use Case #1**: No name found
@@ -406,7 +455,24 @@ Commands for managing appointments between user and clients.
       > ![bob_apt_2](images/bob_apt_2.png)
       > 
       > ---
-      
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `apt Bob` = `apt BOB` = `apt bOb` _(Not exhaustive)_
+
+    Thus, these commands will set an appointment for the same `Bob` profile
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `apt Wen Xuan` != `apt WenXuan`
+    
+    These commands will set appointments for different client profiles 
+    </div> 
+    <br>
+  
     - **Failed Execution:**
       > ---
       > **Use Case #1**: Incorrect `DATE` format 
@@ -430,7 +496,7 @@ Commands for managing appointments between user and clients.
       > ---
 
 - #### Delete Appointment
-    - **Format:** `delapt <NAME>`
+    - **Format:** `delapt NAME`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
@@ -443,27 +509,34 @@ Commands for managing appointments between user and clients.
       > ![bobdeletedappt](images/bob_del_apt.png)
       > 
       > ---
-      
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `delapt Bob` = `delapt BOB` = `delapt bOb` _(Not exhaustive)_
+
+    Thus, these commands will delete the appointment for the same `Bob` profile
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `delapt Wen Xuan` != `delapt WenXuan`
+    
+    These commands will delete appointments for different client profiles 
+    </div> 
+    <br>
+
     - **Failed Execution:**
       > ---
       > **Use Case**: Attempting to delete an appointment from a non-existent client
       >
-      > **Input**: `delapt Bob7777`
+      > **Input**: `delapt nonExistentClient`
       >
       > **Output**: Please enter an existing client name!
       >
       > ---
-    
-    <br>
-    <div class="note" markdown="span">
-    If you suggest a name that differs from an existing client by at most 3 letters, 
-    the console will suggest to input the existing client instead!
-    <br>  
-    ![levershtein](images/levershtein_distance.png)
-    <br>
-    </div>
-    <br>
-
+      
 ---
 
 ### **3. Listing Management**
@@ -664,7 +737,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **User Error #1**: Listing not found
       >
-      > **Input**: removelistingbuyers rc44444 buyer/alex yeoh
+      > **Input**: `removelistingbuyers rc44444 buyer/alex yeoh`
       >
       > **Output**: The specified listing name does not exist.
       > 
