@@ -142,6 +142,13 @@ public class ModelManager implements Model {
         requireAllNonNull(person, event);
         addressBook.linkPersonToEvent(person, event);
     }
+
+    @Override
+    public void unlinkPersonFromEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.unlinkPersonFromEvent(person, event);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
