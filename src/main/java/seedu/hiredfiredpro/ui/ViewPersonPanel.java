@@ -73,19 +73,18 @@ public class ViewPersonPanel extends UiPart<Region> {
         Set<Tag> tagsSet = person.getTags();
         StringBuilder tagsText = new StringBuilder();
 
-        if (tagsSet.isEmpty()) {
-            tagsText.append("None");
-        } else {
-            for (Tag tag : tagsSet) {
-                if (!tag.equals(Person.DEFAULT_TAG_PENDING) & !tag.equals(Person.TAG_HIRED)
-                        & !tag.equals(Person.TAG_REJECTED)) {
-                    tagsText.append(tag.tagName).append(", ");
-                }
-            }
-            if (!tagsText.isEmpty()) {
-                tagsText.setLength(tagsText.length() - 2);
+        for (Tag tag : tagsSet) {
+            if (!tag.equals(Person.DEFAULT_TAG_PENDING) & !tag.equals(Person.TAG_HIRED)
+                    & !tag.equals(Person.TAG_REJECTED)) {
+                tagsText.append(tag.tagName).append(", ");
             }
         }
+        if (!tagsText.isEmpty()) {
+            tagsText.setLength(tagsText.length() - 2);
+        } else {
+            tagsText.append("None");
+        }
+
         tags.setText("Tags: " + tagsText.toString());
 
         if (tagsSet.contains(Person.DEFAULT_TAG_PENDING)) {
