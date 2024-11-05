@@ -47,7 +47,8 @@ public class Name {
         }
 
         return otherName != null
-                && this.fullName.equalsIgnoreCase(removeExtraSpaces(otherName.fullName));
+                && removeExtraSpaces(this.fullName)
+                    .equalsIgnoreCase(removeExtraSpaces(otherName.fullName));
     }
 
     /**

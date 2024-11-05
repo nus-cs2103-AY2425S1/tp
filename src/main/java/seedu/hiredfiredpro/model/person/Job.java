@@ -48,7 +48,8 @@ public class Job {
         }
 
         return otherJob != null
-                && this.jobName.equalsIgnoreCase(removeExtraSpaces(otherJob.jobName));
+                && removeExtraSpaces(this.jobName)
+                    .equalsIgnoreCase(removeExtraSpaces(otherJob.jobName));
     }
 
     /**
