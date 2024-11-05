@@ -16,7 +16,6 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person cannot be found in the clientHub \n"
@@ -41,6 +40,25 @@ public class Messages {
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
+
+    /**
+     * Returns an overview message of the number of persons listed.
+     * The message will use the singular form "person" if the count is 1,
+     * and the plural form "persons" otherwise.
+     *
+     * @param count The number of persons listed.
+     * @return A formatted string with the count and the correct singular or plural term.
+     */
+    public static String getMessagePersonsListedOverview(int count) {
+        if (count == 0) {
+            return "0 person listed!";
+        }
+        if (count == 1) {
+            return "1 person listed!";
+        }
+        return String.format("%1$d persons listed!", count);
+    }
+
 
     /**
      * Formats the {@code person} for display to the user.
