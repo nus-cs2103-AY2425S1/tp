@@ -31,7 +31,7 @@ public class PasswordPromptDialog {
      */
     public static boolean display(Stage owner) {
         // Read the existing password, if any
-        String existingPassword = PasswordManager.readPassword();
+        String existingPassword = PasswordManager.readPassword(null);
 
         // Dialog window.
         // If no existing password set, create a new password.
@@ -66,11 +66,11 @@ public class PasswordPromptDialog {
             String inputPassword = passwordField.getText();
             if (existingPassword == null) {
                 // Save new password
-                PasswordManager.savePassword(inputPassword);
+                PasswordManager.savePassword(inputPassword, null);
                 dialog.close();
             } else {
                 // Check existing password
-                if (PasswordManager.isPasswordCorrect(inputPassword)) {
+                if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
                     dialog.close();
                 } else {
                     showAlert("Incorrect Password", "Please try again.");
@@ -87,12 +87,13 @@ public class PasswordPromptDialog {
         // Handle cancel button click
         cancelButton.setOnAction(e -> {
             dialog.close(); // Close the dialog
+            System.exit(0);
         });
 
         dialog.showAndWait(); // Wait for the dialog to close
 
         // Return true if the password is correct or if setting new password, otherwise false
-        return existingPassword == null || PasswordManager.isPasswordCorrect(passwordField.getText());
+        return existingPassword == null || PasswordManager.isPasswordCorrect(passwordField.getText(), null);
     }
 
     private static void showAlert(String title, String message) {
