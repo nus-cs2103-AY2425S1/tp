@@ -263,7 +263,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 <box type="tip" header="##### Tips">
 
-* In case you accidentally make a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the PAID_AMOUNT as your preference.
+* In case you accidentally make a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT as your preference.
 
 </box>
 
@@ -291,7 +291,7 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 <box type="tip" header="##### Tips">
 
-* In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+* In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT as your preference.
 
 </box>
 
