@@ -82,7 +82,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Command aliases: `addc`
+Command aliases: `addc`<br>
 Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
@@ -98,14 +98,14 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Command aliases: `listc`
+Command aliases: `listc`<br>
 Format: `listcustomer`
 
 ### Editing a person : `editcustomer`
 
 Edits an existing person in the address book.
 
-Command aliases: `editc`
+Command aliases: `editc`<br>
 Format: `editcustomer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -123,7 +123,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Command aliases: `findc`
+Command aliases: `findc`<br>
 Format: `findcustomer KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -142,7 +142,7 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Command aliases: `deletec`
+Command aliases: `deletec`<br>
 Format: `deletecustomer INDEX`
 
 * Deletes the person at the specified `INDEX`.
@@ -157,7 +157,7 @@ Examples:
 
 Adds an order under a specified person from the address book.
 
-Command aliases: `addo`
+Command aliases: `addo`<br>
 Format: `addorder INDEX i/ITEM d/DATE [q/QUANTITY]`
 
 * Add an order under the person at the specified `INDEX`, with a default `pending` status.
@@ -177,7 +177,7 @@ Examples:
 
 List all orders of a specified person from the address book.
 
-Command aliases: `listo`
+Command aliases: `listo`<br>
 Format: `listorder INDEX`
 
 * List all orders of the person at the specified `INDEX`.
@@ -192,7 +192,7 @@ Examples:
 
 Deletes an order from the selected person's displayed order list.
 
-Command aliases: `deleteo`
+Command aliases: `deleteo`<br>
 Format: `deleteorder ORDER_INDEX`
 
 * A person's order list must first be displayed before deleting an order from that person.
@@ -208,7 +208,7 @@ Examples:
 
 Edits an order from the selected person's displayed order list.
 
-Command aliases: `edito`
+Command aliases: `edito`<br>
 Format: `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`
 
 * A person's order list must first be displayed before editing an order from that person.
@@ -229,7 +229,7 @@ Examples:
 
 Marks an order from the selected person's displayed order list as completed.
 
-Command aliases: `marko`
+Command aliases: `marko`<br>
 Format: `markorder ORDER_INDEX`
 
 * A person's order list must first be displayed before marking an order from that person.
@@ -245,7 +245,7 @@ Examples:
 
 Reverts an order from the selected person's displayed order list to pending.
 
-Command aliases: `unmarko`
+Command aliases: `unmarko`<br>
 Format: `unmarkorder ORDER_INDEX`
 
 * A person's order list must first be displayed before unmarking an order from that person.
@@ -261,7 +261,7 @@ Examples:
 
 Filters orders by the specified order status, under a selected person from their displayed order list.
 
-Command aliases: `filtero`
+Command aliases: `filtero`<br>
 Format: `filterorder ORDER_STATUS`
 
 * A person's order list must first be displayed before filtering their order list.
