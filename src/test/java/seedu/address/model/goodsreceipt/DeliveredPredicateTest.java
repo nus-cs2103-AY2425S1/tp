@@ -17,7 +17,7 @@ public class DeliveredPredicateTest {
     private final Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
 
     @Test
-    public void deliveredPredicateTest_delivered_predicateSuccess() {
+    public void deliveredPredicateTest_valid_predicateSuccess() {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID_DELIVERED), true, 1, 1.0);
 
@@ -27,13 +27,13 @@ public class DeliveredPredicateTest {
     }
 
     @Test
-    public void deliveredPredicateTest_pending_predicateSuccess() {
+    public void deliveredPredicateTest_invalid_predicateFailure() {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID_PENDING), false, 1, 1.0);
 
-        DeliveredPredicate testPredicate = new DeliveredPredicate(false);
+        DeliveredPredicate testPredicate = new DeliveredPredicate(true);
         boolean posResult = testPredicate.test(testReceipt);
-        assertTrue(posResult);
+        assertFalse(posResult);
     }
 
     @Test
@@ -48,5 +48,11 @@ public class DeliveredPredicateTest {
 
         // check that it is not equal with different isDelivered
         assertFalse(predicate.equals(new DeliveredPredicate(false)));
+
+        // check that it is not equal with null
+        assertFalse(predicate.equals(null));
+
+        // check that it is not equal with different object type
+        assertFalse(predicate.equals(new Object()));
     }
 }
