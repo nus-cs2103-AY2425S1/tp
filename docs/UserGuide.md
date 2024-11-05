@@ -132,6 +132,7 @@ Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/G
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The parameter `NAME` only accepts alphabets and spaces. The app will reject the input if it contains any other characters.
+The parameter `DATE` must take in a valid day, which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (i.e. 30-02-1994), will be automatically corrected.
 </div>
 
 **Examples:**
@@ -146,6 +147,7 @@ Format: `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be an exact match of respective names in the address book. The app will reject the input if it contains unknown doctors or patients.
+The parameter `DATE` must take in a valid day, which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (i.e. 30-02-1994), will be automatically corrected.
 </div>
 
 **Examples:**
