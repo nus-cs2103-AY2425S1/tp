@@ -330,6 +330,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1c. A Guest with the same name already exists
+    * 1c1. System tells the user the Guest already exists
+
+      Use case ends.
+
 **Use case: Add a Vendor**
 
 **MSS**
@@ -348,6 +353,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The input command was invalid (i.e. spelling error, etc.).
     * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+* 1c. A Vendor with the same name already exists
+    * 1c1. System tells the user the Vendor already exists
 
       Use case ends.
 
