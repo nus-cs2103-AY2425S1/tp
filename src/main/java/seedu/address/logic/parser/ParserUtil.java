@@ -8,8 +8,10 @@ import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -148,7 +150,10 @@ public class ParserUtil {
     public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT)
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern(AttendanceList.DATE_TIME_FORMAT)
+                .parseDefaulting(ChronoField.ERA, 1)
+                .toFormatter()
                 .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDateTime.parse(trimmedDate, formatter);
