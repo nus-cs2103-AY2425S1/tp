@@ -88,7 +88,9 @@ public class EditCommand extends Command {
         //making sure gradual changes in person attributes will not lead to duplicate persons
         if (personToEdit.isSamePerson(editedPerson)) {
             // Filter persons based on provided criteria
-            List<Person> matchingPersons = lastShownList.stream()
+            List<Person> matchingPersons = model.getAddressBook()
+                    .getPersonList()
+                    .stream()
                     .filter(editedPerson::isSamePerson)
                     .toList();
 
