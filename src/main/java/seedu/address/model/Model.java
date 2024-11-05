@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
+import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -161,4 +162,7 @@ public interface Model {
     void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws CommandException;
 
     void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws VolunteerDuplicateDateException;
+
+    void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
+            VolunteerDeleteMissingDateException;
 }

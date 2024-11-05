@@ -108,6 +108,10 @@ public class VolunteerManager {
 
     public void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws
             VolunteerDuplicateDateException {
-        volunteerToAddDate.addDatesToVolunteerDates(dateList);
+        volunteerToAddDate.addAvailableDates(dateList);
+    }
+
+    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) {
+        volunteerToRemoveDate.removeAvailableDates(dateList);
     }
 }

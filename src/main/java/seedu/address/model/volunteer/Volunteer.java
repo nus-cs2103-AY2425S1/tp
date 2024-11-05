@@ -138,9 +138,14 @@ public class Volunteer {
      * Adds a given string list of dates to the volunteer's available dates
      * @param date
      */
-    public void addDatesToVolunteerDates(String date) {
-        String[] dates = date.split(", ");
+    public void addAvailableDates(String dateList) {
+        String[] dates = dateList.split(", ");
         this.availableDates.addStringOfDatesToAvailList(dates);
+    }
+
+    public void removeAvailableDates(String dateList) {
+        String[] dates = dateList.split(",");
+        this.availableDates.removeStringOfDatesFromAvailList(dates);
     }
 
     /**

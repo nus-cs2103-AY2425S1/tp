@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 
 /**
@@ -55,6 +56,15 @@ public class VolunteerDates {
         this.datesListAsObservableString.set(this.toString());
     }
 
+    public void removeStringOfDatesFromAvailList(String... dates) throws VolunteerDeleteMissingDateException {
+        for (String date : dates) {
+            requireNonNull(date);
+            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+            this.removeDateFromAvailList(LocalDate.parse(date));
+        }
+        this.datesListAsObservableString.set(this.toString());
+    }
+
     private void addDateToAvailList(LocalDate date) throws VolunteerDuplicateDateException {
         if (this.dates.contains(date)) {
             throw new VolunteerDuplicateDateException(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -62,6 +72,15 @@ public class VolunteerDates {
             this.dates.add(date);
         }
     }
+
+    private void removeDateFromAvailList(LocalDate date) throws VolunteerDeleteMissingDateException {
+        if (!this.dates.contains(date)) {
+            throw new VolunteerDeleteMissingDateException(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        } else {
+            this.dates.remove(date);
+        }
+    }
+
 
     /**
      * Returns true if a given string is a valid date.
@@ -126,4 +145,5 @@ public class VolunteerDates {
     public int hashCode() {
         return dates.hashCode();
     }
+
 }
