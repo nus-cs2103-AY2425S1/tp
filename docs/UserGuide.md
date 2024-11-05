@@ -12,11 +12,16 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start: Get started in 10 minutes!
+## Quick Start: Get started in 3 minutes!
 
 In this quick start guide, you'll learn how to install EZSTATES. **_(3 min)_**<br>
 <br>
-You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+
+<div class="note"> 
+While learning our command structure is optional, 
+we highly recommend reviewing this section to make using EZSTATES much easier.
+</div>
 
 ### Installation
 
