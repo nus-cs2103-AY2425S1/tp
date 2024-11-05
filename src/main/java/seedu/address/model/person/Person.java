@@ -217,7 +217,7 @@ public class Person {
                 // && role.equals(otherPerson.role)
                 // && ownWedding.equals(otherPerson.ownWedding)
                 && weddingJobs.equals(otherPerson.weddingJobs);
-
+         //TODO HERE
         // commented them out since they give null pointer exception
         // need to use Optional
     }
