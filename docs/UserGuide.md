@@ -96,7 +96,7 @@ This section tells you what information you will find in each of the sections of
 
     * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/H t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
 
-    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 company/Jack's Florist b/1000 t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
+    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 c/Jack's Florist b/1000 t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
 
     * `delete_guest 3` : Deletes the 3rd guest shown in the current guest list.
 
@@ -174,7 +174,7 @@ For more details on the `add_guest` command, such as the additional optional fie
 
 Let us now add a vendor to the list of vendors you are intending to collaborate with, and familiarise ourselves with the `add_vendor` command, which you will need in order to add vendors to the vendor list.
 
-Let's try entering the following command in the Command Line: `add_vendor n/Jane Tan p/91234567 e/janet@example.com a/743, Jurong Mall, #05-245 company/Jane's Florist`.
+Let's try entering the following command in the Command Line: `add_vendor n/Jane Tan p/91234567 e/janet@example.com a/743, Jurong Mall, #05-245 c/Jane's Florist`.
 
 This means you are adding a new vendor, with the name `Jane Tan`, phone number `91234567`, email `janet@example.com`, address `743, Jurong Mall, #05-245` and company name `Jane's Florist` to the vendor list.
 
@@ -294,7 +294,7 @@ Entering the `list` command returns the following result on your screen:
 
 Finds guests and vendors that match any of the given keyword(s).
 
-**Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [company/COMPANY] [b/BUDGET] [t/TAG]...`
+**Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
 > :warning: Only one type of prefix should be used for each find command.
 
@@ -370,8 +370,9 @@ Adds a guest to the bottom of the existing overall guest list.
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
-* > :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
-* > :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
+> :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
+
+> :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
 
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
@@ -390,7 +391,7 @@ Edits the details of the guest identified by the index number used in the displa
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `edit_guest 1 p/91234567 e/johndoe@example.com`
 
@@ -430,13 +431,13 @@ Commands listed in this section are applicable to managing your vendor list (ven
 
 Adds a vendor to the bottom of the existing overall vendor list.
 
-**Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS company/COMPANY [b/BUDGET] [t/TAG]...`
+**Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...`
 
 * :warning: You can only enter a non-negative number with up to 2 decimal places for the optional `BUDGET` field.
 
-**Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 company/John's Florist b/1000 t/florist t/responsible`
+**Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
 
-Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 company/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
+Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
 ![add_vendor command](images/addVendorCommand.png)
 
@@ -447,11 +448,11 @@ Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clemen
 
 Edits the details of the vendor identified by the index number used in the displayed vendor list. Existing values will be overwritten by the input values.
 
-**Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [company/COMPANY] [b/BUDGET] [t/TAG]...`
+**Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
-    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
 **Example Usage:** `edit_vendor 1 p/91234567 e/johndoe@example.com`
 
@@ -528,20 +529,20 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                                                                         |
-|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Guest**     | `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...` <br> e.g., `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`                         |
-| **Add Vendor**    | `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS company/COMPANY [b/BUDGET] [t/TAG]...` <br> e.g., `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 company/John's Florist b/1000 t/florist t/responsible` |
-| **Edit Guest**    | `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]......` <br> e.g., `edit_guest 1 p/91234567 e/johndoe@example.com`                                                                            |
-| **Edit Vendor**   | `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [company/COMPANY] [b/BUDGET] [t/TAG]...` <br> e.g., `edit_vendor 1 p/91234567 e/johndoe@example.com`                                                                         |
-| **Delete Guest**  | `delete_guest INDEX` <br> e.g., `delete_guest 1`                                                                                                                                                                                         |
-| **Delete Vendor** | `delete_vendor INDEX` <br> e.g., `delete_vendor 1`                                                                                                                                                                                       |
-| **Help**          | `help`                                                                                                                                                                                                                                   |
-| **List**          | `list`                                                                                                                                                                                                                                   |
-| **Find**          | `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [company/COMPANY] [b/BUDGET] [t/TAG] ...`<br> e.g., `find n/James`                                                                                               |
-| **Clear**         | `clear`                                                                                                                                                                                                                                  |
-| **Stats**         | `stats`                                                                                                                                                                                                                                  |
-| **Exit**          | `exit`                                                                                                                                                                                                                                   |
+| Action            | Format, Examples                                                                                                                                                                                                             |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Guest**     | `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...` <br> e.g., `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`             |
+| **Add Vendor**    | `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...` <br> e.g., `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` |
+| **Edit Guest**    | `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]......` <br> e.g., `edit_guest 1 p/91234567 e/johndoe@example.com`                                                                |
+| **Edit Vendor**   | `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...` <br> e.g., `edit_vendor 1 p/91234567 e/johndoe@example.com`                                                                   |
+| **Delete Guest**  | `delete_guest INDEX` <br> e.g., `delete_guest 1`                                                                                                                                                                             |
+| **Delete Vendor** | `delete_vendor INDEX` <br> e.g., `delete_vendor 1`                                                                                                                                                                           |
+| **Help**          | `help`                                                                                                                                                                                                                       |
+| **List**          | `list`                                                                                                                                                                                                                       |
+| **Find**          | `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [c/COMPANY] [b/BUDGET] [t/TAG] ...`<br> e.g., `find n/James`                                                                                         |
+| **Clear**         | `clear`                                                                                                                                                                                                                      |
+| **Stats**         | `stats`                                                                                                                                                                                                                      |
+| **Exit**          | `exit`                                                                                                                                                                                                                       |
 
 
 [_Back to Top_](#table-of-contents)
