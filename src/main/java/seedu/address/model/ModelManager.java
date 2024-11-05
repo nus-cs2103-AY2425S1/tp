@@ -217,13 +217,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteAllAssignments(EmployeeId targetEmployeeId) {
-        addressBook.removeAllAssignments(targetEmployeeId);
+    public boolean deleteAllAssignments(EmployeeId targetEmployeeId) {
+        return addressBook.removeAllAssignments(targetEmployeeId);
     }
 
     @Override
-    public void deleteAllAssignments(ProjectId targetProjectId) {
-        addressBook.removeAllAssignments(targetProjectId);
+    public boolean deleteAllAssignments(ProjectId targetProjectId) {
+        return addressBook.removeAllAssignments(targetProjectId);
     }
 
     @Override

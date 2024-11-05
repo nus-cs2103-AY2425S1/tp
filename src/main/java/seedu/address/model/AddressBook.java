@@ -290,6 +290,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes all {@code Assignment} from this {@code AddressBook}
      * with matching {@code EmployeeId}.
+     *
+     * @return true if assignments were deleted, false otherwise
      */
     public boolean removeAllAssignments(EmployeeId employeeId) {
         requireNonNull(employeeId);
@@ -299,6 +301,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes all {@code Assignment} from this {@code AddressBook}
      * with matching {@code ProjectId}.
+     *
+     * @return true if assignments were deleted, false otherwise
      */
     public boolean removeAllAssignments(ProjectId projectId) {
         requireNonNull(projectId);

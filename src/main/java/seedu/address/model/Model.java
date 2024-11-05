@@ -188,13 +188,15 @@ public interface Model {
 
     /**
      * Deletes the all assignments with matching {@code EmployeeId}
+     *
+     * @return true if at least
      */
-    void deleteAllAssignments(EmployeeId targetEmployeeId);
+    boolean deleteAllAssignments(EmployeeId targetEmployeeId);
 
     /**
      * Deletes the all assignments with matching {@code ProjectId}
      */
-    void deleteAllAssignments(ProjectId targetProjectId);
+    boolean deleteAllAssignments(ProjectId targetProjectId);
 
     /**
      * Adds the given assignment.
