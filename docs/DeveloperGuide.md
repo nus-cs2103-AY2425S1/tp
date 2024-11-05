@@ -240,6 +240,43 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
   * Pros: Cleaner separation of concerns, potentially more scalable.
   * Cons: Increased complexity in ensuring consistency between companies and applications.
 
+---
+
+### Find feature
+
+#### Implementation
+
+The `find` command is responsible for filtering companies based on specific keywords, to be typed in after the `find` keyword. The name, application and tags of every company will be searched through and the company will be displayed in a list if the keyword is present.
+
+The following methods and operations are involved:
+
+* `FindCommand#execute(Model model)` - Displays companies filtered by specific search terms.
+* `NameContainsKeywordsPredicate#test(Company company)` - Checks the company's name, application name, application details and tags for a match against the stream of keywords.
+
+##### Example usage scenario:
+
+Step 1. The user inputs several search keywords after the `find` keyword.
+
+Step 2. The model applies the predicate to the list of companies, to create a list of filtered companies.
+
+Step 3. The GUI displays the list of companies filtered by the given search terms.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: How to find applications based on keywords:**
+
+* **Alternative 1 (current choice):** Expand on initial feature that filters companies by name.
+    * Pros: Simple to expand upon, and one iteration of company list is sufficient.
+    * Cons: Searching logic may increase in complexity.
+
+* **Alternative 2:** Create new predicates for each field to be searched through.
+    * Pros: Improves separation of concerns between different fields to be searched through.
+    * Cons: Multiple iterations of company list will be required, which can increase time complexity with a large list.
+
+---
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
