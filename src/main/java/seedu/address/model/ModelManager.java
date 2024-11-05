@@ -140,11 +140,13 @@ public class ModelManager implements Model {
     @Override
     public void addLink(Person patient, Person caregiver) {
         addressBook.addLink(patient, caregiver);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void deleteLink(Person patient, Person caregiver) {
         addressBook.deleteLink(patient, caregiver);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
