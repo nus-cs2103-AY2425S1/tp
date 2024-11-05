@@ -174,20 +174,19 @@ Edits an existing transaction in the transaction book.
 
 Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
 
-* Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed person
-  list.
+* Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed transaction list.
   The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing categories, the existing categories of the person will be removed i.e adding of categories is not
+* When editing categories, the existing categories of the transaction will be removed i.e adding of categories is not
   cumulative.
 * You can remove all the person’s categories by typing `cat/` without
   specifying any categories after it.
+* When editing the person related to the transaction through specifying `[p/PHONE_NUMBER]`, the person with the input phone number must be in the address book.
 
 Examples:
 
-* `editTxn 1 p/91234567 desc/Hello world` Edits the phone number and description of the 1st transaction to be `91234567`
-  and `Hello world` respectively.
+* `editTxn 1 p/91234567 desc/Hello world` Edits the 1st transaction to be related to the person with phone number `91234567` and edits the description of the 1st transaction to be `Hello world`.
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
 
 ### Locating persons by name: `find`
