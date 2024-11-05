@@ -23,8 +23,8 @@ public class LinkCommand extends Command {
             + PREFIX_PATIENT + "PATIENT_NRIC "
             + PREFIX_CAREGIVER + "CAREGIVER_NRIC\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PATIENT + "S8484131E "
-            + PREFIX_CAREGIVER + "S7654321B";
+            + PREFIX_PATIENT + "S9749978J "
+            + PREFIX_CAREGIVER + "S4908426I";
 
     public static final String MESSAGE_SUCCESS = "Linked %1$s and %2$s";
 
