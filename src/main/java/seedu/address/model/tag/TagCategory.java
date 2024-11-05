@@ -6,7 +6,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Provides categories to sort Tags into, as well as colour codes for display in the UI.
  */
 public enum TagCategory {
-    GENERAL("#ECECEC"), // Light Grey for default color
+    GENERAL("#A9A9A9"), // Dark Grey for default color
     ACADEMICS("#FFD700"), // Gold
     ACTIVITIES("#1E90FF"), // Dodger Blue
     NETWORKING("#32CD32"), // Lime Green
