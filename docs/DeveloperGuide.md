@@ -340,7 +340,7 @@ We will be using the user input `delete 1` as an example.
 #### `Delete Command` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
 
-<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+<img src="images/DeleteCommandSequenceDiagram.png" width="800" />
 
 ---
 
@@ -385,7 +385,7 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 #### `EditCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of editing a person's details in TalentSG.
 
-<img src="images/EditCommandSequenceDiagram.png" width="550" />
+<img src="images/EditCommandSequenceDiagram.png" width="800" />
 
 ---
 
@@ -469,7 +469,7 @@ We will be using the user input `find John` as an example.
 #### `FindCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
-<img src="images/FindCommandSequenceDiagram.png" width="550" />
+<img src="images/FindCommandSequenceDiagram.png" width="800" />
 
 ---
 
@@ -512,7 +512,7 @@ We will be using the user input `filter Interviewed` as an example.
 #### `FindCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
-<img src="images/FilterCommandSequenceDiagram.png" width="550" />
+<img src="images/FilterCommandSequenceDiagram.png" width="800" />
 
 ---
 
@@ -553,7 +553,7 @@ We will be using the user input `delete 2` as an example.
 #### `View Command` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
 
-<img src="images/ViewCommandSequenceDiagram.png" width="550" />
+<img src="images/ViewCommandSequenceDiagram.png" width="800" />
 
 ---
 
