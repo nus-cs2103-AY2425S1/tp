@@ -21,7 +21,7 @@ public class Messages {
             "The specified event does not contain this vendor";
     public static final String MESSAGE_EVENT_DOES_NOT_CONTAIN_VENDOR =
             "The specified vendor is not assigned to this Event";
-    public static final String MESSAGE_VENDOR_ALREADY_ASSIGNED = "The specified event already contains this vendor";
+    public static final String MESSAGE_VENDOR_ALREADY_ASSIGNED_TO_EVENT = "The specified event already contains this vendor";
     public static final String MESSAGE_EVENT_ALREADY_CONTAINS_VENDOR =
             "The specified vendor is already assigned to this Event";
     public static final String MESSAGE_NO_VENDORS_FOUND = "No vendors found!";

@@ -75,7 +75,7 @@ public class AssignCommand extends Command {
         Event event = IndexResolverUtil.resolveEvent(model, selectedIndex);
 
         if (model.isVendorAssignedToEvent(vendor, event)) {
-            throw new CommandException(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED);
+            throw new CommandException(Messages.MESSAGE_VENDOR_ALREADY_ASSIGNED_TO_EVENT);
         }
 
         model.assignVendorToEvent(vendor, event);
