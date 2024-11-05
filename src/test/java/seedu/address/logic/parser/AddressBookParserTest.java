@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddBuyerProfile;
 import seedu.address.logic.commands.AddSellerProfile;
+import seedu.address.logic.commands.ChatWindowCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -25,6 +26,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ShowListingsCommand;
+import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -111,4 +114,22 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    // New Tests for Additional Commands
+
+    @Test
+    public void parseCommand_today() throws Exception {
+        assertTrue(parser.parseCommand(TodayCommand.COMMAND_WORD) instanceof TodayCommand);
+    }
+
+    @Test
+    public void parseCommand_showListings() throws Exception {
+        assertTrue(parser.parseCommand(ShowListingsCommand.COMMAND_WORD) instanceof ShowListingsCommand);
+    }
+
+    @Test
+    public void parseCommand_chatWindow() throws Exception {
+        assertTrue(parser.parseCommand(ChatWindowCommand.COMMAND_WORD) instanceof ChatWindowCommand);
+    }
+
 }
