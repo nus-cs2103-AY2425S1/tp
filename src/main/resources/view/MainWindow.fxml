@@ -50,7 +50,7 @@
             </padding>
             <!-- Scrollable PinWindow section -->
             <ScrollPane vbarPolicy="NEVER" fitToWidth="true"
-                        styleClass="pane-with-border" maxHeight="160">
+                        styleClass="pane-with-border" maxHeight="100">
               <StackPane fx:id="pinnedListPanelPlaceholder"/>
             </ScrollPane>
 
