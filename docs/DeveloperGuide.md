@@ -331,6 +331,65 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
+#### Parsing design considerations
+
+**Aspect: How to parse the commands:**
+
+Context: The commands (other than the general) have the command format: `add... ENTITY_TYPE ENTITY_ARGS`
+
+* **Alternative 1 (current choice):** Parse `ENTITY_TYPE` and `ENTITY_ARGS` separately.
+  * Pros:
+    * Easier to parse
+    * Easier to debug, as the parsing is separated into different portions
+  * Cons:
+    * More verbose, and less centralised.
+
+* **Alternative 2**: Parse them together.
+  * Pros:
+    * Everything is parsed together, centralising the parsing logic.
+  * Cons:
+    * Harder to parse and debug
+
+**Aspect: Command format (with prefixes/not with prefixes):**
+
+* **Alternative 1 (current choice):** Use prefixes
+  * Pros:
+    * Easier to identify markers for each parameter
+    * Prefixes allow for free positioning of arguments
+  * Cons:
+    * Less intuitive for the user at start
+    * Need to create prefixes
+
+* **Alternative 2:** Use no prefixes
+    * The way that this would work, would be parsing the arguments based on position.
+    * Pros:
+        * More intuitive at start
+        * No need to create prefixes
+    * Cons:
+        * Harder to identify markers - may result in issues with arguments that have spaces in between
+        * No free positioning
+        * Might be harder to implement variable amount of arguments
+
+**Aspect: `ArgumentMultimap` use across different entities:**
+  * Context: The `ArgumentMultimap` is used across different entities.
+
+* **Alternative 1 (current choice):** Use the same `ArgumentMultimap` for all entities.
+  * Pros:
+    * Prefixes are shared universally, making it more consistent across entities.
+    * Less code duplication
+  * Cons:
+    * Might be more cluttered, as all the prefixes are together
+    * Inability to use same prefixes for different arguments across entities
+
+* **Alternative 2**: Use different `ArgumentMultimap` for each entity.
+  * Pros:
+    * Less cluttered, only prefixes for that entity will be addressed
+    * Can use prefixes used in different entities for different arguments
+  * Cons:
+    * More code duplication, as there are shared prefixes
+    * Might be harder to track shared prefixes, causing confusion to users
+
+
 --- 
 
 <br>
