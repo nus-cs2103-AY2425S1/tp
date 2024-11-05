@@ -131,10 +131,10 @@ public class AddApptCommand extends Command {
         try {
             oldAppointmentList = new ArrayList<>(personToEdit.getAppointments());
             for (Appointment a : oldAppointmentList) {
-                if (a.isClashing(newApptDate, newApptTime)) {
+                if (a.isSameDateTime(newApptDate, newApptTime)) {
                     throw new CommandException(String.format(MESSAGE_DUPLICATE_APPT_1S, a));
                 } else if (a.isClashing(newApptDate, newApptTime)) {
-                    throw new CommandException(String.format(MESSAGE_DUPLICATE_APPT_1S, a));
+                    throw new CommandException(String.format(MESSAGE_CLASHING_APPT_1S, a));
                 }
             }
 

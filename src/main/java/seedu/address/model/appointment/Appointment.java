@@ -139,7 +139,7 @@ public class Appointment implements Comparable<Appointment> {
      * @return true if there is a match.
      * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
-    public boolean isSameTime(String date, String timePeriod) throws IllegalValueException {
+    public boolean isSameDateTime(String date, String timePeriod) throws IllegalValueException {
         requireNonNull(date);
         requireNonNull(timePeriod);
         return date.equals(this.appointmentDate) && timePeriod.equals(this.appointmentTimePeriod);
