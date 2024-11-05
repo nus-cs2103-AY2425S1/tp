@@ -119,6 +119,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`, `TagCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`, `TagCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Diving into specific implementation of the `XYZCommand` and `XYZCommandParser` classes, the user command undergoes extensive checks for validity.
+Demonstrating with an example, the following activity diagrams summarise what happens when a user executes a `newtag` and `tag` command:
+![NewTagActivityDiagram.png](images%2FNewTagActivityDiagram.png)
+![TagActivityDiagram.png](images%2FTagActivityDiagram.png)
+
+These extensive input checks in the Logic classes protect against potential malicious and invalid inputs that could undermine the usage of the code.
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -227,7 +233,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarises what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
