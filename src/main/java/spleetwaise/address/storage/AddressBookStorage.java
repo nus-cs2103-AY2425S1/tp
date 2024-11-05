@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.ReadOnlyAddressBook;
+import spleetwaise.commons.exceptions.DataLoadingException;
 
 /**
  * Represents a storage for {@link AddressBook}.

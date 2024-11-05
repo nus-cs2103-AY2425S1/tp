@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.exceptions.IllegalValueException;
 import spleetwaise.transaction.model.transaction.Amount;
 
 

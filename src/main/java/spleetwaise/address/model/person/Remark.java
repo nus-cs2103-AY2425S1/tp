@@ -2,17 +2,16 @@ package spleetwaise.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Person's remark in the address book. Guarantees: immutable; is valid as declared in
  * {@link #isValidRemark(String)}
  */
 public class Remark {
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9 ]*$";
-    public static final String MESSAGE_CONSTRAINTS = "Remarks should only contain alphanumeric characters and spaces, "
-            + "and be at most 120 characters long";
     public static final int MAX_LENGTH = 120;
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should not be blank or more than " + MAX_LENGTH
+            + " characters.";
     public final String value;
 
     /**
@@ -28,7 +27,7 @@ public class Remark {
      * Returns true if a given string is a valid remark (allows empty string "").
      */
     public static boolean isValidRemark(String test) {
-        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH;
+        return test.length() <= MAX_LENGTH;
     }
 
     @Override

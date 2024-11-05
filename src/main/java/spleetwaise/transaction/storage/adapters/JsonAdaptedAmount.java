@@ -3,7 +3,7 @@ package spleetwaise.transaction.storage.adapters;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.exceptions.IllegalValueException;
 import spleetwaise.transaction.model.transaction.Amount;
 
 /**

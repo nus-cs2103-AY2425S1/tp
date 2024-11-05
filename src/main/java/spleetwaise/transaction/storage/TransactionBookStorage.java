@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
 

@@ -8,9 +8,9 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.exceptions.DuplicatePersonException;
 import spleetwaise.address.model.person.exceptions.PersonNotFoundException;
+import spleetwaise.commons.util.CollectionUtil;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls. A person is considered

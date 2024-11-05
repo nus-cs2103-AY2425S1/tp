@@ -3,8 +3,8 @@ package spleetwaise.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 /**
  * Jackson-friendly version of {@link Tag}.

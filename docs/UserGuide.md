@@ -115,14 +115,15 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn p/PHONE_NUMBER amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
+Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
 
-* The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
+* The `INDEX` refers to the index of the person currently displayed in the address book panel.
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
-* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces.
+* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
+:bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
 :bulb: **Tip:** A person can have any number of categories (including 0)<br>
 :bulb: **Tip:** Positive Amount Transaction indicates someone owes <ins>_the user_</ins> an amount.<br>
@@ -150,7 +151,7 @@ Format: `listTxn`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -164,94 +165,8 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
+* `edit 2 r/` Edits the 2nd person by deleting the remark.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Filtering transactions: `filterTxn`
-
-Filter transactions with the specified person identified by their phone number, and/or amount and/or description
-and/or date.
-
-Format: `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
-
-* The command requires at least one of the above optional prefixes to be provided.
-* As more prefixes are provided, the filter becomes more specific.
-* The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
-* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
-  amount.
-* The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
-* The `DESCRIPTION` accepts a string of words.
-    * The description filter is case-insensitive. e.g `hans` will match `Hans`
-
-Examples:<br>
-
-* Given the example transaction book:<br>
-  ![Given the example transaction book](images/filterTxnExample.png)
-* `filterTxn p/87438807` returns all transactions with the person `Alex Yeoh`.<br>
-  ![result fpr 'filterTxn p/87438807'](images/filterTxnAlexYeohResult.png)
-* `filterTxn p/99272758 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`.<br>
-  ![result for 'filterTxn p/99272758 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
-
-### Adding Remarks for a person : `remark`
-
-Add remarks for the specified person from the address book.
-
-Format: `remark INDEX r/REMARK`
-
-* Add remarks for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `remark 2 r/remark for person 2` adds remarks for the 2nd person in the address book.
-* `find Betsy` followed by `remark 1 r/remark for betsy` adds remarks for the 1st person in the results of the `find`
-  command.
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries of AddressBook: `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Clearing all entries of TransactionBook : `clearTxn`
-
-Clears all entries from the transaction book.
-
-Format: `clearTxn`
 
 ### Editing a transaction : `editTxn `
 
@@ -274,6 +189,118 @@ Examples:
 * `editTxn 1 p/91234567 desc/Hello world` Edits the phone number and description of the 1st transaction to be `91234567`
   and `Hello world` respectively.
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
+
+### Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Filtering transactions: `filterTxn`
+
+Filter transactions with a any combination of the following parameters:
+* the specified person identified by their index in the displayed person list
+* and/or amount 
+* and/or description 
+* and/or date
+* and/or status
+
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS]`
+
+* The command requires at least one of the above optional prefixes to be provided.
+* As more prefixes are provided, the filter becomes more specific.
+* The `INDEX` refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
+* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
+  amount.
+* The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
+* The `DESCRIPTION` accepts a string of words.
+    * The description filter is case-insensitive. e.g `hans` will match `Hans`
+* The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
+
+Examples:<br>
+
+* Given the example transaction book:<br>
+  ![Given the example transaction book](images/filterTxnExample.png)
+* `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in 
+  the displayed person list.<br>
+  ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
+* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Givent that `2` is 
+  the index of `Bernice Yu` in the displayed person list.<br>
+  ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
+
+### Adding/Deleting Remarks for a person : `remark`
+
+Add/Delete remarks for the specified person from the address book.
+
+Format: `remark INDEX r/REMARK`
+
+* Add/delete remarks for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `list` followed by `remark 2 r/remark for person 2` adds remarks for the 2nd person in the address book.
+* `list` followed by `remark 1 r/` deletes the remarks for the 1st person in the address book.
+* `find Betsy` followed by `remark 1 r/remark for betsy` adds remarks for the 1st person in the results of the `find`
+  command.
+* `find Betsy` followed by `remark 1 r/` deletes the remarks for the 1st person in the results of the `find` command.
+
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a transaction : `deleteTxn`
+
+Deletes the specified transaction from the transaction book.
+
+Format: `deleteTxn INDEX`
+
+* Deletes the transaction at the specified `INDEX`.
+* The index refers to the index number shown in the displayed transaction list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `listTxn` followed by `delete 2` deletes the 2nd person in the address book.
+* `filterTxn 1` followed by `delete 1` deletes the 1st transaction in the results of the `filterTxn` command.
+
+### Clearing all entries of AddressBook: `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+### Clearing all entries of TransactionBook : `clearTxn`
+
+Clears all entries from the transaction book.
+
+Format: `clearTxn`
 
 ### Marking a transaction as done : `markDone`
 
@@ -328,11 +355,12 @@ save manually.
 ### Editing the data file
 
 - AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`
-- Transaction data are saved automatically as a JSON file `[JAR file location]/data/transaction.json` 
+- TransactionBook data are saved automatically as a JSON file `[JAR file location]/data/transactionbook.json` 
 - Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SpleetWaise will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Transactions with invalid person IDs will not be loaded into the TransactionBook.<br>
 Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -382,5 +410,5 @@ _Details coming soon ..._
 | **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN`                                   |
 | **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
 | **List**   | `listTxn`                                                                                                                                                                                                                    |
-| **Filter** | `filterTxn [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn p/99999999`                                                                                                                    |
+| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS]` <br> e.g. `filterTxn 1`                                                                                                                      |
 | **Clear**  | `clearTxn`                                                                                                                                                                                                                   |

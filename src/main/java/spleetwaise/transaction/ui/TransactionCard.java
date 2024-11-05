@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import spleetwaise.address.ui.UiPart;
+import spleetwaise.commons.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**

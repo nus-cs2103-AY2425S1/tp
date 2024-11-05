@@ -1,7 +1,7 @@
 package spleetwaise.transaction.model;
 
 import static java.util.Objects.requireNonNull;
-import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
+import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -10,7 +10,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import spleetwaise.address.commons.core.LogsCenter;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**

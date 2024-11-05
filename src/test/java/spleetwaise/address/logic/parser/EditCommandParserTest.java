@@ -2,7 +2,6 @@ package spleetwaise.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.logic.commands.CommandTestUtil;
 import spleetwaise.address.logic.commands.EditCommand;
@@ -14,6 +13,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.address.testutil.TypicalIndexes;
+import spleetwaise.commons.core.index.Index;
 
 public class EditCommandParserTest {
 

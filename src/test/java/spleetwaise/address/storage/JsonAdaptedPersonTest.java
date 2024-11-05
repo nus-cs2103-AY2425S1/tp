@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -17,6 +16,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 public class JsonAdaptedPersonTest {
 
@@ -24,7 +24,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_REMARK = "Remark with control char \u0001";
+    private static final String INVALID_REMARK = "a".repeat(Remark.MAX_LENGTH + 1);
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_ID = TypicalPersons.BENSON.getId();

@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.ui.UiPart;
+import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**

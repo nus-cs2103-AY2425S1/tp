@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.exceptions.IllegalValueException;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.model.transaction.Transaction;

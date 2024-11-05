@@ -2,11 +2,12 @@ package spleetwaise.transaction.model;
 
 import java.util.function.Predicate;
 
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -18,6 +19,7 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
     private final Amount amount;
     private final Description description;
     private final Date date;
+    private final Status status;
 
     /**
      * Constructs a {@code FilterCommandPredicate} with the given contact, amount, description and date.
@@ -26,9 +28,10 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
      * @param amount      The amount to filter the transaction by.
      * @param description The description to filter the transaction by.
      * @param date        The date to filter the transaction by.
+     * @param status      The status to filter the transaction by.
      */
-    public FilterCommandPredicate(Person contact, Amount amount, Description description, Date date) {
-        if (contact == null && amount == null && description == null && date == null) {
+    public FilterCommandPredicate(Person contact, Amount amount, Description description, Date date, Status status) {
+        if (contact == null && amount == null && description == null && date == null && status == null) {
             throw new NullPointerException();
         }
 
@@ -36,6 +39,7 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.status = status;
     }
 
     @Override
@@ -55,6 +59,10 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
         }
 
         if (date != null && !txn.getDate().equals(date)) {
+            return false;
+        }
+
+        if (status != null && !txn.getStatus().equals(status)) {
             return false;
         }
 
@@ -78,7 +86,9 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
                 && (description == null ? otherFilterCommandPredicate.description == null
                 : description.equals(otherFilterCommandPredicate.description))
                 && (date == null ? otherFilterCommandPredicate.date == null
-                : date.equals(otherFilterCommandPredicate.date));
+                : date.equals(otherFilterCommandPredicate.date))
+                && (status == null ? otherFilterCommandPredicate.status == null
+                : status.equals(otherFilterCommandPredicate.status));
     }
 
     @Override
@@ -88,6 +98,7 @@ public class FilterCommandPredicate implements Predicate<Transaction> {
                 .add("amount", amount)
                 .add("description", description)
                 .add("date", date)
+                .add("status", status)
                 .toString();
     }
 

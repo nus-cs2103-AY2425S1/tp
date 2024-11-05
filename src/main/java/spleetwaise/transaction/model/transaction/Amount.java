@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import spleetwaise.address.commons.util.AppUtil;
+import spleetwaise.commons.util.AppUtil;
 
 /**
  * Represents a Transaction's amount in the transaction book. Guarantees: immutable; is valid or declared in

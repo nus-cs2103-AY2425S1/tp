@@ -13,12 +13,11 @@ import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.Messages;
@@ -39,7 +38,7 @@ public class EditCommandParserTest {
     private final TransactionBookModel tbModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook());
     private final AddressBookModel abModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
     private EditCommandParser parser = new EditCommandParser();
 
 

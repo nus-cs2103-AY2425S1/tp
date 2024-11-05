@@ -14,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -43,7 +42,7 @@ public class AddCommandTest {
     @BeforeEach
     void setup() {
         CommonModel.initialise(
-                new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs()),
+                new AddressBookModelManager(TypicalPersons.getTypicalAddressBook()),
                 new TransactionBookModelManager()
         );
     }

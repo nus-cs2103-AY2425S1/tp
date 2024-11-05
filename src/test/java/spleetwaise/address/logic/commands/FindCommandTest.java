@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
@@ -24,9 +23,9 @@ import spleetwaise.commons.model.CommonModel;
 public class FindCommandTest {
 
     private AddressBookModel model = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
     private AddressBookModel expectedModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
 
     @BeforeEach
     void setUp() {

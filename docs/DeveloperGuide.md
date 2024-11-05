@@ -59,7 +59,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `spleetwaise.commons` package.
 
 ---
 
@@ -146,6 +146,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 - **Alternative 2:** Individual command knows how to undo/redo by itself.
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
+
+**Aspect: spleetwaise.commons Package:**
+
+- **Disclaimer:** Our team has decided to add the `spleetwaise.commons` package as a common package for classes that are used by multiple components, in our case, `address` and `transaction`. This is an enhancement for modularity on top of the original design of the AddressBook-Level3 project, which only have a `seedu.address` package. The refactoring is almost 90% complete, and we are working on the remaining 10%.
 
 _{more aspects and alternatives to be added}_
 

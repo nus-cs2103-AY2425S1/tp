@@ -7,12 +7,10 @@ import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.UniquePersonList;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .isSamePerson comparison)
@@ -63,11 +61,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// person-level operations
 
+    /**
+     * Searches for a person by id and returns an optional Person
+     */
     public Optional<Person> getPersonById(String id) {
         requireNonNull(id);
         return persons.getPersonById(id);
     }
 
+    /**
+     * Searches for a person by phone and returns an optional Person
+     */
     public Optional<Person> getPersonByPhone(Phone phone) {
         requireNonNull(phone);
 
@@ -76,17 +80,6 @@ public class AddressBook implements ReadOnlyAddressBook {
             return Optional.empty();
         }
         return Optional.of(filteredPersonList.get(0));
-    }
-
-    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
-        requireNonNull(index);
-
-        List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();
-
-        if (lastShownList.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(lastShownList.get(index.getZeroBased()));
     }
 
     /**

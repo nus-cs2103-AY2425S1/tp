@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -17,6 +16,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -115,10 +115,10 @@ public class JsonAdaptedPerson {
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        if (!Remark.isValidRemark(remark)) {
+        if (!Remark.isValidRemark(remark.trim())) {
             throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
         }
-        final Remark modelRemark = new Remark(remark);
+        final Remark modelRemark = new Remark(remark.trim());
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(id, modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);

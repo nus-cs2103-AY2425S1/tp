@@ -1,6 +1,6 @@
 package spleetwaise.commons.logic.parser.exceptions;
 
-import spleetwaise.address.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a parse error encountered by a parser.

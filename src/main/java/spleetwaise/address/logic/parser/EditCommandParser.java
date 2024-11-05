@@ -14,10 +14,10 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.commands.EditCommand;
 import spleetwaise.address.logic.commands.EditCommand.EditPersonDescriptor;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 

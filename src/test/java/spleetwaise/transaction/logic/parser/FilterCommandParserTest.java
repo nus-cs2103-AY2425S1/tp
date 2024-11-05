@@ -1,11 +1,14 @@
 package spleetwaise.transaction.logic.parser;
 
+import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
@@ -18,6 +21,7 @@ import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class FilterCommandParserTest {
@@ -26,6 +30,7 @@ public class FilterCommandParserTest {
     private static final Amount testAmount = TypicalTransactions.SEANOWESME.getAmount();
     private static final Description testDescription = TypicalTransactions.SEANOWESME.getDescription();
     private static final Date testDate = TypicalTransactions.SEANOWESME.getDate();
+    private static final Status testStatus = TypicalTransactions.SEANOWESME.getStatus();
     private static final AddressBookModel abModel = new AddressBookModelManager();
     private static final TransactionBookModel txnModel = new TransactionBookModelManager();
 
@@ -40,8 +45,8 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_personField_success() {
-        String userInput = " p/94351253";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, null, null, null);
+        String userInput = " 1";
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, null, null, null, null);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -49,7 +54,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_amountField_success() {
         String userInput = " amt/9999999999.99";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, testAmount, null, null);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, testAmount, null, null, null);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -57,7 +62,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_descriptionField_success() {
         String userInput = " desc/Sean owes me a lot for a landed property in Sentosa";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, testDescription, null);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, testDescription, null, null);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
@@ -65,25 +70,47 @@ public class FilterCommandParserTest {
     @Test
     public void parse_dateField_success() {
         String userInput = " date/10102024";
-        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, null, testDate);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, null, testDate, null);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
+    }
+
+    @Test
+    public void parse_statusField_success() {
+        String userInput = " status/" + Status.NOT_DONE_STATUS;
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(null, null, null, null, testStatus);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
     public void parse_allFields_success() {
-        String userInput = " p/94351253 amt/9999999999.99  "
-                + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024";
+        String userInput = " 1 amt/9999999999.99  "
+                + "desc/Sean owes me a lot for a landed property in Sentosa date/10102024 status/"
+                + Status.NOT_DONE_STATUS;
         FilterCommandPredicate expectedPred = new FilterCommandPredicate(testPerson, testAmount,
-                testDescription, testDate);
+                testDescription, testDate, testStatus
+        );
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
     }
 
     @Test
-    public void parse_invalidPersonField_failure() {
-        String userInput = " p/9435125";
-        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
+    public void parse_noField_failure() {
+        String userInput = " ";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndexField_failure() {
+        String userInput = " 0";
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
+
+        userInput = " invalid";
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
+
+        userInput = " " + abModel.getFilteredPersonList().size() + 1;
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -102,5 +129,11 @@ public class FilterCommandParserTest {
     public void parse_invalidDateField_failure() {
         String userInput = " date/1010202";
         assertParseFailure(parser, userInput, Date.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidStatusField_failure() {
+        String userInput = " status/invalid";
+        assertParseFailure(parser, userInput, Status.MESSAGE_CONSTRAINTS);
     }
 }

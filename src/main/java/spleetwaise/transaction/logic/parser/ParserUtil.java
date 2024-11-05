@@ -7,17 +7,18 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.commons.util.StringUtil;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.util.StringUtil;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -85,6 +86,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String status} into a {@code Status}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        status = status.trim();
+        if (!Status.isValidStatus(status)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return new Status(status);
+    }
+
+    /**
      * Parses a {@code String catStr} into a {@code Category} that represents the category. Leading and trailing
      * whitespaces will be trimmed and capitalized
      */
@@ -125,6 +140,13 @@ public class ParserUtil {
         return p.get();
     }
 
+    /**
+     * Finds the corresponding Person displayed on the current Address Book view with the provided index.
+     *
+     * @param index The 1-based index corresponding to the Person entry.
+     * @return A Person who has the specified index in the current Address Book view.
+     * @throws ParseException Invalid index or index is out of bounds.
+     */
     public static Person getPersonFromAddressBookIndex(Index index) throws ParseException {
         requireNonNull(index);
         Optional<Person> p = CommonModel.getInstance().getPersonByFilteredPersonListIndex(index);
