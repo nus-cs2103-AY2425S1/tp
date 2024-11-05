@@ -168,6 +168,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a reminder: `remind` or `rem`
+
+Adds a reminder to the address book.
+
+Format: `remind INDEX d/DATE des/DESCRIPTION`
+
+* Adds a reminder allocated to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `remind 1 d/21-11-2024 des/Meet up for lunch`
+* `remind 2 d/25-12-2024 des/Christmas Date`
+
 ### Deleting a reminder: `delete_reminder` or `dr`
 
 Deletes the specified reminder from the address book.
@@ -240,11 +254,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add Person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear Person** | `clear`
+**Delete Person** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add Reminder** | `remind INDEX d/DATE des/DESCRIPTION` <br> e.g.,`remind 1 d/21-11-2024 des/Meet up for lunch`
 **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 2 r/handsome`
 **List** | `list`
 **Help** | `help`
