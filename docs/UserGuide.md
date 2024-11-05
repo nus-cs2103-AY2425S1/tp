@@ -127,11 +127,30 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Investment d/likes bubble tea`
 * `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Investment c/Healthcare d/Loves travelling`
 
-### Listing all persons : `list`
 
-Shows a list of all persons in the Client Hub.
+### Deleting a person : `delete`
 
-Format: `list`
+Deletes the specified person from ClientHub.
+
+Format: `delete NAME` or `d NAME` or `delete NAME/`
+
+* Deletes the person with specified NAME
+* / is used to indicate specific name to delete
+    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
+    * However, deleting David Lim does not require / as it is already the **MOST** specific name.
+    * Name written before / must be **EXACT** name of the contact to be deleted.
+    * Order matters when using / to delete a contact.
+
+A **valid** `NAME` for delete should:
+* Not be empty.
+* For eg. Just typing `delete` without providing any `NAME` will throw an error.
+* Be a valid name that exists in the list of contacts.
+* For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
+
+Examples:
+* `delete John Doe` deletes the person named `John Doe`
+* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
+
 
 ### Editing a person : `edit`
 
@@ -282,8 +301,7 @@ deleted, and edited.
 
 Adds a reminder to the reminder list.
 
-Format: 
-
+Format:
 `radd n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
 `ra n/NAME dt/DATETIME r/REMINDER_DESCRIPTION`
 
@@ -357,6 +375,38 @@ Examples:
 * `re 2 dt/2022-10-10 12:00` Edits the date and time of the 2nd reminder to be `2022-10-10 12:00`
 
 
+### Viewing a client: `view`
+
+Creates a popup view of the specified client from ClientHub.
+
+Format: `view CLIENT_NAME` or `v CLIENT_NAME` or `view CLIENT_NAME/`
+* The command is case-insensitive. eg. `alice` will match `Alice`
+* The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
+* If duplicates are found, `view` will throw an error telling user to specify the name further.
+    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
+* / is used to indicate **specific** name to view
+    * If there are two contacts named `David Li` and `David Lim`, typing `view David Li/` will show the contact with the name `David Li`.
+    * For contacts with names that are already unique, like `David Lim`, the `/` is not required.
+    * The `CLIENT_NAME` before the `/` must match the contact's name **exactly**.
+    * The order of the `CLIENT_NAME` and `/` matters - `David Li/` is different from `Li/David`.
+
+A **valid** `CLIENT_NAME` for view should:
+* Not be empty.
+    * For eg. Just typing `view` without providing any `CLIENT_NAME` will throw an error.
+* Be a valid name that exists in the list of contacts.
+    * For eg. Typing `view John Doe` when there is no contact with the name `John Doe` will throw an error.
+* Be a prefix match of the contact name.
+    * Typing `view John` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
+    * Typing `view John` if there is only `John Doe` in the contact list will **create a popup view** of `John Doe`.
+
+Examples:
+* `view John Doe` shows the contact named `John Doe`
+* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
+
+Result for `view jeremy`:
+![result for 'view jeremy`](images/ViewCommandExample.png)
+
+
 ### Sort by name : `sort`
 
 Sort the current list on ClientHub according to their name.
@@ -369,56 +419,11 @@ Examples:
 * `sort` sorts the list
 * `sort n` sorts the list
 
-### Deleting a person : `delete`
+### Listing all persons : `list`
 
-Deletes the specified person from ClientHub.
+Shows a list of all persons in the Client Hub.
 
-Format: `delete NAME` or `d NAME` or `delete NAME/`
-
-* Deletes the person with specified NAME
-* / is used to indicate specific name to delete
-    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
-    * However, deleting David Lim does not require / as it is already the **MOST** specific name.
-    * Name written before / must be **EXACT** name of the contact to be deleted.
-    * Order matters when using / to delete a contact.
-
-A **valid** `NAME` for delete should:
-    * Not be empty.
-        * For eg. Just typing `delete` without providing any `NAME` will throw an error.
-    * Be a valid name that exists in the list of contacts.
-        * For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
-
-Examples:
-* `delete John Doe` deletes the person named `John Doe`
-* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
-
-### Viewing a client: `view`
-
-Creates a popup view of the specified client from ClientHub.
-
-Format: `view CLIENT_NAME`
-* The command is case-insensitive. eg. `alice` will match `Alice`
-* The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
-* If duplicates are found, `view` will throw an error telling user to specify the name further.
-  * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
-
-A **valid** `CLIENT_NAME` for view should:
-* Not be empty.
-  * For eg. Just typing `view` without providing any `CLIENT_NAME` will throw an error.
-* Be a valid name that exists in the list of contacts.
-    * For eg. Typing `view John Doe` when there is no contact with the name `John Doe` will throw an error.
-* Be *specific* and the exact name of the contact to be viewed.
-* Be a prefix match of the contact name.
-  * Typing `view John Doe` will **create a popup view* of `John Doe` if there is `John Doe` and `John Doey`in the contact list.
-  * Typing `view John` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
-  * Typing `view John` if there is only `John Doe` in the contact list will **create a popup view** of `John Doe`.
-
-Examples:
-* `view John Doe` shows the contact named `John Doe`
-* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
-
-Result for `view jeremy`:
-    ![result for 'view jeremy`](images/ViewCommandExample.png)
+Format: `list`
 
 
 ### Clearing all entries : `clear`
@@ -444,11 +449,11 @@ This feature enables efficient command recall, streamlining the process of repea
 
 ### Saving the data
 
-ClientHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+* ClientHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-ClientHub data is saved automatically as a JSON file `[JAR file location]/data/clienthub.json`. Advanced users are welcome to update data directly by editing that data file.
+* ClientHub data is saved automatically as a JSON file `[JAR file location]/data/clienthub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ClientHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
