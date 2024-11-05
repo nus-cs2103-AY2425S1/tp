@@ -57,7 +57,7 @@ public class DeletePropertyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model, "Model cannot be null");
-        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTY);
+        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTIES);
 
         logger.log(Level.INFO, "Executing DeletePropertyCommand with postalCode={0}, unitNumber={1}",
                 new Object[]{postalCode, unitNumber});

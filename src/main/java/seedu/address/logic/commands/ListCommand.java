@@ -34,6 +34,8 @@ public abstract class ListCommand extends Command {
      */
     public static final String MESSAGE_SUCCESS = "Listed all %1$s";
 
+    public static final String MESSAGE_SUCCESS_EMPTY_LIST = "There are no %1$s yet!";
+
     /**
      * Executes the list command to retrieve and display a specific category of records from the model.
      *

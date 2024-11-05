@@ -206,6 +206,20 @@ public class ModelManager implements Model {
         return filteredClients;
     }
 
+    /**
+     * Checks if the filtered client list is empty.
+     *
+     * <p>This method can be used to determine whether there are any clients currently
+     * available in the filtered list, which may be useful for conditional UI rendering or
+     * other logic that depends on the presence of clients.</p>
+     *
+     * @return {@code true} if the filtered client list is empty, {@code false} otherwise.
+     */
+    @Override
+    public boolean isFilteredClientListEmpty() {
+        return filteredClients.isEmpty();
+    }
+
     @Override
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
@@ -279,6 +293,20 @@ public class ModelManager implements Model {
         return filteredProperties;
     }
 
+    /**
+     * Checks if the filtered property list is empty.
+     *
+     * <p>This method can be used to determine whether there are any properties currently
+     * available in the filtered list, which may be useful for conditional UI rendering or
+     * other logic that depends on the presence of properties.</p>
+     *
+     * @return {@code true} if the filtered property list is empty, {@code false} otherwise.
+     */
+    @Override
+    public boolean isFilteredPropertyListEmpty() {
+        return filteredProperties.isEmpty();
+    }
+
     @Override
     public void updateFilteredPropertyList(Predicate<Property> predicate) {
         requireNonNull(predicate);
@@ -326,6 +354,20 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Meeting> getFilteredMeetingList() {
         return filteredMeetings;
+    }
+
+    /**
+     * Checks if the filtered meeting list is empty.
+     *
+     * <p>This method can be used to determine whether there are any meetings currently
+     * available in the filtered list, which may be useful for conditional UI rendering or
+     * other logic that depends on the presence of meetings.</p>
+     *
+     * @return {@code true} if the filtered meeting list is empty, {@code false} otherwise.
+     */
+    @Override
+    public boolean isFilteredMeetingListEmpty() {
+        return filteredMeetings.isEmpty();
     }
 
     @Override

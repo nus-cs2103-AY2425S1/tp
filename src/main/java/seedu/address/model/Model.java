@@ -19,7 +19,7 @@ public interface Model {
     Predicate<Client> PREDICATE_SHOW_ALL_BUYERS_ONLY = Client::isBuyer;
     Predicate<Client> PREDICATE_SHOW_ALL_SELLERS_ONLY = Client::isSeller;
     Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
-    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTY = unused -> true;
+    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -87,6 +87,13 @@ public interface Model {
     ObservableList<Client> getFilteredClientList();
 
     /**
+     * Checks if the filtered client list is empty.
+     *
+     * @return {@code true} if the filtered client list is empty, {@code false} otherwise.
+     */
+    boolean isFilteredClientListEmpty();
+
+    /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -126,6 +133,13 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered property list */
     ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Checks if the filtered meeting list is empty.
+     *
+     * @return {@code true} if the filtered meeting list is empty, {@code false} otherwise.
+     */
+    boolean isFilteredMeetingListEmpty();
 
     /**
      * Updates the filter of the filtered property list to filter by the given {@code predicate}.
@@ -172,6 +186,13 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered meeting list */
     ObservableList<Meeting> getFilteredMeetingList();
+
+    /**
+     * Checks if the filtered property list is empty.
+     *
+     * @return {@code true} if the filtered property list is empty, {@code false} otherwise.
+     */
+    boolean isFilteredPropertyListEmpty();
 
     /**
      * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.
