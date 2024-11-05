@@ -18,6 +18,27 @@ import spleetwaise.transaction.model.TransactionBookModelManager;
 public class CommonModelTest {
 
     @Test
+    void constructor() {
+        TransactionBookModel tbModel = new TransactionBookModelManager();
+        AddressBookModel abModel = new AddressBookModelManager();
+
+        // test constructor values
+        CommonModel.initialise(abModel, tbModel);
+        assertEquals(abModel.getAddressBook(), CommonModel.getInstance().getAddressBook());
+        assertEquals(tbModel.getTransactionBook(), CommonModel.getInstance().getTransactionBook());
+        assertEquals(new UserPrefs(), CommonModel.getInstance().getUserPrefs());
+        assertEquals(new GuiSettings(), CommonModel.getInstance().getGuiSettings());
+
+        CommonModel.initialise(abModel, tbModel, new UserPrefs());
+        assertEquals(abModel.getAddressBook(), CommonModel.getInstance().getAddressBook());
+        assertEquals(tbModel.getTransactionBook(), CommonModel.getInstance().getTransactionBook());
+        assertEquals(new UserPrefs(), CommonModel.getInstance().getUserPrefs());
+        assertEquals(new GuiSettings(), CommonModel.getInstance().getGuiSettings());
+
+        assertThrows(NullPointerException.class, () -> CommonModel.initialise(abModel, tbModel, null));
+    }
+
+    @Test
     void shouldBeSingleton() {
         TransactionBookModel tbModel = new TransactionBookModelManager();
         AddressBookModel abModel = new AddressBookModelManager();
@@ -30,9 +51,6 @@ public class CommonModelTest {
 
         assertEquals(x.hashCode(), y.hashCode());
         assertEquals(y.hashCode(), z.hashCode());
-
-        assertEquals(new UserPrefs(), CommonModel.getInstance().getUserPrefs());
-        assertEquals(new GuiSettings(), CommonModel.getInstance().getGuiSettings());
     }
 
     @Test
