@@ -18,8 +18,8 @@ import seedu.address.model.wedding.Wedding;
 public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view-wed";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
-            + ": Shows all persons involved in the weddings of "
-            + "the specified keywords (case-insensitive)\n";
+            + ": Shows all persons involved in the weddings of the specified "
+            + "keywords (case-insensitive)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: NAME & NAME\n"
