@@ -23,7 +23,8 @@ public class UnassignCommand extends Command {
             + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNASSIGN_SUCCESS = "Vendor %s unassigned from Event %s";
+    public static final String MESSAGE_UNASSIGN_VENDOR_SUCCESS = "Vendor %s unassigned from Event %s";
+    public static final String MESSAGE_UNASSIGN_EVENT_SUCCESS = "Event %s unassigned from Vendor %s";
     public static final String MESSAGE_UNASSIGN_FAILURE_INVALID_VIEW =
         "You have to be viewing a vendor or event to use the unassign command";
 
@@ -60,15 +61,15 @@ public class UnassignCommand extends Command {
         ObservableValue<UiState> uiState = model.getUiState();
         switch (uiState.getValue()) {
         case VENDOR_DETAILS:
-            return handleVendorDetailsView(model);
+            return assignEventToVendor(model);
         case EVENT_DETAILS:
-            return handleEventDetailsView(model);
+            return assignVendorToEvent(model);
         default:
             return new CommandResult(MESSAGE_UNASSIGN_FAILURE_INVALID_VIEW);
         }
     }
 
-    private CommandResult handleVendorDetailsView(Model model) throws CommandException {
+    private CommandResult assignEventToVendor(Model model) throws CommandException {
         Vendor vendor = model.getViewedVendor().getValue();
 
         Event event = IndexResolverUtil.resolveEvent(model, selectedIndex);
@@ -80,21 +81,21 @@ public class UnassignCommand extends Command {
         model.unassignVendorFromEvent(vendor, event);
 
         return new CommandResult(
-                String.format(MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()));
+                String.format(MESSAGE_UNASSIGN_EVENT_SUCCESS, event.getName(), vendor.getName()));
     }
 
-    private CommandResult handleEventDetailsView(Model model) throws CommandException {
+    private CommandResult assignVendorToEvent(Model model) throws CommandException {
         Event event = model.getViewedEvent().getValue();
 
         Vendor vendor = IndexResolverUtil.resolveVendor(model, selectedIndex);
 
         if (!model.isVendorAssignedToEvent(vendor, event)) {
-            throw new CommandException(Messages.MESSAGE_VENDOR_NOT_ASSIGNED_TO_EVENT);
+            throw new CommandException(Messages.MESSAGE_EVENT_DOES_NOT_CONTAIN_VENDOR);
         }
 
         model.unassignVendorFromEvent(vendor, event);
 
         return new CommandResult(
-                String.format(MESSAGE_UNASSIGN_SUCCESS, vendor.getName(), event.getName()));
+                String.format(MESSAGE_UNASSIGN_VENDOR_SUCCESS, vendor.getName(), event.getName()));
     }
 }
