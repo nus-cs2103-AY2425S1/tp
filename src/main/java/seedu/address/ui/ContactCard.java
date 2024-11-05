@@ -59,7 +59,7 @@ public class ContactCard extends UiPart<Region> {
 
         final int width = 580; // try not to change this
         name.setText(contact.getName().fullName);
-        setSize(name, width-18);
+        //setSize(name, width-18);
 
         telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
         studentStatus.setText(contact.getStudentStatus().value);
@@ -73,15 +73,15 @@ public class ContactCard extends UiPart<Region> {
         if (!nicknameObtained.isEmpty()) {
             Label nicknameLabel = new Label(nicknamePrelabel + nicknameObtained);
             setSize(nicknameLabel, width);
-            nicknameLabel.setWrapText(true);
+            nicknameLabel.setWrapText(false);
             nickname.getChildren().add(nicknameLabel);
         }
     }
 
     private void setSize(Label label, int size) {
-        label.setMaxWidth(size);
-        label.setMinWidth(size);
-        label.setPrefWidth(size);
+        //label.setMaxWidth(size);
+        //label.setMinWidth(size);
+        //label.setPrefWidth(size);
     }
 
     /**
