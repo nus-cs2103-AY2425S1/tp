@@ -2,6 +2,9 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.ui.CommandBox.ERROR_STYLE_CLASS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +25,7 @@ import org.testfx.util.WaitForAsyncUtils;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import seedu.address.MainApp;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 @ExtendWith(ApplicationExtension.class)
 public class CommandBoxUiTest extends ApplicationTest {
@@ -73,4 +77,16 @@ public class CommandBoxUiTest extends ApplicationTest {
             robot.type(KeyCode.DOWN);
         }
     }
+    @Test
+    public void setStyleToIndicateCommandFailure_addsErrorStyleClass() {
+        FxRobot robot = new FxRobot();
+
+        assertNotNull(robot.lookup("#commandTextField"), "Command box should be present.");
+        
+        robot.clickOn("#commandTextField");
+        robot.write("UNKNOWN COMMMAND");
+        robot.type(KeyCode.ENTER);
+        assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
+    }
+
 }
