@@ -58,6 +58,13 @@ public class Email {
         return value.isEmpty() ? "Email unspecified" : value;
     }
 
+    /**
+     * Returns true if value is empty, otherwise returns false.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;
