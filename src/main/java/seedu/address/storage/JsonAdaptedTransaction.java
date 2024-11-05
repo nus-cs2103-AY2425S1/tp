@@ -12,7 +12,7 @@ import seedu.address.model.person.Transaction;
  */
 public class JsonAdaptedTransaction {
     private final String description;
-    private final int amount;
+    private final double amount;
     private final String otherParty;
     private final LocalDate date;
 
@@ -45,7 +45,7 @@ public class JsonAdaptedTransaction {
     }
 
     @JsonProperty("amount")
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
