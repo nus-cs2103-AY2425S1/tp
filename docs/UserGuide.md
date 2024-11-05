@@ -131,16 +131,20 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filter persons : `filter`
+### Filter persons
 
-Filters persons who meet all specified conditions.
+Filter persons who meet all specified conditions.
 
 Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching all the given conditions will be returned (i.e. `AND` search) except for multiple tags and modules.
-* If multiple tags or modules are provided, it will do `OR` search to tags and modules and do `AND` search with rest of the parameters.
+* Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter except phone number.
+* At least 3 digits of number must be provided to filter phone number and it will return all matching numbers that contains specified number.
+* Persons matching all the given conditions will be returned (i.e. `AND` search).
+
+<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+Each parameter can only contain one keyword.
+</div>
 
 Examples:
 * `filter n/John` returns `john` and `John Doe` (filter by name)
