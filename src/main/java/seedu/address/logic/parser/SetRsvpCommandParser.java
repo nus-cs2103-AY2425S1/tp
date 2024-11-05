@@ -5,10 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetRsvpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.RsvpStatus;
-
-import java.awt.font.NumericShaper;
-
 /**
  * Parses input arguments and creates a new SetRsvpCommand object
  */
