@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.StarCommand;
 import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -31,13 +32,15 @@ public class UnstarCommandParser implements Parser<UnstarCommand> {
             return new UnstarCommand(index);
         } catch (ParseException pe) {
 
-            try {
-                Name name = ParserUtil.parseName(trimmedArgs);
-                return new UnstarCommand(name);
-            } catch (ParseException pe2) {
-
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE), pe2);
+            if (trimmedArgs.matches("[^\\d]*")) {
+                try {
+                    Name name = ParserUtil.parseName(trimmedArgs);
+                    return new UnstarCommand(name);
+                } catch (ParseException pe2) {
+                    throw new ParseException(pe2.getMessage(), pe2);
+                }
+            } else {
+                throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
             }
         }
     }

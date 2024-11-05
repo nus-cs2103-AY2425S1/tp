@@ -37,7 +37,7 @@ public class StarCommand extends Command {
 
     public static final String MESSAGE_STAR_PERSON_SUCCESS = "Starred Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
-    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "The person's index provided is invalid";
     public static final String MESSAGE_ALREADY_STARRED = "%1$s has already been starred as favourite";
 
     private final Name targetName;
