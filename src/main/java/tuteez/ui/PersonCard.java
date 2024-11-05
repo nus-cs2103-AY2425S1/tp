@@ -2,13 +2,10 @@ package tuteez.ui;
 
 import java.util.logging.Logger;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import javafx.util.Duration;
 import tuteez.commons.core.LogsCenter;
 import tuteez.commons.util.UiUtil;
 import tuteez.model.person.Person;
@@ -20,11 +17,9 @@ import tuteez.model.person.lesson.Lesson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final int REFRESH_TIME = 60;
 
     public final Person person;
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private Timeline refreshTimeline;
     private Lesson lastDisplayedLesson = null;
 
     /**
@@ -65,44 +60,19 @@ public class PersonCard extends UiPart<Region> {
         UiUtil.setEmailText(email, person);
         UiUtil.setTags(tags, person);
         setNextLesson(person);
-        startRefreshTimeline();
-    }
-
-    /**
-     * Starts the timeline that checks the lesson status every second and updates if necessary.
-     */
-    private void startRefreshTimeline() {
-        if (refreshTimeline != null) {
-            refreshTimeline.stop();
-        }
-        refreshTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(REFRESH_TIME), event -> refreshNextLesson())
-        );
-        refreshTimeline.setCycleCount(Timeline.INDEFINITE);
-        refreshTimeline.play();
     }
 
     /**
      * Refreshes the next lesson if there is a change.
      */
-    private void refreshNextLesson() {
+    public void refreshNextLesson() {
         Lesson currentLesson = person.nextLessonBasedOnCurrentTime();
         if (currentLesson != lastDisplayedLesson) {
             logger.info(String.format("Next lesson for %s updated to: %s",
                     person.getName().fullName,
                     currentLesson.getDayAndTime()));
             setNextLesson(person);
-            lastDisplayedLesson = currentLesson; // Update to keep track of the last displayed lesson
-        }
-    }
-
-    /**
-     * Stops the refresh timeline for updating the next lesson.
-     * This method should be called when the {@code PersonCard} is no longer needed.
-     */
-    public void stopRefreshTimeline() {
-        if (refreshTimeline != null) {
-            refreshTimeline.stop();
+            lastDisplayedLesson = currentLesson;
         }
     }
 
