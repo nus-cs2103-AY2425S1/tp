@@ -52,6 +52,23 @@ public class MarkPaidCommandTest {
     }
 
     @Test
+    public void execute_markPaidAll_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
+        MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.all();
+        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
+        for (int i = 0; i < model.getFilteredPersonList().size(); i++) {
+            Person modifiedPerson = createMarkedPerson(
+                    model.getFilteredPersonList().get(i), VALID_MONTHSPAID, false);
+            expectedModel.setPerson(model.getFilteredPersonList().get(i),
+                    modifiedPerson);
+        }
+        String expectedMonthPaidString = "[" + VALID_MONTHPAID_STRING + "]";
+        String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_ALL_SUCCESS,
+                expectedMonthPaidString);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+    @Test
     public void toStringMethod() {
         MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
         MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID, false);
