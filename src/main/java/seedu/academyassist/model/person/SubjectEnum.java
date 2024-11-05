@@ -10,6 +10,7 @@ public enum SubjectEnum {
     MALAY("Malay"),
     TAMIL("Tamil"),
     MATH("Math"),
+    FURTHER_MATH("Further Math"),
     SCIENCE("Science"),
     HISTORY("History"),
     GEOGRAPHY("Geography"),
