@@ -48,8 +48,6 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ## Features
 
-<box type="info" seamless>
-
 **Notes about the command format:**<br>
 
 Documentation style conventions are based on [Google's guide](https://developers.google.com/style/code-syntax). 
@@ -80,7 +78,6 @@ or events with `-e`.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
 
 ### Viewing help: `help`
 
