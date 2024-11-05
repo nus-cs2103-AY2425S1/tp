@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
     public static final String MESSAGE_PHONE_EXIST = "This number already exists in the address book";
     public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
-    public static final String MESSAGE_WEDDING_DOES_NOT_EXIT = "Wedding %d is not in the list.";
+    public static final String MESSAGE_WEDDING_DOES_NOT_EXIST = "Wedding %d is not in the list.";
 
 
     private final Person toAdd;
@@ -95,7 +95,7 @@ public class AddCommand extends Command {
 
         for (Index index : weddingIndices) {
             if (!(index.getZeroBased() >= 0 && index.getZeroBased() < weddingList.size())) {
-                throw new CommandException(String.format(MESSAGE_WEDDING_DOES_NOT_EXIT, index.getOneBased()));
+                throw new CommandException(String.format(MESSAGE_WEDDING_DOES_NOT_EXIST, index.getOneBased()));
             }
         }
     }

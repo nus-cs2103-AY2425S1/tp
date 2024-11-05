@@ -7,9 +7,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
@@ -45,6 +48,19 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_validWeddingIndices_throwsException() throws Exception {
+        Set<Index> weddingIndices = new HashSet<>();
+        Index i1 = Index.fromOneBased(1);
+        weddingIndices.add(i1);
+
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson, weddingIndices);
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_WEDDING_DOES_NOT_EXIST, 1), () -> addCommand.execute(modelStub));
     }
 
     @Test
