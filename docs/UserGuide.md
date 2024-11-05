@@ -253,7 +253,6 @@ The designated names for each component of the User Interface will be used consi
 ### 3.3 How to use TrackMate commands:
 <a id="how-to-use-track-mate-commands"></a>
 
-TO BE DONE 
 TrackMate operates primarily through text-based commands. Before we explore the specific commands in detail in the
 Commands section, let’s familiarize ourselves with the basic components and format of a command.
 
@@ -263,15 +262,14 @@ Commands section, let’s familiarize ourselves with the basic components and fo
 In TrackMate, a parameter prefix acts as a delimiter for specifying different types of parameters in commands.
 Here's a reference table for common parameter prefixes and their corresponding parameters:
 
-| Parameter Prefix | Corresponding Parameter |
-|------------------|-------------------------|
-| `n/`             | `STUDENT_NAME`          |
-| `s/`             | `STUDENT_ID`            |
-| `tn/`            | `TUTORIAL_NAME`         |
-| `c/`             | `TUTORIAL_ID`           |
-| `a/`             | `ASSIGNMENT_NAME`       |
-| `d/`             | `ASSIGNMENT_DUE_DATE`   |
-| `d/`             | `ATTENDANCE_DATE`       |
+| Parameter Prefix | Corresponding Parameter              |
+|------------------|--------------------------------------|
+| `n/`             | `STUDENT_NAME` or `ASSIGNMENT_TITLE` |
+| `s/`             | `STUDENT_ID`                         |
+| `tn/`            | `TUTORIAL_NAME`                      |
+| `c/`             | `TUTORIAL_ID`                        |
+| `d/`             | `ASSIGNMENT_DUE_DATE`                |
+| `d/`             | `ATTENDANCE_DATE`                    |
 
 
 #### 3.3.2 Parameters:
@@ -284,11 +282,11 @@ Essentially they are to be supplied by the user.
 
 | Parameter             | Parameter Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |-----------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `STUDENT_NAME`        | `n/`             | Specifies the name of a student. <br/><br/> **Requirements:** <ul><li>Names must contain only alphabetic character and whitespaces.</li><li>Names are restricted to a maximum of 150 characters.</li><li>Each `STUDENT_NAME` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                             |
+| `STUDENT_NAME`        | `n/`             | Specifies the name of a student. <br/><br/> **Requirements:** <ul><li>Names must contain only alphabetic character and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `STUDENT_ID`          | `s/`             | Specifies the Student ID of a student. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with a letter `A`, followed by exactly 7 digits, and end with a letter.</li><li>Each `STUDENT_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                   |
-| `TUTORIAL_NAME`       | `t/`             | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Names are restricted to a maximum of 150 characters.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                     |
+| `TUTORIAL_NAME`       | `t/`             | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
-| `ASSIGNMENT_NAME`     | `a/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Names are restricted to a maximum of 150 characters.</li><li>Each `ASSIGNMENT_NAME` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                   |
+| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                               |
 | `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The Assignment Due Date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
 | `ATTENDANCE_DATE`     | `d/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                             |
 | `KEYWORD`             | Not Applicable   | Specifies the keywords to search for when finding students. <br/><br/> **Requirements:** <ul><li>Can contain alphanumeric characters and any special characters.</li><li>Whitespace characters will be treated as part of the `KEYWORD`.</li><li>The special character `/` will be ignored.</li>                                                                                                                                                                                                                                                                                                   |
@@ -299,14 +297,14 @@ Essentially they are to be supplied by the user.
 
 To understand how a full command is interpreted, we will utilise the following example.
 
-**Example:** `add n/STUDENT_NAME s/STUDENT_ID [c/TUTORIAL_ID]`
+**Example:** `addStu n/STUDENT_NAME s/STUDENT_ID [c/TUTORIAL_ID]`
 >**Tip:** You can add a student without specifying a tutorial ID!
 
 **Structure of Command:**<br>
 
 |                | Component        | Description                                                    |
 |----------------|------------------|----------------------------------------------------------------|
-| `add`          | Command          | Execute Add Command to add a student.                          |
+| `addStu`       | Command          | Execute Add Command to add a student.                          |
 | `n/`           | Parameter Prefix | Unique prefix to distinguish `STUDENT_NAME` from other prefix. |
 | `STUDENT_NAME` | Parameter        | Represents placeholder for name of the student.                |
 
@@ -318,15 +316,10 @@ To understand how a full command is interpreted, we will utilise the following e
 > 2. `COMMAND` + `PARAMETER`
 > 3. `COMMAND`
 >
-> The second format applies specifically to delete commands!
+> The second format applies specifically to deleteStu commands!
 
-**Notes about the command format:**<br>
-
-TO BE DONE
-
-**IMPORTANT !!!**<br>
-
-TO BE DONE
+**Hint:**<br>
+> Adding a tutorial before enrolling a student would make the process more efficient!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -424,17 +417,17 @@ no other tutorial with the Tutorial ID `T1001`.
 <a id="deleting-a-tutorial-deleteTut"></a>
 > Delete a specified tutorial from the TrackMate application. 
 
-Format: `deleteTut id/TUTORIAL_ID`
+Format: `deleteTut c/TUTORIAL_ID`
 
 Command Details & Constraints:
 * Deletes the tutorial based on the `TUTORIAL_ID`
   * The `TUTORIAL_ID` must exist in the tutorial list.
-* The `TUTORIAL_ID` should be alphanumeric with the following format `TXXXX` where `T` signifies that it is a tutorial code
-* and `X` must be an integer between 0 and 9.
+* Prefix is required for `deleteTut` command.
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
 
 Example:
-1. `deleteTut id/T1001` deletes the tutorial with Tutorial ID `T1001`, provided the tutorial exists.
+1. `deleteTut c/1001` deletes the tutorial with Tutorial ID `1001`, provided the tutorial exists.
+
 
 #### 4.2.3 List tutorials: `listTut`
 <a id="listing-tutorials-listTut"></a>
@@ -474,17 +467,16 @@ Example:
 
 > Delete a specified assignment from the TrackMate application.
 
-Format: `deleteAsg ASSIGNMENT_TITLE`
+Format: `deleteAsg n/ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
 * Deletes the assignment based on the `ASSIGNMENT_TITLE`
   * The `ASSIGNMENT_TITLE` must exist in the assignment list.
-* No prefix is required for `deleteAsg` command.
-* The command should only consist of exactly two words: `deleteAsg` and a valid `ASSIGNMENT_NAME`
+* Prefix is required for `deleteAsg` command.
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
 
 Example:
-1. `deleteAsg CS2101 CA3` deletes the assignment with Assignment Name `Assignment CS2101 CA3`, provided the assignment exists.
+1. `deleteAsg n/CS2101 CA3` deletes the assignment with Assignment Name `Assignment CS2101 CA3`, provided the assignment exists.
 
 
 #### 4.3.3 List assignments: `listAsg`
