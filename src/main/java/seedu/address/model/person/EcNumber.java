@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's emergency phone number in the address book.
+ * Represents a Person's emergency contact number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEcNumber(String)}
  */
 public class EcNumber implements Comparable<EcNumber> {
@@ -14,10 +14,11 @@ public class EcNumber implements Comparable<EcNumber> {
             "Emergency contact numbers should contain numbers that are 8 digits long\n"
             + "and it can be blank if no contact number is provided.";
     public static final String VALIDATION_REGEX = "\\d{8}";
+
     public final String value;
 
     /**
-     * Constructs a {@code ECNumber}.
+     * Constructs a {@code EcNumber}.
      *
      * @param ecNumber A valid emergency phone number.
      */
@@ -28,14 +29,14 @@ public class EcNumber implements Comparable<EcNumber> {
     }
 
     /**
-     * Returns true if a given string is a valid emergency phone number or empty string to delete.
+     * Returns true if a given string is a valid emergency contact number or empty string.
      */
     public static boolean isValidEcNumber(String number) {
         return number != null && (number.matches(VALIDATION_REGEX) || number.isEmpty());
     }
 
     /**
-     * Returns the integer representation of EcNumber
+     * Returns the integer representation of EcNumber.
      */
     public Integer toInt() {
         if (value.isEmpty()) {

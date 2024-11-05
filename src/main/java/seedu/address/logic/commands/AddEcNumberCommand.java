@@ -24,17 +24,15 @@ public class AddEcNumberCommand extends Command {
             + "identified by the index.\n"
             + "Parameters: [INDEX] ep/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
-
     public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for Person: %1$s\n";
-
     public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for Person: %1$s\n";
 
     private final Index index;
     private final EcNumber ecNumber;
 
     /**
-     * @param index index of the person in the filtered person list to edit the emergency contact phone
-     * @param ecNumber emergency contact number of the person to be updated to
+     * @param index index of the person in the filtered person list to edit the emergency contact phone.
+     * @param ecNumber emergency contact number of the person to be updated to.
      */
     public AddEcNumberCommand(Index index, EcNumber ecNumber) {
         requireAllNonNull(index, ecNumber);
@@ -69,6 +67,8 @@ public class AddEcNumberCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
+        assert personToEdit != null;
+
         String message = !ecNumber.value.isEmpty() ? MESSAGE_ADD_ECNUMBER_SUCCESS : MESSAGE_DELETE_ECNUMBER_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }

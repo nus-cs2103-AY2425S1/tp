@@ -22,7 +22,7 @@ import seedu.address.model.person.comparator.SexCompare;
 import seedu.address.model.person.comparator.StudentClassCompare;
 
 /**
- * Sorts the list of contacts based on the attribute
+ * Sorts the list of students based on the specified attribute in the displayed list.
  */
 public class SortCommand extends Command {
 
@@ -31,26 +31,30 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list based on the attribute\n"
             + "Attributes: name, phone, email, address, register number, sex, \n"
             + "student class, emergency contact name, emergency contact number";
-
     public static final String MESSAGE_SORTED_SUCCESS = "Sorted the list based on %1$s";
     public static final String MESSAGE_UNSORTED_SUCCESS = "Your list is now unsorted and back to the original!";
+
     private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
+
     private final SortAttribute sortAttribute;
     private Comparator<Person> comparator;
 
 
     /**
-     * @param sortAttribute attribute to sort the persons in the list
+     * @param sortAttribute attribute to sort the persons in the list.
      */
     public SortCommand(SortAttribute sortAttribute) {
         requireNonNull(sortAttribute);
+
         this.sortAttribute = sortAttribute;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         this.comparator = this.getComparator();
+
         model.sortFilteredPersonList(this.comparator);
         logger.log(Level.INFO, "SortCommand has been executed");
         return new CommandResult(this.generateSuccessMessage());
@@ -61,11 +65,11 @@ public class SortCommand extends Command {
         return isNull(comparator) ? MESSAGE_UNSORTED_SUCCESS : String.format(MESSAGE_SORTED_SUCCESS, sortAttribute);
     }
     /**
-     * Retrieves the comparator needed to sort the list.
-     * Returns null to unsort.
+     * Returns the comparator needed to sort the list. Returns null to restore the unsorted list.
      */
     public Comparator<Person> getComparator() {
         assert sortAttribute != null;
+
         switch (sortAttribute) {
 
         case NAME:
