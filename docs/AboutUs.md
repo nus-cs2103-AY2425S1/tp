@@ -9,14 +9,6 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 
 ## Project team
 
-### Dominic
-
-<img src="images/dominic2412.png" width="200px">
-
-[[Github](https://github.com/dominic2412)]
-- Role: User Guide Coordinator
-- Responsibilities: Oversee the User Guide and delegate responsibilities for others to work on it
-
 ### Tung Yan Zuo
 
 <img src="images/darren-tung.png" width="200px">
@@ -25,6 +17,15 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: Oversee CS2101 & CS2103T's task & responsibilities
+
+### Dominic Lei Zeyuan
+
+<img src="images/dominic2412.png" width="200px">
+
+[[Github](https://github.com/dominic2412)]
+- Role: User Guide Coordinator
+- Responsibilities: Oversee the User Guide and delegate responsibilities for others to work on it
+
 
 ### Stanley Tang Zhiheng
 
