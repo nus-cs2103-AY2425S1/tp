@@ -23,4 +23,6 @@ Person *--> RegisterNumber
 Person *--> Sex
 Person *--> EcName
 Person *--> EcNumber
+Person *--> "*" AbsentReason
+Person *--> "*" AbsentDate
 @enduml

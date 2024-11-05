@@ -24,6 +24,8 @@ Class RegisterNumber
 Class Sex
 Class EcName
 Class EcNumber
+Class AbsentDate
+Class AbsentReason
 
 Class I #FFFFFF
 }
@@ -52,6 +54,8 @@ Person *--> RegisterNumber
 Person *--> Sex
 Person *--> EcName
 Person *--> EcNumber
+Person *--> "*" AbsentReason
+Person *--> "*" AbsentDate
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

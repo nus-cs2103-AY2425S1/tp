@@ -23,16 +23,22 @@ public class AbsentReasonTest {
     @Test
     public void isValidReason() {
         // invalid reasons
-        assertFalse(AbsentReason.isValidAbsentReason(null)); // null input
-        assertFalse(AbsentReason.isValidAbsentReason("!@#")); // special characters not allowed
+        // EP: null input
+        assertFalse(AbsentReason.isValidAbsentReason(null));
+
+        // EP: non-alphanumeric characters
+        assertFalse(AbsentReason.isValidAbsentReason("!@#"));
 
 
         // valid reasons
-        assertTrue(AbsentReason.isValidAbsentReason("")); // empty string allowed
-        assertTrue(AbsentReason.isValidAbsentReason(" ")); // single space not allowed
-        assertTrue(AbsentReason.isValidAbsentReason("Sick")); // valid reason
-        assertTrue(AbsentReason.isValidAbsentReason("Holiday")); // valid reason
-        assertTrue(AbsentReason.isValidAbsentReason("Just a test")); // valid reason with spaces
+        // EP: empty string
+        assertTrue(AbsentReason.isValidAbsentReason(""));
+        assertTrue(AbsentReason.isValidAbsentReason(" "));
+
+        // EP: alphanumeric characters
+        assertTrue(AbsentReason.isValidAbsentReason("Sick"));
+        assertTrue(AbsentReason.isValidAbsentReason("Holiday"));
+        assertTrue(AbsentReason.isValidAbsentReason("Just a test"));
     }
 
     @Test
