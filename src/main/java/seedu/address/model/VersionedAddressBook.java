@@ -3,10 +3,13 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents the different states of the Address Book for the user.
@@ -18,6 +21,8 @@ public class VersionedAddressBook extends AddressBook {
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
     private AddressBook current;
+    private UniquePersonList persons;
+    private Logger logger = LogsCenter.getLogger(VersionedAddressBook.class);
 
 
     /**
@@ -27,7 +32,10 @@ public class VersionedAddressBook extends AddressBook {
         addressBookStateList = new ArrayList<>();
         currentStatePointer = -1;
         current = new AddressBook();
+        persons = new UniquePersonList();
+        syncPersonList();
         this.commitAddressBook();
+        logger.info("VersionedAddressBook initialized with no data");
     }
 
     /**
@@ -37,7 +45,10 @@ public class VersionedAddressBook extends AddressBook {
         addressBookStateList = new ArrayList<>();
         currentStatePointer = -1;
         current = new AddressBook(addressBook);
+        persons = new UniquePersonList();
+        syncPersonList();
         this.commitAddressBook();
+        logger.info("VersionedAddressBook initialized with data: " + addressBook);
     }
 
     /**
@@ -47,6 +58,8 @@ public class VersionedAddressBook extends AddressBook {
         currentStatePointer++;
         addressBookStateList.subList(currentStatePointer, addressBookStateList.size()).clear();
         addressBookStateList.add(currentStatePointer, new AddressBook(current));
+        logger.info("AddressBook state committed, current state pointer at " + currentStatePointer
+                + "\n Data: " + current);
     }
 
     /**
@@ -63,6 +76,9 @@ public class VersionedAddressBook extends AddressBook {
 
         currentStatePointer--;
         current = new AddressBook(addressBookStateList.get(currentStatePointer));
+        syncPersonList();
+        logger.info("AddressBook state undone, current state pointer at " + currentStatePointer
+                + "\n Data: " + current);
     }
 
     /**
@@ -70,6 +86,9 @@ public class VersionedAddressBook extends AddressBook {
      */
     public void discardUnsavedChanges() {
         current = new AddressBook(addressBookStateList.get(currentStatePointer));
+        syncPersonList();
+        logger.info("Unsaved changes discarded, current state pointer at " + currentStatePointer
+                + "\n Data: " + current);
     }
 
     /**
@@ -86,11 +105,13 @@ public class VersionedAddressBook extends AddressBook {
     @Override
     public void setPersons(List<Person> persons) {
         getCurrentAddressBook().setPersons(persons);
+        syncPersonList();
     }
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         getCurrentAddressBook().resetData(newData);
+        syncPersonList();
     }
 
     @Override
@@ -111,21 +132,28 @@ public class VersionedAddressBook extends AddressBook {
     @Override
     public void addPerson(Person p) {
         getCurrentAddressBook().addPerson(p);
+        syncPersonList();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         getCurrentAddressBook().setPerson(target, editedPerson);
+        syncPersonList();
     }
 
     @Override
     public void removePerson(Person key) {
         getCurrentAddressBook().removePerson(key);
+        syncPersonList();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
-        return getCurrentAddressBook().getPersonList();
+        return this.persons.asUnmodifiableObservableList();
+    }
+
+    private void syncPersonList() {
+        persons.setPersons(getCurrentAddressBook().getPersonList());
     }
 
     @Override

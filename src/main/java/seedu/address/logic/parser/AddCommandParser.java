@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.ParserUtil.areAnyPrefixesPresent;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -29,8 +30,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    public static final String MESSAGE_UNEXPECTED_PREAMBLE = "Unexpected text found without prefix.";
-    public static final String MESSAGE_MISSING_NAME = " Missing required field for name.";
+    public static final String MESSAGE_MISSING_NAME = "Missing required field for name.";
     public static final String MESSAGE_MISSING_PHONE_OR_EMAIL =
             "At least one contact method (phone or email) is required.";
 
@@ -45,17 +45,18 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MODULE, PREFIX_DESCRIPTION);
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException("Error: " + MESSAGE_UNEXPECTED_PREAMBLE + "\nUsage:\n"
-                    + AddCommand.MESSAGE_USAGE);
+            throw new ParseException(Messages.getErrorMessageWithUsage(Messages.MESSAGE_UNEXPECTED_PREAMBLE,
+                    AddCommand.MESSAGE_USAGE));
         }
 
         if (!areAllPrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException("Error:" + MESSAGE_MISSING_NAME + "\nUsage:\n" + AddCommand.MESSAGE_USAGE);
+            throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_MISSING_NAME,
+                    AddCommand.MESSAGE_USAGE));
         }
 
         if (!areAnyPrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL)) {
-            throw new ParseException("Error: " + MESSAGE_MISSING_PHONE_OR_EMAIL + "\nUsage:\n"
-                    + AddCommand.MESSAGE_USAGE);
+            throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_MISSING_PHONE_OR_EMAIL,
+                    AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,

@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 
 /**
@@ -36,12 +37,12 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(MESSAGE_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidMultipleArgs_throwsParseException() {
         assertParseFailure(parser, "1 a",
-                String.format(MESSAGE_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE));
+                Messages.getErrorMessageWithUsage(MESSAGE_INVALID_INDEX, DeleteCommand.MESSAGE_USAGE));
     }
 }
