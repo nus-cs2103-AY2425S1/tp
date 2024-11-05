@@ -45,7 +45,7 @@ By following these sections, you can quickly find the information you need and m
 
 4. Open the home folder and right click anywhere in the red box in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
 
-<img src="images/Quickstart-new-terminal.png" alt="NewTerminal" width="600">
+<img src="images/Quickstart-new-terminal.png" alt="NewTerminal">
 
 
 
