@@ -17,14 +17,14 @@ public class BackupCommand extends Command {
 
     public static final String COMMAND_WORD = "backup";
 
-    public static final String MESSAGE_SUCCESS = "Backup successful";
+    public static final String MESSAGE_SUCCESS = "Backup successfully stored at ";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Path backupPath = model.getBackupAddressBookFilePath();
         Path originalPath = model.getAddressBookFilePath();
         backup(originalPath, backupPath);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + backupPath.toString());
     }
 
     private void backup(Path originalPath, Path backupPath) throws CommandException {

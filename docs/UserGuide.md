@@ -286,10 +286,9 @@ Creates a backup of the current save file.
 
 Format: `backup`
 
-* Backup AddressBook data are saved automatically as a JSON file `[JAR file location]/backup/addressbook.json`.
-
+* Backup AddressBook data will be saved as a JSON file `[JAR file location]/backup/addressbook.json`.
+* If a addressbook.json file already exists in the backup folder it will be overwritten.
 * The backup file can be used in order to restore the AddressBook data in case of data loss, or to transfer the data to another device.
-
 * Users can safely move or copy the backup file to another device, without worrying above negative consequences.
 
 ### Clearing all entries : `clear`
