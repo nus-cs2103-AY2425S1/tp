@@ -124,10 +124,12 @@ public interface Model {
 
 
     /**
-     * Deletes the specified assignment.
-     * The assignment must exist in the assignment list.
+     * Deletes the specified assignment and returns a confirmation message.
+     *
+     * @param assignment The assignment to be deleted.
+     * @return A string containing the assignment name and its due date in the format.
      */
-    void deleteAssignment(Assignment assignment);
+    String deleteAssignment(Assignment assignment);
 
     /**
      * check the completion statuses of the specified assignment.

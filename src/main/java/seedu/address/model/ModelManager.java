@@ -259,8 +259,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteAssignment(Assignment assignment) {
-        assignmentList.deleteAssignment(assignment);
+    public String deleteAssignment(Assignment assignment) {
+        return assignmentList.deleteAssignment(assignment);
     }
 
     @Override
