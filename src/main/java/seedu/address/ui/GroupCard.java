@@ -43,6 +43,7 @@ public class GroupCard extends UiPart<Region> {
         List<Person> members = group.asUnmodifiableObservableList();
 
         groupSize.setText("Group Size: " + String.valueOf(members.size()));
+        groupSize.getStyleClass().add("group-size");
 
         // Display the first 3 members as a single comma-separated string
         String membersDisplayText = "Members: "
@@ -58,5 +59,6 @@ public class GroupCard extends UiPart<Region> {
 
         // Set the combined text to the membersPane label
         membersPane.setText(membersDisplayText);
+        membersPane.getStyleClass().add("members-pane");
     }
 }
