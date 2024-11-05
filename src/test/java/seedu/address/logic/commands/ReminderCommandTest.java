@@ -11,18 +11,23 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Schedule;
 import seedu.address.testutil.PersonBuilder;
 
 public class ReminderCommandTest {
+    private static final Name VALID_NAME_1 = new Name("John Doe");
+    private static final Name VALID_NAME_2 = new Name("Jane Doe");
     private Model model;
+
 
     @BeforeEach
     public void setUp() {
@@ -40,7 +45,7 @@ public class ReminderCommandTest {
                         new String[]{validSchedule.getNotes()}).build();
         model.setPerson(personToRemind, scheduledPerson);
 
-        ReminderCommand command = new ReminderCommand(personToRemind.getName().toString(),
+        ReminderCommand command = new ReminderCommand(personToRemind.getName(),
                 "1 hour");
 
         Person personWithReminder = new PersonBuilder(scheduledPerson)
@@ -68,7 +73,7 @@ public class ReminderCommandTest {
         model.setPerson(personToRemind, personWithSchedule);
 
         // Create reminder command
-        ReminderCommand command = new ReminderCommand(personWithSchedule.getName().toString(),
+        ReminderCommand command = new ReminderCommand(personWithSchedule.getName(),
                 singularReminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_SINGULAR_FORMAT_ERROR);
@@ -87,7 +92,7 @@ public class ReminderCommandTest {
         model.setPerson(personToRemind, personWithSchedule);
 
         // Create reminder command
-        ReminderCommand command = new ReminderCommand(personWithSchedule.getName().toString(),
+        ReminderCommand command = new ReminderCommand(personWithSchedule.getName(),
                 singularReminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_PLURAL_FORMAT_ERROR);
@@ -106,10 +111,10 @@ public class ReminderCommandTest {
         model.setPerson(personToRemind, personWithSchedule);
 
         // Create reminder command
-        ReminderCommand command = new ReminderCommand(personWithSchedule.getName().toString(),
+        ReminderCommand command = new ReminderCommand(personWithSchedule.getName(),
                 invalidReminder.getReminderTime());
 
-        assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_REMINDER_TIME);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_REMINDER_FORMAT);
     }
 
     @Test
@@ -127,7 +132,7 @@ public class ReminderCommandTest {
         model.setPerson(personToRemind, personWithReminder);
 
         // Try to set the same reminder again
-        ReminderCommand command = new ReminderCommand(personWithReminder.getName().toString(),
+        ReminderCommand command = new ReminderCommand(personWithReminder.getName(),
                 existingReminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_REMINDER_EXISTS);
@@ -135,7 +140,8 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_personNotFound_throwsCommandException() {
-        ReminderCommand command = new ReminderCommand("Unknown Person", "1 day");
+        Name name = new Name("Unknown Person");
+        ReminderCommand command = new ReminderCommand(name, "1 day");
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_NAME);
     }
@@ -151,7 +157,7 @@ public class ReminderCommandTest {
         Reminder reminder = new Reminder("1 day");
 
         // Person doesn't have an appointment
-        ReminderCommand command = new ReminderCommand(personToRemind.getName().toString(),
+        ReminderCommand command = new ReminderCommand(personToRemind.getName(),
                 reminder.getReminderTime());
 
         assertCommandFailure(command, model, ReminderCommand.MESSAGE_INVALID_APPOINTMENT);
@@ -159,40 +165,40 @@ public class ReminderCommandTest {
 
     @Test
     public void equals_sameObject_returnsFalse() {
-        ReminderCommand command = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command = new ReminderCommand(VALID_NAME_1, "1 day");
         assertFalse(command.equals(command));
     }
 
     @Test
     public void equals_nullObject_returnsFalse() {
-        ReminderCommand command = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command = new ReminderCommand(VALID_NAME_1, "1 day");
         assertFalse(command.equals(null));
     }
 
     @Test
     public void equals_differentType_returnsFalse() {
-        ReminderCommand command = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command = new ReminderCommand(VALID_NAME_1, "1 day");
         assertFalse(command.equals("String Object"));
     }
 
     @Test
     public void equals_differentName_returnsFalse() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "1 day");
-        ReminderCommand command2 = new ReminderCommand("Jane Doe", "1 day");
+        ReminderCommand command1 = new ReminderCommand(VALID_NAME_1, "1 day");
+        ReminderCommand command2 = new ReminderCommand(VALID_NAME_2, "1 day");
         assertFalse(command1.equals(command2));
     }
 
     @Test
     public void equals_differentReminderTime_returnsFalse() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "1 day");
-        ReminderCommand command2 = new ReminderCommand("John Doe", "2 days");
+        ReminderCommand command1 = new ReminderCommand(VALID_NAME_1, "1 day");
+        ReminderCommand command2 = new ReminderCommand(VALID_NAME_1, "2 days");
         assertFalse(command1.equals(command2));
     }
 
     @Test
     public void equals_identicalValues_returnsTrue() {
-        ReminderCommand command1 = new ReminderCommand("John Doe", "1 day");
-        ReminderCommand command2 = new ReminderCommand("John Doe", "1 day");
+        ReminderCommand command1 = new ReminderCommand(VALID_NAME_1, "1 day");
+        ReminderCommand command2 = new ReminderCommand(VALID_NAME_1, "1 day");
         assertTrue(command1.equals(command2));
     }
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new {@code ReminderCommand} object
@@ -29,7 +30,14 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
                     ReminderCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMINDER);
-        String name = argMultimap.getPreamble();
+        Name name = ParserUtil.parseName(argMultimap.getPreamble());
+
+        //Check for reminder prefix
+        if (!argMultimap.getValue(PREFIX_REMINDER).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ReminderCommand.MESSAGE_USAGE));
+        }
+
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
         // Check for missing reminder
