@@ -38,7 +38,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Deleting an employee : `delete`](#deleting-an-employee--delete)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Adding a project : `addproject`](#adding-a-project--addproject)
-  - [Listing all projects : `listproject`](#listing-all-projects--listproject)
+  - [Listing all projects : `listprojects`](#listing-all-projects--listproject)
   - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
   - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
   - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
@@ -89,7 +89,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 - `clear` : Deletes all contacts.
 
-- `listprojectss`: Lists all projects.
+- `listprojects`: Lists all projects.
 
 - `addproject pid/A03 pn/Project Charlie`: Adds a project named `Project Charlie`.
 
