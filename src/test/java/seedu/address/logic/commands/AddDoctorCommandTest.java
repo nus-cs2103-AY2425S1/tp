@@ -214,9 +214,9 @@ public class AddDoctorCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.doctor.isSamePerson(person);
+        public boolean hasDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            return this.doctor.isSameDoctor(doctor);
         }
     }
 
@@ -227,15 +227,15 @@ public class AddDoctorCommandTest {
         final ArrayList<Person> doctorsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return doctorsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            return doctorsAdded.stream().anyMatch(doctor::isSameDoctor);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            doctorsAdded.add(person);
+        public void addDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            doctorsAdded.add(doctor);
         }
 
         @Override
