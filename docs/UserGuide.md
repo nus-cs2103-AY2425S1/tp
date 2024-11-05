@@ -63,7 +63,7 @@ or events with `-e`.
   e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
 
 * Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
-  e.g. in `add {-c d/DATE | -v s/SERVICE} ...`, `-c d/DATE` and `-v s/SERVICE` are mutually exclusive arguments.
+  e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
 
 * `WEDDING_DATE` parameter will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
   e.g. `MM/dd/yyyy`: 10/13/2024m; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
@@ -96,13 +96,12 @@ Adds a new entity, of type specified by flag.
 
 Format for adding **contact**:
 ```
-add {-c d/DATE | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
+add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
 ```
 
 Parameters:
-* `-c`: create a client (only 1 of -c, -v or -e should be specified)
-* `-v`: create a vendor (only 1 of -c, -v or -e should be specified)
-* `d/DATE`: date of client's event (must be specified if `-c` is specified)
+* `-c`: flag to create a client (only 1 of -c, -v or -e should be specified)
+* `-v`: flag to create a vendor (only 1 of -c, -v or -e should be specified)
 * `s/SERVICE`: service provided by vendor (must be specified if `-v` is specified)
 * `n/NAME`: name of contact
 * `p/PHONE`: phone number of contact
@@ -113,7 +112,7 @@ Parameters:
 > **Tip:** A contact can have any number of tags (including 0)
 
 Examples:
-* `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 d/2024-12-15 t/budget`
+* `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`
 * `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
 
 Note:
