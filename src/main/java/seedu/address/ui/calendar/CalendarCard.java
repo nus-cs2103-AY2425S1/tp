@@ -1,5 +1,6 @@
 package seedu.address.ui.calendar;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,7 +36,7 @@ public class CalendarCard extends UiPart<Region> {
     /**
      * Creates a {@code CalendarCard} with the given {@code meeting} and index to display.
      */
-    public CalendarCard(Meeting meeting, int displayedIndex, ReadOnlyAddressBook addressBook) {
+    public CalendarCard(Meeting meeting, int displayedIndex, ObservableList<Person> personList) {
         super(FXML);
         this.meeting = meeting;
         id.setText(displayedIndex + ".");
@@ -44,7 +45,7 @@ public class CalendarCard extends UiPart<Region> {
         time.setText(meeting.getMeetingTime().toString());
         meeting.getContactUids()
             .forEach(contact -> {
-                FilteredList<Person> filteredList = addressBook.getPersonList()
+                FilteredList<Person> filteredList = personList
                         .filtered(p -> p.getUid().equals(contact));
                 if (!filteredList.isEmpty()) {
                     associatedContacts.getChildren().add(

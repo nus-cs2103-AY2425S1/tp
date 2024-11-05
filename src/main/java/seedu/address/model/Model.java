@@ -98,9 +98,9 @@ public interface Model {
 
     public ObservableList<Meeting> getWeeklySchedule();
 
-    void changeWeeklySchedule(Predicate<Meeting> predicate);
+    public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek();
 
-    ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate);
+    void changeWeeklySchedule(Predicate<Meeting> predicate);
 
     /**
      * @param i Index of the meeting to be retrieved
@@ -113,6 +113,11 @@ public interface Model {
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the whole person list
+     */
+    public ObservableList<Person> getPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

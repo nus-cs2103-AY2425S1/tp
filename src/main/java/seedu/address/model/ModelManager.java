@@ -6,7 +6,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -27,6 +29,8 @@ public class ModelManager implements Model {
     private final ScheduleList scheduleList;
     private final FilteredList<Meeting> weeklySchedule;
 
+    private final ObservableList<ObservableList<Meeting>> dailySchedulesOfWeek;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -45,6 +49,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.scheduleList = new ScheduleList(scheduleList);
         weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
+        dailySchedulesOfWeek = this.initialiseDailyScheduleOfWeek();
     }
 
     /**
@@ -64,6 +69,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.scheduleList = new ScheduleList();
         weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
+        dailySchedulesOfWeek = this.initialiseDailyScheduleOfWeek();
     }
 
 
@@ -204,6 +210,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -237,15 +248,23 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         weeklySchedule.setPredicate(predicate);
     }
+
     @Override
-    public ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate) {
-        requireNonNull(predicate);
-        weeklySchedule.setPredicate(predicate);
-        return weeklySchedule;
+    public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek() {
+        return this.dailySchedulesOfWeek;
     }
 
     @Override
     public Meeting getMeeting(Index i) {
         return weeklySchedule.get(i.getZeroBased());
     }
+
+    private ObservableList<ObservableList<Meeting>> initialiseDailyScheduleOfWeek() {
+        ObservableList<ObservableList<Meeting>> dailyScheduleOfWeek = FXCollections.observableArrayList();
+        for (int i = 1; i < 8; i++) {
+            dailyScheduleOfWeek.add(weeklySchedule);
+        }
+        return dailyScheduleOfWeek;
+    }
+
 }

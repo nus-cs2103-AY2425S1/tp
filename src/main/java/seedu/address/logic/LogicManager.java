@@ -80,16 +80,17 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Meeting> getWeeklyMeetingList() {
-        return model.getWeeklySchedule();
-    }
-    @Override
-    public ObservableList<Meeting> getCurrentMeetingList() {
-        LocalDate today = LocalDate.now();
-        Predicate<Meeting> currentWeekPredicate = new SameWeekAsDatePredicate(today);
-        return model.getCurrentWeeklySchedule(currentWeekPredicate);
+    public ObservableList<Person> getPersonList() {
+        return model.getPersonList();
     }
 
+    @Override
+    public ObservableList<ObservableList<Meeting>> getCurrentMeetingList() {
+        LocalDate today = LocalDate.now();
+        Predicate<Meeting> currentWeekPredicate = new SameWeekAsDatePredicate(today);
+        model.changeWeeklySchedule(currentWeekPredicate);
+        return model.getDailyScheduleOfWeek();
+    }
 
     @Override
     public Path getAddressBookFilePath() {
