@@ -120,7 +120,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseAmountSign_validStatus_success() {
-        AmountSignFilterPredicate result = assertDoesNotThrow(() -> ParserUtil.parseAmountSign(AmountSignFilterPredicate.POSITIVE_SIGN));
+        AmountSignFilterPredicate result = assertDoesNotThrow(() ->
+                ParserUtil.parseAmountSign(AmountSignFilterPredicate.POSITIVE_SIGN));
         assertEquals(new AmountSignFilterPredicate(AmountSignFilterPredicate.POSITIVE_SIGN), result);
 
         result = assertDoesNotThrow(() -> ParserUtil.parseAmountSign(AmountSignFilterPredicate.NEGATIVE_SIGN));
