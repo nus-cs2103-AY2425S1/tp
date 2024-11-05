@@ -199,7 +199,7 @@ public class ParserUtil {
     public static AddedBuyer parseAddedBuyer(String addedBuyer) throws ParseException {
         requireNonNull(addedBuyer);
         String trimmedAddedBuyer = addedBuyer.trim();
-        if (!AddedBuyer.isValidBuyerName(trimmedAddedBuyer)) {
+        if (!AddedBuyer.isValidName(trimmedAddedBuyer)) {
             throw new ParseException(AddedBuyer.MESSAGE_CONSTRAINTS);
         }
         return new AddedBuyer(trimmedAddedBuyer);

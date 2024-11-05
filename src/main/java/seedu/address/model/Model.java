@@ -80,6 +80,9 @@ public interface Model {
      */
     void setBuyer(Buyer target, Buyer editedBuyer);
 
+    /** Returns an unmodifiable view of the unfiltered buyer list */
+    ObservableList<Buyer> getUnfilteredBuyerList();
+
     /** Returns an unmodifiable view of the filtered buyer list */
     ObservableList<Buyer> getFilteredBuyerList();
 
@@ -108,6 +111,9 @@ public interface Model {
 
     /** Returns the MeetUpList */
     ReadOnlyMeetUpList getMeetUpList();
+
+    /** Returns an unmodifiable view of the unfiltered meet-up list */
+    ObservableList<MeetUp> getUnfilteredMeetUpList();
 
     /** Returns an unmodifiable view of the filtered meetup list */
     ObservableList<MeetUp> getFilteredMeetUpList();
@@ -159,6 +165,9 @@ public interface Model {
 
     /** Returns the PropertyList */
     ReadOnlyPropertyList getPropertyList();
+
+    /** Returns an unmodifiable view of the unfiltered property list */
+    ObservableList<Property> getUnfilteredPropertyList();
 
     /** Returns an unmodifiable view of the filtered property list */
     ObservableList<Property> getFilteredPropertyList();

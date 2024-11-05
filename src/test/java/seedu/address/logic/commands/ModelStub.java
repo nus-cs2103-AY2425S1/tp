@@ -79,6 +79,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Buyer> getUnfilteredBuyerList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Buyer> getFilteredBuyerList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -105,6 +110,11 @@ public class ModelStub implements Model {
 
     @Override
     public ReadOnlyMeetUpList getMeetUpList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<MeetUp> getUnfilteredMeetUpList() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -175,6 +185,11 @@ public class ModelStub implements Model {
 
     @Override
     public void setProperty(Property property, Property editedProperty) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Property> getUnfilteredPropertyList() {
         throw new AssertionError("This method should not be called.");
     }
 
