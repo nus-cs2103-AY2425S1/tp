@@ -54,7 +54,7 @@ public class EditEventCommand extends EditCommand {
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
     public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "Celebrity cannot be a contact in contact list";
+    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list";
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
 
@@ -133,7 +133,7 @@ public class EditEventCommand extends EditCommand {
         Set<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
 
         if (updatedContacts.contains(updatedCelebrity)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+            throw new CommandException(MESSAGE_CELEBRITY_IN_CONTACT);
         }
         return Event.createEvent(updatedEventName, updatedTime, updatedVenue, updatedCelebrity, updatedContacts);
     }

@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
 class JsonAdaptedEvent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
+    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list";
 
     private final String name;
     private final JsonAdaptedTime time;
@@ -107,6 +108,10 @@ class JsonAdaptedEvent {
 
         if (celebrity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
+
+        if (eventContacts.contains(celebrity)) {
+            throw new IllegalValueException(MESSAGE_CELEBRITY_IN_CONTACT);
         }
 
         return Event.createEvent(eventName, eventTime, eventVenue, celebrity, eventContacts);
