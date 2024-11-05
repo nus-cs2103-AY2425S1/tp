@@ -88,6 +88,7 @@ public class StatusCommand extends Command {
                 false, false, model.getChartData());
     }
 
+
     /**
      * Checks if this command is equal to another object.
      *
