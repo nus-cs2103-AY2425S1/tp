@@ -50,6 +50,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
     public static final String MESSAGE_PHONE_EXIST = "This number already exists in the address book";
     public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
+    public static final String MESSAGE_WEDDING_DOES_NOT_EXIT = "Wedding %d is not in the list.";
+
 
     private final Person toAdd;
     private Set<Index> weddingIndices;
@@ -84,13 +86,29 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Checks validity of all provided wedding indexes..
+     *
+     * @param model The model containing the list of weddings.
+     */
+    public void checkWeddingJobs(Model model) throws CommandException {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+
+        for (Index index : weddingIndices) {
+            if (!(index.getZeroBased() >= 0 && index.getZeroBased() < weddingList.size())) {
+                throw new CommandException(String.format(MESSAGE_WEDDING_DOES_NOT_EXIT, index.getOneBased()));
+            }
+        }
+    }
+
+    /**
      * Associates the person with wedding jobs based on the provided indices.
      *
      * @param model The model containing the list of weddings.
      */
-    public void generateWeddingJobs(Model model) {
+    public void generateWeddingJobs(Model model) throws CommandException {
         List<Wedding> weddingList = model.getFilteredWeddingList();
 
+        checkWeddingJobs(model);
         for (Index index : weddingIndices) {
             toAdd.addWeddingJob(weddingList.get(index.getZeroBased()));
         }
