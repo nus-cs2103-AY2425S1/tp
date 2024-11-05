@@ -32,7 +32,7 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
     - Appointment Management
       - [Adding an appointment to a patient](#adding-an-appointment-to-a-patient-makeappt)
       - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-delappt)
-      - [List all patient appointments on a specific date](#show-appointments-on-a-specific-date-schedule-date)
+      - [List all patient appointments on a specific date](#show-appointments-on-a-specific-date-scheduledate)
       - [List all patient appointments](#list-all-patient-appointment-scheduleall)
 4. [FAQ](#faq)
 5. [Glossary](#glossary)
