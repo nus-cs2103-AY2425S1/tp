@@ -34,9 +34,13 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        BigInteger value = new BigInteger(trimmedIndex);
-        if (value.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
-            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        try {
+            BigInteger value = new BigInteger(trimmedIndex);
+            if (value.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
