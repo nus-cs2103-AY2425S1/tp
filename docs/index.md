@@ -13,14 +13,11 @@ title: "PlanPerfect"
 **PlanPerfect is a desktop application designed for wedding planners to manage their contacts efficiently.** While it includes a GUI, most user interactions are performed through a CLI (Command Line Interface), catering specifically to users who prefer keyboard-based navigation.
 
 PlanPerfect allows wedding planners to organize and manage large numbers of contacts, such as:
-- Clients
 - Wedding photographers
 - Wedding venues
 - Food caterers
 - Guest lists
 - Other essential event-related contacts
-
-Although it is primarily tailored to the needs of wedding planners, PlanPerfect can also be used by individuals planning other large-scale events.
 
 ### Key Features:
 * Organize and keep track of all important contacts for wedding planning in one place.
