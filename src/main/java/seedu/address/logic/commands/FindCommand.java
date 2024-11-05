@@ -41,7 +41,7 @@ public class FindCommand extends Command {
             + "2. Exact matching is required for tutorial field. "
             + "with a tutorial named mathematics.\n3. Payment field will require a true/false input. "
             + "matches all students who have paid fees.\n4. Attendance field require a date range input with the format"
-            + "of dd/MM/yyyy:dd/MM/yyyy.\n5. Otherwise for other fields, "
+            + " of dd/MM/yyyy:dd/MM/yyyy.\n5. Otherwise for other fields, "
             + "partial matching is allowed.\n"
             + "6. Search is case-insensitive, and multiple conditions are combined with logical AND.\n"
             + "7. Parameters: "
