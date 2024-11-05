@@ -38,7 +38,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Deleting an employee : `delete`](#deleting-an-employee--delete)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Adding a project : `addproject`](#adding-a-project--addproject)
-  - [Listing all projects : `listproject`](#listing-all-projects--listproject)
+  - [Listing all projects : `listprojects`](#listing-all-projects--listproject)
   - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
   - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
   - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
@@ -89,7 +89,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 - `clear` : Deletes all contacts.
 
-- `listproject`: Lists all projects.
+- `listprojects`: Lists all projects.
 
 - `addproject pid/A03 pn/Project Charlie`: Adds a project named `Project Charlie`.
 
@@ -321,11 +321,11 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all projects : `listproject`
+### Listing all projects : `listprojects`
 
 Shows a list of **all stored projects**.
 
-Format: `listproject`
+Format: `listprojects`
 
 Expected output:
 
@@ -503,7 +503,7 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 ## Command Summary
 
 | Action                      | Format, Examples                                                                                                                                                                                                         |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| --------------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **- Employee Commands -**   |                                                                                                                                                                                                                          |
 | **Add Employee**            | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
 | **Clear Employees**         | `clear`                                                                                                                                                                                                                  |
@@ -511,13 +511,13 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 | **Edit Employee**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
 | **Filter Employees**        | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
 | **Find Employees**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **List Employees**          | `listemployees`                                                                                                                                                                                                                   |
+| **List Employees**          | `listemployees`                                                                                                                                                                                                          |
 | **- Project Commands -**    |                                                                                                                                                                                                                          |
 | **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/E0276 pn/Project Alpha`                                                                                                                            |
 | **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
 | **Delete Project**          | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
 | **Find Projects**           | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
-| **List Projects**           | `listproject`                                                                                                                                                                                                            |
+| **List Projects**           | `listprojects`                                                                                                                                                                                                           |
 | **- Assignment Commands -** |                                                                                                                                                                                                                          |
 | **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/A02 id/1`                                                                                                                           |
 | **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
