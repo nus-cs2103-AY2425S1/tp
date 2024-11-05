@@ -65,6 +65,8 @@ public class MarkAttendanceByTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert tutorial != null;
+        assert attendance != null;
         logger.info("Running execute(Model model)");
 
         if (model.getTutorialList().stream().noneMatch(tutorial -> tutorial.equals(this.tutorial))) {
@@ -150,6 +152,11 @@ public class MarkAttendanceByTutorialCommand extends Command {
      */
     private int markAttendanceForStudents(List<Participation> participationList, Model model,
                                           StringBuilder markedStudents, StringBuilder duplicateAttendanceStudents) {
+        assert participationList != null;
+        assert model != null;
+        assert markedStudents != null;
+        assert duplicateAttendanceStudents != null;
+
         int duplicateStudents = 0;
         for (Participation currentParticipation : participationList) {
             if (containsDuplicateWeeklyAttendance(currentParticipation.getAttendanceList())) {
@@ -182,6 +189,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
      * @return true if an attendance within the list exists in the same week and year; false otherwise.
      */
     private boolean containsDuplicateWeeklyAttendance(List<Attendance> attendanceList) {
+        assert attendanceList != null;
         for (Attendance attendance : attendanceList) {
             if (attendance.isSameWeek(this.attendance)) {
                 return true;

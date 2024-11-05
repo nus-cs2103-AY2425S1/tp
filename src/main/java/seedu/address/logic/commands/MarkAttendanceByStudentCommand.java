@@ -66,6 +66,9 @@ public class MarkAttendanceByStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert tutorial != null;
+        assert attendance != null;
+        assert targetIndex != null;
         logger.info("Running execute(Model model)");
 
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -138,6 +141,9 @@ public class MarkAttendanceByStudentCommand extends Command {
      */
     private Participation getStudentParticipation(List<Participation> participationList,
                                                   Person student) throws CommandException {
+        assert participationList != null;
+        assert student != null;
+
         return participationList.stream()
                 .filter(participation -> participation.getStudent().equals(student)
                         && participation.getTutorial().equals(this.tutorial))
@@ -159,6 +165,7 @@ public class MarkAttendanceByStudentCommand extends Command {
      * @return true if an attendance within the list exists in the same week and year; false otherwise.
      */
     private boolean containsDuplicateWeeklyAttendance(List<Attendance> attendanceList) {
+        assert attendanceList != null;
         for (Attendance currentAttendance : attendanceList) {
             if (currentAttendance.isSameWeek(attendance)) {
                 return true;
