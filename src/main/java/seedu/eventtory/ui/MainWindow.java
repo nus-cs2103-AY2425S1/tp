@@ -26,8 +26,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    private static final String EVENT_LIST_HEADER = "Events List";
-    private static final String VENDOR_LIST_HEADER = "Vendors List";
+    private static final String EVENT_LIST_HEADER = "Event List";
+    private static final String VENDOR_LIST_HEADER = "Vendor List";
     private static final String ASSIGNABLE_EVENT_HEADER = "Assignable Events";
     private static final String ASSIGNABLE_VENDOR_HEADER = "Assignable Vendors";
     private final Logger logger = LogsCenter.getLogger(getClass());
