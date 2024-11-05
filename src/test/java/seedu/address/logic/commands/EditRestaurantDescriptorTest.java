@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -70,9 +71,11 @@ public class EditRestaurantDescriptorTest {
                 + editRestaurantDescriptor.getName().orElse(null) + ", phone="
                 + editRestaurantDescriptor.getPhone().orElse(null) + ", email="
                 + editRestaurantDescriptor.getEmail().orElse(null) + ", address="
-                + editRestaurantDescriptor.getRating().orElse(null) + ", rating="
-                + editRestaurantDescriptor.getAddress().orElse(null) + ", tags="
+                + editRestaurantDescriptor.getAddress().orElse(null) + ", rating="
+                + editRestaurantDescriptor.getRating().orElse(null) + ", price="
+                + editRestaurantDescriptor.getPrice().orElse(null) + ", tags="
                 + editRestaurantDescriptor.getTags().orElse(null) + "}";
+
         assertEquals(expected, editRestaurantDescriptor.toString());
     }
 }

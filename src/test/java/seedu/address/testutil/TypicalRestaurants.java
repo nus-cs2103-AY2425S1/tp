@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -75,6 +77,7 @@ public class TypicalRestaurants {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
+            .withPrice("$")
             .build();
 
     // Manually added
@@ -100,6 +103,7 @@ public class TypicalRestaurants {
             .withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY)
             .withTags(VALID_TAG_FRIEND)
+            .withPrice(VALID_PRICE_AMY)
             .build();
     public static final Restaurant BOB = new RestaurantBuilder()
             .withName(VALID_NAME_BOB)
@@ -107,7 +111,7 @@ public class TypicalRestaurants {
             .withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withPrice("$")
+            .withPrice(VALID_PRICE_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
