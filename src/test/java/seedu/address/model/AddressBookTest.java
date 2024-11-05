@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDoctors.DANIEL;
+import static seedu.address.testutil.TypicalPatients.CARL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -21,8 +23,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalAppointments;
 
@@ -83,6 +89,54 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void hasPatient_nullPatient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPatient(null));
+    }
+
+    @Test
+    public void hasPatient_patientNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPatient(CARL));
+    }
+
+    @Test
+    public void hasPatient_patientInAddressBook_returnsTrue() {
+        addressBook.addPatient(CARL);
+        assertTrue(addressBook.hasPatient(CARL));
+    }
+
+    @Test
+    public void hasPatient_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPatient(CARL);
+        Patient editedCarl = new PatientBuilder(CARL).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasPatient(editedCarl));
+    }
+
+    @Test
+    public void hasDoctor_nullDoctor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPatient(null));
+    }
+
+    @Test
+    public void hasDoctor_doctorNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasDoctor(DANIEL));
+    }
+
+    @Test
+    public void hasDoctor_doctorInAddressBook_returnsTrue() {
+        addressBook.addDoctor(DANIEL);
+        assertTrue(addressBook.hasDoctor(DANIEL));
+    }
+
+    @Test
+    public void hasDoctor_doctorWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addDoctor(DANIEL);
+        Doctor editedDaniel = new DoctorBuilder(DANIEL).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasDoctor(editedDaniel));
     }
 
     @Test
