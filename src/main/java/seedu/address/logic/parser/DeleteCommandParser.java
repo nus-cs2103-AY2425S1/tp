@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Optional;
 
@@ -26,8 +29,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String[] trimmedArgs = args.trim().split(" ");
-        ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
-
+        ArgumentMultimap argMultiMap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_TAG, PREFIX_JOBCODE, PREFIX_REMARK);
         // Check if the arguments consist of a single word
         if (trimmedArgs.length == 1) {
             try {
@@ -36,6 +40,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteCommand(index);
             } catch (ParseException pe) { // cannot parse as index
                 // If it is not an index, handle using parseOtherAttributes
+                if (!argMultiMap.getPreamble().isEmpty()) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                }
+                argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG, PREFIX_REMARK);
                 return parseOtherAttributes(argMultiMap);
             }
         }
@@ -52,20 +62,34 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
         Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
         Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
-        if (optionalName.isPresent() && optionalPhone.isPresent()) {
-            // find using name and phone
+        Optional<String> optionalJobCode = argMultimap.getValue(PREFIX_JOBCODE);
+        Optional<String> optionalRemark = argMultimap.getValue(PREFIX_REMARK);
+        Optional<String> optionalTag = argMultimap.getValue(PREFIX_TAG);
+        if (optionalJobCode.isPresent() || optionalRemark.isPresent() || optionalTag.isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+        if (optionalName.isPresent() && optionalPhone.isPresent() && optionalEmail.isEmpty()) {
+            System.out.println("name and phone only");
+            // find using name and phone ONLY
             Name name = ParserUtil.parseName(optionalName.get());
             Phone phone = ParserUtil.parsePhone(optionalPhone.get());
             return new DeleteCommand(name, phone);
-        } else if (optionalName.isPresent() && optionalEmail.isPresent()) {
-            //find using name and email
+        } else if (optionalName.isPresent() && optionalEmail.isPresent() && optionalPhone.isEmpty()) {
+            System.out.println("name and email only");
+            //find using name and email ONLY
             Name name = ParserUtil.parseName(optionalName.get());
             Email email = ParserUtil.parseEmail(optionalEmail.get());
             return new DeleteCommand(name, email);
-        } else if (optionalName.isPresent()) {
+        } else if (optionalName.isPresent() && optionalPhone.isEmpty() && optionalEmail.isEmpty()) {
             // find using name only
             Name name = ParserUtil.parseName(optionalName.get());
             return new DeleteCommand(name);
+        } else if (optionalEmail.isPresent() && optionalPhone.isEmpty() && optionalName.isEmpty()) {
+            Email email = ParserUtil.parseEmail(optionalEmail.get());
+            return new DeleteCommand(email); // handles unique emails
+        } else if (optionalPhone.isPresent() && optionalEmail.isEmpty() && optionalName.isEmpty()) {
+            Phone phone = ParserUtil.parsePhone(optionalPhone.get());
+            return new DeleteCommand(phone); // handles unique phone
         } else {
             // Wrong attributes used to find for the contacts. return delete format.
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
