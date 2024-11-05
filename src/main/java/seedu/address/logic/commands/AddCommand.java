@@ -64,7 +64,12 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        boolean isArchivedList = model.getIsArchivedList();
 
+        // Allow user to use only if currently viewing the main list
+        if (isArchivedList) {
+            throw new CommandException(Messages.MESSAGE_NOT_IN_MAIN_LIST);
+        }
         if (model.hasPerson(toAdd) || model.hasArchivedPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }

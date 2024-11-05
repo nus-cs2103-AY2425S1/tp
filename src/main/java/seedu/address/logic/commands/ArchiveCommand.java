@@ -19,7 +19,7 @@ public class ArchiveCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archives the details of the person identified "
             + "by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
     private final Index index;
@@ -34,6 +34,12 @@ public class ArchiveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        boolean isArchivedList = model.getIsArchivedList();
+
+        // Allow user to use only if currently viewing the main list
+        if (isArchivedList) {
+            throw new CommandException(Messages.MESSAGE_NOT_IN_MAIN_LIST);
+        }
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

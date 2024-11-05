@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ArgumentPredicateToFail;
 import seedu.address.model.person.ClientStatus;
@@ -15,8 +16,6 @@ public class WhitelistListCommand extends WhitelistCommand {
 
     /**
      * Instantiates a {@code WhitelistListCommand} object.
-     *
-     * @param argPredToFail an argument predicate that should fail
      */
     public WhitelistListCommand() {
         // this is irrelevant but necessary
@@ -24,8 +23,14 @@ public class WhitelistListCommand extends WhitelistCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        boolean isArchivedList = model.getIsArchivedList();
+
+        // Allow user to use only if currently viewing the main list
+        if (isArchivedList) {
+            throw new CommandException(Messages.MESSAGE_NOT_IN_MAIN_LIST);
+        }
 
         // here, the predicate dictates that the client status should be blacklisted;
         // hence if the predicate fails (ensured by the ArgumentPredicateToFail object),

@@ -65,6 +65,12 @@ public class WhitelistCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        boolean isArchivedList = model.getIsArchivedList();
+
+        // Allow user to use only if currently viewing the main list
+        if (isArchivedList) {
+            throw new CommandException(Messages.MESSAGE_NOT_IN_MAIN_LIST);
+        }
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
