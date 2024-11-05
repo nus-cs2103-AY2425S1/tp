@@ -38,7 +38,7 @@ public class ListingParserTest {
     @Test
     public void parseCommand_editListing() throws Exception {
         Command command =
-                parser.parseCommand("editListing n/Kent Ridge Condo n/Kent Ridge HDB");
+                parser.parseCommand("editListing Kent Ridge Condo n/Kent Ridge HDB");
         assertEquals(EditListingCommand.class, command.getClass());
     }
 

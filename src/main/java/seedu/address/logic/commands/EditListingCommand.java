@@ -176,7 +176,7 @@ public class EditListingCommand extends Command {
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, price, area, address, region);
+            return CollectionUtil.isAnyNonNull(name, price, area, address, region, sellerName);
         }
 
         public void setName(Name name) {
