@@ -172,58 +172,59 @@ Examples:
 
 Adds an Assignment to the app.
 
-Format: `add_assignment studentIndex/STUDENT_INDEX assignmentName/ASSIGNMENT_NAME maxScore/MAX_SCORE`
+Format: `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
 Examples:
-* `list` followed by `add_assignment studentIndex/3 assignmentName/Assignment 1 maxScore/100` adds an assignment to the
+* `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
   3rd student in the app.
-* `add_assignment studentIndex/1 assignmentName/Assignment 1 maxScore/100`
+* `add_assignment si/1 an/Assignment 1 ms/100`
+  ![result for 'add_assignment si/1 an/Assignment 1 ms/100'](images/add_assignment_image.jpg)
 
 ### Deleting an assignment: `delete_assignment`
 
 Deletes an assignment belonging to a student based on the student's index number and the assignment's index.
 
-Format: `delete_assignment studentIndex/INDEX assignmentIndex/INDEX`
+Format: `delete_assignment si/INDEX ai/INDEX`
 
 Examples:
-* `find John` followed by `delete_assignment studentIndex/1 assignmentIndex/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
-* `delete_assignment studentIndex/1 assignmentIndex/1`
+* `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
+* `delete_assignment si/1 ai/1`
 
 ### Marking an assignment as submitted: `mark`
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
 
-Format: `mark studentIndex/INDEX assignmentIndex/INDEX`
+Format: `mark si/INDEX ai/INDEX`
 
 Examples:
-* `list` followed by `mark studentIndex/3 assignmentIndex/1` marks the 1st assignment of the 3rd student in the app.
-* `mark studentIndex/1 assignmentIndex/1`
+* `list` followed by `mark si/3 ai/1` marks the 1st assignment of the 3rd student in the app.
+* `mark si/1 ai/1`
 
 ### Unmarking an assignment: `unmark`
 
 Unmarks an existing assignment belonging to a student, resetting its status to not submitted.
 
-Format: `unmark studentIndex/INDEX assignmentIndex/INDEX`
+Format: `unmark si/INDEX ai/INDEX`
 
 Examples:
-* `unmark studentIndex/1 assignmentIndex/1`
+* `unmark si/1 ai/1`
 
 ### Grading an assignment: `grade`
 
 Edits the score of an assignment belonging to a student and marks it as submitted.
 
-Format: `grade studentIndex/INDEX assignmentIndex/INDEX score/ASSIGNMENT_SCORE`
+Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
 
 Examples:
-* `grade studentIndex/1 assignmentIndex/1 score/100`
+* `grade si/1 ai/1 s/100`
 
 ### Adding a remark to a student: `remark`
 Adds a remark to a existing student in the displayed list.
 
-Format: `remark studentIndex/INDEX r/REMARK`
+Format: `remark si/INDEX r/REMARK`
 
 Examples:
-* `remark studentIndex/1 r/Weak in Math`
+* `remark si/1 r/Weak in Math`
 
 ### Clearing all entries : `clear`
 
@@ -286,9 +287,9 @@ Action            | Format, Examples
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
-**Add Assignment**| `add_assignment studentIndex/STUDENT_INDEX assignmentName/ASSIGNMENT_NAME maxScore/MAX_SCORE`<br> e.g., `add_assignment studentIndex/1 assignmentName/Assignment 1 maxScore/100`
-**Delete Assignment** | `delete_assignment studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `delete_assignment studentIndex/1 assignmentIndex/1`
-**Mark Assignment** | `mark studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `mark studentIndex/1 assignmentIndex/1`
-**Unmark Assignment** | `unmark studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `unmark studentIndex/1 assignmentIndex/1`
-**Grade Assignment** | `grade studentIndex/INDEX assignmentIndex/INDEX score/ASSIGNMENT_SCORE`<br> e.g., `grade studentIndex/1 assignmentIndex/1 score/100`
-**Add Remark** | `remark studentIndex/INDEX r/REMARK` <br> e.g., `remark studentIndex/1 r/Weak in Math`
+**Add Assignment**| `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
+**Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
+**Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
+**Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
+**Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`
+**Add Remark** | `remark si/INDEX r/REMARK` <br> e.g., `remark si/1 r/Weak in Math`
