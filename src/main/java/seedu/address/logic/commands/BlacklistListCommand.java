@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.ArgumentPredicate;
 
 /**
  * Lists out all blacklisted clients
@@ -23,11 +23,10 @@ public class BlacklistListCommand extends BlacklistCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        try {
-            // make the find command do the hard work
-            return (new FindCommandParser().parse("find cs/blacklisted")).execute(model);
-        } catch (ParseException pe) {
-            return null; // this will never happen
-        }
+        // here, the predicate dictates that the client status should be blacklisted
+        model.updateFilteredPersonList(ArgumentPredicate.PREDICATE_BLACKLISTED);
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,6 +17,13 @@ import seedu.address.model.tag.Tag;
  * Tests that input parameters matches all the requirements of a particular Person
  */
 public class ArgumentPredicate implements Predicate<Person> {
+
+    public static final ArgumentPredicate PREDICATE_BLACKLISTED =
+            new ArgumentPredicate(Map.of(
+                    ClientStatus.CLIENT_STATUS_KEY, new ClientStatus("blacklisted"),
+                    Tag.TAG_KEY, new HashSet<>()
+                ));
+
     private final Map<String, Object> inputParameters;
 
     /**

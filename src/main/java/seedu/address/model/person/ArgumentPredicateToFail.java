@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,11 @@ import seedu.address.model.tag.Tag;
  */
 public class ArgumentPredicateToFail extends ArgumentPredicate {
 
-    private static ArgumentPredicateToFail notBlacklistedPredicate;
+    public static final ArgumentPredicateToFail PREDICATE_NOT_BLACKLISTED =
+            new ArgumentPredicateToFail(Map.of(
+                    ClientStatus.CLIENT_STATUS_KEY, new ClientStatus("blacklisted"),
+                    Tag.TAG_KEY, new HashSet<>()
+                ));
 
     /**
      * Constructs an {@code ArgumentPredicateToFail}
@@ -27,21 +30,6 @@ public class ArgumentPredicateToFail extends ArgumentPredicate {
      */
     public ArgumentPredicateToFail(Map<String, Object> parameterMap) {
         super(parameterMap);
-    }
-
-    public static ArgumentPredicateToFail getNotBlacklistedPredicate() {
-        if (notBlacklistedPredicate == null) {
-            Map<String, Object> parameterMap = new HashMap<>();
-
-            parameterMap.put(ClientStatus.CLIENT_STATUS_KEY, new ClientStatus("blacklisted"));
-
-            Set<Tag> tagList = new HashSet<>();
-            parameterMap.put(Tag.TAG_KEY, tagList);
-
-            notBlacklistedPredicate = new ArgumentPredicateToFail(parameterMap);
-        }
-
-        return notBlacklistedPredicate;
     }
 
     private void addIfPresent(String key, Predicate<Person> predicate,
