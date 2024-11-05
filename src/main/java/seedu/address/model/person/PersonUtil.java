@@ -27,13 +27,13 @@ public class PersonUtil {
         switch (role) {
         case VOLUNTEER:
             Volunteer volunteer = (Volunteer) person;
-            return "Hours: " + volunteer.getHours();
+            return "; Hours: " + volunteer.getHours();
         case DONOR:
             Donor donor = (Donor) person;
-            return "Donated Amount: " + donor.getDonatedAmount();
+            return "; Donated Amount: " + donor.getDonatedAmount();
         case PARTNER:
             Partner partner = (Partner) person;
-            return "Partnership End Date: " + partner.getEndDate();
+            return "; Partnership End Date: " + partner.getEndDate();
         default:
             return ""; //return an empty string by default
         }

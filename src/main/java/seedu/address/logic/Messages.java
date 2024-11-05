@@ -52,7 +52,7 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         String roleSpecificInfo = getRoleSpecificInfoString(person);
-        builder.append("; ").append(roleSpecificInfo);
+        builder.append(roleSpecificInfo);
         return builder.toString();
     }
 
