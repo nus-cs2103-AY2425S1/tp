@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters command to view all entries.
-2. System displays list with all entries to the user.
+1. System displays list with all entries to the user.
 
    Use case ends.
 
@@ -341,8 +341,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters command to read total earnings and total money owed.
-2. System displays total earnings and total money owed to the user.
+1. User enters command to read total earnings and total money owed. 
+1. System displays total earnings and total money owed to the user.
 
    Use case ends.
 
@@ -359,8 +359,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <ins>list students(UC02)</ins>.
-2. User enters command to delete a specific student.
-3. System displays list with specified student deleted from the list.
+1. User enters command to delete a specific student.
+1. System displays list with specified student deleted from the list.
 
    Use case ends.
 
