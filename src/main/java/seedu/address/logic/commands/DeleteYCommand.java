@@ -89,7 +89,7 @@ public class DeleteYCommand extends Command {
         }
 
         if (!(personToDelete == null)) {
-            Person personToDeleteWithNoTag = model.personWithAllTagsRemoved(personToDelete, model);
+            Person personToDeleteWithNoTag = model.personWithAllTagsRemoved(personToDelete);
             model.deletePerson(personToDeleteWithNoTag);
             // Clear history of personToDelete from StaticContext once delete operation is done
             StaticContext.setPersonToDelete(null);
