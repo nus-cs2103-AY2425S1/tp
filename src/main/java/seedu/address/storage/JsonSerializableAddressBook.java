@@ -26,16 +26,27 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
-
     private final List<JsonAdaptedLinkedPersonsEntry> linkedPersonsEntries = new ArrayList<>();
+
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, events, and linked persons entries.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
-        this.events.addAll(events);
-        this.linkedPersonsEntries.addAll(linkedPersonsEntries);
+    public JsonSerializableAddressBook(
+            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("events") List<JsonAdaptedEvent> events,
+            @JsonProperty("linkedPersonEntries") List<JsonAdaptedLinkedPersonsEntry> linkedPersonsEntries) {
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
+
+        if (events != null) {
+            this.events.addAll(events);
+        }
+
+        if (linkedPersonsEntries != null) {
+            this.linkedPersonsEntries.addAll(linkedPersonsEntries);
+        }
     }
 
     /**

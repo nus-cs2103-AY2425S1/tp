@@ -47,7 +47,8 @@ public class TypicalEvents {
 
     // Extra Unused Events if Fixed Time is needed, feel free to edit if needed
     public static final Event HIKING_TRIP = new EventBuilder().withName("Weekend Hiking Trip")
-            .withAddress("Trailhead at Bukit Timah").withStartTime("2025-12-01 08:00").build();
+            .withAddress("Trailhead at Bukit Timah").withStartTime("2025-12-01 08:00")
+            .withTags("hobby", "outdoor").build();
 
     public static final Event ICE_CREAM_FEST = new EventBuilder().withName("Ice Cream Festival")
             .withAddress("5, Clarke Quay").withStartTime("2025-12-21 14:00").build();
@@ -81,6 +82,18 @@ public class TypicalEvents {
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
         }
+        ab.addEvent(HIKING_TRIP);
+        ab.addEvent(ICE_CREAM_FEST);
+        ab.addEvent(ART_EXHIBIT);
+        ab.addEvent(BOOK_FAIR);
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the events with fixed time.
+     */
+    public static AddressBook getFixedTimeAddressBook() {
+        AddressBook ab = new AddressBook();
         ab.addEvent(HIKING_TRIP);
         ab.addEvent(ICE_CREAM_FEST);
         ab.addEvent(ART_EXHIBIT);
