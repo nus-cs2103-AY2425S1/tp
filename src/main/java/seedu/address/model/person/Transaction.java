@@ -11,6 +11,9 @@ import seedu.address.logic.Messages;
  */
 public class Transaction {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Amount should have at most 2 decimal places.";
+    public static final String VALIDATION_REGEX = "/^-?\\d+(,\\d{3})*(\\.\\d{1,2})?$/";
     private final String description;
     private final double amount;
     private final String otherParty;
@@ -25,6 +28,13 @@ public class Transaction {
         this.amount = amount;
         this.otherParty = otherParty;
         this.date = date;
+    }
+
+    /**
+     * Returns true if a given string is a valid phone number.
+     */
+    public static boolean isValidTransaction(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     public String getDescription() {
