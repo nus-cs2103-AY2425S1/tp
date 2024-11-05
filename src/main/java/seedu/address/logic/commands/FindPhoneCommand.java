@@ -15,7 +15,7 @@ public class FindPhoneCommand extends Command {
 
     public static final String COMMAND_WORD = "fp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose phone number begins with "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose phone number begins with "
             + "the specified keywords (integers only with no spacing) and displays them as a list with index numbers.\n"
             + "Parameters: integers \n"
             + "Example: " + COMMAND_WORD + " 91234567";
