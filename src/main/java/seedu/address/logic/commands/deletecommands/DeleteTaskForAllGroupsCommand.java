@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.deletecommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
@@ -28,7 +28,7 @@ public class DeleteTaskForAllGroupsCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "dt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Deletes a task from a group.\n"
+        + ": Deletes a task from all groups.\n"
         + "Parameters: "
         + PREFIX_INDEX + "INDEX\n"
         + "Example: " + COMMAND_WORD + " "
@@ -57,12 +57,12 @@ public class DeleteTaskForAllGroupsCommand extends Command {
         Task targetTask = lastShownList.get(taskIndex.getZeroBased());
         List<Group> toBeDeletedFrom = getGroupsToBeDeletedFrom(groupList, targetTask);
         updateTaskInGroup(toBeDeletedFrom, targetTask, model);
-        model.setStateGroupTask();
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         String formattedGroups = toBeDeletedFrom.stream()
             .map(group -> Messages.format(group))
             .collect(Collectors.joining("\n"));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(targetTask), formattedGroups),
-            LIST_GROUP_TASK_MARKER);
+            LIST_TASK_MARKER);
     }
 
     @Override
