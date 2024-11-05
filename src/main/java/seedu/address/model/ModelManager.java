@@ -268,7 +268,7 @@ public class ModelManager implements Model {
             }
         }
     }
-    
+
     @Override
     public List<Wedding> getWeddingFromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
@@ -282,7 +282,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        
+    
         return list;
     }
 
