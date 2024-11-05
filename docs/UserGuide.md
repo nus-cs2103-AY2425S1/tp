@@ -10,18 +10,6 @@ the perfect balance between efficiency and usability. BakeBuddy is an address bo
 prefer quick and efficient commands over traditional GUI-based apps, making orders, customer and supplier management 
 seamless for busy home-based bakery owners.
 
-## Target User Profile
-
-The MVP offers a simplified digital address book solution designed specifically for home-based bakery businesses. BakeBuddy helps owners manage customer relationships, track orders, maintain an inventory of ingredients and pastries, and manage supplier orders—all in one place. With a streamlined interface, bakery owners can reduce administrative tasks and focus on baking.
-
----
-
-## Task and Purpose
-
-This User Guide (UG) explains the operation of BakeBuddy for home-based bakery business owners, covering all current features precisely to facilitate correct usage. The language is concise, unambiguous, and appropriate for the target audience, ensuring readability on first glance. The structure, layout, and formatting are consistent, making navigation easy for the user.
-
----
-
 * Table of Contents
 {:toc}
 
