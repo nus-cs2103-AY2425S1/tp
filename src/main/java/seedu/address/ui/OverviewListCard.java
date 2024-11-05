@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,21 +24,21 @@ public class OverviewListCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label phone;
+    private Text phone;
     @FXML
-    private Label email;
+    private Text email;
     @FXML
-    private Label address;
+    private Text address;
     @FXML
-    private Label desiredRole;
+    private Text desiredRole;
     @FXML
-    private Label skills;
+    private Text skills;
     @FXML
-    private Label experience;
+    private Text experience;
     @FXML
-    private Label status;
+    private Text status;
     @FXML
-    private Label note;
+    private Text note;
     @FXML
     private FlowPane tags;
 
@@ -52,11 +53,12 @@ public class OverviewListCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         address.setText(person.getAddress().value);
-        desiredRole.setText(person.getDesiredRole().value); // Display desired role
-        skills.setText(person.getSkills().value); // Display skills
+        desiredRole.setText(person.getDesiredRole().value); // Display role with label
+        skills.setText(person.getSkills().value); // Display skills with label
         experience.setText(person.getExperience().value);
-        status.setText(person.getStatus().value); // Display status
-        note.setText(person.getNote().value); // Display note
+        status.setText(person.getStatus().value); // Display status with label
+        note.setText(person.getNote().value); // Display note with label
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

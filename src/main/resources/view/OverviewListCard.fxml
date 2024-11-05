@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
 <HBox id="overviewCard" fx:id="overviewCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -25,17 +27,41 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="name" text="\$first" styleClass="label_name" />
             </HBox>
             <FlowPane fx:id="tags" />
-            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-            <Label fx:id="skills" styleClass="cell_small_label" text="\$skills" />
-            <Label fx:id="experience" styleClass="cell_small_label" text="\$experience" />
-            <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
-            <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
-            <Label fx:id="desiredRole" styleClass="cell_small_label" text="\$desiredRole" />
+            <TextFlow>
+                <Text text="Phone: " styleClass="cell_detail"/>
+                <Text fx:id="phone" styleClass="cell_small_text"/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Address: " styleClass="cell_detail" />
+                <Text fx:id="address" styleClass="cell_small_text"/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Email: " styleClass="cell_detail" />
+                <Text fx:id="email" styleClass="cell_small_text"/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Skills: " styleClass="cell_detail" />
+                <Text fx:id="skills" styleClass="cell_small_text"/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Experience: " styleClass="cell_detail" />
+                <Text fx:id="experience" styleClass="cell_small_text "/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Status: " styleClass="cell_detail" />
+                <Text fx:id="status" styleClass="cell_small_text"/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Role: " styleClass="cell_detail" />
+                <Text fx:id="desiredRole" styleClass="cell_small_text "/>
+            </TextFlow>
+            <TextFlow>
+                <Text text="Note: " styleClass="cell_detail" />
+                <Text fx:id="note" styleClass="cell_small_text"/>
+            </TextFlow>
         </VBox>
     </GridPane>
 </HBox>
