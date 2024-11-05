@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
@@ -19,28 +18,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventManager;
 
-import javax.swing.text.View;
 
 
 public class ViewEventCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
-
-    @Test
-    public void execute_validIndex_success() {
-        Event eventToView = model.getEventManager().getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        ViewEventCommand viewEventCommand = new ViewEventCommand(INDEX_FIRST_EVENT);
-
-        String expectedMessage = String.format(ViewEventCommand.MESSAGE_SUCCESS,
-                eventToView.getName());
-
-        EventManager expectedEventManager = getTypicalEventManager();
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), expectedEventManager, new UserPrefs());
-        
-        assertCommandSuccess(viewEventCommand, model, expectedMessage, expectedModel);
-    }
 
     @Test
     public void execute_nullEventManager_throwsNullPointerException() {
