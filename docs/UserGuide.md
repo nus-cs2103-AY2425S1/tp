@@ -310,7 +310,7 @@ An unarchive feature is in the works and will be available in the future.
 
 </div>
 
-### Listing all archived clients
+### Listing all archived clients `archive-list`
 Shows a list of all archived clients' contacts in Clientele+.
 
 Format: `archive-list`
