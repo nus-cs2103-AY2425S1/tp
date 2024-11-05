@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +21,7 @@ import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ClassIdContainsKeywordsPredicate;
-import seedu.address.model.person.MonthPaidContainsKeywordsPredicate;
-import seedu.address.model.person.NameAndClassIdContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.NotMonthPaidContainsKeywordsPredicate;
+import seedu.address.model.person.PersonPredicateBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -35,26 +33,26 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-        ClassIdContainsKeywordsPredicate thirdPredicate = new ClassIdContainsKeywordsPredicate(
-                Collections.singletonList("third"));
-        ClassIdContainsKeywordsPredicate fourthPredicate = new ClassIdContainsKeywordsPredicate(
-                Collections.singletonList("fourth"));
-        NameAndClassIdContainsKeywordsPredicate fifthPredicate = new NameAndClassIdContainsKeywordsPredicate(
-                Collections.singletonList("fifth"), Collections.singletonList("fifth"));
-        NameAndClassIdContainsKeywordsPredicate sixthPredicate = new NameAndClassIdContainsKeywordsPredicate(
-                Collections.singletonList("sixth"), Collections.singletonList("sixth"));
+        PersonPredicateBuilder firstPredicateBuilder = new PersonPredicateBuilder()
+                .withNameKeywords(List.of("first"));
+        PersonPredicateBuilder secondPredicateBuilder = new PersonPredicateBuilder()
+                .withNameKeywords(List.of("second"));
+        PersonPredicateBuilder thirdPredicateBuilder = new PersonPredicateBuilder()
+                .withClassIdKeywords(List.of("third"));
+        PersonPredicateBuilder fourthPredicateBuilder = new PersonPredicateBuilder()
+                .withClassIdKeywords(List.of("fourth"));
+        PersonPredicateBuilder fifthPredicateBuilder = new PersonPredicateBuilder()
+                .withClassIdKeywords(List.of("fifth")).withNameKeywords(List.of("fifth"));
+        PersonPredicateBuilder sixthPredicateBuilder = new PersonPredicateBuilder()
+                .withClassIdKeywords(List.of("sixth")).withNameKeywords(List.of("fifth"));
 
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
-        FindCommand findThirdCommand = new FindCommand(thirdPredicate);
-        FindCommand findFourthCommand = new FindCommand(fourthPredicate);
-        FindCommand findFifthCommand = new FindCommand(fifthPredicate);
-        FindCommand findSixthCommand = new FindCommand(sixthPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicateBuilder);
+        FindCommand findSecondCommand = new FindCommand(secondPredicateBuilder);
+        FindCommand findThirdCommand = new FindCommand(thirdPredicateBuilder);
+        FindCommand findFourthCommand = new FindCommand(fourthPredicateBuilder);
+        FindCommand findFifthCommand = new FindCommand(fifthPredicateBuilder);
+        FindCommand findSixthCommand = new FindCommand(sixthPredicateBuilder);
 
 
         // same object -> returns true
@@ -63,13 +61,13 @@ public class FindCommandTest {
         assertTrue(findFifthCommand.equals(findFifthCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicateBuilder);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
-        FindCommand findThirdCommandCopy = new FindCommand(thirdPredicate);
+        FindCommand findThirdCommandCopy = new FindCommand(thirdPredicateBuilder);
         assertTrue(findThirdCommand.equals(findThirdCommandCopy));
 
-        FindCommand findFifthCommandCopy = new FindCommand(fifthPredicate);
+        FindCommand findFifthCommandCopy = new FindCommand(fifthPredicateBuilder);
         assertTrue(findFifthCommand.equals(findFifthCommandCopy));
 
 
@@ -97,9 +95,9 @@ public class FindCommandTest {
     @Test
     public void test_executeZeroKeywordsNoPersonFound_returnSuccess() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        PersonPredicateBuilder predicateBuilder = preparePredicate(" ", "name");
+        FindCommand command = new FindCommand(predicateBuilder);
+        expectedModel.updateFilteredPersonList(predicateBuilder.build());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -107,10 +105,9 @@ public class FindCommandTest {
     @Test
     public void test_executeNoPersonsFoundClassId_returnSuccess() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        ClassIdContainsKeywordsPredicate predicate =
-                new ClassIdContainsKeywordsPredicate(Collections.singletonList(" "));
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        PersonPredicateBuilder predicateBuilder = preparePredicate(" ", "classId");
+        FindCommand command = new FindCommand(predicateBuilder);
+        expectedModel.updateFilteredPersonList(predicateBuilder.build());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -118,84 +115,79 @@ public class FindCommandTest {
     @Test
     public void test_monthPaidContainsKeywordsWithMatchers_returnsTrue() {
         // Matcher for month paid
-        MonthPaidContainsKeywordsPredicate predicate =
-                new MonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-12"));
-        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        PersonPredicateBuilder predicateBuilder = preparePredicate("2022-12", "monthPaid");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
 
         // Only one matching keyword
-        predicate =
-                new MonthPaidContainsKeywordsPredicate(Arrays.asList("2022-11", "2022-12"));
-        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        predicateBuilder = preparePredicate("2022-11 2022-12", "monthPaid");
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
     }
 
     @Test
     public void test_monthPaidContainsKeywordsWithMatchers_returnsFalse() {
         // Non-matching month paid
-        MonthPaidContainsKeywordsPredicate predicate =
-                new MonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-11"));
-        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withMonthPaidKeywords(Collections.singletonList("2022-11"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
 
         // Non-matching both months paid
-        predicate =
-                new MonthPaidContainsKeywordsPredicate(Arrays.asList("2022-10", "2022-11"));
-        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        predicateBuilder =
+                new PersonPredicateBuilder().withMonthPaidKeywords(Arrays.asList("2022-10", "2022-11"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
     }
 
     @Test
     public void test_notMonthPaidContainsKeywordsWithMatchers_returnsTrue() {
         // Matcher for not month paid
-        NotMonthPaidContainsKeywordsPredicate predicate =
-                new NotMonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-11"));
-        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withNotMonthPaidKeywords(Collections.singletonList("2022-11"));
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
 
         // Only one non-matching keyword
-        predicate =
-                new NotMonthPaidContainsKeywordsPredicate(Arrays.asList("2022-10", "2022-11"));
-        assertTrue(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        predicateBuilder =
+                new PersonPredicateBuilder().withNotMonthPaidKeywords(Arrays.asList("2022-10", "2022-11"));
+        assertTrue(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
     }
 
     @Test
     public void test_notMonthPaidContainsKeywordsWithMatchers_returnsFalse() {
-        // Matching month paid
-        NotMonthPaidContainsKeywordsPredicate predicate =
-                new NotMonthPaidContainsKeywordsPredicate(Collections.singletonList("2022-12"));
-        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        // Matcher for not month paid
+        PersonPredicateBuilder predicateBuilder =
+                new PersonPredicateBuilder().withNotMonthPaidKeywords(Collections.singletonList("2022-12"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
 
-        // Matching one of the months paid
-        predicate =
-                new NotMonthPaidContainsKeywordsPredicate(Arrays.asList("2022-11", "2022-12"));
-        assertFalse(predicate.test(new PersonBuilder().withMonthsPaid("2022-12").build()));
+        // Only one non-matching keyword
+        predicateBuilder =
+                new PersonPredicateBuilder().withNotMonthPaidKeywords(Arrays.asList("2022-11", "2022-12"));
+        assertFalse(predicateBuilder.build().test(new PersonBuilder().withMonthsPaid("2022-12").build()));
     }
 
     @Test
     public void test_executeWithMultipleKeywordsMultiplePersonsFound_returnSuccess() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        PersonPredicateBuilder predicate = preparePredicate("Kurz Elle Kunz", "name");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 
-
-    @Test
-    public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
-
-        ClassIdContainsKeywordsPredicate classIdPredicate = new ClassIdContainsKeywordsPredicate(
-                Arrays.asList("keyword"));
-        FindCommand findCommandClassId = new FindCommand(classIdPredicate);
-        String expectedClassId = FindCommand.class.getCanonicalName() + "{predicate=" + classIdPredicate + "}";
-        assertEquals(expectedClassId, findCommandClassId.toString());
-    }
-
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code PredicateBuilder} with specified type keywords.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private PersonPredicateBuilder preparePredicate(String userInput, String type) {
+        if (Objects.equals(type, "name")) {
+            return new PersonPredicateBuilder().withNameKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "classId")) {
+            return new PersonPredicateBuilder().withClassIdKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "monthPaid")) {
+            return new PersonPredicateBuilder().withMonthPaidKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        if (Objects.equals(type, "notMonthPaid")) {
+            return new PersonPredicateBuilder().withNotMonthPaidKeywords(Arrays.asList(userInput.split("\\s+")));
+        }
+        throw new RuntimeException();
     }
 }

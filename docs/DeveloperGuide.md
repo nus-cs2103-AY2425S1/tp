@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Utilized JavaFX for creating interactive and visual components such as charts (e.g., bar charts, pie charts).
+* Any adapted code, concepts, or third-party libraries should be properly cited here.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the javaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -531,14 +532,18 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `pie`<br>
       Expected: A pie chart is displayed showing the number of students in each class. The pie chart is displayed in a new window.
+   
+   2. Test case: `bar` with multiple months but varying numbers of students  
+      Expected: A bar chart is displayed with multiple bars, each representing a different month. The bars vary in height according to the number of students who paid in each month.
 
+      
+2. Displaying a pie chart with data
 
-2. Displaying a pie chart error
+    1. Prerequisites: List all students in the address book, ensuring there are students in multiple classes.
 
-    1. Prerequisites: Empty list
-    
-    1. Test case: `pie`<br>
-        Expected: Error message shown in the status bar. No pie chart displayed.
+    1. Test case: `pie`  
+       Expected: A pie chart is displayed, showing the distribution of students across different classes. Each class is represented as a segment, with the segment size proportional to the number of students in that class. The chart is displayed in a new window.
+
    
 ### Displaying a bar chart of the distribution of students against the number of months paid
 
@@ -573,6 +578,105 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
+### Marking a Payment Date
+
+1. Marking a payment date
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `markpaid 1 m/2024-12`<br>
+      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message. The person card in the UI is updated.
+   1. Test case: `markpaid 0 m/2023-10`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect mark as paid commands to try: `markpaid`, `markpaid x`, `markpaid x m/1` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+   2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
+      Expected: Similar to previous.
+
+### Viewing Command History
+
+1. Viewing command history
+
+   1. Prerequisites: Multiple commands have been executed.
+
+   1. Test case: up arrow key<br>
+      Expected: A previous command is shown in the status message.
+
+### Viewing Student Details
+
+1. Viewing student details
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `info 1` <br>
+      Expected: The first person's details are shown in the status message. The person card in the UI is highlighted.
+   1. Test case: `info 0` <br>
+      Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+   1. Other incorrect view commands to try: `info`, `info x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+=======
+### Clearing all entries
+
+1. Clearing all entries while all entries are being shown
+
+    1. Prerequisites: List all entries using the `list` command. Ensure there is at least one entry on the list.
+
+    1. Test case: `clear`  
+       Expected: All entries are removed from the address book. A message "Address book has been cleared!" is displayed in the command box. UI updates to show an empty address book.
+
+    1. Test case: `clear` on an already empty address book  
+       Expected: No change, as there are no entries to delete. Message "Address book has been cleared!" is displayed again. Status bar remains the same.
+
+    1. Other clear commands to try: `clear x`, `clear 123`, `clear all`  
+       Expected: Address book will ignore parameters after the "clear" keyword, hence the address book will still be cleared.
+
+### Undoing and Redoing changes
+
+1. Undoing the most recent change
+
+    1. Prerequisites: Perform a command that modifies the address book (e.g., `add`, `delete`, `edit`).
+
+    1. Test case: `undo`  
+       Expected: The most recent change is reversed. The address book reverts to the state before the last modification. A message indicating the undo action is displayed in the command box. Status bar timestamp is updated.
+
+    1. Test case: `undo` with no prior changes  
+       Expected: No change, as there are no actions to undo. A message "No Command to undo" is shown in the command box. 
+
+1. Redoing the most recent undone change
+
+    1. Prerequisites: Perform an `undo` action to revert a change.
+
+    1. Test case: `redo`  
+       Expected: The most recently undone change is reapplied. The address book reflects the state as if the original command was executed again. A message indicating the redo action is displayed in the command box. Status bar timestamp is updated.
+
+    1. Test case: `redo` with no prior `undo`  
+       Expected: No change, as there are no actions to redo. An error message is shown in the command box "No command to redo".
+
+    1. Other incorrect undo/redo commands to try: `undo x`, `redo x` (where `x` is any additional parameter)  
+       Expected: Error message indicating an unrecognized command format. Address book remains unaffected.
+
+### Exiting the Program
+
+1. Exiting the program using the `exit` command
+
+    1. Prerequisites: Ensure the program is running with the address book open.
+
+    1. Test case: `exit`  
+       Expected: The program closes immediately. Data written to EduTuTu should be saved. No further interaction is possible as the program window closes.
+
+1. Exiting the program using the GUI
+
+    1. Prerequisites: Ensure the program is running with the address book open.
+
+    1. Test case: Click `File` > `Exit` in the GUI toolbar  
+       Expected: The program closes immediately. Similar to the `exit` command, data written to EduTuTu should be saved.
+
+    1. Other exit commands to try: `exit now`, `quit`, `close`  
+       Expected: Program will ignore arguments after the exit command and close immediately.
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -580,3 +684,75 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## Appendix: Effort
+
+This project, EduTuTu, required a considerable amount of effort to design and implement due to its functionality and the combination of both Command Line Interface (CLI) and Graphical User Interface (GUI) components. Unlike simpler applications like AB3, which deals with only one entity type, EduTuTu manages multiple entities such as students, payments, and classes. Each entity has unique properties and relationships, adding complexity to the data model, command handling, and user interface design.
+
+### Difficulty Level and Challenges
+The development of EduTuTu presented several key challenges:
+- **Multi-Entity Management:** Managing multiple types of entities (students, payments, classes) required a flexible data structure and sophisticated command parsing to handle diverse commands like `add`, `markpaid`, and `pie`.
+- **Data Visualization:** Creating dynamic visualizations (pie and bar charts) to track class distributions and monthly payments required integration with a charting library and customization to suit EduTuTu’s specific data needs.
+- **Error Handling and User Experience:** Ensuring robust error handling and clear user feedback was essential, particularly for commands related to data visualization and file manipulation (e.g., handling missing or corrupted files).
+
+### Effort Required
+Significant effort went into:
+- **Designing a Scalable Data Model:** We created a model that supports various entity types, allowing for easy future expansion.
+- **Extensive Testing:** Due to the multi-entity structure and data visualization, thorough testing was necessary to handle a wide range of user inputs and edge cases, particularly for commands such as `clear`, `undo`, and `redo`.
+- **User Interface Improvements:** Balancing the CLI with GUI elements required additional effort to ensure that commands were intuitive and visualizations were accessible, providing a seamless user experience.
+
+### Reuse of Libraries and Components
+To streamline development, we leveraged certain libraries and reused components where feasible:
+- **Charting Library for Visualizations:** The `javaFX` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `javaFX` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
+- **Command Framework from AB3:** We adapted AB3’s command framework to accommodate EduTuTu’s expanded command set, allowing us to save development time while maintaining a consistent structure. Additional commands such as `markpaid` and `info` were added to extend functionality for the specific needs of a tuition center.
+
+### Achievements
+Despite the complexity, we achieved several milestones:
+- Designed a flexible and scalable multi-entity data model that can be expanded easily for future needs.
+- Successfully implemented user-friendly data visualization commands (`pie`, `bar`), providing tuition center administrators with valuable insights at a glance.
+- Developed a robust system for error handling and user feedback, enhancing usability and reliability.
+
+In summary, EduTuTu required significant effort due to its multi-entity structure, visualizations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
+
+## Appendix: Planned Enhancement
+
+**Team size:** 5  
+**Total planned enhancements:** 10
+
+This section lists planned enhancements to address known feature flaws. These enhancements will be implemented after PE-D testing is completed and feedback is received.
+
+
+1. **Add Confirmation for ‘Clear’ Command**  
+   **Current Issue:** The `clear` command deletes all entries immediately without a confirmation prompt, which can lead to accidental data loss.  
+   **Planned Enhancement:** Add a confirmation dialog that appears when the `clear` command is entered. Users must confirm the action by typing “yes” to proceed with clearing all data. Example prompt: "Are you sure you want to clear all entries? Type 'yes' to confirm."
+
+   
+2. **Make 'Undo' and 'Redo' Command Limit Clear**  
+   **Current Issue:** Users are unaware of the limit to the `undo` and `redo` command history, leading to potential confusion.  
+   **Planned Enhancement:** Display a warning when the maximum undo/redo history has been reached. For example, "No further undo actions are available."
+
+
+3. **Emoji Handling in Input Fields**  
+   **Current Issue:** Input fields currently do not handle emojis correctly due to a regex limitation, which may cause unexpected behavior.  
+   **Planned Enhancement:** Update the regex used for validation to allow emojis in names, addresses, and other text fields, or provide an informative error message if emojis are not supported.
+
+
+4. **Display List Sorting Options**  
+   **Current Issue:** The `list` command displays entries in a default order, with no options for sorting.  
+   **Planned Enhancement:** Add sorting options to the `list` command, allowing users to sort by name, class, or payment status. For example, `list sortby/name` or `list sortby/class`.
+
+
+5. **Improved Multi-Monitor Support**  
+   **Current Issue:** When switching between multiple monitors, the application may open off-screen if moved to a secondary screen and later switched back to a single-monitor setup.  
+   **Planned Enhancement:** Implement better positioning handling to ensure the application opens within the primary screen’s bounds if multiple monitors are disconnected.
+
+
+6. **Allow Multiple Class Allocations for a Single Student**  
+   **Current Issue:** Currently, there are restrictions preventing a student from being assigned to more than one class, which can cause issues in managing class rosters.  
+   **Planned Enhancement:** Remove restrictions each student to a single class.
+
+   
+These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
+
+
