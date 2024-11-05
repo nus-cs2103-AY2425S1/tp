@@ -6,6 +6,11 @@
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
 }
 
+.command-failure {
+    /* The command-failure class should always override the default text-fill style */
+    -fx-text-fill: #878787 !important;
+}
+
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
     -fx-background: #383838;
