@@ -57,8 +57,7 @@ public class TagCommandTest {
 
         Person updatedPerson = new StudentBuilder((Student) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
-                tagsToAdd, Messages.format(updatedPerson));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
 
@@ -82,8 +81,7 @@ public class TagCommandTest {
 
         Person updatedPerson = new CompanyBuilder((Company) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS,
-                tagsToAdd, Messages.format(updatedPerson));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
 
