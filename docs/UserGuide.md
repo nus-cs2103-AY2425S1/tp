@@ -127,9 +127,9 @@ Examples:
 * `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan t/Chief Technology Officer ps/in progress py/pending cs/active d/09-09-2024`
 * `add n/Betsy Crowe t/SoftEng Inc e/betsycrowe@gmail.com a/Wallich Street p/1234567 t/Founder d/11-04-2024`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: 
+**:information_source: Tip:**<br>
 
-<br>
 * The deadline could be the date you need to submit the project to the client.
 * The deadline could instead be the date by which you need to follow up with a potential client.
 * You may hover over the Payment Status Icon to view the payment status as text.
