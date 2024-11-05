@@ -310,11 +310,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: Add a Guest**
 
 **MSS**
 
-1. User creates a new person with the required details (e.g. name, email, role, etc.).
+1. User creates a new Guest with the required details (e.g. name, email, etc.).
+2. System adds the entry.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided details are incomplete or invalid.
+    * 1a1. System shows an error message and requests the user to re-enter the details.
+
+      Use case resumes at step 1.
+
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+**Use case: Add a Vendor**
+
+**MSS**
+
+1. User creates a new Vendor with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
@@ -349,7 +370,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. System shows an error message and requests the user to re-enter the details.
 
       Use case resumes at step 1.
-
 
 **Use Case: Delete a Guest**
 
