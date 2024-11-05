@@ -18,7 +18,6 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-
       <HBox alignment="BOTTOM_RIGHT" fx:id="helpMessageContainer">
         <children>
           <Label fx:id="helpMessage" text="Label">
