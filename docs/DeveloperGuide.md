@@ -121,12 +121,12 @@ How the parsing works:
 
 The class diagram below demonstrates the subclasses of the CommandParser class:
 
-<puml src="diagrams/ParserSubClasses.puml" width="600"/>
+<puml src="diagrams/ParserSubClasses.puml" width="700"/>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 
 The `Model` component,
@@ -143,7 +143,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="700" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -574,12 +574,6 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit John Doe ap/`<br>
        Expected: Contact with name `John Doe` has all existing appointments cleared
 
-### Exporting the address book
-
-1. Exporting Data
-    1. Test case: `export`<br>
-       Expected: A .json file under `data` folder should be created in the folder where the MediContact.jar file is stored
-
 ### Filter the contacts list
 
 1. Filtering by Age range
@@ -661,12 +655,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding new notes to an existing person
 
-    1. Test cases to try: `note Bryan ap/01/01/2025 r/Allergic to Ibuprofen`, `note John m/10mg Panadol`<br>
+    1. Test cases: `note Bryan ap/01/01/2025 r/Allergic to Ibuprofen`, `note John m/10mg Panadol`<br>
        Expected: Notes are added to person (Behaviour is very similar to Edit Command's appointments and tags)
 
 2. Removing note's fields of an existing person
 
-    1. Test cases to try: `note Bryan ap/ r/`, `note John m/`<br>
+    1. Test cases: `note Bryan ap/ r/`, `note John m/`<br>
        Expected: Respective Note fields are removed (Behaviour is very similar to Edit Command's appointments and tags)
 
 ### Sorting the list
@@ -753,13 +747,15 @@ The project was moderately challenging due to the complexity of managing multipl
 3. **Integration with JavaFX**: Ensuring smooth integration with JavaFX for the UI components, especially given the non-modular setup.
 4. **Performance Optimization**: Ensuring the application performs efficiently with a large dataset (up to 1000 contacts) without noticeable sluggishness.
 5. **Testing**: Comprehensive testing to ensure all functionalities work as expected and the application is robust against invalid inputs.
+6. **Complex Codebase**: Starting from a brownfield project meant working with a complex, pre-existing codebase. Understanding and adapting to others' coding styles and logic added a significant challenge, requiring time and careful analysis to ensure seamless integration of new features.
 
 ### Effort Required
 The project required significant effort in the following areas:
-1. **Design and Architecture**: Planning the architecture to handle multiple entities and their interactions.
+1. **Familiarizing with existing code**: Understanding and adapting to others' coding styles and logic added a significant challenge, requiring time and careful analysis to ensure seamless integration of new features.
+2. **Design and Architecture**: Planning the architecture to handle multiple entities and their interactions.
 2. **Implementation**: Coding the functionalities, ensuring they work together seamlessly.
 3. **Testing**: Writing and executing test cases to ensure the application is bug-free and performs well.
-4. **Documentation**: Creating detailed documentation to help future developers understand the system and its components.
+4. **Documentation**: Producing comprehensive documentation for both developers and users, including a developer guide to explain the system's components and a user guide to ensure understanding of the application's features.
 
 ### Achievements
 1. **Robust Data Model**: Successfully designed and implemented a data model that handles multiple entity types efficiently.
@@ -772,6 +768,7 @@ A significant part of the effort was saved through the reuse of components from 
 1. **UI Components**: Reused and adapted UI components from AB3, saving time on designing and implementing new UI elements.
 2. **Command Parsing**: Leveraged the command parsing logic from AB3, adapting it to handle the additional commands required for our project.
 3. **Storage**: Utilized the storage mechanisms from AB3, modifying them to handle the additional data types.<br>
+4. **Architecture Design**: Built upon the existing architecture design from AB3, extending classes on top of the current structure.
 
 The reuse of these components allowed us to focus more on the unique aspects of our project, such as handling multiple entity types and optimizing performance, thereby saving approximately 20% of the total effort.
 

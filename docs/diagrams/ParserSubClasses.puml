@@ -4,31 +4,38 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
+skinparam class {
+    width 400
+}
 package "Parser SubClasses"{
 
-Class "<<interface>>\nParser" as Parser
+Class "     <<interface>>     \n   Parser   " as Parser
 Class AddCommandParser
 Class DeleteCommandParser
 Class EditCommandParser
 Class FilterCommandParser
 Class FindCommandParser
+Class ImportCommandParser
 Class ListCommandParser
 Class NoteCommandParser
 Class SortCommandParser
 Class StarCommandParser
 Class UnstarCommandParser
+Class ViewCommandParser
 
 }
 AddCommandParser -up-|> Parser
-DeleteCommandParser -up---|> Parser
+DeleteCommandParser -up----|> Parser
 EditCommandParser -up--|> Parser
-FilterCommandParser -up--|> Parser
-FindCommandParser -up---|> Parser
-ListCommandParser -up--|> Parser
-NoteCommandParser -up---|> Parser
+FilterCommandParser -up---|> Parser
+FindCommandParser -up----|> Parser
+ImportCommandParser -up--|> Parser
+ListCommandParser -up---|> Parser
+NoteCommandParser -up----|> Parser
 SortCommandParser -up--|> Parser
 StarCommandParser -up---|> Parser
 UnstarCommandParser -up-|> Parser
+ViewCommandParser -up-|> Parser
 
 @enduml
 
