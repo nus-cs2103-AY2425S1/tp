@@ -116,4 +116,38 @@ public class UniqueAppointmentListTest {
         assertEquals(expectedString, uniqueAppointmentList.toString());
     }
 
+    @Test
+    public void removeAppointment_nonExistingAppointment_throwsAppointmentNotFoundException() {
+        uniqueAppointmentList.addAppointment(appointment1);
+        Appointment nonExistingAppointment = new Appointment(new AppointmentType("Consultation"),
+                LocalDateTime.of(2024, 1, 3, 9, 0), BOB, new Sickness("Headache"), new Medicine("Ibuprofen"));
+        assertThrows(AppointmentNotFoundException.class, () -> uniqueAppointmentList.removeAppointment(nonExistingAppointment));
+    }
+
+    @Test
+    public void setAppointments_duplicateInList_throwsDuplicateAppointmentException() {
+        List<Appointment> duplicateAppointments = Arrays.asList(appointment1, appointment1);
+        assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.setAppointments(duplicateAppointments));
+    }
+
+    @Test
+    public void setAppointments_replacesWithNewList() {
+        UniqueAppointmentList anotherList = new UniqueAppointmentList();
+        anotherList.addAppointment(appointment1);
+        anotherList.addAppointment(appointment2);
+        uniqueAppointmentList.setAppointments(anotherList);
+        assertTrue(uniqueAppointmentList.containsAppointment(appointment1));
+        assertTrue(uniqueAppointmentList.containsAppointment(appointment2));
+        assertEquals(uniqueAppointmentList, anotherList);
+    }
+
+    @Test
+    public void equals_withDifferentType_returnsFalse() {
+        assertFalse(uniqueAppointmentList.equals("Not an appointment list"));
+    }
+
+    @Test
+    public void equals_withNull_returnsFalse() {
+        assertFalse(uniqueAppointmentList.equals(null));
+    }
 }
