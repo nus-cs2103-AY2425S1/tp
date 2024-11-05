@@ -17,8 +17,7 @@ import bizbook.model.person.Note;
 public class EditNotesCommandParser implements Parser<EditNotesCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the
-     * EditNotesCommand
+     * Parses the given {@code String} of arguments in the context of the EditNotesCommand
      * and returns a EditNotesCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
