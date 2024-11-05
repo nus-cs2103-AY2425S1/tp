@@ -51,12 +51,21 @@ public class Student extends Person {
         return null;
     }
 
-    public void incrementAttendance() {
-        attendance++;
-    }
+    /**
+     * Returns true if both students have the same student id.
+     * This defines a weaker notion of equality between two students.
+     */
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
 
-    public int getAttendance() {
-        return attendance;
+        if (otherPerson instanceof Student) {
+            return otherPerson != null
+                    && otherPerson.getStudentId().equals(getStudentId());
+        }
+        return false;
     }
 
     @Override
@@ -75,5 +84,5 @@ public class Student extends Person {
     public String getCategoryDisplayName() {
         return "Student";
     }
-    // Things to add: A list to keep track of event attended
+
 }

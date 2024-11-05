@@ -185,16 +185,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Shows the list of possible commands on the right.
      */
     @FXML
     public void handleHelp() {
+        contactDisplay.showHelpDisplay();
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.'
+     */
+    @FXML
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
-        contactDisplay.showHelpDisplay();
     }
 
     void show() {
@@ -234,6 +241,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowHelpWindow()) {
+                handleHelpWindow();
             }
 
             if (commandResult.isExit()) {
