@@ -13,6 +13,8 @@ end box
 [-> LogicManager : execute("xyz")
 activate LogicManager
 
+LogicManager -> AddressBookParser : parseCommand("xyz")
+
 create CommandParser
 activate AddressBookParser
 AddressBookParser -> CommandParser
@@ -20,7 +22,8 @@ activate CommandParser
 AddressBookParser <-- CommandParser
 deactivate CommandParser
 
-LogicManager -> AddressBookParser : parseCommand("xyz")
+
+
 AddressBookParser -> CommandParser : parse("xyz")
 activate CommandParser
 
@@ -29,7 +32,7 @@ create XYZCommand
 CommandParser -> XYZCommand
 activate XYZCommand
 
-note right of XYZCommand: XYZCommand = \nFindEntityCommand, \nAddEntityCommand, \nDeleteEntityCommand, \nEditEntityCommand
+note right of XYZCommand: XYZCommand = \nFindEntityCommand, \nAddEntityCommand, \nDeleteEntityCommand, \nEditEntityCommand, \nClearEntityCommand, \nListEntityCommand
 
 XYZCommand --> CommandParser
 CommandParser --> AddressBookParser
