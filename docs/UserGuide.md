@@ -169,11 +169,12 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TA
 * Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B` matches `Hans Bo`.
 * Phone number, email, address, project status, payment status, client status must match the exact string
   e.g. `ps/in progress` will not match `ps/in prog`.
-* All tags need to be matched for a person to be found.
+* All parameters need to be matched for a person to be found, but if multiple tags are specified only one of them need to be matched.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`.
 * `find n/John ps/completed` returns all clients whose names start with "John" and project status is set to `completed`.
+* `find n/John t/homeowner t/ceo` returns all clients whose names start with "John" and have either a "ceo" tag or a "homeowner" tag.
 * `find n/alex david` returns `Alex Yeoh`, `David Li`:<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
