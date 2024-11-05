@@ -5,8 +5,6 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-![images](images/ezstates_alt_picture.png)
-
 EZStates is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -519,11 +517,11 @@ Commands for managing property listings and associating clients with listings.
     - **Failed Execution:** NIL
 
 - #### Add Buyers to Listing
-    - **Format:** `AddBuyersToListingCommand`
+    - **Format:** `addlistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Adding buyers `Alex Yeoh` and `Charlotte Oliveiro`
       >
       > **Input**:
       >
