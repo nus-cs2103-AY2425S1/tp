@@ -32,12 +32,14 @@ tasks done faster than traditional GUI apps.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
       ![Ui](images/Ui.png)
    <box type="tip" seamless>
-   **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:** <br>
-    1. Create an empty folder on your Desktop called 'PlanPerfect'. <br>
-    2. Copy the PlanPerfect.jar file in this folder.<br>
-    3. Open a command terminal, such as terminal on MacOS devices or Command Prompt on Windows devices. <br>
-    4. Access the PlanPerfect folder by inputting `cd Desktop/PlanPerfect` and then hitting the Enter key. <br>
-    5. Type `java -jar PlanPerfect.jar` to launch the PlanPerfect application. <br>
+
+   **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:**
+    1. Create an empty folder on your Desktop called 'PlanPerfect'.
+    2. Copy the PandaBot.jar file in this folder.
+    3. Open a command terminal, such as terminal on MacOS devices or Command Prompt on Windows devices.
+    4. Access the PlanPerfect folder by inputting `cd Desktop/PlanPerfect` and then hitting the Enter key.
+    5. Type `java -jar PlanPerfect.jar` to launch the PlanPerfect application
+
     </box>
 1. On the bottom left of the screen is a list of sample weddings. On the bottom right is a list of sample contacts.
 1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -54,6 +56,8 @@ tasks done faster than traditional GUI apps.
 1. Refer to the [Features](#features) below for details of each command.
 1. Once you are familiar with the commands, run the `clear` command to get rid of the sample data and start adding and managing your contacts and weddings with ease!
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -66,10 +70,10 @@ tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/photographer` or as `n/John Doe`.
 
 * Parameter descriptions containing a `...` indicate that the parameter can take one or more inputs (compulsory parameters) or no inputs at all (only for optional parameters).<br>
-  e.g. `[t/TAG1 TAG2 ...]` can be ignored (0 tags), replaced with `t/friend` (1 tag), or replaced with `t/friend family` (2 tags) and so on. Suppose the square brackets were not present for this example, a command input with 0 provided tags would not be accepted.
+  e.g. `[t/TAG1 TAG2 ...]` can be ignored (0 tags), replaced with `t/photographer` (1 tag), or replaced with `t/photographer videographer` (2 tags) and so on. Suppose the square brackets were not present for this example, a command input with 0 provided tags would not be accepted.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -80,10 +84,12 @@ tasks done faster than traditional GUI apps.
 * Commands are executed relative to current view. The current view could either be a list of all contacts saved in your PlanPerfect application (accessed using the `list` command) or only contacts assigned to a particular wedding (accessed using the `view` command).
   * eg1: using the `filter` command to find florists while in the all contacts view will list ALL florists in your contacts. However, if you are in a wedding view, using `filter` to find 
     florists will only list florists assigned to that wedding.
-  * eg2: certain commands like `unassign` can only be used while inside a wedding view. This aligns with the logical flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.
+  * eg2: certain commands like `unassign` can only be used while inside a wedding view. This aligns with the logical flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.<br>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### General Features
 
@@ -97,6 +103,8 @@ Shows a message with basic usage instructions for PlanPerfect. The link to this 
 
 <br><br/>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Contact-related Features
 #### Adding a contact: `add`
 
@@ -105,7 +113,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
 Adds a contact to the address book.
 
 <box type="info" seamless>
+
+**Note:**
 A contact can only have up to 6 tags (including 0). No two contacts can have the same phone number.
+
 </box>
 
 Examples:
@@ -136,7 +147,10 @@ Edits an existing contact in the address book.
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
   
 <box type="info" seamless>
-**Note:** Tagging & Untagging (Editing of Tags) is done using the `tag` and `untag` commands, not the `edit` command!
+
+**Note:**
+Tagging & Untagging (Editing of Tags) is done using the `tag` and `untag` commands, not the `edit` command!
+
 </box>
 
 Examples:
@@ -262,12 +276,16 @@ Clears all entries in the address book.
 
 <br><br/>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Wedding-related Features
 
 In this section, note that:
 * A `WEDDING_INDEX` refers to that wedding's index number as shown in the wedding list.
 * A `CONTACT_INDEX` refers to the that contact's index number in the contact list (the word `CONTACT` may be followed by a number to indicate its order of appearance in the command input).
 * Any `WEDDING_INDEX` or `CONTACT_INDEX` **must be a positive integer** 1, 2, 3, ...
+
+<br><br/>
 
 #### Add wedding: `addw`
 
@@ -279,8 +297,10 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view.
   <box type="warning" seamless>
-  **IMPORTANT:**
+
+  **Caution:**
   If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
+  
   </box>
 Examples:
 * `addw n/Arif and Sonali Wedding d/30/04/2025`
@@ -312,8 +332,10 @@ Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 * Assigning/Removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and `unassign` commands.
 
 <box type="warning" seamless>
+
 **Caution:**
-The edited wedding name provided must not be the same as the name of an existing wedding.
+The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect
+
 </box>
 
 Examples:
@@ -344,9 +366,11 @@ Unassigns contacts at the specified index's from the wedding you are currently v
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
 <box type="warning" seamless>
+
 **Caution:**
 You must be in a wedding view to unassign contacts from that wedding (using the `view` command). You can only input contact indices
 from that wedding to be unassigned.
+
 </box>
 
 Examples: 
@@ -365,6 +389,9 @@ Examples:
 * `deletew 4` deletes the 4th wedding on the wedding panel.
 
 <br><br/>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Other Features
 
 #### Exiting the program : `exit`
@@ -381,9 +408,11 @@ PlanPerfect automatically saves your contact and wedding data as a JSON file `[J
 Advanced users are welcome to update data directly by editing that data file if you choose.
 
 <box type="warning" seamless>
+
 **Caution:**
 If your changes to the data file makes its format invalid, PlanPerfect will discard all data and start with an empty data file the next time it is run.  Hence, you are strongly recommended to save a backup of the file before editing it.<br>
 Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 <br><br/>
@@ -393,6 +422,8 @@ Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e
 User preferences are saved in the JSON file `[JAR file location]/preferences.json`. Advanced users are welcome to edit the 'TagColours' field in the JSON with custom hexadecimal values (colour codes) in order to customise the appearance of your tags.<br>
 
 <br><br/>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -422,6 +453,7 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
