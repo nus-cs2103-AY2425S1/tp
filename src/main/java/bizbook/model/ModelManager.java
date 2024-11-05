@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import bizbook.commons.core.GuiSettings;
 import bizbook.commons.core.LogsCenter;
 import bizbook.model.person.Person;
-import bizbook.model.person.UniquePersonList;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,10 +21,9 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final UniquePersonList pinnedPersons;
     private final ObjectProperty<Person> focusedPerson;
 
     /**
@@ -36,10 +34,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        pinnedPersons = new UniquePersonList();
         this.focusedPerson = Person.personProperty(null);
     }
 
@@ -119,8 +116,57 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public ObservableList<Person> getPinnedPersonList() {
+        return addressBook.getPinnedPersonList();
+    }
+
+    @Override
+    public boolean isPinned(Person person) {
+        requireNonNull(person);
+        return addressBook.isPinned(person);
+    }
+
+    @Override
+    public void pinPerson(Person person) {
+        requireNonNull(person);
+        this.addressBook.addPinnedPerson(person);
+    }
+
+    @Override
+    public void unpinPerson(Person person) {
+        requireNonNull(person);
+        this.addressBook.removePinnedPerson(person);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return addressBook.canUndo();
+    }
+
+    @Override
+    public void saveAddressBookVersion() {
+        addressBook.commit();
+    }
+
+    @Override
+    public void revertAddressBookVersion() {
+        addressBook.undo();
+    }
+
+    @Override
+    public void setFocusPerson(Person person) {
+        focusedPerson.set(person);
+    }
+
+    @Override
+    public void updateFocusPerson(Person previousPerson, Person currentPerson) {
+        if (previousPerson.equals(focusedPerson.get())) {
+            setFocusPerson(currentPerson);
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -140,36 +186,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Pinned Person List Accessors ===============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of pinned {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-
-    @Override
-    public boolean isPinned(Person person) {
-        requireNonNull(person);
-        return pinnedPersons.contains(person);
-    }
-
-    @Override
-    public ObservableList<Person> getPinnedPersonList() {
-        return pinnedPersons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public void addPinnedPersonList(Person person) {
-        requireNonNull(person);
-        this.pinnedPersons.add(person);
-    }
-
-    @Override
-    public void removePinnedPersonList(Person person) {
-        requireNonNull(person);
-        this.pinnedPersons.remove(person);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -187,4 +203,5 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && Objects.equals(focusedPerson.get(), otherModelManager.focusedPerson.get());
     }
+
 }

@@ -105,12 +105,39 @@ public interface Model {
      *
      * @param person The {@code person} in the contact list to be pinned.
      */
-    void addPinnedPersonList(Person person);
+    void pinPerson(Person person);
 
     /**
      * Remove the {@code person} in the pinned contact list.
      *
      * @param person The {@code person} in the contact list to be unpinned.
      */
-    void removePinnedPersonList(Person person);
+    void unpinPerson(Person person);
+
+    /**
+     * Checks if there is a version that can be reverted to or not.
+     */
+    boolean canUndo();
+
+    /**
+     * Saves the current state of the {@code AddressBook} into a version history list.
+     */
+    void saveAddressBookVersion();
+
+    /**
+     * Reverts the {@code AddressBook} to the most recent saved version.
+     */
+    void revertAddressBookVersion();
+
+    /**
+     * Sets the focus person to {@code person}.
+     */
+    void setFocusPerson(Person person);
+
+    /**
+     * Cheks if the focus person needs to be updated.
+     * If {@code previousPerson} is the focused person then update it with {@code currentPerson}.
+     */
+    void updateFocusPerson(Person previousPerson, Person currentPerson);
+
 }

@@ -95,6 +95,19 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setFocusPerson_success() {
+        modelManager.setFocusPerson(ALICE);
+        assertEquals(modelManager.getFocusedPerson().get(), ALICE);
+    }
+
+    @Test
+    public void updateFocusPerson_success() {
+        modelManager.setFocusPerson(ALICE);
+        modelManager.updateFocusPerson(ALICE, BENSON);
+        assertEquals(modelManager.getFocusedPerson().get(), BENSON);
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
