@@ -35,9 +35,9 @@ ClientGrid is an **address book** targeted for English-speaking real estate agen
 
    * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
    
-   * `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
+   * `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600(thousand) and bid price of $500(thousand).
    
-   * `filterproperty t/HDB gte/500 lte/15000` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than or equal to $500 and less than or equal to $15000.
+   * `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than or equal to $400(thousand) and less than or equal to $700(thousand).
    
    * `deleteproperty c/124894 u/15-20` : Deletes the property with postal code 124894 and unit number #15-20.
 
@@ -215,9 +215,9 @@ The Unit parameter for `LANDED` properties will default to 00-00 regardless of t
 </box>
 
 Examples:
-* `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
+* `addproperty c/124894 u/15-20 t/HDB a/600 b/500` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $600(thousand) and bid price of $500(thousand).
 
-  ![result for 'addproperty c/124894 u/15-20 t/HDB a/50000 b/10000'](images/addproperty.png)
+  ![result for 'addproperty c/124894 u/15-20 t/HDB a/600 b/500'](images/addproperty.png)
 
 ### Filtering properties : `filterproperty`
 
@@ -231,7 +231,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 
 <box type="definition" seamless>
 
-**Matching Price:** The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
+**Matching Price:** The true price of the property given by the average of the property's lowest `Ask` price and highest `Bid` price.
 </box>
 <box type="warning" seamless>
 
@@ -241,9 +241,9 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 </box>
 
 Examples:
-* `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
+* `filterproperty t/HDB gte/400 lte/700` : Filters and lists properties which is type HDB and matching price is greater than or equal to $400(thousand) and less than or equal to $700(thousand).
 
-  ![result for 'filterproperty t/HDB gte/500 lte/60000'](images/filterproperty.png)
+  ![result for 'filterproperty t/HDB gte/400 lte/700'](images/filterproperty.png)
 
 ### Deleting a property : `deleteproperty`
 

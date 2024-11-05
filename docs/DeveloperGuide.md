@@ -219,7 +219,8 @@ Use case ends.
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
 2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -245,6 +246,8 @@ MSS:
 1. Real estate agent requests to filter the clients by entering a name prefix.
 2. ClientGrid will filter and display the clients whose names start with the provided prefix.
 
+Use case ends.
+
 Extensions:
 
 * 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
@@ -265,7 +268,8 @@ Guarantees:
 MSS:
 1. Real estate agent requests to delete a buyer/ seller and passes in the buyer/ seller's phone number.
 2. ClientGrid will delete the buyer/ seller with the phone number provided by the real estate agent.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -285,11 +289,12 @@ Extensions:
 
 1.  Real estate agent requests to add a property to ClientGrid and passes in the property's postal code, unit number, housing type, ask price and bid price. 
 2.  ClientGrid will add the property's postal code, unit number, housing type, ask price and bid price specified by the real estate agent.
-    Use case ends.
+    
+Use case ends.
 
 **Extensions**
 
-* 1a. ClientGrid detects an error in the postal code / unit / type / ask / bid format provided by the real estate agent.
+* 1a. ClientGrid detects an error in the postal code/ unit/ type/ ask/ bid format provided by the real estate agent.
 
     * 1a1. ClientGrid requests for the correct data.
 
@@ -311,13 +316,15 @@ MSS:
 1. Real estate agent requests to filter the propertiess by entering property type and matching price bounds.
 2. ClientGrid will filter and display the properties that match the property type and has a matching price within the matching price bounds.
 
+Use case ends.
+
 Extensions:
 
-* 1a. ClientGrid detects an error in the type / matching price format prefix provided by the real estate agent.
+* 1a. ClientGrid detects an error in the type/ matching price format prefix provided by the real estate agent.
 
     * 1a1. ClientGrid detects the error and requests for the correct data
 
-    * 1a2. Real estate agent enters a new type / matching price prefix
+    * 1a2. Real estate agent enters a new type/ matching price prefix
 
     * Steps 1a1-1a2 are repeated until the data entered are correct.
 
@@ -331,6 +338,7 @@ Guarantees:
 MSS:
 1. Real estate agent requests to delete a property listing based on the property’s postal code and unit number.
 2. ClientGrid will delete the respective property listing and indicate success.
+
 Use case ends.
 
 Extensions:
@@ -356,7 +364,8 @@ Extensions:
 MSS:
 1. Real estate agent requests to add a meeting based on the meeting’s title and date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
 2. ClientGrid will add the meeting and indicate success.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
@@ -390,7 +399,8 @@ Guarantees:
 MSS:
 1. Real estate agent requests to delete a meeting based on the meeting’s meeting title and meeting date.
 2. ClientGrid will delete the respective meeting and indicate success.
-   Use case ends.
+   
+Use case ends.
 
 Extensions:
 
