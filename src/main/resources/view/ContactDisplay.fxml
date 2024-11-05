@@ -15,7 +15,7 @@
         <VBox fx:id="contactHeader" alignment="TOP_CENTER">
           <Label fx:id="helpLabel" text=""/>
           <Label fx:id="nameLabel" text="Name:"/>
-          <Label fx:id="categoryLabel" text="Category:"/>
+          <Label fx:id="categoryLabel" styleClass="category-label" text="Category:"/>
         </VBox>
         <VBox fx:id="contactBody" spacing="20" alignment="TOP_CENTER">
           <Label fx:id="industryStudentIdLabel" text=""/>

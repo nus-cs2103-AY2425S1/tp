@@ -1,47 +1,38 @@
-# AdmiNUS User Guide
-
-## Why AdmiNUS?
+---
+layout: page
+title: User Guide
+---
 
 AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
 
-> 💡 **Example Use Case**: Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
->
-> ```shell
-> student n/John Doe s/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
-> ```
->
-> This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods.
->
-AdmiNUS helps you stay organized and efficient, letting you focus on running successful events.
-
 ---
+## Table of Content
 
 * [Quick start](#Quick-start)
 * [Features](#Features)
-  * [Basic Commands](#basic-commands)
-    * [Viewing help: `help`](#viewing-help-help)
-    * [Link to the user guide: `helpwindow`](#link-to-the-user-guide-helpwindow)
-    * [Listing all contacts: `list`](#listing-all-contacts-list)
-    * [Viewing a contact: `view`](#viewing-a-contact-view)
-    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
-    * [Exiting the program: `exit`](#exiting-the-program-exit)
-  * [Contact Management](#contact-management)
-    * [Adding a student: `student`](#adding-a-student-student-)
-    * [Adding a company: `company`](#adding-a-company-company)
-    * [Editing a contact: `edit`](#editing-a-contact-edit)
-    * [Deleting contact(s): `delete`](#deleting-contacts-delete)
-  * [Advanced Commands](#advanced-commands)
-    * [Locating persons by name: `find`](#locating-persons-by-name-find)
-    * [Filtering contacts by tag: `filtertag`](#filtering-contacts-by-tags-filtertag)
-    * [Tracking contacts by category: `track`](#tracking-contacts-by-category-track)
-    * [Adding tag(s) to contact: `tag`](#adding-tags-to-contact-tag)
-    * [Deleting tag(s) from contact: `deletetag`](#deleting-tags-from-contact-deletetag)
-  * [File Operations](#file-operations)
-    * [Importing CSV files: `import`](#importing-csv-files-import)
-    * [Exporting CSV files: `export`](#exporting-csv-files)
-
-
---------------------------------------------------------------------------------------------------------------------
+    * [Basic Commands](#basic-commands)
+        * [Viewing help: `help`](#viewing-help-help)
+        * [Link to the user guide: `helpwindow`](#link-to-the-user-guide-helpwindow)
+        * [Listing all contacts: `list`](#listing-all-contacts-list)
+        * [Viewing a contact: `view`](#viewing-a-contact-view)
+        * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+        * [Exiting the program: `exit`](#exiting-the-program-exit)
+    * [Contact Management](#contact-management)
+        * [Adding a student: `student`](#adding-a-student-student-)
+        * [Adding a company: `company`](#adding-a-company-company)
+        * [Editing a contact: `edit`](#editing-a-contact-edit)
+        * [Deleting contact(s): `delete`](#deleting-contacts-delete)
+    * [Advanced Commands](#advanced-commands)
+        * [Locating persons by name: `find`](#locating-persons-by-name-find)
+        * [Filtering contacts by tag: `filtertag`](#filtering-contacts-by-tags-filtertag)
+        * [Tracking contacts by category: `track`](#tracking-contacts-by-category-track)
+        * [Adding tag(s) to contact: `tag`](#adding-tags-to-contact-tag)
+        * [Deleting tag(s) from contact: `deletetag`](#deleting-tags-from-contact-deletetag)
+    * [File Operations](#file-operations)
+        * [Importing CSV files: `import`](#importing-csv-files-import)
+        * [Exporting CSV files: `export`](#exporting-csv-files-export)
+      
+---
 
 ## Quick start
 
@@ -76,7 +67,7 @@ AdmiNUS helps you stay organized and efficient, letting you focus on running suc
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format**<br>
+🔔 **Notes about the command format**: <br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -155,7 +146,7 @@ Adds a student to AdmiNUS
 
 **Format**: 
 ```shell
-student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
 | Parameter Name | Description                                                                             | Required    |
@@ -167,12 +158,14 @@ student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`    | Physical address                                                                        | Compulsory  |
 | `t/TAG`        | Tags to categorize contact (cannot contain spaces)                                      | Optional    |
 
-<div markdown="span" class="alert alert-primary">**Tip:**
+<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
+
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
 **Examples**:
-* `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a student named John Doe to AdmiNUS
 
 #### Adding a company: `company`
 
@@ -192,12 +185,14 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`   | Physical address                                   | Compulsory  |
 | `t/TAG`       | Tags to categorize contact (cannot contain spaces) | Optional    |
 
-<div markdown="span" class="alert alert-primary">**Tip:**
+<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
+
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
 A company can have any number of tags (including 0)
 </div>
 
 Examples:
-* `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`
+* `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility` adds a company name Newgate Prison to AdmiNUS
 
 #### Editing a contact: `edit`
 
@@ -205,7 +200,7 @@ Edits an existing contact in the address book.
 
 **Format**: 
 ```
-edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 ```
 
 | Parameter Name | Description                                                   | Required   |
@@ -219,33 +214,37 @@ edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS] 
 | `a/ADDRESS`   | Updated physical address                                      | Optional   |
 | `t/TAG`       | Updated tags (replaces existing tags, cannot contains spaces) | Optional   |
 
-**Notes**:
+<div markdown="block" class="alert alert-info">
 
-* The index refers to the index number shown in the displayed person list. 
-<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: The index must be a positive integer (1, 2, 3, ...). </div>
+🔔 **Notes**: <br>
+
+* The index refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, ...).
 
 * At least one of the optional fields must be provided.
 
-<div markdown="block" class="alert alert-warning">
-
 * For student contact, editing industry field is **prohibited**.
+
 * For company contact, editing student id field is **prohibited**.
+
+* Existing values will be updated to the input values.
+
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
 </div>
 
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-> 💡 **Tip**: You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+<div markdown="span" class="alert alert-primary">💡 **Tip**:
+
+You can remove all the person’s tags by typing `t/` without
+specifying any tags after it. </div>
 
 
-Examples:
+**Examples**:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 #### Deleting contact(s): `delete`
 
-Deletes the specified contacts from AdmiNUS
+Deletes the contact(s) at the specified indices from AdmiNUS
 
 Format: `delete INDEX [MORE_INDEX]`
 
@@ -254,11 +253,17 @@ Format: `delete INDEX [MORE_INDEX]`
 | `INDEX`            | Index number of the contact to delete                                |Compulsory|	
 | `MORE_INDEX`       | 	Additional index numbers of contacts to delete (separate by spaces) |	Optional|
 
-**Notes**:
-* Deletes the contact(s) at the specified `INDEX`.
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
 * Split the indices by spaces.
-* The index refers to the index number shown in the displayed person list.
-<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: The index must be a positive integer (1, 2, 3, ...). </div>
+
+* The index refers to the index number shown in the displayed person list. 
+
+* The index must be a positive integer (1, 2, 3, ...). 
+
+</div>
 
 **Examples**:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
@@ -273,17 +278,24 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-**Notes**:
+<div markdown="block" class="alert alert-info">
 
-<div markdown="span" class="alert alert-info"> 🔍 **Note**: The search is case-insensitive. For example, `hans` will match `Hans`. </div>
+🔔 **Notes**: <br>
+
+* The search is case-insensitive. For example, `hans` will match `Hans`. 
 
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+
 * Only the name is searched.
+
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+
+* Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+</div>
+
+**Examples**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -362,7 +374,7 @@ Troubleshooting:
 * If you receive an error indicating that the file is not found, double-check the file path and ensure that the CSV file exists in the specified location.
 * If the CSV is not properly formatted, importing may fail. Make sure the file follows the standard CSV format (e.g., no extra commas).
 
-#### Exporting CSV Files
+#### Exporting CSV Files: `export`
 Export data to a CSV file, use the export command followed by the desired path and filename for your CSV. This command allows you to save the current data in a structured format that can be easily shared or used by other applications.
 
 Format: `export /path/to/data/File.csv`
