@@ -26,12 +26,16 @@ public class SubmissionTest {
         // null submission name
         assertThrows(NullPointerException.class, () -> Submission.isValidSubmissionName(null));
 
-        // invalid submission name
+        // invalid submission names
+        // EP: empty strings
         assertFalse(Submission.isValidSubmissionName("")); // empty string
         assertFalse(Submission.isValidSubmissionName(" ")); // spaces only
-        assertFalse(Submission.isValidSubmissionName("Assignment%")); // non-alphanumeric characters
 
-        // valid submission name
+        // EP: non-alphanumeric characters
+        assertFalse(Submission.isValidSubmissionName("Assignment%"));
+
+        // valid submission names
+        // EP: only contain alphanumeric characters and spaces
         assertTrue(Submission.isValidSubmissionName("Assignment")); // only alphabets
         assertTrue(Submission.isValidSubmissionName("Assignment 1")); // alphabets with space
         assertTrue(Submission.isValidSubmissionName("Assignment1")); // alphabets and numbers
@@ -43,15 +47,27 @@ public class SubmissionTest {
         assertThrows(NullPointerException.class, () -> Submission.isValidSubmissionStatus(null));
 
         // invalid submission status
+        // EP: empty strings
         assertFalse(Submission.isValidSubmissionStatus("")); // empty string
         assertFalse(Submission.isValidSubmissionStatus(" ")); // spaces only
-        assertFalse(Submission.isValidSubmissionStatus("A")); // invalid alphabets
-        assertFalse(Submission.isValidSubmissionStatus("1")); // numbers
+
+        // EP: invalid alphabet
+        assertFalse(Submission.isValidSubmissionStatus("A"));
+
+        // EP: only numbers
+        assertFalse(Submission.isValidSubmissionStatus("1"));
+
+        // EP: lowercase values
         assertFalse(Submission.isValidSubmissionStatus("y")); // lowercase "Y"
 
+        // EP: too long input
+        assertFalse(Submission.isValidSubmissionStatus("NILL"));
+
         // valid submission status
+        // EP: "Y", "N" or "NIL"
         assertTrue(Submission.isValidSubmissionStatus("Y")); // "Y"
         assertTrue(Submission.isValidSubmissionStatus("N")); // "N"
+        assertTrue(Submission.isValidSubmissionStatus("NIL")); // "NIL"
     }
 
     @Test

@@ -24,21 +24,34 @@ public class StudentClassTest {
         // null class
         assertThrows(NullPointerException.class, () -> StudentClass.isValidStudentClass(null));
 
-        // invalid class
+        // invalid classes
+        // EP: empty strings
         assertFalse(StudentClass.isValidStudentClass("")); // empty string
         assertFalse(StudentClass.isValidStudentClass(" ")); // spaces only
-        assertFalse(StudentClass.isValidStudentClass("^")); // only non-alphanumeric characters
-        assertFalse(StudentClass.isValidStudentClass("1A*")); // contains non-alphanumeric characters
-        assertFalse(StudentClass.isValidStudentClass("0A")); // digit is 0
+
+        // EP: wrong length of input
         assertFalse(StudentClass.isValidStudentClass("1")); // only digit
         assertFalse(StudentClass.isValidStudentClass("A")); // only alphabet
-        assertFalse(StudentClass.isValidStudentClass("A4")); // wrong order
         assertFalse(StudentClass.isValidStudentClass("12A")); // multiple digits
         assertFalse(StudentClass.isValidStudentClass("1AA")); // multiple alphabets
 
-        // valid class
-        assertTrue(StudentClass.isValidStudentClass("2C")); // digit followed by alphabet
-        assertTrue(StudentClass.isValidStudentClass("5d")); // with lowercase
+        // EP: non-alphanumeric characters
+        assertFalse(StudentClass.isValidStudentClass("^")); // only non-alphanumeric characters
+        assertFalse(StudentClass.isValidStudentClass("1*")); // contains non-alphanumeric characters
+
+        // EP: zero followed by a capital alphabet
+        assertFalse(StudentClass.isValidStudentClass("0A")); // Boundary value
+
+        // EP: non-zero digit followed by lowercase alphabet
+        assertFalse(StudentClass.isValidStudentClass("5d"));
+
+        // EP: capital alphabet followed by digit
+        assertFalse(StudentClass.isValidStudentClass("A4"));
+
+        // valid classes
+        // EP: non-zero digit followed by a capital alphabet
+        assertTrue(StudentClass.isValidStudentClass("1A")); // Boundary value
+        assertTrue(StudentClass.isValidStudentClass("9Z")); // Boundary value
     }
 
     @Test

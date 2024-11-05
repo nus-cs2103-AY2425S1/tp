@@ -136,9 +136,9 @@ public class FilterCommandParserTest {
 
     @Test
     void parse_invalidArgs_allEmptyPredicatesFilterCommand() {
-        String exception_str = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "filter", exception_str);
-        assertParseFailure(parser, "filter  ", exception_str);
-        assertParseFailure(parser, "filter n", exception_str);
+        String exceptionString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "filter", exceptionString);
+        assertParseFailure(parser, "filter  ", exceptionString);
+        assertParseFailure(parser, "filter n", exceptionString);
     }
 }
