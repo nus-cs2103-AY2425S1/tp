@@ -27,7 +27,6 @@ public class PersonListPanel extends UiPart<Region> {
 
     private final ObservableList<Person> personList;
     private final ObservableList<Participation> participationList;
-    private final ObservableList<Tutorial> tutorialList;
     private Map<Person, ObservableList<Participation>> participationMap;
 
     @FXML
@@ -35,15 +34,13 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableList<Participation> participationList,
-                           ObservableList<Tutorial> tutorialList) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableList<Participation> participationList) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
         this.personList = personList;
         this.participationList = participationList;
-        this.tutorialList = tutorialList;
         this.participationMap = createParticipationMap(personList, participationList);
 
         addListeners();
@@ -61,7 +58,8 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                logger.info("Updating list cell with person: " + person);
+                logger.info("Updating list cell with person: " + person
+                        + "\n - participation list: " + participationMap.get(person));
                 Platform.runLater(() -> setGraphic(new PersonCard(person,
                         participationMap.get(person), getIndex() + 1).getRoot()));
             }
@@ -76,18 +74,21 @@ public class PersonListPanel extends UiPart<Region> {
     private HashMap<Person, ObservableList<Participation>> createParticipationMap(
             ObservableList<Person> personList, ObservableList<Participation> participationList) {
         HashMap<Person, ObservableList<Participation>> participationMap = new HashMap<>();
-
+        logger.info("Creating new participation map with"
+                + "\n - person list: " + personList
+                + "\n - participation list: " + participationList);
         for (Person person : personList) {
             participationMap.put(person, FXCollections.observableArrayList());
         }
 
         for (Participation participation : participationList) {
+            logger.info("Adding participation to map: " + participation);
             ObservableList<Participation> participations = participationMap.get(participation.getStudent());
             if (participations != null) {
                 participations.add(participation);
             }
         }
-        logger.info("Successfully created participation map");
+        logger.info("Successfully created participation map" + "\n" + participationMap);
         return participationMap;
     }
 
@@ -102,26 +103,30 @@ public class PersonListPanel extends UiPart<Region> {
     private void addListeners() {
         // Listener to recreate participationMap
         personList.addListener((ListChangeListener<Person>) change -> {
-            logger.info("Change observed in person list");
+            logger.info("Change observed in person list: creating new participation map");
             this.participationMap = createParticipationMap(this.personList, this.participationList);
         });
 
         // Listener to add or remove participation from current participationMap
         participationList.addListener((ListChangeListener<Participation>) change -> {
-            logger.info("Change observed in participation list");
+            logger.info("Change observed in participation list: " + change);
             while (change.next()) {
                 for (Participation removedParticipation : change.getRemoved()) {
+                    logger.info("Participation to be removed: " + removedParticipation);
                     ObservableList<Participation> participations =
                             participationMap.get(removedParticipation.getStudent());
                     if (participations != null) {
                         participations.remove(removedParticipation);
+                        logger.info("Removed participation: " + removedParticipation);
                     }
                 }
                 for (Participation addedParticipation : change.getAddedSubList()) {
+                    logger.info("Participation to be added: " + addedParticipation);
                     ObservableList<Participation> participations =
                             participationMap.get(addedParticipation.getStudent());
                     if (participations != null) {
                         participations.add(addedParticipation);
+                        logger.info("Added participation: " + addedParticipation);
                     }
                 }
             }
