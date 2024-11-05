@@ -2,6 +2,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -27,7 +28,7 @@ public class DeleteProfileCommandTest {
                 String.format(DeleteProfileCommand.MESSAGE_SUCCESS, "deletable-profile"),
                 result.getFeedbackToUser()
         );
-        assertEquals(false, model.getProfiles().contains(profileToDelete));
+        assertFalse(model.getProfiles().contains(profileToDelete));
     }
 
     @Test
@@ -39,7 +40,7 @@ public class DeleteProfileCommandTest {
         DeleteProfileCommand minDeleteCommand = new DeleteProfileCommand(minLengthProfile);
         CommandResult minResult = minDeleteCommand.execute(model);
         assertEquals(String.format(DeleteProfileCommand.MESSAGE_SUCCESS, "a"), minResult.getFeedbackToUser());
-        assertEquals(false, model.getProfiles().contains(minLengthProfile));
+        assertFalse(model.getProfiles().contains(minLengthProfile));
 
         Profile maxLengthProfile = new Profile("a".repeat(30));
         model.addToProfiles(maxLengthProfile);
@@ -50,7 +51,7 @@ public class DeleteProfileCommandTest {
                 String.format(DeleteProfileCommand.MESSAGE_SUCCESS, "a".repeat(30)),
                 maxResult.getFeedbackToUser()
         );
-        assertEquals(false, model.getProfiles().contains(maxLengthProfile));
+        assertFalse(model.getProfiles().contains(maxLengthProfile));
     }
 
     @Test

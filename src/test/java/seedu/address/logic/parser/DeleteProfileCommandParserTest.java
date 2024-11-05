@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -42,5 +43,13 @@ public class DeleteProfileCommandParserTest {
     public void parse_specialCharacterInProfileName_throwsParseException() {
         String specialCharProfileName = "john*doe";
         assertThrows(ParseException.class, () -> parser.parse(specialCharProfileName));
+    }
+
+    @Test
+    public void parse_emptyProfileName_throwParseException() {
+        String emptyStr = "";
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteProfileCommand.MESSAGE_USAGE), () ->
+                        parser.parse(emptyStr));
     }
 }
