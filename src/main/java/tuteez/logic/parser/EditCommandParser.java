@@ -48,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            if (argMultimap.getPreamble().isEmpty() && argMultimap.verifyHasPrefixes()) {
+            if (argMultimap.getPreamble().isEmpty() && argMultimap.hasPrefixes()) {
                 throw new ParseException(MESSAGE_MISSING_PERSON_INDEX);
             }
 
