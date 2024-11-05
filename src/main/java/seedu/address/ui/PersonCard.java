@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 
@@ -29,6 +31,7 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private final Logger logger = LogsCenter.getLogger(PersonCard.class);
     @FXML
     private HBox cardPane;
     @FXML
@@ -72,5 +75,7 @@ public class PersonCard extends UiPart<Region> {
 
         paymentCardPlaceholder.getChildren().add(new PaymentCard(person.getPayment()).getRoot());
         attendanceContainerPlaceholder.getChildren().add(new AttendanceContainer(participationList).getRoot());
+
+        logger.info("Successfully created PersonCard for " + person + "\n - Participation: " + participationList);
     }
 }

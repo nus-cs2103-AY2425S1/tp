@@ -22,6 +22,7 @@ import seedu.address.model.tutorial.Tutorial;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
+
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     private final ObservableList<Person> personList;
@@ -60,6 +61,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
+                logger.info("Updating list cell with person: " + person);
                 Platform.runLater(() -> setGraphic(new PersonCard(person,
                         participationMap.get(person), getIndex() + 1).getRoot()));
             }
@@ -67,6 +69,8 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Creates a participation map to be used for displaying attendance records tagged to each person.
+     *
      * @return Map of participation associated with each person in the personList.
      */
     private HashMap<Person, ObservableList<Participation>> createParticipationMap(
@@ -83,24 +87,28 @@ public class PersonListPanel extends UiPart<Region> {
                 participations.add(participation);
             }
         }
-
+        logger.info("Successfully created participation map");
         return participationMap;
     }
 
     /**
      * Adds listeners to ObservableList of {@code Persons} and ObservableList of {@code participation}
      * to create or modify participationMap on changes to personList and participationList
-     * respectively to update the UI on user input and execution of the command. Listener is added
-     * to ObservableList of {@code Tutorial} to update UI when tutorials are created or closed.
+     * respectively to update the UI on user input and execution of the command.
+     * </p>
+     * Listener is added to ObservableList of {@code Tutorial} to update UI
+     * when tutorials are created or closed.
      */
     private void addListeners() {
         // Listener to recreate participationMap
         personList.addListener((ListChangeListener<Person>) change -> {
+            logger.info("Change observed in person list");
             this.participationMap = createParticipationMap(this.personList, this.participationList);
         });
 
         // Listener to add or remove participation from current participationMap
         participationList.addListener((ListChangeListener<Participation>) change -> {
+            logger.info("Change observed in participation list");
             while (change.next()) {
                 for (Participation removedParticipation : change.getRemoved()) {
                     ObservableList<Participation> participations =

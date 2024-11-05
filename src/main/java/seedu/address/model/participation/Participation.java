@@ -42,6 +42,10 @@ public class Participation {
         return student;
     }
 
+    public String getStudentName() {
+        return student.getFullName();
+    }
+
     public Tutorial getTutorial() {
         return tutorial;
     }

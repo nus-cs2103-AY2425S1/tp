@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Payment;
 
 /**
@@ -20,6 +22,7 @@ public class PaymentCard extends UiPart<Region> {
 
     public final int payment;
 
+    private final Logger logger = LogsCenter.getLogger(PaymentCard.class);
     @FXML
     private Label month;
     @FXML
@@ -41,6 +44,8 @@ public class PaymentCard extends UiPart<Region> {
         this.payment = Integer.parseInt(payment.overdueAmount);
         setDisplayMonth();
         setPaymentDetails();
+
+        logger.info("Successfully created payment card for payment: " + this.payment);
     }
 
     /**
@@ -62,7 +67,6 @@ public class PaymentCard extends UiPart<Region> {
             fees.setText("$0");
             advance.setText("- ");
             setNoOverduePaymentStyle();
-
         } else if (payment < 0) {
             fees.setText("- ");
             advance.setText(Math.abs(payment) + "");
