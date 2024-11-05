@@ -91,7 +91,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
                                             <Label fx:id="demoteTextHeader" styleClass="text-command, text-command-header"/>
@@ -104,7 +104,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
                                             <Label fx:id="editTextHeader" styleClass="text-command, text-command-header"/>
@@ -117,7 +117,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="employeeTextHeader" styleClass="text-command, text-command-header"/>
@@ -130,7 +130,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="exitTextHeader" styleClass="text-command, text-command-header"/>
@@ -143,7 +143,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="findTextHeader" styleClass="text-command, text-command-header"/>
@@ -156,7 +156,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="helpTextHeader" styleClass="text-command, text-command-header"/>
@@ -169,7 +169,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="listTextHeader" styleClass="text-command, text-command-header"/>
@@ -182,7 +182,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="potentialTextHeader" styleClass="text-command, text-command-header"/>
@@ -195,7 +195,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
                                         <VBox>
                                             <Label fx:id="promoteTextHeader" styleClass="text-command, text-command-header"/>
@@ -208,7 +208,7 @@
                                             </VBox>
                                         </VBox>
                                     </HBox>
-                                    
+
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
                                             <Label fx:id="sortTextHeader" styleClass="text-command, text-command-header"/>
