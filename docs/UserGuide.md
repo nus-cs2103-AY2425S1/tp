@@ -14,16 +14,16 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Quick Start: Get started in 3 minutes!
 
-In this quick start guide, you'll learn how to install EZSTATES. **_(3 min)_**<br>
+In this quick start guide, you'll learn how to install EZSTATES. 
 <br>
-**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+<br>
+**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. 
 
-<div class="note"> 
-While learning our command structure is optional, 
-we highly recommend reviewing this section to make using EZSTATES much easier.
+<div class="note" markdown="span"> 
+While learning our command structure is optional, we highly recommend reviewing this section to make using EZSTATES much easier.
 </div>
 
-### Installation
+### Installation _(~3min)_
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -50,7 +50,64 @@ we highly recommend reviewing this section to make using EZSTATES much easier.
 
 6. Refer to the [Features](#features) for command details.
 
-### Command Structure
+### Command Structure _(~10 mins)_
+
+In this section, we will explore the general format of commands in EZSTATES.
+
+Commands in EZStates follow the same structure:
+
+`commandWord (REFERENCE) (PREFIXES)` 
+
+| commandWord                  | REFERENCE                                                                                                            | PREFIXES                                                                                                 |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| Specifies the command to run | Comes before all prefixes and is used to make reference a particular client/listing <br/> Optional for some commands | Used to specify various attributes/properties for a given `commandWord` <br/> Optional for some commands |
+
+#### Reference Types
+
+| Reference | Meaning                                  | Constraints                                                      | Remarks                                                                                                                                               |
+|-----------|------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name      | Name of a client or a listing in a list  | Names should only contain `alphanumerical` characters and spaces | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
+
+#### Prefix Notation
+
+Prefixes follow the same structure
+
+`prefix/Value`
+
+and can be either optional or mandatory, and variadic or not variadic.
+The table below showcases the four different possible notations of prefixes:
+
+|              | Mandatory       | Optional          |
+|--------------|-----------------|-------------------|
+| Not variadic | prefix/Value    | [prefix/Value]    |
+| Variadic     | prefix/Value... | [prefix/Value]... |
+
+<div class="note" markdown="span">
+Optional fields can be omitted and the command will still be executed successfully <br> _(assuming all other parts are correctly inputted)_ 
+</div>
+
+#### Prefix Types
+
+<div class="note" markdown="span">
+The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have the same constraints and remarks)_
+</div>
+<br>
+
+| Prefix   | Meaning | Location    | Constraints | Remarks | Example |
+|----------|---------|-------------|-------------|---------|---------|
+| n/       | name    | Client      |             |         |         |
+| p/       | phone   | Client      |             |         |         |
+| e/       | email   | Client      |             |         |         |
+| t/       | tag     | Client      |             |         |         |
+| d/       | date    | Appointment |             |         |         |
+| fr/      | from    | Appointment |             |         |         |
+| to/      | to      | Appointment |             |         |         |
+| price/   | price   | Listing     |             |         |         |
+| area/    | area    | Listing     |             |         |         |
+| address/ | address | Listing     |             |         |         |
+| region/  | region  | Listing     |             |         |         |
+| seller/  | seller  | Listing     |             |         |         |
+| buyer/   | buyer   | Listing     |             |         |         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -77,7 +134,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 ![showClients](images/Ui.png)
 
 - #### Add Buyer Command
-    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
       > ---
@@ -99,7 +156,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
    
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `buyer n/Bob` = `buyer n/BOB` = `buyer n/bOb` _(Not exhaustive)_
   
@@ -153,7 +210,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 - #### Add Seller Command
-    - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
     - **Description:** Creates a new seller profile with specified details.
     - **Successful Execution:**
       > ---
@@ -174,7 +231,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `seller n/Bob` = `seller n/BOB` = `seller n/bOb` _(Not exhaustive)_
     <br>
@@ -228,7 +285,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       >  ---
 
 - #### Find Command
-    - **Format:** `find KEYWORD [KEYWORD...]`
+    - **Format:** `find KEYWORD [KEYWORD]...`
     - **Description:** Finds the specified client(s) based on the provided keywords.
     - **Successful Execution:**
       > ---
@@ -253,7 +310,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `find Bob` = `find BOB` = `find bOb` _(Not exhaustive)_
     </div>
@@ -273,7 +330,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Failed Execution:**
       > ---
       >
-      > **Use Case**: Attempting to find a non-existent client
+      > **Use Case**: Client not found
       > 
       > **Input**: `find Bob7`
       > 
@@ -284,7 +341,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### Edit Client Command
-    - **Format:** `editclient NAME [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
+    - **Format:** `editclient NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]... [r/REMARK]`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
@@ -313,7 +370,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `editclient Bob` = `editclient BOB` = `editclient bOb` _(Not exhaustive)_
     </div>
@@ -434,13 +491,13 @@ Commands for managing appointments between user and clients.
 ![appointments](images/appointments.png)
 
 - #### Schedule Appointment
-    - **Format:** `apt NAME d/<DD-MM-YY> fr/<HHmm> to/<HHmm>`
+    - **Format:** `apt NAME d/DD-MM-YY fr/HHmm to/HHmm` OR `apt NAME d/ddMMyy fr/HH:mm to/HH:mm`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
       >
-      > **Input**: `apt Bob d/08-10-2024 fr/1900 to/2100`
+      > **Input**: `apt Bob d/08-10-24 fr/1900 to/2100`
       >
       > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
       >
@@ -479,7 +536,7 @@ Commands for managing appointments between user and clients.
       > ---
       > **Use Case #1**: Incorrect `DATE` format 
       >
-      > **Input #a**: `apt Bob d/09-10-24 fr/1000 to/1200`
+      > **Input #a**: `apt Bob d/09-10-2024 fr/1000 to/1200`
       >
       > **Input #b**: `apt Bob d/aaa fr/1000 to/1200`
       > 
@@ -801,7 +858,7 @@ Commands for managing property listings and associating clients with listings.
 
     <div class="alert" markdown="span">
     However, NAME is space-sensitive:
-    `deletelisting bob house Wen Xuan` != `delapt bobhouse`
+    `deletelisting bob house` != `deletelisting bobhouse`
     
     These commands will delete different listings 
     </div> 
@@ -818,41 +875,15 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### Clear Listing
-    - **Format:** `ClearListingCommand`
+    - **Format:** `clearlistings`
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Clear all listings in addressbook
       >
-      > **Input**:
+      > **Input**: clearlistings
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: All listings have been cleared!
       >
       > ---
 
@@ -861,138 +892,91 @@ Commands for managing property listings and associating clients with listings.
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
 - #### Clear
-    - **Format:** `ClearCommand`
-    - **Description:** Clears the console or application state.
+    - **Format:** `clear`
+    - **Description:** Clears all clients and listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Fresh addressbook and listings
       >
-      > **Input**:
+      > **Input**: clear
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Address book and listings has been cleared!
       >
       > ---
 
 - #### Exit
-    - **Format:** `ExitCommand`
+    - **Format:** `exit`
     - **Description:** Exits the application.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Exit the application
       >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Input**: exit
+      > 
+      > **Output**: Exiting Address Book as requested ...
       >
       > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+      
 - #### Help
     - **Format:** `help`
     - **Description:** Displays a list of available commands and their descriptions.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Accessing help
+      > **Use Case**: Accessing help
       >
       > **Input**: `help`
       >
-      > **Output**:
+      > **Output**: Opened help window.
       >
+      > ![help](images/help.png)
+      > 
       > ---
 
 - #### More Info
-    - **Format:** `MoreInfoCommand`
-    - **Description:** Provides additional information about a specific command or feature.
+    - **Format:** `moreinfo NAME`
+    - **Description:** Provides additional information about a specific client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Finding out more information about `Bob`
       >
-      > **Input**:
+      > **Input**: `moreinfo Bob`
       >
-      > **Output**:
+      > **Output**: Opened window for client's information.
       >
+      > ![moreinfo](images/moreinfo.png)
+      > 
       > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `moreinfo Bob` = `moreinfo BOB` = `moreinfo bOb` _(Not exhaustive)_
+
+    Thus, these commands will provide more information about the same `Bob` client
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `moreinfo wen xuan` != `moreinfo wenxuan`
+    
+    These commands will provide more information about different clients
+    </div> 
+    <br>
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Client not found
       >
-      > **Input**:
+      > **Input**: moreinfo nonExistentClient
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
       > ---
 
 - #### Chat Window
-    - **Format:** `ChatWindowCommand`
-    - **Description:** Opens a chat window for client-agent communication.
+    - **Format:** `chatbot`
+    - **Description:** Opens a chatbot that answers basic queries.
     - **Successful Execution:**
       > ---
       > **Use Case #1**:
