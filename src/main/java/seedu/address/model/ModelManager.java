@@ -189,13 +189,11 @@ public class ModelManager implements Model {
         return filteredStudents;
     }
 
-
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }
-
 
     @Override
     public Person getPersonByName(Name name) {

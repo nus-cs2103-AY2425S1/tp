@@ -25,14 +25,13 @@ import seedu.address.model.person.Phone;
  */
 public class Student {
 
-    private final ObservableList<AttendanceRecord> attendanceRecords = FXCollections.observableArrayList();
-
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
     private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
+    private final ObservableList<AttendanceRecord> attendanceRecords = FXCollections.observableArrayList();
 
     /**
      * Every field must be present and not null.
@@ -145,7 +144,6 @@ public class Student {
     }
 
     //getters
-
     public ObservableList<AttendanceRecord> getAttendanceRecord() {
         return attendanceRecords;
     }
@@ -222,13 +220,6 @@ public class Student {
      */
     public void addAttendanceRecord(AttendanceRecord ar) {
         attendanceRecords.add(ar);
-    }
-
-    /**
-     * Deletes the last assignment in the list.
-     */
-    public void deleteLastAssignment() {
-        assignments.remove(assignments.size() - 1);
     }
 
     /**
