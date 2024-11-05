@@ -165,7 +165,7 @@ Once successful, you should see the following on your screen:
 
 ![add guest_command](images/addGuestCommandSample.png)
 
-For more details on the `add_guest` command, such as the additional optional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest--add_guest)
+For more details on the `add_guest` command, such as the additional optional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest-add-guest)
 
 [_Back to Top_](#table-of-contents)
 
@@ -182,7 +182,7 @@ Once successful, you should see the following on your screen:
 
 ![add vendor_command](images/addVendorCommandSample.png)
 
-For more details on the `add_vendor` command, such as the additional optional fields you can classify a vendor with, we encourage you to refer to [**Adding a new vendor to the vendor list**](#adding-a-vendor--add_vendor)
+For more details on the `add_vendor` command, such as the additional optional fields you can classify a vendor with, we encourage you to refer to [**Adding a new vendor to the vendor list**](#adding-a-vendor-add-vendor)
 
 [_Back to Top_](#table-of-contents)
 
@@ -200,7 +200,7 @@ Once successful, you should see the following on your screen:
 ![delete vendor_command](images/deleteVendorCommandSample.png)
 
 Deleting a guest works in a similar way but using the `delete_guest` command instead.
-For more details on the `delete_guest` and `delete_vendor` commands, we encourage you to refer to [**Deleting a guest from the guest list**](#deleting-a-guest--delete_guest) and [**Deleting a vendor from the vendor list**](#deleting-a-vendor--delete_vendor) respectively.
+For more details on the `delete_guest` and `delete_vendor` commands, we encourage you to refer to [**Deleting a guest from the guest list**](#deleting-a-guest-delete-guest) and [**Deleting a vendor from the vendor list**](#deleting-a-vendor-delete-vendor) respectively.
 
 [_Back to Top_](#table-of-contents)
 
