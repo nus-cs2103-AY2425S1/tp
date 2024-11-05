@@ -64,11 +64,6 @@ public class Task {
         this.isComplete.set(true);
     }
 
-    // Method to access the completion status directly.
-    public boolean getIsComplete() {
-        return isComplete.get();
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

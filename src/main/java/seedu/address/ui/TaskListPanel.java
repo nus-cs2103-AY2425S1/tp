@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -23,6 +24,21 @@ public class TaskListPanel extends UiPart<Region> {
         super(FXML);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
+
+        taskList.forEach(this::addTaskListener);
+
+        // Listen for changes in the taskList to add listeners for new tasks
+        taskList.addListener((ListChangeListener<Task>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    change.getAddedSubList().forEach(this::addTaskListener);
+                }
+            }
+        });
+    }
+
+    private void addTaskListener(Task task) {
+        task.isCompleteProperty().addListener((observable, oldValue, newValue) -> taskListView.refresh());
     }
 
     /**
@@ -36,18 +52,12 @@ public class TaskListPanel extends UiPart<Region> {
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
-                getStyleClass().removeAll("task-complete", "task-incomplete");
+                getStyleClass().clear();
             } else {
                 TaskListCard card = new TaskListCard(task, getIndex() + 1);
+                setGraphic(card.getRoot());
                 // Apply initial style based on task status
                 updateStyle(task);
-
-                // Add a listener to update the style when the task status changes
-                task.isCompleteProperty().addListener((observable, oldValue, newValue) -> {
-                    updateStyle(task); // Call the updateStyle method
-                });
-                setGraphic(card.getRoot());
-
             }
         }
 
