@@ -26,6 +26,10 @@ public class Lesson {
             + "Start time cannot be 2359 and end time cannot be 0000\n"
             + "Lesson input must contain a day and a time range separated by a space. "
             + "Example: " + PREFIX_LESSON + " monday 0900-1000";
+    public static final String MESSAGE_INVALID_LESSON_DAY = "Are you sure you have given a valid day of the week? ⊙▂⊙";
+    public static final String MESSAGE_INVALID_LESSON_TIME = "Are you sure you have given valid "
+            + "start and end times? ⊙▂⊙ \n"
+            + "Please give it in HHMM-HHMM (24-hour format)";
     public static final String MESSAGE_INVALID_LESSON_END_TIME = "Unfortunately we do not allow lessons to overflow "
             + "to the next day, the latest a lesson can end is 2359";
     public static final String MESSAGE_INVALID_LESSON_START_TIME = "Lessons have to start earlier than 2359,"

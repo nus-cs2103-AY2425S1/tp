@@ -163,7 +163,6 @@ public class ParserUtil {
     public static Lesson parseLesson(String lesson) throws ParseException {
         requireNonNull(lesson);
         String trimmedLesson = lesson.trim();
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         String[] lessonDayTimeArr = trimmedLesson.split("\\s+", 2);
 
         if (lessonDayTimeArr.length != 2) {
@@ -172,13 +171,48 @@ public class ParserUtil {
 
         String dayString = lessonDayTimeArr[0];
         String timeRange = lessonDayTimeArr[1];
-        String[] timeArr = timeRange.split("-");
+
+        checkValidLessonDayInfo(dayString);
+        checkValidLessonTimeInfo(timeRange);
+
+        return new Lesson(trimmedLesson);
+    }
+
+    /**
+     * Checks if the provided lesson day information is valid.
+     *
+     * <p>This method verifies that the specified day string corresponds to a valid day
+     * in the {@code Day} enum. The day string is case-insensitive.</p>
+     *
+     * @param lessonDayString The string representation of the lesson day to be validated.
+     * @throws ParseException If the provided day string is not a valid day.
+     */
+    public static void checkValidLessonDayInfo(String lessonDayString) throws ParseException {
+        if (!Day.isValidDay(lessonDayString.toLowerCase())) {
+            throw new ParseException(Lesson.MESSAGE_INVALID_LESSON_DAY);
+        }
+    }
+
+    /**
+     * Checks if the provided lesson time information is valid.
+     *
+     * <p>This method validates the time range format and ensures the start and end times
+     * meet the specified constraints. Specifically, it checks that the lesson start time
+     * is before the end time, that the lesson does not overflow into the next day, and
+     * that both times are within valid bounds (e.g., 0000 to 2359).</p>
+     *
+     * @param lessonTimeString The string representation of the lesson time range in the format "HHmm-HHmm".
+     * @throws ParseException If the time range format is invalid or if any time constraints are violated.
+     */
+    public static void checkValidLessonTimeInfo(String lessonTimeString) throws ParseException {
+        if (!Lesson.isValidTimeRange(lessonTimeString)) {
+            throw new ParseException(Lesson.MESSAGE_INVALID_LESSON_TIME);
+        }
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        String[] timeArr = lessonTimeString.split("-");
         LocalTime startTime = LocalTime.parse(timeArr[0], timeFormatter);
         LocalTime endTime = LocalTime.parse(timeArr[1], timeFormatter);
-
-        if (!Day.isValidDay(dayString.toLowerCase()) || !Lesson.isValidTimeRange(timeRange)) {
-            throw new ParseException(Lesson.MESSAGE_CONSTRAINTS);
-        }
 
         if (!Lesson.isLessonStartAtValidTime(startTime)) {
             throw new ParseException(Lesson.MESSAGE_INVALID_LESSON_START_TIME);
@@ -191,7 +225,6 @@ public class ParserUtil {
         if (!Lesson.isValidTimeOrder(startTime, endTime)) {
             throw new ParseException(Lesson.MESSAGE_INVALID_TIME_ORDER);
         }
-        return new Lesson(trimmedLesson);
     }
 
     /**
