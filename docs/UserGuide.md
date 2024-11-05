@@ -58,8 +58,8 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 ---
 ## Symbols and Tips
 
-Throughout this guide, you'll encounter several symbols. 
-Refer to these symbols as you explore the guide. 
+Throughout this guide, you'll encounter several symbols.
+Refer to these symbols as you explore the guide.
 Each provides quick insights or warnings that can make your experience smoother:
 
 - [💡 **Tip**]: Useful information to enhance your experience.
@@ -75,7 +75,7 @@ Each provides quick insights or warnings that can make your experience smoother:
     - If your computer does not have Java or its version is below Java 17, you may refer to:
         - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
         - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
-        - 
+
 [❗ **Note**]:If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
 2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.3).
 
@@ -96,14 +96,13 @@ Each provides quick insights or warnings that can make your experience smoother:
       ```
       ![launch instruction.png](images%2Flaunch%20instruction.png)
 [⚠️ **Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error.
- 
    
-<br><br>🎉A GUI similar to the one below should appear in a few seconds!🎉 
+<br>🎉A GUI similar to the one below should appear in a few seconds!🎉<br>
 
-<br>Note how the app contains some sample data. 
 
 <img src="images/successimage.png" alt="imgidk.png" width="800">
 
+[❗ **Note**]:Note how the app contains some sample data.
 
 
 
@@ -456,53 +455,54 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 ### Interfaces
 
-- **CLI (Command Line Interface)**:  
+- **CLI (Command Line Interface)**:
   A text-based interface where users type commands to interact with the application, providing faster and more precise control than a graphical interface.
 
-- **GUI (Graphical User Interface)**:  
+- **GUI (Graphical User Interface)**:
   A visual interface that lets users interact with the app through graphical elements like buttons, icons, and windows, making it more user-friendly.
 
 ### Commands & Formats
 
-- **Command Format**:  
+- **Command Format**:
   The structure in which commands are entered in the CLI. It includes keywords, parameters, and optional elements that allow flexibility in entering information.
 
-- **Command Parameters**:  
+- **Command Parameters**:
   Specific data (e.g., `NAME`, `PHONE_NUMBER`, `EMAIL`) you supply when using commands to customize their actions. Parameters may be required or optional, depending on the command.
 
-- **Placeholder Value**:  
+- **Placeholder Value**:
   A generic example value in command formats (e.g., `n/NAME`, `p/PHONE_NUMBER`) that shows where users should insert their own specific information.
 
 ### Data & Fields
 
-- **Index**:  
+- **Index**:
   A number indicating a specific item in a list, such as a candidate or job entry. For example, the index "2" refers to the second item displayed in the current list.
 
-- **Status**:  
+- **Status**:
   A label representing the current stage of a candidate in the hiring process (e.g., Applied, Interviewed, Hired). Useful for filtering and organizing candidates based on their progress.
 
-- **Tag**:  
+- **Tag**:
   A custom label that can be added to candidates, like "friend" or "urgent," to help categorize or prioritize them. Multiple tags can be assigned to each candidate.
 
-- **Field**:  
+- **Field**:
   An attribute or property of a candidate, such as "Name," "Phone Number," or "Email," that can be edited or displayed.
 
 ### Functional Categories
 
-- **Module**:  
+- **Module**:
   A feature grouping within TalentSG that includes functions related to candidates and job roles, such as adding, listing, and filtering candidates.
 
-- **Filter**:  
+- **Filter**:
   A command that narrows down displayed candidates based on specific criteria, such as "status" or "skills," simplifying searching and management.
 
 ### Resources & Links
 
-- **Hyperlink**:  
+- **Hyperlink**:
   Underlined and often blue text within the document that, when clicked, redirects to external resources, guides, or downloads. Requires an internet connection.
 
-- **File Path**:  
+- **File Path**:
   The directory location on your computer where specific files are stored (e.g., `[JAR file location]/data/addressbook.json`), often used when accessing or editing files.
 
-- **Backup**:  
+- **Backup**:
   A saved copy of the data file, recommended before making manual changes to avoid data loss.
-  [back to top](#talentSG-user-guide)
+
+[back to top](#talentSG-user-guide)
