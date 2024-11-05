@@ -23,10 +23,10 @@ public class AddLessonCommand extends Command {
     public static final CommandType COMMAND_TYPE = CommandType.LESSON;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to TAHub. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_DATE + "2024-10-20 "
             + PREFIX_TIME + "14:00 ";
 

@@ -3,6 +3,7 @@ package seedu.address.model.datetime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
@@ -55,7 +56,8 @@ public class Time implements Comparable<Time> {
      * @return True if the string represents a valid time, false otherwise.
      */
     public static boolean isValidTime(String test) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
 
         try {
             LocalTime.parse(test, timeFormatter);
@@ -73,10 +75,7 @@ public class Time implements Comparable<Time> {
      *         or after the specified time.
      */
     public int compareTo(Time otherTime) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime thisLocalTime = LocalTime.parse(this.value, timeFormatter);
-        LocalTime otherLocalTime = LocalTime.parse(otherTime.value, timeFormatter);
-        return thisLocalTime.compareTo(otherLocalTime);
+        return this.getLocalTimeValue().compareTo(otherTime.getLocalTimeValue());
     }
 
     @Override

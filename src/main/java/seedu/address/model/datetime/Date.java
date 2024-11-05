@@ -3,6 +3,7 @@ package seedu.address.model.datetime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
@@ -45,17 +46,18 @@ public class Date implements Comparable<Date> {
      */
     public LocalDate getLocalDateValue() {
         assert !value.isEmpty();
-        return LocalDate.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return LocalDate.parse(value, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
     /**
-     * Returns true if a given string is a valid date format (YYYY-MM-DD) and represents a real date.
+     * Returns true if a given string is a valid date format (UUUU-MM-DD) and represents a real date.
      *
      * @param test The string to test for validity.
      * @return True if the string represents a valid date, false otherwise.
      */
     public static boolean isValidDate(String test) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+                .withResolverStyle(ResolverStyle.STRICT);;
 
         try {
             LocalDate.parse(test, dateFormatter);

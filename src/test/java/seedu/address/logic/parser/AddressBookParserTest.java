@@ -40,6 +40,7 @@ import seedu.address.logic.commands.lesson.AddLessonCommand;
 import seedu.address.logic.commands.lesson.DeleteLessonCommand;
 import seedu.address.logic.commands.lesson.ListLessonsCommand;
 import seedu.address.logic.commands.lesson.MarkLessonAttendanceCommand;
+import seedu.address.logic.commands.lesson.MarkLessonParticipationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Consultation;
@@ -317,5 +318,16 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand,
                 parser.parseCommand(MarkLessonAttendanceCommand.COMMAND_WORD
                         + " 1 n/Alice Pauline n/Benson Meier a/y"));
+    }
+
+    @Test
+    public void parseCommand_markLessonParticipation() throws Exception {
+        MarkLessonParticipationCommand expectedCommand = new MarkLessonParticipationCommand(
+                Index.fromOneBased(1),
+                List.of(TypicalStudents.ALICE.getName(), TypicalStudents.BENSON.getName()),
+                3);
+        assertEquals(expectedCommand,
+                parser.parseCommand(MarkLessonParticipationCommand.COMMAND_WORD
+                        + " 1 n/Alice Pauline n/Benson Meier pt/3"));
     }
 }
