@@ -74,7 +74,7 @@ public class AddressBookParser {
 
         case DeleteProfileCommand.COMMAND_WORD:
         case DeleteProfileCommand.COMMAND_ALIAS:
-            return new DeleteProfileParser().parse(arguments);
+            return new DeleteProfileCommandParser().parse(arguments);
 
 
         case EditCommand.COMMAND_WORD:

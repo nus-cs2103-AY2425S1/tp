@@ -7,7 +7,7 @@ import seedu.address.model.profile.Profile;
 /**
  * Parses input arguments and creates a new {@code DeleteProfileCommand} object.
  */
-public class DeleteProfileParser implements Parser<DeleteProfileCommand> {
+public class DeleteProfileCommandParser implements Parser<DeleteProfileCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteProfileCommand
