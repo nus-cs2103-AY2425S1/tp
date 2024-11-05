@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -253,11 +254,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Wedding> getFilteredWeddingList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -272,6 +268,25 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person personWithAllTagsRemoved(Person personToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonInWedding(Person editedPerson, Set<Tag> tagsInBoth) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

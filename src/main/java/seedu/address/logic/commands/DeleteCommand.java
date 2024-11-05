@@ -69,9 +69,6 @@ public class DeleteCommand extends Command {
                 personToDelete.getAddress().value,
                 personToDelete.getJob().value);
 
-        // Print confirmation prompt
-        System.out.println(confirmationMessage);
-
         // Store the personToDelete in a static context
         StaticContext.setPersonToDelete(personToDelete);
 

@@ -4,10 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,6 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 
@@ -205,21 +210,6 @@ public class ModelManager implements Model {
         weddingBook.setWedding(target, editedWedding);
     }
 
-    @Override
-    public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
-        List<Wedding> weddingList = getFilteredWeddingList();
-
-        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
-                .toList();
-
-        for (Set<Person> set : weddingParticipantsSet) {
-            if (set.contains(personToEdit)) {
-                set.remove(personToEdit);
-                set.add(editedPerson);
-            }
-        }
-    }
-
     //=========== Filtered Wedding List Accessors ============================================================
 
     /**
@@ -260,6 +250,64 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredWeddings.equals(otherModelManager.filteredWeddings);
+    }
+
+    //=========== Person, Wedding and Tag related accessors ============================================================
+
+    @Override
+    public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+        List<Wedding> weddingList = getFilteredWeddingList();
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            if (set.contains(personToEdit)) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+    }
+
+    @Override
+    public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+        List<String> predicate = tags
+                .stream().map(Tag::getTagName).collect(Collectors.toList());
+        List<Wedding> list = new ArrayList<>();
+
+        for (Wedding wedding : getFilteredWeddingList()) {
+            for (String tagName : predicate) {
+                if (wedding.getWeddingName().toString().equals(tagName)) {
+                    list.add(wedding);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    @Override
+    public void deletePersonInWedding(Person editedPerson, Set<Tag> editedTags) {
+        List<Wedding> weddingList = getWeddingFromTags(editedTags);
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            set.remove(editedPerson);
+        }
+    }
+
+    @Override
+    public Person personWithAllTagsRemoved(Person personToEdit) {
+        Set<Tag> currentTags = new HashSet<>(personToEdit.getTags());
+
+        deletePersonInWedding(personToEdit, currentTags);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getJob(), Collections.emptySet());
+        setPerson(personToEdit, editedPerson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return editedPerson;
     }
 
 }
