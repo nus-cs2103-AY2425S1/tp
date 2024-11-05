@@ -87,8 +87,6 @@ public class StatusTest {
         assertNotEquals(status, status4);
         assertNotEquals(status2, status3);
         assertNotEquals(status2, status4);
-
-
     }
 
     @Test

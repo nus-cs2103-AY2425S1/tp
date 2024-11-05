@@ -15,6 +15,7 @@ import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.BaseParserUtil;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
@@ -142,5 +143,19 @@ public class ParserUtil extends BaseParserUtil {
         }
 
         return lastShownList.get(index.getZeroBased());
+    }
+
+    /**
+     * Parses a {@code String amountSign} into a {@code AmountSignFilterPredicate}.
+     *
+     * @throws ParseException if the given {@code amountSign} is invalid.
+     */
+    public static AmountSignFilterPredicate parseAmountSign(String amountSign) throws ParseException {
+        requireNonNull(amountSign);
+        amountSign = amountSign.trim();
+        if (!AmountSignFilterPredicate.isValidSign(amountSign)) {
+            throw new ParseException(AmountSignFilterPredicate.MESSAGE_CONSTRAINTS);
+        }
+        return new AmountSignFilterPredicate(amountSign);
     }
 }

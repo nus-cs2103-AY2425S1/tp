@@ -22,6 +22,7 @@ import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
 import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
@@ -47,6 +48,8 @@ public class FilterCommandParserTest {
     private static final Predicate<Transaction> testDescriptionPred = new DescriptionFilterPredicate(testDescription);
     private static final Predicate<Transaction> testDatePred = new DateFilterPredicate(testDate);
     private static final Predicate<Transaction> testStatusPred = new StatusFilterPredicate(testStatus);
+    private static final Predicate<Transaction> testAmountSignPred =
+            new AmountSignFilterPredicate(AmountSignFilterPredicate.POSITIVE_SIGN);
 
     private final FilterCommandParser parser = new FilterCommandParser();
 
@@ -118,6 +121,16 @@ public class FilterCommandParserTest {
         subPredicates.add(testDescriptionPred);
         subPredicates.add(testDatePred);
         subPredicates.add(testStatusPred);
+        FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
+
+        assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));
+    }
+
+    @Test
+    public void parse_amtSignField_success() {
+        String userInput = " amtsign/" + AmountSignFilterPredicate.POSITIVE_SIGN;
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testAmountSignPred);
         FilterCommandPredicate expectedPred = new FilterCommandPredicate(subPredicates);
 
         assertParseSuccess(parser, userInput, new FilterCommand(expectedPred));

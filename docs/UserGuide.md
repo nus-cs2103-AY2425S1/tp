@@ -216,8 +216,9 @@ Filter transactions with a any combination of the following parameters:
 * and/or description 
 * and/or date
 * and/or status
+* and/or positive/negative amount
 
-Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS]`
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]`]`
 
 * The command requires at least one of the above optional prefixes to be provided.
 * As more prefixes are provided, the filter becomes more specific.
@@ -229,6 +230,8 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `DESCRIPTION` accepts a string of words.
     * The description filter is case-insensitive. e.g `hans` will match `Hans`
 * The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
+* The `AMOUNT_SIGN` accepts either `Pos` or `Neg` to indicate filtering for transactions with amount that are 
+  positive or negative.
 
 Examples:<br>
 
@@ -409,5 +412,5 @@ _Details coming soon ..._
 | **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN`                                   |
 | **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
 | **List**   | `listTxn`                                                                                                                                                                                                                    |
-| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS]` <br> e.g. `filterTxn 1`                                                                                                                      |
+| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]` <br> e.g. `filterTxn 1`                                                                                                        |
 | **Clear**  | `clearTxn`                                                                                                                                                                                                                   |
