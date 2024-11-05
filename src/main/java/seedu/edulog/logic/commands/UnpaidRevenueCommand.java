@@ -11,53 +11,29 @@ import static seedu.edulog.model.Model.PREDICATE_SHOW_UNPAID_STUDENTS;
 /**
  * Calculate total revenue earned
  */
-public class PaidRevenueCommand extends Command {
-    public static final String COMMAND_WORD = "revenue";
-    public static final String COMMAND_USAGE = COMMAND_WORD + " [paid/unpaid]"
-            + ": calculate total amount of money earned/not earned"
-            + "from students who have paid/not paid. Example: revenue paid";
-    public static final String COMMAND_SUCCESS = "Total revenue %s is $%d";
-    public static final String MESSAGE_SUCCESS = "Total revenue %s is $%d";
-    public static final String PAID = "paid";
-    public static final String UNPAID = "unpaid";
+public class UnpaidRevenueCommand extends RevenueCommand {
 
-    private String option;
+    private final String OPTION = "unpaid";
 
-    public PaidRevenueCommand(String option) {
-        this.option = option;
-    }
+    public UnpaidRevenueCommand() { }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        int result;
-        if (option.equals(PAID)) {
-            model.updateFilteredStudentList(PREDICATE_SHOW_PAID_STUDENTS);
-            result = model.getPaid();
-        } else if (option.equals(UNPAID)) {
-            model.updateFilteredStudentList(PREDICATE_SHOW_UNPAID_STUDENTS);
-            result = model.getUnpaid();
-        } else {
-            throw new CommandException();
-        }
+        int result = model.getUnpaid();
+        model.updateFilteredStudentList(PREDICATE_SHOW_UNPAID_STUDENTS);
 
-        String output = String.format(COMMAND_SUCCESS, option, result);
-        return new CommandResult(output);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, OPTION, result));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof PaidRevenueCommand)) {
-            return false;
-        }
-
-        PaidRevenueCommand otherCommand = (PaidRevenueCommand) other;
-        return otherCommand.option.equals(this.option);
+        return (other instanceof UnpaidRevenueCommand);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("option", option).toString();
+        return new ToStringBuilder(this).toString();
     }
 }
