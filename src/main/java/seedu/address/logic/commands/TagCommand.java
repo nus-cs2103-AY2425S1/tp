@@ -100,18 +100,15 @@ public class TagCommand extends Command {
                 .orElse(studentToTag.getEmergencyContact());
         Address updatedAddress = tagsToAdd.getAddress().orElse(studentToTag.getAddress());
         Note updatedNote = tagsToAdd.getNote().orElse(studentToTag.getNote());
-
         Level updatedLevel = tagsToAdd.getLevel().orElse(studentToTag.getLevel());
+        Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(studentToTag.getSubjects());
 
-        if (updatedLevel != null && tagsToAdd.getSubjects().isPresent()) {
+        if (!updatedSubjects.isEmpty()) {
             if (!Subject.isValidSubjectsByLevel(updatedLevel,
-                            tagsToAdd
-                                .getSubjects()
-                                .get())) {
+                    updatedSubjects)) {
                 throw new CommandException(Subject.getValidSubjectMessage());
             }
         }
-        Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(studentToTag.getSubjects());
 
         TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(studentToTag.getTaskList());
         Set<LessonTime> updatedLessonTimes = tagsToAdd.getLessonTimes()

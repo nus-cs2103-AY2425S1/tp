@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -24,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -164,6 +166,72 @@ public class UpdateCommandTest {
                 new UpdateStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_STUDENT_UPDATE);
+    }
+
+    @Test
+    public void execute_updateStudentWithNoSubjectsWithLevel_success() {
+
+        //Remove subjects of student in address book
+        Student studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+        Student replaceStudent = new StudentBuilder(studentInList).withSubjects().build();
+        model.setStudent(studentInList, replaceStudent);
+
+        //Get new student for expected message
+        Student newStudent = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased());
+
+        Name studentName = newStudent.getName();
+
+        //Student after being updated with new Level
+        Student finalStudent = new StudentBuilder(newStudent).withLevel("S3 NA").build();
+
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withLevel("S3 NA").build();
+        UpdateCommand updateCommand = new UpdateCommand(studentName, descriptor);
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_STUDENT_SUCCESS,
+                Messages.format(finalStudent));
+
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, model);
+    }
+
+    @Test
+    public void execute_invalidLevelForStudentSubjects_failure() throws CommandException {
+
+        Name studentInList = model.getAddressBook()
+                .getStudentList()
+                .get(INDEX_SECOND_STUDENT
+                        .getZeroBased())
+                .getName();
+
+        //Ensures Student first has a Valid Level and Subject before making it invalid
+        UpdateStudentDescriptor test =
+                new UpdateStudentDescriptorBuilder()
+                        .withLevel("S2 NA")
+                        .withSubjects("Math")
+                        .build();
+        new TagCommand(studentInList, test).execute(model);
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder()
+                        .withLevel("S3 Express")
+                        .build();
+
+        UpdateCommand updateCommand = new UpdateCommand(studentInList, descriptor);
+
+        String expectedMessage = "Subject is not valid for given level. "
+                + "Valid subjects for S3 EXPRESS: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
+                + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
+                + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
+
+        CommandException thrown = assertThrows(CommandException.class, () -> {
+            updateCommand.execute(model);
+        });
+        assertEquals(expectedMessage, thrown.getMessage());
     }
 
     @Test
