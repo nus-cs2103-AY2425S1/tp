@@ -214,7 +214,8 @@ public class ModelManager implements Model {
                 && filteredClients.equals(otherModelManager.filteredClients)
                 && clients.equals(otherModelManager.clients)
                 && visibleRentalInformationList.equals(otherModelManager.visibleRentalInformationList)
-                && Objects.equals(lastViewedClient.get(), otherModelManager.lastViewedClient.get());
+                && Objects.equals(lastViewedClient.get(), otherModelManager.lastViewedClient.get())
+                && commandHistoryStorage.equals(otherModelManager.commandHistoryStorage);
     }
 
 }
