@@ -210,21 +210,6 @@ public class ModelManager implements Model {
         weddingBook.setWedding(target, editedWedding);
     }
 
-    @Override
-    public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
-        List<Wedding> weddingList = getFilteredWeddingList();
-
-        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
-                .toList();
-
-        for (Set<Person> set : weddingParticipantsSet) {
-            if (set.contains(personToEdit)) {
-                set.remove(personToEdit);
-                set.add(editedPerson);
-            }
-        }
-    }
-
     //=========== Filtered Wedding List Accessors ============================================================
 
     /**
@@ -269,6 +254,21 @@ public class ModelManager implements Model {
 
     //=========== Person, Wedding and Tag related accessors ============================================================
 
+    @Override
+    public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+        List<Wedding> weddingList = getFilteredWeddingList();
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            if (set.contains(personToEdit)) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+    }
+    
     /**
      * Gets a list of weddings whose name matches that of the tags in the set.
      *
@@ -290,27 +290,6 @@ public class ModelManager implements Model {
         }
 
         return list;
-    }
-
-    /**
-     * Updates the remaining list of weddings with the editedPerson.
-     *
-     * @param editedPerson Person whose new tags have been added to them.
-     * @param personToEdit Person who has tags currently being added to them.
-     * @param model        current Model containing necessary wedding address book.
-     */
-    public void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model) {
-        List<Wedding> weddingList = model.getFilteredWeddingList();
-
-        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
-                .toList();
-
-        for (Set<Person> set : weddingParticipantsSet) {
-            if (set.contains(personToEdit)) {
-                set.remove(personToEdit);
-                set.add(editedPerson);
-            }
-        }
     }
 
     /**
