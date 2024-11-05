@@ -480,7 +480,7 @@ assignments are present for a person, separate them within the same entry using 
 ![Valid CSV](images/validCSV.png)
 ![Valid CSV(excel)](images/validCSV1.png)
 
-
+</box>
 
 
 --------------------------------------------------------------------------------------------------------------------
