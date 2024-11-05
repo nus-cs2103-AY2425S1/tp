@@ -73,7 +73,7 @@ public class AddTransactionCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        assert personToEdit != null: "Person should not be null";
+        assert personToEdit != null : "Person should not be null";
         List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(toAdd);
         transactions.sort(new TransactionDateComparator());
