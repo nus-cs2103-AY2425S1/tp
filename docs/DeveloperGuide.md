@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteStu 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteStu 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `deleteStu 1` Command" />
 
 <box type="info" seamless>
 
@@ -145,6 +145,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both tutorial data and assignment data as well in JSON format, and read them back into corresponding objects.
 * inherits from `AddressBookStorage`, `UserPrefStorage`, `TutorialStorage` and `AssignmentStorage`, which means it can be treated as one of these (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -165,19 +166,19 @@ This section describes some noteworthy details on how certain features are imple
 Users can seamlessly add tutorials, students and assignments into the TrackMate application. On top of that, users can also add student's tutorial
 attendance to maintain student's accurate attendance record.
 
-### Feature's Architecture Design
+#### Feature's Architecture Design
 
-1. **Centralized Parsing with AddCommandParser** :
-The parsing logic is centralized in AddCommandParser to ensure that input arguments are consistently handled across commands. This prevents each command from having redundant logic and promotes modularity by isolating parsing responsibilities.
+1. **Centralized Parsing with AddCommandParser**:
+   The parsing logic is centralized in `AddCommandParser` to ensure that input arguments are consistently handled across commands. This prevents each command from having redundant logic and promotes modularity by isolating parsing responsibilities.
 
-* **Benefit**: This structure simplifies the command classes, making them more focused on executing logic rather than parsing input.
-* **Challenge**: It requires careful handling of the parsing rules to ensure correctness since the parser is a crucial layer between user input and the system’s execution.
+    * **Benefit**: This structure simplifies the command classes, making them more focused on executing logic rather than parsing input.
+    * **Challenge**: It requires careful handling of the parsing rules to ensure correctness since the parser is a crucial layer between user input and the system’s execution.
 
 2. **Avoiding Duplicates with Tutorial and Student Validation**:
-We ensure that duplicate students or non-existent tutorials are caught early in ModelManager. This provides immediate feedback and prevents inconsistent states in the data model.
+   We ensure that duplicate students or non-existent tutorials are caught early in `ModelManager`. This provides immediate feedback and prevents inconsistent states in the data model.
 
-* **Benefit**: Validation at the model level ensures the integrity of the data.
-* **Challenge**: This requires checks across multiple classes (such as TutorialList and Student) to ensure consistency without impacting performance.
+    * **Benefit**: Validation at the model level ensures the integrity of the data.
+    * **Challenge**: This requires checks across multiple classes (such as `TutorialList` and `Student`) to ensure consistency without impacting performance.
 
 
 #### Add Student
@@ -185,7 +186,7 @@ We ensure that duplicate students or non-existent tutorials are caught early in 
 To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below
 shows the sequence of action users will have to take to add a new Student Profile into the TrackMate Application.
 
-<puml src="diagrams/AddFeatureActivityDiagram.puml" width="400" />
+<puml src="diagrams/AddFeatureActivityDiagram.puml" width="600" />
 
 Besides, a class diagram of add student command is given below to demonstrate the interactions among classes.
 
@@ -196,7 +197,7 @@ Besides, a class diagram of add student command is given below to demonstrate th
 Similar to adding student, the system requires parameters such as Tutorial Name and Tutorial ID. The sequence diagram below demonstrates the interaction
 among various classes to add a new Tutorial into the TrackMate Application.
 
-<puml src="diagrams/AddTutorialSequenceDiagram.puml" width="400" />
+<puml src="diagrams/AddTutorialSequenceDiagram.puml" width="600" />
 
 #### Add Attendance
 
@@ -204,7 +205,7 @@ The AttendCommand is responsible for marking the attendance of a student for a s
 with the model to update the attendance record of a given student for a particular tutorial. The sequence diagram below shows how the command
 interact with other classes.
 
-<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="400" />
+<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="600" />
 
 #### Add Assignment
 
@@ -248,7 +249,7 @@ promoting cleaner, more maintainable code.
 The TrackMate application empowers users to update the details of existing students easily. With the Edit feature, users can modify a student's name, student ID, or assigned tutorial
 ID. This functionality ensures that student records remain accurate and up-to-date within the application, reflecting any changes in student information or tutorial assignments.
 
-### Feature's Architecture Design
+#### Feature's Architecture Design
 
 **Use of EditStudentDescriptor**: The EditStudentDescriptor is a static inner class within EditCommand that stores the details of the fields to edit. It allows for optional
 fields, meaning users can choose to update any combination of the student's attributes without affecting others.
@@ -322,7 +323,7 @@ keeping parsing, data encapsulation, and execution concerns separate.
 The TrackMate application allows users to remove students, tutorials, assignments, and attendance records efficiently. The Delete feature ensures
 that outdated or incorrect records can be cleaned up, maintaining the integrity and relevance of the data within the application.
 
-### Feature's Architecture Design
+#### Feature's Architecture Design
 
 1. **Centralized Parsing with DeleteCommandParser**: The parsing logic for delete commands is centralized in their respective parser classes (e.g., DeleteCommandParser, DeleteTutorialCommandParser, etc.). Each parser is responsible for interpreting
 the user's input, extracting necessary identifiers (like student index, tutorial ID, assignment title), and creating the appropriate delete command object.
