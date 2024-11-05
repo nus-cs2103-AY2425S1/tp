@@ -23,6 +23,14 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+
+        // with special characters
+        assertFalse(() -> Tag.isValidTagName("tag_name"));
+
+        // valid tags
+        assertTrue(() -> Tag.isValidTagName("tagname"));
+        assertTrue(() -> Tag.isValidTagName("TAGNAME"));
+        assertTrue(() -> Tag.isValidTagName("tagname"));
     }
 
     @Test
@@ -42,6 +50,9 @@ public class TagTest {
 
         // different tag -> returns false
         assertFalse(tag.equals(new Tag("different")));
+
+        // same tags but difference case -> returns true
+        assertTrue(tag.equals(new Tag("TAG")));
     }
 
 }
