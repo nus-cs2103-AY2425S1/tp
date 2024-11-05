@@ -457,7 +457,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Adding a person
 
@@ -576,7 +575,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 
 ### Marking a Payment Date
@@ -616,7 +614,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
    1. Other incorrect view commands to try: `info`, `info x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-=======
+
 ### Clearing all entries
 
 1. Clearing all entries while all entries are being shown
@@ -683,7 +681,6 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
 
 
 ## Appendix: Effort
@@ -751,6 +748,12 @@ This section lists planned enhancements to address known feature flaws. These en
 6. **Allow Multiple Class Allocations for a Single Student**  
    **Current Issue:** Currently, there are restrictions preventing a student from being assigned to more than one class, which can cause issues in managing class rosters.  
    **Planned Enhancement:** Remove restrictions each student to a single class.
+
+
+7. **Enable Multi-Word Search for Accurate Matching**  
+   **Current Issue:** Currently, the find command interprets multi-word entries with spaces (e.g., names or addresses) as separate search terms. For example, searching `n/Kim Woo Bin` returns any entries that match "Kim," "Woo," or "Bin" individually rather than finding the exact phrase "Kim Woo Bin." Similarly, searching for an address like "222 Greenwood Ave" matches "222," "Greenwood," and "Ave" separately, which could yield inaccurate results.  
+   **Planned Enhancement:** Modify the find command to recognize multi-word search terms as complete phrases, enabling accurate matching for entries that include spaces. This enhancement will help avoid potential edge cases due to whitespace handling.
+
 
    
 These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
