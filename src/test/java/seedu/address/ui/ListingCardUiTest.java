@@ -44,8 +44,8 @@ public class ListingCardUiTest extends ApplicationTest {
     private ListingCard listingCard;
     private Listing sampleListing;
     private final Seller sampleSeller = (Seller) createSampleSeller();
-    private final Buyer sampleBuyerOne = (Buyer) createSampleBuyer_one();
-    private final Buyer sampleBuyerTwo = (Buyer) createSampleBuyer_two();
+    private final Buyer sampleBuyerOne = (Buyer) createSampleBuyerOne();
+    private final Buyer sampleBuyerTwo = (Buyer) createSampleBuyerTwo();
 
 
     @BeforeEach
@@ -170,7 +170,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing.
      */
-    private Person createSampleBuyer_one() {
+    private Person createSampleBuyerOne() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
         tagSet.add(new Tag("colleagues"));
@@ -188,7 +188,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing.
      */
-    private Person createSampleBuyer_two() {
+    private Person createSampleBuyerTwo() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
 
