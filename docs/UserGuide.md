@@ -455,13 +455,14 @@ Commands for managing appointments between user and clients.
       > ---
     
     <br>
-    <div class="note">
+    <div class="note" markdown="span">
     If you suggest a name that differs from an existing client by at most 3 letters, 
-    the console will suggest to input the existing client instead
+    the console will suggest to input the existing client instead!
+    <br>  
+    ![levershtein](images/levershtein_distance.png)
+    <br>
     </div>
     <br>
-  
-    ![levershtein](images/levershtein_distance.png)
 
 ---
 
