@@ -188,4 +188,14 @@ public class ModelStub implements Model {
     public ObservableIntegerValue getStartingIndexOfAssignedEvents() {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public int getRelativeIndexOfEvent(Event event) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public int getRelativeIndexOfVendor(Vendor vendor) {
+        throw new AssertionError("This method should not be called.");
+    }
 }
