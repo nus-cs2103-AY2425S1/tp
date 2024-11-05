@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIELD_GITHUB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIELD_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FIELD_TELEGRAM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SORT_RESET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTORDER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -55,6 +56,13 @@ public class SortCommandParserTest {
     }
 
     @Test
+    public void parse_additionalValues_throwsParseException() {
+        // reset + order field
+        assertParseFailure(parser, VALID_SORT_RESET + ORDER_DESC_ASC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_duplicateValues_throwsParseException() {
         // duplicate order
         assertParseFailure(parser, VALID_FIELD_NAME + ORDER_DESC_DESC + ORDER_DESC_DESC,
@@ -77,5 +85,8 @@ public class SortCommandParserTest {
         SortCommand expectedThirdCommand =
                 new SortCommand(comparatorManager.getComparator(SortField.TELEGRAM, SortOrder.ASC));
         assertParseSuccess(parser, VALID_FIELD_TELEGRAM + ORDER_DESC_ASC, expectedThirdCommand);
+
+        SortCommand expectedResetCommand = new SortCommand(null);
+        assertParseSuccess(parser, VALID_SORT_RESET , expectedResetCommand);
     }
 }
