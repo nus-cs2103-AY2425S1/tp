@@ -14,16 +14,17 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Quick Start: Get started in 3 minutes!
 
-In this quick start guide, you'll learn how to install EZSTATES. **_(3 min)_**<br>
+In this quick start guide, you'll learn how to install EZSTATES. 
 <br>
-**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+<br>
+**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. 
 
 <div class="note"> 
 While learning our command structure is optional, 
 we highly recommend reviewing this section to make using EZSTATES much easier.
 </div>
 
-### Installation
+### Installation _(~3min)_
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -50,7 +51,50 @@ we highly recommend reviewing this section to make using EZSTATES much easier.
 
 6. Refer to the [Features](#features) for command details.
 
-### Command Structure
+### Command Structure _(~10 mins)_
+
+In this section, we will explore the general format of commands in EZSTATES.
+
+Commands in EZStates follow the same structure:
+
+`commandWord (REFERENCE) (PREFIXES)` 
+
+| commandWord                  | reference                                                                                                            | prefixes                                                                                                 |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| Specifies the command to run | Comes before all prefixes and is used to make reference a particular client/listing <br/> Optional for some commands | Used to specify various attributes/properties for a given `commandWord` <br/> Optional for some commands |
+
+#### Reference Types
+
+| Reference | Meaning                                  | Constraints                                                      | Remarks                                                                                                                                               |
+|-----------|------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name      | Name of a client or a listing in a list  | Names should only contain `alphanumerical` characters and spaces | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
+
+#### Prefixes
+
+Prefixes follow the same structure
+
+`prefix/Value`
+
+and can be either optional or mandatory, and variadic or not variadic.
+The table below showcases the four different possible notations of prefixes
+
+|              | Mandatory       | Optional          |
+|--------------|-----------------|-------------------|
+| Not variadic | prefix/Value    | [prefix/Value]    |
+| Variadic     | prefix/Value... | [prefix/Value]... |
+
+<div class="note" markdown="span">
+Optional fields can be omitted and the command will still be executed successfully <br> (assuming all other parts are correctly inputted) 
+</div>
+
+#### Prefix Types
+
+<div class="note" markdown="span">
+The prefixes used in EZSTATES are universal across all commands (i.e. have the same constraints and remarks)
+</div>
+
+| prefix | constraints | remarks | valid | invalid |
+|--------|-------------|---------|-------|---------|
 
 --------------------------------------------------------------------------------------------------------------------
 
