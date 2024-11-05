@@ -26,7 +26,7 @@ public class SubjectTest {
         // invalid subject names
         assertFalse(Subject.isValidSubject("")); // empty string
         assertFalse(Subject.isValidSubject(" ")); // spaces only
-        assertFalse(Subject.isValidSubject("Physics")); // not in enum
+        assertFalse(Subject.isValidSubject("Art")); // not in enum
         assertFalse(Subject.isValidSubject("English123")); // alphanumeric
 
         // valid subject names
