@@ -41,13 +41,13 @@ MedDict is a _desktop application designed for physiotherapists_ who manage a la
 
 ## Quick start (detailed)
 
-1. Make sure Java 17 or higher is installed on your computer.
+1. **Make sure Java 17 or higher is installed on your computer.**
 
    * To Check if Java is Installed:
 
         1. Open your terminal:
-            - Windows: Press `Windows + R`, type `cmd`, and press **Enter**.
-            - Mac: Press `Command + Space`, type `Terminal`, and press **Enter**.
+            - Windows: Press `Windows + R`, type `cmd`, and press Enter.
+            - Mac: Press `Command + Space`, type `Terminal`, and press Enter.
             - Linux: Press `Ctrl + Alt + T`, or look for "Terminal" in your applications menu.
 
         2. In the terminal, enter the following command and press Enter:
@@ -71,39 +71,40 @@ MedDict is a _desktop application designed for physiotherapists_ who manage a la
         3. Once installed, run the `java -version` command again to confirm that Java is installed correctly.
 
 
-2. Download the latest `.jar` file as follows:
+<br><br>
+2. **Download the latest `.jar` file as follows:**
 
     1. Go to the [GitHub releases page](https://github.com/) for the latest version.
     1. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
     3. Save the `.jar` file in the folder where you want to keep your MedDict project.
 
-
-3. Copy the `.jar` file to the folder you want to use as the home folder for MedDict.
+<br><br>
+3. **Copy the `.jar` file to the folder you want to use as the home folder for MedDict.**
 
     * Windows:
-      1. Open the **Downloads** folder and locate the `.jar` file. 
-      2. Right-click on the `.jar` file and select **Copy**. 
-      3. Go to the folder where you want to store MedDict, right-click, and select **Paste**.
+      1. Open the Downloads folder and locate the `.jar` file. 
+      2. Right-click on the `.jar` file and select Copy. 
+      3. Go to the folder where you want to store MedDict, right-click, and select Paste.
 
     * Mac
-      1. Open Finder and navigate to your **Downloads** folder.
-      2. Right-click (or use `Control + Click`) on the `.jar` file and choose **Copy**.
-      3. Go to the folder where you want to keep the file, right-click, and select **Paste**.
+      1. Open Finder and navigate to your Downloads folder.
+      2. Right-click (or use `Control + Click`) on the `.jar` file and choose Copy.
+      3. Go to the folder where you want to keep the file, right-click, and select Paste.
 
     * Linux:
-      1. Open your file manager and go to the **Downloads** directory.
-      2. Right-click on the `.jar` file and choose **Copy**.
-      3. Go to the destination folder, right-click, and select **Paste**.
+      1. Open your file manager and go to the Downloads directory.
+      2. Right-click on the `.jar` file and choose Copy.
+      3. Go to the destination folder, right-click, and select Paste.
 
-
-4. Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.
+<br><br>
+4. **Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.**
 
    * Windows:
      1. Open the folder where the `.jar` file is saved.
      2. To get the full path of this folder:
-        1. Right-click on the folder and select **Properties**.
-        2. In the **General** tab, locate the **Location** field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`). 
-     3. Open the **Command Prompt**:
+        1. Right-click on the folder and select Properties.
+        2. In the General tab, locate the Location field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`). 
+     3. Open the Command Prompt:
            1. Press `Windows + R`, type `cmd`, and press Enter.
         2. Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
 
@@ -118,11 +119,11 @@ MedDict is a _desktop application designed for physiotherapists_ who manage a la
           ```
 
     * Mac/Linux:
-      1. Open the **Terminal** by searching for it or by pressing `Ctrl + Alt + T`.
+      1. Open the Terminal by searching for it or by pressing `Ctrl + Alt + T`.
       2. To get the full path of the folder where the `.jar` file is located:
-         1. Open **Finder** (Mac) or **File Explorer** (Linux).
+         1. Open Finder (Mac) or File Explorer (Linux).
          2. Navigate to the folder where you saved the `.jar` file.
-         3. Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
+         3. Right-click on the folder and choose Get Info (Mac) or Properties (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
       3. Use the `cd` command and paste the copied path to go to the folder where the `.jar` file is saved. For example:
 
           ```bash
@@ -138,21 +139,21 @@ MedDict is a _desktop application designed for physiotherapists_ who manage a la
 After a few seconds, a GUI similar to the one below should appear:
 ![StartUpPage](images/StartUpPage.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. **Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.** <br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all persons.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `createP n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Patient named John Doe to the Address Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `deleteP z/2` : Deletes the Patient with Id = 2.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes all persons.
 
     * `exit` : Exits the app.
 
-
-6. Refer to the [Features](#features) below for details of each command.
+<br><br>
+6. **Refer to the [Features](#features) below for details of each command.**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -194,16 +195,16 @@ Examples:
 
 ### Creating and Adding a Doctor : `createD`
 
-Create a doctor with given details and add the doctor to the MedDict database in the address book.
+Creates a doctor with given details and add the doctor to the MedDict database in the address book.
 
-Format: `createD [n/Name] [p/Phone] [e/Email] [a/Address] `
+Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
-* **Names**: Only alphanumeric characters and spaces; cannot be blank.
-* **Phone numbers:** Numeric only; minimum of 3 digits.
-* **Emails**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
+* **Name**: Only alphanumeric characters and spaces; cannot be blank.
+* **Phone number:** Numeric only; minimum of 3 digits.
+* **Email**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
   but cannot start or end with these special characters (+_.-). The domain consists of labels separated by periods,
   ending with a label at least two characters long, with each label starting and ending with an alphanumeric character and allowing hyphens in between.
-* **Doctors**: Duplicate doctors (same name, phone, or email) are not allowed.
+* **Doctor**: Duplicate doctors (same name, phone, or email) are not allowed.
 * A _notification message_ will be output if there is failure in creating doctor.
 
 Examples:
@@ -218,16 +219,16 @@ Examples:
 
 ### Creating and Adding a Patient : `createP`
 
-Create a patient with given details and add the patient to the MedDict database in the address book.
+Creates a patient with given details and add the patient to the MedDict database in the address book.
 
-Format: `createP [n/Name] [p/Phone] [e/Email] [a/Address] `
+Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
-* **Names**: Only alphanumeric characters and spaces; cannot be blank.
-* **Phone numbers:** Numeric only; minimum of 3 digits.
-* **Emails**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
+* **Name**: Only alphanumeric characters and spaces; cannot be blank.
+* **Phone number:** Numeric only; minimum of 3 digits.
+* **Email**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
   but cannot start or end with these special characters (+_.-). The domain consists of labels separated by periods,
   ending with a label at least two characters long, with each label starting and ending with an alphanumeric character and allowing hyphens in between.
-* **Patients**: Duplicate patients (same name, phone, or email) are not allowed.
+* **Patient**: Duplicate patients (same name, phone, or email) are not allowed.
 * A _notification message_ will be output if there is failure in creating patient.
 
 
@@ -244,7 +245,7 @@ This patient already exists
 
 Deletes the patient with the specified `PatientId` from the MedDict database in the address book.
 
-Format: `deleteP [z/PatientId]`
+Format: `deleteP z/PATIENT_ID`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * A _notification message_ will be output if there is failure in deleting patient.
@@ -257,11 +258,11 @@ Examples:
   **Output**: <br>
   Unable to delete a patient, check the id entered!
 
-### Add Remarks to a Patient : `addR`
+### Add a Remark to a Patient : `addR`
 
-Add remarks to an existing patient with the specified `PatientId` in the MedDict database in address book.
+Adds a remark to an existing patient with the specified `PatientId` in the MedDict database in address book.
 
-Format: `addR [z/PatientId] [r/Remarks]`
+Format: `addR z/PATIENT_ID r/REMARK`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * A _notification message_ will be output if there is failure in adding notes to the patient.
@@ -289,7 +290,7 @@ Examples:
 
 Edits an existing person with the specified `Id` in the address book.
 
-Format: `edit Id [n/Name] [p/Phone] [e/Email] [a/Address] [t/tag]…​`
+Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
@@ -301,21 +302,21 @@ Format: `edit Id [n/Name] [p/Phone] [e/Email] [a/Address] [t/tag]…​`
 * A _notification message_ will be output if there is failure in editing person in MedDict database in address book.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` <br>
+*  `edit z/1 p/91234567 e/johndoe@example.com` <br>
    **Output**: <br>
    Edited Person: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
-*  `edit 2 n/Betsy Crower` <br>
+*  `edit z/2 n/Betsy Crower` <br>
    **Output**: <br>
    At least one field to edit must be provided.
-* `edit 1 p/91234567 e/johndoe@example.com` <br>
+* `edit z/1 p/91234567 e/johndoe@example.com` <br>
   **Output**: <br>
   This person already exists in the address book.
 
 ### Getting Id of Doctor or Patient by Name: `get`
 
-Get id of a doctor or patient whose names contain any of the given keywords.
+Gets the id of a doctor or patient whose names contain any of the given keywords.
 
-Format: `get [Keyword]`
+Format: `get KEYWORD`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -336,9 +337,9 @@ Examples:
 
 ### Adding an Appointment : `addA`
 
-Add appointment to an existing patient with the specified `PatientId` and doctor with the specified `DoctorId` in the MedDict database in address book.
+Adds an appointment to an existing patient with the specified `PatientId` and doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `addA [x/DateTime] [z/PatientId] [z/DoctorId] …​`
+Format: `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID …​`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
@@ -364,12 +365,12 @@ Examples:
 
 ### View History of a Patient : `view`
 
-View history of an existing patient with the specified `PatientId` in the MedDict database in address book.
+Displays the history of an existing patient with the specified `PatientId` in the MedDict database in address book.
 
-Format: `view [z/PatientId]  …​`
+Format: `view z/PATIENT_ID [x/DATE_TIME] …​`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DateTime]` when calling the command.
+* **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DATE_TIME]` when calling the command.
 * A _notification message_ will be output if there are no histories found for the doctor.
 
 Examples:
@@ -386,9 +387,9 @@ Examples:
 
 ### Check Appointment of a Doctor : `checkA`
 
-Check appointment of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
+Checks the appointments of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `checkA [z/DoctorId] [y/Date]`
+Format: `checkA z/DOCTOR_ID y/DATE`
 
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there are no appointments found for the doctor.
@@ -404,36 +405,36 @@ Examples:
 
 ### Mark Appointment of a Doctor : `mark`
 
-Mark appointment of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
+Marks appointment of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `mark [x/DateTime] [z/PatientId] [z/DoctorId] `
+Format: `mark x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in marking appointments.
 
 Examples:
-*  `mark x/2024-12-31 15.23 z/00 z/01` <br>
+*  `mark x/2024-12-31 15:23 z/00 z/01` <br>
    **Output**: <br>
    Successfully marked appointment as complete
-*  `mark x/2024-12-31 16.23 z/02 z/03` <br>
+*  `mark x/2024-12-31 16:23 z/02 z/03` <br>
    **Output**: <br>
    The appointment doesn't exist!
 
 ### Delete Appointment of a Doctor : `deleteA`
 
-Delete appointment of a existing patient for both patient and doctor with the specified `PatientId` and `DoctorId` in the MedDict database in address book.
+Deletes appointment of a existing patient for both patient and doctor with the specified `PatientId` and `DoctorId` in the MedDict database in address book.
 
-Format: `deleteA [x/DateTime] [z/PatientId] [z/DoctorId] `
+Format: `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in deleting appointment.
 
 Examples:
-*  `deleteA x/2024-12-31 15.23 z/00 z/01` <br>
+*  `deleteA x/2024-12-31 15:23 z/00 z/01` <br>
    **Output**: <br>
    Successfully deleted appointment to a patient
-*  `deleteA x/2024-12-31 15.23 z/01 z/03` <br>
+*  `deleteA x/2024-12-31 15:23 z/01 z/03` <br>
    **Output**: <br>
    The appointment doesn't exist!
 
@@ -492,17 +493,17 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Help** | `help` <br> Shows help page
-**Create Doctor** | `createD [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` <br> e.g., `createDoctor n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy`
-**Create Patient** | `createP [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` <br> e.g., `createPatient n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`
-**Delete Patient** | `deleteP [z/PatientId]` <br> e.g., `deletePatient 00`
-**Add Notes** | `addR [z/PatientId] [r/Notes]` <br> e.g., `addNotes z/0 r/cancer`
+**Create Doctor** | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy`
+**Create Patient** | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`
+**Delete Patient** | `deleteP z/PATIENT_ID` <br> e.g., `deleteP z/2`
+**Add Notes** | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`
 **List** | `list` <br> Shows all persons in address book
-**Edit** | `edit Id [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit 1 p/91234567 e/johndoe@example.com`
-**Get ID** | `get [Keyword]` <br> e.g., `getId john`
-**Add Appointment** | `addAppointment [x/DateTime] [z/PatientId] [z/DoctorId] [r/Remark]` <br> e.g., `addAppointment x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`
-**View History** | `view [z/PatientId] [x/DateTime]` <br> e.g., `viewhistory z/0 x/2024-12-31 15:23`
-**Check Appointment** | `checkA [z/DoctorId] [y/Date]` <br> e.g., `checkAppointment z/1 x/2024-12-31`
-**Mark Appointment** | `mark [z/DateTime] [z/PatientId] [z/DoctorId]` <br> e.g., `markAppointment x/2024-12-31 15.23 z/00 z/01`
-**Delete Appointment** | `deleteA [z/DateTime] [z/PatientId] [z/DoctorId]` <br> e.g., `deleteAppointment x/2024-12-31 15.23 z/00 z/01`
+**Edit** | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`
+**Get ID** | `get KEYWORD` <br> e.g., `get john`
+**Add Appointment** | `addAppointment x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`
+**View History** | `view z/PATIENT_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`
+**Check Appointment** | `checkA z/DOCTOR_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`
+**Mark Appointment** | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`
+**Delete Appointment** | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`
 **Clear** | `clear` <br> Clears all entries
 **Exit** | `exit` <br> Exits the program
