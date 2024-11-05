@@ -33,7 +33,7 @@ public class AddGradeCommand extends Command {
                     + PREFIX_ASSIGNMENT
                     + "ASSIGNMENT "
                     + PREFIX_SCORE
-                    + "SCORE "
+                    + "SCORE\n"
                     + "Example: "
                     + COMMAND_WORD
                     + " "
