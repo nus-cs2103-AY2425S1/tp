@@ -20,7 +20,8 @@ import seedu.sellsavvy.model.person.Person;
  */
 public class AddPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addcustomer";
+    public static final String COMMAND_ALIAS = "addc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the address book. \n"
             + "Parameters: "
