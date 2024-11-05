@@ -440,7 +440,7 @@ Commands for managing appointments between user and clients.
       > ---
       > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
       >
-      > **Input**: `apt Bob d/08-10-2024 fr/1900 to/2100`
+      > **Input**: `apt Bob d/08-10-24 fr/1900 to/2100`
       >
       > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
       >
@@ -479,7 +479,7 @@ Commands for managing appointments between user and clients.
       > ---
       > **Use Case #1**: Incorrect `DATE` format 
       >
-      > **Input #a**: `apt Bob d/09-10-24 fr/1000 to/1200`
+      > **Input #a**: `apt Bob d/09-10-2024 fr/1000 to/1200`
       >
       > **Input #b**: `apt Bob d/aaa fr/1000 to/1200`
       > 
