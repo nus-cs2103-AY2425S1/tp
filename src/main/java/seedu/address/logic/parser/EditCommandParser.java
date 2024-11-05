@@ -51,22 +51,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         } else {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()
-                        .toUpperCase()));
+                        ));
             }
             if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
                 editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
             }
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()
-                        .toUpperCase()));
+                        ));
             }
             if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
                 editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()
-                        .toUpperCase()));
+                        ));
             }
             if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
                 editPersonDescriptor.setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()
-                        .toUpperCase()));
+                        ));
             }
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
