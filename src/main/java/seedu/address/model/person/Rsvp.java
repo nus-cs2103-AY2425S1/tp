@@ -12,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Rsvp {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Relation should be 'P' for pending, 'A' for accepted or 'D' for declined!";
+            "Rsvp should be 'P' for pending, 'A' for accepted or 'D' for declined!";
     /**
      * Represents the RSVP status of a guest.
      *
