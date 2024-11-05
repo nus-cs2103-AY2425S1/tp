@@ -103,6 +103,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     // group methods
 
+    public void updateGroupListWithEditedPerson(Person target, Person editedPerson) {
+        this.groups.updatePersonInAllGroups(target, editedPerson);
+    }
+
     /**
      * Adds {@code group} to the groups in this {@code AddressBook}.
      */
