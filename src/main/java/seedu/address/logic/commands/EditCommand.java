@@ -57,6 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
 
     private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,11 +79,17 @@ public class EditCommand extends Command {
         requireNonNull(model);
 
         Person personToEdit = model.getPerson(nric);
+
+        if (personToEdit == null) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
