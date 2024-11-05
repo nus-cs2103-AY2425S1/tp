@@ -38,7 +38,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.updateSortedPersonList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getDisplayPersons().size()));
+                Messages.getMessagePersonsListedOverview(model.getDisplayPersons().size()));
     }
 
     @Override
