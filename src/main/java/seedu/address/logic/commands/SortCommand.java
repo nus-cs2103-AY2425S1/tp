@@ -55,8 +55,8 @@ public class SortCommand extends Command {
             model.updateSortingOrder(Comparator.comparing(person -> person.getIncome().getValue()));
             break;
 
-        case SortCommandParser.FAMSIZE:
-            model.updateSortingOrder(Comparator.comparing(person -> person.getFamilySize().getValue()));
+        case SortCommandParser.UPDATED:
+            model.updateSortingOrder(Comparator.comparing(person -> person.getUpdatedAt().getValue()));
             break;
 
         default:

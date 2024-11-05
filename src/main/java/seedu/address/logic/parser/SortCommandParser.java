@@ -14,8 +14,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     public static final String ADDRESS = "address";
     public static final String PRIORITY = "priority";
     public static final String INCOME = "income";
-
-    public static final String FAMSIZE = "famsize";
+    public static final String UPDATED = "updated";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -40,8 +39,8 @@ public class SortCommandParser implements Parser<SortCommand> {
         case INCOME:
             return new SortCommand(INCOME);
 
-        case FAMSIZE:
-            return new SortCommand(FAMSIZE);
+        case UPDATED:
+            return new SortCommand(UPDATED);
 
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
