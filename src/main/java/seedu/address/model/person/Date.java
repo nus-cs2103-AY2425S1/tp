@@ -67,6 +67,11 @@ public class Date {
      *      </ul>
      */
     public static void checkDateAndTime(String date) throws ParseException {
+        if (!date.matches("[0-9/ ]+")) {
+            throw new ParseException("Invalid date characters detected! "
+                    + "Only numbers, '/' and spaces are allowed.");
+        }
+
         if (!date.matches(DATE_AND_TIME_PATTERN) && !date.matches(FORMAT_PATTERN_DATE_AND_TIME)) {
             throw new ParseException("Invalid date format! Please use 'd/M/yyyy HHmm'. "
                     + "For example, '2/12/2024 1800'.");
@@ -93,6 +98,11 @@ public class Date {
      * @throws ParseException if the date format is invalid or the date values are out of range
      */
     public static void checkDate(String date) throws ParseException {
+        if (!date.matches("[0-9/ ]+")) {
+            throw new ParseException("Invalid date characters detected! "
+                    + "Only numbers and '/' are allowed.");
+        }
+
         if (!date.matches(DATE_PATTERN) && !date.matches(FORMAT_PATTERN_DATE)) {
             throw new ParseException("Invalid date format! Please use 'd/M/yyyy'. "
                     + "For example, '2/12/2024'.");
