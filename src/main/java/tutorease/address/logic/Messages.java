@@ -21,6 +21,10 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_LESSONS_FOUND = "No lessons found with the given keyword(s).";
     public static final String MISSING_PREFIX = "%s prefix is missing!\n" + "%s";
+    public static final String MESSAGE_DUPLICATE_PHONE = "A person with this phone number already exists in the "
+            + "address book!";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "A person with this email already exists in the "
+            + "address book!";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -1,6 +1,8 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_EMAIL;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,11 +41,7 @@ public class AddContactCommand extends ContactCommand {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New contact added: %1$s.";
-    public static final String MESSAGE_DUPLICATE_PHONE = "A person with this phone number already exists in the "
-            + "address book!";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "A person with this email already exists in the "
-            + "address book!";
+    public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase. If you wish to "
             + "save an alternative version of a person, "
             + "you may add a unique identifier to his/her name e.g. Ryan Tan Sec 1";
