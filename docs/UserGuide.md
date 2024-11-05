@@ -316,14 +316,12 @@
 <div class="content content-droppable content-droppable-first">
 
 <details open>
-  <!-- <div class="command-titles"> -->
   <summary>
     <strong>Clearing all entries<br><code>clear</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
   </summary>
-  <!-- </div> -->
 
   <div class="command-content">
   Clears all entries from StaffSync.
@@ -347,10 +345,13 @@
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Deleting a person<br><code>delete</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Deletes the specified person from StaffSync.
@@ -386,15 +387,19 @@
   * `delete 1` - You forgot to specify the person type
   </div>
   </div>
-  </div>
+  </details>
 </div>
 
 </div>
 <div class="content content-droppable">
-<div>
-  <div class="command-titles">
+
+<details open>
+  <summary>
     <strong>Demoting a person<br><code>demote</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Demotes the specified employee from StaffSync into a potential hire.
@@ -427,15 +432,18 @@
   </div>
   </div>
 
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Editing a person<br><code>edit</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Edits an existing person in the StaffSync.
@@ -469,15 +477,18 @@
   *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
   *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Adding an employee<br><code>employee</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
 
   <div class="command-content">
@@ -501,15 +512,18 @@
   Examples:
   * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Exiting the program<br><code>exit</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Exits the program.
@@ -524,15 +538,18 @@
   </div>
   <br>
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Locating persons by name<br><code>find</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Finds all employees and/or potential hires whose names contain any of the specified keywords.
@@ -592,15 +609,18 @@
   </div>
 
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Viewing help<br><code>help</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Displays a help window containing the list of commands, its purpose and the format
@@ -615,15 +635,18 @@
 
   ![Ui](images/helpWindow.png)
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Listing all persons<br><code>list</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Shows a list of all persons in StaffSync.
@@ -649,15 +672,18 @@
   * `list e`
   * `list ph`
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Adding a potential hire<br><code>potential</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Adds a potential hire to StaffSync.
@@ -680,15 +706,18 @@
   Examples:
   * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable content-droppable">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Promoting a person<br><code>promote</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Promotes the specified potential hire from StaffSync into an employee with a specific contract end date.
@@ -725,15 +754,18 @@
   * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
   </div>
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable content-droppable-last">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <summary>
     <strong>Sorting the list<br><code>sort</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
   <div class="command-content">
   Sorts the list in ascending or descending order by the given parameter.
@@ -774,7 +806,7 @@
   * `sort role asc` sorts contacts by role in alphabetical order.
 </div>
 
-</div>
+</details>
 </div>
 
 <br>
@@ -852,9 +884,9 @@ _Details coming soon ..._
 <div class="content content-qna">
 
 <div>
-  <div class="command-titles">
+  <summary>
     <strong>Q: How do I transfer my data to another Computer?</strong>
-  </div>
+  </summary>
 
   <div class="qna-content">
 
