@@ -26,8 +26,6 @@ public class ViewWindow extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label phone;
-    @FXML
     private Label email;
     @FXML
     private Label assignment;
@@ -48,7 +46,6 @@ public class ViewWindow extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         telegram.setText(person.getTelegram().value);
         person.getTags().stream()
