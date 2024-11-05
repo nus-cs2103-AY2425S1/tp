@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
@@ -83,6 +84,19 @@ public class ViewStudentCommandTest {
         ViewStudentCommand viewStudentCommand = new ViewStudentCommand(diddy);
         String expected = ViewStudentCommand.class.getCanonicalName() + "{name=" + diddy + "}";
         assertEquals(expected, viewStudentCommand.toString());
+    }
+
+    @Test
+    public void undo() {
+        Name nameWithMatch = model.getAddressBook().getStudentList().get(0).getName();
+        Predicate<Student> predicate = preparePredicate(nameWithMatch);
+        ViewStudentCommand command = new ViewStudentCommand(nameWithMatch);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model,
+                String.format(ViewStudentCommand.MESSAGE_SUCCESS, 1, nameWithMatch), expectedModel);
+
+        command.undo(model);
+        assertEquals(Arrays.asList(HUGH, DIDDY, ALICE), model.getFilteredStudentList());
     }
 
     /**

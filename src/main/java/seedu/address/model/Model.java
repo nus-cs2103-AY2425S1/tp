@@ -116,7 +116,6 @@ public interface Model {
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
-
     void addStudent(Student student);
 
     /**

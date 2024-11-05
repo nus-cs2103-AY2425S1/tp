@@ -71,4 +71,10 @@ public class ViewStudentCommand extends Command {
                 .add("name", name)
                 .toString();
     }
+
+    @Override
+    public boolean undo(Model model) {
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        return true;
+    }
 }
