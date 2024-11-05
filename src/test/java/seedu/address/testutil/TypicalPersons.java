@@ -68,11 +68,10 @@ public class TypicalPersons {
     public static final Tutorial MATH = new TutorialBuilder().withSubject("Math").build();
     public static final Tutorial SCIENCE = new TutorialBuilder().withSubject("Science").build();
 
-    public static final Participation ALICE_MATH_12122024 =
-            new Participation(
-                    ALICE,
-                    MATH,
-                    List.of(new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT))));
+    public static final Participation ALICE_MATH = new Participation(ALICE, MATH,
+            List.of(new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT))));
+    public static final Participation BENSON_MATH = new Participation(BENSON, MATH,
+            List.of(new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT))));
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -104,6 +103,6 @@ public class TypicalPersons {
     }
 
     public static List<Participation> getTypicalParticipations() {
-        return new ArrayList<>(Arrays.asList(ALICE_MATH_12122024));
+        return new ArrayList<>(Arrays.asList(ALICE_MATH));
     }
 }
