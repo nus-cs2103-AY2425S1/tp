@@ -18,6 +18,7 @@ title: AcademyAssist User Guide
    * [Viewing a student's detail](#viewing-a-students-detail--detail)
    * [Finding a student](#finding-a-student--find)
    * [Sorting students](#sorting-students--sort)
+   * [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
    * [Clearing all entries](#clearing-all-entries--clear)
    * [Getting help](#getting-help--help)
    * [Exiting the program](#exiting-the-program--exit)
@@ -73,7 +74,8 @@ again, type `help` and press Enter.
 * Words in `UPPER_CASE` are the inputs to be supplied by the user.
   e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
-* Every student added will be assigned a `STUDENT_ID` that begins with S followed by a 5 digit number (e.g. S00003).
+* Every student added will be assigned a unique, non-modifiable `STUDENT_ID` that begins with S followed by a 5 digit 
+* number (e.g. S00003).
 > **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
 ` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
 of replacing S00001).
@@ -106,6 +108,8 @@ secondary school years 7 - 13).
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
 within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
 as the same).
+* A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
+message and can be used for `addc`, `edit`, and `delete`.
 
 Examples:
 * `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
@@ -136,6 +140,8 @@ Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.
+* Although editing the IC number is allowed, it must not match any other student's IC number in the system. 
+An error message will be shown if a duplicate is detected.
 
 Examples:
 * `edit S00001 a/New_Address`
@@ -179,21 +185,37 @@ Examples:
 
 ![Find Success Message](/images/find.png)
 
-### Adding a class to a student : `addc`
+### Filtering the list : `filter`
 
-Adds a class to an existing student's record.
+Shows a list of students filtered by year group or subject.
 
-Format: `addc STUDENT_ID s/SUBJECT`
+Format: `filter FIELD/VALUE`
+
+* You can only filter by EITHER year group or class.
+* You can only filter one value (eg. filter by Science only).
+
+Examples:
+* `filter yg/2` shows only students who belong to year group 2
+* `filter s/Science` shows only students who take Science as a subject
+
+![Filter Success Message](/images/filter.png)
+
+### Adding subject(s) to a student : `addsubject`
+
+Adds one or more subjects to an existing student's record.
+
+Format: `addsubject STUDENT_ID s/SUBJECT`
 
 * `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
   (i.e. science, SCIENCE, Science are treated the same way).
+* Subjects available are English, Math, Chinese, Science
 
 Examples:
-* `addc S00001 s/Science`
+* `addsubject S00001 s/Science`
 
-![addc Success Message](/images/addc.png)
+![Addsubject Success Message](/images/addsubject.png)
 
 ### Sorting students : `sort`
 
@@ -201,13 +223,26 @@ Sorts the list of students based on a specified field.
 
 Format: `sort s/FIELD`
 
-* `FIELD` can be either `name` or `class`.
+* `FIELD` can be either `name`, `subject` or `yearGroup`.
+* Sorting by name will sort students in lexicographical ascending order of their names.
+* Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
+* Sorting by yearGroup will sort students in ascending order based on their year group.
 
 Examples:
 * `sort s/name`
-* `sort s/class`
+* `sort s/subject`
+* `sort s/yearGroup`
+
 
 ![Sort Success Message](/images/sort.png)
+
+### Tracking student count for each subject : `tracksubject`
+
+Displays a window that shows how many students are taking each of the 4 subjects.
+
+Format: `tracksubject`
+
+![TrackSubject Success Message](/images/tracksubject.png)
 
 ### Clearing all entries : `clear`
 
@@ -219,7 +254,7 @@ Format: `clear`
 
 ### Getting help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a help window with details of how to use the different commands.
 
 Format: `help`
 
@@ -288,16 +323,18 @@ the data of your previous AcademyAssist folder.
 
 ## Command summary
 
-| Action | Format, Examples                                                                                                                                                                        |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
-| **Delete** | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
-| **Edit** | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
-| **View** | `view`                                                                                                                                                                                  |
-| **Detail** | `detail STUDENT_ID`<br> e.g., `detail S00001`                                                                                                                                           |
-| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
-| **Add Class** | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
-| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
-| **Clear** | `clear`                                                                                                                                                                                 |
-| **Help** | `help`                                                                                                                                                                                  |
-| **Exit** | `exit`                                                                                                                                                                                  |
+| Action            | Format, Examples                                                                                                                                                                        |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
+| **Delete**        | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
+| **Edit**          | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
+| **View**          | `view`                                                                                                                                                                                  |
+| **Detail**        | `detail STUDENT_ID`<br> e.g., `detail S00001`                                                                                                                                           |
+| **Find**          | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
+| **Filter**        | `filter FIELD/VALUE`<br> e.g., `filter yg/2`                                                                                                                                            |
+| **Add Subject**   | `addsubject STUDENT_ID s/SUBJECT`<br> e.g., `addsubject S00003 Science`                                                                                                                 |
+| **Track Subject** | `tracksubject`                                                                                                                                                                          |
+| **Sort**          | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
+| **Clear**         | `clear`                                                                                                                                                                                 |
+| **Help**          | `help`                                                                                                                                                                                  |
+| **Exit**          | `exit`                                                                                                                                                                                  |
