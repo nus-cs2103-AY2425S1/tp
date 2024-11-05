@@ -197,7 +197,13 @@ Format: `import FILENAME.json`
 - File **must** be in the same folder as the application JAR file. 
 - File **must** be in the expected format of MediContact data (see <u>Expected format</u> for more details). 
 - Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see <u>Summary of input constraints</u> for more details).
-- **Warning**: Upon execution of `import` folder `data` containing `addressbook.json` will be created in the same directory as the application JAR if not already existing. Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting  which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal. 
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. It is recommended **not** to manually edit the data file if you are not an expert user.
+</box>
 
 Example:
 
