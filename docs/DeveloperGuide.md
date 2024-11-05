@@ -979,10 +979,15 @@ Use case ends.
 
 ### Glossary
 
+* **Attendance**: Student's Presence/Absence for a Lesson
+* **Consultation**: A scheduled meeting between TA and students for academic discussions
+* **Lesson**: An Official Tutorial/Lab coordinated by TA
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Participation**: Student's Score for performance in a Lesson
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **TA**: Teaching assistant
-* **Student Record**: A collection of data fields that stores information about a student, including their name, contact information, course enrollment, and other relevant details (e.g., performance data or group assignments).
+* **Student***: A Person with Name, Contact, Email & Courses
+* **Student Record**: A collection of data fields that stores information about a student, including their name, contact information, course enrollment
+* **TA**: Teaching Assistant
 
 --------------------------------------------------------------------------------------------------------------------
 
