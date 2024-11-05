@@ -21,10 +21,10 @@ import seedu.address.ui.MainWindow;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "And also deletes the policy identified by the index number used in the displayed policy list.\n"
-            + "Parameters: INDEX (must be a positive integer) + <Optional> po/policyIndex\n"
-            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 1 po/1";
+            + ": Deletes the specified person or policy from their respective lists.\n"
+            + "Use the index number shown in the displayed persons and policy list or the person's exact name\n"
+            + "Parameters: INDEX + <Optional> po/policyIndex or NAME\n"
+            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 1 po/1 or " + COMMAND_WORD + " Alex Yeoh";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_POLICY_SUCCESS = "Deleted Policy %1$d from %2$s";
