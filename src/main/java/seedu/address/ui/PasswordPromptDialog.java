@@ -74,6 +74,7 @@ public class PasswordPromptDialog {
                     dialog.close();
                 } else {
                     showAlert("Incorrect Password", "Please try again.");
+                    passwordField.clear();
                 }
             }
         };
