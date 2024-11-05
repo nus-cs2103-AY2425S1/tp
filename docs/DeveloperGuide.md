@@ -200,18 +200,17 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How add command is carried out:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Key in all details for student in one command.
+  * Pros: Easy to implement, only one command needs to be key in by user.
+  * Cons: Command might get too long.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Key in details for students in multiple steps.
+  * Pros: Step by step adding of details might be more convenient for new users.
+  * Cons: Hard to implement, especially with optional fields and compulsory fields. It is also
+  not user-friendly for users who type fast due to multi line commands required to add a student.
 
-_{more aspects and alternatives to be added}_
 
 ### Owe feature
 
