@@ -167,17 +167,17 @@
     -fx-background-color: white; /* Set the output box background to white */
     -fx-background-radius: 20px;
     -fx-border-color: white; /* Set the border color to black */
-    -fx-border-width: 2px; /* Set the border width */
+    -fx-border-width: 0px; /* Set the border width */
     -fx-border-radius: 20px; /* Optional: Rounded corners */
-    -fx-padding: 10px; /* Optional: Add some padding for the text */
+    -fx-padding: 5px; /* Optional: Add some padding for the text */
     -fx-font-family: "Poppins";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
 }
 
 
 .result-display .label {
     -fx-font-family: "Poppins"; /* Bold font for the text */
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: black; /* Set the text color to black */
 }
 
