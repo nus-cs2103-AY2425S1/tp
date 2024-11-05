@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index provided is not a non-zero positive integer";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -165,7 +165,8 @@ public class ParserUtil {
     public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
         String trimmedAppointment = appointment.trim();
-        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+        if (!Appointment.isValidAppointment(trimmedAppointment)
+            || !Appointment.isFutureAppointment(trimmedAppointment)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return new Appointment(trimmedAppointment);
@@ -179,6 +180,34 @@ public class ParserUtil {
         final Set<Appointment> appointmentSet = new HashSet<>();
         for (String appointmentDates : appointments) {
             appointmentSet.add(parseAppointment(appointmentDates));
+        }
+        return appointmentSet;
+    }
+
+    /**
+     * Parses a {@code String appointment} into a {@code Appointment} for Note.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Appointment} is invalid.
+     */
+    public static Appointment parseAppointmentForNote(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (!Note.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS_APPOINTMENT);
+        }
+        return new Appointment(trimmedAppointment);
+    }
+
+    /**
+     * Parses {@code Collection<String> Appointments} into a
+     * {@code Set<Appointment> with only one appointment} for Note.
+     */
+    public static Set<Appointment> parseAppointmentsForNote(Collection<String> appointments) throws ParseException {
+        requireNonNull(appointments);
+        final Set<Appointment> appointmentSet = new HashSet<>();
+        for (String appointmentDates : appointments) {
+            appointmentSet.add(parseAppointmentForNote(appointmentDates));
         }
         return appointmentSet;
     }

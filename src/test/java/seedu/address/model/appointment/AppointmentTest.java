@@ -28,7 +28,8 @@ public class AppointmentTest {
         assertThrows(NullPointerException.class, () -> Appointment.isValidAppointment(null));
 
         // valid Appointment date
-        assertTrue(() -> Appointment.isValidAppointment("11/11/2025 1100"));
+        assertTrue(() -> Appointment.isValidAppointment("11/11/2025 1100")
+                         && Appointment.isFutureAppointment("11/11/2025 1100"));
     }
 
     @Test

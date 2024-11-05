@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.NoteCommand.NoteDescriptor;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.note.Note;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.NoteDescriptorBuilder;
@@ -67,7 +66,7 @@ public class NoteCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid appointment
-        assertParseFailure(parser, "Test" + INVALID_APPOINTMENT_DESC, Appointment.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "Test" + INVALID_APPOINTMENT_DESC, Note.MESSAGE_CONSTRAINTS_APPOINTMENT);
         // invalid remark
         assertParseFailure(parser, "Test" + INVALID_REMARK_DESC, Note.MESSAGE_CONSTRAINTS);
         //invalid medications
@@ -75,16 +74,16 @@ public class NoteCommandParserTest {
 
         // invalid medications followed by valid appointment
         assertParseFailure(parser, "Test" + INVALID_MEDICATION_DESC
-                                   + APPOINTMENT_DESC_TWO, Note.MESSAGE_CONSTRAINTS);
+                                   + APPOINTMENT_DESC_ONE, Note.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_APPOINTMENT} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "Test" + APPOINTMENT_DESC_ONE + APPOINTMENT_DESC_TWO + APPOINTMENT_EMPTY,
-                Appointment.MESSAGE_CONSTRAINTS);
+                Note.MESSAGE_CONSTRAINTS_APPOINTMENT);
         assertParseFailure(parser, "Test" + APPOINTMENT_DESC_ONE + APPOINTMENT_EMPTY + APPOINTMENT_DESC_TWO,
-                Appointment.MESSAGE_CONSTRAINTS);
+                Note.MESSAGE_CONSTRAINTS_APPOINTMENT);
         assertParseFailure(parser, "Test" + APPOINTMENT_EMPTY + APPOINTMENT_DESC_ONE + APPOINTMENT_DESC_TWO,
-                Appointment.MESSAGE_CONSTRAINTS);
+                Note.MESSAGE_CONSTRAINTS_APPOINTMENT);
 
         // while parsing {@code PREFIX_MEDICATION} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error

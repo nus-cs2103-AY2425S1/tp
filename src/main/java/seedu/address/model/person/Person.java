@@ -139,6 +139,9 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+    public boolean hasAppointments() {
+        return !appointments.isEmpty();
+    }
 
     /**
      * Retrieves the earliest appointment date among this person's appointments.

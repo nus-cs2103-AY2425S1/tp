@@ -48,6 +48,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_APPOINTMENT_ONE = "01/01/2023 0000";
     public static final String VALID_APPOINTMENT_TWO = "20/08/2027 1200";
+    public static final String VALID_APPOINTMENT_THREE = "01/01/2025 1200";
     public static final String VALID_MEDICATION_ONE = "10mg Panadol";
     public static final String VALID_MEDICATION_TWO = "5mg Ibuprofen";
     public static final String VALID_REMARK_ONE = "Sick";
@@ -69,6 +70,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String APPOINTMENT_DESC_ONE = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_ONE;
     public static final String APPOINTMENT_DESC_TWO = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_TWO;
+    public static final String APPOINTMENT_DESC_THREE = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_THREE;
     public static final String REMARK_DESC_ONE = " " + PREFIX_REMARK + VALID_REMARK_ONE;
     public static final String REMARK_DESC_TWO = " " + PREFIX_REMARK + VALID_REMARK_TWO;
     public static final String MEDICATION_DESC_ONE = " " + PREFIX_MEDICATION + VALID_MEDICATION_ONE;

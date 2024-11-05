@@ -139,11 +139,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersons() {
+    public int sortFilteredPersons() {
         logger.info("Sorting filtered person list by appointments.");
+        boolean hasAppointments = filteredPersons.stream()
+                .anyMatch(Person::hasAppointments);
+        if (!hasAppointments) {
+            return -1;
+        }
         addressBook.sortByAppointments();
         assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
-
+        return 1;
     }
 
     @Override

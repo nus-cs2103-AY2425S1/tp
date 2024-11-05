@@ -76,7 +76,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 ? Collections.emptySet()
                 : appointments;
 
-        return Optional.of(ParserUtil.parseAppointments(appointmentSet));
+        return Optional.of(ParserUtil.parseAppointmentsForNote(appointmentSet));
     }
 
     /**
