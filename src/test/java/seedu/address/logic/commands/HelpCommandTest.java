@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.HelpCommand.HELP_LIST;
 import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
@@ -16,5 +17,10 @@ public class HelpCommandTest {
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+        CommandResult alternativeExpectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE,
+                false, false);
+        assertCommandSuccess(new HelpCommand(HELP_LIST), model,
+                alternativeExpectedCommandResult, expectedModel);
+
     }
 }
