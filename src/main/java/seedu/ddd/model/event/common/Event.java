@@ -193,12 +193,12 @@ public class Event implements Displayable {
     /**
      * Return if the two events are the same.
      *
-     * Two events are considered the same if they have the same client and date.
+     * Two events are considered the same if they have the same name.
      * @param otherEvent Another event.
      * @return A boolean value which represents the result.
      */
     public boolean isSameEvent(Event otherEvent) {
-        return this.getName().equals(otherEvent.getName());
+        return this.getName().isSameName(otherEvent.getName());
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = capitalizeName(name);
+        fullName = name.trim();
     }
 
     /**
@@ -39,7 +39,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
-
+    /**
+     * Returns true if a given {@code Name} is the same as the current Name object.
+     */
+    public boolean isSameName(Name name) {
+        return fullName.equalsIgnoreCase(name.fullName);
+    }
     @Override
     public String toString() {
         return fullName;
@@ -63,20 +68,5 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
-    }
-
-    private String capitalizeName(String name) {
-        String[] words = name.toLowerCase().split("\\s+");
-        StringBuilder capitalized = new StringBuilder();
-
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                capitalized.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
-            }
-        }
-
-        return capitalized.toString().trim();
     }
 }

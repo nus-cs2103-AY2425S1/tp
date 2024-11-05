@@ -120,7 +120,7 @@ public abstract class Contact implements Displayable {
         }
 
         return otherContact != null
-                && (otherContact.getName().equals(name)
+                && (otherContact.getName().isSameName(name)
                 || otherContact.getPhone().equals(phone));
     }
 
