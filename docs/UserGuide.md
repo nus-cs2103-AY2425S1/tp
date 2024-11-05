@@ -38,12 +38,12 @@ A person can have any number of tags (including 0)
 ---
 ### **2. General Command Format**
 
-The commands follow the general format of `COMMAND INDEX PREFIX/...` .
+The commands in EduVault follow q general format of `COMMAND INDEX PREFIX/...` .
 
 * `COMMAND` refers to the command that you want to execute.
-* `INDEX` refers to the student data you want to alter, specified by the number prepended to the name of the student on the application.
+* `INDEX` refers to the student whose data you want to alter, specified by the number prepended to the name of the student on the application.
 * `PREFIX` specifies the type of data we want to alter.
-    * Refer to the prefix table below for the usage of each prefix.
+    * Refer to the [Prefix Table](#11-prefix-table-) below for the usage of each prefix.
 
 <br>
 
