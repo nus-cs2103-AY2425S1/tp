@@ -49,7 +49,7 @@ public class Messages {
                 .append(person.getEmail())
                 .append(" | Address: ")
                 .append(person.getAddress())
-                .append("| Role: ")
+                .append(" | Role: ")
                 .append(person.getRole().map(Role::toString).orElse(null));
         return builder.toString();
     }
@@ -75,7 +75,7 @@ public class Messages {
     public static String format(Set<Wedding> weddingJobs) {
         return weddingJobs.stream()
                 .map(Messages::format) // Calls the static format method in Wedding for each wedding
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", \n"));
     }
 
 

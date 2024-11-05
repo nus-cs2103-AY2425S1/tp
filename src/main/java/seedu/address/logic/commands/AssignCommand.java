@@ -46,7 +46,7 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_ASSIGN_PERSON_ROLE_SUCCESS = "Assigned role to: %1$s";
 
-    public static final String MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS = "Assigned %1$s to wedding(s):\n %2$s";
+    public static final String MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS = "Assigned %1$s to wedding(s):\n%2$s";
 
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
 
