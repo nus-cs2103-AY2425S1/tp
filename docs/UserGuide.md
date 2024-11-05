@@ -30,7 +30,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
-   
+
    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
 
    * `clear` : Deletes all contacts.
@@ -59,7 +59,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -171,21 +171,23 @@ Examples:
 
 ### Adding or updating an appointment date and time to a person : `date`
 
-Adds or updates the next appointment date of the specified person in the address book.
+Adds or updates the next appointment date and time of the specified person in the address book.
 
-Format: `date n/NAME p/PHONE e/EMAIL d/DATE`
+Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE`
 
-* Adds or updates the next appointment date of person that uniquely matches at least one of the following three attributes NAME, PHONE and EMAIL
+* Adds or updates the next appointment date of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
 * `NAME` should only include alphanumeric characters, spaces, and hyphens
 * `PHONE` must have 8 digits, starting with 3, 6, 8 or 9
 * `EMAIL` must follow the format of [name]@[domain].[TLD]
 * `DATE` must follow the format of dd/MM/YYYY HHmm
 * If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
+* To remove the date and time from a person, use `d/None`.
 
 Examples:
 * `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`
 * `date p/92938132 d/22/10/2024 1920`
 * `date e/johndoe@gmail.com d/10/02/2023 1520`
+* `date n/Alex Yeoh d/None`
 
 ### Clearing all entries : `clear`
 
@@ -247,13 +249,15 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/High Risk t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE [atleast one parameter]`<br> e.g., `filter t/High Risk`
-**View** | `view`
-**Help** | `help`
+| Action               | Format, Examples                                                                                                                                                                        |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/High Risk t/colleague` |
+| **Clear**            | `clear`                                                                                                                                                                                 |
+| **Delete**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
+| **Edit**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                             |
+| **Find**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                              |
+| **Filter**           | `filter n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                          |
+| **View**             | `view`                                                                                                                                                                                  |
+| **Help**             | `help`                                                                                                                                                                                  |
+| **Appointment Date** | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE`                                                                                                                                       |
+| **Schedule**         | `schedule d/DATE`                                                                                                                                                                       |
