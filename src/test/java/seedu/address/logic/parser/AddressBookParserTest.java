@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
@@ -24,8 +25,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeliveryCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
@@ -47,18 +48,19 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingAfterPredicate;
 import seedu.address.model.delivery.DeliveryIsUpcomingBeforePredicate;
+import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.SupplierSortComparator;
 import seedu.address.model.supplier.SupplierSortNameComparator;
 import seedu.address.model.supplier.SupplierStatus;
-import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
-import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.SupplierUtil;
+import seedu.address.testutil.TypicalDeliveryWrappers;
 
 public class AddressBookParserTest {
 
@@ -67,16 +69,16 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Supplier supplier = new SupplierBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
-        assertEquals(new AddCommand(supplier), command);
+        AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
+        assertEquals(new AddSupplierCommand(supplier), command);
     }
 
     @Test
     public void parseCommand_add_delivery() throws Exception {
-        Delivery delivery = new DeliveryBuilder().buildWithNullSender();
+        DeliveryWrapper deliveryWrapper = TypicalDeliveryWrappers.getNullWrapper();
         AddDeliveryCommand command = (AddDeliveryCommand) parser.parseCommand(DeliveryUtil
-                .getDeliveryCommand(delivery));
-        assertEquals(new AddDeliveryCommand(delivery), command);
+                .getDeliveryCommand(APPLE));
+        assertEquals(new AddDeliveryCommand(deliveryWrapper), command);
     }
     @Test
     public void parseCommand_upcoming() throws Exception {
@@ -158,7 +160,7 @@ public class AddressBookParserTest {
     public void parseCommand_findSupplier() throws Exception {
         String commandInput = "find -s n/Linkes pro/Iphone";
         List<Predicate<Supplier>> listOfPredicates = new ArrayList<>();
-        listOfPredicates.add(new NameContainsPredicate("Linkes"));
+        listOfPredicates.add(new NameContainsKeywordPredicate("Linkes"));
         listOfPredicates.add(new ProductContainsKeywordPredicate("Iphone"));
 
         FindSupplierCommand command = (FindSupplierCommand) parser.parseCommand(commandInput);

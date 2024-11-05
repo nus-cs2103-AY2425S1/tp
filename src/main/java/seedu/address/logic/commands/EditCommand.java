@@ -60,7 +60,7 @@ public class EditCommand extends Command {
     private final EditSupplierDescriptor editSupplierDescriptor;
 
     /**
-     * @param index of the supplier in the filtered supplier list to edit
+     * @param index of the supplier in the modified supplier list to edit
      * @param editSupplierDescriptor details to edit the supplier with
      */
     public EditCommand(Index index, EditSupplierDescriptor editSupplierDescriptor) {
@@ -74,7 +74,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Supplier> lastShownList = model.getFilteredSupplierList();
+        List<Supplier> lastShownList = model.getModifiedSupplierList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);

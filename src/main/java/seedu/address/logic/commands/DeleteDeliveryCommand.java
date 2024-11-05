@@ -33,12 +33,12 @@ public class DeleteDeliveryCommand extends Command {
         requireNonNull(model);
 
         // Ensure delivery list has items
-        if (targetIndex.getZeroBased() >= model.getFilteredDeliveryList().size()) {
+        if (targetIndex.getZeroBased() >= model.getModifiedDeliveryList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
         // Get the delivery at the specified index
-        Delivery deliveryToDelete = model.getFilteredDeliveryList().get(targetIndex.getZeroBased());
+        Delivery deliveryToDelete = model.getModifiedDeliveryList().get(targetIndex.getZeroBased());
 
         // Delete the delivery
         model.deleteDelivery(deliveryToDelete);

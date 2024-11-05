@@ -20,14 +20,13 @@ public class Delivery {
     private final DateTime deliveryDateTime;
     private final Cost cost;
     private final Quantity quantity;
-    private final SupplierIndex supplierIndex;
 
     /**
      * Every field must be present and not null.
      */
     public Delivery(Product product, Supplier sender, Status status,
                     DateTime deliveryDateTime, Cost cost, Quantity quantity) {
-        requireAllNonNull(product, sender, status, deliveryDateTime, cost, quantity);
+        requireAllNonNull(product, status, deliveryDateTime, cost, quantity);
         this.product = product;
         this.sender = sender;
         this.status = status;
@@ -35,37 +34,7 @@ public class Delivery {
         this.cost = cost;
         this.quantity = quantity;
         //might need to change this
-        this.supplierIndex = null;
     }
-    //might need to change this
-
-    /**
-     * Creates an instance of Delivery object with sender set to null and initialised
-     * when the execute method of AddDevlieryCommand is called.
-     *
-     * @param product Product being delivered.
-     * @param sender Supplier object in charge of delivery
-     * @param status Status of delivery which is set to Status.PENDING initially.
-     * @param deliveryDateTime Represents a LocalDateTime object with Date and time of delivery.
-     * @param cost Cost of delivery.
-     * @param quantity Quantity of product to be delivered.
-     * @param supplierIndex Index of supplier inside the UniqueDeliveryList.
-     */
-    public Delivery(Product product, Supplier sender, Status status, DateTime deliveryDateTime, Cost cost,
-                    Quantity quantity, SupplierIndex supplierIndex) {
-        requireAllNonNull(product, status, deliveryDateTime, cost, quantity, supplierIndex);
-        this.product = product;
-        this.sender = sender;
-        this.status = status;
-        this.deliveryDateTime = deliveryDateTime;
-        this.cost = cost;
-        this.quantity = quantity;
-        this.supplierIndex = supplierIndex;
-    }
-    public SupplierIndex getSupplierIndex() {
-        return this.supplierIndex;
-    }
-
     public Product getDeliveryProduct() {
         return this.product;
     }
@@ -148,7 +117,9 @@ public class Delivery {
                 && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
                 && otherDelivery.getDeliveryProduct().equals(getDeliveryProduct())
                 && otherDelivery.getDeliverySender().equals(getDeliverySender())
-                && otherDelivery.getDeliveryStatus().equals(getDeliveryStatus());
+                && otherDelivery.getDeliveryStatus().equals(getDeliveryStatus())
+                && otherDelivery.getDeliveryCost().equals(getDeliveryCost())
+                && otherDelivery.getDeliveryQuantity().equals(getDeliveryQuantity());
     }
 
     /**

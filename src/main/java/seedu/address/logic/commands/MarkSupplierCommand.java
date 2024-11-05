@@ -39,7 +39,7 @@ public class MarkSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex.getZeroBased() >= model.getFilteredSupplierList().size()) {
+        if (targetIndex.getZeroBased() >= model.getModifiedSupplierList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
 

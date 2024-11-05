@@ -19,9 +19,10 @@ public class UpcomingCommand extends Command {
     public static final String COMMAND_WORD = "upcoming";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " : Lists all pending deliveries with completion date before and after the specified dates.\n"
+            + "Must have at least a START_DATE or END_DATE.\n"
             + "Parameters: "
-            + PREFIX_START_DATE + "START (optional) "
-            + PREFIX_END_DATE + "END (optional)\n"
+            + PREFIX_START_DATE + "START "
+            + PREFIX_END_DATE + "END\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_START_DATE + "19-12-2022 08:00"
             + " " + PREFIX_END_DATE + "18-06-2023 17:00";
     public static final String MESSAGE_SUCCESS = Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;

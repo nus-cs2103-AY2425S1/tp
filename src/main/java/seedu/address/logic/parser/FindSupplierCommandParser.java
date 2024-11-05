@@ -14,7 +14,7 @@ import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.predicates.CompanyContainsKeywordPredicate;
-import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 
 /**
@@ -45,7 +45,7 @@ public class FindSupplierCommandParser implements Parser<FindSupplierCommand> {
             if (nameKeyword.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
             }
-            supplierPredicates.add(new NameContainsPredicate(nameKeyword));
+            supplierPredicates.add(new NameContainsKeywordPredicate(nameKeyword));
         }
 
         if (argMultimap.getValue(PREFIX_COMPANY).isPresent()) {

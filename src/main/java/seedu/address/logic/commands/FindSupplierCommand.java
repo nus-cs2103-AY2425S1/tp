@@ -18,9 +18,7 @@ import seedu.address.model.supplier.Supplier;
  * Finds and lists all suppliers in vendor whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindSupplierCommand extends Command {
-
-    public static final String COMMAND_WORD = "find";
+public class FindSupplierCommand extends FindCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_SUPPLIER + ": Finds all suppliers "
             + "whose name, company and product contains the specified keyword (case-insensitive) "

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -167,8 +167,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + COMPANY_DESC_AMY;
+        String addCommand = AddSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + NAME_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + COMPANY_DESC_AMY;
         Supplier expectedSupplier = new SupplierBuilder(AMY).withTags().withProducts().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addSupplier(expectedSupplier);

@@ -23,11 +23,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryWrapper;
+import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.UniqueSupplierList;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.SupplierBuilder;
-import seedu.address.testutil.TypicalDeliveriesWithoutSender;
+import seedu.address.testutil.TypicalDeliveries;
+import seedu.address.testutil.TypicalDeliveryWrappers;
 import seedu.address.testutil.TypicalSuppliers;
 
 public class AddDeliveryCommandTest {
@@ -42,34 +45,36 @@ public class AddDeliveryCommandTest {
         Supplier validSupplier = new SupplierBuilder().build();
         ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded(validSupplier);
         Delivery deliveryWithNullSender = new DeliveryBuilder().buildWithNullSender();
-        CommandResult commandResult = new AddDeliveryCommand(deliveryWithNullSender).execute(modelStub);
-        assertEquals(String.format(AddDeliveryCommand.MESSAGE_SUCCESS, Messages.format(deliveryWithNullSender)),
+        DeliveryWrapper wrapper = new DeliveryWrapper(deliveryWithNullSender, new SupplierIndex("1"));
+        CommandResult commandResult = new AddDeliveryCommand(wrapper).execute(modelStub);
+        assertEquals(String.format(AddDeliveryCommand.MESSAGE_SUCCESS, Messages.format(wrapper.getDelivery())),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(deliveryWithNullSender), modelStub.deliveriesAdded);
+        assertEquals(Arrays.asList(wrapper.getDelivery()), modelStub.deliveriesAdded);
     }
 
     @Test
     public void execute_duplicateDelivery_throwsCommandException() {
-        Delivery validDelivery = new DeliveryBuilder().buildWithNullSender();
-        validDelivery.setDeliverySender(TypicalSuppliers.ALICE);
-        AddDeliveryCommand addDeliveryCommand = new AddDeliveryCommand(validDelivery);
-        ModelStub modelStub = new ModelStubWithDelivery(validDelivery);
+        DeliveryWrapper deliveryWrapper = TypicalDeliveryWrappers.getNullWrapper();
+        AddDeliveryCommand addDeliveryCommand = new AddDeliveryCommand(deliveryWrapper);
+        ModelStub modelStub = new ModelStubWithDelivery(TypicalDeliveries.APPLE);
         assertThrows(CommandException.class, AddDeliveryCommand.MESSAGE_DUPLICATE_DELIVERY, () ->
                 addDeliveryCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Delivery deliveryApple = TypicalDeliveriesWithoutSender.APPLE;
-        Delivery deliveryBread = TypicalDeliveriesWithoutSender.BREAD;
-        AddDeliveryCommand addAppleDeliveryCommand = new AddDeliveryCommand(deliveryApple);
-        AddDeliveryCommand addBreadDeliveryCommand = new AddDeliveryCommand(deliveryBread);
+        DeliveryWrapper deliveryWrapperApple = TypicalDeliveryWrappers.getNullWrapper();
+        Delivery deliveryPear = new DeliveryBuilder().withProduct("Pear")
+                .withDeliveryTime("01-11-2024 12:30").withSender(null).build();
+        DeliveryWrapper deliveryWrapperPear = new DeliveryWrapper(deliveryPear, new SupplierIndex("2"));
+        AddDeliveryCommand addAppleDeliveryCommand = new AddDeliveryCommand(deliveryWrapperApple);
+        AddDeliveryCommand addPearDeliveryCommand = new AddDeliveryCommand(deliveryWrapperPear);
 
         // same object -> returns true
         assertTrue(addAppleDeliveryCommand.equals(addAppleDeliveryCommand));
 
         // same values -> returns true
-        AddDeliveryCommand addAppleDeliveryCommandCopy = new AddDeliveryCommand(deliveryApple);
+        AddDeliveryCommand addAppleDeliveryCommandCopy = new AddDeliveryCommand(deliveryWrapperApple);
         assertTrue(addAppleDeliveryCommand.equals(addAppleDeliveryCommandCopy));
 
         // different types -> returns false
@@ -79,7 +84,7 @@ public class AddDeliveryCommandTest {
         assertFalse(addAppleDeliveryCommand.equals(null));
 
         // different delivery -> returns false
-        assertFalse(addAppleDeliveryCommand.equals(addBreadDeliveryCommand));
+        assertFalse(addAppleDeliveryCommand.equals(addPearDeliveryCommand));
     }
 
     /**
@@ -228,7 +233,7 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public ObservableList<Supplier> getFilteredSupplierList() {
+        public ObservableList<Supplier> getModifiedSupplierList() {
             return uniqueSupplierList.asUnmodifiableObservableList();
         }
 
@@ -254,7 +259,7 @@ public class AddDeliveryCommandTest {
         }
 
         @Override
-        public ObservableList<Supplier> getFilteredSupplierList() {
+        public ObservableList<Supplier> getModifiedSupplierList() {
             return uniqueSupplierList.asUnmodifiableObservableList();
         }
 

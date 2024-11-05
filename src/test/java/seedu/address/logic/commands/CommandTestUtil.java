@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -24,8 +23,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliverySupplierPredicate;
-import seedu.address.model.supplier.NameContainsKeywordsPredicate;
 import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 
 /**
@@ -174,7 +173,7 @@ public class CommandTestUtil {
 
         Supplier supplier = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
         final String[] splitName = supplier.getName().fullName.split("\\s+");
-        model.updateFilteredSupplierList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredSupplierList(new NameContainsKeywordPredicate(splitName[0]));
 
         assertEquals(1, model.getFilteredSupplierList().size());
     }
