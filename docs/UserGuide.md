@@ -54,16 +54,16 @@ tasks done faster than traditional GUI apps.
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `contact add /nNAME`, `NAME` is a parameter which can be used as `contact add /nJohn Doe`.
+  e.g. in `contact add n/NAME`, `NAME` is a parameter which can be used as `contact add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `/nNAME [/tTAG]` can be used as `/nJohn Doe /tfriend` or as `/nJohn Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[/tTAG]…​` can be used as ` ` (i.e. 0 times), `/tfriend`, `/tfriend /tfamily` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `/nNAME /pPHONE_NUMBER`, `/pPHONE_NUMBER /nNAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -75,7 +75,7 @@ tasks done faster than traditional GUI apps.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -85,7 +85,14 @@ Format: `help`
 
 Adds a person to Address Book.
 
-Format: `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS /rROLE [/tTAG]…​`
+Format: `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
+
+* Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan Sec 1".
+* Names with symbols like "s/o" and "d/o" will not be allowed. Please write without these symbols.
+* Names with additional white spaces in between terms will be taken as it is.
+* Duplicated phone numbers and email is strictly not allowed too.
+* Phone number can start from any number with at least 3 digits.
+* Address with non-alphanumeric characters are accepted like "😁".
 
 <box type="tip" seamless>
 
@@ -96,24 +103,8 @@ Format: `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS /rROLE [/tTAG]…�
 
 Examples:
 
-* `contact add /nJohn Doe /p98765432 /ejohnd@example.com /aJohn street, block 123, #01-01 /rStudent`
-* `contact add /nBetsy Crowe /tfriend /ebetsycrowe@example.com /rGuardian /aNewgate Prison /p1234567 /tcriminal`
-
-### Adding a lesson : `lesson add`
-
-Adds a lesson tied to a student with start and end date time.
-
-Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
-
-* Add a lesson with the student at specified `STUDENTID`.
-* The student ID refers to the index number shown in the displayed person list.
-* The lesson starts at the specified `STARTDATETIME` in the format `dd-MM-yyyy HH:mm`.
-* The lesson is held at the address of the student.
-* The price per hour refers to the price of the lesson per hour.
-* The price per hour **must be a non-negative integer**.
-* The duration **must be a decimal number or an integer** between 0 and 24 inclusive.
-* The duration of the lesson is specified by the `DURATION` in hours.
-* The student ID **must be a positive integer** 1, 2, 3, …​
+* `contact add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Student`
+* `contact add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Guardian a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all persons : `contact list`
 
@@ -121,17 +112,11 @@ Shows a list of all persons in the address book.
 
 Format: `contact list`
 
-### Listing all lessons : `lesson list`
-
-Shows a list of all lessons in the schedule.
-
-Format: `lesson list`
-
 ### Editing a person : `contact edit`
 
 Edits an existing person in the address book.
 
-Format: `contact edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…​`
+Format: `contact edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -144,9 +129,9 @@ Format: `contact edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…�
 
 Examples:
 
-* `contact edit 1 /p91234567 /ejohndoe@example.com` Edits the phone number and email address of the 1st person to 
+* `contact edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to
   be `91234567` and `johndoe@example.com` respectively.
-* `contact edit 2 /nBetsy Crower /t` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `contact edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `contact find`
 
@@ -182,6 +167,28 @@ Examples:
 * `contact list` followed by `contact delete 2` deletes the 2nd person in the address book.
 * `contact find Betsy` followed by `contact delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a lesson : `lesson add`
+
+Adds a lesson tied to a student with start and end date time.
+
+Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
+
+* Add a lesson with the student at specified `STUDENTID`.
+* The student ID refers to the index number shown in the displayed person list.
+* The lesson starts at the specified `STARTDATETIME` in the format `dd-MM-yyyy HH:mm`.
+* The lesson is held at the address of the student.
+* The price per hour refers to the price of the lesson per hour.
+* The price per hour **must be a non-negative integer**.
+* The duration **must be a decimal number or an integer** between 0 and 24 inclusive.
+* The duration of the lesson is specified by the `DURATION` in hours.
+* The student ID **must be a positive integer** 1, 2, 3, …​
+
+### Listing all lessons : `lesson list`
+
+Shows a list of all lessons in the schedule.
+
+Format: `lesson list`
+
 ### Deleting a lesson : `lesson delete`
 
 Deletes the lesson at the specified index from the lesson schedule.
@@ -206,9 +213,9 @@ Format: `lesson find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Lessons with students whose names match at least one of the specified keywords will be returned (i.e., 
+* Lessons with students whose names match at least one of the specified keywords will be returned (i.e.,
   an OR search).
-  e.g. `Hans Bo` will return lessons with `Hans Gruber` if any and `Bo Yang` if any. 
+  e.g. `Hans Bo` will return lessons with `Hans Gruber` if any and `Bo Yang` if any.
 
 Examples:
 
@@ -279,10 +286,10 @@ the data of your previous AddressBook home folder.
 
  Action             | Format, Examples                                                                                                                                                      
 --------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add Contact**    | `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS [/tTAG]…​` <br> e.g., `contact add /nJames Ho /p22224444 /ejamesho@example.com /rStudent /a123, Clementi Rd, 1234665 /tfriend /tcolleague` 
+ **Add Contact**    | `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `contact add n/James Ho p/22224444 e/jamesho@example.com r/Student a/123, Clementi Rd, 1234665 t/friend t/colleague` 
  **Clear**          | `clear`                                                                                                                                                               
  **Delete Contact** | `contact delete INDEX`<br> e.g., `contact delete 3`                                                                                                                                   
- **Edit Contact**   | `contact edit INDEX [/nNAME] [/pPHONE_NUMBER] [/eEMAIL] [/aADDRESS] [/tTAG]…​`<br> e.g.,`contact edit 2 /nJames Lee /ejameslee@example.com`                                           
+ **Edit Contact**   | `contact edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`contact edit 2 n/James Lee e/jameslee@example.com`                                           
  **Find Contact**   | `contact find KEYWORD [MORE_KEYWORDS]`<br> e.g., `contact find James Jake`                                                                                                            
  **List Contacts**  | `contact list`                                                                                                                                                                
  **Add Lesson**     | `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION` <br> e.g., `lesson add sid/1 f/10 d/23-10-2024 12:00 h/1`                                         
