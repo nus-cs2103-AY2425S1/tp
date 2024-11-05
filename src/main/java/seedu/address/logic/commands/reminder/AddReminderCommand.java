@@ -31,9 +31,9 @@ public class AddReminderCommand extends Command {
             + "New Year's Eve";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
-    public static final String MESSAGE_NONEXISTENT_PERSON = "This person doesn't exist in the address book.";
+    public static final String MESSAGE_NONEXISTENT_PERSON = "This person doesn't exist in the client hub.";
     public static final String MESSAGE_MORE_THAN_ONE_PERSON = "There is more than one person with this name in the "
-            + "address book. Please use a more specific name instead.";
+            + "client hub. Please use a more specific name instead.";
 
     private final Reminder toAdd;
 
@@ -80,7 +80,7 @@ public class AddReminderCommand extends Command {
         } else if (matchingPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_PERSON);
         } else {
-            throw new CommandException("More than one person with the specified name found. Please be more specific.");
+            throw new CommandException(MESSAGE_MORE_THAN_ONE_PERSON);
         }
     }
 
@@ -92,8 +92,19 @@ public class AddReminderCommand extends Command {
      */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || other instanceof AddReminderCommand; // instanceof handles nulls
+        // Check if same object
+        if (other == this) {
+            return true;
+        }
+
+        // Check if instance of AddReminderCommand and compare reminders
+        if (other instanceof AddReminderCommand) {
+            AddReminderCommand otherCommand = (AddReminderCommand) other;
+            return toAdd.equals(otherCommand.toAdd);
+        }
+
+        // If neither of the above, return false
+        return false;
     }
 
     /**
@@ -103,6 +114,6 @@ public class AddReminderCommand extends Command {
      */
     @Override
     public String toString() {
-        return "AddReminderCommand";
+        return "AddReminderCommand {" + "toAdd=" + toAdd + '}';
     }
 }
