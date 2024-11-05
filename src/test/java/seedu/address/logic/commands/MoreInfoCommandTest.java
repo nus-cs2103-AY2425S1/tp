@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
@@ -21,6 +22,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
+import seedu.address.testutil.PersonBuilder;
 
 public class MoreInfoCommandTest {
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
@@ -43,6 +47,23 @@ public class MoreInfoCommandTest {
                 .get(randomIndex + 1));
 
         assertCommandFailure(moreInfoCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
+    }
+    
+    @Test
+    public void execute_subName_throwsCommandException() {
+        Random random = new Random();
+        List<Name> typicalNames = getTypicalNames();
+        int randomIndex = random.nextInt(typicalNames.size() - 1);
+        Person personToMoreInfo = model.getPersonByName(typicalNames.get(randomIndex));
+        String personToMoreInfoNameString = personToMoreInfo.getName().toString();
+        Name subNamePersonToMoreInfo =
+                new Name(personToMoreInfoNameString
+                        .substring(0, personToMoreInfoNameString.length() - 1));
+        MoreInfoCommand moreInfoCommand =
+                new MoreInfoCommand(subNamePersonToMoreInfo);
+
+        assertCommandFailure(moreInfoCommand, model,
+                String.format(Messages.MESSAGE_SUGGESTION, personToMoreInfo.getName()));
     }
 
     @Test

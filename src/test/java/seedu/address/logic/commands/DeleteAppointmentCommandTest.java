@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
@@ -33,11 +34,8 @@ public class DeleteAppointmentCommandTest {
 
 
     @Test
-    public void execute_validNameUnfilteredList_success() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 1);
-        Person personToDeleteAppointment = model.getPersonByName(typicalNames.get(randomIndex));
+    public void execute_validBuyerNameUnfilteredList_success() {
+        Person personToDeleteAppointment = DANIEL;
         DeleteAppointmentCommand deleteAppointmentCommand =
                 new DeleteAppointmentCommand(personToDeleteAppointment.getName());
 
@@ -45,20 +43,31 @@ public class DeleteAppointmentCommandTest {
                 personToDeleteAppointment.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
-        Person personWithoutAppointment;
-        if (personToDeleteAppointment instanceof Buyer) {
-            personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
+        Person personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
                     personToDeleteAppointment.getPhone(),
                     personToDeleteAppointment.getEmail(),
                     personToDeleteAppointment.getTags(),
                     Appointment.EMPTY_APPOINTMENT);
-        } else { // Assuming it's a Seller if not a Buyer
-            personWithoutAppointment = new Seller(personToDeleteAppointment.getName(),
-                    personToDeleteAppointment.getPhone(),
-                    personToDeleteAppointment.getEmail(),
-                    personToDeleteAppointment.getTags(),
-                    Appointment.EMPTY_APPOINTMENT);
-        }
+        expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
+
+        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validSellerNameUnfilteredList_success() {
+        Person personToDeleteAppointment = ALICE;
+        DeleteAppointmentCommand deleteAppointmentCommand =
+                new DeleteAppointmentCommand(personToDeleteAppointment.getName());
+
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                personToDeleteAppointment.getName());
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
+        Person personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
+                personToDeleteAppointment.getPhone(),
+                personToDeleteAppointment.getEmail(),
+                personToDeleteAppointment.getTags(),
+                Appointment.EMPTY_APPOINTMENT);
         expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
 
         assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);

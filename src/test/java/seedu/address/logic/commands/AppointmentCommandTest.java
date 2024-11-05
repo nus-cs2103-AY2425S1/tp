@@ -2,8 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,12 +65,30 @@ public class AppointmentCommandTest {
     }
 
     @Test
-    public void execute_validIndex_addAppointmentSuccess() throws Exception {
+    public void execute_validSellerIndex_addAppointmentSuccess() throws Exception {
         // Arrange
         Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
         AppointmentCommand command = new AppointmentCommand(ALICE.getName(), validAppointment);
+
+        // Act
+        CommandResult result = command.execute(modelStub);
+
+        // Assert
+        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
+                .buildBuyer();
+        assertEquals(String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_validBuyerIndex_addAppointmentSuccess() throws Exception {
+        // Arrange
+        Person personToEdit = DANIEL;
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
+
+        AppointmentCommand command = new AppointmentCommand(DANIEL.getName(), validAppointment);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -93,6 +115,30 @@ public class AppointmentCommandTest {
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
         assertEquals(editedPerson.getAppointment(), validAppointment);
+    }
+    @Test
+    public void equals() {
+        AppointmentCommand firstAppointmentCommand =
+                new AppointmentCommand(ALICE.getName(), validAppointment);
+        AppointmentCommand secondAppointmentCommand =
+                new AppointmentCommand(BENSON.getName(), validAppointment);
+
+        // same object -> returns true
+        assertTrue(firstAppointmentCommand.equals(firstAppointmentCommand));
+
+        // same values -> returns true
+        AppointmentCommand firstAppointmentCommandCopy =
+                new AppointmentCommand(ALICE.getName(), validAppointment);
+        assertTrue(firstAppointmentCommand.equals(firstAppointmentCommandCopy));
+
+        // different types -> returns false
+        assertFalse(firstAppointmentCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(firstAppointmentCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstAppointmentCommand.equals(secondAppointmentCommand));
     }
 
     /**
