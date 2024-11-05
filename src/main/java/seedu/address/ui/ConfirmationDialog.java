@@ -1,10 +1,11 @@
 package seedu.address.ui;
 
-import java.util.Optional;
+import java.io.IOException;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Represents a confirmation dialog used to get user confirmation for certain actions,
@@ -19,20 +20,26 @@ public class ConfirmationDialog {
      * @return {@code true} if the user confirms the action by pressing OK, {@code false} otherwise.
      */
     public static boolean showDeleteConfirmation(String clientName) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Confirmation");
-        alert.setHeaderText("Are you sure you want to delete " + clientName + "?");
-        alert.setContentText(clientName + " has active listings!");
+        FXMLLoader loader =
+                new FXMLLoader(ConfirmationDialog.class.getResource("/view/ConfirmationDialog.fxml"));
+        Stage dialogStage = new Stage();
 
-        alert.initModality(Modality.APPLICATION_MODAL);
+        try {
+            Scene scene = new Scene(loader.load());
+            dialogStage.setScene(scene);
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Delete Confirmation");
 
-        ButtonType yesButton = new ButtonType("Yes");
-        ButtonType noButton = new ButtonType("No");
-        alert.getButtonTypes().setAll(yesButton, noButton);
+            ConfirmationDialogController controller = loader.getController();
+            controller.setHeaderLabelText("Are you sure you want to delete " + clientName + "?");
+            controller.setClientName(clientName + " still has active listing(s)!");
 
-        alert.setOnShowing(e -> alert.getDialogPane().lookupButton(yesButton).requestFocus());
+            dialogStage.showAndWait();
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == yesButton;
+            return controller.isConfirmed();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
