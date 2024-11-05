@@ -12,7 +12,7 @@ public class ExportCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_help_success() {
+    public void execute_export_success() {
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS);
         assertCommandSuccess(new ExportCommand(), model, expectedCommandResult, expectedModel);
     }
