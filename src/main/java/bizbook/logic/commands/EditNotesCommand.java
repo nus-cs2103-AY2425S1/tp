@@ -94,24 +94,9 @@ public class EditNotesCommand extends Command {
         notesList.set(noteIndex.getZeroBased(), note);
         ArrayList<Note> editedNotes = new ArrayList<>(notesList);
 
+
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedNotes);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditNotesCommand otherEditNotesCommand)) {
-            return false;
-        }
-
-        return personIndex.equals(otherEditNotesCommand.personIndex)
-                && noteIndex.equals(otherEditNotesCommand.noteIndex)
-                && note.equals(otherEditNotesCommand.note);
     }
 
 }
