@@ -2,7 +2,6 @@ package seedu.address.logic.commands.reminder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.reminder.EditReminderCommand.MESSAGE_EDIT_REMINDER_SUCCESS;
 import static seedu.address.logic.commands.reminder.EditReminderCommand.MESSAGE_REMINDER_NOT_EDITED;
 
 import java.time.LocalDateTime;
