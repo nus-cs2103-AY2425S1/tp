@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.hireme.commons.core.index.Index;
 import seedu.hireme.logic.Messages;
+import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ModelManager;
 import seedu.hireme.model.UserPrefs;
@@ -28,26 +29,22 @@ public class StatusCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Model clonedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
-
         InternshipApplication internshipApplicationToUpdate = clonedModel
                 .getFilteredList().get(INDEX_FIRST_INTERNSHIP_APPLICATION.getZeroBased());
 
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
-
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), Status.ACCEPTED);
 
         Status previousStatus = internshipApplicationToUpdate.getStatus();
 
         ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
-
         InternshipApplication updatedApplication = new InternshipApplication(
                 internshipApplicationToUpdate.getCompany(),
                 internshipApplicationToUpdate.getDateOfApplication(),
                 internshipApplicationToUpdate.getRole(),
                 Status.ACCEPTED
         );
-
         expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
@@ -76,6 +73,40 @@ public class StatusCommandTest {
 
         assertCommandFailure(statusCommand, model,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_emptyList_throwsCommandException() {
+        Model emptyModel = new ModelManager(); // An empty model with no internship applications
+        StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
+
+        assertCommandFailure(statusCommand, emptyModel,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_lastIndex_success() {
+        Index lastIndex = Index.fromOneBased(model.getFilteredList().size());
+        Model clonedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
+        InternshipApplication internshipApplicationToUpdate = clonedModel.getFilteredList().get(lastIndex.getZeroBased());
+
+        StatusCommand statusCommand = new StatusCommand(lastIndex, Status.ACCEPTED);
+        String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
+                Messages.format(internshipApplicationToUpdate), Status.ACCEPTED);
+
+        InternshipApplication updatedApplication = new InternshipApplication(
+                internshipApplicationToUpdate.getCompany(),
+                internshipApplicationToUpdate.getDateOfApplication(),
+                internshipApplicationToUpdate.getRole(),
+                Status.ACCEPTED
+        );
+        ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
+        expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
+
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
+                false, false, expectedModel.getChartData());
+
+        assertCommandSuccess(statusCommand, clonedModel, expectedCommandResult, expectedModel);
     }
 
     @Test
