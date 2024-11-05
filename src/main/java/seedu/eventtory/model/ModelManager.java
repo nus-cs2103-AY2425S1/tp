@@ -70,13 +70,13 @@ public class ModelManager implements Model {
         // Update selected vendor or event when the list of vendors or events is updated
         filteredVendors.addListener((ListChangeListener<? super Vendor>) change -> {
             if (selectedVendor.get() != null) {
-                change.getList().stream().filter(vendor -> vendor.getId() == selectedVendor.get().getId()).findFirst()
+                change.getList().stream().filter(vendor -> vendor.isSameId(selectedVendor.get())).findFirst()
                         .ifPresent(vendor -> selectedVendor.set(vendor));
             }
         });
         filteredEvents.addListener((ListChangeListener<? super Event>) change -> {
             if (selectedEvent.get() != null) {
-                change.getList().stream().filter(event -> event.getId() == selectedEvent.get().getId()).findFirst()
+                change.getList().stream().filter(event -> event.isSameId(selectedEvent.get())).findFirst()
                         .ifPresent(event -> selectedEvent.set(event));
             }
         });
