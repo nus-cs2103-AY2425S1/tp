@@ -109,7 +109,6 @@ public class ChatWindowUiTest extends ApplicationTest {
                             + "Can you help specify which you are referring to?\n"
                             + "• Adding a buyer/seller client profile\n"
                             + "• Adding an appointment\n"
-                            + "• Adding a property\n"
                             + "• Adding a listing",
                     chatWindow.getResponse("add"));
         });
@@ -123,7 +122,6 @@ public class ChatWindowUiTest extends ApplicationTest {
                             + "Can you help specify which you are referring to?\n"
                             + "• Deleting a buyer/seller client profile\n"
                             + "• Deleting an appointment\n"
-                            + "• Deleting a property\n"
                             + "• Deleting a listing",
                     chatWindow.getResponse("delete"));
         });
@@ -161,14 +159,6 @@ public class ChatWindowUiTest extends ApplicationTest {
 
     @Test
     @Order(11)
-    public void getResponse_addProperty_success() {
-        assertEquals("This is how to add a property!\n"
-                        + "prop {index} prop/{date} fr/{address}",
-                chatWindow.getResponse("add property"));
-    }
-
-    @Test
-    @Order(12)
     public void getResponse_deleteBuyer_success() {
         assertEquals("This is how to delete a buyer!\n"
                         + "delete n/{name}",
@@ -176,7 +166,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(13)
+    @Order(12)
     public void getResponse_deleteSeller_success() {
         assertEquals("This is how to delete a seller!\n"
                         + "delete n/{name}",
@@ -184,7 +174,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(14)
+    @Order(13)
     public void getResponse_deleteAppointment_success() {
         assertEquals("This is how to delete an appointment!\n"
                         + "delapt n/{name}",
@@ -193,14 +183,6 @@ public class ChatWindowUiTest extends ApplicationTest {
 
     @Test
     @Order(15)
-    public void getResponse_deleteProperty_success() {
-        assertEquals("This is how to delete a property!\n"
-                        + "delprop n/{name}",
-                chatWindow.getResponse("delete property"));
-    }
-
-    @Test
-    @Order(16)
     public void getResponse_clientCategory_success() {
         assertEquals("We categorise clients into buyers and sellers for clarity of our users!\n"
                         + "Maybe consider:\n"
@@ -215,7 +197,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(17)
+    @Order(16)
     public void getResponse_invalidMessage_failure() {
         String expected = "I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";
@@ -225,7 +207,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(18)
+    @Order(17)
     public void getResponse_emptyMessage_failure() {
         String expected = "I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";
@@ -235,7 +217,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(19)
+    @Order(18)
     public void handleSendButtonAction_typingResponse_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);
@@ -258,7 +240,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(20)
+    @Order(19)
     public void handleSendButtonAction_specialCharacters_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);
@@ -273,7 +255,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
-    @Order(21)
+    @Order(20)
     public void handleSendButtonAction_exitOnGoodbye_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);

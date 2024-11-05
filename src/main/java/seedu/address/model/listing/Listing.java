@@ -123,7 +123,6 @@ public class Listing {
                 .add("area", area)
                 .add("region", region)
                 .add("seller", seller)
-                //.add("buyers", )
                 .toString();
     }
 }

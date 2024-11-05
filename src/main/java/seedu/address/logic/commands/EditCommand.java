@@ -26,7 +26,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Property;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -99,17 +98,15 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        // edit command does not allow editing properties
-        Property updatedProperty = personToEdit.getProperty();
         // edit command does not allow editing appointments
         Appointment updatedAppointment = personToEdit.getAppointment();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         if (personToEdit instanceof Buyer) {
             return new Buyer(updatedName, updatedPhone, updatedEmail,
-                    updatedTags, updatedAppointment, updatedProperty);
+                    updatedTags, updatedAppointment);
         } else {
             return new Seller(updatedName, updatedPhone, updatedEmail,
-                    updatedTags, updatedAppointment, updatedProperty);
+                    updatedTags, updatedAppointment);
         }
     }
 
