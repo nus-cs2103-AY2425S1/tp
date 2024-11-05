@@ -112,9 +112,15 @@ Adds a client to the address book.
 Format: `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<ADDRESS> b/<BIRTHDAY >appt/<APPOINTMENT TIME>`
 
 - **Parameters**:
-  - Birthday should be in `yyyy-mm-dd`
-  - Appointment should be in `yyyy-mm-dd HH:mm`
+  * Birthday should be in `yyyy-mm-dd`
+  * Appointment should be in `yyyy-mm-dd HH:mm`
+  * Phone number can only be 3 to 8 digits long 
+  * Clients with the same name and address are considered as duplicates 
+  * The system standardises addresses by removing commas, spaces, and hyphens and making 
+  all characters lowercase. This means that "311, Clementi Ave 5, unit 02-2" and 
+  "311 clementi ave 5 unit 022" (without commas) will be treated as the same client address.
 
+    
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
 * `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
@@ -126,12 +132,15 @@ Examples:
 Assigns policies to a client.
 
 Format: `assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>`
-- **Parameters**:
-  - Policy start date and end date refers to the duration of coverage
-  - Policy start date and Policy end date should be in `yyyy-mm-dd`
-  - Pay date should be in `yyyy-mm-dd` format
-  - Amount Due can only be Big Decimal format
 
+- **Parameters**:
+    * `POLICY START DATE` and `POLICY END DATE` refer to the duration of the policy's coverage.
+    * `POLICY START DATE` and `POLICY END DATE` must be in the format `yyyy-mm-dd`.
+    * `POLICY START DATE` and `POLICY END DATE` cannot be the same date.
+    * `INSURANCE DUE DATE` must be in the format `yyyy-mm-dd`.
+    * `INSURANCE DUE DATE` cannot be earlier than the `POLICY START DATE`.
+    * `INSURANCE DUE DATE` cannot be later than the `POLICY START DATE`.
+    * `AMOUNT DUE` must be a positive number with up to 2 decimal places.
 
 Examples:
 * `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`

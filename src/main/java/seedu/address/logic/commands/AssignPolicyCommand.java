@@ -26,7 +26,7 @@ public class AssignPolicyCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a policy to a person"
             + " by the index number used in the displayed person list. "
-            + "\nParameters: "
+            + "\nParameters: " + "INDEX "
             + PREFIX_POLICY_NAME + "POLICYNAME "
             + PREFIX_POLICY_START_DATE + "STARTDATE "
             + PREFIX_POLICY_END_DATE + "ENDDATE "
