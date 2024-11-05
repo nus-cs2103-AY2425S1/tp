@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_CLIENT_TYPE + "CLIENT_TYPE...\n"
+            + PREFIX_CLIENT_TYPE + "CLIENT_TYPE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -38,10 +38,12 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_CLIENT_TYPE + "Plan A "
             + PREFIX_CLIENT_TYPE + "Plan B "
-            + PREFIX_DESCRIPTION + "Likes to eat a lot ";
+            + PREFIX_DESCRIPTION + "Likes to eat a lot \n"
+            + "Additional Info:\n"
+            + "- Can add multiple c/ to add multiple CLIENT_TYPE\n";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This name already exists in the client hub. If the "
+    public static final String MESSAGE_DUPLICATE_PERSON = "This name already exists in Client Hub. If the "
             + "newly added client has the same name, Please add use () to add more information after the name "
             + "to differentiate the names.";
 

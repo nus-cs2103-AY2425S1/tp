@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -22,12 +18,14 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds clients whose name, phone number, "
             + "address or client type contain any of "
             + "all specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: n/NAME, p/PHONE_NUMBER, a/ADDRESS, c/CLIENT_TYPE \n"
-            + "Examples: \n"
-            + COMMAND_WORD + " " + PREFIX_NAME + " alice wong\n"
-            + COMMAND_WORD + " " + PREFIX_PHONE + " 91234567\n"
-            + COMMAND_WORD + " " + PREFIX_ADDRESS + " 123, Jurong West Ave 6\n"
-            + COMMAND_WORD + " " + PREFIX_CLIENT_TYPE + " Investment Plan 1";
+            + "Parameters: n/NAME or p/PHONE_NUMBER, or a/ADDRESS or c/CLIENT_TYPE\n"
+            + "Examples:\n"
+            + "- " + COMMAND_WORD + " alice wong\n"
+            + "- " + COMMAND_WORD + " p/91234567\n"
+            + "- " + COMMAND_WORD + " a/123, Jurong West Ave 6\n"
+            + "- " + COMMAND_WORD + " c/Investment Plan 1\n"
+            + "Additional Info:\n"
+            + "- The command can only take in one prefix at any point of time. (find n/NAME a/Address is invalid)\n";
 
     private final NameContainsKeywordsPredicate predicate;
 
