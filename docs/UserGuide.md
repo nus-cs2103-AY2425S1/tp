@@ -2,11 +2,31 @@
 layout: page
 title: User Guide
 ---
+Hey SoC Students,
 
-NetBook is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NetBook can get your contact management tasks done faster than traditional GUI apps.
+Are you meeting too many people during your internship grind? Struggling to manage your contacts?
 
-* Table of Contents
-{:toc}
+Then NetBook is the application for you!
+
+NetBook is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NetBook can get your contact management tasks done faster than traditional GUI apps.
+
+### Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * Contact Management
+    * [Help Command](#viewing-help--help)
+    * [Adding a contact](#adding-a-person-add)
+    * [List all contacts](#listing-all-persons--list)
+    * [Find individuals by name or rrganisation](#locating-persons-by-name-and-organization-find-or-f)
+    * [Sorting contacts](#sorting-persons--sort-or-s)
+    * [Saving your sort preference](#save-sort-preference-save-or-svp)
+    * [Delete a contact](#deleting-a-person--delete)
+    * [Add a remark to a contact](#remark-a-person--remark)
+    * [Delete all contacts](#clearing-all-entries--clear)
+    * [Exit NetBook](#exiting-the-program--exit)
+* [FAQ](#faq)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +63,7 @@ NetBook is a **desktop app for managing contacts, optimized for use via a Comman
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
