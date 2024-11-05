@@ -49,24 +49,14 @@ deactivate AddressBookParser
 LogicManager -> StatusCommand : execute(m)
 activate StatusCommand
 
-note over StatusCommand
-Retrieve last shown list and validate index
-end note
-StatusCommand -> Model : Retrieve and Validate Data
+StatusCommand -> Model : update internship application status
+activate Model
 
-note over StatusCommand
-Create a deep copy of the internship application
-Update status and save back to model
-end note
-StatusCommand -> Model : Update Internship Application Status
-
-note over StatusCommand
-Apply previous filter to updated list
-end note
-StatusCommand -> Model : Refresh Filtered List
+Model --> StatusCommand
+deactivate Model
 
 create CommandResult
-StatusCommand -> CommandResult : Generate result message
+StatusCommand -> CommandResult
 activate CommandResult
 
 CommandResult --> StatusCommand
@@ -75,6 +65,9 @@ deactivate CommandResult
 StatusCommand --> LogicManager : r
 deactivate StatusCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+StatusCommand -[hidden]-> LogicManager
+destroy StatusCommand
 @enduml
