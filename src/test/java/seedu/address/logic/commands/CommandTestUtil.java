@@ -189,6 +189,7 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_COMPLETED_DESC = " " + PREFIX_STATUS + VALID_STATUS_COMPLETED;
     public static final String VALID_STATUS_PENDING_DESC = " " + PREFIX_STATUS + VALID_STATUS_PENDING;
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + INVALID_STATUS_CANCELLED;
+    public static final String INVALID_STATUS_DESC_NULL = " " + PREFIX_STATUS;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withNric(VALID_NRIC_AMY)

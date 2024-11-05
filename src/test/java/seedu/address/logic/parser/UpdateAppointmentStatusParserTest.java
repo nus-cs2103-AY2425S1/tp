@@ -4,6 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_TIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC_NULL;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_DESC_APPOINTMENT;
@@ -84,6 +86,20 @@ public class UpdateAppointmentStatusParserTest {
         assertParseFailure(parser, NRIC_DESC_AMY + VALID_DATE_DESC_APPOINTMENT + INVALID_START_TIME_DESC
             + VALID_STATUS_COMPLETED_DESC,
             UpdateAppointmentStatusCommand.MESSAGE_INVALID_TIME);
+    }
+
+    @Test
+    public void parse_invalidStatus_failure() {
+        // Invalid status
+        assertParseFailure(parser, NRIC_DESC_AMY + VALID_DATE_DESC_APPOINTMENT + VALID_START_TIME_DESC_APPOINTMENT
+            + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidStatus_failureNull() {
+        // Invalid status
+        assertParseFailure(parser, NRIC_DESC_AMY + VALID_DATE_DESC_APPOINTMENT + VALID_START_TIME_DESC_APPOINTMENT
+            + INVALID_STATUS_DESC_NULL, Status.MESSAGE_CONSTRAINTS);
     }
 
 }

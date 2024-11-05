@@ -106,6 +106,38 @@ public class AppointmentTest {
     }
 
     @Test
+    public void markAsUncompletedTest() {
+        Person testPerson = new PersonBuilder().build();
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 10, 22, 12, 0).plusHours(1);
+
+        // Create an appointment with the completed flag set to true
+        Appointment appointment = new Appointment("Incomplete Appointment", testPerson.getNric(),
+            startTime, endTime, true);
+        assertTrue(appointment.isCompleted());
+
+        // Mark as not completed and check again
+        appointment.markAsNotCompleted();
+        assertFalse(appointment.isCompleted());
+    }
+
+    @Test
+    public void setStatusPending() {
+        Person testPerson = new PersonBuilder().build();
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 10, 22, 12, 0).plusHours(1);
+
+        // Create an appointment with the completed flag set to true
+        Appointment appointment = new Appointment("Incomplete Appointment", testPerson.getNric(),
+            startTime, endTime, true);
+        assertTrue(appointment.isCompleted());
+
+        // Change status and check again
+        appointment.setStatus(Status.PENDING);
+        assertFalse(appointment.isCompleted());
+    }
+
+    @Test
     public void toStringTest() {
         Person testPerson = new PersonBuilder().build();
         LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
