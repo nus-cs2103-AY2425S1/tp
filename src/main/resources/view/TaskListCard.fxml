@@ -25,8 +25,6 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" text="\$first" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <ImageView fx:id="imageView" fitWidth="40" fitHeight="48" style="-fx-padding: -15 0 0 0;"/>
             </HBox>
             <Label fx:id="deadline" styleClass="cell_small_label" style="-fx-padding: -10 0 0 0;"/>
         </VBox>

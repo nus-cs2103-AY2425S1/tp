@@ -3,12 +3,14 @@ package seedu.address.ui.cards;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.group.Group;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 import seedu.address.ui.UiPart;
 
@@ -38,12 +40,12 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
-    private ImageView imageView;
+    private Label groups;
 
     /**
      * Creates a {@code GroupCode} with the given {@code Group} and index to display.
      */
-    public TaskCard(Task task, int displayedIndex) {
+    public TaskCard(ObservableList<Group> groupList, Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
@@ -53,7 +55,52 @@ public class TaskCard extends UiPart<Region> {
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
         if (task.getDeadline().getTime().isBefore(currentTime)) {
-            imageView.setImage(image);
+            String groupsOverdue = "Overdue Groups:";
+            String groupsComplete = "Complete Groups:";
+            ObservableList<Group> completeGroupList = groupList;
+            try {
+                groupsOverdue = groupList.stream()
+                    .filter(x -> x.getTasks().stream().filter(y -> y.equals(task))
+                    .filter(c -> c.getStatus().equals(Status.OVERDUE)).count() > 0)
+                    .map(z -> z.getGroupName().getGroupName())
+                    .reduce(groupsOverdue, (a, b) -> a + "\n" + b);
+            } catch (IndexOutOfBoundsException ioe) {
+
+            }
+            try {
+                groupsComplete = completeGroupList.stream()
+                    .filter(x -> x.getTasks().stream().filter(y -> y.equals(task))
+                    .filter(c -> c.getStatus().equals(Status.COMPLETED)).count() > 0)
+                    .map(z -> z.getGroupName().getGroupName())
+                    .reduce(groupsComplete, (a, b) -> a + "\n" + b);
+            } catch (IndexOutOfBoundsException ioe) {
+
+            }
+            deadline.setText(groupsOverdue + "\n" + groupsComplete);
+        } else {
+            String groupsPending = "Pending Groups:";
+            String groupsComplete = "Complete Groups:";
+            ObservableList<Group> completeGroupList = groupList;
+            try {
+                groupsPending = groupList.stream()
+                    .filter(x -> x.getTasks().stream().filter(y -> y.equals(task))
+                    .filter(c -> c.getStatus().equals(Status.PENDING)).count() > 0)
+                    .map(z -> z.getGroupName().getGroupName())
+                    .reduce(groupsPending, (a, b) -> a + "\n" + b);
+            } catch (IndexOutOfBoundsException ioe) {
+
+            }
+            try {
+                groupsComplete = completeGroupList.stream()
+                    .filter(x -> x.getTasks().stream().filter(y -> y.equals(task))
+                    .filter(c -> c.getStatus().equals(Status.COMPLETED)).count() > 0)
+                    .map(z -> z.getGroupName().getGroupName())
+                    .reduce(groupsComplete, (a, b) -> a + "\n" + b);
+            } catch (IndexOutOfBoundsException ioe) {
+
+            }
+            deadline.setText(groupsPending + "\n" + groupsComplete);
         }
+
     }
 }

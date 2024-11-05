@@ -122,10 +122,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        logic.setStatus();
         studentListPanel = new StudentListPanel(logic.getFilteredPersonList());
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupTaskPanel = new GroupTaskPanel(logic.getFilteredGroupList());
-        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.getFilteredGroupList());
         if (this.logic.getState().equals(DEFAULT_STUDENT)) {
             informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
@@ -228,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
             studentListPanel = new StudentListPanel(logic.getFilteredPersonList());
             groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
             groupTaskPanel = new GroupTaskPanel(logic.getFilteredGroupList());
-            taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+            taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.getFilteredGroupList());
             if (this.logic.getState().equals(DEFAULT_STUDENT)) {
                 informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
             } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
