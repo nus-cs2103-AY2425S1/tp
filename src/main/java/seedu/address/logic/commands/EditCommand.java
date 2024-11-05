@@ -32,7 +32,7 @@ import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.util.Remark;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;

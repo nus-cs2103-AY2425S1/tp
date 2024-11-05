@@ -35,6 +35,8 @@ public class CustomerOrderCard extends UiPart<Region> {
     @FXML
     private Label items;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane status;
 
     /**
@@ -48,6 +50,7 @@ public class CustomerOrderCard extends UiPart<Region> {
         phone.setText(order.getPerson().getPhone().value);
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
+        remark.setText(order.getRemark().toString());
 
         Label tagLabel = new Label(order.getStatus().toString());
         if (order.getStatus().toString().equals("Pending")) {

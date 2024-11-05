@@ -12,6 +12,7 @@ import java.util.Set;
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
 
 /**
  * Represents a person with contact details, address, remark, tags, and orders.

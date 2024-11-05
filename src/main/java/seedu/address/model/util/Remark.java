@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.util;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,8 +10,8 @@ public class Remark {
     public final String value;
 
     /**
-     * Creates a remark message for the contact.
-     * @param remark message for the contact.
+     * Creates a remark message for the contact or order.
+     * @param remark message for the contact or order.
      */
     public Remark(String remark) {
         requireNonNull(remark);
