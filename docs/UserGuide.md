@@ -305,6 +305,15 @@ Exits the program.
 
 Format: `exit`
 
+### Additional Features
+#### Command History Navigation
+The command history feature allows users to easily navigate through previously entered commands using the **Up** and **Down** arrow keys. This is helpful for quickly accessing past commands without needing to retype them.
+
+* **Up** Arrow: Moves to the previous command in the history.
+* **Down** Arrow: Moves to the next command in the history.
+
+This feature enables efficient command recall, streamlining the process of repeating or editing previous inputs.
+
 ### Saving the data
 
 ClientHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
