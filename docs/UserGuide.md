@@ -483,11 +483,7 @@
   <br>
   <br>
 
-  Format: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
-
->Parameter: `e` for employees, `ph` for potential hires, `all` for both employees and potential hires
->
->Keywords: `n/[NAMES]` `p/[PHONE NUMBERS]` `e/[EMAILS]` `d/[DEPARTMENTS]` `r/[ROLES]`
+  Format: `find (e/ph/all) [n/NAMES] [p/PHONE_NUMBERS] [e/EMAILS] [d/DEPARTMENTS] [r/ROLES]`
 
 <div class="box" type="tip" seamless>
 
@@ -499,14 +495,13 @@
 * The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
 * Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
 with name `alice`, with phone number `123445678` and with email `alice@example.com`.
+* Persons matching at least one keyword in every field specified will be returned.
+  e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
+  and with phone number either `12345678` or `87654321`.
 * The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
 `find all e/bob@example.com alice@example.com`.
 * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
 `find all e/john@example.com n/john`.
-* Persons matching at least one keyword in every field specified will be returned.
-e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
-and with phone number either `12345678` or `87654321`.
-
 
   Examples:
   * `find all n/John p/12345678` returns persons with `John` in their name, and with phone number `12345678`
@@ -701,7 +696,7 @@ Action     | Format                                                             
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
 **Exit**   | `exit`                                                                                        |
-**Find**   | `find all [KEYWORDS]` <br> `find e [KEYWORDS]` <br> `find ph [KEYWORDS]`                      | `find all Jake` <br> `find e Jake` <br> `find ph Jake`
+**Find**   | `find (e/ph/all) [n/NAMES] [p/PHONE_NUMBERS] [e/EMAILS] [d/DEPARTMENTS] [r/ROLES]`            | `find e n/Jake e/jake@example.com` <br> `find ph n/Don p/97651234` <br> `find all n/James d/IT r/SWE`
 **Help**   | `help`                                                                                        |
 **List**   | `list all` <br> `list e` <br> `list ph`                                                       |
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
