@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Commands <<Rectangle>> {
+    abstract class Command {
+        + execute(): void
+    }
+
+    abstract class UndoableCommand extends Command {
+        + undo(): void
+    }
+
+    class AddCommand extends UndoableCommand
+    class ClearCommand extends Command
+    class DeleteCommand extends UndoableCommand
+    class DeleteTagCommand extends UndoableCommand
+    class EditCommand extends UndoableCommand
+    class ExitCommand extends Command
+    class FilterCommand extends UndoableCommand
+    class FindCommand extends UndoableCommand
+    class HelpCommand extends Command
+    class ListCommand extends Command
+    class NewtagCommand extends UndoableCommand
+    class RenameTagCommand extends UndoableCommand
+    class SetRsvpCommand extends UndoableCommand
+    class TagCommand extends UndoableCommand
+    class UntagCommand extends UndoableCommand
+    class UndoCommand extends Command
+}
+
+
+
+@enduml
