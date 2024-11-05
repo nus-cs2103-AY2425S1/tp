@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Status;
 import seedu.address.model.person.Person;
 
 /**
@@ -136,5 +137,16 @@ public class AppointmentManager {
         allAppointments.sort(Comparator.comparing(Appointment::getStartTime));
 
         return allAppointments;
+    }
+
+    /**
+     * Updates the status of an existing appointment.
+     *
+     * @param appointment The appointment to be updated.
+     * @param status The new status of the appointment.
+     */
+    public void updateAppointmentStatus(Appointment appointment, Status status) {
+        appointment.setStatus(status);
+        update();
     }
 }

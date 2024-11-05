@@ -14,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Status;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -229,6 +230,23 @@ public class ParserUtil {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedInput);
+    }
+
+    /**
+     * Parses a {@code String input} into a {@code Status}.
+     * The input string is expected to be either "COMPLETED" or "PENDING".
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param input the status string to be parsed
+     * @return the parsed {@code Status} object
+     * @throws ParseException if the input does not conform to the expected format
+     */
+    public static Status parseStatus(String input) throws ParseException {
+        String trimmedInput = input.trim();
+        if (!Status.isValidStatus(trimmedInput)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return Status.valueOf(trimmedInput.toUpperCase());
     }
 
 }

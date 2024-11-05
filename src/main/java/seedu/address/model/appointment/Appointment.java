@@ -21,6 +21,8 @@ public class Appointment {
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
 
+    private Status status;
+
     private boolean isCompleted = false;
 
     /**
@@ -39,6 +41,7 @@ public class Appointment {
         this.nric = nric;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.status = Status.PENDING;
     }
 
     /**
@@ -59,6 +62,31 @@ public class Appointment {
         this.startTime = startTime;
         this.endTime = endTime;
         this.isCompleted = isCompleted;
+        this.status = Status.COMPLETED;
+    }
+
+    /**
+     * Constructs an appointment with the given details, completion status, and status.
+     *
+     * @param name the name of the appointment
+     * @param nric the nric of the patient
+     * @param startTime the start time of the appointment
+     * @param endTime the end time of the appointment
+     * @param isCompleted the completion status of the appointment
+     * @param status the status of the appointment
+     */
+
+    public Appointment(String name, Nric nric, LocalDateTime startTime, LocalDateTime endTime,
+        boolean isCompleted, Status status) {
+        if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+            throw new InvalidAppointmentException(INVALID_APPOINTMENT_ERROR);
+        }
+        this.name = name;
+        this.nric = nric;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isCompleted = isCompleted;
+        this.status = status;
     }
 
     /**
@@ -97,10 +125,43 @@ public class Appointment {
     }
 
     /**
+     * @return the status of the appointment
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
      * Marks the appointment as completed.
      */
     public void markAsCompleted() {
         isCompleted = true;
+        status = Status.COMPLETED;
+    }
+
+    /**
+     * Marks the appointment as not completed.
+     */
+    public void markAsNotCompleted() {
+        isCompleted = false;
+        status = Status.PENDING;
+    }
+
+    /**
+     * Sets the status of the appointment.
+     *
+     * If the status is COMPLETED, the appointment is marked as completed.
+     * If the status is PENDING, the appointment is marked as not completed.
+     *
+     * @param status the status to set
+     */
+    public void setStatus(Status status) {
+        this.status = status;
+        if (status == Status.COMPLETED) {
+            this.markAsCompleted();
+        } else {
+            this.markAsNotCompleted();
+        }
     }
 
     /**

@@ -25,5 +25,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_NEW_DATE = new Prefix("newd/");
     public static final Prefix PREFIX_NEW_START_TIME = new Prefix("newstart/");
     public static final Prefix PREFIX_NEW_END_TIME = new Prefix("newend/");
+    public static final Prefix PREFIX_STATUS = new Prefix("status/");
 
 }

@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Status;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -238,6 +239,11 @@ public class AddCommandTest {
 
         @Override
         public void editAppointment(Appointment appointmentToEdit, Person person, Appointment editedAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateAppointmentStatus(Appointment appointment, Status status) {
             throw new AssertionError("This method should not be called.");
         }
 
