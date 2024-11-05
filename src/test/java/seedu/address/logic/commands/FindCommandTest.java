@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -16,6 +17,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -83,6 +85,15 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_transactionListView_throwsCommandException() {
+        PersonContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FindCommand findCommand = new FindCommand(predicate);
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "find");
+        assertCommandFailure(findCommand, model, expectedMessage);
     }
 
     @Test

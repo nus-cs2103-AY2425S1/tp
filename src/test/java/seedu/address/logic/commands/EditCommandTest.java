@@ -147,6 +147,15 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_transactionListView_throwsCommandException() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "edit");
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 

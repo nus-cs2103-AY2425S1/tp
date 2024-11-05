@@ -80,6 +80,14 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_transactionListView_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        model.setIsViewTransactions(true);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "delete");
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
