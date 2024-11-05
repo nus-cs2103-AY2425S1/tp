@@ -80,18 +80,18 @@ public class AddAppointmentCommand extends Command {
                 .filter(person -> person instanceof Doctor && person.getName().equals(doctorName))
                 .findAny();
 
-        Doctor doctorToEdit = (Doctor) doctor.orElseThrow(() ->
+        Person doctorToEdit = doctor.orElseThrow(() ->
                 new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_NAME + doctorName));
 
-        Patient patientToEdit = (Patient) patient.orElseThrow(() ->
+        Person patientToEdit = patient.orElseThrow(() ->
                 new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_NAME + patientName));
 
-        checkForClashingAppointments(patientToEdit, doctorToEdit);
+        checkForClashingAppointments((Patient) patientToEdit, (Doctor) doctorToEdit);
 
-        Patient editedPatient;
-        Doctor editedDoctor;
+        Person editedPatient;
+        Person editedDoctor;
 
-        Appointment appointment = new Appointment(doctorToEdit, patientToEdit, this.date, this.time);
+        Appointment appointment = new Appointment((Doctor) doctorToEdit, (Patient) patientToEdit, this.date, this.time);
         if (model.hasAppointment(appointment)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
@@ -99,10 +99,10 @@ public class AddAppointmentCommand extends Command {
         // Only call createAppointment() if it isn't a duplicate
         // This avoids linking a duplicate appointment to the Doctor and Patient classes
         this.appointmentToAdd = Appointment.createAppointment(
-            doctorToEdit,
-            patientToEdit,
-            this.date,
-            this.time
+                (Doctor) doctorToEdit,
+                (Patient) patientToEdit,
+                this.date,
+                this.time
         );
 
         editedPatient = patientToEdit;
