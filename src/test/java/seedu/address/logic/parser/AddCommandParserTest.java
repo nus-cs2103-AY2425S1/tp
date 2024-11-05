@@ -170,7 +170,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CONTACTTYPE_DESC_BOB + VALID_NAME_BOB + TELEHANDLE_DESC_BOB,
                 expectedMessage);
 
-        // missing telegram handle prefix
+        // missing all 3 of telegram handle, phone and email prefixes
         assertParseFailure(parser, CONTACTTYPE_DESC_BOB + NAME_DESC_BOB + VALID_TELEHANDLE_BOB,
                 expectedMessage);
 
