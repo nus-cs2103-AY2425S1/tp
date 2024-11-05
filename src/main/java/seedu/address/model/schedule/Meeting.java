@@ -96,6 +96,7 @@ public class Meeting {
         }
 
         return otherMeeting != null
+                && otherMeeting.getMeetingName().equals(getMeetingName())
                 && otherMeeting.getMeetingDate().equals(getMeetingDate())
                 && otherMeeting.getMeetingTime().equals(getMeetingTime())
                 && otherMeeting.getContactUids().equals((getContactUids()));
