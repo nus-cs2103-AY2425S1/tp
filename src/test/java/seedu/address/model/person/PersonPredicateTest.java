@@ -68,6 +68,26 @@ public class PersonPredicateTest {
 
         // same values -> returns true
         assertTrue(predicate1.equals(predicate2));
+    }
+
+    @Test
+    public void not_equals() {
+        List<String> names = Arrays.asList("Alice", "Bob");
+        List<String> phones = Collections.singletonList("12345678");
+        List<String> emails = Collections.singletonList("test@example.com");
+        List<String> addresses = Collections.singletonList("123 Main St");
+        List<String> registerNumbers = Collections.singletonList("RN123");
+        List<String> sexes = Collections.singletonList("Female");
+        List<String> classes = Collections.singletonList("ClassA");
+        List<String> ecNames = Collections.singletonList("John Doe");
+        List<String> ecNumbers = Collections.singletonList("87654321");
+        List<String> tags = Collections.singletonList("VIP");
+
+        PersonPredicate predicate1 = new PersonPredicate(
+                names, phones, emails, addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+
+        PersonPredicate predicate2 = new PersonPredicate(
+                names, phones, emails, addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
 
         // different types -> returns false
         assertFalse(predicate1.equals("not a predicate"));
@@ -86,6 +106,82 @@ public class PersonPredicateTest {
         assertFalse(predicate1.equals(differentTagsPredicate));
     }
 
+    @Test
+    public void equals_allPredicates() {
+        List<String> names = Arrays.asList("Alice", "Bob");
+        List<String> phones = Collections.singletonList("12345678");
+        List<String> emails = Collections.singletonList("test@example.com");
+        List<String> addresses = Collections.singletonList("123 Main St");
+        List<String> registerNumbers = Collections.singletonList("RN123");
+        List<String> sexes = Collections.singletonList("Female");
+        List<String> classes = Collections.singletonList("ClassA");
+        List<String> ecNames = Collections.singletonList("John Doe");
+        List<String> ecNumbers = Collections.singletonList("87654321");
+        List<String> tags = Collections.singletonList("VIP");
+
+        PersonPredicate predicate1 = new PersonPredicate(
+                names, phones, emails, addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+
+        PersonPredicate predicate2 = new PersonPredicate(
+                names, phones, emails, addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+
+        // different types -> returns false
+        assertFalse(predicate1.equals("not a predicate"));
+
+        // null -> returns false
+        assertFalse(predicate1.equals(null));
+
+        // different person names -> returns false
+        PersonPredicate diffNamesPredicate = new PersonPredicate(Collections.singletonList("Charlie"), phones,
+                emails, addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffNamesPredicate));
+
+        // different person phones -> returns false
+        PersonPredicate diffPhonesPredicate = new PersonPredicate(names, Collections.singletonList("99999999"),
+                emails, addresses, registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffNamesPredicate));
+
+        // different person emails -> returns false
+        PersonPredicate diffEmailsPredicate = new PersonPredicate(names, phones,
+                Collections.singletonList("different@example.com"), addresses, registerNumbers, sexes, classes,
+                ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffEmailsPredicate));
+
+        // different person addresses -> returns false
+        PersonPredicate diffAddressesPredicate = new PersonPredicate(names, phones, emails,
+                Collections.singletonList("456 Main St"), registerNumbers, sexes, classes, ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffAddressesPredicate));
+
+        // different person register numbers -> returns false
+        PersonPredicate diffRegisterNumbersPredicate = new PersonPredicate(names, phones, emails, addresses,
+                Collections.singletonList("RN999"), sexes, classes, ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffRegisterNumbersPredicate));
+
+        // different person sexes -> returns false
+        PersonPredicate diffSexesPredicate = new PersonPredicate(names, phones, emails, addresses, registerNumbers,
+                Collections.singletonList("Male"), classes, ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffSexesPredicate));
+
+        // different person classes -> returns false
+        PersonPredicate diffClassesPredicate = new PersonPredicate(names, phones, emails, addresses, registerNumbers,
+                sexes, Collections.singletonList("ClassB"), ecNames, ecNumbers, tags);
+        assertFalse(predicate1.equals(diffClassesPredicate));
+
+        // different person emergency contact names -> returns false
+        PersonPredicate diffEcNamesPredicate = new PersonPredicate(names, phones, emails, addresses, registerNumbers,
+                sexes, classes, Collections.singletonList("Jane Doe"), ecNumbers, tags);
+        assertFalse(predicate1.equals(diffEcNamesPredicate));
+
+        // different person emergency contact numbers -> returns false
+        PersonPredicate diffEcNumbersPredicate = new PersonPredicate(names, phones, emails, addresses, registerNumbers,
+                sexes, classes, ecNames, Collections.singletonList("12345678"), tags);
+        assertFalse(predicate1.equals(diffEcNumbersPredicate));
+
+        // different person tags -> returns false
+        PersonPredicate differentTagsPredicate = new PersonPredicate(names, phones, emails, addresses, registerNumbers,
+                sexes, classes, ecNames, ecNumbers, Collections.singletonList("Regular"));
+        assertFalse(predicate1.equals(differentTagsPredicate));
+    }
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
