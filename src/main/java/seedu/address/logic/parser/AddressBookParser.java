@@ -68,7 +68,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND + userInput);
         }
         };
     }

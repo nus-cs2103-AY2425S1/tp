@@ -3,7 +3,6 @@ package seedu.address.model.person.role;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -13,17 +12,22 @@ import seedu.address.model.person.Person;
 public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code RoleContainsKeywordsPredicate}.
+     *
+     * @param keywords List of keywords to check against.
+     */
     public RoleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+        System.out.println(keywords);
     }
 
     @Override
     public boolean test(Person person) {
         // check if any role contains keyword
-        return keywords.stream()
-                .anyMatch(keywords -> StringUtil.containsWordIgnoreCase(person.getRoles().stream()
-                                .map(Role::getRoleName)
-                                .reduce("", (x, y) -> x + " " + y), keywords));
+        return person.getRoles().stream()
+                .anyMatch(role -> keywords.stream()
+                        .anyMatch(keyword -> role.getRoleName().toLowerCase().contains(keyword.toLowerCase())));
     }
 
     @Override

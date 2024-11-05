@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -11,12 +8,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-    private static final String HELP_PATH = "docs/help/help.txt";
     private static final String FXML = "HelpWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
 
@@ -48,18 +45,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Reads the help message from a file.
      */
     private String loadHelpMessage() {
-        StringBuilder helpMessage = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(HELP_PATH));
-            String line;
-            while ((line = br.readLine()) != null) {
-                helpMessage.append(line).append("\n");
-            }
-        } catch (IOException e) {
-            System.out.println("Error! Could not retrieve help message from file.");
-            return "Failed to load help message.";
-        }
-        return helpMessage.toString();
+        return Messages.MESSAGE_HELP;
     }
 
     private void copyUrl() {

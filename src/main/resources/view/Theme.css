@@ -350,3 +350,9 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#roles .label {
+    -fx-text-fill: #ff7700;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13;
+}

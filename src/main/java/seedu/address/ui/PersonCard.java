@@ -4,15 +4,14 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.event.Event;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.Role;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -31,6 +30,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox cardVBox;
+    @FXML
+    private HBox cardTextHBox;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -39,9 +42,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane events;
+    private VBox events;
     @FXML
-    private FlowPane roles;
+    private VBox roles;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -51,13 +54,21 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().toString());
+        name.setWrapText(true);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         person.getEvents().stream()
                 .sorted(Comparator.comparing(event -> event.getName().toString()))
-                .forEach(event -> events.getChildren().add(new Label(((Event) event).getName().toString())));
+                .forEach(event -> {
+                    Label eventTitle = new Label(event.getName().toString());
+                    events.getChildren().add(eventTitle);
+                });
         person.getRoles().stream()
                 .sorted(Comparator.comparing(Role::getRoleName))
-                .forEach(role -> roles.getChildren().add(new Label(role.getRoleName() + ", ")));
+                .forEach(role -> {
+                    Label roleLabel = new Label(role.getRoleName() + ", ");
+                    roleLabel.setWrapText(true);
+                    roles.getChildren().add(roleLabel);
+                });
     }
 }

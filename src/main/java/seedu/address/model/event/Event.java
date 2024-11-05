@@ -2,8 +2,6 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 /**
  * Represents an {@code Event} in the address book.
  */
@@ -50,8 +48,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .toString();
+        return name.toString();
     }
 }
