@@ -16,11 +16,13 @@ public class FindAppointmentCommandTest {
     public void equals() {
         // Create sample predicates for testing
         Predicate<Appointment> firstPredicate = appointment ->
-                appointment.getPerson().getName().equals("Alice") &&
-                        appointment.getAppointmentDateTime().toLocalDate().equals(LocalDateTime.of(2024, 10, 20, 0, 0).toLocalDate());
+                appointment.getPerson().getName().equals("Alice")
+                        && appointment.getAppointmentDateTime().toLocalDate().equals(LocalDateTime.of(2024,
+                        10, 20, 0, 0).toLocalDate());
         Predicate<Appointment> secondPredicate = appointment ->
-                appointment.getPerson().getName().equals("Bob") &&
-                        appointment.getAppointmentDateTime().toLocalDate().equals(LocalDateTime.of(2024, 11, 20, 0, 0).toLocalDate());
+                appointment.getPerson().getName().equals("Bob")
+                        && appointment.getAppointmentDateTime().toLocalDate().equals(LocalDateTime.of(2024,
+                        11, 20, 0, 0).toLocalDate());
 
         FindAppointmentCommand findFirstCommand = new FindAppointmentCommand(firstPredicate);
         FindAppointmentCommand findSecondCommand = new FindAppointmentCommand(secondPredicate);

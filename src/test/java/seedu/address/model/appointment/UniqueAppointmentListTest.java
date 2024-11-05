@@ -120,14 +120,17 @@ public class UniqueAppointmentListTest {
     public void removeAppointment_nonExistingAppointment_throwsAppointmentNotFoundException() {
         uniqueAppointmentList.addAppointment(appointment1);
         Appointment nonExistingAppointment = new Appointment(new AppointmentType("Consultation"),
-                LocalDateTime.of(2024, 1, 3, 9, 0), BOB, new Sickness("Headache"), new Medicine("Ibuprofen"));
-        assertThrows(AppointmentNotFoundException.class, () -> uniqueAppointmentList.removeAppointment(nonExistingAppointment));
+                LocalDateTime.of(2024, 1, 3, 9, 0), BOB,
+                new Sickness("Headache"), new Medicine("Ibuprofen"));
+        assertThrows(AppointmentNotFoundException.class, () ->
+                uniqueAppointmentList.removeAppointment(nonExistingAppointment));
     }
 
     @Test
     public void setAppointments_duplicateInList_throwsDuplicateAppointmentException() {
         List<Appointment> duplicateAppointments = Arrays.asList(appointment1, appointment1);
-        assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.setAppointments(duplicateAppointments));
+        assertThrows(DuplicateAppointmentException.class, () ->
+                uniqueAppointmentList.setAppointments(duplicateAppointments));
     }
 
     @Test
