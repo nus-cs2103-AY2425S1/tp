@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelStub;
@@ -20,6 +19,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -44,16 +44,16 @@ public class AppointmentCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         // Test null appointment
-        assertThrows(NullPointerException.class, () -> new AppointmentCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> new AppointmentCommand(ALICE.getName(), null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         // Arrange
         ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().buildBuyer());
-        Index invalidIndex = Index.fromZeroBased(1);
+        Name invalidName = ALICE.getName();
 
-        AppointmentCommand command = new AppointmentCommand(invalidIndex, validAppointment);
+        AppointmentCommand command = new AppointmentCommand(invalidName, validAppointment);
 
         // Act & Assert
         assertThrows(CommandException.class, () -> command.execute(modelStub),
@@ -63,10 +63,10 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_addAppointmentSuccess() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
+        Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AppointmentCommand command = new AppointmentCommand(ALICE.getName(), validAppointment);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -81,10 +81,10 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_updatesPersonWithAppointment() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
+        Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AppointmentCommand command = new AppointmentCommand(ALICE.getName(), validAppointment);
 
         // Act
         command.execute(modelStub);
@@ -118,6 +118,19 @@ public class AppointmentCommandTest {
                 throw new AssertionError("Target person not found in list.");
             }
             persons.set(index, editedPerson);
+        }
+
+        @Override
+        public boolean hasPersonOfName(Name name) {
+            return this.persons.stream()
+                    .anyMatch(person -> person.getName().equals(name));
+        }
+
+        @Override
+        public Person getPersonByName(Name name) {
+            return this.persons.stream()
+                    .filter(person -> person.getName().equals(name))
+                    .findFirst().orElse(null);
         }
 
         @Override

@@ -38,7 +38,7 @@ public class ListingParserTest {
     @Test
     public void parseCommand_editListing() throws Exception {
         Command command =
-                parser.parseCommand("editListing n/Kent Ridge Condo n/Kent Ridge HDB");
+                parser.parseCommand("editListing Kent Ridge Condo n/Kent Ridge HDB");
         assertEquals(EditListingCommand.class, command.getClass());
     }
 
@@ -69,14 +69,14 @@ public class ListingParserTest {
     @Test
     public void parseCommand_addBuyersToListing() throws Exception {
         Command command =
-                parser.parseCommand("addBuyersToListing n/Warton House buyer/John Doe");
+                parser.parseCommand("addBuyersToListing Warton House buyer/John Doe");
         assertEquals(AddBuyersToListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_removeBuyersFromListing() throws Exception {
         Command command =
-                parser.parseCommand("removeBuyersFromListing n/Warton House buyer/John Doe");
+                parser.parseCommand("removeBuyersFromListing Warton House buyer/John Doe");
         assertEquals(RemoveBuyersFromListingCommand.class, command.getClass());
     }
 

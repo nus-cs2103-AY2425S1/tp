@@ -9,8 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
-import java.util.List;
-
 import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,44 +29,21 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION, PREFIX_SELLER);
 
-        List<String> nameValues = argMultimap.getAllValues(PREFIX_NAME);
-
-        if (nameValues.size() > 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getAllValues(PREFIX_PRICE).size() > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getAllValues(PREFIX_AREA).size() > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getAllValues(PREFIX_ADDRESS).size() > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getAllValues(PREFIX_REGION).size() > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
-        if (argMultimap.getAllValues(PREFIX_SELLER).size() > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
+                PREFIX_REGION, PREFIX_SELLER);
 
         Name currentListingName;
 
-        if (nameValues.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
-
         try {
-            currentListingName = ParserUtil.parseName(nameValues.get(0));
+            currentListingName = ParserUtil.parseName(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditListingCommand.MESSAGE_USAGE), pe);
         }
 
         EditListingDescriptor editListingDescriptor = new EditListingDescriptor();
-        if (nameValues.size() == 2) {
-            Name newListingName = ParserUtil.parseName(nameValues.get(1));
-            editListingDescriptor.setName(newListingName);
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editListingDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             editListingDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
