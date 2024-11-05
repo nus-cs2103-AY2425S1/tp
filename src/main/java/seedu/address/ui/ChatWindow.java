@@ -207,7 +207,8 @@ public class ChatWindow {
                     + "addBuyersToListing n/{listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
                     + "Example: addBuyersToListing n/Warton House buyer/Alice buyer/Bob\n"
                     + "Adds the specified buyers to the listing identified by its name.";
-        } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*l+i+s+t+i+n+g+\\b").matcher(message).find()) {
+        } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*l+i+s+t+i+n+g+" +
+                "\\b").matcher(message).find()) {
             return "This is how to edit a listing!\n"
                     + "editListing n/{listing name} [n/{listing name} p/{price}] [a/{area}]"
                     + " [addr/{address}] [r/{region}]\n"
