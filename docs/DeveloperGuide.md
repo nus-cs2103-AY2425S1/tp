@@ -929,7 +929,7 @@ Use case ends.
 1. User requests to mark a specific student's participation in the lesson by providing the necessary details (Lesson Index, Student Name, Participation)
 2. TAHub validates the inputs.
 3. TAHub marks the student's participation in the lesson.
-4. TAHub displays the updated student attendance.
+4. TAHub displays the updated student attendance & participation.
    <br>
    Use case ends.
 
@@ -946,6 +946,10 @@ Use case ends.
   * 2c1. TAHub shows an error message stating that the Participation is invalid.
     <br>
     Use case ends.
+* 2d. Participation Score is Positive & Valid.
+  * 2d1. TAHub marks the student's attendance as Present
+    <br>
+    Use case resumes from step 3.
 
 
 **<u>Use case: UC22 - Refresh Lesson List</u>**
