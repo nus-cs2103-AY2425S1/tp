@@ -50,6 +50,7 @@ public class AddEventCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
     public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "Celebrity cannot be a contact in contact list";
     private final EventName eventName;
     private final Time time;
     private final Venue venue;
@@ -80,6 +81,10 @@ public class AddEventCommand extends AddCommand {
             contacts = new HashSet<>(contactNames.stream().map(model::findPerson).toList());
         } catch (PersonNotFoundException e) {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
+        }
+
+        if (contacts.contains(celebrity)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
         Event toAdd = Event.createEvent(this.eventName, this.time, this.venue, celebrity, contacts);
