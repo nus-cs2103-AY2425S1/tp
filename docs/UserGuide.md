@@ -67,7 +67,34 @@ By following these sections, you can quickly find the information you need and m
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+-----
+
+## Quick Tutorial on MedConnect's [GUI](#gui)
+
+![uitutorial](images/uitutorial.png)
+
+<span style="font-size: 20px; font-weight: bold">Menu Bar</span>
+* Clicking `File` will show the option to exit the application.
+* Clicking `Help` will show `Help F1` which when clicked will link you to this User Guide!
+
+<span style="font-size: 20px; font-weight: bold; color: #00bf63">Command Box</span>
+* This is where you will be typing the commands for MedConnect! The full list of commands can be found at [Features](#features)!
+
+<span style="font-size: 20px; font-weight: bold; color: #ffde59">Result Box</span>
+* This is where MedConnect will give you feedback after you type in a command! It will provide information on whether a command was successful or an invalid input was provided! For more information on the valid command inputs, head to [Features](#features).
+
+<span style="font-size: 20px; font-weight: bold; color: #ff3131">Patients List</span>
+* The list of patients will be shown here.
+* You can scroll down the list to see more patients.
+
+<span style="font-size: 20px; font-weight: bold; color: #5ce1e6">Doctor Details</span>
+* Each patient has a doctor assigned to them.
+* The name, phone number and email of the assigned doctor can be easily identified by the blue text colour!
+
+<span style="font-size: 20px; font-weight: bold; color: #ff00bf">Emergency Contact Details</span>
+* Each patient will have at least one emergency contact listed.
+* The name, phone number and relationship to the patient of each emergency contact is listed here.
+* If a patient has multiple emergency contacts, this box will become scrollable to be able to view more contacts.
 
 ## Features
 
@@ -332,20 +359,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ---
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                       |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action     | Format,Examples|
+|------------|----------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br><br> e.g., `add n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123465` `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` `t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                                                |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                    |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                             |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                             |
-| **Find Doctor** | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran` |
-| **Add Emergency Contact** | `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`<br> e.g., `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter`                                                                                                                                                                                                                                                                                                                                          |
-| **Undo**   | `undo`                                                                                                                                                                                                                 |
-| **Redo**   | `redo`                                                                                                                                                                                                                 |
-| **List**   | `list`                                                                                                                                                                                                                 |
-| **Help**   | `help`                                                                                                                                                                                                                 |
-| **Archive** | `archive [DESCRIPTION]` <br> e.g., `archive before major update`
-| **List Archive Files** | `listArchives`
-| **Load Archive File** | `loadArchive FILE_NAME` <br> e.g., `loadArchive addressbook-20241106_010856.json`
-| **Delete Archive File** | `deleteArchive FILE_NAME` <br> e.g., `deleteArchive addressbook-20241106_014247.json`
+| **Add Emergency Contact** | `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`<br> e.g., `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter`|
+| **Archive** | `archive [DESCRIPTION]` <br> e.g., `archive before major update`|
+| **Clear**  | `clear`|
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`|
+| **Delete Archive File** | `deleteArchive FILE_NAME` <br> e.g., `deleteArchive addressbook-20241106_014247.json`|
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
+| **Find Doctor** | `finddoc KEYWORD [MORE_KEYWORDS]` <br> e.g., `find Tan Sheeran`|
+| **Help**   |`help`|
+| **List**   |`list`|
+| **List Archive Files** | `listArchives`|
+| **Load Archive File** | `loadArchive FILE_NAME` <br> e.g., `loadArchive addressbook-20241106_010856.json`|
+| **Redo**   |`redo`|
+| **Undo**   |`undo`|
+
