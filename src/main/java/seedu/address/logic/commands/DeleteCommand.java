@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     private void validateIndices(List<Index> targetIndices, Integer lastShownListSize) throws CommandException {
         for (Index targetIndex : targetIndices) {
             if (targetIndex.getZeroBased() >= lastShownListSize) {
-                throw new CommandException(Messages.MESSAGE_INVALID_INTERVAL_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
     }
