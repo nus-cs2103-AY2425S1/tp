@@ -17,14 +17,15 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
   * [Contact Management](#contact-management)
     * [Adding a contact](#adding-a-person-add-or-a)
     * [List all contacts](#listing-all-persons--list)
-    * [Find individuals by name or rrganisation](#locating-persons-by-name-and-organization-find-or-f)
+    * [Find individuals by name or organisation](#locating-persons-by-name-and-organization-find-or-f)
+    * [Edit a contact](#editing-a-person--edit)
     * [Sorting contacts](#sorting-persons--sort-or-s)
     * [Saving your sort preference](#save-sort-preference-save-or-svp)
-    * [Delete a contact](#deleting-a-person--delete)
+    * [Delete a contact](#deleting-a-person--delete-or-del)
     * [Add a remark to a contact](#add-a-remark-to-a-person--remark)
-    * [Delete all contacts](#clearing-all-entries--clear)
+    * [Delete all contacts](#clearing-all-entries--clear-or-c)
   * [Reminder Management](#reminder-management)
-    * [Create a reminder](#create-a-reminder-remind)
+    * [Create a reminder](#create-a-reminder-remind-or-rem)
     * [Delete a reminder](#deleting-a-reminder-delete_reminder-or-dr)
   * [Exit NetBook](#exiting-the-program--exit)
 * [FAQ](#faq)
@@ -186,11 +187,11 @@ Examples:
 * `save high`
 * `svp default`
 
-### Deleting a person : `delete`
+### Deleting a person : `delete` or `del`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `del INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -198,7 +199,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
 
 ### Add a remark to a person : `remark`
 
@@ -213,11 +214,11 @@ Examples:
 *  `remark 1 r/handsome` Remarks the 1st person with `handsome`.
 *  `remark 2 r/pretty` Remarks the 2nd person with `pretty`.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clear` or `c`
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: `clear` or `c`
 
 ## Reminder Management
 
