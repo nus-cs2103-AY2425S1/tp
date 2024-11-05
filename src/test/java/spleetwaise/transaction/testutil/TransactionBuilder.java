@@ -11,6 +11,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -26,6 +27,7 @@ public class TransactionBuilder {
     private static final String DEFAULT_NEGATIVE_AMOUNT = "-1.23";
     private static final Category DEFAULT_CATEGORY = new Category("FOOD");
     public static final Set<Category> DEFAULT_CATEGORY_SET = new HashSet<>(Arrays.asList(DEFAULT_CATEGORY));
+    private static final String DEFAULT_STATUS = "Not Done";
 
     private String id;
     private Person person;
@@ -33,6 +35,7 @@ public class TransactionBuilder {
     private Description description;
     private Date date;
     private Set<Category> categories;
+    private Status status;
 
     /**
      * Creates a {@code TransactionBuilder} with the default details.
@@ -44,6 +47,7 @@ public class TransactionBuilder {
         description = new Description(DEFAULT_DESCRIPTION);
         date = new Date(DEFAULT_DATE);
         categories = new HashSet<>(Arrays.asList(DEFAULT_CATEGORY));
+        status = new Status(DEFAULT_STATUS);
     }
 
     /**
@@ -56,6 +60,7 @@ public class TransactionBuilder {
         description = transactionToCopy.getDescription();
         date = transactionToCopy.getDate();
         categories = transactionToCopy.getCategories();
+        status = transactionToCopy.getStatus();
     }
 
 
@@ -108,9 +113,17 @@ public class TransactionBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
      * Builds and returns the {@code Transaction} object.
      */
     public Transaction build() {
-        return new Transaction(id, person, amount, description, date, categories);
+        return new Transaction(id, person, amount, description, date, categories, status);
     }
 }

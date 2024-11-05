@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Address;
@@ -32,6 +31,7 @@ import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.util.CollectionUtil;
 import spleetwaise.commons.util.ToStringBuilder;
+import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -122,15 +122,12 @@ public class EditCommand extends Command {
         requireNonNull(model);
         requireNonNull(oldPerson);
         requireNonNull(updatedPerson);
-        ObservableList<Transaction> txnList = model.getFilteredTransactionList();
-
-        txnList.forEach(txn -> {
-            if (txn.getPerson().equals(oldPerson)) {
-                model.setTransaction(txn, new Transaction(txn.getId(), updatedPerson, txn.getAmount(),
-                        txn.getDescription(), txn.getDate(), txn.getCategories()
-                ).setStatus(txn.getStatus()));
-            }
-        });
+        model.updateFilteredTransactionList(new PersonFilterPredicate(oldPerson));
+        for (Transaction txn : model.getFilteredTransactionList()) {
+            model.setTransaction(txn, new Transaction(txn.getId(), updatedPerson, txn.getAmount(), txn.getDescription(),
+                    txn.getDate(), txn.getCategories(), txn.getStatus()
+            ));
+        }
     }
 
     @Override

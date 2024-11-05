@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,10 +35,10 @@ public class AddCommandTest {
     private static final Amount testAmount = new Amount("1.23");
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date("01012024");
-    private static final Status testStatus = new Status(false);
+    private static final Status testStatus = new Status(NOT_DONE_STATUS);
     private static final Set<Category> testCategories = new HashSet<>(List.of(new Category("FOOD")));
     private static final Transaction testTxn = new Transaction(
-            testPerson, testAmount, testDescription, testDate, testCategories);
+            testPerson, testAmount, testDescription, testDate, testCategories, testStatus);
 
     @BeforeEach
     void setup() {
@@ -86,7 +87,7 @@ public class AddCommandTest {
     public void equals_diffTransaction_returnsFalse() {
         AddCommand cmd1 = new AddCommand(testTxn);
         Transaction testTxn2 = new Transaction(
-                TypicalPersons.BOB, testAmount, testDescription, testDate, testCategories);
+                TypicalPersons.BOB, testAmount, testDescription, testDate, testCategories, testStatus);
         AddCommand cmd2 = new AddCommand(testTxn2);
 
         assertNotEquals(cmd1, cmd2);
