@@ -110,5 +110,4 @@ public class ScheduleCommandParserTest {
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(multipleDates));
         assertTrue(thrown.getMessage().contains("Invalid command format"));
     }
-    
 }
