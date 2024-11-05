@@ -70,14 +70,12 @@ public class DeleteAppointmentCommand extends Command {
             Buyer buyer = (Buyer) personToDeleteAppointment;
             personWithoutAppointment = new Buyer(buyer.getName(), buyer.getPhone(),
                     buyer.getEmail(), buyer.getTags(),
-                    Appointment.EMPTY_APPOINTMENT,
-                    buyer.getProperty());
+                    Appointment.EMPTY_APPOINTMENT);
         } else { // Must be a Seller
             Seller seller = (Seller) personToDeleteAppointment;
             personWithoutAppointment = new Seller(seller.getName(), seller.getPhone(),
                     seller.getEmail(), seller.getTags(),
-                    Appointment.EMPTY_APPOINTMENT,
-                    seller.getProperty());
+                    Appointment.EMPTY_APPOINTMENT);
         }
         model.setPerson(personToDeleteAppointment, personWithoutAppointment);
 

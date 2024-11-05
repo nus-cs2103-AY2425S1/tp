@@ -175,10 +175,6 @@ public class ChatWindow {
                 .matcher(message).find()) {
             return "This is how to add an appointment!\n"
                     + "apt {index} d/{date} fr/{start time} to/{end time}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*p+r+o+p+e+r+t+y+\\b")
-                .matcher(message).find()) {
-            return "This is how to add a property!\n"
-                    + "prop {index} prop/{date} fr/{address}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*c+l+i+e+n+t+\\b")
                 .matcher(message).find()) {
             return "We categorise clients into buyers and sellers for clarity of our users!\n"
@@ -201,10 +197,6 @@ public class ChatWindow {
                 .matcher(message).find()) {
             return "This is how to delete a listing!\n"
                     + "deleteListing n/{name}";
-        } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*p+r+o+p+e+r+t+y+\\b")
-                .matcher(message).find()) {
-            return "This is how to delete a property!\n"
-                    + "delprop n/{name}";
         } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*c+l+i+e+n+t+\\b").matcher(message).find()) {
             return "This is how to edit a client!\n"
                     + "editClient INDEX [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
@@ -240,14 +232,12 @@ public class ChatWindow {
                     + "Can you help specify which you are referring to?\n"
                     + "• Deleting a buyer/seller client profile\n"
                     + "• Deleting an appointment\n"
-                    + "• Deleting a property\n"
                     + "• Deleting a listing";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b").matcher(message).find()) {
             return "I assume you are having trouble with the add command.\n"
                     + "Can you help specify which you are referring to?\n"
                     + "• Adding a buyer/seller client profile\n"
                     + "• Adding an appointment\n"
-                    + "• Adding a property\n"
                     + "• Adding a listing";
         } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b").matcher(message).find()) {
             return "It seems you want to edit something.\n"
