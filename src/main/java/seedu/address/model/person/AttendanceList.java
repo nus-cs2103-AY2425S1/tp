@@ -15,7 +15,7 @@ import seedu.address.model.person.exceptions.AttendanceNotFoundException;
  */
 public class AttendanceList {
 
-    public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+    public static final String DATE_TIME_FORMAT = "dd/MM/uuuu HH:mm";
 
     private final Map<LocalDateTime, Attendance> attendanceList;
 
@@ -98,7 +98,7 @@ public class AttendanceList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         attendanceList.forEach((date, attendance) -> {
-            sb.append(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(date));
+            sb.append(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT).format(date));
             sb.append(" ");
             sb.append(attendance.toString());
             sb.append("\n");
