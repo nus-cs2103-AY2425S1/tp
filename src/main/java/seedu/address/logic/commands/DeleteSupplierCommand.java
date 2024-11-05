@@ -26,10 +26,10 @@ public class DeleteSupplierCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex.getZeroBased() >= model.getFilteredSupplierList().size()) {
+        if (targetIndex.getZeroBased() >= model.getModifiedSupplierList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
-        Supplier supplierToDelete = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        Supplier supplierToDelete = model.getModifiedSupplierList().get(targetIndex.getZeroBased());
         model.deleteSupplier(supplierToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, targetIndex.getOneBased()));
     }

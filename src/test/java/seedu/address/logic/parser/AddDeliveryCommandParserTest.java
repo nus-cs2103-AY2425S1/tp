@@ -35,23 +35,25 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
-import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
-import seedu.address.testutil.TypicalDeliveriesWithoutSender;
+import seedu.address.testutil.DeliveryBuilder;
 
 public class AddDeliveryCommandParserTest {
     private AddDeliveryCommandParser parser = new AddDeliveryCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Delivery expectedDelivery = TypicalDeliveriesWithoutSender.APPLE;
+        DeliveryWrapper expectedDeliveryWrapper = new DeliveryWrapper(new DeliveryBuilder().withSender(null).build(),
+                new SupplierIndex("1"));
         System.out.println(PREAMBLE_WHITESPACE + TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE);
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE, new AddDeliveryCommand(expectedDelivery));
+                + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
+                new AddDeliveryCommand(expectedDeliveryWrapper));
     }
 
     @Test
