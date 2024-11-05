@@ -167,19 +167,19 @@ This section describes some noteworthy details on how certain features are imple
 Users can seamlessly add tutorials, students and assignments into the TrackMate application. On top of that, users can also add student's tutorial
 attendance to maintain student's accurate attendance record.
 
-### Feature's Architecture Design
+#### Feature's Architecture Design
 
-1. **Centralized Parsing with AddCommandParser** :
-The parsing logic is centralized in AddCommandParser to ensure that input arguments are consistently handled across commands. This prevents each command from having redundant logic and promotes modularity by isolating parsing responsibilities.
+1. **Centralized Parsing with AddCommandParser**:
+   The parsing logic is centralized in `AddCommandParser` to ensure that input arguments are consistently handled across commands. This prevents each command from having redundant logic and promotes modularity by isolating parsing responsibilities.
 
-* **Benefit**: This structure simplifies the command classes, making them more focused on executing logic rather than parsing input.
-* **Challenge**: It requires careful handling of the parsing rules to ensure correctness since the parser is a crucial layer between user input and the system’s execution.
+    * **Benefit**: This structure simplifies the command classes, making them more focused on executing logic rather than parsing input.
+    * **Challenge**: It requires careful handling of the parsing rules to ensure correctness since the parser is a crucial layer between user input and the system’s execution.
 
 2. **Avoiding Duplicates with Tutorial and Student Validation**:
-We ensure that duplicate students or non-existent tutorials are caught early in ModelManager. This provides immediate feedback and prevents inconsistent states in the data model.
+   We ensure that duplicate students or non-existent tutorials are caught early in `ModelManager`. This provides immediate feedback and prevents inconsistent states in the data model.
 
-* **Benefit**: Validation at the model level ensures the integrity of the data.
-* **Challenge**: This requires checks across multiple classes (such as TutorialList and Student) to ensure consistency without impacting performance.
+    * **Benefit**: Validation at the model level ensures the integrity of the data.
+    * **Challenge**: This requires checks across multiple classes (such as `TutorialList` and `Student`) to ensure consistency without impacting performance.
 
 
 #### Add Student
@@ -250,7 +250,7 @@ promoting cleaner, more maintainable code.
 The TrackMate application empowers users to update the details of existing students easily. With the Edit feature, users can modify a student's name, student ID, or assigned tutorial
 ID. This functionality ensures that student records remain accurate and up-to-date within the application, reflecting any changes in student information or tutorial assignments.
 
-### Feature's Architecture Design
+#### Feature's Architecture Design
 
 **Use of EditStudentDescriptor**: The EditStudentDescriptor is a static inner class within EditCommand that stores the details of the fields to edit. It allows for optional
 fields, meaning users can choose to update any combination of the student's attributes without affecting others.
@@ -324,7 +324,7 @@ keeping parsing, data encapsulation, and execution concerns separate.
 The TrackMate application allows users to remove students, tutorials, assignments, and attendance records efficiently. The Delete feature ensures
 that outdated or incorrect records can be cleaned up, maintaining the integrity and relevance of the data within the application.
 
-### Feature's Architecture Design
+#### Feature's Architecture Design
 
 1. **Centralized Parsing with DeleteCommandParser**: The parsing logic for delete commands is centralized in their respective parser classes (e.g., DeleteCommandParser, DeleteTutorialCommandParser, etc.). Each parser is responsible for interpreting
 the user's input, extracting necessary identifiers (like student index, tutorial ID, assignment title), and creating the appropriate delete command object.
