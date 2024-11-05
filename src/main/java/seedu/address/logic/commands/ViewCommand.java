@@ -36,30 +36,16 @@ public class ViewCommand extends Command {
         this.tele = tele.toLowerCase();
     }
 
-    /**
-     * Checks if telegram handle for this ViewCommand instance is at least 5
-     * characters long and that it contains no illegal characters. Otherwise
-     * throws relevant exception
-     * @throws CommandException
-     */
-    public void isValidHandle() throws CommandException {
-        if (!Telegram.isValidTelegramLength(this.tele)) {
-            throw new CommandException(Telegram.LENGTH_CONSTRAINTS);
-        } else if (!Telegram.isValidTelegram(this.tele)) {
-            throw new CommandException(Telegram.MESSAGE_CONSTRAINTS);
-        }
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        isValidHandle();
+        Telegram.isValidHandle(this.tele);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> p = lastShownList.stream().filter(person ->
                 person.getTelegram().value.toLowerCase().equals(this.tele)).toList();
         if (p.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TELEGRAM + this.tele);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TELEGRAM, "@" + this.tele));
         }
         Person person = p.get(0);
         return new CommandResult(MESSAGE_SUCCESS, true, person);
