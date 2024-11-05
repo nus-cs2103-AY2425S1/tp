@@ -16,7 +16,7 @@ import seedu.address.model.schedule.SameWeekAsDatePredicate;
 public class SeeScheduleCommand extends Command {
     public static final String COMMAND_WORD = "see";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": See your schedule for the week. "
-            + "Parameters: d/\n"
+            + "Parameters: d/dd-MM-YYYY\n"
             + "Example: " + COMMAND_WORD + " d/10-10-2024";
 
     public static final String MESSAGE_INVALID_DATE = "Date must be in the format DD-MM-YYYY.";
