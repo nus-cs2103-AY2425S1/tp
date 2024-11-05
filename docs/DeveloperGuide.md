@@ -906,7 +906,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
        Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-2024`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+    1. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
