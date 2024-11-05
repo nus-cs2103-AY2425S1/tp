@@ -238,7 +238,7 @@ addCustomer n/John Doe p/12345678 e/john@example.com a/456 Pastry Street i/Aller
 ```
 <img width="1492" alt="Screenshot 2024-10-24 at 6 50 40 PM" src="https://github.com/user-attachments/assets/3bcacbc0-9002-492d-9519-5cbaa4d214ab">
 
-### 2. **Add Supplier Command (WIP)**
+### 2. **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
@@ -325,19 +325,19 @@ removePastry Croissant
 
 
 ### 7. **Add CustomerOrder Command**
-Adds a customer order by providing the customer's phone number and the product IDs from the catalogue.
+Adds a customer order by providing the customer's name, phone number and the product IDs from the catalogue.
 
 ```bash
-addCustomerOrder p/PHONE_NUMBER r/REMARK o/PASTRYID [MORE_PASTRYIDs...] [n/NAME]
+addCustomerOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
 ```
 - **Parameters:**
-    - `PHONE_NUMBER`: The phone number of the customer.
-    - `REMARK`: Details of the order
-    - `PASTRYID`: One or more pastry IDs for the items being ordered in the pastry catalogue.
+    - `n/NAME`: The customer's name.
+    - `p/PHONE_NUMBER`: The phone number of the customer.
+    - `o/PRODUCTID`: One or more product IDs for the items being ordered.
 
 **Example:**
 ```bash
-addCustomerOrder p/98765432 r/Self-collection at 6pm o/1 1 2 3 n/John Doe
+addCustomerOrder n/John p/12345678 o/1 2 3
 ```
 <img width="1191" alt="Screenshot 2024-10-24 at 5 50 18 PM" src="https://github.com/user-attachments/assets/ebedf898-8319-497e-8f89-e32a9f62c3f3">
 
@@ -358,15 +358,15 @@ deleteCustomerOrder 1
 <img width="1194" alt="Screenshot 2024-10-24 at 5 51 01 PM" src="https://github.com/user-attachments/assets/a30d3276-7a26-4c12-8df7-364d76e7c9dc">
 
 ### 9. **Add SupplyOrder Command**
-Adds a supplier order by providing the supplier's phone number and the product IDs from the ingredient catalogue.
+Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
 ```bash
-addSupplyOrder p/PHONE_NUMBER r/REMARK o/INGREDIENTID [more INGREDIENTIDs...] [n/NAME]
+addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
 ```
 - **Parameters:**
-  - `PHONE_NUMBER`: The phone number of the supplier.
-  - `REMARK`: Details of the order
-  - `INGREDIENTID`: One or more ingredient IDs for the items being supplied in the ingredient catalogue.
+    - `n/NAME`: The supplier's name.
+    - `p/PHONE_NUMBER`: The phone number of the supplier.
+    - `o/PRODUCTID`: One or more product IDs for the items being supplied.
 
 **Example:**
 ```bash
