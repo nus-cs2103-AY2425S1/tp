@@ -92,6 +92,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
+* At least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL` must be provided to add a contact.
+
 <box type="tip" seamless>
 
 **Tip:** You can add multiple tags (or none at all).
