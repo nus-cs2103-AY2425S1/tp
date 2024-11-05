@@ -392,10 +392,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: Find Guests and Vendor with a particular field**
 
 **MSS**
-1. User requests to search for or filter entries (e.g., by category, name, RSVP status).
-2. System prompts for search or filter criteria.
-3. User provides the criteria.
-4. System displays the matching entries.
+1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
+2. User provides the criteria.
+3. System displays the matching Guest and Vendor entries.
 
    Use case ends.
 
