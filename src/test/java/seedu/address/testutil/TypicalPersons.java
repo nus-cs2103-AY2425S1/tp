@@ -30,11 +30,15 @@ import seedu.address.model.person.PersonBuilder;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-                                                          .withNric("S1234567A").withDateOfBirth("2000-01-01").withGender("F")
-                                                          .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                                                          .withNric("S1234567A")
+                                                          .withDateOfBirth("2000-01-01")
+                                                          .withGender("F")
+                                                          .withAddress("123, Jurong West Ave 6, #08-111")
+                                                          .withEmail("alice@example.com")
                                                           .withPhone("94351253")
                                                           .withPriority("HIGH")
-                                                          .withAppointments("Physio:2024-12-01:1500-1600", "Orthopedic:2024-12-01:1200-1300")
+                                                          .withAppointments("Physio:2024-12-01:1500-1600",
+                                                                            "Orthopedic:2024-12-01:1200-1300")
                                                           .withAllergies("Peanuts")
                                                           .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
