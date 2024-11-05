@@ -31,6 +31,10 @@ public class GroupListTest {
         assertThrows(IllegalArgumentException.class, () -> new Group(invalidGroupList));
     }
     @Test
+    void testIsEmpty() {
+        assertTrue(groupList.isEmpty());
+    }
+    @Test
     void testAddGroup_lowerCase_whenModifiable() {
         Group group = new Group("group 1");
         groupList.addGroup(group);
@@ -59,6 +63,12 @@ public class GroupListTest {
         groupList.addGroup(group1);
         groupList.addGroup(group2);
         assertEquals(1, groupList.getUnmodifiableGroups().size());
+    }
+    @Test
+    public void testSize() {
+        Group group = new Group("group 1");
+        groupList.addGroup(group);
+        assertEquals(1, groupList.size());
     }
     @Test
     void testMakeListUnmodifiable() {

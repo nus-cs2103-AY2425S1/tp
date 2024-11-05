@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.list.GroupList;
@@ -64,6 +65,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         GroupList groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
+
+        long inputGroups = argMultimap.countPrefixesOf(PREFIX_GROUP);
+
+        if (inputGroups > 1 && inputGroups > groupList.size()) {
+            throw new ParseException(Messages.MESSAGE_DUPLICATE_GROUPS);
+        }
 
         Comment comment = new Comment("");
 

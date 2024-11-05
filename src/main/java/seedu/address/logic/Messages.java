@@ -48,6 +48,8 @@ public class Messages {
             + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Attendance event '%1$s' not found.";
+    public static final String MESSAGE_DUPLICATE_GROUPS = "There are duplicate groups. "
+            + "Group names are treated as case insensitive ";
 
 
     /**
