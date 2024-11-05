@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <Label fx:id="header" style="-fx-font-weight: bold;" styleClass="label-bright" text="Vendors List" textFill="WHITE">
+   <Label fx:id="header" style="-fx-font-weight: bold;" styleClass="label-bright" text="Vendor List" textFill="WHITE">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
