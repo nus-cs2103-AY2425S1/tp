@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="ownerName" styleClass="cell_big_label" style="-fx-text-fill: white;" />
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="ownerName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-text-fill: white;" styleClass="cell_big_label" textOverrun="CLIP" wrapText="true" />
     <ListView fx:id="rentalInformationListView" VBox.vgrow="ALWAYS" />
 </VBox>

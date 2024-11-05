@@ -149,9 +149,9 @@ public class ModelManager implements Model {
         filteredClients.setPredicate(predicate);
 
         if (filteredClients.isEmpty()) {
-            updateVisibleRentalInformationList(List.of());
             setLastViewedClient(null);
         }
+        updateVisibleRentalInformationList(List.of());
     }
 
     @Override
