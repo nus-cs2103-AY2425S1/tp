@@ -275,12 +275,12 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public void deleteAllAssignments(EmployeeId targetEmployeeId) {
+        public boolean deleteAllAssignments(EmployeeId targetEmployeeId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteAllAssignments(ProjectId targetProjectId) {
+        public boolean deleteAllAssignments(ProjectId targetProjectId) {
             throw new AssertionError("This method should not be called.");
         }
     }

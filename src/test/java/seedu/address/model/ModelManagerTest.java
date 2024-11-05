@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
+import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.BENSON;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
@@ -215,28 +215,64 @@ public class ModelManagerTest {
                 modelManager.deleteAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
     }
 
+    // EP: valid project id, addressbook has 1 assignment
     @Test
-    public void deleteAllAssignment_assignmentWithProjectIdInAddressBook_deleteAllSuccess() {
+    public void deleteAllAssignment_assignmentWithProjectIdInAddressBookSingleAssignment_deleteAllSuccess() {
         modelManager.addAssignment(ALICE_ALPHA);
-        modelManager.deleteAllAssignments(ALPHA.getId());
+        assertTrue(modelManager.deleteAllAssignments(ALPHA.getId()));
         assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
     }
 
+    // EP: valid project id, addressbook has more than 1 assignment
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdInAddressBookMultipleAssignments_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        modelManager.addAssignment(BENSON_BETA);
+        assertTrue(modelManager.deleteAllAssignments(ALPHA.getId()));
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    // EP: invalid project id, addressbook is empty
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdNotInEmptyAddressBook_noError() {
+        assertFalse(modelManager.deleteAllAssignments(ALPHA.getId()));
+    }
+
+    // EP: invalid project id, addressbook is not empty
     @Test
     public void deleteAllAssignment_assignmentWithProjectIdNotInAddressBook_noError() {
-        assertDoesNotThrow(() -> modelManager.deleteAllAssignments(ALPHA.getId()));
+        modelManager.addAssignment(BENSON_BETA);
+        assertFalse(modelManager.deleteAllAssignments(ALPHA.getId()));
     }
 
+    // EP: valid employee id, addressbook has 1 assignment
     @Test
-    public void deleteAllAssignment_assignmentWithEmployeeIdInAddressBook_deleteAllSuccess() {
+    public void deleteAllAssignment_assignmentWithEmployeeIdInAddressBookSingleAssignment_deleteAllSuccess() {
         modelManager.addAssignment(ALICE_ALPHA);
-        modelManager.deleteAllAssignments(ALICE.getEmployeeId());
+        assertTrue(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
         assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
     }
 
+    // EP: valid employee id, addressbook has more than 1 assignment
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdInAddressBookMultipleAssignments_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        modelManager.addAssignment(BENSON_BETA);
+        assertTrue(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    // EP: invalid employee id, addressbook is empty
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdNotInEmptyAddressBook_noError() {
+        assertFalse(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+    }
+
+    // EP: invalid employee id, addressbook is not empty
     @Test
     public void deleteAllAssignment_assignmentWithEmployeeIdNotInAddressBook_noError() {
-        assertDoesNotThrow(() -> modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
+        modelManager.addAssignment(BENSON_BETA);
+        assertFalse(modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
     }
 
     @Test
