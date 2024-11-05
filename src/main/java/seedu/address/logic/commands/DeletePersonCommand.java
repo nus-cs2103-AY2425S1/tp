@@ -28,11 +28,24 @@ public class DeletePersonCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Gets the filtered list of persons in the model.
+     *
+     * @param model Model to get the list from.
+     * @return Filtered list of persons.
+     */
     @Override
     protected List<Person> getFilteredList(Model model) {
         return model.getFilteredPersonList();
     }
 
+    /**
+     * Deletes the person from the model.
+     *
+     * @param model Model to delete the person from.
+     * @param entity Person to be deleted.
+     * @throws CommandException If the entity is not a Person.
+     */
     @Override
     protected void deleteEntity(Model model, Object entity) throws CommandException {
         requireNonNull(entity);
@@ -42,16 +55,32 @@ public class DeletePersonCommand extends DeleteCommand {
         model.deletePerson((Person) entity);
     }
 
+    /**
+     * Gets the success message for deleting a person.
+     *
+     * @return Success message for deleting a person.
+     */
     @Override
     protected String getSuccessMessage() {
         return MESSAGE_DELETE_PERSON_SUCCESS;
     }
 
+    /**
+     * Gets the invalid index message for deleting a person.
+     *
+     * @return Invalid index message for deleting a person.
+     */
     @Override
     protected String getInvalidIndexMessage() {
         return Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
     }
 
+    /**
+     * Formats the person entity to be displayed.
+     *
+     * @param entity Entity to be formatted.
+     * @return Formatted entity.
+     */
     @Override
     protected String formatEntity(Object entity) {
         assert entity instanceof Person;

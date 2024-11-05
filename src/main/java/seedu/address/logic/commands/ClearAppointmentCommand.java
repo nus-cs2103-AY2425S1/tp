@@ -13,7 +13,7 @@ public class ClearAppointmentCommand extends ClearCommand {
         model.setAppointmentBook(new AppointmentBook());
     }
 
-    /*
+    /**
      * Returns success message to display upon adding entity.
      */
     protected String getSuccessMessage() {
@@ -21,7 +21,7 @@ public class ClearAppointmentCommand extends ClearCommand {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this || (other instanceof ClearAppointmentCommand);
+    public boolean equals(Object otherCommand) {
+        return (otherCommand instanceof ClearAppointmentCommand);
     }
 }

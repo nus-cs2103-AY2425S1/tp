@@ -15,15 +15,17 @@ public class ClearPersonCommand extends ClearCommand {
         model.setAddressBook(new AddressBook());
     }
 
-    /*
+    /**
      * Returns success message to display upon adding entity.
+     *
+     * @return success message
      */
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this || (other instanceof ClearPersonCommand);
+    public boolean equals(Object otherCommand) {
+        return (otherCommand instanceof ClearPersonCommand);
     }
 }

@@ -40,40 +40,68 @@ public class AddPersonCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final PersonDescriptor toAdd;
+    private final PersonDescriptor personDescriptor;
     private int personId;
 
     /**
      * Creates an AddPersonCommand to add the specified {@code Person}
+     *
+     * @param personDescriptorToAdd Person to add.
      */
-    public AddPersonCommand(PersonDescriptor personDescriptor) {
-        requireNonNull(personDescriptor);
-        toAdd = personDescriptor;
+    public AddPersonCommand(PersonDescriptor personDescriptorToAdd) {
+        requireNonNull(personDescriptorToAdd);
+        personDescriptor = personDescriptorToAdd;
     }
 
+    /**
+     * Checks if the entity being added to model already exists.
+     *
+     * @param model Model to check if entity exists in.
+     * @return True if entity already exists in model, false otherwise.
+     */
     @Override
     protected boolean alreadyExists(Model model) {
-        return model.hasPerson(toAdd);
+        return model.hasPerson(personDescriptor);
     }
 
+    /**
+     * Adds the entity to the model.
+     *
+     * @param model Model to add entity to.
+     */
     @Override
     protected void addEntity(Model model) {
-        personId = model.addPerson(toAdd).getPersonId();
+        personId = model.addPerson(personDescriptor).getPersonId();
     }
 
+    /**
+     * Returns the success message of the command.
+     *
+     * @return Success message of the command.
+     */
     @Override
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
     }
 
+    /**
+     * Returns the message to display when the person ID does not exist.
+     *
+     * @return Message to display when the person ID does not exist.
+     */
     @Override
     protected String getDuplicateEntityMessage() {
         return MESSAGE_DUPLICATE_PERSON;
     }
 
+    /**
+     * Formats the entity for displaying in the success message.
+     *
+     * @return Formatted entity.
+     */
     @Override
     protected String formatEntity() {
-        return Messages.formatPerson(toAdd);
+        return Messages.formatPerson(personDescriptor);
     }
 
     @Override
@@ -87,13 +115,13 @@ public class AddPersonCommand extends AddCommand {
             return false;
         }
 
-        return toAdd.equals(otherAddPersonCommand.toAdd);
+        return personDescriptor.equals(otherAddPersonCommand.personDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("toAdd", toAdd)
+            .add("personDescriptor", personDescriptor)
             .toString();
     }
 }

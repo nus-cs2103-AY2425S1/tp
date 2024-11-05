@@ -43,7 +43,7 @@ public class AddAppointmentCommand extends AddCommand {
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "This person ID does not belong to anyone in the address book";
 
-    private final AppointmentDescriptor toAdd;
+    private final AppointmentDescriptor appointmentDescriptor;
     private final int personId;
 
     /**
@@ -51,20 +51,26 @@ public class AddAppointmentCommand extends AddCommand {
      */
     public AddAppointmentCommand(AppointmentDescriptor appointmentDescriptor, int personId) {
         requireAllNonNull(appointmentDescriptor, personId);
-        this.toAdd = appointmentDescriptor;
+        this.appointmentDescriptor = appointmentDescriptor;
         this.personId = personId;
     }
 
-    /*
+    /**
      * Checks if the entity being added to model already exists.
+     *
+     * @param model Model to check if entity already exists in.
+     * @return True if entity already exists in model, false otherwise.
      */
     @Override
     protected boolean alreadyExists(Model model) {
-        return model.hasAppointment(toAdd);
+        return model.hasAppointment(appointmentDescriptor);
     };
 
-    /*
+    /**
      * Adds the entity to the model.
+     *
+     * @param model Model to add entity to.
+     * @throws CommandException If the person ID does not exist in the model.
      */
     @Override
     protected void addEntity(Model model) throws CommandException {
@@ -72,27 +78,33 @@ public class AddAppointmentCommand extends AddCommand {
         if (personOptional.isEmpty()) {
             throw new CommandException(getPersonIdDoesNotExistMessage());
         }
-        model.addAppointment(personOptional.get(), toAdd);
+        model.addAppointment(personOptional.get(), appointmentDescriptor);
     };
 
-    /*
+    /**
      * Returns success message to display upon adding entity.
+     *
+     * @return Success message.
      */
     @Override
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
     };
 
-    /*
+    /**
      * Returns the message to display when there is a duplicate.
+     *
+     * @return Duplicate message.
      */
     @Override
     protected String getDuplicateEntityMessage() {
         return MESSAGE_DUPLICATE_APPOINTMENT;
     };
 
-    /*
+    /**
      * Returns the message to display when the person ID does not exist.
+     *
+     * @return Person ID does not exist message.
      */
     protected String getPersonIdDoesNotExistMessage() {
         return MESSAGE_PERSON_NOT_FOUND;
@@ -100,10 +112,12 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Formats the entity for displaying in the success message.
+     *
+     * @return Formatted entity.
      */
     @Override
     protected String formatEntity() {
-        return Messages.formatAppointment(toAdd);
+        return Messages.formatAppointment(appointmentDescriptor);
     };
 
     @Override
@@ -129,13 +143,13 @@ public class AddAppointmentCommand extends AddCommand {
             return false;
         }
 
-        return toAdd.equals(otherAddAppointmentCommand.toAdd);
+        return appointmentDescriptor.equals(otherAddAppointmentCommand.appointmentDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("appointmentDescriptor", appointmentDescriptor)
                 .toString();
     }
 }

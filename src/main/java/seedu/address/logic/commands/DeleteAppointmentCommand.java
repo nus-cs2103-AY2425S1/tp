@@ -27,11 +27,23 @@ public class DeleteAppointmentCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Gets the filtered list of appointments in the model.
+     *
+     * @param model Model to get the list from.
+     * @return Filtered list of appointments.
+     */
     @Override
     protected List<Appointment> getFilteredList(Model model) {
         return model.getFilteredAppointmentList();
     }
 
+    /**
+     * Deletes the appointment from the model.
+     *
+     * @param model Model to delete the appointment from.
+     * @param entity Appointment to be deleted.
+     */
     @Override
     protected void deleteEntity(Model model, Object entity) {
         requireNonNull(entity);
@@ -41,16 +53,32 @@ public class DeleteAppointmentCommand extends DeleteCommand {
         model.deleteAppointment((Appointment) entity);
     }
 
+    /**
+     * Gets the success message for deleting an appointment.
+     *
+     * @return Success message for deleting an appointment.
+     */
     @Override
     protected String getSuccessMessage() {
         return MESSAGE_DELETE_APPOINTMENT_SUCCESS;
     }
 
+    /**
+     * Gets the invalid index message for deleting an appointment.
+     *
+     * @return Invalid index message for deleting an appointment.
+     */
     @Override
     protected String getInvalidIndexMessage() {
         return Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX;
     }
 
+    /**
+     * Formats the appointment entity to be displayed.
+     *
+     * @param entity Appointment entity to be displayed.
+     * @return Formatted appointment entity.
+     */
     @Override
     protected String formatEntity(Object entity) {
         assert entity instanceof Appointment;
