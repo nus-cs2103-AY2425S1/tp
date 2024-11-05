@@ -53,8 +53,7 @@ public class GradeAssignmentCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + INVALID_INDEX
                 + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_SCORE + VALID_SCORE;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                GradeAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -62,8 +61,7 @@ public class GradeAssignmentCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_INDEX + INVALID_INDEX
                 + " " + PREFIX_ASSIGNMENT_SCORE + VALID_SCORE;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                GradeAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
@@ -71,8 +69,7 @@ public class GradeAssignmentCommandParserTest {
         String userInput = " " + PREFIX_STUDENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_FIRST_ASSIGNMENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_SCORE + INVALID_SCORE;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                GradeAssignmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_SCORE);
     }
 
     @Test
