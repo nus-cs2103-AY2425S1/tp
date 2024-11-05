@@ -66,11 +66,15 @@ public class FilterCommandParserTest {
         assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
         age = " b/ 10-fifty";
         assertParseFailure(parser, age, String.format(INCORRECT_AGE));
+        age = " b/ 100-0";
+        assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
 
         // invalid appointment range
         String appointment = " ap/ 01/01/2024-01-01-2026";
         assertParseFailure(parser, appointment, String.format(INCORRECT_RANGE));
-        appointment = " ap/ 01/01/2025-12/30/2025";
+        appointment = " ap/ 01/01/2025-01/01/2024";
+        assertParseFailure(parser, appointment, String.format(INCORRECT_RANGE));
+        appointment = " ap/ 01/01/2025-12/30/2025"; // incorrect date format
         assertParseFailure(parser, appointment, String.format(INCORRECT_DATE_FORMAT));
 
 

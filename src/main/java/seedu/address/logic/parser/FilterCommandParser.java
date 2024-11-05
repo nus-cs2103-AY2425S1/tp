@@ -82,6 +82,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         try {
             LocalDate lower = LocalDate.parse(splittedRange[0].trim(), FORMATTER);
             LocalDate upper = LocalDate.parse(splittedRange[1].trim(), FORMATTER);
+            if (lower.isAfter(upper)) {
+                throw new ParseException(String.format(INCORRECT_RANGE));
+            }
             return new Range<LocalDate>(lower, upper);
         } catch (DateTimeParseException e) {
             throw new ParseException(String.format(INCORRECT_DATE_FORMAT));
@@ -105,6 +108,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         try {
             int lower = Integer.parseInt(splittedRange[0].trim());
             int upper = Integer.parseInt(splittedRange[1].trim());
+            if (lower > upper) {
+                throw new ParseException(String.format(INCORRECT_RANGE));
+            }
             return new Range<Integer>(lower, upper);
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(INCORRECT_AGE));

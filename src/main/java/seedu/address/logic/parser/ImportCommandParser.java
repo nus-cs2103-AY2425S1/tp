@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -158,50 +159,22 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * @throws CommandException If the Note fields do not follow the expected format.
      */
     private void validateNoteField(JsonNode noteNode) throws CommandException {
-        if (!noteNode.isObject()) {
-            throw new CommandException(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_NOTE);
-        }
+        // Validate each optional array in note: appointments, remarks, medication
+        validateNoteArray(noteNode, "appointments", Note::isValidAppointment);
+        validateNoteArray(noteNode, "remark", Note::isValidString);
+        validateNoteArray(noteNode, "medication", Note::isValidString);
+    }
 
-        // Validates Note medication
-        JsonNode medicationNode = noteNode.get("medication");
-        if (medicationNode != null) {
-            if (!medicationNode.isArray()) {
+    private void validateNoteArray(JsonNode noteNode, String fieldName, Function<String, Boolean> validationFunction)
+            throws CommandException {
+        JsonNode arrayNode = noteNode.get(fieldName);
+        if (arrayNode != null) {
+            if (!arrayNode.isArray()) {
                 throw new CommandException(String.format(
-                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "medication"));
+                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, fieldName));
             }
-
-            for (JsonNode medication : medicationNode) {
-                if (!Note.isValidString(medication.asText())) {
-                    throw new CommandException(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_FORMAT);
-                }
-            }
-        }
-
-        // Validates Note appointments
-        JsonNode appointmentsNode = noteNode.get("appointments");
-        if (appointmentsNode != null) {
-            if (!appointmentsNode.isArray()) {
-                throw new CommandException(String.format(
-                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "appointments"));
-            }
-
-            for (JsonNode appointment : appointmentsNode) {
-                if (!Note.isValidAppointment(appointment.asText())) {
-                    throw new CommandException(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_FORMAT);
-                }
-            }
-        }
-
-        // Validates Note remark
-        JsonNode remarkNode = noteNode.get("remark");
-        if (remarkNode != null) {
-            if (!remarkNode.isArray()) {
-                throw new CommandException(String.format(
-                        ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_OPTIONAL, "remark"));
-            }
-
-            for (JsonNode remark : remarkNode) {
-                if (!Note.isValidString(remark.asText())) {
+            for (JsonNode element : arrayNode) {
+                if (!validationFunction.apply(element.asText())) {
                     throw new CommandException(ImportCommand.MESSAGE_FILE_FORMAT_FAIL_INVALID_FORMAT);
                 }
             }

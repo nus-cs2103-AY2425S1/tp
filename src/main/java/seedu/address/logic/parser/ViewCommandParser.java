@@ -26,16 +26,20 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        try {
+        if (isNumber(trimmedArgs)) {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new ViewCommand(index);
-        } catch (ParseException pe) {
-            try {
-                Name name = ParserUtil.parseName(trimmedArgs);
-                return new ViewCommand(name);
-            } catch (ParseException pe2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-            }
         }
+
+        if (Name.isValidName(trimmedArgs)) {
+            Name name = ParserUtil.parseName(trimmedArgs);
+            return new ViewCommand(name);
+        }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+
+    }
+
+    private boolean isNumber(String index) {
+        return index.matches("-?\\d+");
     }
 }
