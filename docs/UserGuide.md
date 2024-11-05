@@ -311,19 +311,29 @@ After entering the `list` command, all persons stored in the address book will b
 
 The `find` command allows you to list persons by their names, [Class IDs](#class-id), or [payment status](#payment-status) (paid/unpaid).
 
-**[Command Format](#command-format):**
-- **By Name:** `find n/NAME [MORE_NAMES]`
-- **By [Class ID](#class-id):** `find c/CLASSID [MORE_CLASSIDS]`
-- **By Name and [Class ID](#class-id):** `find n/NAME [MORE_NAMES] c/CLASSID [MORE_CLASSIDS]`
-- **By Payment Date:** `find m/YEAR-MONTH` – Finds people who have completed payment for the specified month and year (e.g., `find m/2024-10` to find those who paid in October 2024).
-- **By Unpaid Status:** `find !m/YEAR-MONTH` – Finds people who have **not** completed payment for the specified month and year (e.g., `find !m/2024-10` to find those who haven’t paid in October 2024).
+**[Command Format](#command-format):** `find`
+- **By Name Prefix:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES]`
+- **By Phone Number Prefix:** `find p/PHONE_PREFIX [MORE_PHONE_PREFIXES]`
+- **By Address Prefix:** `find a/ADDRESS_PREFIX [MORE_ADDRESS_PREFIXES]`
+- **By Email Prefix:** `find e/EMAIL_PREFIX [MORE_EMAIL_PREFIXES]`
+- **By Fees (Exact Match):** `find f/FEES [MORE_FEES]`
+- **By Class ID:** `find c/CLASSID [MORE_CLASSIDS]`
+- **By Months Paid:** `find mp/YEAR-MONTH [MORE_YEARS-MONTHS]`
+- **By Months Not Paid:** `find !mp/YEAR-MONTH [MORE_YEARS-MONTHS]`
 
-* The search is case-insensitive. e.g., `kim` will match `Kim`.
-* The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
-* Only the name is searched when using `n/` format.
-* Partially matched words will be matched, e.g., `Han` will match `Hans`.
-* find `n/KEYWORD c/KEYWORD2` will match persons with names containing `KEYWORD` and [class IDs](#class-id) containing `KEYWORD2`.
-* For payment search, use the format YEAR-MONTH (e.g., m/2024-10).
+
+**Examples of Combined Searches**
+- **By Name and Phone Prefix:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES] p/PHONE_PREFIX [MORE_PHONE_PREFIXES]`
+- **By Email and Address Prefix:** `find e/EMAIL_PREFIX [MORE_EMAIL_PREFIXES] a/ADDRESS_PREFIX [MORE_ADDRESS_PREFIXES]`
+- **By Name, Class ID, and Fees:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES] c/CLASSID [MORE_CLASSIDS] f/FEES [MORE_FEES]`
+
+**Notes:**
+- Searches are case-insensitive. For example, `serangoon` will match `Serangoon`.
+- The order of keywords does not matter. For example, `find n/Esther p/832` will match the same as `find p/832 n/Esther`.
+- Fuzzy matches are supported for **Name**, **Phone**, **Email**, **Address**, **Class ID**, and **Months Paid** fields, meaning partial matches will return results (e.g., `832` will match phone numbers starting with `832`).
+- **Exact match** is required for the **Fees** field, so `find f/350` will only return results with an exact fee of 350.
+- Only individuals matching all specified criteria will be included in the search results.
+
 
 **Example Usage:** `find n/Kim`
 
