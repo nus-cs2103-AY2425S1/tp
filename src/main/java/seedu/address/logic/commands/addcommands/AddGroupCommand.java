@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -31,7 +33,8 @@ public class AddGroupCommand extends Command {
         + PREFIX_GROUP_NAME + "Group 1 ";
 
     public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group detected";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) entered, only 1 will be added:";
+    public static final String MESSAGE_GROUP_EXISTS_IN_MODEL = "Group(s) already exists in model";
 
     private final List<Group> toAdd;
 
@@ -47,13 +50,18 @@ public class AddGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         String resultMessage = "";
-        if (toAdd.size() > 1) {
+        int count = 0;
+        Stream<Group> checkForDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1).distinct();
+        long numDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1).distinct().count();
+        String duplicateMessage = checkForDuplicates.map(a -> a.getGroupName().getGroupName()).reduce(
+                MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y);
+        List<Group> noDuplicateGroupList = toAdd.stream().distinct().toList();
+        if (noDuplicateGroupList.size() > 1) {
             resultMessage += "\n";
         }
-        int count = 0;
-        for (Group g: toAdd) {
+        for (Group g: noDuplicateGroupList) {
             if (model.hasGroup(g)) {
-                throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+                throw new CommandException(MESSAGE_GROUP_EXISTS_IN_MODEL);
             }
             count++;
             resultMessage += Messages.format(g);
@@ -65,6 +73,10 @@ public class AddGroupCommand extends Command {
         model.updateFilteredGroupList(x ->
                 toAdd.stream().anyMatch(y -> y.getGroupName().equals(x.getGroupName())));
         model.setStateGroups();
+        if (numDuplicates > 0) {
+            return new CommandResult(duplicateMessage
+                    + "\n" + String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
     }
 
