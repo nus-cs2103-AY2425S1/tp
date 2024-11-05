@@ -21,6 +21,6 @@
 
 * MediBase3 is built with scalability in mind, allowing **doctors** to store and manage a large number of patient records easily and securely. The interface is user-friendly, with **clear and concise inputs** for adding or modifying patient data.
 
-* The system ensures **data accuracy** and prevents duplicate entries by using NRIC as a unique identifier for each patient.ystem ensures **data accuracy** and prevents duplicate entries by using NRIC as a unique identifier for each patient.
+* The system ensures **data accuracy** and prevents duplicate entries by using NRIC as a unique identifier for each patient.
 
 * For more detailed documentation on usage and features, please refer to the [MediBase3 Product Website](https://ay2425s1-cs2103t-f12-3.github.io/tp/).
