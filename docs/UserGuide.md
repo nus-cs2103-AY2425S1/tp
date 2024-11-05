@@ -62,9 +62,9 @@ Throughout this guide, you'll encounter several symbols.
 Refer to these symbols as you explore the guide.
 Each provides quick insights or warnings that can make your experience smoother:
 
-- [💡 **Tip**]: Useful information to enhance your experience.
-- [❗ **Note**]: Important information you should be aware of.
-- [⚠️ **Caution**]: Critical information to prevent potential issues.
+- [**Tip**]: Useful information to enhance your experience.
+- [**Note**]: Important information you should be aware of.
+- [**Caution**]: Critical information to prevent potential issues.
 
 ---
 ## Quick Start
@@ -76,11 +76,11 @@ Each provides quick insights or warnings that can make your experience smoother:
         - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
         - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
 
-[❗ **Note**]:If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
+[**Note**]:If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
 2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.3).
 
 ![downloadPage.png](images%2FdownloadPage.png)
-[💡 **Tip**] To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
+[**Tip**] To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
 
 
 3. **Set Up Home Folder**: Copy the `TalentSG.jar` file to the Desktop to launch.
@@ -95,14 +95,14 @@ Each provides quick insights or warnings that can make your experience smoother:
       java -jar TalentSg.jar
       ```
       ![launch instruction.png](images%2Flaunch%20instruction.png)
-[⚠️ **Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error.
+[⚠**Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error.
    
 <br>🎉A GUI similar to the one below should appear in a few seconds!🎉<br>
 
 
 <img src="images/successimage.png" alt="imgidk.png" width="800">
 
-[❗ **Note**]:Note how the app contains some sample data.
+[**Note**]:Note how the app contains some sample data.
 
 
 
@@ -125,7 +125,7 @@ Each provides quick insights or warnings that can make your experience smoother:
 ## Features
 
 TalentSG provides a variety of features to help you manage candidates and job roles effectively.
-
+---
 ### Notes About the Command Format
 
 - **UPPER_CASE**: Parameters to be supplied by the user.
@@ -175,13 +175,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex
 - **DESIRED_ROLE**: Desired job position, should not be blank.
 - **Tags**: Optional and can be multiple, e.g. `t/friends t/owesMoney`.
 
-[⚠️ **Caution**]: The required information except tags cannot be empty.
+[**Caution**]: The required information except tags cannot be empty.
 
-**Example**:
+<u>**Example**</u>
 
 `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dr/Software Engineer s/Java, Python, C++ ex/Project Manager at Google from 2010-2020 st/Interviewed note/Super confident t/friends t/owesMoney`
 
-**Image Example**
+<u>**Image Example**</u>
 
 Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
 
@@ -190,7 +190,7 @@ After the add command ran:
 
 ![img_5.png](images/afteradd.png)
 
-[⚠️ **Caution**]: You cannot add the same candidate twice. (same name and phone)
+[**Caution**]: You cannot add the same candidate twice. (same name and phone)
 
 ---
 
@@ -200,7 +200,7 @@ Shows a list of all applicants in TalentSG.
 
 Format: `list`
 
-**Image Example**
+<u>**Image Example**</u>
 
 Command: ` list `
 
@@ -214,7 +214,7 @@ After the list command ran:
 <img src="images/afterlist.png" alt="afterlist.png" width="800">
 
 
-[💡 **Tip**]:Regularly listing all contacts helps you review the information stored and identify any duplicates or mistakes early.
+[**Tip**]:Regularly listing all contacts helps you review the information stored and identify any duplicates or mistakes early.
 
 
   ---
@@ -231,12 +231,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STAT
 - **At Least One Field**: Must be provided.
 - **Existing Values**: Will be replaced with new inputs.
 
-**Examples**:
+<u>**Examples**:<u>
 
 - `edit 1 p/91234567 e/johndoe@example.com`: Updates phone and email of the first candidate.
 - `edit 2 n/Betsy Crower t/`: Changes the name and clears all tags of the second candidate.
 
-**Image Example**
+<u>**Image Example**<u>
 
 Command: ` edit 1 st/Rejected note/arrogant `
 
@@ -249,7 +249,7 @@ After the edit command ran:
 <img src="images/afteredit.png" alt="afteredit.png" width="800">
 
 
-[⚠️ **Caution**]: You cannot edit a candidate to be a duplicate of another existing candidate.
+[**Caution**]: You cannot edit a candidate to be a duplicate of another existing candidate.
 
 ---
 
@@ -266,14 +266,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+<u>Examples:<u>
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 
-[⚠️ **Caution**]:  If you search for "Han," contacts named "Hans" will not appear in the results. Always search by full words.
+[**Caution**]:  If you search for "Han," contacts named "Hans" will not appear in the results. Always search by full words.
 
-**Image Example**
+<u>**Image Example**<u>
 
 Command: ` find John Stanley `
 
@@ -296,12 +296,12 @@ Removes a candidate from TalentSG.
 - **INDEX**: Refers to the candidate's number in the current list.
 - **Positive Integer**: Must be 1, 2, 3, etc.
 
-**Examples**:
+<u>**Examples**:<u>
 
 - `list` followed by `delete 2`: Deletes the second candidate.
 - `find Betsy` followed by `delete 1`: Deletes the first candidate in the search results.
 
-**Image Example**
+<u>**Image Example**<u>
 
 Command: ` delete 2 `
 
@@ -313,7 +313,7 @@ After the delete command ran:
 <img src="images/afterdelete.png" alt="afterdelete.png" width="800">
 
 
-[⚠️ **Caution**]: Deleted entries cannot be recovered.
+[**Caution**]: Deleted entries cannot be recovered.
 
 ---
 
@@ -328,12 +328,12 @@ Filters candidates based on their status.
 - **Case-Insensitive**: The search is case-insensitive.
 - **Available Statuses**: Active, Shortlisted, Hired, etc.
 
-**Examples**:
+<u>**Examples**:<u>
 
 - `filter st/Active`: Displays all active candidates.
 - `filter st/Shortlisted`: Shows candidates marked as shortlisted.
 
-**Image Example**
+<u>**Image Example**<u>
 
 Command: ` filter screening `
 
@@ -353,7 +353,7 @@ Removes all candidates from TalentSG.
 
 **Format**: `clear`
 
-**Image Example**
+<u>**Image Example**<u>
 
 Before the clear command ran:
 <img src="images/beforeclear.png" alt="beforeclear.png" width="800">
@@ -362,7 +362,7 @@ Before the clear command ran:
 After the clear command ran:
 <img src="images/afterclear.png" alt="afterclear.png" width="800">
 
-[⚠️ **Caution**]: Clearing all entries is irreversible. Make sure you have a backup if you want to retain the data for future reference.
+[**Caution**]: Clearing all entries is irreversible. Make sure you have a backup if you want to retain the data for future reference.
 
 ---
 
@@ -372,7 +372,7 @@ Closes the TalentSG application.
 
 **Format**: `exit`
 
-**Image Example**
+<u>**Image Example**<u>
 
 Running the exit command:
 
@@ -390,13 +390,13 @@ Data is automatically saved in the hard disk after any command that changes the 
 
 Advanced users can edit the data file located at `[JAR file location]/data/addressbook.json`.
 
-[⚠️ **Caution**]:
+[**Caution**]:
 
 - If your changes to the data file make its format invalid, TalentSG will discard all data and start with an empty data file at the next run.
 - It is recommended to take a backup of the file before editing it.
 - Certain edits can cause TalentSG to behave unexpectedly (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
----
+
 ---
 
 
@@ -432,7 +432,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command ## Command Summary
+## Command Summary
 
 
 | Action     | Format, Examples                                                                                                                                                                                                            |
