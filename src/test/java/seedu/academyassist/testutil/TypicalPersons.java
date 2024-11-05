@@ -5,6 +5,8 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_ADDRESS_B
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_IC_ALICE;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_IC_AMY;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -13,6 +15,8 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_STUDENT_I
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_YEAR_GROUP_AMY;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_YEAR_GROUP_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,11 +73,12 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withAddress(VALID_ADDRESS_AMY).withEmail(VALID_EMAIL_AMY)
             .withPhone(VALID_PHONE_AMY).withStudentId(VALID_STUDENT_ID_AMY)
-            .withSubjects(VALID_SUBJECT_AMY).build();
+            .withSubjects(VALID_SUBJECT_AMY).withIc(VALID_IC_AMY).withYearGroup(VALID_YEAR_GROUP_AMY)
+            .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withAddress(VALID_ADDRESS_BOB).withEmail(VALID_EMAIL_BOB)
+            .withAddress(VALID_ADDRESS_BOB).withIc(VALID_IC_BOB).withEmail(VALID_EMAIL_BOB)
             .withPhone(VALID_PHONE_BOB).withStudentId(VALID_STUDENT_ID_BOB)
-            .withSubjects(VALID_SUBJECT_BOB).build();
+            .withSubjects(VALID_SUBJECT_BOB).withYearGroup(VALID_YEAR_GROUP_BOB).build();
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
