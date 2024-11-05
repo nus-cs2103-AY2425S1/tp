@@ -164,7 +164,29 @@ public interface Model {
      */
     void updatePersonInWedding(Person personToEdit, Person editedPerson);
 
-    Person personWithAllTagsRemoved(Person personToDelete, Model model);
+    /**
+     * Removes all tags from a person and removes the person from any weddings related to those tags.
+     *
+     * @param personToEdit the person whose tags will be removed.
+     * @param model        the current model containing the necessary wedding address book.
+     */
+    Person personWithAllTagsRemoved(Person personToDelete);
 
-    void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> tagsInBoth);
+    /**
+     * Removes the person from the participant list of weddings that correspond to the specified tag(s).
+     *
+     * @param editedPerson Person whose specified tags have been deleted from.
+     * @param model        current Model containing necessary wedding address book.
+     * @param editedTags   Set of tags that exist as a wedding as well.
+     */
+    void deletePersonInWedding(Person editedPerson, Set<Tag> tagsInBoth);
+
+    /**
+     * Gets a list of weddings whose name matches that of the tags in the set.
+     *
+     * @param model current Model containing the necessary wedding address book.
+     * @param tags  Set of tags input by the user.
+     * @return List of weddings that match the tag.
+     */
+    List<Wedding> getWeddingFromTags(Set<Tag> tags);
 }
