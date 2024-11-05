@@ -79,7 +79,7 @@ public class ImportCommand extends Command {
             throw new CommandException("Error reading from the CSV file path: " + e.getMessage()
                 + "\nPlease check file path provided again");
         } catch (DuplicatePersonException e) {
-            throw new CommandException("Error reading from the CSV file" + e.getMessage()
+            throw new CommandException("Error reading from the CSV file " + e.getMessage()
                 + "\nPlease ensure that there are no duplicate person in the CSV file");
         } catch (CsvValidationException | CommandException e) {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());

@@ -140,4 +140,19 @@ public class ImportCommandTest {
             + "There is no person data present";
         assertCommandFailure(command, model, expectedMsg);
     }
+
+    /**
+     * Tests the execution of an import command with a CSV file containing duplicate persons,
+     * expecting failure. Verifies that the command fails with the expected error message
+     * indicating that duplicate persons are present.
+     */
+    @Test
+    public void duplicatePersonExecution_fail() {
+        String projectDir = System.getProperty("user.dir");
+        String filePath = projectDir + "/src/test/data/duplicatePerson.csv";
+        ImportCommand command = new ImportCommand(filePath);
+        String expectedMsg = "Error reading from the CSV file " + "Operation would result in duplicate persons"
+            + "\nPlease ensure that there are no duplicate person in the CSV file";
+        assertCommandFailure(command, model, expectedMsg);
+    }
 }
