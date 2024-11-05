@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.TypicalPersons.JOHN;
 
 import org.junit.jupiter.api.Test;
@@ -176,4 +174,84 @@ class EditwCommandTest {
                 result.getFeedbackToUser());
     }
 
+    @Test
+    void equals_selfAndOtherTypes_returnsExpectedResults() {
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptor();
+        descriptor.setName(new Name("Wedding"));
+
+        // Test self-comparison (should return true)
+        assertEquals(descriptor, descriptor);
+
+        // Test comparison with a different type (should return false)
+        assertNotEquals(descriptor, new Object());
+
+        // Test comparison with null (should return false)
+        assertNotEquals(descriptor, null);
+    }
+
+    @Test
+    void equals_differentDescriptorsWithSameValues_returnsTrue() {
+        EditWeddingDescriptor descriptor1 = new EditWeddingDescriptor();
+        descriptor1.setName(new Name("Wedding"));
+        descriptor1.setDate(new Date("2024-12-25"));
+        descriptor1.setVenue(new Venue("Grand Ballroom"));
+
+        EditWeddingDescriptor descriptor2 = new EditWeddingDescriptor();
+        descriptor2.setName(new Name("Wedding"));
+        descriptor2.setDate(new Date("2024-12-25"));
+        descriptor2.setVenue(new Venue("Grand Ballroom"));
+
+        // Test equality for descriptors with the same values
+        assertEquals(descriptor1, descriptor2);
+    }
+
+    @Test
+    void equals_differentDescriptorsWithDifferentValues_returnsFalse() {
+        EditWeddingDescriptor descriptor1 = new EditWeddingDescriptor();
+        descriptor1.setName(new Name("WeddingJim"));
+
+        EditWeddingDescriptor descriptor2 = new EditWeddingDescriptor();
+        descriptor2.setName(new Name("WeddingNotJim"));
+
+        // Test inequality for descriptors with different values
+        assertNotEquals(descriptor1, descriptor2);
+    }
+
+    @Test
+    void isAnyFieldEdited_noFieldsSet_returnsFalse() {
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptor();
+        assertFalse(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    void isAnyFieldEdited_someFieldsSet_returnsTrue() {
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptor();
+        descriptor.setName(new Name("Wedding"));
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    void isAnyFieldEdited_allFieldsSet_returnsTrue() {
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptor();
+        descriptor.setName(new Name("Wedding"));
+        descriptor.setDate(new Date("2024-12-25"));
+        descriptor.setVenue(new Venue("Grand Ballroom"));
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    void createEditedWedding_optionalFieldsNotEdited() {
+        Wedding originalWedding = new Wedding(new Name("OriginalWedding"), new Client(JOHN), new Date("2024-10-01"),
+                new Venue("OriginalVenue"));
+
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptor();
+        descriptor.setName(new Name("UpdatedWedding"));
+
+        Wedding editedWedding = EditwCommand.createEditedWedding(originalWedding, descriptor);
+
+        // Ensure only the name is updated, and other fields remain unchanged
+        assertEquals("UpdatedWedding", editedWedding.getName().toString());
+        assertEquals("2024-10-01", editedWedding.getDate().toString());
+        assertEquals("OriginalVenue", editedWedding.getVenue().toString());
+    }
 }

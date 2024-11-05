@@ -76,7 +76,7 @@ public class EditwCommand extends Command {
      * Creates and returns a {@code Wedding} with the details of {@code weddingToEdit}
      * edited with {@code editWeddingDescriptor}.
      */
-    private static Wedding createEditedWedding(Wedding weddingToEdit, EditWeddingDescriptor descriptor) {
+    static Wedding createEditedWedding(Wedding weddingToEdit, EditWeddingDescriptor descriptor) {
         assert weddingToEdit != null;
 
         Name updatedName = descriptor.getName().orElse(weddingToEdit.getName());
