@@ -19,7 +19,7 @@ public class Email {
             + "The LOCAL_PART:\n"
             + "    - must not start or end with any special characters\n"
             + "    - must not contain consecutive periods (i.e. a..a)\n"
-            + "    - may contain consecutive special characters other than \".\" (i.e. a__a is allowed)."
+            + "    - may contain consecutive special characters other than periods (i.e. a__a is allowed).\n"
             + "2. This is followed by a '@' and then a DOMAIN_NAME. The DOMAIN_NAME is made up of domain labels "
             + "separated by periods.\n"
             + "The DOMAIN name:\n"
