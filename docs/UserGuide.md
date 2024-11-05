@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-  pageNav: 3
+  pageNav: 4
 ---
 
 # PlanPerfect User Guide
@@ -26,18 +26,18 @@ tasks done faster than traditional GUI apps.
 
 1. Download the latest `PlanPerfect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-2/tp/releases).
 
-1. Copy the downloadedfile to an empty folder called 'PlanPerfect' on your Desktop. This folder will store all your data and the necessary files for running the PlanPerfect application.
+1. Copy the downloaded file to an empty folder called 'PlanPerfect' on your Desktop. This folder will store all your data and the necessary files for running the PlanPerfect application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PlanPerfect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
       ![Ui](images/Ui.png)
    <box type="tip" seamless>
-   **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:**
-    1. Create an empty folder on your Desktop called 'PlanPerfect'.
-    2. Copy the PandaBot.jar file in this folder.
-    3. Open a command terminal, such as terminal on MacOS devices or Command Prompt on Windows devices.
-    4. Access the PlanPerfect folder by inputting `cd Desktop/PlanPerfect` and then hitting the Enter key.
-    5. Type `java -jar PlanPerfect.jar` to launch the PlanPerfect application
+   **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:** <br>
+    1. Create an empty folder on your Desktop called 'PlanPerfect'. <br>
+    2. Copy the PlanPerfect.jar file in this folder.<br>
+    3. Open a command terminal, such as terminal on MacOS devices or Command Prompt on Windows devices. <br>
+    4. Access the PlanPerfect folder by inputting `cd Desktop/PlanPerfect` and then hitting the Enter key. <br>
+    5. Type `java -jar PlanPerfect.jar` to launch the PlanPerfect application. <br>
     </box>
 1. On the bottom left of the screen is a list of sample weddings. On the bottom right is a list of sample contacts.
 1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -89,9 +89,9 @@ tasks done faster than traditional GUI apps.
 
 #### Viewing help : `help`
 
-Shows a message with basic usage instructions for PlanPerfect. The link to this user guide can be copied to the clipboard for more advanced support.
-
 Format: `help`
+
+Shows a message with basic usage instructions for PlanPerfect. The link to this user guide can be copied to the clipboard for more advanced support.
 
 ![help message](images/helpMessage.png)
 
@@ -100,9 +100,9 @@ Format: `help`
 ### Contact-related Features
 #### Adding a contact: `add`
 
-Adds a contact to the address book.
-
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
+
+Adds a contact to the address book.
 
 <box type="info" seamless>
 A contact can only have up to 6 tags (including 0). No two contacts can have the same phone number.
@@ -121,13 +121,15 @@ Format: `list`
 
 Shows a list of all contacts in the address book.
 
+* Use this command to return to the view of all your contacts after using commands such as `filter` and `view` that display a subset of contacts.
+
 <br><br/>
 
 #### Editing a contact : `edit`
 
-Edits an existing contact in the address book.
-
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+
+Edits an existing contact in the address book.
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -145,91 +147,91 @@ Examples:
 
 #### Tagging a contact: `tag`
 
-Adds one or more tags to a specific contact in the address book
-
 Format: `tag INDEX t/TAG1 TAG2 ...`
+
+Adds one or more tags to a specific contact in the address book.
 
 * Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * Tags specified in the command must be alphanumeric.
-* The user can specify multiple tags in the same command by separating the tags with a space.
+* You can specify multiple tags in the same command by separating the tags with a space.
 * Adding a tag to a contact who already has the tag will show an error message.
 
 Examples:
-* `tag 1 t/photographer` adds the tag 'photographer' to the contact at index 1
-* `tag 2 t/baker florist` adds the tags 'baker' and 'florist' to the contact at index 2
+* `tag 1 t/photographer` adds the tag 'photographer' to the contact at index 1.
+* `tag 2 t/baker florist` adds the tags 'baker' and 'florist' to the contact at index 2.
 
 <br><br/>
 
 #### Untagging a contact : `untag`
 
-Removes one or more tags from a specific contact in the address book.
-
 Format: `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all`
 
+Removes one or more tags from a specific contact in the address book.
+
 * Untags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
-* If the user only wants to remove specific tags from the contact, at least one tag to remove must be specified.
-* The user can remove multiple tags from a contact by separating them with a space.
-* The user can alternatively remove all tags associated with a contact by using `untag INDEX t/all`.
+* If you only wants to remove specific tags from the contact, at least one tag to remove must be specified.
+* You can remove multiple tags from a contact by separating them with a space.
+* Alternatively, you can remove all tags associated with a contact by using `untag INDEX t/all`.
 
 Examples:
-* `untag 1 t/florist designer` removes the tags 'florist' and 'designer' from the 1st contact in the current list
+* `untag 1 t/florist designer` removes the tags 'florist' and 'designer' from the 1st contact in the current list.
 * `untag 2 t/all` removes all tags from the 2nd contact in the current list.
 
 <br><br/>
 
 #### Listing all tags: `taglist`
 
+Format: `taglist`
+
 Lists the active tags across *all* contacts in the address book.
 'Active tag' refers to a tag that currently assigned to at least 1 contact in your PlanPerfect application.<br>
 
-Format: `taglist`
-
-* Lists active tags in alphabetical order
-* Useful to keep track of which tags you have used in order to maintain consistency
+* Lists active tags in alphabetical order.
+* Useful to keep track of which tags you have used in order to maintain consistency.
 
 <br></br>
 
 #### Locating contacts by name: `find`
 
-Finds contacts whose names contain any of the given keywords.
-
 Format: `find KEYWORD1 KEYWORD2 ...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+Finds contacts whose names contain any of the given keywords.
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh`, `David Li`.<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <br><br/>
 
 #### Filtering contacts by tag: `filter`
 
+Format: `filter t/TAG1 [TAG2 ...]`
+
 Filters contacts who are tagged with all of the given tags.
 
-Format: `filter t/TAG1 TAG2 ...`
-
-
 * Contacts matching all tags will be returned (i.e. `AND` search).
-* If used inside a wedding view, only contacts assigned to that wedding (with that tag) are displayed
+* The search for tags is case-insensitive. eg. filtering by tag `Photographer` will also show contacts tagged with `photographer`.
+* If used inside a wedding view, only contacts assigned to that wedding (with that tag) are displayed.
 
 Examples:
-* `filter t/foodCaterer bartender` returns all contacts tagged with both `foodCaterer` AND `bartender`
-* `filter t/foodCaterer` returns all contacts tagged with the tag `foodCaterer`<br>
+* `filter t/foodCaterer bartender` returns all contacts tagged with both `foodCaterer` AND `bartender`.
+* `filter t/foodCaterer` returns all contacts tagged with the tag `foodCaterer`.<br>
 
 <br><br/>
 
 #### Deleting a contact : `delete`
 
-Deletes the specified contact from the address book.
-
 Format: `delete INDEX`
+
+Deletes the specified contact from the address book.
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
@@ -253,9 +255,10 @@ Sorts the contacts in the current view in alphabetical order.
 
 Format: `clear`
 
-Confirms with the user whether they actually want to clear the address book, then clears all entries from the address 
-book only if the follow-up input is `yes` or `y` (case-insensitive). Any other input will result in the address book not 
-being cleared.
+Clears all entries in the address book.
+
+* After entering the `clear` command, a confirmation message will appear to ask you if you are sure about clearing the address book.
+* If you input `yes` or `y`, the address book will be cleared. If other input is entered, the address book will not be cleared.
 
 <br><br/>
 
@@ -274,7 +277,7 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
 
 * Running this command will create a new wedding in the wedding panel, allowing you to use its wedding index to execute relevant commands on that wedding.
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
-* Contact indexes must be valid in the context of the current view
+* Contact indexes must be valid in the context of the current view.
   <box type="warning" seamless>
   **IMPORTANT:**
   If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
@@ -289,10 +292,14 @@ Examples:
 
 Format: `view WEDDING_INDEX`
 
-* Displays contacts involved in the wedding at the specified `WEDDING_INDEX`.
+Displays contacts assigned to the wedding at the specified `WEDDING_INDEX`.
 
 Examples:
 * `view 2` displays a list of all contacts involved in the 2nd wedding on the wedding list.
+
+<box type="info" seamless>
+Note that using the `view` command to enter a wedding view will result in subsequent operations being performed relative to the current wedding view. See "General Notes" for more details.
+</box>
 
 <br><br/>
 
@@ -300,12 +307,13 @@ Examples:
 
 Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
-* Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
+Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
+
 * Assigning/Removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and `unassign` commands.
 
 <box type="warning" seamless>
 **Caution:**
-The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect
+The edited wedding name provided must not be the same as the name of an existing wedding.
 </box>
 
 Examples:
@@ -317,7 +325,8 @@ Examples:
 
 Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
-* Assigns contacts at the specified index's to the wedding at the specified `WEDDING_INDEX`.
+Assigns contacts at the specified index's to the wedding at the specified `WEDDING_INDEX`.
+
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
 Examples:
@@ -330,7 +339,8 @@ Examples:
 
 Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
-* Unassigns contacts at the specified index's from the wedding the user is currently viewing.
+Unassigns contacts at the specified index's from the wedding you are currently viewing.
+
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
 <box type="warning" seamless>
