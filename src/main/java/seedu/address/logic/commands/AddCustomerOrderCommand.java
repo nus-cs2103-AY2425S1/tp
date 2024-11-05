@@ -56,6 +56,13 @@ public class AddCustomerOrderCommand extends Command {
 
         PastryCatalogue pastryCatalogue = model.getPastryCatalogue();
 
+        // Check if all product IDs exist in the catalogue
+        for (Integer id : idList) {
+            if (pastryCatalogue.getProductById(id) == null) {
+                throw new CommandException("One or more specified pastries do not exist in the pastry catalogue.");
+            }
+        }
+
         List<Product> productList = idList.stream()
                                         .map(pastryCatalogue::getProductById)
                                         .filter(Objects::nonNull)

@@ -56,6 +56,13 @@ public class AddSupplyOrderCommand extends Command {
 
         IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
 
+        // Check if all product IDs exist in the catalogue
+        for (Integer id : idList) {
+            if (ingredientCatalogue.getProductById(id) == null) {
+                throw new CommandException("One or more specified ingredients do not exist in the ingredient catalogue.");
+            }
+        }
+
         List<Product> productList = idList.stream()
                                         .map(ingredientCatalogue::getProductById)
                                         .filter(Objects::nonNull)

@@ -17,6 +17,7 @@ public abstract class Order {
     private final List<? extends Product> items;
     private OrderStatus status;
     private final Person person;
+    private Person originalPerson;
     private final Remark remark;
 
     /**
@@ -31,7 +32,8 @@ public abstract class Order {
         this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
-        this.person = person;
+        this.person = new Person(person);
+        this.originalPerson = person;
         this.remark = remark;
     }
 
@@ -42,6 +44,14 @@ public abstract class Order {
      */
     public Person getPerson() {
         return person;
+    }
+
+    public Person getOriginalPerson() {
+        return originalPerson;
+    }
+
+    public void setOriginalPerson(Person person) {
+        this.originalPerson = person;
     }
 
     /**
