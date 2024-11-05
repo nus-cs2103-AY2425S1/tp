@@ -26,8 +26,16 @@ public class JsonSerializableAddressBookTest {
             "duplicateConcertAddressBook.json");
     private static final Path DUPLICATE_CONCERT_COONTACT_FILE = TEST_DATA_FOLDER.resolve(
             "duplicateConcertContactAddressBook.json");
-    private static final Path INVALID_CONCERT_CONTACT_FILE = TEST_DATA_FOLDER.resolve(
-            "invalidConcertContactAddressBook.json");
+    private static final Path INVALID_CONCERT_CONTACT_FILE_CONCERT = TEST_DATA_FOLDER.resolve(
+            "invalidConcertContactConcertAddressBook.json");
+    private static final Path INVALID_CONCERT_CONTACT_FILE_PERSON = TEST_DATA_FOLDER.resolve(
+            "invalidConcertContactPersonAddressBook.json");
+    private static final Path INVALID_CONCERT_FILE_DATE = TEST_DATA_FOLDER.resolve(
+            "invalidConcertDateAddressBook.json");
+    private static final Path INVALID_CONCERT_FILE_NAME = TEST_DATA_FOLDER.resolve(
+            "invalidConcertDateAddressBook.json");
+    private static final Path INVALID_CONCERT_FILE_ADDRESS = TEST_DATA_FOLDER.resolve(
+            "invalidConcertAddressAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -63,17 +71,45 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_duplicateConcertContact_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_CONCERT_COONTACT_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(
+                DUPLICATE_CONCERT_COONTACT_FILE, JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class,
-                JsonSerializableAddressBook.MESSAGE_DUPLICATE_CONCERT_CONTACT, dataFromFile::toModelType);
+                JsonSerializableAddressBook.MESSAGE_DUPLICATE_CONCERT_CONTACT,
+                dataFromFile::toModelType);
     }
 
     @Test
-    public void toModelType_invalidConcertContactFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_CONCERT_CONTACT_FILE,
-                JsonSerializableAddressBook.class).get();
+    public void toModelType_invalidConcertContactFileMissingConcert_throwsIllegalValueException()
+            throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(
+                INVALID_CONCERT_CONTACT_FILE_CONCERT, JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class,
-                JsonSerializableAddressBook.MESSAGE_INVALID_CONCERT_CONTACT, dataFromFile::toModelType);
+                JsonSerializableAddressBook.MESSAGE_INVALID_CONCERT_CONTACT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidConcertContactFileMissingPerson_throwsIllegalValueException()
+            throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(
+                INVALID_CONCERT_CONTACT_FILE_PERSON, JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class,
+                JsonSerializableAddressBook.MESSAGE_INVALID_CONCERT_CONTACT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidConcert_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_CONCERT_FILE_DATE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+
+        dataFromFile = JsonUtil.readJsonFile(INVALID_CONCERT_FILE_NAME,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+
+        dataFromFile = JsonUtil.readJsonFile(INVALID_CONCERT_FILE_ADDRESS,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 }
