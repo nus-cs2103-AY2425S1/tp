@@ -11,6 +11,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,14 +19,14 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
- * Schedules an appointment with a person in SocialBook.
+ * Adds an appointment with a person in the address book.
  */
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "adda";
+    public static final String COMMAND_WORD = "addappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Schedules an appointment with a person in SocialBook.\n"
+            + ": Adds an appointment with a person in the address book.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "yyyy-MM-dd "
             + PREFIX_FROM + "HH:mm "
@@ -35,7 +36,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_FROM + "16:00 "
             + PREFIX_TO + "18:00";
 
-    public static final String MESSAGE_SUCCESS = "New appointment added:\n%s";
+    public static final String MESSAGE_SUCCESS = "New appointment with %s added:\n%s";
 
     private final Index index;
     private final LocalDate date;
@@ -73,7 +74,9 @@ public class AddAppointmentCommand extends Command {
         checkForConflictingAppointments(model);
 
         model.addAppointment(appointment);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, appointment), true, false, false);
+
+        String feedback = String.format(MESSAGE_SUCCESS, person.getName(), Messages.format(appointment));
+        return new CommandResult(feedback, true, false, false);
     }
 
     private void checkForConflictingAppointments(Model model) throws CommandException {
@@ -89,6 +92,14 @@ public class AddAppointmentCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        model.deleteAppointment(appointment);
+        pastCommands.remove();
+        return String.format(UndoCommand.MESSAGE_UNDO_ADD_APPOINTMENT, appointment.name(),
+                Messages.format(appointment));
     }
 
     @Override

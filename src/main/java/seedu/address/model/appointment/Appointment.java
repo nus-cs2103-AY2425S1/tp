@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 
 /**
@@ -73,7 +74,11 @@ public record Appointment(Name name, LocalDate date, LocalTime startTime, LocalT
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %s – %s",
-                name, getFormattedDate(), getFormattedStartTime(), getFormattedEndTime());
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("date", date)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .toString();
     }
 }

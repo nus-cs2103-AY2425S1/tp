@@ -65,6 +65,11 @@ public class SchemeCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -77,10 +82,5 @@ public class SchemeCommand extends Command {
 
         SchemeCommand otherSchemeCommand = (SchemeCommand) other;
         return targetIndex.equals(otherSchemeCommand.targetIndex);
-    }
-
-    @Override
-    public String getCommandWord() {
-        return COMMAND_WORD;
     }
 }

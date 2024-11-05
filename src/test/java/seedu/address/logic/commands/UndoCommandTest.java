@@ -5,18 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_APPOINTMENT;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_CLEAR;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_COMMAND_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_APPOINTMENT;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT;
+import static seedu.address.testutil.TypicalPastCommands.ADDA_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPastCommands.ADD_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPastCommands.CLEAR_COMMAND_LAST;
+import static seedu.address.testutil.TypicalPastCommands.DELETEA_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPastCommands.DELETE_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPastCommands.EDIT_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPastCommands.EMPTY_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook2;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +33,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.testutil.TypicalPersons;
 
 public class UndoCommandTest {
@@ -41,10 +49,9 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoClearCommand() throws CommandException {
-        CLEAR_COMMAND_LAST.get(CLEAR_COMMAND_LAST.size() - 1).execute(model);
+        CLEAR_COMMAND_LAST.getCommandInputHistory().get(CLEAR_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(CLEAR_COMMAND_LAST);
-
         String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, MESSAGE_UNDO_CLEAR);
 
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
@@ -53,7 +60,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoAddCommand() throws CommandException {
-        ADD_COMMAND_LAST.get(ADD_COMMAND_LAST.size() - 1).execute(model);
+        ADD_COMMAND_LAST.getCommandInputHistory().get(ADD_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(ADD_COMMAND_LAST);
 
@@ -66,8 +73,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoDeleteCommand() throws CommandException {
-        DELETE_COMMAND_LAST.get(DELETE_COMMAND_LAST.size() - 1).execute(model);
-
+        DELETE_COMMAND_LAST.getCommandInputHistory().get(DELETE_COMMAND_LAST.getSize() - 1).execute(model);
         UndoCommand undoCommand = new UndoCommand(DELETE_COMMAND_LAST);
 
         String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS,
@@ -78,7 +84,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoEditCommand() throws CommandException {
-        EDIT_COMMAND_LAST.get(EDIT_COMMAND_LAST.size() - 1).execute(model);
+        EDIT_COMMAND_LAST.getCommandInputHistory().get(EDIT_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(EDIT_COMMAND_LAST);
 
@@ -86,6 +92,41 @@ public class UndoCommandTest {
                 String.format(MESSAGE_UNDO_EDIT, TypicalPersons.BENSON.getName()));
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
 
+    }
+
+    @Test
+    public void execute_undoAddAppointmentCommand() throws CommandException {
+        ADDA_COMMAND_LAST.getCommandInputHistory().get(ADDA_COMMAND_LAST.getSize() - 1).execute(model);
+
+        UndoCommand undoCommand = new UndoCommand(ADDA_COMMAND_LAST);
+        Appointment appointment = model.getFilteredAppointmentList().get(0);
+
+        String feedback = String.format(MESSAGE_UNDO_ADD_APPOINTMENT, appointment.name(),
+                Messages.format(appointment));
+        String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, feedback);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false, false);
+
+        assertCommandSuccess(undoCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_undoDeleteAppointmentCommand() throws CommandException {
+        Appointment testAppointment = new Appointment(TypicalPersons.BENSON.getName(),
+                LocalDate.of(2024, 12, 31),
+                LocalTime.of(14, 30), LocalTime.of(16, 30));
+        List<Appointment> temp = new ArrayList<>();
+        temp.add(testAppointment);
+        model = new ModelManager(getTypicalAddressBook2(), temp, new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), temp, new UserPrefs());
+        DELETEA_COMMAND_LAST.getCommandInputHistory().get(DELETEA_COMMAND_LAST.getSize() - 1).execute(model);
+        UndoCommand undoCommand = new UndoCommand(DELETEA_COMMAND_LAST);
+
+        String feedback = String.format(MESSAGE_UNDO_DELETE_APPOINTMENT, testAppointment.name(),
+                Messages.format(testAppointment));
+        String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, feedback);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false, false);
+
+        assertCommandSuccess(undoCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

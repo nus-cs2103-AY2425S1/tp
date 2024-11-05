@@ -84,7 +84,11 @@ public class AppointmentTest {
 
     @Test
     public void toStringMethod() {
-        String expected = "Alex Yeoh, Wednesday, October 30, 2024, 10:00 AM – 11:00 AM";
+        String expected = Appointment.class.getCanonicalName() + "{name="
+                + appointment.name() + ", date="
+                + appointment.date() + ", startTime="
+                + appointment.startTime() + ", endTime="
+                + appointment.endTime() + "}";
         assertEquals(expected, appointment.toString());
     }
 }

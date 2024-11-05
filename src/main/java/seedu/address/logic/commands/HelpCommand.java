@@ -37,6 +37,11 @@ public class HelpCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -50,8 +55,4 @@ public class HelpCommand extends Command {
         return usage.equals(otherHelpCommand.usage);
     }
 
-    @Override
-    public String getCommandWord() {
-        return COMMAND_WORD;
-    }
 }

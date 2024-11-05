@@ -76,6 +76,6 @@ public class SortCommand extends Command {
             return false;
         }
 
-        return this.parameter.equals(otherSortCommand.parameter);
+        return parameter.equals(otherSortCommand.parameter);
     }
 }

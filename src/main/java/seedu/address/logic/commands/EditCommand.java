@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -22,6 +23,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -62,7 +64,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -132,17 +134,19 @@ public class EditCommand extends Command {
                 updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now());
     }
 
-    public Person getUneditedPerson() {
-        return personToEdit;
-    }
-
-    public Person getEditedPerson() {
-        return editedPerson;
-    }
-
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        if (!editedPerson.isSamePerson(personToEdit)) {
+            model.updateAppointments(editedPerson.getName(), personToEdit.getName());
+        }
+        model.setPerson(editedPerson, personToEdit);
+        pastCommands.remove();
+        return String.format(MESSAGE_UNDO_EDIT, personToEdit.getName());
     }
 
     @Override

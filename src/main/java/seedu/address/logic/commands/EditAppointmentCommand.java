@@ -16,17 +16,18 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Edits the details of an existing appointment in SocialBook.
+ * Edits the details of an existing appointment in the appointment list.
  */
 public class EditAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "edita";
+    public static final String COMMAND_WORD = "editappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
             + "by the index number used in the displayed appointment list. "
@@ -39,7 +40,7 @@ public class EditAppointmentCommand extends Command {
             + PREFIX_FROM + "14:00 "
             + PREFIX_TO + "16:00";
 
-    public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited appointment:\n%s";
+    public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited appointment with %s:\n%s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -47,6 +48,8 @@ public class EditAppointmentCommand extends Command {
 
     private Appointment appointmentToEdit;
     private Appointment editedAppointment;
+
+    private int sourceIndex;
 
     /**
      * @param index of the appointment in the filtered appointment list to edit
@@ -78,12 +81,13 @@ public class EditAppointmentCommand extends Command {
 
         checkForConflictingAppointments(model);
 
-        int sourceIndex = lastShownList.getSourceIndex(index.getZeroBased());
+        sourceIndex = lastShownList.getSourceIndex(index.getZeroBased());
         model.setAppointment(sourceIndex, editedAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
 
-        return new CommandResult(
-                String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), true, false, false);
+        String feedback = String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment.name(),
+                Messages.format(editedAppointment));
+        return new CommandResult(feedback, true, false, false);
     }
 
     private Appointment createEditedAppointment() {
@@ -107,6 +111,14 @@ public class EditAppointmentCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        model.setAppointment(sourceIndex, appointmentToEdit);
+        pastCommands.remove();
+        return String.format(UndoCommand.MESSAGE_UNDO_EDIT_APPOINTMENT, appointmentToEdit.name(),
+                Messages.format(appointmentToEdit));
     }
 
     @Override

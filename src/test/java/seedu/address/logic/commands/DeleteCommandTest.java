@@ -40,8 +40,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_SECOND_MULTIPLE);
 
         String expectedMessage = String.format(MESSAGE_DELETE_PEOPLE_SUCCESS,
-                Messages.format(person1ToDelete) + "\n\n"
-                        + Messages.format(person2ToDelete));
+                person1ToDelete.getName() + "\n" + person2ToDelete.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new ArrayList<>(), new UserPrefs());
         expectedModel.deletePerson(person1ToDelete);
@@ -65,8 +64,7 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MULTIPLE);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_PEOPLE_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, personToDelete.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new ArrayList<>(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);

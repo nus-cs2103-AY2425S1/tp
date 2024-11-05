@@ -103,11 +103,20 @@ public interface Model {
      */
     void updateSortingOrder(Comparator<Person> comparator);
 
+    /** Returns an unmodifiable view of the appointment list */
+    List<Appointment> getAppointmentList();
+
     /**
      * Adds the given appointment.
      * {@code appointment} must not conflict with any existing appointments.
      */
     void addAppointment(Appointment appointment);
+
+    /**
+     * Adds the given appointment at the specified index.
+     * {@code appointment} must not conflict with any existing appointments.
+     */
+    void addAppointment(int index, Appointment appointment);
 
     /**
      * Replaces the appointment at the specified index with {@code appointment}.
@@ -120,14 +129,19 @@ public interface Model {
     void updateAppointments(Name oldName, Name newName);
 
     /**
-     * Deletes and returns the appointment at the specified index.
+     * Deletes the given appointment.
+     */
+    void deleteAppointment(Appointment appointment);
+
+    /**
+     * Deletes the appointment at the specified index and returns the deleted appointment.
      */
     Appointment deleteAppointment(int index);
 
     /**
-     * Deletes all appointments with the given name.
+     * Deletes all appointments with the given name and returns the deleted appointments.
      */
-    void deleteAppointments(Name name);
+    List<Appointment> deleteAppointments(Name name);
 
     /** Returns an unmodifiable view of the filtered appointment list */
     ObservableList<Appointment> getFilteredAppointmentList();

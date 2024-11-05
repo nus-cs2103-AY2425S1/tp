@@ -104,4 +104,14 @@ public class Messages {
         }
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code appointment} for display to the user.
+     */
+    public static String format(Appointment appointment) {
+        return String.format("Date: %s\nTime: %s – %s",
+                appointment.getFormattedDate(),
+                appointment.getFormattedStartTime(),
+                appointment.getFormattedEndTime());
+    }
 }
