@@ -284,41 +284,31 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### **Delete Client Command**
-    - **Format:** `delete n/<NAME>`
+    - **Format:** `delete <NAME>`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Deleting client `Bob`
       >
-      > **Input**:
+      > **Input**: `delete Bob`
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Successfully deleted Bob with the number: 91124444 and email: bobby123@gmail.com!
       >
       > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+    <br>
+    <div class="note" markdown="span">
+    Delete is case-insensitive: 
+    `delete Bob` = `delete BOB` = `delete bOb` 
+    </div>
+    <br>
+  
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Attempt to delete client `Bob7` who does not exist
       >
-      > **Input**:
+      > **Input**: `delete bob7`
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
       > ---
 
