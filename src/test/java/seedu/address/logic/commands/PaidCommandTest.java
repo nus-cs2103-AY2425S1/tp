@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_INSURANCE_PAYMENT;
-import static seedu.address.logic.commands.CommandTestUtil.EXPIRING_POLICY_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.NON_EXISTENT_POLICY_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
@@ -12,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIF
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
@@ -77,20 +74,6 @@ public class PaidCommandTest {
         PaidCommand paidCommand = new PaidCommand(outOfBoundIndex, VALID_POLICY_NAME_INVESTMENT);
 
         assertCommandFailure(paidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_policyExpiringSoon_throwsCommandException()
-            throws seedu.address.logic.commands.exceptions.CommandException {
-        Person personToUpdate = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Policy policyToUpdate = new Policy(EXPIRING_POLICY_NAME, VALID_DATE_1, VALID_DATE_2,
-                EXPIRING_INSURANCE_PAYMENT);
-        personToUpdate.assignPolicy(policyToUpdate);
-
-        PaidCommand paidCommand = new PaidCommand(INDEX_SECOND_PERSON, EXPIRING_POLICY_NAME);
-
-        assertCommandFailure(paidCommand, model, String.format(PaidCommand.MESSAGE_INVALID_PAYDATE,
-                EXPIRING_POLICY_NAME, personToUpdate.getName()));
     }
 
 }

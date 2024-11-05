@@ -164,6 +164,10 @@ public class Policy {
         return payment.getPaymentDueDate().plusYears(1).isAfter(endDate);
     }
 
+    public boolean isFullyPaid() {
+        return payment.getPaymentDueDate().equals(LocalDate.MAX);
+    }
+
     public static Comparator<Policy> getPolicyPaymentDueDateComparator() {
         return Comparator.comparing(policy -> policy.getPolicyPaymentDueDate());
     }

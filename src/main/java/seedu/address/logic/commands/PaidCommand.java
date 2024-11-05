@@ -24,9 +24,9 @@ public class PaidCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_POLICY_NAME + "Health Insurance";
 
     public static final String MESSAGE_SUCCESS = "Policy %1$s for %2$s is marked as paid. Next payment date updated.";
+    public static final String MESSAGE_FULLY_PAID = "The policy %1$s for %2$s will be fully paid after this payment.";
     public static final String MESSAGE_INVALID_POLICY = "The policy %1$s does not exist for %2$s.";
-
-    public static final String MESSAGE_INVALID_PAYDATE = "The coverage of policy %1$s for %2$s ends after this year.";
+    public static final String MESSAGE_INVALID_PAYDATE = "The policy %1$s for %2$s is fully paid.";
 
     private final Index targetIndex;
     private final String policyName;
@@ -57,9 +57,13 @@ public class PaidCommand extends Command {
             throw new CommandException(String.format(MESSAGE_INVALID_POLICY, policyName, personToUpdate.getName()));
         }
 
+        if (policyToUpdate.isFullyPaid()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyName, personToUpdate.getName()));
+        }
+
         if (policyToUpdate.isExpiringSoon()) {
             policyToUpdate.updateNextPaymentDate();
-            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyName, personToUpdate.getName()));
+            return new CommandResult(String.format(MESSAGE_FULLY_PAID, policyName, personToUpdate.getName()));
         }
 
         policyToUpdate.updateNextPaymentDate();
