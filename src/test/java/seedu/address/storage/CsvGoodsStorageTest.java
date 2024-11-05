@@ -63,7 +63,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"";
+                + "\"Amy Bee\"";
         assertTrue(lines.contains(expectedLine));
     }
 
@@ -103,7 +103,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"\n";
+                + "\"Amy Bee\"\n";
         Files.write(filePath, headerLine.getBytes());
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
@@ -133,7 +133,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"\n";
+                + "\"Amy Bee\"\n";
         String missingContent = "\"2022-02-02T00:00\","
                 + "\"Banana\","
                 + "\"true\","
@@ -170,7 +170,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"\n";
+                + "\"Amy Bee\"\n";
         Files.write(filePath, headerLine.getBytes());
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
 
