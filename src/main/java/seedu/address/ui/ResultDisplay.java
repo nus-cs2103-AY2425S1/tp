@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
+    private boolean isHint;
 
     @FXML
     private TextArea resultDisplay;
@@ -23,6 +24,21 @@ public class ResultDisplay extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
+        isHint = false;
+    }
+
+    public void setHint(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        resultDisplay.setText(feedbackToUser);
+        isHint = true;
+    }
+
+    public boolean getHint() {
+        return isHint;
+    }
+
+    public void clearFeedback() {
+        resultDisplay.setText("");
     }
 
 }

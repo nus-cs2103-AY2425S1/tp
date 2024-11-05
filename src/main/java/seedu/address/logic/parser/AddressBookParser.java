@@ -161,10 +161,8 @@ public class AddressBookParser {
             }
         } else if (userInput.startsWith("c")) {
             return getClearHint(userInput);
-        } else if (userInput.startsWith("h")) {
-            return HelpCommand.MESSAGE_USAGE;
         } else {
-            return "";
+            return HelpCommand.MESSAGE_USAGE;
         }
     }
 
