@@ -38,8 +38,13 @@ public class Date {
         this.value = date;
     }
 
+    /**
+     * Checks if this date is today's date.
+     *
+     * @return true if the date is today; false otherwise.
+     */
     public boolean isToday() {
-        return LocalDate.now().isEqual(value);
+        return LocalDate.now().equals(value);
     }
 
     /**

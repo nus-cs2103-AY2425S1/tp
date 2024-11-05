@@ -12,19 +12,25 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start: Get started in 10 minutes!
+
+In this quick start guide, you'll learn how to install EZSTATES. **_(3 min)_**<br>
+<br>
+You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+
+### Installation
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ezstates.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -37,194 +43,781 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) for command details.
+
+### Command Structure
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Feature Categories
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+<div class="alert" markdown="span">
+You are strongly recommended to read through [Command Structure](#CommandStructure) before proceeding with this section!
 </div>
 
-### Viewing help : `help`
+<br>
+This user guide is divided into four main feature categories:
 
-Shows a message explaning how to access the help page.
+1. **Client Management Commands**
+2. **Appointment Management Commands**
+3. **Listing Management Commands**
+4. **Utility Commands**
 
-![help message](images/helpMessage.png)
+---
 
-#### Command Format
-<div class="command-box">
-help
-</div>
+### 1. Client Management Commands
 
-### Adding a Person: `add`
+Commands for creating, updating, and deleting buyers and sellers.
 
-Adds a person to the address book.
+![showClients](images/showClients.png)
 
-#### Command Format
-<div class="command-box">
-add n/NAME p/PHONE_NUMBER e/EMAIL
-</div>
+- #### **Add Buyer Command**
+    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Description:** Creates a new buyer profile with specified details.
+    - **Successful Execution:**
+      > ---
+      >
+      > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `john123@gmail.com`
+      >
+      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
+      >
+      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+      >
+      > ---
+      >
+      > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
+      >
+      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+      >
+      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+      >
+      > ---
 
-#### Successful Execution
-**Example**
-> **Use Case**: Adding a client named `John Doe` with phone number `98765432` and email `johnd@example.com`.
->
-> **Input**:  `add n/John Doe p/98765432 e/johnd@example.com`
->
-> **Output**:
+    - **Failed Execution:**
+      > ---
+      >
+      > **User Error #1**: Missing `NAME` field
+      >
+      > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
+      >
+      > **Output**: <br>
+      Invalid command format! <br>
+      buyer: Adds a buyer to the address book. <br>
+      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      >
+      > ---
+      >
+      > **User Error #2**: Missing `PHONE` field
+      >
+      > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
+      >
+      > **Output**: <br>
+      Invalid command format! <br>
+      buyer: Adds a buyer to the address book. <br>
+      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
+      >
+      > ---
+      >
+      > **User Error #3**: Missing `EMAIL` field
+      >
+      > **Input**: `buyer n/Bobby p/91124444`
+      >
+      > **Output**: <br>
+      Invalid command format! <br>
+      buyer: Adds a buyer to the address book. <br>
+      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+      Example: buyer n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      >
+      > ---
+- #### **Add Seller Command**
+    - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Description:** Creates a new seller profile with specified details.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Adding a seller named `Bobby` with phone number `91124444` and email `john123@gmail.com`
+      >
+      > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com`
+      >
+      > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+      >
+      > ---
+      >
+      > **Use Case #2**: Adding a seller named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
+      >
+      > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+      >
+      > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+      >
+      > ---
 
-#### Failed Execution
-**Example**
-> **User Error**: Missing a `PHONE` field.
->
-> **Input**: `add n/Betsy Crowe e/betsycrowe@example.com`
->
-> **Output**:
+    - **Failed Execution**
+      > ---
+      > **User Error #1**: Missing `NAME` field
+      >
+      > **Input**: `seller p/91124444 e/bobby123@gmail.com`
+      >
+      > **Output**: <br>
+        Invalid command format! <br>
+        seller: Adds a seller to the address book. <br>
+        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+      >
+      > ---
+      >
+      > **User Error #2**: Missing `PHONE` field
+      >
+      > **Input**: `seller n/Bobby e/bobby123@gmail.com`
+      >
+      > **Output**: <br>
+        Invalid command format! <br>
+        seller: Adds a seller to the address book. <br>
+        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com>
+      >
+      > ---
+      > **User Error #3**: Missing `EMAIL` field
+      >
+      > **Input**: `seller n/Bobby p/91124444`
+      >
+      > **Output**: <br>
+        Invalid command format! <br>
+        seller: Adds a seller to the address book. <br>
+        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+        Example: seller n/John Doe p/98765432 t/friends t/owesMoney e/johnd@example.com
+
+- #### **Find Command**
+    - **Format:** `find KEYWORD [KEYWORD...]`
+    - **Description:** Finds the specified client(s) based on the provided keywords.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Finding `Bob`
+      >
+      > **Input**: `find Bob`
+      >
+      > **Output**: 1 persons listed!
+      >
+      > ![bob](images/bob.png)
+      >
+      > ---
+      >
+      > **Use Case #2**: Finding `Bob` OR `Winter`
+      >
+      > **Input**: `find Bob Winter`
+      >
+      > **Output**: 2 persons listed!
+      >
+      > ![bobwinter](images/bob_winter.png)
+      >
+      > ---
+
+    - **Failed Execution:** NIL
 
 
-### Listing all Persons : `list`
+- #### **Edit Command**
+    - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
+    - **Description:** Edits the details of the specified client.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Changing name of `Bob` to `Bobby`
+      >
+      > **Input**: `edit 1 n/Bobby`
+      >
+      > **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
+      >
+      > ---
+      >
+      > **Use Case #2**: Changing phone of `Bobby` to `97774444`
+      >
+      > **Input**: `edit 1 p/97774444`
+      >
+      > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
+      >
+      > ---
+      >
+      > **Use Case #3**: Removing tags of `Bobby`
+      >
+      > **Input**: `edit 1 t/`
+      >
+      > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
+      >
+      > ---
 
-Shows a list of all persons in the address book.
+    - **Failed Execution:**
+      > ---
+      > **User Error #1**: Entering non-existent index
+      >
+      > **Input**: `edit -1 n/Bobby`
+      >
+      > **Output**:
+      <br> Invalid command format!
+      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      >
+      > **Input**: `edit 500 n/Bobby`
+      >
+      > **Output**:
+      <br> Invalid command format!
+      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      >
+      > ---
+      >
+      > **User Error #2**: Entering non-numerical index
+      >
+      > **Input**: `edit a#2 n/Bobby`
+      >
+      > **Output**:
+      <br> Invalid command format!
+      <br>edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: edit 1 e/johndoe@example.comp/91234567
+      >
+      > ---
 
-#### Command Format
-<div class="command-box">
-list
-</div>
+- #### **Delete Client Command**
+    - **Format:** `delete n/<NAME>`
+    - **Description:** Deletes the specified client profile.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-### Editing a Person : `edit`
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-Edits an existing person in the address book.
+---
 
-#### Command Format
-<div class="command-box">
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
-</div>
+### 2. Appointment Management
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+Commands for managing appointments between user and clients.
 
-#### Successful Execution
-**Example 1**
-> **Use Case**: Editing phone number and email address of the 1st person in the list to be `91234567` and `johndoe@example.com` respectively.
->
-> **Input**:  `edit 1 p/91234567 e/johndoe@example.com`
->
-> **Output**:
+![appointments](images/appointments.png)
 
-**Example 2**
-> **Use Case**: Editing the name of the 2nd person in the list to be `Betsy Crower`.
->
-> **Input**: `edit 2 n/Betsy Crower`
->
-> **Output**:
+- #### **Schedule Appointment**
+    - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
+    - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Failed Execution
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-### Locating persons by name: `find`
+- #### **Delete Appointment**
+    - **Format:** `delapt n/<NAME>`
+    - **Description:** Deletes an appointment with the specified client.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-Finds persons whose names contain any of the given keywords.
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Command Format
-<div class="command-box">
-find KEYWORD [MORE_KEYWORDS]
-</div>
+---
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+### 3. Listing Management
 
-#### Successful Execution
-**Example 1**
-> **Use Case**: Finding all clients with `John` in their names.
->
-> **Input**: `find John`
->
-> **Output**:
+Commands for managing property listings and associating clients with listings.
 
-**Example 2**
-> **Use Case**: Finding all clients with `Alex` *OR* `David` in their names.
->
-> **Input**: `find alex david`
->
-> **Output**: 2 persons listed!
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+![showListings](images/showListings.png)
 
-#### Failed Execution
-**Example 1**
-> **User Error**: Attempting to find a user that does not exist.
->
-> **Input**: `find BabyLockEmDoors`
->
-> **Output**:
+- #### **Add Listing**
+    - **Format:** `AddListingCommand`
+    - **Description:** Adds a new property listing with specified details.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-### Deleting a person : `delete`
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-Deletes the specified person from the address book.
+- #### **Show Listings**
+    - **Format:** `ShowListingsCommand`
+    - **Description:** Displays all current listings.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Command Format
-<div class="command-box">
-delete n/NAME
-</div>
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-* Deletes the person with the specified `NAME`.
+- #### **Add Buyers to Listing**
+    - **Format:** `AddBuyersToListingCommand`
+    - **Description:** Associates buyers with a specified listing.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Successful Execution
-**Example**
-> **Use Case**: Deleting `John Doe` from the address book.
->
-> **Input**: `delete n/John Doe`
->
-> **Output**:
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Failed Execution
-**Example**
-> **User Error**: Attempting to delete someone that does not exist.
->
-> **Input**:
->
-> **Output**:
+- #### **Remove Buyers from Listing**
+    - **Format:** `RemoveBuyersFromListingCommand`
+    - **Description:** Removes buyers associated with a specified listing.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-### Clearing all entries : `clear`
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-Clears all entries from the address book.
+- #### **Delete Listing**
+    - **Format:** `DeleteListingCommand`
+    - **Description:** Deletes a specified listing.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Command Format
-<div class="command-box">
-clear
-</div>
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-### Exiting the program : `exit`
+- #### **Clear Listing**
+    - **Format:** `ClearListingCommand`
+    - **Description:** Deletes ALL listings.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-Exits the program.
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
 
-#### Command Format
-<div class="command-box">
-exit
-</div>
+### 4. Utility Commands
+
+Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
+
+- #### **Clear**
+    - **Format:** `ClearCommand`
+    - **Description:** Clears the console or application state.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+- #### **Exit**
+    - **Format:** `ExitCommand`
+    - **Description:** Exits the application.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+- #### **Help**
+    - **Format:** `help`
+    - **Description:** Displays a list of available commands and their descriptions.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**: Accessing help
+      >
+      > **Input**: `help`
+      >
+      > **Output**:
+      >
+      > ---
+
+- #### **More Info**
+    - **Format:** `MoreInfoCommand`
+    - **Description:** Provides additional information about a specific command or feature.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+- #### **Chat Window**
+    - **Format:** `ChatWindowCommand`
+    - **Description:** Opens a chat window for client-agent communication.
+    - **Successful Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #2**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+      >
+      > **Use Case #3**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
+    - **Failed Execution:**
+      > ---
+      > **Use Case #1**:
+      >
+      > **Input**:
+      >
+      > **Output**:
+      >
+      > ---
+
 
 ### Saving the data
 

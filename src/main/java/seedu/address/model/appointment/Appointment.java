@@ -45,6 +45,16 @@ public class Appointment {
         return to;
     }
 
+
+    /**
+     * Checks if the appointment is scheduled for today.
+     *
+     * @return true if the appointment date is today; false otherwise.
+     */
+    public boolean isToday() {
+        return date.isToday();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
