@@ -214,7 +214,7 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
 
 ### Owe tuition fees
 
-The owe command is used to track the amount of tuition fee owed by a student. The `OweCommandParser` is responsible for parsing the user input and creating an `OweCommand` object. The `OweCommand` object is then executed by the `Logic` component.
+The owe command is part of UGTeach's payment tracking feature. It is used to track the amount of tuition fee owed by a student. The `OweCommandParser` is responsible for parsing the user input and creating an `OweCommand` object. The `OweCommand` object is then executed by the `Logic` component.
 
 `OweCommandParser` obtains the `INDEX` of the student and the values corresponding to the prefix `hr/` from the user input. The `OweCommandParser` will enforce the following constraints:
 * The `INDEX` must be a positive integer.
@@ -231,7 +231,7 @@ Then, `OweCommand` calculates the amount of tuition fee owed and checks if the t
 
 Finally, `OweCommand` updates the total amount of tuition fee owed by the student by creating a new `Student` instance with updated fields to replace the outdated `Student` instance in the model.
 
-The owe command is part of UGTeach's payment tracking feature. The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
+The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
 <puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
 
 How an OweCommand operation goes through the `Model` component is shown below:
