@@ -84,29 +84,10 @@ public class MarkAttendanceByTutorialCommand extends Command {
 
         StringBuilder markedStudents = new StringBuilder();
         StringBuilder duplicateAttendanceStudents = new StringBuilder();
-        int duplicateStudents = 0;
 
         logger.info("Starting to mark the attendance of students in tutorial: " + tutorial.getSubject());
-        for (Participation currentParticipation : participationList) {
-            if (containsMarkedAttendance(currentParticipation.getAttendanceList())) {
-                logger.info("Duplicate weekly attendance found for " + currentParticipation.getStudentName());
-                duplicateAttendanceStudents.append(currentParticipation.getStudentName()).append(" ");
-                duplicateStudents++;
-                continue;
-            }
-            List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-            LocalDate attendanceDate = LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT);
-            updatedAttendance.add(new Attendance(attendanceDate));
-
-            Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
-                    currentParticipation.getTutorial(), updatedAttendance);
-
-            model.setParticipation(currentParticipation, updatedParticipation);
-            logger.info("Successfully replaced current participation with updated participation for "
-                    + currentParticipation.getStudentName());
-
-            markedStudents.append(currentParticipation.getStudentName()).append(" ");
-        }
+        int duplicateStudents = markAttendanceForStudents(participationList, model,
+                markedStudents, duplicateAttendanceStudents);
 
         if (duplicateStudents == participationList.size()) {
             logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByTutorialCommand.class
@@ -149,13 +130,58 @@ public class MarkAttendanceByTutorialCommand extends Command {
     }
 
     /**
+     * Marks attendance for each student in the given participation list.
+     * <p>
+     * For each student, the method checks if there is a duplicate attendance entry for the same week.
+     * <p>
+     * If a duplicate is found, the attendance for that student is skipped,
+     * and the student's name is added to the string of students with duplicate weekly attendance.
+     * </p>
+     * If no duplicate is found, the student's attendance is marked,
+     * and their name is added to the string of students with attendance marked.
+     *
+     * @param participationList The list of participation records for students in a tutorial.
+     * @param model The model used to update each student's attendance in the tutorial.
+     * @param markedStudents A StringBuilder used to store the names of students
+     *                       whose attendance was marked successfully.
+     * @param duplicateAttendanceStudents A StringBuilder used to store the names of students
+     *                                    who already had attendance marked for this week.
+     * @return The number of students for whom duplicate weekly attendance was found and skipped.
+     */
+    private int markAttendanceForStudents(List<Participation> participationList, Model model,
+                                          StringBuilder markedStudents, StringBuilder duplicateAttendanceStudents) {
+        int duplicateStudents = 0;
+        for (Participation currentParticipation : participationList) {
+            if (containsDuplicateWeeklyAttendance(currentParticipation.getAttendanceList())) {
+                logger.info("Duplicate weekly attendance found for " + currentParticipation.getStudentName());
+                duplicateAttendanceStudents.append(currentParticipation.getStudentName()).append(" ");
+                duplicateStudents++;
+                continue;
+            }
+            List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
+            LocalDate attendanceDate = LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT);
+            updatedAttendance.add(new Attendance(attendanceDate));
+
+            Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
+                    currentParticipation.getTutorial(), updatedAttendance);
+
+            model.setParticipation(currentParticipation, updatedParticipation);
+            logger.info("Successfully replaced current participation with updated participation for "
+                    + currentParticipation.getStudentName());
+
+            markedStudents.append(currentParticipation.getStudentName()).append(" ");
+        }
+        return duplicateStudents;
+    }
+
+    /**
      * Checks if the list of attendance contains an {@code Attendance} with a date that falls in the same
      * week and year as the specified {@code Attendance} to mark.
      *
      * @param attendanceList List of attendance to compare against.
      * @return true if an attendance within the list exists in the same week and year; false otherwise.
      */
-    private boolean containsMarkedAttendance(List<Attendance> attendanceList) {
+    private boolean containsDuplicateWeeklyAttendance(List<Attendance> attendanceList) {
         for (Attendance attendance : attendanceList) {
             if (attendance.isSameWeek(this.attendance)) {
                 return true;

@@ -78,25 +78,14 @@ public class MarkAttendanceByStudentCommand extends Command {
 
         Person studentToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
 
-        Participation currentParticipation = model.getParticipationList().stream()
-                .filter(participation -> participation.getStudent().equals(studentToMarkAttendance)
-                        && participation.getTutorial().equals(this.tutorial))
-                .findFirst()
-                .orElseThrow(() -> {
-                    logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
-                            + "\n - No participation found for " + studentToMarkAttendance.getFullName()
-                            + " for tutorial: " + tutorial.getSubject()));
-                    return new CommandException(
-                            String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject()));
-                });
+        Participation currentParticipation = getStudentParticipation(
+                model.getParticipationList(), studentToMarkAttendance);
 
-        for (Attendance currentAttendance : currentParticipation.getAttendanceList()) {
-            if (currentAttendance.isSameWeek(attendance)) {
-                logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
-                        + "\n - Duplicate weekly attendance found for " + studentToMarkAttendance.getFullName()));
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                        studentToMarkAttendance.getName(), attendance));
-            }
+        if (containsDuplicateWeeklyAttendance(currentParticipation.getAttendanceList())) {
+            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
+                    + "\n - Duplicate weekly attendance found for " + studentToMarkAttendance.getFullName()));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
+                    studentToMarkAttendance.getName(), attendance));
         }
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
@@ -137,6 +126,45 @@ public class MarkAttendanceByStudentCommand extends Command {
                 .add("attendance", attendance)
                 .add("tutorial", tutorial)
                 .toString();
+    }
+
+    /**
+     * Retrieves the participation record for the specified student from the list of participation.
+     *
+     * @param participationList The list of all participation entries to search through.
+     * @param student The student whose attendance is being marked.
+     * @return The participation record for the specified student.
+     * @throws CommandException if no participation record is found for the specified student.
+     */
+    private Participation getStudentParticipation(List<Participation> participationList,
+                                                  Person student) throws CommandException {
+        return participationList.stream()
+                .filter(participation -> participation.getStudent().equals(student)
+                        && participation.getTutorial().equals(this.tutorial))
+                .findFirst()
+                .orElseThrow(() -> {
+                    logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
+                            + "\n - No participation found for " + student.getFullName()
+                            + " for tutorial: " + tutorial.getSubject()));
+                    return new CommandException(
+                            String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject()));
+                });
+    }
+
+    /**
+     * Checks if the list of attendance contains an {@code Attendance} with a date that falls in the same
+     * week and year as the specified {@code Attendance} to mark.
+     *
+     * @param attendanceList List of attendance to compare against.
+     * @return true if an attendance within the list exists in the same week and year; false otherwise.
+     */
+    private boolean containsDuplicateWeeklyAttendance(List<Attendance> attendanceList) {
+        for (Attendance currentAttendance : attendanceList) {
+            if (currentAttendance.isSameWeek(attendance)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
