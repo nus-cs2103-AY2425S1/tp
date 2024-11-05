@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * The type Export command.
+ * Represents a command to export person data to a CSV file.
  */
 public class ExportCommand extends Command {
 
@@ -29,6 +29,11 @@ public class ExportCommand extends Command {
 
     private final String filePath;
 
+    /**
+     * Constructs an ExportCommand with the specified file path for export.
+     *
+     * @param filePath The path where the CSV file will be saved.
+     */
     public ExportCommand(String filePath) {
         this.filePath = filePath;
     }
@@ -47,16 +52,26 @@ public class ExportCommand extends Command {
         }
     }
 
+    /**
+     * Writes the person data to the provided CSVWriter.
+     *
+     * @param writer The CSVWriter to write the data to.
+     * @param persons The list of persons to export.
+     * @return CommandResult indicating the number of persons exported.
+     */
     private CommandResult writeData(CSVWriter writer, List<Person> persons) {
-
-        String[] header = {"Name", "Phone", "Email", "Telegram", "Tags", "Github", "Assignment", "WeeksPresent"};
+        // Define CSV header.
+        String[] header = {"Name", "Phone", "Email", "Telegram", "Tags", "Github", "Assignments", "WeeksPresent"};
         writer.writeNext(header);
-        // Write each person data
+
+        // Write each person data to CSV file.
         for (Person person : persons) {
+            // Join weeks present as a comma-separated string.
             String weeksPresentStr = person.getWeeksPresent().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
 
+            // Prepare the person's data as a string array for CSV.
             String[] record = {
                 person.getName().toString(),
                 person.getPhone().toString(),
@@ -74,9 +89,18 @@ public class ExportCommand extends Command {
         return new CommandResult("Exported " + persons.size() + " persons to CSV.");
     }
 
+    /**
+     * Ensures the directory structure for the specified file path exists,
+     * creating it if necessary.
+     *
+     * @param filePath The file path for the CSV file.
+     * @return The File object for the specified path.
+     * @throws CommandException If the directory structure cannot be created.
+     */
     private File createDirectories(String filePath) throws CommandException {
         File file = new File(filePath);
         File parentDir = file.getParentFile();
+        // Check and create parent directories if they don't exist.
         if (parentDir != null && !parentDir.exists()) {
             boolean isDirCreated = parentDir.mkdirs();
             if (!isDirCreated) {

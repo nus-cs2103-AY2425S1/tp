@@ -50,7 +50,7 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
             throw new ParseException("Score cannot be empty.");
         }
 
-        Float score;
+        float score;
         try {
             score = Float.parseFloat(scoreString);
         } catch (NumberFormatException e) {
