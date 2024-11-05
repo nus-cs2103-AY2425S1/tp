@@ -32,6 +32,8 @@ public class Messages {
             + "list    : Lists both suppliers and deliveries (No parameters should be given)\n"
             + "list -d : Lists deliveries to the user\n"
             + "list -s : Lists suppliers to the user";
+    public static final String MESSAGE_DUPLICATE_SUPPLIER_STATUS =
+            "%1$s is already marked as %2$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -61,9 +63,10 @@ public class Messages {
         supplier.getTags().forEach(builder::append);
         builder.append("; Products ");
         supplier.getProducts().forEach(builder::append);
+        builder.append("; Status: ")
+                .append(supplier.getStatus());
         return builder.toString();
     }
-
     /**
      * Formats the {@code Delivery} for display to the user.
      */
@@ -82,5 +85,25 @@ public class Messages {
                 .append(delivery.getDeliveryStatus());
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code supplier} for display to the user without the status.
+     */
+    public static String formatWithoutStatus(Supplier supplier) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(supplier.getName())
+                .append("; Phone: ")
+                .append(supplier.getPhone())
+                .append("; Email: ")
+                .append(supplier.getEmail())
+                .append("; Company: ")
+                .append(supplier.getCompany())
+                .append("; Tags: ");
+        supplier.getTags().forEach(builder::append);
+        builder.append("; Products ");
+        supplier.getProducts().forEach(builder::append);
+        return builder.toString();
+    }
+
 
 }

@@ -37,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Supplier editedSupplier = new SupplierBuilder().build();
+        Supplier editedSupplier = new SupplierBuilder().withStatus("inactive").build();
         EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder(editedSupplier).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SUPPLIER, descriptor);
 
@@ -45,6 +45,7 @@ public class EditCommandTest {
                 Messages.format(editedSupplier));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        System.out.println(model.getFilteredSupplierList().get(0));
         expectedModel.setSupplier(model.getFilteredSupplierList().get(0), editedSupplier);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

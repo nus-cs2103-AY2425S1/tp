@@ -66,7 +66,8 @@ public class EditSupplierDescriptorTest {
                 + editSupplierDescriptor.getEmail().orElse(null) + ", company="
                 + editSupplierDescriptor.getCompany().orElse(null) + ", tags="
                 + editSupplierDescriptor.getTags().orElse(null) + ", products="
-                + editSupplierDescriptor.getProducts().orElse(null) + "}";
+                + editSupplierDescriptor.getProducts().orElse(null) + ", status="
+                + editSupplierDescriptor.getStatus().orElse(null) + "}";
         assertEquals(expected, editSupplierDescriptor.toString());
     }
 }
