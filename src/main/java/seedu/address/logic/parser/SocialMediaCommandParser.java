@@ -26,6 +26,8 @@ public class SocialMediaCommandParser implements Parser<SocialMediaCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_IG, PREFIX_FB, PREFIX_CS);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IG, PREFIX_FB, PREFIX_CS);
+
         Index index;
 
         try {

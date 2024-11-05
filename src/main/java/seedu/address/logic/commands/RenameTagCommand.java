@@ -33,6 +33,8 @@ public class RenameTagCommand extends Command {
 
     public static final String MESSAGE_TAG_NOT_FOUND = "%1$s Tag is not found";
 
+    public static final String MESSAGE_DUPLICATES = ". Contacts with the existing tag %1$s were not updated!";
+
     private String oldTag;
     private String newTag;
 
@@ -49,6 +51,7 @@ public class RenameTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         ObservableList<Person> persons = model.getPersonList();
         boolean found = false;
+        boolean duplicates = false;
         for (int i = 0; i < persons.size(); i++) {
             Person currPerson = persons.get(i);
             Set<Tag> tags = currPerson.getTags();
@@ -56,6 +59,11 @@ public class RenameTagCommand extends Command {
             while (iterator.hasNext()) {
                 Tag tag = iterator.next();
                 if (tag.getTagName().equals(oldTag)) {
+                    if (currPerson.hasTag(newTag)) {
+                        found = true;
+                        duplicates = true;
+                        continue;
+                    }
                     tag.updateTagName(newTag);
                     found = true;
                 }
@@ -65,6 +73,9 @@ public class RenameTagCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (!found) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_FOUND, oldTag));
+        } if (duplicates) {
+            return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, newTag)
+                    + String.format(MESSAGE_DUPLICATES, newTag));
         } else {
             return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, newTag));
         }

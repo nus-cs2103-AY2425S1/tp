@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TIME;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Schedule;
 
 /**
  * Parses input arguments and creates a new ScheduleCommand object
@@ -38,15 +39,27 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         ScheduleCommand.ScheduleDescriptor scheduleDescriptor = new ScheduleCommand.ScheduleDescriptor();
 
         if (argMultimap.getValue(PREFIX_SCHEDULE_NAME).isPresent()) {
-            scheduleDescriptor.setScheduleName(argMultimap.getValue(PREFIX_SCHEDULE_NAME).get());
+            String scheduleName = argMultimap.getValue(PREFIX_SCHEDULE_NAME).get();
+            if (!Schedule.isValidName(scheduleName)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+            }
+            scheduleDescriptor.setScheduleName(scheduleName);
         }
 
         if (argMultimap.getValue(PREFIX_SCHEDULE_DATE).isPresent()) {
-            scheduleDescriptor.setDateString(argMultimap.getValue(PREFIX_SCHEDULE_DATE).get());
+            String scheduleDate = argMultimap.getValue(PREFIX_SCHEDULE_DATE).get();
+            if (!Schedule.isValidDate(scheduleDate)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+            }
+            scheduleDescriptor.setDateString(scheduleDate);
         }
 
         if (argMultimap.getValue(PREFIX_SCHEDULE_TIME).isPresent()) {
-            scheduleDescriptor.setTimeString(argMultimap.getValue(PREFIX_SCHEDULE_TIME).get());
+            String scheduleTime = argMultimap.getValue(PREFIX_SCHEDULE_TIME).get();
+            if (!Schedule.isValidTime(scheduleTime)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+            }
+            scheduleDescriptor.setTimeString(scheduleTime);
         }
 
         return new ScheduleCommand(index, scheduleDescriptor);

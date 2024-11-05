@@ -67,7 +67,8 @@ public class SocialMediaCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getSchedule(), personToEdit.getTags());
+                personToEdit.getAddress(), personToEdit.getSchedule(), personToEdit.getSocialMedia(),
+                personToEdit.getTags());
         SocialMedia socialMediaToAdd = new SocialMedia(handle, platform);
         editedPerson.setSocialMedia(socialMediaToAdd);
         model.setPerson(personToEdit, editedPerson);

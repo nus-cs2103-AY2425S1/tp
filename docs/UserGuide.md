@@ -50,6 +50,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* 
+* Items together in curly square brackets means one and only one of them must be given as input.<br>
+  e.g `{n/NAME t/TAG}` can be used as `n/John Doe` or as `t/friends`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -104,7 +107,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* Note that you cannot edit `schedule` information using the `edit` command. Please use the `schedule` command instead.
+* Note that you cannot edit `schedule` and `socialMedia` information using the `edit` command. Please use the `schedule` and `socialMedia` command instead.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -136,17 +139,33 @@ Examples:
 
 Renames an existing tag in the address book.
 
-Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
+Format: `renameTag ot/OLDTAG nt/NEWTAG`
 
 * Renames the tags called `OLDTAG` to `NEWTAG`.
 * Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
 * If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
+* If there are any contacts with both `[OLDTAG]` and `[NEWTAG]`, the `[OLDTAG]` will not be renamed as this will lead to duplicated tags.
+
+### Adding Social Media : `socialMedia`
+
+Adds or updates the social media handle to an existing person.
+
+Format: `socialMedia [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
+
+* Contacts will have their social media handle displayed as `[ig-igusername]` or `[fb-fbusername]` or `[cs-csusername]`.
+* `ig`,`fb`, and `cs` is used to represent Instagram, Facebook, and Carousell handles respectively.
+* If the contact already has an existing social media handle, their handle will be updated.
+* Hence, we can only add one social media handle to each contact.
+* Handles must be non empty, have a limit of 30 characters,and consist only of alphanumeric characters, or `-`, `_` and `.`.
+* If multiple handles are entered, only the last handle will be accepted. Eg. `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 Examples:
-*  `renameTag ot/manager nt/boss` Renames the tag `colleagues` to be `boss`.
-![result for 'rename tag1'](images/renameTagResult1.png)
-*  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
-![result for 'rename tag2'](images/renameTagResult2.png)
+*  `socialMedia 3 ig/charlotteo` Adds the handle `[ig-charlotteo]` to the third contact Charlotte.
+![result for 'rename tag1'](images/socialMediaResult1.png)
+*  `socialMedia 1 cs/alexsells` Updates the first contact Alex's social media to `[cs-alexsells]`.
+![result for 'rename tag2'](images/socialMediaResult2.png)
+*  `socialMedia 2 fb/berniceyu` Updates the second contact Bernice's social media to `[fb-berniceyu]`.
+![result for 'social media 3'](images/socialMediaResult3.png)
 
 ### Locating persons by name: `find`
 
@@ -168,18 +187,20 @@ Examples:
 
 ### Filter persons by tag: `filter`
 
-Filters the list of contacts and displays those with the provided tag.
+Filters the list of contacts and displays those with the provided tag(s).
 
-Format: `filter [t/TAG]`
+Format: `filter [t/TAG]...`
 
 * The filter is case-sensitive.
-* Only exact matches of tags will be considered.
+* Filters for users whose tags contains all the input tags.
 * The tag provided must only contain alphanumeric characters
-* If the provided tag does not match any contact, an empty list will be shown.
+* If the provided tag(s) does not match any contact, an empty list will be shown.
 
 Examples:
-* `filter t/friends` will filter for contacts with the tag `friends`<br>
+* `filter t/friends` will filter for contacts that has tag `friends`<br>
   ![result for 'filter_friends'](images/filterFriendsResult.png)
+* * `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`<br>
+    ![result for 'filter_friends'](images/filterMultipleTags.png)
 * `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
   ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
 
@@ -213,19 +234,62 @@ Examples:
 
 ### Sort persons by name: `sort`
 
-Sorts and displays the list of persons by name in either ascending or descending alphabetical order
+Sorts and displays the list of persons by schedule or name alphabetically in either ascending or descending order
 
-Format: `sort [ORDER]`
+Format: `sort {n/[ORDER], sch/[ORDER]}`
 
-* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive)
-* If no order is provided, persons will be sorted in ascending order by default
+* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive).
+* If no order is provided, persons will be sorted in ascending order by default.
+* Contact list will be sorted alphabetically by name with `n/` and by schedule with `sch/`.
+* If the list is filtered before executing the sort command, it will display the sorted filter list.
+* Executing the `list` function after will show the sorted full list.
+* When sorting by schedules:
+  1. Contacts with no schedules will appear at the end of the list.
+  2. Contacts with a date but no time as schedule will be sorted under the assumption that their time is 00:00.
 
 Examples:
-* `sort` will sort by persons names alphabetically in ascending order
-* `sort ascending` will sort by persons names alphabetically in ascending order
+* `sort n/` will sort by persons names alphabetically in ascending order
+* `sort sch/` will sort by schedule in ascending order
+* `sort n/ascending` will sort by persons names alphabetically in ascending order
   ![result for 'sort and sort ascending'](images/sortResult.png)
-* `sort descending` will sort by persons names alphabetically in descending order
+* `sort n/descending` will sort by persons names alphabetically in descending order
   ![result for 'sort descending'](images/sortDescendingResult.png)
+* `sort sch/ascending` will sort by schedule in ascending order
+  ![result for 'sort and sort ascending'](images/sortByScheduleAsc.png)
+* `sort sch/descending` will sort by schedule in descending order
+  ![result for 'sort descending'](images/sortByScheduleDesc.png)
+
+### Search persons by schedule range: `search`
+
+Searches for a list of persons within a given range of schedule 
+
+Format: `search [b/START_TIME] [en/END_TIME]`
+
+* `START_TIME` and `END_TIME` must adhere to the datetime format yyyy-MM-dd HH:mm
+* Either `[b/START_TIME]` or `[en/END_TIME]` has to be provided
+* It will search for schedules between the given `[b/START_TIME]` and `[en/END_TIME]`
+* If `[b/START_TIME]` is not provided, it will search for all schedules that is before `[en/END_TIME]`
+* If `[en/END_TIME]` is not provided, it will search for all schedules that is after `[b/START_TIME]`
+* Persons with no schedule given will not appear in the search results
+* Persons with only a date as a schedule but not time will be searched under the assumption that time is 00:00
+* Search result will be inclusive of the begin and end time
+
+Examples:
+* `search b/2024-11-11 12:00` will search for the list of persons with schedules after 2024-11-11 12:00
+* `search en/2024-11-12 12:00` will search for the list of persons with schedules before 2024-11-12 12:00
+* `search b/2024-11-11 12:00 en/2024-11-12 12:00` will search for the list of persons with schedules between 2024-11-11 12:00 and 2024-11-12 12:00
+  ![result for 'search b/2024-11-11 12:00 en/2024-11-12 12:00'](images/searchCommandSuccess.png)
+
+### Backing up save file : `backup`
+
+Creates a backup of the current save file.
+
+Format: `backup`
+
+* Backup AddressBook data will be saved as a JSON file `[JAR file location]/backup/addressbook.json`.
+* If a addressbook.json file already exists in the backup folder it will be overwritten.
+* The backup file can be used in order to restore the AddressBook data in case of data loss, or to transfer the data to another device.
+* Users can safely move or copy the backup file to another device, without worrying above negative consequences.
 
 ### Clearing all entries : `clear`
 
@@ -285,6 +349,7 @@ Action | Format, Examples
 **Help** | `help`
 **Restore** | `restore`
 **Sort** | `sort [ORDER]`<br> e.g., `sort asc`
-**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss`
+**Rename Tag** | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`
 **Filter** | `filter [t/TAG]`<br> e.g., `filter t/friends`
+**Social Media** | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername` 
 
