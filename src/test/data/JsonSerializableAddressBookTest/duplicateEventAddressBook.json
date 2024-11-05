@@ -6,7 +6,10 @@
     "personEvents": [{
       "name": "IFG"
     }],
-    "roles": [ "friends" ]
+    "roles": [
+      {
+        "name": "friends"
+      } ]
   } ],
   "events": [ {
     "name": "IFG"

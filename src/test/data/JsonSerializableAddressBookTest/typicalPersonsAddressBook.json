@@ -4,23 +4,32 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "IFG"
     }],
-    "roles" : [ "Athlete - COM - Volleyball Women, Floorball Women" ]
+    "roles" : [
+      {
+        "name": "Athlete - COM - Volleyball Women, Floorball Women"
+      } ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "SUNIG"
     }],
-    "roles" : [ "Volunteer - Emcee", "Athlete - FASS - Swimming Men" ]
+    "roles" : [
+      {
+        "name": "Volunteer - Emcee"
+      },
+      {
+        "name": "Athlete - FASS - Swimming Men"
+      } ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "AUG"
     }],
     "roles" : [ ]
@@ -28,15 +37,18 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "IVP"
     }],
-    "roles" : [ "Sponsor - OATSIDE" ]
+    "roles" : [
+      {
+        "name": "Sponsor - OATSIDE"
+      } ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "IFG"
     }],
     "roles" : [ ]
@@ -44,18 +56,24 @@
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "SUNIG"
     }],
-    "roles" : [ "Committee - Publicity - Project Director"]
+    "roles" : [
+      {
+        "name": "Committee - Publicity - Project Director"
+      } ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "IVP"
     }],
-    "roles" : [ "Committee - Sports - Vice Sports Director - BIZ"]
+    "roles" : [
+      {
+        "name": "Committee - Sports - Vice Sports Director - BIZ"
+      } ]
   } ],
   "events": [ {
     "name": "IFG"

@@ -3,15 +3,18 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "IFG"
     }],
-    "roles": [ "friends" ]
+    "roles": [
+      {
+        "name": "friends"
+      } ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "personEvents": [{
+    "events": [{
       "name": "IFG"
     }]
   } ],
