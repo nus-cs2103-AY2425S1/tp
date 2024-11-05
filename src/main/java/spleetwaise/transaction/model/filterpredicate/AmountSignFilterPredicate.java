@@ -16,7 +16,7 @@ public class AmountSignFilterPredicate implements Predicate<Transaction> {
     public static final String POSITIVE_SIGN = "Pos";
     public static final String NEGATIVE_SIGN = "Neg";
 
-    public static final String MESSAGE_CONSTRAINTS = "AmountSign should be '" + POSITIVE_SIGN + "' or '"
+    public static final String MESSAGE_CONSTRAINTS = "Amount sign should be '" + POSITIVE_SIGN + "' or '"
             + NEGATIVE_SIGN + "'";
 
     private final boolean sign;
