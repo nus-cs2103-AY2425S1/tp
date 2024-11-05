@@ -19,13 +19,17 @@ import org.junit.jupiter.api.Test;
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
 import seedu.eventtory.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.eventtory.logic.commands.EditVendorCommand.EditVendorDescriptor;
 import seedu.eventtory.model.EventTory;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
 import seedu.eventtory.model.event.Event;
+import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.testutil.EditEventDescriptorBuilder;
+import seedu.eventtory.testutil.EditVendorDescriptorBuilder;
 import seedu.eventtory.testutil.EventBuilder;
+import seedu.eventtory.testutil.VendorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditEventCommand.
@@ -131,8 +135,7 @@ public class EditEventCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of EventTory
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of EventTory
      */
     @Test
     public void execute_invalidEventIndexFilteredList_failure() {
@@ -145,6 +148,25 @@ public class EditEventCommandTest {
                 new EditEventDescriptorBuilder().withName(VALID_NAME_BIRTHDAY).build());
 
         assertCommandFailure(editEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_updateSelectedEvent_success() {
+        Event editedEvent = new EventBuilder().build();
+
+        model.viewEvent(editedEvent);
+
+        EditEventDescriptor descriptor = new EditEventDescriptor();
+        EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
+        try {
+            editEventCommand.execute(model);
+        } catch (Exception e) {
+            throw new AssertionError("Execution of command should not fail.", e);
+        }
+
+        model.getViewedEvent().addListener((observable, oldValue, newValue) -> {
+            assertEquals(newValue, editedEvent);
+        });
     }
 
     @Test
@@ -172,8 +194,7 @@ public class EditEventCommandTest {
         assertFalse(standardCommand.equals(new EditEventCommand(INDEX_FIRST_EVENT, DESC_BIRTHDAY)));
 
         // different tags descriptor -> returns false
-        EditEventDescriptor differentTag = new EditEventDescriptorBuilder(DESC_WEDDING)
-                .withTags(VALID_TAG_CHARITY)
+        EditEventDescriptor differentTag = new EditEventDescriptorBuilder(DESC_WEDDING).withTags(VALID_TAG_CHARITY)
                 .build();
         assertFalse(standardCommand.equals(new EditEventCommand(INDEX_FIRST_EVENT, differentTag)));
     }
