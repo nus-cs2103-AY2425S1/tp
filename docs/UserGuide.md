@@ -69,6 +69,8 @@ Command: `add`
 
 Usage: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT [t/TAG]…`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `NAME`: Should only contain alphanumeric characters and spaces and it should not be blank
@@ -77,14 +79,23 @@ Fields
 * `ADDRESS`: Can take in any values and should not be blank
 * `PAYMENT`: Refers to a number, either negative, zero or positive. This can be 0 when first creating the student to add to EduVault.
 
+</div>
+{% endraw %}
+
 Example usages
+
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/0`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
 
 Invalid usages
 * Student already exists in EduVault
   * *Error message: This person already exists in the address book.*
 * Format errors, check [here](#12-format-errors).
 
+</div>
+{% endraw %}
 
 #### **3.2 Creating a new tutorial**
 
@@ -312,6 +323,9 @@ Command: `umas`
 
 Usage: `umas INDEX tut/TUTORIAL attend/ATTENDANCE`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
+
 Fields
 
 * `INDEX`: Index number as shown in the displayed person list of the student to mark.
@@ -320,16 +334,25 @@ Fields
 * `ATTENDANCE`: Date to unmark the attendance for.
   * Must be in format dd/MM/yyyy
 
+</div>
+{% endraw %}
+
 Example usages
 
 * `umas 1 tut/Math attend/30/10/2024`
 * `umas 2 attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
 
 Invalid usages
 
 * Unmarking attendance of student who does not take specified tutorial
     * Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial
 * Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
 
 #### **5.7 Unenrolling student from a tutorial**
 
