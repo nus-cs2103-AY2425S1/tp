@@ -9,11 +9,11 @@
 * **MediBase3** is a desktop application designed for doctors to manage patient contact details, appointments, medical conditions, **allergies**, and more.
   * Example usages:
     * A doctor can track patient information, medical history, and contact details efficiently.
-    * Doctors can schedule, update, and delete patient appointments.
+    * Doctors can schedule and delete patient appointments.
     * Manages and tracks patients' medical conditions and allergies to enhance patient safety.
 
 * Key features include:
-  * **Add, edit, or delete patient details** such as name, NRIC, gender, contact information, and medical records.
+  * **Add, edit, or delete patient details** such as name, NRIC, gender, and contact information.
   * **Schedule and manage appointments** for patients with details like date and time.
   * **Track medical conditions** and **allergies** associated with each patient.
   * **Prioritize patients** based on urgency levels (low, medium, high, and NONE).
