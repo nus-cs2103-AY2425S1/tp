@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -14,6 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * </p>
  */
 public class HelpCommandParser implements Parser<HelpCommand> {
+    private static final String WARNING_PARAMETERS_SUPPLIED = "Additional parameters supplied have been ignored";
+
     /**
      * Parses user input to create a HelpCommand object.
      * <p>
@@ -25,10 +25,9 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * @author wnayar
      */
     public HelpCommand parse(String userInput) throws ParseException {
-        String[] words = userInput.split(" ");
+        String[] words = userInput.trim().split(" ");
         if (words.length != 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new HelpCommand(WARNING_PARAMETERS_SUPPLIED);
         } else {
             return new HelpCommand();
         }

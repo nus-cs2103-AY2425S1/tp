@@ -103,4 +103,25 @@ public class StringUtil {
         // negates the check that input only has digits 0-9
         return !trimmedIndex.matches("\\d+");
     }
+
+    /**
+     * Returns true if there is less than 10 leading zeros
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean verifyNotExcessiveLeadingZeros(String s) {
+        requireNonNull(s);
+
+        // removes zeros starting from start of string
+        String noLeadingZeros = s.replaceFirst("^0+", "");
+        int leadingZeroCounter = s.length() - noLeadingZeros.length();
+
+        if (s.matches("0+") && leadingZeroCounter <= 10) {
+            return true;
+        }
+        if (leadingZeroCounter >= 10) {
+            return false;
+        }
+
+        return true;
+    }
 }

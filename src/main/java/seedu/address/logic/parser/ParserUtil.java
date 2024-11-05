@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_MAXLEADINGZEROS;
 import static seedu.address.logic.Messages.MESSAGE_OVERFLOW_INDEX;
 
 import java.util.Collection;
@@ -33,6 +34,9 @@ public class ParserUtil {
 
         if (StringUtil.verifyNotNumber(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        if (!StringUtil.verifyNotExcessiveLeadingZeros(trimmedIndex)) {
+            throw new ParseException(MESSAGE_MAXLEADINGZEROS);
         }
         if (!StringUtil.verifyNotIntOverflow(trimmedIndex)) {
             throw new ParseException(MESSAGE_OVERFLOW_INDEX);
