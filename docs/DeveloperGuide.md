@@ -304,9 +304,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 1: Add Guest**
-
-**MSS**
+**Use Case 1 (UC1)**: Add Guest<br>
+**MSS**:
 
 1.  User enters the command to add a guest.
 2.  The system prompts the user for guest's name, contact number and email address.
@@ -316,9 +315,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-
-* 3a. User inputs invalid contact number (e.g. invalid spaces, more than 8 integers).
+**Extensions**:
+* 3a. User inputs invalid contact number.
   * 3a1. System displays error message and prompts for corrected input.
   * Use case resumes at step 3.
 
@@ -327,27 +325,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays an error message, showing user already exists and prompts for corrected input.
     * Use case resumes at step 3.
 
-**Use case 2: Delete Guest**
-
-**MSS**
+**Use Case 2 (UC2)**: Delete Guest<br>
+**Preconditions**: List displayed is not empty.<br>
+**MSS**:
 
 1.  User enters the command to delete a guest.
-2.  The system prompts for guest's index in the list.
-3.  User enters the index.
-4.  The system verifies the index.
+2.  The system prompts for guest.
+3.  User enters the guest.
+4.  The system verifies the input.
 5.  The system deletes the guest and display confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User inputs invalid index (e.g. index lesser than 1 or greater than current list length).
+* 3a. User inputs invalid index.
     * 3a1. System displays error message and prompts for corrected input.
     * Use case resumes at step 3.
 
-**Use case 3: Find Guest By Name**
-
-**MSS**
+**Use Case 3 (UC3)**: Find Guest By Name<br>
+**MSS**:
 
 1.  User enters the command to find a guest.
 2.  The system prompts for the guest's name.
@@ -357,49 +354,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Extensions**
+**Extensions**:
 
-* 5a. No guests match the keyword
+* 5a. No guests match the keyword.
     * 5a1. System displays a message indicating no guest found. 
     * Use case ends.
 
-**Use case 4: Set RSVP status**
-
-**MSS**
+**Use Case 4 (UC4)**: Set RSVP Status<br>
+**Preconditions**: List displayed is not empty.<br>
+**MSS**:
 
 1.  User enters the command to set RSVP status.
-2.  The system prompts for the guest's index in the list and the intended RSVP status.
-3.  User enters the index and intended RSVP status.
+2.  The system prompts for the guest and RSVP status.
+3.  User enters the guest and  RSVP status.
 4.  The system verifies the input.
 5.  The system updates the RSVP status of the guest in the list and shows confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User enters an invalid guest or status (e.g. index lesser than 1 or greater than current list length, invalid status)
+* 3a. User enters an invalid guest or status.
     * 3a1. System displays error message and prompt for indexes.
     * Use case resumes at step 3.
 
-**Use case 5: Create new tag**
+**Use Case 5 (UC5)**: Create Tag<br>
+**MSS**:
 
-**MSS**
-
-1.  User enters the command to create new tag.
-2.  The system prompts for the description of the new tag.
-3.  User enters the description of the new tag.
+1.  User enters the command to create a tag.
+2.  The system prompts for the description of the tag.
+3.  User enters the description of the tag.
 4.  The system verifies the input.
-5.  The system updates the tag list to show the new created tag and shows confirmation message.
+5.  The system updates the tag list to show the created tag and shows confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
-    * 3a1. System displays error message and prompt tag description.
+* 3a. User enters an invalid description.
+    * 3a1. System displays error message and prompt for the corrected tag description.
     * Use case resumes at step 3.
 
-* 3b. User enters a duplicate tag description (i.e. tag already exists in the tag list)
+* 3b. User enters a duplicate tag description.
     * 3b1. System displays a message indicating the tag already exists.
     * Use case ends.
 
@@ -407,9 +403,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. System displays a message indicating the tag list limit has been reached.
     * Use case ends.
 
-**Use case 6: Delete tag**
-
-**MSS**
+**Use Case 6 (UC6)**: Delete Tag<br>
+**Preconditions**: Tag is not on any guest in the entire list.<br>
+**MSS**:
 
 1.  User enters the command to delete tag.
 2.  The system prompts for the description of the tag.
@@ -419,63 +415,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+* 3a. User enters an invalid description.
     * 3a1. System displays error message and prompt tag description.
     * Use case resumes at step 3.
 
-* 3b. User enters a description not matching any existing tags (i.e. tag does not exist in the tag list)
+* 3b. User enters a description not matching any existing tags.
     * 3b1. System displays a message indicating the tag does not exist.
     * Use case ends.
 
-**Use case 7: Tag guest**
-
-**MSS**
+**Use Case 7 (UC7)**: Tag Guest<br>
+**MSS**:
 
 1.  User enters the command to tag guest.
-2.  The system prompts for the index of the guest in the list and the tag.
-3.  User enters the index and the tag.
+2.  The system prompts for the guest and the tag.
+3.  User enters the guest and the tag.
 4.  The system verifies the input.
 5.  The system updates the guest list to show the tag on the guest and shows confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User enters an invalid tag (e.g. containing non-ASCII characters)
-    * 3a1. System displays error message and prompt index and tag.
+* 3a. User enters an invalid tag.
+    * 3a1. System displays error message and prompt for the guest and corrected tag.
     * Use case resumes at step 3.
 
-* 3b. User enters invalid index (e.g. index lesser than 1 or greater than current list length)
-    * 3c1. System displays error message and prompt for index and tag.
+* 3b. User enters invalid guest.
+    * 3c1. System displays error message and prompt for corrected guest and tag.
     * Use case resumes at step 3.
 
-* 5a. Tag not in tag list
+* 5a. Tag not in tag list.
     * 5a1. System displays a message indicating the tag does not exist in tag list.
+    * 5a2. User <u>creates a new tag (UC5)</u>.
     * Use case ends.
 
 
-**Use case 8: Untag guest**
-
-**MSS**
+**Use Case 8 (UC8)**: Untag Guest<br>
+**MSS**:
 
 1.  User enters the command to untag guest.
-2.  The system prompts for the index of the guest in the list and the tag.
-3.  User enters the index and tag.
+2.  The system prompts for the guest and the tag.
+3.  User enters the guest and tag.
 4.  The system verifies the input.
 5.  The system updates the guest list to show that the tag on the guest are removed and shows confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User enters an invalid tag (e.g. containing non-ASCII characters)
-    * 3a1. System displays error message and prompt index and tag.
-    * Use case resumes at step 3.
-
-* 3b. User enters invalid index (e.g. index lesser than 1 or greater than current list length)
-    * 3c1. System displays error message and prompt for index and tag.
+* 3b. User enters invalid guest.
+    * 3c1. System displays error message and prompt for the corrected guest and tag.
     * Use case resumes at step 3.
 
 * 5a. Tag not on guest
@@ -483,41 +474,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case ends.
 
 
-**Use case 9: Filter guest list by tag or RSVP status**
-
-**MSS**
+**Use Case 9 (UC9)**: Filter by Tag or RSVP Status<br>
+**MSS**:
 
 1.  User enters the command to filter guest list.
-2.  The system prompts for the desired predicate (e.g. a RSVP status and/or tag).
+2.  The system prompts for the desired predicate.
 3.  User enters the desired predicate.
 4.  The system verifies the input.
 5.  The system shows the list of guests matching the predicate and shows confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 3a. User enters an invalid RSVP status
+* 3a. User enters an invalid RSVP status.
     * 3a1. System displays error message indicating invalid RSVP status and prompts for the corrected predicate.
     * Use case resumes at step 3.
 
-* 3b. User enters an invalid tag
+* 3b. User enters an invalid tag.
     * 3b1. System displays error message indicating the tag does not exist in tag list and prompts for the corrected predicate.
     * Use case resumes at step 3.
 
-**Use case 10: Undo last action**
-
-**MSS**
+**Use Case 10 (UC10)**: Undo Last Command<br>
+**Preconditions**: Last command was successfully executed.<br>
+**MSS**:
 
 1.  User enters the command to undo the last action.
 2.  The system verifies the input.
-3.  The system shows the previous list before last action was taken shows confirmation message.
+3.  The system shows the list before last action was taken shows confirmation message.
 
     Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 2a. No last action present
+* 2a. No last action present.
     * 2a1. System displays error message indicating there is no action to undo.
     * Use case ends.
 
@@ -548,6 +538,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Delete**: Removes a guest and all details regarding the guest from the address book
 * **Add**: Creates and saves a new guest into the address book
 * **Filter**: Only show guests that contains the text input by the user
+* **Filter panel**: Shows the current filter predicates applied to the list
 * **New Tag**: Creates a new tag and adds it to the tag list
 * **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
 * **Remove Tag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
