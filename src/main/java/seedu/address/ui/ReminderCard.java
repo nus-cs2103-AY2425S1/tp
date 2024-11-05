@@ -22,10 +22,7 @@ public class ReminderCard extends UiPart<Region> {
     private Label name;
 
     @FXML
-    private Label date;
-
-    @FXML
-    private Label description;
+    private Label descriptionDate;
 
     @FXML
     private Label id;
@@ -42,7 +39,6 @@ public class ReminderCard extends UiPart<Region> {
         LocalDate reminderDate = reminder.reminderDate;
         LocalDate today = LocalDate.now();
         long daysBetween = ChronoUnit.DAYS.between(today, reminderDate);
-        date.setText("(" + daysBetween + "d)");
-        description.setText(reminder.reminderDescription);
+        descriptionDate.setText(reminder.reminderDescription + " (" + daysBetween + "d)");
     }
 }
