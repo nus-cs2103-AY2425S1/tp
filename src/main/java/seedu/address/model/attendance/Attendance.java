@@ -8,12 +8,14 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents an Attendance session for a contact in the address book.
- * Guarantees: immutable; session is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; session is valid as declared in {@link #isValidDateFormat(String)}
  */
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Session date should be valid and "
             + "in the form YYYY-MM-DD";
+
+    public static final String MESSAGE_TIME_CONSTRAINTS = "Session date should not be a future date";
 
     public static final String VALIDATION_REGEX =
             "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
@@ -26,7 +28,7 @@ public class Attendance {
      */
     public Attendance(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDateFormat(date), MESSAGE_CONSTRAINTS);
         session = LocalDate.parse(date);
     }
 
@@ -38,7 +40,7 @@ public class Attendance {
      * @param test A test date string.
      * @return Boolean representing validity of test date string
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidDateFormat(String test) {
         try {
             LocalDate.parse(test);
             return test.matches(VALIDATION_REGEX);
@@ -47,6 +49,15 @@ public class Attendance {
         }
     }
 
+    /**
+     * Returns true if a given string is before or same as current date.
+     * @param test A test date string.
+     * @return Boolean representing time validity of test date string
+     */
+    public static boolean isValidDateTime(String test) {
+        LocalDate date = LocalDate.parse(test);
+        return !date.isAfter(LocalDate.now());
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

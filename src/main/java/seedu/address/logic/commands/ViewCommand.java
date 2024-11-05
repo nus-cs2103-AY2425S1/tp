@@ -43,9 +43,8 @@ public class ViewCommand extends Command {
      * @throws CommandException
      */
     public void isValidHandle() throws CommandException {
-        char[] arr = this.tele.toCharArray();
-        if (arr.length < 5) {
-            throw new CommandException(Messages.MESSAGE_LENGTH_INVALID_TELEGRAM);
+        if (Telegram.isValidTelegramLength(this.tele)) {
+            throw new CommandException(Telegram.MESSAGE_LENGTH_INVALID_TELEGRAM);
         } else if (Telegram.isValidTelegram(this.tele)) {
             throw new CommandException(Messages.MESSAGE_ILLEGAL_CHARACTERS_IN_TELEGRAM);
         }

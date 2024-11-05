@@ -81,6 +81,9 @@ public class ParserUtil {
         if (!Telegram.isValidTelegram(trimmedTelegram)) {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
+        if (!Telegram.isValidTelegramLength(trimmedTelegram)) {
+            throw new ParseException(Telegram.LENGTH_CONSTRAINTS);
+        }
         return new Telegram(trimmedTelegram);
     }
 
@@ -108,8 +111,11 @@ public class ParserUtil {
     public static Attendance parseAttendance(String dateString) throws ParseException {
         requireNonNull(dateString);
         String trimmedDateString = dateString.trim();
-        if (!Attendance.isValidDate(trimmedDateString)) {
+        if (!Attendance.isValidDateFormat(trimmedDateString)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        if (!Attendance.isValidDateTime(trimmedDateString)) {
+            throw new ParseException(Attendance.MESSAGE_TIME_CONSTRAINTS);
         }
         return new Attendance(trimmedDateString);
     }
