@@ -55,7 +55,7 @@ public class Date {
      * <li>Month-specific day limits (e.g., April cannot exceed 30 days).</li>
      * </ul>
      *
-     * @param date the date string to validate, in the format {@code "d/M/yyyy HHmm"}
+     * @param date the date string to validate, in the format {@code "d/M/yyyy HHmm"}.
      * @throws ParseException if the date format is incorrect or if values exceed valid ranges:
      *      <ul>
      *          <li>{@code "Invalid date format! Please use 'd/M/yyyy HHmm'. For example, '2/12/2024 1800'"}
@@ -63,8 +63,9 @@ public class Date {
      *          <li>{@code "Invalid date or time values! Ensure day, month, hour, and minute ranges are correct."}
      *          for incorrect values.</li>
      *          <li>Specific messages for day limits in certain months,
-     *          such as {@code "February cannot have more than 29 days."}</li>
+     *          such as {@code "February cannot have more than 29 days."} for incorrect day counts.</li>
      *      </ul>
+     * @throws NullPointerException if the provided date string is {@code null}.
      */
     public static void checkDateAndTime(String date) throws ParseException {
         if (!date.matches("[0-9/ ]+")) {
@@ -89,13 +90,21 @@ public class Date {
     /**
      * Validates the format and values of a date string.
      * <p>
-     * This method checks if the input date matches the expected patterns for formatting
-     * and valid day/month ranges. If the format or values are invalid, it throws a
-     * {@link ParseException} with an appropriate message.
+     * This method checks if the input date string matches the expected format
+     * of "d/M/yyyy" (e.g., "2/12/2024") and whether the individual day,
+     * month, and year values are valid according to the Gregorian calendar.
+     * If the format or values are invalid, a {@link ParseException} is thrown
+     * with a descriptive message indicating the nature of the error.
      * </p>
      *
-     * @param date the date string to validate, expected in the format "d/M/yyyy" (e.g., "2/12/2024")
-     * @throws ParseException if the date format is invalid or the date values are out of range
+     * @param date the date string to validate, expected in the format "d/M/yyyy"
+     *             (e.g., "2/12/2024"). The string may include spaces but must
+     *             adhere to the specified format.
+     * @throws ParseException if the date format is invalid or the date values
+     *                        are out of range (e.g., day is not between 1 and 31,
+     *                        month is not between 1 and 12, or the year is
+     *                        negative).
+     * @throws NullPointerException if the provided date string is {@code null}.
      */
     public static void checkDate(String date) throws ParseException {
         if (!date.matches("[0-9/ ]+")) {
