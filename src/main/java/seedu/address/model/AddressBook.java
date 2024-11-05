@@ -277,7 +277,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes all {@code assignment} from this {@code AddressBook}
+     * Removes all {@code Assignment} from this {@code AddressBook}
      * with matching {@code EmployeeId}.
      */
     public boolean removeAllAssignments(EmployeeId employeeId) {
@@ -286,7 +286,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes all {@code assignment} from this {@code AddressBook}
+     * Removes all {@code Assignment} from this {@code AddressBook}
      * with matching {@code ProjectId}.
      */
     public boolean removeAllAssignments(ProjectId projectId) {
