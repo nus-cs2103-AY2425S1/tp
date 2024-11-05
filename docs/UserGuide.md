@@ -79,6 +79,7 @@
 
   .content-droppable:hover {
     background-color: var(--hover-bg-color);
+    transition: 0.2s ease;
   }
 
   .content-qna {
@@ -91,16 +92,11 @@
     padding: 8px;
   }
 
-  summary {
-    cursor: pointer;
+  .command-titles {
     margin-bottom: 8px;
     display: flex;
-    transition: 0s ease;
+    transition: 0.2s ease;
     font-size: 1.2em;
-  }
-
-  details[open] > summary > .chevrons {
-    transform: rotate(270deg);
   }
 
   code {
@@ -300,13 +296,10 @@
 
 <div class="content content-droppable content-droppable-first">
 
-<details>
-  <summary>
+<div>
+  <div class="command-titles">
     <strong>Clearing all entries<br><code>clear</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+  </div>
 
   <div class="command-content">
   Clears all entries from StaffSync.
@@ -316,17 +309,15 @@
 
   Format: `clear`
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Deleting a person<br><code>delete</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Deleting a person<br><code>delete</code></strong>
+  </div>
 
   <div class="command-content">
   Deletes the specified person from StaffSync.
@@ -345,16 +336,14 @@
   * `list` followed by `delete e 2` deletes the 2nd person in the employee list.
   * `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
-<details>
-  <summary><strong>Demoting a person<br><code>demote</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Demoting a person<br><code>demote</code></strong>
+  </div>
 
   <div class="command-content">
   Demotes the specified employee from StaffSync into a potential hire.
@@ -383,17 +372,15 @@
   </div class="box">
   </div>
 
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Editing a person<br><code>edit</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Editing a person<br><code>edit</code></strong>
+  </div>
 
   <div class="command-content">
   Edits an existing person in the StaffSync.
@@ -416,17 +403,15 @@
   *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
   *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Adding an employee<br><code>employee</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Adding an employee<br><code>employee</code></strong>
+  </div>
 
 
   <div class="command-content">
@@ -445,17 +430,15 @@
   Examples:
   * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Exiting the program<br><code>exit</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Exiting the program<br><code>exit</code></strong>
+  </div>
 
   <div class="command-content">
   Exits the program.
@@ -465,17 +448,15 @@
 
   Format: `exit`
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Locating persons by name<br><code>find</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Locating persons by name<br><code>find</code></strong>
+  </div>
 
   <div class="command-content">
   Finds all employees and/or potential hires whose names contain any of the specified keywords.
@@ -526,17 +507,15 @@ Example: "find ph n/John".
   </div class="box">
 
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Viewing help<br><code>help</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Viewing help<br><code>help</code></strong>
+  </div>
 
   <div class="command-content">
   Displays a help window containing the list of commands, its purpose and the format
@@ -548,17 +527,15 @@ Example: "find ph n/John".
 
   Format:`help`
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Listing all persons<br><code>list</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Listing all persons<br><code>list</code></strong>
+  </div>
 
   <div class="command-content">
   Shows a list of all persons in StaffSync.
@@ -569,17 +546,15 @@ Example: "find ph n/John".
   Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
   * Lists type of persons based on the parameter given.
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Adding a potential hire<br><code>potential</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Adding a potential hire<br><code>potential</code></strong>
+  </div>
 
   <div class="command-content">
   Adds a potential hire to StaffSync.
@@ -597,17 +572,15 @@ Example: "find ph n/John".
   Examples:
   * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable content-droppable">
 
-<details>
-  <summary><strong>Promoting a person<br><code>promote</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Promoting a person<br><code>promote</code></strong>
+  </div>
 
   <div class="command-content">
   Promotes the specified potential hire from StaffSync into an employee.
@@ -638,17 +611,15 @@ Example: "find ph n/John".
   * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
   </div class="box">
   </div>
-</details>
+</div>
 
 </div>
 <div class="content content-droppable content-droppable-last">
 
-<details>
-  <summary><strong>Sorting the list<br><code>sort</code></strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Sorting the list<br><code>sort</code></strong>
+  </div>
 
   <div class="command-content">
   Sorts the list in ascending or descending order by the given parameter.
@@ -678,7 +649,7 @@ Example: "find ph n/John".
   * `sort name` sorts all contacts by name in alphabetical order.
   * `sort date desc` sorts by contract end date with potential hires at the bottom.
   * `sort role asc` sorts contacts by role in alphabetical order.
-</details>
+</div>
 
 </div>
 
@@ -756,19 +727,17 @@ _Details coming soon ..._
 
 <div class="content content-qna">
 
-<details>
-  <summary><strong>Q: How do I transfer my data to another Computer?</strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
-  </summary>
+<div>
+  <div class="command-titles">
+    <strong>Q: How do I transfer my data to another Computer?</strong>
+  </div>
 
   <div class="qna-content">
 
   <strong>A: </strong>Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StaffSync home folder.
 
   </div>
-</details>
+</div>
 
 </div>
 
