@@ -139,7 +139,7 @@ public class TagDeleteCommand extends Command {
             }
         }
 
-        model.deletePersonInWedding(editedPerson, model, tagsToDelete);
+        model.deletePersonInWedding(editedPerson, tagsToDelete);
         return String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsToDelete),
                 Messages.format(editedPerson), Messages.format(editedPerson),
                 Messages.tagSetToString(tagsToDelete));
