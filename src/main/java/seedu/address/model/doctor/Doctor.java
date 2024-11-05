@@ -85,4 +85,7 @@ public class Doctor extends Person {
                 .toString();
     }
 
+    public boolean isSameDoctor(Person person) {
+        return person instanceof Doctor && isSameDoctor((Doctor) person);
+    }
 }
