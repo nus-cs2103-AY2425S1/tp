@@ -22,7 +22,6 @@ public class PersonUtil {
      *
      * @param person the {@code Person} instance whose role-specific information is to be retrieved.
      * @return a {@code String} containing the role-specific information.
-     * @throws CommandException if the {@code Person} has an unknown role or if the role is unsupported.
      */
     public static String getRoleSpecificInfoString(Person person) throws CommandException {
         Role role = person.getRole();
