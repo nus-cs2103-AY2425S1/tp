@@ -107,6 +107,22 @@ public class Person {
     }
 
     /**
+     * Checks if the {@code weddingJobs} of the person contains the Wedding object.
+     *
+     * @param target {@code Wedding} object to be found
+     * @return true if {@code target} is found in {@code weddingJobs}
+     */
+    public boolean containsWeddingJob(Wedding target) {
+        for (Wedding weddingJob : weddingJobs) {
+            if (weddingJob.equals(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Returns true if both persons have the same name, phone, email, address.
      * This defines a weaker notion of equality between two persons.
      */

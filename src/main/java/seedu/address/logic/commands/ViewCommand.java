@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.PersonHasWeddingPredicate;
 
 import java.util.List;
 
@@ -50,13 +51,13 @@ public class ViewCommand extends Command {
         if (this.targetIndex != null) {
             Person personToView = getPersonByIndex(model);
             model.updateFilteredPersonList(p -> p.equals(personToView));
-            model.updateFilteredWeddingList(p -> personToView.containsWeddingJob(p));
+            model.updateFilteredWeddingList(new PersonHasWeddingPredicate(personToView));
             return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS + personToView.getName()));
         } else {
             Person personToView = getPersonByKeyword(model);
             if (personToView != null) {
                 // unique person found
-                model.updateFilteredWeddingList(p -> personToView.containsWeddingJob(p));
+                model.updateFilteredWeddingList(new PersonHasWeddingPredicate(personToView));
                 return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS + personToView.getName()));
             } else {
                 return new CommandResult(String.format(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,

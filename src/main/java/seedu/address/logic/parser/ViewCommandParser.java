@@ -26,7 +26,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
             if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
 
             if (isNumeric(trimmedArgs)) {
@@ -41,7 +41,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             }
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
         }
     }
 

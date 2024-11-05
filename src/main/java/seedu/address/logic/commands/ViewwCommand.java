@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ViewwCommand extends Command {
     public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There are no wedding records to view.";
     public static final String MESSAGE_VIEW_WEDDING_SUCCESS = "Viewing Wedding Details of: %1$s";
     public static final String MESSAGE_DUPLICATE_HANDLING =
-            "Please specify the index of the contact whose wedding details you want to view.\n"
+            "Please specify the index of the wedding which wedding details you want to view.\n"
                     + "Find the index from the list below and type vieww INDEX\n"
                     + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_NO_WEDDING_DETAILS = "No wedding details found for: %1$s";
@@ -62,6 +63,7 @@ public class ViewwCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_VIEW_WEDDING_SUCCESS,
                         Messages.format(weddingPredicateToView.getWedding())));
             } else {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
             }
         }
@@ -85,6 +87,7 @@ public class ViewwCommand extends Command {
                     lastShownList.size()));
         }
         Wedding weddingToView = lastShownList.get(targetIndex.getZeroBased());
+        model.updateFilteredWeddingList(p -> p.equals(weddingToView));
 
         return new PersonMatchesWeddingPredicate(weddingToView);
     }
