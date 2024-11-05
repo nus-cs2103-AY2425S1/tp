@@ -22,6 +22,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonBuilder;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -29,13 +30,17 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withNric("S1234567A").withDateOfBirth("2000-01-01").withGender("F")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withPriority("HIGH")
-            .withAppointments("Physio:2024-12-01:1500-1600", "Orthopedic:2024-12-01:1200-1300")
-            .withAllergies("Peanuts")
-            .build();
+                                                          .withNric("S1234567A")
+                                                          .withDateOfBirth("2000-01-01")
+                                                          .withGender("F")
+                                                          .withAddress("123, Jurong West Ave 6, #08-111")
+                                                          .withEmail("alice@example.com")
+                                                          .withPhone("94351253")
+                                                          .withPriority("HIGH")
+                                                          .withAppointments("Physio:2024-12-01:1500-1600",
+                                                                            "Orthopedic:2024-12-01:1200-1300")
+                                                          .withAllergies("Peanuts")
+                                                          .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withNric("T0234547A").withDateOfBirth("2002-01-01").withGender("M")
             .withAddress("311, Clementi Ave 2, #02-25")

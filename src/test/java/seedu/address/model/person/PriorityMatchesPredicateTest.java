@@ -6,9 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
-
-
 
 public class PriorityMatchesPredicateTest {
     private final Priority highPriority = new Priority("HIGH");

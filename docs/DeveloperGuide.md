@@ -309,216 +309,369 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case:** UC1 - Add Patient
 
 **MSS:**
-1. User requests to add patient details.
-2. User provides the patient details.
-3. MB3 adds the patient and displays a success message.
+1. User requests to add patient detail
+2. User provides the patient detail
+3. MediBase3 adds the patient detail
 
-    Use case ends.
+    Use case ends
 
 **Extensions:**
 
 * 2a. The patient already exists in MediBase3.
-    * 2a1. MediBase3 informs the user of the error.<br>
-    Use case ends
+
+    * 2a1. MediBase3 informs user of the error.
+  
+        Use case resumes at step 2.
 
 
 * 2b. The user provides patient details that is not in the expected format.
-    * 2b1. MB3 informs the user of the expected format.<br>
-    Use case resume at step 2.
+
+    * 2b1. MediBase3 informs user of the error.
+  
+        Use case resume at step 2.
 
 ---
 
 **Use case:** UC2 - Edit Patient
 
 **MSS:**
-1. User requests MediBase3 to edit the patient data.
-2. User provides the new patient data.
-3. MediBase3 updates the patient data and displays a success message.  
-   Use case ends.
+1. User requests MediBase3 to edit the patient data
+2. User provides the new patient detail
+3. MediBase3 updates the patient detail
+   Use case ends
 
 **Extensions:**
+
 * 3a. User updates a non-existing patient.
-    * 3a1. MediBase3 shows an error message.<br>
-    Use case resumes at step 2.
+
+    * 3a1. MediBase3 informs user of the error.
+  
+        Use case resumes at step 2.
 
 
 * 3b. User provides a field that is not in the expected format.
-    * 3b1. MediBase3 informs the user that the field is not in the expected format.<br>
-    * MediBase3 provides the expected format for the field.<br>
-    Use case resumes at step 2.
+
+    * 3b1. MediBase3 informs user of the error.
+  
+        Use case resumes at step 2.
 
 
 * 3c. User provides multiple instances of the same field for the patient.
-    * 3b1. MediBase3 informs the user that multiple fields are present.<br>
-    Use case resumes at step 2.
+
+    * 3b1. MediBase3 informs user of the error.
+  
+        Use case resumes at step 2.
 
 ---
 
 **Use case:** UC3 - Find Patient by Name
 
 **MSS:**
-1. User requests to find a patient
-2. MB3 prints the selected patient information and displays a success message.  
-   Use case ends.
+1. User requests to find a patient by with a specific keyword in their name
+2. MediBase3 checks each patient's name in the list that contains the keyword
+4. MediBase3 shows the selected patient information that match the criteria
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when finding patient data.  
-  * 1a1. MB3 does not print patient data and shows an error message.  
+
+* 4a. No patient found with the given name.
+
+    * 4a1. MediBase3 informs user of the error.
+  
         Use case ends.
 
 ---
- 
-**Use case:** UC4 - List Patients
+
+**Use case:** UC4 - Find Patient by NRIC
 
 **MSS:**
-1. User requests MB3 to list patients.
-2. MB3 lists the patient data sequentially and displays a success message.  
-   Use case ends.
+1. User requests to find a patient by NRIC
+2. MediBase3 request for search requirements
+3. User provides the details required to search for the patient
+4. MediBase3 shows the selected patient information
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when listing patient data.  
-  * 1a1. MB3 does not list patient data and shows an error message.  
-Use case ends.
+
+* 4a. No patient found with the given NRIC.
+
+    * 4a1. MediBase3 informs user of the error.
+
+        Use case ends.
+
+---
+
+**Use case:** UC5 - Find Patient by Medical Condition
+
+**MSS:**
+1. User requests to find a patient by with a specific keyword in their medical condition
+2. MediBase3 checks each patient's medical condition in the list that contains the keyword
+4. MediBase3 shows the selected patient information that match the criteria
+
+   Use case ends
+
+**Extensions:**
+
+* 4a. No patient found with the given medical condition.
+
+    * 4a1. MediBase3 informs user of the error.
+
+      Use case ends.
 
 ---
  
-**Use case:** UC5 - Add Appointment
+**Use case:** UC6 - List Patients
 
 **MSS:**
-1. User keys in the appointment details.
-2. MB3 adds the appointment and displays a success message.  
-   Use case ends.
+1. User requests MediBase3 to list patients detail
+2. MediBase3 lists the patient detail sequentially
 
-**Extensions:**
-* 1a. MB3 detects an error when adding an appointment.  
-  * 1a1. MB3 does not add the appointment and shows an error message.  
-Use case ends.
+   Use case ends
+
+---
+
+**Use case:** UC7 - List Patients By Priority
+
+**MSS:**
+1. User requests to list patients by priority
+2. User provides the details required to list patients by priority
+3. MediBase3 lists patients' details by priority
+
+   Use case ends.
 
 ---
  
-**Use case:** UC6 - Add Medical Condition
+**Use case:** UC8 - Add Appointment
 
 **MSS:**
-1. User keys in the patient’s medical condition.
-2. MB3 adds the medical condition and displays a success message.  
-   Use case ends.
+1. User requests to add appointment to the patient detail
+2. User provides the appointment detail
+3. MediBase3 adds the appointment to the patient detail
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when adding the patient’s medical condition.  
-  * 1a1. MB3 does not add the medical condition and shows an error message.  
-Use case ends.
+
+* 3a. User provides a field that is not in the expected format.
+
+    * 3a1. MediBase3 informs the user of the error.
+  
+      Use case resumes at step 2.
+
+* 3b. User provides multiple instances of the same field for the appointment.
+
+    * 3b1. MediBase3 informs the user of the error.
+  
+      Use case resumes at step 2.
 
 ---
  
-**Use case:** UC7 - Set Patient’s Priority
+**Use case:** UC9 - Add Medical Condition
 
 **MSS:**
-1. User requests MB3 to set a selected patient’s priority.
-2. MB3 sets the patient’s priority and displays a success message.  
-   Use case ends.
+1. User requests to add medical condition to the patient detail
+2. User provides the medical condition
+3. MediBase3 adds the medical condition to the patient detail
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when setting the patient’s priority.  
-  * 1a1. MB3 does not set the patient’s priority and shows an error message.  
-Use case ends.
+
+* 3a. User provides a field that is not in the expected format.
+
+    * 3a1. MediBase3 informs the user of the error.
+
+      Use case resumes at step 2.
+
+* 3b. User provides multiple instances of the same field for the medical condition.
+
+    * 3b1. MediBase3 informs the user of the error.
+
+      Use case resumes at step 2.
 
 ---
  
-**Use case:** UC8 - Add Allergies to Patients
+**Use case:** UC10 - Set Patient’s Priority
 
 **MSS:**
-1. User keys in the patient’s allergies to MB3.
-2. MB3 adds the allergies and displays a success message.  
-   Use case ends.
+1. User requests to set patient's priority 
+2. User provides the patient’s priority details
+3. MediBase3 sets the patient’s priority
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when adding the patient’s allergies.  
-  * 1a1. MB3 does not add the allergies and shows an error message.  
-Use case ends.
 
----
+* 3a. User provides a field that is not in the expected format.
 
-**Use case:** UC9 - Delete Patient Contact
+    * 3a1. MediBase3 informs the user of the error.
+  
+      Use case ends.
 
-**MSS:**
-1. User requests MB3 to delete a selected patient’s contact.
-2. MB3 deletes the patient’s contact and displays a success message.  
-   Use case ends.
+* 3b. User provides multiple instances of the same field for the medical condition.
 
-**Extensions:**
-* 1a. MB3 detects an error when deleting a patient’s contact.  
-  * 1a1. MB3 does not delete the patient’s contact and shows an error message.  
-Use case ends.
+    * 3b1. MediBase3 informs the user of the error.
+
+      Use case ends.
 
 ---
  
-**Use case:** UC10 - Delete Patient Condition   
+**Use case:** UC11 - Add Allergies to Patients
 
 **MSS:**
-1. User requests MB3 to delete a selected patient’s condition.
-2. MB3 deletes the patient’s condition and displays a success message.  
-   Use case ends.
+1. User requests to add patient’s allergies to the patient detail
+2. User provides the allergies details
+3. MediBase3 adds the allergies to the patient detail
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when deleting a patient’s condition.  
-  * 1a1. MB3 does not delete the patient’s condition and shows an error message.  
-Use case ends.
+
+* 3a. User provides a field that is not in the expected format.
+
+  * 3a1. MediBase3 informs the user of the error.
+
+    Use case ends.
+
+* 3b. User provides multiple instances of the same field for the medical condition.
+
+  * 3b1. MediBase3 informs the user of the error.
+
+    Use case ends.
+
+---
+
+**Use case:** UC12 - Delete Patient Contact
+
+**MSS:**
+1. User requests to delete patient contact 
+2. User provides the details required to delete the patient contact
+3. MediBase3 deletes the patient’s contact
+
+   Use case ends
+
+**Extensions:**
+
+* 3a. User updates a non-existing patient.
+
+  * 3a1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 3b. User provides a field that is not in the expected format.
+
+  * 3b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 3c. User provides multiple instances of the same field for the patient.
+
+  * 3b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
 
 ---
  
-**Use case:** UC11 - Delete Patient Allergies
+**Use case:** UC13 - Delete Patient Medical Condition   
 
 **MSS:**
-1. User requests MB3 to delete a selected patient’s allergies.
-2. MB3 deletes the allergies and displays a success message.  
+1. User requests to delete a patient medical condition
+2. User provides the details required to delete the patient’s condition
+3. MediBase3 deletes the patient’s condition
+
    Use case ends.
 
 **Extensions:**
-* 1a. MB3 detects an error when deleting a patient’s allergies.  
-  * 1a1. MB3 does not delete the allergies and shows an error message.  
-Use case ends.
 
----
+* 3a. User updates a non-existing patient.
 
-**Use case:** UC12 - Delete Patient Appointment
+  * 3a1. MediBase3 informs user of the error.
 
-**MSS:**
-1. User requests MB3 to delete a selected patient’s appointment.
-2. MB3 deletes the appointment and displays a success message.  
-   Use case ends.
+    Use case resumes at step 2.
 
-**Extensions:**
-* 1a. MB3 detects an error when deleting a patient’s appointment.  
-  * 1a1. MB3 does not delete the appointment and shows an error message.  
-Use case ends.
+
+* 3b. User provides a field that is not in the expected format.
+
+  * 3b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 3c. User provides multiple instances of the same field for the patient.
+
+  * 3b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
 
 ---
  
-**Use case:** UC13 - List Patients By Condition
+**Use case:** UC14 - Delete Patient Allergies
 
 **MSS:**
-1. User requests MB3 to list patients’ details by condition.
-2. MB3 lists patients' details by condition and displays a success message.  
-   Use case ends.
+1. User requests to delete a patient’s allergies
+2. User provides the details required to delete the patient’s allergies
+3. MediBase3 deletes the patient’s allergies
+
+   Use case ends
 
 **Extensions:**
-* 1a. MB3 detects an error when listing patients by condition.  
-  * 1a1. MB3 does not list the patients by condition and shows an error message.  
-Use case ends.
+
+* 3a. User updates a non-existing patient.
+
+  * 3a1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 3b. User provides a field that is not in the expected format.
+
+  * 3b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 3c. User provides multiple instances of the same field for the patient.
+
+  * 3b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
 
 ---
 
-**Use case:** UC14 - List Patients By Priority
+**Use case:** UC15 - Delete Patient Appointment
 
 **MSS:**
-1. User requests MB3 to list patients’ details by priority.
-2. MB3 lists patients' details by priority and displays a success message.  
+1. User requests to delete a patient’s appointment
+2. User provides the details required to delete the patient’s appointment
+3. MediBase3 deletes the appointment
+
    Use case ends.
 
 **Extensions:**
-* 1a. MB3 detects an error when listing patients by priority.  
-  * 1a1. MB3 does not list the patients by priority and shows an error message.  
-Use case ends.
+
+* 3a. User updates a non-existing patient.
+
+    * 3a1. MediBase3 informs user of the error.
+
+      Use case resumes at step 2.
+
+
+* 3b. User provides a field that is not in the expected format.
+
+    * 3b1. MediBase3 informs user of the error.
+
+      Use case resumes at step 2.
+
+
+* 3c. User provides multiple instances of the same field for the patient.
+
+    * 3b1. MediBase3 informs user of the error.
+
+      Use case resumes at step 2.
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -527,12 +680,11 @@ Use case ends.
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The application should be able to start up within 3s.
-5.  The application should be able to respond to user commands within 1s.
+4.  For under 1000 patient details, the application should be able to start up within 3s.
+5.  For under 1000 patient details, the application should be able to respond to user commands within 1s.
 6.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
 7.  The user interface should be easy for users to navigate and understand.
 8.  The application should be able to function without an internet connection.
-9.  Data should be stored securely
 
 [Back to Table of Contents](#table-of-contents)
 ### Glossary
