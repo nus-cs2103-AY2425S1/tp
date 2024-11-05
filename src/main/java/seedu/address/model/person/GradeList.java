@@ -28,10 +28,18 @@ public class GradeList {
     }
 
     public GradeList(Map<String, Grade> grades) {
+        if (grades.keySet().stream().map(String::toLowerCase).distinct().count() != grades.keySet().size()) {
+            throw new IllegalStateException("Duplicates in grade map");
+        }
+
         this.grades = Collections.unmodifiableMap(grades);
     }
 
     private GradeList(List<Grade> grades) {
+        if (grades.stream().map(grade -> grade.getTestName().toLowerCase()).distinct().count() != grades.size()) {
+            throw new IllegalStateException("Duplicates in grade list");
+        }
+
         this.grades = grades.stream().collect(Collectors.toMap(Grade::getTestName, grade -> grade));
     }
 
