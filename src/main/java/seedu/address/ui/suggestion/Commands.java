@@ -5,25 +5,27 @@ package seedu.address.ui.suggestion;
  * Each command has a name, an example format, and associated prefixes for parameters.
  */
 public enum Commands {
-    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [w/WEDDING...]",
-            new String[]{"n/", "p/", "e/", "a/", "t/", "w/"}),
-    DELETE("delete", "delete INDEX/NAME", new String[]{}),
+    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]",
+            new String[]{"n/", "p/", "e/", "a/", "r/", "w/"}),
     CLEAR("clear", "clear", new String[]{}),
+    DELETE("delete", "delete INDEX/NAME", new String[]{}),
+    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
+            new String[]{"n/", "p/", "e/", "a/"}),
+    FIND("find", "find KEYWORD [MORE_KEYWORDS]", new String[]{}),
+    FILTER("filter", "filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]",
+            new String[]{"n/", "p/", "e/", "a/", "r/"}),
     VIEW("view", "view NAME", new String[]{}),
-    FILTER("filter", "filter KEYWORD [MORE_KEYWORDS...]", new String[]{}),
     LIST("list", "list", new String[]{}),
     EXIT("exit", "exit", new String[]{}),
     HELP("help", "help", new String[]{}),
-    ADDWEDDING("addw", "addw n/WEDDINGNAME c/CLIENT [d/DATE] [v/VENUE]",
-            new String[]{"d/", "v/", "c/", "n/"}),
-    TAGWEDDING("tagw", "tagw INDEX/NAME w/WEDDING r/ROLE ", new String[]{"w/", "r/"}),
-    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
-            new String[]{"n/", "p/", "e/", "a/"}),
-    VIEWWEDDING("vieww", "vieww WEDDINGNAME/INDEX", new String[]{}),
-
-
+    ADDWEDDING("addw", "addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]",
+            new String[]{"n/", "c/", "d/", "v/"}),
+    EDITWEDDING("editw", "editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]",
+            new String[]{"n/", "d/", "v/"}),
+    VIEWWEDDING("vieww", "vieww INDEX/WEDDING_NAME", new String[]{}),
     DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
-    TAGGING("tag", "tag INDEX/NAME [t/TAG...]", new String[]{"t/"});
+    TAGGING("assign","assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX]",
+            new String[]{"r/", "w/"});
 
     private final String commandName;
     private final String formatExample;
