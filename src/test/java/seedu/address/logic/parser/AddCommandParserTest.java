@@ -153,40 +153,41 @@ public class AddCommandParserTest {
     @Test
     public void parse_compulsoryFieldMissing_failure() {
 
+
         // missing name prefix
         assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + CLIENT_TYPE_DESC_A
                         + DESCRIPTION_DESC_A + VALID_NAME_BOB,
-                "The following field is missing: n/NAME");
+                "The following field for add command is missing: n/NAME");
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + CLIENT_TYPE_DESC_A + DESCRIPTION_DESC_A,
-                "The following field is missing: p/PHONE");
+                "The following field for add command is missing: p/PHONE");
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
                         + ADDRESS_DESC_BOB + CLIENT_TYPE_DESC_A + DESCRIPTION_DESC_A,
-                "The following field is missing: e/EMAIL");
+                "The following field for add command is missing: e/EMAIL");
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + VALID_ADDRESS_BOB + CLIENT_TYPE_DESC_A + DESCRIPTION_DESC_A,
-                "The following field is missing: a/ADDRESS");
+                "The following field for add command is missing: a/ADDRESS");
 
         // missing description prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + CLIENT_TYPE_DESC_A + VALID_DESCRIPTION_A,
-                "The following field is missing: d/DESCRIPTION");
+                "The following field for add command is missing: d/DESCRIPTION");
 
         // missing client type prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + VALID_CLIENT_TYPE_A + DESCRIPTION_DESC_A,
-                "The following field is missing: c/CLIENT_TYPE");
+                "The following field for add command is missing: c/CLIENT_TYPE");
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
                         + VALID_ADDRESS_BOB + VALID_CLIENT_TYPE_A + VALID_DESCRIPTION_A,
-                "The following fields are missing: n/NAME a/ADDRESS p/PHONE "
+                "The following fields for add command are missing: n/NAME a/ADDRESS p/PHONE "
                         + "e/EMAIL c/CLIENT_TYPE d/DESCRIPTION");
     }
 

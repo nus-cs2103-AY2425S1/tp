@@ -28,8 +28,9 @@ import seedu.address.model.reminder.Reminder;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    private static final String MESSAGE_MISSING_FIELD = "The following field is missing: %s";
-    private static final String MESSAGE_MULTIPLE_MISSING_FIELDS = "The following fields are missing: %s";
+    private static final String MESSAGE_MISSING_FIELD = "The following field for add command is missing: %s";
+    private static final String MESSAGE_MULTIPLE_MISSING_FIELDS =
+            "The following fields for add command are missing: %s";
 
     // Map to store prefix to field description mapping
     private static final HashMap<Prefix, String> FIELD_DESCRIPTIONS = new HashMap<>();
