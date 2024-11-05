@@ -42,8 +42,8 @@ public class PropertyCard extends UiPart<Region> {
         postalCode.setText(property.getPostalCode().value);
         unit.setText(property.getUnit().value);
         type.setText("Type: " + property.getType().value);
-        bid.setText("Bid: $" + property.getBid().value);
-        ask.setText("Ask: $" + property.getAsk().value);
+        bid.setText("Bid('000): $" + property.getBid().value);
+        ask.setText("Ask('000): $" + property.getAsk().value);
     }
 
     public HBox getPropertyCardPane() {
