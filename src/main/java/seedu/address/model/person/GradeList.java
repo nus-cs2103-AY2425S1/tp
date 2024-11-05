@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,7 +187,14 @@ public class GradeList {
         }
 
         GradeList otherGradeList = (GradeList) other;
-        return this.grades.equals(otherGradeList.grades);
+        // Sort both grade lists before comparing
+        List<Grade> sortedGrades = new ArrayList<>(this.grades.values());
+        sortedGrades.sort(Comparator.comparing(Grade::getTestName));
+
+        List<Grade> otherSortedGrades = new ArrayList<>(otherGradeList.grades.values());
+        otherSortedGrades.sort(Comparator.comparing(Grade::getTestName));
+
+        return sortedGrades.equals(otherSortedGrades);
     }
 
     @Override
