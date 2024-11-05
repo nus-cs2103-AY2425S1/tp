@@ -292,6 +292,7 @@ Examples:
 Result for `view jeremy`:
     ![result for 'view jeremy`](images/ViewCommandExample.png)
 
+### Add Reminder
 
 ### Clearing all entries : `clear`
 
