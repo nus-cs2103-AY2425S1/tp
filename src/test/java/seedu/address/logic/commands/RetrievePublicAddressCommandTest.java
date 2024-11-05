@@ -12,11 +12,13 @@ import static seedu.address.testutil.TypicalPersons.BTC_SPECIAL_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,6 +29,11 @@ import seedu.address.testutil.PersonBuilder;
 public class RetrievePublicAddressCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(new AddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_validIndexValidNetwork_success() {

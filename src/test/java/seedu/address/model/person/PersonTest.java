@@ -78,7 +78,7 @@ public class PersonTest {
         PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, "solAddress", "solLabel");
         Person updatedPerson = person.withUpdatedPublicAddress(newAddress);
 
-        assertEquals(person, updatedPerson);
+        assertNotEquals(person, updatedPerson);
     }
 
     @Test
