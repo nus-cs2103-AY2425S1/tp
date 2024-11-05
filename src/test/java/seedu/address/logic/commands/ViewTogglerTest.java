@@ -23,7 +23,7 @@ public class ViewTogglerTest {
                         Messages.format(ALICE))).getCommandType(),
                 ViewToggler.LINK_OWNER_TO_PET_COMMAND);
 
-        assertEquals(new ViewToggler(AddCommand.MESSAGE_SUCCESS).getCommandType(),
+        assertEquals(new ViewToggler(AddOwnerCommand.MESSAGE_SUCCESS).getCommandType(),
                 ViewToggler.OTHER_COMMAND);
     }
 }

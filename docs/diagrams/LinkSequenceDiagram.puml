@@ -1,0 +1,93 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":LinkCommandParser" as LinkCommandParser LOGIC_COLOR
+participant "c:LinkCommand" as LinkCommand LOGIC_COLOR
+participant ":Link" as Link LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("link o1 t/p1 t/p2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("link o1 t/p1 t/p2")
+activate AddressBookParser
+
+create LinkCommandParser
+AddressBookParser -> LinkCommandParser
+activate LinkCommandParser
+
+LinkCommandParser --> AddressBookParser
+deactivate LinkCommandParser
+
+AddressBookParser -> LinkCommandParser : parse("o1 t/p1 t/p2")
+activate LinkCommandParser
+
+create LinkCommand
+LinkCommandParser -> LinkCommand
+activate LinkCommand
+
+LinkCommand --> LinkCommandParser :
+deactivate LinkCommand
+
+LinkCommandParser --> AddressBookParser : c
+deactivate LinkCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LinkCommandParser -[hidden]-> AddressBookParser
+destroy LinkCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> LinkCommand : execute(m)
+activate LinkCommand
+
+LinkCommand -> Model : getFilteredOwnerList()
+activate Model
+Model --> LinkCommand
+
+LinkCommand -> Model : getFilteredPetList()
+Model --> LinkCommand
+
+'Validate all links
+LinkCommand -> LinkCommand : getValidatedLinks(m, owner, petList)
+activate LinkCommand
+loop for each owner-pet pair
+    create Link
+    LinkCommand -> Link :
+    activate Link
+    Link --> LinkCommand : link
+    deactivate Link
+    LinkCommand -> Model : hasLink(link)
+    Model --> LinkCommand
+end
+LinkCommand --> LinkCommand : links
+deactivate LinkCommand
+
+loop for each link
+    LinkCommand -> Model : addLink(link)
+    Model --> LinkCommand
+    deactivate Model
+end
+
+create CommandResult
+LinkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LinkCommand
+deactivate CommandResult
+
+LinkCommand --> LogicManager : r
+deactivate LinkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

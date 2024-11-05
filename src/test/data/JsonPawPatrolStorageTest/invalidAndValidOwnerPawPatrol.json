@@ -1,0 +1,16 @@
+{
+  "owners": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "identificationNumber": "S0000001I"
+  },
+  {
+    "name": "Benson Meier",
+    "phone": "98765432",
+    "email": "johnd@example.com",
+    "address": "311, Clementi Ave 2, #02-25",
+    "identificationNumber": "S0000002AA"
+  } ]
+}

@@ -13,7 +13,6 @@ import seedu.address.model.PawPatrol;
 import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -21,16 +20,12 @@ import seedu.address.model.pet.Pet;
  */
 @JsonRootName(value = "pawpatrol")
 class JsonSerializablePawPatrol {
-
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-
     public static final String MESSAGE_DUPLICATE_OWNER = "Owners list contains duplicate owner(s).";
 
     public static final String MESSAGE_DUPLICATE_PET = "Pets list contains duplicate pet(s).";
 
     public static final String MESSAGE_DUPLICATE_LINK = "Pets list contains duplicate link(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedOwner> owners = new ArrayList<>();
     private final List<JsonAdaptedPet> pets = new ArrayList<>();
     private final List<JsonAdaptedLink> links = new ArrayList<>();
@@ -39,13 +34,9 @@ class JsonSerializablePawPatrol {
      * Constructs a {@code JsonSerializablePawPatrol} with the given owners and pets.
      */
     @JsonCreator
-    public JsonSerializablePawPatrol(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                     @JsonProperty("pets") List<JsonAdaptedPet> pets,
+    public JsonSerializablePawPatrol(@JsonProperty("pets") List<JsonAdaptedPet> pets,
                                      @JsonProperty("owners") List<JsonAdaptedOwner> owners,
                                      @JsonProperty("links") List<JsonAdaptedLink> links) {
-        if (persons != null) {
-            this.persons.addAll(persons);
-        }
         if (pets != null) {
             this.pets.addAll(pets);
         }
@@ -63,7 +54,6 @@ class JsonSerializablePawPatrol {
      * @param source future changes to this will not affect the created {@code JsonSerializablePawPatrol}.
      */
     public JsonSerializablePawPatrol(ReadOnlyPawPatrol source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
         links.addAll(source.getLinkList().stream().map(JsonAdaptedLink::new).collect(Collectors.toList()));
@@ -76,13 +66,6 @@ class JsonSerializablePawPatrol {
      */
     public PawPatrol toModelType() throws IllegalValueException {
         PawPatrol pawPatrol = new PawPatrol();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (pawPatrol.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            pawPatrol.addPerson(person);
-        }
         for (JsonAdaptedOwner jsonAdaptedOwner : owners) {
             Owner owner = jsonAdaptedOwner.toModelType();
             if (pawPatrol.hasOwner(owner)) {

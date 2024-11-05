@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalPawPatrol;
+import static seedu.address.testutil.TypicalOwners.getTypicalPawPatrol;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,14 +11,13 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.owner.Owner;
+import seedu.address.testutil.OwnerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
-
     private Model model;
 
     @BeforeEach
@@ -28,21 +27,20 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Owner validPerson = new OwnerBuilder().build();
 
         Model expectedModel = new ModelManager(model.getPawPatrol(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addOwner(validPerson);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddOwnerCommand(validPerson), model,
+                String.format(AddOwnerCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getPawPatrol().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateOwner_throwsCommandException() {
+        Owner ownerInList = model.getPawPatrol().getOwnerList().get(0);
+        assertCommandFailure(new AddOwnerCommand(ownerInList), model,
+            AddOwnerCommand.MESSAGE_DUPLICATE_OWNER);
     }
-
 }

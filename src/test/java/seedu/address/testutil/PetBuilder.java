@@ -22,7 +22,7 @@ public class PetBuilder {
     public static final String DEFAULT_SPECIES = "Dog";
     public static final String DEFAULT_BREED = "German Shepard";
     public static final String DEFAULT_AGE = "5";
-    public static final String DEFAULT_SEX = "F";
+    public static final String DEFAULT_SEX = "Female";
 
     private String uniqueId;
     private Name name;

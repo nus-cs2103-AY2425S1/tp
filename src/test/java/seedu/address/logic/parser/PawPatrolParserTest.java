@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -17,17 +18,18 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddOwnerCommand;
+import seedu.address.logic.commands.AddPetCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteOwnerCommand;
 import seedu.address.logic.commands.DeletePetCommand;
 import seedu.address.logic.commands.EditOwnerCommand;
 import seedu.address.logic.commands.EditOwnerCommand.EditOwnerDescriptor;
+import seedu.address.logic.commands.EditPetCommand;
+import seedu.address.logic.commands.EditPetCommand.EditPetDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindOwnerCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.FindPetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
@@ -38,31 +40,42 @@ import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditOwnerDescriptorBuilder;
+import seedu.address.testutil.EditPetDescriptorBuilder;
 import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.OwnerUtil;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.PetUtil;
 
 public class PawPatrolParserTest {
 
     private final PawPatrolParser parser = new PawPatrolParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
-    }
-
-    @Test
     public void parseCommand_addOwner() throws Exception {
         Owner owner = new OwnerBuilder().build();
         AddOwnerCommand command = (AddOwnerCommand) parser.parseCommand(OwnerUtil.getAddOwnerCommand(owner));
         assertEquals(new AddOwnerCommand(owner), command);
+    }
+
+    @Test
+    public void parseCommand_addPet() throws Exception {
+        Pet expectedPet = new PetBuilder().build();
+        AddPetCommand command = (AddPetCommand) parser.parseCommand(PetUtil.getAddPetCommand(expectedPet));
+
+        // Access the private field 'toAdd' in AddPetCommand using reflection
+        Field toAddField = AddPetCommand.class.getDeclaredField("toAdd");
+        toAddField.setAccessible(true); // Bypass the private modifier
+        Pet actualPet = (Pet) toAddField.get(command);
+
+        // Compare each field except uniqueId
+        assertEquals(expectedPet.getName(), actualPet.getName());
+        assertEquals(expectedPet.getSpecies(), actualPet.getSpecies());
+        assertEquals(expectedPet.getBreed(), actualPet.getBreed());
+        assertEquals(expectedPet.getAge(), actualPet.getAge());
+        assertEquals(expectedPet.getSex(), actualPet.getSex());
     }
 
     @Test
@@ -111,17 +124,18 @@ public class PawPatrolParserTest {
     }
 
     @Test
-    public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    public void parseCommand_editPet() throws Exception {
+        Pet pet = new PetBuilder().build();
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder(pet).build();
+        EditPetCommand command = (EditPetCommand) parser.parseCommand(EditPetCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PetUtil.getEditPetDescriptorDetails(descriptor));
+        assertEquals(new EditPetCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-            FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_exit() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test

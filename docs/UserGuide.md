@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit 2 types of 
+entities, owners and pets. PawPatrol also allows the user to link owners to pets, allowing the user
+to easily see at a glance which pets belong to which owner. It is optimised 
+for use via a Command Line Interface** (CLI) which improves use speed while still having the user-friendliness of a Graphical User Interface (GUI). 
+If you can type fast, PawPatrol can manage patient owner and pet data faster than traditional organisation apps.
 
 * Table of Contents
 {:toc}
@@ -14,24 +18,26 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/se-edu/pawpatrol/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for PawPatrol.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar pawpatrol.jar` command to run the application.<br>
+   A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list both` : Lists all owners and pets.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a contact named `John Doe` to PawPatrol.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete o3` : Deletes the 3rd owner shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `link o1 t/p1` : Links 1st owner shown to 1st pet shown.
+
+   * `clear` : Deletes all owners and pets in PawPatrol.
 
    * `exit` : Exits the app.
 
@@ -46,18 +52,18 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `owner n/NAME`, `NAME` is a parameter which can be used as `owner n/John Doe`, and in `delete oOWNER_INDEX`, `OWNER_INDEX` is a parameter which can be used as `delete o1`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/Fluffy t/friendly` or as `n/Fluffy`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friendly`, `t/friendly t/skiddish` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list owners`, `list pets` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -71,79 +77,136 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding an owner: `owner`
 
-### Adding a person: `add`
+Adds an owner to PawPatrol.
 
-Adds a person to the address book.
+Format: `owner n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Examples:
+* `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+
+### Adding a pet: `pet`
+
+Adds a pet to PawPatrol.
+
+Format: `pet n/NAME s/SPECIES b/BREED a/AGE sex/SEX [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A pet can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+* `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
 
-### Listing all persons : `list`
+### Linking owners and pets: `link`
 
-Shows a list of all persons in the address book.
+Links an owner to one or more pets.
 
-Format: `list`
+Format: `link oOWNER_INDEX t/pPET_INDEX…​`
 
-### Editing a person : `edit`
+Examples:
+* `link o1 t/p1`
+* `link o2 t/p2 t/p3`
 
-Edits an existing person in the address book.
+* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+* An owner can be linked to 0 or more pets.
+* A pet can be linked to 0 or more owners.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+### Unlinking owners and pets: `unlink`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Unlinks an owner to one or more pets.
+
+Format: `unlink oOWNER_INDEX t/pPET_INDEX…​`
+
+Examples:
+* `unlink o1 t/p1`
+* `unlink o2 t/p2 t/p3`
+
+* Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+
+### Listing entities: `list`
+
+Shows a list of desired entities in PawPatrol.
+
+Format: 
+* `list owners`: Shows a list of all owners.
+* `list pets`: Shows a list of all pets.
+* `list both`: Shows both owners and pets in a consolidated view.
+
+### Editing entities: `edit`
+
+Edits an existing owner or pet in PawPatrol.
+
+Format:
+* `edit oOWNER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`: Edits an existing owner in PawPatrol
+* `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`: Edits an existing pet in PawPatrol
+
+
+* Edits the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* IC number cannot be edited.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the pet will be removed i.e adding of tags is not cumulative.
+* You can remove all the pet’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit o1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st owner to be `91234567` and `johndoe@example.com` respectively.
+*  `edit p2 n/Fluffy t/` Edits the name of the 2nd pet to be `Fluffy` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating entities by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds owners or pets whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: 
+* `find owner KEYWORD [MORE_KEYWORDS]`: Finds owners whose names contain any of the given keywords.
+* `find pet KEYWORD [MORE_KEYWORDS]`: Finds pets whose names contain any of the given keywords.
+
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Owners or pets matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find owner John` returns `john` and `John Doe` in the owners list panel.
+* `find pet fluffy megatron` returns `Fluffy`, `Megatron`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting an entity : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified owner or pet from PawPatrol.
 
-Format: `delete INDEX`
+Format:
+* `delete oOWNER_INDEX`: Deletes the specified owner from PawPatrol.
+* `delete pPET_INDEX`: Deletes the specified pet from PawPatrol.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+
+* Deletes the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively.
+* The index refers to the index number shown in the displayed owner or pet list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list owners` followed by `delete o2` deletes the 2nd person in PawPatrol.
+* `find owner Betsy` followed by `delete o1` deletes the 1st owner in the results of the `find` command.
+* `list pets` followed by `delete p2` deletes the 2nd pet in PawPatrol.
+* `find pets Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command.
+
+### Sort : `sort`
+
+Sorts owners or pets in PawPatrol by their names in alphabetical order.
+
+Format:
+* `sort owners`: Sorts owners by name in alphabetical order.
+* `sort pets`: Sorts pets by name in alphabetical order.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all owners and pets in PawPatrol.
 
 Format: `clear`
 
@@ -155,15 +218,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+PawPatrol data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+PawPatrol data are saved automatically as a JSON file `[JAR file location]/data/pawpatrol.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, PawPatrol will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -175,7 +238,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PawPatrol home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,10 +253,20 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Owner** | `owner n/NAME p/PHONE e/EMAIL a/ADDRESS` <br> e.g., `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+**Add Pet** | `pet n/NAME s/SPECIES b/BREED a/AGE sex/SEX [t/TAG]…​` <br> e.g., `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Delete Owner** | `delete oOWNER_INDEX`<br> e.g., `delete o3`
+**Delete Pet** | `delete pPET_INDEX`<br> e.g., `delete p2`
+**Edit Owner** | `edit oOWNER_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit o2 n/James Lee e/jameslee@example.com`
+**Edit Pet** | `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`<br> e.g.,`edit p2 n/George a/2`
+**Find Owner** | `find owner KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Pet** | `find pet KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Fluffy`
+**Link** | `link oOWNER_INDEX t/pPET_INDEX…​` <br> e.g., `link o1 t/p1 t/p2`
+**Unlink** | `unlink oOWNER_INDEX t/pPET_INDEX…​` <br> e.g., `unlink o1 t/p1 t/p2`
+**List Owners** | `list owners`
+**List Pets** | `list pets`
+**List Owners and Pets** | `list both`
+**Sort Owners** | `sort owners`
+**Sort Pets** | `sort pets`
 **Help** | `help`
