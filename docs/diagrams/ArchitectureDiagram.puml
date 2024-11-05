@@ -46,20 +46,9 @@ commons_Main -[#grey].> commons_UI
 commons_Main -[#grey].> commons_Logic
 commons_Main -[#grey].> commons_Storage
 commons_Main -up[#grey].> commons_Model
-
-
 commons_Storage -down[STORAGE_COLOR].> File
 User -down.> commons_UI
 
-commons_UI -down[#green].> txn_UI
-commons_UI -down[#green].> aB_UI
-
-commons_Logic -down[#blue].> txn_Logic
-commons_Logic -down[#blue].> aB_Logic
-
-commons_Model -down[#red].> aB_Model
-commons_Model -down[#red].> txn_Model
-
-commons_Storage -down[STORAGE_COLOR].> aB_Storage
-commons_Storage -down[STORAGE_COLOR].> txn_Storage
+commons -down.> aB
+commons -down.> txn
 @enduml
