@@ -81,7 +81,7 @@ public class Person {
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
-            // This means that the otherPerson has the same id, name, phone, email, address and tags
+            // This means that the otherPerson has the same id, name, phone, email, address, remark and tags
             return true;
         }
 

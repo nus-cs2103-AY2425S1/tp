@@ -16,7 +16,7 @@ public class RemarkTest {
 
     @Test
     public void constructor_invalidRemark_throwsIllegalArgumentException() {
-        String invalidRemark = "^";
+        String invalidRemark = "a".repeat(Remark.MAX_LENGTH + 1);
         Assert.assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
     }
 
@@ -26,8 +26,6 @@ public class RemarkTest {
         Assert.assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
         // invalid remark
-        assertFalse(Remark.isValidRemark("^")); // only non-alphanumeric characters
-        assertFalse(Remark.isValidRemark("peter*")); // contains non-alphanumeric characters
         assertFalse(Remark.isValidRemark("a".repeat(Remark.MAX_LENGTH + 1))); // exceeds max length
 
         // valid remark
@@ -38,6 +36,11 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemark("Capital Tan")); // with capital letters
         assertTrue(Remark.isValidRemark("a".repeat(Remark.MAX_LENGTH))); // exactly max length
         assertTrue(Remark.isValidRemark("David Roger Jackson Ray Jr 2nd is bankrupt")); // long remarks
+        assertTrue(Remark.isValidRemark("peter*")); // contains non-alphanumeric characters
+        assertTrue(Remark.isValidRemark("Jack's mortgage isn't paid yet")); // contains apostrophe
+        assertTrue(Remark.isValidRemark("Jack's mortgage is due on 12/12/2022")); // contains forward slash
+        assertTrue(Remark.isValidRemark("Jack's mortgage is due on 12/12/2022, not paid")); // contains comma
+        assertTrue(Remark.isValidRemark("Jack's mortgage is due on 12/12/2022, not paid.")); // contains full stop
     }
 
     @Test
