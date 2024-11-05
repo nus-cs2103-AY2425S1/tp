@@ -39,16 +39,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalGuests.AVA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalVendors.BRIAN;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditGuestCommand;
 import seedu.address.logic.commands.util.EditGuestDescriptor;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -65,7 +68,14 @@ public class EditGuestCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGuestCommand.MESSAGE_USAGE);
 
-    private EditGuestCommandParser parser = new EditGuestCommandParser();
+    private static final Model MODEL_MANAGER = new ModelManager();
+    private EditGuestCommandParser parser = new EditGuestCommandParser(MODEL_MANAGER);
+    @BeforeAll
+    public static void addPersons() {
+        // AVA -> Guest, BRIAN -> VENDOR;
+        MODEL_MANAGER.addPerson(AVA);
+        MODEL_MANAGER.addPerson(BRIAN);
+    }
 
     @Test
     public void parse_missingParts_failure() {
@@ -121,7 +131,7 @@ public class EditGuestCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND
                 + RSVP_DESC_AMY + RELATION_DESC_BOB;
@@ -150,7 +160,7 @@ public class EditGuestCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditGuestCommand expectedCommand = new EditGuestCommand(targetIndex, descriptor);
@@ -231,7 +241,7 @@ public class EditGuestCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditGuestDescriptor descriptor = new EditGuestDescriptorBuilder().withTags().build();

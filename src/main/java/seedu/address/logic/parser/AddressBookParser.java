@@ -22,6 +22,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -33,6 +34,12 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
+    private final Model model;
+
+    public AddressBookParser(Model model) {
+        this.model = model;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -64,10 +71,10 @@ public class AddressBookParser {
             return new AddVendorCommandParser().parse(arguments);
 
         case EditGuestCommand.COMMAND_WORD:
-            return new EditGuestCommandParser().parse(arguments);
+            return new EditGuestCommandParser(model).parse(arguments);
 
         case EditVendorCommand.COMMAND_WORD:
-            return new EditVendorCommandParser().parse(arguments);
+            return new EditVendorCommandParser(model).parse(arguments);
 
         case DeleteGuestCommand.COMMAND_WORD:
             return new DeleteGuestCommandParser().parse(arguments);

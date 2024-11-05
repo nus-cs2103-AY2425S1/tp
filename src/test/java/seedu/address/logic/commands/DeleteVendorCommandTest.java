@@ -47,7 +47,7 @@ public class DeleteVendorCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredVendorList().size() + 1);
         DeleteVendorCommand deleteVendorCommand = new DeleteVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteVendorCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class DeleteVendorCommandTest {
 
         DeleteVendorCommand deleteVendorCommand = new DeleteVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteVendorCommand, model, Messages.MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX);
     }
 
     @Test

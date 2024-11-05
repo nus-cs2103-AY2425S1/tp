@@ -6,12 +6,15 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGuests.AVA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalVendors.BRIAN;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddGuestCommand;
@@ -29,6 +32,8 @@ import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.commands.util.EditGuestDescriptor;
 import seedu.address.logic.commands.util.EditVendorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -41,7 +46,15 @@ import seedu.address.testutil.VendorUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private static final Model MODEL_MANAGER = new ModelManager();
+    private AddressBookParser parser = new AddressBookParser(MODEL_MANAGER);
+
+    @BeforeAll
+    public static void addPersons() {
+        // AVA -> Guest, BRIAN -> VENDOR;
+        MODEL_MANAGER.addPerson(AVA);
+        MODEL_MANAGER.addPerson(BRIAN);
+    }
 
     @Test
     public void parseCommand_add_guest() throws Exception {

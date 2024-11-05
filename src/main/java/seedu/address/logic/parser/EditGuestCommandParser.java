@@ -16,16 +16,21 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditGuestCommand;
 import seedu.address.logic.commands.util.EditGuestDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditGuestCommand object
  */
 public class EditGuestCommandParser implements Parser<EditGuestCommand> {
-
+    private final Model model;
+    public EditGuestCommandParser(Model model) {
+        this.model = model;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the EditGuestCommand
      * and returns an EditGuestCommand object for execution.
@@ -43,6 +48,10 @@ public class EditGuestCommandParser implements Parser<EditGuestCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGuestCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (index.getOneBased() > this.model.getFilteredGuestList().size()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_GUEST_DISPLAYED_INDEX);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
