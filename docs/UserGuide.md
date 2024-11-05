@@ -22,7 +22,7 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
     - On Mac/Linux: Open the Terminal from your Applications.
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file, then run the following command:
-   java -jar volunsync.jar
+   java -jar name_of_jar_file. For example "java -jar volunsync-v1.4.jar".
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
@@ -58,6 +58,15 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 
 * Items in square brackets are optional.<br>
   e.g [des/ DESCRIPTION]
+
+* Trailing and leading whitespace is automatically trimmed in the command line input.
+
+* For fields with character limits, internal spaces are counted as characters.
+  Example:
+<pre> "AB"   # 2 characters
+ "A B"  # 3 characters
+ "A  B" # 4 characters
+</pre>
 
 * Commands without parameters (like `help`) ignore any additional input.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -102,11 +111,15 @@ Format: `exit`
 
 Adds a volunteer to the database.
 
-Format: `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIME e/ END_TIME`
+Format: `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE`
 
 Examples:
-* `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`
-* `/v new n/ Ellen Joe p/ 81234567 em/ ellen@gmail.com d/ 2024-05-23 s/ 12:00 e/ 15:59`
+* `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02`
+* `/v new n/ Ellen Joe p/ 81234567 em/ ellen@gmail.com d/ 2024-05-23`
+
+Running the command successfully, you should see:
+
+<img src="images/NewVolunteer.png" alt="NewVolunteerUI" width="600" />
 
 ### Locating volunteers by name : `/v find`
 
@@ -124,12 +137,12 @@ Examples:
 
 ### Deleting a volunteer : `/v del`
 
-Deletes the specified volunteer from the database.
+Deletes the volunteer at the specified __VOLUNTEER_INDEX__ from the database. 
 
 Format: `/v del VOLUNTEER_INDEX`
 
 * Deletes the volunteer at the specified `VOLUNTEER_INDEX`.
-* The index refers to the number before the volunteer's name in the displayed volunteer list.
+* The index refers to the number that appears before each volunteer’s name in the displayed volunteer list on the panel.
 * The index **must be a non-negative integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
@@ -138,7 +151,7 @@ is involved in.
 </div>
 
 Examples:
-* `/v del 2` deletes the second volunteer in the volunteer list.
+* `/v del 2` deletes the second volunteer in the displayed volunteer list.
 
 ### Assigning a volunteer to event: `assign`
 
