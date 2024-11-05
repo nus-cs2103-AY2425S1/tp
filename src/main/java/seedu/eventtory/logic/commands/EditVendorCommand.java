@@ -23,6 +23,7 @@ import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.commons.name.Name;
 import seedu.eventtory.model.commons.tag.Tag;
+import seedu.eventtory.model.id.UniqueId;
 import seedu.eventtory.model.vendor.Description;
 import seedu.eventtory.model.vendor.Phone;
 import seedu.eventtory.model.vendor.Vendor;
@@ -86,8 +87,10 @@ public class EditVendorCommand extends EditCommand {
         Phone updatedPhone = editVendorDescriptor.getPhone().orElse(vendorToEdit.getPhone());
         Description updatedDescription = editVendorDescriptor.getDescription().orElse(vendorToEdit.getDescription());
         Set<Tag> updatedTags = editVendorDescriptor.getTags().orElse(vendorToEdit.getTags());
+        // Id should be preserved when editing vendor
+        UniqueId id = vendorToEdit.getId();
 
-        return new Vendor(updatedName, updatedPhone, updatedDescription, updatedTags);
+        return new Vendor(id, updatedName, updatedPhone, updatedDescription, updatedTags);
     }
 
     @Override

@@ -23,6 +23,7 @@ import seedu.eventtory.model.commons.name.Name;
 import seedu.eventtory.model.commons.tag.Tag;
 import seedu.eventtory.model.event.Date;
 import seedu.eventtory.model.event.Event;
+import seedu.eventtory.model.id.UniqueId;
 
 /**
  * Edits an event identified using it's displayed index from EventTory.
@@ -79,8 +80,10 @@ public class EditEventCommand extends EditCommand {
         Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         Date updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getDate());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
+        // Id should be preserved when editing event
+        UniqueId id = eventToEdit.getId();
 
-        return new Event(updatedName, updatedDate, updatedTags);
+        return new Event(id, updatedName, updatedDate, updatedTags);
     }
 
     @Override
