@@ -44,8 +44,8 @@ public class ListingCardUiTest extends ApplicationTest {
     private ListingCard listingCard;
     private Listing sampleListing;
     private final Seller sampleSeller = (Seller) createSampleSeller();
-    private final Buyer sampleBuyer_one = (Buyer) createSampleBuyer_one();
-    private final Buyer sampleBuyer_two = (Buyer) createSampleBuyer_two();
+    private final Buyer sampleBuyerOne = (Buyer) createSampleBuyer_one();
+    private final Buyer sampleBuyerTwo = (Buyer) createSampleBuyer_two();
 
 
     @BeforeEach
@@ -136,8 +136,8 @@ public class ListingCardUiTest extends ApplicationTest {
      */
     private Listing createSampleListing() {
         Set<Person> buyersSet = new HashSet<>();
-        buyersSet.add(sampleBuyer_one);
-        buyersSet.add(sampleBuyer_two);
+        buyersSet.add(sampleBuyerOne);
+        buyersSet.add(sampleBuyerTwo);
 
         return new Listing(
                 new Name("Sample Listing"),
