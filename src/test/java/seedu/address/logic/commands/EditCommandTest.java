@@ -18,6 +18,9 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
+import java.util.List;
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -33,16 +36,13 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.List;
-import java.util.Random;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
     private static final Name VALID_NAME = ALICE.getName();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

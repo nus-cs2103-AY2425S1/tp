@@ -69,8 +69,8 @@ public class EditListingCommandParserTest {
 
     @Test
     public void parse_missingListingName_throwsParseException() {
-        String userInput = EditListingCommand.COMMAND_WORD +
-                PREFIX_PRICE + VALID_PRICE;
+        String userInput = EditListingCommand.COMMAND_WORD
+                + PREFIX_PRICE + VALID_PRICE;
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
     }
