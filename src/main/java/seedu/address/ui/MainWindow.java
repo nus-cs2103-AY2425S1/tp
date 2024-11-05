@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private boolean isLightMode = true;
+    private boolean isLightMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
