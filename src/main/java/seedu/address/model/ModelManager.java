@@ -270,7 +270,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Wedding> getWeddingFromTags(Model model, Set<Tag> tags) {
+    public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
         List<Wedding> list = new ArrayList<>();
