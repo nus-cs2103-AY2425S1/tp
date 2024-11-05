@@ -98,9 +98,35 @@ public class UnmarkAttendanceCommandTest {
 
         CommandResult result = command.execute(model);
 
-        List<String> alreadyMarkedList = displayMembers(membersAttendanceUnmarked);
-        assertEquals(String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, alreadyMarkedList),
+        List<String> alreadyUnarkedList = displayMembers(membersAttendanceUnmarked);
+        assertEquals(String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, alreadyUnarkedList),
                 result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_unmarkDuplicateAttendance() throws Exception {
+        Attendance attendance = new Attendance("2024-10-21");
+        Person unmarkedPerson = new PersonBuilder().withTelegram(ALICE.getTelegram().value)
+                .isMember(true).withName(ALICE.getName().fullName).build();
+        Person markedPerson = new PersonBuilder().withTelegram(BENSON.getTelegram().value)
+                .isMember(true).withName(BENSON.getName().fullName).withAttendance(attendance).build();
+
+        List<Person> membersAttendanceUnmarked = List.of(unmarkedPerson);
+        model.setPerson(ALICE, unmarkedPerson);
+        model.setPerson(BENSON, markedPerson);
+
+        UnmarkAttendanceCommand command = new UnmarkAttendanceCommand(
+                Arrays.asList(ALICE.getTelegram(), BENSON.getTelegram()), attendance);
+
+        CommandResult result = command.execute(model);
+
+        List<String> alreadyUnmarkedList = displayMembers(membersAttendanceUnmarked);
+        List<String> unmarkSuccessList = displayMembers(List.of(BENSON));
+        String expectedMessage = String.format(
+                MESSAGE_UNMARK_MEMBER_SUCCESS, attendance, unmarkSuccessList) + '\n'
+                + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, alreadyUnmarkedList);
+
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test

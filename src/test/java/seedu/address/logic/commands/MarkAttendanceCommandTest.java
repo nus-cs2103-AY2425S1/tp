@@ -99,6 +99,33 @@ public class MarkAttendanceCommandTest {
     }
 
     @Test
+    public void execute_partialDuplicateAttendance() throws Exception {
+        Attendance attendance = new Attendance("2024-10-21");
+        Person markedPerson = new PersonBuilder().withTelegram(ALICE.getTelegram().value)
+                .isMember(true).withName(ALICE.getName().fullName).withAttendance(attendance).build();
+
+        Person unmarkedPerson = new PersonBuilder().withTelegram(BENSON.getTelegram().value)
+                .isMember(true).withName(BENSON.getName().fullName).build();
+
+        model.setPerson(ALICE, markedPerson);
+        model.setPerson(BENSON, unmarkedPerson);
+
+        MarkAttendanceCommand command = new MarkAttendanceCommand(
+                Arrays.asList(ALICE.getTelegram(), BENSON.getTelegram()), attendance);
+
+        CommandResult result = command.execute(model);
+        List<Person> membersAttendanceMarked = List.of(ALICE);
+        List<Person> membersMarkSuccess = List.of(BENSON);
+
+        List<String> alreadyMarkedList = displayMembers(membersAttendanceMarked);
+        String expectedMessage = String.format(
+                MESSAGE_MARK_MEMBER_SUCCESS, attendance, displayMembers(membersMarkSuccess)) + '\n'
+                + String.format(MESSAGE_CONTAIN_MARKED_MEMBER, alreadyMarkedList);
+
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+    }
+
+    @Test
     public void equals() {
         Telegram telegramAlice = new Telegram("aliceTelegram");
         Telegram telegramBob = new Telegram("bobTelegram");
