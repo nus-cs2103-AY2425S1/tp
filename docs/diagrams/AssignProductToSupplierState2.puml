@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After "Assign Command" State
+
+package State {
+    class State1 as "<u>ab:AddressBook</u>"
+
+Class "<u>:Supplier</u> \n name : Hayley \n phone : 91836434 \n email : hay@gmail.com \n address : MBS \n tags : [ ] \n products : [ "Potato Chips" ]" as Supplier {
+
+}
+
+Class "<u>:Product</u> \n name : Potato Chips \n SupplierName : "Hayley" \n stockLevel : 200 \n minStockLevel : 250 \n maxStockLevel : 500 \n tags : [ ]" as Product {
+
+}
+}
+Supplier -up-> State1
+Product -up-> State1
+@enduml

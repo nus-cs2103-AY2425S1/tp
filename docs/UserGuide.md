@@ -82,7 +82,7 @@ Refer to the [Features](#features) below for details of each command.
 > * **Items in square brackets are optional.**<br>
  e.g `add_product n/PRODUCT_NAME [st/STOCK_LEVEL]` can be used as `add_product n/Apples st/50` or as `add_product n/Apples`.
 > * Items with **`…`** ​ after them can be **used multiple times including zero times.**<br>
- e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/beverage`, `t/beverage t/important` etc. 
+ e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/beverage`, `t/beverage t/important` etc.
 > * Parameters can be in any order.<br>
   e.g. if the command specifies `n/SUPPLIER_NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/SUPPLIER_NAME` is also acceptable.
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
@@ -154,7 +154,7 @@ Deletes the specified supplier from the address book.
 Format: `delete n/SUPPLIER_NAME`
 
 * Deletes the supplier of the specified `SUPPLIER_NAME`.
-* Supplier must exist in tracker for command to work. 
+* Supplier must exist in tracker for command to work.
 
 Examples:
 *  `delete n/Global Produce` deletes the supplier named Global Produce from the tracker.
@@ -328,4 +328,4 @@ _Details coming soon ..._
 | **Delete Product**   | `delete_product pr/PRODUCT_NAME`<br> e.g., `delete_product pr/Tissue Paper`                                                                                   |
 | **Clear All**        | `clear`                                                                                                                                                       |
 | **Help**             | `help`                                                                                                                                                        |
-| **Exit**             | `exit`   
+| **Exit**             | `exit`
