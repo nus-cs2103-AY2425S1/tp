@@ -3,7 +3,20 @@
 }
 
 #ugLink {
+    -fx-text-fill: #11BBFF; /* Slightly different blue for contrast with bg */
+    -fx-opacity: 0.9;
+    -fx-border-color: transparent;
+}
+
+#ugLink:hover {
     -fx-text-fill: #FFA500; /* Orange text */
+    -fx-opacity: 1.0;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+#ugLink:visited {
+    -fx-text-fill: #966afc; /* Purple text */
     -fx-opacity: 0.9;
     -fx-border-color: transparent;
 }
@@ -12,6 +25,5 @@
 #helpMessageContainer {
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI", sans-serif;
-    -fx-text-fill: #1E90FF;
     -fx-background-color: #2B3A67;
 }
