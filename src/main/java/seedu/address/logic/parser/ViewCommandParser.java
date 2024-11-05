@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
@@ -19,15 +20,32 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        try {
+            String trimmedArgs = args.trim();
+
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
+
+            if (isNumeric(trimmedArgs)) {
+                Index index = ParserUtil.parseIndex(trimmedArgs);
+                return new ViewCommand(index, null);
+            } else {
+                String[] nameKeywords = trimmedArgs.split("\\s+");
+                NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(
+                        Arrays.asList(nameKeywords));
+
+                return new ViewCommand(null, predicate);
+            }
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
         }
+    }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new ViewCommand(new NameMatchesKeywordPredicate(Arrays.asList(nameKeywords)));
+    private boolean isNumeric(String str) {
+        return str != null && str.matches("-?\\d+");
     }
 
 }

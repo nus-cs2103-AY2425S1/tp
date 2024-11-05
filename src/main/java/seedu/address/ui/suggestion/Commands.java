@@ -9,7 +9,7 @@ public enum Commands {
             new String[]{"n/", "p/", "e/", "a/", "r/", "w/"}),
     DELETE("delete", "delete INDEX/NAME", new String[]{}),
     CLEAR("clear", "clear", new String[]{}),
-    VIEW("view", "view NAME", new String[]{}),
+    VIEW("view", "view INDEX/NAME", new String[]{}),
     FILTER("filter", "filter KEYWORD [MORE_KEYWORDS...]", new String[]{}),
     LIST("list", "list", new String[]{}),
     EXIT("exit", "exit", new String[]{}),
