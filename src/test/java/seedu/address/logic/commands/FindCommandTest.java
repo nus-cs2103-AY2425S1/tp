@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -17,8 +18,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.ArchivedAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -33,6 +36,11 @@ import seedu.address.model.person.Person;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+
+    @BeforeEach
+    public void setUp() {
+        model.setArchivedListMode(false);
+    }
 
     @Test
     public void equals() {
@@ -82,6 +90,14 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_findArchivedList_throwsCommandException() {
+        model.setArchivedListMode(true);
+        FindCommand findCommand = new FindCommand(preparePredicate(mapPerson(ALICE)));
+
+        assertCommandFailure(findCommand, model, Messages.MESSAGE_NOT_IN_MAIN_LIST);
     }
 
     @Test

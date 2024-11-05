@@ -74,6 +74,14 @@ public class ArchivedAddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Removes {@code key} from this {@code ArchivedAddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeArchivedPerson(Person key) {
+        persons.remove(key);
+    }
+
     //// util methods
 
     @Override

@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,8 +21,12 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 public class ArchiveCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
-
+    private Model model;
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+        model.setArchivedListMode(false);
+    }
     @Test
     public void execute_validIndexArchivedList_success() {
         Person personToArchive = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -44,6 +49,16 @@ public class ArchiveCommandTest {
         ArchiveCommand archiveCommand = new ArchiveCommand(outOfBoundIndex);
 
         assertCommandFailure(archiveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexArchivedList_throwsCommandException() {
+        Person personToAdd = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setArchivedListMode(true);
+        model.addArchivedPerson(personToAdd);
+        ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(archiveCommand, model, Messages.MESSAGE_NOT_IN_MAIN_LIST);
     }
 
     @Test

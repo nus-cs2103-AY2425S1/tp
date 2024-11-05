@@ -13,8 +13,10 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Comparator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ArchivedAddressBook;
 import seedu.address.model.Model;
@@ -28,6 +30,11 @@ public class SortCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+
+    @BeforeEach
+    public void setUp() {
+        model.setArchivedListMode(false);
+    }
 
     @Test
     public void equals() {
@@ -116,5 +123,13 @@ public class SortCommandTest {
         // Ensure the filtered persons are sorted by name
         assertTrue(model.getFilteredPersonList().get(0).equals(BENSON));
         assertTrue(model.getFilteredPersonList().get(1).equals(DANIEL));
+    }
+
+    @Test
+    public void execute_sortArchivedList_throwsCommandException() {
+        model.setArchivedListMode(true);
+        SortCommand sortCommand = new SortCommand("name", true);
+
+        assertCommandFailure(sortCommand, model, Messages.MESSAGE_NOT_IN_MAIN_LIST);
     }
 }
