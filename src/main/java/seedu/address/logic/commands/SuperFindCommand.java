@@ -23,8 +23,7 @@ public class SuperFindCommand extends Command {
             + "them as a list with indices.\n"
             + "Parameters: PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]...\n"
             + "Examples:\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_PHONE + "80021234 " + PREFIX_TAG + "CS1101S\n"
-            + COMMAND_WORD + " " + PREFIX_EMAIL + "bob@gmail.com " + PREFIX_EMAIL + "charlotte@yahoo.com";
+            + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_PHONE + "80021234 " + PREFIX_TAG + "CS1101S";
 
     public static final String MESSAGE_NO_PERSONS_FOUND = "No persons found!";
 
