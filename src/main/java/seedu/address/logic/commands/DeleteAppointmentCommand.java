@@ -24,11 +24,11 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an appointment from the person identified "
             + "By the patient's NRIC number"
             + "\nParameters: "
-            + PREFIX_NRIC + "PATIENT_NRIC\n"
-            + PREFIX_DATE + "DATE (DD/MM/YYYY) \n"
+            + PREFIX_NRIC + "PATIENT_NRIC "
+            + PREFIX_DATE + "DATE (DD/MM/YYYY) "
             + PREFIX_START_TIME + "START_TIME (HH:MM) \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S1234567A "
+            + PREFIX_NRIC + "S1234567D "
             + PREFIX_DATE + "01/01/2025 "
             + PREFIX_START_TIME + "10:00";
     public static final String MESSAGE_SUCCESS = "Deleted appointment: %1$s";
