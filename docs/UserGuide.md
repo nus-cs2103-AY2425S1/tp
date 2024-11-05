@@ -45,7 +45,7 @@ operate than graphical user interfaces commonly found in smartphones.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. If not, you can download Java `17` [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
 
@@ -56,7 +56,7 @@ operate than graphical user interfaces commonly found in smartphones.
 
 - A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-![Ui](images/Ui.png)
+![Ui](images/user-guide-images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -120,13 +120,9 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB`
 * `add n/Betsy Crowe t/condo e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567`
 
+Visual example of correct output:
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the PROperty.
-
-Format: `list`
-
+![AddCommandShowcase.png](images/user-guide-images/AddCommandShowcase.png)
 
 ### Editing a person : `edit`
 
@@ -148,6 +144,79 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 2 t/condo` Adds the tag `condo` to the 2nd person
+
+Visual example of correct output:
+
+![EditCommandShowcase.png](images/user-guide-images/EditCommandShowcase.png)
+
+### Deleting a person : `delete`
+
+Deletes the specified person from the PROperty.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `list` followed by `delete 2` deletes the 2nd person in PROperty.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+Visual example of correct output:
+
+![DeleteCommandShowcase.png](images/user-guide-images/DeleteCommandShowcase.png)
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the PROperty.
+
+Format: `list`
+
+Visual example of correct output:
+
+![ListCommandShowcase.png](images/user-guide-images/ListCommandShowcase.png)
+
+### Sorting all persons : `sort`
+
+Sorts the list of all persons in the address book by name in alphabetical order.
+
+Format: `sort`
+
+Visual example of correct output:
+
+![SortCommandShowcase.png](images/user-guide-images/SortCommandShowcase.png)
+
+### Showing property listings of a person : `show`
+
+Shows the full details of the specified person, including their property listings.
+
+Format: `show INDEX`
+
+- Shows the person at the specified `INDEX`
+- The `INDEX` refers to the index number shown in the displayed person list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `show 2` shows the name, contact information, tags, and property listings of the second person in the PROperty.
+
+Visual example of correct output:
+
+![Show Command](images/user-guide-images/ShowCommandShowcase.png)
+
+### Quick reference help: `help`
+
+Shows commands in a help menu for quick reference during use of PROperty.
+
+Format: `help`
+
+Visual example of correct output:
+
+![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
+![help message](images/user-guide-images/HelpMessageShowcase.png)
+![help message](images/user-guide-images/HelpMessageShowcase2.png)
 
 ### Locating persons by name: `find`
 
@@ -174,7 +243,13 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`.
 * `find s/Alex Yeoh s/23 Smith Street` returns `Alex Yeoh` who has `23 Smith Street` as his address.
 
-![Find Command](images/findCommand.png)
+Visual example of correct output (General Find):
+
+![GeneralFindCommandShowcase.png](images/user-guide-images/GeneralFindCommandShowcase.png)
+
+Visual example of correct output (Specific Find):
+
+![SpecificFindCommandShowcase.png](images/user-guide-images/SpecificFindCommandShowcase.png)
 
 ### Locating persons by tag: `findtag`
 
@@ -182,33 +257,19 @@ Finds persons whose tags contain any of the given words.
 
 Format: `findtag TAG [MORE_TAGS]`
 
-- The search is case-insensitive. e.g., `HDB` will match `hdb`.
-- The order of the tags does not matter.
-- Persons with at least one matching tag will be returned (i.e., an `OR` search).
-- List of possible tags you can search for are found in the [Tag Table](#tag-table)
+* The search is case-insensitive. e.g., `HDB` will match `hdb`. 
+* The order of the tags does not matter. 
+* Persons with at least one matching tag will be returned (i.e., an `OR` search). 
+* List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
 Examples:
 
-- `findtag HDB` returns persons tagged with `HDB`.
-- `findtag HDB buyer` returns persons tagged with either `HDB` or `buyer`.
+* `findtag HDB` returns persons tagged with `HDB`.
+* `findtag HDB buyer` returns persons tagged with either `HDB` or `buyer`.
 
-![Find tag command](images/findtagCommand.png)
+Visual example of correct output:
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the PROperty.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `delete 2` deletes the 2nd person in PROperty.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
+![Find tag command](images/user-guide-images/FindtagCommandShowcase.png)
 
 ### Clearing all entries : `clear`
 
@@ -216,23 +277,9 @@ Clears all entries from the PROperty.
 
 Format: `clear`
 
+Visual example of correct output:
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-
-### Quick reference help: `help`
-
-Shows commands in a help menu for quick reference during use of PROperty.
-
-![help message](images/helpMessage.png)
-![help message](images/helpMessage2.png)
-
-Format: `help`
-
+![ClearCommandShowcase.png](images/user-guide-images/ClearCommandShowcase.png)
 
 ### Managing Remarks : `remark`
 
@@ -240,40 +287,23 @@ Adds/removes a remark from a person in PROperty.
 
 Format: `remark INDEX r/[REMARKS]`
 
-- Adds a remark `REMARKS` to the person at `INDEX`
-
-- The index refers to the index number shown in the displayed person list.
-
-- The index **must be a positive integer** 1, 2, 3, …​
-
-- **Note:** `[REMARKS]` will **delete the remark if left blank**
+* Adds a remark `REMARKS` to the person at `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* **Note:** `[REMARKS]` will **delete the remark if left blank**
 
 Examples:
 
-- `remark 1 r/Prefers a higher floor apartment`
-  
-  - Adds a remark "Prefers a higher floor apartment" to the person at index `1`
+* `remark 1 r/Prefers a higher floor apartment` adds a remark "Prefers a higher floor apartment" to the person at index `1`
+* `remark 1 r/` deletes the remark of person at index `1`
 
-- `remark 1 r/`
-  
-  - Deletes the remark of person at index `1`
+Visual example of correct output (Add Remark):
 
+![RemarkAddCommandShowcase](images/user-guide-images/RemarkAddCommandShowcase.png)
 
-### Showing property listings of a person : `show`
+Visual example of correct output (Remove Remark):
 
-Shows the full details of the specified person, including their property listings.
-
-Format: `show INDEX`
-
-- Shows the person at the specified `INDEX`
-- The `INDEX` refers to the index number shown in the displayed person list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
-
-Examples: 
-
-- `show 2` shows the name, contact information, tags, and property listings of the second person in the PROperty.
-
-![Show Command](images/showCommand.png)
+![RemarkRemoveCommandShowcase](images/user-guide-images/RemarkRemoveCommandShowcase.png)
 
 ### Adding a property listing : `listing add`
 
@@ -290,21 +320,28 @@ Examples:
 
 - `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
 
+Visual example of correct output:
+
+![ListingAddCommandShowcase.png](images/user-guide-images/ListingAddCommandShowcase.png)
+
 ### Deleting a property listing : `listing delete`
 
 Deletes the property listing with index `LISTING_INDEX` from the person specified by `INDEX` 
 
 Format: `listing delete INDEX LISTING_INDEX`
 
-- Adds the property listing with index `LISTING_INDEX` to the person specified by `INDEX`
-- The `INDEX` refers to the index number shown in the displayed person list.
-- The `LISTING_INDEX` refers to the index number shown in the property listing displayed by the `show` command
-- The `INDEX`/`LISTING_INDEX` **must be a positive integer** 1, 2, 3, …​
+* Adds the property listing with index `LISTING_INDEX` to the person specified by `INDEX`
+* The `INDEX` refers to the index number shown in the displayed person list.
+* The `LISTING_INDEX` refers to the index number shown in the property listing displayed by the `show` command
+* The `INDEX`/`LISTING_INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
+Visual example of correct output:
+
+![ListingDeleteCommandShowcase.png](images/user-guide-images/ListingDeleteCommandShowcase.png)
 
 ### Exporting your contacts : `export`
 
@@ -312,20 +349,25 @@ Exports your contacts and their relevant data to a Comma-Separated Value (CSV) f
 
 Format: `export`
 
-- Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
-- If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
-- By default, the exported CSV file will be located in the "data" folder with the name "property.csv"
+* Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
+* If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
+* By default, the exported CSV file at `[JAR file location]/data/property.csv`
 
-### Sorting all persons : `sort`
+Visual example of correct output:
 
-Sorts the list of all persons in the address book by name in alphabetical order.
+![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
 
-Format: `sort`
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+* There is no visual example as the programme will close after inputting the `exit` command.
 
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
 
 ### Editing the data file
 
@@ -335,7 +377,6 @@ PROperty data are saved automatically as a JSON file `[JAR file location]/data/p
 If your changes to the data file makes its format invalid, PROperty will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
 
 ### Archiving data files `[coming in v2.0]`
 
