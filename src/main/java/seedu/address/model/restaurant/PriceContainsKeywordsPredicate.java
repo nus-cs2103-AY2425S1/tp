@@ -20,7 +20,6 @@ public class PriceContainsKeywordsPredicate implements Predicate<Restaurant> {
 
     @Override
     public boolean test(Restaurant restaurant) {
-
         if (keywords == null || keywords.isEmpty()) {
             return false;
         }

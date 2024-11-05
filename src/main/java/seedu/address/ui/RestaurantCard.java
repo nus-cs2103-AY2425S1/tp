@@ -65,7 +65,7 @@ public class RestaurantCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        prices.getChildren().add(new Label(restaurant.getPrice().value));
+        prices.getChildren().add(new Label(restaurant.getPrice().toString()));
 
         if (restaurant.isFavourite()) {
             cardPane.getStyleClass().add("favourite");
