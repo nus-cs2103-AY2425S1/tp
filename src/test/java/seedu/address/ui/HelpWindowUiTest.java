@@ -12,7 +12,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -29,8 +28,8 @@ public class HelpWindowUiTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) {
-        mockDesktop = mock(Desktop.class);  // Mock the Desktop instance
-        helpWindow = new HelpWindow(stage, mockDesktop);  // Inject the mock into HelpWindow
+        mockDesktop = mock(Desktop.class);
+        helpWindow = new HelpWindow(stage, mockDesktop);
     }
 
     @AfterEach
