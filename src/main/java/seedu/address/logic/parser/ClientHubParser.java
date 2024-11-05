@@ -110,10 +110,10 @@ public class ClientHubParser {
         case DeleteReminderCommand.COMMAND_WORD, DeleteReminderCommand.COMMAND_WORD_SHORT:
             return new DeleteReminderCommandParser().parse(arguments);
 
-        case AddReminderCommand.COMMAND_WORD:
+        case AddReminderCommand.COMMAND_WORD, AddReminderCommand.COMMAND_WORD_SHORT:
             return new AddReminderCommandParser().parse(arguments);
 
-        case EditReminderCommand.COMMAND_WORD:
+        case EditReminderCommand.COMMAND_WORD, EditReminderCommand.COMMAND_WORD_SHORT:
             return new EditReminderCommandParser().parse(arguments);
 
         default:

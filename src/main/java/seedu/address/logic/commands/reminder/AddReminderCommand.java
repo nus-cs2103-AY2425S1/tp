@@ -19,7 +19,8 @@ import seedu.address.model.reminder.Reminder;
  * Adds a reminder to the address book.
  */
 public class AddReminderCommand extends Command {
-    public static final String COMMAND_WORD = "ra"; // reminder add
+    public static final String COMMAND_WORD = "radd"; // reminder add
+    public static final String COMMAND_WORD_SHORT = "ra"; // reminder add
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to the address book. "
             + "Parameters: "
