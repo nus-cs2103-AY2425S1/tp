@@ -34,7 +34,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         SortField sortField = parseSortField(argMultimap.getPreamble());
         isReset = sortField == SortField.NONE;
 
-        if(isReset && arePrefixesPresent(argMultimap, PREFIX_SORTORDER)) {
+        if (isReset && arePrefixesPresent(argMultimap, PREFIX_SORTORDER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
