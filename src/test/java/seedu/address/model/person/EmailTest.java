@@ -66,8 +66,9 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
         assertTrue(Email.isValidEmail("testtest12testtest12testtest12testtest12testtest12"
-                + "testtest12testtest12testtest12testtest12testtest12testtest12testtest12testtest12testtest12test"
-                + "test12testtest12testtest12testtest12testtest12testtest12testtest12testtest12testtest12testtest12te@example.com")); // exactly 254 characters
+                + "testtest12testtest12testtest12testtest12testtest12testtest12testtest12testt"
+                + "est12testtest12testtest12testtest12testtest12testtest12testtest12testtest12"
+                + "testtest12testtest12testtest12testtest12te@example.com")); // exactly 254 characters
     }
 
     @Test
