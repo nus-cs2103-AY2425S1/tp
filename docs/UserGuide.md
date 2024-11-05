@@ -114,6 +114,7 @@ Adds a student to the address book.
 
 ##### Constraints
 
+* **NAME** must only contain alphanumeric characters and spaces.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
@@ -134,6 +135,7 @@ Adds a student to the address book.
 
 * New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit).
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
+* For names containing special characters (e.g., `/`, `.`, or `&`), please omit these symbols and save the names in a memorable format, such as using only letters and spaces. This way, you can keep names easily identifiable within the app's constraints. 
 </box>
 
 ### Listing all students: `list`
