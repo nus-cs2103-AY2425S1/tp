@@ -1,0 +1,66 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title AddToLessonCommand Sequence Diagram
+
+Participant ":LogicManager" as LogicManager UI_COLOR
+Participant "AddressBookParser" as addressBookParser LOGIC_COLOR_T3
+Participant "AddToLessonCommandParser" as AddToLessonCommandParser LOGIC_COLOR_T2
+Participant "AddToLessonCommand" as AddToLessonCommand LOGIC_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+
+'UI calls AddressBookParser and passes the command
+activate LogicManager UI_COLOR
+LogicManager -[UI_COLOR]> addressBookParser : parseCommand("addtolesson 1 n/John Doe i/3")
+activate addressBookParser LOGIC_COLOR_T3
+
+'AddressBookParser creates an instance of the parser
+addressBookParser -[LOGIC_COLOR_T3]> AddToLessonCommandParser : AddToLessonCommandParser() <<constructor>>
+activate AddToLessonCommandParser LOGIC_COLOR_T2
+
+AddToLessonCommandParser --[LOGIC_COLOR_T2]> addressBookParser
+deactivate AddToLessonCommandParser
+
+' AddressBookParser calls the parse command
+addressBookParser -[LOGIC_COLOR_T3]> AddToLessonCommandParser : parse("addtolesson 1 n/John Doe i/3")
+activate AddToLessonCommandParser LOGIC_COLOR_T2
+
+'Within the parse command, the parser creates an instance of the command
+AddToLessonCommandParser --[LOGIC_COLOR_T2]> AddToLessonCommand : AddToLessonCommand() <<constructor>>
+activate AddToLessonCommand LOGIC_COLOR_T1
+
+AddToLessonCommand --[LOGIC_COLOR_T1]> AddToLessonCommandParser
+deactivate AddToLessonCommand LOGIC_COLOR_T1
+
+'parser returns the command to the AddressBookParser
+AddToLessonCommandParser --[LOGIC_COLOR_T2]> addressBookParser : AddToLessonCommand
+deactivate AddToLessonCommandParser
+
+addressBookParser --[LOGIC_COLOR_T3]> LogicManager : AddToLessonCommand
+deactivate addressBookParser
+
+'LogicManager calls command.execute
+LogicManager -[UI_COLOR]> AddToLessonCommand : execute(model)
+activate AddToLessonCommand LOGIC_COLOR_T1
+
+'get filteredLessonList
+AddToLessonCommand -[LOGIC_COLOR]> model : getFilteredLessonList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> AddToLessonCommand
+deactivate model
+
+'get filteredStudentList
+AddToLessonCommand -[LOGIC_COLOR]> model : filteredStudentList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> AddToLessonCommand
+deactivate model
+
+'After adding students, return new lesson
+AddToLessonCommand --[LOGIC_COLOR]> LogicManager : CommandResult
+deactivate AddToLessonCommand LOGIC_COLOR_T1
+
+
+@enduml

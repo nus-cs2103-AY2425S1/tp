@@ -1,0 +1,42 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title MarkLessonAttendanceCommand Sequence Diagram
+
+participant "MarkLessonAttendanceCommand" as command LOGIC_COLOR
+participant ":Model" as model MODEL_COLOR
+participant "Lesson" as lesson MODEL_COLOR_T2
+
+command -[MODEL_COLOR]> model : getFilteredLessonList()
+activate model MODEL_COLOR
+
+model --[MODEL_COLOR]> command : list of lessons
+deactivate model
+
+command -[LOGIC_COLOR]> lesson : new Lesson(targetLesson)
+activate lesson MODEL_COLOR_T2
+
+lesson --[LOGIC_COLOR]> command
+deactivate lesson MODEL_COLOR_T2
+
+loop for each student
+    command -[MODEL_COLOR]> model : findStudentByName(studentName)
+    activate model MODEL_COLOR
+
+    model --[MODEL_COLOR]> command : student
+    deactivate model
+
+    command -[LOGIC_COLOR]> lesson : setAttendance(student, attendance)
+    activate lesson MODEL_COLOR_T2
+    lesson --[LOGIC_COLOR]> command :
+    deactivate lesson
+end
+
+command -[MODEL_COLOR]> model : setLesson(targetLesson, newLesson)
+activate model MODEL_COLOR
+
+model --[MODEL_COLOR]> command
+deactivate model
+
+@enduml

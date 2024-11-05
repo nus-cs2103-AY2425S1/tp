@@ -1,6 +1,6 @@
 @startuml
 
-!include style.puml
+!include ../style.puml
 
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
@@ -38,13 +38,13 @@ Command ..> CommandResult : creates >
 AddLessonCommandParser ..> AddLessonCommand : creates >
 
 ' Model relationships
-Lesson *-- "0..*" StudentLessonInfo
+Lesson *-- "*" StudentLessonInfo
 StudentLessonInfo --> "1" Student : has >
 Lesson *-- "1" Date
 Lesson *-- "1" Time
 
 ' Group visibility for logical structure
-CommandResult ..> Lesson : produces >
+CommandResult ..> Lesson : creates >
 
 StudentLessonInfo *-- "1" Attendance : records >
 StudentLessonInfo *-- "1" ParticipationScore : tracks >
