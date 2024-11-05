@@ -92,10 +92,6 @@ public class Event {
      * @return boolean
      */
     public boolean isSameId(Event otherEvent) {
-        if (otherEvent == this) {
-            return true;
-        }
-
         return otherEvent != null
                 && otherEvent.getId().equals(getId());
     }

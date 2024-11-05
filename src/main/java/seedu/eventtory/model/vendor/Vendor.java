@@ -110,10 +110,6 @@ public class Vendor {
      * @return boolean
      */
     public boolean isSameId(Vendor otherVendor) {
-        if (otherVendor == this) {
-            return true;
-        }
-
         return otherVendor != null
                 && otherVendor.getId().equals(getId());
     }
