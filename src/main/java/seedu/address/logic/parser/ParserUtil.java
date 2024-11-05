@@ -201,11 +201,17 @@ public class ParserUtil {
         try {
             personIndexSet = Arrays.stream(personIndexString.split("\\s+"))
                     .map(Integer::parseInt)
+                    .peek(i -> {
+                        if (i < 1) {
+                            throw new IllegalArgumentException("Error: Negative or zero contact index's are not allowed. " +
+                                    "Please specify a positive index within range.");
+                        }
+                    })
                     .map(i -> Index.fromOneBased(i))
                     .collect(Collectors.toSet());
 
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Wedding.MESSAGE_CONSTRAINTS);
+            throw new ParseException(e.getMessage());
         }
         String[] indexArray = personIndexString.split("\\s+");
         Set<String> inputIndexSet = new HashSet<>(List.of(indexArray));
