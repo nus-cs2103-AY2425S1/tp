@@ -35,7 +35,7 @@ public class DeletePublicAddressCommand extends Command {
         + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
         + PREFIX_PUBLIC_ADDRESS_LABEL + "default";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person's Public Address: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted %1$s's Public Address: %2$s";
     public static final String MESSAGE_NON_MATCHING_LABEL = "Label %1$s does not match any public addresses of %2$s";
     public static final String MESSAGE_EMPTY_NETWORK = "Network %1$s of %2$s is empty and cannot be deleted from";
     private static final Logger logger = LogsCenter.getLogger(DeletePublicAddressCommand.class);
@@ -102,16 +102,14 @@ public class DeletePublicAddressCommand extends Command {
         if (targetLabel.isEmpty()) {
             // Delete all the addresses in the network
             deletedPerson = personToDelete.withoutPublicAddressesByNetwork(targetAddressnetwork);
-        }
-        else
-        {
+        } else {
             // Delete the specific address with the label
             deletedPerson = personToDelete.withoutPublicAddressByNetworkAndLabel(targetAddressnetwork, targetLabel);
         }
         model.setPerson(personToDelete, deletedPerson);
         return new CommandResult(String.format(
-                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getPublicAddressesComposition())
-        );
+                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(), personToDelete.getPublicAddressesComposition()
+        ));
 
     }
 

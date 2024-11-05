@@ -144,22 +144,31 @@ public class PublicAddressesComposition {
 
     /**
      * Adds a new public address to the composition.
+     * Addresses with existing labels will be replaced.
      *
      * @param newPublicAddress The new public address to be added.
      * @return A new PublicAddressesComposition with the updated public addresses.
      */
     public PublicAddressesComposition add(PublicAddress newPublicAddress) {
         assert newPublicAddress != null;
-        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
-            .map(entry -> {
-                Set<PublicAddress> updatedAddresses = entry.getValue().stream()
-                    .map(addr -> addr.label.equals(newPublicAddress.label)
-                        ? newPublicAddress
-                        : addr)
-                    .collect(Collectors.toSet());
-                return new AbstractMap.SimpleEntry<>(entry.getKey(), updatedAddresses);
-            })
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = new HashMap<>(publicAddresses);
+
+        // Get or create the set of addresses for this network
+        Set<PublicAddress> networkAddresses = updatedPublicAddresses.getOrDefault(
+                newPublicAddress.getNetwork(),
+                new HashSet<>()
+        );
+
+        // Remove any existing address with the same label (if exists)
+        networkAddresses.removeIf(addr -> addr.label.equals(newPublicAddress.label));
+
+        // Add the new address
+        networkAddresses.add(newPublicAddress);
+
+        // Put the updated set back in the map
+        updatedPublicAddresses.put(newPublicAddress.getNetwork(), networkAddresses);
+
         return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
@@ -171,9 +180,8 @@ public class PublicAddressesComposition {
      */
     public PublicAddressesComposition remove(Network network) {
         assert network != null;
-        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
-                .filter(entry -> !entry.getKey().equals(network))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = new HashMap<>(publicAddresses);
+        updatedPublicAddresses.remove(network);
         return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
@@ -185,16 +193,28 @@ public class PublicAddressesComposition {
      * @return A new PublicAddressesComposition with the updated public addresses
      */
     public PublicAddressesComposition remove(String label, Network network) {
-        assert label != null;
         assert network != null;
-        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
-            .map(entry -> {
-                Set<PublicAddress> updatedAddresses = entry.getValue().stream()
-                    .filter(addr -> !(addr.label.equals(label) && entry.getKey().equals(network)))
+        assert label != null;
+
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = new HashMap<>(publicAddresses);
+
+        // Get the set of addresses for this network
+        Set<PublicAddress> networkAddresses = updatedPublicAddresses.get(network);
+
+        // If network exists and has addresses
+        if (networkAddresses != null) {
+            // Remove the address with matching label
+            Set<PublicAddress> updatedAddresses = networkAddresses.stream()
+                    .filter(addr -> !addr.label.equals(label))
                     .collect(Collectors.toSet());
-                return new AbstractMap.SimpleEntry<>(entry.getKey(), updatedAddresses);
-            })
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+            // If set is empty after removal, remove the network entirely
+            if (updatedAddresses.isEmpty()) {
+                updatedPublicAddresses.remove(network);
+            } else {
+                updatedPublicAddresses.put(network, updatedAddresses);
+            }
+        }
         return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
