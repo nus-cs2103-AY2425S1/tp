@@ -36,14 +36,14 @@ public class ViewCommandTest {
         NameMatchesKeywordPredicate secondPredicate =
                 new NameMatchesKeywordPredicate(Collections.singletonList("second"));
 
-        ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
+        ViewCommand viewFirstCommand = new ViewCommand(null, firstPredicate);
+        ViewCommand viewSecondCommand = new ViewCommand(null, secondPredicate);
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
+        ViewCommand viewFirstCommandCopy = new ViewCommand(null, firstPredicate);
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
@@ -60,7 +60,7 @@ public class ViewCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameMatchesKeywordPredicate predicate = preparePredicate(" ");
-        ViewCommand command = new ViewCommand(predicate);
+        ViewCommand command = new ViewCommand(null, predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -70,7 +70,7 @@ public class ViewCommandTest {
     public void execute_singleWordInKeyword_partialNameMatched() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         NameMatchesKeywordPredicate predicate = preparePredicate(KEYWORD_MATCHING_MEIER);
-        ViewCommand command = new ViewCommand(predicate);
+        ViewCommand command = new ViewCommand(null, predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
@@ -80,14 +80,14 @@ public class ViewCommandTest {
     public void execute_multipleWordsInKeyword_nameMatched() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         NameMatchesKeywordPredicate predicate = preparePredicate("Carl Kurz");
-        ViewCommand command = new ViewCommand(predicate);
+        ViewCommand command = new ViewCommand(null, predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
 
         expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         predicate = preparePredicate("Carl Duh Kurz");
-        command = new ViewCommand(predicate);
+        command = new ViewCommand(null, predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARLDUH), model.getFilteredPersonList());
@@ -96,7 +96,7 @@ public class ViewCommandTest {
     @Test
     public void toStringMethod() {
         NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(Arrays.asList("keyword"));
-        ViewCommand viewCommand = new ViewCommand(predicate);
+        ViewCommand viewCommand = new ViewCommand(null, predicate);
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
     }
