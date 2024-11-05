@@ -18,14 +18,17 @@ public class IncomeComparisonPredicateTest {
         IncomeComparisonOperator operatorEqual = new IncomeComparisonOperator("=");
         IncomeComparisonOperator operatorGreater = new IncomeComparisonOperator(">");
 
-        IncomeComparisonPredicate firstPredicate = new IncomeComparisonPredicate(operatorEqual, BigInteger.valueOf(5000));
-        IncomeComparisonPredicate secondPredicate = new IncomeComparisonPredicate(operatorGreater, BigInteger.valueOf(10000));
+        IncomeComparisonPredicate firstPredicate = new IncomeComparisonPredicate(operatorEqual,
+                BigInteger.valueOf(5000));
+        IncomeComparisonPredicate secondPredicate = new IncomeComparisonPredicate(operatorGreater,
+                BigInteger.valueOf(10000));
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        IncomeComparisonPredicate firstPredicateCopy = new IncomeComparisonPredicate(operatorEqual, BigInteger.valueOf(5000));
+        IncomeComparisonPredicate firstPredicateCopy = new IncomeComparisonPredicate(operatorEqual,
+                BigInteger.valueOf(5000));
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

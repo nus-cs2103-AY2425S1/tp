@@ -13,11 +13,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_REJECT;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
+import java.math.BigInteger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ClientBuilder;
-
-import java.math.BigInteger;
 
 public class ClientTest {
 
