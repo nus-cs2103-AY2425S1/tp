@@ -156,16 +156,8 @@ public class Person {
             } else if (!person2HasPolicies) {
                 return -1;
             } else {
-                if (person1.getPolicies().get(0).isFullyPaid() && !person2.getPolicies().get(0).isFullyPaid()) {
-                    return 1;
-                } else if (!person1.getPolicies().get(0).isFullyPaid() && person2.getPolicies().get(0).isFullyPaid()) {
-                    return -1;
-                } else if (person1.getPolicies().get(0).isFullyPaid() && person2.getPolicies().get(0).isFullyPaid()) {
-                    return 0;
-                } else {
-                    return person1.getPolicies().get(0).getPolicyPaymentDueDate()
-                            .compareTo(person2.getPolicies().get(0).getPolicyPaymentDueDate());
-                }
+                return person1.getPolicies().get(0).getPolicyPaymentDueDate()
+                        .compareTo(person2.getPolicies().get(0).getPolicyPaymentDueDate());
             }
         };
     }
