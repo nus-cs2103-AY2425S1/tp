@@ -132,7 +132,10 @@ public class HelpWindow extends UiPart<Stage> {
                         "exit"),
                 new CommandSummary("Clear All Data",
                         "clear",
-                        "clear")
+                        "clear"),
+                new CommandSummary("Save Data Automatically",
+                        "Automatic",
+                        "No command required")
         );
 
         commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
