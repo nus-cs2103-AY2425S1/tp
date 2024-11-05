@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 
 /**
@@ -31,7 +31,7 @@ public abstract class AddClientCommand extends Command {
 
     public static final String CLIENT_RESTRICTIONS = String.format(
             "Restrictions: %s\n%s\n%s",
-            Name.MESSAGE_CONSTRAINTS,
+            NameWithoutNumber.MESSAGE_CONSTRAINTS,
             Phone.MESSAGE_CONSTRAINTS,
             Email.MESSAGE_CONSTRAINTS
     );

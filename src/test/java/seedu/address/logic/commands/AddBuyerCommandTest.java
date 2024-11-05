@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 
 class AddBuyerCommandTest {
@@ -26,7 +26,7 @@ class AddBuyerCommandTest {
     @BeforeEach
     void setUp() {
         buyer = new Buyer(
-                new Name("John Doe"),
+                new NameWithoutNumber("John Doe"),
                 new Phone("91234567"), // Valid phone starting with '9'
                 new Email("john.doe@example.com") // Valid email format
         );
@@ -93,7 +93,7 @@ class AddBuyerCommandTest {
     void equals_differentBuyer_returnsFalse() {
         // Arrange
         Buyer differentBuyer = new Buyer(
-                new Name("Jane Smith"),
+                new NameWithoutNumber("Jane Smith"),
                 new Phone("81234567"), // Different phone number
                 new Email("jane.smith@example.com") // Different email
         );

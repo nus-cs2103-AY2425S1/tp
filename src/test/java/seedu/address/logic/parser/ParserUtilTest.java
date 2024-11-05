@@ -68,25 +68,27 @@ public class ParserUtilTest {
     // Tests for client Name
     @Test
     public void parseClientName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientName(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientNameWithoutNumber(null));
     }
 
     @Test
     public void parseClientName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseClientName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientNameWithoutNumber(INVALID_NAME));
     }
 
     @Test
     public void parseClientName_validValueWithoutWhitespace_returnsClientName() throws Exception {
-        seedu.address.model.client.Name expectedName = new seedu.address.model.client.Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseClientName(VALID_NAME));
+        seedu.address.model.client.NameWithoutNumber expectedName =
+                new seedu.address.model.client.NameWithoutNumber(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseClientNameWithoutNumber(VALID_NAME));
     }
 
     @Test
     public void parseClientName_validValueWithWhitespace_returnsTrimmedClientName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        seedu.address.model.client.Name expectedName = new seedu.address.model.client.Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseClientName(nameWithWhitespace));
+        seedu.address.model.client.NameWithoutNumber expectedName =
+                new seedu.address.model.client.NameWithoutNumber(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseClientNameWithoutNumber(nameWithWhitespace));
     }
 
     // Tests for client Phone

@@ -8,6 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,37 +23,37 @@ import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Type;
 
+
 /**
  * Adds a {@code Meeting} to the meeting book.
  */
 public class AddMeetingCommand extends Command {
-
     public static final String COMMAND_WORD = "addmeeting";
 
     public static final String MESSAGE_USAGE = String
             .format("%s: Adds a meeting to the meeting book.\n"
                             + "Parameters: %sMEETING_TITLE %sMEETING_DATE %sBUYER_PHONE %sSELLER_PHONE %sTYPE "
-                            + "%sPOSTALCODE\n"
+                            + "%sPOSTAL_CODE\n"
                             + "Restrictions:\n"
                             + "\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
                     COMMAND_WORD, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE, PREFIX_BUYER_PHONE, PREFIX_SELLER_PHONE,
                     PREFIX_TYPE, PREFIX_POSTALCODE, MeetingTitle.MESSAGE_CONSTRAINTS, MeetingDate.MESSAGE_CONSTRAINTS,
                     Phone.MESSAGE_CONSTRAINTS, Type.MESSAGE_CONSTRAINTS, PostalCode.MESSAGE_CONSTRAINTS,
                     "There must be an existing buyer in the client book with a phone number equal to BUYER_PHONE. "
-                            + "Likewise for SELLER_PHONE.", "Postal Code must belong to some existing property "
-                            + "in the property book of the specified Type.");
+                            + "Likewise for SELLER_PHONE.", "POSTAL_CODE must belong to some existing property "
+                            + "in the property book of the specified TYPE.");
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "There is already a meeting of the same title "
             + "scheduled on this date. Please change either the meeting title or date.";
-
+    private static final Logger logger = Logger.getLogger(AddMeetingCommand.class.getName());
     private final Meeting toAdd;
 
     /**
      * Creates an AddMeetingCommand to add the specified {@code Meeting}
      */
     public AddMeetingCommand(Meeting meeting) {
-        requireNonNull(meeting);
+        requireNonNull(meeting, "Meeting cannot be null");
         toAdd = meeting;
     }
 
@@ -66,8 +69,12 @@ public class AddMeetingCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        requireNonNull(model, "Model cannot be null");
         model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
+        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTY);
+        model.updateFilteredMeetingList(Model.PREDICATE_SHOW_ALL_MEETINGS);
+
+        logger.log(Level.INFO, "Executing AddMeetingCommand for meeting: {0}", toAdd);
 
         checkForDuplicateMeeting(model);
         checkBuyerExists(model);
@@ -75,6 +82,7 @@ public class AddMeetingCommand extends Command {
         checkPropertyExists(model);
 
         model.addMeeting(toAdd);
+        logger.log(Level.INFO, "Meeting added successfully: {0}", toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -85,6 +93,7 @@ public class AddMeetingCommand extends Command {
      * @throws CommandException if a meeting with the same details already exists
      */
     private void checkForDuplicateMeeting(Model model) throws CommandException {
+        assert model != null : "Model should not be null at this point";
         if (model.hasMeeting(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
