@@ -98,10 +98,10 @@ Invalid usages
 
 The commands in this section are used to view and retrieve records on the system, such as students, tutorials, and enrollment status.
 
-3.1 Listing all students  
+- [Listing all students](#31-listing-all-students)  
 3.2 Search
 
-### **3.1 Listing all students**
+#### **3.1 Listing all students**
 
 Command: `list`
 
@@ -111,13 +111,13 @@ Command: `list`
 
 The commands in this section are used edit records on the system, such as student information, tutorial information, payment, and attendance status
 
-4.1 Editing student’s details  
-4.2 Logging fees  
-4.3 Marking payment  
-4.4 Marking attendance of student  
+- [Editing student’s details](#41-editing-a-student)  
+- [Logging fees](#42-logging-fees-for-tutorial)  
+- [Marking payment](#43-marking-a-students-payment)  
+4.4 Marking attendance of student
 4.5 Marking attendance of tutorial  
-4.6 Unenroll a student from tutorial
-### **4.1 Editing a student**
+- [Unenroll a student from tutorial](#46-unenrolling-student-from-a-tutorial)
+#### **4.1 Editing a student**
 
 Edit the personal information of students within EduVault
 
@@ -125,6 +125,8 @@ Command: `edit`
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TAG]…​`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields:
 
 * `INDEX`: Index number shown in the displayed person list
@@ -137,15 +139,20 @@ Fields:
     * Remove a student’s tag by typing  `t/` without specifying any tags
 * ATTENDANCE: Field not editable within edit
 * TUTORIAL: Field not editable within edit
+</div>
+{% endraw %}
 
-<div markdown="span" class="alert alert-primary">:pushpin:|**Note:** 
-More information about other prefixes can be found [here](#2-general-command-foramt)</div>
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+More information about other prefixes can be found here
+</div>
 
 Example Usage:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usage:
 
 * None of the option fields are input
@@ -155,8 +162,10 @@ Invalid usage:
 * ATTENDANCE & TUTORIAL prefix used
     * Error message: PREFIX cannot be used in this command
 * Format errors, check [here](#11-format-errors)
+</div>
+{% endraw %}
 
-### **4.2 Logging fees for tutorial**
+#### **4.2 Logging fees for tutorial**
 
 *Logging each student's monthly tutorial fees or any other additional fees*
 
@@ -164,24 +173,33 @@ Command:  `addfees`
 
 Usage: addfees `INDEX pay/PAYMENT`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `PAYMENT:` Amount in integer that a student have to pay
+</div>
+{% endraw %}
 
-| **Note:** Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+</div>
 
 Example usages
 
 * `addfees 1 pay/400`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Format errors, check [here](#11-format-errors)
+</div>
+{% endraw %}
 
-
-### **4.3 Marking a student’s payment**
+#### **4.3 Marking a student’s payment**
 
 *Recording a student’s payment*
 
@@ -189,42 +207,59 @@ Command:  `markpaid`
 
 Usage: markpaid `INDEX pay/PAYMENT`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
+
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `PAYMENT:` Amount in integer that a student have paid
+</div>
+{% endraw %}
 
-| **Note:** Student’s payment will be shown as a decrease in overdue amount. If student pays extra, it will be shown as advanced payment
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Student’s payment will be shown as a decrease in overdue amount. If student pays extra, it will be shown as advanced payment
+</div>
 
 Example usages
 
 * `markpaid 1 pay/400`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Format errors, check [here](#11-format-errors)
+</div>
+{% endraw %}
 
-
-
-### **4.6 Unenrolling student from a tutorial**
+#### **4.6 Unenrolling student from a tutorial**
 
 Command:  `unenroll`
 
 Usage: `unenroll` `INDEX tut/TUTORIAL_NAME`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL_NAME:` Name of the tutorial
+</div>
+{% endraw %}
 
-| **Note:** Student can only be unenrolled from tutorials that they are currently in
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Student can only be unenrolled from tutorials that they are currently in
+</div>
 
 Example usages
 
 * `unenroll 1 tut/physics`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Unenrolling student from a tutorial that they are not in
@@ -232,6 +267,8 @@ Invalid usages
     * *Error Message: Cannot unenroll STUDENT from TUTORIAL, as…*
 
 * Format errors, check [here](#11-format-errors)
+</div>
+{% endraw %}
 
 ---
 
@@ -239,11 +276,11 @@ Invalid usages
 
 The commands in this section are used to delete records on the system
 
-5.1 Deleting a student  
+- [Deleting a student](#51-deleting-a-student)  
 5.2 Closing a tutorial  
-5.3 Clearing all entries
+- [Clearing all entries](#53-clearing-all-entries)
 
-### **5.1 Deleting a student**
+#### **5.1 Deleting a student**
 
 *Deleting student’s record*
 
@@ -251,20 +288,29 @@ Command:  `delete`
 
 Usage: `delete` `INDEX`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
+</div>
+{% endraw %}
 
 Example usages
 
 * `delete 2`
 
+{% raw %}
+<div markdown="1" class="smaller-text">
 Invalid usages
 
 * Format errors, check [here](#11-format-errors)
+</div>
+{% endraw %}
 
-### **5.3 Clearing all entries**
+
+#### **5.3 Clearing all entries**
 
 *Deleting all tutorial and student records*
 
