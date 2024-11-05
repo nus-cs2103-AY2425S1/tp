@@ -1,5 +1,6 @@
 package seedu.edulog.logic.parser;
 
+import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -21,8 +22,8 @@ public class RevenueCommandParserTest {
 
     @Test
     public void parse_invalidArgs() {
-        assertParseFailure(parser, "paid unpaid", RevenueCommand.COMMAND_USAGE);
-        assertParseFailure(parser, "12345", RevenueCommand.COMMAND_USAGE);
-        assertParseFailure(parser, "paid 123", RevenueCommand.COMMAND_USAGE);
+        assertParseFailure(parser, "paid unpaid", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
+        assertParseFailure(parser, "12345", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
+        assertParseFailure(parser, "paid 123", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
     }
 }
