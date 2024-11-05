@@ -29,7 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_AMOUNT = "100.005";
+    private static final String INVALID_AMOUNT_1 = "100.005";
+    private static final String INVALID_AMOUNT_2 = "1,000";
     private static final String INVALID_DATE_1 = "2024-10-32";
     private static final String INVALID_DATE_2 = "2024-13-12";
     private static final String INVALID_DATE_3 = "2024-1-12";
@@ -214,14 +215,17 @@ public class ParserUtilTest {
     }
     @Test
     public void parseAmount_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_2));
     }
+
     @Test
     public void parseAmount_validValueWithoutWhitespace_returnsDouble() throws ParseException {
         assertEquals(Double.parseDouble(VALID_AMOUNT_1), ParserUtil.parseAmount(VALID_AMOUNT_1));
         assertEquals(Double.parseDouble(VALID_AMOUNT_2), ParserUtil.parseAmount(VALID_AMOUNT_2));
         assertEquals(Double.parseDouble(VALID_AMOUNT_3), ParserUtil.parseAmount(VALID_AMOUNT_3));
     }
+
     @Test
     public void parseAmount_validValueWithWhitespace_returnsDouble() throws Exception {
         String amountWithWhitespace = WHITESPACE + VALID_AMOUNT_1 + WHITESPACE;
