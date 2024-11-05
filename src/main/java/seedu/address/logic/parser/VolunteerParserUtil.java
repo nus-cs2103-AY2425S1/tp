@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
+import seedu.address.model.volunteer.VolunteerDates;
 
 
 /**
@@ -71,13 +71,29 @@ public class VolunteerParserUtil {
      * @return A valid {@code Date} object.
      * @throws ParseException If the given date does not conform to the date constraints.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static VolunteerDates parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        if (!VolunteerDates.isValidListOfDates(trimmedDate)) {
+            throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new VolunteerDates(trimmedDate);
+    }
+
+    /**
+     * Checks a given string as a valid list for strings suitable for {@code Date} and returns
+     * the same string trimmed
+     * @param date
+     * @return trimmedDate
+     * @throws ParseException
+     */
+    public static String checkStringListOfDates(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!VolunteerDates.isValidListOfDates(trimmedDate)) {
+            throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedDate;
     }
 
     /**

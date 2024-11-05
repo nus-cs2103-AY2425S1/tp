@@ -44,7 +44,7 @@ public class Messages {
                 .append("; Email: ")
                 .append(volunteer.getEmail())
                 .append("; Available Date: ")
-                .append(volunteer.getAvailableDate());
+                .append(volunteer.getAvailableDates());
         return builder.toString();
     }
 
