@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -68,6 +69,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        long inputGroups = argMultimap.countPrefixesOf(PREFIX_GROUP);
+
+        if (inputGroups > 1 && editPersonDescriptor.getGroups().isPresent()
+                && inputGroups > editPersonDescriptor.getGroups().get().size()) {
+            throw new ParseException(Messages.MESSAGE_DUPLICATE_GROUPS);
         }
 
         return new EditCommand(index, editPersonDescriptor);

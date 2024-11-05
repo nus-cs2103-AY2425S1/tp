@@ -24,6 +24,7 @@ public class GroupList implements Iterable<Group> {
         this.groups = new HashSet<>();
         this.isModifiable = true;
     }
+
     /**
      * Constructs a GroupList with the specified set of groups.
      *
@@ -51,25 +52,33 @@ public class GroupList implements Iterable<Group> {
             groups.add(group);
         }
     }
+
+    /**
+     * Checks if the GroupList is empty
+     * @return Boolean which indicates if the list is empty
+     */
     public boolean isEmpty() {
         return this.groups.isEmpty();
     }
+
     /**
      * Adds all groups from another GroupList to the current GroupList if it is modifiable.
      *
-     * @param grouplist The list of groups one would like to add to current list..
+     * @param groupList The list of groups one would like to add to current list.
      * @throws UnsupportedOperationException if the GroupList is not modifiable.
      */
-    public void addAll(GroupList grouplist) {
+    public void addAll(GroupList groupList) {
         if (!isModifiable) {
             throw new UnsupportedOperationException("GroupList is not modifiable");
         }
-        this.groups.addAll(grouplist.getUnmodifiableGroups());
+        this.groups.addAll(groupList.getUnmodifiableGroups());
     }
+
     @Override
     public Iterator<Group> iterator() {
         return groups.iterator();
     }
+
     /**
      * Marks the GroupList as unmodifiable.
      *
@@ -79,12 +88,23 @@ public class GroupList implements Iterable<Group> {
         this.isModifiable = false;
         return this;
     }
+
+    /**
+     * Returns unmodifiable set of groups
+     * @return This unmodifiable group set
+     */
     public Set<Group> getUnmodifiableGroups() {
         return Collections.unmodifiableSet(groups);
     }
+
     public GroupList makeCopy() {
         return new GroupList(this.groups);
     }
+
+    public int size() {
+        return this.groups.size();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {

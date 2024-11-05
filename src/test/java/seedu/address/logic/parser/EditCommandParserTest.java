@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -52,7 +51,6 @@ public class EditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-    private static final String MESSAGE_MULTIPLE_GROUPS = MESSAGE_DUPLICATE_FIELDS + PREFIX_GROUP;
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -202,7 +200,7 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetGroups_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 

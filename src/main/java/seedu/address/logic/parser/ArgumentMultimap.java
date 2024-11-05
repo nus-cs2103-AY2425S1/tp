@@ -88,4 +88,14 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.MESSAGE_MORE_THAN_FOUR_DUPLICATE_FIELDS);
         }
     }
+    /**
+     * Counts the total number of occurrences of the specified prefixes in the argument map
+     */
+    public long countPrefixesOf(Prefix... prefixes) throws ParseException {
+        long count = Stream.of(prefixes)
+                .filter(argMultimap::containsKey)
+                .mapToLong(prefix -> argMultimap.get(prefix).size())
+                .sum();
+        return count;
+    }
 }
