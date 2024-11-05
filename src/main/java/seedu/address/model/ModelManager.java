@@ -269,13 +269,7 @@ public class ModelManager implements Model {
         }
     }
     
-    /**
-     * Gets a list of weddings whose name matches that of the tags in the set.
-     *
-     * @param model current Model containing the necessary wedding address book.
-     * @param tags  Set of tags input by the user.
-     * @return List of weddings that match the tag.
-     */
+    @Override
     public List<Wedding> getWeddingFromTags(Model model, Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
@@ -292,13 +286,7 @@ public class ModelManager implements Model {
         return list;
     }
 
-    /**
-     * Removes the person from the participant list of weddings that correspond to the specified tag(s).
-     *
-     * @param editedPerson Person whose specified tags have been deleted from.
-     * @param model        current Model containing necessary wedding address book.
-     * @param editedTags   Set of tags that exist as a wedding as well.
-     */
+    @Override
     public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> editedTags) {
         List<Wedding> weddingList = getWeddingFromTags(model, editedTags);
 
@@ -309,12 +297,8 @@ public class ModelManager implements Model {
             set.remove(editedPerson);
         }
     }
-    /**
-     * Removes all tags from a person and removes the person from any weddings related to those tags.
-     *
-     * @param personToEdit the person whose tags will be removed.
-     * @param model        the current model containing the necessary wedding address book.
-     */
+
+    @Override
     public Person personWithAllTagsRemoved(Person personToEdit, Model model) {
         Set<Tag> currentTags = new HashSet<>(personToEdit.getTags());
 
