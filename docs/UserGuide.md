@@ -307,7 +307,7 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
   <box type="warning" seamless>
 
   **Caution:**
-  If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
+  If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
   
   </box>
 Examples:
@@ -320,7 +320,7 @@ Examples:
 
 Format: `view WEDDING_INDEX`
 
-Displays contacts assigned to the wedding at the specified `WEDDING_INDEX`.
+Displays contacts assigned to the wedding at the specified `WEDDING_INDEX`. Please refer to the 'General Notes' at the start of the Features section to learn more about the implications (on command behaviour) of entering a wedding view using this command 
 
 Examples:
 * `view 2` displays a list of all contacts involved in the 2nd wedding on the wedding list.
