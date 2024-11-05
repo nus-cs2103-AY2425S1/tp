@@ -93,10 +93,22 @@ public class Wedding {
         }
 
         Wedding otherWedding = (Wedding) other;
-        return name.equals(otherWedding.name)
-               && ((client == null && otherWedding.client == null) || client.equals(otherWedding.client))
-               && ((date == null && otherWedding.date == null) || date.equals(otherWedding.date))
-               && ((venue == null && otherWedding.venue == null) || venue.equals(otherWedding.venue));
+
+        boolean nameEqual = name.equals(otherWedding.name);
+
+        boolean clientEqual = (client == null && otherWedding.client == null)
+            || (client != null && client.equals(otherWedding.client));
+
+        boolean dateEqual = (date == null && otherWedding.date == null)
+                || (date != null && date.equals(otherWedding.date));
+
+        boolean venueEqual = (venue == null && otherWedding.venue == null)
+                || (venue != null && venue.equals(otherWedding.venue));
+
+        return nameEqual
+               && clientEqual
+               && dateEqual
+               && venueEqual;
     }
 
     @Override

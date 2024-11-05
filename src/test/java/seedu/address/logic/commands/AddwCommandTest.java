@@ -37,6 +37,7 @@ public class AddwCommandTest {
 
     @Test
     public void execute_indexBasedWeddingAcceptedByModel_addSuccessful() throws Exception {
+        // given date and given venue
         AddwCommandTest.ModelStubAcceptingWeddingAdded modelStub =
                 new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         Wedding weddingToAdd = new WeddingBuilder().build();
@@ -44,6 +45,20 @@ public class AddwCommandTest {
 
         AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
         CommandResult commandResult = addwCommand.execute(modelStub);
+
+        weddingToAdd.setClient(tobeClient);
+
+        assertEquals(String.format(AddwCommand.MESSAGE_SUCCESS, Messages.format(weddingToAdd)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
+
+        // null date and null venue
+        modelStub =
+                new AddwCommandTest.ModelStubAcceptingWeddingAdded();
+        weddingToAdd = new WeddingBuilder().withDate(null).withVenue(null).build();
+
+        addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
+        commandResult = addwCommand.execute(modelStub);
 
         weddingToAdd.setClient(tobeClient);
 

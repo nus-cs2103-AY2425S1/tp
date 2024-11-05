@@ -36,9 +36,9 @@ public class AddwCommand extends Command {
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
     public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book";
     public static final String MESSAGE_DUPLICATE_HANDLING =
-            "Please specify the index of the contact you want to edit.\n"
+            "Please specify the index of the contact you want to set as client.\n"
                     + "Find the index from the list below and type edit INDEX ...\n"
-                    + "Example: " + COMMAND_WORD + " 1 ...";
+                    + "Example: " + COMMAND_WORD + "n/WEDDING NAME c/1 ...";
 
     private final Index index;
     private final NameMatchesKeywordPredicate predicate;
