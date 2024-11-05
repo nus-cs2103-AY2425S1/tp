@@ -29,7 +29,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
         boolean matchesWedding = tagNames.stream()
                                     .anyMatch(tagName -> {
-                                        return tagName.toLowerCase().equals(weddingKeywords);
+                                        return tagName.equals(weddingKeywords);
                                     });
 
         return matchesWedding;
