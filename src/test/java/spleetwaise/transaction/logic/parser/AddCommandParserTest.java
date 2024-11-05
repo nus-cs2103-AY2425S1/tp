@@ -103,6 +103,12 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_invalidStatus_exceptionThrown() {
+        String userInput = " 1 amt/1.23 desc/test status/invalid";
+        assertParseFailure(parser, userInput, Status.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_missingParam_exceptionThrown() {
         String userInput = " 1 desc/test";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
