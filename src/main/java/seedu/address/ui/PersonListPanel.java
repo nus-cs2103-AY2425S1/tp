@@ -25,7 +25,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
-        emergencyContactSelectionController = new EmergencyContactSelectionController(personListView);
+        emergencyContactSelectionController = new EmergencyContactSelectionController();
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
 
             if (empty || person == null) {
                 if (personCard != null) {
-                    emergencyContactSelectionController.removePerson(
+                    emergencyContactSelectionController.removeEmergencyContactListView(
                             personCard.getEmergencyContactListView());
                 }
                 setGraphic(null);
@@ -50,13 +50,8 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 personCard = new PersonCard(person, getIndex() + 1);
                 setGraphic(personCard.getRoot());
-                emergencyContactSelectionController.addPerson(this,
+                emergencyContactSelectionController.addEmergencyContactListView(
                         personCard.getEmergencyContactListView());
-                this.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-                    if (isSelected) {
-                        emergencyContactSelectionController.onListCellSelected(this);
-                    }
-                });
             }
         }
     }
