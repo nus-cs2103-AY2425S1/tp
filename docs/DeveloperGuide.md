@@ -236,24 +236,26 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Update Find Command
+### Update Find Command
 
-#### Proposed Implementation
+#### Implementation
 
-Enhance the `find` command to enable searching profiles using additional attributes such as 'tags', 
-'roomNumber', and 'contactNumber'. These new features will create predicates similar to the existing 'name' feature, 
-allowing for more comprehensive search capabilities.
+* the findCommand is enhanced by new Predicates 
+* RoomNumber predicates, PhonePredicate, and TagContainsKeywordsPredicate allows
+the a wider range of searching based on more features
 
 Below is a detailed process illustration using a sequential diagram:
 
-Step 1: The user issues a `find` command followed by specific parameters, 
-for example: `t/friends n/Alex r/08-0805 p/9124 6892`.
+Step 1. The user issues a `find` command followed by specific parameters, 
+for example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a 
+tag of friends, a name called Alex, a roomNumber of 08-0805, and a phone call of 9124 6842
  
 **Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
 
-Step 2, The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
+Step 2. The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
 
-Step 3, The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+
 results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
