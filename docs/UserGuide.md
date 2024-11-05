@@ -54,8 +54,8 @@ In this comprehensive user guide, we will take you to experience a full journey 
   - [4.3.5 Unmarking an assignment: `unmarkAsg`](#unmarking-an-assignment-unmarkAsg)
   - [4.3.6 Checking an assignment: `checkAsg`](#checking-an-assignment-checkAsg)
 - [4.4 Attendance Data Related Commands](#attendance-data-commands)
-  - [4.4.1 Marking an attendance: `attend`](#adding-an-assigment-addAsg)
-  - [4.4.2 Unmarking an attendance: `TBC`](#deleting-an-assignment-deleteAsg)
+  - [4.4.1 Marking an attendance: `addAtt`](#adding-an-assigment-addAsg)
+  - [4.4.2 Unmarking an attendance: `deleteAtt`](#deleting-an-assignment-deleteAsg)
 - [4.5 General Commands](#general-commands)
   - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
   - [4.5.2 Clearing all entries: `clear`](#clearing-all-entries-clear)
@@ -244,7 +244,7 @@ Here's a reference table for common parameter prefixes and their corresponding p
 | `c/`             | `TUTORIAL_ID`           |
 | `a/`             | `ASSIGNMENT_NAME`       |
 | `d/`             | `ASSIGNMENT_DUE_DATE`   |
-| `e/`             | `ATTENDANCE_DATE`       |
+| `d/`             | `ATTENDANCE_DATE`       |
 
 
 #### 3.3.2 Parameters:
@@ -263,7 +263,7 @@ Essentially they are to be supplied by the user.
 | `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
 | `ASSIGNMENT_NAME`     | `a/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Names are restricted to a maximum of 150 characters.</li><li>Each `ASSIGNMENT_NAME` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                   |
 | `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The Assignment Due Date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
-| `ATTENDANCE_DATE`     | `e/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                             |
+| `ATTENDANCE_DATE`     | `d/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                             |
 | `KEYWORD`             | Not Applicable   | Specifies the keywords to search for when finding students. <br/><br/> **Requirements:** <ul><li>Can contain alphanumeric characters and any special characters.</li><li>Whitespace characters will be treated as part of the `KEYWORD`.</li><li>The special character `/` will be ignored.</li>                                                                                                                                                                                                                                                                                                   |
 | `INDEX`               | Not Applicable   | Refers to the index number shown in the Student List Panel. <br/><br/> **Requirements:** <ul><li>Must be a positive integer, e.g., 1, 2, 3.</li><li>The value must fall within the range of 1 to 2,147,483,647.</li></ul>                                                                                                                                                                                                                                                                                                                                                                          |
 
@@ -637,26 +637,26 @@ TO BE CHANGED
 ## 8. Command summary
 <a id="command-summary"></a>
 
-| Action            | Format, Examples                                                                               |
-|-------------------|------------------------------------------------------------------------------------------------|
-| **Add Student**    | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`   |
-| **Edit Student**    | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M` |
-| **Delete Student**  | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                      |
-| **List Students**   | `listStu`                                                                                      |
-| **Add Tutorial**    | `addTut tn/TUTORIAL NAME id/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 id/1011`                  |
-| **Delete Tutorial** | `deleteTut TUTORIAL ID`<br> e.g., `deleteTut 1011`                                             |
-| **List Tutorials**  | `listTut`                                                                                      |
-| **Add Assignment**  | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`     |
-| **Delete Assignment**| `deleteAsg ASSIGNMENT TITLE`<br> e.g., `deleteAsg Assignment 1`                                |
-| **List Assignments**| `listAsg`                                                                                      |
-| **Mark Assignment** | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                        |
-| **Unmark Assignment**| `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                    |
-| **Check Assignment**| `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                              |
-| **Mark Attendance** | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/1001 d/2024-02-21` |
-| **Unmark Attendance**| `deletedAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtd s/1001 c/1001 d/2024-02-21` |
-| **Clear**          | `clear`                                                                                        |
-| **Help**           | `help`                                                                                         |
-| **Exit**           | `exit`                                                                                         |
+| Action            | Format, Examples                                                                                        |
+|-------------------|---------------------------------------------------------------------------------------------------------|
+| **Add Student**    | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`            |
+| **Edit Student**    | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`      |
+| **Delete Student**  | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                               |
+| **List Students**   | `listStu`                                                                                               |
+| **Add Tutorial**    | `addTut tn/TUTORIAL NAME id/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 id/1011`                           |
+| **Delete Tutorial** | `deleteTut TUTORIAL ID`<br> e.g., `deleteTut 1011`                                                      |
+| **List Tutorials**  | `listTut`                                                                                               |
+| **Add Assignment**  | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`              |
+| **Delete Assignment**| `deleteAsg ASSIGNMENT TITLE`<br> e.g., `deleteAsg Assignment 1`                                         |
+| **List Assignments**| `listAsg`                                                                                               |
+| **Mark Assignment** | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                 |
+| **Unmark Assignment**| `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                             |
+| **Check Assignment**| `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                       |
+| **Mark Attendance** | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/1001 d/2024-02-21`      |
+| **Unmark Attendance**| `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/1001 c/1001 d/2024-02-21` |
+| **Clear**          | `clear`                                                                                                 |
+| **Help**           | `help`                                                                                                  |
+| **Exit**           | `exit`                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 

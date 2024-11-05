@@ -159,7 +159,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<<<<<<< HEAD
 > Please note that certain aspects, such as UML classes, may have been simplified to fit within the diagram's constraints and maintain readability.
 
 ### Add feature
@@ -187,14 +186,18 @@ We ensure that duplicate students or non-existent tutorials are caught early in 
 To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below
 shows the sequence of action users will have to take to add a new Student Profile into the TrackMate Application.
 
-[//]: # (<puml src="diagrams/AddCommandActivityDiagram.puml" width="280" />)
+<puml src="diagrams/AddFeatureActivityDiagram.puml" width="400" />
+
+Besides, a class diagram of add student command is given below to demonstrate the interactions among classes.
+
+<puml src="diagrams/AddFeatureClassDiagram.puml" width="400" />
 
 #### Add Tutorial
 
 Similar to adding student, the system requires parameters such as Tutorial Name and Tutorial ID. The sequence diagram below demonstrates the interaction
 among various classes to add a new Tutorial into the TrackMate Application.
 
-[//]: # (<puml src="diagrams/AddTutCommandSequenceDiagram.puml" width="280" />)
+<puml src="diagrams/AddTutorialSequenceDiagram.puml" width="400" />
 
 #### Add Attendance
 
@@ -202,14 +205,14 @@ The AttendCommand is responsible for marking the attendance of a student for a s
 with the model to update the attendance record of a given student for a particular tutorial. The sequence diagram below shows how the command
 interact with other classes.
 
-<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="280" />
+<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="400" />
 
 #### Add Assignment
 
 Users can also add assignments to the TrackMate Application that are shared among all the students in every tutorials. The activity diagram below will
 demonstrate what the users need to do to add assignment for students.
 
-<puml src="diagrams/CreateAssignmentActivityDiagram.puml" width="280" />
+<puml src="diagrams/CreateAssignmentActivityDiagram.puml" width="400" />
 
 #### Implementation - Design Considerations:
 
@@ -271,7 +274,7 @@ already exist in the system.
 To maintain accurate and up-to-date student records, the Edit feature allows users to modify existing student information. The sequence diagram below shows
 how it involves specifying the student's index in the displayed list and providing any new values for the student's attributes.
 
-<puml src="diagrams/EditSequenceDiagram.puml" width="280" />
+<puml src="diagrams/EditSequenceDiagram.puml" width="400" />
 
 #### Implementation - Design Considerations
 
@@ -343,7 +346,7 @@ Attendance Records: Deleting attendance marks the student as absent for that dat
 To remove a student from the application, the user specifies the student's index in the displayed student list. The system ensures
 that the index is valid and then proceeds to delete the student, updating all related records. Below is the sequence diagram regarding deleting student.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" width="280" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" width="400" />
 
 #### Delete Tutorial
 To delete a tutorial, the user provides the tutorial ID. The system verifies the existence of the tutorial and then removes it, updating any students assigned to it.
@@ -353,7 +356,7 @@ The sequence diagram of deleting tuorial is similar to deleting student.
 To delete an assignment, the user specifies the assignment title. The system ensures that the assignment exists before deleting it from the model. The
 activity diagram below illustrates what the series of actions the user should do to delete assignment.
 
-<puml src="diagrams/DeleteAssignmentActivityDiagram.puml" width="280" />
+<puml src="diagrams/DeleteAssignmentActivityDiagram.puml" width="400" />
 
 #### Delete Attendance
 To delete a student's attendance record for a specific date and tutorial, the user provides the student ID, tutorial ID, and date. The diagram is
@@ -395,61 +398,6 @@ An alternative design is to implement a single DeleteCommand that can handle del
 We chose Alternative 1 because it promotes modularity, clarity, and maintainability. By having separate commands and parsers for each
 entity type, we can encapsulate the specific logic and validation required for each. This separation makes the codebase more organized and easier to extend or
 modify. Although there is some code duplication, the benefits of clarity and reduced complexity outweigh the drawbacks.
-=======
-### Add feature
-
-The "Add Student" mechanism is facilitated by `Model` and `AddCommand`.
-This feature enables users to seamlessly integrate new student profiles into TrackMate application. To ensure data integrity and completeness, the system necessitates the inclusion of essential parameters such as Name, Student ID, and optionally Tutorial ID.
-
-#### Example Usage Scenario and Behavior at Each Step
-
-Step 1: The user launches the application. The initial state contains no student data.
-
-Step 2: The user executes an `add` command to add a new student. If the command format is correct, the system parses the command and creates a `Student` object.
-
-Step 3: The system checks if the student already exists based on a unique identifier like student ID or email. If not, it commits the current state of the address book before adding the new student.
-
-Step 4: The user receives feedback about the successful addition of the student.
-
-
-#### Activity Diagram Explanation
-
-Below is the activity diagram that outlines the user interactions and system processes involved in adding a new student profile. This diagram illustrates the step-by-step sequence required to successfully integrate a student into the TrackMate system.
-
-<puml src="diagrams/AddFeatureActivityDiagram.puml" alt="Activity Diagram - Add"/>
-
-#### Implementation - Class Diagram:
-
-The class diagram below details the classes involved in the Add feature's implementation. It highlights the relationships and interactions between these classes, providing a clear view of the system's structure for adding a student.
-
-<puml src="diagrams/AddFeatureClassDiagram.puml" alt="Class Diagram - Add"/>
-
-**Key Components:**
-
-- **AddCommandParser**: Interprets user input to create an appropriate `AddCommand`.
-- **AddCommand**: Executes the operation to add a new student, producing a `CommandResult`.
-- **ParserUtil**: Provides utility functions for parsing and validating various data types.
-- **ArgumentMultimap**: Organizes command arguments for easy retrieval and processing.
-- **Student**: The primary entity representing a student in the system.
-
-#### Detailed Implementation Notes
-
-- **ParserUtil Class**: Utilized for parsing string inputs into their respective data types and ensuring that inputs like names, student IDs, and tutorial IDs conform to expected formats. It automatically trims excessive whitespace.
-- **ArgumentMultimap**: Facilitates the mapping of parsed arguments to their respective prefixes, ensuring organized and efficient data retrieval during command processing.
-- **AddCommand**: Manages the creation of new student entries. It verifies the non-existence of duplicate student IDs and ensures the specified tutorial exists before adding the student to the model.
-
-#### Design Considerations:
-
-**Centralized Data Validation:**
-- **Alternative 1 (Current Choice)**: Using a dedicated ParserUtil class for data validation centralizes validation logic, promoting modularity and maintainability.
-    - **Pros**: Isolates validation logic, simplifying modifications and updates.
-    - **Cons**: Adds a layer of abstraction, potentially increasing complexity.
-- **Alternative 2**: Integrating validation functions directly within each class.
-    - **Pros**: Enables context-specific validations tailored to specific needs.
-    - **Cons**: Could lead to code duplication and maintenance challenges.
-
-The chosen approach (Alternative 1) enhances code consistency and facilitates easier updates and maintenance by centralizing validation logic in the ParserUtil class. This method is especially effective given the similarity in validation requirements across different student attributes such as name, ID, and tutorial IDs.
->>>>>>> 743b28648c20ff0b0c6d3af519ce3180c9106219
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -690,7 +638,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a student with all required details
     1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
 
-    2. Test case: `addStu n/John Doe id/A1234567X t/T1001`<br>
+    2. Test case: `addStu n/John Doe s/A1234567X t/T1001`<br>
        Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
 
 2. Adding a student with missing compulsory fields
@@ -698,15 +646,15 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `addStu n/John Doe t/T1001`<br>
        Expected: Error message indicating that the student ID is missing.
 
-    2. Test case: `addStu id/A1234567X t/T1001`<br>
+    2. Test case: `addStu s/A1234567X t/T1001`<br>
        Expected: Error message indicating that the student's name is missing.
 
 3. Adding a student with invalid data
 
-    1. Test case: `addStu n/John Doe id/INVALID_ID t/T1001`<br>
+    1. Test case: `addStu n/John Doe s/INVALID_ID t/T1001`<br>
        Expected: Error message indicating that the student ID format is invalid.
 
-    2. Test case: `addStu n/John Doe id/A1234567X t/INVALID_TUT`<br>
+    2. Test case: `addStu n/John Doe s/A1234567X t/INVALID_TUT`<br>
        Expected: Error message indicating that the tutorial ID does not exist.
 
 ### Editing a student
@@ -715,7 +663,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one student exists in the list. For example, a student at index 1.
 
-    2. Test case: `edit 1 n/Jane Smith id/A7654321X t/T2001`<br>
+    2. Test case: `edit 1 n/Jane Smith s/A7654321X t/T2001`<br>
        Expected: Student at index 1 is updated with the new name "Jane Smith", student ID "A7654321X", and assigned to tutorial "T2001". Confirmation message is displayed with the updated details.
 
 2. Editing a student with some fields missing
@@ -760,17 +708,17 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
 
-    2. Test case: `markAtt id/A1234567X t/T1001 d/2023-10-21`<br>
+    2. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
        Expected: Attendance for student "A1234567X" on "2023-10-21" is marked as present in tutorial "T1001". Confirmation message is displayed.
 
 2. Marking attendance for a student not in the tutorial
 
-    1. Test case: `markAtt id/A1234567X t/T2001 d/2023-10-21`<br>
+    1. Test case: `markAtt s/A1234567X t/T2001 d/2023-10-21`<br>
        Expected: Error message indicating that the student is not enrolled in tutorial "T2001".
 
 3. Marking attendance with invalid date format
 
-    1. Test case: `markAtt id/A1234567X t/T1001 d/21-10-2023`<br>
+    1. Test case: `markAtt s/A1234567X t/T1001 d/21-10-2023`<br>
        Expected: Error message indicating that the date format is invalid. Correct format should be "YYYY-MM-DD".
 
 ### Saving data
