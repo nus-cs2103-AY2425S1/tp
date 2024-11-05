@@ -13,7 +13,7 @@ import seedu.address.model.tag.TagCategory;
 
 /**
  * Implements command to categorize all occurrences of specified tags.
- * Format: cattag t/TAG1 t/TAG2 ... t/TAGn CATEGORY
+ * Format: cattag t/TAG1 [t/TAG2 ... t/TAGn] CATEGORY
  */
 public class CategorizeTagCommand extends Command {
 
