@@ -2,11 +2,40 @@
 layout: page
 title: User Guide
 ---
-
+## What is VolunSync?
 VolunSync is a desktop app for **Non-Governmental Organisations** that require keeping track of volunteers and volunteering events, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+## Download VolunSync
+Installation instructions can be found [here](#quick-start).
+
+## Learn About Commands Supported By VolunSync
+VolunSync supports the following types of commands to help you manage your volunteers and events.
+Click the links to find out more about each command type:
+1. [General Commands](#general-commands)
+   1. [Viewing help](#viewing-help--help)
+   1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list)
+   1. [Export database to a CSV file](#export-database-to-a-csv-file--export)
+   1. [Exiting the program](#exiting-the-program--exit)
+1. [Volunteer-related Commands](#volunteer-related-commands)
+   1. [Adding a volunteer](#adding-a-volunteer-v-new)
+   1. [Locating volunteers by name](#locating-volunteers-by-name--v-find)
+   1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
+   1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
+   1. [Removing a volunteer from an event](#removing-a-volunteer-from-an-event-unassign)
+1. [Event-related Commands](#event-related-commands)
+   1. [Adding an event](#adding-an-event-e-new)
+   1. [Locating events by name](#locating-events-by-name--e-find)
+   1. [Deleting an event](#deleting-an-event--e-del-) 
+   1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
+      
+#### Command Format Guidelines can be found [here](#command-format-guidelines).
+
+#### A summary of all available commands' format can be found [here](#command-summary).
+
+## Other Resources
+#### [FAQ](#faq-1)
+#### [Known Issues](#known-issues-1)
+#### [Saving the data](#saving-the-data-1)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,7 +76,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Format
+## Command Format Guidelines
 
 <div markdown="block" class="alert alert-info">
 
@@ -90,7 +119,7 @@ Format: `help`
 Shows a list of all volunteers and events in the database.
 
 Format: `list`
-[Ui](images/Ui.png)
+![Ui](images/Ui.png)
 
 Examples:
 * `list` would show the full list of events and volunteers
@@ -122,7 +151,7 @@ Examples:
 
 Running the command successfully, you should see:
 
-[New Volunteer Demo](images/NewVolunteer.png)
+![New Volunteer Demo](images/NewVolunteer.png)
 
 ### Locating volunteers by name : `/v find`
 
@@ -138,7 +167,7 @@ Format: `/v find KEYWORD`
 Examples:
 * `/v find A` returns `Alice Wong`, `Bob Tan` and `David Ng`
 
-[Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
+![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
@@ -162,7 +191,7 @@ is involved in.
 Examples:
 * `/v del 2` deletes the second volunteer in the displayed volunteer list.
 
-[Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
 
 ### Assigning a volunteer to event: `assign`
 
@@ -176,7 +205,7 @@ Format: `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
 Examples:
 * `assign v/ 1 e/ 2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
 
-[Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
+![Assign Volunteer Demo](images/commandDemo/AssignDemo.png)
 
 ### Removing a volunteer from an event: `unassign`
 
@@ -190,7 +219,7 @@ Format: `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
 Examples:
 * `unassign v/ 1 e/ 2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
 
-[Unassign Volunteer Demo](images/commandDemo/UnassignDemo.png)
+![Unassign Volunteer Demo](images/commandDemo/UnassignDemo.png)
 
 ## Event-related Commands
 
@@ -204,7 +233,7 @@ Examples:
 * `/e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12`
 * `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`
 
-[New Event Demo](images/commandDemo/NewEventDemo.png)
+![New Event Demo](images/commandDemo/NewEventDemo.png)
 
 ### Locating events by name : `/e find`
 
@@ -224,7 +253,7 @@ Examples:
 If there are no events with names matching the keyword in the database, the entire list of events will be displayed.
 </div>
 
-[Finding Events](images/commandDemo/FindEventDemo.png)
+![Finding Events](images/commandDemo/FindEventDemo.png)
 
 ### Deleting an event : `/e del `
 
@@ -243,7 +272,7 @@ Deleting an event causes that event to be removed from all participants' list of
 Examples:
 * `/e del 2` deletes the second event in the event list.
 
-[Delete Event Demo](images/commandDemo/DeleteEventDemo.png)
+![Delete Event Demo](images/commandDemo/DeleteEventDemo.png)
 
 ### Listing all volunteers participating in an event: `/e view`
 
@@ -257,7 +286,7 @@ Format: `/e view EVENT_INDEX`
 Examples:
 * `/e view 1` displayes the volunteers participating in the first event in the event list.
 
-[View Event Demo](images/commandDemo/ViewDemo.png)
+![View Event Demo](images/commandDemo/ViewDemo.png)
 
 ## Saving the data
 
