@@ -52,10 +52,10 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/florist` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[w/WEDDING_INDEX]…​` can be used as ` ` (i.e. 0 times), `w/1`, `w/1 w/2` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -85,7 +85,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING]...​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]...​`
 
 <box type="tip" seamless>
 
@@ -96,8 +96,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING]...​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 r/Florist`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 w/1`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 r/Florist`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 w/1`
 
 ### Listing all persons : `list`
 
@@ -109,7 +109,7 @@ Format: `list`
 
 Edits an existing person in the address book. Fields that can be edited: name, phone, address, email.
 
-If you know the index of the specific contact you want to delete:
+If you know the index of the specific contact you want to edit:
 
 Format #1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 
@@ -122,7 +122,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` edits the name of the 2nd person to be `Betsy Crower`.
 
-If you do not know the index but know the name of the contact you want to delete:
+If you do not know the index but know the name of the contact you want to edit:
 
 Format #2: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 
@@ -133,12 +133,54 @@ Format #2: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 * Existing values will be updated to the input values.
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
 
+
 Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` edits the phone number and email address of `John Doe` to be `91234567` and `johndoe@example.com` respectively.
 *  `edit Betsy n/Betsy Crower` edits the name of `Betsy` to be `Betsy Crower`.
 * `edit Chris p/99998888` returns a filtered list of contacts whose names contain `Chris` and user need to edit their existing command to become
   `edit [INDEX of specific person] p/99998888` to specify the `Chris` they want to edit.
 
+### Assigning a person : `assign`
+
+Assigns an existing person in the address book a role or to existing wedding(s).
+
+If you know the index of the specific contact you want to assign:
+
+Format #1: `assign INDEX [r/ROLE] [w/WEDDING_INDEX]…​`
+
+* Assigns the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* When assigning roles, assigning blank roles e.g `r/` is not allowed.
+* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list. 
+The index **must be a positive integer** 1, 2, 3, …​
+* A person can be assigned to multiple weddings.
+
+Examples:
+*  `assign 1 r/florist` assigns the 1st person to have the role of a `florist`.
+*  `assign 1 w/1 ` assigns the 1st person to the 1st wedding.
+*  `assign 2 r/vendor w/1 w/2` assigns the 2nd person to have the role of a `vendor` as well as to be associated to the 1st and 2nd wedding.
+
+If you do not know the index but know the name of the contact you want to assign:
+
+Format #2: `assign NAME [r/ROLE] [w/WEDDING_INDEX]…​`
+
+* Filters a list of contacts with names that contains the entire NAME keyword
+* If there is only one contact that matches, the contact will be assigned directly
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
+* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `assign INDEX …​` to specify the contact they want to edit
+* At least one of the optional fields must be provided.
+* * When assigning roles, assigning blank roles e.g `r/` is not allowed.
+* When assigning a person to wedding(s), the wedding(s) can be specified by `INDEX` The index refers to the index number shown in the displayed wedding list.
+  The index **must be a positive integer** 1, 2, 3, …​
+* A person can be assigned to multiple weddings.
+
+Examples:
+*  `assign John Doe r/florist` assigns `John Doe` to have the role of a `florist`.
+*  `assign Betsy Crower w/1 ` assigns `Betsy Crower` to the 1st wedding.
+*  `assign Chris r/vendor w/1 w/2` if there are more than 1 name that contains `Chris`, 
+a filtered list of contacts whose names contain `Chris` is returned and user need to edit their existing command to become
+   `assign [INDEX of specific person] r/vendor w/1 w/2` to specify the `Chris` they want to assign.
 
 ### Locating persons by name: `find`
 
@@ -373,10 +415,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/florist w/1 w/2`
 **Clear**  | `clear`
 **Delete** | #1: `delete INDEX` or <br> #2: `delete NAME`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`
-**Edit**   | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com`
+**Edit**   | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com`
 **View**   | `view NAME`<br> e.g., `view Alex`, `view Alex Tan`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]`<br> e.g., `filter r/friends`
