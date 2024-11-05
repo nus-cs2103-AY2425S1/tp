@@ -31,7 +31,6 @@ public class RemarkCommand extends Command {
             + PREFIX_REMARK + "Weak in Math";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Student: %1$s";
-    public static final String MESSAGE_NO_REMARK = "Remark cannot be empty!";
 
     private final Index studentIndex;
     private final Remark remark;

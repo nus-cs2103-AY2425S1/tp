@@ -20,8 +20,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
-    private static final Remark EMPTY_REMARK = new Remark("");
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -42,7 +40,7 @@ public class Student {
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
-        this.remark = EMPTY_REMARK;
+        this.remark = new Remark("");
     }
 
     /**
