@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
 import seedu.address.storage.exceptions.ConverterException;
 
@@ -31,6 +32,9 @@ public class CsvToJsonConverter {
      */
     public CsvToJsonConverter(File directory) {
         personFieldNames = Person.getFieldSimpleNames();
+        for (int i = 0; i < personFieldNames.length; i++) {
+            personFieldNames[i] = StringUtil.toCamelCase(personFieldNames[i]);
+        }
         this.directory = directory;
 
         if (!directory.exists() || !this.directory.isDirectory()) {
@@ -96,8 +100,10 @@ public class CsvToJsonConverter {
     private File writeToJson(ObjectMapper content, ArrayNode arrayNode,
                                 String jsonFilePath) throws ConverterException {
         try {
+            ObjectNode rootObject = content.createObjectNode();
+            rootObject.set("persons", arrayNode);
             File toReturn = new File(jsonFilePath);
-            content.writerWithDefaultPrettyPrinter().writeValue(toReturn, arrayNode);
+            content.writerWithDefaultPrettyPrinter().writeValue(toReturn, rootObject);
             return toReturn;
         } catch (IOException e) {
             throw new ConverterException("Could not write to Json File");
@@ -129,12 +135,14 @@ public class CsvToJsonConverter {
         ObjectNode jsonObject = objectMapper.createObjectNode();
 
         for (int i = 0; i < headers.length; i++) {
-            if (!jsonObject.get(headers[i]).isNull()) {
+            if (jsonObject.has(headers[i]) && !jsonObject.get(headers[i]).isNull()) {
+                System.out.println("this");
                 continue;
             } else if (!Arrays.asList(this.personFieldNames).contains(headers[i])) {
+                System.out.println("that");
                 continue;
             }
-
+            System.out.println(headers[i] + ": " + values[i]);
             if (values[i].isBlank()) {
                 values[i] = null;
             }
@@ -151,7 +159,7 @@ public class CsvToJsonConverter {
         assert csvName.endsWith(".csv");
 
         if (!csvName.isBlank() && csvName.endsWith(".csv")) {
-            return csvName.replace(".csv", ".json");
+            return new File(csvFile.getParent(), csvName.replace(".csv", ".json")).getPath();
         } else {
             throw new IllegalArgumentException("Filename must end with .csv");
         }
