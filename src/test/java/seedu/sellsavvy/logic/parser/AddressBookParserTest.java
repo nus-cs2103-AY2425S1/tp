@@ -51,7 +51,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addPerson() throws Exception {
         Person person = new PersonBuilder().build();
+
+        // using command word
         AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommand(person));
+        assertEquals(new AddPersonCommand(person), command);
+
+        // using command alias
+        command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommandAlias(person));
         assertEquals(new AddPersonCommand(person), command);
     }
 
@@ -63,8 +69,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_deletePerson() throws Exception {
+        String parameters = " " + INDEX_FIRST_PERSON.getOneBased();
+
+        // using command word
         DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
-                DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                DeletePersonCommand.COMMAND_WORD + parameters);
+        assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
+
+        // using command alias
+        command = (DeletePersonCommand) parser.parseCommand(
+                DeletePersonCommand.COMMAND_ALIAS + parameters);
         assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -72,8 +86,16 @@ public class AddressBookParserTest {
     public void parseCommand_editPerson() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        String parameters = " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor);
+
+        // using command word
+        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD
+                + parameters);
+        assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
+
+        // using command alias
+        command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_ALIAS + parameters);
         assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -86,8 +108,16 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_findPerson() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String parameters = " " + keywords.stream().collect(Collectors.joining(" "));
+
+        // using command word
         FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindPersonCommand.COMMAND_WORD + parameters);
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+
+        // using command alias
+        command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_ALIAS + parameters);
         assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -99,29 +129,57 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listPerson() throws Exception {
+        // using command word
         assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD) instanceof ListPersonCommand);
         assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD + " 3") instanceof ListPersonCommand);
+
+        // using command alias
+        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_ALIAS) instanceof ListPersonCommand);
+        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_ALIAS + " 3") instanceof ListPersonCommand);
     }
 
     @Test
     public void parseCommand_addOrder() throws Exception {
         Order order = new OrderBuilder().build();
+
+        // using command word
         String commandString = OrderUtil.getAddOrderCommand(INDEX_FIRST_PERSON, order);
         AddOrderCommand command = (AddOrderCommand) parser.parseCommand(commandString);
+        assertEquals(new AddOrderCommand(INDEX_FIRST_PERSON, order), command);
+
+        // using command alias
+        commandString = OrderUtil.getAddOrderCommandAlias(INDEX_FIRST_PERSON, order);
+        command = (AddOrderCommand) parser.parseCommand(commandString);
         assertEquals(new AddOrderCommand(INDEX_FIRST_PERSON, order), command);
     }
 
     @Test
     public void parseCommand_listOrder() throws Exception {
+        String parameters = " " + INDEX_FIRST_PERSON.getOneBased();
+
+        // using command word
         ListOrderCommand command = (ListOrderCommand) parser.parseCommand(
-                ListOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                ListOrderCommand.COMMAND_WORD + parameters);
+        assertEquals(new ListOrderCommand(INDEX_FIRST_PERSON), command);
+
+        // using command alias
+        command = (ListOrderCommand) parser.parseCommand(
+                ListOrderCommand.COMMAND_ALIAS + parameters);
         assertEquals(new ListOrderCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_deleteOrder() throws Exception {
+        String parameters = " " + INDEX_FIRST_ORDER.getOneBased();
+
+        // using command word
         DeleteOrderCommand command = (DeleteOrderCommand) parser.parseCommand(
-                DeleteOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+                DeleteOrderCommand.COMMAND_WORD + parameters);
+        assertEquals(new DeleteOrderCommand(INDEX_FIRST_ORDER), command);
+
+        // using command alias
+        command = (DeleteOrderCommand) parser.parseCommand(
+                DeleteOrderCommand.COMMAND_ALIAS + parameters);
         assertEquals(new DeleteOrderCommand(INDEX_FIRST_ORDER), command);
     }
 
@@ -129,31 +187,61 @@ public class AddressBookParserTest {
     public void parseCommand_editOrder() throws Exception {
         Order order = new OrderBuilder().build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(order).build();
+        String parameters = " " + INDEX_FIRST_ORDER.getOneBased() + " "
+                + OrderUtil.getEditOrderDescriptorDetails(descriptor);
+
+        // using command word
         EditOrderCommand command = (EditOrderCommand) parser.parseCommand(
-                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased() + " "
-                        + OrderUtil.getEditOrderDescriptorDetails(descriptor));
+                EditOrderCommand.COMMAND_WORD + parameters);
+        assertEquals(new EditOrderCommand(INDEX_FIRST_ORDER, descriptor), command);
+
+        // using command alias
+        command = (EditOrderCommand) parser.parseCommand(
+                EditOrderCommand.COMMAND_ALIAS + parameters);
         assertEquals(new EditOrderCommand(INDEX_FIRST_ORDER, descriptor), command);
     }
 
     @Test
     public void parseCommand_markOrder() throws Exception {
+        String parameters = " " + INDEX_FIRST_ORDER.getOneBased();
+
+        // using command word
         MarkOrderCommand command = (MarkOrderCommand) parser.parseCommand(
-                MarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+                MarkOrderCommand.COMMAND_WORD + parameters);
+        assertEquals(new MarkOrderCommand(INDEX_FIRST_ORDER), command);
+
+        // using command alias
+        command = (MarkOrderCommand) parser.parseCommand(
+                MarkOrderCommand.COMMAND_ALIAS + parameters);
         assertEquals(new MarkOrderCommand(INDEX_FIRST_ORDER), command);
 
     }
 
     @Test
     public void parseCommand_unmarkOrder() throws Exception {
+        String parameters = " " + INDEX_FIRST_ORDER.getOneBased();
+
+        // using command word
         UnmarkOrderCommand command = (UnmarkOrderCommand) parser.parseCommand(
-                UnmarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+                UnmarkOrderCommand.COMMAND_WORD + parameters);
+        assertEquals(new UnmarkOrderCommand(INDEX_FIRST_ORDER), command);
+
+        // using command alias
+        command = (UnmarkOrderCommand) parser.parseCommand(
+                UnmarkOrderCommand.COMMAND_ALIAS + parameters);
         assertEquals(new UnmarkOrderCommand(INDEX_FIRST_ORDER), command);
     }
 
     @Test
     public void parseCommand_filterOrder() throws Exception {
+        // using command word
         FilterOrderCommand command = (FilterOrderCommand) parser.parseCommand(
                 FilterOrderCommand.COMMAND_WORD + " Completed");
+        assertEquals(new FilterOrderCommand(new StatusEqualsKeywordPredicate(Status.COMPLETED)), command);
+
+        // using command alias
+        command = (FilterOrderCommand) parser.parseCommand(
+                FilterOrderCommand.COMMAND_ALIAS + " Completed");
         assertEquals(new FilterOrderCommand(new StatusEqualsKeywordPredicate(Status.COMPLETED)), command);
     }
 
