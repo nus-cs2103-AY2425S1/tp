@@ -79,7 +79,9 @@ public class ScheduleCommandTest {
         // Try to schedule another person with the same time slot
         Person secondPerson = model.getFilteredPersonList().get(1);
         ScheduleCommand command = new ScheduleCommand(secondPerson.getName(), takenSchedule);
-        assertCommandFailure(command, model, ScheduleCommand.MESSAGE_SLOT_TAKEN);
+        String expectedMessage = ScheduleCommand.MESSAGE_SLOT_TAKEN
+                + " (" + takenSchedule.iterator().next().getDateTime() + ")";
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
