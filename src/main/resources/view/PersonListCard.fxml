@@ -31,7 +31,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="organisation" styleClass="cell_small_label" text="\$organisation" />
       <Label fx:id="lastSeen" styleClass="cell_small_label" text="\$lastSeen" />
-      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" wrapText="true"/>
     </VBox>
   </GridPane>
   <VBox alignment="TOP_CENTER">
