@@ -89,6 +89,11 @@ public class CsvGoodsStorage implements GoodsStorage {
             }
         };
         Optional<List<GoodsReceipt>> goodsReceiptList = CsvUtil.readCsvFile(filePath, GoodsReceipt.class, filter);
+
+        if (goodsReceiptList.isEmpty()) {
+            return Optional.empty();
+        }
+
         goodsReceiptList.ifPresent(receiptLog::setReceipts);
         return Optional.of(receiptLog);
     }

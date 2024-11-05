@@ -77,9 +77,7 @@ public class CsvGoodsStorageTest {
         Path nonExistentFile = Paths.get("nonExistentFile.csv");
         Optional<ReadOnlyReceiptLog> optionalReceiptLog = csvGoodsStorage.readGoods(nonExistentFile);
 
-        assertTrue(optionalReceiptLog.isPresent());
-        ReadOnlyReceiptLog receiptLog = optionalReceiptLog.get();
-        assertTrue(receiptLog.getReceiptList().isEmpty());
+        assertTrue(optionalReceiptLog.isEmpty());
     }
 
     @Test
