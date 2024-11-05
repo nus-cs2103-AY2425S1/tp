@@ -120,8 +120,7 @@ Examples:
 * Upon entering the application, the parser mode is set to `b`.
 * `switch` followed by `m` switches the parser mode to meet-ups.
 
-![SwitchMeetUpBefore](images/SwitchMeetUpBefore.png)
-![SwitchMeetUpAfter](images/SwitchMeetUpAfter.png)
+![SwitchBuyerToMeetUp](images/SwitchBuyerToMeetUpSequence.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -145,10 +144,6 @@ Examples:
 * Note how the mode is highlighted by `Viewing: Buyers` above the command line
 
 </div>
-
-In buyer mode, you will be able to store and view the list of buyer's details.
-
-![buyer_mode display](images/BuyerModeDisplay.png)
 
 ### Viewing all buyers : `view`
 
@@ -211,7 +206,7 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![FindBuyerSequence](images/FindBuyerSequence.png)
 
 ### Deleting a buyer : `delete`
 
@@ -321,15 +316,9 @@ Examples:
 
 </div>
 
-In property mode, you will be able to store and view the list of property's details.
-
-![property_mode display](images/PropertyModeDisplay.png)
-
 ### Viewing all properties : `view`
 
 Shows a list of all properties in the property list.
-
-![alt text](images/PropertyView.png)
 
 Format: `view`
 
@@ -372,6 +361,8 @@ Format: `find n/LANDLORD_NAME` or `find a/ADDRESS`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find a/Pasir Ris` returns `pasir ris east` and `Pasir Ris West`
+
+![FindPropertySequence](images/FindPropertySequence.png)
 
 ### Deleting a property: `delete`
 
