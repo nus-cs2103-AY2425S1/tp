@@ -231,7 +231,7 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `DESCRIPTION` accepts a string of words.
     * The description filter is case-insensitive. e.g `hans` will match `Hans`
 * The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
-* The `AMOUNT_SIGN` accepts either `POS` or `NEG` to indicate filtering for transactions with amount that are 
+* The `AMOUNT_SIGN` accepts either `Pos` or `Neg` to indicate filtering for transactions with amount that are 
   positive or negative.
 
 Examples:<br>
