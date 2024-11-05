@@ -27,11 +27,11 @@
       </VBox>
 
       <HBox alignment="CENTER_LEFT">
-        <Label styleClass="card-details" text="👨  Clients:" />
+        <Label minWidth="90" styleClass="card-details" text="👨  Clients:" />
         <FlowPane fx:id="clients" styleClass="card-clients" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
-        <Label styleClass="card-details" text="👨  Vendors:" />
+        <Label minWidth="100" styleClass="card-details" text="👨  Vendors:" />
         <FlowPane fx:id="vendors" styleClass="card-vendors" />
       </HBox>
     </VBox>
