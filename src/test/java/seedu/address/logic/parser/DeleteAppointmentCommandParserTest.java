@@ -79,4 +79,14 @@ public class DeleteAppointmentCommandParserTest {
             DeleteAppointmentCommand.MESSAGE_INVALID_TIME);
     }
 
+    @Test
+    public void parse_invalidPreamble_failure() {
+
+        String expectedString = "Please do not enter anything before the keywords!\n"
+            + "Please remove this from your input: 1 some random string";
+
+        assertParseFailure(parser, "1 some random string" + NRIC_DESC_AMY + VALID_DATE_DESC_APPOINTMENT
+            + VALID_START_TIME_DESC_APPOINTMENT, expectedString);
+    }
+
 }
