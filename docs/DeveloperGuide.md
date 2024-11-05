@@ -12,6 +12,7 @@ title: Developer Guide
 
 - {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 - [ez-vcard](https://github.com/mangstadt/ez-vcard) by [mangstadt](https://github.com/mangstadt/)
+- [mockito](https://github.com/mockito/mockito)
 
 ---
 
@@ -99,7 +100,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </div>
 
 How the `Logic` component works:
@@ -132,7 +136,9 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -282,20 +288,21 @@ particular, this representative works with B2B sales.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …           | I want to …                                                                 | So that I can …                                                       |
-| -------- | ---------------- |-----------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                |
-| `* * *`  | user             | delete a contact                                                            | free up space in my app                                               |
-| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                         |
-| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                              |
-| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                      |
-| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                   |
+| Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
+| `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
+| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
+| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                               |
+| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                       |
+| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                    |
 | `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
 | `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
 | `* *`    | user             | edit contact                                                                | update contact with new information                                    |
 | `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
 | `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
+| `* *`    | user             | unpin a specific contact                                                    | clear the pin that is no longer needed                                 |
 | `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them               |
 | `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
 | `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
@@ -306,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
 | `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
 | `* *`    | sales rep        | edit notes saved to client's contact                                        | keep track of my conversation with them                                |
-| `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                    |
+| `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                     |
 | `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
 | `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
 | `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
@@ -357,9 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. No contacts stored in the System.
 
-  - 1a1. System informs Actor that they have no contacts stored.
-
-    Use case ends.
+  Use case ends.
 
 **Use case: UC3 - Delete a person**
 
@@ -383,7 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor request to see specific person.
+1.  Actor requests to see specific person's detail.
 2.  System shows person's contact details.
 
     Use case ends.
@@ -409,11 +414,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. No contacts match keywords.
 
-  - 1a1. System informs Actor that they have no contacts that match.
+  Use case ends.
 
-    Use case ends.
-
-**Use case: UC6 - Add notes to a person contact**
+**Use case: UC6 - Add note to a person contact**
 
 **MSS**
 
@@ -431,53 +434,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 2b. The note name is invalid.
+- 2b. The note content is invalid.
 
   - 2b1. System shows an error message.
 
     Use case ends.
 
-**Use case: UC7 - Pin a person**
+**Use case: UC8 - Edit a note of a person contact**
 
 **MSS**
 
-1.  Actor performs <u>list all people (UC2)</u>.
-2.  Actor requests to pin a specific person.
-3.  System shows details of newly pinned person.
-
-**Extension**
-
-- 2a. The person is already pinned.
-
-  - 2a1. System shows duplicated pin message.
-
-    Use case ends.
-
-**Use case: UC8 - Export contact list**
-
-**MSS**
-1.  Actor requests to export contact list to a specific file.
-2.  System exports the contact information into the file.
-
-    Use case ends.
-
-**Extensions**
-
-- 1a. System detects that the directory does not exist.
-
-    - 1a1. System creates the directory.
-
-      Use case resumes from step 2.
-
-- 1b. System detects that the file is used by another process.
-
-    - 1b1. System shows an error message.
-
-      Use case ends.
-
-**Use case: UC9 - Edit a note of a person contact**
-
-**MSS**
 1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor requests to edit a note to a specific person.
 3.  System shows details of the newly edited note of that person.
@@ -488,24 +454,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The specified person is invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
+- 2b. The note index is invalid.
 
-- 2b. The note name is invalid.
+  - 2b1. System shows an error message.
 
-    - 2b1. System shows an error message.
+    Use case ends.
 
-      Use case ends.
+- 2c. The note content is invalid.
 
-- 2c. The note index is invalid.
+  - 2c1. System shows an error message.
 
-    - 2c1. System shows an error message.
+    Use case ends.
 
-      Use case ends.
-
-**Use case: UC10 - Delete note from a person contact**
+**Use case: UC9 - Delete note from a person contact**
 
 **MSS**
 
@@ -519,15 +484,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The specified person is invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 - 2b. The note index is invalid.
 
-    - 2b1. System shows an error message.
+  - 2b1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC10 - Pin a person**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to pin a specific person.
+3.  System shows details of newly pinned person.
+
+**Extension**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 2b. The person is already pinned.
+
+  - 2b1. System shows duplicated pin message.
+
+    Use case ends.
+
+**Use case: UC11 - Unpin a person**
+
+_Similar to UC10 except without extension 2b._
+
+**Use case: UC12 - Undo a command**
+
+**MSS**
+
+1.  Actor performs a command that updates the addressbook.
+2.  System executes the command.
+3.  Actor requests to undo the recently executed command.
+4.  System reverts changes made by the actor.
+
+    Use case ends.
+
+**Extensions**
+
+- 3a. There is no version to revert to.
+
+    - 3a1. System shows an error message.
 
       Use case ends.
+
+**Use case: UC13 - Export contact list**
+
+**MSS**
+
+1.  Actor requests to export contact list to a specific file.
+2.  System exports the contact information into the file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. System detects that the directory does not exist.
+
+  - 1a1. System creates the directory.
+
+    Use case resumes from step 2.
+
+- 1b. System detects that the file is used by another process.
+
+  - 1b1. System shows an error message.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 

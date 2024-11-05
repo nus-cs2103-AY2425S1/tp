@@ -8,6 +8,7 @@ import static bizbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static bizbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -101,7 +102,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Note> updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
+        ArrayList<Note> updatedNotes = editPersonDescriptor.getNotes().orElse(personToEdit.getNotes());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNotes);
     }
@@ -140,7 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Set<Note> notes;
+        private ArrayList<Note> notes;
 
         public EditPersonDescriptor() {}
 
@@ -196,13 +197,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setNotes(Set<Note> notes) {
-            this.notes = (notes != null) ? new LinkedHashSet<>(notes) : null;
+        public void setNotes(ArrayList<Note> notes) {
+            this.notes = (notes != null) ? new ArrayList<>(notes) : null;
         }
 
-
-        public Optional<Set<Note>> getNotes() {
-            return (notes != null) ? Optional.of(Collections.unmodifiableSet(notes)) : Optional.empty();
+        public Optional<ArrayList<Note>> getNotes() {
+            return (notes != null) ? Optional.of(notes) : Optional.empty();
         }
 
         /**

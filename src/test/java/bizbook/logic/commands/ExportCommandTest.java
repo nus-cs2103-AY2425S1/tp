@@ -16,9 +16,6 @@ import org.junit.jupiter.api.Test;
 import bizbook.model.Model;
 import bizbook.model.ModelManager;
 
-/**
- * Contains integration tests (interaction with the Model) for {@code ExportCommand}.
- */
 public class ExportCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();

@@ -1,5 +1,6 @@
 package bizbook.testutil;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Set<Note> notes;
+    private ArrayList<Note> notes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,7 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new LinkedHashSet<>();
-        notes = new LinkedHashSet<>();
+        notes = new ArrayList<>();
     }
 
     /**
@@ -97,7 +98,7 @@ public class PersonBuilder {
      * Sets the {@code Notes} of the {@code Person} that we are building.
      */
     public PersonBuilder withNotes(String ... notes) {
-        this.notes = SampleDataUtil.getNoteSet(notes);
+        this.notes = SampleDataUtil.getNoteList(notes);
         return this;
     }
 

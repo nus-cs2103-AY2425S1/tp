@@ -20,10 +20,6 @@ import bizbook.model.ModelManager;
 import bizbook.model.UserPrefs;
 import bizbook.model.person.Person;
 
-
-/**
- * Contains integration tests (interaction with the Model) for {@code PinCommand}.
- */
 public class PinCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -36,7 +32,7 @@ public class PinCommandTest {
                 Messages.formatShort(personToPin));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPinnedPersonList(personToPin);
+        expectedModel.pinPerson(personToPin);
 
         assertCommandSuccess(pinCommand, model, expectedMessage, expectedModel);
     }
@@ -54,7 +50,7 @@ public class PinCommandTest {
         Person validPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PinCommand pinCommand = new PinCommand(INDEX_FIRST_PERSON);
         ModelManager filledModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        filledModel.addPinnedPersonList(validPerson);
+        filledModel.pinPerson(validPerson);
 
         assertThrows(CommandException.class,
                 PinCommand.MESSAGE_ALREADY_PINNED, () -> pinCommand.execute(filledModel));
@@ -65,12 +61,18 @@ public class PinCommandTest {
     public void equals() {
         PinCommand pinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
         PinCommand pinSecondCommand = new PinCommand(INDEX_SECOND_PERSON);
-        PinCommand duplicatepinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
 
+        // same object -> returns true
         assertTrue(pinFirstCommand.equals(pinFirstCommand));
+
+        // same values -> returns true
+        PinCommand duplicatepinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
         assertTrue(pinFirstCommand.equals(duplicatepinFirstCommand));
 
+        // null -> returns false
         assertFalse(pinFirstCommand.equals(null));
+
+        // different person -> returns false
         assertFalse(pinFirstCommand.equals(pinSecondCommand));
     }
 
