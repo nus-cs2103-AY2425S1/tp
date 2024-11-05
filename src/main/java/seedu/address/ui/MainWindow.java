@@ -165,10 +165,12 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Opens the help window or focuses on it if it's already opened.
+     * This also resets the hyperlink status to unclicked.
      */
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
+            helpWindow.resetHyperlink();
             helpWindow.show();
         } else {
             helpWindow.focus();
