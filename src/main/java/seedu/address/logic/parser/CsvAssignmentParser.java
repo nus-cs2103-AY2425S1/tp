@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +20,14 @@ public class CsvAssignmentParser {
     /**
      * Parses the assignments field, where each assignment is represented as "assignmentName | score".
      *
-     * @param assignmentField string representing assignments and their scores
-     * @param model           the application model
-     * @return a map of assignment names to Assignment objects
-     * @throws CommandException if assignment name or score is invalid
+     * @param assignmentField string representing assignments and their scores.
+     * @param model           the application model.
+     * @return a map of assignment names to Assignment objects.
+     * @throws CommandException if assignment name or score is invalid.
      */
     public static Map<String, Assignment> parseAssignment(String assignmentField, Model model)
             throws NumberFormatException, CommandException {
+        requireNonNull(assignmentField);
         Map<String, Assignment> assignments = new HashMap<>();
         assignmentField = assignmentField.trim();
 
@@ -40,13 +43,16 @@ public class CsvAssignmentParser {
     /**
      * Processes each assignment entry by validating the name and score, and adds it to the assignments map.
      *
-     * @param assignment  string representing a single assignment
-     * @param assignments map to store validated assignments
-     * @param model       the application model
-     * @throws CommandException if assignment name or score is invalid
+     * @param assignment  string representing a single assignment.
+     * @param assignments map to store validated assignments.
+     * @param model       the application model.
+     * @throws CommandException if assignment name or score is invalid.
      */
-    public static void processAssignment(String assignment, Map<String, Assignment> assignments, Model model)
+    private static void processAssignment(String assignment, Map<String, Assignment> assignments, Model model)
             throws CommandException {
+        requireNonNull(assignment);
+        requireNonNull(model);
+        assignment = assignment.trim();
         List<String> individual = Stream.of(assignment.split("\\|"))
             .map(String::trim).toList(); // | used as delimiter between name and score
 

@@ -29,7 +29,7 @@ public class ImportCommand extends Command {
         + "[" + PREFIX_PATH + "FILE_PATH]\n"
         + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
     public static final String CORRECT_HEADER_USAGE =
-        "Your header should be Name, Phone, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
+        "Header of CSV file should be Name, Phone, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
             + " (Case insensitive, Order sensitive)";
 
     private final String csvFilePath;
@@ -37,7 +37,7 @@ public class ImportCommand extends Command {
     /**
      * Instantiates an ImportCommand to import data from the specified file path.
      *
-     * @param csvFilePath the path to the CSV file
+     * @param csvFilePath the path to the CSV file.
      */
     public ImportCommand(String csvFilePath) {
         this.csvFilePath = csvFilePath;
@@ -75,8 +75,16 @@ public class ImportCommand extends Command {
                 throw new CommandException("There is no person data present");
             }
             model.replaceAllPersons(newPersons);
-        } catch (IOException | CsvValidationException | DuplicatePersonException | CommandException e) {
+        } catch (IOException e) {
+            throw new CommandException("Error reading from the CSV file path: " + e.getMessage()
+                + "\nPlease check file path provided again");
+        } catch (DuplicatePersonException e) {
+            throw new CommandException("Error reading from the CSV file" + e.getMessage()
+                + "\nPlease ensure that there are no duplicate person in the CSV file");
+        } catch (CsvValidationException | CommandException e) {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());
+        } catch (NullPointerException e) {
+            throw new CommandException("Please ensure that there is no null fields");
         }
 
         // Replace all existing person with those present in the CSV file.

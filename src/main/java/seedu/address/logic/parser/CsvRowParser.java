@@ -12,8 +12,8 @@ public class CsvRowParser {
     /**
      * Checks if all fields in a row are empty.
      *
-     * @param fields the row data from the CSV file
-     * @return true if all fields are empty or contain only whitespace, false otherwise
+     * @param fields the row data from the CSV file.
+     * @return true if all fields are empty or contain only whitespace, false otherwise.
      */
     public static boolean isRowEmpty(String[] fields) {
         for (String field : fields) {
@@ -27,9 +27,9 @@ public class CsvRowParser {
     /**
      * Checks if the CSV headers match the expected headers.
      *
-     * @param headers the headers from the CSV file
-     * @param expectedHeaders the expected headers in the correct order
-     * @throws CommandException if the headers are incorrect
+     * @param headers the headers from the CSV file.
+     * @param expectedHeaders the expected headers in the correct order.
+     * @throws CommandException if the headers are incorrect.
      */
     public static void checkHeaders(String[] headers, String[] expectedHeaders) throws CommandException {
         if (headers.length == 0) {
@@ -69,8 +69,8 @@ public class CsvRowParser {
     /**
      * Cleans the row headers, removing any Byte Order Mark (BOM) if present.
      *
-     * @param headers the headers from the CSV file
-     * @return the cleaned headers
+     * @param headers the headers from the CSV file.
+     * @return the cleaned headers.
      */
     public static String[] cleanRow(String[] headers) {
         if (headers.length > 0 && headers[0] != null) {

@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,11 +13,13 @@ public class CsvAttendanceParser {
     /**
      * Parses the weeksPresent field into a set of integers.
      *
-     * @param weeksField string representing weeks present, separated by commas
-     * @return a set of integers representing weeks present
-     * @throws ParseException if any week value is invalid
+     * @param weeksField string representing weeks present, separated by commas.
+     * @return a set of integers representing weeks present.
+     * @throws ParseException if any week value is invalid.
      */
     public static Set<Integer> parseWeeksPresent(String weeksField) throws ParseException {
+        requireNonNull(weeksField);
+        weeksField = weeksField.trim();
         Set<Integer> weeksPresent = new HashSet<>();
         if (weeksField.isEmpty()) {
             return weeksPresent;

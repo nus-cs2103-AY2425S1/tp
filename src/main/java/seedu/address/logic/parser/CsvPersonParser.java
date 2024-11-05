@@ -22,25 +22,25 @@ public class CsvPersonParser {
     /**
      * Parses a CSV row into a Person object using model data.
      *
-     * @param fields CSV data fields representing a person
-     * @param model  the application model
-     * @return a Person object created from the CSV data
-     * @throws CommandException if the CSV data cannot be parsed into a Person object
+     * @param fields CSV data fields representing a person.
+     * @param model  the application model.
+     * @return a Person object created from the CSV data.
+     * @throws CommandException if the CSV data cannot be parsed into a Person object.
      */
     public static Person parsePerson(String[] fields, Model model) throws CommandException {
         try {
 
             // Use parse fields using ParserUtil.
-            Name name = ParserUtil.parseName(fields[0].trim());
-            Phone phone = ParserUtil.parsePhone(fields[1].trim());
-            Email email = ParserUtil.parseEmail(fields[2].trim());
-            Telegram telegram = ParserUtil.parseTelegram(fields[3].trim());
-            Github github = ParserUtil.parseGithub(fields[5].trim());
+            Name name = ParserUtil.parseName(fields[0]);
+            Phone phone = ParserUtil.parsePhone(fields[1]);
+            Email email = ParserUtil.parseEmail(fields[2]);
+            Telegram telegram = ParserUtil.parseTelegram(fields[3]);
+            Github github = ParserUtil.parseGithub(fields[5]);
 
             // Parse tags, assignments and week present.
-            Set<Tag> tags = CsvTagParser.parseTags(fields[4].trim());
-            Map<String, Assignment> assignment = CsvAssignmentParser.parseAssignment(fields[6].trim(), model);
-            Set<Integer> weeksPresent = CsvAttendanceParser.parseWeeksPresent(fields[7].trim());
+            Set<Tag> tags = CsvTagParser.parseTags(fields[4]);
+            Map<String, Assignment> assignment = CsvAssignmentParser.parseAssignment(fields[6], model);
+            Set<Integer> weeksPresent = CsvAttendanceParser.parseWeeksPresent(fields[7]);
 
             // Return person with given information from a row of data.
             return new Person(name, phone, email, telegram, github, assignment, weeksPresent, tags);
