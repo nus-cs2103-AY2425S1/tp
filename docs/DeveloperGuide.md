@@ -308,7 +308,7 @@ Attributes:
 
 Given below is an example usage scenario and how the export process behaves at each step.
 
-Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data 
+Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data
 before exporting it.
 
 Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with
