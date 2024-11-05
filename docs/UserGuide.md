@@ -91,6 +91,7 @@ Optional fields can be omitted and the command will still be executed successful
 <div class="note" markdown="span">
 The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have the same constraints and remarks)_
 </div>
+<br>
 
 | prefix | constraints | remarks | valid | invalid |
 |--------|-------------|---------|-------|---------|
