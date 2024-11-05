@@ -81,6 +81,8 @@ public class AddEventCommand extends AddCommand {
             contacts = new HashSet<>(contactNames.stream().map(model::findPerson).toList());
         } catch (PersonNotFoundException e) {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_NAME));
         }
 
         if (contacts.contains(celebrity)) {
