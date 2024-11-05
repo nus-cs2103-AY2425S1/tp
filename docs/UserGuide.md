@@ -13,16 +13,40 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 <!-- * Table of Contents -->
 ## Table of Contents
 - [Quick Start](#quick-start)
-- [Command summary](#Command-summary)
+- [Command Summary](#command-summary)
 - [Features](#features)
-- [FAQ](#FAQ)
-- [Known issues](#Known-issues)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
 
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Quick Start (Non-technical Users)
+
+1. Open up the command prompt (in Windows) or terminal (in MacBook) on your computer.
+
+2. Type in `java -version` and hit enter.
+
+3. If your version of Java is 17 and above, skip to step 6. If it is less than 17, click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java 17.
+
+4. For Windows users, download the Windows x64 Installer. For MacBook users, download the macOS Arm 64 DMG Installer. Follow the respective installation guides.
+
+5. After successfully completing the installation, repeat steps 1 to 3 to ensure that you have Java 17.
+
+6. Download the latest `KnottyPlanner.jar` file under the Assets tab from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
+
+7. Create a new folder in your Desktop and copy the `KnottyPlanner.jar` file into that folder.
+
+8. Repeat step 1 to open up a new terminal.
+
+9. Type in `cd Desktop\NEW_FOLDER_NAME` where `NEW_FOLDER_NAME` is the name of the folder you created in step 7 and hit enter.
+
+10. Type in `java -jar KnottyPlanner.jar` and hit enter to run the application.
+
+11. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
+
+## Quick Start (Technical Users)
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -30,24 +54,9 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Knotty Planner.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanner.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui2.png)
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanner.jar` command to run the application.
 
-5. Type the command in the command box and press Enter to execute it.<br>
-   Some example commands you can try:
-
-    *  `help`: Opens the help window.
-
-    * `list` : Lists all contacts.
-
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer` : Adds a contact named `John Doe` to the Address Book.
-
-    * `del n/John Doe` followed by `y` : Deletes the contact named John Doe in the contacts list.
-
-    * `exit` : Exits Knotty Planner.
-
-6. Refer to the [Features](#features) below for details of each command.
+5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
@@ -406,7 +415,7 @@ _Details coming soon ..._
 **A**: Download the latest jar file from the [[releases page]](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases)
 
 **Q**: How do all the commands work?<br>
-**A**: Refer to the [Command summary](#Command-summary) section for details of each command. Additionally, some tips and important details are provided in the [Features](#features) section.
+**A**: Refer to the [Command summary](#command-summary) section for details of each command. Additionally, some tips and important details are provided in the [Features](#features) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
