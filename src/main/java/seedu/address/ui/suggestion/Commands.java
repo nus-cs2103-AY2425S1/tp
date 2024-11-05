@@ -21,7 +21,7 @@ public enum Commands {
     ADDWEDDING("addw", "addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]",
             new String[]{"n/", "c/", "d/", "v/"}),
     EDITWEDDING("editw", "editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]",
-            new String[]{"n/", "d/", "v/"}),
+            new String[]{"n/", "d/", "v/", "w/"}),
     VIEWWEDDING("vieww", "vieww INDEX/WEDDING_NAME", new String[]{}),
     DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
     TAGGING("assign","assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX]",
