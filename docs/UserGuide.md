@@ -147,21 +147,23 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose names, addresses, tags or lessons contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [l/LESSON_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* For name keywords, only the name is searched. For address keywords, only the address is searched etc.
+* For words, only full words will be matched e.g. `Han` will not match `Hans`
+* For time-range, lessons with overlapping time-ranges will be matched e.g. `0900-1000` will overlap with `0800-0930`
+* Persons with at least one parameter matching at least one of its keyword will be returned (i.e. `OR` search).
+* `find n/John t/Science English` will can return students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
+* `find l/monday 1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
 ### Deleting a person : `delete`
 
