@@ -137,7 +137,7 @@ Format: `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 <box type="info" seamless>
 
 **Note:**
-No duplicate sellers are allowed. Similar to the `addbuyer` command duplicate sellers are checked based on whether the sellers have the same phone number.
+No duplicate sellers are allowed. Similar to the `addbuyer` command, duplicate sellers are checked based on whether the sellers have the same phone number.
 </box>
 
 Examples:
