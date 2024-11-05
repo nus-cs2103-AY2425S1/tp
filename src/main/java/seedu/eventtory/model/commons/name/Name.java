@@ -9,7 +9,7 @@ import static seedu.eventtory.commons.util.AppUtil.checkArgument;
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names cannot contain '/' and should not be blank";
 
     /*
      * The first character of a name must not be a whitespace,
