@@ -10,8 +10,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PersonHaveSubjectPredicate;
 
 /**
- * Finds and lists all persons in address book who teaches or learns the specified subject
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in VolunTier who teaches or learns the specified subject
+ * Keyword matching is case-insensitive.
  */
 public class FindSubjectCommand extends Command {
 
@@ -19,7 +19,7 @@ public class FindSubjectCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who teaches or learns "
             + "the specified subject (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: SUBJECT [MORE_KEYWORDS]...\n"
+            + "Parameters: SUBJECT [MORE_KEYWORDS]…\n"
             + "Example: " + COMMAND_WORD + " english";
 
     private final PersonHaveSubjectPredicate predicate;

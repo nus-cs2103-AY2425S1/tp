@@ -35,7 +35,7 @@ import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in VolunTier.
  */
 public class EditCommand extends Command {
 
@@ -45,20 +45,19 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_HOURS + "HOURS] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
+            + "[" + PREFIX_NAME + " NAME] "
+            + "[" + PREFIX_PHONE + " PHONE_NUMBER] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + "[" + PREFIX_ADDRESS + " ADDRESS] "
+            + "[" + PREFIX_HOURS + " HOURS] "
+            + "[" + PREFIX_SUBJECT + " SUBJECT]… \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_PHONE + " 91234567 "
+            + PREFIX_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: \n %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in VolunTier.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

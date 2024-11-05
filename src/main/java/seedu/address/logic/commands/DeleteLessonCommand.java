@@ -18,7 +18,7 @@ import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
 /**
- * Deletes a lesson identified using it's displayed index from the address book.
+ * Deletes a lesson identified using it's displayed index from VolunTier.
  */
 public class DeleteLessonCommand extends Command {
 
@@ -39,7 +39,7 @@ public class DeleteLessonCommand extends Command {
     public static final String MESSAGE_INVALID_SUBJECT = "The tutor, tutee and the lesson to be deleted "
             + "must have the same subject";
 
-    public static final String MESSAGE_INVALID_LESSON = "The lesson to be deleted does not exist in the address book";
+    public static final String MESSAGE_INVALID_LESSON = "The lesson to be deleted does not exist in VolunTier";
 
     private final Index tutorIndex;
 
@@ -50,9 +50,10 @@ public class DeleteLessonCommand extends Command {
     /**
      * Creates a DeleteLesson Command to delete the Lesson asssociated with
      * the specified {@code Tutor} and {@code Tutee}.
-     * @param tutorIndex
-     * @param tuteeIndex
-     * @param subject
+     *
+     * @param tutorIndex Index of the tutor
+     * @param tuteeIndex Index of the tutee
+     * @param subject Subject of the lesson
      */
     public DeleteLessonCommand(Index tutorIndex, Index tuteeIndex, Subject subject) {
         this.tutorIndex = tutorIndex;
