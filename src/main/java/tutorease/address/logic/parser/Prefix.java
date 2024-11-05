@@ -19,6 +19,9 @@ public class Prefix {
     public String toString() {
         return getPrefix();
     }
+    public String toStringUpperCase() {
+        return getPrefix().toUpperCase();
+    }
 
     @Override
     public int hashCode() {

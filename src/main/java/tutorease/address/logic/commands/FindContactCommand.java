@@ -13,6 +13,8 @@ import tutorease.address.model.person.NameContainsKeywordsPredicate;
 public class FindContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "find";
 
+    public static final String MESSAGE_NO_CONTACTS_FOUND = "No contacts found with the given keyword(s).";
+
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + COMMAND_WORD
             + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -30,6 +32,12 @@ public class FindContactCommand extends ContactCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int foundContacts = model.getFilteredPersonList().size();
+
+        if (foundContacts == 0) {
+            // No contacts found
+            return new CommandResult(MESSAGE_NO_CONTACTS_FOUND);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

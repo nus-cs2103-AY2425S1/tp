@@ -11,7 +11,6 @@ import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.ContactCommand;
-import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.commands.LessonCommand;
@@ -41,7 +40,7 @@ public class TutorEaseParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -52,9 +51,6 @@ public class TutorEaseParser {
         switch (commandWord) {
         case ContactCommand.COMMAND_WORD:
             return new ContactCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

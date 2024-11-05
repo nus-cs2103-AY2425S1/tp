@@ -18,6 +18,7 @@ import tutorease.address.logic.LogicManager;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
@@ -81,9 +82,11 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getTutorEaseFilePath());
 
         Optional<ReadOnlyTutorEase> tutorEaseOptional;
-        Optional<LessonSchedule> lessonScheduleOptional;
+
+        Optional<ReadOnlyLessonSchedule> lessonScheduleOptional;
         ReadOnlyTutorEase initialData;
-        LessonSchedule initialLessonSchedule;
+
+        ReadOnlyLessonSchedule initialLessonSchedule;
 
         try {
             tutorEaseOptional = storage.readTutorEase();

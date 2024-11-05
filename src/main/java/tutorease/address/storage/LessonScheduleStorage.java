@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import tutorease.address.commons.exceptions.DataLoadingException;
 import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 
 /**
@@ -18,29 +19,29 @@ public interface LessonScheduleStorage {
     Path getLessonScheduleFilePath();
 
     /**
-     * Returns LessonSchedule data as a {@link LessonSchedule}.
+     * Returns LessonSchedule data as a {@link ReadOnlyLessonSchedule}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<LessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase) throws DataLoadingException;
+    Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase) throws DataLoadingException;
 
     /**
      * @see #getLessonScheduleFilePath()
      */
-    Optional<LessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
+    Optional<ReadOnlyLessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
             DataLoadingException;
 
     /**
-     * Saves the given {@link LessonSchedule} to the storage.
+     * Saves the given {@link ReadOnlyLessonSchedule} to the storage.
      * @param lessonSchedule cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveLessonSchedule(LessonSchedule lessonSchedule) throws IOException;
+    void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) throws IOException;
 
     /**
-     * @see #saveLessonSchedule(LessonSchedule)
+     * @see #saveLessonSchedule(ReadOnlyLessonSchedule)
      */
-    void saveLessonSchedule(LessonSchedule lessonSchedule, Path filePath) throws IOException;
+    void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule, Path filePath) throws IOException;
 
 }

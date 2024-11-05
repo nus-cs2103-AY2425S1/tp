@@ -1,5 +1,6 @@
 package tutorease.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -20,6 +21,7 @@ import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.lesson.Lesson;
@@ -38,10 +40,10 @@ class DeleteContactCommandTest {
     public void testToString_returnsCorrectString() {
         Index index = Index.fromZeroBased(0);
         DeleteContactCommand deleteCommand = new DeleteContactCommand(index);
+        String expectedString = String.format(DeleteContactCommand.DELETE_COMMAND_STRING_FORMAT, 0);
 
         // Test toString method
-        assertEquals("DeleteContactCommand{targetIndex=tutorease.address.commons.core."
-                + "index.Index{zeroBasedIndex=0}}", deleteCommand.toString());
+        assertEquals(expectedString, deleteCommand.toString());
     }
 
     @Test
@@ -77,8 +79,8 @@ class DeleteContactCommandTest {
 
         CommandResult commandResult = new DeleteContactCommand(Index.fromZeroBased(0)).execute(modelStub);
 
-        String expectedMessage = String.format("Contact [%s; Phone: %s; Email: %s; Address: %s; Tags: ] "
-                        + "deleted successfully",
+        String expectedMessage = String.format("Contact [Name: %s; Phone: %s; Email: %s; Address: %s; Tags: ] "
+                        + "deleted successfully.",
                 validPerson.getName(), validPerson.getPhone(), validPerson.getEmail(), validPerson.getAddress());
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
@@ -105,6 +107,9 @@ class DeleteContactCommandTest {
 
 
     private class ModelStub implements Model {
+        final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+        final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -144,6 +149,10 @@ class DeleteContactCommandTest {
         public void setTutorEase(ReadOnlyTutorEase newData) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ReadOnlyTutorEase getTutorEase() {
@@ -152,6 +161,16 @@ class DeleteContactCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -182,7 +201,7 @@ class DeleteContactCommandTest {
 
         @Override
         public ObservableList<Lesson> getFilteredLessonList() {
-            throw new AssertionError("This method should not be called.");
+            return lessons;
         }
 
         @Override
@@ -192,7 +211,9 @@ class DeleteContactCommandTest {
 
         @Override
         public void addLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(lesson);
+            lessonsAdded.add(lesson);
+            lessons.add(lesson);
         }
 
         @Override
@@ -201,23 +222,42 @@ class DeleteContactCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
-            throw new AssertionError("This method should not be called.");
+        public void deleteLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            lessonsAdded.remove(lesson);
         }
 
         @Override
         public Lesson getLesson(int index) {
+            return lessonsAdded.get(index);
+        }
+
+        @Override
+        public Lesson getFilteredLesson(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public int getLessonScheduleSize() {
+            return lessonsAdded.size();
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteStudentLesson(Person student) {
-            throw new AssertionError("This method should not be called.");
+            int currentIndex = 0;
+            while (currentIndex < this.getLessonScheduleSize()) {
+                Lesson lesson = this.getLesson(currentIndex);
+                if (student.equals(lesson.getStudent())) {
+                    this.deleteLesson(lesson);
+                } else {
+                    currentIndex++;
+                }
+            }
         }
     }
 

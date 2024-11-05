@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.commons.core.index.Index;
@@ -20,6 +21,7 @@ import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
@@ -34,6 +36,7 @@ public class DeleteLessonCommandTest {
 
     private class ModelStubAcceptingLessonDeleted extends ModelStub {
         final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+        final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
         @Override
         public boolean hasLessons(Lesson lesson) {
@@ -45,11 +48,14 @@ public class DeleteLessonCommandTest {
         public void addLesson(Lesson lesson) {
             requireNonNull(lesson);
             lessonsAdded.add(lesson);
+            lessons.add(lesson);
         }
 
         @Override
-        public void deleteLesson(int index) {
-            lessonsAdded.remove(index);
+        public void deleteLesson(Lesson lesson) {
+            requireNonNull(lesson);
+            lessonsAdded.remove(lesson);
+            lessons.remove(lesson);
         }
 
         @Override
@@ -58,20 +64,62 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            return lessons.get(index);
+        }
+
+        @Override
         public int getLessonScheduleSize() {
             return lessonsAdded.size();
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
+            return lessons.size();
         }
 
         @Override
         public ReadOnlyTutorEase getTutorEase() {
             return new TutorEase();
         }
+
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            return lessons;
+        }
     }
+
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         // Ensure constructor throws NullPointerException if index is null
         assertThrows(NullPointerException.class, () -> new DeleteLessonCommand(null));
+    }
+
+    @Test
+    public void equals() throws CommandException, ParseException {
+        Index index = Index.fromZeroBased(0);
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(index);
+        // Test equality with the same object (identity)
+        assertTrue(deleteLessonCommand.equals(deleteLessonCommand));
+
+        // Test equality with null
+        assertFalse(deleteLessonCommand.equals(null));
+
+        // Test equality with an object of different type
+        assertFalse(deleteLessonCommand.equals(new Object()));
+
+        // Test equality with a different DeleteLessonCommand (different index)
+        DeleteLessonCommand differentCommand = new DeleteLessonCommand(Index.fromOneBased(2));
+        assertFalse(deleteLessonCommand.equals(differentCommand));
+    }
+
+    @Test
+    public void toString_correctFormat() {
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromOneBased(1));
+        // Verify that the toString method returns the correct format
+        String expectedString = String.format(DeleteLessonCommand.DELETE_COMMAND_STRING_FORMAT, 0);
+        assertEquals(expectedString, deleteLessonCommand.toString());
     }
 
     @Test
@@ -161,6 +209,16 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -186,6 +244,11 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Lesson> getFilteredLessonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -206,7 +269,7 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
-        public void deleteLesson(int index) {
+        public void deleteLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -216,7 +279,17 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getLessonScheduleSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
             throw new AssertionError("This method should not be called.");
         }
 

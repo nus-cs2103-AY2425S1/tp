@@ -11,7 +11,7 @@ import java.util.Set;
 
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.ContactCommand;
-import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
+import tutorease.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.tag.Tag;
 

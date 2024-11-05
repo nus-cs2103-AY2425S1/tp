@@ -28,4 +28,15 @@ public class Student extends Person {
     public Role getRole() {
         return new Role(STUDENT);
     }
+
+    @Override
+    public boolean isGuardian() {
+        return false;
+    }
+
+    @Override
+    public boolean isStudent() {
+        return true;
+    }
+
 }

@@ -14,12 +14,18 @@ public class DeleteLessonCommand extends LessonCommand {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String DELETE_COMMAND_STRING_FORMAT = "DeleteLessonCommand"
+            + "{targetIndex=tutorease.address.commons.core."
+            + "index.Index{zeroBasedIndex=%d}}";
+
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD
-            + " " + COMMAND_WORD + ": Deletes a lesson from the lesson list. "
-            + "Parameters: INDEX (must be a positive integer)";
+            + " " + COMMAND_WORD + ": Deletes a lesson from the lesson list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Lesson removed successfully: %1$s";
-    public static final String MESSAGE_INVALID_INDEX = "The lesson index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "The lesson index provided is invalid. "
+            + "Please key in an index that is on the lesson panel";
 
     private final Index targetIndex;
 
@@ -41,12 +47,12 @@ public class DeleteLessonCommand extends LessonCommand {
 
         int listIndex = targetIndex.getZeroBased();
 
-        if (listIndex >= model.getLessonScheduleSize()) {
+        if (listIndex >= model.getFilteredLessonListSize()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
-        Lesson lesson = model.getLesson(listIndex);
-        model.deleteLesson(listIndex);
+        Lesson lesson = model.getFilteredLesson(listIndex);
+        model.deleteLesson(lesson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));
     }
 
@@ -64,8 +70,9 @@ public class DeleteLessonCommand extends LessonCommand {
         DeleteLessonCommand otherDeleteLessonCommand = (DeleteLessonCommand) other;
         return targetIndex.equals(otherDeleteLessonCommand.targetIndex);
     }
+
     @Override
     public String toString() {
-        return String.format("DeleteLessonCommand[targetIndex=%s]", targetIndex);
+        return String.format(DELETE_COMMAND_STRING_FORMAT, targetIndex.getZeroBased());
     }
 }

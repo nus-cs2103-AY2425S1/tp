@@ -17,14 +17,18 @@ import tutorease.address.model.person.Person;
 public class DeleteContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "delete";
 
+    public static final String DELETE_COMMAND_STRING_FORMAT = "DeleteContactCommand"
+            + "{targetIndex=tutorease.address.commons.core."
+            + "index.Index{zeroBasedIndex=%d}}";
+
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
             + ": Deletes the contact identified by the index number "
             + "in the displayed contact list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: contact delete 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
 
     private final Index targetIndex;
     /**
@@ -50,6 +54,7 @@ public class DeleteContactCommand extends ContactCommand {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteStudentLesson(personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
     }
@@ -70,9 +75,7 @@ public class DeleteContactCommand extends ContactCommand {
 
     @Override
     public String toString() {
-        return "DeleteContactCommand{"
-                + "targetIndex=" + targetIndex
-                + '}';
+        return String.format(DELETE_COMMAND_STRING_FORMAT, targetIndex.getZeroBased());
     }
 }
 

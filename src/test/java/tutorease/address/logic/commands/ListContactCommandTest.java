@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
+import tutorease.address.model.TutorEase;
 import tutorease.address.model.UserPrefs;
 
 /**
@@ -30,8 +31,8 @@ public class ListContactCommandTest {
 
     @Test
     public void execute_noContactsFound_showsNoContactsMessage() {
-        // Clear the model's filtered person list to simulate no contacts
-        model.updateFilteredPersonList(p -> false);
+        // Simulate when there are no contacts at all
+        model = new ModelManager(new TutorEase(), new UserPrefs(), getTypicalLessons());
 
         CommandResult result = new ListContactCommand().execute(model);
 

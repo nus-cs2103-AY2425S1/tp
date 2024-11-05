@@ -59,6 +59,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    boolean hasSamePhone(Person person);
+
+    /**
+     * Returns true if a person with the same email address as {@code person} exists in the address book.
+     */
+    boolean hasSameEmail(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -91,7 +101,9 @@ public interface Model {
      *
      * @return The lesson schedule.
      */
-    LessonSchedule getLessonSchedule();
+    ReadOnlyLessonSchedule getLessonSchedule();
+
+    void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule);
 
     ObservableList<Lesson> getFilteredLessonList();
 
@@ -111,13 +123,12 @@ public interface Model {
      * @return A boolean indicating if the lesson is in the lessons schedule.
      */
     boolean hasLessons(Lesson lesson);
-
     /**
-     * Deletes the lesson at the given index.
+     * Deletes the given lesson.
      *
-     * @param index The index of the lesson to delete.
+     * @param lesson The lesson to delete.
      */
-    void deleteLesson(int index);
+    void deleteLesson(Lesson lesson);
 
     /**
      * Returns lesson at the specified index.
@@ -128,16 +139,31 @@ public interface Model {
     Lesson getLesson(int index);
 
     /**
+     * Returns lesson at the specified index from the filtered list.
+     *
+     * @param index The index of the lesson to get from the filtered list.
+     * @return The lesson at the specified index.
+     */
+    Lesson getFilteredLesson(int index);
+
+    /**
      * Returns size of lesson schedule.
      *
-     * @return The size of the lesson schedule
+     * @return The size of the lesson schedule.
      */
     int getLessonScheduleSize();
 
     /**
-     * Deletes all the lessons of a particular student
+     * Returns size of filtered lesson list.
      *
-     * @param student The student whose lessons we are deleting
+     * @return The size of the filtered lesson list.
+     */
+    int getFilteredLessonListSize();
+
+    /**
+     * Deletes all the lessons of a particular student.
+     *
+     * @param student The student whose lessons we are deleting.
      */
     void deleteStudentLesson(Person student);
 }

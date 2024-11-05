@@ -13,12 +13,22 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+Class UniqueLessonList
+Class "{abstract}\nPerson" as Person
 Class Address
 Class Email
+Class EndDateTime
+Class Fee
+Class Guardian
 Class Name
 Class Phone
+Class StartDateTime
+Class Student
 Class Tag
+Class Role
+
+Class Lesson
+Class LessonSchedule
 
 Class I #FFFFFF
 }
@@ -37,11 +47,21 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 TutorEase *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+UniqueLessonList -left-> "~* filtered" Lesson
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> Role
+Person <|-right- Student
+Person <|-left- Guardian
+
+LessonSchedule --> UniqueLessonList
+Lesson *-left-> Student
+Lesson *--> Fee
+Lesson *--> StartDateTime
+Lesson *--> EndDateTime
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +71,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "1" LessonSchedule
 @enduml

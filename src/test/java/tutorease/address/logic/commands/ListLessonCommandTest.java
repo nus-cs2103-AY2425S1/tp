@@ -28,7 +28,7 @@ public class ListLessonCommandTest {
 
     @Test
     public void execute_noLessons_found() {
-        model.updateFilteredLessonList(lesson -> false); // No lessons to show
+        model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), new LessonSchedule());
         expectedModel.updateFilteredLessonList(lesson -> false); // Ensure expected model matches
 
         assertCommandSuccess(new ListLessonCommand(), model, ListLessonCommand.MESSAGE_NO_LESSONS_FOUND, expectedModel);
@@ -40,14 +40,6 @@ public class ListLessonCommandTest {
         expectedModel.updateFilteredLessonList(lesson -> true); // Ensure expected model matches
 
         assertCommandSuccess(new ListLessonCommand(), model, ListLessonCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void execute_emptyFilteredList() {
-        model.updateFilteredLessonList(lesson -> lesson.getAddress().equals("3")); // No lessons match
-        expectedModel.updateFilteredLessonList(lesson -> lesson.getAddress().equals("3"));
-
-        assertCommandSuccess(new ListLessonCommand(), model, ListLessonCommand.MESSAGE_NO_LESSONS_FOUND, expectedModel);
     }
 
     @Test
