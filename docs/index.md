@@ -10,11 +10,18 @@
 
 ![Ui](images/Ui.png)
 
-**CampusConnect is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+> "Diversity in our university"
 
-* If you are interested in using CampusConnect, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing CampusConnect, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+We believe that social interaction is the key to success in university. However, in a competitive environment with rising 
+academic pressures, how can students ever find the time to remember names or contact details?
 
+Presenting **CampusConnect**, the premium contact management app for NUS students. 
+Featuring speedy finding and tagging features, **CampusConnect** is the number 1 most preferred contact management app on campus!
+
+**More Information**
+* New to **CampusConnect**? Check out our [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* Interested in working on **CampusConnect**? The [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* Like to know more about our developers? Check out the [**team behind CampusConnect**](AboutUs.md)!
 
 **Acknowledgements**
 
