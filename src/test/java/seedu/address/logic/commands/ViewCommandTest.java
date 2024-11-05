@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -45,7 +46,10 @@ class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(TypicalPersons.ALICE.getName());
         assertEquals(
                 viewCommand.execute(model),
-                new CommandResult(ViewCommand.VIEW_ACKNOWLEDGMENT, TypicalPersons.ALICE));
+                new CommandResult(
+                        ViewCommand.VIEW_ACKNOWLEDGMENT,
+                        new SimpleObjectProperty<>(TypicalPersons.ALICE),
+                        false));
     }
 
     @Test

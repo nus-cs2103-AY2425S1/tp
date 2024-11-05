@@ -29,6 +29,7 @@ import seedu.address.logic.commands.GitHubCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.RemoveGradeCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -47,6 +48,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final CommandDetailCard[] COMMANDS = {
         new CommandDetailCard(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
         new CommandDetailCard(AddGradeCommand.COMMAND_WORD, AddGradeCommand.MESSAGE_USAGE),
+        new CommandDetailCard(RemoveGradeCommand.COMMAND_WORD, RemoveGradeCommand.MESSAGE_USAGE),
         new CommandDetailCard(ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE),
         new CommandDetailCard(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
         new CommandDetailCard(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
