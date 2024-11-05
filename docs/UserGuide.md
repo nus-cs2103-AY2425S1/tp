@@ -32,8 +32,8 @@ we highly recommend reviewing this section to make using EZSTATES much easier.
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ezstates.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+   ![Ui](images/Ui.png)<br><br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -70,13 +70,13 @@ This user guide is divided into four main feature categories:
 
 ---
 
-### 1. Client Management Commands
+### **1. Client Management Commands**
 
 Commands for creating, updating, and deleting buyers and sellers.
 
 ![showClients](images/Ui.png)
 
-- #### **Add Buyer Command**
+- #### Add Buyer Command
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
@@ -97,6 +97,16 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
       >
       > ---
+   
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `buyer n/Bob` = `buyer n/BOB` = `buyer n/bOb` _(Not exhaustive)_
+  
+    Thus, if a buyer/seller with the same name already exists, the commands above cannot be executed
+    as they result in a duplicate buyer created
+    </div>
+    <br>
 
     - **Failed Execution:**
       > ---
@@ -135,8 +145,14 @@ Commands for creating, updating, and deleting buyers and sellers.
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
+      > **User Error #4**: Buyer already exists 
+      > 
+      > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
+      > 
+      > **Output**: This buyer already exists in the address book
+      > 
       > ---
-- #### **Add Seller Command**
+- #### Add Seller Command
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
     - **Description:** Creates a new seller profile with specified details.
     - **Successful Execution:**
@@ -156,6 +172,15 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
       >
       > ---
+
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `seller n/Bob` = `seller n/BOB` = `seller n/bOb` _(Not exhaustive)_
+    <br>
+    If a buyer/seller with the same name already exists, the equivalent commands above cannot be carried out
+    </div>
+    <br>
 
     - **Failed Execution**
       > ---
@@ -191,8 +216,18 @@ Commands for creating, updating, and deleting buyers and sellers.
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+      >
+      > ---
+      > 
+      > **User Error #4**: Seller already exists
+      > 
+      > **Input**: `seller n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_ 
+      > 
+      > **Output**: This buyer already exists in the address book
+      > 
+      >  ---
 
-- #### **Find Command**
+- #### Find Command
     - **Format:** `find KEYWORD [KEYWORD...]`
     - **Description:** Finds the specified client(s) based on the provided keywords.
     - **Successful Execution:**
@@ -217,6 +252,24 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > ---
 
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `find Bob` = `find BOB` = `find bOb` _(Not exhaustive)_
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `find Wen Xuan` != `find WenXuan`
+    <br>
+    <br>
+    First command finds names with `wen` OR `xuan`
+    <br>
+    Second command finds names with `wenxuan`
+    </div> 
+    <br>    
+
     - **Failed Execution:**
       > ---
       >
@@ -230,7 +283,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 
-- #### **Edit Client Command**
+- #### Edit Client Command
     - **Format:** `editclient NAME [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
@@ -258,6 +311,19 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
       >
       > ---
+
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `editclient Bob` = `editclient BOB` = `editclient bOb` _(Not exhaustive)_
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `editclient Wen Xuan` != `editclient WenXuan`
+    </div> 
+    <br> 
 
     - **Failed Execution:**
       > ---
@@ -293,7 +359,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 
-- #### **Delete Client Command**
+- #### Delete Client Command
     - **Format:** `delete NAME`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
@@ -308,11 +374,21 @@ Commands for creating, updating, and deleting buyers and sellers.
     
     <br>
     <div class="note" markdown="span">
-    Delete is case-insensitive: 
-    `delete Bob` = `delete BOB` = `delete bOb` 
+    NAME is case-insensitive: 
+    `delete Bob` = `delete BOB` = `delete bOb` _(Not exhaustive)_
+  
+    Thus, these delete commands will delete the same `Bob` profile
     </div>
     <br>
-      
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `delete Wen Xuan` != `delete WenXuan`
+    
+    These commands will delete different client profiles 
+    </div> 
+    <br>
+  
     - **Failed Execution:**
       > ---
       > **Use Case #1**: No name found
@@ -346,21 +422,18 @@ Commands for creating, updating, and deleting buyers and sellers.
       <br>delete: Deletes the client profile corresponding to the client's name.
       <br>Parameters: CLIENT_NAME (case-insensitive)
       <br>Example: delete Tan Wen Xuan
-      > 
-      > ---
-      > **Use Case #3**:
-      > 
+      >
       > ---
 
 ---
 
-### 2. Appointment Management
+### **2. Appointment Management**
 
 Commands for managing appointments between user and clients.
 
 ![appointments](images/appointments.png)
 
-- #### **Schedule Appointment**
+- #### Schedule Appointment
     - **Format:** `apt NAME d/<DD-MM-YY> fr/<HHmm> to/<HHmm>`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
@@ -384,7 +457,24 @@ Commands for managing appointments between user and clients.
       > ![bob_apt_2](images/bob_apt_2.png)
       > 
       > ---
-      
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `apt Bob` = `apt BOB` = `apt bOb` _(Not exhaustive)_
+    <br>
+    Thus, these commands will set an appointment for the same `Bob` profile
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `apt Wen Xuan` != `apt WenXuan`
+    
+    These commands will set appointments for different client profiles 
+    </div> 
+    <br>
+  
     - **Failed Execution:**
       > ---
       > **Use Case #1**: Incorrect `DATE` format 
@@ -407,8 +497,8 @@ Commands for managing appointments between user and clients.
       > 
       > ---
 
-- #### **Delete Appointment**
-    - **Format:** `delapt <NAME>`
+- #### Delete Appointment
+    - **Format:** `delapt NAME`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
@@ -421,35 +511,43 @@ Commands for managing appointments between user and clients.
       > ![bobdeletedappt](images/bob_del_apt.png)
       > 
       > ---
-      
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `delapt Bob` = `delapt BOB` = `delapt bOb` _(Not exhaustive)_
+
+    Thus, these commands will delete the appointment for the same `Bob` profile
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `delapt Wen Xuan` != `delapt WenXuan`
+    
+    These commands will delete appointments for different client profiles 
+    </div> 
+    <br>
+
     - **Failed Execution:**
       > ---
       > **Use Case**: Attempting to delete an appointment from a non-existent client
       >
-      > **Input**: `delapt Bob7777`
+      > **Input**: `delapt nonExistentClient`
       >
       > **Output**: Please enter an existing client name!
       >
       > ---
-    
-    <br>
-    <div class="note">
-    If you suggest a name that differs from an existing client by at most 3 letters, 
-    the console will suggest to input the existing client instead
-    </div>
-    <br>
-  
-    ![levershtein](images/levershtein_distance.png)
-
+      
 ---
 
-### 3. Listing Management
+### **3. Listing Management**
 
 Commands for managing property listings and associating clients with listings.
 
 ![showListings](images/showListings.png)
 
-- #### **Add Listing**
+- #### Add Listing
     - **Format:** `listing n/NAME price/PRICE area/AREA address/ADDRESS region/REGION seller/SELLER [buyer/BUYER]...`
     - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
@@ -492,7 +590,7 @@ Commands for managing property listings and associating clients with listings.
       > 
       > ---
 
-- #### **Show Listings**
+- #### Show Listings
     - **Format:** `showlistings`
     - **Description:** Displays all current listings.
     - **Successful Execution:**
@@ -519,124 +617,207 @@ Commands for managing property listings and associating clients with listings.
 
     - **Failed Execution:** NIL
 
-- #### **Add Buyers to Listing**
-    - **Format:** `AddBuyersToListingCommand`
+- #### Add Buyers to Listing
+    - **Format:** `addlistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4`
       >
-      > **Input**:
+      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh buyer/Charlotte Oliveiro`
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Buyers added to listing: RC4
       >
       > ---
       >
-      > **Use Case #3**:
+      > **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
       >
-      > **Input**:
+      > **Input**: `addlistingbuyers david hdb buyer/Alex Yeoh buyer/Charlotte Oliveiro`
       >
-      > **Output**:
+      > **Output**: Buyers added to listing: David HDB
       >
       > ---
 
+    <br>
+    <div class="note" markdown="span">
+    Listing and buyer names are case-insensitive: 
+    `addlistingbuyers Warton House` 
+    = `addlistingbuyers warton house` 
+    = `addlistingbuyers wArToN HouSe` _(Not exhaustive)_
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, listing/buyer name is space-sensitive:
+    `addlistingbuyers Warton House` != `addlistingbuyers WartonHouse`
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
+    </div> 
+    <br>
+    
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Listing not found
       >
-      > **Input**:
+      > **Input**: `addlistingbuyers NonExistentListing buyer/Bob`
       >
-      > **Output**:
+      > **Output**: The specified listing name does not exist.
+      >
+      > ---
+      > 
+      > **User Error #2**: Duplicate buyers
+      > 
+      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh` <br>_(Assuming RC4 contains Alex Yeoh already)_
+      > 
+      > **Output**: Some buyers are already associated with this listing.
+      > 
+      > --- 
+      > 
+      > **User Error #3**: Buyer not found
+      > 
+      > **Input**: `addlistingbuyers RC4 buyer/NonExistentBuyer`
+      > 
+      > **Output**: The specified buyer NonExistentBuyer does not exist in the client list.
+      > 
+      > ---
+      > 
+      > **User Error #4**: Person is not a buyer
+      > 
+      > **Input**: `addlistingbuyers RC4 buyer/Bernice Yu` <br>_(Assuming Bernice Yu is a seller)_
+      > 
+      > **Output**: The specified person Bernice Yu is not a buyer.
       >
       > ---
 
-- #### **Remove Buyers from Listing**
-    - **Format:** `RemoveBuyersFromListingCommand`
+- #### Remove Buyers from Listing
+    - **Format:** `removelistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
       >
-      > **Input**:
+      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh` 
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Buyers removed from listing: RC4
       >
       > ---
       >
-      > **Use Case #3**:
+      > **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
       >
-      > **Input**:
+      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh buyer/charlotte oliveiro`
       >
-      > **Output**:
+      > **Output**: Buyers removed from listing: RC4
       >
       > ---
+
+    <br>
+    <div class="note" markdown="span">
+    Listing and buyer names are case-insensitive: 
+    `removelistingbuyers Warton House` 
+    = `removelistingbuyers warton house` 
+    = `removelistingbuyers wArToN HouSe` _(Not exhaustive)_
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, listing/buyer name is space-sensitive:
+    `removelistingbuyers Warton House` != `removelistingbuyers WartonHouse`
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
+    </div> 
+    <br>
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **User Error #1**: Listing not found
       >
-      > **Input**:
+      > **Input**: `removelistingbuyers rc44444 buyer/alex yeoh`
       >
-      > **Output**:
+      > **Output**: The specified listing name does not exist.
+      > 
+      > ---
+      > 
+      > **User Error #2**: Empty set of buyers
       >
+      > **Input**: `removelistingbuyers rc4 buyer/`
+      >
+      > **Output**: Please provide valid buyers
+      > 
+      > ---
+      > 
+      > **User Error #3**: Person specified is not buyer
+      >
+      > **Input**: `removelistingbuyers rc4 buyer/ImASeller`
+      >
+      > **Output**: The client ImASeller is not registered as a buyer.
+      > 
+      > ---
+      > 
+      > **User Error #4**: Person specified is not a buyer for the listing
+      >
+      > **Input**: `removelistingbuyers rc4 buyer/notInterestedBuyer`
+      >
+      > **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
+      > 
+      > ---
+      > 
+      > **User Error #5**: Buyer not found
+      >
+      > **Input**: `removelistingbuyers rc4 buyer/nonExistentBuyer`
+      >
+      > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
+      > 
       > ---
 
-- #### **Delete Listing**
-    - **Format:** `DeleteListingCommand`
+- #### Delete Listing
+    - **Format:** `deletelisting LISTING_NAME`
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Deleting listing `Warton House`
       >
-      > **Input**:
+      > **Input**: `deletelisting warton house`
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Successfully deleted listing: Warton House
       >
       > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `deletelisting Bob House` = `deletelisting BOB HOUSE` = `deletelisting bOb hOUsE` _(Not exhaustive)_
+
+    Thus, these commands will delete the same `Bob House` listing
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `deletelisting bob house Wen Xuan` != `delapt bobhouse`
+    
+    These commands will delete different listings 
+    </div> 
+    <br>
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Error**: Listing not found
       >
-      > **Input**:
+      > **Input**: deletelisting nonExistentListing
       >
-      > **Output**:
+      > **Output**: This listing does not exist in EZSTATE
       >
       > ---
 
-- #### **Clear Listing**
+- #### Clear Listing
     - **Format:** `ClearListingCommand`
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
@@ -675,11 +856,11 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
 
-### 4. Utility Commands
+### **4. Utility Commands**
 
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
-- #### **Clear**
+- #### Clear
     - **Format:** `ClearCommand`
     - **Description:** Clears the console or application state.
     - **Successful Execution:**
@@ -718,7 +899,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **Exit**
+- #### Exit
     - **Format:** `ExitCommand`
     - **Description:** Exits the application.
     - **Successful Execution:**
@@ -757,7 +938,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **Help**
+- #### Help
     - **Format:** `help`
     - **Description:** Displays a list of available commands and their descriptions.
     - **Successful Execution:**
@@ -770,7 +951,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **More Info**
+- #### More Info
     - **Format:** `MoreInfoCommand`
     - **Description:** Provides additional information about a specific command or feature.
     - **Successful Execution:**
@@ -809,7 +990,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       >
       > ---
 
-- #### **Chat Window**
+- #### Chat Window
     - **Format:** `ChatWindowCommand`
     - **Description:** Opens a chat window for client-agent communication.
     - **Successful Execution:**
