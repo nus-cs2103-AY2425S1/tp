@@ -48,10 +48,11 @@ public class SortCommandIntegrationTest {
 
     @Test
     public void execute_sortByYearGroup_correctOrdering() throws CommandException {
-        SortCommand sortCommand = new SortCommand(new SortParam("class"));
+        SortCommand sortCommand = new SortCommand(new SortParam("yearGroup"));
         sortCommand.execute(model);
 
         List<Person> sortedList = model.getFilteredPersonList();
+        System.out.println(sortedList);
         if (sortedList.size() > 1) {
             for (int i = 0; i < sortedList.size() - 1; i++) {
                 String currentYearGroup = sortedList.get(i).getYearGroup().toString();
@@ -108,7 +109,7 @@ public class SortCommandIntegrationTest {
         int originalSize = model.getFilteredPersonList().size();
 
         // Test all sort types
-        String[] sortTypes = {"name", "class", "studentId"};
+        String[] sortTypes = {"name", "subject", "studentId", "yearGroup"};
         for (String sortType : sortTypes) {
             SortCommand sortCommand = new SortCommand(new SortParam(sortType));
             sortCommand.execute(model);

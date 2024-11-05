@@ -26,6 +26,8 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_PARAM);
+
         SortParam sortCommandParam = ParserUtil.parseSortCommandParam(argMultimap.getValue(PREFIX_SORT_PARAM).get());
 
         return new SortCommand(sortCommandParam);
