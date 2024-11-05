@@ -115,13 +115,6 @@ public class EditCommand extends Command {
         Medication updatedMedication = editPersonDescriptor.getMedication().orElse(personToEdit.getMedication());
         Notes updatedNotes = personToEdit.getNotes();
         Appointment updatedAppointment = personToEdit.getAppointment();
-        /*
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-         */
 
         return new Person(updatedName, updatedId, updatedWard, updatedDiagnosis, updatedMedication,
                 updatedNotes, updatedAppointment);
@@ -163,11 +156,6 @@ public class EditCommand extends Command {
         private Diagnosis diagnosis;
         private Medication medication;
 
-        /*
-        private Set<Tag> tags;
-
-         */
-
         public EditPersonDescriptor() {}
 
         /**
@@ -180,10 +168,6 @@ public class EditCommand extends Command {
             setWard(toCopy.ward);
             setDiagnosis(toCopy.diagnosis);
             setMedication(toCopy.medication);
-            /*
-            setTags(toCopy.tags);
-
-             */
         }
 
         /**
@@ -233,32 +217,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(medication);
         }
 
-        /*
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        /*
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-         */
-
-        /*
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        /*
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-         */
-
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -276,13 +234,6 @@ public class EditCommand extends Command {
                     && Objects.equals(ward, otherEditPersonDescriptor.ward)
                     && Objects.equals(diagnosis, otherEditPersonDescriptor.diagnosis)
                     && Objects.equals(medication, otherEditPersonDescriptor.medication);
-            /*
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
-
-            */
         }
 
         @Override
@@ -293,13 +244,6 @@ public class EditCommand extends Command {
                     .add("ward", ward)
                     .add("diagnosis", diagnosis)
                     .add("medication", medication)
-                    /*
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-
-                     */
                     .toString();
         }
     }
