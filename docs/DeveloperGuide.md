@@ -363,20 +363,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2b2. User can retry with a valid policy Index.
   * Use case resumes from step 2.
 
-**Use case: Undo a Delete Command**
+**Use case: Undo a Command**
 
 **MSS**
 
-1. User enters the undo command after deleting a person or policy.
+1. User enters the undo command.
 2. AgentConnect validates the input.
-3. AgentConnect restores the deleted person or policy.
+3. AgentConnect restores the previous state of the address book.
 4. AgentConnect shows a success message confirming the undo operation.
 
     Use case ends.
 
 **Extensions**
-* 2a. No delete operation to undo.
-  * 2a1. AgentConnect shows an error message indicating no delete operation to undo.
+* 2a. No commands to undo.
+  * 2a1. AgentConnect shows an error message indicating no commands to undo.
+  * Use case ends.
+
+**Use case: Redo a Command**
+
+**MSS**
+
+1. User enters the redo command.
+2. AgentConnect validates the input.
+3. AgentConnect restores the previously undone state of the address book.
+4. AgentConnect shows a success message confirming the redo operation.
+    
+    Use case ends.
+
+**Extensions**
+* 2a. No commands to redo.
+  * 2a1. AgentConnect shows an error message indicating no commands to redo.
   * Use case ends.
 
 **Use case: Sort Clients**
