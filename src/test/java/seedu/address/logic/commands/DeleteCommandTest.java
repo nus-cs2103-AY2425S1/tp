@@ -70,14 +70,14 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deleteByName_singleMatch_success() {
+    public void execute_deleteByNameSingleMatch_success() {
         Name targetName = new Name("George Best");
         DeleteCommand deleteCommand = new DeleteCommand(targetName);
 
         Person personToDelete = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().equals(targetName))
                 .findFirst()
-                .orElseThrow();  // fails if person with that name not found
+                .orElseThrow(); // fails if person with that name not found
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -89,12 +89,12 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deleteByName_multipleMatches_displaysMultipleMatchesMessage() {
+    public void execute_deleteByNameMultipleMatches_displaysMultipleMatchesMessage() {
         Name duplicateName = new Name("Fiona Kunz");
         DeleteCommand deleteCommand = new DeleteCommand(duplicateName);
 
-        String expectedMessage = DeleteCommand.MESSAGE_MULTIPLE_MATCHES + " '" + duplicateName + "'. " +
-                DeleteCommand.MESSAGE_DELETE_BY_ID + '\n';
+        String expectedMessage = DeleteCommand.MESSAGE_MULTIPLE_MATCHES + " '" + duplicateName + "'. "
+                + DeleteCommand.MESSAGE_DELETE_BY_ID + '\n';
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, model);
     }
@@ -113,7 +113,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deleteByName_nameNotFound_throwsCommandException() {
+    public void execute_deleteByNameNameNotFound_throwsCommandException() {
         Name nonExistentName = new Name("Non Existent Name");
         DeleteCommand deleteCommand = new DeleteCommand(nonExistentName);
 
