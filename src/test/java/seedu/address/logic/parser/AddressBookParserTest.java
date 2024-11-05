@@ -3,14 +3,19 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LIST_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 
@@ -31,7 +36,9 @@ import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListAllCommand;
+import seedu.address.logic.commands.ListDeliveryCommand;
+import seedu.address.logic.commands.ListSupplierCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortSupplierCommand;
@@ -39,7 +46,9 @@ import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
+import seedu.address.model.delivery.DeliveryIsUpcomingAfterPredicate;
+import seedu.address.model.delivery.DeliveryIsUpcomingBeforePredicate;
+import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.SupplierSortComparator;
@@ -47,11 +56,11 @@ import seedu.address.model.supplier.SupplierSortNameComparator;
 import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.supplier.predicates.NameContainsPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
-import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 import seedu.address.testutil.SupplierBuilder;
 import seedu.address.testutil.SupplierUtil;
+import seedu.address.testutil.TypicalDeliveryWrappers;
 
 public class AddressBookParserTest {
 
@@ -66,18 +75,26 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add_delivery() throws Exception {
-        Delivery delivery = new DeliveryBuilder().buildWithNullSender();
+        DeliveryWrapper deliveryWrapper = TypicalDeliveryWrappers.getNullWrapper();
         AddDeliveryCommand command = (AddDeliveryCommand) parser.parseCommand(DeliveryUtil
-                .getDeliveryCommand(delivery));
-        assertEquals(new AddDeliveryCommand(delivery), command);
+                .getDeliveryCommand(APPLE));
+        assertEquals(new AddDeliveryCommand(deliveryWrapper), command);
     }
     @Test
     public void parseCommand_upcoming() throws Exception {
-        DateTime time = new DateTime(VALID_DATE_APPLE);
-        DeliveryIsUpcomingPredicate predicate = new DeliveryIsUpcomingPredicate(time, Status.PENDING);
+        DateTime startTime = new DateTime(VALID_DATE_APPLE);
+        DateTime endTime = new DateTime(VALID_DATE_BREAD);
+        DeliveryIsUpcomingBeforePredicate predicateBefore = new DeliveryIsUpcomingBeforePredicate(endTime,
+                Status.PENDING);
+        DeliveryIsUpcomingAfterPredicate predicateAfter = new DeliveryIsUpcomingAfterPredicate(startTime,
+                Status.PENDING);
+        List<Predicate<Delivery>> predicates = new ArrayList<>();
+        predicates.add(predicateAfter);
+        predicates.add(predicateBefore);
         UpcomingCommand command = (UpcomingCommand) parser.parseCommand(
-                UpcomingCommand.COMMAND_WORD + " " + VALID_DATE_APPLE);
-        assertEquals(new UpcomingCommand(predicate), command);
+                UpcomingCommand.COMMAND_WORD + " " + PREFIX_START_DATE + VALID_DATE_APPLE + " " + PREFIX_END_DATE
+                        + " " + VALID_DATE_BREAD);
+        assertEquals(new UpcomingCommand(predicates), command);
     }
 
     @Test
@@ -158,8 +175,21 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListAllCommand.COMMAND_WORD) instanceof ListAllCommand);
+        assertThrows(ParseException.class, MESSAGE_INVALID_LIST_COMMAND_FORMAT, () ->
+                parser.parseCommand(ListAllCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_list_supplier() throws Exception {
+        assertTrue(parser.parseCommand(ListSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER)
+                instanceof ListSupplierCommand);
+    }
+
+    @Test
+    public void parseCommand_list_delivery() throws Exception {
+        assertTrue(parser.parseCommand(ListDeliveryCommand.COMMAND_WORD + " " + PREFIX_DELIVERY)
+                instanceof ListDeliveryCommand);
     }
 
     @Test

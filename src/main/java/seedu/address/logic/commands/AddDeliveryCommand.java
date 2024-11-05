@@ -15,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.supplier.Supplier;
 
@@ -41,30 +42,44 @@ public class AddDeliveryCommand extends Command {
             + PREFIX_COST + "25.50 ";
     public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "Delivery is already added!!!";
-    private final Delivery deliveryToAdd;
+    private final DeliveryWrapper deliveryWrapper;
     /**
      * Creates an AddDeliveryCommand to add the specified {@code deliveryToAdd}
      */
-    public AddDeliveryCommand(Delivery deliveryToAdd) {
-        requireNonNull(deliveryToAdd);
-        this.deliveryToAdd = deliveryToAdd;
+    public AddDeliveryCommand(DeliveryWrapper deliveryWrapper) {
+        requireNonNull(deliveryWrapper);
+        this.deliveryWrapper = deliveryWrapper;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //Need to update when list changes name
-        List<Supplier> lastShownList = model.getModifiedSupplierList();
-        SupplierIndex supplierIndex = this.deliveryToAdd.getSupplierIndex();
+        Supplier sender = this.getSupplierBasedOnIndex(model);
+        System.out.println("sender not null");
+        deliveryWrapper.setDeliverySupplier(sender);
+        Delivery deliveryToAdd = deliveryWrapper.getDelivery();
+        if (model.hasDelivery(deliveryToAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);
+        }
+        model.addDelivery(deliveryToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(deliveryToAdd)));
+    }
+
+    /**
+     * Retrieves the supplier from addressbook corresponding to the specified supplier index.
+     *
+     * @param model AddressBook model.
+     * @return Supplier that currently has index value equal to supplier index.
+     * @throws CommandException If supplier index is invalid.
+     */
+    public Supplier getSupplierBasedOnIndex(Model model) throws CommandException {
+        List<Supplier> lastShownList = model.getFilteredSupplierList();
+        SupplierIndex supplierIndex = this.deliveryWrapper.getSupplierIndex();
         if (supplierIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
         Supplier sender = lastShownList.get(supplierIndex.getZeroBased());
-        this.deliveryToAdd.setDeliverySender(sender);
-        if (model.hasDelivery(deliveryToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);
-        }
-        model.addDelivery(this.deliveryToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(this.deliveryToAdd)));
+        return sender;
     }
 
     /**
@@ -86,7 +101,7 @@ public class AddDeliveryCommand extends Command {
         }
 
         AddDeliveryCommand otherAddDeliveryCommand = (AddDeliveryCommand) other;
-        return this.deliveryToAdd.equals(otherAddDeliveryCommand.deliveryToAdd);
+        return this.deliveryWrapper.equals(otherAddDeliveryCommand.deliveryWrapper);
     }
 
     /**
@@ -95,7 +110,7 @@ public class AddDeliveryCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("deliveryToAdd", this.deliveryToAdd)
+                .add("deliveryWrapper", this.deliveryWrapper)
                 .toString();
     }
 }
