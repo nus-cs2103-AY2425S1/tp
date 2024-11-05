@@ -198,14 +198,16 @@ Examples:
 
 Sorts the list of persons being viewed by name or date of last visit in ascending or descending order.
 
-Format: `sort parameter/order`
+Format: `sort PARAMETER/ORDER`
 
-* Sorts the displayed list of persons according to the specified order.
-* Order can be specified as ascending by leaving the order blank or **a**/**asc**/**ascend**/**ascending**
-* Order can be specified as descending by **d**/**desc**/**descend**/**descending**
+* Sorts the contacts according to the parameter, in the specified order.
+* By default, if `ORDER` is omitted, contacts will be sorted in ascending order based on the `PARAMETER`.
+* An ascending order can be specified by replacing `ORDER` with `ascending` or its short form `asc`.
+* A descending order can be specified by replacing `ORDER` with `descending` or its short form `desc`.
 
 Examples:
 * `sort n/` sorts by name in ascending order.
+* `sort d/`, `sort d/asc`, `sort d/ascending` are all equivalent, and they sort the date of last visit in ascending order. 
 * `sort d/desc` sorts by date of last visit in descending order.
 
 ### Clearing all entries : `clear`
