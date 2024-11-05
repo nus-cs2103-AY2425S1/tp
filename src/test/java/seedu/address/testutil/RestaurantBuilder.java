@@ -7,6 +7,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.Price;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.tag.Tag;
@@ -22,6 +23,7 @@ public class RestaurantBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Integer DEFAULT_RATING = null;
+    public static final String DEFAULT_PRICE = "$";
 
     private Name name;
     private Phone phone;
@@ -29,6 +31,7 @@ public class RestaurantBuilder {
     private Address address;
     private Rating rating;
     private Set<Tag> tags;
+    private Price price;
 
     /**
      * Creates a {@code RestaurantBuilder} with the default details.
@@ -40,6 +43,7 @@ public class RestaurantBuilder {
         address = new Address(DEFAULT_ADDRESS);
         rating = new Rating(DEFAULT_RATING);
         tags = new HashSet<>();
+        price = new Price(DEFAULT_PRICE);
     }
 
     /**
@@ -52,6 +56,7 @@ public class RestaurantBuilder {
         address = restaurantToCopy.getAddress();
         rating = restaurantToCopy.getRating();
         tags = new HashSet<>(restaurantToCopy.getTags());
+        price = restaurantToCopy.getPrice();
     }
 
     /**
@@ -102,8 +107,16 @@ public class RestaurantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Price} of the {@code Restaurant} that we are building.
+     */
+    public RestaurantBuilder withPrice(String price) {
+        this.price = new Price(price);
+        return this;
+    }
+
     public Restaurant build() {
-        return new Restaurant(name, phone, email, address, rating, tags);
+        return new Restaurant(name, phone, email, address, rating, tags, price);
     }
 
 }

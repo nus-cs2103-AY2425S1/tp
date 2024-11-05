@@ -9,8 +9,8 @@ public enum PriceCategory {
     PREMIUM("$$$"),
     LUXURY("$$$$");
 
-    public static final String MESSAGE_CONSTRAINTS 
-            = "Price categories should be one of the following: $, $$, $$$, $$$$";
+    public static final String MESSAGE_CONSTRAINTS = "Price categories should be one of the following: "
+            + "$, $$, $$$, $$$$";
     private final String symbol;
 
     /**

@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.Pair;
 
 /**
  * Represents a Restaurant in the address book.
