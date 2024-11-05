@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -40,6 +43,23 @@ public class CommandTestUtil {
     public static final String VALID_MEDICATION_BOB = "Fluticasone (Flonase Veramyst)";
     public static final String VALID_NOTES_AMY = "Like skiing.";
     public static final String VALID_NOTES_BOB = "Favourite pastime: Eating";
+    public static final String VALID_START_DATETIME_1 = "05-11-2024-12-00";
+    public static final String VALID_START_DATETIME_2 = "05-11-2024-14-00";
+    public static final String VALID_END_DATETIME_1 = "25-12-2024-18-00";
+    public static final String VALID_END_DATETIME_2 = "26-12-2024-06-00";
+
+    public static final String DATETIME_START_DESC_AMY = " " + PREFIX_START + VALID_START_DATETIME_1;
+    public static final String DATETIME_START_DESC_BOB = " " + PREFIX_START + VALID_START_DATETIME_2;
+    public static final String DATETIME_END_DESC_AMY = " " + PREFIX_END + VALID_END_DATETIME_1;
+    public static final String DATETIME_END_DESC_BOB = " " + PREFIX_END + VALID_END_DATETIME_2;
+
+    public static final String VALID_APPOINTMENT_AMY = "Surgery";
+    public static final String VALID_APPOINTMENT_BOB = "Consultation";
+
+    public static final String APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
+    public static final String APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
+
+
     /*
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
@@ -62,17 +82,6 @@ public class CommandTestUtil {
     public static final String DIAGNOSIS_DESC_BOB = " " + PREFIX_DIAGNOSIS + VALID_DIAGNOSIS_BOB;
     public static final String MEDICATION_DESC_AMY = " " + PREFIX_MEDICATION + VALID_MEDICATION_AMY;
     public static final String MEDICATION_DESC_BOB = " " + PREFIX_MEDICATION + VALID_MEDICATION_BOB;
-    /*
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
-     */
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "P12D^5"; // '^' not allowed in id
@@ -80,13 +89,14 @@ public class CommandTestUtil {
     public static final String INVALID_DIAGNOSIS_DESC = " " + PREFIX_DIAGNOSIS + "$<>"; // Only a-z and .()/- allowed
     public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "$<>"; // Only a-z and .()/- allowed
 
-    /*
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    // Only a-z and .()/- allowed
+    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "\t";
+    public static final String INVALID_START_DATETIME = "10/11/2024"; // Only 0-9 and - allowed
+    public static final String INVALID_END_DATETIME = "10-11-202?"; // Only 0-9 and - allowed
+    public static final String INVALID_START_DATETIME_DESC = " " + PREFIX_START + INVALID_START_DATETIME;
+    public static final String INVALID_END_DATETIME_DESC = " " + PREFIX_END + INVALID_END_DATETIME;
 
-     */
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
