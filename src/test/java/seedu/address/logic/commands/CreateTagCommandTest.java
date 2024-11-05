@@ -181,6 +181,11 @@ public class CreateTagCommandTest {
         }
 
         @Override
+        public Tag getTag(Tag targetTag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTask(Task toAdd) {
             throw new AssertionError("This method should not be called.");
         }

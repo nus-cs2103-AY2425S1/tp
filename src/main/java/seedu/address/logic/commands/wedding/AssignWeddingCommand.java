@@ -101,6 +101,7 @@ public class AssignWeddingCommand extends Command {
             } else {
                 Wedding weddingToEdit = model.getWedding(wedding);
                 weddingToEdit.increasePeopleCount();
+                updatedWeddings.remove(weddingToEdit);
                 updatedWeddings.add(weddingToEdit);
             }
         }

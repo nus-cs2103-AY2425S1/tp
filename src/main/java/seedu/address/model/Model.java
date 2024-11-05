@@ -152,6 +152,9 @@ public interface Model {
      */
     void deleteTag(Tag toDelete);
 
+    /** Returns a target tag from the model. */
+    Tag getTag(Tag tag);
+
     /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
      */

@@ -295,6 +295,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns {@code Tag} object with the same {@code TagName}.
+     */
+    public Tag getTag(Tag target) {
+        requireNonNull(target);
+        return tags.getTag(target);
+    }
+
+    /**
      * Creates any tags that is attached to a person but not initialised.
      * This function is only to be used when loading from Storage.
      */

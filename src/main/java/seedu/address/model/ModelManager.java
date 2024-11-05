@@ -168,6 +168,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Tag getTag(Tag target) {
+        requireNonNull(target);
+        return addressBook.getTag(target);
+    }
+
+    @Override
     public void addTask(Task task) {
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);

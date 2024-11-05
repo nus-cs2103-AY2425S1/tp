@@ -146,7 +146,12 @@ public class CreateWeddingCommandTest {
         }
 
         @Override
-        public void setTag(Tag target, Tag editedWedding) {
+        public void setTag(Tag target, Tag editedTag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Tag getTag(Tag targetTag) {
             throw new AssertionError("This method should not be called.");
         }
 
