@@ -233,11 +233,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        // Edit Command doesn't allow editing of reminders
-        //        public void setReminders(Set<Reminder> reminders) {
-        //            this.reminders = (reminders != null) ? new HashSet<>(reminders) : null;
-        //        }
-
         public Optional<Set<Reminder>> getReminders() {
             return (reminders != null) ? Optional.of(Collections.unmodifiableSet(reminders)) : Optional.empty();
         }
