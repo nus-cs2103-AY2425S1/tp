@@ -141,7 +141,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new String[] { "exit", "Exits the application" });
 
         commandTable.setItems(commandList);
-        commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Set height of table dynamically
         commandTable.setFixedCellSize(30);
