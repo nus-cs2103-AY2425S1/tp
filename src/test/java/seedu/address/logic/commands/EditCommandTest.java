@@ -163,4 +163,12 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void execute_personNotFound_throwsCommandException() {
+        Nric nonExistentNric = new Nric("S9876543C");
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        EditCommand editCommand = new EditCommand(nonExistentNric, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
 }
