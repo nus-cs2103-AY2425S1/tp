@@ -6,6 +6,8 @@ import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.commons.core.LogsCenter;
@@ -17,7 +19,8 @@ import spleetwaise.transaction.model.transaction.Transaction;
 public class TransactionBookModelManager implements TransactionBookModel {
 
     private static final Logger logger = LogsCenter.getLogger(TransactionBookModelManager.class);
-    private Predicate<Transaction> currPredicate = TransactionBookModel.PREDICATE_SHOW_ALL_TXNS;
+    private ObjectProperty<Predicate<Transaction>> currPredicate = new SimpleObjectProperty<>(
+            TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
 
     private final TransactionBook transactionBook;
     private final FilteredList<Transaction> filteredTransactions;
@@ -80,13 +83,18 @@ public class TransactionBookModelManager implements TransactionBookModel {
 
     @Override
     public void updateFilteredTransactionList() {
-        filteredTransactions.setPredicate(currPredicate);
+        filteredTransactions.setPredicate(currPredicate.get());
     }
 
     @Override
     public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
-        currPredicate = predicate;
+        currPredicate.set(predicate);
         filteredTransactions.setPredicate(predicate);
+    }
+
+    @Override
+    public ObjectProperty<Predicate<Transaction>> getCurrentPredicate() {
+        return currPredicate;
     }
 
     @Override

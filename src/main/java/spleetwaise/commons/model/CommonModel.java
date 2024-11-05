@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
@@ -188,6 +189,12 @@ public class CommonModel implements Model {
     public ObservableList<Transaction> getFilteredTransactionList() {
         requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
         return transactionBookModel.getFilteredTransactionList();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<Transaction>> getCurrentPredicate() {
+        requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
+        return transactionBookModel.getCurrentPredicate();
     }
 
     @Override
