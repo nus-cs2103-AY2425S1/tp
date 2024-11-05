@@ -541,33 +541,24 @@ Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting tag.
 **Extensions**
 
 * 1a. The list is empty.
-
   Use case ends.
 
-
 * 2a. The given index is invalid.
-
     * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 1.
 
-
 * 2b. The user does not specify what type of details they want to change.
-
     * 2b1. System shows an error message prompting the user to put in the type of details they want to edit.
 
       Use case resumes at step 1.
 
-
 * 2c. The user does not specify what the new details should be.
-
     * 2c1. System shows an error message prompting the user to put in the new details.
 
       Use case resumes at step 1.
 
-
 * 2d. The user specifies details that do not meet the requirements of the detail type.
-
     * 2d1. System shows an error message prompting the user with the correct detail type format and requirements.
 
       Use case resumes at step 1.
