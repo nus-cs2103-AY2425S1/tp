@@ -17,7 +17,7 @@ public class DeleteLessonCommand extends Command {
     public static final String COMMAND_WORD = "deletec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the description used in the displayed calendar.\n"
+            + ": Deletes the class identified by the description used in the displayed calendar.\n"
             + "Parameters: STRING\n"
             + "Example: " + COMMAND_WORD + " Secondary 4 Chemistry Class";
 
