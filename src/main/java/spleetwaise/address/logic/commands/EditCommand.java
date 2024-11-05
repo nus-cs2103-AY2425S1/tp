@@ -7,10 +7,10 @@ import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static spleetwaise.commons.logic.commands.CommandUtil.getPersonByFilteredPersonListIndex;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -100,13 +100,7 @@ public class EditCommand extends Command {
     public CommandResult execute() throws CommandException {
         CommonModel model = CommonModel.getInstance();
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = getPersonByFilteredPersonListIndex(model, index);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {

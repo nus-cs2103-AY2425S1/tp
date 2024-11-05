@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBook;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.testutil.Assert;
 import spleetwaise.commons.util.JsonUtil;
 
 public class JsonSerializableAddressBookTest {

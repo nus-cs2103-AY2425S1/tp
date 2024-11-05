@@ -1,19 +1,29 @@
 package spleetwaise.transaction.ui;
 
+import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.function.Predicate;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.ui.CommandBox;
 import spleetwaise.commons.ui.UiPart;
+import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -25,8 +35,10 @@ public class RightPanel extends UiPart<Region> {
     private static final String FXML = "RightPanel.fxml";
 
     private static boolean amountFilter = false;
+    private static boolean doneFilter = false;
 
     private TransactionListPanel transactionListPanel;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane transactionListPanelPlaceholder;
@@ -35,20 +47,31 @@ public class RightPanel extends UiPart<Region> {
     @FXML
     private Label ownYouLabel;
     @FXML
-    private Label filterIcon;
+    private Button filterBtn;
 
     /**
      * Creates a {@code RightPanel} with the given {@code ObservableList<Transaction>} to display.
      */
-    public RightPanel() {
+    public RightPanel(CommandBox cb) {
         super(FXML);
-        ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
+
+        commandBox = cb;
+        CommonModel commonModel = CommonModel.getInstance();
+
+        ObservableList<Transaction> txns = commonModel.getFilteredTransactionList();
         updateBalances();
 
         transactionListPanel = new TransactionListPanel(txns);
         transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
-        filterIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, this::showFilterMenu);
+        StringBinding iconColorBinding = Bindings.createStringBinding(() -> {
+            return commonModel.getCurrentPredicate().get() == TransactionBookModel.PREDICATE_SHOW_ALL_TXNS ? "gray"
+                    : "blue";
+        }, commonModel.getCurrentPredicate());
+
+        filterBtn.styleProperty().bind(Bindings.concat("-icon-paint: ", iconColorBinding, ";"));
+        filterBtn.setPickOnBounds(true);
+        filterBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, this::showFilterMenu);
     }
 
     /**
@@ -56,8 +79,8 @@ public class RightPanel extends UiPart<Region> {
      */
     public void updateBalances() {
         ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
-        youOwnLabel.setText("You owe $" + calculateBalance(txns, Amount::isNegative).toString());
-        ownYouLabel.setText("You are owned $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
+        youOwnLabel.setText("You Owe $" + calculateBalance(txns, Amount::isNegative).toString());
+        ownYouLabel.setText("You are Owed $" + calculateBalance(txns, amt -> !amt.isNegative()).toString());
     }
 
     /**
@@ -81,38 +104,57 @@ public class RightPanel extends UiPart<Region> {
     private void showFilterMenu(MouseEvent event) {
         ContextMenu filterMenu = new ContextMenu();
 
-        MenuItem filterByAmount = new MenuItem("Filter by Positive or Negative Amount");
-        filterByAmount.setOnAction(e -> filterTransactionsByAmount());
-
-        MenuItem filterByDateRange = new MenuItem("Filter by last month");
-        filterByDateRange.setOnAction(e -> filterTransactionsByLastMonth());
-
         MenuItem resetFilter = new MenuItem("Reset filter");
         resetFilter.setOnAction(e -> resetFilter());
 
-        filterMenu.getItems().addAll(resetFilter, filterByAmount, filterByDateRange);
-        filterMenu.show(filterIcon, event.getScreenX(), event.getScreenY());
+        MenuItem filterByDone = new MenuItem("Filter by Done or Not Done Status");
+        filterByDone.setOnAction(e -> filterTransactionsByDoneStatus());
+
+        MenuItem filterByPositiveOrNegativeAmount = new MenuItem("Filter by Positive or Negative Amount");
+        filterByPositiveOrNegativeAmount.setOnAction(e -> filterTransactionsByAmount());
+
+        SeparatorMenuItem divider = new SeparatorMenuItem();
+
+        MenuItem filterByContact = new MenuItem("Filter by Contact");
+        filterByContact.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_PHONE));
+
+        MenuItem filterByAmount = new MenuItem("Filter by Amount");
+        filterByAmount.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_AMOUNT));
+
+        MenuItem filterByDescription = new MenuItem("Filter by Description");
+        filterByDescription.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_DESCRIPTION));
+
+        MenuItem filterByDate = new MenuItem("Filter by Date");
+        filterByDate.setOnAction(
+                e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_DATE));
+
+        filterMenu.getItems().addAll(resetFilter, filterByDone, filterByPositiveOrNegativeAmount, divider,
+                filterByContact, filterByAmount, filterByDescription, filterByDate
+        );
+        filterMenu.show(filterBtn, event.getScreenX(), event.getScreenY());
     }
 
     private void filterTransactionsByAmount() {
-        // show only negative or positive amounts
-        CommonModel.getInstance().updateFilteredTransactionList(txn -> amountFilter != txn.getAmount().isNegative());
-        ObservableList<Transaction> filtered = CommonModel.getInstance().getFilteredTransactionList();
-        transactionListPanel.updateTransactionList(filtered);
+        // toggle between positive or negative amounts only
         amountFilter = !amountFilter;
+        resetFilter();
+        CommonModel.getInstance().updateFilteredTransactionList(txn -> amountFilter != txn.getAmount().isNegative());
     }
 
-    private void filterTransactionsByLastMonth() {
-        // filter transactions by last month
-        CommonModel.getInstance()
-                .updateFilteredTransactionList(txn -> txn.getDate().getDate().isAfter(LocalDate.now().minusMonths(1)));
-        ObservableList<Transaction> filtered = CommonModel.getInstance().getFilteredTransactionList();
-        transactionListPanel.updateTransactionList(filtered);
+    private void filterTransactionsByDoneStatus() {
+        // toggle between undone or done transactions only
+        doneFilter = !doneFilter;
+        resetFilter();
+        CommonModel.getInstance().updateFilteredTransactionList(txn -> doneFilter != txn.getStatus().isDone());
     }
 
-    private void resetFilter() {
+    /**
+     * Resets the filter to show all transactions. public for testability.
+     */
+    public void resetFilter() {
         CommonModel.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
-        ObservableList<Transaction> filtered = CommonModel.getInstance().getFilteredTransactionList();
-        transactionListPanel.updateTransactionList(filtered);
     }
 }

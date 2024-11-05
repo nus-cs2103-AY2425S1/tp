@@ -7,13 +7,13 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.core.GuiSettings;
-import spleetwaise.commons.core.index.Index;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -43,12 +43,14 @@ public class CommonModel implements Model {
     /**
      * Initialises the singleton instance of this class with the given address book and transaction book models.
      *
-     * @param abModel The address book model to use
-     * @param tbModel The transaction book model to use
+     * @param abModel   The address book model to use
+     * @param tbModel   The transaction book model to use
      * @param userPrefs The user prefs to use
      */
-    public static synchronized void initialise(AddressBookModel abModel, TransactionBookModel tbModel,
-            ReadOnlyUserPrefs userPrefs) {
+    public static synchronized void initialise(
+            AddressBookModel abModel, TransactionBookModel tbModel,
+            ReadOnlyUserPrefs userPrefs
+    ) {
         model = new CommonModel(abModel, tbModel, userPrefs);
     }
 
@@ -158,12 +160,6 @@ public class CommonModel implements Model {
         return addressBookModel.getPersonByPhone(phone);
     }
 
-    public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        requireNonNull(index);
-        return addressBookModel.getPersonByFilteredPersonListIndex(index);
-    }
-
     // TransactionBook
     @Override
     public ReadOnlyTransactionBook getTransactionBook() {
@@ -193,6 +189,12 @@ public class CommonModel implements Model {
     public ObservableList<Transaction> getFilteredTransactionList() {
         requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
         return transactionBookModel.getFilteredTransactionList();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<Transaction>> getCurrentPredicate() {
+        requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
+        return transactionBookModel.getCurrentPredicate();
     }
 
     @Override

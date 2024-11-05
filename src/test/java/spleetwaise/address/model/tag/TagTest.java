@@ -3,7 +3,7 @@ package spleetwaise.address.model.tag;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.testutil.Assert;
 
 public class TagTest {
 

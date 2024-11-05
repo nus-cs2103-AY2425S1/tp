@@ -12,9 +12,9 @@ import java.util.logging.Level;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.commons.core.Config;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.testutil.Assert;
 
 public class ConfigUtilTest {
 

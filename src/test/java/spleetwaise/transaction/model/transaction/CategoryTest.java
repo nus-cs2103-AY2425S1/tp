@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.testutil.Assert;
 
 public class CategoryTest {
     private Category testCat = new Category("FOOD");

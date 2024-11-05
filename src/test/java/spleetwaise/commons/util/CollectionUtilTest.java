@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.testutil.Assert;
 
 public class CollectionUtilTest {
     @Test
