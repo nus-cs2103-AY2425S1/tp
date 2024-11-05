@@ -45,7 +45,6 @@ public class MoreInfoCommandTest {
 
         assertCommandFailure(moreInfoCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
-    
     @Test
     public void execute_subName_throwsCommandException() {
         Random random = new Random();
