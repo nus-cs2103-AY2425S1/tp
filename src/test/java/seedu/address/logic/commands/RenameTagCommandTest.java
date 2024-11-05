@@ -2,7 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.RenameTagCommand.MESSAGE_NONEXISTENT_OR_DUPLICATE;
+import static seedu.address.logic.commands.RenameTagCommand.MESSAGE_DUPLICATE;
+import static seedu.address.logic.commands.RenameTagCommand.MESSAGE_NONEXISTENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,7 @@ public class RenameTagCommandTest {
     public void execute_nonExistentTagToNonExistentNewTag_failure() {
         Tag newTag = new Tag(TYPICAL_NAME);
         RenameTagCommand renameTagCommand = new RenameTagCommand(newTag, NEW_NAME);
-        String expectedMessage = MESSAGE_NONEXISTENT_OR_DUPLICATE;
+        String expectedMessage = MESSAGE_NONEXISTENT + newTag;
         assertCommandFailure(renameTagCommand, model, expectedMessage);
     }
 
@@ -43,8 +44,9 @@ public class RenameTagCommandTest {
         Tag existingTag = new Tag(NEW_NAME);
         model.addTag(existingTag);
         Tag newTag = new Tag(TYPICAL_NAME);
+        model.addTag(newTag);
         RenameTagCommand renameTagCommand = new RenameTagCommand(newTag, NEW_NAME);
-        String expectedMessage = MESSAGE_NONEXISTENT_OR_DUPLICATE;
+        String expectedMessage = MESSAGE_DUPLICATE + existingTag;
         assertCommandFailure(renameTagCommand, model, expectedMessage);
     }
 

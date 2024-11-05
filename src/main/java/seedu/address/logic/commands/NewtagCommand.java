@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,10 +25,14 @@ public class NewtagCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "New tag(s) created.\n";
-    public static final String MESSAGE_DUPLICATE = "Some tag(s) already exist(s).\n"
-            + "Non-duplicate tags (if any) have been added successfully.\n";
-    public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
-            + " tags.\nPlease remove some using 'deletetag'.\n";
+    public static final String MESSAGE_ALL_DUPLICATE = "The following tag(s) already exist(s):\n";
+
+    public static final String MESSAGE_SOME_DUPLICATE = "Non-duplicate tag(s) has/have been created successfully.\n"
+            + "The following tag(s) already exist(s):\n";
+
+    public static final String MESSAGE_TOO_MANY_TAGS = "You are attempting to add more than "
+            + TagList.MAXIMUM_TAGLIST_SIZE + " tags in total.\n"
+            + "Please remove some using 'deletetag first'.\n";
 
     private final List<Tag> tags;
 
@@ -45,6 +51,8 @@ public class NewtagCommand extends UndoableCommand {
      *      allowable number if the new tags were to be added.
      */
     private void validateTagListSize(Model model) throws CommandException {
+        requireAllNonNull(model);
+        requireAllNonNull(tags);
         if (!model.checkAcceptableTagListSize(tags.size())) {
             throw new CommandException(MESSAGE_TOO_MANY_TAGS);
         }
@@ -54,21 +62,29 @@ public class NewtagCommand extends UndoableCommand {
      * Adds the tags to the model and checks for duplicates.
      * @param model The model to which tags will be added.
      */
-    private boolean addTagsToModel(Model model) {
-        boolean isSuccessful = model.addTags(tags);
+    private Set<Tag> addTagsToModel(Model model) {
+        requireAllNonNull(model);
+        Set<Tag> tagsSuccessfullyAdded = model.addTags(tags);
         model.updateTagList();
-        return isSuccessful;
+        return tagsSuccessfullyAdded;
     }
 
     /**
      * Creates a CommandResult based on the success of adding tags to the model.
      *
-     * @param isSuccessful Indicates if the tags were successfully added.
+     * @param tagsSuccessfullyAdded the tags that were successfully added.
      * @return The corresponding CommandResult.
      */
-    private CommandResult createCommandResult(boolean isSuccessful) {
-        if (!isSuccessful) {
-            return new CommandResult(MESSAGE_DUPLICATE);
+    private CommandResult createCommandResult(Set<Tag> tagsSuccessfullyAdded) {
+        requireAllNonNull(tagsSuccessfullyAdded);
+        List<Tag> tagsNotSuccessfullyAdded = new ArrayList<>(tags);
+        tagsNotSuccessfullyAdded.removeAll(tagsSuccessfullyAdded);
+
+        if (!tagsNotSuccessfullyAdded.isEmpty()) {
+            if (tagsSuccessfullyAdded.isEmpty()) {
+                return new CommandResult(MESSAGE_ALL_DUPLICATE + tagsNotSuccessfullyAdded);
+            }
+            return new CommandResult(MESSAGE_SOME_DUPLICATE + tagsNotSuccessfullyAdded);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -77,8 +93,8 @@ public class NewtagCommand extends UndoableCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
         validateTagListSize(model);
-        boolean isSuccessful = addTagsToModel(model);
-        return createCommandResult(isSuccessful);
+        Set<Tag> tagsSuccessfullyAdded = addTagsToModel(model);
+        return createCommandResult(tagsSuccessfullyAdded);
     }
 
     @Override
