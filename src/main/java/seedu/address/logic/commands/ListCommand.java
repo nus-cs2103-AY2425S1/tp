@@ -16,15 +16,17 @@ public abstract class ListCommand extends Command {
 
     /**
      * Usage message to guide users on how to use the 'list' command. It provides examples of listing
-     * buyers, sellers, clients, or properties from the database, and clarifies the allowed keys.
+     * buyers, sellers, clients, properties, or meetings from the address book, and clarifies the allowed keys.
      */
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Lists all existing properties, sellers, buyers, or clients in the database.\n"
+            "%s: Shows a list of all existing buyers, sellers, clients (i.e., buyers and sellers), "
+                    + "properties, and meetings in the address book.\n"
                     + "Parameters: k/KEY\nRestrictions: KEY must be one of the following: "
-                    + "\"buyers\", \"sellers\", \"clients\", \"properties\" or \"meetings\".\n"
-                    + "Only these 5 types of records are stored in the database.",
+                    + "\"buyers\", \"sellers\", \"clients\", \"properties\", or \"meetings\". (case-insensitive)\n"
+                    + "Only these 5 types of records are stored in the address book.",
             COMMAND_WORD
     );
+
 
 
     /**
