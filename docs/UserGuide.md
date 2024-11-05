@@ -28,8 +28,9 @@ tasks done faster than traditional GUI apps.
 
 1. Copy the downloaded file to an empty folder called 'PlanPerfect' on your Desktop. This folder will store all your data and the necessary files for running the PlanPerfect application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PlanPerfect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PlanPerfect.jar` command to run the application.
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   <br><br/>
       ![Ui](images/Ui.png)
    <box type="tip" seamless>
 
@@ -42,7 +43,7 @@ tasks done faster than traditional GUI apps.
 
     </box>
 1. On the bottom left of the screen is a list of sample weddings. On the bottom right is a list of sample contacts.
-1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window. 
    Some example commands you can try:
 
    * `add n/John David p/98765432 e/johnd@gmail.com a/Jurong East, Block 71, #04-19, 672381` : Adds a contact named `John David` with the specified details to your contacts.
@@ -52,9 +53,11 @@ tasks done faster than traditional GUI apps.
    * `list` : Lists all contacts.
 
    * `exit` : Exits the app.
-
+<br><br/>
 1. Refer to the [Features](#features) below for details of each command.
 1. Once you are familiar with the commands, run the `clear` command to get rid of the sample data and start adding and managing your contacts and weddings with ease!
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -91,6 +94,10 @@ tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### General Features
 
 #### Viewing help : `help`
@@ -101,7 +108,9 @@ Shows a message with basic usage instructions for PlanPerfect. The link to this 
 
 ![help message](images/helpMessage.png)
 
-<br><br/>
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,7 +283,9 @@ Clears all entries in the address book.
 * After entering the `clear` command, a confirmation message will appear to ask you if you are sure about clearing the address book.
 * If you input `yes` or `y`, the address book will be cleared. If other input is entered, the address book will not be cleared.
 
-<br><br/>
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -388,7 +399,9 @@ Format: `deletew WEDDING_INDEX`
 Examples:
 * `deletew 4` deletes the 4th wedding on the wedding panel.
 
-<br><br/>
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -421,7 +434,7 @@ Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e
 
 User preferences are saved in the JSON file `[JAR file location]/preferences.json`. Advanced users are welcome to edit the 'TagColours' field in the JSON with custom hexadecimal values (colour codes) in order to customise the appearance of your tags.<br>
 
-<br><br/>
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -453,7 +466,10 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -479,6 +495,6 @@ Action     | Format, Examples
 **Delete Wedding** | `deletew WEDDING_INDEX`<br> e.g., `deletew 3`
 **Exit**   | `exit`
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 
