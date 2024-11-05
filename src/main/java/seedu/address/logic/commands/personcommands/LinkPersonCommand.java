@@ -23,12 +23,15 @@ public class LinkPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "link";
 
-    public static final String MESSAGE_USAGE = "Use \"link\" to link identified person to"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Link identified person to"
             + " an event in the address book.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_EVENT + "EVENT\n"
+            + "Parameters: INDEX_OF_PERSON (must be a positive integer) "
+            + PREFIX_EVENT + "EVENT_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EVENT + "Company Meeting";
+
+    public static final String MESSAGE_HINT = "Use \"link\" to link identified person to"
+            + " an event in the address book.";
 
     public static final String MESSAGE_LINK_SUCCESS = "Person linked to event: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person is already linked to the event";

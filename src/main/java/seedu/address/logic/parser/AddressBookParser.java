@@ -143,7 +143,7 @@ public class AddressBookParser {
             } else if (userInput.startsWith("sc")) {
                 return ScheduleCommand.MESSAGE_USAGE;
             } else {
-                return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_USAGE;
+                return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_HINT;
             }
         } else if (userInput.startsWith("l")) {
             if (userInput.startsWith("lis")) {
@@ -151,7 +151,7 @@ public class AddressBookParser {
             } else if (userInput.startsWith("lin")) {
                 return LinkPersonCommand.MESSAGE_USAGE;
             } else {
-                return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_USAGE;
+                return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_HINT;
             }
         } else if (userInput.startsWith("c")) {
             return getClearHint(userInput);
