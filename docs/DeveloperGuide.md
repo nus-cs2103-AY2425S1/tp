@@ -222,11 +222,12 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ## **Implementation of main features**
 
-## **Implementation of Entity Commands**
-Entity commands include `add`, `delete`, `find`, `clear` commands.
-So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
+### **Implementation of Entity Commands**
+Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. Hence, `xyzCommand` 
+can be `addPersonCommand`, `addCommandParser` and so on.
 
-**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity, `person` 
+or `appt`. This is followed by appropriate arguments and prefixes.
 
 
 **Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
@@ -727,8 +728,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: None
    2. Test case:`add person n/Elmo p/98765432 e/elmo@sesa.me a/Sesame Street st/recovering t/insurance`
    3. Expected: A new contact is added to the list.
-   - The status bar shows the following: "New person added: Elmo; Phone: 98765432; 
-   Email: elmo@sesa.me; Address: Sesame Street; Status: recovering; Tags: [insurance]"
+   - The status bar shows the following:
+     New person added:
+     Name: Elmo
+     Phone: 98765432
+     Email: elmo@sesa.me
+     Address: Sesame Street
+     Tags: [[insurance]]
    - The list of persons should now have the new contact inside it.
     
 
@@ -777,10 +783,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a person
     1. Prerequisites: There must be a person with the PID 1.
-    2. Test case:`add appt ty/Check up d/2024-10-16 12:30:30 i/1 s/Common Cold m/Paracetamol`
+    2. Test case:`add appt ty/Check up d/2024-10-16 12:30 i/1 s/Common Cold m/Paracetamol`
     3. Expected: A new appointment is added to the list.
-    - The status bar shows the following: "New appointment added: Check up; Date and Time2024-10-16T12:30:30; 
-   Sickness: Common Cold; Medicine: Paracetamol
+      The status bar shows the following:
+      New appointment added:
+      Appointment Type: Check up
+      Date and Time: October 16, 2024, 12:30 PM
+      Sickness: Common Cold
+      Medicine: Paracetamol
     - The list of appointments should now have the new appointment inside it.
 
 ### Deleting an appointment
