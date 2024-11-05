@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.common.Id;
 import seedu.ddd.testutil.event.EventBuilder;
 
-public class EventContactIdPredicateTest {
+public class EventIdPredicateTest {
     @Test
     public void equals() {
         Id firstId = new Id(1);
@@ -36,7 +36,7 @@ public class EventContactIdPredicateTest {
     }
 
     @Test
-    public void test_contactContainsId_returnsTrue() {
+    public void test_eventContainsId_returnsTrue() {
         EventIdPredicate predicate = new EventIdPredicate(new Id(1));
         assertTrue(predicate.test(new EventBuilder().withEventId(1).build()));
 
@@ -51,7 +51,7 @@ public class EventContactIdPredicateTest {
     }
 
     @Test
-    public void test_contactDoesNotContainsId_returnsFalse() {
+    public void test_eventDoesNotContainsId_returnsFalse() {
         EventIdPredicate predicate = new EventIdPredicate(new Id(1));
         assertFalse(predicate.test(new EventBuilder().withEventId(2).build()));
 

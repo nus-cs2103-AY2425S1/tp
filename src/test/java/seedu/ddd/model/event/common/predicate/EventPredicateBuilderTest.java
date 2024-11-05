@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -15,6 +16,10 @@ import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.testutil.event.EventBuilder;
 
 public class EventPredicateBuilderTest {
+    private String validDate1 = "2000-01-03";
+    private String validDate2 = "3 Jan 2000";
+    private String validDate3 = "01/03/2000";
+    private String differentValidDate = "2000-03-01";
 
     @Test
     public void equals() {
@@ -109,6 +114,39 @@ public class EventPredicateBuilderTest {
         argMultimap.put(PREFIX_ID, "1");
         assertFalse(predicateBuilder.build().test(new EventBuilder().withEventId(2).build()));
     }
+    @Test
+    public void testArgumentMultimap_containsDate_returnsTrue() throws ParseException {
+        // Three same date inputs with different formats
+
+
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_DATE, validDate1);
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+
+        assertTrue(predicateBuilder.build().test(new EventBuilder().withDate(validDate1).build()));
+
+        argMultimap.put(PREFIX_DATE, validDate2);
+        assertTrue(predicateBuilder.build().test(new EventBuilder().withDate(validDate1).build()));
+
+        argMultimap.put(PREFIX_DATE, validDate3);
+        assertTrue(predicateBuilder.build().test(new EventBuilder().withDate(validDate1).build()));
+    }
+
+    @Test
+    public void testArgumentMultimap_doesNotContainDate_returnsFalse() throws ParseException {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_DATE, differentValidDate);
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+
+        // Test different date against all three valid inputs.
+        assertFalse(predicateBuilder.build().test(new EventBuilder().withDate(validDate1).build()));
+
+        argMultimap.put(PREFIX_DATE, differentValidDate);
+        assertFalse(predicateBuilder.build().test(new EventBuilder().withDate(validDate2).build()));
+
+        argMultimap.put(PREFIX_DATE, differentValidDate);
+        assertFalse(predicateBuilder.build().test(new EventBuilder().withDate(validDate3).build()));
+    }
 
     @Test
     public void testArgumentMultimap_doesNotContainDescription_throwsParseExceptionError() {
@@ -129,6 +167,14 @@ public class EventPredicateBuilderTest {
     public void testArgumentMultimap_doesNotContainId_throwsParseExceptionError() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "");
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+        assertThrows(ParseException.class, predicateBuilder::build);
+    }
+
+    @Test
+    public void testArgumentMultimap_doesNotContainDate_throwsParseExceptionError() {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_DATE, "");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
         assertThrows(ParseException.class, predicateBuilder::build);
     }
