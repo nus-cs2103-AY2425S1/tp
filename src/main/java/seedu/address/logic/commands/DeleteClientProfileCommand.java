@@ -8,8 +8,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
+import seedu.address.ui.ConfirmationDialog;
 
 /**
  * Deletes a client identified using it's displayed index from the address book.
@@ -25,12 +29,22 @@ public class DeleteClientProfileCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
             + "with the number: %2$s " + "and email: %3$s!";
-    public static final String MESSAGE_HAS_ACTIVE_LISTINGS = "Cannot delete seller %1$s because they"
-            + " have active listings.";
     private final Name targetName;
+    private final boolean skipConfirmation;
 
     public DeleteClientProfileCommand(Name targetName) {
+        this(targetName, false);
+    }
+    /**
+     * Creates a {@code DeleteClientProfileCommand} to delete the client profile with the specified name.
+     *
+     * @param targetName The name of the client profile to delete.
+     * @param skipConfirmation If {@code true}, the command will skip the confirmation dialog for deletion;
+     *                         if {@code false}, it will prompt the user for confirmation before deletion.
+     */
+    public DeleteClientProfileCommand(Name targetName, boolean skipConfirmation) {
         this.targetName = targetName;
+        this.skipConfirmation = skipConfirmation;
     }
 
     @Override
@@ -49,13 +63,30 @@ public class DeleteClientProfileCommand extends Command {
             }
         }
 
-        if (model.hasListingsForSeller(personToDelete)) {
-            throw new CommandException(String.format(MESSAGE_HAS_ACTIVE_LISTINGS, personToDelete.getName()));
+        if (!skipConfirmation
+                && (model.hasListingsForSeller(personToDelete)
+                || model.hasListingsForBuyer(personToDelete))) {
+            boolean isConfirmed = ConfirmationDialog.showDeleteConfirmation(personToDelete.getName().toString());
+            if (!isConfirmed) {
+                throw new CommandException("Deletion canceled by user.");
+            }
         }
+        if (personToDelete instanceof Buyer buyerToDelete) {
 
-        if (model.hasListingsForBuyer(personToDelete)) {
-            throw new CommandException(String.format(MESSAGE_HAS_ACTIVE_LISTINGS, personToDelete.getName()));
+            model.getListings().getListingList()
+                    .forEach(listing -> listing.removeBuyer(buyerToDelete));
+
+        } else if (personToDelete instanceof Seller sellerToDelete) {
+
+            List<Listing> listingsToDelete = model.getListings().getListingList().stream()
+                    .filter(listing -> listing.getSeller().equals(sellerToDelete))
+                    .toList();
+
+            for (Listing listing : listingsToDelete) {
+                model.deleteListing(listing);
+            }
         }
+        model.updateFilteredListingList(listing -> true);
 
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
