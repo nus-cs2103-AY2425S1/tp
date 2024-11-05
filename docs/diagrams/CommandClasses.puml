@@ -13,6 +13,7 @@ package "Command Classes" as CommandClasses {
 
     package "CampusConnect Classes" {
         Class "AddTagCommand" as ATC
+        Class "CategorizeTagCommand" as CTC
         Class "DeleteTagCommand" as DTC
         Class "UndoCommand" as UC
         Class "RedoCommand" as RC
@@ -22,7 +23,10 @@ package "Command Classes" as CommandClasses {
 HiddenOutside ..> Command
 
 ATC -u-|> Command
-ATC -[hidden]right DTC
+ATC -[hidden]right CTC
+
+CTC -u-|> Command
+CTC -[hidden]right DTC
 
 DTC -u-|> Command
 DTC -[hidden]right UC
