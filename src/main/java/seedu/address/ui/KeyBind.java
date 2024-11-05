@@ -12,11 +12,10 @@ import javafx.scene.input.KeyEvent;
  * Allows optional conditions for triggering the action.
  */
 public class KeyBind {
+    private static final Logger logger = Logger.getLogger(KeyBind.class.getName());
     private final KeyCode code;
     private final Runnable action;
     private final Predicate<KeyEvent> condition;
-
-    private static final Logger logger = Logger.getLogger( KeyBind.class.getName() );
 
 
     /**

@@ -28,13 +28,13 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    private static final Logger logger = Logger.getLogger(AddCommandParser.class.getName());
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private static final Logger logger = Logger.getLogger( AddCommandParser.class.getName() );
-
     public AddCommand parse(String args) throws ParseException {
         logger.log(Level.FINE, "Parsing AddCommand");
         ArgumentMultimap argMultimap =

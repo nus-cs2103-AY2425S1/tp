@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -9,21 +12,16 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Manages key bindings and their actions within the application's user interface components.
  */
 public class KeyBindController {
+    private static final Logger logger = Logger.getLogger(KeyBindController.class.getName());
     private CommandBox commandBox;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
 
     private TextField textField;
-
-    private static final Logger logger = Logger.getLogger( KeyBindController.class.getName() );
-
     /**
      * Initializes the KeyBindController with UI components to be managed.
      */
