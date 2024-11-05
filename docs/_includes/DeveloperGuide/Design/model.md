@@ -20,6 +20,8 @@ The  `AddressBookModel` component:
 
 **API** : [`TransactionBookModel.java`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/transaction/model/TransactionBookModel.java)
 
+<img src="images/TransactionModelClassDiagram.png" width="450" />
+
 - stores the transaction book data i.e., all `Transaction` objects (which are contained in a `ObservableList<Transaction>` object).
 - stores the currently 'selected' `Transaction` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Transaction>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
