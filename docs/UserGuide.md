@@ -60,10 +60,13 @@ Sellsavvy is a **desktop app for managing contacts, optimized for use via a Comm
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listcustomer`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* Command aliases are alternative words you can use to execute the same command for convenience.<br>
+  e.g. `listcustomer` has the same function as `listc`
 </box>
 
 ### Viewing help : `help`
@@ -75,11 +78,12 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `addcustomer`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Command aliases: `addc`
+Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -87,20 +91,22 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons : `listcustomer`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Command aliases: `listc`
+Format: `listcustomer`
 
-### Editing a person : `edit`
+### Editing a person : `editcustomer`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Command aliases: `editc`
+Format: `editcustomer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -110,14 +116,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editcustomer 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `findcustomer`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Command aliases: `findc`
+Format: `findcustomer KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -127,29 +134,31 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findcustomer John` returns `john` and `John Doe`
+* `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `deletecustomer`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Command aliases: `deletec`
+Format: `deletecustomer INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `listcustomer` followed by `deletecustomer 2` deletes the 2nd person in the address book.
+* `findcustomer Betsy` followed by `deletec 1` deletes the 1st person in the results of the `find` command.
 
-### Adding an order under a Person : `addOrder`
+### Adding an order under a Person : `addorder`
 
 Adds an order under a specified person from the address book.
 
-Format: `addOrder INDEX i/ITEM d/DATE [q/QUANTITY]`
+Command aliases: `addo`
+Format: `addorder INDEX i/ITEM d/DATE [q/QUANTITY]`
 
 * Add an order under the person at the specified `INDEX`, with a default `pending` status.
 * The index refers to the index number shown in the displayed person list.
@@ -160,29 +169,31 @@ Format: `addOrder INDEX i/ITEM d/DATE [q/QUANTITY]`
 * If the order `DATE` has elapsed the current date, a warning will be given.
 
 Examples:
-* `addOrder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
-* `addOrder 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
-* `find Betsy` followed by `addOrder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st person in the results of the `find` command.
+* `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
+* `addo 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
+* `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st person in the results of the `find` command.
 
-### Listing all orders under a Person : `listOrder`
+### Listing all orders under a Person : `listorder`
 
 List all orders of a specified person from the address book.
 
-Format: `listOrder INDEX`
+Command aliases: `listo`
+Format: `listorder INDEX`
 
 * List all orders of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `listOrder 2` lists all orders of the 2nd person in the address book.
-* `find Betsy` followed by `listOrder 1` lists all orders of the 1st person from the list of persons found with "Betsy".
+* `listcustomer` followed by `listorder 2` lists all orders of the 2nd person in the address book.
+* `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st person from the list of persons found with "Betsy".
 
-### Deleting an order under a Person : `deleteOrder`
+### Deleting an order under a Person : `deleteorder`
 
 Deletes an order from the selected person's displayed order list.
 
-Format: `deleteOrder ORDER_INDEX`
+Command aliases: `deleteo`
+Format: `deleteorder ORDER_INDEX`
 
 * A person's order list must first be displayed before deleting an order from that person.
 * Deletes an order under the selected person at the specified `ORDER_INDEX`.
@@ -190,14 +201,15 @@ Format: `deleteOrder ORDER_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deleteOrder 1` deletes the order with index 1 from the selected person.
-* `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
+* `deleteorder 1` deletes the order with index 1 from the selected person.
+* `listorder 1` followed by `deleteo 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
 
-### Editing an order : `editOrder`
+### Editing an order : `editorder`
 
 Edits an order from the selected person's displayed order list.
 
-Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`
+Command aliases: `edito`
+Format: `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`
 
 * A person's order list must first be displayed before editing an order from that person.
 * Edits the order at the specified `ORDER_INDEX`. The order index refers to the index number shown in the displayed order list.
@@ -209,15 +221,16 @@ Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`
 * If the order `DATE` has elapsed the current date, a warning will be given.
 
 Examples:
-*  `editOrder 1 i/Light bulb d/21-11-2025` edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
-*  `editOrder 2 q/22` edits the quantity of the 2nd order to be `22`.
-*  `listOrder 1` followed by `editOrder 3 i/Wallet` selects the 1st person in the address book and edits the item of the 3rd order under the 1st person to be `Wallet`.
+*  `editorder 1 i/Light bulb d/21-11-2025` edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
+*  `edito 2 q/22` edits the quantity of the 2nd order to be `22`.
+*  `listorder 1` followed by `editorder 3 i/Wallet` selects the 1st person in the address book and edits the item of the 3rd order under the 1st person to be `Wallet`.
 
-### Mark an order as completed : `markOrder`
+### Mark an order as completed : `markorder`
 
 Marks an order from the selected person's displayed order list as completed.
 
-Format: `markOrder ORDER_INDEX`
+Command aliases: `marko`
+Format: `markorder ORDER_INDEX`
 
 * A person's order list must first be displayed before marking an order from that person.
 * Marks a pending order under the selected person at the specified `ORDER_INDEX` as completed.
@@ -225,14 +238,15 @@ Format: `markOrder ORDER_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `markOrder 1` marks the order with index 1 from the displayed order list as completed.
-* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
+* `markorder 1` marks the order with index 1 from the displayed order list as completed.
+* `listorder 1` followed by `marko 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
 
-### Reverts an order to pending status : `unmarkOrder`
+### Reverts an order to pending status : `unmarkorder`
 
 Reverts an order from the selected person's displayed order list to pending.
 
-Format: `unmarkOrder ORDER_INDEX`
+Command aliases: `unmarko`
+Format: `unmarkorder ORDER_INDEX`
 
 * A person's order list must first be displayed before unmarking an order from that person.
 * Reverts a completed order under the selected person at the specified `ORDER_INDEX` to pending.
@@ -240,14 +254,15 @@ Format: `unmarkOrder ORDER_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unmarkOrder 1` reverts the order with index 1 from the displayed order list to pending.
-* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and reverts the 2nd order under the 1st person to pending.
+* `unmarkorder 1` reverts the order with index 1 from the displayed order list to pending.
+* `listorder 1` followed by `unmarko 2` selects the 1st person in the address book and reverts the 2nd order under the 1st person to pending.
 
-### Filter orders by order status : `filterOrder`
+### Filter orders by order status : `filterorder`
 
 Filters orders by the specified order status, under a selected person from their displayed order list.
 
-Format: `filterOrder ORDER_STATUS`
+Command aliases: `filtero`
+Format: `filterorder ORDER_STATUS`
 
 * A person's order list must first be displayed before filtering their order list.
 * Filters the selected person's order list for orders that match the `ORDER_STATUS`.
@@ -255,8 +270,8 @@ Format: `filterOrder ORDER_STATUS`
 * `ORDER_STATUS` is case-insensitive. e.g. `completed` is the same as `Completed`.
 
 Examples:
-* `filterOrder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected person being displayed.
-* `listOrder 1` followed by `filterOrder completed` displays the list of all completed orders under the 1st person in the address book.
+* `filterorder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected person being displayed.
+* `listorder 1` followed by `filtero completed` displays the list of all completed orders under the 1st person in the address book.
   ![result for filtering completed order'](images/filterCompletedOrders.png)
 
 ### Clearing all entries : `clear`
@@ -308,19 +323,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                                | Format, Examples                                                                                                                                                    |
-|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a person**                      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**                             | `clear`                                                                                                                                                             |
-| **Delete a person**                   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
-| **Edit a person**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                                         |
-| **Find person(s)**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                           |
-| **List all persons**                  | `list`                                                                                                                                                              |
-| **Add an order**                      | `addOrder INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addOrder 2 i/Lamp d/20-11-2024 q/3`                                                                           |
-| **List all orders**                   | `listOrder INDEX`<br> e.g. `listOrder 3`                                                                                                                            |
-| **Delete an order**                   | `deleteOrder ORDER_INDEX`<br> e.g. `deleteOrder 2`                                                                                                                  |
-| **Edit an order**                     | `edit ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> `editOrder 1 i/Light bulb d/21-11-2025`                                                                      |
-| **Mark an order as completed**        | `markOrder ORDER_INDEX`<br> e.g. `markOrder 2`                                                                                                                      |                                                                                                                                                                                                                                           
-| **Revert an order to pending status** | `unmarkOrder ORDER_INDEX`<br> e.g., `unmarkOrder 2`                                                                                                                 |
-| **Filter orders by status**           | `filterOrder ORDER_STATUS`<br> e.g. `filterOrder Completed`                                                                                                         |
-| **Help**                              | `help`                                                                                                                                                              |
+| Action                                | Command                     | Format and Examples                                                                                                                                                                 |
+|---------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add a person**                      | `addcustomer`, `addc`       | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `addcustomer n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**                             | `clear`                     |                                                                                                                                                                                     |
+| **Delete a person**                   | `deletecustomer`, `deletec` | `deletecustomer INDEX`<br> e.g., `deletecustomer 3`                                                                                                                                 |
+| **Edit a person**                     | `editcustomer`, `editc`     | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find person(s)**                    | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
+| **List all persons**                  | `listcustomer`, `listc`     |                                                                                                                                                                                     |
+| **Add an order**                      | `addorder`, `addo`          | `addorder INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                           |
+| **List all orders**                   | `listorder`, `listo`        | `listorder INDEX`<br> e.g. `listorder 3`                                                                                                                                            |
+| **Delete an order**                   | `deleteorder`, `deleteo`    | `deleteorder ORDER_INDEX`<br> e.g. `deleteorder 2`                                                                                                                                  |
+| **Edit an order**                     | `editorder`, `edito`        | `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> e.g. `editorder 1 i/Light bulb d/21-11-2025`                                                                            |
+| **Mark an order as completed**        | `markorder`, `marko`        | `markorder ORDER_INDEX`<br> e.g. `markorder 2`                                                                                                                                      |                                                                                                                                                                                                                                           
+| **Revert an order to pending status** | `unmarkorder`, `unmarko`    | `unmarkorder ORDER_INDEX`<br> e.g., `unmarkorder 2`                                                                                                                                 |
+| **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
+| **Help**                              | `help`                      |                                                                                                                                                                                     |
+| **Exit**                              | `exit`                       |                                                                                                                                                                                     |
