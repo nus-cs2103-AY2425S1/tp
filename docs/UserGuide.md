@@ -22,6 +22,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
     - [Adding a person: `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons-list)
     - [Editing a person : `edit`](#editing-a-person-edit)
+    - [Grading a person : `grade`](#grading-a-person-grade)
     - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
     - [Adding a module to a student: `module`](#adding-a-module-to-a-student-module)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
@@ -174,11 +175,27 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-
 Examples:
 *  To edit the module CS2103T to CS2101 of a student with ID 12345678, type  `edit 12345678 m/CS2103T CS2101` utilizing the `m/` prefix for modules
 *  To edit the course of a student with ID 12121212 to Computer Science type `edit 12121212 c/Computer Science`
    ![result for 'edit command result'](images/editCommandResult.png)
+
+### Adding a grade : `grade`
+
+Adds a grade to a person's module
+
+```bash
+grade ID m/MODULE g/GRADE
+```
+
+* Adds a grade to a person according to the specified ID and Module
+* Module specified must exist prior to execution grade command
+* Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
+* Existing grade will be updated to the input grade
+
+Examples:
+* `grade 23876767 m/CS2103T g/A` will assign an A grade to the CS2103T module of a Person whose ID is 23876767
+
 ### Listing students by certain attributes : `filter`
 
 Filter students based on their Names, Courses and Modules.
@@ -345,6 +362,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
+**Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
 **Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
 **Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
 **Find**   | `find ID`<br> e.g., `find 12345678`
