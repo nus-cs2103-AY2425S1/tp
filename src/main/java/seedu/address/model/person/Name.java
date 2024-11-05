@@ -56,7 +56,8 @@ public class Name implements Comparable<Name> {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.replaceAll("\\s+", "")
+                .equalsIgnoreCase(otherName.fullName.replaceAll("\\s+", ""));
     }
 
     @Override
