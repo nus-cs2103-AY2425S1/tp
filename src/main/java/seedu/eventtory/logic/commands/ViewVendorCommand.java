@@ -2,6 +2,7 @@ package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_VENDOR;
+import static seedu.eventtory.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
@@ -9,7 +10,6 @@ import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.logic.commands.util.IndexResolverUtil;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.vendor.Vendor;
-import seedu.eventtory.ui.UiState;
 
 /**
  * Display details of a vendor in EventTory to the user.
@@ -33,7 +33,7 @@ public class ViewVendorCommand extends ViewCommand {
         Vendor vendorToView = IndexResolverUtil.resolveVendor(model, targetIndex);
 
         model.viewVendor(vendorToView);
-        model.setUiState(UiState.VENDOR_DETAILS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(vendorToView)));
     }

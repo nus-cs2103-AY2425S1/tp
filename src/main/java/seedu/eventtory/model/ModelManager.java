@@ -2,6 +2,7 @@ package seedu.eventtory.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.eventtory.model.util.PredicateBuilder.combinePredicates;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -35,6 +36,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final ObjectProperty<Event> selectedEvent;
     private final ObjectProperty<UiState> currentUiState;
+    private final ObjectProperty<Predicate<Vendor>> suppliedVendorFilterPredicate;
+    private final ObjectProperty<Predicate<Event>> suppliedEventFilterPredicate;
     private final ObservableIntegerValue startIndexOfAssignedVendors;
     private final ObservableIntegerValue startIndexOfAssignedEvents;
 
@@ -53,6 +56,8 @@ public class ModelManager implements Model {
         selectedVendor = new SimpleObjectProperty<>(null);
         selectedEvent = new SimpleObjectProperty<>(null);
         currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
+        suppliedVendorFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_VENDORS);
+        suppliedEventFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_EVENTS);
         // one-based index
         startIndexOfAssignedEvents = Bindings.createIntegerBinding(() -> {
             return filteredEvents.size() + 1;
@@ -173,12 +178,14 @@ public class ModelManager implements Model {
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
         eventTory.assignVendorToEvent(vendor, event);
+        applyFiltersBasedOnUiState();
     }
 
     @Override
     public void unassignVendorFromEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
         eventTory.unassignVendorFromEvent(vendor, event);
+        applyFiltersBasedOnUiState();
     }
 
     @Override
@@ -212,7 +219,8 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredVendorList(Predicate<Vendor> predicate) {
         requireNonNull(predicate);
-        filteredVendors.setPredicate(predicate);
+        suppliedVendorFilterPredicate.setValue(predicate);
+        applyFiltersBasedOnUiState();
     }
 
     @Override
@@ -234,7 +242,8 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
-        filteredEvents.setPredicate(predicate);
+        suppliedEventFilterPredicate.setValue(predicate);
+        applyFiltersBasedOnUiState();
     }
 
     @Override
@@ -259,6 +268,37 @@ public class ModelManager implements Model {
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
+    // =========== Association Filters =============================================================
+    private void applyFiltersBasedOnUiState() {
+        Predicate<Vendor> vendorPredicate = evaluateVendorPredicate();
+        Predicate<Event> eventPredicate = evaluateEventPredicate();
+
+        filteredVendors.setPredicate(vendorPredicate);
+        filteredEvents.setPredicate(eventPredicate);
+    }
+
+    private Predicate<Vendor> evaluateVendorPredicate() {
+        if (currentUiState.getValue() == UiState.EVENT_DETAILS) {
+            Predicate<Vendor> notAssociatedPredicate = vendor -> {
+                Event event = selectedEvent.getValue();
+                return event != null && !isVendorAssignedToEvent(vendor, event);
+            };
+            return combinePredicates(notAssociatedPredicate, suppliedVendorFilterPredicate.getValue());
+        }
+        return suppliedVendorFilterPredicate.getValue();
+    }
+
+    private Predicate<Event> evaluateEventPredicate() {
+        if (currentUiState.getValue() == UiState.VENDOR_DETAILS) {
+            Predicate<Event> notAssociatedPredicate = event -> {
+                Vendor vendor = selectedVendor.getValue();
+                return vendor != null && !isVendorAssignedToEvent(vendor, event);
+            };
+            return combinePredicates(notAssociatedPredicate, suppliedEventFilterPredicate.getValue());
+        }
+        return suppliedEventFilterPredicate.getValue();
+    }
+
     // =========== Viewed Vendor Accessors =============================================================
 
     @Override
@@ -270,6 +310,8 @@ public class ModelManager implements Model {
     public void viewVendor(Vendor vendor) {
         requireNonNull(vendor);
         selectedVendor.setValue(vendor);
+        currentUiState.setValue(UiState.VENDOR_DETAILS);
+        applyFiltersBasedOnUiState();
     }
 
     // =========== Viewed Events Accessors =============================================================
@@ -283,6 +325,8 @@ public class ModelManager implements Model {
     public void viewEvent(Event event) {
         requireNonNull(event);
         selectedEvent.setValue(event);
+        currentUiState.setValue(UiState.EVENT_DETAILS);
+        applyFiltersBasedOnUiState();
     }
 
     // =========== UI State Accessors =============================================================
@@ -294,7 +338,14 @@ public class ModelManager implements Model {
     @Override
     public void setUiState(UiState uiState) {
         requireNonNull(uiState);
-        currentUiState.setValue(uiState);
+        switch (uiState) {
+        case EVENT_DETAILS:
+        case VENDOR_DETAILS:
+            assert false : "UiState should not be set to EVENT_DETAILS or VENDOR_DETAILS directly";
+            break;
+        default:
+            currentUiState.setValue(uiState);
+            applyFiltersBasedOnUiState();
+        }
     }
-
 }

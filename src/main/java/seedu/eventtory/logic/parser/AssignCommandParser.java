@@ -42,4 +42,3 @@ public class AssignCommandParser implements Parser<AssignCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
-

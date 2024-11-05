@@ -138,10 +138,11 @@ public class ModelManagerTest {
             observedState.set(newValue);
         });
 
-        modelManager.setUiState(UiState.EVENT_DETAILS);
+        // Set new UI to view using dummy event and vendor
+        modelManager.viewEvent(WEDDING);
         assertEquals(UiState.EVENT_DETAILS, observedState.get());
 
-        modelManager.setUiState(UiState.VENDOR_DETAILS);
+        modelManager.viewVendor(ALICE);
         assertEquals(UiState.VENDOR_DETAILS, observedState.get());
     }
 
@@ -282,6 +283,31 @@ public class ModelManagerTest {
         modelManager.addVendor(TypicalVendors.HOON);
 
         assertEquals(2, modelManager.getStartingIndexOfAssignedVendors().get());
+    }
+
+    @Test
+    public void testSetUiStateValidStates() {
+        modelManager.setUiState(UiState.DEFAULT);
+        assertEquals(UiState.DEFAULT, modelManager.getUiState().get());
+
+        // Test with VENDOR_LIST state
+        modelManager.setUiState(UiState.VENDOR_LIST);
+        assertEquals(UiState.VENDOR_LIST, modelManager.getUiState().get());
+
+        // Test with EVENT_LIST state
+        modelManager.setUiState(UiState.EVENT_LIST);
+        assertEquals(UiState.EVENT_LIST, modelManager.getUiState().get());
+    }
+
+    @Test
+    public void testSetUiStateInvalidStates() {
+        assertThrows(AssertionError.class, () -> {
+            modelManager.setUiState(UiState.EVENT_DETAILS);
+        });
+
+        assertThrows(AssertionError.class, () -> {
+            modelManager.setUiState(UiState.VENDOR_DETAILS);
+        });
     }
 
     @Test

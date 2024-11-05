@@ -111,10 +111,11 @@ public class LogicManagerTest {
             observedState.set(newValue);
         });
 
-        model.setUiState(UiState.EVENT_DETAILS);
+        // Set new UI to view using dummy event and vendor
+        model.viewEvent(TypicalEvents.BIRTHDAY);
         assertEquals(UiState.EVENT_DETAILS, observedState.get());
 
-        model.setUiState(UiState.VENDOR_DETAILS);
+        model.viewVendor(TypicalVendors.AMY);
         assertEquals(UiState.VENDOR_DETAILS, observedState.get());
     }
 
