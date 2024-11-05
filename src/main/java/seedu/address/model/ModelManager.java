@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private final ObservableList<Reminder> originalReminders;
     private final FilteredList<Reminder> filteredReminders;
+    private final SortedList<Reminder> sortedReminders;
 
 
     /**
@@ -44,12 +45,13 @@ public class ModelManager implements Model {
         this.originalPersons = this.clientHub.getPersonList();
         this.filteredPersons = new FilteredList<>(originalPersons);
         this.sortedPersons = new SortedList<>(filteredPersons);
+
         this.originalReminders = this.clientHub.getReminderList();
         this.filteredReminders = new FilteredList<>(originalReminders);
-
+        this.sortedReminders = new SortedList<>(filteredReminders);
 
         filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-        filteredReminders.setPredicate(PREDICATE_SHOW_ALL_REMINDERS);
+        updateFilteredReminderList();
     }
 
     public ModelManager() {
@@ -134,7 +136,7 @@ public class ModelManager implements Model {
     @Override
     public void addReminder(Reminder reminder) {
         clientHub.addReminder(reminder);
-        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        updateFilteredReminderList();
     }
 
     @Override
@@ -172,7 +174,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Reminder> getDisplayReminders() {
-        return filteredReminders;
+        return sortedReminders;
     }
 
     //=========== Unfiltered Person List Accessors =============================================================
@@ -209,9 +211,12 @@ public class ModelManager implements Model {
     //=========== Filtered Reminder List Accessors =============================================================
 
     @Override
-    public void updateFilteredReminderList(Predicate<Reminder> predicate) {
-        requireNonNull(predicate);
-        filteredReminders.setPredicate(predicate);
+    public void updateFilteredReminderList() {
+        filteredReminders.setPredicate(PREDICATE_SHOW_ALL_REMINDERS);
+
+        Comparator<Reminder> reminderComparator = Comparator.comparing(Reminder::getDateTime);
+
+        sortedReminders.setComparator(reminderComparator);
     }
 
     //=========== Sorted Person List Accessors =============================================================
