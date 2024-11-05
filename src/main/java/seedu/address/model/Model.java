@@ -80,6 +80,11 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Clears all persons from the address book and associated appointments in the calendar.
+     */
+    void clearAddressBook();
+
+    /**
      * Checks if a person with the same identity as {@code person} exists in the address book.
      *
      * @param person The person to check.

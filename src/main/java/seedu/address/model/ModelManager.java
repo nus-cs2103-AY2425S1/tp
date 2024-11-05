@@ -165,6 +165,15 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Clears all persons from the address book and removes all appointments from the calendar.
+     */
+    @Override
+    public void clearAddressBook() {
+        addressBook.clear();
+        calendar.clearAppointments();
+    }
+
+    /**
      * Checks if the specified person exists in the address book.
      *
      * @param person The person to check.

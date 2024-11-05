@@ -67,6 +67,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         setOperatingHours(newData.getOperatingHours());
     }
 
+    /**
+     * Clears all person entries from the address book.
+     */
+    public void clear() {
+        persons.clear();
+    }
+
     //// person-level operations
 
     /**

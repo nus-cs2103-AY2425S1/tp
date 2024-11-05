@@ -249,6 +249,12 @@ public class AddCommandTest {
             // Return an empty string or default message
             return "";
         }
+
+        @Override
+        public void clearAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
