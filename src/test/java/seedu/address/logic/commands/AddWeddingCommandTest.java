@@ -270,7 +270,7 @@ public class AddWeddingCommandTest {
         }
 
         @Override
-        public void getWeddingFromTags(Set<Tag> tags) {
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
     }
