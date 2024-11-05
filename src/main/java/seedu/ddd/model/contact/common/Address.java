@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.ddd.commons.util.AppUtil;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a {@code Contact}'s address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
