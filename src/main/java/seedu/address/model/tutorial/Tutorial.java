@@ -22,7 +22,8 @@ public class Tutorial {
      */
     public Tutorial(String subject) {
         requireAllNonNull(subject);
-        assert isValidTutorial(subject) : "Invalid tutorial name; should only contain alphanumeric characters and spaces.";
+        assert isValidTutorial(subject)
+                : "Invalid tutorial name; should only contain alphanumeric characters and spaces.";
 
         this.subject = subject;
     }

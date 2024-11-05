@@ -63,6 +63,12 @@ public class Participation {
         assert tutorial.getSubject() != null : "Tutorial subject should never be null";
         return tutorial.getSubject();
     }
+
+    /**
+     * Checks if participation list input is valid.
+     * @param test the participation list to test.
+     * @return boolean for whether the participation list is valid.
+     */
     public static Boolean isValidParticipationList(String test) {
         assert test != null : "Test string for participation list validation should not be null";
         return test.matches(VALIDATION_REGEX);
