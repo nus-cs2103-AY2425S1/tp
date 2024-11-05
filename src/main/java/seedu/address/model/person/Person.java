@@ -163,8 +163,15 @@ public class Person implements Appointmentable {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
+                && normalizeName(otherPerson.getName()).equals(normalizeName(getName()))
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+    }
+
+    /**
+     * Normalizes a name by converting it to lowercase and removing all spaces.
+     */
+    private String normalizeName(Name name) {
+        return name.toString().toLowerCase().replaceAll("\\s+", "");
     }
 
     /**

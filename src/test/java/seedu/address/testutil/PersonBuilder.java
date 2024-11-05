@@ -19,8 +19,8 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Beeee";
     public static final int DEFAULT_ID = 12;
-    public static final String DEFAULT_PATIENT_ROLE = "patient";
-    public static final String DEFAULT_DOCTOR_ROLE = "doctor";
+    public static final String DEFAULT_PATIENT_ROLE = "PATIENT";
+    public static final String DEFAULT_DOCTOR_ROLE = "DOCTOR";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";

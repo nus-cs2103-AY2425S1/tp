@@ -85,6 +85,10 @@ public class CreateDoctorCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public String getPersonRole(Person person) {
+            return "DOCTOR";
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {

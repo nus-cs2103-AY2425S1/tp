@@ -20,7 +20,7 @@ public class AddRemarksCommand extends Command {
 
     public static final String COMMAND_WORD = "addR";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds remarks to the patient."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds remarks to the patient. "
             + "Existing remarks will be concatenated by the input.\n"
             + COMMAND_WORD + " "
             + PREFIX_ID + "[PATIENT_ID] "
@@ -31,8 +31,10 @@ public class AddRemarksCommand extends Command {
 
     public static final String MESSAGE_ADD_REMARKS_SUCCESS = "Successfully "
             + "added remarks: '%s' to patient of ID: %d.";
-    public static final String MESSAGE_ADD_NOTES_FAILURE = "Unable to "
+    public static final String MESSAGE_ADD_REMARKS_FAILURE = "Unable to "
             + "add remarks! Check the id entered!";
+    public static final String MESSAGE_WRONG_ROLE = "Unable to add remarks for a doctor.\n"
+            + " Please check the id of the person you are adding remarks to!";
     private final int patientId;
     private final Remark additionalRemarks;
 
@@ -54,7 +56,10 @@ public class AddRemarksCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person patientToAddRemarks = model.getFilteredPatientById(allPersons, patientId);
         if (patientToAddRemarks == null) {
-            throw new CommandException(MESSAGE_ADD_NOTES_FAILURE);
+            throw new CommandException(MESSAGE_ADD_REMARKS_FAILURE);
+        }
+        if (patientToAddRemarks.getRole().equals("DOCTOR")) {
+            throw new CommandException(MESSAGE_WRONG_ROLE);
         }
         Person editedPatient = new Person(patientToAddRemarks.getName(),
                 patientToAddRemarks.getId(), patientToAddRemarks.getRole(), patientToAddRemarks.getPhone(),
