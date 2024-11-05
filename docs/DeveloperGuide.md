@@ -275,7 +275,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage patients and appointments faster than a typical mouse/GUI driven app
+**Value proposition**: Our app empowers doctors to focus on what matters most-their patients-by automating laborious administrative tasks. From managing patient records, appointment, and priorities to tracking medical conditions and allergies, Medibase3 stores and manages all vital information into one accessible application.
 
 
 [Back to Table of Contents](#table-of-contents)
