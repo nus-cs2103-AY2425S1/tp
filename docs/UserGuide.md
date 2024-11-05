@@ -67,7 +67,7 @@ Documentation style conventions are based on [Google's guide](https://developers
   {FILE_1|FILE_2}
 
 * `WEDDING_DATE` parameter will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
-  e.g. `MM/dd/yyyy`: 10/13/2024m; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
+  e.g. `MM/dd/yyyy`: 10/13/2024; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `t/TAG…​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
