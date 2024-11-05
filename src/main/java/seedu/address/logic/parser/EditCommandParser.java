@@ -21,7 +21,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.role.Role;
 
 /**
- * Parses input arguments and creates a new {@link EditCommand} object
+ * Parses input arguments and creates a new {@link EditCommand} object.
  */
 public class EditCommandParser implements Parser<EditCommand> {
 

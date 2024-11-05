@@ -11,7 +11,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 
 /**
- * Parses input arguments and creates a new AddEventCommand object
+ * Parses input arguments and creates a new AddEventCommand object.
  */
 public class AddEventCommandParser implements Parser<AddEventCommand> {
     /**
