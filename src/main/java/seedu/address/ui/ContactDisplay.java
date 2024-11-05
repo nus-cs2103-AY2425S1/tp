@@ -98,6 +98,8 @@ public class ContactDisplay extends UiPart<Region> {
      */
     @FXML void initialize() {
         helpLabel.setText(CONDENSED_HELP_MESSAGE);
+        checkIsNullCategory();
+        checkIsNullTags();
     }
 
     /**
@@ -166,14 +168,16 @@ public class ContactDisplay extends UiPart<Region> {
      * Clears the contact details, resetting the labels to their default placeholders.
      */
     public void clear() {
-        nameLabel.setText("Name:");
+        nameLabel.setText(null);
         categoryLabel.setText(null);
-        industryStudentIdLabel.setText("");
-        phoneLabel.setText("Phone:");
-        emailLabel.setText("Email:");
-        addressLabel.setText("Address:");
+        industryStudentIdLabel.setText(null);
+        phoneLabel.setText(null);
+        emailLabel.setText(null);
+        addressLabel.setText(null);
         tags.getChildren().clear();
         helpLabel.setText(null);
+        checkIsNullCategory();
+        checkIsNullTags();
     }
 
     /**
@@ -241,6 +245,39 @@ public class ContactDisplay extends UiPart<Region> {
 
     public Label getAddressLabel() {
         return addressLabel;
+    }
+
+    /**
+     * Removes the background colour of the category label if it is null.
+     */
+    public void checkIsNullCategory() {
+        categoryLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isEmpty()) {
+                categoryLabel.getStyleClass().remove("with-background");
+            } else {
+                if (!categoryLabel.getStyleClass().contains("with-background")) {
+                    categoryLabel.getStyleClass().add("with-background");
+                }
+            }
+        });
+    }
+
+    /**
+     * Removes the background colour of the tags flowpane if it is null.
+     */
+    public void checkIsNullTags() {
+        for (javafx.scene.Node node : tags.getChildren()) {
+            if (node instanceof Label tagLabel) {
+                String text = tagLabel.getText();
+                if (text == null || text.isEmpty()) {
+                    tagLabel.getStyleClass().remove("with-background");
+                } else {
+                    if (!tagLabel.getStyleClass().contains("with-background")) {
+                        tagLabel.getStyleClass().add("with-background");
+                    }
+                }
+            }
+        }
     }
 
 

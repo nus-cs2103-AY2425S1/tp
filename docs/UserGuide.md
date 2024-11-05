@@ -30,7 +30,7 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
         * [Deleting tag(s) from contact: `deletetag`](#deleting-tags-from-contact-deletetag)
     * [File Operations](#file-operations)
         * [Importing CSV files: `import`](#importing-csv-files-import)
-        * [Exporting CSV files: `export`](#exporting-csv-files)
+        * [Exporting CSV files: `export`](#exporting-csv-files-export)
       
 ---
 
@@ -374,7 +374,7 @@ Troubleshooting:
 * If you receive an error indicating that the file is not found, double-check the file path and ensure that the CSV file exists in the specified location.
 * If the CSV is not properly formatted, importing may fail. Make sure the file follows the standard CSV format (e.g., no extra commas).
 
-#### Exporting CSV Files
+#### Exporting CSV Files: `export`
 Export data to a CSV file, use the export command followed by the desired path and filename for your CSV. This command allows you to save the current data in a structured format that can be easily shared or used by other applications.
 
 Format: `export /path/to/data/File.csv`
