@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.ListChangeListener;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
@@ -22,6 +24,8 @@ import seedu.address.model.tutorial.Tutorial;
 public class Dashboard extends UiPart<Region> {
 
     private static final String FXML = "Dashboard.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private final ObservableList<Person> personList;
     private final ObservableList<Participation> participationList;
@@ -54,6 +58,8 @@ public class Dashboard extends UiPart<Region> {
         updateStudentSummary();
         addParticipationListListener();
         addTutorialListListener();
+
+        logger.info("Successfully created Dashboard");
     }
 
 
