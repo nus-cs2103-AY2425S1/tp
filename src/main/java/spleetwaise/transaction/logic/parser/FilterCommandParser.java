@@ -7,6 +7,8 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.ArrayList;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
@@ -18,10 +20,16 @@ import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.model.FilterCommandPredicate;
+import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Parses input arguments and creates a new transaction FilterCommand object.
@@ -52,35 +60,37 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS);
 
-        Person person = null;
+        ArrayList<Predicate<Transaction>> filterSubPredicates = new ArrayList<>();
+
         if (!argMultimap.getPreamble().isEmpty()) {
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            person = ParserUtil.getPersonByFilteredPersonListIndex(index);
+            Person person = ParserUtil.getPersonByFilteredPersonListIndex(index);
+            filterSubPredicates.add(new PersonFilterPredicate(person));
         }
 
-        Amount amount = null;
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
-            amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+            Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+            filterSubPredicates.add(new AmountFilterPredicate(amount));
         }
 
-        Description description = null;
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            filterSubPredicates.add(new DescriptionFilterPredicate(description));
         }
 
-        Date date = null;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            filterSubPredicates.add(new DateFilterPredicate(date));
         }
 
-        Status status = null;
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            filterSubPredicates.add(new StatusFilterPredicate(status));
         }
 
-        assert person != null || amount != null || description != null || date != null || status != null;
+        assert !filterSubPredicates.isEmpty();
 
-        FilterCommandPredicate filterPredicate = new FilterCommandPredicate(person, amount, description, date, status);
+        FilterCommandPredicate filterPredicate = new FilterCommandPredicate(filterSubPredicates);
 
         return new FilterCommand(filterPredicate);
     }

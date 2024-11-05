@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,10 +23,16 @@ import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
+import spleetwaise.transaction.model.filterpredicate.AmountFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.DateFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.PersonFilterPredicate;
+import spleetwaise.transaction.model.filterpredicate.StatusFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Status;
+import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class FilterCommandTest {
@@ -33,6 +42,11 @@ public class FilterCommandTest {
     private static final Description testDescription = TypicalTransactions.SEANOWESME.getDescription();
     private static final Date testDate = TypicalTransactions.SEANOWESME.getDate();
     private static final Status testStatus = TypicalTransactions.SEANOWESME.getStatus();
+    private static final Predicate<Transaction> testPersonPred = new PersonFilterPredicate(testPerson);
+    private static final Predicate<Transaction> testAmountPred = new AmountFilterPredicate(testAmount);
+    private static final Predicate<Transaction> testDescriptionPred = new DescriptionFilterPredicate(testDescription);
+    private static final Predicate<Transaction> testDatePred = new DateFilterPredicate(testDate);
+    private static final Predicate<Transaction> testStatusPred = new StatusFilterPredicate(testStatus);
     private static final AddressBookModel abModel = new AddressBookModelManager();
     private static final TransactionBookModel txnModel = new TransactionBookModelManager();
 
@@ -57,8 +71,14 @@ public class FilterCommandTest {
 
     @Test
     public void execute_allParams_success() {
-        FilterCommandPredicate pred = new FilterCommandPredicate(testPerson, testAmount, testDescription,
-                testDate, testStatus);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        subPredicates.add(testAmountPred);
+        subPredicates.add(testDescriptionPred);
+        subPredicates.add(testDatePred);
+        subPredicates.add(testStatusPred);
+        FilterCommandPredicate pred = new FilterCommandPredicate(subPredicates);
+
         FilterCommand cmd = new FilterCommand(pred);
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
@@ -70,10 +90,16 @@ public class FilterCommandTest {
 
     @Test
     public void equals_sameTransaction_returnsTrue() {
-        FilterCommandPredicate pred1 = new FilterCommandPredicate(testPerson, testAmount, testDescription,
-                testDate, testStatus);
-        FilterCommandPredicate pred2 = new FilterCommandPredicate(testPerson, testAmount, testDescription,
-                testDate, testStatus);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        subPredicates.add(testAmountPred);
+        FilterCommandPredicate pred1 = new FilterCommandPredicate(subPredicates);
+
+        ArrayList<Predicate<Transaction>> subPredicates2 = new ArrayList<>();
+        subPredicates2.add(testPersonPred);
+        subPredicates2.add(testAmountPred);
+        FilterCommandPredicate pred2 = new FilterCommandPredicate(subPredicates2);
+
         FilterCommand cmd1 = new FilterCommand(pred1);
         FilterCommand cmd2 = new FilterCommand(pred1);
         FilterCommand cmd3 = new FilterCommand(pred2);
@@ -85,8 +111,12 @@ public class FilterCommandTest {
 
     @Test
     public void equals_diffTransaction_returnsFalse() {
-        FilterCommandPredicate pred1 = new FilterCommandPredicate(testPerson, null, null, null, null);
-        FilterCommandPredicate pred2 = new FilterCommandPredicate(null, testAmount, null, null, null);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        FilterCommandPredicate pred1 = new FilterCommandPredicate(subPredicates);
+        ArrayList<Predicate<Transaction>> subPredicates2 = new ArrayList<>();
+        subPredicates2.add(testDescriptionPred);
+        FilterCommandPredicate pred2 = new FilterCommandPredicate(subPredicates2);
         FilterCommand cmd1 = new FilterCommand(pred1);
         FilterCommand cmd2 = new FilterCommand(pred2);
 
@@ -95,8 +125,9 @@ public class FilterCommandTest {
 
     @Test
     public void equals_genericObject_returnsFalse() {
-        FilterCommandPredicate pred = new FilterCommandPredicate(testPerson, testAmount, testDescription,
-                testDate, testStatus);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        FilterCommandPredicate pred = new FilterCommandPredicate(subPredicates);
         FilterCommand cmd = new FilterCommand(pred);
 
         assertNotEquals(new Object(), cmd);
@@ -104,8 +135,9 @@ public class FilterCommandTest {
 
     @Test
     public void equals_null_returnsFalse() {
-        FilterCommandPredicate pred = new FilterCommandPredicate(testPerson, testAmount, testDescription,
-                testDate, testStatus);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testPersonPred);
+        FilterCommandPredicate pred = new FilterCommandPredicate(subPredicates);
         FilterCommand cmd = new FilterCommand(pred);
 
         assertNotEquals(null, cmd);
@@ -113,12 +145,14 @@ public class FilterCommandTest {
 
     @Test
     public void toString_success() {
-        FilterCommandPredicate pred = new FilterCommandPredicate(null, null, testDescription, null, null);
+        ArrayList<Predicate<Transaction>> subPredicates = new ArrayList<>();
+        subPredicates.add(testDescriptionPred);
+        FilterCommandPredicate pred = new FilterCommandPredicate(subPredicates);
         FilterCommand cmd = new FilterCommand(pred);
-        assertEquals(
-                "spleetwaise.transaction.logic.commands.FilterCommand{predicate=spleetwaise.transaction.model"
-                        + ".FilterCommandPredicate{contact=null, amount=null, description=Sean owes me a lot for a "
-                        + "landed property in Sentosa, date=null, status=null}}",
+        assertEquals("spleetwaise.transaction.logic.commands.FilterCommand{"
+                        + "predicate=spleetwaise.transaction.model.FilterCommandPredicate{"
+                        + "pred0=spleetwaise.transaction.model.filterpredicate.DescriptionFilterPredicate{"
+                        + "description=Sean owes me a lot for a landed property in Sentosa}}}",
                 cmd.toString()
         );
     }
