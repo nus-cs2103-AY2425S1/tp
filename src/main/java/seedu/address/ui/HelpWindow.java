@@ -18,9 +18,11 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f10-1.github.io/tp/UserGuide.html";
     public static final String USERGUIDE_REF = "For more info, refer to the user guide: \n" + USERGUIDE_URL;
     public static final String ADD_HELP_HEADER = "Add contacts: ";
-    public static final String ADD_HELP = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]";
+    public static final String ADD_HELP_1 = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]";
+    public static final String ADD_HELP_2 = "a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]";
+
     public static final String LIST_HELP_HEADER = "List all contacts in ClientHub: ";
-    public static final String LIST_HELP = "list";
+    public static final String LIST_HELP = "list    or   li";
     public static final String EDIT_HELP_HEADER = "Edit contacts: ";
     public static final String EDIT_HELP = "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE";
     public static final String DELETE_HELP_HEADER = "Delete contacts by name: ";
@@ -35,10 +37,10 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String FA_HELP = "find a/ADDRESS   or   " + "fa ADDRESS";
     public static final String FC_HELP_HEADER = "Find contacts by Client Type: ";
     public static final String FC_HELP = "find c/CLIENT_TYPE   or   " + "fc CLIENT_TYPE";
-    public static final String SORT_HELP_HEADER = "Sort contacts by nameL: ";
-    public static final String SORT_HELP = "sort n/";
+    public static final String SORT_HELP_HEADER = "Sort contacts by name: ";
+    public static final String SORT_HELP = "sort    or   s";
     public static final String VIEW_HELP_HEADER = "View a contact's full information: ";
-    public static final String VIEW_HELP = "view NAME";
+    public static final String VIEW_HELP = "view NAME   or   v NAME";
     public static final String RA_HELP_HEADER = "Add a reminder for a contact: ";
     public static final String RA_HELP_1 = "radd n/NAME dt/DATE and TIME d/DESCRIPTION";
     public static final String RA_HELP_2 = "ra n/NAME dt/DATE and TIME d/DESCRIPTION";
@@ -62,7 +64,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label addHelpHeader;
 
     @FXML
-    private Label addHelp;
+    private Label addHelp1;
+
+    @FXML
+    private Label addHelp2;
 
     @FXML
     private Label listHelpHeader;
@@ -180,7 +185,8 @@ public class HelpWindow extends UiPart<Stage> {
         rdHelpHeader.setText(RD_HELP_HEADER);
         exitHelpHeader.setText(EXIT_HELP_HEADER);
 
-        addHelp.setText(ADD_HELP);
+        addHelp1.setText(ADD_HELP_1);
+        addHelp2.setText(ADD_HELP_2);
         listHelp.setText(LIST_HELP);
         editHelp.setText(EDIT_HELP);
         deleteHelp.setText(DELETE_HELP);

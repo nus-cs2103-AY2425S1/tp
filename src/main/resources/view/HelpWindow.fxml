@@ -60,7 +60,10 @@
             <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
               <Label fx:id="addHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
               <HBox styleClass="commandWrapper">
-                <Label fx:id="addHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label fx:id="addHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="addHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
               </HBox>
               <padding>
                 <Insets bottom="5" left="10" right="10" top="5" />
