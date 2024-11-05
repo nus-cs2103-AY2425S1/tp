@@ -28,26 +28,22 @@ public class StatusCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Model clonedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
-
         InternshipApplication internshipApplicationToUpdate = clonedModel
                 .getFilteredList().get(INDEX_FIRST_INTERNSHIP_APPLICATION.getZeroBased());
 
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
-
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), Status.ACCEPTED);
 
         Status previousStatus = internshipApplicationToUpdate.getStatus();
 
         ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
-
         InternshipApplication updatedApplication = new InternshipApplication(
                 internshipApplicationToUpdate.getCompany(),
                 internshipApplicationToUpdate.getDateOfApplication(),
                 internshipApplicationToUpdate.getRole(),
                 Status.ACCEPTED
         );
-
         expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
@@ -79,18 +75,66 @@ public class StatusCommandTest {
     }
 
     @Test
-    public void equals() {
-        StatusCommand statusFirstCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
-        StatusCommand statusSecondCommand = new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.PENDING);
+    public void execute_emptyList_throwsCommandException() {
+        Model emptyModel = new ModelManager(); // An empty model with no internship applications
+        StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
 
+        assertCommandFailure(statusCommand, emptyModel,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_lastIndex_success() {
+        Index lastIndex = Index.fromOneBased(model.getFilteredList().size());
+        Model clonedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
+        InternshipApplication internshipApplicationToUpdate =
+                clonedModel.getFilteredList().get(lastIndex.getZeroBased());
+
+        StatusCommand statusCommand = new StatusCommand(lastIndex, Status.ACCEPTED);
+        String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
+                Messages.format(internshipApplicationToUpdate), Status.ACCEPTED);
+
+        InternshipApplication updatedApplication = new InternshipApplication(
+                internshipApplicationToUpdate.getCompany(),
+                internshipApplicationToUpdate.getDateOfApplication(),
+                internshipApplicationToUpdate.getRole(),
+                Status.ACCEPTED
+        );
+        ModelManager expectedModel = new ModelManager(getClonedAddressBook(), new UserPrefs());
+        expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
+
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false,
+                false, false, expectedModel.getChartData());
+
+        assertCommandSuccess(statusCommand, clonedModel, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        // Create two StatusCommand objects with the same index and status
+        StatusCommand statusFirstCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
+        StatusCommand statusFirstCommandCopy = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
+
+        // Test: Same object reference should be equal
         assertTrue(statusFirstCommand.equals(statusFirstCommand));
 
-        StatusCommand statusFirstCommandCopy = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
+        // Test: Different objects with the same values should be equal
         assertTrue(statusFirstCommand.equals(statusFirstCommandCopy));
 
+        // Test: Different types should not be equal
         assertFalse(statusFirstCommand.equals(1));
+
+        // Test: Null should not be equal
         assertFalse(statusFirstCommand.equals(null));
+
+        // Test: Objects with different indices should not be equal
+        StatusCommand statusSecondCommand = new StatusCommand(INDEX_SECOND_INTERNSHIP_APPLICATION, Status.ACCEPTED);
         assertFalse(statusFirstCommand.equals(statusSecondCommand));
+
+        // Test: Objects with the same index but different statuses should not be equal
+        StatusCommand statusDifferentStatusCommand =
+                new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING);
+        assertFalse(statusFirstCommand.equals(statusDifferentStatusCommand));
     }
 
     @Test
