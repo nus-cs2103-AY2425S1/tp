@@ -204,9 +204,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | real estate agent | delete a property entry from ClientGrid                    | remove entries that I no longer need                                                                                   |
 | `* * *`  | real estate agent | add a meeting with my client(s) on ClientGrid              | keep track of all my scheduled meetings in one place                                                                   |
 | `* * *`  | real estate agent | delete a meeting with my client(s) on ClientGrid           | remove meetings that have already ended or have been cancelled                                                         |
-| `* * *`  | real estate agent | list information about properties                          | easily manage my portfolio of available properties                                                                     |
 | `* * *`  | real estate agent | list information about buyers                              | match buyers with suitable properties based on their preferences                                                       |
 | `* * *`  | real estate agent | list information about sellers                             | manage relationships and property listings efficiently                                                                 |
+| `* * *`  | real estate agent | list information about all clients (buyers and sellers)    | have a comprehensive view of all clients in one place and streamline client interactions                               |
+| `* * *`  | real estate agent | list information about properties                          | easily manage my portfolio of available properties                                                                     |
+| `* * *`  | real estate agent | list information about scheduled meetings                  | quickly view upcoming meetings and plan my schedule effectively                                                        |
 | `* *`    | real estate agent | indicate that a buyer wants to buy property X at Y price   | keep track of the clients that are involved in the transaction                                                         |
 | `* *`    | real estate agent | indicate that a seller wants to sell property X at Y price | keep track of the clients that are involved in the transaction                                                         |
 
