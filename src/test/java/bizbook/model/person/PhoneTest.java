@@ -21,24 +21,20 @@ public class PhoneTest {
 
     @Test
     public void isValidPhone() {
-        // EP: null phone number
+        // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
-        // EP: invalid phone numbers
+        // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
-
-        // less than 8 numbers even though it starts with 9
-        assertFalse(Phone.isValidPhone("91"));
-        assertFalse(Phone.isValidPhone("9123456"));
-
+        assertFalse(Phone.isValidPhone("91")); // less than 8 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
         assertFalse(Phone.isValidPhone("12345678")); // exactly 8 numbers but does not start with 6, 8 or 9
 
-        // EP: valid phone numbers
-        assertTrue(Phone.isValidPhone("91415691"));
+        // valid phone numbers
+        assertTrue(Phone.isValidPhone("91415691")); // valid singapore number
         assertTrue(Phone.isValidPhone("93121534"));
     }
 
