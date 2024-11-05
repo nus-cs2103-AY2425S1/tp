@@ -36,7 +36,7 @@ public class LessonContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesAnyKeyword(Lesson lesson) {
         return keywords.stream().anyMatch(keyword -> (
                 Day.isValidDay(keyword) && lesson.getLessonDay().toString().equalsIgnoreCase(keyword))
-                || (Lesson.isValidTimeRange(keyword) && checkOverlappingTimeRange(lesson, keyword)));
+                || (Lesson.checkIsValidTimeRange(keyword) && checkOverlappingTimeRange(lesson, keyword)));
     }
 
     private boolean checkOverlappingTimeRange(Lesson lesson, String keyword) {

@@ -54,7 +54,7 @@ public class Lesson {
      * @param timeRange The time range to validate.
      * @return true if the time range is valid.
      */
-    public static boolean isValidTimeRange(String timeRange) {
+    public static boolean checkIsValidTimeRange(String timeRange) {
         return timeRange.matches(VALID_TIME_RANGE_REGEX);
     }
 
@@ -64,8 +64,8 @@ public class Lesson {
      * @param timeRange The time range to check.
      * @return true if the start time is before the end time.
      */
-    public static boolean isValidTimeOrder(String timeRange) {
-        if (isValidTimeRange(timeRange)) {
+    public static boolean checkIsValidTimeOrder(String timeRange) {
+        if (checkIsValidTimeRange(timeRange)) {
             String[] times = timeRange.split("-");
             LocalTime startTime = LocalTime.parse(times[0], TIME_FORMATTER);
             LocalTime endTime = LocalTime.parse(times[1], TIME_FORMATTER);
@@ -93,7 +93,7 @@ public class Lesson {
         }
         String day = parts[0];
         String timeRange = parts[1];
-        return Day.isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
+        return Day.isValidDay(day) && checkIsValidTimeRange(timeRange) && checkIsValidTimeOrder(timeRange);
     }
 
     /**
