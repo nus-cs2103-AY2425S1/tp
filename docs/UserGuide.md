@@ -432,7 +432,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command ## Command Summary
+## Command Summary
 
 
 | Action     | Format, Examples                                                                                                                                                                                                            |
