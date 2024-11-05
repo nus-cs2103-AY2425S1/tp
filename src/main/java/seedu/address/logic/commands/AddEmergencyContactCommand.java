@@ -36,7 +36,7 @@ public class AddEmergencyContactCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_EMERGENCY_CONTACT_NAME + "EMERGENCY CONTACT NAME "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE "
-            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP "
+            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMERGENCY_CONTACT_NAME + "Sarah Lim "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "91234567 "
