@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
@@ -41,10 +42,14 @@
           </padding>
         </StackPane>
 
-                    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
+               <styleClass>
+                  <String fx:value="pane-with-border" />
+                  <String fx:value="secondary" />
+               </styleClass>
         </StackPane>
             <GridPane fx:id="panelsHolder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
               <columnConstraints>
