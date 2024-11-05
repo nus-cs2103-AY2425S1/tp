@@ -6,8 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -21,6 +19,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    // For implementing web functionality -- we need to get the user's current hosting service
     private final Application currApp = new CampusConnectApp();
 
     @FXML
@@ -37,9 +37,14 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+
+        // hyperlink setups: set hyperlink as unclicked, hyperlink text, handle onAction logic
+        setHyperlink();
         ugLink.setText(USER_GUIDE_URL);
-        ugLink.setOnAction(event -> currApp.getHostServices().showDocument(USER_GUIDE_URL));
-        ugLink.setVisited(false);
+        ugLink.setOnAction(event -> {
+            currApp.getHostServices().showDocument(USER_GUIDE_URL);
+            this.setHyperlink();
+        });
     }
 
     /**
@@ -68,7 +73,7 @@ public class HelpWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing help page for CampusConnect.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -94,17 +99,45 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    private class CampusConnectApp extends Application {
+    /**
+     * Resets the hyperlink to an unclicked state.
+     */
+    public void resetHyperlink() {
+        ugLink.setVisited(false);
+    }
+
+    /**
+     * Sets hyperlink to a clicked state.
+     * No other function should be touching this except HelpWindow,
+     * where the hyperlink logic is handled.
+     */
+    private void setHyperlink() {
+        ugLink.setVisited(true);
+    }
+
+    /**
+     * Handles default browser passing to HelpWindow.
+     * Private static class that extends Application.
+     * This is to enable us to use the {@code getInstance} method, which gets the
+     * current web service provide of the user (his/her default browser).
+     * Necessary for hyperlink to open.
+     */
+    private static class CampusConnectApp extends Application {
         private static CampusConnectApp mInstance;
-        public static void main(String[] args) throws Exception { launch(args); }
+
+        public static void main(String[] args) throws Exception {
+            launch(args);
+        }
 
         public static CampusConnectApp getInstance() {
             return mInstance;
         }
 
+        /**
+         * Empty overridden start method from {@code Application}.
+         */
         @Override
-        public void start(Stage primaryStage) throws Exception {
-            // your code
+        public void start(Stage primaryStage) {
         }
     }
 }

@@ -169,6 +169,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
+            helpWindow.resetHyperlink();
             helpWindow.show();
         } else {
             helpWindow.focus();
