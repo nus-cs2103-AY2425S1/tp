@@ -38,7 +38,7 @@ management tasks done faster than traditional GUI apps.
 
    * `view_student 2 ` : Displays the details of the 2nd student shown in the current list.
 
-   * `delete 3` : Deletes the 3rd student shown in the current list.
+   * `delete_student 3` : Deletes the 3rd student shown in the current list.
 
    * `clear` : Deletes all students.
 
@@ -74,7 +74,7 @@ management tasks done faster than traditional GUI apps.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -85,8 +85,9 @@ Format: `help`
 
 Adds a student to the app.
 
-Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
-
+Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> 
+Constraints: 
+* Tags must be at most 40 characters long, and must be alphanumeric
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags (including 0)
@@ -104,6 +105,7 @@ Format: `view_student INDEX`
 
 * Displays the details of a student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
+![Explanation for INDEX](images/student_index.png)
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -116,11 +118,11 @@ Shows a list of all students in the app.
 
 Format: `list`
 
-### Editing a student : `edit`
+### Editing a student : `edit_student`
 
 Edits an existing student in the app.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​ [r/REMARK]`
+Format: `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -130,9 +132,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​ [r/REMARK]`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 r/Weak in Science` Edits the remark of the 3rd student to be `Weak in Science`
+*  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+   ![result for 'edit_student 1 p/91234567 e/johndoe@example.com'](images/editStudent.png) 
+* `edit_student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 ### Locating students by name: `find`
 
@@ -152,76 +154,78 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a student : `delete`
+### Deleting a student : `delete_student`
 
 Deletes the specified student from the app.
 
-Format: `delete INDEX`
+Format: `delete_student INDEX`
 
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
+* Deletes the student at the specified `INDEX`. 
+* Similar to the View Command, this index is specified by the number as shown on the left of the Student's name, in the student list display.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the app.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `list` followed by `delete_student 2` deletes the 2nd student in the app.
+* `find Betsy` followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
 
 ### Adding an assignment: `add_assignment`
 
 Adds an Assignment to the app.
 
-Format: `add_assignment studentIndex/STUDENT_INDEX assignmentName/ASSIGNMENT_NAME maxScore/MAX_SCORE`
+Format: `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
 Examples:
-* `list` followed by `add_assignment studentIndex/3 assignmentName/Assignment 1 maxScore/100` adds an assignment to the
+* `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
   3rd student in the app.
-* `add_assignment studentIndex/1 assignmentName/Assignment 1 maxScore/100`
+* `add_assignment si/1 an/Assignment 1 ms/100`
+  ![result for 'add_assignment si/1 an/Assignment 1 ms/100'](images/addAssignment.jpg)
 
 ### Deleting an assignment: `delete_assignment`
 
 Deletes an assignment belonging to a student based on the student's index number and the assignment's index.
 
-Format: `delete_assignment studentIndex/INDEX assignmentIndex/INDEX`
+Format: `delete_assignment si/INDEX ai/INDEX`
 
 Examples:
-* `find John` followed by `delete_assignment studentIndex/1 assignmentIndex/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
-* `delete_assignment studentIndex/1 assignmentIndex/1`
+* `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
+* `delete_assignment si/1 ai/1`
+  ![result for 'delete_assignment si/1 ai/1'](images/deleteAssignment.png)
 
 ### Marking an assignment as submitted: `mark`
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
 
-Format: `mark studentIndex/INDEX assignmentIndex/INDEX`
+Format: `mark si/INDEX ai/INDEX`
 
 Examples:
-* `list` followed by `mark studentIndex/3 assignmentIndex/1` marks the 1st assignment of the 3rd student in the app.
-* `mark studentIndex/1 assignmentIndex/1`
+* `list` followed by `mark si/3 ai/1` marks the 1st assignment of the 3rd student in the app.
+* `mark si/1 ai/1`
 
 ### Unmarking an assignment: `unmark`
 
 Unmarks an existing assignment belonging to a student, resetting its status to not submitted.
 
-Format: `unmark studentIndex/INDEX assignmentIndex/INDEX`
+Format: `unmark si/INDEX ai/INDEX`
 
 Examples:
-* `unmark studentIndex/1 assignmentIndex/1`
+* `unmark si/1 ai/1`
 
 ### Grading an assignment: `grade`
 
-Edits the score of an assignment belonging to a student and marks it as submitted.
+Edits the s of an assignment belonging to a student and marks it as submitted.
 
-Format: `grade studentIndex/INDEX assignmentIndex/INDEX score/ASSIGNMENT_SCORE`
+Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
 
 Examples:
-* `grade studentIndex/1 assignmentIndex/1 score/100`
+* `grade si/1 ai/1 s/100`
 
 ### Adding a remark to a student: `remark`
 Adds a remark to a existing student in the displayed list.
 
-Format: `remark studentIndex/INDEX r/REMARK`
+Format: `remark si/INDEX r/REMARK`
 
 Examples:
-* `remark studentIndex/1 r/Weak in Math`
+* `remark si/1 r/Weak in Math`
 
 ### Clearing all entries : `clear`
 
@@ -267,6 +271,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Duplicate names are not allowed**. If students have duplicate names (e.g: common names such as "Nicholas Tan"), then the tutor should add an extra word in the name to distinguish the students. For example ('Nicholas Tan RJC' and 'Nicholas Tan HCI') can be done to distinguish students with duplicate names.
+4. **Student names cannot include the symbol '/'**. Even if legal names include symbols (e.g: Suresh S/O Rama), TAchy will not be able to parse such names. Users are advised to instead remove such characters, or write the names in full (e.g: Suresh son of Rama)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,17 +280,17 @@ _Details coming soon ..._
 
 Action            | Format, Examples
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
-**View**          | `view INDEX`<br> e.g., `view_student 3`
+**Add Student**   | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
+**View Student**  | `view_student INDEX`<br> e.g., `view_student 3`
 **Clear**         | `clear`
-**Delete**        | `delete INDEX`<br> e.g., `delete 3`
-**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete Student**| `delete_student INDEX`<br> e.g., `delete_student 3`
+**Edit Student**  | `edit_student INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
-**Add Assignment**| `add_assignment studentIndex/STUDENT_INDEX assignmentName/ASSIGNMENT_NAME maxScore/MAX_SCORE`<br> e.g., `add_assignment studentIndex/1 assignmentName/Assignment 1 maxScore/100`
-**Delete Assignment** | `delete_assignment studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `delete_assignment studentIndex/1 assignmentIndex/1`
-**Mark Assignment** | `mark studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `mark studentIndex/1 assignmentIndex/1`
-**Unmark Assignment** | `unmark studentIndex/INDEX assignmentIndex/INDEX`<br> e.g., `unmark studentIndex/1 assignmentIndex/1`
-**Grade Assignment** | `grade studentIndex/INDEX assignmentIndex/INDEX score/ASSIGNMENT_SCORE`<br> e.g., `grade studentIndex/1 assignmentIndex/1 score/100`
-**Add Remark** | `remark studentIndex/INDEX r/REMARK` <br> e.g., `remark studentIndex/1 r/Weak in Math`
+**Add Assignment**| `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
+**Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
+**Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
+**Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
+**Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`
+**Add Remark** | `remark si/INDEX r/REMARK` <br> e.g., `remark si/1 r/Weak in Math`

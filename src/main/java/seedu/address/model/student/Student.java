@@ -20,8 +20,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
-    private static final Remark EMPTY_REMARK = new Remark("");
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -42,7 +40,7 @@ public class Student {
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
-        this.remark = EMPTY_REMARK;
+        this.remark = new Remark("");
     }
 
     /**
@@ -186,6 +184,15 @@ public class Student {
         newAssignmentlist.add(assignmentToAdd);
         return new Student(this.name, this.phone, this.email, this.tags, newAssignmentlist, this.remark);
     }
+    /**
+     * Deletes the Assignment at {@code index} in the student's assignmentList
+     */
+    public void deleteAssignment(int index) {
+        if (assignmentList.size() < (index) || index <= 0) {
+            throw new AssignmentIndexOutOfRangeException();
+        }
+        assignmentList.remove(index - 1);
+    }
 
     /**
      * Updates the Assignment at {@code index} to a new Assignment in the student's assignmentList
@@ -202,4 +209,12 @@ public class Student {
         return this;
     }
 
+    /**
+     * Creates a new Student that has the same existing data, but with an updated {@code assignmentList}
+     * @return a new {@code Student} object with the updated assignmentList.
+     */
+    public Student setAssignmentList(List<Assignment> assignmentList) {
+        Objects.requireNonNull(assignmentList);
+        return new Student(this.name, this.phone, this.email, this.tags, assignmentList, this.remark);
+    }
 }

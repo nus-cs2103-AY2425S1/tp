@@ -29,7 +29,7 @@
                                 <Region fx:constant="USE_PREF_SIZE" />
                             </minWidth>
                         </Label>
-                        <Label fx:id="name" styleClass="details_big_label" text="\$first" />
+                        <Label fx:id="name" styleClass="details_big_label" text="\$first" wrapText="true" />
                         <padding>
                             <Insets bottom="3" left="5" right="5" top="5" />
                         </padding>
@@ -44,19 +44,38 @@
                             <Insets bottom="8" left="5" top="10" />
                         </padding>
                     </FlowPane>
+                    <HBox alignment="CENTER_LEFT">
+                        <VBox minWidth="70" spacing="10">
+                            <padding>
+                                    <Insets left="8" />
+                            </padding>
+                            <Label styleClass="details_field_headers" text="Phone:" />
+                        </VBox>
+                        <VBox spacing="3">
+                            <Label fx:id="phone" styleClass="details_small_label" text="\$phone" />
+                        </VBox>
+                    </HBox>
 
                     <HBox alignment="CENTER_LEFT">
                         <VBox minWidth="70" spacing="10">
                             <padding>
                                 <Insets left="8" />
                             </padding>
-                            <Label styleClass="details_field_headers" text="Phone:" />
                             <Label styleClass="details_field_headers" text="Email:" />
+                        </VBox>
+                        <VBox spacing="3">
+                            <Label fx:id="email" styleClass="details_small_label" text="\$email" wrapText="true" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT">
+                        <VBox minWidth="70" spacing="10">
+                            <padding>
+                                <Insets left="8" />
+                            </padding>
                             <Label styleClass="details_field_headers" text="Remark:" />
                         </VBox>
                         <VBox spacing="3">
-                            <Label fx:id="phone" styleClass="details_small_label" text="\$phone" />
-                            <Label fx:id="email" styleClass="details_small_label" text="\$email" />
                             <Label fx:id="remark" styleClass="details_small_label" text="\$remark" wrapText="true" />
                         </VBox>
                     </HBox>
