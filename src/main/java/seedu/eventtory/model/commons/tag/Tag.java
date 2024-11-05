@@ -9,8 +9,10 @@ import static seedu.eventtory.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = """
+            Tags can contain alphanumeric characters, hyphens '-', and underscores '_' only.
+            Tags cannot be made up of only hyphens '-' and underscores '_'.""";
+    public static final String VALIDATION_REGEX = "^(?=.*\\p{Alnum})[\\p{Alnum}_-]+$";
 
     public final String tagName;
 
