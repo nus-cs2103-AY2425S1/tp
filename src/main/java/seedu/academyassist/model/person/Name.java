@@ -11,8 +11,8 @@ import seedu.academyassist.commons.util.AppUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabets and spaces. Names should not start with a space and should not be " +
-                    "blank";
+            "Names should only contain alphabets and spaces. Names should not start with a space and should not be "
+                    + "blank";
 
     /*
      * The first character of the name must not be a whitespace,
