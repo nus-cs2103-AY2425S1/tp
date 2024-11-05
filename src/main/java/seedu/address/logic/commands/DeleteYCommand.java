@@ -21,7 +21,7 @@ public class DeleteYCommand extends Command {
 
     public static final String COMMAND_WORD = "y";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person:\n%1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_WEDDING_SUCCESS =
             "Deleted Wedding:\nWedding name: %1$s\nVenue: %2$s\nDate: %3$s";
     public static final String MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS = "Address book has been cleared!";

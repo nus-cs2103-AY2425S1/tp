@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -201,6 +203,20 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedWedding);
 
         weddingBook.setWedding(target, editedWedding);
+    }
+
+    public void updatePersonInWedding(Person editedPerson, Person personToEdit) {
+        List<Wedding> weddingList = getFilteredWeddingList();
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            if (set.contains(personToEdit)) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
     }
 
     //=========== Filtered Wedding List Accessors ============================================================
