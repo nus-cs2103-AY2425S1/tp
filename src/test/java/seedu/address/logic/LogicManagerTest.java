@@ -110,7 +110,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         Name invalidName = new Name("aaaaaaaaaaaaaaa");
-        String deleteCommand = "delete " + PREFIX_NAME + invalidName;
+        String deleteCommand = "delete " + invalidName;
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_INPUT);
     }
 

@@ -64,7 +64,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteClientProfile() throws Exception {
         DeleteClientProfileCommand command = (DeleteClientProfileCommand) parser.parseCommand(
-                DeleteClientProfileCommand.COMMAND_WORD + " " + PREFIX_NAME + ALICE.getName());
+                DeleteClientProfileCommand.COMMAND_WORD + " " + ALICE.getName());
         assertEquals(new DeleteClientProfileCommand(ALICE.getName()), command);
     }
 
