@@ -55,8 +55,8 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johnd@gmail.com\n"
-            + "Note: You can leave the optional parameters specified in 'add' blank "
-            + "in order to delete the existing values.\n"
+            + "Note: To delete existing values of an optional parameter in the 'add' command, "
+            + "enter its prefix with an empty value. (eg. edit 1 e/ will delete the email) \n"
             + "Note: Lessons can be added or removed via the 'addlesson' or 'deletelesson' commands respectively.";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
