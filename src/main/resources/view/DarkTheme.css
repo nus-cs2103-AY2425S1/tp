@@ -346,3 +346,7 @@
     -fx-background-radius: 2; /* Rounded corners */
     -fx-background-insets: 0; /* Remove insets if necessary */
 }
+
+.view-person-panel-placeholder {
+    -fx-background-color: #f0f0f0; /* Replace with the actual color */
+}

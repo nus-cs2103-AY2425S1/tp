@@ -174,6 +174,9 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    //@@author LemonDrew-reused
+    //Reused from https://github.com/AY2223S1-CS2103T-T15-3/tp
+    // with minor modifications
     /**
      * Shows the panel containing details of the specified person
      */
@@ -182,6 +185,7 @@ public class MainWindow extends UiPart<Stage> {
         viewPersonPanelPlaceholder.getChildren().add(new ViewPersonPanel(person).getRoot());
         viewPersonPanelPlaceholder.setVisible(true);
     }
+    //@@author LemonDrew
 
     /**
      * Hides the panel containing details of the specified person

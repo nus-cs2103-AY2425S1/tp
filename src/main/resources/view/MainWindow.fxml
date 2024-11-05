@@ -60,7 +60,7 @@
           </VBox>
 
           <!-- View Person Panel on the right -->
-          <StackPane fx:id="viewPersonPanelPlaceholder" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="viewPersonPanelPlaceholder" styleClass="view-person-panel-placeholder" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS"/>
         </SplitPane>
 
         <!-- Status Bar -->

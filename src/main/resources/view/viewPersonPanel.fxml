@@ -4,9 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" minWidth="400" prefWidth="400" styleClass="details-base" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox alignment="TOP_CENTER" minWidth="400" prefWidth="400" styleClass="details-pane" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"
-          style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5; -fx-padding: 10;">
+<ScrollPane fitToWidth="true" minWidth="400" prefWidth="400" styleClass="details-base"
+            HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="TOP_CENTER" minWidth="400" prefWidth="400" styleClass="details-pane"
+          HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"
+          style="-fx-padding: 10;">
         <padding>
             <Insets bottom="10" left="20" right="20" top="20" />
         </padding>
@@ -19,13 +21,13 @@
                textAlignment="CENTER"
                maxWidth="400" />
 
-        <!-- Status label with lighter blue background -->
-        <Label fx:id="status" styleClass="cell_small_label" text="Status: \$status"
-               style="-fx-background-color: #add8e6; -fx-padding: 5; -fx-background-radius: 5;" />
-
         <!-- Job label with lighter green background -->
         <Label fx:id="job" styleClass="cell_small_label" text="Job: \$job"
                style="-fx-background-color: #90ee90; -fx-padding: 5; -fx-background-radius: 5;" />
+
+        <!-- Status label with lighter blue background -->
+        <Label fx:id="status" styleClass="cell_small_label" text="Status: \$status"
+               style="-fx-background-color: #add8e6; -fx-padding: 5; -fx-background-radius: 5;" />
 
         <!-- Add a Region for spacing between Introduction and Background -->
         <Region prefHeight="20" /> <!-- Adjust the height as needed for spacing -->
@@ -50,10 +52,18 @@
         <Label styleClass="cell_header_label" text="Contact" style="-fx-font-size: 14pt; -fx-font-weight: bold;" />
 
         <!-- Phone label -->
-        <Label fx:id="phone" styleClass="cell_small_label" text="Phone: \$phone" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="Phone: \$phone"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
 
         <!-- Email label -->
-        <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email" />
+        <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
 
         <!-- Add a Region for spacing between Contact and Skills -->
         <Region prefHeight="20" />
