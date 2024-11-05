@@ -7,7 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
+import seedu.address.model.claim.ClaimStatus;
+import seedu.address.model.policy.exceptions.DuplicateClaimException;
 
 public class PolicyTest {
     private final PremiumAmount premiumAmount = new PremiumAmount(200.0);
@@ -55,23 +58,31 @@ public class PolicyTest {
     }
 
     @Test
-    public void setters_setCorrectValues() {
-        final Policy policy = new ConcretePolicy(new PremiumAmount(0), new CoverageAmount(0), expiryDate);
+    public void addClaim_returnNewUpdatedPolicy() {
+        final ConcretePolicy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
+        final Claim claim = new Claim(ClaimStatus.PENDING, "foo");
 
-        policy.setPremiumAmount(premiumAmount);
-        assertEquals(premiumAmount, policy.getPremiumAmount());
-        policy.setCoverageAmount(coverageAmount);
-        assertEquals(coverageAmount, policy.getCoverageAmount());
-        policy.setExpiryDate(expiryDate);
-        assertEquals(expiryDate, policy.getExpiryDate());
+        final ClaimList expectedClaimList = new ClaimList();
+        expectedClaimList.add(claim);
+        final Policy expectedPolicy = new LifePolicy(premiumAmount, coverageAmount, expiryDate, expectedClaimList);
+
+        final Policy actualPolicy = policy.addClaim(claim);
+
+        assertEquals(expectedPolicy, actualPolicy);
     }
 
     @Test
-    public void setters_nullInputs_throwsNullPointerException() {
-        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
-        assertThrows(NullPointerException.class, () -> policy.setPremiumAmount(null));
-        assertThrows(NullPointerException.class, () -> policy.setCoverageAmount(null));
-        assertThrows(NullPointerException.class, () -> policy.setExpiryDate(null));
+    public void addClaim_nullInput_throwsNullPointerException() {
+        final ConcretePolicy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
+        assertThrows(NullPointerException.class, () -> policy.addClaim(null));
+    }
+
+    @Test
+    public void addClaim_duplicateClaim_throwsDuplicateClaimException() {
+        final ConcretePolicy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
+        final Claim duplicateClaim = new Claim(ClaimStatus.PENDING, "foo");
+        Policy updatedPolicy = policy.addClaim(duplicateClaim);
+        assertThrows(DuplicateClaimException.class, () -> updatedPolicy.addClaim(duplicateClaim));
     }
 
     @Test
@@ -111,10 +122,22 @@ public class PolicyTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toString_policyWithClaims() {
+        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
+        final Claim claim = new Claim(ClaimStatus.PENDING, "foo");
+        final Policy policyWithClaim = policy.addClaim(claim);
+        final String expected = String.format("Policy type: Life | Premium amount: $%s | Coverage amount: $%s "
+                + "| Expiry date: %s | Claims:\n%s",
+                policy.getPremiumAmount().toString(), policy.getCoverageAmount().toString(),
+                policy.getExpiryDate().toString(), policyWithClaim.getClaimList().toString());
+        assertEquals(expected, policyWithClaim.toString());
+    }
+
+    @Test
+    public void toString_policyWithoutClaims() {
         final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
         final String expected = String.format("Premium amount: $%s | Coverage amount: $%s "
-                + "| Expiry date: %s | Claims: %s",
+                + "| Expiry date: %s | No claims",
                 policy.getPremiumAmount().toString(), policy.getCoverageAmount().toString(),
                 policy.getExpiryDate().toString(), policy.getClaimList().toString());
         assertEquals(expected, policy.toString());
@@ -130,7 +153,7 @@ public class PolicyTest {
 
         @Override
         public PolicyType getType() {
-            return null;
+            return PolicyType.LIFE;
         }
     }
 }

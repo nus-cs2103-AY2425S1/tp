@@ -44,8 +44,7 @@ public class ListClaimsCommandTest {
         PolicySet policies = new PolicySet();
 
         Policy healthPolicy = new HealthPolicy();
-        healthPolicy.addClaim(new Claim(ClaimStatus.PENDING, "Hospitalization"));
-        policies.add(healthPolicy);
+        policies.add(healthPolicy.addClaim(new Claim(ClaimStatus.PENDING, "Hospitalization")));
 
         Client updatedClient = new Client(client.getName(), client.getPhone(), client.getEmail(),
                 client.getAddress(), client.getTags(), policies);

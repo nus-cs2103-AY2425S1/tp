@@ -197,7 +197,7 @@ public class ClaimList implements List<Claim> {
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (Claim claim : claims) {
-            result.append(claim.toString()).append("\n");
+            result.append("        ").append(claim.toString()).append("\n");
         }
         return result.toString();
     }
