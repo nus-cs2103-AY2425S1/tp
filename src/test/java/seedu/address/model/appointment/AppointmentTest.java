@@ -3,7 +3,7 @@ package seedu.address.model.appointment;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_NONEXISTANT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_1;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DATE_DENTAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_DENTAL;
@@ -57,7 +57,7 @@ class AppointmentTest {
                                                                            "asd1200-1223asd"));
         assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
                                                                            VALID_APPOINTMENT_DATE_DENTAL,
-                                                                           INVALID_APPOINTMENT_TIMEPERIOD_FORMAT));
+                                                                           INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_1));
         assertThrows(IllegalArgumentException.class, () -> new Appointment(VALID_APPOINTMENT_NAME_DENTAL,
                                                                            VALID_APPOINTMENT_DATE_DENTAL,
                                                                            INVALID_APPOINTMENT_TIMEPERIOD_ORDER));

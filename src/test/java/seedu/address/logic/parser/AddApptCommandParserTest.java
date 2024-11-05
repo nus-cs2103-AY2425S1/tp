@@ -66,13 +66,16 @@ public class AddApptCommandParserTest {
         assertParseFailure(parser, INVALID_APPOINTMENT_NAME_LENGTH_DESC + NRIC_DESC_AMY,
                            Appointment.MESSAGE_TOO_LONG_CONSTRAINT);
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_FORMAT_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);;
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_NONEXISTANT_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);;
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);;
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
         assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);;
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);
+
+        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC + NRIC_DESC_AMY,
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);
     }
 
     @Test
