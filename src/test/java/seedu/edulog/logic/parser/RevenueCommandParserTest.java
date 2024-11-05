@@ -22,8 +22,11 @@ public class RevenueCommandParserTest {
 
     @Test
     public void parse_invalidArgs() {
-        assertParseFailure(parser, "paid unpaid", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
-        assertParseFailure(parser, "12345", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
-        assertParseFailure(parser, "paid 123", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
+        assertParseFailure(parser, "paid unpaid",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
+        assertParseFailure(parser, "12345",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
+        assertParseFailure(parser, "paid 123",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RevenueCommand.COMMAND_USAGE));
     }
 }
