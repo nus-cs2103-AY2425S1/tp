@@ -125,6 +125,15 @@ A person can have any number of tags (including 0)
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
+<md>**Tag restrictions**</md>
+* Tags must be a single word containing only alphanumeric characters (no spaces or special symbols are allowed).
+* To specify multiple tags, separate each tag with a space.
+
+</box>
+
+
+<box type="warning" icon=":fa-solid-circle-exclamation:" light>
+
 <md>**GitHub username restrictions**</md>
 * Length of username must between 1 and 39 characters
 * Can contain only alphanumeric characters and hyphens ('-').
@@ -145,8 +154,8 @@ A person can have any number of tags (including 0)
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `add n/John Doe p/98765432 e/johnd@example.com telegram/@john github/swag-john33`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 telegram/@Betsy t/criminal github/betsy-29`
+* `add n/John Doe p/98765432 e/johnd@example.com telegram/@john github/swag-john33` adds John Doe's contact details with no tags.
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 telegram/@Betsy t/criminal github/betsy-29` adds Betsy Crowe's contact details with a friend and criminal tag.
 </box>
 
 
