@@ -18,6 +18,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
+    public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX =
+            "The wedding index provided is invalid, please "
+            + "enter an index that is between 1 and %1$d";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -52,7 +55,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats a {@code Wedding} for display to the user.
      */
     public static String format(Wedding wedding) {
         final StringBuilder builder = new StringBuilder();
@@ -60,10 +63,21 @@ public class Messages {
                 .append(" | Client: ")
                 .append(wedding.getClient().getPerson().getName().fullName)
                 .append(" | Date: ")
-                .append(wedding.getDate())
+                .append(wedding.getDate() == null ? " " : wedding.getDate())
                 .append(" | Venue: ")
-                .append(wedding.getVenue());
+                .append(wedding.getVenue() == null ? " " : wedding.getVenue());
         return builder.toString();
     }
+
+    /**
+     * Formats the list of {@code Wedding} for display to the user.
+     */
+    public static String format(Set<Wedding> weddingJobs) {
+        return weddingJobs.stream()
+                .map(Messages::format) // Calls the static format method in Wedding for each wedding
+                .collect(Collectors.joining(", "));
+    }
+
+
 
 }

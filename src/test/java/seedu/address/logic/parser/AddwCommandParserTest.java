@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMYWEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ALICEWEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMYWEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_INDEX_ALICEWEDDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_NAME_ALICEWEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_ALICEWEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICEWEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_ALICEWEDDING;
@@ -60,7 +61,7 @@ public class AddwCommandParserTest {
                         + DATE_DESC_ALICEWEDDING
                         + VENUE_DESC_ALICEWEDDING,
                 new AddwCommand(null, new NameMatchesKeywordPredicate(
-                        Arrays.asList(CLIENT_NAME_DESC_ALICEWEDDING.split("\\s+"))), expectedWedding));
+                        Arrays.asList(VALID_CLIENT_NAME_ALICEWEDDING.split("\\s+"))), expectedWedding));
 
         // Single name only
         assertParseFailure(parser,

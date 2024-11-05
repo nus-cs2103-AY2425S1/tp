@@ -91,8 +91,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     // Add new TagPersonDescriptors
-    public static final RoleCommand.PersonWithRoleDescriptor DESC_JON;
-    public static final RoleCommand.PersonWithRoleDescriptor DESC_DOE;
+    public static final AssignCommand.PersonWithRoleDescriptor DESC_JON;
+    public static final AssignCommand.PersonWithRoleDescriptor DESC_DOE;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
