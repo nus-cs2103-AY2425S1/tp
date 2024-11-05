@@ -260,6 +260,9 @@ Example: `find n/John` followed by `find chained n/Doe` will return all persons 
 
 </box>
 
+#### By other fields
+_coming in v2.0_
+
 ### Deleting persons: `delete`
 
 Deletes the specified person from the address book.
