@@ -29,27 +29,27 @@ your contact management tasks done faster than traditional GUI apps.
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `john doe` to the Address Book.
 
-   * `delete John Doe` : Deletes the contact named `John Doe` in the current list.
+   * `delete John Doe` : Deletes the contact named `john doe` in the current list.
 
-   * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
+   * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for john doe on October 14, 2024, at 12pm with the given note.
 
-   * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for John Doe.
+   * `appointment-delete John Doe d/2024-10-14 1200` : Deletes a specified appointment for john doe.
 
    * `appointment-list` : Lists all upcoming scheduled appointments.
 
-   * `edit John Doe n/John Doo` : Edits the name of John Doe to John Doo.
+   * `edit John Doe n/John Doo` : Edits the name of john doe to john doo.
 
-   * `view John Doe` : Shows the details of John Doe.
+   * `view John Doe` : Shows the details of john doe.
 
-   * `find John Doe` : Searches for John Doe in the current list.
+   * `find John Doe` : Searches for john doe in the current list.
 
-   * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
+   * `reminder John Doe r/1 hour` : Sets a reminder for john doe 1 hour before his scheduled appointment.
 
-   * `reminder-delete John Doe` : Deletes the reminder set for John Doe.
+   * `reminder-delete John Doe` : Deletes the reminder set for john doe.
 
-   * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for John Doe on October 14, 2024, at 12pm as paid.
+   * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for john doe on October 14, 2024, at 12pm as paid.
 
    * `clear` : Deletes all contacts.
 
@@ -80,6 +80,8 @@ your contact management tasks done faster than traditional GUI apps.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* The parameter `NAME` is unique and case-insensitive across all commands that require it, and it will be displayed in lowercase.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -104,7 +106,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/acltear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/ankle sprain`<br>
+* `add n/Betsy Crowe t/acl tear e/betsycrowe@example.com a/Newgate Prison p/1234567 t/ankle sprain`<br>
   ![add Betsy Crowe](images/addBetsyCrowe.png)
 
 ### Scheduling an appointment: `schedule`
@@ -258,19 +260,18 @@ Finds persons whose names contain any of the given keywords.
 Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The order of the keywords does not matter. e.g. `hans bo` will match `bo hans`
+* Only the name or the number is searched.
 * Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `hans gruber`, `bo yang`
 * Persons matching the phone number (or parts of it) will be returned
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find john` returns `john` and `john doe`
+* `find alex david` returns `alex yeoh`, `david li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)<br>
-* `find p/88` returns `John Doo` (with phone number `88765432`) <br>
-  ![result for 'find p/88'](images/find88.png)
+* `find p/887` returns `john doo` (with phone number `88765432`) <br>
+  ![result for 'find p/887'](images/find887.png)
 
 ### Deleting a person : `delete`
 
@@ -282,7 +283,7 @@ Format: `delete NAME`
 * The name must be the name of an existing person.
 
 Examples:
-* `delete John Doe` deletes the person named `John Doe` in the address book.
+* `delete John Doe` deletes the person named `john doe` in the address book.
 
 ### Clearing all entries : `clear`
 
