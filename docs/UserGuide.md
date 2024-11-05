@@ -69,7 +69,7 @@ Commands in EZStates follow the same structure:
 |-----------|------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name      | Name of a client or a listing in a list  | Names should only contain `alphanumerical` characters and spaces | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
 
-#### Prefixes
+#### Prefix Notation
 
 Prefixes follow the same structure
 
