@@ -39,7 +39,7 @@ public class EditAppointmentCommand extends Command {
             + PREFIX_NEW_START_TIME + "NEW_START_TIME (HH:MM) \n"
             + PREFIX_NEW_END_TIME + "NEW_END_TIME (HH:MM) \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S1234567A "
+            + PREFIX_NRIC + "S1234567D "
             + PREFIX_DATE + "01/01/2025 "
             + PREFIX_START_TIME + "10:00"
             + PREFIX_NEW_DATE + "02/02/2025 "
@@ -81,6 +81,10 @@ public class EditAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person patient = model.getPerson(findPatientNric);
+
+        if (patient == null) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
 
         Appointment appointmentToEdit = model.getAppointmentForPersonAndTime(patient,
                 findStartDateTime);
