@@ -188,7 +188,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("roles", role)
-                .add("wedding", ownWedding == null ? "null" : ownWedding)
+                .add("wedding", ownWedding == null ? "NA" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }

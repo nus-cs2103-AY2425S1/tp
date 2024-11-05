@@ -77,9 +77,9 @@ public class Wedding {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("client", client)
-                .add("date", date)
-                .add("venue", venue)
+                .add("client", client == null ? "NA" : client)
+                .add("date", date == null ? "NA" : date)
+                .add("venue", venue == null ? "NA" : venue)
                 .toString();
     }
     @Override
