@@ -106,10 +106,15 @@
     padding: 8px;
   }
 
-  .command-titles {
+  .command-titles, summary {
+    cursor: pointer;
     margin-bottom: 8px;
     display: flex;
     font-size: 1.2em;
+  }
+
+  details[open] > summary > .chevrons {
+    transform: rotate(270deg);
   }
 
   code {
@@ -123,6 +128,7 @@
     background-color: transparent !important;
     margin: auto;
     margin-right: 0;
+    transition: 0.2s ease;
   }
 
   .command-content {
@@ -201,7 +207,7 @@
 <h1 class="headers headers-first">StaffSync User Guide</h1>
 
 <p class="content content-special">
-  StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a  Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
+  StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
 </p>
 
 <br>
@@ -309,10 +315,15 @@
 
 <div class="content content-droppable content-droppable-first">
 
-<div>
-  <div class="command-titles">
+<details open>
+  <!-- <div class="command-titles"> -->
+  <summary>
     <strong>Clearing all entries<br><code>clear</code></strong>
-  </div>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
+  <!-- </div> -->
 
   <div class="command-content">
   Clears all entries from StaffSync.
@@ -331,7 +342,7 @@
   **Warning:** There is **NO confirmation prompt** when using this command and is irreversible.
   </div>
   </div>
-</div>
+</details>
 
 </div>
 <div class="content content-droppable">
