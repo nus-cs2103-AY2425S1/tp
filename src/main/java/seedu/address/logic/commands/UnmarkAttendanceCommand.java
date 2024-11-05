@@ -61,7 +61,7 @@ public class UnmarkAttendanceCommand extends Command {
         Person studentUnmarked = studentToUnmark.removeAttendance(classDate);
 
         model.setPerson(studentToUnmark, studentUnmarked);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(model.getCurrentPersonFilter());
         String dateString = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate);
         return new CommandResult(
                 String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, studentUnmarked.getName(), dateString));
