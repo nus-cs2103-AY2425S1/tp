@@ -44,6 +44,8 @@
           </padding>
         </StackPane>
 
+        <VBox fx:id="dashboardPlaceholder" />
+
         <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>

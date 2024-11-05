@@ -177,6 +177,10 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
