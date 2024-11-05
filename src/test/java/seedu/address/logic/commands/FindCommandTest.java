@@ -169,6 +169,41 @@ public class FindCommandTest {
     }
 
     @Test
+    public void test_executeFindByClassId_success() {
+        PersonBuilder class1 = new PersonBuilder().withName("Sally").withClassId("CS2202");
+        PersonBuilder class2 = new PersonBuilder().withName("Benny").withClassId("CS2203");
+        PersonBuilder class3 = new PersonBuilder().withName("Jerry").withClassId("CS2204");
+        PersonBuilder class4 = new PersonBuilder().withName("Aaron").withClassId("CS2205");
+
+        model.addPerson(class1.build());
+        model.addPerson(class2.build());
+        model.addPerson(class3.build());
+        model.addPerson(class4.build());
+
+        expectedModel.addPerson(class1.build());
+        expectedModel.addPerson(class2.build());
+        expectedModel.addPerson(class3.build());
+        expectedModel.addPerson(class4.build());
+
+        // Test case for "CS"
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        PersonPredicateBuilder predicate = preparePredicate("CS", "classId");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(class1.build(), class2.build(),
+                class3.build(), class4.build()), model.getFilteredPersonList());
+
+        // Test case for "CS2102"
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        predicate = preparePredicate("CS2202", "classId");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(class1.build()), model.getFilteredPersonList());
+    }
+
+    @Test
     public void test_monthPaidContainsKeywordsWithMatchers_returnsTrue() {
         // Matcher for month paid
         PersonPredicateBuilder predicateBuilder = preparePredicate("2022-12", "monthPaid");
