@@ -13,7 +13,8 @@ import java.util.Arrays;
  * Represents a LessonTime in the address book.
  * Guarantees: immutable; value is valid as declared in {@link #isValidLessonTime(String)}
  */
-public class LessonTime {
+public class LessonTime implements Comparable<LessonTime> {
+
     enum Days {
         MON, TUE, WED, THU, FRI, SAT, SUN
     }
@@ -102,6 +103,24 @@ public class LessonTime {
         return lessonDay.equals(otherLessonTime.getLessonDay())
                 && lessonStart.equals(otherLessonTime.getLessonStart())
                 && lessonEnd.equals(otherLessonTime.getLessonEnd());
+    }
+
+    @Override
+    public int compareTo(LessonTime o) {
+
+        int dayComparison = Days.valueOf(this.lessonDay).ordinal() - Days.valueOf(o.lessonDay).ordinal();
+        if (dayComparison != 0) {
+            return dayComparison;
+        }
+
+        // If the days are the same, compare the start times
+        int startTimeComparison = this.lessonStart.compareTo(o.lessonStart);
+        if (startTimeComparison != 0) {
+            return startTimeComparison;
+        }
+
+        // If both the day and start time are the same, compare the end times
+        return this.lessonEnd.compareTo(o.lessonEnd);
     }
 
     @Override
