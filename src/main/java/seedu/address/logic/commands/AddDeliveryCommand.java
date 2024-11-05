@@ -32,7 +32,7 @@ public class AddDeliveryCommand extends Command {
             + PREFIX_DATETIME + "dd-mm-yyyy hh:mm "
             + PREFIX_SUPPLIER_INDEX + "SUPPLIER_INDEX "
             + PREFIX_PRODUCT + "PRODUCT "
-            + PREFIX_QUANTITY + "QUANTITY kg/g/litres/ml/units "
+            + PREFIX_QUANTITY + "QUANTITY kg/g/L/mL/units "
             + PREFIX_COST + "COST\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + PREFIX_DATETIME + "18-06-2024 17:00 "
