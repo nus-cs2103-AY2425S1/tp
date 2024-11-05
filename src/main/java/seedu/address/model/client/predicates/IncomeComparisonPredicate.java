@@ -59,7 +59,7 @@ public class IncomeComparisonPredicate implements Predicate<Client> {
 
         IncomeComparisonPredicate otherIncomeComparisonPredicate =
                 (IncomeComparisonPredicate) other;
-        return incomeThreshold == otherIncomeComparisonPredicate.incomeThreshold
+        return incomeThreshold.equals(otherIncomeComparisonPredicate.incomeThreshold)
                 && incomeComparisonOperator.equals(otherIncomeComparisonPredicate.incomeComparisonOperator);
     }
 
