@@ -32,6 +32,8 @@ public class DeleteAppointmentParser implements Parser<DeleteAppointmentCommand>
                 DeleteAppointmentCommand.MESSAGE_USAGE));
         }
 
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_DATE, PREFIX_START_TIME);
+
         Nric nric = ParserUtil.parseNric(argumentMultimap.getValue(PREFIX_NRIC).get());
         LocalDate date = ParserUtil.parseDate(argumentMultimap.getValue(PREFIX_DATE).get());
         LocalTime startTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_START_TIME).get());
