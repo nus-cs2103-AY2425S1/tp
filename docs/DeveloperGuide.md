@@ -453,129 +453,147 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the System is the TrackMate and the Actor is the National University of Singapore teaching assistants, unless specified otherwise)
 
-**Use case: Delete a student**
+#### Use Case: Add Student
+#### Main Success Scenario (MSS)
 
-**MSS**
+1. User requests to add a new student.
+2. User inputs the required details.
+3. TrackMate confirms that the student details are valid and adds the student to the list.
+4. The new student record is successfully created.
 
-1.  User requests to list students
-2.  AddressBook shows a list of students
-3.  User requests to delete a specific student in the list
-4.  AddressBook deletes the student
+Use case ends.
 
-    Use case ends.
+#### Extensions
 
-**Extensions**
+2a. User enters incomplete or invalid student details:
+* 2a1. TrackMate informs the user of the specific constraints for each field.
+* 2a2. User re-enters the correct information. Steps 3a1–3a2 are repeated until all required fields are valid.
 
-* 2a. The list is empty.
+Use case resumes at Step 3.
 
-  Use case ends.
+2b. Duplicate student id found:
+* 2b1. TrackMate informs the user that a student with the same id already exists.
+* 2b2. User re-enters the new student id. Steps 3b1–3b2 are repeated until a new student id is provided.
 
-* 3a. The given index is invalid.
+Use case resumes at Step 3.
 
-    * 3a1. AddressBook shows an error message.
+#### Use Case: Add Tutorial
+#### Main Success Scenario (MSS)
 
-      Use case resumes at step 2.
+1. User requests to add a tutorial.
+2. User inputs the tutorial information.
+3. TrackMate validates the input and confirms the addition.
+4. The new tutorial session is successfully created.
 
-**Use case: Add a student**
+Use case ends.
 
-**MSS**
+#### Extensions
 
-1.  User requests to list students
-2.  AddressBook shows a list of students
-3.  User requests to add a specific student to the list
-4.  AddressBook adds the student
+2a. Invalid tutorial id or name format entered:
+* 2a1. TrackMate informs the user of the constraints for tutorial id or name.
+* 2a2. User re-enters the correct tutorial id or name. Steps 3a1–3a2 are repeated until a valid code is provided.
 
-    Use case ends.
+Use case resumes at Step 3.
 
-**Extensions**
+2b. Duplicate tutorial id found:
+* 2b1. TrackMate informs the user that a tutorial with the same id already exists.
+* 2b2. User re-enters the new tutorial id. Steps 3b1–3b2 are repeated until a new tutorial id is provided.
 
-* 2a. The list is full.
-    * AddressBook shows an error message
-      Use case ends.
+Use case resumes at Step 3.
 
-* 3a. The given index is invalid.
+#### Use Case: Add Attendance
+#### Main Success Scenario (MSS)
 
-    * 3a1. AddressBook shows an error message.
+1. User requests to record attendance for a tutorial session.
+2. User inputs the student information. 
+3. TrackMate validates the input and confirms the attendance.
+4. Attendance data is successfully saved.
 
-      Use case resumes at step 2.
+Use case ends.
 
-**Use case: Categorise student based on tutorial class**
+#### Extensions
 
-**MSS**
+2a. User enters an invalid attendance date (incorrect date format: yyyy-MM-dd)
+* 2a1. TrackMate informs the user of the accepted date format for attendance.
+* 2a2. User re-enters the date. Steps 2a1–2a2 are repeated until a valid status is given.
 
-1.  User requests to list students
-2.  AddressBook shows a list of students
-3.  User requests to categorise the tutorial class of a specific student to the list
-4.  AddressBook checks if the tutorial class is valid.
-5.  AddressBook edits the student's tutorial class
+Use case resumes at Step 3.
 
-    Use case ends.
+2b. User enters the student information wrongly.
+* 2b1. TrackMate informs the user that the student information is incorrect.
+* 2b2. User re-enters the student information. Steps 2a1–2a2 are repeated until a valid status is given.
 
-**Extensions**
+Use case resumes at Step 3.
 
-* 1a. The list is empty.
+#### Use Case: Add Assignment
+#### Main Success Scenario (MSS)
 
-  Use case ends.
+1. User requests to add a new assignment.
+2. User inputs the assignment information.
+3. TrackMate validates the assignment details.
 
-* 3a. The given student index is invalid.
+Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+#### Extensions
 
-      Use case resumes at step 3.
+2a. User enters an invalid due date (incorrect date format: yyyy-MM-dd)
+* 2a1. TrackMate informs the user of the accepted date format for due date.
+* 2a2. User re-enters the due date in the correct format. Steps 2a1–2a2 are repeated until a valid date is entered.
 
-* 4a. The given tutorial index is invalid.
+Use case resumes at Step 3.
 
-    * 4a1. AddressBook shows an error message.
+2b. Duplicate assignment name found:
+* 2b1. TrackMate informs the user that an assignment with the same name already exists.
+* 2b2. User re-enters the new assignment name. Steps 2a1–2a2 are repeated until a new assignment name is entered.
 
-      Use case resumes at step 4.
+Use case resumes at Step 3.
 
-**Use case: Record Student Attendance**
+#### Use Case: Edit the Information of a Student
+#### Main Success Scenario (MSS)
 
-**MSS**
+1. User request to edit student details.
+2. User inputs the student index and updated information.
+3. The student's information is successfully changed.
 
-1.  User requests to list students
-2.  AddressBook shows a list of students
-3.  User requests to mark attendance of a specific student to the list
-4.  AddressBook adds the date and status to the students attendance list
+Use case ends.
 
-    Use case ends.
+#### Extensions
 
-**Extensions**
+2a. Invalid student index is entered
+* 2a1. TrackMate informs user that the index is invalid.
+* 2a2. User enters the correct student index and updated information. Steps 2a1 - 2a2 are repeated till a valid student index is given.
 
-* 1a. The list is empty.
+Use case resumes at step 3.
 
-  Use case ends.
+2b. detect error in any updated information entered (invalid format)
+* 2b1. TrackMate informs the user of the specific constraints for each field.
+* 2b2. User re-enters the correct information. Steps 3a1–3a2 are repeated until all required fields are valid.
 
-* 3a. The given student index is invalid.
+Use case resumes at step 3.
 
-    * 3a1. AddressBook shows an error message.
+2c. updated information is the same as current information
+* 2c1. No changes made to information
 
-      Use case resumes at step 3.
+Use case ends.
 
-* 4a. The date given is invalid or after the current date.
+#### Use Case: Delete Student
+#### Main Success Scenario (MSS)
 
-    * 4a1. AddressBook shows an error message.
+1. User request to delete student details.
+2. User inputs the student's index.
+3. TrackMate successfully deletes the student record.
 
-      Use case resumes at step 4.
+Use case ends.
 
-**Use case: Add assignment**
+#### Extensions
 
-**MSS**
+2a. Invalid student index is entered
+* 2a1. TrackMate informs user that the index is invalid.
+* 2a2. User enters the correct student index and updated information. Steps 2a1 - 2a2 are repeated till a valid student index is given.
 
-1.  User requests to add an assignment
-2.  AddressBook creates the assignment
-3.  AddressBook gets a list of students
-4.  AddressBook adds the copy of the assignment to the assignment list of every student in the list.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  Use case ends.
+Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
