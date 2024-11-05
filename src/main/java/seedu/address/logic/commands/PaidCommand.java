@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY;
 
 import java.util.List;
 
@@ -19,9 +19,10 @@ import seedu.address.model.person.Policy;
 public class PaidCommand extends Command {
     public static final String COMMAND_WORD = "paid";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the policy identified by the policy name as paid and updates the next payment date.\n"
-            + "Parameters: INDEX (must be a positive integer) " + PREFIX_POLICY_NAME + "POLICY_NAME\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_POLICY_NAME + "Health Insurance";
+            + ": Marks the policy identified by the policy index as paid and updates the next payment date.\n"
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_POLICY
+            + "POLICY_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_POLICY + "1";
 
     public static final String MESSAGE_SUCCESS = "Policy %1$s for %2$s is marked as paid. Next payment date updated.";
     public static final String MESSAGE_FULLY_PAID = "The policy %1$s for %2$s will be fully paid after this payment.";
@@ -29,16 +30,16 @@ public class PaidCommand extends Command {
     public static final String MESSAGE_INVALID_PAYDATE = "The policy %1$s for %2$s is fully paid.";
 
     private final Index targetIndex;
-    private final String policyName;
+    private final Index policyIndex;
 
     /**
      * Creates a PaidCommand to mark the specified policy as paid.
      */
-    public PaidCommand(Index targetIndex, String policyName) {
+    public PaidCommand(Index targetIndex, Index policyIndex) {
         requireNonNull(targetIndex);
-        requireNonNull(policyName);
+        requireNonNull(policyIndex);
         this.targetIndex = targetIndex;
-        this.policyName = policyName;
+        this.policyIndex = policyIndex;
     }
 
     @Override
@@ -51,24 +52,29 @@ public class PaidCommand extends Command {
         }
 
         Person personToUpdate = lastShownList.get(targetIndex.getZeroBased());
-        Policy policyToUpdate = personToUpdate.getPolicyByName(policyName);
 
-        if (policyToUpdate == null) {
-            throw new CommandException(String.format(MESSAGE_INVALID_POLICY, policyName, personToUpdate.getName()));
+        if (policyIndex.getZeroBased() >= personToUpdate.getPolicies().size()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_POLICY, policyIndex.getOneBased(),
+                    personToUpdate.getName()));
         }
 
+        Policy policyToUpdate = personToUpdate.getPolicies().get(policyIndex.getZeroBased());
+
         if (policyToUpdate.isFullyPaid()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyName, personToUpdate.getName()));
+            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyIndex.getOneBased(),
+                    personToUpdate.getName()));
         }
 
         if (policyToUpdate.isExpiringSoon()) {
             policyToUpdate.updateNextPaymentDate();
-            return new CommandResult(String.format(MESSAGE_FULLY_PAID, policyName, personToUpdate.getName()));
+            return new CommandResult(String.format(MESSAGE_FULLY_PAID, policyIndex.getOneBased(),
+                    personToUpdate.getName()));
         }
 
         policyToUpdate.updateNextPaymentDate();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, policyName, personToUpdate.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, policyIndex.getOneBased(),
+                personToUpdate.getName()));
     }
 
     @Override
@@ -84,14 +90,14 @@ public class PaidCommand extends Command {
 
         PaidCommand otherPaidCommand = (PaidCommand) other;
         return targetIndex.equals(otherPaidCommand.targetIndex)
-                && policyName.equals(otherPaidCommand.policyName);
+                && policyIndex.equals(otherPaidCommand.policyIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
-                .add("policyName", policyName)
+                .add("policyIndex", policyIndex)
                 .toString();
     }
 }
