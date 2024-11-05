@@ -11,8 +11,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerAddDateCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerDeleteCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerNewCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerRemoveDateCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerViewCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -58,6 +60,10 @@ public class VolunteerCommandParser {
             return new FindVolunteerCommandParser().parse(arguments);
         case VolunteerViewCommand.COMMAND_WORD:
             return new VolunteerViewCommandParser().parse(arguments);
+        case VolunteerAddDateCommand.COMMAND_WORD:
+            return new VolunteerAddDateCommandParser().parse(arguments);
+        case VolunteerRemoveDateCommand.COMMAND_WORD:
+            return new VolunteerRemoveDateCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

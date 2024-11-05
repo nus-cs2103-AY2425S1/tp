@@ -19,14 +19,14 @@ public class VolunteerTest {
         Name name = ALICE.getName();
         Phone phone = ALICE.getPhone();
         Email email = ALICE.getEmail();
-        Date availableDate = ALICE.getAvailableDate();
+        VolunteerDates availableDate = ALICE.getAvailableDates();
 
         Volunteer volunteer = new Volunteer(name, phone, email, availableDate);
 
         assertEquals(name, volunteer.getName());
         assertEquals(phone, volunteer.getPhone());
         assertEquals(email, volunteer.getEmail());
-        assertEquals(availableDate, volunteer.getAvailableDate());
+        assertEquals(availableDate, volunteer.getAvailableDates());
         assertTrue(volunteer.getInvolvedIn().isEmpty()); // Ensure the involvedIn list is empty
     }
 
@@ -34,9 +34,9 @@ public class VolunteerTest {
     @Test
     public void getId_uniqueIdAssigned() {
         Volunteer volunteer1 = new Volunteer(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                ALICE.getAvailableDate());
+                ALICE.getAvailableDates());
         Volunteer volunteer2 = new Volunteer(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
-                ALICE.getAvailableDate());
+                ALICE.getAvailableDates());
 
         // Check if both volunteers have unique IDs
         assertTrue(volunteer1.getId() != volunteer2.getId()); // IDs should be different
@@ -130,7 +130,7 @@ public class VolunteerTest {
         String expected = "Volunteer{name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
-                + ", availableDate=" + ALICE.getAvailableDate() + "}";
+                + ", availableDate=" + ALICE.getAvailableDates() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

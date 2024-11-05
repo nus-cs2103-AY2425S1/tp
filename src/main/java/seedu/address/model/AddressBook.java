@@ -7,6 +7,8 @@ import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.OverlappingAssignException;
+import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
+import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
 
 import java.util.LinkedList;
@@ -191,4 +193,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return volunteerManager.hashCode() * 31 + eventManager.hashCode();
     }
 
+    public void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws
+            VolunteerDuplicateDateException {
+        volunteerManager.addDatesToVolunteer(volunteerToAddDate, dateList);
+    }
+
+    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
+            VolunteerDeleteMissingDateException {
+        volunteerManager.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
+    }
 }

@@ -25,11 +25,11 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
-import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerDates;
 import seedu.address.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
@@ -82,7 +82,7 @@ public class AddressBookParserTest {
     public void parseCommand_newVolunteer() throws Exception {
         String volunteerDetails = "n/John Doe p/98765432 em/johndoe@example.com d/2020-10-10";
         Volunteer volunteer = new Volunteer(new Name("John Doe"), new Phone("98765432"),
-                new Email("johndoe@example.com"), new Date("2020-10-10"));
+                new Email("johndoe@example.com"), new VolunteerDates("2020-10-10"));
         VolunteerNewCommand command = (VolunteerNewCommand) parser.parseCommand(
                 createCommand(AddressBookParser.VOLUNTEER_COMMAND_INDICATOR,
             VolunteerNewCommand.COMMAND_WORD, volunteerDetails));

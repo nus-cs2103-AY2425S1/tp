@@ -8,7 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
@@ -47,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private FlowPane volunteerListPanelPlaceholder;
+    private BorderPane borderPane;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -118,10 +118,14 @@ public class MainWindow extends UiPart<Stage> {
         volunteerListPanel = new VolunteerListPanel(logic.getFilteredVolunteerList());
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
 
-        eventListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
-        volunteerListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
+        eventListPanel.getRoot().minWidthProperty().bind(borderPane.widthProperty().multiply(0.49));
+        eventListPanel.getRoot().minHeightProperty().bind(borderPane.heightProperty());
+        volunteerListPanel.getRoot().minWidthProperty().bind(borderPane.widthProperty().multiply(0.49));
+        volunteerListPanel.getRoot().minHeightProperty().bind(borderPane.heightProperty());
 
-        volunteerListPanelPlaceholder.getChildren().addAll(volunteerListPanel.getRoot(), eventListPanel.getRoot());
+        borderPane.setLeft(volunteerListPanel.getRoot());
+        borderPane.setRight(eventListPanel.getRoot());
+        borderPane.minHeightProperty().bind(primaryStage.heightProperty().multiply(0.6));
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
