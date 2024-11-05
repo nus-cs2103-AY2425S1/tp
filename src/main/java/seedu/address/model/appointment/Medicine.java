@@ -12,10 +12,6 @@ public class Medicine {
     public static final String MESSAGE_CONSTRAINTS = "Medicines should contain at least one letter "
             + "(alphabetic character), and it should not be blank";
 
-    /*
-     * The first character of the medicine must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "(?=.*[a-zA-Z]).+";
 
     public final String value;
