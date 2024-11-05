@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 /**
@@ -45,6 +46,7 @@ public class GoodsCard extends UiPart<Region> {
         this.goodsReceipt = goodsReceipt;
         id.setText(displayedIndex + ". ");
         goodsName.setText(goodsReceipt.getGoods().toString());
+        setStyle(goodsName, goodsReceipt.isDelivered() ? "cell_big_label_success" : "cell_big_label_warning");
         goodsCategory.setText(goodsReceipt.getGoods().getCategory().toString());
         supplierName.setText("From: " + goodsReceipt.getSupplierName().toString());
         procurementDate.setText("Ordered on " + goodsReceipt.getProcurementDate().getReadableDateTimeString());
@@ -52,5 +54,15 @@ public class GoodsCard extends UiPart<Region> {
         isDelivered.setText("Delivery Status: " + (goodsReceipt.isDelivered() ? "Delivered" : "Pending"));
         quantity.setText("Quantity: " + String.valueOf(goodsReceipt.getQuantity()));
         price.setText("Cost: " + String.valueOf(goodsReceipt.getPriceTotal()));
+    }
+
+    /**
+     * Sets the style of the label
+     * @param label The label to be styled.
+     * @param style the style to be applied to the label.
+     */
+    private void setStyle(Label label, String style) {
+        label.getStyleClass().clear();
+        label.getStyleClass().add(style);
     }
 }
