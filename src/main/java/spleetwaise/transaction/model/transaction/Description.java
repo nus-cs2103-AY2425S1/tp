@@ -27,12 +27,13 @@ public class Description {
      */
     public Description(String description) {
         requireNonNull(description);
+        description = description.trim();
         AppUtil.checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
-        this.description = description.trim();
+        this.description = description;
     }
 
     public static boolean isValidDescription(String testString) {
-        return !testString.isEmpty() && testString.length() < MAX_LENGTH;
+        return !testString.trim().isEmpty() && testString.trim().length() <= MAX_LENGTH;
     }
 
     @Override

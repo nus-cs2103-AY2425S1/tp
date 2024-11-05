@@ -51,6 +51,7 @@ public class ParserUtil extends BaseParserUtil {
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
         description = description.trim();
+        description = description.replace("\\/", "/");
         if (!Description.isValidDescription(description)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
