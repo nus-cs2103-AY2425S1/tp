@@ -124,6 +124,9 @@ public class EventParserUtil {
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
+        if (trimmedDescription.isEmpty()) {
+            throw new ParseException(Description.MESSAGE_DESCRIPTION_REMINDER);
+        }
         return new Description(trimmedDescription);
     }
 

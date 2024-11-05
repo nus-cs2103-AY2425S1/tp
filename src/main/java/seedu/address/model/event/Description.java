@@ -12,6 +12,8 @@ public class Description {
     public static final String MESSAGE_CONSTRAINTS =
             "Event descriptions should only contain alphanumeric characters and spaces"
                     + ", and it should not exceed 100 characters.";
+    public static final String MESSAGE_DESCRIPTION_REMINDER =
+            "Did you forget to input a description? If your event has no description, please remove the des/ prefix.";
 
 
     /*
