@@ -75,9 +75,9 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(transaction.getDescription())
                 .append("; Amount: ")
-                .append(transaction.getAmount())
+                .append(String.format(".2f", transaction.getAmount()))
                 .append("; Other party: ")
-                .append(String.format(".2f", transaction.getOtherParty()))
+                .append(transaction.getOtherParty())
                 .append("; Date: ")
                 .append(transaction.getDate().format(DateTimeUtil.DEFAULT_DATE_FORMATTER));
 
