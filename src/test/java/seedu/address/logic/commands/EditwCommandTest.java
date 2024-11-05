@@ -153,4 +153,27 @@ class EditwCommandTest {
         assertNotEquals(null, command);
         assertNotEquals(command, new Object());
     }
+
+    @Test
+    void execute_partialFieldUpdate_success() throws Exception {
+        ModelStubAcceptingWeddingAdded modelStub = new ModelStubAcceptingWeddingAdded();
+        Client validClient = new Client(JOHN);
+        Wedding validWedding = new Wedding(new Name("OriginalWedding"), validClient, new Date("2024-10-31"),
+                new Venue("OriginalVenue"));
+        modelStub.addWedding(validWedding);
+
+        EditwCommand.EditWeddingDescriptor descriptor = new EditwCommand.EditWeddingDescriptor();
+        descriptor.setVenue(new Venue("UpdatedVenue"));
+
+        EditwCommand command = new EditwCommand(Index.fromOneBased(1), descriptor);
+        CommandResult result = command.execute(modelStub);
+
+        Wedding editedWedding = modelStub.getFilteredWeddingList().get(0);
+        assertEquals("OriginalWedding", editedWedding.getName().toString());
+        assertEquals("2024-10-31", editedWedding.getDate().toString());
+        assertEquals("UpdatedVenue", editedWedding.getVenue().toString());
+        assertEquals(String.format(EditwCommand.MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)),
+                result.getFeedbackToUser());
+    }
+
 }
