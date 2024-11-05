@@ -62,8 +62,8 @@ public class EcNumber implements Comparable<EcNumber> {
             return false;
         }
 
-        EcNumber otherNumber = (EcNumber) other;
-        return value.equals(otherNumber.value);
+        EcNumber otherEcNumber = (EcNumber) other;
+        return value.equals(otherEcNumber.value);
     }
 
     @Override

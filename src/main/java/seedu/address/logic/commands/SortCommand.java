@@ -114,7 +114,7 @@ public class SortCommand extends Command {
             return false;
         }
 
-        SortCommand s = (SortCommand) other;
-        return sortAttribute.equals(s.sortAttribute);
+        SortCommand otherSortCommand = (SortCommand) other;
+        return sortAttribute.equals(otherSortCommand.sortAttribute);
     }
 }

@@ -83,8 +83,8 @@ public class AddEcNumberCommand extends Command {
             return false;
         }
 
-        AddEcNumberCommand e = (AddEcNumberCommand) other;
-        return index.equals(e.index)
-                && ecNumber.equals(e.ecNumber);
+        AddEcNumberCommand otherAddEcNumberCommand = (AddEcNumberCommand) other;
+        return index.equals(otherAddEcNumberCommand.index)
+                && ecNumber.equals(otherAddEcNumberCommand.ecNumber);
     }
 }
