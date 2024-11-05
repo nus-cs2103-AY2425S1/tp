@@ -58,10 +58,10 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Tags in Knotty Planners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `Jonus Ho & Izzat Syazani`, `stacy & sam`).
+* Tags in Knotty Planners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`,, `Stacy & Sam` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -87,23 +87,25 @@ You can add a person to the list of contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
-<box type="tip" seamless>
+box type="important" seamless>
 
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
 * We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
 
+</box>
+
+<box type="tip" seamless>
+
 **Tip:**
 * A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
 involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
-* To make adding s person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+* To make adding a person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
 
     Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
 
 </box>
-
-
 
 ![add message](images/addMsg.png)
 
@@ -122,8 +124,11 @@ You can delete a person from your list of contacts.
 
 Format: `del n/NAME` followed by `y` or `n`
 
-**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be
-affected.
+<box type="important" seamless>
+
+**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be affected.
+
+</box>
 
 ![delete message](images/deleteMsg.png)
 
@@ -333,6 +338,7 @@ There is no need to save manually.
 **<span style="color: red;">Caution:</span>**
 * If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
