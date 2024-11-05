@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* Our name, **CampusConnect**, was inspired by the NUS internship portal [**TalentConnect**](https://nus-csm.symplicity.com/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -548,3 +548,7 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Efforts**
