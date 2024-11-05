@@ -138,6 +138,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.clearPersonFromContacts(target);
     }
 
+    /**
+     * Replaces the given person from all events.
+     */
+    public void replacePersonInEvents(Person personToEdit, Person editedPerson) {
+        events.replacePersonInEvents(personToEdit, editedPerson);
+    }
+
     public Person findPerson(String personName) {
         return persons.findPerson(personName);
     }

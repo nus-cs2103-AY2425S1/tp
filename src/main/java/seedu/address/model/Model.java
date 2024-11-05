@@ -86,6 +86,11 @@ public interface Model {
     void clearPersonFromContacts(Person target);
 
     /**
+     * Replaces the given person from all events.
+     */
+    void replacePersonInEvents(Person personToEdit, Person editedPerson);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
