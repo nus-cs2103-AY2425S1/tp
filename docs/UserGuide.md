@@ -204,7 +204,7 @@ Similarly, the `whitelist` command can be entered to find all clients who are wh
 _Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
 </div>
 
-### Delete Client Details : `delete`
+### Delete Client Details: `delete`
 
 Deletes the specified person from Clientele+.
 
@@ -248,7 +248,7 @@ Entering `blacklist` on its own without any other parameters will filter and dis
 
 </div>
 
-### Whitelist a Client : `whitelist`
+### Whitelist a Client: `whitelist`
 
 Whitelists a previously-blacklisted client.
 
@@ -272,7 +272,7 @@ Entering `whitelist` on its own without any other parameters will filter and dis
 
 </div>
 
-### Sort Client list : `sort`
+### Sort Client list: `sort`
 
 Sorts the client list in ascending order by the specified field.
 
@@ -310,7 +310,7 @@ An unarchive feature is in the works and will be available in the future.
 
 </div>
 
-### Listing all archived clients `archive-list`
+### Listing all archived clients: `archive-list`
 Shows a list of all archived clients' contacts in Clientele+.
 
 Format: `archive-list`
