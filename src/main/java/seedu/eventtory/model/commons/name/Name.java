@@ -12,10 +12,11 @@ public class Name {
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the eventtory must not be a whitespace,
+     * The first character of a name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Forward slashes are also not allowed as they conflict with command syntax.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[^\\s/][^/]*$";
 
     public final String fullName;
 
