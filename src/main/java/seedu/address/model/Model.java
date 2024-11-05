@@ -124,6 +124,12 @@ public interface Model {
      */
     IngredientCatalogue getIngredientCatalogue();
 
+    /**
+     * Returns the next available product ID.
+     * @return The next product ID as an integer.
+     */
+    int getNextProductId();
+
     //=========== Order Management ========================================================================
 
     /**

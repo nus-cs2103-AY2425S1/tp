@@ -16,14 +16,19 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.StorageManager;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddCustomerCommand}.
@@ -34,7 +39,9 @@ public class AddCustomerCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new AddressBook(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), new UserPrefs(),
+                IngredientCatalogue.getInstance(), new PastryCatalogue(),
+                new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
         // Add a sample Customer to the model to ensure it's in the filtered list
         Customer existingCustomer = new Customer(
                 new Name("Alice Tan"),
@@ -65,7 +72,9 @@ public class AddCustomerCommandTest {
         AddCustomerCommand command = new AddCustomerCommand(validCustomer);
 
         // Expected model state after adding the customer
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), IngredientCatalogue.getInstance(),
+                new PastryCatalogue(), new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
         expectedModel.addPerson(validCustomer);
 
         // Adjust expected message format to match actual CommandResult output

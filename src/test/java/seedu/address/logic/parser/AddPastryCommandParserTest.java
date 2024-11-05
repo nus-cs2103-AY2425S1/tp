@@ -30,7 +30,7 @@ public class AddPastryCommandParserTest {
     @Test
     public void parse_validArgs_returnsAddPastryCommand() {
         // Prepare the expected AddPastryCommand
-        IngredientCatalogue catalogue = new IngredientCatalogue();
+        IngredientCatalogue catalogue = IngredientCatalogue.getInstance();
         ArrayList<Ingredient> ingredients = new ArrayList<>(List.of(
                 catalogue.getIngredientByName("Flour"),
                 catalogue.getIngredientByName("Sugar")

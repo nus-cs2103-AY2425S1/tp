@@ -8,8 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -21,7 +19,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.util.Remark;
 import seedu.address.model.person.Supplier;
-import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
@@ -49,17 +46,8 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(null));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(null));
-        // Parse ingredients supplied as a list of Ingredient objects
-        List<Ingredient> ingredientList = new ArrayList<>();
-        String[] ingredientNames = argMultimap.getValue(PREFIX_INGREDIENTS_SUPPLIED).orElse("").split(",");
-        for (String nameStr : ingredientNames) {
-            String trimmedName = nameStr.trim();
-            if (!trimmedName.isEmpty()) {
-                ingredientList.add(new Ingredient(0, trimmedName, 0.0)); // Placeholder values
-            }
-        }
-        Ingredients ingredientsSupplied = new Ingredients(ingredientList);
-
+        Ingredients ingredientsSupplied = ParserUtil.parseIngredients(argMultimap.getValue(PREFIX_INGREDIENTS_SUPPLIED)
+                                                                                    .orElse(null));
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // Add the "supplier" tag explicitly
