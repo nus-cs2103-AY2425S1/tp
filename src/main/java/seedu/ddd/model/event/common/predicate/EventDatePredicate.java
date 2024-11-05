@@ -19,7 +19,7 @@ public class EventDatePredicate implements Predicate<Event> {
 
     @Override
     public boolean test(Event event) {
-        return Date.parseDate(this.date.toString()).equals(Date.parseDate(event.getDate().toString()));
+        return this.date.equals(event.getDate());
     }
 
     @Override
