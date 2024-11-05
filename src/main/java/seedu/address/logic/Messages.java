@@ -49,16 +49,23 @@ public class Messages {
                 .append(person.getAddress());
 
         appendTelegramUsernameToMsg(person, builder);
-        builder.append("; Roles: ");
-        person.getRoles().forEach(builder::append);
+
+        appendRolesToMsg(person, builder);
 
         return builder.toString();
     }
 
     private static void appendTelegramUsernameToMsg(Person person, StringBuilder builder) {
-        builder.append("; Telegram username: ");
         if (person.getTelegramUsername().toString() != null) {
+            builder.append("; Telegram username: ");
             builder.append(person.getTelegramUsername());
+        }
+    }
+
+    private static void appendRolesToMsg(Person person, StringBuilder builder) {
+        if (!person.getRoles().isEmpty()) {
+            builder.append("; Roles: ");
+            person.getRoles().forEach(builder::append);
         }
     }
 
