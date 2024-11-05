@@ -47,12 +47,18 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        person.getOrderedTags()
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName + " " + tag.getTagCategory())));
-
+        syncPersonTagDetails(person);
 
         // add horizontal and vertical gaps for the tags FlowPane
         tags.setHgap(5);
         tags.setVgap(5);
+    }
+
+    private void syncPersonTagDetails(Person person) {
+        person.getOrderedTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.setStyle("-fx-padding: 2; -fx-background-color: " + tag.getTagColour());
+            tags.getChildren().add(tagLabel);
+        });
     }
 }
