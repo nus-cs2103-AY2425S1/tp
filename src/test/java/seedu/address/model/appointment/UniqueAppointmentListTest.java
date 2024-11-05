@@ -111,7 +111,6 @@ public class UniqueAppointmentListTest {
         list1.addAppointment(appointment1);
         list2.addAppointment(appointment1);
         assertEquals(list1.hashCode(), list2.hashCode());
-        
         // EP: different list
         list2.addAppointment(appointment2);
         assertNotEquals(list1.hashCode(), list2.hashCode());
