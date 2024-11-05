@@ -559,6 +559,11 @@ Features that we feel would further enhance the user experience include
 - The option to customize the colors of the categories.
 - Include more than one number per contact as some people may own multiple contact numbers.
 - The feature to add a custom field to the contacts added.
+- The option to add custom shortcut commands.
+- The option to delete a specific tag from all contacts at once.
+- Include a dark mode theme for ease on eyes in the dark.
+- The option to copy the contact information to reduce errors from manual copying.
+- The option to export out the contact for ease of sharing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
