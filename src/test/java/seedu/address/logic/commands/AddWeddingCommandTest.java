@@ -239,6 +239,11 @@ public class AddWeddingCommandTest {
         }
 
         @Override
+        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Wedding> getFilteredWeddingList() {
             throw new AssertionError("This method should not be called.");
         }

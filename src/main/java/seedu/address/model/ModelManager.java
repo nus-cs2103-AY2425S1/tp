@@ -205,6 +205,7 @@ public class ModelManager implements Model {
         weddingBook.setWedding(target, editedWedding);
     }
 
+    @Override
     public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
         List<Wedding> weddingList = getFilteredWeddingList();
 
