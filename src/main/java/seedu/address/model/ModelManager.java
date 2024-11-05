@@ -103,6 +103,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setAddressBookAssignments(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetAssignmentData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }

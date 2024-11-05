@@ -93,6 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         resetEmployeeData(newData);
         resetProjectData(newData);
+        resetAssignmentData(newData);
     }
 
     /**
@@ -113,6 +114,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setProjects(newData.getProjectList());
+    }
+
+    /**
+     * Resets the existing assignments data of this {@code AddressBook} with
+     * {@code newData}.
+     */
+    public void resetAssignmentData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
+        setAssignments(newData.getAssignmentList());
     }
 
     //// employee-level operations

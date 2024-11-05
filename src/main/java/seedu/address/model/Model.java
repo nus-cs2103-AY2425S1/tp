@@ -66,6 +66,11 @@ public interface Model {
      */
     void setAddressBookProject(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Replaces address book assignments data with the data in {@code addressBook}.
+     */
+    void setAddressBookAssignments(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
