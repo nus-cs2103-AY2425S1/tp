@@ -13,10 +13,13 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = "See `" + COMMAND_WORD + "`: Shows program usage instructions.\n"
             + "Format: " + COMMAND_WORD;
-    public static final String SHOWING_HELP_MESSAGE = "Command List: " + Messages.MESSAGE_COMMAND_LIST + "\n"
-            + "For more details, type `help [COMMAND_WORD]` with the words found in the command list above "
-            + "except for " + COMMAND_WORD + "\n"
-            + "Alternatively, visit our user guide on the popup screen";
+    public static final String SHOWING_HELP_MESSAGE = "List of other commands: "
+            + Messages.MESSAGE_COMMAND_LIST.replace("help, ", "") + "\n"
+            + "For more details, type `help [COMMAND_WORD]` with the words found in the command list above."
+            + "\nAlternatively, visit https://ay2425s1-cs2103-f09-1.github.io/tp/UserGuide.html for " +
+            "complete user guide";
+           // + "\nAlternatively, visit our complete user guide on the popup screen";
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f09-1.github.io/tp/UserGuide.html";
 
     // studentStatus and Role can magic number
     public static final String HELP_ADD = AddCommand.MESSAGE_FUNCTION + "\n"

@@ -9,6 +9,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
@@ -45,7 +47,7 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="paginationContactPlaceholder" styleClass="pagination, pane-with-border"  minWidth="340" prefWidth="340">
+        <StackPane fx:id="paginationContactPlaceholder" styleClass="pagination, pane-with-border"  minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>

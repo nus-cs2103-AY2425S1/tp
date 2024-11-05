@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -56,10 +57,12 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        showGoToButton();
-        setHelpMessage();
+        helpMessage.setText(HELP_MESSAGE);
+        //showGoToButton();
+        //setHelpMessage();
     }
 
+    /*
     private void setHelpMessage() {
         if (!goToButton.isVisible()) {
             helpMessage.setText(HELP_MESSAGE);
@@ -75,7 +78,7 @@ public class HelpWindow extends UiPart<Stage> {
             return;
         }
         goToButton.setVisible(true);
-    }
+    }*/
 
     /**
      * Creates a new HelpWindow.
@@ -105,10 +108,11 @@ public class HelpWindow extends UiPart<Stage> {
     public void show() {
         logger.fine("Showing help page about the application.");
 
-        if (!isShowing()) {
+        /*if (!isShowing()) {
             getRoot().hide(); // https://stackoverflow.com/questions/8341305/how-to-remove-javafx-stage-buttons-minimize-maximize-close
-        }
+        }*/
         getRoot().initStyle(StageStyle.UTILITY);
+        //getRoot().setAlwaysOnTop(true);
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -134,6 +138,7 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /*
     private void createHelpMessage(int urlConnectionStatus) {
         assert urlConnectionStatus == URL_CONNECTION_FAIL || urlConnectionStatus == URL_WRONG_SYNTAX
                 || urlConnectionStatus == URL_CONNECTION_SUCCESS;
@@ -145,8 +150,9 @@ public class HelpWindow extends UiPart<Stage> {
                 "internet connection" + "\nWhat about copying the user guide URL to your clipboard first?");
         case URL_CONNECTION_SUCCESS -> helpMessage.setText(HELP_MESSAGE);
         } // no default
-    }
+    }*/
 
+    /*
     private int checkUrlConnectionStatus() {
         int urlStatus = URL_CONNECTION_SUCCESS;
         try {
@@ -164,11 +170,12 @@ public class HelpWindow extends UiPart<Stage> {
         finally {
             return urlStatus;
         }
-    }
+    }*/
 
     /**
      * Goes to the URL to the user guide
      */
+
     @FXML
     private void goToUrl() {
         try {
@@ -196,7 +203,8 @@ public class HelpWindow extends UiPart<Stage> {
             return;
         }
         goToButton.setDisable(false);
-    }
+    }*/
+
     /**
      * Copies the URL to the user guide to the clipboard.
      */

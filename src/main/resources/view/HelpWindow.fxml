@@ -26,10 +26,11 @@
               <Insets right="5.0" />
             </HBox.margin>
           </Label>
+          <!--
           <Button fx:id="goToButton" mnemonicParsing="false" onAction="#goToUrl" text="Go to URL">            <HBox.margin>
               <Insets left="5.0" />
             </HBox.margin>
-          </Button>
+          </Button>-->
           <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
             <HBox.margin>
               <Insets left="5.0" />
