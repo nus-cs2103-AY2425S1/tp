@@ -151,7 +151,8 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     private static Boolean isValidAppointmentTimePeriodFormat(String test) {
-        return test.matches(TIME_VALIDATION_REGEX);
+        // format: HHMM-HHMM
+        return test.length() == 9 && test.matches(TIME_VALIDATION_REGEX);
     }
 
     private static Boolean isValidAppointmentTimePeriodOrder(String test) {
