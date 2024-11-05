@@ -27,6 +27,7 @@ public class FilterCommand extends Command {
             + PREFIX_AGE + " 70-79 "
             + PREFIX_APPOINTMENT + " 01/01/2024-01/01/2025 "
             + PREFIX_TAG + " obesity";
+    public static final String MESSAGE_NO_MATCH = "No matches for your criteria.";
 
     private final PersonWithCriteriaPredicate criteria;
     /**
@@ -39,6 +40,10 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(criteria);
+        int modelFilteredPersonListSize = model.getFilteredPersonList().size();
+        if (modelFilteredPersonListSize == 0) {
+            return new CommandResult(MESSAGE_NO_MATCH);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
