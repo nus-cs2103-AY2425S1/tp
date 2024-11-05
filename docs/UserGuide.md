@@ -128,6 +128,7 @@ add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [
 Parameters:
 * `n/NAME`: name of event
 * `des/DESCRIPTION`: description of event
+* `d/DATE`: date of event
 * `c/CLIENT`: list of client IDs
 * `v/VENDOR`: list of vendor IDs
 
