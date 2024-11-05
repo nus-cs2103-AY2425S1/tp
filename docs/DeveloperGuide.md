@@ -649,11 +649,11 @@ Use case ends.
 
 **Extensions**
 * 2a. One or more input parameters are missing or invalid.
-    * 1a1. TAHub shows an error message indicating the missing or invalid fields. 
+    * 2a1. TAHub shows an error message indicating the missing or invalid fields. 
     <br>
     Use case ends
 * 2b. Duplicate consultation Exists (Consultation date & time matches an existing consultation)
-    * 1b1. TAHub shows a duplicate error message.
+    * 2b1. TAHub shows a duplicate error message.
     <br>
     Use case ends.
 
@@ -694,7 +694,7 @@ Use case ends.
 **Precondition:** The Consultation exists in TAHub.
 
 **MSS:**
-1. User requests to remove a specific student from the consultation by providing the necessary details (Consultation Index, Student Index, Student Name)
+1. User requests to remove a specific student from the consultation by providing the necessary details (Consultation Index, Student Name)
 2. TAHub validates the inputs.
 3. TAHub removes the student from the consultation.
 4. TAHub displays the updated consultation list.
@@ -706,16 +706,12 @@ Use case ends.
   * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
     <br>
     Use case ends.
-* 2b. Invalid Student Index
-  * 2b1. TAHub shows an error message stating that the Student Index is invalid.
+* 2b. Student Name not Found in Student List.
+  * 2b1. TAHub shows an error message stating that the Student does not exist.
     <br>
     Use case ends.
-* 2c. Student Name not Found in Student List.
-  * 2c1. TAHub shows an error message stating that the Student does not exist.
-    <br>
-    Use case ends.
-* 2d. Student is not in consultation
-  * 2d1. TAHub shows an error message stating that the Student is not in the consultation.
+* 2c. Student is not in consultation
+  * 2c1. TAHub shows an error message stating that the Student is not in the consultation.
     <br>
     Use case ends.
 
