@@ -291,7 +291,7 @@ Then, we set the `currentCommandIndex` to be the size of the arraylist, anticipa
 
 :information_source: **Note:** CommandTextHistory will store commands that were unsuccessful as well.
 
-These operations are exposed in the `Model` interface as `Model#addCommandTextToHistory(String commandText)`, `Model#getPreviousCommandTextFromHistory()` and `Model#getNextCommandTextFromHistory()` respectively.
+These operations are exposed in the `Logic` interface as `Logic#addCommandTextToHistory(String commandText)`, `Logic#getPreviousCommandTextFromHistory()` and `Logic#getNextCommandTextFromHistory()` respectively.
 
 The following sequence diagram shows how the user can get previous command:
 ![CommandTextHistorySequenceDiagram](images/CommandTextHistorySequenceDiagram.png)
@@ -333,47 +333,46 @@ The following activity diagram summarizes what happens when a user interacts wit
 
 ### User stories
 
-Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlikely to have) - `**`, Super Low (won't have) - `*`
+Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlikely to have) - `**`, Super Low (highly unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​           | So that…​                                           |
-| -------- |------|------------------------|-----------------------------------------------------|
- | `****` | User | Mark elderly as called | I can easily keep track of who has been contacted   |
- | `****` | New user | List elderly contacts by priority (prioritised by last called date) | I know whom to contact first                        | 
- | `****` | Frequent User | Remove elderly from the call list | Any elderly who has passed away or left the program will no longer be on the list | 
- | `****` | User | Record details of the elderly (NRIC etc.) | I know who I'm calling                              | 
- | `****` | Frequent User | Add new elderly who have joined the Befriending Program | I can keep track of these new elderly and call them regularly | 
- | `****` | Expert User | Take notes regarding the call | I can keep track of things which should be followed up on | 
- | `****` | Frequent User | Update elderly contact information | I can keep the elderly information up to date       | 
- | `****` | Frequent User | Search elderly by name | I can find this specific elderly if they were to call me and I can log it as a call | 
- | `****` | User | Search elderly by Nric | I can find this specific elderly given their Nric   | 
- | `****` | Forgetful User | Mark calls with a specific date | I can mark a call that I previously forgot to mark  | 
- | `****` | User | View the next contact date for each elderly | I can quickly see which day the next call should be made to better plan my work | 
- | `****` | Expert User | Generate a monthly report to AIC / excel sheet | show the progress and outcome of the Befriending Program | 
- | `****` | Frequent User | Check if the same elderly has been added multiple times | I don't call the same elderly multiple times        | 
- | `**` | Frequent User | Make changes to the style of my address book | I can be happy when I use the address book :)       | 
- | `**` | Frequent user | Mark contacted elderly quickly using shortcuts | I can work efficiently to contact the entire list   | 
- | `**` | Detail-orientated user | Add tags to each elderly | I can keep track of details that are important when taking the call. | 
- | `**` | Expert User | Add custom fields      | I can add details of elderly which are not currently in the system | 
- | `**` | Expert User | Visualise how many and which elderly to be called in a calendar | I can plan accordingly if any elderly needs to switch dates | 
- | `**` | Expert User | Filter through certain details added for the elderly | I can keep track of how the elderly are doing easily | 
- | `**` | Frequent User | receive notifications for the contacts that are due in the next hour | I can prioritize and complete the calls on time     | 
- | `**` | New User | Receive feedback on the commands I have given if they are incorrect | I can easily correct the errors in the commands given | 
- | `***` | Frequent User | Use my up and down arrow keys to go back and forth between commands | I don't have to retype the same commands            | 
- | `***` | New user | Receive a list of commands that the address book uses | I can familiarise myself with the commands and shortcuts | 
- | `***` | Frequent User | I can undo my actions  | I can correct my mistakes                           | 
- | `***` | Expert User | Quickly update the status of multiple elderly contacts | I can efficiently manage my tasks                   | 
- | `***` | New user | Try out the app with sample data | I can familiarise myself with it without worrying about the data I am playing around with | 
- | `***` | Onboarded user | Purge all sample data  | The app is ready to be used                         | 
- | `***` | Frequent User | I can view a history of calls made to an elderly contact | I can track past interactions                       | 
- | `***` | Frequent User | Change the frequency of calls needed to be made for each elderly | I can track when I need to make calls               | 
- | `***` | Expert User | Archive elderly contacts who are temporarily not part of the program | Keep my contact list organised                      | 
- | `***` | Frequent User | Export/Import my data across computers | If I would like to work using separate computers, e.g. a laptop and desktop, I can keep them updated | 
- | `***` | Expert User | Set multiple contacts as emergency contacts | I can call their next of kin in the event the elderly do not pick up or needs help | 
- | `***` | Frequent User | Export a specific elderly's details and history (All information) | So I can share it with another employee             | 
- | `*` | Expert user | Be notified by the app when too many elderly calls are scheduled on one day | I will not overwork myself or spend too little time calling each elderly | 
- | `*` | Expert User | I can see a dashboard of my weekly or monthly call stats | I can track my productivity and ensure that I hit my KPI | 
- | `*` | Expert User | Set up automated messages for elderly contacts that are not reachable | I can have an alternative communication method      | 
- | `*` | Expert User | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised           | 
+| Priority | As a …​                | I want to …​                                                                 | So that…​                                                                                     |
+| -------- |------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+ | `****` | User                   | Mark elderly as called                                                       | I can easily keep track of who has been contacted                                             |
+ | `****` | User                   | List elderly contacts by priority (prioritised by last called date)          | I know whom to contact first                                                                  | 
+ | `****` | Frequent User          | Remove elderly from the list                                                 | Any elderly who has passed away or left the program will no longer be on the list             | 
+ | `****` | User                   | Record details of the elderly (Name, NRIC etc.)                              | I know who I'm calling                                                                        | 
+ | `****` | Frequent User          | Add new elderly who have joined the Befriending Program                      | I can keep track of these new elderly and call them regularly                                 | 
+ | `****` | Expert User            | Take notes regarding the call                                                | I can keep track of things which should be followed up on                                     | 
+ | `****` | Frequent User          | Update elderly details                                                       | I can keep the elderly details up to date                                                     | 
+ | `****` | Frequent User          | Search elderly by name or NRIC                                               | I can more easily find elderly in the list                                                    |
+ | `****` | Forgetful User         | Mark calls with a specific date                                              | I can mark a call that I previously forgot to mark                                            | 
+ | `****` | User                   | View the next contact date for each elderly                                  | I can quickly see which day the next call should be made to better plan my work               |
+ | `****` | Frequent User          | Know if the same elderly has been added before                               | I don't add the same elderly multiple times                                                   |
+| `***` | Expert User            | Generate a monthly report to AIC / excel sheet                               | show the progress and outcome of the Befriending Program                                      | 
+| `***` | Frequent User          | Use my up and down arrow keys to go back and forth between commands          | I don't have to retype the same commands                                                      | 
+| `***` | New user               | Receive a list of commands that the address book uses                        | I can familiarise myself with the commands and shortcuts                                      | 
+| `***` | Frequent User          | I can undo my actions                                                        | I can correct my mistakes                                                                     | 
+| `***` | Expert User            | Quickly update the status of multiple elderly contacts                       | I can efficiently manage my tasks                                                             | 
+| `***` | New user               | Try out the app with sample data                                             | I can familiarise myself with it without worrying about the data I am playing around with     | 
+| `***` | Onboarded user         | Purge all sample data                                                        | The app is ready to be used                                                                   | 
+| `***` | Frequent User          | I can view a history of calls made to an elderly contact                     | I can track past interactions                                                                 | 
+| `***` | Frequent User          | Change the frequency of calls needed to be made for each elderly             | I can track when I need to make calls                                                         | 
+| `***` | Expert User            | Archive elderly contacts who are temporarily not part of the program         | I can keep my contact list organised                                                          | 
+| `***` | Frequent User          | Export/Import my data across computers                                       | If I would like to work using separate computers, e.g. a laptop and desktop, I can keep them updated | 
+| `***` | Expert User            | Set multiple contacts as emergency contacts                                  | I can call their next of kin in the event the elderly do not pick up or needs help            | 
+| `***` | Frequent User          | Export a specific elderly's details and history (All information)            | I can share it with another employee                                                          | 
+ | `**` | Frequent User          | Make changes to the style of my address book                                 | I can be happy when I use the address book                                                    | 
+ | `**` | Frequent user          | Mark contacted elderly quickly using shortcuts                               | I can work efficiently to contact the entire list                                             | 
+ | `**` | Detail-orientated user | Add tags to each elderly                                                     | I can keep track of details that are important when taking the call                           | 
+ | `**` | Expert User            | Add custom fields                                                            | I can add details of elderly which are not currently in the system                            | 
+ | `**` | Expert User            | Visualise how many and which elderly to be called in a calendar              | I can plan accordingly if any elderly needs to switch dates                                   | 
+ | `**` | Expert User            | Filter through certain details added for the elderly                         | I can keep track of how the elderly are doing easily                                          | 
+ | `**` | Frequent User          | Receive notifications for the contacts that are due in the next hour         | I can prioritize and complete the calls on time                                               | 
+ | `**` | New User               | Receive feedback on the commands I have given if they are incorrect          | I can easily correct the errors in the commands given                                         |
+ | `*` | Expert user            | Be notified by the app when too many elderly calls are scheduled on one day  | I will not overwork myself or spend too little time calling each elderly                      | 
+ | `*` | Expert User            | I can see a dashboard of my weekly or monthly call stats                     | I can track my productivity and ensure that I hit my KPI                                      | 
+ | `*` | Expert User            | Set up automated messages for elderly contacts that are not reachable        | I can have an alternative communication method                                                | 
+ | `*` | Expert User            | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised                                                     | 
 
 ### Use cases
 
@@ -496,9 +495,20 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 1. A user with above-average typing speed (> 40 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 2. The product should be a single-user system.
 3. The product should not rely on a remote server.
-4. It should accommodate up to 250 elderly without noticeable performance slowdowns during typical usage.
-5. The product should respond within two seconds.
+4. It should accommodate up to 250 elderly without performance slowdowns of more than 3 seconds during typical usage.
+5. The product should generally respond within two seconds.
 6. The product should work on Windows, Linux and Mac as long as they have `Java 17` installed.
+7. The product should not use a DBMS.
+8. The data should be stored locally and should be in a human editable text file.
+8. The product needs to be developed in a breadth-first incremental manner over the project duration.
+9. The software should follow the Object-oriented paradigm primarily.
+10. The software should work without requiring an installer.
+11. With respect to the GUI, for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%, there should not be any resolution-related inconveniences to the user.
+12. With respect to the GUI, for resolutions 1280x720 and higher, and, for screen scales 150%, all functions can be used even if the user experience is not optimal.
+13. The entire application should be packaged into a single JAR file.
+14. The file size of the JAR file should be under 100 MB and should not be unnecessarily bloated.
+15. PDF files generated for documentation should have file sizes under 15 MB and should not be unnecessarily bloated.
+16. The User Guide and the Developer Guide should be PDF-friendly. (Don't use expandable panels, embedded videos, animated GIFs etc.)
 
 
 ### Glossary
@@ -534,19 +544,19 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Adding a person
+### Adding an elderly
 
-1. Adding a person without a tag
+1. Adding an elderly without a tag
    1. Test case: `add i/S6516486H n/James Lim p/91234567 e/james.lim@hotmail.com a/432, Clementi East Ave 4, #13-42 c/7`<br>
-      Expected: A new person is added to the list. The details of the person are shown in the list.
+      Expected: A new elderly is added to the list. The details of the elderly are shown in the list.
 
-2. Adding a person with a tag
+2. Adding an elderly with a tag
    1. Test case: `add i/S1486256J n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 t/wheelchairBound c/7`<br>
-      Expected: A new person is added to the list. The details of the person are shown in the list and the "wheelchairBound" tag is shown.
+      Expected: A new elderly is added to the list. The details of the elderly are shown in the list and the "wheelchairBound" tag is shown.
 
-3. Adding a person with a duplicate NRIC
+3. Adding an elderly with a duplicate NRIC
    1. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
-      Expected: No new person is added. Error message is shown in the status bar.
+      Expected: No new elderly is added. Error message is shown in the status bar.
 
 ### Editing an elderly's details
 
@@ -570,9 +580,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting an elderly
 
-1. Deleting an elderly while all people are listed in the `personList`.
+1. Deleting an elderly while all elderly are listed in the `personList`.
 
-   1. Prerequisites: List all people using the `list` command. There must be at least one elderly in the list.
+   1. Prerequisites: List all elderly using the `list` command. There must be at least one elderly in the list.
 
    2. Test case: `delete 1`<br>
       Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
@@ -583,34 +593,34 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
       Expected: Similar to the previous case.
 
-### Finding a person
-1. Finding a person by name
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Finding an elderly
+1. Finding an elderly by name
+    1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
     2. Test case: `find Alice`<br>
-       Expected: Persons with the name Alice are shown in the list. Other persons are hidden.
+       Expected: Elderly with the name `Alice` are shown in the list. Other elderly are hidden.
 
-2. Finding a person by NRIC
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Finding an elderly by NRIC
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `find S6516486H`<br>
-        Expected: The person with the NRIC S6516486H is shown in the list. Other persons are hidden.
+        Expected: The elderly with the NRIC `S6516486H` is shown in the list. Other elderly are hidden.
 
-### Marking a person as called
-1. Mark a person as called by index
-   1. Prerequisites: List all persons using the `list` command.
+### Marking an elderly as called
+1. Mark an elderly as called by index
+   1. Prerequisites: List all elderly using the `list` command.
    2. Test case: `mark 1`<br>
-    Expected: The person at index 1 is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
-2. Mark a person as called by NRIC
+    Expected: The elderly at index 1 is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
+2. Mark an elderly as called by NRIC
     1. Test case: `mark S1486256J o/My test note`<br>
-       Expected: The person with NRIC S1486256J is marked as called. The status message shows the details of the person marked as called. Their next call date should be updated.
+       Expected: The elderly with NRIC `S1486256J` is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
 
-### Call history of a person
-1. Viewing call history of a person by index
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Call history of an elderly
+1. Viewing call history of an elderly by index
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
    2. Test case: `history 2`<br>
-      Expected: The list is updated to show the call history of the person at index 2.
-2. Viewing call history of a person by NRIC
+      Expected: The list is updated to show the call history of the elderly at index 2.
+2. Viewing call history of an elderly by NRIC
    1. Test case: `history S1486256J`<br>
-      Expected: The list is updated to show the call history of the person with NRIC S1486256J. One of which contains the note "My test note".
+      Expected: The list is updated to show the call history of the elderly with NRIC `S1486256J`. One of which contains the note "My test note".
 
 ### Navigating through command history
 1. Navigating to previous command
@@ -626,10 +636,10 @@ testers are expected to do more *exploratory* testing.
 1. Data is saved after shutdown
 
    1. Clear data with the `clear` command.
-   2. Add a new person. Refer to the [Adding a person](#adding-a-person) section.
+   2. Add a new elderly. Refer to the [adding an elderly](#adding-an-elderly) section.
    3. Close the app.
-   4. Re-launch the app.<br>
-       Expected: The newly added person is still present.
+   4. Re-launch the app.<br>G
+       Expected: The newly added elderly is still present.
 
 2. Dealing with missing/corrupted data files
 

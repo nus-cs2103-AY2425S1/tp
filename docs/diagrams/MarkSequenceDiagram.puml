@@ -2,6 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 skinparam dpi 300
+skinparam DefaultFontSize 23
 
 box Logic LOGIC_COLOR_T1
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
@@ -15,7 +16,7 @@ box Model MODEL_COLOR_T1
 participant ":ContactRecord" as ContactRecord MODEL_COLOR
 end box
 
-[-> AddressBookParser : parseCommand("mark 1 d/2024-10-25")
+[-> AddressBookParser : parseCommand(\n"mark 1 d/2024-10-25")
 activate AddressBookParser
 
 create MarkCommandParser
@@ -27,9 +28,9 @@ activate MarkCommandParser
 MarkCommandParser --> AddressBookParser
 deactivate MarkCommandParser
 
-AddressBookParser -> MarkCommandParser : parse("1 d/2024-10-25")
+AddressBookParser -> MarkCommandParser : parse(\n"1 d/2024-10-25")
 activate MarkCommandParser
-MarkCommandParser -> ArgumentTokenizer : tokenize("1 d/2024-10-25")
+MarkCommandParser -> ArgumentTokenizer : tokenize(\n"1 d/2024-10-25")
 activate ArgumentTokenizer
 ArgumentTokenizer -> ArgumentTokenizer : extractArguments
 activate ArgumentTokenizer
