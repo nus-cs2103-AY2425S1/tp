@@ -7,7 +7,7 @@ import seedu.address.model.Model;
  */
 public class ConsecutiveCommand extends Command {
 
-    public static final String MESSAGE_CONSECUTIVE_COMMAND = "This has been %sed already.";
+    public static final String MESSAGE_CONSECUTIVE_COMMAND = "Command: '%s' has been executed already.";
 
     private final String commandWord;
 
