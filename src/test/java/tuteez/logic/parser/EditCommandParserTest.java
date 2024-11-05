@@ -82,8 +82,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
         // No index but valid command otherwise
-        assertParseFailure(parser, " t/math", Messages.MESSAGE_NEED_TO_PROVIDE_INDEX
-                + " for the edit command");
+        assertParseFailure(parser, " t/math", Messages.MESSAGE_MISSING_PERSON_INDEX);
+
     }
 
     @Test

@@ -87,7 +87,7 @@ public class ArgumentMultimap {
      * @return {@code true} if {@code argMultimap} contains more than one entry, indicating
      *         the presence of prefixes; {@code false} otherwise.
      */
-    public boolean hasPrefixes() {
+    public boolean verifyHasPrefixes() {
         return argMultimap.size() > 1;
     }
 }
