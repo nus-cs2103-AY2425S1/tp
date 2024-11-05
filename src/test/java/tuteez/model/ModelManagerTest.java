@@ -16,7 +16,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import tuteez.commons.core.GuiSettings;
-import tuteez.model.person.NameContainsKeywordsPredicate;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

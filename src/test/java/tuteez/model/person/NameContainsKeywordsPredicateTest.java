@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {

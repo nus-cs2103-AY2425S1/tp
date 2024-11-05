@@ -160,18 +160,17 @@ The `Model` component,
 The `LessonManager` component,
 * stores all the info regarding `Lesson` objects.`LessonManager.dayLessonsMap` is a `HashMap` where keys are `Day`s, intuitively there are only 7 keys in the `HashMap`. One for each day of the week.
 * uses a `TreeSet<Lesson>` as value of `LessonManager.dayLessonMap`. A `TreeSet` is used to maintain ordering of lessons. Lessons are ordered according to `Lesson.startTime`
-* is the main class that determines any overlapping or clashing lessons. Refer to `LessonManager#isClashingWithExistingLesson`
+* is the main class that determines any overlapping or clashing lessons for lessons within the memory.
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/LessonManagerDetectClashingLessons.puml" width="1000" />
 
-The diagram above is an example of how abstraction is used for the `AddCommand`. Some `opt` statements and other complexities have been removed but the general flow is clear.
-* In words, for every lesson a new student has. `LessonManager` checks against existing lessons on the same `Day`. It then calls `Lesson#isClashingWithOtherLesson` which takes two `Lesson` objects are arguments and returns `True` if they clash else `False`
+The diagram above shows how clashing lessons are detected,
 
-
+* `clashingLessonsMap` is a `Map` where each key is a student whose lessons conflict with a newly proposed lesson. The value associated with each key is an array of that student’s specific lessons that clash with the proposed lesson.
 
 <box type="info" seamless>
 
-Note: As of `v1.4` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
+Note: As of `v1.5` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
 
 </box>
 
@@ -224,6 +223,24 @@ How the this feature works:
 1. The command can communicate with the `Model` when it is executed.<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+### Detection of next lesson
+
+On the left panel, which displays only the most important information, we show each student’s upcoming lesson based on the computer’s current time.
+
+High level idea:
+
+* For each student, calculate the duration remaining until the start of each of their lessons based on devices current time.
+* Identify the lesson with the shortest remaining time and display it as their next scheduled lesson.
+* Returns null if a student has no lessons scheduled
+
+How this feature works:
+
+1. Every minute, UI calls `Person#nextLessonBasedOnCurrentTime` on every student to consistently keep track of a students next lesson
+1. `Person#nextLessonBasedOnCurrentTime` calls `Lesson#durationTillLesson` for all of student's lessons which returns `Duration` objects
+1. Then leverage `Duration#compareTo` to get the lesson with the shortest duration
+1. Return lesson with shortest duration or `null` if student has no lessons
+
 
 ### Display feature
 The `DisplayCommand` allows users to display a specified person in the addressbook.
@@ -360,14 +377,18 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * tech-savvy full-time tuition teacher
-* has a need to manage a significant number of students
+* exclusively teach 1-1 tuition (no group lessons)
+* Teaches a regular weekly schedule
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Our app is designed to help tech-savvy full-time tuition teachers manage the schedules and contact details of a small to medium number of students. The app focuses on preventing scheduling conflicts by automatically checking for overlapping lesson times and organising students into groups for easier lesson planning.
+**Value proposition**: Our app serves as an address book tailored for tech-savvy full-time tuition teachers who prefer to use CLI, streamlining the management of student schedules and contact details. It effectively prevents scheduling conflicts and allows for quick access to essential information, enabling teachers to prioritise teaching over administration.
 
+**Note:**
+
+* It is possible that the target user changes or its scope is widened in the future
 
 ### User stories
 

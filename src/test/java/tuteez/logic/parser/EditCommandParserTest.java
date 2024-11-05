@@ -80,6 +80,10 @@ public class EditCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // No index but valid command otherwise
+        assertParseFailure(parser, " t/math", Messages.MESSAGE_MISSING_PERSON_INDEX);
+
     }
 
     @Test
