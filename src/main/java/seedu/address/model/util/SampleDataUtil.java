@@ -2,6 +2,7 @@ package seedu.address.model.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,29 +26,46 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), getPhone("87438807"), getEmail("alexyeoh@example.com"),
-                getAddress("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), getMap("CS2040S", RoleType.PROFESSOR),
-                getDescription("This is Alex Yeoh, he is CS2040S Professor.")),
-            new Person(new Name("Bernice Yu"), getPhone("99272758"), getEmail("berniceyu@example.com"),
-                getAddress("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), getEmptyMap(),
+            new Person(new Name("Campus Asset Management"), getPhone("+65 6601 7878 (24 hours)"),
+                getEmail("maintenance@nus.edu.sg"),
+                getAddress("CAM Office 8 Kent Ridge Drive #01-01 Singapore 119246"),
+                getTagSet("school"), getEmptyMap(),
+                getDescription("For issues relating to cleanliness, leaks, repairs, aircon etc.")
+                ),
+            new Person(new Name("Campus Emergency and Security"), getPhone("+65 6874 1616 (24 hours)"),
+                getEmail("ces@nus.edu.sg"),
+                getAddress("Campus Emergency and Security Office 17 & 18 Prince George’s Park Singapore 118417"),
+                getTagSet("school", "security", "emergency"), getEmptyMap(),
+                getDescription("For emergencies only")),
+            new Person(new Name("Boyd Anderson"), getPhone("660 17900"), getEmail("boyd@comp.nus.edu.sg"),
+                getAddress("COM3-02-46"),
+                getTagSet("favorite"), getMap("CS1101S", RoleType.PROFESSOR),
+                getDescription("Lecturer in the Department of Computer Science at the School of Computing"
+                    + " at the National University of Singapore (NUS).")),
+            new Person(new Name("Martin Henz"), getPhone("651 66632"), getEmail("henz@comp.nus.edu.sg"),
+                getAddress("COM3-02-05"),
+                new HashSet<>(), getMap("CS1101S", RoleType.PROFESSOR),
+                getDescription("Likes to set difficult questions to his students!")),
+            new Person(new Name("Aaron Tan"), getPhone("651 62906"), getEmail("tantc@comp.nus.edu.sg"),
+                getAddress("COM1-03-12"),
+                new HashSet<>(), getMap("CS1231S", RoleType.PROFESSOR),
                 getEmptyDescription()),
-            new Person(new Name("Charlotte Oliveiro"), getPhone("93210283"), getEmail("charlotte@example.com"),
-                getAddress("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), getMultipleRolesMap(),
-                getEmptyDescription()),
-            new Person(new Name("David Li"), getPhone("91031282"), getEmail("lidavid@example.com"),
-                getAddress("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getEmptyMap(),
-                getEmptyDescription()),
-            new Person(new Name("Irfan Ibrahim"), getPhone("92492021"), getEmail("irfan@example.com"),
-                getAddress("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getMap("MA1522", RoleType.TUTOR),
-                getEmptyDescription()),
-            new Person(new Name("Roy Balakrishnan"), getPhone("92624417"), getEmail("royb@example.com"),
-                getAddress("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getMultipleRolesMap(),
+            new Person(new Name("Mao Xiongkai"), getPhone("91031282"), getEmail("mxk@u.nus.edu"),
+                Optional.empty(),
+                getTagSet("friends"), getMap("CS2030S", RoleType.TUTOR),
+                getDescription("Respond very quickly and does pretty solid jobs")),
+            new Person(new Name("Zhu Tianyi"), getPhone("92492021"), getEmail("zty@u.nus.edu"),
+                Optional.empty(),
+                getTagSet("friends"), getMap("CS1231S", RoleType.TUTOR),
+                getDescription("A very good TA who takes responsibility in teaching,"
+                    + " anything not sure can go ask him.")),
+            new Person(new Name("Huang Jiaxi"), getPhone("92624417"), getEmail("hjx@u.nus.edu"),
+                Optional.empty(),
+                getTagSet("classmates"), getMultipleRolesMap(),
+                getDescription("Teaching many modules within the same semester, a very solid TA.")),
+            new Person(new Name("Alex Yeoh"), getPhone("83351346"), getEmail("alex@gmail.com"),
+                getAddress("#06-66, Blk 211, Clementi Ave 6"), getTagSet("classmates"),
+                getMap("CS2040S", RoleType.STUDENT),
                 getEmptyDescription())
         };
     }
@@ -105,7 +123,7 @@ public class SampleDataUtil {
      */
     public static ModuleRoleMap getMultipleRolesMap() {
         HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
-        hashMap.put(new ModuleCode("CS2103T"), RoleType.STUDENT);
+        hashMap.put(new ModuleCode("CS2103T"), RoleType.TUTOR);
         hashMap.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
         hashMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
         ModuleRoleMap map = new ModuleRoleMap(hashMap);
