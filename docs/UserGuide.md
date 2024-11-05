@@ -429,18 +429,153 @@ Format: `exit`
 
 ---
 
-### **11. Command summary**
+### **11. Prefix Table** 
+
+Prefixes are used whenever we want to alter the data in EduVault, such as adding, updating or deleting data. They are also used when we want to search for data on the student. Each prefix specifies what type of data we want to alter or search for, and the word(s) following each prefix specifies what to alter the data to or what to search for. The table below is a list of all prefixes that are used in our commands.
+
+<table style="width:100%">
+  <tr>
+    <th style="width:10%">Prefix</th>
+    <th style="width:60%">Prefix description and usage</th>
+    <th style="width:30%">Exception Cases</th>
+  </tr>
+
+  <!-- n/ prefix row -->
+
+  <tr>
+    <td rowspan="3">n/</td>
+    <td><u>Description</u><br>Specifies the <b>name</b> of the student.</td>
+    <td rowspan="3">For <code>find</code> command, keyword(s) for this prefix <b>need not</b> be alphanumeric, but it <b>must not</b> be blank.</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword(s) following this prefix must be alphanumeric and cannot be blank. <br><br><i>Multiple keywords are allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br> Keyword(s) contain special characters or are blank.<br><br> <i>Error Message: Names should only contain alphanumeric characters...</i></td>
+  </tr>
+
+  <!-- p/ prefix row -->
+
+  <tr>
+    <td rowspan="3">p/</td>
+    <td><u>Description</u><br>Specifies the <b>phone number</b> of the student.</td>
+    <td rowspan="3">For <code>find</code> command, keyword(s) for this prefix <b>need not</b> be numbers, and can be less than 3 digits. However, it <b>must not</b> be blank.</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword following this prefix must be numbers, and at least 3 digits.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br>Keyword(s) contain non-numeric characters or are less than 3 digits.<br><br><i>Error Message: Phone numbers should only contain numbers...</i></td>
+  </tr>
+
+ <!-- e/ prefix row -->
+
+  <tr>
+    <td rowspan="3">e/</td>
+    <td><u>Description</u><br>Specifies the <b>email</b> of the student.</td>
+    <td rowspan="3">For <code>find</code> command, the format constraints to the keyword does not apply. However, it <b>must not</b> be blank.</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword following this prefix must be in the format of “...@domain.com”.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br>Keyword does not have the valid email format described above.<br><br><i>Error Message: Emails should be of the format...</i></td>
+  </tr>
+
+  <!-- a/ prefix row -->
+
+  <tr>
+    <td rowspan="3">a/</td>
+    <td><u>Description</u><br>Specifies the <b>address</b> of the student.</td>
+    <td rowspan="3">NIL</td>
+  </tr>
+  <tr>
+    <td><u>Format</u><br>The keyword(s) can be any input but cannot be blank.<br><br><i>Multiple keywords are allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  </tr>
+  <tr>
+    <td><u>Invalid Usage</u><br>Keyword(s) is blank.<br><br><i>Error Message: Addresses can take any values, and...</i></td>
+  </tr>
+
+ <!-- pay/ prefix row -->
+
+<tr>
+  <td rowspan="3">pay/</td>
+  <td><u>Description</u><br>Specifies the <b>amount</b> that the student pays or owes.</td>
+  <td rowspan="3">For <code>find</code> command, keyword(s) for this prefix <b>are restricted to only</b> <code>true</code> or <code>false</code>.</td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided after this prefix should be a number.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword provided is not a number.<br><br><i>Error Message: Payment should be an...</i></td>
+</tr>
+
+ <!-- attend/ prefix row -->
+
+<tr>
+  <td rowspan="3">attend/</td>
+  <td><u>Description</u><br>Specifies the <b>attendance date</b> that the student went for class.</td>
+  <td rowspan="3">For <code>find</code> command, keyword <b>must be</b> in the format of <code>dd/MM/yyyy:
+dd/MM/yyyy</code>
+  </td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided should be of the format <code>dd/MM/yyyy</code>.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be in date format...</i></td>
+</tr>
+
+ <!-- t/ prefix row -->
+
+<tr>
+  <td rowspan="3">t/</td>
+  <td><u>Description</u><br>Specifies the <b>tag</b> associated to the student.</td>
+  <td rowspan="3">
+    For <code>edit</code> command, keyword for this prefix <b>can be blank</b>.<br><br>
+    For <code>find</code> command, keyword for this prefix <b>need not</b> be alphanumeric, but it <b>must not</b> be blank.
+  </td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided should be alphanumeric with no spaces, and it cannot be blank.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Tag names should be...</i></td>
+</tr>
+
+
+ <!-- tut/ prefix row -->
+
+<tr>
+  <td rowspan="3">tut/</td>
+  <td><u>Description</u><br>Specifies the <b>tutorial</b> of the student.</td>
+  <td rowspan="3">
+    For <code>enroll</code> and <code>unenroll</code> commands, the keyword <b>need not</b> be alphanumeric, but <b>must not</b> be blank.<br><br>
+    For <code>find</code> command, <b>duplicate prefixes are allowed</b>.
+  </td>
+</tr>
+<tr>
+  <td><u>Format</u><br>The keyword provided should be alphanumeric and it cannot be blank. Spaces are allowed.<br><br><i>Multiple keywords are allowed.<br>Duplicate prefixes are not allowed.</i></td>
+</tr>
+<tr>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Tutorial name should only contain...</i></td>
+</tr>
+
+
+</table>
+
 
 ---
 
 ### **12. Format Errors**
 
-| Error Message | Most Likely Cause |
-| :---- | :---- |
-| *Unknown Command….* | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul> |
-| *Invalid Command format…* | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li></ul></ul>|
-| *The student’s index provided is invalid…* | <ul><li>Index provided is out of range for the current displayed list</li></ul> |
-| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul> |
+| Error Message                                                           | Most Likely Cause                                                                                                                                                                                                                                                                                           |
+|:------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *Unknown Command….*                                                     | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul>                                                                                                                                                                                                                   |
+| *Invalid Command format…*                                               | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li><li>Keywords of the prefix is incorrect</li> </ul></ul> |
+| *The student’s index provided is invalid…*                              | <ul><li>Index provided is out of range for the current displayed list</li></ul>                                                                                                                                                                                                                             |
+| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul>                                                                                                                                                                                                                                            |                                                                                                                                                                                                                           
+| *At least one of the dates is not in the right format…* | <ul><li>The date format used is incorrect</li></ul>                                                                                                                                                                                                               
 
 ---
 
