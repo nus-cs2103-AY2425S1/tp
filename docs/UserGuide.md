@@ -237,6 +237,7 @@ Format: `cattag t/TAG [t/MORE_TAGS] CATEGORY`
 * Multiple tags can be categorized to the same category at a time.
 * All tags specified must be valid existing tags.
 * Attempts to set a tag to its current category will cause the whole command to be rejected.
+* Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
 
 Examples:
 * `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics`
