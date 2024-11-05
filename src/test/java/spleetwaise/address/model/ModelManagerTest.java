@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.AddressBookBuilder;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.testutil.Assert;
 
 public class ModelManagerTest {
 

@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.testutil.Assert;
 
 public class StringUtilTest {
 

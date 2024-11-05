@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.fxml.FXML;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.commons.MainApp;
+import spleetwaise.commons.testutil.Assert;
 
 public class UiPartTest {
 

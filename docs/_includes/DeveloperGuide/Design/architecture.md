@@ -6,19 +6,34 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+The app consists of three packages: `address`, `transactions`, and `common`.
+
+- `common` is where the main application logic lives. It contains general classes that are used by multiple components in the app.
+- `address` contains classes related to address book.
+- `transactions` contains classes related to transactions.
+
+<div markdown="span" class="alert alert-info">:information_source:
+**Package structure:**
+Packages follow this general package structure: <br>
+- **`logic`**: Contains classes related to commands/command parsing.<br>
+- **`model`**: Contains classes for representing data in the app.<br>
+- **`storage`**: Contains classes related to reading and writing data from, and to storage.<br>
+- **`ui`**: Contains classes related to the GUI of the app.<br>
+</div>
+
+**Main application**
+
+The entry-point to the app, **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)), lives in the `common` package, and is in charge of managing the app's lifecycle.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-- [**`UI`**](#ui-component): The UI of the App.
+- [**`Ui`**](#ui-component): The UI of the App.
 - [**`Logic`**](#logic-component): The command executor.
 - [**`Model`**](#model-component): Holds the data of the App in memory.
 - [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 

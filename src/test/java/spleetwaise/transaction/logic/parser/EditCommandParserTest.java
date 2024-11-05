@@ -1,7 +1,7 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static spleetwaise.address.testutil.Assert.assertThrows;
+import static spleetwaise.commons.testutil.Assert.assertThrows;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;

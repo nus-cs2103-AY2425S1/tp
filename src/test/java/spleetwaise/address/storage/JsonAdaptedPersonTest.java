@@ -14,9 +14,9 @@ import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.testutil.Assert;
 
 public class JsonAdaptedPersonTest {
 

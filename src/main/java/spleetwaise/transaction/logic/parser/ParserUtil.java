@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,9 +12,9 @@ import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.core.index.Index;
+import spleetwaise.commons.logic.parser.BaseParserUtil;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.commons.util.StringUtil;
 import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
@@ -24,24 +25,8 @@ import spleetwaise.transaction.model.transaction.Status;
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
-public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+public class ParserUtil extends BaseParserUtil {
     public static final String MESSAGE_PHONE_NUMBER_IS_UNKNOWN = "Phone number is unknown.";
-
-    /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
 
     /**
      * Parses a {@code String amount} into a {@code Amount}. Leading and trailing whitespaces will be trimmed.
@@ -142,20 +127,22 @@ public class ParserUtil {
     }
 
     /**
-     * Finds the corresponding Person displayed on the current Address Book view with the provided index.
+     * Retrieves a {@code Person} from the filtered person list at the specified {@code Index}.
      *
-     * @param index The 1-based index corresponding to the Person entry.
-     * @return A Person who has the specified index in the current Address Book view.
-     * @throws ParseException Invalid index or index is out of bounds.
+     * @param index The {@code Index} of the person to retrieve from the filtered address book list.
+     * @return The {@code Person} at the specified index in the filtered person list.
+     * @throws ParseException If the specified index is out of bounds for the filtered person list.
      */
-    public static Person getPersonFromAddressBookIndex(Index index) throws ParseException {
+    public static Person getPersonByFilteredPersonListIndex(Index index)
+            throws ParseException {
         requireNonNull(index);
-        Optional<Person> p = CommonModel.getInstance().getPersonByFilteredPersonListIndex(index);
-        if (p.isEmpty()) {
+        List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        return p.get();
+        return lastShownList.get(index.getZeroBased());
     }
 
     /**

@@ -45,21 +45,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 {% include DeveloperGuide/Design/model.md %}
 
 ### Storage component
-
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
-
-<img src="images/StorageClassDiagram.png" width="550"  alt="Storage Class Diagram"/>
-
-The `Storage` component,
-
-* can save address book data, transaction book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from `AddressBookStorage`, `TransactionBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-
-
-### Common classes
-
-Classes used by multiple components are in the `spleetwaise.commons` package.
+{% include DeveloperGuide/Design/storage.md %}
 
 ---
 
@@ -186,13 +172,13 @@ Given below are instructions to test the app manually.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-   
+
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   
+
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
@@ -214,13 +200,13 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 1. Adding a person while all persons are being shown
 
    1. Prerequisites: List all persons using the list command. Multiple persons in the list.
-   
+
    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
       Expected: A new contact named John Doe is added to the list. Details of the added contact shown in the status message.
-   
+
    3. Test case: `add n/ p/ e/ a/`<br>
       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
-   
+
    4. Other incorrect add commands to try: `add n/John Doe`, `add p/98765432`, `add e/johnd@example.com`, `add a/John street, block 123, #01-01`<br>
       Expected: Similar to previous.
 
@@ -245,7 +231,7 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 1. Ensuring person details changed are accurately reflected in all views and models.
 
    1. Prerequisites: List all persons and transactions using the `list` and `listTxn` command. At least one person and one transaction with that person in the list.
-   
+
    2. Test case: `edit 1 n/New Name` (where `New Name` is the updated name for the person)<br>
       Expected: The person's name updates in the lists and UI, ensuring consistency in both `CommonModel` and the visible transaction list.
 
@@ -281,9 +267,30 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
 2. _{ more test cases …​ }_
 
+### Adding a transaction
+
+1. Adding a transaction while all transactions are being shown with minimally 1 person in address book
+   
+   1. Prerequisites: List all persons and transactions using the `list` and `listTxn` command. At least one person in the address book list and multiple transactions in the list
+
+   2. Test cases: `addTxn 1 amt/12.3 desc/John owes me for dinner`<br>
+      Expected: A new transaction related to the person in the first index of the address book is added to the list along with description of it. The amount reflected in the transaction is displayed green in the transaction panel to signify that you are owed. The date of the transaction displays the current day. No categories to be displayed. Details of the added transaction is shown in the status message.
+
+   3. Test cases: `addTxn 1 amt/-12.3 desc/I owe John for dinner date/10102024`<br>
+      Expected: A new transaction related to the person in the first index of the address book is added to the list along with description of it. The amount reflected in the transaction is displayed red in the transaction panel to signify that I owe. The date of the transaction displays `10 Oct 2024`. No categories to be displayed. Details of the added transaction is shown in the status message.
+
+   4. Test cases: `addTxn 1 amt/12.3 desc/John owes me for dinner cat/FOOD`<br>
+      Expected: A new transaction related to the person in the first index of the address book is added to the list along with description of it. The amount reflected in the transaction is displayed green in the transaction panel to signify that you are owed. The date of the transaction displays the current day. Category of `FOOD` is displayed. Details of the added transaction is shown in the status message.
+
+   5. Test cases: `addTxn 0 amt/ desc/ date/ cat/`<br>
+      Expected: No transaction is added. Error details shown in the status message. Status bar remains the same.
+
+   6. Other incorrect `addTxn` commands to try: `addTxn 1`, `addTxn amt/1.234`, `addTxn desc/dinner`, `addTxn date/10102024`, `addTxn cat/FOOD`<br>
+      Expected: Similar to previous.
+
 ### Marking a transaction as done
 
-1. Marking a transaction as done while all transactions are being shown. 
+1. Marking a transaction as done while all transactions are being shown.
 
    1. Prerequisites: List all transactions using the `listTxn` command. One transaction is in the list.
 
@@ -292,10 +299,10 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
    3. Test cases: `markDone 1` (Assumes transaction 1 is already marked)<br>
       Expected: No change in transaction status. The "done" icon remains. A status message confirms that the transaction is already marked.
-   
+
    4. Test cases: `markDone 0`<br>
       Expected: No transaction is marked. Error details shown in the status message.
-   
+
    5. Other incorrect `markDone` commands to try: `markDone`, `markDone x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
@@ -321,11 +328,11 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
 1. Maintaining the current filter state when transactions are modified.
 
-    1. Prerequisites: List all transactions using the `listTxn` command. Apply a filter via `filterTxn` command to the list (e.g., filtering by description containing "mac").  
+    1. Prerequisites: List all transactions using the `listTxn` command. Apply a filter via `filterTxn` command to the list (e.g., filtering by description containing "mac").
 
-    2. Test cases: `addTxn p/01234567 d/macdonald`<br>
+    2. Test cases: `addTxn 1 amt/12.3 desc/John owes me for dinner`<br>
        Expected: The new transaction appears in the filtered list while preserving the existing filter. Details of the new transaction shown in the status message.
-   
+
     3. Test cases: `editTxn 1 d/happy meal at mac` (Assumes transaction 1 description is "KFC")<br>
        Expected: The updated transaction appears in the filtered list while preserving the existing filter. Details of the updated transaction shown in the status message.
 
@@ -341,7 +348,7 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
     1. Prerequisites: At least one done transaction and one undone transaction in the list.
 
-    2. Test cases: Initial Filter on App Startup<br> 
+    2. Test cases: Initial Filter on App Startup<br>
        Expected: The list displays all transactions (both done and undone) by default when the app starts.
 
 ### Saving data
@@ -350,11 +357,11 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
    1. Prerequisites: Multiple persons in `addressbook.json` and multiple transactions in `transactionbook.json` data files.<br>
        _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-   
+
    2. Test cases: Missing `isDone` field in `transactionbook.json` data file<br>
       Simulation: Remove the `isDone` field from a transaction entry in the JSON file, then start the app.
       Expected: The transaction loads as undone by default. Upon closing the app, the transaction is saved as undone in the JSON file.
-   
-   3. 
+
+   3.
 
 2. _{ more test cases …​ }_

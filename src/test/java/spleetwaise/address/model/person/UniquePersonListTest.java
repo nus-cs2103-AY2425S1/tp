@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.person.exceptions.DuplicatePersonException;
 import spleetwaise.address.model.person.exceptions.PersonNotFoundException;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.testutil.Assert;
 
 public class UniquePersonListTest {
 
