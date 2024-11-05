@@ -42,6 +42,8 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_NAME + "NAME "
             + PREFIX_DESC + "DESCRIPTION "
             + PREFIX_DATE + "DATE "
+            + PREFIX_CLIENTS + "CLIENT_ID "
+            + PREFIX_VENDORS + "VENDOR_ID "
             + "[" + PREFIX_CLIENTS + "CLIENT_ID ...] "
             + "[" + PREFIX_VENDORS + "VENDOR_ID ...]";
     public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " " + FLAG_EVENT + " "
@@ -50,6 +52,7 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_DATE + SAMPLE_EVENT_DATE + " "
             + PREFIX_CLIENTS + SAMPLE_CLIENT_ID + " "
             + PREFIX_VENDORS + SAMPLE_VENDOR_ID;
+
     public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
             + COMMAND_USAGE + "\n"
             + USAGE_EXAMPLE;
