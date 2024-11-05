@@ -773,3 +773,44 @@ testers are expected to do more *exploratory* testing.
 
 <puml src="diagrams/ListSeqeuenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
 Diagram for interactions inside the logic component for the `list all` command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Difficulty Level: 10/10
+
+### Challenges Faced:
+1. The original AB3 has many different classes that are all coupled together so making a single change would require an 
+understanding of how the different classes work together, making tracing long codes essential
+
+2. JavaFX is weirdly restrictive in the things that can be done, such as when it becomes scrollable and no animations 
+allowed, whereas AB3 seem to have done it seamlessly (except animation) for each component.
+
+3. The way that the frontend pulls data from the backend makes it hard to perform operations on the list.
+
+4. Understanding how AB3 code works from the start to implement our features.
+
+5. The way AB3 handled Person felt like it had a lot of dependency on person. I was in charge of adding new fields to 
+Person and I had to create the new fields (Department, Role, Contract End Date), update the parser to parse the new 
+fields, change the JsonAdaptedPerson to convert a json to the new person, update json test cases to have the new fields,
+update personBuilder in the testutil to generate new persons, update TypicalPersons to have new persons with department, 
+role, contract end date and update SampleDataUtil.java to have people with the right sample data. This was extremely 
+time consuming as just to update Person with new fields you had to update a lot of files with the updated tests.
+
+6. As someone who is inexperienced with Git, there was a very steep learning curve, especially for fixing merge conflicts.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancement**
+
+Team Size: 5
+
+1. Make the scrolling to commands in helpWindow more accurate: The current dropdown jumps to the correct command, but 
+the command box is not standardized. We plan to make it more accurate ensuring that it jumps to most command boxes with 
+it at the very top of the helpWindow screen.
+
+2. We will separate potential hires and employees into two different columns in the UI. This makes delete more sensible 
+as right now, the inclusion of ph or e parameter is not as relevant.
+
+3. We plan to add colours to the help and command output text to improve readability.
