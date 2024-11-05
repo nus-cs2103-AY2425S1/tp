@@ -67,10 +67,15 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Parses the addPersonCommand
-     * @param argMultimap
-     * @return
-     * @throws ParseException
+     * Parses the given {@code ArgumentMultimap} and creates a PersonDescriptor object.
+     *
+     * @param argMultimap Contains the field-value pairs for creating a person, where fields are indicated by prefixes
+     *                    (PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_STATUS, PREFIX_EMAIL, and optionally PREFIX_TAG)
+     * @return A new PersonDescriptor object with the parsed name, phone, email, address, status, and tags
+     * @throws ParseException If:
+     *         - Any of the required fields (name, address, phone, status, email) is missing, or
+     *         - Any required field has duplicate prefixes, or
+     *         - Any field value is invalid according to the respective parsing rules in ParserUtil
      */
     public PersonDescriptor parseAddPerson(ArgumentMultimap argMultimap) throws ParseException {
         if (!arePrefixesPresent(
@@ -97,10 +102,19 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Parses the Add Appointment Command
-     * @param argMultimap
-     * @return
-     * @throws ParseException
+     * Parses the given {@code ArgumentMultimap} and creates an AppointmentDescriptor object.
+     *
+     * @param argMultimap Contains the field-value pairs for creating an appointment, where fields are indicated by prefixes:
+     *                    Required: PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE
+     *                    Optional: PREFIX_SICKNESS, PREFIX_MEDICINE
+     * @return A new AppointmentDescriptor object with the parsed appointment type, datetime, and optional sickness and medicine details
+     * @throws ParseException If:
+     *         - Any of the required fields (person ID, datetime, appointment type) is missing, or
+     *         - Any field has duplicate prefixes, or
+     *         - Any field value is invalid according to the respective parsing rules in ParserUtil
+     *                 - Person ID must be a valid integer
+     *                 - Datetime must be in the correct format
+     *                 - Appointment type must be a valid enum value
      */
     public AppointmentDescriptor parseAddAppointment(ArgumentMultimap argMultimap) throws ParseException {
         if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE)) {
@@ -128,10 +142,13 @@ public class AddCommandParser implements Parser<AddCommand> {
     };
 
     /**
-     * Helper function for parseAddAppointment
-     * @param argMultimap
-     * @return
-     * @throws ParseException
+     * Extracts and parses the person ID from the given ArgumentMultimap.
+     *
+     * @param argMultimap Contains the field-value pairs, must include PREFIX_PERSON_ID
+     * @return The parsed person ID as an integer
+     * @throws ParseException If:
+     *         - The person ID prefix is missing, or
+     *         - The person ID value cannot be parsed into a valid integer
      */
     public int extractPersonId(ArgumentMultimap argMultimap) throws ParseException {
         if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID)) {
