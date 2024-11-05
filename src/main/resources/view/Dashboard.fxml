@@ -29,7 +29,7 @@
          <Label fx:id="feesOverdue" text="\$fees overdue" />
       </HBox>
    </VBox>
-   <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" style="-fx-padding: 0 25 0 50">
+   <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" style="-fx-padding: 0 25 0 75">
       <VBox spacing="7">
          <HBox alignment="CENTER_LEFT" spacing="7">
             <Label text="Classes offered" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #262626"/>
@@ -39,7 +39,7 @@
                </ImageView>
             </HBox>
          </HBox>
-         <ScrollPane VBox.vgrow="NEVER" fx:id="scrollPane" styleClass="tutorial-pane" fitToHeight="true" vbarPolicy="NEVER">
+         <ScrollPane VBox.vgrow="NEVER" minHeight="65" fx:id="scrollPane" styleClass="tutorial-pane" fitToHeight="true" vbarPolicy="NEVER">
             <HBox fx:id="tutorials" spacing="15" style="-fx-background-color: white; -fx-padding: 0 0 3 0"/>
          </ScrollPane>
       </VBox>
