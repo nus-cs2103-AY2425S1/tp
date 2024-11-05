@@ -106,6 +106,22 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    public boolean getClearCommandPrompted() {
+        return clearCommandPrompted;
+    }
+
+    public void setClearCommandPrompted(boolean isPrompted) {
+        ClearCommand.setPrompted(isPrompted);
+    }
+
+    public boolean getClearCommandConfirmed() {
+        return clearCommandPrompted;
+    }
+
+    public void setClearCommandConfirmed(boolean isConfirmed) {
+        ClearCommand.setConfirmed(isConfirmed);
+    }
+
     //=========== Person Methods==============================================================================
     @Override
     public boolean hasPerson(Person person) {
