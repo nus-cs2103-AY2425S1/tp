@@ -13,7 +13,8 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.chart.ScatterChart?>
-<fx:root minHeight="600" minWidth="790" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="790" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -44,21 +45,26 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
+                   styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="mainPanelPlaceholder" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-          <HBox fx:id="personConcertListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-            <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <StackPane fx:id="mainPanelPlaceholder" minWidth="680" prefWidth="680" styleClass="pane-with-border"
+                   VBox.vgrow="ALWAYS">
+          <HBox fx:id="personConcertListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border"
+                VBox.vgrow="ALWAYS">
+            <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS"
+                  VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
             </VBox>
-            <VBox fx:id="concertList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <VBox fx:id="concertList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS"
+                  VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
@@ -66,8 +72,10 @@
             </VBox>
           </HBox>
 
-          <StackPane fx:id="concertContactListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS" visible="false">
-            <VBox fx:id="concertContactList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+          <StackPane fx:id="concertContactListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border"
+                     VBox.vgrow="ALWAYS" visible="false">
+            <VBox fx:id="concertContactList" minWidth="340" prefWidth="340" styleClass="pane-with-border"
+                  HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
