@@ -21,7 +21,8 @@ public class NameWithoutNumber {
      * The first character of the name must be alphabetic, and the rest
      * can only be alphabetic characters or spaces.
      */
-    public static final String VALIDATION_REGEX = "[a-zA-Z]+([ '][a-zA-Z]+)*( s/o| d/o)?([ '][a-zA-Z]+)*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]+([ '][a-zA-Z]+)*( (?i)s/o|d/o)?([ '][a-zA-Z]+)*";
+
 
 
 

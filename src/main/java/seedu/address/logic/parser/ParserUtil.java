@@ -145,7 +145,7 @@ public class ParserUtil {
      * @return True if the token contains a relationship identifier, false otherwise.
      */
     private static boolean containsRelationshipToken(String token) {
-        return token.contains("s/o") || token.contains("d/o");
+        return token.toLowerCase().contains("s/o") || token.toLowerCase().contains("d/o");
     }
 
     /**
@@ -272,7 +272,7 @@ public class ParserUtil {
      * @throws ParseException If any part of the name does not meet the required constraints.
      */
     private static NameWithoutNumber parseRelationshipName(String name, String prefix) throws ParseException {
-        String[] parts = name.split(prefix, 2);
+        String[] parts = name.split(prefix.toLowerCase(), 2);
         String beforePrefix = parts[0].trim();
         String afterPrefix = parts[1].trim();
 
