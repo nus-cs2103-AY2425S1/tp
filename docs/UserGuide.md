@@ -22,6 +22,11 @@
     --black-color: rgb(0, 0, 0);
   }
 
+  img {
+    pointer-events: none;
+    scale: 0.85;
+  }
+
   .ug {
     font-family: 'DM Sans', sans-serif;
     transition: 0.2s ease;
@@ -47,6 +52,7 @@
 
   .headers {
     font-weight: 900;
+    margin-top: 64px;
   }
 
   .headers-first {
@@ -75,11 +81,11 @@
     border-top: 1px solid var(--border-color);
     background-color: var(--white-bg-color);
     border-radius: 0px;
+    transition: 0.2s ease;
   }
 
   .content-droppable:hover {
     background-color: var(--hover-bg-color);
-    transition: 0.2s ease;
   }
 
   .content-qna {
@@ -95,7 +101,6 @@
   .command-titles {
     margin-bottom: 8px;
     display: flex;
-    transition: 0.2s ease;
     font-size: 1.2em;
   }
 
@@ -525,7 +530,7 @@ Example: "find ph n/John".
 
   ![Ui](images/helpWindow.png)
 
-  Format:`help`
+  Format: `help`
   </div>
 </div>
 
@@ -651,6 +656,7 @@ Example: "find ph n/John".
   * `sort role asc` sorts contacts by role in alphabetical order.
 </div>
 
+</div>
 </div>
 
 <br>
