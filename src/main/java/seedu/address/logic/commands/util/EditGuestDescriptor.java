@@ -35,7 +35,7 @@ public class EditGuestDescriptor extends EditPersonDescriptor {
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(rsvp);
+        return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(rsvp) || CollectionUtil.isAnyNonNull(relation);
     }
 
     public void setRsvp(Rsvp rsvp) {
@@ -67,7 +67,8 @@ public class EditGuestDescriptor extends EditPersonDescriptor {
 
         EditGuestDescriptor otherEditGuestDescriptor = (EditGuestDescriptor) other;
         return super.equals(other)
-                && Objects.equals(rsvp, otherEditGuestDescriptor.rsvp);
+                && Objects.equals(rsvp, otherEditGuestDescriptor.rsvp)
+                && Objects.equals(relation, otherEditGuestDescriptor.relation);
     }
 
     @Override

@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_TOTAL_GUEST;
 import static seedu.address.logic.Messages.MESSAGE_TOTAL_VENDOR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalGuests.AVA;
+import static seedu.address.testutil.TypicalGuests.BRIAN;
+import static seedu.address.testutil.TypicalGuests.CAM;
+import static seedu.address.testutil.TypicalGuests.getTypicalAddressBookWithGuests;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithGuests(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookWithGuests(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -69,14 +69,14 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String guestMessage = String.format(MESSAGE_TOTAL_GUEST, 3, 3, 0, 0);
+        String guestMessage = String.format(MESSAGE_TOTAL_GUEST, 3, 1, 1, 1);
         String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR, 0);
         String expectedMessage = FindCommand.MESSAGE_FIND_SUCCESS + guestMessage + vendorMessage;
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Johnson Brian White");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGuestList());
+        assertEquals(Arrays.asList(AVA, BRIAN, CAM), model.getFilteredGuestList());
     }
 
     @Test

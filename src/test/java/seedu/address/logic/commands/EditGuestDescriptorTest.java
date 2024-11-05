@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RELATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RSVP_DECLINED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -59,6 +60,10 @@ public class EditGuestDescriptorTest {
 
         // different rsvp -> returns false
         editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withRsvp(VALID_RSVP_DECLINED).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different relation -> returns false
+        editedAmy = new EditGuestDescriptorBuilder(DESC_AMY).withRelation(VALID_RELATION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

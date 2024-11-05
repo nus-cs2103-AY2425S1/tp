@@ -17,7 +17,6 @@ import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.JsonAdaptedTag;
 
-
 /**
  * Jackson friendly version of {@link Guest}
  */
