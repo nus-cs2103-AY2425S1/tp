@@ -293,9 +293,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As a user       | add contact information of the family member                 | I can retrieve their contact information                              |
 | `* * *`  | As a user       | add the relationship of the family members                   | I can know the relationship between people                            |
 | `* * *`  | As a user       | update the information of family members in the contact list | I can keep the latest information of my family                        |
-| `* * *`  | As a user       | add events tied to family members(e.g birthdays)             | I can set reminders on that date so that I don't ever forget about it |
-| `* * *`  | As an attendee  | see who is attending the event                               | I can make a more informed decision of whether I want to attend       |
-| `* * *`  | As an attendee  | see the venue and time of the event                          | I can make a more informed decision of whether I want to attend       |
+| `* * *`  | As a user       | add events tied to family members (e.g birthdays)            | I can set reminders on that date so that I don't ever forget about it |
 | `* * *`  | As an organizer | track RSVPs and attendance for each event                    | I know who is attending the event and can plan accordingly            |
 | `* * *`  | As an organizer | schedule family events                                       | I can plan and coordinate events                                      |
 | `* * *`  | As an organizer | see the contact list of family members                       | I know whose contacts that I have not added yet and add them          |
@@ -313,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case 1: Add contact**
 
 **MSS**
-1. User enters name and relationship of the contact.
+1. User enters name, phone number, email and relationship of the contact.
 2. User confirms details of the contact.
 3. System adds the contact.
 
@@ -321,24 +319,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User enters phone number of the contact.
-* 1b. User enters the email of the contact
+* 1a. User enters an invalid name, phone number, email, and/or relationship.
 
-    Use case resumes at step 2.
-
-
-* 1c. Given phone number is invalid.
-
-    * 1c1. System shows an error message.
-
-      Use case resumes at step 1.
-
-
-* 1d. Given email is invalid.
-
-    * 1d1. System shows an error message.
-
-      Use case resumes at step 1.
+    Use case resumes at step 1.
 
 
 **Use case 2: Delete contact**
@@ -365,12 +348,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case 3: View contacts**
+**Use case 3: View all contacts**
 
 **MSS**
 
 1. User requests to view the list of contacts.
-2. Systems displays list of contacts.
+2. The system displays a list of all contacts.
+3. User can scroll through the list to see all the contact listed.
+4. User can click on a contact to view more details.
 
     Use case ends.
 
@@ -378,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User views all contacts (UC-3).
+1. User lists all contacts (UC-3).
 2. User selects contact to update.
 3. User can edit name / phone number / email / relationship of contact.
 4. System registers the changes.
@@ -410,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters name and date of the event.
+1. User enters name, start date, end date, location of the event.
 2. User confirms the details of the event.
 3. System adds the event.
 
@@ -418,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User enters the name of people attending.
+* 1a. User enters index of persons attending.
 
     Use case resumes at step 2.
 
@@ -431,10 +416,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 *a At any time, Users chooses to cancel the adding.
-
-    a1. System requests to confirm the cancellation.
-    a2. System cancels the adding process.
-    Use case ends.
 
 
 **Use case 6: Delete an event**
@@ -449,10 +430,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User lists all events(UC-7).
 2. System shows a list of events.
 3. User selects an event to delete.
-4. User is prompted for confirmation to delete the event.
-5. User confirms their intention and the event is deleted.
-6. User is given feedback that the event is deleted successfully.
-7. User no longer sees the event in the event list.
+4. User confirms their intention and the event is deleted.
+5. User is given feedback that the event is deleted successfully.
+6. User no longer sees the event in the event list.
 
     Use case ends.
 
@@ -469,23 +449,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *a. If the user exists the application without confirming, the event is kept and the use case ends.
 
-**Use case 7: View all upcoming events**
+**Use case 7: View all events**
 
 **MSS**
 
-1. User navigates to the "Events" panel.
-2. The system displays a list of all upcoming events, sorted by latest date.
-3. For each event, the event name, date and time, location and number of family members invited are displayed.
-4. User can scroll through the list to see all the events listed.
-5. User can click on an event to view more details.
+1. User lists all events.
+2. The system displays a list of all events.
+3. User can scroll through the list to see all the events listed.
+4. User can click on an event to view more details.
 
     Use case ends
-
-**Extensions**
-
-* 1a. No upcoming events.
-  * 1a1. System displays a message to prompt users to add events.
-  * 1a2. System provides a button to add event(UC-5).
 
 **Use case 8: Update event information**
 
@@ -520,9 +493,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 *a At any time, User chooses to cancel the edit.
-
-    *a1. System requests to confirm the cancellation.
-    Use case ends.
 
 *{More to be added}*
 
@@ -569,22 +539,114 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Listing all persons
+
+1. List all persons
+
+    1. Test case: `list -p` (must be an exact match)
+        Expected: `Listed all person` is shown in the status message. Tabs switched to Contacts.
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: List all persons using the `list -p` command. Multiple persons in the list.
+
+    1. Test case: `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother`<br>
+       Expected: Person with name `John Doe` with phone number `98765432`, email `johnd@example.com` and relationship of `Brother` is added. `New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Relationship: Brother` is shown in the status message.
+
+    1. Test case: `add`<br>
+       Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+    1. Test case: `add 0` <br>
+       Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Invalid name): `add -n John_Doe -p 98765432 -e johnd@example.com -rs Brother` <br>
+      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Invalid phone number): `add -n John Doe -p 1 -e johnd@example.com -rs Brother` <br>
+      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Invalid email): `add -n John Doe -p 98765432 -e johndexample -rs Brother` <br>
+      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Invalid relationship): `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother333` <br>
+      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Multiple values for fields): `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother -rs Brother` <br>
+      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Missing fields): `add -n John Doe -e johnd@example.com -rs Brother` <br>
+      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+2. Adding a duplicate person
+
+    1. Prerequisites: List all persons using the `list -p` command. Person with name `John Doe` with phone number `98765432`, email `johnd@example.com` and relationship of `Brother` already exists.
+
+    1. Test case: `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother`
+        Expected: `This person already exists in the address book` is displayed.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list -p` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
+### Editing a person
+
+1. Editing a person, where result does not cause duplicate persons.
+
+    1. Prerequisites: List all persons using the `list -p` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 -n Bernice Tan`<br>
+       Expected: The name of the first person is edited to `Bernice Tan`. Details of the added person shown in the status message.
+
+   1. Test case: `edit 1 -p 123123123`<br>
+      Expected: The phone number of the first person is edited to `123123123`. Details of the added person shown in the status message.
+
+   1. Test case: `edit 1 -e johnd@example.com`<br>
+      Expected: The email of the first person is edited to `johnd@example.com`. Details of the added person shown in the status message.
+
+   1. Test case: `edit 1 -rs Sister`<br>
+      Expected: The name of the first person is edited to `Sister`. Details of the added person shown in the status message. Timestamp in the status bar is updated.
+
+   1. Other correct edit commands to try (more than 1 field edited): `edit 1 -p 12345678 -rs Sister` <br>
+       Expected: The phone number and relationship of the first person is edited to `12345678` and `Sister`. Details of the added person shown in the status message.
+
+   1. Test case (No fields provided): `edit 1`<br>
+      Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case (Multiple values for fields): `edit 1 -n John -n Doe`<br>
+      Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect add commands to try: `edit`, `edit x` (where x is larger than the list size), <br>
+      Expected: Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
+
+2. Editing a person, where result causes duplicate persons.
+
+   1. Prerequisites: `add -n Johnny Doe -p 98765432 -e johnd@example.com -rs Brother` followed by `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother`
+
+    1. Test case: `edit 1 -n John Doe`<br>
+       Expected: `This person already exists in the address book.` is shown in the status message.
+
+    1. Other test cases to try: editing 1 or more fields to cause a person to have the same `name`, `phone number`, `email` and `relationship` as another person in the list.
+       Expected: `This person already exists in the address book.` is shown in the status message.
+
+### Listing all events
+
+1. Listing all events
+
+   1. Test case: `list -e` (must be an exact match)
+        Expected: `Listed all events` is shown in the status message. Tabs switched to Events.
 
 ### Saving data
 
@@ -593,3 +655,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Make upcoming events in PersonDetailView update automatically when a Person is edited.** Currently, users need to click on another person card then back to view the upcoming events as a result of editing the person.

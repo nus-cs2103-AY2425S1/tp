@@ -74,7 +74,7 @@ Format: `help`
 
 Shows a list of all persons in the address book.
 
-Format: `list -p`
+Format: `list -p` (must be an exact match)
 
 ### Adding a person: `add`
 
@@ -153,7 +153,7 @@ Format: `clear -e`
 
 Shows a list of all events in the event book.
 
-Format: `list -e`
+Format: `list -e` (must be an exact match)
 
 ### Adding an event: `event`
 
@@ -170,13 +170,13 @@ Format: `event -n EVENT_NAME -d EVENT_DATE (yyyy-mm-dd) -l LOCATION -a ATTENDEES
 
 ### Updating an event: `update`
 
-Updates the details of an existing event in the address book. 
+Updates the details of an existing event in the address book.
 
 Format: `update -i INDEX -n NEW_NAME -d NEW_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
 
-**Tip:** The `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to 
-remove attendees from an event, and can be used together with the `-a` flag. If you add and remove the same index, the result 
-will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes. 
+**Tip:** The `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
+remove attendees from an event, and can be used together with the `-a` flag. If you add and remove the same index, the result
+will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes.
 
 ### Exiting the program : `exit`
 

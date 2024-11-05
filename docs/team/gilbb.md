@@ -7,4 +7,20 @@
 
 Given below are my contributions to the project.
 
-Nothing so far!
+* **New Feature**: 
+    * What it does:
+    * Justification:
+    * Highlights:
+
+* **Enhancements to existing features**:
+    *
+
+* **Project management**:
+    *
+
+* **Documentation**:
+    * User Guide:
+      
+    * Developer Guide:
+
+* **Code contributed**: [RepoSense link]()
