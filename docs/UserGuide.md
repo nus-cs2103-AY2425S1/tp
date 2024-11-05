@@ -83,13 +83,13 @@ The table below showcases the four different possible notations of prefixes
 | Variadic     | prefix/Value... | [prefix/Value]... |
 
 <div class="note" markdown="span">
-Optional fields can be omitted and the command will still be executed successfully <br> (assuming all other parts are correctly inputted) 
+Optional fields can be omitted and the command will still be executed successfully <br> _(assuming all other parts are correctly inputted)_ 
 </div>
 
 #### Prefix Types
 
 <div class="note" markdown="span">
-The prefixes used in EZSTATES are universal across all commands (i.e. have the same constraints and remarks)
+The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have the same constraints and remarks)_
 </div>
 
 | prefix | constraints | remarks | valid | invalid |
