@@ -30,13 +30,13 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
         FxToolkit.showStage();
         WaitForAsyncUtils.waitForFxEvents(20);
         FxRobot robot = new FxRobot();
-        Label nameArea = robot.lookup("#name").query();
-        if (nameArea == null) {
+        if (robot.lookup("#name").tryQuery().isEmpty()) {
             name = new Name("Jackson");
             robot.clickOn("#commandBoxPlaceholder");
             robot.write("buyer n/Jackson p/98294924 e/jackson@gmail.com");
             robot.type(KeyCode.ENTER);
         } else {
+            Label nameArea = robot.lookup("#name").query();
             name = new Name(nameArea.getText());
         }
 
