@@ -295,6 +295,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: Successfully deleted Bob with the number: 91124444 and email: bobby123@gmail.com!
       >
       > ---
+    
     <br>
     <div class="note" markdown="span">
     Delete is case-insensitive: 
@@ -321,42 +322,50 @@ Commands for managing appointments between user and clients.
 ![appointments](images/appointments.png)
 
 - #### **Schedule Appointment**
-    - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
+    - **Format:** `apt NAME d/<DD-MM-YY> fr/<HHmm> to/<HHmm>`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
       >
-      > **Input**:
+      > **Input**: `apt Bob d/08-10-2024 fr/1900 to/2100`
       >
-      > **Output**:
+      > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
       >
+      > ![bob_apt](images/bob_apt.png)
+      > 
       > ---
       >
-      > **Use Case #2**:
+      > **Use Case #2**: Overriding an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
       >
-      > **Input**:
+      > **Input**: `apt Bob d/09-10-24 fr/1000 to/1200`
       >
-      > **Output**:
+      > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 09-10-24 (From: 10:00 To: 12:00); Tags:
       >
+      > ![bob_apt_2](images/bob_apt_2.png)
+      > 
       > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+      
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Incorrect `DATE` format 
       >
-      > **Input**:
+      > **Input #a**: `apt Bob d/09-10-24 fr/1000 to/1200`
       >
-      > **Output**:
+      > **Input #b**: `apt Bob d/aaa fr/1000 to/1200`
+      > 
+      > **Output**: Dates should be in the format dd-MM-yy or ddMMyy, e.g., 25-12-24 or 251224.
       >
+      > ---
+      > 
+      > **Use Case #2**: Incorrect `TIME` format
+      > 
+      > **Input #a**: `apt Bob d/20-10-24 fr/100000 to/1200`
+      > 
+      > **Input #b**: `apt Bob d/20-10-24 fr/aa to/1200`
+      > 
+      > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
+      > 
       > ---
 
 - #### **Delete Appointment**
