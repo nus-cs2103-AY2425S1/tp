@@ -24,8 +24,9 @@ public class AddEcNumberCommand extends Command {
             + "identified by the index.\n"
             + "Parameters: [INDEX] ep/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
-    public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for Person: %1$s\n";
-    public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for Person: %1$s\n";
+    public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for %1$s\n"
+            + "New Emergency Contact Number: %2$s";
+    public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for: %1$s\n%2$s";
 
     private final Index index;
     private final EcNumber ecNumber;
@@ -70,7 +71,7 @@ public class AddEcNumberCommand extends Command {
         assert personToEdit != null;
 
         String message = !ecNumber.value.isEmpty() ? MESSAGE_ADD_ECNUMBER_SUCCESS : MESSAGE_DELETE_ECNUMBER_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        return String.format(message, personToEdit.getName(), personToEdit.getEcNumber());
     }
 
     @Override

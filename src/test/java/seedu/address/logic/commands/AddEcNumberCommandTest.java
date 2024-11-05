@@ -40,7 +40,7 @@ public class AddEcNumberCommandTest {
                 new EcNumber(editedPerson.getEcNumber().value));
 
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_ADD_ECNUMBER_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcNumber());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -58,7 +58,7 @@ public class AddEcNumberCommandTest {
                 new EcNumber(editedPerson.getEcNumber().toString()));
 
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_DELETE_ECNUMBER_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcNumber());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -79,7 +79,7 @@ public class AddEcNumberCommandTest {
                 new EcNumber(editedPerson.getEcNumber().value));
 
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_ADD_ECNUMBER_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcNumber());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -100,7 +100,7 @@ public class AddEcNumberCommandTest {
                 new EcNumber(editedPerson.getEcNumber().value));
 
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_DELETE_ECNUMBER_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getName(), editedPerson.getEcNumber());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);

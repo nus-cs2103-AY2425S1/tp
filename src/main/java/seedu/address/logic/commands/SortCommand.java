@@ -32,7 +32,7 @@ public class SortCommand extends Command {
             + "Attributes: name, phone, email, address, register number, sex, \n"
             + "student class, emergency contact name, emergency contact number";
     public static final String MESSAGE_SORTED_SUCCESS = "Sorted the list based on %1$s";
-    public static final String MESSAGE_UNSORTED_SUCCESS = "Your list is now unsorted and back to the original!";
+    public static final String MESSAGE_UNSORTED_SUCCESS = "Your list is now unsorted and restored to before!";
 
     private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
 
@@ -60,14 +60,18 @@ public class SortCommand extends Command {
         return new CommandResult(this.generateSuccessMessage());
     }
 
-
-    public String generateSuccessMessage() {
+    /**
+     * Generates a command execution success message based on whether
+     * the list is sorted or restored to its unsorted state.
+     */
+    private String generateSuccessMessage() {
         return isNull(comparator) ? MESSAGE_UNSORTED_SUCCESS : String.format(MESSAGE_SORTED_SUCCESS, sortAttribute);
     }
+
     /**
      * Returns the comparator needed to sort the list. Returns null to restore the unsorted list.
      */
-    public Comparator<Person> getComparator() {
+    private Comparator<Person> getComparator() {
         assert sortAttribute != null;
 
         switch (sortAttribute) {
