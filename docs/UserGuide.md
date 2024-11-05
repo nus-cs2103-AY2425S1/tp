@@ -104,7 +104,7 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
 * The `BUYER_NAME` should only contain alphabetic characters and spaces. Each word is separated by a single space and has a character limit of 747 [longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name). It should also ignore extra/leading/trailing spaces and not be empty. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the clientbook.
-* The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
+* The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
 * The `BUYER_EMAIL` should be of the format local-part@domain and adhere to the following constraints: 
   * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
     * The local-part may not start or end with any special characters and must not contain consecutive special characters.
@@ -153,7 +153,7 @@ Filters the clients that starts with the prefix provided.
 Format: `filterclient n/NAME`
 
 * Filters the client with the specified prefix `NAME`.
-* The `NAME` should only contain alphabetic characters and spaces. Each word is separated by a single space and has a character limit of 747 [longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name). It should also ignore extra/leading/trailing spaces.  All names will be converted to lower case and checked against the clientbook.
+* The restrictions for the `NAME` is identical to the restrictions for the `BUYER_NAME` specified in the `addbuyer` feature.
 
 Examples:
 * `filterclient n/A` filters the clients that starts with the prefix `A`.
@@ -167,7 +167,7 @@ Deletes the specified buyer from the client book of ClientGrid.
 Format: `deletebuyer p/PHONE_NUMBER`
 
 * Deletes the buyer with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
+* The restrictions for the `PHONE_NUMBER` is identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
 
 Examples:
 * `deletebuyer p/83456789` deletes the buyer with phone number `83456789` from the client book.
@@ -180,7 +180,7 @@ Deletes the specified seller from the client book of ClientGrid.
 Format: `deleteseller p/PHONE_NUMBER`
 
 * Deletes the seller with the specified `PHONE_NUMBER`.
-* The restrictions for the `PHONE_NUMBER` are identical to the restrictions for the `PHONE_NUMBER` specified in the `deletebuyer` feature.
+* The restrictions for the `PHONE_NUMBER` is identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
 
 Examples:
 * `deleteseller p/83456789` deletes the seller with phone number `83456789` from the client book.
