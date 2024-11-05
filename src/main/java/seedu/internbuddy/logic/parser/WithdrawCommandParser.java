@@ -24,7 +24,6 @@ public class WithdrawCommandParser implements Parser<WithdrawCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX)) {
-            System.out.println("hi");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WithdrawCommand.MESSAGE_USAGE));
         }
 

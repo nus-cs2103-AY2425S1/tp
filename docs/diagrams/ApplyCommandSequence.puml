@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ApplyCommandParser" as ApplyCommandParser LOGIC_COLOR
+participant "a:ApplyCommand" as ApplyCommand LOGIC_COLOR
+participant "editedCompany:Company" as Company LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("apply 1 n/Product Manager d/Requires Figma")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("apply 1 n/Product Manager d/Requires Figma")
+activate AddressBookParser
+
+create ApplyCommandParser
+AddressBookParser -> ApplyCommandParser
+activate ApplyCommandParser
+
+ApplyCommandParser --> AddressBookParser
+deactivate ApplyCommandParser
+
+AddressBookParser -> ApplyCommandParser : parse("1 n/Product Manager d/Requires Figma")
+activate ApplyCommandParser
+
+create ApplyCommand
+ApplyCommandParser -> ApplyCommand
+activate ApplyCommand
+
+ApplyCommand --> ApplyCommandParser : a
+deactivate ApplyCommand
+
+ApplyCommandParser --> AddressBookParser : a
+deactivate ApplyCommandParser
+
+ApplyCommandParser -[hidden]-> AddressBookParser
+destroy ApplyCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> ApplyCommand : execute(m)
+activate ApplyCommand
+
+create Company
+ApplyCommand -> Company : new Company(companyToEdit)
+activate Company
+
+Company --> ApplyCommand : editedCompany
+deactivate Company
+
+ApplyCommand -> Model : setCompany(companyToEdit, editedCompany)
+activate Model
+
+Model --> ApplyCommand
+deactivate Model
+
+create CommandResult
+ApplyCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ApplyCommand : r
+deactivate CommandResult
+
+ApplyCommand --> LogicManager : r
+deactivate ApplyCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

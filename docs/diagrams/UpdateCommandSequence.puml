@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UpdateCommandParser" as UpdateCommandParser LOGIC_COLOR
+participant "u:UpdateCommand" as UpdateCommand LOGIC_COLOR
+participant "editedCompany:Company" as Company LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("update c/1 app/1 as/OA")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("update c/1 app/1 as/OA")
+activate AddressBookParser
+
+create UpdateCommandParser
+AddressBookParser -> UpdateCommandParser
+activate UpdateCommandParser
+
+UpdateCommandParser --> AddressBookParser
+deactivate UpdateCommandParser
+
+AddressBookParser -> UpdateCommandParser : parse("c/1 app/1 as/OA")
+activate UpdateCommandParser
+
+create UpdateCommand
+UpdateCommandParser -> UpdateCommand
+activate UpdateCommand
+
+UpdateCommand --> UpdateCommandParser : u
+deactivate UpdateCommand
+
+UpdateCommandParser --> AddressBookParser : u
+deactivate UpdateCommandParser
+
+UpdateCommandParser -[hidden]-> AddressBookParser
+destroy UpdateCommandParser
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> UpdateCommand : execute(m)
+activate UpdateCommand
+
+create Company
+UpdateCommand -> Company : new Company(companyToEdit)
+activate Company
+
+Company --> UpdateCommand : editedCompany
+deactivate Company
+
+UpdateCommand -> Model : setCompany(companyToEdit, editedCompany)
+activate Model
+
+Model --> UpdateCommand
+deactivate Model
+
+create CommandResult
+UpdateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UpdateCommand : r
+deactivate CommandResult
+
+UpdateCommand --> LogicManager : r
+deactivate UpdateCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

@@ -1,5 +1,6 @@
 package seedu.internbuddy.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -24,6 +25,7 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ApplyCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_APP_STATUS);
 
