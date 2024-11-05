@@ -306,11 +306,14 @@ Format: `backup [DESCRIPTION]`
   3_After updating John's contact info_2024-10-30_15-45-00-000.json
   ```
 #### **Automated Backup:** 🚨
-- Whenever a patient record is deleted, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
+- Whenever a patient record is deleted or cleared, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
 - This helps to ensure that no data is permanently lost in case of an accidental deletion.
 - Backups are stored in the same location as the manual backup whicch is the /backups/ folder within the application directory.
   ```
   0_delete_John Doe_2024-10-30_18-05-29-745.json
+  ```
+  ```
+  1_clear_2024-10-30_18-05-29-745.json
   ```
 
 ### Restoring data from backups : `restore`

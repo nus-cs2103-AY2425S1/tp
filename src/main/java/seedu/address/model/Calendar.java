@@ -102,4 +102,11 @@ public class Calendar {
     public int hashCode() {
         return appointments.hashCode();
     }
+
+    /**
+     * Clears all appointments from the calendar.
+     */
+    public void clearAppointments() {
+        appointments.clear();
+    }
 }
