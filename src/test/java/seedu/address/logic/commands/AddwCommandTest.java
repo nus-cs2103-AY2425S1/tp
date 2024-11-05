@@ -42,6 +42,7 @@ public class AddwCommandTest {
                 new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         Wedding weddingToAdd = new WeddingBuilder().build();
         Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        tobeClient.resetOwnWedding();
 
         AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
         CommandResult commandResult = addwCommand.execute(modelStub);
@@ -53,6 +54,7 @@ public class AddwCommandTest {
         assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
 
         // null date and null venue
+        tobeClient.resetOwnWedding();
         modelStub =
                 new AddwCommandTest.ModelStubAcceptingWeddingAdded();
         weddingToAdd = new WeddingBuilder().withDate(null).withVenue(null).build();
@@ -96,6 +98,7 @@ public class AddwCommandTest {
         Wedding weddingToAdd = new WeddingBuilder().build();
         AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
         Person tobeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        tobeClient.resetOwnWedding();
 
         weddingToAdd.setClient(tobeClient);
 
@@ -103,6 +106,22 @@ public class AddwCommandTest {
 
         assertThrows(CommandException.class,
                 AddwCommand.MESSAGE_DUPLICATE_WEDDING, () -> addwCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_alreadyClient_throwsCommandException() {
+        Wedding createdWedding = new WeddingBuilder().build();
+        Wedding weddingToAdd = new WeddingBuilder().build();
+        AddwCommandTest.ModelStub modelStub = new AddwCommandTest.ModelStubWithWedding(weddingToAdd);
+        Person toBeClient = modelStub.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        toBeClient.resetOwnWedding();
+
+        toBeClient.setOwnWedding(createdWedding);
+
+        AddwCommand addwCommand = new AddwCommand(INDEX_FIRST_PERSON, null, weddingToAdd);
+
+        assertThrows(CommandException.class,
+                AddwCommand.MESSAGE_ALREADY_A_CLIENT, () -> addwCommand.execute(modelStub));
     }
 
     @Test
