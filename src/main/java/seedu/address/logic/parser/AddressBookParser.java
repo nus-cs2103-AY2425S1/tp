@@ -21,8 +21,8 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
+import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
-import seedu.address.logic.commands.event.commands.ViewEventCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.InitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
@@ -33,9 +33,9 @@ import seedu.address.logic.parser.contact.parser.FindNameCommandParser;
 import seedu.address.logic.parser.contact.parser.FindRoleCommandParser;
 import seedu.address.logic.parser.event.parser.AddPersonToEventParser;
 import seedu.address.logic.parser.event.parser.DeleteEventCommandParser;
+import seedu.address.logic.parser.event.parser.FindEventCommandParser;
 import seedu.address.logic.parser.event.parser.NewEventCommandParser;
 import seedu.address.logic.parser.event.parser.RemovePersonFromEventParser;
-import seedu.address.logic.parser.event.parser.ViewEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -106,8 +106,8 @@ public class AddressBookParser {
         case InitSearchModeCommand.COMMAND_WORD:
             return new InitSearchModeCommand();
 
-        case ViewEventCommand.COMMAND_WORD:
-            return new ViewEventCommandParser().parse(arguments);
+        case FindEventCommand.COMMAND_WORD:
+            return new FindEventCommandParser().parse(arguments);
 
         case RemovePersonFromEventCommand.COMMAND_WORD:
             return new RemovePersonFromEventParser().parse(arguments);

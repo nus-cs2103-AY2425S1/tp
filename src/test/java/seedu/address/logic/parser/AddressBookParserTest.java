@@ -31,8 +31,8 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
+import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
-import seedu.address.logic.commands.event.commands.ViewEventCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -173,9 +173,9 @@ public class AddressBookParserTest {
     }
 
     public void parseCommand_viewEvent() throws ParseException {
-        Command expected = new ViewEventCommand(INDEX_FIRST_EVENT);
+        Command expected = new FindEventCommand(INDEX_FIRST_EVENT);
         assertEquals(expected, new AddressBookParser()
-                .parseCommand(ViewEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
+                .parseCommand(FindEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
     }
 
     @Test
