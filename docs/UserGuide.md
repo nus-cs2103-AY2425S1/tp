@@ -131,9 +131,9 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filter persons: `filter`
+### Filter persons : `filter`
 
-Filter persons who meet all specified conditions.
+Filters persons who meet all specified conditions.
 
 Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
