@@ -30,9 +30,8 @@ public class DeleteRentalCommand extends Command {
             + PREFIX_CLIENT_INDEX + "1 "
             + PREFIX_RENTAL_INDEX + "3";
     public static final String MESSAGE_DELETE_RENTAL_SUCCESS = "Deleted Rental Information: %1$s";
-    public static final String MESSAGE_PROMPT = "This will delete the rental information:\n"
-            + "%1$s\n"
-            + "Confirm command? (y/n)";
+    public static final String MESSAGE_PROMPT = "This will delete the rental information: Confirm command? (y/n)\n"
+            + "%1$s";
 
     private final Index clientIndex;
     private final Index rentalIndex;
