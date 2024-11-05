@@ -201,6 +201,11 @@ public class ParserUtil {
         try {
             personIndexSet = Arrays.stream(personIndexString.split("\\s+"))
                     .map(Integer::parseInt)
+                    .peek(i -> {
+                        if (i < 1) {
+                            throw new IllegalArgumentException("Negative or zero index.");
+                        }
+                    })
                     .map(i -> Index.fromOneBased(i))
                     .collect(Collectors.toSet());
 

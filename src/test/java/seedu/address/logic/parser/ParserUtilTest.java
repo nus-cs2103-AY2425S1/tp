@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.WeddingDate;
@@ -265,5 +267,38 @@ public class ParserUtilTest {
     @Test
     public void parseTags_invalidTag_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList("invalid tag!")));
+    }
+
+    @Test
+    public void parsePersonIndexString_negativeIndex_throwsParseException() {
+        String negativeIndex = "-1 2 3";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(negativeIndex));
+    }
+
+    @Test
+    public void parsePersonIndexString_zeroIndex_throwsParseException() {
+        String zeroIndex = "0 1 2";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(zeroIndex));
+    }
+
+    @Test
+    public void parseWeddingDate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("01-01-2025"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("2025/01/01"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("January 1, 2025"));
+    }
+
+    @Test
+    public void parseWeddingName_validWeddingNameWithWhitespace_returnsTrimmedWeddingName() throws Exception {
+        String nameWithWhitespace = "  Smith Wedding  ";
+        WeddingName expectedWeddingName = new WeddingName("Smith Wedding");
+        assertEquals(expectedWeddingName, ParserUtil.parseWeddingName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parsePersonListToString_emptyList_returnsEmptyString() {
+        ArrayList<Person> emptyList = new ArrayList<>();
+        String expectedOutput = "";
+        assertEquals(expectedOutput, ParserUtil.parsePersonListToString(emptyList));
     }
 }
