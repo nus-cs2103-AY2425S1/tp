@@ -28,15 +28,15 @@ public class ViewStudentCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // Input is a non-numeric string
+        // EP: Input is a non-numeric string
         assertParseFailure(parser, "a", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input contains special characters
+        // EP: Input contains special characters
         assertParseFailure(parser, "(!12", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input is a floating-point number
+        // EP: Input is a floating-point number
         assertParseFailure(parser, "0.5", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input is a negative number
+        // EP: Input is a negative number
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input is zero, which is not a valid index
+        // EP: Input is zero, which is not a valid index
         assertParseFailure(parser, "0", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 }
