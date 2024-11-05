@@ -42,11 +42,11 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**How do I read the command format?**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -54,8 +54,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [c/COURSE]` can be used as `n/John Doe c/CS2103T` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/COURSE]…​` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101`, `c/CS2103T c/CS2101` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[c/COURSE]…` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101`, `c/CS2103T c/CS2101` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a student to TAHub.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of courses (including 0)
@@ -221,18 +221,33 @@ Format: `exit`
 
 # Lessons
 
-The lesson list is shown on the right side of TAHub.
-You can create new lessons and add students to lessons.
-You can mark students' attendance and participation.
+The lesson list is shown on the right side of TAHub.<br>
+Currently, you can:
+- Add and delete lessons
+- Add and remove students from lessons
+- Mark students' attendance and participation
 
-Lessons that have already passed (when your computer's time is after
-the lesson's time) will be displayed in red.
+In a lesson, students are represented by name tags.<br>
+Its color represents their attendance (green for present, red for absent)<br>
+The number next to a student's name represents their participation score.
+
+![UgLesson.png](images/UgLesson.png)
+
+This is an example of a lesson. In this example, `Jane Doe` is absent,
+and has a participation of `0`. `John Doe` is present with a participation
+of `2`.
+
+Additionally, lessons that have passed (the time is before your computer's time)
+will be displayed in red, as follows:
+
+![UgRedLesson.png](images/UgRedLesson.png)
 
 ## Lesson Commands
 
 ### Adding a Lesson : `addlesson`
 
-Adds a lesson to TAHub.
+Adds a lesson to TAHub. Lessons will be sorted in chronological order
+in the lesson list.
 
 Format: `addlesson d/DATE t/TIME`
 
@@ -252,7 +267,8 @@ Examples:
 
 ### Adding a student to a lesson : `addtolesson`
 
-Adds student(s) to a lesson.
+Adds student(s) to a lesson. Students added to a lesson will be shown as name tags under
+that lesson inside the lesson list.
 
 Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
 
@@ -267,7 +283,8 @@ Examples:
 
 ### Removing a student from a lesson : `removefromlesson`
 
-Removes student(s) from a lesson.
+Removes student(s) from a lesson.Removing a student will also remove all data associated
+with them to that lesson, i.e. re-adding them defaults to no attendance and 0 participation.
 
 Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
 
@@ -279,7 +296,8 @@ Examples:
 
 ### Marking a student's attendance : `marka`
 
-Marks student(s)' attendance in a lesson.
+Marks student(s)' attendance in a lesson. The student's attendance is represented by the
+color of their name tag under a lesson - **green** for present and **red** for absent.
 
 Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
 
@@ -295,7 +313,10 @@ Examples:
 
 ### Marking a student's participation : `markp`
 
-Marks student(s)' participation in a lesson.
+Marks student(s)' participation in a lesson. The student's participation is reflected in the number next to
+their name tag under a lesson.<br>
+**Additionally, setting a student's participation above 0
+will also automatically set their attendance to true.**
 
 Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 
