@@ -430,6 +430,7 @@ _Details coming soon ..._
 * ***CSV (Comma-separated values)*** : A text file format that uses commas to separate values, and newlines to separate records.
 * ***GUI (Graphical User Interface)*** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 * ***NUS Club Administrator*** : An NUS club admin user responsible for managing contacts of students, companies, etc.
+* ***Student ID*** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z)
 * ***Tag*** : A keyword or label associated with a contact that allows for easy grouping and filtering.
 
 --------------------------------------------------------------------------------------------------------------------
