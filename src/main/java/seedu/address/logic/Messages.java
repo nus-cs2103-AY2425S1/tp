@@ -33,6 +33,7 @@ public class Messages {
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No student with the name %1$s is found.";
     public static final String MESSAGE_LOGGER_FOR_EXCEPTION = "An exception is thrown in: %s";
+    public static final String MESSAGE_PREFIX_NOT_ALLOWED = "%s cannot be used in this command";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
