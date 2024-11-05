@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_NAME_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -68,12 +70,64 @@ public class ViewCommandTest {
     }
 
     @Test
+    public void execute_multipleSpacesInKeyword_personFound() {
+        // Multiple spaces between keywords should be treated as a single space
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, "Carl Kurz");
+        NameMatchesKeywordPredicate predicate = preparePredicate("Carl      Kurz");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_mixedCaseKeyword_personFound() {
+        // Case insensitive matching test
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, "cArL kUrZ");
+        NameMatchesKeywordPredicate predicate = preparePredicate("cArL kUrZ");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void equals() {
+        NameMatchesKeywordPredicate firstPredicate =
+                preparePredicate("first");
+        NameMatchesKeywordPredicate secondPredicate =
+                preparePredicate("second");
+
+        ViewCommand findFirstCommand = new ViewCommand(firstPredicate);
+        ViewCommand findSecondCommand = new ViewCommand(secondPredicate);
+
+        // same object -> returns true
+        assertTrue(findFirstCommand.equals(findFirstCommand));
+
+        // same values -> returns true
+        ViewCommand findFirstCommandCopy = new ViewCommand(firstPredicate);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(findFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(findFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
     public void toStringMethod() {
         NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(Arrays.asList("keyword"));
         ViewCommand viewCommand = new ViewCommand(predicate);
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
     }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
