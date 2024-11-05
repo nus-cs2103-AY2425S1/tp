@@ -25,12 +25,12 @@ import seedu.address.model.wedding.Wedding;
 public class AddwCommand extends Command {
     public static final String COMMAND_WORD = "addw";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a wedding to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a wedding to the address book. \n"
             + "Parameters: "
             + PREFIX_NAME + "WEDDING'S NAME "
-            + PREFIX_CLIENT + "CLIENT"
-            + PREFIX_DATE + "DATE "
-            + PREFIX_VENUE + "VENUE ";
+            + PREFIX_CLIENT + "CLIENT "
+            + "[" + PREFIX_DATE + "DATE" + "] "
+            + "[" + PREFIX_VENUE + "VENUE" + "] ";
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";

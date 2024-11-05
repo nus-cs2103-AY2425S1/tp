@@ -17,7 +17,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the contact you want to see "
             + "with the name (case-insensitive).\n"
-            + "Parameters: NAME\n"
+            + "Parameters: NAME (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " alice";
 
     private final NameMatchesKeywordPredicate predicate;
