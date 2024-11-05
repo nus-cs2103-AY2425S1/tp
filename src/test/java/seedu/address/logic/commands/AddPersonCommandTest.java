@@ -165,6 +165,12 @@ public class AddPersonCommandTest {
         public void clearPersonFromContacts(Person target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void replacePersonInEvents(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
