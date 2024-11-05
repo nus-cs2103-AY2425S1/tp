@@ -104,7 +104,12 @@ public class MainApp extends Application {
             appointments = new ArrayList<>();
         }
 
-        return new ModelManager(initialData, appointments, userPrefs);
+        ModelManager modelManager = new ModelManager(initialData, appointments, userPrefs);
+
+        // ensures initial list shown to user consists only of current (i.e. unarchived) persons
+        modelManager.updateFilteredPersonList(Model.PREDICATE_SHOW_CURRENT_PERSONS);
+
+        return modelManager;
     }
 
     private void initLogging(Config config) {

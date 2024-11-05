@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
@@ -94,7 +95,7 @@ public class AddressBookParser {
             return new UndoCommand(LogicManager.getPastCommands());
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
@@ -113,6 +114,12 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case ArchiveCommand.COMMAND_WORD_ARCHIVE:
+            return new ArchiveCommandParser(true).parse(arguments);
+
+        case ArchiveCommand.COMMAND_WORD_UNARCHIVE:
+            return new ArchiveCommandParser(false).parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

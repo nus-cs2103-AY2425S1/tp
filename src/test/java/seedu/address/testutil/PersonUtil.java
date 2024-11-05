@@ -61,6 +61,8 @@ public class PersonUtil {
                 dateOfBirth -> sb.append(PREFIX_DATE_OF_BIRTH).append(dateOfBirth.getValue()).append(" "));
         descriptor.getPriority().ifPresent(priority -> sb.append(PREFIX_PRIORITY).append(priority).append(" "));
         descriptor.getIncome().ifPresent(income -> sb.append(PREFIX_INCOME).append(income.getValue()).append(" "));
+        descriptor.getFamilySize().ifPresent(familySize -> sb.append(PREFIX_FAMILY_SIZE).append(familySize.getValue())
+                .append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

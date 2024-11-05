@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,11 +30,12 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "LOW";
     public static final String DEFAULT_REMARK = "";
-    public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
+    public static final LocalDate DEFAULT_DATE_OF_BIRTH = LocalDate.of(2000, 1, 1);
     public static final double DEFAULT_INCOME = 0;
     public static final int DEFAULT_FAMILY_SIZE = 1;
     public static final LocalDateTime DEFAULT_UPDATED_AT =
             LocalDateTime.of(2024, 1, 1, 0, 0);
+    public static final boolean DEFAULT_IS_ARCHIVED = false;
 
     private Name name;
     private Phone phone;
@@ -46,6 +48,7 @@ public class PersonBuilder {
     private FamilySize familySize;
     private Set<Tag> tags;
     private UpdatedAt updatedAt;
+    private boolean isArchived;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -62,6 +65,7 @@ public class PersonBuilder {
         familySize = new FamilySize(DEFAULT_FAMILY_SIZE);
         tags = new HashSet<>();
         updatedAt = new UpdatedAt(DEFAULT_UPDATED_AT);
+        isArchived = DEFAULT_IS_ARCHIVED;
     }
 
     /**
@@ -79,6 +83,7 @@ public class PersonBuilder {
         familySize = personToCopy.getFamilySize();
         tags = new HashSet<>(personToCopy.getTags());
         updatedAt = personToCopy.getUpdatedAt();
+        isArchived = personToCopy.isArchived();
     }
 
     /**
@@ -132,7 +137,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code dateOfBirth} of the {@code Person} that we are building.
      */
-    public PersonBuilder withDateOfBirth(String dateOfBirth) {
+    public PersonBuilder withDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = new DateOfBirth(dateOfBirth);
         return this;
     }
@@ -170,10 +175,18 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code isArchived} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
+    /**
      * Builds the {@code Person}.
      */
     public Person build() {
         return new Person(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, updatedAt);
+                dateOfBirth, income, familySize, tags, updatedAt, isArchived);
     }
 }
