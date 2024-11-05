@@ -76,9 +76,8 @@ Format: `help`
 
 Show a list of all clients contacts in Clientele+.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 
-<br>
 This command is often used to return to the main client list
 
 </div>
