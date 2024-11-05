@@ -12,11 +12,16 @@ EZStates is a **desktop app for managing contacts, optimized for use via a Comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start: Get started in 10 minutes!
+## Quick Start: Get started in 3 minutes!
 
 In this quick start guide, you'll learn how to install EZSTATES. **_(3 min)_**<br>
 <br>
-You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. **_(7 min)_**
+
+<div class="note"> 
+While learning our command structure is optional, 
+we highly recommend reviewing this section to make using EZSTATES much easier.
+</div>
 
 ### Installation
 
@@ -33,9 +38,9 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `showclients` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
+   * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` to the Address Book.
 
    * `delete John Doe` : Deletes the contact with name John Doe from the list.
 
@@ -69,7 +74,7 @@ This user guide is divided into four main feature categories:
 
 Commands for creating, updating, and deleting buyers and sellers.
 
-![showClients](images/showClients.png)
+![showClients](images/Ui.png)
 
 - #### **Add Buyer Command**
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
@@ -212,8 +217,18 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > ---
 
-    - **Failed Execution:** NIL
-
+    - **Failed Execution:**
+      > ---
+      >
+      > **Use Case**: Attempting to find a non-existent client
+      > 
+      > **Input**: `find Bob7`
+      > 
+      > **Output**: 0 persons listed!
+      > 
+      > ![noclients](images/no_clients.png)
+      > 
+      > ---
 
 - #### **Edit Client Command**
     - **Format:** `editclient NAME [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
@@ -290,6 +305,13 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: `Successfully deleted Bob with the number: 97774444 and email: bobby123@gmail.com`
       >
       > ---
+    
+    <br>
+    <div class="note" markdown="span">
+    Delete is case-insensitive: 
+    `delete Bob` = `delete BOB` = `delete bOb` 
+    </div>
+    <br>
       
     - **Failed Execution:**
       > ---
@@ -330,7 +352,6 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 
-
 ---
 
 ### 2. Appointment Management
@@ -340,82 +361,85 @@ Commands for managing appointments between user and clients.
 ![appointments](images/appointments.png)
 
 - #### **Schedule Appointment**
-    - **Format:** `apt INDEX d/<DD-MM-YYYY> fr/<HHmm> to/<HHmm>`
+    - **Format:** `apt NAME d/<DD-MM-YY> fr/<HHmm> to/<HHmm>`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
       >
-      > **Input**:
+      > **Input**: `apt Bob d/08-10-2024 fr/1900 to/2100`
       >
-      > **Output**:
+      > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
       >
+      > ![bob_apt](images/bob_apt.png)
+      > 
       > ---
       >
-      > **Use Case #2**:
+      > **Use Case #2**: Overriding an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
       >
-      > **Input**:
+      > **Input**: `apt Bob d/09-10-24 fr/1000 to/1200`
       >
-      > **Output**:
+      > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 09-10-24 (From: 10:00 To: 12:00); Tags:
       >
+      > ![bob_apt_2](images/bob_apt_2.png)
+      > 
       > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+      
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Incorrect `DATE` format 
       >
-      > **Input**:
+      > **Input #a**: `apt Bob d/09-10-24 fr/1000 to/1200`
       >
-      > **Output**:
+      > **Input #b**: `apt Bob d/aaa fr/1000 to/1200`
+      > 
+      > **Output**: Dates should be in the format dd-MM-yy or ddMMyy, e.g., 25-12-24 or 251224.
       >
+      > ---
+      > 
+      > **Use Case #2**: Incorrect `TIME` format
+      > 
+      > **Input #a**: `apt Bob d/20-10-24 fr/100000 to/1200`
+      > 
+      > **Input #b**: `apt Bob d/20-10-24 fr/aa to/1200`
+      > 
+      > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
+      > 
       > ---
 
 - #### **Delete Appointment**
-    - **Format:** `delapt n/<NAME>`
+    - **Format:** `delapt <NAME>`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Deleting appointment for `Bob`
       >
-      > **Input**:
+      > **Input**: `delapt Bob`
       >
-      > **Output**:
+      > **Output**: Successfully deleted appointment from Bob
       >
+      > ![bobdeletedappt](images/bob_del_apt.png)
+      > 
       > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+      
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Attempting to delete an appointment from a non-existent client
       >
-      > **Input**:
+      > **Input**: `delapt Bob7777`
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
       > ---
+    
+    <br>
+    <div class="note">
+    If you suggest a name that differs from an existing client by at most 3 letters, 
+    the console will suggest to input the existing client instead
+    </div>
+    <br>
+  
+    ![levershtein](images/levershtein_distance.png)
 
 ---
 
@@ -426,82 +450,74 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### **Add Listing**
-    - **Format:** `AddListingCommand`
-    - **Description:** Adds a new property listing with specified details.
+    - **Format:** `listing n/NAME price/PRICE area/AREA address/ADDRESS region/REGION seller/SELLER [buyer/BUYER]...`
+    - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
       >
-      > **Input**:
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/Alex Yeoh`
       >
-      > **Output**:
+      > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
       >
+      > ![listing](images/warton_house_listing.png)
+      > 
       > ---
       >
-      > **Use Case #2**:
+      > **Use Case #2**: Adding a listing with no buyers
       >
-      > **Input**:
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu`
       >
-      > **Output**:
+      > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
       >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
+      > ![listing2](images/warton_house_no_buyers.png)
+      > 
       > ---
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Attempting to add a listing for a non-existent seller
       >
-      > **Input**:
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/bob7`
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
+      > ---
+      > 
+      > **Use Case #2**: Attempting to add non-existent buyers to a listing
+      > 
+      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/bob7`
+      > 
+      > **Output**: Please enter an existing client name!
+      > 
       > ---
 
 - #### **Show Listings**
-    - **Format:** `ShowListingsCommand`
+    - **Format:** `showlistings`
     - **Description:** Displays all current listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: To show all listings in the addressbook
       >
-      > **Input**:
+      > **Input**: showlistings
       >
-      > **Output**:
+      > **Output**: Here are your listings!
       >
+      > ![showlistings](images/showListings.png)
+      > 
       > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
+      > 
+      > **Use Case #2**: To show all listings (when there are none)
+      > 
+      > **Input**: showlistings
+      > 
+      > **Output**: You have no listings available.
+      > 
+      > ![nolistings](images/no_listings.png)
+      > 
       > ---
 
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
+    - **Failed Execution:** NIL
 
 - #### **Add Buyers to Listing**
     - **Format:** `AddBuyersToListingCommand`
