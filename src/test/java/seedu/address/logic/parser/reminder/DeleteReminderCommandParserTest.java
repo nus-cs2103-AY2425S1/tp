@@ -1,4 +1,4 @@
 package seedu.address.logic.parser.reminder;
 
-public class DeleteReminderParserTest {
+public class DeleteReminderCommandParserTest {
 }
