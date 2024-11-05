@@ -132,7 +132,8 @@ public class StatusCommandTest {
         assertFalse(statusFirstCommand.equals(statusSecondCommand));
 
         // Test: Objects with the same index but different statuses should not be equal
-        StatusCommand statusDifferentStatusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING);
+        StatusCommand statusDifferentStatusCommand =
+                new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING);
         assertFalse(statusFirstCommand.equals(statusDifferentStatusCommand));
     }
 
