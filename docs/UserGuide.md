@@ -226,6 +226,7 @@ Notes:
 * Similarly, to delete contacts, the user has to enter `list` (with optional filters) to ensure the screen displays contacts, before entering the `delete` command
 * The user will not be allowed to delete clients that are the **sole** client of any event, i.e., if any event only has a single client, that client cannot be deleted
 * The user must delete the corresponding event(s) before deleting the intended client
+* Users are allowed to delete vendors that are the **sole** vendor of any event, i.e. if the event only has a single vendor, it can still be deleted. However, while adding an event, at least 1 client and 1 vendor must be input to create an event.
 
 ### Clearing all entries : `clear`
 
