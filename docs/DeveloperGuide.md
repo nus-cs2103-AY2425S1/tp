@@ -898,7 +898,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting attendance for a person in the list
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The person must have an existing attendance to be deleted.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The test for adding attendance should be done first as the person must have an existing attendance to be deleted.
 
     1. Test case: `addAttendance 1 ad/24-09-2024 ar/`<br>
        Expected: Attendance record with date 24-09-2024 is deleted from the first person. Confirmation message shown in the status message. Timestamp in the status bar is updated.
