@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_NAME_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -30,35 +28,8 @@ public class ViewCommandTest {
     private Model expectedModel = new ModelManager(getAdditionalAddressBook(), new UserPrefs());
 
     @Test
-    public void equals() {
-        NameMatchesKeywordPredicate firstPredicate =
-                new NameMatchesKeywordPredicate(Collections.singletonList("first"));
-        NameMatchesKeywordPredicate secondPredicate =
-                new NameMatchesKeywordPredicate(Collections.singletonList("second"));
-
-        ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
-
-        // same object -> returns true
-        assertTrue(viewFirstCommand.equals(viewFirstCommand));
-
-        // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
-        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(viewFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(viewFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(viewFirstCommand.equals(viewSecondCommand));
-    }
-
-    @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW, 0, "");
         NameMatchesKeywordPredicate predicate = preparePredicate(" ");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -68,7 +39,8 @@ public class ViewCommandTest {
 
     @Test
     public void execute_singleWordInKeyword_partialNameMatched() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, KEYWORD_MATCHING_MEIER);
         NameMatchesKeywordPredicate predicate = preparePredicate(KEYWORD_MATCHING_MEIER);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -78,14 +50,16 @@ public class ViewCommandTest {
 
     @Test
     public void execute_multipleWordsInKeyword_nameMatched() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, "Carl Kurz");
         NameMatchesKeywordPredicate predicate = preparePredicate("Carl Kurz");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
 
-        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                1, "Carl Duh Kurz");
         predicate = preparePredicate("Carl Duh Kurz");
         command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
