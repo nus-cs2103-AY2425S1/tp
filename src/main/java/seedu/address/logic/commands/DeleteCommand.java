@@ -29,15 +29,19 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters:\nINDEX (must be a positive integer) OR "
-            + "n/NAME OR "
-            + "n/NAME e/EMAIL OR "
+            + ": Deletes the person with a positive integer index/name/email/phone/name & email/ name & phone \n"
+            + "Parameters:\n"
+            + "n/NAME\n"
+            + "n/EMAIL\n"
+            + "n/PHONE\n"
+            + "n/NAME e/EMAIL\n"
             + "n/NAME p/PHONE\n"
-            + "Example:\n" + COMMAND_WORD + " 1 OR "
-            + COMMAND_WORD + " n/John Doe OR "
-            + COMMAND_WORD + " n/John Doe e/johndoe@gmail.com OR "
-            + COMMAND_WORD + " n/John Doe p/88306733";
+            + "Example:\n" + COMMAND_WORD + " 1\n"
+            + COMMAND_WORD + " n/John Doe\n"
+            + COMMAND_WORD + " e/johndoe@gmail.com\n"
+            + COMMAND_WORD + " p/88308830\n"
+            + COMMAND_WORD + " n/John Doe e/johndoe@gmail.com\n"
+            + COMMAND_WORD + " n/John Doe p/88308830\n";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
