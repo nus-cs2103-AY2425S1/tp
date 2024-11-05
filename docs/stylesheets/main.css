@@ -123,6 +123,10 @@ mark {
     display: none;
   }
 }
+@page {
+  margin-top: 60px;  /* Increase the top margin to add more space for the header */
+  margin-bottom: 60px; /* Increase the bottom margin to add more space for the footer */
+}
 
 /* Hide site navigation when printing */
 @media print {
@@ -133,22 +137,27 @@ mark {
   #page-nav {
     display: none;
   }
-
   /* Reduce font size when printing */
   h1 {
       font-size: 1.2rem !important;
   }
   h2 {
       font-size: 1.0rem !important;
+      color: #3D5D90!important;
   }
   h3 {
       font-size: 0.9rem !important;
+      color: #88bbde!important;
   }
   h4 {
       font-size: 0.8rem !important;
+      color: #7cc8b6!important;
+
   }
   h5 {
       font-size: 0.7rem !important;
+      color: #58bc9c!important;
+
   }
   body {
       font-size: 0.65rem !important;
@@ -161,10 +170,17 @@ mark {
   }
 }
 
-h2,
-h3,
-h4,
+h2 {
+  color: #3D5D90 !important;
+}
+h3 {
+  color: #88bbde !important;
+}
+h4 {
+  color: #7cc8b6 !important;
+
+}
 h5,
 h6 {
-  color: #e46c0a;
+  color: #58bc9c; !important;
 }
