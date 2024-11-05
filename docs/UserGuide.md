@@ -305,7 +305,7 @@
 * Parameters and commands are case-sensitive
   e.g. the command `Help` and `edit 1 N/John Doe` will return an error
   <br>
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
+* Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   <br>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
