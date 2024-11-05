@@ -37,7 +37,15 @@ title: Developer Guide
     5. [Glossary](#glossary)
 11. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     1. [Launch and Shut Down](#launch-and-shutdown)
-    2. [Saving Data](#saving-data)
+    2. [Adding Person](#adding-person)
+    3. [Deleting Person](#deleting-person)
+    4. [Editing Person](#editing-person)
+    5. [Listing People](#listing-people)
+    6. [Finding Person](#finding-person)
+    7. [Viewing Person](#viewing-person)
+    8. [Summary](#summary)
+    9. [Help](#help)
+    10. [Saving Data](#saving-data)
 12. [Appendix: Planned Enhancements](#planned-enhancements)
 13. [Appendix: Effort](#effort)
 ---
@@ -650,9 +658,11 @@ The sequence diagram below illustrates the above process of executing the `summa
 
 **Target user profile**:
 
-Our primary target users are Recruiters and HR professionals who are responsible for managing job candidates and employee information.
+Our primary target users are Recruiters and HR professionals who are responsible for managing job candidates and employee information in mid-size companies.
 
-**Value proposition**: simplify and enhance the recruitment process for HR professionals and recruiters.
+**Value proposition**: 
+
+Simplify and enhance the recruitment process for HR professionals and recruiters.
 
 
 ### User stories
@@ -695,88 +705,259 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-#### Use Case 1: Add a New Candidate Profile
+#### Use Case 1 - Add a Person
+
 **Actor**: Recruiter
 
-**Preconditions**: The system is running, and the recruiter is logged into the application.
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter selects the "Add Candidate" option.
-2. System prompts recruiter to input candidate details (name, phone, email, address, role).
-3. Recruiter enters candidate details.
-4. System confirms that the details are valid and adds the candidate profile.
-5. System displays a success message: "Candidate profile added successfully."
+1. Recruiter requests to add a new person to TalentSG
+2. Recruiter inputs candidate details (name, phone, email, address, desired role, experience, skills, status) with the add command.
+3. TalentSG confirms that the command is valid and adds the person.
+4. TalentSG responds with a success message indicating that the person was added successfully
+
+    Use case ends.
 
 **Extensions**:
-- 3a. Recruiter inputs invalid phone number or email.
-    - System shows an error message: "Invalid phone number or email. Please enter valid information."
-- 4a. A duplicate candidate profile is detected.
-    - System shows an error message: "Duplicate candidate detected. Profile not added."
+
+- 2a. Recruiter does not input all required person details.
+    - 2a1. TalentSG responds with an error message telling the recruiter to input all the required fields and that the
+      command is invalid
+    - 2a2. Recruiter inputs add command with the required person details
+    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+- 2b. Recruiter inputs invalid field.
+    - 2b1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
+      formatted and that the command is invalid
+    - 2b2. Recruiter inputs add command with the proper format for all fields
+    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+- 2c. A duplicate candidate profile is detected.
+    - 2c1. TalentSG responds with an error message telling the recruiter that the person has already been added and
+      prompts the recruiter to input a new person
+    - 2c2. Recruiter inputs add command with new person details
+    - 2c3. Steps 2c1-2c2 are repeated until the data entered is correct
+    
+      Use case resumes at step 3.
 
 
-#### Use Case 2: Schedule an Interview
+#### Use Case 2 - Delete a Person
+
 **Actor**: Recruiter
 
-**Preconditions**: Recruiter is logged in, and a candidate profile exists.
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter selects the "Schedule Interview" option for a specific candidate.
-2. System prompts recruiter to input the date and time for the interview.
-3. Recruiter inputs valid date and time.
-4. System saves the interview schedule for the candidate.
-5. System displays a success message: "Interview scheduled for [Candidate Name] on [Date and Time]."
+1. Recruiter requests to delete a person from TalentSG.
+2. Recruiter inputs the delete command with the index i of the person to be deleted.
+3. TalentSG confirms that the command is valid and deletes the person.
+4. TalentSG responds with a success message indicating that the person was deleted successfully
+
+   Use case ends.
 
 **Extensions**:
-- a. Recruiter inputs invalid date or time.
-    - System shows an error message: "Invalid date or time format. Please follow the format YYYY-MM-DD and HH:MM."
-- b. The selected time slot is already booked for another interview.
-    - System shows an error message: "Time slot is already booked. Please select a different time."
 
-#### Use Case 3: Search for Candidates by Criteria
-**Actor**: HR Professional
+- 2a. Recruiter does not input index of person to be deleted.
+    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
+      and that the command is invalid.
+    - 2a2. Recruiter inputs deleted command with the index of the person to be deleted
+    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
 
-**Preconditions**: Candidate profiles exist in the system.
+      Use case resumes at step 3.
+
+- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+      person of that index doesn't exist and that the command is invalid
+    - 2b2. Recruiter inputs delete command with a valid index
+    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+#### Use Case 3 - Edit a Person
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. HR professional selects the "Search" option.
-2. System prompts HR professional to input search criteria (e.g., candidate name, role, or skill).
-3. HR professional enters search criteria (e.g., role: Software Engineer).
-4. System retrieves and displays a list of candidates matching the criteria.
-5. HR professional selects a candidate from the list to view detailed information.
+1. Recruiter requests to edit a person in TalentSG.
+2. Recruiter inputs the edit command with the index i of the person to be edited along with the fields that the recruiter
+   would like to edit.
+3. TalentSG confirms that the command is valid and edits the specified fields of the person.
+4. TalentSG responds with a success message indicating that the person was edited successfully
+
+   Use case ends.
 
 **Extensions**:
-- 3a. No candidates match the search criteria.
-    - System displays a message: "No candidates found for the given criteria."
+
+- 2a. Recruiter does not input index of person to be edited.
+    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
+      and that the command is invalid.
+    - 2a2. Recruiter inputs deleted command with the index of the person to be deleted
+    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+      person of that index doesn't exist and that the command is invalid
+    - 2b2. Recruiter inputs edit command with a valid index
+    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+- 2c. Recruiter inputs invalid field(s).
+    - 2c1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
+      formatted and that the command is invalid
+    - 2c2. Recruiter inputs edit command with the proper format for all fields
+    - 2c3. Steps 2c2-2c3 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+#### Use Case 4 - List all People
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to list all the people in TalentSG.
+2. Recruiter inputs the list command
+3. TalentSG confirms that the command is valid and lists all the people in the application
+4. TalentSG responds with a success message indicating that list was displayed successfully.
+
+
+#### Use Case 5 - Find a Person
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to find a person in TalentSG.
+2. Recruiter inputs the find command with keywords that the application will use match the people.
+3. TalentSG confirms that the command is valid and finds the person/people by matching the keywords with every person's
+   name.
+4. TalentSG responds with a success message indicating that the person/people were either found, or no one matched the keyword.
+
+**Extensions**:
+- 2a. Recruiter does not input a keyword.
+    - 2a1. TalentSG responds with an error message telling the recruiter to input a keyword and that the command is invalid.
+    - 2a2. Recruiter inputs find command with the required keyword.
+    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+
+#### Use Case 6 - Filter people based on application status
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to filter the list of people in TalentSG by application status.
+2. Recruiter inputs the filter command with one of the valid application statuses.
+3. TalentSG confirms that the command is valid and filters the person list to display the people with the inputted application status.
+4. TalentSG responds with a success message indicating that the person list was filtered successfully.
+
+**Extensions**:
+- 2a. Recruiter inputs an empty or invalid application status.
+    - 2a1. TalentSG responds with an error message telling the recruiter to input a valid application status and that the command is invalid.
+    - 2a2. Recruiter inputs filter command with a valid application status.
+    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+#### Use Case 7 - View a Person
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to view a person in TalentSG.
+2. Recruiter inputs the view command with the index i of the person to be viewed
+3. TalentSG confirms that the command is valid and displays the specified fields of the person in the `Overview Panel`
+4. TalentSG responds with a success message indicating that the person was viewed successfully
+
+**Extensions**:
+- 2a. Recruiter does not input index of person to be viewed.
+    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be viewed
+      and that the command is invalid.
+    - 2a2. Recruiter inputs view command with the index of the person to be viewed
+    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+      person of that index doesn't exist and that the command is invalid
+    - 2b2. Recruiter inputs view command with a valid index
+    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+
+      Use case resumes at step 3.
+
+
+#### Use Case 8 - Get summary of application statuses of People
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to list all the people in TalentSG.
+2. Recruiter inputs the list command.
+3. TalentSG confirms that the command is valid and lists all the people in the application.
+4. TalentSG responds with a success message indicating that list was displayed successfully.
+
+
+#### Use Case 9 - Get help within TalentSG
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to get help regarding the acceptable commands in TalentSG.
+2. Recruiter inputs the help command.
+3. TalentSG confirms that the command is valid and displays the help pop-up.
+4. TalentSG responds with a success message indicating that help pop-up was displayed successfully.
+
+
+#### Use Case 10 - Exit TalentSG
+
+**Actor**: Recruiter
+
+**Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
+
+**Main Success Scenario**:
+1. Recruiter requests to exit TalentSG.
+2. Recruiter clicks the exit button.
+3. TalentSG confirms that the command is valid and exits the application
 
 
 ### Non-Functional Requirements
 
-1. **Performance**:
-- The system should be able to handle up to 100 simultaneous users without a significant decrease in performance.
-- System response time for any operation should not exceed 1 second.
+1. The application should work on any mainstream operating system (Windows, Linux, Unix, OS-X) as long as it has
+Java `11` or above installed.
 
-2. **Scalability**:
-- The system should support the management of up to 10,000 candidate profiles without performance degradation.
-- The system should be able to integrate with external recruitment systems (e.g., LinkedIn, job portals) to import candidate data.
+2. TalentSG should be able to support up to 1000 candidate profiles without any noticeable performance degradation.
 
-3. **Usability**:
-- The system should be intuitive for users with basic computer skills.
-- The user interface should provide clear navigation, with minimal need for user training.
+3. TalentSG user interface should be intuitive for users with basic computer skills, providing clear navigation with minimal need for user training.
 
-4. **Reliability**:
-- The system should have a 99.9% uptime, ensuring availability for recruiters and HR professionals during business hours.
-- Data should be backed up every 24 hours to prevent data loss.
+4. TalentSG should have a 99.9% uptime, ensuring availability for recruiters and HR professionals during business hours.
 
-5. **Security**:
-- The system must comply with GDPR regulations and ensure that candidate data is securely stored and handled.
-- All user data (including candidate information) should be encrypted both at rest and in transit.
+5. TalentSG must comply with GDPR regulations and ensure that candidate data is securely stored and handled.
 
-6. **Portability**:
-- The system should be compatible with Windows, macOS, and Linux operating systems.
-- The system should be able to run on machines with at least 4GB of RAM and 2GHz processors.
+6. The code should be well-documented and organized to ensure proper maintenance and debugging of code.
 
-7. **Accessibility**:
-- The system should comply with WCAG 2.1 standards for web accessibility, ensuring that users with disabilities can use the system effectively.
+7. The system should comply with WCAG 2.1 standards for web accessibility, ensuring that users with disabilities can use the system effectively.
 
 
 ### Glossary
@@ -790,21 +971,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. **Candidate Profile**:
 - A record containing all relevant details about a job applicant, including contact information, skills, experience, and interview notes.
 
-4. **MVP (Minimum Viable Product)**:
-- The minimum version of a product that meets the basic requirements to be usable by the target audience.
-
-5. **Interview Schedule**:
+4. **Interview Schedule**:
 - The process of setting a date and time for a job applicant to be interviewed by the recruiter or hiring manager.
-
-6. **NFR (Non-functional Requirements)**:
-- Requirements that specify the quality and performance characteristics of the system (e.g., performance, security, usability).
-
-7. **CRUD**:
-- Refers to the basic operations of Create, Read, Update, and Delete, typically applied to data management within an application.
-
-8. **GDPR (General Data Protection Regulation)**:
-- A European regulation on data protection and privacy for individuals within the EU, applicable to the handling of personal data.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -823,38 +991,68 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. In the unfortunate event that your data files end up corrupted, TalentSG will wipe all data and allow you to start over
+      from a clean slate.
 
-1. _{ more test cases …​ }_
+---
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+---
+
+## **Appendix: Effort**
+
+Working on TalentSG was both a challenging and rewarding experience for our entire team. As a few members in team had
+prior experience working in properly-structured teams, we were able to effectively divide tasks and collaborate efficiently.
+However, during the initial stages of our team project, we found it difficult to understand the structure of
+AddressBook Level 3 (AB3) and navigate through the codebase. In turn, we spent a lot of time understanding the existing
+application and helping each other when we needed it.
+
+We faced a few challenges while working on TalentSG:
+
+1. Becoming familiar with the existing AB3 codebase
+2. How to integrate the view command such that it worked with both the Logic and UI components
+3. Maintaining the abstraction principles when implementing new classes and methods
+4. Quality code testing of code
+
+Our group reused a lot of what AB3 had in place - we reused AB3's parsing, command handling, and storage structure for
+the newly implemented commands (summary, view, filter) as we found it to be modular and organized.
+
+Overall, our team put in a significant amount of effort to understand the existing codebase and implement the new features
+to successfully transform AB3 into TalentSG. Our hard work paid off, and we are proud that we ended up with a solid,
+user-friendly platform that meets our users needs.
+
+---
