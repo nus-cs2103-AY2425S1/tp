@@ -13,7 +13,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Data has been imported successfully.";
     public static final String MESSAGE_FAILURE = "An error has occurred while reading the file. "
             + "The chosen file may be corrupted.";
-    public static final String MESSAGE_PROMPT = "This will delete ALL data in the current address book. Confirm command? (y/n)\n"
+    public static final String MESSAGE_PROMPT = "This will delete ALL data in the current address book. "
+            + "Confirm command? (y/n)\n"
             + "You may want to back-up the current data by running 'export' before continuing. ";
     public static final String MESSAGE_SELECT_FILE = "Please select the file import data from.";
 

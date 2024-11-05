@@ -26,7 +26,8 @@ public class DeleteClientCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
 
-    public static final String MESSAGE_PROMPT = "This will delete the client and ALL existing rental information: Confirm command? (y/n)\n"
+    public static final String MESSAGE_PROMPT = "This will delete the client and ALL existing rental information: "
+            + "Confirm command? (y/n)\n"
             + "%1$s";
 
     private final Index targetIndex;
