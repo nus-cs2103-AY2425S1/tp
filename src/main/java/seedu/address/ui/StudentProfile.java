@@ -13,6 +13,8 @@ public class StudentProfile extends UiPart<Region> {
 
     private static final String FXML = "StudentProfile.fxml";
 
+    private static Student student;
+
     @FXML
     private Label nameLabel;
     @FXML
@@ -38,6 +40,7 @@ public class StudentProfile extends UiPart<Region> {
             clearProfile();
             return;
         }
+        this.student = student;
 
         nameLabel.setText(student.getName().fullName);
         studentIdLabel.setText(student.getStudentId().value);
@@ -59,5 +62,17 @@ public class StudentProfile extends UiPart<Region> {
         studentIdLabel.setText("");
         tutorialIdLabel.setText("");
         attendanceFlowPane.getChildren().clear();
+    }
+
+    /**
+     * Checks if the current student selected equals the specified student.
+     * @param otherStudent The other student to be compared.
+     * @return A boolean value representing whether the current student selected equals the specified student.
+     */
+    public static boolean isSameStudent(Student otherStudent) {
+        if (otherStudent == null) {
+            return false;
+        }
+        return otherStudent.equals(student);
     }
 }

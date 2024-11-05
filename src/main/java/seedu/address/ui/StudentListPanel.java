@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.student.Student;
 
 /**
@@ -28,6 +29,12 @@ public class StudentListPanel extends UiPart<Region> {
         this.studentProfile = studentProfile;
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
+        DeleteCommand.getStudentProperty().addListener((observable, oldValue, newValue) -> {
+            if (StudentProfile.isSameStudent(newValue)) {
+                studentProfile.setStudent(null);
+                studentListView.getSelectionModel().clearSelection();
+            }
+        });
     }
 
 

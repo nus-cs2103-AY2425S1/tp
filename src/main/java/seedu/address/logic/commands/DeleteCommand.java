@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -24,6 +26,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    private static Property<Student> studentProperty = new SimpleObjectProperty<>();
 
     private final Index targetIndex;
 
@@ -41,8 +44,13 @@ public class DeleteCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
+        studentProperty.setValue(studentToDelete);
         model.deleteStudent(studentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
+    }
+
+    public static Property<Student> getStudentProperty() {
+        return studentProperty;
     }
 
     @Override
