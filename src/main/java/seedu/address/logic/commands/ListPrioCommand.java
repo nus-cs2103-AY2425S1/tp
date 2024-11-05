@@ -13,7 +13,8 @@ import seedu.address.model.person.PriorityMatchesPredicate;
  */
 public class ListPrioCommand extends Command {
 
-    public static final String COMMAND_WORD = "listprio";
+    public static final String COMMAND_WORD = "listPrio";
+    public static final String COMMAND_WORD_INSENSITIVE = "listprio";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all patients whose Priority "
             + "matches the given Priority level.\n"

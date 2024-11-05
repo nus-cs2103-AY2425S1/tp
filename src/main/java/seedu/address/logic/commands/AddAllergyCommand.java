@@ -21,7 +21,8 @@ import seedu.address.model.person.Person;
  */
 public class AddAllergyCommand extends Command {
 
-    public static final String COMMAND_WORD = "addallergy";
+    public static final String COMMAND_WORD = "addAllergy";
+    public static final String COMMAND_WORD_INSENSITIVE = "addallergy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds allergy to the patient in MediBase3. \n"
             + "Parameters: "

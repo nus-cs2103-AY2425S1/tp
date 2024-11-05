@@ -20,7 +20,8 @@ import seedu.address.model.person.Person;
  */
 public class DelMedConCommand extends Command {
 
-    public static final String COMMAND_WORD = "delmedcon";
+    public static final String COMMAND_WORD = "delMedCon";
+    public static final String COMMAND_WORD_INSENSITIVE = "delmedcon";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns "
             + "one or more medical conditions to a patient in MediBase3. \n"

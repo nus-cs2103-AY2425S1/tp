@@ -21,7 +21,8 @@ import seedu.address.model.person.Person;
  */
 public class DelAllergyCommand extends Command {
 
-    public static final String COMMAND_WORD = "delallergy";
+    public static final String COMMAND_WORD = "delAllergy";
+    public static final String COMMAND_WORD_INSENSITIVE = "delallergy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes allergy from patient in MediBase3. \n"
             + "Parameters: "

@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD_INSENSITIVE = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to MediBase3. \n"
             + "Parameters: "
