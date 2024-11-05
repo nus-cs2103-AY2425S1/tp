@@ -108,7 +108,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Sets hyperlink to a clicked state.
-     * No other function should be touching this except HelpWindow,
+     * No other class or method should be touching this except the event handler of the hyperlink in HelpWindow,
      * where the hyperlink logic is handled.
      */
     private void setHyperlink() {
@@ -116,18 +116,12 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles default browser passing to HelpWindow.
-     * Private static class that extends Application.
-     * This is to enable us to use the {@code getInstance} method, which gets the
-     * current web service provide of the user (his/her default browser).
+     * Handles extraction of default browser to HelpWindow.
+     * This is to enable the use the {@code getInstance} method, which gets the user's default browser.
      * Necessary for hyperlink to open.
      */
     private static class CampusConnectApp extends Application {
         private static CampusConnectApp mInstance;
-
-        public static void main(String[] args) throws Exception {
-            launch(args);
-        }
 
         public static CampusConnectApp getInstance() {
             return mInstance;
@@ -135,6 +129,7 @@ public class HelpWindow extends UiPart<Stage> {
 
         /**
          * Empty overridden start method from {@code Application}.
+         * This is to enable the extension of the abstract {@code Application} class.
          */
         @Override
         public void start(Stage primaryStage) {
