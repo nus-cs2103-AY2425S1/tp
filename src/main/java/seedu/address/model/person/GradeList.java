@@ -50,6 +50,16 @@ public class GradeList {
         for (Grade g : newGrades.values()) {
             totalWeightage += g.getWeightage();
         }
+
+        String normalizedTestName = grade.getTestName().toLowerCase();
+
+        // If there is already a grade for this exam, subtract the old weightage
+        Grade existingGrade = newGrades.get(normalizedTestName);
+        if (existingGrade != null) {
+            totalWeightage -= existingGrade.getWeightage();
+        }
+
+        // Add weightage of new grade
         totalWeightage += grade.getWeightage();
 
         // Check if the total weightage exceeds 100%
@@ -57,7 +67,7 @@ public class GradeList {
             throw new IllegalStateException("Total weightage exceeds 100%");
         }
 
-        newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
+        newGrades.merge(normalizedTestName, grade, (oldGrade, newGrade) -> newGrade);
 
         return new GradeList(newGrades);
     }
