@@ -85,11 +85,15 @@ public class TagAddCommand extends Command {
 
 
         model.updatePersonInWedding(personToEdit, editedPerson);
-        setPersonInWedding(editedPerson, personToEdit, model);
+        model.setPersonInWedding(editedPerson, personToEdit);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(message + "\n" + generateSuccessMessage(personToEdit, editedPerson));
+        if (message.isEmpty()) {
+            return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
+        } else {
+            return new CommandResult(message + "\n" + generateSuccessMessage(personToEdit, editedPerson));
+        }
     }
 
     @Override
@@ -204,24 +208,5 @@ public class TagAddCommand extends Command {
         }
 
         return "";
-    }
-
-    /**
-     * Sets the person being tagged as a participant in the wedding that matches the tag.
-     *
-     * @param editedPerson Person whose tags have been added to them.
-     * @param personToEdit Person who has tags currently being added to them.
-     * @param model current Model containing necessary wedding address book.
-     */
-    private void setPersonInWedding(Person editedPerson, Person personToEdit, Model model) {
-        List<Wedding> weddingList = model.getWeddingFromTags(editedPerson.getTags());
-
-        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
-                .toList();
-
-        for (Set<Person> set : weddingParticipantsSet) {
-            set.remove(personToEdit);
-            set.add(editedPerson);
-        }
     }
 }
