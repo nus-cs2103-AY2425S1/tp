@@ -16,17 +16,18 @@ public class DeleteAppointmentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, PREFIX_NAME + "Alice Pauline", new DeleteAppointmentCommand(ALICE.getName()));
+        assertParseSuccess(parser, "Alice Pauline", new DeleteAppointmentCommand(ALICE.getName()));
     }
 
     @Test
     public void parse_missingField_throwsParseException() {
-        assertParseFailure(parser, PREFIX_NAME.toString(), Messages.MISSING_CLIENT_NAME);
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "$$", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 }
