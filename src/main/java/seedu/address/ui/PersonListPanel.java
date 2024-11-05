@@ -65,11 +65,18 @@ public class PersonListPanel extends UiPart<Region> {
             togglePlaceholder(personList.isEmpty());
         });
 
+
         // Wait for the personListView to be initialized
         Platform.runLater(() -> {
             assert(personListView != null);
             logger.info("Setting up auto scroll mechanism");
             setupAutoScroll(personList);
+
+            // Initial highlight
+            int currentSize = personListView.getItems().size();
+            if (currentSize > 0) {
+                personListView.getSelectionModel().select(0);
+            }
 
             disableScrollbarButtons();
         });
@@ -79,15 +86,21 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     static class PersonListViewCell extends ListCell<Person> {
+        // Cache each person card
+        // Only update the person card if a person is created or changed
+        private PersonListCard cachedPersonCard;
+
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
 
             if (empty || person == null) {
                 setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new PersonListCard(person, getIndex() + 1).getRoot());
+                cachedPersonCard = null;
+
+            } else if (cachedPersonCard == null || !cachedPersonCard.person.equals(person)) {
+                cachedPersonCard = new PersonListCard(person, getIndex() + 1);
+                setGraphic(cachedPersonCard.getRoot());
             }
         }
     }
