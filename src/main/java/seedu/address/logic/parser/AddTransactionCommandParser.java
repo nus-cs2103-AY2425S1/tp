@@ -2,20 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Transaction;
@@ -58,16 +55,9 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
                 PREFIX_OTHER_PARTY, PREFIX_DATE);
 
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
-        int amount = Integer.parseInt(argMultimap.getValue(PREFIX_AMOUNT).get().trim());
+        double amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get().trim());
         String otherParty = argMultimap.getValue(PREFIX_OTHER_PARTY).get().trim();
-        LocalDate date;
-        try {
-            date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get().trim(),
-                    DateTimeUtil.DEFAULT_DATE_PARSER);
-        } catch (DateTimeParseException e) {
-            logger.fine("ParseException caused by invalid date or incorrect date format.");
-            throw new ParseException(String.format(MESSAGE_INVALID_DATE_FORMAT), e);
-        }
+        LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get().trim());
 
         Transaction transaction = new Transaction(description, amount, otherParty, date);
 
