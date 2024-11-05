@@ -151,11 +151,26 @@ public class CommandTestUtil {
                                                                            + INVALID_APPOINTMENT_DATE_NONEXISTANT
                                                                            + " " + PREFIX_TIMEPERIOD
                                                                            + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
-    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_1 = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
                                                                             + PREFIX_DATE
                                                                             + VALID_APPOINTMENT_DATE_PHYSIO + " "
                                                                             + PREFIX_TIMEPERIOD
                                                                             + INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_1;
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_2 = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                            + PREFIX_DATE
+                                                                            + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                            + PREFIX_TIMEPERIOD
+                                                                            + INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_2;
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_3 = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                            + PREFIX_DATE
+                                                                            + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                            + PREFIX_TIMEPERIOD
+                                                                            + INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_3;
+    public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_4 = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
+                                                                            + PREFIX_DATE
+                                                                            + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                                            + PREFIX_TIMEPERIOD
+                                                                            + INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_4;
     public static final String INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC = " " + VALID_APPOINTMENT_NAME_PHYSIO + " "
                                                                            + PREFIX_DATE
                                                                            + VALID_APPOINTMENT_DATE_PHYSIO + " "

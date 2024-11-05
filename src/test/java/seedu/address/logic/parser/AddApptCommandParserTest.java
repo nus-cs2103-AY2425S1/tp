@@ -6,11 +6,15 @@ import static seedu.address.logic.commands.AddApptCommand.MESSAGE_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_FORMAT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_NONEXISTANT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DATE_NONEXISTANT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME_BLANK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME_LENGTH_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_3;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_4;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
@@ -68,14 +72,18 @@ public class AddApptCommandParserTest {
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_FORMAT_DESC + NRIC_DESC_AMY,
                            Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_NONEXISTANT_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
-        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC + NRIC_DESC_AMY,
+                           String.format(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1S,
+                                         INVALID_APPOINTMENT_DATE_NONEXISTANT));
+        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC + NRIC_DESC_AMY,
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);
+        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_1 + NRIC_DESC_AMY,
                            Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
-        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);
-
-        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_ORDER_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_INVALID_ORDER);
+        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_2 + NRIC_DESC_AMY,
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
+        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_3 + NRIC_DESC_AMY,
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
+        assertParseFailure(parser, INVALID_APPOINTMENT_TIMEPERIOD_FORMAT_DESC_4 + NRIC_DESC_AMY,
+                           Appointment.MESSAGE_CONSTRAINTS_APPT_TIME_PERIOD_WRONG_FORMAT);
     }
 
     @Test
