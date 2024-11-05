@@ -27,7 +27,7 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_NO_CRITERIA = "At least one filter criteria must be provided";
-
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Name should be a single word";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons by multiple criteria. "
             + "At least one field must be specified.\n"
             + "Parameters: [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...\n"
@@ -40,7 +40,8 @@ public class FilterCommand extends Command {
     private final String address;
 
     /**
-     * Creates a FilterCommand to filter the list of persons.
+     * Creates a FilterCommand to filter persons by the specified {@code name}, {@code role}, {@code email},
+     * {@code phone} and {@code address}.
      */
     public FilterCommand(String name, String role, String email, String phone, String address) {
         this.name = name;
@@ -50,9 +51,6 @@ public class FilterCommand extends Command {
         this.address = address;
     }
 
-    /**
-     * Executes the FilterCommand to filter the list of persons.
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -60,8 +58,13 @@ public class FilterCommand extends Command {
         List<Predicate<Person>> predicates = new ArrayList<>();
 
         if (!name.isEmpty()) {
+            // Check if name contains any whitespace, which would indicate multiple words
+            if (name.trim().contains(" ")) {
+                throw new CommandException(MESSAGE_NAME_CONSTRAINTS);
+            }
             predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(name.toLowerCase())));
         }
+
         if (!role.isEmpty()) {
             predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(role.toLowerCase())));
         }
