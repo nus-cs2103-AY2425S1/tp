@@ -10,7 +10,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -39,7 +39,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -78,6 +78,12 @@ Show a list of all clients contacts in Clientele+.
 
 Format: `list`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+
+This command is often used to return to the main client list
+
+</div>
+
 ### Clearing All Entries: `clear`
 
 Clears all entries from Clientele+.
@@ -91,13 +97,16 @@ Exits the program.
 Format: `exit`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
 You can also exit the program by clicking the "x" at the top left corner of the window. The program will automatically save your data before closing.
+
 </div>
 
-## Client Management:
+## Client Management
 ### Add Client Details: `add`
 
-Allows the user to add a new client with details including client name and contact details, payment status, client status, project status and project deadline.
+Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
@@ -123,6 +132,7 @@ Examples:
 <br>1. The deadline could be the date you need to submit the project to the client. <br>
 2. The deadline could instead be the date by which you need to follow up with a potential client. <br>
 3. You may hover over the Payment Status Icon to view the payment status as text.
+
 </div>
 
 ### Update Client Details: `edit`
@@ -153,7 +163,9 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
+<br>
 The deadline field will show an `OVERDUE` label if the deadline has passed and the client status is still `active`, so if the client has paid, and your business with them is finished, remember to set their client status to 'old' so the deadline field doesn't show `OVERDUE`.
+
 </div>
 
 ### Locating Clients: `find`
@@ -190,7 +202,7 @@ Similarly, the `whitelist` command can be entered to find all clients who are wh
 _Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
 </div>
 
-### Delete Client Details : `delete`
+### Delete Client Details: `delete`
 
 Deletes the specified person from Clientele+.
 
@@ -208,7 +220,10 @@ Examples:
 * `find n/Betsy` followed by `delete id/1` deletes the 1st person in the result of the `find` command.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
 If you try to delete by name but there are 2 or more clients in the list that same name, then you will be shown a list of those clients and prompted to delete by index instead.
+
 </div>
 
 ### Blacklist a Client: `blacklist`
@@ -225,10 +240,13 @@ Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
 Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
+
 </div>
 
-### Whitelist a Client : `whitelist`
+### Whitelist a Client: `whitelist`
 
 Whitelists a previously-blacklisted client.
 
@@ -246,10 +264,13 @@ Examples:
 * `whitelist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
 Entering `whitelist` on its own without any other parameters will filter and display all clients who have been whitelisted.
+
 </div>
 
-### Sort Client list : `sort`
+### Sort Client list: `sort`
 
 Sorts the client list in ascending order by the specified field.
 
@@ -263,7 +284,10 @@ Examples:
 * `sort deadline descending` sorts the client list by project deadline (later dates first).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
 Clientele+ saves you the hassle of sorting the list every time you open the app. Every time you sort, it will save the list in the sort order specified.
+
 </div>
 
 ### Archive a Client: `archive`
@@ -278,23 +302,32 @@ Examples:
 * `archive 1` archives the first person in the list, removing it and storing it in an archived list
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
+
+<br>
 An unarchive feature is in the works and will be available in the future.
+
 </div>
 
-### Listing all archived clients
+### Listing all archived clients: `archive-list`
 Shows a list of all archived clients' contacts in Clientele+.
 
 Format: `archive-list`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
+Use the `list` command to return to the main client list.
+
+</div>
+
 ### Deadline Reminder
 
-The Deadline Reminder feature automatically tracks upcoming and overdue deadlines for active clients and displays them in the footer. This system runs without the need for any command input from the user.
+The Deadline Reminder feature automatically tracks the latest upcoming and overdue deadlines for active clients and displays them in the footer. This feature runs without any command input from the user.
 
 ![reminder](images/reminder.png)
 
 * Reminders are only shown for clients with an `active` status.
-* The system does not track `completed` projects.
-* It tracks overdue deadlines, but the client status must still be `active`.
+* The feature does not track `completed` projects.
 * If there are `overdue` deadlines, only overdue projects are shown; upcoming deadlines will not be displayed
 * `No upcoming or overdue reminders.` This indicates there are no active clients with upcoming or overdue deadlines.
 
@@ -303,13 +336,17 @@ Examples:
 Single Client Due Today:
 * `John has deadline due today.` This shows that John, an active client, has a deadline due today.
 
-Two Clients Due Today:
-* `John and Alice have deadlines due today.` This shows that John and Alice, both active clients, have deadlines due today.
-
 More Than Three Clients Due Today:
 * `John, Alice, Charlie and 1 more have deadlines due today.` This shows that John, Alice, Charlie, and one additional active client have deadlines due today.
 
-## Data Management:
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+
+<br>
+Reminders shown are only for clients in the main list, not for those in the archive list.
+
+</div>
+
+## Data Management
 ### Saving the Data
 
 Clientele+ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -321,11 +358,14 @@ Clientele+ data is saved automatically as a JSON file `[JAR file location]/data/
 Data of archived clients is saved automatically as a separate JSON file `[JAR file location]/data/archivedAddressBook.json`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+<br>
 If your changes to the data file makes its format invalid, Clientele+ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the Clientele+ to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Unarchiving a Client `[coming in v2.0]`
 
 _Details coming soon ..._
 
