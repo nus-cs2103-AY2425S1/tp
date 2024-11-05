@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T09-2/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/successimage.png)
 
 # TALENT SG
 
@@ -36,7 +36,6 @@ TalentSG aims to simplify and enhance the recruitment process for HR professiona
 TalentSG will evolve from the existing AddressBook-Level3 (AB3) codebase, transforming it into a powerful contact management tool for recruitment and HR management. Key areas of development include:
 
 - **Customizable Applicant Profiles**: Recruiters can add, modify, and manage detailed profiles for job candidates.
-- **Interview and Task Scheduling**: Track interview schedules, follow-up tasks, and milestones.
 - **Employment Record Management**: Tools for managing employee information post-hiring.
 - **Search and Filter Enhancements**: Advanced search and filtering options to locate candidate profiles.
 - **Data Import/Export**: Import data from other systems and export records for reporting.
@@ -59,13 +58,12 @@ TalentSG will evolve from the existing AddressBook-Level3 (AB3) codebase, transf
 
 ## Selecting User Stories for the MVP:
 
-The selected user stories for the MVP(Minimium Viable Product) include:
+The selected user stories for the MVP (Minimium Viable Product) include:
 - **📝Add/Edit/Delete Candidate Profiles**
 - **👥 View a List of Candidates**
 - **🔍Search Candidates by Criteria**
-- **🗓️Schedule and Manage Interviews**
-- **🔔Set Interview Reminders**
 - **📊Track Candidate Status**
+- **📈View Statistics for Candidates**
 
 These stories form the core of the MVP, providing basic functionality for recruiters and HR professionals.
 
@@ -74,14 +72,13 @@ These stories form the core of the MVP, providing basic functionality for recrui
 
 ## Feature Specification for TalentSG:
 
-| Feature                         | Purpose                                                     |
-| -------------------------------- | ----------------------------------------------------------- |
+| Feature                         | Purpose                                                      |
+| -------------------------------- |--------------------------------------------------------------|
 | **Add/Edit/Delete Candidate**    | Allows the recruiter to manage candidate profiles            |
-| **View Candidate List**          | Displays a list of all candidates                           |
+| **View Candidate List**          | Displays a list of all candidates                            |
 | **Search Candidates by Criteria**| Enables recruiters to search candidates by skills or roles   |
-| **Schedule Interviews**          | Schedule and manage candidate interviews                    |
-| **Set Interview Reminders**      | Set reminders for upcoming interviews                       |
-| **Track Candidate Status**       | Track recruitment stages like interview, shortlisted, hired |
+| **Track Candidate Status**       | Track application status like Interviewed, Onboarding, Hired |
+| **View Statistics for Candidates**| View a summary of application status for all the candidates  |
 
 ---
 
@@ -107,27 +104,7 @@ These stories form the core of the MVP, providing basic functionality for recrui
 
 ---
 
-### Use Case 2: Schedule an Interview
-**Actor**: Recruiter
-
-**Preconditions**: Recruiter is logged in, and a candidate profile exists.
-
-**Main Success Scenario**:
-1. Recruiter selects the "Schedule Interview" option for a specific candidate.
-2. System prompts recruiter to input the date and time for the interview.
-3. Recruiter inputs valid date and time.
-4. System saves the interview schedule for the candidate.
-5. System displays a success message: "Interview scheduled for [Candidate Name] on [Date and Time]."
-
-**Extensions**:
-- a. Recruiter inputs invalid date or time.
-  - System shows an error message: "Invalid date or time format. Please follow the format YYYY-MM-DD and HH:MM."
-- b. The selected time slot is already booked for another interview.
-  - System shows an error message: "Time slot is already booked. Please select a different time."
-
----
-
-### Use Case 3: Search for Candidates by Criteria
+### Use Case 2: Search for Candidates by Criteria
 **Actor**: HR Professional
 
 **Preconditions**: Candidate profiles exist in the system.
@@ -191,16 +168,13 @@ These stories form the core of the MVP, providing basic functionality for recrui
 4. **MVP (Minimum Viable Product)**:
   - The minimum version of a product that meets the basic requirements to be usable by the target audience.
 
-5. **Interview Schedule**:
-  - The process of setting a date and time for a job applicant to be interviewed by the recruiter or hiring manager.
-
-6. **NFR (Non-functional Requirements)**:
+5. **NFR (Non-functional Requirements)**:
   - Requirements that specify the quality and performance characteristics of the system (e.g., performance, security, usability).
 
-7. **CRUD**:
+6. **CRUD**:
   - Refers to the basic operations of Create, Read, Update, and Delete, typically applied to data management within an application.
 
-8. **GDPR (General Data Protection Regulation)**:
+7. **GDPR (General Data Protection Regulation)**:
   - A European regulation on data protection and privacy for individuals within the EU, applicable to the handling of personal data.
 
 
