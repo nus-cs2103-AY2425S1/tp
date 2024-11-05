@@ -26,7 +26,6 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 public class DeleteAppointmentCommandTest {
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
