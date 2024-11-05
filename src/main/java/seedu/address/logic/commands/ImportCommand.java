@@ -10,8 +10,8 @@ import seedu.address.model.Model;
  */
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports a json file with patient data if"
-            + "json file exists in the same directory as MediContact.jar and the data "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports a json file if it exists in the same "
+            + "directory as MediContact.jar and the data "
             + "is in the correct format (refer to user guide linked in help window for more information).\n"
             + "Parameters: FILE_NAME.json\n"
             + "Example: " + COMMAND_WORD + " addressbook.json ";
