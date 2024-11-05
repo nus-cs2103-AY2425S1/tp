@@ -281,14 +281,17 @@ Examples:
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
-Format: `find KEYWORD`
+Format: `find s/KEYWORD`
 
 * The search is case-insensitive. e.g `meet` will match `Meet`
 * Only the meet-up name is searched.
 * Keyword will be matched to full words and sentences e.g. `meet` will match `meetup` and `meet with Jack`
 
 Examples:
-* `find Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+* `find s/Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+* `find s/Sales` returns `Sales Meeting`
+
+![FindMeetUpSequence](images/FindMeetUpSequence.png)
 
 ### Deleting a meet-up : `delete`
 
