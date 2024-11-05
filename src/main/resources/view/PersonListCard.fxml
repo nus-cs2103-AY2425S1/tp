@@ -32,22 +32,32 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Region VBox.vgrow="NEVER" prefHeight="10" />
+      <Region VBox.vgrow="NEVER" prefHeight="5" />
+      <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="doctorBox" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
+        <padding>
+          <Insets top="10" left="10" bottom="15" right="10" />
+        </padding>
+        <Label styleClass="cell_big_label" text="Doctor">
+          <VBox.margin>
+            <Insets bottom="5" /> <!-- Adds padding below the label -->
+          </VBox.margin>
+        </Label>
+        <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName" />
+        <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
+        <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />
+      </VBox>
+      <Region VBox.vgrow="NEVER" prefHeight="7" />
       <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="emergencyContactsBox" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
         <padding>
-          <Insets top="10" right="10" bottom="15" left="10" />
+          <Insets top="10" right="10" bottom="10" left="10" />
         </padding>
-        <Label styleClass="cell_big_label" text="Emergency contacts:">
+        <Label styleClass="cell_big_label" text="Emergency contact(s)">
           <VBox.margin>
             <Insets bottom="10" /> <!-- Adds padding below the label -->
           </VBox.margin>
         </Label>
         <StackPane fx:id="emergencyContactListPanelPlaceholder" maxHeight="180" VBox.vgrow="ALWAYS"/>
       </VBox>
-      <Region VBox.vgrow="NEVER" prefHeight="10" />
-      <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName" />
-      <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
-      <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />
     </VBox>
   </GridPane>
 </HBox>

@@ -57,6 +57,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private VBox emergencyContactsBox;
 
+    @FXML
+    private VBox doctorBox;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -74,8 +77,10 @@ public class PersonCard extends UiPart<Region> {
 
         // Follows syntax of personCard, odd here refers to the displayedIndex - 1 i.e. zero-indexed list
         if (displayedIndex % 2 == 0) {
+            doctorBox.getStyleClass().add("emergencyContactListView-odd");
             emergencyContactsBox.getStyleClass().add("emergencyContactListView-odd");
         } else {
+            doctorBox.getStyleClass().add("emergencyContactListView-even");
             emergencyContactsBox.getStyleClass().add("emergencyContactListView-even");
         }
 
