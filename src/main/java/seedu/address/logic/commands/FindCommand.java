@@ -31,7 +31,7 @@ public class FindCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME KEYWORD(s) "
             + PREFIX_PHONE + "PHONE KEYWORD(s) "
-            + PREFIX_ADDRESS + "ADDRESS KEYWORD(s)"
+            + PREFIX_ADDRESS + "ADDRESS KEYWORD(s) "
             + PREFIX_TAG + "TAG(s)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie\n"
             + COMMAND_WORD + " " + PREFIX_ADDRESS + "blk 40_blk 50_blk 60\n"
