@@ -24,6 +24,12 @@ public class VolunteerManager {
         this.volunteers.setVolunteers(volunteers);
     }
 
+    public void checkNoOverlappingEvents() {
+        for (Volunteer v : volunteers) {
+
+        }
+    }
+
     public void addVolunteer(Volunteer volunteer) {
         volunteers.add(volunteer);
     }

@@ -9,6 +9,10 @@ import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Stream;
+
 /**
  * Represents the top-level AddressBook. It holds managers responsible for volunteers and events.
  */
@@ -43,6 +47,46 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         volunteerManager.setVolunteers(newData.getVolunteerList());
         eventManager.setEvents(newData.getEventList());
+        removeOverlappingEvents();
+    }
+
+    /**
+     * Runs through all events that volunteers are assigned to and checks for overlapping events.
+     * Removes the first event that overlaps with another event.
+     */
+    public void removeOverlappingEvents() {
+        // check to ensure that no volunteer is assigned to overlapping events
+        // this is only used when the data is being reset
+        for (Volunteer v : volunteerManager.getVolunteers()) {
+            ObservableList<String> involvedIn = v.getEvents();
+
+            // get the list of events that the volunteer is involved in
+            List<Event> eventsInvolvedIn = new LinkedList<>();
+            for (String eventName : involvedIn) {
+                eventsInvolvedIn.add(eventManager.getEventFromName(eventName));
+            }
+
+            List<Event> overlappingEvents = new LinkedList<>();
+
+            boolean loopAgain = false;
+            // check if any events are overlapping
+            for (Event event : eventsInvolvedIn) {
+                loopAgain = false;
+                for (Event otherEvent : eventsInvolvedIn) {
+                    if (event != otherEvent && event.isOverlappingWith(otherEvent)) {
+                        System.out.println("Unassigning " + v.getName().fullName + " from " + event.getName().toString());
+                        unassignVolunteerFromEvent(v, event);
+                        eventsInvolvedIn.remove(event);
+                        loopAgain = true;
+                    }
+                }
+                if (loopAgain) {
+                    break;
+                }
+            }
+
+
+        }
     }
 
     /**
