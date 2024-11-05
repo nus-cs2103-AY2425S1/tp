@@ -87,65 +87,50 @@ Examples:
 * `adds n/John Doe p/98765432 tg/G69 sn/E1234567I`
 * `adds n/Betsy Crowe tg/G16 p/23456789 sn/A1234567Z`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
 Shows a list of all students in the contact list.
 
 Format: `list`
 
-### Editing a person : `edits`
+### Editing a student : `edits`
 
-Edits an existing student in the address book.
+Edits an existing student in the contact list.
 
 Format: `edits INDEX [n/NAME] [p/PHONE] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person to be `91234567` and `Z19` respectively.
-*  `edits 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person in the displayed list to be `91234567` and `Z19` respectively.
+*  `edits 2 n/Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
 
 ### Undoing the previous command : `undo`
 
-Undoes the previous command that changed the data.
+Undoes the previous data-changing command.
 
 Format: `undo`
 
-### Locating person by name: `view`
+### Locating student by name: `view`
 
-Views student whose name matches the specified name exactly.
+View student(s) whose name matches the specified name exactly.
 
-Format: `view NAME`
+Format: `view n/NAME`
 
 * The given name must match the student's name exactly. e.g `view John` will not return `John Doe`'s details.
+* Name is case-sensitive. e.g. `view mary` will not return `Mary`'s details.
+* Name is space-sensitive. e.g. `view John Doe` will not return `JohnDoe`'s details, and `view JohnNg` will not return `John Ng`'s details.
 * If more than one student share the exact same name, all the students with that name will be displayed.
 
 Examples: 
-* `view Alex Yeoh` Displays the details of all students with the name `Alex Yeoh`.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `view Alex Yeoh` Displays the details of all students with the exact name `Alex Yeoh`.
+* `view Lynette` Displays the details of all students with the exact name `Lynette`.
 
 ### Deleting a specific student : `deletes`
 
-Deletes the specified student from the address book.
+Deletes the specified student from the contact list.
 
 Format: `deletes n/STUDENT_NAME`
 Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
@@ -153,17 +138,12 @@ Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
 * Deletes the student with the specified details.
 * The student name refers to the student name shown in the displayed list of students.
 * The student number refers to the student number shown in the displayed list of students.
-* The student number **must be in the following format** A1234567B …​
+* If a student number is provided, it **must be in the following format** A1234567B …​
+* If there is more than one student with the exact same name, the student number must be provided to differentiate between them when deleting.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
+* `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
+* `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
 ### Exiting the program : `exit`
 
@@ -263,7 +243,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`
 **Clear**   | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`
 **Edit**   | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
