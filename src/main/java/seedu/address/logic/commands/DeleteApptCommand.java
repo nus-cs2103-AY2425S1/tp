@@ -7,6 +7,8 @@ import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Appt;
@@ -24,7 +26,8 @@ public class DeleteApptCommand extends Command {
             + ": Deletes the specified appointment for the identified patient\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_DELETE_APPT_SUCCESS = "Deleted Appointment: %1$s";
+    public static final String MESSAGE_DELETE_APPT_SUCCESS = "Deleted Appointment: %1$s\n"
+            + "Input \"home\" to return to home page";
 
     private final LocalDateTime apptDateTime;
     private final Nric nric;
@@ -67,7 +70,8 @@ public class DeleteApptCommand extends Command {
 
         patientToDeleteAppt.deleteAppt(apptToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_APPT_SUCCESS, apptToDelete));
+        return new ShowPatientInfoCommandResult(String.format(MESSAGE_DELETE_APPT_SUCCESS, apptToDelete),
+                patientToDeleteAppt, true);
     }
 
     /**

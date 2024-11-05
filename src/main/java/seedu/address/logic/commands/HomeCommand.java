@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.DefaultCommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -19,6 +21,6 @@ public class HomeCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new DefaultCommandResult(MESSAGE_SUCCESS);
     }
 }

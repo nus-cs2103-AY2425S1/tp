@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Appt;
@@ -19,7 +21,8 @@ import seedu.address.model.patient.Patient;
 public class BookApptCommand extends Command {
 
     public static final String COMMAND_WORD = "bookappt";
-    public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully for %1$s";
+    public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully for %1$s\n"
+            + "Input \"home\" to return to home page";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date and time";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointments under a specified health service "
@@ -72,7 +75,7 @@ public class BookApptCommand extends Command {
         // Add the appointment to the patient's list of appointments
         patient.addAppt(this.appt);
 
-        return new CommandResult(generateSuccessMessage(patient));
+        return new ShowPatientInfoCommandResult(generateSuccessMessage(patient), patient, true);
     }
 
     /**
