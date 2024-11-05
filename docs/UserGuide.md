@@ -101,6 +101,10 @@ The commands in this section are used to view and retrieve records on the system
 3.1 Listing all students  
 3.2 Search
 
+### **3.1 Listing all students**
+
+Command: `list`
+
 ---
 
 ### **4. Editing and updating data**
@@ -113,6 +117,44 @@ The commands in this section are used edit records on the system, such as studen
 4.4 Marking attendance of student  
 4.5 Marking attendance of tutorial  
 4.6 Unenroll a student from tutorial
+### **4.1 Editing a student**
+
+Edit the personal information of students within EduVault
+
+Command: `edit`
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TAG]…​`
+
+Fields:
+
+* `INDEX`: Index number shown in the displayed person list
+    * Must be a positive integer 1, 2, 3, …​
+* `[ ]:` Fields wrapped in square brackets are optional
+    * At least one of the optional fields must be provided
+    * Existing values will be updated to the input values
+* `PAYMENT`: Updates the absolute value of a student’s overdue amount
+* `TAG:` Existing tag will be replaced by the new tag
+    * Remove a student’s tag by typing  `t/` without specifying any tags
+* ATTENDANCE: Field not editable within edit
+* TUTORIAL: Field not editable within edit
+
+<div markdown="span" class="alert alert-primary">:pushpin:|**Note:** 
+More information about other prefixes can be found [here](#2-general-command-foramt)</div>
+
+Example Usage:
+
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+Invalid usage:
+
+* None of the option fields are input
+    * *Error message: At least one field to edit must be provided.*
+* Values to edit result in a copy of a student already in EduVault
+    * *Error message: This person already exists in the address book.*
+* ATTENDANCE & TUTORIAL prefix used
+    * Error message: PREFIX cannot be used in this command
+* Format errors, check [here](#11-format-errors)
 
 ### **4.2 Logging fees for tutorial**
 
@@ -201,6 +243,33 @@ The commands in this section are used to delete records on the system
 5.2 Closing a tutorial  
 5.3 Clearing all entries
 
+### **5.1 Deleting a student**
+
+*Deleting student’s record*
+
+Command:  `delete`
+
+Usage: `delete` `INDEX`
+
+Fields
+
+* `INDEX:` Index number as shown in the displayed list of the students.
+    * Must be a positive integer 1, 2, 3…
+
+Example usages
+
+* `delete 2`
+
+Invalid usages
+
+* Format errors, check [here](#11-format-errors)
+
+### **5.3 Clearing all entries**
+
+*Deleting all tutorial and student records*
+
+Command:  `clear`
+
 ---
 
 ### **6. Viewing help**
@@ -236,10 +305,10 @@ Format: `exit`
 
 | Error Message | Most Likely Cause |
 | :---- | :---- |
-| *Unknown Command….* | Command misspelled Command not available in the current release |
-| *Invalid Command format…* | Command word is correct but the format entered is wrong Index is missing, or is a negative number Prefix is missing or misspelt Unidentified inputs after the command word and before the first prefix |
-| *The student’s index provided is invalid…* | Index provided is out of range for current displayed list |
-| *Multiple values specified for the following single-valued field(s)...* | Duplicated prefix usage used when it is not allowed |
+| *Unknown Command….* | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul> |
+| *Invalid Command format…* | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li></ul></ul>|
+| *The student’s index provided is invalid…* | <ul><li>Index provided is out of range for the current displayed list</li></ul> |
+| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul> |
 
 ---
 
