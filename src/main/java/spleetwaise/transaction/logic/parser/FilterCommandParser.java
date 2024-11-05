@@ -55,7 +55,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Person person = null;
         if (!argMultimap.getPreamble().isEmpty()) {
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            person = ParserUtil.getPersonFromAddressBookIndex(index);
+            person = ParserUtil.getPersonByFilteredPersonListIndex(index);
         }
 
         Amount amount = null;

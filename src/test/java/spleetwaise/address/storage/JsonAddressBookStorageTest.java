@@ -12,9 +12,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.ReadOnlyAddressBook;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.exceptions.DataLoadingException;
+import spleetwaise.commons.testutil.Assert;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
