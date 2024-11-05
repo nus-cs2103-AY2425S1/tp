@@ -10,7 +10,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -39,7 +39,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -74,7 +74,7 @@ Format: `help`
 
 ### Listing all Client: `list`
 
-Show a list of all clients contacts in Clientele+.
+Show a list of all clients contacts in Clientele+. This command is often used to return to the main client list
 
 Format: `list`
 
@@ -97,7 +97,7 @@ You can also exit the program by clicking the "x" at the top left corner of the 
 ## Client Management:
 ### Add Client Details: `add`
 
-Allows the user to add a new client with details including client name and contact details, payment status, client status, project status and project deadline.
+Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
@@ -288,13 +288,12 @@ Format: `archive-list`
 
 ### Deadline Reminder
 
-The Deadline Reminder feature automatically tracks upcoming and overdue deadlines for active clients and displays them in the footer. This system runs without the need for any command input from the user.
+The Deadline Reminder feature automatically tracks the latest upcoming and overdue deadlines for active clients and displays them in the footer. This feature runs without any command input from the user.
 
 ![reminder](images/reminder.png)
 
 * Reminders are only shown for clients with an `active` status.
-* The system does not track `completed` projects.
-* It tracks overdue deadlines, but the client status must still be `active`.
+* The feature does not track `completed` projects.
 * If there are `overdue` deadlines, only overdue projects are shown; upcoming deadlines will not be displayed
 * `No upcoming or overdue reminders.` This indicates there are no active clients with upcoming or overdue deadlines.
 
@@ -303,11 +302,12 @@ Examples:
 Single Client Due Today:
 * `John has deadline due today.` This shows that John, an active client, has a deadline due today.
 
-Two Clients Due Today:
-* `John and Alice have deadlines due today.` This shows that John and Alice, both active clients, have deadlines due today.
-
 More Than Three Clients Due Today:
 * `John, Alice, Charlie and 1 more have deadlines due today.` This shows that John, Alice, Charlie, and one additional active client have deadlines due today.
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Reminders shown are only for clients in the main list, not for those in the archive list.
+</div>
 
 ## Data Management:
 ### Saving the Data
