@@ -20,9 +20,10 @@ public class Messages {
             "The guest index provided exceeds the number of guests!";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX =
             "The vendor index provided exceeds the number of vendors!";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d guests and vendors found!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_TOTAL_GUEST = "Number of guests: %d (%d pending, %d coming, %d not coming)\n";
+    public static final String MESSAGE_TOTAL_VENDOR = "Number of vendors: %d";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -93,5 +94,20 @@ public class Messages {
                 .append("; Tags: ");
         vendor.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public static String getSuccessMessageWithStats(String commandSuccess, int[] guestCounts, int vendorCount) {
+        assert guestCounts.length == 4;
+
+        int guestCount = guestCounts[0];
+        int guestsPending = guestCounts[1];
+        int guestsComing = guestCounts[2];
+        int guestsNotComing = guestCounts[3];
+
+        String guestMessage = String.format(MESSAGE_TOTAL_GUEST,
+                guestCount, guestsPending, guestsComing, guestsNotComing);
+
+        String vendorMessage = String.format(MESSAGE_TOTAL_VENDOR, vendorCount);
+        return commandSuccess + guestMessage + vendorMessage;
     }
 }

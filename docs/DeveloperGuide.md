@@ -393,8 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
-2. User provides the criteria.
-3. System displays the matching Guest and Vendor entries.
+2. System displays the matching Guest and Vendor entries.
 
    Use case ends.
 
@@ -404,8 +403,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 4a. No matching entries are found.
-    * 4a1. System shows a message indicating no results.
+* 2a. No matching entries are found.
+    * 2a1. System shows a message indicating no results.
 
       Use case ends.
 

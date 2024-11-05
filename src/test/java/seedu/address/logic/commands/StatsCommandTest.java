@@ -26,8 +26,9 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand();
         CommandResult result = statsCommand.execute(model);
 
-        String expectedMessage = "There are 0 guests. (0 pending, 0 coming, 0 not coming)\n"
-                + "There are 0 vendors.";
+        String expectedMessage = StatsCommand.MESSAGE_STATS_SUCCESS
+                + "Number of guests: 0 (0 pending, 0 coming, 0 not coming)\n"
+                + "Number of vendors: 0";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
@@ -39,8 +40,9 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand();
         CommandResult result = statsCommand.execute(model);
 
-        String expectedMessage = "There is 1 guest. (1 pending, 0 coming, 0 not coming)\n"
-                + "There are 0 vendors.";
+        String expectedMessage = StatsCommand.MESSAGE_STATS_SUCCESS
+                + "Number of guests: 1 (1 pending, 0 coming, 0 not coming)\n"
+                + "Number of vendors: 0";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
@@ -54,8 +56,9 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand();
         CommandResult result = statsCommand.execute(model);
 
-        String expectedMessage = "There are 3 guests. (1 pending, 1 coming, 1 not coming)\n"
-                + "There are 0 vendors.";
+        String expectedMessage = StatsCommand.MESSAGE_STATS_SUCCESS
+                + "Number of guests: 3 (1 pending, 1 coming, 1 not coming)\n"
+                + "Number of vendors: 0";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
@@ -67,8 +70,9 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand();
         CommandResult result = statsCommand.execute(model);
 
-        String expectedMessage = "There are 0 guests. (0 pending, 0 coming, 0 not coming)\n"
-                + "There is 1 vendor.";
+        String expectedMessage = StatsCommand.MESSAGE_STATS_SUCCESS
+                + "Number of guests: 0 (0 pending, 0 coming, 0 not coming)\n"
+                + "Number of vendors: 1";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
@@ -81,8 +85,9 @@ public class StatsCommandTest {
         StatsCommand statsCommand = new StatsCommand();
         CommandResult result = statsCommand.execute(model);
 
-        String expectedMessage = "There are 0 guests. (0 pending, 0 coming, 0 not coming)\n"
-                + "There are 2 vendors.";
+        String expectedMessage = StatsCommand.MESSAGE_STATS_SUCCESS
+                + "Number of guests: 0 (0 pending, 0 coming, 0 not coming)\n"
+                + "Number of vendors: 2";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
