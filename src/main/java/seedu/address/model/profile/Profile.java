@@ -15,9 +15,8 @@ import seedu.address.model.profile.exceptions.IllegalProfilePathException;
  * Represents a user profile with a name.
  */
 public class Profile {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Profile names may contain only letters (a-z, A-Z), numbers (0-9), hyphens (-), "
-                    + "and underscores (_). The name also must be 30 characters or fewer.";
+    public static final String MESSAGE_CONSTRAINTS = "Profile names must be between 1 and 30 characters and can "
+            + "only include letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9-_]+$";
     private static final String DEFAULT_PROFILE = "addressbook";
     private static final String PROFILE_PARENT_DIR = "data";

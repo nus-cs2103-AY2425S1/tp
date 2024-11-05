@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.profile.Profile.extractProfileNameFromPathOrThrow;
 
 import java.nio.file.Path;
@@ -51,7 +52,7 @@ public class SwitchCommand extends Command {
         if (profile instanceof Profile.EmptyProfile) {
             Set<Profile> profiles = model.getProfiles();
             if (profiles.isEmpty()) {
-                throw new CommandException(MESSAGE_USAGE);
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             }
             List<String> profilesList = profiles.stream()
                     .map(Profile::toPath)

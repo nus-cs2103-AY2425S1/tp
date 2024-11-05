@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,8 @@ public class SwitchCommandTest {
         SwitchCommand switchCommand = new SwitchCommand(Profile.getEmptyProfile());
 
         assertThrows(CommandException.class,
-                SwitchCommand.MESSAGE_USAGE, () -> switchCommand.execute(model)
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwitchCommand.MESSAGE_USAGE), () ->
+                        switchCommand.execute(model)
         );
     }
 
