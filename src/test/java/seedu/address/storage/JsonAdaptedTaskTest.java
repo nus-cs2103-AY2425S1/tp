@@ -15,6 +15,7 @@ public class JsonAdaptedTaskTest {
 
     private static final String VALID_DESCRIPTION = "Buy medication";
     private static final JsonAdaptedPerson VALID_PATIENT = new JsonAdaptedPerson(BENSON);
+    private static final boolean VALID_COMPLETION_STATUS = true;
     private static final JsonAdaptedPerson INVALID_PATIENT = new JsonAdaptedPerson("R@chel",
             BENSON.getPhone().value,
             BENSON.getEmail().value, BENSON.getAddress().value, BENSON.getEmergencyContact().getName().toString(),
@@ -24,34 +25,34 @@ public class JsonAdaptedTaskTest {
 
     @Test
     public void toModelType_validTaskDetails_returnsTask() throws Exception {
-        Task task = new Task(BENSON, VALID_DESCRIPTION);
+        Task task = new Task(BENSON, VALID_DESCRIPTION, VALID_COMPLETION_STATUS);
         JsonAdaptedTask adaptedTask = new JsonAdaptedTask(task);
         assertEquals(task, adaptedTask.toModelType());
     }
 
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask(null, VALID_PATIENT);
+        JsonAdaptedTask task = new JsonAdaptedTask(null, VALID_PATIENT, VALID_COMPLETION_STATUS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description");
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullPatient_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, null);
+        JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, null, VALID_COMPLETION_STATUS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Patient");
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_PATIENT);
+        JsonAdaptedTask task = new JsonAdaptedTask(INVALID_DESCRIPTION, VALID_PATIENT, VALID_COMPLETION_STATUS);
         assertThrows(IllegalValueException.class, task::toModelType);
     }
 
     @Test
     public void toModelType_invalidPatient_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, INVALID_PATIENT);
+        JsonAdaptedTask task = new JsonAdaptedTask(VALID_DESCRIPTION, INVALID_PATIENT, VALID_COMPLETION_STATUS);
         assertThrows(IllegalValueException.class, task::toModelType);
     }
 }

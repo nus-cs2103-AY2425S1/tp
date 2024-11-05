@@ -16,15 +16,18 @@ class JsonAdaptedTask {
 
     private final String description;
     private final JsonAdaptedPerson patient;
+    private final Boolean isComplete;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description,
-                           @JsonProperty("patient") JsonAdaptedPerson patient) {
+                           @JsonProperty("patient") JsonAdaptedPerson patient,
+                           @JsonProperty("isComplete") Boolean isComplete) {
         this.description = description;
         this.patient = patient;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -33,6 +36,7 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         description = source.getDescription();
         patient = new JsonAdaptedPerson(source.getPatient());
+        isComplete = source.getStatus(); // Serialize the isComplete status
     }
 
     /**
@@ -52,6 +56,6 @@ class JsonAdaptedTask {
         }
 
         Person modelPatient = this.patient.toModelType();
-        return new Task(modelPatient, description);
+        return new Task(modelPatient, description, isComplete);
     }
 }
