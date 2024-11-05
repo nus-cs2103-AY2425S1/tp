@@ -58,7 +58,7 @@ Commands in EZStates follow the same structure:
 
 `commandWord (REFERENCE) (PREFIXES)` 
 
-| commandWord                  | reference                                                                                                            | prefixes                                                                                                 |
+| commandWord                  | REFERENCE                                                                                                            | PREFIXES                                                                                                 |
 |------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | Specifies the command to run | Comes before all prefixes and is used to make reference a particular client/listing <br/> Optional for some commands | Used to specify various attributes/properties for a given `commandWord` <br/> Optional for some commands |
 
@@ -93,8 +93,21 @@ The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have
 </div>
 <br>
 
-| prefix | constraints | remarks | valid | invalid |
-|--------|-------------|---------|-------|---------|
+| Prefix   | Meaning | Constraints | Remarks | Example |
+|----------|---------|-------------|---------|---------|
+| n/       | name    |             |         |         |
+| p/       | phone   |             |         |         |
+| e/       | email   |             |         |         |
+| t/       | tag     |             |         |         |
+| d/       | date    |             |         |         |
+| fr/      | from    |             |         |         |
+| to/      | to      |             |         |         |
+| price/   | price   |             |         |         |
+| area/    | area    |             |         |         |
+| address/ | address |             |         |         |
+| region/  | region  |             |         |         |
+| seller/  | seller  |             |         |         |
+| buyer/   | buyer   |             |         |         |
 
 --------------------------------------------------------------------------------------------------------------------
 
