@@ -65,6 +65,7 @@ public class GradeList {
 
         // If there is already a grade for this exam, subtract the old weightage
         Grade existingGrade = newGrades.get(normalizedTestName);
+      
         if (existingGrade != null) {
             totalWeightage -= existingGrade.getWeightage();
         }
