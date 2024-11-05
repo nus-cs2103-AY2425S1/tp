@@ -32,6 +32,7 @@ public class JsonAppointmentBookStorageTest {
 
     @Test
     public void readAppointmentBook_nullFilePath_throwsNullPointerException() {
+        // EP: Null file path
         assertThrows(NullPointerException.class, () -> readAppointmentBook(null));
     }
 
@@ -48,16 +49,19 @@ public class JsonAppointmentBookStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
+        // EP: Missing file, expect empty result
         assertFalse(readAppointmentBook("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
+        // EP: Incorrect format, expect DataLoadingException
         assertThrows(DataLoadingException.class, () -> readAppointmentBook("notJsonFormatAppointmentBook.json"));
     }
 
     @Test
     public void readAppointmentBook_invalidAppointmentBook_throwDataLoadingException() {
+        // EP: Invalid data in JSON, expect DataLoadingException
         assertThrows(DataLoadingException.class, () -> readAppointmentBook("invalidAppointmentBook.json"));
     }
 
@@ -68,6 +72,7 @@ public class JsonAppointmentBookStorageTest {
 
     @Test
     public void saveAppointmentBook_nullAppointmentBook_throwsNullPointerException() {
+        // EP: Null appointment book input
         assertThrows(NullPointerException.class, () -> saveAppointmentBook(null, "SomeFile.json"));
     }
 
@@ -75,6 +80,7 @@ public class JsonAppointmentBookStorageTest {
      * Saves {@code appointmentBook} at the specified {@code filePath}.
      */
     private void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook, String filePath) {
+        // EP: Null file path
         try {
             new JsonAppointmentBookStorage(Paths.get(filePath))
                     .saveAppointmentBook(appointmentBook, addToTestDataPathIfNotNull(filePath));
