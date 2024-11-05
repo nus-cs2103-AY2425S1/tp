@@ -6,7 +6,7 @@
 
 # UniLink User Guide
 
-UniLink is a desktop app that allows university students to manage their contacts. With Unilink, students can categorise
+UniLink is a desktop app that allows university students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work' contacts and 'personal' contacts to better manage their lives!
 
 <!-- * Table of Contents -->
@@ -16,22 +16,31 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+**1. Set up Java**
+- Ensure you have Java `17` or above installed in your Computer.
+- Not sure? Open up Command Prompt (for Windows) or Terminal (for Mac) and type `java -version` to check.
+- Download Java [[here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)] if needed.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+**2. Download UniLink**
+- Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+**3. Choose a Home Folder**
+- Move the `.jar` file to where you want to store your UniLink data. This will be your 'home folder'.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+**4. Launch the app!**
+- Open up Command Prompt (for Windows) or Terminal (for Mac) and navigate to the home folder with `cd path-to/folder`
+    - E.g. If my jar file is in a folder called 'Contacts' in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
+- Run UniLink by typing `java -jar UniLink.jar`
+- The app should open within a few seconds, showing some sample data that you can explore! 
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+![Ui](images/Ui.png)
+
+**5. Try out some commands**
+- Type commands in the command box and press Enter to execute it. Here are some commands to get you started:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe h/@johndoe p/99887766 e/johndoe@gmail.com ct/work` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe h/@johndoe ct/work` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -39,7 +48,7 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,31 +56,32 @@ their contacts into 'work' contacts and 'personal' contacts to better manage the
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the Command Format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` need to be provided by you.<br>
+    * e.g. in `add n/NAME`: if you want to add someone named John Doe, you'd type `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in [Square Brackets] are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be repeated or omitted entirely<br>
+  e.g. `[t/TAG]…​` can be left blank, or used like `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` will also work.
 
 * Anything after certain commands such as `help`, `list`, `exit` and `clear` will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+* PDF Users
+  * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/help.png)
 
 Format: `help`
 
@@ -80,16 +90,18 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME h/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL ct/CONTACT_TYPE [t/TAG]…​`
+Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
+
+* At least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL` must be provided to add a contact.
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** You can add multiple tags (or none at all).
 </box>
 
 Examples:
-* `add n/John Doe h/@johndoe p/9988 7766 e/johndoh@gmail.com ct/work t/friend`
-* `add n/Betsy Crowe t/friend h/@betsy_c p/87452451 e/betsyc@gmail.com ct/personal t/criminal`
+* `add n/John Doe ct/work h/@johndoe p/99887766 e/johndoh@gmail.com m/CS2030S t/friend`
+* `add n/Betsy Crowe ct/personal t/friend h/@betsy_c r/likes cats t/criminal`
 
 ### Listing all persons : `list`
 
@@ -99,13 +111,13 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Updates details for an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [ct/CONTACT_TYPE] [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* `INDEX` refers to the person's position in the displayed list (i.e. must be a positive integer 1, 2, 3...)
+* At least one optional field must be provided.
+* Existing values are replaced by the new input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -116,7 +128,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose **names** or **telegram handle** contain any of the given keywords.
+Finds persons whose **names** or **telegram handle** contain any of the specified keywords.
 
 Format: <br>
 `find NAME [MORE_NAME_KEYWORDS]`<br>
@@ -131,8 +143,23 @@ Format: <br>
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
+  ![result for 'find alex david'](images/findAlexDavid.png)
+
+### Filtering persons by contact type: `filter`
+
+Filters persons by their contact type (i.e. work or personal).
+
+Format: `filter CONTACT_TYPE`
+
+* Displays a list of persons tagged with that `CONTACT_TYPE`
+* `CONTACT_TYPE` can be either 'WORK' or 'PERSONAL'
+* The search is case-insensitive. e.g. 'work' is the same as 'WORK'
+
+Examples:
+
+* `filter WORK` returns all the 'work' contacts
+* `filter PERSONAL` returns all the 'personal' contacts
 
 ### Deleting a person : `delete`
 
@@ -154,18 +181,20 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Switching Interface Theme : `switch`
+### Switching display theme: `switch`
 
-Switches graphic user interface's theme
+Changes the display to 'light' mode or 'dark' mode.
 
 Format: `switch THEME`
 
-* Two themes available: `light` and `dark`
-* Theme is case-insensitive
+* Displays the `THEME` specified
+* `THEME` can be `light` or `dark`
+* `THEME` is case-insensitive. e.g. 'light' is the same as 'LIGHT'
 
 Examples:
-* `switch light`
-* `switch DARK`
+
+* `switch LIGHT` switches to the 'light' display theme
+* `switch DARK` switches to the 'dark' display theme
 
 ### Exiting the program : `exit`
 
@@ -206,14 +235,16 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME t/TELEGRAM_HANDLE p/PHONE_NUMBER e/EMAIL ct/CONTACT_TYPE [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
+**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
 **Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br> `find h/ TELEGRAM_HANDLE` e.g., `find h/ @james_lake`
+**Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **List**   | `list`
+**Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
 **Help**   | `help`
