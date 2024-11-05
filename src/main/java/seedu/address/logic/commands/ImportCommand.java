@@ -31,6 +31,9 @@ public class ImportCommand extends Command {
     public static final String CORRECT_HEADER_USAGE =
         "Header of CSV file should be Name, Phone, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
             + " (Case insensitive, Order sensitive)";
+    private static final String MESSAGE_INVALID_CSV = "Invalid CSV format, ensure that all necessary data are present.";
+    private static final String MESSAGE_MISSING_PERSON_DATA = "There is no person data present.";
+    private static final String MESSAGE_NULL_FIELDS = "Please ensure that there is no null fields";
 
     private final String csvFilePath;
 
@@ -65,14 +68,14 @@ public class ImportCommand extends Command {
                 }
                 String[] cleanedFields = CsvRowParser.cleanRow(fields);
                 if (cleanedFields.length != expectedHeaders.length) {
-                    throw new CommandException("Invalid CSV format, ensure that all necessary data are present.");
+                    throw new CommandException(MESSAGE_INVALID_CSV);
                 }
                 Person person = CsvPersonParser.parsePerson(cleanedFields, model);
                 newPersons.add(person);
             }
 
             if (newPersons.isEmpty()) {
-                throw new CommandException("There is no person data present");
+                throw new CommandException(MESSAGE_MISSING_PERSON_DATA);
             }
             model.replaceAllPersons(newPersons);
         } catch (IOException e) {
@@ -84,7 +87,7 @@ public class ImportCommand extends Command {
         } catch (CsvValidationException | CommandException e) {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());
         } catch (NullPointerException e) {
-            throw new CommandException("Please ensure that there is no null fields");
+            throw new CommandException(MESSAGE_NULL_FIELDS);
         }
 
         // Replace all existing person with those present in the CSV file.
