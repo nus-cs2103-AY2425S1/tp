@@ -8,6 +8,7 @@ public enum SubjectEnum {
     ENGLISH("English"),
     CHINESE("Chinese"),
     MALAY("Malay"),
+    TAMIL("Tamil"),
     MATH("Math"),
     SCIENCE("Science"),
     HISTORY("History"),
