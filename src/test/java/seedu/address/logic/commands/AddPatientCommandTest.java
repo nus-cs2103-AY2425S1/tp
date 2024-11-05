@@ -27,6 +27,9 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PatientBuilder;
 
+/**
+ * Unit tests for {@code AddPatientCommand}.
+ */
 public class AddPatientCommandTest {
 
     @Test
