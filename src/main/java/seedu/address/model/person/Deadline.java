@@ -3,11 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import seedu.address.logic.parser.ParserUtil;
 
 /**
  * Represents a Person's deadline in the address book.
@@ -16,9 +20,13 @@ import java.util.logging.Logger;
 public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadlines should be in the format dd-MM-yyyy, and it should be a valid date.";
-    public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+            "Deadlines must be in one of the following formats: dd-mm-[yy]yy or dd/mm/[yy]yy or dd|mm|[yy]yy"
+            + "\nThe deadline provided must also be a valid date (ex: there is no 31st February)"
+            + "\nExamples of accepted deadlines: 10-10-2025, 1-5-24, 3|10|2023, 4/3/27, 01-10-28";
+    public static final DateTimeFormatter FORMAT_JSON_STORAGE = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final Pattern PATTERN_DATE =
+            Pattern.compile("^(\\d+)[_\\-\\/|](\\d+)[_\\-\\/|](\\d+)$");
+    public static final DateTimeFormatter FORMAT_GUI_OUTPUT = DateTimeFormatter.ofPattern("MMM d, yyyy");
     public static final String DEADLINE_KEY = "deadline";
     private static final Logger logger = Logger.getLogger(Deadline.class.getName());
 
@@ -32,22 +40,35 @@ public class Deadline {
     public Deadline(String deadline) {
         requireNonNull(deadline);
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
-        this.value = LocalDate.parse(deadline, INPUT_FORMATTER);
+        this.value = LocalDate.of(
+                ParserUtil.getYear(deadline), ParserUtil.getMonth(deadline), ParserUtil.getDay(deadline));
     }
 
     /**
      * Returns true if a given string is a valid deadline.
      */
     public static boolean isValidDeadline(String test) {
-        try {
-            // Parse the string into a LocalDate and check if the string matches the expected format
-            LocalDate parsedDate = LocalDate.parse(test, INPUT_FORMATTER);
+        Matcher datetimeMatcher = PATTERN_DATE.matcher(test);
 
-            // Necessary to prevent dates like "31-02-2020" being accepted (they get converted to "28-02-2020")
-            String reformattedDate = parsedDate.format(INPUT_FORMATTER);
-            return reformattedDate.equals(test);
-        } catch (DateTimeParseException e) {
-            logger.log(Level.WARNING, "Invalid deadline format: {0}", test);
+        if (datetimeMatcher.find()) {
+            int day = ParserUtil.getDay(test);
+            int month = ParserUtil.getMonth(test);
+            int year = ParserUtil.getYear(test);
+
+            if (year == 0) {
+                return false;
+            }
+
+            try {
+                // LocalDate::of method handles invalid dates like 31st Feb or -3rd of the 13th month
+                LocalDate.of(year, month, day);
+                return true;
+            } catch (DateTimeException dte) {
+                logger.log(Level.WARNING, "Invalid date provided: {0}", test);
+                return false;
+            }
+        } else {
+            logger.log(Level.WARNING, "Invalid date format: {0}", test);
             return false;
         }
     }
@@ -61,7 +82,7 @@ public class Deadline {
 
     @Override
     public String toString() {
-        return value.format(OUTPUT_FORMATTER);
+        return value.format(FORMAT_GUI_OUTPUT);
     }
 
     @Override

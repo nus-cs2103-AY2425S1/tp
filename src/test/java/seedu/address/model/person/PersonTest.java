@@ -18,6 +18,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();

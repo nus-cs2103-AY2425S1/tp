@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.ParserUtilDateTest;
+
 public class DeadlineTest {
 
     @Test
@@ -24,27 +26,50 @@ public class DeadlineTest {
         // null deadline
         assertThrows(NullPointerException.class, () -> Deadline.isValidDeadline(null));
 
-        // invalid deadlines
-        assertFalse(Deadline.isValidDeadline("")); // empty string
-        assertFalse(Deadline.isValidDeadline(" ")); // spaces only
-        assertFalse(Deadline.isValidDeadline("31-02-2020")); // invalid date (February 31st doesn't exist)
-        assertFalse(Deadline.isValidDeadline("2020-12-12")); // incorrect format (should be dd-MM-yyyy)
-        assertFalse(Deadline.isValidDeadline("12/12/2020")); // slashes instead of dashes
-        assertFalse(Deadline.isValidDeadline("32-01-2020")); // invalid day
-        assertFalse(Deadline.isValidDeadline("15-13-2020")); // invalid month
-        assertFalse(Deadline.isValidDeadline("15-12-20")); // invalid year (too short)
-        assertFalse(Deadline.isValidDeadline("15- 12 -20")); // spaces in between
-        assertFalse(Deadline.isValidDeadline("10 -12-20")); // spaces in between
-        assertFalse(Deadline.isValidDeadline("10-12 -20")); // spaces in between
+        // invalid strings
+        assertFalse(Deadline.isValidDeadline(""));
+        assertFalse(Deadline.isValidDeadline("hello world"));
+        assertFalse(Deadline.isValidDeadline(" "));
+        assertFalse(Deadline.isValidDeadline("\t"));
+        assertFalse(Deadline.isValidDeadline("\n"));
+        assertFalse(Deadline.isValidDeadline("abcd1234"));
+        assertFalse(Deadline.isValidDeadline("12102025"));
 
-        // valid deadlines
-        assertTrue(Deadline.isValidDeadline("01-01-2020")); // valid format, start of the year
-        assertTrue(Deadline.isValidDeadline("29-02-2020")); // valid leap year date
-        assertTrue(Deadline.isValidDeadline("31-12-2020")); // valid date, end of the year
-        assertTrue(Deadline.isValidDeadline("10-10-2022")); // arbitrary valid date
-        assertTrue(Deadline.isValidDeadline("15-07-2021")); // another valid date
+
+        // invalid deadlines; see seedu/address/logic/parser/ParserUtilDateTest.java for test cases
+        for (String deadline : ParserUtilDateTest.INVALID_DEADLINES_WRONG_NUMBERS) {
+            assertFalse(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.INVALID_DEADLINES_WRONG_DELIMITER) {
+            assertFalse(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.INVALID_DEADLINES_NUMBERS_OUTSIDE_RANGE) {
+            System.out.println("Testing " + deadline);
+            assertFalse(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.INVALID_DEADLINES_BORDER_VALUES) {
+            assertFalse(Deadline.isValidDeadline(deadline));
+        }
+
+        // valid deadlines; see seedu/address/logic/parser/ParserUtilDateTest.java for test cases
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_EASY) {
+            assertTrue(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_DIFFERENT_DELIMITERS) {
+            assertTrue(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_SHORT_STRINGS) {
+            assertTrue(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_BORDER_VALUES) {
+            assertTrue(Deadline.isValidDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_MIXED) {
+            assertTrue(Deadline.isValidDeadline(deadline));
+        }
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test
     public void equals() {
         Deadline deadline = new Deadline("01-01-2020");

@@ -33,7 +33,6 @@ public class ParserUtilTest {
     private static final String INVALID_PROJECT_STATUS = "unknown";
     private static final String INVALID_PAYMENT_STATUS = "unknown";
     private static final String INVALID_CLIENT_STATUS = "referral";
-    private static final String INVALID_DEADLINE = "12-13-2024";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -42,15 +41,13 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PROJECT_STATUS = "in progress";
-    private static final String VALID_PROJECT_STATUS_2 = "completed";
+    // private static final String VALID_PROJECT_STATUS_2 = "completed";
     private static final String VALID_PAYMENT_STATUS = "pending";
-    private static final String VALID_PAYMENT_STATUS_2 = "paid";
+    // private static final String VALID_PAYMENT_STATUS_2 = "paid";
     private static final String VALID_CLIENT_STATUS = "active";
     private static final String VALID_CLIENT_STATUS_2 = "unresponsive";
     private static final String VALID_CLIENT_STATUS_3 = "potential";
     private static final String VALID_CLIENT_STATUS_4 = "old";
-    private static final String VALID_DEADLINE = "12-12-2024";
-    private static final String VALID_DEADLINE_2 = "10-10-2024";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -294,26 +291,41 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDeadline_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeadline((String) null));
+    public void parseDeadline_validValues_returnsDeadline() throws Exception {
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_EASY) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_DIFFERENT_DELIMITERS) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_SHORT_STRINGS) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_BORDER_VALUES) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_MIXED) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
     }
 
     @Test
-    public void parseDeadline_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDeadline(INVALID_DEADLINE));
-    }
-
-    @Test
-    public void parseDeadline_validValueWithoutWhitespace_returnsDeadline() throws Exception {
-        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
-        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE));
-    }
-
-    @Test
-    public void parseDeadline_validValueWithWhitespace_returnsTrimmedDeadline() throws Exception {
-        String deadlineWithWhitespace = WHITESPACE + VALID_DEADLINE_2 + WHITESPACE;
-        Deadline expectedDeadline = new Deadline(VALID_DEADLINE_2);
-        assertEquals(expectedDeadline, ParserUtil.parseDeadline(deadlineWithWhitespace));
+    public void parseDeadline_validValuesWithWhitespace_returnsDeadline() throws Exception {
+        String[] deadlinesWithWhitespace = new String[] {
+            "  10-10-2024",
+            "10-10-2024  ",
+            " 10/10/2024 ",
+            "\t10|10|2024\n",
+        };
+        Deadline expected = new Deadline("10-10-2024");
+        for (String deadline : deadlinesWithWhitespace) {
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
     }
 
 }
