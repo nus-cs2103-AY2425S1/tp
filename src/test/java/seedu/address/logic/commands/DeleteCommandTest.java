@@ -138,6 +138,7 @@ public class DeleteCommandTest {
         // different types -> returns false
         assertFalse(deleteByIndexCommand1.equals(1));
         assertFalse(deleteByNameCommand1.equals("string"));
+        assertFalse(deleteByIndexCommand1.equals(deleteByNameCommand1));
 
         // null -> returns false
         assertFalse(deleteByIndexCommand1.equals(null));
