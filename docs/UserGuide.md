@@ -85,6 +85,32 @@ Adds a person to the address book.
 Command aliases: `addc`
 Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+<box type="important">
+
+##### Constraints
+
+* `NAME` can only contain alphanumeric characters, spaces, and one of the following symbols: hyphen, comma, and apostrophe.
+* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator preceded "S/O" or "D/O" can be included, but must be followed with the name of person with stated relationship.
+* Duplicated `NAME` is not allowed.
+* If there is already a person with similar `NAME` (same name excluding space and casing), a warning will be given.
+* `PHONE_NUMBER` should only contains numbers, and it should at least be 3 digits long.
+* `EMAIL` should be of the format `local-part`@`domain` and adhere to the following constraints:
+  * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
+  * The `local-part` may not start or end with any special characters.
+  * This is followed by a '@' and then a `domain` name.
+  * The `domain` name is made up of domain labels separated by periods.
+  * The `domain` name must:
+      - end with a domain label at least 2 characters long
+      - have each domain label start and end with alphanumeric characters
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any
+* `ADDRESS` can take any values, and it should not be blank.
+* `TAG` should be alphanumeric.
+* Duplicated `TAG` will be ignored.
+* If similar `TAG` (same name excluding space and casing) are added, a warning will be given.
+
+</box>
+
+
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
