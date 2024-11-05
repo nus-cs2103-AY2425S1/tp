@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.HashSet;
 import java.util.List;
@@ -177,6 +178,39 @@ public class SortCommandTest {
         assertEquals("Charlie", sortedList.get(2).getName().fullName);
         assertEquals("Alice", sortedList.get(3).getName().fullName);
         assertEquals("Null", sortedList.get(4).getName().fullName);
+    }
+
+    @Test
+    public void equals() {
+        SortCommand sortCommand1 = new SortCommand("dummy", "asc");
+        SortCommand sortCommand2 = new SortCommand("dummy", "desc");
+        SortCommand emptyStringNameCommand = new SortCommand("", "desc");
+        SortCommand sortCommandNullName1 = new SortCommand(null, "asc");
+        SortCommand sortCommandNullName2 = new SortCommand(null, "desc");
+
+        // Expected for both to equal due to same tag name
+        assertEquals(sortCommand1, sortCommand2);
+        // Expected to not equal due to different tag names
+        assertNotEquals(sortCommand2, emptyStringNameCommand);
+        assertNotEquals(sortCommand2, sortCommandNullName1);
+        // Null object case
+        assertNotEquals(sortCommand2, null);
+        // Expected for both to equal due to null name
+        assertEquals(sortCommandNullName1, sortCommandNullName2);
+    }
+
+    @Test
+    public void toStringMethod() {
+        SortCommand command = new SortCommand("dummy", "asc");
+        SortCommand emptyStringNameCommand = new SortCommand("", "asc");
+        SortCommand nullNameCommand = new SortCommand(null, "asc");
+        // Test using non-empty string as name
+        assertEquals("seedu.address.logic.commands.SortCommand{tagName=dummy}", command.toString());
+        // Test using empty string as name
+        assertEquals("seedu.address.logic.commands.SortCommand{tagName=}",
+                emptyStringNameCommand.toString());
+        // Test using null as name
+        assertEquals("seedu.address.logic.commands.SortCommand{tagName=null}", nullNameCommand.toString());
     }
 }
 
