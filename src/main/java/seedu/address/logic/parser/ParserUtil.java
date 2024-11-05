@@ -158,6 +158,7 @@ public class ParserUtil {
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
         if (!Transaction.isValidAmount(trimmedAmount)) {
+            logger.fine("ParseException caused by invalid amount.");
             throw new ParseException(Transaction.MESSAGE_CONSTRAINTS);
         }
         return Double.parseDouble(trimmedAmount);
