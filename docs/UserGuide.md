@@ -6,7 +6,32 @@ title: User Guide
 AB3 My Guest is a **desktop app for managing wedding guests, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 My Guest can get your guest management tasks done faster than traditional methods of managing guest lists!
 
 * Table of Contents
-{:toc}
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Viewing help](#viewing-help--help)
+    * [Listing all Guest](#listing-all-guests--list)
+    * [Adding a Guest](#adding-a-guest-add)
+    * [Deleting a Guest](#deleting-a-guest--delete)
+    * [Editing a Guest](#editing-a-guest--edit)
+    * [Viewing Guest Details](#viewing-guest-details)
+    * [Creating a New Tag](#creating-a-new-tag-newtag)
+    * [Deleting an Existing Tag](#deleting-an-existing-tag-deletetag)
+    * [Renaming a Tag](#renaming-a-tag--renametag)
+    * [Tagging a Guest](#tagging-a-guest-tag)
+    * [Removing a Tag from Guest](#removing-a-tag-from-a-guest-untag)
+    * [Setting RSVP Status for Guest](#setting-rsvp-status-for-a-guest--setrsvp)
+    * [Filtering using RSVP Status or Tags](#filtering-using-rsvp-status-or-tags--filter)
+    * [Locating Guests by Name](#locating-guests-by-name-find)
+    * [Undoing Previous Command](#undoing-previous-command--undo)
+    * [Clearing All Entries](#clearing-all-entries--clear)
+* [Exiting the Program](#exiting-the-program--exit)
+* [Saving the Data](#saving-the-data)
+* [Editing the Data File](#editing-the-data-file)
+* [Archiving Data Files](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -247,8 +272,8 @@ Examples:
 
 Toggles the RSVP status for a guest between `Coming`, `Not Coming` and `Pending`.
 
-Format: `setrsvp INDEX STATUS_INDEX`
-* Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer**
+Format: `setrsvp INDEX s/STATUS_INDEX`
+* Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer** and valid index starts from 1.
 * `STATUS_INDEX` accepts 3 possible values:
   * `1` represents `Coming`
   * `2` represents `Not Coming`
@@ -259,9 +284,9 @@ You may only set one guest's RSVP status in each command. i.e. Setting multiple 
 </div>
 
 Example:
-* `setrsvp 1 1`
-* `setrsvp 2 3`
-* `setrsvp 1 2`
+* `setrsvp 1 s/1`
+* `setrsvp 2 s/3`
+* `setrsvp 1 s/2`
 
 ![setRsvpCommand](images/setRsvpCommand.png)
 
