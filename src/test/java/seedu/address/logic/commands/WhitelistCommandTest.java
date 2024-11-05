@@ -13,6 +13,7 @@ import static seedu.address.testutil.BlacklistedPersons.getBlacklistedAddressBoo
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -27,10 +28,16 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class WhitelistCommandTest {
+    private Model normalModel;
+    private Model blacklistedModel;
+    @BeforeEach
+    public void setUp() {
+        normalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+        blacklistedModel = new ModelManager(getBlacklistedAddressBook(), new UserPrefs(),
+                new ArchivedAddressBook());
+        blacklistedModel.setArchivedListMode(false);
+    }
 
-    private Model normalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
-    private Model blacklistedModel = new ModelManager(getBlacklistedAddressBook(), new UserPrefs(),
-            new ArchivedAddressBook());
 
     @Test
     public void whitelist_validPersonSetClientStatusActive_success() {

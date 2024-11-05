@@ -41,20 +41,20 @@ public class UnarchiveCommandTest {
     }
 
     @Test
+    public void execute_validIndexMainList_throwsCommandException() {
+        model.setArchivedListMode(false);
+        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(unarchiveCommand, model, UnarchiveCommand.MESSAGE_NOT_IN_ARCHIVED_LIST);
+    }
+
+    @Test
     public void execute_invalidIndexArchivedList_throwsCommandException() {
         model.setArchivedListMode(true);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         UnarchiveCommand unarchiveCommand = new UnarchiveCommand(outOfBoundIndex);
 
         assertCommandFailure(unarchiveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexMainList_throwsCommandException() {
-        model.setArchivedListMode(false);
-        UnarchiveCommand unarchiveCommand = new UnarchiveCommand(INDEX_FIRST_PERSON);
-
-        assertCommandFailure(unarchiveCommand, model, UnarchiveCommand.MESSAGE_NOT_IN_ARCHIVED_LIST);
     }
 
     @Test
