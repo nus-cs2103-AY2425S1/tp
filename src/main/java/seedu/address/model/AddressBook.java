@@ -275,6 +275,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireAllNonNull(employeeId);
         assignments.remove(projectId, employeeId);
     }
+
+    /**
+     * Removes all {@code assignment} from this {@code AddressBook}
+     * with matching {@code EmployeeId}.
+     */
+    public boolean removeAllAssignments(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        return assignments.removeAll(employeeId);
+    }
+
+    /**
+     * Removes all {@code assignment} from this {@code AddressBook}
+     * with matching {@code ProjectId}.
+     */
+    public boolean removeAllAssignments(ProjectId projectId) {
+        requireNonNull(projectId);
+        return assignments.removeAll(projectId);
+    }
+
     //// util methods
 
     @Override

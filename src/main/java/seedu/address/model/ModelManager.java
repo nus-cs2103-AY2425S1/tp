@@ -212,6 +212,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAllAssignments(EmployeeId targetEmployeeId) {
+        addressBook.removeAllAssignments(targetEmployeeId);
+    }
+
+    @Override
+    public void deleteAllAssignments(ProjectId targetProjectId) {
+        addressBook.removeAllAssignments(targetProjectId);
+    }
+
+    @Override
     public void addAssignment(Assignment assignment) {
         addressBook.addAssignment(assignment);
     }

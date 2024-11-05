@@ -182,6 +182,18 @@ public interface Model {
     void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId);
 
     /**
+     * Deletes the all assignments with matching {@code EmployeeId}
+     * The assignment must exist in the address book.
+     */
+    void deleteAllAssignments(EmployeeId targetEmployeeId);
+
+    /**
+     * Deletes the all assignments with matching {@code ProjectId}
+     * The assignment must exist in the address book.
+     */
+    void deleteAllAssignments(ProjectId targetProjectId);
+
+    /**
      * Adds the given assignment.
      * {@code assignment} must not already exist in the address book.
      */
