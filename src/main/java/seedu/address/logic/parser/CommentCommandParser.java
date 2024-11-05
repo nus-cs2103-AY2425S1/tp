@@ -31,11 +31,7 @@ public class CommentCommandParser implements Parser<CommentCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMMENT);
 
         Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE), ive);
-        }
+        index = ParserUtil.parseIndex(argMultimap.getPreamble());
         String comment = argMultimap.getValue(PREFIX_COMMENT).orElse("");
         return new CommentCommand(index, new Comment(comment));
     }
