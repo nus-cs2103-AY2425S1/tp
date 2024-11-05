@@ -15,7 +15,7 @@ public abstract class Order {
     private final LocalDateTime orderDate;
     private final List<? extends Product> items;
     private OrderStatus status;
-    private final Person person;
+    private Person person;
 
     /**
      * Constructs an {@code Order} with the specified customer, list of items, and initial status.
@@ -39,6 +39,10 @@ public abstract class Order {
      */
     public Person getPerson() {
         return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     /**
