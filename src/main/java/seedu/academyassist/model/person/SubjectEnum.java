@@ -46,6 +46,21 @@ public enum SubjectEnum {
     }
 
     /**
+     * Returns a string containing all the available subjects.
+     *
+     * @return A string containing all the available subjects.
+     */
+    public static String getSubjectNames() {
+        StringBuilder subjects = new StringBuilder();
+        for (SubjectEnum s : values()) {
+            subjects.append(s.getSubjectName()).append(", ");
+        }
+
+        // remove the trailing comma and space for the last subject.
+        return subjects.substring(0, subjects.length() - 2);
+    }
+
+    /**
      * Checks if the given subject is valid.
      * A valid subject matches any of the available subjects, case-insensitive.
      *
