@@ -32,6 +32,7 @@ import seedu.sellsavvy.model.order.Status;
 public class EditOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "editorder";
+    public static final String COMMAND_ALIAS = "edito";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the order identified "
             + "by the index number used in the displayed order list. "

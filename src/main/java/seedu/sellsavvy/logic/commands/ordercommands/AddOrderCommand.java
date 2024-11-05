@@ -26,6 +26,7 @@ import seedu.sellsavvy.model.person.Person;
 public class AddOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "addorder";
+    public static final String COMMAND_ALIAS = "addo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order under the specified customer.\n"
             + "Parameters: INDEX (must be a positive integer) "
