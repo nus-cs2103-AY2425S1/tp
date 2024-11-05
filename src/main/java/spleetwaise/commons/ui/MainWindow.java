@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import spleetwaise.address.ui.PersonListPanel;
 import spleetwaise.commons.core.GuiSettings;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
