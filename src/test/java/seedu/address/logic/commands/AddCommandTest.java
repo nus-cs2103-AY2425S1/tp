@@ -54,6 +54,34 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_invalidSubjectStudent_throwsCommandException() {
+        // upper secondary
+        Student invalidStudent = new StudentBuilder().withLevel("S3 NA").withSubjects("Math").build();
+        AddCommand addCommand = new AddCommand(invalidStudent);
+        ModelStub modelStub = new ModelStubWithStudent(invalidStudent);
+
+        String expectedMessageUpperSec = "Subject is not valid for given level. "
+                + "Valid subjects for S3 NA: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
+                + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
+                + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
+
+        assertThrows(CommandException.class, expectedMessageUpperSec, () -> addCommand.execute(modelStub));
+
+        // lower secondary
+        invalidStudent = new StudentBuilder().withLevel("S1 IP").withSubjects("combined_science").build();
+        AddCommand otherAddCommand = new AddCommand(invalidStudent);
+        ModelStub otherModelStub = new ModelStubWithStudent(invalidStudent);
+
+        String expectedMessageLowerSec = "Subject is not valid for given level. Valid subjects for S1 IP: "
+                + "[MATH, SCIENCE, PHYSICS, CHEMISTRY, BIOLOGY, LITERATURE, HISTORY, GEOGRAPHY, SOCIAL_STUDIES, "
+                + "ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";
+
+        assertThrows(CommandException.class, expectedMessageLowerSec, () -> otherAddCommand.execute(otherModelStub));
+    }
+
+
+    @Test
     public void equals() {
         Student alice = new StudentBuilder().withName("Alice").build();
         Student bob = new StudentBuilder().withName("Bob").build();

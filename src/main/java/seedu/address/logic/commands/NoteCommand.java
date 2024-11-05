@@ -60,7 +60,7 @@ public class NoteCommand extends Command {
         }
 
         if (studentToEdit == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+            throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
         }
 
         Student editedStudent = new Student(

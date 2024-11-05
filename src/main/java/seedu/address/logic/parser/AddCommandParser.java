@@ -62,19 +62,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         }
-
         Set<Subject> subjectList = new HashSet<>();
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             if (argMultimap.getValue(PREFIX_LEVEL).isEmpty()) {
                 throw new ParseException(Subject.MESSAGE_LEVEL_NEEDED);
             }
-
             subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
-
-            if (!Subject.isValidSubjectsByLevel(level,
-                    subjectList)) {
-                throw new ParseException(Subject.getValidSubjectMessage());
-            }
         }
 
         Set<LessonTime> lessonTimes = ParserUtil.parseLessonTimes(argMultimap.getAllValues(PREFIX_LESSON_TIME));

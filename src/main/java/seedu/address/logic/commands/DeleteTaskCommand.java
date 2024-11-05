@@ -68,7 +68,7 @@ public class DeleteTaskCommand extends Command {
                 .filter(x -> x.getName().equals(targetName))
                 .findFirst();
         if (optionalStudent.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+            throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
         }
         Student targetStudent = optionalStudent.get();
 

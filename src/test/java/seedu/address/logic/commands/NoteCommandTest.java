@@ -59,7 +59,7 @@ public class NoteCommandTest {
     public void execute_invalidStudentName_failure() {
         Name invalidName = new Name("FancyPants");
         NoteCommand noteCommand = new NoteCommand(invalidName, new Note(VALID_NOTE_BOB));
-        assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+        assertCommandFailure(noteCommand, model, Messages.MESSAGE_STUDENT_NOT_FOUND);
     }
 
     @Test

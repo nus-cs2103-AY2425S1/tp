@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
         }
 
         if (studentToView == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+            throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
         }
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, name),

@@ -170,7 +170,6 @@ public class UpdateCommandTest {
 
     @Test
     public void execute_updateStudentWithNoSubjectsWithLevel_success() {
-
         //Remove subjects of student in address book
         Student studentInList = model.getAddressBook()
                 .getStudentList()
