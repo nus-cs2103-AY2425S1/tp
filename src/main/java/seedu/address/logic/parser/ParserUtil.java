@@ -203,15 +203,14 @@ public class ParserUtil {
                     .map(Integer::parseInt)
                     .peek(i -> {
                         if (i < 1) {
-                            throw new IllegalArgumentException("Error: Negative or zero contact index's are not allowed. " +
-                                    "Please specify a positive index within range.");
+                            throw new IllegalArgumentException("Negative or zero index.");
                         }
                     })
                     .map(i -> Index.fromOneBased(i))
                     .collect(Collectors.toSet());
 
         } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException(Wedding.MESSAGE_CONSTRAINTS);
         }
         String[] indexArray = personIndexString.split("\\s+");
         Set<String> inputIndexSet = new HashSet<>(List.of(indexArray));
