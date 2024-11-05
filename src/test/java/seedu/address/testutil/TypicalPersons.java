@@ -57,6 +57,11 @@ public class TypicalPersons {
             .withDeadline("08-08-2024")
             .build();
 
+    public static final Person FIONA_2 = new PersonBuilder().withName("Fiona Kunz").withPhone("1482427")
+            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withDeadline("08-08-2024")
+            .build();
+
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withDeadline("07-07-2024")
@@ -96,6 +101,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, FIONA_2, GEORGE));
     }
 }
