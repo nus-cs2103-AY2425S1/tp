@@ -46,6 +46,12 @@ public class MarkDeliveryCommand extends Command {
         }
 
         Delivery deliveryToMark = model.getFilteredDeliveryList().get(index.getZeroBased());
+
+        if (deliveryToMark.getDeliveryStatus().equals(status)) {
+            throw new CommandException(String.format(Messages.MESSAGE_DELIVERY_ALREADY_HAS_STATUS,
+                    Messages.formatWithoutStatus(deliveryToMark), status));
+        }
+
         Delivery markedDelivery = new Delivery(
                 deliveryToMark.getDeliveryProduct(),
                 deliveryToMark.getDeliverySender(),
@@ -56,7 +62,8 @@ public class MarkDeliveryCommand extends Command {
 
         model.setDelivery(deliveryToMark, markedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_MARK_DELIVERY_SUCCESS, Messages.format(deliveryToMark), status));
+        return new CommandResult(String.format(MESSAGE_MARK_DELIVERY_SUCCESS,
+                Messages.formatWithoutStatus(deliveryToMark), status));
     }
 
     @Override
