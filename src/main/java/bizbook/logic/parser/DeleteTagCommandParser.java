@@ -6,22 +6,22 @@ import static java.util.Objects.requireNonNull;
 
 import bizbook.commons.core.index.Index;
 import bizbook.commons.exceptions.IllegalValueException;
-import bizbook.logic.commands.RemoveTagCommand;
+import bizbook.logic.commands.DeleteTagCommand;
 import bizbook.logic.parser.exceptions.ParseException;
 import bizbook.model.tag.Tag;
 
 /**
- * Parses input arguments and returns a new RemoveTagCommand object
+ * Parses input arguments and returns a new DeleteTagCommand object
  */
-public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
+public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
     /**
-     * Parses the given {@code userInput} of arguments in the context of the RemoveTagCommand
-     * and returns an RemoveTagCommand object for execution.
+     * Parses the given {@code userInput} of arguments in the context of the DeleteTagCommand
+     * and returns a DeleteTagCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RemoveTagCommand parse(String userInput) throws ParseException {
+    public DeleteTagCommand parse(String userInput) throws ParseException {
 
         requireNonNull(userInput);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TAG);
@@ -36,10 +36,10 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
 
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RemoveTagCommand.MESSAGE_USAGE), ive);
+                    DeleteTagCommand.MESSAGE_USAGE), ive);
         }
 
-        return new RemoveTagCommand(personIndex, tagToDelete);
+        return new DeleteTagCommand(personIndex, tagToDelete);
     }
 
 }

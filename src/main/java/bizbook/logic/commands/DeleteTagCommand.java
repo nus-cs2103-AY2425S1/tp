@@ -21,9 +21,9 @@ import bizbook.model.person.Phone;
 import bizbook.model.tag.Tag;
 
 /**
- * Remove a tag from an existing person in the address book.
+ * Delete a tag from an existing person in the address book.
  */
-public class RemoveTagCommand extends Command {
+public class DeleteTagCommand extends Command {
 
     public static final String COMMAND_WORD = "removetag";
 
@@ -33,7 +33,7 @@ public class RemoveTagCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "BusniessMan";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Tag was removed from Person: %1$s";
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Tag was removed from Person: %1$s";
     public static final String TAG_DOES_NOT_EXIST = "Unable to delete %1$s "
             + "because the tag does not exist for the person.";
 
@@ -44,7 +44,7 @@ public class RemoveTagCommand extends Command {
      * @param personIndex of the person in the filtered person list to remove the tag from.
      * @param tag         is the name of the tag to be removed from the {@code Person}.
      */
-    public RemoveTagCommand(Index personIndex, Tag tag) {
+    public DeleteTagCommand(Index personIndex, Tag tag) {
         requireAllNonNull(personIndex, tag);
 
         this.personIndex = personIndex;
@@ -81,7 +81,23 @@ public class RemoveTagCommand extends Command {
 
         model.setPerson(personToEdit, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.format(personToEdit)));
+        return new CommandResult(String.format(MESSAGE_REMOVE_TAG_SUCCESS, Messages.format(updatedPerson)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteTagCommand)) {
+            return false;
+        }
+
+        DeleteTagCommand otherDeleteTagCommand = (DeleteTagCommand) other;
+        return this.personIndex.equals(otherDeleteTagCommand.personIndex)
+                && this.tagToDelete.equals(otherDeleteTagCommand.tagToDelete);
     }
 
 }
