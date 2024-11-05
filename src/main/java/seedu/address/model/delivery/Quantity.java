@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Quantity should be a positive number followed by a valid unit (e.g., 100 kg, 100 liters). "
-                    + "Valid units are: kg, g, liters, ml, units";
+            "Quantity should be a positive number followed by a space and then a valid unit (e.g., 100 kg, 100 L)."
+                    + "Valid units are: kg, g, L, mL, units";
 
-    public static final String VALIDATION_REGEX = "^([1-9]\\d*)(\\s+)(kg|g|liters|ml|units)$";
+    public static final String VALIDATION_REGEX = "^([1-9]\\d*)(\\s+)(kg|g|L|mL|units)$";
 
     public final String value;
 

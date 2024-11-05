@@ -24,8 +24,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeliveryCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
@@ -52,7 +52,7 @@ import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.SupplierSortComparator;
 import seedu.address.model.supplier.SupplierSortNameComparator;
 import seedu.address.model.supplier.SupplierStatus;
-import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
@@ -67,8 +67,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Supplier supplier = new SupplierBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
-        assertEquals(new AddCommand(supplier), command);
+        AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
+        assertEquals(new AddSupplierCommand(supplier), command);
     }
 
     @Test
@@ -158,7 +158,7 @@ public class AddressBookParserTest {
     public void parseCommand_findSupplier() throws Exception {
         String commandInput = "find -s n/Linkes pro/Iphone";
         List<Predicate<Supplier>> listOfPredicates = new ArrayList<>();
-        listOfPredicates.add(new NameContainsPredicate("Linkes"));
+        listOfPredicates.add(new NameContainsKeywordPredicate("Linkes"));
         listOfPredicates.add(new ProductContainsKeywordPredicate("Iphone"));
 
         FindSupplierCommand command = (FindSupplierCommand) parser.parseCommand(commandInput);

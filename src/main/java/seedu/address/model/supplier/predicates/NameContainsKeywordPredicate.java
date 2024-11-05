@@ -6,9 +6,9 @@ import seedu.address.model.supplier.Supplier;
 /**
  * Tests that a {@code Supplier}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsPredicate extends SupplierPredicate {
+public class NameContainsKeywordPredicate extends SupplierPredicate {
 
-    public NameContainsPredicate(String keywords) {
+    public NameContainsKeywordPredicate(String keywords) {
         super(keywords);
     }
 
@@ -25,11 +25,11 @@ public class NameContainsPredicate extends SupplierPredicate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsPredicate)) {
+        if (!(other instanceof NameContainsKeywordPredicate)) {
             return false;
         }
 
-        NameContainsPredicate otherNameContainsPredicate = (NameContainsPredicate) other;
+        NameContainsKeywordPredicate otherNameContainsPredicate = (NameContainsKeywordPredicate) other;
         return super.equals(otherNameContainsPredicate);
     }
 

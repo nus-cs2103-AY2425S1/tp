@@ -42,7 +42,7 @@ import static seedu.address.testutil.TypicalSuppliers.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Company;
 import seedu.address.model.supplier.Email;
@@ -64,7 +64,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + COMPANY_DESC_BOB + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD,
-                new AddCommand(expectedSupplier));
+                new AddSupplierCommand(expectedSupplier));
 
 
         // multiple tags - all accepted
@@ -72,14 +72,14 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD,
-                new AddCommand(expectedSupplierMultipleTags));
+                new AddSupplierCommand(expectedSupplierMultipleTags));
 
         // multiple products - all accepted
         Supplier expectedSupplierMultipleProducts = new SupplierBuilder(BOB)
                 .withProducts(VALID_PRODUCT_BREAD, VALID_PRODUCT_RICE).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD + PRODUCT_DESC_RICE,
-                new AddCommand(expectedSupplierMultipleProducts));
+                new AddSupplierCommand(expectedSupplierMultipleProducts));
     }
 
     @Test
@@ -153,12 +153,12 @@ public class AddCommandParserTest {
         Supplier expectedSupplier = new SupplierBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + COMPANY_DESC_AMY
                 + PRODUCT_DESC_BREAD + PRODUCT_DESC_RICE,
-                new AddCommand(expectedSupplier));
+                new AddSupplierCommand(expectedSupplier));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + COMPANY_DESC_BOB,
@@ -215,6 +215,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + COMPANY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD + PRODUCT_DESC_RICE,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE));
     }
 }

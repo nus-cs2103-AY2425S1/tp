@@ -31,7 +31,7 @@ public class AddCommandTest {
 
     @Test
     public void constructor_nullSupplier_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddSupplierCommand(null));
     }
 
     @Test
@@ -39,9 +39,9 @@ public class AddCommandTest {
         ModelStubAcceptingSupplierAdded modelStub = new ModelStubAcceptingSupplierAdded();
         Supplier validSupplier = new SupplierBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validSupplier).execute(modelStub);
+        CommandResult commandResult = new AddSupplierCommand(validSupplier).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validSupplier)),
+        assertEquals(String.format(AddSupplierCommand.MESSAGE_SUCCESS, Messages.format(validSupplier)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validSupplier), modelStub.suppliersAdded);
     }
@@ -49,25 +49,25 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateSupplier_throwsCommandException() {
         Supplier validSupplier = new SupplierBuilder().build();
-        AddCommand addCommand = new AddCommand(validSupplier);
+        AddSupplierCommand addCommand = new AddSupplierCommand(validSupplier);
         ModelStub modelStub = new ModelStubWithSupplier(validSupplier);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_SUPPLIER, () -> addCommand.execute(modelStub));
+                AddSupplierCommand.MESSAGE_DUPLICATE_SUPPLIER, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Supplier alice = new SupplierBuilder().withName("Alice").build();
         Supplier bob = new SupplierBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddSupplierCommand addAliceCommand = new AddSupplierCommand(alice);
+        AddSupplierCommand addBobCommand = new AddSupplierCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddSupplierCommand addAliceCommandCopy = new AddSupplierCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -82,8 +82,8 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddSupplierCommand addCommand = new AddSupplierCommand(ALICE);
+        String expected = AddSupplierCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 

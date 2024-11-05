@@ -33,14 +33,14 @@ public class QuantityTest {
         assertFalse(Quantity.isValidQuantity("100abc")); // no space between number and unit
         assertFalse(Quantity.isValidQuantity("100 grams")); // invalid unit (grams instead of g)
         assertFalse(Quantity.isValidQuantity("100g")); // no space between number and unit
-        assertFalse(Quantity.isValidQuantity("1 liters   ")); // space at the end
-        assertFalse(Quantity.isValidQuantity("  1 liters   ")); // space at the start
+        assertFalse(Quantity.isValidQuantity("1 L   ")); // space at the end
+        assertFalse(Quantity.isValidQuantity("  1 L   ")); // space at the start
 
         // valid quantities
         assertTrue(Quantity.isValidQuantity("100 kg")); // valid kilogram quantity
         assertTrue(Quantity.isValidQuantity("50 g")); // valid gram quantity
-        assertTrue(Quantity.isValidQuantity("200       liters")); // valid liters quantity with spaces in middle
-        assertTrue(Quantity.isValidQuantity("300   ml")); // valid milliliters quantity with random spaces
+        assertTrue(Quantity.isValidQuantity("200       L")); // valid liters quantity with spaces in middle
+        assertTrue(Quantity.isValidQuantity("300   mL")); // valid milliliters quantity with random spaces
         assertTrue(Quantity.isValidQuantity("300 units")); // valid milliliters quantity with random spaces
 
     }
@@ -62,6 +62,6 @@ public class QuantityTest {
         assertFalse(quantity.equals(5));
 
         // different values -> returns false
-        assertFalse(quantity.equals(new Quantity("200 liters")));
+        assertFalse(quantity.equals(new Quantity("200 L")));
     }
 }
