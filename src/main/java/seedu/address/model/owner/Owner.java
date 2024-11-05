@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.link.Linkable;
-import seedu.address.model.pet.Pet;
 
 /**
  * Represents an Owner in PawPatrol.
@@ -62,11 +61,13 @@ public class Owner implements Linkable {
         return linkedPets;
     }
 
-    public void addLinkedPet(Pet pet) {
+    @Override
+    public void addLinkedEntity(Linkable pet) {
         linkedPets.add(pet);
     }
 
-    public void removeLinkedPet(Pet pet) {
+    @Override
+    public void removeLinkedEntity(Linkable pet) {
         linkedPets.remove(pet);
     }
 
@@ -115,6 +116,11 @@ public class Owner implements Linkable {
     @Override
     public String getUniqueID() {
         return identificationNumber.value;
+    }
+
+    @Override
+    public String getInfo() {
+        return getName().toString();
     }
 
     @Override

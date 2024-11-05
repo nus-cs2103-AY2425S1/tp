@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.link.Linkable;
 import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.exceptions.DuplicatePetException;
 import seedu.address.model.pet.exceptions.PetNotFoundException;
@@ -49,8 +50,9 @@ public class LinkedPetList implements Iterable<Pet> {
      * Adds a pet to the list.
      * The pet must not already exist in the list.
      */
-    public void add(Pet toAdd) {
-        requireNonNull(toAdd);
+    public void add(Linkable target) {
+        requireNonNull(target);
+        Pet toAdd = (Pet) target;
         if (contains(toAdd)) {
             throw new DuplicatePetException();
         }
@@ -81,12 +83,12 @@ public class LinkedPetList implements Iterable<Pet> {
      * Removes the equivalent pet from the list.
      * The pet must exist in the list.
      */
-    public void remove(Pet toRemove) {
-        requireNonNull(toRemove);
+    public void remove(Linkable target) {
+        requireNonNull(target);
+        Pet toRemove = (Pet) target;
         if (!internalList.remove(toRemove)) {
             throw new PetNotFoundException();
         }
-        System.out.println("hi");
     }
 
     public void setPets(LinkedPetList replacement) {

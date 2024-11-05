@@ -33,7 +33,7 @@ public class LinkTest {
     @Test
     public void descriptionMethod() {
         Link link = new Link(ALICE, AARFUL);
-        String expected = "Link from owner " + ALICE.getUniqueID() + " to pet " + AARFUL.getUniqueID().substring(1);
+        String expected = "Link from owner " + ALICE.getInfo() + " to pet " + AARFUL.getInfo();
         assertEquals(expected, new Link(ALICE, AARFUL).description());
     }
 

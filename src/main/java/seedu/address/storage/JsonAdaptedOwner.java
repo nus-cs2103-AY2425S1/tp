@@ -11,8 +11,6 @@ import seedu.address.model.owner.Name;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.Phone;
 
-import java.util.List;
-
 /**
  * Jackson-friendly version of {@link Owner}.
  */

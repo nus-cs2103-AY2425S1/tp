@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.link.Link;
 import seedu.address.model.owner.LinkedPetList;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.pet.Pet;
@@ -35,7 +34,7 @@ public class OwnerCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label linkedPets;  // Label to display linked pets
+    private Label linkedPets; //Label to display linked pets
 
     private ObservableList<Pet> petList;
 

@@ -5,14 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.link.Linkable;
-import seedu.address.model.owner.LinkedPetList;
-import seedu.address.model.owner.Owner;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -97,11 +94,13 @@ public class Pet implements Linkable {
         return linkedOwner;
     }
 
-    public void addLinkedOwner(Owner owner) {
+    @Override
+    public void addLinkedEntity(Linkable owner) {
         linkedOwner.add(owner);
     }
 
-    public void removeLinkedPet(Owner owner) {
+    @Override
+    public void removeLinkedEntity(Linkable owner) {
         linkedOwner.remove(owner);
     }
 
@@ -149,6 +148,11 @@ public class Pet implements Linkable {
     @Override
     public String getUniqueID() {
         return uniqueId;
+    }
+
+    @Override
+    public String getInfo() {
+        return getName().toString();
     }
 
     @Override

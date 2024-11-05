@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.link.Linkable;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.exceptions.DuplicateOwnerException;
 import seedu.address.model.owner.exceptions.OwnerNotFoundException;
@@ -50,8 +51,9 @@ public class LinkedOwnerList implements Iterable<Owner> {
      * Adds a Owner to the list.
      * The Owner must not already exist in the list.
      */
-    public void add(Owner toAdd) {
-        requireNonNull(toAdd);
+    public void add(Linkable target) {
+        requireNonNull(target);
+        Owner toAdd = (Owner) target;
         if (contains(toAdd)) {
             throw new DuplicateOwnerException();
         }
@@ -85,12 +87,12 @@ public class LinkedOwnerList implements Iterable<Owner> {
      * Removes the equivalent Owner from the list.
      * The Owner must exist in the list.
      */
-    public void remove(Owner toRemove) {
-        requireNonNull(toRemove);
+    public void remove(Linkable target) {
+        requireNonNull(target);
+        Owner toRemove = (Owner) target;
         if (!internalList.remove(toRemove)) {
             throw new OwnerNotFoundException();
         }
-        System.out.println("hi");
     }
 
     public void setOwners(LinkedOwnerList replacement) {
@@ -102,13 +104,13 @@ public class LinkedOwnerList implements Iterable<Owner> {
      * Replaces the contents of this list with {@code Owners}.
      * {@code Owners} must not contain duplicate Owners.
      */
-    public void setOwners(List<Owner> Owners) {
-        requireAllNonNull(Owners);
-        if (!OwnersAreUnique(Owners)) {
+    public void setOwners(List<Owner> owners) {
+        requireAllNonNull(owners);
+        if (!ownersAreUnique(owners)) {
             throw new DuplicateOwnerException();
         }
 
-        internalList.setAll(Owners);
+        internalList.setAll(owners);
     }
 
     /**
@@ -159,10 +161,10 @@ public class LinkedOwnerList implements Iterable<Owner> {
     /**
      * Returns true if {@code Owners} contains only unique Owners.
      */
-    private boolean OwnersAreUnique(List<Owner> Owners) {
-        for (int i = 0; i < Owners.size() - 1; i++) {
-            for (int j = i + 1; j < Owners.size(); j++) {
-                if (Owners.get(i).isSameOwner(Owners.get(j))) {
+    private boolean ownersAreUnique(List<Owner> owners) {
+        for (int i = 0; i < owners.size() - 1; i++) {
+            for (int j = i + 1; j < owners.size(); j++) {
+                if (owners.get(i).isSameOwner(owners.get(j))) {
                     return false;
                 }
             }

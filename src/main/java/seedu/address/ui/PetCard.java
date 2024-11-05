@@ -42,7 +42,7 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label sex;
     @FXML
-    private Label linkedOwner;  // Label to display linked pets
+    private Label linkedOwner; // Label to display linked pets
 
     private ObservableList<Owner> ownerList;
 

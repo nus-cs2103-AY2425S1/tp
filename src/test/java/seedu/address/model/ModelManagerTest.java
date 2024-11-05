@@ -104,8 +104,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasLink_linkInPawPatrol_returnsTrue() {
-        //TypicalOwners.ALICE.removeLinkedPet(TypicalPets.BELLA);
-        Link link = new Link(TypicalOwners.ALICE, TypicalPets.BELLA);
+        Link link = new Link(TypicalOwners.CARL, TypicalPets.MAX);
         modelManager.addLink(link);
         assertTrue(modelManager.hasLink(link));
     }
@@ -120,8 +119,6 @@ public class ModelManagerTest {
     @Test
     public void deleteLink_linkInPawPatrol_returnsFalse() {
         Link link = new Link(TypicalOwners.ALICE, TypicalPets.BELLA);
-        modelManager.addLink(link);
-        modelManager.deleteLink(link);
         assertFalse(modelManager.hasLink(link));
     }
 

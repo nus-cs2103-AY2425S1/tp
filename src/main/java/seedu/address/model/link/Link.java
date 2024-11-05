@@ -38,7 +38,7 @@ public class Link {
      */
     public String description() {
         assert(to.getUniqueID().length() > 1);
-        return "Link from owner " + from.getUniqueID() + " to pet " + to.getUniqueID().substring(1);
+        return "Link from owner " + from.getInfo() + " to pet " + to.getInfo();
     }
 
     /**
