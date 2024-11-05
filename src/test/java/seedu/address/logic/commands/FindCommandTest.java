@@ -32,7 +32,7 @@ public class FindCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
 
     @Test
-    public void equals() {
+    public void equalsMethod() {
         PersonPredicateBuilder firstPredicateBuilder = new PersonPredicateBuilder()
                 .withNameKeywords(List.of("first"));
         PersonPredicateBuilder secondPredicateBuilder = new PersonPredicateBuilder()
@@ -110,6 +110,62 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicateBuilder.build());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void test_executeFindByName_success() {
+        PersonBuilder samSoh = new PersonBuilder().withName("Sam Soh");
+        PersonBuilder samTan = new PersonBuilder().withName("Sam Tan");
+        PersonBuilder samKoh = new PersonBuilder().withName("Sam Koh");
+        PersonBuilder sammyHo = new PersonBuilder().withName("Sammy Ho");
+
+        model.addPerson(samSoh.build());
+        model.addPerson(samTan.build());
+        model.addPerson(samKoh.build());
+        model.addPerson(sammyHo.build());
+
+        expectedModel.addPerson(samSoh.build());
+        expectedModel.addPerson(samTan.build());
+        expectedModel.addPerson(samKoh.build());
+        expectedModel.addPerson(sammyHo.build());
+
+        // Test case for "Sam"
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        PersonPredicateBuilder predicate = preparePredicate("Sam", "name");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(samSoh.build(), samTan.build(), samKoh.build(), sammyHo.build()),
+                model.getFilteredPersonList());
+
+
+        // Test case for "sam"
+        predicate = preparePredicate("sam", "name");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(samSoh.build(), samTan.build(), samKoh.build(), sammyHo.build()),
+                model.getFilteredPersonList());
+
+
+        // Test case for "Sammy"
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        predicate = preparePredicate("Sammy", "name");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(sammyHo.build()), model.getFilteredPersonList());
+
+
+        // Test case for "sAm"
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        predicate = preparePredicate("sAm", "name");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate.build());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(samSoh.build(), samTan.build(), samKoh.build(), sammyHo.build()),
+                model.getFilteredPersonList());
+
     }
 
     @Test
