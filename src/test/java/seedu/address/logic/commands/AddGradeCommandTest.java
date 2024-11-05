@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleAssignmentsUtil;
 import seedu.address.testutil.TypicalPersons;
@@ -30,26 +31,26 @@ public class AddGradeCommandTest {
 
     @Test
     public void assignment_invalidName() {
-        AddGradeCommand command = new AddGradeCommand("John Doe", 0f, "ex10");
+        AddGradeCommand command = new AddGradeCommand(new Name("John Doe"), 0f, "ex10");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void person_invalidName() {
-        AddGradeCommand command = new AddGradeCommand("John DoeDoedoe", 0f, "ex01");
+        AddGradeCommand command = new AddGradeCommand(new Name("John DoeDoedoe"), 0f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void assignment_invalidHighScore() {
-        AddGradeCommand command = new AddGradeCommand("John Doe",
+        AddGradeCommand command = new AddGradeCommand(new Name("John Doe"),
                 100f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void assignment_invalidLowScore() {
-        AddGradeCommand command = new AddGradeCommand("John Doe",
+        AddGradeCommand command = new AddGradeCommand(new Name("John Doe"),
                 -1f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
@@ -57,7 +58,7 @@ public class AddGradeCommandTest {
 
     @Test
     public void constructor_validAddGradeCommandFormat_success() {
-        AddGradeCommand command = new AddGradeCommand("John Doe", 9.0f, "Ex09");
+        AddGradeCommand command = new AddGradeCommand(new Name("John Doe"), 9.0f, "Ex09");
         assertNotNull(command);
     }
 
@@ -66,7 +67,7 @@ public class AddGradeCommandTest {
         Person testPerson = TypicalPersons.ALICE;
         final String name = "Ex02";
         AddGradeCommand command = new AddGradeCommand(
-                testPerson.getName().toString(),
+                testPerson.getName(),
                 9.0f,
                 name);
         command.execute(model);
