@@ -30,12 +30,9 @@ public class DescriptionTest {
     @Test
     public void isValidDescription_invalidInput_returnsFalse() {
         assertFalse(Description.isValidDescription(""));
+        assertFalse(Description.isValidDescription("    "));
 
-        StringBuilder longStringBuilder = new StringBuilder();
-        for (int i = 0; i <= 120; i++) {
-            longStringBuilder.append("+");
-        }
-        String longString = longStringBuilder.toString();
+        String longString = "+".repeat(Description.MAX_LENGTH + 1);
         assertFalse(Description.isValidDescription(longString));
     }
 
@@ -50,7 +47,6 @@ public class DescriptionTest {
         Description desc2 = new Description("same");
 
         assertTrue(desc1.equals(desc2));
-
         assertTrue(desc1.equals(desc1));
     }
 
