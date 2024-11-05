@@ -217,6 +217,55 @@ Example:
 findi i/Swimming
 ```
 
+### Finding Contacts by Major: `findm`
+
+Finds contacts with a specific major.
+
+Format:
+```plaintext
+findm m/MAJOR
+```
+
+* `m/MAJOR`: Major or field of study.
+
+Example:
+```plaintext
+findm m/Computer Science
+```
+
+### Finding Contacts by Work Experience: `findw`
+
+Finds contacts with specific work experiences based on **company** and optionally **role** and **year**.
+
+Format:
+```plaintext
+findw w/COMPANY[,ROLE][,YEAR]
+```
+
+- **`COMPANY`**: Required. The name of the company to search for.
+- **`ROLE`**: Optional. The role or position held at the company (e.g., `Engineer`).
+- **`YEAR`**: Optional. The year of employment at the company.
+
+<box type="info" seamless>
+
+**Note**: The fields `ROLE` and `YEAR` can be omitted, but `COMPANY` must always be specified.
+</box>
+
+Examples:
+- Find all contacts who worked at Google:
+  ```plaintext
+  findw w/Google
+  ```
+- Find contacts who interned at Google:
+  ```plaintext
+  findw w/Intern,Google
+  ```
+- Find contacts who interned at Google in 2024:
+  ```plaintext
+  findw w/Google,Intern,2024
+  ```
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -298,6 +347,8 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find by Interest** | `findi i/INTEREST` <br> e.g., `findi i/Swimming`
+**Find by Work Experience** | `findw w/ROLE,COMPANY` <br> e.g., `findw w/Engineer,Google`
 **Find by University** | `findu u/UNIVERSITY` <br> e.g., `findu u/NUS`
+**Find by Major** | `findm m/MAJOR` <br> e.g., `findm m/Computer Science`
 **List**   | `list`
 **Help**   | `help`
