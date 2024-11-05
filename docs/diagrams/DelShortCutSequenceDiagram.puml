@@ -26,10 +26,6 @@ create DelShortCutCommandParser
 AddressBookParser -> DelShortCutCommandParser : parse("al/v tn/Vegan")
 activate DelShortCutCommandParser
 
-DelShortCutCommandParser -> ":ArgumentTokenizer" : tokenize("al/v tn/Vegan")
-DelShortCutCommandParser -> ":ParserUtil" : parseFullTagName("Vegan")
-DelShortCutCommandParser -> ":ParserUtil" : parseAlias("v")
-
 create DelShortCutCommand
 DelShortCutCommandParser -> DelShortCutCommand : new DelShortCutCommand("v", "Vegan")
 activate DelShortCutCommand

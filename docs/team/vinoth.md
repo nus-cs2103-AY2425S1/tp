@@ -32,6 +32,7 @@ Given below are my contributions to the project.
 * **Documentation**:
 1. Authored the introduction section and Quick Start section of the User Guide, ensuring it was accessible and informative for new users.
 2. Added UML diagram for addShortCut command
+3. Added majority of User stories, NFR, Glossary into Developer Guide
     
 
 * **Community**:

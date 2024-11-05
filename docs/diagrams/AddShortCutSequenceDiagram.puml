@@ -25,10 +25,6 @@ create AddShortCutCommandParser
 AddressBookParser -> AddShortCutCommandParser : parse("al/v tn/Vegan")
 activate AddShortCutCommandParser
 
-AddShortCutCommandParser -> ":ArgumentTokenizer" : tokenize("al/v tn/Vegan")
-AddShortCutCommandParser -> ":ParserUtil" : parseFullTagName("Vegan")
-AddShortCutCommandParser -> ":ParserUtil" : parseAlias("v")
-
 create AddShortCutCommand
 AddShortCutCommandParser -> AddShortCutCommand : new AddShortCutCommand("v", "Vegan")
 activate AddShortCutCommand

@@ -495,31 +495,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                               | So that I can…​                                                                                  |
-| -------- | ------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `* * *`  | manager                                    | add a customer’s detail via a one-line CLI command          | quickly add new customers without >1 step                                                         |
-| `* *`    | manager                                    | retrieve a customer’s detail via a one-line CLI command     | view their details without having to scroll through pages                                          |
-| `* * *`  | manager                                    | delete customer data in one-line CLI                        | delete customers that I want to not deliver to anymore                                             |
-| `* * *`  | manager                                    | search for customers by name                                | quickly access customer profiles during phone orders                                               |
-| `* * *`  | manager                                    | search for customers by phone number                        | quickly access customer profiles during phone orders                                               |
-| `* *`    | manager                                    | edit customer data in one-line CLI                          | update any part of user data in 1 step                                                             |
-| `* *`    | manager                                    | bulk-create multiple customers through a file               | quickly populate the system                                                                        |
-| `* *`    | manager                                    | bulk update multiple customers                              | effectively manage large sets of customers                                                         |
-| `*`      | manager                                    | archive customer data instead of a hard delete              | avoid losing this information permanently                                                          |
-| `*`      | manager                                    | unarchive a customer                                        | continue serving this customer                                                                     |
-| `*`      | manager                                    | list customers by recent order dates                        | quickly identify who is a repeat customer                                                          |
-| `*`      | manager                                    | list customers by order frequency                           | identify regular customers for reward programmes                                                   |
-| `*`      | manager                                    | export customer data as a CSV                               | provide the data to other people to use                                                            |
-| `*`      | manager                                    | convert a CSV file into a readable state file               | have a backup                                                                                      |
-| `*`      | manager                                    | export CSV data using specific criteria                     | reduce the effort needed by others to parse the data                                               |
-| `*`      | manager                                    | validate attributes when adding a customer                  | avoid entering invalid data                                                                        |
-| `*`      | manager                                    | validate attributes when updating a customer                | avoid entering invalid data                                                                        |
-| `*`      | manager                                    | categorise customers as VIP, regular, or new                | know who to target for promotions                                                                  |
-| `*`      | manager                                    | tag customers with dietary restrictions                     | personalise orders and maintain customer service                                                   |
-| `*`      | manager                                    | create a tag                                                | tag customers with a different issue                                                               |
-| `*`      | manager                                    | tag customers with multiple different tags                  | store a pattern of customers                                                                       |
-| `*`      | manager                                    | bulk tag customers with dietary restrictions                | save time                                                                                          |
-| `*`      | manager                                    | search for customers by tag                                 | easily find and manage customers for promotions                                                    |
+| Priority | As a …​                                    | I want to …​                                                         | So that I can…​                                               |
+| -------- | ------------------------------------------ |----------------------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | manager                                    | add a customer’s detail via a one-line CLI command                   | quickly add new customers without >1 step                     |
+| `* *`    | manager                                    | retrieve a customer’s detail via a one-line CLI command              | view their details without having to scroll through pages     |
+| `* * *`  | manager                                    | delete customer data in one-line CLI                                 | delete customers that I want to not deliver to anymore        |
+| `* * *`  | manager                                    | search for customers by name                                         | quickly access customer profiles during phone orders          |
+| `* * *`  | manager                                    | search for customers by phone number                                 | quickly access customer profiles during phone orders          |
+| `* *`    | manager                                    | edit customer data in one-line CLI                                   | update any part of user data in 1 step                        |
+| `* *`    | manager                                    | bulk-create multiple customers through a file                        | quickly populate the system                                   |
+| `* *`    | manager                                    | bulk update multiple customers                                       | effectively manage large sets of customers                    |
+| `* *`    | manager                                    | assign tags to customers easily by setting abbreviations to tagnames | waste time typing out tag names that are already predetermined |
+| `*`      | manager                                    | archive customer data instead of a hard delete                       | avoid losing this information permanently                     |
+| `*`      | manager                                    | unarchive a customer                                                 | continue serving this customer                                |
+| `*`      | manager                                    | list customers by recent order dates                                 | quickly identify who is a repeat customer                     |
+| `*`      | manager                                    | list customers by order frequency                                    | identify regular customers for reward programmes              |
+| `*`      | manager                                    | export customer data as a CSV                                        | provide the data to other people to use                       |
+| `*`      | manager                                    | convert a CSV file into a readable state file                        | have a backup                                                 |
+| `*`      | manager                                    | export CSV data using specific criteria                              | reduce the effort needed by others to parse the data          |
+| `*`      | manager                                    | validate attributes when adding a customer                           | avoid entering invalid data                                   |
+| `*`      | manager                                    | validate attributes when updating a customer                         | avoid entering invalid data                                   |
+| `*`      | manager                                    | categorise customers as VIP, regular, or new                         | know who to target for promotions                             |
+| `*`      | manager                                    | tag customers with dietary restrictions                              | personalise orders and maintain customer service              |
+| `*`      | manager                                    | create a tag                                                         | tag customers with a different issue                          |
+| `*`      | manager                                    | tag customers with multiple different tags                           | store a pattern of customers                                  |
+| `*`      | manager                                    | bulk tag customers with dietary restrictions                         | save time                                                     |
+| `*`      | manager                                    | group customers by tag                                               | easily find and manage customers for promotions               |
 
 
 ### Use cases
@@ -538,6 +539,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. Manager request/invalid/incomplete
   * 1a1. AddressBook shows an error message
   * Use Case Ends
+
+* 1a. Manager tags customer using pre-assigned shortcut
+  * 1a1. Abbreviation is mapped to pre-assigned tag name
+  * Use Case resumes at step 2
 
 **Use case: Search for a customer**
 
@@ -579,6 +584,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use Case: Creating a shortcut**
+
+**MSS**
+
+1. Manager requests to add shortcut
+2. AddressBook adds the shortcut with alias and tag name to UniqueShortcut list
+    
+    Use Case ends
+
+**Extension**
+* 1a. Shortcut format is invalid
+    * 1a1. AddressBook shows error message
+    * Use Case ends
+* 1b. Alias or tag name in shortcut already exists in AddressBook
+  * 1b1. AddressBook shows error message
+  * Use Case ends
+
+**Use Case: Deleting a shortcut**
+
+**MSS**
+
+1. Manager requests to delete shortcut
+2. AddressBook deletes the shortcut with specified alias and tag name in UniqueShortCut list
+
+    Use Case ends
+
+**Extension**
+* 1a. Shortcut format is invalid
+    * 1a1. AddressBook shows error message
+    * Use Case ends
+* 1b. ShortCut does not exist in AddressBook
+    * 1b1. AddressBook shows error message
+    * Use Case ends
 
 ### Non-Functional Requirements
 
