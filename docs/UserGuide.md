@@ -776,41 +776,42 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### Delete Listing
-    - **Format:** `DeleteListingCommand`
+    - **Format:** `deletelisting LISTING_NAME`
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Deleting listing `Warton House`
       >
-      > **Input**:
+      > **Input**: `deletelisting warton house`
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Successfully deleted listing: Warton House
       >
       > ---
 
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `deletelisting Bob House` = `deletelisting BOB HOUSE` = `deletelisting bOb hOUsE` _(Not exhaustive)_
+
+    Thus, these commands will delete the same `Bob House` listing
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `deletelisting bob house Wen Xuan` != `delapt bobhouse`
+    
+    These commands will delete different listings 
+    </div> 
+    <br>
+
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Error**: Listing not found
       >
-      > **Input**:
+      > **Input**: deletelisting nonExistentListing
       >
-      > **Output**:
+      > **Output**: This listing does not exist in EZSTATE
       >
       > ---
 
