@@ -168,6 +168,42 @@
             </VBox>
 
             <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="raHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="raHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="raHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="reHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="reHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="reHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="rdHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="rdHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
               <Label fx:id="exitHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
               <HBox styleClass="commandWrapper">
                 <Label fx:id="exitHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
@@ -176,6 +212,7 @@
                 <Insets bottom="5" left="10" right="10" top="5" />
               </padding>
             </VBox>
+
           </VBox>
         </ScrollPane>
 
