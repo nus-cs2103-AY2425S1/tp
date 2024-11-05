@@ -205,36 +205,7 @@ and more detailed implementation on model changes have been omitted.
 
 </box>
 
-## Template
-
-Separate each feature with dividers
-
-### Feature
-
-#### Implementation details
-
-
-#### Note
-
-For any important information that has been omitted, refer to [Delete Group feature](#delete-group-feature)
-
-#### Activity diagram
-
-#### Sequence diagram
-
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `WHATEVER COMMAND` should end at the destroy marker (X) but due to a limitation of
-PlantUML, the lifeline continues till the end of diagram.
-</box>
-
-#### Design considerations
-
-1. Include if we had any alternative design decisions and why we decided to go with the current one
-
 --------------------------------------------------------------------------------------------------------------------
-
 
 ### Delete Group feature
 
