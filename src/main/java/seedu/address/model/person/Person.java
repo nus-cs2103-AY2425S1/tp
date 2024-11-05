@@ -107,8 +107,12 @@ public class Person implements Appointmentable {
         return remark;
     }
 
-    public void addNotes(String notes) {
-        this.remark.addNotes(notes);
+    /**
+     * Adds additional remarks to a person
+     */
+    public Remark addRemarks(String remarks) {
+        remark.addRemarks(remarks);
+        return remark;
     }
 
     public int getId() {

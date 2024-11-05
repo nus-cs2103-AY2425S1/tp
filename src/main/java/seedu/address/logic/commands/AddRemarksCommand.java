@@ -30,7 +30,7 @@ public class AddRemarksCommand extends Command {
             + PREFIX_REMARK + "Much better than previous appointment.";
 
     public static final String MESSAGE_ADD_REMARKS_SUCCESS = "Successfully "
-            + "added remarks: %s to patient of ID: %d.";
+            + "added remarks: '%s' to patient of ID: %d.";
     public static final String MESSAGE_ADD_NOTES_FAILURE = "Unable to "
             + "add remarks! Check the id entered!";
     private final int patientId;
@@ -53,12 +53,17 @@ public class AddRemarksCommand extends Command {
 
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Person patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
-        if (patientToAddNotes == null) {
+        Person patientToAddRemarks = model.getFilteredPatientById(allPersons, patientId);
+        if (patientToAddRemarks == null) {
             throw new CommandException(MESSAGE_ADD_NOTES_FAILURE);
         }
-        patientToAddNotes.addNotes(additionalNotes);
+        Person editedPatient = new Person(patientToAddRemarks.getName(),
+                patientToAddRemarks.getId(), patientToAddRemarks.getRole(), patientToAddRemarks.getPhone(),
+                patientToAddRemarks.getEmail(), patientToAddRemarks.getAddress(),
+                patientToAddRemarks.addRemarks(additionalNotes),
+                patientToAddRemarks.getAppointments(), patientToAddRemarks.getTags());
 
+        model.setPerson(patientToAddRemarks, editedPatient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_ADD_REMARKS_SUCCESS, additionalNotes, patientId
