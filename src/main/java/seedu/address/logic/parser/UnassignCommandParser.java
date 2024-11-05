@@ -35,13 +35,13 @@ public class UnassignCommandParser implements Parser<UnassignCommand> {
         try {
             // Parse the volunteer and event indices
             Index volunteerIndex = VolunteerParserUtil.parseIndex(argMultimap.getValue(UNASSIGN_VOLUNTEER_PREFIX_NAME)
-                    .orElseThrow(() -> new ParseException("Volunteer ID is required.")));
+                    .orElseThrow(() -> new ParseException("Volunteer index is required.")));
             Index eventIndex = EventParserUtil.parseIndex(argMultimap.getValue(UNASSIGN_EVENT_PREFIX_NAME)
-                    .orElseThrow(() -> new ParseException("Event ID is required.")));
+                    .orElseThrow(() -> new ParseException("Event index is required.")));
             return new UnassignCommand(volunteerIndex, eventIndex);
         } catch (NumberFormatException e) {
             // Handle cases where the input is not a valid integer
-            throw new ParseException("Volunteer ID and Event ID must be valid integers.", e);
+            throw new ParseException("Volunteer index and Event index must be valid integers.", e);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignCommand.MESSAGE_USAGE), pe);
         }
