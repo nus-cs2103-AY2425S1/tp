@@ -48,7 +48,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(null));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(null));
-        Information information = ParserUtil.parseInformation(argMultimap.getValue(PREFIX_INFORMATION).orElse(null));
+        Information information = ParserUtil.parseInformation(argMultimap.getValue(PREFIX_INFORMATION).orElse(""));
         Remark remark = new Remark(""); // No direct remark input
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

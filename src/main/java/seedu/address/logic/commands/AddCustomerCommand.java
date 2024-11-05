@@ -27,7 +27,7 @@ public class AddCustomerCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_INFORMATION + "INFORMATION "
+            + "[" + PREFIX_INFORMATION + "INFORMATION ]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
