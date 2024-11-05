@@ -86,7 +86,7 @@ public class PaymentCommand extends Command {
             }
             updatedSchedule.markPaymentAsPaid();
         } else {
-            if (!targetSchedule.get().getPaymentStatus()){
+            if (!targetSchedule.get().getPaymentStatus()) {
                 throw new CommandException(String.format(MESSAGE_UNPAID_PAYMENT, name, dateTime));
             }
             updatedSchedule.markPaymentAsUnpaid();
