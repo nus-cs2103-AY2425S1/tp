@@ -33,7 +33,7 @@ public class AddGradeCommand extends Command {
                     + PREFIX_ASSIGNMENT
                     + "ASSIGNMENT "
                     + PREFIX_SCORE
-                    + "SCORE "
+                    + "SCORE\n"
                     + "Example: "
                     + COMMAND_WORD
                     + " "
@@ -66,9 +66,9 @@ public class AddGradeCommand extends Command {
      * @param score          Score of the assignment.
      * @param assignmentName Name of assignment.
      */
-    public AddGradeCommand(String personName, Float score, String assignmentName) {
+    public AddGradeCommand(Name personName, Float score, String assignmentName) {
         requireAllNonNull(personName, score, assignmentName);
-        this.personName = new Name(personName);
+        this.personName = personName;
         this.score = score;
         this.assignmentName = assignmentName;
     }
