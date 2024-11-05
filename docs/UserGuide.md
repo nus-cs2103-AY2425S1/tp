@@ -801,7 +801,7 @@ Commands for managing property listings and associating clients with listings.
 
     <div class="alert" markdown="span">
     However, NAME is space-sensitive:
-    `deletelisting bob house Wen Xuan` != `delapt bobhouse`
+    `deletelisting bob house` != `deletelisting bobhouse`
     
     These commands will delete different listings 
     </div> 
@@ -818,41 +818,15 @@ Commands for managing property listings and associating clients with listings.
       > ---
 
 - #### Clear Listing
-    - **Format:** `ClearListingCommand`
+    - **Format:** `clearlistings`
     - **Description:** Deletes ALL listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Clear all listings in addressbook
       >
-      > **Input**:
+      > **Input**: clearlistings
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: All listings have been cleared!
       >
       > ---
 
@@ -861,138 +835,91 @@ Commands for managing property listings and associating clients with listings.
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
 - #### Clear
-    - **Format:** `ClearCommand`
-    - **Description:** Clears the console or application state.
+    - **Format:** `clear`
+    - **Description:** Clears all clients and listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Fresh addressbook and listings
       >
-      > **Input**:
+      > **Input**: clear
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Address book and listings has been cleared!
       >
       > ---
 
 - #### Exit
-    - **Format:** `ExitCommand`
+    - **Format:** `exit`
     - **Description:** Exits the application.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Exit the application
       >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Input**: exit
+      > 
+      > **Output**: Exiting Address Book as requested ...
       >
       > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+      
 - #### Help
     - **Format:** `help`
     - **Description:** Displays a list of available commands and their descriptions.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Accessing help
+      > **Use Case**: Accessing help
       >
       > **Input**: `help`
       >
-      > **Output**:
+      > **Output**: Opened help window.
       >
+      > ![help](images/help.png)
+      > 
       > ---
 
 - #### More Info
-    - **Format:** `MoreInfoCommand`
-    - **Description:** Provides additional information about a specific command or feature.
+    - **Format:** `moreinfo NAME`
+    - **Description:** Provides additional information about a specific client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Finding out more information about `Bob`
       >
-      > **Input**:
+      > **Input**: `moreinfo Bob`
       >
-      > **Output**:
+      > **Output**: Opened window for client's information.
       >
+      > ![moreinfo](images/moreinfo.png)
+      > 
       > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
+
+    <br>
+    <div class="note" markdown="span">
+    NAME is case-insensitive: 
+    `moreinfo Bob` = `moreinfo BOB` = `moreinfo bOb` _(Not exhaustive)_
+
+    Thus, these commands will provide more information about the same `Bob` client
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, NAME is space-sensitive:
+    `moreinfo wen xuan` != `moreinfo wenxuan`
+    
+    These commands will provide more information about different clients
+    </div> 
+    <br>
 
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Client not found
       >
-      > **Input**:
+      > **Input**: moreinfo nonExistentClient
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
       > ---
 
 - #### Chat Window
-    - **Format:** `ChatWindowCommand`
-    - **Description:** Opens a chat window for client-agent communication.
+    - **Format:** `chatbot`
+    - **Description:** Opens a chatbot that answers basic queries.
     - **Successful Execution:**
       > ---
       > **Use Case #1**:
