@@ -147,12 +147,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //Initialise the orders with the correct person object in the address book
     public void associateOrdersWithPersons() {
         for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
             addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())
                     .ifPresent(person -> {
-                        customerOrder.setPerson(person);
+                        customerOrder.setOriginalPerson(person);
                         person.addOrder(customerOrder);
                     });
         }
@@ -160,7 +159,7 @@ public class ModelManager implements Model {
         for (SupplyOrder supplyOrder : supplyOrderList.getOrders()) {
             addressBook.findPersonByPhone(supplyOrder.getPerson().getPhone())
                     .ifPresent(person -> {
-                        supplyOrder.setPerson(person);
+                        supplyOrder.setOriginalPerson(person);
                         person.addOrder(supplyOrder);
                     });
         }
