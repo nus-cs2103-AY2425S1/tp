@@ -3,6 +3,7 @@ package seedu.address.model.meeting;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Phone;
@@ -14,6 +15,7 @@ import seedu.address.model.property.Type;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Meeting {
+    private static final Logger logger = Logger.getLogger(Meeting.class.getName());
     // Identity fields
     private final MeetingTitle meetingTitle;
     private final MeetingDate meetingDate;
@@ -27,13 +29,14 @@ public class Meeting {
      */
     public Meeting(MeetingTitle meetingTitle, MeetingDate meetingDate, Phone buyerPhone, Phone sellerPhone,
                    Type type, PostalCode postalCode) {
-        requireAllNonNull(meetingTitle);
+        requireAllNonNull(meetingTitle, meetingDate, buyerPhone, sellerPhone, type, postalCode);
         this.meetingTitle = meetingTitle;
         this.meetingDate = meetingDate;
         this.buyerPhone = buyerPhone;
         this.sellerPhone = sellerPhone;
         this.type = type;
         this.postalCode = postalCode;
+        logger.info("Meeting created: " + this);
     }
 
     public MeetingTitle getMeetingTitle() {

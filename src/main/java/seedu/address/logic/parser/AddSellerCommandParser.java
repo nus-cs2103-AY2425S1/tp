@@ -10,7 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 
@@ -33,6 +33,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         // Tokenize the input arguments based on the expected prefixes (name, phone, email)
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
+        // Verify there are no duplicate prefixes in the input
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
         if (ParserUtil.hasExcessToken(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
             logger.warning("Excess prefixes.");
@@ -45,7 +46,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerCommand.MESSAGE_USAGE));
         }
         // Parse the name, phone, and email from the argument map
-        Name name = ParserUtil.parseClientName(argMultimap.getValue(PREFIX_NAME).get());
+        NameWithoutNumber name = ParserUtil.parseClientNameWithoutNumber(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parseClientPhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseClientEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 

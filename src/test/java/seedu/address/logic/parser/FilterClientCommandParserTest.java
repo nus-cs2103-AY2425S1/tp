@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterClientCommand;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 
 public class FilterClientCommandParserTest {
 
@@ -19,7 +19,7 @@ public class FilterClientCommandParserTest {
     public void parse_nameSpecified_success() {
         // Test for valid phone number
         String userInput = String.format(" %s%s", PREFIX_NAME, name);
-        assertParseSuccess(parser, userInput, new FilterClientCommand(new Name(name)));
+        assertParseSuccess(parser, userInput, new FilterClientCommand(new NameWithoutNumber(name)));
     }
 
     @Test

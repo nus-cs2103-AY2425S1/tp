@@ -19,6 +19,7 @@ public interface Model {
     Predicate<Client> PREDICATE_SHOW_ALL_BUYERS_ONLY = Client::isBuyer;
     Predicate<Client> PREDICATE_SHOW_ALL_SELLERS_ONLY = Client::isSeller;
     Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
+    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTY = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

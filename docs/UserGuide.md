@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # Client Grid User guide
@@ -103,7 +103,7 @@ Add a specified buyer into the client book of ClientGrid.
 Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
-* The `BUYER_NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+* The `BUYER_NAME` should only contain alphabetic characters and spaces. Each word is separated by a single space and has a character limit of 747 [longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name). It should also ignore extra/leading/trailing spaces and not be empty. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the clientbook.
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
 * The `BUYER_EMAIL` should be of the format local-part@domain and adhere to the following constraints: 
   * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
@@ -119,20 +119,6 @@ Examples:
 
   ![result for 'addbuyer n/John p/83456789 e/john@gmail.com'](images/addbuyer.png)
 
-### Filtering clients : `filterclient`
-
-Filters the clients that starts with the prefix provided.
-
-Format: `filterclient n/NAME`
-
-* Filters the client with the specified prefix `NAME`.
-* The `NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the clientbook.
-
-Examples:
-* `filterclient n/A` filters the clients that starts with the prefix `A`.
-
-  ![result for 'filterclient n/A'](images/filterclient.png)
-
 ### Adding a seller : `addseller`
 
 Add a specified seller into the client book of ClientGrid.
@@ -147,6 +133,20 @@ Examples:
 
   ![result for 'addseller n/Mary p/83456789 e/mary@gmail.com'](images/addseller.png)
 
+### Filtering clients : `filterclient`
+
+Filters the clients that starts with the prefix provided.
+
+Format: `filterclient n/NAME`
+
+* Filters the client with the specified prefix `NAME`.
+* The `NAME` should only contain alphabetic characters and spaces. Each word is separated by a single space and has a character limit of 747 [longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name). It should also ignore extra/leading/trailing spaces.  All names will be converted to lower case and checked against the clientbook.
+
+Examples:
+* `filterclient n/A` filters the clients that starts with the prefix `A`.
+
+  ![result for 'filterclient n/A'](images/filterclient.png)
+
 ### Deleting a buyer : `deletebuyer`
 
 Deletes the specified buyer from the client book of ClientGrid.
@@ -154,8 +154,7 @@ Deletes the specified buyer from the client book of ClientGrid.
 Format: `deletebuyer p/PHONE_NUMBER`
 
 * Deletes the buyer with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
-
+* The `PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
 
 Examples:
 * `deletebuyer p/83456789` deletes the buyer with phone number `83456789` from the client book.
@@ -168,7 +167,7 @@ Deletes the specified seller from the client book of ClientGrid.
 Format: `deleteseller p/PHONE_NUMBER`
 
 * Deletes the seller with the specified `PHONE_NUMBER`.
-* The `PHONE_NUMBER` must be 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’.
+* The restrictions for the `PHONE_NUMBER` are identical to the restrictions for the `PHONE_NUMBER` specified in the `deletebuyer` feature.
 
 Examples:
 * `deleteseller p/83456789` deletes the seller with phone number `83456789` from the client book.
@@ -241,8 +240,7 @@ Deletes a specified property from the property book of ClientGrid.
 Format: `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
 
 * Deletes a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
-* The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces.
-* The `UNIT_NUMBER` comprises of two numbers delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digits. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted.
+* The restrictions for the `POSTAL_CODE` and `UNIT_NUMBER` are identical to the restrictions for the `POSTAL_CODE` and `UNIT_NUMBER` specified in the `addproperty` feature.
 
 Examples:
 * `deleteproperty c/123456 u/01-01` deletes a property with postal code `123456` and unit number `01-01`.
@@ -253,16 +251,21 @@ Examples:
 
 Adds a specified meeting to the meeting book of ClientGrid.
 
-Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTALCODE`
+Format: `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTAL_CODE`
 
 * Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
-* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
+* The `MEETING_TITLE` should only contain alphanumeric characters and spaces. It should not be blank and it should not exceed 100 characters (excluding starting and ending whitespaces).
 * The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
+* The restrictions for the `BUYER_PHONE` and `SELLER_PHONE` are identical to the restrictions for the `BUYER_PHONE_NUMBER` specified in the `addbuyer` feature.
+* The restrictions for the `POSTAL_CODE` and `TYPE` are identical to the restrictions for the `POSTAL_CODE` and `TYPE` specified in the `addproperty` feature.
+
+<box type="info" seamless>
+
+**Note:**
 * `BUYER_PHONE` refers to a buyer's phone number. There must be an existing buyer in the client book that has a phone number that is equal to the `BUYER_PHONE`.
 * `SELLER_PHONE` refers to a seller's phone number. Likewise, there must be an existing seller in the client book with a phone number equal to `SELLER_PHONE`.
-* Both `BUYER_PHONE` and `SELLER_PHONE` should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'. Spaces are not allowed between the 8 numbers.
-* `TYPE` refers to a property type. It must be one of the following values (case-insensitive): `CONDO`, `HDB`, or `LANDED`.
-* `POSTALCODE` refers to a postal code. The postal code must belong to some existing property in the property book of the specified `TYPE`.
+* `POSTAL_CODE` refers to a postal code. The postal code must belong to some existing property in the property book of the specified `TYPE`.
+</box>
 
 Examples:
 * `addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456` adds a meeting with meeting title `Meeting 1`, meeting date `01-01-2025`, buyer's phone number `95352563`, seller's phone number `87652533`, property type `HDB` and postal code `321456`.
@@ -276,8 +279,8 @@ Deletes a specified meeting from the meeting book of ClientGrid.
 Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 
 * Deletes a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
-* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
-* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
+* The restrictions for the `MEETING_TITLE` and `MEETING_DATE` are identical to the restrictions for the `MEETING_TITLE` and `MEETING_DATE` specified in the `addmeeting` feature.
+
 
 Examples:
 * `deletemeeting mt/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
@@ -338,20 +341,20 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 ## Command Summary
 
-| Action                | Format, Examples                                                                               |
-|-----------------------|------------------------------------------------------------------------------------------------|
-| **Help**              | `help`                                                                                         |
-| **List**              | `list k/KEY`                                                                                   |
-| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                     |
-| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                 |
-| **Filter Clients**    | `filterclient n/NAME`                                                                          |
-| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                   |
-| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                  |
-| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                   |
-| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                  |
-| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                   |
-| **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTALCODE` |
-| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                |
-| **Exit**              | `exit`                                                                                         |
+| Action                | Format, Examples                                                                                |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| **Help**              | `help`                                                                                          |
+| **List**              | `list k/KEY`                                                                                    |
+| **Add Buyer**         | `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`                                      |
+| **Add Seller**        | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`                                  |
+| **Filter Clients**    | `filterclient n/NAME`                                                                           |
+| **Delete Buyer**      | `deletebuyer p/PHONE_NUMBER`                                                                    |
+| **Delete Seller**     | `deleteseller p/PHONE_NUMBER`                                                                   |
+| **Add Property**      | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`                                    |
+| **Filter Properties** | `filterproperty t/TYPE gte/MATCHING_PRICE lte/MATCHING_PRICE`                                   |
+| **Delete Property**   | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`                                                    |
+| **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTAL_CODE` |
+| **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                 |
+| **Exit**              | `exit`                                                                                          |
 
 

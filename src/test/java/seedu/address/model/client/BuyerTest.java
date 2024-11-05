@@ -14,7 +14,7 @@ class BuyerTest {
     @Test
     void testIsSameClient_sameClient_returnsTrue() {
         // Arrange
-        Name name = mock(Name.class);
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
         Phone phone = mock(Phone.class);
         Email email = mock(Email.class);
 
@@ -27,8 +27,8 @@ class BuyerTest {
     @Test
     void testIsSameClient_samePhoneDifferentBuyer_returnsTrue() {
         // Arrange
-        Name name1 = mock(Name.class);
-        Name name2 = mock(Name.class);
+        NameWithoutNumber name1 = mock(NameWithoutNumber.class);
+        NameWithoutNumber name2 = mock(NameWithoutNumber.class);
         Phone phone = mock(Phone.class);
         Email email1 = mock(Email.class);
         Email email2 = mock(Email.class);
@@ -43,7 +43,7 @@ class BuyerTest {
     @Test
     void testIsSameClient_differentPhone_returnsFalse() {
         // Arrange
-        Name name1 = mock(Name.class);
+        NameWithoutNumber name1 = mock(NameWithoutNumber.class);
         Phone phone1 = mock(Phone.class);
         Phone phone2 = mock(Phone.class);
         Email email1 = mock(Email.class);
@@ -59,7 +59,7 @@ class BuyerTest {
     @Test
     void testEquals_sameObject_returnsTrue() {
         // Arrange
-        Name name = mock(Name.class);
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
         Phone phone = mock(Phone.class);
         Email email = mock(Email.class);
 
@@ -72,7 +72,7 @@ class BuyerTest {
     @Test
     void testEquals_sameAttributes_returnsTrue() {
         // Arrange
-        Name name1 = mock(Name.class);
+        NameWithoutNumber name1 = mock(NameWithoutNumber.class);
         Phone phone1 = mock(Phone.class);
         Email email1 = mock(Email.class);
 
@@ -86,8 +86,8 @@ class BuyerTest {
     @Test
     void testEquals_differentAttributes_returnsFalse() {
         // Arrange
-        Name name1 = mock(Name.class);
-        Name name2 = mock(Name.class);
+        NameWithoutNumber name1 = mock(NameWithoutNumber.class);
+        NameWithoutNumber name2 = mock(NameWithoutNumber.class);
         Phone phone1 = mock(Phone.class);
         Phone phone2 = mock(Phone.class);
         Email email1 = mock(Email.class);
@@ -103,7 +103,7 @@ class BuyerTest {
     @Test
     void testHashCode_sameAttributes_returnsSameHashCode() {
         // Arrange
-        Name name = mock(Name.class);
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
         Phone phone = mock(Phone.class);
         Email email = mock(Email.class);
 
@@ -117,11 +117,11 @@ class BuyerTest {
     @Test
     void testHashCode_differentAttributes_returnsDifferentHashCode() {
         // Arrange
-        Name name1 = mock(Name.class);
+        NameWithoutNumber name1 = mock(NameWithoutNumber.class);
         Phone phone1 = mock(Phone.class);
         Email email1 = mock(Email.class);
 
-        Name name2 = mock(Name.class);
+        NameWithoutNumber name2 = mock(NameWithoutNumber.class);
         Phone phone2 = mock(Phone.class);
         Email email2 = mock(Email.class);
 
@@ -135,7 +135,7 @@ class BuyerTest {
     @Test
     void testToString_correctFormat() {
         // Arrange
-        Name name = mock(Name.class);
+        NameWithoutNumber name = mock(NameWithoutNumber.class);
         Phone phone = mock(Phone.class);
         Email email = mock(Email.class);
 
@@ -155,7 +155,7 @@ class BuyerTest {
     @Test
     void testGetTypeString_returnsCorrectType() {
         // Arrange
-        Buyer buyer = new Buyer(mock(Name.class), mock(Phone.class), mock(Email.class));
+        Buyer buyer = new Buyer(mock(NameWithoutNumber.class), mock(Phone.class), mock(Email.class));
 
         // Act
         String typeString = buyer.getTypeString();

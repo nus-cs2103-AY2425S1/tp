@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FilterClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 
 
 /**
@@ -34,7 +34,7 @@ public class FilterClientCommandParser implements Parser<FilterClientCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterClientCommand.MESSAGE_USAGE));
         }
-        Name name = ParserUtil.parseClientName(argMultimap.getValue(PREFIX_NAME).get());
+        NameWithoutNumber name = ParserUtil.parseClientNameWithoutNumber(argMultimap.getValue(PREFIX_NAME).get());
         return new FilterClientCommand(name);
     }
 }
