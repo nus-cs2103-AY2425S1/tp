@@ -239,16 +239,9 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
 * There cannot be two groups with the same name. If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
 
-### Editing a group's name : `editGroupName`
-
-Edits the name of a group that currently exists.
-
-Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-
-* Changes the group with the name `OLD_GROUP_NAME`'s name to
-`NEW_GROUP_NAME`.
-* The old group name must exist, and the new group name must not already be in use.
-* If either of the above conditions are not met, the command will fail.
+Example:
+* `createGroup g/blood drive 2024 m/3 4` creates a new group named `blood drive 2024`
+  with the 3rd and 4th persons in the current address book as members.
 
 ### Adding new members to a existing group : `addToGroup`
 
@@ -263,7 +256,23 @@ must be valid indices.
 * If either of the above conditions are not met, the command will fail.
 
 Example:
-* `addToGroup g/blood drive 2024 m/1 2 5 6`
+* `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 as
+  members to the existing group named `blood drive`.
+
+### Editing a group's name : `editGroupName`
+
+Edits the name of a group that currently exists.
+
+Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
+
+* Changes the group with the name `OLD_GROUP_NAME`'s name to
+  `NEW_GROUP_NAME`.
+* The old group name must exist, and the new group name must not already be in use.
+* If either of the above conditions are not met, the command will fail.
+
+Example:
+* `editGroupName g/blood drive 2024 g/charity run` renames an existing group called
+  `blood drive 2024` into `charity run`.
 
 ### Deleting a group: `deleteGroup`
 
@@ -273,6 +282,9 @@ Format: `deleteGroup g/GROUP_NAME`
 
 * Deletes group named `GROUP_NAME`
 * Group named `GROUP_NAME` must exist.
+
+Example:
+* `deleteGroup g/blood drive 2024`
 
 ### Listing groups: `listGroups`
 
@@ -342,8 +354,8 @@ Action     | Format, Examples
 **Help**   | `help`
 **Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
+**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
+**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
 **Get Emails**   | `email`
-**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
