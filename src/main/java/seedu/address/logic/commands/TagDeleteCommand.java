@@ -126,7 +126,7 @@ public class TagDeleteCommand extends Command {
                 return String.format(MESSAGE_TAG_DOESNT_EXIST, Messages.tagSetToString(tagsToDelete),
                         Messages.format(editedPerson));
             } else {
-                model.deletePersonInWedding(editedPerson, model, tagsInBoth);
+                model.deletePersonInWedding(editedPerson, tagsInBoth);
 
                 String tagsNotExist = String.format(MESSAGE_TAG_DOESNT_EXIST + "\n",
                         Messages.tagSetToString(tagsInNeither), Messages.format(personToEdit));
