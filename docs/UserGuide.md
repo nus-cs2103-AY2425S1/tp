@@ -134,7 +134,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 ![showClients](images/Ui.png)
 
 - #### Add Buyer Command
-    - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
       > ---
@@ -210,7 +210,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > 
       > ---
 - #### Add Seller Command
-    - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
+    - **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
     - **Description:** Creates a new seller profile with specified details.
     - **Successful Execution:**
       > ---
@@ -285,7 +285,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       >  ---
 
 - #### Find Command
-    - **Format:** `find KEYWORD [KEYWORD...]`
+    - **Format:** `find KEYWORD [KEYWORD]...`
     - **Description:** Finds the specified client(s) based on the provided keywords.
     - **Successful Execution:**
       > ---
@@ -330,7 +330,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Failed Execution:**
       > ---
       >
-      > **Use Case**: Attempting to find a non-existent client
+      > **Use Case**: Client not found
       > 
       > **Input**: `find Bob7`
       > 
@@ -341,7 +341,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### Edit Client Command
-    - **Format:** `editclient NAME [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
+    - **Format:** `editclient NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]... [r/REMARK]`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
@@ -491,7 +491,7 @@ Commands for managing appointments between user and clients.
 ![appointments](images/appointments.png)
 
 - #### Schedule Appointment
-    - **Format:** `apt NAME d/<DD-MM-YY> fr/<HHmm> to/<HHmm>`
+    - **Format:** `apt NAME d/DD-MM-YY fr/HHmm to/HHmm` OR `apt NAME d/ddMMyy fr/HH:mm to/HH:mm`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
