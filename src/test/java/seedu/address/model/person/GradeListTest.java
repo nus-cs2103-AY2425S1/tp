@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -7,6 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class GradeListTest {
@@ -93,5 +99,22 @@ public class GradeListTest {
         // different size -> returns false
         secondGradeList = secondGradeList.addGrade(secondGrade);
         assertFalse(firstGradeList.equals(secondGradeList));
+    }
+
+    @Test
+    public void constructor() {
+        Grade firstGrade = new Grade("Midterm", 86.4F, 25.0F);
+        Grade secondGrade = new Grade("Final", 86.4F, 25.0F);
+        Grade thirdGrade = new Grade("midterm", 86.5F, 25.0F);
+        Grade fourthGrade = new Grade("final", 86.4F, 25.0F);
+
+        Map<String, Grade> correctMap = Map.of("Midterm", firstGrade, "Final", secondGrade);
+        Map<String, Grade> incorrectMap = Map.of("Midterm", firstGrade, "Final", secondGrade
+                , "midterm", thirdGrade
+                , "final", fourthGrade);
+
+        assertDoesNotThrow(() -> new GradeList(correctMap), "Valid call to GradeList constructor should not throw.");
+        assertThrows(IllegalStateException.class, () -> new GradeList(incorrectMap), "Invalid call to GradeList " +
+                "constructor should throw");
     }
 }
