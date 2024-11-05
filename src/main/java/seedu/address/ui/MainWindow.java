@@ -13,7 +13,11 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteNCommand;
+import seedu.address.logic.commands.DeleteWeddingCommand;
+import seedu.address.logic.commands.DeleteYCommand;
 import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -86,6 +90,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -194,9 +199,13 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (isDeleteCommand(commandText)) {
+                return commandResult;
+            }
+
             // allows for the corresponding person or wedding list to be shown
             listPanelPlaceholder.getChildren().clear();
-            if (commandText.startsWith(ListWeddingCommand.COMMAND_WORD)) {
+            if (isWeddingCommand(commandText)) {
                 weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
                 listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
             } else {
@@ -211,5 +220,31 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Checks if the given command text is related to wedding operations.
+     *
+     * @param commandText the command input text to check
+     * @return true if the command is a wedding-related command, false otherwise
+     */
+    public boolean isWeddingCommand(String commandText) {
+        String firstWord = commandText.split("\\s+")[0];
+        return firstWord.equals(ListWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(AddWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD);
+    }
+
+    /**
+     * Checks if the given command text is a delete command that does not modify the UI.
+     *
+     * @param commandText the command input text to check
+     * @return true if the command is a delete command that
+     *      should not change the UI, false otherwise
+     */
+    public boolean isDeleteCommand(String commandText) {
+        String firstWord = commandText.split("\\s+")[0];
+        return firstWord.equals(DeleteYCommand.COMMAND_WORD)
+                || firstWord.equals(DeleteNCommand.COMMAND_WORD);
     }
 }
