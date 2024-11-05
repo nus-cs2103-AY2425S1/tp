@@ -154,7 +154,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Sort feature
 The sort command is reliant on the `SortOrder` enumeration. Each constant in `SortOrder` contains 2 additional values: the `keyword`, and the `stringRep` (which is the string representation of the order).
-The command itself is encapsulated by the `SortCommand` class, which extends the abstract class `Command`, overriding its execution method. 
+The command itself is encapsulated by the `SortCommand` class, which extends the abstract class `Command`, overriding its execution method.
 On execution, the `SortCommand#execute()` method calls the `updateSortedPersonListComparator` method of the `model`, and passes in the relevant comparator, depending on which order the user selects.
 
 ### Mark/Unmark feature
@@ -162,7 +162,7 @@ On execution, the `SortCommand#execute()` method calls the `updateSortedPersonLi
 #### Implementation
 
 This command's implementation is based on the new field `attendance` of `Person` object which stores the list of attendances
-if the person is a member. 
+if the person is a member.
 
 Given below is the class diagram of `MarkAttendanceCommand` and relative classes it uses to execute.
 
@@ -171,7 +171,7 @@ Given below is the class diagram of `MarkAttendanceCommand` and relative classes
 
 **Find Targeted Member**
 
-The command will call `Model::getFilteredPersonList` to get current contacts in addressbook, 
+The command will call `Model::getFilteredPersonList` to get current contacts in addressbook,
 then it filters the list by user input telegram handles, get a list of people by there telegrams to mark their attendance.
 
 
@@ -235,8 +235,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: The program aims to assist CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details. 
-This is done via a clean user interface with a focus on the CLI, with fast access to the contact information of relevant CCA personnel, 
+**Value proposition**: The program aims to assist CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details.
+This is done via a clean user interface with a focus on the CLI, with fast access to the contact information of relevant CCA personnel,
 providing users a one-stop solution to help manage CCA manpower related considerations.
 
 
@@ -319,7 +319,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
   * Use case ends.
 
 * 3a. User inputs an invalid index.
@@ -352,7 +352,7 @@ Use case ends.
 **MSS**
 
 1. User searches the list of contacts with a query relating to a contact’s name.
-2. System displays the subset of contacts with the same name as the query 
+2. System displays the subset of contacts with the same name as the query
 
 Use case ends.
 
@@ -364,7 +364,7 @@ Use case ends.
 * 2a. System fails to find any contacts related to the query.
     * 2a1. System displays an empty list to the user.
     * Use case ends.
-   
+
 <br>
 **Use case: UC05 - List all contacts**
 **Actor: User**
@@ -423,7 +423,7 @@ Use case ends.
 * 1b. System detects that user entered an invalid field.
     * 1b1. System shows user an appropriate error message.
     * Use case ends.
-  
+
 * 1c. System detects that user tried to mark the attendance of non-member contact.
     * 1c1. System shows user an appropriate error message.
     * Use case ends.
