@@ -51,7 +51,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_validWeddingIndices_throwsException() throws Exception {
+    public void execute_invalidWeddingIndices_throwsException() throws Exception {
         Set<Index> weddingIndices = new HashSet<>();
         Index i1 = Index.fromOneBased(1);
         weddingIndices.add(i1);
