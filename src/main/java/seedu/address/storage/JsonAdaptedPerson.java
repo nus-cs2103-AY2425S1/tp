@@ -110,11 +110,6 @@ class JsonAdaptedPerson {
                 ? Optional.empty()
                 : Optional.of(new Email(email));
 
-//        if (telegramHandle == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-//                    TelegramHandle.class.getSimpleName()));
-//        }
-
         if (telegramHandle != null && !TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
