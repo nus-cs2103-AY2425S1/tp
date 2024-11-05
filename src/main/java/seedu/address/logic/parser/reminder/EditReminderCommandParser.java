@@ -1,4 +1,8 @@
 package seedu.address.logic.parser.reminder;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -10,12 +14,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
 /**
  * Parses user input to create a new {@code EditReminderCommand}.
  */
@@ -26,8 +24,8 @@ public class EditReminderCommandParser implements Parser<EditReminderCommand> {
     @Override
     public EditReminderCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap
-                = ArgumentTokenizer.tokenize(args, PREFIX_DATE_TIME, PREFIX_DESCRIPTION);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_DATE_TIME, PREFIX_DESCRIPTION);
 
         Index index;
 

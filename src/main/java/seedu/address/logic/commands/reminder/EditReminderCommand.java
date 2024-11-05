@@ -1,4 +1,12 @@
 package seedu.address.logic.commands.reminder;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -13,23 +21,14 @@ import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderDescription;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-
 /**
  * Edits a reminder in the address book.
  */
 public class EditReminderCommand extends Command {
     public static final String COMMAND_WORD = "re"; // reminder edit
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a reminder in the address book identified " +
-            "by the index number displayed in the reminder list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a reminder in the address book identified "
+            + "by the index number displayed in the reminder list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be  positive integer)"
             + PREFIX_DATE_TIME + "DATE and TIME "
@@ -46,7 +45,6 @@ public class EditReminderCommand extends Command {
     private final EditReminderFields editReminderFields;
 
     /**
-     *
      * @param index of the reminder in the reminder list to edit
      * @param editReminderFields details of the edited reminder
      */
@@ -55,7 +53,7 @@ public class EditReminderCommand extends Command {
         requireNonNull(editReminderFields);
 
         this.index = index;
-        this.editReminderFields = editReminderFields;
+        this.editReminderFields = new EditReminderFields(editReminderFields);
     }
 
     @Override
@@ -104,10 +102,11 @@ public class EditReminderCommand extends Command {
 
         // EditReminder does not allow editing of personName
         String personName = reminderToEdit.getPersonName();
-        LocalDateTime UpdatedDateTime = editReminderFields.getDateTime().orElse(reminderToEdit.getDateTime());
-        ReminderDescription UpdatedDescription = editReminderFields.getDescription().orElse(reminderToEdit.getDescription());
+        LocalDateTime updatedDateTime = editReminderFields.getDateTime().orElse(reminderToEdit.getDateTime());
+        ReminderDescription updatedDescription = editReminderFields.getDescription()
+                .orElse(reminderToEdit.getDescription());
 
-        return new Reminder(personName, UpdatedDateTime, UpdatedDescription);
+        return new Reminder(personName, updatedDateTime, updatedDescription);
     }
 
     @Override
@@ -121,12 +120,26 @@ public class EditReminderCommand extends Command {
         return "EditReminderCommand";
     }
 
+    /**
+     * Stores the details to edit the reminder with. Each non-empty field value will replace the
+     * corresponding field value of the reminder.
+     */
     public static class EditReminderFields {
         private LocalDateTime dateTime;
         private ReminderDescription description;
 
+        /**
+         * Default constructor for {@code EditReminderFields}.
+         * Initializes an instance with no specified fields.
+         */
         public EditReminderFields() {}
 
+        /**
+         * Copy constructor for {@code EditReminderFields}.
+         * Creates a new instance by copying the fields from the specified {@code EditReminderFields} instance.
+         *
+         * @param toCopy The {@code EditReminderFields} instance to copy from. Must not be {@code null}.
+         */
         public EditReminderFields(EditReminderFields toCopy) {
             setDateTime(toCopy.dateTime);
             setDescription(toCopy.description);

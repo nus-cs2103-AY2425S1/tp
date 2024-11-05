@@ -15,8 +15,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.reminder.Reminder;
 
-
-
 /**
  * Adds a reminder to the address book.
  */
