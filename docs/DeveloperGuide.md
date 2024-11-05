@@ -476,6 +476,24 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Sorting the list
+
+1. Sorting the list while all persons are being shown
+
+    1. Test case: `sort recent`<br>
+       Expected: List is sorted by last seen date from recent to distant. Timestamp in the status bar is updated.
+
+    1. Test case: `sort high`<br>
+       Expected: List is sorted by priority from high to low. Timestamp in the status bar is updated.
+
+    1. Test case: `sort name`<br>
+       Expected: List doesn't change. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `sort`, `sort s`, `...` (where s is not one of the four default parameters)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
