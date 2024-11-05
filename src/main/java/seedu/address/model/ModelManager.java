@@ -38,7 +38,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyUserPrefs userPrefs,
                         ReadOnlyReceiptLog goodsList) {
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, userPrefs, goodsList);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -46,6 +46,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
+        filterIllegalSupplierNames();
         filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
     }
 
@@ -188,13 +189,6 @@ public class ModelManager implements Model {
         return goodsList;
     }
 
-    private boolean hasSupplierName(GoodsReceipt goodsReceipt) {
-        return addressBook.getPersonList()
-                .stream()
-                .map(Person::getName)
-                .anyMatch(personName -> personName.equals(goodsReceipt.getSupplierName()));
-    }
-
     @Override
     public void addGoods(GoodsReceipt goodsReceipt) {
         requireNonNull(goodsReceipt);
@@ -236,5 +230,16 @@ public class ModelManager implements Model {
     @Override
     public double getFilteredGoodsCostStatistics() {
         return GoodsReceiptUtil.sumTotals(filteredReceipts);
+    }
+
+    private boolean hasSupplierName(GoodsReceipt goodsReceipt) {
+        return addressBook.getPersonList()
+                .stream()
+                .map(Person::getName)
+                .anyMatch(personName -> personName.equals(goodsReceipt.getSupplierName()));
+    }
+
+    private void filterIllegalSupplierNames() {
+        goodsList.removeIf(receipt -> !hasSupplierName(receipt));
     }
 }
