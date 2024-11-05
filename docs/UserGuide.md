@@ -161,7 +161,7 @@ Parameters:
 * `a/ADDRESS`: address of contact
 * `s/SERVICE`: service provided by vendor (can only be specified if `-v` is specified)
 * `t/TAG`: tag(s) associated with the contact
-* `id/ID`: ID of the contact
+* `id/ID`: ID of the contact or event
 * `d/DATE`: date of event (can only be specified if `-e` is specified)
 * `des/DESCRIPTION`: description of the event (should only be specified if `-e` is specified)
 
@@ -171,14 +171,14 @@ Example:
 * `list -e des/wedding`
 
 Notes:
-* If no arguments are specified, `list` will list all contacts.
+* If no arguments are specified, `list` will list all contacts (clients and vendors).
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list. 
 * If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
 * All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
 * All parameters are optional. Leaving them out will list all contacts by default.
 * The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` and phone number `91234567`.
+* Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
 * Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
 * Likewise, searching by name will list all contacts and events with names that include the input keywords.
 
