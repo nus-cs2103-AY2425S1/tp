@@ -59,7 +59,7 @@ public class HelpWindow extends UiPart<Stage> {
         Label infoLabel = new Label(HELP_WINDOW_MESSAGE); // Use HELP_MESSAGE for the label text
         infoLabel.getStyleClass().add("label"); // Add CSS style
         moreInfo.getChildren().add(infoLabel); // Add the label to moreInfo
-        moreInfo.setPrefHeight(40);
+        moreInfo.setPrefHeight(30);
         initializeCommandTable();
     }
 
@@ -139,6 +139,7 @@ public class HelpWindow extends UiPart<Stage> {
         );
 
         commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        commandTable.setPrefHeight(450);
     }
 
     /**
