@@ -35,11 +35,11 @@ public class NotesWindow {
 
         TextArea notesTextArea = new TextArea(person.getNotes().toString());
         notesTextArea.setWrapText(true);
-        notesTextArea.setStyle("-fx-font-size: 13px; -fx-background-color: #f5f5f5;");
+        notesTextArea.setStyle("-fx-control-inner-background: #C0C0C0; -fx-font-size: 13px;");
 
         VBox layout = new VBox(10, instructionLabel, notesTextArea);
         layout.setPadding(new Insets(15, 15, 15, 15));
-        layout.setStyle("-fx-background-color: #ffffff;");
+        layout.setStyle("-fx-background-color: #C0C0C0;");
 
         notesTextArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER && event.isShiftDown()) {
