@@ -8,6 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -154,22 +156,25 @@ public class ParserUtil {
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
 
-        String[] trimmedTime = time.trim().split(", ", 2);
+        Pattern pattern = Pattern.compile("(.+) to (.+)");
+        Matcher matcher = pattern.matcher(time.trim());
+
+        if (!matcher.matches()) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
 
         LocalDateTime fromDate;
         LocalDateTime toDate;
 
         try {
-            String from = trimmedTime[0].replaceFirst("from: ", "");
-            fromDate = LocalDateTime.parse(from, formatter);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            fromDate = LocalDateTime.parse(matcher.group(1), formatter);
+        } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
 
         try {
-            String to = trimmedTime[1].replaceFirst("to: ", "");
-            toDate = LocalDateTime.parse(to, formatter);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            toDate = LocalDateTime.parse(matcher.group(2), formatter);
+        } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
 
