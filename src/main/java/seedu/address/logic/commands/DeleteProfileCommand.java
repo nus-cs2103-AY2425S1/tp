@@ -64,11 +64,10 @@ public class DeleteProfileCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteProfileCommand)) {
+        if (!(other instanceof DeleteProfileCommand otherDeleteProfile)) {
             return false;
         }
 
-        DeleteProfileCommand otherDeleteProfile = (DeleteProfileCommand) other;
         return profileName.equals(otherDeleteProfile.profileName);
     }
 

@@ -57,7 +57,7 @@ public class SwitchCommand extends Command {
                     .map(Profile::toPath)
                     .flatMap(Profile::extractNameFromPathOrIgnore)
                     .toList();
-            assert profilesList.size() > 0 : "There is no profile to switch to. Message usage should have been thrown";
+            assert !profilesList.isEmpty() : "There is no profile to switch to. Message usage should have been thrown";
             throw new CommandException(String.format(
                     MESSAGE_SHOW_PROFILES,
                     String.join(", ", profilesList),
@@ -92,11 +92,10 @@ public class SwitchCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SwitchCommand)) {
+        if (!(other instanceof SwitchCommand otherSwitchCommand)) {
             return false;
         }
 
-        SwitchCommand otherSwitchCommand = (SwitchCommand) other;
         return profile.equals(otherSwitchCommand.profile);
     }
 

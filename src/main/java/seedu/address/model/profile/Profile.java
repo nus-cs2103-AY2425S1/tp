@@ -220,11 +220,10 @@ public class Profile {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Profile)) {
+        if (!(other instanceof Profile otherProfile)) {
             return false;
         }
 
-        Profile otherProfile = (Profile) other;
         return profileName.equalsIgnoreCase(otherProfile.profileName);
     }
 
