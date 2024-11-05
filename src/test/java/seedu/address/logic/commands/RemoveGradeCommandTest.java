@@ -80,7 +80,7 @@ public class RemoveGradeCommandTest {
 
     @Test
     public void execute_assignmentPresent_success() throws Exception {
-        AddGradeCommand addedGrade = new AddGradeCommand("Alice Pauline", 2.0f, "Ex01");
+        AddGradeCommand addedGrade = new AddGradeCommand(new Name("Alice Pauline"), 2.0f, "Ex01");
         addedGrade.execute(model);
 
         RemoveGradeCommand command = new RemoveGradeCommand("Alice Pauline", "Ex01");
