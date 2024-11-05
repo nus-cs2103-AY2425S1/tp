@@ -346,10 +346,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       <br>delete: Deletes the client profile corresponding to the client's name.
       <br>Parameters: CLIENT_NAME (case-insensitive)
       <br>Example: delete Tan Wen Xuan
-      > 
-      > ---
-      > **Use Case #3**:
-      > 
+      >
       > ---
 
 ---
