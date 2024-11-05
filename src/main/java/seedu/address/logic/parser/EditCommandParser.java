@@ -59,17 +59,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(
-            PREFIX_NAME,
-            PREFIX_PHONE,
-            PREFIX_EMAIL,
-            PREFIX_ADDRESS,
-            PREFIX_DESIREDROLE,
-            PREFIX_SKILLS,
-            PREFIX_EXPERIENCE,
-            PREFIX_STATUS,
-            PREFIX_NOTE);
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -118,6 +107,18 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+        // Now verify for duplicate prefixes after ensuring at least one field is edited
+        argMultimap.verifyNoDuplicatePrefixesFor(
+            PREFIX_NAME,
+            PREFIX_PHONE,
+            PREFIX_EMAIL,
+            PREFIX_ADDRESS,
+            PREFIX_DESIREDROLE,
+            PREFIX_SKILLS,
+            PREFIX_EXPERIENCE,
+            PREFIX_STATUS,
+            PREFIX_NOTE);
+
         return new EditCommand(index, editPersonDescriptor);
     }
 
@@ -139,6 +140,4 @@ public class EditCommandParser implements Parser<EditCommand> {
                 : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
-
 }
