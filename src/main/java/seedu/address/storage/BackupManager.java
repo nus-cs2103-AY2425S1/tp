@@ -210,10 +210,13 @@ public class BackupManager {
     }
 
     /**
-     * Retrieves a formatted list of all backup files in the backups directory.
+     * Retrieves a formatted list of all backup files in the backups directory, sorted by timestamp
+     * in descending order so that the most recent backups appear first. Each backup entry includes
+     * the index, description, and timestamp.
      *
-     * @return A string with each backup file listed on a new line, with index, description, and timestamp.
-     * @throws IOException If an error occurs while accessing the backup directory.
+     * @return A formatted string with each backup file listed on a new line. If no backups are found,
+     *         an empty string is returned.
+     * @throws IOException If an error occurs while accessing or reading the backup directory.
      */
     public String getFormattedBackupList() throws IOException {
         if (!Files.exists(backupDirectory)) {
@@ -224,7 +227,7 @@ public class BackupManager {
             List<Path> backupFiles = stream
                     .filter(Files::isRegularFile)
                     .filter(path -> path.toString().endsWith(".json"))
-                    .sorted(Comparator.comparingInt(this::extractIndex))
+                    .sorted(Comparator.comparing(this::getFileTimestamp).reversed())
                     .collect(Collectors.toList());
 
             if (backupFiles.isEmpty()) {
