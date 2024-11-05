@@ -185,9 +185,9 @@ Format: `unfav COMPANY_INDEX`
 
 * Sets the favourite field of company at the specified `COMPANY_INDEX` as `false`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
-### Locating companies by name: `find`
+### Locating companies: `find`
 
-Finds companies whose names contain any of the given keywords.
+Finds companies whose names, applications, or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -202,6 +202,10 @@ Examples:
 * `find Inc` returns `inc` and `Apple Inc`
 * `find apple facebook` returns `Apple`, `Facebook`<br>
   ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
+
+* `find hardware SWE` returns `Google`, `Apple` <br>
+  ![result for 'find hardware SWE'](images/findhardwareSWEResult.png)
+
 
 ### Viewing help : `help`
 
