@@ -15,7 +15,7 @@ public class DateOfBirth {
     public static final String MESSAGE_CONSTRAINTS_WRONG_FORMAT = "Date of Birth should be in the format of yyyy-MM-dd"
             + " and should not be blank.";
 
-    public static final String MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST = "Date of Birth is an invalid "
+    public static final String MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST = "The given Date of Birth is an invalid "
             + "date that does not exist.";
 
     public final String value;

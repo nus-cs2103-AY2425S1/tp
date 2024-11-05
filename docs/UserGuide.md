@@ -179,6 +179,8 @@ This example shows how a typical command might look in MediBase3, with three mai
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
 - **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
 
+<div style="page-break-after: always;"></div>
+
 ### A First Look at MediBase3
 
 Here’s a basic tutorial on how to start using the application:
@@ -458,7 +460,6 @@ Format: `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
 
 Example:
 * `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` will delete an appointment on `2024-10-27` from `1100` to `1200` for the patient with NRIC `S1234567A`.
-
 
 [Back to Table of Contents](#table-of-contents)
 
