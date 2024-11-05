@@ -189,10 +189,10 @@ public class GradeList {
         GradeList otherGradeList = (GradeList) other;
         // Sort both grade lists before comparing
         List<Grade> sortedGrades = new ArrayList<>(this.grades.values());
-        sortedGrades.sort(Comparator.comparing(Grade::getTestName));
+        sortedGrades.sort(Comparator.comparing(grade -> grade.getTestName().toLowerCase()));
 
         List<Grade> otherSortedGrades = new ArrayList<>(otherGradeList.grades.values());
-        otherSortedGrades.sort(Comparator.comparing(Grade::getTestName));
+        otherSortedGrades.sort(Comparator.comparing(grade -> grade.getTestName().toLowerCase()));
 
         return sortedGrades.equals(otherSortedGrades);
     }
