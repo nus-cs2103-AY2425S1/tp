@@ -14,7 +14,7 @@ import seedu.address.model.event.Event;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class EventCard extends UiPart<Region> {
+public class EventCard extends UiPart<Region> implements Observer {
 
     private static final String FXML = "EventListCard.fxml";
 
@@ -56,6 +56,14 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName());
+        attendees.setText("Attendees: " + event.getAttendees().size());
+        vendors.setText("Vendors: " + event.getVendors().size());
+        sponsors.setText("Sponsors: " + event.getSponsors().size());
+        volunteers.setText("Volunteers: " + event.getVolunteers().size());
+    }
+
+    @Override
+    public void update() {
         attendees.setText("Attendees: " + event.getAttendees().size());
         vendors.setText("Vendors: " + event.getVendors().size());
         sponsors.setText("Sponsors: " + event.getSponsors().size());

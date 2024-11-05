@@ -11,6 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
+import seedu.address.ui.Observer;
 
 
 /**
@@ -23,6 +24,7 @@ public class Event {
     private final Set<Person> vendors;
     private final Set<Person> sponsors;
     private final Set<Person> volunteers;
+    private Observer observer;
 
     /**
      * Constructs a {@code Event}.
@@ -303,5 +305,12 @@ public class Event {
     public boolean isPersonInEvent(Person person) {
         return attendees.contains(person) || volunteers.contains(person)
                 || sponsors.contains(person) || vendors.contains(person);
+    }
+
+    public void addObserver(Observer observer) {
+        this.observer = observer;
+    }
+    public void updateUi() {
+        this.observer.update();
     }
 }
