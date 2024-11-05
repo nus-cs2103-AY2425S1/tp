@@ -32,7 +32,9 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().map(Phone::toString).orElse("");
     private static final String VALID_EMAIL = BENSON.getEmail().map(Email::toString).orElse("");
-    private static final String VALID_TELEHANDLE = BENSON.getTelegramHandle().toString();
+    private static final String VALID_TELEHANDLE = BENSON.getTelegramHandle().map(TelegramHandle::toString)
+            .orElse("");
+
     private static final String VALID_CONTACTTYPE = BENSON.getContactType().toString();
     private static final String VALID_MODULENAME = BENSON.getModuleName().toString();
     private static final String VALID_REMARK = BENSON.getRemark().toString();
@@ -87,14 +89,6 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_TELEHANDLE, VALID_MODULENAME,
                         VALID_REMARK, VALID_TAGS, VALID_CONTACTTYPE);
         String expectedMessage = TelegramHandle.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullTelegramHandle_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                null, VALID_MODULENAME, VALID_REMARK, VALID_TAGS, VALID_CONTACTTYPE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TelegramHandle.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

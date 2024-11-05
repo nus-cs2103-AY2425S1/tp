@@ -95,7 +95,7 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{contactType=" + ALICE.getContactType() + ", name="
                 + ALICE.getName() + ", phone=" + ALICE.getPhone().map(Phone::toString).orElse(" ")
                 + ", email=" + ALICE.getEmail().map(Email::toString).orElse(" ")
-                + ", telegramHandle=" + ALICE.getTelegramHandle()
+                + ", telegramHandle=" + ALICE.getTelegramHandle().map(TelegramHandle::toString).orElse(" ")
                 + ", moduleName=" + ALICE.getModuleName()
                 + ", remark=" + ALICE.getRemark()
                 + ", tags=" + ALICE.getTags() + "}";

@@ -32,7 +32,7 @@ public class PersonBuilder {
     private Name name;
     private Optional<Phone> phone;
     private Optional<Email> email;
-    private TelegramHandle telegramHandle;
+    private Optional<TelegramHandle> telegramHandle;
     private ModuleName moduleName;
     private Remark remark;
     private Set<Tag> tags;
@@ -45,7 +45,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = Optional.of(new Phone(DEFAULT_PHONE));
         email = Optional.of(new Email(DEFAULT_EMAIL));
-        telegramHandle = new TelegramHandle(DEFAULT_TELEHANDLE);
+        telegramHandle = Optional.of(new TelegramHandle(DEFAULT_TELEHANDLE));
         moduleName = new ModuleName(DEFAULT_MODULENAME);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
@@ -108,7 +108,9 @@ public class PersonBuilder {
      * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
      */
     public PersonBuilder withTelegramHandle(String telegramHandle) {
-        this.telegramHandle = new TelegramHandle(telegramHandle);
+        this.telegramHandle = (telegramHandle == null || telegramHandle.isEmpty())
+                ? Optional.empty()
+                : Optional.of(new TelegramHandle(telegramHandle));
         return this;
     }
 

@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -59,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().map(Phone::toString).orElse(" "));
         email.setText(person.getEmail().map(Email::toString).orElse(" "));
-        telegramHandle.setText(person.getTelegramHandle().value);
+        telegramHandle.setText(person.getTelegramHandle().map(TelegramHandle::toString).orElse(" "));
         moduleName.setText(person.getModuleName().toString());
         String contactTypeStr = person.getContactType().value.toString().toLowerCase();
         remark.setText(person.getRemark().value);
