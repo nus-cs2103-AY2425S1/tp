@@ -114,7 +114,7 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_invalidIndex_throwsCommandException() {
+    public void execute_invalidIndex_throwsCommandException() throws CommandException {
         Set<Tag> tagsToDelete = new HashSet<>();
         tagsToDelete.add(FRIENDS_TAG);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(Index.fromOneBased(7), tagsToDelete);

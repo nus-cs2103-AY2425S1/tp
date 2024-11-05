@@ -1,10 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.ContactDisplay;
 
@@ -25,10 +26,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         try {
             index = ParserUtil.parseIndex(args);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
+        } catch (CommandException | ParseException e) {
+            throw new ParseException(String.format(MESSAGE_NON_POSITIVE_INDEX, ViewCommand.MESSAGE_USAGE), e);
         }
-
         return new ViewCommand(index, new ContactDisplay());
     }
 
