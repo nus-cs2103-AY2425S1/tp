@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.util.Pair;
 import seedu.address.logic.parser.ParserUtil;
 
 /**
@@ -23,7 +24,7 @@ public class Deadline {
             "Deadlines should be in the format dd-MM-yyyy, and it should be a valid date.";
     public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final Pattern PATTERN_DATE =
-            Pattern.compile("^(\\d+)[_\\-\\/\\\\|](\\d+)[_\\-\\/\\\\|](\\d+)$");
+            Pattern.compile("^(\\d+)[_\\-\\/|](\\d+)[_\\-\\/|](\\d+)$");
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
     public static final String DEADLINE_KEY = "deadline";
     private static final Logger logger = Logger.getLogger(Deadline.class.getName());
@@ -39,7 +40,7 @@ public class Deadline {
         requireNonNull(deadline);
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.of(
-                ParserUtil.getYear(deadline), ParserUtil.getMonth(deadline), ParserUtil.getDay(deadline));
+                ParserUtil.getYear(deadline).getKey(), ParserUtil.getMonth(deadline), ParserUtil.getDay(deadline));
     }
 
     /**
@@ -51,7 +52,11 @@ public class Deadline {
         if (datetimeMatcher.find()) {
             int day = ParserUtil.getDay(test);
             int month = ParserUtil.getMonth(test);
-            int year = ParserUtil.getYear(test);
+            Pair<Integer, Boolean> yearPair = ParserUtil.getYear(test);
+            if (!yearPair.getValue()) {
+                return false;
+            }
+            int year = yearPair.getKey();
 
             try {
                 // LocalDate::of method handles invalid dates like 31st Feb or -3rd of the 13th month
