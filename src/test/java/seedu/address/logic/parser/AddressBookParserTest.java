@@ -39,6 +39,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GitHubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveGradeCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -165,5 +166,13 @@ public class AddressBookParserTest {
         GitHubCommand command = (GitHubCommand) parser.parseCommand(GitHubCommand.COMMAND_WORD + arguments);
         Name validName = new Name(VALID_NAME_AMY);
         assertEquals(command, new GitHubCommand(validName, nonFunctionalBrowser));
+    }
+
+    @Test
+    public void parseCommand_removeGrade() throws Exception {
+        String arguments = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE;
+        RemoveGradeCommand command = (RemoveGradeCommand)
+                parser.parseCommand(RemoveGradeCommand.COMMAND_WORD + arguments);
+        assertEquals(command, new RemoveGradeCommand(VALID_NAME_AMY, VALID_ASSIGNMENT_ONE));
     }
 }
