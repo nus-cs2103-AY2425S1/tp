@@ -4,62 +4,62 @@
 !include <office/Users/user>
 !include style.puml
 
-Package "spleetwaise.commons" <<Rectangle>> {
-    Class commons_UI UI_COLOR
-    Class commons_Logic LOGIC_COLOR
-    Class commons_Storage STORAGE_COLOR
-    Class commons_Model MODEL_COLOR
-    Class commons_Main #grey
-    Class commons_Commons LOGIC_COLOR_T2
-}
-
-Package "spleetwaise.aB" <<Rectangle>> {
-    Class aB_UI UI_COLOR
-    Class aB_Logic LOGIC_COLOR
-    Class aB_Storage STORAGE_COLOR
-    Class aB_Model MODEL_COLOR
-    Class aB_Main #grey
-    Class aB_Commons LOGIC_COLOR_T2
-}
-
-Package "spleetwaise.txn" <<Rectangle>> {
-    Class txn_UI UI_COLOR
-    Class txn_Logic LOGIC_COLOR
-    Class txn_Storage STORAGE_COLOR
-    Class txn_Model MODEL_COLOR
-    Class txn_Main #grey
-    Class txn_Commons LOGIC_COLOR_T2
-}
+top to bottom direction
 
 Class "<$user>" as User MODEL_COLOR_T2
+
+Package "spleetwaise.commons" <<Rectangle>> {
+    Class commons_Main #grey
+
+    together {
+        Class commons_Logic LOGIC_COLOR
+        Class commons_Storage STORAGE_COLOR
+        Class commons_UI UI_COLOR
+        Class commons_Model MODEL_COLOR
+    }
+
+}
+
+together {
+    Package "spleetwaise.aB" <<Rectangle>> {
+        Class aB_UI UI_COLOR
+        Class aB_Logic LOGIC_COLOR
+        Class aB_Storage STORAGE_COLOR
+        Class aB_Model MODEL_COLOR
+    }
+
+    Package "spleetwaise.txn" <<Rectangle>> {
+        Class txn_UI UI_COLOR
+        Class txn_Logic LOGIC_COLOR
+        Class txn_Storage STORAGE_COLOR
+        Class txn_Model MODEL_COLOR
+    }
+}
+
 Class "<$documents>" as File UI_COLOR_T1
 
-aB_UI -[#green]> aB_Logic
-aB_UI -right[#green]-> aB_Model
-aB_Logic -[#blue]-> aB_Storage
-aB_Logic -down[#blue]-> aB_Model
-aB_Main -[#grey]-> aB_UI
-aB_Main -[#grey]-> aB_Logic
-aB_Main -[#grey]-> aB_Storage
-aB_Main -up[#grey]-> aB_Model
-aB_Main -down[hidden]-> aB_Commons
+commons_UI -[#green].> commons_Logic
+commons_UI -right[#green].> commons_Model
+commons_Logic -[#blue].> commons_Storage
+commons_Logic -down[#blue].> commons_Model
+commons_Main -[#grey].> commons_UI
+commons_Main -[#grey].> commons_Logic
+commons_Main -[#grey].> commons_Storage
+commons_Main -up[#grey].> commons_Model
 
-txn_UI -[#green]> txn_Logic
-txn_UI -right[#green]-> txn_Model
-txn_Logic -[#blue]-> txn_Storage
-txn_Logic -down[#blue]-> txn_Model
-txn_Main -[#grey]-> txn_UI
-txn_Main -[#grey]-> txn_Logic
-txn_Main -[#grey]-> txn_Storage
-txn_Main -up[#grey]-> txn_Model
-txn_Main -down[hidden]-> txn_Commons
 
-aB_Storage -up[STORAGE_COLOR].> File
-txn_Storage -up[STORAGE_COLOR].> File
-User ..> aB_UI
+commons_Storage -down[STORAGE_COLOR].> File
+User -down.> commons_UI
 
-aB_Logic -down[#blue]-> commons_Logic
-txn_Logic -down[#blue]-> commons_Logic
-aB_Model -down[#red]-> commons_Model
-txn_Model -down[#red]-> commons_Model
+commons_UI -down[#green].> txn_UI
+commons_UI -down[#green].> aB_UI
+
+commons_Logic -down[#blue].> txn_Logic
+commons_Logic -down[#blue].> aB_Logic
+
+commons_Model -down[#red].> aB_Model
+commons_Model -down[#red].> txn_Model
+
+commons_Storage -down[STORAGE_COLOR].> aB_Storage
+commons_Storage -down[STORAGE_COLOR].> txn_Storage
 @enduml
