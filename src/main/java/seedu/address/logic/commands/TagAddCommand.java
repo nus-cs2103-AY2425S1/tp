@@ -185,7 +185,7 @@ public class TagAddCommand extends Command {
      * @throws CommandException if none of the weddings corresponding to the tags exist.
      */
     private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) throws CommandException {
-        List<Wedding> weddingList = model.getWeddingfromTags(editedTags);
+        List<Wedding> weddingList = model.getWeddingFromTags(editedTags);
 
         if (weddingList.isEmpty()) {
             Set<Tag> tagsDontExist = new HashSet<>(editedTags);
@@ -215,7 +215,7 @@ public class TagAddCommand extends Command {
      * @param model current Model containing necessary wedding address book.
      */
     private void setPersonInWedding(Person editedPerson, Person personToEdit, Model model) {
-        List<Wedding> weddingList = model.getWeddingfromTags(editedPerson.getTags());
+        List<Wedding> weddingList = model.getWeddingFromTags(editedPerson.getTags());
 
         List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
                 .toList();
