@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
@@ -10,10 +13,6 @@ import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Represents the top-level AddressBook. It holds managers responsible for volunteers and events.
@@ -68,26 +67,22 @@ public class AddressBook implements ReadOnlyAddressBook {
                 eventsInvolvedIn.add(eventManager.getEventFromName(eventName));
             }
 
-            List<Event> overlappingEvents = new LinkedList<>();
-
-            boolean loopAgain = false;
             // check if any events are overlapping
             for (Event event : eventsInvolvedIn) {
-                loopAgain = false;
+                boolean hasOverlappingEvents = false;
                 for (Event otherEvent : eventsInvolvedIn) {
                     if (event != otherEvent && event.isOverlappingWith(otherEvent)) {
-                        System.out.println("Unassigning " + v.getName().fullName + " from " + event.getName().toString());
+                        System.out.println("Unassigning " + v.getName().fullName + " from "
+                                + event.getName().toString());
                         unassignVolunteerFromEvent(v, event);
                         eventsInvolvedIn.remove(event);
-                        loopAgain = true;
+                        hasOverlappingEvents = true;
                     }
                 }
-                if (loopAgain) {
+                if (hasOverlappingEvents) {
                     break;
                 }
             }
-
-
         }
     }
 
