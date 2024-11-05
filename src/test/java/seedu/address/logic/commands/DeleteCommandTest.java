@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -44,7 +45,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws CommandException {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -104,7 +105,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toStringMethod() throws CommandException {
         List<Index> targetIndices = List.of(Index.fromOneBased(1));
         DeleteCommand deleteCommand = new DeleteCommand(targetIndices);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=" + targetIndices + "}";
