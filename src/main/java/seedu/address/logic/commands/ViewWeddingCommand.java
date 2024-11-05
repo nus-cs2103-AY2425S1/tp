@@ -18,17 +18,17 @@ import seedu.address.model.wedding.Wedding;
 public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view-wed";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
-            + ": Shows all persons involved in the weddings of the specified\n"
+            + ": Shows all persons involved in the weddings of the specified "
             + "keywords (case-insensitive)\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: NAME & NAME\n"
             + "Example: " + COMMAND_WORD + " Jonus & Izzat";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found.\n"
-            + "Please make sure that the wedding is created and is in the format\n'NAME & NAME'.\n"
+            + "Please make sure that the wedding is created and is in the format 'NAME & NAME'.\n"
             + "If you have not created a wedding yet, you can do so using the '"
             + AddWeddingCommand.COMMAND_WORD
-            + "'\ncommand.";
+            + "'command.";
     public static final String MESSAGE_NO_PARTICIPANTS_ADDED =
             String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 0)
             + "\n"

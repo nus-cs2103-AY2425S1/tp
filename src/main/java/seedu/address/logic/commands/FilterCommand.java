@@ -17,7 +17,7 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
-            + ": Filters all persons whose names or jobs contain any of the specified\n"
+            + ": Filters all persons whose names or jobs contain any of the specified "
             + "keywords (case-insensitive)";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
