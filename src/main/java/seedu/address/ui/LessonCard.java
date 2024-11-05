@@ -38,6 +38,25 @@ public class LessonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         date.setText(lesson.getDate().toString() + ", ");
         time.setText(lesson.getTime().toString());
+
+        // Combine date and time for comparison with current date and time
+        LocalDateTime lessonDateTime = LocalDateTime.of(
+                lesson.getDate().getLocalDateValue(),
+                lesson.getTime().getLocalTimeValue());
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // Apply the appropriate CSS class based on the lesson time
+        if (lessonDateTime.isBefore(currentDateTime)) {
+            if (displayedIndex % 2 == 0) {
+                cardPane.getStyleClass().add("lesson-card-past-even");
+            } else {
+                cardPane.getStyleClass().add("lesson-card-past-odd");
+            }
+            id.getStyleClass().add("lesson-card-strikethrough");
+            date.getStyleClass().add("lesson-card-strikethrough");
+            time.getStyleClass().add("lesson-card-strikethrough");
+        }
+
         lesson.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
                 .forEach(student -> {
@@ -60,24 +79,6 @@ public class LessonCard extends UiPart<Region> {
                     HBox studentBox = new HBox(0);
                     studentBox.getChildren().addAll(studentNameLabel, participationLabel);
                     students.getChildren().add(studentBox);
-
-                    // Combine date and time for comparison with current date and time
-                    LocalDateTime lessonDateTime = LocalDateTime.of(
-                            lesson.getDate().getLocalDateValue(),
-                            lesson.getTime().getLocalTimeValue());
-                    LocalDateTime currentDateTime = LocalDateTime.now();
-
-                    // Apply the appropriate CSS class based on the lesson time
-                    if (lessonDateTime.isBefore(currentDateTime)) {
-                        if (displayedIndex % 2 == 0) {
-                            cardPane.getStyleClass().add("lesson-card-past-even");
-                        } else {
-                            cardPane.getStyleClass().add("lesson-card-past-odd");
-                        }
-                        id.getStyleClass().add("lesson-card-strikethrough");
-                        date.getStyleClass().add("lesson-card-strikethrough");
-                        time.getStyleClass().add("lesson-card-strikethrough");
-                    }
                 });
     }
 }
