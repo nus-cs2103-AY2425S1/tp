@@ -150,7 +150,7 @@ public class AddressBookParserTest {
     public void parseCommand_addGrade() throws Exception {
         String arguments = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + SCORE_DESC;
         AddGradeCommand command = (AddGradeCommand) parser.parseCommand(AddGradeCommand.COMMAND_WORD + arguments);
-        assertEquals(command, new AddGradeCommand(VALID_NAME_AMY, VALID_SCORE, VALID_ASSIGNMENT_ONE));
+        assertEquals(command, new AddGradeCommand(new Name(VALID_NAME_AMY), VALID_SCORE, VALID_ASSIGNMENT_ONE));
     }
 
     @Test

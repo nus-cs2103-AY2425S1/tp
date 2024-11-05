@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -26,7 +29,7 @@ public class ViewCommand extends Command {
     public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact ";
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact ";
     private static final ViewCommand closeView = new ViewCommand();
-    private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null);
+    private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null, true);
 
     private final Name personName;
     private final boolean isClose;
@@ -63,12 +66,16 @@ public class ViewCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
-        Person person =
-                model.getAddressBook().getPersonList().stream()
-                        .filter(p -> p.getName().equalIgnoreCase(personName))
-                        .findFirst().orElseThrow();
-
-        return new CommandResult(VIEW_ACKNOWLEDGMENT, person);
+        ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
+        model.getAddressBook().getPersonList().addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    person.set(null);
+                    model.getPerson(personName).ifPresentOrElse(person::set, () -> {});
+                }
+            }
+        });
+        return new CommandResult(VIEW_ACKNOWLEDGMENT, person, false);
     }
 
     @Override
