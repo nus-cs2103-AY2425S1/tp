@@ -78,9 +78,54 @@ Adds a person to the Client Hub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​`
 
+A **valid** `NAME` should:
+* Not be empty.
+    * For eg. Just typing `n/` without providing any `NAME` will throw an error.
+* Can only have one name.
+    * For eg. Typing `n/John Doe n/John Eng` will throw an error.
+
+A **valid** `PHONE_NUMBER` should:
+* Only numbers are allowed.
+    * For eg. Typing `find p/abc` will throw an error.
+* Not be empty.
+    * For eg. Just typing `p/` without providing any `PHONE_NUMBER` will throw an error.
+* Only 8 digit phone numbers are allowed
+    * For eg. Typing `p/123456789` will throw an error.
+* Can only have one phone number.
+    * For eg. Typing `p/12345678 p/12345678` will throw an error.
+
+A **valid** `EMAIL` should:
+* Not be empty.
+    * For eg. Just typing `e/` without providing any `EMAIL` will throw an error.
+* Can only have one email.
+    * For eg. Typing `e/abc@mail.com e/example@mail.com` will throw an error.
+
+A **valid** `ADDRESS` should:
+* Not be empty.
+    * For eg. Just typing `a/` without providing any `ADDRESS` will throw an error.
+* Can only have one address.
+    * For eg. Typing `a/John street, block 123, #01-01 a/John street, block 123, #01-02` will throw an error.
+
+A **valid** `CLIENT_TYPE` should:
+* Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
+    * `CLIENT_TYPE` will always be in alphanumeric format.
+* Not be empty.
+    * For eg. Just typing `c/` without providing any `CLIENT_TYPE` will throw an error.
+* Can have multiple client types.
+    * For eg. Typing `c/Plan A c/Plan B` is valid.
+
+A **valid** `DESCRIPTION` should:
+* Not be empty.
+    * For eg. Just typing `d/` without providing any `DESCRIPTION` will throw an error.
+    * Be limited to 500 characters
+    * For eg. Typing `d/Imagine this is a very long description that is more than 500 characters long` will throw an error.
+* Can only have one description.
+    * For eg. Typing `d/likes bubble tea d/likes bubble tea` will throw an error.
+
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Plan A d/likes bubble tea`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Plan A c/Plan B d/Loves travelling`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Investment d/likes bubble tea`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Investment c/Healthcare d/Loves travelling`
 
 ### Listing all persons : `list`
 
@@ -108,7 +153,7 @@ Examples:
 
 Finds persons by name, phone number, address or client type.
 
-Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYWORD`
+Format: `find n/NAME` or `find p/PHONE_NUMBER` or `find a/ADDRESS` or `find c/CLIENT_TYPE`
 
 #### Locating by name: `find n/NAME`
   * Only the name is searched.
@@ -121,6 +166,9 @@ Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYW
 A **valid** `NAME` should:
 * Not be empty.
     * For eg. Just typing `find n/` without providing any `KEYWORD` will throw an error.
+* Be a valid name that exists in the list of contacts.
+    * For eg. Typing `find n/John Doe` when there is no contact with the name `John Doe` will throw an error.
+
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -167,6 +215,7 @@ Result for `find a/tampines`:
 * Only the `CLIENT_TYPE` of the person is searched.
 * Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
 * Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+
 A **valid** `CLIENT_TYPE` should:
 * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `client_type` will always be in alphanumeric format.
