@@ -314,8 +314,6 @@ Given below is an example usage scenario and how the export process behaves at e
 Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data 
 before exporting it.
 
-<puml src="diagrams/ExportCommand.puml" alt="ExportCommand"></puml>
-
 Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with 
 `EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `addressbook.json`.
 
@@ -329,7 +327,7 @@ Note: The `performExport` method is asynchronous, leveraging `CompletableFuture`
 
 The following sequence diagram explains how the export operation works:
 
-<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram"></puml>
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram"/>
 
 Design Considerations:
 Aspect: Export Execution and Destination Selection
