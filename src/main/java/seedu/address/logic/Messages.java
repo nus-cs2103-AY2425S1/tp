@@ -25,6 +25,7 @@ public class Messages {
     public static final String MESSAGE_MARK_ALREADY_SUCCESS = "Attendance is already marked for this student!";
     public static final String MESSAGE_UNMARK_ALREADY_SUCCESS = "Attendance is already unmarked for this student";
     public static final String MESSAGE_UNMARK_SUCCESS = "%1$s is marked as absent for week %2$d";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NAME = "Invalid assignment name: %1$s";
 
 
     /**

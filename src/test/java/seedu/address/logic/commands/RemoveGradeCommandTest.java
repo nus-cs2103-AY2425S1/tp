@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,19 +31,19 @@ public class RemoveGradeCommandTest {
     }
 
     @Test
-    public void assignment_invalidName() {
+    public void assignment_invalidName() throws ParseException {
         RemoveGradeCommand command = new RemoveGradeCommand("John Doe", "ex10");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
-    public void person_invalidName() {
+    public void person_invalidName() throws ParseException {
         RemoveGradeCommand command = new RemoveGradeCommand("John DoeDoedoe", "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
-    public void constructor_validRemoveGradeCommandFormat_success() {
+    public void constructor_validRemoveGradeCommandFormat_success() throws ParseException {
         RemoveGradeCommand command = new RemoveGradeCommand("John Doe", "Ex09");
         assertNotNull(command);
     }
@@ -65,13 +66,14 @@ public class RemoveGradeCommandTest {
     }
 
     @Test
-    public void execute_assignmentDoesNotExist_throwsCommandException() {
-        RemoveGradeCommand command = new RemoveGradeCommand("Alice Pauline", "NonExistentAssignment");
+    public void execute_assignmentDoesNotExist_throwsCommandException() throws ParseException {
+        RemoveGradeCommand command =
+                new RemoveGradeCommand("Alice Pauline", "NonExistentAssignment");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
-    public void execute_personDoesNotExist_throwsCommandException() {
+    public void execute_personDoesNotExist_throwsCommandException() throws ParseException {
         RemoveGradeCommand command = new RemoveGradeCommand("NonExistentPerson", "Ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
@@ -91,14 +93,14 @@ public class RemoveGradeCommandTest {
 
     }
     @Test
-    public void execute_assignmentAlreadyAbsent_throwsCommandException() {
+    public void execute_assignmentAlreadyAbsent_throwsCommandException() throws ParseException {
         RemoveGradeCommand command = new RemoveGradeCommand("Alice Pauline", "Ex01");
 
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
-    public void execute_toString() {
+    public void execute_toString() throws ParseException {
         RemoveGradeCommand c = new RemoveGradeCommand("Alice Pauline", "Ex01");
 
         String expectedOutput = "Alice Pauline Ex01";
@@ -106,10 +108,16 @@ public class RemoveGradeCommandTest {
     }
 
     @Test
-    public void equals_differentCommands_returnsFalse() {
+    public void equals_differentCommands_returnsFalse() throws ParseException {
         RemoveGradeCommand command1 = new RemoveGradeCommand("Alice Pauline", "Ex01");
         RemoveGradeCommand command2 = new RemoveGradeCommand("Alice Pauline", "Ex02");
 
         assertFalse(command1.equals(command2));
+    }
+
+    @Test
+    public void equals_differentObjectType_returnsFalse() throws ParseException {
+        RemoveGradeCommand command = new RemoveGradeCommand("Alice Pauline", "Ex01");
+        assertFalse(command.equals("Not a RemoveGradeCommand"));
     }
 }

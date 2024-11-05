@@ -2,14 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_ASSIGNMENT_NAME;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.ParserUtil.parseName;
 
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Email;
@@ -32,17 +36,17 @@ public class RemoveGradeCommand extends Command {
                     + PREFIX_NAME
                     + "NAME "
                     + PREFIX_ASSIGNMENT
-                    + "ASSIGNMENT "
+                    + "ASSIGNMENT\n"
                     + "Example: "
                     + COMMAND_WORD
                     + " "
                     + PREFIX_NAME
                     + "John Doe "
                     + PREFIX_ASSIGNMENT
-                    + "Ex09 ";
+                    + "Ex09";
 
     public static final String MESSAGE_SUCCESS = "Assignment %1$s removed from %2$s";
-    public static final String MESSAGE_FAILURE = "Assignment %s already removed for %s.";
+    public static final String MESSAGE_FAILURE = "Assignment %s does not exist for %s.";
     private final Name personName;
     private final String assignmentName;
 
@@ -50,9 +54,9 @@ public class RemoveGradeCommand extends Command {
      * @param personName     Name of the person.
      * @param assignmentName Name of assignment.
      */
-    public RemoveGradeCommand(String personName, String assignmentName) {
+    public RemoveGradeCommand(String personName, String assignmentName) throws ParseException {
         requireAllNonNull(personName, assignmentName);
-        this.personName = new Name(personName);
+        this.personName = parseName(personName);
         this.assignmentName = assignmentName;
     }
 
@@ -79,12 +83,12 @@ public class RemoveGradeCommand extends Command {
 
         // check if assignment is in predefined list
         if (!model.hasAssignment(assignmentName)) {
-            throw new CommandException("Invalid assignment name: " + assignmentName);
+            throw new CommandException(String.format(MESSAGE_INVALID_ASSIGNMENT_NAME, assignmentName));
         }
 
         Person person = model.getPerson(personName)
                 .orElseThrow(() ->
-                        new CommandException("Person " + personName + " not in address book"));
+                        new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
         // Check if the assignment is already missing from the person's record
         if (!person.getAssignment().containsKey(assignmentName)) {
