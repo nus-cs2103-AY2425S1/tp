@@ -27,7 +27,7 @@ title: "Knotty Planner - Your Ultimate Wedding Planning Companion"
 - **Reliable**: Built with robust technologies like JavaFX, Jackson, and JUnit5.
 - **Community-Driven**: Join our community of users and developers to share tips and get support.
 
-## Why Wait? Get Started Today! 🎉
+## Get Started Today! 🎉
 * If you are interested in using Knotty Planner, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing Knotty Planner, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 * We value your feedback! Reach out to us with any suggestions or issues.
