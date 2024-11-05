@@ -110,6 +110,13 @@ public class SortCommandTest {
     }
 
     @Test
+    public void execute_emptyPersonList_throwsCommandException() {
+        Model emptyModel = new ModelManager();
+        SortCommand sortCommand = new SortCommand("n/", "asc");
+        assertCommandFailure(sortCommand, emptyModel, SortCommand.MESSAGE_EMPTY_PERSON_LIST);
+    }
+
+    @Test
     public void equals() {
         SortCommand sortByNameAsc = new SortCommand("n/", "asc");
         SortCommand sortByNameDesc = new SortCommand("n/", "desc");

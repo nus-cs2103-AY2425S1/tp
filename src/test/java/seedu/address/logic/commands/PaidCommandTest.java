@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAID_INSURANCE_PAYMENT;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -69,6 +72,42 @@ public class PaidCommandTest {
         PaidCommand paidCommand = new PaidCommand(outOfBoundIndex, Index.fromOneBased(1));
 
         assertCommandFailure(paidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void toStringMethod() {
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, Index.fromOneBased(1));
+        String expected = new ToStringBuilder(paidCommand)
+                .add("targetIndex", INDEX_FIRST_PERSON)
+                .add("policyIndex", Index.fromOneBased(1))
+                .toString();
+        assertEquals(expected, paidCommand.toString());
+    }
+
+    @Test
+    public void equals() {
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, Index.fromOneBased(1));
+        PaidCommand paidCommandCopy = new PaidCommand(INDEX_FIRST_PERSON, Index.fromOneBased(1));
+        PaidCommand paidCommandDifferent = new PaidCommand(Index.fromOneBased(2), Index.fromOneBased(1));
+        PaidCommand paidCommandDifferent2 = new PaidCommand(INDEX_FIRST_PERSON, Index.fromOneBased(2));
+
+        // same object -> returns true
+        assertEquals(paidCommand, paidCommand);
+
+        // same values -> returns true
+        assertEquals(paidCommand, paidCommandCopy);
+
+        // different types -> returns false
+        assertFalse(paidCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(paidCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(paidCommand.equals(paidCommandDifferent));
+
+        // different policy -> returns false
+        assertFalse(paidCommand.equals(paidCommandDifferent2));
     }
 
 }
