@@ -97,6 +97,15 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
       >
       > ---
+   
+    <br>
+    <div class="alert" markdown="span">
+    NAME is case-insensitive: 
+    `buyer n/Bob` = `buyer n/BOB` = `buyer n/bOb` _(Not exhaustive)_
+  
+    If a buyer/seller with the same name already exists, the equivalent commands above cannot be carried out
+    </div>
+    <br>
 
     - **Failed Execution:**
       > ---
@@ -135,6 +144,12 @@ Commands for creating, updating, and deleting buyers and sellers.
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
+      > **User Error #4**: Buyer already exists 
+      > 
+      > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
+      > 
+      > **Output**: This buyer already exists in the address book
+      > 
       > ---
 - #### Add Seller Command
     - **Format:** `seller n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
@@ -191,6 +206,16 @@ Commands for creating, updating, and deleting buyers and sellers.
         seller: Adds a seller to the address book. <br>
         Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
         Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+      >
+      > ---
+      > 
+      > **User Error #4**: Seller already exists
+      > 
+      > **Input**: `seller n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_ 
+      > 
+      > **Output**: This buyer already exists in the address book
+      > 
+      >  ---
 
 - #### Find Command
     - **Format:** `find KEYWORD [KEYWORD...]`
@@ -308,8 +333,8 @@ Commands for creating, updating, and deleting buyers and sellers.
     
     <br>
     <div class="note" markdown="span">
-    Delete is case-insensitive: 
-    `delete Bob` = `delete BOB` = `delete bOb` 
+    NAME is case-insensitive: 
+    `delete Bob` = `delete BOB` = `delete bOb` _(Not exhaustive)_
     </div>
     <br>
       
@@ -542,12 +567,12 @@ Commands for managing property listings and associating clients with listings.
     Listing and buyer names are case-insensitive: 
     `addlistingbuyers Warton House` 
     = `addlistingbuyers warton house` 
-    = `addlistingbuyers wArToN HouSe` 
+    = `addlistingbuyers wArToN HouSe` _(Not exhaustive)_
     <br>
     <br>
     `addlistingbuyers warton house buyer/Alex Yeoh` 
     = `addlistingbuyers warton house buyer/alex yeoh` 
-    = `addlistingbuyers warton house buyer/aLeX yEoH
+    = `addlistingbuyers warton house buyer/aLeX yEoH _(Not exhaustive)_
     </div>
     <br>
 
