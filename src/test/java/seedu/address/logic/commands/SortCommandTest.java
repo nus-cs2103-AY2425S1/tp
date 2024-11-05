@@ -189,6 +189,7 @@ public class SortCommandTest {
         SortCommand sortCommandNullName2 = new SortCommand(null, "desc");
 
         // Expected for both to equal due to same tag name
+        assertEquals(sortCommand1, sortCommand1);
         assertEquals(sortCommand1, sortCommand2);
         // Expected to not equal due to different tag names
         assertNotEquals(sortCommand2, emptyStringNameCommand);
