@@ -241,7 +241,7 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
 
 Example:
 * `createGroup g/blood drive 2024 m/3 4` creates a new group named `blood drive 2024`
-  with the 3rd and 4th persons in the current address book as members.
+  with the 3rd and 4th persons in the current list in view as members.
 
 ### Adding new members to a existing group : `addToGroup`
 
@@ -256,8 +256,8 @@ must be valid indices.
 * If either of the above conditions are not met, the command will fail.
 
 Example:
-* `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 as
-  members to the existing group named `blood drive`.
+* `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 of
+  the current list in view as members to the existing group named `blood drive`.
 
 ### Editing a group's name : `editGroupName`
 
