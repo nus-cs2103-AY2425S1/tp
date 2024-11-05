@@ -108,8 +108,7 @@ public interface Model {
 
     /**
      * Updates the filtered person list to be sorted by the given {@code comparator}.
-     *
-     * @throws NullPointerException if {@code comparator} is null.
+     * Ordering is set to default if {@code null} is the argument.
      */
     void updateSortedPersonList(Comparator<Person> comparator);
 

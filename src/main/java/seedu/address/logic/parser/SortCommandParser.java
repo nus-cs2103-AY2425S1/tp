@@ -66,7 +66,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     private static SortField parseSortField(String userInput) throws ParseException {
-        String trimmedInput = userInput.trim();
+        String trimmedInput = userInput.trim().toLowerCase();
         return switch (trimmedInput) {
         case "name" -> SortField.NAME;
         case "github" -> SortField.GITHUB;
