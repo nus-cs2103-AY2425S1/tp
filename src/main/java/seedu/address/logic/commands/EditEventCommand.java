@@ -24,6 +24,7 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
@@ -79,13 +80,24 @@ public class EditEventCommand extends EditCommand {
         }
 
         if (editEventDescriptor.celebrityName != null) {
-            editEventDescriptor.setCelebrity(model.findPerson(editEventDescriptor.celebrityName.trim()));
+            Person updatedCelebrity;
+            try {
+                updatedCelebrity = model.findPerson(editEventDescriptor.celebrityName);
+            } catch (PersonNotFoundException e) {
+                throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
+            }
+            editEventDescriptor.setCelebrity(updatedCelebrity);
         }
 
         if (editEventDescriptor.contactsNames != null) {
-            Set<Person> newSet = new HashSet<>(editEventDescriptor.contactsNames.stream()
-                    .map(model::findPerson)
-                    .toList());
+            Set<Person> newSet;
+            try {
+                newSet = new HashSet<>(editEventDescriptor.contactsNames.stream()
+                        .map(model::findPerson)
+                        .toList());
+            } catch (PersonNotFoundException e) {
+                throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
+            }
             editEventDescriptor.setContacts(newSet);
         }
 
