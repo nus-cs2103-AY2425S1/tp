@@ -121,7 +121,7 @@ public class ParserUtil {
         }
 
         if (!DateUtil.isValidDate(trimmedDob)) {
-            throw new ParseException(DateUtil.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST);
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST);
         }
 
         if (!DateOfBirth.isValidDateOfBirth(trimmedDob)) {
