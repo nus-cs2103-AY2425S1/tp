@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -188,5 +189,59 @@ public class ParserUtil {
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
+    }
+
+    /**
+     * Returns the day given in a string representing a date
+     */
+    public static int getDay(String date) {
+        // defensive programming
+        Matcher datetimeMatcher = Deadline.PATTERN_DATE.matcher(date);
+
+        if (datetimeMatcher.find()) {
+            return Integer.parseInt(datetimeMatcher.group(1));
+        } else {
+            return -1; // will eventually throw an error
+        }
+    }
+
+    /**
+     * Returns the month given in a string representing a date
+     */
+    public static int getMonth(String date) {
+        // defensive programming
+        Matcher datetimeMatcher = Deadline.PATTERN_DATE.matcher(date);
+
+        if (datetimeMatcher.find()) {
+            return Integer.parseInt(datetimeMatcher.group(2));
+        } else {
+            return -1; // will eventually throw an error
+        }
+    }
+
+    /**
+     * Returns the year given in a string representing a date.
+     * The year can either be a 2 digit number or a 4-digit number.
+     * A 2-digit year is converted to a 4-digit year by adding 2000:
+     *      Ex: 24 is considered as 2024
+     * A year with 4+ digits is kept as-is.
+     * A 1-digit or 3-digit year is considered invalid.
+     */
+    public static int getYear(String date) {
+        // defensive programming
+        Matcher datetimeMatcher = Deadline.PATTERN_DATE.matcher(date);
+
+        if (datetimeMatcher.find()) {
+            int year = Integer.parseInt(datetimeMatcher.group(3));
+            if (year >= 10 && year <= 99) {
+                year += 2000;
+            } else if (year < 10 || (year > 99 && year < 1000)) {
+                return -1; // will eventually throw an error
+            }
+
+            return year;
+        } else {
+            return -1; // will eventually throw an error
+        }
     }
 }
