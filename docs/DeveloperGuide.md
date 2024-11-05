@@ -222,83 +222,37 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ## **Implementation of main features**
 
-### Add person feature
+## **Implementation of Entity Commands**
+Entity commands include `add`, `delete`, `find`, `clear` commands.
+So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
-#### Implementation
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
 
-#### Design considerations
 
-<br>
+**Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
 
-### Edit person feature
 
-#### Implementation
+**Step 3**. The `AddressBookParser` creates a `xyzEntityCommand` object, and call the `xyzCommandParser::parse` method, which is returned to the `LogicManager`. This may be different based on the entity type as commands like `addPersonCommand` and `addApptCommand` have a different set of arguments the user can provide. 
 
-#### Design considerations
 
-<br>
+**Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 
-### Delete person feature
+**Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
-#### Implementation
+<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
+- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand` because we have two entities called person and appointment on which operations can be performed.
 
-#### Design considerations
 
-<br>
+#### Find Appointment Command
+**Aspect: How to show find appointment.**
 
-### Find person feature
+- **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+  - Pros: Fast and easy to find by date and name
+  - Cons: Confusing syntax from user's perspective
 
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### List person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Clear person feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Add appointment feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Edit appointment feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Delete appointment feature
-
-#### Implementation
-
-#### Design considerations
-
-<br>
-
-### Find appointment feature
-
-#### Implementation
-
-#### Design considerations
+- **Alternative 2**: Create different find commands, find by date, find by name etc.
+  - Pros: Much easy in terms of user experience
+  - Cons: Harder to implement as more code needs to be written.
 
 <br>
 
@@ -306,15 +260,25 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 #### Implementation
 
+**Aspect**: How to show list 
+
+- **Alternative 1 (Current choice)**: Print them out individually on the listpanel
+  - Pros: Easy to scroll through
+  - Cons: Might look cluttered to some users
+
+
 #### Design considerations
 
 <br>
 
 ### Clear appointment feature
 
-#### Implementation
 
 #### Design considerations
+
+**Aspect**: How to show list
+
+- **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
 
 <br>
 
@@ -718,6 +682,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
 
+#### GUI
+
+* **Command box**: The box to type in enter commands
+* **Result display/status bar**: The box to display the result of commands
+* **Help window**: The window that displays the help information
+* **Address list/list of persons**: List of address
+* **Appointment list/list of appointments**: List of appointments
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -740,58 +712,128 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
+   2. Open up a terminal, and run the following command: `java -jar DocTrack.jar`
+      - Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
+2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Adding a person
+
+1. Adding a person
+   1. Prerequisites: None
+   2. Test case:`add person n/Elmo p/98765432 e/elmo@sesa.me a/Sesame Street st/recovering t/insurance`
+   3. Expected: A new contact is added to the list.
+   - The status bar shows the following: "New person added: Elmo; Phone: 98765432; 
+   Email: elmo@sesa.me; Address: Sesame Street; Status: recovering; Tags: [insurance]"
+   - The list of persons should now have the new contact inside it.
+    
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+   1. Prerequisites: Multiple persons in the DocTrack. If they are not shown, do `list person`.
+   2. Test case: `delete person 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+   Timestamp in the status bar is updated.
+   3. Test case: `delete person -1`<br>
+         Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+         Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Editing a person
 
+1. Editing a person
+    1. Prerequisites: At least one person is showing in the list.
+    2. Test case:`edit person 1 p/90909090`
+    3. Expected: The contact is edited.
+    - The status bar shows the following: "Edited person.... Phone: 90909090...."
+    - The list of persons should now have the edited contact inside it.
+
 ### Finding a person
+
+1. Finding a person
+    1. Prerequisites: At least one person in DocTrack. 
+        - For a simple example, use the person added in the test case for adding a person.
+    2. Test case:`find person n/Elmo`
+    3. Expected: The list is updated to show all the people with names containing "elmo", non-case-sensitive.
+    - The status bar shows the following: "Found `n` persons".
+    - The `n` refers to the amount of people with names containing "elmo".
+    - The list of persons should now only show people matching the criteria.
+
+### Clearing person list
+
+1. Clearing the person list 
+    1. Prerequisites: At least one person in DocTrack, for proper testing.
+   2. Test case: `clear person`
+   3. Expected: The list is updated to show no persons.
+   - The status bar shows the following: "Address book has been cleared!"
+   - The list of appointments should also be empty.
 
 ### Adding an appointment
 
+1. Adding a person
+    1. Prerequisites: There must be a person with the PID 1.
+    2. Test case:`add appt ty/Check up d/2024-10-16 12:30:30 i/1 s/Common Cold m/Paracetamol`
+    3. Expected: A new appointment is added to the list.
+    - The status bar shows the following: "New appointment added: Check up; Date and Time2024-10-16T12:30:30; 
+   Sickness: Common Cold; Medicine: Paracetamol
+    - The list of appointments should now have the new appointment inside it.
+
 ### Deleting an appointment
 
+1. Deleting a person while all persons are being shown
+    1. Prerequisites: Multiple appointments in DocTrack. If they are not shown, do `list appt`.
+    2. Test case: `delete appt 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted appointment shown in the status message.
+       Timestamp in the status bar is updated.
+    3. Test case: `delete appt -1 `<br>
+       Expected: No appointment is deleted. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: No appointment is deleted. Error details shown in the status message. Status bar remains the same.
+   
 ### Editing an appointment
 
+1. Editing a person
+    1. Prerequisites: At least one person is showing in the list.
+    2. Test case:`edit appt 1 ty/Health Checkup`
+    3. Expected: The appointment is edited.
+    - The status bar shows the following: "Edited Appointment: Health Checkup; ....."
+    - The list of appointments should now have the edited appointment inside it.
+
 ### Finding an appointment
+
+1. Finding an appointment
+    1. Prerequisites: At least one appointment in the DocTrack book.
+        - For a simple example, use the appointment added in the test case for adding a person.
+    2. Test case:`find appt n/[NAME]`
+    3. Expected: The list is updated to show all the appointments with names containing "[NAME]", non-case-sensitive.
+    - The status bar shows the following: "Found `n` appointments".
+   - The `n` refers to the amount of appointment for people with names containing "elmo".
+    - The list of appointments should now only show appointments matching the criteria.
+
+### Clearing person list
+
+1. Clearing the appointment list
+    1. Prerequisites: At least one person in DocTrack, for proper testing.
+    2. Test case: `clear appt`
+    3. Expected: The list is updated to show no appointment.
+    - The status bar shows the following: "Appointment book has been cleared!"
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Test case: missing data file
+       1. Navigate to `../data` and delete the `.json` files.
+       2. Run the application 
+       3. Expected: The application should still run, with sample data shown in the list.
+    2. Test case: corrupted data file
+       1. Navigate to `../data` and edit the `.json` file, adding a random `/` at the end.
+       2. Run the application
+       3. Expected: The application should still run, with sample data shown in the list.
 
 <br>
 

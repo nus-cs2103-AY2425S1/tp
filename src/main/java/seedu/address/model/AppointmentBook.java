@@ -131,6 +131,10 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
         appointments.remove(key);
     }
 
+    public void removeAppointmentsForPerson(Person person) {
+        appointments.removeAppointmentsForPerson(person);
+    }
+
     //// util methods
 
     @Override

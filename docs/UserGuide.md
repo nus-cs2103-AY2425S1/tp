@@ -59,7 +59,7 @@ _If you type fast, this application can serve as an excellent substitute for you
 
 5. A GUI similar to the one below should appear in a few seconds. Note how the DocTrack application contains some sample data.
    <br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Updated_UI.png)
 
 <br>
 
@@ -255,7 +255,7 @@ Deletes the specified person from the address book.
 
 ##### Clearing all persons : `clear person`
 
-Clears all entries from the address book after a validation check from the user.
+Deletes all entries from the address book.
 
 **Format**: `clear person`
 
@@ -365,7 +365,7 @@ Deletes the specified appointment from DocTrack.
 
 ##### Clearing all appointments : `clear appt`
 
-Clears all entries from the appointment book after a validation check from the user.
+Deletes all entries from the appointment book.
 
 **Format**: `clear appt`
 
@@ -407,7 +407,7 @@ Exits the program.
 
 ##### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook and AppointmentBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <br>
 
