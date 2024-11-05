@@ -277,10 +277,11 @@ The implementation of the filter command follows the convention of a normal comm
 
 <puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
 
-Refer to AddSequenceDiagram for how `AddressBookParser` creates `FilterCommandParser` and `FilterCommand`.
-`FilterCommandParser` obtains the specified status value and ensures that it is valid.
+`AddressBookParser` first obtains the status from the user's input.
+`AddressBookParser` ensures that the status is found. If there is no status found, `AddressBookParser` throws a ParseException.
 
-A new filter command is then created with a `StatusPredicate`.
+Otherwise, it creates a new instance of `FilterCommand` that corresponds to the user input.
+`FilterCommand` comprises of a `StatusPredicate`.
 
 Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
 
@@ -375,7 +376,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+**System**: HireMe application
 **Use Case: UC01 - Add a new internship entry**
+**Actor**: User
 
 **MSS**
 
@@ -430,7 +433,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **System**: HireMe application
 **Use Case: UC02 - List all internship entries**
 **Actor**: User
-**MSS**
 
 **MSS**
 
@@ -446,8 +448,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
+**System**: HireMe application
 **Use Case: UC03 - Delete an internship entry**
+**Actor**: User
 
 **MSS**
 
@@ -494,7 +497,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use Case: Load saved internship applications**
+**System**: HireMe application
+**Use Case: UC05 - Load saved internship applications**
+**Actor**: User
 
 **MSS**
 
@@ -515,7 +520,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Auto-save the current state of the internship list**
+
+**System**: HireMe application
+**Use Case: UC06 - Auto-save the current state of the internship list**
+**Actor**: User
 
 **MSS**
 
@@ -535,7 +543,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use Case: List all internship entries**
+**System**: HireMe application
+**Use Case: UC07 - List all internship entries**
+**Actor**: User
 
 **MSS**
 
@@ -551,16 +561,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Clear all internship entries**
 
-**MSS**
-
-1. The user requests to clear all internship entries.
-2. HireMe clears all internship entries.
-
-   Use case ends.
-
-**Use Case: Summarise all internship entries**
+**System**: HireMe application
+**Use Case: UC08 - Summarise all internship entries**
+**Actor**: User
 
 **MSS**
 
@@ -569,7 +573,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use Case: Filter internship entries by status**
+
+**System**: HireMe application
+**Use Case: UC09 - Filter internship entries by status**
+**Actor**: User
 
 **MSS**
 
@@ -584,7 +591,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
+
+**System**: HireMe application
+**Use Case: UC010 - Clear all internship entries**
+**Actor**: User
+
+**MSS**
+
+1. The user requests to clear all internship entries.
+2. HireMe clears all internship entries.
+
+   Use case ends.
+
+
+**System**: HireMe application
+**Use Case: UC011 - Exit HireMe application**
+**Actor**: User
+
+**MSS**
+
+1. The user requests to exit the application.
+2. HireMe application closes and auto-saves the file.
+
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -617,6 +647,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Company Name**: The name of the company that the user is applying for an internship role at.
 
 - **Role**: The role of the internship the user applied for.
+
+- **Index**: The index of the internship application displayed in the list.
 
 
 --------------------------------------------------------------------------------------------------------------------
