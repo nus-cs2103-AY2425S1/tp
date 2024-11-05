@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING_NAME;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Date;
@@ -27,7 +25,7 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_WEDDING_NAME, PREFIX_VENUE, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddWeddingCommand.MESSAGE_USAGE));
         }
@@ -40,17 +38,6 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
         Wedding wedding = new Wedding(name, venue, date);
 
         return new AddWeddingCommand(wedding);
-    }
-
-    /**
-     * Returns true if the prefixes contain all the required fields.
-     * @param argumentMultimap
-     * @param prefixes
-     * @return boolean
-     * @see ArgumentMultimap
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

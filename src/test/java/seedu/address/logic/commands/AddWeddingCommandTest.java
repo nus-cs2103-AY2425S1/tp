@@ -261,7 +261,7 @@ public class AddWeddingCommandTest {
         }
 
         @Override
-        public Person personWithAllTagsRemoved( Person personToDelete) {
+        public Person personWithAllTagsRemoved(Person personToDelete) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
