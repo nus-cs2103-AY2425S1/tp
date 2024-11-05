@@ -130,4 +130,20 @@ public class TaskTest {
                 + "}";
         assertEquals(expected, task.toString());
     }
+
+    @Test
+    public void getIsComplete_validTask_returnsCorrectValue() {
+        Task incompleteTask = new Task(ALICE, VALID_DESCRIPTION_ONE, false);
+        Task completeTask = new Task(ALICE, VALID_DESCRIPTION_ONE, true);
+
+        assertFalse(incompleteTask.getIsComplete());
+        assertTrue(completeTask.getIsComplete());
+    }
+
+    @Test
+    public void hashCode_consistentWithEquals() {
+        Task taskOne = new Task(ALICE, VALID_DESCRIPTION_ONE);
+        Task taskTwo = new Task(ALICE, VALID_DESCRIPTION_ONE);
+        assertEquals(taskOne.hashCode(), taskTwo.hashCode());
+    }
 }
