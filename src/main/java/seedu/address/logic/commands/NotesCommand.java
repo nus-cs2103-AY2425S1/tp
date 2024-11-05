@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 
@@ -24,19 +25,22 @@ public class NotesCommand extends Command {
     public static final String COMMAND_WORD = "notes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views, adds, or deletes the notes of the person identified by their name.\n"
+            + ": Views, adds, edits, or deletes the notes of the person identified by their name.\n"
             + "Parameters: \n"
             + "View: " + PREFIX_VIEW + "NAME\n"
             + "Add: " + PREFIX_ADD + "NAME " + PREFIX_NOTES + "NOTES\n"
+            + "Edit: " + PREFIX_EDIT + "NAME\n"
             + "Delete: " + PREFIX_DELETE + "NAME\n"
             + "Example: \n"
             + COMMAND_WORD + " " + PREFIX_VIEW + "John Doe\n"
+            + COMMAND_WORD + " " + PREFIX_EDIT + "John Doe\n"
             + COMMAND_WORD + " " + PREFIX_ADD + "John Doe " + PREFIX_NOTES + "Prefers email contact\n"
             + COMMAND_WORD + " " + PREFIX_DELETE + "John Doe";
 
     public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: \n%2$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted notes for %1$s";
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: %2$s";
+    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: \n%2$s";
+    public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edited notes for %1$s: \n%2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
 
     private final Name targetName;
@@ -134,7 +138,7 @@ public class NotesCommand extends Command {
                     personToEdit.getEmail(), personToEdit.getAddress(), newNotes,
                     personToEdit.getTags(), personToEdit.getIncome(), personToEdit.getAge());
             model.setPerson(personToEdit, personWithEditedNotes);
-            return new CommandResult(String.format(MESSAGE_VIEW_NOTES_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_EDIT_NOTES_SUCCESS,
                     personWithEditedNotes.getName(), personWithEditedNotes.getNotes().toString()));
 
         default:
