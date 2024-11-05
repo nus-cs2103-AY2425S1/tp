@@ -84,6 +84,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        ab.addPinnedPerson(ALICE);
         return ab;
     }
 
