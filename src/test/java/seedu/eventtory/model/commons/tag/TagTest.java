@@ -24,10 +24,16 @@ public class TagTest {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
 
-        // with special characters
-        assertFalse(() -> Tag.isValidTagName("tag_name"));
+        // just hypyens and underscores
+        assertFalse(() -> Tag.isValidTagName("-"));
+        assertFalse(() -> Tag.isValidTagName("_"));
+        assertFalse(() -> Tag.isValidTagName("-_"));
 
         // valid tags
+        assertTrue(() -> Tag.isValidTagName("-tag"));
+        assertTrue(() -> Tag.isValidTagName("_tag"));
+        assertTrue(() -> Tag.isValidTagName("tag-name"));
+        assertTrue(() -> Tag.isValidTagName("tag_name"));
         assertTrue(() -> Tag.isValidTagName("tagname"));
         assertTrue(() -> Tag.isValidTagName("TAGNAME"));
         assertTrue(() -> Tag.isValidTagName("tagname"));
