@@ -84,6 +84,9 @@ Adds a person to the address book.
 
 Command aliases: `addc`
 Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Examples:
+* `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <box type="important">
 
@@ -110,15 +113,13 @@ Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 </box>
 
+<box type="tip">
 
-<box type="tip" seamless>
+#### Tips
 
-**Tip:** A person can have any number of tags (including 0)
+* A person can have any number of tags (including 0).
+
 </box>
-
-Examples:
-* `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all persons : `listcustomer`
 
