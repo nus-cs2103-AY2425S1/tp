@@ -126,8 +126,8 @@ public class Person {
      * @return true if the person is already assigned to the wedding
      */
     public boolean isAssignedToWedding(Wedding wedding) {
-        return weddingJobs.contains(wedding) ||
-                (ownWedding != null && ownWedding.equals(wedding));
+        return weddingJobs.contains(wedding)
+                || (ownWedding != null && ownWedding.equals(wedding));
     }
 
     /**
