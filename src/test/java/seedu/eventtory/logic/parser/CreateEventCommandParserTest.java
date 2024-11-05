@@ -94,7 +94,7 @@ public class CreateEventCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse() {
         // invalid name
         assertParseFailure(parser, " " + PREFIX_EVENT + INVALID_NAME_DESC + DATE_DESC_BIRTHDAY,
                 Name.MESSAGE_CONSTRAINTS);
@@ -105,8 +105,8 @@ public class CreateEventCommandParserTest {
                 Date.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, " " + PREFIX_EVENT + " " + PREFIX_NAME + "Zoo Excursion?" + " "
-                        + PREFIX_DATE + "10 October 2024",
+        assertParseFailure(parser, " " + PREFIX_EVENT + " " + PREFIX_NAME + "Zoo Excursion/" + " "
+                        + PREFIX_DATE + "32 October 2024",
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
