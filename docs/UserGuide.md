@@ -225,12 +225,12 @@ Format: `filter [s/SKILL]... [t/TAG]...`
 - Only the skills and tags are searched.
 - Only full words will be matched e.g. `s/database` will not match `skills={databases}`.
 - Employees who have at least one skill or tag matching at least one search item will be returned (i.e. `OR` search).
-  e.g. `s/frontend t/swe` will return `skills={frontend, uiux}, tags={designer}`, `skills={backend, database, api}, tags={swe, devops}`, and `skills={frontend, backend}, tags={swe}`
+  e.g. `s/frontend t/swe` will return `{skills={frontend, uiux}, tags={designer}}`, `{skills={backend, database, api}, tags={swe, devops}}`, and `{skills={frontend, backend}, tags={swe}}`
 
 Examples:
 
-- `filter s/frontend` returns `skills={frontend}, tags={designer}` and `skills={frontend, uiux}, tags={designer, pm}`
-- `filter s/frontend t/swe` returns `skills={Frontend, UIUX}, tags={designer}`, `skills={Backend}, tags={swe}`<br>
+- `filter s/frontend` returns `{skills={frontend}, tags={designer}}` and `{skills={frontend, uiux}, tags={designer, pm}}`
+- `filter s/frontend t/swe` returns `{skills={Frontend, UIUX}, tags={designer}}`, `{skills={Backend}, tags={swe}}`<br>
   ![result for 'filter s/frontend t/swe'](images/filterAlexCharlotte.png)
 
 Expected output:
