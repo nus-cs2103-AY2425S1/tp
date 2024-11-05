@@ -26,6 +26,7 @@ public class Meeting {
     public final LocalDateTime startTime;
     public final LocalDateTime endTime;
     public final Name personToMeet;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a, d MMMM yyyy");
 
     /**
      * Constructs a {@code Meeting}.
@@ -95,7 +96,6 @@ public class Meeting {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a, d MMMM yyyy");
         return "from " + formatter.format(startTime) + " to " + formatter.format(endTime) + " at " + location;
     }
 
@@ -128,8 +128,16 @@ public class Meeting {
         return startTime;
     }
 
+    public String getStartTimeFormatted() {
+        return formatter.format(startTime);
+    }
+
     public LocalDateTime getEndTime() {
         return endTime;
+    }
+
+    public String getEndTimeFormatted() {
+        return formatter.format(endTime);
     }
 
     public Name getPersonToMeet() {
