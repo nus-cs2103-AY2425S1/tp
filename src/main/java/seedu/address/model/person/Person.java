@@ -41,14 +41,6 @@ public class Person {
         this.ownWedding = ownWedding;
     }
 
-    /**
-     * Sets ownWedding to null.
-     * Used for test cases.
-     */
-    public void resetOwnWedding() {
-        this.ownWedding = null;
-    }
-
     public void setOwnWedding(Wedding wedding) {
 
         if (wedding == null) {
@@ -71,6 +63,14 @@ public class Person {
         if (this.ownWedding.equals(wedding)) {
             this.ownWedding = null;
         }
+    }
+
+    /**
+     * Sets ownWedding to null.
+     * Used for test cases.
+     */
+    public void resetOwnWedding() {
+        this.ownWedding = null;
     }
 
     public Name getName() {
@@ -130,17 +130,9 @@ public class Person {
     }
 
     /**
-     * Returns true if person has own wedding.
-     *
-     */
-    public boolean hasOwnWedding() {
-        return ownWedding != null;
-    }
-
-    /**
      * Checks if the {@code weddingJobs} of the person contains the Wedding object.
      *
-             * @param target {@code Wedding} object to be found
+     * @param target {@code Wedding} object to be found
      * @return true if {@code target} is found in {@code weddingJobs}
      */
     public boolean containsWeddingJob(Wedding target) {
@@ -154,6 +146,14 @@ public class Person {
 
     public void removeWeddingJob(Wedding weddingJob) {
         this.weddingJobs.remove(weddingJob);
+    }
+
+    /*
+     * Returns true if person has own wedding.
+     *
+     */
+    public boolean hasOwnWedding() {
+        return ownWedding != null;
     }
 
     /**
@@ -217,7 +217,7 @@ public class Person {
                 // && role.equals(otherPerson.role)
                 // && ownWedding.equals(otherPerson.ownWedding)
                 && weddingJobs.equals(otherPerson.weddingJobs);
-         //TODO HERE
+        //TODO HERE
         // commented them out since they give null pointer exception
         // need to use Optional
     }
