@@ -553,17 +553,21 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Future features**
-Features that we feel would further enhance the user experience include
-- Clustering of the tags of the same categories together in the UI's display of the tags list.
-- The feature to pin selected contacts to be constantly shown at the top of the contacts list.
-- The option to customize the colors of the categories.
-- Include more than one number per contact as some people may own multiple contact numbers.
-- The feature to add a custom field to the contacts added.
-- The option to add custom shortcut commands.
-- The option to delete a specific tag from all contacts at once.
-- Include a dark mode theme for ease on eyes in the dark.
-- The option to copy the contact information to reduce errors from manual copying.
-- The option to export out the contact for ease of sharing.
+Below is a list of features that we feel would further enhance the user experience.
+
+  | Feature                                                                         | Description                                                                         |
+  |---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+  | Clustering of tags                                                              | Group tags of the same categories together in the UI's display of the tags list.    |
+  | Pin contacts                                                                    | Keep selected contacts constantly shown at the top of the contacts list.            |
+  | Customize category colors                                                       | Change the colors of the categories to the user's preference.                       |
+  | Multiple numbers per contact                                                    | Allow more than one number per contact to accommodate multiple contact numbers.     |
+  | Custom fields for contacts                                                      | Add custom fields to the contacts added.                                            |
+  | Custom shortcut commands                                                        | Add custom shortcut commands to streamline actions within the application.          |
+  | Delete tag from all contacts                                                    | Remove a specific tag from all contacts at once.                                    |
+  | Dark mode                                                                       | Include a dark mode theme for easier viewing in low light conditions.               |
+  | Copy contact information                                                        | Enable copying of contact information to reduce errors from manual copying.         |
+  | Export contacts                                                                 | Provide an option to export contact information for easier sharing.                 |
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
