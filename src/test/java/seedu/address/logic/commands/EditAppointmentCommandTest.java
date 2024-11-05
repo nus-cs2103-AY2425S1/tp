@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.EditAppointmentCommand.MESSAGE_PERSON_NOT_FOUND;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -103,6 +104,20 @@ public class EditAppointmentCommandTest {
                 startDateTime,
                 editAppointmentDescriptor);
         assertCommandFailure(editCommand, modelStub, EditAppointmentCommand.MESSAGE_INVALID_START_END_TIME);
+    }
+
+    @Test
+    public void execute_patientNotFound_throwsCommandException() {
+        Model modelStub = new ModelManager();
+        Nric nonExistentNric = new Nric("S9876543C");
+        EditAppointmentCommand.EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withDate("10/12/2025")
+                .withStartTime("10:00")
+                .withEndTime("11:00")
+                .build();
+        EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(nonExistentNric,
+                startDateTime, descriptor);
+        assertCommandFailure(editAppointmentCommand, modelStub, MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
