@@ -370,8 +370,9 @@ Adds a guest to the bottom of the existing overall guest list.
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
-* > :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
-* > :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
+> :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
+
+> :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
 
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
@@ -390,7 +391,7 @@ Edits the details of the guest identified by the index number used in the displa
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `edit_guest 1 p/91234567 e/johndoe@example.com`
 
@@ -451,7 +452,7 @@ Edits the details of the vendor identified by the index number used in the displ
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
-    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
 **Example Usage:** `edit_vendor 1 p/91234567 e/johndoe@example.com`
 
