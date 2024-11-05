@@ -55,9 +55,9 @@ public class SortCommand extends Command {
             model.updateSortingOrder(Comparator.comparing(person -> person.getIncome().getValue()));
             break;
 
-            case SortCommandParser.FAMSIZE:
-                model.updateSortingOrder(Comparator.comparing(person -> person.getFamilySize().getValue()));
-                break;
+        case SortCommandParser.FAMSIZE:
+            model.updateSortingOrder(Comparator.comparing(person -> person.getFamilySize().getValue()));
+            break;
 
         default:
             assert false : "Program should not reach here since parser checks for invalid parameter.";
