@@ -74,7 +74,8 @@ again, type `help` and press Enter.
 * Words in `UPPER_CASE` are the inputs to be supplied by the user.
   e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
-* Every student added will be assigned a `STUDENT_ID` that begins with S followed by a 5 digit number (e.g. S00003).
+* Every student added will be assigned a unique, non-modifiable `STUDENT_ID` that begins with S followed by a 5 digit 
+* number (e.g. S00003).
 > **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
 ` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
 of replacing S00001).
@@ -107,6 +108,8 @@ secondary school years 7 - 13).
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
 within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
 as the same).
+* A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
+message and can be used for `addc`, `edit`, and `delete`.
 
 Examples:
 * `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
@@ -137,6 +140,8 @@ Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.
+* Although editing the IC number is allowed, it must not match any other student's IC number in the system. 
+An error message will be shown if a duplicate is detected.
 
 Examples:
 * `edit S00001 a/New_Address`
