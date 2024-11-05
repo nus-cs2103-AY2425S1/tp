@@ -5,14 +5,22 @@ package seedu.academyassist.model.person;
  * Each subject has a name that can be accessed via the {@link #getSubjectName()} method.
  */
 public enum SubjectEnum {
-    /** Subject for English. */
     ENGLISH("English"),
-    /** Subject for Math. */
-    MATH("Math"),
-    /** Subject for Chinese. */
     CHINESE("Chinese"),
-    /** Subject for Science. */
-    SCIENCE("Science");
+    MALAY("Malay"),
+    MATH("Math"),
+    SCIENCE("Science"),
+    HISTORY("History"),
+    GEOGRAPHY("Geography"),
+    LITERATURE("Literature"),
+    ECONOMICS("Economics"),
+    ACCOUNTING("Accounting"),
+    BUSINESS("Business"),
+    PHYSICS("Physics"),
+    CHEMISTRY("Chemistry"),
+    BIOLOGY("Biology"),
+    COMPUTING("Computing");
+
 
     /** The name of the subject. */
     private final String subjectName;
