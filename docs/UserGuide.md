@@ -63,6 +63,12 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* The client parameter (c/) in wedding commands can accept either an index number or a name.<br>
+  e.g. `c/1` or `c/John Doe` are both valid formats.
+
+* Dates must be specified in YYYY-MM-DD format.<br>
+  e.g. `d/2024-12-31` for December 31st, 2024.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
@@ -229,19 +235,83 @@ Examples:
 * `filter n/John r/vendor` returns persons who either have name `John` OR role `vendor`
 * `filter e/gmail a/jurong` returns persons whose email contains "gmail" OR address contains "jurong"
 
+### Managing Weddings
+
 ### Adding a wedding : `addw`
+
 Adds a wedding to the address book.
 
-Format: `addw n/WEDDING NAME c/CLIENT [d/DATE] [v/VENUE]`
+Format: `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]`
 
-Tip: CLIENT can be inputted by index or name.
+* The wedding name must be specified
+* The client must be specified either by their index in the displayed list (e.g., `c/1`) or by their name (e.g., `c/John Doe`)
+* A client can only have one wedding at a time
+* Date must be in YYYY-MM-DD format when provided
+* Venue cannot be blank when provided
 
 Examples:
-* `addw n/Alice's Wedding c/Alice`
-* `addw n/Alice's Wedding c/1`
-* `addw n/Bob's Wedding c/Bob d/2024-12-31`
-* `addw n/Bob's Wedding c/Bob v/Sentosa`
-* `addw n/Bob's Wedding c/Bob d/2024-12-31 v/Sentosa`
+* `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach` adds a wedding for the first contact in the list
+* `addw n/Garden Wedding c/John Doe v/Botanical Gardens` adds a wedding for John Doe (if there's only one contact with this name)
+* `addw n/Church Wedding c/Alex` will show a list of all contacts named Alex if there are multiple matches
+
+### Editing a wedding : `editw`
+
+Edits an existing wedding in the address book.
+
+Format: `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`
+
+* Edits the wedding at the specified `INDEX`. The index refers to the index number shown in the displayed wedding list.
+* At least one of the optional fields must be provided.
+* The index must be a positive integer (1, 2, 3, ...)
+* Existing values will be updated to the input values
+* The client of a wedding cannot be changed after creation
+* Date must be in YYYY-MM-DD format when provided
+* Venue cannot be blank when provided
+
+Examples:
+* `editw w/1 n/Sunset Wedding` changes the name of the first wedding to "Sunset Wedding"
+* `editw w/2 d/2025-01-01 v/Grand Hotel` updates both the date and venue of the second wedding
+* `editw w/1 v/` will show an error as venue cannot be blank
+
+### Viewing wedding details : `vieww`
+
+Views the details of a wedding from the address book.
+
+Format: `vieww INDEX` or `vieww KEYWORD`
+
+* Can view a wedding using either its index number or the client's name
+* When using index: must be a positive integer (1, 2, 3, ...)
+* When using name: matches are case-insensitive
+* If multiple weddings match the name keyword, a list will be shown and you'll be prompted to use the index
+
+Examples:
+* `vieww 1` shows details of the first wedding in the list
+* `vieww John` shows John's wedding if there's only one matching client named John
+* `vieww Alex` will show a list of all weddings where the client's name contains "Alex" if there are multiple matches
+
+### Assigning a role : `assign`
+
+Assigns a role to an existing person in the address book. Roles help identify the function of each contact (e.g., vendor, client, etc.).
+
+Format: `assign INDEX r/ROLE` or `assign NAME r/ROLE`
+
+* The person can be identified by either their index number or their name
+* When using index: must be a positive integer (1, 2, 3, ...)
+* When using name: matches are case-insensitive
+* If multiple contacts match the name, a list will be shown and you'll be prompted to use the index
+* Each person can only have one role at a time
+* Assigning a new role will replace the existing role
+* Role cannot be blank
+
+Examples:
+* `assign 1 r/vendor` assigns the role "vendor" to the first person in the list
+* `assign John Doe r/photographer` assigns the role "photographer" to John Doe (if there's only one contact with this name)
+* `assign Alex r/florist` will show a list of all contacts named Alex if there are multiple matches
+
+<box type="tip" seamless>
+
+**Tip:** Roles are useful for filtering contacts later using the `filter` command with the `r/` prefix.
+</box>
 
 ### Exiting the program : `exit`
 
@@ -276,6 +346,20 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: How do I add a wedding for an existing client?<br>
+**A**: First use `list` to see all contacts. Then use either `addw n/WEDDING_NAME c/INDEX` using the client's index number, or `addw n/WEDDING_NAME c/CLIENT_NAME` using the client's name.
+
+**Q**: What happens if I try to delete a client who has a wedding?<br>
+**A**: The system will prevent you from deleting the client and show an error message. You must first handle the client's wedding before deleting the contact.
+
+**Q**: Can I change a wedding's client after creation?<br>
+**A**: No, a wedding's client cannot be changed after creation. You would need to create a new wedding for the different client.
+
+**Q**: Can a client have multiple weddings?<br>
+**A**: No, each client can only have one wedding at a time.
+
+**Q**: Can I assign multiple roles to a person?<br>
+**A**: No, each person can only have one role at a time. Assigning a new role will replace the existing one.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -298,4 +382,8 @@ Action     | Format, Examples
 **Filter** | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]`<br> e.g., `filter r/friends`
 **View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
 **List**   | `list`
+**Addw**   | `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]` <br> e.g., `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
+**Editw**  | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`
+**Vieww**  | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`
+**Assign** | `assign INDEX r/ROLE` or `assign NAME r/ROLE`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer`
 **Help**   | `help`
