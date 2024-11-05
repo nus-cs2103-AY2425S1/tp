@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         // Create and add the StatusBarFooter if it's not null
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = null;
         if (statusBarFooter != null && statusBarFooter.getRoot() != null) {
             statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         }

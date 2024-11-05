@@ -210,18 +210,45 @@ For first-time users of the application, it is highly recommended for you to rea
 
 #### 3.2.1 User Interface Overview:
 <a id="user-interface-overview"></a>
-TO BE DONE 
-## To update UI component picture here:
-![startingGUI.png](images/startingGUI.png)
 
-### Add UI Components descriptions here
+![UserInterfaceOverview.png](images/UserInterfaceOverview.png)
+
+The designated names for each component of the User Interface will be used consistently throughout the User Guide to ensure clarity and minimize confusion. Below is a detailed description of each component.
+
+* **Menu Box:** Positioned at the top of the interface, the menu bar offers access to a variety of functions and features within TrackMate.
+
+* **Logo:** This represents the logo of our application, TrackMate.
+
+* **Command Box:** This designated area is where users can input commands for TrackMate to execute.
+
+* **Result Box:** Prominently displayed on the interface, this box shows the results of executed commands.
+
+* **Student List Panel:** This panel visually represents the roster of students stored within TrackMate.
+
+* **Student Panel Card:** Within the Student List Panel, each student is depicted in a concise overview displayed in card format.
+
+* **Student Card:** To view detailed information about an individual student, users can refer to the Student Card, which provides comprehensive details stored in the system.
 
 #### 3.2.2 Additional UI Components:
 
 <a id="additional-ui-components"></a>
-![startingGUI.png](images/startingGUI.png)
+![additionalUIComponents.png](images/additionalUIComponents.png)
 
-### Add additiona UI Components description here
+* **Index:** This component indicates the position of each student in the Student List Panel.
+
+* **Student Name:**  The Student Name appears in both the Student Card and Student Panel Card. It represents the name of the Student.
+
+* **Student Id:** Every student will be assigned to a student id before being added to a system. Take note that the student id is unique and is an easy way to identify a student.
+  
+* **Tutorial Classes allocated to student:** This component appears just below the student id. The component displays the list of tutorial classes that the student is allocated to.
+* Tutorial classes are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
+* However, if there are no tutorial classes added to the student. Then it will display "No Tutorial Assigned" instead. 
+
+* **Attendance Tag:** The attendance tag displays all of the dates in which the student has attended the tutorial class. 
+* The tag uses a datetime format of the form `yyyy/mm/dd`.
+
+
+* **Selected Student:** Highlighted in blue, this component indicates the selected Student Panel Card for viewing in the Student Card.
 
 ### 3.3 How to use TrackMate commands:
 <a id="how-to-use-track-mate-commands"></a>
@@ -378,28 +405,49 @@ Example:
 #### 4.2.1 Adding a tutorial: `addTut`
 <a id="adding-a-tutorial-addTut"></a>
 
-> TO BE DONE
+> Adds a tutorial with a specified tutorial name and tutorial id to the TrackMate application.
+ 
+Format: `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`
+
+Command Details & Constraints:
+* Adds the tutorial based on its `TUTORIAL_NAME` and `TUTORIAL_ID`
+* The `TUTORIAL_ID` should be alphanumeric with the following format `TXXXX` where `T` signifies that it is a tutorial code
+and `X` must be an integer between 0 and 9.
+* There cannot be tutorial classes of the same `TUTORIAL_ID` in the list even when their `TUTORIAL_NAME` is different.
+* All parameters are required to adhere to their [respective constraints](#332-parameters).
+
+Example:
+1. `addTut tn/CS2103T id/T1001` adds a tutorial with Tutorial Name `CS2103T` and Tutorial ID `T1001`, provided that there is
+no other tutorial with the Tutorial ID `T1001`.
 
 #### 4.2.2 Delete a tutorial: `deleteTut`
 <a id="deleting-a-tutorial-deleteTut"></a>
-> Delete a specified tutorial from the TrackMate application.
+> Delete a specified tutorial from the TrackMate application. 
 
-Format: `deleteTut TUTORIAL_ID`
+Format: `deleteTut id/TUTORIAL_ID`
 
 Command Details & Constraints:
 * Deletes the tutorial based on the `TUTORIAL_ID`
   * The `TUTORIAL_ID` must exist in the tutorial list.
-* No prefix is required for `deleteTut` command.
-* The command should only consist of exactly two words: `deleteTut` and a valid `TUTORIAL_ID`
+* The `TUTORIAL_ID` should be alphanumeric with the following format `TXXXX` where `T` signifies that it is a tutorial code
+* and `X` must be an integer between 0 and 9.
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
 
 Example:
-1. `deleteTut 1001` deletes the tutorial with Tutorial ID `1001`, provided the tutorial exists.
+1. `deleteTut id/T1001` deletes the tutorial with Tutorial ID `T1001`, provided the tutorial exists.
 
 #### 4.2.3 List tutorials: `listTut`
 <a id="listing-tutorials-listTut"></a>
 
-> TO BE DONE
+> List all of the tutorials that are currently stored in the application
+
+
+Format: `listTut`
+
+Command Details & Constraints:
+* This command will display all Tutorials with details such as:
+  * tutorial name
+  * tutorial id
 
 ### 4.3 Assignment Data Related Commands:
 <a id="assignment-data-commands"></a>

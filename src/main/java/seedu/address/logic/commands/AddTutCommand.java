@@ -20,7 +20,7 @@ public class AddTutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutorial to the address book. "
             + "Parameters: "
             + PREFIX_TUT_NAME + "TUTORIAL_NAME "
-            + PREFIX_TUT_ID + "id\n"
+            + PREFIX_TUT_ID + "TUT_ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUT_NAME + "CS1010 "
             + PREFIX_TUT_ID + "T1001";
