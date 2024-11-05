@@ -77,7 +77,10 @@ public class ViewPersonPanel extends UiPart<Region> {
             tagsText.append("None");
         } else {
             for (Tag tag : tagsSet) {
-                tagsText.append(tag.tagName).append(", ");
+                if (!tag.equals(Person.DEFAULT_TAG_PENDING) & !tag.equals(Person.TAG_HIRED)
+                        & !tag.equals(Person.TAG_REJECTED)) {
+                    tagsText.append(tag.tagName).append(", ");
+                }
             }
             if (!tagsText.isEmpty()) {
                 tagsText.setLength(tagsText.length() - 2);
