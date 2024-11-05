@@ -52,7 +52,7 @@ public class LinkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (this.patientNric == this.caregiverNric) {
+        if (this.patientNric.equals(this.caregiverNric)) {
             throw new CommandException(SAME_PERSON);
         }
 
