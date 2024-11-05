@@ -26,8 +26,8 @@ import seedu.address.logic.commands.contact.commands.DeleteCommand;
 import seedu.address.logic.commands.contact.commands.EditCommand;
 import seedu.address.logic.commands.contact.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.contact.commands.FindNameCommand;
+import seedu.address.logic.commands.contact.commands.FindRoleCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
-import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
@@ -97,10 +97,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_search() throws Exception {
         List<Role> roles = Arrays.asList(new Sponsor(), new Volunteer());
-        SearchCommand command = (SearchCommand) parser.parseCommand(
-                SearchCommand.COMMAND_WORD + " "
+        FindRoleCommand command = (FindRoleCommand) parser.parseCommand(
+                FindRoleCommand.COMMAND_WORD + " "
                         + roles.stream().map(Role::getRoleName).collect(Collectors.joining(" ")));
-        assertEquals(new SearchCommand(new PersonIsRolePredicate(roles)), command);
+        assertEquals(new FindRoleCommand(new PersonIsRolePredicate(roles)), command);
     }
 
     @Test
@@ -147,29 +147,29 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseSearchCommand_searchModeSearchCommand() throws ParseException {
+    public void parseFindRoleCommand_searchModeSearchCommand() throws ParseException {
         Command expected = new SearchModeSearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Amy")));
         assertEquals(expected, new AddressBookParser()
-                .parseSearchCommand(SearchModeSearchCommand.COMMAND_WORD + " n/Amy"));
+                .parseFindRoleCommand(SearchModeSearchCommand.COMMAND_WORD + " n/Amy"));
     }
 
     @Test
-    public void parseSearchCommand_exitSearchModeCommand() throws ParseException {
+    public void parseFindRoleCommand_exitSearchModeCommand() throws ParseException {
         Command expected = new ExitSearchModeCommand();
         assertEquals(expected, new AddressBookParser()
-                .parseSearchCommand(ExitSearchModeCommand.COMMAND_WORD));
+                .parseFindRoleCommand(ExitSearchModeCommand.COMMAND_WORD));
     }
     @Test
-    public void parseSearchCommand_exitCommand() throws ParseException {
+    public void parseFindRoleCommand_exitCommand() throws ParseException {
         Command expected = new ExitCommand();
         assertEquals(expected, new AddressBookParser()
-                .parseSearchCommand(ExitCommand.COMMAND_WORD));
+                .parseFindRoleCommand(ExitCommand.COMMAND_WORD));
     }
 
     @Test
-    public void parseSearchCommand_unrecognisedInput_throwsParseException() {
+    public void parseFindRoleCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                HelpCommand.MESSAGE_USAGE), () -> parser.parseSearchCommand(""));
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseFindRoleCommand(""));
     }
 
     public void parseCommand_viewEvent() throws ParseException {

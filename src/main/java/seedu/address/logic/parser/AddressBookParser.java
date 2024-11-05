@@ -16,8 +16,8 @@ import seedu.address.logic.commands.contact.commands.ClearCommand;
 import seedu.address.logic.commands.contact.commands.DeleteCommand;
 import seedu.address.logic.commands.contact.commands.EditCommand;
 import seedu.address.logic.commands.contact.commands.FindNameCommand;
+import seedu.address.logic.commands.contact.commands.FindRoleCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
-import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
@@ -30,7 +30,7 @@ import seedu.address.logic.parser.contact.parser.AddCommandParser;
 import seedu.address.logic.parser.contact.parser.DeleteCommandParser;
 import seedu.address.logic.parser.contact.parser.EditCommandParser;
 import seedu.address.logic.parser.contact.parser.FindNameCommandParser;
-import seedu.address.logic.parser.contact.parser.SearchCommandParser;
+import seedu.address.logic.parser.contact.parser.FindRoleCommandParser;
 import seedu.address.logic.parser.event.parser.AddPersonToEventParser;
 import seedu.address.logic.parser.event.parser.DeleteEventCommandParser;
 import seedu.address.logic.parser.event.parser.NewEventCommandParser;
@@ -88,8 +88,8 @@ public class AddressBookParser {
         case FindNameCommand.COMMAND_WORD:
             return new FindNameCommandParser().parse(arguments);
 
-        case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
+        case FindRoleCommand.COMMAND_WORD:
+            return new FindRoleCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -131,7 +131,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseSearchCommand(String userInput) throws ParseException {
+    public Command parseFindRoleCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             logger.warning("This user input caused a ParseException: " + userInput);
@@ -144,7 +144,7 @@ public class AddressBookParser {
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.fine("Using SearchCommandParser to parse user input: " + userInput);
+        logger.fine("Using FindRoleCommandParser to parse user input: " + userInput);
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
         switch (commandWord) {
         case ExitSearchModeCommand.COMMAND_WORD:

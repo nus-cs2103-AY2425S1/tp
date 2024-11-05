@@ -25,9 +25,9 @@ import seedu.address.model.role.Vendor;
 import seedu.address.model.role.Volunteer;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SearchCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindRoleCommand}.
  */
-public class SearchCommandTest {
+public class FindRoleCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
 
@@ -38,14 +38,14 @@ public class SearchCommandTest {
         PersonIsRolePredicate secondPredicate =
                 new PersonIsRolePredicate(Collections.singletonList(new Vendor()));
 
-        SearchCommand searchFirstCommand = new SearchCommand(firstPredicate);
-        SearchCommand searchSecondCommand = new SearchCommand(secondPredicate);
+        FindRoleCommand searchFirstCommand = new FindRoleCommand(firstPredicate);
+        FindRoleCommand searchSecondCommand = new FindRoleCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(searchFirstCommand.equals(searchFirstCommand));
 
         // same values -> returns true
-        SearchCommand searchFirstCommandCopy = new SearchCommand(firstPredicate);
+        FindRoleCommand searchFirstCommandCopy = new FindRoleCommand(firstPredicate);
         assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
 
         // different types -> returns false
@@ -64,7 +64,7 @@ public class SearchCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonIsRolePredicate predicate =
                 new PersonIsRolePredicate(Arrays.asList());
-        SearchCommand command = new SearchCommand(predicate);
+        FindRoleCommand command = new FindRoleCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -75,7 +75,7 @@ public class SearchCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonIsRolePredicate predicate =
                 new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Volunteer()));
-        SearchCommand command = new SearchCommand(predicate);
+        FindRoleCommand command = new FindRoleCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, CARL, ELLE), model.getFilteredPersonList());
@@ -84,8 +84,8 @@ public class SearchCommandTest {
     @Test
     public void toStringMethod() {
         PersonIsRolePredicate predicate = new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Volunteer()));
-        SearchCommand searchCommand = new SearchCommand(predicate);
-        String expected = SearchCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, searchCommand.toString());
+        FindRoleCommand findRoleCommand = new FindRoleCommand(predicate);
+        String expected = FindRoleCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, findRoleCommand.toString());
     }
 }
