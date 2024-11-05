@@ -12,7 +12,11 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class BuyerListPanel
+Class MeetUpListPanel
+Class PropertyListPanel
 Class BuyerCard
+Class MeetUpCard
+Class PropertyCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -33,21 +37,31 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" BuyerListPanel
+MainWindow *-down-> "1" MeetUpListPanel
+MainWindow *-down-> "1" PropertyListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 BuyerListPanel -down-> "*" BuyerCard
+MeetUpListPanel -down-> "*" MeetUpCard
+PropertyListPanel -down-> "*" PropertyCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 BuyerListPanel --|> UiPart
+MeetUpListPanel --|> UiPart
+PropertyListPanel --|> UiPart
 BuyerCard --|> UiPart
+MeetUpCard --|> UiPart
+PropertyCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 BuyerCard ..> Model
+MeetUpCard ..> Model
+PropertyCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
