@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.person.Person;
 
@@ -60,9 +61,24 @@ public interface Model {
     void addHistoryCommand(Command command, String originalCommandText);
 
     /**
-     * Returns an unmodifiable view of the history command list
+     * Returns an unmodifiable view of the history command list.
      */
     ObservableList<HistoryCommand> getHistoryCommandList();
+
+    /**
+     * Saves the current AddressBook state in the history.
+     */
+    public void commitAddressBook();
+
+    /**
+     * Reverts the AddressBook to the previous state.
+     */
+    public void undoAddressBook() throws CommandException;
+
+    /**
+     * Gets the AddressBook in previous state at specific index for testing purpose.
+     */
+    AddressBook getVersionedAddressBook(int index);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -96,4 +112,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -81,7 +81,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getFilteredModuleCodes_null_throwsNullPointerException() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
         assertThrows(NullPointerException.class, () -> {
@@ -91,7 +91,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getFilteredModuleCodes_validRoleTypeAndOneMatch() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
         assertArrayEquals(Stream.of(new ModuleCode("CS1101S")).toArray(ModuleCode[]::new),
@@ -100,20 +100,20 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getFilteredModuleCodes_validRoleTypeAndMultipleMatches() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         roles.put(new ModuleCode("CS3230"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
-        assertArrayEquals(Stream.of(new ModuleCode("MA1522"),
-                        new ModuleCode("CS3230"),
-                        new ModuleCode("CS1101S")).toArray(ModuleCode[]::new),
+        assertArrayEquals(Stream.of(new ModuleCode("CS1101S"),
+                        new ModuleCode("MA1522"),
+                        new ModuleCode("CS3230")).toArray(ModuleCode[]::new),
                 moduleRoleMap.getFilteredModuleCodes(RoleType.TUTOR).toArray(ModuleCode[]::new));
     }
 
     @Test
     public void getFilteredModuleCodes_validRoleTypeButNoMatches_emptyStream() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
         assertTrue(moduleRoleMap.getFilteredModuleCodes(RoleType.STUDENT).findAny().isEmpty());
@@ -146,7 +146,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getRoleDescription_null_throwsNullPointerException() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS3241"), RoleType.STUDENT);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
@@ -157,7 +157,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getRoleDescription_studentRole() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS3241"), RoleType.STUDENT);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
@@ -167,7 +167,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getRoleDescription_tutorRole() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS3241"), RoleType.STUDENT);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
@@ -177,7 +177,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getRoleDescription_professorRole() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS3241"), RoleType.STUDENT);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         roles.put(new ModuleCode("CS2106"), RoleType.PROFESSOR);
@@ -188,7 +188,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void getRoleDescription_noMatchingRoles_emptyString() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS3241"), RoleType.STUDENT);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(roles);
@@ -198,7 +198,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void toString_singleModuleAndSingleRoleType() {
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         newRoles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(newRoles);
         assertEquals("Student of: CS1101S\n", moduleRoleMap.toString());
@@ -206,7 +206,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void toString_singleModuleAndMultipleRoleTypes() {
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         newRoles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(newRoles);
@@ -215,7 +215,7 @@ public class ModuleRoleMapTest {
 
     @Test
     public void toString_singleModuleAndAllRoleTypes() {
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         newRoles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         newRoles.put(new ModuleCode("CS3241"), RoleType.PROFESSOR);
@@ -225,28 +225,28 @@ public class ModuleRoleMapTest {
 
     @Test
     public void toString_multipleModulesAndSingleRoleType() {
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         newRoles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("MA1522"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("CS3241"), RoleType.STUDENT);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(newRoles);
-        assertEquals("Student of: MA1522, CS3241, CS1101S\n", moduleRoleMap.toString());
+        assertEquals("Student of: CS1101S, MA1522, CS3241\n", moduleRoleMap.toString());
     }
 
     @Test
     public void toString_multipleModulesAndMultipleRoleTypes() {
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         newRoles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("MA1522"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("CS3241"), RoleType.TUTOR);
         newRoles.put(new ModuleCode("CS2105"), RoleType.TUTOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(newRoles);
-        assertEquals("Student of: MA1522, CS1101S\nTutor of: CS2105, CS3241\n", moduleRoleMap.toString());
+        assertEquals("Student of: CS1101S, MA1522\nTutor of: CS3241, CS2105\n", moduleRoleMap.toString());
     }
 
     @Test
     public void toString_multipleModulesAndAllRoleTypes() {
-        HashMap<ModuleCode, RoleType> newRoles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> newRoles = new LinkedHashMap<>();
         newRoles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("MA1522"), RoleType.STUDENT);
         newRoles.put(new ModuleCode("CS3241"), RoleType.TUTOR);
@@ -255,13 +255,13 @@ public class ModuleRoleMapTest {
         newRoles.put(new ModuleCode("CS2107"), RoleType.PROFESSOR);
         ModuleRoleMap moduleRoleMap = new ModuleRoleMap(newRoles);
         assertEquals(
-                "Student of: MA1522, CS1101S\nTutor of: CS3241, CS2105\nProfessor of: CS2106, CS2107\n",
+                "Student of: CS1101S, MA1522\nTutor of: CS3241, CS2105\nProfessor of: CS2106, CS2107\n",
                 moduleRoleMap.toString());
     }
 
     @Test
     public void equals() {
-        HashMap<ModuleCode, RoleType> roles = new HashMap<>();
+        LinkedHashMap<ModuleCode, RoleType> roles = new LinkedHashMap<>();
         roles.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         roles.put(new ModuleCode("MA1522"), RoleType.TUTOR);
         roles.put(new ModuleCode("CS3241"), RoleType.PROFESSOR);

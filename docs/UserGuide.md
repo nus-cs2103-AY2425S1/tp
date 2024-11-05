@@ -141,14 +141,16 @@ The module-role pairs can be edited by adding, deleting, or replacing.
 
 Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
-The index **must be a positive integer** 1, 2, 3, …​
+* Adds new roles to the person at the specified `INDEX`. The index refers to the index number shown in the displayed 
+person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one module-role pair must be provided.
 * Multiple module-role pairs can be added at once, separated by `" "`.
+* The role type can be omitted, in which case the role `STUDENT` will be the default.
 
 Examples:
-* `edit 1 r/+CS2103T-Prof` add role "professor of CS2103T" to the first person.
-* `edit 1 r/+CS1101S MA1521-TA` add role "Student of CS1101S" and "TA of MA1521" to the first person.
+* `edit 1 r/+CS2103T-Prof` adds role "professor of CS2103T" to the first person.
+* `edit 1 r/+CS1101S MA1521-TA` adds role "Student of CS1101S" and "TA of MA1521" to the first person.
 
 <box type="warning" seamless>
 
@@ -160,7 +162,28 @@ The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +M
 
 ##### Delete existing module-role pairs
 
-TODO
+Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
+* Deletes existing roles from the person at the specified `INDEX`. The index refers to the index number shown in the
+displayed person list. 
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one module-role pair must be provided.
+* Multiple module-role pairs can be deleted at once, separated by `" "`.
+* The role type can be omitted, in which case **any associated role will be deleted.**
+i.e. `edit 1 r/-MA1521` will delete `MA1521-Student`, `MA1521-TA` or `MA1521-Prof`, whichever is present.
+
+Examples:
+* `edit 1 r/-CS2103T` deletes any role related to module `CS2103T` from the first person.
+* `edit 1 r/-CS1101S-Student MA1521-TA` deletes the role "Student of CS1101S" and "TA of MA1521" from the first person.
+
+<box type="warning" seamless>
+
+**Be careful:**
+- Omitting the role type intentionally leads to two different behaviors for adding and deleting roles:
+  - For adding roles, the role type is assumed to be `Student`.
+  - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
+
+If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
+</box>
 
 ##### Replace existing module-role pairs
 

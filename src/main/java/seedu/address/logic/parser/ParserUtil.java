@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.edit.AddModuleRoleOperation.AddModuleRoleDescriptor;
+import static seedu.address.logic.commands.edit.DeleteModuleRoleOperation.DeleteModuleRoleDescriptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -33,7 +35,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Error: Index is not a non-zero unsigned integer!\nUsage:\n%1$s";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -160,6 +162,28 @@ public class ParserUtil {
     }
 
     /**
+     * Returns true if the given {@code moduleRolePair} contains only the module code.
+     */
+    public static boolean isOnlyModuleCodePresent(String moduleRolePair) {
+        return moduleRolePair.indexOf('-') == -1;
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedModuleCode);
+    }
+
+    /**
      * Parses a {@code String moduleRolePair} into a {@code ModuleRolePair}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -209,7 +233,7 @@ public class ParserUtil {
     public static ModuleRoleMap parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
         requireNonNull(moduleRolePairs);
 
-        final HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        final LinkedHashMap<ModuleCode, RoleType> hashMap = new LinkedHashMap<>();
         final List<ModuleCode> moduleCodes = new ArrayList<>();
 
         for (String moduleRolePair : moduleRolePairs) {
@@ -223,8 +247,7 @@ public class ParserUtil {
             throw new ParseException(ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS);
         }
 
-        final ModuleRoleMap moduleRoleMap = new ModuleRoleMap(hashMap);
-        return moduleRoleMap;
+        return new ModuleRoleMap(hashMap);
     }
 
     /**
@@ -259,6 +282,56 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a list of {@code String moduleRolePairs} into an {@code AddModuleRoleDescriptor}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param moduleRolePairs the list of strings representing the module role pairs.
+     * @return the corresponding {@code AddModuleRoleDescriptor}.
+     * @throws ParseException if the given {@code moduleRolePairs} is invalid.
+     */
+    public static AddModuleRoleDescriptor parseAddModuleRoleDescriptor(List<String> moduleRolePairs)
+            throws ParseException {
+        return new AddModuleRoleDescriptor(parseModuleRolePairs(moduleRolePairs).getData());
+    }
+
+    /**
+     * Parses a list of {@code String moduleRolePairs} into a {@code DeleteModuleRoleDescriptor}.
+     * Leading and trailing whitespaces will be trimmed.
+     * For each {@code String moduleRolePair}, if the role is not specified, the returned descriptor
+     * will specify that any role type associated with the module should be deleted later.
+     *
+     * @param moduleRolePairs the list of strings representing the module role pairs.
+     * @return the corresponding {@code DeleteModuleRoleDescriptor}.
+     * @throws ParseException if the given {@code moduleRolePairs} is invalid.
+     */
+    public static DeleteModuleRoleDescriptor parseDeleteModuleRoleDescriptor(
+            List<String> moduleRolePairs) throws ParseException {
+        List<ModuleRolePair> toDeletes = new ArrayList<>();
+        List<ModuleCode> toDeleteAnyRoles = new ArrayList<>();
+
+        List<ModuleCode> moduleCodes = new ArrayList<>();
+
+        for (String moduleRolePair : moduleRolePairs) {
+            if (isOnlyModuleCodePresent(moduleRolePair)) {
+                ModuleCode moduleCode = parseModuleCode(moduleRolePair);
+                toDeleteAnyRoles.add(moduleCode);
+                moduleCodes.add(moduleCode);
+            } else {
+                ModuleRolePair parsedPair = parseModuleRolePair(moduleRolePair);
+                toDeletes.add(parsedPair);
+                moduleCodes.add(parsedPair.moduleCode);
+            }
+        }
+
+        Set<ModuleCode> uniqueModuleCodes = new HashSet<>(moduleCodes);
+        if (uniqueModuleCodes.size() != moduleCodes.size()) {
+            throw new ParseException(ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS);
+        }
+
+        return new DeleteModuleRoleDescriptor(toDeletes, toDeleteAnyRoles);
+    }
+
+    /**
      * Parses a {@code String moduleRoleOperations} into an {@code EditModuleRoleOperation}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -277,11 +350,11 @@ public class ParserUtil {
         case '+':
             List<String> moduleRolesToAdd =
                     Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
-            return new AddModuleRoleOperation(parseModuleRolePairs(moduleRolesToAdd));
+            return new AddModuleRoleOperation(parseAddModuleRoleDescriptor(moduleRolesToAdd));
         case '-':
             List<String> moduleRolesToRemove =
                     Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
-            return new DeleteModuleRoleOperation(parseModuleRolePairs(moduleRolesToRemove));
+            return new DeleteModuleRoleOperation(parseDeleteModuleRoleDescriptor(moduleRolesToRemove));
         default:
             throw new RuntimeException();
         }
