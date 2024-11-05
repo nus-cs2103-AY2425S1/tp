@@ -29,3 +29,4 @@ key.txt
 docs/_markbind/logs/
 
 *.jks
+/docs/_markbind/logs/

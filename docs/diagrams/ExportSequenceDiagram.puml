@@ -1,0 +1,108 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExportCommand" as ExportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Files" as Files LOGIC_COLOR
+participant "writer:BufferedWriter" as BufferedWriter LOGIC_COLOR
+participant ":FileWriter" as FileWriter LOGIC_COLOR
+end box
+
+box Security SECURITY_COLOR_T1
+participant ":EncryptionManager" as EncryptionManager SECURITY_COLOR
+end box
+
+[-> LogicManager : execute(":export")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(":export")
+activate AddressBookParser
+
+create ExportCommand
+AddressBookParser -> ExportCommand : new ExportCommand()
+activate ExportCommand
+
+ExportCommand --> AddressBookParser
+deactivate ExportCommand
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+AddressBookParser -[hidden]-> ExportCommand
+destroy AddressBookParser
+
+LogicManager -> ExportCommand : execute(ExportCommand())
+activate ExportCommand
+
+create Files
+ExportCommand -> Files : Files.readAllBytes(sourceFile.toPath())
+activate Files
+Files --> ExportCommand : encryptedData
+deactivate Files
+Files -[hidden]-> AddressBookParser
+destroy Files
+
+ExportCommand -> EncryptionManager : decrypt(encryptedData, this.keyPath)
+activate EncryptionManager
+
+EncryptionManager --> ExportCommand : jsonData
+deactivate EncryptionManager
+
+create BufferedWriter
+ExportCommand -> BufferedWriter : new BufferedWriter(new FileWriter(tmpFile))
+activate BufferedWriter
+
+create FileWriter
+BufferedWriter -> FileWriter : new FileWriter(tmpFile)
+activate FileWriter
+FileWriter --> BufferedWriter
+deactivate FileWriter
+FileWriter -[hidden]-> ExportCommand
+destroy FileWriter
+
+BufferedWriter -> BufferedWriter : write(jsonData)
+activate BufferedWriter
+BufferedWriter --> BufferedWriter
+deactivate BufferedWriter
+
+BufferedWriter --> ExportCommand
+deactivate BufferedWriter
+BufferedWriter -[hidden]-> ExportCommand
+destroy BufferedWriter
+
+opt if destinationFile is null
+    ExportCommand -> ExportCommand : chooseExportLocation()
+    activate ExportCommand
+    ExportCommand --> ExportCommand
+    deactivate ExportCommand
+    opt if destinationFile is null
+    create CommandResult
+    ExportCommand --> CommandResult
+    activate CommandResult
+    CommandResult --> ExportCommand : CommandResult(NO_DESTINATION_MESSAGE)
+    deactivate CommandResult
+    ExportCommand --> LogicManager : CommandResult
+    end
+end
+
+ExportCommand -> ExportCommand : performExport(tmpFile, destinationFile)
+activate ExportCommand
+ExportCommand --> ExportCommand : result
+deactivate ExportCommand
+
+
+create CommandResult
+ExportCommand -> CommandResult
+activate CommandResult
+CommandResult --> ExportCommand : CommandResult(feedback)
+deactivate CommandResult
+
+ExportCommand --> LogicManager : CommandResult
+deactivate ExportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

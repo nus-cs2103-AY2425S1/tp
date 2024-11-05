@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "markbind-cli": "^5.5.3"
+  },
+  "dependencies": {
+    "markbind": "^2.9.0"
   }
 }
