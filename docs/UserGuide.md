@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
+at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -16,9 +17,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventfulnus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -27,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -49,13 +50,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/friend`, `r/friend r/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -63,9 +64,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+## Persons
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to use some of the commands. Also contains a link to this guide.
 
 ![help message](images/helpMessage.png)
 
@@ -74,17 +77,17 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of roles (including 0)
+A person can have zero or more roles.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/criminal`
 
 ### Listing all persons : `list`
 
@@ -96,18 +99,19 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing roles, the existing roles of the person will be removed i.e adding of roles is not cumulative.
-* You can remove all the person’s roles by typing `t/` without
+* You can remove all the person’s roles by typing `r/` without
     specifying any roles after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
+*  `edit 2 n/Betsy Crower r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
 ### Locating persons by name: `find`
 
@@ -127,9 +131,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by roles: 'filter'
+
+Finds persons whose roles contain any of the given keywords.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `athlete` will match `Athlete`
+* The order of the keywords does not matter. e.g. `athlete student` will match `Student Athlete`
+* Only the roles are searched.
+* Only full words will be matched e.g. `ath` will not match `athlete`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `athlete student` will return `Student Athlete`, `Athlete`
+
+
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the database.
 
 Format: `delete INDEX`
 
@@ -141,9 +159,53 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+## Events
+
+### Adds an event to the database.
+
+Format: `add n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+An event can have zero or more participants.
+Note that the participants must be valid persons in the database.
+</div>
+
+Examples:
+* `add n/Basketball Final s/Basketball Men v/USC pa/John Doe pa/Betsy Crowe`
+* `add n/100m Sprint s/Athletics v/USC pa/John Doe pa/Betsy Crowe pa/Alex Yeoh`
+
+### Edits an event in the database.
+
+Format: `edit INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
+
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing participants, the existing participants of the events will be removed i.e adding of participants is not cumulative.
+* You can remove all the event's participants by typing `pa/` without
+  specifying any participants after it.
+
+Examples:
+*  `edit 1 n/200m sprint` Edits the name of the event to be `200m sprint`.
+*  `edit 2 sp/Basketball Women r/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
+
+### Deletes an event from the database.
+
+... _Details coming soon ..._
+
+### Lists all events in the database.
+
+... _Details coming soon ..._
+
+### Finds events by name.
+
+... _Details coming soon ..._
+
+## More Features
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the database. But remember, they're gone forever.
 
 Format: `clear`
 
@@ -155,11 +217,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EventfulNUS data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EventfulNUS data is saved automatically as a JSON file `[JAR file location]/data/eventfulnus.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -175,7 +237,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EventfulNUS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

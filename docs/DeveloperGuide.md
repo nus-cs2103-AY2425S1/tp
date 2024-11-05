@@ -314,7 +314,7 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `MED`    | familiar user   | export participant details to a CSV file                                          | share participant records with others                                       |
 | `LOW`    | familiar user   | view a report of participants based on their sport category or faculty membership | understand how participants are distributed                                 |
 | `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                                   |
-| `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | treamline data entry for large-scale events                                 |
+| `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | streamline data entry for large-scale events                                |
 | `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                                 |
 | `LOW`    | expert user     | bulk update participant details or sub-event assignments                          | efficiently manage changes for large numbers of participants                |
 | `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                                |
@@ -329,9 +329,7 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 
 MSS:
 1. User requests to add a participant
-2. System requests for confirmation
-3. User confirms
-4. System adds the participant and displays a message indicating no errors.
+2. System adds the participant and displays a message indicating no errors.
 
 Extensions:\
 1a. System detects an error in the entered data.\
@@ -353,14 +351,14 @@ MSS:
 
 Extensions:\
 1a. System detects an error in the entered data.\
-1a1. System prompts user to re-enter data\
-1a2. User enters new data\
+1a1. System prompts user to re-enter data.\
+1a2. User enters new data.\
 Steps 1a1-1a2 are repeated until the data entered is correct.
 Use case resumes from step 2.
 
-1b. System does not find any matching participant in the system\
-1b1. System prompts user to re-enter data\
-1b2. User enters new data\
+1b. System does not find any matching participant in the system.\
+1b1. System prompts user to re-enter data.\
+1b2. User enters new data.\
 Steps 1b1-1b2 are repeated until the data entered is correct.
 Use case resumes from step 2.
 
@@ -376,10 +374,10 @@ MSS:
 2. System displays the tutorial / list of commands
 
 Extensions:\
-1a. System detects an unknown command\
-1a1. System prompts user to re-enter the command\
-1a2. User enters new command\
-Steps 1a1-1a2 are repeated until the data entered is correct.
+1a. System detects an unknown command.\
+1a1. System prompts user to re-enter the command.\
+1a2. User enters new command.\
+Steps 1a1-1a2 are repeated until the command is correctly entered.
 Use case resumes from step 2.
 
 <hr>
@@ -398,14 +396,14 @@ Extensions:\
 1a1. System prompts user to re-enter data\
 1a2. User enters new data\
 Steps 1a1-1a2 are repeated until the data entered is correct.
-Use case resumes from step 2.
+Use case resumes from step 2
 
 <hr>
 
 **System: EventfulNUS**\
 **Use case: UC5 - Update participant’s details**\
 **Actor: User**\
-**Guarantee: MSS → The specified participant’s details will be updated**
+**Guarantee: MSS → The specified participant’s details will be updated to match the provided details**
 
 MSS:
 1. User requests to update a participant’s details
@@ -413,14 +411,14 @@ MSS:
 
 Extensions:\
 1a. System detects an error in the entered data.\
-1a1. System prompts user to re-enter data\
-1a2. User enters new data\
+1a1. System prompts user to re-enter data.\
+1a2. User enters new data.\
 Steps 1a1-1a2 are repeated until the data entered is correct.\
 Use case resumes from step 2.
 
-1b. System does not find the specified participant in the system\
-1b1. System prompts user to re-enter data\
-1b2. User enters new data\
+1b. System does not find the specified participant in the system.\
+1b1. System prompts user to re-enter data.\
+1b2. User enters new data.\
 Steps 1b1-1b2 are repeated until the data entered is correct.\
 Use case resumes from step 2.
 
@@ -438,13 +436,13 @@ MSS:
 Extensions:\
 1a. System detects an error in the entered data.\
 1a1. System prompts user to re-enter data\
-1a2. User enters new data\
+1a2. User enters new data.\
 Steps 1a1-1a2 are repeated until the data entered is correct.
 Use case resumes from step 2.
 
-1b. System does not find specified participant in the system\
-1b1. System prompts user to re-enter data\
-1b2. User enters new data\
+1b. System does not find specified participant in the system.\
+1b1. System prompts user to re-enter data.\
+1b2. User enters new data.\
 Steps 1b1-1b2 are repeated until the data entered is correct.\
 Use case resumes from step 2.
 
@@ -453,25 +451,47 @@ Use case resumes from step 2.
 **System: EventfulNUS**\
 **Use case: UC7 - Delete participant**\
 **Actor: User**\
-**Guarantee: MSS → The specified participant will be deleted from the system**
+**Guarantee: MSS → The participant at the specified index will not be present in the system after the command is entered**
 
 MSS:
 1. User requests to delete a participant
-2. System requests for confirmation
-3. User confirms
-4. System deletes the participant and displays a message indicating no errors.
+2. System deletes the participant and displays a message indicating no errors.
 
 Extensions:\
 1a. System detects an error in the entered data.\
-1a1. System prompts user to re-enter data\
+1a1. System prompts user to re-enter data.\
 1a2. User enters new data\
 Steps 1a1-1a2 are repeated until the data entered is correct.\
 Use case resumes from step 2.
 
-1b. System does not find specified participant in the system\
-1b1. System prompts user to re-enter data\
-1b2. User enters new data\
+1b. System does not find specified participant in the system.\
+1b1. System prompts user to re-enter data.\
+1b2. User enters new data.\
 Steps 1b1-1b2 are repeated until the data entered is correct.\
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC8 - Delete event**\
+**Actor: User**\
+**Guarantee: MSS → The event at the specified index will not be present in the system after the command is entered**
+
+MSS:
+1. User requests to delete an event
+2. System deletes the event and displays a message indicating no errors.
+
+Extensions:\
+1a. System detects an error in the entered data.\
+1a1. System prompts user to re-enter data.\
+1a2. User enters new data.\
+Steps 1a1-1a2 are repeated until the data entered is valid.\
+Use case resumes from step 2.
+
+1b. System does not find specified event in the system.\
+1b1. System prompts user to re-enter data.\
+1b2. User enters new data.\
+Steps 1b1-1b2 are repeated until an index corresponding to an existing event is entered.\
 Use case resumes from step 2.
 
 ### Non-Functional Requirements

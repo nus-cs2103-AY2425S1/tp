@@ -5,8 +5,9 @@
 <?import javafx.scene.layout.StackPane?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" prefHeight="25.0" prefWidth="279.0" promptText="Enter a command eg. add n/ John Doe" style="-fx-border-radius: 5; -fx-border-color: #000000; -fx-background-radius: 5;">
+  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" prefHeight="47.0" prefWidth="279.0" promptText="Enter a command eg. add /n John Doe" style="-fx-border-radius: 5; -fx-border-color: #000000; -fx-background-radius: 5;">
       <padding>
          <Insets left="5.0" />
-      </padding></TextField>
+      </padding>
+   </TextField>
 </StackPane>

@@ -6,7 +6,7 @@ help - Display this help page.
 usage: help
 
 add - Add a Person to the list. They have a name, phone number, email and an event tied to them.
-usage: add n/<name> p/<phone number> e/<email> s/<subevent> {t/<role>}
+usage: add n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
 examples:
 1. add ... r/athlete - <faculty> - <sport>
 2. add ... r/committee - <branch> - <position>
@@ -27,7 +27,7 @@ list - List all entries registered to EventfulNUS.
 usage: list
 
 edit - Update the information in an entry.
-usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {t/<role>}
+usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
 
 delete - Delete an entry with the given ID.
 usage: delete <id>
