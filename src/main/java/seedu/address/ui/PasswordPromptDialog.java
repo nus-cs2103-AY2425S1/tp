@@ -1,14 +1,20 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.KeyBindController.handleKeyEvent;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.security.PasswordManager;
+
 
 /**
  * The PasswordPromptDialog class provides a modal dialog for users to enter
@@ -56,7 +62,7 @@ public class PasswordPromptDialog {
         grid.add(cancelButton, 1, 2);
 
         // If no existing password, prompt for a new password
-        confirmButton.setOnAction(e -> {
+        EventHandler<ActionEvent> confirmPasswordAction = e -> {
             String inputPassword = passwordField.getText();
             if (existingPassword == null) {
                 // Save new password
@@ -70,7 +76,13 @@ public class PasswordPromptDialog {
                     showAlert("Incorrect Password", "Please try again.");
                 }
             }
-        });
+        };
+        KeyBind confirmPasswordKeyBind = new KeyBind(KeyCode.ENTER, ()
+                 -> confirmPasswordAction.handle(new ActionEvent()));
+        confirmButton.setOnAction(confirmPasswordAction);
+        grid.setOnKeyPressed(event ->
+                handleKeyEvent(event, confirmPasswordKeyBind));
+
 
         // Handle cancel button click
         cancelButton.setOnAction(e -> {
