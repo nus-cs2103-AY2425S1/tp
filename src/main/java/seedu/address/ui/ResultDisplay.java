@@ -16,13 +16,29 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Creates a {@code ResultDisplay} with the given {@code String}.
+     */
     public ResultDisplay() {
         super(FXML);
+        resultDisplay.setWrapText(true);
+        resultDisplay.textProperty().addListener((observable, oldValue, newValue) -> adjustHeight());
     }
 
+    /**
+     * Sets the feedback to be displayed to the user.
+     */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
+        adjustHeight();
     }
 
+    /**
+     * Adjusts the height of the result display based on the number of lines of text.
+     * Ensures that all text is visible without having to scroll.
+     */
+    private void adjustHeight() {
+        resultDisplay.setPrefHeight(resultDisplay.getText().split("\n").length * 24 + 20);
+    }
 }
