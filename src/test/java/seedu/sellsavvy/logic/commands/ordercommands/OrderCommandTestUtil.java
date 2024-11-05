@@ -17,6 +17,7 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
@@ -117,5 +118,12 @@ public class OrderCommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Returns the order in the model's selected filtered order list by the given {@code Index}.
+     */
+    public static Order getOrderByIndex(Model model, Index index) {
+        return model.getFilteredOrderList().get(index.getZeroBased());
     }
 }

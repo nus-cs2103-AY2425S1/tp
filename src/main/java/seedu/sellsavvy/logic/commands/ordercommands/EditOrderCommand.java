@@ -81,17 +81,17 @@ public class EditOrderCommand extends Command {
         Order orderToEdit = lastShownOrderList.get(index.getZeroBased());
         Order editedOrder = createEditedOrder(orderToEdit, editOrderDescriptor);
 
+        model.setOrder(orderToEdit, editedOrder);
+
         OrderList orderList = model.getSelectedOrderList();
-        String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
-                && orderList.contains(editedOrder)
+        String feedbackToUser = orderList.containsDuplicateOrder(editedOrder)
                 ? String.format(MESSAGE_DUPLICATE_ORDER_WARNING,
                 editedOrder.getStatus().getValue())
                 : "";
-        feedbackToUser += editedOrder.hasDateElapsed()
+        feedbackToUser += editedOrder.hasDateElapsed() && editOrderDescriptor.isDateEdited()
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
 
-        model.setOrder(orderToEdit, editedOrder);
         return new CommandResult(feedbackToUser
                 + String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
     }
@@ -186,6 +186,10 @@ public class EditOrderCommand extends Command {
 
         public Optional<Date> getDate() {
             return Optional.ofNullable(date);
+        }
+
+        public boolean isDateEdited() {
+            return date != null;
         }
 
 

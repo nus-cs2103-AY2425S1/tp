@@ -64,7 +64,7 @@ public class AddOrderCommandTest {
     public void execute_duplicatePendingOrder_warningGiven() {
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
         // add the first order to the person's order list
-        model.getFilteredPersonList().get(0).getOrderList().add(ABACUS);
+        model.getFilteredPersonList().get(0).getOrderList().add(ABACUS.createCopy());
 
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
