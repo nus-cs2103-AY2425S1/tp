@@ -552,6 +552,49 @@ The sequence diagram below illustrates the above process of deleting a person fr
 
 ---
 
+### Summary Feature
+
+#### **Command Feature**
+
+`summary`
+
+#### **Command Feature Purpose**
+
+The `summary` command provides a breakdown of the application statuses of all the people in the `HRPlatform`.
+
+#### Key Components
+- **`SummaryCommand`**: Executes the summarization operation to display the counts for each application status in the `HRPlatform`.
+- **`HRPlatformParser`**: Parses user input to create a `SummaryCommand` object.
+- **`LogicManager`**: Invokes the `SummaryCommand` to execute the summary operation.
+- **`ModelManager`**: Implements the `Model` interface and contains the internal list of persons.
+- **`CommandResult`**: Encapsulates the result of the command execution, including any feedback to the user.
+
+### **Sequence of action**
+
+To help you understand how the `summary` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `summary` as an example:
+
+1. The user executes the command `summary`, intending to view a breakdown of all application statuses for candidates in the `HRPlatform`
+2. The `HRPlatformParser` interprets the input and creates a `SummaryCommand` object.
+3. The `LogicManager` invokes the execute method of `SummaryCommand`.
+4. The execute method of `SummaryCommand` initializes a map of all possible statuses with counts set to 0.
+5. `SummaryCommand` collects the list of all candidates in the address book via `Model` and computes the count for each application status using a grouping and counting operation.
+6. The execute method of `SummaryCommand` formats these counts into a summary message, displaying each status count and the total number of applicants.
+7. The execute method of `SummaryCommand` returns a `CommandResult` object, encapsulating the summary message for display to the user.
+8. The UI then reflects this summarized breakdown of application statuses.
+
+:information_source: **Note**:
+
+- At step 2, if an invalid input is detected after `summary` (e.g. `summary abc`), an error will be shown and the sequence of action is terminated.
+
+#### `SummaryCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of executing the `summary` command in TalentSG, which lists all persons in the address book.
+
+![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
+
+---
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
