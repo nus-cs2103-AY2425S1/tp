@@ -19,8 +19,14 @@ public class MedicineTest {
 
     @Test
     public void isValidMedicine_invalidMedicineNames_returnsFalse() {
+
+        // EP: empty string
         assertFalse(Medicine.isValidMedicine(""));
+
+        // EP: only whitespaces
         assertFalse(Medicine.isValidMedicine(" "));
+
+        // EP: leading/trailing whitespaces
         assertFalse(Medicine.isValidMedicine(" Aspirin"));
     }
 
@@ -32,8 +38,13 @@ public class MedicineTest {
 
     @Test
     public void constructor_invalidMedicineName_throwsIllegalArgumentException() {
+        // EP: empty string
         assertThrows(IllegalArgumentException.class, () -> new Medicine(""));
+
+        // EP: only whitespaces
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" "));
+
+        // EP: leading/trailing whitespaces
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" Aspirin"));
     }
 
@@ -55,10 +66,19 @@ public class MedicineTest {
         Medicine medicine2 = new Medicine("Aspirin");
         Medicine medicine3 = new Medicine("Tamiflu");
 
+        // EP: same name
         assertEquals(medicine1, medicine2);
+
+        // EP: different name
         assertNotEquals(medicine1, medicine3);
+
+        // EP: null
         assertNotEquals(null, medicine1);
+
+        // EP: non-Medicine object
         assertNotEquals("Aspirin", medicine1);
+
+        // EP: self-equality
         assertEquals(medicine1, medicine1);
     }
 
@@ -68,7 +88,10 @@ public class MedicineTest {
         Medicine medicine2 = new Medicine("Aspirin");
         Medicine medicine3 = new Medicine("Tamiflu");
 
+        // EP: same name
         assertEquals(medicine1.hashCode(), medicine2.hashCode());
+
+        // EP: different name
         assertNotEquals(medicine1.hashCode(), medicine3.hashCode());
     }
 }

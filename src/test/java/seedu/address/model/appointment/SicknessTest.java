@@ -13,6 +13,8 @@ public class SicknessTest {
 
     @Test
     void isValidSickness_validSicknessNames_returnsTrue() {
+
+        // EP: Valid names
         assertTrue(Sickness.isValidSickness("Common cold"));
         assertTrue(Sickness.isValidSickness("Flu"));
         assertTrue(Sickness.isValidSickness("COVID-19"));
@@ -22,8 +24,13 @@ public class SicknessTest {
 
     @Test
     void isValidSickness_invalidSicknessNames_returnsFalse() {
+        // EP: empty string
         assertFalse(Sickness.isValidSickness(""));
+
+        // EP: whitespaces only
         assertFalse(Sickness.isValidSickness(" "));
+
+        // EP: leading/trailing whitespaces
         assertFalse(Sickness.isValidSickness(" Headache"));
     }
 
@@ -35,8 +42,13 @@ public class SicknessTest {
 
     @Test
     void constructor_invalidSicknessName_throwsIllegalArgumentException() {
+        // EP: empty string
         assertThrows(IllegalArgumentException.class, () -> new Sickness(""));
+
+        // EP: whitespaces only
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" "));
+
+        // EP: leading/trailing whitespaces
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" Cough"));
     }
 
@@ -57,11 +69,20 @@ public class SicknessTest {
         Sickness sickness2 = new Sickness("Asthma");
         Sickness sickness3 = new Sickness("Bronchitis");
 
+        // EP: same name
         assertEquals(sickness1, sickness2);
+
+        // EP: different name
         assertNotEquals(sickness1, sickness3);
+
+        // EP: null
         assertNotEquals(null, sickness1);
-        assertNotEquals("Asthma", sickness1); // Different type
-        assertEquals(sickness1, sickness1); // Same object
+
+        // EP: different type
+        assertNotEquals("Asthma", sickness1);
+
+        // EP: same object
+        assertEquals(sickness1, sickness1);
     }
 
     @Test
@@ -70,7 +91,10 @@ public class SicknessTest {
         Sickness sickness2 = new Sickness("Diabetes");
         Sickness sickness3 = new Sickness("Hypertension");
 
+        // EP: same name
         assertEquals(sickness1.hashCode(), sickness2.hashCode());
+
+        // EP: different name
         assertNotEquals(sickness1.hashCode(), sickness3.hashCode());
     }
 }

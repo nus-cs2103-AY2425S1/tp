@@ -34,7 +34,10 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void contains_existingAndNonExistingAppointment_returnsCorrect() {
+        // EP: non-existing appointment
         assertFalse(uniqueAppointmentList.contains(appointment1));
+
+        // EP: existing appointment
         uniqueAppointmentList.add(appointment1);
         assertTrue(uniqueAppointmentList.contains(appointment1));
     }
@@ -88,22 +91,28 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void equals_differentAndSameAppointments_returnsCorrectEquality() {
+        // EP: same list
         UniqueAppointmentList list1 = new UniqueAppointmentList();
         UniqueAppointmentList list2 = new UniqueAppointmentList();
         list1.add(appointment1);
         list2.add(appointment1);
         assertEquals(list1, list2);
+
+        // EP: different list
         list2.add(appointment2);
         assertNotEquals(list1, list2);
     }
 
     @Test
     public void hashCode_differentAndSameAppointments_returnsCorrectHashCodeEquality() {
+        // EP: same list
         UniqueAppointmentList list1 = new UniqueAppointmentList();
         UniqueAppointmentList list2 = new UniqueAppointmentList();
         list1.add(appointment1);
         list2.add(appointment1);
         assertEquals(list1.hashCode(), list2.hashCode());
+
+        // EP: different list
         list2.add(appointment2);
         assertNotEquals(list1.hashCode(), list2.hashCode());
     }
