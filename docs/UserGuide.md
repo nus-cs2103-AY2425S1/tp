@@ -152,10 +152,10 @@ Filters the displayed list of persons in the address book to include all persons
 Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG... i/INCOME_GROUP... age/AGE_CRITERIA...`
 
 Parameters:
-* `p/PHONE`: The phone number criteria to filter by.
-* `e/EMAIL`: The email criteria to filter by.
-* `a/ADDRESS`: The address criteria to filter by.
-* `t/TAG...`: The tags to filter by.
+* `p/PHONE`: The phone number criteria to filter by. For multiple phone numbers, it checks if any phone number is present.
+* `e/EMAIL`: The email criteria to filter by. For multiple emails, it checks if any email is present.
+* `a/ADDRESS`: The address criteria to filter by. For multiple addresses, it checks if any address is present.
+* `t/TAG...`: The tags to filter by. For multiple tags, it checks if all tags are present.
 * `i/INCOME_GROUP...`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high`.
 * `age/AGE_CRITERIA...`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria, it checks if all age criteria are satisfied.
 
@@ -165,9 +165,10 @@ Parameters:
 
 **Notes**:
 * At least one of `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `i/INCOME_GROUP`, `age/AGE_CRITERIA` or `t/TAG...` must be provided.
+* If a contact does not have a value for the criteria field, it is not displayed.
 * Multiple criteria for phone, email, address, tags, income group, and age can be specified, separated by spaces.
-* The criteria for phone, email, and address are case-insensitive and can be partial matches.
-* The criteria for tags and income group only checks for exact matches.
+* The criteria for phone, email, address, and tags are case-insensitive and can be partial matches.
+* The criteria income group only checks for exact matches.
 
 ### Deleting a person : `delete`
 

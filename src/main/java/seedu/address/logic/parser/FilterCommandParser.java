@@ -10,14 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonMeetsCriteriaPredicate;
-import seedu.address.model.tag.Tag;
-
 /**
  * Parses input arguments and creates a new FilterCommand object.
  */
@@ -47,7 +44,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         List<String> phoneCriteria = new ArrayList<>();
         if (arePrefixesPresent(argMultimap, PREFIX_PHONE)) {
-            phoneCriteria = ParserUtil.parseCriteria(argMultimap.getValue(PREFIX_PHONE).get().trim());
+            phoneCriteria = ParserUtil.parsePhoneCriteria(argMultimap.getValue(PREFIX_PHONE).get().trim());
         }
         List<String> emailCriteria = new ArrayList<>();
         if (arePrefixesPresent(argMultimap, PREFIX_EMAIL)) {
@@ -61,7 +58,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         List<String> incomeCriteria = new ArrayList<>();
         if (arePrefixesPresent(argMultimap, PREFIX_INCOME)) {
-            incomeCriteria = ParserUtil.parseCriteria(argMultimap.getValue(PREFIX_INCOME).get().trim());
+            incomeCriteria = ParserUtil.parseIncomeCriteria(argMultimap.getValue(PREFIX_INCOME).get().trim());
         }
 
         List<String> ageCriteria = new ArrayList<>();
@@ -69,11 +66,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             ageCriteria = ParserUtil.parseAgeCriteria(argMultimap.getValue(PREFIX_AGE).get().trim());
         }
 
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        List<String> tagsCriteria = new ArrayList<>();
+        if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+            tagsCriteria = ParserUtil.parseCriteria(argMultimap.getValue(PREFIX_TAG).get().trim());
+        }
 
         return new FilterCommand(
             new PersonMeetsCriteriaPredicate(phoneCriteria, emailCriteria,
-                addressCriteria, incomeCriteria, ageCriteria, tagList));
+                addressCriteria, incomeCriteria, ageCriteria, tagsCriteria));
     }
 
     /**

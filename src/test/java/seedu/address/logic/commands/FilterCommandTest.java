@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +35,7 @@ public class FilterCommandTest {
                     Arrays.asList("first"),
                     Arrays.asList(),
                     Arrays.asList(),
-                    new HashSet<>()
+                    Arrays.asList()
                 );
         PersonMeetsCriteriaPredicate secondPredicate =
                 new PersonMeetsCriteriaPredicate(
@@ -45,7 +44,7 @@ public class FilterCommandTest {
                     Arrays.asList("second"),
                     Arrays.asList(),
                     Arrays.asList(),
-                    new HashSet<>()
+                    Arrays.asList()
                 );
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
@@ -94,7 +93,7 @@ public class FilterCommandTest {
                 Arrays.asList("address"),
                 Arrays.asList(),
                 Arrays.asList(),
-                new HashSet<>()
+                Arrays.asList()
             );
         FilterCommand filterCommand = new FilterCommand(predicate);
         String expected = FilterCommand.class.getCanonicalName()
@@ -113,14 +112,14 @@ public class FilterCommandTest {
                 Arrays.asList(),
                 Arrays.asList(),
                 Arrays.asList(),
-                new HashSet<>()
+                Arrays.asList()
             ) : new PersonMeetsCriteriaPredicate(
                 Arrays.asList(),
                 Arrays.asList(),
                 Arrays.asList(address),
                 Arrays.asList(),
                 Arrays.asList(),
-                new HashSet<>()
+                Arrays.asList()
             );
     }
 }

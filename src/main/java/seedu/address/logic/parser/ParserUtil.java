@@ -195,6 +195,56 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String phoneCriteria} into a {@code List<String>} of phone criteria.
+     * The phone criteria string is split by spaces, and each part is validated to match the pattern
+     * of an optional leading '<' or '>' followed by one or more digits.
+     *
+     * @param phoneCriteria The string containing phone criteria to be parsed.
+     * @return A list of valid phone criteria strings.
+     * @throws ParseException If any part of the phone criteria string does not match the expected pattern.
+     */
+    public static List<String> parsePhoneCriteria(String phoneCriteria) throws ParseException {
+        requireNonNull(phoneCriteria);
+        final List<String> phoneCriteriaSet = new ArrayList<>();
+        for (String phoneCriteriaString : phoneCriteria.split(" ")) {
+            if (phoneCriteriaString.isEmpty()) {
+                continue;
+            }
+            if (phoneCriteriaString.matches("\\+?[\\d\\-]*")) {
+                phoneCriteriaSet.add(phoneCriteriaString);
+            } else {
+                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return phoneCriteriaSet;
+    }
+
+    /**
+     * Parses a {@code String incomeCriteria} into a {@code List<String>} of income criteria.
+     * The income criteria string is split by spaces, and each part is validated to match the pattern
+     * of valid income levels or their substrings.
+     *
+     * @param incomeCriteria The string containing income criteria to be parsed.
+     * @return A list of valid income criteria strings.
+     * @throws ParseException If any part of the income criteria string does not match the expected pattern.
+     */
+    public static List<String> parseIncomeCriteria(String incomeCriteria) throws ParseException {
+        requireNonNull(incomeCriteria);
+        final List<String> incomeCriteriaSet = new ArrayList<>();
+        for (String incomeCriteriaString : incomeCriteria.split(" ")) {
+            if (incomeCriteriaString.isEmpty()) {
+                continue;
+            }
+            if (Income.isValidIncome(incomeCriteriaString)) {
+                incomeCriteriaSet.add(incomeCriteriaString);
+            } else {
+                throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return incomeCriteriaSet;
+    }
+
+    /**
      * Parses a {@code String income} into an {@code Income}.
      * Leading and trailing whitespaces will be trimmed.
      *

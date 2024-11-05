@@ -1,12 +1,10 @@
 package seedu.address.model.person;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code Phone}, {@code Email},
@@ -18,7 +16,7 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
     private final List<String> addressCriteria;
     private final List<String> incomeCriteria;
     private final List<String> ageCriteria;
-    private final Set<Tag> tags;
+    private final List<String> tags;
 
     /**
      * Constructs a {@code PersonMeetsCriteriaPredicate} with the specified criteria.
@@ -34,7 +32,7 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
         List<String> addressCriteria,
         List<String> incomeCriteria,
         List<String> ageCriteria,
-        Set<Tag> tags) {
+        List<String> tags) {
         this.phoneCriteria = phoneCriteria;
         this.emailCriteria = emailCriteria;
         this.addressCriteria = addressCriteria;
@@ -45,16 +43,22 @@ public class PersonMeetsCriteriaPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        boolean phoneMatch = true;
-        boolean tagsMatch = person.getTags().containsAll(tags);
-        boolean emailMatch = true;
-        boolean addressMatch = true;
-        boolean incomeMatch = true;
-        boolean ageMatch = true;
+        boolean phoneMatch = phoneCriteria.isEmpty();
+        boolean tagsMatch = tags.isEmpty();
+        boolean emailMatch = emailCriteria.isEmpty();
+        boolean addressMatch = addressCriteria.isEmpty();
+        boolean incomeMatch = incomeCriteria.isEmpty();
+        boolean ageMatch = ageCriteria.isEmpty();
 
         if (!phoneCriteria.isEmpty()) {
             phoneMatch = phoneCriteria.stream()
                 .anyMatch(searchTerm -> StringUtil.containsSubstringIgnoreCase(person.getPhone().value, searchTerm));
+        }
+
+        if (!tags.isEmpty() && !person.getTags().isEmpty()) {
+            tagsMatch = tags.stream()
+                .allMatch(tag -> person.getTags().stream()
+                    .anyMatch(personTag -> personTag.tagName.toLowerCase().contains(tag.toLowerCase())));
         }
 
         if (!emailCriteria.isEmpty() && !person.getEmail().isEmpty()) {
