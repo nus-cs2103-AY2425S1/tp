@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -110,5 +113,19 @@ public class SwitchCommandTest {
         );
     }
 
+    @Test
+    public void equals() {
+        Profile profile1 = new Profile("profile1");
+        Profile profile2 = new Profile("profile2");
+        SwitchCommand switchCommand1 = new SwitchCommand(profile1);
+        SwitchCommand switchCommand2 = new SwitchCommand(profile1);
+        SwitchCommand switchCommand3 = new SwitchCommand(profile2);
+
+        assertEquals(switchCommand1, switchCommand2);
+        assertEquals(switchCommand1, switchCommand1);
+        assertNotEquals(switchCommand1, switchCommand3);
+        assertNotEquals("not a SwitchCommand", switchCommand1);
+        assertNotEquals(null, switchCommand1);
+    }
 
 }

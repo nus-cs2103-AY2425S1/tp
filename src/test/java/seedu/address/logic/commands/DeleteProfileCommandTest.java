@@ -2,6 +2,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -100,5 +103,20 @@ public class DeleteProfileCommandTest {
 
         assertThrows(CommandException.class,
                 DeleteProfileCommand.MESSAGE_ILLEGAL_MODIFICATION, () -> deleteCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        Profile profile1 = new Profile("profile1");
+        Profile profile2 = new Profile("profile2");
+        DeleteProfileCommand deleteCommand1 = new DeleteProfileCommand(profile1);
+        DeleteProfileCommand deleteCommand2 = new DeleteProfileCommand(profile1);
+        DeleteProfileCommand deleteCommand3 = new DeleteProfileCommand(profile2);
+
+        assertEquals(deleteCommand1, deleteCommand2);
+        assertEquals(deleteCommand1, deleteCommand1);
+        assertNotEquals(deleteCommand1, deleteCommand3);
+        assertNotEquals("not a DeleteProfileCommand", deleteCommand1);
+        assertNotEquals(null, deleteCommand1);
     }
 }
