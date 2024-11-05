@@ -38,14 +38,13 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
                     ReminderCommand.MESSAGE_USAGE));
         }
 
+        // Check for multiple prefixes
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_REMINDER);
+
         String reminderTime = argMultimap.getValue(PREFIX_REMINDER).orElse("");
 
         // Check for missing reminder
         if (reminderTime.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
-        }
-        // Check for multiple prefixes
-        if (argMultimap.getAllValues(PREFIX_REMINDER).size() > 1) {
             throw new ParseException(MESSAGE_INVALID_REMINDER_FORMAT);
         }
 
