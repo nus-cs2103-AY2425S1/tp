@@ -40,7 +40,7 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
     public static final String MESSAGE_UNMARK_MEMBER_SUCCESS =
-            "Successfully unmark the attendance on %1$s for member(s): %2$s";
+            "Successfully unmarked the attendance on %1$s for member(s):\n%2$s\n";
     public static final String MESSAGE_CONTAIN_UNMARKED_MEMBER =
             "Please note that attendance of %1$s is already unmarked.";
 
@@ -79,12 +79,15 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
         unmarkAttendance(model, membersToUnmarkAttendance, this.attendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        List<String> peopleNames = membersAttendanceUnmarkSuccess.stream().map(p -> p.getName().toString()).toList();
-        String commandResultMessage = this.membersAttendanceAlreadyUnmarked.isEmpty()
-                ? String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance, peopleNames)
-                : String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance, peopleNames)
-                + '\n' + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, this.membersAttendanceAlreadyUnmarked.stream()
-                .map(Person::getName).toList());
+        String commandResultMessage = membersAttendanceAlreadyUnmarked.isEmpty()
+                ? String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance,
+                displayMembers(membersAttendanceUnmarkSuccess))
+                : (this.membersAttendanceUnmarkSuccess.isEmpty()
+                ? String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER, displayMembers(membersAttendanceAlreadyUnmarked))
+                : String.format(MESSAGE_UNMARK_MEMBER_SUCCESS, attendance,
+                displayMembers(membersAttendanceUnmarkSuccess))
+                + '\n' + String.format(MESSAGE_CONTAIN_UNMARKED_MEMBER,
+                displayMembers(membersAttendanceAlreadyUnmarked)));
         return new CommandResult(commandResultMessage);
     }
 

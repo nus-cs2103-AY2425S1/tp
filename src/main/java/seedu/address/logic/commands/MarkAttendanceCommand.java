@@ -40,7 +40,7 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
     public static final String MESSAGE_MARK_MEMBER_SUCCESS =
-            "Successfully mark the attendance on %1$s for member(s): %2$s";
+            "Successfully marked the attendance on %1$s for member(s): \n%2$s\n";
     public static final String MESSAGE_CONTAIN_MARKED_MEMBER =
             "Please note that attendance of %1$s is already marked.";
 
@@ -78,12 +78,13 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
         markAttendance(model, membersToMarkAttendance, this.attendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        List<String> peopleNames = membersAttendanceMarkSuccess.stream().map(p -> p.getName().toString()).toList();
         String commandResultMessage = this.membersAttendanceAlreadyMarked.isEmpty()
-                ? String.format(MESSAGE_MARK_MEMBER_SUCCESS, attendance, peopleNames)
-                : String.format(MESSAGE_MARK_MEMBER_SUCCESS, attendance, peopleNames)
-                + '\n' + String.format(MESSAGE_CONTAIN_MARKED_MEMBER, this.membersAttendanceAlreadyMarked.stream()
-                .map(Person::getName).toList());
+                ? String.format(MESSAGE_MARK_MEMBER_SUCCESS, attendance, displayMembers(membersAttendanceMarkSuccess))
+                : (this.membersAttendanceMarkSuccess.isEmpty()
+                    ? String.format(MESSAGE_CONTAIN_MARKED_MEMBER, displayMembers(membersAttendanceAlreadyMarked))
+                    : String.format(MESSAGE_MARK_MEMBER_SUCCESS, attendance,
+                displayMembers(membersAttendanceMarkSuccess))
+                + '\n' + String.format(MESSAGE_CONTAIN_MARKED_MEMBER, displayMembers(membersAttendanceAlreadyMarked)));
         return new CommandResult(commandResultMessage);
     }
 
