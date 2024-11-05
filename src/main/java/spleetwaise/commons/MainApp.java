@@ -59,6 +59,8 @@ public class MainApp extends Application {
 
     protected Config config;
 
+    private volatile boolean isStopped = false;
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing SpleetWaise]===========================");
@@ -86,13 +88,7 @@ public class MainApp extends Application {
         ui = new UiManager(logic);
 
         // Add shutdown hook
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                stop();
-            } catch (Exception e) {
-                logger.severe("Error during shutdown: " + e.getMessage());
-            }
-        }));
+        Runtime.getRuntime().addShutdownHook(new Thread(this::cleanUp));
     }
 
     /**
@@ -221,17 +217,26 @@ public class MainApp extends Application {
         ui.start(primaryStage);
     }
 
+    private void cleanUp() {
+        if (!isStopped) {
+            logger.info("Cleaning up resources...");
+            try {
+                storage.saveUserPrefs(CommonModel.getInstance().getUserPrefs());
+                storage.saveAddressBook(addressBookModel.getAddressBook());
+                storage.saveTransactionBook(transactionBookModel.getTransactionBook());
+                logger.info("Resources saved...");
+            } catch (AccessDeniedException e) {
+                logger.severe(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()));
+            } catch (IOException e) {
+                logger.severe(String.format(FILE_OPS_ERROR_FORMAT, e.getMessage()));
+            }
+        }
+    }
+
     @Override
     public void stop() {
         logger.info("============================ [ Stopping SpleetWaise ] =============================");
-        try {
-            storage.saveUserPrefs(CommonModel.getInstance().getUserPrefs());
-            storage.saveAddressBook(addressBookModel.getAddressBook());
-            storage.saveTransactionBook(transactionBookModel.getTransactionBook());
-        } catch (AccessDeniedException e) {
-            logger.severe(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()));
-        } catch (IOException e) {
-            logger.severe(String.format(FILE_OPS_ERROR_FORMAT, e.getMessage()));
-        }
+        cleanUp();
+        isStopped = true; // Ensures `cleanUp()` only runs once
     }
 }
