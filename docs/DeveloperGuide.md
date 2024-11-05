@@ -299,7 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters command to create new student entry.
-2. System displays success message and command line is cleared.
+1. System displays success message and command line is cleared.
 
    Use case ends.
 
@@ -307,16 +307,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
-
-
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.<br><br>
+  
 * 1b. System detects error in parameters.
     * 1b1. System displays error message and does not clear command line.
-    * 1b2. User enters command with correct parameters.
-* Steps 1b1-1b2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+    * 1b2. User enters command with correct parameters.<br>
+  Steps 1b1-1b2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.
 
 
 **Use case: UC02 - Read all entries**
@@ -330,13 +329,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension**
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.<br><br>
 
 * 1b. System detects the list is empty.
-    * 1b1. System shows an empty list.
-
+    * 1b1. System shows an empty list.<br> 
   Use case ends.
 
 **Use case: UC03 - Read total earnings**
@@ -351,9 +349,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension**
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br> 
+  Use case resumes from step 2.
 
 
 **Use case: UC04 - Delete a student entry**
@@ -370,16 +368,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters command with new index.
-* Steps 2a1-2a2 are repeated until index entered is correct.
-* Use case resumes from step 3.
+    * 2a2. User enters command with new index.<br>
+  Steps 2a1-2a2 are repeated until index entered is correct.<br>
+  Use case resumes from step 3.
 
 
 * 2b. System detects error in format of entered command.
     * 2b1. System displays error message and does not clear command line.
-    * 2b2. User enters new command.
-* Steps 2b1-2b2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
+    * 2b2. User enters new command.<br<
+  Steps 2b1-2b2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 3.
 
 
 **Use case: UC05 - Find student entries**
@@ -395,10 +393,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects error in entered command.
     * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.
-
-* Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
+    * 1a2. User enters new command.<br>
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 2.
 
 
 **Use case: UC06 - Receiving tuition fee from a student**
@@ -420,9 +417,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. System detects error in entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
+    * 2a2. User enters new command.<br>
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br> 
+  Use case resumes from step 3.
 
 
 **Use case: UC07 - Settle outstanding fees for student**
@@ -439,14 +436,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)<ins>.
-* Use case resumes from step 1.
+    * 1a1. User <ins>adds the student to the system (UC01)<ins>.<br>
+  Use case resumes from step 1.
 
 * 2a. System detects error in entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.
-* Steps 2a1-2a2 are repeated until all details entered are correct.
-* Use case resumes from step 3.
+    * 2a2. User enters new command.<br>
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br>
+  Use case resumes from step 3.
 
 *{More to be added}*
 
@@ -518,7 +515,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Open a command terminal, `cd` into the folder that you put the jar file in.
 
-   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`
+   1. Run the jar file with the command in the terminal `java -jar ugteach.jar`<br>
       Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today. 
       The window size may not be optimum.
 
@@ -628,6 +625,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisite: There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
+
+   1. Test case: Delete the `ugteach.json` file.<br>
+       Expected: UGTeach should create a new `ugteach.json` file with default data.
+        
+   1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
+       Expected: Similar to previous.
+
+   1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
+   e.g. add a non-alphanumeric character to one of the student's name.<br>
+       Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
 1. _{ more test cases …​ }_
