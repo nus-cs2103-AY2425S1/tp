@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +14,7 @@ import java.time.format.ResolverStyle;
  */
 public class Deadline implements Comparable<Deadline> {
     public static final String MESSAGE_CONSTRAINTS = "Deadlines must be given in the form YYYY-MM-DD HHmm";
-    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}\\d{2}";
+    public static final String VALIDATION_REGEX = "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2}) (?<hour>\\d{2})(?<minute>\\d{2})";
     // safer to use 'uuuu' vs 'yyyy'
     // https://stackoverflow.com/questions/
     // 41177442/uuuu-versus-yyyy-in-datetimeformatter-formatting-pattern-codes-in-java
@@ -47,7 +48,6 @@ public class Deadline implements Comparable<Deadline> {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
-        // can add another check to see if deadline is after current date
         try {
             LocalDateTime.parse(test, DATETIME_FORMATTER);
             return true;
