@@ -90,13 +90,13 @@ Format: `exit`
 
 ### Saving the data
 
-BuyerList data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
 All data is saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
 
-Note: By default, the storage folder is set to a folder named `package` in the home folder.
+Note: By default, the storage folder is set to a folder named `data` in the home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, the data files will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -111,9 +111,9 @@ Format: `switch PARSER_MODE`
 
 * Switches the parser mode to the specified `PARSER_MODE`.
 * The parser mode takes 3 types:
-* `b` for [buyers](#buyer-mode)
-* `m` for meet-ups
-* `p` for properties [properties](#property-mode)
+* `b` for [buyers](#buyers)
+* `m` for [meet-ups](#meet-ups)
+* `p` for [properties](#properties)
 * The default parser mode is set to `b`.
 
 Examples:
@@ -162,7 +162,7 @@ Adds a buyer to the buyer list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
 
-* New buyers must have unique names and cannot duplicate names of existing buyers.
+* New buyers must have unique names and must not be duplicate names of existing buyers.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A buyer can have any number of tags (including 0)
@@ -228,7 +228,7 @@ Examples:
 * `view` followed by `delete 2` deletes the 2nd buyer in the displayed buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the displayed results of the `find` command.
 
-## Meet Up
+## Meet Ups
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
 
@@ -246,7 +246,7 @@ Adds a meet-up to the meet-up list.
 Format: `add n/MEETUP_SUBJECT i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
 
 <div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
+MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`
 </div>
 
 Examples:
@@ -263,8 +263,6 @@ Shows a list of all meet-ups in the meet-up list.
 
 Format: `view`
 
-Examples: `view` will show you all meet-ups in the meet-up list.
-
 ### Editing a meet-up : `edit`
 
 Edits an existing meet-up in the meet-up list.
@@ -272,7 +270,7 @@ Edits an existing meet-up in the meet-up list.
 Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
 
 <div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
+MEETUP_FROM and MEETUP_TO fields should follow the format  `YYYY-MM-DD HH:MM`
 </div>
 
 * Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
@@ -280,7 +278,7 @@ MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
+*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
 ### Locating meet-ups by name: `find`
 
@@ -360,8 +358,7 @@ Examples:
 
 Find existing properties in the property list based on either name or address keywords.
 
-Format: `find n/LANDLORD_NAME`
-Format: `find a/ADDRESS`
+Format: `find n/LANDLORD_NAME` or `find a/ADDRESS`
 
 * The tags used in searching should only be `n/` or `a/`, but not both.
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -388,6 +385,7 @@ Format: `delete INDEX`
 Examples:
 * `view` followed by `delete 4` deletes the 4th property in the displayed property list.
 * `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
