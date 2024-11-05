@@ -35,7 +35,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "buy raw materials "
-            + PREFIX_AMOUNT + "-100 "
+            + PREFIX_AMOUNT + "-100.50 "
             + PREFIX_OTHER_PARTY + "Company XYZ "
             + PREFIX_DATE + "2024-10-10";
 
