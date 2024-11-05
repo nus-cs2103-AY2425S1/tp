@@ -1,8 +1,9 @@
-package seedu.address.model.consultation;
+package seedu.address.model.datetime;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
@@ -30,6 +31,16 @@ public class Time {
     }
 
     /**
+     * Returns the LocalTime of String value.
+     *
+     * @return LocalTime of the time.
+     */
+    public LocalTime getLocalTimeValue() {
+        assert !value.isEmpty();
+        return LocalTime.parse(value, DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    /**
      * Returns the value of the time as a string.
      *
      * @return The string representation of the time.
@@ -45,7 +56,8 @@ public class Time {
      * @return True if the string represents a valid time, false otherwise.
      */
     public static boolean isValidTime(String test) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);
 
         try {
             LocalTime.parse(test, timeFormatter);
@@ -63,10 +75,7 @@ public class Time {
      *         or after the specified time.
      */
     public int compareTo(Time otherTime) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime thisLocalTime = LocalTime.parse(this.value, timeFormatter);
-        LocalTime otherLocalTime = LocalTime.parse(otherTime.value, timeFormatter);
-        return thisLocalTime.compareTo(otherLocalTime);
+        return this.getLocalTimeValue().compareTo(otherTime.getLocalTimeValue());
     }
 
     @Override

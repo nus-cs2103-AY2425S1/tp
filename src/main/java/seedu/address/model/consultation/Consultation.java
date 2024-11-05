@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 
@@ -98,6 +100,18 @@ public class Consultation {
      */
     public void removeStudent(Student student) {
         students.remove(student);
+    }
+
+    /**
+     * Sets a student in the consultation.
+     * Method works by removing a Student & Adding a new Student.
+     *
+     * @param target The student to remove.
+     * @param editedStudent The student to add.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+        removeStudent(target);
+        addStudent(editedStudent);
     }
 
     /**

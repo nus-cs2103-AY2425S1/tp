@@ -45,4 +45,19 @@ class JsonAdaptedCourse {
         return new Course(courseCode);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof JsonAdaptedCourse)) {
+            return false;
+        }
+
+        JsonAdaptedCourse otherCourse = (JsonAdaptedCourse) other;
+        return courseCode.equals((otherCourse.courseCode));
+    }
+
 }

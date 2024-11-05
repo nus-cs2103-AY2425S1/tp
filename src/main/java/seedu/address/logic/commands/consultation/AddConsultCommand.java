@@ -19,7 +19,7 @@ import seedu.address.model.consultation.Consultation;
 public class AddConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "addconsult";
-    public static final CommandType COMMAND_TYPE = CommandType.ADDCONSULT;
+    public static final CommandType COMMAND_TYPE = CommandType.CONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a consultation to TAHub. "
             + "Parameters: "

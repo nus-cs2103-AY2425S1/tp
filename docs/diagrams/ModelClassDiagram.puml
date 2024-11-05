@@ -14,11 +14,14 @@ Class UserPrefs
 
 Class UniqueStudentList
 Class Student
-Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Course
+
+Class Consultation
+Class Date
+Class Time
 
 Class I #FFFFFF
 }
@@ -36,19 +39,24 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueStudentList
+ModelManager --> "~* all" Consultation
 UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> Phone
 Student *--> Email
-Student *--> Address
-Student *--> "*" Tag
+Student *--> "0..*" Course
+
+
+Consultation *--> Date
+Consultation *--> Time
+Consultation -left-> "0..*" Student
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Date
+Date -[hidden]right-> Time
 
 ModelManager --> "~* filtered" Student
 @enduml

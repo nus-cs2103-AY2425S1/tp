@@ -1,9 +1,12 @@
-package seedu.address.model.consultation;
+package seedu.address.model.datetime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +28,9 @@ public class DateTest {
         String validDate = "2024-10-19";
         Date date = new Date(validDate);
         assertEquals(validDate, date.getValue());
+
+        LocalDate localDate = LocalDate.parse(validDate, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
+        assertEquals(localDate, date.getLocalDateValue());
     }
 
     @Test
@@ -37,6 +43,7 @@ public class DateTest {
         assertFalse(Date.isValidDate(" ")); // spaces only
         assertFalse(Date.isValidDate("2024-13-19")); // invalid month
         assertFalse(Date.isValidDate("2024-10-32")); // invalid day
+        assertFalse(Date.isValidDate("2024-02-30")); // February 30th
         assertFalse(Date.isValidDate("19/10/2024")); // wrong delimiter
         assertFalse(Date.isValidDate("19-10-2024")); // wrong order
 

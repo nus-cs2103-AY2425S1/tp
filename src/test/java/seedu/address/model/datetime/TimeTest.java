@@ -1,9 +1,12 @@
-package seedu.address.model.consultation;
+package seedu.address.model.datetime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +28,9 @@ public class TimeTest {
         String validTime = "14:00";
         Time time = new Time(validTime);
         assertEquals(validTime, time.getValue());
+
+        LocalTime localTime = LocalTime.parse(validTime, DateTimeFormatter.ofPattern("HH:mm"));
+        assertEquals(localTime, time.getLocalTimeValue());
     }
 
     @Test

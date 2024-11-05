@@ -81,6 +81,7 @@ public class EditCommandTest {
                 Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -190,7 +191,7 @@ public class EditCommandTest {
     @Test
     public void getCommandTypeMethod() {
         final EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, DESC_AMY);
-        assertEquals(editCommand.getCommandType(), CommandType.EDITSTUDENT);
+        assertEquals(editCommand.getCommandType(), CommandType.STUDENT);
     }
 
 }

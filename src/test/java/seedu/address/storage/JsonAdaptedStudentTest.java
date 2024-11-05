@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.BENSON;
@@ -90,6 +92,51 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidCourses);
         assertThrows(IllegalValueException.class, student::toModelType);
+    }
+
+    @Test
+    public void isSameStudent_sameObject_returnsTrue() {
+        JsonAdaptedStudent student1 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        assertTrue(() -> student1.isSameStudent(student1));
+    }
+
+    @Test
+    public void isSameStudent_hasSameName_returnsTrue() {
+        JsonAdaptedStudent student1 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        JsonAdaptedStudent student2 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, List.of());
+        assertTrue(() -> student1.isSameStudent(student2));
+    }
+
+    @Test
+    public void isSameStudent_hasDifferentName_returnsFalse() {
+        JsonAdaptedStudent student1 = new JsonAdaptedStudent("Alice", VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        JsonAdaptedStudent student2 = new JsonAdaptedStudent("Benson", VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        assertFalse(() -> student1.isSameStudent(student2));
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        JsonAdaptedStudent student1 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        JsonAdaptedStudent student2 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        assertTrue(() -> student1.equals(student1));
+    }
+
+    @Test
+    public void equals_hasSameDetails_returnsTrue() {
+        JsonAdaptedStudent student1 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        JsonAdaptedStudent student2 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        assertTrue(() -> student1.equals(student2));
+    }
+
+    @Test
+    public void equals_hasDifferentDetails_returnsFalse() {
+        JsonAdaptedStudent student1 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COURSES);
+        JsonAdaptedStudent student2 = new JsonAdaptedStudent("NIQUEIGFUQE", VALID_PHONE, VALID_EMAIL, List.of());
+        JsonAdaptedStudent student3 = new JsonAdaptedStudent(VALID_NAME, "10475629", VALID_EMAIL, List.of());
+        JsonAdaptedStudent student4 = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, List.of());
+        assertFalse(() -> student1.equals(student2));
+        assertFalse(() -> student1.equals(student3));
+        assertFalse(() -> student1.equals(student4));
     }
 
 }

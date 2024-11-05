@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.Date;
-import seedu.address.model.consultation.Time;
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.student.Student;
 
 /**

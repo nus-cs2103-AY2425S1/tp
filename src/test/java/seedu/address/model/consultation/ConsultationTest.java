@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.datetime.Date;
+import seedu.address.model.datetime.Time;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -67,6 +69,17 @@ public class ConsultationTest {
 
         consultation.removeStudent(student1);
         assertFalse(consultation.getStudents().contains(student1));
+    }
+
+    @Test
+    public void setStudent_studentSetSuccessfully() {
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+        Consultation consultation = new Consultation(validDate, validTime, students);
+
+        consultation.setStudent(student1, student2);
+        assertFalse(consultation.getStudents().contains(student1));
+        assertTrue(consultation.getStudents().contains(student2));
     }
 
     @Test
