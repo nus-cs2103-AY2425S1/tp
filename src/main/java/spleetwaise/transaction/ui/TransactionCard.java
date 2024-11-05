@@ -1,12 +1,14 @@
 package spleetwaise.transaction.ui;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import spleetwaise.commons.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -40,6 +42,8 @@ public class TransactionCard extends UiPart<Region> {
     private Label month;
     @FXML
     private Label day;
+    @FXML
+    private FlowPane categories;
 
     /**
      * Creates a {@code TransactionCard} with the given {@code Transaction} and index to display.
@@ -68,5 +72,8 @@ public class TransactionCard extends UiPart<Region> {
             amount.setStyle("-fx-text-fill: green;");
         }
         amount.setText("$" + transaction.getAmount().toString());
+        transaction.getCategories().stream()
+                .sorted(Comparator.comparing(category -> category.category))
+                .forEach(category -> categories.getChildren().add(new Label(category.category)));
     }
 }
