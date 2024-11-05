@@ -32,7 +32,7 @@ public class DeleteAssignmentCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 ";
     public static final String MESSAGE_DELETE_SUCCESS = "Deleted Assignment: %1$s belonging "
-            + "to Student: %1$s";
+            + "to Student: %2$s";
     private final Index studentIndex;
     private final Index assignmentIndex;
     /**
