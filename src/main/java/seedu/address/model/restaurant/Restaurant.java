@@ -39,11 +39,10 @@ public class Restaurant {
         this.email = email;
         this.address = address;
         this.rating = rating;
+        this.tags.addAll(tags);
 
         // Extract the price tag and other tags
-        Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
-        this.price = priceTagAndOtherTags.getFirst();
-        this.tags.addAll(priceTagAndOtherTags.getSecond());
+        this.price = new Price("$$$$");
 
         // Default to not favourite
         this.isFavourite = false;
@@ -69,32 +68,17 @@ public class Restaurant {
         return rating;
     }
 
+    public Price getPrice() {
+        return price;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         Set<Tag> allTags = new HashSet<>(this.tags);
-        allTags.addAll(getPriceTags());
         return Collections.unmodifiableSet(allTags);
-    }
-
-    /**
-     * Returns an immutable tag set without symbols in PriceCategory
-     */
-    public Set<Tag> getTagsWithoutPrice() {
-        return tags;
-    }
-
-    /**
-     * Returns an immutable tag set containing only the single price tag.
-     */
-    public Set<Tag> getPriceTags() {
-        if (price == null) {
-            return Collections.emptySet();
-        }
-        assert price != null : "Price should not be null";
-        return Collections.singleton(price);
     }
 
     /**

@@ -81,42 +81,4 @@ public enum PriceCategory {
         }
         throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
     }
-
-    /**
-     * Extracts the price tag from a set of tags.
-     *
-     * @param tags the set of tags
-     * @return a pair of the price tag and the other tags
-     */
-    public static Pair<Price, Set<Tag>> extractPriceTag(Set<Tag> tags) {
-        Price priceTag = null;
-        Set<Tag> otherTags = new HashSet<>();
-
-        for (Tag tag : tags) {
-            if (isSymbol(tag.tagName) && priceTag == null) {
-                priceTag = new Price(tag);
-            } else if (isSymbol(tag.tagName) && priceTag != null) {
-                throw new IllegalArgumentException(MESSAGE_MULTIPLE_PRICE_TAGS);
-            } else {
-                otherTags.add(tag);
-            }
-        }
-        return new Pair<>(priceTag, otherTags);
-    }
-
-    /**
-     * Returns true if the set of tags has multiple price tags.
-     *
-     * @param tags the set of tags
-     * @return true if the set of tags has multiple price tags
-     */
-    public static boolean hasMultiplePriceTags(Set<Tag> tags) {
-        int count = 0;
-        for (Tag tag : tags) {
-            if (isSymbol(tag.tagName)) {
-                count++;
-            }
-        }
-        return count > 1;
-    }
 }

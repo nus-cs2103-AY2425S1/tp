@@ -145,10 +145,6 @@ public class ParserUtil {
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
-
-        if (PriceCategory.hasMultiplePriceTags(tagSet)) {
-            throw new ParseException(PriceCategory.MESSAGE_MULTIPLE_PRICE_TAGS);
-        }
         return tagSet;
     }
 }
