@@ -60,7 +60,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson, weddingIndices);
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
 
-        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_WEDDING_DOES_NOT_EXIST, 1), () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(AddCommand.MESSAGE_WEDDING_DOES_NOT_EXIST, 1), () -> addCommand.execute(modelStub));
     }
 
     @Test
