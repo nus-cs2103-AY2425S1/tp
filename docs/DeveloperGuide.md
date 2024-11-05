@@ -122,7 +122,7 @@ However, there are new classes implemented for CampusConnect as well:
 <puml src="diagrams/CommandClasses.puml" width="600"/>
 
 The structure is simple:
-* Each `Command` class (old and new) extends from the abstract `Command` class, which enforces the implementation of the `execute()`
+* Each `Command` class (old and new) extends from the abstract `Command` class, which enforces the implementation of the `execute()` method.
 * Each `Command` class contains the respective `COMMAND_WORD` representing the name of the command and a `MESSAGE_USAGE` string to demonstrate how to use the respective command.
 * They also contain their own respective error messages.
 
