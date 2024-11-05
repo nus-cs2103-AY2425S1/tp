@@ -28,9 +28,13 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+  * [Introduction]({{ baseUrl }}/UserGuide.html#1-introduction)
+  * [How to Use]({{ baseUrl }}/UserGuide.html#2-how-to-use-this-user-guide)
   * [Getting Started]({{ baseUrl }}/UserGuide.html#3-getting-started)
-  * [Features]({{ baseUrl }}/UserGuide.html#4-commands)
+  * [Commands]({{ baseUrl }}/UserGuide.html#4-commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#5-faq)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#6-known-issues)
+  * [Glossary]({{ baseUrl }}/UserGuide.html#7-glossary)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#8-command-summary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
@@ -40,10 +44,6 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
