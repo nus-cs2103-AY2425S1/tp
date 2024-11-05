@@ -41,11 +41,11 @@ public class MarkDeliveryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (index.getZeroBased() >= model.getFilteredDeliveryList().size()) {
+        if (index.getZeroBased() >= model.getModifiedDeliveryList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
-        Delivery deliveryToMark = model.getFilteredDeliveryList().get(index.getZeroBased());
+        Delivery deliveryToMark = model.getModifiedDeliveryList().get(index.getZeroBased());
         Delivery markedDelivery = new Delivery(
                 deliveryToMark.getDeliveryProduct(),
                 deliveryToMark.getDeliverySender(),
