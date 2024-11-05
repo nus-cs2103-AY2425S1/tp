@@ -36,8 +36,27 @@ A person can have any number of tags (including 0)
 6. Refer to the table below for the general command format
 
 ---
+### **2. General Command Format**
 
-### **2. Adding data**
+The commands follow the general format of `COMMAND INDEX PREFIX/...` .
+
+* `COMMAND` refers to the command that you want to execute.
+* `INDEX` refers to the student data you want to alter, specified by the number prepended to the name of the student on the application.
+* `PREFIX` specifies the type of data we want to alter.
+    * Refer to the prefix table below for the usage of each prefix.
+
+<br></br>
+#### Example
+![GeneralCommandFormatExample](images/GeneralCommandFormatExample.png)
+
+For example,  `edit 1 n/Benjamin` edits the student name at index 1(Alex Yeoh, in this case) to Benjamin.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+This is a general command format, not ALL commands follow this format! For the specific command formats, refer to the individual section of each command below.
+</div>
+
+---
+### **3. Adding data**
 
 The commands in this section are used to add new records to the system, such as students and tutorials.
 
@@ -45,9 +64,9 @@ The commands in this section are used to add new records to the system, such as 
 - [Creating a new tutorial](#22-creating-a-new-tutorial)
 - [Enrolling student into a tutorial](#23-enrolling-student-into-a-tutorial)
 
-#### **2.1 Adding a student**
+#### **3.1 Adding a student**
 
-#### **2.2 Creating a new tutorial**
+#### **3.2 Creating a new tutorial**
 
 Command: `createtut`
 
@@ -73,7 +92,7 @@ Invalid usages
 
 </div>
 
-#### **2.3 Enrolling student into a tutorial**
+#### **3.3 Enrolling student into a tutorial**
 
 Command:  `enroll`
 
@@ -118,7 +137,7 @@ Invalid usages
 
 ---
 
-### **3. Viewing and retrieving data**
+### **4. Viewing and retrieving data**
 
 The commands in this section are used to view and retrieve records on the system, such as students, tutorials, and enrollment status.
 
@@ -127,7 +146,7 @@ The commands in this section are used to view and retrieve records on the system
 
 ---
 
-### **4. Editing and updating data**
+### **5. Editing and updating data**
 
 The commands in this section are used edit records on the system, such as student information, tutorial information, payment, and attendance status
 
@@ -138,7 +157,7 @@ The commands in this section are used edit records on the system, such as studen
 4.5 Marking attendance of tutorial  
 4.6 Unenroll a student from tutorial
 
-### **4.2 Logging fees for tutorial**
+### **5.2 Logging fees for tutorial**
 
 *Logging each student's monthly tutorial fees or any other additional fees*
 
@@ -163,7 +182,7 @@ Invalid usages
 * Format errors, check [here](#11-format-errors)
 
 
-### **4.3 Marking a student’s payment**
+### **5.3 Marking a student’s payment**
 
 *Recording a student’s payment*
 
@@ -189,7 +208,7 @@ Invalid usages
 
 
 
-### **4.6 Unenrolling student from a tutorial**
+### **5.6 Unenrolling student from a tutorial**
 
 Command:  `unenroll`
 
@@ -217,7 +236,7 @@ Invalid usages
 
 ---
 
-### **5. Deleting data**
+### **6. Deleting data**
 
 The commands in this section are used to delete records on the system
 
@@ -225,7 +244,7 @@ The commands in this section are used to delete records on the system
 5.2 Closing a tutorial  
 5.3 Clearing all entries
 
-#### **5.2 Closing a tutorial**
+#### **6.2 Closing a tutorial**
 
 Command:  `closetut`
 
@@ -261,7 +280,7 @@ Invalid usages
 
 ---
 
-### **6. Viewing help**
+### **7. Viewing help**
 Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
@@ -270,7 +289,7 @@ Command: `help`
 
 ---
 
-### **7. Exiting the program**
+### **8. Exiting the program**
 
 Exits the program.
 
@@ -278,19 +297,19 @@ Format: `exit`
 
 ---
 
-### **8. Saving data** 
+### **9. Saving data** 
 
 ---
 
-### **9. Editing the data file**
+### **10. Editing the data file**
 
 ---
 
-### **10. Command summary**
+### **11. Command summary**
 
 ---
 
-### **11. Format Errors**
+### **12. Format Errors**
 
 | Error Message | Most Likely Cause |
 | :---- | :---- |
@@ -301,18 +320,18 @@ Format: `exit`
 
 ---
 
-### **12. FAQ**
+### **13. FAQ**
 
 **Q**: How do I transfer my data to another Computer?  
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 ---
 
-### **13. Known issues**
+### **14. Known issues**
 
 ---
 
-### **14. Archiving data files \[coming in v2.0\]**
+### **15. Archiving data files \[coming in v2.0\]**
 
 
 
