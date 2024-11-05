@@ -86,11 +86,11 @@ public class SampleDataUtil {
                         + "strategy and help develop your team."),
                 getRequirements("Leadership", "AGILE", "SDLC", "CICD")
         ), new Job(
-                new Name("Test Job"),
-                new JobCompany("Test Company"),
+                new Name("Database Engineer"),
+                new JobCompany("Amazon"),
                 new JobSalary("300"),
-                new JobDescription("Test Description"),
-                getRequirements("TestRequirements")
+                new JobDescription("Looking for someone to handle our web services."),
+                getRequirements("SQL")
         )};
     }
 
@@ -111,7 +111,7 @@ public class SampleDataUtil {
                 new BillingDate("25"),
                 new Phone("69101099")
         ), new Company(
-                new Name("Test Company"),
+                new Name("Amazon"),
                 new Address("23 Church St, #10-01, Singapore 049481"),
                 new BillingDate("3"),
                 new Phone("67220300")
