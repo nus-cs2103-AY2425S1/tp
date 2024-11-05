@@ -39,7 +39,8 @@ public class PaymentCommand extends Command {
     public static final String MESSAGE_SCHEDULE_NOT_FOUND = "No appointment found for %1$s at %2$s";
     public static final String MESSAGE_PAYMENT_STATUS_INVALID =
             "Payment status must be either 'paid' or 'unpaid'";
-
+    public static final String MESSAGE_DUPLICATE_PAYMENT = "Payment for %1$s at %2$s has already been made!";
+    public static final String MESSAGE_UNPAID_PAYMENT = "Payment for %1$s at %2$s was not paid!";
     private final Name name;
     private final String dateTime;
     private final boolean isPaid;
@@ -80,8 +81,14 @@ public class PaymentCommand extends Command {
         // Update the payment status
         Schedule updatedSchedule = new Schedule(dateTime, targetSchedule.get().getNotes());
         if (isPaid) {
+            if (targetSchedule.get().getPaymentStatus()) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_PAYMENT, name, dateTime));
+            }
             updatedSchedule.markPaymentAsPaid();
         } else {
+            if (!targetSchedule.get().getPaymentStatus()) {
+                throw new CommandException(String.format(MESSAGE_UNPAID_PAYMENT, name, dateTime));
+            }
             updatedSchedule.markPaymentAsUnpaid();
         }
 
