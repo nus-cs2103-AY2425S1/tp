@@ -19,6 +19,7 @@ import seedu.eventtory.model.ModelManager;
 import seedu.eventtory.model.UserPrefs;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.vendor.Vendor;
+import seedu.eventtory.ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -92,6 +93,20 @@ public class DeleteEventCommandTest {
                 Messages.format(eventToDelete));
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_viewedEvent_changeUiState() {
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        model.viewEvent(eventToDelete);
+        DeleteEventCommand deleteCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
+
+        try {
+            deleteCommand.execute(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertFalse(model.getUiState().get() == UiState.EVENT_DETAILS);
     }
 
     @Test

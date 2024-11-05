@@ -31,6 +31,15 @@ public class VendorTest {
         // null -> returns false
         assertFalse(ALICE.isSameVendor(null));
 
+        // same id -> returns true
+        assertTrue(ALICE.isSameId(ALICE));
+
+        // different id -> returns false
+        assertFalse(ALICE.isSameId(BOB));
+
+        // null -> returns false
+        assertFalse(ALICE.isSameId(null));
+
         // same name, all other attributes different -> returns true
         Vendor editedAlice = new VendorBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND).build();
