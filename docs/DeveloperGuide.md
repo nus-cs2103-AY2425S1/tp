@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. A Guest with the same name already exists
+* 1c. A Guest with the same name and phone number already exists
     * 1c1. System tells the user the Guest already exists
 
       Use case ends.
@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. A Vendor with the same name already exists
+* 1c. A Vendor with the same name and phone number already exists
     * 1c1. System tells the user the Vendor already exists
 
       Use case ends.
@@ -379,6 +379,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. System shows an error message and requests the user to re-enter the details.
 
       Use case resumes at step 1.
+
+* 1c. The new details result in a duplicate Person (i.e. same name, phone number and type)
+    * 1c1. System tells the user the Person already exists
+    
+      Use case ends.
 
 **Use Case: Delete a Guest**
 

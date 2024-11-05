@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BUDGET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -34,18 +35,30 @@ public class VendorTest {
         // null -> returns false
         assertFalse(AMY.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Vendor editedAlice = new VendorBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name and phone number, all other attributes different -> returns true
+        Vendor editedAlice = new VendorBuilder(AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withBudget(VALID_BUDGET_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(AMY.isSamePerson(editedAlice));
+
+        // same name, all other attributes different -> returns false
+        editedAlice = new VendorBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withBudget(VALID_BUDGET_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(AMY.isSamePerson(editedAlice));
+
+        // same phone number, all other attributes different -> returns false
+        editedAlice = new VendorBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withBudget(VALID_BUDGET_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(AMY.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new VendorBuilder(AMY).withName(VALID_NAME_BOB).build();
         assertFalse(AMY.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns true
-        Vendor editedBob = new VendorBuilder(AMY).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Vendor editedBob = new VendorBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
