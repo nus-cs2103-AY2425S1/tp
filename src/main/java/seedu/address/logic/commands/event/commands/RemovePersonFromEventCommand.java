@@ -75,6 +75,7 @@ public class RemovePersonFromEventCommand extends Command {
 
         event.removePerson(person, personRole);
         eventManager.setEvent(originalEvent, event);
+        event.updateUi();
         return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
 
 
