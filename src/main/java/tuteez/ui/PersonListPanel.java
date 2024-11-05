@@ -1,5 +1,7 @@
 package tuteez.ui;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Logger;
 
 import javafx.animation.KeyFrame;
@@ -42,14 +44,34 @@ public class PersonListPanel extends UiPart<Region> {
         if (centralRefreshTimeline != null) {
             centralRefreshTimeline.stop();
         }
-
+        // Calculate the initial delay to the next full minute
+        long initialDelayInMillis = calculateInitialDelayToNextMinute();
+        // Create a timeline with an initial delay and a 60-second interval
         centralRefreshTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(REFRESH_TIME), event -> refreshAllVisibleCards())
+                new KeyFrame(Duration.millis(initialDelayInMillis), event -> {
+                    refreshAllVisibleCards();
+                    // Start a repeating timeline after the initial refresh at the start of the next minute
+                    centralRefreshTimeline = new Timeline(
+                            new KeyFrame(Duration.seconds(REFRESH_TIME), e -> refreshAllVisibleCards())
+                    );
+                    centralRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
+                    centralRefreshTimeline.play();
+                })
         );
-        centralRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
+
         centralRefreshTimeline.play();
 
-        logger.info("Started refresh timeline.");
+        logger.info("Started refresh timeline, initial delay until the next full minute: "
+                + initialDelayInMillis + " ms");
+    }
+
+    /**
+     * Calculates the delay in milliseconds until the start of the next full minute.
+     */
+    private long calculateInitialDelayToNextMinute() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nextMinute = now.truncatedTo(ChronoUnit.MINUTES).plusMinutes(1);
+        return ChronoUnit.MILLIS.between(now, nextMinute);
     }
 
     /**
