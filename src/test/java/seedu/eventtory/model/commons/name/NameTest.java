@@ -27,15 +27,22 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("/")); // with forward slash
+        assertFalse(Name.isValidName("/testName")); // with forward slash at start
+        assertFalse(Name.isValidName("test/Name")); // with forward slash in middle
+        assertFalse(Name.isValidName("testName/")); // with forward slash at end
+        assertFalse(Name.isValidName("{:><;['.?\"}")); // special characters only
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("peter*")); // contains non-alphanumeric characters
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+
+        // special characters (Excluding '/') with leading alphanumeric character
+        assertTrue(Name.isValidName("a{:><;['.?\"}"));
     }
 
     @Test

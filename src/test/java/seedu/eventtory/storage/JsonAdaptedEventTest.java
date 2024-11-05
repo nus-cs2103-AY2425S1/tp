@@ -19,7 +19,7 @@ import seedu.eventtory.model.event.Date;
 import seedu.eventtory.model.id.UniqueId;
 
 public class JsonAdaptedEventTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "Ra/chel";
     private static final String INVALID_DATE = "10 Octo 2024";
     private static final String INVALID_TAG = "#hiking";
 

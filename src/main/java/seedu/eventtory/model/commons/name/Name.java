@@ -9,13 +9,13 @@ import static seedu.eventtory.commons.util.AppUtil.checkArgument;
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names must start with an alphanumeric character and must not contain '/'.";
 
     /*
-     * The first character of the eventtory must not be a whitespace,
+     * The first character of a name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^\\p{Alnum}[^/]*$";
 
     public final String fullName;
 
