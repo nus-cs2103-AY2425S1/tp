@@ -104,7 +104,9 @@ public class EditPersonCommand extends EditCommand {
         Email updatedEmail = editPersonDescriptor.isEmailEdited()
                 ? editPersonDescriptor.getEmail().orElse(null)
                 : personToEdit.getEmail().orElse(null);
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().orElse(null));
+        Address updatedAddress = editPersonDescriptor.isAddressEdited()
+                ? editPersonDescriptor.getAddress().orElse(null)
+                : personToEdit.getAddress().orElse(null);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return Person.createPerson(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
