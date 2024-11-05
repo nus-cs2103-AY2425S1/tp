@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
@@ -25,6 +26,11 @@ import seedu.address.testutil.AddressBookBuilder;
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
+
+    @BeforeEach
+    public void setUp() {
+        modelManager.setArchivedListMode(false);
+    }
 
     @Test
     public void constructor() {

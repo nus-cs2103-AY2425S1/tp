@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,6 +29,11 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+
+    @BeforeEach
+    public void setUp() {
+        model.setArchivedListMode(false);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -118,6 +124,14 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(nonExistentName);
 
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_NAME_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_deleteByIndexArchivedList_throwsCommandException() {
+        model.setArchivedListMode(true);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NOT_IN_MAIN_LIST);
     }
 
     @Test

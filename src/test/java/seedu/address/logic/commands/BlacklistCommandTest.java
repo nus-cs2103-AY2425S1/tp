@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,7 +21,12 @@ import seedu.address.testutil.PersonBuilder;
 
 public class BlacklistCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+    private Model model;
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+        model.setArchivedListMode(false);
+    }
 
     @Test
     public void blacklist_firstPerson_success() {
@@ -71,5 +77,15 @@ public class BlacklistCommandTest {
         BlacklistCommand blacklistCommand = new BlacklistCommand(outOfBoundIndex);
 
         assertCommandFailure(blacklistCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexArchivedList_throwsCommandException() {
+        Person personToAdd = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setArchivedListMode(true);
+        model.addArchivedPerson(personToAdd);
+        BlacklistCommand blacklistCommand = new BlacklistCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(blacklistCommand, model, Messages.MESSAGE_NOT_IN_MAIN_LIST);
     }
 }

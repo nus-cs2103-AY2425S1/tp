@@ -25,6 +25,7 @@ public class ListCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ArchivedAddressBook());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new ArchivedAddressBook());
+        model.setArchivedListMode(false);
     }
 
     @Test
@@ -34,7 +35,6 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        model.setArchivedListMode(false);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
