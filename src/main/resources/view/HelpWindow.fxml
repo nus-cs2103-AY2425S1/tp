@@ -31,10 +31,10 @@
             Adds a person to DorManagerPro
           </Label>
           <Label styleClass="feature-text" fx:id="addFeatureFormat">
-            Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
+            Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS t/TAG
           </Label>
           <Label styleClass="feature-text" fx:id="addFeatureNotes">
-            Note: ROOM_NUMBER, ADDRESS and TAGs are optional.
+            Note: ROOM_NUMBER, ADDRESS and TAGs are optional. There can be zero or more tags.
           </Label>
         </VBox>
         <VBox fx:id="editFeatureGuide">
@@ -42,11 +42,12 @@
           <Label styleClass="feature-text" fx:id="editFeatureDesc">
             Edits an existing person in DorManagerPro
           </Label>
-          <Label styleClass="feature-text" fx:id="editFeatureFormat">
-            Format: edit 2 n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
+          <Label styleClass="feature-text" fx:id="editFeatureFormat"
+          text="Format: edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS &#10;
+            en/EMERGENCY_NAME ep/EMERGENCY_PHONE g/GRADUATION_YEAR t/TAG">
           </Label>
           <Label styleClass="feature-text" fx:id="editFeatureNotes">
-            Note: All fields are optional, but there must be 1 or more fields.
+            Note: All fields are optional, but there must be 1 or more fields. There can be zero or more tags.
           </Label>
         </VBox>
         <VBox fx:id="deleteFeatureGuide">
