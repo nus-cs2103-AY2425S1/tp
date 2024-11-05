@@ -116,7 +116,7 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code GroupName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code groupName} is invalid.
      */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
@@ -131,7 +131,7 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code TaskName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code taskName} is invalid.
      */
     public static TaskName parseTaskName(String taskName) throws ParseException {
         requireNonNull(taskName);
@@ -146,7 +146,7 @@ public class ParserUtil {
      * Parses a {@code String deadline} into a {@code Deadline}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code deadline} is invalid.
      */
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
@@ -161,7 +161,7 @@ public class ParserUtil {
      * Parses a {@code String status} into a {@code Status}
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code status} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
