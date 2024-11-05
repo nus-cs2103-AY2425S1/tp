@@ -28,8 +28,8 @@ public class CommandBoxUiTest extends ApplicationTest {
     private MainApp app;
     private final List<String> testCommandHistory = new ArrayList<>(Arrays.asList(
             "showclients",
-            "buyer n/Jack p/99999999 e/jack@gmail.com",
-            "delete n/Jack",
+            "buyer n/SOMEONE THAT WILL NEVER EXIST p/99999999 e/seanisthebest@gmail.com",
+            "delete n/SOMEONE THAT WILL NEVER EXIST",
             "showlistings"
     ));
 
@@ -57,6 +57,8 @@ public class CommandBoxUiTest extends ApplicationTest {
             robot.clickOn("#commandTextField");
             robot.write(command);
             robot.type(KeyCode.ENTER);
+            TextField commandTextField = robot.lookup("#commandTextField").query();
+            commandTextField.setText("");
         }
         Collections.reverse(testCommandHistory);
         for (String command : testCommandHistory) {
