@@ -93,7 +93,10 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();
+
+    /** Returns an unmodifiable view of the contact list in full*/
     ObservableList<Contact> getAllContactList();
+
     /**
      * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

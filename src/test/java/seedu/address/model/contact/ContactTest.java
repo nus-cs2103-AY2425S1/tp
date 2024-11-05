@@ -72,7 +72,7 @@ public class ContactTest {
         // null -> returns false
         assertFalse(ALICE.hasSameFields(null));
 
-        // different fields for (name + nickname), tele handle, email -> false
+        // different fields for (name + nickname), tele handle, and email and  no same president role -> false
         assertFalse(ALICE.hasSameFields(BOB));
 
         // Both of the following Bob's have exactly one conflicting field with Alice

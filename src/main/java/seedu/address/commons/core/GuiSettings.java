@@ -12,8 +12,13 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class GuiSettings implements Serializable {
 
+<<<<<<< HEAD
     private static final double DEFAULT_HEIGHT = 650;
     private static final double DEFAULT_WIDTH = 800;
+=======
+    private static final double DEFAULT_HEIGHT = 660;
+    private static final double DEFAULT_WIDTH = 630;
+>>>>>>> 76f0c3dca1a6b7b00313d12d9ac9f7e4ec2a55ef
 
     private final double windowWidth;
     private final double windowHeight;

@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NICKNAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_PRESIDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -65,12 +65,12 @@ public class EditCommandTest {
         Contact editedContact = contactInList.withName(VALID_NAME_BOB)
                 .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "a1")
                 .withEmail(VALID_EMAIL_BOB + "a1")
-                .withRoles(VALID_ROLE_PRESIDENT).build();
+                .withRoles(VALID_ROLE_ADMIN).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB + "a1")
                 .withEmail(VALID_EMAIL_BOB + "a1")
-                .withRoles(VALID_ROLE_PRESIDENT).build();
+                .withRoles(VALID_ROLE_ADMIN).build();
         EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
 
         String expectedMessage = String.format(

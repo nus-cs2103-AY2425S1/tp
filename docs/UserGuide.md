@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # AB-3 User Guide
@@ -40,9 +40,23 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Refer to the [Features](#features) below for details of each command.
 
+
+## Summary of Features
+### Command summary
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President`
+**Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`
+**List**   | `list`
+**Help**   | `help`
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Feature Details
 
 <box type="info" seamless>
 
@@ -131,22 +145,31 @@ Examples:
 
 ### Locating contacts by name : `find`
 
-Finds contacts whose names contain any of the given keywords.
+Finds contacts whose details matches all given fields.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Substrings of the name will also be matched e.g. Query `Han` will match `Hans`
-* Contacts matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Role field `[r/ROLE]`:
+    * Can be repeated any number of times e.g. `find r/Vice President r/Admin` &rarr; valid
+    * Have to take a valid role value (Refer to **Tip** section in [adding a contact](#adding-a-contact-add))<br>
+      e.g. `find r/pres` &rarr; invalid<br>
+      e.g. `find r/President` &rarr; valid
+    * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
+    * Only perfect matches returned
+* All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
+    * Can be used at most once e.g. `find n/Hans n/Bo` &rarr; invalid
+    * Case-insensitive. e.g. query `hans` will match `Hans`
+    * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
+    * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
+    * Each keyword is treated as a separate substring e.g. query `Hans Ansbo` will match `Hansbo`
+    * Contacts matching only one keyword will not be returned (i.e. `AND` search).
+      e.g. query `Hans Bo` will match `Hans Boey` and `Hans Jobo` but not `Hans Gruber`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-* `find adele` returns `Adele Yang`, `Adelene Neo`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/john` returns `Johnny Tan` and `John Doe`<br>
+* `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
+* `find r/Admin r/President` returns `Bernice Yu` who holds both roles, but not `Alex Yeoh` who only holds the role `President`<br>
+  ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
 ### Deleting a contact : `delete`
 
@@ -175,6 +198,20 @@ Exits the program.
 
 Format: `exit`
 
+### Pagination
+
+The app comes with a pagination at the bottom of the list. It supports navigation to a specific page or navigation to 
+the next or previous page. Each page contains a maximum of **10** items. The pagination supports a maximum of **10** pages
+being displayed at one time, to access more pages, one can go to the last page and clicks on `NEXT` page button to access other pages.
+
+Alternatively, users can make use of left and right arrow keys on the keyboard to navigate to the previous and next page. To do this, users need to make sure 
+that they have at least one click on the pagination before using keyboard to make sure that the app is focusing on the pagination component.
+
+Pagination UI:
+![ui of pagination](images/pagination_ui.png)
+
+### Status Bar
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -185,14 +222,17 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <box type="warning" seamless>
 
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+    Caution:
+
+    If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+    Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+--------------------------------------------------------------------------------------------------------------------
 
-_Details coming soon ..._
+## What is considered as invalid contacts
+
+## Available fields
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -207,17 +247,3 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`

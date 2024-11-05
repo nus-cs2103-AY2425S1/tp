@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
+    private final ObservableList<Contact> allContacts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+        allContacts = this.addressBook.getContactList();
     }
 
     public ModelManager() {
@@ -119,7 +121,6 @@ public class ModelManager implements Model {
     @Override
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
-
         addressBook.setContact(target, editedContact);
     }
 
@@ -138,6 +139,11 @@ public class ModelManager implements Model {
     public ObservableList<Contact>getAllContactList() {
         return filteredContacts;
     } // SHOULD BE REPLACED WITH THE CORRECT ONE AFTER MERGING ANOTHER PR
+
+    @Override
+    public ObservableList<Contact> getAllContactList() {
+        return allContacts;
+    }
 
     @Override
     public void updateFilteredContactList(Predicate<Contact> predicate) {

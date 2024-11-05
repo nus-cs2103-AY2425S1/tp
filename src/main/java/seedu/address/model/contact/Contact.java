@@ -99,15 +99,21 @@ public class Contact {
         }
 
         Nickname otherContactNickname = otherContact.getNickname();
-        Nickname currentContactNickname = getNickname();
-        boolean hasSameTelegramHandle = otherContact.getTelegramHandle().equals(getTelegramHandle());
-        boolean hasSameEmail = otherContact.getEmail().equals(getEmail());
+        Nickname currentContactNickname = this.getNickname();
+        boolean hasSameTelegramHandle = otherContact.getTelegramHandle().equals(this.getTelegramHandle());
+        boolean hasSameEmail = otherContact.getEmail().equals(this.getEmail());
         boolean hasSameNickname = otherContactNickname.equals(currentContactNickname);
-        boolean hasSameNameAndNickname = hasSameNickname && otherContact.getName().equals(getName());
+        boolean hasSameNameAndNickname = hasSameNickname && otherContact.getName().equals(this.getName());
         boolean hasSameNonEmptyNickname =
                 hasSameNickname && !otherContactNickname.isEmpty() && !currentContactNickname.isEmpty();
+        boolean isBothPresident = otherContact.hasPresident() && this.hasPresident();
+        return hasSameTelegramHandle || hasSameEmail || hasSameNameAndNickname
+                || hasSameNonEmptyNickname || isBothPresident;
+    }
 
-        return hasSameTelegramHandle || hasSameEmail || hasSameNameAndNickname || hasSameNonEmptyNickname;
+    private boolean hasPresident() {
+        return getRoles().stream().map(role -> role.roleName)
+                .anyMatch(roleName -> roleName.equalsIgnoreCase(Role.PRESIDENT));
     }
 
     /**
@@ -151,5 +157,4 @@ public class Contact {
                 .add("nickname", nickname)
                 .toString();
     }
-
 }
