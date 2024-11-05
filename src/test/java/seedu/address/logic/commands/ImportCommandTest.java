@@ -137,7 +137,7 @@ public class ImportCommandTest {
         String filePath = projectDir + "/src/test/data/noDataRow.csv";
         ImportCommand command = new ImportCommand(filePath);
         String expectedMsg = "Error reading from the CSV file: "
-            + "There is no person data present";
+            + "There is no person data present.";
         assertCommandFailure(command, model, expectedMsg);
     }
 
