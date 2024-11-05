@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -43,7 +42,6 @@ public class AutoSuggestionTextField extends TextField {
     private PopupControl suggestionPopup;
     private ListView<TextFlow> suggestionList;
     private CommandBox commandBox;
-
     private ObservableList<TextFlow> textFlowItems;
 
     /**
@@ -66,7 +64,7 @@ public class AutoSuggestionTextField extends TextField {
 
         // Listen for text changes
         textProperty().addListener((obs, oldText, newText) -> {
-            if (!newText.isEmpty()) {
+            if (!newText.trim().isEmpty()) {
                 String[] text = newText.split("\\s+");
                 String command = text[0];
                 boolean hasParams = false;
@@ -81,6 +79,12 @@ public class AutoSuggestionTextField extends TextField {
 
         // Add key event handler to both the TextField and ListView
         EventHandler<KeyEvent> keyEventHandler = event -> {
+            if (event.getCode() == KeyCode.UP && !event.isShiftDown()) {
+                commandBox.handleUpEntered();
+            }
+            if (event.getCode() == KeyCode.DOWN && !event.isShiftDown()) {
+                commandBox.handleDownEntered();
+            }
             if (event.isShiftDown()) {
                 switch (event.getCode()) {
                 case UP:
@@ -97,6 +101,8 @@ public class AutoSuggestionTextField extends TextField {
             } else if (event.getCode() == KeyCode.TAB) {
                 handleTab();
                 event.consume();
+            } else if (event.getCode() == KeyCode.ENTER) {
+                handleCommandEntered();
             }
         };
 
@@ -106,18 +112,12 @@ public class AutoSuggestionTextField extends TextField {
                 CommandTextFlow commandFlow = (CommandTextFlow) selectedTextFlow;
                 setText(commandFlow.getCommandText());
                 this.positionCaret(commandFlow.getCommandText().length());
-                suggestionPopup.hide();
             }
         });
 
         // Add the handler to both the TextField and ListView
         this.addEventHandler(KeyEvent.KEY_PRESSED, keyEventHandler);
         suggestionList.addEventHandler(KeyEvent.KEY_PRESSED, keyEventHandler);
-
-        // Ensure the TextField keeps focus when showing popup
-        suggestionPopup.setOnShowing(event -> {
-            Platform.runLater(() -> this.requestFocus());
-        });
 
         // Prevent ListView from handling its default key events
         suggestionList.addEventFilter(KeyEvent.ANY, event -> {
@@ -232,7 +232,7 @@ public class AutoSuggestionTextField extends TextField {
     }
 
     /**
-     * Sets the CommandBox object that processes commands entered in the TextField.
+     * Sets the CommandBox object that processes commands entered into the TextField.
      *
      * @param commandBox The CommandBox object to be set.
      */
@@ -352,6 +352,7 @@ public class AutoSuggestionTextField extends TextField {
 
         }
     }
+
 
     /**
      * Build TextFlow with selected text. Return "case" dependent.

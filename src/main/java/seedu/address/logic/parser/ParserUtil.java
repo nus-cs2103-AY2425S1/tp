@@ -16,6 +16,7 @@ import seedu.address.model.game.Role;
 import seedu.address.model.game.SkillLevel;
 import seedu.address.model.game.Username;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Blank;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -64,6 +65,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
+        if (phone.equals("")) {
+            return new Phone(new Blank());
+        }
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
@@ -79,6 +83,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
+        if (address.equals("")) {
+            return new Address(new Blank());
+        }
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
@@ -94,6 +101,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
+        if (email.equals("")) {
+            return new Email(new Blank());
+        }
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
