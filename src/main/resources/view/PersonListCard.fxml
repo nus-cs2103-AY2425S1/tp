@@ -39,7 +39,7 @@
       <Label fx:id="age" styleClass="cell_small_label" text="\$age" wrapText="true"/>
       <Label fx:id="sex" styleClass="cell_small_label" text="\$sex" wrapText="true"/>
     </VBox>
-    <VBox minHeight="105" GridPane.columnIndex="1">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="1">
       <padding>
         <Insets top="5" />
       </padding>
