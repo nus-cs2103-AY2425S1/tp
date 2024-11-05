@@ -11,8 +11,9 @@ public class Skills {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Skills should be a non-empty string consisting of alphabetic characters, separated by commas. "
-                    + "Each skill should be between 1 and 30 characters long";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9+]+(, [a-zA-Z0-9+]+)*$";
+                    + "Each skill should be between 1 and 40 characters long. We do also accept spacing, '#' and ':'";
+    public static final String VALIDATION_REGEX =
+            "^([A-Za-z0-9#:+]{1}[A-Za-z0-9#:+ ]{0,40})(, [A-Za-z0-9#:+]{1}[A-Za-z0-9#:+ ]{0,40})*$";
     public final String value;
 
     /**
