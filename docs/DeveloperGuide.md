@@ -595,6 +595,45 @@ The sequence diagram below illustrates the above process of executing the `summa
 
 ---
 
+### Help Feature
+
+#### **Command Feature**
+
+`help`
+
+#### **Command Feature Purpose**
+
+The `help` command provides a breakdown of the application statuses of all the people in the `HRPlatform`.
+
+#### Key Components
+- **`HelpCommand`**: Executes the operation to display the help instructions.
+- **`HRPlatformParser`**: Parses user input to create a `HelpCommand` object.
+- **`CommandResult`**: Opens the help window and encapsulates the result of the command execution
+
+### **Sequence of action**
+
+To help you understand how the `help` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `help` as an example:
+
+1. The user executes the command `help`, intending to view usage instructions for the `HRPlatform`
+2. The `HRPlatformParser` interprets the input and creates a `HelpCommand` object.
+3. The execute method of `HelpCommand` returns a `CommandResult` object, triggering the opening of the help window in the UI
+4. The UI then reflects this summarized breakdown of application statuses.
+
+The CommandResult object is then passed to the UI, which opens a panel displaying the help content.
+
+:information_source: **Note**:
+
+- At step 2, if an invalid input is detected after `help` (e.g. `help a123`), an error will be shown and the sequence of action is terminated.
+
+#### `HelpCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the above process of executing the `summary` command in TalentSG, which lists all persons in the address book.
+
+![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
+
+---
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
