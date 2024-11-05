@@ -1,93 +1,88 @@
 package seedu.address.logic.commands.event.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.PersonInEventPredicate;
-import seedu.address.testutil.TypicalEvents;
+import seedu.address.model.event.EventManager;
+
+import javax.swing.text.View;
 
 
 public class ViewEventCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
 
     @Test
-    public void execute_eventExists_success() {
-        // Inputs
-        Event inputEvent = TypicalEvents.SPORTS_FESTIVAL;
-        ViewEventCommand command = new ViewEventCommand(inputEvent);
+    public void execute_validIndex_success() {
+        Event eventToView = model.getEventManager().getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        ViewEventCommand viewEventCommand = new ViewEventCommand(INDEX_FIRST_EVENT);
 
-        // Expected outputs
-        String expectedMessage = String.format(ViewEventCommand.MESSAGE_SUCCESS, inputEvent.getName());
-        PersonInEventPredicate predicate = new PersonInEventPredicate(inputEvent);
-        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format(ViewEventCommand.MESSAGE_SUCCESS,
+                eventToView.getName());
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        EventManager expectedEventManager = getTypicalEventManager();
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), expectedEventManager, new UserPrefs());
+        
+        assertCommandSuccess(viewEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_eventDoesNotExist_throwsCommandException() {
-        // Inputs
-        Event inputEvent = TypicalEvents.TEST_EVENT;
-        ViewEventCommand command = new ViewEventCommand(inputEvent);
-
-        // Expected outputs
-        String expectedMessage = ViewEventCommand.EVENT_DOES_NOT_EXIST;
-
-        assertCommandFailure(command, model, expectedMessage);
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+    public void execute_nullEventManager_throwsNullPointerException() {
+        ViewEventCommand viewEventCommand = new ViewEventCommand(INDEX_FIRST_EVENT);
+        assertThrows(NullPointerException.class, () -> viewEventCommand.execute(model, null));
     }
 
     @Test
-    public void equals_sameObject_returnsTrue() {
-        Event inputEvent1 = TypicalEvents.TEST_EVENT;
-        Event inputEvent2 = TypicalEvents.TEST_EVENT;
-
-        ViewEventCommand command1 = new ViewEventCommand(inputEvent1);
-        ViewEventCommand command2 = new ViewEventCommand(inputEvent2);
-
-        assertEquals(command1, command2);
-        assertEquals(command1, command1);
+    public void execute_invalidIndex_throwsCommandException() {
+        ViewEventCommand viewEventCommand = new ViewEventCommand(Index.fromOneBased(4));
+        assertCommandFailure(viewEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void equals_differentObject_returnsFalse() {
-        Event inputEvent = TypicalEvents.TEST_EVENT;
-        Event notInputEvent = TypicalEvents.TEST_EVENT_2;
+    public void equals() {
+        ViewEventCommand viewFirstCommand = new ViewEventCommand(INDEX_FIRST_PERSON);
+        ViewEventCommand viewSecondCommand = new ViewEventCommand(Index.fromOneBased(2));
 
-        ViewEventCommand commandInputEvent = new ViewEventCommand(inputEvent);
-        ViewEventCommand commandNotInputEvent = new ViewEventCommand(notInputEvent);
+        // same object -> returns true
+        assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
-        assertNotEquals(commandInputEvent, commandNotInputEvent);
-    }
+        // same values -> returns true
+        ViewEventCommand viewFirstCommandCopy = new ViewEventCommand(INDEX_FIRST_PERSON);
+        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
-    @Test
-    public void equals_nullOrDifferentType_returnsFalse() {
-        Event inputEvent = TypicalEvents.TEST_EVENT;
+        // different types -> returns false
+        assertFalse(viewFirstCommand.equals(1));
 
-        ViewEventCommand commandInputEvent = new ViewEventCommand(inputEvent);
+        // null -> returns false
+        assertFalse(viewFirstCommand.equals(null));
 
-        assertNotEquals(commandInputEvent, null);
-        assertNotEquals(commandInputEvent, 1);
+        // different person -> returns false
+        assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
 
     @Test
     public void toString_returnsCorrectString() {
-        Event testEvent = TypicalEvents.SPORTS_FESTIVAL;
-        ViewEventCommand viewCommand = new ViewEventCommand(testEvent);
-        String expected = ViewEventCommand.class.getCanonicalName() + "{eventToView=" + testEvent + "}";
-        assertEquals(expected, viewCommand.toString());
-        System.out.println(testEvent.toString());
+        Event eventToView = model.getEventManager().getEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        ViewEventCommand viewEventCommand = new ViewEventCommand(INDEX_FIRST_EVENT);
+
+        String expected = ViewEventCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_EVENT + "}";
+        assertEquals(expected, viewEventCommand.toString());
+        System.out.println(eventToView.toString());
     }
 }
