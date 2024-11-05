@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -15,8 +18,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddBuyerProfile;
 import seedu.address.logic.commands.AddSellerProfile;
+import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.commands.ChatWindowCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -27,6 +32,10 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowListingsCommand;
 import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -60,12 +69,34 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_appointment() throws Exception {
+        Person sean = new PersonBuilder().withName("Sean Kevin Dias")
+                .withPhone("94351253").withEmail("sean@example.com").buildBuyer();
+        Appointment appointment = new Appointment(
+                new Date("01-01-24"),
+                new From("0900"),
+                new To("1000")
+        );
+        AppointmentCommand command = (AppointmentCommand) parser.parseCommand(
+                AppointmentCommand.COMMAND_WORD + " " + sean.getName()
+                        + " " + PREFIX_DATE + appointment.getDate()
+                        + " " + PREFIX_FROM + appointment.getFrom()
+                        + " " + PREFIX_TO + appointment.getTo()
+                );
+        assertEquals(new AppointmentCommand(sean.getName(), appointment), command);
+    }
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
+                DeleteAppointmentCommand.COMMAND_WORD + " " + ALICE.getName());
+        assertEquals(new DeleteAppointmentCommand(ALICE.getName()), command);
+    }
+    @Test
     public void parseCommand_deleteClientProfile() throws Exception {
         DeleteClientProfileCommand command = (DeleteClientProfileCommand) parser.parseCommand(
                 DeleteClientProfileCommand.COMMAND_WORD + " " + ALICE.getName());
         assertEquals(new DeleteClientProfileCommand(ALICE.getName()), command);
     }
-
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().buildBuyer();
