@@ -27,14 +27,29 @@ title: "Knotty Planner - Your Ultimate Wedding Planning Companion"
 - **Reliable**: Built with robust technologies like JavaFX, Jackson, and JUnit5.
 - **Community-Driven**: Join our community of users and developers to share tips and get support.
 
-## Why Wait? Get Started Today!
+## Why Wait? Get Started Today! 🎉
 * If you are interested in using Knotty Planner, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing Knotty Planner, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 * We value your feedback! Reach out to us with any suggestions or issues.
 
-## Acknowledgements
+## Acknowledgements 🙏
 
 - **Libraries Used**: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
-![delete message](images/deleteMsg.png)
-![clear message](images/clearMsg.png)
+## Contributors 🌟
+
+* Check out our [**About Us page**](AboutUs.html) to learn more about the developers behind Knotty Planner.
+
+## Join Our Community! 🌐
+
+- **Stay Updated**: Follow us on [GitHub](https://github.com/AY2425S1-CS2103T-W13-4/tp) for the latest updates and releases.
+- **Get Involved**: Contribute to the project by reporting issues, suggesting features, or submitting pull requests.
+- **Spread the Word**: Share Knotty Planner with your friends and family who are planning their big day!
+
+## Contact Us 📧
+
+- **Email**: support@knottyplanner.com
+- **Twitter**: [@KnottyPlanner](https://twitter.com/KnottyPlanner)
+- **Facebook**: [Knotty Planner](https://facebook.com/KnottyPlanner)
+
+Let's make wedding planning fun and stress-free together! 🎊💖
