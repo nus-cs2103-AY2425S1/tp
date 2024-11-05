@@ -39,10 +39,7 @@ public class ResultDisplay extends UiPart<Region> {
     private void adjustTextAreaHeight() {
         double minHeight = 113.0;
         double maxHeight = 225.0;
-        System.out.println(resultDisplay.getFont().getSize());
-        System.out.println(resultDisplay.getParagraphs().size());
         double textHeight = (resultDisplay.getFont().getSize() + 3.75) * (resultDisplay.getParagraphs().size() + 1);
-        System.out.println(textHeight);
         resultDisplay.setPrefHeight(Math.min(maxHeight, Math.max(minHeight, textHeight)));
     }
 
