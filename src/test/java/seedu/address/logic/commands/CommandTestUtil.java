@@ -22,6 +22,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliverySupplierPredicate;
 import seedu.address.model.supplier.NameContainsKeywordsPredicate;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
@@ -175,6 +177,18 @@ public class CommandTestUtil {
         model.updateFilteredSupplierList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredSupplierList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show deliveries with the same supplier as the delivery at the
+     * given {@code targetIndex}in the {@code model}'s address book.
+     */
+    public static void showAllDeliveryWithSameSupplier(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDeliveryList().size());
+
+        Delivery delivery = model.getFilteredDeliveryList().get(targetIndex.getZeroBased());
+        final Supplier sender = delivery.getDeliverySender();
+        model.updateFilteredDeliveryList(new DeliverySupplierPredicate(sender));
     }
 
 }

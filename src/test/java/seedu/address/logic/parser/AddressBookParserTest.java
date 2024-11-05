@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_LIST_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
@@ -35,7 +36,9 @@ import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListAllCommand;
+import seedu.address.logic.commands.ListDeliveryCommand;
+import seedu.address.logic.commands.ListSupplierCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortSupplierCommand;
@@ -172,8 +175,21 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListAllCommand.COMMAND_WORD) instanceof ListAllCommand);
+        assertThrows(ParseException.class, MESSAGE_INVALID_LIST_COMMAND_FORMAT, () ->
+                parser.parseCommand(ListAllCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_list_supplier() throws Exception {
+        assertTrue(parser.parseCommand(ListSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER)
+                instanceof ListSupplierCommand);
+    }
+
+    @Test
+    public void parseCommand_list_delivery() throws Exception {
+        assertTrue(parser.parseCommand(ListDeliveryCommand.COMMAND_WORD + " " + PREFIX_DELIVERY)
+                instanceof ListDeliveryCommand);
     }
 
     @Test

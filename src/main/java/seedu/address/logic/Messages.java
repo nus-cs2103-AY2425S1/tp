@@ -28,6 +28,11 @@ public class Messages {
 
     public static final String MESSAGE_EMPTY_KEYWORD = "The keyword provided after the %1$s prefix is empty";
 
+    public static final String MESSAGE_INVALID_LIST_COMMAND_FORMAT = "Invalid list command format! \n"
+            + "list    : Lists both suppliers and deliveries (No parameters should be given)\n"
+            + "list -d : Lists deliveries to the user\n"
+            + "list -s : Lists suppliers to the user";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
