@@ -29,7 +29,7 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents(20);
         FxRobot robot = new FxRobot();
         robot.clickOn("#commandBoxPlaceholder");
-        robot.write("clear");
+        robot.write("clearclients");
         robot.type(KeyCode.ENTER);
         robot.clickOn("#commandBoxPlaceholder");
         robot.write("buyer n/Jackson p/98294924 e/jackson@gmail.com");

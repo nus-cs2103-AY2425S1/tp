@@ -68,6 +68,10 @@ public class EditListingCommand extends Command {
         requireNonNull(model);
         List<Listing> lastShownList = model.getFilteredListingList();
 
+        if (!editListingDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         Listing listingToEdit = lastShownList.stream()
                 .filter(listing -> listing.getName().equals(listingName))
                 .findFirst()
@@ -86,7 +90,6 @@ public class EditListingCommand extends Command {
         } else if (editListingDescriptor.getSellerName().isPresent()) {
             throw new CommandException("Seller not found in the system.");
         }
-
 
         Listing editedListing = createEditedListing(
                 listingToEdit,
@@ -163,10 +166,11 @@ public class EditListingCommand extends Command {
             setAddress(toCopy.address);
             setRegion(toCopy.region);
             setSellerName(toCopy.sellerName);
+
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, price, area, address, region);
+            return CollectionUtil.isAnyNonNull(name, price, area, address, region, sellerName);
         }
 
         public void setName(Name name) {
