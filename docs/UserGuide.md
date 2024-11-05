@@ -350,8 +350,8 @@ Exits the program.
 
 Format: `exit`
 
-### Additional Features
-#### Command History Navigation
+## Additional Features
+### Command History Navigation
 The command history feature allows users to easily navigate through previously entered commands using the **Up** and **Down** arrow keys. This is helpful for quickly accessing past commands without needing to retype them.
 
 * **Up** Arrow: Moves to the previous command in the history.
