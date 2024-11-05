@@ -13,8 +13,8 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 ### Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * Contact Management
-    * [Help Command](#viewing-help--help)
+* [Help Command](#viewing-help--help)
+  * [Contact Management](#contact-management)
     * [Adding a contact](#adding-a-person-add)
     * [List all contacts](#listing-all-persons--list)
     * [Find individuals by name or rrganisation](#locating-persons-by-name-and-organization-find-or-f)
@@ -23,7 +23,10 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
     * [Delete a contact](#deleting-a-person--delete)
     * [Add a remark to a contact](#remark-a-person--remark)
     * [Delete all contacts](#clearing-all-entries--clear)
-    * [Exit NetBook](#exiting-the-program--exit)
+  * [Reminder Management](#reminder-management)
+    * [Create a reminder](#create-a-reminder-remind)
+    * [Delete a reminder](#deleting-a-reminder-delete_reminder-or-dr)
+  * [Exit NetBook](#exiting-the-program--exit)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
@@ -91,6 +94,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Contact Management
 
 ### Adding a person: `add`
 
@@ -188,23 +192,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting a reminder: `delete_reminder` or `dr`
+## Reminder Management
 
-Deletes the specified reminder from the address book.
+### Add a remark to a person : `remark`
 
-Format: `delete_reminder INDEX` or `dr INDEX`
-
-* Deletes the reminder at the specified `INDEX`.
-* The index refers to the index number shown in the displayed reminder list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
-
-
-### Remark a person : `remark`
-
-Remarks an existing person in the address book.
+Adds a remark to an existing person in the address book.
 
 Format: `remark INDEX [r/REMARK]​`
 
@@ -220,6 +212,33 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Create a reminder: `remind`
+
+Creates a reminder for the specified person in the address book.
+
+Format: `remind INDEX [d/DATE] [des/DESCRIPTION]`
+
+* Creates a reminder for the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed reminder list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `remind 2 d/22-01-2024 des/Meet for lunch` will create a reminder with the date 22-01-2024, about meeting the person 
+at index 2 for lunch
+
+### Deleting a reminder: `delete_reminder` or `dr`
+
+Deletes the specified reminder from the address book.
+
+Format: `delete_reminder INDEX` or `dr INDEX`
+
+* Deletes the reminder at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reminder list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
 
 ### Exiting the program : `exit`
 
