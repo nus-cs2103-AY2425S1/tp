@@ -229,7 +229,8 @@ Finds contacts whose names contain any of the given keywords.
 
 Examples:
 * `find John` returns `john` and `John Doe`.
-* `find alex david` returns `Alex Yeoh`, `David Li`.<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`.
+<br><br/>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <br><br/>
