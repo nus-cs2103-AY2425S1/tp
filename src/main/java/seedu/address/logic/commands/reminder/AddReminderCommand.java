@@ -22,19 +22,22 @@ public class AddReminderCommand extends Command {
     public static final String COMMAND_WORD = "radd"; // reminder add
     public static final String COMMAND_WORD_SHORT = "ra"; // reminder add
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reminder to the client hub. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT
+            + ": Adds a reminder to Client hub.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_DATE_TIME + "DATE and TIME "
+            + PREFIX_NAME + "NAME, "
+            + PREFIX_DATE_TIME + "DATE_AND_TIME, "
             + PREFIX_DESCRIPTION + "DESCRIPTION\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John "
-            + PREFIX_DATE_TIME + "2021-12-31 23:59 "
-            + PREFIX_DESCRIPTION + "New Year's Eve";
+            + "Examples:\n"
+            + "- " + COMMAND_WORD + " " + PREFIX_NAME + "John " + PREFIX_DATE_TIME + "2021-12-31 23:59 "
+            + PREFIX_DESCRIPTION + "New Year's Eve\n"
+            + "- " + COMMAND_WORD_SHORT + " " + PREFIX_NAME + "John " + PREFIX_DATE_TIME + "2021-12-31 23:59 "
+            + PREFIX_DESCRIPTION + "New Year's Eve\n";
+
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
-    public static final String MESSAGE_NONEXISTENT_PERSON = "This person doesn't exist in the client hub.";
-    public static final String MESSAGE_MORE_THAN_ONE_PERSON = "There is more than one person with this name in the "
+    public static final String MESSAGE_NONEXISTENT_PERSON = "This client doesn't exist in the Client Hub.";
+    public static final String MESSAGE_MORE_THAN_ONE_PERSON = "There is more than one client with this name in "
             + "client hub. Please use a more specific name instead.";
 
     private final Reminder toAdd;

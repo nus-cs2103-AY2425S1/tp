@@ -28,16 +28,18 @@ public class EditReminderCommand extends Command {
     public static final String COMMAND_WORD = "redit"; // reminder edit
     public static final String COMMAND_WORD_SHORT = "re"; // reminder edit
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a reminder in the address book identified "
-            + "by the index number displayed in the reminder list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be  positive integer)"
-            + PREFIX_DATE_TIME + "DATE and TIME "
-            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
-            + "Example: "
-            + COMMAND_WORD + " 1 "
-            + PREFIX_DATE_TIME + " 2022-01-01 00:00 "
-            + PREFIX_DESCRIPTION + " New Year's";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT
+            + ": Edits a reminder in Client Hub identified "
+            + "by the index number displayed in the reminder list.\n"
+            + "Parameters: INDEX, " + PREFIX_DATE_TIME + "DATE_AND_TIME, " + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " 1 " + PREFIX_DATE_TIME + "2022-01-01 00:00 "
+            + PREFIX_DESCRIPTION + "New Year's\n"
+            + COMMAND_WORD_SHORT + " 1 " + PREFIX_DATE_TIME + "2022-01-01 00:00 "
+            + PREFIX_DESCRIPTION + "New Year's\n"
+            + "Additional Info:\n"
+            + "- " + "INDEX must be a positive integer.\n"
+            + "- " + "Existing values will be overwritten by the input values.";
 
     public static final String MESSAGE_EDIT_REMINDER_SUCCESS = "Edited reminder %1$s";
     public static final String MESSAGE_REMINDER_NOT_EDITED = "At least one field must be edited";

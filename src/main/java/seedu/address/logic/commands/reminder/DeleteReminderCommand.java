@@ -24,10 +24,13 @@ public class DeleteReminderCommand extends Command {
     public static final String COMMAND_WORD = "rdelete";
     public static final String COMMAND_WORD_SHORT = "rd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the reminder "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT
+            + ": Deletes the reminder "
             + "identified by the index number used in the displayed reminder list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example:\n"
+            + "- " + COMMAND_WORD + " 1\n"
+            + "- " + COMMAND_WORD_SHORT + " 1";
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
