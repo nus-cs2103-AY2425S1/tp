@@ -47,24 +47,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone;
-        if (arePrefixesPresent(argMultimap, PREFIX_PHONE)) {
-            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        } else {
-            phone = new Phone(new Blank());
-        }
-        Email email;
-        if (arePrefixesPresent(argMultimap, PREFIX_EMAIL)) {
-            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        } else {
-            email = new Email(new Blank());
-        }
-        Address address;
-        if (arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
-            address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        } else {
-            address = new Address(new Blank());
-        }
+
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse(""));
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(""));
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(""));
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Map<String, Game> gameList = ParserUtil.parseGames(argMultimap.getAllValues(PREFIX_GAME));
@@ -72,7 +58,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ParserUtil.parsePreferredTimes(argMultimap.getAllValues(PREFIX_PREFERREDTIME));
 
         Person person = new Person(name, phone, email, address, tagList, gameList, preferredTimeList);
-
         return new AddCommand(person);
     }
 
