@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_INVALID_INDEX_OR_STRING;
 
 import java.util.List;
 
@@ -21,11 +21,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
+            // delete all
+            if (args.trim().equalsIgnoreCase("all")) {
+                return new DeleteCommand();
+            }
             List<Index> indices = ParserUtil.parseIndices(args);
             return new DeleteCommand(indices);
         } catch (ParseException | CommandException e) {
             throw new ParseException(
-                    String.format(MESSAGE_NON_POSITIVE_INDEX, DeleteCommand.MESSAGE_USAGE), e);
+                    String.format(MESSAGE_INVALID_INDEX_OR_STRING, DeleteCommand.MESSAGE_USAGE), e);
         }
     }
 

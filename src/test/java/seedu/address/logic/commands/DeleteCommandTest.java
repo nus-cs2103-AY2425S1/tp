@@ -45,6 +45,47 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validIndicesUnfilteredList_success() {
+        List<Person> personsToDelete = List.of(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()),
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_SECOND_PERSON, INDEX_FIRST_PERSON));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personsToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personsToDelete.get(0));
+        expectedModel.deletePerson(personsToDelete.get(1));
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allUnfilteredList_success() {
+        List<Person> personsToDelete = model.getFilteredPersonList();
+        DeleteCommand deleteCommand = new DeleteCommand();
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personsToDelete));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        for (Person person : personsToDelete) {
+            expectedModel.deletePerson(person);
+        }
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allOnEmptyList_throwsCommandException() throws CommandException {
+        model.updateFilteredPersonList(p -> false);
+        DeleteCommand deleteCommand = new DeleteCommand();
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_EMPTY_CONTACTS);
+    }
+
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws CommandException {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -53,7 +94,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_singlevalidIndexFilteredList_success() {
+    public void execute_singleValidIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         List<Person> personsToDelete = List.of(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
@@ -103,13 +144,42 @@ public class DeleteCommandTest {
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
+    @Test
+    public void equals_deleteAll() {
+        DeleteCommand deleteAllCommand = new DeleteCommand();
+        DeleteCommand deleteAllCommandCopy = new DeleteCommand();
+
+        // Same object -> returns true
+        assertTrue(deleteAllCommand.equals(deleteAllCommand));
+
+        // Same values -> returns true
+        assertTrue(deleteAllCommand.equals(deleteAllCommandCopy));
+
+        // Different command -> returns false
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        assertFalse(deleteAllCommand.equals(deleteFirstCommand));
+
+        // Different types -> returns false
+        assertFalse(deleteAllCommand.equals(1));
+
+        // Null -> returns false
+        assertFalse(deleteAllCommand.equals(null));
+    }
 
     @Test
     public void toStringMethod() throws CommandException {
         List<Index> targetIndices = List.of(Index.fromOneBased(1));
         DeleteCommand deleteCommand = new DeleteCommand(targetIndices);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=" + targetIndices + "}";
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=" + targetIndices
+                + ", deleteAll=false}";
         assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void toString_deleteAll() {
+        DeleteCommand deleteAllCommand = new DeleteCommand();
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=null, deleteAll=true}";
+        assertEquals(expected, deleteAllCommand.toString());
     }
 
     /**
