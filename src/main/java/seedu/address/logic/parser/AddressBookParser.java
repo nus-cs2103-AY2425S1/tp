@@ -40,6 +40,7 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private String lastCommandWord = null; // Track the last command executed
+    private String lastArgument = null;
 
     /**
      * Parses user input into command for execution.
@@ -63,69 +64,87 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         // Check if the command is consecutive
-        if (commandWord.equals(lastCommandWord)) {
-            return new ConsecutiveCommand(commandWord);
+        if (commandWord.equals(lastCommandWord) & arguments.equals(lastArgument)) {
+            return new ConsecutiveCommand(commandWord, arguments);
         }
-
-        // Update lastCommandWord to the current command
-        lastCommandWord = commandWord;
-
-
+        Command command;
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            command = new AddCommandParser().parse(arguments);
+            break;
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            command = new EditCommandParser().parse(arguments);
+            break;
 
         case ExportCommand.COMMAND_WORD:
-            return new ExportCommand();
+            command = new ExportCommand();
+            break;
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            command = new DeleteCommandParser().parse(arguments);
+            break;
 
         case DeleteGroupCommand.COMMAND_WORD:
-            return new DeleteGroupCommandParser().parse(arguments);
+            command = new DeleteGroupCommandParser().parse(arguments);
+            break;
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            command = new ClearCommand();
+            break;
 
         case FindGroupCommand.COMMAND_WORD:
-            return new FindGroupCommandParser().parse(arguments);
+            command = new FindGroupCommandParser().parse(arguments);
+            break;
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
+            command = new FindCommandParser().parse(arguments);
+            break;
 
         case ImportCommand.COMMAND_WORD:
-            return new ImportCommandParser().parse(arguments);
+            command = new ImportCommandParser().parse(arguments);
+            break;
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            command = new ListCommand();
+            break;
 
         case GroupsCommand.COMMAND_WORD:
-            return new GroupsCommand();
+            command = new GroupsCommand();
+            break;
 
         case GroupCommand.COMMAND_WORD:
-            return new GroupCommandParser().parse(arguments);
+            command = new GroupCommandParser().parse(arguments);
+            break;
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            command = new ExitCommand();
+            break;
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            command = new HelpCommand();
+            break;
 
         case TagCommand.COMMAND_WORD:
-            return new TagCommandParser().parse(arguments);
+            command = new TagCommandParser().parse(arguments);
+            break;
 
         case UntagCommand.COMMAND_WORD:
-            return new UntagCommandParser().parse(arguments);
+            command = new UntagCommandParser().parse(arguments);
+            break;
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+
         }
+
+        // Only update lastCommandWord if parsing was successful
+        lastCommandWord = commandWord;
+        lastArgument = arguments;
+        return command;
     }
 
 }
