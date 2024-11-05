@@ -115,14 +115,16 @@ How the parsing works:
 * When called upon to parse a user command, the `CampusConnectParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `CampusConnectParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-Finally, here are the command classes in `Logic` used to represent the different types of commands:
+Finally, the `Logic` contains the important `Command` classes. Some command classes from AB3 have been retained:
+<puml src="diagrams/CommandClassesOriginal.puml" width="600"/>
 
+However, there are new classes implemented for CampusConnect as well:
 <puml src="diagrams/CommandClasses.puml" width="600"/>
 
-A few notes here:
-* Since there are many types of Find Command classes with similar functionality, they all extend an abstract parent class `AbstractFindCommand`, used to contain most of the common methods.
+The structure is simple:
+* Each `Command` class (old and new) extends from the abstract `Command` class, which enforces the implementation of the `execute()` method.
 * Each `Command` class contains the respective `COMMAND_WORD` representing the name of the command and a `MESSAGE_USAGE` string to demonstrate how to use the respective command.
-* Additionally, each Find Command class (`FindByNameCommand`, `FindByEmailCommand`, `FindByTagCommand` and `FindByPhoneCommand`) contains a respective `COMMAND_WORD` ("`n/`", "`e/`", "`t/`" and "`p/`" respectively) on top of the shared command word "`find`" to be used.
+* They also contain their own respective error messages.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/model/Model.java)
