@@ -79,9 +79,16 @@ public class FindCommandParserTest {
                 new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList("MATH")));
         assertParseSuccess(parser, " s/MATH", expectedFindCommand);
 
+        FindCommand expectedFindCommandLower =
+                new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList("math")));
+        assertParseSuccess(parser, " s/math", expectedFindCommandLower);
+
         FindCommand expectedFindCommandMany =
                 new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList("MATH", "CHEMISTRY")));
         assertParseSuccess(parser, " s/MATH CHEMISTRY", expectedFindCommandMany);
+        assertParseSuccess(parser, " s/MATH     CHEMISTRY", expectedFindCommandMany);
+        assertParseSuccess(parser, " s/    MATH CHEMISTRY", expectedFindCommandMany);
+
     }
 
     @Test

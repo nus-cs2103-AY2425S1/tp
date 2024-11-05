@@ -211,18 +211,18 @@ Find students by either their name, level or subject(s).
 1. `find l/LEVEL`
 1. `find s/SUBJECT [SUBJECT]…​`
 
-* The search is case-insensitive and treats multiple spaces as one space. e.g `hans` will match `Hans` and `s2   nt` will match `S2 NT`
-* For name and subject searches, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive and treats multiple spaces as one space. e.g `hans` will match `Hans` and `s2   nt` will match `S2 NT`.
+* For name and subject searches, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * For name and subject searches, students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  e.g. `MATH CHEMISTRY` will return students with `MATH` or `CHEMISTRY`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+  e.g. `MATH CHEMISTRY` will return students with `MATH` or `CHEMISTRY`.
 
 **Examples:**
-* `find n/John` returns `john` and `John Doe`
-* `find l/S3 NA` returns all students tagged with level `S3 NA`
-* `find s/MATH` returns all students tagged with subject `MATH`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`
-* `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`<br>
+* `find n/John` returns `john` and `John Doe`.
+* `find l/S3 NA` returns all students tagged with level `S3 NA`.
+* `find s/MATH` returns all students tagged with subject `MATH`.
+* `find n/alex david` returns `Alex Yeoh`, `David Li`.
+* `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.<br>
 
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
