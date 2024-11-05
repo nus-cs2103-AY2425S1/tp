@@ -110,6 +110,24 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 w/Intern,Google,2024 u/NUS m/Computer Science t/friends t/owesMoney i/swimming i/reading b/13-12-2003`
 * `add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12 w/Intern,Meta,2024 u/NTU m/Computer Science t/classmate b/01-01-2001`
 
+### Adding Work Experience to existing contact: `addw`
+
+Adds work experience to an existing contact.
+
+Format:
+```plaintext
+addw in/INDEX w/WORK EXPERIENCE
+```
+
+* `in/INDEX`: Index of contact user wishes to add work experience to.
+* `w/WORK EXPERIENCE` : Work Experience user wishes to add.
+* Index has to be a number from 1 to the total number of existing contacts in the contact list.
+* Work experience in the format `ROLE,COMPANY,YEAR`
+* If existing contact has a current work experience, it will just be replaced by the user input.
+
+Example:
+*  `addw in/1 w/Intern,Google,2024` Adds the work experience `Intern,Google,2024` to the 1st person in the contact list.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
