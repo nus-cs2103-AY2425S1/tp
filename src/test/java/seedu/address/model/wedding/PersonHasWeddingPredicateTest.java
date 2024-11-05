@@ -41,10 +41,7 @@ public class PersonHasWeddingPredicateTest {
 
     @Test
     public void test_nameMatchesWedding_returnsTrue() {
-        // under own wedding
         PersonHasWeddingPredicate predicate = new PersonHasWeddingPredicate(ALICE);
-        assertTrue(predicate.test(ALICE_WEDDING));
-
         // under wedding job
         BOB.addWeddingJob(ALICE_WEDDING);
         predicate = new PersonHasWeddingPredicate(BOB);

@@ -75,8 +75,8 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821311")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    public static final Person CARLDUH = new PersonBuilder().withName("Carl Duh Kurz").withPhone("95532563")
-            .withEmail("carlheinz@mail.com").withAddress("wall street 1")
+    public static final Person CARLDUH = new PersonBuilder().withName("Carl Duh Kurz").withPhone("95352563")
+            .withEmail("heinz@example.com").withAddress("wall street 1")
             .withRole("baker").build();
 
     public static final Person JOHN = new PersonBuilder().withName("John").withPhone("94351253")
