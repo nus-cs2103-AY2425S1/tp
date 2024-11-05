@@ -297,28 +297,25 @@ The `ExportCommand` class facilitates this export functionality and manages file
 
 Constructor Variants:
 
-- `ExportCommand()`: The default constructor for regular use, opening a file chooser dialog to select the export 
-destination.
-- `ExportCommand(File destinationFile, File sourceFile, String keyPath)`: An overloaded constructor that allows 
-  specifying a destination file and encryption key path directly, which is particularly useful for testing.
+- `ExportCommand()`: The default constructor for regular use, opening a file chooser dialog to select the export destination.
+- `ExportCommand(File destinationFile, File sourceFile, String keyPath)`: An overloaded constructor that allows specifying a destination file and encryption key path directly, which is particularly useful for testing.
 
 Attributes:
 
 - `destinationFile`: The file chosen or set as the target for the export.
 - `sourceFile`: A temporary file that holds the JSON data to be exported.
 - `keyPath`: The path to the decryption key required for decrypting the address book data.
-  
 
 Given below is an example usage scenario and how the export process behaves at each step.
 
 Step 1. The user initiates an export by executing `:export`. The `ExportCommand` will attempt to decrypt the data 
 before exporting it.
 
-Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with 
+Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with
 `EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `addressbook.json`.
 
-Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays 
-a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process 
+Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays
+a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process
 is aborted with an error message.
 
 Step 4. The `performExport(File sourceFile, File destinationFile)` method copies the decrypted data to the specified `destinationFile`, using `Files.copy()` with `StandardCopyOption.REPLACE_EXISTING` to overwrite any existing file. The temporary file is then deleted.
