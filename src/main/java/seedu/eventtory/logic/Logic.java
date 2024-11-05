@@ -65,6 +65,12 @@ public interface Logic {
     /** Return the display index of the first event in the assigned list */
     ObservableIntegerValue getStartingIndexOfAssignedEvents();
 
+    /** Return the display index of the given vendor in the filtered list */
+    int getRelativeIndexOfVendor(Vendor vendor);
+
+    /** Return the display index of the given event in the filtered list */
+    int getRelativeIndexOfEvent(Event event);
+
     /**
      * Returns the user prefs' EventTory file path.
      */

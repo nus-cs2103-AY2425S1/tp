@@ -133,6 +133,16 @@ public interface Model {
     ObservableObjectValue<Vendor> getViewedVendor();
 
     /**
+     * Returns the relative index of the vendor in the filtered list.
+     */
+    int getRelativeIndexOfVendor(Vendor vendor);
+
+    /**
+     * Returns the relative index of the event in the filtered list.
+     */
+    int getRelativeIndexOfEvent(Event event);
+
+    /**
      * Sets the selected vendor.
      */
     void viewVendor(Vendor vendor);

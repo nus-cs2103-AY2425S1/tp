@@ -122,6 +122,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public int getRelativeIndexOfVendor(Vendor vendor) {
+        return model.getRelativeIndexOfVendor(vendor);
+    }
+
+    @Override
+    public int getRelativeIndexOfEvent(Event event) {
+        return model.getRelativeIndexOfEvent(event);
+    }
+
+    @Override
     public Path getEventToryFilePath() {
         return model.getEventToryFilePath();
     }

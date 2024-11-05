@@ -342,6 +342,12 @@ public class ModelManager implements Model {
         applyFiltersBasedOnUiState();
     }
 
+    @Override
+    public int getRelativeIndexOfVendor(Vendor vendor) {
+        requireNonNull(vendor);
+        return filteredVendors.indexOf(vendor);
+    }
+
     // =========== Viewed Events Accessors =============================================================
 
     @Override
@@ -355,6 +361,12 @@ public class ModelManager implements Model {
         selectedEvent.setValue(event);
         currentUiState.setValue(UiState.EVENT_DETAILS);
         applyFiltersBasedOnUiState();
+    }
+
+    @Override
+    public int getRelativeIndexOfEvent(Event event) {
+        requireNonNull(event);
+        return filteredEvents.indexOf(event);
     }
 
     // =========== UI State Accessors =============================================================
