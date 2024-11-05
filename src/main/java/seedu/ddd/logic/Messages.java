@@ -36,6 +36,7 @@ public class Messages {
     public static final String MESSAGE_DEPENDENT_EVENT =
             "Unable to delete client!\n Event(s) %1$s depend on the client you are trying to delete.";
     public static final String MESSAGE_EXCLUSIVE_FLAGS = "Only 1 of the following flags can be specified: ";
+    public static final String MESSAGE_NOT_DISPLAYING_CONTACTS = "The displayed list does not contain contacts.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
