@@ -99,7 +99,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
    
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `buyer n/Bob` = `buyer n/BOB` = `buyer n/bOb` _(Not exhaustive)_
   
@@ -174,7 +174,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `seller n/Bob` = `seller n/BOB` = `seller n/bOb` _(Not exhaustive)_
     <br>
@@ -253,7 +253,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `find Bob` = `find BOB` = `find bOb` _(Not exhaustive)_
     </div>
@@ -313,7 +313,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
     <br>
-    <div class="alert" markdown="span">
+    <div class="note" markdown="span">
     NAME is case-insensitive: 
     `editclient Bob` = `editclient BOB` = `editclient bOb` _(Not exhaustive)_
     </div>
