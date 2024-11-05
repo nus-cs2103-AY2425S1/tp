@@ -231,6 +231,7 @@ Format: `addExam ex/EXAMNAME`
 </box>
 
 * The exam name can only contain alphanumeric characters and spaces.
+* The exam name is case-sensitive. e.g. "Midterm" will be treated differently from "midterm".
 
 Examples:
 * `addExam ex/Midterm`
@@ -241,13 +242,13 @@ Adds an exam score for the specified exam for the person at the specified index.
 
 Format: `addExamScore INDEX ex/EXAMNAME sc/EXAMSCORE`
 
-* The exam score must be an integer between 0 and 100, or `NIL`.
+* The exam score must be a percentage accurate to one decimal point, or `NIL`.
 * The exam score can be edited using the same command with a different exam score.
 * The exam score can be deleted by entering the exam score as `NIL`.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `addExamScore 1 ex/Midterm sc/70`
+* `addExamScore 1 ex/Midterm sc/70.0`
 * `addExamScore 1 ex/Midterm sc/NIL`
 
 ### Adding a Submission : `addSubmission`
@@ -262,7 +263,7 @@ Format: `addSubmission sm/SUBMISSION_NAME`
 </box>
 
 * The submission name can only contain alphanumeric characters and spaces.
-* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1"
+* The submission name is case-sensitive. e.g. "Assignment 1" will be treated differently from "assignment 1".
 
 Examples:
 * `addSubmission sm/Assignment 1`
@@ -309,7 +310,9 @@ Format: `sort [ATTRIBUTE]`
 **Tip:** Students attributes include: name, phone, email, address, sex, register number, student class, emergency contact name, emergency contact number.
 </box>
 
-* Sorts the list based on the ATTRIBUTE
+* Sorts the list based on the ATTRIBUTE lexicographically in increasing order
+* Sorts the list based on one attribute at a time
+* Missing attributes will be shifted to the end of the list (only for emergency contact name and emergency contact number)
 * Unsort the list when the attribute is `none`
 
 Examples:
@@ -378,7 +381,7 @@ _Details coming soon ..._
 | **Add Emergency Contact Name**   | `addEcName INDEX [en/EMERGENCY CONTACT NAME]` <br> e.g., `addEcName 1 en/John Doe`                                                                                                                                 |
 | **Add Emergency Contact Number** | `EcNumber INDEX [ep/EMERGENCY_CONTACT_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`                                                                                                                                  |
 | **AddExam**                      | `addExam ex/EXAMNAME` <br> e.g., `addExam ex/Midterm`                                                                                                                                                              |
-| **AddExamScore**                 | `addExamScore INDEX ex/EXAMNAME sc/SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70`                                                                                                                             |
+| **AddExamScore**                 | `addExamScore INDEX ex/EXAMNAME sc/SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70.0`                                                                                                                           |
 | **Add Attendance**               | `addAttendance INDEX ad/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 ad/24-09-2024 ar/Sick`                                                                                                                      |
 | **AddSubmission**                | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                      |
 | **AddSubmissionStatus**          | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/Y`                                                                                        |

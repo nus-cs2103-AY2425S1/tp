@@ -26,8 +26,11 @@ public class AddExamScoreCommand extends Command {
             + "Parameters: [INDEX] ex/EXAM_NAME sc/EXAM_SCORE\n"
             + "Example: " + COMMAND_WORD + " 1 ex/Midterm sc/70";
 
-    public static final String MESSAGE_ADDEXAMSCORE_SUCCESS = "Added exam score for person: %1$s";
+    public static final String MESSAGE_ADDEXAMSCORE_SUCCESS = "Added exam score for person: %1$s\n"
+            + "Exam: %2$s\n"
+            + "Score: %3$s";
     public static final String MESSAGE_EXAM_NOT_FOUND = "This exam does not exist.";
+    public static final String MESSAGE_EXAMSCORE_NOT_EDITED = "The exam score was not changed!";
 
     private final Index index;
     private final Exam exam;
@@ -54,6 +57,12 @@ public class AddExamScoreCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Exam> updatedExams = personToEdit.getExams();
+        // throw an error if the input exam score is the same as in the system
+        for (Exam examInSet : updatedExams) {
+            if (examInSet.equals(exam) && examInSet.examScore.equals(examScore)) {
+                throw new CommandException(MESSAGE_EXAMSCORE_NOT_EDITED);
+            }
+        }
         Exam updatedExam = new Exam(exam.examName, examScore);
         if (!updatedExams.remove(exam)) {
             throw new CommandException(MESSAGE_EXAM_NOT_FOUND);
@@ -66,7 +75,8 @@ public class AddExamScoreCommand extends Command {
                 updatedExams, personToEdit.getTags(), personToEdit.getAttendances(), personToEdit.getSubmissions());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADDEXAMSCORE_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_ADDEXAMSCORE_SUCCESS, editedPerson.getDisplayedName(),
+                exam, examScore));
     }
 
     @Override

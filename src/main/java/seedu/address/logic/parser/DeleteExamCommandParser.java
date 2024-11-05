@@ -26,6 +26,8 @@ public class DeleteExamCommandParser implements Parser<DeleteExamCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExamCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXAM);
+
         Exam exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
         return new DeleteExamCommand(exam);
     }

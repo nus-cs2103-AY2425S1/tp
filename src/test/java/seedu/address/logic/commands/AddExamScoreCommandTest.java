@@ -38,7 +38,7 @@ public class AddExamScoreCommandTest {
         AddExamScoreCommand addExamScoreCommand = new AddExamScoreCommand(INDEX_FIRST_PERSON,
                 new Exam(VALID_EXAM_MIDTERM), VALID_EXAM_SCORE_AMY);
         String expectedMessage = String.format(AddExamScoreCommand.MESSAGE_ADDEXAMSCORE_SUCCESS,
-                Messages.format(editedPerson));
+                editedPerson.getDisplayedName(), new Exam(VALID_EXAM_MIDTERM), VALID_EXAM_SCORE_AMY);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addExamScoreCommand, model, expectedMessage, expectedModel);
@@ -59,6 +59,14 @@ public class AddExamScoreCommandTest {
                 new Exam(VALID_EXAM_QUIZ), VALID_EXAM_SCORE_AMY);
         assertThrows(CommandException.class, AddExamScoreCommand.MESSAGE_EXAM_NOT_FOUND, () -> addExamScoreCommand
                 .execute(model));
+    }
+
+    @Test
+    public void execute_examScoreNotEdited_throwsCommandException() {
+        AddExamScoreCommand addExamScoreCommand = new AddExamScoreCommand(INDEX_FIRST_PERSON,
+                new Exam(VALID_EXAM_FINAL), "NIL");
+        assertThrows(CommandException.class, AddExamScoreCommand.MESSAGE_EXAMSCORE_NOT_EDITED, ()
+                -> addExamScoreCommand.execute(model));
     }
 
     @Test

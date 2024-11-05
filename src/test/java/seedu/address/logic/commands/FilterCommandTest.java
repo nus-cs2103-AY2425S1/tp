@@ -16,6 +16,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -78,18 +80,15 @@ public class FilterCommandTest {
         assertEquals(emptyList(), model.getFilteredPersonList());
     }
 
-    /*@Test - next iteration
+    @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonPredicate predicate = preparePredicate("n/Fiona n/Carl");
-        System.out.println("Parsed names: " + predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        PersonPredicate predicate = preparePredicate("filter n/Alice n/Benson");
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        System.out.println("Filtered person list before command: " + model.getFilteredPersonList());
-        System.out.println("Test data: " + model.getFilteredPersonList());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA, CARL), model.getFilteredPersonList());
-    }*/
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+    }
 
     @Test
     public void toStringMethod() {
@@ -109,17 +108,35 @@ public class FilterCommandTest {
                 PREFIX_ADDRESS, PREFIX_REGISTER_NUMBER, PREFIX_SEX,
                 PREFIX_STUDENT_CLASS, PREFIX_ECNAME, PREFIX_ECNUMBER, PREFIX_TAG);
 
-        List<String> names = argMultimap.getAllValues(PREFIX_NAME).stream().map(String::trim).toList();
-        List<String> phones = argMultimap.getAllValues(PREFIX_PHONE).stream().map(String::trim).toList();
-        List<String> emails = argMultimap.getAllValues(PREFIX_EMAIL).stream().map(String::trim).toList();
-        List<String> addresses = argMultimap.getAllValues(PREFIX_ADDRESS).stream().map(String::trim).toList();
+        List<String> names = argMultimap.getAllValues(PREFIX_NAME).stream()
+                .flatMap(name -> List.of(name.trim().split("\\s+")).stream()).toList();
+
+        List<String> phones = argMultimap.getAllValues(PREFIX_PHONE).stream()
+                .flatMap(phone -> List.of(phone.trim().split("\\s+")).stream()).toList();
+
+        List<String> emails = argMultimap.getAllValues(PREFIX_EMAIL).stream()
+                .flatMap(email -> List.of(email.trim().split("\\s+")).stream()).toList();
+
+        List<String> addresses = argMultimap.getAllValues(PREFIX_ADDRESS).stream()
+                .flatMap(addr -> List.of(addr.trim().split("\\s+")).stream()).toList();
+
         List<String> registerNumbers = argMultimap.getAllValues(PREFIX_REGISTER_NUMBER).stream()
-                .map(String::trim).toList();
-        List<String> sexes = argMultimap.getAllValues(PREFIX_SEX).stream().map(String::trim).toList();
-        List<String> classes = argMultimap.getAllValues(PREFIX_STUDENT_CLASS).stream().map(String::trim).toList();
-        List<String> ecNames = argMultimap.getAllValues(PREFIX_ECNAME).stream().map(String::trim).toList();
-        List<String> ecNumbers = argMultimap.getAllValues(PREFIX_ECNUMBER).stream().map(String::trim).toList();
-        List<String> tags = argMultimap.getAllValues(PREFIX_TAG).stream().map(String::trim).toList();
+                .flatMap(regNo -> List.of(regNo.trim().split("\\s+")).stream()).toList();
+
+        List<String> sexes = argMultimap.getAllValues(PREFIX_SEX).stream()
+                .flatMap(sex -> List.of(sex.trim().split("\\s+")).stream()).toList();
+
+        List<String> classes = argMultimap.getAllValues(PREFIX_STUDENT_CLASS).stream()
+                .flatMap(clss -> List.of(clss.trim().split("\\s+")).stream()).toList();
+
+        List<String> ecNames = argMultimap.getAllValues(PREFIX_ECNAME).stream()
+                .flatMap(ecName -> List.of(ecName.trim().split("\\s+")).stream()).toList();
+
+        List<String> ecNumbers = argMultimap.getAllValues(PREFIX_ECNUMBER).stream()
+                .flatMap(ecNum -> List.of(ecNum.trim().split("\\s+")).stream()).toList();
+
+        List<String> tags = argMultimap.getAllValues(PREFIX_TAG).stream()
+                .flatMap(tag -> List.of(tag.trim().split("\\s+")).stream()).toList();
 
         return new PersonPredicate(names, phones, emails, addresses, registerNumbers, sexes,
                 classes, ecNames, ecNumbers, tags);

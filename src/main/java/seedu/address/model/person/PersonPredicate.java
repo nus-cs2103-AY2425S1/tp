@@ -94,8 +94,6 @@ public class PersonPredicate implements Predicate<Person> {
         boolean matchtag = tags.isEmpty() || tags.stream().anyMatch(tag -> person.getTags().stream()
                         .anyMatch(personTag -> personTag.tagName.equalsIgnoreCase(tag)));
 
-        System.out.println("Match result: " + matchName);
-
         if (this.isEmpty()) {
             return false;
         }
@@ -128,6 +126,10 @@ public class PersonPredicate implements Predicate<Person> {
                 && tags.equals(otherPersonPredicate.tags);
     }
 
+    /**
+     * Checks if all predicates of each prefix is empty
+     * @return boolean value representing whether predicates are empty
+     */
     public boolean isEmpty() {
         return names.isEmpty() && phones.isEmpty() && emails.isEmpty() && addresses.isEmpty()
                 && registerNumbers.isEmpty() && sexes.isEmpty() && classes.isEmpty()
