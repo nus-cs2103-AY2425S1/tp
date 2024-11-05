@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,14 @@ public class AddCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "addCustomerOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new customer order to the bakery's order list. "
-            + "Parameters: PHONE_NUMBER PRODUCT_ID\n"
-            + "Example: " + COMMAND_WORD + " 87654321 1";
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_ORDER + "PASTRYID] "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_ORDER + "1 1 2";
 
     public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New customer order added: \n%1$s";
 
