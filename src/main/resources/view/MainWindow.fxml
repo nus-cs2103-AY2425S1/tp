@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -50,9 +51,23 @@
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-               <StackPane fx:id="jobListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-               <StackPane fx:id="companyListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+          <!-- Contact Panel with Label -->
+          <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="Contacts" styleClass="label-contacts"/>
+            <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+          </VBox>
+
+          <!-- Job Panel with Label -->
+          <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="Jobs" styleClass="label-jobs"/>
+            <StackPane fx:id="jobListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+          </VBox>
+
+          <!-- Company Panel with Label -->
+          <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="Companies" styleClass="label-companies"/>
+            <StackPane fx:id="companyListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+          </VBox>
         </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
