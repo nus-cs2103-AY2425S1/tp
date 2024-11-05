@@ -1,0 +1,17 @@
+@startuml
+participant User
+participant EncryptionManager
+participant KeyStore
+
+User -> EncryptionManager: encrypt(plaintext)
+EncryptionManager -> KeyStore: loadOrCreateKey()
+KeyStore --> EncryptionManager: Key
+EncryptionManager -> EncryptionManager: perform encryption
+EncryptionManager --> User: ciphertext
+
+User -> EncryptionManager: decrypt(ciphertext)
+EncryptionManager -> KeyStore: loadKey()
+KeyStore --> EncryptionManager: Key
+EncryptionManager -> EncryptionManager: perform decryption
+EncryptionManager --> User: plaintext
+@enduml
