@@ -4,7 +4,7 @@
 }
 
 .background {
-    -fx-background-color: #FF8080; /* The pink background */
+    -fx-background-color: #FFB6B9; /* The pink background */
 }
 
 .label {
@@ -44,9 +44,9 @@
 }
 
 .table-view {
-    -fx-base: #FF8080; /* Background color for the table */
-    -fx-control-inner-background: #FF8080;
-    -fx-background-color: #FF8080;
+    -fx-base: #FF9494; /* Background color for the table #FF8080*/
+    -fx-control-inner-background: #FFB6B9;
+    -fx-background-color: #FFB6B9;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -77,34 +77,47 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#FF8080, 20%);
+    -fx-background-color: derive(#FFB6B9, 20%);
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#FF8080, 20%);
+    -fx-background-color: derive(#FFB6B9, 20%);
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #FF8080; /* Pink background for the list view */
+    -fx-background-color: #FFB6B9; /* Pink background for the list view */
+    -fx-border-color: transparent;
+    -fx-border-radius: 20 0 0 20; /* Rounded corners for the outer border */
+    -fx-background-radius: 20 0 0 20; /* Rounded corners for the background */
+    -fx-clip: "rounded";
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-radius: 0;
+}
+
+.first-cell {
+    -fx-background-radius: 20 0 0 0; /* Round only the top-left corner */
+}
+
+.last-cell {
+    -fx-background-radius: 0 0 0 20; /* Round only the bottom-left corner */
 }
 
 .list-view .list-cell:empty {
-    -fx-background-color: #FF8080; /* Ensure empty cells or extra space also have a pink background */
+    -fx-background-color: #FFB6B9; /* Ensure empty cells or extra space also have a pink background */
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #FFDC73; /* Yellow for the even list cells */
+    -fx-background-color: #FFE39D; /* Pastel yellow for the even list cells */
 }
 
 .list-cell:filled:odd {
@@ -112,12 +125,13 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #E4E4FF; /* Light purple for selected cell */
+    -fx-opacity: 0.7;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-color: #6AB9FF;
+    -fx-border-width: 2;
+    -fx-background-radius: 20 0 0 0; /* Round only the top-left corner */
 }
 
 .list-cell .label {
@@ -137,46 +151,47 @@
 }
 
 .stack-pane {
-    -fx-background-color: #FF8080; /* Pink background */
+    -fx-background-color: #FFB6B9; /* Pink background */
 }
 
-.pane-with-border {
-    -fx-background-color: #FF8080;
-    -fx-border-color: derive(#1d1d1d, 10%);
+.pane-without-border {
+    -fx-background-color: #FFB6B9;
     -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: #FF8080;
+    -fx-background-color: #FFB6B9;
 }
 
 .result-display {
     -fx-background-color: white; /* Set the output box background to white */
-    -fx-border-color: black; /* Set the border color to black */
-    -fx-border-width: 2px; /* Set the border width */
-    -fx-border-radius: 5px; /* Optional: Rounded corners */
-    -fx-padding: 10px; /* Optional: Add some padding for the text */
+    -fx-background-radius: 20px;
+    -fx-border-color: white; /* Set the border color to black */
+    -fx-border-width: 0px; /* Set the border width */
+    -fx-border-radius: 20px; /* Optional: Rounded corners */
+    -fx-padding: 5px; /* Optional: Add some padding for the text */
     -fx-font-family: "Poppins";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
 }
 
 
 .result-display .label {
     -fx-font-family: "Poppins"; /* Bold font for the text */
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: black; /* Set the text color to black */
 }
 
 .status-bar .label {
     -fx-font-family: "Poppins";
-    -fx-text-fill: white;
-    -fx-padding: 4px;
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
+    -fx-padding: 4 4 4 10;
     -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#FF8080, 30%);
-    -fx-border-color: derive(#FF8080, 25%);
+    -fx-background-color: derive(#FFB6B9, 30%);
+    -fx-border-color: derive(#FFB6B9, 25%);
     -fx-border-width: 1px;
 }
 
@@ -185,25 +200,53 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#FF8080, 30%);
-    -fx-border-color: derive(#FF8080, 30%);
+    -fx-background-color: derive(#FFB6B9, 30%);
+    -fx-border-color: derive(#FFB6B9, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#FF8080, 30%);
+    -fx-background-color: derive(#FFB6B9, 30%);
 }
 
 .context-menu {
-    -fx-background-color: derive(#FF8080, 50%);
+    -fx-background-color: derive(#FFB6B9, 50%);
 }
 
 .context-menu .label {
     -fx-text-fill: white;
 }
 
+.menu-item:hover, .menu-item:pressed, .menu-item:show-mnemonic, .menu-item:default:pressed, .menu-item:focused, .menu-item:default:hover:pressed, .menu-item:default:hover {
+    -fx-background-color: #6AB9FF;
+}
+
+.menu-item:disabled, .menu-item:default:disabled {
+    -fx-background-color: #FFB6B9;
+}
+
+.menu-item:default {
+    -fx-background-color: #FFB6B9;
+}
+
+.menu:default {
+    -fx-background-color: #FFB6B9;
+}
+
+.menu:hover, .menu:default:pressed, .menu:default:hover {
+    -fx-background-color: #6AB9FF;
+}
+
+.menu-button:hover, .menu-button:showing, .menu-button:default, .menu-button:default:hover:pressed, .menu-button:default:hover {
+    -fx-background-color: #6AB9FF;
+}
+
+.menu:disabled, .menu:default:disabled {
+    -fx-background-color: #FFB6B9;
+}
+
 .menu-bar {
-    -fx-background-color: derive(#FF8080, 20%);
+    -fx-background-color: derive(#FFB6B9, 20%);
 }
 
 .menu-bar .label {
@@ -223,7 +266,7 @@
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #FF8080; /* Pink button */
+    -fx-background-color: #FFB6B9; /* Pink button */
     -fx-font-family: "Poppins"; /* , Helvetica, Arial, sans-serif */
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
@@ -231,12 +274,12 @@
 }
 
 .button:hover {
-    -fx-background-color: #FF6363; /* Darker pink on hover */
+    -fx-background-color: #FFB6CB; /* Darker pink on hover */
 }
 
 .button:pressed, .button:default:hover:pressed {
     -fx-background-color: white;
-    -fx-text-fill: #FF8080;
+    -fx-text-fill: #FFB6B9;
 }
 
 .button:focused {
@@ -249,7 +292,7 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #FF8080;
+    -fx-background-color: #FFB6B9;
     -fx-text-fill: white;
 }
 
@@ -263,11 +306,11 @@
 }
 
 .dialog-pane {
-    -fx-background-color: #FF8080;
+    -fx-background-color: #FFB6B9;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #FF8080;
+    -fx-background-color: #FFB6B9;
 }
 
 .dialog-pane > *.label.content {
@@ -277,7 +320,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#FF8080, 25%);
+    -fx-background-color: derive(#FFB6B9, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -288,11 +331,12 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#FF8080, 20%);
+    -fx-background-color: derive(#FFB6B9, 20%);
+    /*-fx-background-radius: 0 20 20 0;*/
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#FF8080, 50%);
+    -fx-background-color: derive(#FFB6B9, 50%);
     -fx-background-insets: 3;
 }
 
@@ -324,9 +368,9 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #FF8080 transparent #FF8080;
+    -fx-background-color: transparent #FFB6B9 transparent #FFB6B9;
     -fx-background-insets: 0;
-    -fx-border-color: #FF8080 #FF8080 black #FF8080; /* Set the bottom border to grey */
+    -fx-border-color: #FFB6B9 #FFB6B9 black #FFB6B9; /* Set the bottom border to grey */
     -fx-border-insets: 0;
     -fx-border-width: 1; /* Set border width, affecting the grey line */
     -fx-font-family: "Poppins"; /* Bold font */
@@ -339,6 +383,7 @@
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+    -fx-background-radius: 0;
 }
 
 #resultDisplay .content {
@@ -355,7 +400,7 @@
 #tags .label {
     -fx-font-family: "Poppins";
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #6AB9FF;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

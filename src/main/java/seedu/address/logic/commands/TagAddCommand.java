@@ -84,7 +84,8 @@ public class TagAddCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getJob(), editedTags);
 
-        model.updatePersonInWedding(editedPerson, personToEdit, model);
+
+        model.updatePersonInWedding(personToEdit, editedPerson);
         setPersonInWedding(editedPerson, personToEdit, model);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

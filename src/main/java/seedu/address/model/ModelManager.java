@@ -210,6 +210,21 @@ public class ModelManager implements Model {
         weddingBook.setWedding(target, editedWedding);
     }
 
+    @Override
+    public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+        List<Wedding> weddingList = getFilteredWeddingList();
+
+        List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                .toList();
+
+        for (Set<Person> set : weddingParticipantsSet) {
+            if (set.contains(personToEdit)) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+    }
+
     //=========== Filtered Wedding List Accessors ============================================================
 
     /**

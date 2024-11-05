@@ -70,7 +70,7 @@ public class TagDeleteCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getJob(),
                 getTagsAfterDelete(personToEdit.getTags(), tagsToDelete));
 
-        model.updatePersonInWedding(editedPerson, personToEdit, model);
+        model.updatePersonInWedding(personToEdit, editedPerson);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
