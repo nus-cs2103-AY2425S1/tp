@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -14,6 +16,9 @@ public class KeyBind {
     private final Runnable action;
     private final Predicate<KeyEvent> condition;
 
+    private static final Logger logger = Logger.getLogger( KeyBind.class.getName() );
+
+
     /**
      * Constructs a key binding with a specified key code and action.
      */
@@ -21,6 +26,7 @@ public class KeyBind {
         this.code = code;
         this.action = action;
         this.condition = x -> true;
+        logger.log(Level.FINE, "Created keybind with no condition");
     }
 
     /**
@@ -30,7 +36,14 @@ public class KeyBind {
     public KeyBind(KeyCode code, Runnable action, Predicate<KeyEvent> condition) {
         this.code = code;
         this.action = action;
-        this.condition = condition;
+        if (condition == null) {
+            this.condition = x -> true;
+            logger.log(Level.FINE, "Created keybind with null condition");
+        } else {
+            this.condition = condition;
+            logger.log(Level.FINE, "Created keybind with condition");
+        }
+
     }
 
     /**

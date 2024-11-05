@@ -9,6 +9,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.person.Person;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Manages key bindings and their actions within the application's user interface components.
  */
@@ -19,6 +22,7 @@ public class KeyBindController {
 
     private TextField textField;
 
+    private static final Logger logger = Logger.getLogger( KeyBindController.class.getName() );
 
     /**
      * Initializes the KeyBindController with UI components to be managed.
@@ -45,6 +49,8 @@ public class KeyBindController {
         if (event.getCode() == KeyCode.TAB) {
             event.consume();
         }
+
+        logger.log(Level.FINE, "Key press event handled");
     }
 
     /**
