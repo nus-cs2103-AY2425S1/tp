@@ -24,9 +24,9 @@ public class AddSellerProfile extends AddClientProfile {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
-            + PREFIX_EMAIL + "johnd@example.com";
+            + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New seller added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This seller already exists in the address book";

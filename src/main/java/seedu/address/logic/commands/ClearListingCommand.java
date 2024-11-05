@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ClearListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "clearListings";
+    public static final String COMMAND_WORD = "clearlistings";
     public static final String MESSAGE_SUCCESS = "All listings have been cleared!";
 
     @Override

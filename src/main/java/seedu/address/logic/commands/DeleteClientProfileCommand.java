@@ -21,7 +21,7 @@ public class DeleteClientProfileCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the client profile corresponding to the client's name.\n"
             + "Parameters: CLIENT_NAME (case-insensitive)\n"
-            + "Example: " + COMMAND_WORD + " n/Tan Wen Xuan";
+            + "Example: " + COMMAND_WORD + " Tan Wen Xuan";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
             + "with the number: %2$s " + "and email: %3$s!";
