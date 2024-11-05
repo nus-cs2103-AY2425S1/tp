@@ -228,7 +228,7 @@ public class ModelManager implements Model {
 
     @Override
     public IngredientCatalogue getIngredientCatalogue() {
-        return ingredientCatalogue;
+        return IngredientCatalogue.getInstance();
     }
 
     @Override

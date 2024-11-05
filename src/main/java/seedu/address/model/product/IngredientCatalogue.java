@@ -38,7 +38,7 @@ public class IngredientCatalogue extends Catalogue {
      */
     private void setNextProductId() {
         if (!productCatalogue.isEmpty()) {
-            this.nextProductId = Collections.max(productCatalogue.keySet()) + 1;
+            nextProductId = Collections.max(productCatalogue.keySet()) + 1;
         }
     }
     /**
