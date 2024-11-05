@@ -48,23 +48,22 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ## Features
 
-<box type="info" seamless>
-
 **Notes about the command format:**<br>
 
 Documentation style conventions are based on [Google's guide](https://developers.google.com/style/code-syntax). 
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
   e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
 
-* `-CONTACT_FLAG` can be either `-v` or `-c` for commands allowing specifying of contact type.
-  e.g. in `list -CONTACT_FLAG`, `-CONTACT_FLAG` can allow for filtering all vendors with `-v` or clients with `-c`.
+* `-TYPE_FLAG` can be either `-v` or `-c` or `-e` for commands allowing specifying of type.
+  e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all vendors with `-v` or clients with `-c`
+or events with `-e`.
 
 * Parameters wrapped in **square brackets** are optional arguments.<br>
   e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
 
 * Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
-  {FILE_1|FILE_2}
+  e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
 
 * `WEDDING_DATE` parameter will only accept the following date formats: `MM/dd/yyyy`, `yyyy-MM-dd` `d MMM yyyy`
   e.g. `MM/dd/yyyy`: 10/13/2024; `yyyy-MM-dd`: 2024-10-13; `d MMM yyyy`: 13 Oct 2024
@@ -79,9 +78,8 @@ Documentation style conventions are based on [Google's guide](https://developers
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -92,24 +90,18 @@ Format:
 help
 ```
 
-### Create a new contact or event: `add`
+### Create a new entity: `add`
 
-Adds a new contact (client or vendor) or an event.
+Adds a new entity, of type specified by flag.
 
-Format:
+Format for adding **contact**:
 ```
 add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
 ```
-```
-add -e n/NAME d/DATE des/DESCRIPTION c/CLIENT ... v/VENDOR ...
-```
 
-Parameters to specify the type of item created:
-* `-c`: create a client (only 1 of -c, -v or -e should be specified)
-* `-v`: create a vendor (only 1 of -c, -v or -e should be specified)
-* `-e`: create an event (only 1 of -c, -v or -e should be specified)
-
-Parameters used with `-c` or `-v`:
+Parameters:
+* `-c`: flag to create a client (only 1 of -c, -v or -e should be specified)
+* `-v`: flag to create a vendor (only 1 of -c, -v or -e should be specified)
 * `s/SERVICE`: service provided by vendor (must be specified if `-v` is specified)
 * `n/NAME`: name of contact
 * `p/PHONE`: phone number of contact
@@ -119,19 +111,33 @@ Parameters used with `-c` or `-v`:
 
 > **Tip:** A contact can have any number of tags (including 0)
 
-Parameters used with `-e`:
-* `n/NAME`: name of event
-* `d/DATE`: date of event
-* `des/DESCRIPTION`: description of event
-* `c/CLIENT`: list of client IDs
-* `v/VENDOR`: list of vendor IDs
-
-> **Tip:** An event can have multiple clients or vendors
-
 Examples:
 * `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`
 * `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
-* `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`
+
+Note:
+* Contacts' name-phone number pair need to be unique.
+
+___
+Format for adding **event**:
+
+```
+add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]
+```
+
+Parameters:
+* `n/NAME`: name of event
+* `des/DESCRIPTION`: description of event
+* `d/DATE`: date of event
+* `c/CLIENT`: list of client IDs
+* `v/VENDOR`: list of vendor IDs
+
+Example:
+* `add -e n/Sample Wedding des/Wedding reception d/2025-01-01 c/0 v/1 v/2`
+
+Notes:
+* Events are uniquely identified by their names and hence all event names must be unique.
+* Each event must have minimal one client and one vendor.
 
 ### View contacts or events: `list`
 
@@ -243,12 +249,9 @@ exit
 
 DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
-
-**Caution:**
+<box type="warning" seamless>**Caution:**
 If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -268,17 +271,17 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 ## Command summary
 
-| Action            | Format                                                                                      | Example                                                                                     |
-|-------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| **Create Client** | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`                                       | `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 d/2024-12-15 t/budget`          |
-| **Create Vendor** | `add -v s/SERVICE n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`                             | `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget` |
-| **Create Event**  | `add -e n/NAME d/DATE des/DESCRIPTION c/CLIENT ... v/VENDOR ...`                            | `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`                    |
-| **Clear**         | `clear`                                                                                     | `clear`                                                                                     |
-| **Delete**        | `delete INDEX`                                                                              | `delete 1`                                                                                  |
-| **List Clients**  | `list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]`             | `list -c n/Jane`                                                                            |
-| **List Vendors**  | `list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]` | `list -v s/catering`                                                                        |
-| **List Events**   | `list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]`                                     | `list -e des/wedding`                                                                       |
-| **List Contacts** | `list`                                                                                      | `list`                                                                                      |
-| **Edit by Index** | `edit INDEX [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`               | `edit 1 p/91234567`                                                                         |
-| **Edit by ID**    | `edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`               | `edit id/0 p/91234567 e/johndoe@example.com`                                                |
-| **Help**          | `help`                                                                                      | `help`                                                                                      |
+| Action            | Format                                                                                             | Example                                                                                     |
+|-------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Create Client** | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`                                              | `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`                       |
+| **Create Vendor** | `add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]`                                    | `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget` |
+| **Create Event**  | `add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]` | `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`                    |
+| **Clear**         | `clear`                                                                                            | `clear`                                                                                     |
+| **Delete**        | `delete INDEX`                                                                                     | `delete 1`                                                                                  |
+| **List Clients**  | `list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]`                    | `list -c n/Jane`                                                                            |
+| **List Vendors**  | `list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]`        | `list -v s/catering`                                                                        |
+| **List Events**   | `list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]`                                            | `list -e des/wedding`                                                                       |
+| **List Contacts** | `list`                                                                                             | `list`                                                                                      |
+| **Edit by Index** | `edit INDEX [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`                      | `edit 1 p/91234567`                                                                         |
+| **Edit by ID**    | `edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]`                      | `edit id/0 p/91234567 e/johndoe@example.com`                                                |
+| **Help**          | `help`                                                                                             | `help`                                                                                      |
