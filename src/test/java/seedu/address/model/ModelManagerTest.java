@@ -14,14 +14,19 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -165,12 +170,32 @@ public class ModelManagerTest {
 
     @Test
     public void addGoods_nullGoods_throwsNullPointerException() {
-        // TODO: Implement this
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.addGoods(null));
     }
 
     @Test
+    public void addGoods_illegalSupplierName_throwsIllegalSupplierName() {
+        Person person = new PersonBuilder().build();
+        modelManager.addPerson(person);
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(new Name("Invalid Name"))
+                .build();
+
+        assertFalse(person.getName().equals(goodsReceipt.getSupplierName()));
+        Assertions.assertThrows(IllegalSupplierNameException.class, () -> modelManager.addGoods(goodsReceipt));
+    }
+
+
+    @Test
     public void addGoods_validGoods_addsGoods() {
-        // TODO: Implement this
+        Person person = new PersonBuilder().build();
+        modelManager.addPerson(person);
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(person.getName())
+                .build();
+
+        assertTrue(person.getName().equals(goodsReceipt.getSupplierName()));
+        Assertions.assertDoesNotThrow(() -> modelManager.addGoods(goodsReceipt));
     }
 
     @Test
