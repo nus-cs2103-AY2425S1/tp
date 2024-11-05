@@ -118,6 +118,7 @@
 
 .list-cell .label {
     -fx-text-fill: white;
+    -fx-font-family: "Garamond ";
 }
 
 .cell_big_label {
@@ -130,6 +131,19 @@
     -fx-font-family: "Garamond";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.cell_cat_label {
+    -fx-background-color: #EF7C00;
+    -fx-font-family: "Garamond";
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
 }
 
 .stack-pane {
