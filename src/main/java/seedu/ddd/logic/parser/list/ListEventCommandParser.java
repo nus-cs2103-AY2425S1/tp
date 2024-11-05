@@ -34,6 +34,8 @@ public class ListEventCommandParser implements Parser<ListEventCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE, PREFIX_DESC, FLAG_EVENT);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_NAME, PREFIX_ID, PREFIX_DATE, PREFIX_DESC);
         ParserUtil.verifyEventParser(argMultimap);
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
         return new ListEventCommand(predicateBuilder.build());

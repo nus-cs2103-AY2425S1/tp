@@ -60,7 +60,7 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addAddressPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String args = verifyNoEmptyInput(argMultimap, PREFIX_ADDRESS, ListCommand.MESSAGE_USAGE);
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_ADDRESS);
             String[] addressKeywords = args.split("\\s+");
             return combinedPredicate.and(new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
         }
@@ -70,7 +70,7 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addEmailPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            String args = verifyNoEmptyInput(argMultimap, PREFIX_EMAIL, ListCommand.MESSAGE_USAGE);
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_EMAIL);
             Email email = new Email(args);
             combinedPredicate = combinedPredicate.and(new ContactEmailPredicate(email));
         }
@@ -80,7 +80,7 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addPhonePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String args = verifyNoEmptyInput(argMultimap, PREFIX_PHONE, ListCommand.MESSAGE_USAGE);
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_PHONE);
             Phone phoneNumber = new Phone(args);
             combinedPredicate = combinedPredicate.and(new ContactPhonePredicate(phoneNumber));
         }
@@ -90,7 +90,7 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addIdPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            String args = verifyNoEmptyInput(argMultimap, PREFIX_ID, ListCommand.MESSAGE_USAGE);
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_ID);
             Id contactId = new Id(Integer.parseInt(args));
             combinedPredicate = combinedPredicate.and(new ContactIdPredicate(contactId));
         }
@@ -109,7 +109,7 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String args = verifyNoEmptyInput(argMultimap, PREFIX_NAME, ListCommand.MESSAGE_USAGE);
+            String args = verifyNoEmptyInput(argMultimap, PREFIX_NAME);
             String[] nameKeywords = args.split("\\s+");
             combinedPredicate = combinedPredicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }

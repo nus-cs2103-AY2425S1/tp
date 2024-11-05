@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n\n%1$s";
     public static final String MESSAGE_INVALID_FLAGS = "No flag or invalid flag specified! Use -c OR -v OR -e %1$s";
     public static final String MESSAGE_INVALID_PREFIX = "Not allowed to filter by %s when you specify %s";
+    public static final String MESSAGE_INVALID_PREFIX_EMPTY_INPUT = "Not allowed to have an empty input after %s";
     public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid.";
     public static final String MESSAGE_DISPLAYED_INDEX_TOO_LARGE = "The index provided goes out of bounds.";

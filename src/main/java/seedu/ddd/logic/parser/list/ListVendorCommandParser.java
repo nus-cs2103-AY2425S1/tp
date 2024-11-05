@@ -35,6 +35,8 @@ public class ListVendorCommandParser implements Parser<ListVendorCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE, PREFIX_DATE, PREFIX_DESC, FLAG_VENDOR);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SERVICE);
         ParserUtil.verifyVendorParser(argMultimap);
         ContactPredicateBuilder predicateBuilder = new VendorPredicateBuilder(argMultimap);
         return new ListVendorCommand(predicateBuilder.build());

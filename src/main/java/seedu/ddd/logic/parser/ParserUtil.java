@@ -1,7 +1,7 @@
 package seedu.ddd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_PREFIX_EMPTY_INPUT;
 import static seedu.ddd.logic.Messages.getErrorMessageForPrefix;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
@@ -303,16 +303,15 @@ public class ParserUtil {
      *
      * @param argMultimap The ArgumentMultimap containing the parsed arguments.
      * @param prefix The Prefix to look for in the ArgumentMultimap.
-     * @param message The error message to display if the input is empty, used to format the ParseException message.
      * @return The trimmed argument string following the specified prefix.
      * @throws ParseException if there is no argument or the argument is empty after the prefix.
      */
-    public static String verifyNoEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String message)
+    public static String verifyNoEmptyInput(ArgumentMultimap argMultimap, Prefix prefix)
             throws ParseException {
-        String trimmedArgs = argMultimap.getValue(prefix).get();
+        String trimmedArgs = argMultimap.getValue(prefix).get().trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, message));
+                    String.format(MESSAGE_INVALID_PREFIX_EMPTY_INPUT, prefix));
         }
         return trimmedArgs;
     }
