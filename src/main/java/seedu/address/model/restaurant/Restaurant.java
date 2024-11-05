@@ -32,17 +32,15 @@ public class Restaurant {
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, rating, tags);
+    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags, Price price) {
+        requireAllNonNull(name, phone, email, address, rating, tags, price);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rating = rating;
         this.tags.addAll(tags);
-
-        // Extract the price tag and other tags
-        this.price = new Price("$$$$");
+        this.price = price;
 
         // Default to not favourite
         this.isFavourite = false;

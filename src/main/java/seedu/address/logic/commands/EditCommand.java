@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
@@ -26,6 +27,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.Price;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.tag.Tag;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_RATING + "RATING] "
+            + "[" + PREFIX_PRICE + "PRICE]...\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -105,8 +108,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editRestaurantDescriptor.getAddress().orElse(restaurantToEdit.getAddress());
         Rating updatedRating = editRestaurantDescriptor.getRating().orElse(restaurantToEdit.getRating());
         Set<Tag> updatedTags = editRestaurantDescriptor.getTags().orElse(restaurantToEdit.getTags());
+        Price updatedPrice = editRestaurantDescriptor.getPrice().orElse(restaurantToEdit.getPrice());
 
-        return new Restaurant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRating, updatedTags);
+        return new Restaurant(
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRating, updatedTags, updatedPrice);
     }
 
     @Override
@@ -143,6 +148,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Rating rating;
+        private Price price;
         private Set<Tag> tags;
 
         public EditRestaurantDescriptor() {}
@@ -157,6 +163,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setRating(toCopy.rating);
+            setPrice(toCopy.price);
             setTags(toCopy.tags);
         }
 
@@ -197,6 +204,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setPrice(Price price) {
+            this.price = price;
+        }
+
+        public Optional<Price> getPrice() {
+            return Optional.ofNullable(price);
         }
 
         public void setRating(Rating rating) {
@@ -241,6 +256,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditRestaurantDescriptor.email)
                     && Objects.equals(address, otherEditRestaurantDescriptor.address)
                     && Objects.equals(rating, otherEditRestaurantDescriptor.rating)
+                    && Objects.equals(price, otherEditRestaurantDescriptor.price)
                     && Objects.equals(tags, otherEditRestaurantDescriptor.tags);
         }
 
@@ -252,6 +268,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("rating", rating)
+                    .add("price", price)
                     .add("tags", tags)
                     .toString();
         }
