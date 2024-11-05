@@ -8,13 +8,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
+import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL3;
-import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
