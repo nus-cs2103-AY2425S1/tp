@@ -465,6 +465,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 3. Executing commands
+
     1. Refer to the User Guide [here](https://ay2425s1-cs2103t-t16-2.github.io/tp/UserGuide.html#faq) for the list of commands.
 
 4. Closing the application
