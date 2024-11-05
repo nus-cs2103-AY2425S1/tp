@@ -703,21 +703,21 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-    2. Test case: `delete 1`<br>
+    2. Test case: `deleteStu 1`<br>
      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: `delete 0`<br>
+    3. Test case: `deleteStu 0`<br>
      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-2. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+2. Other incorrect delete commands to try: `deleteStu`, `deleteStu x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
-    1. Test case: `delete 1`<br>
+    1. Test case: `deleteStu 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    2. Test case: `delete 0`<br>
+    2. Test case: `deleteStu 0`<br>
        Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-    3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    3. Other incorrect delete commands to try: `deleteStu`, `deleteStu x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Marking attendance
