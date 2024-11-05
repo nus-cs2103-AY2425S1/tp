@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package spleetwaise.commons.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.fxml.FXML;
-import spleetwaise.address.MainApp;
 import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.MainApp;
 
 public class UiPartTest {
 

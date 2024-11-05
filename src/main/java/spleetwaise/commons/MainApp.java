@@ -1,4 +1,4 @@
-package spleetwaise.address;
+package spleetwaise.commons;
 
 import static spleetwaise.commons.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
 import static spleetwaise.commons.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
@@ -18,9 +18,6 @@ import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.util.SampleDataUtil;
 import spleetwaise.address.storage.AddressBookStorage;
 import spleetwaise.address.storage.JsonAddressBookStorage;
-import spleetwaise.address.ui.Ui;
-import spleetwaise.address.ui.UiManager;
-import spleetwaise.commons.AppParameters;
 import spleetwaise.commons.core.Config;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.core.Version;
@@ -34,6 +31,8 @@ import spleetwaise.commons.storage.JsonUserPrefsStorage;
 import spleetwaise.commons.storage.Storage;
 import spleetwaise.commons.storage.StorageManager;
 import spleetwaise.commons.storage.UserPrefsStorage;
+import spleetwaise.commons.ui.Ui;
+import spleetwaise.commons.ui.UiManager;
 import spleetwaise.commons.util.ConfigUtil;
 import spleetwaise.commons.util.StringUtil;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;

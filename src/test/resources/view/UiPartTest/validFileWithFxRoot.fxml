@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import spleetwaise.address.ui.TestFxmlObject?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" type="spleetwaise.address.ui.TestFxmlObject"
+<?import spleetwaise.commons.ui.TestFxmlObject?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" type="TestFxmlObject"
          xmlns="http://javafx.com/javafx/17">
     <text>Hello World!</text>
 </fx:root>

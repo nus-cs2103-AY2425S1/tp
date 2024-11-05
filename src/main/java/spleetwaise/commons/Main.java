@@ -1,4 +1,4 @@
-package spleetwaise.address;
+package spleetwaise.commons;
 
 import java.util.logging.Logger;
 

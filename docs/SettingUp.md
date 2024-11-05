@@ -26,7 +26,7 @@ If you plan to use Intellij IDEA (highly recommended):
    IDEA.<br>
    :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
-    1. Run the `spleetwaise.address.Main` and try a few commands.
+    1. Run the `spleetwaise.commons.Main` and try a few commands.
     2. [Run the tests](Testing.md) to ensure they all pass.
 
 --------------------------------------------------------------------------------------------------------------------

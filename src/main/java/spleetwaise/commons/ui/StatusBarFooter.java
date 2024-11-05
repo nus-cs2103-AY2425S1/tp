@@ -1,4 +1,4 @@
-package spleetwaise.address.ui;
+package spleetwaise.commons.ui;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
