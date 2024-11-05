@@ -1,6 +1,5 @@
 package tuteez.ui;
 
-import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.animation.KeyFrame;
@@ -11,8 +10,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import tuteez.commons.core.LogsCenter;
+import tuteez.commons.util.UiUtil;
 import tuteez.model.person.Person;
-import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 
 /**
@@ -59,12 +58,12 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        setTelegramUsernameText(person);
-        setAddressText(person);
-        setEmailText(person);
-        setTags(person);
+        UiUtil.setNameText(name, person);
+        UiUtil.setPhoneText(phone, person);
+        UiUtil.setTelegramUsernameText(telegram, person);
+        UiUtil.setAddressText(address, person);
+        UiUtil.setEmailText(email, person);
+        UiUtil.setTags(tags, person);
         setNextLesson(person);
         startRefreshTimeline();
     }
@@ -108,55 +107,6 @@ public class PersonCard extends UiPart<Region> {
     }
 
     /**
-     * Sets the address label text if an address exists for the {@code Person}.
-     * Hides the address label if no address is present.
-     *
-     * @param person The {@code Person} whose address is to be displayed.
-     */
-    private void setAddressText(Person person) {
-        assert(person != null);
-        if (person.getAddress().value != null) {
-            address.setText(person.getAddress().value);
-            address.setVisible(true);
-        } else {
-            address.setVisible(false);
-        }
-    }
-
-    /**
-     * Sets the email label text if an email exists for the {@code Person}.
-     * Hides the email label if no email is present.
-     *
-     * @param person The {@code Person} whose email is to be displayed.
-     */
-    private void setEmailText(Person person) {
-        assert(person != null);
-        if (person.getEmail().value != null) {
-            email.setText(person.getEmail().value);
-            email.setVisible(true);
-        } else {
-            email.setVisible(false);
-        }
-    }
-
-    /**
-     * Sets the Telegram username label text if a Telegram username exists for the {@code Person}.
-     * Hides the Telegram label if no username is present.
-     *
-     * @param person The {@code Person} whose Telegram username is to be displayed.
-     */
-    private void setTelegramUsernameText(Person person) {
-        assert(person != null);
-        TelegramUsername username = person.getTelegramUsername();
-        if (username != null && username.telegramUsername != null && !username.telegramUsername.isEmpty()) {
-            telegram.setText("@" + username.telegramUsername);
-            telegram.setVisible(true);
-        } else {
-            telegram.setVisible(false);
-        }
-    }
-
-    /**
      * Displays the next lesson scheduled for the {@code Person}, based on the current time.
      * If no lessons are scheduled, hides the lessons flow pane.
      *
@@ -171,18 +121,5 @@ public class PersonCard extends UiPart<Region> {
             nextLesson.managedProperty().bind(nextLesson.visibleProperty());
             nextLesson.setVisible(false);
         }
-    }
-
-    /**
-     * Sets the tags associated with the {@code Person} in the tags flow pane.
-     * Sorts the tags alphabetically for consistent ordering.
-     *
-     * @param person The {@code Person} whose tags are to be displayed.
-     */
-    private void setTags(Person person) {
-        assert(person != null);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
