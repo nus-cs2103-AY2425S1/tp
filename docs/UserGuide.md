@@ -179,7 +179,7 @@ Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [ca
   The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing categories, the existing categories of the person will be removed i.e adding of categories is not
+* When editing categories, the existing categories of the transaction will be removed i.e adding of categories is not
   cumulative.
 * You can remove all the person’s categories by typing `cat/` without
   specifying any categories after it.
