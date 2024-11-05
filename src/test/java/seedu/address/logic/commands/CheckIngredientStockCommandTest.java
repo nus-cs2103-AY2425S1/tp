@@ -24,14 +24,20 @@ public class CheckIngredientStockCommandTest {
 
     private Model model;
 
+    // Ingredients
+    private Ingredient flour = IngredientCatalogue.getInstance().getIngredientByName("flour");
+    private Ingredient sugar = IngredientCatalogue.getInstance().getIngredientByName("sugar");
+    private Ingredient chocolate = IngredientCatalogue.getInstance().getIngredientByName("chocolate");
+
+
     @BeforeEach
     public void setUp() {
         // Initialize the model and add necessary stock before each test
         model = new ModelManager();
 
         // Add stock levels for ingredients
-        model.getInventory().addStock(IngredientCatalogue.FLOUR.getProductId(), 10);
-        model.getInventory().addStock(IngredientCatalogue.SUGAR.getProductId(), 5);
+        model.getInventory().addStock(flour.getProductId(), 10);
+        model.getInventory().addStock(sugar.getProductId(), 5);
     }
 
     @Test
@@ -56,10 +62,10 @@ public class CheckIngredientStockCommandTest {
         model.getInventory().displayStockLevels();
 
         // Remove all stock of sugar to simulate insufficient stock
-        model.getInventory().removeStock(IngredientCatalogue.SUGAR.getProductId(), 5);
+        model.getInventory().removeStock(sugar.getProductId(), 5);
 
         // Verify that the stock was reduced to 0
-        assertEquals(0, model.getInventory().getStockLevel(IngredientCatalogue.SUGAR.getProductId()),
+        assertEquals(0, model.getInventory().getStockLevel(sugar.getProductId()),
                 "Sugar stock should be 0 after removal.");
 
         // Create the CheckIngredientStockCommand

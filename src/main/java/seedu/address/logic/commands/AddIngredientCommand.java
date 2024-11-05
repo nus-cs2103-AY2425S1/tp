@@ -3,10 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Map;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Product;
 
 /**
  * Adds a new ingredient to the bakery's ingredient catalogue.
@@ -38,14 +41,14 @@ public class AddIngredientCommand extends Command {
         requireNonNull(model);
 
         // Use the existing ingredient catalogue from the model
-        IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
+        IngredientCatalogue ingredientCatalogue = IngredientCatalogue.getInstance();
         int nextProductId = ingredientCatalogue.getNextProductId();
 
         // Create a new ingredient with the next available product ID
         Ingredient newIngredient = new Ingredient(nextProductId, name, cost);
 
         // Check if the ingredient already exists in the catalogue
-        if (isDuplicateIngredient(ingredientCatalogue, newIngredient)) {
+        if (isDuplicateIngredient(ingredientCatalogue.getCatalogue(), newIngredient)) {
             throw new CommandException(MESSAGE_DUPLICATE_INGREDIENT);
         }
 
@@ -57,12 +60,15 @@ public class AddIngredientCommand extends Command {
     }
 
     /**
-     * Checks if an ingredient with the same name already exists in the catalogue.
+     * Checks if an ingredient with the same name and cost already exists in the catalogue.
      */
-    private boolean isDuplicateIngredient(IngredientCatalogue catalogue, Ingredient newIngredient) {
-        return catalogue.getCatalogue().values().stream()
+    private boolean isDuplicateIngredient(Map<Integer, Product> catalogue, Ingredient newIngredient) {
+        return catalogue.values().stream()
+                .filter(product -> product instanceof Ingredient) // Filter only Ingredient objects
+                .map(product -> (Ingredient) product)             // Cast to Ingredient
                 .anyMatch(existingIngredient ->
-                        existingIngredient.getName().equalsIgnoreCase(newIngredient.getName()));
+                        existingIngredient.getName().equalsIgnoreCase(newIngredient.getName()) &&
+                                Double.compare(existingIngredient.getCost(), newIngredient.getCost()) == 0);
     }
 
     @Override
