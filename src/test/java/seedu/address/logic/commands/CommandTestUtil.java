@@ -96,6 +96,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_NEW_TAG = " " + PREFIX_NEWTAG + "hubby*";
     public static final String INVALID_SOCIALMEDIA = " " + PREFIX_IG + "USER$$";
     public static final String INVALID_HANDLE_EXCEED = " " + PREFIX_IG + "12345678901234567890123456789012345";
+    public static final String INVALID_INDEX_EXCEED_MAXINT = "2147483648";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

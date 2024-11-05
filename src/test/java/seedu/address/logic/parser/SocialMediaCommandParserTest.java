@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HANDLE_EXCEED;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_EXCEED_MAXINT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SOCIALMEDIA;
 import static seedu.address.logic.commands.CommandTestUtil.SOCIALMEDIA_CS;
 import static seedu.address.logic.commands.CommandTestUtil.SOCIALMEDIA_CS_SC;
@@ -62,6 +64,8 @@ public class SocialMediaCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_SOCIALMEDIA, SocialMedia.MESSAGE_CONSTRAINTS);
+        // index greater than MAX INT
+        assertParseFailure(parser, INVALID_INDEX_EXCEED_MAXINT, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
