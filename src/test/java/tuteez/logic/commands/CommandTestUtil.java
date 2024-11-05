@@ -82,7 +82,7 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withLessons(VALID_LESSON_DAY_AND_TME).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

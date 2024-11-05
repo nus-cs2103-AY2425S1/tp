@@ -1,6 +1,5 @@
 package tuteez.testutil;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +11,6 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
-import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -41,7 +39,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTelegramUsername(person.getTelegramUsername());
         descriptor.setTags(person.getTags());
-        descriptor.setLessons(person.getLessons());
     }
 
     /**
@@ -95,16 +92,6 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
-        return this;
-    }
-
-    /**
-     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withLessons(String... lessons) {
-        List<Lesson> lessonLst = Stream.of(lessons).map(Lesson::new).collect(Collectors.toList());
-        descriptor.setLessons(lessonLst);
         return this;
     }
 
