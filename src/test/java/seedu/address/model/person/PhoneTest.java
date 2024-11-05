@@ -24,18 +24,57 @@ public class PhoneTest {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
+        // assertion fail
+        assertThrows(AssertionError.class, () -> Phone.isValidPhone(" ")); // spaces only
+        assertThrows(AssertionError.class, () -> Phone.isValidPhone("93 12 15 34")); // spaces within digits
+
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("9p11")); // should not have alphabets in the phone number
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertTrue(Phone.isValidPhone("9-11")); // non-consecutive 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+    }
+
+    @Test
+    public void isValidPhoneField() {
+        // ---- The test cases for isValidPhone() are repeated here and should give a similar result.
+
+        // null phone number
+        assertThrows(NullPointerException.class, () -> Phone.isValidPhoneField(null));
+
+        // invalid phone numbers, but will not trigger assertion based on code logic
+        assertFalse(Phone.isValidPhoneField(" ")); // spaces only
+        assertFalse(Phone.isValidPhoneField("93 12 15 34")); // spaces within digits
+
+        // invalid phone numbers
+        assertFalse(Phone.isValidPhone("")); // empty string
+        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("phone")); // non-numeric
+        assertFalse(Phone.isValidPhone("9p11")); // should not have alphabets in the phone number
+
+        // valid phone numbers
+        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertTrue(Phone.isValidPhone("9-11")); // non-consecutive 3 numbers
+        assertTrue(Phone.isValidPhone("93121534"));
+        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+
+        // ---- Unique test cases for isValidPhoneField()
+
+        // invalid
+        assertFalse(Phone.isValidPhoneField("91h 23a 1")); // each token has less than 3 numbers
+        assertFalse(Phone.isValidPhoneField("91h     23a 1")); // extra spaces
+
+        // valid
+        final String validPhoneNumber = "8123-4567";
+        assertTrue(Phone.isValidPhoneField(validPhoneNumber + " misc text")); // valid phone number at start
+        assertTrue(Phone.isValidPhoneField("misc text " + validPhoneNumber)); // valid phone number at end
+        assertTrue(Phone.isValidPhoneField("misc text           " + validPhoneNumber)); // extra spaces
     }
 
     @Test

@@ -98,6 +98,8 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+`
+
+* `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
@@ -299,6 +301,31 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Input format
+
+### Concept of a phone number
+
+In our application, the concept of a phone number is defined as:
+
+1. a string without any whitespace,
+2. with at least 3 digits,
+3. without any alphabet characters,
+4. and may contain additional characters such as but not limited to "+", "-", "(", and ")".
+
+Some valid phone numbers include `+6581234567`, `81234567`, or `+44-1234567`.
+
+Some invalid phone numbers include `+65 81 23 45 67`, or `8123p4567`.
+
+### `PHONE_NUMBER` field
+
+The `PHONE_NUMBER` field (specified in the `add` or `edit` commands) is defined as a string where, if split by spaces, at least one of the resulting tokens is a valid phone number.
+
+Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (hp) 91234567 (emergency)`.
+
+This allows you to add extra annotations if you wish to.
 
 --------------------------------------------------------------------------------------------------------------------
 
