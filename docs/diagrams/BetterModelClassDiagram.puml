@@ -25,4 +25,5 @@ Person *--> EcName
 Person *--> EcNumber
 Person *--> "*" AbsentReason
 Person *--> "*" AbsentDate
+Person *--> "*" Submission
 @enduml
