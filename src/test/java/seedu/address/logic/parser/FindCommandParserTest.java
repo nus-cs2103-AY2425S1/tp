@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
 import seedu.address.model.student.predicate.LevelContainsKeywordsPredicate;
 import seedu.address.model.student.predicate.NameContainsKeywordsPredicate;
@@ -49,15 +50,27 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidNameArgs_throwsParseException() {
+        assertParseFailure(parser, " n/", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/&^$*(^", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/    ", Name.MESSAGE_CONSTRAINTS);
+
+    }
+
+    @Test
     public void parse_validLevelArgs_returnsFindCommand() {
         FindCommand expectedFindCommand =
                 new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList("S1 NA")));
         assertParseSuccess(parser, " l/S1 NA", expectedFindCommand);
+        assertParseSuccess(parser, " l/s1 na", expectedFindCommand);
+        assertParseSuccess(parser, " l/s1      na", expectedFindCommand);
     }
 
     @Test
     public void parse_invalidLevelArgs_throwsParseException() {
         assertParseFailure(parser, " l/Sec1", Level.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " l/", Level.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " l/   ", Level.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -65,11 +78,17 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList("MATH")));
         assertParseSuccess(parser, " s/MATH", expectedFindCommand);
+
+        FindCommand expectedFindCommandMany =
+                new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList("MATH", "CHEMISTRY")));
+        assertParseSuccess(parser, " s/MATH CHEMISTRY", expectedFindCommandMany);
     }
 
     @Test
     public void parse_invalidSubjectArgs_throwsParseException() {
         assertParseFailure(parser, " s/MATHEMATIC", Subject.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " s/    ", Subject.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " s/", Subject.MESSAGE_CONSTRAINTS);
     }
 
 }
