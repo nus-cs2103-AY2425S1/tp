@@ -93,8 +93,16 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        System.out.println(model.getPersonToDisplay());
+        System.out.println(personToEdit);
+
+        if (personToEdit.isSamePerson(model.getPersonToDisplay())) {
+            model.setPersonToDisplay(editedPerson);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
