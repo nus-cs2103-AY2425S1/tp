@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -23,8 +22,7 @@ public class SuperFindCommand extends Command {
             + "them as a list with indices.\n"
             + "Parameters: PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]...\n"
             + "Examples:\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_PHONE + "80021234 " + PREFIX_TAG + "CS1101S\n"
-            + COMMAND_WORD + " " + PREFIX_EMAIL + "bob@gmail.com " + PREFIX_EMAIL + "charlotte@yahoo.com";
+            + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_PHONE + "80021234 " + PREFIX_TAG + "CS1101S";
 
     public static final String MESSAGE_NO_PERSONS_FOUND = "No persons found!";
 
