@@ -159,7 +159,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     private void sortListLexographically() {
         int numOfContacts = this.internalList.size();
-        this.internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+        this.internalList.sort(Comparator.comparing(p -> p.getName().toString().toLowerCase()));
 
         // Ensure that the number of contacts remains the same after sorting
         assert(this.internalList.size() == numOfContacts);
