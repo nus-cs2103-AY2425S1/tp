@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -36,14 +35,7 @@ public class ViewCompanyCommandParser implements Parser<ViewCompanyCommand> {
 
         String indexString = splitArgs[1];
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(indexString);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            ViewCompanyCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseIndex(indexString);
 
         return new ViewCompanyCommand(index);
 

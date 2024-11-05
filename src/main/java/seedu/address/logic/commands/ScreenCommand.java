@@ -10,6 +10,7 @@ public abstract class ScreenCommand extends Command {
 
     public static final String COMMAND_WORD = "screen";
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ":  Screen the entity identified by argument 'job' "
-                    + "Parameters: [job] <INDEX>\nExample: " + COMMAND_WORD + " job 1";
+            COMMAND_WORD + ": Filters and displays entities matching the specified criteria. "
+                    + "\n\nParameters:\n- job <INDEX>: Screens and lists contacts that fit the specified job.\n"
+                    + "\nExample:\n" + COMMAND_WORD + " job 1";
 }

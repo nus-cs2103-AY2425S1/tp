@@ -4,17 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Job's salary in the address book.
+ * Represents a Job's monthly salary in the address book.
  */
 public class JobSalary {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Job salary should only contain numbers, and it should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Digit}][\\p{Digit}]*";
+    public static final String MESSAGE_CONSTRAINTS = "Monthly job salary should only contain numeric characters, "
+            + "and it should not be blank\n"
+            + "It is also limited to a value smaller than 2147483648";
 
     public final int value;
 
@@ -33,7 +29,13 @@ public class JobSalary {
      * Returns true if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches(VALIDATION_REGEX);
+        requireNonNull(test);
+        try {
+            Integer.parseInt(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

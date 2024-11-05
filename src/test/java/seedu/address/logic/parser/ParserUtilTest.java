@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -17,6 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.common.Address;
 import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
+import seedu.address.model.job.JobCompany;
+import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skill.Skill;
@@ -29,6 +31,9 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_SKILL = "#friend";
     private static final String INVALID_BILLING_DATE = "30";
+    private static final String INVALID_COMPANY = "@Google";
+    private static final String INVALID_SALARY = "$700"; // $ not allowed
+    private static final String INVALID_TAG = "#Matlab";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -37,6 +42,10 @@ public class ParserUtilTest {
     private static final String VALID_SKILL_1 = "Python";
     private static final String VALID_SKILL_2 = "C";
     private static final String VALID_BILLING_DATE = "25";
+    private static final String VALID_COMPANY = "Google";
+    private static final String VALID_SALARY = "100";
+    private static final String VALID_TAG_1 = "Matlab";
+    private static final String VALID_TAG_2 = "Conda";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -153,6 +162,97 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCompany_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCompany(null));
+    }
+
+    @Test
+    public void parseCompany_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCompany(INVALID_COMPANY));
+    }
+
+    @Test
+    public void parseCompany_validValueWithoutWhitespace_returnsCompany() throws Exception {
+        JobCompany expectedCompany = new JobCompany(VALID_COMPANY);
+        assertEquals(expectedCompany, ParserUtil.parseCompany(VALID_COMPANY));
+    }
+
+    @Test
+    public void parseCompany_validValueWithWhitespace_returnsTrimmedCompany() throws Exception {
+        String companyWithWhitespace = WHITESPACE + VALID_COMPANY + WHITESPACE;
+        JobCompany expectedCompany = new JobCompany(VALID_COMPANY);
+        assertEquals(expectedCompany, ParserUtil.parseCompany(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseSalary_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSalary(null));
+    }
+
+    @Test
+    public void parseSalary_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSalary(INVALID_SALARY));
+    }
+
+    @Test
+    public void parseSalary_validValueWithoutWhitespace_returnsSalary() throws Exception {
+        JobSalary expectedSalary = new JobSalary(VALID_SALARY);
+        assertEquals(expectedSalary, ParserUtil.parseSalary(VALID_SALARY));
+    }
+
+    @Test
+    public void parseSalary_validValueWithWhitespace_returnsTrimmedSalary() throws Exception {
+        String salaryWithWhitespace = WHITESPACE + VALID_SALARY + WHITESPACE;
+        JobSalary expectedSalary = new JobSalary(VALID_SALARY);
+        assertEquals(expectedSalary, ParserUtil.parseSalary(salaryWithWhitespace));
+    }
+
+    @Test
+    public void parseTag_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    }
+
+    @Test
+    public void parseTag_invalidTag_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    }
+
+    @Test
+    public void parseTag_validTagWithoutWhitespace_returnsTag() throws Exception {
+        Tag expectedTag = new Tag(VALID_TAG_1);
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    }
+
+    @Test
+    public void parseTag_validTagWithWhitespace_returnsTrimmedTag() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
+        Tag expectedTag = new Tag(VALID_TAG_1);
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    }
+
+    @Test
+    public void parseTags_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    }
+
+    @Test
+    public void parseTags_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    }
+
+    @Test
+    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
     public void parseSkill_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseSkills((String) null));
     }
@@ -163,16 +263,16 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSkill_validValueWithoutWhitespace_returnsTag() throws Exception {
+    public void parseSkill_validValueWithoutWhitespace_returnsSkill() throws Exception {
         Skill expectedSkill = new Skill(VALID_SKILL_1);
         assertEquals(expectedSkill, ParserUtil.parseSkills(VALID_SKILL_1));
     }
 
     @Test
-    public void parseSkill_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_SKILL_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_SKILL_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseSkill_validValueWithWhitespace_returnsTrimmedSkill() throws Exception {
+        String skillWithWhitespace = WHITESPACE + VALID_SKILL_1 + WHITESPACE;
+        Skill expectedSkill = new Skill(VALID_SKILL_1);
+        assertEquals(expectedSkill, ParserUtil.parseSkills(skillWithWhitespace));
     }
 
     @Test
@@ -181,7 +281,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSkills_collectionWithInvalidTags_throwsParseException() {
+    public void parseSkills_collectionWithInvalidSkills_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, INVALID_SKILL)));
     }
 
@@ -191,11 +291,11 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSkills_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
-        Set<Skill> expectedTagSet =
+    public void parseSkills_collectionWithValidSkills_returnsSkillSet() throws Exception {
+        Set<Skill> actualSkillSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
+        Set<Skill> expectedSkillSet =
                 new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedSkillSet, actualSkillSet);
     }
 
     @Test
