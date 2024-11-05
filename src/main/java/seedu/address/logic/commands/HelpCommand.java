@@ -25,6 +25,7 @@ public class HelpCommand extends Command {
         AddCommand.MESSAGE_USAGE,
         DeleteCommand.MESSAGE_USAGE,
         EditCommand.MESSAGE_USAGE,
+        UndoCommand.MESSAGE_USAGE,
         FindCommand.MESSAGE_USAGE,
         ListCommand.MESSAGE_USAGE,
         HelpCommand.MESSAGE_USAGE,
@@ -45,21 +46,23 @@ public class HelpCommand extends Command {
         requireNonNull(model);
         requireNonNull(keyword);
         switch (keyword) {
-        case "add":
+        case AddCommand.COMMAND_WORD:
             return new CommandResult(AddCommand.MESSAGE_USAGE, false, false);
-        case "delete":
+        case DeleteCommand.COMMAND_WORD:
             return new CommandResult(DeleteCommand.MESSAGE_USAGE, false, false);
-        case "edit":
+        case EditCommand.COMMAND_WORD:
             return new CommandResult(EditCommand.MESSAGE_USAGE, false, false);
-        case "find":
+        case UndoCommand.COMMAND_WORD:
+            return new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
+        case FindCommand.COMMAND_WORD:
             return new CommandResult(FindCommand.MESSAGE_USAGE, false, false);
-        case "list":
+        case ListCommand.COMMAND_WORD:
             return new CommandResult(ListCommand.MESSAGE_USAGE, false, false);
-        case "help":
+        case HelpCommand.COMMAND_WORD:
             return new CommandResult(MESSAGE_USAGE, false, false);
-        case "clear":
+        case ClearCommand.COMMAND_WORD:
             return new CommandResult(ClearCommand.MESSAGE_USAGE, false, false);
-        case "exit":
+        case ExitCommand.COMMAND_WORD:
             return new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
         case "":
             return new CommandResult(FULL_HELP_MESSAGE, true, false);
