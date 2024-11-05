@@ -681,9 +681,11 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Student Number**: Unique identifier for each student
-* **Group Name**: Unique identifier for each group
+| Key Terms      | Definition                                             |
+|----------------|--------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
+| Prefix         | Keyword used in commands to specify the parameter type |
+| Student Number | Unique identifier for a student                        |
 
 --------------------------------------------------------------------------------------------------------------------
 
