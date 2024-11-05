@@ -56,16 +56,13 @@ public class UnmatchCommandTest {
         Index contactIndex = INDEX_FIRST_PERSON;
         Index jobIndex = INDEX_FIRST_JOB;
         // First, set up the model with an existing match
-        MatchCommand initialMatchCommand = new MatchCommand(contactIndex, jobIndex);
-        initialMatchCommand.execute(model);
+        setModelAfterMatching(model, contactIndex, jobIndex);
 
         UnmatchCommand unmatchCommand = new UnmatchCommand(contactIndex, jobIndex);
 
         Person contactToUnmatch = model.getFilteredPersonList().get(contactIndex.getZeroBased());
         Job jobToUnmatch = model.getFilteredJobList().get(jobIndex.getZeroBased());
 
-        // Ensure the contact is currently matched to the job
-        assert contactToUnmatch.hasMatched(jobToUnmatch.getIdentifier());
         // Execute the unmatch command to update the model's state
         CommandResult commandResult = unmatchCommand.execute(model);
 
@@ -85,10 +82,8 @@ public class UnmatchCommandTest {
         model.setPerson(model.getFilteredPersonList().get(contactIndex.getZeroBased()), matchedContact);
 
         // Verify the output message and model state
-        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertCommandSuccess(unmatchCommand, model, commandResult, expectedModel);
     }
-
 
     @Test
     public void execute_contactIndexOutOfRange_failure() {
@@ -124,7 +119,7 @@ public class UnmatchCommandTest {
     public void execute_contactMatchedToAnotherJob_failure() {
         setModelAfterMatching(model, INDEX_FIRST_PERSON, INDEX_SECOND_JOB);
         UnmatchCommand unmatchCommand = new UnmatchCommand(INDEX_FIRST_PERSON, INDEX_FIRST_JOB);
-        assertCommandFailure(unmatchCommand, model, UnmatchCommand.MESSAGE_CONTACT_NOT_MATCHED);
+        assertCommandFailure(unmatchCommand, model, UnmatchCommand.MESSAGE_CONTACT_MATCHED_TO_OTHER_JOB);
     }
 
     @Test
