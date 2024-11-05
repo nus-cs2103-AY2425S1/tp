@@ -329,8 +329,9 @@ The following sequence diagram explains how the export operation works:
 
 <puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram"/>
 
-Design Considerations:
-Aspect: Export Execution and Destination Selection
+**Design Considerations:**
+
+**Aspect: Export Execution and Destination Selection**
 
 **Alternative 1 (current choice)**: Use a file chooser dialog to allow the user to select the export location.
 
