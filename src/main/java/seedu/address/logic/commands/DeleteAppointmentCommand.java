@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -56,6 +59,7 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         Person personWithAppointmentToDelete = lastShownList.get(index);
+        Set<Schedule> oldSchedule = personWithAppointmentToDelete.getSchedules();
 
         Schedule appointmentToDelete = new Schedule("", "");
         for (Schedule schedule : personWithAppointmentToDelete.getSchedules()) {
@@ -69,17 +73,25 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED);
         }
 
-        Person personWithAppointmentDeleted = personWithAppointmentToDelete;
-        personWithAppointmentDeleted.removeAppointment(appointment);
-        model.setPerson(personWithAppointmentToDelete, personWithAppointmentDeleted);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Set<Schedule> updatedSchedules = oldSchedule.stream()
+                .filter(s -> !(s.getDateTime().equals(appointment.getDateTime())))
+                .collect(Collectors.toCollection(HashSet::new));
+
+        Person updatedPerson = new Person(personWithAppointmentToDelete.getName(),
+                personWithAppointmentToDelete.getPhone(),
+                personWithAppointmentToDelete.getEmail(),
+                personWithAppointmentToDelete.getAddress(),
+                updatedSchedules,
+                personWithAppointmentToDelete.getReminder(),
+                personWithAppointmentToDelete.getTags());
 
         // if the person has no scheduled appointments and a reminder set, delete the reminder
-        if (lastShownList.get(index).getSchedules().isEmpty()
-                && personWithAppointmentToDelete.getReminder() != null) {
-            model.deleteReminder(personWithAppointmentToDelete);
+        if (updatedPerson.getSchedules().isEmpty()
+                && updatedPerson.getReminder() != null) {
+            updatedPerson.removeReminder();
         }
 
+        model.setPerson(personWithAppointmentToDelete, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 Messages.formatSchedule(personWithAppointmentToDelete, appointment)));
