@@ -570,15 +570,16 @@ Commands for managing property listings and associating clients with listings.
     = `addlistingbuyers wArToN HouSe` _(Not exhaustive)_
     <br>
     <br>
-    `addlistingbuyers warton house buyer/Alex Yeoh` 
-    = `addlistingbuyers warton house buyer/alex yeoh` 
-    = `addlistingbuyers warton house buyer/aLeX yEoH _(Not exhaustive)_
+    (Similar behaviour as above for buyer names)
     </div>
     <br>
 
     <div class="alert" markdown="span">
     However, listing/buyer name is space-sensitive:
     `addlistingbuyers Warton House` != `addlistingbuyers WartonHouse`
+    <br>
+    <br>
+    (Similar behaviour as above for buyer names)
     </div> 
     <br>
     
