@@ -61,9 +61,11 @@ public class CommandBox extends UiPart<Region> {
         switch (keyEvent.getCode()) {
         case UP:
             commandTextField.setText(commandHistory.getPreviousCommand());
+            commandTextField.positionCaret(commandTextField.getText().length()); // Move cursor to end
             break;
         case DOWN:
             commandTextField.setText(commandHistory.getNextCommand());
+            commandTextField.positionCaret(commandTextField.getText().length()); // Move cursor to end
             break;
         default:
             break;
