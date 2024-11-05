@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Company;
@@ -25,20 +25,20 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddSupplierCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_COMPANY, PREFIX_TAG, PREFIX_PRODUCT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_COMPANY, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COMPANY);
@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         SupplierStatus status = new SupplierStatus("active");
         Supplier supplier = new Supplier(name, phone, email, company, tagList, productList, status);
 
-        return new AddCommand(supplier);
+        return new AddSupplierCommand(supplier);
     }
 
     /**

@@ -18,7 +18,7 @@ import seedu.address.model.supplier.Supplier;
 /**
  * Adds a supplier to the address book.
  */
-public class AddCommand extends Command {
+public class AddSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -49,7 +49,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Supplier}
      */
-    public AddCommand(Supplier supplier) {
+    public AddSupplierCommand(Supplier supplier) {
         requireNonNull(supplier);
         toAdd = supplier;
     }
@@ -72,11 +72,11 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddSupplierCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        AddSupplierCommand otherAddCommand = (AddSupplierCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
 import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
@@ -25,7 +25,7 @@ public class SupplierUtil {
      * Returns an add command string for adding the {@code supplier}.
      */
     public static String getAddCommand(Supplier supplier) {
-        return AddCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + getSupplierDetails(supplier);
+        return AddSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + getSupplierDetails(supplier);
     }
 
     /**

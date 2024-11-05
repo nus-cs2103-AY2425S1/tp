@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalSuppliers.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
-import seedu.address.model.supplier.NameContainsKeywordsPredicate;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -196,8 +195,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredSupplierList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredSupplierList(new NameContainsKeywordPredicate(ALICE.getName().fullName));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

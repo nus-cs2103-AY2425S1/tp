@@ -117,7 +117,9 @@ public class Delivery {
                 && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
                 && otherDelivery.getDeliveryProduct().equals(getDeliveryProduct())
                 && otherDelivery.getDeliverySender().equals(getDeliverySender())
-                && otherDelivery.getDeliveryStatus().equals(getDeliveryStatus());
+                && otherDelivery.getDeliveryStatus().equals(getDeliveryStatus())
+                && otherDelivery.getDeliveryCost().equals(getDeliveryCost())
+                && otherDelivery.getDeliveryQuantity().equals(getDeliveryQuantity());
     }
 
     /**

@@ -6,21 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.testutil.SupplierBuilder;
 
-public class NameContainsPredicateTest {
+public class NameContainsKeywordPredicateTest {
     @Test
     public void equals() {
 
-        NameContainsPredicate firstPredicate = new NameContainsPredicate("linkes");
-        NameContainsPredicate secondPredicate = new NameContainsPredicate("varun");
+        NameContainsKeywordPredicate firstPredicate = new NameContainsKeywordPredicate("linkes");
+        NameContainsKeywordPredicate secondPredicate = new NameContainsKeywordPredicate("varun");
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsPredicate firstPredicateCopy = new NameContainsPredicate("linkes");
+        NameContainsKeywordPredicate firstPredicateCopy = new NameContainsKeywordPredicate("linkes");
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -36,35 +36,35 @@ public class NameContainsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword (case insensitive)
-        NameContainsPredicate predicate = new NameContainsPredicate("Alice");
+        NameContainsKeywordPredicate predicate = new NameContainsKeywordPredicate("Alice");
         assertTrue(predicate.test(new SupplierBuilder().withName("Alice Bob").build()));
 
         // Partial matching keyword
-        predicate = new NameContainsPredicate("B");
+        predicate = new NameContainsKeywordPredicate("B");
         assertTrue(predicate.test(new SupplierBuilder().withName("Alice Bob").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsPredicate("aLIce");
+        predicate = new NameContainsKeywordPredicate("aLIce");
         assertTrue(predicate.test(new SupplierBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Bad keyword
-        NameContainsPredicate predicate = new NameContainsPredicate("$$$$$$$$$$$$");
+        NameContainsKeywordPredicate predicate = new NameContainsKeywordPredicate("$$$$$$$$$$$$");
         assertFalse(predicate.test(new SupplierBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsPredicate("Xenon");
+        predicate = new NameContainsKeywordPredicate("Xenon");
         assertFalse(predicate.test(new SupplierBuilder().withName("Alice Bob").build()));
 
     }
 
     @Test
     public void toStringMethod() {
-        NameContainsPredicate predicate = new NameContainsPredicate("testing 1 2 3");
+        NameContainsKeywordPredicate predicate = new NameContainsKeywordPredicate("testing 1 2 3");
 
-        String expected = NameContainsPredicate.class.getCanonicalName() + "{keyword=testing 1 2 3}";
+        String expected = NameContainsKeywordPredicate.class.getCanonicalName() + "{keyword=testing 1 2 3}";
         assertEquals(expected, predicate.toString());
     }
 }

@@ -59,8 +59,9 @@ public class Messages {
                 .append(supplier.getCompany())
                 .append("; Tags: ");
         supplier.getTags().forEach(builder::append);
-        builder.append("; Products ");
-        supplier.getProducts().forEach(builder::append);
+        builder.append("; Products: ");
+        supplier.getProducts().forEach(product -> builder.append(String.format("[%s]", product)));
+        builder.append(";");
         return builder.toString();
     }
 

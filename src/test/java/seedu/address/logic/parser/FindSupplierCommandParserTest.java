@@ -16,7 +16,7 @@ import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.predicates.CompanyContainsKeywordPredicate;
-import seedu.address.model.supplier.predicates.NameContainsPredicate;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.model.supplier.predicates.ProductContainsKeywordPredicate;
 
 public class FindSupplierCommandParserTest {
@@ -29,7 +29,7 @@ public class FindSupplierCommandParserTest {
 
         List<Predicate<Supplier>> expectedPredicate = new ArrayList<>();
 
-        expectedPredicate.add(new NameContainsPredicate("Linkes"));
+        expectedPredicate.add(new NameContainsKeywordPredicate("Linkes"));
         expectedPredicate.add(new CompanyContainsKeywordPredicate("NUS"));
         expectedPredicate.add(new ProductContainsKeywordPredicate("Iphone"));
 
@@ -45,7 +45,7 @@ public class FindSupplierCommandParserTest {
 
         List<Predicate<Supplier>> expectedPredicate = new ArrayList<>();
 
-        expectedPredicate.add(new NameContainsPredicate("Linkes"));
+        expectedPredicate.add(new NameContainsKeywordPredicate("Linkes"));
 
         FindSupplierCommand expectedCommand = new FindSupplierCommand(expectedPredicate);
         FindSupplierCommand actualCommand = parser.parse(input);
