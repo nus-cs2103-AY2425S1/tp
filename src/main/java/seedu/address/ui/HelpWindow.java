@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
@@ -42,71 +43,72 @@ import seedu.address.logic.commands.SortCommand;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String CLEAR_COMMAND = ClearCommand.COMMAND_WORD
-            + "\nFormat: " + ClearCommand.COMMAND_WORD
-            + "\nPurpose: " + ClearCommand.MESSAGE_PURPOSE
-            + "\nExample: " + ClearCommand.COMMAND_WORD;
+            + "\n" + ClearCommand.COMMAND_WORD
+            + "\n" + ClearCommand.MESSAGE_PURPOSE
+            + "\n" + ClearCommand.COMMAND_WORD;
+
     public static final String DELETE_COMMAND = DeleteCommand.COMMAND_WORD
-            + "\nFormat: " + DeleteCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + DeleteCommand.MESSAGE_PURPOSE
-            + "\nExample: " + DeleteCommand.MESSAGE_EXAMPLE;
+            + "\n" + DeleteCommand.MESSAGE_FORMAT
+            + "\n" + DeleteCommand.MESSAGE_PURPOSE
+            + "\n" + DeleteCommand.MESSAGE_EXAMPLE;
 
     public static final String DEMOTE_COMMAND = DemoteCommand.COMMAND_WORD
-            + "\nFormat: " + DemoteCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + DemoteCommand.MESSAGE_PURPOSE
-            + "\nExample: " + DemoteCommand.MESSAGE_EXAMPLE;
+            + "\n" + DemoteCommand.MESSAGE_FORMAT
+            + "\n" + DemoteCommand.MESSAGE_PURPOSE
+            + "\n" + DemoteCommand.MESSAGE_EXAMPLE;
 
     public static final String EDIT_COMMAND = EditCommand.COMMAND_WORD
-            + "\nFormat: " + EditCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + EditCommand.MESSAGE_PURPOSE
-            + "\nExample: " + EditCommand.MESSAGE_EXAMPLE;
+            + "\n" + EditCommand.MESSAGE_FORMAT
+            + "\n" + EditCommand.MESSAGE_PURPOSE
+            + "\n" + EditCommand.MESSAGE_EXAMPLE;
 
     public static final String EMPLOYEE_COMMAND = EmployeeCommand.COMMAND_WORD
-                    + "\nFormat: " + EmployeeCommand.MESSAGE_FORMAT
-                    + "\nPurpose: " + EmployeeCommand.MESSAGE_PURPOSE
-                    + "\nExample: " + EmployeeCommand.MESSAGE_EXAMPLE;
+            + "\n" + EmployeeCommand.MESSAGE_FORMAT
+            + "\n" + EmployeeCommand.MESSAGE_PURPOSE
+            + "\n" + EmployeeCommand.MESSAGE_EXAMPLE;
 
     public static final String EXIT_COMMAND = ExitCommand.COMMAND_WORD
-                    + "\nFormat: " + ExitCommand.COMMAND_WORD
-                    + "\nPurpose: " + ExitCommand.MESSAGE_PURPOSE
-                    + "\nExample: " + ExitCommand.COMMAND_WORD;
+            + "\n" + ExitCommand.COMMAND_WORD
+            + "\n" + ExitCommand.MESSAGE_PURPOSE
+            + "\n" + ExitCommand.COMMAND_WORD;
 
     public static final String FIND_COMMAND = FindCommand.COMMAND_WORD
-            + "\nFormat: " + FindCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + FindCommand.MESSAGE_PURPOSE
-            + "\nExample: " + FindCommand.MESSAGE_EXAMPLE;
-    public static final String HELP_COMMAND = HelpCommand.COMMAND_WORD
-            + "\nFormat: " + HelpCommand.COMMAND_WORD
-            + "\nPurpose: " + HelpCommand.MESSAGE_PURPOSE
-            + "\nExample: " + HelpCommand.COMMAND_WORD;
+            + "\n" + FindCommand.MESSAGE_FORMAT
+            + "\n" + FindCommand.MESSAGE_PURPOSE
+            + "\n" + FindCommand.MESSAGE_EXAMPLE;
 
+    public static final String HELP_COMMAND = HelpCommand.COMMAND_WORD
+            + "\n" + HelpCommand.COMMAND_WORD
+            + "\n" + HelpCommand.MESSAGE_PURPOSE
+            + "\n" + HelpCommand.COMMAND_WORD;
 
     public static final String LIST_COMMAND = ListCommand.COMMAND_WORD
-            + "\nFormat: " + ListCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + ListCommand.MESSAGE_PURPOSE
-            + "\nExample: " + ListCommand.MESSAGE_EXAMPLE;
+            + "\n" + ListCommand.MESSAGE_FORMAT
+            + "\n" + ListCommand.MESSAGE_PURPOSE
+            + "\n" + ListCommand.MESSAGE_EXAMPLE;
 
     public static final String POTENTIAL_COMMAND = PotentialCommand.COMMAND_WORD
-            + "\nFormat: " + PotentialCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + PotentialCommand.MESSAGE_PURPOSE
-            + "\nExample: " + PotentialCommand.MESSAGE_EXAMPLE;
+            + "\n" + PotentialCommand.MESSAGE_FORMAT
+            + "\n" + PotentialCommand.MESSAGE_PURPOSE
+            + "\n" + PotentialCommand.MESSAGE_EXAMPLE;
 
     public static final String PROMOTE_COMMAND = PromoteCommand.COMMAND_WORD
-            + "\nFormat: " + PromoteCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + PromoteCommand.MESSAGE_PURPOSE
-            + "\nExample: " + PromoteCommand.MESSAGE_EXAMPLE;
+            + "\n" + PromoteCommand.MESSAGE_FORMAT
+            + "\n" + PromoteCommand.MESSAGE_PURPOSE
+            + "\n" + PromoteCommand.MESSAGE_EXAMPLE;
 
     public static final String SORT_COMMAND = SortCommand.COMMAND_WORD
-            + "\nFormat: " + SortCommand.MESSAGE_FORMAT
-            + "\nPurpose: " + SortCommand.MESSAGE_PURPOSE
-            + "\nExample: " + SortCommand.MESSAGE_EXAMPLE;
+            + "\n" + SortCommand.MESSAGE_FORMAT
+            + "\n" + SortCommand.MESSAGE_PURPOSE
+            + "\n" + SortCommand.MESSAGE_EXAMPLE;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-    private static final int ABSOLUTE_PADDING = 112;
-    private static final int INSET_PADDING = 16;
-    private static final Color HIGHLIGHT_RED_BACKGROUND = Color.rgb(255, 40, 40, 0.2);
-    private static final Color HIGHLIGHT_ORANGE_BACKGROUND = Color.rgb(255, 152, 36, 0.4);
-    private static final CornerRadii DEFAULT_CORNER_RADII = new CornerRadii(15);
+    private static final int ABSOLUTE_PADDING = 70;
+    private static final int INSET_PADDING = 0;
+    private static final Color HIGHLIGHT_ACTIVE_BACKGROUND = Color.rgb(90, 90, 90, 1);
+    private static final Color HIGHLIGHT_HOVER_BACKGROUND = Color.rgb(70, 70, 70, 1);
+    private static final CornerRadii DEFAULT_CORNER_RADII = new CornerRadii(0);
 
     /**
      * Array of String containing the format, purpose and examples of all the commands in StaffSync.
@@ -131,48 +133,169 @@ public class HelpWindow extends UiPart<Stage> {
     private final int numOfCommands;
 
     @FXML
-    private Text clearText;
+    private Label clearTextHeader;
     @FXML
-    private Text deleteText;
+    private Label deleteTextHeader;
     @FXML
-    private Text demoteText;
+    private Label demoteTextHeader;
     @FXML
-    private Text editText;
+    private Label editTextHeader;
     @FXML
-    private Text employeeText;
+    private Label employeeTextHeader;
     @FXML
-    private Text exitText;
+    private Label exitTextHeader;
     @FXML
-    private Text findText;
+    private Label findTextHeader;
     @FXML
-    private Text helpText;
+    private Label helpTextHeader;
     @FXML
-    private Text listText;
+    private Label listTextHeader;
     @FXML
-    private Text potentialText;
+    private Label potentialTextHeader;
     @FXML
-    private Text promoteText;
+    private Label promoteTextHeader;
     @FXML
-    private Text sortText;
+    private Label sortTextHeader;
+
+    @FXML
+    private Label clearTextFormat;
+    @FXML
+    private Label deleteTextFormat;
+    @FXML
+    private Label demoteTextFormat;
+    @FXML
+    private Label editTextFormat;
+    @FXML
+    private Label employeeTextFormat;
+    @FXML
+    private Label exitTextFormat;
+    @FXML
+    private Label findTextFormat;
+    @FXML
+    private Label helpTextFormat;
+    @FXML
+    private Label listTextFormat;
+    @FXML
+    private Label potentialTextFormat;
+    @FXML
+    private Label promoteTextFormat;
+    @FXML
+    private Label sortTextFormat;
+
+    @FXML
+    private Text clearTextPurpose;
+    @FXML
+    private Text deleteTextPurpose;
+    @FXML
+    private Text demoteTextPurpose;
+    @FXML
+    private Text editTextPurpose;
+    @FXML
+    private Text employeeTextPurpose;
+    @FXML
+    private Text exitTextPurpose;
+    @FXML
+    private Text findTextPurpose;
+    @FXML
+    private Text helpTextPurpose;
+    @FXML
+    private Text listTextPurpose;
+    @FXML
+    private Text potentialTextPurpose;
+    @FXML
+    private Text promoteTextPurpose;
+    @FXML
+    private Text sortTextPurpose;
+
+    @FXML
+    private Text clearTextExample;
+    @FXML
+    private Text deleteTextExample;
+    @FXML
+    private Text demoteTextExample;
+    @FXML
+    private Text editTextExample;
+    @FXML
+    private Text employeeTextExample;
+    @FXML
+    private Text exitTextExample;
+    @FXML
+    private Text findTextExample;
+    @FXML
+    private Text helpTextExample;
+    @FXML
+    private Text listTextExample;
+    @FXML
+    private Text potentialTextExample;
+    @FXML
+    private Text promoteTextExample;
+    @FXML
+    private Text sortTextExample;
 
     /**
-     * Collection of Text objects to be added into HelpWindow.fxml.
+     * Collection of different Text objects to be added into HelpWindow.fxml.
      * Arranged in alphabetical order.
      * To be updated together with adding a Text component in HelpWindow.fxml when new commands are added.
      */
-    private final Text[] arrayText = {
-        clearText,
-        deleteText,
-        demoteText,
-        editText,
-        employeeText,
-        exitText,
-        findText,
-        helpText,
-        listText,
-        potentialText,
-        promoteText,
-        sortText
+
+    private final Label[] arrayTextHeader = {
+        clearTextHeader,
+        deleteTextHeader,
+        demoteTextHeader,
+        editTextHeader,
+        employeeTextHeader,
+        exitTextHeader,
+        findTextHeader,
+        helpTextHeader,
+        listTextHeader,
+        potentialTextHeader,
+        promoteTextHeader,
+        sortTextHeader
+    };
+
+    private final Label[] arrayTextFormat = {
+        clearTextFormat,
+        deleteTextFormat,
+        demoteTextFormat,
+        editTextFormat,
+        employeeTextFormat,
+        exitTextFormat,
+        findTextFormat,
+        helpTextFormat,
+        listTextFormat,
+        potentialTextFormat,
+        promoteTextFormat,
+        sortTextFormat
+    };
+
+    private final Text[] arrayTextPurpose = {
+        clearTextPurpose,
+        deleteTextPurpose,
+        demoteTextPurpose,
+        editTextPurpose,
+        employeeTextPurpose,
+        exitTextPurpose,
+        findTextPurpose,
+        helpTextPurpose,
+        listTextPurpose,
+        potentialTextPurpose,
+        promoteTextPurpose,
+        sortTextPurpose
+    };
+
+    private final Text[] arrayTextExample = {
+        clearTextExample,
+        deleteTextExample,
+        demoteTextExample,
+        editTextExample,
+        employeeTextExample,
+        exitTextExample,
+        findTextExample,
+        helpTextExample,
+        listTextExample,
+        potentialTextExample,
+        promoteTextExample,
+        sortTextExample
     };
 
     @FXML
@@ -227,7 +350,10 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private VBox textVBox;
 
-    private ArrayList<Text> textArrayList;
+    private ArrayList<Label> textArrayHeaderList;
+    private ArrayList<Label> textArrayFormatList;
+    private ArrayList<Text> textArrayPurposeList;
+    private ArrayList<Text> textArrayExampleList;
 
     private ArrayList<MenuItem> menuItemArrayList;
 
@@ -240,28 +366,40 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
 
         // Check if ARRAY_OF_COMMAND_STRING, arrayText and arrayMenuItem are updated
-        assert (ARRAY_OF_COMMAND_STRING.length == arrayText.length)
+        assert (ARRAY_OF_COMMAND_STRING.length == arrayTextFormat.length)
                 : "Number of command String is not equal to number of Text object";
         assert (ARRAY_OF_COMMAND_STRING.length == arrayMenuItem.length)
                 : "Number of command String is not equal to number of MenuItem object";
 
         // Initialize the ArrayList and NUM_OF_COMMANDS
-        List<Text> textList = Arrays.asList(arrayText);
+        List<Label> textListHeader = Arrays.asList(arrayTextHeader);
+        List<Label> textListFormat = Arrays.asList(arrayTextFormat);
+        List<Text> textListPurpose = Arrays.asList(arrayTextPurpose);
+        List<Text> textListExample = Arrays.asList(arrayTextExample);
         List<MenuItem> menuItemList = Arrays.asList(arrayMenuItem);
-        textArrayList = new ArrayList<>(textList);
+        textArrayHeaderList = new ArrayList<>(textListHeader);
+        textArrayFormatList = new ArrayList<>(textListFormat);
+        textArrayPurposeList = new ArrayList<>(textListPurpose);
+        textArrayExampleList = new ArrayList<>(textListExample);
         menuItemArrayList = new ArrayList<>(menuItemList);
-        numOfCommands = textArrayList.size();
+        numOfCommands = textArrayFormatList.size();
 
         for (int i = 0; i < numOfCommands; i++) {
             // Setting the corresponding String content in the Text object
-            Text commandText = textArrayList.get(i);
-            String commandString = ARRAY_OF_COMMAND_STRING[i];
-            commandText.setText(commandString);
+            Label commandTextHeader = textArrayHeaderList.get(i);
+            Label commandTextFormat = textArrayFormatList.get(i);
+            Text commandTextPurpose = textArrayPurposeList.get(i);
+            Text commandTextExample = textArrayExampleList.get(i);
+            String[] commandString = ARRAY_OF_COMMAND_STRING[i].split("\n");
+            commandTextHeader.setText(commandString[0]);
+            commandTextFormat.setText(commandString[1]);
+            commandTextPurpose.setText(commandString[2]);
+            commandTextExample.setText(commandString[3]);
 
             // Setting the corresponding MenuItem to scroll to the Text object
             ChangeListener<Number> listener = (obs, oldText, newText) -> {
                 Platform.runLater(() -> {
-                    commandText.setWrappingWidth(getRoot().getScene().getWidth() - ABSOLUTE_PADDING);
+                    commandTextPurpose.setWrappingWidth(getRoot().getScene().getWidth() - ABSOLUTE_PADDING);
                     logger.log(Level.INFO, "Setting Height of ResultDisplay to "
                             + (getRoot().getScene().getWidth() - ABSOLUTE_PADDING));
                 });
@@ -269,7 +407,7 @@ public class HelpWindow extends UiPart<Stage> {
             getRoot().widthProperty().addListener(listener);
 
             MenuItem commandMenuItem = menuItemArrayList.get(i);
-            commandMenuItem.setOnAction(event -> scrollAndHighlightText(commandText));
+            commandMenuItem.setOnAction(event -> scrollAndHighlightText(commandTextPurpose));
         }
     }
 
@@ -311,7 +449,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void scrollAndHighlightText(Text targetText) {
         // if the command to be scrolled to is the last command, just scroll to the end
         int lastIndex = numOfCommands - 1;
-        Text lastText = textArrayList.get(lastIndex);
+        Text lastText = textArrayPurposeList.get(lastIndex);
         if (targetText == lastText) {
             scrollPane.setVvalue(1);
             highlightText(targetText);
@@ -319,7 +457,7 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         // if the command to be scrolled to is the first command, just scroll to the top
-        Text firstText = textArrayList.get(0);
+        Text firstText = textArrayPurposeList.get(0);
         if (targetText == firstText) {
             scrollPane.setVvalue(0);
             highlightText(targetText);
@@ -327,7 +465,7 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
-        HBox box = (HBox) targetText.getParent();
+        HBox box = (HBox) targetText.getParent().getParent().getParent();
         Bounds bounds = box.getBoundsInParent();
         double yPadding = 100;
         double yOffset = bounds.getMinY() + yPadding;
@@ -344,19 +482,19 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private void highlightText(Text targetText) {
         if (lastHighlighted != null) {
-            HBox prevBox = (HBox) lastHighlighted.getParent();
+            HBox prevBox = (HBox) lastHighlighted.getParent().getParent().getParent();
             prevBox.setBackground(new Background(new BackgroundFill(
-                    HIGHLIGHT_ORANGE_BACKGROUND,
+                    HIGHLIGHT_HOVER_BACKGROUND,
                     DEFAULT_CORNER_RADII,
                     new Insets(INSET_PADDING, INSET_PADDING, 0, INSET_PADDING))));
         }
         // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
-        HBox vBox = (HBox) targetText.getParent();
+        HBox hBox = (HBox) targetText.getParent().getParent().getParent();
         Background highlight = new Background(new BackgroundFill(
-                HIGHLIGHT_RED_BACKGROUND,
+                HIGHLIGHT_ACTIVE_BACKGROUND,
                 DEFAULT_CORNER_RADII,
                 new Insets(INSET_PADDING, INSET_PADDING, 0, INSET_PADDING)));
-        vBox.setBackground(highlight);
+        hBox.setBackground(highlight);
         lastHighlighted = targetText;
     }
 
