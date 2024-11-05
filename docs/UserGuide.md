@@ -323,7 +323,7 @@ Examples:
 
 In property mode, you will be able to store and view the list of property's details.
 
-![buyer_mode display](images/PropertyModeDisplay.png)
+![property_mode display](images/PropertyModeDisplay.png)
 
 ### Viewing all properties : `view`
 
@@ -358,7 +358,7 @@ Examples:
 
 ### Locating Properties: `find`
 
-Find existing properties in the existing property list based on keywords.
+Find existing properties in the property list based on either name or address keywords.
 
 Format: `find n/LANDLORD_NAME`
 Format: `find a/ADDRESS`

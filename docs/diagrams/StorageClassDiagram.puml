@@ -62,6 +62,7 @@ JsonPropertyListStorage ..> JsonSerializablePropertyList
 JsonSerializableBuyerList --> "*" JsonAdaptedBuyer
 JsonSerializableMeetUpList --> "*" JsonAdaptedMeetUp
 JsonSerializablePropertyList --> "*" JsonAdaptedProperty
+JsonSerializablePropertyList --> "*" JsonAdaptedBuyer
 JsonAdaptedBuyer --> "*" JsonAdaptedTag
 
 'Force relative postions
