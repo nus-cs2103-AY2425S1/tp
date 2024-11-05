@@ -1,82 +1,87 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
+import seedu.address.storage.exceptions.ImporterException;
 
 /**
  * A class that does all the importing of data from a group of .json files to AddressBook.json
  */
 public class JsonImporter {
-    private final Path AddressBookFilePath;
-    private final File directoryToImport;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<File> jsonFiles = new ArrayList<>();
 
     /**
-     * Creates a new instance of JsonImporter which will handle all the importing from the provided directory path
-     * @param directoryPath path to the directory containing all the .json files to be imported
+     * Creates a new JsonImporter
+     * @param jsonFiles A list containing the .json files to be imported.
      */
-    public JsonImporter(String directoryPath, JsonAddressBookStorage storage) {
-        this.directoryToImport = new File(directoryPath);
-        this.AddressBookFilePath = storage.getAddressBookFilePath();
-        if (!directoryToImport.exists() || !this.directoryToImport.isDirectory()) {
-            throw new IllegalArgumentException("The provided path is not a directory");
+    public JsonImporter(List<File> jsonFiles) {
+        this.jsonFiles.addAll(jsonFiles);
+    }
+
+    private final Model importJsonFile(File jsonFile, Model model)  throws ImporterException {
+        requireNonNull(jsonFile);
+
+        Path filePath = jsonFile.toPath().toAbsolutePath();
+
+        Optional<JsonSerializableAddressBook> jsonAddressBook;
+        try {
+            jsonAddressBook = JsonUtil.readJsonFile(
+                    filePath, JsonSerializableAddressBook.class);
+        } catch (DataLoadingException e) {
+            throw new ImporterException(e);
+        }
+        if (!jsonAddressBook.isPresent()) {
+            throw new ImporterException("jsonAddressBook is Null");
+        }
+
+        try {
+            model.addAllPersons(jsonAddressBook.get().toModelType());
+            return model;
+        } catch (IllegalValueException ive) {
+            throw new ImporterException(ive);
         }
     }
 
-    public static void appendJsonFiles(File targetFile, File sourceDirectory) throws IOException {
-        // Step 1: Directly load the existing AddressBook.json data as an ArrayNode
-        ArrayNode targetArray = loadJsonArrayFromFile(targetFile);
-
-        // Step 2: Get all JSON files in the source directory
-        File[] jsonFiles = sourceDirectory.listFiles((dir, name) -> name.endsWith(".json"));
-        if (jsonFiles == null) {
-            System.out.println("No JSON files found in the specified directory.");
-            return;
+    public final Model importAllJsonFiles(Model model) throws ImporterException {
+        for (File file: jsonFiles) {
+            importJsonFile(file, model);
         }
-
-        // Step 3: Append each JSON file's content to the target array
-        for (File jsonFile : jsonFiles) {
-            if (!jsonFile.equals(targetFile)) {  // Avoid appending the target file itself
-                ArrayNode sourceArray = loadJsonFileAsArray(jsonFile);
-                targetArray.addAll(sourceArray);  // Append data from source array
-            }
-        }
-
-        // Step 4: Write the combined array back to the target file
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(targetFile, targetArray);
-        System.out.println("Appended JSON files to " + targetFile.getName());
+        return model;
     }
 
-    // Helper method to load an existing JSON array from a file
-    private static ArrayNode loadJsonArrayFromFile(File file) throws IOException {
-        if (!file.exists()) {
-            throw new IOException("The file " + file.getName() + " does not exist.");
-        }
+    public static final boolean initImporterSystem() throws IllegalStateException{
 
-        JsonNode jsonNode = objectMapper.readTree(file);
-        if (jsonNode.isArray()) {
-            return (ArrayNode) jsonNode;
-        } else {
-            throw new IOException("Expected JSON array in " + file.getName());
+        File importer = new File("Import");
+
+        if (!importer.exists()) {
+            importer.mkdir();
+        } else if (!importer.isDirectory()) {
+            throw new IllegalStateException("'Import' exists but is not a directory.");
         }
+        return true;
     }
 
-    // Helper method to load a JSON file as an ArrayNode; wraps objects in an array if necessary
-    private static ArrayNode loadJsonFileAsArray(File file) throws IOException {
-        JsonNode jsonNode = objectMapper.readTree(file);
-        if (jsonNode.isArray()) {
-            return (ArrayNode) jsonNode;
-        } else if (jsonNode.isObject()) {
-            ArrayNode arrayNode = objectMapper.createArrayNode();
-            arrayNode.add(jsonNode);
-            return arrayNode;
-        } else {
-            throw new IOException("Invalid JSON data in " + file.getName());
-        }
-    }
 }

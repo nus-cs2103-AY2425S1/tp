@@ -57,4 +57,17 @@ class JsonSerializableAddressBook {
         return addressBook;
     }
 
+    /**
+     * Merges two instances of {@Code AddressBook}, adding all instances of {@Code Person} from the source to the
+     * target.
+     * @param target the {@Code AddressBook} that the Persons will be added to
+     * @param source the {@Code AddressBook} that the Persons will be added from
+     * @return the target {@Code AddressBook} after adding the source {@Code AddressBook}
+     */
+    public JsonSerializableAddressBook mergeAddressBook(JsonSerializableAddressBook target,
+                                                        JsonSerializableAddressBook source) {
+        target.persons.addAll(source.persons);
+        return target;
+    }
+
 }

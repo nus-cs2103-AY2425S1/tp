@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.model.person.Person;
 import seedu.address.storage.exceptions.ConverterException;
@@ -25,15 +27,37 @@ public class CsvToJsonConverter {
     /**
      * creates a new CsvToJsonConverter object with the provided {@Code String directorypath}. Checks if the given
      * path is a valid directory. Will convert all .csv files inside the directory to .json files.
-     * @param directoryPath the string representation of the path to the directory which stores the .csv files
+     * @param directory the directory which stores the .csv files ot be converted
      */
-    public CsvToJsonConverter(String directoryPath) {
+    public CsvToJsonConverter(File directory) {
         personFieldNames = Person.getFieldSimpleNames();
-        this.directory = new File(directoryPath);
+        this.directory = directory;
 
         if (!directory.exists() || !this.directory.isDirectory()) {
             throw new IllegalArgumentException("The provided path is not a directory");
         }
+    }
+
+    /**
+     * Converts all the .csv files in a given directory to .json files
+     * @return A List containing all the successfully converted .json files
+     * @throws ConverterException When the provided path contains no .csv files to convert
+     */
+    public List<File> convertAllCsvFiles() throws ConverterException{
+        List<File> jsonFiles = new ArrayList<>();
+        if (directory.getName().endsWith(".csv")) {
+            jsonFiles.add(convertCsvFile(directory));
+        } else if (directory.isDirectory()){
+            try {
+                File[] files = findAllCsvFiles();
+                for (File csvFile: files) {
+                    jsonFiles.add(convertCsvFile(csvFile));
+                }
+            } catch (IOException ioe) {
+                throw new ConverterException(ioe.getMessage());
+            }
+        }
+        return jsonFiles;
     }
 
     private File[] findAllCsvFiles() throws IOException {
@@ -45,7 +69,7 @@ public class CsvToJsonConverter {
         return csvFiles;
     }
 
-    private boolean convertCsvFile(File csvFile) throws ConverterException {
+    private File convertCsvFile(File csvFile) throws ConverterException {
         ObjectMapper objectMapper = new ObjectMapper();
         BufferedReader br = createNewBufferedReader(csvFile);
         ArrayNode jsonArray = objectMapper.createArrayNode();
@@ -56,8 +80,7 @@ public class CsvToJsonConverter {
         } catch (IOException ioe) {
             throw new ConverterException("There has been a corrupted input", ioe);
         }
-        writeToJson(objectMapper, jsonArray, getJsonName(csvFile));
-        return true;
+        return writeToJson(objectMapper, jsonArray, getJsonName(csvFile));
     }
 
     private void addAllJSonObjects(BufferedReader br, ObjectMapper objectMapper,
@@ -70,11 +93,12 @@ public class CsvToJsonConverter {
         }
     }
 
-    private boolean writeToJson(ObjectMapper content, ArrayNode arrayNode,
+    private File writeToJson(ObjectMapper content, ArrayNode arrayNode,
                                 String jsonFilePath) throws ConverterException {
         try {
-            content.writerWithDefaultPrettyPrinter().writeValue(new File(jsonFilePath), arrayNode);
-            return true;
+            File toReturn = new File(jsonFilePath);
+            content.writerWithDefaultPrettyPrinter().writeValue(toReturn, arrayNode);
+            return toReturn;
         } catch (IOException e) {
             throw new ConverterException("Could not write to Json File");
         }
