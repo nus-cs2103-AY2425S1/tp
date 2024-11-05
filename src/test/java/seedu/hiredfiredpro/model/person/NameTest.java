@@ -48,11 +48,14 @@ public class NameTest {
         // same object -> returns true
         assertTrue(name.isSameName(name));
 
-        // same values case insensitive -> returns true
+        // same values, different case -> returns true
         assertTrue(name.isSameName(new Name("ALEX YEOH")));
 
-        // same values case insensitive -> returns true
+        // same values, different case -> returns true
         assertTrue(name.isSameName(new Name("alex yeoh")));
+
+        // same values, multiple spaces between words -> returns true
+        assertTrue(name.isSameName(new Name("Alex  Yeoh")));
 
         // null -> returns false
         assertFalse(name.isSameName(null));
