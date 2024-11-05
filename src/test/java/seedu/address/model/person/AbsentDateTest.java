@@ -21,17 +21,26 @@ public class AbsentDateTest {
     @Test
     public void isValidAbsentDate() {
         // invalid dates
+        // EP: empty string or null
         assertFalse(AbsentDate.isValidAbsentDate(null));
-        assertFalse(AbsentDate.isValidAbsentDate("")); // empty string
-        assertFalse(AbsentDate.isValidAbsentDate(" ")); // spaces only
-        assertFalse(AbsentDate.isValidAbsentDate("2024-13-01")); // invalid format
-        assertFalse(AbsentDate.isValidAbsentDate("invalid-date")); // invalid format
-        assertFalse(AbsentDate.isValidAbsentDate("30-02-2024")); // non-existent date
-        assertFalse(AbsentDate.isValidAbsentDate("12-02-2100")); // date in the future
+        assertFalse(AbsentDate.isValidAbsentDate(""));
+        assertFalse(AbsentDate.isValidAbsentDate(" "));
+
+        // EP: invalid format
+        assertFalse(AbsentDate.isValidAbsentDate("2024-13-01"));
+        assertFalse(AbsentDate.isValidAbsentDate("invalid-date"));
+
+        // EP: non-existent date
+        assertFalse(AbsentDate.isValidAbsentDate("30-02-2024")); // boundary value
+
+        // EP: date that is not within the current year
+        assertFalse(AbsentDate.isValidAbsentDate("12-02-2100"));
+        assertFalse(AbsentDate.isValidAbsentDate("12-02-2023"));
 
         // valid dates
-        assertTrue(AbsentDate.isValidAbsentDate("20-10-2024")); // valid date format
-        assertTrue(AbsentDate.isValidAbsentDate("01-01-2024")); // valid date
+        // EP: dates that are within the current year
+        assertTrue(AbsentDate.isValidAbsentDate("20-10-2024"));
+        assertTrue(AbsentDate.isValidAbsentDate("01-01-2024"));
     }
 
     @Test
