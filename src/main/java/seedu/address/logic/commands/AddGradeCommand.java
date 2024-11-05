@@ -26,16 +26,14 @@ import seedu.address.model.tag.Tag;
  */
 public class AddGradeCommand extends Command {
     public static final String COMMAND_WORD = "addGrade";
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD
-                    + ": Adds a grade of an assignment to the person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a grade of an assignment to the person.\n"
                     + "Parameters: "
                     + PREFIX_NAME
                     + "NAME "
                     + PREFIX_ASSIGNMENT
                     + "ASSIGNMENT "
                     + PREFIX_SCORE
-                    + "SCORE "
+                    + "SCORE\n"
                     + "Example: "
                     + COMMAND_WORD
                     + " "
@@ -44,7 +42,7 @@ public class AddGradeCommand extends Command {
                     + PREFIX_ASSIGNMENT
                     + "Ex09 "
                     + PREFIX_SCORE
-                    + "9 ";
+                    + "9";
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
     public static final String HELP_MESSAGE =
             "Input addGrade without any fields to see list of assignments specified in database.";

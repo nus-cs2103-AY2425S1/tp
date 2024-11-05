@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+
+<?import java.net.URL?>
+
+<VBox fx:id="commandDetailCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@CommandDetailCard.css" />
+    </stylesheets>
+
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+
+    <Label fx:id="command" styleClass="cell_small_label" text="\$command" />
+    <Label fx:id="commandDetails" styleClass="cell_small_label" text="\$commandDetails" />
+
+</VBox>
