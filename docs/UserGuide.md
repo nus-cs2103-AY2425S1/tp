@@ -171,7 +171,7 @@ Examples:
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* customers matching at least one keyword will be returned (i.e. `OR` search).
+* Customers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 </box>
@@ -213,7 +213,8 @@ Examples:
 
 * Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `pending` status.
 * The index refers to the index number shown in the displayed customer list.
-* The index and quantity **must be a positive integer** 1, 2, 3, …​
+* The index and quantity **must be a positive integer** 1, 2, 3, …​\
+* 'ITEM' can contain any printable characters, but it should not be blank.
 * Date must follow the following format: `DD-MM-YYYY`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
 * If there already exists a pending order with similar item(same item excluding space and casing), identical quantity and date under that customer, a warning will be given.
