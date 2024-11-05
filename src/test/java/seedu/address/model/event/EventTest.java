@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
+import seedu.address.testutil.TypicalEvents;
+import seedu.address.ui.Observer;
 
 
 public class EventTest {
@@ -303,5 +304,24 @@ public class EventTest {
         } catch (Exception e) {
             assert false;
         }
+    }
+
+    private class DummyObserver implements Observer {
+        public void update() {
+
+        }
+    }
+    @Test
+    public void testAddObserver() {
+        Observer dummyObserver = new DummyObserver();
+        Event dummyEvent = new Event("dummy");
+        dummyEvent.addObserver(dummyObserver);
+        assertEquals(dummyEvent.getObserver(), dummyObserver);
+    }
+
+    @Test
+    public void testGetTotalNumberOfDistinctContacts() {
+        Event event = TypicalEvents.getTypicalEvents().get(0);
+        assertEquals(event.getTotalNumberOfDistinctContacts(), 6);
     }
 }

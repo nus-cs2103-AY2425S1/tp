@@ -351,4 +351,18 @@ public class Event {
         persons.addAll(sponsors);
         return persons.size();
     }
+
+    /**
+     * Retrieves the currently registered observer.
+     * <p>
+     * This method returns the observer that has been added to this object via the
+     * {@code addObserver(Observer observer)} method. If no observer has been registered,
+     * this method will return {@code null}.
+     * </p>
+     *
+     * @return The currently registered {@code Observer}, or {@code null} if no observer is set.
+     */
+    public Observer getObserver() {
+        return this.observer;
+    }
 }
