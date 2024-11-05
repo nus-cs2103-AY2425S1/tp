@@ -24,6 +24,7 @@ import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class UnmarkOrderCommandTest {
 
@@ -43,7 +44,8 @@ public class UnmarkOrderCommandTest {
 
         Model expectedModel = model.createCopy();
         Order orderToBeUnmarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_SECOND_ORDER);
-        Order unmarkedOrder = UnmarkOrderCommand.createUnmarkedOrder(orderToBeUnmarkedInUnfilteredList);
+        OrderBuilder orderBuilder = new OrderBuilder(orderToBeUnmarkedInUnfilteredList);
+        Order unmarkedOrder = orderBuilder.withStatus(Status.PENDING).build();
 
         getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON)
                 .setOrder(orderToBeUnmarkedInUnfilteredList, unmarkedOrder);
@@ -59,11 +61,12 @@ public class UnmarkOrderCommandTest {
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
 
         Model expectedModel = model.createCopy();
-        Order orderToBeUnmarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
-        Order unmarkedOrder = UnmarkOrderCommand.createUnmarkedOrder(orderToBeUnmarkedInUnfilteredList);
+        Order orderToBeUnmarkedInFilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
+        OrderBuilder orderBuilder = new OrderBuilder(orderToBeUnmarkedInFilteredList);
+        Order unmarkedOrder = orderBuilder.withStatus(Status.PENDING).build();
 
         getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON)
-                .setOrder(orderToBeUnmarkedInUnfilteredList, unmarkedOrder);
+                .setOrder(orderToBeUnmarkedInFilteredList, unmarkedOrder);
         String expectedMessage = String.format(UnmarkOrderCommand.MESSAGE_UNMARK_ORDER_SUCCESS,
                 Messages.format(unmarkedOrder));
 
@@ -80,8 +83,12 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
+
         personToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+
+        assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
+
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(unmarkOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);

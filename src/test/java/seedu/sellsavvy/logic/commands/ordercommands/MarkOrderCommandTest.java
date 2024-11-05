@@ -25,6 +25,7 @@ import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class MarkOrderCommandTest {
 
@@ -44,7 +45,8 @@ public class MarkOrderCommandTest {
 
         Model expectedModel = model.createCopy();
         Order orderToBeMarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
-        Order markedOrder = MarkOrderCommand.createMarkedOrder(orderToBeMarkedInUnfilteredList);
+        OrderBuilder orderBuilder = new OrderBuilder(orderToBeMarkedInUnfilteredList);
+        Order markedOrder = orderBuilder.withStatus(Status.COMPLETED).build();
 
         getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON).setOrder(orderToBeMarkedInUnfilteredList, markedOrder);
         String expectedMessage = String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS,
@@ -60,7 +62,8 @@ public class MarkOrderCommandTest {
 
         Model expectedModel = model.createCopy();
         Order orderToBeMarkedInFilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
-        Order markedOrder = MarkOrderCommand.createMarkedOrder(orderToBeMarkedInFilteredList);
+        OrderBuilder orderBuilder = new OrderBuilder(orderToBeMarkedInFilteredList);
+        Order markedOrder = orderBuilder.withStatus(Status.COMPLETED).build();
 
         getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON).setOrder(orderToBeMarkedInFilteredList, markedOrder);
         String expectedMessage = String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS,
@@ -79,8 +82,12 @@ public class MarkOrderCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
+
         personToMarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
+
+        assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
+
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(markOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
@@ -102,7 +109,9 @@ public class MarkOrderCommandTest {
         // mark the first order
         OrderList orderList = model.getSelectedOrderList();
         Order order = orderList.get(targetIndex.getZeroBased());
-        orderList.setOrder(order, MarkOrderCommand.createMarkedOrder(order));
+        OrderBuilder orderBuilder = new OrderBuilder(order);
+        Order markedOrder = orderBuilder.withStatus(Status.COMPLETED).build();
+        orderList.setOrder(order, markedOrder);
 
         assertCommandFailure(markOrderCommand, model, MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED);
     }

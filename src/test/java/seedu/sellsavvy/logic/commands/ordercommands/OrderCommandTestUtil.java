@@ -129,7 +129,7 @@ public class OrderCommandTestUtil {
     }
 
     /**
-     * Returns the order list in the model's selected person's filtered order list by the given {@code Index}.
+     * Returns an {@code OrderList} of the model's selected person by the given {@code Index}
      */
     public static OrderList getOrderListByIndex(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased()).getOrderList();

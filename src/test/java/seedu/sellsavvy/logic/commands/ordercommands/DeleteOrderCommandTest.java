@@ -22,6 +22,8 @@ import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Status;
+import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -31,21 +33,22 @@ import seedu.sellsavvy.model.person.Person;
 public class DeleteOrderCommandTest {
 
     private Model model;
+    private Person personToDeleteOrderUnder;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
+        personToDeleteOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+        model.updateSelectedPerson(personToDeleteOrderUnder);
     }
 
     @Test
-    public void execute_validIndexOrderList_success() {
-        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
-        model.updateSelectedPerson(person);
+    public void execute_validIndexUnfilteredOrderList_success() {
         Model expectedModel = model.createCopy();
 
-        OrderList expectedOrderList = getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON);
+        OrderList expectedUnfilteredOrderList = getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON);
         Order expectedOrder = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
-        expectedOrderList.remove(expectedOrder);
+        expectedUnfilteredOrderList.remove(expectedOrder);
         String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS,
                 Messages.format(expectedOrder));
 
@@ -54,10 +57,36 @@ public class DeleteOrderCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexOrderList_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(3);
-        model.updateSelectedPerson(person);
-        Index outOfBoundIndex = Index.fromOneBased(person.getOrderList().size() + 1);
+    public void execute_validIndexFilteredOrderList_success() {
+        personToDeleteOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        Model expectedModel = model.createCopy();
+
+        OrderList expectedFilteredOrderList = getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON);
+        Order expectedOrder = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
+        expectedFilteredOrderList.remove(expectedOrder);
+        String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS,
+                Messages.format(expectedOrder));
+
+        DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
+        assertCommandSuccess(deleteOrderCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredOrderList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
+        DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
+
+        personToDeleteOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+
+        assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
+
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
@@ -66,6 +95,7 @@ public class DeleteOrderCommandTest {
     @Test
     public void execute_noOrderListDisplayed_throwsCommandException() {
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
+        model.updateSelectedPerson(null);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
     }
