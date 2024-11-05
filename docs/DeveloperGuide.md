@@ -187,7 +187,7 @@ attendance to maintain student's accurate attendance record.
 To ensure data integrity and completeness, the system necessitates the inclusion of parameters such as Name and Student ID. The activity diagram below
 shows the sequence of action users will have to take to add a new Student Profile into the TrackMate Application.
 
-<puml src="diagrams/AddFeatureActivityDiagram.puml" width="400" />
+<puml src="diagrams/AddFeatureActivityDiagram.puml" width="600" />
 
 Besides, a class diagram of add student command is given below to demonstrate the interactions among classes.
 
@@ -198,7 +198,7 @@ Besides, a class diagram of add student command is given below to demonstrate th
 Similar to adding student, the system requires parameters such as Tutorial Name and Tutorial ID. The sequence diagram below demonstrates the interaction
 among various classes to add a new Tutorial into the TrackMate Application.
 
-<puml src="diagrams/AddTutorialSequenceDiagram.puml" width="400" />
+<puml src="diagrams/AddTutorialSequenceDiagram.puml" width="600" />
 
 #### Add Attendance
 
@@ -206,7 +206,7 @@ The AttendCommand is responsible for marking the attendance of a student for a s
 with the model to update the attendance record of a given student for a particular tutorial. The sequence diagram below shows how the command
 interact with other classes.
 
-<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="400" />
+<puml src="diagrams/AttendCommandSequenceDiagram.puml" width="600" />
 
 #### Add Assignment
 
