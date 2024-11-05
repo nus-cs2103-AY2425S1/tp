@@ -25,13 +25,14 @@ public class UnmarkOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "unmarkOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts an order to the pending status."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts an order identified by "
+            + "the index number used in the displayed order list to the pending status.\n"
             + "Parameters: ORDER_INDEX (must be positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_UNMARK_ORDER_SUCCESS =
             "The order has been reverted to the pending status: %1$s";
-    public static final String MESSAGE_ORDER_ALREADY_UNMARKED = "The order has not been marked as completed.";
+    public static final String MESSAGE_ORDER_ALREADY_UNMARKED = "The order is already in pending status.";
 
     private final Index index;
 

@@ -27,7 +27,7 @@ public class AddOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "addOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order under the specified person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order under the specified customer.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM + "ITEM "
             + PREFIX_DATE + "DELIVERY_BY "
@@ -41,7 +41,7 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has a pending order with the same details, "
-            + "verify if this is a mistake\n";
+            + "verify if this is a mistake.\n";
 
     private final Index index;
     private final Order toAdd;

@@ -39,7 +39,7 @@ public class EditOrderCommand extends Command {
             + "Parameters: ORDER_INDEX (must be a positive integer) "
             + "[" + PREFIX_ITEM + "ITEM] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_QUANTITY + "QUANTITY] "
+            + "[" + PREFIX_QUANTITY + "QUANTITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ITEM + "LED light bulb "
             + PREFIX_DATE + "20-12-2024 ";
@@ -48,7 +48,7 @@ public class EditOrderCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has a %1$s order with the same details, "
-            + "verify if this is a mistake\n";
+            + "verify if this is a mistake.\n";
 
     private final Index index;
     private final EditOrderDescriptor editOrderDescriptor;

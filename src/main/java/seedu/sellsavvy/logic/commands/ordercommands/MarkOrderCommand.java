@@ -25,7 +25,8 @@ public class MarkOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "markOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an order as completed."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an order identified by "
+            + "the index number used in the displayed order list as completed.\n"
             + "Parameters: ORDER_INDEX (must be positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
 

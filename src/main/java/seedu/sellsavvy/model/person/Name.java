@@ -10,10 +10,10 @@ import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names can only contain alphanumeric characters, spaces,"
+            "Names can only contain alphanumeric characters, spaces, "
                     + "and one of the following symbols: hyphen, comma, and apostrophe.\n"
                     + "Names should have alphanumeric characters before and after the symbol, "
-                    + "and it should not be blank."
+                    + "and it should not be blank. "
                     + "Relationship indicator preceded \"S/O\" or \"D/O\" can be included, but must be followed "
                     + "with the name of person with stated relationship.";
 

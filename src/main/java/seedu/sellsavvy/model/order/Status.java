@@ -20,7 +20,7 @@ public enum Status {
         }
     };
 
-    public static final String MESSAGE_CONSTRAINTS = "Status should be \"Pending\" or \"Completed\"";
+    public static final String MESSAGE_CONSTRAINTS = "Status should be \"Pending\" or \"Completed\".";
 
     /**
      * Returns the enum name of the given string.
