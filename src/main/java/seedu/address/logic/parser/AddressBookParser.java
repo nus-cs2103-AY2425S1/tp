@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListDeliveryCommand;
 import seedu.address.logic.commands.ListSupplierCommand;
+import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -117,7 +118,7 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
             }
 
-        case MarkDeliveryCommand.COMMAND_WORD:
+        case MarkCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new MarkSupplierCommandParser().parse(arguments.trim());
             } else if (arguments.trim().startsWith("-d")) {
