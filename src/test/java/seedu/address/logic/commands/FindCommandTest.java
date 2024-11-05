@@ -166,6 +166,20 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_allFields_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("benson");
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate("98765432");
+        AddressContainsKeywordsPredicate addressPredicate = prepareAddressPredicate("Clementi Ave 2_");
+        TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("friends");
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, addressPredicate, tagPredicate);
+        expectedModel.updateFilteredPersonList(namePredicate.and(phonePredicate).and(addressPredicate).and(tagPredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         PhoneContainsKeywordsPredicate phonePredicate = new PhoneContainsKeywordsPredicate(Arrays.asList("phone"));
