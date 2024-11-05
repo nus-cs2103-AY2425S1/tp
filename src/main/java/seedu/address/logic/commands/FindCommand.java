@@ -19,6 +19,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_NO_MATCH = "No matches for your keywords.";
 
     private final NameContainsKeywordsPredicate predicate;
     /**
@@ -32,6 +33,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int numberOfMatches = model.getFilteredPersonList().size();
+        if (numberOfMatches == 0) {
+            return new CommandResult(MESSAGE_NO_MATCH);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
