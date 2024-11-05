@@ -122,8 +122,6 @@ Format: `list`
 
 Edits an existing student in the app.
 
-![result for edit_student 1 p/91234567 e/johndoe@example.com](images/editStudent.png)
-
 Format: `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
@@ -135,7 +133,8 @@ Format: `edit_student INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 Examples:
 *  `edit_student 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit_student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+   ![result for 'edit_student 1 p/91234567 e/johndoe@example.com'](images/editStudent.png) 
+* `edit_student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 ### Locating students by name: `find`
 
@@ -179,18 +178,18 @@ Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
   3rd student in the app.
 * `add_assignment si/1 an/Assignment 1 ms/100`
+  ![result for 'add_assignment si/1 an/Assignment 1 ms/100'](images/addAssignment.jpg)
 
 ### Deleting an assignment: `delete_assignment`
 
 Deletes an assignment belonging to a student based on the student's index number and the assignment's index.
-
-![result for delete_assignment si/1 ai/1](images/deleteAssignment.png)
 
 Format: `delete_assignment si/INDEX ai/INDEX`
 
 Examples:
 * `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
 * `delete_assignment si/1 ai/1`
+  ![result for 'delete_assignment si/1 ai/1'](images/deleteAssignment.png)
 
 ### Marking an assignment as submitted: `mark`
 
