@@ -122,7 +122,7 @@ public class OrderCommandTestUtil {
     }
 
     /**
-     * Returns the order in the model's selected filtered order list by the given {@code Index}.
+     * Returns an {@code Order} from the model's filtered order list by the given {@code Index}.
      */
     public static Order getOrderByIndex(Model model, Index index) {
         return model.getFilteredOrderList().get(index.getZeroBased());
