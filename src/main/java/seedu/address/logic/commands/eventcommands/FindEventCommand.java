@@ -24,8 +24,8 @@ public class FindEventCommand extends Command {
             + "Parameters: PREFIX (must be a non-empty string)\n"
             + "Example: " + COMMAND_WORD + " eventSearchString";
 
-    public static final String MESSAGE_EVENT_FOUND = "Found %d event(s) starting with '%s':";
-    public static final String MESSAGE_EVENT_NOT_FOUND = "No events found starting with '%s'.";
+    public static final String MESSAGE_EVENT_FOUND = "Found %d event(s) containing '%s':";
+    public static final String MESSAGE_EVENT_NOT_FOUND = "No events found containing '%s'.";
 
     private final String searchString;
 
