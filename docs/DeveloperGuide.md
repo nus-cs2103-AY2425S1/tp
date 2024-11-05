@@ -444,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given specified field is/are empty.
 
   * 3a1. SocialBook shows an error message.
-  
+
     Use case resumes at step 2.
 
 * 3b. The given index is invalid.
@@ -452,11 +452,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3c. There is an error in any of the specified fields.
-    
+
   * 3c1. SocialBook shows an error message.
-      
+
     Use case resumes at step 2.
 
 ##### **Use case: Find a contact**
@@ -581,7 +581,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a person while found persons are being shown
 
-    1. Prerequisites: Find people with names matching a particular keyword using the `find` command. 
+    1. Prerequisites: Find people with names matching a particular keyword using the `find` command.
 
     1. Test case: `delete x`<br> (where x is less than or equal to the number of found persons)
        Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -602,7 +602,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete x y`<br> (where x,y are greater than the number of listed persons)
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Test case: `delete 0 1`<br> 
+    1. Test case: `delete 0 1`<br>
        Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message. Timestamp in the status bar is updated.
 
 ### Saving data

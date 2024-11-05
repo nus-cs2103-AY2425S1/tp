@@ -47,7 +47,7 @@ public class SortCommandTest {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
                 sortParameter, isAscending ? "ascending" : "descending");
         Model expectedModel = new ModelManager(getTypicalAddressBook(sortParameter, isAscending), new UserPrefs());
-        assertCommandSuccess(sortCommand, modelDescendingName, expectedMessage, expectedModel);
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

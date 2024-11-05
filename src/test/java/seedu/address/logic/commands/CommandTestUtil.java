@@ -38,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_EMERGENCY_CONTACT_BOB = VALID_PHONE_BOB;
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
+    public static final String VALID_TAG_CONVICT = "ex-convict";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_DATEOFLASTVISIT_AMY = "12-12-2023";
     public static final String VALID_DATEOFLASTVISIT_BOB = "09-09-2024";
@@ -58,7 +58,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_CONVICT = " " + PREFIX_TAG + VALID_TAG_CONVICT;
     public static final String DATEOFLASTVISIT_DESC_AMY = " " + PREFIX_DATEOFLASTVISIT
             + VALID_DATEOFLASTVISIT_AMY;
     public static final String DATEOFLASTVISIT_DESC_BOB = " " + PREFIX_DATEOFLASTVISIT
@@ -79,7 +79,7 @@ public class CommandTestUtil {
     // empty string not allowed for addresses
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS;
     // '*' not allowed in tags
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*";
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "    ";
     // date should only be in the format: dd/MM/yyyy, separated by '-'
     public static final String INVALID_DATEOFLASTVISIT_DESC = " " + PREFIX_DATEOFLASTVISIT + "13/13/2023";
 
@@ -96,7 +96,7 @@ public class CommandTestUtil {
                 .withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY).withRemark(VALID_REMARK_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withDateOfLastVisit(VALID_DATEOFLASTVISIT_BOB)
+                .withTags(VALID_TAG_CONVICT, VALID_TAG_FRIEND).withDateOfLastVisit(VALID_DATEOFLASTVISIT_BOB)
                 .withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB).withRemark(VALID_REMARK_BOB).build();
     }
 

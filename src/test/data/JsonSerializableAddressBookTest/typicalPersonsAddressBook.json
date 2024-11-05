@@ -14,7 +14,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "owes money", "friends" ],
     "dateOfLastVisit" : "01-02-2024",
     "emergencyContact" : "92173902",
     "remark" : ""
@@ -24,7 +24,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2025",
+    "dateOfLastVisit" : "01-04-2024",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -33,7 +33,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "dateOfLastVisit" : "02-01-2024",
+    "dateOfLastVisit" : "02-04-2024",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -42,7 +42,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "dateOfLastVisit" : "10-10-2024",
+    "dateOfLastVisit" : "10-07-2024",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -60,7 +60,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "dateOfLastVisit" : "05-06-2024",
+    "dateOfLastVisit" : "05-09-2023",
     "emergencyContact" : "",
     "remark" : ""
   } ]
