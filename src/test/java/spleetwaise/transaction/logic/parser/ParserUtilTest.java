@@ -17,6 +17,7 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -33,6 +34,7 @@ public class ParserUtilTest {
     private static final String VALID_DATE = "01012024";
 
     private static final String INVALID_STATUS = "invalid";
+    private static final String INVALID_AMTSIGN = "invalid";
 
     private static final Phone TEST_PHONE = TypicalPersons.ALICE.getPhone();
     private static final Index TEST_INDEX = Index.fromOneBased(1);
@@ -104,6 +106,25 @@ public class ParserUtilTest {
         result = assertDoesNotThrow(() -> ParserUtil.parseStatus(Status.NOT_DONE_STATUS));
         assertEquals(new Status(Status.NOT_DONE_STATUS), result);
         assertEquals(new Status(false), result);
+    }
+
+    @Test
+    public void parseAmountSign_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmountSign(null));
+    }
+
+    @Test
+    public void parseAmountSign_invalidStatus_exceptionThrown() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmountSign(INVALID_AMTSIGN));
+    }
+
+    @Test
+    public void parseAmountSign_validStatus_success() {
+        AmountSignFilterPredicate result = assertDoesNotThrow(() -> ParserUtil.parseAmountSign(AmountSignFilterPredicate.POSITIVE_SIGN));
+        assertEquals(new AmountSignFilterPredicate(AmountSignFilterPredicate.POSITIVE_SIGN), result);
+
+        result = assertDoesNotThrow(() -> ParserUtil.parseAmountSign(AmountSignFilterPredicate.NEGATIVE_SIGN));
+        assertEquals(new AmountSignFilterPredicate(AmountSignFilterPredicate.NEGATIVE_SIGN), result);
     }
 
     @Test
