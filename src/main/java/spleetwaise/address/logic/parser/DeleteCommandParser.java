@@ -2,8 +2,8 @@ package spleetwaise.address.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.commands.DeleteCommand;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 

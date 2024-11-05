@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.commons.util.FileUtil;
-import spleetwaise.address.commons.util.JsonUtil;
 import spleetwaise.address.model.ReadOnlyAddressBook;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.util.FileUtil;
+import spleetwaise.commons.util.JsonUtil;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.

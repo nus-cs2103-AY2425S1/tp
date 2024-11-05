@@ -8,9 +8,9 @@ import static spleetwaise.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.commands.RemarkCommand;
 import spleetwaise.address.model.person.Remark;
+import spleetwaise.commons.core.index.Index;
 
 public class RemarkCommandParserTest {
     private final Remark nonEmptyRemark = new Remark("remark");

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.commons.core.index.Index;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.model.TransactionBookModel;

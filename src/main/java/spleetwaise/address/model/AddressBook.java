@@ -7,10 +7,10 @@ import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.UniquePersonList;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Wraps all data at the address-book level Duplicates are not allowed (by .isSamePerson comparison)

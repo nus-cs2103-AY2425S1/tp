@@ -6,15 +6,15 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.commons.util.StringUtil;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.util.StringUtil;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -105,10 +105,14 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
-        if (!Remark.isValidRemark(trimmedRemark)) {
+
+        // Replace escaped delimiters (\/)
+        String processedRemark = trimmedRemark.replace("\\/", "/");
+
+        if (!Remark.isValidRemark(processedRemark)) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
-        return new Remark(trimmedRemark);
+        return new Remark(processedRemark);
     }
 
     /**

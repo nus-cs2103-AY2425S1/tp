@@ -115,14 +115,15 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn p/PHONE_NUMBER amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
+Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
 
-* The `PHONE_NUMBER` refers to the phone number associated to the person had a transaction with.
+* The `INDEX` refers to the index of the person currently displayed in the address book panel.
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
-* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces.
+* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
+:bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
 :bulb: **Tip:** A person can have any number of categories (including 0)<br>
 :bulb: **Tip:** Positive Amount Transaction indicates someone owes <ins>_the user_</ins> an amount.<br>
@@ -210,10 +211,14 @@ Examples:
 
 ### Filtering transactions: `filterTxn`
 
-Filter transactions with the specified person identified by their index in the displayed person list, and/or amount 
-and/or description and/or date.
+Filter transactions with a any combination of the following parameters:
+* the specified person identified by their index in the displayed person list
+* and/or amount 
+* and/or description 
+* and/or date
+* and/or status
 
-Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS]`
 
 * The command requires at least one of the above optional prefixes to be provided.
 * As more prefixes are provided, the filter becomes more specific.
@@ -224,6 +229,7 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]`
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `DESCRIPTION` accepts a string of words.
     * The description filter is case-insensitive. e.g `hans` will match `Hans`
+* The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
 
 Examples:<br>
 
@@ -349,11 +355,12 @@ save manually.
 ### Editing the data file
 
 - AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`
-- Transaction data are saved automatically as a JSON file `[JAR file location]/data/transaction.json` 
+- TransactionBook data are saved automatically as a JSON file `[JAR file location]/data/transactionbook.json` 
 - Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SpleetWaise will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Transactions with invalid person IDs will not be loaded into the TransactionBook.<br>
 Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -403,5 +410,5 @@ _Details coming soon ..._
 | **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN`                                   |
 | **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
 | **List**   | `listTxn`                                                                                                                                                                                                                    |
-| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE]` <br> e.g. `filterTxn 1`                                                                                                                                      |
+| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS]` <br> e.g. `filterTxn 1`                                                                                                                      |
 | **Clear**  | `clearTxn`                                                                                                                                                                                                                   |

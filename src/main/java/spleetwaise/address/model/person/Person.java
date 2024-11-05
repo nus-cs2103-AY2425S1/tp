@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import spleetwaise.address.commons.util.CollectionUtil;
-import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.model.tag.Tag;
-import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.util.CollectionUtil;
+import spleetwaise.commons.util.IdUtil;
+import spleetwaise.commons.util.ToStringBuilder;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field values are validated,
@@ -81,7 +81,7 @@ public class Person {
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
-            // This means that the otherPerson has the same id, name, phone, email, address and tags
+            // This means that the otherPerson has the same id, name, phone, email, address, remark and tags
             return true;
         }
 

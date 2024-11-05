@@ -5,14 +5,15 @@ import static spleetwaise.transaction.logic.commands.FilterCommand.MESSAGE_USAGE
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.stream.Stream;
 
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
 import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.FilterCommand;
@@ -20,6 +21,7 @@ import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 
 /**
  * Parses input arguments and creates a new transaction FilterCommand object.
@@ -43,12 +45,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE)
+                ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS);
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS)
                 && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS);
 
         Person person = null;
         if (!argMultimap.getPreamble().isEmpty()) {
@@ -71,9 +73,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         }
 
-        assert person != null || amount != null || description != null || date != null;
+        Status status = null;
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        }
 
-        FilterCommandPredicate filterPredicate = new FilterCommandPredicate(person, amount, description, date);
+        assert person != null || amount != null || description != null || date != null || status != null;
+
+        FilterCommandPredicate filterPredicate = new FilterCommandPredicate(person, amount, description, date, status);
 
         return new FilterCommand(filterPredicate);
     }

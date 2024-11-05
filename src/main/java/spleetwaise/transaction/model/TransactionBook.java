@@ -7,7 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.util.CollectionUtil;
+import spleetwaise.commons.util.CollectionUtil;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.model.transaction.exceptions.DuplicateTransactionException;
 import spleetwaise.transaction.model.transaction.exceptions.TransactionNotFoundException;

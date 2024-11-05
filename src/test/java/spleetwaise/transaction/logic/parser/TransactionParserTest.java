@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
@@ -28,7 +27,7 @@ public class TransactionParserTest {
     private final TransactionBookModel tbModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook());
     private final AddressBookModel abModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+            TypicalPersons.getTypicalAddressBook());
     private final TransactionParser parser = new TransactionParser();
 
 

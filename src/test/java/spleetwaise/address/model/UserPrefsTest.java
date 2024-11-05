@@ -3,6 +3,7 @@ package spleetwaise.address.model;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.model.UserPrefs;
 
 public class UserPrefsTest {
 

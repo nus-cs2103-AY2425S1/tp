@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.commons.core.index.Index;
+import spleetwaise.commons.core.LogsCenter;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;

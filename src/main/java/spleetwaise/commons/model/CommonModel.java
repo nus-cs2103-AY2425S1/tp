@@ -1,20 +1,19 @@
 package spleetwaise.commons.model;
 
 import static java.util.Objects.requireNonNull;
-import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
+import static spleetwaise.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import spleetwaise.address.commons.core.GuiSettings;
-import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
-import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
+import spleetwaise.commons.core.GuiSettings;
+import spleetwaise.commons.core.index.Index;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -26,12 +25,14 @@ public class CommonModel implements Model {
     // Singleton instance
     private static CommonModel model = null;
 
+    private final UserPrefs userPrefs;
     private AddressBookModel addressBookModel;
     private TransactionBookModel transactionBookModel;
 
-    private CommonModel(AddressBookModel abModel, TransactionBookModel tbModel) {
+    private CommonModel(AddressBookModel abModel, TransactionBookModel tbModel, ReadOnlyUserPrefs userPrefs) {
         addressBookModel = abModel;
         transactionBookModel = tbModel;
+        this.userPrefs = new UserPrefs(userPrefs);
     }
 
     public static synchronized CommonModel getInstance() {
@@ -44,9 +45,16 @@ public class CommonModel implements Model {
      *
      * @param abModel The address book model to use
      * @param tbModel The transaction book model to use
+     * @param userPrefs The user prefs to use
      */
+    public static synchronized void initialise(AddressBookModel abModel, TransactionBookModel tbModel,
+            ReadOnlyUserPrefs userPrefs) {
+        model = new CommonModel(abModel, tbModel, userPrefs);
+    }
+
+
     public static synchronized void initialise(AddressBookModel abModel, TransactionBookModel tbModel) {
-        model = new CommonModel(abModel, tbModel);
+        model = new CommonModel(abModel, tbModel, new UserPrefs());
     }
 
     /**
@@ -58,39 +66,35 @@ public class CommonModel implements Model {
 
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        return addressBookModel.getUserPrefs();
+        return userPrefs;
     }
 
-    // AddressBook
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        addressBookModel.setUserPrefs(userPrefs);
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
     public GuiSettings getGuiSettings() {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        return addressBookModel.getGuiSettings();
+        return userPrefs.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        addressBookModel.setGuiSettings(guiSettings);
+        requireNonNull(guiSettings);
+        userPrefs.setGuiSettings(guiSettings);
     }
 
     @Override
     public Path getAddressBookFilePath() {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        return addressBookModel.getAddressBookFilePath();
+        return userPrefs.getAddressBookFilePath();
     }
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookModel, "AddressBook model cannot be null");
-        addressBookModel.setAddressBookFilePath(addressBookFilePath);
+        requireNonNull(addressBookFilePath);
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
     @Override
