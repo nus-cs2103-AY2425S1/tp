@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -52,19 +56,32 @@ public class ContactCard extends UiPart<Region> {
         final String nicknamePrelabel = "aka ";
         final String telegramPrelabel = "@";
         id.setText(displayedIndex + ". ");
+
+        final int width = 580; // try not to change this
         name.setText(contact.getName().fullName);
+        setSize(name, width-18);
+
         telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
         studentStatus.setText(contact.getStudentStatus().value);
         email.setText(contact.getEmail().value);
+        List.<Label>of(telegramHandle, email, studentStatus).forEach(label -> label.setMaxWidth(width));
+
         contact.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.getRoleIndex()))
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
         String nicknameObtained = contact.getNickname().value;
         if (!nicknameObtained.isEmpty()) {
             Label nicknameLabel = new Label(nicknamePrelabel + nicknameObtained);
+            setSize(nicknameLabel, width);
             nicknameLabel.setWrapText(true);
             nickname.getChildren().add(nicknameLabel);
         }
+    }
+
+    private void setSize(Label label, int size) {
+        label.setMaxWidth(size);
+        label.setMinWidth(size);
+        label.setPrefWidth(size);
     }
 
     /**
