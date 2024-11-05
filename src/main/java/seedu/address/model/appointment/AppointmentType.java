@@ -50,11 +50,10 @@ public class AppointmentType {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentType)) {
+        if (!(other instanceof AppointmentType otherAppointmentType)) {
             return false;
         }
 
-        AppointmentType otherAppointmentType = (AppointmentType) other;
         return value.equals(otherAppointmentType.value);
     }
 

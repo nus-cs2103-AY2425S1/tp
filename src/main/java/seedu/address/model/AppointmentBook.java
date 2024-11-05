@@ -79,7 +79,7 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
      */
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
-        return appointments.contains(appointment);
+        return appointments.containsAppointment(appointment);
     }
 
     /**
@@ -87,7 +87,7 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
      */
     public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor) {
         requireNonNull(appointmentDescriptor);
-        return appointments.contains(appointmentDescriptor);
+        return appointments.containsAppointment(appointmentDescriptor);
     }
 
     /**
@@ -95,7 +95,7 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
      * The appointment must not already exist in the appointment book.
      */
     public void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
+        appointments.addAppointment(appointment);
         ++nextAppointmentId;
     }
 
@@ -106,7 +106,7 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     public Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor) {
         requireAllNonNull(person, appointmentDescriptor);
         Appointment appointment = new Appointment(nextAppointmentId, person, appointmentDescriptor);
-        appointments.add(appointment);
+        appointments.addAppointment(appointment);
         ++nextAppointmentId;
         return appointment;
     }
@@ -128,15 +128,13 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
      * {@code key} must exist in the appointment book.
      */
     public void removeAppointment(Appointment key) {
-        appointments.remove(key);
+        appointments.removeAppointment(key);
     }
-
     public void removeAppointmentsForPerson(Person person) {
         appointments.removeAppointmentsForPerson(person);
     }
 
     //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -156,11 +154,10 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentBook)) {
+        if (!(other instanceof AppointmentBook otherAppointmentBook)) {
             return false;
         }
 
-        AppointmentBook otherAppointmentBook = (AppointmentBook) other;
         return appointments.equals(otherAppointmentBook.appointments);
     }
 

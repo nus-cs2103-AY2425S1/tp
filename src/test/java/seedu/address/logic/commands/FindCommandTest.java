@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.AppointmentPersonContainsNamePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -36,29 +37,36 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-            new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-            new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate firstPersonPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        NameContainsKeywordsPredicate secondPersonPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindPersonCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindPersonCommand(secondPredicate);
+        AppointmentPersonContainsNamePredicate firstApptPredicate =
+                new AppointmentPersonContainsNamePredicate(Collections.singletonList("2024-10-20"));
+        AppointmentPersonContainsNamePredicate secondApptPredicate =
+                new AppointmentPersonContainsNamePredicate(Collections.singletonList("2024-10-21"));
 
-        // same object -> returns true
-        assertEquals(findFirstCommand, findFirstCommand);
+        FindCommand findFirstPersonCommand = new FindPersonCommand(firstPersonPredicate);
+        FindCommand findSecondPersonCommand = new FindPersonCommand(secondPersonPredicate);
+        FindCommand findFirstApptCommand = new FindAppointmentCommand(firstApptPredicate);
+        FindCommand findSecondApptCommand = new FindAppointmentCommand(secondApptPredicate);
 
-        // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
-        assertEquals(findFirstCommand, findFirstCommandCopy);
+        assertEquals(findFirstPersonCommand, findFirstPersonCommand);
+        assertEquals(findFirstApptCommand, findFirstApptCommand);
 
-        // different types -> returns false
-        assertNotEquals(1, findFirstCommand);
+        FindCommand findFirstPersonCommandCopy = new FindPersonCommand(firstPersonPredicate);
+        FindCommand findFirstApptCommandCopy = new FindAppointmentCommand(firstApptPredicate);
+        assertEquals(findFirstPersonCommand, findFirstPersonCommandCopy);
+        assertEquals(findFirstApptCommand, findFirstApptCommandCopy);
 
-        // null -> returns false
-        assertNotEquals(null, findFirstCommand);
+        assertNotEquals(findFirstPersonCommand, findFirstApptCommand);
 
-        // different person -> returns false
-        assertNotEquals(findFirstCommand, findSecondCommand);
+        assertNotEquals(null, findFirstPersonCommand);
+        assertNotEquals(null, findFirstApptCommand);
+
+        assertNotEquals(findFirstPersonCommand, findSecondPersonCommand);
+        assertNotEquals(findFirstApptCommand, findSecondApptCommand);
     }
 
     @Test

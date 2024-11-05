@@ -49,11 +49,10 @@ public class Medicine {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Medicine)) {
+        if (!(other instanceof Medicine otherMedicine)) {
             return false;
         }
 
-        Medicine otherMedicine = (Medicine) other;
         return value.equals(otherMedicine.value);
     }
 
