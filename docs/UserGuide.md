@@ -521,37 +521,73 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Adding buyers `Alex Yeoh` and `Charlotte Oliveiro`
+      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4`
       >
-      > **Input**:
+      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh buyer/Charlotte Oliveiro`
       >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
+      > **Output**: Buyers added to listing: RC4
       >
       > ---
       >
-      > **Use Case #3**:
+      > **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
       >
-      > **Input**:
+      > **Input**: `addlistingbuyers david hdb buyer/Alex Yeoh buyer/Charlotte Oliveiro`
       >
-      > **Output**:
+      > **Output**: Buyers added to listing: David HDB
       >
       > ---
 
+    <br>
+    <div class="note" markdown="span">
+    Listing and buyer names are case-insensitive: 
+    `addlistingbuyers Warton House` 
+    = `addlistingbuyers warton house` 
+    = `addlistingbuyers wArToN HouSe` 
+    <br>
+    <br>
+    `addlistingbuyers warton house buyer/Alex Yeoh` 
+    = `addlistingbuyers warton house buyer/alex yeoh` 
+    = `addlistingbuyers warton house buyer/aLeX yEoH
+    </div>
+    <br>
+
+    <div class="alert" markdown="span">
+    However, listing/buyer name is space-sensitive:
+    `addlistingbuyers Warton House` != `addlistingbuyers WartonHouse`
+    </div> 
+    <br>
+    
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Listing not found
       >
-      > **Input**:
+      > **Input**: `addlistingbuyers NonExistentListing buyer/Bob`
       >
-      > **Output**:
+      > **Output**: The specified listing name does not exist.
+      >
+      > ---
+      > 
+      > **User Error #2**: Duplicate buyers
+      > 
+      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh` <br>_(Assuming RC4 contains Alex Yeoh already)_
+      > 
+      > **Output**: Some buyers are already associated with this listing.
+      > 
+      > --- 
+      > 
+      > **User Error #3**: Buyer not found
+      > 
+      > **Input**: `addlistingbuyers RC4 buyer/NonExistentBuyer`
+      > 
+      > **Output**: The specified buyer NonExistentBuyer does not exist in the client list.
+      > 
+      > ---
+      > 
+      > **User Error #4**: Person is not a buyer
+      > 
+      > **Input**: `addlistingbuyers RC4 buyer/Bernice Yu` <br>_(Assuming Bernice Yu is a seller)_
+      > 
+      > **Output**: The specified person Bernice Yu is not a buyer.
       >
       > ---
 
