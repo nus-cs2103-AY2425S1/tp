@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -159,6 +161,7 @@ public class ParserUtilDateTest {
         int[] expected = new int[]{2025, 2022, 2002};
         for (int i = 0; i < 3; i++) {
             assertEquals(expected[i], ParserUtil.getYear(VALID_DEADLINES_EASY[i]).getKey());
+            assertTrue(ParserUtil.getYear(VALID_DEADLINES_EASY[i]).getValue());
         }
     }
 
@@ -166,6 +169,7 @@ public class ParserUtilDateTest {
     public void getYear_validDatesDifferentDelimiters_returnsCorrectYear() {
         for (String date : VALID_DEADLINES_DIFFERENT_DELIMITERS) {
             assertEquals(2025, ParserUtil.getYear(date).getKey());
+            assertTrue(ParserUtil.getYear(date).getValue());
         }
     }
 
@@ -173,6 +177,7 @@ public class ParserUtilDateTest {
     public void getYear_validDatesShortened_returnsCorrectYear() {
         for (String date : VALID_DEADLINES_SHORT_STRINGS) {
             assertEquals(2025, ParserUtil.getYear(date).getKey());
+            assertTrue(ParserUtil.getYear(date).getValue());
         }
     }
 
@@ -182,6 +187,9 @@ public class ParserUtilDateTest {
         for (int i = 0; i < 7; i++) {
             assertEquals(expected[i], ParserUtil.getYear(VALID_DEADLINES_BORDER_VALUES[i]).getKey());
         }
+        for (int i = 0; i < 7; i++) {
+            assertTrue(ParserUtil.getYear(VALID_DEADLINES_BORDER_VALUES[i]).getValue());
+        }
     }
 
     @Test
@@ -189,6 +197,9 @@ public class ParserUtilDateTest {
         int[] expected = new int[]{2024, 2024, 2024, 2010, 2012};
         for (int i = 0; i < 5; i++) {
             assertEquals(expected[i], ParserUtil.getYear(VALID_DEADLINES_MIXED[i]).getKey());
+        }
+        for (int i = 0; i < 5; i++) {
+            assertTrue(ParserUtil.getYear(VALID_DEADLINES_MIXED[i]).getValue());
         }
     }
 
@@ -293,6 +304,12 @@ public class ParserUtilDateTest {
         for (int i = 0; i < 9; i++) {
             assertEquals(expected[i], ParserUtil.getYear(INVALID_DEADLINES_NUMBERS_OUTSIDE_RANGE[i]).getKey());
         }
+        for (int i = 0; i < 6; i++) {
+            assertTrue(ParserUtil.getYear(INVALID_DEADLINES_NUMBERS_OUTSIDE_RANGE[i]).getValue());
+        }
+        for (int i = 6; i < 9; i++) {
+            assertFalse(ParserUtil.getYear(INVALID_DEADLINES_NUMBERS_OUTSIDE_RANGE[i]).getValue());
+        }
     }
 
     @Test
@@ -300,6 +317,9 @@ public class ParserUtilDateTest {
         int[] expected = new int[]{2024, 2023, 2025, 2023};
         for (int i = 0; i < 4; i++) {
             assertEquals(expected[i], ParserUtil.getYear(INVALID_DEADLINES_BORDER_VALUES[i]).getKey());
+        }
+        for (int i = 0; i < 4; i++) {
+            assertTrue(ParserUtil.getYear(INVALID_DEADLINES_BORDER_VALUES[i]).getValue());
         }
     }
 
