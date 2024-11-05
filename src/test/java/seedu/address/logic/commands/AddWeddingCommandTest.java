@@ -261,14 +261,18 @@ public class AddWeddingCommandTest {
         }
 
         @Override
-        public Person personWithAllTagsRemoved( Person personToDelete, Model model) {
+        public Person personWithAllTagsRemoved( Person personToDelete) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> tagsInBoth) {
+        public void deletePersonInWedding(Person editedPerson, Set<Tag> tagsInBoth) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void getWeddingFromTags(Set<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
