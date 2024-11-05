@@ -41,7 +41,7 @@ public class MarkAttendanceByStudentCommand extends Command {
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS =
             "Marked attendance of %1$s student for %2$s tutorial for %3$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
-            "The student does not take %1$s tutorial";
+            "Student %1$s does not take %2$s tutorial";
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE =
             "Student %1$s has attendance marked for the corresponding week of date %2$s";
 
@@ -152,8 +152,8 @@ public class MarkAttendanceByStudentCommand extends Command {
                     logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
                             + "\n - No participation found for " + student.getFullName()
                             + " for tutorial: " + tutorial.getSubject()));
-                    return new CommandException(
-                            String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject()));
+                    return new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT,
+                            student.getFullName(), tutorial.getSubject()));
                 });
     }
 

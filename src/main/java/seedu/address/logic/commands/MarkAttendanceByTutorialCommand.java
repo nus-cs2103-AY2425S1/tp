@@ -45,7 +45,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
             Marked attendance for the following students: %3$s
             Students with duplicate weekly attendance: %4$s
             """;
-    public static final String MESSAGE_EMPTY_TUTORIAL = "No students are enrolled in tutorial %1$s.";
+    public static final String MESSAGE_EMPTY_TUTORIAL = "No students are enrolled in %1$s tutorial.";
 
     private final Logger logger = LogsCenter.getLogger(MarkAttendanceByTutorialCommand.class);
 
