@@ -54,7 +54,7 @@ public class Lesson {
      * @param timeRange The time range to validate.
      * @return true if the time range is valid.
      */
-    private static boolean isValidTimeRange(String timeRange) {
+    public static boolean checkIsValidTimeRange(String timeRange) {
         return timeRange.matches(VALID_TIME_RANGE_REGEX);
     }
 
@@ -64,8 +64,8 @@ public class Lesson {
      * @param timeRange The time range to check.
      * @return true if the start time is before the end time.
      */
-    private static boolean isValidTimeOrder(String timeRange) {
-        if (isValidTimeRange(timeRange)) {
+    public static boolean checkIsValidTimeOrder(String timeRange) {
+        if (checkIsValidTimeRange(timeRange)) {
             String[] times = timeRange.split("-");
             LocalTime startTime = LocalTime.parse(times[0], TIME_FORMATTER);
             LocalTime endTime = LocalTime.parse(times[1], TIME_FORMATTER);
@@ -94,7 +94,7 @@ public class Lesson {
         }
         String day = parts[0];
         String timeRange = parts[1];
-        return Day.isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
+        return Day.isValidDay(day) && checkIsValidTimeRange(timeRange) && checkIsValidTimeOrder(timeRange);
     }
 
     /**
@@ -207,6 +207,25 @@ public class Lesson {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    /**
+     * Checks if this lesson's time range falls within a specified time range.
+     *
+     * @param otherTimeRange A time range in the format "HHmm-HHmm".
+     * @return true if this lesson's time range is overlapping the specified time range.
+     */
+    public boolean checkOverlappingTimeRange(String otherTimeRange) {
+        String[] times = otherTimeRange.split("-");
+        LocalTime otherStartTime = LocalTime.parse(times[0], TIME_FORMATTER);
+        LocalTime otherEndTime = LocalTime.parse(times[1], TIME_FORMATTER);
+
+        return ((startTime.equals(otherStartTime) || startTime.isBefore(otherStartTime))
+                && endTime.isAfter(otherStartTime))
+                || (startTime.isBefore(otherEndTime)
+                && (endTime.equals(otherEndTime) || endTime.isAfter(otherEndTime)))
+                || ((startTime.equals(otherStartTime) || (startTime.isAfter(otherStartTime))
+                && (endTime.equals(otherEndTime) || endTime.isBefore(otherEndTime))));
     }
 
     /**

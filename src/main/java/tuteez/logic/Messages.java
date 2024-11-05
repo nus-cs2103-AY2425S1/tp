@@ -25,6 +25,10 @@ public class Messages {
     public static final String MESSAGE_MISSING_PHONE =
             "Person phone number is required but missing. Please provide the phone of the person using p/.";
 
+    public static final String MESSAGE_MISSING_PREFIX_FOR_FIND =
+            "Missing a valid prefix. Please input at least one of the following: n/NAME a/ADDRESS t/TAG l/LESSON";
+    public static final String MESSAGE_EMPTY_KEYWORD = "Keywords cannot be empty after inputting prefix %1$s";
+
     public static final String MESSAGE_MISSING_REMARK_PREFIX = "The remark prefix 'r/' is missing";
     public static final String MESSAGE_MISSING_REMARK_INDEX_PREFIX = "The remark index prefix 'ri/' is missing";
     public static final String MESSAGE_MISSING_REMARK_INDEX = "Remark index is required for deletion but missing. "

@@ -12,7 +12,6 @@ import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_REMARK;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +27,9 @@ import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.ListCommand;
 import tuteez.logic.parser.exceptions.ParseException;
-import tuteez.model.person.NameContainsKeywordsPredicate;
 import tuteez.model.person.Person;
+import tuteez.model.person.predicates.CombinedPredicate;
+import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.remark.Remark;
 import tuteez.testutil.EditPersonDescriptorBuilder;
 import tuteez.testutil.PersonBuilder;
@@ -113,10 +113,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        List<String> keywords = Arrays.asList("alice", "bob");
+        FindCommand command = (FindCommand) parser.parseCommand(PersonUtil.getFindCommand(keywords));
+        assertEquals(new FindCommand(new CombinedPredicate(List.of(new NameContainsKeywordsPredicate(keywords)))),
+                command);
     }
 
     @Test
@@ -139,8 +139,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class,
-                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
     @Test
