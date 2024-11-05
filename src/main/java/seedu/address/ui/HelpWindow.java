@@ -19,7 +19,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String HELP_MESSAGE_COMMANDS = "Below are the list of commands TalentSG supports:\n\n"
             + "Add    |    Edit    |    List    |    Delete    |    View    |    Find    |    Filter    |    Clear  "
-            + "    |    Help    |    Exit\n\n";
+            + "  |    Summary    |    Help    |    Exit\n\n";
     public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "For additional information, "
             + "please refer to the user guide:\n " + USERGUIDE_URL;
 
