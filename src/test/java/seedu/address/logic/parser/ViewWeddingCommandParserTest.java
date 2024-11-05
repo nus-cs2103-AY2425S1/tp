@@ -17,7 +17,7 @@ public class ViewWeddingCommandParserTest {
     @Test
     public void parse_validArgs_returnsViewWeddingCommand() {
         String input = "alice & bob";
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("alice & bob");
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate("Alice & Bob");
         ViewWeddingCommand expectedCommand = new ViewWeddingCommand(predicate);
         assertParseSuccess(parser, input, expectedCommand);
     }

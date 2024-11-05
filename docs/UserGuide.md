@@ -336,8 +336,9 @@ If you are looking for participants tagged to a particular wedding, you can use 
 
 Format: `view-wed NAME & NAME`
 
-* `view-wed` shows based on wedding names that match the keyword
-* `KEYWORD` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
+* `view-wed` shows particpants based on wedding names that match the keyword
+* `NAME & NAME` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
+* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`
 * Only full words will be matched e.g. `jak` will not match `Jake`
 * Persons matching at least one keyword will be returned (i.e. `AND` search).
   e.g. `Alice` will not return `Alice & Bob`

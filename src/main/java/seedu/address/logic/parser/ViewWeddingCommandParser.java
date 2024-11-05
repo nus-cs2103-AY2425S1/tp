@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -26,7 +27,7 @@ public class ViewWeddingCommandParser implements Parser<ViewWeddingCommand> {
 
         ParserUtil.parseWeddingName(trimmedArgs);
 
-        String weddingNameKeyword = trimmedArgs.toLowerCase();
+        String weddingNameKeyword = StringUtil.capitaliseString(trimmedArgs);
 
         return new ViewWeddingCommand(new TagContainsKeywordsPredicate(weddingNameKeyword));
     }
