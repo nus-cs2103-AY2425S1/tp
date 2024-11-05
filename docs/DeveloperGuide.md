@@ -79,7 +79,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Guest`, `Vendor` objects residing in the `Model`.
 
 ### Logic component
 
@@ -91,7 +91,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_guest 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteGuestSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
 
@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteGuestCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGuestCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a guest).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -444,36 +444,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 **Data Requirements**
-1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
+1. Size: The system should support storage for up to 300 guests and 300 vendors per wedding. 
 1. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
-1. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
-1. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
+1. Persistency: All guest and vendor information must be saved persistently in a JSON file and remain accessible even after system shutdown or failure.
+1. Backup Frequency: Automatic backup of data should be created whenever the application is closed.
 
 **Environment Requirements**
 1. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
 1. Dependencies: Java 17 should be the core language.
 
 **Accessibility**
-1. Provide command-line help documentation that can be accessed at any time with a simple command (help).
-
-**Capacity**
-1. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
+1. Provide help documentation that can be accessed at any time with a simple command (help).
 
 **Fault Tolerance**
-
 1. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
-1. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
+1. Ensure that invalid input (e.g., incorrect email format) does not result in data corruption.
 
 **Performance Requirements**
-
-1. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
-1. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
-1. System startup time should not exceed five seconds on standard hardware.
-
+1. The system should respond to user input within ten seconds, even for lists of up to 300 guests and 300 vendors.
+1. System startup time should not exceed ten seconds on standard hardware.
 
 ### Glossary
 **Technical**
-*  **Mainstream OS**: Windows, Linux, Unix, MacOS
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
 *  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
 *  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
