@@ -25,6 +25,11 @@ public class UpdateAppointmentStatusParser implements Parser<UpdateAppointmentSt
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NRIC,
             PREFIX_DATE, PREFIX_START_TIME, PREFIX_STATUS);
 
+        if (!argumentMultimap.getPreamble().equals("")) {
+            throw new ParseException("Please do not enter anything before the keywords!\n"
+            + "Please remove this from your input: " + argumentMultimap.getPreamble());
+        }
+
         if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC, PREFIX_DATE, PREFIX_START_TIME, PREFIX_STATUS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 UpdateAppointmentStatusCommand.MESSAGE_USAGE));
