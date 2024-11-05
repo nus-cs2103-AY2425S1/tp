@@ -81,4 +81,12 @@ public class Attendance {
     public int hashCode() {
         return session.hashCode();
     }
+
+    /**
+     * Retrieve LocalDate of session
+     * @return
+     */
+    public LocalDate getDate() {
+        return this.session;
+    }
 }

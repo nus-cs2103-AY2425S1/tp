@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -90,56 +88,6 @@ public class Person {
      */
     public Set<Attendance> getAttendance() {
         return Collections.unmodifiableSet(attendance);
-    }
-
-    /**
-     * Generates the string representation of the instance's specified field of type 'c'
-     * @param c class that corresponds with a field of the instance
-     * @return string representation of that field
-     */
-    public String getString(Class c) {
-        if (c.equals(Name.class)) {
-            return this.getName().toString();
-        } else if (c.equals(Phone.class)) {
-            return this.getPhone().toString();
-        } else if (c.equals(Email.class)) {
-            return this.getEmail().toString();
-        } else if (c.equals(Telegram.class)) {
-            return this.getTelegram().toString();
-        } else if (c.equals(Role.class)) {
-            StringBuilder r = new StringBuilder("| ");
-            Set<Role> roles = this.getRoles();
-            for (Role role : roles) {
-                r.append(role + " | ");
-            }
-            return r.toString();
-        } else if (this.isMember() && c.equals(Attendance.class)) {
-            StringBuilder a = new StringBuilder("| ");
-            Set<Attendance> sessions = this.getAttendance();
-            for (Attendance sesh : sessions) {
-                a.append(sesh + " | ");
-            }
-            return a.toString();
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * Formulates a message that displays all information of the specified contact
-     * @return String message which contains all the information of the specified contact
-     */
-    public String generateContactInformation() {
-        Field[] fields = Person.class.getDeclaredFields();
-        StringBuilder contactInfo = new StringBuilder("");
-        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
-                ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
-                : field.getName().toUpperCase().equals("ATTENDANCE")
-                ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
-                : field.getName().toUpperCase().equals("ISFAVOURITE")
-                ? "> " + this.isFavourite + " CONTACT\n"
-                : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
-        return contactInfo.toString();
     }
 
     /**

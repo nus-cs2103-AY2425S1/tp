@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * Represents a Person's telegram username in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
@@ -54,6 +56,20 @@ public class Telegram {
      */
     public static boolean isValidTelegramLength(String test) {
         return test.length() >= VALIDATION_LENGTH_MIN && test.length() <= VALIDATION_LENGTH_MAX;
+    }
+
+    /**
+     * Checks if telegram handle is at least 5 characters long
+     * and that it contains no illegal characters. Otherwise
+     * throws relevant exception
+     * @throws CommandException
+     */
+    public static void isValidHandle(String tele) throws CommandException {
+        if (!isValidTelegramLength(tele)) {
+            throw new CommandException(Telegram.LENGTH_CONSTRAINTS);
+        } else if (!isValidTelegram(tele)) {
+            throw new CommandException(Telegram.MESSAGE_CONSTRAINTS);
+        }
     }
 
     @Override

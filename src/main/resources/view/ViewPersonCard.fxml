@@ -5,9 +5,38 @@
 
 <?import java.net.URL?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <Label id="personTitle" text="Contact Info" />
-    <Label fx:id="personInfo" text="{info}"/>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.GridPane?>
+
+<VBox fx:id="view" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label id="viewTitle" text="Contact Information" />
+    <GridPane>
+    <HBox alignment="BASELINE_LEFT" prefWidth="1250">
+        <Label id="viewName" fx:id="viewName"/>
+    </HBox>
+    </GridPane>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Phone Number: "/>
+        <Label id="viewPhone" fx:id="viewPhone"/>
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Email Address: "/>
+        <Label id="viewEmail" fx:id="viewEmail"/>
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Telegram Handle: "/>
+        <Label id="viewTelegram" fx:id="viewTelegram"/>
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Roles: "/>
+        <FlowPane fx:id="viewRoles" />
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Sessions Attended: "/>
+        <FlowPane fx:id="viewAttendance" />
+    </HBox>
     <stylesheets>
         <URL value="@ViewPersonCard.css"/>
     </stylesheets>
