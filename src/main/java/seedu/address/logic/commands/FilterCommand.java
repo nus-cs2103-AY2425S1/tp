@@ -17,11 +17,11 @@ import seedu.address.model.person.PersonWithCriteriaPredicate;
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose appointment dates "
-            + "or age group are within the specified range. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons based on specified criteria: "
+            + "appointment dates within the range, age group range, or matching tags.\n"
             + "Parameters: "
             + PREFIX_AGE + "AGE RANGE "
-            + PREFIX_APPOINTMENT + "APPOINTMENT "
+            + PREFIX_APPOINTMENT + "APPOINTMENT RANGE "
             + PREFIX_TAG + "TAG \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_AGE + " 70-79 "
