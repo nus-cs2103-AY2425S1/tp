@@ -17,6 +17,10 @@ import seedu.address.model.student.Subject;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    
+    /**
+     * Returns a list of sample students.
+     */
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -39,7 +43,10 @@ public class SampleDataUtil {
                     new Subject("Economics"), new Rate("550.15"), new PaidAmount(), new OwedAmount("0")),
         };
     }
-
+    
+    /**
+     * Returns a {@code ReadOnlyAddressBook} containing the students in the {@code SampleDataUtil}.
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Student sampleStudent : getSampleStudents()) {
