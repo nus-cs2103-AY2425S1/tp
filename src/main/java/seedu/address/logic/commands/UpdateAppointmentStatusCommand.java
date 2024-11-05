@@ -79,4 +79,18 @@ public class UpdateAppointmentStatusCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        UpdateAppointmentStatusCommand otherCommand = (UpdateAppointmentStatusCommand) other;
+        return nric.equals(otherCommand.nric)
+            && startDateTime.equals(otherCommand.startDateTime)
+            && status.equals(otherCommand.status);
+    }
+
 }
