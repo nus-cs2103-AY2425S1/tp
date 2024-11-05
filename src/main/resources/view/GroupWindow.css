@@ -1,9 +1,5 @@
-#copyButton, #helpMessage {
+#helpMessage {
     -fx-text-fill: white;
-}
-
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 #members {
@@ -26,5 +22,13 @@
     -fx-text-fill: #010504;
 }
 #groupWindowContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#4A628A, 20%);
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #B9E5E8;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #DFF2EB;
 }
