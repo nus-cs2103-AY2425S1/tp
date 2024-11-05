@@ -127,6 +127,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteVendor(Vendor target) throws AssociationDeleteException {
         eventTory.removeVendor(target);
+        // Only reset view if the deleted vendor is the currently viewed vendor and
+        // deletion is successful (error not thrown)
+        if (currentUiState.get() == UiState.VENDOR_DETAILS && target.isSameId(selectedVendor.getValue())) {
+            selectedVendor.setValue(null);
+            currentUiState.setValue(UiState.DEFAULT);
+        }
     }
 
     @Override
@@ -151,6 +157,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) throws AssociationDeleteException {
         eventTory.removeEvent(target);
+        // Only reset view if the deleted event is the currently viewed event and
+        // deletion is successful (error not thrown)
+        if (currentUiState.get() == UiState.EVENT_DETAILS && target.isSameId(selectedEvent.getValue())) {
+            selectedEvent.setValue(null);
+            currentUiState.setValue(UiState.DEFAULT);
+        }
     }
 
     @Override
