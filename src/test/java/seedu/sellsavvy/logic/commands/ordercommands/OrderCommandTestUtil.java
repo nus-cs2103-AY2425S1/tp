@@ -18,7 +18,10 @@ import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.order.Order;
+<<<<<<< HEAD
 import seedu.sellsavvy.model.order.OrderList;
+=======
+>>>>>>> db3a49b61d6e1e13999c0a65722bff317741e73d
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;

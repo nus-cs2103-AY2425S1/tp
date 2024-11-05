@@ -25,9 +25,10 @@ import seedu.sellsavvy.model.person.Person;
  */
 public class AddOrderCommand extends Command {
 
-    public static final String COMMAND_WORD = "addOrder";
+    public static final String COMMAND_WORD = "addorder";
+    public static final String COMMAND_ALIAS = "addo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order under the specified person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order under the specified customer.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ITEM + "ITEM "
             + PREFIX_DATE + "DELIVERY_BY "
@@ -41,7 +42,7 @@ public class AddOrderCommand extends Command {
     public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has a pending order with the same details, "
-            + "verify if this is a mistake\n";
+            + "verify if this is a mistake.\n";
 
     private final Index index;
     private final Order toAdd;
@@ -69,15 +70,16 @@ public class AddOrderCommand extends Command {
 
         Person personToAddUnder = lastShownList.get(index.getZeroBased());
         OrderList orderList = personToAddUnder.getOrderList();
-        String feedbackToUser = orderList.contains(toAdd)
+        orderList.add(toAdd);
+        model.updateSelectedPerson(personToAddUnder);
+        personToAddUnder.resetFilteredOrderList();
+
+        String feedbackToUser = orderList.containsDuplicateOrder(toAdd)
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
         feedbackToUser += toAdd.hasDateElapsed()
                 ? MESSAGE_OUTDATED_WARNING
                 : "";
-        orderList.add(toAdd);
-        model.updateSelectedPerson(personToAddUnder);
-        personToAddUnder.resetFilteredOrderList();
 
         return new CommandResult(feedbackToUser
                 + String.format(MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd)));

@@ -58,24 +58,29 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
 
         case AddPersonCommand.COMMAND_WORD:
+        case AddPersonCommand.COMMAND_ALIAS:
             return new AddPersonCommandParser().parse(arguments);
 
         case EditPersonCommand.COMMAND_WORD:
+        case EditPersonCommand.COMMAND_ALIAS:
             return new EditPersonCommandParser().parse(arguments);
 
         case DeletePersonCommand.COMMAND_WORD:
+        case DeletePersonCommand.COMMAND_ALIAS:
             return new DeletePersonCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindPersonCommand.COMMAND_WORD:
+        case FindPersonCommand.COMMAND_ALIAS:
             return new FindPersonCommandParser().parse(arguments);
 
         case ListPersonCommand.COMMAND_WORD:
+        case ListPersonCommand.COMMAND_ALIAS:
             return new ListPersonCommand();
 
         case ExitCommand.COMMAND_WORD:
@@ -85,24 +90,31 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case ListOrderCommand.COMMAND_WORD:
+        case ListOrderCommand.COMMAND_ALIAS:
             return new ListOrderCommandParser().parse(arguments);
 
         case FilterOrderCommand.COMMAND_WORD:
+        case FilterOrderCommand.COMMAND_ALIAS:
             return new FilterOrderCommandParser().parse(arguments);
 
         case AddOrderCommand.COMMAND_WORD:
+        case AddOrderCommand.COMMAND_ALIAS:
             return new AddOrderCommandParser().parse(arguments);
 
         case DeleteOrderCommand.COMMAND_WORD:
+        case DeleteOrderCommand.COMMAND_ALIAS:
             return new DeleteOrderCommandParser().parse(arguments);
 
         case EditOrderCommand.COMMAND_WORD:
+        case EditOrderCommand.COMMAND_ALIAS:
             return new EditOrderCommandParser().parse(arguments);
 
         case MarkOrderCommand.COMMAND_WORD:
+        case MarkOrderCommand.COMMAND_ALIAS:
             return new MarkOrderCommandParser().parse(arguments);
 
         case UnmarkOrderCommand.COMMAND_WORD:
+        case UnmarkOrderCommand.COMMAND_ALIAS:
             return new UnmarkOrderCommandParser().parse(arguments);
 
         default:

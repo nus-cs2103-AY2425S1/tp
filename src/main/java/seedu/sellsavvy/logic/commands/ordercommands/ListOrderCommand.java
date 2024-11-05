@@ -17,14 +17,16 @@ import seedu.sellsavvy.model.person.Person;
  * Lists all orders of a specified person to the user.
  */
 public class ListOrderCommand extends Command {
-    public static final String COMMAND_WORD = "listOrder";
+    public static final String COMMAND_WORD = "listorder";
+    public static final String COMMAND_ALIAS = "listo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": List all orders under the person identified by the index number used in the displayed person list.\n"
+            + ": List all orders under the customer identified by the index number "
+            + "used in the displayed customer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_LIST_ORDER_SUCCESS = "Listed all orders under %1$s";
+    public static final String MESSAGE_LIST_ORDER_SUCCESS = "Listed all orders under %1$s.";
 
     private final Index index;
 

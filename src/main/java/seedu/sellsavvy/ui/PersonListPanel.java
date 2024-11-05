@@ -40,6 +40,7 @@ public class PersonListPanel extends UiPart<Region> {
         personList.addListener(orderChangeListener);;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        handleChangeInPersons();
     }
 
     /**

@@ -33,6 +33,14 @@
     -fx-alignment: center;
 }
 
+.label-title-text {
+    -fx-font-size: 24pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+    -fx-alignment: center;
+}
+
 .label-instruction {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Light";

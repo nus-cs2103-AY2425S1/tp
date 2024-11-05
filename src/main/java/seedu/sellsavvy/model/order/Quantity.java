@@ -10,7 +10,7 @@ import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Item quantity should be a positive integer";
+            "Item quantity should be a positive integer.";
     public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
     public final String value;
 

@@ -21,7 +21,7 @@ public class OrderList implements Iterable<Order> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent order as the given argument.
      */
     public boolean contains(Order toCheck) {
         requireNonNull(toCheck);
@@ -29,7 +29,15 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Replaces the first instance of an equivalent order {@code target} in the list with {@code editedOrder}.
+     * Returns true if the list contains an equivalent but different order as the given argument.
+     */
+    public boolean containsDuplicateOrder(Order toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(order -> toCheck.equals(order) && toCheck != order);
+    }
+
+    /**
+     * Replaces the {@code target} order in the list with {@code editedOrder}.
      * {@code target} must exist in the list.
      */
     public void setOrder(Order target, Order editedOrder) {
@@ -65,8 +73,8 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Removes the first instance of an equivalent order from the list.
-     * An equivalent order must exist in the list.
+     * Removes the given order from the list.
+     * The same order must exist in the list.
      */
     public void remove(Order toRemove) {
         requireNonNull(toRemove);
