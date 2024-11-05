@@ -301,23 +301,27 @@ Format: `archive INDEX`
 Examples:
 * `archive 1` archives the first person in the list, removing it and storing it in an archived list
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+### Unarchive a Client: `unarchive`
+Unarchives a client and adds the client back to the main address book.
 
-<br>
-An unarchive feature is in the works and will be available in the future.
+Format: `unarchive INDEX`
 
-</div>
+* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* `unarchive 1` removes the first person from the archived list, adding it back to the main client list
 
 ### Listing all archived clients: `archive-list`
 Shows a list of all archived clients' contacts in Clientele+.
 
 Format: `archive-list`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
 <br>
-Use the `list` command to return to the main client list.
-
+The archive list is a purely read-only list, the only available feature to manipulate it is the command `unarchive`. 
+<br>
+Other commands will require to navigate back to the main client list first using `list`
 </div>
 
 ### Deadline Reminder
@@ -401,6 +405,7 @@ Action | Format, Examples
 **Whitelist list** | `whitelist`
 **Sort** | `sort FIELD ORDER` <br> e.g., `sort name ascending` or `sort deadline descending`
 **Archive** | `archive INDEX`
+**Unarchive** | `unarchive INDEX`
 **Archive-list** | `archive-list`
 **List** | `list`
 **Help** | `help`
