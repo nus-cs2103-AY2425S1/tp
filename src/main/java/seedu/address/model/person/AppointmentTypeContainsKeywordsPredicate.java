@@ -31,12 +31,11 @@ public class AppointmentTypeContainsKeywordsPredicate implements Predicate<Appoi
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentTypeContainsKeywordsPredicate)) {
+        if (!(other instanceof AppointmentTypeContainsKeywordsPredicate
+                otherAppointmentTypeContainsKeywordsPredicate)) {
             return false;
         }
 
-        AppointmentTypeContainsKeywordsPredicate otherAppointmentTypeContainsKeywordsPredicate =
-                (AppointmentTypeContainsKeywordsPredicate) other;
         return keywords.equals(otherAppointmentTypeContainsKeywordsPredicate.keywords);
     }
 

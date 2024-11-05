@@ -60,10 +60,9 @@ public class FindPersonCommand extends FindCommand<Person> {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof FindPersonCommand)) {
+        if (!(other instanceof FindPersonCommand otherFindPersonCommand)) {
             return false;
         }
-        FindPersonCommand otherFindPersonCommand = (FindPersonCommand) other;
         return predicate.equals(otherFindPersonCommand.predicate);
     }
 }

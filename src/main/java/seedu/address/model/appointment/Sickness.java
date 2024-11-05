@@ -49,11 +49,10 @@ public class Sickness {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Sickness)) {
+        if (!(other instanceof Sickness otherSickness)) {
             return false;
         }
 
-        Sickness otherSickness = (Sickness) other;
         return value.equals(otherSickness.value);
     }
 
