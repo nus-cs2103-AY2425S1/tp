@@ -26,7 +26,8 @@ public class PaidCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Policy %1$s for %2$s is marked as paid. Next payment date updated.";
     public static final String MESSAGE_FULLY_PAID = "The policy %1$s for %2$s will be fully paid after this payment.";
-    public static final String MESSAGE_INVALID_POLICY = "The policy %1$s does not exist for %2$s.";
+    public static final String MESSAGE_INVALID_POLICY = "The policy associated with index %1$s does not exist for "
+            + "%2$s.";
     public static final String MESSAGE_INVALID_PAYDATE = "The policy %1$s for %2$s is fully paid.";
 
     private final Index targetIndex;
@@ -61,19 +62,19 @@ public class PaidCommand extends Command {
         Policy policyToUpdate = personToUpdate.getPolicies().get(policyIndex.getZeroBased());
 
         if (policyToUpdate.isFullyPaid()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyIndex.getOneBased(),
+            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyToUpdate.getPolicyName(),
                     personToUpdate.getName()));
         }
 
         if (policyToUpdate.isExpiringSoon()) {
             policyToUpdate.updateNextPaymentDate();
-            return new CommandResult(String.format(MESSAGE_FULLY_PAID, policyIndex.getOneBased(),
+            return new CommandResult(String.format(MESSAGE_FULLY_PAID, policyToUpdate.getPolicyName(),
                     personToUpdate.getName()));
         }
 
         policyToUpdate.updateNextPaymentDate();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, policyIndex.getOneBased(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, policyToUpdate.getPolicyName(),
                 personToUpdate.getName()));
     }
 
