@@ -152,6 +152,7 @@ public class ModelManager implements Model {
             updateVisibleRentalInformationList(List.of());
             setLastViewedClient(null);
         }
+        updateVisibleRentalInformationList(List.of());
     }
 
     @Override
