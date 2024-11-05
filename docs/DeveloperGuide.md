@@ -218,6 +218,10 @@ _{more aspects and alternatives to be added}_
 The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
 <puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
 
+How an OweCommand operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/OweSequenceDiagram-Model.puml" alt="OweSequenceDiagram-Model" height="1400" />
+
 #### Design considerations:
 
 **Aspect: How owe executes:**
@@ -231,7 +235,7 @@ The following activity diagram summarizes what happens when a user wants to trac
     * Cons: Might not be user-friendly as user would need to find out what is the 
     tuition rate charged and calculate how much tuition fee did the student owe.
 
-<puml src="diagrams/OweSequenceDiagram-Model.puml" width="500" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
