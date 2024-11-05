@@ -119,7 +119,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean hasLink(Person patient, Person caregiver) {
         return patient.isSamePerson(caregiver)
-                || patient.hasPatient(caregiver.getNric()) && caregiver.hasCaregiver(patient.getNric())
                 || patient.hasCaregiver(caregiver.getNric()) && caregiver.hasPatient(patient.getNric());
     }
 
