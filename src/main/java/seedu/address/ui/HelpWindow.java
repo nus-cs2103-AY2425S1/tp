@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -27,7 +28,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL =
             "https://ay2425s1-cs2103t-t14-4.github.io/tp/UserGuide.html#quick-start";
-    public static final String HELP_MESSAGE =
+
+    public static final String HELP_WINDOW_MESSAGE =
             "For more information, please refer to the user guide.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -35,6 +37,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private TableView<CommandSummary> commandTable;
+
+    @FXML
+    private StackPane moreInfo;
 
     @FXML
     private VBox mainContainer;
@@ -51,6 +56,10 @@ public class HelpWindow extends UiPart<Stage> {
         Label titleLabel = new Label("Command Summary");
         titleLabel.getStyleClass().add("help-title");
         mainContainer.getChildren().add(0, titleLabel);
+        Label infoLabel = new Label(HELP_WINDOW_MESSAGE); // Use HELP_MESSAGE for the label text
+        infoLabel.getStyleClass().add("label"); // Add CSS style
+        moreInfo.getChildren().add(infoLabel); // Add the label to moreInfo
+        moreInfo.setPrefHeight(40);
         initializeCommandTable();
     }
 
@@ -84,9 +93,6 @@ public class HelpWindow extends UiPart<Stage> {
         commandTable.getColumns().addAll(actionCol, commandFormatCol, exampleCol);
 
         commandTable.getItems().addAll(
-                new CommandSummary("Save Data Automatically",
-                        "Automatic",
-                        "No command required"),
                 new CommandSummary(
                         "Add New Client",
                         "add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
@@ -101,19 +107,32 @@ public class HelpWindow extends UiPart<Stage> {
                                 + "[t/ <TIER>] [s/ <STATUS>]"
                                 + "[rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>]",
                         "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
-                                + "t/ bronze s/ none ra/ Specialist in eye care"),
-                new CommandSummary("Find a Client by Details",
-                        "filter <FLAG>/ <FLAG FIELD>",
-                        "filter n/ TAN LESHEW"),
-                new CommandSummary("Undo Previous Command",
-                        "undo",
-                        "undo"),
-                new CommandSummary("Help",
+                                + "t/ bronze s/ urgent ra/ Specialist in eye care"),
+                new CommandSummary("List All Clients",
+                        "list",
+                        "list"),
+                new CommandSummary("Filter Client List",
+                        "filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] "
+                                + "[t/<TIER>] [i/<INCOME>]",
+                        "filter n/ TAN LESHEW t/ gold"),
+                new CommandSummary("View Client Details",
+                        "view <INDEX>",
+                        "view 1"),
+                new CommandSummary("Close Client Details",
+                        "close",
+                        "close"),
+                new CommandSummary("View Help",
                         "help",
                         "help"),
-                new CommandSummary("Exit",
+                new CommandSummary("Undo Command",
+                        "undo",
+                        "undo"),
+                new CommandSummary("Exit Application",
                         "exit",
-                        "exit")
+                        "exit"),
+                new CommandSummary("Clear All Data",
+                        "clear",
+                        "clear")
         );
 
         commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
