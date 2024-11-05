@@ -1,4 +1,5 @@
 package seedu.address.model.exceptions;
+
 /**
  * Signals that a volunteer is already marked as available on the given date.
  */

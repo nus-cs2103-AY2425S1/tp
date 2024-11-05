@@ -1,5 +1,9 @@
 package seedu.address.logic.commands.volunteercommands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -8,13 +12,11 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
-import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Removes a list of dates from a volunteer's available dates
+ */
 public class VolunteerRemoveDateCommand extends Command {
 
     public static final String COMMAND_WORD = "unfree";

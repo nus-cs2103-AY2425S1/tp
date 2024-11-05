@@ -32,7 +32,7 @@ public class VolunteerDates {
      * @param listOfDates A valid list of dates.
      */
     public VolunteerDates(String listOfDates) throws DateTimeParseException, VolunteerDuplicateDateException {
-        String[] strings = listOfDates.split(", ");
+        String[] strings = listOfDates.split(",");
         this.addStringOfDatesToAvailList(strings);
     }
 
@@ -55,6 +55,13 @@ public class VolunteerDates {
         }
         this.datesListAsObservableString.set(this.toString());
     }
+
+    /**
+     * Removes a given string of dates from its list of dates.
+     * @param dates
+     * @throws DateTimeParseException
+     * @throws VolunteerDuplicateDateException
+     */
 
     public void removeStringOfDatesFromAvailList(String... dates) throws VolunteerDeleteMissingDateException {
         for (String date : dates) {
@@ -100,7 +107,7 @@ public class VolunteerDates {
      * @return
      */
     public static boolean isValidListOfDates(String test) {
-        String[] dates = test.split(", ");
+        String[] dates = test.split(",");
         for (String s : dates) {
             if (!isValidDate(s)) {
                 return false;

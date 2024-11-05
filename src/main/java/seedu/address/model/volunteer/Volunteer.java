@@ -136,13 +136,17 @@ public class Volunteer {
 
     /**
      * Adds a given string list of dates to the volunteer's available dates
-     * @param date
+     * @param dateList
      */
     public void addAvailableDates(String dateList) {
-        String[] dates = dateList.split(", ");
+        String[] dates = dateList.split(",");
         this.availableDates.addStringOfDatesToAvailList(dates);
     }
 
+    /**
+     * Removes a given string list of dates from the volunteer's available dates
+     * @param dateList
+     */
     public void removeAvailableDates(String dateList) {
         String[] dates = dateList.split(",");
         this.availableDates.removeStringOfDatesFromAvailList(dates);
