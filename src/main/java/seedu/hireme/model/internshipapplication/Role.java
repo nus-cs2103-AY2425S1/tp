@@ -10,7 +10,8 @@ import seedu.hireme.logic.validator.RoleValidator;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Role should only contain alphanumeric characters, spaces and it should not blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Role should only contain alphanumeric characters, spaces and it should not blank";
 
     private final String value;
 
