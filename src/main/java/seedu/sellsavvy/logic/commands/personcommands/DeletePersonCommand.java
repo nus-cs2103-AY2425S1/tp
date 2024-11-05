@@ -18,7 +18,8 @@ import seedu.sellsavvy.model.person.Person;
  */
 public class DeletePersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deletecustomer";
+    public static final String COMMAND_ALIAS = "deletec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the customer identified by the index number used in the displayed customer list.\n"
