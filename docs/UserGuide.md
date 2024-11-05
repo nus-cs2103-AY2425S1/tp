@@ -1,72 +1,98 @@
----
-layout: page
-title: User Guide
----
+# Welcome to BakeBuddy
 
-BakeBuddy is an intuitive Command Line Interface (CLI)-based desktop application, tailor-made to empower home-based
-bakery owners to efficiently manage their customers, suppliers, pastries, ingredients, customer and supply orders.
-By combining the speed of a CLI with the user-friendliness of a simple Graphical User Interface (GUI), BakeBuddy offers
-the perfect balance between efficiency and usability. BakeBuddy is an address book solution designed for users who
-prefer quick and efficient commands over traditional GUI-based apps, making orders, customer and supplier management
-seamless for busy home-based bakery owners.
+BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
+efficiency in mind, it combines the power of a Command Line Interface (CLI) with intuitive features to help you focus
+on what matters most - creating delicious baked goods.
+
+BakeBuddy is a desktop application that streamlines your bakery operations by helping you manage:
+- 🧁 Pastries and recipes
+- 👥 Customers and their orders
+- 📦 Suppliers and ingredients
+- 📋 Order tracking and fulfillment
+- 🗄️ Inventory management
+
+## Why Choose BakeBuddy?
+
+- **Speed First**: Execute commands quickly through our CLI, perfect for busy bakers
+- **User-Friendly**: Simple GUI elements complement the CLI for enhanced usability
+- **All-in-One Solution**: Manage every aspect of your bakery business from a single application
+- **Efficiency Focused**: Designed specifically for home-based bakery owners who value their time
+
+## Getting Started
+
+This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 * Table of Contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Before You Begin ✔️
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Step 1: Check if Your Computer is Ready
+First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Open your computer's terminal:
+    - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
+    - **For Mac**: Press Command + Space, type `terminal`, and press Enter
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+2. In the black window that appears, type exactly:
+   ```
+   java --version
+   ```
+   and press Enter
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. What you should see:
+    - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
+    - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Step 2: Install BakeBuddy
 
-    * `list` : Lists all contacts.
+1. Download BakeBuddy:
+    - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
+    - Look for the file named `bakebuddy.jar`
+    - Click on it to download
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+2. Create a home for BakeBuddy:
+    - Create a new folder on your computer named `BakeBuddy`
+    - Move the downloaded `bakebuddy.jar` file into this folder
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+3. Start BakeBuddy:
+    - Open your terminal (like in Step 1)
+    - Type `cd ` (with a space after cd)
+    - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
+    - Press Enter
+    - Type:
+      ```
+      java -jar bakebuddy.jar
+      ```
+    - Press Enter
 
-    * `clear` : Deletes all contacts.
+   You should see the BakeBuddy window appear!
 
-    * `exit` : Exits the app.
+### Step 3: Try Your First Commands
 
-1. Refer to the [Features](#features) below for details of each command.
+Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
---------------------------------------------------------------------------------------------------------------------
+1. Add your first ingredient:
+   ```
+   addPastry
+   ```
+   ↳ This adds a chocolate cake that costs $45.00 and marks it as a bestseller
+
+2. Add your first customer:
+   ```
+   addCustomer n/Jane Doe p/98765432 e/jane@email.com
+   ```
+   ↳ This adds a customer named Jane with her phone number and email
+
+3. See what you've added:
+    - Type `list pastries` to see your pastry
+    - Type `list customers` to see your customer
+
+Refer to the [Features](#features) below for details of each command.
 
 ## Features
-
-<div markdown="block" class="alert alert-info">
-
-**Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
 
 ### **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue, along with its ingredients.
@@ -163,4 +189,3 @@ helping ensure customer order fulfillment.
 Clears all entries from the address book.
 
 Format: `clear`
-
