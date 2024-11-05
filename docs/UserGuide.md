@@ -330,7 +330,7 @@
   <br>
 
   <div class="box box-info">
-  
+
   **Format**: `clear`
   </div>
   <br>
@@ -361,14 +361,14 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `delete PARAMETER INDEX`
   </div>
   <br>
 
   Deletes the potential hire/employee at the specified `INDEX`.
 
-  `PARAMETER`: 
+  `PARAMETER`:
   * `e` for employees
   * `ph` for potential hires.
 
@@ -409,7 +409,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `demote INDEX`
   </div>
   <br>
@@ -453,7 +453,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]`
   </div>
   <br>
@@ -499,7 +499,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
   </div>
   <br>
@@ -533,7 +533,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `exit`
   </div>
   <br>
@@ -559,17 +559,17 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
   </div>
   <br>
 
-  `PARAMETER`: 
+  `PARAMETER`:
   * `e` for employees.
   * `ph` for potential hires.
   * `all` for both employees and potential hires.
 
-  `KEYWORD`: 
+  `KEYWORD`:
   * `n/[NAMES]` `p/[PHONE NUMBERS]` `e/[EMAILS]` `d/[DEPARTMENTS]` `r/[ROLES]`
 
   <div class="box" type="tip" seamless>
@@ -584,7 +584,7 @@
   with name `alice`, with phone number `123445678` and with email `alice@example.com`.
   * The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
   `find all e/bob@example.com alice@example.com`.
-  * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
+  * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match
   `find all e/john@example.com n/john`.
   * Persons matching at least one keyword in every field specified will be returned.
   e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
@@ -629,7 +629,7 @@
   <br>
 
   <div class="box box-info">
-  
+
   **Format**: `help`
   </div>
 
@@ -655,16 +655,16 @@
   <br>
 
   <div class="box box-info">
-  
+
   **Format**: `list KEYWORD`
   </div>
   <br>
 
   Lists type of persons based on the parameter given.
 
-  `KEYWORD`: 
+  `KEYWORD`:
   * `all` for all persons.
-  * `ph` for potential hires. 
+  * `ph` for potential hires.
   * `e` for employees.
 
   Examples:
@@ -693,7 +693,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
   </div>
   <br>
@@ -727,7 +727,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `promote INDEX CONTRACT_END_DATE`
   </div>
   <br>
@@ -775,7 +775,7 @@
 
 
   <div class="box box-info">
-  
+
   **Format**: `sort FIELD [ORDER]`
   </div>
   <br>
@@ -794,7 +794,7 @@
 
   <div class="box" type="tip" seamless>
 
-  **Tips:** 
+  **Tips:**
   * Sort only sorts the contacts show at the current point in time.
   * When sort date is used, potential hires show up at the bottom as they do not have a contract end date.
   * If the order is left out StaffSync will sort in ascending order by default.
