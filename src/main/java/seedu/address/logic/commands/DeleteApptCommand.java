@@ -16,7 +16,6 @@ import seedu.address.model.patient.Patient;
 /**
  * Deletes an appointment from a patient in the address book.
  * The appointment is identified by the NRIC of the patient and the date and time of the appointment.
- *
  */
 public class DeleteApptCommand extends Command {
     public static final String COMMAND_WORD = "deleteappt";
@@ -32,8 +31,8 @@ public class DeleteApptCommand extends Command {
 
     /**
      * Creates a DeleteApptCommand to delete the specified {@code Appt}
-     * @param apptDateTime
-     * @param nric
+     * @param apptDateTime {@code LocalDateTime} of the appointment to delete
+     * @param nric {@code Nric} of the patient
      */
     public DeleteApptCommand(Nric nric, LocalDateTime apptDateTime) {
         this.apptDateTime = apptDateTime;
