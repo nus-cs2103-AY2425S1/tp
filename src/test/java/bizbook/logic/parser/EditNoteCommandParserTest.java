@@ -6,13 +6,13 @@ import static bizbook.testutil.TypicalNotes.VALID_NOTE;
 
 import org.junit.jupiter.api.Test;
 
-import bizbook.logic.commands.EditNotesCommand;
+import bizbook.logic.commands.EditNoteCommand;
 
 
-public class EditNotesCommandParserTest {
+public class EditNoteCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditNotesCommand.MESSAGE_USAGE);
+                    EditNoteCommand.MESSAGE_USAGE);
 
     private EditNotesCommandParser parser = new EditNotesCommandParser();
 
