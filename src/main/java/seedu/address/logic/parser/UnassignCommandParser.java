@@ -43,7 +43,8 @@ public class UnassignCommandParser implements Parser<UnassignCommand> {
             // Handle cases where the input is not a valid integer
             throw new ParseException("Volunteer ID and Event ID must be valid integers.", e);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(VolunteerParserUtil.MESSAGE_INVALID_INDEX, UnassignCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(VolunteerParserUtil.MESSAGE_INVALID_INDEX,
+                    UnassignCommand.MESSAGE_USAGE), pe);
         }
     }
 
