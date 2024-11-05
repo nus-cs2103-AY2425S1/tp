@@ -20,7 +20,7 @@ public class Wedding {
      * Validation regex checks that first character of the wedding name must not be a whitespace,
      * so that " " (a blank string) is not a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*(/p[12])?";
     private final WeddingName weddingName;
     private int peopleCount;
     private Person partner1;
