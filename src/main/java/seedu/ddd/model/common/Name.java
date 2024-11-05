@@ -29,7 +29,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = capitalizeName(name);
     }
 
     /**
@@ -65,4 +65,18 @@ public class Name {
         return fullName.hashCode();
     }
 
+    private String capitalizeName(String name) {
+        String[] words = name.toLowerCase().split("\\s+");
+        StringBuilder capitalized = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                capitalized.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1))
+                        .append(" ");
+            }
+        }
+
+        return capitalized.toString().trim();
+    }
 }

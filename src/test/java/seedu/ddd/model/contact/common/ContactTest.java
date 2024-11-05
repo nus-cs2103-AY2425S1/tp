@@ -70,20 +70,20 @@ public class ContactTest {
                 .build();
         assertFalse(VALID_CLIENT.isSameContact(otherClient));
 
-        // name differs in case and different phone, all other attributes same -> returns false
+        // name differs in case and different phone, all other attributes same -> returns true
         Contact otherVendor = new VendorBuilder(VALID_VENDOR)
                 .withName(VALID_VENDOR_NAME.toLowerCase())
                 .withPhone(VALID_CLIENT_PHONE)
                 .build();
-        assertFalse(VALID_VENDOR.isSameContact(otherVendor));
+        assertTrue(VALID_VENDOR.isSameContact(otherVendor));
 
-        // name has trailing spaces and different phone, all other attributes same -> returns false
+        // name has trailing spaces and different phone, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_VENDOR_NAME + " ";
         otherVendor = new VendorBuilder(VALID_VENDOR)
                 .withName(nameWithTrailingSpaces)
                 .withPhone(VALID_CLIENT_PHONE)
                 .build();
-        assertFalse(VALID_VENDOR.isSameContact(otherVendor));
+        assertTrue(VALID_VENDOR.isSameContact(otherVendor));
 
         // should equal self
         assertTrue(VALID_CLIENT.isSameContact(VALID_CLIENT));
