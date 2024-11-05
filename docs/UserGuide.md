@@ -9,7 +9,31 @@
 Tuteez is a **desktop address book app designed specifically for tech-savvy private tutors to manage student contacts**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+
+- [Tuteez User Guide](#tuteez-user-guide)
+   * [Quick start](#quick-start)
+   * [Features](#features)
+      + [Viewing help : `help`](#viewing-help-help)
+      + [Adding a person: `add`](#adding-a-person-add)
+      + [Listing all persons : `list`](#listing-all-persons-list)
+      + [Editing a person : `edit`](#editing-a-person-edit)
+      + [Adding or Deleting a Remark: `remark`](#adding-or-deleting-a-remark-remark)
+      + [Locating persons by name: `find`](#locating-persons-by-name-find)
+      + [Deleting a person : `delete`](#deleting-a-person-delete)
+      + [Displaying Student Information: `display`](#displaying-student-information-display)
+      + [Clearing all entries : `clear`](#clearing-all-entries-clear)
+      + [Exiting the program : `exit`](#exiting-the-program-exit)
+   * [Key details for Users  ](#key-details-for-users)
+      + [`Lesson` Constraints](#lesson-constraints)
+      + [Saving the data](#saving-the-data)
+      + [Editing the data file](#editing-the-data-file)
+   * [Future Features](#future-features)
+      + [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+   * [FAQ](#faq)
+   * [Known issues](#known-issues)
+   * [Command summary](#command-summary)
+
+<!-- TOC end -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,6 +65,18 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## UI 
+
+### Left panel
+
+* Meant to showcase only important information such as student's phone number, address, telegram and next lesson based on your computer's current time
+* If a lesson is currently ongoing it will show that lesson as the next lesson on the left panel
+
+### Right panel
+
+* Provides full view of students information when you call display
+* This is where you can see all your student's lesson details and the remarks you have left them
 
 ## Features
 
@@ -85,6 +121,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON
 - The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
     - Example: `l/monday 0900-1100` or `l/Wednesday 1400-1600`
     - Tutors cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify the user with an error message.
+    - To see more details for valid lessons, check out [lesson constraints](#lesson-constraints)
 
 <box type="tip" seamless>
 
@@ -211,6 +248,25 @@ Exits the program.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Key details for Users  
+
+### `Lesson` Constraints
+
+Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
+
+  1. Lessons are not allowed to overflow into the next day
+  1. Group tuition is currently not supported, so adding overlapping or clashing lessons is not available yet  
+
+This means the following constraints apply:
+
+  1. Lesson start time must be before end time  
+  1. Lesson start and end time cannot be identical  
+  1. The latest lesson start time is `2358`
+  1. The latest lesson end time is `2359`, `0000` is treated as the start of a new day
+
+Look forward to [future updates](#future-features) for group tuition support!!
 ### Saving the data
 
 Tuteez data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -225,6 +281,10 @@ Tuteez data are saved automatically as a JSON file `[JAR file location]/data/add
 If your changes to the data file makes its format invalid, Tuteez will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Future Features
 
 ### Archiving data files `[coming in v2.0]`
 
