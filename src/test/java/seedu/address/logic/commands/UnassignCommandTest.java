@@ -190,6 +190,11 @@ public class UnassignCommandTest {
         }
 
         @Override
+        public void setAddressBookAssignments(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -306,6 +311,16 @@ public class UnassignCommandTest {
 
         @Override
         public void updateFilteredAssignmentList(Predicate<Assignment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAllAssignments(EmployeeId targetEmployeeId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAllAssignments(ProjectId targetProjectId) {
             throw new AssertionError("This method should not be called.");
         }
     }

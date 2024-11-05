@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -212,6 +213,30 @@ public class ModelManagerTest {
     public void deleteAssignment_projectIdAndEmployeeIdNotInAddressBook_throwsAssignmentNotFoundException() {
         assertThrows(AssignmentNotFoundException.class, () ->
                 modelManager.deleteAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdInAddressBook_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        modelManager.deleteAllAssignments(ALPHA.getId());
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    @Test
+    public void deleteAllAssignment_assignmentWithProjectIdNotInAddressBook_noError() {
+        assertDoesNotThrow(() -> modelManager.deleteAllAssignments(ALPHA.getId()));
+    }
+
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdInAddressBook_deleteAllSuccess() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        modelManager.deleteAllAssignments(ALICE.getEmployeeId());
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    @Test
+    public void deleteAllAssignment_assignmentWithEmployeeIdNotInAddressBook_noError() {
+        assertDoesNotThrow(() -> modelManager.deleteAllAssignments(ALICE.getEmployeeId()));
     }
 
     @Test

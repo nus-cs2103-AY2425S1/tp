@@ -269,6 +269,8 @@ Expected output:
 ### Deleting an employee : `delete`
 
 Deletes the specified employee from the address book.
+<br>
+<span style="color:red">This will delete the employee AND all its assignments\!</span>
 
 Format: `delete INDEX`
 
@@ -278,7 +280,7 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd employee in the address book.
+- `listemployees` followed by `delete 2` deletes the 2nd employee in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Expected output:
@@ -291,6 +293,8 @@ Expected output:
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
+<br>
+<span style="color:red">This will delete all employee records AND their assignments\!</span>
 
 Format: `clear`
 
