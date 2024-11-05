@@ -41,6 +41,14 @@ public class Person {
         this.ownWedding = ownWedding;
     }
 
+    /**
+     * Sets ownWedding to null.
+     * Used for test cases.
+     */
+    public void resetOwnWedding() {
+        this.ownWedding = null;
+    }
+
     public void setOwnWedding(Wedding wedding) {
 
         if (wedding == null) {
@@ -104,6 +112,14 @@ public class Person {
         for (Wedding wedding : weddingJobs) {
             this.addWeddingJob(wedding);
         }
+    }
+
+    /**
+     * Returns true if person has own wedding.
+     *
+     */
+    public boolean hasOwnWedding() {
+        return ownWedding != null;
     }
 
     /**
@@ -188,7 +204,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("roles", role)
-                .add("wedding", ownWedding == null ? "null" : ownWedding)
+                .add("wedding", ownWedding == null ? "NA" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }
