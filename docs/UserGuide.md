@@ -6,41 +6,50 @@ title: User Guide
 <div markdown="block" class="alert alert-warning">
 **Disclaimer: MedConnect is only designed to support the English language. Other languages may cause unexpected behaviour.**
 </div>
+<br>
 
-MedConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MedConnect can get your contact management tasks done faster than traditional GUI apps.
+MedConnect is a **desktop app designed for healthcare administrators in elderly care homes for dementia patients**. This app consolidates crucial contact information into a single, accessible database, allowing administrative staff to manage patient and doctor contacts efficiently under high-pressure conditions.
 
-* Table of Contents
+MedConnect combines the speed of a Command Line Interface ([CLI](#cli)) with the visual clarity of a Graphical User Interface ([GUI](#gui)), making it ideal for administrators who can type fast and need rapid access to information. MedConnect can get your contact management tasks done faster than traditional [GUI](#gui) apps.
+
+With MedConnect, connecting with on-call doctors, family members, or other essential contacts becomes seamless, helping you respond quickly when every second counts.
+
+
+
+## Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use this User Guide
 This User Guide is designed to help you understand and use MedConnect effectively. Here are some tips on how to navigate and use this guide:
-1. **Table of Contents**: At the beginning of the guide, you will find a Table of Contents. Use this to quickly jump to the section you are interested in.
-1. **Quick Start**: If you are new to MedConnect, start with the Quick Start section. It provides step-by-step instructions on how to set up and start using the application.
-1. **Features**: This section details all the commands available in MedConnect. Each command is explained with its format, parameters, and examples. Use this section to learn how to perform specific tasks.
-1. **Command Summary**: At the end of the guide, there is a Command Summary table that provides a quick reference for all commands. Use this table to quickly look up the format of a command.
-1. **FAQ**: The FAQ section addresses common questions and issues. Check this section if you encounter any problems or have questions about using MedConnect.
-1. **Known Issues**: This section lists any known issues with the application and their workarounds. Refer to this section if you experience any unexpected behavior.
-1. **Notes and Tips**: Throughout the guide, you will find notes and tips highlighted in different styles. These provide additional information and helpful hints for using MedConnect effectively.  
-   
+1. **[Table of Contents](#table-of-contents)**: At the beginning of the guide, you will find a Table of Contents. Use this to quickly jump to the section you are interested in.
+1. **[Quick Start](#quick-start)**: If you are new to MedConnect, start with the Quick Start section. It provides step-by-step instructions on how to set up and start using the application.
+1. **[Features](#features)**: This section details all the commands available in MedConnect. Each command is explained with its format, parameters, and examples. Use this section to learn how to perform specific tasks.
+1. **[Command Summary](#command-summary)**: At the end of the guide, there is a Command Summary table that provides a quick reference for all commands. Use this table to quickly look up the format of a command.
+1. **[FAQ](#faq)**: The FAQ section addresses common questions and issues. Check this section if you encounter any problems or have questions about using MedConnect.
+1. **[Known Issues](#known-issues)**: This section lists any known issues with the application and their workarounds. Refer to this section if you experience any unexpected behavior.
+1. **Notes and Tips**: Throughout the guide, you will find notes and tips highlighted in different styles. These provide additional information and helpful hints for using MedConnect effectively.
+
 By following these sections, you can quickly find the information you need and make the most out of MedConnect.
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-   * You can check your Java version by following the instructions [here](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line). 
+   * You can check your Java version by following the instructions [here](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line).
    * If you do not have Java `17` or above installed in your Computer, you can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Download the latest release of the `medconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-1/tp/releases).
+2. Download the latest release of the `medconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
+3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medconnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/sampleUiImage.png)
+4. Open the home folder and right click anywhere in the red box in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+<img src="images/Quickstart-new-terminal.png" alt="NewTerminal" width="600">
+
+
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -100,17 +109,23 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE
 ecrs/EMERGENCY CONTACT RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL [t/TAG]…​`
 
+<div markdown="block" class="alert alert-info">
+
 Valid inputs for relationship: `Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse,
 Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter`
+
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/94681352 ecrs/daughter dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/94681352 ecrs/daughter dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`<br>
+Adds John Doe as a patient with his daughter Charlotte Lim as his emergency contact and Dr Ronald Lee as his assigned doctor.
 
-* `add n/Betsy Crowe t/friend ecname/Matthew Tan e/betsycrowe@example.com a/Newgate Prison p/1234567 ecrs/son ecphone/94873631 ecname/Bob Builder demail/liampayne@gmail.com dphone/91231231 dname/Liam Payne t/criminal`
+* `add n/Betsy Crowe t/friend ecname/Matthew Tan e/betsycrowe@example.com a/Newgate Prison p/1234567 ecrs/son ecphone/94873631 ecname/Bob Builder demail/liampayne@gmail.com dphone/91231231 dname/Liam Payne t/criminal` <br>
+Adds Betsy Crowe as a patient with her son Bob Builder as her emergency contact and Dr Liam Payne as her assigned doctor.
 
 ### Listing all persons : `list`
 
@@ -137,7 +152,7 @@ Examples:
 
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-*  `edit 2 n/Betsy Crower ec/1 ecname/Peter Tan` Edits the name of the first emergency contact of the 2nd person to be `Peter Tan`.
+*  `edit 2 n/Betsy Crower ec/1 ecname/Peter Tan` Edits the name of the first emergency contact of the 2nd person in the list to be `Peter Tan`.
 
 ### Locating persons by name: `find`
 
@@ -154,8 +169,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find dav Roy` returns `David Li` and `Roy Balakishnan`<br><br>
+  ![result for 'find dav roy'](images/findDavRoyResult.png)
+Entering the command `find dav Roy` returns the above list, finding David Li and Roy Balakrishnan.
 
 ### Locating persons by name: `finddoc`
 
@@ -163,17 +179,17 @@ Finds persons by checking if their doctor's names contain any of the provided ke
 
 Format: `finddoc KEYWORD [MORE_KEYWORDS]`
 
+* **Only the doctor's name is searched.**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the doctor's name is searched.
 * Names will match if the keyword is found in any part of the doctor's name. For example, `Ha` will match `Hans`
 * Persons matching at least one keyword in their doctor's name will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return persons whose doctors are `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `finddoc John` returns persons with doctors `john` and `John Doe`
-* `finddoc tan ed` returns persons with doctors `Tan Wei Ming`, `Ed Sheeran`<br>
-  ![result for 'finddoc tan ed'](images/finddoc-tan-ed.png)
+* `finddoc tan ed` returns persons with doctors `Tan Wei Ming`, `Ed Sheeran`<br><br>
+  ![result for 'finddoc zhou'](images/finddocZhouResult.png)Entering the command `finddoc zhou` returns the above result of Irfan Ibrahim since Dr Zhou Jie Lun is his assigned doctor.
 
 ### Deleting a person : `delete`
 
@@ -181,7 +197,7 @@ Deletes the specified person or emergency contact from the address book.
 
 Format: `delete INDEX [ec/EMERGENCY_CONTACT_INDEX]`
 
-* Deletes the person at the specified `INDEX` OR deletes the emergency contact at the specified `EMERGENCY_CONTACT_INDEX` of the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX` **OR** deletes the emergency contact at the specified `EMERGENCY_CONTACT_INDEX` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -197,7 +213,7 @@ Adds an emergency contact to a specified person in the address book.
 Format: `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`
 
 Examples:
-* `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter` Adds a new emergency contact to the first person in the address book. 
+* `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter` Adds a new emergency contact Shannon Wong to the 1st person in the address book.
 
 ### Archiving data files: `archive`
 
@@ -228,8 +244,25 @@ Format: `loadArchive FILE_NAME`
 * The data from the archived file will replace the current data in the address book.
 * The data in the archived file will not be deleted.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Did you accidentally load an archive and want your old data back? Enter the 'undo' command!
+</div>
+
 Examples:
 * `loadArchive addressbook-20241023_114324-example.json` Loads the data from the archived file named `addressbook-20241023_114324-example.json` into the address book.
+
+### Deleting an archived data file: `deleteArchive`
+
+Deletes the data of an existing archived data file in the archives folder.
+
+Format: `deleteArchive FILE_NAME`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting an archive file is permanent. The `undo` command cannot restore a deleted archive file.
+</div> <br>
+
+* The `FILE_NAME` must be the name of an archived data file in the archive folder.
+
 
 ### Clearing all entries : `clear`
 
@@ -237,39 +270,16 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Undo previous command : `undo`
+### Undoing previous command : `undo`
 Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a person or entry.
 
 Format: `undo`
 
-Success Message:
-If the undo operation is successful, it returns: "Address book has undone previous command!"
+### Redoing previous command : `redo`
 
-Failure Message:
-If there is no action to undo, or if the undo operation fails, it returns: "Address book failed to be undone. Please try again later."
-
-How it works:
-* It checks whether there is an operation in the undo stack (like an add, delete, or edit) that can be undone. This check is done via the model.canUndoAddressBook() method.
-* If there is an undoable operation, it calls the model.undoAddressBook() method to restore the address book's previous state.
-* If there are no operations to undo (i.e., if the user tries to undo without having made any modifications), the command will return the failure message.
-
-
-### Redo previous command : `redo`
-
-Restores the state of the address book after an undo operation has been executed, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a person or entry.
+Restores the state of the address book **after an undo operation has been executed**, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a person or entry.
 
 Format: `redo`
-
-Success Message:
-If the redo operation is successful, it returns: "Address book has redone previous undo command!"
-
-Failure Message:
-If there is no action to redo or if the redo operation fails, it returns: "Redo not possible as no actions were undone."
-
-How it works:
-* It checks whether there is an undo operation that can be redone. This check is done via the model.canRedoAddressBook() method.
-* If there is a redoable operation, it calls the model.redoAddressBook() method to restore the address book's previous state (before the undo).
-* If there are no operations to redo (e.g., if the user tries to redo without any undo), the command will return the failure message.
 
 ### Exiting the program : `exit`
 
@@ -294,7 +304,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: How do I change the AddressBook home folder?<br>
@@ -309,11 +319,22 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+|Term             | Details      | Example |
+|-----------------|--------------|---------|
+| **Alphanumeric**|Characters that are either numbers or letters.|1, 2, 3, A, b, c are alphanumeric characters.
+|**Command**|Instructions that are given to MedConnect to execute.|[Features](#features) are commands that MedConnect can execute. [`add`](#adding-a-person-add) is one such command!
+|**Command Line Interface (CLI)**<a name="cli" />|A Command Line Interface allows users to interact with an application by typing commands to execute actions.|The command line acts as a CLI in MedConnect.
+|**Graphical User Interface (GUI)**<a name="gui" /> |A Graphical User Interface allows users to interact with an application through graphics like buttons or icons.|MedConnect acts as a GUI.
+|**Keyword**|The word you want to search for in a `find` or `finddoc` command.|Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.
+|**Parameter**|Information that you are required to provide to the MedConnect command.|`NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-person-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters.
+
+---
 ## Command summary
 
 | Action     | Format, Examples                                                                                                                                                                                                       |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665` <br> `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` <br> `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` <br> `t/friend t/colleague` |
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP [t/TAG]…​` <br><br> e.g., `add n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123465` `ecname/Lim Jun Wei ecphone/98765678 ecrs/Brother` `dname/Sam Lim dphone/9987766 demail/samlim@hotmail.com` `t/friend t/colleague` |
 | **Clear**  | `clear`                                                                                                                                                                                                                |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                    |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dname/DOCTOR_NAME] [dphone/DOCTOR_PHONE] [demail/DOCTOR_EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                             |
@@ -324,4 +345,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Redo**   | `redo`                                                                                                                                                                                                                 |
 | **List**   | `list`                                                                                                                                                                                                                 |
 | **Help**   | `help`                                                                                                                                                                                                                 |
-
+| **Archive** | `archive [DESCRIPTION]` <br> e.g., `archive before major update`
+| **List Archive Files** | `listArchives`
+| **Load Archive File** | `loadArchive FILE_NAME` <br> e.g., `loadArchive addressbook-20241106_010856.json`
+| **Delete Archive File** | `deleteArchive FILE_NAME` <br> e.g., `deleteArchive addressbook-20241106_014247.json`
