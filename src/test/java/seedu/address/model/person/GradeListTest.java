@@ -56,12 +56,12 @@ public class GradeListTest {
         gradeList = gradeList.addGrade(thirdGrade);
 
         // same name -> returns true
-        assertEquals(gradeList.getGrade("Midterm"), firstGrade);
-        assertEquals(gradeList.getGrade("Final"), secondGrade);
-        assertEquals(gradeList.getGrade("Assignment"), thirdGrade);
+        assertEquals(gradeList.getGrade("midterm"), firstGrade);
+        assertEquals(gradeList.getGrade("final"), secondGrade);
+        assertEquals(gradeList.getGrade("assignment"), thirdGrade);
 
         // non-existing test name -> returns null
-        assertNull(gradeList.getGrade("Tutorial"));
+        assertNull(gradeList.getGrade("tutorial"));
     }
 
     @Test
