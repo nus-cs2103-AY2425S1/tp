@@ -6,7 +6,6 @@ import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import seedu.ddd.logic.commands.list.ListCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.Contact;

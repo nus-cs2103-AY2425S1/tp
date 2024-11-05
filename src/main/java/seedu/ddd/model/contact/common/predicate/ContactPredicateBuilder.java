@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
-import seedu.ddd.logic.commands.list.ListCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.ParserUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
