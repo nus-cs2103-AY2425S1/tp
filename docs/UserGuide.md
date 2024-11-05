@@ -143,13 +143,13 @@ addIngredient Syrup 3.50
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 
 ```bash
-addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYIDS [MORE_PASTRYIDSs...] r/REMARK
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYIDS [MORE_PASTRYIDSs...] [r/REMARK]
 ```
 - **Parameters:**
     - `n/NAME`: (Optional) The customer's name.
     - `p/PHONE_NUMBER`: The phone number of the customer (new customer will be added with the name if phone number not found in contacts).
     - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
-    - `r/REMARK`: Information about the 
+    - `r/REMARK`: (Optional) Information about the customer order.
 
 **Example:**
 ```bash
