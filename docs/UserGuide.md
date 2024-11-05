@@ -288,7 +288,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Deleting client `Bob`
+      > **Use Case**: Deleting client `Bob`
       >
       > **Input**: `delete Bob`
       >
@@ -305,7 +305,7 @@ Commands for creating, updating, and deleting buyers and sellers.
   
     - **Failed Execution:**
       > ---
-      > **Use Case #1**: Attempt to delete client `Bob7` who does not exist
+      > **Use Case**: Attempt to delete client `Bob7` who does not exist
       >
       > **Input**: `delete bob7`
       >
@@ -369,43 +369,38 @@ Commands for managing appointments between user and clients.
       > ---
 
 - #### **Delete Appointment**
-    - **Format:** `delapt n/<NAME>`
+    - **Format:** `delapt <NAME>`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Deleting appointment for `Bob`
       >
-      > **Input**:
+      > **Input**: `delapt Bob`
       >
-      > **Output**:
+      > **Output**: Successfully deleted appointment from Bob
       >
+      > ![bobdeletedappt](images/bob_del_apt.png)
+      > 
       > ---
-      >
-      > **Use Case #2**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-      >
-      > **Use Case #3**:
-      >
-      > **Input**:
-      >
-      > **Output**:
-      >
-      > ---
-
+      
     - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case**: Attempting to delete an appointment from a non-existent client
       >
-      > **Input**:
+      > **Input**: `delapt Bob7777`
       >
-      > **Output**:
+      > **Output**: Please enter an existing client name!
       >
       > ---
+    
+    <br>
+    <div class="note">
+    If you suggest a name that differs from an existing client by at most 3 letters, 
+    the console will suggest to input the existing client instead
+    </div>
+    <br>
+  
+    ![levershtein](images/levershtein_distance.png)
 
 ---
 
