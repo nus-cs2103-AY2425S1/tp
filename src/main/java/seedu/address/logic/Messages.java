@@ -26,6 +26,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_GET_ID = "The id of the person that you are finding is: %1$d";
+    public static final String MESSAGE_MULTIPLE_PERSONS_WITH_THE_SAME_NAME = "%1$d persons listed "
+            + "that suits your keyword!\n"
+            + "enters more specific name keywords to retrieve the id of the person";
 
 
     /**
