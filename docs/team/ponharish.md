@@ -69,8 +69,26 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * UML Diagrams:
-    * Updated UML diagram to reflect the changes to UI [\#]()
+    * Updated UML diagram to reflect the changes to UI [\#177](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/177)
   * Developer Guide:
-    * Added details about the changes to UI [\#]()
+    * Added details about the changes to UI [\#177](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/177)
   * User Guide:
     * Added documentation for the features `find` and `findapp` [\#173](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/173)
+    * Updated all the screenshots to reflect the current UI [\#219](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/219)
+
+
+* **Bug Fixes**:
+  * Update `ModelManager` [\#208](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/208)
+    * Updated the `ModelManager` to handle the updating of the model when `addlink` or `deletelink` commands were executed.
+  * Update `EditCommand` [\#209](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/209)
+    * Updated the prompt displayed to the user in `EditCommand`.
+  * Update `ClearCommand` [\#210](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/210)
+    * Updated the confirmation prompt in `ClearCommand`.
+  * Update `AddCommand` [\#211](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/211)
+    * Updated the message displayed upon successful execution of the `AddCommand` to include the person's NRIC.
+    * Updated the prompt displayed to user in `Addcommand` to make roles field compulsory.
+  * Update `DeleteAppointmentCommand` [\#212](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/212)
+    * Updated the prompt displayed to the user in `DeleteAppointmentCommand`.
+  * Update `EditAppointmentCommand` [\#213](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/213)
+    * Updated `EditAppointmentCommand` to handle the case when patient is not found.
+
