@@ -170,33 +170,33 @@ Adds a person to the address book.
 
 **Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" theme="success">
 
-**Tip:** A person can have any number of tags (including 0). For example, `t/friend t/likes coding` has 2 tags and it is valid. 
+**Tip:** A patient can have any number of tags (including 0). For example, `t/obese t/nearsighted` has 2 tags and it is valid. 
 </box>
 
 **Examples**:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering`
-- `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal`
-
+- `add person n/Betsy Crowe t/farsighted e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/ectomorphic`
+  ![result adding patients](images/addCommandResultUG.png)
 <br>
 
 ##### Listing all persons : `list person`
 
-Shows a list of all persons in the address book.
+Shows a list of all patient in DocTrack.
 
-**Format**: `list person`
+**Format**: `list person` shows the list of all patients on the screen.
 
 <br>
 
 ##### Editing a person : `edit person`
 
-Edits an existing person in the address book.
+Edits an existing patient in DocTrack.
 
 **Format**: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`.
+- Edits the patient at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -207,6 +207,11 @@ Edits an existing person in the address book.
 
 - `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+<box type="tip" theme="success">
+
+**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags
+</box>
 
 <br>
 
@@ -226,7 +231,7 @@ Finds persons whose **names** contain any of the given keywords.
 
 **Examples**:
 
-- `find person n/John` returns `john` and `John Doe`
+- `find person n/John` returns `john` and `John Doe` 
 - `find person n/alex david` returns `Alex Yeoh`, `David Li`<br><br>
   ![result for 'find person alex david'](images/findAlexDavidResult.png)
 
@@ -234,7 +239,7 @@ Finds persons whose **names** contain any of the given keywords.
 
 ##### Deleting a person : `delete person`
 
-Deletes the specified person from the address book.
+Deletes the specified patient from DocTrack.
 
 **Format**: `delete person INDEX`
 
@@ -246,16 +251,22 @@ Deletes the specified person from the address book.
 
 </box>
 
+<box type="tip" theme="success" seamless>
+
+**Tip:** Make you have the correct index of the patient before deleting. Use `list person` to check
+
+</box>
+
 **Examples**:
 
-- `list` followed by `delete person 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete person 2` deletes the 2nd patient in DocTrack.
+- `find Betsy` followed by `delete person 1` deletes the 1st patient in the results of the `find` command.
 
 <br>
 
 ##### Clearing all persons : `clear person`
 
-Deletes all entries from the address book.
+Deletes all entries from DocTrack.
 
 **Format**: `clear person`
 
@@ -284,12 +295,19 @@ Deletes all entries from the address book.
 Adds an appointment to the DocTrack. 
 
 **Format**: `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
-- The format of `DATE_TIME` is `YYYY/MM/DD HH:mm:ss`. For example, `29/03/2025 10:30:00`.
+- The format of `DATE_TIME` is `YYYY/MM/DD HH:mm`. For example, `29/03/2025 10:30`.
 
 **Examples**:
 
 - `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`
 - `add appt i/2 d/30/01/2024-12-01 16:40:00 ty/Follow-up s/Asthma m/Inhaler`
+
+<box type="tip" theme="success">
+
+**Tip:** You can decide to leave out sickness and medicine inputs when adding them, then edit them later.
+</box>
+
+<br>
 
 <br>
 
@@ -331,6 +349,12 @@ Finds appointments whose person names and / or dates contain any of the given ke
 - `find appt n/John` returns appointments with patients named `John`.
 - `find appt d/2024-12-05` returns appointments on `2024-12-05`.
 - `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
+  
+<box type="tip" theme="success">
+
+**Tip:** Use the `find appt` command to filter out appointments for a certain day or patient
+
+</box>
 
 <br>
 
@@ -352,6 +376,11 @@ Deletes the specified appointment from DocTrack.
 
 - `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
 
+<box type="tip" theme="success">
+
+**Tip:** Use the `list appt` to check the index of the appointment before deleting one.
+
+</box>
 <br>
 
 ##### Clearing all appointments : `clear appt`
