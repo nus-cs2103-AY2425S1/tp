@@ -552,7 +552,7 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
-Our goal was to improve AB3 in terms of organisation, finding and tagging to allow for greater functionality.
+Our goal was to improve AB3 in terms of contact organisation, finding and tagging to allow for greater functionality and flexibility.
 
 Our first major change was to modify the `find` command to accept any field as a parameter and allow multiple parameters. This was a moderate effort
 that required us to change how the `FindCommand` class worked by creating new predicate classes and processing the logic for that as well,
@@ -564,7 +564,8 @@ when the `undo` and `redo` commands failed and whether non-state affecting comma
 this was quite difficult.
 
 Finally, our last major change was the tag management and categorisation system, which was more difficult as the `undo` and `redo`. We added a tag management 
-component and several commands, different types of tags, and a tag list component in the UI. Figuring out how to dynamically update the tags and the tag list in the GUI required a major restructuring 
-to our GUI files (under the `ui` folder) and we had faced many issues with the tag categorisation system.
+component and several commands, different types of tags, and a tag list component in the UI. Figuring out how to dynamically update the tags and the tag list 
+in the GUI required a restructuring of our GUI files (under the `ui` folder) and we had faced many issues with the tag categorisation system. All in all, 
+implementing this system was not easy but it did provide better tag customisation and control than AB3.
 
 Most commands implemented used the given `Command` classes as a reference, but modified them to adapt the respective `execute()` methods for the command.
