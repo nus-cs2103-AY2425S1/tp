@@ -93,7 +93,7 @@ public class ScheduleCommand extends Command {
 
             // Check if the time slot is already taken
             if (isTimeSlotTaken(lastShownList, schedule.getDateTime())) {
-                throw new CommandException(MESSAGE_SLOT_TAKEN);
+                throw new CommandException(MESSAGE_SLOT_TAKEN + " (" + schedule.getDateTime() + ")");
             }
         }
 
