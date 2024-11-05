@@ -138,6 +138,22 @@ Preference types: `high`, `low`, `recent`, `distant`
 * `recent`: Persons with more recent "last seen" dates rise to the top
 * `distant`: Persons with more distant "last seen" dates rise to the top
 
+### Save sort preference: `save` or `svp`
+
+Saves the sorting preference specified by the user.
+
+Format: `save PREFERENCE` or `svp PREFERENCE`
+
+Preference types: `default`, `high`, `low`, `distant`, `recent`
+
+* `high`, `low`, `recent`, `distant`: Sorts according to the preferences specified in section **Sorting persons**.
+* `default`: Persons are sorted in chronological order according to when they are added to NetBook.
+* Changes will only be reflected upon restarting NetBook.
+
+Examples: 
+* `save high`
+* `svp default`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -151,6 +167,20 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a reminder: `delete_reminder` or `dr`
+
+Deletes the specified reminder from the address book.
+
+Format: `delete_reminder INDEX` or `dr INDEX`
+
+* Deletes the reminder at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reminder list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
+
 
 ### Remark a person : `remark`
 
