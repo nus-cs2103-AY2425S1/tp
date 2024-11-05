@@ -20,6 +20,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ExportCommand.Format;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -79,14 +80,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_export() throws Exception {
-        // TODO: softcode "format/csv"
-        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " format/csv") instanceof ExportCommand);
+        // TODO: softcode "format\csv"
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " format\\csv") instanceof ExportCommand);
     }
 
     @Test
     public void parseCommand_exportWithValidCommand() throws Exception {
-        ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD + " format/csv");
-        assertEquals(new ExportCommand(), command);
+        ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD + " format\\csv");
+        assertEquals(new ExportCommand(Format.CSV), command);
     }
     @Test
     public void parseCommand_help() throws Exception {

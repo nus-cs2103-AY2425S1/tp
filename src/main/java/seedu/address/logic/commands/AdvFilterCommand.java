@@ -36,7 +36,7 @@ public class AdvFilterCommand extends Command {
     private final Operator operator;
 
     /**
-     * Class that handles Operator enum type used in SortCommand
+     * Class that handles Operator enum type used in AdvFilterCommand
      */
     public static enum Operator {
         GREATER_THAN(">"),
@@ -59,7 +59,7 @@ public class AdvFilterCommand extends Command {
     }
 
     /**
-     * Class that handles SortCommand
+     * Class that handles AdvFilterCommand
      */
     public AdvFilterCommand(String tagName, Operator operator, String tagValue) {
         this.tagName = tagName;

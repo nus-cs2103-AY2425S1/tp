@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.ExportCommand.Format;
 import static seedu.address.logic.commands.ExportCommand.parseTags;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -40,10 +42,10 @@ public class ExportCommandTest {
     }
     @Test
     public void equals() {
-        final ExportCommand standardCommand = new ExportCommand();
+        final ExportCommand standardCommand = new ExportCommand(Format.CSV);
 
         // same values -> returns true
-        ExportCommand commandWithSameValues = new ExportCommand();
+        ExportCommand commandWithSameValues = new ExportCommand(Format.CSV);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -54,6 +56,11 @@ public class ExportCommandTest {
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
+    }
+    @Test
+    public void toStringMethod() {
+        ExportCommand testCommand = new ExportCommand(Format.CSV);
+        assertEquals("seedu.address.logic.commands.ExportCommand{format=CSV}", testCommand.toString());
     }
     @Test
     public void parseValidTag() {
@@ -149,6 +156,102 @@ public class ExportCommandTest {
 
         assertEquals(4, headers.size());
         assertTrue(headers.containsAll(Arrays.asList("name", "phone", "email", "tags")));
+    }
+
+    @Test
+    public void matchFormat_success() {
+        assertEquals(ExportCommand.matchFormat("csv"), Format.CSV);
+        assertEquals(ExportCommand.matchFormat("txt"), Format.TXT);
+    }
+
+    @Test
+    public void matchFormat_failure() {
+        assertEquals(ExportCommand.matchFormat("invalidFormat"), Format.UNSUPPORTED);
+        // Case sensitivity test
+        assertEquals(ExportCommand.matchFormat("cSv"), Format.UNSUPPORTED);
+        // Null input
+        assertEquals(ExportCommand.matchFormat(null), Format.UNSUPPORTED);
+    }
+
+    @Test
+    public void writeFileTest_csv() throws IOException {
+        List<Map<String, String>> jsonData = new ArrayList<>();
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Siti", "phone", "65432109")));
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar", "email", "kumar@kgoomail.com")));
+        jsonData.add(new LinkedHashMap<>(
+                Map.of("name", "Ahmad", "phone", "32109876", "email", "kumar@kgoomail.com")));
+        Set<String> headers = new LinkedHashSet<>(Arrays.asList("name", "phone", "email"));
+
+        String fileName = "test";
+        Path csvPath = tempDir.resolve(fileName + ".csv");
+        ExportCommand.writeFile(jsonData, headers, csvPath.toString().replace(".csv", ""), Format.CSV);
+
+        List<String> lines = Files.readAllLines(csvPath);
+        assertEquals(4, lines.size());
+        assertEquals("name,phone,email", lines.get(0));
+        assertEquals("\"Siti\",\"65432109\",\"\"", lines.get(1));
+        assertEquals("\"Kumar\",\"\",\"kumar@kgoomail.com\"", lines.get(2));
+        assertEquals("\"Ahmad\",\"32109876\",\"kumar@kgoomail.com\"", lines.get(3));
+    }
+
+    @Test
+    public void writeFileTest_txtFormatted() throws IOException {
+        List<Map<String, String>> jsonData = new ArrayList<>();
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Johnny Appleseed", "phone", "93321121",
+                "email", "johnnya@example.com", "address", "Malaysia",
+                "tags", "\"LifeInsurance\" : \"Yes\"",
+                "financialInfo", "noIncome", "socialMediaHandle", "@johnA")));
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar", "email", "kumar@kgoomail.com")));
+        Set<String> headers = new LinkedHashSet<>(Arrays.asList("name", "phone", "email", "address",
+                "tags", "financialInfo", "socialMediaHandle"));
+
+        String fileName = "test";
+        Path txtPath = tempDir.resolve(fileName + ".txt");
+        ExportCommand.writeFile(jsonData, headers, txtPath.toString().replace(".txt", ""), Format.TXT);
+
+        List<String> lines = Files.readAllLines(txtPath);
+
+        // Verify output
+        assertEquals("{", lines.get(0));
+        assertEquals("  name | Johnny Appleseed", lines.get(1));
+        assertEquals("  phone | 93321121", lines.get(2));
+        assertEquals("  email | johnnya@example.com", lines.get(3));
+        assertEquals("  address | Malaysia", lines.get(4));
+        assertEquals("  tags | [ LifeInsurance : Yes ]", lines.get(5));
+        assertEquals("  financialInfo | noIncome", lines.get(6));
+        assertEquals("  socialMediaHandle | @johnA", lines.get(7));
+        assertEquals("}", lines.get(8));
+        assertEquals("", lines.get(9)); // Blank line between records
+
+        // Validate the second entry
+        assertEquals("{", lines.get(10));
+        assertEquals("  name | Kumar", lines.get(11));
+        assertEquals("  phone | ", lines.get(12));
+        assertEquals("  email | kumar@kgoomail.com", lines.get(13));
+        assertEquals("  address | ", lines.get(14));
+        assertEquals("  tags | ", lines.get(15));
+        assertEquals("  financialInfo | ", lines.get(16));
+        assertEquals("  socialMediaHandle | ", lines.get(17));
+        assertEquals("}", lines.get(18));
+    }
+
+    @Test
+    public void writeFile_unsupportedFormat_throwsIllegalArgumentException() {
+        List<Map<String, String>> jsonData = new ArrayList<>();
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Siti", "phone", "65432109")));
+        Set<String> headers = new LinkedHashSet<>(Arrays.asList("name", "phone"));
+
+        String filePathAndName = "test";
+
+        // Assuming there is an unsupported format defined
+        // (or if Format is an enum, you could use null or another value)
+        Format unsupportedFormat = ExportCommand.matchFormat("invalid");
+        // Ensure the format is unsupported
+        assertEquals(unsupportedFormat, Format.UNSUPPORTED);
+        // Expect IllegalArgumentException when calling writeFile with an unsupported format
+        assertThrows(IllegalArgumentException.class, () -> {
+            ExportCommand.writeFile(jsonData, headers, filePathAndName, unsupportedFormat);
+        });
     }
 
     @Test

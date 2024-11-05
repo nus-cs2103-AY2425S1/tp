@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -34,28 +37,62 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the address book in CSV format.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " "
+            + "format\\csv";
     public static final String SUCCESS_MESSAGE = "The address book has been exported to "
-            + "/data/addressbook.csv in the specified format.";
+            + "/data/addressbook.%1$s in the specified format.";
 
-    public static final String FAILURE_MESSAGE = "Error exporting address book to CSV";
+    public static final String FAILURE_MESSAGE = "Error exporting address book to %1$s";
     public static final String BACKWARD_SLASH_REGEX = "\\\\";
     public static final String INVERTED_COMMA_REGEX = "\"";
     public static final String EMPTY_STRING = "";
 
+    public static final String DEFAULT_FILEPATH = "data/";
+    public static final String DEFAULT_FILENAME = "addressbook";
+
+    /**
+     * Class that handles Format enum type used in ExportCommand
+     */
+    public static enum Format {
+        CSV("csv"),
+        TXT("txt"),
+        UNSUPPORTED("unsupported");
+
+        private final String format;
+
+        Format(String format) {
+            this.format = format;
+        }
+
+        public String getKeyword() {
+            return this.format;
+        }
+    }
+    private final Format format;
+
+    /**
+     * Class that handles ExportCommand
+     */
+    public ExportCommand(Format format) {
+        requireAllNonNull(format);
+        this.format = format;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         String jsonFilePath = "data/addressbook.json";
-        String csvFilePath = "data/addressbook.csv";
 
         try {
             List<Map<String, String>> jsonData = readAndParseJson(jsonFilePath);
             Set<String> headers = extractHeaders(jsonData);
-            writeCsvFile(jsonData, headers, csvFilePath);
+            writeFile(jsonData,
+                    headers,
+                    DEFAULT_FILEPATH + DEFAULT_FILENAME,
+                    this.format);
         } catch (IOException e) {
-            return new CommandResult(FAILURE_MESSAGE);
+            return new CommandResult(String.format(FAILURE_MESSAGE, this.format.getKeyword()));
         }
-        return new CommandResult(SUCCESS_MESSAGE);
+        return new CommandResult(String.format(SUCCESS_MESSAGE, this.format.getKeyword()));
     }
 
     /**
@@ -135,6 +172,47 @@ public class ExportCommand extends Command {
         return headers;
     }
 
+    /**
+     * Checks if user's command input contains a valid format.
+     * @param string The format in the form of a String
+     * @return matching Format object if valid, null otherwise.
+     */
+    public static Format matchFormat(String string) {
+        Format formatType = Format.UNSUPPORTED;
+        if (string == null) {
+            return formatType;
+        }
+        for (Format format : Format.values()) {
+            if (string.equals(format.getKeyword())) {
+                formatType = format;
+                break;
+            }
+        }
+        return formatType;
+    }
+
+    /**
+     * Calls methods that write to csv or txt format depending on the format specified
+     * @param jsonData
+     * @param headers
+     * @throws IOException
+     */
+    static void writeFile(List<Map<String, String>> jsonData, Set<String> headers,
+                          String filePathAndName, Format format) throws IOException {
+        String formattedFilePath = filePathAndName + "." + format.getKeyword();
+        switch (format) {
+        case CSV -> {
+            writeCsvFile(jsonData, headers, formattedFilePath);
+            break;
+        }
+        case TXT -> {
+            writeTxtFile(jsonData, headers, formattedFilePath);
+            break;
+        }
+        default -> throw new IllegalArgumentException("Unknown/Unsupported file format");
+        };
+    }
+
     static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
             throws FileNotFoundException {
         try (PrintWriter writer = new PrintWriter(csvFilePath)) {
@@ -150,6 +228,39 @@ public class ExportCommand extends Command {
         }
     }
 
+    static void writeTxtFile(List<Map<String, String>> jsonData, Set<String> headers, String txtFilePath)
+            throws FileNotFoundException {
+        try (PrintWriter writer = new PrintWriter(txtFilePath)) {
+            for (Map<String, String> row : jsonData) {
+                writer.println("{");
+                for (String header : headers) {
+                    String cellValue = row.getOrDefault(header, "");
+
+                    // Check if the header is "tags" and format as a comma-separated list in square brackets
+                    if ("tags".equals(header) && !cellValue.isEmpty()) {
+                        // Assuming the tags come in as a set represented by a JSON-like structure
+                        // Parse the cell value if it's formatted as JSON-like, i.e., "{key1 : value1, key2 : value2}"
+                        cellValue = cellValue.replaceAll("[{}\"]", ""); // Remove curly braces and quotes
+                        String[] tagsArray = cellValue.split(","); // Split tags by comma if needed
+                        cellValue = "[ " + String.join(", ", tagsArray) + " ]"; // Join with comma and wrap in brackets
+                    } else {
+                        // For other fields, clean up quotes, commas, newline characters, and backslashes
+                        cellValue = cellValue
+                                .replace("\"", "")
+                                .replace(",", "")
+                                .replace("\\n", "")
+                                .replace("\\", "");
+                    }
+
+                    writer.printf("  %s | %s%n", header, cellValue);
+                }
+                writer.println("}");
+                writer.println(); // Blank line between records for readability
+            }
+        }
+    }
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -160,6 +271,14 @@ public class ExportCommand extends Command {
         if (!(other instanceof ExportCommand)) {
             return false;
         }
-        return true;
+        ExportCommand otherCommand = (ExportCommand) other;
+        return this.format.equals(otherCommand.format);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("format", this.format)
+                .toString();
     }
 }
