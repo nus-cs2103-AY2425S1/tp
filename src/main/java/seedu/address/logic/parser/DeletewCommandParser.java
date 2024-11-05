@@ -1,15 +1,18 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.Arrays;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeletewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 
-import java.util.Arrays;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-public class DeletewCommandParser {
+/**
+ * Parses input arguments and creates a new DeletewCommand object
+ */
+public class DeletewCommandParser implements Parser<DeletewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeletewCommand
      * and returns a DeletewCommand object for execution.

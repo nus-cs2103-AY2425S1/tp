@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletewCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -27,6 +28,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -60,6 +62,20 @@ public class AddressBookParserTest {
         command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new DeleteCommand(null, new NameMatchesKeywordPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_deletew() throws Exception {
+        // delete INDEX
+        DeletewCommand command = (DeletewCommand) parser.parseCommand(
+                DeletewCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeletewCommand(INDEX_FIRST_PERSON, null), command);
+
+        // delete KEYWORD
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        command = (DeletewCommand) parser.parseCommand(
+                DeletewCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new DeletewCommand(null, new NameMatchesWeddingPredicate(keywords)), command);
     }
 
     @Test

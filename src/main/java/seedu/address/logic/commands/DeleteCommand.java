@@ -116,53 +116,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-//    /**
-//     * Performs delete command logic when the input is an index.
-//     *
-//     * @param model {@code Model} which the command should operate on
-//     * @return the person deleted
-//     * @throws CommandException if an invalid index is given
-//     */
-//    public Person deleteWithIndex(Model model) throws CommandException {
-//        List<Person> lastShownList = model.getFilteredPersonList();
-//        if (lastShownList.isEmpty()) {
-//            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
-//        }
-//
-//        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-//            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-//                    lastShownList.size()));
-//        }
-//
-//        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-//        model.deletePerson(personToDelete);
-//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-//        return personToDelete;
-//    }
-//
-//    /**
-//     * Performs delete command logic when the input is a {@code String}.
-//     *
-//     * @param model {@code Model} which the command should operate on
-//     * @return the person deleted
-//     * @throws CommandException if the filtered list using {@code predicate} is empty
-//     */
-//    public Person deleteWithKeyword(Model model) throws CommandException {
-//        model.updateFilteredPersonList(predicate);
-//        List<Person> filteredList = model.getFilteredPersonList();
-//
-//        if (filteredList.isEmpty()) {
-//            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
-//        } else if (filteredList.size() == 1) {
-//            Person personToDelete = filteredList.get(0);
-//            model.deletePerson(personToDelete);
-//            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-//            return personToDelete;
-//        } else {
-//            return null;
-//        }
-//    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -205,8 +158,14 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
+        if (this.targetIndex != null) {
+            return new ToStringBuilder(this)
+                    .add("targetIndex", targetIndex)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("targetKeywords", predicate.toString())
+                    .toString();
+        }
     }
 }

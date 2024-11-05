@@ -22,6 +22,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.NameMatchesWeddingPredicate;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonWithRoleDescriptorBuilder;
 
@@ -162,4 +164,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the wedding at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showWeddingAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+
+        Wedding wedding = model.getFilteredWeddingList().get(targetIndex.getZeroBased());
+        final String[] splitName = wedding.getName().fullName.split("\\s+");
+        model.updateFilteredWeddingList(new NameMatchesWeddingPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredWeddingList().size());
+    }
 }

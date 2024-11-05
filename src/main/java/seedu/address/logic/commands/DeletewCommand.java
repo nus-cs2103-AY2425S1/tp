@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -8,11 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
-
+/**
+ * Deletes a wedding identified from the address book, using index or keyword.
+ */
 public class DeletewCommand extends Command {
     public static final String COMMAND_WORD = "deletew";
 
@@ -52,7 +55,8 @@ public class DeletewCommand extends Command {
             if (weddingToDelete != null) {
                 model.deleteWedding(weddingToDelete);
                 model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS); // Reset filter
-                return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS, Messages.format(weddingToDelete)));
+                return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
+                        Messages.format(weddingToDelete)));
             } else {
                 return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
             }
@@ -134,8 +138,15 @@ public class DeletewCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
+        if (this.targetIndex != null) {
+            return new ToStringBuilder(this)
+                    .add("targetIndex", targetIndex)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("targetKeywords", predicate.toString())
+                    .toString();
+        }
+
     }
 }
