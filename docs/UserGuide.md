@@ -254,6 +254,7 @@ Format: `filterOrder ORDER_STATUS`
 Examples:
 * `filterOrder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected person being displayed.
 * `listOrder 1` followed by `filterOrder completed` displays the list of all completed orders under the 1st person in the address book.
+  ![result for filtering completed order'](images/filterCompletedOrders.png)
 
 ### Clearing all entries : `clear`
 
