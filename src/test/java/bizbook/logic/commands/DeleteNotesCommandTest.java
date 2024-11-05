@@ -56,7 +56,7 @@ public class DeleteNotesCommandTest {
 
         // Set up the person index and note index
         Index validPersonIndex = INDEX_FIRST_PERSON;
-        Index validNoteIndex = Index.fromOneBased(1);
+        Index validNoteIndex = INDEX_FIRST_PERSON;
 
         DeleteNotesCommand deleteNotesCommand = new DeleteNotesCommand(validPersonIndex, validNoteIndex);
 
@@ -128,8 +128,8 @@ public class DeleteNotesCommandTest {
     public void equals() {
         Index indexFirstPerson = INDEX_FIRST_PERSON;
         Index indexSecondPerson = INDEX_SECOND_PERSON;
-        Index noteIndexFirst = Index.fromOneBased(1);
-        Index noteIndexSecond = Index.fromOneBased(2);
+        Index noteIndexFirst = INDEX_FIRST_PERSON;
+        Index noteIndexSecond = INDEX_SECOND_PERSON;
 
         DeleteNotesCommand deleteFirstNoteCommand = new DeleteNotesCommand(indexFirstPerson, noteIndexFirst);
         DeleteNotesCommand deleteSecondNoteCommand = new DeleteNotesCommand(indexSecondPerson, noteIndexSecond);
