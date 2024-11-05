@@ -33,9 +33,9 @@ You'll also learn how our commands work to kickstart the application. **_(7 min)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `showclients` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
+   * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` to the Address Book.
 
    * `delete John Doe` : Deletes the contact with name John Doe from the list.
 
@@ -69,7 +69,7 @@ This user guide is divided into four main feature categories:
 
 Commands for creating, updating, and deleting buyers and sellers.
 
-![showClients](images/showClients.png)
+![showClients](images/Ui.png)
 
 - #### **Add Buyer Command**
     - **Format:** `buyer n/<NAME> p/<PHONE> e/<EMAIL> [t/<TAG>...]`
