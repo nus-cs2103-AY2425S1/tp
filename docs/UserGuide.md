@@ -44,13 +44,13 @@
 
   .box-info {
     background-color: var(--info-bg-color) !important;
-    padding: 16px 32px;
+    padding: 16px 16px;
     border: none;
   }
 
   .box-warn {
     background-color: var(--warn-bg-color) !important;
-    padding: 16px 32px;
+    padding: 16px 24px;
     border: 2px solid var(--warn-border-color);
   }
 
