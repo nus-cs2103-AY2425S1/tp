@@ -130,7 +130,7 @@ Examples:
 
 **<ins>When in the main or inspect window**
 
-Shows a list of all contacts added to the contacts list. When you enter this command in either window, you will end up in the main window after this command.
+Takes you back to the main window, and shows a list of all contacts added to the contacts list. 
 
 Format: `list`
 
