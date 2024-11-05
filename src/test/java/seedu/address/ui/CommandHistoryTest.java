@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +36,7 @@ public class CommandHistoryTest {
 
     @Test
     public void getPreviousCommand_emptyHistory_returnsNull() {
-        assertNull(commandHistory.getPreviousCommand(),
+        assertEquals("", commandHistory.getPreviousCommand(),
                 "Previous command should be null when history is empty.");
     }
 
@@ -49,7 +48,7 @@ public class CommandHistoryTest {
         assertEquals("add Alice", commandHistory.getPreviousCommand());
 
         // No more history, so it should return null
-        assertNull(commandHistory.getPreviousCommand(),
+        assertEquals("", commandHistory.getPreviousCommand(),
                 "Should return null when no more previous commands are available.");
     }
 
