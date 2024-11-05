@@ -217,8 +217,18 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > ---
 
-    - **Failed Execution:** NIL
-
+    - **Failed Execution:**
+      > ---
+      >
+      > **Use Case**: Attempting to find a non-existent client
+      > 
+      > **Input**: `find Bob7`
+      > 
+      > **Output**: 0 persons listed!
+      > 
+      > ![noclients](images/no_clients.png)
+      > 
+      > ---
 
 - #### **Edit Command**
     - **Format:** `edit INDEX [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [t/<TAG>...] [r/<REMARK>]`
