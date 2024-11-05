@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label text="Statistics" />
+    <!-- BarChart with hardcoded data -->
+    <BarChart fx:id="barChart" prefWidth="400" prefHeight="300">
+        <xAxis>
+            <CategoryAxis fx:id="categoryAxis" label="Categories" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis fx:id="numberAxis" label="Values" />
+        </yAxis>
+    </BarChart>
+</VBox>
