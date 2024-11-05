@@ -113,6 +113,7 @@ public class AssignCommand extends Command {
             assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
             model.setPerson(personToAssign, assignedPerson);
             model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(
                     MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS,
                     Messages.format(assignedPerson),
