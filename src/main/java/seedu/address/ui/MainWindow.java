@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -18,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -146,6 +148,28 @@ public class MainWindow extends UiPart<Stage> {
                         contactDisplay.clear();
                     }
                 });
+
+        personListPanel.getPersonList().addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                Person selectedPerson = personListPanel.getPersonListView()
+                        .getSelectionModel().getSelectedItem();
+                if (change.wasRemoved()) {
+                    if (!personListPanel.getPersonList().contains(selectedPerson)) {
+                        contactDisplay.clear();
+                    }
+                }
+                if (change.wasUpdated() || change.wasReplaced()) {
+                    for (int i = change.getFrom(); i < change.getTo(); i++) {
+                        if (i < personListPanel.getPersonList().size()) {
+                            Person updatedPerson = personListPanel.getPersonList().get(i);
+                            System.out.println("Checking updated person: " + updatedPerson);
+                            contactDisplay.updateContactDetails(updatedPerson);
+                            System.out.println("Updated contact display with: " + updatedPerson);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     /**
