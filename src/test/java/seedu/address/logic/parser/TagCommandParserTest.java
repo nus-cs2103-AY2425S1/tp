@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.HashSet;
@@ -47,9 +47,9 @@ public class TagCommandParserTest {
     @Test
     public void parse_invalidIndex_throwsParseException() {
         // Index is 0 or signed or non-integer
-        assertParseFailure(parser, "0 t/friend", MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "-1 t/friend", MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "e t/friend", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "0 t/friend", MESSAGE_NON_POSITIVE_INDEX);
+        assertParseFailure(parser, "-1 t/friend", MESSAGE_NON_POSITIVE_INDEX);
+        assertParseFailure(parser, "e t/friend", MESSAGE_NON_POSITIVE_INDEX);
 
     }
 
