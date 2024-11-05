@@ -38,7 +38,7 @@ public class ViewwCommand extends Command {
     private final NameMatchesWeddingPredicate predicate;
 
     /**
-     * Creates a ViewwCommand to view the wedding details of the specified contact
+     * Creates a ViewwCommand to view the wedding details of the specified wedding
      */
     public ViewwCommand(Index targetIndex, NameMatchesWeddingPredicate predicate) {
         this.targetIndex = targetIndex;
@@ -83,7 +83,7 @@ public class ViewwCommand extends Command {
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
                     lastShownList.size()));
         }
         Wedding weddingToView = lastShownList.get(targetIndex.getZeroBased());

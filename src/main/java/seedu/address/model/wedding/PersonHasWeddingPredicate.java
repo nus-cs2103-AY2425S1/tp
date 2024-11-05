@@ -1,14 +1,13 @@
 package seedu.address.model.wedding;
 
-import seedu.address.commons.util.StringUtil;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+/**
+ * Tests that a {@code Wedding} is contained in a person under their wedding jobs or own wedding.
+ */
 public class PersonHasWeddingPredicate implements Predicate<Wedding> {
     private final Person person;
 
@@ -48,7 +47,7 @@ public class PersonHasWeddingPredicate implements Predicate<Wedding> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameMatchesWeddingPredicate)) {
+        if (!(other instanceof PersonHasWeddingPredicate)) {
             return false;
         }
 
@@ -57,8 +56,8 @@ public class PersonHasWeddingPredicate implements Predicate<Wedding> {
     }
 
     /**
-     * Returns a string representation of this NameMatchesWeddingPredicate.
-     * The string includes the list of keywords being matched against.
+     * Returns a string representation of this PersonHasWeddingPredicate.
+     * The string includes the person being matched against.
      *
      * @return A string representation of this predicate
      */

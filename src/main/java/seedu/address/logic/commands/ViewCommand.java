@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,10 +13,9 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.PersonHasWeddingPredicate;
 
-import java.util.List;
 
 /**
- * View the person in address book whose name matches the keyword.
+ * View the person in address book whose name matches the keyword or at the given index.
  * Keyword matching is case insensitive.
  */
 public class ViewCommand extends Command {
@@ -27,9 +27,9 @@ public class ViewCommand extends Command {
             + "Parameters: NAME (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " alice";
 
-    public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There is nothing to view.";
+    public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There is no contact to view.";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Viewing contact: ";
+    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Viewing contact: %s";
 
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "To view a specific contact, please specify the index of the contact you want to view.\n"
@@ -39,6 +39,9 @@ public class ViewCommand extends Command {
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
 
+    /**
+     * Creates a ViewCommand to view the contact details of the specified person
+     */
     public ViewCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
         this.targetIndex = targetIndex;
         this.predicate = predicate;
@@ -52,16 +55,16 @@ public class ViewCommand extends Command {
             Person personToView = getPersonByIndex(model);
             model.updateFilteredPersonList(p -> p.equals(personToView));
             model.updateFilteredWeddingList(new PersonHasWeddingPredicate(personToView));
-            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS + personToView.getName()));
+            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
         } else {
             Person personToView = getPersonByKeyword(model);
             if (personToView != null) {
                 // unique person found
                 model.updateFilteredWeddingList(new PersonHasWeddingPredicate(personToView));
-                return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS + personToView.getName()));
+                return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView.getName()));
             } else {
-                return new CommandResult(String.format(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                                model.getFilteredPersonList().size()) + "\n" + MESSAGE_DUPLICATE_HANDLING));
+                return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                                model.getFilteredPersonList().size()) + "\n" + MESSAGE_DUPLICATE_HANDLING);
             }
         }
     }
@@ -111,7 +114,32 @@ public class ViewCommand extends Command {
         }
 
         ViewCommand otherViewCommand = (ViewCommand) other;
-        return predicate.equals(otherViewCommand.predicate);
+
+        // Both commands have null fields
+        boolean bothHaveNullIndex = targetIndex == null && otherViewCommand.targetIndex == null;
+        boolean bothHaveNullPredicates = predicate == null && otherViewCommand.predicate == null;
+
+        // Both commands have non-null fields
+        boolean bothHaveIndex = targetIndex != null && otherViewCommand.targetIndex != null;
+        boolean bothHavePredicates = predicate != null && otherViewCommand.predicate != null;
+
+        // Case 1: Both have null targetIndex and null predicate
+        if (bothHaveNullIndex && bothHaveNullPredicates) {
+            return true;
+        }
+
+        // Case 2: Both have targetIndex but null predicate
+        if (bothHaveIndex && bothHaveNullPredicates) {
+            return targetIndex.equals(otherViewCommand.targetIndex);
+        }
+
+        // Case 3: Both have null targetIndex but have predicate
+        if (bothHaveNullIndex && bothHavePredicates) {
+            return predicate.equals(otherViewCommand.predicate);
+        }
+
+        // All other cases are false
+        return false;
     }
 
     @Override
