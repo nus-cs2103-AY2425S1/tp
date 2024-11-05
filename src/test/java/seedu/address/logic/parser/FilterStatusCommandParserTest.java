@@ -17,17 +17,17 @@ public class FilterStatusCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterStatusCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterStatusCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFilterStatusCommand() {
         // no leading and trailing whitespaces
         FilterStatusCommand expectedFilterStatusCommand =
-                new FilterStatusCommand(new StatusContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFilterStatusCommand);
+            new FilterStatusCommand(new StatusContainsKeywordsPredicate(Arrays.asList("Applied", "Hired")));
+        assertParseSuccess(parser, "Applied Hired", expectedFilterStatusCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFilterStatusCommand);
+        assertParseSuccess(parser, " \n Applied \n \t Hired  \t", expectedFilterStatusCommand);
     }
 }
