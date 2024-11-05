@@ -27,6 +27,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.reminder.AddReminderCommand;
+import seedu.address.logic.commands.reminder.DeleteReminderCommand;
+import seedu.address.logic.commands.reminder.EditReminderCommand;
+import seedu.address.logic.commands.reminder.ReminderCommandTestUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
@@ -173,6 +177,24 @@ public class ClientHubParserTest {
                 ViewCommand.SHORT_COMMAND_WORD + " " + keyword);
         assertEquals(new ViewCommand(new NameContainsKeywordsPredicate(List.of(keyword))), command);
     }
+
+    @Test
+    public void parseCommand_reminderDeleteCommand() throws Exception {
+        String keyword = "1";
+        DeleteReminderCommand command = (DeleteReminderCommand) parser.parseCommand(
+                DeleteReminderCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new DeleteReminderCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseShortCommand_reminderDeleteCommand() throws Exception {
+        String keyword = "1";
+        DeleteReminderCommand command = (DeleteReminderCommand) parser.parseCommand(
+                DeleteReminderCommand.COMMAND_WORD_SHORT + " " + keyword);
+        assertEquals(new DeleteReminderCommand(INDEX_FIRST_PERSON), command);
+    }
+
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

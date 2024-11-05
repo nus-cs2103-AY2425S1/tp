@@ -78,10 +78,6 @@ Adds a person to the Client Hub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A contact can have any number of Client Type (including 0)
-</div>
-
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Plan A d/likes bubble tea`
 * `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Plan A c/Plan B d/Loves travelling`
@@ -100,14 +96,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+  * At most 1 of each field can be edited at a time.(excluding CLIENT_TYPE)
 * Existing values will be updated to the input values.
 * When editing client types, the existing client types of the person will be removed i.e adding of client type is not cumulative.
 * You can remove all the contact’s client types by typing `c/` without
-    specifying any client typess after it.
+    specifying any client types after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing client types.
+*  `edit 2 n/Betsy Crower c/investment c/healthcare` Edits the name of the 2nd person to be `Betsy Crower` and add 2 client types of `investment` and `healthcare`.
 
 ### Locating persons by key information: `find`
 
@@ -227,6 +224,54 @@ Format: `fc CLIENT_TYPE`
 Examples:
 * `fc Investment` returns `Investment Plan`
 * `fc Investment Healthcare` returns `Investment Plan` and `Healthcare Plan`
+
+### Reminder Features
+ClientHub has a basic reminder list that keeps track of a users commitments to
+specific clients. The reminder list is a list of reminders that can be added,
+deleted, and edited.
+
+#### Adding Reminder: `radd` 
+
+Adds a reminder to the reminder list.
+
+Format: 
+
+`radd n/NAME dt/DATETIME r/REMINDER` or
+`ra n/NAME dt/DATETIME r/REMINDER`
+
+#### Deleting Reminder: `rdelete`
+
+Deletes a reminder from the reminder list.
+
+Format:
+`rdelete INDEX` or
+`rd INDEX`
+
+* Deletes the person with specified NAME
+* / is used to indicate specific name to delete
+    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
+    * However, deleting David Lim does not require / as it is already the **MOST** specific name.
+    * Name written before / must be **EXACT** name of the contact to be deleted.
+    * Order matters when using / to delete a contact.
+
+A **valid** `NAME` for delete should:
+* Not be empty.
+* For eg. Just typing `delete` without providing any `NAME` will throw an error.
+* Be a valid name that exists in the list of contacts.
+* For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
+
+Examples:
+* `delete John Doe` deletes the person named `John Doe`
+* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
+
+
+#### Editing Reminder: `redit`
+
+Edits an existing reminder in the reminder list.
+
+Format:
+`redit INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]` or
+`re INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]`
 
 
 ### Sort by name : `sort`

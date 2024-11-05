@@ -25,7 +25,8 @@ import seedu.address.model.reminder.ReminderDescription;
  * Edits a reminder in the address book.
  */
 public class EditReminderCommand extends Command {
-    public static final String COMMAND_WORD = "re"; // reminder edit
+    public static final String COMMAND_WORD = "redit"; // reminder edit
+    public static final String COMMAND_WORD_SHORT = "re"; // reminder edit
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a reminder in the address book identified "
             + "by the index number displayed in the reminder list. "
