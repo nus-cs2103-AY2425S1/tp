@@ -717,6 +717,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
 
+#### GUI
+
+* **Command box**: The box to type in enter commands
+* **Result display/status bar**: The box to display the result of commands
+* **Help window**: The window that displays the help information
+* **Address list/list of persons**: List of address
+* **Appointment list/list of appointments**: List of appointments
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -769,7 +777,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete person -1`<br>
          Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-         Expected: Similar to previous.
+         Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Editing a person
 
@@ -787,8 +795,18 @@ testers are expected to do more *exploratory* testing.
         - For a simple example, use the person added in the test case for adding a person.
     2. Test case:`find person n/Elmo`
     3. Expected: The list is updated to show all the people with names containing "elmo", non-case-sensitive.
-    - The status bar shows the following: "Found _ persons".
+    - The status bar shows the following: "Found `n` persons".
+    - The `n` refers to the amount of people with names containing "elmo".
     - The list of persons should now only show people matching the criteria.
+
+### Clearing person list
+
+1. Clearing the person list 
+    1. Prerequisites: At least one person in DocTrack, for proper testing.
+   2. Test case: `clear person`
+   3. Expected: The list is updated to show no persons.
+   - The status bar shows the following: "Address book has been cleared!"
+   - The list of appointments should also be empty.
 
 ### Adding an appointment
 
@@ -810,7 +828,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete appt -1 `<br>
        Expected: No appointment is deleted. Error details shown in the status message. Status bar remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+       Expected: No appointment is deleted. Error details shown in the status message. Status bar remains the same.
    
 ### Editing an appointment
 
@@ -828,9 +846,18 @@ testers are expected to do more *exploratory* testing.
         - For a simple example, use the appointment added in the test case for adding a person.
     2. Test case:`find appt n/[NAME]`
     3. Expected: The list is updated to show all the appointments with names containing "[NAME]", non-case-sensitive.
-    - The status bar shows the following: "Found _ appointments".
+    - The status bar shows the following: "Found `n` appointments".
+   - The `n` refers to the amount of appointment for people with names containing "elmo".
     - The list of appointments should now only show appointments matching the criteria.
-   
+
+### Clearing person list
+
+1. Clearing the appointment list
+    1. Prerequisites: At least one person in DocTrack, for proper testing.
+    2. Test case: `clear appt`
+    3. Expected: The list is updated to show no appointment.
+    - The status bar shows the following: "Appointment book has been cleared!"
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
