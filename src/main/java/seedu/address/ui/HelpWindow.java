@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,14 +9,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Controller for a help page
@@ -103,12 +97,12 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private void openUrl() {
         try {
-            // Create a URI object from the URL string
+            // Create a URI object
             URI uri = new URI(USERGUIDE_URL);
 
             // Check if Desktop is supported on the current platform
             if (Desktop.isDesktopSupported()) {
-                // Get the Desktop instance and open the browser with the URL
+                // Opens the link
                 Desktop.getDesktop().browse(uri);
             } else {
                 logger.warning("Desktop is not supported on this platform.");
