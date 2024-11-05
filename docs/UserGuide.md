@@ -74,7 +74,14 @@ Format: `help`
 
 ### Listing all Client: `list`
 
-Show a list of all clients contacts in Clientele+. This command is often used to return to the main client list
+Show a list of all clients contacts in Clientele+.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<br>
+This command is often used to return to the main client list
+
+</div>
 
 Format: `list`
 
