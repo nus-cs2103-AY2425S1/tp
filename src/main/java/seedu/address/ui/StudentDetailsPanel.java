@@ -70,8 +70,7 @@ public class StudentDetailsPanel extends UiPart<Region> {
                     VBox assignmentBox = new VBox();
                     assignmentBox.setSpacing(5); // Optional: add spacing between elements
 
-                    Label assignmentIdLabel = new Label("Assignment ID: " + (i + 1));
-                    Label titleLabel = new Label(assignment.getName());
+                    Label titleLabel = new Label(Integer.toString(i + 1) + ". " + assignment.getName());
                     titleLabel.getStyleClass().add("assignment-name");
 
                     Label scoreLabel = new Label("Score: " + assignment.getScore() + "/"
@@ -87,7 +86,7 @@ public class StudentDetailsPanel extends UiPart<Region> {
                     assignmentBox.getStyleClass().add("assignment-box");
 
                     // Add all labels to the VBox
-                    assignmentBox.getChildren().addAll(assignmentIdLabel, titleLabel, scoreLabel, statusLabel);
+                    assignmentBox.getChildren().addAll(titleLabel, scoreLabel, statusLabel);
 
                     // Add the VBox to the assignments FlowPane
                     assignments.getChildren().add(assignmentBox);
