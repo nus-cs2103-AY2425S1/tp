@@ -12,7 +12,7 @@ public class Quantity {
             "Quantity should be a positive number followed by a space and then a valid unit (e.g. 100 kg, 150 l). "
                     + "Valid units are: kg, g, l, ml, units";
 
-    public static final String VALIDATION_REGEX = "^([1-9]\\d*)(\\s+)(kg|g|l|ml|units)$";
+    public static final String VALIDATION_REGEX = "^([1-9]\\d*)(\\s+)(kg|g|L|mL|units)$";
 
     public final String value;
 
