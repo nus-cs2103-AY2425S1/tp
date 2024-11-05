@@ -144,14 +144,6 @@ public interface Model {
      */
     void setWedding(Wedding target, Wedding editedWedding);
 
-    /**
-     * Updates the rest of the list of weddings with the editedPerson.
-     *
-     * @param editedPerson Person whose details have been edited.
-     * @param personToEdit Person whose details are currently being edited.
-     */
-    void updatePersonInWedding(Person personToEdit, Person editedPerson);
-
     /** Returns an unmodifiable view of the filtered wedding list */
     ObservableList<Wedding> getFilteredWeddingList();
 
@@ -163,8 +155,14 @@ public interface Model {
 
     /** Updates the filter of the filtered wedding list to filter by the given {@code JobContainsKeywordsPredicate}. */
     void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate);
-
-    void updatePersonInWedding(Person editedPerson, Person personToEdit, Model model);
+    
+    /**
+     * Updates the rest of the list of weddings with the editedPerson.
+     *
+     * @param editedPerson Person whose details have been edited.
+     * @param personToEdit Person whose details are currently being edited.
+     */
+    void updatePersonInWedding(Person personToEdit, Person editedPerson);
 
     Person personWithAllTagsRemoved(Person personToDelete, Model model);
 
