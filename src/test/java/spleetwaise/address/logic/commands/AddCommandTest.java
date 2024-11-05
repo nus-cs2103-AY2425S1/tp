@@ -21,7 +21,6 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
@@ -142,11 +141,6 @@ public class AddCommandTest {
 
         @Override
         public Optional<Person> getPersonByPhone(Phone phone) {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<Person> getPersonByFilteredPersonListIndex(Index index) {
             return Optional.empty();
         }
     }

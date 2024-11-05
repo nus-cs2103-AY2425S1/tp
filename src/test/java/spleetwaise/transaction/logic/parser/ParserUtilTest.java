@@ -166,30 +166,30 @@ public class ParserUtilTest {
 
 
     @Test
-    public void getPersonFromIndex_null_exceptionThrown() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.getPersonFromAddressBookIndex(null));
+    public void getPersonByFilteredPersonListIndex_null_exceptionThrown() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(null));
     }
 
     @Test
-    public void getPersonFromIndex_personNotFound_exceptionThrown() {
+    public void getPersonByFilteredPersonListIndex_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
 
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
     }
 
     @Test
-    public void getPersonFromIndex_personFound_success() {
+    public void getPersonByFilteredPersonListIndex_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
         abModel.addPerson(TypicalPersons.ALICE);
 
-        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ALICE, testPerson);
     }
 
     @Test
-    public void getPersonFromIndexAfterFilter_personNotFound_exceptionThrown() {
+    public void getPersonByFilteredPersonListIndexAfterFilter_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
         CommonModel.initialise(abModel, null);
@@ -198,11 +198,11 @@ public class ParserUtilTest {
 
         CommonModel.getInstance().updateFilteredPersonList(predicate);
 
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
     }
 
     @Test
-    public void getPersonFromIndexAfterFilter_personFound_success() {
+    public void getPersonByFilteredPersonListIndexAfterFilter_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
         CommonModel.initialise(abModel, null);
@@ -211,7 +211,7 @@ public class ParserUtilTest {
 
         CommonModel.getInstance().updateFilteredPersonList(predicate);
 
-        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromAddressBookIndex(TEST_INDEX));
+        Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ELLE, testPerson);
     }
 }

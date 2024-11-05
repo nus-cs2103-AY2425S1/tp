@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -125,19 +126,21 @@ public class ParserUtil extends BaseParserUtil {
     }
 
     /**
-     * Finds the corresponding Person displayed on the current Address Book view with the provided index.
+     * Retrieves a {@code Person} from the filtered person list at the specified {@code Index}.
      *
-     * @param index The 1-based index corresponding to the Person entry.
-     * @return A Person who has the specified index in the current Address Book view.
-     * @throws ParseException Invalid index or index is out of bounds.
+     * @param index The {@code Index} of the person to retrieve from the filtered address book list.
+     * @return The {@code Person} at the specified index in the filtered person list.
+     * @throws ParseException If the specified index is out of bounds for the filtered person list.
      */
-    public static Person getPersonFromAddressBookIndex(Index index) throws ParseException {
+    public static Person getPersonByFilteredPersonListIndex(Index index)
+            throws ParseException {
         requireNonNull(index);
-        Optional<Person> p = CommonModel.getInstance().getPersonByFilteredPersonListIndex(index);
-        if (p.isEmpty()) {
+        List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        return p.get();
+        return lastShownList.get(index.getZeroBased());
     }
 }
