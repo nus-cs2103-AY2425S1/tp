@@ -94,6 +94,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
