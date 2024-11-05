@@ -56,12 +56,9 @@ public class EventDetailsPanel extends UiPart<Region> {
         startIndexOfAssignedVendors = logic.getStartingIndexOfAssignedVendors();
 
         ObservableObjectValue<Event> observableEvent = logic.getViewedEvent();
-        setEvent(observableEvent.get());
-        showEventDetails();
-        updateAssignedVendors();
 
         observableEvent.addListener((observable, oldValue, newValue) -> {
-            setEvent(newValue);
+            setEvent(newValue, this.logic.getRelativeIndexOfEvent(newValue));
             showEventDetails();
             updateAssignedVendors();
         });
@@ -80,10 +77,11 @@ public class EventDetailsPanel extends UiPart<Region> {
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
-    private void setEvent(Event event) {
+    private void setEvent(Event event, int index) {
         this.event = event;
         if (event != null) {
-            name.setText(event.getName().fullName);
+            String nameWithIndex = String.format("%d. %s", index + 1, event.getName().fullName);
+            name.setText(nameWithIndex);
             date.setText(event.getDate().toString());
             // Empty tags will leave behind the last set of tags,
             // so we clear the tags before adding new tags
