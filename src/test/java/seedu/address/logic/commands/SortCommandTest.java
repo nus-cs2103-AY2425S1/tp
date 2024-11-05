@@ -63,7 +63,7 @@ public class SortCommandTest {
         // Ensure the persons are sorted by name in ascending order
         assertTrue(model.getFilteredPersonList().get(0).equals(ALICE));
         assertTrue(model.getFilteredPersonList().get(1).equals(BENSON));
-        assertTrue(model.getFilteredPersonList().get(6).equals(GEORGE));
+        assertTrue(model.getFilteredPersonList().get(7).equals(GEORGE));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class SortCommandTest {
 
         // Ensure the persons are sorted by deadline in descending order
         assertTrue(model.getFilteredPersonList().get(0).equals(DANIEL)); // DANIEL has the latest deadline
-        assertTrue(model.getFilteredPersonList().get(6).equals(GEORGE)); // GEORGE has the earliest deadline
+        assertTrue(model.getFilteredPersonList().get(7).equals(GEORGE)); // GEORGE has the earliest deadline
     }
 
     @Test
