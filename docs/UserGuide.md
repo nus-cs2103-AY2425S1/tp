@@ -308,7 +308,8 @@ Launches GitHub repository of the specified person on the browser from the addre
 
 <md>**Examples:**</md>
 
-* `github n/Betsy` launches the GitHub repository of the person named `Betsy`, using the GitHub username assigned to `Betsy`.
+* `github n/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned to `Harry`.
+  ![github use case for launching Harry's repository](images/githubUsage.png)
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -325,7 +326,7 @@ Opens a window at the side with the full details of the specified person from th
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * View the full details of the selected contact.
-* The name refers to the full name of the person shown in the displayed person list.
+* `NAME` refers to the full name of the person shown in the displayed person list.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
   </box>
 
@@ -335,6 +336,7 @@ Opens a window at the side with the full details of the specified person from th
 
 * `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
 * Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`.
+  ![viewing John Doe's contact detail in the view window](images/viewWindowScreenshot.png)
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
