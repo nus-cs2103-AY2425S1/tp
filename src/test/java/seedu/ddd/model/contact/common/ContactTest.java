@@ -3,6 +3,7 @@ package seedu.ddd.model.contact.common;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
+import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_CLIENT_PHONE;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_1;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_TAG_2;
 import static seedu.ddd.testutil.contact.TypicalContactFields.VALID_VENDOR_ADDRESS;
@@ -53,19 +54,35 @@ public class ContactTest {
                 .build();
         assertTrue(VALID_CLIENT.isSameContact(otherClient));
 
-        // different name, all other attributes same -> returns false
-        otherClient = new ClientBuilder(VALID_CLIENT).withName(VALID_VENDOR_NAME).build();
+        // same phone, all other attributes different -> returns true
+        otherClient = new ClientBuilder(VALID_CLIENT)
+                .withName(VALID_VENDOR_NAME)
+                .withEmail(VALID_VENDOR_EMAIL)
+                .withAddress(VALID_VENDOR_ADDRESS)
+                .withTags(VALID_TAG_1)
+                .build();
+        assertTrue(VALID_CLIENT.isSameContact(otherClient));
+
+        // different name and phone, all other attributes same -> returns false
+        otherClient = new ClientBuilder(VALID_CLIENT)
+                .withName(VALID_VENDOR_NAME)
+                .withPhone(VALID_VENDOR_PHONE)
+                .build();
         assertFalse(VALID_CLIENT.isSameContact(otherClient));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case and different phone, all other attributes same -> returns false
         Contact otherVendor = new VendorBuilder(VALID_VENDOR)
                 .withName(VALID_VENDOR_NAME.toLowerCase())
+                .withPhone(VALID_CLIENT_PHONE)
                 .build();
         assertFalse(VALID_VENDOR.isSameContact(otherVendor));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces and different phone, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_VENDOR_NAME + " ";
-        otherVendor = new VendorBuilder(VALID_VENDOR).withName(nameWithTrailingSpaces).build();
+        otherVendor = new VendorBuilder(VALID_VENDOR)
+                .withName(nameWithTrailingSpaces)
+                .withPhone(VALID_CLIENT_PHONE)
+                .build();
         assertFalse(VALID_VENDOR.isSameContact(otherVendor));
 
         // should equal self
