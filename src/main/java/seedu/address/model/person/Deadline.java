@@ -22,7 +22,7 @@ public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format dd-MM-yyyy, and it should be a valid date.";
-    public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter JSON_STORAGE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final Pattern PATTERN_DATE =
             Pattern.compile("^(\\d+)[_\\-\\/|](\\d+)[_\\-\\/|](\\d+)$");
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
