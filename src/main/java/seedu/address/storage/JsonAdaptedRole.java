@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static seedu.address.logic.parser.ParserUtil.parseRole;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.role.Role;
@@ -19,7 +19,7 @@ class JsonAdaptedRole {
      * Constructs a {@code JsonAdaptedRole} with the given {@code roleName}.
      */
     @JsonCreator
-    public JsonAdaptedRole(String roleName) {
+    public JsonAdaptedRole(@JsonProperty("name") String roleName) {
         this.roleName = roleName;
     }
 
@@ -34,7 +34,7 @@ class JsonAdaptedRole {
         this.roleName = null;
     }
 
-    @JsonValue
+    @JsonProperty("name")
     public String getRoleName() {
         return roleName;
     }
