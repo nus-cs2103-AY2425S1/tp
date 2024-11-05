@@ -81,6 +81,7 @@ public class Messages {
         boolean emailIsEmpty = person.getEmail().value.isEmpty();
         boolean majorIsEmpty = person.getMajor().value.isEmpty();
         boolean yearIsEmpty = person.getYear().value.isEmpty();
+        boolean groupsIsEmpty = person.getGroups().isEmpty();
 
         if (!emailIsEmpty) {
             builder.append("; Email: ")
@@ -95,6 +96,11 @@ public class Messages {
         if (!yearIsEmpty) {
             builder.append("; Year: ")
                     .append(person.getYear());
+        }
+
+        if (!groupsIsEmpty) {
+            builder.append("; Group(s): ");
+            person.getGroups().forEach(builder::append);
         }
 
         return builder.toString();

@@ -15,7 +15,8 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
  * Parses input arguments and creates a new ShowCommand object
  */
 public class ShowCommandParser implements Parser<ShowCommand> {
-    private static String VALIDATION_REGEX = "^[a-z0-9 ]*$";
+
+    private static final String VALIDATION_REGEX = "[^\\s].*";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ShowCommand

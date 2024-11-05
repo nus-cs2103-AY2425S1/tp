@@ -28,16 +28,32 @@ public class ShowCommandParserTest {
                 + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
     @Test
-    public void parse_negativeNumber_throwsParseException() {
-        assertParseFailure(parser, "-3", "Invalid arguments! Must be alphanumeric"
-                + " lowercase characters \n"
-                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+    public void parse_lowerCaseLetters_returnsShowCommand() {
+        Predicate<Person> predicate = new GroupContainsKeywordsPredicate(Arrays.asList("group"));
+        ShowCommand expectedShowCommand = new ShowCommand(predicate);
+
+        assertParseSuccess(parser, "group", expectedShowCommand);
     }
     @Test
-    public void parse_specialSymbol_throwsParseException() {
-        assertParseFailure(parser, "%", "Invalid arguments! Must be alphanumeric"
-                + " lowercase characters \n"
-                + String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+    public void parse_upperCaseLetters_returnsShowCommand() {
+        Predicate<Person> predicate = new GroupContainsKeywordsPredicate(Arrays.asList("GROUP"));
+        ShowCommand expectedShowCommand = new ShowCommand(predicate);
+
+        assertParseSuccess(parser, "GROUP", expectedShowCommand);
+    }
+    @Test
+    public void parse_mixLetters_returnsShowCommand() {
+        Predicate<Person> predicate = new GroupContainsKeywordsPredicate(Arrays.asList("Group"));
+        ShowCommand expectedShowCommand = new ShowCommand(predicate);
+
+        assertParseSuccess(parser, "Group", expectedShowCommand);
+    }
+    @Test
+    public void parse_specialSymbol_returnsShowCommand() {
+        Predicate<Person> predicate = new GroupContainsKeywordsPredicate(Arrays.asList("$$$"));
+        ShowCommand expectedShowCommand = new ShowCommand(predicate);
+
+        assertParseSuccess(parser, "$$$", expectedShowCommand);
     }
 
     @Test

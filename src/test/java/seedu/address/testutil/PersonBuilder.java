@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
@@ -33,7 +34,7 @@ public class PersonBuilder {
     private Email email;
     private Major major;
     private Year year;
-    private Set<Group> groups;
+    private GroupList groups;
     private Comment comment;
 
     /**
@@ -45,7 +46,8 @@ public class PersonBuilder {
         email = Email.makeEmail(DEFAULT_EMAIL);
         major = Major.makeMajor(DEFAULT_MAJOR);
         year = Year.makeYear(DEFAULT_YEAR);
-        groups = new HashSet<>(Collections.singleton(new Group(DEFAULT_GROUP)));
+        Set<Group> groupSet = new HashSet<>(Collections.singleton(new Group(DEFAULT_GROUP)));
+        groups = new GroupList(groupSet);
         comment = new Comment(DEFAULT_COMMENT);
     }
 
@@ -58,7 +60,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         major = personToCopy.getMajor();
         year = personToCopy.getYear();
-        groups = new HashSet<>(personToCopy.getGroups());
+        groups = personToCopy.getGroupList();
         comment = personToCopy.getComment();
     }
 
@@ -71,10 +73,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code groups} into a {@code GroupList} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.groups = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withGroups(String ... groups) {
+        this.groups = SampleDataUtil.getGroupList(groups);
         return this;
     }
 

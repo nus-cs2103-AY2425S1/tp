@@ -1,9 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
@@ -73,10 +72,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Group> personGroups = new ArrayList<>();
-        for (JsonAdaptedGroup tag : groups) {
-            personGroups.add(tag.toModelType());
-        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -128,8 +123,16 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
         }
         final Comment modelComment = new Comment(comment);
-
-        final Set<Group> modelGroups = new HashSet<>(personGroups);
+        final GroupList modelGroups = new GroupList();
+        for (JsonAdaptedGroup group : groups) {
+            modelGroups.addGroup(group.toModelType());
+        }
+        List<Group> invalidGroups = modelGroups.getUnmodifiableGroups().stream()
+                .filter(groupName -> !Group.isValidGroupName(groupName.getGroupName()))
+                .collect(Collectors.toList());
+        if (!invalidGroups.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
+        }
         return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear, modelComment);
     }
 

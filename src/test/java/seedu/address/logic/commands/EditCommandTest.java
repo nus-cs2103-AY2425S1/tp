@@ -56,7 +56,7 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withStudentId(VALID_STUDENTID_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withGroups(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withStudentId(VALID_STUDENTID_BOB).withGroups(VALID_TAG_HUSBAND).build();

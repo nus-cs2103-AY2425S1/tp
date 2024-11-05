@@ -4,13 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_OVERFLOW_INDEX;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -185,14 +184,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> groups} into a {@code Set<Tag>}.
      */
-    public static Set<Group> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Group> groupSet = new HashSet<>();
-        for (String tagName : tags) {
-            groupSet.add(parseGroup(tagName));
+    public static GroupList parseGroups(Collection<String> groups) throws ParseException {
+        requireNonNull(groups);
+        final GroupList groupList = new GroupList();
+        for (String groupName : groups) {
+            groupList.addGroup(parseGroup(groupName));
         }
-        return groupSet;
+        return groupList;
     }
 }

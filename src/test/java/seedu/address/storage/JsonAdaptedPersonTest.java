@@ -22,7 +22,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_STUDENTID = "12346";
     private static final String INVALID_MAJOR = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "";
     private static final String INVALID_YEAR = "0";
 
     private static final String VALID_NAME = BENSON.getName().toString();

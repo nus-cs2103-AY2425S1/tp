@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -23,7 +24,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_MAJOR = " ";
     private static final String INVALID_NETID = "e12345";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "the only group that is not allowed is one that is longer than 15 chars";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_STUDENTID = "A1234567P";
@@ -167,24 +168,24 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroups(null));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_GROUP_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroups(Arrays.asList(VALID_GROUP_1, INVALID_TAG)));
     }
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+        assertTrue(ParserUtil.parseGroups(Collections.emptyList()).isEmpty());
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Group> actualGroupSet = ParserUtil.parseTags(Arrays.asList(VALID_GROUP_1, VALID_GROUP_2));
-        Set<Group> expectedGroupSet = new HashSet<Group>(Arrays.asList(new Group(VALID_GROUP_1),
-                new Group(VALID_GROUP_2)));
+        GroupList actualGroupSet = ParserUtil.parseGroups(Arrays.asList(VALID_GROUP_1, VALID_GROUP_2));
+        Set<Group> groupSet = new HashSet<>(Arrays.asList(new Group(VALID_GROUP_1), new Group(VALID_GROUP_2)));
+        GroupList expectedGroupSet = new GroupList(groupSet);
 
         assertEquals(expectedGroupSet, actualGroupSet);
     }

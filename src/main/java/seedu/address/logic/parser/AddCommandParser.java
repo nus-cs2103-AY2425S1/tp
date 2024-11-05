@@ -8,12 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
@@ -43,7 +42,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID,
-                PREFIX_NETID, PREFIX_MAJOR, PREFIX_YEAR, PREFIX_GROUP);
+                PREFIX_NETID, PREFIX_MAJOR, PREFIX_YEAR);
+        argMultimap.verifyLessThanFourDuplicatePrefixesFor(PREFIX_GROUP);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
 
@@ -63,7 +63,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
         }
 
-        Set<Group> groupList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_GROUP));
+        GroupList groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
 
         Comment comment = new Comment("");
 

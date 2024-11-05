@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -37,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setStudentId(person.getStudentId());
         descriptor.setEmail(person.getEmail());
         descriptor.setMajor(person.getMajor());
-        descriptor.setGroups(person.getGroups());
+        descriptor.setGroups(person.getGroupList());
         descriptor.setYear(person.getYear());
     }
 
@@ -79,7 +80,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withGroups(String... groups) {
         Set<Group> groupSet = Stream.of(groups).map(Group::new).collect(Collectors.toSet());
-        descriptor.setGroups(groupSet);
+        descriptor.setGroups(new GroupList(groupSet));
         return this;
     }
 

@@ -14,8 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 public class Group {
 
     public static final String MESSAGE_CONSTRAINTS = "Group is written as g/GROUP_NAME "
-            + "(less than 16 alphanumerical characters and in lowercase)";
-    public static final String VALIDATION_REGEX = "^[a-z0-9 ]{1,15}$";
+            + "(less than 16 characters)";
+    public static final String VALIDATION_REGEX = "^.{1,15}$";
     private static final Logger logger = LogsCenter.getLogger(Group.class);
     public final String groupName;
     /**
@@ -49,7 +49,7 @@ public class Group {
         }
 
         Group otherGroup = (Group) other;
-        return groupName.equals(otherGroup.groupName);
+        return groupName.equalsIgnoreCase(otherGroup.groupName);
     }
 
     @Override
@@ -58,10 +58,17 @@ public class Group {
     }
 
     /**
+     * Get group name
+     */
+    public String getGroupName() {
+        return groupName;
+    }
+
+    /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return groupName;
+        return "[" + groupName + "]";
     }
 
 }

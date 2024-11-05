@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.group.Group;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -21,7 +22,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getGroups().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getGroupList().addGroup(new Group("3")));
     }
 
     @Test
@@ -87,7 +88,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", studentId="
                 + ALICE.getStudentId() + ", email=" + ALICE.getEmail()
-                + ", major=" + ALICE.getMajor() + ", year=" + ALICE.getYear() + ", groups=" + ALICE.getGroups()
+                + ", major=" + ALICE.getMajor() + ", year=" + ALICE.getYear() + ", groups=" + ALICE.getGroupList()
                 + ", comment=" + ALICE.getComment() + "}";
         assertEquals(expected, ALICE.toString());
     }

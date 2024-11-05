@@ -45,32 +45,32 @@ public class GroupContainsKeywordsPredicateTest {
         // One keyword
         GroupContainsKeywordsPredicate predicate =
                 new GroupContainsKeywordsPredicate(Collections.singletonList("1"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("group 1").build()));
+        assertTrue(predicate.test(new PersonBuilder().withGroups("group 1").build()));
 
         // Only one matching keyword
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("2", "3"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("group 2").build()));
+        assertTrue(predicate.test(new PersonBuilder().withGroups("group 2").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTags("group 1").build()));
+        assertFalse(predicate.test(new PersonBuilder().withGroups("group 1").build()));
 
         // Non-matching keyword
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("4"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("group 6").build()));
+        assertFalse(predicate.test(new PersonBuilder().withGroups("group 6").build()));
 
         // Keyword that contains the number but is not equal
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("5"));
-        assertFalse(predicate.test(new PersonBuilder().withTags("group 51").build()));
+        assertFalse(predicate.test(new PersonBuilder().withGroups("group 51").build()));
 
         // Keywords match studentid, email and major, but does not match group
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("A9900990L", "e1234567@u.nus.edu", "Computer",
                 "Science"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withStudentId("A9900990L")
-                .withEmail("e1234567@u.nus.edu").withMajor("Computer Science").withTags("group 1").build()));
+                .withEmail("e1234567@u.nus.edu").withMajor("Computer Science").withGroups("group 1").build()));
     }
 
     @Test

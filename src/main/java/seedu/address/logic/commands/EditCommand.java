@@ -9,12 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -22,7 +19,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
@@ -105,7 +102,7 @@ public class EditCommand extends Command {
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Major updatedAddress = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
+        GroupList updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroupList());
         Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
         Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
         return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress,
@@ -145,7 +142,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private Email email;
         private Major major;
-        private Set<Group> groups;
+        private GroupList groups;
         private Year year;
         private Comment comment;
 
@@ -153,7 +150,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code groups} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -221,8 +218,8 @@ public class EditCommand extends Command {
          * Sets {@code groups} to this object's {@code groups}.
          * A defensive copy of {@code groups} is used internally.
          */
-        public void setGroups(Set<Group> groups) {
-            this.groups = (groups != null) ? new HashSet<>(groups) : null;
+        public void setGroups(GroupList groups) {
+            this.groups = (groups != null) ? groups.makeCopy() : null;
         }
 
         /**
@@ -230,8 +227,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Group>> getGroups() {
-            return (groups != null) ? Optional.of(Collections.unmodifiableSet(groups)) : Optional.empty();
+        public Optional<GroupList> getGroups() {
+            return (groups != null) ? Optional.of(groups.makeListUnmodifiable()) : Optional.empty();
         }
 
         @Override
