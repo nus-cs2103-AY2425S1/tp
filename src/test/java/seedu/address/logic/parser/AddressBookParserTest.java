@@ -159,6 +159,12 @@ public class AddressBookParserTest {
         assertEquals(expected, new AddressBookParser()
                 .parseSearchCommand(ExitSearchModeCommand.COMMAND_WORD));
     }
+    @Test
+    public void parseSearchCommand_exitCommand() throws ParseException {
+        Command expected = new ExitCommand();
+        assertEquals(expected, new AddressBookParser()
+                .parseSearchCommand(ExitCommand.COMMAND_WORD));
+    }
 
     @Test
     public void parseSearchCommand_unrecognisedInput_throwsParseException() {

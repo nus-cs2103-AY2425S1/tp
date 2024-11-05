@@ -12,7 +12,7 @@ import seedu.address.model.event.EventManager;
  * Exits search mode.
  */
 public class ExitSearchModeCommand extends Command {
-    public static final String COMMAND_WORD = "exitsearchmode";
+    public static final String COMMAND_WORD = "exitsearch";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits search mode.\n"
             + "Example: " + COMMAND_WORD;

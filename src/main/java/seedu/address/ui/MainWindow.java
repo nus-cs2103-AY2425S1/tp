@@ -139,12 +139,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         updateUiBasedOnSearchMode(logic.getSearchMode().get());
-        //        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        //        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        //        if (logic.getSearchMode()) {
-        //            allPersonListPanel = new PersonListPanel(logic.getAllPersons());
-        //            personListPanelPlaceholder.getChildren().add(allPersonListPanel.getRoot());
-        //        }
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());

@@ -47,6 +47,7 @@ public class ViewEventCommand extends Command {
         Event eventToView = events.get(targetIndex.getZeroBased());
 
         model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(eventToView));
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, eventToView.getName()));
     }
 

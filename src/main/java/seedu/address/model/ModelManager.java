@@ -210,5 +210,4 @@ public class ModelManager implements Model {
     public ObservableList<Person> getAllPersons() {
         return addressBook.getPersonList();
     }
-
 }

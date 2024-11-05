@@ -13,9 +13,6 @@ import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 
 
-
-
-
 /**
  * Represents an Event in the address book.
  */
