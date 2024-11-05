@@ -2,12 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.START_TIME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_APPOINTMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_DATE_APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB;
@@ -37,7 +35,6 @@ public class EditAppointmentCommandParserTest {
         String userInput = NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY
                 + VALID_NEW_DATE_APPOINTMENT_DESC_BOB + VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB
                 + VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB;
-        System.out.println(userInput);
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
                 .withDate(VALID_DATE_APPOINTMENT_BOB)
                 .withStartTime(VALID_START_TIME_APPOINTMENT_BOB)
@@ -97,7 +94,7 @@ public class EditAppointmentCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no nric specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, DATE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -109,17 +106,14 @@ public class EditAppointmentCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        String expectedString = "Please do not enter anything before the keywords!\n"
+            + "Please remove this from your input: 1 some random string";
 
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string" + NRIC_DESC_AMY + DATE_DESC_AMY + START_TIME_DESC_AMY
+            + VALID_NEW_DATE_APPOINTMENT_DESC_BOB + VALID_NEW_START_TIME_APPOINTMENT_DESC_BOB
+            + VALID_NEW_END_TIME_APPOINTMENT_DESC_BOB, expectedString);
 
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
 }
