@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_NAME_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -30,35 +30,8 @@ public class ViewCommandTest {
     private Model expectedModel = new ModelManager(getAdditionalAddressBook(), new UserPrefs());
 
     @Test
-    public void equals() {
-        NameMatchesKeywordPredicate firstPredicate =
-                new NameMatchesKeywordPredicate(Collections.singletonList("first"));
-        NameMatchesKeywordPredicate secondPredicate =
-                new NameMatchesKeywordPredicate(Collections.singletonList("second"));
-
-        ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
-
-        // same object -> returns true
-        assertTrue(viewFirstCommand.equals(viewFirstCommand));
-
-        // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
-        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(viewFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(viewFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(viewFirstCommand.equals(viewSecondCommand));
-    }
-
-    @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW, 0, "");
         NameMatchesKeywordPredicate predicate = preparePredicate(" ");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -68,7 +41,8 @@ public class ViewCommandTest {
 
     @Test
     public void execute_singleWordInKeyword_partialNameMatched() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, KEYWORD_MATCHING_MEIER);
         NameMatchesKeywordPredicate predicate = preparePredicate(KEYWORD_MATCHING_MEIER);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -78,19 +52,72 @@ public class ViewCommandTest {
 
     @Test
     public void execute_multipleWordsInKeyword_nameMatched() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, "Carl Kurz");
         NameMatchesKeywordPredicate predicate = preparePredicate("Carl Kurz");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
 
-        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                1, "Carl Duh Kurz");
         predicate = preparePredicate("Carl Duh Kurz");
         command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARLDUH), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleSpacesInKeyword_personFound() {
+        // Multiple spaces between keywords should be treated as a single space
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, "Carl Kurz");
+        NameMatchesKeywordPredicate predicate = preparePredicate("Carl      Kurz");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_mixedCaseKeyword_personFound() {
+        // Case insensitive matching test
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_NAME_OVERVIEW,
+                2, "cArL kUrZ");
+        NameMatchesKeywordPredicate predicate = preparePredicate("cArL kUrZ");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void equals() {
+        NameMatchesKeywordPredicate firstPredicate =
+                preparePredicate("first");
+        NameMatchesKeywordPredicate secondPredicate =
+                preparePredicate("second");
+
+        ViewCommand findFirstCommand = new ViewCommand(firstPredicate);
+        ViewCommand findSecondCommand = new ViewCommand(secondPredicate);
+
+        // same object -> returns true
+        assertTrue(findFirstCommand.equals(findFirstCommand));
+
+        // same values -> returns true
+        ViewCommand findFirstCommandCopy = new ViewCommand(firstPredicate);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(findFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(findFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
@@ -100,6 +127,7 @@ public class ViewCommandTest {
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
     }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.

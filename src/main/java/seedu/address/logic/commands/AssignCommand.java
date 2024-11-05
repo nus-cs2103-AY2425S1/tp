@@ -71,7 +71,7 @@ public class AssignCommand extends Command {
     private final Set<Index> weddingIndices;
 
     /**
-     * @param index of the person in the filtered person list to assign role
+     * @param index                    of the person in the filtered person list to assign role
      * @param personWithRoleDescriptor details of the person to assign role
      */
     public AssignCommand(Index index, NameMatchesKeywordPredicate predicate,
@@ -186,10 +186,11 @@ public class AssignCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the role added to {@code personToAddRole}
-     *  with {@code personWithRoleDescriptor}.
+     * with {@code personWithRoleDescriptor}.
      */
     private static Person createPersonWithRole(Person personToAddRole,
-                                           PersonWithRoleDescriptor personWithRoleDescriptor) throws CommandException {
+                                               PersonWithRoleDescriptor personWithRoleDescriptor)
+                                                throws CommandException {
         assert personToAddRole != null;
 
         Name updatedName = personWithRoleDescriptor.getName().orElse(personToAddRole.getName());
