@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -49,5 +50,11 @@ public class DeleteTagCommandParserTest {
     public void parse_missingInput_throwsParseException() {
         assertParseFailure(parser, " ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_indexError_throwsParseException() {
+        assertParseFailure(parser, "-1 t/hi",
+                String.format(MESSAGE_NON_POSITIVE_INDEX, DeleteTagCommand.MESSAGE_USAGE));
     }
 }

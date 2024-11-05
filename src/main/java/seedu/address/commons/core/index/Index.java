@@ -1,6 +1,8 @@
 package seedu.address.commons.core.index;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a zero-based or one-based index.
@@ -17,9 +19,9 @@ public class Index implements Comparable<Index> {
      * Index can only be created by calling {@link Index#fromZeroBased(int)} or
      * {@link Index#fromOneBased(int)}.
      */
-    private Index(int zeroBasedIndex) {
+    private Index(int zeroBasedIndex) throws CommandException {
         if (zeroBasedIndex < 0) {
-            throw new IndexOutOfBoundsException();
+            throw new CommandException(Messages.MESSAGE_NON_POSITIVE_INDEX);
         }
 
         this.zeroBasedIndex = zeroBasedIndex;
@@ -40,14 +42,14 @@ public class Index implements Comparable<Index> {
     /**
      * Creates a new {@code Index} using a zero-based index.
      */
-    public static Index fromZeroBased(int zeroBasedIndex) {
+    public static Index fromZeroBased(int zeroBasedIndex) throws CommandException {
         return new Index(zeroBasedIndex);
     }
 
     /**
      * Creates a new {@code Index} using a one-based index.
      */
-    public static Index fromOneBased(int oneBasedIndex) {
+    public static Index fromOneBased(int oneBasedIndex) throws CommandException {
         return new Index(oneBasedIndex - 1);
     }
 
