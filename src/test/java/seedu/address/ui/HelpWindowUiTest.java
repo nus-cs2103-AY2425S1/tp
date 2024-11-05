@@ -3,6 +3,7 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -10,6 +11,9 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +27,10 @@ import javafx.stage.Stage;
 
 public class HelpWindowUiTest extends ApplicationTest {
 
+    private static final Logger testLogger = Logger.getLogger(HelpWindow.class.getName());
     private HelpWindow helpWindow;
     private Desktop mockDesktop;
+
 
     @Override
     public void start(Stage stage) {
@@ -112,4 +118,43 @@ public class HelpWindowUiTest extends ApplicationTest {
 
         verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
     }
+
+    @Test
+    void openInBrowserMethod_logsIoException() throws Exception {
+        doThrow(new IOException("Simulated IOException")).when(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
+
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        testLogger.addHandler(consoleHandler);
+        testLogger.setLevel(Level.WARNING);
+
+        interact(() -> {
+            helpWindow.show();
+            helpWindow.openInBrowser();
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+
+        verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
+
+        testLogger.removeHandler(consoleHandler);
+    }
+
+    @Test
+    void openUserGuideMethod_logsIoException() throws Exception {
+        doThrow(new IOException("Simulated IOException")).when(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
+
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        testLogger.addHandler(consoleHandler);
+        testLogger.setLevel(Level.WARNING);
+
+        interact(() -> {
+            helpWindow.show();
+            helpWindow.openUserGuide();
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+
+        verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
+
+        testLogger.removeHandler(consoleHandler);
+    }
+
 }
