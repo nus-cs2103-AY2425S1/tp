@@ -5,9 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -86,23 +84,18 @@ public class AddAllergyCommand extends Command {
      */
     private Set<Allergy> getUpdatedAllergySet(Person person) throws CommandException {
         Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
-        List<Allergy> duplicateAllergies = new ArrayList<>();
 
-        for (Allergy allergy : allergies) {
-            if (!updatedAllergySet.add(allergy)) {
-                duplicateAllergies.add(allergy);
-            }
-        }
-
-        if (!duplicateAllergies.isEmpty()) {
-            String duplicates = duplicateAllergies.stream()
-                    .map(Allergy::getAllergy)
-                    .collect(Collectors.joining(", "));
+        String duplicates = allergies.stream()
+                .filter(allergy -> !updatedAllergySet.add(allergy))
+                .map(Allergy::getAllergy)
+                .collect(Collectors.joining(", "));
+        if (!duplicates.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, duplicates));
         }
 
         return updatedAllergySet;
     }
+
 
 
     /**

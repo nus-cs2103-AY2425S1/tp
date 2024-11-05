@@ -5,9 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -86,18 +84,12 @@ public class AddMedConCommand extends Command {
      */
     private Set<MedCon> getUpdatedMedConSet(Person person) throws CommandException {
         Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
-        List<MedCon> duplicateMedCons = new ArrayList<>();
 
-        for (MedCon medCon : medCons) {
-            if (!updatedMedConSet.add(medCon)) {
-                duplicateMedCons.add(medCon);
-            }
-        }
-
-        if (!duplicateMedCons.isEmpty()) {
-            String duplicates = duplicateMedCons.stream()
-                    .map(MedCon::getMedCon)
-                    .collect(Collectors.joining(", "));
+        String duplicates = medCons.stream()
+                .filter(medCon -> !updatedMedConSet.add(medCon))
+                .map(MedCon::getMedCon)
+                .collect(Collectors.joining(", "));
+        if (!duplicates.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MEDCON, duplicates));
         }
 
