@@ -138,13 +138,14 @@
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
     -fx-font-size: 13px;
-    -fx-text-fill: black;
+    -fx-text-fill: white !important;
     -fx-font-weight: bold;
 }
 
 /* Pending status: orange */
 .status-pending {
     -fx-background-color: orange;
+
 }
 
 /* Accepted status: green */
