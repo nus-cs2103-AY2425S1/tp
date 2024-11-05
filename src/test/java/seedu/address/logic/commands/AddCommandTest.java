@@ -254,11 +254,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Wedding> getFilteredWeddingList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -272,14 +267,17 @@ public class AddCommandTest {
         public void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        
         @Override
         public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
+        
         @Override
         public Person personWithAllTagsRemoved(Person personToDelete, Model model) {
             throw new AssertionError("This method should not be called.");
         }
+        
         @Override
         public void deletePersonInWedding(Person editedPerson, Model model, Set<Tag> tagsInBoth) {
             throw new AssertionError("This method should not be called.");
