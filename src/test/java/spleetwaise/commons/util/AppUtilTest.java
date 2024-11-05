@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.testutil.Assert;
+import spleetwaise.commons.testutil.Assert;
 
 public class AppUtilTest {
 

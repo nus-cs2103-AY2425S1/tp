@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.person.Address;
@@ -17,6 +18,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.testutil.TypicalIndexes;
+import spleetwaise.commons.logic.parser.BaseParserUtil;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.testutil.Assert;
 
@@ -37,6 +39,11 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    @BeforeEach
+    void setUp() {
+        assertTrue(BaseParserUtil.class.isAssignableFrom(spleetwaise.transaction.logic.parser.ParserUtil.class));
+    }
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {

@@ -16,9 +16,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.testutil.Assert;
 
 public class PersonTest {
 

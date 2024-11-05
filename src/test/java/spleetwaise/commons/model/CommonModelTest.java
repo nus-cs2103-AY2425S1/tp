@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.testutil.Assert;
 import spleetwaise.commons.core.GuiSettings;
+import spleetwaise.commons.testutil.Assert;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 
