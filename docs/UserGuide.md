@@ -110,7 +110,8 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
     * The local-part may not start or end with any special characters and must not contain consecutive special characters.
   * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
   * The domain name must:
-    * end with a domain label at least 2 characters long 
+    * contain at least one period separating domain labels
+    * end with a top-level domain (TLD) that is at least 2 alphabetic characters long
     * have each domain label start and end with alphanumeric characters
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
