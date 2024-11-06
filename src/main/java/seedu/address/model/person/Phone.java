@@ -35,9 +35,9 @@ public class Phone {
      * Our definition of a valid phone number is a string without spaces that has
      * at least 3 digits, and no alphabets.
      */
-    public static boolean isValidPhone(String test) {
+    static boolean isValidPhone(String test) {
         // Assert that there should not be whitespaces in the string
-        assert test.chars().noneMatch(ch -> ch == ' ');
+        assert test.chars().noneMatch(ch -> ch == ' ') : "Phone number itself should not contain space";
 
         long digitCount = test.chars()
             .filter(Character::isDigit)
