@@ -15,6 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.OrderTracker;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -88,9 +89,10 @@ public class ArchiveCommand extends Command {
         PostalCode updatedPostalCode = archivePersonDescriptor.getPostalCode().orElse(personToEdit.getPostalCode());
         Set<Tag> updatedTags = archivePersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedIsArchive = archivePersonDescriptor.getIsArchived().orElse(personToEdit.isArchived());
+        OrderTracker updatedTracker = personToEdit.getOrderTracker();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode, updatedTags,
-                updatedIsArchive);
+                updatedTracker, updatedIsArchive);
 
     }
 
@@ -130,6 +132,7 @@ public class ArchiveCommand extends Command {
         private PostalCode postalCode;
         private Set<Tag> tags;
         private Boolean isArchived;
+        private OrderTracker tracker;
 
         public ArchivePersonDescriptor() {}
 
@@ -145,6 +148,7 @@ public class ArchiveCommand extends Command {
             setPostalCode(toCopy.postalCode);
             setTags(toCopy.tags);
             setIsArchived(toCopy.isArchived);
+            setTracker(toCopy.tracker);
         }
 
         public void setName(Name name) {
@@ -187,6 +191,14 @@ public class ArchiveCommand extends Command {
             return Optional.ofNullable(postalCode);
         }
 
+        public void setTracker(OrderTracker tracker) {
+            if (tracker != null) {
+                this.tracker = new OrderTracker();
+                this.tracker.add(tracker.get());
+            } else {
+                this.tracker = null;
+            }
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
