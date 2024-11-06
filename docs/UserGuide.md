@@ -6,11 +6,18 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) for Real Estate Agents to organize and categorize client and seller contacts, manage property listings, and easily search through client information. With NUStates, agents can add and categorize clients, list properties for sale or purchase,and find contacts by name, phone number or tags.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents.
+Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
-Additionally, NUStates allows agents to **segregate properties by bought or sold status**, and even **sort contacts and properties based on various criteria**. This powerful functionality helps streamline workflow, ensuring that agents have a clear, organized view of their contacts and listings, all within a highly optimized CLI environment.
+With NUStates, agents can:
+- **Manage and Tag Clients**: Easily add, tag, and retrieve client and seller details.
+- **Search and Filter**: Quickly find contacts by name, phone number, or tags, and sort by various criteria.
+- **Pin and Unpin Clients**: Keep high-priority clients at the top for quick access.
+- **Scroll through Command History**: Effortlessly scroll through previous commands, making repetitive tasks quicker.
+- **View Statistics Dashboard**: View insightful statistics at a glance, such as the number of active clients, properties sold, and performance metrics.
 
-It has the benefits of a Graphical User Interface (GUI). If you can type fast, NUStates can get your contact management tasks done faster than traditional GUI apps.
+NUStates combines the power of **CLI efficiency** with the clarity of **GUI visuals**, enabling agents to streamline their workflow, stay organised, and focus on what matters—_serving their clients_.
+
 
 <!-- * Table of Contents -->
 # Table of Contents
@@ -55,17 +62,27 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or a newer version installed in your computer.
+   If you're not sure, you can download and install it from [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
+2. Download the latest `NUStates.jar` file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Move the downloaded file to the folder where you want to keep NUStates.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar nustates.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal:
+    - **Windows**: Press `Win + R`, type `cmd`, and press `Enter`.
+    - **macOS**: Press `Cmd + Space`, type `Terminal`, and press `Enter`.
+
+5. Navigate to the folder where you put the `NUStates.jar` file by using the `cd` command:
+    - **Windows**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
+    - **macOS**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
+
+6. Run the application by typing `java -jar nustates.jar` in the terminal and pressing `Enter`.
+   
+    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -82,7 +99,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
