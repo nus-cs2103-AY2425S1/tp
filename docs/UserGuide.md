@@ -178,14 +178,14 @@ A **person** is a patient with several fields: a name, a phone number, an email,
 
 <br>
 
-| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
-| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                           | `list person`                                                                                                           |
-| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                 | `edit person 2 n/James Lee e/jameslee@example.com`                                                                      |
-| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person n/James Jake`                                                                                              |
-| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                                       |
-| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                            | `clear person`                                                                                                          |
+| Action                                                      | Format                                                                                    | Examples                                                                                                       |
+|-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **[Add person](#adding-a-person-add-person)**               | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
+| **[List all persons](#listing-all-persons-list-person)**    | `list person`                                             <br/>                           | `list person`                                                                                                  |
+| **[Edit person](#editing-a-person-edit-person)**            | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​` | `edit person 2 n/James Lee e/jameslee@example.com`                                                             |
+| **[Find person](#finding-persons-by-name-find-person)**     | `find person KEYWORD [MORE_KEYWORDS]`                                                     | `find person n/James Jake`                                                                                     |
+| **[Delete person](#deleting-a-person-delete-person)**       | `delete person INDEX`                                                                     | `delete person 3`                                                                                              |
+| **[Clear all persons](#clearing-all-persons-clear-person)** | `clear person`                                                                            | `clear person`                                                                                                 |
 
 <br>
 
@@ -198,7 +198,7 @@ Adds a person to the address book.
 
 **Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`
 
-<box type="tip" theme="primary">
+<box type="tip" light>
 
 **Tip:** A person can have any number of tags (including 0). For example, `t/friend t/likes coding` has 2 tags and it is valid. 
 
@@ -269,7 +269,7 @@ Deletes the specified person from the address book.
 
 - Deletes the person at the specified `INDEX`.
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light seamless>
 
 **Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
 
@@ -288,7 +288,7 @@ Deletes all entries from the address book.
 
 **Format**: `clear person`
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light seamless>
 
 **Warning:** This action is irreversible. Ensure you have a backup of the patient data before clearing. 
 
@@ -308,14 +308,14 @@ Deletes all entries from the address book.
 
 <br>
 
-| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`                                            |
-| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                               | `list appt`                                                                                                             |
-| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                              |
-| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                  | `find appt d/2024-12-05`                                                                                                |
-| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                       | `delete appt 2`                                                                                                         |
-| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                    | `clear appt`                                                                                                            |
+| Action                                                                   | Format                                                                                                                   | Examples                                                              |
+|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin` |
+| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                              | `list appt`                                                           |
+| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                            |
+| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                      | `find appt d/2024-12-05`                                              |
+| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                      | `delete appt 2`                                                       |
+| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                   | `clear appt`                                                          |
 ---
 
 <br>
@@ -383,7 +383,7 @@ Deletes the specified appointment from DocTrack.
 
 - Deletes the appointment at the specified `INDEX`.
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light seamless>
 
 **Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
 
@@ -401,9 +401,10 @@ Deletes all entries from the appointment book.
 
 **Format**: `clear appt`
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light seamless>
 
-**Warning:** This action is irreversible. Ensure you have a backup of the appointment data before clearing.
+**Warning:**
+This action is irreversible. Ensure you have a backup of the appointment data before clearing.
 
 </box>
 
@@ -417,11 +418,10 @@ Deletes all entries from the appointment book.
 
 **General commands** can help you with miscellaneous tasks related to patient and appointment management.
 
-| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help-help)**                                           | `help`                                                                                                                    | `help`                                                                                                                  |
-| **[Exit](#exiting-the-program-exit)**   
-
+| Action                                | Format | Examples |
+|---------------------------------------|--------|----------|
+| **[Help](#viewing-help-help)**        | `help` | `help`   |
+| **[Exit](#exiting-the-program-exit)** | `exit` | `exit`   |
 
 <br>
 
@@ -453,11 +453,13 @@ AddressBook and AppointmentBook data are saved in the hard disk automatically af
 
 For advanced users, feel free to update patient and appointment data directly by editing the [data files](#faq) in the `data` folder.
 
-<box type="warning" seamless>
+<box type="warning" light seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+- If your changes to the data file makes its format invalid, AddressBook will discard all data and start 
+with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+- Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 <br>
