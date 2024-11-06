@@ -24,6 +24,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
+    private static final String MESSAGE_EMPTY_NAME = "The event name cannot be empty.";
+
     @Override
     public AddScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
@@ -49,6 +51,9 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
             // Parse the schedule name
             String name = argMultimap.getValue(PREFIX_NAME).get().trim();
+            if (name.isEmpty()) {
+                throw new ParseException(MESSAGE_EMPTY_NAME);
+            }
 
             // Parse and validate the date
             LocalDate date;
