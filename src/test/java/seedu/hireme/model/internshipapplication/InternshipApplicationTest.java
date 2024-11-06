@@ -2,6 +2,7 @@ package seedu.hireme.model.internshipapplication;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_APPLE;
 import static seedu.hireme.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_BOFA;
@@ -176,5 +177,32 @@ public class InternshipApplicationTest {
                 + APPLE.getDateOfApplication() + ", Role="
                 + APPLE.getRole() + ", Status=" + APPLE.getStatus() + "}";
         assertEquals(expected, APPLE.toString());
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // Same values -> same hashCode
+        InternshipApplication appleCopy = new InternshipApplicationBuilder(APPLE).build();
+        assertEquals(APPLE.hashCode(), appleCopy.hashCode());
+
+        // Different company name -> different hashCode
+        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withName(VALID_COMPANY_NAME_BOFA).build();
+        assertNotEquals(APPLE.hashCode(), editedApple.hashCode());
+
+        // Different role -> different hashCode
+        editedApple = new InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA).build();
+        assertNotEquals(APPLE.hashCode(), editedApple.hashCode());
+
+        // Different email -> different hashCode
+        editedApple = new InternshipApplicationBuilder(APPLE).withEmail(VALID_COMPANY_EMAIL_BOFA).build();
+        assertNotEquals(APPLE.hashCode(), editedApple.hashCode());
+
+        // Different date -> different hashCode
+        editedApple = new InternshipApplicationBuilder(APPLE).withDate("02/01/24").build();
+        assertNotEquals(APPLE.hashCode(), editedApple.hashCode());
+
+        // Different status -> different hashCode
+        editedApple = new InternshipApplicationBuilder(APPLE).withStatus(Status.REJECTED).build();
+        assertNotEquals(APPLE.hashCode(), editedApple.hashCode());
     }
 }
