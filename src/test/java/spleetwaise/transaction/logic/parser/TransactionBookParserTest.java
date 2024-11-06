@@ -22,13 +22,13 @@ import spleetwaise.transaction.testutil.TransactionUtil;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 
-public class TransactionParserTest {
+public class TransactionBookParserTest {
 
     private final TransactionBookModel tbModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook());
     private final AddressBookModel abModel = new AddressBookModelManager(
             TypicalPersons.getTypicalAddressBook());
-    private final TransactionParser parser = new TransactionParser();
+    private final TransactionBookParser parser = new TransactionBookParser();
 
 
     @BeforeEach

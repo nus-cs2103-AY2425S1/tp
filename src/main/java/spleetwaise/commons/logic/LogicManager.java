@@ -21,7 +21,7 @@ import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.storage.Storage;
-import spleetwaise.transaction.logic.parser.TransactionParser;
+import spleetwaise.transaction.logic.parser.TransactionBookParser;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -37,7 +37,7 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final TransactionParser transactionParser;
+    private final TransactionBookParser transactionParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -45,7 +45,7 @@ public class LogicManager implements Logic {
     public LogicManager(Storage storage) {
         this.storage = storage;
         this.addressBookParser = new AddressBookParser();
-        this.transactionParser = new TransactionParser();
+        this.transactionParser = new TransactionBookParser();
     }
 
     @Override

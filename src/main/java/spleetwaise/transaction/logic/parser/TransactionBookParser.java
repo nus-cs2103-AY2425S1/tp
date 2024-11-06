@@ -19,14 +19,14 @@ import spleetwaise.transaction.logic.commands.UnmarkCommand;
 /**
  * Parses user input.
  */
-public class TransactionParser {
+public class TransactionBookParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(TransactionParser.class);
+    private static final Logger logger = LogsCenter.getLogger(TransactionBookParser.class);
 
     /**
      * Parses user input into command for execution.
