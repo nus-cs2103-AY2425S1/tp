@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -44,6 +43,16 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_invalidName_throwsParseException() {
+        // Example input with an invalid name (assuming non-alphanumeric names are invalid)
+        String userInput = "delete n/67";
+
+        String expectedMessage = "ERROR: Invalid name format. Enter a valid name.";
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidPhone_throwsParseException() {
         // Simulate an input with an invalid phone number (e.g., less than 8 digits)
         String userInput = "delete n/Alice Pauline p/1234"; // Invalid phone number
@@ -57,6 +66,8 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        String expectedMessage = "Invalid command format! \n"
+                + "Please provide at least one of the following: name, phone, or email.";
+        assertParseFailure(parser, "a", expectedMessage);
     }
 }

@@ -12,12 +12,15 @@ import seedu.address.model.person.PersonHasFeaturePredicate;
  * Finds and lists all persons in address book according to their tag.
  */
 public class FilterCommand extends Command {
+
     public static final String COMMAND_WORD = "filter";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with the specified tag and/or phone"
           + " number and displays them as a list with index numbers.\n"
           + "Parameters: PREFIX/PREFIX_NAME + [PREFIX/MORE_PREFIX_NAMES...]\n"
           + "Example: " + COMMAND_WORD + " t/High Risk p/88506657";
 
+    public static final String MESSAGE_NO_MATCHES_FOUND = "No patients align with the provided details.";
     private final PersonHasFeaturePredicate predicate;
 
     public FilterCommand(PersonHasFeaturePredicate predicate) {
@@ -27,6 +30,11 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+
+        if (model.getFilteredPersonList().isEmpty()) {
+
+            return new CommandResult(MESSAGE_NO_MATCHES_FOUND);
+        }
         return new CommandResult(
               String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
