@@ -74,6 +74,10 @@ public class DeleteCommand extends Command {
     private CommandResult executeDeleteEmergencyContact(Index emergencyContactIndex,
                                                         Person personToDelete,
                                                         Model model) throws CommandException {
+        if (emergencyContactIndex.getOneBased() > personToDelete.getEmergencyContacts().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EMERGENCY_CONTACT_DISPLAYED_INDEX);
+        }
+
         if (personToDelete.hasOnlyOneEmergencyContact()) {
             throw new CommandException(Messages.MESSAGE_LAST_EMERGENCY_CONTACT_INDEX);
         }
