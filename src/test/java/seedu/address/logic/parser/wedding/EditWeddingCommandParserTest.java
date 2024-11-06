@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.model.wedding.WeddingName;
@@ -59,6 +60,13 @@ public class EditWeddingCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_WEDDING_DESC, WeddingName.MESSAGE_CONSTRAINTS); // invalid name
+    }
+
+    @Test
+    public void parse_invalidDate_failure() {
+        assertParseFailure(parser, "1 d/text date", Messages.MESSAGE_INVALID_DATE_FORMAT); // string for date
+        assertParseFailure(parser, "1 d/2022-02-99", Messages.MESSAGE_INVALID_DATE_FORMAT); // invalid date
+        assertParseFailure(parser, "1 d/19-03-2024", Messages.MESSAGE_INVALID_DATE_FORMAT); // invalid date format
     }
 
     @Test
