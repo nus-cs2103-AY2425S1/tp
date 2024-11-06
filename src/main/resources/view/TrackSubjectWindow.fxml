@@ -25,9 +25,8 @@
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                 <children>
-                    <Label styleClass="descriptor-label" text=
-                            "This window displays the current enrolment statistic for each subject." wrapText="true" />
                     <Label styleClass="header-label" text="Subject Statistics" />
+                    <Label styleClass="descriptor-label" fx:id="description" />
                     <ScrollPane fitToWidth="true" styleClass="stats-scroll-pane">
                         <VBox fx:id="subjectStatsBox" alignment="TOP_CENTER" spacing="5" styleClass="stats-container">
                             <!-- Subject statistics will be added here dynamically -->
