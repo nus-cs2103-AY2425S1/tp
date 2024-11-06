@@ -24,7 +24,7 @@ Action | Format (with examples)
 [**List**](#listing-all-persons-list) | `list`
 [**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients-list-patient) | `list-patient`
-[**Find**](#finding-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find James Jake`
+[**Find**](#finding-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find Jane Doe`
 [**Find Doctor**](#finding-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor Jane Doe`
 [**Find Patient**](#finding-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient John Doe`
 [**Delete**](#deleting-a-person-delete) | `delete INDEX` <br><br> e.g. `delete 3`
@@ -41,12 +41,14 @@ Action | Format (with examples)
 
 3. Copy the file to the folder you want to use as the _home folder_ for your MediContacts App.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediContacts.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds.<br>
-   Note how the app will initially contain some sample data.<br>
-   [You may refer to this video tutorial on how to run JAR files on Windows](https://www.youtube.com/watch?v=hv0UhoaA0eo) (Watch from 0:47 onwards)<br>
-   [You may refer to this video tutorial on how to run JAR files on macOS](https://www.youtube.com/watch?v=GspNQbJLfag) (Watch from 2:23 onwards)<br>
-   [You may refer to this video tutorial on how to run JAR files on Linux](https://www.youtube.com/watch?v=DVD9DIxs9Lo) (Watch full video)<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediContacts.jar` command to run the application. You may refer to the following video tutorials on how to run JAR files:
+
+    - [For Windows](https://www.youtube.com/watch?v=hv0UhoaA0eo) (Watch from 0:47 onwards)
+    - [For macOS](https://www.youtube.com/watch?v=GspNQbJLfag) (Watch from 2:23 onwards)
+    - [For Linux](https://www.youtube.com/watch?v=DVD9DIxs9Lo) (Watch full video)
+
+    A GUI similar to the below should appear in a few seconds.Note how the app will initially contain some sample data.<br>
+   
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
