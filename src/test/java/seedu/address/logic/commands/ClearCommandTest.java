@@ -16,15 +16,30 @@ public class ClearCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        ClearCommand clearCommand = new ClearCommand();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
+        assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
+
+        clearCommand.setConfirmed(true);
+        assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyAddressBook_abort() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+        ClearCommand clearCommand = new ClearCommand();
+
+        assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
+
+        clearCommand.setConfirmed(false);
+        assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_ABORTED, expectedModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(getTypicalAddressBook());
         ClearCommand clearCommand = new ClearCommand();
 
         assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
@@ -35,4 +50,17 @@ public class ClearCommandTest {
         assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void execute_nonEmptyAddressBook_abort() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ClearCommand clearCommand = new ClearCommand();
+
+        assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_CONFIRMATION, expectedModel);
+
+        clearCommand.setConfirmed(false);
+        expectedModel.setAddressBook(getTypicalAddressBook());
+
+        assertCommandSuccess(clearCommand, model, ClearCommand.MESSAGE_ABORTED, expectedModel);
+    }
 }

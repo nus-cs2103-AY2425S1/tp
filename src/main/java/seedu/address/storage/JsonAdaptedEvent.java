@@ -83,10 +83,11 @@ class JsonAdaptedEvent {
         final Address modelAddress = new Address(address);
 
         if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
         }
         if (!DateTime.isValidDateTime(startTime)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
         }
         final DateTime modelStartTime = new DateTime(startTime);
 
