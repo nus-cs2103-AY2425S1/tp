@@ -653,7 +653,7 @@ Example:
 
 Finds patients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]…`
 
 {: .alert .alert-info} 
 > :information_source: **Note:**
@@ -678,7 +678,7 @@ Examples:
 
 Finds patients whose medical condition(s) contain the given keywords.
 
-Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
+Format: `findMedCon KEYWORD [MORE_KEYWORDS]…`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
