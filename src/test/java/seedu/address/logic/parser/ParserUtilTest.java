@@ -47,7 +47,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -304,7 +304,6 @@ public class ParserUtilTest {
         Index maxIndex = Index.fromOneBased(Integer.MAX_VALUE);
         assertEquals(maxIndex, ParserUtil.parseIndex(Integer.toString(Integer.MAX_VALUE)));
     }
-    
     @Test
     public void parseTag_decimalValue() throws Exception {
         String tagWithDecimalValue = "grade:8.5";
