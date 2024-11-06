@@ -1,0 +1,44 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 18
+skinparam ArrowFontSize 15
+start
+:User enters command;
+:PrudyParser parses command;
+
+if () then ([known command])
+    if () then ([ExitCommand])
+        :ExitCommand
+        is created;
+        :Execute
+        ExitCommand;
+        :Prudy closes;
+        stop
+    elseif () then ([HelpCommand])
+        :HelpCommand
+        is created;
+        :Execute
+        HelpCommand;
+        :UI displays
+        help window;
+        stop
+    else ([other command])
+        :Corresponding parser parses
+        the arguments of the command;
+                if () then ([valid format])
+                    :Command is created;
+                    :Execute Command;
+                    :UI displays success message;
+                    stop
+                else ([else])
+                    :UI displays error message;
+                    stop
+                endif
+    endif
+
+else ([else])
+    :UI displays error message;
+    stop
+    endif
+
+@enduml

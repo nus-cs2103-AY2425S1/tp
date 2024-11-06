@@ -152,6 +152,12 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+### Command Parsing and Execution Flow
+
+The following UML activity diagram illustrates the command parsing and execution process within Prudy.
+It depicts how commands are parsed, validated, and executed, along with the corresponding UI interactions for success or error messages.
+<puml src="diagrams/FlowActivityDiagram.puml" width="550" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
