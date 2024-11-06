@@ -3,17 +3,14 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeleteGoodsCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
@@ -21,10 +18,6 @@ import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
 public class DeleteGoodsCommandTest {
-
-    private Model getDefaultModel() {
-        return new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
-    }
 
     @Test
     public void execute_nonExistingSupplierNameAndExistingGoodsName_failure() {

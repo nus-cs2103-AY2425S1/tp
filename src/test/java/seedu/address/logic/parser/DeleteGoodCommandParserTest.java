@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.DeleteGoodsCommandParser;
+import seedu.address.logic.commands.DeleteGoodsCommand;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.person.Name;
 
