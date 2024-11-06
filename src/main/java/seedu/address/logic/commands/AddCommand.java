@@ -29,8 +29,8 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ROLE + "friends "
-            + PREFIX_ROLE + "owesMoney";
+            + PREFIX_ROLE + "Athlete-{Faculty}-{Sport1}, {Sport2}... "
+            + PREFIX_ROLE + "Volunteer-{Position}";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book. "
