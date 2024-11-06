@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.owner.LinkedPetList;
 import seedu.address.model.owner.Owner;
+import seedu.address.model.pet.Pet;
 
 /**
  * An UI component that displays information of a {@code Owner}.
@@ -12,14 +16,6 @@ import seedu.address.model.owner.Owner;
 public class OwnerCard extends UiPart<Region> {
 
     private static final String FXML = "OwnerListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on PawPatrol level 4</a>
-     */
 
     public final Owner owner;
 
@@ -37,9 +33,13 @@ public class OwnerCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label linkedPets; //Label to display linked pets
+
+    private ObservableList<Pet> petList;
 
     /**
-     * Creates a {@code OwnerCode} with the given {@code Owner} and index to display.
+     * Creates a {@code OwnerCard} with the given {@code Owner} and index to display.
      */
     public OwnerCard(Owner owner, int displayedIndex) {
         super(FXML);
@@ -50,5 +50,29 @@ public class OwnerCard extends UiPart<Region> {
         phone.setText(owner.getPhone().value);
         address.setText(owner.getAddress().value);
         email.setText(owner.getEmail().value);
+        // Set the linked pets using the toString() of each pet
+        linkedPets.setText(formatLinkedPets(owner.getLinkedPets()));
+
+        this.petList = owner.getLinkedPets().getList();
+
+        // Add a listener to dynamically update the linked pets when they change
+        petList.addListener((ListChangeListener<Pet>) change -> updateLinkedPetsDisplay());
+    }
+
+    /**
+     * Updates the displayed linked pets when the list changes.
+     */
+    private void updateLinkedPetsDisplay() {
+        linkedPets.setText(formatLinkedPets(owner.getLinkedPets()));
+    }
+
+    /**
+     * Formats the list of linked pets as a single line separated by vertical bars.
+     *
+     * @param linkedPets the list of linked pets to format
+     * @return a formatted string of linked pet names
+     */
+    private String formatLinkedPets(LinkedPetList linkedPets) {
+        return linkedPets.getAsField();
     }
 }

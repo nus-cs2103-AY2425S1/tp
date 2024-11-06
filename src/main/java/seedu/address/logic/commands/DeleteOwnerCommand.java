@@ -15,12 +15,6 @@ import seedu.address.model.owner.Owner;
  * Deletes a person identified using it's displayed index from PawPatrol.
  */
 public class DeleteOwnerCommand extends DeleteCommand {
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the owner identified by the index number used in the displayed owner list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
-
     public static final String MESSAGE_DELETE_OWNER_SUCCESS = "Deleted Owner: %1$s";
 
     private final Index targetIndex;

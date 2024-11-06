@@ -1,6 +1,7 @@
 package seedu.address.model.link;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -28,7 +29,22 @@ public class LinkableTest {
         }
 
         @Override
+        public void addLinkedEntity(Linkable entity) {
+            assertFalse(false); // method should not be called
+        }
+
+        @Override
+        public void removeLinkedEntity(Linkable entity) {
+            assertFalse(false); // method should not be called
+        }
+
+        @Override
         public String getUniqueID() {
+            return uniqueID;
+        }
+
+        @Override
+        public String getInfo() {
             return uniqueID;
         }
     }

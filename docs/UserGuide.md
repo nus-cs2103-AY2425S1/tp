@@ -106,15 +106,15 @@ Examples:
 
 Links an owner to one or more pets.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-info">
 
-:exclamation: **Extra information:**<br>
+**:exclamation: Extra information:**<br>
   
-* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.<br>
   
-* An owner can be linked to 0 or more pets.
+* An owner can be linked to 0 or more pets.<br>
   
-* A pet can be linked to 0 or more owners.
+* A pet can be linked to 0 or more owners.<br>
   
 </div>
 
@@ -133,21 +133,17 @@ Unlinks an owner to one or more pets.
 
 Format: `unlink oOWNER_INDEX t/pPET_INDEX…​`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-info">
 
 :exclamation: **Extra information:**<br>
   
-* Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
   
 </div>
 
 Examples:
 * `unlink o1 t/p1`
 * `unlink o2 t/p2 t/p3`
-
-### Finding unlinked pets and owners  `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ### Listing entities: `list`
 
@@ -162,21 +158,21 @@ Format:
 
 Edits an existing owner or pet in PawPatrol.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-info">
 
-:exclamation: **Extra information:**<br>
+**:exclamation: Extra information:**<br>
 
-* Edits the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​<br>
 
-* At least one of the optional fields must be provided.
+* At least one of the optional fields must be provided.<br>
 
-* IC number cannot be changed.
+* IC number cannot be changed.<br>
 
-* Existing values will be updated to the input values.
+* Existing values will be updated to the input values.<br>
 
-* When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.
+* When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.<br>
 
-* You can remove all the pet’s tags by typing `t/` without specifying any tags after it.
+* You can remove all the pet’s tags by typing `t/` without specifying any tags after it.<br>
 
 </div>
 
@@ -200,17 +196,17 @@ Example:
 
 Finds owners or pets whose names contain any of the given keywords.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-info">
 
-:exclamation: **Extra information:**<br>
+**:exclamation: Extra information:**<br>
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`<br>
 
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`<br>
 
-* Only the name is searched.
+* Only the name is searched.<br>
 
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`<br>
 
 * Owners or pets matching at least one keyword will be returned (i.e. `OR` search).<br>
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -224,21 +220,21 @@ Format:
 Examples:
 * `find owner John` returns `john` and `John Doe` in the owners list panel.
 * `find pet fluffy megatron` returns `Fluffy`, `Megatron` as shown in the image below.<br>
-  ![result for 'find fluffy megatron'](images/findFluffyMegatron.png)
+  ![result for 'find fluffy megatron'](images/findFluffyMegatron.jpeg)
 
 ### Deleting an entity : `delete`
 
 Deletes the specified owner or pet from PawPatrol.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-info">
 
-:exclamation: **Extra information:**<br>
+**:exclamation: Extra information:**<br>
 
-* Deletes the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively.
+* Deletes the owner or pet at the specified `OWNER_INDEX` or `PET_INDEX` respectively.<br>
 
-* The index refers to the index number shown in the displayed owner or pet list.
+* The index refers to the index number shown in the displayed owner or pet list.<br>
 
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​<br>
 
 </div>
 
@@ -282,6 +278,10 @@ This action is irreversible! Please make a backup of the <a href="#for-advanced-
 Exits PawPatrol. This is equivalent to clicking the "X" icon to close the app.
 
 Format: `exit`
+
+### Finding unlinked pets and owners  `[coming in v2.0]`
+
+_Details coming soon ..._
 
 ## For Advanced Users: Updating PawPatrol Data Directly
 

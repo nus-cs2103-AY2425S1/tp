@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalOwners.ALICE;
+import static seedu.address.testutil.TypicalOwners.BENSON;
 import static seedu.address.testutil.TypicalOwners.getTypicalPawPatrol;
+import static seedu.address.testutil.TypicalPets.AARFUL;
 import static seedu.address.testutil.TypicalPets.BELLA;
 
 import java.util.Arrays;
@@ -100,10 +102,7 @@ public class PawPatrolTest {
 
     @Test
     public void hasLink_linkInPawPatrol_returnsTrue() {
-        Owner owner = TypicalOwners.ALICE;
-        Pet pet = BELLA;
-        Link link = new Link(owner, pet);
-
+        Link link = new Link(BENSON, AARFUL);
         pawPatrol.addLink(link);
         assertTrue(pawPatrol.hasLink(link));
     }

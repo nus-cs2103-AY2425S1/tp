@@ -46,7 +46,7 @@ public class SortPetCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        //showPetAtIndex(model, INDEX_FIRST_Pet); fix later
+        //showPetAtIndex(model, INDEX_FIRST_Pet);
         assertCommandSuccess(new SortPetCommand(), model, SortPetCommand.MESSAGE_SORT_PET_SUCCESS, expectedModel);
     }
 
