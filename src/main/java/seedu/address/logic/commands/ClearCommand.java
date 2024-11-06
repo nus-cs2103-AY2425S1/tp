@@ -12,7 +12,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "AgentAssist's contacts have been cleared!";
-    public static final String MESSAGE_CLEAR_CONFIRMATION = "This will permanently clear all contacts. "
+    public static final String MESSAGE_CLEAR_CONFIRMATION = "This will permanently clear all clients' contacts. "
             + "Are you sure you want to execute this command? (y/n)";
 
     private static final boolean requiresConfirmation = true;

@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
             + "Example: '" + COMMAND_WORD + " 1'";
 
     public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Deleted Client: %1$s";
-    public static final String MESSAGE_DELETE_CONFIRMATION = "This will permanently delete this contact. "
+    public static final String MESSAGE_DELETE_CONFIRMATION = "This will permanently delete this client's contact. "
             + "Are you sure you want to execute this command? (y/n)";
 
     private static final boolean requiresConfirmation = true;
