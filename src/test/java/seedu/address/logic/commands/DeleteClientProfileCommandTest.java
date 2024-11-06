@@ -22,6 +22,7 @@ import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalListings;
@@ -35,19 +36,44 @@ public class DeleteClientProfileCommandTest {
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
 
-
     @Test
-    public void execute_validNameUnfilteredList_success() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 1);
-        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
+    public void execute_validBuyerNameUnfilteredList_success() {
+        Model model =
+                new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+        Person personToDelete = DANIEL;
+        DeleteClientProfileCommand deleteCommand =
+                new DeleteClientProfileCommand(personToDelete.getName(), true); // skipConfirmation = true
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
+        Model expectedModel =
+                new ModelManager(model.getAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+        expectedModel.getListings().getListingList().forEach(listing -> listing.removeBuyer(personToDelete));
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validSellerNameUnfilteredList_success() {
+        Model model =
+                new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+        Person personToDelete = ALICE;
+        DeleteClientProfileCommand deleteCommand =
+                new DeleteClientProfileCommand(personToDelete.getName(), true); // skipConfirmation = true
+
+        String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
+
+        Model expectedModel =
+                new ModelManager(model.getAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+        List<Listing> listingsToDelete = expectedModel.getListings().getListingList().stream()
+                .filter(listing -> listing.getSeller().equals(personToDelete))
+                .toList();
+        for (Listing listing : listingsToDelete) {
+            expectedModel.deleteListing(listing);
+        }
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +85,6 @@ public class DeleteClientProfileCommandTest {
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
-
     @Test
     public void execute_validNameFilteredList_success() {
         Random random = new Random();
@@ -91,32 +116,6 @@ public class DeleteClientProfileCommandTest {
                                                                             .get(randomIndex + 1));
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
-    }
-
-    @Test
-    public void execute_buyerInListing_throwsCommandException() {
-        Model model =
-                new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
-        Person personToDelete = DANIEL;
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
-
-        String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_HAS_ACTIVE_LISTINGS,
-                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
-
-        assertCommandFailure(deleteCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_sellerInListing_throwsCommandException() {
-        Model model =
-                new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
-        Person personToDelete = ALICE;
-        DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
-
-        String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_HAS_ACTIVE_LISTINGS,
-                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
-
-        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
     @Test
     public void execute_subName_throwsCommandException() {
