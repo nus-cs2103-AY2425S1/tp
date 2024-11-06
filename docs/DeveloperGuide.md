@@ -553,7 +553,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar socialbook.jar` command to run the application. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar socialbook.jar` command to run the application. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
@@ -609,9 +609,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing files
 
-   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Exisitng data not affected.
+   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Exisiting data is not affected.
 
-   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Exisitng data not affected.
+   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Exisiting data is not affected.
 
    3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only).
 
