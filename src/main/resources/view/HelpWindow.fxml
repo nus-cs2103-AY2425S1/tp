@@ -16,9 +16,6 @@
   </icons>
   <scene>
     <Scene>
-      <stylesheets>
-        <URL value="@HelpWindow.css" />
-      </stylesheets>
 
       <VBox alignment="CENTER">
         <Label fx:id="commandSummary" wrapText="true" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>

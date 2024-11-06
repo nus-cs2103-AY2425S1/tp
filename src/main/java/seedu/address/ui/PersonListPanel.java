@@ -28,16 +28,30 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         this.currentTheme = currentTheme;
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> {
+            PersonListViewCell cell = new PersonListViewCell();
+            personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                cell.handleSelectionChange(newValue != null);
+            });
+
+            return cell;
+        });
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private boolean isSelectionChange = false;
+
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
+
+            // If it's a selection change, ignore updates
+            if (isSelectionChange) {
+                return;
+            }
 
             if (empty || person == null) {
                 setGraphic(null);
@@ -45,6 +59,10 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1, currentTheme).getRoot());
             }
+        }
+
+        public void handleSelectionChange(boolean selected) {
+            isSelectionChange = selected;
         }
     }
 
