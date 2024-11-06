@@ -130,6 +130,7 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+    -fx-padding: 1px 0 2px 0;
 }
 
 .stack-pane {
@@ -310,6 +311,11 @@
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
+    -fx-padding: 3px;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: grey;
+    -fx-margin-right: 1px;
 }
 
 #commandTypeLabel {
