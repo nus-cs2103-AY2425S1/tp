@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,7 +30,7 @@ public class GroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Group %s created with %d student(s)";
     public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
-
+    public static final String DUPLICATE_STUDENT_FOUND = "Duplicate student found in input: %s";
     public static final String STUDENTS_NOT_FOUND = "The following students could not be found: %s";
     private final String groupName;
     private final List<String> students;
@@ -59,6 +61,13 @@ public class GroupCommand extends Command {
         List<Person> allPersons = model.getFilteredPersonList();
         List<Person> groupMembers = new ArrayList<>();
         List<String> notFoundStudents = new ArrayList<>();
+
+        Set<String> uniqueStudents = new HashSet<>();
+        for (String studentName : students) {
+            if (!uniqueStudents.add(studentName)) {
+                throw new CommandException(String.format(DUPLICATE_STUDENT_FOUND, studentName));
+            }
+        }
 
         for (String studentName : students) {
             boolean found = false;
