@@ -207,7 +207,7 @@ public class TagCommandTest {
     }
 
     @Test
-    public  void execute_clearSubjectsWhenOnlyLevelNoneNoneProvided() throws CommandException{
+    public void execute_clearSubjectsWhenOnlyLevelNoneNoneProvided() throws CommandException {
         Student studentInList = model.getAddressBook()
                 .getStudentList()
                 .get(INDEX_SECOND_STUDENT
