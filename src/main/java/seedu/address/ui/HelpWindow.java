@@ -25,7 +25,7 @@ public class HelpWindow extends UiPart<Stage> {
             new String[]{"AddLesson", "addLesson TUTOR_INDEX TUTEE_INDEX \\s SUBJECT\ne.g., addLesson 1 2 \\s science"},
             new String[]{"AddTutee", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
                     + "[\\s SUBJECT]…\n e.g., addTutee \\n Evan Lee \\p 88889999 \\e evanlee@example.com \\a "
-                    + "345, Clementi Rd, 123466 \\h 2 \\s english"},
+                    + "345, Ubi St, 123466 \\h 2 \\s english"},
             new String[]{"AddTutor", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
                     + "[\\s SUBJECT]…\n e.g., addTutor \\n James Ho \\p 22224444 \\e jamesho@example.com \\a "
                     + "123, Clementi Rd, 123465 \\h 7 \\s math"},
