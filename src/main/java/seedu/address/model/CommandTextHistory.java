@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  * the user.
  */
 public class CommandTextHistory {
-    private static final int MAX_HISTORY_SIZE = 50;
+    public static final int MAX_HISTORY_SIZE = 50;
     private final List<String> commandTextList;
     private int currentCommandIndex = -1;
 
@@ -28,7 +30,8 @@ public class CommandTextHistory {
      * Resets the existing data of this {@code CommandTextHistory} with
      * {@code newData}.
      */
-    public void resetData(CommandTextHistory newData) {
+    public void resetData(CommandTextHistory newData) throws NullPointerException {
+        requireNonNull(newData);
         setCommandTextList(newData.getCommandTextList());
     }
 
@@ -36,6 +39,7 @@ public class CommandTextHistory {
      * Adds a command text to the history.
      */
     public void addCommandText(String commandText) {
+        requireNonNull(commandText);
         commandTextList.add(commandText);
         truncateHistory();
         // Pressing the up arrow key should give the last command in the list, or size - 1.
@@ -71,10 +75,17 @@ public class CommandTextHistory {
      * Sets the history of command texts.
      */
     public void setCommandTextList(List<String> commandTextList) {
+        requireNonNull(commandTextList);
         this.commandTextList.clear();
         this.commandTextList.addAll(commandTextList);
         // Pressing the up arrow key should give the last command in the list, or size - 1.
         currentCommandIndex = commandTextList.size();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof CommandTextHistory
+                && commandTextList.equals(((CommandTextHistory) other).commandTextList));
     }
 
     private String getCommandText() {

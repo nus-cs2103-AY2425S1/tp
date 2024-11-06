@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.CommandTextHistory;
 import seedu.address.model.employee.Employee;
 
 /**
@@ -85,5 +86,20 @@ public class TypicalEmployees {
 
     public static List<Employee> getTypicalEmployees() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Returns a typical {@code CommandTextHistory}.
+     */
+    public static CommandTextHistory getTypicalCommandTextHistory() {
+        CommandTextHistory cth = new CommandTextHistory();
+        for (String commandText : getTypicalCommandTextList()) {
+            cth.addCommandText(commandText);
+        }
+        return cth;
+    }
+
+    public static List<String> getTypicalCommandTextList() {
+        return new ArrayList<>(Arrays.asList("help", "listemployees", "listprojects", "listassignments"));
     }
 }
