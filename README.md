@@ -12,7 +12,7 @@ Optimized for command-line-interface usage
 ## Core features
 - Maintain a of list of suppliers and their contact information
 - Keep track of the goods that you have ordered from each supplier
-- Able to load data easily with commonly with **Excel**
+- Able to load data easily with **Excel**
 - Able to save changes made in the application instantaneously as well as export filters
 
 ### Codebase and Documentation
