@@ -32,14 +32,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private final ListChangeListener<Client> clientListListener = change -> {
-        while (change.next()) {
-            if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
-                updateStatusChart();
-            }
-        }
-    };
-
     private Stage primaryStage;
     private Logic logic;
 
@@ -49,63 +41,74 @@ public class MainWindow extends UiPart<Stage> {
     private StatusPieChart statusPieChart;
     private HelpWindow helpWindow;
 
+    // The currently viewed client in the detail panel
+    private Client currentlyViewedClient;
+
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
     @FXML
     private SplitPane topSplitPane;
-
     @FXML
     private SplitPane splitPane;
-
     @FXML
     private StackPane clientListPanelPlaceholder;
-
     @FXML
     private StackPane clientDetailsPanelPlaceholder;
-
     @FXML
     private StackPane resultDisplayPlaceholder;
     @FXML
     private StackPane statusChartPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
-
     @FXML
     private ImageView placeholderImage;
 
+    // Tracks client list changes to update UI components
+    private final ListChangeListener<Client> clientListListener = change -> {
+        while (change.next()) {
+            if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
+                updateStatusChart();
+                if (currentlyViewedClient != null) {
+                    boolean clientFound = false;
+                    for (Client client : logic.getFilteredClientList()) {
+                        if (client.equals(currentlyViewedClient)) {
+                            currentlyViewedClient = client; // Update to new instance
+                            Platform.runLater(() -> clientDetailPanel.setClientDetails(client));
+                            clientFound = true;
+                            break;
+                        }
+                    }
+
+                    // Only close if the client was actually removed (not just filtered)
+                    if (!clientFound && change.wasRemoved()) {
+                        Platform.runLater(this::handleCloseCommand);
+                    }
+                }
+            }
+        }
+    };
+
     /**
-     * Creates a new MainWindow with the given Stage and Logic.
-     * Initializes the window with default settings and accelerators.
-     *
-     * @param primaryStage The primary stage for this window
-     * @param logic The logic manager that handles command execution
+     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
         this.primaryStage = primaryStage;
         this.logic = logic;
+
         setWindowDefaultSize(logic.getGuiSettings());
         setAccelerators();
+
         helpWindow = new HelpWindow();
         logic.getFilteredClientList().addListener(clientListListener);
     }
 
-    /**
-     * Returns the primary stage of the application.
-     *
-     * @return The primary stage
-     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    /**
-     * Sets up keyboard accelerators for menu items.
-     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
@@ -116,7 +119,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
-
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -149,7 +151,6 @@ public class MainWindow extends UiPart<Stage> {
 
         setupSplitPanes();
         splitPane.setDividerPositions(0.5);
-
         splitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> {
             splitPane.setDividerPositions(0.5);
         });
@@ -158,6 +159,30 @@ public class MainWindow extends UiPart<Stage> {
         topSplitPane.getStyleClass().add("top-split-pane");
         statusChartPlaceholder.getStyleClass().add("chart-container");
         updateStatusChart();
+    }
+
+    /**
+     * Updates the detail panel if the currently viewed client was modified
+     */
+    private void updateDetailPanelIfNeeded() {
+        if (currentlyViewedClient != null) {
+            boolean clientFound = false;
+            // Look for the same client in the filtered list
+            for (Client client : logic.getFilteredClientList()) {
+                if (client.equals(currentlyViewedClient)) {
+                    if (client != currentlyViewedClient) {
+                        currentlyViewedClient = client;
+                        Platform.runLater(() -> clientDetailPanel.setClientDetails(client));
+                    }
+                    clientFound = true;
+                    break;
+                }
+            }
+
+            if (!clientFound) {
+                handleCloseCommand();
+            }
+        }
     }
 
     /**
@@ -179,23 +204,37 @@ public class MainWindow extends UiPart<Stage> {
 
         Platform.runLater(() -> {
             statusPieChart.updateChartData(counts[0], counts[1], counts[2]);
-
             int total = counts[0] + counts[1] + counts[2];
             logger.info(String.format("Chart updated - NA: %d, Non-Urgent: %d, Urgent: %d (Total: %d)",
                     counts[0], counts[1], counts[2], total));
         });
     }
 
+    /**
+     * Handles the view command by updating the UI to show client details.
+     */
+    private void handleViewCommand(CommandResult commandResult) {
+        if (!splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
+            splitPane.getItems().add(clientDetailsPanelPlaceholder);
+            placeholderImage.setVisible(false);
+            splitPane.setDividerPositions(0.6);
+        }
+
+        Client clientToView = commandResult.getViewedClient();
+        if (clientToView != null) {
+            currentlyViewedClient = clientToView;
+            clientDetailPanel.setClientDetails(clientToView);
+        }
+    }
 
     /**
-     * Sets the default size based on {@code guiSettings}.
+     * Closes the detail panel view.
      */
-    private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowHeight());
-        primaryStage.setWidth(guiSettings.getWindowWidth());
-        if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
-            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+    private void handleCloseCommand() {
+        if (splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
+            splitPane.getItems().remove(clientDetailsPanelPlaceholder);
+            placeholderImage.setVisible(true);
+            currentlyViewedClient = null;
         }
     }
 
@@ -212,13 +251,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Makes the main window visible.
-     */
-    void show() {
-        primaryStage.show();
-    }
-
-    /**
      * Closes the application.
      */
     @FXML
@@ -231,42 +263,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles the view command by updating the UI to show client details.
-     * If the details panel is not visible, adds it to the split pane.
-     * Updates the client details based on the provided index in the command.
-     *
-     * @param commandText The full command text containing the view command and index
+     * Sets the default size based on {@code guiSettings}.
      */
-    private void handleViewCommand(String commandText) {
-        if (!splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
-            splitPane.getItems().add(clientDetailsPanelPlaceholder);
-            placeholderImage.setVisible(false);
-            splitPane.setDividerPositions(0.6);
+    private void setWindowDefaultSize(GuiSettings guiSettings) {
+        primaryStage.setHeight(guiSettings.getWindowHeight());
+        primaryStage.setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.getWindowCoordinates() != null) {
+            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
-
-        String[] commandParts = commandText.split("\\s+");
-        if (commandParts.length > 1) {
-            try {
-                int index = Integer.parseInt(commandParts[1]) - 1; // Assuming 1-based indexing in UI
-                Client clientToView = logic.getFilteredClientList().get(index);
-                clientDetailPanel.setClientDetails(clientToView);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                // Handle invalid index
-                resultDisplay.setFeedbackToUser("Invalid client index.");
-            }
-        } else {
-            resultDisplay.setFeedbackToUser("Please provide a client index to view.");
-        }
-    }
-
-    private void handleCloseCommand() {
-        splitPane.getItems().remove(clientDetailsPanelPlaceholder);
     }
 
     /**
      * Executes the command and returns the result.
-     *
-     * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -275,9 +284,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowClient()) {
-                handleViewCommand(commandText);
-            } else {
+                handleViewCommand(commandResult);
+            } else if (commandText.trim().toLowerCase().equals("close")) {
                 handleCloseCommand();
+            } else if (commandResult.isConfirmedDeletion() && currentlyViewedClient != null
+                    && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
+                // Only close if this is a confirmed deletion of the viewed client
+                handleCloseCommand();
+            } else if (currentlyViewedClient != null) {
+                updateDetailPanelIfNeeded();
             }
 
             if (commandResult.isShowHelp()) {
@@ -301,11 +316,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void setupSplitPanes() {
         topSplitPane.setDividerPositions(0.8);
-
         topSplitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> {
             if (Math.abs(newValue.doubleValue() - 0.8) > 0.05) {
                 Platform.runLater(() -> topSplitPane.setDividerPositions(0.8));
             }
         });
+    }
+
+    void show() {
+        primaryStage.show();
     }
 }

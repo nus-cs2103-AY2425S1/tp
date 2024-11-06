@@ -21,6 +21,8 @@ public class CloseCommand extends Command {
                 false,
                 false,
                 EMPTY_CLIENT,
+                false,
+                null,
                 false
         );
     }
