@@ -6,7 +6,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HRPlatformParser" as HRPlatformParser LOGIC_COLOR
 participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
 participant "r:AddCommand" as AddCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -19,17 +19,17 @@ end box
 [-> LogicManager : execute("args")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("args")
-activate AddressBookParser
+LogicManager -> HRPlatformParser : parseCommand("args")
+activate HRPlatformParser
 
 create AddCommandParser
-AddressBookParser -> AddCommandParser
+HRPlatformParser -> AddCommandParser
 activate AddCommandParser
 
-AddCommandParser --> AddressBookParser
+AddCommandParser --> HRPlatformParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse("args")
+HRPlatformParser -> AddCommandParser : parse("args")
 activate AddCommandParser
 
 create AddCommand
@@ -39,14 +39,14 @@ activate AddCommand
 AddCommand --> AddCommandParser : r
 deactivate AddCommand
 
-AddCommandParser --> AddressBookParser : r
+AddCommandParser --> HRPlatformParser : r
 deactivate AddCommandParser
 
-AddCommandParser -[hidden]-> AddressBookParser
+AddCommandParser -[hidden]-> HRPlatformParser
 destroy AddCommandParser
 
-AddressBookParser --> LogicManager : r
-deactivate AddressBookParser
+HRPlatformParser --> LogicManager : r
+deactivate HRPlatformParser
 
 LogicManager -> AddCommand : execute()
 activate AddCommand

@@ -18,6 +18,10 @@
     -fx-background-color: derive(#141a21, 20%);
 }
 
-#reportBugContainer {
+#reportBugMessageContainer {
     -fx-background-color: derive(#141a21, 20%);
+}
+
+#reportBugMessage {
+    -fx-text-fill: white;
 }

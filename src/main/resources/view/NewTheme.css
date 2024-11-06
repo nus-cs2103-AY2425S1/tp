@@ -260,12 +260,35 @@ table-view .column-header .label {
 .summary-list-cell {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff; /* Set your preferred text color */
-    -fx-background-color: #333333; /* Set background color for cell */
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #333333;
     -fx-padding: 10px;
-    -fx-border-color: #555555; /* Optional border for the cell */
+    -fx-border-color: #555555;
     -fx-border-width: 1px;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
 }
 
+.cell_small_text {
+    -fx-font-size: 12pt;
+     -fx-font-family: "PT Serif";
+    -fx-fill: white
+}
+
+.cell_detail {
+    -fx-font-size: 11pt;
+    -fx-font-family: "PT Serif";
+    -fx-font-weight: bold;
+    -fx-fill: white
+}
+
+.label_name {
+    -fx-font-size: 14pt;
+    -fx-font-family: "PT Serif";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.scroll-bar {
+    -fx-pref-width: 1px;
+}

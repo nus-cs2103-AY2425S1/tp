@@ -48,6 +48,7 @@ public class MainWindowNew extends UiPart<Stage> {
 
     @FXML
     private MenuItem reportBugItem;
+
     @FXML
     private MenuItem summaryMenuItem;
 
@@ -89,7 +90,7 @@ public class MainWindowNew extends UiPart<Stage> {
     }
 
     private void setAcceleratorsBugReport() {
-        setAccelerator(reportBugItem, KeyCombination.valueOf("F2"));
+        setAccelerator(reportBugItem, KeyCombination.valueOf("F10"));
     }
 
     /**
