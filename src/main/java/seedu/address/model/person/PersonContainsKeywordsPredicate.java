@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.event.Event;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -22,9 +21,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .anyMatch(keyword -> (StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
-                        || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)
-                        || StringUtil.containsSubstringIgnoreCase(person.getEvents().stream().map(Event::toString)
-                        .reduce("", (x, y) -> x + " " + y), keyword)));
+                        || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)));
     }
 
     @Override

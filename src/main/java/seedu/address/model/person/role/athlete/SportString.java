@@ -2,10 +2,26 @@ package seedu.address.model.person.role.athlete;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
 /**
  * Represents the String form of a Sport that an Athlete can participate in shown to the user.
  */
 public class SportString {
+
+    private Sport sport;
+
+    /**
+     * Constructs a {@code SportString}.
+     *
+     * @param sport A valid sport.
+     */
+    public SportString(String sport) throws ParseException {
+        this.sport = ParserUtil.parseSport(sport);
+    }
+
     public static String getSportString(Sport sport) {
         requireNonNull(sport);
         return switch (sport) {
@@ -41,4 +57,10 @@ public class SportString {
         case VOLLEYBALL_W -> "Volleyball Women";
         };
     }
+
+    @Override
+    public String toString() {
+        return getSportString(sport);
+    }
+
 }

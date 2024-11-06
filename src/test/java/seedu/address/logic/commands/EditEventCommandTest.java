@@ -32,7 +32,6 @@ import seedu.address.testutil.EventBuilder;
  */
 public class EditEventCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Event editedEvent = new EventBuilder().build();

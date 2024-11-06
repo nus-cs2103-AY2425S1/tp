@@ -8,18 +8,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.Venue;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.role.Faculty;
 import seedu.address.model.person.role.Role;
 import seedu.address.model.person.role.athlete.Athlete;
 import seedu.address.model.person.role.athlete.Sport;
+import seedu.address.model.person.role.athlete.SportString;
 import seedu.address.model.person.role.committee.Branch;
 import seedu.address.model.person.role.committee.CommitteeMember;
 import seedu.address.model.person.role.committee.FacultySportCommitteeMember;
@@ -34,6 +38,12 @@ import seedu.address.model.person.role.volunteer.VolunteerRole;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    private static FilteredList<Person> personList;
+
+    public static void setPersonList(FilteredList<Person> personsList) {
+        personList = personsList;
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -102,7 +112,7 @@ public class ParserUtil {
     public static Event parseEvent(String event) throws ParseException {
         requireNonNull(event);
         EventName eventName = parseEventName(event);
-        return new Event(eventName);
+        return new Event(eventName, null, null, null);
     }
 
     /**
@@ -182,6 +192,18 @@ public class ParserUtil {
         case "VOLLEYBALL WOMEN" -> Sport.VOLLEYBALL_W;
         default -> throw new ParseException("Invalid sport: " + sport);
         };
+    }
+
+    /**
+     * Parses a {@code String sport} into a {@code SportString}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sport} is invalid.
+     */
+    public static SportString parseSportString(String sport) throws ParseException {
+        requireNonNull(sport);
+        String trimmedSport = sport.trim();
+        return new SportString(trimmedSport);
     }
 
     /**
@@ -295,5 +317,45 @@ public class ParserUtil {
             eventSet.add(parseEvent(eventName));
         }
         return eventSet;
+    }
+
+    /**
+     * Parses a {@code String venue} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedVenue);
+    }
+
+    /**
+     * Parses {@code Collection<String> participants} into a {@code Set<Person>}.
+     *
+     * @throws ParseException if the given {@code participant} is invalid (i.e. not in the addressbook).
+     */
+    public static Set<Person> parseParticipants(Collection<String> participants) throws ParseException {
+        requireNonNull(participants);
+        final Set<Person> participantSet = new HashSet<>();
+
+        for (String participantName : participants) {
+            boolean isParticipantValid = false;
+            for (Person person : personList) {
+                if (person.getNameString().equals(participantName)) {
+                    participantSet.add(person);
+                    isParticipantValid = true;
+                    break;
+                }
+            }
+            if (isParticipantValid == false) {
+                throw new ParseException("Participant " + participantName + " does not exist in the address book.");
+            }
+        }
+        return participantSet;
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.person.role.committee;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.person.role.Role;
 
 /**
@@ -17,6 +19,7 @@ public class CommitteeMember extends Role {
      */
     public CommitteeMember(Branch branch, Position position) {
         super("Committee - " + branch + " - " + PositionString.getPositionString(position));
+        requireAllNonNull(branch, position);
         this.branch = branch;
         this.position = position;
     }

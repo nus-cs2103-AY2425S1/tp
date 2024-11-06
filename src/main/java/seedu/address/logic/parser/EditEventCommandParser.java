@@ -10,7 +10,7 @@ import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new {@link EditEventCommand} object
+ * Parses input arguments and creates a new {@link EditEventCommand} object.
  */
 public class EditEventCommandParser implements Parser<EditEventCommand> {
     @Override

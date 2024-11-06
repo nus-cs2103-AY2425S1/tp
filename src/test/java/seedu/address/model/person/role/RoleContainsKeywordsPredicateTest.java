@@ -42,10 +42,10 @@ public class RoleContainsKeywordsPredicateTest {
     }
 
     @Test
-    void keywordsMatchPartOfRole_returnsFalse() {
+    void keywordsMatchPartOfRole_returnsTrue() {
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(List.of("Man"));
         Person person = new PersonBuilder().withRoles("Manager").build();
-        assertFalse(predicate.test(person));
+        assertTrue(predicate.test(person));
     }
 
     @Test
