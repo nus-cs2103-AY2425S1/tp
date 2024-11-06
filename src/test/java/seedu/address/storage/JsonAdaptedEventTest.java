@@ -10,10 +10,8 @@ import seedu.address.model.event.Time;
 
 import static seedu.address.storage.JsonAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +27,6 @@ public class JsonAdaptedEventTest {
         private static final String INVALID_DATE = "2020-13-32";
         private static final String INVALID_TIME = "25:00";
         private static final String INVALID_DESCRIPTION = "!";
-        private static final List<String> INVALID_VOLUNTEERS = new LinkedList<>();
 
         private static final String VALID_NAME = EVENT_A.getName().toString();
         private static final String VALID_LOCATION = EVENT_A.getLocation().toString();
@@ -39,10 +36,6 @@ public class JsonAdaptedEventTest {
         private static final String VALID_DESCRIPTION = EVENT_A.getDescription().toString();
         private static final List<String> VALID_VOLUNTEERS = EVENT_A.getVolunteers();
 
-        @BeforeAll
-        public static void setUp() {
-            INVALID_VOLUNTEERS.add("not a volunteer !");
-        }
 
         @Test
         public void toModelType_validEventDetails_returnsEvent() throws Exception {

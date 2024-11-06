@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -37,7 +39,7 @@ class JsonAdaptedVolunteer {
         this.phone = phone;
         this.email = email;
         this.availableDate = availableDate;
-        this.involvedIn = involvedIn;
+        this.involvedIn = involvedIn != null ? involvedIn : new ArrayList<>();
     }
 
     /**
