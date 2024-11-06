@@ -249,7 +249,7 @@ public class AutoSuggestionTextField extends TextField {
     private double calculateListViewHeight(ObservableList<TextFlow> items) {
         double totalHeight = 0;
         for (TextFlow item : items) {
-            totalHeight += 50; // 10 pixels padding
+            totalHeight += 40; // 10 pixels padding
         }
 
         return totalHeight;
@@ -344,7 +344,6 @@ public class AutoSuggestionTextField extends TextField {
         List<TextFlow> menuItems = new LinkedList<>();
         for (int i = 0; i < filteredList.size(); i++) {
             final String result = filteredList.get(i);
-
             //label with graphic (TextFlow) to highlight matching prefix
             Label entryLabel = new Label();
             entryLabel.setGraphic(buildTextFlow(result, searchRequest));

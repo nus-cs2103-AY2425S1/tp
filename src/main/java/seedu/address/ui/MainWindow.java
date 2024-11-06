@@ -148,6 +148,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.getRoot().toFront();
         }
         if (!helpWindow.isShowing()) {
+            helpWindow = new HelpWindow();
             helpWindow.show();
         } else {
             helpWindow.focus();

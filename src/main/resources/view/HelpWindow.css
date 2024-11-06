@@ -55,3 +55,19 @@
 .table-view .focused .cell {
     -fx-background-color: #e0f7fa; /* Highlighted row when focused */
 }
+
+.table-view .table-row-cell {
+    -fx-border-color: black;
+    -fx-border-width: 0 1 1 0; /* Only bottom border */
+    -fx-pref-height: 30;
+}
+
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0; /* Makes the scrollbar invisible */
+    -fx-pref-width: 0; /* Sets the width to 0, effectively hiding it */
+}
+
+.table-view .column2 .table-cell {
+    -fx-alignment: CENTER;
+}

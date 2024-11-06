@@ -74,21 +74,24 @@ public class CommandTextFlow extends TextFlow {
     private String getDetailForCommand(String command) {
         // Switch statement to determine the detail text for each command
         return switch (command.toLowerCase()) {
+        case "help" -> "help - Shows program help instructions and command summary";
+        case "list" -> "list - Shows a list of all persons in the gamer address book";
         case "add" -> "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... [pt/PREFERRED_TIME]...";
-        case "clear" -> "clear - Clears all entries from the gamer address book";
-        case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
         case "edit" -> "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... "
                 + "[t/TAG]... [pt/PREFERRED_TIME]...";
+        case "addgame" -> "addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]";
         case "editgame" -> "editgame INDEX g/GAME [u/USERNAME] [s/SKILL_LEVEL] [r/ROLE]";
+        case "deletegame" -> "deletegame INDEX g/GAME";
+        case "favgame" -> "favgame INDEX g/GAME";
+        case "unfavgame" -> "unfavgame INDEX g/GAME";
         case "find" -> "find KEYWORD [MORE_KEYWORDS] - Finds persons whose names contain any of the keywords";
-        case "list" -> "list - Shows a list of all persons in the gamer address book";
-        case "help" -> "help - Shows program help instructions and command summary";
+        case "findtime" -> "find HHmm-HHmm [HHmm-HHmm]";
+        case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
+        case "clear" -> "clear - Clears all entries from the gamer address book";
+        case "undo" -> "undo - Undoes the previous command (aside from save and load)";
         case "save" -> "save - Saves the gamer address book data";
         case "load" -> "load - Loads the gamer address book data";
         case "exit" -> "exit - Closes the gamer address book";
-        case "findtime" -> "findtime TIME_RANGE [MORE_RANGES] "
-                        + "- Finds persons whose preferred times overlap with any of the time ranges";
-        // TODO: #201 description for 'undo', 'favgame', 'unfavgame', and 'findgame'
         default -> "No additional information available";
         };
     }

@@ -12,21 +12,22 @@ public class PopUpCommandsSet {
      */
     public static SortedSet<String> commands() {
         TreeSet<String> commandSet = new TreeSet<>();
-        commandSet.add("add");
         commandSet.add("help");
-        commandSet.add("editgame");
-        commandSet.add("edit");
-        commandSet.add("delete");
-        commandSet.add("find");
         commandSet.add("list");
-        commandSet.add("save");
-        commandSet.add("load");
-        commandSet.add("clear");
-        commandSet.add("findgame");
-        commandSet.add("findtime");
+        commandSet.add("add");
+        commandSet.add("edit");
+        commandSet.add("addgame");
+        commandSet.add("editgame");
+        commandSet.add("deletegame");
         commandSet.add("favgame");
         commandSet.add("unfavgame");
+        commandSet.add("find");
+        commandSet.add("findtime");
+        commandSet.add("delete");
+        commandSet.add("clear");
         commandSet.add("undo");
+        commandSet.add("save");
+        commandSet.add("load");
         commandSet.add("exit");
         return commandSet;
     }
