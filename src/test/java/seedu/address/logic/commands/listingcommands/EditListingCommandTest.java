@@ -60,7 +60,6 @@ public class EditListingCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 new Listings(model.getListings()));
         expectedModel.setListing(model.getListingByName(SENGKANG.getName()), editedListing);
-
         assertCommandSuccess(editListingCommand, model, expectedMessage, expectedModel);
     }
 

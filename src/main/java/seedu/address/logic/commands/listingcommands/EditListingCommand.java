@@ -91,14 +91,13 @@ public class EditListingCommand extends Command {
             throw new CommandException("Seller not found in the system.");
         }
 
-
         Listing editedListing = createEditedListing(
                 listingToEdit,
                 editListingDescriptor,
                 seller.orElse(listingToEdit.getSeller())
         );
 
-        if (!listingToEdit.isSameListing(editedListing) || model.hasListing(editedListing)) {
+        if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
         }
 
