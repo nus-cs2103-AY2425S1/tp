@@ -6,7 +6,13 @@
 
 # MindMap User Guide
 
-MindMap is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MindMap is a **desktop app that helps you manage your contacts efficiently, combining the speed of typing commands with the ease of a visual interface.**
+
+It’s designed for professionals like psychologists who work with many contacts and prefer a fast, straightforward tool.
+
+With MindMap, you can accomplish tasks quickly by typing simple commands, and you still get a clear, user-friendly screen to view and organize your contacts.
+
+If you’re comfortable typing, MindMap can help you get contact management tasks done much faster than traditional apps that rely heavily on point-and-click with a mouse.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,50 +21,67 @@ MindMap is a **desktop app for managing contacts, optimized for use via a  Line 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above [installed](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) in your Computer.
+1. **Check Your Java Version**  
+   Make sure Java **version 17** or above is installed on your computer. [Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your MindMap application.
+2. **Download MindMap**  
+   Download the latest `.jar` file for MindMap from [this link](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases).
 
-4. Open a command terminal,
-  - For Windows user,
-     1. **Can some window user edit this**
+
+3. **Choose a Folder**  
+   Copy the `.jar` file to a folder you’d like to use as the home for your MindMap contacts.
+
+
+4. **Open a Terminal**
+    - **For Windows**:
+        - Open the Start menu, type “Windows PowerShell,” and click on it to open.
+
+    - **For Mac**:
+        - Press `Command + Space` to open the search bar.
+        - Type "Terminal" and select it from the results.
+
+
+5. **Get the Folder Path**
+    - For **Windows**: Hold `Shift` and `Right-click` the folder containing the `.jar` file and select **Copy as Path**.
+    - For **Mac**: [Follow these steps](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ) to copy the folder path.
+
+
+6. **Navigate to the Folder in Terminal**  
+   In the terminal, type the following line and press Enter:
+   ```bash
+   cd [paste the folder path from step 5 here]
+   ```
    
-        
-  - For MacOS user,
-     1. Use command + space, to show the highlight search bar
-     2. Type `terminal` into the search bar and select the first option.
+7. **Start MindMap**  
+   Now, type the following line in the terminal to launch the app:
+   ```bash
+   java -jar mindmap.jar
+   ```
    
-5. Copy the filepath of the folder containing Mindmap. For Windows, **shift and right-click** the folder, then select "Copy as Path" from the context menu. For MacOS, follow [this](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ).
-6. Change the file directory to match the location of the folder containing the app. Copy the following line into terminal.
-```
-cd [Replace this with the copied filepath]
-```
-7. Copy the followning line into terminal to run the application
-```
-java -jar mindmap.jar
-```
-8. A GUI similar to the below should appear in a few seconds.
->[!NOTE]
->The app contains some sample data.<br>
+8. **Get Started with the App**  
+   In a few seconds, you'll see the MindMap interface open with some sample contacts to explore.
+> **NOTE**: The app contains some sample data.<br>
+
    
    ![Ui](images/Ui.png)
 
-9. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+9. **Try Out Some Commands**  
+   Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe i/S1234567D p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe i/S1234567D p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app. 
 
-10. Refer to the [Features](#features) below for details of each command.
+10. **Learn More**  
+    Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -221,10 +244,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
