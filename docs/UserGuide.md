@@ -887,13 +887,6 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 </div>
 
 </div>
-<br>
-<br>
-
-### **Archiving data files `[coming in v2.0]`**
-<div class="sub-content">
-
-_Details coming soon ..._
 
 </div>
 </div>
