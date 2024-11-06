@@ -174,8 +174,8 @@ Adds an Assignment to the app.
 
 Format: `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
-* Adds an assignment to the student at the specified `STUDENT_INDEX`. 
-* The index refers to the index number shown in the displayed student list.
+* Adds an assignment to the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the 
+  displayed student list.
 * The max score must be a positive integer.
 
 Examples:
@@ -190,6 +190,9 @@ Deletes an assignment belonging to a student based on the student's index number
 
 Format: `delete_assignment si/INDEX ai/INDEX`
 
+* Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
+  list and the assignment list on the student detail panel respectively.
+  
 Examples:
 * `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
 * `delete_assignment si/1 ai/1`
@@ -246,8 +249,8 @@ Edits the score of an assignment belonging to a student and marks it as submitte
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
 
 * The score must be a positive integer that is in bounds of the minimum and maximum scores of the assignment.
-* The index refers to the index number shown in the displayed student list and the assignment list on the student detail 
-  panel respectively.
+* The indices refer to the index numbers shown in the displayed student list and the assignment list on the student 
+  detail panel respectively.
 * The score can be regraded multiple times by using the `grade` command again.
 
 Examples:
