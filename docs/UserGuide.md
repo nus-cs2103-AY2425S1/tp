@@ -7,6 +7,7 @@
 #  UGTeach User Guide
 
 UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+
 Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
 If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
 
@@ -53,17 +54,18 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
 **Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
-**List**   | `list`
 **Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
-**Remind**   | `remind`
-**Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Income**  | `income`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Remind**   | `remind`
+**Clear**  | `clear`
 **Exit**   | `exit`
 
 ## Features
@@ -136,9 +138,9 @@ Adds a student to the address book.
 
 <box type="tip" header="##### Tips">
 
-
-* New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student-edit).
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.   
+* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* UGTeach will inform you of clashing schedules so that you can modify using the [`edit` command](#editing-a-student-edit).
+  ![clashingSchedule.png](images/clashingSchedule.png)
 </box>
 
 ### Listing all students: `list`
@@ -182,22 +184,6 @@ for convenient ways to update the paid amount and owed amount.
 
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
 </box>
-
-<div style="page-break-after: always;"></div>
-
-### Showing income data: `income`
-
-Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
-
-**Format:** `income`
-
-**Examples**
-* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
-* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
-students whose name contains Alex
-
-**Output:**
-![result for `income` when all entries listed](images/incomeResult.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -316,6 +302,22 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 * **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
+
+<div style="page-break-after: always;"></div>
+
+### Showing income data: `income`
+
+Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
+
+**Format:** `income`
+
+**Examples**
+* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
+* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
+  students whose name contains Alex
+
+**Output:**
+![result for `income` when all entries listed](images/incomeResult.png)
 
 <div style="page-break-after: always;"></div>
 
