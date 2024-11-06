@@ -188,13 +188,13 @@ public class CommandTestUtil {
     
     /**
      * Creates a mixed-case version of {@code s}.
-     * For example: "paidAmount/" becomes "pAiDaMoUnT/".
+     * For example: "paidAmount/" becomes "PaIdAmOuNt/".
      */
     private static String createMixedCase(String s) {
         return IntStream.range(0, s.length())
                 .mapToObj(i -> i % 2 == 0
-                        ? Character.toString(Character.toLowerCase(s.charAt(i)))
-                        : Character.toString(Character.toUpperCase(s.charAt(i))))
+                        ? Character.toString(Character.toUpperCase(s.charAt(i)))
+                        : Character.toString(Character.toLowerCase(s.charAt(i))))
                 .collect(Collectors.joining());
     }
 }
