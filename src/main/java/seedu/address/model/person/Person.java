@@ -112,7 +112,7 @@ public class Person implements Appointmentable {
         return remark;
     }
 
-    public List<Appointment> getAllAppointments() { return this.appointments;}
+    public List<Appointment> getAllAppointments() { return this.appointments; }
 
     /**
      * Adds additional remarks to a person
@@ -223,7 +223,7 @@ public class Person implements Appointmentable {
                     doctor.deleteAppointment(appointment.getDateTime(), appointment.getPatientId(), this.id);
                 }
             }
-        } else  {
+        } else {
             for (Appointment appointment : appointments) {
                 if (appointment.getDoctorId() == this.id) {
                     ObservableList<Person> allPersons = model.getFilteredPersonList();
