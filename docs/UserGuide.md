@@ -53,14 +53,18 @@ As you read through the user guide, you may come across some terms that are unfa
 ### Annotations box
 The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
 
-> :information_source: **Note:** <br>
-> Additional information that help you understand more about Commands.
+<box type="info" seamless>
+**Note:** Additional information about the Commands.
+</box>
 
-> :bulb: **Tip:** <br>
-> Provide tips to help users understand the command usage better.
+<box type="tip" seamless>
+**Tip:** Provide tips to help users understand the command usage better.
+</box>
 
-> :warning: **Warning:** <br>
-> Warns you about potential errors that you may face when using the NovaCare.
+<box type="warning" seamless>
+**Warning:** Warns you about potential errors that you may face when using the NovaCare.
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -98,12 +102,13 @@ Upon successful execution, you should see the GUI of NovaCare covered in the nex
 ## Overview of GUI
 
 The GUI is broken down into different **sections** as shown in the image below:
-![GUI Overview](images/GUIOverview.jpg)
-1. **Command Box**: This is where you can type your commands to interact with the application.
-2. **Result Display Box**: Displays the result of commands.
-3. **Patient List**: Displays all the patients in the application.
-4. **Task List**: Displays all the task for all patients.
-5. **Menu Bar**: Contains the `File` and `Help` menu. (to exit or view the help menu)
+
+![GUI Overview](images/GUIOverview.png)
+1. **Command Box:** This is where you can type your commands to interact with the application.
+2. **Result Display Box:** Displays the result of commands.
+3. **Patient List:** Displays all the patients in the application.
+4. **Task List:** Displays all the task for all patients.
+5. **Menu Bar:** Contains the `File` and `Help` menu. (to exit or view the help menu)
 
 ## Get started with NovaCare
 Here will be a basic guide on how to use the application.
