@@ -168,7 +168,7 @@ Examples:
 
 ### Deleting in a batch : `batch-delete`
 
-Delete all contacts from cher with contains **all** the specified tags.
+Delete all contacts from Cher that contain **all** the specified tags.
 
 Format: `batch-delete t/TAG [t/TAG]...`
 
@@ -186,6 +186,17 @@ Examples:
 
 * `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts.
 * `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show only these selected contacts.
+
+### Editing tag in a batch: `batch-edit`
+Changes all contacts from cher with containing the specified tags with a new tag.
+
+Format: `batch-edit t/OLDTAG t/NEWTAG`
+
+Examples:
+![Batch delete example data](images/ForBatchDeleteExampleData.png)
+* `batch-edit t/friends t/fren` will change the `friends` tag of both `Alex Yeoh` and `Bernice Yu` to `fren`.
+
+
 
 ### Clearing all entries : `clear`
 
@@ -240,6 +251,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
+**Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
