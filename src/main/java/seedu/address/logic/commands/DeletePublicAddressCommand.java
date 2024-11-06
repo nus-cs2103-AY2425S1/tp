@@ -1,20 +1,20 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.Network;
-import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 
 /**
@@ -29,13 +29,16 @@ public class DeletePublicAddressCommand extends Command {
         + "public address identified by the index number "
         + "used in the displayed person list and their crypto network.\n"
         + "Parameters: INDEX (must be a positive integer)\n"
-        + PREFIX_PUBLIC_ADDRESS + "NETWORK\n"
-        + "[" + PREFIX_PUBLIC_ADDRESS + "LABEL]\n"
+        + PREFIX_PUBLIC_ADDRESS_NETWORK + "NETWORK\n"
+        + "[" + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL]\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_PUBLIC_ADDRESS + "BTC"
+        + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
         + PREFIX_PUBLIC_ADDRESS_LABEL + "default";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person's Public Address: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted %1$s's Public Address: %2$s";
+    public static final String MESSAGE_NON_MATCHING_LABEL = "Label %1$s does not match any public addresses of %2$s";
+    public static final String MESSAGE_EMPTY_NETWORK = "Network %1$s of %2$s is empty and cannot be deleted from";
+    private static final Logger logger = LogsCenter.getLogger(DeletePublicAddressCommand.class);
 
     private final Index targetIndex;
     private final Network targetAddressnetwork;
@@ -76,24 +79,38 @@ public class DeletePublicAddressCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person person = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        // Select from address and delete the specific ones
-        Set<PublicAddress> addresses = person.getPublicAddressesByNetwork(targetAddressnetwork);
-        Set<PublicAddress> newAddresses = new HashSet<PublicAddress>();
-        if (!targetLabel.isEmpty()) {
-            addresses.forEach(
-                address -> {
-                    if (!address.label.equals(targetLabel)) {
-                        newAddresses.add(address);
-                    }
-                }
-            );
+        if (personToDelete.getPublicAddressesByNetwork(targetAddressnetwork).isEmpty()) {
+            logger.warning(String.format(
+                    "Attempted to delete a public address from empty network %1$s on person %2s",
+                    targetAddressnetwork, personToDelete.getName()));
+            throw new CommandException(
+                    String.format(MESSAGE_EMPTY_NETWORK, targetAddressnetwork, personToDelete.getName()));
         }
-        person.addPublicAddressToNetwork(targetAddressnetwork, new HashSet<PublicAddress>(newAddresses));
 
+        if (!Objects.equals(targetLabel, "")
+                && !personToDelete.hasPublicAddressWithLabelWithinNetwork(targetAddressnetwork, targetLabel)) {
+            logger.warning(String.format(
+                "Attempted to delete a public address with a non-matching label %1$s for network %2$s on person %3$s",
+                targetLabel, targetAddressnetwork, personToDelete.getName()));
+            throw new CommandException(
+                String.format(MESSAGE_NON_MATCHING_LABEL, targetLabel, personToDelete.getName()));
+        }
+
+        Person deletedPerson;
+        if (targetLabel.isEmpty()) {
+            // Delete all the addresses in the network
+            deletedPerson = personToDelete.withoutPublicAddressesByNetwork(targetAddressnetwork);
+        } else {
+            // Delete the specific address with the label
+            deletedPerson = personToDelete.withoutPublicAddressByNetworkAndLabel(targetAddressnetwork, targetLabel);
+        }
+        model.setPerson(personToDelete, deletedPerson);
         return new CommandResult(String.format(
-            MESSAGE_DELETE_PERSON_SUCCESS, person.getPublicAddressesComposition()));
+                MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(), personToDelete.getPublicAddressesComposition()
+        ));
+
     }
 
     @Override

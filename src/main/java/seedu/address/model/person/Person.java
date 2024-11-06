@@ -118,6 +118,29 @@ public class Person {
         return new Person(name, phone, email, address, updatedPublicAddresses, tags);
     }
 
+    /**
+     * Returns a new {@code Person} object with the public addresses from the network removed.
+     *
+     * @param network The network to remove the public address
+     * @param label The label of the public address to be removed
+     * @return A new {@code Person} object with the public addresses removed
+     */
+    public Person withoutPublicAddressByNetworkAndLabel(Network network, String label) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.remove(label, network);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the public addresses from the network removed.
+     *
+     * @param network The network to remove the public address
+     * @return A new {@code Person} object with the public addresses removed
+     */
+    public Person withoutPublicAddressesByNetwork(Network network) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.remove(network);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
     private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
         return addresses.stream()
             .map(addr -> addr.label.equals(newAddress.label)
