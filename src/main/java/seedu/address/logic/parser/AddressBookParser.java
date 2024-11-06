@@ -24,10 +24,10 @@ import seedu.address.logic.commands.GetAttendanceByTgCommand;
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

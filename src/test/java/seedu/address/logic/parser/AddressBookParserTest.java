@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.CloseWindowCommand;
 import seedu.address.logic.commands.DeleteAllStudentsCommand;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
 import seedu.address.logic.commands.EditStudentCommand;
@@ -25,9 +26,9 @@ import seedu.address.logic.commands.GetAttendanceByTgCommand;
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
-import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
@@ -165,6 +166,10 @@ public class AddressBookParserTest {
                 MarkAbsentAllCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " "
                         + PREFIX_DATE + date);
         assertEquals(new MarkAbsentAllCommand(tutorialGroup, date), command);
+    }
+    @Test
+    public void parseCommand_closeWindow() throws Exception {
+        assertTrue(parser.parseCommand(CloseWindowCommand.COMMAND_WORD) instanceof CloseWindowCommand);
     }
 
 
