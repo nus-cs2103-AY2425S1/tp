@@ -1066,9 +1066,9 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `edit 2 n/Test 2`<br>
    Expected: No student is edited. Error details shown.
 5. Test case: `edit 1 c/CS2103T;CS2109S`
-   Expected: The first student’s courses are updated to include both CS2103T and CS2109S.
+   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
 6. Test case: `edit 1 c/CS2103T c/CS2109S`
-   Expected: The first student’s courses are updated to include both CS2103T and CS2109S.
+   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
 5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
    Expected: No student is edited. Error details shown.
 
