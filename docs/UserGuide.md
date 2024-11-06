@@ -106,8 +106,8 @@ Format: `edit NAME [n/NEW_NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the supplier (with name `John Doe`) to be `91234567` and `johndoe@example.com` respectively.
-*  `edit Bety n/Betsy Crower t/` Edits the name of `Bety` to be `Betsy Crower` and clears all existing tags.
+*  `edit John Doe p/91234567 e/johndoe@example.com` edits the phone number and email address of the supplier (with name `John Doe`) to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Bety n/Betsy Crower t/` edits the name of `Bety` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating suppliers by name: `find`
 
@@ -121,7 +121,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Optionally, a selection of categories "CONSUMABLES", "LIFESTYLE", "SPECIALTY" can be specified to search for suppliers which has goods which has at least one of the specified category. If the category is specified, the keywords are optional.
+* Optionally, a selection of categories `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY` can be specified to search for suppliers which has goods which has at least one of the specified category. If the category is specified, the keywords are optional.
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -157,11 +157,17 @@ Format: `exit`
 
 To be added.
 
-Note: The goods category of goods will be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of "CONSUMABLES", a "CONSUMABLES" tag will be added to the supplier (visually). The tag information of the supplier remains as it is.
+Note: The goods category of goods will be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of `CONSUMABLES`, a `CONSUMABLES` tag will be added to the supplier (visually). The tag information of the supplier remains as it is.
 
 ### Deletion of Goods : `deletegoods`
 
-To be added.
+Deletes the specified goods from the specified supplier.
+
+Format: `deletegoods n/NAME gn/GOODS_NAME`
+
+Examples:
+
+* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes the goods that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
 
 ### View statistics for Goods : `viewgoods`
 
