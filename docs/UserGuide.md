@@ -13,23 +13,23 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 1. [Quick Start](#quick-start)
 2. [Input Parameters](#Input-parameters)
 3. [Features](#features)
-    - General Commands
+    - **General Commands**
       - [Viewing help](#viewing-help-help)
       - [Saving the data](#saving-the-data)
       - [Editing the data file](#editing-the-data-file)
       - [Clearing all entries](#clearing-all-entries-clear)
       - [Exiting the program](#exiting-the-program-exit)
-    - Patient Management
+    - **Patient Management**
       - [Adding a patient](#adding-a-patient-add)
       - [Editing a patient](#editing-a-patient-edit)
       - [Deleting a patient](#deleting-a-patient-delete)
       - [Listing all patients](#listing-all-patients-list)
       - [Searching patients by field](#searching-patients-by-field-find)
       - [Viewing a patient's details](#viewing-a-patient-s-details-view)
-    - Notes Management
+    - **Notes Management**
       - [Adding notes to a patient](#adding-notes-to-a-patient-addnotes)
       - [Deleting notes from a patient](#deleting-notes-from-a-patient-delnotes)
-    - Appointment Management
+    - **Appointment Management**
       - [Adding an appointment to a patient](#adding-an-appointment-to-a-patient-makeappt)
       - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-delappt)
       - [List all patient appointments on a specific date](#show-appointments-on-a-specific-date-scheduledate)
@@ -105,6 +105,21 @@ For more information on the formats of `PARAMETERS`, please refer to [Input para
    e.g. `list` and `LIST` are both valid commands.
 5) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+**Save and Storage information:**
+
+- AddressBook data are saved in the [hard disk](#glossary) automatically after any command that changes the data. There is no need to save manually.
+
+- AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
+
+[Back to Table of Contents](#table-of-contents)
+
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -156,12 +171,13 @@ Format: `help`
 
 ![add patient result](images/add.png)
 
-Adds a person to the address book.
+Adds a patient to the address book.
 
-Format: `add n/NAME i/ID w/WARD d/DIAGNOSIS m/MEDICATION`
+Format: `add n/NAME i/ID w/WARD [d/DIAGNOSIS] [m/MEDICATION]`
 
-* `ID` must be in the form of `PXXXXX` where `XXXXX` is a 5 digit integer.
+* `DIAGNOSIS` and `MEDICATION` fields are optional. The user can use the [Edit Command](#editing-a-patient-edit) to add these fields in the future.
 * `ID` of patients must be unique.
+* View parameter constraints [here](#input-parameters)!
 
 
 [//]: # (<box type="tip" seamless>)
@@ -414,9 +430,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Glossary
 
-1. **CLI (Command Line Interface):** A user interface where users interact with a computer or software by typing text-based commands. Instead of clicking on icons or buttons, users enter specific commands in a terminal or command prompt window to perform tasks.
+1. **Command Line Interface (CLI):** A user interface where users interact with a computer or software by typing text-based commands. Instead of clicking on icons or buttons, users enter specific commands in a terminal or command prompt window to perform tasks.
 
-2. **GUI (Graphical User Interface):** A user interface that allows users to interact with electronic devices through graphical elements such as icons, buttons, and windows, rather than text-based commands. GUIs make it easier for users to navigate and use software applications visually.
+2. **Graphical User Interface (GUI):** A user interface that allows users to interact with electronic devices through graphical elements such as icons, buttons, and windows, rather than text-based commands. GUIs make it easier for users to navigate and use software applications visually.
+
+3. **Hard Disk (HDD):** A storage device inside a computer that uses spinning magnetic disks to store and retrieve data, commonly used for long-term storage of files, programs, and the operating system.
 
 [Back to Table of Contents](#table-of-contents)
 
