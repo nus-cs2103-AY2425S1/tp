@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -9,6 +11,7 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.model.student.Note;
 
@@ -31,8 +34,18 @@ public class NoteCommandParserTest {
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE);
+
         // no parameters
         assertParseFailure(parser, NoteCommand.COMMAND_WORD, expectedMessage);
+
+        // no preamble
+        assertParseFailure(parser, PREFIX_NAME + AMY.getName().fullName + " " + PREFIX_NOTE + nonEmptyNote,
+                expectedMessage);
+
+        // duplicate prefixes
+        assertParseFailure(parser, NAME_DESC_AMY + " " + NAME_DESC_BOB + "" + PREFIX_NOTE + nonEmptyNote,
+                "Multiple values specified for the following single-valued field(s): n/");
+
         // no name
         assertParseFailure(parser, NoteCommand.COMMAND_WORD + " " + nonEmptyNote, expectedMessage);
     }
