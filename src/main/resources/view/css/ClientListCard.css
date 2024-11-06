@@ -58,7 +58,7 @@
 
 /** Styling for Tier Tag/Label **/
 #assignedTier .label, #assignedStatus .label {
-    -fx-text-fillx: white;
+    -fx-text-fill: white;
     -fx-padding: 3 6 4 6;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
