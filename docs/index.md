@@ -4,7 +4,7 @@ title: EduTuTu
 ---
 
 [![CI Status](https://github.com/AY2425S1-CS2103T-T15-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T15-2/tp/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425S1-CS2103T-T15-2/tp)
+[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425S1-CS2103T-T15-2/tp/tree/master)
 
 ![Ui](images/Ui.png)
 
