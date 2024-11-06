@@ -9,8 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
@@ -34,6 +33,7 @@ import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
 import seedu.sellsavvy.testutil.AddressBookBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
 import seedu.sellsavvy.testutil.PersonBuilder;
+import seedu.sellsavvy.testutil.TypicalIndexes;
 
 public class ModelManagerTest {
 
@@ -146,7 +146,7 @@ public class ModelManagerTest {
     public void findEquivalentPerson_modelContainsEquivalentPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
         Model modelCopy = model.createCopy();
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Person selectedPersonCopy = modelCopy.findEquivalentPerson(selectedPerson);
         assertNotSame(selectedPersonCopy, selectedPerson);
         assertEquals(selectedPersonCopy, selectedPerson);
@@ -155,7 +155,7 @@ public class ModelManagerTest {
     @Test
     public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Person differentPerson = new PersonBuilder(selectedPerson).withName(VALID_NAME_BOB).build();
         assertThrows(PersonNotFoundException.class, () -> model.findEquivalentPerson(differentPerson));
     }
@@ -196,7 +196,7 @@ public class ModelManagerTest {
         assertThrows(OrderNotFoundException.class, () -> model.setOrder(new OrderBuilder(BOTTLE).build(), ABACUS));
 
         // success when selectedPerson has the same order
-        Order order = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
+        Order order = model.getFilteredOrderList().get(TypicalIndexes.INDEX_FIRST.getZeroBased());
         model.setOrder(order, BOTTLE);
         assertFalse(model.getFilteredOrderList().contains(order));
         assertTrue(model.getFilteredOrderList().contains(BOTTLE));

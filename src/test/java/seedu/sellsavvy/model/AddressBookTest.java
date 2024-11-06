@@ -8,7 +8,7 @@ import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUti
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -97,7 +97,7 @@ public class AddressBookTest {
     public void findEquivalentPerson_modelContainsEquivalentPerson() {
         AddressBook addressBook1 = getTypicalAddressBook().createCopy();
         AddressBook addressBook2 = addressBook1.createCopy();
-        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST.getZeroBased());
         Person selectedPersonCopy = addressBook2.findEquivalentPerson(selectedPerson);
         assertNotSame(selectedPersonCopy, selectedPerson);
         assertEquals(selectedPersonCopy, selectedPerson);
@@ -106,7 +106,7 @@ public class AddressBookTest {
     @Test
     public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
         AddressBook addressBook1 = getTypicalAddressBook().createCopy();
-        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST.getZeroBased());
         Person differentPerson = new PersonBuilder(selectedPerson).withName(VALID_NAME_BOB).build();
         assertThrows(PersonNotFoundException.class, () -> addressBook.findEquivalentPerson(differentPerson));
     }

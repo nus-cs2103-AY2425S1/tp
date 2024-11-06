@@ -1,12 +1,10 @@
 package seedu.sellsavvy.model.order;
 
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 import java.util.Objects;
 
 import seedu.sellsavvy.commons.util.ToStringBuilder;
-import seedu.sellsavvy.model.tag.Tag;
 
 /**
  * Represents an Order made by a Person in the address book.
