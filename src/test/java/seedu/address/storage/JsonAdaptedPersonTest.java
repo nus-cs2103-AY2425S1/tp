@@ -36,7 +36,8 @@ public class JsonAdaptedPersonTest {
             .orElse("");
 
     private static final String VALID_CONTACTTYPE = BENSON.getContactType().toString();
-    private static final String VALID_MODULENAME = BENSON.getModuleName().toString();
+    private static final String VALID_MODULENAME = BENSON.getModuleName().map(ModuleName::toString)
+            .orElse("");
     private static final String VALID_REMARK = BENSON.getRemark().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
@@ -123,14 +124,6 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEHANDLE,
                 INVALID_MODULENAME, VALID_REMARK, VALID_TAGS, VALID_CONTACTTYPE);
         String expectedMessage = ModuleName.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullModuleName_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEHANDLE,
-                null, VALID_REMARK, VALID_TAGS, VALID_CONTACTTYPE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }

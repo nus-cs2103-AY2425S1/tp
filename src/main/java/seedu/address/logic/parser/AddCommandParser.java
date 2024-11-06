@@ -41,7 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TELEHANDLE, PREFIX_MOD, PREFIX_REMARK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_MOD,
+        if (!arePrefixesPresent(argMultimap, PREFIX_CONTACTTYPE, PREFIX_NAME,
                 PREFIX_REMARK)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -53,7 +53,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         // parse required fields
         ContactType contactType = ParserUtil.parseContactType(argMultimap.getValue(PREFIX_CONTACTTYPE).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MOD).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
         // parse optional fields
@@ -67,6 +66,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Optional<TelegramHandle> telegramHandle = argMultimap.getValue(PREFIX_TELEHANDLE).isPresent()
                 ? Optional.of(ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get()))
+                : Optional.empty();
+
+        Optional<ModuleName> moduleName = argMultimap.getValue(PREFIX_MOD).isPresent()
+                ? Optional.of(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MOD).get()))
                 : Optional.empty();
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

@@ -6,9 +6,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramHandle;
+
 
 
 /**
@@ -48,7 +50,7 @@ public class Messages {
                 .append("; Telegram Handle: ")
                 .append(person.getTelegramHandle().map(TelegramHandle::toString).orElse("N/A"))
                 .append("; Module Name: ")
-                .append(person.getModuleName())
+                .append(person.getModuleName().map(ModuleName::toString).orElse("N/A"))
                 .append(": Remark: ")
                 .append(person.getRemark())
                 .append("; Tags: ");

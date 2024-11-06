@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramHandle;
@@ -61,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().map(Phone::toString).orElse(" "));
         email.setText(person.getEmail().map(Email::toString).orElse(" "));
         telegramHandle.setText(person.getTelegramHandle().map(TelegramHandle::toString).orElse(" "));
-        moduleName.setText(person.getModuleName().toString());
+        moduleName.setText(person.getModuleName().map(ModuleName::toString).orElse(" "));
         String contactTypeStr = person.getContactType().value.toString().toLowerCase();
         remark.setText(person.getRemark().value);
         contactType.setText(contactTypeStr);
