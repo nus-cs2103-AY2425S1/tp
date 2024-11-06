@@ -20,18 +20,19 @@ administrators.
    - [2.2 Adding a Person](#22-adding-a-person-add)
    - [2.3 Deleting a Person](#23-deleting-a-person-delete)
    - [2.4 Marking a Payment Date](#24-marking-a-payment-date-markpaid)
-   - [2.5 Editing a Person](#25-editing-a-person-edit)
-   - [2.6 Listing All Persons](#26-listing-all-persons-list)
-   - [2.7 Finding a Person](#27-finding-a-person-find)
-   - [2.8 Clearing All Entries](#28-clearing-all-entries-clear)
-   - [2.9 Undo/Redo Commands](#29-undoredo-commands-undo-and-redo)
-   - [2.10 Displaying Pie Chart of Class Distribution](#210-displaying-pie-chart-of-class-distribution-pie)
-   - [2.11 Displaying Bar Chart](#211-displaying-bar-chart-bar)
-   - [2.12 Viewing Command History](#212-viewing-command-history-arrow-keys)
-   - [2.13 View Student Details](#213-view-student-details-info)
-   - [2.14 Editing the Data File](#214-editing-the-data-file)
-   - [2.15 Saving the Data](#215-saving-the-data)
-   - [2.16 Exiting the Program](#216-exiting-the-program-exit)
+   - [2.5 Unmarking a Payment Date](#25-unmarking-a-payment-date-unmarkpaid)
+   - [2.6 Editing a Person](#26-editing-a-person-edit)
+   - [2.7 Listing All Persons](#27-listing-all-persons-list)
+   - [2.8 Finding a Person](#28-finding-a-person-find)
+   - [2.9 Clearing All Entries](#29-clearing-all-entries-clear)
+   - [2.10 Undo/Redo Commands](#210-undoredo-commands-undo-and-redo)
+   - [2.11 Displaying Pie Chart of Class Distribution](#211-displaying-pie-chart-of-class-distribution-pie)
+   - [2.12 Displaying Bar Chart](#212-displaying-bar-chart-bar)
+   - [2.13 Viewing Command History](#213-viewing-command-history-arrow-keys)
+   - [2.14 View Student Details](#214-view-student-details-info)
+   - [2.15 Editing the Data File](#215-editing-the-data-file)
+   - [2.16 Saving the Data](#216-saving-the-data)
+   - [2.17 Exiting the Program](#217-exiting-the-program-exit)
 3. [FAQ](#3-faq)
 4. [Glossary](#4-glossary)
 
@@ -233,7 +234,51 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 ***
 
-### 2.5 Editing a Person: `edit`
+Here's the markdown for the `unmarkpaid` feature following your provided format:
+
+### 2.5 Unmarking a Payment Date: `unmarkpaid`
+
+Updates the [payment status](#payment-status) of a student by removing the completed status for a specific month.
+
+**[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_UNPAID`
+
+* Removes the payment mark of the person at the specified `INDEX` for the given month and year.
+* The `INDEX` refers to the index number shown in the displayed person list.
+* The `MONTH_UNPAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* The [index](#index) **must be within the range** of the number of people in the list.
+* The year must be within 1900 to 2100 inclusive, and the month must be within 01 to 12 inclusive.
+
+**Example Usage:**
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+
+  <!-- Text Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <p><b>Input:</b> User enters the `unmarkpaid 1 m/2024-10` command to remove the payment status of the first student for October 2024.</p>
+    </div>
+    <div style="width: 45%;">
+      <p><b>Output:</b> The UI updates to remove the payment status of the student for the specified month.</p>
+    </div>
+  </div>
+
+  <!-- Image Section -->
+  <div style="display: flex; justify-content: space-around; width: 100%;">
+    <div style="width: 45%;">
+      <img src="images/unmarkpaidinput.png" alt="UnmarkPaid Command Input" style="width: 100%;" />
+    </div>
+    <div style="width: 45%;">
+      <img src="images/unmarkpaidoutput.png" alt="UnmarkPaid Command Output" style="width: 100%;" />
+    </div>
+  </div>
+
+</div>
+
+[Back to Table of Contents](#table-of-contents)
+
+***
+
+### 2.6 Editing a Person: `edit`
 
 Edits an existing person in the address book.
 
@@ -276,7 +321,7 @@ Edits an existing person in the address book.
 
 ***
 
-### 2.6 Listing All Persons: `list`
+### 2.7 Listing All Persons: `list`
 
 The `list` command displays a list of all persons currently stored in [EduTuTu](#edututu).
 
@@ -309,7 +354,7 @@ After entering the `list` command, all persons stored in the address book will b
 
 ***
 
-### 2.7 Finding A Person: `find`
+### 2.8 Finding A Person: `find`
 
 The `find` command allows you to list persons by their names, [Class IDs](#class-id), or [payment status](#payment-status) (paid/unpaid).
 
@@ -361,7 +406,7 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 
 ***
 
-### 2.8 Clearing All Entries: `clear`
+### 2.9 Clearing All Entries: `clear`
 
 [Clears](#clear) all entries from the address book.
 
@@ -396,7 +441,7 @@ Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 
 ***
 
-### 2.9 Undo/Redo Commands: `undo` and `redo`
+### 2.10 Undo/Redo Commands: `undo` and `redo`
 
 **[Command Format](#command-format):** `undo` and `redo`
 
@@ -426,7 +471,7 @@ The UI updates to reflect the reapplication of the previously undone change*
 
 ***
 
-### 2.10 Displaying Pie Chart of Class Distribution: `pie`
+### 2.11 Displaying Pie Chart of Class Distribution: `pie`
 
 Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
 
@@ -460,7 +505,7 @@ For example, given the following data set with 4 students:
 
 ***
 
-### 2.11 Displaying Bar Chart: `bar`
+### 2.12 Displaying Bar Chart: `bar`
 
 Displays a [bar chart](#bar-chart) showing the number of students who made payments for each month. This feature allows you to visually track payment trends over time.
 
@@ -494,7 +539,7 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 
 ***
 
-### 2.12 Viewing Command History: *Arrow Keys*
+### 2.13 Viewing Command History: *Arrow Keys*
 
 Allows users to quickly access previously entered commands using the up and down arrow keys.
 
@@ -508,7 +553,7 @@ Allows users to quickly access previously entered commands using the up and down
 
 ***
 
-### 2.13 Viewing Student Details: `info`
+### 2.14 Viewing Student Details: `info`
 
 Displays the detailed information of a student in the list.
 
@@ -561,7 +606,7 @@ Displaying the detailed command window can be done in two ways:
 
 ***
 
-### 2.14 Editing the Data File
+### 2.15 Editing the Data File
 
 [EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/addressbook.json`. Advanced users can modify data directly by editing that file.
 
@@ -573,7 +618,7 @@ Displaying the detailed command window can be done in two ways:
 
 ***
 
-### 2.15 Saving the Data
+### 2.16 Saving the Data
 
 [EduTuTu](#edututu) data is saved in the hard disk automatically after the execution of any command that modifies the data. There is no need for manual saving.
 
@@ -581,7 +626,7 @@ Displaying the detailed command window can be done in two ways:
 
 ***
 
-### 2.16 Exiting the Program: `exit`
+### 2.17 Exiting the Program: `exit`
 
 **[Command Format](#command-format):** `exit`
 
