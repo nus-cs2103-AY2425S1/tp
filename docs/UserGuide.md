@@ -44,7 +44,7 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 
 10. Type in `java -jar KnottyPlanner.jar` and hit enter to run the application.
 
-11. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
+11. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details regarding each command.
 
 ## Quick Start (Technical Users)
 
