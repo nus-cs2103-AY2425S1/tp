@@ -223,12 +223,47 @@ If looking for a specific person, try to be as specific as possible to get the b
 
 ### Excluding persons from Searchmode `exclude`
 
+Format: `exclude pi/INDEX [MORE_INDEXES]`
+
 To get rid of persons from the search results, you can exclude them using the `exclude` command.
 Note that excluded persons will not be displayed in all subsequent search results until they are cleared from the excluded list.
 
+Example:
+- `search n/Alex` returns a list of persons with the name `Alex`
+  ![NameMatchCriteriaExample.png](images%2FNameMatchCriteriaExample.png)
+- `exclude pi/2` will exclude the second person in the list from the search results
+![ExcludeExample.png](images%2FExcludeExample.png)
+- Subsequent searches will not include the excluded person in the search results
+  - `search p/9234512` matches previously excluded person but will not reappear in l ist
+![ExcludedSearchExample.png](images%2FExcludedSearchExample.png)
 
+### Check excluded persons `checkexcluded`
+To check the currently excluded persons in the search results, use the `checkexcluded` command.
 
+Format: `checkexcluded`
 
+Example:
+- `checkexcluded` will display the list of persons that have been excluded from the search results
+![CheckExcluded.png](images%2FCheckExcluded.png)
+
+### Clear Excluded persons `clearexcluded`
+To remove all persons from the excluded list, use the `clearexcluded` command.
+Removed persons will be immediately added back to the list
+
+Format: `clearexcluded`
+
+Example:
+![ClearExcludedExample.png](images%2FClearExcludedExample.png)
+
+### Exiting Searchmode `exitsearch`/`es`
+To exit searchmode and return to the normal display, use the `exitsearch` or `es` command.
+
+Format: `exitsearch` or `es`
+
+Example:
+![ExitSearch.png](images%2FExitSearch.png)
+
+_This is the end of the Searchmode feature commands. The following commands can be used in the normal display mode._
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
