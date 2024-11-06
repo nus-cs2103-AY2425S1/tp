@@ -74,7 +74,7 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
+        if (!Phone.isValidPhoneField(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
@@ -349,11 +349,11 @@ public class ParserUtil {
         switch (moduleRoleOperations.charAt(0)) {
         case '+':
             List<String> moduleRolesToAdd =
-                    Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
+                    Arrays.asList(moduleRoleOperations.substring(1).trim().split("\\s+"));
             return new AddModuleRoleOperation(parseAddModuleRoleDescriptor(moduleRolesToAdd));
         case '-':
             List<String> moduleRolesToRemove =
-                    Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
+                    Arrays.asList(moduleRoleOperations.substring(1).trim().split("\\s+"));
             return new DeleteModuleRoleOperation(parseDeleteModuleRoleDescriptor(moduleRolesToRemove));
         default:
             throw new RuntimeException();

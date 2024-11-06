@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -52,11 +53,11 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BETTY).withPhone(VALID_PHONE_BETTY)
+        Person editedPerson = personInList.withName(VALID_NAME_BETTY).withPhone(VALID_PHONE_AMY)
                 .withEmptyAddress().withTags(VALID_TAG_FRIEND).withEmptyAddress().build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BETTY)
-                .withPhone(VALID_PHONE_BETTY).withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_FRIEND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,

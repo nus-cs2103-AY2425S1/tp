@@ -110,7 +110,7 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        assert personToEdit != null;
+        assert personToEdit != null : "PersonToEdit should not be null";
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().or(personToEdit :: getPhone).orElse(null);
@@ -179,19 +179,13 @@ public class EditCommand extends Command {
             changesDescription.append(EditModuleRoleOperation.getModuleCodeChangesDescription(
                     personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
         }
-        if (!personBefore.getDescription().equals(personAfter.getDescription())) {
+        if (!personBefore.getDescriptionString().equals(personAfter.getDescriptionString())) {
             isChanged = true;
             changesDescription.append("Description: ")
-                .append(personBefore.getDescription()
-                    .filter(value -> !value.isBlank())
-                    .map(Objects::toString)
-                    .orElse("<no description>"))
-                .append(" -> ")
-                .append(personAfter.getDescription()
-                    .filter(value -> !value.isBlank())
-                    .map(Objects::toString)
-                    .orElse("<no description>"))
-                .append("\n");
+                    .append(personBefore.getDescriptionString())
+                    .append(" -> ")
+                    .append(personAfter.getDescriptionString())
+                    .append("\n");
         }
 
         return isChanged ? changesDescription.toString() : "No changes made.";

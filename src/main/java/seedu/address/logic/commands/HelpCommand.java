@@ -25,6 +25,7 @@ public class HelpCommand extends Command {
         AddCommand.MESSAGE_USAGE,
         DeleteCommand.MESSAGE_USAGE,
         EditCommand.MESSAGE_USAGE,
+        UndoCommand.MESSAGE_USAGE,
         RedoCommand.MESSAGE_USAGE,
         FindCommand.MESSAGE_USAGE,
         ListCommand.MESSAGE_USAGE,
@@ -52,6 +53,8 @@ public class HelpCommand extends Command {
             return new CommandResult(DeleteCommand.MESSAGE_USAGE, false, false);
         case EditCommand.COMMAND_WORD:
             return new CommandResult(EditCommand.MESSAGE_USAGE, false, false);
+        case UndoCommand.COMMAND_WORD:
+            return new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
         case RedoCommand.COMMAND_WORD:
             return new CommandResult(RedoCommand.MESSAGE_USAGE, false, false);
         case FindCommand.COMMAND_WORD:
