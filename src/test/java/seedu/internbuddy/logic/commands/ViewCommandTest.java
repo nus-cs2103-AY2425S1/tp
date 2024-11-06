@@ -1,7 +1,9 @@
 package seedu.internbuddy.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.internbuddy.testutil.TypicalApplications.SWE_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 
@@ -45,5 +47,13 @@ public class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
 
         assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_COMPANY);
+
+        // same object -> returns true
+        assertTrue(viewCommand.equals(viewCommand));
     }
 }
