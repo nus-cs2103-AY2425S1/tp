@@ -19,6 +19,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReceiptLog;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
 public class CsvGoodsStorageTest {
@@ -151,7 +152,7 @@ public class CsvGoodsStorageTest {
         List<GoodsReceipt> goodsReceiptList = receiptLog.getReceiptList();
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
-        GoodsReceipt expected = new GoodsReceiptBuilder().build();
+        GoodsReceipt expected = new GoodsReceiptBuilder().withSupplierName(new Name("Supplier")).build();
         assertTrue(expected.isSameReceipt(goodsReceipt));
     }
 
@@ -188,7 +189,7 @@ public class CsvGoodsStorageTest {
         List<GoodsReceipt> goodsReceiptList = receiptLog.getReceiptList();
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
-        GoodsReceipt expected = new GoodsReceiptBuilder().build();
+        GoodsReceipt expected = new GoodsReceiptBuilder().withSupplierName(new Name("Supplier")).build();
         assertTrue(expected.isSameReceipt(goodsReceipt));
     }
 
