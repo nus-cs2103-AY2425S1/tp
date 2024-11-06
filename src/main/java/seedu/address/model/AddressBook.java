@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -47,6 +49,42 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         volunteerManager.setVolunteers(newData.getVolunteerList());
         eventManager.setEvents(newData.getEventList());
+        removeOverlappingEvents();
+    }
+
+    /**
+     * Runs through all events that volunteers are assigned to and checks for overlapping events.
+     * Removes the first event that overlaps with another event.
+     */
+    public void removeOverlappingEvents() {
+        // check to ensure that no volunteer is assigned to overlapping events
+        // this is only used when the data is being reset
+        for (Volunteer v : volunteerManager.getVolunteers()) {
+            ObservableList<String> involvedIn = v.getEvents();
+
+            // get the list of events that the volunteer is involved in
+            List<Event> eventsInvolvedIn = new LinkedList<>();
+            for (String eventName : involvedIn) {
+                eventsInvolvedIn.add(eventManager.getEventFromName(eventName));
+            }
+
+            // check if any events are overlapping
+            for (Event event : eventsInvolvedIn) {
+                boolean hasOverlappingEvents = false;
+                for (Event otherEvent : eventsInvolvedIn) {
+                    if (event != otherEvent && event.isOverlappingWith(otherEvent)) {
+                        System.out.println("Unassigning " + v.getName().fullName + " from "
+                                + event.getName().toString());
+                        unassignVolunteerFromEvent(v, event);
+                        eventsInvolvedIn.remove(event);
+                        hasOverlappingEvents = true;
+                    }
+                }
+                if (hasOverlappingEvents) {
+                    break;
+                }
+            }
+        }
     }
 
     /**
