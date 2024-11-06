@@ -198,13 +198,23 @@ Otherwise, the command will not be executed and display an error message in Resu
 
 #### Adding a patient: `add`
 
-Adds a patient to the address book.
+Adds a patient details to the system.
 
 :pencil: Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+<box type="info" seamless>
+
+**Note:**
+* A person will not be added if the name and phone number is already in the system.
+* Refer to [Parameter Information](#parameter-information) for the limitations of each parameter.
+</box>
+
 <box type="tip" seamless>
 
-**Tip:** A patient can have any number of tags (including 0)
+**Tip:** 
+* A patient can have any number of tags (including 0)
+* A patient can have multiple tags with no spaces between them.
+* Use `edit` command if you made a mistake in adding a patient.
 </box>
 
 Examples:
@@ -213,22 +223,26 @@ Examples:
 
 #### Listing all patients : `list`
 
-Shows a list of all patients in the address book.
+Shows a list of all patients in the system.
 
 :pencil: Format: `list`
 
 #### Editing a patient : `edit`
 
-Edits an existing patient in the address book.
+Edits an existing patient in the system.
 
 :pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<box type="info" seamless>
+
+**Note:**
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
 * You can remove all the patient’s tags by typing `t/` without
   specifying any tags after it.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
@@ -240,12 +254,16 @@ Finds patients whose names contain any of the given keywords.
 
 :pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<box type="info" seamless>
+
+**Note:**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+</box>
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -254,7 +272,7 @@ Examples:
 
 #### Deleting a patient : `delete`
 
-Deletes the specified patient and tasks associated to that patient from the address book.
+Deletes the specified patient and tasks associated to that patient from the system.
 
 :pencil: Format: `delete INDEX`
 
@@ -263,7 +281,7 @@ Deletes the specified patient and tasks associated to that patient from the addr
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
+* `list` followed by `delete 2` deletes the 2nd patient in the system.
 * `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 
@@ -271,7 +289,7 @@ Examples:
 
 #### Adding emergency contact : `emergency`
 
-Adds an emergency contact and details to a patient in the address book.
+Adds an emergency contact and details to a patient in the system.
 
 :pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
@@ -284,7 +302,7 @@ Examples:
 
 #### Deleting emergency contact : `delemergency`
 
-Deletes an emergency contact and its details from a patient in the address book.
+Deletes an emergency contact and its details from a patient in the system.
 
 :pencil: Format: `delemergency INDEX
 
@@ -300,7 +318,7 @@ Examples:
 
 #### Adding priority level : `priority`
 
-Adds an priority level to a patient in the address book.
+Adds an priority level to a patient in the system.
 
 :pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
 
@@ -314,7 +332,7 @@ Examples:
 
 #### Deleting priority level : `deletelevel`
 
-Delete a priority level to a patient in the address book, resetting it to the default value **3**.
+Delete a priority level to a patient in the system, resetting it to the default value **3**.
 
 :pencil: Format: `deletelevel INDEX`
 
@@ -330,7 +348,7 @@ Examples:
 
 #### Adding a task : `addtask`
 
-Adds a task to a patient in the address book.
+Adds a task to a patient in the system.
 
 :pencil: Format: `addtask INDEX d/DESCRIPTION`
 
@@ -339,14 +357,14 @@ Adds a task to a patient in the address book.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the address book.
+* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the system.
 * `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
   ![Patient List](images/PersonListExample.png)
   ![Task List](images/TaskListExample.png)
 
 #### Deleting a task : `deletetask`
 
-Deletes a task for a patient in the address book.
+Deletes a task for a patient in the system.
 
 :pencil: Format: `deletetask INDEX`
 
@@ -457,8 +475,6 @@ _Details coming soon ..._
 | **List**                  | `list`                                                                                                                                                   |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
-| **Clear**                 | `clear`                                                                                                                                                  |
-
 
 ### Task-Related Commands:
 | Action              | Format, Examples                                                                   |
@@ -475,4 +491,5 @@ _Details coming soon ..._
 | Action                | Format, Examples       |
 |-----------------------|------------------------|
 |**Help**               | `help`                 |
+|**Clear**              | `clear`                |
 |**Exit**               | `exit`                 |
