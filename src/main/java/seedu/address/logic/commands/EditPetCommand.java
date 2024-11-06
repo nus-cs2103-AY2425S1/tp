@@ -31,7 +31,7 @@ public class EditPetCommand extends EditCommand<Pet> {
 
     public static final String MESSAGE_EDIT_PET_SUCCESS = "Edited Pet: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in PawPatrol.";
 
     private final EditPetDescriptor editPetDescriptor;
 

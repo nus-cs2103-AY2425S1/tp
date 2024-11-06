@@ -3,10 +3,10 @@ layout: page
 title: User Guide
 ---
 
-PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit 2 types of 
+PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit 2 types of
 entities, owners and pets. PawPatrol also allows the user to link owners to pets, allowing the user
-to easily see at a glance which pets belong to which owner. It is optimised 
-for use via a Command Line Interface** (CLI) which improves use speed while still having the user-friendliness of a Graphical User Interface (GUI). 
+to easily see at a glance which pets belong to which owner. It is optimised
+for use via a Command Line Interface** (CLI) which improves use speed while still having the user-friendliness of a Graphical User Interface (GUI).
 If you can type fast, PawPatrol can manage patient owner and pet data faster than traditional organisation apps.
 
 * Table of Contents
@@ -58,7 +58,7 @@ If you can type fast, PawPatrol can manage patient owner and pet data faster tha
   e.g. `n/NAME [t/TAG]` can be used as `n/Fluffy t/friendly` or as `n/Fluffy`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friendly`, `t/friendly t/skiddish` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. none specified), `t/friendly`, `t/friendly t/skiddish` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -92,11 +92,11 @@ Examples:
 
 Adds a pet to PawPatrol.
 
-Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A pet can have any number of tags (including 0)
 </div>
+
+Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
 
 Examples:
 * `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
@@ -106,15 +106,23 @@ Examples:
 
 Links an owner to one or more pets.
 
+<div markdown="span" class="alert alert-primary">
+
+:exclamation: **Extra information:**<br>
+  
+* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+  
+* An owner can be linked to 0 or more pets.
+  
+* A pet can be linked to 0 or more owners.
+  
+</div>
+
 Format: `link oOWNER_INDEX t/pPET_INDEX…​`
 
 Examples:
 * `link o1 t/p1`
 * `link o2 t/p2 t/p3`
-
-* Links owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
-* An owner can be linked to 0 or more pets.
-* A pet can be linked to 0 or more owners.
 
 ![link between Tricia and Fluffy](images/linkTriciaFluffy.jpeg)
 <div style="text-align: center;"><em>Link between Tricia (owner) and Fluffy (pet)</em></div>
@@ -125,17 +133,27 @@ Unlinks an owner to one or more pets.
 
 Format: `unlink oOWNER_INDEX t/pPET_INDEX…​`
 
+<div markdown="span" class="alert alert-primary">
+
+:exclamation: **Extra information:**<br>
+  
+* Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+  
+</div>
+
 Examples:
 * `unlink o1 t/p1`
 * `unlink o2 t/p2 t/p3`
 
-* Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
+### Finding unlinked pets and owners  `[coming in v2.0]`
+
+_Details coming soon ..._
 
 ### Listing entities: `list`
 
 Shows a list of desired entities in PawPatrol.
 
-Format: 
+Format:
 * `list owners`: Shows a list of all owners.
 * `list pets`: Shows a list of all pets.
 * `list both`: Shows both owners and pets in a consolidated view.
@@ -143,16 +161,6 @@ Format:
 ### Editing entities: `edit`
 
 Edits an existing owner or pet in PawPatrol.
-
-#### <u>Editing an owner</u>
-
-Format:
-* `edit oOWNER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`: Edits an existing owner in PawPatrol
-
-#### <u>Editing a pet</u>
-
-Format:
-* `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`: Edits an existing pet in PawPatrol
 
 <div markdown="span" class="alert alert-primary">
 
@@ -172,18 +180,25 @@ Format:
 
 </div>
 
+#### <u>Editing an owner</u>
 
-Examples:
+Format:
+* `edit oOWNER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`: Edits an existing owner in PawPatrol.
+
+Example:
 *  `edit o1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st owner to be `91234567` and `johndoe@example.com` respectively.
+
+#### <u>Editing a pet</u>
+
+Format:
+* `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`: Edits an existing pet in PawPatrol.
+
+Example:
 *  `edit p2 n/Fluffy t/` Edits the name of the 2nd pet to be `Fluffy` and clears all existing tags.
 
 ### Finding entities by name: `find`
 
 Finds owners or pets whose names contain any of the given keywords.
-
-Format: 
-* `find owner KEYWORD [MORE_KEYWORDS]`: Finds owners whose names contain any of the given keywords.
-* `find pet KEYWORD [MORE_KEYWORDS]`: Finds pets whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -202,6 +217,10 @@ Format:
 
 </div>
 
+Format: 
+* `find owner KEYWORD [MORE_KEYWORDS]`: Finds owners whose names contain any of the given keywords.
+* `find pet KEYWORD [MORE_KEYWORDS]`: Finds pets whose names contain any of the given keywords.
+
 Examples:
 * `find owner John` returns `john` and `John Doe` in the owners list panel.
 * `find pet fluffy megatron` returns `Fluffy`, `Megatron` as shown in the image below.<br>
@@ -210,10 +229,6 @@ Examples:
 ### Deleting an entity : `delete`
 
 Deletes the specified owner or pet from PawPatrol.
-
-Format:
-* `delete oOWNER_INDEX`: Deletes the specified owner from PawPatrol.
-* `delete pPET_INDEX`: Deletes the specified pet from PawPatrol.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -226,6 +241,10 @@ Format:
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
+
+Format:
+* `delete oOWNER_INDEX`: Deletes the specified owner from PawPatrol.
+* `delete pPET_INDEX`: Deletes the specified pet from PawPatrol.
 
 Examples:
 * `list owners` followed by `delete o2` deletes the 2nd person in PawPatrol.
@@ -242,7 +261,7 @@ Examples:
 
 ### Sorting : `sort`
 
-Sorts owners or pets in PawPatrol by their names in alphabetical order.
+View owners or pets in PawPatrol sorted by their names in alphabetical order.
 
 Format:
 * `sort owners`: Sorts owners by name in alphabetical order.
@@ -254,26 +273,38 @@ Clears all owners and pets in PawPatrol.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+This action is irreversible! Please make a backup of the <a href="#for-advanced-users-updating-pawpatrol-data-directly">data file</a> should you wish to retain past data.
+</div>
+
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits PawPatrol. This is equivalent to clicking the "X" icon to close the app.
 
 Format: `exit`
 
+## For Advanced Users: Updating PawPatrol Data Directly
+
 ### Saving the data
 
-PawPatrol data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+PawPatrol data is saved on your computer automatically after any command that changes the data. There is no need to save manually.
+
+It is saved automatically as a JSON file located in `[JAR file location]/data/pawpatrol.json`.
+
+### Saving a backup data file
+
+PawPatrol does not automatically backup your data. To do so, copy the JSON file (as mentioned above) into another location on your computer or to another device.
 
 ### Editing the data file
 
-PawPatrol data are saved automatically as a JSON file `[JAR file location]/data/pawpatrol.json`. Advanced users are welcome to update data directly by editing that data file.
+Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, PawPatrol will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, PawPatrol will <b>discard all data</b> and start with an empty data file at the next run. Hence, it is recommended to take a <a href="#saving-a-backup-data-file">backup</a> of the file before editing it.<br>
+Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Automatic backup data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -288,8 +319,9 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **Accidental clearing of data** using the `clear` command may lead to data being lost. [Backups of the data file](#saving-a-backup-data-file) should be made frequently by copying out the JSON file to another location on your computer.
+3. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again. This file can be found in `[JAR file location]/data/preferences.json` similar to [other data files](#saving-the-data).
 
 --------------------------------------------------------------------------------------------------------------------
 
