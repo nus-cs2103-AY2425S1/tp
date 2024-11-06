@@ -29,11 +29,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class AddNotesCommandTest {
+public class AddNoteCommandTest {
 
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddNotesCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddNoteCommand(null, null));
     }
 
     @Test
@@ -57,12 +57,12 @@ public class AddNotesCommandTest {
         Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
         Index validIndex = INDEX_FIRST_PERSON;
 
-        AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(validIndex, validNote);
 
         // Execute the addNotesCommand
-        CommandResult commandResult = addNotesCommand.execute(modelMock);
+        CommandResult commandResult = addNoteCommand.execute(modelMock);
 
-        String expected = "Added notes to Person: " + DEFAULT_NAME + "; Phone: " + DEFAULT_PHONE + "; Email: "
+        String expected = "Added note to Person: " + DEFAULT_NAME + "; Phone: " + DEFAULT_PHONE + "; Email: "
                 + DEFAULT_EMAIL + "; Address: " + DEFAULT_ADDRESS + "; Tags: ; Notes: ["
                 + VALID_NOTE_HIGH_PROFILE_CLIENT + "]";
 
@@ -91,11 +91,11 @@ public class AddNotesCommandTest {
         Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
         Index validIndex = INDEX_FIRST_PERSON;
 
-        AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(validIndex, validNote);
 
         // Assert that the expected error is thrown
-        assertThrows(CommandException.class, AddNotesCommand.DUPLICATE_MESSAGE_CONSTRAINTS, () ->
-                addNotesCommand.execute(modelMock));
+        assertThrows(CommandException.class, AddNoteCommand.DUPLICATE_MESSAGE_CONSTRAINTS, () ->
+                addNoteCommand.execute(modelMock));
     }
 
     @Test
@@ -105,14 +105,14 @@ public class AddNotesCommandTest {
         Index indexFirstPerson = INDEX_FIRST_PERSON;
         Index indexSecondPerson = INDEX_SECOND_PERSON;
 
-        AddNotesCommand addAliceNoteCommand = new AddNotesCommand(indexFirstPerson, noteAlice);
-        AddNotesCommand addBobNoteCommand = new AddNotesCommand(indexSecondPerson, noteBob);
+        AddNoteCommand addAliceNoteCommand = new AddNoteCommand(indexFirstPerson, noteAlice);
+        AddNoteCommand addBobNoteCommand = new AddNoteCommand(indexSecondPerson, noteBob);
 
         // same object -> returns true
         assertTrue(addAliceNoteCommand.equals(addAliceNoteCommand));
 
         // same values -> returns true
-        AddNotesCommand addAliceNoteCommandCopy = new AddNotesCommand(indexFirstPerson, noteAlice);
+        AddNoteCommand addAliceNoteCommandCopy = new AddNoteCommand(indexFirstPerson, noteAlice);
         assertTrue(addAliceNoteCommand.equals(addAliceNoteCommandCopy));
 
         // different types -> returns false

@@ -308,6 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
 | `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
 | `* *`    | user             | undo a command                                                              | fix a mistake I made                                                   |
+| `* *`    | user             | redo a command                                                              | revert back the changes I undid                                        |
 | `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                       |
 | `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product           |
 | `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
@@ -564,7 +565,28 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
-**Use case: UC13 - Export contact list**
+**Use case: UC13 - Redo a command**
+
+**MSS**
+
+1.  Actor performs a command that updates the addressbook.
+2.  System executes the command.
+3.  Actor requests to undo the recently executed command.
+4.  System reverts changes made by the actor.
+5.  Actor requests to redo the recently executed undo command.
+6.  System reverts changes made by the actor.
+
+    Use case ends.
+
+**Extensions**
+
+- 5a. There is no version to revert to.
+
+    - 5a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC14 - Export contact list**
 
 **MSS**
 

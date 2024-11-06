@@ -28,6 +28,7 @@ import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.RedoCommand;
 import bizbook.logic.commands.UndoCommand;
 import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
@@ -177,6 +178,16 @@ public class AddressBookParserTest {
             UndoCommand.COMMAND_WORD.toUpperCase());
         assertEquals(new UndoCommand(), command);
         assertEquals(new UndoCommand(), commandUpperCase);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        RedoCommand command = (RedoCommand) parser.parseCommand(
+            RedoCommand.COMMAND_WORD);
+        RedoCommand commandUpperCase = (RedoCommand) parser.parseCommand(
+            RedoCommand.COMMAND_WORD.toUpperCase());
+        assertEquals(new RedoCommand(), command);
+        assertEquals(new RedoCommand(), commandUpperCase);
     }
 
     @Test

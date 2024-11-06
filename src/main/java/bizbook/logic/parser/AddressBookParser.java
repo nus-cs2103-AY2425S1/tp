@@ -9,20 +9,21 @@ import java.util.regex.Pattern;
 
 import bizbook.commons.core.LogsCenter;
 import bizbook.logic.commands.AddCommand;
-import bizbook.logic.commands.AddNotesCommand;
+import bizbook.logic.commands.AddNoteCommand;
 import bizbook.logic.commands.ClearCommand;
 import bizbook.logic.commands.Command;
 import bizbook.logic.commands.DeleteCommand;
-import bizbook.logic.commands.DeleteNotesCommand;
+import bizbook.logic.commands.DeleteNoteCommand;
 import bizbook.logic.commands.DeleteTagCommand;
 import bizbook.logic.commands.EditCommand;
-import bizbook.logic.commands.EditNotesCommand;
+import bizbook.logic.commands.EditNoteCommand;
 import bizbook.logic.commands.ExitCommand;
 import bizbook.logic.commands.ExportCommand;
 import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.RedoCommand;
 import bizbook.logic.commands.UndoCommand;
 import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
@@ -92,13 +93,13 @@ public class AddressBookParser {
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
-        case AddNotesCommand.COMMAND_WORD:
+        case AddNoteCommand.COMMAND_WORD:
             return new AddNotesCommandParser().parse(arguments);
 
-        case EditNotesCommand.COMMAND_WORD:
+        case EditNoteCommand.COMMAND_WORD:
             return new EditNotesCommandParser().parse(arguments);
 
-        case DeleteNotesCommand.COMMAND_WORD:
+        case DeleteNoteCommand.COMMAND_WORD:
             return new DeleteNotesCommandParser().parse(arguments);
 
         case PinCommand.COMMAND_WORD:
@@ -107,11 +108,15 @@ public class AddressBookParser {
         case UnpinCommand.COMMAND_WORD:
             return new UnpinCommandParser().parse(arguments);
 
+
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

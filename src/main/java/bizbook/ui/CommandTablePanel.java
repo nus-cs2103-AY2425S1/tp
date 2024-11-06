@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import bizbook.commons.core.LogsCenter;
 import bizbook.logic.commands.AddCommand;
-import bizbook.logic.commands.AddNotesCommand;
+import bizbook.logic.commands.AddNoteCommand;
 import bizbook.logic.commands.DeleteCommand;
 import bizbook.logic.commands.EditCommand;
 import bizbook.logic.commands.FindCommand;
@@ -74,7 +74,7 @@ public class CommandTablePanel extends UiPart<Region> {
         ObservableList<CommandEntry> commandList = FXCollections.observableArrayList(
             // Add more commands here as needed
             new CommandEntry(AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE),
-            new CommandEntry(AddNotesCommand.COMMAND_WORD, AddNotesCommand.MESSAGE_USAGE),
+            new CommandEntry(AddNoteCommand.COMMAND_WORD, AddNoteCommand.MESSAGE_USAGE),
             new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
             new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
             new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
