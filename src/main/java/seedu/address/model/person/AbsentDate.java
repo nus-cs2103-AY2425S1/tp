@@ -23,7 +23,7 @@ public class AbsentDate {
     public final String absentDate;
 
     /**
-     * Constructs an {@code AbsentDate}
+     * Constructs an {@code AbsentDate}.
      *
      * @param absentDate A valid date where student is absent.
      */
@@ -37,7 +37,7 @@ public class AbsentDate {
      * Returns true if a given string is a valid date.
      *
      * @param absentDate A valid date where student is absent.
-     * @return true if absentDate is valid
+     * @return true if absentDate is valid.
      */
     public static boolean isValidAbsentDate(String absentDate) {
         if (absentDate == null || !absentDate.matches(VALIDATION_REGEX)) {

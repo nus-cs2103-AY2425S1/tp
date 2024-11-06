@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents the reason that the student is absent.
  * The reason should only contain alphanumeric characters and spaces.
- * The reason can be blank to delete attendance
+ * The reason can be blank to delete attendance.
  */
 public class AbsentReason {
 
@@ -18,7 +18,7 @@ public class AbsentReason {
     public final String absentReason;
 
     /**
-     * Constructs an {@code AbsentReason}
+     * Constructs an {@code AbsentReason}.
      *
      * @param absentReason A reason why student is absent.
      */
@@ -30,6 +30,8 @@ public class AbsentReason {
 
     /**
      * Returns true if a given string is a valid reason.
+     *
+     * @return true if reason format is valid and false if otherwise.
      */
     public static boolean isValidAbsentReason(String reason) {
         return reason != null && (reason.matches(VALIDATION_REGEX) || reason.isEmpty());
