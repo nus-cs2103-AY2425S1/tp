@@ -117,9 +117,15 @@ Examples:
 
 #### Listing all clients : `list`
 
-Shows a list of all clients in the application.
+Shows a list of all clients in the application, together with their current financial balance.
 
 Format: `list`
+<box type="tip" seamless>
+
+Negative balances are red. Positive balances are green.
+</box>
+
+![result for `listt`](images/listResult.png =600x)
 
 #### Editing a client : `edit`
 
@@ -133,6 +139,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client's tags by typing `t/` without
     specifying any tags after it.
+
+<box type="warning" seamless>
+
+**Note:** `edit` can only be used in person list view.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -151,10 +162,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+<box type="warning" seamless>
+
+**Note:** `find` can only be used in person list view.
+</box>
+
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex creative` returns `Alex Yeoh`, `Charlotte Oliveiro`, whose company matches `creative`<br>
-  ![result for 'find alex creative'](images/findAlexCreativeResult.png)
+  ![result for 'find alex creative'](images/findAlexCreativeResult.png =600x)
 
 #### Deleting a client : `delete`
 
@@ -165,6 +181,11 @@ Format: `delete INDEX`
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" seamless>
+
+**Note:** `delete` can only be used in person list view.
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the application.
@@ -185,6 +206,11 @@ e.g. `10, 100.5, 1000.55`
 e.g. `0.5`
 * The date should be in the format `YYYY-MM-DD` e.g. `2024-12-20`
 
+<box type="warning" seamless>
+
+**Note:** `addt` can only be used in person list view.
+</box>
+
 Examples:
 * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16`
 * `list` followed by `addt 1 d/buy new equipment amt/-10000.5 o/ABC Motor Group dt/2024-11-17` 
@@ -202,6 +228,11 @@ Format: `listt INDEX`
 * The index refers to the index number shown in the displayed client list when using `list` or `find` command.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="warning" seamless>
+
+**Note:** `listt` can only be used in person list view.
+</box>
+
 Examples:
 * `list` followed by `listt 1` lists transactions for the 1st client in the application.
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st client in the results of the `find` command.
@@ -213,6 +244,11 @@ Format: `deletet INDEX`
 * Deletes the transactions at the specified `INDEX`.
 * The index refers to the index number of the transaction when using `listt` command.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" seamless>
+
+**Note:** `deletet` can only be used in transaction list view.
+</box>
 
 Examples:
 * `listt 1` followed by `deletet 1` loads the transaction list for the first client, then deletes the first transaction.
@@ -238,9 +274,14 @@ Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
 * clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `investing material` will return `material purchase`, `future investing`
 
+<box type="warning" seamless>
+
+**Note:** `findt` can only be used in person list view.
+</box>
+
 Examples:
 * `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
-![result for 'findt 1 materials invest'](images/findt.png)
+![result for 'findt 1 materials invest'](images/findt.png =600x)
 
 ### Data Management
 
@@ -301,11 +342,16 @@ Find | `find KEYWORD [MORE_KEYWORDS]`
 Edit | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 Delete | `delete INDEX`
 
-Transaction Commands | Format
+**Transaction Commands**
+
+For Person List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
 Find Transactions | `findt INDEX KEYWORD [MORE_KEYWORDS]`
+
+For Transaction List View | Format
+--------------------|--------
 Delete Transaction | `deletet INDEX`
 
 General Commands | Format
