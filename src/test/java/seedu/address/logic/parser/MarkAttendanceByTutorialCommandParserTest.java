@@ -88,6 +88,10 @@ public class MarkAttendanceByTutorialCommandParserTest {
 
         assertParseFailure(parser, " attend/10/10/24 tut/Math", Attendance.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, " attend/10-10-2024 tut/Math", Attendance.MESSAGE_CONSTRAINTS);
+
+        // future date as input
+        String tomorrowDate = LocalDate.now().plusDays(1).format(Attendance.VALID_DATE_FORMAT);
+        assertParseFailure(parser, " attend/" + tomorrowDate + " tut/Math", Attendance.MESSAGE_CONSTRAINTS);
     }
 
     @Test
