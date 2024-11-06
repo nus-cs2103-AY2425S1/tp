@@ -174,6 +174,10 @@ Adds an Assignment to the app.
 
 Format: `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
+* Adds an assignment to the student at the specified `STUDENT_INDEX`. 
+* The index refers to the index number shown in the displayed student list.
+* The max score must be a positive integer.
+
 Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
   3rd student in the app.
