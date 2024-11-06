@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,7 +16,8 @@ public class Birthday {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Birthdays should only contain numbers, and it should be in the format DD MM YYYY";
+            "Birthdays should only contain numbers, and it should be in the format DD MM YYYY. \nElse,"
+                    + " ensure that the your day, month or year inputs are valid";
     public final String value;
     public final LocalDate date;
 
@@ -37,13 +39,22 @@ public class Birthday {
      */
     public static boolean isValidBirthday(String test) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu");
+        LocalDate testDate;
 
         try {
-            LocalDate.parse(test, formatter);
-            return true; // The date is valid
+            LocalDate.parse(test, formatter); // The date is valid
         } catch (DateTimeParseException e) {
             return false; // The date is invalid
         }
+
+        try {
+            testDate = LocalDate.of(Integer.parseInt(test.substring(6, 10)), Integer.parseInt(test.substring(3, 5)),
+                    Integer.parseInt(test.substring(0, 2))); // The date is valid
+        } catch (DateTimeException e) {
+            return false; // The date is invalid
+        }
+
+        return !testDate.isAfter(LocalDate.now());
     }
 
     @Override

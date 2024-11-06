@@ -29,14 +29,16 @@ public class Person {
     private final Boolean hasPaid;
     private final LastPaidDate lastPaidDate;
     private final Frequency frequency;
+    private final ProfilePicFilePath profilePicFilePath;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Birthday birthday,
-                  Set<Tag> tags, Boolean hasPaid, LastPaidDate lastpaidDate, Frequency frequency) {
+                  Set<Tag> tags, Boolean hasPaid, LastPaidDate lastpaidDate, Frequency frequency,
+                  ProfilePicFilePath profilePicFilePath) {
 
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, birthday, tags);
         //hasPaid not required to be non-null for testing of commands that do not interact with paid status
         //e.g. edit command in AddressBookParserTest::parseCommand_edit()
         this.name = name;
@@ -49,6 +51,7 @@ public class Person {
         this.hasPaid = hasPaid;
         this.lastPaidDate = lastpaidDate;
         this.frequency = frequency;
+        this.profilePicFilePath = profilePicFilePath;
     }
 
     public Name getName() {
@@ -92,7 +95,9 @@ public class Person {
     public Frequency getFrequency() {
         return frequency;
     }
-
+    public ProfilePicFilePath getProfilePicFilePath() {
+        return profilePicFilePath;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

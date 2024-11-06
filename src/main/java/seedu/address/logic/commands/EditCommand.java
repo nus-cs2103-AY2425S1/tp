@@ -30,6 +30,7 @@ import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProfilePicFilePath;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -108,9 +109,10 @@ public class EditCommand extends Command {
         Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
         LastPaidDate updatedLastPaidDate = personToEdit.getLastPaidDate();
         Frequency updatedFrequency = personToEdit.getFrequency();
+        ProfilePicFilePath updatedProfilePicFilePath = personToEdit.getProfilePicFilePath(); // edit does not update pic
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                updatedTags, updatedHasPaid, updatedLastPaidDate, updatedFrequency);
+                updatedTags, updatedHasPaid, updatedLastPaidDate, updatedFrequency, updatedProfilePicFilePath);
     }
 
     @Override

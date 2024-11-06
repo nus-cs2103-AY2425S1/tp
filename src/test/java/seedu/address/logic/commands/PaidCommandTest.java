@@ -48,7 +48,8 @@ public class PaidCommandTest {
 
         Person paidPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
                 personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
-                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true, personToMarkPaid.getFrequency());
+                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true,
+                personToMarkPaid.getFrequency(), personToMarkPaid.getProfilePicFilePath());
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
                 Messages.format(paidPerson));
