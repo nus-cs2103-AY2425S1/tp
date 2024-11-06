@@ -9,6 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final int MAXIMUM_EMAIL_LENGTH = 256;
+    public static final String MESSAGE_EMAIL_TOO_LONG = "A student's email cannot exceed "
+            + "the maximum length of %d characters";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"

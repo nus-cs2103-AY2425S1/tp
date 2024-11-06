@@ -9,6 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int MAXIMUM_NAME_LENGTH = 256;
+
+    public static final String MESSAGE_NAME_TOO_LONG = "A student's name cannot exceed "
+            + "the maximum length of %d characters";
+
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
