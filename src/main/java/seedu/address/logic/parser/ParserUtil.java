@@ -121,6 +121,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        assert !trimmedTag.isEmpty();
         return new Tag(trimmedTag);
     }
 
@@ -130,8 +131,18 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        final Set<String> netWorthTags = Set.of("highnetworth", "midnetworth", "lownetworth");
+        boolean hasNetWorthTag = false;
+
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tag = parseTag(tagName);
+            if (netWorthTags.contains(tag.tagName.toLowerCase())) {
+                if (hasNetWorthTag) {
+                    throw new ParseException(Tag.NETWORTH_CONSTRAINTS);
+                }
+                hasNetWorthTag = true;
+            }
+            tagSet.add(tag);
         }
         return tagSet;
     }

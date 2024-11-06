@@ -10,6 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String NETWORTH_CONSTRAINTS = "Only one net worth status tag "
+            + "(highnetworth, midnetworth, or lownetworth) can be specified.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;

@@ -50,7 +50,7 @@ public class PersonDetailedView extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} to display.
      */
-    public PersonDetailedView(Person person) {
+    public PersonDetailedView(Person person, boolean isVisualsEnabled) {
         super(FXML);
         this.person = person;
 
@@ -67,7 +67,20 @@ public class PersonDetailedView extends UiPart<Region> {
         hasPaid.setText("Paid status: " + (person.getHasPaid() ? "Paid" : "Not Paid"));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+
+                    if (isVisualsEnabled) {
+                        if ("highnetworth".equalsIgnoreCase(tag.tagName)) {
+                            tagLabel.getStyleClass().add("tag-high");
+                        } else if ("midnetworth".equalsIgnoreCase(tag.tagName)) {
+                            tagLabel.getStyleClass().add("tag-mid");
+                        } else if ("lownetworth".equalsIgnoreCase(tag.tagName)) {
+                            tagLabel.getStyleClass().add("tag-low");
+                        }
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
         frequency.setText("Policy Renewal Frequency: " + person.getFrequency().value + " month(s)");
     }
 }
