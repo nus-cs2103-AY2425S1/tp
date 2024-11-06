@@ -365,4 +365,14 @@ public class Event {
     public Observer getObserver() {
         return this.observer;
     }
+
+    /**
+     * Clears all contact lists, including attendees, volunteers, vendors, and sponsors.
+     */
+    public void clearAllContacts() {
+        this.attendees.clear();
+        this.volunteers.clear();
+        this.vendors.clear();
+        this.sponsors.clear();
+    }
 }
