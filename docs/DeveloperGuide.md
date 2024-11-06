@@ -243,7 +243,29 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+    
+### Sort Feature
+
+### Implementation
+
+The sort feature in `PROperty` is implemented by adding sorting methods to the `UniquePersonList` class, which is responsible for managing the list of `Person` objects. Sorting is performed directly on the `internalList` by specific attributes such as `name` or `ID`, allowing users to organise contacts in a meaningful order.
+
+The feature includes the following operations:
+
+- **`UniquePersonList#sortByName()`** — Sorts the `internalList` of `Person` objects alphabetically by name, using a `Comparator` that performs a case-insensitive comparison.
+- **`UniquePersonList#sortByID()`** — Sorts the `internalList` by ID in ascending order, allowing users to organise contacts based on their unique identifiers.
+
+These operations are exposed in the `Model` interface as `Model#sortByName()` and `Model#sortByID()` respectively.
+
+
+The following sequence diagram shows how an sort operation goes through the `Logic` component:
+
+![SortSequenceDiagram](images/developer-guide-images//SortSequenceDiagram-Logic.png)
+
+Similarly, the sorting process within the `Model` component is shown below:
+
+![SortSequenceDiagram](images/developer-guide-images//SortSequenceDiagram-Model.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
