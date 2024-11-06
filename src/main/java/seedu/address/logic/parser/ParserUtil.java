@@ -149,7 +149,7 @@ public class ParserUtil {
      */
     public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
+        String trimmedDate = date.trim().replaceAll("  +", " ");
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern(AttendanceList.DATE_TIME_FORMAT)
                 .parseDefaulting(ChronoField.ERA, 1)
