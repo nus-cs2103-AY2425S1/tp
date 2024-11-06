@@ -423,15 +423,6 @@ This segment describes features of BlitzBiz that helps users with using the app 
 
 Need to quickly access this user guide while using BlitzBiz? Get **help** with this one simple command!
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `restore` command:**<br>
-
-* Shows a message explaining how to access the help page.
-
-</div>
-
-
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -477,7 +468,7 @@ Format: `backup`
 
 #### Clearing all entries : `clear`
 
-Want a fresh start
+Want a fresh start?
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
