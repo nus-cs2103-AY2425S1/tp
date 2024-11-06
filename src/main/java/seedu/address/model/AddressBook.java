@@ -176,11 +176,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code AddressBook} and unassign {@code key} from all {@code Person} objects.
      * {@code key} must exist in the address book.
      */
     public void removeEvent(Event key) {
         events.remove(key);
+        persons.unassignEventFromAllPersons(key);
     }
 
     /**

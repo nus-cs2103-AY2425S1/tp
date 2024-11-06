@@ -175,10 +175,10 @@ public class ParserUtil {
             start = LocalDate.parse(trimmedEventStartDate);
             end = LocalDate.parse(trimmedEventEndDate);
         } catch (DateTimeParseException exception) {
-            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
         }
         if (!EventDuration.isValidDuration(start, end)) {
-            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS_DATE_ORDER);
         }
         return new EventDuration(start, end);
     }

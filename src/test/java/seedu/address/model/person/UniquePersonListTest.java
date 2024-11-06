@@ -6,13 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.MEETING;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -268,6 +271,57 @@ public class UniquePersonListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void unassignEventFromAllPersons_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.unassignEventFromAllPersons(null));
+    }
+
+    @Test
+    public void unassignEventFromAllPersons_personsAssignedDeletedEvent() {
+        int eventId = MEETING.getEventId();
+        Set<Integer> aliceEventIds = ALICE.getEventIds();
+        Set<Integer> bobEventIds = BOB.getEventIds();
+        ALICE.addEventId(eventId);
+        BOB.addEventId(eventId);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.unassignEventFromAllPersons(MEETING);
+        assertEquals(aliceEventIds, ALICE.getEventIds());
+        assertEquals(bobEventIds, BOB.getEventIds());
+    }
+
+    @Test
+    public void unassignEventFromAllPersons_personsAssignedDeletedEventAndPersonsNotAssignedDeletedEvent() {
+        int eventId = MEETING.getEventId();
+        Set<Integer> aliceEventIds = ALICE.getEventIds();
+        Set<Integer> bobEventIds = BOB.getEventIds();
+        Set<Integer> bensonEventIds = BENSON.getEventIds();
+        ALICE.addEventId(eventId);
+        BOB.addEventId(eventId);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(BENSON);
+        uniquePersonList.unassignEventFromAllPersons(MEETING);
+        assertEquals(aliceEventIds, ALICE.getEventIds());
+        assertEquals(bobEventIds, BOB.getEventIds());
+        assertEquals(bensonEventIds, BENSON.getEventIds());
+    }
+
+    @Test
+    public void unassignEventFromAllPersons_personsNotAssignedDeletedEvent() {
+        int eventId = MEETING.getEventId();
+        Set<Integer> aliceEventIds = ALICE.getEventIds();
+        Set<Integer> bobEventIds = BOB.getEventIds();
+        Set<Integer> bensonEventIds = BENSON.getEventIds();
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(BENSON);
+        uniquePersonList.unassignEventFromAllPersons(MEETING);
+        assertEquals(aliceEventIds, ALICE.getEventIds());
+        assertEquals(bobEventIds, BOB.getEventIds());
+        assertEquals(bensonEventIds, BENSON.getEventIds());
     }
 
     @Test

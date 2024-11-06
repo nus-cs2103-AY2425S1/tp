@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_MEET
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_WORKSHOP;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.DURATION_DESC_WORKSHOP;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_DURATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT_NAME_DESC;
@@ -78,9 +80,17 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, NAME_DESC_MEETING + INVALID_EVENT_DESCRIPTION_DESC + DURATION_DESC_MEETING,
                 EventDescription.MESSAGE_CONSTRAINTS);
 
+        // invalid date format
+        assertParseFailure(parser, NAME_DESC_MEETING + DESCRIPTION_DESC_MEETING + INVALID_EVENT_DATE_FORMAT_DESC,
+                EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
+
+        // invalid date
+        assertParseFailure(parser, NAME_DESC_MEETING + DESCRIPTION_DESC_MEETING + INVALID_EVENT_DATE_DESC,
+                EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
+
         // invalid duration
         assertParseFailure(parser, NAME_DESC_MEETING + DESCRIPTION_DESC_MEETING + INVALID_EVENT_DURATION_DESC,
-                EventDuration.MESSAGE_CONSTRAINTS);
+                EventDuration.MESSAGE_CONSTRAINTS_DATE_ORDER);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_EVENT_NAME_DESC + INVALID_EVENT_DESCRIPTION_DESC + DURATION_DESC_WORKSHOP,
