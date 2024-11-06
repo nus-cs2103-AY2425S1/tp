@@ -33,6 +33,7 @@ import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Days;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.student.predicates.ScheduleContainsKeywordsPredicate;
@@ -232,29 +233,28 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_settle() throws Exception {
-        // Example index and amount
-        double amount = 100.0; // Example amount
+        double amount = 100.0;
+        SettleAmount settleAmount = new SettleAmount(Double.toString(amount));
 
-        // Assuming the command format is "settle i/1 a/100.0"
+
         SettleCommand command = (SettleCommand) parser.parseCommand(
                 SettleCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_AMOUNT + amount);
 
-        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, settleAmount), command);
     }
 
     @Test
     public void parseCommand_settleRandomCase() throws Exception {
-        // Example index and amount
-        double amount = 100.0; // Example amount
+        double amount = 100.0;
+        SettleAmount settleAmount = new SettleAmount(Double.toString(amount));
 
-        // Test for random case command
         SettleCommand command = (SettleCommand) parser.parseCommand(
                 SettleCommand.COMMAND_WORD_RANDOM_CASE + " "
                         + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_AMOUNT + amount);
 
-        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, settleAmount), command);
     }
 }

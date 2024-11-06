@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.PaidAmount;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Student;
 
 
@@ -29,19 +30,18 @@ public class SettleCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_AMOUNT + "AMOUNT";
 
-    public static final String MESSAGE_SETTLE_SUCCESS = "Payment of %.2f has been settled for %s";
+    public static final String MESSAGE_SETTLE_SUCCESS = "Payment of $%.2f has been settled for %s";
     public static final String MESSAGE_INVALID_AMOUNT = "Entered amount is more than amount owed";
 
     private final Index index;
-    private final double amount;
+    private final SettleAmount amount;
 
     /**
      * @param index The index of the student in the filtered student list.
      * @param amount The amount to settle for the student.
      */
-    public SettleCommand(Index index, double amount) {
+    public SettleCommand(Index index, SettleAmount amount) {
         requireNonNull(index);
-        assert amount > 0 : "assertion failed: amount must be positive";
 
         this.index = index;
         this.amount = amount;
@@ -61,7 +61,7 @@ public class SettleCommand extends Command {
         model.setStudent(studentToUpdate, updatedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(String.format(MESSAGE_SETTLE_SUCCESS, amount, studentToUpdate.getName()));
+        return new CommandResult(String.format(MESSAGE_SETTLE_SUCCESS, amount.value, studentToUpdate.getName()));
     }
 
     /**
@@ -90,11 +90,11 @@ public class SettleCommand extends Command {
                 );
     }
 
-    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, double amountPaid) {
+    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, SettleAmount amountPaid) throws CommandException {
         return paidAmount.updateValue(amountPaid);
     }
 
-    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, double amountPaid) throws CommandException {
+    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, SettleAmount amountPaid) throws CommandException {
         if (owedAmount.isGreater(amountPaid)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
@@ -114,7 +114,7 @@ public class SettleCommand extends Command {
 
         SettleCommand otherSettleCommand = (SettleCommand) other;
         return index.equals(otherSettleCommand.index)
-                && amount == otherSettleCommand.amount;
+                && amount.equals(otherSettleCommand.amount);
     }
 
     @Override
