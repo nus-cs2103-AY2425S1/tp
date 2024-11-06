@@ -106,7 +106,7 @@ public class ContactDisplay extends UiPart<Region> {
     @FXML void initialize() {
         helpLabel.setText(CONDENSED_HELP_MESSAGE);
         checkIsNullCategory();
-        checkIsNullTags();
+        addTagsColor();
     }
 
     /**
@@ -116,55 +116,51 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void updateContactDetails(Person person) {
         helpLabel.setText(null);
-        nameLabel.setText(person.getName().fullName);
-        categoryLabel.setText(person.getCategoryDisplayName());
-        phoneLabel.setText("Phone: " + person.getPhone().value);
-        emailLabel.setText("Email: " + person.getEmail().value);
-        addressLabel.setText("Address: " + person.getAddress().value);
-        tags.getChildren().clear();
-        person.getTags().stream()
-        .sorted(Comparator.comparing(tag -> tag.tagName))
-        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        checkIsNullTags();
+        updateBasicFields(person);
+        updateTags(person);
+        updateExtraFields(person);
+    }
+
+    /**
+     * Updates the extra fields of the student or company.
+     *
+     * @param person The contact whose details are to be displayed.
+     */
+    public void updateExtraFields(Person person) {
         if (person instanceof Company) {
             Company company = (Company) person;
-            industryStudentIdLabel.setText("Industry: " + company.getIndustry().value);
+            industryStudentIdLabel.setText(String.format("Industry: %s", company.getIndustry().value));
         }
         if (person instanceof Student) {
             Student student = (Student) person;
-            industryStudentIdLabel.setText("Student ID: " + student.getStudentId());
+            industryStudentIdLabel.setText(String.format("Student ID: %s", student.getStudentId().value));
         }
     }
 
     /**
-     * Updates the contact display with the details of the specified person.
+     * Updates the basic fields of the contact.
      *
-     * @param company The company whose details are to be displayed.
+     * @param person The contact whose details are to be displayed.
      */
-    public void updateContactDetails(Company company) {
-        nameLabel.setText("Name: " + company.getName().fullName);
-        categoryLabel.setText("Category: " + company.getCategoryDisplayName());
-        industryStudentIdLabel.setText("Industry: " + company.getIndustry().value);
-        phoneLabel.setText("Phone: " + company.getPhone().value);
-        emailLabel.setText("Email: " + company.getEmail().value);
-        addressLabel.setText("Address: " + company.getAddress().value);
+    public void updateBasicFields(Person person) {
+        nameLabel.setText(person.getName().fullName);
+        categoryLabel.setText(person.getCategoryDisplayName());
+        phoneLabel.setText(String.format("Phone: %s", person.getPhone().value));
+        emailLabel.setText(String.format("Email: %s", person.getEmail().value));
+        addressLabel.setText(String.format("Address: %s", person.getAddress().value));
         tags.getChildren().clear();
-        checkIsNullTags();
     }
 
     /**
-     * Updates the contact display with the details of the specified person.
+     * Updates the tags of the contact.
      *
-     * @param student The person whose details are to be displayed.
+     * @param person The contact whose details are to be displayed.
      */
-    public void updateContactDetails(Student student) {
-        nameLabel.setText("Name: " + student.getName().fullName);
-        categoryLabel.setText("Category: " + student.getCategoryDisplayName());
-        industryStudentIdLabel.setText("Student ID: " + student.getStudentId());
-        phoneLabel.setText("Phone: " + student.getPhone().value);
-        emailLabel.setText("Email: " + student.getEmail().value);
-        addressLabel.setText("Address: " + student.getAddress().value);
-        checkIsNullTags();
+    public void updateTags(Person person) {
+        person.getTags().stream()
+        .sorted(Comparator.comparing(tag -> tag.tagName))
+        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        addTagsColor();
     }
 
     /**
@@ -180,7 +176,7 @@ public class ContactDisplay extends UiPart<Region> {
         tags.getChildren().clear();
         helpLabel.setText(null);
         checkIsNullCategory();
-        checkIsNullTags();
+        addTagsColor();
     }
 
     /**
@@ -251,12 +247,13 @@ public class ContactDisplay extends UiPart<Region> {
     }
 
     /**
-     * Removes the background colour of the category label if it is null.
+     * Adds background color of the category label.
+     * Removes the background color of the category label if it is null.
      */
     public void checkIsNullCategory() {
         categoryLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             categoryLabel.getStyleClass().removeAll("student-background", "company-background");
-            if (newValue != null || !newValue.isEmpty()) {
+            if (newValue != null) {
                 addCategoryColor(newValue);
             }
         });
@@ -275,25 +272,38 @@ public class ContactDisplay extends UiPart<Region> {
     }
 
     /**
-     * Removes the background colour of the tags flowpane if it is null.
+     * Adds background color for tags.
+     * @tagLabel The tag.
+     * @param text The text of the tag.
+     * @param i The order of the tag.
      */
-    public void checkIsNullTags() {
+    public void addTagColor(Label tagLabel, String text, int i) {
+        String message = String.format(("Adding color to tag: %s, index: %d"), text, i);
+        System.out.println(message);
+        if (text.equalsIgnoreCase("paid")) {
+            tagLabel.getStyleClass().add("paid");
+        } else {
+            tagLabel.getStyleClass().add(i % 2 == 0
+                    ? "with-background-1"
+                    : "with-background-2");
+        }
+
+    }
+
+    /**
+     * Adds background color of all tags.
+     * Removes the background color of the tags flowpane if it is null.
+     */
+    public void addTagsColor() {
+        System.out.println("Adding tags color.");
         for (int i = 0; i < tags.getChildren().size(); i++) {
             javafx.scene.Node node = tags.getChildren().get(i);
             if (node instanceof Label tagLabel) {
                 String text = tagLabel.getText();
                 tagLabel.getStyleClass().remove("with-background-1");
                 tagLabel.getStyleClass().remove("with-background-2");
-                if (text == null || text.isEmpty()) {
-                    continue;
-                } else {
-                    if (text.equalsIgnoreCase("paid")) {
-                        tagLabel.getStyleClass().add("paid");
-                    } else if (i % 2 == 0) {
-                        tagLabel.getStyleClass().add("with-background-1");
-                    } else {
-                        tagLabel.getStyleClass().add("with-background-2");
-                    }
+                if (!text.isEmpty()) {
+                    addTagColor(tagLabel, text, i);
                 }
             }
         }
