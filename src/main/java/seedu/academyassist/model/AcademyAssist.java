@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.academyassist.commons.util.ToStringBuilder;
-import seedu.academyassist.logic.parser.SortCommandParser;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.StudentId;
