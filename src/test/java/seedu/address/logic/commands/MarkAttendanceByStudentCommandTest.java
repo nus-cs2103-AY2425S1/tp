@@ -175,9 +175,9 @@ public class MarkAttendanceByStudentCommandTest {
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance2, tutorial);
 
         String expectedMessage1 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance1);
+                studentToMarkAttendance.getName(), attendance1, tutorial.getSubject());
         String expectedMessage2 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance2);
+                studentToMarkAttendance.getName(), attendance2, tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand1, model, expectedMessage1);
         assertCommandFailure(markAttendanceCommand2, model, expectedMessage2);
@@ -262,9 +262,9 @@ public class MarkAttendanceByStudentCommandTest {
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance2, tutorial);
 
         String expectedMessage1 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance1);
+                studentToMarkAttendance.getName(), attendance1, tutorial.getSubject());
         String expectedMessage2 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance2);
+                studentToMarkAttendance.getName(), attendance2, tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand1, model, expectedMessage1);
         assertCommandFailure(markAttendanceCommand2, model, expectedMessage2);
