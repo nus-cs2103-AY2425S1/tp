@@ -68,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
         roleColors.put("vendor", "#f87f26");
         roleColors.put("volunteer", "#d262f3");
 
-        if (person.getRoles().isEmpty()){
+        if (person.getRoles().isEmpty()) {
             addDefaultNoRoleLabel();
         } else {
             person.getRoles().stream()
