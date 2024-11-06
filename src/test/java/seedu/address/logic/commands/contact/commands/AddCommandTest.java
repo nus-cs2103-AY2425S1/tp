@@ -56,7 +56,9 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub, new EventManager()));
+                String.format(AddCommand.MESSAGE_DUPLICATE_PERSON,
+                        "phone", validPerson.getPhone().value), () -> addCommand.execute(modelStub,
+                            new EventManager()));
     }
 
     @Test
@@ -229,6 +231,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public String[] findSameField(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -246,6 +253,19 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public String[] findSameField(Person person) {
+            if (this.person.isSamePhone(person)) {
+                return new String[] {"phone", this.person.getPhone().value};
+            } else if (this.person.isSameEmail(person)) {
+                return new String[] {"email", this.person.getEmail().value};
+            } else if (this.person.isSameTelegram(person)) {
+                return new String[] {"telegram", this.person.getTelegramUsername().telegramUsername};
+            } else {
+                return null;
+            }
         }
     }
 

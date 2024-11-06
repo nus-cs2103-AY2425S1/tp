@@ -193,5 +193,31 @@ public class PersonTest {
 
     }
 
+    @Test
+    public void isSameTelegram() {
+        // same object -> returns true
+        assertTrue(ALICE.isSameTelegram(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.isSameTelegram(null));
+
+        // same telegram, all other attributes different -> returns false
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).build();
+        assertTrue(ALICE.isSameTelegram(editedAlice));
+
+        // different telegram, all other attributes same -> returns true
+        editedAlice = new PersonBuilder(ALICE).withTelegramUsername(VALID_TELEGRAM_BOB).build();
+        assertFalse(ALICE.isSameTelegram(editedAlice));
+
+        // telegram differs in case, all other attributes same -> returns true
+        Person editedBob = new PersonBuilder(BOB).withTelegramUsername(VALID_TELEGRAM_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSameTelegram(editedBob));
+
+        // telegram has trailing spaces, all other attributes same -> returns true
+        String editedTelegram = VALID_TELEGRAM_BOB + "xDD";
+        editedBob = new PersonBuilder(BOB).withTelegramUsername(editedTelegram).build();
+        assertFalse(BOB.isSameTelegram(editedBob));
+    }
 
 }

@@ -43,7 +43,25 @@ public class AddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                String.format(AddCommand.MESSAGE_DUPLICATE_PERSON, "phone", personInList.getPhone().value));
     }
 
+    @Test
+    public void execute_duplicatePersonSameEmail_throwsCommandException() {
+        Person personInList = model.getAddressBook().getPersonList().get(1);
+        Person personWithSameEmail = new PersonBuilder().withPhone("90123144")
+                .withEmail(personInList.getEmail().value).build();
+        assertCommandFailure(new AddCommand(personWithSameEmail), model,
+                String.format(AddCommand.MESSAGE_DUPLICATE_PERSON, "email", personInList.getEmail().value));
+    }
+
+    @Test
+    public void execute_duplicatePersonSameTelegram_throwsCommandException() {
+        Person personInList = model.getAddressBook().getPersonList().get(2);
+        Person personWithSameTelegram = new PersonBuilder().withPhone("90123144")
+                .withTelegramUsername(personInList.getTelegramUsername().telegramUsername).build();
+        assertCommandFailure(new AddCommand(personWithSameTelegram), model,
+                String.format(AddCommand.MESSAGE_DUPLICATE_PERSON,
+                        "telegram", personInList.getTelegramUsername().telegramUsername));
+    }
 }
