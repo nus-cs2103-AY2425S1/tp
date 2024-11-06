@@ -28,10 +28,12 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
-  * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
+  * [Installation and Quick Start]({{ baseUrl }}/UserGuide.html#installation-and-quick-start)
+  * [Commands]({{ baseUrl }}/UserGuide.html#commands)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)

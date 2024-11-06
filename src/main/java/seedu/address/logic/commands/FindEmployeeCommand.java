@@ -15,11 +15,6 @@ import seedu.address.model.person.PredicateContainer;
 public class FindEmployeeCommand extends FindCommand {
     public static final String ARGUMENT_WORD = "e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: e KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " " + ARGUMENT_WORD + " alice bob charlie";
-
     public FindEmployeeCommand(PredicateContainer predicateContainer) {
         super(predicateContainer);
     }
