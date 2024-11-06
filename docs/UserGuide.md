@@ -16,26 +16,7 @@ Graphical User Interface (GUI). If you can type fast, SocialBook can get your co
 than traditional GUI apps.
 
 <!-- * Table of Contents -->
-- [Quick Start](#quick-start)
-- [Features](#features)
-    - [Viewing Help](#viewing-help--help)
-    - [Adding a Person](#adding-a-person--add)
-    - [Listing All Persons](#listing-all-persons--list)
-    - [Editing a Person](#editing-a-person--edit)
-    - [Finding Persons](#finding-persons--find)
-    - [Deleting People](#deleting-people--delete)
-    - [Getting Parameters](#getting-the-parameters-of-these-people--get)
-    - [Clearing All Entries](#clearing-all-entries--clear)
-    - [Undo the Previous Command](#undo-the-previous-command--undo)
-    - [Displaying Statistics](#displaying-overall-statistics--statistics)
-    - [Displaying Eligible Schemes](#displaying-eligible-schemes--scheme)
-    - [Exiting the Program](#exiting-the-program--exit)
-    - [Saving the Data](#saving-the-data)
-    - [Editing the Data File](#editing-the-data-file)
-    - [Archiving Data Files](#archiving-data-files-coming-in-v20)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
