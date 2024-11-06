@@ -118,11 +118,11 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn INDEX amt/AMOUNT desc/DESC [date/DATE] [status/STATUS] [cat/CATEGORY]...`
+Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [cat/CATEGORY]...`
 
 * The `INDEX` refers to the index of the person currently displayed in the address book panel (as we are adding the transaction related to the person).
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index.
-* The `DESC` accepts a string of words with a limit of 120 characters.
+* The `DESCRIPTION` accepts a string of words with a limit of 120 characters.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
@@ -182,7 +182,7 @@ Examples:
 
 Edits an existing transaction in the transaction book.
 
-Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [cat/CATEGORY]...`
+Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]...`
 
 * Edits the transaction at the specified `INDEX`. The index refers to the index number shown in the displayed transaction list.
   The index **must be a positive integer** 1, 2, 3, …

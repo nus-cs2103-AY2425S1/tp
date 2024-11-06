@@ -1,6 +1,7 @@
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `SpleetWaise` and the **Actor** is the `user`, unless specified 
+otherwise)
 
 **UC01 - View Usage Instructions**
 
@@ -75,25 +76,14 @@ Actor: New User
 4. The system updates the status of the expense.
 5. The system displays a success message indicating the change.
 
-**Extensions**
-- **3a.** The expense is a recurring expense.
-  - 3a1. The system asks whether to apply the change to all future occurrences or just the current one.
-  - 3a2. The user confirms.
-  - 3a3. Use case resumes from step 4.
-
 ---
 
 **UC06 - View Person's Owed Amount**
 
 **MSS**
 1. A user requests to list all person.
-2. The user selects a person to view.
-3. The system displays how much the user own to the selected person.
-
-**Extensions**
-- **3a.** The system includes currency conversion.
-  - 3a1. The system converts the owed amount to a default currency.
-  - 3a2. Use case resumes from step 3.
+2. The user requests to filter transaction by a specific person in the list
+3. The system displays how much the user owe to the selected person.
 
 ---
 
@@ -105,25 +95,7 @@ Actor: New User
 3. The system displays the summary to the user in a tabular format.
 
 **Extensions**
-- **3a.** The user wants to see the summary in a graphical format.
-  - 3a1. The system provides a graphical representation (e.g., pie charts, bar graphs).
+- **3a.** The user requests a filtered summary (e.g., by date or category).
+  - 3a1. The system filters the summary based on the user’s input.
   - 3a2. Use case resumes from step 3.
-- **3b.** The user requests a filtered summary (e.g., by date or category).
-  - 3b1. The system filters the summary based on the user’s input.
-  - 3b2. Use case resumes from step 3.
-
----
-
-**UC08 - Set Up Recurring Transactions**
-
-**MSS**
-1. A user requests to add an expense as a recurring transaction with required details (e.g., frequency, start date, end date).
-2. The system sets up the recurring transaction and displays a confirmation message.
-
-**Extensions**
-- **2a.** The user requests a custom interval (e.g., bi-weekly).
-  - 2a1. The system allows the user to specify a custom interval.
-  - 2a2. Use case resumes from step 3.
-- **2b.** The user requests reminders before the transaction is processed.
-  - 2b1. The system sends reminders before the recurring transaction is processed.
-  - 2b2. Use case ends.
+  
