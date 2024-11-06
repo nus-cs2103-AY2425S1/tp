@@ -122,7 +122,7 @@ public class StatisticsCommand extends Command {
     private void insertTagPercentages(StringBuilder builder, HashMap<String, Integer> tagCounts,
                                       int totalApplicantsInSystem) {
         StringBuilder stringToInsert = new StringBuilder();
-        stringToInsert.append("Percentages of applicants in each interview stage:\n");
+        stringToInsert.append("Percentages of applicant(s) in each interview stage:\n");
 
         // Correct order of tags
         String[] tagOrder = {"N", "TP", "TC", "BP", "BC", "A", "R"};
