@@ -59,10 +59,10 @@ public class ListingCard extends UiPart<Region> {
     private void initializeName() {
         String actualName = listing.getName().fullName;
 
-        // Check if the listing name length is greater than 55
-        if (actualName.length() > 55) {
-            // Truncate the listing name to 55 characters and add "..."
-            name.setText(actualName.substring(0, 55) + "...");
+        // Check if the listing name length is greater than 45
+        if (actualName.length() > 45) {
+            // Truncate the listing name to 45 characters and add "..."
+            name.setText(actualName.substring(0, 45) + "...");
         } else {
             name.setText(actualName);
         }
@@ -88,10 +88,10 @@ public class ListingCard extends UiPart<Region> {
     private void initializeArea() {
         String actualArea = listing.getArea().toString();
 
-        // Check if the area length is greater than 15
-        if (actualArea.length() > 15) {
-            // Truncate the area to 15 characters and add "..."
-            actualArea = actualArea.substring(0, 15) + "...";
+        // Check if the area length is greater than 10
+        if (actualArea.length() > 10) {
+            // Truncate the area to 10 characters and add "..."
+            actualArea = actualArea.substring(0, 10) + "...";
         }
 
         area.setText(String.format("%s m²", actualArea));

@@ -109,10 +109,10 @@ public class ListingCardUiTest extends ApplicationTest {
         // Check if the displayed name, price, area, region, address, and seller labels are correct
         // after truncation
         assertEquals("1. ", listingCard.getId().getText());
-        assertEquals("Sample Listingggggggggggggggggggggggggggggggggggggggggg...",
+        assertEquals("Sample Listingggggggggggggggggggggggggggggggg...",
                 listingCard.getName().getText());
         assertEquals("$500000000000000...", listingCard.getPrice().getText());
-        assertEquals("10000 m²", listingCard.getArea().getText());
+        assertEquals("1000000000... m²", listingCard.getArea().getText());
         assertEquals("NORTH", listingCard.getRegion().getText());
         assertEquals("123 Main Sttttttttttttttttttttttttttttttttttttttttttttt...",
                 listingCard.getAddress().getText());
@@ -170,7 +170,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Address("123 Main Sttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"),
                 new Price("50000000000000000000000000000000000",
                         new BigDecimal("50000000000000000000000000000000000")),
-                new Area(10000),
+                new Area("100000000000000000000000000000000000000000000000000000"),
                 Region.NORTH,
                 createSampleTruncatedSeller(),
                 buyersSet
