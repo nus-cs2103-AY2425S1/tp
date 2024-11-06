@@ -2,7 +2,6 @@ package seedu.address.model.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -79,7 +78,7 @@ public class UniqueLessonListTest {
     @Test
     public void getAssociatedPeople_singleLesson_returnsAssociatedPeople() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        Subject subject =  new Subject("Math");
+        Subject subject = new Subject("Math");
         uniqueLessonList.add(new Lesson(ALICE, DANIEL, subject));
         ArrayList<Map.Entry<Person, Subject>> expected = new ArrayList<>();
         expected.add(Map.entry(DANIEL, subject));
@@ -89,8 +88,8 @@ public class UniqueLessonListTest {
     @Test
     public void getAssociatedPeople_multipleLessons_returnsAssociatedPeople() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        Subject math =  new Subject("Math");
-        Subject english =  new Subject("English");
+        Subject math = new Subject("Math");
+        Subject english = new Subject("English");
         uniqueLessonList.add(new Lesson(ALICE, DANIEL, math));
         uniqueLessonList.add(new Lesson(ALICE, CLARA, english));
         ArrayList<Map.Entry<Person, Subject>> expected = new ArrayList<>();
