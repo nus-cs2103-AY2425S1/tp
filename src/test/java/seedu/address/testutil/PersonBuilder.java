@@ -45,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tag = new Tag(DEFAULT_TAG);
         allergies = new HashSet<>();
+        allergies.add(new Allergy(DEFAULT_ALLERGY));
         date = new Date(DEFAULT_DATE);
     }
 
