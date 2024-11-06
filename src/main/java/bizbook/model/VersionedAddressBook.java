@@ -58,6 +58,8 @@ public class VersionedAddressBook extends AddressBook {
             addressBookOlderVersionList.removeFirst();
         }
         addressBookOlderVersionList.addLast(addressBookCopy);
+
+        addressBookNewerVersionList.clear();
     }
 
     /**
@@ -66,7 +68,14 @@ public class VersionedAddressBook extends AddressBook {
     public void undo() {
         AddressBook currentVersion = addressBookOlderVersionList.removeLast();
         AddressBook previousVersion = addressBookOlderVersionList.getLast();
+
+        // Limit the versions saved to be 5
+        if (addressBookNewerVersionList.size() == 5) {
+            addressBookNewerVersionList.removeFirst();
+        }
+
         addressBookNewerVersionList.addLast(currentVersion);
+
         setPersons(previousVersion.getPersonList());
         setPinnedPersons(previousVersion.getPinnedPersonList());
     }
