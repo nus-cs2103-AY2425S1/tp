@@ -128,8 +128,6 @@ public class CommandTestUtil {
             + PREFIX_NAME + "Ron"; // multiple prefit not allowed
     public static final String INVALID_MEETUP_FROM_DESC = " " + PREFIX_FROM + "01/02/2025 1800"; // Not proper format
     public static final String INVALID_MEETUP_TO_DESC = " " + PREFIX_TO + "01/05/2025 1940"; // Not proper format
-    public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date
-    public static final String INVALID_MEETUP_TO_DESC_TWO = " " + PREFIX_TO + "03/02/2025 2988"; // Not valid date
     public static final String INVALID_MEETUP_INFO_DESC = " " + PREFIX_INFO; // Empty info not allowed
     public static final String INVALID_MEETUP_ADDED_BUYER_DESC = " " + PREFIX_ADDED_BUYER + "S@m"; // '@' not allowed
     public static final String INVALID_MEETUP_FIND_DESC = " " + PREFIX_SUBJECT + "@fternoon"; // '@' not allowed

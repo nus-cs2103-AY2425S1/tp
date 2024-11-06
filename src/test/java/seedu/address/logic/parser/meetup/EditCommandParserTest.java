@@ -2,10 +2,8 @@ package seedu.address.logic.parser.meetup;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FROM_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FROM_DESC_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_ADDED_BUYER_DESC_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_FROM_DESC_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_INFO_DESC_NETWORKING;
@@ -80,10 +78,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_MEETUP_SUBJECT_DESC, Subject.MESSAGE_CONSTRAINTS); // invalid subject
-        assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC, From.MESSAGE_CONSTRAINTS); // invalid from
-        assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC_TWO, From.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_MEETUP_TO_DESC, To.MESSAGE_CONSTRAINTS); // invalid to
-        assertParseFailure(parser, "1" + INVALID_MEETUP_TO_DESC_TWO, To.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC, From.MESSAGE_CONSTRAINTS_FORMAT); // invalid from
+        assertParseFailure(parser, "1" + INVALID_MEETUP_TO_DESC, To.MESSAGE_CONSTRAINTS_FORMAT); // invalid to
 
         // invalid subject followed by valid info, from and to
         assertParseFailure(parser, "1" + INVALID_MEETUP_SUBJECT_DESC

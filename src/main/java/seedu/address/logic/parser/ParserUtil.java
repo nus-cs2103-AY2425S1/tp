@@ -169,8 +169,11 @@ public class ParserUtil {
     public static From parseMeetUpFrom(String meetUpFrom) throws ParseException {
         requireNonNull(meetUpFrom);
         String trimmedFrom = meetUpFrom.trim();
-        if (!From.isValidFrom(trimmedFrom)) {
-            throw new ParseException(seedu.address.model.meetup.From.MESSAGE_CONSTRAINTS);
+        if (!From.isValidFormat(trimmedFrom)) {
+            throw new ParseException(From.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!From.isValidDateTime(trimmedFrom)) {
+            throw new ParseException(From.MESSAGE_CONSTRAINTS_DATETIME);
         }
         return new From(meetUpFrom);
     }
@@ -184,8 +187,11 @@ public class ParserUtil {
     public static To parseMeetUpTo(String meetUpTo) throws ParseException {
         requireNonNull(meetUpTo);
         String trimmedTo = meetUpTo.trim();
-        if (!To.isValidTo(trimmedTo)) {
-            throw new ParseException(seedu.address.model.meetup.To.MESSAGE_CONSTRAINTS);
+        if (!To.isValidFormat(trimmedTo)) {
+            throw new ParseException(To.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!To.isValidDateTime(trimmedTo)) {
+            throw new ParseException(To.MESSAGE_CONSTRAINTS_DATETIME);
         }
         return new To(meetUpTo);
     }
