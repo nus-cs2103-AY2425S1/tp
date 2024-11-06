@@ -181,7 +181,9 @@ The following sections describe the various commands available in the DocTrack p
 A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and 
 optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. 
 DocTrack allows you to interact with patient information through different commands, which can be seen below.
-=======
+
+<br>
+
 | Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
 |--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
