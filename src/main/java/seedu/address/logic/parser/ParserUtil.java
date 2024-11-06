@@ -140,19 +140,7 @@ public class ParserUtil {
         }
         return Integer.parseInt(trimmedScore);
     }
-    /**
-     * Parses a {@code String studentIndex} into a {@code int}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code studentIndex} is invalid.
-     */
-    public static int parseStudentIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Integer.parseInt(trimmedIndex);
-    }
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
