@@ -2,9 +2,9 @@
   "baseUrl": "",
   "titlePrefix": "LegacyLink",
   "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/LegacyLink.png",
   "style": {
-    "codeTheme": "light"
+    "bootstrapTheme": "bootswatch-pulse"
   },
   "ignore": [
     "_markbind/layouts/*",
