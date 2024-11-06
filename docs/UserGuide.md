@@ -162,9 +162,18 @@ Format: `del n/NAME` followed by `y` or `n`
 </box>
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/deleteMsg.png" alt="delete message" style="width: 33%;">
-  <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 33%;">
-  <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 33%;">
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteMsg.png" alt="delete message" style="width: 100%;">
+    <div>Confirmation Prompt</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 100%;">
+    <div>Success</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 100%;">
+    <div>Cancel Operation</div>
+  </div>
 </div>
 
 Examples:
@@ -190,8 +199,14 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 </box>
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/editMsg.png" alt="edit message" style="width: 50%;">
-  <img src="images/editMsg2.png" alt="edit message success" style="width: 50%;">
+   <div style="text-align: center; width: 50%;">
+    <img src="images/editMsg.png" alt="edit message before" style="width: 100%;">
+    <div>Before</div>
+  </div>
+  <div style="text-align: center; width: 50%;">
+    <img src="images/deleteYMsg.png" alt="edit message after" style="width: 100%;">
+    <div>After</div>
+  </div>
 </div>
 
 Examples:
@@ -258,10 +273,23 @@ affected. Make sure you follow the format strictly 😲.
 
 </box>
 
-![delete wedding message](images/deleteWeddingMsg.png)
+<div style="display: flex; justify-content: space-between;">
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteWeddingMsg.png" alt="delete wedding message" style="width: 100%;">
+    <div>Confirmation Prompt</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteWeddingYMsg.png" alt="delete wedding message success" style="width: 100%;">
+    <div>Success</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteWeddingNMsg.png" alt="delete wedding message cancel" style="width: 100%;">
+    <div>Cancel Operation</div>
+  </div>
+</div>
 
 Examples:
-* `del-wed w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
+* `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John oh & Jean Tan` from the address book.
 * `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
 ### Listing All Weddings : `list-wed`
