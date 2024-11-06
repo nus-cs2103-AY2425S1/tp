@@ -78,7 +78,7 @@ By following these sections, you can quickly find the information you need and m
 
 ![uitutorial](images/uitutorial.png)
 
-<span style="font-size: 20px; font-weight: bold">Menu Bar</span>
+<span style="font-size: 20px; font-weight: bold; color: #7a7d82">Menu Bar</span>
 * Clicking `File` will show the option to exit the application.
 * Clicking `Help` will show `Help F1` which when clicked will link you to this User Guide!
 
