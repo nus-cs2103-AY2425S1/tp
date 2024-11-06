@@ -6,10 +6,8 @@ import java.time.ZoneId;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
@@ -65,7 +63,7 @@ public class TaskCard extends UiPart<Region> {
                     .map(z -> z.getGroupName().getGroupName())
                     .reduce(groupsOverdue, (a, b) -> a + "\n" + b);
             } catch (IndexOutOfBoundsException ioe) {
-
+                groupsOverdue = "Overdue Groups:";
             }
             try {
                 groupsComplete = completeGroupList.stream()
@@ -74,11 +72,10 @@ public class TaskCard extends UiPart<Region> {
                     .map(z -> z.getGroupName().getGroupName())
                     .reduce(groupsComplete, (a, b) -> a + "\n" + b);
             } catch (IndexOutOfBoundsException ioe) {
-
+                groupsComplete = "Complete Groups:";
             }
             groups.setText(groupsOverdue + "\n" + "\n" + groupsComplete);
         } else {
-            deadline.setTextFill(Color.WHITE);
             String groupsPending = "Pending Groups:";
             String groupsComplete = "Complete Groups:";
             ObservableList<Group> completeGroupList = groupList;
@@ -89,7 +86,7 @@ public class TaskCard extends UiPart<Region> {
                     .map(z -> z.getGroupName().getGroupName())
                     .reduce(groupsPending, (a, b) -> a + "\n" + b);
             } catch (IndexOutOfBoundsException ioe) {
-
+                groupsPending = "Pending Groups:";
             }
             try {
                 groupsComplete = completeGroupList.stream()
@@ -98,7 +95,7 @@ public class TaskCard extends UiPart<Region> {
                     .map(z -> z.getGroupName().getGroupName())
                     .reduce(groupsComplete, (a, b) -> a + "\n" + b);
             } catch (IndexOutOfBoundsException ioe) {
-
+                groupsComplete = "Complete Groups:";
             }
             groups.setText(groupsPending + "\n" + "\n" + groupsComplete);
         }

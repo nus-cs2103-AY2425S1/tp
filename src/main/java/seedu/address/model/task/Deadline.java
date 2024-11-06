@@ -40,6 +40,13 @@ public class Deadline implements Comparable<Deadline> {
         this.time = time;
     }
 
+    /**
+     * Represents an empty constructor.
+     */
+    public Deadline() {
+        this.time = LocalDateTime.now();
+    }
+
     public LocalDateTime getTime() {
         return time;
     }

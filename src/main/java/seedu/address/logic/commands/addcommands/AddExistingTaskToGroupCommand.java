@@ -1,10 +1,9 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
+import static seedu.address.logic.ListMarkers.LIST_TASK_MARKER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.List;
 import java.util.Set;
@@ -78,11 +77,13 @@ public class AddExistingTaskToGroupCommand extends Command {
             }
             model.addTaskToGroup(taskToAdd, groupToAdd);
             model.increaseGroupWithTask(taskToAdd);
+            model.setMostRecentTaskDisplay(taskToAdd);
+            model.setStateTasks();
+            model.updateFilteredTaskList(x -> x.equals(taskToAdd));
             groupsAdded.append(groupToAdd.getGroupName()).append("\n");
         }
-        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd.getTaskName().getTaskName(),
-            groupsAdded), LIST_GROUP_MARKER);
+            groupsAdded), LIST_TASK_MARKER);
     }
 
     @Override
