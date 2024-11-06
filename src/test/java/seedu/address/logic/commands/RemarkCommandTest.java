@@ -55,7 +55,8 @@ public class RemarkCommandTest {
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_COMPANY, emptyRemark);
         Company editedCompany = new CompanyBuilder(companyToEdit).withRemark("").build();
 
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedCompany);
+        String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS,
+                Messages.format(editedCompany));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setCompany(companyToEdit, editedCompany);
