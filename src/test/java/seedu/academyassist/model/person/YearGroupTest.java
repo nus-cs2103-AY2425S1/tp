@@ -10,51 +10,50 @@ public class YearGroupTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Phone(null));
+        assertThrows(NullPointerException.class, () -> new YearGroup(null));
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    public void constructor_invalidYearGroup_throwsIllegalArgumentException() {
+        String invalidYearGroup = "";
+        assertThrows(IllegalArgumentException.class, () -> new YearGroup(invalidYearGroup));
     }
 
     @Test
-    public void isValidPhone() {
-        // null phone number
-        assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
+    public void isValidYearGroup() {
+        // null year group
+        assertThrows(NullPointerException.class, () -> YearGroup.isValidYearGroup(null));
 
-        // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        // invalid year groups
+        assertFalse(YearGroup.isValidYearGroup("")); // empty string
+        assertFalse(YearGroup.isValidYearGroup(" ")); // spaces only
+        assertFalse(YearGroup.isValidYearGroup("0")); // less than 1
+        assertFalse(YearGroup.isValidYearGroup("-4")); // negative number
+        assertFalse(YearGroup.isValidYearGroup("40")); // more than 13
 
-        // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        // valid year groups
+        assertTrue(YearGroup.isValidYearGroup("1"));
+        assertTrue(YearGroup.isValidYearGroup("13"));
+        assertTrue(YearGroup.isValidYearGroup("5"));
     }
 
     @Test
     public void equals() {
-        Phone phone = new Phone("999");
+        YearGroup yearGroup = new YearGroup("3");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Phone("999")));
+        assertTrue(yearGroup.equals(new YearGroup("3")));
 
         // same object -> returns true
-        assertTrue(phone.equals(phone));
+        assertTrue(yearGroup.equals(yearGroup));
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertFalse(yearGroup.equals(null));
 
         // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+        assertFalse(yearGroup.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(phone.equals(new Phone("995")));
+        assertFalse(yearGroup.equals(new YearGroup("2")));
     }
 }
