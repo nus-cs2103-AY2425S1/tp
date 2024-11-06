@@ -67,14 +67,14 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void initializeName() {
-        String fullName = person.getName().fullName;
+        String actualName = person.getName().fullName;
 
         // Check if the name length is greater than 55
-        if (fullName.length() > 55) {
+        if (actualName.length() > 55) {
             // Truncate the name to 55 characters and add "..."
-            name.setText(fullName.substring(0, 55) + "...");
+            name.setText(actualName.substring(0, 55) + "...");
         } else {
-            name.setText(fullName);
+            name.setText(actualName);
         }
     }
 
@@ -96,7 +96,15 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void initializeEmail() {
-        email.setText(person.getEmail().value);
+        String actualEmail = person.getEmail().value;
+
+        // Check if the email length is greater than 55
+        if (actualEmail.length() > 55) {
+            // Truncate the email to 55 characters and add "..."
+            email.setText(actualEmail.substring(0, 55) + "...");
+        } else {
+            email.setText(actualEmail);
+        }
     }
 
     private void initializeAppointment() {
