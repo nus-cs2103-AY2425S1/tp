@@ -245,33 +245,33 @@ Examples:
 ### Sorting the contacts or delivery list in ascending order: `asort`
 **<ins>When in the main window**
 
-Sorts all contacts in the contacts list by the specified attribute, in ascending order.
+Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
 Format `asort by/ [ATTRIBUTE]`
 
-* Current attributes supported are: date, email, name, phone, role.
+* Attributes you can sort by: date, email, name, phone, role.
 
 Examples:
 * `asort by/ name` sorts the contacts list by name, in ascending alphabetical order (e.g. A, B, C, ...).
-* `asort by/ date` sorts the contacts list by the date the contact was added, in ascending date order (e.g. 2024-10-31 before 2024-11-1).
+* `asort by/ date` sorts the contacts list by the date the contacts were added, from oldest to newest (e.g. 2024-10-31 before 2024-11-1).
 
 **<ins>When in the inspect window**
 
-Sorts all deliveries in the delivery list of a contact by the specified attribute, in ascending order.
+Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
 
 Format `asort by/ [ATTRIBUTE]`
 
-* Current attributes supported are: address, cost, date, eta, id, status.
+* Attributes you can sort by: address, cost, date, eta, id, status.
 
 Examples:
-* `asort by/ cost` sorts the delivery list by ascending cost (e.g. $1, $100, $1000, ...).
+* `asort by/ cost` sorts the delivery list by cost, from lowest to highest (e.g. $1, $100, $1000, ...).
 * `asort by/ status` sorts the delivery list by delivery status, where `not delivered` deliveries come before `delivered` deliveries.
 
 ### Sorting the contacts or delivery list in descending order: `dsort`
 
-Does the same thing as `asort`, except the sorting is now done in descending order.
+`dsort` works the same way as `asort`, except the sorting is now done from highest to lowest.
 
-Refer to the `asort` feature explanation, and replace `asort` with `dsort` where appropriate.
+Simply use the same format as `asort`, but replace `asort` with `dsort`.
 
 ### Deleting a contact or delivery : `delete`
 **<ins>When in the main window**
