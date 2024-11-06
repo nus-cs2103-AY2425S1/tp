@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -23,10 +24,26 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         } else if (keywords.get(keywords.size() - 1).contains("$")) {
             return isExact(person);
         } else {
-            return keywords.stream()
-                    .allMatch(keyword ->
-                            Arrays.stream(person.getName().fullName.split("\\s+"))
-                                    .anyMatch(part -> part.toLowerCase().startsWith(keyword.toLowerCase())));
+            String[] nameParts = person.getName().fullName.split("\\s+");
+            // Create a list to track which name parts have been matched
+            List<String> remainingParts = new ArrayList<>(Arrays.asList(nameParts));
+
+            for (String keyword : keywords) {
+                boolean foundMatch = false;
+                // Try to match this keyword with any remaining (unmatched) name part
+                for (int i = remainingParts.size() - 1; i >= 0; i--) {
+                    if (remainingParts.get(i).toLowerCase().startsWith(keyword.toLowerCase())) {
+                        remainingParts.remove(i);
+                        foundMatch = true;
+                        break;
+                    }
+                }
+                // If any keyword doesn't find a match, return false
+                if (!foundMatch) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
