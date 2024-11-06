@@ -22,8 +22,7 @@ public class BookingsCommand extends Command {
             + "The date has to be in one of the following accepted formats:\n"
             + "dd/MM/yyyy OR dd-MM-yyyy OR dd MM yyyy\n"
             + "Parameters: DATE\n"
-            + "Examples:\n"
-            + COMMAND_WORD + " 23/10/2024\n";
+            + "Example: " + COMMAND_WORD + " 23/10/2024\n";
 
     private final LocalDate date;
 
