@@ -44,7 +44,7 @@ public class HistoricalAddressBookTest {
         historicalAddressBook.resetData(newData);
         assertEquals(newData.getCurrentAddressBook(), historicalAddressBook.getCurrentAddressBook());
         // Check save()
-        assertEquals(newData.getAddressBookHistory().pop(), historicalAddressBook.getCurrentAddressBook());
+        assertEquals(newData.getAddressBookHistory().removeLast(), historicalAddressBook.getCurrentAddressBook());
     }
 
     @Test
