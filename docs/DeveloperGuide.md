@@ -360,29 +360,32 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete Ahmad`<br>
+      Expected: Contact with name "Ahmad" is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete x` (where x is a number) <br>
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a contact not in the list) <br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a contact with the same name
+
+    1. Test case: `delete Jeremy` with more than one contact with the name `Jeremy` <br>
+        Expected: User is prompted to be more specific. Details of the required change are shown in the status message. Status bar remains the same.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Checking if changes in data are saved
+   1. Use any of the data changing commands eg.`add` `delete` `edit`.
+   2. Exit ClientHub with `exit` or closing the window.
+   3. Re-launch the app by double-clicking the jar file. <br>
+      Expected: Changes made previously are loaded into the displayed data
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
