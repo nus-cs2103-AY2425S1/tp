@@ -55,35 +55,25 @@ public class UnmatchCommandTest {
     public void execute_validContactAndJob_unmatchSuccessful() throws Exception {
         Index contactIndex = INDEX_FIRST_PERSON;
         Index jobIndex = INDEX_FIRST_JOB;
+
         // First, set up the model with an existing match
         setModelAfterMatching(model, contactIndex, jobIndex);
 
         UnmatchCommand unmatchCommand = new UnmatchCommand(contactIndex, jobIndex);
 
-        Person contactToUnmatch = model.getFilteredPersonList().get(contactIndex.getZeroBased());
-        Job jobToUnmatch = model.getFilteredJobList().get(jobIndex.getZeroBased());
-
-        // Execute the unmatch command to update the model's state
-        CommandResult commandResult = unmatchCommand.execute(model);
-
-        // Retrieve the updated contact from the model after unmatching
-        Person updatedContact = model.getFilteredPersonList().get(contactIndex.getZeroBased());
-        Person matchedContact = new PersonBuilder(contactToUnmatch).withMatch(jobToUnmatch.getIdentifier()).build();
-        // Check if the contact is no longer matched with the job
-        assertFalse(updatedContact.hasMatched(jobToUnmatch.getIdentifier()));
-
-        String expectedMessage = String.format(UnmatchCommand.MESSAGE_UNMATCH_SUCCESS,
-                Messages.format(updatedContact), Messages.format(jobToUnmatch));
-
-        // Update expectedModel with the unmatched contact from expectedModel's list
+        // Set up the expected model state after unmatching
         Person contactInExpectedModel = expectedModel.getFilteredPersonList().get(contactIndex.getZeroBased());
         Person unmatchedContact = new PersonBuilder(contactInExpectedModel).withoutMatch().build();
         expectedModel.setPerson(contactInExpectedModel, unmatchedContact);
-        model.setPerson(model.getFilteredPersonList().get(contactIndex.getZeroBased()), matchedContact);
 
-        // Verify the output message and model state
-        assertCommandSuccess(unmatchCommand, model, commandResult, expectedModel);
+        // Format the expected success message
+        String expectedMessage = String.format(UnmatchCommand.MESSAGE_UNMATCH_SUCCESS,
+                Messages.format(unmatchedContact), Messages.format(expectedModel.getFilteredJobList().get(jobIndex.getZeroBased())));
+
+        // Verify the command execution and resulting state
+        assertCommandSuccess(unmatchCommand, model, expectedMessage, expectedModel);
     }
+
 
     @Test
     public void execute_contactIndexOutOfRange_failure() {
