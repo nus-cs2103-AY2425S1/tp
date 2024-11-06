@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-
+* Multiple areas of the code were completed with the help of generative AI including ChatGPT, Codeium and ClaudeAI.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**

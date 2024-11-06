@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.PaymentCommand;
 import seedu.address.model.person.Name;
 
@@ -71,5 +72,32 @@ public class PaymentCommandParserTest {
                         + PREFIX_DATE + "2024-10-24 1000 "
                         + PREFIX_PAID + "maybe",
                 PaymentCommand.MESSAGE_PAYMENT_STATUS_INVALID);
+    }
+
+    @Test
+    public void parse_multipleValidDateArgs_throwsParseException() {
+        assertParseFailure(parser, "John Doe "
+                        + PREFIX_DATE + "2024-10-24 1000 "
+                        + PREFIX_DATE + "2024-11-01 1200 "
+                        + PREFIX_PAID + "paid",
+                String.format(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE)));
+    }
+    @Test
+    public void parse_multipleValidPaidArgs_throwsParseException() {
+        assertParseFailure(parser, "John Doe "
+                        + PREFIX_DATE + "2024-10-24 1000 "
+                        + PREFIX_PAID + "paid "
+                        + PREFIX_PAID + "paid",
+                String.format(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID)));
+    }
+
+    @Test
+    public void parse_multipleValidPaidAndDateArgs_throwsParseException() {
+        assertParseFailure(parser, "John Doe "
+                        + PREFIX_DATE + "2024-10-24 1000 "
+                        + PREFIX_DATE + "2024-11-01 1200 "
+                        + PREFIX_PAID + "paid "
+                        + PREFIX_PAID + "paid",
+                String.format(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE, PREFIX_PAID)));
     }
 }

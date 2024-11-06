@@ -23,6 +23,7 @@ public class ListAppointmentsCommandParser implements Parser<ListAppointmentsCom
      */
     public ListAppointmentsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE);
 
         Optional<LocalDate> dateFilter = Optional.empty();
         Optional<LocalTime> timeFilter = Optional.empty();
