@@ -122,4 +122,25 @@ public class VolunteerParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a given string as a search term returns it after validation.
+     *
+     * @param searchTerm The email string to be parsed.
+     * @return A valid search term as a string object.
+     * @throws ParseException If the given search term does not conform to Name's constraints.
+     */
+    public static String parseSearchTerm(String searchTerm) throws ParseException {
+        requireNonNull(searchTerm);
+        searchTerm = searchTerm.trim();
+        if (searchTerm.isEmpty()) {
+            throw new ParseException("Names cannot be empty!");
+        }
+
+        if (!searchTerm.matches(Name.VALIDATION_REGEX)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+
+        return searchTerm;
+    }
 }
