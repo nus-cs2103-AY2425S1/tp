@@ -46,6 +46,8 @@ public class EditAppointmentCommand extends Command {
             + PREFIX_NEW_START_TIME + "11:00 "
             + PREFIX_NEW_END_TIME + "12:00";
     public static final String MESSAGE_SUCCESS = "Edited appointment: %1$s";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT =
+        "An appointment already exists at the edited date and time";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
     public static final String MESSAGE_INVALID_DATE = "Invalid date. Please use the DD/MM/YYYY format";
     public static final String MESSAGE_INVALID_TIME = "Invalid time. Please use the HH:MM format";
@@ -95,7 +97,12 @@ public class EditAppointmentCommand extends Command {
 
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppointmentDescriptor);
 
-        model.editAppointment(appointmentToEdit, patient, editedAppointment);
+        boolean success = model.editAppointment(appointmentToEdit, patient, editedAppointment);
+
+        if (!success) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedAppointment));

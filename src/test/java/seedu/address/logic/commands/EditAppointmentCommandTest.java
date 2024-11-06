@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_BOB;
@@ -17,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_TIME
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.EditAppointmentCommand.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +26,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.appointment.Appointment;
@@ -36,9 +37,14 @@ import seedu.address.testutil.PersonBuilder;
 
 public class EditAppointmentCommandTest {
     private static final LocalDate VALID_DATE = LocalDate.of(2025, 10, 22);
+    private static final String VALID_DATE_STRING = "22/10/2025";
     private static final LocalTime VALID_START_TIME = LocalTime.of(10, 0);
     private static final LocalTime VALID_END_TIME = LocalTime.of(11, 0);
     private static final LocalDateTime startDateTime = LocalDateTime.of(2025, 10, 22, 10, 0);
+    private static final LocalTime CONFLICTING_LOCAL_TIME_HOUR_START = VALID_END_TIME.plusMinutes(1);
+    private static final String CONFLICTING_LOCAL_TIME_HOUR_START_STRING = "11:01";
+    private static final LocalTime CONFLICTING_LOCAL_TIME_HOUR_END = VALID_END_TIME.plusMinutes(60);
+    private static final String CONFLICTING_LOCAL_TIME_HOUR_END_STRING = "12:00";
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
@@ -163,4 +169,43 @@ public class EditAppointmentCommandTest {
                 + editAppointmentDescriptor + "}";
         assertEquals(expected, editAppointmentCommand.toString());
     }
+
+    @Test
+    public void execute_conflictingAppointment_throwsCommandException() throws Exception {
+        Model modelStub = new ModelManager();
+        Person testPerson = new PersonBuilder().build();
+        modelStub.addPerson(testPerson);
+
+
+        Appointment expected = new Appointment(testPerson.getName().toString(), testPerson.getNric(),
+                LocalDateTime.of(VALID_DATE, VALID_START_TIME), LocalDateTime.of(VALID_DATE, VALID_END_TIME));
+
+        modelStub.addAppointment(expected, testPerson);
+
+        Appointment newExpected = new Appointment(testPerson.getName().toString(), testPerson.getNric(),
+                LocalDateTime.of(VALID_DATE, CONFLICTING_LOCAL_TIME_HOUR_START),
+                LocalDateTime.of(VALID_DATE, CONFLICTING_LOCAL_TIME_HOUR_END));
+
+        modelStub.addAppointment(newExpected, testPerson);
+
+        Appointment newAppointment = new Appointment(testPerson.getName().toString(), testPerson.getNric(),
+            LocalDateTime.of(VALID_DATE, CONFLICTING_LOCAL_TIME_HOUR_START),
+            LocalDateTime.of(VALID_DATE, CONFLICTING_LOCAL_TIME_HOUR_END));
+
+        assertTrue(modelStub.hasAppointment(newAppointment));
+
+        EditAppointmentCommand.EditAppointmentDescriptor desc_Appointment = new EditAppointmentDescriptorBuilder()
+                .withDate(VALID_DATE_STRING)
+                .withStartTime(CONFLICTING_LOCAL_TIME_HOUR_START_STRING)
+                .withEndTime(CONFLICTING_LOCAL_TIME_HOUR_END_STRING).build();
+
+        EditAppointmentCommand editCommandResult = new EditAppointmentCommand(new Nric(testPerson.getNric().toString()),
+                startDateTime,
+                desc_Appointment);
+
+        assertThrows(CommandException.class, EditAppointmentCommand
+            .MESSAGE_DUPLICATE_APPOINTMENT, () -> editCommandResult.execute(modelStub));
+
+    }
+
 }

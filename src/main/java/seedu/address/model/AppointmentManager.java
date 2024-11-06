@@ -112,9 +112,14 @@ public class AppointmentManager {
      * @param person The person from whom the appointment is edited.
      * @param newAppointment The new appointment to replace the old appointment.
      */
-    public void editAppointment(Appointment appointment, Person person, Appointment newAppointment) {
+    public boolean editAppointment(Appointment appointment, Person person, Appointment newAppointment) {
+        if (hasConflict(newAppointment, appointments)) {
+            return false;
+        }
+
         person.editAppointment(appointment, newAppointment);
         update();
+        return true;
     }
 
     /**
