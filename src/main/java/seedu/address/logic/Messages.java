@@ -55,7 +55,7 @@ public class Messages {
                 .append("Job: ")
                 .append(person.getJob())
                 .append("\n")
-                .append("Tags: ");
+                .append("Tags:");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
