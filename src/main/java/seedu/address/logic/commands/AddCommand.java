@@ -1,6 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
+import static seedu.address.logic.Messages.LINE_BREAK;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS_CONTACT;
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_DESCRIPTION_INPUT;
+import static seedu.address.logic.Messages.MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX_GENERAL;
+import static seedu.address.logic.Messages.WHITESPACE;
+import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -20,27 +29,47 @@ import seedu.address.model.contact.Contact;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_TELEGRAM_HANDLE + "TELEGRAM "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_STUDENT_STATUS + "STUDENT_STATUS "
-            + PREFIX_ROLE + "ROLE [...]"
-            + "[" + PREFIX_NICKNAME + "NICKNAME]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_TELEGRAM_HANDLE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_STUDENT_STATUS + "undergraduate 3 "
-            + PREFIX_ROLE + "Admin "
-            + PREFIX_ROLE + "President "
+    public static final String MESSAGE_FUNCTION = COMMAND_WORD
+            + ": Adds a contact to the address book.";
+    public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE
+            + PREFIX_NAME + "FULL_NAME" + WHITESPACE
+            + PREFIX_TELEGRAM_HANDLE + "TELEGRAM" + WHITESPACE
+            + PREFIX_EMAIL + "EMAIL" + WHITESPACE
+            + PREFIX_STUDENT_STATUS + "STUDENT_STATUS" + WHITESPACE
+            + PREFIX_ROLE + "ROLE [...]" + WHITESPACE
+            + "[" + PREFIX_NICKNAME + "NICKNAME]");
+    public static final String MESSAGE_COMMAND_EXAMPLE = "Example: "
+            + COMMAND_WORD + WHITESPACE
+            + PREFIX_NAME + "John Doe" + WHITESPACE
+            + PREFIX_TELEGRAM_HANDLE + "johnny_9876_haha" + WHITESPACE
+            + PREFIX_EMAIL + "johnd@example.com" + WHITESPACE
+            + PREFIX_STUDENT_STATUS + "undergraduate 3" + WHITESPACE
+            + PREFIX_ROLE + "Admin" + WHITESPACE
+            + PREFIX_ROLE + "President" + WHITESPACE
             + PREFIX_NICKNAME + "altName";
+    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT =
+            COMMAND_FORMAT_PREAMBLE + WHITESPACE + AddCommand.MESSAGE_COMMAND_FORMAT + "\n"
+                    + String.format(MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD + " " + AddCommand.COMMAND_WORD);
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_FIELDS = "This contact has a duplicate field as another contact";
+    public static final String MESSAGE_MISSING_DESCRIPTION =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_MISSING_DESCRIPTION_INPUT, "add")
+                    + LINE_BREAK + MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT);
+    public static final String MESSAGE_DUPLICATE_CONTACT =
+            String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "Contact to add", "the contact to add");
+    public static final String MESSAGE_DUPLICATE_FIELD_CONTACT =
+            String.format(MESSAGE_DUPLICATE_FIELDS_CONTACT,
+                    "If the details of the contact for adding is correct, please rectify the existing "
+                            + "contacts details before adding the new contact.");
+    public static final String MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    String.format(MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX_GENERAL,
+                            styleCommand(COMMAND_WORD))
+                            + LINE_BREAK + MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT);
+
+    public static final String MESSAGE_MISSING_PREFIXES =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, "%s" + WHITESPACE + "mandatory prefix(es) is/are missing."
+                    + LINE_BREAK + MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT);
 
     private final Contact toAdd;
 
@@ -61,7 +90,7 @@ public class AddCommand extends Command {
         }
 
         if (model.hasDuplicateFields(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_FIELDS);
+            throw new CommandException(MESSAGE_DUPLICATE_FIELD_CONTACT);
         }
 
         model.addContact(toAdd);

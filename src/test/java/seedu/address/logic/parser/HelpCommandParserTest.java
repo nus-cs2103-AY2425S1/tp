@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -51,6 +50,6 @@ public class HelpCommandParserTest {
     @Test
     public void parse_failure() {
         String userInput = "random";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, HelpCommand.MESSAGE_HELP_NOT_COMMAND_WORD);
     }
 }

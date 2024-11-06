@@ -10,18 +10,18 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nickname;
+import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
 
 public class SampleDataUtilTest {
     private Contact[] sampleContacts =
         new Contact[] {
-            new Contact(new Name("John Haas"), new TelegramHandle("jason1185"),
+            new Contact(new Name("Alexandra Haas"), new TelegramHandle("jason1185"),
                 new Email("lynchamanda@example.org"),
                 new StudentStatus("undergraduate 6"),
-                getRoleSet("Admin"),
+                getRoleSet("President"),
                 new Nickname("Matthew Owens")),
             new Contact(new Name("Lori Werner"), new TelegramHandle("roger4548"),
                         new Email("levyjon@example.com"),
@@ -33,22 +33,22 @@ public class SampleDataUtilTest {
                         new StudentStatus("undergraduate 3"),
                         getRoleSet("Events (internal)"),
                         new Nickname("")),
-            new Contact(new Name("Matthew Gray"), new TelegramHandle("elizabeth3027"),
+            new Contact(new Name("Aaron Gray @ Li Zheng Da"), new TelegramHandle("elizabeth3027"),
                         new Email("millerlisa@example.net"),
                         new StudentStatus("undergraduate 2"),
                         getRoleSet("Events (external)", "Events (internal)"),
                         new Nickname("")),
-            new Contact(new Name("Rebecca Ray"), new TelegramHandle("mandy6034"),
+            new Contact(new Name("Alex Ray (Chen Zi Ning)"), new TelegramHandle("mandy6034"),
                         new Email("zmoore@example.com"),
                         new StudentStatus("undergraduate 2"),
                         getRoleSet("Events (internal)", "Admin"),
                         new Nickname("")),
-            new Contact(new Name("Shirley Gay"), new TelegramHandle("samantha6699"),
+            new Contact(new Name("Adam Ijaaz S/O Ismail"), new TelegramHandle("samantha6699"),
                         new Email("gibsondaniel@example.com"),
                         new StudentStatus("undergraduate 5"),
                         getRoleSet("Marketing", "Admin"),
                         new Nickname("")),
-            new Contact(new Name("James Mitchell"), new TelegramHandle("jose7636"),
+            new Contact(new Name("Avika D/O Thangarajan"), new TelegramHandle("jose7636"),
                         new Email("zsims@example.com"),
                         new StudentStatus("undergraduate 2"),
                         getRoleSet("External Relations", "Events (external)"),
@@ -61,7 +61,7 @@ public class SampleDataUtilTest {
             new Contact(new Name("Jim Tran"), new TelegramHandle("shannon1526"),
                         new Email("phillip83@example.com"),
                         new StudentStatus("masters"),
-                        getRoleSet("President"),
+                        getRoleSet("Events (External)"),
                         new Nickname("")),
             new Contact(new Name("Brendan Wang"), new TelegramHandle("vanessa2181"),
                         new Email("jdavis@example.com"),

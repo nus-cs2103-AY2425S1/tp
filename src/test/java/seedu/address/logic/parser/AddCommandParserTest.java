@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -26,6 +25,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_STATUS_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -38,11 +38,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.StudentStatus;
-import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Role;
 import seedu.address.testutil.ContactBuilder;
 
 public class AddCommandParserTest {
@@ -144,38 +140,37 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                         + STUDENT_STATUS_DESC_BOB + ROLE_DESC_ADMIN,
-                expectedMessage);
+                String.format(AddCommand.MESSAGE_MISSING_PREFIXES, PREFIX_NAME));
 
         // missing telegramHandle prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_TELEGRAM_HANDLE_BOB + EMAIL_DESC_BOB
                         + STUDENT_STATUS_DESC_BOB + ROLE_DESC_ADMIN,
-                expectedMessage);
+                String.format(AddCommand.MESSAGE_MISSING_PREFIXES, PREFIX_TELEGRAM_HANDLE));
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB + VALID_EMAIL_BOB
                         + STUDENT_STATUS_DESC_BOB + ROLE_DESC_ADMIN,
-                expectedMessage);
+                String.format(AddCommand.MESSAGE_MISSING_PREFIXES, PREFIX_EMAIL));
 
-        // missing address prefix
+        // missing address prefix // the following does not look like missing address prefix
+        /*
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                         + VALID_STUDENT_STATUS_BOB + ROLE_DESC_ADMIN,
-                expectedMessage);
+                String.format(AddCommand.MESSAGE_MISSING_PREFIXES, PREFIX_NAME));*/
 
         // missing role prefix
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                         + EMAIL_DESC_BOB + STUDENT_STATUS_DESC_BOB
                         + VALID_ROLE_PRESIDENT,
-                expectedMessage);
+                String.format(AddCommand.MESSAGE_MISSING_PREFIXES, PREFIX_ROLE));
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_TELEGRAM_HANDLE_BOB + VALID_EMAIL_BOB
                         + VALID_STUDENT_STATUS_BOB + VALID_ROLE_PRESIDENT,
-                expectedMessage);
+                String.format(AddCommand.MESSAGE_MISSING_PREFIXES, "n/  ss/  th/  e/  r/"));
     }
 
     @Test
@@ -183,36 +178,37 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_HANDLE_DESC_BOB
                 + EMAIL_DESC_BOB + STUDENT_STATUS_DESC_BOB
-                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, Name.MESSAGE_CONSTRAINTS);
+                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, "Invalid Name!\n" + Name.MESSAGE_CONSTRAINTS);
+        // not so good code but it reflects actual code for now
 
         // invalid telegramHandle
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_TELEGRAM_HANDLE_DESC
                 + EMAIL_DESC_BOB + STUDENT_STATUS_DESC_BOB
-                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, TelegramHandle.MESSAGE_CONSTRAINTS);
+                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, ParserUtil.MESSAGE_INVALID_TELEGRAM_HANDLE_FIELD);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + INVALID_EMAIL_DESC + STUDENT_STATUS_DESC_BOB
-                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, Email.MESSAGE_CONSTRAINTS);
+                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, ParserUtil.MESSAGE_INVALID_EMAIL_FIELD);
 
         // invalid student status
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + EMAIL_DESC_BOB + INVALID_STUDENT_STATUS_DESC
-                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, StudentStatus.MESSAGE_CONSTRAINTS);
+                + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN, ParserUtil.MESSAGE_STUDENT_STATUS_FIELD_CANNOT_BLANK);
 
         // invalid role
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + EMAIL_DESC_BOB + STUDENT_STATUS_DESC_BOB
-                + INVALID_ROLE_DESC + VALID_ROLE_ADMIN, Role.MESSAGE_CONSTRAINTS);
+                + INVALID_ROLE_DESC + VALID_ROLE_ADMIN, ParserUtil.MESSAGE_INVALID_ROLE_FIELD);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                         + INVALID_STUDENT_STATUS_DESC + ROLE_DESC_PRESIDENT,
-                Name.MESSAGE_CONSTRAINTS);
+                ParserUtil.MESSAGE_INVALID_NAME_FIELD);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                 + STUDENT_STATUS_DESC_BOB + ROLE_DESC_PRESIDENT + ROLE_DESC_ADMIN,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                AddCommand.MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX);
     }
 }

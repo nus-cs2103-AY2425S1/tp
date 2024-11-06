@@ -88,8 +88,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_setTargetIndexFailureNameNotInAddressBook_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(new Name("abzczdzezfghzizjzkzlmnopqrstuvwxyz"));
-        String expectedMessage = String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
+        String fullName = "abzczdzezfghzizjzkzlmnopqrstuvwxyz";
+        String fullNameOfficialCase = fullName.replaceAll("a", "A");
+        DeleteCommand deleteCommand = new DeleteCommand(new Name(fullName));
+        String expectedMessage = String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK, fullNameOfficialCase);
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }

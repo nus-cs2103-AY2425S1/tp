@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * Jackson-friendly version of {@link Role}.

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -95,14 +96,16 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listWithInvalidWords_throwsParseException() {
         assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, " There shouldn't' be any words after "
+                        + "the list command word except for a few special cases. "
+                        + String.format(MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD
+                        + " " + ListCommand.COMMAND_WORD)), ()-> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
-    public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+    public void parseCommand_unrecognisedInput_throwsParseException() { //not too good a code
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        "\n" + HelpCommand.MESSAGE_USAGE), ()-> parser.parseCommand(""));
     }
 
     @Test

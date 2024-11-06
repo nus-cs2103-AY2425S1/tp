@@ -3,13 +3,11 @@ package seedu.address.model.contact;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
 
 /**
  * Represents a Contact in the address book.
@@ -24,7 +22,7 @@ public class Contact {
 
     // Data fields
     private final StudentStatus studentStatus;
-    private final Set<Role> roles = new HashSet<>();
+    private final Set<Role> roles = new TreeSet<>(); // allows ordered representation
     private final Nickname nickname;
 
     /**

@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_PREFIX_FIELD;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETER_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -18,13 +16,12 @@ import java.util.Set;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -41,11 +38,17 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
         if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(FindCommand.MESSAGE_MISSING_DESCRIPTION);
         }
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
+                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME)) {
+            throw new ParseException(FindCommand.MESSAGE_MISSING_PREFIX);
+        }
+
+        // repeat in add command
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(FindCommand.MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX);
         }
 
         List<String> nameKeywords = List.of();
@@ -70,10 +73,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_STUDENT_STATUS).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_STUDENT_STATUS).get();
             studentStatusKeywords = getKeywords(arg);
+
         }
         if (argMultimap.getValue(PREFIX_NICKNAME).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_NICKNAME).get();
-            nicknameKeywords = getKeywords(arg);
+            nicknameKeywords = getKeywords(arg); // nickname no parsing problem
         }
 
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
@@ -97,10 +101,37 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (trimmedArg.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_EMPTY_PREFIX_FIELD, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_BLANK_FIELD));
         }
         String[] keywords = trimmedArg.split("\\s+");
         return Arrays.asList(keywords);
     }
+
+    // from add command but change from allMatch to anyMatch
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Arrays.stream(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /*
+    private void checkCanParse(List<String> keywords, Function<String, ParserUtil> parser) throws ParseException {
+        String invalidInput = keywords.stream().map(word -> {
+                    try {
+                        parser.apply(word);
+                        return ""; // successful
+                    } catch (ParseException e) {
+                        return e.getMessage(); // fail
+                    }
+                }).filter(inputValidity -> !inputValidity.isEmpty())
+                .limit(1) // to standardise throughout that 1 error at the time is only shown
+                .reduce("", (toReturn, errorMessage) -> errorMessage);
+        if (!invalidInput.isEmpty()) {
+            throw new ParseException(invalidInput);
+        }
+
+    }*/
 }
 

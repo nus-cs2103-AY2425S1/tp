@@ -38,11 +38,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.StudentStatus;
-import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Role;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -50,7 +46,7 @@ public class EditCommandParserTest {
     private static final String ROLE_EMPTY = " " + PREFIX_ROLE;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_COMMAND_FORMAT);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -86,29 +82,38 @@ public class EditCommandParserTest {
     // Format {edit 1 <desc>} example of <desc>: " n/James&"
     @Test
     public void parse_invalidParameter_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC, ParserUtil.MESSAGE_INVALID_NAME_FIELD);
+        // invalid name
         assertParseFailure(parser, "1"
-                + INVALID_TELEGRAM_HANDLE_DESC, TelegramHandle.MESSAGE_CONSTRAINTS); // invalid handle
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+                + INVALID_TELEGRAM_HANDLE_DESC,
+                ParserUtil.MESSAGE_INVALID_TELEGRAM_HANDLE_FIELD); //
+        // invalid handle
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, ParserUtil.MESSAGE_INVALID_EMAIL_FIELD);
+        // invalid email
 
         // invalid student status
-        assertParseFailure(parser, "1" + INVALID_STUDENT_STATUS_DESC, StudentStatus.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_STUDENT_STATUS_DESC, // empty string
+                ParserUtil.MESSAGE_STUDENT_STATUS_FIELD_CANNOT_BLANK);
 
-        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
+        assertParseFailure(parser, "1" + INVALID_ROLE_DESC,
+                ParserUtil.MESSAGE_INVALID_ROLE_FIELD); // invalid role
 
-        // invalid phone followed by valid email
+        // invalid telegram handle followed by valid email
         assertParseFailure(parser, "1" + INVALID_TELEGRAM_HANDLE_DESC
-                + EMAIL_DESC_AMY, TelegramHandle.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_AMY, ParserUtil.MESSAGE_INVALID_TELEGRAM_HANDLE_FIELD);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + ROLE_DESC_ADMIN + ROLE_DESC_PRESIDENT + ROLE_EMPTY, Role.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + ROLE_DESC_ADMIN + ROLE_EMPTY + ROLE_DESC_PRESIDENT, Role.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + ROLE_EMPTY + ROLE_DESC_ADMIN + ROLE_DESC_PRESIDENT, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ROLE_DESC_ADMIN + ROLE_DESC_PRESIDENT + ROLE_EMPTY,
+                ParserUtil.MESSAGE_ROLE_FIELD_CANNOT_BLANK);
+        assertParseFailure(parser, "1" + ROLE_DESC_ADMIN + ROLE_EMPTY + ROLE_DESC_PRESIDENT,
+                ParserUtil.MESSAGE_ROLE_FIELD_CANNOT_BLANK);
+        assertParseFailure(parser, "1" + ROLE_EMPTY + ROLE_DESC_ADMIN + ROLE_DESC_PRESIDENT,
+                ParserUtil.MESSAGE_ROLE_FIELD_CANNOT_BLANK);
 
-        // multiple invalid values, but only the first invalid value is captured
+        // multiple invalid values, but only the first invalid value is captured (think first in code order)
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_STUDENT_STATUS_AMY
-                + VALID_TELEGRAM_HANDLE_AMY, Name.MESSAGE_CONSTRAINTS);
+                + VALID_TELEGRAM_HANDLE_AMY, ParserUtil.MESSAGE_INVALID_NAME_FIELD);
     }
 
     // {edit Alex Yeoh n/Amy Bee ...}
@@ -132,13 +137,14 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidNameToEdit_failure() {
         String userInput = DEFAULT_NAME + "&" + NAME_DESC_AMY;
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput,
+                ParserUtil.MESSAGE_INVALID_NAME_FIELD);
     }
 
     @Test
     public void parse_noFieldsEdited_failure() {
         String userInput = DEFAULT_NAME;
-        assertParseFailure(parser, userInput, EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, userInput, EditCommand.MESSAGE_MISSING_PREFIX);
     }
 
     @Test
@@ -244,6 +250,6 @@ public class EditCommandParserTest {
     public void parse_resetRoles_failure() {
         String userInput = INDEX_THIRD_CONTACT.getOneBased() + ROLE_EMPTY;
 
-        assertParseFailure(parser, userInput, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_ROLE_FIELD_CANNOT_BLANK);
     }
 }

@@ -8,10 +8,10 @@ import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nickname;
+import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
 
 
 /**
@@ -38,7 +38,7 @@ public class EditContactDescriptorBuilder {
         descriptor.setTelegramHandle(contact.getTelegramHandle());
         descriptor.setEmail(contact.getEmail());
         descriptor.setStudentStatus(contact.getStudentStatus());
-        descriptor.setRoles(contact.getRoles());
+        descriptor.setAndSortRoles(contact.getRoles());
         descriptor.setNickname(contact.getNickname());
     }
 
@@ -80,7 +80,7 @@ public class EditContactDescriptorBuilder {
      */
     public EditContactDescriptorBuilder withRoles(String... roles) {
         Set<Role> roleSet = Stream.of(roles).map(Role::new).collect(Collectors.toSet());
-        descriptor.setRoles(roleSet);
+        descriptor.setAndSortRoles(roleSet);
         return this;
     }
 

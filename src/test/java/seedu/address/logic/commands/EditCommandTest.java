@@ -168,7 +168,8 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(name, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK);
+        assertCommandFailure(editCommand, model, String.format(
+                Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK, userInput));
     }
 
     @Test

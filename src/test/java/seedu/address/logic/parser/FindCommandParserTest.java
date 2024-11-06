@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_PREFIX_FIELD;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETER_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ADMIN;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_PRESIDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -22,13 +21,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
-import seedu.address.model.tag.Role;
 import seedu.address.testutil.ContainsKeywordsPredicateBuilder;
 
 public class FindCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_FUNCTION);
 
     private static final List<String> NAME_KEYWORD_LIST = Arrays.asList("amy", "Bob");
     private static final List<String> TELEGRAM_HANDLE_KEYWORD_LIST = Arrays.asList("amy", "123");
@@ -38,7 +36,7 @@ public class FindCommandParserTest {
     private static final List<String> NICKNAME_KEYWORD_LIST = Arrays.asList("amy", "bob");
     private static final String NAME_QUERY = " " + PREFIX_NAME + "amy Bob";
     private static final String TELEGRAM_HANDLE_QUERY = " " + PREFIX_TELEGRAM_HANDLE + "amy 123";
-    private static final String EMAIL_QUERY = " " + PREFIX_EMAIL + "gmail amy";
+    private static final String EMAIL_QUERY = " " + PREFIX_EMAIL + "gmail amy"; // sucessful one?
     private static final String STUDENT_STATUS_QUERY = " " + PREFIX_STUDENT_STATUS + "Undergrad phd";
     private static final String PRESIDENT_ROLE_QUERY = ROLE_DESC_PRESIDENT;
     private static final String INVALID_ROLE_QUERY = " " + PREFIX_ROLE + "invalid role";
@@ -50,16 +48,16 @@ public class FindCommandParserTest {
     @Test
     public void parse_missingParts_throwsParseException() {
         // no arguments
-        assertParseFailure(parser, "     ", String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", FindCommand.MESSAGE_MISSING_DESCRIPTION);
 
         // no prefix
-        assertParseFailure(parser, " Alice Bob", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " Alice Bob", FindCommand.MESSAGE_MISSING_PREFIX);
 
         // all empty prefix field
-        assertParseFailure(parser, " " + PREFIX_NAME, String.format(MESSAGE_EMPTY_PREFIX_FIELD));
+        assertParseFailure(parser, " " + PREFIX_NAME, MESSAGE_BLANK_FIELD);
 
         // only one empty prefix field
-        assertParseFailure(parser, " " + PREFIX_NAME + ROLE_DESC_PRESIDENT, String.format(MESSAGE_EMPTY_PREFIX_FIELD));
+        assertParseFailure(parser, " " + PREFIX_NAME + ROLE_DESC_PRESIDENT, MESSAGE_BLANK_FIELD);
     }
 
     @Test
@@ -134,7 +132,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRoleValue_failure() {
         String userInput = INVALID_ROLE_QUERY;
-        assertParseFailure(parser, userInput, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_ROLE_FIELD);
     }
 
     @Test

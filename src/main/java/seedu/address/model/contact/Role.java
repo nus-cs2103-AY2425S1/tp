@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.address.model.contact;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -6,11 +6,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Arrays;
 
 /**
- * Represents a Role in the address book.
+ * Represents a Role in the address book that has a natural ordering.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRoleName(String)}
  */
-public class Role {
-
+public class Role implements Comparable<Role> {
     public static final String PRESIDENT = "President";
     public static final String VICE_PRESIDENT = "Vice President";
     public static final String ADMIN = "Admin";
@@ -58,7 +57,7 @@ public class Role {
         requireNonNull(roleName);
         checkArgument(isValidRoleName(roleName), MESSAGE_CONSTRAINTS);
         this.roleName = toOfficialCase(roleName);
-        this.roleIndex = assignRoleIndex(roleName);
+        this.roleIndex = assignRoleIndex(this.roleName);
     }
 
     /**
@@ -83,13 +82,13 @@ public class Role {
     }
 
     private int assignRoleIndex(String roleName) {
-        assert roleName.equalsIgnoreCase(PRESIDENT)
-                || roleName.equalsIgnoreCase(VICE_PRESIDENT)
-                || roleName.equalsIgnoreCase(ADMIN)
-                || roleName.equalsIgnoreCase(MARKETING)
-                || roleName.equalsIgnoreCase(EVENTS_INTERNAL)
-                || roleName.equalsIgnoreCase(EVENTS_EXTERNAL)
-                || roleName.equalsIgnoreCase(EXTERNAL_RELATIONS);
+        assert roleName.equals(PRESIDENT) // must be case sensitive
+                || roleName.equals(VICE_PRESIDENT)
+                || roleName.equals(ADMIN)
+                || roleName.equals(MARKETING)
+                || roleName.equals(EVENTS_INTERNAL)
+                || roleName.equals(EVENTS_EXTERNAL)
+                || roleName.equals(EXTERNAL_RELATIONS);
 
         int errorStatus = -1;
 
@@ -109,8 +108,14 @@ public class Role {
         case EXTERNAL_RELATIONS:
             return EXTERNAL_RELATIONS_INDEX;
         default:
-            return errorStatus; // should not happen
+            assert false;
+            return errorStatus; // if happen, programming error
         }
+    }
+
+    @Override
+    public int compareTo(Role role) {
+        return getRoleIndex() - role.getRoleIndex();
     }
 
     @Override

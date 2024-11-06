@@ -17,10 +17,11 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain letter characters and spaces, it should neither be blank nor "
-                    + "contain numbers, with the following exceptions: " + ALIAS + ", " + SON_OF + ", "
-                    + DAUGHTER_OF + ", " + BRACKET_PAIR + ". These exceptions can be used, but must only appear once."
-                    + ALIAS + ", " + SON_OF + ", " + DAUGHTER_OF + " must be in the middle of the name while "
-                    + BRACKET_PAIR + " must be at the end of the name";
+                    + "contain numbers. But the following cases are still allowed: " + ALIAS + ", " + SON_OF
+                    + ", " + DAUGHTER_OF + ", " + BRACKET_PAIR + ". These cases can be used, but must only "
+                    + "appear once. " + ALIAS + ", " + SON_OF + ", " + DAUGHTER_OF + " must be in the middle "
+                    + "of the name while " + BRACKET_PAIR + " must be after the given name (at the end of the"
+                    + " full name)";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -91,7 +92,10 @@ public class Name {
         if (word.equalsIgnoreCase("s/o") || word.equalsIgnoreCase("d/o")) {
             return word.toUpperCase();
         }
-        // inspired from Baeldung <link>
+        if (word.substring(0, 1).equals("(")) {
+            return word.substring(0, 1) + Character.toUpperCase(word.charAt(1))
+                    + word.substring(2, word.length());
+        }
         return Character.toUpperCase(word.charAt(0)) + word.substring(1, word.length());
     }
 
@@ -141,5 +145,4 @@ public class Name {
     public int compareTo(Name otherName) {
         return fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
     }
-
 }

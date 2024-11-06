@@ -1,14 +1,17 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.tag.Role;
+import seedu.address.model.contact.Role;
 
 /**
  * An UI component that displays information of a {@code Contact}.
@@ -49,8 +52,12 @@ public class ContactCard extends UiPart<Region> {
     public ContactCard(Contact contact, int displayedIndex) {
         super(FXML);
         this.contact = contact;
+
         final String nicknamePrelabel = "aka ";
         final String telegramPrelabel = "@";
+        final int margin = 20; // try not to change this
+
+        // setting text
         id.setText(displayedIndex + ". ");
         name.setText(contact.getName().fullName);
         telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
@@ -60,9 +67,30 @@ public class ContactCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(role -> role.getRoleIndex()))
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
         String nicknameObtained = contact.getNickname().value;
+        Label nicknameLabel = null;
         if (!nicknameObtained.isEmpty()) {
-            nickname.getChildren().add(new Label(nicknamePrelabel + nicknameObtained));
+            nicknameLabel = new Label(nicknamePrelabel + nicknameObtained);
+            nicknameLabel.setWrapText(true);
+            nickname.getChildren().add(nicknameLabel);
         }
+
+        // event listener (code from somewhere)
+        final Label nicknameConfirm = nicknameLabel; // in order to be streamed in the event listener
+        cardPane.widthProperty().addListener(new ChangeListener<Number>() {
+            private Label[] labels = new Label[]{name, nicknameConfirm, email};
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double cardPaneWidth = newValue.doubleValue(); // Get the new width of the card pane
+                Arrays.stream(labels).filter(label -> label != null).forEach(label -> {
+                    double labelWidth = label.getWidth();
+                    if (labelWidth > cardPaneWidth || labelWidth < cardPaneWidth) {
+                        label.setPrefWidth(cardPaneWidth - margin); // Set the label width to match the
+                        // parent width
+                    }
+                });
+            }
+        });
     }
 
     /**

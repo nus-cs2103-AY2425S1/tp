@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.address.model.contact;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,7 +8,6 @@ import static java.util.Objects.requireNonNull;
  */
 public class Nickname {
 
-    public static final String MESSAGE_CONSTRAINTS = "Nicknames should not be empty";
     public final String value;
 
     /**
@@ -20,6 +19,7 @@ public class Nickname {
         requireNonNull(nickname);
         this.value = nickname.trim(); // in ParserUtil.java also have trim()
     }
+
 
     /**
      * Returns true if a given nickname is empty.

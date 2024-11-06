@@ -14,7 +14,7 @@ public class StudentStatus {
     public static final String UNDERGRADUATE_LOWERCASE = "undergraduate";
     public static final String UNDERGRADUATE_OFFICAL_CASE = toOfficialCase(UNDERGRADUATE_LOWERCASE);
     public static final String UNDERGRADUATE_START_YEAR = "1";
-    public static final String UNDERGRADUATE_END_YEAR = "6"; // why 6?
+    public static final String UNDERGRADUATE_END_YEAR = "6"; // 6 - maximum candidature for medicine students
     public static final String MASTERS_LOWERCASE = "masters";
     public static final String MASTERS_OFFICIAL_CASE = toOfficialCase(MASTERS_LOWERCASE);
     public static final String PHD_LOWERCASE = "phd";
@@ -25,8 +25,8 @@ public class StudentStatus {
             + UNDERGRADUATE_START_YEAR + " and " + UNDERGRADUATE_END_YEAR + " inclusive\n"
             + "2. " + MASTERS_OFFICIAL_CASE + "\n"
             + "3. " + PHD_OFFICIAL_CASE + "\n"
-            + "For " + UNDERGRADUATE_OFFICAL_CASE + " There must only be one whitespace between the word "
-            + "and the integer value.";
+            + "For " + UNDERGRADUATE_OFFICAL_CASE + ", There must only be one whitespace between the word "
+            + "and the integer value. E.g. Undergraduate 4";
 
     public static final String VALIDATION_REGEX =
             String.format("^((%s \\b[%s-%s]\\b)|%s|%s)$",

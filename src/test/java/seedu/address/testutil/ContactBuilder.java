@@ -7,10 +7,10 @@ import java.util.Set;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Nickname;
+import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
-import seedu.address.model.tag.Nickname;
-import seedu.address.model.tag.Role;
 import seedu.address.model.util.SampleDataUtil;
 
 /**

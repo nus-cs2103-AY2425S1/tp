@@ -8,15 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.LogsCenter;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f09-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Refer to full user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -25,7 +25,13 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
+    private Button goToButton;
+
+    @FXML
     private Label helpMessage;
+
+    @FXML
+    private Label linkMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -64,6 +70,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        getRoot().initStyle(StageStyle.UTILITY); // prevent minimise
         getRoot().show();
         getRoot().centerOnScreen();
     }
