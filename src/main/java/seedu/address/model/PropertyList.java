@@ -75,7 +75,7 @@ public class PropertyList implements ReadOnlyPropertyList {
      * The property must not already exist in the meet up list.
      */
     public void addProperty(Property p) {
-        logger.info(String.format("Adding [%s] to property list", p.getLandlordName()));
+        logger.info(String.format("Adding [%s] to property list", p.getAddress()));
         properties.add(p);
     }
 

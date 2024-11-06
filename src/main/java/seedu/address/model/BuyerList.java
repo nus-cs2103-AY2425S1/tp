@@ -49,6 +49,7 @@ public class BuyerList implements ReadOnlyBuyerList {
      * {@code buyers} must not contain duplicate buyers.
      */
     public void setBuyers(List<Buyer> buyers) {
+        requireNonNull(buyers);
         this.buyers.setBuyers(buyers);
     }
 
