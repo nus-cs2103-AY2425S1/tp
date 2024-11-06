@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.filename.Filename;
 import seedu.address.logic.commands.DeleteArchiveCommand;
-import seedu.address.logic.commands.LoadArchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
