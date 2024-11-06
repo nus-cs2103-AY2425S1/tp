@@ -62,7 +62,7 @@ public class Remark {
         for (Remark currentRemark: remarks) {
             combinedValues.append(currentRemark.value + "\n");
         }
-        return new Remark(combinedValues.toString());
+        return new Remark(combinedValues.toString().trim());
     }
 
 }
