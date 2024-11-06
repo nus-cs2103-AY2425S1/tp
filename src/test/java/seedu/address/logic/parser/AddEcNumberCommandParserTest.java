@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -39,10 +40,10 @@ public class AddEcNumberCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // EP: negative index
-        assertParseFailure(parser, "-5" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_INDEX);
 
-        // EP: zero index
-        assertParseFailure(parser, "0" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_FORMAT); // boundary value
+        // EP: zero index, boundary value
+        assertParseFailure(parser, "0" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // EP: invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -54,7 +55,7 @@ public class AddEcNumberCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // EP: invalid EcNumber
-        assertParseFailure(parser, "1" + INVALID_ECNUMBER_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1" + INVALID_ECNUMBER_DESC, EcNumber.MESSAGE_CONSTRAINTS);
     }
 
     @Test

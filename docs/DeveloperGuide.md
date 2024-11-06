@@ -1025,7 +1025,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
        Expected: No student is added. Error detail regarding class is shown in the status message. Status bar remains the same.
 
-    5. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/ s/M c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
+    5. Other incorrect add commands to try:<br>
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`<br>
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/ s/M c/2A`<br>
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1042,7 +1045,10 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try:<br>
+      `delete`<br>
+      `delete x`<br>
+      `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1059,9 +1065,35 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit 1 c/A1`<br>
        Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect edit commands to try: `edit`, `edit 0`, `edit c/1A c/2A`, `edit x c/1A` (where x is larger than the list size)<br>
+    4. Other incorrect edit commands to try:<br>
+       `edit`<br>
+       `edit 0`<br>
+       `edit c/1A c/2A`<br>
+       `edit x c/1A` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+2. _{ more test cases …​ }_
+
+### Adding EcName for a student
+
+1. Adding EcName for a student in the list
+
+    1. Prerequisites: List must not be empty, student for which EcName is added should already be in the list.
+
+    2. Test case: `addEcName 1 en/Sally Ho`<br>
+       Expected: First student will have his emergency contact name added. Name and emergency contact name will be shown in the status message.
+
+    3. Test case: `addEcName 1 en/`<br>
+       Expected: First student will have his emergency contact name deleted. Name of student with the emergency contact name deleted will be shown in the status message.
+
+    4. Test case: `addEcName 1 en/John Doe`<br>
+       Expected: First student's emergency contact name will be updated to "John Doe". Name and emergency contact name will be shown in the status message.
+
+    5. Other incorrect addEcName commands to try:<br>
+       `addEcName`<br>
+       `addEcName hhhh en/Jack`<br>
+       Expected: An error message is shown which includes the correct format of the addEcName command to follow. 
+   
 2. _{ more test cases …​ }_
 
 ### Adding EcNumber for a student
@@ -1079,7 +1111,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `addEcNumber 1 ep/123`<br>
        Expected: No emergency contact number is changed. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect addEcNumber commands to try: `addEcNumber`, `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
+    5. Other incorrect addEcNumber commands to try:<br> 
+       `addEcNumber`<br>
+       `addEcNumber abc ep/91234567`
+       `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1096,7 +1131,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
        Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addAttendance commands to try: `addAttendance`, `addAttendance 1 ad/24-09-24 ar/MC`, `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
+    4. Other incorrect addAttendance commands to try:<br>
+       `addAttendance`<br>
+       `addAttendance 1 ad/24-09-24 ar/MC`<br>
+       `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1113,7 +1151,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
        Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addAttendance commands to try: `addAttendance 1 ad/24-09-2024`, `addAttendance 1 ad/2024-12-12 ar/`, `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
+    4. Other incorrect addAttendance commands to try:<br>
+       `addAttendance 1 ad/24-09-2024`<br>
+       `addAttendance 1 ad/2024-12-12 ar/`<br>
+       `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1130,7 +1171,9 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addExam ex/Midterm#`<br>
        Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addExam commands to try: `addExam`, `addExam ex/`, `addExam ex/#@*`<br>
+    4. Other incorrect addExam commands to try:<br>
+       `addExam`<br>
+       `addExam ex/`, `addExam ex/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1147,7 +1190,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addExamScore 1 ex/Midterm sc/101.0`<br>
        Expected: No exam score is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addExamScore commands to try: `addExamScore 1 ex/Midterm`, `addExamScore 1 ex/Midterm sc/`, `addExamScore x ex/Midterm sc/70.0` (where x is larger than the list size)<br>
+    4. Other incorrect addExamScore commands to try:<br>
+       `addExamScore 1 ex/Midterm`<br>
+       `addExamScore 1 ex/Midterm sc/`<br>
+       `addExamScore x ex/Midterm sc/70.0` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1164,7 +1210,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deleteExam ex/Midterm#`<br>
        Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect deleteExam commands to try: `deleteExam`, `deleteExam ex/`, `deleteExam ex/#@*`<br>
+    4. Other incorrect deleteExam commands to try:<br>
+       `deleteExam`<br>
+       `deleteExam ex/`<br>
+       `deleteExam ex/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1181,7 +1230,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addSubmission sm/Assignment #1`<br>
        Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addSubmission commands to try: `addSubmission`, `addSubmission sm/`, `addSubmission sm/#@*`<br>
+    4. Other incorrect addSubmission commands to try:<br>
+       `addSubmission`<br>
+       `addSubmission sm/`<br>
+       `addSubmission sm/#@*`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1198,7 +1250,10 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/A`<br>
        Expected: No submission status is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addSubmissionStatus commands to try: `addSubmissionStatus 1 sm/Assignment 1`, `addSubmissionStatus 1 sm/Assignment 1 ss/`, `addSubmissionStatus x sm/Assignment 1 ss/Y` (where x is larger than the list size)<br>
+    4. Other incorrect addSubmissionStatus commands to try:<br>
+       `addSubmissionStatus 1 sm/Assignment 1`<br>
+       `addSubmissionStatus 1 sm/Assignment 1 ss/`<br>
+       `addSubmissionStatus x sm/Assignment 1 ss/Y` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1215,8 +1270,39 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deleteSubmission sm/Assignment #1`<br>
        Expected: No submission is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect deleteSubmission commands to try: `deleteSubmission`, `deleteSubmission sm/`, `deleteSubmission sm/#@*`<br>
+    4. Other incorrect deleteSubmission commands to try:<br>
+       `deleteSubmission`<br>
+       `deleteSubmission sm/`<br>
+       `deleteSubmission sm/#@*`<br>
        Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Filtering students
+
+1. Filters all students currently in the list based on the specified attribute and predicate 
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `filter n/John`<br>
+       Expected: Returns the students in the list who have John in their name. Confirmation message is shown in the status message, including the number of persons filtered.
+
+    3. Test case: `filter n/John Park`<br>
+       Expected: Returns the students in the list who have John OR Park in their name. Confirmation message is shown in the status message, including the number of persons filtered.
+
+    4. Test case: `filter n/John Park p/99999999 92929292`<br>
+       Expected: Returns the students in the list who match at least one name and one phone number. Confirmation message is shown in the status message, including the number of persons filtered.
+
+    5. Test case: `filter hhh`<br>
+       Expected: Filtering does not occur and an error message is depicted to show the correct format of the filter command.
+
+    6. Test case: `filter n/`<br>
+       Expected: Filtering does not occur and an error message is depicted to assert that the predicate values cannot be empty.
+
+    7. Other incorrect sort commands to try:<br>
+       `filter n`<br>
+       `filter n/ p/`<br>
+       Expected: Similar to previous
 
 2. _{ more test cases …​ }_
 
@@ -1232,7 +1318,9 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `sort abc`<br>
       Expected: List is not sorted, Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect sort commands to try: `sort`, `sort 1`<br>
+   4. Other incorrect sort commands to try:<br> 
+      `sort`<br>
+      `sort 1`<br>
       Expected: Similar to previous
 
 2. _{ more test cases …​ }_
