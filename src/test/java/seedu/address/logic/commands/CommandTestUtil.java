@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1, 123456";
+    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3, 123456";
     public static final String VALID_HOURS_AMY = "20";
     public static final String VALID_HOURS_BOB = "10";
     public static final String VALID_NAME_CLARA = "Clara Doe";
@@ -43,8 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_DEACON = "44444444";
     public static final String VALID_EMAIL_CLARA = "clara@example.com";
     public static final String VALID_EMAIL_DEACON = "deacon@example.com";
-    public static final String VALID_ADDRESS_CLARA = "Block 456, Clara Street 5";
-    public static final String VALID_ADDRESS_DEACON = "Block 789, Deacon Avenue 8";
+    public static final String VALID_ADDRESS_CLARA = "Block 456, Clara Street 5, 123456";
+    public static final String VALID_ADDRESS_DEACON = "Block 789, Deacon Avenue 8, 123456";
     public static final String VALID_HOURS_CLARA = "15";
     public static final String VALID_HOURS_DEACON = "25";
     public static final String VALID_SUBJECT_MATH = "Math";
