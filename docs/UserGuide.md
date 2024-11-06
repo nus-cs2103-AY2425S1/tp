@@ -57,6 +57,9 @@ any traditional point-and-click management app.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Prefixes (for the contact information) refer to any of these: `n/`, `p/`, `e/`, `t/`, which are
+  used for contact information (name, phone, email and tag respectively)
+
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -77,18 +80,15 @@ any traditional point-and-click management app.
 ## Command summary
 
 Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find by name**   | `find n/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
-**Find by email**   | `find e/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e/bigman123@email.com bobbyrick@example.com`
-**Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
-**Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
+**Find by contact information**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
 **Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag t/TAG [t/MORE_TAGS] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
 **Undo action** | `undo`
 **Redo action** | `redo`
 **List**   | `list`
@@ -151,30 +151,18 @@ Finds persons whose names, email address, contact number, or tag contain any of 
 
 Format: 
 
-`find n/KEYWORD [MORE_KEYWORDS]…​`
+`find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`
 
-`find p/KEYWORD [MORE_KEYWORDS]…​`
-
-`find e/KEYWORD [MORE_KEYWORDS]…​`
-
-`find t/KEYWORD [MORE_KEYWORDS]…​`
-
-
-* Only one field type can be specified per command.
-* Only the specified field is searched.
+* Only the specified fields are searched.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/bernice n/charlotte` returns `Bernice Yu`, `Charlotte Oliveiro`<br>
-  ![result for 'find n/bernice n/charlotte'](images/findBerniceCharlotteResult.png)
-
-Disallowed examples:
-* `find n/John p/82345670` will not succeed as intended, as the command only searches on single fields. "`p/82345670`" will be treated as a keyword string.
+* `find n/John` returns `johnathon` and `John Doe`
+* `find n/bernice t/floor` returns `Bernice Yu` and all contacts with tags containing `floor`<br>
+  ![result for 'find n/bernice t/floor'](images/findBerniceFloorResult.png)
 
 ### Deleting a person : `delete`
 
@@ -194,7 +182,7 @@ Examples:
 
 Adds the specified person's tag.
 
-Format: `addtag INDEX t/TAG [t/MORE_TAGS]`
+Format: `addtag INDEX t/TAG [t/MORE_TAGS]…​`
 
 * Adds the tags with the specified name `TAG` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -228,7 +216,7 @@ Disallowed examples:
 
 Categorizes a tag under a defined category.
 
-Format: `cattag t/TAG [t/MORE_TAGS] CATEGORY`
+Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 * Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
 * Currently available categories and their respective keywords are:
