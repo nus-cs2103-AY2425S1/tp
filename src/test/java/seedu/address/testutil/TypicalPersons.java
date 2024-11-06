@@ -29,6 +29,8 @@ import static seedu.address.testutil.TypicalTasks.DEADLINE_TASK;
 import static seedu.address.testutil.TypicalTasks.TODO_TASK;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.CARLA_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +38,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -93,11 +96,17 @@ public class TypicalPersons {
         ab.addTag(PHOTOGRAPHER);
         ab.addWedding(AMY_WEDDING);
         ab.addWedding(BOB_WEDDING);
+        ab.addWedding(WEDDING_TWO);
+        ab.addWedding(CARLA_WEDDING);
         ab.addTask(TODO_TASK);
         ab.addTask(DEADLINE_TASK);
 
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
+            for (Wedding wedding : person.getWeddings()) {
+                Wedding weddingInAb = ab.getWedding(wedding);
+                weddingInAb.increasePeopleCount();
+            }
         }
         return ab;
     }
