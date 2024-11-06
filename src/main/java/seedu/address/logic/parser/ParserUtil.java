@@ -167,8 +167,8 @@ public class ParserUtil {
         try {
             amount = Double.parseDouble(trimmedAmount);
         } catch (NumberFormatException e) {
-            logger.fine("ParseException caused by incorrect amount format.");
-            throw new ParseException(Messages.MESSAGE_INCORRECT_AMOUNT_FORMAT);
+            logger.fine("ParseException caused by invalid amount.");
+            throw new ParseException(Messages.MESSAGE_INVALID_AMOUNT);
         }
         return amount;
     }
