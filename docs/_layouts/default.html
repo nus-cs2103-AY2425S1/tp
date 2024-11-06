@@ -16,14 +16,14 @@
       <li>
         <a href="{{ item.url }}">{{ item.title }}</a>
         {% if item.toc %}
-        <button onclick="toggleTOC('{{ item.title | replace: ' ', '-' }}')">Details</button>
-        <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content hidden">
-          <ul>  <!-- Add this UL here -->
+        <!-- Display TOC directly, without the button -->
+        <div id="toc-{{ item.title | replace: ' ', '-' }}" class="toc-content">
+          <ul>
             {% if item.title == "User Guide" %}
             <li><a href="UserGuide.html#quick-start">Quick Start</a></li>
             <li><a href="UserGuide.html#features">Features</a></li>
             <li><a href="UserGuide.html#faq">FAQ</a></li>
-            <li><a href="UserGuide.html#known-issues">Know Issues</a></li>
+            <li><a href="UserGuide.html#known-issues">Known Issues</a></li>
             <li><a href="UserGuide.html#command-summary">Command Summary</a></li>
             {% elsif item.title == "Developer Guide" %}
             <li><a href="DeveloperGuide.html#acknowledgements">Acknowledgements</a></li>
@@ -46,13 +46,6 @@
   </main>
 </div>
 
-<script>
-  function toggleTOC(id) {
-    const toc = document.getElementById('toc-' + id);
-    toc.classList.toggle('hidden');
-  }
-</script>
-
 <style>
   /* Flex container for sidebar and main content */
   .content-container {
@@ -64,7 +57,9 @@
     position: fixed; /* Fix the sidebar position */
     top: 0;         /* Align it to the top of the viewport */
     left: 0;        /* Align it to the left */
-    width: 250px;  /* Set width of the sidebar */
+    width: 20%;  /* Set width of the sidebar */
+    max-width: 250px;        /* Maximum width for large screens */
+    min-width: 150px;        /* Minimum width for small screens */
     height: 100vh; /* Full height of the viewport */
     overflow-y: auto; /* Allow scrolling if content exceeds height */
     background-color: #f8f9fa; /* Optional: Background color */
@@ -76,12 +71,10 @@
   .page-content {
     flex: 1; /* Take up remaining space */
     padding: 20px;
+    margin-left: calc(clamp(150px, 20%, 250px)); /* Use `clamp` to restrict between 150px and 250px */
+  }
   }
 
-  /* Style for hidden class */
-  .hidden {
-    display: none;
-  }
 </style>
 
 </body>
