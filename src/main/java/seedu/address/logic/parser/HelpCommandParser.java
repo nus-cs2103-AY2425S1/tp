@@ -17,6 +17,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListAppointmentCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SchemeCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewPersonSchemeCommand;
@@ -112,6 +113,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case ViewPersonSchemeCommand.COMMAND_WORD:
             message = ViewPersonSchemeCommand.MESSAGE_USAGE;
+            break;
+
+        case SortCommand.COMMAND_WORD:
+            message = SortCommand.MESSAGE_USAGE;
             break;
 
         default:

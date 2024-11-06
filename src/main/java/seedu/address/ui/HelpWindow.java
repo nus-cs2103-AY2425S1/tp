@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListAppointmentCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SchemeCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewPersonSchemeCommand;
@@ -75,10 +76,12 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String ADD_APPOINTMENT_COMMAND = AddAppointmentCommand.COMMAND_WORD + "\n";
     private static final String DELETE_APPOINTMENT_COMMAND = DeleteAppointmentCommand.COMMAND_WORD + "\n";
 
+    private static final String SORT_COMMAND = SortCommand.COMMAND_WORD + "\n";
+
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEME_COMMAND,
-        SCHEME_VIEW_COMMAND, SCHEME_ADD_COMMAND, SCHEME_DELETE_COMMAND, LIST_APPOINTMENT_COMMAND,
-        ADD_APPOINTMENT_COMMAND, DELETE_APPOINTMENT_COMMAND, HELP_COMMAND, EXIT_COMMAND};
+        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEME_COMMAND, SCHEME_VIEW_COMMAND,
+        SCHEME_ADD_COMMAND, SCHEME_DELETE_COMMAND, LIST_APPOINTMENT_COMMAND, ADD_APPOINTMENT_COMMAND, SORT_COMMAND,
+        DELETE_APPOINTMENT_COMMAND, UNDO_COMMAND, HELP_COMMAND, EXIT_COMMAND};
 
     @FXML
     private Button copyButton;

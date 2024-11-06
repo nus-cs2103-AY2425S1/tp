@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -30,13 +29,14 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons in the address book according to the "
             + "given parameters. Matching is case-insensitive. A combination of the following parameters can be used.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "START_OF_NAME] "
-            + "[" + PREFIX_ADDRESS + "PART_OF_ADDRESS] "
-            + "[" + PREFIX_PRIORITY + "PRIORITY] "
-            + "[" + PREFIX_INCOME + "INCOME]\n"
+            + "[" + PREFIX_NAME + "START_OF_NAME]... "
+            + "[" + PREFIX_ADDRESS + "PART_OF_ADDRESS]... "
+            + "[" + PREFIX_PRIORITY + "PRIORITY]... "
+            + "[" + PREFIX_INCOME + "INCOME]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jo "
-            + PREFIX_ADDRESS + "Clementi | Serangoon "
+            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_ADDRESS + "Serangoon "
             + PREFIX_PRIORITY + "HIGH "
             + PREFIX_INCOME + "1000\n"
             + "Note that the corresponding prefix must be used everytime a new filter is given.";
@@ -45,13 +45,10 @@ public class FindCommand extends Command {
     private final List<String> addresses;
     private final List<String> priorities;
     private final List<String> incomes;
-    private Predicate<Person> finalPredicate;
-
 
     /**
-     * Creates a FindCommand to filter the address book by the given lists of
-     * {@code names}, {@code addresses}, and {@code priorities}
-     *
+     * Creates a FindCommand to filter the address book using the given lists of
+     * {@code names}, {@code addresses}, {@code priorities}, and {@code incomes}.
      */
     public FindCommand(List<String> names, List<String> addresses, List<String> priorities, List<String> incomes) {
         this.names = names;
@@ -64,21 +61,21 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        finalPredicate = person -> true; // default starting predicate
+        Predicate<Person> finalPredicate = person -> true; // default starting predicate
 
-        if (!this.names.isEmpty()) {
+        if (!names.isEmpty()) {
             finalPredicate = finalPredicate.and(new NameContainsKeywordsPredicate(names));
         }
 
-        if (!this.addresses.isEmpty()) {
+        if (!addresses.isEmpty()) {
             finalPredicate = finalPredicate.and(new AddressContainsKeywordsPredicate(addresses));
         }
 
-        if (!this.priorities.isEmpty()) {
+        if (!priorities.isEmpty()) {
             finalPredicate = finalPredicate.and(new PriorityPredicate(priorities));
         }
 
-        if (!this.incomes.isEmpty()) {
+        if (!incomes.isEmpty()) {
             finalPredicate = finalPredicate.and(new IncomePredicate(incomes));
         }
 
@@ -93,22 +90,16 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand otherFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
         return names.equals(otherFindCommand.names)
                 && addresses.equals(otherFindCommand.addresses)
                 && priorities.equals(otherFindCommand.priorities)

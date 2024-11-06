@@ -43,6 +43,7 @@ public class ArchiveCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(ArchiveCommand.class);
 
     private Person personToModify;
+    private Person modifiedPerson;
 
     /**
      * @param index of the person in the filtered person list to archive/unarchive
@@ -72,7 +73,7 @@ public class ArchiveCommand extends Command {
                     : MESSAGE_PERSON_IS_ALREADY_UNARCHIVED);
         }
 
-        Person modifiedPerson = modifyPerson(personToModify);
+        modifiedPerson = modifyPerson(personToModify);
         model.setPerson(personToModify, modifiedPerson);
         logArchiveInfo(modifiedPerson);
         return generateCommandResult(modifiedPerson);
@@ -124,6 +125,15 @@ public class ArchiveCommand extends Command {
     }
 
     @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        model.setPerson(modifiedPerson, personToModify);
+        pastCommands.remove();
+        return String.format(
+                shouldArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                Messages.format(personToModify));
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -136,15 +146,5 @@ public class ArchiveCommand extends Command {
 
         return this.index.equals(otherArchiveCommand.index)
                 && this.shouldArchive == otherArchiveCommand.shouldArchive;
-    }
-
-    @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        Person afterArchive = modifyPerson(personToModify);
-        model.setPerson(afterArchive, personToModify);
-        pastCommands.remove();
-        return String.format(
-                shouldArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
-                Messages.format(personToModify));
     }
 }

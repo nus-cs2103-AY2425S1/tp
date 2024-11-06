@@ -1,14 +1,20 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.logging.Logger;
+
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
 
 /**
@@ -16,6 +22,8 @@ import seedu.address.model.appointment.Appointment;
  */
 public class CalendarViewPanel extends UiPart<Region> {
     private static final String FXML = "CalendarViewPanel.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(CalendarViewPanel.class);
 
     @FXML
     private final CalendarView calendarView;
@@ -31,6 +39,7 @@ public class CalendarViewPanel extends UiPart<Region> {
         calendar = new Calendar("Appointments");
         setUpCalendarView(appointmentList);
         bindAppointmentListToCalendar(appointmentList);
+        startUpdateTimeThread();
     }
 
     private void setUpCalendarView(ObservableList<Appointment> appointmentList) {
@@ -80,6 +89,31 @@ public class CalendarViewPanel extends UiPart<Region> {
                 .filter(entry -> entry.getStartDate().equals(appointment.date())
                         && entry.getStartTime().equals(appointment.startTime()))
                 .forEach(calendar::removeEntry);
+    }
+
+    private void startUpdateTimeThread() {
+        Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Platform.runLater(() -> {
+                            calendarView.setToday(LocalDate.now());
+                            calendarView.setTime(LocalTime.now());
+                        });
+
+                        // update every 10 seconds
+                        sleep(10000);
+                    }
+                } catch (InterruptedException e) {
+                    logger.info("Calendar update time thread interrupted: " + e.getMessage());
+                }
+            }
+        };
+
+        updateTimeThread.setPriority(Thread.MIN_PRIORITY);
+        updateTimeThread.setDaemon(true);
+        updateTimeThread.start();
     }
 
     protected CalendarView getCalendarView() {

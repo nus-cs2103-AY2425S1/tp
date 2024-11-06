@@ -68,7 +68,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -139,14 +139,6 @@ public class EditCommand extends Command {
                 personToEdit.isArchived());
     }
 
-    public Person getUneditedPerson() {
-        return personToEdit;
-    }
-
-    public Person getEditedPerson() {
-        return editedPerson;
-    }
-
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
@@ -154,11 +146,12 @@ public class EditCommand extends Command {
 
     @Override
     public String undo(Model model, CommandHistory pastCommands) {
-        Person beforeEdit = this.getUneditedPerson();
-        Person afterEdit = this.getEditedPerson();
-        model.setPerson(afterEdit, beforeEdit);
+        if (!editedPerson.isSamePerson(personToEdit)) {
+            model.updateAppointments(editedPerson.getName(), personToEdit.getName());
+        }
+        model.setPerson(editedPerson, personToEdit);
         pastCommands.remove();
-        return String.format(MESSAGE_UNDO_EDIT, beforeEdit.getName());
+        return String.format(MESSAGE_UNDO_EDIT, personToEdit.getName());
     }
 
     @Override

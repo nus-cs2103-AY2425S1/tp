@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -26,18 +25,19 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_COMMAND_SUCCESS = "Undo successful:\n%s";
     public static final String MESSAGE_UNDO_COMMAND_NEUTRAL = "No action to undo:\n%s";
     public static final String MESSAGE_UNDO_ADD = "%s has been removed from SocialBook";
-    public static final String MESSAGE_UNDO_EDIT = "Edits to %s has been reverted";
+    public static final String MESSAGE_UNDO_EDIT = "Edits to %s have been reverted";
     public static final String MESSAGE_UNDO_DELETE =
             "%s and their appointments have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
-    public static final String MESSAGE_UNDO_DELETE_APPOINTMENT =
-            "Appointment for %s has been added back to appointments";
-    public static final String MESSAGE_UNDO_ADD_APPOINTMENT =
-            "Appointment for %s has been removed from appointments";
 
     public static final String MESSAGE_UNDO_ADD_SCHEME = "The following scheme for %s has been removed\n";
 
     public static final String MESSAGE_UNDO_DELETE_SCHEME = "The following schemes for %s has been added back\n";
+
+    public static final String MESSAGE_UNDO_ADD_APPOINTMENT = "Appointment with %s removed:\n%s";
+    public static final String MESSAGE_UNDO_EDIT_APPOINTMENT = "Restored previous appointment with %s:\n%s";
+    public static final String MESSAGE_UNDO_DELETE_APPOINTMENT = "Restored appointment with %s:\n%s";
+
     private final CommandHistory pastCommands;
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -48,41 +48,38 @@ public class UndoCommand extends Command {
      */
     public UndoCommand(CommandHistory pastCommands) {
         this.pastCommands = pastCommands;
-
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         if (pastCommands.getCommandInputHistory().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_LATEST_COMMAND);
         }
+
         Command latestCommand = pastCommands.getCommandInputHistory().get(pastCommands.getSize() - 1);
         String latestCommandWord = latestCommand.getCommandWord();
         logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
-        String resultMessage = String.format(
-                "No change as command undone (%s) was not an action command", latestCommandWord);
-        if (Arrays.asList(ACTION_COMMANDS).contains(latestCommandWord)) {
-            resultMessage = latestCommand.undo(model, pastCommands);
-            return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
-        } else {
-            pastCommands.remove();
-            return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_NEUTRAL, resultMessage));
-        }
-    }
 
-    public CommandHistory getPastCommands() {
-        return pastCommands;
+        // Check if the command is a person or appointment action command
+        boolean isPersonCommand = getPersonActionCommands().contains(latestCommandWord);
+        boolean isAppointmentCommand = getAppointmentActionCommands().contains(latestCommandWord);
+
+        if (isPersonCommand || isAppointmentCommand) {
+            String feedback = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, latestCommand.undo(model, pastCommands));
+            return new CommandResult(feedback, isAppointmentCommand, false, false);
+        }
+
+        pastCommands.remove();
+        String feedback = String.format(MESSAGE_UNDO_COMMAND_NEUTRAL,
+                "No change as command undone (" + latestCommandWord + ") was not an action command");
+        return new CommandResult(feedback, latestCommandWord.endsWith("appt"), false, false);
     }
 
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
-    }
-
-    @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
     }
 
     @Override
@@ -92,12 +89,11 @@ public class UndoCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UndoCommand)) {
+        if (!(other instanceof UndoCommand otherUndoCommand)) {
             return false;
         }
 
-        UndoCommand otherUndoCommand = (UndoCommand) other;
         return pastCommands.getCommandInputHistory()
-                .equals(otherUndoCommand.getPastCommands().getCommandInputHistory());
+                .equals(otherUndoCommand.pastCommands.getCommandInputHistory());
     }
 }
