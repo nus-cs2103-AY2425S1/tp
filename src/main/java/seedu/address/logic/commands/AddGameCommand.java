@@ -200,6 +200,10 @@ public class AddGameCommand extends Command {
             return this.isFavourite;
         }
 
+        public void setFavouriteStatus(boolean isFavourite) {
+            this.isFavourite = isFavourite;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
