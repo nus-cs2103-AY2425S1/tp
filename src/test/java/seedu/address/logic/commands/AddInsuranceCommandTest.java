@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INSURANCE_ID;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
-import static seedu.address.model.client.insurance.InsurancePlanFactory.INVALID_PLAN_ID_MESSAGE;
 import static seedu.address.model.client.insurance.InsurancePlansManager.DUPLICATE_PLAN_DETECTED_MESSAGE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
@@ -152,7 +152,7 @@ class AddInsuranceCommandTest {
         int invalidInsuranceId = -1;
         AddInsuranceCommand addInsuranceCommand = new AddInsuranceCommand(INDEX_FIRST_CLIENT, invalidInsuranceId);
 
-        assertCommandFailure(addInsuranceCommand, model, String.format(INVALID_PLAN_ID_MESSAGE));
+        assertCommandFailure(addInsuranceCommand, model, String.format(MESSAGE_INVALID_INSURANCE_ID));
     }
 
     @Test
