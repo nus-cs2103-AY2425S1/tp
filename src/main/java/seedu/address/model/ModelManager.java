@@ -239,4 +239,9 @@ public class ModelManager implements Model {
         }
         excludedPersons.add(person);
     }
+
+    @Override
+    public void clearExcludedPersons() {
+        excludedPersons.clear();
+    }
 }

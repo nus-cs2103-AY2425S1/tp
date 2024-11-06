@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -45,6 +46,9 @@ public class ExcludePersonCommand extends Command {
         checkValidIndex(excludedPersonIndices, lastShownList.size());
         StringBuilder removedMessage = new StringBuilder("Excluded:");
         removePersonsFromSearchResults(model, excludedPersonIndices, removedMessage);
+        Predicate<Person> excludeRemovedPersons = person -> !model.getExcludedPersons().contains(person);
+        Predicate <Person> newPredicate = model.getLastPredicate().and(excludeRemovedPersons);
+        model.updateFilteredPersonList(newPredicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, removedMessage));
     }
 
@@ -60,6 +64,7 @@ public class ExcludePersonCommand extends Command {
             Person excluded = model.getFilteredPersonList().get(index.getZeroBased());
             removedMessage.append(" ").append(excluded.getName());
             model.excludePerson(excluded);
+
         }
     }
 

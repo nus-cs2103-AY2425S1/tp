@@ -142,4 +142,6 @@ public interface Model {
      * Excludes a Person from the search.
      */
     void excludePerson(Person person);
+
+    void clearExcludedPersons();
 }
