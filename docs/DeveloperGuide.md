@@ -168,7 +168,7 @@ Step 1. The user launches the application. The `VersionedStudentDirectory` will 
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the student directory. The `delete` command calls `Model#commitStudentDirectory()`, causing the modified state of the student directory after the `delete 5` command executes to be saved in the `studentDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted student directory state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the student directory. The `delete` calls `Model#commitStudentDirectory()`, causing the modified state of the student directory after the `delete 5` command executes to be saved in the `studentDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted student directory state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
