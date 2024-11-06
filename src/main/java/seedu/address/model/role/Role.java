@@ -8,7 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidRoleName(String)}
  */
 public class Role {
-
     public static final String MESSAGE_CONSTRAINTS = "Role length should be between 1 to 20 characters";
     public static final String VALIDATION_REGEX = "^(?!\\s)(?=.{1,20}$).+(?<!\\s)$";
 

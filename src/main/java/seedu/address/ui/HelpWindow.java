@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteProfileCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -37,6 +38,7 @@ public class HelpWindow extends UiPart<Stage> {
         AddCommand.MESSAGE_USAGE,
         ClearCommand.MESSAGE_USAGE,
         DeleteCommand.MESSAGE_USAGE,
+        DeleteProfileCommand.MESSAGE_USAGE,
         EditCommand.MESSAGE_USAGE,
         ExitCommand.MESSAGE_USAGE,
         FindCommand.MESSAGE_USAGE,

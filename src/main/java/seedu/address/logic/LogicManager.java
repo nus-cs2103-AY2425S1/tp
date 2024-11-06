@@ -18,6 +18,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.profile.exceptions.IllegalProfileNameException;
+import seedu.address.model.profile.exceptions.IllegalProfilePathException;
 import seedu.address.storage.Storage;
 
 /**
@@ -53,7 +55,6 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
-            storage.saveUserPrefs(model.getUserPrefs());
             syncAddressBook();
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
@@ -61,6 +62,9 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         } catch (DataLoadingException dle) {
             throw new CommandException(String.format(FILE_OPS_LOAD_ERROR, dle.getMessage()));
+        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
+            logger.severe(model.getAddressBook().toString());
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, "\n" + e.getMessage()));
         }
 
         return commandResult;

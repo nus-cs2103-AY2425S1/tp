@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.SortOrder;
@@ -16,56 +17,197 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 class SortCommandTest {
-    private static final Person A = new PersonBuilder().withName("Alice").withTelegram("a").build();
-    private static final Person B = new PersonBuilder().withName("Bob").withTelegram("b").build();
-    private static final Person C = new PersonBuilder().withName("Charlie").withTelegram("c").build();
-    private static final Person D = new PersonBuilder().withName("David").withTelegram("d").build();
+    // Test data
+    private static final Person a = new PersonBuilder().withName("alice").withTelegram("a1xxx").build();
+    private static final Person A = new PersonBuilder().withName("Alice").withTelegram("a2xxx").build();
+    private static final Person b = new PersonBuilder().withName("bob").withTelegram("b1xxx").build();
+    private static final Person B = new PersonBuilder().withName("Bob").withTelegram("b2xxx").build();
+    private static final Person c = new PersonBuilder().withName("charlie").withTelegram("c1xxx").build();
+    private static final Person C = new PersonBuilder().withName("Charlie").withTelegram("c2xxx").build();
+    private static final Person d = new PersonBuilder().withName("david").withTelegram("d1xxx").build();
+    private static final Person D = new PersonBuilder().withName("David").withTelegram("d2xxx").build();
 
     private Model model;
 
-    private final List<Person> personsAscending = Arrays.asList(A, B, C, D);
-
-    private final List<Person> personsDescending = Arrays.asList(D, C, B, A);
-
-    private final List<Person> personsUnordered = Arrays.asList(B, D, A, C);
-
-    @BeforeEach
-    void setUp() {
+    /**
+     * Initialises the model with the relevant list of Persons
+     */
+    public void addToModel(List<Person> list) {
         model = new ModelManager();
-        // Populate the model with some test data
-        for (Person person : personsUnordered) {
+        for (Person person : list) {
             model.addPerson(person);
         }
     }
 
-    @Test
-    void execute_sortAscending_success() throws CommandException {
-        SortCommand sortCommand = new SortCommand(SortOrder.ASC);
-        CommandResult result = sortCommand.execute(model);
+    @Nested
+    class SortUncapitalisedTest {
+        private final List<Person> personsUncapitalisedAscending = Arrays.asList(a, b, c, d);
+        private final List<Person> personsUncapitalisedDescending = Arrays.asList(d, c, b, a);
+        private final List<Person> personsUncapitalisedUnordered = Arrays.asList(b, d, a, c);
 
-        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.ASC), result.getFeedbackToUser());
-        List<Person> sortedPersons = model.getSortedPersonList();
-        assertEquals(personsAscending, sortedPersons.stream().toList());
+        @BeforeEach
+        void init() {
+            // Load the uncapitalised test data into model
+            addToModel(personsUncapitalisedUnordered);
+        }
+
+        @Test
+        void execute_sortUncapitalisedAscending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.ASC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.ASC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsUncapitalisedAscending, sortedPersons.stream().toList());
+        }
+
+        @Test
+        void execute_sortUncapitalisedDescending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.DESC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.DESC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+
+            assertEquals(personsUncapitalisedDescending, sortedPersons.stream().toList());
+        }
+
+        @Test
+        void execute_sortUncapitalisedOriginal_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.OG);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.OG), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsUncapitalisedUnordered, sortedPersons);
+        }
     }
 
-    @Test
-    void execute_sortDescending_success() throws CommandException {
-        SortCommand sortCommand = new SortCommand(SortOrder.DESC);
-        CommandResult result = sortCommand.execute(model);
+    @Nested
+    class SortCapitalisedTest {
+        private final List<Person> personsCapitalisedAscending = Arrays.asList(A, B, C, D);
+        private final List<Person> personsCapitalisedDescending = Arrays.asList(D, C, B, A);
+        private final List<Person> personsCapitalisedUnordered = Arrays.asList(B, D, A, C);
 
-        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.DESC), result.getFeedbackToUser());
-        List<Person> sortedPersons = model.getSortedPersonList();
+        @BeforeEach
+        void init() {
+            // Load the capitalised test data into the model
+            addToModel(personsCapitalisedUnordered);
+        }
+        @Test
+        void execute_sortCapitalisedAscending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.ASC);
+            CommandResult result = sortCommand.execute(model);
 
-        assertEquals(personsDescending, sortedPersons.stream().toList());
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.ASC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsCapitalisedAscending, sortedPersons.stream().toList());
+        }
+
+        @Test
+        void execute_sortCapitalisedDescending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.DESC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.DESC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+
+            assertEquals(personsCapitalisedDescending, sortedPersons.stream().toList());
+        }
+
+        @Test
+        void execute_sortCapitalisedOriginal_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.OG);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.OG), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsCapitalisedUnordered, sortedPersons);
+        }
     }
 
-    @Test
-    void execute_sortOriginal_success() throws CommandException {
-        SortCommand sortCommand = new SortCommand(SortOrder.OG);
-        CommandResult result = sortCommand.execute(model);
+    @Nested
+    class SortMixedTest {
+        private final List<Person> personsMixedAscending = Arrays.asList(a, B, c, D);
+        private final List<Person> personsMixedDescending = Arrays.asList(D, c, B, a);
+        private final List<Person> personsMixedUnordered = Arrays.asList(B, D, a, c);
 
-        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.OG), result.getFeedbackToUser());
-        List<Person> sortedPersons = model.getSortedPersonList();
-        assertEquals(personsUnordered, sortedPersons);
+        @BeforeEach
+        void init() {
+            // Load the test data into model
+            addToModel(personsMixedUnordered);
+        }
+
+        @Test
+        void execute_sortMixedAscending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.ASC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.ASC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsMixedAscending, sortedPersons.stream().toList());
+        }
+
+        @Test
+        void execute_sortMixedDescending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.DESC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.DESC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+
+            assertEquals(personsMixedDescending, sortedPersons.stream().toList());
+        }
+
+        @Test
+        void execute_sortMixedOriginal_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.OG);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.OG), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsMixedUnordered, sortedPersons);
+        }
+    }
+
+    @Nested
+    class SortSameMixedTest {
+        private final List<Person> personsMixedSameChar = Arrays.asList(a, A);
+
+        @BeforeEach
+        void init() {
+            // Load the test data into model
+            addToModel(personsMixedSameChar);
+        }
+
+        @Test
+        void execute_sortSameMixedAscending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.ASC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.ASC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsMixedSameChar, sortedPersons);
+        }
+
+        @Test
+        void execute_sortSameMixedDescending_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.DESC);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.DESC), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsMixedSameChar, sortedPersons);
+        }
+
+        @Test
+        void execute_sortSameMixedOriginal_success() throws CommandException {
+            SortCommand sortCommand = new SortCommand(SortOrder.OG);
+            CommandResult result = sortCommand.execute(model);
+
+            assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, SortOrder.OG), result.getFeedbackToUser());
+            List<Person> sortedPersons = model.getSortedPersonList();
+            assertEquals(personsMixedSameChar, sortedPersons);
+        }
     }
 }

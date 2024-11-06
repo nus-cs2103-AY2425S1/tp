@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 /**
  * Writes and reads files
@@ -80,4 +81,12 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    public static Stream<Path> getSiblingsAtPath(Path filePath) throws IOException {
+        Path parentDir = filePath.getParent();
+        return Files.list(parentDir);
+    }
+
+    public static void deleteFileAtPath(Path path) throws IOException {
+        Files.delete(path);
+    }
 }
