@@ -384,7 +384,13 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: To transfer your data, install the application on the other computer. After installation, locate the data folder, which is in the same location as the app itself. Replace the JSON file in this folder with your existing JSON file that contains your data. This will allow you to access your previous data seamlessly on the new computer.
+**A**: To transfer your data to another computer, follow these steps:
+
+1. **Install PROperty**: Place the `PROperty.jar` file in your preferred location on the new computer.
+2. **Set Up the Data Folder**: If you have already run the application, skip to step 3. Otherwise, manually create a `data` folder in the same directory as `PROperty.jar`.
+3. **Transfer Your Data**: If the application has been run previously, simply replace the existing `property.json` file in the `data` folder with your data-containing `property.json` file from the original computer. Otherwise, add your `property.json` file directly into the `data` folder you just created.
+4. **Launch PROperty**: Run the app to load your transferred data, giving you access to all your previous contacts and property listings.
+
 
 **Q**: Can I customise the tags or categories for contacts and properties?<br>
 **A**: Customising tags is not currently supported. Users can only use the predefined tags listed in the table provided in this guide.
