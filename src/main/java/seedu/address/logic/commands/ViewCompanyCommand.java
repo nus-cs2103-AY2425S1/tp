@@ -23,13 +23,15 @@ public class ViewCompanyCommand extends Command {
 
     public static final String ENTITY_WORD = "company";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ENTITY_WORD
             + ": Displays all jobs and persons linked to the company identified by the index number "
             + "used in the displayed company list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + ENTITY_WORD + " 1";
 
-
+    public static final String MESSAGE_SUCCESS = "Showing jobs and persons linked to: %1$s; "
+        + "Address: %2$s; Phone: %3$s; Billing date on %4$s"
+        + "%nTo see all lists again, use 'list all'.";
 
     private final Index targetIndex;
 
@@ -58,8 +60,13 @@ public class ViewCompanyCommand extends Command {
 
         model.showLinkedJobsAndPersonsByCompany(companyToView);
 
-        return new CommandResult(String.format("Showing jobs and persons linked to %s",
-                companyToView.getName()));
+        String successMessage = String.format(MESSAGE_SUCCESS,
+                companyToView.getName(),
+                companyToView.getAddress(),
+                companyToView.getPhone(),
+                companyToView.getBillingDate());
+
+        return new CommandResult(successMessage);
     }
 
 }

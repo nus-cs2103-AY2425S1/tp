@@ -275,7 +275,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Filters the lists of jobs, persons, and companies to show only those
+     * Filters the lists of jobs and persons to show only those
      * linked to the specified company.
      * @param targetCompany The company whose linked jobs and persons will be shown.
      */
@@ -283,7 +283,6 @@ public class ModelManager implements Model {
     public void showLinkedJobsAndPersonsByCompany(Company targetCompany) {
         updateFilteredJobList(getJobLinkedToCompanyPredicate(targetCompany));
         updateFilteredPersonList(getPersonLinkedToCompanyPredicate(targetCompany));
-        updateFilteredCompanyList(company -> company.equals(targetCompany));
     }
 
 }

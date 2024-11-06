@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_OPERATION_NOT_ALLOWED;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,10 +21,17 @@ public class ViewCompanyCommandParser implements Parser<ViewCompanyCommand> {
 
         String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, ViewCompanyCommand.MESSAGE_USAGE);
 
+        String entityString = splitArgs[0];
         String indexString = splitArgs[1];
+        String entity = ParserUtil.parseEntity(entityString);
         Index index = ParserUtil.parseIndex(indexString);
 
-        return new ViewCompanyCommand(index);
-
+        switch (entity) {
+        case ViewCompanyCommand.ENTITY_WORD:
+            return new ViewCompanyCommand(index);
+        default:
+            throw new ParseException(String.format(MESSAGE_OPERATION_NOT_ALLOWED,
+                    ViewCompanyCommand.COMMAND_WORD, entity));
+        }
     }
 }
