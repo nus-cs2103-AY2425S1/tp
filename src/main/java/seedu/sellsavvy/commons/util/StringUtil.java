@@ -70,6 +70,7 @@ public class StringUtil {
      * Normalises the tag name by removing spaces and converting to lowercase.
      */
     public static String normalise(String tagName) {
+        requireNonNull(tagName);
         return tagName.replaceAll(" ", "").toLowerCase();
     }
 }
