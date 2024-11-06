@@ -21,8 +21,10 @@ import seedu.address.model.event.EventManager;
 public class FindEventCommand extends Command {
     public static final String COMMAND_WORD = "find-event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT NAME: View list of persons in an event.\n"
-            + "e.g. view sumobot festival";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT INDEX: View list of persons "
+            + "in the event identified by the "
+            + "index number used in the event list.\n"
+            + "e.g. view 1";
 
     public static final String MESSAGE_SUCCESS = "Viewing event: %1$s";
 
