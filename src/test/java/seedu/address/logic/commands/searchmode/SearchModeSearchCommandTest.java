@@ -2,6 +2,7 @@ package seedu.address.logic.commands.searchmode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import java.util.Collections;
 import java.util.function.Predicate;
@@ -10,13 +11,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class SearchModeSearchCommandTest {
 
@@ -31,14 +36,18 @@ public class SearchModeSearchCommandTest {
 
     @Test
     public void execute_validPredicate_success() {
-        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
+        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
+        expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalEventManager(),
+                new UserPrefs());
+        Predicate<Person> predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
 
         SearchModeSearchCommand command = new SearchModeSearchCommand(predicate);
+        model.updateFilteredPersonList(person -> false);
+        CommandResult result = command.execute(model, model.getEventManager());
 
-        model.updateFilteredPersonList(predicate);
-        CommandResult result = command.execute(model, null);
+        expectedModel.updateFilteredPersonList(predicate);
 
-        assertEquals(SearchModeSearchCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(String.format(SearchModeSearchCommand.MESSAGE_SUCCESS, "1"), result.getFeedbackToUser());
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
@@ -90,9 +99,9 @@ public class SearchModeSearchCommandTest {
         SearchModeSearchCommand command = new SearchModeSearchCommand(combinedPredicate);
 
         model.updateFilteredPersonList(combinedPredicate);
-        CommandResult result = command.execute(model, null);
+        CommandResult result = command.execute(model, model.getEventManager());
 
-        assertEquals(SearchModeSearchCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(SearchModeSearchCommand.MESSAGE_NO_PERSONS_FOUND, result.getFeedbackToUser());
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
@@ -104,28 +113,35 @@ public class SearchModeSearchCommandTest {
                 Collections.singletonList(RoleHandler.getRole("vendor")));
         Predicate<Person> combinedPredicate = namePredicate.and(rolePredicate);
 
+        PersonBuilder personBuilder = new PersonBuilder().withName("Amy").withRoles("vendor");
+        model.addPerson(personBuilder.build());
+        model.updateFilteredPersonList(person -> false);
         SearchModeSearchCommand command = new SearchModeSearchCommand(combinedPredicate);
 
-        model.updateFilteredPersonList(combinedPredicate);
-        CommandResult result = command.execute(model, null);
+        expectedModel.addPerson(personBuilder.build());
+        expectedModel.updateFilteredPersonList(combinedPredicate);
+        CommandResult result = command.execute(model, model.getEventManager());
 
-        assertEquals(SearchModeSearchCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(String.format(SearchModeSearchCommand.MESSAGE_SUCCESS, 1), result.getFeedbackToUser());
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
     @Test
     public void execute_orPredicates_success() throws InvalidRoleException {
-        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
+        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
+        expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalEventManager(),
+                new UserPrefs());
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
                 Collections.singletonList(RoleHandler.getRole("vendor")));
         Predicate<Person> combinedPredicate = namePredicate.or(rolePredicate);
 
         SearchModeSearchCommand command = new SearchModeSearchCommand(combinedPredicate);
+        model.updateFilteredPersonList(person -> false);
+        expectedModel.updateFilteredPersonList(combinedPredicate);
+        CommandResult result = command.execute(model, model.getEventManager());
 
-        model.updateFilteredPersonList(combinedPredicate);
-        CommandResult result = command.execute(model, null);
-
-        assertEquals(SearchModeSearchCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(String.format(SearchModeSearchCommand.MESSAGE_SUCCESS, "3"), result.getFeedbackToUser());
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
@@ -135,11 +151,30 @@ public class SearchModeSearchCommandTest {
         Predicate<Person> negatedPredicate = namePredicate.negate();
 
         SearchModeSearchCommand command = new SearchModeSearchCommand(negatedPredicate);
+        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalEventManager(), new UserPrefs());
+        expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), getTypicalEventManager(),
+                new UserPrefs());
 
-        model.updateFilteredPersonList(negatedPredicate);
-        CommandResult result = command.execute(model, null);
+        model.updateFilteredPersonList(person -> false);
+        expectedModel.updateFilteredPersonList(negatedPredicate);
+        CommandResult result = command.execute(model, model.getEventManager());
+        //everyone except amy
+        assertEquals(String.format(SearchModeSearchCommand.MESSAGE_SUCCESS, "7"), result.getFeedbackToUser());
+        assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+    }
 
-        assertEquals(SearchModeSearchCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+    @Test
+    public void execute_noPersonsFound_success() {
+        Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Obama"));
+        SearchModeSearchCommand command = new SearchModeSearchCommand(namePredicate);
+        model = new ModelManager(new AddressBook(), getTypicalEventManager(), new UserPrefs());
+        expectedModel = new ModelManager(new AddressBook(), getTypicalEventManager(), new UserPrefs());
+
+        model.updateFilteredPersonList(person -> false);
+        expectedModel.updateFilteredPersonList(namePredicate);
+        CommandResult result = command.execute(model, model.getEventManager());
+
+        assertEquals(SearchModeSearchCommand.MESSAGE_NO_PERSONS_FOUND, result.getFeedbackToUser());
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
