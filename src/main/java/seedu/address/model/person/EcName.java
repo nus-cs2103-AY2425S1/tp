@@ -30,7 +30,7 @@ public class EcName implements Comparable<EcName> {
     public EcName(String ecName) {
         requireNonNull(ecName);
         checkArgument(isValidEcName(ecName), MESSAGE_CONSTRAINTS);
-        value = ecName;
+        value = ecName.trim();
     }
 
     /**
