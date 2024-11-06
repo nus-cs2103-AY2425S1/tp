@@ -3,12 +3,14 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
@@ -30,7 +32,14 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
+        // Verify nameKeywords are valid Name inputs
         List<String> nameKeywords = Arrays.asList(nameKeyArg.split("\\s+"));
+        if (!NameContainsKeywordsPredicate.areValidNameKeywords(nameKeywords)) {
+             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+
+
         Set<Tag> tagKeyWords = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new FindCommand(

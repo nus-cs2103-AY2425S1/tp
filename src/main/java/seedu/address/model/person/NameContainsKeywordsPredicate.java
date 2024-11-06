@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -14,6 +15,27 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+    }
+
+    /**
+     * Checks all keywords for invalid characters
+     */
+    public static boolean areValidNameKeywords(List<String> keywords) {
+        for (String s : keywords) {
+            if (!isValidKeyword(s)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the name keyword is a valid and possible name in the address book.
+     *
+     * @param keyword the name keyword used to search the list.
+     */
+    private static boolean isValidKeyword(String keyword) {
+        return Name.isValidName(keyword);
     }
 
     @Override
