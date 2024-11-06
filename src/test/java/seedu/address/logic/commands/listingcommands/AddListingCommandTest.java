@@ -340,4 +340,29 @@ public class AddListingCommandTest {
                     .orElse(null);
         }
     }
+
+    @Test
+    public void execute_buyerNotInList_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName())));
+        ModelStub modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_INVALID_PERSON_INPUT, () -> addListingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_buyerNotOfTypeBuyer_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(BENSON.getName())));
+        ModelStub modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(BENSON);
+
+        assertThrows(CommandException.class,
+                AddListingCommand.MESSAGE_NOT_BUYER, () -> addListingCommand.execute(modelStub));
+    }
+
 }
