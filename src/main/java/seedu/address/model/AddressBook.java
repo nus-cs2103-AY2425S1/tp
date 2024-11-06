@@ -68,6 +68,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns the role of a person (patient or doctor)
+     */
+    public String getPersonRole(Person person) {
+        requireNonNull(person);
+        return persons.getPersonRole(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

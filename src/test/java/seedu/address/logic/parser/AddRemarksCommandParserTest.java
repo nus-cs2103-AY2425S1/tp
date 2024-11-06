@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_REMARK;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
@@ -12,16 +13,17 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddNotesCommand;
+import seedu.address.logic.commands.AddRemarksCommand;
+import seedu.address.model.person.Remark;
 
-public class AddNotesCommandParserTest {
+public class AddRemarksCommandParserTest {
 
-    private AddNotesCommandParser parser = new AddNotesCommandParser();
+    private AddRemarksCommandParser parser = new AddRemarksCommandParser();
 
     @Test
     public void parse_validArgs_returnsAddNotesCommand() {
         String userInput = " " + PREFIX_ID + VALID_ID_AMY + " " + PREFIX_REMARK + VALID_REMARK_AMY;
-        AddNotesCommand expectedCommand = new AddNotesCommand(VALID_ID_AMY, VALID_REMARK_AMY);
+        AddRemarksCommand expectedCommand = new AddRemarksCommand(VALID_ID_AMY, new Remark(VALID_REMARK_AMY));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -32,17 +34,23 @@ public class AddNotesCommandParserTest {
     }
 
     @Test
+    public void parse_emptyRemarks_throwsParseException() {
+        String userInput = " " + PREFIX_ID + "abc" + " " + PREFIX_REMARK + " ";
+        assertParseFailure(parser, userInput, MESSAGE_EMPTY_REMARK);
+    }
+
+    @Test
     public void parse_missingRemark_throwsParseException() {
         String userInput = " " + PREFIX_ID + VALID_ID_AMY;
         assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNotesCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRemarksCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingId_throwsParseException() {
         String userInput = " " + PREFIX_REMARK + VALID_REMARK_AMY;
         assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNotesCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRemarksCommand.MESSAGE_USAGE));
     }
 
     @Test

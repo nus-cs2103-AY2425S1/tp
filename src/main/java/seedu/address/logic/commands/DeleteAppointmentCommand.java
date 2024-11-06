@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  * deletes an appointment to both a patient and a doctor.
  */
 public class DeleteAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "deleteAppointment";
+    public static final String COMMAND_WORD = "deleteA";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes an appointment "
             + "between the relevant doctor and patient. "

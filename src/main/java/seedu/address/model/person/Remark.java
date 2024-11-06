@@ -25,7 +25,7 @@ public class Remark {
      * Adds notes to this Remark
      * @param notes notes to be added
      */
-    public void addNotes(String notes) {
+    public void addRemarks(String notes) {
         requireNonNull(notes);
         this.value += "\n" + notes;
     }

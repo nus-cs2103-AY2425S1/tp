@@ -23,17 +23,17 @@ import seedu.address.model.person.Person;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeletePatientCommandTest {
+public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIdUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
         System.out.println(personToDelete.getId());
-        DeletePatientCommand deletePatientCommand = new DeletePatientCommand(ID_FIRST_PERSON);
+        DeleteCommand deletePatientCommand = new DeleteCommand(ID_FIRST_PERSON);
 
-        String expectedMessage = DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS;
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -44,18 +44,18 @@ public class DeletePatientCommandTest {
     @Test
     public void execute_invalidIdUnfilteredList_throwsCommandException() {
         int outOfBoundId = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1).getId() + 2;
-        DeletePatientCommand deletePatientCommand = new DeletePatientCommand(outOfBoundId);
+        DeleteCommand deletePatientCommand = new DeleteCommand(outOfBoundId);
 
-        assertCommandFailure(deletePatientCommand, model, DeletePatientCommand.MESSAGE_DELETE_PATIENT_FAILURE);
+        assertCommandFailure(deletePatientCommand, model, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonOfId(model, ID_FIRST_PERSON);
         Person personToDelete = model.getFilteredPersonById(model.getFilteredPersonList(), ID_FIRST_PERSON);
-        DeletePatientCommand deletePatientCommand = new DeletePatientCommand(ID_FIRST_PERSON);
+        DeleteCommand deletePatientCommand = new DeleteCommand(ID_FIRST_PERSON);
 
-        String expectedMessage = DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS;
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -72,21 +72,21 @@ public class DeletePatientCommandTest {
         ObservableList<Person> bookList = model.getAddressBook().getPersonList();
         assertTrue(outOfBoundId <= bookList.get(bookList.size() - 1).getId());
 
-        DeletePatientCommand deletePatientCommand = new DeletePatientCommand(outOfBoundId);
+        DeleteCommand deletePatientCommand = new DeleteCommand(outOfBoundId);
 
-        assertCommandFailure(deletePatientCommand, model, DeletePatientCommand.MESSAGE_DELETE_PATIENT_FAILURE);
+        assertCommandFailure(deletePatientCommand, model, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
     }
 
     @Test
     public void equals() {
-        DeletePatientCommand deleteFirstCommand = new DeletePatientCommand(ID_FIRST_PERSON);
-        DeletePatientCommand deleteSecondCommand = new DeletePatientCommand(ID_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(ID_FIRST_PERSON);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(ID_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeletePatientCommand deleteFirstCommandCopy = new DeletePatientCommand(ID_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(ID_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -102,8 +102,8 @@ public class DeletePatientCommandTest {
     @Test
     public void toStringMethod() {
         int targetId = 1;
-        DeletePatientCommand deletePatientCommand = new DeletePatientCommand(targetId);
-        String expected = DeletePatientCommand.class.getCanonicalName() + "{patientId=" + targetId + "}";
+        DeleteCommand deletePatientCommand = new DeleteCommand(targetId);
+        String expected = DeleteCommand.class.getCanonicalName() + "{person Id=" + targetId + "}";
         assertEquals(expected, deletePatientCommand.toString());
     }
 

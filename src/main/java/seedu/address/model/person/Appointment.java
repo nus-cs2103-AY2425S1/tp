@@ -65,7 +65,7 @@ public class Appointment {
      * @param o Object to be compared to.
      * @return True if all details are the same (including checking remarks), false if otherwise.
      */
-    public boolean equalsIncludngRemarks(Object o) {
+    public boolean equalsIncludingRemarks(Object o) {
         if (this == o) {
             return true;
         }
@@ -80,6 +80,7 @@ public class Appointment {
                 && Objects.equals(doctorId, appointment.doctorId)
                 && Objects.equals(remarks, appointment.remarks);
     }
+
 
     @Override
     public boolean equals(Object o) {

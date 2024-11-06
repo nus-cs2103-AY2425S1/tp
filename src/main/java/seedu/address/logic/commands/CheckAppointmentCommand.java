@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class CheckAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "checkAppointment";
+    public static final String COMMAND_WORD = "checkA";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks the appointments of the doctor identified "
             + "by the doctor ID. "

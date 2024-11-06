@@ -17,27 +17,30 @@ import seedu.address.model.person.Person;
  * Code is adapted from @@author sandyk0105
  */
 public class CreateDoctorCommand extends Command {
-    public static final String COMMAND_WORD = "createDoctor";
+    public static final String COMMAND_WORD = "createD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new doctor. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_ADDRESS + "ADDRESS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
-    public static final String MESSAGE_SUCCESS = "Successfully created a new doctor Doctor#%d : %1$s";
+    public static final String MESSAGE_SUCCESS = "Successfully created a new doctor of id: #%d : \n"
+            + "%2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This doctor already exists";
+    public static final String MESSAGE_OVERLAPPING_PATIENT = "This person already exists as a patient\n"
+            + "Please check the details you have entered!";
 
     private final Person toAdd;
 
     /**
-     * Creates an CreatevCommand to add the specified {@code doctor}
+     * Creates an CreateDoctorCommand to add the specified {@code doctor}
      */
     public CreateDoctorCommand(Person doctor) {
         requireNonNull(doctor);
@@ -49,7 +52,12 @@ public class CreateDoctorCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            if (model.getPersonRole(toAdd).equals("DOCTOR")) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+            if (model.getPersonRole(toAdd).equals("PATIENT")) {
+                throw new CommandException(MESSAGE_OVERLAPPING_PATIENT);
+            }
         }
 
         model.addPerson(toAdd);
