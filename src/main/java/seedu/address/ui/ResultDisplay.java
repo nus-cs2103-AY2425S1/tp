@@ -26,7 +26,7 @@ public class ResultDisplay extends UiPart<Region> {
      */
     public ResultDisplay() {
         super(FXML);
-        Platform.runLater(this::disableScrollbarButtons);
+
     }
 
     private void disableScrollbarButtons() {

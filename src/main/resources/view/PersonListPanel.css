@@ -59,7 +59,7 @@
 
 .list-cell:filled {
     -fx-background-color: #F8D3CA;
-    -fx-padding: 7 7 18 7;
+    -fx-padding: 8 8 18 8;
     -fx-background-insets: 0 0 18 0;
     -fx-border-insets: 0 0 18 0;
 }

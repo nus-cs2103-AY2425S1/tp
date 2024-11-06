@@ -26,10 +26,4 @@
     -fx-padding: 5;
 }
 
-#resultDisplay .scroll-bar {
-    -fx-opacity: 0;
-    -fx-pref-width: 1;
-    -fx-max-width: 0;
-    -fx-min-width: 0;
-    -fx-cursor: null;
-}
+
