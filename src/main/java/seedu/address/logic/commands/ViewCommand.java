@@ -26,8 +26,8 @@ public class ViewCommand extends Command {
                     + " "
                     + PREFIX_NAME + "JohnDoe";
 
-    public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact ";
-    public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact ";
+    public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact";
+    public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
     private static final ViewCommand closeView = new ViewCommand();
     private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null, true);
 

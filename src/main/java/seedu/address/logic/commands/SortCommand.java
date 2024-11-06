@@ -17,12 +17,14 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based on the specified field "
             + "and order.\n"
+            + "To reset the sorted order: " + COMMAND_WORD + " reset\n"
             + "Parameters: " + "FIELD " + PREFIX_SORTORDER + "ORDER\n"
             + "Acceptable value for FIELD: github, name, telegram\n"
             + "Acceptable value for ORDER: asc, desc\n"
             + "Example: " + COMMAND_WORD + " name " + PREFIX_SORTORDER + "asc";
 
     public static final String MESSAGE_SUCCESS = "List sorted based on %1$s in %2$s order";
+    public static final String RESET_MESSAGE_SUCCESS = "List sorting set to default order.";
     private final PersonComparator comparator;
 
     public SortCommand(PersonComparator comparator) {
@@ -32,6 +34,10 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateSortedPersonList(comparator);
+
+        if (comparator == null) {
+            return new CommandResult(RESET_MESSAGE_SUCCESS);
+        }
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder()));
     }
@@ -48,11 +54,18 @@ public class SortCommand extends Command {
         }
 
         SortCommand otherSortCommand = (SortCommand) other;
+
+        if (comparator == null) {
+            return otherSortCommand.comparator == null;
+        }
         return comparator.equals(otherSortCommand.comparator);
     }
 
     @Override
     public String toString() {
+        if (comparator == null) {
+            return SortCommand.class.getCanonicalName() + "{comparator=null}";
+        }
         return new ToStringBuilder(this)
                 .add("comparator", comparator)
                 .toString();

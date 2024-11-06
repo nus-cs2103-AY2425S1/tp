@@ -162,7 +162,6 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSortedPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
         sortedPersons.setComparator(comparator);
     }
 

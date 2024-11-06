@@ -14,6 +14,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Functional browser used for launching local browser of the user.
  */
 public class FunctionalBrowser implements seedu.address.commons.core.Browser {
+    private static final String MESSAGE_EXTERNAL_LINK_FAILURE = "The current OS does not support opening "
+        + "external links.";
+    private static final String MESSAGE_INVALID_URI = "The URI specified is invalid.";
+
+    private static final String MESSAGE_OS_ACCESS_FAILURE = "Access to open external links is denied by the security "
+        + "manager.";
+
+    private static final String MESSAGE_NO_DEFAULT_BROWSER = "Default browser not found or failed to launch. "
+        + "Please try again.";
     private static FunctionalBrowser browser = null;
     private Desktop desktop;
 
@@ -80,7 +89,7 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
                 if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
                     Runtime.getRuntime().exec(new String[] { "xdg-open", url });
                 } else {
-                    throw new CommandException("The current OS does not support opening external links.");
+                    throw new CommandException(MESSAGE_EXTERNAL_LINK_FAILURE);
                 }
             } else {
                 //For non linux OS
@@ -88,15 +97,15 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
                         && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     this.desktop.browse(uri);
                 } else {
-                    throw new CommandException("The current OS does not support opening external links.");
+                    throw new CommandException(MESSAGE_EXTERNAL_LINK_FAILURE);
                 }
             }
         } catch (URISyntaxException uriException) {
-            throw new CommandException("The URI specified is invalid.");
+            throw new CommandException(MESSAGE_INVALID_URI);
         } catch (SecurityException securityException) {
-            throw new CommandException("Access to open external links is denied by the security manager.");
+            throw new CommandException(MESSAGE_OS_ACCESS_FAILURE);
         } catch (IOException ioException) {
-            throw new CommandException("Default browser not found or failed to laucnh. Please try again.");
+            throw new CommandException(MESSAGE_NO_DEFAULT_BROWSER);
         }
     }
 }
