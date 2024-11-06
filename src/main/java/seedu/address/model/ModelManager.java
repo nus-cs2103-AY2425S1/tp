@@ -107,8 +107,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasGraduatedBefore(String year) {
+        return addressBook.hasGraduatedPeople(year);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void deletePersonByPredicate(Predicate<Person> predicate) {
+        addressBook.removePersonByPredicate(predicate);
     }
 
     @Override

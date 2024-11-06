@@ -66,10 +66,21 @@ public interface Model {
     boolean hasPhone(Person person);
 
     /**
+     * Returns true if a person with GradYear earlier than {@code year} exists in the address book.
+     */
+    boolean hasGraduatedBefore(String year);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Deletes the persons who fulfil the predicate's test.
+     * @param predicate Predicate to test whether to delete the person.
+     */
+    void deletePersonByPredicate(Predicate<Person> predicate);
 
     /**
      * Adds the given person.
