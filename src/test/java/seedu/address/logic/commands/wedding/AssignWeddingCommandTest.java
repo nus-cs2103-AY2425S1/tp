@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -106,15 +107,22 @@ public class AssignWeddingCommandTest {
     @Test
     public void forceAssignWedding_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Wedding unseenWedding = new Wedding(new WeddingName("UNKNOWN WEDDING"));
+        Wedding unseenWedding1 = new Wedding(new WeddingName("UNKNOWN WEDDING1"));
+        Wedding unseenWedding2 = new Wedding(new WeddingName("UNKNOWN WEDDING2"));
+        Wedding unseenWedding3 = new Wedding(new WeddingName("UNKNOWN WEDDING3"));
         HashMap<Wedding, String> weddingsToAdd = new HashMap<>() {
-            { put(unseenWedding, "g"); }
+            { put(unseenWedding1, "g"); }
+            { put(unseenWedding2, "p1"); }
+            { put(unseenWedding3, "p2"); }
         };
         AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
                 INDEX_FIRST, weddingsToAdd, true);
+        String addedWeddings = weddingsToAdd.keySet().stream()
+                .map(wedding -> wedding.toString().replaceAll("[\\[\\]]", ""))
+                .collect(Collectors.joining(", "));
         String expectedMessage = String.format(
                 Messages.MESSAGE_ADD_WEDDING_SUCCESS,
-                unseenWedding.getWeddingName().toString(),
+                addedWeddings,
                 personToEdit.getName().toString());
         CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, model);
 

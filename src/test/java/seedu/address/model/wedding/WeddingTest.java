@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.VALID_WEDDING_NAME_AMY_WEDDING;
@@ -92,6 +93,20 @@ public class WeddingTest {
     public void noPersonsWeddinggedCheck() {
         Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
         assertEquals(0, amyWedding.getNumPersonsForWedding());
+    }
+
+    @Test
+    public void setPartner1() {
+        Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        amyWedding.setPartner1(ALICE);
+        assertEquals(ALICE, amyWedding.getPartner1());
+    }
+
+    @Test
+    public void setPartner2() {
+        Wedding amyWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
+        amyWedding.setPartner2(ALICE);
+        assertEquals(ALICE, amyWedding.getPartner2());
     }
 
     @Test
