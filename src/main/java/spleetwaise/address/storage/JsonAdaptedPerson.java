@@ -17,6 +17,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.commons.exceptions.IllegalValueException;
+import spleetwaise.commons.util.IdUtil;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -121,7 +122,11 @@ public class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(id, modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
-    }
 
+        if (!IdUtil.isValidId(id)) {
+            throw new IllegalValueException(IdUtil.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Person(id.trim(), modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+    }
 }

@@ -2,6 +2,7 @@ package spleetwaise.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
+import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.exceptions.IllegalValueException;
 
 /**
@@ -21,6 +23,8 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_ID = "Persons list contains duplicate ids.";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -49,17 +53,23 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
+            try {
+                Person person = jsonAdaptedPerson.toModelType();
 
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            } else if (addressBook.hasPersonById(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_ID);
+                if (addressBook.hasPerson(person)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                } else if (addressBook.hasPersonById(person)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_ID);
+                }
+
+                addressBook.addPerson(person);
+            } catch (IllegalValueException e) {
+                logger.warning(String.format(
+                        "Address book is possibly corrupted: %s Ignoring corrupted person.",
+                        e.getMessage()
+                ));
             }
-
-            addressBook.addPerson(person);
         }
         return addressBook;
     }
-
 }
