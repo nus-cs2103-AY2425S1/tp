@@ -2,12 +2,9 @@ package seedu.edulog.logic.parser;
 
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-
 import seedu.edulog.logic.commands.FilterCommand;
-import seedu.edulog.logic.commands.FindCommand;
 import seedu.edulog.logic.parser.exceptions.ParseException;
-import seedu.edulog.model.student.NameContainsKeywordsPredicate;
+import seedu.edulog.model.student.StudentHasPaidPredicate;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
@@ -25,9 +22,23 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
+        boolean hasPaidStatus;
 
+        char paymentStatus = Character.toLowerCase(trimmedArgs.charAt(0));
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        switch (paymentStatus) {
+        case FilterCommand.PAID:
+            hasPaidStatus = true;
+            break;
+        case FilterCommand.UNPAID:
+            hasPaidStatus = false;
+            break;
+        default:
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
+        return new FilterCommand(new StudentHasPaidPredicate(hasPaidStatus));
     }
 
 }

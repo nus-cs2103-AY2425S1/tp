@@ -21,6 +21,10 @@ public class FilterCommand extends Command {
             + "OR U\n"
             + "Example: " + COMMAND_WORD + "paid";
 
+    public static final char PAID = 'p';
+
+    public static final char UNPAID = 'u';
+
     private final StudentHasPaidPredicate predicate;
 
     public FilterCommand(StudentHasPaidPredicate predicate) {
