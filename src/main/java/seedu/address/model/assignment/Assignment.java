@@ -39,6 +39,10 @@ public class Assignment {
         return employee;
     }
 
+    public String getAssignmentName() {
+        return project.getName().toString() + " - " + employee.getName().toString();
+    }
+
     /**
      * Returns true if both {@code Project#equals(Project)} and
      * {@code Employee#equals(Employee)} returns true.
