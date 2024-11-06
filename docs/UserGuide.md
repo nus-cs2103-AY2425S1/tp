@@ -57,6 +57,9 @@ ClientHub is a **desktop app for managing contacts, optimized for use via a Comm
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Adding `$` after the input name is used to indicate **specific** name.<br>
+  e.g. `delete John Doe$` will delete the contact with the name `John Doe`.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -83,6 +86,11 @@ A **valid** `NAME` should:
     * For eg. Just typing `n/` without providing any `NAME` will throw an error.
 * Can only have one name.
     * For eg. Typing `n/John Doe n/John Eng` will throw an error.
+* have **only letters** for the *first* character
+* have **only letters** or **parenthesis** for the *last* character
+* have **letters** or **parenthesis** or **slash** for the *middle* characters
+  * eg. `John Doe`, `John (NUS)`, `John S/O Bob` is **valid** 
+  * eg. `John 123`, `!John Doe` is **invalid**
 
 A **valid** `PHONE_NUMBER` should:
 * Only numbers are allowed.
@@ -139,10 +147,12 @@ Edits an existing client in  Client Hub.
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* The fields constraints are the same as the `add` command.
 * At least one of the optional fields must be provided.
   * At most 1 of each field can be edited at a time.(excluding CLIENT_TYPE)
 * Existing values will be updated to the input values.
 * When editing `CLIENT_TYPE`, the existing `CLIENT_TYPE` of the person will be removed i.e adding of `CLIENT_TYPE` is not cumulative.
+* When editing `NAME`, the client with the associated `NAME` should have **no** reminders.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -156,14 +166,14 @@ result for `edit 1 p/91234567`:
 
 Deletes the specified person from ClientHub.
 
-Format: `delete NAME` or `d NAME` or `delete NAME/`
+Format: `delete NAME` or `d NAME` or `delete NAME$`
 
 * Deletes the client with specified `NAME`
-* / is used to indicate specific name to delete
-    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
-    * However, deleting David Lim does not require / as it is already the **MOST** specific name.
-    * Name written before / must be **EXACT** name of the contact to be deleted.
-    * Order matters when using / to delete a contact.
+* `$` is used to indicate specific name to delete
+    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li$` will delete the contact with the name "David Li".
+    * However, deleting David Lim does not require `$` as it is already the **MOST** specific name.
+    * Name written before `$` must be **EXACT** name of the contact to be deleted.
+    * Order matters when using `$` to delete a contact.
 
 A **valid** `NAME` for delete should:
 * Not be empty.
@@ -173,7 +183,7 @@ A **valid** `NAME` for delete should:
 
 Examples:
 * `delete John Doe` deletes the person named `John Doe`
-* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
+* `delete John Doe$` deletes the person named `John Doe` and not `John Doey`
 
 Result for `delete John Doe`:
 ![result for 'delete John Doe'](images/result_for_delete.png)
@@ -184,11 +194,12 @@ Result for `delete John Doe`:
 Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`. 
 
 #### Locating by `NAME`
-Format: `find n/NAME` or `fn NAME`
+Format: `find n/NAME` or `fn NAME` or `find NAME$`
   * Only the name is searched.
   * The search is case-insensitive. e.g `hans` will match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
+  * `$` is used to indicate specific name to find
   * Clients matching all keyword prefix will be returned (i.e. `AND` search).
     e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
@@ -319,6 +330,9 @@ Format:
 `re INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]`
 
 * Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
+* Have least one of the optional fields must be provided.
+  * At most 1 of each field can be edited at a time.
+* Existing values will be updated to the input values.
 
 A **valid** `INDEX` for edit should:
 * Not be empty.
@@ -326,10 +340,14 @@ A **valid** `INDEX` for edit should:
 * Be a valid index that exists in the list of contacts.
 * For eg. Typing `redit 1` when there is no contact at index 1 will throw an error
 
-A **valid** `DATETIME`/`REMINDER_DESCRIPTION` for edit should:
-* Have least one of the optional fields must be provided.
-  * At most 1 of each field can be edited at a time.
-* Existing values will be updated to the input values.
+A **valid** `DATETIME` for edit should:
+* Be a valid date and time in the format `yyyy-MM-dd HH:mm`.
+* For eg. Typing `redit 1 dt/2022-10-10 12:00` will edit the `DATETIME` of the reminder at index `1` to `2022-10-10 12:00`.
+
+A **valid** `REMINDER_DESCRIPTION` for edit should:
+* Be limited to 300 characters
+* For eg. Typing `redit 1 d/Meeting with John at 12pm` will edit the `REMINDER_DESCRIPTION` of the reminder at index `1` to `Meeting with John at 12pm`.
+
 
 Examples:
 * `redit 1 dt/2022-10-10 12:00 d/Meeting for lunch` Edits the date and time and description of the 1st reminder to be `2022-10-10 12:00` and `Meeting for lunch` respectively.
@@ -367,16 +385,16 @@ Result for `rdelete 1`:
 
 Creates a popup view of the specified client from ClientHub.
 
-Format: `view NAME` or `v NAME` or `view NAME/`
+Format: `view NAME` or `v NAME` or `view NAME$`
 * The command is case-insensitive. eg. `alice` will match `Alice`
 * The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
 * If duplicates are found, `view` will throw an error telling user to specify the name further.
     * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
-* / is used to indicate **specific** name to view
-    * If there are two contacts named `David Li` and `David Lim`, typing `view David Li/` will show the contact with the name `David Li`.
-    * For contacts with names that are already unique, like `David Lim`, the `/` is not required.
-    * The `NAME` before the `/` must match the contact's name **exactly**.
-    * The order of the `NAME` and `/` matters - `David Li/` is different from `Li/David`.
+* `$` is used to indicate **specific** name to view
+    * If there are two contacts named `David Li` and `David Lim`, typing `view David Li$` will show the contact with the name `David Li`.
+    * For contacts with names that are already unique, like `David Lim`, the `$` is not required.
+    * The `NAME` before the `$` must match the contact's name **exactly**.
+    * The order of the `NAME` and `$` matters - `David Li$` is different from `Li$David`.
 
 A **valid** `NAME` for view should:
 * Not be empty.
