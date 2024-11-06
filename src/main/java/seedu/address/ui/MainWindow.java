@@ -3,9 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -43,7 +41,6 @@ public class MainWindow extends UiPart<Stage> {
     private StatusPieChart statusPieChart;
     private HelpWindow helpWindow;
 
-    // The currently viewed client in the detail panel
     private Client currentlyViewedClient;
 
     @FXML
@@ -67,27 +64,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private ImageView placeholderImage;
 
-    // Tracks client list changes to update UI components
     private final ListChangeListener<Client> clientListListener = change -> {
         while (change.next()) {
             if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
                 updateStatusChart();
-                if (currentlyViewedClient != null) {
-                    boolean clientFound = false;
-                    for (Client client : logic.getFilteredClientList()) {
-                        if (client.equals(currentlyViewedClient)) {
-                            currentlyViewedClient = client; // Update to new instance
-                            Platform.runLater(() -> clientDetailPanel.setClientDetails(client));
-                            clientFound = true;
-                            break;
-                        }
-                    }
-
-                    // Only close if the client was actually removed (not just filtered)
-                    if (!clientFound && change.wasRemoved()) {
-                        Platform.runLater(this::handleCloseCommand);
-                    }
-                }
+                handleClientListChange(change);
             }
         }
     };
@@ -107,17 +88,22 @@ public class MainWindow extends UiPart<Stage> {
         logic.getFilteredClientList().addListener(clientListListener);
     }
 
+    /**
+     * Returns the main {@code Stage} of the application.
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * Configures the keyboard shortcuts for menu items.
+     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
-     * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * Sets the specified {@code keyCombination} as the shortcut for the given {@code menuItem}.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -130,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Initializes and adds the primary UI components to the main window.
      */
     void fillInnerParts() {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
@@ -164,12 +150,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the detail panel if the currently viewed client was modified
+     * Handles updates in the client list, updating the UI as necessary.
      */
-    private void updateDetailPanelIfNeeded() {
+    private void handleClientListChange(ListChangeListener.Change<? extends Client> change) {
         if (currentlyViewedClient != null) {
+            if (change.wasRemoved() && change.getRemoved().stream()
+                    .anyMatch(client -> client.equals(currentlyViewedClient))) {
+                boolean clientStillExists = logic.getFilteredClientList().stream()
+                        .anyMatch(client -> client.equals(currentlyViewedClient));
+                if (!clientStillExists) {
+                    handleCloseCommand();
+                    return;
+                }
+            }
+
             boolean clientFound = false;
-            // Look for the same client in the filtered list
             for (Client client : logic.getFilteredClientList()) {
                 if (client.equals(currentlyViewedClient)) {
                     if (client != currentlyViewedClient) {
@@ -188,10 +183,114 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates the status pie chart with current data
+     * Executes the specified command text and returns the result.
+     */
+    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        try {
+            int indexToReview = getIndexForReview(commandText);
+            CommandResult commandResult = executeMainCommand(commandText);
+
+            if (!commandText.trim().toLowerCase().equals("close")) {
+                updateViewPanelWithFilteredList();
+            }
+
+            handlePostCommandExecution(commandResult, commandText, indexToReview);
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            handleCommandError(e);
+            throw e;
+        }
+    }
+
+    /**
+     * Updates the view panel with the filtered client list.
+     */
+    private void updateViewPanelWithFilteredList() {
+        if (currentlyViewedClient != null && !isClientInFilteredList(currentlyViewedClient)) {
+            handleCloseCommand();
+        }
+    }
+
+    /**
+     * Checks if the specified client is in the current filtered list.
+     */
+    private boolean isClientInFilteredList(Client client) {
+        return logic.getFilteredClientList().stream()
+                .anyMatch(c -> c.equals(client));
+    }
+
+    /**
+     * Returns the index of the client to review based on the command text.
+     */
+    private int getIndexForReview(String commandText) {
+        if (commandText.trim().toLowerCase().startsWith("edit") && currentlyViewedClient != null) {
+            for (int i = 0; i < logic.getFilteredClientList().size(); i++) {
+                if (logic.getFilteredClientList().get(i).equals(currentlyViewedClient)) {
+                    return i + 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Executes the main command and returns the result.
+     */
+    private CommandResult executeMainCommand(String commandText) throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute(commandText);
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        return commandResult;
+    }
+
+    /**
+     * Handles actions to take after a command is executed, such as displaying help or closing the view.
+     */
+    private void handlePostCommandExecution(CommandResult commandResult, String commandText, int indexToReview) {
+        if (indexToReview > 0) {
+            reviewClientAfterEdit(indexToReview);
+        } else if (commandResult.isShowClient()) {
+            handleViewCommand(commandResult);
+        } else if (commandText.trim().toLowerCase().equals("close")) {
+            handleCloseCommand();
+        } else if (commandResult.isConfirmedDeletion() && currentlyViewedClient != null
+                && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
+            handleCloseCommand();
+        }
+
+        if (commandResult.isShowHelp()) {
+            handleHelp();
+        }
+        if (commandResult.isExit()) {
+            handleExit();
+        }
+    }
+
+    /**
+     * Displays error messages when a command fails.
+     */
+    private void handleCommandError(Exception e) {
+        logger.info("Invalid command: " + e.getMessage());
+        resultDisplay.setFeedbackToUser(e.getMessage());
+    }
+
+    /**
+     * Re-views a client after an edit operation.
+     */
+    private void reviewClientAfterEdit(int index) {
+        try {
+            CommandResult viewResult = logic.execute("view " + index);
+            handleViewCommand(viewResult);
+        } catch (Exception e) {
+            logger.warning("Failed to re-view client after edit: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Updates the status chart with the current client data.
      */
     private void updateStatusChart() {
-        final int[] counts = new int[3]; // [na, nonUrgent, urgent]
+        final int[] counts = new int[3];
 
         for (Client client : logic.getFilteredClientList()) {
             switch (client.getStatus().status) {
@@ -206,31 +305,27 @@ public class MainWindow extends UiPart<Stage> {
 
         Platform.runLater(() -> {
             statusPieChart.updateChartData(counts[0], counts[1], counts[2]);
-            int total = counts[0] + counts[1] + counts[2];
-            logger.info(String.format("Chart updated - NA: %d, Non-Urgent: %d, Urgent: %d (Total: %d)",
-                    counts[0], counts[1], counts[2], total));
         });
     }
 
     /**
-     * Handles the view command by updating the UI to show client details.
+     * Handles the view command, displaying the specified client's details.
      */
     private void handleViewCommand(CommandResult commandResult) {
-        if (!splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
-            splitPane.getItems().add(clientDetailsPanelPlaceholder);
-            placeholderImage.setVisible(false);
-            splitPane.setDividerPositions(0.6);
-        }
-
         Client clientToView = commandResult.getViewedClient();
         if (clientToView != null) {
             currentlyViewedClient = clientToView;
+            if (!splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
+                splitPane.getItems().add(clientDetailsPanelPlaceholder);
+                placeholderImage.setVisible(false);
+                splitPane.setDividerPositions(0.6);
+            }
             clientDetailPanel.setClientDetails(clientToView);
         }
     }
 
     /**
-     * Closes the detail panel view.
+     * Closes the client details view.
      */
     private void handleCloseCommand() {
         if (splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
@@ -241,7 +336,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the help window or focuses on it if already open.
      */
     @FXML
     public void handleHelp() {
@@ -253,7 +348,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Exits the application, saving the current window settings.
      */
     @FXML
     private void handleExit() {
@@ -265,7 +360,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the default size based on {@code guiSettings}.
+     * Sets the default window size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
@@ -277,64 +372,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles commands that need to preserve filter state
-     */
-    private CommandResult handleFilterPreservingCommand(String commandText) throws CommandException, ParseException {
-        // Store the current filtered list
-        ObservableList<Client> preFilteredList = FXCollections.observableArrayList(logic.getFilteredClientList());
-
-        CommandResult commandResult = logic.execute(commandText);
-        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-        return commandResult;
-    }
-
-    /**
-     * Executes the command and returns the result.
-     */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
-        try {
-            CommandResult commandResult;
-            String trimmedCommand = commandText.trim().toLowerCase();
-
-            // Handle special commands
-            if (trimmedCommand.startsWith("edit")) {
-                commandResult = handleFilterPreservingCommand(commandText);
-            } else {
-                commandResult = logic.execute(commandText);
-                logger.info("Result: " + commandResult.getFeedbackToUser());
-                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            }
-
-            // Handle UI updates based on command result
-            if (commandResult.isShowClient()) {
-                handleViewCommand(commandResult);
-            } else if (trimmedCommand.equals("close")) {
-                handleCloseCommand();
-            } else if (commandResult.isConfirmedDeletion() && currentlyViewedClient != null
-                    && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
-                handleCloseCommand();
-            }
-
-            // Handle other UI states
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            return commandResult;
-        } catch (CommandException | ParseException e) {
-            logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
-            throw e;
-        }
-    }
-
-    /**
-     * Sets up the split panes and their divider positions
+     * Configures the split panes and their divider positions.
      */
     private void setupSplitPanes() {
         topSplitPane.setDividerPositions(0.8);
@@ -345,6 +383,9 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    /**
+     * Displays the primary stage.
+     */
     void show() {
         primaryStage.show();
     }
