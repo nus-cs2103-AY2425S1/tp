@@ -8,6 +8,7 @@ import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
 
+
 /**
  * Jackson-friendly version of {@link ShortCut}.
  */

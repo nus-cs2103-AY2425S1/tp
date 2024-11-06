@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
 
@@ -151,10 +152,12 @@ public class ModelManager implements Model {
     }
     @Override
     public void addShortCut(ShortCut shortcut) {
+        logger.info("ShortCut Added: " + shortcut.toString());
         addressBook.addShortCut(shortcut);
     }
     @Override
     public void removeShortCut(ShortCut shortcut) {
+        logger.info("ShortCut Removed: " + shortcut.toString());
         addressBook.removeShortCut(shortcut);
     }
     @Override
@@ -164,6 +167,10 @@ public class ModelManager implements Model {
     @Override
     public boolean hasAlias(Alias alias) {
         return addressBook.hasAlias(alias);
+    }
+    @Override
+    public boolean hasFullTagName(FullTagName fullTagName) {
+        return addressBook.hasFullTagName(fullTagName);
     }
     @Override
     public ObservableList<ShortCut> getShortCutList() {
