@@ -223,8 +223,7 @@
 }
 
 #cardPane {
-    -fx-background-color: #dfefff;
-    -fx-background-radius: 8;
+    -fx-background-color: transparent;
 }
 
 #commandTypeLabel {
