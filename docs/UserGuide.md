@@ -90,7 +90,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
+Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
 > [!Note]
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
@@ -191,7 +191,7 @@ Removes all graduated students from the address book based on the current year a
 Format: `clean`
 
 > [!Tip]
-> If you mistakenly entered this command, you can undo it with the `undo` command. See [Undo](#undoing-the-previous-command--undo) for details!
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
 Examples of usage:
 
