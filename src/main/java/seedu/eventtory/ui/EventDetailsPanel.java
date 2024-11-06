@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.eventtory.commons.core.LogsCenter;
+import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Logic;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
@@ -72,15 +73,15 @@ public class EventDetailsPanel extends UiPart<Region> {
             updateAssignedVendors();
         });
 
-        VendorListPanel vendorListPanel = new VendorListPanel(
-            assignedVendors, "Assigned Vendors", startIndexOfAssignedVendors);
+        VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors",
+                startIndexOfAssignedVendors);
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
-    private void setEvent(Event event, int index) {
+    private void setEvent(Event event, Index index) {
         this.event = event;
         if (event != null) {
-            String nameWithIndex = String.format("%d. %s", index + 1, event.getName().fullName);
+            String nameWithIndex = String.format("%d. %s", index.getZeroBased() + 1, event.getName().fullName);
             name.setText(nameWithIndex);
             date.setText(event.getDate().toString());
             // Empty tags will leave behind the last set of tags,

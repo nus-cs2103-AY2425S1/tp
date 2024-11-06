@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.eventtory.commons.core.GuiSettings;
 import seedu.eventtory.commons.core.LogsCenter;
+import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.commons.exceptions.AssociationDeleteException;
 import seedu.eventtory.model.event.Event;
@@ -343,9 +344,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getRelativeIndexOfVendor(Vendor vendor) {
+    public Index getRelativeIndexOfVendor(Vendor vendor) {
         requireNonNull(vendor);
-        return filteredVendors.indexOf(vendor);
+        return Index.fromZeroBased(filteredVendors.indexOf(vendor));
     }
 
     // =========== Viewed Events Accessors =============================================================
@@ -364,9 +365,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getRelativeIndexOfEvent(Event event) {
+    public Index getRelativeIndexOfEvent(Event event) {
         requireNonNull(event);
-        return filteredEvents.indexOf(event);
+        return Index.fromZeroBased(filteredEvents.indexOf(event));
     }
 
     // =========== UI State Accessors =============================================================

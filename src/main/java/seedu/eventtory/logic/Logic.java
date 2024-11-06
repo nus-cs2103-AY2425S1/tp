@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
+import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.commands.CommandResult;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.logic.parser.exceptions.ParseException;
@@ -66,10 +67,10 @@ public interface Logic {
     ObservableIntegerValue getStartingIndexOfAssignedEvents();
 
     /** Return the display index of the given vendor in the filtered list */
-    int getRelativeIndexOfVendor(Vendor vendor);
+    Index getRelativeIndexOfVendor(Vendor vendor);
 
     /** Return the display index of the given event in the filtered list */
-    int getRelativeIndexOfEvent(Event event);
+    Index getRelativeIndexOfEvent(Event event);
 
     /**
      * Returns the user prefs' EventTory file path.
