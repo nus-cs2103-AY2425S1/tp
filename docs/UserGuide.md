@@ -421,7 +421,16 @@ This segment describes features of BlitzBiz that helps users with using the app 
 
 #### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Need to quickly access this user guide while using BlitzBiz? Get **help** with this one simple command!
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `restore` command:**<br>
+
+* Shows a message explaining how to access the help page.
+
+</div>
+
 
 ![help message](images/helpMessage.png)
 
@@ -429,7 +438,7 @@ Format: `help`
 
 #### Restoring a deleted person : `restore`
 
-Restores the person deleted from the address book by the [`delete`](#deleting-a-person--delete) command.
+Used `delete` on the wrong person by accident? Well don't worry get their information back with the `restore` command!
 
 format: `restore`
 
@@ -437,7 +446,7 @@ format: `restore`
 
 **:information_source: Notes about the `restore` command:**<br>
 
-* Restores the last person deleted from the address book by the 'delete' command.
+* Restores the last person deleted from the address book by the [`delete`](#deleting-a-person--delete) command.
 * Only works if person has been deleted by the 'delete' command within the session.
 * Does not work if same person has been added to the address book after deletion using add command.
 
@@ -450,7 +459,7 @@ Examples:
 
 #### Backing up save file : `backup`
 
-Creates a backup file of the current save file.
+Worried about your save file? Create a backup file and keep it anywhere you want!
 
 Format: `backup`
 
@@ -458,18 +467,21 @@ Format: `backup`
 
 **:information_source: Notes about the `backup` command:**<br>
 
-* Backup AddressBook data will be saved as a JSON file `[JAR file location]/backup/addressbook.json`.
+* Creates a backup save of the current BlitzBiz data
+* Backup BlitzBiz data will be saved as a JSON file at `[JAR file location]/backup/addressbook.json`.
 * If a `addressbook.json` file already exists in the backup folder it will be overwritten.
-* The backup file can be used in order to restore the AddressBook data in case of data loss, or to transfer the data to another device.
+* The backup file can be used in order to restore the BlitzBiz data in case of data loss, or to transfer the data to another device.
 * Users can safely move or copy the backup file to another device, without worrying above negative consequences.
 
 </div>
 
 #### Clearing all entries : `clear`
 
+Want a fresh start
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
-Clears **all** entries from the address book.
+Clears **all** entries from the BlitzBiz app.
 
 </div>
 
@@ -483,17 +495,19 @@ Format: `exit`
 
 #### Saving the data
 
-BlitzBiz data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+BlitzBiz data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Editing the data file
 
-BlitzBiz data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+BlitzBiz data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data
+directly by editing that data file.  
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, BlitzBiz will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause BlitzBiz to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, BlitzBiz will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file using the backup command  before editing it.<br>
+Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+### Upcoming features
 #### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -503,7 +517,9 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: To safely transfer your data, install the app in the other computer. Use the `backup` command on your original computer and transfer the `addressbook.json` file at `[JAR file location]/backup`
+to `[JAR file location]/data` in your new computer.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
