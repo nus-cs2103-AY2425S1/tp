@@ -10,6 +10,7 @@ import javafx.beans.binding.StringExpression;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.hireme.commons.core.LogsCenter;
 import seedu.hireme.commons.util.StringUtil;
@@ -21,8 +22,11 @@ import seedu.hireme.model.internshipapplication.Status;
 public class ChartWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ChartWindow.class);
     private static final String FXML = "ChartWindow.fxml";
+    private static final String countTitle = "Number of internship applications: ";
     @FXML
     private PieChart pieChart;
+    @FXML
+    private Label internshipCount;
 
     /**
      * Creates a new ChartWindow.
@@ -71,6 +75,9 @@ public class ChartWindow extends UiPart<Stage> {
      * Updates the pie chart with new chart data
      */
     public void update(Map<Status, Integer> insights) {
+        int count = getInternshipCount(insights);
+        internshipCount.setText(countTitle + count);
+
         List<PieChart.Data> data = new ArrayList<>();
         List<Map.Entry<Status, Integer>> sortedList = new ArrayList<>(insights.entrySet());
         sortedList.sort(Map.Entry.comparingByKey());
@@ -84,7 +91,7 @@ public class ChartWindow extends UiPart<Stage> {
         pieChart.setData(FXCollections.observableArrayList(data));
         pieChart.setTitle("Internship Application Chart");
         pieChart.setClockwise(true);
-        pieChart.setLabelsVisible(true);
+        pieChart.setLabelsVisible(count > 0);
         pieChart.setStartAngle(360);
         pieChart.setAnimated(false);
         pieChart.layout();
@@ -127,5 +134,9 @@ public class ChartWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    private int getInternshipCount(Map<Status, Integer> insights) {
+        return insights.values().stream().reduce(0, Integer::sum);
     }
 }

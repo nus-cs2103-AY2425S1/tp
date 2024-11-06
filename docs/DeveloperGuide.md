@@ -18,24 +18,33 @@
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
   * [**Implementation**](#implementation)
+    * [Getting help](#getting-help)
     * [Create new internship application](#create-new-internship-application)
-    * [Find internship applications](#find-internship-applications)
-    * [Filter internship applications](#filter-internship-applications)
+    * [List all internship applications](#list-all-internship-applications)
     * [Delete an internship application](#delete-an-internship-application)
+    * [Find internship applications](#find-internship-applications)
+    * [Update the Status of an Internship Application](#update-the-status-of-an-internship-application)
+    * [Filter internship applications](#filter-internship-applications)
     * [Sort internship application list](#sort-internship-application-list)
     * [View chart](#view-chart)
-    * [Update the Status of an Internship Application](#update-the-status-of-an-internship-application)
+    * [Close the application](#close-the-application)
   * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
   * [**Appendix: Requirements**](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
-* [Glossary](#glossary)
+    * [Glossary](#glossary)
   * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
+    * [Launch](#launch)
+    * [Help Window](#help-window)
+    * [Adding an internship application](#adding-an-internship-application)
     * [Deleting an internship application](#deleting-an-internship-application)
+    * [Sorting the list of internship applications](#sorting-the-list-of-internship-applications)
+    * [Finding internship applications](#finding-internship-applications)
+    * [Updating the status of an internship application](#updating-the-status-of-an-internship-application)
     * [Saving data](#saving-data)
+    * [Shutdown](#shutdown)
 <!-- TOC -->
 <page-nav-print />
 
@@ -667,7 +676,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-# Glossary
+### Glossary
 
 - **Application Status**:
     - **PENDING**: The internship application is currently in progress.

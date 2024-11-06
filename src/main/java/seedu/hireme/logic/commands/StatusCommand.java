@@ -35,7 +35,11 @@ public class StatusCommand extends Command {
             + " or " + COMMAND_WORD_PENDING + " or " + COMMAND_WORD_REJECT
             + ": Changes the status of the internship application identified by "
             + "the index number used in the displayed list.\n"
-            + "Parameters: INDEX (" + MESSAGE_INDEX_CONSTRAINT + ")\n";
+            + "Parameters: INDEX (" + MESSAGE_INDEX_CONSTRAINT + ")\n"
+            + "Examples (assuming the total number of applications is 5):\n"
+            + COMMAND_WORD_ACCEPT + " 5\n"
+            + COMMAND_WORD_PENDING + " 5\n"
+            + COMMAND_WORD_REJECT + " 5";
 
     /**
      * Message to display upon successful status update.
