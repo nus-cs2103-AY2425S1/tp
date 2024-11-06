@@ -117,16 +117,17 @@ Examples:
 
 Assigns vendors to events.
 
-#### Format: `assign v/VENDOR_INDEX e/EVENT_INDEX`
+#### Format: `assign INDEX`
 
-* Assigns the vendor specified at `VENDOR_INDEX` to the event specified at `EVENT_INDEX`.
-  * The index refers to the index number shown in the displayed person list.
+* Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
+  * The index refers to the index number shown in the vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
+* The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
 
 #### Examples:
-* `assign v/1 e/2` will assign the 1st vendor to the 2nd event.
-* `assign e/5 v/2` will assign the 2nd vendor to the 5th event.
+* `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
+* `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
 
 ### Locating persons by name: `find`
 
