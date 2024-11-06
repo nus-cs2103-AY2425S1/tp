@@ -296,18 +296,51 @@ public class ModelManager implements Model {
 
     @Override
     public void addTagFilters(Set<Tag> tagFilters) {
-        this.tagFilters.addAll(tagFilters);
+        for (Tag tag : tagFilters) {
+            if (!this.tagFilters.contains(tag)) {
+                this.tagFilters.add(tag);
+            }
+        }
     }
 
     @Override
     public void addStatusFilters(Set<RsvpStatus> statusFilters) {
-        this.statusFilters.addAll(statusFilters);
+        for (RsvpStatus status : statusFilters) {
+            if (!this.statusFilters.contains(status)) {
+                this.statusFilters.add(status);
+            }
+        }
+    }
+
+    @Override
+    public boolean checkTagFilterAlreadyExists(Tag tagToCheck) {
+        if (this.tagFilters.contains(tagToCheck)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+        if (this.statusFilters.contains(statusToCheck)) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
-        this.tagFilters.removeAll(tagFilters);
-        this.statusFilters.removeAll(statusFilters);
+        this.tagFilters.remove(tagFilters);
+        this.statusFilters.remove(statusFilters);
+
+        for (Tag tag : tagFilters) {
+            this.tagFilters.remove(tag);
+        }
+
+        for (RsvpStatus status : statusFilters) {
+            this.statusFilters.remove(status);
+        }
     }
 
     @Override

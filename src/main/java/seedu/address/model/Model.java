@@ -220,6 +220,16 @@ public interface Model {
     void addStatusFilters(Set<RsvpStatus> statusFilters);
 
     /**
+     * Checks whether the tag filter already exists in the list of filters.
+     */
+    boolean checkTagFilterAlreadyExists(Tag tagToCheck);
+
+    /**
+     * Checks whether the RSVP status filter already exists in the list of filters.
+     */
+    boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck);
+
+    /**
      * Removes the tag and RSVP status filters in the sets from the model.
      */
     void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters);
