@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/e delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="544"  alt=""/>
 
@@ -94,13 +94,14 @@ Here's a (partial) class diagram of the `Logic` component:
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteVolunteerSequenceDiagram.png)
-
+![Supporting sd Frame](images/DeleteVolunteerSequenceDiagramSdFrame.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command. 
+   - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -111,8 +112,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="668"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `{Command Name}CommandParser` which uses the other classes shown above to parse the user command and create a `{Command Name}Command` object (e.g., `AssignCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `{Command Name}CommandParser` classes (e.g., `AssignCommandParser`, `EventNewCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -122,17 +123,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Event` and `Volunteer` objects (which are contained in a `UniqueEventList` and `UniqueVolunteerList` object respectively).
+* stores the currently 'selected' `Event` and `Volunteer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` and `ObservableList<Volunteer` respectively, that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="472"  alt=""/>
-
-</div>
-
 
 ### Storage component
 
@@ -147,102 +141,13 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2425S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="308"  alt=""/>
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,61 +211,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 # UML Use Cases: Contact Management Application for Volunteer Organizations
+<br/>
+For the following use cases, the `Actors` are defined as the Management Staff of Volunteer Organisations, and the `System` is defined as VolunSync, unless specified otherwise.
 
-## Actors
-- Management Staff
+### UC01. Create Event
 
-## Use Cases
+**Description**: Create a new event in the system.
 
-### 1. Create Volunteer Event
+**Preconditions**: NA
 
-**Actor**: Management Staff
+**MSS**:
+1. User enters event's details.
+2. User submits the event's details to the system.
+3. System checks if all required information is present, and that all information is valid.
+4. System creates the new event and confirms creation to the user.
 
-**Description**: Create a new volunteer event in the system.
-
-**Preconditions**:
-- User is logged in with management privileges
-
-**Main Flow**:
-1. User selects "Create New Event" option
-2. System displays event creation form
-3. User enters event details (eventName, date, time, location, required roles)
-4. User submits the form
-5. System validates the information
-6. System creates the new event and confirms creation to the user
-
-**Alternative Flows**:
-- 5a. If information is invalid, system displays error and returns to step 3
-- 6a. If event creation fails, system notifies user and provides option to try again
+**Extensions**:
+- 3a. Information provided is incomplete or invalid.
+  - 3ai. System displays error and returns to step 1.
+    Use Case Ends.
+- 4a. Event creation fails.
+  - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
+    Use Case Ends.
 
 **Postconditions**:
-- New event is stored in the system
+- New event is stored in the system.
 
-### 2. Add Volunteer to Event
+### UC02. Create Volunteer
 
-**Actor**: Management Staff
+**Description**: Create a new Volunteer in the system.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters the volunteer's details.
+2. User submits the volunteer's details to the system.
+3. System checks if all required information is present, and that all information is valid.
+4. System creates the new event and confirms creation to the user.
+   Use Case Ends.
+
+**Extensions**:
+- 3a. Information provided is incomplete or invalid.
+   - 3ai. System displays error and returns to step 1.
+     Use Case Ends.
+- 4a. Volunteer creation fails.
+   - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
+     Use Case Ends.
+
+**Postconditions**:
+- New volunteer is stored in the system.
+
+### UC03. Assign Volunteer to Event
 
 **Description**: Assign a volunteer to a specific event.
 
 **Preconditions**:
-- Volunteer event exists in the system
-- Volunteer is registered in the system
+- Event exists in the system.
+- Volunteer is registered in the system.
 
-**Main Flow**:
-1. User navigates to the event details page
-2. User selects "Add Volunteer" option
-3. System displays list of available volunteers
-4. User selects a volunteer
-5. System prompts for role assignment and availability
-6. User provides role and availability information
-7. System adds the volunteer to the event and confirms addition
+**MSS**:
+1. User queries all volunteers and events.
+2. System displays list of all volunteers and events.
+3. User selects the desired volunteer and event to assign the volunteer to.
+4. User submits the information to the system.
+5. System adds the volunteer to the event and confirms addition.
+   Use Case Ends.
 
 **Extensions**:
-- 4a. If desired volunteer is not in the list, user can add a new volunteer
-- 7a. If addition fails, system notifies user and provides option to try again
+- 2a. No volunteers and/or events are found.
+  - 2ai. System notifies user and prompts user to create a new volunteer ([UC02 - Create Volunteer](#uc02-create-volunteer)) and / or event ([UC01 - Create Event](#uc01-create-event)).
+   Use Case Ends.
+- 5a. Volunteer is already assigned to the event.
+  - 5ai. System notifies user.
+  - 5aii. Volunteer remains assigned to the event.
+    Use Case Ends.
+-5b. Volunteer is assigned to another event occurring at the same time.
+  - 5bi. System notifies user.
+  - 5bii. Volunteer is not assigned to the event.
+    Use Case Ends.
 
-**Postconditions**:
-- Volunteer is associated with the event in the system
+**Guarantees**:
+- Volunteer is associated with the event in the system if the volunteer is not assigned to another event occurring at the same time.
+
+### UC04. Find Volunteer by Name
+
+**Description**: Search for a volunteer by their name.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters a keyword to search for.
+2. System looks up all volunteers whose names contain the keyword.
+3. System notifies the number of matches found and displays the list of volunteers whose names contains the keyword.
+   Use Case Ends.
+
+**Extensions**:
+- 2a. No volunteers whose names contains the keyword are found.
+  - 2ai. System notifies user and displays all volunteers.
+    Use Case Ends.
 
 ## UML Use Case Diagram
 
@@ -396,6 +344,7 @@ This diagram shows the main actor (Management Staff) and their interactions with
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
+* **MSS**: Main Success Scenario, the primary flow of events in a use case.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
