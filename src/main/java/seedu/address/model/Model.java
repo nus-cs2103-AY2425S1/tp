@@ -111,11 +111,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Gets predicate for the people in the current filtered list.
-     */
-    Predicate<? super Person> getFilteredPersonListPredicate();
-
-    /**
      * Pushes a concrete command to the undo stack.
      */
     void pushToUndoStack(ConcreteCommand command);
