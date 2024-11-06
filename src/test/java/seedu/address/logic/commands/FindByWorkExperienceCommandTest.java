@@ -70,7 +70,8 @@ public class FindByWorkExperienceCommandTest {
         // Update the expected message to match the new formatted output
         String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_WORKEXP, 2, "as Intern at Google in 2024");
 
-        WorkExperienceContainsKeywordsPredicate predicate = new WorkExperienceContainsKeywordsPredicate("Intern", "Google", "2024");
+        WorkExperienceContainsKeywordsPredicate predicate = new WorkExperienceContainsKeywordsPredicate("Intern",
+                "Google", "2024");
         FindByWorkExperienceCommand command = new FindByWorkExperienceCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
