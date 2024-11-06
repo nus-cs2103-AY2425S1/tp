@@ -3,7 +3,8 @@ layout: default.md
 title: "NovaCare User Guide"
 pageNav: 3
 ---
-NovaCare is a **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+## NovaCare
+A **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +68,7 @@ The following are annotations throughout this user guide that provide additional
 
 This section provides a quick overview of how to set up and run NovaCare on your computer.
 
-### Step 1. Ensure you have Java `17` or above installed in your Computer. You can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
+### Step 1. Ensure you have Java `17` or above installed in your Computer. You can download Java [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
 For **Windows** users, you can type **Command Prompt** in the search bar.
 Type `java -version` to check if you have Java installed.
@@ -79,7 +80,7 @@ Type `java -version` to check if you have Java installed.
 Upon successful installation, you should see something like this:
 ![Mac Java](images/mac-java.png)
 
-### Step 2. Download NovaCare from [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
+### Step 2. Download NovaCare [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
 1. Download the `NovaCareApp.jar` file from the link provided by scrolling down to Assets as shown below.
    ![Assets](images/assets.png)
 2. Click on the `NovaCareApp.jar` file to download it.
@@ -98,40 +99,40 @@ Upon successful execution, you should see the GUI of NovaCare covered in the nex
 
 The GUI is broken down into different **sections** as shown in the image below:
 ![GUI Overview](images/GUIOverview.jpg)
-1. Command Box: This is where you can type your commands to interact with the application.
-2. Result Display Box: Displays the result of commands.
-3. Patient List: Displays all the patients in the application.
-4. Task List: Displays all the task for all patients.
-5. Menu Bar: Contains the `File` and `Help` menu. (to exit or view the help menu)
+1. **Command Box**: This is where you can type your commands to interact with the application.
+2. **Result Display Box**: Displays the result of commands.
+3. **Patient List**: Displays all the patients in the application.
+4. **Task List**: Displays all the task for all patients.
+5. **Menu Bar**: Contains the `File` and `Help` menu. (to exit or view the help menu)
 
 ## Get started with NovaCare
 Here will be a basic guide on how to use the application.
 1. **Launch help guide**:
-   * Type the command in the command box and press Enter to **view help window**:
+   * Type the following command in the command box and press Enter to **view help window**:
       > `help`
 
 2. **Clear all entries**:
-   * Type the command in the command box and press Enter to **clear all entries**:
+   * Type the following command in the command box and press Enter to **clear all entries**:
       > `clear`
 
 3. **Add a patient**:
-   * Type the command in the command box and press Enter to **add a patient**:
+   * Type the following command in the command box and press Enter to **add a patient**:
       > `add n/Johnson p/98765432 e/johnson123@gmail.com a/123, Clementi Rd, 1234665 t/diabetes`
 
 4. **Edit patient information**:
-   * Type the command in the command box and press Enter to **edit a patients's information**:
+   * Type the following command in the command box and press Enter to **edit a patients's information**:
       > `edit 1 p/91234567`
 
 5. **Delete a patient**:
-   * Type the command in the command box and press Enter to **delete a patient**:
+   * Type the following command in the command box and press Enter to **delete a patient**:
       > `delete 1`
 
 6. **Add a task**:
-    * Type the command in the command box and press Enter to **add a task to the patient**:
+    * Type the following command in the command box and press Enter to **add a task to the patient**:
         > `addtask 1 d/Eat paracetamol 1000mg`
 
 7. **Exit**:
-    * Type the command in the command box and press Enter to **exit the program**:
+    * Type the following command in the command box and press Enter to **exit the program**:
         > `exit`
 
 Refer to the [Features](#features) below for details of each command.
@@ -147,7 +148,7 @@ Refer to the [Features](#features) below for details of each command.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets `[]` are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -175,7 +176,7 @@ Format: `help`
 
 Adds a patient to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+:pencil: Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -190,13 +191,13 @@ Examples:
 
 Shows a list of all patients in the address book.
 
-Format: `list`
+:pencil: Format: `list`
 
 ### Editing a patient : `edit`
 
 Edits an existing patient in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+:pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -213,7 +214,7 @@ Examples:
 
 Finds patients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+:pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -231,7 +232,7 @@ Examples:
 
 Deletes the specified patient and tasks associated to that patient from the address book.
 
-Format: `delete INDEX`
+:pencil: Format: `delete INDEX`
 
 * Deletes the patient and task associated to that patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -245,7 +246,7 @@ Examples:
 
 Adds a task to a patient in the address book.
 
-Format: `addtask INDEX d/DESCRIPTION`
+:pencil: Format: `addtask INDEX d/DESCRIPTION`
 
 * Adds a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -261,7 +262,7 @@ Examples:
 
 Deletes a task for a patient in the address book.
 
-Format: `deletetask INDEX`
+:pencil: Format: `deletetask INDEX`
 
 * Deletes a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -274,7 +275,7 @@ Examples:
 
 Adds an emergency contact and details to a patient in the address book.
 
-Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
+:pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
 * Adds an emergency contact and details at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -287,7 +288,7 @@ Examples:
 
 Deletes an emergency contact and its details from a patient in the address book.
 
-Format: `delemergency INDEX
+:pencil: Format: `delemergency INDEX
 
 * Deletes an emergency contact and its details at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -300,7 +301,7 @@ Examples:
 
 Adds an priority level to a patient in the address book.
 
-Format: `priority /id INDEX /level PRIORITY_LEVEL`
+:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
 
 * Adds a priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -314,7 +315,7 @@ Examples:
 
 Delete a priority level to a patient in the address book, resetting it to the default value **3**.
 
-Format: `deletelevel INDEX`
+:pencil: Format: `deletelevel INDEX`
 
 * Delete the current priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
@@ -327,7 +328,7 @@ Examples:
 
 Marks a task at a specific index.
 
-Format: `marktask INDEX`
+:pencil: Format: `marktask INDEX`
 
 * Marks a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Task list.
@@ -340,13 +341,13 @@ Examples:
 
 Clears all patient and tasks entry from NovaCare.
 
-Format: `clear`
+:pencil: Format: `clear`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+:pencil: Format: `exit`
 
 ### Saving the data
 
@@ -371,24 +372,24 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I **transfer my data** to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: What should I do if NovaCare doesn't start after double-clicking the JAR file? <br>
+**Q**: What should I do if NovaCare **doesn't start** after double-clicking the JAR file? <br>
 **A**: Ensure Java is correctly installed by typing `[java -version]` in your command prompt or terminal. If Java is not recognized, install it from Oracle's official site.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
-### Patient-related commands:
+### Patient-Related Commands:
 | Action                    | Format Examples                                                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
@@ -403,7 +404,7 @@ _Details coming soon ..._
 | **Clear**                 | `clear`                                                                                                                                                  |
 
 
-### Task-related commands:
+### Task-Related Commands:
 | Action              | Format, Examples                                                                   |
 |---------------------|------------------------------------------------------------------------------------|
 | **Add Task**        | `addtask INDEX d/TASK_DESCRIPTION` <br> e.g., `addtask 1 d/Eat paracetamol 1000mg` |
@@ -412,7 +413,7 @@ _Details coming soon ..._
 | **List Task**       | `listtask`                                                                         |
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
 | **List Incomplete** | `listincomplete`                                                                   |
-### Other commands:
+### Other Commands:
 | Action                | Format, Examples       |
 |-----------------------|------------------------|
 |**Help**               | `help`                 |
