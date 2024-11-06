@@ -91,7 +91,7 @@
 }
 
 .list-view .placeholder {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #e6f3ff;
     -fx-text-fill: #2c3e50;
 }
 
@@ -141,14 +141,14 @@
 }
 
 .pane-with-border {
-    -fx-background-color: #fefefe;
+    -fx-background-color: #b8d6f8;
     -fx-border-color: #d9e2ea;
     -fx-border-top-width: 1px;
     -fx-border-radius: 0;
 }
 
 .pane-without-border {
-    -fx-background-color: #f7f9fc;
+    -fx-background-color: #b8d6f8;
 }
 
 .status-bar {
@@ -156,9 +156,9 @@
 }
 
 .result-display {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #0000FF;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12.4pt;
     -fx-text-fill: #2c3e50;
 }
 
@@ -200,7 +200,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: #f8fafc;
+    -fx-background-color: #e0f0ff;
     -fx-border-color: #d9e2ea;
     -fx-border-width: 0 0 1px 0;
     -fx-border-radius: 0;
@@ -272,3 +272,13 @@
         -fx-font-size: 14;
 }
 
+#commandTextField {
+    -fx-background-color: #c1d9f1 #c1d9f1 #c1d9f1 #c1d9f1;
+    -fx-background-insets: 0;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Lucida Console";
+    -fx-font-size: 13pt;
+    -fx-text-fill: black;
+}

@@ -174,8 +174,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void show() {
-        primaryStage.setMinHeight(800);
-        primaryStage.setMinWidth(1200);
         primaryStage.show();
     }
 
