@@ -9,7 +9,7 @@ import java.util.Locale;
  */
 public class TagBuilder {
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a TagBuilder.
      */
     public TagBuilder() {
     }
@@ -41,7 +41,7 @@ public class TagBuilder {
                 return new Tag(userInput);
             }
         }
-        // If no specific type, return a CustomTag
+        // If no specific type, return a Normal Tag
         return new Tag(userInput);
     }
 
