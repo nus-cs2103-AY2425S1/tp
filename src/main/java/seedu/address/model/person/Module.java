@@ -90,7 +90,7 @@ public class Module {
      * @param test the module value to be tested.
      * @return the result of the test.
      */
-    private boolean isValidLength(String test) {
+    public static boolean isValidLength(String test) {
         boolean isValidMinLength = test.length() >= MIN_MODULE_LENGTH;
         boolean isValidMaxLength = test.length() <= MAX_MODULE_LENGTH;
         return isValidMinLength && isValidMaxLength;
