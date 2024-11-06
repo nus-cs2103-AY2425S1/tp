@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -22,6 +23,7 @@ import seedu.address.model.doctor.Doctor;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AppointmentBuilder;
+
 
 /**
  * Unit tests for {@code AddAppointmentCommand}.
@@ -63,6 +65,26 @@ public class AddAppointmentCommandTest {
         // different appointment -> returns false
         assertFalse(addAppointmentOneCommand.equals(addAppointmentTwoCommand));
     }
+
+    @Test
+    public void checkForClashingAppointments_clashingDate_throwsException() {
+        Appointment appointmentOne = new AppointmentBuilder().withDate("12-12-2023").withTime("1400").build();
+        Appointment appointmentTwo = new AppointmentBuilder().withDate("12-12-2023").withTime("1400").build();
+
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        modelStub.addAppointment(appointmentOne);
+
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(
+                appointmentTwo.getPatient().getName(),
+                appointmentTwo.getDoctor().getName(),
+                appointmentTwo.getDate(),
+                appointmentTwo.getTime()
+        );
+
+        assertThrows(CommandException.class, () -> addAppointmentCommand.execute(modelStub));
+    }
+
+
 
     /**
      * A default model stub that have all of the methods failing.
