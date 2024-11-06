@@ -21,7 +21,9 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .anyMatch(keyword -> (StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
-                        || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)));
+                        || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)
+                        || person.getRoles().stream().anyMatch(
+                                role -> role.getRoleName().toLowerCase().contains(keyword.toLowerCase()))));
     }
 
     @Override

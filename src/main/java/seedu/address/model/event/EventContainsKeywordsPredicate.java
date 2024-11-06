@@ -5,15 +5,18 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
  * Tests that an {@link Event}'s {@link EventName} matches any of the keywords given.
  */
 public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
+    private final PersonContainsKeywordsPredicate personContainsKeywordsPredicate;
 
     public EventContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+        this.personContainsKeywordsPredicate = new PersonContainsKeywordsPredicate(keywords);
     }
 
     @Override
@@ -23,10 +26,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         || (StringUtil.containsSubstringIgnoreCase(event.getSport().toString(), keyword))
                         || (StringUtil.containsSubstringIgnoreCase(event.getVenue().toString(), keyword))
                         || event.getParticipants().stream()
-                            .anyMatch(person ->
-                                    StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
-                                    || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
-                                    || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)));
+                            .anyMatch(personContainsKeywordsPredicate));
     }
 
     @Override
