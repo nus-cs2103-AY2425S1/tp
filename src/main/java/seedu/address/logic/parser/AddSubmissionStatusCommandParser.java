@@ -5,6 +5,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION_STATUS;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddSubmissionStatusCommand;
@@ -16,10 +20,12 @@ import seedu.address.model.submission.Submission;
  */
 public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionStatusCommand> {
 
+    private static final Logger logger = LogsCenter.getLogger(AddSubmissionStatusCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the {@code AddSubmissionStatusCommand}
      * and returns a {@code AddSubmissionStatusCommand} object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddSubmissionStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -27,6 +33,7 @@ public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionSta
 
         if (!argMultimap.getValue(PREFIX_SUBMISSION).isPresent()
                 || !argMultimap.getValue(PREFIX_SUBMISSION_STATUS).isPresent()) {
+            logger.log(Level.WARNING, "Missing prefix for AddSubmissionCommand or AddSubmissionStatusCommand.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSubmissionStatusCommand.MESSAGE_USAGE));
         }
@@ -46,6 +53,7 @@ public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionSta
             throw new ParseException(ive.getMessage(), ive);
         }
 
+        logger.log(Level.INFO, "Parsed AddSubmissionStatusCommand successfully.");
         return new AddSubmissionStatusCommand(index, submission, submissionStatus);
     }
 }
