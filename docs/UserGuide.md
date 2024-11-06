@@ -122,11 +122,12 @@ Examples:
 *  `edit 2 n/Jason Brown t/` Edits the name of the 2nd person to be `Jason Brown` and clears their telegram username.
 *  `edit 3 n/Betsy Crower r/` Edits the name of the 3rd person to be `Betsy Crower` and clears all existing roles.
 
-### Locating persons by name: `find`
+### Locating persons, `find-name` and `find-role`
 
+#### `find-name`
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find-name KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -140,6 +141,129 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+#### `find-role`
+Finds persons who have the specified role.
+
+Format: `find-role ROLE`
+
+* The search is case-insensitive. e.g `attendee` will match `Attendee`
+* Only full words will be matched e.g. `attend` will not match `attendee`
+* Roles should be one of the following: `attendee`, `sponsor`, `vendor`, `volunteer`
+* Persons matching the role will be returned.
+* If more than 1 role is specified, persons matching at least one role will be returned (i.e. `OR` search).
+  e.g. `attendee sponsor` will return persons who are either attendees or sponsors.
+
+Examples:
+* `find-role attendee` returns all persons who are attendees.<br>
+![FindRoleSingleRole.png](images%2FFindRoleSingleRole.png)
+
+
+
+* `find-role attendee sponsor` returns all have roles of either attendee or sponsor (or both!).<br>
+![FindRoleDoubleRole.png](images%2FFindRoleDoubleRole.png)
+
+
+## Specialized Searching Mode: `searchmode`/`sm`
+Searchmode allows you to search for persons based on multiple criteria. 
+You can search for persons based on any criteria including:
+- Name
+- Phone Number
+- Email
+- Address
+- Telegram Handle
+- Role
+
+To Enter Searchmode, type `searchmode` or `sm` and press Enter. The display will then change to show the Searchmode interface.
+
+![SearchModeUI.png](images%2FSearchModeUI.png)
+Searchmode will display the list of all Contacts in PlanPal in the right blue panel (in the same way as the `list` command).
+<br> The persons that match the search criteria (if any) will be displayed in the center panel.
+
+The following commands can be used in Searchmode:
+- `search` : Search for persons based on the criteria you specify.
+- `exclude` : Exclude persons from appearing in searchmode
+- `clearexcluded` : Clear all excluded persons
+- `checkexcluded` : Check the list of excluded persons
+- `exitsearch`/`es` : Exit searchmode and return to the normal display
+- `help` : Display the help message 
+- `exit`: Exit the program (same as the `exit` command)
+
+### Searching in Searchmode `search`
+
+Format: `search [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`
+
+
+<Br>For each field, you can either specify multiple keywords _or_ multiple partial keywords
+<Br>For example:
+- `search n/Alex Yeoh` will return all persons whose name matches `Alex Yeoh` OR persons whose name contains `"Alex"`or 
+`"Yeoh"`
+![NameMatchCriteriaExample.png](images%2FNameMatchCriteriaExample.png)
+
+
+<Br>With multiple fields search command will return all persons that match **ALL** the criteria you specify.
+<Br>
+Example:
+- `search n/Alex Yeoh t/alexyeoh a/Blk` will return all persons 
+whose:
+  - name contains `Alex Yeoh`
+  - telegram handle contains `alexyeoh` 
+  - address contains `Blk`.
+    ![SpecificSearchCriteria.png](images%2FSpecificSearchCriteria.png)
+
+You can chain multiple searches to get the full list of persons you are looking for!
+Example:
+- Following up on the previous example, you can add more to the search list with more searches:
+  - `search n/Char` will add people who have `Char` in their name to the list!
+![ChainSearchExample1.png](images%2FChainSearchExample1.png)
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If looking for a specific person, try to be as specific as possible to get the best results!
+</div>
+
+### Excluding persons from Searchmode `exclude`
+
+Format: `exclude pi/INDEX [MORE_INDEXES]`
+
+To get rid of persons from the search results, you can exclude them using the `exclude` command.
+Note that excluded persons will not be displayed in all subsequent search results until they are cleared from the excluded list.
+
+Example:
+- `search n/Alex` returns a list of persons with the name `Alex`
+  ![NameMatchCriteriaExample.png](images%2FNameMatchCriteriaExample.png)
+- `exclude pi/2` will exclude the second person in the list from the search results
+![ExcludeExample.png](images%2FExcludeExample.png)
+- Subsequent searches will not include the excluded person in the search results
+  - `search p/9234512` matches previously excluded person but will not reappear in l ist
+![ExcludedSearchExample.png](images%2FExcludedSearchExample.png)
+
+### Check excluded persons `checkexcluded`
+To check the currently excluded persons in the search results, use the `checkexcluded` command.
+
+Format: `checkexcluded`
+
+Example:
+- `checkexcluded` will display the list of persons that have been excluded from the search results
+![CheckExcluded.png](images%2FCheckExcluded.png)
+
+### Clear Excluded persons `clearexcluded`
+To remove all persons from the excluded list, use the `clearexcluded` command.
+Removed persons will be immediately added back to the list
+
+Format: `clearexcluded`
+
+Example:
+![ClearExcludedExample.png](images%2FClearExcludedExample.png)
+
+### Exiting Searchmode `exitsearch`/`es`
+To exit searchmode and return to the normal display, use the `exitsearch` or `es` command.
+
+Format: `exitsearch` or `es`
+
+Example:
+![ExitSearch.png](images%2FExitSearch.png)
+
+_This is the end of the Searchmode feature commands. The following commands can be used in the normal display mode._
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
