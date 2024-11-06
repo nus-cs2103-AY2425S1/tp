@@ -53,6 +53,12 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+
+        // check for recent birthday
+        if (isVisualsEnabled && person.getBirthday().hasBirthdayWithin7Days()) {
+            name.getStyleClass().add("label-name-birthday");
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {

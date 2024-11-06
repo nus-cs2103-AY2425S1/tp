@@ -18,6 +18,12 @@
     -fx-font-family: "Segoe UI Bold";
 }
 
+.label-name-birthday {
+    -fx-text-fill: #ff4500;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
 /* Phone and email labels */
 .label-phone, .label-email {
     -fx-text-fill: white;
