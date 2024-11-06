@@ -71,7 +71,7 @@ public class UnlinkPersonCommand extends Command {
 
         model.unlinkPersonFromEvent(personToUnlink, targetEvent);
 
-        return new CommandResult(String.format(MESSAGE_LINK_SUCCESS, Messages.format(targetEvent)));
+        return new CommandResult(String.format(MESSAGE_LINK_SUCCESS, Messages.format(targetEvent)), false, false, true);
     }
 
     @Override
