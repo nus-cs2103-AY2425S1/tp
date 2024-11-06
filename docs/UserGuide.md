@@ -157,9 +157,18 @@ Format: `del n/NAME` followed by `y` or `n`
 </box>
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/deleteMsg.png" alt="delete message" style="width: 33%;">
-  <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 33%;">
-  <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 33%;">
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteMsg.png" alt="delete message" style="width: 100%;">
+    <div>Confirmation Prompt</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 100%;">
+    <div>Success</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 100%;">
+    <div>Cancel Operation</div>
+  </div>
 </div>
 
 Examples:
@@ -184,8 +193,14 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 </box>
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="images/editMsg.png" alt="edit message" style="width: 50%;">
-  <img src="images/editMsg2.png" alt="edit message success" style="width: 50%;">
+   <div style="text-align: center; width: 50%;">
+    <img src="images/editMsg.png" alt="edit message before" style="width: 100%;">
+    <div>Before</div>
+  </div>
+  <div style="text-align: center; width: 50%;">
+    <img src="images/deleteYMsg.png" alt="edit message after" style="width: 100%;">
+    <div>After</div>
+  </div>
 </div>
 
 Examples:
@@ -244,10 +259,23 @@ Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 
 </box>
 
-![delete wedding message](images/deleteWeddingMsg.png)
+<div style="display: flex; justify-content: space-between;">
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteWeddingMsg.png" alt="delete wedding message" style="width: 100%;">
+    <div>Confirmation Prompt</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteWeddingYMsg.png" alt="delete wedding message success" style="width: 100%;">
+    <div>Success</div>
+  </div>
+  <div style="text-align: center; width: 33%;">
+    <img src="images/deleteWeddingNMsg.png" alt="delete wedding message cancel" style="width: 100%;">
+    <div>Cancel Operation</div>
+  </div>
+</div>
 
 Examples:
-* `del-wed w/Alice Koh & John Lee` followed by `y` deletes the wedding named `John Doe` from the address book.
+* `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John oh & Jean Tan` from the address book.
 * `del-wed w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
 ### Listing All Weddings : `list-wed`
@@ -256,7 +284,7 @@ You can now view all weddings in the order they were added in!
 
 Format: `list-wed`
 
-![list wedding message](images/listWeddingMsg.png)
+![list wedding message](images/listWedding.png)
 
 ### Tagging a Contact : `tag-add` / `tag-del`
 
@@ -265,17 +293,28 @@ If you need to add your contacts to a particular wedding, you can use `tag-add` 
 
 Format: `tag-add n/NAME t/TAG...`
 
+<box type="warning" seamless>
+
+**TAKE NOTE:** 
+
+* The wedding must already exist in the wedding book to successfully tag a person to a wedding.
+
 * The name of the tag must match the wedding that you want to add the contact to.
 
 * You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
 
-<box type="important" seamless>
-
-**IMPORTANT:** The wedding must already exist in the wedding book to successfully tag a person to a wedding.
-
 </box>
 
-![tag-add message](images/tagadd2.png)
+<div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 50%;">
+        <img src="images/tagAddMsg1.png" alt="tag-add message before" style="width: 100%;">
+        <div>Before</div>
+    </div>
+    <div style="text-align: center; width: 50%;">
+        <img src="images/tagAddMsg2.png" alt="tag-add message after" style="width: 50%;">
+        <div>After</div>
+    </div>
+</div>
 
 Examples:
 *  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
@@ -296,7 +335,16 @@ Format: `tag-del n/NAME t/TAG...`
 
 </box>
 
-![tag-delete message](images/tagDelMsg.png)
+<div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 50%;">
+        <img src="images/tagDelMsg1.png" alt="tag-add message before" style="width: 100%;">
+        <div>Before</div>
+    </div>
+    <div style="text-align: center; width: 50%;">
+        <img src="images/tagDelMsg2.png" alt="tag-add message after" style="width: 100%;">
+        <div>After</div>
+    </div>
+</div>
 
 Examples:
 *  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
@@ -319,7 +367,16 @@ Format: `filter n/KEYWORD... j/KEYWORD...`
 
 </box>
 
-![filter message](images/filterNameMsg.png) ![filter message](images/filterJobMsg.png)
+<div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 50%;">
+        <img src="images/filterMsg1.png" alt="filter one field" style="width: 100%;">
+        <div>Filter One Field</div>
+    </div>
+    <div style="text-align: center; width: 50%;">
+        <img src="images/filterMsg2.png" alt="filter two fields" style="width: 100%;">
+        <div>Filter Multiple Fields</div>
+    </div>
+</div>
 
 Examples:
 * `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers.
@@ -359,7 +416,16 @@ Format:
 * `clear-ab` followed by `y` clears all contacts in address book.
 * `clear-wb` followed by `y` clears all weddings in wedding book.
 
-![clear message](images/clearMsg.png)
+<div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 50%;">
+        <img src="images/clearMsg1.png" alt="clear ab" style="width: 100%;">
+        <div>Clear Address Book</div>
+    </div>
+    <div style="text-align: center; width: 50%;">
+        <img src="images/clearMsg2.png" alt="clear wb" style="width: 100%;">
+        <div>Clear Wedding Book</div>
+    </div>
+</div>
 
 ### Exiting the Program : `exit`
 
@@ -379,8 +445,10 @@ There is no need to save manually.
 
 <box type="warning" seamless>
 
-**<span style="color: red;">Caution:</span>**
-* If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+**<span style="color: red;">CAUTION:</span>**
+  
+* If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
@@ -411,5 +479,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **List Command** ignores any extraneous parameters after the `list` command. This is a feature, not a bug.
+4. **Filter Command** returns the largest range of matches based on your input. This is a feature, not a bug.
+5. **Names and Wedding Names** are automatically formatted to have the first letter of each word capitalized. This is a feature, not a bug.
 
 --------------------------------------------------------------------------------------------------------------------

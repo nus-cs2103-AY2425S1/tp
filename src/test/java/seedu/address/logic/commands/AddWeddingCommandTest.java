@@ -269,6 +269,7 @@ public class AddWeddingCommandTest {
         public Person personWithAllTagsRemoved(Person personToDelete) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void deletePersonInWedding(Person editedPerson, Set<Tag> tagsInBoth) {
             throw new AssertionError("This method should not be called.");
