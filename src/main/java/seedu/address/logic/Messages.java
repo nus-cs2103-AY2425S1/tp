@@ -19,7 +19,6 @@ public class Messages {
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d Member(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_TELEGRAM = "Cannot find person with telegram handle: %1$s";
     public static final String MESSAGE_INVALID_TELEGRAM = "Cannot find member(s) with telegram handle: %1$s";
     public static final String MESSAGE_NONMEMBER_ATTENDANCE =
             "Cannot mark attendance for contact that is not a member. "
