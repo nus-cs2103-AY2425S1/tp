@@ -25,7 +25,7 @@ import seedu.address.model.tag.TagName;
 
 public class TagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validTagsUnfilteredList_success() {
@@ -131,7 +131,8 @@ public class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, tagsToAdd);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                1, model.getFilteredPersonList().size());
 
         CommandTestUtil.assertCommandFailure(tagCommand, model, expectedMessage);
     }
