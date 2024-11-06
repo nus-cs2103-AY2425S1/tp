@@ -100,9 +100,9 @@ public class JsonAdaptedStudentCourseAssociationTest {
     void toModelType_validStudentCourseAssociation_noExceptionThrown() {
         JsonAdaptedStudentCourseAssociation adapter = new JsonAdaptedStudentCourseAssociation(
                 VALID_MATRICULATION_NUMBER, VALID_COURSE_CODE, new JsonAdaptedTutorial(VALID_TUTORIAL_ID,
-                                                                                       new JsonAdaptedCourse
-                                                                                               (VALID_COURSE_CODE,
-                                                                                                VALID_COURSE_NAME)),
+                                                                                       new JsonAdaptedCourse(
+                                                                                               VALID_COURSE_CODE,
+                                                                                               VALID_COURSE_NAME)),
                 VALID_ATTENDANCE);
         assertDoesNotThrow(() -> adapter.toModelType(stubAddressBook, stubCourseList));
     }
@@ -111,9 +111,9 @@ public class JsonAdaptedStudentCourseAssociationTest {
     void toModelType_invalidStudent_throwsIllegalValueException() {
         JsonAdaptedStudentCourseAssociation adapter = new JsonAdaptedStudentCourseAssociation(
                 INVALID_MATRICULATION_NUMBER, VALID_COURSE_CODE, new JsonAdaptedTutorial(VALID_TUTORIAL_ID,
-                                                                                         new JsonAdaptedCourse
-                                                                                                 (VALID_COURSE_CODE,
-                                                                                                  VALID_COURSE_NAME)),
+                                                                                         new JsonAdaptedCourse(
+                                                                                                 VALID_COURSE_CODE,
+                                                                                                 VALID_COURSE_NAME)),
                 VALID_ATTENDANCE);
         assertThrows(IllegalValueException.class, () -> adapter.toModelType(stubAddressBook, stubCourseList));
     }
@@ -122,9 +122,9 @@ public class JsonAdaptedStudentCourseAssociationTest {
     void toModelType_invalidCourse_throwsIllegalValueException() {
         JsonAdaptedStudentCourseAssociation adapter = new JsonAdaptedStudentCourseAssociation(
                 VALID_MATRICULATION_NUMBER, INVALID_COURSE_CODE, new JsonAdaptedTutorial(VALID_TUTORIAL_ID,
-                                                                                         new JsonAdaptedCourse
-                                                                                                 (INVALID_COURSE_CODE,
-                                                                                                  VALID_COURSE_NAME)),
+                                                                                         new JsonAdaptedCourse(
+                                                                                                 INVALID_COURSE_CODE,
+                                                                                                 VALID_COURSE_NAME)),
                 VALID_ATTENDANCE);
         assertThrows(IllegalValueException.class, () -> adapter.toModelType(stubAddressBook, stubCourseList));
     }
