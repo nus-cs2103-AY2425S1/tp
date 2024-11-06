@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_FAVOURITE_LABEL;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NOT_FAVOURITE_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NONFAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -37,10 +39,15 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
-                        PREFIX_ROLE, PREFIX_FAVOURITE);
+                        PREFIX_ROLE, PREFIX_FAVOURITE, PREFIX_NONFAVOURITE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_FAVOURITE).isPresent()
+                && argMultimap.getValue(PREFIX_NONFAVOURITE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -49,8 +56,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(MESSAGE_INVALID_FAVOURITE_LABEL);
         }
 
+        if (argMultimap.getValue(PREFIX_NONFAVOURITE).isPresent()
+                && !argMultimap.getAllValues(PREFIX_NONFAVOURITE).get(0).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_NOT_FAVOURITE_LABEL);
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_TELEGRAM, PREFIX_FAVOURITE);
+                PREFIX_TELEGRAM, PREFIX_FAVOURITE, PREFIX_NONFAVOURITE);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
