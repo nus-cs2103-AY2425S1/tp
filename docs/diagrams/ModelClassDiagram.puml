@@ -4,59 +4,71 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+package Model as ModelPackage {
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
+Class "<<interface>>\nObservableList" as ObservableList
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class AddressBook
+Class ReadOnlyAddressBook
+Class Model
 Class ModelManager
 Class UserPrefs
+Class VersionedAddressBook
 
-Class UniquePersonList
-abstract Class Person
+package Person as PersonPackage {
+Class "{abstract}\nPerson" as Person
+Class Tutor
+Class Tutee
 Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
 Class Hours
 Class Subject
+Class UniquePersonList
+}
 
-
-Class I #FFFFFF
+package Lesson as LessonPackage {
+Class Lesson
+Class UniqueLessonList
+}
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+VersionedAddressBook .up.|> AddressBook
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+Model .right.> ObservableList
+ModelManager o--> "1" VersionedAddressBook
+ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Hours
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Person *--> "*" Subject
+UserPrefs -[hidden]right-> AddressBook
+ModelManager -[hidden]right-> UserPrefs
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+VersionedAddressBook *--> "1" UniquePersonList
+VersionedAddressBook *--> "1" UniqueLessonList
+UniquePersonList o--> "*" Person
+UniqueLessonList o--> "*" Lesson
+Tutor --|> Person
+Tutee --|> Person
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" Hours
+Person *--> "0..3" Subject
 
+Lesson .right. (Tutor, Tutee)
+
+Tutee -[hidden]left-> Person
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
-
-Tutor .up.|> Person
-Tutee .up.|> Person
+ModelManager -->"1" Person : filtered list
 @enduml

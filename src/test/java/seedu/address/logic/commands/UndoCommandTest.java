@@ -13,6 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 public class UndoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -43,3 +45,4 @@ public class UndoCommandTest {
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
     }
 }
+//@@author
