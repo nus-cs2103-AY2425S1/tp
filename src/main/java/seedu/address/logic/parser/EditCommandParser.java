@@ -107,7 +107,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editClientDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED + "\n"
+                    + EditCommand.MESSAGE_USAGE_OPTIONAL_PARAMETERS);
         }
 
         return new EditCommand(index, editClientDescriptor);

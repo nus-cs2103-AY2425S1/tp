@@ -229,18 +229,19 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
-| **Flag** | **Expected Argument** | **Description**                                | **Requirements**                                                                                | **Case Sensitivity**  |
-|----------|-----------------------|------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------|
-| `n/`     | `<NAME>`              | The client's full name                         | Any combination of letters, numbers, and spaces (no symbols).                                   | ❌                     |
-| `p/`     | `<PHONE>`             | The client's phone number                      | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                     |
-| `e/`     | `<EMAIL>`             | The client's email address                     | Valid email format (`username@domain.com`)                                                      | ❌                     |
-| `a/`     | `<ADDRESS>`           | The client's physical address                  | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `j/`     | `<JOBNAME>`           | The client's job title or profession           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `i/`     | `<INCOME>`            | The client's annual income                     | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                     |
-| `t/`     | `<TIER>`              | The client's assigned tier level               | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                    |
-| `r/`     | `<REMARK>`            | General remarks about the client               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark      | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
-| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |    
+| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                | **Case Sensitivity** |
+|----------|-----------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|----------------------|
+| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                 | ❌                    |
+| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                    |
+| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                      | ❌                    |
+| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                    |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                   |
+| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                               | ❌                    |
 
 > 💡 **Pro Tip:**
 >
@@ -262,7 +263,7 @@ Some initial commands to try:
 
 **Editing a Client's Information**
 * `edit 1 p/12345678`: Updates the phone number of the first client in your list to `12345678`.
-* `edit 4 rn/Updated remarks here`: Replaces the remarks of the fourth client with "Updated remarks here".
+* `edit 4 rn/Updated remark(s) here`: Replaces the remark(s) of the fourth client with "Updated remark(s) here".
 
 **Removing a Client**
 * `delete 3`: Removes the third client from your list. Ensure you have the correct index to avoid deleting the wrong client.
@@ -309,10 +310,10 @@ When reading commands, there are certain syntax conventions that help indicate h
 
 ### Example Command:
 ```
-add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
+add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]
 ```
 - **Mandatory Components**: Flags such as `n/`, `p/`, `e/`, `a/`, `j/`, and `i/` must be followed by valid arguments like the name, phone number, and job title.
-- **Optional Components**: Flags like `t/` and `rn/` are enclosed in square brackets, indicating they are optional.
+- **Optional Components**: Flags like `t/`, `r/` and `s/` are enclosed in square brackets, indicating they are optional.
 
 ## 5.2 Data Modification Commands
 
@@ -320,14 +321,14 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 
 **Purpose:** Save detailed records of a new client.
 
-Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
+Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark(s) here. Otherwise, new users are assigned a default value of "NA".
 
 **Command Format:**
 ```
-add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]
+add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]
 ```
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
-* Optional Fields: `t/`, `rn/`
+* Optional Fields: `t/`, `r/`, 's/'
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -336,24 +337,39 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999
   ```
-- Add new client with tier and remark:
+- Add new client with tier, remark(s) and status:
   ```
-  add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue
+  add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue s/ urgent
   ```
 
 #### What to Expect
 - **On Success:**
     - Message:
       ```
-      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>.
+      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>.
       ```
-    - If "Tier" and "Remark" are not provided, they will be set to "N.A." and displayed as such in the success message.
+    - If "Tier" and "Remark" are not provided, they will be set to "NA" and displayed as such in the success message.
+    - If "Status" is not provided, it will be set to "NONE".
 
 - **On Error**
-    - Message:
-      ```
-      Please verify that your input is in the correct format. Include the following details: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>].
-      ```
+  - Error caused by missing mandatory fields
+      - Message:
+        ```
+        The following mandatory prefixes are missing: [...]
+        Invalid command format!
+        add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
+        [r/REMARK]...[s/STATUS]...
+        Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'
+        ```
+  - Error caused by invalid values for some fields
+      - Message:
+        ```
+        Invalid command format!
+        <INDIVIDUAL FIELD'S ERROR MESSAGES>...
+        add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
+        [r/REMARK]...[s/STATUS]...
+        Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'    
+        ```
 
 > **Note on Duplicates:**
 >
@@ -361,7 +377,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > When this happens, you will see the following message:
 >
 > ```
-> This client is already saved as a contact.
+> This client already exists in the address book
 > ```
 >
 > **The duplicate contact will not be saved** to prevent redundancy.
@@ -376,15 +392,16 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 **Purpose:** Update the details of an existing client in the database.
 
-All client information, including contact details, address, job information, and other relevant data, can be modified. You can also append to or replace existing remarks and adjust the client's tier status.
+All client information, including contact details, address, job information, and other relevant data, can be modified. You can also append to or replace existing remark(s) and adjust the client's tier status.
 
 **Command Format:**
 ```
-edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>]
+edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
 ```
 - Mandatory Field: `<INDEX>`
-- Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`
-- **Note:** `rn/` (new remark) and `ra/` (append remark) cannot be used simultaneously in a single command.
+- Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
+- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
+- **Note:** Assigning an empty value to `t/` or `s/` flags will remove the existing value for either of these flags and assign a default value to both. In the case of tier, it defaults to `N.A` and for status, it defaults to `None`.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -396,16 +413,18 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   edit 12 t/ gold
   ```
-
+  ```
+  edit 12 s/ urgent 
+- ```
 - Edit multiple fields at the same time:
   ```
   edit 12 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
   ```
-- Append new remark onto existing one:
+- Append new remark(s) onto existing one:
   ```
   edit 12 ra/ Recently received Gordon E. Moore Award
   ```
-- Replace all remark(s) with a new remark:
+- Replace all remark(s) with new remark(s):
   ```
   edit 69 rn/ Do not call, angry about calls 
   ```
@@ -456,7 +475,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success (after confirming with y/yes):**
     - Message:
       ```
-      Client <INDEX> has been deleted.
+      Deleted Client: <CLIENT DETAILS>
       ```
 - **On Cancellation (if confirmation is declined):**
     - Message:
@@ -466,7 +485,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Error:**
     - Invalid index error message:
       ```
-      No client with <INDEX> exists. Please recheck the index.
+      The client index provided is invalid.
       ```
 
 > 💡 **Pro Tip:**  
@@ -492,7 +511,7 @@ This will permanently clear all contacts. Are you sure you want to execute this 
 - **On Success (after confirming with y/yes):**
   - Message:
     ```
-    Address book has been cleared!
+    AgentAssist's contacts have been cleared!
     ```
     The application will remove all client data from the list, effectively resetting the client database.
 - **On Cancellation (if confirmation is declined):**
@@ -528,11 +547,11 @@ list
 
 ### 5.2.3 Filter Clients by Details / Find a Client {#filter-command}
 
-**Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, or remarks.
+**Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, remarks or status.
 
 **Command Format:**
 ```
-filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARKS> t/ <TIER> i/ <INCOME>
+filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIER> i/ <INCOME> s/ <STATUS>
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms.
 - **Special Syntax for Income (i/)**:
@@ -551,7 +570,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   filter j/ doctor
   ```
-- Filter clients by name, job and remark:
+- Filter clients by status:
+  ```
+  filter s/ urgent
+  ```
+- Filter clients by name, job and remark(s):
   ```
   filter n/ Gordon Moore j/ doctor r/ award winner
   ```
@@ -596,11 +619,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   
       Parameters: <FLAG>/ <SEARCH TERM>
     
-      Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)
+      Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, r/ REMARK i/ (=/</>) INCOME s/ STATUS
     
-      Example: filter n/ Alice p/ 91112222
+      Example: filter n/ Alice p/ 91112222 i/ >2000
       ```
-    - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to the first invalid search term.
+    - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
 
 
@@ -609,7 +632,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 ### 5.4.1 Viewing a Client's Details {#view-command}
 
-**Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remarks and additional details.
+**Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remark(s) and additional details.
 
 **Command Format:**
 ```
@@ -713,13 +736,16 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks. If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
-Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark, while `ra/` appends to the current remark.
+Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
 
 ### What do the different tier colors represent in the UI?
 Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each client.
+
+### What do the different status colors represent in the UI?
+Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -727,22 +753,23 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran' 
 
 --------------------------------------------------------------------------------------------------------------------
 
 
 ## 8. Command Summary
 
-| **Action**                 | **Command Format**                                                                                                           | **Example**                                                                                               |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **Add New Client**         | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<REMARK>]`                                   | `add n/ GORDON MOORE p/ 99007766 e/ gmoore@ntu.sg a/ COM3 j/ engineer i/ 99999 t/ gold rn/ remark`        |
-| **Delete Existing Client** | `delete <INDEX>`                                                                                                             | `delete 69`                                                                                               |
-| **Edit Existing Client**   | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<NEW REMARK>] [ra/<APPEND REMARK>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info` |
-| **List All Clients**       | `list`                                                                                                                       | `list`                                                                                                    |
-| **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/<INCOME>]`                     | `filter n/ GORDON MOORE j/ doctor t/ gold`                                                                |
-| **View Client Details**    | `view <INDEX>`                                                                                                               | `view 1`                                                                                                  |
-| **Close Client Details**   | `close`                                                                                                                      | `close`                                                                                                   |
-| **View Help**              | `help`                                                                                                                       | `help`                                                                                                    |
-| **Undo Command**           | `undo`                                                                                                                       | `undo`                                                                                                    |
-| **Exit Application**       | `exit`                                                                                                                       | `exit`                                                                                                    |
-| **Clear All Data**         | `clear`                                                                                                                      | `clear`                                                                                                   |
+| **Action**                 | **Command Format**                                                                                                                        | **Example**                                                                                                         |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Add New Client**         | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [r/<REMARK>] [s/<STATUS>]`                                    | `add n/ GORDON MOORE p/ 99007766 e/ gmoore@ntu.sg a/ COM3 j/ engineer i/ 99999 t/ gold r/ remark s/ urgent`         |
+| **Delete Existing Client** | `delete <INDEX>`                                                                                                                          | `delete 69`                                                                                                         |
+| **Edit Existing Client**   | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<NEW REMARK>] [ra/<APPEND REMARK>] [s/<STATUS>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info s/ urgent` |
+| **List All Clients**       | `list`                                                                                                                                    | `list`                                                                                                              |
+| **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]`            | `filter n/ GORDON MOORE j/ doctor t/ gold s/ urgent`                                                                |
+| **View Client Details**    | `view <INDEX>`                                                                                                                            | `view 1`                                                                                                            |
+| **Close Client Details**   | `close`                                                                                                                                   | `close`                                                                                                             |
+| **View Help**              | `help`                                                                                                                                    | `help`                                                                                                              |
+| **Undo Command**           | `undo`                                                                                                                                    | `undo`                                                                                                              |
+| **Exit Application**       | `exit`                                                                                                                                    | `exit`                                                                                                              |
+| **Clear All Data**         | `clear`                                                                                                                                   | `clear`                                                                                                             |
