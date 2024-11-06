@@ -181,7 +181,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 Expected output:
-![helpMessage](images/helpMessage.png)
+![result for 'help'](images/helpMessage.png)
 
 ### Adding a person: `add`
 
@@ -190,7 +190,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
 Expected output:
-![AddPerson](images/AddPerson.png)
+![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
 
 <box type="tip" seamless>
 
@@ -209,7 +209,7 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 Expected output:
-![ListPersons](images/ListPersons.png)
+![result for 'list'](images/listPersons.png)
 
 ### Editing a person : `edit`
 
@@ -230,7 +230,7 @@ Examples:
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower`
 
 Expected output:
-![editPerson](images/editPerson.png)
+![result for 'find John' followed by 'edit 1 p/91234567 e/johndoe@example.com'](images/editPerson.png)
 
 ### Locating persons by name: `find`
 
@@ -266,10 +266,10 @@ Format: `delete INDEX`
 Examples:
 
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `find John` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 Expected output:
-![deletePerson](images/deletePerson.png)
+![result for 'find John' followed by 'delete 1'](images/deletePerson.png)
 
 ### Adding or editing a grade: `addGrade`
 
@@ -285,11 +285,11 @@ Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 Examples:
 
-- `addGrade 2 n/Midterm s/85 w/20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
+- `addGrade 2 n/Midterm s/85 w/30` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
 - `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
 Expected output:
-![addGrade](images/addGrade.png)
+![result for 'find John' followed by 'addGrade 1 n/Midterm s/85 w/30'](images/addGrade.png)
 
 ### Deleting a grade from a person: `deleteGrade`
 
@@ -307,7 +307,7 @@ Examples:
 - `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
 
 Expected output:
-![deleteGrade](images/deleteGrade.png)
+![result for 'find John' followed by 'deleteGrade 1 n/Midterm'](images/deleteGrade.png)
 
 ### Marking attendance: `mark`
 
@@ -323,10 +323,10 @@ Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 Examples:
 
 - `mark 2 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find Betsy` followed by `mark 1 d/31/01/2024 10:00 m/Absent` Sets the attendance to 'Absent' on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent` Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
-![markAttendance](images/markAttendance.png)
+![result for 'find John' followed by 'mark 1 d/31/01/2024 12:00 m/Absent'](images/markAttendance.png)
 
 ### Unmarking attendance: `unmark`
 
@@ -340,10 +340,10 @@ Format: `unmark INDEX d/DATETIME`
 Examples:
 
 - `unmark 2 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find Betsy` followed by `unmark 1 d/31/01/2024 10:00` deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `find John` followed by `unmark 1 d/31/01/2024 12:00` deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
-![unmarkAttendance](images/unmarkAttendance.png)
+![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
 
 ### Clearing all entries : `clear`
 
@@ -352,7 +352,7 @@ Clears all entries from the address book.
 Format: `clear`
 
 Expected output:
-![clearMessage](images/clearMessage.png)
+![result for 'clear'](images/clearMessage.png)
 
 ### Exiting the program : `exit`
 
