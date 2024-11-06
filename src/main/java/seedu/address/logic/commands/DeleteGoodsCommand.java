@@ -12,7 +12,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Name;
 
 /**
- * Deletes all goods that match the given goodsName.
+ * Deletes the goods receipt that belongs to a supplier.
  */
 public class DeleteGoodsCommand extends Command {
 
@@ -48,7 +48,7 @@ public class DeleteGoodsCommand extends Command {
         GoodsReceipt receipt = model
                 .findGoodsReceipt(r -> r.isFromSupplier(supplierName) && r.getGoods().getGoodsName().equals(goodsName))
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND));
-        model.deleteGoodsReceipt(receipt);
+        model.deleteGoods(receipt);
         return new CommandResult(String.format(MESSAGE_SUCCESS, goodsName));
     }
 

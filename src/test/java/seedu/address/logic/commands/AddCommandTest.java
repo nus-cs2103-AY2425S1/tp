@@ -189,7 +189,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteGoodsReceipt(GoodsReceipt goodsReceipt) {
+        public void deleteGoods(GoodsReceipt goodsReceipt) {
             throw new AssertionError("This method should not be called.");
         }
 

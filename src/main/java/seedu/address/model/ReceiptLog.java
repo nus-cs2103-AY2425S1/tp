@@ -85,10 +85,6 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
         receipts.removeIf(predicate);
     }
 
-    public void remove(GoodsReceipt receipt) {
-        receipts.remove(receipt);
-    }
-
     public int size() {
         return receipts.size();
     }

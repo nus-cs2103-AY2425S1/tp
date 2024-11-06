@@ -208,9 +208,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteGoodsReceipt(GoodsReceipt goodsReceipt) {
+    public void deleteGoods(GoodsReceipt goodsReceipt) {
         requireNonNull(goodsReceipt);
-        goodsList.remove(goodsReceipt);
+        goodsList.deleteReceipt(goodsReceipt);
     }
 
     @Override

@@ -120,7 +120,7 @@ public interface Model {
     /**
      * Deletes the given good receipt.
      */
-    void deleteGoodsReceipt(GoodsReceipt goodsReceipt);
+    void deleteGoods(GoodsReceipt goodsReceipt);
 
     /**
      * Finds a goods that satisfies the predicate.
