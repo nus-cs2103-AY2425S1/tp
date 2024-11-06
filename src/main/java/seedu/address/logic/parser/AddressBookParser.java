@@ -134,7 +134,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseFindRoleCommand(String userInput) throws ParseException {
+    public Command parseSearchModeCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             logger.warning("This user input caused a ParseException: " + userInput);
