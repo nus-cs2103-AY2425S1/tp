@@ -58,7 +58,7 @@ public class Supplier extends Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder(super.toString());
         builder.append(" Ingredients Supplied: ")
-                .append(String.join(", ", getIngredientsSupplied().getIngredientNames()));
+                .append(String.join("", getIngredientsSupplied().getIngredientNames()));
         return builder.toString();
     }
 }
