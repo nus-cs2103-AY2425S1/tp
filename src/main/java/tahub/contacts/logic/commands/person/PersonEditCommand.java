@@ -113,7 +113,6 @@ public class PersonEditCommand extends Command {
                 .equals(matriculationNumber)).findFirst().get();
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
