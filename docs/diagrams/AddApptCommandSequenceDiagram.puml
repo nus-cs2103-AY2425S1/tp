@@ -5,147 +5,59 @@ skinparam ArrowFontStyle plain
 Actor user as user USER_COLOR
 
 box Logic LOGIC_COLOR_T1
-participant "Logic" as Logic LOGIC_COLOR
-participant "AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "AddApptCommandParser" as AddApptCommandParser LOGIC_COLOR
-participant "c:AddApptCommand" as AddApptCommand LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "LogicManager" as Logic LOGIC_COLOR
+participant "AddApptCommand" as AddApptCommand LOGIC_COLOR
+participant "CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+participant "Model" as Model MODEL_COLOR
 participant "AddressBook" as AddressBook MODEL_COLOR
-participant "OwnedAppointment" as OwnedAppointment MODEL_COLOR
-participant "target:Person" as Person1 MODEL_COLOR
-participant "appt:Appointment" as Appointment MODEL_COLOR
-participant "edited:Person" as Person2 MODEL_COLOR
+participant "appt:Appointment" as Appt MODEL_COLOR
+participant "Person" as Person MODEL_COLOR
 end box
 
 box UI UI_COLOR_T1
-participant "PersonListPanel" as PersonListPanel UI_COLOR
 participant "AppointmentListPanel" as ApptListPanel UI_COLOR
 end box
 
-user -[USER_COLOR]> Logic : execute(addAppt Dental i/S1234567A @d/2023-12-25 @t/1400-1500)
+user -[USER_COLOR]> Logic : addAppt command
 activate Logic LOGIC_COLOR
 
-Logic -[LOGIC_COLOR]> AddressBookParser : parseCommand(addAppt Dental i/S1234567A @d/2023-12-25 @t/1400-1500)
-activate AddressBookParser LOGIC_COLOR
-
-create AddApptCommandParser
-AddressBookParser -[LOGIC_COLOR]> AddApptCommandParser : parse(Dental i/S1234567A @d/2023-12-25 @t/1400-1500)
-activate AddApptCommandParser LOGIC_COLOR
-
-create AddApptCommand
-AddApptCommandParser -[LOGIC_COLOR]> AddApptCommand : S1234567A, Dental, 2023-12-25, 1400-1500
+Logic -[LOGIC_COLOR]> AddApptCommand : execute
 activate AddApptCommand LOGIC_COLOR
-AddApptCommand -[LOGIC_COLOR]> AddApptCommandParser : c
-deactivate AddApptCommand LOGIC_COLOR
 
-AddApptCommandParser -[LOGIC_COLOR]> AddressBookParser : c
-deactivate AddApptCommandParser LOGIC_COLOR
-destroy AddApptCommandParser
-
-AddressBookParser -[LOGIC_COLOR]> Logic : c
-deactivate AddressBookParser LOGIC_COLOR
-
-Logic -[LOGIC_COLOR]> AddApptCommand : execute(m)
-activate AddApptCommand LOGIC_COLOR
-AddApptCommand -[LOGIC_COLOR]> Model : fetchPersonIfPresent
+AddApptCommand -[LOGIC_COLOR]> Model : fetchPersonIfPresent()
 activate Model MODEL_COLOR
-Model -[MODEL_COLOR]> AddApptCommand : Optional<Person>
+Model -[MODEL_COLOR]-> AddApptCommand : target
 deactivate Model MODEL_COLOR
 
+AddApptCommand -[LOGIC_COLOR]> AddApptCommand : createEditedPerson(target)
 activate AddApptCommand LOGIC_COLOR_T1
-AddApptCommand -[LOGIC_COLOR]> Person1: get
-activate Person1 MODEL_COLOR
-Person1 -[MODEL_COLOR]> AddApptCommand: target:Person
-deactivate Person1 MODEL_COLOR
-AddApptCommand -[LOGIC_COLOR]> AddApptCommand : target:Person
+
+create Appt MODEL_COLOR
+AddApptCommand -[LOGIC_COLOR]> Appt : Name, Date, Time
+activate Appt MODEL_COLOR
+Appt -[MODEL_COLOR]-> AddApptCommand
+deactivate Appt
+
+create Person MODEL_COLOR
+AddApptCommand -[LOGIC_COLOR]> Person : appt
+activate Person MODEL_COLOR
+Person -[MODEL_COLOR]-> AddApptCommand
+deactivate Person
+AddApptCommand -[LOGIC_COLOR]-> AddApptCommand : edited
 deactivate AddApptCommand LOGIC_COLOR_T1
-
-AddApptCommand -[LOGIC_COLOR]> AddApptCommand : createEditedPerson(S1234567A Dental 2023-12-25 1400-1500)
-activate AddApptCommand LOGIC_COLOR_T1
-create Appointment MODEL_COLOR
-AddApptCommand -[LOGIC_COLOR]> Appointment
-activate Appointment MODEL_COLOR
-Appointment -[MODEL_COLOR]> AddApptCommand: appt:Appointment
-deactivate Appointment MODEL_COLOR
-create Person2 MODEL_COLOR
-AddApptCommand -[LOGIC_COLOR]> Person2: target:Person, appt:Appointment
-activate Person2 MODEL_COLOR
-Person2 -[MODEL_COLOR]> AddApptCommand: edited:Person
-deactivate Person2 MODEL_COLOR
-AddApptCommand -[LOGIC_COLOR]> AddApptCommand : edited:Person
-
-deactivate AddApptCommand LOGIC_COLOR_T1
-
-AddApptCommand -[LOGIC_COLOR]> Model : setPerson(target:Person, edited:Person)
+AddApptCommand -[LOGIC_COLOR]> Model : setPerson(target, edited)
 activate Model MODEL_COLOR
-
-Model -[MODEL_COLOR]-> AddressBook : setPerson(target:Person, edited:Person)
-activate AddressBook MODEL_COLOR
-AddressBook -[MODEL_COLOR]> AddressBook : setPerson(target:Person, edited:Person)
-activate AddressBook MODEL_COLOR_T1
-AddressBook -[MODEL_COLOR]> Person1: delete
-destroy Person1
-AddressBook -[MODEL_COLOR]> Person2
-activate Person2 MODEL_COLOR
-Person2 -[MODEL_COLOR]> AddressBook: edited:Person
-deactivate Person2 MODEL_COLOR
-AddressBook -[MODEL_COLOR]-> AddressBook
-deactivate AddressBook MODEL_COLOR_T1
-AddressBook -[MODEL_COLOR]> AddressBook : updateAppointmentList()
-activate AddressBook MODEL_COLOR_T1
-AddressBook -[MODEL_COLOR]> AddressBook : clear()
-loop for each Person in Persons
-    create OwnedAppointment MODEL_COLOR
-    AddressBook -[MODEL_COLOR]> OwnedAppointment: Apppointment, Person
-    activate OwnedAppointment MODEL_COLOR
-    OwnedAppointment -[MODEL_COLOR]> AddressBook: add to appointmentList:ObservableList
-    deactivate OwnedAppointment MODEL_COLOR
-end
-AddressBook -[MODEL_COLOR]-> AddressBook
-deactivate AddressBook MODEL_COLOR_T1
-AddressBook -[MODEL_COLOR]-> Model
-deactivate AddressBook MODEL_COLOR
 Model -[MODEL_COLOR]-> AddApptCommand
 deactivate Model MODEL_COLOR
 
-AddApptCommand -[LOGIC_COLOR]> Model : updateFilteredPersonList
+AddApptCommand -[LOGIC_COLOR]> Model : update ListView filters
 activate Model MODEL_COLOR
-Model -[MODEL_COLOR]> Model: setFilteredListPredicate
-Model -[UI_COLOR]-> PersonListPanel: Listener triggered
-activate PersonListPanel UI_COLOR
-PersonListPanel -[UI_COLOR]> AddressBook: retrieve via reference
-activate AddressBook MODEL_COLOR
-AddressBook -[MODEL_COLOR]> PersonListPanel: personList:ObservableList<Person>
-deactivate AddressBook MODEL_COLOR
-loop for each person in personList
-    PersonListPanel -[UI_COLOR]> PersonListPanel: UpdateItem(Person)
-end
-PersonListPanel -[UI_COLOR]-> Model
-deactivate PersonListPanel UI_COLOR
-
-Model -[MODEL_COLOR]-> AddApptCommand
-deactivate Model MODEL_COLOR
-AddApptCommand -[LOGIC_COLOR]> Model : updateFilteredAppointmentList
-activate Model MODEL_COLOR
-Model -[MODEL_COLOR]> Model: setFilteredListPredicate
-
-Model -[UI_COLOR]-> ApptListPanel: Listener triggered
+Model -[UI_COLOR]-> ApptListPanel : Listener triggered
 activate ApptListPanel UI_COLOR
-ApptListPanel -[UI_COLOR]> AddressBook: retrieve via reference
-activate AddressBook MODEL_COLOR
-AddressBook -[MODEL_COLOR]-> OwnedAppointment: get
-activate OwnedAppointment MODEL_COLOR
-OwnedAppointment -[MODEL_COLOR]-> AddressBook
-deactivate OwnedAppointment MODEL_COLOR
-AddressBook -[MODEL_COLOR]> ApptListPanel: appointmentList:ObservableList<OwnedAppointment>
-deactivate AddressBook MODEL_COLOR
-loop for each ownedAppt in appointmentList
-    ApptListPanel -[UI_COLOR]> ApptListPanel: UpdateItem(ownedAppt)
-end
+ApptListPanel -[UI_COLOR]> ApptListPanel : refresh ListView
 ApptListPanel -[UI_COLOR]-> Model
 deactivate ApptListPanel UI_COLOR
 
@@ -153,17 +65,15 @@ Model -[MODEL_COLOR]-> AddApptCommand
 deactivate Model MODEL_COLOR
 
 create CommandResult LOGIC_COLOR
-AddApptCommand -[LOGIC_COLOR]> CommandResult
+AddApptCommand -[LOGIC_COLOR]> CommandResult : Success
 activate CommandResult LOGIC_COLOR
-CommandResult -[LOGIC_COLOR]> AddApptCommand: r
+CommandResult -[LOGIC_COLOR]> AddApptCommand : r
 deactivate CommandResult LOGIC_COLOR
 
 AddApptCommand -[LOGIC_COLOR]> Logic : r
 deactivate AddApptCommand LOGIC_COLOR
 
-Logic -[LOGIC_COLOR]-> : saveAddressBook
-Note right: Storage segment is omitted
-]-[STORAGE_COLOR]-> Logic:
 Logic -[LOGIC_COLOR]> user : r
+destroy AddApptCommand
 deactivate Logic LOGIC_COLOR
 @enduml
