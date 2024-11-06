@@ -60,9 +60,9 @@ public class ContactCard extends UiPart<Region> {
 
         final ReadOnlyDoubleProperty idWidth = id.widthProperty(); // try not to change this
         final int margin = 20; // try not to change this
+        final int minWidth = 450; // correspond to fxml file
 
         name.setText(contact.getName().fullName);
-        name.prefWidthProperty().bind(cardPane.widthProperty().subtract(idWidth).subtract(margin)); // chatGPT
         telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
         studentStatus.setText(contact.getStudentStatus().value);
         email.setText(contact.getEmail().value);
@@ -70,19 +70,45 @@ public class ContactCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(role -> role.getRoleIndex()))
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
         String nicknameObtained = contact.getNickname().value;
+        Label nicknameLabel = null;
         if (!nicknameObtained.isEmpty()) {
-            Label nicknameLabel = new Label(nicknamePrelabel + nicknameObtained);
+            nicknameLabel = new Label(nicknamePrelabel + nicknameObtained);
             nicknameLabel.setWrapText(true);
             nickname.getChildren().add(nicknameLabel);
-            setSize(margin, nicknameLabel, telegramHandle, email, studentStatus);
         }
+
+        final Label nicknameConfirm = nicknameLabel; // in order to be streamed in the event listener
+
+        // code from chatGPT, need to find a non-AI equivalent reference
+        cardPane.widthProperty().addListener(new ChangeListener<Number>() {
+            Label[] labels = new Label[]{name, nicknameConfirm, email};
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double cardPaneWidth = newValue.doubleValue();  // Get the new width of the card pane
+                Arrays.stream(labels).filter(label -> label != null).forEach(label -> {
+                    double labelWidth = label.getWidth();
+                    if (labelWidth > cardPaneWidth || labelWidth < cardPaneWidth) {
+                        label.setPrefWidth(cardPaneWidth - margin); // Set the label width to match the
+                        // parent width
+                    }
+                });
+            }
+        });
     }
 
-    private void setSize(int margin, Label...labels) {
-        Arrays.stream(labels).forEach(
-                label -> label.prefWidthProperty().bind(
-                        cardPane.widthProperty().subtract(margin)));
-    }
+    /*
+    //margin?
+    private void setSize(double cardPaneWidth, Label...labels) {
+        Arrays.stream(labels).filter(label -> label != null).forEach(
+                label -> {
+                    label.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                    label.setPrefWidth(450);
+                }
+                );
+                //label -> label.prefWidthProperty().bind(
+                       // cardPane.widthProperty().subtract(margin)));
+    }*/
 
     /**
      * Gets role label with id that corresponds to its role name.
