@@ -332,8 +332,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters command to read total earnings and total money owed. 
-1. System displays total earnings and total money owed to the user.
+1. User enters command to read total earnings and total amount owed by the students. 
+1. System displays total earnings and total amount owed to the user.
 
    Use case ends.
 
