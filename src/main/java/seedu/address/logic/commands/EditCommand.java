@@ -108,7 +108,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = new HashSet<>(editPersonDescriptor.getTags().orElse(personToEdit.getTags()));
 
         Set<String> netWorthTags = Set.of("highnetworth", "midnetworth", "lownetworth");
 
