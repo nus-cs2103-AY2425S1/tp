@@ -84,19 +84,19 @@ public class AddressBookParser {
         case DeleteNCommand.COMMAND_WORD:
             return new DeleteNCommand();
 
-        case DeleteWeddingCommand.COMMAND_WORD:
+        case DeleteWeddingCommand.COMMAND_WORD, DeleteWeddingCommand.COMMAND_WORD_SHORT:
             return new DeleteWeddingCommandParser().parse(arguments);
 
-        case ClearAddressBookCommand.COMMAND_WORD:
+        case ClearAddressBookCommand.COMMAND_WORD, ClearAddressBookCommand.COMMAND_WORD_SHORT:
             return new ClearAddressBookCommand();
 
-        case ClearWeddingBookCommand.COMMAND_WORD:
+        case ClearWeddingBookCommand.COMMAND_WORD, ClearWeddingBookCommand.COMMAND_WORD_SHORT:
             return new ClearWeddingBookCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ListWeddingCommand.COMMAND_WORD:
+        case ListWeddingCommand.COMMAND_WORD, ListWeddingCommand.COMMAND_WORD_SHORT:
             return new ListWeddingCommand();
 
         case ExitCommand.COMMAND_WORD:
@@ -105,16 +105,16 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case TagAddCommand.COMMAND_WORD:
+        case TagAddCommand.COMMAND_WORD, TagAddCommand.COMMAND_WORD_SHORT:
             return new TagAddCommandParser().parse(arguments);
 
-        case TagDeleteCommand.COMMAND_WORD:
+        case TagDeleteCommand.COMMAND_WORD, TagDeleteCommand.COMMAND_WORD_SHORT:
             return new TagDeleteCommandParser().parse(arguments);
 
-        case FilterCommand.COMMAND_WORD:
+        case FilterCommand.COMMAND_WORD, FilterCommand.COMMAND_WORD_SHORT:
             return new FilterCommandParser().parse(arguments);
 
-        case ViewWeddingCommand.COMMAND_WORD:
+        case ViewWeddingCommand.COMMAND_WORD, ViewWeddingCommand.COMMAND_WORD_SHORT:
             return new ViewWeddingCommandParser().parse(arguments);
 
         default:

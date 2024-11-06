@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -37,7 +38,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "\nParameters: n/NAME "
+            + "\nParameters: " + PREFIX_NAME + "NAME "
             + "[" + PREFIX_NEW_NAME + "NEW_NAME] "
             + "[" + PREFIX_PHONE + "NEW_PHONE] "
             + "[" + PREFIX_EMAIL + "NEW_EMAIL] "

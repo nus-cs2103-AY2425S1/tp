@@ -17,13 +17,14 @@ import seedu.address.model.wedding.Wedding;
  */
 public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view-wed";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD
+    public static final String COMMAND_WORD_SHORT = "vw";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT
             + ": Shows all persons involved in the weddings of the specified "
             + "keywords (case-insensitive).\n";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: NAME & NAME\n"
-            + "Example: " + COMMAND_WORD + " Jonus & Izzat";
+            + "Example: " + COMMAND_WORD_SHORT + " Jonus & Izzat";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found.\n"
             + "Please make sure that the wedding is created and is in the format 'NAME & NAME'.\n"
             + "If you have not created a wedding yet, you can do so using the '"
@@ -33,7 +34,7 @@ public class ViewWeddingCommand extends Command {
             String.format(Messages.MESSAGE_PARTICIPANTS_LISTED_OVERVIEW, 0)
             + "\n"
             + "You can add a participant to this wedding using the '"
-            + TagAddCommand.COMMAND_WORD
+            + TagAddCommand.COMMAND_WORD_SHORT
             + "' command.";
 
     private final TagContainsKeywordsPredicate predicate;
