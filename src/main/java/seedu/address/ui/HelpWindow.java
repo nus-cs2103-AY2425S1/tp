@@ -141,7 +141,6 @@ public class HelpWindow extends UiPart<Stage> {
         table.setEditable(false);
         table.setSelectionModel(null);
         ObservableList<HelpCommand> data =
- Update-PopUp-and-HelpWindow
                 FXCollections.observableArrayList(
                         new HelpCommand("Help", "`help`"),
                         new HelpCommand("List", "`list`"),
