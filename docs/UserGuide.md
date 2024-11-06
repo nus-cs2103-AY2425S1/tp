@@ -150,14 +150,19 @@ Here are some **key points** to keep in mind when using the commands:
 - You can add fields in **any order**. <br>
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
-<box type="tip" theme="success" light seamless style="border: 1px solid">
+<box type="tip" theme="success" light style="border: 1px solid">
 
-**Tip:** If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, `list appt`, `exit` and `clear`), they will be ignored. <br>
+**Tip:** 
+
+If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, 
+`list appt`, `exit` and `clear`), they will be ignored. <br>
 _**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
 
 </box>
 
 <box type="warning" light seamless style="border: 1px solid red">
+
+**Caution:**
 
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
 
@@ -206,7 +211,8 @@ Adds a person to the address book.
 
 <box type="tip" light>
 
-**Tip:** A person can have any number of tags (including 0). For example, `t/friend t/likes coding` has 2 tags and it is valid. 
+**Tip:** A person can have any number of tags (including 0). <br>
+_**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 
 </box>
 
@@ -343,9 +349,11 @@ Adds an appointment to the DocTrack.
 - `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
 - `add appt i/2 ty/Follow-up d/2024-02-01 16:40 s/Asthma m/Inhaler` adds an appointment to the person with personId `2`. The appointment has appointment type `Follow-up`, date and time `2024-02-01 16:40`, sickness `Asthma`, and medicine `Inhaler`.
 
-<box type="tip" seamless>
+<box type="tip" light seamless>
 
-**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, it will be displayed as `Month Date, Year, Time`. For example, `2024-12-10 12:30` will be displayed as `December 10, 2024, 12:30 PM`.
+**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, you will see it displayed as `Month Date, Year, Time`. <br>
+_**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 12:30 PM`._
+
 </box>
 
 <br>
@@ -452,7 +460,7 @@ Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" alt="Help Message" width="700">
 
-<br><br>
+<br><sbr>
 
 ##### Exiting the program : `exit`
 
