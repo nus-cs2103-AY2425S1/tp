@@ -85,7 +85,7 @@ public class AddressBookParserTest {
         String descriptor = ECNAME_DESC_AMY + ECPHONE_DESC_AMY + ECRS_DESC_AMY;
         AddEmergencyContactCommand command = (AddEmergencyContactCommand) parser.parseCommand(
                 AddEmergencyContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + descriptor);
+                        + INDEX_FIRST_PERSON.getOneBased() + descriptor);
         assertEquals(new AddEmergencyContactCommand(INDEX_FIRST_PERSON, person.getFirstEmergencyContact()), command);
     }
 
@@ -112,28 +112,32 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " name desc") instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_archive() throws Exception {
         assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
+        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD + " test") instanceof ArchiveCommand);
     }
 
     @Test
     public void parseCommand_listArchiveFiles() throws Exception {
         assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD) instanceof ListArchiveFilesCommand);
-        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD + " 3") instanceof ListArchiveFilesCommand);
+        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD + " 3")
+                instanceof ListArchiveFilesCommand);
     }
 
     @Test
     public void parseCommand_loadArchive() throws Exception {
-        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD) instanceof LoadArchiveCommand);
+        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD + " test.json")
+                instanceof LoadArchiveCommand);
     }
 
     @Test
     public void parseCommand_deleteArchive() throws Exception {
-        assertTrue(parser.parseCommand(DeleteArchiveCommand.COMMAND_WORD) instanceof DeleteArchiveCommand);
+        assertTrue(parser.parseCommand(DeleteArchiveCommand.COMMAND_WORD + " test.json")
+                instanceof DeleteArchiveCommand);
     }
 
     @Test
@@ -149,8 +153,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find_doctor() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(
-                FindDoctorCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(FindDoctorCommand.COMMAND_WORD
+                + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindDoctorCommand(new DoctorNameContainsKeywordsPredicate(keywords)), command);
     }
 

@@ -16,6 +16,10 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ArchiveCommand parse(String args) throws ParseException {
+        if (args.isBlank()) {
+            return new ArchiveCommand();
+        }
+
         Filename filename = ParserUtil.parseFilename(args);
         return new ArchiveCommand(filename);
     }

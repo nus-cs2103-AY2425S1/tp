@@ -9,7 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
+* Libraries used: JavaFX, Jackson, JUnit5
+* The autocomplete feature was adapted and overhauled from a similar feature in [AY2223S2-CS2103T-W12-2's tp](https://github.com/AY2223S2-CS2103T-W12-2/tp). We analysed their code and made significant changes to tailor the feature to fit the needs of Medconnect.
+* The undo and redo features were inspired by the proposed implementation found in [AB3's Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature).
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -17,7 +17,7 @@ import seedu.address.model.Model;
  * Lists all archive files in the archive folder.
  */
 public class ListArchiveFilesCommand extends Command {
-    public static final String COMMAND_WORD = "listArchives";
+    public static final String COMMAND_WORD = "listarchives";
 
     public static final String MESSAGE_SUCCESS = "Listed all archive files.";
     public static final String MESSAGE_NO_ARCHIVE = "No archive files found.";
