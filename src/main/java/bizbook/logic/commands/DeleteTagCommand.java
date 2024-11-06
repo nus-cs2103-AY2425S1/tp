@@ -90,7 +90,6 @@ public class DeleteTagCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof DeleteTagCommand)) {
             return false;
         }
