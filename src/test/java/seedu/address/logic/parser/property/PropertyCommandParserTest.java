@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.property.AddCommand;
+import seedu.address.logic.commands.property.ClearCommand;
 import seedu.address.logic.commands.property.DeleteCommand;
 import seedu.address.logic.commands.property.EditCommand;
 import seedu.address.logic.commands.property.FindCommand;
@@ -109,6 +110,11 @@ public class PropertyCommandParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD, "") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, "") instanceof ClearCommand);
     }
 
     @Test
