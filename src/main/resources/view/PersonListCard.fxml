@@ -29,7 +29,13 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <FlowPane fx:id="tags">
+
+      <FlowPane fx:id="vendor" >
+      <VBox.margin>
+        <Insets bottom="4.0" />
+      </VBox.margin></FlowPane>
+
+      <FlowPane fx:id="tags" >
             <VBox.margin>
                <Insets bottom="4.0" />
             </VBox.margin></FlowPane>
