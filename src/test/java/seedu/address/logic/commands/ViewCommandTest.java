@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithNewList;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -79,16 +80,14 @@ public class ViewCommandTest {
     public void execute_multipleSpaces_throwsCommandException() {
         NameContainsKeywordsPredicate predicate = preparePredicate("  ");
         ViewCommand command = new ViewCommand(predicate);
-        assertCommandFailureWithNewList(command, "  ", model, String.format(
-                MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW + ViewCommand.NO_PERSON_FOUND_VIEW_MESSAGE, 0));
+        assertCommandFailure(command, model, ViewCommand.NO_PERSON_FOUND_VIEW_MESSAGE);
     }
 
     @Test
     public void execute_singleKeywordNoPersonFound_throwsCommandException() {
         NameContainsKeywordsPredicate predicate = preparePredicate("NonExistentName");
         ViewCommand command = new ViewCommand(predicate);
-        assertCommandFailureWithNewList(command, "NonExistentName", model, String.format(
-                MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW + ViewCommand.NO_PERSON_FOUND_VIEW_MESSAGE, 0));
+        assertCommandFailure(command, model, ViewCommand.NO_PERSON_FOUND_VIEW_MESSAGE);
     }
 
     @Test

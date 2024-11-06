@@ -122,9 +122,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the client hub data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all Reminders(which are contained in a ReminderList object).
+* stores the client hub data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _sorted_ list composed using a _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* 
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -142,7 +141,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both ClientHub data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `ClientHubStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -210,10 +209,10 @@ The following activity diagram summarizes what happens when a user executes a ad
 * Can type quickly and are comfortable using CLI applications, favoring typing over mouse-based interactions for efficiency.
 * Require a simple and streamlined tool that makes it easy to access and track client information with minimal clicks.
 * Value simplicity and efficiency in their tools to save time and focus on client relationships.
-* Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and contact details.
+* Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and client details.
 * Often handle tasks that involve tracking insurance policies, renewals, and financial documents.
 
-**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies) as well as create reminders for meet ups with them. Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information of their clients and important dates their clients.
+**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies). Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information for their clients.
 
 
 ### User stories
@@ -222,12 +221,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​             | I want to …​                                                                    | So that I can…​                               |
 |----------|---------------------|---------------------------------------------------------------------------------|-----------------------------------------------|
-| `* * *`  | financial advisor   | add a new client’s contact details                                              | easily manage my client base                  |
+| `* * *`  | financial advisor   | add a new client’s client details                                              | easily manage my client base                  |
 | `* * *`  | financial advisor   | view all of a client’s details on one screen                                    | have all necessary information in one place.  |
-| `* * *`  | financial advisor   | delete outdated client contact information                                      | keep my database clean and relevant           |
+| `* * *`  | financial advisor   | delete outdated client client information                                      | keep my database clean and relevant           |
 | `* *`    | financial advisor   | search for a client by their personal information, such as name or phone number | ensure that I always have the latest details  |
 | `* *`    | financial advisor   | sort all clients in alphabetical order based on their names                     | prioritize my communication with them         |
-| `*`      | financial advisor   | update a client’s contact information                                           | ensure that I always have the latest details  |
+| `*`      | financial advisor   | update a client’s client information                                           | ensure that I always have the latest details  |
 | `*`      | financial advisor   | tag clients with specific client types (e.g., investor, retiree)                | segment them for different services           |
 | `*`      | financial advisor   | add description to a client’s profile                                           | track important interactions or discussions   |
 | `*`      | financial advisor   | assign reminders to each client (e.g., "Review investment portfolio")           | stay organized and focused                    |
@@ -241,8 +240,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Add a new client**
 
 **MSS**
-1. User inputs the command to add a client's contact
-2. ClientHub adds the contact to the list of contacts
+1. User inputs the command to add a client's client
+2. ClientHub adds the new client to the list of clients
 3. ClientHub shows successful output message
 
     Use case ends.
@@ -261,9 +260,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Step 1 is repeated until user inputs all required fields.
  
 
-* 1c. ClientHub detects a duplicate contact
+* 1c. ClientHub detects a duplicate client
 
-  * 1c1. ClientHub informs user that there is more than one contact with the same name and prompt the user to input a 
+  * 1c1. ClientHub informs user that there is more than one client with the same name and prompt the user to input a 
     different name.
     
     Step 1 is repeated until user inputs a unique name.
@@ -293,17 +292,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-* 1c. ClientHub detects multiple contacts of the same name
+* 1c. ClientHub detects multiple clients of the same name
 
-    * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
+    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
 
-        Step 1 is repeated until user inputs full name of the contact.
+        Step 1 is repeated until user inputs full name of the client.
 
-**Use case: List contacts**
+**Use case: List clients**
 
 **MSS**
-1. User requests to list all contacts
-2. ClientHub shows the list of all contacts saved
+1. User requests to list all clients
+2. ClientHub shows the list of all clients saved
 
 **Extensions**
 
@@ -312,12 +311,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-**Use case: Search for a contact**
+**Use case: Search for a client**
 
 **MSS** 
-1. User inputs the command to search for a contact
-2. ClientHub searches for the contact
-3. ClientHub shows the contact details
+1. User inputs the command to search for a client
+2. ClientHub searches for the client
+3. ClientHub shows the client details
 
     Use case ends.
 
@@ -334,13 +333,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ClientHub detects multiple clients that matches the same name
     * 1c1. ClientHub informs the user that multiple clients matches the same name and requests the user to input the full name of the client
 
-        Step 1 is repeated until user inputs full name of the contact.
+        Step 1 is repeated until user inputs full name of the client.
 
 **Use case: Edit a client**
 
 **MSS**
-1. User inputs the command to edit a client's contact
-2. ClientHub edits the contact details
+1. User inputs the command to edit a client's contact details
+2. ClientHub edits the client details
 3. ClientHub shows successful output message
 
     Use case ends.
@@ -355,10 +354,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
-* 1c. ClientHub detects multiple contacts of the same name
-    * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
+* 1c. ClientHub detects multiple clients of the same name
+    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
 
-        Step 1 is repeated until user inputs full name of the contact.
+        Step 1 is repeated until user inputs full name of the client.
 
 **Use case: Sort clients**
 
@@ -381,6 +380,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Step 1 is repeated until user inputs the correct format.
 
+
+**Use case: View**
+
+**MSS**
+
+1. User inputs the command to view a client's details
+2. ClientHub shows the client's details
+
+    Use case ends.
+
+**Extensions**
+1. ClientHub detects invalid input format
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+        Step 1 is repeated until user inputs the correct format.
+* 1b. ClientHub detects that the given name is not in the list
+    * 1b1. ClientHub shows an error message that the name is not in the list
+
+        Use case ends.
+* 1c. ClientHub detects multiple clients of the same name
+    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
+
+        Step 1 is repeated until user inputs full name of the client.
+
 **Use case: Add reminder**
 
 **MSS**
@@ -400,10 +423,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
-* 1c. ClientHub detects multiple contacts of the same name
-    * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
+* 1c. ClientHub detects multiple clients of the same name
+    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
 
-        Step 1 is repeated until user inputs full name of the contact.
+        Step 1 is repeated until user inputs full name of the client.
 * 1d. ClientHub detects that the reminder is already added
     * 1d1. ClientHub shows an error message that the reminder is already added
 
@@ -452,8 +475,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 client's contact without a noticeable sluggishness in performance for typical usage.
-3.  Should be able to load client's contact within 2 seconds to provide a smooth user experience.
+2.  Should be able to hold up to 1000 client's client without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to load client's client within 2 seconds to provide a smooth user experience.
 4.  As the number of clients increases, the app should be able to handle the increased data load without significant degradation in performance.
 5.  A financial advisor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 6.  The application should have an intuitive and easy-to-navigate UI so that financial advisors can quickly find clients and input data without much training.
@@ -463,13 +486,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private Contact Detail**: A contact detail that is not meant to be shared with others
-* **Client**: A person or company that is in the contact list
+* **Private client Detail**: A client detail that is not meant to be shared with others
+* **Client**: A person or company that is in the client list
 * **Client Type**: A category used to describe the relationship or status of a client, such as VIP and standard.
-* **Contact**: A client's information saved in the system, which includes details such as name, phone number, email, address, client type, and optional descriptions.
-* **Financial Advisor**: The primary user of ClientHub, responsible for managing a large number of client contacts and using the system to track details, tasks, and interactions with clients.
-* **Tag**: Keywords assigned to clients, such as "investor" or "retiree," used to categorize and segment clients for better management and service delivery.
-
+* **client**: A client's information saved in the system, which includes details such as name, phone number, email, address, client type, and descriptions.
+* **Financial Advisor**: The primary user of ClientHub, responsible for managing a large number of clients and using the system to track details, tasks, and interactions with clients.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -483,47 +504,38 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch 
+1. Initial launch
 
-**For Mac**
+   1. Download the jar file and copy into an empty folder
 
-    1. Download the jar file and copy into an empty folder called `ClientHu`b in `Desktop`. 
-    2. Open Terminal 
-    3. Inside the terminal enter: `cd/Desktop/ClientHub`
-    4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-   
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample clients. The window size may not be optimum.
 
-**For Windows**
+1. Saving window preferences
 
-    1.Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
-    2.Open PowerShell
-    3.Inside the Command Prompt enter: `cd Downloads\ClientHub`
-    4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   2. Re-launch the app by double-clicking the jar file.<br>
+
+   1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
-### Deleting a contact
+### Deleting a client
 
-1. Deleting a contact while all contacts are being shown
+1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete Ahmad`<br>
-      Expected: Contact with name "Ahmad" is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: client with name "Ahmad" is deleted. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete x` (where x is a number) <br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a contact not in the list) <br>
+   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a client not in the list) <br>
       Expected: Similar to previous.
 
-1. Deleting a contact with the same name
+1. Deleting a client with the same name
 
-    1. Test case: `delete Jeremy` with more than one contact with the name `Jeremy` <br>
+    1. Test case: `delete Jeremy` with more than one client with the name `Jeremy` <br>
         Expected: User is prompted to be more specific. Details of the required change are shown in the status message. Status bar remains the same.
 
 ### Saving data

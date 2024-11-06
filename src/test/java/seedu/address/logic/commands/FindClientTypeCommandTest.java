@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_NO_PERSON_FOUND_FOR_VIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithNewList;
+import static seedu.address.logic.Messages.MESSAGE_CLIENT_TYPE_NOT_FOUND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -58,11 +58,11 @@ public class FindClientTypeCommandTest {
 
     @Test
     public void execute_zeroKeywords_noClientFound() {
-        String expectedMessage = String.format(MESSAGE_NO_PERSON_FOUND_FOR_VIEW);
+        String expectedMessage = String.format(MESSAGE_CLIENT_TYPE_NOT_FOUND);
         String userInput = "  ";
         ClientTypeContainsKeywordsPredicate predicate = preparePredicate(userInput);
         FindClientTypeCommand command = new FindClientTypeCommand(predicate);
-        assertCommandFailureWithNewList(command, userInput, model, expectedMessage);
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test

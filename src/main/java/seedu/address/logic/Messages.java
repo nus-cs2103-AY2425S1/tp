@@ -19,8 +19,14 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "The client cannot be found in the clientHub \n"
-            + "Please use the list command to see all clients!";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Client not found. \n"
+            + "Please double check the name of the client!";
+    public static final String MESSAGE_ADDRESS_NOT_FOUND = "Client not found. \n"
+            + "Please double check the address of the client!";
+    public static final String MESSAGE_PHONE_NOT_FOUND = "Client not found. \n"
+            + "Please double check the phone number of the client!";
+    public static final String MESSAGE_CLIENT_TYPE_NOT_FOUND = "Client not found. \n"
+            + "Please double check the client type(s) of the client!";
     public static final String MESSAGE_VAGUE_DELETE = "Please be more specific in the name \n"
                                 + "or use $ to indicate the end of an EXACT name";
     public static final String MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW = "%1$d client found for viewing!";
@@ -55,7 +61,7 @@ public class Messages {
      */
     public static String getMessagePersonsListedOverview(int count) {
         if (count == 0) {
-            return "0 client listed!";
+            return "0 client listed!, please use the list command to see all clients!";
         }
         if (count == 1) {
             return "1 client listed!";

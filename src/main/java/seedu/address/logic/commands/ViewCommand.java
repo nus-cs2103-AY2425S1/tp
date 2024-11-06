@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,7 +29,7 @@ public class ViewCommand extends Command {
             "\nMultiple clients found. Please specify the name of your client further.";
 
     public static final String NO_PERSON_FOUND_VIEW_MESSAGE =
-            "\nClient not found. Use the list command to see all clients";
+            "Client not found for viewing. Please double check the name of your client!";
 
     public static final String SHOWING_VIEW_MESSAGE = "Opened view window.";
 
@@ -47,11 +48,10 @@ public class ViewCommand extends Command {
 
         // Check if there is anyone in the filtered list
         if (model.getDisplayPersons().isEmpty()) {
-            throw new CommandException(
-                    String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW,
-                    model.getDisplayPersonsListSize())
-                    + NO_PERSON_FOUND_VIEW_MESSAGE
-            );
+
+            // If noone found, show all persons (no change)
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(NO_PERSON_FOUND_VIEW_MESSAGE);
         }
 
         // Check if there are duplicates

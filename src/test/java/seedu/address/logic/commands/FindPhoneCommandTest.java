@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -10,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalClientHub;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,12 +56,10 @@ public class FindPhoneCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPhoneFound() {
-        String expectedMessage = Messages.getMessagePersonsListedOverview(0);
+        String expectedMessage = Messages.MESSAGE_PHONE_NOT_FOUND;
         PhoneBeginsWithKeywordPredicate predicate = preparePredicate(" ");
         FindPhoneCommand command = new FindPhoneCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getDisplayPersons());
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
