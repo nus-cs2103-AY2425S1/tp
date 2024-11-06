@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -81,9 +80,6 @@ public class AssignPolicyCommand extends Command {
         if (!editSuccess) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
         }
-        model.commitAddressBook();
-        System.out.println(model.getFilteredPersonList());
-        //model.updateFilteredPersonList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit)));
     }
 
