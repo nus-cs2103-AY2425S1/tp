@@ -27,7 +27,7 @@
 
       <VBox>
         <HBox alignment="CENTER" spacing="10" >
-          <Label fx:id="headerlabel"  text="VOLUNTIER" styleClass="header-label" />
+          <Label fx:id="headerlabel"  text="VolunTier" styleClass="header-label" />
         </HBox>
 
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">

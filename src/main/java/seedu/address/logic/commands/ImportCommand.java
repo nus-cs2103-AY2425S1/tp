@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.storage.CsvImport;
 
 /**
- * Adds a  list of persons to the address book provided by an import file.
+ * Adds a list of persons to VolunTier provided by an import file.
  */
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
@@ -21,7 +21,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a list of persons provided in"
             + " the provided file. \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FILEPATH + "~/Desktop/tp/data/import_file.csv";
+            + PREFIX_FILEPATH + " ~/Desktop/tp/data/import_file.csv";
 
     public static final String MESSAGE_SUCCESS = "%d persons added. ";
     public static final String MESSAGE_DUPLICATES = "Rows with duplicates: %s. ";
