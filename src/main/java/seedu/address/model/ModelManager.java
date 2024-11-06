@@ -231,5 +231,11 @@ public class ModelManager implements Model {
     public void saveCurrentCampusConnect() {
         campusConnect.saveCurrentState();
     }
+
+    @Override
+    public void undoExceptionalCommand() throws CommandException {
+        ReadOnlyCampusConnect cc = campusConnect.recoverStateWithoutSaving();
+        this.setCampusConnect(cc);
+    }
 }
 

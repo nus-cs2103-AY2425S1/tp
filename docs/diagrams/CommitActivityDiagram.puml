@@ -8,10 +8,16 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command commits CampusConnect])
-    :Purge redundant states;
-    :Save CampusConnect to
-    campusConnectStateList;
+if () then ([command modifies CampusConnect])
+    :Purge undone states in the
+    "future" stack;
+    :Save current CampusConnect
+    to "history" stack;
+    if () then ([command execution fails])
+    : Undo old version of
+    CampusConnect;
+    else ([else])
+    endif
 else ([else])
 endif
 stop

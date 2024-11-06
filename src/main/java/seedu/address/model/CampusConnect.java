@@ -77,6 +77,10 @@ public class CampusConnect implements ReadOnlyCampusConnect {
         return out;
     }
 
+    public ReadOnlyCampusConnect recoverStateWithoutSaving() throws UndoException {
+        return versionedCampusConnect.extractOldData();
+    }
+
     /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
