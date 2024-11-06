@@ -96,8 +96,8 @@ class JsonSerializableAddressBook {
 
             jsonAdaptedEvent.getClientIds().stream()
                     .map(addressBook::getContact)
+                    .filter(contact -> contact instanceof Client)
                     .map(contact -> (Client) contact)
-                    .filter(Objects::nonNull)
                     .forEach(event::addClient);
 
             boolean hasClients = jsonAdaptedEvent.getClientIds().stream().anyMatch(Objects::nonNull);
@@ -107,8 +107,8 @@ class JsonSerializableAddressBook {
 
             jsonAdaptedEvent.getVendorIds().stream()
                     .map(addressBook::getContact)
+                    .filter(contact -> contact instanceof Vendor)
                     .map(contact -> (Vendor) contact)
-                    .filter(Objects::nonNull)
                     .forEach(event::addVendor);
 
             boolean hasVendors = jsonAdaptedEvent.getVendorIds().stream().anyMatch(Objects::nonNull);
