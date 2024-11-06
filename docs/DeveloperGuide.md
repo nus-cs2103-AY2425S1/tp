@@ -311,88 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `NovaCare` and the **Actor** is the `nurses`, unless specified otherwise)
 
-**Use case: UC01  - Add Task**
-
-**MSS**
-
-1. User chooses to add a new task.
-2. NovaCare asks for a patient ID and description of the task.
-3. User inputs the requested information.
-4. NovaCare outputs message showing successful task creation.
-
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The patient list is empty.
-
-  Use case ends.
-
-* 3a. NovaCare detects an invalid patient ID.
-
-    * 3a1. NovaCare requests for valid patient ID.
-    * 3a2. User enters a new patient ID and description of the task.
-
-
-      Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use case: UC02  - Delete Emergency contact number**
-
-**MSS**
-
-1.  Nurse chooses to delete an emergency contact number for a patient.
-2.  Nurse requests the patient's details from NovaCare to identify the patient.
-3.  NovaCare displays the list of current emergency contacts for the patient.
-4.  Nurse selects the contact to delete.
-5.  NovaCare deletes the selected emergency contact and displays a confirmation message with the updated emergency contact list.
-
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The list is empty.
-
-  Use case ends.
-
-* 3b. NovaCare detects that the patient does not exist.
-
-    * 3b1. NovaCare notifies the nurse that the patient does not exist.
-    * 3b2. Nurse either re-enters the correct patient details or cancels the operation.
-
-
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use Case: UC03 - Delete Task**
-
-**MSS**
-
-1. User chooses to delete a task.
-2. NovaCare asks for the Task ID of the task to be deleted.
-3. User inputs the Task ID.
-4. NovaCare outputs a message showing successful deletion of the task.
-
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The task list is empty.
-
-    * Use case ends.
-
-* 3a. NovaCare detects an invalid Task ID.
-
-    * 3a1. NovaCare requests a valid Task ID.
-    * 3a2. User enters a new Task ID.
-
-
-      Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use Case: UC04 - Add Patient**
+**Use Case: UC01 - Add Patient**
 
 **MSS**
 
@@ -412,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Steps 3a1-3a2 are repeated until the data entered is correct.
       Use case resumes at step 3 if the details are re-entered.
-  
+
 * 3b. User omits one or more required fields (name, phone number, email or address).
 
     * 3b1. NovaCare prompts the user to enter the missing fields.
@@ -421,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 3b1-3b2 are repeated until all required fields are provided.
       Use case resumes at step 3 once all fields are correctly entered.
 
-**Use Case: UC05 - Delete Patient**
+**Use Case: UC02 - Delete Patient**
 
 **MSS**
 
@@ -442,7 +361,110 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 3a1-3a2 are repeated until a valid patient record is found.
       Use case resumes at step 3 if the patient details are correct.
 
-**Use Case: UC06 - Add Priority**
+
+**Use case: UC03 - Add Task**
+
+**MSS**
+
+1. User chooses to add a new task.
+2. NovaCare asks for a patient ID and description of the task.
+3. User inputs the requested information.
+4. NovaCare outputs message showing successful task creation.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The patient list is empty.
+
+  Use case ends.
+
+* 3a. NovaCare detects an invalid patient ID.
+
+    * 3a1. NovaCare requests for valid patient ID.
+    * 3a2. User enters a new patient ID and description of the task.
+
+      Steps 3a1-3a2 are repeated until the data entered is correct.
+      Use case resumes at step 2 if patient details are re-entered.
+
+**Use Case: UC04 - Delete Task**
+
+**MSS**
+
+1. User chooses to delete a task.
+2. NovaCare asks for the Task ID of the task to be deleted.
+3. User inputs the Task ID.
+4. NovaCare outputs a message showing successful deletion of the task.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The task list is empty.
+
+    * Use case ends.
+
+* 3a. NovaCare detects an invalid Task ID.
+
+    * 3a1. NovaCare requests a valid Task ID.
+    * 3a2. User enters a new Task ID.
+
+      Steps 3a1-3a2 are repeated until the data entered is correct.
+      Use case resumes at step 2 if patient details are re-entered.
+
+**Use case: UC05 - Add Emergency contact**
+
+**MSS**
+
+1. User chooses to add emergency contact details to a selected patient.
+2. NovaCare asks for a patient ID, emergency contact name, and emergency contact number.
+3. User inputs the requested information.
+4. NovaCare adds the emergency contact to the selected patient and displays a confirmation message with the updated emergency contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. NovaCare detects that the patient already has a registered emergency contact.
+
+    * 3a1. NovaCare notifies the user that the patient already has a registered emergency contact.
+
+      Use case ends.
+
+* 3b. NovaCare detects that the patient does not exist.
+
+    * 3b1. NovaCare notifies the user that the patient does not exist.
+    * 3b2. User either re-enters the correct patient details or cancels the operation.
+
+      Use case resumes at step 2 if patient details are re-entered.
+
+**Use case: UC06 - Delete Emergency contact**
+
+**MSS**
+
+1. User chooses to delete the emergency contact details of a selected patient.
+2. NovaCare asks for a patient ID of the patient to have their emergency contact details deleted.
+3. User inputs the patient ID.
+4. NovaCare deletes the emergency contact of the selected patient and displays a confirmation message with the deleted emergency contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. NovaCare detects that the patient does not have a registered emergency contact.
+
+    * 3a1. NovaCare notifies the user that the patient already does not have a registered emergency contact.
+
+      Use case ends.
+
+* 3b. NovaCare detects that the patient does not exist.
+
+    * 3b1. NovaCare notifies the user that the patient does not exist.
+    * 3b2. User either re-enters the correct patient details or cancels the operation.
+
+      Use case resumes at step 2 if patient details are re-entered.
+
+**Use Case: UC07 - Add Priority**
 
 **MSS**
 
@@ -464,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 3a1-3a2 are repeated until a valid priority level is provided.
       Use case resumes at step 3 if the priority level is correct.
 
-**Use Case: UC07 - Reset Priority**
+**Use Case: UC08 - Reset Priority**
 
 **MSS**
 
