@@ -58,11 +58,11 @@ public class AddPatientCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(patientToAdd)) {
+        if (model.hasPatient(patientToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.addPerson(patientToAdd);
+        model.addPatient(patientToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(patientToAdd)));
     }
 

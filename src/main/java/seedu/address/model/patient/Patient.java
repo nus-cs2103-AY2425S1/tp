@@ -36,17 +36,20 @@ public class Patient extends Person {
     }
 
     /**
-     * Returns true if both patients have the same name and phone number.
+     * Returns true if both patients have the same name.
      * This defines a weaker notion of equality between two patients.
      */
-    public boolean isSamePatient(Patient otherPatient) {
+    public boolean isSamePatient(Person otherPatient) {
+        if (!(otherPatient instanceof Patient)) {
+            return false;
+        }
+
         if (otherPatient == this) {
             return true;
         }
 
         return otherPatient != null
-                && otherPatient.getName().equals(getName())
-                && otherPatient.getPhone().equals(getPhone());
+                && otherPatient.getName().equals(getName());
     }
 
     /**
@@ -95,5 +98,4 @@ public class Patient extends Person {
                 .add("tags", super.getTags())
                 .toString();
     }
-
 }

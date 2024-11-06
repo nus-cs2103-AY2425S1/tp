@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.doctor.Doctor;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PatientBuilder;
@@ -131,6 +132,16 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public void addPatient(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addDoctor(Doctor doctor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -142,6 +153,16 @@ public class AddPatientCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPatient(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDoctor(Doctor doctor) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -193,9 +214,9 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.patient.isSamePerson(person);
+        public boolean hasPatient(Patient patient) {
+            requireNonNull(patient);
+            return this.patient.isSamePerson(patient);
         }
     }
 
@@ -206,15 +227,15 @@ public class AddPatientCommandTest {
         final ArrayList<Person> patientsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return patientsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasPatient(Patient patient) {
+            requireNonNull(patient);
+            return patientsAdded.stream().anyMatch(patient::isSamePatient);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            patientsAdded.add(person);
+        public void addPatient(Patient patient) {
+            requireNonNull(patient);
+            patientsAdded.add(patient);
         }
 
         @Override

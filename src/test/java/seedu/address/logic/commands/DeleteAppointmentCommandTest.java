@@ -22,6 +22,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AppointmentBuilder;
 
@@ -160,14 +162,35 @@ public class DeleteAppointmentCommandTest {
         }
 
         @Override
+        public boolean hasPatient(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDoctor(Doctor doctor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addPerson(Person person) {
-
+            throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addPatient(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addDoctor(Doctor doctor) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
