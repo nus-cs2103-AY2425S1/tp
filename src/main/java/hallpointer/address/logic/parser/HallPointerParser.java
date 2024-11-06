@@ -16,6 +16,7 @@ import hallpointer.address.logic.commands.DeleteMemberCommand;
 import hallpointer.address.logic.commands.DeleteSessionCommand;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
+import hallpointer.address.logic.commands.FindSessionCommand;
 import hallpointer.address.logic.commands.HelpCommand;
 import hallpointer.address.logic.commands.ListCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
@@ -70,6 +71,9 @@ public class HallPointerParser {
 
         case DeleteSessionCommand.COMMAND_WORD:
             return new DeleteSessionCommandParser().parse(arguments);
+
+        case FindSessionCommand.COMMAND_WORD:
+            return new FindSessionCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
