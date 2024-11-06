@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalTags.FLORIST;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.tag.DeleteTagCommand;
 
 public class DeleteTagCommandParserTest {
 

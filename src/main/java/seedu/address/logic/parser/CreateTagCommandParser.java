@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.tag.CreateTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 

@@ -8,7 +8,7 @@ import java.util.Set;
 
 import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.UntagCommand;
+import seedu.address.logic.commands.tag.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
