@@ -173,6 +173,9 @@ Removes all graduated students from the address book based on the current year a
 
 Format: `clean`
 
+> [!Tip]
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [Undo](#undoing-the-previous-command--undo) for details!
+
 Examples of usage:
 
 `clean`, executed in 2024.
