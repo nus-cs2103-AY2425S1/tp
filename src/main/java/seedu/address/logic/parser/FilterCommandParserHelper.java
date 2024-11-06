@@ -26,6 +26,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed names as strings.
      */
     public static List<String> parseNames(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_NAME).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -39,6 +40,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed phone numbers as strings.
      */
     public static List<String> parsePhones(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_PHONE).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -52,6 +54,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed emails as strings.
      */
     public static List<String> parseEmails(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_EMAIL).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -65,6 +68,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed addresses as strings.
      */
     public static List<String> parseAddresses(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_ADDRESS).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -78,6 +82,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed register numbers as strings.
      */
     public static List<String> parseRegisterNumbers(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_REGISTER_NUMBER).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -91,6 +96,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed sex values as strings.
      */
     public static List<String> parseSexes(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_SEX).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -104,6 +110,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed student classes as strings.
      */
     public static List<String> parseClasses(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_STUDENT_CLASS).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -117,6 +124,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed emergency contact names as strings.
      */
     public static List<String> parseEcNames(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_ECNAME).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -130,6 +138,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed emergency contact numbers as strings.
      */
     public static List<String> parseEcNumbers(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_ECNUMBER).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();
@@ -143,6 +152,7 @@ public class FilterCommandParserHelper {
      * @return A list of parsed tags as strings.
      */
     public static List<String> parseTags(ArgumentMultimap argMultimap) {
+        assert argMultimap != null;
         return argMultimap.getAllValues(PREFIX_TAG).stream()
                 .flatMap(value -> List.of(value.trim().split("\\s+")).stream())
                 .toList();

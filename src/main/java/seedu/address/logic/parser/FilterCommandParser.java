@@ -40,6 +40,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform to the expected format and if predicates are empty.
      */
     public FilterCommand parse(String args) throws ParseException {
+        assert args != null;
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS, PREFIX_ECNAME, PREFIX_ECNUMBER, PREFIX_TAG);
