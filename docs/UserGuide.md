@@ -27,7 +27,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
     * [Viewing status chart: `/chart`](#viewing-status-chart-chart)
     * [Exiting the program : `/exit`](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
-  * [FAQ](#FAQ)
+  * [FAQ](#faq)
   * [Command summary](#command-summary)
 <!-- TOC -->
 
