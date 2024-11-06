@@ -24,7 +24,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 [Policy Management](#policy-management): Navigate here for more information on handling policy assignments and payments.  
 [Search Functions](#search-functions): Navigate here for more information on how to quickly find client's information.  
 [Advanced Features](#advanced-features): Enhance your workflow with advanced commands.  
-[Frequently Asked Questions (FAQ)](#frequently-asked-questions--faq-): Common questions and answers about using AgentConnect.  
+[Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq): Common questions and answers about using AgentConnect.  
 [Known Issues](#known-issues): List of current issues and their solutions.  
 ---
 
@@ -110,6 +110,8 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 --------------------------------------------------------------------------------------------------------------------
 ## Getting Started
+
+### Understanding Command Format
 
 Users engage with the AgentConnect application by inputting a series of commands. These commands enable a variety of actions, such as adding, updating, listing, and managing clients and policies, as well as retrieving client information like appointments and birthdays. This section will introduce some pointers to take note of when running commands.
 
