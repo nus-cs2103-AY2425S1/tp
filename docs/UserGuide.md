@@ -155,13 +155,12 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
-  For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
-  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
-  and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-  If the resulting role does not have the specified field, the edit will be invalid.
+  * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
+  * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
+  * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+* If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
