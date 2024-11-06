@@ -75,11 +75,10 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 
 Detailed information can be found under [Features](#features).
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ---
 
-## Symbols and Tips
+## Key Symbols and Tips for a Smooth Experience
 
 Throughout this guide, you'll encounter several symbols. Refer to these symbols as you explore the guide. Each provides quick insights or warnings that can make your experience smoother:
 
@@ -97,7 +96,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
     - If your computer does not have Java or its version is below Java 17, you may refer to: 
       - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
       - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
-    - 📋:If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
+    - <strong>[Note]</strong>: If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
 2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.4).
 ![downloadPage.png](images%2FdownloadPage.png)[**Tip**] To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
    <br><br>
@@ -116,8 +115,10 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 [⚠**Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error. <br><br>
 
 5. 🎉 A GUI similar to the one below should appear in a few seconds! 🎉
-<img src="images/successimage.png" alt="imgidk.png" width="800">
-📋:Note how the app contains some sample data. <br><br>
+
+    <img src="images/successimage.png" alt="imgidk.png" width="800">
+
+   - <strong>[Note]</strong>:Note how the app contains some sample data. <br><br>
 
 6. **Interact with TalentSG**:
     - Type your command into the command box and press **Enter** to execute it.
@@ -152,7 +153,24 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 - **Extraneous Parameters**: Ignored for commands that do not take parameters.
     - E.g., `help 123` is interpreted as `help`.
 - **Copying Commands**: Be cautious when copying multi-line commands from PDFs; line breaks may affect the command execution.
+<br> <br>
+#### Constraints of fields
 
+| Field            | Constraints                                | Example                                                                                                  |
+|------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **NAME**         | Up to 20 characters, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
+| **PHONE_NUMBER** | Numeric                                    | `98989899`, `81092819`                                                                                   |
+| **EMAIL**        | Valid email format                         | `testing@gmail.com`,`example@gmail.com`                                                                  |
+| **ADDRESS**      | Valid address, should not be blank         | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
+| **SKILLS**       | Comma-separated values                     | `Java, Python`, `C++`                                                                                    |
+| **STATUS**       | Predefined statuses                        | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
+| **EXPERIENCE**   | Valid experience, should not be blank      | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
+| **DESIRED_ROLE** | Desired job position, should not be blank  | `Software Engineer`, `UI/UX Designer`                                                                    |
+| **NOTE**         | Any characters are accepted                | `Very confident`, `Confident`                                                                            |
+| **Tags**         | Optional and can be multiple               | `Must have`                                                                                              |
+
+
+[**Caution**]: The required information except tags cannot be empty.
 
 ---
 
@@ -176,23 +194,6 @@ Adds a new candidate to TalentSG.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex/EXPERIENCE st/STATUS note/NOTE  [t/TAG]...`
 
-#### Constraints
-
-| Field            | Constraints                                | Example                                                                                                  |
-|------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **NAME**         | Up to 20 characters, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
-| **PHONE_NUMBER** | Numeric                                    | `98989899`, `81092819`                                                                                   |
-| **EMAIL**        | Valid email format                         | `testing@gmail.com`,`example@gmail.com`                                                                  |
-| **ADDRESS**      | Valid address, should not be blank         | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
-| **SKILLS**       | Comma-separated values                     | `Java, Python`, `C++`                                                                                    |
-| **STATUS**       | Predefined statuses                        | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
-| **EXPERIENCE**   | Valid experience, should not be blank      | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
-| **DESIRED_ROLE** | Desired job position, should not be blank  | `Software Engineer`, `UI/UX Designer`                                                                    |
-| **NOTE**         | Any characters are accepted                | `Very confident`, `Confident`                                                                            |
-| **Tags**         | Optional and can be multiple               | `Must have`                                                                                              |
-
-
-[**Caution**]: The required information except tags cannot be empty.
 
 <u>Example</u>
 
@@ -203,9 +204,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex
 Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
 
 
-After the add command ran:
+**After the add command ran:**
 
-![img_5.png](images/afteradd.png)
+<img src="images/afteradd.png" alt="afteradd" width="800">
+
 
 [**Caution**]: You cannot add the same candidate twice. (same name and phone)
 
@@ -221,12 +223,12 @@ Format: `list`
 
 Command: ` list `
 
-Before the list command ran:
+**Before the list command ran:**
 
 <img src="images/beforelist.png" alt="beforelist" width="800">
 
 
-After the list command ran:
+**After the list command ran:**
 
 <img src="images/afterlist.png" alt="afterlist.png" width="800">
 
@@ -257,12 +259,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STAT
 
 Command: ` edit 1 st/Rejected note/arrogant `
 
-Before the edit command ran:
+**Before the edit command ran:**
+
 <img src="images/beforeedit.png" alt="beforeedit.png" width="800">
 
 
 
-After the edit command ran:
+**After the edit command ran:**
+
 <img src="images/afteredit.png" alt="afteredit.png" width="800">
 
 
@@ -294,10 +298,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Command: ` find John Stanley `
 
-Before the find command ran:
+**Before the find command ran:**
+
 <img src="images/beforefind.png" alt="beforefind.png" width="800">
 
-After the find command ran:
+**After the find command ran:**
+
 <img src="images/afterfind.png" alt="afterfind.png" width="800">
 
 ---
@@ -322,11 +328,13 @@ Removes a candidate from TalentSG.
 
 Command: ` delete 2 `
 
-Before the delete command ran:
+**Before the delete command ran:**
+
 <img src="images/beforedelete.png" alt="beforedelete.png" width="800">
 
 
-After the delete command ran:
+**After the delete command ran:**
+
 <img src="images/afterdelete.png" alt="afterdelete.png" width="800">
 
 
@@ -363,9 +371,11 @@ Filters candidates based on their status.
 Command: `filter screening`
 
 **Before the filter command ran:**
+
 <img src="images/beforefilter.png" alt="beforefilter.png" width="800">
 
 **After the filter command ran:**
+
 <img src="images/afterfilter.png" alt="afterfilter.png" width="800">
 
 #### Invalid Status
@@ -384,11 +394,13 @@ Removes all candidates from TalentSG.
 
 <u>Image Example<u>
 
-Before the clear command ran:
+**Before the clear command ran:**
+
 <img src="images/beforeclear.png" alt="beforeclear.png" width="800">
 
 
-After the clear command ran:
+**After the clear command ran:**
+
 <img src="images/afterclear.png" alt="afterclear.png" width="800">
 
 [**Caution**]: Clearing all entries is irreversible. Make sure you have a backup if you want to retain the data for future reference.
@@ -403,7 +415,7 @@ Closes the TalentSG application.
 
 <u>Image Example<u>
 
-Running the exit command:
+**Running the exit command:**
 
 <img src="images/exit.png" alt="exit.png" width="800">
 
@@ -514,5 +526,7 @@ _Details coming soon ..._
 
 - **Backup**:
   A saved copy of the data file, recommended before making manual changes to avoid data loss.
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 [back to top](#talentSG-user-guide)
