@@ -56,7 +56,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
        - [Undo a Command](#undo-a-command--undo)
        - [Redo a Command](#redo-a-command--redo)
        - [Clearing All Entries](#clearing-all-entries--clear)
-4. [Frequently Asked Questions (FAQ)](#frequently-asked-questions--faq-)
+4. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
 5. [Known Issues](#known-issues)
 6. [Command Summary](#command-summary)
 
@@ -131,7 +131,7 @@ Users engage with the AgentConnect application by inputting a series of commands
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 
-### Viewing Help: `help`
+### Viewing Help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -222,7 +222,7 @@ Examples:
 
 ### Deleting a client : `delete`
 
-Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` to confirm deletion.
+Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` and press enter to confirm deletion.
 
 Format: `delete <INDEX>` or `delete <NAME>`
 - **Parameters**:
@@ -563,7 +563,7 @@ Examples:
 
 ---
 
-### Marking a policy payment installment as paid: `paid`
+### Marking a policy payment installment as paid : `paid`
 
 Marks a policy payment installment as paid for a client.
 
@@ -604,7 +604,8 @@ Examples:
 | [Clear All Entries](#clearing-all-entries--clear)   | `clear`            | `clear`             |
 
 ### Undo a command : `undo`
-Undo the last delete. This command works for add, edit, delete client and clear commands.
+Undo the last command. This command works for add, edit, delete client and clear commands.
+
 
 Format: `undo` 
 
