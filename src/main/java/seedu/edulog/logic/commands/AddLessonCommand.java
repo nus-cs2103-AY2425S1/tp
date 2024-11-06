@@ -24,7 +24,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_START_DAY + "DAY OF THE WEEK "
             + PREFIX_START_TIME + "START TIME (24H FORMAT) "
-            + PREFIX_END_TIME + "END TIME (24H FORMAT)"
+            + PREFIX_END_TIME + "END TIME (24H FORMAT) "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Sec 4 Math Class "
             + PREFIX_START_DAY + "Monday "
