@@ -2,7 +2,6 @@
 layout: page
 title: User Guide
 ---
-# EduVault User Guide
 
 **EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
