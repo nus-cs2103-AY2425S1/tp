@@ -18,6 +18,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -60,11 +61,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="314" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -82,6 +87,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Event` and `Volunteer` objects residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -107,6 +114,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="668"/>
@@ -114,6 +123,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -144,6 +155,8 @@ The `Storage` component,
 Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2425S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -206,7 +219,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | General user                             | Dark mode                              | Enhance the app's user experience for those who prefer a darker interface            |
 | `*`      | General user                             | Accessibility features                 | Improve usability for visually impaired users through larger fonts and color changes |
 
-*{More to be added}*
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -235,6 +248,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Guarantees**:
 - New event is stored in the system if all required information is present and valid.
+
+<div style="page-break-after: always;"></div>
 
 #### UC02. Create Volunteer
 
@@ -275,6 +290,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 4. User submits the information to the system.
 5. System adds the volunteer to the event and confirms addition.<br/>
    Use Case Ends.
+
+<div style="page-break-after: always;"></div>
 
 **Extensions**:
 - 2a. No volunteers and/or events are found.
@@ -338,6 +355,8 @@ graph TD
 ```
 
 This diagram shows the main actor (Management Staff) and their interactions with the three primary use cases we've defined. The arrows indicate the relationships between the actor and the use cases, as well as dependencies between use cases.
+
+<div style="page-break-after: always;"></div>
 
 
 ### Non-Functional Requirements
@@ -418,6 +437,8 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect add commands to try: `new`, `/e new [missing fields]`, `...`, where missing fields represents user inputs with some fields (e.g. `n/`, `d/`) missing or left empty.<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a volunteer
 
 1. Adding a volunteer while all events are being shown
@@ -463,6 +484,8 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `del 1`, `/v del x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Assigning a volunteer to an event
 
 1. Assigning a volunteer to an event while all volunteers and events are being shown
@@ -472,13 +495,15 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `assign e/ 1 v/ 1`<br>
        Expected: The volunteer is assigned to the event. The status message should reflect the successful assignment of the volunteer to the event. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
        ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
-   
+
    3. Test case: `assign e/ 1 v/ 0`<br>
        Expected: The volunteer is not assigned to the event. Error details shown in the status message. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
        ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
 
-   5. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
+   4. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Un-assigning a volunteer from an event
 
@@ -496,6 +521,8 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect unassign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding an event by keyword
 
@@ -527,6 +554,8 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect find commands to try: `find`, `/v find n/`, `...`<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all Events And Volunteers
 
 1. Test case: `list`<br>
@@ -541,6 +570,8 @@ This project was significantly more challenging than the Address Book 3 (AB3) re
 - **Entity Relationships**: Implementing relationships between entities (e.g., assigning volunteers to events, tracking event participants) posed significant challenges, especially when ensuring data consistency and avoiding duplication.
 - **User Experience**: Developing a command-line interface that is both intuitive and efficient for users with varying technical skills was a considerable effort.
 - **Testing and Coverage**: Achieving high test coverage for a complex system with multiple interdependent features added to the project workload.
+
+<div style="page-break-after: always;"></div>
 
 ### Effort Required
 The project involved **approximately 1.5x the effort required for AB3**, primarily due to the increased complexity of handling multiple entities and implementing advanced features such as:
