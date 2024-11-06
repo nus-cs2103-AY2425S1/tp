@@ -37,15 +37,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
+        if (hasIdentityNumber) {
+            IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
+                    argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
+            return new DeleteCommand(identityNumber);
+        }
+
         try {
-            if (hasIdentityNumber) {
-                IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
-                        argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
-                return new DeleteCommand(identityNumber);
-            } else {
-                Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-                return new DeleteCommand(index);
-            }
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            return new DeleteCommand(index);
         } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
