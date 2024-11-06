@@ -650,15 +650,15 @@ testers are expected to do more *exploratory* testing.
 ### Adding a Wedding
 Success action: When wedding is successfully added, the details of the added wedding is shown in the status message and reflected in the wedding list.
 
-1. Adding a wedding using INDEX for client (c/)
+1. Adding a wedding while all persons and weddings are shown.
 
-    1. Prerequisites: List all contacts using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `addw n/Church Wedding c/1 d/2024-12-12 v/Church of the Holy Spirit`<br>
-       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Details of the added wedding is displayed on the status message.
+       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Success action will be carried out.
 
    1. Test case: `addw n/Church Wedding c/1`<br>
-      Expected: Wedding added with first person in the persons list set as client, with no date and venue. Details of the added wedding is displayed on the status message.
+      Expected: Wedding added with first person in the persons list set as client, with no date and venue. Success action will be carried out.
 
    1. Test case: `addw`
       Test case: `addw n/Church Wedding`<br>
@@ -690,12 +690,14 @@ Success action: When wedding is successfully added, the details of the added wed
        Expected (No Alice): No wedding added. Error message states that the person inputted does not exist in the address book.
 
 ### Editing a Wedding
-1. Success action: When wedding is successfully edited, the details of the updated wedding is shown in the status message and reflected in the wedding list.
+Success action: When wedding is successfully edited, the details of the updated wedding is shown in the status message and reflected in the wedding list.
 
-    1. Prerequisites: List all contacts using the `list` command. Multiple persons in the list.
+1. Editing a Wedding with all persons and weddings shown.
+
+    1. Prerequisites: List all contacts and weddings using the `list` command. Multiple persons in the list.
 
     1. Test case: `editw w/1 [n/NAME] [d/DATE] [v/VENUE]`<br>
-       Expected: First wedding in list is edited with the given inputs. Details of the edited wedding is displayed on the status message.
+       Expected: First wedding in list is edited with the given inputs. Success action will be carried out.
 
     1. Test case: `editw`<br>
        Test case: `editw w/1`<br>
