@@ -70,7 +70,6 @@ public class DeleteGameCommand extends Command {
 
         deletedGame = gameMap.remove(gameName);
         model.setPerson(personToEdit, personToEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, Messages.format(deletedGame)));
     }
@@ -83,7 +82,6 @@ public class DeleteGameCommand extends Command {
         gameMap.put(gameName, deletedGame);
 
         model.setPerson(personToEdit, personToEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
 

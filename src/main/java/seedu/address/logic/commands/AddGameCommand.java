@@ -86,7 +86,6 @@ public class AddGameCommand extends Command {
         Game editedGame = createNewGame(gameName, addGameDescriptor);
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_ADD_GAME_SUCCESS, Messages.format(editedGame)));
     }
@@ -99,7 +98,6 @@ public class AddGameCommand extends Command {
         gameMap.remove(gameName);
 
         model.setPerson(personToEdit, personToEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     /**
