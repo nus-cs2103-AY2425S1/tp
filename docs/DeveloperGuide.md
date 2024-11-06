@@ -448,8 +448,8 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Checking if changes in data are saved
-   1. Use any of the data changing commands eg. `add` `delete` `edit`. 
-   2. Exit ClientHub with `exit` or closing the window. 
+   1. Use any of the data changing commands eg.`add` `delete` `edit`.
+   2. Exit ClientHub with `exit` or closing the window.
    3. Re-launch the app by double-clicking the jar file. <br>
       Expected: Changes made previously are loaded into the displayed data
 
