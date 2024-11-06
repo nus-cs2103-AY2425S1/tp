@@ -28,28 +28,32 @@ To get started,
 
 1. Ensure you have Java `17` or above installed in your Computer. Refer [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html) for the specific version.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-2/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
+3. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
 
-1. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application.<br>
+4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application.<br>
    A interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/loadingPageOfUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/James Ho e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` : Adds a contact named `James Ho` to the KonTActs.
+    * `mark name/Alex Yeoh week/0` : Marks `Alex Yeoh` attendance in KonTActs.
 
-   * `delete n/James Ho` : Deletes the contact with name `James Ho` if it is shown in the current list.
+    * `delete n/Bernice Yu` : Deletes `Bernice Yu` from KonTActs.
+
+    * `addGrade name/Alex Yeoh assignment/Ex01 score/9` : Assigns and adds `Ex01` with a score of 9 to `Alex Yeoh`.
+
+    * `view n/Alex Yeoh`: Views the added grade and assignment for `Alex Yeoh`.
 
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
    <br><br>
 --------------------------------------------------------------------------------------------------------------------
 
