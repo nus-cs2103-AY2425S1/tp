@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -56,7 +56,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Another *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add-wed w/John & Gina v/CHIJMES d/11/12/25`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram2.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram2.puml" />
 
 The four main components (also shown in the diagram above, staticContext is not a main component),
 
@@ -71,13 +71,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -88,28 +88,26 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Alex")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("view-wed Alex & Mary")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/ViewWeddingSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `view-wed Alex & Mary` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `ViewWeddingCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `ViewWeddingCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `ViewWeddingCommand`) which is executed by the `LogicManager`.
+3. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -120,10 +118,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
 
 The `Model` component,
 
@@ -132,24 +129,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `AddressBookStorage`, `WeddingBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -279,10 +267,10 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * Wedding planners who organise multiple weddings concurrently
-* has a need to manage a significant number of contacts with various roles
-* need to categorise all stakeholders in a wedding efficiently
-* can type fast and prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Possesses a need to manage a significant number of contacts with various roles
+* Requires efficient categorisation of all stakeholders in a wedding
+* Can type fast and prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**: Manage contacts of all stakeholders of multiple weddings with ease and convenience
 
@@ -291,20 +279,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                           | So that I can…​                                                              |
+| Priority | As a …​         | I want to …​                                                             | So that I can…​                                                              |
 |----------|-----------------|------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| `* * *`  | Wedding Planner | Add contact details                                                    | I can find contacts easily                                                   |
-| `* * *`  | Wedding Planner | Delete contacts                                                        | I can keep information organized.                                            |
-| `* * *`  | Wedding Planner | List my contacts easily                                                | I can be view my clients and wedding vendors                                 |
-| `* * *`  | Wedding Planner | Tag my contacts to a wedding                                           | I can be categories relevant stakeholders of a wedding together              |
-| `* *`    | Wedding Planner | List the weddings I am planning                                        | I can access relevant information about particular wedding easily            |
+| `* * *`  | Wedding Planner | Add contact details                                                    | I can store contacts in my address book                                                   |
+| `* * *`  | Wedding Planner | Delete contacts                                                        | I can remove contacts I no longer need                                            |
+| `* * *`  | Wedding Planner | List all contacts                                                      | I can view all my clients and wedding vendors                                 |
 | `* *`    | Wedding Planner | Edit contact details                                                   | I can keep information as up-to-date and accurate as possible.               |
-| `* *`    | Wedding Planner | Search for contacts by name, tags, or number                           | I can quickly find the contact I need                                        |
-| `* *`    | Wedding Planner | Store different methods of contact (phone number, email address, etc.) | I can reach them in more than one way                                        |
-| `* *`    | Wedding Planner | Tag contacts with custom labels                                        | I can categorize vendors based on unique criteria for my clients.            |
-| `* *`    | Wedding Planner | Filter based on type of contractor                                     | It is easier to find the right people for the right job.                     |
-| `* *`    | Wedding Planner | Create an event for each wedding                                       | I can manage all details specific to that event.                             |
-| `*`      | Wedding Planner | Show my clients all the contacts they need to know about the wedding   | My clients don't need to worry about finding the contacts themselves         |
+| `* *`    | Wedding Planner | Filter contacts by name and/or job                                     | I can quickly find the contact(s) I need                                        |
+| `* *`    | Wedding Planner | Create weddings                                                        | I can manage all details specific to that wedding                                                   |
+| `* *`    | Wedding Planner | Delete weddings                                                        | I can remove weddings once they have happened                                            |
+| `* *`    | Wedding Planner | List all weddings                                                      | I can view all my weddings that I am planning            |
+| `* *`      | Wedding Planner | View all contacts associated with a wedding                          | I can easily view which stakeholders are involved in that wedding         |
+| `* *`    | Wedding Planner | Tag my contacts to a wedding                                           | I can group relevant stakeholders and attendees of a wedding together              |
+| `* *`    | Wedding Planner | Un-tag my contacts from a wedding                                      | I can remove relevant stakeholders and attendees who will no associate with that wedding              |
 | `*`      | Wedding Planner | Assign contacts to specific events                                     | I can keep track of all parties involved in a wedding                        |
 | `*`      | Wedding Planner | Create and manage guest lists for each wedding                         | I can track RSVPs and dietary preferences                                    |
 | `*`      | Wedding Planner | Track vendor bookings for each wedding                                 | I can ensure all necessary services are confirmed                            |
@@ -312,8 +299,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Wedding Planner | Separate my contacts into categories                                   | I can locate their contact easily and boost my efficiency                    |
 | `*`      | Wedding Planner | Export guest lists and vendor details                                  | I can share them with clients or print them for use during events            |
 | `*`      | Wedding Planner | Set reminders to contact specific vendors/clients                      | I can correspond with them on time without missing any important deadlines.  |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -349,8 +334,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contact
-2.  KnottyPlaner shows a list of contact
+1.  User requests to list contacts
+2.  KnottyPlaner shows a list of contacts
 3.  User requests to add a wedding tag to a specific contact in the list
 4.  KnottyPlanner adds the wedding tag to that contact
 
@@ -362,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given name is invalid.
+* 3a. The given tag name is invalid.
 
     * 3a1. KnottyPlanner shows an error message.
 
@@ -418,26 +403,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts
-2. KnottyPlanner shows a list of contacts
-3. User requests to search for contacts by name criteria
-4. KnottyPlanner shows a list of contacts that match the name criteria
+1. User requests to search for contacts by name criteria
+2. KnottyPlanner shows a list of contacts that matches the name criteria
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given criterion is invalid.
 
-  Use case ends.
-
-* 3a. The given criterion is invalid.
-
-    * 3a1. KnottyPlanner shows an error message.
+    * 2a1. KnottyPlanner shows an error message.
 
       Use case resumes at step 2.
 
-* 4a. The list is empty.
+* 2b. There are no contacts that matches the name.
+
+    * 2ba1. KnottyPlanner shows an empty list.
 
   Use case ends.
 
@@ -445,26 +426,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts
-2. KnottyPlanner shows a list of contacts
-3. User requests to search for contacts by job criteria
-4. KnottyPlanner shows a list of contacts that match the job criteria
+1. User requests to search for contacts by job criteria
+2. KnottyPlanner shows a list of contacts that match the job criteria
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given criterion is invalid.
 
-  Use case ends.
-
-* 3a. The given criterion is invalid.
-
-    * 3a1. KnottyPlanner shows an error message.
+    * 2a1. KnottyPlanner shows an error message.
 
       Use case resumes at step 2.
 
-* 4a. The list is empty.
+* 2b. There are no contacts that matches the job.
+
+    * 2ba1. KnottyPlanner shows an empty list.
 
   Use case ends.
 
@@ -584,36 +561,33 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-
-   1. Test case: `delete n/Alex` followed by `delete-y`<br>
-      Expected: Confirmation Prompt with Alex's details shown. Alex is  then deleted.
-   1. Test case: `delete n/Jonus` followed by `delete-n`<br>
+   1. Test case: `del n/Alex` followed by `y`<br>
+      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted.
+   2. Test case: `del n/Jonus` followed by `n`<br>
       Expected: No person is deleted.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `del`, `del 123123`<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Using the relevant `add` or `add-wed` commands, create dummy data that is to be stored in the storage.
 
-1. _{ more test cases …​ }_
+   2. To simulate a corrupted file, locate the addressbok.json or weddingbook.json file in the data folder.
+
+   3. Delete a random line in the .json file, and relaunch KnottyPlanner.
+        Expected: KnottyPlanner will launch with all previous data wiped and cleared.

@@ -81,7 +81,7 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
-< type="info" seamless>
+<box type="info" seamless>
 
 **Notes about the command format:**<br>
 
@@ -117,24 +117,19 @@ You can add a person to the list of contacts.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
-box type="important" seamless>
+* A person can have any number of tags (including 0). Tags are associated to the weddings this person is
+  involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
+  
+* To make adding a person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+  
+  Examples:`john doe`, `JOHN    doe` will all be formatted to `John Doe`
+
+<box type="important" seamless>
 
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
 * We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
-
-</box>
-
-<box type="tip" seamless>
-
-**Tip:**
-* A person can have any number of tags,(including 0). Tags are associated to the weddings this person is
-  involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
-  
-* To make add person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
-  
-  Examples:`john doe`, `JOHN doe` will all be formatted to `John Doe`
 
 </box>
 
@@ -148,16 +143,16 @@ Examples:
 
 You can delete a person from your list of contacts.
 
+Format: `del n/NAME` followed by `y` or `n`
+
 * Deletes the person with the specified `NAME` from the address book.
 * The contact's details are shown for confirmation.
 * The contact is deleted if `y` is entered.
 * The contact is not deleted if `n` is entered, cancelling the delete operation and nothing will occur.
 
-Format: `del n/NAME` followed by `y` or `n`
-
 <box type="important" seamless>
 
-**IMPORTANT:** `del n/NAME` MUST BE followed by either two commands, otherwise following delete commands may be affected.
+**IMPORTANT:** `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 
 </box>
 
@@ -186,12 +181,11 @@ You can edit an existing contact's details (name, phone number, email, address a
 
 Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`
 
-<box type="tip" seamless>
-
-**Tip:**
 * You have to provide at least one of the optional fields.
 * If you accidentally type the name of the contact in all capitals or add one too many spaces, don't worry! Knotty Planner will
   automatically format the name by removing the extra spacing and correctly capitalizing it 🤩
+
+<box type="important" seamless>
 
 **IMPORTANT:** Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
@@ -229,25 +223,18 @@ You can add a wedding to the list of weddings.
 
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
 
+* If you are worried about adding duplicated weddings, fret not! Knotty Planner will alert you when an identical wedding is added.
+* We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
+* To make adding a wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
 
 <box type="important" seamless>
 
-**IMPORTANT:**
-
-* Date must be a valid date in the format of **dd/MM/yyyy**.
-* If you are worried about adding duplicated weddings, fret not! Knotty Planner will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
+**IMPORTANT:** Date must be a valid date in the format of **dd/MM/yyyy**.
 
 </box>
 
-<box type="tip" seamless>
 
-**Tip:**
-* To make add wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
-
-  Examples: `john & jane`, `JOHN & jane` will all be formatted to `John & Jane`.
-
-</box>
+Examples: `john & jane`, `JOHN   & jane` will all be formatted to `John & Jane`.
 
 ![add wedding message](images/addWeddingMsg.png)
 
@@ -257,7 +244,7 @@ Examples:
 
 ### Deleting a Wedding: `del-wed`
 
-You can delete a person from your list of contacts.
+You can delete a wedding from your list of weddings.
 
 * Deletes the wedding with the specified `NAME & NAME` from the address book.
 * The wedding's details are shown for confirmation.
@@ -268,8 +255,7 @@ Format: `del-wed w/NAME & NAME` followed by `y` or `n`
 
 <box type="important" seamless>
 
-**IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either two commands, otherwise following delete commands may be
-affected. Make sure you follow the format strictly 😲.
+**IMPORTANT:** `del-wed w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 
 </box>
 
@@ -303,7 +289,7 @@ Format: `list-wed`
 ### Tagging a Contact : `tag-add` / `tag-del`
 
 ### Adding Tag(s) to a Contact
-If you need to associate your contacts with a particular wedding, you can use `tag-add` to add them to the wedding.
+If you need to add your contacts to a particular wedding, you can use `tag-add` to add them to the wedding.
 
 Format: `tag-add n/NAME t/TAG...`
 
@@ -339,11 +325,13 @@ If you need to remove your contacts from a particular wedding, you can use `tag-
 
 Format: `tag-del n/NAME t/TAG...`
 
-<box type="tip" seamless>
+* The name of the tag must match the wedding that you want to delete the contact from.
 
-**Tip #1:** The name of the tag must match the wedding that you want to delete the contact from.
+* You can remove a contact from multiple weddings in one go by specifying multiple tags in your command.
 
-**Tip #2:** You can remove a contact from multiple weddings in one go by specifying multiple tags in your command.
+<box type="important" seamless>
+
+**IMPORTANT:** The wedding must already exist in the wedding book to successfully delete a person from a wedding.
 
 </box>
 
@@ -375,7 +363,7 @@ Format: `filter n/KEYWORD... j/KEYWORD...`
 
 <box type="tip" seamless>
 
-**Tip #1:** You can filter by multiple name and/or job fields at once!
+**Tip:** You can filter by multiple name and/or job fields at once!
 
 </box>
 
@@ -406,7 +394,7 @@ Format: `view-wed NAME & NAME`
 * `NAME & NAME` is the name of the wedding and is not case-sensitive e.g `alice & bob` will match `Alice & Bob`
 * `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`
 * Only full words will be matched e.g. `jak` will not match `Jake`
-* Persons matching at least one keyword will be returned (i.e. `AND` search).
+* Persons matching at least one keyword will not be returned (i.e. `AND` search).
   e.g. `Alice` will not return `Alice & Bob`
 
 ![view-wed message](images/viewWeddingMsg.png)
@@ -441,7 +429,7 @@ Format:
 
 ### Exiting the Program : `exit`
 
-You can exit application and save any new changes.
+You can exit the application and save any new changes.
 
 Format: `exit`
 
@@ -458,7 +446,9 @@ There is no need to save manually.
 <box type="warning" seamless>
 
 **<span style="color: red;">CAUTION:</span>**
+  
 * If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+
 * Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
