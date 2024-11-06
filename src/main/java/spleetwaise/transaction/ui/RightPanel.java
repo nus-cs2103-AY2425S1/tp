@@ -70,9 +70,8 @@ public class RightPanel extends UiPart<Region> {
         transactionListPanel = new TransactionListPanel(txns);
         transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
-        StringBinding iconColorBinding = Bindings.createStringBinding(
-                () -> commonModel.getCurrentPredicate().get() == TransactionBookModel.PREDICATE_SHOW_ALL_TXNS ? "gray"
-                        : "blue", commonModel.getCurrentPredicate());
+        StringBinding iconColorBinding = Bindings.createStringBinding(() -> commonModel.getCurrentPredicate().get()
+                == TransactionBookModel.PREDICATE_SHOW_ALL_TXNS ? "gray" : "blue", commonModel.getCurrentPredicate());
 
         filterBtn.styleProperty().bind(Bindings.concat("-icon-paint: ", iconColorBinding, ";"));
         filterBtn.setPickOnBounds(true);
