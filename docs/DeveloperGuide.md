@@ -174,6 +174,7 @@ Listed below are the implemented features, and a brief description of what they 
 * **Grading an existing Assignment**: Grades an existing assignment belonging to an existing student
 * **Deleting an existing Assignment**: Deletes an existing assignment belonging to an existing student
 * **Viewing a student's details**: Displays students details along with the assignments associated with the student
+* **Adding a remark to a student**: Adds a remark to an existing student
 
 ## Adding a new Assignment
 This `add_assignment` command is a feature that  allows the user to create a new assignment, based on the student's index. The assignment must have an alphanumeric `Name`, and a valid `Max Score`.
@@ -251,7 +252,7 @@ In order to add a remark to a student, the user must provide a number representi
 
 **Aspect: Identifying the student to add a remark to:**
 * Alternative 1 (current choice): Identify the student by their index.
-    * Pros: Straightforward and easy to implement. Users only need to reference the index in the list to add a remark, which makes it less error prone.
+    * Pros: Straightforward and easy to implement. Users only need to reference the index in the list to add a remark, which makes it less error-prone.
     * Cons: The student index may change every time the list is filtered, so the user has to check for the student index every time the user before calling this command.
 
 * Alternative 2: Identify student by their name.
@@ -367,13 +368,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -397,31 +391,30 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**:
 
 * Provide a fast CLI for tutors to manage and track students' work and submissions.
-* Provides an efficient CLI for tutors to plan and manage classes
-* Provides some interface for arranging classes
+* Provide a good UI that serves as a dashboard to see existing student details.
 
 
 ### User stories
 
 Priorities: Very high (must have) - `****`,  High (good to have) - `***`, Medium (should have) - `**`, Low (unlikely to have) -  `*`,
 
-| Priority | As a …​                             | I want to …​                                                                       | So that I can…​                                            |
-|----------|-------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------|
-| `****`   | teacher with multiple students      | add a new student                                                                  | store <br/>important data about my students                |
-| `****`   | teacher with multiple students      | view each student's details                                                        | have a view on each student's progress                     |
-| `****`   | teacher                             | delete a student's information                                                     | remove students who are no longer part of my class         |
-| `****`   | teacher                             | add assignments                                                                    | track assignments for students                             |
-| `****`   | teacher                             | add an assignment score to a student                                               | grade my students                                          |
-| `****`   | teacher                             | delete assignments                                                                 | remove old assignments                                     |
-| `****`   | teacher                             | save data locally                                                                  | access them at a later time                                |
-| `****`   | teacher  who grades assignments     | edit status of submitted assignments                                               | keep track if a student has submitted an assignment        |
-| `***`    | teacher                             | create remark for individual students                                              | not forget any special consideration for certain students  |
-| `***`    | teacher                             | edit assignments                                                                   | ensure that the assignments are up to date                 |
+| Priority | As a …​                         | I want to …​                          | So that I can…​                                           |
+|----------|---------------------------------|---------------------------------------|-----------------------------------------------------------|
+| `****`   | teacher with multiple students  | add a new student                     | store important data about my students                    |
+| `****`   | teacher with multiple students  | view each student's details           | have a view on each student's progress                    |
+| `****`   | teacher                         | delete a student's information        | remove students who are no longer part of my class        |
+| `****`   | teacher                         | add assignments                       | track assignments for students                            |
+| `****`   | teacher                         | add an assignment score to a student  | grade my students work                                    |
+| `****`   | teacher                         | delete assignments                    | remove old assignments                                    |
+| `****`   | teacher                         | save data locally                     | access them at a later time                               |
+| `****`   | teacher  who grades assignments | edit status of submitted assignments  | keep track if a student has submitted an assignment       |
+| `***`    | teacher                         | create remark for individual students | not forget any special consideration for certain students |
+| `***`    | teacher                         | edit assignments                      | ensure that the assignments are up to date                |
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TAchy` and the **Actor** is the `tuition teacher`,
+(For all use cases below, the **System** is the app `TAchy` and the **Actor** is the `tuition teacher`,
 unless specified otherwise)
 
 **Use case: Add a student**
@@ -587,8 +580,8 @@ unless specified otherwise)
 
 **MSS**
 
-1. Teacher requests to mark a assignment as submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list.
+1. Teacher requests to mark an assignment as submitted for a student by index.
+2. TAchy modifies the assignment submission status in the student's assignment list. 
 
    Use case ends.
 
@@ -604,6 +597,10 @@ unless specified otherwise)
 
       Use case ends.
 
+* 1c. The assignment has already been marked as submitted.
+    * 1c1. TAchy shows an error message. 
+  
+      Use case ends.
 ---
 
 
@@ -611,8 +608,8 @@ unless specified otherwise)
 
 **MSS**
 
-1. Teacher requests to mark a assignment as not submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list.
+1. Teacher requests to mark an assignment as not submitted for a student by index.
+2. TAchy modifies the assignment submission status in the student's assignment list and resets the score to 0.
 
    Use case ends.
 
@@ -625,6 +622,11 @@ unless specified otherwise)
 
 * 1b. The assignment index is invalid.
     * 1b1. TAchy shows an error message.
+
+      Use case ends.
+
+* 1c. The assignment has already been unmarked, or has not yet been submitted.
+    * 1c1. TAchy shows an error message.
 
       Use case ends.
 
@@ -635,7 +637,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to add a grade for a student’s assignment by index.
-2. TAchy records the grade for the student’s assignment.
+2. TAchy records the grade for the student’s assignment and sets the assignment submission status as 'submitted'.
 
    Use case ends.
 
@@ -658,15 +660,12 @@ unless specified otherwise)
 
 * 1d. The student has already been graded for the assignment.
     * 1d1. TAchy shows a warning message.
-    * 1d2. TAchy asks if the Teacher wants to overwrite the grade.
-    * 1d3. Teacher confirms the overwrite.
-    * 1d4. TAchy records the new grade.
 
       Use case resumes at step 2.
 
 ---
 
-**Use case: Add remark for individual student**
+**Use case: Add remark for an individual student**
 
 **MSS**
 
@@ -690,7 +689,6 @@ unless specified otherwise)
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -698,18 +696,19 @@ unless specified otherwise)
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Assignments must have deadlines that cannot be set on a date that has passed, Assignments must be submitted by students up to the deadline set by the Teacher
+- Business/domain rules: Students cannot have duplicate names. If a tutor has 2 or more students with the same name (e.g: Nicholas Tan and Nicholas Tan), the tutor must add an additional word to the name to differentiate the students (e.g: Nicholas Tan RJC and Nicholas Tan HCI).
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
 - Quality requirements: The system should be usable by a novice who has never used AB3 before, The system should have clear user documentation to guide users through its features, Intuitive error messages will be displayed to the user so that they know what is the correct method of using the system
 - Process requirements: The project is expected to adhere to the milestones which are added every week
-- Notes about project scope: The system is not required to integrate with third-party systems (e.g. Canvas), The system is not required to generate or print detailed reports of class performance or assignment scores, The system will only support English as the user interface language, The system will not be deployed on the cloud and will only run locally
-- Any other noteworthy points: The system must ensure data privacy by adhering to relevant data protection regulations, The system should not use any langauge or imagery that may be offensive to students or faculty members from different cultural backgrounds.
+- Notes about project scope: The system is not required to integrate with third-party systems (e.g. Canvas). The system is not required to generate or print detailed reports of class performance or assignment scores. The system will only support English as the user interface language. The system will not be deployed on the cloud and will only run locally.
+- Any other noteworthy points: The system must ensure data privacy by adhering to relevant data protection regulations. The system should not use any language or imagery that may be offensive to students or faculty members from different cultural backgrounds.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Duplicate Names**: Names for students are considered to be duplicates even if the capitalisation is different (e.g: 'Nicholas' is a duplicate of 'nicholas')
 * **Private student detail**: A student detail that is not meant to be shared with others
 * **Teacher** : Interchangeable with Tutor. This app is meant for Private tutors who teach multiple students
 
@@ -730,16 +729,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a student
 
@@ -747,21 +745,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete_student 1`<br>
+   2. Test case: `delete_student 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete_student 0`<br>
+   3. Test case: `delete_student 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
