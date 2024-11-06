@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all current (i.e. not archived) contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -96,15 +96,25 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
+Shows a list of persons in the address book, automatically sorted by their priority from HIGH to LOW.
+- `list`: Shows a list of people who are not archived
+- `list archive/`: Shows a list of people who are archived
+- `list all/`: Shows a list of all people
 
-Format: `list`
+<box type="warning" seamless>
+
+**Caution:**
+- Should not be used with both `archive/` and `all/` concurrently, e.g. `list archive/ all/` ❌, `list archive/` ✅
+- `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
+</box>
+
+Format: `list [archive/] [all/]`
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -215,6 +225,34 @@ Format: `scheme INDEXES`
 
 Examples:
 * `scheme 1` shows scheme that the 1st person in the address book is eligible for.
+
+### Archiving person : `archive`
+
+Archives the specified person from the address book.
+
+Format: `archive INDEX`
+
+* Archives the person at the specified `INDEX`.
+* The index refer to the index number shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
+* The specified person must currently not be archived.
+
+Examples:
+* `list` followed by `archive 2` archives the 2nd person in the address book.
+
+### Unarchiving person : `unarchive`
+
+Unarchives the specified person from the address book.
+
+Format: `unarchive INDEX`
+
+* Archives the person at the specified `INDEX`.
+* The index refer to the index number shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
+* The specified person must be currently archived.
+
+Examples:
+* `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
 
 ### Exiting the program : `exit`
 
