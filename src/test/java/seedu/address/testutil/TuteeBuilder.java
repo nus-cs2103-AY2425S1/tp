@@ -17,6 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class TuteeBuilder {
 
+    public static final int DEFAULT_ID = 0;
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -24,6 +25,7 @@ public class TuteeBuilder {
     public static final String DEFAULT_HOURS = "10";
     public static final String DEFAULT_SUBJECT = "english";
 
+    private int id;
     private Name name;
     private Phone phone;
     private Email email;
@@ -36,6 +38,7 @@ public class TuteeBuilder {
      * Creates a {@code TuteeBuilder} with the default details.
      */
     public TuteeBuilder() {
+        id = DEFAULT_ID;
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -48,12 +51,21 @@ public class TuteeBuilder {
      * Initializes the TuteeBuilder with the data of {@code tuteeToCopy}.
      */
     public TuteeBuilder(Tutee tuteeToCopy) {
+        id = tuteeToCopy.getId();
         name = tuteeToCopy.getName();
         phone = tuteeToCopy.getPhone();
         email = tuteeToCopy.getEmail();
         address = tuteeToCopy.getAddress();
         hours = tuteeToCopy.getHours();
         subjects = new HashSet<>(tuteeToCopy.getSubjects());
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code Tutee} that we are building.
+     */
+    public TuteeBuilder withId(int id) {
+        this.id = id;
+        return this;
     }
 
     /**
@@ -105,7 +117,7 @@ public class TuteeBuilder {
     }
 
     public Tutee build() {
-        return new Tutee(name, phone, email, address, hours, subjects);
+        return new Tutee(id, name, phone, email, address, hours, subjects);
     }
 
 }
