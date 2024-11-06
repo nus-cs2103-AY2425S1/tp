@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,7 +13,7 @@ import static tahub.contacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import tahub.contacts.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

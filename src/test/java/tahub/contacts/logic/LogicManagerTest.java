@@ -19,10 +19,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.ListCommand;
 import tahub.contacts.logic.commands.exceptions.CommandException;
+import tahub.contacts.logic.commands.person.PersonAddCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
@@ -140,7 +140,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + MATRICULATION_NUMBER_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+        String addCommand = PersonAddCommand.COMMAND_WORD + MATRICULATION_NUMBER_DESC_AMY
+                + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

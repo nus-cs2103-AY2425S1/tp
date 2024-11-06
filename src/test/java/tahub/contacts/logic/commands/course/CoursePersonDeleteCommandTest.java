@@ -18,7 +18,7 @@ import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 
-public class CourseDeleteCommandTest {
+public class CoursePersonDeleteCommandTest {
 
     private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList(), null);
 

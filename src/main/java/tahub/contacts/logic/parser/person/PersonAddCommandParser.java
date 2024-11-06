@@ -1,4 +1,4 @@
-package tahub.contacts.logic.parser;
+package tahub.contacts.logic.parser.person;
 
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -11,7 +11,12 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import tahub.contacts.logic.commands.AddCommand;
+import tahub.contacts.logic.commands.person.PersonAddCommand;
+import tahub.contacts.logic.parser.ArgumentMultimap;
+import tahub.contacts.logic.parser.ArgumentTokenizer;
+import tahub.contacts.logic.parser.Parser;
+import tahub.contacts.logic.parser.ParserUtil;
+import tahub.contacts.logic.parser.Prefix;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -22,16 +27,16 @@ import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new PersonAddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class PersonAddCommandParser implements Parser<PersonAddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the PersonAddCommand
+     * and returns an PersonAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public PersonAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MATRICULATION_NUMBER, PREFIX_NAME,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
@@ -39,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_MATRICULATION_NUMBER, PREFIX_NAME,
                 PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MATRICULATION_NUMBER, PREFIX_NAME,
@@ -54,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(matricNumber, name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new PersonAddCommand(person);
     }
 
     /**

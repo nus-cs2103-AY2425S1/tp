@@ -17,6 +17,7 @@ import java.util.List;
 
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.logic.commands.exceptions.CommandException;
+import tahub.contacts.logic.commands.person.PersonEditCommand;
 import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
@@ -71,8 +72,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final PersonEditCommand.EditPersonDescriptor DESC_AMY;
+    public static final PersonEditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

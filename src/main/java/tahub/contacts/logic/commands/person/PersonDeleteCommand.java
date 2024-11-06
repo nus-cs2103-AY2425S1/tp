@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,8 @@ import java.util.List;
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
+import tahub.contacts.logic.commands.Command;
+import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.person.Person;
@@ -14,9 +16,9 @@ import tahub.contacts.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class PersonDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "person-delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
@@ -27,7 +29,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public PersonDeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,12 +54,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof PersonDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        PersonDeleteCommand otherPersonDeleteCommand = (PersonDeleteCommand) other;
+        return targetIndex.equals(otherPersonDeleteCommand.targetIndex);
     }
 
     @Override

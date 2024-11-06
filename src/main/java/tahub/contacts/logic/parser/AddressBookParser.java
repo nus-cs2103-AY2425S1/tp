@@ -8,11 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tahub.contacts.commons.core.LogsCenter;
-import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.Command;
-import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.EditCommand;
 import tahub.contacts.logic.commands.EnrollCommand;
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
@@ -25,6 +22,9 @@ import tahub.contacts.logic.commands.attend.AttendRemoveCommand;
 import tahub.contacts.logic.commands.course.CourseAddCommand;
 import tahub.contacts.logic.commands.course.CourseDeleteCommand;
 import tahub.contacts.logic.commands.course.CourseEditCommand;
+import tahub.contacts.logic.commands.person.PersonAddCommand;
+import tahub.contacts.logic.commands.person.PersonDeleteCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand;
 import tahub.contacts.logic.parser.attend.AttendAbsentCommandParser;
 import tahub.contacts.logic.parser.attend.AttendClearCommandParser;
 import tahub.contacts.logic.parser.attend.AttendPresentCommandParser;
@@ -33,6 +33,9 @@ import tahub.contacts.logic.parser.course.CourseAddCommandParser;
 import tahub.contacts.logic.parser.course.CourseDeleteCommandParser;
 import tahub.contacts.logic.parser.course.CourseEditCommandParser;
 import tahub.contacts.logic.parser.exceptions.ParseException;
+import tahub.contacts.logic.parser.person.PersonAddCommandParser;
+import tahub.contacts.logic.parser.person.PersonDeleteCommandParser;
+import tahub.contacts.logic.parser.person.PersonEditCommandParser;
 
 /**
  * Parses user input.
@@ -68,8 +71,8 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case PersonAddCommand.COMMAND_WORD:
+            return new PersonAddCommandParser().parse(arguments);
 
         case CourseAddCommand.COMMAND_WORD:
             return new CourseAddCommandParser().parse(arguments);
@@ -80,11 +83,11 @@ public class AddressBookParser {
         case CourseDeleteCommand.COMMAND_WORD:
             return new CourseDeleteCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case PersonEditCommand.COMMAND_WORD:
+            return new PersonEditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case PersonDeleteCommand.COMMAND_WORD:
+            return new PersonDeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

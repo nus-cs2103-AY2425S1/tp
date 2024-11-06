@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
-import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.EditCommand;
-import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
 import tahub.contacts.logic.commands.course.CourseDeleteCommand;
 import tahub.contacts.logic.commands.course.CourseEditCommand;
+import tahub.contacts.logic.commands.person.PersonAddCommand;
+import tahub.contacts.logic.commands.person.PersonDeleteCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand;
+import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
@@ -43,8 +43,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        PersonAddCommand command = (PersonAddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new PersonAddCommand(person), command);
     }
 
     @Test
@@ -55,18 +55,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        PersonDeleteCommand command = (PersonDeleteCommand) parser.parseCommand(
+                PersonDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new PersonDeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        PersonEditCommand command = (PersonEditCommand) parser.parseCommand(PersonEditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new PersonEditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
