@@ -28,7 +28,7 @@ public class RatingCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_RATING + "10";
 
-    public static final String MESSAGE_ADD_RATING_SUCCESS = "Restaurant's rating changed: %1$s";
+    public static final String MESSAGE_ADD_RATING_SUCCESS = "You've rate %1$s: %2$s/10!";
 
     private final Index index;
     private final Rating rating;
@@ -70,8 +70,10 @@ public class RatingCommand extends Command {
      * Generates a command execution success message based on whether the rating is added to or removed from
      * {@code restaurantToEdit}.
      */
-    private String generateSuccessMessage(Restaurant restaurantToEdit) {
-        return String.format(MESSAGE_ADD_RATING_SUCCESS, this);
+    public String generateSuccessMessage(Restaurant restaurantToEdit) {
+        Name name = restaurantToEdit.getName();
+        Rating rating = restaurantToEdit.getRating();
+        return String.format(MESSAGE_ADD_RATING_SUCCESS, name, rating);
     }
 
     @Override
