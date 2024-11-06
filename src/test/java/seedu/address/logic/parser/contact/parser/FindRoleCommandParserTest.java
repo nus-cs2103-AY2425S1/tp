@@ -8,34 +8,34 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.contact.commands.SearchCommand;
+import seedu.address.logic.commands.contact.commands.FindRoleCommand;
 import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Sponsor;
 import seedu.address.model.role.Volunteer;
 
-public class SearchCommandParserTest {
+public class FindRoleCommandParserTest {
 
-    private SearchCommandParser parser = new SearchCommandParser();
+    private FindRoleCommandParser parser = new FindRoleCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SearchCommand.MESSAGE_USAGE));
+                FindRoleCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validArgs_returnsSearchCommand() {
-        SearchCommand expectedSearchCommand =
-                new SearchCommand(new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Volunteer())));
+    public void parse_validArgs_returnsFindRoleCommand() {
+        FindRoleCommand expectedFindRoleCommand =
+                new FindRoleCommand(new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Volunteer())));
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "sponsor volunteer", expectedSearchCommand);
+        assertParseSuccess(parser, "sponsor volunteer", expectedFindRoleCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n sponsor \n \t volunteer  \t", expectedSearchCommand);
+        assertParseSuccess(parser, " \n sponsor \n \t volunteer  \t", expectedFindRoleCommand);
 
         // order does not matter
-        assertParseSuccess(parser, "volunteer sponsor", expectedSearchCommand);
+        assertParseSuccess(parser, "volunteer sponsor", expectedFindRoleCommand);
     }
 
 }

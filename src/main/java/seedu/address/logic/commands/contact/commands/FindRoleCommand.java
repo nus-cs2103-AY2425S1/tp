@@ -13,9 +13,9 @@ import seedu.address.model.person.predicates.PersonIsRolePredicate;
 /**
  * Finds and lists all persons in address book who has any role equal to any of the role keywords.
  */
-public class SearchCommand extends Command {
+public class FindRoleCommand extends Command {
 
-    public static final String COMMAND_WORD = "search";
+    public static final String COMMAND_WORD = "find-role";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all persons who are of a certain role "
             + "and displays them as a list with index numbers.\n"
@@ -24,7 +24,7 @@ public class SearchCommand extends Command {
 
     private final PersonIsRolePredicate predicate;
 
-    public SearchCommand(PersonIsRolePredicate predicate) {
+    public FindRoleCommand(PersonIsRolePredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -43,12 +43,12 @@ public class SearchCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SearchCommand)) {
+        if (!(other instanceof FindRoleCommand)) {
             return false;
         }
 
-        SearchCommand otherSearchCommand = (SearchCommand) other;
-        return predicate.equals(otherSearchCommand.predicate);
+        FindRoleCommand otherFindRoleCommand = (FindRoleCommand) other;
+        return predicate.equals(otherFindRoleCommand.predicate);
     }
 
     @Override

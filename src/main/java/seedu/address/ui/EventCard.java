@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
@@ -14,7 +13,7 @@ import seedu.address.model.event.Event;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class EventCard extends UiPart<Region> {
+public class EventCard extends UiPart<Region> implements Observer {
 
     private static final String FXML = "EventListCard.fxml";
 
@@ -45,7 +44,7 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label volunteers;
     @FXML
-    private FlowPane roles;
+    private Label total;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,5 +59,15 @@ public class EventCard extends UiPart<Region> {
         vendors.setText("Vendors: " + event.getVendors().size());
         sponsors.setText("Sponsors: " + event.getSponsors().size());
         volunteers.setText("Volunteers: " + event.getVolunteers().size());
+        total.setText("Total: " + event.getTotalNumberOfDistinctContacts());
+    }
+
+    @Override
+    public void update() {
+        attendees.setText("Attendees: " + event.getAttendees().size());
+        vendors.setText("Vendors: " + event.getVendors().size());
+        sponsors.setText("Sponsors: " + event.getSponsors().size());
+        volunteers.setText("Volunteers: " + event.getVolunteers().size());
+        total.setText("Total: " + event.getTotalNumberOfDistinctContacts());
     }
 }

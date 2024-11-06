@@ -21,12 +21,12 @@ import seedu.address.model.person.Person;
  * Adds contacts to an event in to the address book.
  */
 public class AddPersonToEventCommand extends Command {
-    public static final String COMMAND_WORD = "event-add";
+    public static final String COMMAND_WORD = "eventadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/EVENT INDEX [a/ or s/ or ve/ or vo/] CONTACT "
             + "INDEX \nAdds contacts to an event in the address book. \nNote: At least one of the following prefixes "
             + "is required—`a/`, `e/`, `ve/`, or `vo/`—each followed by one or more contact index/indices \ne.g. "
-            + "event-add ei/1 a/1,2,3";
+            + "eventadd ei/1 a/1,2,3";
 
     public static final String MESSAGE_SUCCESS = "Contacts added to %2$s successfully: \n%1$s";
 
@@ -92,6 +92,7 @@ public class AddPersonToEventCommand extends Command {
         }
 
         sb.delete(sb.length() - 1, sb.length());
+        event.updateUi();
         return new CommandResult(String.format(MESSAGE_SUCCESS, sb, event.getName()));
     }
 

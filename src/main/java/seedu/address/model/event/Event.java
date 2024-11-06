@@ -11,9 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
-
-
-
+import seedu.address.ui.Observer;
 
 
 /**
@@ -26,6 +24,7 @@ public class Event {
     private final Set<Person> vendors;
     private final Set<Person> sponsors;
     private final Set<Person> volunteers;
+    private Observer observer;
 
     /**
      * Constructs a {@code Event}.
@@ -306,5 +305,64 @@ public class Event {
     public boolean isPersonInEvent(Person person) {
         return attendees.contains(person) || volunteers.contains(person)
                 || sponsors.contains(person) || vendors.contains(person);
+    }
+
+    /**
+     * Registers an observer to this object.
+     * <p>
+     * Sets the specified {@code observer} as the observer of this object. The observer will be
+     * notified of changes by calling its {@code update()} method when {@code updateUi()} is invoked.
+     * Only one observer can be registered at a time; any previously registered observer will be replaced.
+     * </p>
+     *
+     * @param observer The observer to register, which will be notified of updates.
+     */
+    public void addObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    /**
+     * Notifies the registered observer of a UI update.
+     * <p>
+     * If an observer is registered, this method calls the observer's {@code update()} method to
+     * reflect any necessary changes in the user interface. If no observer is registered, this method does nothing.
+     * </p>
+     */
+    public void updateUi() {
+        if (this.observer != null) {
+            this.observer.update();
+        }
+    }
+
+    /**
+     * Returns the total number of distinct contacts involved in the event.
+     * <p>
+     * This method calculates the total number of unique {@code Person} objects across
+     * attendees, volunteers, vendors, and sponsors by combining them into a set to eliminate duplicates.
+     * </p>
+     *
+     * @return The count of distinct persons participating in the event.
+     */
+    public int getTotalNumberOfDistinctContacts() {
+        HashSet<Person> persons = new HashSet<>();
+        persons.addAll(attendees);
+        persons.addAll(volunteers);
+        persons.addAll(vendors);
+        persons.addAll(sponsors);
+        return persons.size();
+    }
+
+    /**
+     * Retrieves the currently registered observer.
+     * <p>
+     * This method returns the observer that has been added to this object via the
+     * {@code addObserver(Observer observer)} method. If no observer has been registered,
+     * this method will return {@code null}.
+     * </p>
+     *
+     * @return The currently registered {@code Observer}, or {@code null} if no observer is set.
+     */
+    public Observer getObserver() {
+        return this.observer;
     }
 }

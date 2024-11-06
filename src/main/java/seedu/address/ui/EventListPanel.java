@@ -41,7 +41,9 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                EventCard eventCard = new EventCard(event, getIndex() + 1);
+                setGraphic(eventCard.getRoot());
+                event.addObserver(eventCard);
             }
         }
     }

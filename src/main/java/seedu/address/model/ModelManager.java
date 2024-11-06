@@ -219,6 +219,7 @@ public class ModelManager implements Model {
         return addressBook.getPersonList();
     }
 
+
     /**
      * Gets the set of persons that are excluded from the search.
      * @return copy of excludedPersons
@@ -257,4 +258,5 @@ public class ModelManager implements Model {
         }
         updateFilteredPersonList(excludeRemovedPersons.and(lastPredicate));
     }
+
 }

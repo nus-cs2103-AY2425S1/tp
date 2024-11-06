@@ -72,16 +72,16 @@ public class SampleDataUtil {
 
         return new Event[] {
             new Event("NUS Student Life Fair 2024",
-                    getPersonSet(samplePersons[0], samplePersons[1]),
+                    getPersonSet(samplePersons[0]),
+                    getPersonSet(samplePersons[1]),
                     getPersonSet(samplePersons[2]),
-                    getPersonSet(samplePersons[3]),
-                    getPersonSet(samplePersons[4])
+                    getPersonSet(samplePersons[1])
             ),
             new Event("NUS Open House 2024",
-                    getPersonSet(samplePersons[1]),
-                    getPersonSet(samplePersons[0], samplePersons[2]),
+                    getPersonSet(samplePersons[3], samplePersons[4]),
                     getPersonSet(samplePersons[3]),
-                    getPersonSet(samplePersons[4], samplePersons[5])
+                    getPersonSet(samplePersons[5]),
+                    getPersonSet(samplePersons[1])
             )
         };
     }
