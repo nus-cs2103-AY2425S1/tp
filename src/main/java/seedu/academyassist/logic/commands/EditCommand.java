@@ -2,12 +2,7 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.academyassist.logic.parser.CliSyntax.*;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -45,8 +40,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_IC + "IC] "
-            + "[" + PREFIX_IC + "YEARGROUP] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
+            + "[" + PREFIX_YEARGROUP + "YEARGROUP] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... \n"
             + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
