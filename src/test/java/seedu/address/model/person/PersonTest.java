@@ -32,8 +32,16 @@ public class PersonTest {
                 .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // different name, phone number same -> returns false
+        // different name, phone number and email same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // different name, different phone number, and email same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // different name, different email, and phone number same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         //different people -> returns false
@@ -45,6 +53,11 @@ public class PersonTest {
 
         //same name, same phone number, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        //same name, same email, all other attributes different -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
