@@ -6,6 +6,10 @@ import java.util.List;
 
 import seedu.address.model.CommandTextHistory;
 
+/**
+ * A utility class containing a {@code CommandTextHistory} object to be used in
+ * tests.
+ */
 public class TypicalCommandTextHistory {
 
     /**

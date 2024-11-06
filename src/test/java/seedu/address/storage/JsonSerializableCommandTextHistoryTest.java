@@ -13,7 +13,8 @@ import seedu.address.testutil.TypicalCommandTextHistory;
 
 public class JsonSerializableCommandTextHistoryTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableCommandTextHistoryTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonSerializableCommandTextHistoryTest");
     private static final Path TYPICAL_FILE = TEST_DATA_FOLDER.resolve("typicalCommandTextHistory.json");
 
     @Test
