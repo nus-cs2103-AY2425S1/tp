@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -95,9 +96,10 @@ class JsonSerializableAddressBook {
             jsonAdaptedEvent.getClientIds().stream()
                     .map(addressBook::getContact)
                     .map(contact -> (Client) contact)
+                    .filter(Objects::nonNull)
                     .forEach(event::addClient);
 
-            boolean hasClients = jsonAdaptedEvent.getClientIds().stream().findAny().isPresent();
+            boolean hasClients = jsonAdaptedEvent.getClientIds().stream().anyMatch(Objects::nonNull);//filter(Objects::nonNull).findAny().isPresent();
             if (!hasClients) {
                 throw new IllegalValueException(MESSAGE_NO_CLIENT);
             }
@@ -105,6 +107,7 @@ class JsonSerializableAddressBook {
             jsonAdaptedEvent.getVendorIds().stream()
                     .map(addressBook::getContact)
                     .map(contact -> (Vendor) contact)
+                    .filter(Objects::nonNull)
                     .forEach(event::addVendor);
 
             checkAssociation(eventIdsTable, event);
