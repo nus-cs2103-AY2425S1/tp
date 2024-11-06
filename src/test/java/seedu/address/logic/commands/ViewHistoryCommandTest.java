@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -41,10 +42,11 @@ public class ViewHistoryCommandTest {
 
         ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), appointmentTime1);
         CommandResult result = command.execute(modelStub);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         String expected = String.format("Appointment: %s for %s (patient id) "
                         + "with %s (doctor id). Remarks: %s",
-                appointmentTime1, validPatient.getId(),
+                appointmentTime1.format(formatter), validPatient.getId(),
                 validDoctor.getId(), appointmentRemark);
 
         assertEquals(expected, result.getFeedbackToUser());
@@ -75,15 +77,17 @@ public class ViewHistoryCommandTest {
         modelStub.addAppointment(appointmentTime1, validPatient, validDoctor, appointmentRemark);
         modelStub.addAppointment(appointmentTime2, validPatient, validDoctor, appointmentRemark);
 
+        ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), null);
+        CommandResult result = command.execute(modelStub);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         String expected = String.format("Appointment: %s for %s (patient id)" + " "
                         + "with %s (doctor id). Remarks: %s\n"
                         + "Appointment: %s for %s (patient id)" + " "
                         + "with %s (doctor id). Remarks: %s\n",
-                appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark,
-                appointmentTime2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
+                appointmentTime1.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark,
+                appointmentTime2.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
-        ViewHistoryCommand command = new ViewHistoryCommand(validPatient.getId(), null);
-        CommandResult result = command.execute(modelStub);
         assertEquals(expected, result.getFeedbackToUser());
     }
 

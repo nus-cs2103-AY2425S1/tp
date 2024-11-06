@@ -31,7 +31,7 @@ public class CollectionUtil {
      */
     public static void requireAllPositive(int... numbers) {
         for (int number : numbers) {
-            if (number <= 0) {
+            if (number < 0) {
                 throw new IllegalArgumentException("All numbers must be positive. Found: " + number);
             }
         }

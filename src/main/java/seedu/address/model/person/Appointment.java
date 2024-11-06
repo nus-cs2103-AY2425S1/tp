@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -13,7 +14,7 @@ public class Appointment {
     private final int patientId;
     private final int doctorId;
     private final String remarks;
-    private final boolean completed;
+    private boolean completed;
 
     /**
      * Creates an appointment instance associated with the specified patient, doctor, and remarks.
@@ -56,8 +57,12 @@ public class Appointment {
         return remarks;
     }
 
-    public Appointment markAsComplete() {
-        return new Appointment(this.dateTime, this.patientId, this.doctorId, this.remarks, true);
+    public Boolean isCompleted() {
+        return completed;
+    }
+
+    public void markAsComplete() {
+        this.completed = true;
     }
     /**
      * Determines if an appointment is the same appointment including checking for remarks.
@@ -105,16 +110,16 @@ public class Appointment {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         if (this.completed) {
-            return "Appointment: " + getDateTime() + " for " + getPatientId()
+            return "Appointment: " + getDateTime().format(formatter) + " for " + getPatientId()
                     + " (patient id) with " + getDoctorId() + " (doctor id). "
                     + "Remarks: " + getRemarks();
         } else {
-            return "Appointment: " + getDateTime() + " for " + getPatientId()
+            return "Appointment: " + getDateTime().format(formatter) + " for " + getPatientId()
                     + " (patient id) with " + getDoctorId() + " (doctor id). "
                     + "Remarks: " + getRemarks();
         }
     }
 }
-
 

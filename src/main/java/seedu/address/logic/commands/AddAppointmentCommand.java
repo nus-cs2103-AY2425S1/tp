@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_MIXED_SEQUENCE_ID;
+import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_DOCTOR_ID;
+import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_PATIENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -22,16 +27,16 @@ public class AddAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "addA";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment for "
-            + "the relevant doctor and patient. "
+            + "the relevant doctor and patient. \n"
             + COMMAND_WORD + " "
-            + PREFIX_DATE + "[APPOINTMENT_TIME] "
             + PREFIX_ID + "[PATIENT_ID] "
             + PREFIX_ID + "[DOCTOR_ID] "
+            + PREFIX_DATE + "[APPOINTMENT_TIME] "
             + PREFIX_REMARK + "[ADDITIONAL REMARK]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE + "2024-12-31 15:23 "
             + PREFIX_ID + "1234 "
             + PREFIX_ID + "5678 "
+            + PREFIX_DATE + "2024-12-31 15:23 "
             + PREFIX_REMARK + "third physiotherapy session";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Successfully added appointment to a patient";
@@ -64,10 +69,26 @@ public class AddAppointmentCommand extends Command {
         Person patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 
-        if (patientToAddAppointment == null || doctorToAddAppointment == null) {
-            logger.warning(String.format("Patient with ID %d or Doctor with ID %d not found.", patientId, doctorId));
-            throw new CommandException(MESSAGE_INVALID_ID);
+        if (doctorToAddAppointment == null) {
+            logger.warning(String.format("Doctor with ID %d not found.", doctorId));
+            throw new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
         }
+        if (patientToAddAppointment == null) {
+            logger.warning(String.format("Patient with ID %d not found.", patientId));
+            throw new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        }
+
+        if (patientId % 2 == 0 && doctorId % 2 == 0) {
+            logger.warning("The user enter two patientId");
+            throw new CommandException(MESSAGE_MULTIPLE_PATIENT_ID);
+        } else if (patientId % 2 != 0 && doctorId % 2 != 0) {
+            logger.warning("The user enter two doctorId");
+            throw new CommandException(MESSAGE_MULTIPLE_DOCTOR_ID);
+        } else if (patientId % 2 != 0 || doctorId % 2 == 0) {
+            logger.warning("The user enter doctorId and patientId in wrong sequence");
+            throw new CommandException(MESSAGE_MIXED_SEQUENCE_ID);
+        }
+
         boolean isPatientFree = patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId(), remarks);
         boolean isDoctorFree = doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),

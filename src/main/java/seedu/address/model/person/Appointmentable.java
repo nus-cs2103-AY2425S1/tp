@@ -59,5 +59,6 @@ public interface Appointmentable {
      * @param patientId Id of patient in the appointment.
      * @param doctorId  Id of doctor in the appointment.
      */
-    public abstract boolean markAppointment(LocalDateTime dateTime, int patientId, int doctorId);
+    public abstract void markAppointment(LocalDateTime dateTime, int patientId, int doctorId)
+            throws CommandException;
 }
