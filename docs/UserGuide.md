@@ -480,7 +480,7 @@ Clears all entries from the KonTActs.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <i class="fa-solid fa-file-import"></i> Importing data from CSV file: `import`
+### <i class="fa-solid fa-file-import"></i> Importing data from CSV file : `import`
 
 Imports contacts based on CSV file. Importing a file will replace ALL existing contacts
 
@@ -543,7 +543,7 @@ assignments are present for a person, separate them within the same entry using 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <i class="fa-solid fa-file-export"></i> Exporting data into CSV file: `export`
+### <i class="fa-solid fa-file-export"></i> Exporting data into CSV file : `export`
 
 Exports contacts based on contacts and their details stored in KonTActs.
 
@@ -567,7 +567,7 @@ relative path given)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <i class="fa-solid fa-clock-rotate-left"></i> Accessing command history: <kbd>↑</kbd> and <kbd>↓</kbd>
+### <i class="fa-solid fa-clock-rotate-left"></i> Accessing command history : <kbd>↑</kbd> and <kbd>↓</kbd>
 
 KonTActs automatically saves every (valid or invalid) command entered which can then be retrieved later by using the <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys.
 
@@ -595,9 +595,9 @@ KonTActs automatically saves every (valid or invalid) command entered which can 
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
-### Adding grades to a contact: `addGrade`
+### <i class="fa-solid fa-marker"></i>  Adding grades to a contact : `addGrade`
 
-Add an assignment and its grades to a contact.
+Adds an assignment and its grades to a contact.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -648,7 +648,7 @@ Calling `addGrade` without any fields will show the list of assignments in `assi
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Removing grades from a contact: `removeGrade`
+### <i class="fa-solid fa-square-minus"></i> Removing grades from a contact : `removeGrade`
 
 Removes an assignment and its grades from a contact.
 
@@ -664,7 +664,7 @@ Removes an assignment and its grades from a contact.
 
 Assuming John Doe has `Ex01` assignment with a score of `5`.
 
-`removeGrade n/John Doe asgn/Ex01` will remove the `Ex01` assignment from contact John Doe.
+Calling `removeGrade n/John Doe asgn/Ex01` will remove the `Ex01` assignment from contact John Doe.
 
 Calling `removeGrade n/John Doe asgn/Ex01` again will throw an error since the assignment has already been removed.
 To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
@@ -686,18 +686,23 @@ Exits the program.
 
 ### <i class="fa-solid fa-floppy-disk"></i> Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+KonTActs data are automatically saved in the hard disk after every command that changes data. You do not need to save the data manually.
+
+However, it is always good practice to have a local backup :D You can do this with the [export](#exporting-data-into-csv-file-export) command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+KonTActs data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+**Recommended for more advanced and seasoned users**
+- Data in the JSON file can be edited.
+- If your changes to the data file results in an invalid format, KonTActs will discard all data and start with an empty data file at the next run.  
+- It is recommended to create a backup of the file before editing it. This can be done with the [export](#exporting-data-into-csv-file-export) command.
+- Certain edits can also cause the KonTActs to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -706,11 +711,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## <i class="fa-solid fa-question"></i> FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. Alternatively, you can use the export command to export the data into a CSV file and import the CSV file into your other device.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KonTActs home folder. Alternatively, you can use the [export](#exporting-data-into-csv-file-export) command to export the data into a CSV file and [import](#importing-data-from-csv-file-import) the CSV file into your other device.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## <i class="fa-solid fa-triangle-exclamation"></i> Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
