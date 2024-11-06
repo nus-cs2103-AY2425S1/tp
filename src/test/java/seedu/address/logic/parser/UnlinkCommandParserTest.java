@@ -41,9 +41,10 @@ public class UnlinkCommandParserTest {
 
     @Test
     public void parse_invalidCommandFormat_failure() {
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY, UnlinkCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnlinkCommand.MESSAGE_USAGE));
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_CHILD_NAME_DESC_JOHN,
-                UnlinkCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnlinkCommand.MESSAGE_USAGE));
     }
 
     @Test
