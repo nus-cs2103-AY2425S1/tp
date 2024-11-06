@@ -99,6 +99,9 @@ Here's a (partial) class diagram of the `Logic` component:
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete e 1")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete e 1` Command" />
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `edit 1 n/tom` API call as an example.
+
 <puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 n/tom` Command" />
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(find all n/John)` API call as an example.
@@ -386,7 +389,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Add an employee
 
-   1. Prerequisites: List all employees using the `list e` command.
+   1. Prerequisites: The application should be empty. List all employees using the `list e` command.
 
    2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
       Expected: John Doe is added into the list
@@ -397,19 +400,19 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
       Expected: No employee added, error details shown in the status message
 
-   5. Test case: `employee n/John Doe p/98765a432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+   5. Test case: `employee n/John Doe p/98765432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
       Expected: No employee added, error details shown in the status message
 
-   6. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/ d/IT r/SWE ced/2024-10-09`<br>
+   6. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/ d/IT r/SWE ced/2024-10-09`<br>
       Expected: No employee added, error details shown in the status message
 
-   7. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/I@T r/SWE ced/2024-10-09`<br>
+   7. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/ r/SWE ced/2024-10-09`<br>
       Expected: No employee added, error details shown in the status message
 
-   8. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SW-E ced/2024-10-09`<br>
+   8. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/ ced/2024-10-09`<br>
       Expected: No employee added, error details shown in the status message
 
-   9. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/01-09-2023`<br>
+   9. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/01-09-2023`<br>
       Expected: No employee added, error details shown in the status message
 
 2. Adding a duplicate employee
@@ -429,7 +432,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Add a potential hire
 
-    1. Prerequisites: List all potential hires using the `list ph` command.
+    1. Prerequisites: The application should be empty. List all potential hires using the `list ph` command.
 
     2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
        Expected: John Doe is added into the list
@@ -440,30 +443,55 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
        Expected: No potential hire added, error details shown in the status message
 
-    5. Test case: `potential n/John Doe p/98765a432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+    5. Test case: `potential n/John Doe p/98765432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
        Expected: No potential hire added, error details shown in the status message
 
-    6. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/ d/IT r/SWE`<br>
+    6. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/ d/IT r/SWE`<br>
        Expected: No potential hire added, error details shown in the status message
 
-    7. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/I@T r/SWE`<br>
+    7. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/ r/SWE`<br>
        Expected: No potential hire added, error details shown in the status message
 
-    8. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/S-WE`<br>
+    8. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/`<br>
        Expected: No potential hire added, error details shown in the status message
 
 2. Adding a duplicate potential hire
 
-    1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
+    1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE` should already be added
 
-    2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+    2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
        Expected: John Doe should not be added since he already exists
 
-    3. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+    3. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
        Expected: John Doe should not be added since he already exists in potential hire
 
     4. Test case: `potential n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
        Expected: John Doe2 should be added as he has a different name
+
+### Editing an employee or potential hire
+
+1. Editing an employee
+
+   1. Prerequisites: An employee has to be added and list all employees using the `list e` command. There should be an employee at index 1.
+
+   2. Test case: `edit 1 n/John Doe3 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: The employee at index 1 should be edited into John Doe2
+
+   3. Test case: `edit 1 n/John@Doe`<br>
+      Expected: Edit failed, error details shown in the status message
+
+2. Editing a potential hire
+
+   1. Prerequisites: A potential hire has to be added and list all potential hires using the `list ph` command. There should be a potential hire at index 1.
+
+   2. Test case: `edit 1 n/John Doe4 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+      Expected: The employee at index 1 should be edited into John Doe2
+
+   3. Test case: `edit 1 n/John@Doe`<br>
+      Expected: Edit failed, error details shown in the status message
+
+   4. Test case: `edit 1 ced/2020-01-01`<br>
+      Expected: Edit failed, error details shown in the status message
 
 ### Listing the contents of StaffSync
 
@@ -536,7 +564,7 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `delete e 1`<br>
       Expected: If the index is valid but the first index is not an employee, the command is recognised but the action is invalid and a specific status message is shown.
 
-   7. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`,  `...` (where x is larger than the list size)<br>
+   7. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2` (where x is larger than the list size)<br>
       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Deleting a person with no potential hires/employees
@@ -549,6 +577,7 @@ testers are expected to do more *exploratory* testing.
 ### Finding a person
 
 1. Finding a person
+
    1. Test case: `find e n/John`<br>
    Expected: Number of employees with name `John` listed found shown in the status message.
    Displays the list of employees found.
@@ -575,28 +604,28 @@ testers are expected to do more *exploratory* testing.
    Expected: Incorrect command format due to capitalisation of parameter.
    Status message shows the correct usage of Find command.
 
-   8. Other incorrect find commands to try: `find aLL n/john`, `find pH n/john`, `find a`, `...`<br>
+   8. Other incorrect find commands to try: `find aLL n/john`, `find pH n/john`, `find a`<br>
    Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
 
 ### Demoting an employee
 
 1. Demoting an employee while all employees are being shown
 
-   Prerequisites: List all employees using the `list e` command. Employees are in the list.
+    1. Prerequisites: List all employees using the `list e` command. Employees are in the list.
 
-    1. Test case: `demote 1`<br>
+    2. Test case: `demote 1`<br>
       Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
 
-    2. Test case: `demote 0`<br>
+    3. Test case: `demote 0`<br>
      Expected: Invalid index found. No employees demoted. Error details shown in the status message.
 
-    3. Test case: `Demote 1`<br>
+    4. Test case: `Demote 1`<br>
      Excepted: Unrecognised command. Error is due to capitalization of `Demote` instead of `demote`. Capitalisation matters.
 
-    4. Test case: `demote`<br>
+    5. Test case: `demote`<br>
      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-    5. Other incorrect demote commands to try: `demote randomstring`,`demote x`, `demote 1 2` (where x is larger than the list size)<br>
+    6. Other incorrect demote commands to try: `demote randomstring`,`demote x`, `demote 1 2` (where x is larger than the list size)<br>
        Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Demoting a person while no employees are being shown (due to having 0 entries or only potential hire entries)
@@ -608,31 +637,31 @@ testers are expected to do more *exploratory* testing.
 
 1. Promoting a potential hire while all potential hires are being shown
 
-   Prerequisites: List all potential hire using the `list ph` command. Potential hires are in the list.
+    1. Prerequisites: List all potential hire using the `list ph` command. Potential hires are in the list.
 
-    1. Test case: `promote 1 2024-12-20`<br>
+    2. Test case: `promote 1 2024-12-20`<br>
        Expected: First person in the list is promoted to an employee. Details of the promoted potential hire is shown in the status message.
 
-    2. Test case: `promote 0 2024-12-20`<br>
+    3. Test case: `promote 0 2024-12-20`<br>
        Expected: Invalid index found. No potential hire promoted. Error details shown in the status message.
 
-    3. Test case: `Promote 1 2024-12-20`<br>
+    4. Test case: `Promote 1 2024-12-20`<br>
        Excepted: Unrecognised command. Error is due to capitalization of `Promote` instead of `promote`. Capitalisation matters.
 
-    4. Test case: `promote 1`<br>
+    5. Test case: `promote 1`<br>
        Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-    5. Test case: `promote`<br>
-      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+    6. Test case: `promote`<br>
+      Expected: There are missing parameters. A guide on how to use the commandD will be shown in the status message.
 
-    6. Test case: `promote 0 20-12-2024`<br>
+    7. Test case: `promote 0 20-12-2024`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
 
-    7. Test case: `promote 0 2024-20-12`<br>
+    8. Test case: `promote 0 2024-20-12`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
 
-       8. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
-          Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+    9. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
+       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries)
 
@@ -643,46 +672,49 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting with all contacts shown
 
-   Prerequisites: List all contacts using the `list all` command. The list is not empty and not already in order.
+   1. Prerequisites: List all contacts using the `list all` command. The list is not empty and not already in order.
 
-   1. Test case: `sort name`<br>
+   2. Test case: `sort name`<br>
       Expected: All contacts in StaffSync are sorted by name in ascending order.
 
-   2. Test case: `sort date`<br>
+   3. Test case: `sort date`<br>
       Expected: Potential hires are filtered out. Employees are sorted by contract end date in ascending order.
 
-   3. Test case: `sort`<br>
+   4. Test case: `sort`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-   4. Test case: `sort 1`<br>
+   5. Test case: `sort 1`<br>
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
 
-   5. Test case: `sort name 1`
+   6. Test case: `sort name 1`
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
 
 2. Sorting with an already filtered list
 
-   Prerequisites: List has been filtered using a `find` or `list` command. The list is not empty and not already in order.
+   1. Prerequisites: List has been filtered using a `find` or `list` command. The list is not empty and not already in order.
 
-   1. Test case: `sort name`<br>
+   2. Test case: `sort name`<br>
       Expected: The shown contacts are sorted by name in ascending order. contacts that were filtered out will not be shown.
 
-   2. Test case: `sort date`<br>
+   3. Test case: `sort date`<br>
       Expected: List will show all employees. Employees are sorted by contract end date in ascending order.
 
-   3. Test case: `sort`<br>
+   4. Test case: `sort`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-   4. Test case: `sort 1`<br>
+   5. Test case: `sort 1`<br>
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
 
-   5. Test case: `sort name 1`
+   6. Test case: `sort name 1`
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Additional uml diagrams for other cases**
 
-<puml src="diagrams/ListSeqeuenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
+<puml src="diagrams/ListSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
 Diagram for interactions inside the logic component for the `list all` command.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
