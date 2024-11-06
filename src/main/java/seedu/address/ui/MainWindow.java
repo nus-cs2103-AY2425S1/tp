@@ -177,6 +177,12 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+
+        // If open, close the view person window
+        if (viewPersonWindow != null) {
+            viewPersonWindow.hide();
+        }
+
         primaryStage.hide();
     }
 
