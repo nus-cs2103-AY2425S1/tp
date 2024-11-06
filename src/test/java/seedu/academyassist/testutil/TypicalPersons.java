@@ -48,7 +48,7 @@ public class TypicalPersons {
             .withSubjects("English").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withAddress("michegan ave").withEmail("werner@example.com")
-            .withPhone("94822249").withIc("F2238567X").withYearGroup("2").withStudentId("S10005")
+            .withPhone("94822240").withIc("F2238567X").withYearGroup("2").withStudentId("S10005")
             .withSubjects("English").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withAddress("little tokyo").withEmail("lydia@example.com")
@@ -56,7 +56,7 @@ public class TypicalPersons {
             .withSubjects("English").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withAddress("4th street").withEmail("anna@example.com")
-            .withPhone("94820442").withIc("F1294667X").withYearGroup("1").withStudentId("S10007")
+            .withPhone("76425642").withIc("F1294667X").withYearGroup("1").withStudentId("S10007")
             .withSubjects("Science").build();
 
     // Manually added
