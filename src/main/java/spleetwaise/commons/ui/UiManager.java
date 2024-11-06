@@ -72,7 +72,7 @@ public class UiManager implements Ui {
         }
     }
 
-    private Image getImage(String imagePath) {
+    Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
@@ -80,7 +80,7 @@ public class UiManager implements Ui {
      * Shows an error alert dialog with {@code title} and error message, {@code e}, and exits the application after the
      * user has closed the alert dialog.
      */
-    private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
+    void showFatalErrorDialogAndShutdown(String title, Throwable e) {
         logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));
         showAlertDialogAndWait(Alert.AlertType.ERROR, title, e.getMessage(), e.toString());
         Platform.exit();

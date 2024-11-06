@@ -93,7 +93,8 @@ dependencies {
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
 
-    testImplementation "org.mockito:mockito-core:5.14.1"
+    testImplementation "org.mockito:mockito-core:5.14.2"
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.14.2' // Add Mockito JUnit 5 integration
 }
 
 shadowJar {
