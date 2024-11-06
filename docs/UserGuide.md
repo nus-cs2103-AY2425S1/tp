@@ -23,7 +23,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/loadingPageOfUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -227,8 +227,8 @@ Find all persons whose names contains any of the given keywords.
 
 <md>**Examples:**</md>
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex charlotte` returns `Alex Yeoh`, `Charlotte`<br>
+  ![result for 'find alex charlotte'](images/findAlexCharlotte.png)
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -256,8 +256,8 @@ Finds persons whose names contain any of the given tag keywords.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `filter t/friend t/family` returns any contact tagged with `friend` or `family`<br>
-  ![result for 'filter t/friend t/family'](images/findAlexDavidResult.png)
+* `filter t/friends` returns any contact tagged with `friends`<br>
+  ![result for 'filter t/friend t/family'](images/filterFriendsTagByFilter.png)
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -353,17 +353,23 @@ Marks a student as present for a particular week.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Marks the particular student as present in that week.
-* The name and week number is compulsory.
+* The full name and week number is compulsory.
 * The name is case-sensitive.
-* The range of the WEEK NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
+* The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
   </box>
+
+<box type="info">
+
+The update of the attendance will only be seen when [`view`](#viewing-a-contact-s-full-details-view) command is executed.
+
+</box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
-* `mark n/Viswa w/1` marks the student named `Viswa` as present for week 1.
-  ![result for mark](images/markPresent.png)  
+* `mark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as present for week 0.
+  ![result for mark](images/markAlexPresent.png)  
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -380,17 +386,23 @@ Unmarks a student as present for a particular week.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Unmarks the particular student as present in that week.
-* The name and week number is compulsory.
+* The full name and week number is compulsory.
 * The name is case-sensitive. 
-* The range of the WEEK NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
+* The range of the WEEK_NUMBER is between 0 and 13, both inclusive. Rationale being there are 13 weeks per semester.
+</box>
+
+<box type="info">
+
+The update of the attendance will only be seen when [`view`](#viewing-a-contact-s-full-details-view) command is executed.
+
 </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
-* `unmarks n/John Doe w/1` unmarks the student named `JohnDoe` as present for week 1.
-  ![result for unmark](images/unmarkStudent.png)
+* `unmarks n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
+  ![result for unmark](images/markAlexAbsent.png)
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -420,8 +432,12 @@ Sorts the displayed list based on the given field and order.
 
 <md>**Examples:**</md>
 
-* `sort name order/asc` will sort the displayed list based on their name in ascending order.
+* `sort name order/desc` will sort the displayed list based on their name in ascending order.
+  ![result_for_sorting](images/sortByNameDesc.png)
+
 * `sort reset` will reset the displayed list to its default order.
+  ![result_for_sorting](images/sortReset.png)
+
   </box>
 
 --------------------------------------------------------------------------------------------------------------------

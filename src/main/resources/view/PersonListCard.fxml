@@ -38,7 +38,8 @@
         <Label id="fieldLabel" styleClass="cell_small_label" text="Github: " />
         <Label fx:id="github" styleClass="cell_small_label" text="\$github" />
       </HBox>
-    <!--Align to the right -->
+
+      <FlowPane fx:id="weekLabel" />
     </VBox>
   </GridPane>
 </HBox>
