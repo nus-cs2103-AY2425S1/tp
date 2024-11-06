@@ -67,8 +67,8 @@ public class Job {
         }
 
         return otherJob != null
-                && otherJob.getName().equals(getName())
-                && otherJob.getCompany().equals(getCompany());
+                && otherJob.getName().isSameName(getName())
+                && otherJob.getCompany().isSameName(getCompany());
     }
 
     /**

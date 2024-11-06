@@ -32,7 +32,7 @@ public class JobCompany extends Name {
      * @return true if equal.
      */
     public boolean matchesCompanyName(Name name) {
-        return super.equals(name);
+        return this.isSameName(name);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class JobCompany extends Name {
         }
 
         JobCompany otherCompany = (JobCompany) other;
-        return fullName.equalsIgnoreCase(otherCompany.fullName);
+        return fullName.equals(otherCompany.fullName);
     }
 
     @Override
