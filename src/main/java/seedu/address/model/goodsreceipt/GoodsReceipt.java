@@ -8,6 +8,7 @@ import static seedu.address.storage.CsvConverters.GoodsDateConverter;
 import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
@@ -196,9 +197,15 @@ public class GoodsReceipt {
      * Checks if receipt is the same (Logic may be different from hashcode)
      * E.g. delivered variable is not checked here
      */
-    public boolean isSameReceipt(GoodsReceipt otherReceipt) {
-        if (otherReceipt == this) {
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GoodsReceipt otherReceipt)) {
+            return false;
         }
 
         return this.goods.equals(otherReceipt.goods)
@@ -213,4 +220,11 @@ public class GoodsReceipt {
                 &&
                 this.price == otherReceipt.price;
     }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(goods, supplierName, arrivalDate, procurementDate, quantity, price);
+    }
+
 }

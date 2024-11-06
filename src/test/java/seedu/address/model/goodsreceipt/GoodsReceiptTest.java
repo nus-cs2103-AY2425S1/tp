@@ -89,4 +89,19 @@ public class GoodsReceiptTest {
                 new Date(DATETIME_VALID), false, 1, 5.22);
         assertTrue(Objects.equals(goodsReceipt.toString(), "[Quantity 1] Milk Bread (Pending)"));
     }
+
+    @Test
+    public void goodsReceipt_equals_success() {
+        GoodsReceipt goodsReceipt = new GoodsReceipt(
+                VALID_GOODS,
+                new Name("Alex Yeoh"), new Date(DATETIME_VALID),
+                new Date(DATETIME_VALID), false, 1, 5.22);
+
+        GoodsReceipt otherReceipt = new GoodsReceipt(
+                VALID_GOODS,
+                new Name("Alex Yeoh"), new Date(DATETIME_VALID),
+                new Date(DATETIME_VALID), false, 1, 5.22);
+
+        assertTrue(goodsReceipt.equals(otherReceipt));
+    }
 }

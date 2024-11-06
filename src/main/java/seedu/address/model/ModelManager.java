@@ -187,6 +187,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
@@ -208,6 +209,7 @@ public class ModelManager implements Model {
     public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
         requireNonNull(goodsReceipts);
         goodsList.resetData(goodsReceipts);
+        updateFilteredReceiptsList(x -> false); //No goodsReceipt will satisfy this condition
     }
 
     @Override
