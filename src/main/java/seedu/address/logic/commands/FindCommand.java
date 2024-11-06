@@ -47,10 +47,6 @@ public class FindCommand extends Command {
         this.personPredicate = personPredicateBuilder.build();
     }
 
-    public PersonPredicateBuilder getPersonPredicateBuilder() {
-        return personPredicateBuilder;
-    }
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

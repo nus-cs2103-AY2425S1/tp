@@ -84,8 +84,9 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * Adds all strings in {@code nameKeywords} into this object's {@code nameKeywords} field.
-     * @return this object
+     * Adds all strings in {@code nameKeywords} to a new instance of this object's {@code nameKeywords} field.
+     * @param nameKeywords the list of name keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withNameKeywords(List<String> nameKeywords) {
         requireNonNull(nameKeywords);
@@ -96,8 +97,9 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * Adds all strings in {@code classIdKeywords} into this object's {@code classIdKeywords} field.
-     * @return this object
+     * Adds all strings in {@code classIdKeywords} to a new instance of this object's {@code classIdKeywords} field.
+     * @param classIdKeywords the list of class ID keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withClassIdKeywords(List<String> classIdKeywords) {
         requireNonNull(classIdKeywords);
@@ -108,8 +110,9 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * Adds all strings in {@code monthPaidKeywords} into this object's {@code monthPaidKeywords} field.
-     * @return this object
+     * Adds all strings in {@code monthPaidKeywords} to a new instance of this object's {@code monthPaidKeywords} field.
+     * @param monthPaidKeywords the list of month paid keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withMonthPaidKeywords(List<String> monthPaidKeywords) {
         requireNonNull(monthPaidKeywords);
@@ -120,8 +123,10 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * Adds all strings in {@code notMonthPaidKeywords} into this object's {@code notMonthPaidKeywords} field.
-     * @return this object
+     * Adds all strings in {@code notMonthPaidKeywords} to a new instance of this object's
+     * {@code notMonthPaidKeywords} field.
+     * @param notMonthPaidKeywords the list of not month paid keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withNotMonthPaidKeywords(List<String> notMonthPaidKeywords) {
         requireNonNull(notMonthPaidKeywords);
@@ -132,54 +137,68 @@ public class PersonPredicateBuilder {
     }
 
     /**
-     * Adds all strings in {@code tagKeywords} into this object's {@code tagKeywords} field.
-     * @return this object
+     * Adds all strings in {@code tagKeywords} to a new instance of this object's {@code tagKeywords} field.
+     * @param tagKeywords the list of tag keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withTagsKeywords(List<String> tagKeywords) {
         requireNonNull(tagKeywords);
-        this.tagKeywords.addAll(tagKeywords);
-        isSetTag = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.tagKeywords.addAll(tagKeywords);
+        newBuilder.isSetTag = true;
+        return newBuilder;
     }
+
     /**
-     * Adds all strings in {@code addressKeywords} into this object's {@code addressKeywords} field.
-     * @return this object
+     * Adds all strings in {@code addressKeywords} to a new instance of this object's {@code addressKeywords} field.
+     * @param addressKeywords the list of address keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withAddressKeywords(List<String> addressKeywords) {
         requireNonNull(addressKeywords);
-        this.addressKeywords.addAll(addressKeywords);
-        isSetAddress = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.addressKeywords.addAll(addressKeywords);
+        newBuilder.isSetAddress = true;
+        return newBuilder;
     }
+
     /**
-     * Adds all strings in {@code phoneKeywords} into this object's {@code phoneKeywords} field.
-     * @return this object
+     * Adds all strings in {@code phoneKeywords} to a new instance of this object's {@code phoneKeywords} field.
+     * @param phoneKeywords the list of phone keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withPhoneKeywords(List<String> phoneKeywords) {
         requireNonNull(phoneKeywords);
-        this.phoneKeywords.addAll(phoneKeywords);
-        isSetPhone = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.phoneKeywords.addAll(phoneKeywords);
+        newBuilder.isSetPhone = true;
+        return newBuilder;
     }
+
     /**
-     * Adds all strings in {@code emailKeywords} into this object's {@code emailKeywords} field.
-     * @return this object
+     * Adds all strings in {@code emailKeywords} to a new instance of this object's {@code emailKeywords} field.
+     * @param emailKeywords the list of email keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withEmailKeywords(List<String> emailKeywords) {
         requireNonNull(emailKeywords);
-        this.emailKeywords.addAll(emailKeywords);
-        isSetEmail = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.emailKeywords.addAll(emailKeywords);
+        newBuilder.isSetEmail = true;
+        return newBuilder;
     }
+
     /**
-     * Adds all strings in {@code feesKeywords} into this object's {@code feesKeywords} field.
-     * @return this object
+     * Adds all strings in {@code feesKeywords} to a new instance of this object's {@code feesKeywords} field.
+     * @param feesKeywords the list of fees keywords to add
+     * @return a new PersonPredicateBuilder instance with updated data
      */
     public PersonPredicateBuilder withFeesKeywords(List<String> feesKeywords) {
         requireNonNull(feesKeywords);
-        this.feesKeywords.addAll(feesKeywords);
-        isSetFees = true;
-        return this;
+        PersonPredicateBuilder newBuilder = new PersonPredicateBuilder(this);
+        newBuilder.feesKeywords.addAll(feesKeywords);
+        newBuilder.isSetFees = true;
+        return newBuilder;
     }
 
     /**
@@ -187,8 +206,6 @@ public class PersonPredicateBuilder {
      * in this object.
      */
     public Predicate<Person> build() {
-
-
         return person -> {
             boolean nameMatch = nameContainsKeywords(person, isSetName, nameKeywords);
             boolean classIdMatch = classIdContainsKeywords(person, isSetClassId, classIdKeywords);
@@ -227,7 +244,7 @@ public class PersonPredicateBuilder {
             return true;
         }
         return monthPaidKeywords.stream()
-                .anyMatch(keyword -> regexMatch(person.getMonthsPaid().toString(), keyword));
+                .anyMatch(keyword -> regexMatch(person.getMonthsPaidToString(), keyword));
     }
 
     private static boolean notMonthPaidContainsKeywords(
@@ -236,7 +253,7 @@ public class PersonPredicateBuilder {
             return true;
         }
         return notMonthPaidKeywords.stream()
-                .noneMatch(keyword -> regexMatch(person.getMonthsPaid().toString(), keyword));
+                .noneMatch(keyword -> regexMatch(person.getMonthsPaidToString(), keyword));
     }
 
     private static boolean tagContainsKeywords(Person person, boolean isSetTag, List<String> tagKeywords) {
@@ -244,7 +261,7 @@ public class PersonPredicateBuilder {
             return true;
         }
         return tagKeywords.stream()
-                .anyMatch(keyword -> regexMatch(person.getTags().toString(), keyword));
+                .anyMatch(keyword -> regexMatch(person.getTagsToString(), keyword));
     }
 
     private static boolean addressContainsKeywords(Person person, boolean isSetAddress, List<String> addressKeywords) {
@@ -280,7 +297,7 @@ public class PersonPredicateBuilder {
     }
 
     private static boolean regexMatch(String value, String keyword) {
-        Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(Pattern.quote(keyword), Pattern.CASE_INSENSITIVE);
         return pattern.matcher(value).find();
     }
 
