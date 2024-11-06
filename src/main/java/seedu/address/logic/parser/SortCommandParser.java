@@ -17,12 +17,14 @@ import seedu.address.model.person.Tutorial;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-    private static final String MESSAGE_NAME_SHOULD_BE_EMPTY =
+    private static final String MESSAGE_NAME_MUST_BE_EMPTY =
             "The name field must be left empty when sorting by name.";
-    private static final String MESSAGE_ID_SHOULD_BE_EMPTY =
+    private static final String MESSAGE_ID_MUST_BE_EMPTY =
             "The student ID field must be left empty when sorting by student ID.";
-    private static final String MESSAGE_TUT_SHOULD_NOT_BE_EMPTY =
+    private static final String MESSAGE_TUT_MUST_NOT_BE_EMPTY =
             "A tutorial number must be provided for sorting by tutorial attendance.";
+    private static final String MESSAGE_ONLY_ONE_TUT =
+            "Only 1 tutorial number should be provided for sorting by tutorial attendance.";
 
     private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_TUTORIAL);
 
@@ -50,20 +52,23 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (argMultimap.getValue(PREFIX_NAME).map(String::isEmpty).orElse(false)) {
             return SortCommand.sortByName(order);
         } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(MESSAGE_NAME_SHOULD_BE_EMPTY);
+            throw new ParseException(MESSAGE_NAME_MUST_BE_EMPTY);
         }
 
         if (argMultimap.getValue(PREFIX_STUDENT_ID).map(String::isEmpty).orElse(false)) {
             return SortCommand.sortByStudentId(order);
         } else if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            throw new ParseException(MESSAGE_ID_SHOULD_BE_EMPTY);
+            throw new ParseException(MESSAGE_ID_MUST_BE_EMPTY);
         }
 
         if (argMultimap.getValue(PREFIX_TUTORIAL).map(String::isEmpty).orElse(false)) {
-            throw new ParseException(MESSAGE_TUT_SHOULD_NOT_BE_EMPTY);
+            throw new ParseException(MESSAGE_TUT_MUST_NOT_BE_EMPTY);
         } else if (argMultimap.getValue(PREFIX_TUTORIAL).isPresent()) {
-            Tutorial tutorial = ParserUtil.parseTutorial(argMultimap.getValue(PREFIX_TUTORIAL).get());
-            return SortCommand.sortByTutorialAttendance(order, tutorial);
+            List<Tutorial> tutorials = ParserUtil.parseTutorials(argMultimap.getValue(PREFIX_TUTORIAL).get());
+            if (tutorials.size() != 1) {
+                throw new ParseException(MESSAGE_ONLY_ONE_TUT);
+            }
+            return SortCommand.sortByTutorialAttendance(order, tutorials.get(0));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
