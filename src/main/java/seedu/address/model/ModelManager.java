@@ -189,10 +189,23 @@ public class ModelManager implements Model {
         return filteredClients;
     }
 
+
     @Override
-    public void updateFilteredClientList(Predicate<Client> predicate) {
+    public void updateFilteredClientList(Predicate<? super Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    /**
+     *
+     * @return The current applied filter if there is any, otherwise, show all clients
+     */
+    @Override
+    public Predicate<? super Client> getCurrentClientFilter() {
+        if (filteredClients.getPredicate() == null) {
+            return PREDICATE_SHOW_ALL_CLIENTS;
+        }
+        return filteredClients.getPredicate();
     }
 
     @Override
