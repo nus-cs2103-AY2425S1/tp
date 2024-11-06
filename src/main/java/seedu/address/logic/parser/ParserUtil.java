@@ -162,10 +162,10 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
-        if (!Remark.isValidRemarkName(remark)) {
+        if (!Remark.isValidRemarkName(trimmedRemark)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Remark(remark);
+        return new Remark(trimmedRemark);
     }
 
     /**
