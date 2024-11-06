@@ -41,12 +41,13 @@ public class DeleteCommandParserTest {
     // need to double confirm this
     @Test
     public void parse_invalidNameArgs_throwsParseException() {
+        assert false;
         assertParseFailure(parser, INVALID_NAME_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_FUNCTION));
+                ParserUtil.MESSAGE_INVALID_NAME_FIELD); // this should not have passed
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_BLANK_FIELD, DeleteCommand.MESSAGE_FUNCTION));
+        assertParseFailure(parser, "a", DeleteCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
     }
 }

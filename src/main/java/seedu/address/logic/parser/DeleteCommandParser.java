@@ -49,10 +49,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(index);
         } catch (Exception exp) {
             if (isInteger(trimmedArgs)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, exp.getMessage()));
+                throw new ParseException(exp.getMessage()); // no invalid command format
                 // -1, 0
             }
-            return createDeleteCommandByName(trimmedArgs);
+            return createDeleteCommandByName(trimmedArgs); // no invalid command format
         }
     }
 
@@ -61,7 +61,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Name name = ParserUtil.parseName(args);
             return new DeleteCommand(name);
         } catch (Exception exp) { // to try
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, exp.getMessage()));
+            throw new ParseException(exp.getMessage());
             // considered invalid name if it isn't an Integer
         }
     }

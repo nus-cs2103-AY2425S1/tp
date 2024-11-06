@@ -168,8 +168,8 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(name, descriptor);
 
-        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK
-                ,userInput));
+        assertCommandFailure(editCommand, model, String.format(
+                Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK, userInput));
     }
 
     @Test
@@ -199,7 +199,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_CONTACT, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_CONTACT);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
     @Test
@@ -211,7 +211,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT,
                 new EditContactDescriptorBuilder(contactInList).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_CONTACT);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
     @Test

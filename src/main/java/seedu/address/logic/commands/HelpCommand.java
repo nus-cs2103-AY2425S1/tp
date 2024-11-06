@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
 import static seedu.address.logic.Messages.LINE_BREAK;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.Messages.styleCommand;
 
@@ -74,6 +75,9 @@ public class HelpCommand extends Command {
     public static final String HELP_EXIT = ExitCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ExitCommand.MESSAGE_COMMAND_FORMAT;
 
+    public static final String MESSAGE_HELP_NOT_COMMAND_WORD =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Only command words are allowed after the help command\n" + HelpCommand.MESSAGE_USAGE);
 
     private final String message;
     private final boolean isHelp;

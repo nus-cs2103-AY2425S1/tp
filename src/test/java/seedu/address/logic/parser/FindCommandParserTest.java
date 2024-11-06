@@ -37,7 +37,7 @@ public class FindCommandParserTest {
     private static final List<String> NICKNAME_KEYWORD_LIST = Arrays.asList("amy", "bob");
     private static final String NAME_QUERY = " " + PREFIX_NAME + "amy Bob";
     private static final String TELEGRAM_HANDLE_QUERY = " " + PREFIX_TELEGRAM_HANDLE + "amy 123";
-    private static final String EMAIL_QUERY = " " + PREFIX_EMAIL + "gmail amy";
+    private static final String EMAIL_QUERY = " " + PREFIX_EMAIL + "gmail amy"; // sucessful one?
     private static final String STUDENT_STATUS_QUERY = " " + PREFIX_STUDENT_STATUS + "Undergrad phd";
     private static final String PRESIDENT_ROLE_QUERY = ROLE_DESC_PRESIDENT;
     private static final String INVALID_ROLE_QUERY = " " + PREFIX_ROLE + "invalid role";
@@ -49,16 +49,16 @@ public class FindCommandParserTest {
     @Test
     public void parse_missingParts_throwsParseException() {
         // no arguments
-        assertParseFailure(parser, "     ", String.format(MESSAGE_BLANK_FIELD, FindCommand.MESSAGE_FUNCTION));
+        assertParseFailure(parser, "     ", FindCommand.MESSAGE_MISSING_DESCRIPTION);
 
         // no prefix
-        assertParseFailure(parser, " Alice Bob", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " Alice Bob", FindCommand.MESSAGE_MISSING_PREFIX);
 
         // all empty prefix field
-        assertParseFailure(parser, " " + PREFIX_NAME, String.format(MESSAGE_BLANK_FIELD));
+        assertParseFailure(parser, " " + PREFIX_NAME, MESSAGE_BLANK_FIELD);
 
         // only one empty prefix field
-        assertParseFailure(parser, " " + PREFIX_NAME + ROLE_DESC_PRESIDENT, String.format(MESSAGE_BLANK_FIELD));
+        assertParseFailure(parser, " " + PREFIX_NAME + ROLE_DESC_PRESIDENT, MESSAGE_BLANK_FIELD);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRoleValue_failure() {
         String userInput = INVALID_ROLE_QUERY;
-        assertParseFailure(parser, userInput, Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_ROLE_FIELD);
     }
 
     @Test

@@ -82,9 +82,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_MISSING_PREFIX); // Fields missing or at least 1....
         }
 
-
-
-
         // parse the index to edit, else parse the name
         try {
             index = ParserUtil.parseIndex(strPreamble);
@@ -92,7 +89,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             assert index == null;
             if (isInteger(strPreamble)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()));
+                throw new ParseException(pe.getMessage());
                 // -1, 0
             }
             return createEditCommandByName(strPreamble, editContactDescriptor);
@@ -108,7 +105,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             Name name = ParserUtil.parseName(strPreamble);
             return new EditCommand(name, editContactDescriptor);
         } catch (Exception exp) { // to try
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, exp.getMessage()));
+            throw new ParseException(exp.getMessage());
             // considered invalid name if it isn't an Integer
         }
     }

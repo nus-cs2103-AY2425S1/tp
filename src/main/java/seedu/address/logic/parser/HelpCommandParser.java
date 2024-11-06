@@ -50,8 +50,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             return new HelpCommand();
 
         default:
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Only command words are allowed after the help command\n" + HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(HelpCommand.MESSAGE_HELP_NOT_COMMAND_WORD);
         }
 
     }

@@ -99,15 +99,13 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, " There shouldn't' be any words after "
                         + "the list command word except for a few special cases. "
                         + String.format(MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD
-                        + " " + ListCommand.COMMAND_WORD)),
-                ()-> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
+                        + " " + ListCommand.COMMAND_WORD)), ()-> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() { //not too good a code
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        "\n" + HelpCommand.MESSAGE_USAGE),
-                ()-> parser.parseCommand(""));
+                        "\n" + HelpCommand.MESSAGE_USAGE), ()-> parser.parseCommand(""));
     }
 
     @Test
