@@ -17,7 +17,8 @@ public class VersionTest {
 
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
+        assertThrows(IllegalArgumentException.class, () -> Version
+                .fromString("This is not a version string"));
     }
 
     @Test

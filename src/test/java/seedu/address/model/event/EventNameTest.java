@@ -32,7 +32,7 @@ public class EventNameTest {
         // invalid names
         assertFalse(EventName.isValidName("")); // empty string
         assertFalse(EventName.isValidName(" ")); // spaces only
-        assertFalse(EventName.isValidName("a ".repeat(51))); // 51 characters after space inclusion
+        assertFalse(EventName.isValidName("a".repeat(51))); // 51 characters
         assertFalse(EventName.isValidName("Event-Name-1")); // contains non-alphanumeric character (dash)
         assertFalse(EventName.isValidName("Event.Name")); // contains punctuation (dot)
     }
