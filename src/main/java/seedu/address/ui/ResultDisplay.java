@@ -20,6 +20,15 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    // /**
+    // * Initializes the UI.
+    // */
+    // @FXML
+    // public void initialize() {
+    //     resultDisplay.prefWidthProperty().bind(resultDisplay.getParent().widthProperty());
+    //     resultDisplay.prefHeightProperty().bind(resultDisplay.getParent().heightProperty());
+    // }
+
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);

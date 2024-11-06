@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -26,11 +28,12 @@ public class TagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tag(s) to the person identified "
             + "by the index number used in the displayed person list. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "TAG...\n"
+            + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 t/paidFee t/groupA";
 
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tags to Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "The tag %1$s has already been added before.";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag(s): %1$s\n" + "to Person: %2$s";
+    public static final String MESSAGE_DUPLICATE_TAG = "Duplicate tag (case-insensitive) detected!\n"
+        + "The tag %1$s has either been added before or there is a duplicate in the tag input.";
 
     private final Index index;
     private final Set<Tag> tagsToAdd;
@@ -56,39 +59,48 @@ public class TagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        assert index.getOneBased() > 0;
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person updatedPerson = addTagsToPerson(personToEdit, tagsToAdd);
 
         model.setPerson(personToEdit, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, updatedPerson));
+
+        // Concatenates tags for success message
+        String addedTags = tagsToAdd.stream()
+                .map(Tag::toString)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, addedTags, Messages.format(updatedPerson)));
     }
 
     /**
-     * Adds the new tags to the person's existing tags, with duplicate tag detection.
+     * Adds the new tags to the person's existing tags, with case-insensitive duplicate tag detection.
      */
     private static Person addTagsToPerson(Person personToEdit, Set<Tag> tagsToAdd) throws CommandException {
-        Set<Tag> existingTags = new HashSet<>(personToEdit.getTags());
+        Set<String> existingTagNames = personToEdit.getTags().stream()
+                .map(tag -> tag.tagName.toLowerCase())
+                .collect(Collectors.toSet());
 
+        // Detect duplicates based on lowercase comparison
         for (Tag tag : tagsToAdd) {
-            if (existingTags.contains(tag)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_TAG, tag.tagName));
+            String lowerTagName = tag.tagName.toLowerCase();
+            if (existingTagNames.contains(lowerTagName)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_TAG, tag.toString()));
             }
+            existingTagNames.add(lowerTagName);
         }
 
-        Set<Tag> updatedTags = new HashSet<>(existingTags);
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.addAll(tagsToAdd);
 
-        if (personToEdit instanceof Student) {
-            Student studentToEdit = (Student) personToEdit;
+        if (personToEdit instanceof Student studentToEdit) {
             return new Student(studentToEdit.getName(), studentToEdit.getStudentId(), studentToEdit.getPhone(),
-                    studentToEdit.getEmail(), studentToEdit.getAddress(), updatedTags
-            );
+                    studentToEdit.getEmail(), studentToEdit.getAddress(), updatedTags);
         } else {
             Company companyToEdit = (Company) personToEdit;
             return new Company(companyToEdit.getName(), companyToEdit.getIndustry(), companyToEdit.getPhone(),
-                    companyToEdit.getEmail(), companyToEdit.getAddress(), updatedTags
-            );
+                    companyToEdit.getEmail(), companyToEdit.getAddress(), updatedTags);
         }
     }
 

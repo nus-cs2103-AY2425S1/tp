@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.company.Company;
@@ -28,9 +29,10 @@ public class DeleteTagCommand extends Command {
             + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 t/Y3 t/Engineering";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags from Contact: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags %1$s from Contact: %2$s";
     public static final String MESSAGE_DELETE_TAG_FROM_ALL_SUCCESS = "Deleted the tag(s) %1$s "
             + "from all contacts in the list.";
+
     public static final String MESSAGE_INVALID_TAG = "The tag %1$s does not exist.";
     public static final String INVALID_INDEX_OR_STRING = "The person index provided is invalid. Index must either be:\n"
             + "1. Within the size of the list\n"
@@ -86,7 +88,7 @@ public class DeleteTagCommand extends Command {
             Person editedPerson = deleteTagsFromPerson(personToEdit, tagsToDelete);
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPerson));
+            return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagsToDelete, Messages.format(editedPerson)));
         }
     }
 
@@ -109,12 +111,14 @@ public class DeleteTagCommand extends Command {
 
         if (personToEdit instanceof Student) {
             Student studentToEdit = (Student) personToEdit;
-            return new Student(studentToEdit.getName(), studentToEdit.getStudentId(), studentToEdit.getPhone(),
-                    studentToEdit.getEmail(), studentToEdit.getAddress(), currentTags);
+            return new Student(studentToEdit.getName(), studentToEdit.getStudentId(),
+                    studentToEdit.getPhone(), studentToEdit.getEmail(),
+                    studentToEdit.getAddress(), currentTags);
         } else {
             Company companyToEdit = (Company) personToEdit;
-            return new Company(companyToEdit.getName(), companyToEdit.getIndustry(), companyToEdit.getPhone(),
-                    companyToEdit.getEmail(), companyToEdit.getAddress(), currentTags);
+            return new Company(companyToEdit.getName(), companyToEdit.getIndustry(),
+                    companyToEdit.getPhone(), companyToEdit.getEmail(),
+                    companyToEdit.getAddress(), currentTags);
         }
     }
 
