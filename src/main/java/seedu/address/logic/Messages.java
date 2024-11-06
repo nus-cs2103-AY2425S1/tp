@@ -91,7 +91,7 @@ public class Messages {
                 .append(property.getAddress())
                 .append("; Asking price: ")
                 .append(property.getAskingPrice())
-                .append("; Property type")
+                .append("; Property type: ")
                 .append(property.getPropertyType());
         return builder.toString();
     }
