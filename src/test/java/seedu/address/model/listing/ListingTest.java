@@ -55,17 +55,18 @@ public class ListingTest {
         // different listing -> return false
         assertFalse(PASIR_RIS.equals(TAMPINES));
 
-        // different name -> return false
+        // different name, same address -> return true
         Listing editedListing = new ListingBuilder(PASIR_RIS).withName(TAMPINES.getName()).build();
-        assertFalse(PASIR_RIS.equals(editedListing));
+        assertTrue(PASIR_RIS.equals(editedListing));
 
-        // different address -> return false
+        // different address, same name -> return true
         editedListing = new ListingBuilder(PASIR_RIS).withAddress(TAMPINES.getAddress()).build();
-        assertFalse(PASIR_RIS.equals(editedListing));
+        assertTrue(PASIR_RIS.equals(editedListing));
 
-        // different seller -> return false
-        editedListing = new ListingBuilder(PASIR_RIS).withSeller(TAMPINES.getSeller()).build();
-        assertFalse(TAMPINES.equals(editedListing));
+        // different name and address -> return false
+        editedListing = new ListingBuilder(PASIR_RIS).withName(TAMPINES.getName())
+                .withAddress(TAMPINES.getAddress()).build();
+        assertFalse(PASIR_RIS.equals(editedListing));
     }
 
     @Test
@@ -77,5 +78,19 @@ public class ListingTest {
                 + ", region=" + PASIR_RIS.getRegion()
                 + ", seller=" + PASIR_RIS.getSeller() + "}";
         assertEquals(expected, PASIR_RIS.toString());
+    }
+    @Test
+    public void hashCodeTest() {
+        int initialHashCode = PASIR_RIS.hashCode();
+        assertEquals(initialHashCode, PASIR_RIS.hashCode(), "Hash code should be consistent across multiple calls");
+
+        Listing listingCopy = new ListingBuilder(PASIR_RIS).build();
+        assertTrue(PASIR_RIS.equals(listingCopy), "Objects should be equal");
+        assertEquals(PASIR_RIS.hashCode(), listingCopy.hashCode(), "Equal objects should have the same hash code");
+
+        Listing differentListing = new ListingBuilder(TAMPINES).build();
+        assertFalse(PASIR_RIS.equals(differentListing), "Objects should not be equal");
+        assertFalse(PASIR_RIS.hashCode() == differentListing.hashCode(),
+                "Unequal objects should ideally have different hash codes");
     }
 }
