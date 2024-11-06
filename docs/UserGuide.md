@@ -3,44 +3,176 @@ layout: page
 title: User Guide
 ---
 
-BakeBuddy is an intuitive Command Line Interface (CLI)-based desktop application, tailor-made to empower home-based
-bakery owners to efficiently manage their customers, suppliers, pastries, ingredients, customer and supply orders.
-By combining the speed of a CLI with the user-friendliness of a simple Graphical User Interface (GUI), BakeBuddy offers
-the perfect balance between efficiency and usability. BakeBuddy is an address book solution designed for users who
-prefer quick and efficient commands over traditional GUI-based apps, making orders, customer and supplier management
-seamless for busy home-based bakery owners.
+# Welcome to BakeBuddy
+
+BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
+efficiency in mind, it combines the power of a Command Line Interface (CLI) with intuitive features to help you focus
+on what matters most - creating delicious baked goods.
+
+BakeBuddy is a desktop application that streamlines your bakery operations by helping you manage:
+- 🧁 Pastries and recipes
+- 👥 Customers and their orders
+- 📦 Suppliers and ingredients
+- 📋 Order tracking and fulfillment
+- 🗄️ Inventory management
+
+## Why Choose BakeBuddy?
+
+- **Speed First**: Execute commands quickly through our CLI, perfect for busy bakers
+- **User-Friendly**: Simple GUI elements complement the CLI for enhanced usability
+- **All-in-One Solution**: Manage every aspect of your bakery business from a single application
+- **Efficiency Focused**: Designed specifically for home-based bakery owners who value their time
+
+## Getting Started
+
+This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 * Table of Contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Before You Begin ✔️
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Step 1: Check if Your Computer is Ready
+First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Open your computer's terminal:
+  - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
+  - **For Mac**: Press Command + Space, type `terminal`, and press Enter
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+2. In the black window that appears, type exactly:
+   ```
+   java --version
+   ```
+   and press Enter
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. What you should see:
+  - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
+  - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Step 2: Install BakeBuddy
 
-    * `list` : Lists all contacts.
+1. Download BakeBuddy:
+  - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
+  - Look for the file named `bakebuddy.jar`
+  - Click on it to download
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+2. Create a home for BakeBuddy:
+  - Create a new folder on your computer named `BakeBuddy`
+  - Move the downloaded `bakebuddy.jar` file into this folder
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+3. Start BakeBuddy:
+  - Open your terminal (like in Step 1)
+  - Type `cd ` (with a space after cd)
+  - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
+  - Press Enter
+  - Type:
+    ```
+    java -jar bakebuddy.jar
+    ```
+  - Press Enter
 
-    * `clear` : Deletes all contacts.
+   You should see the BakeBuddy window appear as follows!
 
-    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+### Step 3: Try Your First Commands
+
+Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
+
+Refer to the [Features](#features) below for details of each command.
+
+![screenshot](images/Screenshot-5.png)
+
+## List of Commands
+
+### Contact Management
+#### General Contacts
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Contact](#add-contact-command) | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]` | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
+| [Delete Contact](#delete-contact-command) | `deleteContact INDEX` | `deleteContact 1` |
+| [Edit Contact](#edit-contact-command) | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335` |
+| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS...]` | `filterContact t/Customer` |
+| [Find](#find-persons-by-name) | `find KEYWORD [MORE_KEYWORDS]` | `find Charlotte Bernice` |
+| [List](#list-command) | `list` | `list` |
+| [Remark](#remark-command) | `remark INDEX r/REMARK` | `remark 1 r/Regular customer` |
+
+#### Customer Specific
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
+
+#### Supplier Specific
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
+
+### Order Management
+#### Customer Orders
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Customer Order](#add-customer-order-command) | `addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDSs...] [r/REMARK]` | `addCustomerOrder n/John p/98765432 o/1 2 3 r/Delivery at 6pm` |
+| [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX` | `deleteCustomerOrder 2` |
+| [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX` | `markCustomerOrder 1` |
+| [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX` | `unmarkCustomerOrder 1` |
+
+#### Supply Orders
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
+| [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX` | `deleteSupplyOrder 1` |
+| [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX` | `markSupplyOrder 1` |
+| [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX` | `unmarkSupplyOrder 1` |
+
+### Catalogue Management
+#### Ingredient Catalogue
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Ingredient](#add-ingredient-command) | `addIngredient NAME COST` | `addIngredient Syrup 3.50` |
+| [Remove Ingredient](#remove-ingredient-command) | `removeIngredient NAME` | `removeIngredient Flour` |
+| [View Ingredient Catalogue](#view-ingredientcatalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
+
+#### Pastry Catalogue
+| Command | Format | Example |
+|---------|---------|---------|
+| [Add Pastry](#add-pastry-command) | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...]` | `addPastry Croissant 3.50 Flour Cream Sugar` |
+| [Remove Pastry](#remove-pastry-command) | `removePastry NAME` | `removePastry Croissant` |
+| [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue` | `viewPastryCatalogue` |
+
+### Inventory Management
+| Command | Format | Example |
+|---------|---------|---------|
+| [Check Ingredient Stock](#check-ingredient-stock-command) | `checkIngredientStock INGREDIENT` | `checkIngredientStock Flour` |
+| [Check Pastry Stock](#check-pastry-stock-command) | `checkPastryStock PASTRY` | `checkPastryStock Croissant` |
+| [View Inventory](#view-inventory-command) | `viewInventory` | `viewInventory` |
+
+### General Commands
+| Command | Format | Example |
+|---------|---------|---------|
+| [Help](#help-command) | `help` | `help` |
+| [Clear](#clearing-all-entries--clear) | `clear` | `clear` |
+| [Exit](#exit-command) | `exit` | `exit` |
+
+**Parameter Reference:**
+* `INDEX`: Positive integer (1, 2, 3, ...)
+* `NAME`: Name of person/item
+* `PHONE_NUMBER`: Phone number
+* `EMAIL`: Email address
+* `ADDRESS`: Physical address
+* `INFORMATION`: Additional customer details
+* `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
+* `COST`: Numeric value
+* `PRODUCTID`: Product identification numbers
+* `TAG`: Category or label
+* `REMARK`: Additional comments
+
+**Format Notes:**
+* `[parameter]`: Optional parameter
+* `parameter...`: Parameter can be repeated
+* Parameters can be entered in any order
+* Commands and parameter prefixes are case-sensitive
+* Parameter values are case-insensitive
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +183,7 @@ seamless for busy home-based bakery owners.
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -67,6 +199,79 @@ seamless for busy home-based bakery owners.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+### **Add Contact Command**
+Adds a new contact to the bakery’s database.
+
+```bash
+addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]
+```
+- **Parameters:**
+  - `n/NAME`: The person's name.
+  - `p/PHONE_NUMBER`: The person's phone number.
+  - `e/EMAIL`: (Optional) The person's email address.
+  - `a/ADDRESS`: (Optional) The person's address.
+  - `t/TAG`: (Optional) Tags for additional person information.
+
+**Example:**
+```bash
+addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
+```
+![screenshot](images/Screenshot-2.png)
+
+### **Add Customer Command**
+Adds a new customer to the bakery’s customer database.
+
+```bash
+addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
+```
+- **Parameters:**
+  - `n/NAME`: The customer's name.
+  - `p/PHONE_NUMBER`: The customer's phone number.
+  - `e/EMAIL`: (Optional) The customer's email address.
+  - `a/ADDRESS`: (Optional) The customer's address.
+  - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference.
+  - `t/TAG`: (Optional) Tags for additional customer information.
+
+**Example:**
+```bash
+addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 i/Allergic to peanuts
+```
+![screenshot](images/Screenshot-3.png)
+
+### **Add Ingredient Command**
+Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
+
+```bash
+addIngredient NAME COST
+```
+- **Parameters:**
+  - `NAME`: The name of the ingredient.
+  - `COST`: The cost of the ingredient.
+
+**Example:**
+```bash
+addIngredient Syrup 3.50 
+```
+![screenshot](images/Screenshot-1.png)
+
+### **Add Customer Order Command**
+Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
+
+```bash
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
+```
+- **Parameters:**
+  - `n/NAME`: (Optional) The customer's name.
+  - `p/PHONE_NUMBER`: The phone number of the customer (new customer will be added with the name if phone number not found in contacts).
+  - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
+  - `r/REMARK`: (Optional) Information about the customer order.
+
+**Example:**
+```bash
+addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm 
+```
+![screenshot](images/Screenshot-1.png)
 
 ### **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
@@ -109,7 +314,7 @@ addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TA
 
 **Example:**
 ```bash
-addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
+addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 s/salt, chocolate
 ```
 <img width="1503" alt="Screenshot 2024-10-24 at 6 53 16 PM" src="https://github.com/user-attachments/assets/76d7e905-4556-419f-8390-5b3e809db145">
 
@@ -186,6 +391,26 @@ checkPastryStock Croissant
 ```
 ![Pastry Stock.png](images%2FPastry%20Stock.png)
 
+### **Clear All Command**
+Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
+
+```bash
+clear
+```
+**Example:**
+```bash
+clear
+```
+![Clear.png](images%2FClear.png)
+
+The Clear All Command clears all data in the address book, removing all stored records such as customer and supplier
+details and inventory items.
+
+For example, typing **clear** will remove all customer, supplier and inventory information from the address book.
+This command provides a quick way to delete all existing records in one go, allowing bakery owners to reset their
+address book fully. It is helpful when bakery owners want a fresh start or data needs to be purged for any reason.
+This command ensures the address book is empty and ready for new entries.
+
 ### **Delete Contact Command**
 Deletes the contact details of specified person from the address book.
 
@@ -250,6 +475,21 @@ editContact 1 p/91150335
 ```
 ![screenshot](images/ss editcontact.png)    
 
+### **Exit Command**
+Exits the program.
+
+```bash
+exit
+```
+=======
+The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
+This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
+customer demand.
+
+For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
+available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
+by maintaining the right stock levels for popular pastries.
+
 ### **Filter Contact Command**
 Filter and list contacts in the address book based on specified tags.
 
@@ -268,42 +508,6 @@ filterContact t/Customer
 Clears all entries from the address book.
 
 Format: `clear`
-
-### **Exit Command**
-Exits the program.
-
-```bash
-exit
-```
-=======
-The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
-This command requires only the pastry's name and will display whether there is sufficient stock to meet potential 
-customer demand. 
-
-For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity 
-available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders 
-by maintaining the right stock levels for popular pastries.
-
-
-### **Clear All Command**
-Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
-
-```bash
-clear
-```
-**Example:**
-```bash
-clear
-```
-![Clear.png](images%2FClear.png)
-
-The Clear All Command clears all data in the address book, removing all stored records such as customer and supplier 
-details and inventory items.
-
-For example, typing **clear** will remove all customer, supplier and inventory information from the address book.
-This command provides a quick way to delete all existing records in one go, allowing bakery owners to reset their 
-address book fully. It is helpful when bakery owners want a fresh start or data needs to be purged for any reason.
-This command ensures the address book is empty and ready for new entries.
 
 ### **Find persons by name**
 Finds persons whose names contain any of the given keywords.
@@ -376,36 +580,6 @@ markSupplyOrder INDEX
 markSupplyOrder 1
 ```
 ![marksupplyorderui.png](images/marksupplyorderui.png)
-
-### **Unmark Customer Order Command**
-Unmark the customer order status as pending.
-
-```bash
-unmarkCustomerOrder INDEX
-```
-- **Parameters:**
-    - `INDEX`: The index number for the CustomerOrder displayed in the list.
-
-**Example:**
-```bash
-unmarkCustomerOrder 1
-```
-![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
-
-### **Unmark Supply Order Command**
-Unmark the supply order status as pending.
-
-```bash
-unmarkSupplyOrder INDEX
-```
-- **Parameters:**
-    - `INDEX`: The index for theSupplyOrder displayed in the list.
-
-**Example:**
-```bash
-umarkSupplyOrder 1
-```
-![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ### ***Remark Command***
 Edits the remark of the person identified by the index number used in the last person listing. 
@@ -481,6 +655,22 @@ The View Ingredient Catalogue Command provides a detailed list of all ingredient
 
 For instance, typing viewIngredientCatalogue displays the full catalogue for ingredient, enabling the bakery to verify all available ingredients in the catalogue.
 
+### **View Inventory Command**
+Displays the current list of ingredients available in the bakery’s inventory. It is in the format of "ID, Name, Units".
+
+```bash
+viewInventory
+```
+
+**Example:**
+```bash
+viewInventory
+```
+![viewInventory.png](images%2FviewInventory.png)
+The View Inventory Command provides a detailed overview of the current inventory, including the stock levels of each ingredient. This command helps bakery owners manage stock efficiently, avoiding shortages or overstocking.
+
+For instance, typing viewInventory displays the inventory with the ingredient names, IDs, and available quantities, offering a clear snapshot of the bakery's stock levels.
+
 ### **View PastryCatalogue Command**
 Displays the current list of pastries available in the bakery’s pastry catalogue.
 
@@ -497,21 +687,35 @@ The View Pastry Catalogue Command provides a comprehensive view of all pastries 
 
 For example, entering viewPastryCatalogue shows the complete list of pastries, ensuring that bakery owners are aware of the available pastries.
 
-### **View Inventory Command**
-Displays the current list of ingredients available in the bakery’s inventory. It is in the format of "ID, Name, Units".
+### **Unmark Customer Order Command**
+Unmark the customer order status as pending.
 
 ```bash
-viewInventory
+unmarkCustomerOrder INDEX
 ```
+- **Parameters:**
+  - `INDEX`: The index number for the CustomerOrder displayed in the list.
 
 **Example:**
 ```bash
-viewInventory
+unmarkCustomerOrder 1
 ```
-![viewInventory.png](images%2FviewInventory.png)
-The View Inventory Command provides a detailed overview of the current inventory, including the stock levels of each ingredient. This command helps bakery owners manage stock efficiently, avoiding shortages or overstocking.
+![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
 
-For instance, typing viewInventory displays the inventory with the ingredient names, IDs, and available quantities, offering a clear snapshot of the bakery's stock levels.
+### **Unmark Supply Order Command**
+Unmark the supply order status as pending.
+
+```bash
+unmarkSupplyOrder INDEX
+```
+- **Parameters:**
+  - `INDEX`: The index for theSupplyOrder displayed in the list.
+
+**Example:**
+```bash
+umarkSupplyOrder 1
+```
+![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ----------------------------------------------------------------------------------------------------------------------
 ## Key New Features Summary
