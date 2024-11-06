@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 
 import java.util.Arrays;
 
@@ -26,13 +27,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (trimmedArgs.startsWith("/h")) {
-            if (trimmedArgs.length() <= 3) {
+        if (trimmedArgs.startsWith(PREFIX_TELEHANDLE.getPrefix())) {
+            String handleArgs = trimmedArgs.substring(PREFIX_TELEHANDLE.getPrefix().length()).trim();
+            if (handleArgs.isEmpty()) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-
-            String handleArgs = trimmedArgs.substring(3).trim();
             String[] handleKeywords = handleArgs.split("\\s+");
             return new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays.asList(handleKeywords)));
         }
@@ -40,6 +40,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] nameKeywords = trimmedArgs.split("\\s+");
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
-
 }
