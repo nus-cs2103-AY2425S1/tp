@@ -504,12 +504,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing a person
 
+Success action: When a person is successfully viewed, the details of the viewed contact is shown in the person list. Status message shows that that contact is viewed. 
+Timestamp in the status bar is updated. The weddings involved of the person will be reflected in the wedding list on the right.
+
 1. Viewing a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `view 1` <br>
-       Expected: First contact from the list is viewed. Details of the viewed contact shown in the person list. Status message shows that the first contact is viewed. Timestamp in the status bar is updated.
+       Expected: First contact from the list is viewed. Success action will be carried out for that contact.
 
     1. Test case: `view 0`<br>
        Expected: No person is viewed. Error details shown in the status message. 
@@ -521,9 +524,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to point #1(iii).
 
     1. Test case: `view Alice Tan` <br>
-       Expected (Unique Alice Tan): The contact of `Alice Tan` will be shown. Status message shows that Alice Tan's contact is viewed.<br>
+       Expected (Unique Alice Tan): The contact of `Alice Tan` is viewed. Success action will be carried out for that contact.<br>
        Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. Status message shows number of contacts shown.
-       Message will be shown to prompt the user to specify which Alice Tan they want to view.<br>
+       Message will be shown to prompt the user to specify which `Alice Tan` they want to view.<br>
        Expected (No Alice Tan): No person is viewed. Error details is shown in the status message.
 
 1. Viewing a person while a filtered list of contacts is shown
@@ -642,6 +645,8 @@ The persons involved in the viewed wedding will be shown in the person list. Tim
 
 Success action: When a wedding is successfully deleted, the details of the deleted wedding is shown in the status message. The client of the wedding will have their wedding status reset.
 Persons who are involved in the wedding will also be unassigned. Timestamp in the status bar is updated.
+
+- To verify this: view the contact itself, which will show the weddings the person is involved in. The deleted wedding should not be included.
 
 1. Deleting a wedding while all weddings are being shown
 
