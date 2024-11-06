@@ -209,8 +209,8 @@ public class ModelManager implements Model {
     /**
      * Checks if the appointment can be updated with the provided appointment.
      *
-     * @param current The person to check for an appointment.
-     * @param updated The person to check for an appointment.
+     * @param current The current appointment.
+     * @param updated The updated appointment.
      * @return true if the appointment can be updated.
      */
     // add override
