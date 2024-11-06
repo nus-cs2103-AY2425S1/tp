@@ -104,8 +104,8 @@ A tag can be added with or without a value. For example, `t\client` and `t\insur
 **Tag constraints:**<br>
 * Only alphanumeric characters (alphabets and numbers) are supported in tags<br>
 * Multiple of the same tags are not supported for a single contact<br>
-* Negative numbers are not supported in tag names<br>
-* Operations such as `+, -, *, /` are also not supported<br>
+* Negative numbers are not supported in tag values<br>
+* Operations such as `+, -, *, /` are also not supported in tag values<br>
 </box>
 
 Command examples:
