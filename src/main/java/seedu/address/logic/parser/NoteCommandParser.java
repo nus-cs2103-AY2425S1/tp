@@ -3,11 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.ParserUtil.parseNote;
 
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Note;
 
 /**
  * Parses input arguments and creates a new {@code NoteCommand} object
@@ -33,6 +33,6 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         Name studentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new NoteCommand(studentName, new Note(note));
+        return new NoteCommand(studentName, parseNote(note));
     }
 }

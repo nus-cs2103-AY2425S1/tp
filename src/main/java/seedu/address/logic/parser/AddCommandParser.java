@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static seedu.address.logic.parser.ParserUtil.parseNote;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -54,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT)
                 .get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Note note = new Note("");
+        Note note = parseNote("");
         TaskList taskList = new TaskList();
 
         //Parse optional arguments
