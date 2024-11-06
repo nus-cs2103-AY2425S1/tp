@@ -187,6 +187,7 @@ Examples:
 
 Deletes the specified contact from the address book.
 
+#### Delete by index
 Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
@@ -197,6 +198,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
   ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
+
+#### Delete by name
+Format `delete NAME` or `delete [n/NAME]`
+
+* Delete the contact whose name matches the specified `NAME`.
+* The `NAME` is non-case-sensitive.
+
+Examples:
+* Both `delete Amy Gould` and `delete n/Amy Gould` delete the user whose name is `Amy Gould` (non-case-sensitive) in the address book.
+  ![result for 'delete Amy Gould'](images/deleteAmyGouldResult.png)
 
 ### Clearing all entries : `clear`
 
