@@ -179,6 +179,17 @@ public class ModelManager implements Model {
                 .orElse(null);
     }
 
+    /**
+     * Returns true if there exists a listing of the same name as {@code name} in Listings.
+     */
+    @Override
+    public boolean hasListingOfName(Name name) {
+        requireNonNull(name);
+        return this.getFilteredListingList()
+                .stream()
+                .anyMatch(listing -> listing.getName().equals(name));
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -209,6 +220,17 @@ public class ModelManager implements Model {
                     .orElse(null);
     }
 
+    /**
+     * Returns true if the person with the same name as {@code name} exists in the address book.
+     */
+    @Override
+    public boolean hasPersonOfName(Name name) {
+        requireNonNull(name);
+        return this.getFilteredPersonList()
+                .stream()
+                .anyMatch(person -> person.getName().equals(name));
+    }
+
     //=========== Filtered Listing List Accessors =============================================================
 
     /**
@@ -226,16 +248,6 @@ public class ModelManager implements Model {
         filteredListings.setPredicate(predicate);
     }
 
-    /*@Override
-    public Person getListingByName(Name name) {
-        requireNonNull(name);
-        return this.getFilteredPersonList()
-                .stream()
-                .filter(person -> person.getName().equals(name))
-                .findFirst()
-                .orElse(null);
-    }*/
-
     /**
      * Checks if there are any listings associated with the specified {@code seller}.
      *
@@ -248,6 +260,20 @@ public class ModelManager implements Model {
         requireNonNull(seller);
         return listings.getListingList().stream()
                 .anyMatch(listing -> listing.getSeller().equals(seller));
+    }
+
+    /**
+     * Checks if there are any listings associated with the specified {@code buyer}.
+     *
+     * @param buyer The seller whose listings are to be checked.
+     * @return {@code true} if there is at least one listing associated with the buyer;
+     *         {@code false} otherwise.
+     */
+    @Override
+    public boolean hasListingsForBuyer(Person buyer) {
+        requireNonNull(buyer);
+        return listings.getListingList().stream()
+                .anyMatch(listing -> listing.getBuyers().contains(buyer));
     }
 
     @Override

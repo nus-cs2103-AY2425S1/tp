@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,26 +16,20 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyListings;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ModelStub;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
-import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AppointmentCommandTest {
 
-    private static final String VALID_DATE = "20/12/2024";
+    private static final String VALID_DATE = "20-12-24";
     private static final String VALID_FROM = "0800";
     private static final String VALID_TO = "1000";
 
@@ -51,16 +48,16 @@ public class AppointmentCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         // Test null appointment
-        assertThrows(NullPointerException.class, () -> new AppointmentCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> new AppointmentCommand(ALICE.getName(), null));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         // Arrange
         ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().buildBuyer());
-        Index invalidIndex = Index.fromZeroBased(1);
+        Name invalidName = ALICE.getName();
 
-        AppointmentCommand command = new AppointmentCommand(invalidIndex, validAppointment);
+        AppointmentCommand command = new AppointmentCommand(invalidName, validAppointment);
 
         // Act & Assert
         assertThrows(CommandException.class, () -> command.execute(modelStub),
@@ -68,12 +65,30 @@ public class AppointmentCommandTest {
     }
 
     @Test
-    public void execute_validIndex_addAppointmentSuccess() throws Exception {
+    public void execute_validSellerIndex_addAppointmentSuccess() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
+        Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AppointmentCommand command = new AppointmentCommand(ALICE.getName(), validAppointment);
+
+        // Act
+        CommandResult result = command.execute(modelStub);
+
+        // Assert
+        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
+                .buildBuyer();
+        assertEquals(String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_validBuyerIndex_addAppointmentSuccess() throws Exception {
+        // Arrange
+        Person personToEdit = DANIEL;
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
+
+        AppointmentCommand command = new AppointmentCommand(DANIEL.getName(), validAppointment);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -88,10 +103,10 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_updatesPersonWithAppointment() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
+        Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AppointmentCommand command = new AppointmentCommand(ALICE.getName(), validAppointment);
 
         // Act
         command.execute(modelStub);
@@ -101,145 +116,29 @@ public class AppointmentCommandTest {
                 .buildBuyer();
         assertEquals(editedPerson.getAppointment(), validAppointment);
     }
+    @Test
+    public void equals() {
+        AppointmentCommand firstAppointmentCommand =
+                new AppointmentCommand(ALICE.getName(), validAppointment);
+        AppointmentCommand secondAppointmentCommand =
+                new AppointmentCommand(BENSON.getName(), validAppointment);
 
-    /**
-     * A default model stub that have all of the methods failing.
-     * Possible to abstract this
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
+        // same object -> returns true
+        assertTrue(firstAppointmentCommand.equals(firstAppointmentCommand));
 
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
+        // same values -> returns true
+        AppointmentCommand firstAppointmentCommandCopy =
+                new AppointmentCommand(ALICE.getName(), validAppointment);
+        assertTrue(firstAppointmentCommand.equals(firstAppointmentCommandCopy));
 
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
+        // different types -> returns false
+        assertFalse(firstAppointmentCommand.equals(1));
 
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
+        // null -> returns false
+        assertFalse(firstAppointmentCommand.equals(null));
 
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getListingsFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setListingsFilePath(Path listingsFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setListings(ReadOnlyListings listings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyListings getListings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-        @Override
-        public Person getPersonByName(Name name) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasListing(Listing listing) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteListing(Listing listing) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addListing(Listing listing) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setListing(Listing target, Listing editedListing) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Listing getListingByName(Name name) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasListingsForSeller(Person seller) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Listing> getFilteredListingList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredListingList(Predicate<Listing> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
+        // different person -> returns false
+        assertFalse(firstAppointmentCommand.equals(secondAppointmentCommand));
     }
 
     /**
@@ -265,6 +164,19 @@ public class AppointmentCommandTest {
                 throw new AssertionError("Target person not found in list.");
             }
             persons.set(index, editedPerson);
+        }
+
+        @Override
+        public boolean hasPersonOfName(Name name) {
+            return this.persons.stream()
+                    .anyMatch(person -> person.getName().equals(name));
+        }
+
+        @Override
+        public Person getPersonByName(Name name) {
+            return this.persons.stream()
+                    .filter(person -> person.getName().equals(name))
+                    .findFirst().orElse(null);
         }
 
         @Override

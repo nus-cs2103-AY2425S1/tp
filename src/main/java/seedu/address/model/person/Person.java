@@ -9,9 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,24 +23,38 @@ public abstract class Person {
     private final Email email;
 
     // Data fields
-    private final Property property;
+    private String remark = "No remarks yet.";
     private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
-        requireAllNonNull(name, phone, appointment, property);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Appointment appointment) {
+        requireAllNonNull(name, phone, appointment);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.appointment = appointment;
-        this.property = property;
         this.tags.addAll(tags);
-
     }
 
+    /**
+     * Every field must be present and not null, excluding remark.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
+                  Appointment appointment, String remark) {
+        requireAllNonNull(name, phone, appointment);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.appointment = appointment;
+        this.tags.addAll(tags);
+        this.remark = remark;
+    }
+
+    /*
     /**
      * Constructs a {@code Person} object with the specified name.
      * Initializes the phone number as {@code null}, sets the property to a default empty value,
@@ -51,13 +62,14 @@ public abstract class Person {
      *
      * @param name The {@code Name} of the person. Must not be {@code null}.
      */
+    /*
     public Person(Name name) {
         this.name = name;
         this.phone = null;
         this.email = null;
         this.property = new Property("");
         this.appointment = new Appointment(new Date(""), new From(""), new To(""));
-    }
+    }*/
 
     public Name getName() {
         return name;
@@ -71,16 +83,19 @@ public abstract class Person {
         return email;
     }
 
-    public Property getProperty() {
-        return property;
-    }
-
     public Appointment getAppointment() {
         return appointment;
     }
 
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+    public void updateRemark(String newRemark) {
+        remark = newRemark;
     }
 
     /**
@@ -98,6 +113,10 @@ public abstract class Person {
 
         // Case-insensitive name comparison
         return otherPerson.getName().fullName.equalsIgnoreCase(this.getName().fullName);
+    }
+
+    public boolean hasAppointment() {
+        return !appointment.equals(Appointment.EMPTY_APPOINTMENT);
     }
 
     /**
@@ -126,7 +145,7 @@ public abstract class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, appointment, property, tags);
+        return Objects.hash(name, phone, email, appointment, tags, remark);
     }
 
     @Override
@@ -137,9 +156,9 @@ public abstract class Person {
                 .add("email", email)
                 .add("tags", tags)
                 .add("appointment", appointment)
-                .add("property", property)
+                .add("remark", remark)
                 .toString();
     }
 
-    public abstract String getRole();
+    public abstract Role getRole();
 }

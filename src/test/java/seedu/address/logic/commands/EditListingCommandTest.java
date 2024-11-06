@@ -1,239 +1,168 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showListingWithName;
+import static seedu.address.testutil.TypicalListings.PASIR_RIS;
+import static seedu.address.testutil.TypicalListings.SENGKANG;
+import static seedu.address.testutil.TypicalListings.SIMEI;
+import static seedu.address.testutil.TypicalListings.TAMPINES;
+import static seedu.address.testutil.TypicalListings.getTypicalListings;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
+import seedu.address.model.Listings;
 import seedu.address.model.Model;
-import seedu.address.model.listing.Address;
-import seedu.address.model.listing.Area;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
+import seedu.address.testutil.EditListingDescriptorBuilder;
+import seedu.address.testutil.ListingBuilder;
 
-/**
- * Edits the details of an existing listing in the system.
- */
-public class EditListingCommand extends Command {
+public class EditListingCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
 
-    public static final String COMMAND_WORD = "editListing";
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Listing editedListing = new ListingBuilder(SIMEI).withBuyers(SENGKANG.getBuyers()
+                .toArray(new Person[0])).build();
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
+        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), descriptor);
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the listing identified "
-            + "by the listing name. Buyers cannot be edited using this command. "
-            + "Use addBuyersToListing or removeBuyersFromListing to manage buyers.\n"
-            + "Parameters: n/LISTING_NAME "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PRICE + "PRICE] "
-            + "[" + PREFIX_AREA + "AREA] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_REGION + "REGION]...\n"
-            + "Example: " + COMMAND_WORD + " n/ListingName "
-            + PREFIX_PRICE + "4500 "
-            + PREFIX_AREA + "1200";
+        String expectedMessage = String.format(EditListingCommand.MESSAGE_EDIT_LISTING_SUCCESS,
+                Messages.format(editedListing));
 
-    public static final String MESSAGE_EDIT_LISTING_SUCCESS = "Successfully edited listing: %1$s";
-    public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in the system.";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_INVALID_LISTING_NAME = "The specified listing name is invalid.";
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new Listings(model.getListings()));
+        expectedModel.setListing(model.getListingByName(SENGKANG.getName()), editedListing);
 
-    private final Name listingName;
-    private final EditListingDescriptor editListingDescriptor;
-
-    /**
-     * @param listingName of the listing in the filtered listing list to edit
-     * @param editListingDescriptor details to edit the listing with
-     */
-    public EditListingCommand(Name listingName, EditListingDescriptor editListingDescriptor) {
-        requireNonNull(listingName);
-        requireNonNull(editListingDescriptor);
-
-        this.listingName = listingName;
-        this.editListingDescriptor = new EditListingDescriptor(editListingDescriptor);
+        assertCommandSuccess(editListingCommand, model, expectedMessage, expectedModel);
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Listing> lastShownList = model.getFilteredListingList();
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        Listing editedListing = new ListingBuilder(SENGKANG).withArea(50).withSeller(ALICE).build();
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
+        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), descriptor);
 
-        Listing listingToEdit = lastShownList.stream()
-                .filter(listing -> listing.getName().equals(listingName))
-                .findFirst()
-                .orElse(null);
+        String expectedMessage = String.format(EditListingCommand.MESSAGE_EDIT_LISTING_SUCCESS,
+                Messages.format(editedListing));
 
-        if (listingToEdit == null) {
-            throw new CommandException(MESSAGE_INVALID_LISTING_NAME);
-        }
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new Listings(model.getListings()));
+        expectedModel.setListing(model.getListingByName(SENGKANG.getName()), editedListing);
 
-        Optional<Person> seller = editListingDescriptor.getSellerName()
-                .flatMap(name -> Optional.ofNullable(model.getPersonByName(name)));
-        if (seller.isPresent()) {
-            if (!(seller.get() instanceof Seller)) {
-                throw new CommandException("The specified person is not a seller.");
-            }
-        } else if (editListingDescriptor.getSellerName().isPresent()) {
-            throw new CommandException("Seller not found in the system.");
-        }
-
-
-        Listing editedListing = createEditedListing(
-                listingToEdit,
-                editListingDescriptor,
-                seller.orElse(listingToEdit.getSeller())
-        );
-
-        if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
-            throw new CommandException(MESSAGE_DUPLICATE_LISTING);
-        }
-
-        model.setListing(listingToEdit, editedListing);
-        return new CommandResult(String.format(MESSAGE_EDIT_LISTING_SUCCESS, editedListing));
+        assertCommandSuccess(editListingCommand, model, expectedMessage, expectedModel);
     }
 
-    /**
-     * Creates and returns a {@code Listing} with the details of {@code listingToEdit}
-     * edited with {@code editListingDescriptor}.
-     */
-    private static Listing createEditedListing(Listing listingToEdit, EditListingDescriptor editListingDescriptor,
-                                               Person seller) {
-        assert listingToEdit != null;
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_success() {
+        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(),
+                new EditListingDescriptor());
+        Listing editedListing = SENGKANG;
 
-        Name updatedName = editListingDescriptor.getName().orElse(listingToEdit.getName());
-        Price updatedPrice = editListingDescriptor.getPrice().orElse(listingToEdit.getPrice());
-        Area updatedArea = editListingDescriptor.getArea().orElse(listingToEdit.getArea());
-        Address updatedAddress = editListingDescriptor.getAddress().orElse(listingToEdit.getAddress());
-        Region updatedRegion = editListingDescriptor.getRegion().orElse(listingToEdit.getRegion());
-        Person updatedSeller = (seller != null) ? seller : listingToEdit.getSeller();
+        String expectedMessage = String.format(EditListingCommand.MESSAGE_EDIT_LISTING_SUCCESS,
+                Messages.format(editedListing));
 
-        return new Listing(updatedName, updatedAddress, updatedPrice, updatedArea, updatedRegion,
-                updatedSeller, listingToEdit.getBuyers());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new Listings(model.getListings()));
+
+        assertCommandSuccess(editListingCommand, model, expectedMessage, expectedModel);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    @Test
+    public void execute_filteredList_success() {
+        showListingWithName(model, PASIR_RIS.getName());
+        Listing editedListing = new ListingBuilder(SIMEI).withBuyers(PASIR_RIS.getBuyers()
+                .toArray(new Person[0])).build();
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
+        EditListingCommand editListingCommand = new EditListingCommand(PASIR_RIS.getName(), descriptor);
 
-        if (!(other instanceof EditListingCommand otherEditCommand)) {
-            return false;
-        }
+        String expectedMessage = String.format(EditListingCommand.MESSAGE_EDIT_LISTING_SUCCESS,
+                Messages.format(editedListing));
 
-        return listingName.equals(otherEditCommand.listingName)
-                && editListingDescriptor.equals(otherEditCommand.editListingDescriptor);
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                new Listings(model.getListings()));
+        showListingWithName(expectedModel, PASIR_RIS.getName());
+        expectedModel.setListing(PASIR_RIS, editedListing);
+
+        assertCommandSuccess(editListingCommand, model, expectedMessage, expectedModel);
     }
 
-    /**
-     * Stores the details to edit the listing with. Each non-empty field value will replace the
-     * corresponding field value of the listing.
-     */
-    public static class EditListingDescriptor {
-        private Name name;
-        private Price price;
-        private Area area;
-        private Address address;
-        private Region region;
-        private Name sellerName;
+    @Test
+    public void execute_duplicateListingFilteredList_failure() {
+        Listing editedListing = PASIR_RIS;
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
+        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), descriptor);
 
-        public EditListingDescriptor() {}
+        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_DUPLICATE_LISTING);
+    }
 
-        /**
-         * Copy constructor.
-         * Creates an {@code EditListingDescriptor} by copying the details from another descriptor.
-         * Each field is copied from the provided {@code toCopy} descriptor.
-         *
-         * @param toCopy the {@code EditListingDescriptor} to copy from.
-         */
-        public EditListingDescriptor(EditListingDescriptor toCopy) {
-            setName(toCopy.name);
-            setPrice(toCopy.price);
-            setArea(toCopy.area);
-            setAddress(toCopy.address);
-            setRegion(toCopy.region);
-            setSellerName(toCopy.sellerName);
-        }
+    @Test
+    public void execute_invalidListingUnfilteredList_failure() {
+        Listing notInListings = SIMEI;
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder().build();
 
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, price, area, address, region);
-        }
+        EditListingCommand editListingCommand = new EditListingCommand(notInListings.getName(), descriptor);
+        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_INVALID_LISTING_NAME);
+    }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
+    @Test
+    public void execute_invalidListingFilteredList_failure() {
+        showListingWithName(model, PASIR_RIS.getName());
+        Listing notInList = TAMPINES;
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder().build();
+        EditListingCommand editListingCommand = new EditListingCommand(notInList.getName(), descriptor);
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
+        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_INVALID_LISTING_NAME);
+    }
 
-        public void setPrice(Price price) {
-            this.price = price;
-        }
+    @Test
+    public void equals() {
+        EditListingDescriptor editListingDescriptor = new EditListingDescriptorBuilder(PASIR_RIS)
+                .withName(SIMEI.getName()).build();
+        final EditListingCommand standardCommand = new EditListingCommand(PASIR_RIS.getName(), editListingDescriptor);
 
-        public Optional<Price> getPrice() {
-            return Optional.ofNullable(price);
-        }
+        // same values -> returns true
+        EditListingDescriptor copyDescriptor = new EditListingDescriptorBuilder(PASIR_RIS)
+                .withName(SIMEI.getName()).build();
+        EditListingCommand commandWithSameValues = new EditListingCommand(PASIR_RIS.getName(), copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
 
-        public void setArea(Area area) {
-            this.area = area;
-        }
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
 
-        public Optional<Area> getArea() {
-            return Optional.ofNullable(area);
-        }
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
 
-        public void setAddress(Address address) {
-            this.address = address;
-        }
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
+        // different name -> returns false
+        EditListingCommand differentName = new EditListingCommand(TAMPINES.getName(), editListingDescriptor);
+        assertFalse(standardCommand.equals(differentName));
 
-        public void setRegion(Region region) {
-            this.region = region;
-        }
+        // different descriptor -> returns false
+        EditListingDescriptor otherDescriptor = new EditListingDescriptorBuilder(TAMPINES)
+                .withName(SIMEI.getName()).build();
+        EditListingCommand differentDescriptor = new EditListingCommand(PASIR_RIS.getName(), otherDescriptor);
+        assertFalse(standardCommand.equals(differentDescriptor));
+    }
 
-        public Optional<Region> getRegion() {
-            return Optional.ofNullable(region);
-        }
-        public void setSellerName(Name sellerName) {
-            this.sellerName = sellerName;
-        }
-
-        public Optional<Name> getSellerName() {
-            return Optional.ofNullable(sellerName);
-        }
-
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            if (!(other instanceof EditListingDescriptor)) {
-                return false;
-            }
-
-            EditListingDescriptor otherDescriptor = (EditListingDescriptor) other;
-            return Objects.equals(name, otherDescriptor.name)
-                    && Objects.equals(price, otherDescriptor.price)
-                    && Objects.equals(area, otherDescriptor.area)
-                    && Objects.equals(address, otherDescriptor.address)
-                    && Objects.equals(region, otherDescriptor.region)
-                    && Objects.equals(sellerName, otherDescriptor.sellerName);
-        }
+    @Test
+    public void toStringMethod() {
+        EditListingDescriptor editListingDescriptor = new EditListingDescriptor();
+        EditListingCommand editListingCommand = new EditListingCommand(PASIR_RIS.getName(), editListingDescriptor);
+        String expected = EditListingCommand.class.getCanonicalName() + "{listingName=" + PASIR_RIS.getName()
+                + ", editListingDescriptor=" + editListingDescriptor + "}";
+        assertEquals(expected, editListingCommand.toString());
     }
 }

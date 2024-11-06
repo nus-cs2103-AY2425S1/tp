@@ -10,6 +10,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
@@ -127,6 +130,54 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            return new Date(trimmedDate);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code From} start time.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static From parseFrom(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        try {
+            return new From(trimmedTime);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code To} end time.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static To parseTo(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        try {
+            return new To(trimmedTime);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -137,6 +188,8 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+
 
     /**
      * Parses {@code String price} into a {@code Price}.

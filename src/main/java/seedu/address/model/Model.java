@@ -106,6 +106,11 @@ public interface Model {
      */
     Person getPersonByName(Name name);
 
+    /**
+     * Returns true if the person with the same name as {@code name} exists in the address book.
+     */
+    boolean hasPersonOfName(Name name);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -139,10 +144,20 @@ public interface Model {
      * Returns the listing with the same name as {@code name} exists in Listings.
      */
     Listing getListingByName(Name name);
+
+    /**
+     * Returns true if there exists a listing of the same name as {@code name} in Listings.
+     */
+    boolean hasListingOfName(Name name);
+
     /**
      * Checks if the seller has a listing associated with it
      */
     boolean hasListingsForSeller(Person seller);
+    /**
+     * Checks if the buyer has a listing associated with it
+     */
+    boolean hasListingsForBuyer(Person buyer);
 
 
     // Returns the listing with the same name as {@code listing} exists in the address book.

@@ -9,9 +9,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -27,7 +24,7 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the appointment corresponding to the client's name.\n"
             + "Parameters: CLIENT_NAME (case-insensitive)\n"
-            + "Example: " + COMMAND_WORD + " n/Tan Wen Xuan";
+            + "Example: " + COMMAND_WORD + " Tan Wen Xuan";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Successfully deleted appointment from %1$s";
 
@@ -73,14 +70,12 @@ public class DeleteAppointmentCommand extends Command {
             Buyer buyer = (Buyer) personToDeleteAppointment;
             personWithoutAppointment = new Buyer(buyer.getName(), buyer.getPhone(),
                     buyer.getEmail(), buyer.getTags(),
-                    new Appointment(new Date(""), new From(""), new To("")),
-                    buyer.getProperty());
+                    Appointment.EMPTY_APPOINTMENT);
         } else { // Must be a Seller
             Seller seller = (Seller) personToDeleteAppointment;
             personWithoutAppointment = new Seller(seller.getName(), seller.getPhone(),
                     seller.getEmail(), seller.getTags(),
-                    new Appointment(new Date(""), new From(""), new To("")),
-                    seller.getProperty());
+                    Appointment.EMPTY_APPOINTMENT);
         }
         model.setPerson(personToDeleteAppointment, personWithoutAppointment);
 

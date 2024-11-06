@@ -1,6 +1,7 @@
 package seedu.address.model.listing;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class Listing {
      * @param area     Area of the listing in square meters.
      * @param region   Region of the listing, represented by a {@code Region} enum.
      * @param seller   Seller of the listing, represented by a {@code Person}.
+     * @param buyers   Buyers of the listing, represented by a {@code Person}.
      */
     public Listing(Name name, Address address, Price price,
                    Area area, Region region, Person seller, Set<Person> buyers) {
@@ -46,7 +48,25 @@ public class Listing {
         this.region = region;
         this.address = address;
         this.seller = seller;
-        this.buyers = buyers;
+        this.buyers = new HashSet<>(buyers);
+    }
+
+    /**
+     * Copy constructor for creating a new {@code Listing} that is a copy of another {@code Listing}.
+     *
+     * @param other The {@code Listing} to copy.
+     */
+    public Listing(Listing other) {
+        Objects.requireNonNull(other);
+
+        this.name = other.name;
+        this.address = other.address;
+        this.price = other.price;
+        this.area = other.area;
+        this.region = other.region;
+        this.seller = other.seller;
+        this.buyers = new HashSet<>();
+        this.buyers.addAll(other.buyers);
     }
 
     public Name getName() {
@@ -78,6 +98,14 @@ public class Listing {
     }
 
     /**
+     * Removes a buyer from this listing's buyers.
+     * @param buyer The buyer to be removed.
+     */
+    public void removeBuyer(Person buyer) {
+        buyers.remove(buyer);
+    }
+
+    /**
      * Checks if the given listing is the same as the current listing.
      * Two listings are considered the same if they have the same address and seller.
      *
@@ -88,11 +116,10 @@ public class Listing {
         if (this == otherListing) {
             return true;
         }
-
         return otherListing != null
-                && otherListing.name == this.name
-                && otherListing.address == this.address
-                && otherListing.seller == this.seller;
+                && otherListing.name.equals(this.name)
+                && otherListing.address.equals(this.address)
+                && otherListing.seller.equals(this.seller);
     }
 
     @Override
@@ -123,7 +150,6 @@ public class Listing {
                 .add("area", area)
                 .add("region", region)
                 .add("seller", seller)
-                //.add("buyers", )
                 .toString();
     }
 }

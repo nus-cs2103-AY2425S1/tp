@@ -9,22 +9,28 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddBuyerProfile;
+import seedu.address.logic.commands.AddBuyersToListingCommand;
 import seedu.address.logic.commands.AddListingCommand;
-import seedu.address.logic.commands.AddPropertyCommand;
 import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.commands.ChatWindowCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearListingCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
-import seedu.address.logic.commands.DeletePropertyCommand;
+import seedu.address.logic.commands.DeleteListingCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditListingCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindListingCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MoreInfoCommand;
+import seedu.address.logic.commands.RemoveBuyersFromListingCommand;
 import seedu.address.logic.commands.ShowListingsCommand;
+import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,12 +96,6 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case DeletePropertyCommand.COMMAND_WORD:
-            return new DeletePropertyCommandParser().parse(arguments);
-
-        case AddPropertyCommand.COMMAND_WORD:
-            return new AddPropertyCommandParser().parse(arguments);
-
         case AppointmentCommand.COMMAND_WORD:
             return new AppointmentCommandParser().parse(arguments);
 
@@ -107,6 +107,12 @@ public class AddressBookParser {
 
         case ChatWindowCommand.COMMAND_WORD:
             return new ChatWindowCommand();
+
+        case MoreInfoCommand.COMMAND_WORD:
+            return new MoreInfoCommandParser().parse(arguments);
+
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
@@ -121,13 +127,12 @@ public class AddressBookParser {
      */
     private boolean isListingCommand(String commandWord) {
         return commandWord.equals(AddListingCommand.COMMAND_WORD)
-                || commandWord.equals("editListing")
-                || commandWord.equals("addBuyersToListing")
-                || commandWord.equals("deleteListing")
-                || commandWord.equals("clearListings")
-                || commandWord.equals("findListings")
-                || commandWord.equals("listListings")
-                || commandWord.equals("removeBuyersFromListing");
+                || commandWord.equals(EditListingCommand.COMMAND_WORD)
+                || commandWord.equals(AddBuyersToListingCommand.COMMAND_WORD)
+                || commandWord.equals(DeleteListingCommand.COMMAND_WORD)
+                || commandWord.equals(ClearListingCommand.COMMAND_WORD)
+                || commandWord.equals(FindListingCommand.COMMAND_WORD)
+                || commandWord.equals(RemoveBuyersFromListingCommand.COMMAND_WORD);
     }
 
 }

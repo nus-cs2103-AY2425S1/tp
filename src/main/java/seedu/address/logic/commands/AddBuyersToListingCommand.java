@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class AddBuyersToListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "addBuyersToListing";
+    public static final String COMMAND_WORD = "addlistingbuyers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds buyers to the listing identified by its name. "
             + "Parameters: LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES]...\n"
@@ -27,7 +26,8 @@ public class AddBuyersToListingCommand extends Command {
     public static final String MESSAGE_ADD_BUYERS_SUCCESS = "Buyers added to listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
     public static final String MESSAGE_DUPLICATE_BUYERS = "Some buyers are already associated with this listing.";
-
+    public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";
+    public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person %1$s is not a buyer.";
     private final Name listingName;
     private final Set<Name> buyersToAdd;
 
@@ -49,29 +49,31 @@ public class AddBuyersToListingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Listing listingToEdit = model.getListingByName(listingName);
-        if (listingToEdit == null) {
+        if (!model.hasListingOfName(listingName)) {
             throw new CommandException(MESSAGE_LISTING_NOT_FOUND);
         }
+
+        Listing listingToEdit = model.getListingByName(listingName);
 
         Set<Person> existingBuyers = new HashSet<>(listingToEdit.getBuyers());
         Set<Person> newBuyers = new HashSet<>();
 
         for (Name buyerName : buyersToAdd) {
-            Optional<Person> buyer = Optional.ofNullable(model.getPersonByName(buyerName));
 
-            if (buyer.isEmpty()) {
-                throw new CommandException("The specified buyer " + buyerName + " does not exist in the client list.");
+            if (!model.hasPersonOfName(buyerName)) {
+                throw new CommandException(String.format(MESSAGE_BUYER_NOT_FOUND, buyerName));
             }
 
+            Person buyer = model.getPersonByName(buyerName);
+
             // Check if the person is actually an instance of Buyer
-            if (!(buyer.get() instanceof Buyer)) {
-                throw new CommandException("The specified person " + buyerName + " is not a buyer.");
+            if (!(buyer instanceof Buyer)) {
+                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER, buyerName));
             }
 
             // Add the buyer to newBuyers set only if not already in existingBuyers
-            if (!existingBuyers.contains(buyer.get())) {
-                newBuyers.add(buyer.get());
+            if (!existingBuyers.contains(buyer)) {
+                newBuyers.add(buyer);
             }
         }
 
@@ -92,7 +94,7 @@ public class AddBuyersToListingCommand extends Command {
         );
 
         model.setListing(listingToEdit, updatedListing);
-        return new CommandResult(String.format(MESSAGE_ADD_BUYERS_SUCCESS, updatedListing));
+        return new CommandResult(String.format(MESSAGE_ADD_BUYERS_SUCCESS, listingName));
     }
 
     @Override

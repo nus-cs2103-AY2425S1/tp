@@ -14,12 +14,12 @@ import seedu.address.model.person.Name;
  */
 public class DeleteListingCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteListing";
+    public static final String COMMAND_WORD = "deletelisting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the listing specified by its name.\n"
             + "Parameters: LISTING_NAME\n"
-            + "Example: " + COMMAND_WORD + " n/Warton House";
+            + "Example: " + COMMAND_WORD + " Warton House";
 
     public static final String MESSAGE_DELETE_LISTING_SUCCESS = "Successfully deleted listing: %1$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "This listing does not exist in EZSTATE";

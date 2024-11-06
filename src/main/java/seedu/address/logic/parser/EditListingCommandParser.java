@@ -15,36 +15,33 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new EditListingCommand object
+ * Parses input arguments and creates a new EditListingCommand object.
  */
 public class EditListingCommandParser implements Parser<EditListingCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditListingCommand
      * and returns an EditListingCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public EditListingCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION,
-                        PREFIX_SELLER);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION, PREFIX_SELLER);
 
-        Name listingName;
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
+                PREFIX_REGION, PREFIX_SELLER);
 
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
-        }
+        Name currentListingName;
 
         try {
-            listingName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            currentListingName = ParserUtil.parseName(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditListingCommand.MESSAGE_USAGE), pe);
         }
 
         EditListingDescriptor editListingDescriptor = new EditListingDescriptor();
-
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editListingDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -69,6 +66,6 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             throw new ParseException(EditListingCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditListingCommand(listingName, editListingDescriptor);
+        return new EditListingCommand(currentListingName, editListingDescriptor);
     }
 }

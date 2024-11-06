@@ -8,7 +8,6 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_PROPERTY = new Prefix("prop/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_FROM = new Prefix("fr/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
@@ -20,8 +19,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_REGION = new Prefix("region/");
     public static final Prefix PREFIX_SELLER = new Prefix("seller/");
     public static final Prefix PREFIX_BUYER = new Prefix("buyer/");
-    /*
-        public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
-        public static final Prefix PREFIX_REMARK = new Prefix("r/");
-    */
+
 }

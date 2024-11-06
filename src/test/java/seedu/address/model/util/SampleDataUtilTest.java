@@ -8,6 +8,9 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyListings;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.listing.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -59,6 +62,44 @@ class SampleDataUtilTest {
 
         // Check the size of the Tag set
         assertEquals(2, tagSet.size());
+    }
+    @Test
+    void sampleListings_correctSampleData() {
+        Listing[] sampleListings = SampleDataUtil.sampleListings();
+
+        // Check if the number of sample listings is correct
+        assertEquals(1, sampleListings.length);
+
+        // Verify the details of the sample listing
+        Listing listing = sampleListings[0];
+        assertEquals("RC4", listing.getName().fullName);
+        assertEquals("134 Clementi Ave", listing.getAddress().value);
+        assertEquals("2000", listing.getPrice().getFormattedValue());
+        assertEquals(100, listing.getArea().getArea());
+        assertEquals(Region.WEST, listing.getRegion());
+
+        Person seller = listing.getSeller();
+        assertEquals("Alex Yeoh", seller.getName().fullName);
+        assertEquals("87438807", seller.getPhone().value);
+        assertEquals("alexyeoh@example.com", seller.getEmail().value);
+        assertTrue(seller.getTags().contains(new Tag("friends")));
+
+        Set<Person> buyers = listing.getBuyers();
+        assertTrue(buyers.isEmpty());
+    }
+
+    @Test
+    void getSampleListings_containsCorrectSampleListings() {
+        ReadOnlyListings sampleListings = SampleDataUtil.getSampleListings();
+        Listing[] sampleListingsArray = SampleDataUtil.sampleListings();
+
+        // Check if the Listings contains all the sample listings
+        for (Listing sampleListing : sampleListingsArray) {
+            assertTrue(sampleListings.getListingList().contains(sampleListing));
+        }
+
+        // Check if the number of listings in the Listings is correct
+        assertEquals(1, sampleListings.getListingList().size());
     }
 
 }

@@ -6,7 +6,6 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -46,11 +45,12 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model;
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
+        model = new ModelManager();
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
@@ -76,8 +76,8 @@ public class LogicManagerTest {
         Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
 
         // Adjust the expected message to match the actual message format
-        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: Date:  "
-                        + "(From:  To: ); Tags: ",
+        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: "
+                        + "-; Tags: ",
                 expectedBuyer.getName(), expectedBuyer.getPhone(), expectedBuyer.getEmail());
 
         model.addPerson(expectedBuyer);
@@ -92,16 +92,14 @@ public class LogicManagerTest {
         String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
 
-        // Creating a seller with empty appointment, property, and no tags
+        // Creating a seller with empty appointment, and no tags
         Seller expectedSeller = new PersonBuilder(AMY)
-                .withAppointment("", "", "") // Empty appointment details
-                .withProperty("") // Empty property
                 .withTags() // No tags
                 .buildSeller();
 
         // Construct the expected message based on the actual format produced by the application
         String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: "
-                        + "Date:  (From:  To: ); Tags: ",
+                        + "-; Tags: ",
                 expectedSeller.getName(), expectedSeller.getPhone(), expectedSeller.getEmail());
 
         // Execute the command and check for success
@@ -111,7 +109,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         Name invalidName = new Name("aaaaaaaaaaaaaaa");
-        String deleteCommand = "delete " + PREFIX_NAME + invalidName;
+        String deleteCommand = "delete " + invalidName;
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_INPUT);
     }
 
@@ -137,7 +135,6 @@ public class LogicManagerTest {
 
         assertCommandException(listCommand, ListCommand.MESSAGE_NO_CLIENT_IN_LIST);
     }
-    /*
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
@@ -149,12 +146,10 @@ public class LogicManagerTest {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
-
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
-    */
 
     /**
      * Executes the command and confirms that
@@ -234,15 +229,12 @@ public class LogicManagerTest {
 
         logic = new LogicManager(model, storage);
 
-        // Trigger the saveAddressBook method by executing an add command
+        // Trigger the saveAddressBook method by executing an add buyer command
         String addBuyerCommand = AddBuyerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
-
-        String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
-                + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
-
-        // Use a loop or separate assertions if needed
-        assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage);
-        assertCommandFailure(addSellerCommand, CommandException.class, expectedMessage);
+        Buyer expectedBuyer = new PersonBuilder(AMY).withTags().buildBuyer();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(expectedBuyer);
+        assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

@@ -6,14 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.List;
-
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Buyer;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
@@ -29,29 +27,30 @@ public class AppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to a client "
             + "identified by their distinct client name. "
             + "Existing appointment will be overwritten with the new appointment. \n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + " 20/12/2024 "
+            + "Parameters: NAME (must be an existing name in address book) "
+            + PREFIX_DATE + " [DATE in ddMMyy] "
             + PREFIX_FROM + " [FROM] "
             + PREFIX_TO + " [TO]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "d/ 20/12/2024 fr/ 0800 to/ 1000";
+            + "d/ 201224 fr/ 0800 to/ 1000";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Appointment scheduled for %1$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment scheduled for %1$s";
+    public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book.";
 
-    private final Index index;
+    private final Name name;
     private final Appointment appointment;
 
     /**
      * Constructs an {@code AppointmentCommand} with the specified index and appointment details.
      *
-     * @param index The index of the person in the filtered person list.
+     * @param name The index of the person in the filtered person list.
      * @param appointment The new appointment to be added or updated.
      */
-    public AppointmentCommand(Index index, Appointment appointment) {
-        requireNonNull(index);
+    public AppointmentCommand(Name name, Appointment appointment) {
+        requireNonNull(name);
         requireNonNull(appointment);
-        this.index = index;
+        this.name = name;
         this.appointment = appointment;
     }
 
@@ -63,22 +62,22 @@ public class AppointmentCommand extends Command {
      * @throws CommandException If the index is invalid or the person cannot be found.
      */
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (!model.hasPersonOfName(name)) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        Person personToEdit = model.getPersonByName(name);
         Person editedPerson;
 
         if (personToEdit instanceof Buyer buyer) {
             editedPerson = new Buyer(buyer.getName(), buyer.getPhone(),
                     buyer.getEmail(), buyer.getTags(),
-                    appointment, buyer.getProperty());
+                    appointment);
         } else {
             Seller seller = (Seller) personToEdit;
             editedPerson = new Seller(seller.getName(), seller.getPhone(),
                     seller.getEmail(), seller.getTags(),
-                    appointment, seller.getProperty());
+                    appointment);
         }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -89,7 +88,7 @@ public class AppointmentCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !personToEdit.getAppointment().isEmpty()
+        String message = personToEdit.hasAppointment()
                 ? MESSAGE_ADD_APPOINTMENT_SUCCESS
                 : MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
@@ -104,7 +103,7 @@ public class AppointmentCommand extends Command {
         if (!(other instanceof AppointmentCommand)) {
             return false;
         }
-        AppointmentCommand a = (AppointmentCommand) other;
-        return index.equals(a.index) && appointment.equals(a.appointment);
+        AppointmentCommand otherAppointment = (AppointmentCommand) other;
+        return name.equals(otherAppointment.name) && appointment.equals(otherAppointment.appointment);
     }
 }

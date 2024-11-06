@@ -92,4 +92,3 @@ public class MainAppUiTest {
         assertEquals(Paths.get("preferences.json"), config.getUserPrefsFilePath());
     }
 }
-

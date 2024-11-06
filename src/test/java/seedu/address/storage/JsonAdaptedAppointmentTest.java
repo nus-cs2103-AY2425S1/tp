@@ -56,9 +56,9 @@ public class JsonAdaptedAppointmentTest {
 
     @Test
     public void toModelType_validDateValue_returnsDate() throws IllegalValueException {
-        JsonAdaptedDate date = new JsonAdaptedDate("01/01/2024");
+        JsonAdaptedDate date = new JsonAdaptedDate("01-01-24");
         Date modelDate = date.toModelType();
-        assertEquals("01/01/2024", modelDate.value);
+        assertEquals("01-01-24", modelDate.toString());
     }
 
     // Tests for JsonAdaptedFrom
@@ -73,7 +73,7 @@ public class JsonAdaptedAppointmentTest {
     public void toModelType_validFromValue_returnsFrom() throws IllegalValueException {
         JsonAdaptedFrom from = new JsonAdaptedFrom("0800");
         From modelFrom = from.toModelType();
-        assertEquals("0800", modelFrom.value);
+        assertEquals("08:00", modelFrom.toString());
     }
 
     // Tests for JsonAdaptedTo
@@ -88,6 +88,6 @@ public class JsonAdaptedAppointmentTest {
     public void toModelType_validToValue_returnsTo() throws IllegalValueException {
         JsonAdaptedTo to = new JsonAdaptedTo("0900");
         To modelTo = to.toModelType();
-        assertEquals("0900", modelTo.value);
+        assertEquals("09:00", modelTo.toString());
     }
 }

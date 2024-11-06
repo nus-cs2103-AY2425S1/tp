@@ -14,14 +14,10 @@ import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Date;
-import seedu.address.model.appointment.From;
-import seedu.address.model.appointment.To;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Property;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -34,10 +30,6 @@ public class AddClientParser implements Parser<Command> {
 
     public AddClientParser(String commandWord) {
         role = commandWord;
-    }
-
-    public AddClientParser() {
-        role = "";
     }
 
     /**
@@ -59,18 +51,16 @@ public class AddClientParser implements Parser<Command> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 
-        // add command does not allow adding properties straight away
-        Property property = new Property("");
         //  add command does not allow adding appointment straight away
-        Appointment appointment = new Appointment(new Date(""), new From(""), new To(""));
+        Appointment appointment = Appointment.EMPTY_APPOINTMENT;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         if (role.equals("buyer")) {
-            Buyer buyer = new Buyer(name, phone, email, tagList, appointment, property);
+            Buyer buyer = new Buyer(name, phone, email, tagList, appointment);
             return new AddBuyerProfile(buyer);
         } else {
-            Seller seller = new Seller(name, phone, email, tagList, appointment, property);
+            Seller seller = new Seller(name, phone, email, tagList, appointment);
             return new AddSellerProfile(seller);
         }
     }
