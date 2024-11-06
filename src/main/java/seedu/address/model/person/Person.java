@@ -97,6 +97,30 @@ public class Person {
     }
 
     /**
+     * Returns the string representation of {@code MonthsPaid} of this {@code Person}.
+     * The string returned here is used for displaying on {@code PersonCode} and {@code info} pop-up window,
+     * and for the {@code find} command.
+     */
+    public String getMonthsPaidToString() {
+        return monthsPaid.stream()
+                .map(monthPaid -> monthPaid.monthPaidValue)
+                .reduce((curr, next) -> curr + ", " + next)
+                .orElse("");
+    }
+
+    /**
+     * Returns the string representation of {@code Tags} of this {@code Person}.
+     * The string returned here is used for displaying in the window pop-up for the {@code info} command,
+     * and for the {@code find} command.
+     */
+    public String getTagsToString() {
+        return tags.stream()
+                .map(tag -> tag.tagName)
+                .reduce((curr, next) -> curr + ", " + next)
+                .orElse("");
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

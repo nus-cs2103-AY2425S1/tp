@@ -60,15 +60,12 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone:  " + person.getPhone().value);
-        address.setText("Address:  " + person.getAddress().value);
-        email.setText("Email:  " + person.getEmail().value);
-        fees.setText("Fees:  " + person.getFees().value);
-        classId.setText("Class ID:  " + person.getClassId().value);
-        monthsPaid.setText("Months Paid:  " + person.getMonthsPaid().stream()
-                .map(monthPaid -> monthPaid.monthPaidValue)
-                .reduce((curr, next) -> curr + " " + next)
-                .orElse("(empty)"));
+        phone.setText("Phone:  " + person.getPhone().toString());
+        address.setText("Address:  " + person.getAddress().toString());
+        email.setText("Email:  " + person.getEmail().toString());
+        fees.setText("Fees:  " + person.getFees().toString());
+        classId.setText("Class ID:  " + person.getClassId().toString());
+        monthsPaid.setText("Months Paid:  " + person.getMonthsPaidToString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
