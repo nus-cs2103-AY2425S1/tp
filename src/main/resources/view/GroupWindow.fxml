@@ -13,7 +13,7 @@
 <fx:root resizable="false" title="Group" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
          xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" />
+    <Image url="@/images/gb.png" />
   </icons>
   <scene>
     <Scene>
