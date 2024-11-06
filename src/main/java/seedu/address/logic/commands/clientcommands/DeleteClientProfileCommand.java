@@ -22,15 +22,14 @@ import seedu.address.ui.ConfirmationDialog;
  */
 public class DeleteClientProfileCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deleteclient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the client profile corresponding to the client's name.\n"
             + "Parameters: CLIENT_NAME (case-insensitive)\n"
             + "Example: " + COMMAND_WORD + " Tan Wen Xuan";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s "
-            + "with the number: %2$s " + "and email: %3$s!";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully deleted %1$s ";
     private final Name targetName;
     private final boolean skipConfirmation;
 
@@ -91,8 +90,7 @@ public class DeleteClientProfileCommand extends Command {
         model.updateFilteredListingList(listing -> true);
 
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail()));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override

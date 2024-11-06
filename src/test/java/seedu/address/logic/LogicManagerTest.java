@@ -75,9 +75,7 @@ public class LogicManagerTest {
 
         Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
 
-        // Adjust the expected message to match the actual message format
-        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: "
-                        + "-; Tags: ",
+        String expectedMessage = String.format("New buyer added: %1s.\nPhone number: %2s and Email: %3s",
                 expectedBuyer.getName(), expectedBuyer.getPhone(), expectedBuyer.getEmail());
 
         model.addPerson(expectedBuyer);
@@ -97,9 +95,7 @@ public class LogicManagerTest {
                 .withTags() // No tags
                 .buildSeller();
 
-        // Construct the expected message based on the actual format produced by the application
-        String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: "
-                        + "-; Tags: ",
+        String expectedMessage = String.format("New seller added: %1s.\nPhone number: %2s and Email: %3s",
                 expectedSeller.getName(), expectedSeller.getPhone(), expectedSeller.getEmail());
 
         // Execute the command and check for success
@@ -109,7 +105,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         Name invalidName = new Name("aaaaaaaaaaaaaaa");
-        String deleteCommand = "delete " + invalidName;
+        String deleteCommand = "deleteclient " + invalidName;
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_INPUT);
     }
 

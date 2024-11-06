@@ -66,7 +66,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_PASIR_RIS = "Pasir Ris Condo";
     public static final String VALID_ADDRESS_PASIR_RIS = "123 Pasir Ris Drive 3";
-    public static final int VALID_AREA_PASIR_RIS = 75;
+    public static final String VALID_AREA_PASIR_RIS = "75";
     public static final String VALID_PRICE_PASIR_RIS = "700000";
     public static final String VALID_REGION_PASIR_RIS = "East";
     public static final String VALID_SELLER_PASIR_RIS = VALID_NAME_AMY;

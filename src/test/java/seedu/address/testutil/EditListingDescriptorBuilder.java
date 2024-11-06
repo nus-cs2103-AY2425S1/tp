@@ -94,10 +94,10 @@ public class EditListingDescriptorBuilder {
     /**
      * Sets the {@code Area} of the {@code EditListingDescriptor} that we are building.
      *
-     * @param area The area as an integer.
+     * @param area The area as a String.
      * @return This EditListingDescriptorBuilder object for method chaining.
      */
-    public EditListingDescriptorBuilder withArea(int area) {
+    public EditListingDescriptorBuilder withArea(String area) {
         descriptor.setArea(new Area(area));
         return this;
     }

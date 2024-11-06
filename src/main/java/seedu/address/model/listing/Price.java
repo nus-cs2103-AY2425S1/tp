@@ -10,8 +10,9 @@ import java.math.BigDecimal;
  */
 public class Price {
     public static final String MESSAGE_CONSTRAINTS =
-            "Price should only contain numbers, and it should be at least 6 digits long";
-    private static final String VALIDATION_REGEX = "\\d{6,}";
+            "Price should only contain positive numbers and cannot start with zeroes, "
+                    + "and it should be at least 6 digits long";
+    private static final String VALIDATION_REGEX = "^[1-9]\\d{5,}$";
 
     private final String formattedValue;
     private final BigDecimal rawValue;

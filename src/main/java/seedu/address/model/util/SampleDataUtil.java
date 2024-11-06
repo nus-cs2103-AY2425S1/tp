@@ -64,7 +64,7 @@ public class SampleDataUtil {
     public static Listing[] sampleListings() {
         return new Listing[] {
             new Listing(new Name("RC4"), new Address("134 Clementi Ave"),
-                    new Price("200000", new BigDecimal("2000")), new Area(100),
+                    new Price("200000", new BigDecimal("2000")), new Area("100"),
                             Region.WEST, BERNICE, new HashSet<>()),
         };
     }
