@@ -1,4 +1,4 @@
-package seedu.address.ui.controller;
+package seedu.address.logic.commands.controller;
 
 import seedu.address.ui.ConfirmationWindow;
 

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.ui.controller.ConfirmationController;
-import seedu.address.ui.controller.ConfirmationWindowController;
+import seedu.address.logic.commands.controller.ConfirmationController;
+import seedu.address.logic.commands.controller.ConfirmationWindowController;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;

@@ -1,4 +1,4 @@
-package seedu.address.ui.controller;
+package seedu.address.logic.commands.controller;
 
 /**
  * Controller that by pass confirmation window for testing purposes.
