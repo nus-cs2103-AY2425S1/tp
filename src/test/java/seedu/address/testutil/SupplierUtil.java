@@ -8,13 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.AddSupplierCommand;
-import seedu.address.logic.commands.EditCommand.EditSupplierDescriptor;
-import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Supplier.
@@ -43,34 +38,6 @@ public class SupplierUtil {
         supplier.getProducts().stream().forEach(
                 s -> sb.append(PREFIX_PRODUCT + s.productName + " ")
         );
-        return sb.toString();
-    }
-
-    /**
-     * Returns the part of command string for the given {@code EditSupplierDescriptor}'s details.
-     */
-    public static String getEditSupplierDescriptorDetails(EditSupplierDescriptor descriptor) {
-        StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getCompany().ifPresent(company -> sb.append(PREFIX_COMPANY).append(company.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG + " ");
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
-        if (descriptor.getProducts().isPresent()) {
-            Set<Product> products = descriptor.getProducts().get();
-            if (products.isEmpty()) {
-                sb.append(PREFIX_PRODUCT + " ");
-            } else {
-                products.forEach(s -> sb.append(PREFIX_PRODUCT).append(s.productName).append(" "));
-            }
-        }
         return sb.toString();
     }
 }
