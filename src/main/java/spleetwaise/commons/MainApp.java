@@ -80,7 +80,7 @@ public class MainApp extends Application {
         addressBookModel = initAddressBookModelManager(storage);
         transactionBookModel = initTransactionModelManager(storage, addressBookModel);
 
-        // Initialise Common CommonModel
+        // Initialise Common Model
         CommonModelManager.initialise(addressBookModel, transactionBookModel, userPrefs);
 
         logic = new LogicManager(storage);
