@@ -22,10 +22,10 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the contact you want to see "
-            + "with the name (case-insensitive).\n"
-            + "Parameters: NAME (the name of contact)\n"
-            + "Example: " + COMMAND_WORD + " alice";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the contact you want to see.\n"
+            + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact, "
+            + "case-insensitive)\n"
+            + "Example: " + COMMAND_WORD + " alice or " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There is no contact to view.";
 
