@@ -145,10 +145,6 @@ Examples:
 * `unlink o1 t/p1`
 * `unlink o2 t/p2 t/p3`
 
-### Finding unlinked pets and owners  `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ### Listing entities: `list`
 
 Shows a list of desired entities in PawPatrol.
@@ -282,6 +278,10 @@ This action is irreversible! Please make a backup of the <a href="#for-advanced-
 Exits PawPatrol. This is equivalent to clicking the "X" icon to close the app.
 
 Format: `exit`
+
+### Finding unlinked pets and owners  `[coming in v2.0]`
+
+_Details coming soon ..._
 
 ## For Advanced Users: Updating PawPatrol Data Directly
 
