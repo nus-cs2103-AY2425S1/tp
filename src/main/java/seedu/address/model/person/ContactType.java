@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ContactType {
 
-    public static final String MESSAGE_CONSTRAINTS = "ContactType must either be \"Work\" or \"Personal\"";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Contact type must be one of the following: \"Work\", \"Personal\" or \"School\"";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,6 +36,9 @@ public class ContactType {
             break;
         case("PERSONAL"):
             value = ContactTypeEnum.PERSONAL;
+            break;
+        case("SCHOOL"):
+            value = ContactTypeEnum.SCHOOL;
             break;
         default:
             throw new IllegalArgumentException("Incorrect contact type given");
@@ -63,6 +67,7 @@ public class ContactType {
         String trimmedTest = test.trim();
         return trimmedTest.matches(VALIDATION_REGEX)
                 && (test.equalsIgnoreCase("WORK")
-                || test.equalsIgnoreCase("PERSONAL"));
+                || test.equalsIgnoreCase("PERSONAL")
+                || test.equalsIgnoreCase("SCHOOL"));
     }
 }
