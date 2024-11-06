@@ -896,6 +896,46 @@ Team size: 5
 
 <br>
 
+## **Appendix: UI**
+
+### Design considerations
+
+**Aspect: How to show appointment and person lists**
+<br>
+Context: There are two entity types (appointment and person) being managed in DocTrack
+<br>
+* **Alternative 1 (current choice):** Show lists as two separate panels side by side
+    * Pros:
+        * Easier to see all information at once
+        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
+    * Cons:
+        * More verbose and could result in information overload
+* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
+    * Pros:
+        * Information is simpler to digest
+    * Cons:
+        * More overhead of handling switching between lists
+        * Difficult to cross reference when typing certain commands
+
+<br>
+
+**Aspect: Color Scheme**
+<br>
+* **Alternative 1 (current choice):** Create new red, white and gray color scheme
+    * Pros:
+        * Creates brand identity
+        * Makes the GUI more appealling to the target audience
+    * Cons:
+        * Constant oversight needed to maintain color scheme in future feature enhancements
+* **Alternative 2:** Use the original AB3 gray color schee
+    * Pros:
+        * No extra effort needed
+    * Cons:
+        * Colors are not appealing
+        * Colors are not professional and do not suit target audience
+
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 <br>
