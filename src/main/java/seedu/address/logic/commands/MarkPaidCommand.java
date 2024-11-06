@@ -63,16 +63,16 @@ public class MarkPaidCommand extends Command {
 
         //List of participations to delete
         List<Participation> participationsToDelete = model.getParticipationList()
-                .filtered(participation -> participation.getStudent().equals(personToMarkPayment));
+                .filtered(participation -> participation.getStudent().equals(personToMarkPayment)).stream().toList();
 
-        if (participationsToDelete.size() < 1) {
+        if (participationsToDelete.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, personToMarkPayment.getName()));
         }
 
-        for (int i = 0; i < participationsToDelete.size(); i++) {
+        for (Participation participation : participationsToDelete) {
             Participation updatedParticipation = new Participation(markedPerson,
-                    participationsToDelete.get(i).getTutorial(), participationsToDelete.get(i).getAttendanceList());
-            model.setParticipation(participationsToDelete.get(i), updatedParticipation);
+                    participation.getTutorial(), participation.getAttendanceList());
+            model.setParticipation(participation, updatedParticipation);
         }
 
         model.setPerson(personToMarkPayment, markedPerson);
