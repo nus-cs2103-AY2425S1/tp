@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.controller.ConfirmationController;
 import seedu.address.logic.commands.controller.ConfirmationWindowController;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,15 +23,13 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the name or index in the address book.\n"
+            + ": Deletes the person identified by the full name or index in the address book.\n"
             + "Parameters: NAME or INDEX (must match exactly one person or be a valid index)\n"
             + "Example: " + COMMAND_WORD + " John Doe\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_PERSON_CANCELLED = "Delete action cancelled.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
-    public static final String MESSAGE_INVALID_INDEX = "The person's index provided is invalid";
     public static final String MESSAGE_CONFIRMATION = "Are you sure you want to delete %1$s from your address book?\n"
             + "This action is IRREVERSIBLE.";
     private final Name targetName;
@@ -145,7 +144,7 @@ public class DeleteCommand extends Command {
                 .findFirst();
 
         if (personOptional.isEmpty()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
         return personOptional.get();
     }
@@ -159,7 +158,7 @@ public class DeleteCommand extends Command {
      */
     private Person findPersonByIndex(List<Person> lastShownList) throws CommandException {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         return lastShownList.get(targetIndex.getZeroBased());
     }

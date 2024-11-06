@@ -41,7 +41,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the full name in the address book. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NAME (must be an exact match) "
             + "[" + PREFIX_NAME + "NAME] "
