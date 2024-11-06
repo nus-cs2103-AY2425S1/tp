@@ -4,6 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 
 import seedu.address.model.person.Name;
 
+/**
+ * A utility class containing a list of {@code Name} objects and their corresponding String representations
+ * to be used in tests.
+ */
 public class TypicalNames {
     public static final String VALID_NAME_STRING_JOHN = "John Doe";
     public static final String VALID_NAME_STRING_JANE = "Jane Doe";
