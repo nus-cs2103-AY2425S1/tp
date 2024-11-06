@@ -158,6 +158,7 @@
 .pane-with-border-card {
      -fx-background-color: derive(#d3d3d3, 20%);
      -fx-border-color: derive(#d3d3d3, 10%);
+
      -fx-border-top-width: 1px;
      -fx-border-radius: 10 10 0 0;
      -fx-background-radius: 10 10 0 0;
@@ -169,6 +170,8 @@
      -fx-border-top-width: 1px;
      -fx-border-radius: 10 10 0 0;
      -fx-background-radius: 10 10 0 0;
+
+
 }
 
 .status-bar {
