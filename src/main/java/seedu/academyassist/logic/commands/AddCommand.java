@@ -53,8 +53,8 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_IC);
         }
 
-        model.incrementStudentCount();
-        Person toAddWithId = toAdd.assignStudentId(model.getStudentCount());
+        model.incrementIdGeneratedCount();
+        Person toAddWithId = toAdd.assignStudentId(model.getIdGeneratedCount());
         model.addPerson(toAddWithId);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddWithId)));
     }

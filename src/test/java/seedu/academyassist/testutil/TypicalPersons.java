@@ -91,7 +91,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        ab.setStudentCount(7);
+        ab.setIdGeneratedCount(7);
         return ab;
     }
 

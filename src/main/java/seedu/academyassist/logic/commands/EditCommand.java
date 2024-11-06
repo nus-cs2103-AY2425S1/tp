@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.academyassist.commons.util.CollectionUtil;
 import seedu.academyassist.commons.util.ToStringBuilder;
 import seedu.academyassist.logic.Messages;
@@ -27,7 +26,6 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.StudentId;
-import seedu.academyassist.model.person.StudentIdMatchesPredicate;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 
@@ -75,14 +73,12 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Person> filteredPersonList = new FilteredList<>(model.getFilteredPersonList());
-        filteredPersonList.setPredicate(new StudentIdMatchesPredicate(studentId));
 
-        if (filteredPersonList.isEmpty()) {
+        if (!model.hasPersonWithStudentId(studentId)) {
             throw new CommandException(Messages.MESSAGE_NO_STUDENT_FOUND);
         }
 
-        Person personToEdit = filteredPersonList.get(0);
+        Person personToEdit = model.getPersonWithStudentId(studentId);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         boolean hasIcModified = !personToEdit.getIc().equals(editedPerson.getIc());
