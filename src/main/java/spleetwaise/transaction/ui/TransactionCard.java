@@ -52,7 +52,7 @@ public class TransactionCard extends UiPart<Region> {
         super(FXML);
         this.transaction = transaction;
         dayMonth.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("d MMM")));
-        year.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("yyyy")));
+        year.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("uuuu")));
         name.setText(displayedIndex + ". " + transaction.getPerson().getName().fullName);
         if (transaction.getStatus().isDone()) {
             Image doneIcon = new Image(
