@@ -14,7 +14,7 @@
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" fx:id="container">
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
@@ -27,7 +27,7 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" HBox.hgrow="ALWAYS"/>
+      <FlowPane fx:id="tags" />
       <!-- Next Lesson -->
       <HBox spacing="5" alignment="CENTER_LEFT" fx:id="nextLessonBox"
             managed="${nextLesson.visible}" visible="${nextLesson.visible}">
@@ -38,51 +38,59 @@
           </minWidth>
         </Label>
 
-        <Label fx:id="nextLesson" styleClass="cell_small_label"/>
+        <Label fx:id="nextLesson" styleClass="cell_small_label" wrapText="true"/>
       </HBox>
 
       <!-- Phone -->
       <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label text="Phone:" styleClass="cell_small_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="phone" styleClass="cell_small_label" />
+        <VBox alignment="TOP_LEFT">
+          <Label text="Phone:" styleClass="cell_small_label" wrapText="true">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+        </VBox>
+        <Label fx:id="phone" styleClass="cell_small_label" wrapText="true"/>
       </HBox>
 
       <!-- Telegram -->
       <HBox spacing="5" alignment="CENTER_LEFT" managed="${telegram.visible}" visible="${telegram.visible}">
-        <Label text="Telegram:" styleClass="cell_small_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="telegram" styleClass="cell_small_label" />
+        <VBox alignment="TOP_LEFT">
+          <Label text="Telegram:" styleClass="cell_small_label" wrapText="true">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+        </VBox>
+        <Label fx:id="telegram" styleClass="cell_small_label" wrapText="true"/>
       </HBox>
 
       <!-- Address -->
       <HBox spacing="5" alignment="CENTER_LEFT" managed="${address.visible}" visible="${address.visible}">
-        <Label text="Address:" styleClass="cell_small_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="address" styleClass="cell_small_label" style="-fx-text-overrun: ellipsis;" />
+        <VBox alignment="TOP_LEFT">
+          <Label text="Address:" styleClass="cell_small_label" wrapText="true">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+        </VBox>
+        <Label fx:id="address" styleClass="cell_small_label" wrapText="true"/>
       </HBox>
 
       <!-- Email -->
       <HBox spacing="5" alignment="CENTER_LEFT" managed="${email.visible}" visible="${email.visible}">
-        <Label text="Email:" styleClass="cell_small_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="email" styleClass="cell_small_label" />
+        <VBox alignment="TOP_LEFT">
+          <Label text="Email:" styleClass="cell_small_label" wrapText="true">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+        </VBox>
+        <Label fx:id="email" styleClass="cell_small_label" wrapText="true"/>
       </HBox>
 
     </VBox>
