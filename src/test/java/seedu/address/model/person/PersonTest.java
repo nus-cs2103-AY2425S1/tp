@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -29,7 +29,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_HIGH_RISK).withAllergies(VALID_ALLERGY1_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, phone number and email same -> returns false
@@ -53,12 +53,12 @@ public class PersonTest {
 
         //same name, same phone number, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+                .withTag(VALID_TAG_HIGH_RISK).withAllergies(VALID_ALLERGY1_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         //same name, same email, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+                .withTag(VALID_TAG_HIGH_RISK).withAllergies(VALID_ALLERGY1_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // name has trailing spaces, all other attributes same -> returns false
@@ -107,7 +107,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different allergies -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAllergy(VALID_ALLERGY_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withAllergies(VALID_ALLERGY1_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
     @Test
@@ -128,14 +128,14 @@ public class PersonTest {
                 .withEmail("charlie@example.com")
                 .withAddress("123, Charlies Street")
                 .withTag("Medium Risk")
-                .withAllergy("Lactose").build();
+                .withAllergies("Lactose").build();
 
         assertEquals("Charlie", person.getName().toString());
         assertEquals("98765432", person.getPhone().toString());
         assertEquals("charlie@example.com", person.getEmail().toString());
         assertEquals("123, Charlies Street", person.getAddress().toString());
         assertEquals("Medium Risk", person.getTag().toString());
-        assertEquals("Lactose", person.getAllergy().toString());
+        assertTrue(person.getAllergies().contains(new Allergy("Lactose")));
     }
 
     @Test
@@ -145,7 +145,7 @@ public class PersonTest {
         assertEquals(ALICE.getEmail(), ALICE.getEmail());
         assertEquals(ALICE.getAddress(), ALICE.getAddress());
         assertEquals(ALICE.getTag(), ALICE.getTag());
-        assertEquals(ALICE.getAllergy(), ALICE.getAllergy());
+        assertEquals(ALICE.getAllergies(), ALICE.getAllergies());
     }
 
 
@@ -153,7 +153,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
-                + ", tag=" + ALICE.getTag() + ", allergy=" + ALICE.getAllergy()
+                + ", tag=" + ALICE.getTag() + ", allergies=" + ALICE.getAllergies()
                 + ", date=" + ALICE.getDate() + "}";
         assertEquals(expected, ALICE.toString());
     }

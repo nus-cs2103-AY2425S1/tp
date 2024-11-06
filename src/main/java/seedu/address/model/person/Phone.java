@@ -22,13 +22,10 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
-
         requireNonNull(phone);
-        String trimmedPhone = phone.replaceAll(" ", "");
+        String trimmedPhone = phone.replaceAll("\\s", "");
         checkArgument(isValidPhone(trimmedPhone), MESSAGE_CONSTRAINTS);
         value = trimmedPhone;
-
-
     }
 
     /**

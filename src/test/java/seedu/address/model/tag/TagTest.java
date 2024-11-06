@@ -44,6 +44,7 @@ public class TagTest {
         assertTrue(Tag.isValidTagName("Low Risk"));
         assertTrue(Tag.isValidTagName("high risk")); // lowercase
         assertTrue(Tag.isValidTagName("hiGH riSK")); // mixed case
+
     }
     @Test
     public void equals() {

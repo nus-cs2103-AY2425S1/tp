@@ -34,6 +34,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found.";
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
 
+    public static final String MESSAGE_NO_ARGUMENTS_FOUND = "Please provide at least one of the following:"
+            + " name, phone, or email.";
 
     private final Optional<String> name;
     private final Optional<String> phone;

@@ -1,0 +1,33 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Enter date command to add appointment to a person;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([invalid command format])
+    :Receive error message;
+else ([valid command format])
+    :Parse command parameters;
+
+    if() then ([duplicate person])
+        :Receive error message;
+    else
+        if() then ([no person found])
+            :Receive error message;
+        else([unique person])
+            if() then ([overlapping dateTime])
+                :Receive error message;
+            else ([unique dateTime])
+                :Add DateTime (ie appointment) to Person;
+                :Update AddressBook;
+                :Receive success message;
+            endif
+        endif
+    endif
+endif
+stop
+@enduml

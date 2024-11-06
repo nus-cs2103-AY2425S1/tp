@@ -22,8 +22,16 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         tagName = tagName.strip().toLowerCase();
+        tagName = standardizeTagName(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = standardizeTagName(tagName);
+    }
+
+    /**
+     * Returns true if a given string is a valid tag name.
+     */
+    public static boolean isValidTagName(String test) {
+        return test.toLowerCase().strip().matches(VALIDATION_REGEX);
     }
 
     /**
@@ -33,26 +41,23 @@ public class Tag {
      * "low risk" becomes "Low Risk", "medium risk" becomes "Medium Risk", and any other input
      * is considered as "High Risk". This ensures consistent formatting of risk tags.</p>
      *
-     * @param tag The input tag to be standardized.
+     * @param tagName The input tag to be standardized.
      * @return A standardized version of the input tag, either "Low Risk", "Medium Risk", or "High Risk".
      */
-    public static String standardizeTagName(String tag) {
-        if (tag.equals("low risk")) {
-            return "Low Risk";
-        }
-        if (tag.equals("medium risk")) {
+    public static String standardizeTagName(String tagName) {
+        String trimmedTag = tagName.strip().toLowerCase();
+
+        if ("high risk".equals(trimmedTag)) {
+            return "High Risk";
+        } else if ("medium risk".equals(trimmedTag)) {
             return "Medium Risk";
+        } else if ("low risk".equals(trimmedTag)) {
+            return "Low Risk";
+        } else {
+            return tagName; // Should not reach here if validation is used
         }
-        return "High Risk";
     }
 
-
-    /**
-     * Returns true if a given string is a valid tag name.
-     */
-    public static boolean isValidTagName(String test) {
-        return test.toLowerCase().matches(VALIDATION_REGEX);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -70,7 +75,7 @@ public class Tag {
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toLowerCase().hashCode();
     }
 
     /**

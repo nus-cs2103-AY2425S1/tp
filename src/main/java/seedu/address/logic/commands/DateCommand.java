@@ -16,14 +16,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Date;
+import seedu.address.model.person.DatePredicate;
 import seedu.address.model.person.Person;
-
 
 
 /**
  * Changes the date of an existing person in the address book.
  */
 public class DateCommand extends Command {
+    public static final Date NO_DATE = new Date(LocalDateTime.MIN);
     public static final String COMMAND_WORD = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date and time of the person identified "
@@ -40,9 +41,12 @@ public class DateCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Person: %1$s, Date: %2$s";
     public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
     public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
-    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found. "
-            + "Use more attributes (name, phone number, email) to identify the exact person";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found."
+            + " Use more attributes (name, phone number, email) to identify the exact person.";
+
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
+    public static final String MESSAGE_OVERLAPPING_DATES = "Given date & time coincides with another appointment below."
+            + " Please choose another date and time.";
 
     private final Optional<String> name;
     private final Optional<String> phone;
@@ -67,6 +71,7 @@ public class DateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         // Filter persons based on provided criteria
@@ -83,16 +88,26 @@ public class DateCommand extends Command {
             throw new CommandException(MESSAGE_MULTIPLE_PERSONS_FOUND);
         }
 
+        // Handle overlapping dates
+        List<Person> matchingPersonsWithDate = lastShownList.stream()
+                .filter(person -> person.getDate().equals(this.date))
+                .collect(Collectors.toList());
+        if (!matchingPersonsWithDate.isEmpty() && !date.equals(NO_DATE)) {
+            DatePredicate predicate = new DatePredicate(date);
+            model.updateFilteredPersonList(predicate);
+            throw new CommandException(MESSAGE_OVERLAPPING_DATES);
+        }
+
         Person personToEdit = matchingPersons.get(0);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergy(), date);
+                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergies(), date);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
-     * Checks if a person matches the criteria provided in the delete command.
+     * Checks if a person matches the criteria provided in the date command.
      */
     private boolean matches(Person person) {
         boolean matches = true;

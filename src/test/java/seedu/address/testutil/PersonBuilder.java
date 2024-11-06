@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
@@ -10,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -29,7 +32,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Tag tag;
-    private Allergy allergy;
+    private Set<Allergy> allergies;
     private Date date;
 
     /**
@@ -41,7 +44,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tag = new Tag(DEFAULT_TAG);
-        allergy = new Allergy(DEFAULT_ALLERGY);
+        allergies = new HashSet<>();
+        allergies.add(new Allergy(DEFAULT_ALLERGY));
         date = new Date(DEFAULT_DATE);
     }
 
@@ -54,7 +58,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tag = personToCopy.getTag();
-        allergy = personToCopy.getAllergy();
+        allergies = new HashSet<>(personToCopy.getAllergies());
         date = personToCopy.getDate();
     }
 
@@ -101,8 +105,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withAllergy(String allergy) {
-        this.allergy = new Allergy(allergy);
+    public PersonBuilder withAllergies(String ... allergies) {
+        this.allergies = SampleDataUtil.getAllergySet(allergies);
         return this;
     }
 
@@ -115,7 +119,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tag, allergy, date);
+        return new Person(name, phone, email, address, tag, allergies, date);
     }
 
 }

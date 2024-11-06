@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Date;
+import seedu.address.model.person.DatePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -50,6 +52,29 @@ public class DateCommandTest {
         expectedModel.setPerson(personToEdit, editedPerson);
         assertCommandSuccess(dateCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_addDate_failure() {
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        DatePredicate datePredicate = new DatePredicate(new Date(DATE_STUB));
+
+        Person existingPerson = ALICE;
+        Person editedExistingPerson = new PersonBuilder(existingPerson).withDate(DATE_STUB).build();
+        expectedModel.setPerson(existingPerson, editedExistingPerson);
+
+        Person overlappingPerson = BOB;
+        expectedModel.addPerson(overlappingPerson);
+        Person editedOverlappingPerson = new PersonBuilder(overlappingPerson).withDate(DATE_STUB).build();
+        DateCommand overlappingDateCommand = new DateCommand(Optional.of(editedOverlappingPerson.getName().toString()),
+                Optional.of(editedOverlappingPerson.getPhone().toString()),
+                Optional.of(editedOverlappingPerson.getEmail().toString()),
+                new Date(DATE_STUB));
+
+        expectedModel.updateFilteredPersonList(datePredicate);
+
+        assertCommandFailure(overlappingDateCommand, expectedModel, DateCommand.MESSAGE_OVERLAPPING_DATES);
+    }
+
     @Test
     public void execute_deleteDate_success() {
         Person personToEdit = ALICE;
@@ -69,6 +94,21 @@ public class DateCommandTest {
         DateCommand dateCommand = new DateCommand(Optional.of("Stranger"), Optional.empty(),
                 Optional.empty(), new Date(VALID_DATE_BOB));
         assertCommandFailure(dateCommand, model, DateCommand.MESSAGE_NO_PERSON_FOUND);
+    }
+
+    @Test
+    public void execute_multiplePeople_failure() {
+        Person existingPersonOne = new PersonBuilder().withName("John").withPhone("91919191")
+                .withEmail("john1@gmail.com").withAddress("101 Clementi Road").withTag("High Risk")
+                .withAllergies("None").build();
+        model.addPerson(existingPersonOne);
+        Person existingPersonTwo = new PersonBuilder().withName("John").withPhone("92929292")
+                .withEmail("john2@gmail.com").withAddress("102 Clementi Road").withTag("Low Risk").withAllergies("None")
+                .build();
+        model.addPerson(existingPersonTwo);
+        DateCommand dateCommand = new DateCommand(Optional.of("John"), Optional.empty(),
+                Optional.empty(), new Date(VALID_DATE_BOB));
+        assertCommandFailure(dateCommand, model, DateCommand.MESSAGE_MULTIPLE_PERSONS_FOUND);
     }
 
     @Test

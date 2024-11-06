@@ -2,50 +2,129 @@
 layout: page
 title: User Guide
 ---
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
+# Health Connect
+Health Connect is an application designed to **streamline client management** for Singapore based healthcare professionals. It allows users to **efficiently track client details and appointments**, simplifying the management process.
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+1. [Quick Start](#quick-start)
+    1. [For Windows Users](#for-windows-users)
+    2. [For Mac Users](#for-mac-users)
+2. [Features](#features)
+    1. [Command Format](#command-format)
+    2. [Viewing Help: `help`](#viewing-help-help)
+    3. [Adding a Person: `add`](#adding-a-patient-add)
+    4. [Viewing All Patients `view`](#viewing-all-patients-view)
+    5. [Editing a Patient: `edit`](#editing-a-patient--edit)
+    6. [Locating Patients by Name: `find`](#locating-patients-by-name-find)
+    7. [Locating Patients by Features: `filter`](#locating-patients-by-different-parameters-filter)
+    8. [Deleting a Patient: `delete`](#deleting-a-patient--delete)
+    9. [Adding Or Updating Appointment Date and Time to Patient: `date`](#adding-or-updating-an-appointment-date-and-time-to-a-person--date)
+    10. [Seeing the Schedule for the Day: `schedule`](#seeing-the-schedule-for-the-day-schedule)
+    11. [Clearing All Entries: `clear`](#clearing-all-entries--clear)
+    12. [Exiting the Program: `exit`](#exiting-the-program--exit)
+3. [Data](#data)
+    1. [Saving the Data File](#saving-the-data)
+    2. [Editing the Data File](#editing-the-data-file)
+4. [FAQ](#faq)
+5. [Known Issues](#known-issues)
+6. [Command Summary](#command-summary)
 
-## Quick start
+--------------------------------------------------------------------------------------------------------------------
+## Quick Start
 
+### For Windows Users:
 1. Ensure you have Java `17` or above installed in your Computer.
-
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+    1. Open Command Prompt. You can do this by clicking the Windows Start or Search button and type `cmd`.
+       ![Opening Terminal on Windows](./images/QuickStartWindowsOpenCommandPrompt.png)
+    2. Once Command Prompt is open, type: `java -version` and click `Enter`.
+       ![Checking Java Version on Windows - Command](./images/QuickStartWindowsCheckVersionCommand.png)
+    3. If Java `17` or higher is displayed, you are good to go! Proceed to **Step 3**.
+       ![Checking Java Version on Windows - Display](./images/QuickStartWindowsCheckVersionDisplay.png)
+    4. Otherwise, proceed to **Step 2**.
+       <br></br>
+2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
+    1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+    2. Download the appropriate installer for Windows.
+    3. After installation, follow the instructions in **Step 1**.
+       <br></br>
+3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
+   <br></br>
+4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+   <br></br>
+5. Use Command Prompt to open the JAR file.
+    1. Find the file path of the file you just copied. To do so, right-click on the file in the folder and press `Properties`.
+       ![Finding File Path on Windows](./images/QuickStartWindowsFindFilePath.png)
+    2. Check the File Path by noticing the path after your username under **Location**.
+       ![Converting File Path on Windows](./images/QuickStartWindowsCheckFilePath.png)
+       For example, in this case, the required `FILEPATH` will be `OneDrive/Documents/CS2103T/AddressBook`
+    3. In Command Prompt, enter `cd FILEPATH`, replacing `FILEPATH` with your own path obtained. Following the previous example, you should enter `cd OneDrive/Documents/CS2103T/AddressBook` as follows:
+       ![Entering File Path on Windows](./images/QuickStartWindowsNavigateFilePath.png)
+    4. In Command Prompt, enter `java -jar healthconnect.jar`.
+       ![Entering JAR Command on Windows](./images/QuickStartWindowsEnteringJarCommand.png)
+    5. A GUI similar to the below should appear in a few seconds.
+       ![Ui](images/Ui.png)
+       <br></br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
+    * `view` : Displays all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
+    * `clear` : Deletes all contacts.
+    * `exit` : Exits the app.
+      <br></br>
+7. Refer to the [Features](#features) below for details of each command.
 
-   * `view` : Displays all contacts.
+### For Mac Users:
+1. Ensure you have Java `17` or above installed in your Computer.
+    1. Open Terminal. You can do this by searching for it using Spotlight Search. To do so, press `Command + Space` and search "Terminal".
+       ![Opening Terminal on Mac](./images/QuickStartMacOpenTerminal.png)
+    2. Once Terminal is open, type: `java -version` and click `Enter`.
+       ![Checking Java Version on Mac - Command](./images/QuickStartMacCheckVersionCommand.png)
+    3. If Java `17` or higher is displayed, you are good to go! Proceed to **step 3**.
+       ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
+    4. Otherwise, proceed to step 2.
+       <br></br>
+2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
+    1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+    2. Download the appropriate installer for Mac.
+    3. After installation, follow the instructions in **Step 1**.
+       <br></br>
+3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
+   <br></br>
+4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+   <br></br>
+5. Use Terminal to open the JAR file.
+    1. Find the file path of the file you just copied. To do so, right-click on the file in Finder and press `Get Info`.
+       ![Finding File Path on Mac](./images/QuickStartMacFindFilePath.png)
+    2. Check the File Path by noting the path after your username under **Where**.
+       ![Converting File Path on Mac](./images/QuickStartMacCheckFilePath.png)
+       For example, in this case, the required `FILEPATH` will be `Documents/CS2103T/AddressBook`
+    3. In Terminal, enter `cd FILEPATH`, replacing `FILEPATH` with your own path obtained. Following the previous example, you should enter `cd Documents/CS2103T/AddressBook` as follows:
+       ![Entering File Path on Mac](./images/QuickStartMacNavigateFilePath.png)
+    4. In Terminal, enter `java -jar healthconnect.jar`.
+       ![Entering JAR Command on Mac](./images/QuickStartMacEnterJarCommand.png)
+    5. A GUI similar to the below should appear in a few seconds.
+       ![Ui](images/Ui.png)
+       <br></br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
+    * `view` : Displays all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
+    * `clear` : Deletes all contacts.
+    * `exit` : Exits the app.
+      <br></br>
+7. Refer to the [Features](#features) below for details of each command.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `filter t/High Risk` : Displays all entries which are tagged High Risk.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+### Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -53,84 +132,112 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
+![help message](images/helpMessage.png)
 
-### Adding a person: `add`
+### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY …​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY`
 
-**PHONE NUMBER**
-- Must be exactly 8 digits long and start with 3, 6, 8 or 9.
-- Only numeric characters are allowed
-
-**EMAIL**
-- Must follow a valid email format and include a domain like name@example.com
-- Can contain alphanumeric characters like underscores, period and hyphens before the @ symbol
-
-**ALLERGY** should only include alphanumeric characters, spaces, and commas.
-**ALLERGY** must not be empty or contain special characters other than commas and spaces.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A patient must have one tag (no more no less)
-The tag must be one of the following
-1. High Risk
-2. Medium Risk
-3. Low Risk
-</div>
+Constraints:
+* **NAME**
+    - Alphanumeric string of any length. Special characters allowed are ' ', '/' and '-'.
+* **PHONE NUMBER**
+    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
+    - Only numeric characters are allowed
+* **EMAIL**
+    - Must follow a valid email format and include a domain e.g. `name@example.com`
+    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
+* **TAG**
+    - A patient must have one of the following priority tags:
+        1. `High Risk`
+        2. `Medium Risk`
+        3. `Low Risk`
+* **ALLERGY**
+    - Only include alphanumeric characters, spaces, and commas.
+    - Must not be empty or contain special characters other than commas and spaces.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin`
-* `add n/Betsy-Crowe t/friend e/betsycrowe@example.com a/Newgate Estate #14-05 p/1234567 t/Low Risk m/None`
+  ![Example of Add Command 1](./images/FeatureAddExample1.png)
 
-### Listing all persons : `list`
+  <br></br>
+* `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
+  ![Example of Add Command 2](./images/FeatureAddExample2.png)
 
-Shows a list of all persons in the address book.
+### Viewing all patients: `view`
 
-Format: `list`
+Shows a list of all patients in the address book.
 
-### Editing a person : `edit`
+Format: `view`
 
-Edits an existing person in the address book.
+![Example of View Command](./images/FeatureViewExample1.png)
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+### Editing a patient : `edit`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+Edits an existing patient in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]`
+
+Additional Details:
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* **At least one of the optional fields must be provided**.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+Constraints:
+* **INDEX**
+    - Must be a positive integer: 1, 2, 3, ...
+    - Must be an index number shown in the displayed patient list
+* **NAME**
+    - Only alphabets and spaces are allowed
+* **PHONE NUMBER**
+    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
+    - Only numeric characters are allowed
+* **EMAIL**
+    - Must follow a valid email format and include a domain e.g. `name@example.com`
+    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
+* **TAG**
+    - A patient must have one of the following priority tags:
+        1. `High Risk`
+        2. `Medium Risk`
+        3. `Low Risk`
+* **ALLERGY**
+    - Only include alphanumeric characters, spaces, and commas.
+    - Must not be empty or contain special characters other than commas and spaces.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com`
+   ![Example of Edit Command 1](./images/FeatureEditExample1.png)
+   Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+   <br></br>
+* `edit 2 n/Betsy Crower`
+  ![Example of Edit Command 2](./images/FeatureEditExample2.png)
+  Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+### Locating patients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+Additional Details:
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
@@ -139,35 +246,69 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find John`
+  ![Example of Find Command 1](./images/FeatureFindExample1.png)
+  Returns `John` and `John Doe`
+  <br></br>
+* `find craig adam`
+  ![Example of Find Command 2](./images/FeatureFindExample2.png)
+  Returns `Craig` and `Adam`
 
-### Locating persons by different parameters: `filter`
+### Locating patients by different parameters: `filter`
 
-Finds persons whose information match any of the given parameters.
+Filters the list to return patients who have the given features.
 
-Format: `filter n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE [atleast one parameter]`
+Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
 
-* Atleast one parameter is required
-* Multiple parameters can be used to filter persons.
-* Persons matching all parameters are returned (i.e. `AND` search).
+Additional Details:
+* The search is case-sensitive.
+* The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
+* You can filter by **tag, email, allergy, address and phone number**
+* Only full words will be matched e.g. `99999999` will not match `999`
+* Patients matching all features listed will be returned (i.e. `AND` search).
+* There can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
+* Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
+  e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
-
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `filter a/Residential College 4`
+  ![Example of Filter Command 1](./images/FeatureFilterExample1.png)
+  returns all patients who have address Residential College 4
+  <br></br>
+* `filter m/Penicillin t/High Risk`
+  ![Example of Filter Command 2](./images/FeatureFilterExample2.png)
+  returns all patients who have an allergy to penicillin AND an allergy to penicillin
+  <br></br>
+
+### Deleting a patient : `delete`
+
+Deletes the specified patient from the address book.
+
+Format: `delete n/NAME p/PHONE e/EMAIL`
+
+Additional Details:
+- Deletes the person that matches the following NAME, PHONE and/or EMAIL
+- If the NAME cannot uniquely identify the patient, then more details (e.g. PHONE or EMAIL) need to be provided.
+
+Constraints:
+* **NAME**
+    - Only alphabets and spaces are allowed
+* **PHONE NUMBER**
+    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
+    - Only numeric characters are allowed
+* **EMAIL**
+    - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
+    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
+
+Examples:
+* `delete n/john`
+  ![Example of Delete Command 1](./images/FeatureDeleteExample1.png)
+  Deletes `John` assuming that there is only 1 `John` in the address book.
+  <br></br>
+* `delete n/craig p/98761230`
+  ![Example of Delete Command 2](./images/FeatureDeleteExample2.png)
+  Deletes `Craig` with phone `98761230` assuming that there is only 1 patient with name `Craig` and phone `98761230` in the address book
 
 ### Adding or updating an appointment date and time to a person : `date`
 
@@ -175,19 +316,62 @@ Adds or updates the next appointment date and time of the specified person in th
 
 Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE`
 
+Additional Details:
 * Adds or updates the next appointment date of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
-* `NAME` should only include alphanumeric characters, spaces, and hyphens
-* `PHONE` must have 8 digits, starting with 3, 6, 8 or 9
-* `EMAIL` must follow the format of [name]@[domain].[TLD]
-* `DATE` must follow the format of dd/MM/YYYY HHmm
 * If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
 * To remove the date and time from a person, use `d/None`.
+* 2 patients cannot have the same date and time for the appointment
+
+Constraints:
+* **NAME**
+    - Only alphabets and spaces are allowed
+* **PHONE NUMBER**
+    - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
+    - Only numeric characters are allowed
+* **EMAIL**
+    - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
+    - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
+* **DATE**
+    - Must follow the format of dd/MM/YYYY HHmm
 
 Examples:
 * `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`
+  ![Example of Date Command 1](./images/FeatureDateExample1.png)
+  Adds appointment date and time `23/10/2024 1830` to patient with name:`Jason Tan`, phone:`93823871`, email:`jasontan@gmail.com`
+  <br></br>
 * `date p/92938132 d/22/10/2024 1920`
+  ![Example of Date Command 2](./images/FeatureDateExample2.png)
+  Adds appointment date and time `22/10/2024 1920` to patient with phone:`92938132`
+  <br></br>
 * `date e/johndoe@gmail.com d/10/02/2023 1520`
+  ![Example of Date Command 3](./images/FeatureDateExample3.png)
+  Adds appointment date and time `10/02/2023 1520` to patient with email `johndoe@gmail.com`
+  <br></br>
 * `date n/Alex Yeoh d/None`
+  ![Example of Date Command 4](./images/FeatureDateExample4.png)
+  Removes appointment date from `Alex Yeoh`
+
+### Seeing the schedule for the day: `schedule`
+
+Filters the list to return patients who have an appointment of the given day. <br>
+(i.e. shows the healthcare professional's schedule for the day)
+
+Format: `schedule d/[DATE_ONLY]`
+
+Additional Details:
+* Date in the `schedule` feature differs from the date in the `date` feature.
+* Date in the `schedule` feature does not accept a time.
+* All patients with an appointment date on that given day will be listed regardless of what their appointment time is.
+
+Constraints:
+* **DATE_ONLY**
+    - Must follow the format of dd/MM/YYYY
+
+Examples:
+* `schedule d/23/10/2024`
+  ![Example of Schedule Command 1](./images/FeatureScheduleExample1.png)
+  returns all patients with appointment date on 23rd October 2024
+
 
 ### Clearing all entries : `clear`
 
@@ -195,27 +379,16 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Locating persons by their features: `filter`
-
-Filters the list to return persons who have the given features.
-
-Format: `find PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
-
-* The search is case-sensitive.
-* The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
-* In this version, you can only filter by tag and phone number
-* Only full words will be matched e.g. `99999999` will not match `999`
-* Persons matching all features listed will be returned (i.e. `AND` search).
-* There can only be one of each feature as a maximum (ie cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not  accepted.
-  *filter requires at least one feature to filter by (eg. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
-  e.g. `t/ High Risk p/99999999` will return all patients with tag High Risk and phone number 99999999
-
+![Example of Clear Command 1](./images/FeatureClearExample1.png)
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+## Data
 
 ### Saving the data
 
@@ -225,29 +398,34 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer by following the instructions in [Quick Start](#quick-start) and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+1. Find the `data` folder created by the application
+   ![FAQ 1 Step 1](./images/FAQ1Step1.png)
+   <br></br>
+2. Transfer the `.json` file in the `data folder
+   ![FAQ 1 Step 2](./images/FAQ1Step2.png)
+--------------------------------------------------------------------------------------------------------------------
+
+## Known Issues
+
+**Issue 1:** **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. <br>
+**Remedy:** Delete the `preferences.json` file created by the application **in the same folder** before running the application again.
+![Remedy for Known Issue 1](./images/KnownIssuesRemedy1.png)
+<br></br>
+**Issue 2:** **If you minimize the Help Window** and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear.<br>
+**Remedy:** Manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
+## Command Summary
 
 | Action               | Format, Examples                                                                                                                                                                        |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
