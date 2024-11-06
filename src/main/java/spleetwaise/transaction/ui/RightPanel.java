@@ -46,6 +46,7 @@ public class RightPanel extends UiPart<Region> {
 
     private TransactionListPanel transactionListPanel;
     private CommandBox commandBox;
+    private ContextMenu filterMenu;
 
     @FXML
     private StackPane transactionListPanelPlaceholder;
@@ -80,6 +81,7 @@ public class RightPanel extends UiPart<Region> {
 
         filterBtn.styleProperty().bind(Bindings.concat("-icon-paint: ", iconColorBinding, ";"));
         filterBtn.setPickOnBounds(true);
+        filterMenu = createFilterMenu();
         filterBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, this::showFilterMenu);
     }
 
@@ -110,9 +112,22 @@ public class RightPanel extends UiPart<Region> {
     }
 
     /**
-     * Displays a context menu when the filter icon is clicked.
+     * Displays the filter menu if it is not already showing.
      */
     private void showFilterMenu(MouseEvent event) {
+        if (filterMenu.isShowing()) {
+            filterMenu.hide();
+        } else {
+            filterMenu.show(filterBtn, event.getScreenX(), event.getScreenY());
+        }
+    }
+
+    /**
+     * Creates and configures the filter context menu.
+     *
+     * @return the configured ContextMenu
+     */
+    private ContextMenu createFilterMenu() {
         ContextMenu filterMenu = new ContextMenu();
 
         MenuItem resetFilter = new MenuItem("Reset filter");
@@ -145,7 +160,8 @@ public class RightPanel extends UiPart<Region> {
         filterMenu.getItems().addAll(resetFilter, filterByDone, filterByPositiveOrNegativeAmount, divider,
                 filterByContact, filterByAmount, filterByDescription, filterByDate
         );
-        filterMenu.show(filterBtn, event.getScreenX(), event.getScreenY());
+
+        return filterMenu;
     }
 
     private void filterTransactionsByAmount() {
