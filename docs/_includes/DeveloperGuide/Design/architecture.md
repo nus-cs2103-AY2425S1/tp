@@ -23,7 +23,7 @@ Packages follow this general package structure: <br>
 
 **Main application**
 
-The entry-point to the app, **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)), lives in the `common` package, and is in charge of managing the app's lifecycle.
+The entry-point to the app, **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/MainApp.java)), lives in the `common` package, and is in charge of managing the app's lifecycle.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
