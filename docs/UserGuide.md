@@ -71,7 +71,7 @@ If you can type fast, PawPatrol can manage patient owner and pet data faster tha
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page as shown below.
+Shows a message explaining how to access the help page as shown below.
 
 ![help message](images/helpMessage.jpeg)
 
@@ -102,7 +102,7 @@ Examples:
 * `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
 * `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
 
-### Linking entities: `link`
+### Linking owners and pets: `link`
 
 Links an owner to one or more pets.
 
@@ -166,7 +166,7 @@ Format:
 
 * Existing values will be updated to the input values.
 
-* When editing tags, the existing tags of the pet will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.
 
 * You can remove all the pet’s tags by typing `t/` without specifying any tags after it.
 
@@ -177,7 +177,7 @@ Examples:
 *  `edit o1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st owner to be `91234567` and `johndoe@example.com` respectively.
 *  `edit p2 n/Fluffy t/` Edits the name of the 2nd pet to be `Fluffy` and clears all existing tags.
 
-### Locating entities by name: `find`
+### Finding entities by name: `find`
 
 Finds owners or pets whose names contain any of the given keywords.
 
@@ -189,7 +189,7 @@ Format:
 
 :exclamation: **Extra information:**<br>
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 
@@ -231,7 +231,14 @@ Examples:
 * `list owners` followed by `delete o2` deletes the 2nd person in PawPatrol.
 * `find owner Betsy` followed by `delete o1` deletes the 1st owner in the results of the `find` command.
 * `list pets` followed by `delete p2` deletes the 2nd pet in PawPatrol.
-* `find pets Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command.
+* `find pet Fluffy` followed by `delete p1` deletes the 1st pet in the results of the `find` command, as shown below.
+  ![result for 'find Fluffy'](images/findFluffyResult.jpeg)
+  <div style="text-align: center;">
+    <em>Result for 'find Fluffy'</em>
+  </div>
+
+  ![result for 'delete p1'](images/deletep1Result.jpeg)
+  <div style="text-align: center;"><em>Result for 'delete p1' after 'find Fluffy'</em></div>
 
 ### Sorting : `sort`
 
@@ -263,7 +270,7 @@ PawPatrol data are saved automatically as a JSON file `[JAR file location]/data/
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, PawPatrol will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
