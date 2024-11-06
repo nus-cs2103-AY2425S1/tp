@@ -13,14 +13,41 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   1. Open a command terminal.
+      1. For Windows Users:
+         1. Hold down the `Windows` key and press `R`(<kbd>&#x229E; Win</kbd> + <kbd>R</kbd>).
+         2. Type `cmd` and press `Enter`.
+      2. For Mac Users:
+         1. Hold down the `Command` key and press `Space` (<kbd>&#x2318; Cmd</kbd> + <kbd>Space</kbd>).
+         2. Type `Terminal` and press `Enter`.
+   1. Type `java --version` and press `Enter`.
+   2. If you have Java `17` or above installed, you should see a message like this. Referencing the first line (`openjdk XX.0.12 2024-07-16 LTS`), `XX` should be `17` or above.
+    ```
+       openjdk 17.0.12 2024-07-16 LTS
+       OpenJDK Runtime Environment Corretto-17.0.12.7.1 (build 17.0.12+7-LTS)
+       OpenJDK 64-Bit Server VM Corretto-17.0.12.7.1 (build 17.0.12+7-LTS, mixed mode, sharing)
+      ```
+    3. If you do not have Java `17` or above, installed, proceed to Step 2, otherwise, skip to Step 3.
+2. Install Java `17` using the following steps.
    1. Go to [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
    2. Download the appropriate installer for your operating system.
    3. Run the installer and follow the instructions to install Java.
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-3/tp/releases).
-
+   1. You can find the `.jar` file under the Assets section of the latest release.
+   1. Click on the file `contactmate.jar` to download it.
+   ![JarFileImage.png](images%2FJarFileImage.png)
 1. Copy the file to the folder you want to use as the _home folder_ for ContactMate.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactmate.jar` command to run the application.<br>
+1. Open a command terminal for the folder you put the jar file in by following these steps (Folder is named `folder with contactmate jar` in the examples below) :
+   1. For Windows Users:
+      1. Right-click on the folder.
+      1. Click on `Open in Terminal` as highlighted below.
+     ![WindowsCmdOpen.png](images%2FWindowsCmdOpen.png)
+   1. For Mac Users:
+      1. Hold down the `Control` key and click on the folder (<kbd>Control</kbd> + <kbd>Click</kbd>).
+      1. Click on `New Terminal at Folder` as highlighted below.
+      ![MacCmdOpen.jpg](images%2FMacCmdOpen.jpg)
+1. In the command terminal you just opened in Step 5, type the `java -jar contactmate.jar` command and press Enter to run the application.<br>
    1. When you first open the application, the list will contain the sample data. 
    2. The GUI will resemble the picture below. The next time you open ContactMate, the data will still be there for you to see.<br>
             ![Ui](images/Ui.png)
@@ -43,6 +70,20 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+### Elderly Fields
+
+Field | Description                                                                                                                                        | Constraints, Examples
+--------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
+**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Valid, government issued NRIC. e.g., `S1803269D`
+**Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
+**Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
+**Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
+**Address** | Address of the elderly.                                                                                                                            | Any non-blank word. e.g., `311, Clementi Ave 2, #02-25`, `Blk 30 Geylang Street 28, #06-48`
+**Call Frequency** | Frequency of calls to the elderly in days.                                                                                                         | A positive integer less than or equal to 7. e.g., `1` ... `7`
+**Tags** | Tags associated with the elderly.                                                                                                                  | Any word consisting only of alphabets and numbers. e.g., `wheelchairUser`, `fallrisk`, `livingAlone`
+**Call History** | List of dates the elderly was called and any notes associated with the call.                                                                      | Dates in the format `YYYY-MM-DD` and notes in any format.
+**Next Contact Date** | **Calculated** based on the most recent call and the call frequency, with this formula: `Next Contact Date = Recent Contact Date + Call Frequency` | N.A.
 
 <div markdown="block" class="alert alert-info">
 
@@ -209,20 +250,6 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
-
-### Elderly Fields
-
-Field | Description                                                                                                                                        | Constraints, Examples
---------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
-**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Valid, government issued NRIC. e.g., `S1803269D`
-**Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
-**Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
-**Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
-**Address** | Address of the elderly.                                                                                                                            | Any non-blank word. e.g., `311, Clementi Ave 2, #02-25`, `Blk 30 Geylang Street 28, #06-48`
-**Call Frequency** | Frequency of calls to the elderly in days.                                                                                                         | A positive integer less than or equal to 7. e.g., `1` ... `7`
-**Tags** | Tags associated with the elderly.                                                                                                                  | Any word consisting only of alphabets and numbers. e.g., `wheelchairUser`, `fallrisk`, `livingAlone`
-**Call History** | List of dates the elderly was called and any notes associated with the call.                                                                      | Dates in the format `YYYY-MM-DD` and notes in any format.
-**Next Contact Date** | **Calculated** based on the most recent call and the call frequency, with this formula: `Next Contact Date = Recent Contact Date + Call Frequency` | N.A.
 
 ### Navigating the Command History
 You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys.

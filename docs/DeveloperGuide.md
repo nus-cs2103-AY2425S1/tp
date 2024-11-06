@@ -395,8 +395,14 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
   * Use case ends.  
-* 3a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
-  * 3a1. ContactMate shows an error message.  
+* 3a. ContactMate detects an incorrect command format.  
+  * 3a1. ContactMate shows an error message with the correct command format.  
+  * Use case resumes from step 3\.
+* 3b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+  * 3b1. ContactMate shows an error message, explaining that the elderly does not exist.  
+  * Use case resumes from step 3\.
+* 3c. ContactMate detects an invalid date format.
+  * 3c1. ContactMate shows an error message with the correct date format.  
   * Use case resumes from step 3\.
 
 **System: ContactMate**  
@@ -431,9 +437,12 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
-* 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.  
-	* 2a1. ContactMate shows an error message.  
-	* Use case resumes from step 2\.
+* 2a. ContactMate detects an incorrect command format.
+    * 2a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 2\.
+* 2b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+    * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 2\.
 
 **System: ContactMate**  
 **Use case: UC04 \- Delete elderly from the call list**  
@@ -453,9 +462,12 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **Extensions:**  
 * 1a. The list is empty.  
     * Use case ends.  
-* 2a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.
-    * 2a1. ContactMate shows an error message.  
-	* Use case resumes from step 2\.
+* 2a. ContactMate detects an incorrect command format.
+    * 2a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 2\.
+* 2b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+    * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 2\.
 
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
@@ -467,20 +479,89 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff inputs details for the elderly they want to add to the system.  
-2. ContactMate adds the new elderly and shows the updated list with the newly added elderly.
+1. ContactMate adds the new elderly and shows the updated list with the newly added elderly.
 
       Use case ends.
 
 **Extensions:**  
-* 1a. ContactMate detects an invalid INDEX, invalid NRIC, or incorrect command syntax.  
-	* 1a1. ContactMate shows an error message.  
+* 1a. ContactMate detects an incorrect command format.  
+	* 1a1. ContactMate shows an error message with the correct command format.  
 	* Use case resumes from step 1\.  
-* 1b. ContactMate detects that the elderly being added has an NRIC matching someone in the contact book.  
-	* 1b1. ContactMate shows an error message saying this elderly already exists.  
+* 1b. ContactMate detects an invalid format for one of the fields.  
+    * 1b1. ContactMate shows an error message showing the correct format for the invalid field. 
+    * Use case resumes from step 1\.
+* 1c. ContactMate detects that the elderly being added has an NRIC matching someone in the contact book.  
+	* 1c1. ContactMate shows an error message saying this elderly already exists.  
 	* Use case resumes from step 1\.  
-* 1c. ContactMate detects that the elderly being added has a matching name, phone number or email with someone in the contact book.  
-	* 1c1. ContactMate shows a warning message that the elderly added has a matching field.  
+* 1d. ContactMate detects that the elderly being added has a matching name, phone number or email with someone in the contact book.  
+	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
+
+**System: ContactMate**     
+**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
+**Actor: Staff**    
+**Guarantees:**
+
+* Edits the elderly in the contact book only if input has no errors.
+
+**MSS:**
+
+1. Staff <u>lists elderly contacts by priority (UC02)</u>.
+1. Staff inputs INDEX or NRIC of elderly, along with the details for the elderly they want to edit.
+1. ContactMate edits the elderly and shows the updated list with the edited elderly.
+
+   Use case ends.
+
+**Extensions:**
+* 1a. The list is empty.
+    * Use case ends.
+* 2a. ContactMate detects an incorrect command format.
+    * 2a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 2\.
+* 2b. ContactMate detects an INDEX out of bounds of the list or NRIC (used to select the elderly) that does not exist in the list.
+    * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 2\.
+* 2c. ContactMate detects an invalid format for one of the fields.
+    * 2c1. ContactMate shows an error message showing the correct format for the invalid field.
+    * Use case resumes from step 2\.
+* 2d. ContactMate detects that the input of the NRIC field is matching someone in the contact book.
+    * 2d1. ContactMate shows an error message saying this elderly already exists.
+    * Use case resumes from step 2\.
+* 2e. ContactMate detects that input of the name, phone number or email fields matches with someone in the contact book.
+    * 2e1. ContactMate shows a warning message that the elderly has a matching name, phone number or email.
+    * Use case resumes from step 3\.
+
+**System: ContactMate**     
+**Use case: UC07 \- Search elderly by name or NRIC**    
+**Actor: Staff**  
+**Guarantees:**
+
+* Shows the filtered list of elderly that matches the name or NRIC.
+
+**MSS:**    
+
+1. Staff inputs the name or NRIC of the elderly they want to search.
+2. ContactMate shows the filtered list of elderly that matches the name or NRIC.
+
+    Use case ends.
+
+**System: ContactMate**      
+**Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
+**Actor: Staff**        
+**Guarantees:**     
+
+* Marks the elderly as called only if the input has no errors.
+
+**MSS:**
+
+1. Staff <u>searches the elderly by name (UC07)</u>.
+2. Staff <u>marks the elderly as called (UC01)</u>.
+
+    Use case ends.
+
+**Extensions:**
+* 1a. The filtered list is empty.
+    * Use case resumes from step 1\.
 
 ### Non-Functional Requirements
 
