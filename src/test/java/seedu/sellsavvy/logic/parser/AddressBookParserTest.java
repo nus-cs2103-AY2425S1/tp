@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +43,6 @@ import seedu.sellsavvy.testutil.OrderBuilder;
 import seedu.sellsavvy.testutil.OrderUtil;
 import seedu.sellsavvy.testutil.PersonBuilder;
 import seedu.sellsavvy.testutil.PersonUtil;
-import seedu.sellsavvy.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
 
@@ -64,8 +64,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deletePerson() throws Exception {
         DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
-                DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeletePersonCommand(INDEX_FIRST), command);
+                DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeletePersonCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -73,8 +73,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditPersonCommand(INDEX_FIRST, descriptor), command);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -106,23 +106,23 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addOrder() throws Exception {
         Order order = new OrderBuilder().build();
-        String commandString = OrderUtil.getAddOrderCommand(INDEX_FIRST, order);
+        String commandString = OrderUtil.getAddOrderCommand(INDEX_FIRST_PERSON, order);
         AddOrderCommand command = (AddOrderCommand) parser.parseCommand(commandString);
-        assertEquals(new AddOrderCommand(INDEX_FIRST, order), command);
+        assertEquals(new AddOrderCommand(INDEX_FIRST_PERSON, order), command);
     }
 
     @Test
     public void parseCommand_listOrder() throws Exception {
         ListOrderCommand command = (ListOrderCommand) parser.parseCommand(
-                ListOrderCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new ListOrderCommand(INDEX_FIRST), command);
+                ListOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ListOrderCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_deleteOrder() throws Exception {
         DeleteOrderCommand command = (DeleteOrderCommand) parser.parseCommand(
-                DeleteOrderCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteOrderCommand(TypicalIndexes.INDEX_FIRST), command);
+                DeleteOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+        assertEquals(new DeleteOrderCommand(INDEX_FIRST_ORDER), command);
     }
 
     @Test
@@ -130,24 +130,24 @@ public class AddressBookParserTest {
         Order order = new OrderBuilder().build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(order).build();
         EditOrderCommand command = (EditOrderCommand) parser.parseCommand(
-                EditOrderCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST.getOneBased() + " "
+                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased() + " "
                         + OrderUtil.getEditOrderDescriptorDetails(descriptor));
-        assertEquals(new EditOrderCommand(TypicalIndexes.INDEX_FIRST, descriptor), command);
+        assertEquals(new EditOrderCommand(INDEX_FIRST_ORDER, descriptor), command);
     }
 
     @Test
     public void parseCommand_markOrder() throws Exception {
         MarkOrderCommand command = (MarkOrderCommand) parser.parseCommand(
-                MarkOrderCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST.getOneBased());
-        assertEquals(new MarkOrderCommand(TypicalIndexes.INDEX_FIRST), command);
+                MarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+        assertEquals(new MarkOrderCommand(INDEX_FIRST_ORDER), command);
 
     }
 
     @Test
     public void parseCommand_unmarkOrder() throws Exception {
         UnmarkOrderCommand command = (UnmarkOrderCommand) parser.parseCommand(
-                UnmarkOrderCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST.getOneBased());
-        assertEquals(new UnmarkOrderCommand(TypicalIndexes.INDEX_FIRST), command);
+                UnmarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+        assertEquals(new UnmarkOrderCommand(INDEX_FIRST_ORDER), command);
     }
 
     @Test

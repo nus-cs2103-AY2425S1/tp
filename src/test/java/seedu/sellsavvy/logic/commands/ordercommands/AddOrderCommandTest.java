@@ -8,8 +8,8 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalOrders.CAMERA;
@@ -39,7 +39,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void execute_validPersonIndexUnfilteredList_success() {
-        AddOrderCommand addFirstOrder = new AddOrderCommand(INDEX_FIRST, ABACUS);
+        AddOrderCommand addFirstOrder = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
 
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
@@ -52,7 +52,7 @@ public class AddOrderCommandTest {
         assertCommandSuccess(addFirstOrder, model, firstExpectedMessage, expectedModel);
 
         // Second order, no warning messages
-        AddOrderCommand addSecondOrder = new AddOrderCommand(INDEX_FIRST, BLOCKS);
+        AddOrderCommand addSecondOrder = new AddOrderCommand(INDEX_FIRST_PERSON, BLOCKS);
         String secondExpectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(BLOCKS));
         personToAddUnder.getOrderList().add(BLOCKS);
@@ -62,7 +62,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void execute_duplicatePendingOrder_warningGiven() {
-        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
         // add the first order to the person's order list
         model.getFilteredPersonList().get(0).getOrderList().add(ABACUS.createCopy());
 
@@ -78,7 +78,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void execute_duplicateCompletedOrder_success() {
-        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
         Order completedAbacus = new OrderBuilder(ABACUS).withStatus(Status.COMPLETED).build();
         model.getFilteredPersonList().get(0).getOrderList().add(completedAbacus);
 
@@ -94,7 +94,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void execute_orderDateHasElapsed_warningGiven() {
-        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, CAMERA);
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, CAMERA);
 
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
@@ -116,11 +116,11 @@ public class AddOrderCommandTest {
 
     @Test
     public void execute_validPersonIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
-        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
 
         Model expectedModel = model.createCopy();
-        showPersonAtIndex(expectedModel, INDEX_FIRST);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
         String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(ABACUS));
@@ -132,7 +132,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void executeInvalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddOrderCommand addOrderCommand = new AddOrderCommand(outOfBoundIndex, ABACUS);
 
@@ -141,29 +141,29 @@ public class AddOrderCommandTest {
 
     @Test
     public void equals() {
-        final AddOrderCommand standardCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
+        final AddOrderCommand standardCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
 
         // same values -> returns true
-        assertTrue(standardCommand.equals(new AddOrderCommand(INDEX_FIRST, ABACUS)));
+        assertTrue(standardCommand.equals(new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS)));
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
 
         // different Index -> returns false
-        assertFalse(standardCommand.equals(new AddOrderCommand(INDEX_SECOND, ABACUS)));
+        assertFalse(standardCommand.equals(new AddOrderCommand(INDEX_SECOND_PERSON, ABACUS)));
 
         // different item -> returns false
-        assertFalse(standardCommand.equals(new AddOrderCommand(INDEX_FIRST, BLOCKS)));
+        assertFalse(standardCommand.equals(new AddOrderCommand(INDEX_FIRST_PERSON, BLOCKS)));
     }
 
     @Test
     public void toStringMethod() {
-        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
+        AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST_PERSON, ABACUS);
         String expected = AddOrderCommand.class.getCanonicalName()
-                + "{index=" + INDEX_FIRST + ", order=" + ABACUS + "}";
+                + "{index=" + INDEX_FIRST_PERSON + ", order=" + ABACUS + "}";
         assertEquals(expected, addOrderCommand.toString());
     }
 }
