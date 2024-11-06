@@ -107,7 +107,7 @@ public class Listing {
 
     /**
      * Checks if the given listing is the same listing as the current listing.
-     * Two listings are considered the same if they have the same address and seller.
+     * Two listings are considered the same if they have the same address or name.
      *
      * @param otherListing The other listing to compare.
      * @return True if the listings are the same, false otherwise.
@@ -117,10 +117,11 @@ public class Listing {
             return true;
         }
         return otherListing != null
-                && otherListing.address.equals(this.address)
-                && otherListing.name.equals(this.name);
+                && (otherListing.address.equals(this.address)
+                || otherListing.name.equals(this.name));
     }
 
+    // CHECK LOGIC FOR THIS
     @Override
     public boolean equals(Object other) {
         if (other == this) {
