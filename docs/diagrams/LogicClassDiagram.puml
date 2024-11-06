@@ -43,7 +43,7 @@ Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
 Command .right.> Ui
-note right of Ui: Only used for \nDelete Command\n and Clear Command
+note right of Ui: Only used for \nDeleteCommand\n and ClearCommand
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
