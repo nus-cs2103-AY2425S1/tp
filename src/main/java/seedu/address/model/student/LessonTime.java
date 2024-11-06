@@ -108,6 +108,10 @@ public class LessonTime implements Comparable<LessonTime> {
     @Override
     public int compareTo(LessonTime o) {
 
+        if (this.equals(o)) {
+            return 0;
+        }
+
         int dayComparison = Days.valueOf(this.lessonDay).ordinal() - Days.valueOf(o.lessonDay).ordinal();
         if (dayComparison != 0) {
             return dayComparison;
