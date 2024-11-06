@@ -3,8 +3,15 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## Overview
 
+CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
+
+Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -14,12 +21,21 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ccaconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in. E.g. If you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
+    ```dtd
+    cd ~/Desktop/CCA
+    ```
+
+1. Launch the CCAConnect application by typing in the following command:
+    ```dtd
+    java -jar ccaconnect.jar
+    ```
+
+   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -27,11 +43,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe` : Adds a person named `John Doe`, with those specified information.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts stored in the current profile.
 
    * `exit` : Exits the app.
 
@@ -51,70 +67,109 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+[!Warning]
+> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
-
-Format: `help`
+#### Format
+```
+help
+```
 
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]`
+#### Format
+```
+add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
+```
 
-Alias: `a` can be used in place of `add`
+#### Alias
+`a` can be used in place of `add`.
 
-Parameters:
-- `NAME`: should contain non-numeric characters and spaces, and should not be blank
-- `PHONE_NUMBER`: should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9)
-- `EMAIL`: should be a valid email address (follow the restrictions provided in the error message)
-- `TELEGRAM`: should be alphanumeric characters, and be between 5-32 characters long
-- `ROLE`: should be between 1-20 characters long, if it exists
-- `f/`: this indicates if the contact should be a favourite contact
+#### Parameters
+
+|Parameter|Prefix|Compulsory?| Remarks                                                                                                                                    |
+|---------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------|
+|`NAME`|`n/`|Yes| Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                          |
+|`PHONE_NUMBER`|`p/`|Yes| Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9). |
+|`EMAIL`|`e/`|Yes| Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).           |
+|`TELEGRAM`|`t/`|Yes| Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                  |
+|`ROLE`|`r/`|No| Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                   
+|      |`f/`|No| Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.|
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person is uniquely identified by his/her **telegram handle**
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of roles (including 0)
 </div>
 
-Examples:
+#### Example
 * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe12`
 * `a n/Betsy Crowe r/chairperson e/betsycrowe@example.com t/betsyC p/81234567 r/member f/`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. <br/>
+This can be used to reset the list of contacts back to its unfiltered state
 
-Format: `list`
+#### Format
+```
+list
+```
+
+#### Alias
+`l` can be used in place of `list`.
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+#### Format
+```
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
+```
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+#### Alias
+`e` can be used in place of `edit`.
+
+#### Parameters
+|Parameter|Prefix| Compulsory? | Remarks                                                                                                                                                                                                      |
+|---------|------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`INDEX`|   | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).|        
+|`NAME`|`n/`| No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                            |
+|`PHONE_NUMBER`|`p/`| No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                   |
+|`EMAIL`|`e/`| No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                             |
+|`TELEGRAM`|`t/`| No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                    |
+|`ROLE`|`r/`| No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative.|
+|      |`f/`| No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                 |
+|      |`nf/`| No         | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                         |
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing roles, the existing roles of the person will be removed i.e adding of roles is not cumulative.
-* You can remove all the person’s roles by typing `t/` without
-    specifying any roles after it.
+* Only one of `f/` or `nf/` should be present in the command at once, not both.
 
-Examples:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove all the person’s roles by typing `r/` without specifying any roles after it.
+</div>
+
+#### Example
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
@@ -122,73 +177,117 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Format
+```
+find [n/NAMEKEYWORD] [r/ROLEKEYWORD] [t/TELEGRAMKEYWORD] [f/] 
+```
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When using `find`, at least one of the optional parameters must be included
+</div>
+
+#### Alias
+`f` can be used in place of `find`.
+
+#### Parameters
+|Parameter|Prefix|Compulsory?| Remarks                                                                                    |
+|---------|------|-----------|--------------------------------------------------------------------------------------------|
+|`NAMEKEYWORD`|`n/`|No| Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name |
+|`ROLEKEYWORD`|`r/`|No| Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role |
+|`TELEGRAMKEYWORD`|`t/`|No| Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle|
+
+* The search is case-insensitive for all parameters. E.g `hans` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+#### Example
+* `find n/john` returns contacts with the name `john` and `John Doe`
+* `find n/jane t/johnDoe` returns contacts with the name `jane` and a contact with the telegram handle `johnDoe`<br>
+
+### Sorting the contacts: `sort`
+
+Sorts the list of contacts by name, in a user-specified order.<br/>
+Sorting works together with the `find` command, meaning that if you sort after reducing the number of listed contacts, the sorting occurs for those listed contacts.
+
+#### Format
+`sort ORDER`
+
+#### Alias
+`so` can be used in place of `sort`
+
+#### Parameters
+|Parameter|Prefix|Compulsory?| Remarks                                                                                    |
+|---------|------|-----------|--------------------------------------------------------------------------------------------|
+|`ORDER` |      | Yes        |`ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts.|
+
+### Example
+* `sort asc` sorts the current list of contacts by name, in ascending order
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Even though `sort` orders the list of contacts in alphabetical order of their names, this action is case-insensitive. This means that the letters `A` and `a` will be treated equally, for instance.
+</div>
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+#### Format
+```
+delete INDEX
+```
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+#### Alias
+`d` can be used in place of `delete`.
+
+#### Parameters
+|Parameter|Prefix|Compulsory?| Remarks                                                                                                                  |
+|---------|------|-----------|--------------------------------------------------------------------------------------------------------------------------|
+|`INDEX`|        |Yes        | Deletes the person at the specified `INDEX`.<br/> The index **must be a positive integer**, e.g. 1, 2, 3, …​, 2147483647.|
+
+* The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Listing all members for attendance : `attendance`
 
 Lists all contacts that have the role “Member” in the address book, making it easier to check and mark attendance for them directly.
 
-Format: `attendance` or `atd` (alias)
+#### Format
+```
+attendance
+```
 
-* The command must be in lowercase. Variations (e.g., capitalized or mixed-case) will not be recognized.
-* This command does not take any additional parameters. If any extra input is provided, an error message will be displayed.
+#### Alias
+`atd` can be used in place of `attendance`.
 
+#### Parameters
+This command does not take any additional parameters.
 
+If any extra input is provided, an error message will be displayed.
+
+#### Example
 ![result for 'attendance'](images/ListAttendanceResult.png)
 
 ### Marking attendance : `mark`
 
 Marks attendance for **members** with specified Telegram handles on a specific date.
 
+#### Format
+```
+mark t/TELEGRAM…​ d/DATE
+```
 
-Format: `mark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+#### Alias
+`m` can be used in place of `mark`.
 
-Alternative Format: `m t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+#### Parameters
+| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                                                                                                                            |
+|------------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TELEGRAM` |`t/`|Yes| `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** 
+|`DATE`|`d/`|Yes| `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
 
-* Each Telegram handle must begin with t/, followed by an alphanumeric or _ string with no spaces, e.g., t/berniceyu123.
-* The command is not case-sensitive (e.g., t/alexyeoh is the same as t/ALEXYEOH) except command keyword `mark` itself.
-* The command does not allow spaces between the prefix t/ or d/ and the argument.
-
-Command Parameters:
-- Telegram Handles (`t/telegram`):
-  * Accepts multiple handles separated by spaces, each beginning with t/.
-  * Handles must be alphanumeric or include _ (e.g., t/alex_yeoh123).
-  * Invalid input: Spaces within or after the prefix (e.g., t/ alexyeoh) result in an error.
-  * Telegram handle should belong to a contact with `Member` role.
-
-- Date (`d/date`)
-  * Takes in one string value with format d/YYYY-MM-DD (eg. d/2024-01-22 not d/2024/1/22)
-  * Only accept one date, if multiple dates are input, only the last one will be recorded as the attendance date.
-  * Date must not be later than current date (eg. 2090-11-02 is an invalid datetime)
-
-Examples:
-
+#### Example
 * `mark t/toom t/maary d/2024-11-02`
 
   ![result of command `mark t/toom t/maary d/2024-11-02`](images/MarkCommandResult.png)
@@ -206,25 +305,46 @@ Examples:
 
 Unmarks attendance for **members** with specified Telegram handles on a specific date.
 
+#### Format
+```
+unmark t/TELEGRAM…​ d/DATE
+```
 
-Format: `unmark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+#### Alias
+`um` can be used in place of `unmark`.
 
-Alternative Format: `um t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` 
 
-* All parameter constraints and error messages are the same as `mark` command, except `mark` is replaced by `unmark`
-
+#### Parameters
+| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                                                                                                                            |
+|------------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TELEGRAM` |`t/`|Yes| `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** 
+|`DATE`|`d/`|Yes| `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This action permanently deletes all the entries from the address book! **Use with extreme caution**.
+</div>
+
+#### Format
+```
+clear
+```
+
+#### Alias
+`c` can be used in place of `clear`
+
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+#### Format
+```
+exit
+```
 
 ### Saving the data
 
@@ -239,9 +359,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
