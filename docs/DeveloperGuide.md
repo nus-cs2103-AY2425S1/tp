@@ -99,6 +99,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -652,17 +653,38 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `add-car 10 vrn/SJH9514P vin/1HGCM82633A004355 make/Nissan model/Altima`  
       **Expected:** No car is added. Error message indicating that the client index is out of bounds.
 
-### Deleting a client
+### Deleting a Client
 
-1. Deleting a client while all clients are being shown
+<box type="info" seamless>
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+**Note:** For Checked-In Clients: Client can be deleted via `del-client` but Car cannot be deleted via `del-car`.
 
-   1. Test case: `del-client 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+</box>
 
-   1. Test case: `del-client 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message.
+1. **Deleting a client with or without a car**
 
-   1. Other incorrect delete commands to try: `del-client`, `del-client x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to delete exists.
+
+   1. **Test case:** Test case: `del-client 1`<br>
+      **Expected:** First client is deleted from the list. Details of the deleted client are shown in the status message.
+
+   1. **Test case:** `del-client 0`<br>
+      **Expected:** No client is deleted. Error details shown in the status message.
+
+   1. **Other incorrect delete commands to try:** `del-client`, `del-client x`, `...` (where x is larger than the list size)<br>
+      **Expected:** Similar to previous.
+
+### Checking in/ out a Client
+
+1. **Checking in/ out a client with a car**
+
+   1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to check exists and **has a car**.
+
+   1. **Test case:** Test case: `check 1`<br>
+      **Expected:** First client is checked in/ out from the list. Details of the checked client are shown in the status message. If client is checked-in, display `Checked-In` icon in the list, else if client is checked-out, hide the `Checked-In` icon.
+
+   1. **Test case:** `check 0`<br>
+      **Expected:** No client is checked. Error details shown in the status message.
+
+   1. Other incorrect check commands to try: `check`, `check x`, `...` (where x is larger than the list size)<br>
+      **Expected:** Similar to previous.
