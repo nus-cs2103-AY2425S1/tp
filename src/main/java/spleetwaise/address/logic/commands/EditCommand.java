@@ -122,11 +122,12 @@ public class EditCommand extends Command {
         requireNonNull(model);
         requireNonNull(oldPerson);
         requireNonNull(updatedPerson);
-        model.updateFilteredTransactionList(new PersonFilterPredicate(oldPerson));
         for (Transaction txn : model.getFilteredTransactionList()) {
-            model.setTransaction(txn, new Transaction(txn.getId(), updatedPerson, txn.getAmount(), txn.getDescription(),
-                    txn.getDate(), txn.getCategories(), txn.getStatus()
-            ));
+            if (txn.getPerson().equals(oldPerson)) {
+                model.setTransaction(txn, new Transaction(txn.getId(), updatedPerson, txn.getAmount(),
+                        txn.getDescription(), txn.getDate(), txn.getCategories(), txn.getStatus()
+                ));
+            }
         }
     }
 
