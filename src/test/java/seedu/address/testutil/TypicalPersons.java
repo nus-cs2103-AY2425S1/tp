@@ -26,27 +26,27 @@ public class TypicalPersons {
             .withEmail("alice@example.com").withGender("F").withAge("20").withDetail("To be assigned")
             .withStudyGroupTags("1A").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withEmail("johnd@example.com").withGender("M").withAge("40").withDetail("Study completed")
+            .withEmail("benson@example.com").withGender("M").withAge("40").withDetail("Study completed")
             .withStudyGroupTags("Control", "1A").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
+    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withEmail("carl@example.com")
             .withGender("M").withAge("30").withDetail("To be assigned").withStudyGroupTags("1A")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withEmail("cornelia@example.com").withGender("M").withAge("50").withDetail("To be assigned")
+            .withEmail("daniel@example.com").withGender("M").withAge("50").withDetail("To be assigned")
             .withStudyGroupTags("1B").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withEmail("werner@example.com").withGender("F").withAge("60")
+            .withEmail("elle@example.com").withGender("F").withAge("60")
             .withStudyGroupTags("2A").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withEmail("lydia@example.com").withGender("F").withAge("35").withDetail("To follow up").build();
+            .withEmail("fiona@example.com").withGender("F").withAge("35").withDetail("To follow up").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withEmail("anna@example.com").withGender("M").withAge("36").build();
+            .withEmail("george@example.com").withGender("M").withAge("36").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
-            .withEmail("stefan@example.com").withGender("M").withAge("17").withDetail("To follow up").build();
+            .withEmail("hoon@example.com").withGender("M").withAge("17").withDetail("To follow up").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
-            .withEmail("hans@example.com").withGender("F").withAge("21")
+            .withEmail("ida@example.com").withGender("F").withAge("21")
             .withStudyGroupTags("Treatment", "1A").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

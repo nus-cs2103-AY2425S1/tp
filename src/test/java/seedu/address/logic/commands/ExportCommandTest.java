@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -25,8 +25,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.predicates.GenderMatchesKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code ExportCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code ExportCommand}.
  */
 public class ExportCommandTest {
 
@@ -54,6 +53,7 @@ public class ExportCommandTest {
         Long match = Files.mismatch(exportFile.toPath(), expectedExport.toPath());
         assertEquals(-1L, match);
     }
+
     @Test
     public void execute_invalidPathNameUnfilteredList_throwsCommandException() {
         String invalidPathName = "";
@@ -66,7 +66,7 @@ public class ExportCommandTest {
 
     @Test
     public void execute_validPathNameFilteredList_success() throws IOException {
-        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
+        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Set.of("m")));
 
         Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
         Path expectedExportListPath = TEST_DATA_FOLDER.resolve("expectedExportFilteredList.txt");
@@ -79,7 +79,7 @@ public class ExportCommandTest {
         String expectedMessage = ExportCommand.MESSAGE_SUCCESS + exportFile.getAbsolutePath();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
+        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Set.of("m")));
 
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
         Long match = Files.mismatch(exportFile.toPath(), expectedExport.toPath());

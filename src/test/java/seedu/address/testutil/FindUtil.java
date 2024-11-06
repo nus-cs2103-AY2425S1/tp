@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -13,10 +13,9 @@ import seedu.address.model.person.predicates.PredicateGroup;
  */
 public class FindUtil {
     /**
-     * Returns a criteria for find command using provided {@code Prefix} and
-     * keywords.
+     * Returns a criteria for find command using provided {@code Prefix} and keywords.
      */
-    public static String getFindCriteria(Prefix prefix, List<String> keywords) {
+    public static String getFindCriteria(Prefix prefix, Set<String> keywords) {
         return prefix + keywords.stream().collect(Collectors.joining(" "));
     }
 

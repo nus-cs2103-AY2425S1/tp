@@ -21,11 +21,17 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX_1 [INDEX_2]... (must be positive integer(s))\n"
-            + "Example: " + COMMAND_WORD + " 1 3 5";
+            + "Parameters: INDEX_1 [INDEX_2]... [INDEX_3-INDEX_4]... (must be positive integer(s))\n"
+            + "Example: " + COMMAND_WORD + " 1 3 5-9 20";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted successfully!\n"
             + "Deleted participant(s): %1$s";
+
+    public static final String MESSAGE_INVALID_RANGE = "Invalid range: The start index must be less than "
+            + "or equal to the end index.\n";
+
+    public static final String MESSAGE_FULL_RANGE = "Both the lower and upper bounds should be present.\n"
+            + "Ensure there are no spaces around the hyphen in range inputs. Example: 1-5";
 
     private final List<Index> targetIndices;
 

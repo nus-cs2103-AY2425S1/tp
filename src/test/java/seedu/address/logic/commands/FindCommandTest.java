@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +24,7 @@ import seedu.address.model.person.predicates.PredicateGroup;
 import seedu.address.testutil.FindUtil;
 
 /**
- * Contains integration tests (interaction with the Model) for
- * {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -33,9 +33,9 @@ public class FindCommandTest {
     @Test
     public void equals() {
         PredicateGroup firstPredicateGroup = FindUtil.getPredicateGroup(new NameContainsKeywordsPredicate(
-                Collections.singletonList("first")));
+                Set.of("first")));
         PredicateGroup secondPredicateGroup = FindUtil.getPredicateGroup(new NameContainsKeywordsPredicate(
-                Collections.singletonList("second")));
+                Set.of("second")));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicateGroup);
         FindCommand findSecondCommand = new FindCommand(secondPredicateGroup);
@@ -80,7 +80,7 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         PredicateGroup predicateGroup = FindUtil.getPredicateGroup(
-                new NameContainsKeywordsPredicate(Arrays.asList("keyword")));
+                new NameContainsKeywordsPredicate(Set.of("keyword")));
         FindCommand findCommand = new FindCommand(predicateGroup);
         String expected = FindCommand.class.getCanonicalName() + "{predicates=" + predicateGroup + "}";
         assertEquals(expected, findCommand.toString());
@@ -90,6 +90,6 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new NameContainsKeywordsPredicate(Set.of(userInput.split("\\s+")));
     }
 }

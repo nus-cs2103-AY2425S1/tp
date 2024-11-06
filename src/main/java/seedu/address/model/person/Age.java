@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's age in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
+ * Represents a Person's age in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidAge(String)}
  */
 public class Age {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain a non-negative integer, between 0 and 150 (inclusive)";
+    public static final String MESSAGE_CONSTRAINTS = "Age should only contain a non-negative integer, "
+            + "between 0 and 150 (inclusive)!";
 
     /*
      * The age must be a non-negative integer.
@@ -31,8 +31,8 @@ public class Age {
     }
 
     /**
-     * Returns true if a given string is a valid age.
-     * A valid age should be a non-negative integer, between 0 and 150 (inclusive).
+     * Returns true if a given string is a valid age. A valid age should be a non-negative integer, between 0 and 150
+     * (inclusive).
      */
     public static boolean isValidAge(String test) {
 

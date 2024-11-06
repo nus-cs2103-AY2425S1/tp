@@ -94,11 +94,20 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
-     * to the {@code Person} that we are building.
+     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it to the {@code Person} that we are
+     * building.
      */
     public PersonBuilder withStudyGroupTags(String... studyGroups) {
         this.studyGroupTags = SampleDataUtil.getStudyGroupTagSet(studyGroups);
+        return this;
+    }
+
+    /**
+     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and add it to the {@code Person} that we are
+     * building's existing set of study group tags .
+     */
+    public PersonBuilder withAppendStudyGroupTags(String... studyGroups) {
+        this.studyGroupTags.addAll(SampleDataUtil.getStudyGroupTagSet(studyGroups));
         return this;
     }
 

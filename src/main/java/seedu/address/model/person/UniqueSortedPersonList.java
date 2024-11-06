@@ -12,17 +12,22 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A sorted list of persons that enforces uniqueness between its elements and does not allow nulls.
+ *
+ * The list is sorted based on the lexicographical ordering of names using {@code String#compareToIgnoreCase(String)}.
+ * Whenever a person is added or updated, the list will automatically reorder to maintain this sorting, to improve user
+ * experience.
+ *
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
  * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * unique in terms of identity in the UniqueSortedPersonList. However, the removal of a person uses
+ * Person#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniqueSortedPersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
@@ -46,6 +51,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        sortListByName();
     }
 
     /**
@@ -66,6 +72,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        sortListByName();
     }
 
     /**
@@ -79,9 +86,10 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueSortedPersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortListByName();
     }
 
     /**
@@ -95,6 +103,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        sortListByName();
     }
 
     /**
@@ -116,12 +125,12 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniqueSortedPersonList)) {
             return false;
         }
 
-        UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueSortedPersonList otherUniqueSortedPersonList = (UniqueSortedPersonList) other;
+        return internalList.equals(otherUniqueSortedPersonList.internalList);
     }
 
     @Override
@@ -147,4 +156,13 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Sorts the list according to lexicographical order of names, ignoring case
+     */
+    private void sortListByName() {
+        internalList.sort((person1, person2) -> person1.getName().toString()
+                .compareToIgnoreCase(person2.getName().toString()));
+    }
+
 }

@@ -4,17 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's name in the address book. Guarantees: immutable; is
- * valid as declared in {@link #isValidName(String)}
+ * Represents a Person's name in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidName(String)}
  */
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces, "
-            + "and it should include given name and surname";
+            + "and it should include given name and surname!";
 
     /*
-     * The name must only contain alphabetical characters and spaces.
-     * It must contain at least two words, for given name and surname.
+     * The name must only contain alphabetical characters and spaces. It must contain at least two words, for given name
+     * and surname.
      */
     public static final String VALIDATION_REGEX = "([a-zA-Z]+ )+[a-zA-Z]+";
 

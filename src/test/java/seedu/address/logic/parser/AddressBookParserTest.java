@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_3A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNUSED_STUDY_GROUP_TAG_3A;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -13,8 +15,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -83,9 +86,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> generalKeywords = Arrays.asList("foo", "bar", "baz");
-        List<String> genderKeywords = Arrays.asList("m", "F");
-        List<String> ageKeywords = Arrays.asList("12", "34", "56");
+        Set<String> generalKeywords = Set.of("foo", "bar", "baz");
+        Set<String> genderKeywords = Set.of("m", "F");
+        Set<String> ageKeywords = Set.of("12", "34", "56");
 
         // parse name criteria
         FindCommand nameCommand = (FindCommand) parser.parseCommand(
@@ -162,6 +165,13 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_assign() throws Exception {
+        AssignCommand command = (AssignCommand) parser.parseCommand(
+                AssignCommand.COMMAND_WORD + " " + VALID_UNUSED_STUDY_GROUP_TAG_3A);
+        assertEquals(new AssignCommand(Collections.singletonList(DESC_3A)), command);
     }
 
     @Test

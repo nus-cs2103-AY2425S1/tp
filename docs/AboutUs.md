@@ -13,9 +13,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/wkxcass.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/wkxcass)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kexin.md)]
 
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
@@ -26,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/k-hian.png" width="200px">
 
 [[github](http://github.com/k-hian)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kayhian.md)]
 
 * Role: Deliverables and deadlines
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
@@ -36,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wujiaweijoanna.png" width="200px">
 
 [[github](http://github.com/wujiaweijoanna)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jiawei.md)]
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.

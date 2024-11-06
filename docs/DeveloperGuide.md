@@ -155,94 +155,44 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Find feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The find command allows the user to filter the list of contacts by (at least one) criteria applied to data field(s) (`Name`, `Email`, `Gender`, `Age`, `Detail` and/or `StudyGroupTags`). Each field correspond to one criteria, and can consist of one or more keywords. The list of persons in the `AddressBook` is filtered, then displayed to the user.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** `n/Alice Bob` is a single criteria, while `n/Alice e/@example.com` is two criteria.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The user executes a find command with some inputs, for e.g. `find n/Alex Bernice t/1A`, which goes through the `Logic` component as shown by the following sequence diagram:
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![FindSequenceDiagram](images/FindSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+For each criteria, a `Predicate` is initialised in the `Model` component as shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+![FindSequenceDiagram](images/FindSequenceDiagram-PredicateModel.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `PredicateGroup` consist of one or more `Predicate`. The following sequence diagram shows how a `PredicateGroup` is used to test a `Person` record:
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+![PredicateGroupSequenceDiagram](images/PredicateGroupSequenceDiagram.png)
 
-</div>
+#### Design Considerations:
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Aspect: Handling multiple criteria**<br>
+Criteria are segregated by data field, and each criteria is independently evaluated.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+* **Alternative 1 (current choice):**  For a person to be included, they must _satisfy all criteria_.
+  * Pros: Allow the find command to filter very specific criteria that must all be fulfilled, enabling more accurate results.
+  * Cons: May return fewer results, especially when using multiple criteria.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 2:** For a person to be included, they only need to _satisfy one criteria_.
+  * Pros: Returns wider range of results, potentially finding more relevant person records.
+  * Cons: Less specific when finding for exact match.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,8 +223,8 @@ Researchers who,
 
 **Value proposition**:
 
-As researchers have to handle large groups of participants across multiple studies, `ResearchRoster` allows them to 
-* have all participants consolidated in a single program 
+As researchers have to handle large groups of participants across multiple studies, `ResearchRoster` allows them to
+* have all participants consolidated in a single program
 * consolidate a list of contact details based on **specific experimental criteria**
 * export it to an easy-to-read format for better data organization
 
@@ -285,38 +235,30 @@ Thus, *ResearchRoster* allows researchers to save time, effort and energy whilst
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​     | I want to …​                                                                               | So that I can …​                                                                     |
-|----------|-------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | user        | add a new person                                                                           | store a new person in my contact list                                                |
-| `* * *`  | user        | add details to contacts                                                                    | store details of people in my contact list                                           |
-| `* * *`  | researcher  | add multiple tags to participants                                                          | tag contacts to multiple study groups                                                |
-| `* * *`  | user        | delete contacts                                                                            | remove old/ contacts that I no longer need                                           |
-| `* *`    | user        | save my contact list                                                                       | keep my contacts between sessions                                                    |
-| `*`      | user        | exit the program                                                                           | clear up my processes                                                                |
-| `* * *`  | user        | use a program that is fast                                                                 | retrieve information quickly                                                         |
-| `* * *`  | user        | work on a clean, user-friendly *UI*                                                        | navigate the platform with ease                                                      |
-| `* * *`  | user        | list all contacts                                                                          | view my list of contacts                                                             |
-| `* * *`  | user        | see usage instructions                                                                     | refer to instructions when I forget how to use the app                               |
-| `* *`    | user        | be given a prompt on what format to enter details                                          | easily use commands without having to memorise the accepted format for the CLI entry |
-| `* *`    | user        | edit contacts                                                                              | update details of my contacts                                                        |
-| `* * *`  | researcher  | update participant information in bulk                                                     | quickly make changes to large groups of participants                                 |
-| `* *`    | researcher  | archive participants who are no longer active                                              | keep my current participant list uncluttered                                         |
-| `* *`    | user        | clear all entries                                                                          | efficiently restart my progress                                                      |
-| `* * *`  | user        | search contacts by name                                                                    | locate contacts without having to go through the entire list                         |
-| `* * *`  | researcher  | search for participants based on study                                                     | quickly locate specific groups of participants                                       |
-| `* * *`  | researcher  | tag participants with specific attributes (e.g., age, gender, study criteria)              | quickly filter and sort participants                                                 |
-| `* * *`  | researcher  | change tag details                                                                         | update the contacts with experimental details                                        |
-| `* * *`  | user        | filter contacts by tags                                                                    | view my contacts by specific groups                                                  |
-| `* * *`  | user        | sort my contact list by name                                                               | locate a person easily                                                               |
-| `* * *`  | researcher  | categorize participants by their participation status (e.g., active, completed, withdrawn) | easily manage ongoing studies                                                        |
-| `* *`    | user        | hide private contact details                                                               | prevent others from viewing them without permission                                  |
-| `* *`    | researcher  | export contacts emails (or other details) into easy to copy-paste format                   | copy the details (like emails) into other places easily                              |
-| `* *`    | researcher  | anonymize participant data when exporting or sharing                                       | ensure participant confidentiality and legal compliance                              |
-| `* *`    | researcher  | assign participants randomly into sample groups                                            | easily obtain samples for experiments                                                |
-| `* *`    | researcher  | get reminders about upcoming sessions                                                      | be reminded of the time without manually noting it down                              |
-| `* *`    | researcher  | receive reminders when participant data is missing or needs updates                        | keep participant records thorough and current                                        |
-| `* *`    | researcher  | track the progress and completion of tasks related to participants                         | ensure all administrative tasks are completed                                        |
-| `* *`    | user        | undo the most recent command                                                               | easily undo commands if I key in the wrong information                               |
+| Priority | As a …​    | I want to …​                                                                          | So that I can …​                                                                     |
+|----------|------------|---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | user       | add a new person                                                                      | store a new person in my contact list                                                |
+| `* * *`  | user       | add details to contacts                                                               | store details of people in my contact list                                           |
+| `* * *`  | researcher | add multiple tags to participants                                                     | tag participants to multiple study groups                                                |
+| `* * *`  | user       | delete contacts                                                                       | remove old contacts that I no longer need                                           |
+| `* *`    | user       | save my contact list                                                                  | keep my contacts between sessions                                                    |
+| `*`      | user       | exit the program                                                                      | clear up my processes                                                                |
+| `* * *`  | user       | use a program that is fast                                                            | retrieve information quickly                                                         |
+| `* * *`  | user       | work on a clean, user-friendly *UI*                                                   | navigate the platform with ease                                                      |
+| `* * *`  | user       | list all contacts                                                                     | view my list of contacts                                                             |
+| `* * *`  | user       | see usage instructions                                                                | refer to instructions when I forget how to use the app                               |
+| `* *`    | user       | be given a prompt on what format to enter details                                     | easily use commands without having to memorise the accepted format for the CLI entry |
+| `* *`    | user       | edit contacts                                                                         | update details of my contacts                                                        |
+| `* * *`  | researcher | clear participant information in bulk                                                 | quickly clear old groups of participants                                             |
+| `* *`    | user       | clear all entries                                                                     | efficiently restart my progress                                                      |
+| `* *`    | user       | be prompted for confirmation before clearing my contacts                              | ensure that I do not make a mistake when doing a large irreversible delete           |
+| `* * *`  | researcher | search for participants based on criteria(s) (i.e., study group and/or other details) | quickly locate specific groups of participants                                       |
+| `* * *`  | researcher | add and delete tags to and from a specific exisitng participant                       | effectively update the participants' study group for organization                    |
+| `* * *`  | user       | filter contacts by any attribute                                                      | view my contacts by specific groups                                                  |
+| `* * *`  | researcher | find participants using multiple criteria                                             | view specific participants of interest                                               |
+| `* *`    | researcher | export contacts emails into easy to copy-paste format                                 | copy the details (like emails) into other places easily                              |
+| `* *`    | researcher | assign participants randomly into study groups                                        | easily obtain randomized study groups for experiments                                                |
+| `* *`    | researcher | get reminders about upcoming sessions                                                 | be reminded of the time without manually noting it down                              |
 
 ### Use cases
 
@@ -621,6 +563,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+* 4a. The given input only specifies one sample group.
+
+    * 4a1. ResearchRoster assigns the list of persons into this single sample group by adding study group tags to each record.
+
+      Use case ends.
 
 #### **Use Case: UC12 - Undo last action**
 * *Preconditions:* user has performed an action
@@ -798,40 +745,123 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a command window. Run the `java -version` command to ensure that you are using Java 17.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Launch the jar file using the `java -jar` command. Use double-clicking as a last resort.<br> 
+   Expected: Shows the GUI with a set of sample contacts.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by using the java -jar command.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting
+    1. Test case: `exit`<br>
+       Expected: Exit message is displayed, followed by the application closing. 
+   
 
-### Deleting a person
+### Adding a person: `add`
 
-1. Deleting a person while all persons are being shown
+1. Adds a person to the address book
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `add n/John Doe e/john@example.com g/M a/30 d/to be assigned t/1A t/2B`<br>
+       Expected: Contact is added successfully, with details of the added contact shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `add n/John Lee e/john@example.com g/M a/30`<br>
+       Expected: Error message "This person already exists in the address book!" is displayed due to duplicate emails.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `add n/Emma Lee e/emma@gmail.com`<br>
+       Expected: Error message "Invalid command format!" is displayed due to missing mandatory fields.
+   
+### Editing a person : `edit`
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Edits an existing person in the address book
 
-1. _{ more test cases …​ }_
+    1. Test case: `edit 1 n/Betsy Crower t/1B -t/2B`<br> 
+       Expected: Edits the name of the 1st person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`.
 
-### Saving data
+    1. Test case: `edit 1`<br>
+       Expected: Error message "Provide at least one field to edit!" is displayed.
 
-1. Dealing with missing/corrupted data files
+    1. Test case: `edit 1 -t/10A`<br>
+       Expected: Message "You tried removing a nonexistent study group tag" is displayed.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Locating persons by criteria : `find`
 
-1. _{ more test cases …​ }_
+1. Finds persons whose fields contain the given keywords
+
+    1. Test case: `find n/John`<br>
+       Expected: Returns `john` and `John Doe`.
+
+    1. Test case: `find a/30 40 50-60`<br>
+       Expected: Returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`.
+
+   1. Test case: `find n/roy li alex e/example.com g/m t/1A 1B 2B`<br>
+      Expected: Returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`.
+      ![result for 'find' multiple](images/findMultipleCriteria.png)
+
+
+### Deleting persons : `delete`
+
+1. Deletes the specified persons from the address book
+
+   1. Test case: `delete 1 3 5-7`<br>
+      Expected: Deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
+
+   1. Test case: `find John` followed by `delete 2`<br>
+      Expected: Deletes the 2nd person in the results of the `find` command.
+
+   1. Test case: `delete 100`<br>
+      Expected: Error message "Please enter an index within the size of the list. (Your list has 2 entries.)" is displayed.
+   1. Test case: `delete 2-`<br>
+         Expected: Error message "Both the lower and upper bounds should be present." is displayed.
+
+### Assigning persons to Study Groups (randomly) : `assign`
+
+1. Assigns persons in the list to given Study Groups (randomly)
+
+    1. Test case: `list` followed by `assign P90-Placebo P90-Experimental`<br>
+       Expected: Assigns every person in the address book to either `P90-Placebo` or `P90-Experimental` study group, but not both.
+
+    1. Test case: `find g/M` followed by `assign Male-Group`<br>
+       Expected: Assigns every male in the address book to `Male-Group` study group.
+
+### Exporting persons' emails : `export`
+
+1. Exports the current listed persons' emails to a .txt file
+
+    1. Test case: `export data/MyEmailsList`<br>
+       Expected: Exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
+    1. Test case: `find g/f` followed by `export female_emails`<br>
+         Expected: Exports only the emails of female persons.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+* As we were building off of AB3, we were able to reuse the model package and the existing commands.
+* In the beginning of our project (v1.2), this saved us time and effort as it was easy to build an MVP from an already
+functioning product (AB3) by making basic modifications to suit our product.
+* We were also able to reuse the extensive test cases and utility in the testutil package, which saved us a lot of
+effort. Future test cases and utility were also designed after these existing ones.
+* However, challenges arose when we wanted to refine our MVP features to better suit ResearchRoster (v1.3)
+and add new features unlike what AB3 had (v1.3, v1.4, v1.5).
+* This was because we had to carefully look through the AB3 code to fully understand how it worked,
+in order to figure out how we can modify it, work with it, or work around it to implement changes and new features.
+* This resulted in us putting in a high amount of effort to maintain good OOP and use/build off the existing classes
+and methods in AB3, rather than simply creating new classes, methods and solutions that may have overlapped with
+existing classes and methods.
+* The high effort was also because some of the existing classes methods posed limitations to what we wanted to 
+implement, and we had to come up with workarounds to achieve our desired modifications.
+* For example, `Edit` command class and `EditPersonDescriptor` class needed lots of reworking because the initial
+functionality only allowed to overwrite list of tags whilst our product aimed to append to the list and delete from
+the list instead of resetting the whole list.
+* Achievements: We were able to achieve a product that is provides useful and efficient features for researchers.
+We were able to create new, unique commands such as the `export` and `assign` commands, providing researchers with
+specialized features of exporting participants' emails, and randomly assigning participants to a different study
+groups, respectively. Thus, we believe we have achieved our aims of creating a product designed specifically for
+researchers, which sets ResearchRoster apart from other contact storing applications.

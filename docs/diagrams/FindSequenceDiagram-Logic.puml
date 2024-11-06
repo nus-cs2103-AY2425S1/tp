@@ -1,13 +1,13 @@
 @startuml
 !include style.puml
+hide footbox
 skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor #f7807c
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
-participant "np:NameContainsKeywordPredicate" as NameContainsKeywordPredicate LOGIC_COLOR
-participant "pg:PredicateGroup" as PredicateGroup LOGIC_COLOR
 participant "f:FindCommand" as FindCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -32,28 +32,12 @@ deactivate FindCommandParser
 AddressBookParser -> FindCommandParser : parse(" n/alice bob")
 activate FindCommandParser
 
-create PredicateGroup
-FindCommandParser -> PredicateGroup
-activate PredicateGroup
-
-PredicateGroup -> FindCommandParser
-deactivate PredicateGroup
-
-create NameContainsKeywordPredicate
-FindCommandParser -> NameContainsKeywordPredicate
-activate NameContainsKeywordPredicate
-
-NameContainsKeywordPredicate -> FindCommandParser
-deactivate NameContainsKeywordPredicate
-
-FindCommandParser -> PredicateGroup : add(np)
-activate PredicateGroup
-
-PredicateGroup -> FindCommandParser
-deactivate PredicateGroup
+ref over FindCommandParser
+    initialise predicates
+end ref
 
 create FindCommand
-FindCommandParser -> FindCommand : new FindCommand(pg)
+FindCommandParser -> FindCommand
 activate FindCommand
 
 FindCommand --> FindCommandParser
@@ -71,7 +55,13 @@ deactivate AddressBookParser
 LogicManager -> FindCommand : execute(m)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredPersonList(p)
+FindCommand -> Model : updateFilteredPersonList(pg)
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+FindCommand -> Model : getFilteredPersonList()
 activate Model
 
 Model --> FindCommand

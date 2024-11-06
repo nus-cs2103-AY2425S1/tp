@@ -14,8 +14,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows a list of all contacts.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Listed all participants";
-    public static final String MESSAGE_EMPTY = "No saved participants to display";
+    public static final String MESSAGE_SUCCESS = "Listed all participants.";
+    public static final String MESSAGE_EMPTY = "No saved participants to display.";
 
     @Override
     public CommandResult execute(Model model) {
