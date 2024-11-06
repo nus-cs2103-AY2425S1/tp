@@ -1,0 +1,18 @@
+{
+  "clients": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "insurancePlans" : "No added plans",
+    "claims" : "No claims yet",
+    "tags": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "insurancePlans" : "No added plans",
+    "claims" : "No claims yet",
+    "address": "4th street"
+  } ]
+}

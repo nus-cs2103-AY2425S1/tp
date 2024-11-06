@@ -15,7 +15,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.client.Client;
 import seedu.address.storage.Storage;
 
 /**
@@ -67,8 +68,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Client> getFilteredClientList() {
+        return model.getFilteredClientList();
     }
 
     @Override
@@ -84,5 +85,20 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return model.getUserPrefs();
+    }
+
+    @Override
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        model.setUserPrefs(userPrefs);
+        try {
+            storage.saveUserPrefs(userPrefs);
+        } catch (IOException e) {
+            logger.warning("Failed to save user preferences: " + e.getMessage());
+        }
     }
 }

@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Rezwan Ahmed
 
-<img src="images/Rezwan15107.png" width="200px">
+<img src="images/rezwanahmed123.png" width="200px">
 
 [[github](https://github.com/RezwanAhmed123)]
 [[portfolio](team/rezwanahmed.md)]
@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/zi-yii.png" width="200px">
 
-[[github](http://github.com/zi-yii)] 
+[[github](http://github.com/zi-yii)]
 [[portfolio](team/chenziyi.md)]
 
 * Role: Code quality checker

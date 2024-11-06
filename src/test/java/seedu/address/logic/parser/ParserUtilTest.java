@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +26,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INSURANCE_ID = "-1";
+    private static final String INVALID_CLAIM_ID = "CS99999";
+    private static final String INVALID_CLAIM_AMOUNT = "-100..155";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_INSURANCE_ID = "0";
+    private static final String VALID_CLAIM_ID = "C2103";
+    private static final String VALID_CLAIM_AMOUNT = "100.15";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -44,16 +50,16 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_CLIENT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_CLIENT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -192,5 +198,74 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseInsurancePlan_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInsurancePlan((String) null));
+    }
+
+    @Test
+    public void parseInsurancePlan_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurancePlan(INVALID_INSURANCE_ID));
+    }
+
+    @Test
+    public void parseInsurancePlan_validValueWithoutWhitespace_returnsInsurancePlan() throws Exception {
+        int expectedInsuranceIdAsInteger = 0;
+        assertEquals(expectedInsuranceIdAsInteger, ParserUtil.parseInsurancePlan(VALID_INSURANCE_ID));
+    }
+
+    @Test
+    public void parseInsurancePlan_validValueWithWhitespace_returnsTrimmedInsurancePlan() throws Exception {
+        String insuranceIdWithWhitespace = WHITESPACE + VALID_INSURANCE_ID + WHITESPACE;
+        int expectedInsuranceIdAsInteger = 0;
+        assertEquals(expectedInsuranceIdAsInteger, ParserUtil.parseInsurancePlan(insuranceIdWithWhitespace));
+    }
+
+    @Test
+    public void parseClaimId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClaimId((String) null));
+    }
+
+    @Test
+    public void parseClaimId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClaimId(INVALID_CLAIM_ID));
+    }
+
+    @Test
+    public void parseClaimId_validValueWithoutWhitespace_returnsClaimId() throws Exception {
+        String expectedClaimId = VALID_CLAIM_ID;
+        assertEquals(expectedClaimId, ParserUtil.parseClaimId(VALID_CLAIM_ID));
+    }
+
+    @Test
+    public void parseClaimId_validValueWithWhitespace_returnsTrimmedClaimId() throws Exception {
+        String insuranceIdWithWhitespace = WHITESPACE + VALID_CLAIM_ID + WHITESPACE;
+        String expectedClaimId = VALID_CLAIM_ID;
+        assertEquals(expectedClaimId, ParserUtil.parseClaimId(insuranceIdWithWhitespace));
+    }
+
+    @Test
+    public void parseClaimAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClaimAmount((String) null));
+    }
+
+    @Test
+    public void parseClaimAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClaimAmount(INVALID_CLAIM_AMOUNT));
+    }
+
+    @Test
+    public void parseClaimAmount_validValueWithoutWhitespace_returnsClaimAmount() throws Exception {
+        int expectedClaimAmount = 10015;
+        assertEquals(expectedClaimAmount, ParserUtil.parseClaimAmount(VALID_CLAIM_AMOUNT));
+    }
+
+    @Test
+    public void parseClaimAmount_validValueWithWhitespace_returnsTrimmedClaimAmount() throws Exception {
+        String claimAmountWithWhitespace = WHITESPACE + VALID_CLAIM_AMOUNT + WHITESPACE;
+        int expectedClaimAmount = 10015;
+        assertEquals(expectedClaimAmount, ParserUtil.parseClaimAmount(claimAmountWithWhitespace));
     }
 }

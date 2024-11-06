@@ -9,10 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.insurance.claim.Claim;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,10 +22,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_UNPARSABLE_INSURANCE_ID = "Insurance ID must be a positive integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -108,6 +111,79 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String insurancePlanId} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code insurancePlanId} is invalid.
+     */
+    public static int parseInsurancePlan(String insurancePlanId) throws ParseException {
+        requireNonNull(insurancePlanId);
+        int trimmedInsurancePlanId;
+
+        try {
+            trimmedInsurancePlanId = Integer.parseInt(insurancePlanId.trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
+        }
+
+        if (trimmedInsurancePlanId < 0) {
+            throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
+        }
+
+        return trimmedInsurancePlanId;
+    }
+
+    /**
+     * Parses {@code String claimId} into a valid claimId.
+     * Leading and trailing whitespaces will be trimmed. Claim ID will be in uppercase.
+     *
+     * @throws ParseException if the given claimId is invalid based on preset conventions.
+     */
+    public static String parseClaimId(String claimId) throws ParseException {
+        requireNonNull(claimId);
+        String processedClaimId = claimId.trim().toUpperCase();
+        Claim.checkValidClaimId(processedClaimId);
+        return processedClaimId;
+    }
+
+    /**
+     * Parses {@code String claimId} into a valid claimId.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the claim amount is not a valid positive integer
+     */
+    public static int parseClaimAmount(String claimAmount) throws ParseException {
+        requireNonNull(claimAmount);
+        String[] claimAmountString = claimAmount.trim().split("\\.");
+
+        if (claimAmountString.length > 2) {
+            throw new ParseException(Claim.MESSAGE_TOO_MANY_DECIMALS);
+        } else if (claimAmountString.length == 1) {
+            throw new ParseException(Claim.INVALID_CLAIM_AMOUNT);
+        }
+
+        int claimAmountInt;
+
+        try {
+            int centsInADollar = 100;
+            int claimAmountDollars = Integer.parseInt(claimAmountString[0].trim());
+
+            String claimAmountCentsString = claimAmountString[1].trim();
+            if (claimAmountCentsString.length() != 2) {
+                throw new ParseException(Claim.MESSAGE_INVALID_CENTS);
+            }
+            int claimAmountCents = Integer.parseInt(claimAmountCentsString);
+
+            claimAmountInt = claimAmountDollars * centsInADollar + claimAmountCents;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Claim.INVALID_CLAIM_AMOUNT);
+        }
+
+        Claim.checkValidClaimAmount(claimAmountInt);
+        return claimAmountInt;
     }
 
     /**
