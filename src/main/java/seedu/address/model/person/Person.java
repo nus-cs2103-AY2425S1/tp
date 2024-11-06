@@ -136,11 +136,10 @@ public class Person {
             return true;
         }
 
-        String otherPersonName = otherPerson.getName().toString();
         String thisPersonName = this.getName().toString();
 
         return otherPerson != null
-                && otherPersonName.equalsIgnoreCase(thisPersonName);
+                && otherPerson.getName().toString().equalsIgnoreCase(thisPersonName);
     }
     public boolean hasAppointments() {
         return !appointments.isEmpty();
