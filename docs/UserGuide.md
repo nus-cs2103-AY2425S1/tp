@@ -139,8 +139,8 @@ Symbol     | Parameter     | Constraints
 -----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
 **`n`**| `NAME`        |- Must contain at least 1 alphabetic character and has a character limit of 50. <br> - Allows alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.
 **`i`**| `ID`          |- Must contain at least 1 alphanumeric character and has a character limit of 36. <br> - Allows alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.
-**`w`**| `WARD`        |- Must contain at least 1 alphanumeric character, and has a character limit of 50.
-**`d`**| `DIAGNOSIS`   |- Must contain at least 1 alphabetic character, and has a character limit of 80.
+**`w`**| `WARD`        |- Must contain at least 1 alphanumeric character and has a character limit of 50.
+**`d`**| `DIAGNOSIS`   |- Must contain at least 1 alphabetic character and has a character limit of 80.
 **`m`**| `MEDICATION`  |- Must contain at least 1 alphanumeric character and has a character limit of 80. <br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.
 **`pn`**| `NOTES`       |- Allows any characters.
 **`a`**| `APPOINTMENT` |- Refer to [Appointment Parameters](#appointment-parameters) table below.
@@ -149,7 +149,7 @@ Symbol     | Parameter     | Constraints
 
 Symbol     | Parameter    | Constraints
 -----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character, and has a limit of 80 characters.
+**`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character and has a limit of 40 characters.
 **`s`**| `START`      |- A singular `DATE` in the form `DD-MM-YYYY`.
 **`e`**| `END`        |- A singular `DATE` in the form `DD-MM-YYYY`.
 
