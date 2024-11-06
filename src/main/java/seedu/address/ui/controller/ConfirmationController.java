@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.controller;
+package seedu.address.ui.controller;
 
 /**
  * Interface of confirmation.

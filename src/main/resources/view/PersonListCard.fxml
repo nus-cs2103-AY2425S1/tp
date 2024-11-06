@@ -41,7 +41,7 @@
     </VBox>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="1">
       <padding>
-        <Insets top="5" />
+        <Insets top="10" right="10" bottom="10"/>
       </padding>
       <Label fx:id="note" styleClass="note_label" text="\$note" wrapText="true" />
     </VBox>
