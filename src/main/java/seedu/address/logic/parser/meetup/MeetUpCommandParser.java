@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.meetup.AddCommand;
+import seedu.address.logic.commands.meetup.ClearCommand;
 import seedu.address.logic.commands.meetup.DeleteCommand;
 import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.logic.commands.meetup.FindCommand;
@@ -43,6 +44,9 @@ public class MeetUpCommandParser extends CommandParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         default:
             return super.parseCommand(commandWord, arguments);
