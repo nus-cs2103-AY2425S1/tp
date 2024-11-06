@@ -43,9 +43,7 @@ public class MarkCommandTest {
                         new Tutorial("2")).execute(model));
     }
 
-    /**
-     * Mark a person using index outside the displayed list.
-     */
+    // EP: Invalid Index
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -60,9 +58,7 @@ public class MarkCommandTest {
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    /**
-     * Mark a person that has already been marked.
-     */
+    // EP: Invalid Person
     @Test
     public void execute_tutorialAlreadyMarked_failure() {
         // Execute mark twice
@@ -78,11 +74,9 @@ public class MarkCommandTest {
         }
     }
 
-    /**
-     * Mark all persons in the list.
-     */
+    // EP: Wildcard Index
     @Test
-    public void execute_shouldMarkAll_success() {
+    public void execute_shouldMarkAll() {
         Tutorial tutorialToBeAdded = new Tutorial("1");
 
         MarkCommand markCommand = new MarkCommand(INDEX_ALL, tutorialToBeAdded);
@@ -93,6 +87,7 @@ public class MarkCommandTest {
             throw new RuntimeException(e);
         }
 
+        // EP: Valid Persons
         List<Person> editedPersonList = new ArrayList<>();
         // Check all persons are edited
         for (Person person : model.getFilteredPersonList()) {
@@ -118,8 +113,17 @@ public class MarkCommandTest {
                                 Messages.format(personToEdit), tutorialToBeAdded.tutorial)).toArray(String[]::new));
         Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(markCommand, typicalModel, expectedMessage, expectedModel);
+
+        // EP: Invalid Persons (already marked)
+        // Run the above command again, tutorials already marked
+        expectedMessage = String.join("\n",
+                model.getFilteredPersonList().stream()
+                        .map(personToEdit -> String.format(Messages.MESSAGE_MARK_UNNECESSARY,
+                                personToEdit.getName(), tutorialToBeAdded.tutorial)).toArray(String[]::new));
+        assertCommandSuccess(markCommand, typicalModel, expectedMessage, expectedModel);
     }
 
+    // EP: Valid Index, Valid Tutorial, Valid Person
     @Test
     public void execute_success() {
         Tutorial tutorialToBeAdded = new Tutorial("1");

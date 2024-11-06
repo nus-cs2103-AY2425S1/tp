@@ -43,9 +43,7 @@ public class UnmarkCommandTest {
                         new Tutorial("2")).execute(model));
     }
 
-    /**
-     * Unmark a person using index outside the displayed list.
-     */
+    // EP: Invalid Index
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -60,9 +58,7 @@ public class UnmarkCommandTest {
         assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    /**
-     * Unmark a person using tutorial that is already unmarked.
-     */
+    // EP: Invalid Person
     @Test
     public void execute_tutorialAlreadyUnmarked_failure() {
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, new Tutorial("1"));
@@ -77,9 +73,7 @@ public class UnmarkCommandTest {
         }
     }
 
-    /**
-     * Unmark all persons in the list.
-     */
+    // EP: Wildcard Index
     @Test
     public void execute_shouldUnmarkAll_success() {
         Tutorial tutorialToBeAdded = new Tutorial("1");
@@ -117,8 +111,17 @@ public class UnmarkCommandTest {
                                 Messages.format(personToEdit), tutorialToBeAdded.tutorial)).toArray(String[]::new));
         Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(unmarkCommand, typicalModel, expectedMessage, expectedModel);
+
+        // EP: Wildcard Index, Valid tutorial, Invalid Persons (already unmarked)
+        // Run the above command again, tutorials already unmarked
+        expectedMessage = String.join("\n",
+                model.getFilteredPersonList().stream()
+                        .map(personToEdit -> String.format(Messages.MESSAGE_UNMARK_UNNECESSARY,
+                                personToEdit.getName(), tutorialToBeAdded.tutorial)).toArray(String[]::new));
+        assertCommandSuccess(unmarkCommand, typicalModel, expectedMessage, expectedModel);
     }
 
+    // EP: Valid Index, Valid Tutorial, Valid Person
     @Test
     public void execute_success() {
         Tutorial tutorialToBeAdded = new Tutorial("1");
