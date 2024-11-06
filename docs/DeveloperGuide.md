@@ -654,10 +654,10 @@ testers are expected to do more *exploratory* testing.
     6. Test case: `promote`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-    7. Test case: `promote 0 20-12-2024`<br>
+    7. Test case: `promote 1 20-12-2024`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
 
-    8. Test case: `promote 0 2024-20-12`<br>
+    8. Test case: `promote 1 2024-20-12`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
 
     9. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
