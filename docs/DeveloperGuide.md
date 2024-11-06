@@ -495,6 +495,25 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding Reminders
+
+### Deleting Reminders
+**Prerequisite**: Manually add several reminders as specified in the [Adding Reminders](#adding-reminders) section.
+1. Deleting a reminder that is present
+   1. Test case: `delete_reminder 1`<br>
+      Expected: First reminder is deleted from the reminder list. Details of the deleted contact will be displayed. Remaining reminders below the deleted reminder are shifted up by 1 position.
+   1. Alternative command to try: `dr`, `dr x`, `...` (where x is at between 1 and the size of the reminder list)<br>
+      Expected: similar to above
+2. Deleting a reminder that is not present
+   1. Test case: `delete_reminder 0`<br>
+      Expected: No reminder is deleted. Error status displayed.
+   1. Other incorrect delete_reminder commands to try: `delete_reminder`, `delete_reminder x`, `...`
+      (where x is larger than the size of the reminder list)<br>
+      Expected: No reminder is deleted. Error status displayed.
+   1. Alternative command to try: `dr`, `dr x`, `...` (where x is larger than the size of the reminder list)<br>
+      Expected: similar to above
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -502,6 +521,8 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Saving sort preference
 
 ## **Appendix: Effort**
 
@@ -515,3 +536,6 @@ Example: add n/John Doe p/98765432 e/johnd@example.com o/NUS d/23-09-2024 t/frie
 is used as the error message. This can be lengthy and too general. Instead, a more specific message that pinpoints the
 exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work 
 because there is a missing `organisation` field, an error like `missing organisation field` can be shown instead.
+2. **Automate deletion of reminders for planned events that are over**: Currently, events that are over will show negative
+date for the time remaining field. Users will have to delete unwanted reminders themselves which can be troublesome. This
+process can be automated such that reminders that have expired can be archived or deleted according to the user's preference.
