@@ -9,13 +9,13 @@ Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 Participant "StaticContext" as staticContext STATIC_COLOR
 
-user -[USER_COLOR]> ui : "delete n/Alex"
+user -[USER_COLOR]> ui : "del n/Alex"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : execute("delete n/Alex")
+ui -[UI_COLOR]> logic : execute("del n/Alex")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : findPersonByName("Alex")
+logic -[LOGIC_COLOR]> model : getFilteredPersonList()
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic : return person

@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewWeddingCommandParser" as ViewWeddingCommandParser LOGIC_COLOR
+participant ":ViewWeddingCommand" as ViewWeddingCommand LOGIC_COLOR
+participant ":TagContainsKeywordsPredicate" as TagContainsKeywordsPredicate LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("view-wed Alex & Mary")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view-wed Alex & Mary")
+activate AddressBookParser
+
+create ViewWeddingCommandParser
+AddressBookParser -> ViewWeddingCommandParser
+activate ViewWeddingCommandParser
+
+ViewWeddingCommandParser --> AddressBookParser
+deactivate ViewWeddingCommandParser
+
+AddressBookParser -> ViewWeddingCommandParser : parse("Alex & Mary")
+activate ViewWeddingCommandParser
+
+create ViewWeddingCommand
+ViewWeddingCommandParser -> ViewWeddingCommand
+activate ViewWeddingCommand
+
+create TagContainsKeywordsPredicate
+ViewWeddingCommandParser -> TagContainsKeywordsPredicate
+activate TagContainsKeywordsPredicate
+
+TagContainsKeywordsPredicate --> ViewWeddingCommand
+deactivate TagContainsKeywordsPredicate
+
+ViewWeddingCommand --> ViewWeddingCommandParser :
+deactivate ViewWeddingCommand
+
+ViewWeddingCommandParser --> AddressBookParser :
+deactivate ViewWeddingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewWeddingCommandParser -[hidden]-> AddressBookParser
+destroy ViewWeddingCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> ViewWeddingCommand : execute(m)
+activate ViewWeddingCommand
+
+create CommandResult
+ViewWeddingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewWeddingCommand
+deactivate CommandResult
+
+ViewWeddingCommand --> LogicManager
+deactivate ViewWeddingCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

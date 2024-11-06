@@ -68,8 +68,6 @@ Wedding *--> WeddingName
 Wedding *--> Date
 Wedding *---> Venue
 
-Venue -up-|> Address
-
 ModelManager --> "~* filtered" Person
 
 WeddingBook .up.|> ReadOnlyWeddingBook
