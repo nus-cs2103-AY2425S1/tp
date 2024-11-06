@@ -16,7 +16,6 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class VersionedAddressBook extends AddressBook {
     public static final String MESSAGE_NO_MORE_HISTORY = "No more past data changes to undo.";
-    public static final String MESSAGE_UNSAVED_CHANGES = "There are unsaved changes in the current state.";
     public static final String MESSAGE_NO_MORE_UNDONE_STATES = "There are no more data changes to redo.";
     public static final String MESSAGE_UNSAVED_CHANGES_UNDO = "There are unsaved changes in the current state."
             + "Please commit or discard the changes before undoing.";
