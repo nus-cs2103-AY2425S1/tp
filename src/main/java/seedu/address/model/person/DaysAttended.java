@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class DaysAttended {
 
     public static final String MESSAGE_CONSTRAINTS = "Days attended should be a non-negative integer";
+    public static final String DEFAULT_INPUT_VALUE = "0";
     private final IntegerProperty daysAttended;
 
     /**
