@@ -4,18 +4,23 @@ skinparam ArrowFontStyle plain
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedClientHub" as VersionedClientHub MODEL_COLOR
+participant ":ClientHub" as ClientHub MODEL_COLOR
+participant ":ReminderList" as ReminderList MODEL_COLOR
 end box
 
-[-> Model : undoClientHub()
+[-> Model : addReminder(reminder)
 activate Model
 
-Model -> VersionedClientHub : undo()
-activate VersionedClientHub
+Model -> ClientHub : addReminder(reminder)
+activate ClientHub
 
-VersionedClientHub -> VersionedClientHub :resetData(ReadOnlyClientHub)
-VersionedClientHub --> Model :
-deactivate VersionedClientHub
+ClientHub -> ReminderList :add(reminder)
+activate ReminderList
+ReminderList --> ClientHub :
+deactivate ReminderList
+
+ClientHub --> Model :
+deactivate ClientHub
 
 [<-- Model
 deactivate Model
