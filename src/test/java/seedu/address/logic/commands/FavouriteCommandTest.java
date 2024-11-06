@@ -32,7 +32,7 @@ public class FavouriteCommandTest {
         Restaurant expectedRestaurantToFavourite = new Restaurant(
                 restaurantToFavourite.getName(), restaurantToFavourite.getPhone(), restaurantToFavourite.getEmail(),
                 restaurantToFavourite.getAddress(), restaurantToFavourite.getRating(), restaurantToFavourite.getTags(),
-                restaurantToFavourite.isFavourite()
+                restaurantToFavourite.getPrice(), restaurantToFavourite.isFavourite()
         );
 
         String expectedMessage = String.format(FavouriteCommand.MESSAGE_SUCCESS,

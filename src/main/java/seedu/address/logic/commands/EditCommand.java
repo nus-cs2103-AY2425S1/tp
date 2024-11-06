@@ -109,10 +109,11 @@ public class EditCommand extends Command {
         Rating updatedRating = editRestaurantDescriptor.getRating().orElse(restaurantToEdit.getRating());
         Set<Tag> updatedTags = editRestaurantDescriptor.getTags().orElse(restaurantToEdit.getTags());
         Price updatedPrice = editRestaurantDescriptor.getPrice().orElse(restaurantToEdit.getPrice());
+        boolean updatedIsFavourite = restaurantToEdit.isFavourite();
 
         return new Restaurant(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRating, updatedTags,
-                updatedIsFavourite, updatedPrice);
+                updatedPrice, updatedIsFavourite);
     }
 
     @Override

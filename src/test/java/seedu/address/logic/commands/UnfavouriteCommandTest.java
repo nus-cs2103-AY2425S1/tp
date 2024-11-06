@@ -36,7 +36,7 @@ public class UnfavouriteCommandTest {
                 restaurantToUnfavourite.getName(), restaurantToUnfavourite.getPhone(),
                 restaurantToUnfavourite.getEmail(), restaurantToUnfavourite.getAddress(),
                 restaurantToUnfavourite.getRating(), restaurantToUnfavourite.getTags(),
-                restaurantToUnfavourite.isFavourite()
+                restaurantToUnfavourite.getPrice(), restaurantToUnfavourite.isFavourite()
         );
 
         String expectedMessage = String.format(UnfavouriteCommand.MESSAGE_SUCCESS,

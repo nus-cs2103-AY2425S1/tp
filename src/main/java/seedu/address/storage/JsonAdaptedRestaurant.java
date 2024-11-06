@@ -43,7 +43,7 @@ class JsonAdaptedRestaurant {
                                  @JsonProperty("email") String email, @JsonProperty("address") String address,
                                  @JsonProperty("rating") Integer rating,
                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                                 @JsonProperty("price") String price
+                                 @JsonProperty("price") String price,
                                  @JsonProperty("favourite") boolean isFavourite) {
         this.name = name;
         this.phone = phone;
@@ -110,7 +110,8 @@ class JsonAdaptedRestaurant {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -125,7 +126,8 @@ class JsonAdaptedRestaurant {
         final Rating modelRating = new Rating(rating);
 
         if (price == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Price.class.getSimpleName()));
         }
         if (!Price.isValidPrice(price)) {
             throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
@@ -133,7 +135,8 @@ class JsonAdaptedRestaurant {
         final Price modelPrice = new Price(price);
 
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
-        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelRating, modelTags, modelPrice, isFavourite);
+        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelRating, modelTags,
+                modelPrice, isFavourite);
     }
 
 }
