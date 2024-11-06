@@ -15,6 +15,9 @@ import seedu.address.model.exam.Exam;
 
 public class AddExamCommandParserTest {
 
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            AddExamCommand.MESSAGE_USAGE);
+
     private AddExamCommandParser parser = new AddExamCommandParser();
 
     @Test
@@ -24,13 +27,17 @@ public class AddExamCommandParserTest {
     }
 
     @Test
+    public void parse_missingParts_failure() {
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_invalidParams_failure() {
         assertParseFailure(parser, INVALID_EXAM_DESC, NAME_MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_missingPrefix_failure() {
-        assertParseFailure(parser, VALID_EXAM_MIDTERM, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddExamCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_EXAM_MIDTERM, MESSAGE_INVALID_FORMAT);
     }
 }
