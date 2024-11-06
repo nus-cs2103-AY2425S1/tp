@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.collections.ObservableList;
@@ -62,9 +64,18 @@ public class StatisticsCommand extends Command {
         StringBuilder statisticsMessage = new StringBuilder();
 
         int totalApplicantsInSystem = 0;
+        // Convert the jobStatisticsMap entries into a list
+        List<Map.Entry<JobCode, JobCodeStatistics>> sortedEntries = new ArrayList<>(jobStatisticsMap.entrySet());
+        sortedEntries.sort((entry1, entry2) -> {
+            int result = entry1.getKey().value.toLowerCase().compareTo(entry2.getKey().value.toLowerCase());
+            if (result == 0) {
+                result = entry1.getKey().value.compareTo(entry2.getKey().value);
+            }
+            return result;
+        });
 
         // Iterate over the job statistics and build the message
-        for (Map.Entry<JobCode, JobCodeStatistics> entry : jobStatisticsMap.entrySet()) {
+        for (Map.Entry<JobCode, JobCodeStatistics> entry : sortedEntries) {
             JobCode jobCode = entry.getKey();
             JobCodeStatistics jobStats = entry.getValue();
 
