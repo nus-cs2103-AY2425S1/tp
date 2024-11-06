@@ -17,5 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_POLICY_EXPIRY_DATE = new Prefix("ed/");
     public static final Prefix PREFIX_CLAIM_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_CLAIM_DESC = new Prefix("d/");
+    public static final Prefix PREFIX_CLAIM_INDEX = new Prefix("c/");
 
 }

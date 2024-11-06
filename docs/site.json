@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
-  "titlePrefix": "Prudy",
-  "titleSuffix": "AddressBook Level-3",
+  "titlePrefix": "CS2103T-T14-1",
+  "titleSuffix": "Prudy",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"

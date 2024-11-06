@@ -15,15 +15,18 @@ public class HealthPolicyTest {
     @Test
     public void constructor_nullValues_useDefaultValues() {
         // null premiumAmount
-        HealthPolicy nullPremiumAmount = new HealthPolicy(null, defaultCoverageAmount, defaultExpiryDate);
+        HealthPolicy nullPremiumAmount = new HealthPolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, null);
         assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
         // null coverageAmount
-        HealthPolicy nullCoverageAmount = new HealthPolicy(defaultPremiumAmount, null, defaultExpiryDate);
+        HealthPolicy nullCoverageAmount = new HealthPolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, null);
         assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
         // null expiryDate
-        HealthPolicy nullExpiryDate = new HealthPolicy(defaultPremiumAmount, defaultCoverageAmount, null);
+        HealthPolicy nullExpiryDate = new HealthPolicy(defaultPremiumAmount, defaultCoverageAmount,
+                null, null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 

@@ -15,15 +15,18 @@ public class LifePolicyTest {
     @Test
     public void constructor_negativeAmounts_useDefaultValues() {
         // null premiumAmount
-        LifePolicy nullPremiumAmount = new LifePolicy(null, defaultCoverageAmount, defaultExpiryDate);
+        LifePolicy nullPremiumAmount = new LifePolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, null);
         assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
         // null coverageAmount
-        LifePolicy nullCoverageAmount = new LifePolicy(defaultPremiumAmount, null, defaultExpiryDate);
+        LifePolicy nullCoverageAmount = new LifePolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, null);
         assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
         // null expiryDate
-        LifePolicy nullExpiryDate = new LifePolicy(defaultPremiumAmount, defaultCoverageAmount, null);
+        LifePolicy nullExpiryDate = new LifePolicy(defaultPremiumAmount, defaultCoverageAmount,
+                null, null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 

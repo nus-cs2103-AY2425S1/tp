@@ -3,7 +3,12 @@ package seedu.address.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
+
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimList;
+
 
 /**
  * An abstract class to capture all type of policies.
@@ -12,6 +17,8 @@ public abstract class Policy {
     private PremiumAmount premiumAmount;
     private CoverageAmount coverageAmount;
     private ExpiryDate expiryDate;
+    private ClaimList claimList;
+
 
     /**
      * Constructor for a new Policy without an insuree specified.
@@ -21,26 +28,28 @@ public abstract class Policy {
      * @param expiryDate the date of Policy's expiry.
      * @throws NullPointerException if any of the fields is null.
      */
-    public Policy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
-        requireAllNonNull(premiumAmount, coverageAmount, expiryDate);
+    public Policy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate,
+                  ClaimList claims) {
+        requireAllNonNull(premiumAmount, coverageAmount, expiryDate, claims);
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
+        this.claimList = claims;
     }
 
     /**
      * Return a suitable Policy based on the PolicyType passed.
      */
     public static Policy makePolicy(PolicyType policyType, PremiumAmount premiumAmount, CoverageAmount coverageAmount,
-            ExpiryDate expiryDate) {
+                                    ExpiryDate expiryDate, ClaimList claims) {
         requireNonNull(policyType);
         switch (policyType) {
         case LIFE:
-            return new LifePolicy(premiumAmount, coverageAmount, expiryDate);
+            return new LifePolicy(premiumAmount, coverageAmount, expiryDate, claims);
         case HEALTH:
-            return new HealthPolicy(premiumAmount, coverageAmount, expiryDate);
+            return new HealthPolicy(premiumAmount, coverageAmount, expiryDate, claims);
         case EDUCATION:
-            return new EducationPolicy(premiumAmount, coverageAmount, expiryDate);
+            return new EducationPolicy(premiumAmount, coverageAmount, expiryDate, claims);
         default:
             throw new RuntimeException("Policy type " + policyType + " is not accounted for.");
         }
@@ -80,6 +89,7 @@ public abstract class Policy {
         return expiryDate;
     }
 
+
     /**
      * Change this policy's premium amount to the specified {@code premiumAmount}, which cannot be null.
      *
@@ -113,10 +123,30 @@ public abstract class Policy {
         this.expiryDate = expiryDate;
     }
 
+    /**
+     * Adds a claim to this policy's claim set.
+     *
+     * @param claim The claim to add.
+     * @return True if the claim was added successfully, false if it was already present.
+     */
+    public boolean addClaim(Claim claim) {
+        return claimList.add(claim);
+    }
+
+    /**
+     * Removes a claim from this policy's claim set.
+     *
+     * @param claim The claim to remove.
+     * @return True if the claim was removed successfully, false if it was not found.
+     */
+    public boolean removeClaim(Claim claim) {
+        return claimList.remove(claim);
+    }
+
     @Override
     public String toString() {
-        return String.format("Premium amount: $%s | Coverage amount: $%s | Expiry date: %s",
-                premiumAmount, coverageAmount, expiryDate);
+        return String.format("Premium amount: $%s | Coverage amount: $%s | Expiry date: %s | Claims: %s",
+                premiumAmount, coverageAmount, expiryDate, claimList);
     }
 
     @Override
@@ -133,12 +163,20 @@ public abstract class Policy {
         Policy p = (Policy) other;
         return premiumAmount.equals(p.premiumAmount)
                 && coverageAmount.equals(p.coverageAmount)
-                && expiryDate.equals(p.expiryDate);
+                && expiryDate.equals(p.expiryDate)
+                && claimList.equals(p.claimList);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(premiumAmount, coverageAmount, expiryDate);
+        return Objects.hash(premiumAmount, coverageAmount, expiryDate, claimList);
+    }
+
+    public ClaimList getClaimList() {
+        return this.claimList;
+    }
+    public List<Claim> getList() {
+        return this.claimList.getList();
     }
 }

@@ -40,7 +40,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
 
         Index index;
         try {
-            // Parse the preamble as the index of the person
+            // Parse the preamble as the index of the client
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -57,7 +57,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         ExpiryDate expiryDate = ParserUtil.parseExpiryDate(
                 argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).orElse(""));
 
-        Policy policy = Policy.makePolicy(policyType, premiumAmount, coverageAmount, expiryDate);
+        Policy policy = Policy.makePolicy(policyType, premiumAmount, coverageAmount, expiryDate, null);
         return new AddPolicyCommand(index, policy);
     }
 }

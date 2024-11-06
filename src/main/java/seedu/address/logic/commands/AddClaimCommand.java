@@ -5,40 +5,54 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimList;
+import seedu.address.model.client.Client;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
- * Adds a claim to a person in the address book.
+ * Adds a claim to a client in Prudy.
  */
 public class AddClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "add-claim";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a claim to the person identified "
-            + "by the index number used in the displayed person list. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a claim to the client identified "
+            + "by the index number used in the displayed client list. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_POLICY_TYPE + "POLICY_TYPE " + PREFIX_CLAIM_STATUS + "CLAIM_STATUS "
             + PREFIX_CLAIM_DESC + "CLAIM_DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "health "
-            + PREFIX_CLAIM_STATUS + "PENDING "
+            + PREFIX_CLAIM_STATUS + "pending "
             + PREFIX_CLAIM_DESC + "stomach surgery";
 
-    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Added Claim to Person: %1$s";
+    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type"
+            + "'%1$s' of client: %2$s.\n\n"
+            + "Added Claim Details:\nStatus: %3$s | Description: %4$s.\n";
+    public static final String MESSAGE_POLICY_NOT_FOUND = "The policy for the specified type was not found.";
+    public static final String MESSAGE_CLAIM_EXISTS = "A similar claim already exists in the policy.";
+
     private final Index index;
     private final Claim claim;
-    private PolicyType policyType;
+    private final PolicyType policyType;
 
     /**
-     * Constructs an {@code AddClaimCommand} to add the specified {@code Claim} to a person.
+     * Constructs an {@code AddClaimCommand} to add the specified {@code Claim} to a client.
      *
-     * @param index      The index of the person in the filtered person list to whom the claim will be added.
-     * @param claim      The claim to add to the person.
-     * @param policyType
+     * @param index      The index of the client in the filtered client list to whom the claim will be added.
+     * @param claim      The claim to add to the client.
+     * @param policyType The type of the policy to which the claim will be added.
      */
     public AddClaimCommand(Index index, Claim claim, PolicyType policyType) {
         requireNonNull(index);
@@ -52,12 +66,41 @@ public class AddClaimCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        throw new CommandException("still implementing");
-        //        if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
-        //            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        //        }
+        List<Client> lastShownList = model.getFilteredClientList();
 
-        //return new CommandResult(String.format(MESSAGE_ADD_CLAIM_SUCCESS, claim));
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        }
+
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        Set<Policy> policySet = clientToEdit.getPolicies();
+
+        // find the policy based on the policyType
+        Policy policy = policySet.stream()
+                .filter(p -> p.getType().equals(policyType))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(MESSAGE_POLICY_NOT_FOUND));
+
+        ClaimList claimList = policy.getClaimList();
+        if (!claimList.add(claim)) {
+            throw new CommandException(MESSAGE_CLAIM_EXISTS);
+        }
+
+        // create new policy set with the updated policy (to preserve immutability)
+        PolicySet updatedPolicySet = new PolicySet();
+        updatedPolicySet.addAll(new HashSet<>(policySet));
+        updatedPolicySet.remove(policy.getType());
+        updatedPolicySet.add(policy);
+
+        // create a new client with the updated policy set
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);
+
+        model.setClient(clientToEdit, editedClient);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
+        String successMessage = formatSuccessMessage(clientToEdit, claim);
+        return new CommandResult(successMessage);
+
     }
 
     @Override
@@ -74,5 +117,9 @@ public class AddClaimCommand extends Command {
         return index.equals(otherCommand.index)
                 && policyType.equals(otherCommand.policyType)
                 && claim.equals(otherCommand.claim);
+    }
+    private String formatSuccessMessage(Client client, Claim claim) {
+        return String.format(MESSAGE_ADD_CLAIM_SUCCESS, policyType, client.getName(), claim.getStatus(),
+                claim.getClaimDescription());
     }
 }

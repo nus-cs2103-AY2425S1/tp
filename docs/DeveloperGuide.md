@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Prudy Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,9 +17,9 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting Up and Getting Started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-client 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -67,43 +67,43 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Client` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-client 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteClientSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete-client 1` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `PrudyParser` object which in turn creates a parser that matches the command (e.g., `DeleteClientCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -112,25 +112,25 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `PrudyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddClientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddClientCommand`) which the `PrudyParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddClientCommandParser`, `DeleteClientCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores Prudy's data i.e., all `Client` objects (which are contained in a `UniqueClientList` object).
+* stores the currently 'selected' `Client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Prudy`, which `Client` references. This allows `Prudy` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects. (Note that the details of PolicySet has been omitted from this diagram as they are not relevant)<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -139,13 +139,13 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both Prudy's data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `PrudyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -162,42 +162,42 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedPrudy`. It extends `Prudy` with an undo/redo history, stored internally as an `prudyStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedPrudy#commit()` — Saves the current Prudy state in its history.
+* `VersionedPrudy#undo()` — Restores the previous Prudy state from its history.
+* `VersionedPrudy#redo()` — Restores a previously undone Prudy state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitPrudy()`, `Model#undoPrudy()` and `Model#redoPrudy()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedPrudy` will be initialized with the initial Prudy state, and the `currentStatePointer` pointing to that single Prudy state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete-client 5` command to delete the 5th client in Prudy. The `delete-client` command calls `Model#commitPrudy()`, causing the modified state of Prudy after the `delete-client 5` command executes to be saved in the `prudyStateList`, and the `currentStatePointer` is shifted to the newly inserted Prudy state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add-client n/David …​` to add a new client. The `add-client` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitPrudy()`, so the Prudy state will not be saved into the `prudyStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPrudy()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Prudy state, and restores Prudy to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial Prudy state, then there are no previous Prudy states to restore. The `undo` command uses `Model#canUndoPrudy()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -216,19 +216,19 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoPrudy()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores Prudy to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `prudyStateList.size() - 1`, pointing to the latest Prudy state, then there are no undone Prudy states to restore. The `redo` command uses `Model#canRedoPrudy()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list-client`. Commands that do not modify Prudy, such as `list-client`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add-client n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -240,13 +240,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves entire Prudy.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete-client`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -258,7 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -273,16 +273,18 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+The target user is an insurance agent working with Prudential, responsible for managing a substantial portfolio of clients. This user has specific needs and preferences for effectively managing clients, policies, and claims in a high-volume environment.
 
-* is a Prudential insurance agent
-* has a need to manage a significant number of clients
-* has a need to manage clients policies and claims
-* prefer desktop apps over other types
+Key attributes of the target user include:
+* **Role and Responsibilities:** The user is a Prudential insurance agent who needs to efficiently oversee and update client records, including individual policies and claims
+* **Client Management Requirements:** The user regularly manages a large number of clients and requires an organized and efficient system to track and access client information swiftly
+* **Application Preference:** The user prefers desktop applications due to their stability and reliability in handling client data and other sensitive information in a local environment
+* **Interaction Style:** As a proficient typist, the user prefers a command-line interface (CLI) for its speed and efficiency over traditional mouse-based interactions.
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policies. Next, also improve client relationships. Ensures agents never miss a client policy renewal. Manage clients pending claims effectively.
+**Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policy. Next, also improve client's relationships. Ensures agents never miss a client policy renewal. Manage clients' pending claims effectively.
 
 
 ### User stories
@@ -295,20 +297,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Responsible insurance agent    | receive timely reminders for clients' policies which are expiring soon | remind individual clients to renew their policies           |
 | `* * *`  | Forgetful insurance agent      | track the status of my clients' claims           | keep track of pending claims that require my attention                          |
 | `* * *`  | Insurance agent                | store all my client contact information in one place | easily access their details and communicate with them without searching across multiple platforms |
+| `* * *`  | Insurance agent                | track clients' claims and their status    | ensure all client issues are addressed promptly and effectively                 |
+| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter Prudy. |
+| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
+| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
 | `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims | respond promptly to inquiries                                                   |
 | `* *`    | Busy insurance agent           | receive notifications when a client’s claim has not been resolved after a long time | be reminded to prioritize actioning these claims                                 |
 | `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                           |
+| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
 | `*`      | Eager insurance agent          | receive reminders for key client milestones (e.g., birthdays, policy anniversaries) | send personalized messages or offers, strengthening client relationships         |
 | `*`      | Responsible insurance agent    | Track the status of any claims my clients have made | I can provide updates and assistance throughout the claim process. |
 | `*`      | Insurance agent                | import and export client data                    | work with the data outside of the platform when necessary                       |
 | `*`      | Forgetful insurance agent      | set reminders for client meetings                | never miss important meetings or calls                                          |
-| `* * *`  | Insurance agent                | track clients' claims and their remark status    | ensure all client issues are addressed promptly and effectively                 |
 | `*`      | Insurance agent                | view detailed information about client referrals and their referees | know which of my clients are related and show my appreciation to clients with large referrals |
 | `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date | prioritize my work and focus on the most important or time-sensitive client needs |
-| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
-| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter my addressbook. |
-| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
-| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
 
 
 
@@ -316,9 +318,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`, unless specified otherwise)
+<box type="info" seamless>
+**Note:** For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`.
+</box>
 
-**Use case: UC1 - List clients**
+<box type="info" seamless>
+**Note:** For all use cases below, if the user enters an invalid input, or there is an error when executing the command, the use case simply ends.
+</box>
+
+**Use case: UC1 - List clients (Find client has a similar use case)**
 
 **MSS**
 
@@ -327,93 +335,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC2 - Delete a client**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
+**Use case: UC2 - Add a client**
 
 **MSS**
 
+1. User requests to add client
+1. Prudy adds the client
+
+   Use case ends.
+
+**Use case: UC3 - Delete a client**
+
+**MSS**
+
+1. User <u>list clients (UC1)</u> to look for index of client
 1. User requests to delete a specific client in the list
 1. Prudy deletes the client
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-**Use case: UC3 - Add a client**
+**Use case: UC4 - Add a policy to client**
 
 **MSS**
 
-1. User requests to add client
-1. Prudy deletes the client
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The client already exists.
-
-    * 1a1. Prudy shows that the client already exists.
-
-      Use case ends.
-
-**Use case: UC4 - Edit a client details (does not include editing of client policies or claims)**
-
-**Preconditions: User has done <u>UC1 - List clients</u>**
-
-**MSS**
-
-1. User requests to edit a specific client in the list with the specified changes
-1. Prudy edits the client details
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. Prudy shows an error message.
-
-      Use case ends.
-
-**Use case: UC5 - Add a policy to client**
-
-1. User requests to add a policy (or multiple policies) to a specific client in the list
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to add a policy to a specific client in the list
 1. Prudy adds the policy under the client
 
    Use case ends.
 
-**Extensions**
+**Use case: UC5 - Add a claim to a policy**
 
-* 1a. The given index is invalid.
+**MSS**
 
-    * 1a1. Prudy shows an error message.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to add a claim to a specific policy for a client in the list
+1. Prudy adds the claim under the specified policy for the client
 
-      Use case ends.
+   Use case ends.
 
-* 1b. The client already has the stated policy.
+**Use case: UC6 - List claims for a policy**
 
-    * 1b1. Prudy shows an error message.
+**MSS**
 
-      Use case ends.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User requests to list claims for a specific policy under the client
+1. Prudy lists the claims under the specified policy
 
-* 1c. The user indicated an invalid policy.
+   Use case ends.
 
-    * 1c1. Prudy shows an error message.
+**Use case: UC7 - Resolve a claim**
 
-      Use case ends.
+1. User <u>list clients (UC1)</u> to look for index of client
+1. User <u>list claims for a policy (UC6)</u>
+1. User requests to edit a claim to mark its status as resolved
+1. Prudy edits the claim under the specified policy for the client
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be intuitive, agents can perform core functions with 30 minutes training
 5.  The system should provide feedback for user inputs for basic commands (eg. add client, update client) within 1 second.
 6.  The app should not exceed 500MB of memory.
@@ -425,19 +409,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Client**: A person who purchased or about to purchase a policy from the agent
+* **Client**: A client who purchased or about to purchase a policy from the agent
 * **Policy**: An insurance policy that contains the type, premium and coverage
 * **Claim**: A request for payment based on the policy
 * **Commands**: A text instruction that triggers a defined function in the app (e.g., add-client, list-policies).
 * **Command Prefix**: A marker used in commands to specify the type of input (e.g., n/ for name, p/ for phone number).
 * **Premium**: Amount of money paid for an insurance policy
-* **Coverage amount**: Maximum amount an insurance company will pay under a policy.
-* **Claim Status**: The current state of a claim, such as Pending, In Progress, Resolved, or Closed.
+* **Coverage**: Maximum amount an insurance company will pay under a policy.
+* **Claim Status**: The current state of a claim, such as Pending, Approved, or Rejected.
 * **Error Message**: Message displayed to the user providing guidance on how to correct the issue.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -450,42 +434,106 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+#### Initial Launch
 
-   1. Download the jar file and copy into an empty folder
+1. **Step**: Download the jar file and copy it into an empty folder.
+2. **Step**: Double-click the jar file to launch the application.
+3. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+### Saving Window Preferences
 
-1. Saving window preferences
+1. **Step**: Resize the window to a comfortable size.
+2. **Step**: Move the window to a different location on your screen.
+3. **Step**: Close the window.
+4. **Step**: Re-open the app by double-clicking the jar file.
+5. **Expected**: The window should open in the last used size and location.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+---
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Client Management
 
-1. _{ more test cases …​ }_
+#### Deleting a Client
 
-### Deleting a person
+1. **Prerequisites**: Ensure there are multiple clients listed using `list-client`.
+2. **Test Case**: `delete-client 1`
+    - **Expected**: Deletes the first client in the list. The status message displays details of the deletion, and the timestamp updates.
+3. **Test Case**: `delete-client 0`
+    - **Expected**: No client is deleted. An error message is shown, and the status bar remains unchanged.
+4. **Incorrect Commands**:
+    - `delete-client` (no index specified)
+    - `delete-client x` (where `x` is greater than the number of clients)
+    - **Expected**: An error message for invalid input or index.
 
-1. Deleting a person while all persons are being shown
+---
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Policy and Claim Management
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### Listing Policies
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. **Prerequisites**: Ensure `list-client` is used to verify that the client has policies.
+2. **Test Case**: `list-policies 1`
+    - **Expected**: Lists all policies for the first client. If there are no policies, an appropriate message is displayed.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+---
 
-1. _{ more test cases …​ }_
+### Claim Management
 
-### Saving data
+#### Listing Claims
 
-1. Dealing with missing/corrupted data files
+1. **Prerequisites**: Ensure policies with claims are present by using `list-client` and `list-policies`.
+2. **Test Case**: `list-claims 1 pt/health`
+    - **Expected**: Lists all claims under the health policy for the first client. If no claims are found, an appropriate message is shown.
+3. **Invalid Policy Type**: `list-claims 2 pt/lifee`
+    - **Expected**: An error indicating an invalid policy type, not a generic format error.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+#### Adding a Claim
 
-1. _{ more test cases …​ }_
+1. **Prerequisites**: Ensure there is a valid policy for the client using `list-policies`.
+2. **Test Case**: `add-claim 1 pt/health s/PENDING d/Medical Expenses`
+    - **Expected**: Adds a new claim to the health policy. Success message is displayed.
+3. **Invalid Inputs**: Test with incorrect claim statuses, policy types, or invalid claim descriptions.
+    - **Expected**: Validation error messages are displayed.
+
+---
+
+### Data Persistence
+
+#### Saving Data
+
+1. **Step**: Perform various add/delete operations on clients or policies.
+2. **Expected**: Data should save automatically and persist when the application is closed and reopened.
+
+---
+
+### Handling Missing/Corrupted Data Files
+
+1. **Simulating Missing Data File**:
+    - **Step**: Navigate to the app's data directory and remove the data file.
+    - **Step**: Re-launch the app.
+    - **Expected**: The app should load with default data and display a warning about missing data.
+
+2. **Simulating Corrupted Data File**:
+    - **Step**: Open the data file and corrupt the contents (e.g., remove part of the JSON structure).
+    - **Step**: Re-launch the app.
+    - **Expected**: The app should show an error message and initialize with default data.
+
+---
+
+### Error Handling and Edge Cases
+
+1. **Extreme Input Values**:
+    - **Test Case**: Enter long strings or special characters in client or claim fields.
+    - **Expected**: Proper validation errors and handling without app crashes.
+2. **Invalid Command Inputs**:
+    - **Test Case**: Commands like `add-client` with missing parameters.
+    - **Expected**: Informative error messages are displayed.
+
+---
+
+### Exploratory Testing Tips
+
+- Try boundary values for indices and numeric inputs.
+- Ensure the app remains responsive when handling multiple sequential commands.
+- Check how the app handles rapid commands and actions in succession.
+
+---

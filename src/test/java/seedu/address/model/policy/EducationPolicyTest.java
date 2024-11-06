@@ -15,15 +15,18 @@ public class EducationPolicyTest {
     @Test
     public void constructor_nullValues_useDefaultValues() {
         // null premiumAmount
-        EducationPolicy nullPremiumAmount = new EducationPolicy(null, defaultCoverageAmount, defaultExpiryDate);
+        EducationPolicy nullPremiumAmount = new EducationPolicy(null, defaultCoverageAmount,
+                defaultExpiryDate, null);
         assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
         // null coverageAmount
-        EducationPolicy nullCoverageAmount = new EducationPolicy(defaultPremiumAmount, null, defaultExpiryDate);
+        EducationPolicy nullCoverageAmount = new EducationPolicy(defaultPremiumAmount, null,
+                defaultExpiryDate, null);
         assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
         // null expiryDate
-        EducationPolicy nullExpiryDate = new EducationPolicy(defaultPremiumAmount, defaultCoverageAmount, null);
+        EducationPolicy nullExpiryDate = new EducationPolicy(defaultPremiumAmount, defaultCoverageAmount, null,
+                null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }
 

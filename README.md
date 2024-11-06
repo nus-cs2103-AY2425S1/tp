@@ -6,7 +6,7 @@
 ![Ui](docs/images/Ui.png)
 
 ## What is Prudy?
-Prudy is  one stop contact book for Prudential insurance agents to track their client's policies and claims. It is specifically optimized for agents who are proficient in using Command Line Interface (CLI). This application aids them in their quest to improve their database of clients and reduce overall workload.
+Prudy is one stop contact book for Prudential insurance agents to track their client's policies and claims. It is specifically optimized for agents who are proficient in using Command Line Interface (CLI). This application aids them in their quest to improve their database of clients and reduce overall workload.
 
 ## What can Prudy do?
 1. ```Client management```

@@ -10,14 +10,14 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimStatus;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.PolicyType;
@@ -166,7 +166,7 @@ public class ParserUtil {
         final Set<PolicyType> policyTypes = new HashSet<>();
         for (String policy : policies) {
             if (!policyTypes.add(parsePolicyType(policy))) {
-                throw new ParseException(AddPolicyCommand.MESSAGE_DUPLICATES);
+                throw new ParseException(DeletePoliciesCommand.MESSAGE_DUPLICATES);
             }
         }
         return Collections.unmodifiableSet(policyTypes);

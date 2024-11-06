@@ -3,6 +3,8 @@ package seedu.address.model.policy;
 import java.time.LocalDate;
 import java.time.Period;
 
+import seedu.address.model.claim.ClaimList;
+
 /**
  * A Policy of type Education.
  */
@@ -16,7 +18,8 @@ public class EducationPolicy extends Policy {
      */
     public EducationPolicy() {
         super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT,
-                new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)));
+                new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)),
+                new ClaimList());
     }
 
     /**
@@ -30,11 +33,13 @@ public class EducationPolicy extends Policy {
      * @param expiryDate the date of Policy's expiry.
      *                   Use null to initialize this policy with the default expiryDate.
      */
-    public EducationPolicy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
+    public EducationPolicy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate,
+                           ClaimList claims) {
         super(
                 premiumAmount == null ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
                 coverageAmount == null ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
-                expiryDate == null ? new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)) : expiryDate);
+                expiryDate == null ? new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)) : expiryDate,
+                claims == null ? new ClaimList() : claims);
     }
 
     @Override
