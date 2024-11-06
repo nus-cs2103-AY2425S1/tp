@@ -48,13 +48,21 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts and concerts.
+   - `help` : Shows a message explaining how to access the help page.
 
-   - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a contact named `John Doe` to the ConcertPhoneBook.
+   - `listp` : Lists all contacts in the ConcertPhonebook.
+   
+   - `listc` : Lists all concerts in the ConcertPhonebook.
+   
+   - `list` : Lists all contacts and concerts in the ConcertPhonebook.
+   
+   - `listcc` : Lists all concertContacts in the ConcertPhonebook.
+   
+   - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a contact named `John Doe` to the ConcertPhonebook.
 
-   - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert named `Coachella` to the ConcertPhoneBook.
+   - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert named `Coachella` to the ConcertPhonebook.
 
-   - `addcc pi/1 ci/1` : Links the 1st person to the 1st concert
+   - `addcc pi/1 ci/1` : Links the 1st person to the 1st concert.
 
    - `deletep 1` : Deletes the 1st person shown in the current person list.
 
@@ -69,6 +77,10 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
    - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the ConcertPhoneBook.
 
    - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
+   
+   - `editp 1 n/John Doe` : Edits the name of the 1st person shown in the current person list to `John Doe`.
+   
+   - `editc 1 n/Coachella` : Edits the name of the 1st concert shown in the current concert list to `Coachella`.
 
    - `exit` : Exits the app.
 
@@ -104,7 +116,7 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page (User Guide).
+Shows a message explaining how to access the help page (User Guide).
 
 ![help message](images/helpMessage.png)
 
@@ -112,25 +124,25 @@ Format: `help`
 
 ### Listing all persons : `listp`
 
-Shows a list of all persons in the Concert Phone book.
+Shows a list of all persons in the ConcertPhonebook.
 
 Format: `listp`
 
 ### Listing all concerts : `listc`
 
-Shows a list of all concerts in the Concert Phone book.
+Shows a list of all concerts in the ConcertPhonebook.
 
 Format: `listc`
 
 ### Listing all persons and concerts : `list`
 
-Shows a list of all persons and concerts in the Concert Phone book.
+Shows a list of all persons and concerts in the ConcertPhonebook.
 
 Format: `list`
 
 ### Listing all concertContacts : `listcc`
 
-Shows a list of all concertContacts in the Concert Phone book.
+Shows a list of all concertContacts in the ConcertPhonebook.
 
 Format: `listcc`
 
@@ -138,7 +150,7 @@ Format: `listcc`
 
 ### Adding a person: `addp`
 
-Adds a person to the Concert Phone book.
+Adds a person to the ConcertPhonebook.
 
 Format: `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
 
@@ -153,7 +165,7 @@ Examples:
 
 ### Adding a Concert: `addc`
 
-Adds a Concert to the Concert Phone book.
+Adds a Concert to the ConcertPhonebook.
 
 Format: `addc n/NAME a/ADDRESS d/DATE`
 
@@ -167,16 +179,16 @@ Examples:
 
 ### Adding a ConcertContact: `addcc`
 
-Adds an association to the contact in the Concert Phone book with another Concert.
+Adds an association to the contact in the ConcertPhonebook with another Concert.
 
-Format: `addcc pi/INDEX ci/CONCERT_INDEX`
+Format: `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`
 
 - Adds an association between the person at the specified `PERSON_INDEX` to the concert at the specified `CONCERT_INDEX`
 - The index refers to the index number shown in the displayed person / concert list. The index **must be a positive integer** 1, 2, 3, …​
 
 ### Deleting a person : `deletep`
 
-Deletes the specified person from the Concert Phone book.
+Deletes the specified person from the ConcertPhonebook.
 
 Format: `deletep INDEX`
 
@@ -186,12 +198,12 @@ Format: `deletep INDEX`
 
 Examples:
 
-- `list` followed by `deletep 2` deletes the 2nd person in the Concert Phone book.
+- `list` followed by `deletep 2` deletes the 2nd person in the ConcertPhonebook.
 - `findp n/Betsy` followed by `deletep 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a concert : `deletec`
 
-Deletes the specified person from the Concert Phone book.
+Deletes the specified person from the ConcertPhonebook.
 
 Format: `deletec INDEX`
 
@@ -201,7 +213,7 @@ Format: `deletec INDEX`
 
 ### Deleting a concertContact : `deletecc`
 
-Deletes the specified concertContact from the Concert Phone book.
+Deletes the specified concertContact from the ConcertPhonebook.
 
 Format: `deletecc INDEX`
 
@@ -211,7 +223,7 @@ Format: `deletecc INDEX`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the Concert Phone book.
+Clears all entries from the ConcertPhonebook.
 
 Format: `clear`
 
@@ -250,22 +262,22 @@ Examples:
 
 ### Finding a concertContact: `findcc`
 
-Finds all concertContacts that are associated to the person or the concert at the specified index.
+Finds all concertContacts that are associated to the person and the concert at the specified index.
 
 Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
-- The order of the keywords does not matter e.g. `findcc pi/1 ci/1` is equivalent to `findcc c/1 p/1`
+- The order of the keywords does not matter e.g. `findcc pi/1 ci/1` is equivalent to `findcc ci/1 pi/1`
 - At least one of the one of the 2 fields must be present
 
 Examples:
 
-- `findcc p/1` finds concertContact(s) associated with the first person in the phone book.
-- `findcc c/1` finds concertContact(s) associated with the first concert in the phone book.
-- `findcc p/1 c/1` finds concertContact(s) associated with the first concert or first person in the phone book.
+- `findcc pi/1` finds concertContact(s) associated with the first person in the phone book.
+- `findcc ci/1` finds concertContact(s) associated with the first concert in the phone book.
+- `findcc pi/1 ci/1` finds the concertContact associated with the first concert and the first person in the phone book.
 
 ### Editing a person : `editp`
 
-Edits an existing person in the Concert Phone book.
+Edits an existing person in the ConcertPhonebook.
 
 Format: `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]…​`
 
@@ -283,7 +295,7 @@ Examples:
 
 ### Editing a concert : `editc`
 
-Edits an existing concert in the Concert Phone book.
+Edits an existing concert in the ConcertPhonebook.
 
 Format: `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`
 
@@ -339,7 +351,8 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 ## Command summary
 
 | Action                       | Format, Examples                                                                                                                                                             |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                     | `help`                                                                                                                                                                       |
 | **List Person**              | `listp`                                                                                                                                                                      |
 | **List Concerts**            | `listc`                                                                                                                                                                      |
 | **List Person and Concerts** | `list`                                                                                                                                                                       |
@@ -348,13 +361,12 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 | **Add Concert**              | `addc n/NAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                                    |
 | **Add ConcertContact**       | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
 | **Delete Person**            | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
-| **Delete Concert**           | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
+| **Delete Concert**           | `deletec INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
 | **Delete ConcertContact**    | `deletecc INDEX`<br> e.g., `deletecc 1`                                                                                                                                      |
 | **Clear**                    | `clear`                                                                                                                                                                      |
+| **Find Person**              | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `findp n/James Jake r/organiser`                                                                                                |
+| **Find Concert**             | `findc [n/NAME_KEYWORDS]`<br> e.g., `findc n/Coachella Glastonbury`                                                                                                          |
+| **Find ConcertContact**      | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
 | **Edit Person**              | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
 | **Edit Concert**             | `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`<br> e.g.,`editc 1 a/2 Stadium Drive d/2024-10-11 2200`                                                                           |
-| **Find Person**              | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `find n/James Jake r/organiser`                                                                                                 |
-| **Find Concert**             | `findc [n/NAME_KEYWORDS]`<br> e.g., `find n/Coachella Glastonbury`                                                                                                           |
-| **Find ConcertContact**      | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
-| **Help**                     | `help`                                                                                                                                                                       |
 | **Exit**                     | `exit`                                                                                                                                                                       |
