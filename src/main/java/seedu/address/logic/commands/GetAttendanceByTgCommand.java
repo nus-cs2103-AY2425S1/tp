@@ -91,4 +91,9 @@ public class GetAttendanceByTgCommand extends Command {
         }
         return false;
     }
+
+    @Override
+    public boolean undo(Model model) {
+        return closeCurrentWindow();
+    }
 }
