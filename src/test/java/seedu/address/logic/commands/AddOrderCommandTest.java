@@ -19,7 +19,14 @@ class AddOrderCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_newOrder_success() {
+    public void execute_invalidOrderName_throwsCommandException() {
+        assertThrows(CommandException.class, () -> new AddOrderCommand(" cake").execute(model));
+        assertThrows(CommandException.class, () -> new AddOrderCommand("c.ke").execute(model));
+        assertThrows(CommandException.class, () -> new AddOrderCommand("c/ke").execute(model));
+    }
+
+    @Test
+    public void execute_newOrder_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         String name = "cake";
@@ -29,7 +36,7 @@ class AddOrderCommandTest {
     }
 
     @Test
-    void execute_duplicateOrder_throwsCommandException() {
+    public void execute_duplicateOrder_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         String name = "cake";
         Order order = new Order(name);
@@ -38,9 +45,9 @@ class AddOrderCommandTest {
     }
 
     @Test
-    void equalsMethod() {
+    public void equalsMethod() {
         AddOrderCommand o1 = new AddOrderCommand("cake");
-        AddOrderCommand o2 = new AddOrderCommand("cAke");
+        AddOrderCommand o2 = new AddOrderCommand("cake");
         AddOrderCommand o3 = new AddOrderCommand("test");
         assertEquals(o1, o1);
         assertNotEquals(o1, null);
