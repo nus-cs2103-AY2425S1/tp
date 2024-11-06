@@ -71,7 +71,10 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Command keywords are case insensitive
-  e.g. if the command `add n/John Doe`, is equal to `Add n/John Doe`.
+  e.g. the command `add n/John Doe`, is equal to `Add n/John Doe`.
+
+* Parameter `NAME` is case insensitive
+  e.g. the command `delete John Doe`, is equal to `delete john doe` or `delete JOHn DoE`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -255,7 +258,7 @@ Format: `import FILENAME.json`
 - File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
 - File **must** be in the same folder as the application JAR file. 
 - File **must** be in the expected format of MediContact data (see [Expected format](#expected format) for more details). 
-- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary of parameter constraints) for more details).
+- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary of parameter constraints) for more details). No duplicate names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
 
 <box type="warning" seamless>
 
