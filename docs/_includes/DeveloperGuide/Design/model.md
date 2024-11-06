@@ -41,4 +41,4 @@ The `CommonModel` component:
 
 Singleton `CommonModel` class. The singleton instance of this class contains an instance of both `AddressBookModel` and `TransactionBookModel`. The singleton instance acts as a facade, exposing the APIs of both `AddressBookModel` and `TransactionBookModel`.
 
-Certain transaction-related features need access to data from both the address and transaction book from different areas of the codebase. For this reason, we decided to go with the `CommonModelManage**r` class design described above.
+Certain transaction-related features need access to data from both the address and transaction book from different areas of the codebase. For this reason, we decided to go with the `CommonModelManager` class design described above.
