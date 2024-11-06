@@ -26,7 +26,7 @@ The image below shows the different components of HiredFiredPro.
 
 ### Command Format
 
-<box type="info" seamless>
+<box type="info">
 
 **Notes about the command format:**<br>
 
@@ -44,7 +44,7 @@ The image below shows the different components of HiredFiredPro.
 
 ### Commonly Used Parameters
 
-<box type="info" seamless>
+<box type="info">
 
 **Notes about the parameters:**<br>
 
@@ -100,7 +100,7 @@ Parameter     | Notes
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
+<br><br>
 ### Viewing help : `help`
 
 Shows a table summarising the commands in HiredFiredPro and a link to the user guide.
@@ -116,9 +116,14 @@ Adds a candidate to HiredFiredPro.
 
 Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE  [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip">
 
 **Tip:** A candidate can have any number of tags and skills (including 0)
+</box>
+
+<box type="info">
+
+**Note:** Candidates are considered duplicates if they have the same name and same job
 </box>
 
 Examples:
@@ -217,7 +222,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
+* `find alex david` returns `Alex Yeoh`, `David Li`, as shown below:
 
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -231,7 +236,7 @@ Format: `delete INDEX`
 
 <box type="warning">
 
-**Warning:** This action is irreversible! Only enter this command if you are sure that the candidate is not needed.
+**Caution:** This action is irreversible! Only enter this command if you are sure that the candidate is not needed.
 </box>
 
 * Deletes the candidate at the specified `INDEX`.
@@ -264,7 +269,7 @@ Format: `clear`
 
 <box type="warning">
 
-**Warning:** This action is irreversible! Only enter this command if you are sure that all existing candidates are not needed.
+**Caution:** This action is irreversible! Only enter this command if you are sure that all existing candidates are not needed.
 </box>
 <br><br>
 
@@ -284,7 +289,7 @@ HiredFiredPro data are saved in the hard disk automatically after any command th
 
 HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/data/hiredfiredpro.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
