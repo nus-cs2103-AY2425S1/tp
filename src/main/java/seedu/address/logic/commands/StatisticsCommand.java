@@ -28,8 +28,6 @@ public class StatisticsCommand extends Command {
     public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
     public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
     public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
-    public static final String MESSAGE_DISPLAY_LOW_INCOME =
-            "Number Of People With Monthly Household Income <= 4000: %s";
     public static final String MESSAGE_DISPLAY_APPOINTMENTS_SOON =
             "Number Of Appointments Scheduled Within Next 7 Days: %s";
     public static final String MESSAGE_DISPLAY_ELIGIBLE_PERSONS =
@@ -50,7 +48,6 @@ public class StatisticsCommand extends Command {
         allStats.add(highPriorityPeople(lastShownPersonList));
         allStats.add(mediumPriorityPeople(lastShownPersonList));
         allStats.add(lowPriorityPeople(lastShownPersonList));
-        allStats.add(incomeFourThousandOrLess(lastShownPersonList));
         allStats.add(appointmentsSoon(lastShownAppointmentList));
         allStats.add(eligibleForScheme(lastShownPersonList));
 
@@ -108,19 +105,6 @@ public class StatisticsCommand extends Command {
         return String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
     }
 
-    /**
-     * Returns a message with number of people with monthly household income <= 4000 in current list.
-     *
-     * @param currList current list.
-     * @return string message of number of people with monthly household income <= 4000.
-     */
-    public static String incomeFourThousandOrLess(List<Person> currList) {
-        long lowIncome = currList.stream()
-                .map(person -> person.getIncome().getValue())
-                .filter(income -> income <= 4000)
-                .count();
-        return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
-    }
 
     /**
      * Returns a message with number of people with appointments within a week or less from the current time.
