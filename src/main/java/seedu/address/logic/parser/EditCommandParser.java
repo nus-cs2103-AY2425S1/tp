@@ -2,10 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,20 +29,22 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_TAG);
 
-        Index index;
+        Index studentIndex;
 
-        if (args.isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
+
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(pe.getMessage());
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
         EditStudentDescriptor editStudentDescriptor = new EditCommand.EditStudentDescriptor();
 
@@ -63,7 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editStudentDescriptor);
+        return new EditCommand(studentIndex, editStudentDescriptor);
     }
 
     /**
