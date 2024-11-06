@@ -190,7 +190,7 @@ Eduvault stores four types of objects:
         "email" : "alexyeoh@example.com",
         "address" : "Blk 30 Geylang Street 29, #06-40",
         "payment" : "189",
-        "tags" : [ "friends" ]
+        "tags" : [ "Scholar" ]
     },
   ...
 ]

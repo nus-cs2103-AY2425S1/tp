@@ -35,7 +35,7 @@ class SampleDataUtilTest {
         assertFalse(Integer.parseInt(alex.getPayment().overdueAmount) < 0);
         // assertEquals(alex.getParticipation().attendanceDate,
         // LocalDate.parse("08/10/2024", Attendance.VALID_DATE_FORMAT));
-        assertTrue(alex.getTags().contains(new Tag("friends")));
+        assertTrue(alex.getTags().contains(new Tag("Scholar")));
     }
 
     @Test
@@ -59,11 +59,11 @@ class SampleDataUtilTest {
     @Test
     void getTagSet_correctConversion_success() {
         // Verify that getTagSet correctly converts strings to Tag objects
-        Set<Tag> tags = SampleDataUtil.getTagSet("friends", "colleagues");
+        Set<Tag> tags = SampleDataUtil.getTagSet("Scholar", "SessionB");
 
         assertEquals(2, tags.size());
-        assertTrue(tags.contains(new Tag("friends")));
-        assertTrue(tags.contains(new Tag("colleagues")));
+        assertTrue(tags.contains(new Tag("Scholar")));
+        assertTrue(tags.contains(new Tag("SessionB")));
     }
 }
 
