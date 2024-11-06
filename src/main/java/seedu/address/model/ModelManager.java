@@ -20,6 +20,7 @@ import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
+import seedu.address.model.volunteer.VolunteerIsAvailableForEventPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -169,6 +170,13 @@ public class ModelManager implements Model {
         String eventName = eventToView.getName().toString();
         VolunteerInvolvedInEventPredicate volsInEventPredicate = new VolunteerInvolvedInEventPredicate(eventName);
         filteredVolunteers.setPredicate(volsInEventPredicate);
+    }
+
+    @Override
+    public void filterEvent(Event event) {
+        VolunteerIsAvailableForEventPredicate volIsAvail = new VolunteerIsAvailableForEventPredicate(event,
+                addressBook);
+        filteredVolunteers.setPredicate(volIsAvail);
     }
 
     /**

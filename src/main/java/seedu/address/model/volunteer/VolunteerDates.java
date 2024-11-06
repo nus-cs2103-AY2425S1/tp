@@ -153,4 +153,7 @@ public class VolunteerDates {
         return dates.hashCode();
     }
 
+    public boolean hasAvailableDate(LocalDate date) {
+        return this.dates.contains(date);
+    }
 }

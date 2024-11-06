@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
@@ -124,6 +126,16 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public ObservableList<Event> getEventList() {
         return eventManager.getEvents().asUnmodifiableObservableList();
+    }
+
+    @Override
+    public List<Event> getEventFromListOfNames(ObservableList<String> stringOfEvents) {
+        return this.eventManager.getEventsFromListOfNames(stringOfEvents);
+    }
+
+    @Override
+    public boolean eventHasOverlapWithList(Event event, List<Event> eventList) {
+        return this.eventManager.eventHasOverlapWithList(event, eventList);
     }
 
     @Override

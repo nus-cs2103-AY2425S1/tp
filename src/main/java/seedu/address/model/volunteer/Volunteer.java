@@ -2,6 +2,7 @@ package seedu.address.model.volunteer;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -174,4 +175,7 @@ public class Volunteer {
                 + ", availableDate=" + availableDates + "}";
     }
 
+    public boolean isFreeOn(LocalDate date) {
+        return this.availableDates.hasAvailableDate(date);
+    }
 }
