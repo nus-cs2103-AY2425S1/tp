@@ -6,8 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ADHD;
@@ -31,27 +29,16 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withPhone("94351253")
-<<<<<<< HEAD
-            .withPayment("-200").withTags("friends").build();
+            .withPayment("-200").withTags("Scholar").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-            .withPayment("200").withTags("owesMoney", "friends").build();
-=======
-            .withAttendance("08/10/2024").withPayment("-200").withTags("Scholar").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-            .withAttendance("09/10/2024").withPayment("200").withTags("SessionA", "Scholar").build();
->>>>>>> 1f0f1aa7dfe3d9b5be134ca790f318f0dcabe766
+            .withPayment("200").withTags("SessionA", "Scholar").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withPayment("200")
             .withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withPayment("-100")
-<<<<<<< HEAD
-            .withTags("friends").build();
-=======
-            .withAttendance("11/10/2024").withTags("ADHD").build();
->>>>>>> 1f0f1aa7dfe3d9b5be134ca790f318f0dcabe766
+            .withTags("friends").withTags("ADHD").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withPayment("-200").build();
@@ -70,19 +57,11 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-<<<<<<< HEAD
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-=======
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withPayment(VALID_PAYMENT_AMY)
             .withTags(VALID_TAG_SCHOLAR).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withPayment(VALID_PAYMENT_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_ADHD, VALID_TAG_SCHOLAR).build();
->>>>>>> 1f0f1aa7dfe3d9b5be134ca790f318f0dcabe766
 
     public static final Tutorial MATH = new TutorialBuilder().withSubject("Math").build();
     public static final Tutorial SCIENCE = new TutorialBuilder().withSubject("Science").build();

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -36,14 +35,10 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-<<<<<<< HEAD
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
-=======
-            + PREFIX_PAYMENT + "100 "
+            + PREFIX_TAG + "owesMoney"
             + PREFIX_TAG + "Scholar "
             + PREFIX_TAG + "SessionB";
->>>>>>> 1f0f1aa7dfe3d9b5be134ca790f318f0dcabe766
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EduVault";
