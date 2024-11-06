@@ -550,7 +550,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `edit 1 n/NAME`<br>
        Expected: First contact has name field edited to NAME. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
-   
+
     1. Test case: `edit Alice n/Alice Teo`<br>
        Expected (No duplicated Alice): Contact with name field containing Alice has name field edited to Alice Teo. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
        Expected (Duplicated Alice): No contact edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.
@@ -562,7 +562,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `view Alice` <br>
        Expected: Contacts with name field containing Alice shown. Status message shows number of contacts shown.
-   
+
     1. Test case: `view Alice Pauline` <br>
        Expected: Contacts with name field containing Alice and Pauline shown. Status message shows number of contacts shown.
 
@@ -592,13 +592,13 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-   
+
    2. Test case: `delete betsy`, assuming there is only one contact with this name `betsy` <br>
       Expected: The contact of Betsy Crow will be deleted.
-   
+
    3. Test case: `delete alex`, assuming there is more than one contact with the name `alex` <br>
       For example: `Alex Tan`, `Alex Crow`, `Alex Rodrigo` <br>
-      Expected: The contacts of all persons matching `alex` will be filtered and listed. No person is deleted. 
+      Expected: The contacts of all persons matching `alex` will be filtered and listed. No person is deleted.
       Multiple person found message will be shown, prompting user to specify the contact to delete using index of filtered list.
 
    4. Test case: `delete alice`, assuming there is no contact with the name `alice` <br>
@@ -607,7 +607,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a person while a filtered list of contacts is shown
 
    1. Prerequisite: A partial list of contacts is shown.
-   
+
    2. Test cases used can be the same since `delete NAME` searches from the entire list of contacts, rather than only the partial list.
 
 ### Filtering persons

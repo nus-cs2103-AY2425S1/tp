@@ -1,9 +1,10 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -19,8 +20,13 @@ public class NameMatchesKeywordPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return !keywords.isEmpty() && keywords.stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        requireNonNull(person);
+        // Return false if keywords list is empty
+        if (keywords.isEmpty()) {
+            return false;
+        }
+        return keywords.stream()
+                .allMatch(keyword -> person.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override
