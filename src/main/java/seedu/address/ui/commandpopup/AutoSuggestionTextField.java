@@ -55,7 +55,7 @@ public class AutoSuggestionTextField extends TextField {
 
         suggestionPopup = new PopupControl();
         suggestionList = new ListView<>();
-        suggestionList.setFocusTraversable(true);
+        suggestionList.setFocusTraversable(false);
 
         // Set up the popup
         suggestionPopup.getScene().setRoot(suggestionList);
@@ -65,7 +65,7 @@ public class AutoSuggestionTextField extends TextField {
         // Listen for text changes
         textProperty().addListener((obs, oldText, newText) -> {
             if (!newText.trim().isEmpty()) {
-                String[] text = newText.split("\\s+");
+                String[] text = newText.trim().split("\\s+");
                 String command = text[0];
                 boolean hasParams = false;
                 if (text.length > 1 || newText.contains(" ")) {
