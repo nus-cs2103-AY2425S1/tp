@@ -25,49 +25,51 @@ public class AddEcNumberCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
+        // EP: Missing inputs
+        // First missing input: no index specified
         assertParseFailure(parser, VALID_ECNUMBER_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
+        // Second missing input: no field specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
-        // no index and no field specified
+        // Both missing inputs: no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
+        // EP: negative index
         assertParseFailure(parser, "-5" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // zero index
-        assertParseFailure(parser, "0" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // EP: zero index
+        assertParseFailure(parser, "0" + ECNUMBER_DESC_AMY, MESSAGE_INVALID_FORMAT); // boundary value
 
-        // invalid arguments being parsed as preamble
+        // EP: invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
-        // invalid prefix being parsed as preamble
+        // EP: invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
+        // EP: invalid EcNumber
         assertParseFailure(parser, "1" + INVALID_ECNUMBER_DESC, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        // emergency phone field is filled
+        // EP: EcNumber field is filled and valid
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + ECNUMBER_DESC_BOB;
         AddEcNumberCommand expectedCommand = new AddEcNumberCommand(targetIndex,
                 new EcNumber(VALID_ECNUMBER_BOB));
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // emergency phone field is empty
+        // EcNumber field is empty
         userInput = targetIndex.getOneBased() + " ep/";
         expectedCommand = new AddEcNumberCommand(targetIndex,
                 new EcNumber(""));
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand); // boundary value: empty EcNumber
     }
 }

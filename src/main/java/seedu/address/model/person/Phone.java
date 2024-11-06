@@ -34,7 +34,7 @@ public class Phone implements Comparable<Phone> {
     }
 
     /**
-     * Returns the integer representation of Phone
+     * Returns the integer representation of Phone.
      */
     public Integer toInt() {
         return Integer.valueOf(this.value);

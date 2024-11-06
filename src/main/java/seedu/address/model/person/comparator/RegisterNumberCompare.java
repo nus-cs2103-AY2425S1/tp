@@ -3,7 +3,7 @@ package seedu.address.model.person.comparator;
 import seedu.address.model.person.Person;
 
 /**
- * A class to compare two Person objects using RegisterNumber
+ * Compares two Person objects based on their RegisterNumber.
  */
 public class RegisterNumberCompare extends PersonCompare {
 

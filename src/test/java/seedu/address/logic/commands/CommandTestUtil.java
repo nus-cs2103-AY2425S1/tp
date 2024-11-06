@@ -59,6 +59,7 @@ public class CommandTestUtil {
     public static final String VALID_ECNAME_BOB = "Sally";
     public static final String VALID_ECNUMBER_AMY = "91234567";
     public static final String VALID_ECNUMBER_BOB = "98765432";
+    public static final String VALID_ECNUMBER_EMPTY = "";
     public static final String VALID_SUBMISSION_ASSIGNMENT_1 = "Assignment 1";
     public static final String VALID_SUBMISSION_ASSIGNMENT_2 = "Assignment 2";
     public static final String VALID_SUBMISSION_TUTORIAL_1 = "Tutorial 1";

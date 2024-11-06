@@ -16,17 +16,20 @@ public class StudentClassCompareTest {
 
     @Test
     public void compare_equal() {
+        // EP: StudentClasses are equal
         assertTrue(comparator.compare(p1, p1) == 0);
         assertTrue(comparator.compare(p2, p2) == 0);
     }
 
     @Test
     public void compare_lessThan() {
+        // EP: first StudentClass is less than second StudentClass
         assertTrue(comparator.compare(p1, p2) <= -1);
     }
 
     @Test
     public void compare_greaterThan() {
+        // EP: first StudentClass is less than second StudentClass
         assertTrue(comparator.compare(p2, p1) >= 1);
     }
 

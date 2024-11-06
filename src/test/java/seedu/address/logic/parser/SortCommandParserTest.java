@@ -16,21 +16,23 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+        // EP: empty argument
         assertParseFailure(parser, "    ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // EP: invalid argument
         assertParseFailure(parser, "name and number", MESSAGE_INVALID_FORMAT);
     }
     @Test
     public void parse_validArgs_returnsSortCommand() {
         SortCommand expectedSortCommand = new SortCommand(ParserUtil.SortAttribute.REGISTERNUMBER);
 
-        // multiple white spaces
+        // EP: valid argument, boundary value: extra whitespace
         assertParseSuccess(parser, " register number ", expectedSortCommand);
 
-        // no white spaces
+        // EP: valid argument, boundary value: no extra whitespace
         expectedSortCommand = new SortCommand(ParserUtil.SortAttribute.ADDRESS);
         assertParseSuccess(parser, "address", expectedSortCommand);
     }

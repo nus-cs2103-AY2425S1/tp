@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -12,41 +13,54 @@ public class EcNumberTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
+        // EP: null EcNumber
         assertThrows(NullPointerException.class, () -> new EcNumber(null));
     }
 
     @Test
-    public void constructor_invalidEmergencyPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "123";
-        assertThrows(IllegalArgumentException.class, () -> new EcNumber(invalidPhone));
+    public void constructor_invalidEcNumber_throwsIllegalArgumentException() {
+        String invalidEcNumber = "123";
+        // EP: invalid EcNumber
+        assertThrows(IllegalArgumentException.class, () -> new EcNumber(invalidEcNumber));
+    }
+
+    @Test
+    public void constructor_validEcNumber() {
+        String validEcNumber1 = "12345678";
+        String validEcNumber2 = "";
+
+        // EP: valid EcNumber
+        assertDoesNotThrow(() -> new EcNumber(validEcNumber1)); // Boundary Value: 8 digits
+        assertDoesNotThrow(() -> new EcNumber(validEcNumber2)); // Boundary Value: Empty String
     }
 
     @Test
     public void isValidEcNumber() {
-        // null phone number
+        // EP: null phone number
         assertFalse(EcNumber.isValidEcNumber(null));
 
-        // invalid phone numbers
+        // EP: invalid phone numbers
         assertFalse(EcNumber.isValidEcNumber(" ")); // spaces only
         assertFalse(EcNumber.isValidEcNumber("91")); // less than 8 numbers
         assertFalse(EcNumber.isValidEcNumber("phone")); // non-numeric
         assertFalse(EcNumber.isValidEcNumber("9011p041")); // alphabets within digits
         assertFalse(EcNumber.isValidEcNumber("9312 1534")); // spaces within digits
 
-        // valid phone numbers
-        assertTrue(EcNumber.isValidEcNumber("")); // empty string
-        assertTrue(EcNumber.isValidEcNumber("93121534")); // exactly 8 numbers
+        // EP: valid phone numbers
+        assertTrue(EcNumber.isValidEcNumber("")); // Boundary value: empty string
+        assertTrue(EcNumber.isValidEcNumber("93121534")); // Boundary value: exactly 8 numbers
     }
 
     @Test
     public void toInt() {
         EcNumber ecNumber = new EcNumber("91234567");
 
+        // EP: integer strings
         assertEquals(ecNumber.toInt(), 91234567);
         assertNotEquals(ecNumber.toInt(), 98765432);
 
-        // empty ecNumber
-        ecNumber = new EcNumber("");
+        // EP: empty string
+        ecNumber = new EcNumber(""); // Boundary value: empty string
         assertEquals(ecNumber.toInt(), Integer.MAX_VALUE);
         assertNotEquals(ecNumber.toInt(), 0);
     }
@@ -55,19 +69,19 @@ public class EcNumberTest {
     public void equals() {
         EcNumber ecNumber = new EcNumber("91234567");
 
-        // same values -> returns true
+        // EP: same values -> returns true
         assertTrue(ecNumber.equals(new EcNumber("91234567")));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(ecNumber.equals(ecNumber));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(ecNumber.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(ecNumber.equals(5.0f));
 
-        // different values -> returns false
+        // EP: different values -> returns false
         assertFalse(ecNumber.equals(new Phone("98765432")));
     }
 }

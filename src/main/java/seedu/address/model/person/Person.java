@@ -71,7 +71,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of Name in the GUI
+     * Returns representation of Name in the GUI.
      */
     public String getDisplayedName() {
         return String.format(Name.MESSAGE_GUI, name);
@@ -82,7 +82,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of Phone in the GUI
+     * Returns representation of Phone in the GUI.
      */
     public String getDisplayedPhone() {
         return String.format(Phone.MESSAGE_GUI, phone);
@@ -93,7 +93,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of Email in the GUI
+     * Returns representation of Email in the GUI.
      */
     public String getDisplayedEmail() {
         return String.format(Email.MESSAGE_GUI, email);
@@ -104,7 +104,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of Address in the GUI
+     * Returns representation of Address in the GUI.
      */
     public String getDisplayedAddress() {
         return String.format(Address.MESSAGE_GUI, address);
@@ -115,7 +115,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of RegisterNumber in the GUI
+     * Returns representation of RegisterNumber in the GUI.
      */
     public String getDisplayedRegisterNumber() {
         return String.format(RegisterNumber.MESSAGE_GUI, registerNumber);
@@ -126,7 +126,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of Sex in the GUI
+     * Returns representation of Sex in the GUI.
      */
     public String getDisplayedSex() {
         return String.format(Sex.MESSAGE_GUI, sex);
@@ -137,7 +137,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of StudentClass in the GUI
+     * Returns representation of StudentClass in the GUI.
      */
     public String getDisplayedStudentClass() {
         return String.format(StudentClass.MESSAGE_GUI, studentClass);
@@ -148,7 +148,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of EcName in the GUI
+     * Returns representation of EcName in the GUI.
      */
     public String getDisplayedEcName() {
         return String.format(EcName.MESSAGE_GUI, ecName);
@@ -163,7 +163,7 @@ public class Person {
     }
 
     /**
-     * Returns representation of EcNumber in the GUI
+     * Returns representation of EcNumber in the GUI.
      */
     public String getDisplayedEcNumber() {
         return String.format(EcNumber.MESSAGE_GUI, ecNumber);
