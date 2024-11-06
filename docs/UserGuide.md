@@ -145,11 +145,17 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+:bulb: **Tip:** This command can be used to reset the filter applied on the person list caused by a `find` command 
+operation.
+
 ### Listing all transactions : `listTxn`
 
 Shows a list of all transactions in the transaction book.
 
 Format: `listTxn`
+
+:bulb: **Tip:** This command can be used to reset the filter applied on transaction list caused by a `fitlerTxn` 
+command operation.
 
 ### Editing a person : `edit`
 
@@ -164,6 +170,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* You can remove the person’s remark by typing `r/` without 
+  specifying any remark after it.
 
 Examples:
 
@@ -193,11 +201,9 @@ Examples:
 * `editTxn 1 p/91234567 desc/Hello world` Edits the 1st transaction to be related to the person with phone number `91234567` and edits the description of the 1st transaction to be `Hello world`.
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
 
-====
-*Future consideration*
+#### *Future consideration*
 
 * Support editing status field in `editTxn` command. Currently, similar result can be done via `markDone` or `markUndone` command.
-====
 
 ### Locating persons by name: `find`
 
@@ -228,7 +234,7 @@ Filter transactions with a any combination of the following parameters:
 * and/or status
 * and/or positive/negative amount
 
-Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]`]`
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]`
 
 * The command requires at least one of the above optional prefixes to be provided.
 * As more prefixes are provided, the filter becomes more specific.
@@ -241,7 +247,7 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
     * The description filter is case-insensitive. e.g `hans` will match `Hans`
 * The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
 * The `AMOUNT_SIGN` accepts either `Pos` or `Neg` to indicate filtering for transactions with amount that are 
-  positive or negative.
+  positive or negative respectively.
 
 Examples:<br>
 
@@ -250,7 +256,7 @@ Examples:<br>
 * `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in 
   the displayed person list.<br>
   ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
-* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Givent that `2` is 
+* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Given that `2` is 
   the index of `Bernice Yu` in the displayed person list.<br>
   ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
