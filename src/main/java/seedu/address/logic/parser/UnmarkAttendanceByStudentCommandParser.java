@@ -35,8 +35,6 @@ public class UnmarkAttendanceByStudentCommandParser implements Parser<UnmarkAtte
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException e) {
-            logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, UnmarkAttendanceByStudentCommandParser.class
-                    + "\n - Failed to parse index"));
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceByStudentCommand.MESSAGE_USAGE), e);
         }
