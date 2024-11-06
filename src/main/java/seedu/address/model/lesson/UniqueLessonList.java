@@ -13,7 +13,6 @@ import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
-import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -97,11 +96,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
         if (person instanceof Tutor) {
             return internalList.stream().filter(item -> item.getTutor().equals(person))
                     .map(Lesson::getTutee).collect(Collectors.toList());
-        } else if (person instanceof Tutee) {
+        } else {
             return internalList.stream().filter(item -> item.getTutee().equals(person))
                     .map(Lesson::getTutor).collect(Collectors.toList());
-        } else {
-            throw new PersonNotFoundException();
         }
     }
 

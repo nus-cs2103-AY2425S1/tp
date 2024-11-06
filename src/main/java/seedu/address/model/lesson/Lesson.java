@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
@@ -22,6 +24,7 @@ public class Lesson {
      * @param subject
      */
     public Lesson(Tutor tutor, Tutee tutee, Subject subject) {
+        requireAllNonNull(tutor, tutee, subject);
         this.tutor = tutor;
         this.tutee = tutee;
         this.subject = subject;

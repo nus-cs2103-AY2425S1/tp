@@ -10,8 +10,8 @@ import seedu.address.model.person.Tutor;
  */
 public class LessonBuilder {
 
-    public static final TutorBuilder DEFAULT_TUTOR = new TutorBuilder();
-    public static final TuteeBuilder DEFAULT_TUTEE = new TuteeBuilder();
+    public static final Tutor DEFAULT_TUTOR = new TutorBuilder().build();
+    public static final Tutee DEFAULT_TUTEE = new TuteeBuilder().build();
     public static final Subject DEFAULT_SUBJECT = new Subject("English");
 
     private Tutor tutor;
@@ -22,8 +22,8 @@ public class LessonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public LessonBuilder() {
-        tutor = DEFAULT_TUTOR.build();
-        tutee = DEFAULT_TUTEE.build();
+        tutor = DEFAULT_TUTOR;
+        tutee = DEFAULT_TUTEE;
         subject = DEFAULT_SUBJECT;
     }
 
