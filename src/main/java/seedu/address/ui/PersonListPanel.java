@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -19,6 +21,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
@@ -167,12 +170,23 @@ public class PersonListPanel extends UiPart<Region> {
 
             // After every update, recalculate the max content width (includes non-visible area)
             // Based on the cells that are filled (ie: cells that have a person entry in it!)
-            Platform.runLater(PersonListPanel.this::recalculateMaxContentWidth);
+            Platform.runLater(PersonListPanel.this::recalculateMaxContentWidthWithDelay);
         }
     }
 
+    private void recalculateMaxContentWidthWithDelay() {
+        // Use Timeline to delay the recalculation
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
+            recalculateMaxContentWidth();
+        }));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
     private void recalculateMaxContentWidth() {
+        personListView.requestLayout();
         Platform.runLater(() -> {
+
             double currentMaxWidth = 0;
 
             for (Node node : personListView.lookupAll(".list-cell")) {
@@ -180,13 +194,14 @@ public class PersonListPanel extends UiPart<Region> {
                     ListCell<?> cell = (ListCell<?>) node;
                     ScrollPane contentContainer = (ScrollPane) cell.lookup("#contentContainer");
                     if (contentContainer != null) {
-                        double containerWidth = contentContainer.getContent().getBoundsInParent().getWidth();
-                        currentMaxWidth = Math.max(currentMaxWidth, containerWidth);
+                        double totalWidth = contentContainer.getContent().getBoundsInParent().getWidth();
+                        currentMaxWidth = Math.max(currentMaxWidth, totalWidth);
                     }
                 }
             }
             // Recalculate and set
             // This in turn triggers the registered listener on maxContentWidth
+            System.out.println(currentMaxWidth);
             maxContentWidth.set(currentMaxWidth);
         });
     }
@@ -238,6 +253,15 @@ public class PersonListPanel extends UiPart<Region> {
                         }
                         personListView.scrollTo(removalIndex);
                         personListView.getSelectionModel().select(removalIndex);
+                    });
+                    break;
+                }
+
+                if (change.wasUpdated()) {
+                    Platform.runLater(() -> {
+                        int changeIndex = change.getFrom();
+                        personListView.scrollTo(changeIndex);
+                        personListView.getSelectionModel().select(changeIndex);
                     });
                     break;
                 }
