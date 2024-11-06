@@ -149,7 +149,7 @@ Shows a pop-up message explaining how to access the help page.
 
 Format: `help`
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding a patient: `add`
@@ -173,7 +173,7 @@ Examples:
 * `add n/John Doe i/P12345 w/A1 d/TYPE 1 DIABETES m/METFORMIN `
 * `add n/Nicky Lam i/P17777 w/A5 d/Gastritis m/Proton pump inhibitors `
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Listing all patients : `list`
@@ -184,7 +184,7 @@ Shows a list of all patients in WardWatch.
 
 Format: `list`
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Editing a patient : `edit`
@@ -203,7 +203,7 @@ Examples:
 *  `edit 1 i/P12345 w/A2` Edits the patient ID and ward of the 1st person to be `P12345` and `A2` respectively.
 *  `edit 2 n/Betsy Crower m/Paracetamol` Edits the name and medication of the 2nd person to be `Betsy Crower` and `Panadol`
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding notes to a patient : `addnotes`
@@ -218,7 +218,7 @@ Examples:
 *  `addnotes 1 pn/Patient is prone to falling`
 *  `addnotes 2 pn/Patient requires frequent checkups`
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting notes from a patient : `delnotes`
@@ -233,7 +233,7 @@ Format: `delnotes INDEX`
 Examples:
 *  `delnotes 1`
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Viewing a patient's details: `view`
@@ -249,7 +249,7 @@ Examples:
 * `view 2` to view the 2nd patient's details.
 ![result for 'view 2'](images/viewResult.png)
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Searching patients by field: `find`
@@ -280,7 +280,7 @@ Examples:
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
 ![result for 'find n/ alice benson'](images/findAliceBensonResult.png)
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting a patient : `delete`
@@ -299,7 +299,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Adding an Appointment to a patient: `makeappt`
@@ -323,7 +323,7 @@ Examples:
 * `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
   1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting an Appointment from a patient: `del_appt`
@@ -336,16 +336,16 @@ Format: `del_appt INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
-### Show appointments on a specific date: `schedule_date`
+### Show appointments on a specific date: `scheduledate`
 
 ![scheduledate result](images/scheduledate.png)
 
 Lists all the appointments on a specific date.
 
-Format: `schedule_date DATE`
+Format: `scheduledate DATE`
 
 * `DATE` **must be in the form of `DD-MM-YYYY`.**
 * Appointments that overlap with the specified date will be displayed.
@@ -353,7 +353,7 @@ Format: `schedule_date DATE`
 Examples:
 * `schedule_date 01-01-2020` returns all the appointments that takes place on 1 January 2020.
 
-[Back to Input parameters](#input-parameters)<br>
+[View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
 
 ### List all patient appointment: `scheduleall`
