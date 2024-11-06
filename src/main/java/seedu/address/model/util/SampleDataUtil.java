@@ -29,27 +29,22 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final Appointment EMPTY_APPOINTMENT = Appointment.EMPTY_APPOINTMENT;
+    public static final Person ALEX = new Buyer(new Name("Alex Yeoh"), new Phone("87438807"),
+            new Email("alexyeoh@example.com"), getTagSet("friends"), EMPTY_APPOINTMENT);
+    public static final Person BERNICE = new Seller(new Name("Bernice Yu"), new Phone("99272758"),
+            new Email("berniceyu@example.com"), getTagSet("colleagues", "friends"), EMPTY_APPOINTMENT);
+    public static final Person CHARLOTTE = new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"),
+            new Email("charlotte@example.com"), getTagSet("neighbours"), EMPTY_APPOINTMENT);
+    public static final Person DAVID = new Seller(new Name("David Li"), new Phone("91031282"),
+            new Email("lidavid@example.com"), getTagSet("family"), EMPTY_APPOINTMENT);
+    public static final Person IRFAN = new Buyer(new Name("Irfan Ibrahim"), new Phone("92492021"),
+            new Email("irfan@example.com"), getTagSet("classmates"), EMPTY_APPOINTMENT);
+    public static final Person ROY = new Seller(new Name("Roy Balakrishnan"), new Phone("92624417"),
+            new Email("royb@example.com"), getTagSet("colleagues"), EMPTY_APPOINTMENT);
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Buyer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    getTagSet("friends"),
-                    EMPTY_APPOINTMENT),
-            new Seller(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    getTagSet("colleagues", "friends"),
-                    EMPTY_APPOINTMENT),
-            new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    getTagSet("neighbours"),
-                    EMPTY_APPOINTMENT),
-            new Seller(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    getTagSet("family"),
-                    EMPTY_APPOINTMENT),
-            new Buyer(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    getTagSet("classmates"),
-                    EMPTY_APPOINTMENT),
-            new Seller(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    getTagSet("colleagues"),
-                    EMPTY_APPOINTMENT)
+            ALEX, BERNICE, CHARLOTTE, DAVID, IRFAN, ROY
         };
     }
 
@@ -69,11 +64,8 @@ public class SampleDataUtil {
     public static Listing[] sampleListings() {
         return new Listing[] {
             new Listing(new Name("RC4"), new Address("134 Clementi Ave"),
-                    new Price("2000", new BigDecimal("2000")), new Area(100),
-                            Region.WEST,
-                            new Seller(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                                    getTagSet("friends"),
-                                    EMPTY_APPOINTMENT), new HashSet<Person>())
+                    new Price("200000", new BigDecimal("2000")), new Area(100),
+                            Region.WEST, BERNICE, new HashSet<>()),
         };
     }
 

@@ -88,6 +88,31 @@ public class PersonCardUiTest extends ApplicationTest {
     }
 
     @Test
+    void personCard_displayCorrectTruncatedDetails() {
+        PersonCard personCard = new PersonCard(createSampleTruncatedBuyer(), 1);
+
+        // Assert that the person object is not null
+        assertNotNull(personCard.person);
+
+        // Check if the displayed ID, name, phone, email, and other labels are correct (with truncation)
+        assertEquals("1. ", personCard.getId().getText());
+        assertEquals("John Buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...",
+                personCard.getName().getText());
+        assertEquals("9123456777777777777777777...", personCard.getPhone().getText());
+        assertEquals("buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...",
+                personCard.getEmail().getText());
+        assertEquals("Date: 01-01-23 (From: 10:00 To: 11:00)", personCard.getAppointment().getText());
+
+        // Check if the tags are correctly displayed
+        FlowPane tagsFlowPane = personCard.getTags();
+        assertEquals(1, tagsFlowPane.getChildren().size()); // Expecting 1 tag
+
+        // Check correct truncation
+        Label firstTag = (Label) tagsFlowPane.getChildren().get(0);
+        assertEquals("friendsssssssss...", firstTag.getText());
+    }
+
+    @Test
     void personCard_throwsIllegalArgumentExceptionForInvalidPhone() {
         // Use assertThrows to verify that IllegalArgumentException is thrown for an invalid phone number
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
@@ -128,6 +153,22 @@ public class PersonCardUiTest extends ApplicationTest {
                 new Name("John Buyer"),
                 new Phone("91234567"),
                 new Email("buyer@example.com"),
+                tagSet,
+                new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00"))
+        );
+    }
+
+    /**
+     * Helper method to create a sample Buyer object with truncated details for testing.
+     */
+    private Person createSampleTruncatedBuyer() {
+        Set<Tag> tagSet = new HashSet<>();
+        tagSet.add(new Tag("friendsssssssssssssssssssssssssssssssssssssssssssssssssssss"));
+
+        return new Buyer(
+                new Name("John Buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"),
+                new Phone("912345677777777777777777777777"),
+                new Email("buyerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr@example.com"),
                 tagSet,
                 new Appointment(new Date("01-01-23"), new From("10:00"), new To("11:00"))
         );

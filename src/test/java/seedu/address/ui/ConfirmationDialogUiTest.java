@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.clientcommands.DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         robot.write("seller n/Tester p/98765432 e/test@testing.com");
         robot.type(KeyCode.ENTER);
         robot.clickOn("#commandTextField");
-        robot.write("listing n/Testing Site price/1234 area/123 address/123 AVENUE "
+        robot.write("listing n/Testing Site price/123456 area/123 address/123 AVENUE "
                 + "region/east seller/Tester");
         robot.type(KeyCode.ENTER);
     }
