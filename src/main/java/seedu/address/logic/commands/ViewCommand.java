@@ -82,7 +82,7 @@ public class ViewCommand extends Command {
      */
     private Person findPersonByName(List<Person> personList) throws CommandException {
         Optional<Person> personOptional = personList.stream()
-                .filter(person -> person.getName().equals(fullName))
+                .filter(person -> person.getName().toString().equalsIgnoreCase(fullName.toString()))
                 .findFirst();
 
         if (personOptional.isEmpty()) {

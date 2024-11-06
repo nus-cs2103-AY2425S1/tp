@@ -141,7 +141,7 @@ public class DeleteCommand extends Command {
      */
     private Person findPersonByName(List<Person> lastShownList) throws CommandException {
         Optional<Person> personOptional = lastShownList.stream()
-                .filter(person -> person.getName().equals(targetName))
+                .filter(person -> person.getName().toString().equalsIgnoreCase(targetName.toString()))
                 .findFirst();
 
         if (personOptional.isEmpty()) {
