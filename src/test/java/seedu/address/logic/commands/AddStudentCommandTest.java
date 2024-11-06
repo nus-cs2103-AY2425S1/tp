@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -187,7 +188,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void setTask(Task target, Task editedTask, Group group) {
+        public void setTask(Index index, Task editedTask, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

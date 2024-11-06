@@ -29,7 +29,7 @@ public class DeleteGroupCommand extends Command {
         + PREFIX_GROUP_NAME + "GROUP_NAME\n"
         + "Example: "
         + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Group 1";
+        + PREFIX_GROUP_NAME + "CS2103T-T14-1";
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s\nStudents affected: %2$s";
 

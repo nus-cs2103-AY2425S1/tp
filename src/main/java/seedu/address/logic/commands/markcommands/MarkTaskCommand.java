@@ -31,13 +31,14 @@ public class MarkTaskCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "mt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Changes the status of a task.\n"
+        + ": Changes the status of a task based on the index when listing all tasks in that group.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + "GROUP_NAME "
         + PREFIX_INDEX + "INDEX\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Team 5 "
-        + PREFIX_INDEX + "2";
+        + PREFIX_GROUP_NAME + "CS2103-F15-3 "
+        + PREFIX_INDEX + "1";
+
     public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s to %2$s";
 
     private final Index index;
@@ -75,7 +76,7 @@ public class MarkTaskCommand extends Command {
         Task editedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus,
             taskToMark.getGroupsWithTask());
 
-        model.setTask(taskToMark, editedTask, group);
+        model.setTask(index, editedTask, group);
         model.setMostRecentGroupTaskDisplay(group.getGroupName().getGroupName());
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
         model.setStateGroupTask();

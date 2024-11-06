@@ -23,7 +23,7 @@ public class SortTaskCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "st";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Sorts all tasks.\n"
+        + ": Sorts all tasks by deadline (earliest to latest).\n"
         + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all tasks by deadline (earliest to latest)";

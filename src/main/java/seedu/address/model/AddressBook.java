@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
@@ -321,12 +322,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the task {@code target} in {@code group} with {@code editedTask}.
      */
-    public void setTask(Task target, Task editedTask, Group group) {
-        requireNonNull(target);
+    public void setTask(Index index, Task editedTask, Group group) {
+        requireNonNull(index);
         requireNonNull(editedTask);
         requireNonNull(group);
-        // tasks.setTask(target, editedTask);
-        group.setTask(target, editedTask);
+        group.setTask(index, editedTask);
     }
 
     //// util methods

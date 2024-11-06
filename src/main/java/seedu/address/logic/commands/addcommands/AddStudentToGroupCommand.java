@@ -29,13 +29,13 @@ public class AddStudentToGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "asg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Adds a student to a group. \n"
+        + ": Adds a student to a group identified by the group name used.\n"
         + "Parameters: "
         + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
         + PREFIX_GROUP_NAME + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_STUDENT_NUMBER + "A02345678J "
-        + PREFIX_GROUP_NAME + "Group 1";
+        + PREFIX_GROUP_NAME + "CS2103T-T14-1";
 
     public static final String MESSAGE_SUCCESS = "Added student: %1$s to %2$s";
 

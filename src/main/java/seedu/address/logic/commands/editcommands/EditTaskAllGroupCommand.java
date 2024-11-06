@@ -34,17 +34,16 @@ public class EditTaskAllGroupCommand extends Command {
     public static final String COMMAND_WORD = "edit_t";
     public static final String COMMAND_WORD_ALIAS = "et";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Edits the details of the task of all group with given task.\n"
-        + "Fields like task status cannot be modified through this function."
+        + ": Edits the details of the task of all group with given task based on the index when listing all tasks. "
+        + "Fields like task status cannot be modified through this function.\n"
         + "Parameters: "
-        + PREFIX_INDEX + "INDEX(must be an integer) "
+        + PREFIX_INDEX + "INDEX "
         + "[" + PREFIX_TASK_NAME + "TASK NAME] "
         + "[" + PREFIX_TASK_DEADLINE + "DEADLINE]\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_INDEX + "1 "
-        + PREFIX_TASK_NAME + "Complete Assignment "
+        + PREFIX_TASK_NAME + "Complete a new assignment "
         + PREFIX_TASK_DEADLINE + "2024-12-12 1800";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -82,7 +81,7 @@ public class EditTaskAllGroupCommand extends Command {
         }
         for (Group group : groups) {
             if (group.hasTask(taskToEdit)) {
-                updateTaskInGroup(model, group, taskToEdit, editedTask);
+                updateTaskInGroup(model, group, index, editedTask, taskToEdit);
             }
         }
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -90,8 +89,8 @@ public class EditTaskAllGroupCommand extends Command {
             Messages.format(editedTask)), LIST_TASK_MARKER);
     }
 
-    private void updateTaskInGroup(Model model, Group group, Task taskToEdit, Task editedTask) {
-        model.setTask(taskToEdit, editedTask, group);
+    private void updateTaskInGroup(Model model, Group group, Index index, Task editedTask, Task taskToEdit) {
+        model.setTask(index, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
         addOrUpdateEditedTask(model, editedTask);
     }
