@@ -697,7 +697,9 @@ testers are expected to do more *exploratory* testing.
        Expected: For 1st student in **filtered list**, assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
 
     1. Test case: `settle 1 amount/-10`<br>
-       Expected: No changes. UGTeach displays error message that amount needs to be positive.
+       Expected: No changes. UGTeach displays error message that amount needs to be at most 2 decimal places and must be between
+       the range of 0.00 to 9999999.99.
 
     1. Test case: `settle 0 amount/10`<br>
-       Expected: No changes. UGTeach displays error message of invalid command format.
+       Expected: No changes. UGTeach displays error message that amount needs to be at most 2 decimal places and must be between
+       the range of 0.00 to 9999999.99.
