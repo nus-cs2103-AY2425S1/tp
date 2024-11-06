@@ -1,8 +1,10 @@
 package seedu.address.commons.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -11,6 +13,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Contains utility methods for handling dates.
  */
 public class DateUtil {
+
+    /**
+     * The date time formatter for displaying dates and times.
+     */
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a")
+            .withLocale(Locale.US);
 
     /**
      * Returns true if the given dates are the same day, month and year.
@@ -35,4 +43,5 @@ public class DateUtil {
         }
         return dateList;
     }
+
 }

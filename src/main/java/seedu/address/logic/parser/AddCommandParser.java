@@ -54,50 +54,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         switch (entityType) {
         case PERSON_ENTITY_STRING:
-            if (!arePrefixesPresent(
-                        argMultimap,
-                        PREFIX_NAME,
-                        PREFIX_ADDRESS,
-                        PREFIX_PHONE,
-                        PREFIX_STATUS,
-                        PREFIX_EMAIL)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
-            }
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_STATUS);
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            PersonDescriptor person = new PersonDescriptor(name, phone, email, address, status, tagList);
-
+            PersonDescriptor person = parseAddPerson(argMultimap);
             return new AddPersonCommand(person);
         case APPOINTMENT_ENTITY_STRING:
-            if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME,
-                    PREFIX_APPOINTMENT_TYPE)) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
-            }
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME,
-                    PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
-            int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
-            LocalDateTime appointmentDateTime = ParserUtil.parseAppointmentDateTime(
-                    argMultimap.getValue(PREFIX_DATETIME).get());
-            AppointmentType appointmentType = ParserUtil.parseAppointmentType(
-                    argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get());
-            Sickness sickness = argMultimap.getValue(PREFIX_SICKNESS).isPresent()
-                    ? ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get())
-                    : null;
-            Medicine medicine = argMultimap.getValue(PREFIX_MEDICINE).isPresent()
-                    ? ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get())
-                    : null;
-            AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
-                    appointmentType, appointmentDateTime, sickness, medicine);
+            AppointmentDescriptor appointmentDescriptor = parseAddAppointment(argMultimap);
+            int personId = extractPersonId(argMultimap);
 
             return new AddAppointmentCommand(appointmentDescriptor, personId);
         default:
@@ -105,6 +66,101 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
+    /**
+     * Parses the given {@code ArgumentMultimap} and creates a PersonDescriptor object.
+     *
+     * @param argMultimap Contains the field-value pairs for creating a person, where fields are indicated by prefixes
+     *                    (PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_STATUS, PREFIX_EMAIL,
+     *                    and optionally PREFIX_TAG)
+     * @return A new PersonDescriptor object with the parsed name, phone, email, address, status, and tags
+     * @throws ParseException If:
+     *         - Any of the required fields (name, address, phone, status, email) is missing, or
+     *         - Any required field has duplicate prefixes, or
+     *         - Any field value is invalid according to the respective parsing rules in ParserUtil
+     */
+    public PersonDescriptor parseAddPerson(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(
+                argMultimap,
+                PREFIX_NAME,
+                PREFIX_ADDRESS,
+                PREFIX_PHONE,
+                PREFIX_STATUS,
+                PREFIX_EMAIL)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_STATUS);
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        PersonDescriptor person = new PersonDescriptor(name, phone, email, address, status, tagList);
+        return person;
+    }
+
+    /**
+     * Parses the given {@code ArgumentMultimap} and creates an AppointmentDescriptor object.
+     *
+     * @param argMultimap Contains the field-value pairs for creating an appointment, where fields are
+     *                    indicated by prefixes:
+     *                    Required: PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE
+     *                    Optional: PREFIX_SICKNESS, PREFIX_MEDICINE
+     * @return A new AppointmentDescriptor object with the parsed appointment type, datetime, and optional sickness
+     *          and medicine details
+     * @throws ParseException If:
+     *         - Any of the required fields (person ID, datetime, appointment type) is missing, or
+     *         - Any field has duplicate prefixes, or
+     *         - Any field value is invalid according to the respective parsing rules in ParserUtil
+     *                 - Person ID must be a valid integer
+     *                 - Datetime must be in the correct format
+     *                 - Appointment type must be a valid enum value
+     */
+    public AppointmentDescriptor parseAddAppointment(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME,
+                PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
+        int personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
+        LocalDateTime appointmentDateTime = ParserUtil.parseAppointmentDateTime(
+                argMultimap.getValue(PREFIX_DATETIME).get());
+        AppointmentType appointmentType = ParserUtil.parseAppointmentType(
+                argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get());
+        Sickness sickness = argMultimap.getValue(PREFIX_SICKNESS).isPresent()
+                ? ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get())
+                : null;
+        Medicine medicine = argMultimap.getValue(PREFIX_MEDICINE).isPresent()
+                ? ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get())
+                : null;
+        AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
+                appointmentType, appointmentDateTime, sickness, medicine);
+
+        return appointmentDescriptor;
+    };
+
+    /**
+     * Extracts and parses the person ID from the given ArgumentMultimap.
+     *
+     * @param argMultimap Contains the field-value pairs, must include PREFIX_PERSON_ID
+     * @return The parsed person ID as an integer
+     * @throws ParseException If:
+     *         - The person ID prefix is missing, or
+     *         - The person ID value cannot be parsed into a valid integer
+     */
+    public int extractPersonId(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+        }
+
+        return ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get());
+    }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.

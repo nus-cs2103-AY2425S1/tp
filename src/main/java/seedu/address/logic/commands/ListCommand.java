@@ -18,6 +18,12 @@ public abstract class ListCommand extends Command {
             + "Example: list " + PERSON_ENTITY_STRING + "\n"
             + "Example: list " + APPOINTMENT_ENTITY_STRING;
 
+    /**
+     * Executes the list command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the result of executing the command.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -25,12 +31,12 @@ public abstract class ListCommand extends Command {
         return new CommandResult(getSuccessMessage());
     }
 
-    /*
+    /**
      * Lists everything in the model (person or appointment).
      */
     protected abstract void listEntity(Model model);
 
-    /*
+    /**
      * Returns the message to be displayed after listing all persons or appointments.
      */
     protected abstract String getSuccessMessage();

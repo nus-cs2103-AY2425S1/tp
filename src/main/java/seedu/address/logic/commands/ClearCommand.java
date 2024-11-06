@@ -18,6 +18,12 @@ public abstract class ClearCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + "\n"
             + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING;
 
+    /**
+     * Executes the command to clear the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the success of the command.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -27,11 +33,15 @@ public abstract class ClearCommand extends Command {
 
     /**
      * Clears a specified model.
+     *
+     * @param model {@code Model} which the command should operate on.
      */
     protected abstract void clearEntity(Model model);
 
     /**
      * Returns success message to display upon adding entity.
+     *
+     * @return success message
      */
     protected abstract String getSuccessMessage();
 }

@@ -9,13 +9,50 @@
 ![](images/doctrack.png)
 # User Guide
 
-> DocTrack is a desktop application for **general practitioners (GPs)** to quickly access patient contact 
+<box type="info" light theme="primary">
+<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient contact 
 details, appointments, and treatment records.
+</box>
 
-_If you type fast, this application can serve as an excellent substitute for your large medical files._
+With DocTrack, you can take the first step towards digitalisation of your practice!
+DocTrack aims to simplify your patient and appointment tracking process, by allowing you to
+- easily add and update patient and appointment records
+- delete records for regulation purposes
+- search for records based on important criteria such as dates and names
+with an intuitive and user-friendly interface!
+
+To get started, you can read the introduction below, which shows all the different sections
+in this user guide.
+
+---
+
+## Introduction
+
+- [Quick start](#quick-start):
+  - Quickly get started with DocTrack.
+
+- [Interacting with DocTrack](#interacting-with-doctrack):
+  - Learn how you can interact with DocTrack.
+
+- [Command Overview](#command-overview):
+  - Navigate here for information on how the commands work.
+  - [Summary of Commands](#summary-of-commands):
+    - for a general summary of all commands.
+  - [Person Commands](#person-commands):
+    - for more information on person commands.
+  - [Appointment Commands](#appointment-commands):
+    - for more information on appointment commands.
+  - [General Commands](#general-commands):
+    - for more information on general commands.
+
+- [FAQ](#faq):
+  - Find answers to common questions you might have.
+
+- [Known issues](#known-issues):
+  - Discover common issues that may arise while you are using DocTrack.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+<page-nav-print></page-nav-print>
 
 <br>
 
@@ -32,7 +69,8 @@ _If you type fast, this application can serve as an excellent substitute for you
 
 <br>
 
-2. Download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It is a `.jar` file. For more information, see this: 
+2. You can download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It 
+   is a `.jar` file. For more information, you can refer to: 
    - [What is a JAR file?](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html)
    - [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
 
@@ -63,10 +101,10 @@ _If you type fast, this application can serve as an excellent substitute for you
 
 <br>
 
-6. Type the command in the command box, which is indicated by `Enter command here...`. Press `Enter` to execute it. 
-    * E.g. Typing **`help`** and pressing `Enter` will open the help window.<br>
+6. Type the command in the command box, which is indicated by `Enter command here...`. Press `Enter` to execute it.<br>
+   _**Example:** Typing **`help`** and pressing `Enter` will open the help window._<br>
    
-   Some other examples of commands you can try:
+   Some other examples of commands you can enter:
    * `list person` : Lists all contacts.
    * `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering` : Adds a contact named `John Doe` to the Address Book.
    * `delete person 3` : Deletes the 3rd contact shown in the current list.
@@ -75,7 +113,7 @@ _If you type fast, this application can serve as an excellent substitute for you
 
 <br>
 
-7. Refer to the [Command Overview](#command-overview) below for details of each command.
+7. You can refer to the [Command Overview](#command-overview) below for details of each command. 
 
 <br>
 
@@ -85,9 +123,16 @@ _If you type fast, this application can serve as an excellent substitute for you
 
 ## Interacting with DocTrack
 
-All interactions with the DocTrack platform are done through a series of **commands** entered by the user. These commands allow you to perform various **tasks**, such as adding, editing, listing, and managing persons/appointments. The commands are designed to be flexible and user-friendly, allowing **data fields** in any order, handling multiple entries for specific fields.
+All interactions with the DocTrack platform are done through a series of **commands** entered by you. 
+- These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding,
+and clearing persons/appointments. 
+- The commands are designed to be flexible and user-friendly. 
+  - You can add fields in any order.
+  - You can add multiple entries for specific fields.
 
-Here are some **key points** to keep in mind when using commands:
+<box type="tip" light>
+
+Here are some **key points** to keep in mind when you are using the commands:
 
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
@@ -105,17 +150,25 @@ Here are some **key points** to keep in mind when using commands:
 - You can add fields in **any order**. <br>
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
-- Format of `DATE_TIME` is `YYYY:MM:DD hh:mm:ss`. <br>
-  _**Example:** `2024-12-01 09:30:00`._
+<box type="tip" theme="success" light style="border: 1px solid">
 
-- Format of `DATE` is `YYYY-MM-DD`. <br>
-  _**Example:** `2024-12-01`._
+**Tip:** 
 
-- If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, 
-  `list appt`, `exit` and `clear`), they will be ignored. <br>
- _**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
+If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, 
+`list appt`, `exit` and `clear`), they will be ignored. <br>
+_**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
 
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
+</box>
+
+<box type="warning" light seamless style="border: 1px solid red">
+
+**Caution:**
+
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
+
+</box>
+
+</box>
 
 <br>
 
@@ -125,7 +178,7 @@ Here are some **key points** to keep in mind when using commands:
 
 ## Command Overview
 
-The following sections describe the various commands available in the DocTrack platform:
+The following sections describe the various commands you can use in the DocTrack application:
 
 - [Person Commands](#person-commands)
 - [Appointment Commands](#appointment-commands)
@@ -133,58 +186,61 @@ The following sections describe the various commands available in the DocTrack p
 
 <br>
 
-### Summary of commands
-
-| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
-|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
-| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                           | `list person`                                                                                                           |
-| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                 | `edit person 2 n/James Lee e/jameslee@example.com`                                                                      |
-| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person n/James Jake`                                                                                              |
-| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                                       |
-| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                            | `clear person`                                                                                                          |
-| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`                                            |
-| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                               | `list appt`                                                                                                             |
-| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                              |
-| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                  | `find appt d/2024-12-05`                                                                                                |
-| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                       | `delete appt 2`                                                                                                         |
-| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                    | `clear appt`                                                                                                            |
-| **[Help](#viewing-help-help)**                                           | `help`                                                                                                                    | `help`                                                                                                                  |
-| **[Exit](#exiting-the-program-exit)**                                    | `exit`                                                                                                                    | `exit`                                                                                                                  |
-
-<br>
-
----
-
-<br>
-
 ### Person Commands
 
-A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. DocTrack allows you interact with patient information through different commands, which can be seen below.
+A **person** is a patient with several fields. The fields and their corresponding prefixes are as follows:
+
+| Field            | Prefix | Optional | Multiple |
+|------------------|--------|----------|----------|
+| **Name**         | `n/`   | No       | No       |
+| **Phone number** | `p/`   | No       | No       |
+| **Email**        | `e/`   | No       | No       |
+| **Address**      | `a/`   | No       | No       |
+| **Status**       | `st/`  | No       | No       |
+| **Tag(s)**       | `t/`   | Yes      | Yes      |
+
+You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
+
+<br>
+
+ You can also manage the patient information through different commands, which can be seen in the table below:
+
+| Action                                                      | Format                                                                                    | Examples                                                                                                       |
+|-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **[Add person](#adding-a-person-add-person)**               | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
+| **[List all persons](#listing-all-persons-list-person)**    | `list person`                                             <br/>                           | `list person`                                                                                                  |
+| **[Edit person](#editing-a-person-edit-person)**            | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​` | `edit person 2 n/James Lee e/jameslee@example.com`                                                             |
+| **[Find person](#finding-persons-by-name-find-person)**     | `find person KEYWORD [MORE_KEYWORDS]`                                                     | `find person n/James Jake`                                                                                     |
+| **[Delete person](#deleting-a-person-delete-person)**       | `delete person INDEX`                                                                     | `delete person 3`                                                                                              |
+| **[Clear all persons](#clearing-all-persons-clear-person)** | `clear person`                                                                            | `clear person`                                                                                                 |
 
 <br>
 
 ##### Adding a person: `add person`
 
-Adds a person to the address book.
+You can add a person to the patient book.
 
 **Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`
 
-<box type="tip" theme="success">
+<box type="tip" light>
 
-**Tip:** A patient can have any number of tags (including 0). For example, `t/obese t/nearsighted` has 2 tags and it is valid. 
+**Tip:** A person can have any number of tags (including 0). <br>
+_**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
+
 </box>
 
 **Examples**:
 
-- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering`
-- `add person n/Betsy Crowe t/farsighted e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/ectomorphic`
-  ![result adding patients](images/addCommandResultUG.png)
+- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering` 
+  adds a person named `John Doe` with phone number `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`, and status `recovering`.
+- `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal` adds a person named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate 
+  Prison`, phone number `1234567`, status `recovered`, and the tags `friend` and `criminal`.
+
 <br>
 
 ##### Listing all persons : `list person`
 
-Shows a list of all patient in DocTrack.
+You can view a list of all persons in the patient book.
 
 **Format**: `list person` shows the list of all patients on the screen.
 
@@ -199,14 +255,16 @@ Edits an existing patient in DocTrack.
 - Edits the patient at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
 **Examples**:
 
-- `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `list` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
+  address of the first person in the list to be `91234567` and `johndoe@example.com` respectively.
+- `list` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
+  be `Betsy Crower` and clears all existing tags.
 
 <box type="tip" theme="success">
 
@@ -217,12 +275,12 @@ Edits an existing patient in DocTrack.
 
 ##### Finding persons by name: `find person`
 
-Finds persons whose **names** contain any of the given keywords.
+You can find person(s) whose **names** contain any of the given keywords.
 
 **Format**: `find person KEYWORD [MORE_KEYWORDS]`
 
 - Use the prefix `n/` to search for names.
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -239,19 +297,19 @@ Finds persons whose **names** contain any of the given keywords.
 
 ##### Deleting a person : `delete person`
 
-Deletes the specified patient from DocTrack.
+You can delete a specified person from the patient book.
 
 **Format**: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light>
 
 **Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
 
 </box>
 
-<box type="tip" theme="success" seamless>
+<box type="tip" light>
 
 **Tip:** Make you have the correct index of the patient before deleting. Use `list person` to check
 
@@ -259,18 +317,18 @@ Deletes the specified patient from DocTrack.
 
 **Examples**:
 
-- `list` followed by `delete person 2` deletes the 2nd patient in DocTrack.
-- `find Betsy` followed by `delete person 1` deletes the 1st patient in the results of the `find` command.
+- `list` followed by `delete person 2` deletes the second person in the list.
+- `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
 
 <br>
 
 ##### Clearing all persons : `clear person`
 
-Deletes all entries from DocTrack.
+You can delete all person entries from the patient book.
 
 **Format**: `clear person`
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light>
 
 **Warning:** This action is irreversible. Ensure you have a backup of the patient data before clearing. 
 
@@ -285,24 +343,52 @@ Deletes all entries from DocTrack.
 
 ### Appointment Commands
 
-- An **appointment** is defined by several fields: an appointment type, appointment date & time, ID of the person who is associated with the appointment, sickness, and medicine.  
-- You can interact with appointments in DocTrack using the instructions below:
+An **appointment** is defined by several fields. The fields and their corresponding prefixes are as follows:
+
+| Field               | Prefix | Optional | Multiple |
+|---------------------|--------|----------|----------|
+| **Person ID**       | `i/`   | No       | No       |
+| **Appointment Type**| `ty/`  | No       | No       |
+| **Date and Time**   | `d/`   | No       | No       |
+| **Sickness**        | `s/`   | Yes      | No       |
+| **Medicine**        | `m/`   | Yes      | No       |
+
+You can manage the appointments through different commands, which can be seen in the table below:
+
+<br>
+
+| Action                                                                   | Format                                                                                                                   | Examples                                                              |
+|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin` |
+| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                              | `list appt`                                                           |
+| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                            |
+| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                      | `find appt d/2024-12-05`                                              |
+| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                      | `delete appt 2`                                                       |
+| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                   | `clear appt`                                                          |
+---
 
 <br>
 
 ##### Adding an appointment: `add appt`
 
-Adds an appointment to the DocTrack. 
+You can an appointment to DocTrack. 
 
-**Format**: `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
-- The format of `DATE_TIME` is `YYYY/MM/DD HH:mm`. For example, `29/03/2025 10:30`.
+**Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
+- The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
-- `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`
-- `add appt i/2 d/30/01/2024-12-01 16:40:00 ty/Follow-up s/Asthma m/Inhaler`
+- `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
+- `add appt i/2 ty/Follow-up d/2024-02-01 16:40 s/Asthma m/Inhaler` adds an appointment to the person with personId `2`. The appointment has appointment type `Follow-up`, date and time `2024-02-01 16:40`, sickness `Asthma`, and medicine `Inhaler`.
 
-<box type="tip" theme="success">
+<box type="info" light seamless>
+
+**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, you will see it displayed as `Month Date, Year, Time`. <br>
+_**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 12:30 PM`._
+
+</box>
+
+<box type="tip" light>
 
 **Tip:** You can decide to leave out sickness and medicine inputs when adding them, then edit them later.
 </box>
@@ -313,7 +399,7 @@ Adds an appointment to the DocTrack.
 
 ##### Listing all appointments : `list appt`
 
-Shows a list of all appointments in DocTrack.
+You can view a list of all appointments in the appointment book.
 
 **Format**: `list appt`
 
@@ -321,36 +407,38 @@ Shows a list of all appointments in DocTrack.
 
 ##### Editing an appointment : `edit appt`
 
-Edits an existing appointment in DocTrack.
+You can an existing appointment in appointment book.
 
 **Format**: `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`
 
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+- The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
-- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date and time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
+- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` edits the date and time and the medicine to be `2024-12-05 13:00` and `Budesonide` respectively.
 
 <br>
 
 ##### Finding appointments by name and date: `find appt`
 
-Finds appointments whose person names and / or dates contain any of the given keywords.
+You can find appointments whose person names and / or dates contain any of the given keywords.
 
 **Format**: `find appt KEYWORD [MORE_KEYWORDS]`
 - Use the prefix `n/` to search for patient names.
 - Use the prefix `d/` to search for dates.
 - At least one keyword must be provided.
-- The format of `DATE` is `YYYY/MM/DD`. For example, `2024-10-16`.
+- The format of `DATE` is `YYYY-MM-DD`. For example, `2024-10-16`.
 
 **Examples**:
 - `find appt n/John` returns appointments with patients named `John`.
 - `find appt d/2024-12-05` returns appointments on `2024-12-05`.
 - `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
-  
-<box type="tip" theme="success">
+![result for 'find appt John and 2024-12-05'](images/findApptExample.png)
+
+<box type="tip" light>
 
 **Tip:** Use the `find appt` command to filter out appointments for a certain day or patient
 
@@ -360,13 +448,13 @@ Finds appointments whose person names and / or dates contain any of the given ke
 
 ##### Deleting an appointment : `delete appt`
 
-Deletes the specified appointment from DocTrack.
+You can delete a specified appointment from appointment book.
 
 **Format**: `delete appt INDEX`
 
 - Deletes the appointment at the specified `INDEX`.
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light>
 
 **Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
 
@@ -374,9 +462,11 @@ Deletes the specified appointment from DocTrack.
 
 **Examples**:
 
-- `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
+- `list appt` followed by `delete appt 2` deletes the second appointment in the list of appointments.
+- `find appt d/2024-12-05` followed by `delete appt 1` deletes the first appointment in the results of the 
+  `find` command.
 
-<box type="tip" theme="success">
+<box type="tip" light>
 
 **Tip:** Use the `list appt` to check the index of the appointment before deleting one.
 
@@ -385,13 +475,14 @@ Deletes the specified appointment from DocTrack.
 
 ##### Clearing all appointments : `clear appt`
 
-Deletes all entries from the appointment book.
+You can delete all appointment entries from the appointment book.
 
 **Format**: `clear appt`
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light>
 
-**Warning:** This action is irreversible. Ensure you have a backup of the appointment data before clearing.
+**Warning:**
+This action is irreversible. Ensure you have a backup of the appointment data before clearing.
 
 </box>
 
@@ -405,21 +496,26 @@ Deletes all entries from the appointment book.
 
 **General commands** can help you with miscellaneous tasks related to patient and appointment management.
 
+| Action                                | Format | Examples |
+|---------------------------------------|--------|----------|
+| **[Help](#viewing-help-help)**        | `help` | `help`   |
+| **[Exit](#exiting-the-program-exit)** | `exit` | `exit`   |
+
 <br>
 
 ##### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+You will be able to view a help window that directs you to this user guide.
 
 **Format**: `help`
 
-<br>
+<img src="images/helpMessage.png" alt="Help Message" width="700">
+
+<br><sbr>
 
 ##### Exiting the program : `exit`
 
-Exits the program.
+You will be able to exit the DocTrack application. 
 
 **Format**: `exit`
 
@@ -427,7 +523,8 @@ Exits the program.
 
 ##### Saving the data
 
-AddressBook and AppointmentBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data of the patients and appointments are saved in the hard disk automatically after you run any command that changes the data. You do not need to save them manually.
+- For more information on how the data is stored, you can refer to the [FAQ](#faq) section.
 
 <br>
 
@@ -435,11 +532,14 @@ AddressBook and AppointmentBook data are saved in the hard disk automatically af
 
 For advanced users, feel free to update patient and appointment data directly by editing the [data files](#faq) in the `data` folder.
 
-<box type="warning" seamless>
+<box type="warning" light>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+- If your changes to the data file makes its format invalid, DocTrack will discard all data and start with an empty data file at the next run. Hence, it is recommended that you have a backup of the file before 
+  editing it.<br>
+- Furthermore, certain edits can cause DocTrack to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, you should edit the data file only if you are confident that you 
+  can update it correctly.
 </box>
 
 <br>
@@ -451,7 +551,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How is my data stored?<br>
-**A**: The data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
+**A**: Your data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
 Examples:
 
 <img src="images/json/addressbook.png" alt="Address Book JSON" width="420">
@@ -463,12 +563,17 @@ Examples:
 
 **Q**: How do I transfer my data (in the `addressbook.json` and `appointmentbook.json` files) to another 
 computer?<br>
-**A**: [Install the DocTrack app](#quick-start) in the other computer. When you run it, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` folder. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files from your previous computer.
+**A**: 
+1. Save the `addressbook.json` and `appointmentbook.json` files from the `data` folder in your current computer.
+2. [Install the DocTrack app](#quick-start) in the other computer. 
+3. When you run DocTrack, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` 
+   folder. 
+4. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files you saved from your previous computer.
 
 <br>
 
 **Q**: Can I access DocTrack without internet connection?<br>
-**A**: Yes, DocTrack is a desktop application that can be run without an internet connection.
+**A**: Yes, You can run DocTrack without an internet connection.
 
 <br>
 
@@ -485,6 +590,9 @@ folder, you can copy these files to another location as a backup.
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+<br>
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 <br>

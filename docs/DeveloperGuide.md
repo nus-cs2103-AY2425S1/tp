@@ -46,7 +46,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -71,16 +71,17 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete  person 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"></puml>
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the 
+  corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300"></puml>
 
 The sections below give more details of each component.
 
@@ -90,7 +91,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `AppointmentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -111,11 +112,11 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"></puml>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command"></puml>
 
 <box type="info" seamless>
 
@@ -125,14 +126,14 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"></puml>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -164,7 +165,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list (the `UniqueTagList`) in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, the `Appointment` objects are shown as such as well.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450"></puml>
 
 </box>
 
@@ -174,7 +175,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
 
 The `Storage` component,
 * can save patient data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
@@ -220,13 +221,16 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 <br>
 
-## **Implementation of main features**
+## **Implementation of entity command features**
 
-## **Implementation of Entity Commands**
-Entity commands include `add`, `delete`, `find`, `clear` commands.
-So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
+Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. Hence, `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
-**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
+The sequence diagram shows how an entity command is executed:
+
+<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
+- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand`. There are two entities, **person** and **appointment**, on which operations can be performed.
+
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity, `person` or `appt`. This is followed by appropriate arguments and prefixes.
 
 
 **Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
@@ -237,56 +241,101 @@ So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
 **Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 
+
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
-<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
-- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand` because we have two entities called person and appointment on which operations can be performed.
+<br>
 
+### General Design Considerations
 
-#### Find Appointment Command
-**Aspect: How to show find appointment.**
+**Aspect: Whether to implement entity commands as separate commands or through an abstract base command**
+- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity commands (e.g., AddPersonCommand, AddAppointmentCommand, DeletePersonCommand, DeleteAppointmentCommand) inherit from.
+  - Pros: Allows for reuse of code logic between entity commands
+  - Cons: Requires additonal parsing logic since entity in command must be distinguished (person or appointment), which can add complexity
+- **Alternative 2:** Implement each entity command as entirely separate classes.
+  - Pros: Creates a separate command, so the implementations of each command are separated and less coupled
+  - Cons: Results in significant code duplication
 
-- **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+<br>
+
+**Aspect: What constitutes duplicate person that should not be added or edited into the address book**
+- **Alternative 1 (Current choice):** Duplicate person is one that has same name (case-insensitive) and same phone number as an existing person
+  - Pros: Name and phone numbers are identifiers that are commonly recognized by users
+  - Cons: Extra logic required to determine equality of different people
+- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g., by name only)
+  - Pros: Less logic required to determine equality of different people
+  - Cons: Different people could have the same name, but cannot be added into the address book
+
+<br>
+
+**Aspect: What constitutes duplicate appointment that should not be added or edited into the appointment book**
+- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time of an existing appointment
+  - Pros: Provides a rule to avoid scheduling conflicts of same person
+  - Cons: Extra logic required to determine equality of different appointments
+- **Alternative 2:** Define duplicates with only the date and time
+  - Pros: Less logic required to determine equality of different appointments
+  - Cons: Different appointments with different persons could have the same date time, but cannot be added into the appointment book
+
+<br>
+
+### Command-Specific Design Considerations
+
+#### Delete/Clear Person feature
+
+**Aspect: Deleting person and clearing person list should:**
+
+- **Alternative 1 (Current choice):** remove appointments with the `personId` of that person.
+  - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
+- **Alternative 2:** not remove any appointments with the `personId` of that person.
+  - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
+  
+<br>
+
+#### Edit Person/Appointment feature
+
+**Aspect: During Edit Appointment, check if new person ID associated with edited appointment corresponds to an existing person in the address book**
+- This is to ensure no unwanted errors occur while editing the appointment and helps to maintain data integrity.
+
+<br>
+
+#### Find Person/Appointment feature
+
+**Aspect: How to show find person/appointment based on different criteria**
+
+- **Alternative 1 (Current choice)**: Create one find command that supports filtering by multiple criteria (name, date) using prefixes.
   - Pros: Fast and easy to find by date and name
   - Cons: Confusing syntax from user's perspective
 
 - **Alternative 2**: Create different find commands, find by date, find by name etc.
   - Pros: Much easy in terms of user experience
-  - Cons: Harder to implement as more code needs to be written.
+  - Cons: More repeated code for each command
 
 <br>
 
-### List appointment feature
+**Aspect: How to combine multiple prefixes when finding results**
 
-#### Implementation
+- **Alternative 1 (Current choice)**: Prefixes should be combined using an AND condition.
+  - Pros: Ensures more specific search results, as all conditions must be met
+  - Cons: May be too restrictive
 
-**Aspect**: How to show list 
-
-- **Alternative 1 (Current choice)**: Print them out individually on the listpanel
-  - Pros: Easy to scroll through
-  - Cons: Might look cluttered to some users
-
-
-#### Design considerations
+- **Alternative 2**: Prefixes should be combined using an OR condition
+  - Pros: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
+  - Cons: May return too many results
 
 <br>
 
-### Clear appointment feature
+<box type="tip" theme="success" seamless>
 
+**Tip:**
+To add a new predicate, navigate the corresponding entity folder in the model package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
 
-#### Design considerations
-
-**Aspect**: How to show list
-
-- **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
-
-<br>
+</box>
 
 ---
 
 <br>
 
-## Implementation of general features
+## Implementation of general command features
 General commands include the `exit` and `help` commands.
 
 The sequence diagram shows how a general command (`ExitCommand` or `HelpCommand`) is executed:
@@ -324,14 +373,13 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 * **Alternative 1 (current choice):** Display help information in a new window.
   * Pros: Keeps the main application window uncluttered.
   * Cons: Requires managing an additional window.
-
 * **Alternative 2:** Display help information in a modal dialog.
   * Pros: Simpler to implement.
   * Cons: Can clutter the main application window and interrupt the user's workflow.
 
 <br>
 
---- 
+--------------------------------------------------------------------------------------------------------------------
 
 <br>
 
@@ -349,10 +397,23 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
-## **Appendix: Data storage and files**
-- The data of the patients and appointments is stored in the `data` folder.
-  - Patient data is stored in `data/addressbook.json`.
-  - Appointment data is stored in `data/appointmentbook.json`.
+## **Appendix: Miscellaneous Design Considerations**
+
+### Data storage and files
+
+**Aspect: Save patient and appointment data in:**
+<br>
+* **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
+    * Pros: 
+        * More organised file management
+        * Quicker read and write times for each file
+    * Cons: 
+        * Higher chance of inconsistencies between patient and appointment data
+* **Alternative 2:** one single file named `data/addressbook.json`
+    * Pros:
+        * Simplicity and convenience of one file for all information
+    * Cons:
+        * Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
 
 <box type="warning" seamless>
 
@@ -361,17 +422,116 @@ For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
 
-#### Design Considerations
-**Aspect: When the data is updated in the `.json` file:**
+<br>
 
+**Aspect: When the data is updated in the `.json` file:**
+<br>
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
     * Pros: Simplifies the process for the user, without needing to save manually.
     * Cons: May be slow if there are many changes to save.
-
-
 * **Alternative 2:** Prompt the user to save changes before exiting.
     * Pros: Gives the user more control over the saving process.
     * Cons: May be annoying for users who do not want an additional step to save changes.
+
+<br>
+
+### Parsing
+
+**Aspect: How to parse the commands:**
+<br>
+Context: The commands (other than the general) have the command format: `COMMAND ENTITY_TYPE ENTITY_ARGS`
+<br>
+* **Alternative 1 (current choice):** Parse `ENTITY_TYPE` and `ENTITY_ARGS` separately.
+    * Pros:
+        * Easier to parse
+        * Easier to debug, as the parsing is separated into different portions
+    * Cons:
+        * More verbose, and less centralised.
+* **Alternative 2**: Parse them together.
+    * Pros:
+        * Everything is parsed together, centralising the parsing logic.
+    * Cons:
+        * Harder to parse and debug
+
+<br>
+
+**Aspect: Command format (with or without prefixes):**
+<br>
+* **Alternative 1 (current choice):** Use prefixes
+    * Pros:
+        * Easier to identify markers for each parameter
+        * Prefixes allow for free positioning of arguments
+    * Cons:
+        * Less intuitive for the user at start
+        * Need to create prefixes
+* **Alternative 2:** Use no prefixes
+    * Parsing the arguments based on position.
+    * Pros:
+        * More intuitive at start
+        * No need to create prefixes
+    * Cons:
+        * Harder to identify markers - may result in issues with arguments that have spaces in between
+        * No free positioning
+        * Might be harder to implement variable amount of arguments
+
+<br>
+
+**Aspect: `ArgumentMultimap` use across different entities:**
+<br>
+Context: The `ArgumentMultimap` is used across different entities.
+<br>
+* **Alternative 1 (current choice):** Use the same `ArgumentMultimap` for all entities.
+    * Pros:
+        * Prefixes are shared universally, making it more consistent across entities.
+        * Less code duplication
+    * Cons:
+        * Might be more cluttered, as all the prefixes are together
+        * Inability to use same prefixes for different arguments across entities
+* **Alternative 2**: Use different `ArgumentMultimap` for each entity.
+    * Pros:
+        * Less cluttered, only prefixes for that entity will be addressed
+        * Can use prefixes used in different entities for different arguments
+    * Cons:
+        * More code duplication, as there are shared prefixes
+        * Might be harder to track shared prefixes, causing confusion to users
+
+<br>
+
+### User Interface
+
+**Aspect: How to show appointment and person lists**
+<br>
+Context: There are two entity types (appointment and person) being managed in DocTrack
+<br>
+* **Alternative 1 (current choice):** Show lists as two separate panels side by side
+    * Pros:
+        * Easier to see all information at once
+        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
+    * Cons:
+        * More verbose and could result in information overload
+* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
+    * Pros:
+        * Information is simpler to digest
+    * Cons:
+        * More overhead of handling switching between lists
+        * Difficult to cross reference when typing certain commands
+
+<br>
+
+**Aspect: Color Scheme**
+<br>
+* **Alternative 1 (current choice):** Create new red, white and gray color scheme
+    * Pros:
+        * Creates brand identity
+        * Makes the GUI more appealling to the target audience
+    * Cons:
+        * Constant oversight needed to maintain color scheme in future feature enhancements
+* **Alternative 2:** Use the original AB3 gray color schee
+    * Pros:
+        * No extra effort needed
+    * Cons:
+        * Colors are not appealing
+        * Colors are not professional and do not suit target audience
 
 <br>
 
@@ -381,20 +541,20 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 ## **Appendix: Requirements**
 
-<br>
-
 ### Product scope
 
 **Target user profile**:
 * General Practitioners (GPs) at small clinics
 
-**Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
+**Value proposition**: 
+- Time spent looking through paper medical documents should be spent in other life-saving activities. 
+- Our product, DocTrack, resolves this issue by creating fast access to patient contact details as well as their relevant appointment details, allowing GPs to contact and monitor their patients easily.
 
 <br>
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High `* * *` (must have), Medium `* *` (nice to have) , Low `*` (unlikely to have)
 
 | Priority | As a …​              | I want to …​                                       | So that I can…​                                                      |
 |----------|----------------------|----------------------------------------------------|----------------------------------------------------------------------|
@@ -441,246 +601,291 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `DocTrack` application and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, unless specified otherwise, 
+- The **System** is the `DocTrack` application
+- The **Actor** is the `user`
 
-**Use case: Update a patient**
+<br>
+
+#### Use case (UC01): Add a patient
 
 **MSS**
 
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to update a specific patient in the list with new details
-4.  DocTrack updates the patient.
+1. User requests to add a patient.
+2. DocTrack adds the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters invalid parameters.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
+* 1b. User enters a patient that already exists.
 
-    * 3a1. DocTrack shows an error message.
+    * 1b1. DocTrack shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The new patient details are invalid.
+<br>
 
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Delete a patient**
+#### Use case (UC02): Edit a patient
 
 **MSS**
-
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to delete a specific patient in the list.
-4.  DocTrack deletes the patient.
+1. DocTrack <ins>shows a list of patients [(UC04)](#use-case-uc04-view-all-patients)</ins>.
+2. User requests to edit a specific patient in the list with new details. 
+3. DocTrack updates the patient with the new details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
+    * 2a1. DocTrack shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Find appointments for a specific patient**
+* 2b. The new patient details are invalid.
 
-**MSS**
-
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to list appoinments for a specific patient in the list.
-4.  DocTrack shows a list of appointments for that patient.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Add an appointment**
-
-**MSS**
-
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to add an appoinment for a specific patient in the list.
-4.  DocTrack adds appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Duplicate an appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to duplicate a specific appointment in the list on a new date.
-4.  DocTrack duplicates appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Update an appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to update a specific appointment in the list with new details
-4.  DocTrack updates the appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The new details are invalid (i.e. wrongly formatted).
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Delete an appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to delete a specific appointment in the list.
-4.  DocTrack deletes the appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Find patient for a specific appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to find patient for a specific appointment in the list.
-4.  DocTrack shows patient details.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
+    * 2b1. DocTrack shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
+#### Use case (UC03): Delete a patient
+
+**MSS**
+
+1. DocTrack <ins>shows a list of patients [(UC04)](#use-case-uc04-view-all-patients)</ins>.
+2. User requests to delete a specific patient in the list.
+3. DocTrack deletes the patient.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+#### Use case (UC04): View all patients
+
+**MSS**
+
+1. User requests to list all patients.
+2. DocTrack shows a list of patients.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC05): Find a patient by name
+
+**MSS**
+
+1. User requests to find a patient by name.
+2. DocTrack shows the patient details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The patient is not found.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC06): Clear all patients 
+
+**MSS**
+
+1. User requests to clear all patients.
+2. DocTrack clears all patients.
+
+    Use case ends.
+
+<br>
+
+#### Use case (UC07): Add an appointment
+
+**MSS**
+
+1. User requests to add an appointment.
+2. DocTrack adds the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. User enters an appointment with the same date and time.
+
+    * 1b1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+    
+<br>
+
+#### Use case (UC08): Edit an appointment
+
+**MSS**
+
+1. DocTrack <ins>shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments)</ins>.
+2. User requests to edit a specific appointment in the list with new details.
+3. DocTrack updates the appointment with the new details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+* 2b. The new appointment details are invalid.
+
+    * 2b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+#### Use case (UC09): Delete an appointment
+
+**MSS**
+
+1. DocTrack <ins>shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments)</ins>.
+2. User requests to delete a specific appointment in the list.
+3. DocTrack deletes the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+<br>
+
+#### Use case (UC10): View all appointments
+
+**MSS**
+
+1. User requests to list all appointments.
+2. DocTrack shows a list of appointments.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC11): Find an appointment by patient name or date
+
+**MSS**
+
+1. User requests to find an appointment by patient name or date.
+2. DocTrack shows the appointment details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+* 2a. The appointment is not found.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC12): Clear all appointments
+
+**MSS**
+
+1. User requests to clear all appointments.
+2. DocTrack clears all appointments.
+
+    Use case ends.
+
+<br>
+
+
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should not require installation
-5.  Must not operate with dependency on any remote server
-6.  No usage of DBMS
-7.  Main product file must not exceed 100MB
-8.  Documentation must not exceed 15MB
-9.  Product should be designed for typing-preferred consumers, offering a CLI experience
-10. Product should be designed for a single user.
-11. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
-12. Data must be persistent, with all changes saved immediately to local storage
-13. Data files must be in a format that can be edited manually by advanced users
-14. Data file must remain usable and intact even with invalid input from the application
-15. Errors must trigger clear, user-friendly messages
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. Should not require installation of additional packages.
+6. Must not operate with dependency on any remote server.
+7. No usage of DBMS.
+8. Main product file must not exceed 100MB.
+9. Documentation must not exceed 15MB.
+10. Product should be designed for typing-preferred consumers, offering a CLI experience.
+11. Product should be designed for a single user.
+12. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
+13. Data must be persistent, with all changes saved immediately to local storage.
+14. Data files must be in a format that can be edited manually by advanced users.
+15. Data file must remain usable and intact even with invalid input from the application.
+16. Errors must trigger clear, user-friendly messages.
+17. The software architecture must follow a modular design pattern, ensuring separation of concerns (UI, logic, storage) to facilitate future development and maintenance.
+18. The codebase must be well-documented, with appropriate comments and adherence to coding standards.
+19. A comprehensive technical guide should be provided for future developers, including instructions for maintenance and extension.
+20. The product should be designed for users who prefer typing commands, offering a CLI or text-based interface.
+21. The application is designed for a single user. Multi-user or shared usage on the same computer is not allowed, and data files must not be shared between users.
 
 <br>
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
+* **Patient**: A person with details such as name, phone number, email, address, and status
+* **Appointment**: A scheduled meeting between a patient and the user, with details such as date, time, sickness, and medicine
+* **Appointment Type**: The type of appointment, such as consultation, follow-up, etc.
+* **Status**: The status of the patient, such as recovered, hospitalised, etc.
+* **User**: The person using the application
+* **CLI**: Command Line Interface
 
 #### GUI
 
@@ -727,8 +932,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: None
    2. Test case:`add person n/Elmo p/98765432 e/elmo@sesa.me a/Sesame Street st/recovering t/insurance`
    3. Expected: A new contact is added to the list.
-   - The status bar shows the following: "New person added: Elmo; Phone: 98765432; 
-   Email: elmo@sesa.me; Address: Sesame Street; Status: recovering; Tags: [insurance]"
+   - The status bar shows the following:
+     New person added:
+     Name: Elmo
+     Phone: 98765432
+     Email: elmo@sesa.me
+     Address: Sesame Street
+     Tags: [[insurance]]
    - The list of persons should now have the new contact inside it.
     
 
@@ -777,10 +987,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a person
     1. Prerequisites: There must be a person with the PID 1.
-    2. Test case:`add appt ty/Check up d/2024-10-16 12:30:30 i/1 s/Common Cold m/Paracetamol`
+    2. Test case:`add appt ty/Check up d/2024-10-16 12:30 i/1 s/Common Cold m/Paracetamol`
     3. Expected: A new appointment is added to the list.
-    - The status bar shows the following: "New appointment added: Check up; Date and Time2024-10-16T12:30:30; 
-   Sickness: Common Cold; Medicine: Paracetamol
+      The status bar shows the following:
+      New appointment added:
+      Appointment Type: Check up
+      Date and Time: October 16, 2024, 12:30 PM
+      Sickness: Common Cold
+      Medicine: Paracetamol
     - The list of appointments should now have the new appointment inside it.
 
 ### Deleting an appointment

@@ -13,6 +13,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Edits the details of an existing entity (person or appointment) in the address book.
@@ -38,6 +39,8 @@ public abstract class EditCommand extends Command {
     protected final EditEntityDescriptor editEntityDescriptor;
 
     /**
+     * Constructs {@code EditCommand} with the specified index and descriptor.
+     *
      * @param targetIndex Index of entity to be edited.
      */
     public EditCommand(Index targetIndex, EditEntityDescriptor editEntityDescriptor) {
@@ -47,6 +50,13 @@ public abstract class EditCommand extends Command {
         this.editEntityDescriptor = editEntityDescriptor;
     }
 
+    /**
+     * Executes the edit command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the result of executing the command.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -63,33 +73,58 @@ public abstract class EditCommand extends Command {
             throw new CommandException(getDuplicateMessage());
         }
 
-        editEntity(model, editedEntity, entityToEdit);
+        try {
+            editEntity(model, editedEntity, entityToEdit);
+        } catch (DuplicatePersonException e) {
+            throw new CommandException(getDuplicateMessage());
+        }
+
         return new CommandResult(String.format(getSuccessMessage(), formatEntity(editedEntity)));
     }
 
     /**
      * Checks if entity already exists in list
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param entity Entity to check
+     * @return True if entity exists in list, false otherwise
      */
-    protected abstract boolean hasEntity(Model model, Object entity) throws CommandException;
+    protected abstract boolean hasEntity(Model model, Object entity);
 
     /**
      * Checks if entity to edit is the same as edited entity
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param editedEntity Entity after editing
+     * @param entityToEdit Entity to edit
+     * @return True if entity is the same, false otherwise
      */
-    protected abstract boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
-            throws CommandException;
+    protected abstract boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit);
 
     /**
      * Gets the filtered list of entities in the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return List of entities in the model.
      */
     protected abstract List<?> getFilteredList(Model model);
 
     /**
      * Edits Entity
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param editedEntity Entity after editing
+     * @param entityToEdit Entity to edit
      */
-    protected abstract void editEntity(Model model, Object editedEntity, Object entityToEdit) throws CommandException;
+    protected abstract void editEntity(Model model, Object editedEntity, Object entityToEdit);
 
     /**
      * Adds the entity to the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param entityToEdit Entity to edit
+     * @param editEntityDescriptor Descriptor for editing entity
+     * @return Entity after editing
      */
     protected abstract Object createEditedEntity(Model model, Object entityToEdit,
                                                  EditEntityDescriptor editEntityDescriptor) throws CommandException;
@@ -125,8 +160,10 @@ public abstract class EditCommand extends Command {
             return false;
         }
 
-        return targetIndex.equals(otherEditCommand.targetIndex)
-                && editEntityDescriptor.equals(otherEditCommand.editEntityDescriptor);
+        boolean isSameIndex = targetIndex.equals(otherEditCommand.targetIndex);
+        boolean isSameEntityDescriptor = editEntityDescriptor.equals(otherEditCommand.editEntityDescriptor);
+
+        return isSameIndex && isSameEntityDescriptor;
     }
 
     /**

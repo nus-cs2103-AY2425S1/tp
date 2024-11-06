@@ -103,7 +103,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -color-background-alt2;
 }
 
 .list-cell {
@@ -130,14 +130,17 @@
     -fx-border-width: 1 0 1 0;
 }
 
-.list-cell .label {
-    -fx-text-fill: -color-foreground;
-}
-
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 15px;
+    -fx-text-fill: -color-background;
+    -fx-font-weight: bold;
+}
+
+.cell_big_name_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 15px;
+    -fx-text-fill: -color-foreground;
     -fx-font-weight: bold;
 }
 
@@ -157,7 +160,7 @@
 .cell_id_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 12px;
-    -fx-background-color: -color-accent-light;
+    -fx-background-color: -color-accent-dark;
     -fx-text-fill: -color-background;
     -fx-background-radius: 5px;
     -fx-font-weight: bold;
@@ -194,7 +197,6 @@
 .status-bar {
     -fx-background-color: -color-background-alt;
 }
-
 
 .result-display {
     -fx-background-color: -color-background-alt2;
@@ -358,9 +360,9 @@
 }
 
 .panel-label {
-    -fx-padding: 5 5 5 5;
+    -fx-padding: 0 15 12 15;
     -fx-font-weight: bold;
-    -fx-text-fill: -color-foreground;
+    -fx-font-size: 16px;
 }
 
 #cardPane {

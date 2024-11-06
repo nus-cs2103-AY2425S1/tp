@@ -93,8 +93,9 @@ public class AddAppointmentCommandTest {
         AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor, 1);
         String expected = "seedu.address.logic.commands.AddAppointmentCommand"
-                + "{toAdd=seedu.address.model.appointment.AppointmentDescriptor{appointment type=Health Checkup, "
-                + "appointment datetime=2024-10-15T10:30, sickness=Flu, medicine=Panadol}}";
+                + "{appointmentDescriptor=seedu.address.model.appointment.AppointmentDescriptor{appointment"
+                + " type=Health Checkup, " + "appointment datetime=2024-10-15T10:30, sickness=Flu, "
+                + "medicine=Panadol}}";
         assertEquals(expected, addAppointmentCommand.toString());
     }
 
