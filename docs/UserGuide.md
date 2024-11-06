@@ -587,8 +587,8 @@ with name `alice`, with phone number `123445678` and with email `alice@example.c
   email either `john@example.com` or `alice@example.com`
   * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
 
-  Example: "find ph n/John".
-  ![result for 'find ph n/John'](images/findJohnResult.png)
+Example: "find ph n/John".
+![result for 'find ph n/John'](images/findJohnResult.png)
 
   <div class="box box-warn" type="warning" seamless>
 
