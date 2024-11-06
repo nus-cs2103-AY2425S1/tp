@@ -260,6 +260,8 @@ Format: `mark si/INDEX ai/INDEX`
 Examples:
 * `list` followed by `mark si/3 ai/1` marks the 1st assignment of the 3rd student in the app.
 * `mark si/1 ai/1`
+  
+  ![result for 'mark si/1 ai/1'](images/mark.png)
 
 ### Unmarking an assignment: `unmark`
 
@@ -273,6 +275,8 @@ Format: `unmark si/INDEX ai/INDEX`
 
 Examples:
 * `unmark si/1 ai/1`
+
+  ![result for 'unmark si/1 ai/1'](images/unmark.png)
 
 ### Grading an assignment: `grade`
 
@@ -300,6 +304,8 @@ Format: `remark si/INDEX r/REMARK`
 
 Examples:
 * `remark si/1 r/Weak in Math`
+  
+  ![result for 'remark si/1 r/Weak in Math'](images/remark.png)
 
 ### Clearing all entries : `clear`
 
