@@ -11,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Company;
 
-
 /**
  * Changes the application status of an existing company in the address book
  */
@@ -32,7 +31,7 @@ public class ApplicationStatusCommand extends Command {
     private final ApplicationStatus status;
 
     /**
-     * @param index of the company in the filtered company list to edit the remark
+     * @param index  of the company in the filtered company list to edit the remark
      * @param status of the company to be updated to
      */
     public ApplicationStatusCommand(Index index, ApplicationStatus status) {
@@ -51,13 +50,13 @@ public class ApplicationStatusCommand extends Command {
         }
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
-        Company editedPerson = new Company(
+        Company editedCompany = new Company(
                 companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getCareerPageUrl(),
-                companyToEdit.getApplicationStatus(), companyToEdit.getTags(),
+                status, companyToEdit.getTags(),
                 companyToEdit.getIsBookmark(), companyToEdit.getRemark());
 
-        model.setCompany(companyToEdit, editedPerson);
+        model.setCompany(companyToEdit, editedCompany);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
         return new CommandResult(String.format(MESSAGE_ADD_STATUS_SUCCESS, Messages.format(companyToEdit)));
