@@ -17,6 +17,11 @@ import seedu.address.model.person.Tutorial;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    private static final String MESSAGE_NAME_SHOULD_BE_EMPTY =
+            "The name field should be left empty when sorting by name.";
+    private static final String MESSAGE_ID_SHOULD_BE_EMPTY =
+            "The student ID field should be left empty when sorting by student ID.";
+
     private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_TUTORIAL);
 
     @Override
@@ -42,9 +47,17 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).map(String::isEmpty).orElse(false)) {
             return SortCommand.sortByName(order);
-        } else if (argMultimap.getValue(PREFIX_STUDENT_ID).map(String::isEmpty).orElse(false)) {
+        } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            throw new ParseException(MESSAGE_NAME_SHOULD_BE_EMPTY);
+        }
+
+        if (argMultimap.getValue(PREFIX_STUDENT_ID).map(String::isEmpty).orElse(false)) {
             return SortCommand.sortByStudentId(order);
-        } else if (argMultimap.getValue(PREFIX_TUTORIAL).isPresent()) {
+        } else if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
+            throw new ParseException(MESSAGE_ID_SHOULD_BE_EMPTY);
+        }
+
+        if (argMultimap.getValue(PREFIX_TUTORIAL).isPresent()) {
             Tutorial tutorial = ParserUtil.parseTutorial(argMultimap.getValue(PREFIX_TUTORIAL).get());
             return SortCommand.sortByTutorialAttendance(order, tutorial);
         }
