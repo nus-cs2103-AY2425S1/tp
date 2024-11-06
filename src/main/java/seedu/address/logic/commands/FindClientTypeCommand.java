@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -47,9 +48,9 @@ public class FindClientTypeCommand extends Command {
 
         // Check if there is anyone in the filtered list
         if (model.getDisplayPersons().isEmpty()) {
-            throw new CommandException(
-                    String.format(Messages.MESSAGE_NO_PERSON_FOUND_FOR_VIEW)
-            );
+            // If noone found, show all persons (no change)
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(Messages.MESSAGE_CLIENT_TYPE_NOT_FOUND);
         }
         return new CommandResult(
                 Messages.getMessagePersonsListedOverview(model.getDisplayPersons().size()));

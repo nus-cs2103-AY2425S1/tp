@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalClientHub;
 
 import java.util.Arrays;
@@ -53,12 +53,10 @@ public class FindNameCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = Messages.getMessagePersonsListedOverview(0);
+        String expectedMessage = Messages.MESSAGE_PERSON_NOT_FOUND;
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindNameCommand command = new FindNameCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getDisplayPersons());
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
