@@ -143,22 +143,24 @@ Format: <br>
 
 Examples:
 * `find John` returns `john` and `John Doe`
+* `find h/ @alexyeoh` will return `Alex Yeoh`
 * `find alex david` returns `Alex Yeoh`, `David Li`
   ![result for 'find alex david'](images/findAlexDavid.png)
 
 ### Filtering persons by contact type: `filter`
 
-Filters persons by their contact type (i.e. work or personal).
+Filters persons by their contact type (i.e. work, school or personal).
 
 Format: `filter CONTACT_TYPE`
 
 * Displays a list of persons tagged with that `CONTACT_TYPE`
-* `CONTACT_TYPE` can be either 'WORK' or 'PERSONAL'
+* `CONTACT_TYPE` can be either 'WORK', 'SCHOOL', or 'PERSONAL'
 * The search is case-insensitive. e.g. 'work' is the same as 'WORK'
 
 Examples:
 
 * `filter WORK` returns all the 'work' contacts
+* `filter SCHOOL` returns all the 'school' contacts
 * `filter PERSONAL` returns all the 'personal' contacts
 
 ### Deleting a person : `delete`
