@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-    title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -25,7 +25,9 @@ You can reach us at our emails:
 <img src="images/apollo-tan.png" width="200px">
 
 [[github](http://github.com/apollo-tan)]
-* Role: Project Advisor. Handle the list feature and its documentation
+[[linkedin](https://www.linkedin.com/in/apollo-tan-shi-xin/)]
+* Role: UI/UX Designer and Implementer 
+* Responsibilites: Design and maintain an intuitive, user-friendly interface, with regular updates to support new features. Handle the logic and display for the list command.
 
 ### Anthony Hermanto
 
