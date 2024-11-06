@@ -142,7 +142,8 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-:bulb: **Tip:** This command can be used to clear the filtered person list caused by a `find` command operation.
+:bulb: **Tip:** This command can be used to reset the filter applied on the person list caused by a `find` command 
+operation.
 
 ### Listing all transactions : `listTxn`
 
@@ -150,8 +151,8 @@ Shows a list of all transactions in the transaction book.
 
 Format: `listTxn`
 
-:bulb: **Tip:** This command can be used to clear the filtered transaction list caused by a `fitlerTxn` command 
-operation.
+:bulb: **Tip:** This command can be used to reset the filter applied on transaction list caused by a `fitlerTxn` 
+command operation.
 
 ### Editing a person : `edit`
 
@@ -252,7 +253,7 @@ Examples:<br>
 * `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in 
   the displayed person list.<br>
   ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
-* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Givent that `2` is 
+* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Given that `2` is 
   the index of `Bernice Yu` in the displayed person list.<br>
   ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
