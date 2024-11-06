@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class Client {
 
     public static final String NO_CLAIMS_MESSAGE = "No open claims";
-    public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claims";
+    public static final String OPEN_CLAIMS_MESSAGE = "%1$s open claim(s)";
 
     // Identity fields
     private final Name name;
