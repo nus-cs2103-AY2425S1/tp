@@ -36,12 +36,12 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS, PREFIX_STATUS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_IDENTITY_NUMBER, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_ADDRESS, PREFIX_STATUS) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_IDENTITY_NUMBER, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS);
+                PREFIX_ADDRESS, PREFIX_STATUS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         IdentityNumber identityNumber = ParserUtil.parseIdentityNumber(
                 argMultimap.getValue(PREFIX_IDENTITY_NUMBER).get());
