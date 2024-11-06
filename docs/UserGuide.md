@@ -251,8 +251,6 @@ Examples:
 * `filter t/foodCaterer bartender` returns all contacts tagged with both `foodCaterer` AND `bartender`.
 * `filter t/foodCaterer` returns all contacts tagged with the tag `foodCaterer`.<br>
 
-<br><br/>
-
 <div style="page-break-after: always;"></div>
 
 #### Deleting a contact : `delete`
