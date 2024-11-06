@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import org.junit.jupiter.api.AfterEach;
@@ -28,13 +29,13 @@ public class ExportCommandTest {
         // 1. Create temporary source and destination files to not tamper with current data.
         tempSrcPath = null;
         tempDstPath = null;
-        tempKeyPath = "test/key.txt";
+        tempKeyPath = Paths.get("test", "key.jks").toString();
 
         // 2. Populate sample source file with sample json data.
         try {
             Files.createDirectory(Path.of("test"));
-            tempSrcPath = Files.createFile(Path.of("test/addressbook.json"));
-            tempDstPath = Files.createFile(Path.of("test/dst-addressbook.json"));
+            tempSrcPath = Files.createFile(Paths.get("test", "addressbook.json"));
+            tempDstPath = Files.createFile(Paths.get("test", "dst-addressbook.json"));
             ReadOnlyAddressBook sampleData = SampleDataUtil.getSampleAddressBook();
             String stringData = JsonUtil.toJsonString(sampleData);
             byte[] encryptedData = EncryptionManager.encrypt(stringData, tempKeyPath);
