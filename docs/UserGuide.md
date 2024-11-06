@@ -55,8 +55,6 @@ tasks done faster than traditional GUI apps.
 1. Refer to the [Features](#features) below for details of each command.
 1. Once you are familiar with the commands, run the `clear` command to get rid of the sample data and start adding and managing your contacts and weddings with ease!
 
-<br><br/>
-
 ## Getting Around
 
 ![markedUI](images/markedUI.png)
