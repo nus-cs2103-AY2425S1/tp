@@ -11,9 +11,9 @@ Class "<<interface>>\nModel" as Model
 Class ClientHub
 Class ModelManager
 Class UserPrefs
-Class FilteredList
 
 Class UniquePersonList
+Class ReminderList
 Class Person
 Class Address
 Class Email
@@ -21,6 +21,7 @@ Class Name
 Class Phone
 Class ClientType
 Class Description
+Class Reminder
 
 Class I #FFFFFF
 }
@@ -38,6 +39,8 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ClientHub *--> "1" UniquePersonList
+ClientHub *--> "1" ReminderList
+ReminderList *--> "~* all" Reminder
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
@@ -45,6 +48,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" ClientType
 Person *--> Description
+Person *--> Reminder
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -53,6 +57,6 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> FilteredList
-FilteredList --> "~* sorted" Person
+ModelManager --> "~*" Person
+ModelManager --> "~*" Reminder
 @enduml

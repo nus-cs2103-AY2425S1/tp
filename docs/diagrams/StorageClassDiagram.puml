@@ -19,7 +19,8 @@ Class "<<interface>>\nClientHubStorage" as ClientHubStorage
 Class JsonClientHubStorage
 Class JsonSerializableClientHub
 Class JsonAdaptedPerson
-Class JsonAdaptedTag
+Class JsonAdaptedClientType
+Class JsonAdaptedReminder
 }
 
 }
@@ -38,6 +39,8 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonClientHubStorage .up.|> ClientHubStorage
 JsonClientHubStorage ..> JsonSerializableClientHub
 JsonSerializableClientHub --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonSerializableClientHub --> "*" JsonAdaptedReminder
+JsonAdaptedPerson --> "*" JsonAdaptedClientType
+JsonAdaptedPerson --> "*" JsonAdaptedReminder
 
 @enduml
