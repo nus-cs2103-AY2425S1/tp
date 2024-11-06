@@ -135,7 +135,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedTutorEase}
+     * {@code versionedTutorEase}.
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -180,7 +180,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
-     * {@code versionedTutorEase}
+     * {@code versionedTutorEase}.
      */
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {

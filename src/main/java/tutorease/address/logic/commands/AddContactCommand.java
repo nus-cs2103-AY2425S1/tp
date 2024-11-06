@@ -47,7 +47,7 @@ public class AddContactCommand extends ContactCommand {
     private final Person toAdd;
 
     /**
-     * Creates an AddContactCommand to add the specified {@code Person}
+     * Creates an AddContactCommand to add the specified {@code Person}.
      */
     public AddContactCommand(Person person) {
         requireNonNull(person);

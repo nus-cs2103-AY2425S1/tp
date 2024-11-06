@@ -5,7 +5,7 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}.
  */
 public class Tag {
 
@@ -53,7 +53,7 @@ public class Tag {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return '[' + tagName + ']';

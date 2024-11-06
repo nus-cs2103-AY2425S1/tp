@@ -32,6 +32,7 @@ public interface TutorEaseStorage {
 
     /**
      * Saves the given {@link ReadOnlyTutorEase} to the storage.
+     *
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

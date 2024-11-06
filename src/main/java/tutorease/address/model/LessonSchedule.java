@@ -10,8 +10,8 @@ import tutorease.address.model.lesson.UniqueLessonList;
 import tutorease.address.model.person.Person;
 
 /**
- * Wraps all data at the lesson-schedule level
- * Duplicates are not allowed (by .isOverlapping comparison)
+ * Wraps all data at the lesson-schedule level.
+ * Duplicates are not allowed (by .isOverlapping comparison).
  */
 public class LessonSchedule implements ReadOnlyLessonSchedule {
     private final UniqueLessonList lessons;
@@ -24,7 +24,7 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
     }
 
     /**
-     * Creates an LessonSchedule using the Lessons in the {@code toBeCopied}
+     * Creates an LessonSchedule using the Lessons in the {@code toBeCopied}.
      */
     public LessonSchedule(ReadOnlyLessonSchedule toBeCopied) {
         this();

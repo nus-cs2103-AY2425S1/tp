@@ -17,7 +17,7 @@ import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 
 /**
- * A class to access LessonSchedule data stored as a json file on the hard disk.
+ * Accesses LessonSchedule data stored as a json file on the hard disk.
  */
 public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonLessonScheduleStorage.class);

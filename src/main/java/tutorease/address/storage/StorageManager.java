@@ -90,10 +90,11 @@ public class StorageManager implements Storage {
 
     /**
      * Reads the lesson schedule from the default file path.
-     * @param tutorEase cannot be null.
-     * @return an {@code Optional} containing the {@code LessonSchedule} if the file exists, otherwise an empty {@code
+     *
+     * @param tutorEase It cannot be null.
+     * @return An {@code Optional} containing the {@code LessonSchedule} if the file exists, otherwise an empty {@code
      * Optional}.
-     * @throws DataLoadingException if there was any problem reading from the file.
+     * @throws DataLoadingException If there was any problem reading from the file.
      */
     @Override
     public Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase)
@@ -103,11 +104,12 @@ public class StorageManager implements Storage {
 
     /**
      * Reads the lesson schedule from the specified file path.
-     * @param filePath cannot be null.
-     * @param tutorEase cannot be null.
-     * @return an {@code Optional} containing the {@code LessonSchedule} if the file exists, otherwise an empty {@code
+     *
+     * @param filePath It cannot be null.
+     * @param tutorEase It cannot be null.
+     * @return An {@code Optional} containing the {@code LessonSchedule} if the file exists, otherwise an empty {@code
      * Optional}.
-     * @throws DataLoadingException if there was any problem reading from the file.
+     * @throws DataLoadingException If there was any problem reading from the file.
      */
     @Override
     public Optional<ReadOnlyLessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
@@ -118,8 +120,9 @@ public class StorageManager implements Storage {
 
     /**
      * Saves the given {@code LessonSchedule} to the storage.
-     * @param lessonSchedule cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param lessonSchedule It cannot be null.
+     * @throws IOException If there was any problem writing to the file.
      */
     @Override
     public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) throws IOException {
@@ -128,8 +131,9 @@ public class StorageManager implements Storage {
 
     /**
      * Saves the given {@code LessonSchedule} to the storage.
-     * @param lessonSchedule cannot be null.
-     * @param filePath cannot be null.
+     *
+     * @param lessonSchedule It cannot be null.
+     * @param filePath It cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     @Override
