@@ -37,6 +37,24 @@ public class SampleDataUtil {
                 getAddress("Campus Emergency and Security Office 17 & 18 Prince George’s Park Singapore 118417"),
                 getTagSet("school", "security", "emergency"), getEmptyMap(),
                 getDescription("For emergencies only")),
+            new Person(new Name("Clinical Services"), getPhone("+65 6601 5035"),
+                getEmail("uhc_health@nus.edu.sg"),
+                Optional.empty(),
+                getTagSet("school", "clinic", "health"), getEmptyMap(),
+                getDescription("For appointment booking, medical consultation etc.")),
+            new Person(new Name("Lifeline NUS"), getPhone("+65 6516 7777"),
+                Optional.empty(),
+                getAddress("NUS Kent Ridge Campus"),
+                getTagSet("school", "health", "emergency"), getEmptyMap(),
+                getDescription("(24 hours psychological support for students and staff)")),
+            new Person(new Name("NUS Office of Finance"), getPhone("+65 6516 1177 (All student finance matters)"),
+                Optional.empty(),
+                getAddress("Student Service Centre (SSC) @ Kent Ridge Campus, "
+                    + "University Sports Centre, USC-03-07, "
+                    + "2 Sports Drive 1, "
+                    + "Singapore 117561"),
+                getTagSet("school", "finance", "office"), getEmptyMap(),
+                getDescription("For email enquiry, visit http://www.askstudentservice.nus.edu.sg/")),
             new Person(new Name("Boyd Anderson"), getPhone("660 17900"), getEmail("boyd@comp.nus.edu.sg"),
                 getAddress("COM3-02-46"),
                 getTagSet("favorite"), getMap("CS1101S", RoleType.PROFESSOR),
@@ -62,11 +80,7 @@ public class SampleDataUtil {
             new Person(new Name("Huang Jiaxi"), getPhone("92624417"), getEmail("hjx@u.nus.edu"),
                 Optional.empty(),
                 getTagSet("classmates"), getMultipleRolesMap(),
-                getDescription("Teaching many modules within the same semester, a very solid TA.")),
-            new Person(new Name("Alex Yeoh"), getPhone("83351346"), getEmail("alex@gmail.com"),
-                getAddress("#06-66, Blk 211, Clementi Ave 6"), getTagSet("classmates"),
-                getMap("CS2040S", RoleType.STUDENT),
-                getEmptyDescription())
+                getDescription("Teaching many modules within the same semester, a very solid TA."))
         };
     }
 
