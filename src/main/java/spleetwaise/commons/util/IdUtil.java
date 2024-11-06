@@ -1,5 +1,7 @@
 package spleetwaise.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.UUID;
 
 /**
@@ -7,7 +9,9 @@ import java.util.UUID;
  */
 public class IdUtil {
 
-    public static final String TEST_ID = "test-uuid";
+    public static final String TEST_ID = "123e4567-e89b-42d3-a456-556642440000";
+    public static final String MESSAGE_CONSTRAINTS = "UUID is invalid, refer to "
+            + "https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html.";
     private static boolean isDeterminate = false;
 
     /**
@@ -32,4 +36,17 @@ public class IdUtil {
         return UUID.randomUUID().toString();
     }
 
+    /**
+     * Returns true if a given string is a valid remark (allows empty string "").
+     */
+    public static boolean isValidId(String id) {
+        try {
+            requireNonNull(id);
+            String trimmedId = id.trim();
+            UUID.fromString(trimmedId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

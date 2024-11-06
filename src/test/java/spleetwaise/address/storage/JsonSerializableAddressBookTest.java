@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.commons.exceptions.IllegalValueException;
-import spleetwaise.commons.testutil.Assert;
 import spleetwaise.commons.util.JsonUtil;
 
 public class JsonSerializableAddressBookTest {
@@ -38,7 +36,8 @@ public class JsonSerializableAddressBookTest {
                 INVALID_PERSON_FILE,
                 JsonSerializableAddressBook.class
         ).get();
-        Assert.assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        AddressBook ab = dataFromFile.toModelType();
+        assertEquals(0, ab.getPersonList().size());
     }
 
     @Test
@@ -47,9 +46,8 @@ public class JsonSerializableAddressBookTest {
                 DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class
         ).get();
-        Assert.assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
-                dataFromFile::toModelType
-        );
+        AddressBook ab = dataFromFile.toModelType();
+        assertEquals(1, ab.getPersonList().size());
     }
 
     @Test
@@ -58,9 +56,7 @@ public class JsonSerializableAddressBookTest {
                 DUPLICATE_ID_FILE,
                 JsonSerializableAddressBook.class
         ).get();
-        Assert.assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_ID,
-                dataFromFile::toModelType
-        );
+        AddressBook ab = dataFromFile.toModelType();
+        assertEquals(1, ab.getPersonList().size());
     }
-
 }
