@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
@@ -28,8 +30,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getIsViewTransactions()) {
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
+        }
+
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size(),

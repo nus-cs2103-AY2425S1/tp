@@ -104,12 +104,14 @@ public class PersonTest {
     public void updateBalance() {
         // update balance by adding
         Person person1 = new PersonBuilder().build();
+        double initialBalance1 = person1.getBalance();
         person1.updateBalance(20);
-        assertEquals(20, person1.getBalance());
+        assertEquals(initialBalance1 + 20, person1.getBalance());
 
         // update balance by deducting
         Person person2 = new PersonBuilder().build();
+        double initialBalance2 = person2.getBalance();
         person2.updateBalance(-20);
-        assertEquals(-20, person2.getBalance());
+        assertEquals(initialBalance2 - 20, person2.getBalance());
     }
 }

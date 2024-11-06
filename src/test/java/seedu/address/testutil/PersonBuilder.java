@@ -53,6 +53,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         transactions = new ArrayList<>();
+        transactions.add(DEFAULT_TRANSACTION_1);
     }
 
     /**
@@ -120,7 +121,7 @@ public class PersonBuilder {
      * Sets the {@code Transaction} of the {@code Person} that we are building.
      */
     public PersonBuilder withTransactions(Transaction ... transactions) {
-        this.transactions.addAll(List.of(transactions));
+        this.transactions = SampleDataUtil.getTransactionList(transactions);
         return this;
     }
 

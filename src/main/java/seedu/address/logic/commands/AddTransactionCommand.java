@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,7 +21,7 @@ import seedu.address.model.person.Transaction;
 import seedu.address.model.person.TransactionDateComparator;
 
 /**
- * Adds a transaction to an existing person in the address book.
+ * Adds a transaction to the selected person in address book.
  */
 public class AddTransactionCommand extends Command {
 
@@ -33,7 +35,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "buy raw materials "
-            + PREFIX_AMOUNT + "-100 "
+            + PREFIX_AMOUNT + "-100.50 "
             + PREFIX_OTHER_PARTY + "Company XYZ "
             + PREFIX_DATE + "2024-10-10";
 
@@ -41,9 +43,10 @@ public class AddTransactionCommand extends Command {
 
     private final Index index;
     private final Transaction toAdd;
+    private final Logger logger = LogsCenter.getLogger(AddTransactionCommand.class);
 
     /**
-     * @param index index of person to add transactions to
+     * @param index index of selected person in person list to add transaction to
      * @param transaction transaction to add
      */
     public AddTransactionCommand(Index index, Transaction transaction) {
@@ -59,15 +62,18 @@ public class AddTransactionCommand extends Command {
         requireNonNull(model);
 
         if (model.getIsViewTransactions()) {
+            logger.fine("CommandException caused by attempt to use addt command in transaction view.");
             throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
         }
 
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.fine("CommandException caused by invalid index.");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        assert personToEdit != null : "Person should not be null";
         List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(toAdd);
         transactions.sort(new TransactionDateComparator());
