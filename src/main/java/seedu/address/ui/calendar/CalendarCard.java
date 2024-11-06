@@ -47,8 +47,12 @@ public class CalendarCard extends UiPart<Region> {
                 FilteredList<Person> filteredList = personList
                         .filtered(p -> p.getUid().equals(contact));
                 if (!filteredList.isEmpty()) {
+                    String contactName = filteredList.get(0).getName().toString();
+                    contactName = contactName.length() > 20 ?
+                            contactName.substring(0,19) + " ..." :
+                            contactName;
                     associatedContacts.getChildren().add(
-                            new Label(filteredList.get(0).getName().toString())
+                            new Label(contactName)
                     );
                 }
             });
