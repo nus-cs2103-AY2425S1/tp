@@ -38,7 +38,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
-    public List<String> getKeywords() {
+    public List<String> getNameKeywords() {
         return Collections.unmodifiableList(keywords);
     }
 
