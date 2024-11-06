@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Represents a Person's job in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidJob(String)}
@@ -27,7 +29,7 @@ public class Job {
     public Job(String job) {
         requireNonNull(job);
         checkArgument(isValidJob(job), MESSAGE_CONSTRAINTS);
-        value = capitaliseJob(job);
+        value = StringUtil.capitaliseString(job);
     }
 
     /**
@@ -60,21 +62,5 @@ public class Job {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    /**
-     * Capitalises the first letter of each word in a given job title.
-     * Converts the rest of each word to lowercase and returns the formatted string.
-     *
-     * @param job job title as a string
-     * @return a string of job title with each word capitalised
-     */
-    public String capitaliseJob(String job) {
-        String capitalisedJob = "";
-        String[] words = job.toLowerCase().split(" ");
-        for (String word : words) {
-            capitalisedJob += Character.toUpperCase(word.charAt(0)) + word.substring(1) + " ";
-        }
-        return capitalisedJob.trim();
     }
 }
