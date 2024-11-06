@@ -97,8 +97,10 @@ public class AddressBookParser {
 
         case MarkAttendanceByTutorialCommand.COMMAND_WORD:
             return new MarkAttendanceByTutorialCommandParser().parse(arguments);
+
         case UnmarkAttendanceByStudentCommand.COMMAND_WORD:
             return new UnmarkAttendanceByStudentCommandParser().parse(arguments);
+
         case EnrollCommand.COMMAND_WORD:
             return new EnrollCommandParser().parse(arguments);
 
