@@ -57,6 +57,14 @@ public class GroupListTest {
         assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
     @Test
+    void testAddDuplicateGroup_multipleSpaces() {
+        Group group1 = new Group("group 1");
+        Group group2 = new Group("group      1");
+        groupList.addGroup(group1);
+        groupList.addGroup(group2);
+        assertEquals(1, groupList.getUnmodifiableGroups().size());
+    }
+    @Test
     void testAddDuplicateGroup_inDifferentCases() {
         Group group1 = new Group("group 1");
         Group group2 = new Group("GROUP 1");

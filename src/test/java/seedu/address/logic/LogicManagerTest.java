@@ -1,8 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.DEFAULT_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_DEFAULT_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_DELETE_EMPTY_ERROR;
+import static seedu.address.logic.Messages.MESSAGE_EDIT_EMPTY_ERROR;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MAJOR_DESC_AMY;
@@ -58,13 +59,19 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, String.format(MESSAGE_UNKNOWN_COMMAND, DEFAULT_OVERVIEW));
+        assertParseException(invalidCommand, String.format(MESSAGE_UNKNOWN_COMMAND, MESSAGE_DEFAULT_OVERVIEW));
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() {
+    public void execute_deleteCommandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_DELETE_EMPTY_ERROR);
+    }
+
+    @Test
+    public void execute_editCommandExecutionError_throwsCommandException() {
+        String editCommand = "edit 1 n/name";
+        assertCommandException(editCommand, MESSAGE_EDIT_EMPTY_ERROR);
     }
 
     @Test
