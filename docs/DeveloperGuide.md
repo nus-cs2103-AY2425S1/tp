@@ -975,6 +975,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Project Grouping**: The arrangement of students into smaller groups for project purposes
 * **Tags**: Labels assigned to students to indicate specific roles or characteristics
 * **Student Profile**: A record within the system that contains information about a specific student
+* **EcName**: Emergency contact name of a student
+* **EcNumber**: Emergency contact number of a student
+* **SortAttribute**: Particular attribute of a student that can be compared for sorting purposes
 
 --------------------------------------------------------------------------------------------------------------------
 
