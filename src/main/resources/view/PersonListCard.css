@@ -1,11 +1,11 @@
 #contentContainer, #contentContainer * {
     -fx-background-color: #f8d3ca;
     -fx-background-radius: 10;
+
 }
 
-#contentContainer {
-    -fx-padding: 5;
-    -fx-background-insets: 0 3 0 0;
+#cardPaneContents {
+    -fx-padding: 7;
 }
 
 #contentContainer .scroll-bar {
@@ -26,9 +26,12 @@
     -fx-background-color: transparent;
 }
 
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-padding: 1.5 0 7 0;
+    -fx-background-insets: 1.5 0 7 0;
 }
 
 #tags .label {
