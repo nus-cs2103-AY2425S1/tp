@@ -22,7 +22,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD_RANDOM_CASE = "FiNd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose:\n"
-            + "1. name contain any of the specified KEYWORDS (case-insensitive) AND\n"
+            + "1. name contains any of the specified KEYWORDS (case-insensitive) AND\n"
             + "2. schedule is on any of the specified DAY keywords (case-insensitive)\n"
             + "and displays them as a list with index numbers.\n"
             + "Parameters: " + "[" + PREFIX_NAME + "KEYWORD [MORE_KEYWORDS...]] "
