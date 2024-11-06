@@ -30,9 +30,11 @@ public class EventFindCommandTest {
         FindEventCommand command = new FindEventCommand(searchString);
 
         // Update expected model to show events containing the search string
-        expectedModel.updateFilteredEventList(event -> event.getName().toString().toLowerCase().contains(searchString.toLowerCase()));
+        expectedModel.updateFilteredEventList(event -> event.getName().toString().toLowerCase()
+                .contains(searchString.toLowerCase()));
 
-        String expectedMessage = String.format(FindEventCommand.MESSAGE_EVENT_FOUND, expectedModel.getFilteredEventList().size(), searchString);
+        String expectedMessage = String.format(FindEventCommand.MESSAGE_EVENT_FOUND,
+                expectedModel.getFilteredEventList().size(), searchString);
         for (Event event : expectedModel.getFilteredEventList()) {
             expectedMessage += "\n" + event.getName().toString();
         }
