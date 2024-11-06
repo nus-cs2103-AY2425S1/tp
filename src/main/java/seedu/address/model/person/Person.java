@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllPositive;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -55,6 +56,7 @@ public class Person implements Appointmentable {
     public Person(Name name, int id, String role, Phone phone, Email email,
                   Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, role, phone, email, address, tags);
+        requireAllPositive(id);
         this.name = name;
         this.role = role;
         this.phone = phone;
@@ -72,6 +74,7 @@ public class Person implements Appointmentable {
     public Person(Name name, int id, String role, Phone phone, Email email,
                   Address address, Remark remark, List<Appointment> appointments, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
+        requireAllPositive(id);
         this.name = name;
         this.id = id;
         this.role = role;

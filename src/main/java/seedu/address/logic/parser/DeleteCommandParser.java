@@ -7,13 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.InvalidIdException;
-import seedu.address.logic.commands.DeletePatientCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeletePatientCommand object
  */
-public class DeletePatientCommandParser implements Parser<DeletePatientCommand> {
+public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeletePatientCommand
@@ -21,7 +21,7 @@ public class DeletePatientCommandParser implements Parser<DeletePatientCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public DeletePatientCommand parse(String args) throws ParseException {
+    public DeleteCommand parse(String args) throws ParseException {
 
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID);
@@ -29,7 +29,7 @@ public class DeletePatientCommandParser implements Parser<DeletePatientCommand> 
         if (!arePrefixesPresent(argumentMultimap, PREFIX_ID)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeletePatientCommand.MESSAGE_USAGE));
+                    DeleteCommand.MESSAGE_USAGE));
         }
         int patientId;
         try {
@@ -37,7 +37,7 @@ public class DeletePatientCommandParser implements Parser<DeletePatientCommand> 
         } catch (InvalidIdException e) {
             throw new ParseException(e.getMessage());
         }
-        return new DeletePatientCommand(patientId);
+        return new DeleteCommand(patientId);
     }
 
     /**
