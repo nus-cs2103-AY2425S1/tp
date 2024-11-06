@@ -280,8 +280,8 @@ public class LogicManagerTest {
         model.addEvent(indexOneEvent);
         model.addEvent(indexTwoEvent);
 
-        assertEquals(0, this.logic.getRelativeIndexOfEvent(indexOneEvent));
-        assertEquals(1, this.logic.getRelativeIndexOfEvent(indexTwoEvent));
+        assertEquals(0, this.logic.getRelativeIndexOfEvent(indexOneEvent).getZeroBased());
+        assertEquals(1, this.logic.getRelativeIndexOfEvent(indexTwoEvent).getZeroBased());
     }
 
     @Test
@@ -291,8 +291,8 @@ public class LogicManagerTest {
         model.addVendor(indexOneVendor);
         model.addVendor(indexTwoVendor);
 
-        assertEquals(0, this.logic.getRelativeIndexOfVendor(indexOneVendor));
-        assertEquals(1, this.logic.getRelativeIndexOfVendor(indexTwoVendor));
+        assertEquals(0, this.logic.getRelativeIndexOfVendor(indexOneVendor).getZeroBased());
+        assertEquals(1, this.logic.getRelativeIndexOfVendor(indexTwoVendor).getZeroBased());
     }
 
     /**
