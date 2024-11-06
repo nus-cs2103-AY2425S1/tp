@@ -57,6 +57,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         setCompanies(newData.getCompanyList());
     }
 
+    public void hideAllDetails() {
+        for (Company company : companies) {
+            company.
+        }
+    }
+
     //// company-level operations
 
     /**

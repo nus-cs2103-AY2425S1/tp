@@ -31,7 +31,7 @@ public class FavCommandTest {
                 companyToFav.getPhone(), companyToFav.getEmail(),
                 companyToFav.getAddress(), companyToFav.getTags(),
                 companyToFav.getStatus(), companyToFav.getApplications(),
-                true, companyToFav.getIsLong()));
+                true, companyToFav.getIsShowingDetails()));
 
         assertCommandSuccess(favCommand, model, expectedMessage, expectedModel);
     }

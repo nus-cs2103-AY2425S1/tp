@@ -180,7 +180,7 @@ public class EditCommand extends Command {
         private Status status;
         private List<Application> applications;
         private Boolean isFavourite;
-        private Boolean isLong;
+        private Boolean isShowingDetails;
 
         public EditCompanyDescriptor() {}
 
@@ -197,7 +197,7 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setApplications(toCopy.applications);
             setIsFavourite(toCopy.isFavourite);
-            setIsLong();
+            setIsShowingDetails();
         }
 
         /**
@@ -247,8 +247,8 @@ public class EditCommand extends Command {
             return Optional.ofNullable(isFavourite);
         }
 
-        public void setIsLong() {
-            this.isLong = false;
+        public void setIsShowingDetails() {
+            this.isShowingDetails = false;
         }
 
         /**

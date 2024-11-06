@@ -26,7 +26,7 @@ public class CompanyBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STATUS = "INTERESTED";
     public static final Boolean DEFAULT_IS_FAVOURITE = false;
-    public static final Boolean DEFAULT_IS_LONG = false;
+    public static final Boolean DEFAULT_IS_SHOWING_DETAILS = false;
 
     private Name name;
     private Phone phone;
@@ -36,7 +36,7 @@ public class CompanyBuilder {
     private Set<Tag> tags;
     private List<Application> applications;
     private Boolean isFavourite;
-    private Boolean isLong;
+    private Boolean isShowingDetails;
 
     /**
      * Creates a {@code companyBuilder} with the default details.
@@ -51,7 +51,7 @@ public class CompanyBuilder {
         status = new Status(DEFAULT_STATUS);
         applications = new ArrayList<>();
         isFavourite = DEFAULT_IS_FAVOURITE;
-        isLong = DEFAULT_IS_LONG;
+        isShowingDetails = DEFAULT_IS_SHOWING_DETAILS;
     }
 
     /**
@@ -66,7 +66,7 @@ public class CompanyBuilder {
         status = companyToCopy.getStatus();
         applications = companyToCopy.getApplications();
         isFavourite = companyToCopy.getIsFavourite();
-        isLong = companyToCopy.getIsLong();
+        isShowingDetails = companyToCopy.getIsShowingDetails();
     }
 
     /**
@@ -151,14 +151,14 @@ public class CompanyBuilder {
     }
 
     /**
-     * Sets the {@code IsLong} of the {@code company} that we are building.
+     * Sets the {@code isShowingDetails} of the {@code company} that we are building.
      */
-    public CompanyBuilder withIsLong(Boolean isLong) {
-        this.isLong = isLong;
+    public CompanyBuilder withIsShowingDetails(Boolean isShowingDetails) {
+        this.isShowingDetails = isShowingDetails;
         return this;
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags, status, applications, isFavourite, isLong);
+        return new Company(name, phone, email, address, tags, status, applications, isFavourite, isShowingDetails);
     }
 }

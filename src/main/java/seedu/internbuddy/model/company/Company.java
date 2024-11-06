@@ -30,13 +30,13 @@ public class Company {
     private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
     private final Boolean isFavourite;
-    private final Boolean isLong;
+    private final Boolean isShowingDetails;
 
     /**
      * Every field must be present and not null.
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status,
-               List<Application> applications, Boolean isFavourite, Boolean isLong) {
+               List<Application> applications, Boolean isFavourite, Boolean isShowingDetails) {
         requireAllNonNull(name, phone, email, address, tags, status, isFavourite);
         this.name = name;
         this.phone = phone;
@@ -46,7 +46,7 @@ public class Company {
         this.status = status;
         this.applications = applications;
         this.isFavourite = isFavourite;
-        this.isLong = isLong;
+        this.isShowingDetails = isShowingDetails;
     }
 
     /**
@@ -63,7 +63,7 @@ public class Company {
         this.status = status;
         this.applications = applications;
         this.isFavourite = false;
-        this.isLong = false;
+        this.isShowingDetails = false;
     }
 
     public Name getName() {
@@ -102,8 +102,8 @@ public class Company {
         return Collections.unmodifiableList(applications);
     }
 
-    public Boolean getIsLong() {
-        return isLong;
+    public Boolean getIsShowingDetails() {
+        return isShowingDetails;
     }
 
     public String getAppNameString() {
@@ -166,7 +166,8 @@ public class Company {
                 && status.equals(otherCompany.status)
                 && tags.equals(otherCompany.tags)
                 && applications.equals(otherCompany.applications)
-                && isFavourite.equals(otherCompany.isFavourite);
+                && isFavourite.equals(otherCompany.isFavourite)
+                && isShowingDetails.equals(otherCompany.isShowingDetails);
     }
 
     @Override

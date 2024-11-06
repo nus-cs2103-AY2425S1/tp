@@ -33,7 +33,7 @@ public class JsonAdaptedCompany {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedApplication> applications = new ArrayList<>();
     private final Boolean isFavourite;
-    private final Boolean isLong;
+    private final Boolean isShowingDetails;
 
     /**
      * Constructs a {@link JsonAdaptedCompany} with the given company details.
@@ -45,14 +45,14 @@ public class JsonAdaptedCompany {
                  @JsonProperty("status") String status,
                  @JsonProperty("applications") List<JsonAdaptedApplication> applications,
                  @JsonProperty("isFavourite") Boolean isFavourite,
-                 @JsonProperty("IsLong") Boolean isLong) {
+                 @JsonProperty("isShowingDetails") Boolean isShowingDetails) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
         this.isFavourite = isFavourite;
-        this.isLong = isLong;
+        this.isShowingDetails = isShowingDetails;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -77,7 +77,7 @@ public class JsonAdaptedCompany {
                 .map(JsonAdaptedApplication::new)
                 .toList());
         isFavourite = source.getIsFavourite();
-        isLong = source.getIsLong();
+        isShowingDetails = source.getIsShowingDetails();
     }
 
     /**
@@ -139,10 +139,10 @@ public class JsonAdaptedCompany {
 
         final Boolean modelIsFavourite = isFavourite;
 
-        final Boolean modelIsLong = isLong;
+        final Boolean modelIsShowingDetails = isShowingDetails;
 
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelStatus, modelApplications, modelIsFavourite, modelIsLong);
+            modelStatus, modelApplications, modelIsFavourite, modelIsShowingDetails);
     }
 
 }
