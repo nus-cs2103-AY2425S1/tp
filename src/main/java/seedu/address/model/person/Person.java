@@ -69,17 +69,43 @@ public class Person {
     public Allergy getAllergy() {
         return allergy;
     }
+
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Checks if this person is considered the same as another person.
+     * <p>
+     * Two persons are considered the same if they have:
+     * <ul>
+     *   <li>Identical names and either identical phone numbers or identical email addresses.</li>
+     * </ul>
+     * This defines a weaker notion of equality based on commonly shared attributes,
+     * primarily useful for identifying potential duplicates.
+     *
+     * @param otherPerson The person to compare with.
+     * @return {@code true} if both persons have the same name and either the same phone number or email address.
+     *         {@code false} if {@code otherPerson} is null or if neither of these conditions hold.
      */
     public boolean isSamePerson(Person otherPerson) {
+        // Check if the otherPerson reference points to the same object instance as this one
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && (otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone()));
+        // Check if otherPerson is null before further checks
+        if (otherPerson == null) {
+            return false;
+        }
+
+        Name otherName = otherPerson.getName();
+        Phone otherPhone = otherPerson.getPhone();
+        Email otherEmail = otherPerson.getEmail();
+
+        // Define criteria for matching: names match and either phones match or emails match
+        boolean hasMatchingName = getName().equals(otherName);
+        boolean hasMatchingPhone = getPhone().equals(otherPhone);
+        boolean hasMatchingEmail = getEmail().equals(otherEmail);
+
+        // Check if names match and either phones or emails also match
+        return hasMatchingName && (hasMatchingPhone || hasMatchingEmail);
     }
 
     /**
