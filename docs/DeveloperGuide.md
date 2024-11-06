@@ -320,6 +320,24 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
     5. Other incorrect `markUndone` commands to try: `markUndone`, `markUndone x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+### Editing a transaction
+
+1. Editing a transaction while all persons are being shown
+
+   1. Prerequisites: List all persons and transactions using the `list` and `listTxn` command respectively. Multiple 
+      persons in the list on the left pane. Multiple transactions in the list on the right pane. 
+
+   2. Test case: `editTxn 1 amt/1.23`<br>
+      Expected: First contact's amount is changed to $1.23. Details of the edited transaction shown in the status 
+      message.
+
+   3. Test case: `editTxn 0 desc/Updated description`<br>
+      Expected: No transaction is edited. Error details shown in the status message.
+
+   4. Other incorrect edit commands to try: `editTxn`, `edit x amt/1.23` (where x is larger than the list size),
+`editTxn 1`<br>
+      Expected: Similar to previous.
+
 ### Filter Reuse in Transaction List
 
 1. Maintaining the current filter state when transactions are modified.
@@ -337,6 +355,28 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
     5. Test cases: `markDone 1`, `markUndone 1` (Assumes transaction 1 description is "fries at mac")<br>
        Expected: The transaction done icon updated in the filtered list while preserving the existing filter. Details of the updated transaction shown in the status message.
+
+### Filtering the transaction list.
+
+1. Filtering the transaction list while all persons are being shown
+
+   1. Prerequisites: List all persons and transactions using the `list` and `listTxn` command respectively. Multiple
+      persons in the list on the left pane. Multiple transactions in the list on the right pane.
+
+   2. Test case: `flterTxn 1`<br>
+      Expected: Transaction list will be filtered by the person corresponding to the displayed index 1 in the person 
+      list.
+   
+   3. Test case: `flterTxn 1 amt/1.23`<br>
+      Expected: Transaction list will show transactions related to the person corresponding to the displayed index 1 
+      in the person list with amount $1.23.
+
+   4. Test case: `filterTxn 0`<br>
+      Expected: Current displayed transaction list will remain the same. Error details shown in the status message.
+
+   5. Other incorrect edit commands to try: `filterTxn desc/`, `filterTxn x` (where x is larger than the list size),
+      `filterTxn amt/1.222`<br>
+      Expected: Similar to previous.
 
 ### Default Behavior on App Startup
 
@@ -359,5 +399,3 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
       Expected: The transaction loads as undone by default. Upon closing the app, the transaction is saved as undone in the JSON file.
 
    3.
-
-2. _{ more test cases …​ }_
