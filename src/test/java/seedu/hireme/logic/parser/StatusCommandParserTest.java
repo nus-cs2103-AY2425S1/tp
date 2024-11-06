@@ -85,4 +85,34 @@ public class StatusCommandParserTest {
         assertParseSuccess(parser, "   1   ",
                 new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED));
     }
+
+    @Test
+    public void parse_nullStatus_throwsParseException() {
+        // Create the parser with null status
+        StatusCommandParser parser = new StatusCommandParser(null);
+
+        // Ensure the parser throws ParseException with the correct message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1", expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidStatus_throwsParseException() {
+        // Create a parser with a valid status but simulate an invalid scenario
+        StatusCommandParser parser = new StatusCommandParser(null);
+
+        // Ensure the parser throws ParseException with the correct message
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1", expectedMessage);
+    }
+
+    @Test
+    public void parse_nonNumericIndex_throwsParseException() {
+        // Create the parser with a valid status 'PENDING'
+        StatusCommandParser parser = new StatusCommandParser(Status.PENDING);
+
+        // Ensure the parser throws ParseException for non-numeric index
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "abc", expectedMessage);
+    }
 }
