@@ -83,6 +83,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Boolean getExportFilterGoodsStatus() {
+        return userPrefs.getExportFilterGoods();
+    }
+
+    @Override
+    public void setExportFilterGoodsToTrue() {
+        userPrefs.setExportFilterGoodsToTrue();
+    }
+
+    @Override
+    public void setExportFilterGoodsToFalse() {
+        userPrefs.setExportFilterGoodsToFalse();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -218,6 +233,13 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyReceiptLog getGoods() {
         return goodsList;
+    }
+
+    @Override
+    public ReadOnlyReceiptLog getGoodsFiltered() {
+        ReceiptLog receipts = new ReceiptLog();
+        receipts.setReceipts(this.getFilteredReceiptsList().stream().toList());
+        return receipts;
     }
 
     @Override

@@ -21,6 +21,8 @@ public interface GoodsStorage {
      */
     Path getGoodsFilePath();
 
+    Path getExportGoodsFilePath();
+
     /**
      * Returns Goods data as a {@link GoodsReceipt}.
      * Returns {@code Optional.empty()} if storage file is not found.

@@ -17,6 +17,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path goodsFilePath = Paths.get("data", "goods.csv");
 
+    private Path filterGoodsFilePath = Paths.get("data", "filteredGoods.csv");
+
+    private Boolean exportFilterGoods = false;
+
     /**
      * Creates a {@code UserPrefs} with default values.
      */
@@ -49,6 +53,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    public Boolean getExportFilterGoods() {
+        return exportFilterGoods;
+    }
+
+    public void setExportFilterGoodsToTrue() {
+        this.exportFilterGoods = true;
+    };
+
+    public void setExportFilterGoodsToFalse() {
+        this.exportFilterGoods = false;
+    };
+
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
@@ -57,11 +73,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return goodsFilePath;
     }
 
+    public Path getFilterGoodsFilePath() {
+        return filterGoodsFilePath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    public void setFilterGoodsFilePath(Path goodsFilePath) {
+        requireNonNull(goodsFilePath);
+        this.goodsFilePath = goodsFilePath;
+    }
     public void setGoodsFilePath(Path goodsFilePath) {
         requireNonNull(goodsFilePath);
         this.goodsFilePath = goodsFilePath;

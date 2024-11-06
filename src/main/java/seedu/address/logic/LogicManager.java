@@ -50,10 +50,13 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveGoods(model.getGoods());
+            if (model.getExportFilterGoodsStatus()) {
+                storage.saveFilteredGoods(model.getGoodsFiltered());
+                model.setExportFilterGoodsToFalse();
+            }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

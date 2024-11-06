@@ -38,6 +38,21 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * gets status of export
+     */
+    Boolean getExportFilterGoodsStatus();
+
+    /**
+     * Sets export to true
+     */
+    void setExportFilterGoodsToTrue();
+
+    /**
+     * Sets export to false
+     */
+    void setExportFilterGoodsToFalse();
+
+    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
@@ -106,11 +121,15 @@ public interface Model {
      */
     void setGoods(ReadOnlyReceiptLog goodsReceipts);
 
-
     /**
      * Returns the goods list.
      */
     ReadOnlyReceiptLog getGoods();
+
+    /**
+     * Returns the filtered goods list.
+     */
+    ReadOnlyReceiptLog getGoodsFiltered();
 
     /**
      * Adds the given goods.
