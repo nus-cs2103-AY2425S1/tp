@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,22 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * A CommandBox component that is part of the UI, allowing the user to input commands.
+ * The CommandBox supports autocomplete functionality for command input, including autocompleting
+ * command words and parameters, and displaying suggestions for the current command context.
+ *
+ * <p>
+ * Users can press the Control key for autocompletion when typing a command or parameter.
+ * This component dynamically updates the suggestion based on the user's input and the available
+ * commands in the command syntax map.
+ * </p>
+ *
+ * <p>
+ * The CommandBox listens for user input, and upon submission, it delegates the execution
+ * of the command to the provided {@code CommandExecutor}.
+ * </p>
+ */
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
@@ -42,6 +59,12 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("help", "help");
     }
 
+    /**
+     * Creates a CommandBox component that allows users to input and execute commands.
+     * It also provides autocomplete suggestions for commands and parameters.
+     *
+     * @param commandExecutor The executor responsible for executing commands input by the user.
+     */
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
@@ -184,7 +207,9 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleControlCompletion() {
         String input = commandTextField.getText().trim();
-        if (input.isEmpty()) return;
+        if (input.isEmpty()) {
+            return;
+        }
 
         String[] words = input.split("\\s+");
         String command = words[0];
@@ -201,7 +226,8 @@ public class CommandBox extends UiPart<Region> {
                 // Find the next parameter that hasn't been entered
                 for (String nextWord : remainingWords) {
                     if (!isParameterAlreadyEntered(input, nextWord)) {
-                        String completion = nextWord.contains("/") ? nextWord.substring(0, nextWord.indexOf("/") + 1) : nextWord;
+                        String completion = nextWord.contains("/")
+                                ? nextWord.substring(0, nextWord.indexOf("/") + 1) : nextWord;
 
                         // Add the next parameter to the input
                         String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
@@ -221,7 +247,7 @@ public class CommandBox extends UiPart<Region> {
                 // Check if the command expects additional parameters based on its syntax definition
                 String fullSyntax = commandSyntaxMap.get(cmd);
                 if (fullSyntax.split("\\s+").length > 1) {
-                    newText += " ";  // Add trailing space if there are parameters expected
+                    newText += " "; // Add trailing space if there are parameters expected
                 }
 
                 commandTextField.setText(newText);
@@ -250,7 +276,9 @@ public class CommandBox extends UiPart<Region> {
             }
         }
 
-        if (inputPos >= syntaxWords.length) return "";
+        if (inputPos >= syntaxWords.length) {
+            return "";
+        }
 
         StringBuilder remaining = new StringBuilder();
         for (int i = inputPos; i < syntaxWords.length; i++) {
@@ -277,7 +305,9 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
-        if (commandText.isEmpty()) return;
+        if (commandText.isEmpty()) {
+            return;
+        }
 
         try {
             commandExecutor.execute(commandText);
@@ -299,6 +329,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Functional interface for executing commands.
+     */
     @FunctionalInterface
     public interface CommandExecutor {
         CommandResult execute(String commandText) throws CommandException, ParseException;
