@@ -5,8 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Submission that all students in the address book have taken.
- * Guarantees: immutable; name is valid as declared in {@link #isValidSubmissionName(String)}
- * Submission Status is null until initialised to a specific student by {@code AddSubmissionStatus}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidSubmissionName(String)}.
+ * Submission Status is "NIL" until initialised to a specific student by {@code AddSubmissionStatus}.
  */
 public class Submission {
 
@@ -26,7 +26,7 @@ public class Submission {
     public final String submissionStatus;
 
     /**
-     * Constructs a {@code Submission}
+     * Constructs a {@code Submission}.
      *
      * @param submissionName A valid submission name.
      */

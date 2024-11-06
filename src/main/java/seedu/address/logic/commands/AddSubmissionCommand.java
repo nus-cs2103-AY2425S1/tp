@@ -5,7 +5,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,10 +31,12 @@ public class AddSubmissionCommand extends Command {
     public static final String MESSAGE_DUPLICATE_SUBMISSION = "This submission already exists.";
     public static final String MESSAGE_UPDATE_SUBMISSION = "Submission updated for all students: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(AddSubmissionCommand.class);
+
     private final Submission submission;
 
     /**
-     * Creates an AddSubmissionCommand to add the specified {@code Submission}
+     * Creates an AddSubmissionCommand to add the specified {@code Submission}.
      */
     public AddSubmissionCommand(Submission submission) {
         requireNonNull(submission);
@@ -42,6 +47,7 @@ public class AddSubmissionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
+        assert lastShownList != null;
 
         boolean isUpdated = false;
         boolean skip = false;
@@ -65,12 +71,15 @@ public class AddSubmissionCommand extends Command {
         }
         if (!isUpdated) {
             // No updates, submission is a duplicate
+            logger.log(Level.WARNING, "Submission is a duplicate.");
             throw new CommandException(MESSAGE_DUPLICATE_SUBMISSION);
         } else if (!skip) {
             // No skips, submission is a new submission
+            logger.log(Level.INFO, "New submission is added.");
             return new CommandResult(String.format(MESSAGE_ADDSUBMISSION_SUCCESS, submission));
         }
         // Both skips and updates, submission is added for newly added students
+        logger.log(Level.INFO, "Submission is updated for all students.");
         return new CommandResult(String.format(MESSAGE_UPDATE_SUBMISSION, submission));
     }
 

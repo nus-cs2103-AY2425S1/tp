@@ -6,7 +6,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -33,12 +36,14 @@ public class AddSubmissionStatusCommand extends Command {
     public static final String MESSAGE_SUBMISSION_NOT_FOUND = "This submission does not exist.";
     public static final String MESSAGE_SUBMISSIONSTATUS_NOT_EDITED = "The submission status was not changed!.";
 
+    private static final Logger logger = LogsCenter.getLogger(AddSubmissionStatusCommand.class);
+
     private final Index index;
     private final Submission submission;
     private final String submissionStatus;
 
     /**
-     * Creates an AddSubmissionStatusCommand to add a {@code submissionStatus} to the specified {@code Submission}
+     * Creates an AddSubmissionStatusCommand to add a {@code SubmissionStatus} to the specified {@code Submission}.
      */
     public AddSubmissionStatusCommand(Index index, Submission submission, String submissionStatus) {
         requireAllNonNull(index, submission, submissionStatus);
@@ -51,21 +56,28 @@ public class AddSubmissionStatusCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        assert lastShownList != null;
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Index out of bounds.");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        assert personToEdit != null;
+
         Set<Submission> updatedSubmissions = personToEdit.getSubmissions();
+
         // throw an error if the input submission status is the same as in the system
         for (Submission submissionInSet : updatedSubmissions) {
             if (submissionInSet.equals(submission) && submissionInSet.submissionStatus.equals(submissionStatus)) {
+                logger.log(Level.WARNING, "Submission status unchanged.");
                 throw new CommandException(MESSAGE_SUBMISSIONSTATUS_NOT_EDITED);
             }
         }
         Submission updatedSubmission = new Submission(submission.submissionName, submissionStatus);
         if (!updatedSubmissions.remove(submission)) {
+            logger.log(Level.WARNING, "Submission does not exist.");
             throw new CommandException(MESSAGE_SUBMISSION_NOT_FOUND);
         }
         updatedSubmissions.add(updatedSubmission);
@@ -76,6 +88,7 @@ public class AddSubmissionStatusCommand extends Command {
                 personToEdit.getExams(), personToEdit.getTags(), personToEdit.getAttendances(), updatedSubmissions);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.log(Level.INFO, "Submission status added.");
         return new CommandResult(String.format(MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS, editedPerson.getDisplayedName(),
                 submission, submissionStatus));
     }

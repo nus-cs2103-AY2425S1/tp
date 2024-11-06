@@ -5,7 +5,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,10 +30,12 @@ public class DeleteSubmissionCommand extends Command {
     public static final String MESSAGE_DELETESUBMISSION_SUCCESS = "Submission deleted: %1$s";
     public static final String MESSAGE_SUBMISSION_NOT_FOUND = "This submission was not found.";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteSubmissionCommand.class);
+
     private final Submission submission;
 
     /**
-     * Creates an DeleteSubmissionCommand to delete the specified {@code Submission}.
+     * Creates a DeleteSubmissionCommand to delete the specified {@code Submission}.
      */
     public DeleteSubmissionCommand(Submission submission) {
         requireNonNull(submission);
@@ -41,6 +46,7 @@ public class DeleteSubmissionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
+        assert lastShownList != null;
 
         boolean isUpdated = false;
 
@@ -58,8 +64,10 @@ public class DeleteSubmissionCommand extends Command {
         }
         if (!isUpdated) {
             // No updates, submission not found in any students
+            logger.log(Level.WARNING, "Submission does not exist.");
             throw new CommandException(MESSAGE_SUBMISSION_NOT_FOUND);
         }
+        logger.log(Level.INFO, "Submission deleted.");
         return new CommandResult(String.format(MESSAGE_DELETESUBMISSION_SUCCESS, submission));
     }
 
