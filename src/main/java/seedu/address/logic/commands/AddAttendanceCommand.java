@@ -31,7 +31,9 @@ public class AddAttendanceCommand extends Command {
             + "Example to add absent date: " + COMMAND_WORD + " 1 ad/24-09-2024 ar/MC\n"
             + "Example to delete absent date: " + COMMAND_WORD + " 1 ad/24-09-2024 ar/\n";
 
-    public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "Added attendance for Person: %1$s";
+    public static final String MESSAGE_ADD_ATTENDANCE_SUCCESS = "Added attendance for Person: %1$s\n"
+            + "Absent date: %2$s\n"
+            + "Absent reason: %3$s";
     public static final String MESSAGE_DELETE_ATTENDANCE_SUCCESS = "Removed attendance from Person: %1$s";
     public static final String MESSAGE_ABSENT_DATE_NOT_FOUND = "This date has not been recorded before.";
     private static final Logger logger = LogsCenter.getLogger(AddAttendanceCommand.class);
@@ -94,9 +96,12 @@ public class AddAttendanceCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         assert personToEdit != null;
-        String message = !absentReason.absentReason.isEmpty()
-                ? MESSAGE_ADD_ATTENDANCE_SUCCESS : MESSAGE_DELETE_ATTENDANCE_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+        if (absentReason.absentReason.isEmpty()) {
+            return String.format(MESSAGE_DELETE_ATTENDANCE_SUCCESS, personToEdit.getName());
+        } else {
+            return String.format(MESSAGE_ADD_ATTENDANCE_SUCCESS, personToEdit.getName(),
+                    this.absentDate.absentDate, this.absentReason.absentReason);
+        }
     }
 
     @Override
