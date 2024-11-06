@@ -154,14 +154,14 @@ public class UniquePersonListTest {
 
     @Test
     public void updatePersonInvolveInEditedWedding_targetWeddingNull_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniquePersonList.updatePersonInvolveInEditedWedding(null, WEDDING_B));
+        assertThrows(NullPointerException.class, () -> uniquePersonList
+                .updatePersonInvolveInEditedWedding(null, WEDDING_B));
     }
 
     @Test
     public void updatePersonInvolveInEditedWedding_editedWeddingNull_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniquePersonList.updatePersonInvolveInEditedWedding(WEDDING_A, null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList
+                .updatePersonInvolveInEditedWedding(WEDDING_A, null));
     }
 
     @Test
