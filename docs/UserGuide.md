@@ -6,7 +6,13 @@
 
 # CampusConnect User Guide
 
-CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CC can get your contact management tasks done faster than traditional GUI apps.
+**CampusConnect** is the ultimate contact management app for NUS students with speedy typing skills. Our
+contact tagging, finding, and organisation features ensure that with just a few keystrokes, you never forget
+who you meet, where you met them, and what their contact details are.
+
+**CampusConnect** offers a seamless and quick contact management experience using our *Command Line Interface* style of
+input, where commands are processed in the blink of an eye. If you can type quickly, we can get it done faster than 
+any traditional point-and-click management app.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -51,6 +57,9 @@ CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Prefixes (for the contact information) refer to any of these: `n/`, `p/`, `e/`, `t/`, which are
+  used for contact information (name, phone, email and tag respectively)
+
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -71,18 +80,15 @@ CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use 
 ## Command summary
 
 Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find by name**   | `find n/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
-**Find by email**   | `find e/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e/bigman123@email.com bobbyrick@example.com`
-**Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
-**Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
+**Find by contact information**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
 **Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag t/TAG [t/MORE_TAGS] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
 **Undo action** | `undo`
 **Redo action** | `redo`
 **List**   | `list`
@@ -92,12 +98,13 @@ Action     | Format, Examples
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message with a clickable hyperlink.
+
+When clicked, this hyperlink will show the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -145,30 +152,23 @@ Finds persons whose names, email address, contact number, or tag contain any of 
 
 Format: 
 
-`find n/KEYWORD [MORE_KEYWORDS]`
+`find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`
 
-`find p/KEYWORD [MORE_KEYWORDS]`
-
-`find e/KEYWORD [MORE_KEYWORDS]`
-
-`find t/KEYWORD [MORE_KEYWORDS]`
-
-
-* Only one field type can be specified per command.
-* Only the specified field is searched.
+* Only the specified fields are searched.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/bernice n/charlotte` returns `Bernice Yu`, `Charlotte Oliveiro`<br>
-  ![result for 'find n/bernice n/charlotte'](images/findBerniceCharlotteResult.png)
+How `find` works with multiple parameters:
+* If multiple keywords for a field are present, `find` will display contacts that satisfy *any* keyword for that field.
+* If multiple fields are present, `find` will display contacts that satisfy **all** of these fields.
 
-Disallowed examples:
-* `find n/John p/82345670` will not succeed as intended, as the command only searches on single fields. "`p/82345670`" will be treated as a keyword string.
+Examples:
+* `find n/bernice t/is1108` returns `Bernice Yu`<br>
+  ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png)
+* `find t/floor t/run` returns all contacts with any tag containing `floor` or `run` <br>
+  ![result for 'find t/floor t/run'](images/findFloorRunResult.png)
 
 ### Deleting a person : `delete`
 
@@ -188,7 +188,7 @@ Examples:
 
 Adds the specified person's tag.
 
-Format: `addtag INDEX t/TAG [t/MORE_TAGS]`
+Format: `addtag INDEX t/TAG [t/MORE_TAGS]…​`
 
 * Adds the tags with the specified name `TAG` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -222,7 +222,7 @@ Disallowed examples:
 
 Categorizes a tag under a defined category.
 
-Format: `cattag t/TAG [t/MORE_TAGS] CATEGORY`
+Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 * Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
 * Currently available categories and their respective keywords are:
