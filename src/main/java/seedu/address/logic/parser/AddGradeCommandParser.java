@@ -42,7 +42,7 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
         Index index = ParserUtil.parseIndex(argMultiMap.getPreamble());
 
         // Parse the exam name
-        String examName = ParserUtil.parseTestName(argMultiMap.getValue(PREFIX_NAME).get());
+        String examName = ParserUtil.parseTestName(argMultiMap.getValue(PREFIX_NAME).get()).toLowerCase();
 
         // Use ParserUtil to parse score and weightage as floats
         float examScore = ParserUtil.parseScore(argMultiMap.getValue(PREFIX_SCORE).get());
