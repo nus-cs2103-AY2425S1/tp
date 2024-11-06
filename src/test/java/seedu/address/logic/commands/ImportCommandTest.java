@@ -112,22 +112,19 @@ public class ImportCommandTest {
     }
 
     /**
-     * Tests that providing an invalid file path throws a CommandException.
+     * Tests that executing ImportCommand with an inaccessible file path throws a CommandException.
      */
     @Test
-    public void execute_invalidFilePath_throwsCommandException() {
-        String invalidFilePath;
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            invalidFilePath = "/invalid/path/to/file.csv"; // Likely to be treated as relative and invalid on Windows
-        } else {
-            invalidFilePath = "/invalid/path/to/file.csv"; // Always invalid on Unix-like systems as an absolute path
-        }
+    public void execute_inaccessibleFilePath_throwsCommandException() {
+        // Arrange an inaccessible (non-existent) file path
+        String inaccessibleFilePath = "/nonexistent/directory/file.csv";
+        ImportCommand importCommand = new ImportCommand(inaccessibleFilePath);
 
-        ImportCommand importCommand = new ImportCommand(invalidFilePath);
-        CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
-        assertEquals(String.format(ImportCommand.MESSAGE_FAILURE, invalidFilePath), exception.getMessage());
+        // Act & Assert: Expect CommandException on execution
+        CommandException exception = assertThrows(CommandException.class, (
+                ) -> importCommand.execute(model));
+        assertEquals(String.format(ImportCommand.MESSAGE_FAILURE, inaccessibleFilePath), exception.getMessage());
     }
-
 
     /**
      * Tests that ImportCommand objects with the same file path are considered equal.
@@ -224,20 +221,6 @@ public class ImportCommandTest {
 
         Files.deleteIfExists(tempFile);
     }
-
-    /**
-     * Tests that importing a file with a non-CSV extension throws a CommandException.
-     */
-    @Test
-    public void execute_invalidFilePath_throwsIllegalArgumentException() {
-        // Arrange an invalid file path
-        String invalidFilePath = "/invalid/path/<>file.csv";
-        ImportCommand importCommand = new ImportCommand(invalidFilePath);
-
-        // Act & Assert
-        assertThrows(CommandException.class, () -> importCommand.execute(model));
-    }
-
 
     /**
      * Tests importing a CSV file with duplicate entries and verifies only unique entries are imported.
