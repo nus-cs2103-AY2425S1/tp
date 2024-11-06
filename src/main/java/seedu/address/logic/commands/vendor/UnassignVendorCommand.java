@@ -29,7 +29,7 @@ public class UnassignVendorCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Contact unassigned and is no longer a vendor: %1$s";
+    public static final String MESSAGE_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "This vendor cannot be unassigned "
         + "as it still has a task.";

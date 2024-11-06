@@ -34,6 +34,7 @@ public class Vendor extends Person {
                 && otherVendor.getName().equals(getName());
     }
 
+
     /**
      * Returns true if both vendors have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

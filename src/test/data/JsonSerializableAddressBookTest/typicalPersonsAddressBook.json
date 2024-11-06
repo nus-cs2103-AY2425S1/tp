@@ -37,7 +37,7 @@
     "tags" : [ ],
     "tasks": [{
       "type" : "todo",
-      "description" : "Buy cake",
+      "description" : "Buy groceries",
       "isDone" : false
     }]
   }, {
@@ -72,7 +72,8 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "tags" : [],
+    "tasks" : []
   } ],
   "vendors": [],
   "tags": ["florist"],

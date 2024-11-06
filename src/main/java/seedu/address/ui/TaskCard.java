@@ -13,7 +13,7 @@ import seedu.address.model.task.Task;
  */
 public class TaskCard extends UiPart<Region> {
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String DEFAULT_FXML = "TaskListCard.fxml";
 
     public final Task task;
 
@@ -27,11 +27,22 @@ public class TaskCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label isDone;
+
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
+     * Uses the default FXML file (TaskListCard.fxml).
      */
     public TaskCard(Task task, int displayedIndex) {
-        super(FXML);
+        this(task, displayedIndex, DEFAULT_FXML);
+    }
+
+
+    /**
+     * Creates a {@code TaskCard} with the given {@code Task} and index to display,
+     * using the specified FXML file.
+     */
+    public TaskCard(Task task, int displayedIndex, String fxmlFileName) {
+        super(fxmlFileName);
         this.task = task;
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription());

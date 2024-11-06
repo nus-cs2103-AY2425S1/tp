@@ -211,6 +211,11 @@ public class CreateTagCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
