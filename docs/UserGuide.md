@@ -96,7 +96,7 @@ Displays the list of vendors and/or events in EventTory.
 
 #### Format: `list [v/] [e/]`
 
-* The list(s) displayed depends on whether the `v/` and/or `e/` prefix is specified.
+* The list(s) displayed depends on whether the `v/` and/or `e/` prefix(es) is specified.
 * If no prefixes are specified, both the vendor and event lists will be displayed.
 * The prefixes can be specified in any order.
 * If values are specified after the prefixes (e.g. `v/2`, `e/Party`), the value is ignored.
