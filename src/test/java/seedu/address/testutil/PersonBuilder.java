@@ -131,6 +131,15 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code WorkExp} of the {@code Person} being built to {@code null}.
+     * This method is useful for testing scenarios where a {@code Person} has no work experience.
+     */
+    public PersonBuilder withNoWorkExp() {
+        this.workExp = null;
+        return this;
+    }
+
+    /**
      * Sets the {@code University} of the {@code Person} that we are building.
      */
     public PersonBuilder withUniversity(String university) {
