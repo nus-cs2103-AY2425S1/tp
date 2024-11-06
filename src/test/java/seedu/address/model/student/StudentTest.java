@@ -127,7 +127,7 @@ public class StudentTest {
     @Test
     public void isClash_noClash_returnsFalse() {
         Student studentA = new StudentBuilder().withSchedule("Monday-0900-1100").build();
-        Student studentB = new StudentBuilder().withSchedule("Monday-1200-1300").build();
+        Student studentB = new StudentBuilder().withSchedule("Monday-1100-1300").build();
         assertFalse(studentA.isClash(studentB), "Students should not clash when their schedules do not overlap.");
     }
 

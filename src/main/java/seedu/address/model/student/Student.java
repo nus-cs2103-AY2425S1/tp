@@ -105,6 +105,7 @@ public class Student {
 
     /**
      * Determines whether there is a scheduling conflict between this student and another student.
+     *
      * @param otherStudent The student to compare against for scheduling conflicts.
      * @return true if there is a clash in schedules with the specified other student.
      */
