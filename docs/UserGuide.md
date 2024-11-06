@@ -57,8 +57,6 @@ tasks done faster than traditional GUI apps.
 
 <br><br/>
 
-<div style="page-break-after: always;"></div>
-
 ## Getting Around
 
 ![markedUI](images/markedUI.png)
@@ -66,6 +64,8 @@ tasks done faster than traditional GUI apps.
 1. **Output Box**: After you enter a command, any messages (informative or error-related) will be displayed here!
 2. **Contacts Panel**: Here is where you can find your contacts. The contacts displayed here depend on the wedding you are currently viewing.
 3. **Weddings Panel**: Here is where you can find your weddings. The currently viewed wedding will be displayed in the blue box at the top.
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
