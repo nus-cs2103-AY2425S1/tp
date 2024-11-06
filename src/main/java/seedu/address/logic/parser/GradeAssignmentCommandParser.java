@@ -23,27 +23,29 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
      */
     public GradeAssignmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap =
+        ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX,
                         PREFIX_ASSIGNMENT_INDEX, PREFIX_ASSIGNMENT_SCORE);
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
-                PREFIX_ASSIGNMENT_SCORE)) {
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX, PREFIX_ASSIGNMENT_SCORE)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GradeAssignmentCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGNMENT_SCORE, PREFIX_STUDENT_INDEX,
+                PREFIX_ASSIGNMENT_INDEX);
+
         Index studentIndex;
         Index assignmentIndex;
         int score;
 
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGNMENT_SCORE, PREFIX_STUDENT_INDEX,
-                PREFIX_ASSIGNMENT_INDEX);
         try {
-            studentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_STUDENT_INDEX).get());
-            assignmentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
-            score = ParserUtil.parseScore(argumentMultimap.getValue(PREFIX_ASSIGNMENT_SCORE).get());
+            studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
+            assignmentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
+            score = ParserUtil.parseScore(argMultimap.getValue(PREFIX_ASSIGNMENT_SCORE).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    GradeAssignmentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
         return new GradeAssignmentCommand(studentIndex, assignmentIndex, score);
     }

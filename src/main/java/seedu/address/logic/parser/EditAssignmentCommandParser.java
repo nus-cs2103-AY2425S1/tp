@@ -23,39 +23,40 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
      */
     public EditAssignmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap =
+        ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
                         PREFIX_ASSIGNMENT_NAME, PREFIX_ASSIGNMENT_MAX_SCORE);
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)) {
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditAssignmentCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
+                PREFIX_ASSIGNMENT_NAME, PREFIX_ASSIGNMENT_MAX_SCORE);
 
         Index studentIndex;
         Index assignmentIndex;
 
         try {
-            studentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_STUDENT_INDEX).get());
-            assignmentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
+            studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
+            assignmentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditAssignmentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
-
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX,
-                PREFIX_ASSIGNMENT_NAME, PREFIX_ASSIGNMENT_MAX_SCORE);
 
         EditAssignmentCommand.EditAssignmentDescriptor editAssignmentDescriptor =
                 new EditAssignmentCommand.EditAssignmentDescriptor();
 
-        if (argumentMultimap.getValue(PREFIX_ASSIGNMENT_NAME).isPresent()) {
+        if (argMultimap.getValue(PREFIX_ASSIGNMENT_NAME).isPresent()) {
             editAssignmentDescriptor.setName(ParserUtil.parseAssignmentName(
-                    argumentMultimap.getValue(PREFIX_ASSIGNMENT_NAME).get()));
+                    argMultimap.getValue(PREFIX_ASSIGNMENT_NAME).get()));
         }
 
-        if (argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).isPresent()) {
+        if (argMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).isPresent()) {
             editAssignmentDescriptor.setMaxScore(ParserUtil.parseMaxScore(
-                    argumentMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).get()));
+                    argMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).get()));
         }
 
         if (!editAssignmentDescriptor.isAnyFieldEdited()) {

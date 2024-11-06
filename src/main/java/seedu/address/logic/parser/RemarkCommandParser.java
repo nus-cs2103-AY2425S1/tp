@@ -25,7 +25,8 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_REMARK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_REMARK)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_REMARK)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
 
@@ -36,7 +37,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         try {
             studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
 
         // Extract remark, ensuring it is non-empty and trimmed

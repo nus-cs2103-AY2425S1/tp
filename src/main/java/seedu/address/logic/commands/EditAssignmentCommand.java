@@ -29,7 +29,7 @@ public class EditAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the detail of an existing assignment "
             + "belonging to an existing student based on the student's index number in the displayed student list, "
-            + "and the assignment's index belonging to the student."
+            + "and the assignment's index belonging to the student. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
@@ -93,7 +93,8 @@ public class EditAssignmentCommand extends Command {
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS, assignmentIndex.getOneBased(),
-                studentToEdit.getName().fullName, editedAssignment.getName(), editedAssignment.getMaxScore()));
+                studentToEdit.getName().fullName, editedAssignment.getName(), editedAssignment.getMaxScore()),
+                studentToEdit, studentIndex.getZeroBased());
     }
 
     private static Assignment createEditedAssignment(Assignment assignmentToEdit,

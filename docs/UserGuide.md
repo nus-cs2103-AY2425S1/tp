@@ -19,12 +19,19 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `TAchy.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for TAchy.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
-   run the application.<br>
+   run the application. 
+<br> By default, it should be saved in your Downloads folder. <br>
+   - For Windows users: Type `cd Downloads`, and press `Enter`.
+   - For MacOS users: Type `cd ~/Downloads`, and press `Enter`.
+   - For Linux users: Type `cd ~/Downloads`, and press `Enter`.
+   
+1. Type the command `java -jar TAchy.jar` into the terminal to run the application.
+<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -36,9 +43,13 @@ management tasks done faster than traditional GUI apps.
    * `add_student n/John Doe p/98765432 e/johnd@example.com ` : Adds a student named
      `John Doe` to the app.
 
-   * `view_student 2 ` : Displays the details of the 2nd student shown in the current list.
+   * `view_student 2` : Displays the details of the 2nd student shown in the current list.
 
    * `delete_student 3` : Deletes the 3rd student shown in the current list.
+   
+   * `add_assignment si/1 an/Assignment 1 ms/100` : Adds Assignment 1 to the 1st student in the current list with max score 100.
+
+   * `grade si/1 ai/1 s/100` : Edits the score of the 1st assignment belonging to the 1st student in the current list to be 100.
 
    * `clear` : Deletes all students.
 
@@ -108,6 +119,10 @@ Format: `view_student INDEX`
 ![Explanation for INDEX](images/student_index.png)
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Constraints:
+* Index must exist in the current displayed student list.
+  <box type="tip" seamless>
+
 Examples:
 * `list` followed by `view_student 2` displays the 2nd student in the list.
 * `find Betsy` followed by `view_student 1` displays the 1st student in the results of the `find` command.
@@ -174,10 +189,19 @@ Adds an Assignment to the app.
 
 Format: `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
+* Adds an assignment to the student at the specified `STUDENT_INDEX`. The index refers to the index number shown in the 
+  displayed student list.
+* The max score must be a positive integer.
+
+Constraints:
+* Assignment name must be at most 256 characters long, and must be alphanumeric
+  <box type="tip" seamless>
+
 Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
   3rd student in the app.
-* `add_assignment si/1 an/Assignment 1 ms/100`
+* `list` followed by `add_assignment si/1 an/Assignment 1 ms/100` adds an assignment to the
+  1st student in the app.
   ![result for 'add_assignment si/1 an/Assignment 1 ms/100'](images/addAssignment.jpg)
 
 ### Deleting an assignment: `delete_assignment`
@@ -186,10 +210,38 @@ Deletes an assignment belonging to a student based on the student's index number
 
 Format: `delete_assignment si/INDEX ai/INDEX`
 
+* Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
+  list and the assignment list on the student detail panel respectively. The index **must be a positive integer** 1, 2, 3, …​
+  
 Examples:
 * `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
 * `delete_assignment si/1 ai/1`
   ![result for 'delete_assignment si/1 ai/1'](images/deleteAssignment.png)
+
+### Editing an assignment: `edit_assignment`
+
+Edits an assignment belonging to a student based on the student's index number and the assignment's index.
+
+Format: `edit_assignment si/INDEX ai/INDEX`
+
+* Edits the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
+  list and the assignment list on the student detail panel respectively.
+  The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+* `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st 
+  student in the results of the `find` command to the new name and new max score specified.
+* `edit_assignment si/1 ai/1 an/Assignment 1` will only change the name of the selected assignment.
+* `edit_assignment si/1 ai/1 ms/100` will only change the max score of the selected assignment.
+* `edit_assignment si/1 ai/2 an/Math Assignment ms/100` will change the 2nd assignment of the 1st student to be with 
+  a new name `Math Assignment` and a new max score `100`.
+
+  Before execution:
+  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment1.png)
+  After execution:
+  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment2.png)
 
 ### Marking an assignment as submitted: `mark`
 
@@ -212,12 +264,20 @@ Examples:
 
 ### Grading an assignment: `grade`
 
-Edits the s of an assignment belonging to a student and marks it as submitted.
+Edits the score of an assignment belonging to a student and marks it as submitted.
 
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
 
+* Grades the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student 
+  list and the assignment list on the student detail panel respectively. The index **must be a positive integer** 1, 2, 3, …​
+* The score must be a positive integer that is in bounds of the minimum and maximum scores of the assignment.
+* The score can be regraded multiple times by using the `grade` command again.
+
 Examples:
-* `grade si/1 ai/1 s/100`
+* `view_student 1` followed by `grade si/1 ai/1 s/80` grades the 1st assignment of the 1st
+    student in the results of the `find` command with a score of 80.
+* `grade si/1 ai/1 s/80`
+  ![result for `grade si/1 ai/1 s/80`](images/gradeAssignment.png)
 
 ### Adding a remark to a student: `remark`
 Adds a remark to a existing student in the displayed list.
@@ -290,6 +350,7 @@ Action            | Format, Examples
 **Help**          | `help`
 **Add Assignment**| `add_assignment si/STUDENT_INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
 **Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
+**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
 **Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
 **Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
 **Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`

@@ -39,8 +39,7 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
             studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
             assignmentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteAssignmentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
         return new DeleteAssignmentCommand(studentIndex, assignmentIndex);
     }
