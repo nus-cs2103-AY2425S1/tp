@@ -4,8 +4,6 @@
   pageNav: 3
 ---
 
-*Last edited by: somethingfishyfishy 10/06/24 12:55 AM*
-
 # AB-3 Developer Guide
 
 <!-- * Table of Contents -->
@@ -15,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- Sample data for testing purpose developed by [Wu Zengfu](AboutUs.md#wu-zengfu): https://github.com/wuzengfu/tp_util
+- JavaFX Pagination documentation: https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Pagination.html
+
 
 --------------------------------------------------------------------------------------------------------------------
 
