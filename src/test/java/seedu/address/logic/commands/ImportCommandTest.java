@@ -116,12 +116,18 @@ public class ImportCommandTest {
      */
     @Test
     public void execute_invalidFilePath_throwsCommandException() {
-        String invalidFilePath = "/invalid/path/to/file.csv";
-        ImportCommand importCommand = new ImportCommand(invalidFilePath);
+        String invalidFilePath;
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            invalidFilePath = "/invalid/path/to/file.csv"; // Likely to be treated as relative and invalid on Windows
+        } else {
+            invalidFilePath = "/invalid/path/to/file.csv"; // Always invalid on Unix-like systems as an absolute path
+        }
 
+        ImportCommand importCommand = new ImportCommand(invalidFilePath);
         CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
         assertEquals(String.format(ImportCommand.MESSAGE_FAILURE, invalidFilePath), exception.getMessage());
     }
+
 
     /**
      * Tests that ImportCommand objects with the same file path are considered equal.

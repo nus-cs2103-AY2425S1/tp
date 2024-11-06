@@ -111,6 +111,12 @@ public class ImportCommand extends Command {
         if (!filePath.toLowerCase().endsWith(".csv")) {
             throw new IllegalArgumentException("The file extension must be .csv");
         }
+
+        if (System.getProperty("os.name").startsWith("Windows") && (filePath.startsWith("/")
+                || filePath.startsWith("\\"))) {
+            throw new IllegalArgumentException("Invalid file path format for Windows: " + filePath);
+        }
+
         if (filePath.matches(".*[<>\"\\|?*].*")) {
             throw new IllegalArgumentException("Invalid file path provided: " + filePath);
         }
