@@ -15,13 +15,13 @@ MindMap is a **desktop app for managing contacts, optimized for use via a  Line 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above [installed](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MindMap application.
+3. Copy the file to the folder you want to use as the _home folder_ for your MindMap application.
 
-1. Open a command terminal,
+4. Open a command terminal,
   - For Windows user,
      1. **Can some window user edit this**
    
@@ -30,22 +30,22 @@ MindMap is a **desktop app for managing contacts, optimized for use via a  Line 
      1. Use command + space, to show the highlight search bar
      2. Type `terminal` into the search bar and select the first option.
    
-3. Copy the filepath of the folder containing Mindmap. For Windows, **shift and right-click** the folder, then select "Copy as Path" from the context menu. For MacOS, follow [this](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ).
-4. Change the file directory to match the location of the folder containing the app. Copy the following line into terminal.
+5. Copy the filepath of the folder containing Mindmap. For Windows, **shift and right-click** the folder, then select "Copy as Path" from the context menu. For MacOS, follow [this](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ).
+6. Change the file directory to match the location of the folder containing the app. Copy the following line into terminal.
 ```
 cd [Replace this with the copied filepath]
 ```
-6. Copy the followning line into terminal to run the application
+7. Copy the followning line into terminal to run the application
 ```
 java -jar mindmap.jar
 ```
-6. A GUI similar to the below should appear in a few seconds.
+8. A GUI similar to the below should appear in a few seconds.
 >[!NOTE]
 >The app contains some sample data.<br>
    
    ![Ui](images/Ui.png)
 
-7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+9. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -58,7 +58,7 @@ java -jar mindmap.jar
 
    * `exit` : Exits the app.
 
-8. Refer to the [Features](#features) below for details of each command.
+10. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
