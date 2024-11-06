@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -155,4 +157,8 @@ public interface Model {
     /** Resorts Events */
     void reSortEvents();
 
+    /**
+     * Return person event association mapping
+     */
+    public Map<Event, ArrayList<Person>> getPersonEventAssociationMap();
 }

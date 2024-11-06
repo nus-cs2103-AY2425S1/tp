@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -62,5 +64,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Return person event association mapping
+     */
+    public Map<Event, ArrayList<Person>> getPersonEventAssociationMap();
 
 }
