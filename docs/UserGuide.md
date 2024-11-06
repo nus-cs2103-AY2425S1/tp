@@ -207,6 +207,7 @@ Format: `addEcNumber INDEX [ep/ECNUMBER]`
 Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
+* `addEcNumber 1 ep/87654321` to update the emergency contact's number 87654321 to the 1st person in the list.
 
 ### Adding Attendance : `addAttendance`
 
