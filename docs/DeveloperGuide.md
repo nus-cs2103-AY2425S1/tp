@@ -311,18 +311,18 @@ Priorities:
 (For all use cases below, the **System** is *Bridal Boss* and the **Actor** is the *Wedding Organizer*.)
 
 #### **Use Case: Delete a Contact**
-1. Wedding Organizer displays person list containing contacts that they wish to set as client for wedding.
+1. Wedding Organizer displays person list containing the contact they wish to delete.
 2. Wedding Organizer deletes a contact using the delete command.
 
 **Extensions:**
 
-- **2a.** Person name/index is not in the displayed list.
+- **2a.** Person name/index is not in the displayed list
     - **2a1.** Error message displayed in result display.
         - Use case ends.
-- **2b.** Duplicate person name
+- **2b.** Duplicate contacts with name containing inputted name
     - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
     - **2b2.** Use case resumes from step 2.
-- **2c.** Person is a client of a wedding.
+- **2c.** Person is a client of a wedding
     - **2c1.** Error message is displayed in result display.
         - Use case ends.
 
