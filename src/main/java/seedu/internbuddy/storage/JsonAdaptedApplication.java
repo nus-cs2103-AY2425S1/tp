@@ -1,8 +1,11 @@
 package seedu.internbuddy.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.internbuddy.commons.core.LogsCenter;
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.application.AppStatus;
 import seedu.internbuddy.model.application.Application;
@@ -14,6 +17,7 @@ import seedu.internbuddy.model.name.Name;
  */
 public class JsonAdaptedApplication {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Application's %s field is missing!";
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedApplication.class);
 
     private final String name;
     private final String description;
@@ -46,28 +50,34 @@ public class JsonAdaptedApplication {
      */
     public Application toModelType() throws IllegalValueException {
         if (name == null) {
+            logger.warning("Missing `name` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
+            logger.warning("`name` has invalid format.");
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
 
         if (description == null) {
+            logger.warning("Missing `description` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
+            logger.warning("`description` has invalid format.");
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         final Description modelDescription = new Description(description);
 
         if (appStatus == null) {
+            logger.warning("Missing `appStatus` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppStatus.class.getSimpleName()));
         }
         if (!AppStatus.isValidStatus(appStatus)) {
+            logger.warning("`appStatus` has invalid format.");
             throw new IllegalValueException(AppStatus.MESSAGE_CONSTRAINTS);
         }
         final AppStatus modelAppStatus = new AppStatus(appStatus);

@@ -1,8 +1,11 @@
 package seedu.internbuddy.storage;
 
+import java.util.logging.Logger;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import seedu.internbuddy.commons.core.LogsCenter;
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.tag.Tag;
 
@@ -10,6 +13,8 @@ import seedu.internbuddy.model.tag.Tag;
  * Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
+
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedTag.class);
 
     private final String tagName;
 
@@ -40,6 +45,7 @@ class JsonAdaptedTag {
      */
     public Tag toModelType() throws IllegalValueException {
         if (!Tag.isValidTagName(tagName)) {
+            logger.warning("`tag` has invalid format.");
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(tagName);

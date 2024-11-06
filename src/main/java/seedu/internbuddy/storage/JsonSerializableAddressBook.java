@@ -49,7 +49,8 @@ class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
-        logger.info("Attempting to convert " + JsonSerializableAddressBook.class + " to " + AddressBook.class);
+        logger.info("Attempting to convert " + JsonSerializableAddressBook.class + " to "
+                + AddressBook.class + "...");
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
             Company company = jsonAdaptedCompany.toModelType();
