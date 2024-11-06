@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.SCIENCE_ASSIGNMENT_GRADED;
 import static seedu.address.testutil.TypicalStudents.HUGH;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

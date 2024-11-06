@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalAssignments.STATUS_N;
 import static seedu.address.testutil.TypicalAssignments.STATUS_Y;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
