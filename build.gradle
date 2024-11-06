@@ -67,7 +67,7 @@ dependencies {
 
 
 shadowJar {
-    archiveBaseName = 'hallpointer.jar'
+    archiveBaseName = 'hallpointer'
     archiveClassifier = null
 }
 run {
