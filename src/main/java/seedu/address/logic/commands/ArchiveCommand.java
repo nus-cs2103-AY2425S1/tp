@@ -1,12 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -17,7 +11,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,47 +27,32 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class ArchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
-    public static final String ARCHIVE_COMMAND_WORD = "archive";
+    public static final String COMMAND_WORD = "archive";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archive the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_POSTAL_CODE + "POSTAL_CODE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String ARCHIVE_MESSAGE_USAGE = ARCHIVE_COMMAND_WORD + ": archives the person identified "
-            + "by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "Example: " + ARCHIVE_COMMAND_WORD + " 1 ";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NOT_ARCHIVED = "At least one field to archive must be provided.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final ArchivePersonDescriptor archivePersonDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param archivePersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public ArchiveCommand(Index index, ArchivePersonDescriptor archivePersonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(archivePersonDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.archivePersonDescriptor = new ArchivePersonDescriptor(archivePersonDescriptor);
     }
 
     @Override
@@ -86,36 +64,35 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToArchive = lastShownList.get(index.getZeroBased());
+        Person archivedPerson = createArchivedPerson(personToArchive, archivePersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToArchive.isSamePerson(archivedPerson) && model.hasPerson(archivedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToArchive, archivedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, Messages.format(archivedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createArchivedPerson(Person personToEdit, ArchivePersonDescriptor archivePersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        PostalCode updatedPostalCode = editPersonDescriptor.getPostalCode().orElse(personToEdit.getPostalCode());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Boolean updatedIsArchive = editPersonDescriptor.getIsArchived().orElse(personToEdit.isArchived());
-        // To be updated
+        Name updatedName = archivePersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = archivePersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = archivePersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = archivePersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        PostalCode updatedPostalCode = archivePersonDescriptor.getPostalCode().orElse(personToEdit.getPostalCode());
+        Set<Tag> updatedTags = archivePersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Boolean updatedIsArchive = archivePersonDescriptor.getIsArchived().orElse(personToEdit.isArchived());
         OrderTracker updatedTracker = personToEdit.getOrderTracker();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode,
-                    updatedTags, updatedTracker, updatedIsArchive);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPostalCode, updatedTags,
+                updatedTracker, updatedIsArchive);
 
     }
 
@@ -126,28 +103,28 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof ArchiveCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        ArchiveCommand otherArchiveCommand = (ArchiveCommand) other;
+        return index.equals(otherArchiveCommand.index)
+                && archivePersonDescriptor.equals(otherArchiveCommand.archivePersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("archivePersonDescriptor", archivePersonDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to archive the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class ArchivePersonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -157,13 +134,13 @@ public class EditCommand extends Command {
         private Boolean isArchived;
         private OrderTracker tracker;
 
-        public EditPersonDescriptor() {}
+        public ArchivePersonDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public ArchivePersonDescriptor(ArchivePersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -172,13 +149,6 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setIsArchived(toCopy.isArchived);
             setTracker(toCopy.tracker);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, postalCode, tags, tracker);
         }
 
         public void setName(Name name) {
@@ -229,11 +199,6 @@ public class EditCommand extends Command {
                 this.tracker = null;
             }
         }
-
-        public Optional<OrderTracker> getTracker() {
-            return Optional.ofNullable(tracker);
-        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -267,18 +232,19 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof ArchivePersonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(postalCode, otherEditPersonDescriptor.postalCode)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(isArchived, otherEditPersonDescriptor.isArchived);
+            ArchiveCommand.ArchivePersonDescriptor otherArchivePersonDescriptor =
+                    (ArchiveCommand.ArchivePersonDescriptor) other;
+            return Objects.equals(name, otherArchivePersonDescriptor.name)
+                    && Objects.equals(phone, otherArchivePersonDescriptor.phone)
+                    && Objects.equals(email, otherArchivePersonDescriptor.email)
+                    && Objects.equals(address, otherArchivePersonDescriptor.address)
+                    && Objects.equals(postalCode, otherArchivePersonDescriptor.postalCode)
+                    && Objects.equals(tags, otherArchivePersonDescriptor.tags)
+                    && Objects.equals(isArchived, otherArchivePersonDescriptor.isArchived);
         }
 
         @Override
@@ -295,3 +261,4 @@ public class EditCommand extends Command {
         }
     }
 }
+
