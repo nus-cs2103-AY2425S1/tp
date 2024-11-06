@@ -13,7 +13,7 @@ import tuteez.model.person.lesson.Lesson;
  * Tests that a {@code Person}'s {@code Lesson} day matches any of the keywords given.
  */
 public class LessonDayContainsKeywordsPredicate implements Predicate<Person> {
-    private static Logger logger = LogsCenter.getLogger(LessonContainsKeywordsPredicate.class);
+    private static Logger logger = LogsCenter.getLogger(LessonDayContainsKeywordsPredicate.class);
     private final List<String> keywords;
 
     public LessonDayContainsKeywordsPredicate(List<String> keywords) {
@@ -27,7 +27,7 @@ public class LessonDayContainsKeywordsPredicate implements Predicate<Person> {
                 .anyMatch(lesson -> matchesAnyKeyword(lesson));
 
         if (!hasMatch) {
-            logger.info("No matches found for person: " + person.getName());
+            logger.info("No matches for lesson day found for person: " + person.getName());
         }
 
         return hasMatch;

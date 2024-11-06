@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import tuteez.logic.commands.FindCommand;
 import tuteez.model.person.predicates.AddressContainsKeywordsPredicate;
 import tuteez.model.person.predicates.CombinedPredicate;
-import tuteez.model.person.predicates.LessonContainsKeywordsPredicate;
+import tuteez.model.person.predicates.LessonTimeContainsKeywordsPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.person.predicates.TagContainsKeywordsPredicate;
 
@@ -31,8 +31,8 @@ public class FindCommandParserTest {
             new AddressContainsKeywordsPredicate(Arrays.asList("choa", "jurong"));
     private static final TagContainsKeywordsPredicate TAG_PREDICATE =
             new TagContainsKeywordsPredicate(Arrays.asList("math", "secondary4"));
-    private static final LessonContainsKeywordsPredicate LESSON_PREDICATE =
-            new LessonContainsKeywordsPredicate(Arrays.asList("monday", "1900-2200"));
+    private static final LessonTimeContainsKeywordsPredicate LESSON_PREDICATE =
+            new LessonTimeContainsKeywordsPredicate(Arrays.asList("monday", "1900-2200"));
 
     private static final String VALID_NAME_DESC = " " + PREFIX_NAME + "alice bob";
     private static final String VALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + "choa jurong";

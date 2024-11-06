@@ -10,41 +10,41 @@ import org.junit.jupiter.api.Test;
 import tuteez.model.person.Person;
 import tuteez.testutil.PersonBuilder;
 
-public class LessonContainsKeywordsPredicateTest {
+public class LessonTimeContainsKeywordsPredicateTest {
 
     private static final Person personWithLesson =
             new PersonBuilder().withName("bob").withLessons("monday 1730-1830").build();
     @Test
     public void test_lessonMatchesDayKeyword_returnsTrue() {
         List<String> keywords = List.of("monday");
-        LessonContainsKeywordsPredicate predicate = new LessonContainsKeywordsPredicate(keywords);
+        LessonTimeContainsKeywordsPredicate predicate = new LessonTimeContainsKeywordsPredicate(keywords);
         assertTrue(predicate.test(personWithLesson));
     }
 
     @Test
     public void test_lessonMatchesTimeRangeKeyword_returnsTrue() {
         List<String> keywordsStartBefore = List.of("1700-1800");
-        LessonContainsKeywordsPredicate predicateStartBefore = new LessonContainsKeywordsPredicate(keywordsStartBefore);
+        LessonTimeContainsKeywordsPredicate predicateStartBefore = new LessonTimeContainsKeywordsPredicate(keywordsStartBefore);
         assertTrue(predicateStartBefore.test(personWithLesson));
 
         List<String> keywordsSame = List.of("1730-1830");
-        LessonContainsKeywordsPredicate predicateSame = new LessonContainsKeywordsPredicate(keywordsSame);
+        LessonTimeContainsKeywordsPredicate predicateSame = new LessonTimeContainsKeywordsPredicate(keywordsSame);
         assertTrue(predicateSame.test(personWithLesson));
 
         List<String> keywordsEndAfter = List.of("1730-1900");
-        LessonContainsKeywordsPredicate predicateEndAfter = new LessonContainsKeywordsPredicate(keywordsEndAfter);
+        LessonTimeContainsKeywordsPredicate predicateEndAfter = new LessonTimeContainsKeywordsPredicate(keywordsEndAfter);
         assertTrue(predicateEndAfter.test(personWithLesson));
 
         List<String> keywordsStartBeforeAndEndAfter = List.of("1700-1900");
-        LessonContainsKeywordsPredicate predicateStartBeforeAndEndAfter =
-                new LessonContainsKeywordsPredicate(keywordsStartBeforeAndEndAfter);
+        LessonTimeContainsKeywordsPredicate predicateStartBeforeAndEndAfter =
+                new LessonTimeContainsKeywordsPredicate(keywordsStartBeforeAndEndAfter);
         assertTrue(predicateStartBeforeAndEndAfter.test(personWithLesson));
     }
 
     @Test
     public void test_lessonDoesNotMatchAnyKeyword_returnsFalse() {
         List<String> keywords = List.of("tuesday", "0800-1000");
-        LessonContainsKeywordsPredicate predicate = new LessonContainsKeywordsPredicate(keywords);
+        LessonTimeContainsKeywordsPredicate predicate = new LessonTimeContainsKeywordsPredicate(keywords);
         assertFalse(predicate.test(personWithLesson));
     }
 
@@ -53,8 +53,8 @@ public class LessonContainsKeywordsPredicateTest {
         List<String> keywords1 = List.of("MONDAY", "0900-1000");
         List<String> keywords2 = List.of("MONDAY", "0900-1000");
 
-        LessonContainsKeywordsPredicate predicate1 = new LessonContainsKeywordsPredicate(keywords1);
-        LessonContainsKeywordsPredicate predicate2 = new LessonContainsKeywordsPredicate(keywords2);
+        LessonTimeContainsKeywordsPredicate predicate1 = new LessonTimeContainsKeywordsPredicate(keywords1);
+        LessonTimeContainsKeywordsPredicate predicate2 = new LessonTimeContainsKeywordsPredicate(keywords2);
 
         assertTrue(predicate1.equals(predicate2));
     }
@@ -64,8 +64,8 @@ public class LessonContainsKeywordsPredicateTest {
         List<String> keywords1 = List.of("MONDAY", "0900-1000");
         List<String> keywords2 = List.of("TUESDAY", "1100-1200");
 
-        LessonContainsKeywordsPredicate predicate1 = new LessonContainsKeywordsPredicate(keywords1);
-        LessonContainsKeywordsPredicate predicate2 = new LessonContainsKeywordsPredicate(keywords2);
+        LessonTimeContainsKeywordsPredicate predicate1 = new LessonTimeContainsKeywordsPredicate(keywords1);
+        LessonTimeContainsKeywordsPredicate predicate2 = new LessonTimeContainsKeywordsPredicate(keywords2);
 
         assertFalse(predicate1.equals(predicate2));
     }
