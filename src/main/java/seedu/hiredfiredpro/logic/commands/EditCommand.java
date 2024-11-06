@@ -109,9 +109,16 @@ public class EditCommand extends Command {
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
         InterviewScore updatedInterviewScore = editPersonDescriptor.getInterviewScore()
                 .orElse(personToEdit.getInterviewScore());
+
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
+        Person editedPerson = new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
                 updatedInterviewScore, updatedTags);
+        if (personToEdit.isHired()) {
+            editedPerson.markAsHired();
+        } else if (personToEdit.isRejected()) {
+            editedPerson.markAsRejected();
+        }
+        return editedPerson;
     }
 
     @Override
