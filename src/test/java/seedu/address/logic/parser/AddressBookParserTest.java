@@ -4,16 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_S1_NA;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DESCRIPTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DESCRIPTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_INDEX_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S1_NA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.ParserUtil.parseLevel;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
@@ -35,6 +38,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
 import seedu.address.logic.commands.UpdateTaskCommand;
@@ -61,6 +65,15 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
         assertEquals(new AddCommand(student), command);
+    }
+
+    @Test
+    public void parseCommand_tag() throws Exception {
+        String userInput = TagCommand.COMMAND_WORD + NAME_DESC_AMY + LEVEL_DESC_S1_NA;
+        TagCommand command =(TagCommand) parser.parseCommand(userInput);
+        UpdateStudentDescriptor editStudentTags = new UpdateStudentDescriptor();
+        editStudentTags.setLevel(parseLevel(VALID_LEVEL_S1_NA));
+        assertEquals(new TagCommand(new Name(VALID_NAME_AMY), editStudentTags), command);
     }
 
     @Test
