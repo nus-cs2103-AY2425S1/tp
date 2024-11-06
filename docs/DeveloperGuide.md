@@ -265,6 +265,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Wedding planners who
 * needs to manage a significant number (50-100) of wedding guests
+* only have guests with Singapore phone numbers
 * only needs to plan 1 wedding at a time
 * prefer desktop applications over other types (e.g. Web-based)
 * can type fast
@@ -279,26 +280,27 @@ Reduce the time taken to add, tag and filter guests, allowing planners to focus 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                      | So that I can…​                                                                           |
-|----------|-----------------------------------------------------------|---------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `* * *`  | wedding planner new to the app                            | see usage instructions and examples               | refer to instructions when I forget how to use the App                                    |
-| `* * *`  | wedding planner                                           | add a new person to the guest list                | track the person using the guest list                                                     |
-| `* * *`  | wedding planner                                           | delete a person                                   | remove someone that has been uninvited                                                    |
-| `* * *`  | wedding planner                                           | view the entire guest list                        | get an view all the guests in my guest list                                               |
-| `* * *`  | wedding planner                                           | find a guest by name                              | locate specific guests without having to go through the entire list                       |
-| `* * *`  | wedding planner                                           | add customisable tags to guests                   | categorise my guests easily                                                               |
-| `* * *`  | wedding planner                                           | delete tags associated with guests                | re-categorise my guests if needed                                                         |
-| `* * *`  | wedding planner                                           | view the RSVP status of each guest                | see if each guest is attending, not attending or have not RSVP'ed to the wedding          |
-| `* *`    | wedding planner                                           | filter guests according to their RSVP status      | view guests that are attending, not attending or have not RSVP'ed to the wedding only     |
-| `* *`    | wedding planner managing different groups of guests       | filter guests according to their tags             | view specific groups of guests without having to go through the entire list               |
-| `* *`    | wedding planner managing many guests                      | tag and untag multiple guests at once             | quickly tag or untag large groups of guests in the guest list                             |
-| `* *`    | wedding planner managing many tags                        | tag and untag multiple tags on each guest at once | quickly tag or untag multiple tags onto each guest when required                          |
-| `* *`    | wedding planner requiring many tags                       | create and delete multiple tags at once           | quickly create or delete multiple tags used in the guest list                             |
-| `*`      | wedding planner flexible to changes                       | edit tags that were already created               | change the description of tags without altering any association to the guests in the list |
-| `*`      | wedding planner                                           | apply multiple filters to the list                | view only a specific group of guests                                                      |
-| `*`      | wedding planner                                           | have colour coded tags and fields                 | distinguish tags and different fields easily                                              |
-| `*`      | wedding planner                                           | see the list of tags already created              | easily tag guests without checking if the tag has been already created                    |
-| `*`      | wedding planner handling multiple guests and tags at once | undo my last command                              | do not need to retype multiple indexes and tags                                           |
+| Priority | As a …​                                                   | I want to …​                                                 | So that I can…​                                                                             |
+|----------|-----------------------------------------------------------|--------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | wedding planner new to the app                            | see usage instructions and examples                          | refer to instructions when I forget how to use the App                                      |
+| `* * *`  | wedding planner                                           | add a new person to the guest list                           | track the person using the guest list                                                       |
+| `* * *`  | wedding planner                                           | delete a person                                              | remove someone that has been uninvited                                                      |
+| `* * *`  | wedding planner                                           | view the entire guest list                                   | get an view all the guests in my guest list                                                 |
+| `* * *`  | wedding planner                                           | find a guest by name                                         | locate specific guests without having to go through the entire list                         |
+| `* * *`  | wedding planner                                           | create customisable tags which can be applied to guests      | have a personalised way to identify each group of guests                                    |
+| `* * *`  | wedding planner managing distinct groups of guests        | apply customisable tags to guests                            | categorise my guests easily                                                                 |
+| `* * *`  | wedding planner managing distinct groups of guests        | delete tags associated with guests                           | re-categorise my guests if needed                                                           |
+| `* * *`  | wedding planner                                           | view the RSVP status of each guest                           | see if each guest is attending, not attending or have not RSVP'ed to the wedding            |
+| `* *`    | wedding planner                                           | filter guests according to their RSVP status                 | view guests that are attending, not attending or have not RSVP'ed to the wedding only       |
+| `* *`    | wedding planner managing distinct groups of guests        | filter guests according to their tags                        | view specific groups of guests without having to go through the entire list                 |
+| `* *`    | wedding planner managing many guests                      | apply or remove existing tags on multiple guests at once     | quickly tag or untag large groups of guests in the guest list at once                       |
+| `* *`    | wedding planner managing many tags                        | apply or remove multiple existing tags at once on each guest | quickly tag or untag multiple tags onto each guest at once                                  |
+| `* *`    | wedding planner managing many distinct groups of guests   | create and delete multiple predefined tags at once           | quickly create or delete multiple predefined tags at once                                   |
+| `*`      | wedding planner with frequent guest category changes      | rename predefined tags that were already created             | change the description of tags without altering their association to the guests in the list |
+| `*`      | wedding planner                                           | apply multiple filters to the list                           | view only a specific group of guests                                                        |
+| `*`      | wedding planner                                           | have colour coded tags and fields                            | distinguish tags and different fields easily                                                |
+| `*`      | wedding planner                                           | see the list of tags already created                         | easily tag guests without checking if the tag has been already created                      |
+| `*`      | wedding planner handling multiple guests and tags at once | undo my last command                                         | avoid retyping long commands or having to recall my mistakes                                |
 
 ### Use Cases
 
