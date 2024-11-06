@@ -32,6 +32,7 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("@example.com")); // missing local part
         assertFalse(Email.isValidEmail("peterjackexample.com")); // missing '@' symbol
         assertFalse(Email.isValidEmail("peterjack@")); // missing domain name
+        assertFalse(Email.isValidEmail("peterjack@example")); // missing '.' and domain tail
 
         // invalid parts
         assertFalse(Email.isValidEmail("peterjack@-")); // invalid domain name
@@ -51,6 +52,7 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("peterjack@example.123")); // domain tail made of num
 
         // valid email
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
