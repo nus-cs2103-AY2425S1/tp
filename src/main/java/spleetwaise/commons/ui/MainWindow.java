@@ -188,9 +188,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            if (logic.isTransactionCommand(commandText)) {
-                rightPanel.updateBalances();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

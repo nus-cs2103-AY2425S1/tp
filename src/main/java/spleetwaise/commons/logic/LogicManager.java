@@ -78,22 +78,6 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
-    /**
-     * Checks if the command is related to transactions.
-     *
-     * @param commandText The command to check.
-     * @return True if the command is a transaction command, false otherwise.
-     */
-    public boolean isTransactionCommand(String commandText) {
-        try {
-            Command transactionCommand = transactionParser.parseCommand(
-                    commandText);
-            return transactionCommand != null;
-        } catch (ParseException pe) {
-            return false;
-        }
-    }
-
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return CommonModel.getInstance().getAddressBook();

@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -65,6 +66,10 @@ public class RightPanel extends UiPart<Region> {
         CommonModel commonModel = CommonModel.getInstance();
 
         ObservableList<Transaction> txns = commonModel.getFilteredTransactionList();
+        // Add listener to automatically update balances when the list changes
+        txns.addListener((ListChangeListener.Change<? extends Transaction> c) -> updateBalances());
+
+        // Initial balance update
         updateBalances();
 
         transactionListPanel = new TransactionListPanel(txns);
