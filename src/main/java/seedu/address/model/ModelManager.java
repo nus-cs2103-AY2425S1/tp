@@ -24,7 +24,6 @@ import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.model.product.Catalogue;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -229,11 +228,6 @@ public class ModelManager implements Model {
     @Override
     public IngredientCatalogue getIngredientCatalogue() {
         return IngredientCatalogue.getInstance();
-    }
-
-    @Override
-    public int getNextProductId() {
-        return Catalogue.nextProductId;
     }
 
     //=========== Order Management Methods ==================================================================
