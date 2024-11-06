@@ -10,13 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain letters, space, parenthesis and slash, and it should not be blank";
+            "Names should only contain letters, space, parenthesis and slash, and it should not be blank. Names should "
+                    + "start with a letter and end with a letter or closing bracket.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z()/]+[a-zA-Z()/\\s]*$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z]+[a-zA-Z()/\\s]*[a-zA-Z)]$";
+
 
     public final String fullName;
 

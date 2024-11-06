@@ -21,7 +21,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String personNames = args.trim();
-        if (!Name.isValidName(personNames) && !personNames.endsWith("/")) {
+        if (!Name.isValidName(personNames) && !personNames.endsWith("$")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteCommand.MESSAGE_USAGE));
         }

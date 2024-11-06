@@ -33,7 +33,7 @@ public class NameContainsKeywordsDeletePredicate implements Predicate<Person> {
     public boolean test(Person person) {
         if (keywords.isEmpty()) {
             return false;
-        } else if (keywords.get(keywords.size() - 1).contains("/")) {
+        } else if (keywords.get(keywords.size() - 1).contains("$")) {
             return isExact(person);
         } else {
             return keywords.stream()
@@ -50,7 +50,7 @@ public class NameContainsKeywordsDeletePredicate implements Predicate<Person> {
      * @return {@code true} if the concatenated keywords, without the trailing "/", match the person's full name.
      */
     public boolean isExact(Person person) {
-        String fullname = String.join("", keywords).toLowerCase().split("/")[0].trim();
+        String fullname = String.join("", keywords).toLowerCase().split("\\$")[0].trim();
         String personName = person.getName().fullName.trim().toLowerCase().replace(" ", "");
         return fullname.equals(personName);
     }

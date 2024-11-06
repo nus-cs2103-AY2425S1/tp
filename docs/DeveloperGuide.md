@@ -219,17 +219,17 @@ The following activity diagram summarizes what happens when a user executes a ad
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​             | I want to …​                                                              | So that I can…​                               |
-|----------|---------------------|---------------------------------------------------------------------------|-----------------------------------------------|
-| `* * *`  | financial advisor   | add a new client’s contact details                                        | easily manage my client base                  |
-| `* * *`  | financial advisor   | view all of a client’s details on one screen                              | have all necessary information in one place.  |
-| `* * *`  | financial advisor   | delete outdated client contact information                                | keep my database clean and relevant           |
-| `* *`    | financial advisor   | search for a client by name or company                                    | ensure that I always have the latest details  |
-| `* *`    | financial advisor   | categorize my clients (e.g., VIP, standard)                               | prioritize my communication with them         |
-| `*`      | financial advisor   | update a client’s contact information                                     | ensure that I always have the latest details  |
-| `*`      | financial advisor   | tag clients with specific keywords (e.g., investor, retiree)              | segment them for different services           |
-| `*`      | financial advisor   | add notes to a client’s profile                                           | track important interactions or discussions   |
-| `*`      | financial advisor   | assign tasks related to each client (e.g., "Review investment portfolio") | stay organized and focused                    |
+| Priority | As a …​             | I want to …​                                                                    | So that I can…​                               |
+|----------|---------------------|---------------------------------------------------------------------------------|-----------------------------------------------|
+| `* * *`  | financial advisor   | add a new client’s contact details                                              | easily manage my client base                  |
+| `* * *`  | financial advisor   | view all of a client’s details on one screen                                    | have all necessary information in one place.  |
+| `* * *`  | financial advisor   | delete outdated client contact information                                      | keep my database clean and relevant           |
+| `* *`    | financial advisor   | search for a client by their personal information, such as name or phone number | ensure that I always have the latest details  |
+| `* *`    | financial advisor   | sort all clients in alphabetical order based on their names                     | prioritize my communication with them         |
+| `*`      | financial advisor   | update a client’s contact information                                           | ensure that I always have the latest details  |
+| `*`      | financial advisor   | tag clients with specific client types (e.g., investor, retiree)                | segment them for different services           |
+| `*`      | financial advisor   | add description to a client’s profile                                           | track important interactions or discussions   |
+| `*`      | financial advisor   | assign reminders to each client (e.g., "Review investment portfolio")           | stay organized and focused                    |
 
 *{More to be added}*
 
@@ -237,10 +237,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a new contact**
+**Use case: Add a new client**
 
 **MSS**
-1. User requests to add a client's contact
+1. User inputs the command to add a client's contact
 2. ClientHub adds the contact to the list of contacts
 3. ClientHub shows successful output message
 
@@ -262,16 +262,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. ClientHub detects a duplicate contact
 
-  * 1c1. ClientHub informs user that there is more than one contact with the same name and prompts for confirmation
-  * 1c2. User confirms the addition of contact
+  * 1c1. ClientHub informs user that there is more than one contact with the same name and prompt the user to input a 
+    different name.
+    
+    Step 1 is repeated until user inputs a unique name.
+  
 
-    Use case resumes at step 2.
-
-**Use case: Delete a contact**
+**Use case: Delete a client**
 
 **MSS**
 
-1. User requests to delete a contact
+1. User keys in the command to delete a client
 2. ClientHub deletes the person
 3. ClientHub shows successful output message
 
@@ -305,13 +306,147 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. ClientHub detects unknown command
+    * 1a1. ClientHub shows an error message that the command is not recognized
+
+        Use case ends.
+
+**Use case: Search for a contact**
+
+**MSS** 
+1. User inputs the command to search for a contact
+2. ClientHub searches for the contact
+3. ClientHub shows the contact details
+
+    Use case ends.
+
+**Extensions**
+
 * 1a. ClientHub detects invalid input format
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
 
-  * 1a1. ClientHub shows an error message
+        Step 1 is repeated until user inputs the correct format.
+* 1b. ClientHub detects that the given name is not in the list
+    * 1b1. ClientHub shows an error message that the name is not in the list
 
-    Step 1 is repeated until user inputs the correct format.
+        Use case ends.
+* 1c. ClientHub detects multiple clients that matches the same name
+    * 1c1. ClientHub informs the user that multiple clients matches the same name and requests the user to input the full name of the client
 
-*{More to be added}*
+        Step 1 is repeated until user inputs full name of the contact.
+
+**Use case: Edit a client**
+
+**MSS**
+1. User inputs the command to edit a client's contact
+2. ClientHub edits the contact details
+3. ClientHub shows successful output message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClientHub detects invalid input format
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+        Step 1 is repeated until user inputs the correct format.
+* 1b. ClientHub detects that the given name is not in the list
+    * 1b1. ClientHub shows an error message that the name is not in the list
+
+        Use case ends.
+* 1c. ClientHub detects multiple contacts of the same name
+    * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
+
+        Step 1 is repeated until user inputs full name of the contact.
+
+**Use case: Sort clients**
+
+**MSS**
+
+1. User inputs the command to sort clients
+2. ClientHub sorts the clients in alphabetical order based on their names
+3. ClientHub shows the sorted list of clients
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClientHub detects unknown command
+    * 1a1. ClientHub shows an error message that the command is not recognized
+
+        Use case ends.
+* 1b. ClientHub detects invalid input format
+    * 1b1. ClientHub shows an error message that the input is in the wrong format
+
+        Step 1 is repeated until user inputs the correct format.
+
+**Use case: Add reminder**
+
+**MSS**
+
+1. User inputs the command to add a reminder
+2. ClientHub adds the reminder to the client
+3. ClientHub shows successful output message
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClientHub detects invalid input format
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+        Step 1 is repeated until user inputs the correct format.
+* 1b. ClientHub detects that the given name is not in the list
+    * 1b1. ClientHub shows an error message that the name is not in the list
+
+        Use case ends.
+* 1c. ClientHub detects multiple contacts of the same name
+    * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
+
+        Step 1 is repeated until user inputs full name of the contact.
+* 1d. ClientHub detects that the reminder is already added
+    * 1d1. ClientHub shows an error message that the reminder is already added
+
+        Use case ends.
+
+**Use case: Delete reminder**
+
+**MSS**
+
+1. User inputs the command to delete a reminder
+2. ClientHub deletes the reminder from the client
+3. ClientHub shows successful output message
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClientHub detects invalid input format
+  * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+      Step 1 is repeated until user inputs the correct format.
+* 2a. ClientHub detects the given index is out of range
+    * 2a1. ClientHub shows an error message that the index is out of range
+        
+        Step 1 is repeated until user inputs the correct format.
+
+
+**Use case: Edit reminder**
+
+**MSS**
+1. User inputs the command to edit a reminder
+2. ClientHub edits the reminder
+3. ClientHub shows successful output message
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClientHub detects invalid input format
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+        Step 1 is repeated until user inputs the correct format.
+* 2a. ClientHub detects the given index is out of range
+    * 2a1. ClientHub shows an error message that the index is out of range
+        
+        Step 1 is repeated until user inputs the correct format.
 
 ### Non-Functional Requirements
 
