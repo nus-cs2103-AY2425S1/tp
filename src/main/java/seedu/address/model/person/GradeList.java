@@ -27,11 +27,22 @@ public class GradeList {
         this.grades = Collections.unmodifiableMap(new HashMap<>());
     }
 
+    /**
+     * Constructs a new {@code GradeList} based on {@code Map<String, Grade> grades}
+     */
     public GradeList(Map<String, Grade> grades) {
+        if (grades.keySet().stream().map(String::toLowerCase).distinct().count() != grades.keySet().size()) {
+            throw new IllegalStateException("Duplicates in grade map");
+        }
+
         this.grades = Collections.unmodifiableMap(grades);
     }
 
     private GradeList(List<Grade> grades) {
+        if (grades.stream().map(grade -> grade.getTestName().toLowerCase()).distinct().count() != grades.size()) {
+            throw new IllegalStateException("Duplicates in grade list");
+        }
+
         this.grades = grades.stream().collect(Collectors.toMap(Grade::getTestName, grade -> grade));
     }
 
@@ -54,9 +65,9 @@ public class GradeList {
         }
 
         String normalizedTestName = grade.getTestName().toLowerCase();
-
         // If there is already a grade for this exam, subtract the old weightage
         Grade existingGrade = newGrades.get(normalizedTestName);
+
         if (existingGrade != null) {
             totalWeightage -= existingGrade.getWeightage();
         }

@@ -232,7 +232,7 @@ public class ParserUtil {
 
         try {
             float res = Float.parseFloat(trimmedValue);
-            if (res <= 0 || res > 100) {
+            if (res < 0 || res > 100) {
                 throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
             }
             return res;
