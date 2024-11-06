@@ -81,6 +81,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
+        // EP: all fields present
         Student expectedStudent = new StudentBuilder(BOB).build();
 
         // whitespace only preamble
@@ -116,7 +117,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedValue_failure() {
-        /*public void parse_repeatedNonTagValue_failure() {*/
+        // EP: repeated values
         String validExpectedStudentString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_AMOUNT_DESC_AMY
                         + OWED_AMOUNT_DESC_BOB;
@@ -153,7 +154,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, SUBJECT_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SUBJECT));
 
-        // multiple payment_amounts
+        // multiple paidAmount
         assertParseFailure(parser, PAID_AMOUNT_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID_AMOUNT));
 
@@ -243,17 +244,32 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
     }
 
-    // seems like this is for tags
     @Test
     public void parse_optionalFieldsMissing_success() {
+        // EP: optional fields missing
+
+        // owedAmount missing
         Student expectedStudent = new StudentBuilder(AMY).withOwedAmount("0").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY + PAID_AMOUNT_DESC_AMY,
                         new AddCommand(expectedStudent));
+
+        // paidAmount missing
+        expectedStudent = new StudentBuilder(AMY).withPaidAmount("0").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY + OWED_AMOUNT_DESC_AMY,
+                new AddCommand(expectedStudent));
+
+        // both paidAmount and owedAmount missing
+        expectedStudent = new StudentBuilder(AMY).withPaidAmount("0").withOwedAmount("0").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY,
+                new AddCommand(expectedStudent));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
+        // EP: compulsory field missing
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix

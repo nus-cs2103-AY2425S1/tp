@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
@@ -93,8 +94,11 @@ public class UniqueStudentListTest {
 
     @Test
     public void add_duplicateStudent_throwsDuplicateStudentException() {
-        uniqueStudentList.add(ALICE);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(ALICE));
+        // EP: same Name and Phone but different some of other values
+        Student duplicateAlice = new StudentBuilder(ALICE).withOwedAmount(VALID_OWED_AMOUNT_BOB)
+                                                          .withAddress(VALID_ADDRESS_BOB).build();
+        uniqueStudentList.add(duplicateAlice);
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(duplicateAlice));
     }
 
     @Test

@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY_MIXED_C
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.OWED_AMOUNT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PAID_AMOUNT_DESC_AMY_MIXED_CASE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY_MIXED_CASE;
@@ -35,6 +36,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAID_AMOUNT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATE_AMY;
@@ -76,6 +78,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+        // EP: missing parts
         // no index specified
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
@@ -88,6 +91,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
+        // EP: invalid preamble
         // negative index
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
@@ -103,6 +107,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // EP: invalid values
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
@@ -121,6 +126,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
+        // EP: all fields specified
         Index targetIndex = INDEX_SECOND_STUDENT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + SCHEDULE_DESC_AMY + RATE_DESC_AMY
@@ -137,6 +143,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
+        // EP: some fields specified
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
@@ -149,6 +156,8 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
+        // EP: one field specified
+
         // name
         Index targetIndex = INDEX_THIRD_STUDENT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
@@ -183,6 +192,12 @@ public class EditCommandParserTest {
         // rate
         userInput = targetIndex.getOneBased() + RATE_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withRate(VALID_RATE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // paidAmount
+        userInput = targetIndex.getOneBased() + PAID_AMOUNT_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withPaidAmount(VALID_PAID_AMOUNT_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
