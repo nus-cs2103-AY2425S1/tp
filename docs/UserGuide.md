@@ -40,6 +40,16 @@ the process of accessing and updating resident student details. What's more, Dor
 - [FAQ](#FAQ)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
+- [Field constraints](#field-constraints)
+  - [Name](#name)
+  - [Phone number](#phone-number)
+  - [Email](#email)
+  - [Address](#address)
+  - [Tags](#tags)
+  - [Room number](#room-number)
+  - [Emergency contact name](#emergency-contact-name)
+  - [Emergency contact phone number](#emergency-contact-phone-number)
+  - [Graduation year](#graduation-year)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
