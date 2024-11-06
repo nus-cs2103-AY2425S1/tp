@@ -82,7 +82,7 @@ public class EditTaskAllGroupCommand extends Command {
         }
         for (Group group : groups) {
             if (group.hasTask(taskToEdit)) {
-                updateTaskInGroup(model, group, taskToEdit, editedTask);
+                updateTaskInGroup(model, group, index, editedTask, taskToEdit);
             }
         }
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -90,8 +90,8 @@ public class EditTaskAllGroupCommand extends Command {
             Messages.format(editedTask)), LIST_TASK_MARKER);
     }
 
-    private void updateTaskInGroup(Model model, Group group, Task taskToEdit, Task editedTask) {
-        model.setTask(taskToEdit, editedTask, group);
+    private void updateTaskInGroup(Model model, Group group, Index index, Task editedTask, Task taskToEdit) {
+        model.setTask(index, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
         addOrUpdateEditedTask(model, editedTask);
     }

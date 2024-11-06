@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.State;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -197,9 +198,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTask(Task target, Task editedTask, Group group) {
-        requireAllNonNull(target, editedTask, group);
-        addressBook.setTask(target, editedTask, group);
+    public void setTask(Index index, Task editedTask, Group group) {
+        requireAllNonNull(index, editedTask, group);
+        addressBook.setTask(index, editedTask, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
