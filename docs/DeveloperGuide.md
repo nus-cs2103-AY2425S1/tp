@@ -367,9 +367,9 @@ This diagram shows the main actor (Management Staff) and their interactions with
 4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
 5. System response time for any action should be less than 1 second for all operations.
 6. The system should be able to support concurrent users without data corruption or errors.
-7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 8. The system must comply with Personal Data Protection Act (PDPA) to protect volunteer information.
-9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance. 
+9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance.
 10. The system should be capable of running efficiently on devices with limited resources (e.g., 8GB RAM, 4-core CPU).
 
 11. *{More to be added}*
@@ -406,7 +406,7 @@ testers are expected to do more *exploratory* testing.
    Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
    <br/><img src="images/ui.png" width="400" />
 
-   3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start) 
+   3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
 
 2. Saving window preferences
 
@@ -491,7 +491,7 @@ testers are expected to do more *exploratory* testing.
 1. Assigning a volunteer to an event while all volunteers and events are being shown
 
    1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
-   
+
    2. Test case: `assign e/ 1 v/ 1`<br>
        Expected: The volunteer is assigned to the event. The status message should reflect the successful assignment of the volunteer to the event. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
        ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
@@ -537,7 +537,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No event is found. The status message should reflect the absence of any events with the keyword, and all events should be shown in the list.
 
     4. Other incorrect find commands to try: `find`, `/e find n/`, `...`<br>
-       Expected: Similar to previous. 
+       Expected: Similar to previous.
 
 ### Finding a volunteer by keyword
 
