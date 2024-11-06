@@ -29,7 +29,7 @@ public class EditAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the detail of an existing assignment "
             + "belonging to an existing student based on the student's index number in the displayed student list, "
-            + "and the assignment's index belonging to the student."
+            + "and the assignment's index belonging to the student. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
