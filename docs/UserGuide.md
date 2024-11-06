@@ -214,6 +214,22 @@ Shows a list of all events in the address book.
 
 Format: `list_events`
 
+### Deleting an event: `del_event`
+
+Deletes the specified event from the address book.
+
+Format: `del_event INDEX` / `del_event EVENT_NAME`
+
+* Deletes the event at the specified `INDEX` / with event name `EVENT_NAME`.
+* `EVENT_NAME` refers to the name of the event (Case-insensitive).
+* If there are multiple events with the same name, `del_event EVENT_NAME` will fail.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list_events` followed by `del_event 2` deletes the 2nd event in the address book.
+* `del_event meeting` will delete the event with name `meeting` (Case-insensitive) if there is only one event with that name.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
