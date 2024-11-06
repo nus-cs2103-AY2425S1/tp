@@ -140,6 +140,9 @@ public class AddTaskToGroupCommand extends Command {
         } else {
             finalOutput = String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(), resultMessage);
         }
+        if (countModelDoesNotContainGroup > 0) {
+            finalOutput += modelDoesNotContainGroup + "\n";
+        }
         if (deadline.getTime().isBefore(currentTime)) {
             return new CommandResult(finalOutput + MESSAGE_OVERDUE_WARNING, LIST_GROUP_TASK_MARKER);
         }
