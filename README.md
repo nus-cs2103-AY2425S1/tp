@@ -5,6 +5,6 @@
 * This is a project done by Software Engineering (SE) students.<br>
 * The project is an adaptation of an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
 * This is **written in OOP fashion**.
-* This is named `AgentAssist` (`AA` for short) because this is designed to help Banking Agents manage the contact details of its customers.
+* This is named `AgentAssist` (`AA` for short) because this is designed to help Banking Agents manage the contact details of its clients.
 * For the detailed documentation of this project, see the **[AgentAssist Product Website](https://ay2425s1-cs2103t-t14-4.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
