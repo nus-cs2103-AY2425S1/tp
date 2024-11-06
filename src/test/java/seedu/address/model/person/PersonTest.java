@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TUTOR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -24,14 +24,14 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonTest {
 
     /*@Test
-    public void modifyTag_throwsUnsupportedOperationException() {
-        // Build a person with a single, immutable tag
-        Person person = new PersonBuilder().withTag(VALID_TAG_STUDENT).build();
+    public void modifyRole_throwsUnsupportedOperationException() {
+        // Build a person with a single, immutable role
+        Person person = new PersonBuilder().withRole(VALID_ROLE_STUDENT).build();
 
-        // Assuming tag's role cannot be modified, attempt to change it and expect an exception
-        Tag tag = person.getTag();
+        // Assuming role's role cannot be modified, attempt to change it and expect an exception
+        Role role = person.getRole();
         assertThrows(UnsupportedOperationException.class, () -> {
-            tag.setRole("Tutor");
+            role.setRole("Tutor");
         });
     }*/
 
@@ -46,7 +46,7 @@ public class PersonTest {
         // same studentID, all other attributes different -> returns true
         Person editedAmy = new PersonBuilder(AMY).withStudentId(VALID_STUDENTID_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_TUTOR).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_TUTOR).build();
         assertTrue(AMY.isSamePerson(editedAmy));
 
         // different studentID, all other attributes same -> returns false
@@ -78,7 +78,7 @@ public class PersonTest {
                         person.getEmail(),
                         person.getAddress(),
                         person.getCourse(),
-                        person.getTag(),
+                        person.getRole(),
                         updatedModules));
 
         // adding grade
@@ -92,7 +92,7 @@ public class PersonTest {
                         person.getEmail(),
                         person.getAddress(),
                         person.getCourse(),
-                        person.getTag(),
+                        person.getRole(),
                         updatedModules));
     }
 
@@ -130,8 +130,8 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTag(VALID_TAG_TUTOR).build();
+        // different roles -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_TUTOR).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -184,7 +184,7 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{studentId=" + ALICE.getStudentId() + ", name="
                 + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", course=" + ALICE.getCourse()
-                + ", tag=" + ALICE.getTag() + ", modules=" + ALICE.getModules() + "}";
+                + ", role=" + ALICE.getRole() + ", modules=" + ALICE.getModules() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -57,8 +57,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Course: ")
                 .append(person.getCourse())
-                .append("; Tag: ")
-                .append(person.getTag());
+                .append("; Role: ")
+                .append(person.getRole());
         return builder.toString();
     }
 

@@ -6,6 +6,6 @@
     "email": "invalid@email!3e",
     "address": "4th street",
     "course": "physics",
-    "tag": "#Student"
+    "role": "#Student"
   } ]
 }

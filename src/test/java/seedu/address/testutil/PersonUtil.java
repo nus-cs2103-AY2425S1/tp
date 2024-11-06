@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -35,7 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_COURSE + person.getCourse().course + " ");
-        sb.append(PREFIX_TAG + person.getTag().toString() + " ");
+        sb.append(PREFIX_ROLE + person.getRole().toString() + " ");
         person.getModules().forEach(module -> {
             sb.append(PREFIX_MODULE + module.value + " ");
         });
@@ -54,7 +54,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.course).append(" "));
-        descriptor.getTag().ifPresent(tag -> sb.append(PREFIX_TAG).append(tag.role).append(" "));
+        descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.role).append(" "));
         descriptor.getModules().ifPresent(modules -> modules.forEach(
                                                 module -> {
                                                     sb.append(PREFIX_MODULE).append(module.value).append(" ");

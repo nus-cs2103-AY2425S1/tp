@@ -6,7 +6,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "course": "Computer Science",
-    "tag": "Student"
+    "role": "Student"
   }, {
     "studentId": "12345678",
     "name": "Alice Pauline",
@@ -14,6 +14,6 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "course": "Life Science",
-    "tag": "Student"
+    "role": "Student"
   } ]
 }

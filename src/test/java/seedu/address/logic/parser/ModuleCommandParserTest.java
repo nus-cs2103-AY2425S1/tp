@@ -35,7 +35,7 @@ public class ModuleCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonRoleValue_failure() {
         String validExpectedModuleString = STUDENTID_DESC_AMY + MODULE_DESC_AMY;
 
         // multiple studentIds

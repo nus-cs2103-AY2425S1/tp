@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TUTOR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
@@ -47,7 +47,7 @@ public class EduContactsTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_TUTOR)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_TUTOR)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         EduContactsStub newData = new EduContactsStub(newPersons);
@@ -79,7 +79,7 @@ public class EduContactsTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInEduContacts_returnsTrue() {
         eduContacts.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_TUTOR)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_TUTOR)
                 .build();
         assertTrue(eduContacts.hasPerson(editedAlice));
     }

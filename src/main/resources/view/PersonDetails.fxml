@@ -25,7 +25,7 @@
                 <ImageView fx:id="profileImage" fitWidth="100" fitHeight="100" visible="false"/>
                 <Label fx:id="name" text="\$first" styleClass="details_name" />
                 <Label fx:id="course" styleClass="details_subinfo" text="\$course" />
-                <Label fx:id="tag" styleClass="details_subinfo" text="\$tag" />
+                <Label fx:id="role" styleClass="details_subinfo" text="\$role" />
             </VBox>
             <VBox.margin>
                 <Insets bottom="20" />

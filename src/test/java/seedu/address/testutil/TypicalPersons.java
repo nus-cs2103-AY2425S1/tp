@@ -14,10 +14,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_STUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TUTOR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STUDENT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +38,7 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withCourse("Math")
-            .withTag("Student")
+            .withRole("Student")
             .addGradedModule("MA1100", "A")
             .addUngradedModule("MA2202")
             .build();
@@ -49,7 +49,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withCourse("Medicine")
-            .withTag("Student")
+            .withRole("Student")
             .addUngradedModule("GEC1044")
             .build();
     public static final Person CARL = new PersonBuilder()
@@ -59,7 +59,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withCourse("nursing")
-            .withTag("Tutor")
+            .withRole("Tutor")
             .build();
     public static final Person DANIEL = new PersonBuilder()
             .withStudentId("53289012")
@@ -68,7 +68,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
             .withCourse("Dentistry")
-            .withTag("Student")
+            .withRole("Student")
             .addUngradedModule("DI5100")
             .addUngradedModule("DI5200")
             .build();
@@ -79,7 +79,7 @@ public class TypicalPersons {
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withCourse("biomedical engineering")
-            .withTag("Student")
+            .withRole("Student")
             .addGradedModule("BN1111", "D")
             .addGradedModule("BN2102", "C+")
             .build();
@@ -90,7 +90,7 @@ public class TypicalPersons {
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withCourse("Data Science")
-            .withTag("Tutor")
+            .withRole("Tutor")
             .build();
     public static final Person GEORGE = new PersonBuilder()
             .withStudentId("28184003")
@@ -99,7 +99,7 @@ public class TypicalPersons {
             .withEmail("anna@example.com")
             .withAddress("4th street")
             .withCourse("Dentistry")
-            .withTag("Student")
+            .withRole("Student")
             .addUngradedModule("DI5100")
             .addUngradedModule("DI5200")
             .build();
@@ -112,7 +112,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withAddress("little india")
             .withCourse("Mechanical engineering")
-            .withTag("Tutor")
+            .withRole("Tutor")
             .build();
     public static final Person IDA = new PersonBuilder()
             .withStudentId("48883999")
@@ -121,7 +121,7 @@ public class TypicalPersons {
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
             .withCourse("Architecture")
-            .withTag("Student")
+            .withRole("Student")
             .addGradedModule("AR1101", "A+")
             .addUngradedModule("AR1102")
             .build();
@@ -134,7 +134,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY)
             .withCourse(VALID_COURSE_AMY)
-            .withTag(VALID_TAG_STUDENT)
+            .withRole(VALID_ROLE_STUDENT)
             .addGradedModule(VALID_MODULE_AMY, VALID_GRADE_AMY)
             .build();
     public static final Person BOB = new PersonBuilder()
@@ -144,7 +144,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB)
             .withCourse(VALID_COURSE_BOB)
-            .withTag(VALID_TAG_TUTOR)
+            .withRole(VALID_ROLE_TUTOR)
             .addGradedModule(VALID_MODULE_BOB, VALID_GRADE_BOB)
             .build();
 
