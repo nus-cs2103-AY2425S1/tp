@@ -25,7 +25,11 @@ public class Bookmark {
     public boolean getIsBookmarkValue() {
         return this.isBookmark;
     }
-    
+
+    /**
+     * This method is used to return a String to be used for the UI on indicating if the company
+     * is bookmarked or not.
+     */
     public String prettyString() {
         return isBookmark ? "Bookmarked" : "Not bookmarked";
     }
