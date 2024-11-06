@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -9,14 +13,19 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Assigns an event to a person using the person's name and the event's name.
+ */
 public class AssignEventByPersonNameEventNameCommand extends AssignEventCommand {
     private Name targetPersonName;
     private EventName targetEventName;
 
+    /**
+     * Creates an AssignEventByPersonNameEventNameCommand to assign the specified {@code Event} to the specified
+     * {@code Person}.
+     * @param targetPersonName The name of the Person to assign the Event to.
+     * @param targetEventName The name of the Event to assign to the Person.
+     */
     public AssignEventByPersonNameEventNameCommand(Name targetPersonName, EventName targetEventName) {
         this.targetPersonName = targetPersonName;
         this.targetEventName = targetEventName;

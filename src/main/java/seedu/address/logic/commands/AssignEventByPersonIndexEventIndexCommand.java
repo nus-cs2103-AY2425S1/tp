@@ -12,10 +12,19 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
+/**
+ * Assigns an event to a person using the person's displayed index and the event's displayed index.
+ */
 public class AssignEventByPersonIndexEventIndexCommand extends AssignEventCommand {
     private Index targetPersonIndex;
     private Index targetEventIndex;
 
+    /**
+     * Creates an AssignEventByPersonIndexEventIndexCommand to assign the specified {@code Event} to the specified
+     * {@code Person}.
+     * @param targetPersonIndex The index of the Person to assign the Event to.
+     * @param targetEventIndex The index of the Event to assign to the Person.
+     */
     public AssignEventByPersonIndexEventIndexCommand(Index targetPersonIndex, Index targetEventIndex) {
         this.targetPersonIndex = targetPersonIndex;
         this.targetEventIndex = targetEventIndex;

@@ -7,12 +7,24 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AssignEventByPersonIndexEventIndexCommand;
+import seedu.address.logic.commands.AssignEventByPersonIndexEventNameCommand;
+import seedu.address.logic.commands.AssignEventByPersonNameEventIndexCommand;
+import seedu.address.logic.commands.AssignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.AssignEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 
+/**
+ * Parses input arguments and creates a new AssignEventCommand object
+ */
 public class AssignEventCommandParser implements Parser<AssignEventCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the AssignEventCommand
+     * and returns an AssignEventCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AssignEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PERSON, PREFIX_EVENT);
