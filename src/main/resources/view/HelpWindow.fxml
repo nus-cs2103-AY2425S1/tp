@@ -41,7 +41,6 @@
           <Insets bottom="0" left="5.0" right="10.0" top="5.0" />
         </padding>
       </HBox>
-        Update-PopUp-and-HelpWindow
       <TableView fx:id="helpTable" prefHeight="559"></TableView>
         <VBox.margin>
           <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
