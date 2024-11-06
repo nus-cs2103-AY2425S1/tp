@@ -6,7 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import org.w3c.dom.Text;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
@@ -24,6 +27,9 @@ public class TaskListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Task> taskListView;
+
+    @FXML
+    private VBox taskHeader;
 
     /**
      *   Creates a {@code PersonListPanel} with the given {@code ObservableList}.

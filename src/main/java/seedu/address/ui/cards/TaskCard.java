@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
@@ -51,7 +52,6 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(task.getTaskName().toString());
         deadline.setText("Deadline: " + task.getDeadline().toString());
-        Image image = new Image(getClass().getResourceAsStream("/images/overdue_icon.png"));
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
         if (task.getDeadline().getTime().isBefore(currentTime)) {
@@ -76,8 +76,9 @@ public class TaskCard extends UiPart<Region> {
             } catch (IndexOutOfBoundsException ioe) {
 
             }
-            deadline.setText(groupsOverdue + "\n" + groupsComplete);
+            groups.setText(groupsOverdue + "\n" + "\n" + groupsComplete);
         } else {
+            deadline.setTextFill(Color.WHITE);
             String groupsPending = "Pending Groups:";
             String groupsComplete = "Complete Groups:";
             ObservableList<Group> completeGroupList = groupList;
@@ -99,7 +100,7 @@ public class TaskCard extends UiPart<Region> {
             } catch (IndexOutOfBoundsException ioe) {
 
             }
-            deadline.setText(groupsPending + "\n" + groupsComplete);
+            groups.setText(groupsPending + "\n" + "\n" + groupsComplete);
         }
 
     }
