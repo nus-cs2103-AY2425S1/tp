@@ -71,12 +71,7 @@ public class EditWeddingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
-        editWeddingDescriptor.getPartner1Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner1(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
-        editWeddingDescriptor.getPartner2Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner2(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
+
         editWeddingDescriptor.setPeopleCount(weddingToEdit.getPeopleCount());
         editWeddingDescriptor.setGuestList(weddingToEdit.getGuestList());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
