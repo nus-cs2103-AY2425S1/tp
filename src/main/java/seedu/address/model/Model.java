@@ -96,13 +96,6 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
-     * Replaces the given lesson {@code target} with {@code editedLesson}.
-     * {@code target} must exist in the address book.
-     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
-     */
-    void setLesson(Lesson target, Lesson editedLesson);
-
-    /**
      * Returns a list of associated people (Tutors or Tutees) for the given person.
      */
     List<Person> getAssociatedPeople(Person person);
@@ -116,24 +109,31 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    //@@author estellelim-reused
+    //Reused from https://github.com/se-edu/addressbook-level4.git
     /**
      * Returns true if the model has previous address book states to restore.
      */
     boolean canUndoAddressBook();
+
     /**
      * Returns true if the model has undone address book states to restore.
      */
     boolean canRedoAddressBook();
+
     /**
      * Restores the model's address book to its previous state.
      */
     void undoAddressBook();
+
     /**
      * Restores the model's address book to its previously undone state.
      */
     void redoAddressBook();
+
     /**
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+    //@@author
 }

@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -25,21 +24,18 @@ public abstract class Person {
     // Data fields
     private final Address address;
     private final Hours hours;
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<Subject> subjects = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
-                  Set<Subject> subjects) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Subject> subjects) {
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.hours = hours;
-        this.tags.addAll(tags);
         this.subjects.addAll(subjects);
         this.id = ++index;
     }
@@ -47,15 +43,13 @@ public abstract class Person {
     /**
      * Alternate constructor for creating Person from addressbook.json
      */
-    public Person(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
-                  Set<Subject> subjects) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Subject> subjects) {
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.hours = hours;
-        this.tags.addAll(tags);
         this.subjects.addAll(subjects);
         this.id = id;
         index = id++;
@@ -87,14 +81,6 @@ public abstract class Person {
 
     public String getRole() {
         return "Person";
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     public int getId() {
@@ -140,14 +126,13 @@ public abstract class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && hours.equals(otherPerson.hours)
-                && tags.equals(otherPerson.tags)
                 && subjects.equals(otherPerson.subjects);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, hours, tags, subjects);
+        return Objects.hash(name, phone, email, address, hours, subjects);
     }
 
     @Override
@@ -158,13 +143,8 @@ public abstract class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("hours", hours)
-                .add("tags", tags)
                 .add("subjects", subjects)
                 .toString();
-    }
-
-    public void addSubject(Subject subject) {
-        subjects.add(subject);
     }
 
     public Set<Subject> getSubjects() {
@@ -178,9 +158,13 @@ public abstract class Person {
      * @param subject
      * @return {@code true} if the person has a subject with the given name, {@code false} otherwise.
      */
-    public boolean hasSubject(String subject) {
+    public boolean hasSubject(Subject subject) {
         return subjects.stream()
-                .anyMatch(s -> s.subject.equalsIgnoreCase(subject));
+                .anyMatch(s -> s.subject.equalsIgnoreCase(subject.getSubject()));
+    }
+
+    public void setSubject(Subject subject) {
+        subjects.add(subject);
     }
 
 }

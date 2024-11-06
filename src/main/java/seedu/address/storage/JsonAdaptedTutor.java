@@ -18,7 +18,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
-import seedu.address.model.tag.Tag;
 
 
 /**
@@ -36,10 +35,9 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
     public JsonAdaptedTutor(@JsonProperty("id") int id, @JsonProperty("name") String name,
                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                             @JsonProperty("address") String address, @JsonProperty("hours") String hours,
-                            @JsonProperty("tags") List<JsonAdaptedTag> tags,
                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
 
-        super(id, name, phone, email, address, hours, tags, "Tutor", subjects);
+        super(id, name, phone, email, address, hours, "Tutor", subjects);
     }
 
     /**
@@ -49,10 +47,9 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
     public JsonAdaptedTutor(@JsonProperty("name") String name,
                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                             @JsonProperty("address") String address, @JsonProperty("hours") String hours,
-                            @JsonProperty("tags") List<JsonAdaptedTag> tags,
                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
 
-        super(name, phone, email, address, hours, tags, "Tutor", subjects);
+        super(name, phone, email, address, hours, "Tutor", subjects);
     }
 
     /**
@@ -61,9 +58,6 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
     public JsonAdaptedTutor(Person source) {
         super(source.getId(), source.getName().fullName, source.getPhone().value, source.getEmail().value,
                 source.getAddress().value, source.getHours().value,
-                source.getTags().stream()
-                        .map(JsonAdaptedTag::new)
-                        .collect(Collectors.toList()),
                 "Tutor",
                 source.getSubjects().stream().map(JsonAdaptedSubject::new).collect(Collectors.toList())
         );
@@ -81,14 +75,8 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
         String email = this.getEmail();
         String address = this.getAddress();
         String hours = this.getHours();
-        List<JsonAdaptedTag> tags = this.getTags();
         String role = this.getRole();
         List<JsonAdaptedSubject> subjects = this.getSubjects();
-
-        final List<Tag> tutorTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            tutorTags.add(tag.toModelType());
-        }
 
         final List<Subject> personSubjects = new ArrayList<>();
         for (JsonAdaptedSubject subject : subjects) {
@@ -137,10 +125,7 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
 
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
 
-
-        final Set<Tag> modelTags = new HashSet<>(tutorTags);
-
-        return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+        return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelSubjects);
     }
 
 }

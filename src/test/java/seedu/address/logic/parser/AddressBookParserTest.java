@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTuteeCommand;
@@ -69,7 +68,6 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
-    @Disabled
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -18,6 +19,7 @@ public class JsonAdaptedLesson {
 
     private int tutorId;
     private int tuteeId;
+    private JsonAdaptedSubject subject;
     public JsonAdaptedLesson() {}
 
 
@@ -26,9 +28,11 @@ public class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("tutorId") int tutorId, @JsonProperty("tuteeId") int tuteeId) {
+    public JsonAdaptedLesson(@JsonProperty("tutorId") int tutorId, @JsonProperty("tuteeId") int tuteeId,
+                             @JsonProperty("subject") JsonAdaptedSubject subject) {
         this.tutorId = tutorId;
         this.tuteeId = tuteeId;
+        this.subject = subject;
     }
 
     /**
@@ -37,6 +41,7 @@ public class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         tutorId = source.getTutor().getId();
         tuteeId = source.getTutee().getId();
+        subject = new JsonAdaptedSubject(source.getSubject());
     }
 
     public int getTutorId() {
@@ -55,6 +60,7 @@ public class JsonAdaptedLesson {
         this.tuteeId = tuteeId;
     }
 
+
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Lesson} object.
      *
@@ -63,11 +69,15 @@ public class JsonAdaptedLesson {
     public Lesson toModelType(AddressBook addressBook) throws IllegalValueException {
         int tutorId = this.getTutorId();
         int tuteeId = this.getTuteeId();
+        if (subject == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
+        }
+        Subject subject = this.subject.toModelType();
 
         Tutor tutor = (Tutor) addressBook.getPersonById(tutorId);
         Tutee tutee = (Tutee) addressBook.getPersonById(tuteeId);
 
-        return new Lesson(tutor, tutee);
+        return new Lesson(tutor, tutee, subject);
     }
 
 }

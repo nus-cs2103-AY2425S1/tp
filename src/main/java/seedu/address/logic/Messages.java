@@ -48,9 +48,7 @@ public class Messages {
                 .append("\n Address: ")
                 .append(person.getAddress())
                 .append("\n Hours: ")
-                .append(person.getHours())
-                .append("\n Tags: ");
-        person.getTags().forEach(builder::append);
+                .append(person.getHours());
 
         builder.append("\n Subjects: ");
         person.getSubjects().forEach(builder::append);

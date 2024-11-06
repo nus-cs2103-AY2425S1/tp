@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
-
 /**
  * Represents a Tutee in the application.
  */
@@ -17,17 +15,14 @@ public class Tutee extends Person {
      * @param email The email address of the Tutee.
      * @param address The residential address of the Tutee.
      * @param hours The hours the Tutee has been taught.
-     * @param tags A set of tags associated with the Tutee.
      * @param subjects A set of subjects learned by the Tutee.
      */
-    public Tutee(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
-                 Set<Subject> subjects) {
-        super(name, phone, email, address, hours, tags, subjects);
+    public Tutee(Name name, Phone phone, Email email, Address address, Hours hours, Set<Subject> subjects) {
+        super(name, phone, email, address, hours, subjects);
     }
 
-    public Tutee(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
-                 Set<Subject> subjects) {
-        super(id, name, phone, email, address, hours, tags, subjects);
+    public Tutee(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Subject> subjects) {
+        super(id, name, phone, email, address, hours, subjects);
     }
 
     /**
@@ -83,7 +78,6 @@ public class Tutee extends Person {
                 && this.getEmail().equals(otherTutee.getEmail())
                 && this.getAddress().equals(otherTutee.getAddress())
                 && this.getHours().equals(otherTutee.getHours())
-                && this.getTags().equals(otherTutee.getTags())
                 && this.getSubjects().equals(otherTutee.getSubjects());
     }
 

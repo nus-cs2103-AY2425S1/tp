@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -46,24 +47,15 @@ public class UniqueLessonList implements Iterable<Lesson> {
         internalList.add(toAdd);
     }
 
-    /**
-     * Replaces the lesson {@code target} in the list with {@code editedLesson}.
-     * {@code target} must exist in the list.
-     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
-     */
-    public void setLesson(Lesson target, Lesson editedLesson) {
-        requireAllNonNull(target, editedLesson);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new LessonNotFoundException();
+    public Subject getSubject(Person tutor, Person tutee) {
+        requireAllNonNull(tutor, tutee);
+        if (tutor instanceof Tutor) {
+            return internalList.stream().filter(item -> item.getTutor().equals(tutor) && item.getTutee().equals(tutee))
+                    .map(Lesson::getSubject).findFirst().orElse(null);
+        } else {
+            return internalList.stream().filter(item -> item.getTutor().equals(tutee) && item.getTutee().equals(tutor))
+                    .map(Lesson::getSubject).findFirst().orElse(null);
         }
-
-        if (!target.equals(editedLesson) && contains(editedLesson)) {
-            throw new DuplicateLessonException();
-        }
-
-        internalList.set(index, editedLesson);
     }
 
     /**

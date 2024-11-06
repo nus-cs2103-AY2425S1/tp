@@ -20,7 +20,8 @@ public class ViewTutorChartCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the chart of tutors.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Here is the chart of tutors in increasing order.";
+    public static final String MESSAGE_SUCCESS = "Here are the tutoring hours for each tutor, "
+            + "listed in ascending order.";
 
     /**
      * Executes the command and returns the result message.

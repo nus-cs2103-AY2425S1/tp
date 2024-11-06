@@ -174,11 +174,6 @@ public class AddTuteeCommandTest {
         };
 
         @Override
-        public void setLesson(Lesson target, Lesson editedLesson) {
-            throw new AssertionError("This method should not be called.");
-        };
-
-        @Override
         public List<Person> getAssociatedPeople(Person person) {
             throw new AssertionError("This method should not be called.");
         }

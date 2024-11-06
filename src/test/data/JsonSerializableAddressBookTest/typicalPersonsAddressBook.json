@@ -7,7 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "hours" : "1",
     "tags" : [ "friends" ],
-    "role" : "Tutor"
+    "role" : "Tutor",
+    "subjects" : [ "math" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -32,7 +33,8 @@
     "address" : "10th street",
     "hours" : "4",
     "tags" : [ "friends" ],
-    "role" : "Tutee"
+    "role" : "Tutee",
+    "subjects" : [ "Math" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -40,7 +42,8 @@
     "address" : "michegan ave",
     "hours" : "5",
     "tags" : [ ],
-    "role" : "Tutee"
+    "role" : "Tutee",
+    "subjects" : [ "English" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",

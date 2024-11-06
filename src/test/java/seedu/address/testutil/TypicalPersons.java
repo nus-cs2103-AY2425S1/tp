@@ -20,17 +20,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CLARA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEACON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLLEAGUE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -42,18 +40,18 @@ public class TypicalPersons {
     public static final Tutor ALICE = new TutorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withHours("1")
-            .withTags("friends").build();
+            .withSubjects("Math").build();
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHours("2")
-            .withTags("owesMoney", "friends").withSubjects("english").build();
+            .withSubjects("english").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withHours("3").build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withHours("4")
-            .withTags("friends").build();
+            .withSubjects("Math").build();
     public static final Tutee ELLE = new TuteeBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").withHours("5").build();
+            .withEmail("werner@example.com").withAddress("michegan ave").withHours("5").withSubjects("English").build();
     public static final Tutee FIONA = new TuteeBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withHours("6").build();
     public static final Tutee GEORGE = new TuteeBuilder().withName("George Best").withPhone("9482442")
@@ -68,16 +66,16 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Tutor AMY = new TutorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withHours(VALID_HOURS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .build();
     public static final Tutor BOB = new TutorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withHours(VALID_HOURS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .build();
     public static final Tutee CLARA = new TuteeBuilder().withName(VALID_NAME_CLARA).withPhone(VALID_PHONE_CLARA)
             .withEmail(VALID_EMAIL_CLARA).withAddress(VALID_ADDRESS_CLARA).withHours(VALID_HOURS_CLARA)
-            .withTags(VALID_TAG_COLLEAGUE).build();
+            .build();
     public static final Tutee DEACON = new TuteeBuilder().withName(VALID_NAME_DEACON).withPhone(VALID_PHONE_DEACON)
             .withEmail(VALID_EMAIL_DEACON).withAddress(VALID_ADDRESS_DEACON).withHours(VALID_HOURS_DEACON)
-            .withTags(VALID_TAG_MENTOR).build();
+            .build();
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -92,6 +90,15 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        return ab;
+    }
+
+    public static AddressBook getTypicalAddressBookWithLesson() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
         return ab;
     }
 

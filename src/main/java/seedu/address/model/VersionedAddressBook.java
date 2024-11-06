@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 /**
  * {@code AddressBook} that keeps track of its own history.
  */
@@ -112,3 +114,4 @@ public class VersionedAddressBook extends AddressBook {
         }
     }
 }
+//@@author

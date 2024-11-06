@@ -22,7 +22,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -43,15 +42,11 @@ public class JsonAdaptedPerson {
     private String address;
     @CsvBindByName
     private String hours;
-    @CsvCustomBindByName(converter = JsonAdaptedTagConverter.class)
-    private List<JsonAdaptedTag> tags = new ArrayList<>();
     @CsvBindByName()
     private String role;
     @CsvCustomBindByName(converter = JsonAdaptedSubjectConverter.class)
     private List<JsonAdaptedSubject> subjects = new ArrayList<>();
     public JsonAdaptedPerson() {}
-
-
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -60,44 +55,34 @@ public class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("id") int id, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("hours") String hours,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role,
-            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+             @JsonProperty("role") String role, @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.hours = hours;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
-        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
         this.role = role;
     }
 
     /**
      * Alternative constructor for a {@code JsonAdaptedPerson} without the id.
      */
-    public JsonAdaptedPerson(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address, @JsonProperty("hours") String hours,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("hours") String hours, @JsonProperty("role") String role,
                              @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.hours = hours;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
-        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
         this.role = role;
     }
 
@@ -110,9 +95,6 @@ public class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         hours = source.getHours().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
@@ -121,6 +103,10 @@ public class JsonAdaptedPerson {
 
     public int getId() {
         return id;
+    }
+
+    public void setId() {
+        this.id = id;
     }
 
     public String getName() {
@@ -163,14 +149,6 @@ public class JsonAdaptedPerson {
         this.hours = hours;
     }
 
-    public List<JsonAdaptedTag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<JsonAdaptedTag> tags) {
-        this.tags = tags;
-    }
-
     public List<JsonAdaptedSubject> getSubjects() {
         return subjects;
     }
@@ -199,13 +177,7 @@ public class JsonAdaptedPerson {
         String email = this.getEmail();
         String address = this.getAddress();
         String hours = this.getHours();
-        List<JsonAdaptedTag> tags = this.getTags();
         String role = this.getRole();
-
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
 
         final List<Subject> personSubjects = new ArrayList<>();
         for (JsonAdaptedSubject subject : subjects) {
@@ -254,12 +226,10 @@ public class JsonAdaptedPerson {
 
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
         if (Objects.equals(role, "Tutor")) {
-            return new Tutor(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+            return new Tutor(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelSubjects);
         } else {
-            return new Tutee(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+            return new Tutee(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelSubjects);
         }
 
     }

@@ -16,7 +16,7 @@
           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <BarChart fx:id="barChart" VBox.vgrow="ALWAYS">
             <xAxis>
-                <CategoryAxis label="Tutee names"/>
+                <CategoryAxis/>
             </xAxis>
             <yAxis>
                 <NumberAxis label="Hours tutored"/>

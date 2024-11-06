@@ -12,6 +12,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Name;
 
 /**
  * Contains unit tests for {@code ImportCommand}.
@@ -37,7 +38,11 @@ public class ImportCommandTest {
     public void execute_import_noPersonsAdded() throws CommandException {
         Path failedPersons = TEST_DATA_FOLDER.resolve("failedPersonsCsv.csv");
         ImportCommand importCommand = new ImportCommand(failedPersons.toString());
-        String expectedMessage = String.format(ImportCommand.MESSAGE_FAILED, "[1]");
+        StringBuilder expectedMessageBuilder = new StringBuilder();
+        expectedMessageBuilder.append(String.format(ImportCommand.MESSAGE_SUCCESS, 0));
+        expectedMessageBuilder.append(String.format(ImportCommand.MESSAGE_FAILED, "Row 1: "
+                + Name.MESSAGE_CONSTRAINTS + ". "));
+        String expectedMessage = expectedMessageBuilder.toString();
 
         assertCommandSuccess(importCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -48,8 +53,10 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(duplicatePersons.toString());
         expectedModel.addPerson(ALICE);
         expectedModel.commitAddressBook();
-        String expectedMessage = String.format(ImportCommand.MESSAGE_SUCCESS, 1) + " "
-                + String.format(ImportCommand.MESSAGE_FAILED, "[2]");
+        StringBuilder expectedMessageBuilder = new StringBuilder();
+        expectedMessageBuilder.append(String.format(ImportCommand.MESSAGE_SUCCESS, 1));
+        expectedMessageBuilder.append(String.format(ImportCommand.MESSAGE_DUPLICATES, "[2]"));
+        String expectedMessage = expectedMessageBuilder.toString();
 
         assertCommandSuccess(importCommand, model, commandHistory, expectedMessage, expectedModel);
     }

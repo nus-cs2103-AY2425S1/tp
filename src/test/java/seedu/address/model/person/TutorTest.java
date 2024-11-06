@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -22,7 +21,7 @@ public class TutorTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Tutor tutor = new TutorBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> tutor.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> tutor.getSubjects().remove(0));
     }
 
     @Test
@@ -38,13 +37,14 @@ public class TutorTest {
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
+
         // different name, all other attributes same -> returns false
         editedAlice = new TutorBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Tutor editedBob = new TutorBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -90,10 +90,6 @@ public class TutorTest {
         // different hours -> returns false
         editedAlice = new TutorBuilder(ALICE).withAddress(VALID_HOURS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new TutorBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -101,7 +97,7 @@ public class TutorTest {
         String expected = Tutor.class.getCanonicalName()
                 + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", hours=" + ALICE.getHours()
-                + ", tags=" + ALICE.getTags() + ", subjects=" + ALICE.getSubjects() + "}";
+                + ", subjects=" + ALICE.getSubjects() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

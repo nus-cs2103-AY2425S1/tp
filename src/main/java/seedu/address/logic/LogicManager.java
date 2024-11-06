@@ -35,6 +35,9 @@ public class LogicManager implements Logic {
     private final CommandHistory commandHistory;
     private boolean addressBookModified;
 
+    //@@author estellelim-reused
+    //Reused from https://github.com/se-edu/addressbook-level4.git
+    // with minor modifications
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -66,14 +69,15 @@ public class LogicManager implements Logic {
             try {
                 storage.saveAddressBook(model.getAddressBook());
             } catch (AccessDeniedException ade) {
-                throw new CommandException(FILE_OPS_PERMISSION_ERROR_FORMAT, ade);
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, ade.getMessage()), ade);
             } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_FORMAT, ioe);
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }
         }
 
         return commandResult;
     }
+    //@@author
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {

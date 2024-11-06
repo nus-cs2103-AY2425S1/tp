@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -67,10 +66,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build(); //is tutor
+                .build(); //is tutor
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -279,8 +278,7 @@ public class EditCommandTest {
 
         // Creating expected person with updated subjects
         Person editedPerson = new Tutor(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getHours(),
-                personToEdit.getTags(), newSubjects);
+                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getHours(), newSubjects);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -309,7 +307,7 @@ public class EditCommandTest {
         updatedSubjects.add(new Subject("English"));
         Person editedPerson = new Tutee(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getHours(),
-                personToEdit.getTags(), updatedSubjects);
+                updatedSubjects);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -317,7 +315,6 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
         expectedModel.commitAddressBook();
-
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 

@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -21,7 +20,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddTuteeCommand object
@@ -36,7 +34,7 @@ public class AddTuteeCommandParser implements Parser<AddTuteeCommand> {
     public AddTuteeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS, PREFIX_TAG, PREFIX_SUBJECT);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS, PREFIX_SUBJECT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -56,10 +54,9 @@ public class AddTuteeCommandParser implements Parser<AddTuteeCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
-        Tutee tutee = new Tutee(name, phone, email, address, hours, tagList, subjects);
+        Tutee tutee = new Tutee(name, phone, email, address, hours, subjects);
 
         return new AddTuteeCommand(tutee);
     }

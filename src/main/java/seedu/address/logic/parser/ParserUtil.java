@@ -17,7 +17,6 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +24,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    public static final String MESSAGE_INVALID_INDEXES = "Number of Indexes given is not two.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -45,11 +46,11 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer)
      *     or if the format was wrong.
      */
-    public static Index[] parseIndices(String args) throws ParseException {
+    public static Index[] parseIndexes(String args) throws ParseException {
         String trimmedIndices = args.trim();
         String[] parts = trimmedIndices.split(" ");
         if (parts.length != 2) {
-            throw new ParseException("no");
+            throw new ParseException(MESSAGE_INVALID_INDEXES);
         }
         return new Index[]{parseIndex(parts[0]), parseIndex(parts[1])};
     }
@@ -130,33 +131,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
-
-    /**
      * Parses a {@code String subject} into a {@code Subject} object.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -172,8 +146,6 @@ public class ParserUtil {
         }
         return new Subject(capitalizeFirstLetter(trimmedSubject.toLowerCase()));
     }
-
-
 
     /**
      * Parses a collection of subject names into a {@code Set<Subject>}.

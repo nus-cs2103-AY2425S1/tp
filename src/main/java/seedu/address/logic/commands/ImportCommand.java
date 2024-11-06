@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILEPATH;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import seedu.address.commons.exceptions.ImproperFormatException;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.storage.CsvImport;
 
 /**
- * Adds a  list of persons to the address book provided by an import file.
+ * Adds a list of persons to VolunTier provided by an import file.
  */
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
@@ -21,10 +21,12 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a list of persons provided in"
             + " the provided file. \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FILEPATH + "~/data/test.txt";
+            + PREFIX_FILEPATH + " ~/Desktop/tp/data/import_file.csv";
 
-    public static final String MESSAGE_SUCCESS = "%d persons added.";
-    public static final String MESSAGE_FAILED = "Rows with duplicates: %s.";
+    public static final String MESSAGE_SUCCESS = "%d persons added. ";
+    public static final String MESSAGE_DUPLICATES = "Rows with duplicates: %s. ";
+
+    public static final String MESSAGE_FAILED = "The following rows had data which failed some constraints: %s";
 
     private final String importFilePath;
     public ImportCommand(String importFilePath) {
@@ -43,17 +45,10 @@ public class ImportCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        ArrayList<Integer> personsFailed = importer.getDuplicates();
-        if (!importer.hasFailures()) {
+        if (personsAdded != 0) {
             model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, personsAdded));
-        } else if (personsAdded == 0) {
-            return new CommandResult(String.format(MESSAGE_FAILED, personsFailed));
-        } else {
-            model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, personsAdded)
-                    + " " + String.format(MESSAGE_FAILED, personsFailed));
         }
+        return new CommandResult(returnMessage(personsAdded, importer));
     }
 
     @Override
@@ -69,6 +64,27 @@ public class ImportCommand extends Command {
 
         ImportCommand otherImportCommand = (ImportCommand) other;
         return importFilePath.equals(otherImportCommand.importFilePath);
+    }
+
+    /**
+     * Formats the message to be returned when the ImportCommand is executed.
+     */
+    public String returnMessage(int successes, CsvImport importer) {
+        StringBuilder message = new StringBuilder();
+        message.append(String.format(MESSAGE_SUCCESS, successes));
+        if (importer.hasDuplicates()) {
+            message.append(String.format(MESSAGE_DUPLICATES, importer.getDuplicates()));
+        }
+        if (importer.hasFailed()) {
+            Map<Integer, String> failed = importer.getFailed();
+            StringBuilder failedRowsAndConstraints = new StringBuilder();
+            for (Map.Entry<Integer, String> entry : failed.entrySet()) {
+                failedRowsAndConstraints.append("Row " + entry.getKey());
+                failedRowsAndConstraints.append(": " + entry.getValue() + ". ");
+            }
+            message.append(String.format(MESSAGE_FAILED, failedRowsAndConstraints));
+        }
+        return message.toString();
     }
 
     @Override
