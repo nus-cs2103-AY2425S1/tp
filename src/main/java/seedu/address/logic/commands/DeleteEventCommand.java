@@ -7,7 +7,7 @@ import seedu.address.model.Model;
  * Deletes an event identified using its displayed index or name from the address book.
  */
 public abstract class DeleteEventCommand extends Command {
-    public static final String COMMAND_WORD = "del_event";
+    public static final String COMMAND_WORD = "delete_event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event identified by the index number used in the displayed event list "
