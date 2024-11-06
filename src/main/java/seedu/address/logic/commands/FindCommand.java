@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,14 +20,10 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters:\n"
-            + " - Find by name: " + COMMAND_WORD + " NAME [MORE_NAMES]...\n"
-            + " - Find by tag: " + COMMAND_WORD + " t/TAG [t/MORE_TAGS]...\n"
-            + " - Find by both: " + COMMAND_WORD + " NAME [MORE_NAMES]... t/TAG [t/MORE_TAGS]...\n"
-            + "Examples:\n"
-            + " 1. " + COMMAND_WORD + " alice bob charlie\n"
-            + " 2. " + COMMAND_WORD + " " + PREFIX_TAG + "friend " + PREFIX_TAG + "owesMoney\n"
-            + " 3. " + COMMAND_WORD + " alice " + PREFIX_TAG + "isRich";
+            + "Parameters: [" + PREFIX_NAME + "NAME]... [" + PREFIX_TAG + "TAG]...\n"
+            + "Examples: " + COMMAND_WORD + " alice bob charlie, "
+            + COMMAND_WORD + " " + PREFIX_TAG + "friend " + PREFIX_TAG + "owesMoney, "
+            + COMMAND_WORD + " alice " + PREFIX_TAG + "isRich";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final TagContainsKeywordsPredicate tagPredicate;

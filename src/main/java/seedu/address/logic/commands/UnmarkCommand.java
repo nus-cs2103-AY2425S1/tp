@@ -15,15 +15,12 @@ public class UnmarkCommand extends TutorialCommand {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks absence for the contact "
-            + "by the index number used in the last person listing and for the tutorial number inputted. \n"
-            + "Parameters: \n"
-            + "INDEX (must be a positive integer) \n"
-            + "tut/TUTORIAL in the format of \n"
-            + "1) A positive number between 1-12 \n"
-            + "2) A list of numbers eg. [1,3,5] \n"
-            + "3) A range of two numbers eg. 3-6 \n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "tut/1-5";
+            + "by the index number used in the last person listing and for the tutorial number(s) inputted.\n"
+            + "Parameters: "
+            + "INDEX (must be a positive integer) "
+            + "tut/TUTORIAL\n"
+            + "Example: " + COMMAND_WORD + " 1 " + "tut/1-5, "
+            + COMMAND_WORD + " 1 " + "tut/1,4,6";
 
     /**
      * @param index of the person in the display list
