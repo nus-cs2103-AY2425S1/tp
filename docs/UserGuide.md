@@ -14,6 +14,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -46,6 +47,8 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Action     | Format, Examples
@@ -61,6 +64,7 @@ Action     | Format, Examples
 **Remind**   | `remind`
 **Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Exit**   | `exit`
 
 ## Features
 
@@ -87,6 +91,8 @@ Action     | Format, Examples
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
@@ -141,6 +147,8 @@ Shows a list of all students in the address book.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a student: `edit`
 
 Edits an existing student in the address book.
@@ -154,7 +162,6 @@ Edits an existing student in the address book.
 * `edit 2 paid/1200.00 owed/0` edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
 
 **Output:**
-
 ![editResult.png](images/editResult.png)
 
 <box type="important" header="##### Constraints">
@@ -176,22 +183,36 @@ for convenient ways to update the paid amount and owed amount.
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Showing income data: `income`
 
-Shows the total amount of tuition fee you have received from the students and the amount that hasn't been paid.
+Shows the total amount of tuition fee that you have been paid, as well as total amount that is owed.
 
-Format: `income`
+**Format:** `income`
+
+**Examples**
+* `income` when all entries are listed gives the total tuition fee paid, as well as total amount that is owed
+* `find n/Alex` followed by `income` shows total tuition fee paid, as well as owed total amount that is owed, from
+students whose name contains Alex
+
+**Output:**
+![result for `income` when all entries listed](images/incomeResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding students' information: `find`
 
 Finds students whose names contain any of the given keywords *and* their tuition day contains any of the given days.
 
-Format: `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
+**Format:** `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
 
-Examples:
+**Examples:**
 * `find n/alex` returns `Alex Yeoh` and `Alex Tan`
 * `find n/Alex d/Friday` returns `Alex Tan`<br>
-  ![result for `find n/Alex d/Friday`](images/findResult.png)
+
+**Output:**
+![result for `find n/Alex d/Friday`](images/findResult.png)
 
 <box type="important" header="##### Constraints">
 <markdown>
@@ -217,6 +238,8 @@ Examples:
         * only `Alex Tan` has a tuition on `Friday`.
 </markdown>
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Receiving payment from a student: `pay`
 
@@ -244,6 +267,8 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Recording unpaid tuition fee of a student: `owe`
 
 Updates the amount of tuition fee owed by a specified student after a lesson.
@@ -270,6 +295,8 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Settle payments from students: `settle`
 
 Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
@@ -280,7 +307,6 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 * `settle 1 amount/500.00`
 
 **Output:**
-
 ![settleResult.jpg](images%2FsettleResult.jpg)
 
 <box type="important" header="##### Constraints">
@@ -290,6 +316,8 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 * **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a student : `delete`
 
@@ -333,6 +361,8 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -341,15 +371,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UGTeach data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<box type="warning" header="##### Caution">
+If your changes to the data file makes its format invalid, UGTeach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 
@@ -364,7 +394,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UGTeach home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

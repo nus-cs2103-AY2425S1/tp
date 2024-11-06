@@ -218,6 +218,10 @@ _{more aspects and alternatives to be added}_
 The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
 <puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
 
+How an OweCommand operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/OweSequenceDiagram-Model.puml" alt="OweSequenceDiagram-Model" height="1400" />
+
 #### Design considerations:
 
 **Aspect: How owe executes:**
@@ -231,7 +235,7 @@ The following activity diagram summarizes what happens when a user wants to trac
     * Cons: Might not be user-friendly as user would need to find out what is the 
     tuition rate charged and calculate how much tuition fee did the student owe.
 
-<puml src="diagrams/OweSequenceDiagram-Model.puml" width="500" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -286,7 +290,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
 | `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -306,13 +309,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays error message and does not clear command line.
     * 1a2. User enters new command.
 * Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
-
-
-* 1b. System detects error in parameters.
-    * 1b1. System displays error message and does not clear command line.
-    * 1b2. User enters command with correct parameters.
-* Steps 1b1-1b2 are repeated until all details entered are correct.
 * Use case resumes from step 2.
 
 
@@ -365,17 +361,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters command with new index.
-* Steps 2a1-2a2 are repeated until index entered is correct.
-* Use case resumes from step 3.
-
-
-* 2b. System detects error in format of entered command.
-    * 2b1. System displays error message and does not clear command line.
-    * 2b2. User enters new command.
-* Steps 2b1-2b2 are repeated until all details entered are correct.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
 
@@ -444,8 +433,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User enters new command.
 * Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -626,8 +613,6 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ### Using pay command
 

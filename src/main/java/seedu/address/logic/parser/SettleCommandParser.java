@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.SettleAmount;
 
 
 /**
@@ -47,7 +48,7 @@ public class SettleCommandParser implements Parser<SettleCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT);
 
-        double amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+        SettleAmount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         logger.info("Parsed amount: " + amount); // Log the parsed amount
 
         logger.info("Successfully parsed SettleCommand with index " + index.getOneBased() + " and amount " + amount);

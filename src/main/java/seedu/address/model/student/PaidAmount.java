@@ -2,6 +2,9 @@ package seedu.address.model.student;
 
 import java.util.Objects;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * Represents a Student's paid tuition fee in the address book.
  */
@@ -46,11 +49,14 @@ public class PaidAmount extends Fee {
      * Returns a new {@code PaidAmount} with the updated value by adding the specified amount
      * to the current paid amount.
      *
-     * @param value The amount to be added to the current paid amount.
+     * @param amount The amount to be added to the current paid amount.
      * @return A new {@code PaidAmount} object with the updated total amount.
      */
-    public PaidAmount updateValue(double value) {
-        return new PaidAmount(Double.toString(super.value + value));
+    public PaidAmount updateValue(SettleAmount amount) throws CommandException {
+        if (!isValidPaidAmount(Double.toString(super.value + amount.value))) {
+            throw new CommandException(Messages.MESSAGE_LIMIT);
+        }
+        return new PaidAmount(Double.toString(super.value + amount.value));
     }
 
     public double getValue() {

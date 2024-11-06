@@ -19,6 +19,7 @@ import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
+import seedu.address.model.student.SettleAmount;
 import seedu.address.model.student.Subject;
 
 /**
@@ -203,13 +204,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the {@code amount} is invalid.
      */
-    public static double parseAmount(String amount) throws ParseException {
+    public static SettleAmount parseAmount(String amount) throws ParseException {
         String trimmedAmount = amount.trim();
-        double amountDouble = Double.parseDouble(trimmedAmount);
-        if (amountDouble <= 0) {
-            throw new ParseException("Amount has to positive");
+        if (!SettleAmount.isValidSettleAmount(trimmedAmount)) {
+            throw new ParseException(SettleAmount.MESSAGE_CONSTRAINTS);
         }
-        return amountDouble;
+        return new SettleAmount(trimmedAmount);
     }
 
     /**
