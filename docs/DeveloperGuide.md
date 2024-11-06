@@ -120,19 +120,18 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 
-The class diagram below provides an overview of Command.
-
-<img src="images/CommandClassDiagram.png"/>
-
-Commands that extends the UndoableCommand class have a concrete implementation of `undo`, which is called during the execution of an UndoCommand. During the execution of an `UndoableCommand`, the changes to the addressbook are stored, and will be used for `undo`.
-
-
 Diving into specific implementation of the `XYZCommand` and `XYZCommandParser` classes, the user command undergoes extensive checks for validity.
 Demonstrating with an example, the following activity diagrams summarise what happens when a user executes a `newtag` and `tag` command:
 ![NewTagActivityDiagram.png](images%2FNewTagActivityDiagram.png)
 ![TagActivityDiagram.png](images%2FTagActivityDiagram.png)
 
 These extensive input checks in the Logic classes protect against potential malicious and invalid inputs that could undermine the usage of the code.
+
+The class diagram below provides an overview of Command.
+
+<img src="images/CommandClassDiagram.png"/>
+
+Commands that extends the UndoableCommand class have a concrete implementation of `undo`, which is called during the execution of an UndoCommand. During the execution of an `UndoableCommand`, the changes to the addressbook are stored, and will be used for `undo`.
 
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
