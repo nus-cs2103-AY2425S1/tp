@@ -55,17 +55,18 @@ public class ListingTest {
         // different listing -> return false
         assertFalse(PASIR_RIS.equals(TAMPINES));
 
-        // different name -> return false
+        // different name, same address -> return true
         Listing editedListing = new ListingBuilder(PASIR_RIS).withName(TAMPINES.getName()).build();
-        assertFalse(PASIR_RIS.equals(editedListing));
+        assertTrue(PASIR_RIS.equals(editedListing));
 
-        // different address -> return false
+        // different address, same name -> return true
         editedListing = new ListingBuilder(PASIR_RIS).withAddress(TAMPINES.getAddress()).build();
-        assertFalse(PASIR_RIS.equals(editedListing));
+        assertTrue(PASIR_RIS.equals(editedListing));
 
-        // different seller -> return false
-        editedListing = new ListingBuilder(PASIR_RIS).withSeller(TAMPINES.getSeller()).build();
-        assertFalse(TAMPINES.equals(editedListing));
+        // different name and address -> return false
+        editedListing = new ListingBuilder(PASIR_RIS).withName(TAMPINES.getName())
+                .withAddress(TAMPINES.getAddress()).build();
+        assertFalse(PASIR_RIS.equals(editedListing));
     }
 
     @Test

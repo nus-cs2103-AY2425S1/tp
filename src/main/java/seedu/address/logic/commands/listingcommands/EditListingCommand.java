@@ -44,11 +44,11 @@ public class EditListingCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REGION + "REGION]...\n"
             + "Example: " + COMMAND_WORD + " ListingName "
-            + PREFIX_PRICE + "4500 "
+            + PREFIX_PRICE + "450000 "
             + PREFIX_AREA + "1200";
 
     public static final String MESSAGE_EDIT_LISTING_SUCCESS = "Successfully edited listing: %1$s";
-    public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in the system.";
+    public static final String MESSAGE_DUPLICATE_LISTING = "This listing name / address already exists in the system.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_LISTING_NAME = "The specified listing name is invalid.";
 

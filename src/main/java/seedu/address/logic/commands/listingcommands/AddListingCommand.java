@@ -48,7 +48,7 @@ public class AddListingCommand extends Command {
             + "[" + PREFIX_BUYER + "BUYER]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Warton House "
-            + PREFIX_PRICE + "4000 "
+            + PREFIX_PRICE + "400000 "
             + PREFIX_AREA + "1000 "
             + PREFIX_ADDRESS + "123 PASIR RIS (S)123456 "
             + PREFIX_REGION + "east "
