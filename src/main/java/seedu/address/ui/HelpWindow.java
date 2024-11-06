@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -90,13 +92,25 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Opens the URL to the user guide in user's browser.
      */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    private void openUrl() {
+        try {
+            // Create a URI object
+            URI uri = new URI(USERGUIDE_URL);
+
+            // Check if Desktop is supported on the current platform
+            if (Desktop.isDesktopSupported()) {
+                // Opens the link
+                Desktop.getDesktop().browse(uri);
+            } else {
+                logger.warning("Desktop is not supported on this platform.");
+            }
+        } catch (URISyntaxException e) {
+            logger.warning("Invalid URL: " + e.getMessage());
+        } catch (IOException e) {
+            logger.warning("Failed to open URL: " + e.getMessage());
+        }
     }
 }
