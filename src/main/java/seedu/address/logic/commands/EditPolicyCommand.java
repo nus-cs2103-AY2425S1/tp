@@ -71,9 +71,8 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        PolicySet clientPolicies = new PolicySet();
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        clientPolicies.addAll(clientToEdit.getPolicies());
+        PolicySet clientPolicies = new PolicySet(clientToEdit.getPolicies());
 
         PolicyType policyTypeToEdit = editPolicyDescriptor.getPolicyType();
         Policy policyToRemove = findPolicyByType(clientPolicies, policyTypeToEdit);

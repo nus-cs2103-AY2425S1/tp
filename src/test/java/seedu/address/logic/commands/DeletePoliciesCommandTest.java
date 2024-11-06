@@ -38,8 +38,7 @@ public class DeletePoliciesCommandTest {
         policiesToDelete.add(PolicyType.HEALTH);
         DeletePoliciesCommand deletePoliciesCommand = new DeletePoliciesCommand(INDEX_SECOND_CLIENT, policiesToDelete);
 
-        PolicySet expectedPolicies = new PolicySet();
-        expectedPolicies.addAll(editedClient.getPolicies());
+        PolicySet expectedPolicies = new PolicySet(editedClient.getPolicies());
         String expectedMessage = String.format(DeletePoliciesCommand.MESSAGE_SUCCESS,
                 Messages.formatPolicies(expectedPolicies));
 

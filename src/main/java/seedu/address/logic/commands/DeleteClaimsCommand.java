@@ -130,10 +130,8 @@ public class DeleteClaimsCommand extends Command {
      * @return The updated client.
      */
     private Client createUpdatedClient(Client client, Policy updatedPolicy) {
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(client.getPolicies());
-        updatedPolicySet.remove(updatedPolicy.getType());
-        updatedPolicySet.add(updatedPolicy);
+        PolicySet updatedPolicySet = new PolicySet(client.getPolicies());
+        updatedPolicySet.replace(updatedPolicy);
         return new Client(client.getName(), client.getPhone(), client.getEmail(),
                 client.getAddress(), client.getTags(), updatedPolicySet);
     }

@@ -64,8 +64,7 @@ public class AddPolicyCommand extends Command {
         }
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        PolicySet clientPolicies = new PolicySet();
-        clientPolicies.addAll(clientToEdit.getPolicies());
+        PolicySet clientPolicies = new PolicySet(clientToEdit.getPolicies());
 
         if (!clientPolicies.add(policy)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATES, policy.getType()));

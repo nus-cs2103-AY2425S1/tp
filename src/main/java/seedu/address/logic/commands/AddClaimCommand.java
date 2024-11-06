@@ -88,10 +88,8 @@ public class AddClaimCommand extends Command {
         }
 
         // create new policy set with the updated policy to preserve immutability
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(policySet);
-        updatedPolicySet.remove(updatedPolicy.getType());
-        updatedPolicySet.add(updatedPolicy);
+        PolicySet updatedPolicySet = new PolicySet(policySet);
+        updatedPolicySet.replace(updatedPolicy);
 
         // create a new client with the updated policy set
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(),

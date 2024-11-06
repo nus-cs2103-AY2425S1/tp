@@ -94,12 +94,10 @@ public class EditClaimCommand extends Command {
         Claim oldClaim = getOldClaim(policy, claimIndex);
         Claim editedClaim = createEditedClaim(oldClaim, editClaimDescriptor);
 
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(policySet);
-        updatedPolicySet.remove(policy.getType());
+        PolicySet updatedPolicySet = new PolicySet(policySet);
 
         Policy editedPolicy = createEditedPolicy(policy, oldClaim, editedClaim);
-        updatedPolicySet.add(editedPolicy);
+        updatedPolicySet.replace(editedPolicy);
 
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
                 clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);

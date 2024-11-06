@@ -2,6 +2,7 @@ package seedu.address.model.policy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,6 +17,53 @@ public class PolicySetTest {
     final LifePolicy life = new LifePolicy();
     final HealthPolicy health = new HealthPolicy();
     final EducationPolicy education = new EducationPolicy();
+
+    @Test
+    public void constructorWithCollection_success() {
+        Set<Policy> policies = new HashSet<>();
+        policies.add(life);
+        PolicySet policySet = new PolicySet(policies);
+        Object[] policyArray = policySet.toArray();
+
+        assertTrue(policyArray.length == 1);
+        assertEquals(life, policyArray[0]);
+    }
+
+    @Test
+    public void constructorWithCollection_nullInputs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new PolicySet(null));
+
+        Set<Policy> policies = new HashSet<>();
+        policies.add(null);
+        assertThrows(NullPointerException.class, () -> new PolicySet(policies));
+    }
+
+    @Test
+    public void replace_notDuplicatePolicy_returnsNullAndAddPolicy() {
+        final PolicySet policies = new PolicySet();
+        assertNull(policies.replace(life));
+
+        Object[] policyArray = policies.toArray();
+        assertTrue(policyArray.length == 1);
+        assertEquals(life, policyArray[0]);
+    }
+
+    @Test
+    public void replace_duplicatePolicy_returnsOldPolicyAndReplaces() {
+        final PolicySet policies = new PolicySet();
+        policies.add(life);
+        assertEquals(life, policies.replace(life));
+
+        Object[] policyArray = policies.toArray();
+        assertTrue(policyArray.length == 1);
+        assertEquals(life, policyArray[0]);
+    }
+
+    @Test
+    public void replace_nullInput_throwsNullPointerException() {
+        final PolicySet policies = new PolicySet();
+        assertThrows(NullPointerException.class, () -> policies.replace(null));
+    }
 
     @Test
     public void addMethod() {
