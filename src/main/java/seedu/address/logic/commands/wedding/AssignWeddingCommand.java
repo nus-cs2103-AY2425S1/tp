@@ -73,7 +73,7 @@ public class AssignWeddingCommand extends Command {
      */
     public AssignWeddingCommand(Index index, Map<Wedding, String> weddingsToAdd, boolean force) {
         this.index = index;
-        this.weddingsToAdd = null;
+        this.weddingsToAdd = new HashSet<>(weddingsToAdd.keySet());
         this.weddingsToAdd2 = weddingsToAdd;
         this.force = force;
     }
@@ -85,7 +85,7 @@ public class AssignWeddingCommand extends Command {
      * @return A success message indicating the weddings that were added and the name of the person.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String addedWeddings = weddingsToAdd2.keySet().stream()
+        String addedWeddings = weddingsToAdd.stream()
                 .map(wedding -> wedding.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
         return String.format(MESSAGE_ADD_WEDDING_SUCCESS, addedWeddings, personToEdit.getName().toString());
@@ -101,7 +101,7 @@ public class AssignWeddingCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        for (Wedding wedding : weddingsToAdd2.keySet()) {
+        for (Wedding wedding : weddingsToAdd) {
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
@@ -115,7 +115,7 @@ public class AssignWeddingCommand extends Command {
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.addAll(weddingsToAdd2.keySet());
+        updatedWeddings.addAll(weddingsToAdd);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -143,8 +143,8 @@ public class AssignWeddingCommand extends Command {
         }
 
         AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
-        return index.equals(otherCommand.index) && weddingsToAdd2.keySet()
-                .equals(((AssignWeddingCommand) other).weddingsToAdd2.keySet())
+        return index.equals(otherCommand.index) && weddingsToAdd
+                .equals(((AssignWeddingCommand) other).weddingsToAdd)
                 && this.force == otherCommand.force;
     }
 }
