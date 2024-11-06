@@ -75,7 +75,14 @@
     "tags" : [],
     "tasks" : []
   } ],
-  "vendors": [],
+  "vendors": [{
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "tags" : [ ],
+    "tasks": []
+  }],
   "tags": ["florist"],
   "weddings": [{
     "weddingName": "Wedding 2",
