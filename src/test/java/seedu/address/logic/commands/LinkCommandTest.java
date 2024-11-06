@@ -61,8 +61,15 @@ public class LinkCommandTest {
         Set<Index> linkIndexes = new HashSet<>(Arrays.asList(INDEX_FIRST_PET));
         CommandResult commandResult = new LinkCommand(INDEX_FIRST_OWNER, linkIndexes).execute(modelStub);
 
-        assertEquals(String.format(LinkCommand.MESSAGE_SUCCESS, linkIndexes.size(), Messages.format(validOwner)),
-            commandResult.getFeedbackToUser());
+        assertEquals(
+                String.format(
+                        LinkCommand.MESSAGE_SUCCESS,
+                        linkIndexes.size(),
+                        Messages.format(validOwner),
+                        LinkCommand.MESSAGE_RETURN_TO_MAIN_MENU
+                ),
+                commandResult.getFeedbackToUser()
+        );
         assertEquals(Arrays.asList(link), modelStub.linksAdded);
     }
 

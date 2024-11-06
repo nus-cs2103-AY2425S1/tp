@@ -36,9 +36,10 @@ public class LinkCommand extends Command {
         + PREFIX_TO + "p3 "
         + PREFIX_TO + "p2";
 
-    public static final String MESSAGE_SUCCESS = "Linked %1$s pet(s) to %2$s";
+    public static final String MESSAGE_SUCCESS = "Linked %1$s pet(s) to %2$s\n%3$s";
     public static final String MESSAGE_DUPLICATE_LINK =
         "This link already exists in the address book";
+    public static final String MESSAGE_RETURN_TO_MAIN_MENU = "Please enter 'list' to return to the main menu";
 
     private final Index ownerIndex;
     private final Set<Index> petIndexes;
@@ -78,7 +79,7 @@ public class LinkCommand extends Command {
         validatedLinks.forEach(model::addLink);
 
         return new CommandResult(
-          String.format(MESSAGE_SUCCESS, validatedLinks.size(), Messages.format(owner))
+          String.format(MESSAGE_SUCCESS, validatedLinks.size(), Messages.format(owner), MESSAGE_RETURN_TO_MAIN_MENU)
         );
     }
 

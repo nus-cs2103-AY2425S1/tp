@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents an Owner in PawPatrol.
+ * Represents the Link between an Owner and their Pets in PawPatrol.
  * Guarantees: details are present and not null, field values are validated,
  * immutable.
  */

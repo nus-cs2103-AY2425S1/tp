@@ -16,7 +16,8 @@ public class ViewToggler {
     public static final String FIND_PET_COMMAND = "Find pet";
     public static final String FIND_OWNER_COMMAND = "Find owner";
     public static final String OTHER_COMMAND = "Command does not change GUI";
-    private static final String REGEX1 = "^Linked \\d+ pet\\(s\\) to .+$";
+    private static final String REGEX1 = "^Linked \\d+ pet\\(s\\) to .+\\n"
+            + Pattern.quote(LinkCommand.MESSAGE_RETURN_TO_MAIN_MENU) + "$";
     private static final String REGEX2 = "^\\d+ pet listed!$";
     private static final String REGEX3 = "^\\d+ owner listed!$";
 
