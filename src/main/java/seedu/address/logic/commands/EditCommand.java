@@ -88,14 +88,17 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (personToEdit.isSamePerson(editedPerson) || model.hasPerson(editedPerson)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         if (!personToEdit.getPhone().equals(editedPerson.getPhone()) && model.hasPhone(editedPerson)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_PHONE);
         }
 
         if (!personToEdit.getEmail().equals(editedPerson.getEmail()) && model.hasEmail(editedPerson)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
