@@ -49,7 +49,7 @@ public class FilterCommandParserHelper {
      * Splits each email value by whitespace and trims each resulting substring.
      *
      * @param argMultimap The ArgumentMultimap containing the command arguments.
-     * @return A list of parsed email addresses as strings.
+     * @return A list of parsed emails as strings.
      */
     public static List<String> parseEmails(ArgumentMultimap argMultimap) {
         return argMultimap.getAllValues(PREFIX_EMAIL).stream()
