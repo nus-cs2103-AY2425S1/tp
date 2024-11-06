@@ -144,13 +144,16 @@ public class MarkAttendanceByStudentCommandTest {
 
     @Test
     public void execute_notEnrolledInTutorialUnfilteredList_throwsCommandException() {
+        Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
         Tutorial tutorial = new Tutorial("Science");
         Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
 
         MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
 
-        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject());
+        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT,
+                studentToMarkAttendance.getFullName(), tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand, model, expectedMessage);
     }
@@ -227,13 +230,16 @@ public class MarkAttendanceByStudentCommandTest {
     @Test
     public void execute_notEnrolledInTutorialFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
+        Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         Tutorial tutorial = new Tutorial("Science");
         Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
 
         MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, tutorial);
 
-        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject());
+        String expectedMessage = String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT,
+                studentToMarkAttendance.getFullName(), tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand, model, expectedMessage);
     }
