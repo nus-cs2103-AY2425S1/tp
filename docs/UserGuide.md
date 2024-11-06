@@ -92,7 +92,7 @@ Examples:
 
 Adds a pet to PawPatrol.
 
-Format: `pet n/NAME s/SPECIES b/BREED a/AGE sex/SEX [t/TAG]…​`
+Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A pet can have any number of tags (including 0)
@@ -162,7 +162,7 @@ Format:
 
 * At least one of the optional fields must be provided.
 
-* IC number cannot be edited.
+* IC number cannot be changed.
 
 * Existing values will be updated to the input values.
 
