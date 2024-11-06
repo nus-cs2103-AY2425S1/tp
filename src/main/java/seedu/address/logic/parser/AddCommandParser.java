@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(name, phone, email, address, tagList, FXCollections.observableArrayList(),
                 FXCollections.observableArrayList(), FXCollections.observableArrayList(),
-                FXCollections.observableArrayList());
+                FXCollections.observableArrayList(), false);
 
         return new AddCommand(person);
     }
