@@ -30,11 +30,11 @@ ClubConnect is a **desktop address book application used to streamline the compu
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current contact list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts and events.
 
    * `exit` : Exits the app.
 
@@ -158,14 +158,13 @@ Format: `delete INDEX` / `delete CONTACT_NAME`
 
 * Deletes the person at the specified `INDEX` / with name `CONTACT_NAME`.
 * `CONTACT_NAME` refers to the name of the contact (Case-insensitive).
-* If there are multiple contacts with the same name, `delete CONTACT_NAME` will fail.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ClubConnect's contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete john doe` will delete the contact with name `john doe` (Case-insensitive) if there is only one contact with that name.
+* `delete john doe` will delete the contact with name `john doe` (case-insensitive).
 
 ### Deleting multiple people : `mass_delete`
 Deletes multiple specified contacts from ClubConnect's contact list using their displayed indices.
@@ -215,21 +214,20 @@ Shows a list of all events stored in ClubConnect's event list.
 
 Format: `list_events`
 
-### Deleting an event: `del_event`
+### Deleting an event: `delete_event`
 
 Deletes the specified event from ClubConnect's event list.
 
-Format: `del_event INDEX` / `del_event EVENT_NAME`
+Format: `delete_event INDEX` / `delete_event EVENT_NAME`
 
 * Deletes the event at the specified `INDEX` / with event name `EVENT_NAME`.
 * `EVENT_NAME` refers to the name of the event (case-insensitive).
-* If there are multiple events with the same name, `del_event EVENT_NAME` will fail.
 * `INDEX` refers to the index number shown in the displayed event list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list_events` followed by `del_event 2` deletes the 2nd event in ClubConnect's event list.
-* `del_event meeting` will delete the event with name `meeting` (case-insensitive) if there is only one event with that name.
+* `del_event meeting` will delete the event with name `meeting` (case-insensitive).
 
 ### Assigning an event: `assign_event`
 
