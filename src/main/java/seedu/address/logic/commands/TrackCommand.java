@@ -3,9 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.CategoryContainsKeywordsPredicate;
+import seedu.address.model.person.CategoryContainsKeywordPredicate;
 
 /**
  * Tracks and lists all persons in the address book who are in the specified category to the user.
@@ -13,31 +12,36 @@ import seedu.address.model.person.CategoryContainsKeywordsPredicate;
 public class TrackCommand extends Command {
 
     public static final String COMMAND_WORD = "track";
-    public static final String MESSAGE_ARGUMENTS = "Category: %1$s";
+    public static final String MESSAGE_INVALID_INPUT_ERROR = COMMAND_WORD
+            + " command accepts only 1 predefined category (student or company).";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all persons under category: %1$s\n"
+            + "%2$s persons listed!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Tracks and lists all contacts who are in the category of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: CATEGORY (must be one of the predefined categories (student, company))\n"
             + "Example: " + COMMAND_WORD + " student";
-    private final CategoryContainsKeywordsPredicate categoryPredicate;
+    private final CategoryContainsKeywordPredicate categoryPredicate;
+
+    private final String category;
 
     /**
-     * TBC
-     * @param categoryPredicate
+     * @param categoryPredicate the category to track from the list of predefined categories
      */
-    public TrackCommand(CategoryContainsKeywordsPredicate categoryPredicate) {
+    public TrackCommand(CategoryContainsKeywordPredicate categoryPredicate) {
         requireAllNonNull(categoryPredicate);
         this.categoryPredicate = categoryPredicate;
+        this.category = categoryPredicate.toString();
     }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(categoryPredicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int size = model.getFilteredPersonList().size();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.category, size));
     }
 
     @Override
@@ -47,12 +51,11 @@ public class TrackCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TrackCommand)) {
+        if (!(other instanceof TrackCommand t)) {
             return false;
         }
 
-        TrackCommand e = (TrackCommand) other;
-        return categoryPredicate.equals(e.categoryPredicate);
+        return categoryPredicate.equals(t.categoryPredicate);
     }
 
 }
