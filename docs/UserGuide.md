@@ -3,27 +3,19 @@ layout: default.md
 title: "NovaCare User Guide"
 pageNav: 3
 ---
-## NovaCare
+<h1 style="color: #FF6347;">NovaCare</h1>
+
 A **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
---------------------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-- [How to use NovaCare](#how-to-use-novacare)
-  - [Glossary](#glossary)
-  - [Annotations box](#annotations-box)
-- [Quick start](#quick-start)
-  - [Installation](#step-1-ensure-you-have-java-17-or-above-installed-in-your-computer-you-can-download-java-from-here)
-  - [How to run NovaCare](#step-3-run-the-application)
-  - [Overview of GUI](#overview-of-gui)
-  - [Get started with NovaCare](#get-started-with-novacare)
-- [Features](#features)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
-  - [Patient-related commands](#patient-related-commands)
-  - [Task-related commands](#task-related-commands)
-  - [Other commands](#other-commands)
+
+Refer to the sidebar if you are on the website.
+
+<!-- * Table of Contents -->
+<page-nav-print />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## How to use NovaCare
@@ -38,30 +30,34 @@ If you are an existing user looking for a specific feature, you can jump to the 
 ### Glossary
 As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
 
-| Term    | Definition                                                                                                                                                                         |
-|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **JAR** | A Java ARchive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                                                   |
-| **CLI** | A Command Line Interface (CLI) is a text-based interface used to interact with software using text commands.                                                                       |
-| **Parameter** | A parameter is the text that is passed to a software to perform a specific action.                                                                                                 |
-| **GUI** | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.                                           |
-| **Command** | A command is an input action given to the software to perform a specific action.                                                                                                   |
-| **Index** | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                |
-| **Tag** | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                           |
+| Term               | Definition                                                                                                                                                                         |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **JAR**            | A Java ARchive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                                                   |
+| **CLI**            | A Command Line Interface (CLI) is a text-based interface used to interact with software using text commands.                                                                       |
+| **PARAMETER**      | A parameter is the text that is passed to a software to perform a specific action.                                                                                                 |
+| **Prefix**         | A prefix is a keyword that is used to identify the type of parameter that is being passed to the software.                                                                         |
+| **GUI**            | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.                                           |
+| **Command**        | A command is an input action given to the software to perform a specific action.                                                                                                   |
+| **Index**          | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                |
+| **Tag**            | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                           |
 | **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. 1 indicates a critical condition while 3 indicates a non-critical condition. |
-| **[word]** | Words in square brackets are optional parameters that can be included in the command.                                                                                              |
+| **[word]**         | Words in square brackets are optional parameters that can be included in the command.                                                                                              |
 
 ### Annotations box
 The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
 
 <box type="info" seamless>
+
 **Note:** Additional information about the Commands.
 </box>
 
 <box type="tip" seamless>
+
 **Tip:** Provide tips to help users understand the command usage better.
 </box>
 
 <box type="warning" seamless>
+
 **Warning:** Warns you about potential errors that you may face when using the NovaCare.
 </box>
 
@@ -146,9 +142,16 @@ Refer to the [Features](#features) below for details of each command.
 
 ## Features
 
+This section provides a detailed explanation of the features available in NovaCare.
+
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+
+* All command in NovaCare follows a specific structure. The command structure is as follows:
+  `COMMAND prefix/PARAMETERS…​`
+  * `e.g. add n/John Tan p/98765432 e/john@gmail.com a/123, Clementi Rd, 1234665`
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -162,37 +165,38 @@ Refer to the [Features](#features) below for details of each command.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `listincomplete` and `listtask`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-## General Commands
+### Parameter Information
+The table below explains each of the parameter available in NovaCare.
+It will provide the limitations and examples of the parameter.
+<box type = "warning" seamless>
 
-### Viewing help : `help`
+The parameters must follow the limitations as shown below.
+Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:
+![failCommand](images/failAdd.png)
+</box>
 
-Shows a message explaining how to access the help page.
+| Parameter   | Description             | Limitations                                                                                                                                                                                                                                                                                                                                                           | Example                                                                                |
+|-------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| **NAME**    | Name of patient         | * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                         | :white_check_mark: `Thomas Ho`<br/>:X: `Th@mas`|
+|**EMERGENCY_CONTACT_NAME**| Name of emergency contact| * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                         | :white_check_mark: `Thomas Ho`<br/>:X: `Th@mas`|
+| **PHONE_NUMBER** | Phone number of patient | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                            | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:X:`9123 4567`  |
+| **EMERGENCY_CONTACT_NUMBER** | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.                                                                                                                                                                                                            | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:X:`9123 4567`  |
+| **EMAIL**   | Email of patient        | *Format must be in `LOCAL-PART@DOMAIN`.<br/> *No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters. | :white_check_mark: `thomasho@gmail.com`<br/>:X: `$thomas@gmail.com`(`LOCAL-PART` error) |
+| **ADDRESS** | Address of patient      | * Address should not be blank.<br/> * Address can take any values                                                                                                                                                                                                                                                                                                     | :white_check_mark: `123, Clementi Rd, 1234665`<br/>|
+| **TAG**     | Tag of patient          | * Tags should not have space.<br/> * Tags take alphanumeric                                                                                                                                                                                                                                                                                                           | :white_check_mark: `highBloodPressure`<br/>:X:`high blood pressure`|
+| **INDEX**   | Index of patient on GUI | * Index should be a positive integer.<br/> * Index should not be blank.]                                                                                                                                                                                                                                                                                              | :white_check_mark: `1`<br/>:X: `0`|
+| **DESCRIPTION** | Description of task | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                            | :white_check_mark: `Eat paracetamol 1000mg`<br/>|
+|**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `1`<br/>:X: `4`|
 
-![help message](images/helpMessage.png)
+### Patient Management
 
-Format: `help`
-
-### Clearing all entries : `clear`
-
-Clears all patient and tasks entry from NovaCare.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-## Patient-Related Commands
-
-### Adding a patient: `add`
+#### Adding a patient: `add`
 
 Adds a patient to the address book.
 
@@ -207,21 +211,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Deleting a patient : `delete`
+#### Listing all patients : `list`
 
-Deletes the specified patient and tasks associated to that patient from the address book.
+Shows a list of all patients in the address book.
 
-:pencil: Format: `delete INDEX`
+:pencil: Format: `list`
 
-* Deletes the patient and task associated to that patient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
-* `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
-
-### Editing a patient : `edit`
+#### Editing a patient : `edit`
 
 Edits an existing patient in the address book.
 
@@ -238,70 +234,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-### Adding emergency contact : `emergency`
-
-Adds an emergency contact and details to a patient in the address book.
-
-:pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
-
-* Adds an emergency contact and details at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
-
-### Deleting emergency contact : `delemergency`
-
-Deletes an emergency contact and its details from a patient in the address book.
-
-:pencil: Format: `delemergency INDEX
-
-* Deletes an emergency contact and its details at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
-
-### Adding priority level : `priority`
-
-Adds a priority level to a patient in the address book.
-
-:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
-
-* Adds a priority level at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The priority level **must be a positive integer** and only from **1, 2, 3**
-
-Examples:
-* `priority /id 1 /level 2` adds priority level `2` to 1st index in patient list.
-
-### Deleting priority level : `deletelevel`
-
-Delete a priority level to a patient in the address book, resetting it to the default value **3**.
-
-:pencil: Format: `deletelevel INDEX`
-
-* Delete the current priority level at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
-
-### Listing all patients : `list`
-
-Shows a list of all patients in the address book.
-
-Format: `list`
-
-### Locating patients by name: `find`
+#### Locating patients by name: `find`
 
 Finds patients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+:pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -315,9 +252,83 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-## Task-Related Commands
+#### Deleting a patient : `delete`
 
-### Adding a task : `addtask`
+Deletes the specified patient and tasks associated to that patient from the address book.
+
+:pencil: Format: `delete INDEX`
+
+* Deletes the patient and task associated to that patient at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd patient in the address book.
+* `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+
+
+### Emergency Contact Management
+
+#### Adding emergency contact : `emergency`
+
+Adds an emergency contact and details to a patient in the address book.
+
+:pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
+
+* Adds an emergency contact and details at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
+
+#### Deleting emergency contact : `delemergency`
+
+Deletes an emergency contact and its details from a patient in the address book.
+
+:pencil: Format: `delemergency INDEX
+
+* Deletes an emergency contact and its details at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
+
+
+### Priority Level Management
+
+#### Adding priority level : `priority`
+
+Adds an priority level to a patient in the address book.
+
+:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
+
+* Adds a priority level at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The priority level **must be a positive integer** and only from **1, 2, 3**
+
+Examples:
+* `priority /id 1 /level 2` adds priority level `2` to 1st index in patient list.
+
+#### Deleting priority level : `deletelevel`
+
+Delete a priority level to a patient in the address book, resetting it to the default value **3**.
+
+:pencil: Format: `deletelevel INDEX`
+
+* Delete the current priority level at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
+
+
+### Task Management
+
+#### Adding a task : `addtask`
 
 Adds a task to a patient in the address book.
 
@@ -330,10 +341,10 @@ Adds a task to a patient in the address book.
 Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the address book.
 * `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
-![Patient List](images/PersonListExample.png)
-![Task List](images/TaskListExample.png)
+  ![Patient List](images/PersonListExample.png)
+  ![Task List](images/TaskListExample.png)
 
-### Deleting a task : `deletetask`
+#### Deleting a task : `deletetask`
 
 Deletes a task for a patient in the address book.
 
@@ -346,23 +357,7 @@ Deletes a task for a patient in the address book.
 Examples:
 * `deletetask 1` deletes the 1st task in the task list.
 
-### Locating tasks by patient: `findtask`
-
-Finds all tasks whose patient matches specified patient id
-
-:pencil: Format: `findtask INDEX`
-
-Examples:
-* `findtask 1` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
-### Listing all tasks : `listtask`
-
-Shows a list of all tasks.
-
-:pencil: Format: `listtask`
-
-### Mark Task : `marktask`
+#### Mark Task : `marktask`
 
 Marks a task at a specific index.
 
@@ -375,27 +370,39 @@ Marks a task at a specific index.
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
 
-### Listing all incomplete tasks : `listincomplete`
+### Other Commands
 
-Shows a list of all incomplete tasks.
+#### Viewing help : `help`
 
-Format: `listincomplete`
+Shows a message explaning how to access the help page.
 
---------------------------------------------------------------------------------------------------------------------
+Format: `help`
+
+### Clearing all entries : `clear`
+
+Clears all patient and tasks entry from NovaCare.
+
+:pencil: Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+:pencil: Format: `exit`
 
 ### Saving the data
 
-NovaCare data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-NovaCare data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -427,14 +434,16 @@ _Details coming soon ..._
 | Action                    | Format Examples                                                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Edit**                  | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g., `edit 1 p/91234567 e/john13432@gmail.com`                                       |
-| **Add Emergency Contact** | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
-| **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                         |
 | **Change Priority**       | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
 | **Delete Priority**       | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                      |
+| **Add Emergency Contact** | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
+| **Delete Emergency Contact** | `delemergency INDEX` <br> e.g., `delemergency 1`                                                                                                         |
 | **List**                  | `list`                                                                                                                                                   |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
+| **Clear**                 | `clear`                                                                                                                                                  |
+
 
 ### Task-Related Commands:
 | Action              | Format, Examples                                                                   |
@@ -446,9 +455,9 @@ _Details coming soon ..._
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
 | **List Incomplete** | `listincomplete`                                                                   |
 
-### Other commands:
-| Action    | Format, Examples |
-|-----------|------------------|
-| **Help**  | `help`           |
-| **Clear** | `clear`          |
-| **Exit**  | `exit`           |
+
+### Other Commands:
+| Action                | Format, Examples       |
+|-----------------------|------------------------|
+|**Help**               | `help`                 |
+|**Exit**               | `exit`                 |
