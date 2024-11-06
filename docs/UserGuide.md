@@ -305,31 +305,31 @@ Inspects a specified contact from the contacts list to see their delivery list.
 Format: `inspect [INDEX]`
 
 * Inspects the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contacts list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index is the number displayed next to the contact's name in the list.
+* The index **must be a positive number** (starting from 1).
 
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
 **<ins>When in the inspect window**
 
-`inspect` command does not work in the inspect window.
+`inspect` does not work in the inspect window.
 
 ### Clearing all entries : `clear`
 **<ins>When in the main or inspect window**
 
-Clears all entries from the contacts list.
+Clears all contacts from the contacts list.
 
 Format: `clear`
 
 **<ins>When in the main or inspect window**
 
-clear command does not work in the inspect window.
+`clear` does not work in the inspect window.
 
 ### Exiting the program : `exit`
 **<ins>When in the main or inspect window**
 
-Exits the program.
+Exits LogiLink.
 
 Format: `exit`
 
