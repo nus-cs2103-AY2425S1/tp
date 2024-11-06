@@ -47,10 +47,12 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
 
-
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         From from = ParserUtil.parseFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseTo(argMultimap.getValue(PREFIX_TO).get());
+        if (!Appointment.isValidPeriod(from, to)) {
+            throw new ParseException(AddAppointmentCommand.MESSAGE_INVALID_PERIOD);
+        }
         return new AddAppointmentCommand(name, new Appointment(date, from, to));
     }
 

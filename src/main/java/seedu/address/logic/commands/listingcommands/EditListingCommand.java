@@ -44,11 +44,11 @@ public class EditListingCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REGION + "REGION]...\n"
             + "Example: " + COMMAND_WORD + " ListingName "
-            + PREFIX_PRICE + "4500 "
+            + PREFIX_PRICE + "450000 "
             + PREFIX_AREA + "1200";
 
     public static final String MESSAGE_EDIT_LISTING_SUCCESS = "Successfully edited listing: %1$s";
-    public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in the system.";
+    public static final String MESSAGE_DUPLICATE_LISTING = "This listing name / address already exists in the system.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_LISTING_NAME = "The specified listing name is invalid.";
 
@@ -91,14 +91,13 @@ public class EditListingCommand extends Command {
             throw new CommandException("Seller not found in the system.");
         }
 
-
         Listing editedListing = createEditedListing(
                 listingToEdit,
                 editListingDescriptor,
                 seller.orElse(listingToEdit.getSeller())
         );
 
-        if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
+        if (isIdentifierChanged(listingToEdit, editedListing) && model.canEditListing(listingToEdit, editedListing)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
         }
 
@@ -123,6 +122,21 @@ public class EditListingCommand extends Command {
 
         return new Listing(updatedName, updatedAddress, updatedPrice, updatedArea, updatedRegion,
                 updatedSeller, listingToEdit.getBuyers());
+    }
+
+    /**
+     * Checks if the unique identifiers of a listing, specifically the name or address,
+     * have been modified in the edited version.
+     *
+     * @param listingToEdit The original listing before edits.
+     * @param editedListing The listing with potential edits.
+     * @return {@code true} if either the name or address of {@code editedListing} differs
+     *         from {@code listingToEdit}, indicating that the identifiers have changed.
+     *         Returns {@code false} otherwise.
+     */
+    private static boolean isIdentifierChanged(Listing listingToEdit, Listing editedListing) {
+        return !listingToEdit.getAddress().equals(editedListing.getAddress())
+                || !listingToEdit.getName().equals(editedListing.getName());
     }
 
     @Override

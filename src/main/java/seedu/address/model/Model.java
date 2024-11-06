@@ -151,14 +151,20 @@ public interface Model {
     boolean hasListingOfName(Name name);
 
     /**
+     * Determines if a listing can be edited without causing duplicate identifiers within the system.
+     * Checks if the edited listing's name or address matches any existing listing (excluding the original).
+     */
+    boolean canEditListing(Listing toEdit, Listing editedListing);
+
+    /**
      * Checks if the seller has a listing associated with it
      */
     boolean hasListingsForSeller(Person seller);
+
     /**
      * Checks if the buyer has a listing associated with it
      */
     boolean hasListingsForBuyer(Person buyer);
-
 
     // Returns the listing with the same name as {@code listing} exists in the address book.
     //Person getPersonByName(Name name);
