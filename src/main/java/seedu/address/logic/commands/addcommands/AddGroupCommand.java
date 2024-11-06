@@ -26,11 +26,11 @@ public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Adds a group to the address book.\n"
+        + ": Adds a group to T_Assistant.\n"
         + "Parameters: "
-        + PREFIX_GROUP_NAME + "GROUPNAME \n"
+        + PREFIX_GROUP_NAME + "GROUP_NAME \n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Group 1 ";
+        + PREFIX_GROUP_NAME + "CS2103T-T14-1";
 
     public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) entered, only 1 will be added:";

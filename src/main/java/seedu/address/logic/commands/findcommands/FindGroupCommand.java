@@ -26,9 +26,10 @@ public class FindGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Finds all groups whose names contain any of the specified keywords (case-insensitive) "
-        + "and displays them as list with index numbers.\n"
+        + "and displays them as a list with index numbers.\n"
         + "Parameters: " + PREFIX_QUERY + "KEYWORD [" + PREFIX_QUERY + "MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + "/" + COMMAND_WORD_ALIAS + " " + PREFIX_QUERY + " group 1";
+        + "Example: " + COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + " " + PREFIX_QUERY + "CS2103-F15-3";
     public static final String NO_GROUPS_FOUND = "No groups found";
 
     private static final Logger logger = LogsCenter.getLogger(FindGroupCommand.class);

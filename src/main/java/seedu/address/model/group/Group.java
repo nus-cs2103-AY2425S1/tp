@@ -3,11 +3,15 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.exceptions.ExceedGroupSizeException;
 import seedu.address.model.student.Student;
@@ -23,7 +27,7 @@ public class Group {
     private static final int MAXIMUM_STUDENTS_IN_GROUP = 5;
     private final GroupName groupName;
     private final Set<Student> students = new HashSet<>();
-    private final Set<Task> tasks = new HashSet<>();
+    private final Set<Task> tasks = new LinkedHashSet<>();
 
     /**
      * Creates a Group with {@code groupName}, {@code students}, and {@code tasks}.
@@ -112,14 +116,18 @@ public class Group {
     }
 
     /**
-     * Replaces {@code target} with {@code editedTask}.
+     * Replaces the task at {@code index} with {@code editedTask}.
      *
-     * @param target The task to be replaced.
+     * @param index The index of the task to be replaced.
      * @param editedTask The task to replace with.
      */
-    public void setTask(Task target, Task editedTask) {
-        deleteTask(target);
-        addTask(editedTask);
+    public void setTask(Index index, Task editedTask) {
+        List<Task> taskList = new ArrayList<>(getTasks());
+        taskList.set(index.getZeroBased(), editedTask);
+        LinkedHashSet<Task> updatedTaskSet = new LinkedHashSet<>(taskList);
+
+        tasks.clear();
+        tasks.addAll(updatedTaskSet);
     }
 
     public void setTaskStatus() {

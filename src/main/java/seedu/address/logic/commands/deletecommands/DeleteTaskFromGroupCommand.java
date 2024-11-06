@@ -29,13 +29,13 @@ public class DeleteTaskFromGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "dtg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Deletes a task from a group.\n"
+        + ": Deletes a task from a group based on the index when listing all tasks in that group.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + "GROUP_NAME "
         + PREFIX_INDEX + "INDEX\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Team 5 "
-        + PREFIX_INDEX + "2";
+        + PREFIX_GROUP_NAME + "CS2103T-T14-1 "
+        + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_SUCCESS = "Deleted task: %1$s from %2$s";
 

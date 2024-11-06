@@ -33,7 +33,7 @@ public class AddTaskToGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "atg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Adds a task to a group.\n"
+        + ": Adds a task to a group identified by the group name used.\n"
         + "Parameters: "
         + PREFIX_TASK_NAME + "TASK_NAME "
         + PREFIX_TASK_DEADLINE + "TASK_DATE "
@@ -41,8 +41,8 @@ public class AddTaskToGroupCommand extends Command {
         + "[" + PREFIX_GROUP_NAME + "GROUP_NAME]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_TASK_NAME + "Complete this task "
-        + PREFIX_TASK_DEADLINE + "2024-01-01 1300 "
-        + PREFIX_GROUP_NAME + "Team 1";
+        + PREFIX_TASK_DEADLINE + "2025-01-01 1300 "
+        + PREFIX_GROUP_NAME + "CS2103T-T14-1";
 
     public static final String MESSAGE_SUCCESS = "Added task (%1$s) to the following groups:\n%2$s";
 

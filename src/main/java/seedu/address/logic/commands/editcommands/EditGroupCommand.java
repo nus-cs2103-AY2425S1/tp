@@ -34,14 +34,13 @@ public class EditGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "eg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Edits the details of the group "
-        + "by the index in the displayed group list.\n"
+        + ": Edits the details of the group based on the index when listing all groups.\n"
         + "Parameters: "
-        + "INDEX (must be an integer)"
-        + "[" + PREFIX_GROUP_NAME + "GROUP NAME]\n"
+        + PREFIX_INDEX + "INDEX "
+        + "[" + PREFIX_GROUP_NAME + "GROUP_NAME]\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_INDEX + "1 "
-        + PREFIX_GROUP_NAME + "New Group Name";
+        + PREFIX_GROUP_NAME + "CS2103-F15-3";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

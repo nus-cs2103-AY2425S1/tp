@@ -1,0 +1,100 @@
+diff a/docs/UserGuide.md b/docs/UserGuide.md	(rejected hunks)
+@@ -471,24 +471,18 @@
+ 
+ #### Listing Tasks: `list_t`, `lt`
+ 
+-Explanation of what command does.
++Show a list of all tasks in the T_Assistant.
+ 
+ **Format**: `list_t [gn/GROUP_NAME]`
+ 
+ ##### Notes
+ 
+-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
+-   remove all students from this deleted group)
++1. The group name specified mush exits in T_Assistant.
+ 2. For information on the constraints for each parameter used in this command, go
+    to [Command Parameters](#command-parameters).
+ 
+-##### Usage Scenario (for commands that can be overloaded)
+-
+-Add more scenarios if necessary
+-
+-###### Scenario #1
+-
+ This screenshot shows the result of executing `list_t`.
++![lt.png](images/screenshots/lt.png)
+ 
+ --------------------------------------------------------------------------------------------------------------------
+ 
+@@ -617,47 +611,55 @@
+ 
+ #### Deleting a Task from a Group: `del_t_g`, `dtg`
+ 
+-Explanation of what command does.
++
++Delete a task from a specified group by referencing its index in the group's task list.
+ 
+ **Format**: `del_t_g i/INDEX gn/GROUP_NAME`
+ 
+ ##### Notes
+ 
+-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
+-   remove all students from this deleted group)
+-2. For information on the constraints for each parameter used in this command, go
++1. This command is case-insensitive.
++   > `gn/CS2103-F11-2` and `gn/cs2103-f11-2` will be recognised as the same group.
++2. The index must be valid and should be the index of target task in the specified group's task list.
++3. The group name must exist in T_Assistant.
++4. For information on the constraints for each parameter used in this command, go
+    to [Command Parameters](#command-parameters).
+ 
+-##### Usage Scenario (for commands that can be overloaded)
+-
+-Add more scenarios if necessary
++##### Usage Scenario
+ 
+-###### Scenario #1
++###### Scenario #1 Delete task with index `1` from `CS2103-F11-1`
++1. Type and execute: `list_t gn/CS2103-F11-1` to see the list of tasks for `CS2103-F11-1`.
++2. After finding the task that you wish to delete, remember its index number (task with index 1 in this example).
++3. Type and execute: `del_t_g i/1 gn/CS2103-F11-1`
+ 
+-This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F12-2`.
++This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
++![dtg.png](images/screenshots/dtg.png)
+ 
+ --------------------------------------------------------------------------------------------------------------------
+ 
+ #### Deleting a Task from ALL Groups: `del_t`, `dt`
+ 
+-Explanation of what command does.
++Deletes a task from all groups that contain it.
+ 
+ **Format**: `del_t i/INDEX`
+ 
+ ##### Notes
+ 
+-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
+-   remove all students from this deleted group)
++1. The index should be the index of target task in the task list.
++2. The index mush be valid.
+ 2. For information on the constraints for each parameter used in this command, go
+    to [Command Parameters](#command-parameters).
+ 
+ ##### Usage Scenario (for commands that can be overloaded)
+ 
+-Add more scenarios if necessary
++###### Scenario #1 Delete task with index `2`
++1. Type and execute: `list_t` to see the list of tasks.
++2. After finding the task that you wish to delete, remember its index number (task with index 2 in this example).
++3. Type and execute: `del_t_g i/2`
++This screenshot shows the result of executing `del_t i/2`.
++![dt.png](images/screenshots/dt.png)
+ 
+-###### Scenario #1
+ 
+-This screenshot shows the result of executing `del_t i/1`.
+ 
+ --------------------------------------------------------------------------------------------------------------------
+ 
