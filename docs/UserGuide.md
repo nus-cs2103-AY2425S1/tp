@@ -616,29 +616,6 @@ This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Deleting a Task from ALL Groups: `del_t`, `dt`
-
-Explanation of what command does.
-
-**Format**: `del_t i/INDEX`
-
-##### Notes
-
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
-This screenshot shows the result of executing `del_t i/1`.
-
---------------------------------------------------------------------------------------------------------------------
-
 #### Deleting a Task from a Group: `del_t_g`, `dtg`
 
 Explanation of what command does.
@@ -659,6 +636,29 @@ Add more scenarios if necessary
 ###### Scenario #1
 
 This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F12-2`.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Task from ALL Groups: `del_t`, `dt`
+
+Explanation of what command does.
+
+**Format**: `del_t i/INDEX`
+
+##### Notes
+
+1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
+   remove all students from this deleted group)
+2. For information on the constraints for each parameter used in this command, go
+   to [Command Parameters](#command-parameters).
+
+##### Usage Scenario (for commands that can be overloaded)
+
+Add more scenarios if necessary
+
+###### Scenario #1
+
+This screenshot shows the result of executing `del_t i/1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
