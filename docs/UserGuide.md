@@ -5,6 +5,7 @@ title: User Guide
 
 **EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
+![Ui](images/Ui.png)
 ---
 
 {:toc}
@@ -42,7 +43,7 @@ A person can have any number of tags (including 0)
 
 When EduVault is first started, you will see an interface like the one below, made up of multiple components. Here’s a breakdown of each section and its functionality:
 
-![Ui](images/Ui.png)
+![Ui](images/Ui-intro.png)
 
 * **Options Box:**  Provides basic options like exiting the application or accessing the user guide
 * **Command Box:** An input box where users can type in commands to execute specific actions within EduVault
