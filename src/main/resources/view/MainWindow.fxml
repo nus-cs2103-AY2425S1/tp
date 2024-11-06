@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ScrollPane?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="BizBook" minWidth="750" minHeight="600" onCloseRequest="#handleExit">
@@ -48,11 +47,8 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <!-- Scrollable PinWindow section -->
-            <ScrollPane vbarPolicy="NEVER" fitToWidth="true"
-                        styleClass="pane-with-border" maxHeight="100">
-              <StackPane fx:id="pinnedListPanelPlaceholder"/>
-            </ScrollPane>
+            <!-- Horizontally Scrollable PinWindow section -->
+                <StackPane fx:id="pinnedListPanelPlaceholder" minHeight="90" maxHeight="90"/>
 
             <StackPane fx:id="contactDetailsPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>

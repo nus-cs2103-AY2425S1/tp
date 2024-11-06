@@ -374,3 +374,10 @@
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
+
+.pinned-person-item {
+    -fx-background-color: #444;
+    -fx-background-radius: 1px;
+    -fx-max-width: 180;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
