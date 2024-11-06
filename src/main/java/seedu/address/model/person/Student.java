@@ -49,7 +49,7 @@ public class Student extends Person {
      */
     public Student(Person person, LessonTime lessonTime, Education education, Grade grade, Name parentName) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
-                person.getPinned(), person.isArchived());
+                person.isPinned(), person.isArchived());
         this.lessonTime = lessonTime;
         this.education = education;
         this.grade = grade;
@@ -94,7 +94,7 @@ public class Student extends Person {
     @Override
     public int hashCode() {
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getLessonTime(),
-                this.getEducation(), this.getGrade(), this.getParentName(), this.getTags(), this.getPinned(),
+                this.getEducation(), this.getGrade(), this.getParentName(), this.getTags(), this.isPinned(),
                 this.isArchived());
     }
 
