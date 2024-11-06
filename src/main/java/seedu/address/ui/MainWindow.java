@@ -115,10 +115,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
-        supplierListPanelPlaceholder.getChildren().setAll(supplierListPanel.getRoot());
+        supplierListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
 
         deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
-        deliveryListPanelPlaceholder.getChildren().setAll(deliveryListPanel.getRoot());
+        deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -186,10 +186,10 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
-            supplierListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+            supplierListPanelPlaceholder.getChildren().setAll(supplierListPanel.getRoot());
 
             deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
-            deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
+            deliveryListPanelPlaceholder.getChildren().setAll(deliveryListPanel.getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
