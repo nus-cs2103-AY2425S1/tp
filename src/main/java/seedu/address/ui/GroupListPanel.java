@@ -48,7 +48,6 @@ public class GroupListPanel extends UiPart<Region> implements PersonListObserver
     class GroupListViewCell extends ListCell<Group> {
         @Override
         protected void updateItem(Group group, boolean empty) {
-            System.out.println("update in group called");
             super.updateItem(group, empty);
 
             if (empty || group == null) {
