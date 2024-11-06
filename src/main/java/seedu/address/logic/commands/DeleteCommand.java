@@ -83,11 +83,20 @@ public class DeleteCommand extends Command {
         }
 
         if (module != null) {
-            if (!toDelete.hasModule(module)) {
+            Module moduleToDelete = null;
+            for (Module currModule : toDelete.getModules()) {
+                if (currModule.equals(module)) {
+                    moduleToDelete = currModule;
+                    break;
+                }
+            }
+
+            if (moduleToDelete == null) {
                 throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, toDelete.getStudentId()));
             }
-            model.deleteModule(toDelete, module);
-            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, module.toString()));
+
+            model.deleteModule(toDelete, moduleToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
         }
 
         model.deletePerson(toDelete);
