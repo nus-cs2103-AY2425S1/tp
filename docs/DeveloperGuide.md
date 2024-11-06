@@ -546,6 +546,12 @@ testers are expected to do more *exploratory* testing.
     3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
        Expected: Similar to previous results with relevant fields changed
 
+    4. Test case: `edit John Doe n/John Doe`<br>
+       Expected: Error message reflecting no changes detected
+
+    5. Test case: `edit John Doe n/John Doe b/35` (given that John Doe's age is not 35) <br>
+       Expected: Contact with name `John Doe` has age updated to 35
+
 2. Editing a non-existent person's field
 
     1. Prerequisites: Person named `John Doe` must not exist.
@@ -631,8 +637,6 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case to try: `find somebody`, `find somebody 99999999`
        <br>Expected: Message displays that no one matches the criteria and list of contacts remain the same.
-
-### Importing an address book
 
 ### Listing contacts
 
