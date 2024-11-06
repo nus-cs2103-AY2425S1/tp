@@ -488,7 +488,6 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 5. The product should respond within two seconds.
 6. The product should work on Windows, Linux and Mac as long as they have `Java 17` installed.
 
-
 ### Glossary
 
 * **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
