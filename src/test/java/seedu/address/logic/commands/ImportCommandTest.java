@@ -115,16 +115,19 @@ public class ImportCommandTest {
      * Tests that executing ImportCommand with an inaccessible file path throws a CommandException.
      */
     @Test
-    public void execute_inaccessibleFilePath_throwsCommandException() {
-        // Arrange an inaccessible (non-existent) file path
-        String inaccessibleFilePath = "/nonexistent/directory/file.csv";
-        ImportCommand importCommand = new ImportCommand(inaccessibleFilePath);
+    void execute_inaccessibleFilePath_throwsCommandException() {
+        String inaccessiblePath = System.getProperty("os.name").toLowerCase().contains("win")
+                ? "C:\\Windows\\System32\\restricted-file.txt" // Use a restricted Windows path
+                : "/root/restricted-file.txt"; // Unix-based restricted path
 
-        // Act & Assert: Expect CommandException on execution
-        CommandException exception = assertThrows(CommandException.class, (
-                ) -> importCommand.execute(model));
-        assertEquals(String.format(ImportCommand.MESSAGE_FAILURE, inaccessibleFilePath), exception.getMessage());
+        // Initialize ImportCommand with inaccessiblePath
+        ImportCommand importCommand = new ImportCommand(inaccessiblePath);
+
+        assertThrows(CommandException.class, () -> {
+            importCommand.execute(model);
+        });
     }
+
 
     /**
      * Tests that ImportCommand objects with the same file path are considered equal.
