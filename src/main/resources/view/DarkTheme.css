@@ -143,8 +143,8 @@
 }
 
 #emergencyContactListView .list-cell:filled:selected #cardPane {
-    -fx-border-color: #406478;
-    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border-width: 1.5;
 }
 
 #emergencyContactListView .list-cell .label {

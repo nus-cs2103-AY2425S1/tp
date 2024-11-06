@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,10 +32,11 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    private EmergencyContactListPanel emergencyContactListPanel;
-
+    private final double EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT = 90;
+    private final double EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE = 2;
     @FXML
     private HBox cardPane;
+    private EmergencyContactListPanel emergencyContactListPanel;
     @FXML
     private Label name;
     @FXML
@@ -56,7 +59,6 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox emergencyContactsBox;
-
     @FXML
     private VBox doctorBox;
 
@@ -71,11 +73,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        doctorName.setText(person.getDoctor().getName().getDoctorName());
+        doctorPhone.setText(person.getDoctor().getPhone().value);
+        doctorEmail.setText(person.getDoctor().getEmail().value);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        emergencyContactListPanel = new EmergencyContactListPanel(
-                FXCollections.observableArrayList(person.getEmergencyContacts()));
-
-        // Follows syntax of personCard, odd here refers to the displayedIndex - 1 i.e. zero-indexed list
+        // Follows syntax of personCard, odd here refers to a zero-indexed list
         if (displayedIndex % 2 == 0) {
             doctorBox.getStyleClass().add("emergencyContactListView-odd");
             emergencyContactsBox.getStyleClass().add("emergencyContactListView-odd");
@@ -84,17 +89,33 @@ public class PersonCard extends UiPart<Region> {
             emergencyContactsBox.getStyleClass().add("emergencyContactListView-even");
         }
 
+        int numEmergencyContacts = person.getEmergencyContacts().size();
+        emergencyContactListPanel = new EmergencyContactListPanel(
+                FXCollections.observableArrayList(person.getEmergencyContacts()));
+        emergencyContactListPanel.getEmergencyContactListView().getSelectionModel()
+                .selectedItemProperty().addListener(emergencyContactSelectionListener());
         emergencyContactListPanelPlaceholder.getChildren().add(emergencyContactListPanel.getRoot());
-        // 90 is the height of 1 EmergencyContactHeight. Will update in future to make this dynamic
-        // instead of hard-coded.
-        emergencyContactListPanelPlaceholder.setPrefHeight(90 * person.getEmergencyContacts().size());
+        emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
+                numEmergencyContacts);
+        emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT * 2);
+    }
 
-        doctorName.setText(person.getDoctor().getName().getDoctorName());
-        doctorPhone.setText(person.getDoctor().getPhone().value);
-        doctorEmail.setText(person.getDoctor().getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    private ChangeListener<EmergencyContact> emergencyContactSelectionListener() {
+        return (ObservableValue<? extends EmergencyContact> observableValue,
+                EmergencyContact previousSelection,
+                EmergencyContact currentSelection) -> {
+            int updatedNumEmergencyContacts = person.getEmergencyContacts().size();
+            if (currentSelection != null) {
+                emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
+                        updatedNumEmergencyContacts + EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE * 2);
+                emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
+                        2 + EMERGENCY_CONTACT_LIST_DEFAULT_BORDER_SIZE * 2);
+            } else {
+                emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT *
+                        updatedNumEmergencyContacts);
+                emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT * 2);
+            }
+        };
     }
 
     public ListView<EmergencyContact> getEmergencyContactListView() {
