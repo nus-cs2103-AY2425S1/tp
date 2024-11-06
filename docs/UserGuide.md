@@ -324,7 +324,7 @@ Adds a task to the task list of the specified student.
 
 **Format:** `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`
 
-* Deadline must be a valid date in the format of `YYYY-MM-DD`
+* Deadline must be a valid date in the format of `YYYY-MM-DD`.
 
 **Examples:**
 * `addtask n/John Doe t/Mark assignment d/2024-12-25`
