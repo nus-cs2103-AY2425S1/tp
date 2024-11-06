@@ -19,12 +19,14 @@ public class ViewHistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the medical history of the patient identified "
-            + "by the patient ID. "
-            + "Parameters: PATIENT_ID (must be a valid ID) "
-            + "LOCAL_DATETIME \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01" + PREFIX_DATE + "2023-09-25 10:15";
-    public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for Patient";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Views the medical history of a person (patient/doctor) "
+            + "based on id provided "
+            + COMMAND_WORD + " "
+            + PREFIX_ID + "[PATIENT_ID] "
+            + PREFIX_DATE + "[LOCAL_DATE] \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01 " + PREFIX_DATE + "2023-09-25 10:15";
+    public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for the person";
 
     private final int personId;
     private final LocalDateTime dateTime;
@@ -61,7 +63,7 @@ public class ViewHistoryCommand extends Command {
         String history;
         if (dateTime != null) {
             historyDateTime = dateTime;
-            history = personToView.getAppointment(historyDateTime, personId).toString();
+            history = personToView.getOneHistory(historyDateTime, personId);
         } else {
             history = personToView.getStringAppointments();
         }

@@ -18,10 +18,10 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a person (patient/doctor). "
-            + "based on id provided "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a person (patient/doctor) "
+            + "based on id provided \n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID]"
+            + PREFIX_ID + "[PATIENT_ID] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234";
 
@@ -45,6 +45,7 @@ public class DeleteCommand extends Command {
         if (personToDelete == null) {
             throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
         }
+        personToDelete.deleteAllAppointments(model);
         model.deletePerson(personToDelete);
         if (personId == Id.getCurrentPatientIdCounter() - 2) {
             Id.reduceCurrentPatientIdCounter();

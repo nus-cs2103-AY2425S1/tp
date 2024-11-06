@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
@@ -19,16 +20,18 @@ public class CheckAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "checkA";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks the appointments of the doctor identified "
-            + "by the doctor ID. "
-            + "Parameters: DOCTOR_ID (must be a valid ID) "
-            + "LOCAL_DATETIME \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + " 01" + PREFIX_DAY_DATE + " 2023-09-25";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Checks the appointments of the person identified (patient/doctor) "
+            + "based on id provided "
+            + COMMAND_WORD + " "
+            + PREFIX_ID + "[PATIENT_ID] "
+            + PREFIX_DATE + "[LOCAL_DATE] \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01 " + PREFIX_DAY_DATE + "2023-09-25";
 
 
-    public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No appointment found for Doctor: %s";
+    public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No appointment found for the person: %s";
 
-    public static final String MESSAGE_NO_DATE_TIME = "No date time is given for Doctor appointment: %s";
+    public static final String MESSAGE_NO_DATE_TIME = "No date time is given for appointment: %s";
 
     private final int doctorId;
     private final LocalDate date;

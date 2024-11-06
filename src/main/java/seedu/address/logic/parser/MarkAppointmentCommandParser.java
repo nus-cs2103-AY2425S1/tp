@@ -45,7 +45,7 @@ public class MarkAppointmentCommandParser implements Parser<MarkAppointmentComma
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }
         String appointmentTime = String.valueOf(requireNonNull(argumentMultimap.getValue(PREFIX_DATE)));
-        LocalDateTime time = ParserUtil.parseDate(appointmentTime);
+        LocalDateTime time = ParserUtil.parseDateWithNoLimit(appointmentTime);
         return new MarkAppointmentCommand(time, patientId, doctorId);
     }
 

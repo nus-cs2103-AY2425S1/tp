@@ -55,7 +55,7 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
         Optional<String> dateTimeString = argumentMultimap.getValue(PREFIX_DATE);
         if (dateTimeString.isPresent()) {
             try {
-                dateTime = ParserUtil.parseDate(dateTimeString.get().trim());
+                dateTime = ParserUtil.parseDateWithNoLimit(dateTimeString.get().trim());
             } catch (ParseException e) {
                 throw new ParseException("Invalid date-time format. Please use yyyy-MM-dd HH:mm.");
             }

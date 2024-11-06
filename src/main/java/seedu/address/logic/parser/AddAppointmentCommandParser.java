@@ -49,7 +49,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         String remarks = argumentMultimap.getValue(PREFIX_REMARK).orElse("");
         String appointmentTime = String.valueOf(requireNonNull(argumentMultimap.getValue(PREFIX_DATE)));
-        LocalDateTime time = ParserUtil.parseDate(appointmentTime);
+        LocalDateTime time = ParserUtil.parseDateWithNoLimit(appointmentTime);
         return new AddAppointmentCommand(time, patientId, doctorId, remarks);
     }
 

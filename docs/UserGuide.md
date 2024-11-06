@@ -363,13 +363,13 @@ Examples:
    **Output**: <br>
    The doctor already has another appointment!
 
-### View History of a Patient : `view`
+### View History of a Person : `view`
 
-Displays the history of an existing patient with the specified `PatientId` in the MedDict database in address book.
+Displays the history of an existing person with the specified `Id` in the MedDict database in address book.
 
-Format: `view z/PATIENT_ID [x/DATE_TIME] …​`
+Format: `view z/ID [x/DATE_TIME] …​`
 
-* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* **Id**: Must be valid, present in the MedDict database.
 * **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DATE_TIME]` when calling the command.
 * A _notification message_ will be output if there are no histories found for the doctor.
 
@@ -383,16 +383,16 @@ Examples:
    Appointment: `2024-12-31 16:23` for `00` (patient id) with `01` (doctor id). Remarks: `Fourth physiotherapy session`.
 *  `view z/1 x/2024-12-31` <br>
    **Output**: <br>
-   No history found for Patient.
+   No history found for the person.
 
-### Check Appointment of a Doctor : `checkA`
+### Check Appointment of a Person : `checkA`
 
-Checks the appointments of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
+Checks the appointments of an existing person with the specified `Id` in the MedDict database in address book.
 
-Format: `checkA z/DOCTOR_ID y/DATE`
+Format: `checkA z/ID y/DATE`
 
-* **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
-* A _notification message_ will be output if there are no appointments found for the doctor.
+* **Id**: Must be valid, present in the MedDict database.
+* A _notification message_ will be output if there are no appointments found for the person.
 
 Examples:
 *  `checkA z/1 y/2024-12-31` <br>
@@ -405,10 +405,12 @@ Examples:
 
 ### Mark Appointment of a Doctor : `mark`
 
-Marks appointment of an existing doctor with the specified `DoctorId` in the MedDict database in address book.
+Marks appointment of an existing patients with the specified `PatientId`  
+with a doctor with the specified `DoctorId` in the MedDict database in address book.
 
 Format: `mark x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 
+* **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in marking appointments.
 
@@ -420,9 +422,10 @@ Examples:
    **Output**: <br>
    The appointment doesn't exist!
 
-### Delete Appointment of a Doctor : `deleteA`
+### Delete Appointment : `deleteA`
 
-Deletes appointment of a existing patient for both patient and doctor with the specified `PatientId` and `DoctorId` in the MedDict database in address book.
+Deletes appointment of an existing patient with the specified `PatientId` 
+with a doctor with the specified `DoctorId` in the MedDict database in address book.
 
 Format: `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
 
