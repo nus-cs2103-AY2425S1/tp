@@ -463,7 +463,7 @@ Fields
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy
+    * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -509,7 +509,7 @@ Fields
 
 * `TUTORIAL`: Name of the tutorial to mark the attendance for all students
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy
+    * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -553,7 +553,7 @@ Fields
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
-  * Must be in format dd/MM/yyyy
+  * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
