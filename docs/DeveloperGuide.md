@@ -194,14 +194,14 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
 
 **Aspect: How add command is carried out:**
 
-* **Alternative 1 (current choice):** Key in all details for student in one command.
-  * Pros: Easy to implement, only one command needs to be key in by user.
+* **Alternative 1 (current choice):** Key in all the details for student in one command.
+  * Pros: Easy to implement, as only one command needs to be key in by user.
   * Cons: Command might get too long.
 
-* **Alternative 2:** Key in details for students in multiple steps.
-  * Pros: Step by step adding of details might be more convenient for new users.
-  * Cons: Hard to implement, especially with optional fields and compulsory fields. It is also
-  not user-friendly for users who type fast due to multi line commands required to add a student.
+* **Alternative 2:** Key in the details for students in multiple steps.
+  * Pros: A step-by-step guide for adding details can be especially helpful for new users, as it offers clear and structured guidance.
+  * Cons: It is hard to implement, especially with a mix of optional and compulsory fields. 
+  Additionally, it is not user-friendly for fast typists, as multiline commands are required to add a student.
 
 
 ### Owe feature
