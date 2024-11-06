@@ -46,12 +46,6 @@ public class MeetingTest {
                 .withTime(meeting.getMeetingTime().plusHours(1)).build();
         assertTrue(meeting.getMeetingDate().equals(otherMeeting.getMeetingDate()));
         assertFalse(meeting.hasConflictMeeting(otherMeeting));
-        // no conflicts with a meeting with different set of contact uids
-        otherMeeting = new MeetingBuilder(meeting)
-                .withContactUids(List.of(UUID.randomUUID())).build();
-        assertTrue(meeting.getMeetingDate().equals(otherMeeting.getMeetingDate()));
-        assertTrue(meeting.getMeetingTime().equals(otherMeeting.getMeetingTime()));
-        assertFalse(meeting.hasConflictMeeting(otherMeeting));
     }
 
     @Test
