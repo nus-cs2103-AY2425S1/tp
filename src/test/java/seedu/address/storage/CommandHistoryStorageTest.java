@@ -136,7 +136,8 @@ public class CommandHistoryStorageTest {
 
     @Test
     void testEquals_sameInstance() {
-        assertTrue(commandHistoryStorage.equals(commandHistoryStorage), "An instance should be equal to itself");
+        assertTrue(commandHistoryStorage.equals(commandHistoryStorage),
+                "An instance should be equal to itself");
     }
 
     @Test
@@ -146,7 +147,8 @@ public class CommandHistoryStorageTest {
 
     @Test
     void testEquals_differentClass() {
-        assertFalse(commandHistoryStorage.equals("some string"), "An instance should not be equal to an object of a different class");
+        assertFalse(commandHistoryStorage.equals("some string"),
+                "An instance should not be equal to an object of a different class");
     }
 
     @Test
@@ -154,6 +156,7 @@ public class CommandHistoryStorageTest {
         CommandHistoryStorage anotherInstance = new CommandHistoryStorage();
         anotherInstance.setCommandHistoryFilePath(testFilePath);
 
-        assertTrue(commandHistoryStorage.equals(anotherInstance), "Instances with identical fields should be equal");
+        assertTrue(commandHistoryStorage.equals(anotherInstance),
+                "Instances with identical fields should be equal");
     }
 }
