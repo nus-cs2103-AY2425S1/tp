@@ -38,6 +38,11 @@ public class EditAppointmentParser implements Parser<EditAppointmentCommand> {
                 PREFIX_NEW_START_TIME,
                 PREFIX_NEW_END_TIME);
 
+        if (!argumentMultimap.getPreamble().equals("")) {
+            throw new ParseException("Please do not enter anything before the keywords!\n"
+            + "Please remove this from your input: " + argumentMultimap.getPreamble());
+        }
+
         if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC,
                 PREFIX_DATE,
                 PREFIX_START_TIME)) {

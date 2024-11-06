@@ -25,24 +25,14 @@ public class AddAppointmentParser implements Parser<AddAppointmentCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddAppointmentCommand parse(String userInput) throws ParseException {
-        System.out.println("got input" + userInput);
 
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NRIC,
             PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME);
 
-        if (!argumentMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            System.out.println("NRIC not found");
+        if (!argumentMultimap.getPreamble().equals("")) {
+            throw new ParseException("Please do not enter anything before the keywords!\n"
+            + "Please remove this from your input: " + argumentMultimap.getPreamble());
         }
-        if (!argumentMultimap.getValue(PREFIX_DATE).isPresent()) {
-            System.out.println("Date not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_START_TIME).isPresent()) {
-            System.out.println("Start time not found");
-        }
-        if (!argumentMultimap.getValue(PREFIX_END_TIME).isPresent()) {
-            System.out.println("End time not found");
-        }
-
 
         if (!arePrefixesPresent(argumentMultimap, PREFIX_NRIC, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME)) {
             System.out.println("Prefixes not found");
