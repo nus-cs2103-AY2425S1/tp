@@ -50,7 +50,7 @@ public class AddCommand extends Command {
             + PREFIX_BIRTHDAY + "13-12-2003";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This phone number already exists in the address book";
 
     private final Person toAdd;
 

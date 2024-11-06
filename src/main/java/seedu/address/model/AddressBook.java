@@ -73,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person person) {
         if (hasPerson(person)) {
-            throw new IllegalArgumentException("This person already exists in the address book.");
+            throw new IllegalArgumentException("This phone number already exists in the address book.");
         }
         persons.add(person);
     }
