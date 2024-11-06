@@ -233,8 +233,8 @@ The activity diagram shows the general sequence of steps when a user interacts w
 ### Edit person feature
 
 #### Design considerations
-**Aspect: Check if the person with person id exists before editing**
-- This is to ensure no unwanted errors occur while editing the person.
+**Aspect: Check if the person with `personId` exists before editing**
+- This is to ensure no unwanted errors occur while editing the person and helps to maintain data integrity.
 
 <br>
 
@@ -245,6 +245,13 @@ The activity diagram shows the general sequence of steps when a user interacts w
 - Alternative 1 (Current choice): Deleting a person will also remove any appointments with the personId of that person, this is to prevent any appointments with person ids that are non-existent.
 - Alternative 2: We assume the user deletes the appointment, however this is not a good assumption since the user might forget doing so.
 
+**Aspect: Deleting a person should also remove appointments linked to the person**
+
+- **Alternative 1 (Current choice):** Deleting a person will also remove an appointments with the `personId` of that person.
+  - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
+- **Alternative 2:** Deleting a person will not remove any appointments with the `personId` of that person.
+  - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
+  
 <br>
 
 ### Find person feature
@@ -265,22 +272,23 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 ### Clear person feature
 #### Design considerations
-**Aspect: Should `clear persons` also delete appointments**
-- Alternative 1 (Current choice): The `clear persons` command should also clear the appointments else there will be alot of appointments inside the application that are linked to person ids that don't exists. Causing confusion for the users.
-- Alternative 2 : We assume the user will run `clear appt` command after they run `clear persons` to remove the previous appointments
-
+**Aspect: Should `clear person` also delete all the appointments**
+- Alternative 1 (current choice): The `clear person` command should also clear all appointments.
+  - Pros: This prevents the case where the appointments are linked to deleted personIds which do not exist. Hence, this prevents confusion for users.
+- Alternative 2 : The `clear person` command does not clear all appointments.
+  - Cons: This assumes the user will always run `clear appt` after running `clear person`
 <br>
 
 ### Add appointment feature
 #### Design considerations
 **Aspect: Should we implement as `addAppt` or `add appt`**
 - Alternative 1 (Current choice): Implement the add appointment feature as `add appt`
-  - Pros: Allows us to use the existing infrastructure, just have to add code to detect weather the entity is `appt` or not.
+  - Pros: Allows us to use the existing infrastructure, just have to add code to detect whether the entity is `appt` or not.
   - Cons: Adds extra code to the file since more arguments need to be parsed, hence there is a chance of SLAP being violated.
 - Alternative 2: Implement the add appointment function as `addAppt`
-  - Pros: Creates a seperate command, so the implementations of `add person` and `add appointment` will be seperated from each other.
-  - Cons: Implementation requires a different parser, so we will be adding a huge amount of additional lines of code. 
-
+  - Pros: Creates a separate command, so the implementations of `add person` and `add appointment` will be separated from each other.
+  - Cons: Implementation requires a different parser, so we will be adding a huge amount of additional lines of code.
+Later, we decided to you the same infrastructure for all the command types.
 <br>
 
 ### Edit appointment feature
