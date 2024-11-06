@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,16 +51,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        int prefixCount = 0;
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            prefixCount++;
-        }
-        if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
-            prefixCount++;
-        }
-        if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
-            prefixCount++;
-        }
+        long prefixCount = Stream.of(PREFIX_NAME, PREFIX_MODULE, PREFIX_COURSE)
+                .filter(prefix -> argMultimap.getValue(prefix).isPresent())
+                .count();
 
         if (prefixCount > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
