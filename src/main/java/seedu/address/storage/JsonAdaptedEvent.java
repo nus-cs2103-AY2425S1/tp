@@ -91,11 +91,11 @@ public class JsonAdaptedEvent {
             final LocalDate modelStartDate = LocalDate.parse(eventFrom);
             final LocalDate modelEndDate = LocalDate.parse(eventTo);
             if (!EventDuration.isValidDuration(modelStartDate, modelEndDate)) {
-                throw new IllegalValueException(EventDuration.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(EventDuration.MESSAGE_CONSTRAINTS_DATE_ORDER);
             }
             modelEventDuration = new EventDuration(modelStartDate, modelEndDate);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(EventDuration.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
         }
         return modelEventDuration;
     }
