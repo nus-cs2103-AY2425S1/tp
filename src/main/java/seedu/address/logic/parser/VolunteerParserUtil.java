@@ -2,9 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exceptions.VolunteerDuplicateDateException;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
@@ -73,9 +77,16 @@ public class VolunteerParserUtil {
      */
     public static VolunteerDates parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!VolunteerDates.isValidListOfDates(trimmedDate)) {
-            throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+        String trimmedDate = date.replaceAll("\\s+", "");
+        String[] datesArr = trimmedDate.split(",");
+        Set<String> uniqueDates = new HashSet<>();
+        for (String d : datesArr) {
+            if (!VolunteerDates.isValidDate(d)) {
+                throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+            }
+            if (!uniqueDates.add(d)) {
+                throw new ParseException((new VolunteerDuplicateDateException(d)).getMessage());
+            }
         }
         return new VolunteerDates(trimmedDate);
     }
@@ -110,5 +121,26 @@ public class VolunteerParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a given string as a search term returns it after validation.
+     *
+     * @param searchTerm The email string to be parsed.
+     * @return A valid search term as a string object.
+     * @throws ParseException If the given search term does not conform to Name's constraints.
+     */
+    public static String parseSearchTerm(String searchTerm) throws ParseException {
+        requireNonNull(searchTerm);
+        searchTerm = searchTerm.trim();
+        if (searchTerm.isEmpty()) {
+            throw new ParseException("Names cannot be empty!");
+        }
+
+        if (!searchTerm.matches(Name.VALIDATION_REGEX)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+
+        return searchTerm;
     }
 }
