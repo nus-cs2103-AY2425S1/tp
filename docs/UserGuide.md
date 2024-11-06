@@ -378,16 +378,19 @@ If your changes to the data file makes its format invalid, PROperty will discard
 Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PROperty home folder.
+**A**: To transfer your data, install the application on the other computer. After installation, locate the data folder, which is in the same location as the app itself. Replace the JSON file in this folder with your existing JSON file that contains your data. This will allow you to access your previous data seamlessly on the new computer.
+
+**Q**: Can I customise the tags or categories for contacts and properties?<br>
+**A**: Customising tags is not currently supported. Users can only use the predefined tags listed in the table provided in this guide.
+
+**Q**: Is there a way to restore a deleted contact?<br>
+**A**: Unfortunately, it is not possible to restore a deleted contact. We strongly recommend that users regularly save a backup of their contacts to prevent accidental data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 
