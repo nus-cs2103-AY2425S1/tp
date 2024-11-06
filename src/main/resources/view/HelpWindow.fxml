@@ -15,6 +15,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <fx:root minHeight="600" minWidth="460" title="Help" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
@@ -64,160 +65,307 @@
                         <VBox HBox.hgrow="ALWAYS" fx:id="textVBox">
                             <GridPane HBox.hgrow="ALWAYS">
                                 <VBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
-                                      GridPane.columnIndex="0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                      GridPane.columnIndex="0" maxWidth="Infinity" VBox.vgrow="ALWAYS" minWidth="500">
 
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
-                                            <Label fx:id="clearTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="clearTextPurpose" styleClass="text-command, text-command-purpose"/>
+                                            <Label fx:id="clearTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content" minWidth="400">
+                                                <Text fx:id="clearTextPurpose"
+                                                      styleClass="text-command, text-command-purpose"/>
                                                 <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="clearTextFormat" styleClass="text-command, text-command-code"/>
+                                                <Label fx:id="clearTextFormat"
+                                                       styleClass="text-command-code, text-command" wrapText="true"/>
                                                 <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="clearTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
-                                        <VBox>
-                                            <Label fx:id="deleteTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="deleteTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="deleteTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="deleteTextExample" styleClass="text-command, text-command-example"/>
+                                                <Text fx:id="clearTextExample"
+                                                      styleClass="text-command, text-command-example"/>
                                             </VBox>
                                         </VBox>
                                     </HBox>
 
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
-                                            <Label fx:id="demoteTextHeader" styleClass="text-command, text-command-header"/>
+                                            <Label fx:id="deleteTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
                                             <VBox styleClass="text-inner-content">
-                                                <Text fx:id="demoteTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="demoteTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="demoteTextExample" styleClass="text-command, text-command-example"/>
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints
+                                                                hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="deleteTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="deleteTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="deleteTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
                                             </VBox>
                                         </VBox>
                                     </HBox>
 
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
-                                            <Label fx:id="editTextHeader" styleClass="text-command, text-command-header"/>
+                                            <Label fx:id="demoteTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
                                             <VBox styleClass="text-inner-content">
-                                                <Text fx:id="editTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="editTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="editTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="employeeTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="employeeTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="employeeTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="employeeTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="exitTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="exitTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="exitTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="exitTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="findTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="findTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="findTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="findTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="helpTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="helpTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="helpTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="helpTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="listTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="listTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="listTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="listTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="potentialTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="potentialTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="potentialTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="potentialTextExample" styleClass="text-command, text-command-example"/>
-                                            </VBox>
-                                        </VBox>
-                                    </HBox>
-
-                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
-                                        <VBox>
-                                            <Label fx:id="promoteTextHeader" styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content">
-                                                <Text fx:id="promoteTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="promoteTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="promoteTextExample" styleClass="text-command, text-command-example"/>
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="demoteTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="demoteTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="demoteTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
                                             </VBox>
                                         </VBox>
                                     </HBox>
 
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
-                                            <Label fx:id="sortTextHeader" styleClass="text-command, text-command-header"/>
+                                            <Label fx:id="editTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
                                             <VBox styleClass="text-inner-content">
-                                                <Text fx:id="sortTextPurpose" styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="sortTextFormat" styleClass="text-command, text-command-code"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="sortTextExample" styleClass="text-command, text-command-example"/>
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="editTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="editTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="editTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <VBox>
+                                            <Label fx:id="employeeTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="employeeTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="employeeTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="employeeTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <VBox>
+                                            <Label fx:id="exitTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="exitTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="exitTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="exitTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <VBox>
+                                            <Label fx:id="findTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="findTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="findTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="findTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <VBox>
+                                            <Label fx:id="helpTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="helpTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="helpTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="helpTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <VBox>
+                                            <Label fx:id="listTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="listTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="listTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="listTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <VBox>
+                                            <Label fx:id="potentialTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="potentialTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="potentialTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="potentialTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <VBox>
+                                            <Label fx:id="promoteTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="promoteTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="promoteTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="promoteTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
+                                            </VBox>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <VBox>
+                                            <Label fx:id="sortTextHeader"
+                                                   styleClass="text-command, text-command-header"/>
+                                            <VBox styleClass="text-inner-content">
+                                                <GridPane HBox.hgrow="ALWAYS">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           minWidth="10" prefWidth="150" />
+                                                    </columnConstraints>
+                                                    <VBox minHeight="-Infinity">
+                                                        <Text fx:id="sortTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="sortTextFormat"
+                                                               styleClass="text-command-code, text-command"
+                                                               wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="sortTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </GridPane>
                                             </VBox>
                                         </VBox>
                                     </HBox>
