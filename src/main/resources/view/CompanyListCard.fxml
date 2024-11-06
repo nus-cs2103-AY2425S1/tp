@@ -32,6 +32,7 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="careerPageUrl" styleClass="cell_small_label" text="\$careerPageUrl" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="isBookmark" styleClass="cell_small_label" text="\$isBookmark" />
       <HBox spacing="5" alignment="CENTER_LEFT">
         <Label text="Application Status:" style="-fx-background-color: lightblue; -fx-padding: 3 5 3 5; -fx-border-radius: 3; -fx-background-radius: 3;" />
         <Label fx:id="applicationStatus" style="-fx-font-weight: bold;" />

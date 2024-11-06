@@ -44,6 +44,8 @@ public class Messages {
                 .append(company.getAddress())
                 .append("; Url: ")
                 .append(company.getCareerPageUrl())
+                .append("; Bookmark: ")
+                .append(company.getIsBookmark())
                 .append("; Tags: ");
         company.getTags().forEach(builder::append);
         return builder.toString();

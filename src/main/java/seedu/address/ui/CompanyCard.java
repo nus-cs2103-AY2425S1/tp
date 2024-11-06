@@ -43,6 +43,8 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label isBookmark;
+    @FXML
     private Label applicationStatus;
     @FXML
     private FlowPane tags;
@@ -59,6 +61,7 @@ public class CompanyCard extends UiPart<Region> {
         phone.setText(company.getPhone().value);
         address.setText(company.getAddress().value);
         careerPageUrl.setText(company.getCareerPageUrl().value);
+        isBookmark.setText(company.getIsBookmark().prettyString());
         applicationStatus.setText(company.getApplicationStatus().value);
         email.setText(company.getEmail().value);
         company.getTags().stream()
