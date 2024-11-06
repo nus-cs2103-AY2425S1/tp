@@ -14,7 +14,8 @@ public class WelcomeCommandTest {
 
     @Test
     public void execute_welcome_success() {
-        CommandResult expectedCommandResult = new CommandResult(WELCOME_MESSAGE, false, false);
+        CommandResult expectedCommandResult = new CommandResult(WELCOME_MESSAGE, false, false,
+                WelcomeCommand.USERGUIDE_URL);
         assertCommandSuccess(new WelcomeCommand(), model, expectedCommandResult, expectedModel);
     }
 }

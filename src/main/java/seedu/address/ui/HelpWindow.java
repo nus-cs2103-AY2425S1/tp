@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -37,10 +39,12 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n\t"
             + "price:\tFinds restaurants who belong in any of the given price labels"
             + "\n\t"
-            + "\nFor the full list, refer to the user guide: " + USERGUIDE_URL;
+            + "\nFor the full list, refer to the user guide: ";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private final HostServices hostServices;
 
     @FXML
     private Button copyButton;
@@ -48,21 +52,28 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private Hyperlink helpLink;
+
     /**
      * Creates a new HelpWindow.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, HostServices hostServices) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+
+        this.hostServices = hostServices;
+        helpLink.setText(USERGUIDE_URL);
+        helpLink.setOnAction(e -> hostServices.showDocument(USERGUIDE_URL));
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(HostServices hostServices) {
+        this(new Stage(), hostServices);
     }
 
     /**
