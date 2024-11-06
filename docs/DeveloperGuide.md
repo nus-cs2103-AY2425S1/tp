@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventListPanel`, `VolunteerListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Event` and `Volunteer` objects residing in the `Model`.
 
 ### Logic component
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command.
    - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a volunteer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -221,7 +221,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Preconditions**: NA
 
 **MSS**:
-1. User enters event's details.
+1. User enters the event's details.
 2. User submits the event's details to the system.
 3. System checks if all required information is present, and that all information is valid.
 4. System creates the new event and confirms creation to the user.
@@ -392,7 +392,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
 
-    2. Test case: `/e new n/ Sail the Seven Seas s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ Changi Beach des/ on board Queen Ann's Revenge`<br>
+    2. Test case: `/e new n/ Sail the Seven Seas s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ Changi Beach des/ on board Queen Anns Revenge`<br>
        Expected: The new event is added to the end of the list. The status message should reflect the successful creation of the event.
 
     3. Test case: `/e new`<br>
@@ -403,7 +403,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a volunteer
 
-1. Adding an volunteer while all events are being shown
+1. Adding a volunteer while all events are being shown
 
     1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
 
@@ -441,7 +441,7 @@ testers are expected to do more *exploratory* testing.
       Expected: First volunteer is deleted from the list. The status message should reflect the successful deletion of the volunteer.
 
    3. Test case: `/v del 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No volunteer is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `del 1`, `/v del x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -454,37 +454,66 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `assign e/ 1 v/ 1`<br>
        Expected: The volunteer is assigned to the event. The status message should reflect the successful assignment of the volunteer to the event. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
-       ![Assign Volunteer To Event](images/AssignVolunteerToEvent.png)\
+       ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
    
    3. Test case: `assign e/ 1 v/ 0`<br>
-         Expected: The volunteer is not assigned to the event. Error details remains the same. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
+       Expected: The volunteer is not assigned to the event. Error details shown in the status message. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
+       ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
 
-    4. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
-       Expected: Similar to previous.
+   5. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
+      Expected: Similar to previous.
 
 ### Un-assigning a volunteer from an event
 
 1. Un-assigning a volunteer from an event while all volunteers and events are being shown
 
-    1. Prerequisites: LIst all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
+    1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
 
     2. Test case: `unassign e/ 1 v/ 1`<br>
-       Expected: The volunteer is unassigned from the event. The status message should reflect the successful unassignment of the volunteer from the event. The event should be removed from the list of events of the volunteer, and the volunteer should be removed from the list of volunteers of the event as shown below.<br/>
-       ![Unassign Volunteer From Event](images/UnassignVolunteerFromEvent.png)
+       Expected: The volunteer is unassigned from the event. The status message should reflect the successful un-assignment of the volunteer from the event. The event should be removed from the list of events of the volunteer, and the volunteer should be removed from the list of volunteers of the event as shown below.<br/>
+       ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
 
    3. Test case: `unassign e/ 1 v/ 0`<br>
-      Expected: The volunteer is not assigned to the event. Error details remains the same. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
+       Expected: The volunteer remains assigned to the event. Error details shown in the status message. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
+       ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
 
-   4. Other incorrect assign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
+   4. Other incorrect unassign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
       Expected: Similar to previous.
 
-### Saving data
+### Finding an event by keyword
 
-1. Dealing with missing/corrupted data files
+1. Finding event(s) with names containing a keyword
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
 
-2. _{ more test cases …​ }_
+    2. Test case: `/e find n/ Sail`<br>
+       Expected: The event with the name containing the keyword "Sail" is shown in the list. The status message should reflect the successful search for the event.
+
+    3. Test case: `/e find n/ [non-existent keyword]`<br>
+       Expected: No event is found. The status message should reflect the absence of any events with the keyword, and all events should be shown in the list.
+
+    4. Other incorrect find commands to try: `find`, `/e find n/`, `...`<br>
+       Expected: Similar to previous. 
+
+### Finding a volunteer by keyword
+
+1. Finding volunteer(s) with names containing a keyword
+
+    1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+
+    2. Test case: `/v find n/ Aramado`<br>
+       Expected: The volunteer with the name containing the keyword "Aramado" is shown in the list. The status message should reflect the successful search for the volunteer.
+
+    3. Test case: `/v find n/ [non-existent keyword]`<br>
+       Expected: No volunteer is found. The status message should reflect the absence of any volunteers with the keyword, and all volunteers should be shown in the list.
+
+    4. Other incorrect find commands to try: `find`, `/v find n/`, `...`<br>
+       Expected: Similar to previous.
+
+### Listing all Events And Volunteers
+
+1. Test case: `list`<br>
+   Expected: All events and volunteers are shown in the list. The status message should reflect the successful listing of all events and volunteers.
 
 ## Appendix: Effort
 
