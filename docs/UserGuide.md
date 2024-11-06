@@ -232,7 +232,7 @@ Format: `edit_assignment si/INDEX ai/INDEX`
 
 Examples:
 * `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st 
-  student in the results of the `find` command to the new name and new max score specified.
+  student to the new name and new max score specified.
 * `edit_assignment si/1 ai/1 an/Assignment 1` will only change the name of the selected assignment.
 * `edit_assignment si/1 ai/1 ms/100` will only change the max score of the selected assignment.
 * `edit_assignment si/1 ai/2 an/Math Assignment ms/100` will change the 2nd assignment of the 1st student to be with 
@@ -275,7 +275,7 @@ Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
 
 Examples:
 * `view_student 1` followed by `grade si/1 ai/1 s/80` grades the 1st assignment of the 1st
-    student in the results of the `find` command with a score of 80.
+    student with a score of 80.
 * `grade si/1 ai/1 s/80`
   ![result for `grade si/1 ai/1 s/80`](images/gradeAssignment.png)
 
