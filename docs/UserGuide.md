@@ -68,9 +68,9 @@ Action     | Format, Examples
 
 <box type="warning" header="##### Notes">
 
-* The prefixes (e.g. `a/`, `s/` or `paid`) are case-insensitive, i.e. can use `a/`, `s/` or `pAId/` instead.
+* The prefixes (e.g. `a/`, `s/` or `paid`) are case-insensitive, i.e. you can use `a/`, `s/` or `pAId/` instead.
 
-* You should not use the prefixes in any other cases, for example, as a content of **ADDRESS**.
+* You should not use the prefixes in any other cases, e.g. as content of **ADDRESS**.
 </box>
 
 ## Features
