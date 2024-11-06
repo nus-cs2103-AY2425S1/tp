@@ -248,75 +248,67 @@ The sequence diagram shows how an entity command is executed:
 
 ### General Design Considerations
 
+**Aspect: Whether to implement entity commands as separate commands or through an abstract base command**
+- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity commands (e.g., AddPersonCommand, AddAppointmentCommand, DeletePersonCommand, DeleteAppointmentCommand) inherit from.
+  - Pros: Allows for reuse of code logic between entity commands
+  - Cons: Requires additonal parsing logic since entity in command must be distinguished (person or appointment), which can add complexity
+- **Alternative 2:** Implement each entity command as entirely separate classes.
+  - Pros: Creates a separate command, so the implementations of each command are separated and less coupled
+  - Cons: Results in significant code duplication
+
 <br>
 
 ### Command-Specific Design Considerations
 
-#### Edit Person feature
+#### Delete/Clear Person feature
 
-**Aspect: Check if the person with `personId` exists before editing**
-- This is to ensure no unwanted errors occur while editing the person and helps to maintain data integrity.
+**Aspect: Deleting person and clearing person list should:**
 
-**Aspect: Deleting a person should also remove appointments linked to the person**
-
-- **Alternative 1 (Current choice):** Deleting a person will also remove an appointments with the `personId` of that person.
+- **Alternative 1 (Current choice):** remove appointments with the `personId` of that person.
   - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
-- **Alternative 2:** Deleting a person will not remove any appointments with the `personId` of that person.
+- **Alternative 2:** not remove any appointments with the `personId` of that person.
   - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
   
 <br>
 
-#### Clear Person feature
+#### Edit Person/Appointment feature
 
-**Aspect: Whether the `clear person` command also delete all the appointments**
-- **Alternative 1 (current choice):** The `clear person` command should also clear all appointments.
-  - Pros: This prevents the case where the appointments are linked to deleted personIds which do not exist. Hence, this prevents confusion for users.
-- **Alternative 2 :** The `clear person` command does not clear all appointments.
-  - Cons: This assumes the user will always run `clear appt` after running `clear person`
-  
-<br>
-
-#### Add appointment feature
-
-**Aspect: Whether we implement as `addAppt` or `add appt`**
-- **Alternative 1 (Current choice):** Implement the add appointment feature as `add appt`
-  - Pros: Allows us to use the existing infrastructure, just have to add code to detect whether the entity is `appt` or not.
-  - Cons: Adds extra code to the file since more arguments need to be parsed, hence there is a chance of SLAP being violated.
-- **Alternative 2:** Implement the add appointment function as `addAppt`
-  - Pros: Creates a separate command, so the implementations of `add person` and `add appointment` will be separated from each other.
-  - Cons: Implementation requires a different parser, so we will be adding a huge amount of additional lines of code.
-Later, we decided to you the same infrastructure for all the command types.
+**Aspect: During Edit Appointment, check if new person ID associated with edited appointment corresponds to an existing person in the address book**
+- This is to ensure no unwanted errors occur while editing the appointment and helps to maintain data integrity.
 
 <br>
 
-#### Edit Appointment feature
+#### Find Person/Appointment feature
 
-**Aspect: Check if the appointment with appointment id exists before editing**
-- This is to ensure no unwanted errors occur while editing the appointment.
+**Aspect: How to show find person/appointment based on different criteria**
 
-<br>
-
-#### Find Appointment feature
-
-**Aspect: How to show find appointment.**
-
-- **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+- **Alternative 1 (Current choice)**: Create one find command that supports filtering by multiple criteria (name, date) using prefixes.
   - Pros: Fast and easy to find by date and name
   - Cons: Confusing syntax from user's perspective
 
 - **Alternative 2**: Create different find commands, find by date, find by name etc.
   - Pros: Much easy in terms of user experience
-  - Cons: Harder to implement as more code needs to be written.
+  - Cons: More repeated code for each command
 
 <br>
 
-#### Clear Appointment feature
+**Aspect: How to combine multiple prefixes when finding results**
 
-**Aspect**: How appointments are cleared
+- **Alternative 1 (Current choice)**: Prefixes should be combined using an AND condition.
+  - Pros: Ensures more specific search results, as all conditions must be met
+  - Cons: May be too restrictive
 
-- **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
+- **Alternative 2**: Prefixes should be combined using an OR condition
+  - Pros: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
+  - Cons: May return too many results
 
 <br>
+
+<box type="tip" theme="success" seamless>
+
+**Tip:**
+For future developers wanting to add new predicates, you can ..laskdjflaksjdfaklsdfjalsdf
+</box>
 
 ---
 
@@ -389,13 +381,13 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 ### Data storage and files
 
 **Aspect: Save patient and appointment data in:**
+<br>
 * **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
     * Pros: 
         * More organised file management
         * Quicker read and write times for each file
     * Cons: 
         * Higher chance of inconsistencies between patient and appointment data
-
 * **Alternative 2:** one single file named `data/addressbook.json`
     * Pros:
         * Simplicity and convenience of one file for all information
@@ -412,12 +404,10 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 <br>
 
 **Aspect: When the data is updated in the `.json` file:**
-
+<br>
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
     * Pros: Simplifies the process for the user, without needing to save manually.
     * Cons: May be slow if there are many changes to save.
-
-
 * **Alternative 2:** Prompt the user to save changes before exiting.
     * Pros: Gives the user more control over the saving process.
     * Cons: May be annoying for users who do not want an additional step to save changes.
