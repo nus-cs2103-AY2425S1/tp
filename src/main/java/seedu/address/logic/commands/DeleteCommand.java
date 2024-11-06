@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person with a positive integer index/name/email/phone/name & email/ name & phone \n"
+            + ": Deletes the person with a positive integer index/name/email/phone/name & email/name & phone \n"
             + "Parameters:\n"
             + "n/NAME\n"
             + "n/EMAIL\n"
