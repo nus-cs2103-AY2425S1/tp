@@ -208,7 +208,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `HRPlatformParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `HRPlatformParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HRPlatformParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -317,7 +317,7 @@ The `delete` command allows users to delete a `Person` from the `HRPlatform`.
 - `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `DeleteCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -361,7 +361,7 @@ The `edit` command allows users to edit a `Person` in the `HRPlatform`.
 - `LogicManager`: Invokes the `EditCommand` to execute the edit operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `EditCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -413,7 +413,7 @@ To help you understand how the `list` command works, here is a list of steps ill
 We will be using the user input `list` as an example.
 
 1. The user executes the command `list`, intending to list all persons in the address book.
-2. The `AddressBookParser` interprets the input and creates a `ListCommand` object.
+2. The `HRPlatformParser` interprets the input and creates a `ListCommand` object.
 3. The `LogicManager` invokes the execute method of `ListCommand`.
 4. The execute method of `ListCommand` calls `updateFilteredPersonList` in the `Model` to apply a filter to show all persons.
 5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
@@ -446,7 +446,7 @@ The `find` command allows users to find specific people in the `HRPlatform` base
 - `LogicManager`: Invokes the `FindCommand` to execute the find operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Predicate`: Represents the keyword for finding persons whose name contains any of the argument keyword in TalentSG.
-- `AddressBookParser`: Creates an `FindCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `FindCommand` object based on the user input.
 
 ### **Sequence of action**
 
