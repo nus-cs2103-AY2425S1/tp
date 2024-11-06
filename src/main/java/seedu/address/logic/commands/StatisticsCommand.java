@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,14 +17,24 @@ import seedu.address.model.person.Person;
  */
 public class StatisticsCommand extends Command {
 
-    public static final String COMMAND_WORD = "statistics";
+    public static final String COMMAND_WORD = "stats";
+    private HashMap<String, Integer> tagCounts = new HashMap<String, Integer>() {
+        {
+            put("N", 0);
+            put("BP", 0);
+            put("BC", 0);
+            put("TP", 0);
+            put("TC", 0);
+            put("A", 0);
+            put("R", 0);
+        }
+    };
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         ObservableList<Person> lastShownList = model.getFilteredPersonList();
         FilteredList<Person> fullContactList = new FilteredList<>(lastShownList);
-
         HashMap<JobCode, JobCodeStatistics> jobStatisticsMap = new HashMap<>();
         calculateJobCodeStatistics(fullContactList, jobStatisticsMap);
         String statisticsMessage = buildStatisticsMessage(jobStatisticsMap);
@@ -34,23 +45,28 @@ public class StatisticsCommand extends Command {
                                             HashMap<JobCode, JobCodeStatistics> jobStatisticsMap) {
         for (Person person : fullContactList) {
             JobCode jobCode = person.getJobCode(); // get person job code
-            String tagCode = person.getTag().toString(); // get person's tag
+            String tagCode = person.getTag().tagCode; // get person's tag
             JobCodeStatistics jobStats = jobStatisticsMap.getOrDefault(jobCode, new JobCodeStatistics());
+
+            // Increment the tag count for the specific tag code
             jobStats.incrementTag(tagCode);
+
+            // Update the map with the modified JobCodeStatistics object
             jobStatisticsMap.put(jobCode, jobStats);
+            // Update the tagCounts for all applicants
+            tagCounts.put(tagCode, tagCounts.get(tagCode) + 1);
         }
     }
 
     private String buildStatisticsMessage(HashMap<JobCode, JobCodeStatistics> jobStatisticsMap) {
         StringBuilder statisticsMessage = new StringBuilder();
-        appendHeading(statisticsMessage, "STATISTICS");
-        appendHeading(statisticsMessage, "Total number of applicants by Job Code and Interview Stages");
 
         int totalApplicantsInSystem = 0;
 
         // Iterate over the job statistics and build the message
-        for (JobCode jobCode : jobStatisticsMap.keySet()) {
-            JobCodeStatistics jobStats = jobStatisticsMap.get(jobCode);
+        for (Map.Entry<JobCode, JobCodeStatistics> entry : jobStatisticsMap.entrySet()) {
+            JobCode jobCode = entry.getKey();
+            JobCodeStatistics jobStats = entry.getValue();
 
             appendJobCodeStatistics(statisticsMessage, jobCode.value, jobStats.getTotalApplicants());
 
@@ -60,12 +76,11 @@ public class StatisticsCommand extends Command {
             // Update the total count of applicants in the system
             totalApplicantsInSystem += jobStats.getTotalApplicants();
         }
-
-        // Total number of applicants
-        statisticsMessage.append("\nTotal number of applicants in the system: ")
-                .append(totalApplicantsInSystem)
-                .append("\n");
-
+        statisticsMessage.insert(0, "Total number of applicant(s) by job code and interview Stages:\n");
+        // insert the total number of tags across all job codes
+        insertTagPercentages(statisticsMessage, tagCounts, totalApplicantsInSystem);
+        insertHeading(statisticsMessage, "Total number of applicant(s) in system: " + totalApplicantsInSystem);
+        insertHeading(statisticsMessage, "STATISTICS");
         return statisticsMessage.toString();
     }
 
@@ -73,16 +88,16 @@ public class StatisticsCommand extends Command {
         statisticsMessage.append(jobCode)
                 .append(": ")
                 .append(totalApplicants)
-                .append(" applicants\n");
+                .append(" applicant(s)\n");
     }
 
     // Helper method to append formatted headings
-    private void appendHeading(StringBuilder builder, String heading) {
-        builder.append(heading).append("\n")
-                .append("--------\n");
+    private void insertHeading(StringBuilder builder, String heading) {
+        builder.insert(0, heading + "\n--------" + "\n");
     }
 
-    // New method to append stages breakdown
+
+    // Appends breakdown of interview stages for a given JobCodeStatistics instance
     private void appendStagesBreakdown(StringBuilder builder, JobCodeStatistics jobStats) {
         builder.append("      N: ").append(jobStats.getN())
                 .append("      TP: ").append(jobStats.getTP())
@@ -91,5 +106,31 @@ public class StatisticsCommand extends Command {
                 .append("      BC: ").append(jobStats.getBC())
                 .append("      A: ").append(jobStats.getA())
                 .append("      R: ").append(jobStats.getR()).append("\n");
+    }
+
+    private void insertTagPercentages(StringBuilder builder, HashMap<String, Integer> tagCounts,
+                                      int totalApplicantsInSystem) {
+        StringBuilder stringToInsert = new StringBuilder();
+        stringToInsert.append("Percentages of applicants in each interview stage:\n");
+
+        // Correct order of tags
+        String[] tagOrder = {"N", "TP", "TC", "BP", "BC", "A", "R"};
+
+        // Iterate over the tag order and append the % of each tag
+        for (String tag : tagOrder) {
+            int count = tagCounts.getOrDefault(tag, 0); // Get the count for the tag (default to 0 if not present)
+            double percentage = totalApplicantsInSystem == 0 ? 0.0 : (
+                    (double) count / totalApplicantsInSystem) * 100;
+
+            // Append the tag and its count/percentage to the string in the correct order
+            stringToInsert.append("  ")
+                    .append(tag)
+                    .append(": ")
+                    .append(String.format("%.2f", percentage))
+                    .append("%      ");
+        }
+
+        // Insert the tag percentages at the beginning of the builder
+        builder.insert(0, stringToInsert.toString().trim() + "\n--------\n");
     }
 }
