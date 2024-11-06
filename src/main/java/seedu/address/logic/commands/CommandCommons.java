@@ -12,7 +12,7 @@ import seedu.address.model.client.Client;
 public final class CommandCommons {
     public static final String DEFAULT_TIER = "";
     public static final String DEFAULT_REMARK = "NA";
-    public static final String DEFAULT_STATUS = "NONE";
+    public static final String DEFAULT_STATUS = "NA";
     public static final Client EMPTY_CLIENT = null;
 
     /**
