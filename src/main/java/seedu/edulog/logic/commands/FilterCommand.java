@@ -15,9 +15,9 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the students and lists them based on "
-            + "specified payment status\n"
-            + "Parameters:  PAID\n"
-            + "OR UNPAID\n"
+            + "specified payment status. Extra trailing characters are ignored. The command is case insensitive.\n"
+            + "Parameters:  P\n"
+            + "OR U\n"
             + "Example: " + COMMAND_WORD + "paid";
 
     private final StudentHasPaidPredicate predicate;
