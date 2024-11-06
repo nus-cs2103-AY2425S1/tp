@@ -51,6 +51,10 @@ public class Event {
         this.eventId = eventId;
     }
 
+    public EventName getName() {
+        return eventName;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -99,6 +103,10 @@ public class Event {
 
     public LocalDate getEventEndDate() {
         return eventDuration.getEndDate();
+    }
+
+    public EventDuration getEventDuration() {
+        return eventDuration;
     }
 
     public int getEventId() {

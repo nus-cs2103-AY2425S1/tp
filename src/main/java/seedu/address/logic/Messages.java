@@ -17,11 +17,16 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME = "The person name provided does not exist";
+    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
+    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_NAME = "The event name provided does not exist";
     public static final String MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME =
-            "There is more than one person with the given name. Try again with the person's index instead.";
+            "There is more than one person with the given name. Try again with the person's displayed index instead.";
+    public static final String MESSAGE_MORE_THAN_ONE_EVENT_DISPLAYED_NAME =
+            "There is more than one event with the given name. Try again with the event's displayed index instead.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_NOT_ASSIGNED_TO_EVENT = "'%1$s' is not assigned to the event '%2$s'";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

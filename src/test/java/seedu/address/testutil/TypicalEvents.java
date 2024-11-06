@@ -13,6 +13,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.id.counter.list.IdCounterList;
 
 /**
  * A utility class containing a list of {@code Event} objects to be used in tests.
@@ -29,9 +30,16 @@ public class TypicalEvents {
 
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        IdCounterList idCounterList = new IdCounterList();
+        int largestEventId = 0;
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
+            if (event.getEventId() > largestEventId) {
+                largestEventId = event.getEventId();
+            }
         }
+        idCounterList.setEventIdCounter(largestEventId);
+        ab.setIdCounterList(idCounterList);
         return ab;
     }
 

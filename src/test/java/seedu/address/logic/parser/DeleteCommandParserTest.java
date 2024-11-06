@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.DeleteByIndexCommand;
+import seedu.address.logic.commands.DeleteByNameCommand;
 import seedu.address.logic.commands.DeleteCommand;
 
 /**
@@ -23,12 +25,12 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validIndex_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteByIndexCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_validName_returnsDeleteCommand() {
-        assertParseSuccess(parser, ALICE.getName().toString(), new DeleteCommand(ALICE.getName()));
+        assertParseSuccess(parser, ALICE.getName().toString(), new DeleteByNameCommand(ALICE.getName()));
     }
 
     @Test

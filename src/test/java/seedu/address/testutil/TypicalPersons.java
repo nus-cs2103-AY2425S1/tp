@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Person;
 
 /**
@@ -64,9 +65,16 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        IdCounterList idCounterList = new IdCounterList();
+        int largestPersonId = 0;
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
+            if (person.getId() > largestPersonId) {
+                largestPersonId = person.getId();
+            }
         }
+        idCounterList.setPersonIdCounter(largestPersonId);
+        ab.setIdCounterList(idCounterList);
         return ab;
     }
 

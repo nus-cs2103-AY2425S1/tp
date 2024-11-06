@@ -23,10 +23,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -36,6 +39,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getEventList());
     }
 
     @Test
@@ -60,6 +64,17 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons, newEvents);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicateEvents_throwsDuplicateEventException() {
+        // Two events with the same identity fields
+        Event editedMeeting = new EventBuilder(MEETING).build();
+        List<Person> newPersons = new ArrayList<>();
+        List<Event> newEvents = Arrays.asList(MEETING, editedMeeting);
+        AddressBookStub newData = new AddressBookStub(newPersons, newEvents);
+
+        assertThrows(DuplicateEventException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -142,6 +157,84 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEvent(MEETING));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(MEETING);
+        assertTrue(addressBook.hasEvent(MEETING));
+    }
+
+    @Test
+    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEvent(MEETING);
+        Event editedMeeting = new EventBuilder(MEETING).build();
+        assertTrue(addressBook.hasEvent(editedMeeting));
+    }
+
+    @Test
+    public void findEventsWithName_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.findEventsWithName(null));
+    }
+
+    @Test
+    public void findEventsWithName_eventNotInAddressBook_returnsEmptyList() {
+        List<Event> resultList = new ArrayList<>();
+        assertEquals(addressBook.findEventsWithName(MEETING.getName()), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventInAddressBook_returnsEventList() {
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        addressBook.addEvent(MEETING);
+        assertEquals(addressBook.findEventsWithName(MEETING.getName()), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithPartOfNameNotInAddressBook_returnsEmptyList() {
+        List<Event> resultList = new ArrayList<>();
+
+        addressBook.addEvent(MEETING);
+        String nameString = MEETING.getName().toString();
+        String partOfNameString = nameString.substring(0, nameString.length() - 1);
+        EventName partOfName = new EventName(partOfNameString);
+
+        assertEquals(addressBook.findEventsWithName(partOfName), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithLowerCasedNameInAddressBook_returnsEventList() {
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+
+        addressBook.addEvent(MEETING);
+        String nameString = MEETING.getName().toString();
+        String lowerCasedNameString = nameString.toLowerCase();
+        EventName lowerCasedName = new EventName(lowerCasedNameString);
+        assertEquals(addressBook.findEventsWithName(lowerCasedName), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithUpperCasedNameInAddressBook_returnsEventList() {
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+
+        addressBook.addEvent(MEETING);
+        String nameString = MEETING.getName().toString();
+        String upperCasedNameString = nameString.toUpperCase();
+        EventName upperCasedName = new EventName(upperCasedNameString);
+        assertEquals(addressBook.findEventsWithName(upperCasedName), resultList);
+    }
+
+    @Test
     public void generateNewPersonId_success() {
         Person aliceWithId = ALICE.changeId(1);
         Person amyWithId = AMY.changeId(2);
@@ -165,18 +258,80 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
+
+    @Test
+    public void setIdCounterList_success() {
+        IdCounterList newIdCounterList = new IdCounterList(5, 10);
+        addressBook.setIdCounterList(newIdCounterList);
+        assertEquals(newIdCounterList, addressBook.getIdCounterList());
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(addressBook.equals(addressBook));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertFalse(addressBook.equals(5));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        assertFalse(addressBook.equals(null));
+    }
+
+    @Test
+    public void equals_differentAddressBook_returnsFalse() {
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.addPerson(ALICE);
+        assertFalse(addressBook.equals(differentAddressBook));
+    }
+
+    @Test
+    public void hashCode_sameAddressBook_returnsSameHashCode() {
+        AddressBook anotherAddressBook = new AddressBook();
+        assertEquals(addressBook.hashCode(), anotherAddressBook.hashCode());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void setEvent_existingEvent_replacesEvent() {
+        // Add an initial event to the address book
+        Event originalEvent = new EventBuilder()
+                .withEventName("Original Meeting")
+                .withEventDescription("A meeting to discuss project updates.")
+                .withEventDuration("2024-10-01", "2024-10-02")
+                .build();
+        addressBook.addEvent(originalEvent);
+
+        // Create an edited version of the event
+        Event editedEvent = new EventBuilder(originalEvent)
+                .withEventName("Edited Meeting")
+                .build();
+
+        // Replace the existing event with the edited event
+        addressBook.setEvent(originalEvent, editedEvent);
+
+        // Check that the event list contains the edited event and not the original
+        assertTrue(addressBook.hasEvent(editedEvent));
+        assertFalse(addressBook.hasEvent(originalEvent));
+    }
+
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons and events lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Event> events = FXCollections.observableArrayList();
-        private final IdCounterList idCounterList = new IdCounterList();
 
         AddressBookStub(Collection<Person> persons, Collection<Event> events) {
             this.persons.setAll(persons);
@@ -195,8 +350,7 @@ public class AddressBookTest {
 
         @Override
         public IdCounterList getIdCounterList() {
-            return idCounterList;
+            return new IdCounterList(0, 0);
         }
     }
-
 }

@@ -9,8 +9,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -122,6 +124,34 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Assigns an event to a person.
+     */
+    public void assignEventToPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        if (internalList.contains(person)) {
+            Person editedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getAddress(),
+                    person.getTags(), person.getEventIds(), person.getId());
+            editedPerson.addEventId(event.getEventId());
+            setPerson(person, editedPerson);
+        }
+    }
+
+    /**
+     * Removes an assigned event from a person.
+     */
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        if (internalList.contains(person)) {
+            Person editedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getAddress(),
+                    person.getTags(), person.getEventIds(), person.getId());
+            editedPerson.removeEventId(event.getEventId());
+            setPerson(person, editedPerson);
+        }
     }
 
     /**

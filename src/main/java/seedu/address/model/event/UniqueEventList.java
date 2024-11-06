@@ -3,8 +3,10 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,11 +39,31 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list contains an event with the same name (case-insensitive) as the given argument.
+     */
+    public boolean containsName(EventName nameToCheck) {
+        requireNonNull(nameToCheck);
+        return internalList.stream().anyMatch(event -> event.getName().equalsLowerCase(nameToCheck));
+    }
+
+    /**
      * Returns true if the list contains an event with the same ID as the given argument.
      */
     public boolean containsId(int idToCheck) {
         return internalList.stream().anyMatch(event -> event.getEventId() == idToCheck);
     }
+
+    /**
+     * Retrieves an event by its ID.
+     * @throws NoSuchElementException if the event does not exist.
+     */
+    public Event getById(int eventId) {
+        return internalList.stream()
+                .filter(event -> event.getEventId() == eventId)
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("No event with ID: " + eventId));
+    }
+
 
     /**
      * Adds an event to the list.
@@ -84,6 +106,17 @@ public class UniqueEventList implements Iterable<Event> {
         if (!internalList.remove(toRemove)) {
             throw new EventNotFoundException();
         }
+    }
+
+    /**
+     * Gets all the events whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Event> getEventsWithName(EventName name) {
+        requireNonNull(name);
+        if (this.containsName(name)) {
+            return internalList.stream().filter(event -> event.getName().equalsLowerCase(name)).toList();
+        }
+        return new ArrayList<>();
     }
 
     public void setEvents(UniqueEventList replacement) {

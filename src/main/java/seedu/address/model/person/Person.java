@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Integer> eventIds = new HashSet<>();
 
     /**
      * Constructor for the {@code Person} Class. ID is initialised to -1.
@@ -44,13 +46,14 @@ public class Person {
      * Constructor for the {@code Person} Class. ID is initialised to the given ID.
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, int id) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Integer> eventIds, int id) {
+        requireAllNonNull(name, phone, email, address, tags, eventIds);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.eventIds.addAll(eventIds);
         this.id = id;
     }
 
@@ -82,11 +85,27 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Set<Integer> getEventIds() {
+        return Collections.unmodifiableSet(eventIds);
+    }
+
     /**
      * Returns a new {@code Person} object that has the same attributes except the ID.
      */
     public Person changeId(int newId) {
-        return new Person(name, phone, email, address, tags, newId);
+        return new Person(name, phone, email, address, tags, eventIds, newId);
+    }
+
+    public boolean checkAssignedToEvent(Event event) {
+        return eventIds.contains(event.getEventId());
+    }
+
+    public void addEventId(int eventId) {
+        eventIds.add(eventId);
+    }
+
+    public void removeEventId(int eventId) {
+        eventIds.remove(eventId);
     }
 
     /**

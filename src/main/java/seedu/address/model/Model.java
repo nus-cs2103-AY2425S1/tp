@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -103,11 +104,11 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
-    //    /**
-    //     * Deletes the given event.
-    //     * The event must exist in the address book.
-    //     */
-    //    void deleteEvent(Event target);
+    /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
 
     /**
      * Adds the given event
@@ -123,10 +124,27 @@ public interface Model {
     //     */
     //    void setEvent(Event target, Event editedEvent);
 
-    //    /**
-    //     * Find all the events whose names are the same as the given argument.
-    //     */
-    //    List<Event> findEventsWithName(EventName eventName);
+    /**
+     * Find all the events whose names are the same as the given argument.
+     */
+    List<Event> findEventsWithName(EventName eventName);
+
+    /**
+     * Returns true if an event with the given ID exists in the address book.
+     */
+    boolean hasEventById(int eventId);
+
+    /**
+     * Retrieves an event by its ID.
+     * @throws IllegalArgumentException if the event does not exist.
+     */
+    Event getEventById(int eventId);
+
+    /**
+     * Replaces the given event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     */
+    void setEvent(Event target, Event editedEvent);
 
     /**
      * Returns an unmodifiable view of the filtered event list.
@@ -138,6 +156,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Assigns an event to a person.
+     */
+    void assignEventToPerson(Person person, Event event);
+
+    /**
+     * Removes an assigned event from a person.
+     */
+    void unassignEventFromPerson(Person person, Event event);
 
     /**
      * Generates a new unique person ID.

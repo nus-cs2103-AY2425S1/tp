@@ -54,4 +54,28 @@ public class EventNameTest {
         // different values -> returns false
         assertFalse(eventName.equals(new EventName("Other Valid Event Name")));
     }
+
+    @Test
+    public void equalsLowerCase() {
+        EventName eventName = new EventName("Valid Event Name");
+
+        // same values -> returns true
+        assertTrue(eventName.equalsLowerCase(new EventName("Valid Event Name")));
+
+        // same values (case-insensitive) -> returns true
+        assertTrue(eventName.equalsLowerCase(new EventName("Valid Event Name".toLowerCase())));
+        assertTrue(eventName.equalsLowerCase(new EventName("Valid Event Name".toUpperCase())));
+
+        // same object -> returns true
+        assertTrue(eventName.equalsLowerCase(eventName));
+
+        // null -> returns false
+        assertFalse(eventName.equalsLowerCase(null));
+
+        // different types -> returns false
+        assertFalse(eventName.equalsLowerCase(5.0f));
+
+        // different values -> returns false
+        assertFalse(eventName.equalsLowerCase(new EventName("Other Valid Event Name")));
+    }
 }

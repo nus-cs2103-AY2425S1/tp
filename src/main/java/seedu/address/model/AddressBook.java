@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Name;
@@ -71,6 +72,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setIdCounterList(IdCounterList idCounterList) {
         this.idCounterList.setPersonIdCounter(idCounterList.getPersonIdCounter());
         this.idCounterList.setEventIdCounter(idCounterList.getEventIdCounter());
+    }
+
+    /**
+     * Returns true if an event with the given ID exists in the address book.
+     */
+    public boolean hasEventById(int eventId) {
+        return events.containsId(eventId);
+    }
+
+    /**
+     * Retrieves an event by its ID.
+     * @throws IllegalArgumentException if the event does not exist.
+     */
+    public Event getEventById(int eventId) {
+        return events.getById(eventId);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+        events.setEvent(target, editedEvent);
     }
 
     /**
@@ -148,6 +173,40 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addEvent(Event event) {
         assert event.getEventId() != -1 : "Event added should not have an ID of -1.";
         events.add(event);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+
+    /**
+     * Gets all the events whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Event> findEventsWithName(EventName eventName) {
+        requireNonNull(eventName);
+        return events.getEventsWithName(eventName);
+    }
+
+    /**
+     * Assigns an event to a person.
+     */
+    public void assignEventToPerson(Person person, Event event) {
+        requireNonNull(person);
+        requireNonNull(event);
+        persons.assignEventToPerson(person, event);
+    }
+
+    /**
+     * Unassigns an event from a person.
+     */
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireNonNull(person);
+        requireNonNull(event);
+        persons.unassignEventFromPerson(person, event);
     }
 
     //// ID counter-level operations

@@ -59,6 +59,23 @@ public class EventName {
         return eventName.equals(otherEventName.eventName);
     }
 
+    /**
+     * Returns true if 2 event names are equal (case-insensitive).
+     */
+    public boolean equalsLowerCase(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventName)) {
+            return false;
+        }
+
+        EventName otherEventName = (EventName) other;
+        return eventName.equalsIgnoreCase(otherEventName.eventName);
+    }
+
     @Override
     public int hashCode() {
         return eventName.hashCode();
