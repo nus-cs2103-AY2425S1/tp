@@ -214,6 +214,7 @@ SupplyCentral goods data will be stored in a CSV file for advanced users to acce
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
+</div>
 
 ### Resizing UI elements
 
@@ -249,11 +250,11 @@ The delivery status of the goods can be easily seen through the color of the goo
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete NAME`<br> e.g., `delete Amy`
-**Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee`
-**Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g., `find James Jake c/CONSUMABLES`
+**Delete** | `delete NAME`<br> e.g. `delete Amy`
+**Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
+**Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g. `find James Jake c/CONSUMABLES`
 **List** | `list`
 **Help** | `help`
 **Add Goods** | `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL DATE n/SUPPLIER_NAME` <br> e.g. `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
