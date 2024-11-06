@@ -298,7 +298,7 @@ You can now view all weddings in the order they were added in!
 
 Format: `list-wed`
 
-![list wedding message](images/listWeddingMsg.png)
+![list wedding message](images/listWedding.png)
 
 ### Tagging a Contact : `tag-add` / `tag-del`
 
