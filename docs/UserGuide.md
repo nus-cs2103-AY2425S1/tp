@@ -17,32 +17,32 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 [1. Quick Start](#1-quick-start)
 
 [2. Command Summary](#2-command-summary)
-  * [2.1 Command Table](#21-command-table)
-  * [2.2 Parameter Table](#22-parameter-table)
-  * [2.3 Notes on the Command Format](#23-notes-on-the-command-format)
+  * [2.1 Command Table](#2-1-command-table)
+  * [2.2 Parameter Table](#2-2-parameter-table)
+  * [2.3 Notes on the Command Format](#2-3-notes-on-the-command-format)
 
 [3. Features](#3-features)
-  * [3.1 Student Management](#31-student-management)
-    * [3.1.1 Adding a Student: `add`](#311-adding-a-student-add)
-    * [3.1.2 Deleting a Student: `delete`](#312-deleting-a-student-delete)
-    * [3.1.3 Updating a Student: `update`](#313-updating-a-student-update)
-    * [3.1.4 Finding Students: `find`](#314-finding-students-find)
-    * [3.1.5 Listing All Students: `list`](#315-listing-all-students-list)
-    * [3.1.6 Tagging a Student: `tag`](#316-tagging-a-student-tag)
-    * [3.1.7 Recording Notes: `note`](#317-recording-notes-note)
-    * [3.1.8 Viewing a Specific Student: `view`](#318-viewing-a-specific-student-view)
-  * [3.2 Task Management](#32-task-management)
-    * [3.2.1 Adding a Task: `addtask`](#321-adding-a-task-addtask)
-    * [3.2.2 Deleting a Task: `deletetask`](#322-deleting-a-task-deletetask)
-    * [3.2.3 Updating a Task: `updatetask`](#323-updating-a-task-updatetask)
-    * [3.2.4 Viewing All Tasks: `viewtasks`](#324-viewing-all-tasks-viewtasks)
-  * [3.3 Data Management](#33-data-management)
-    * [3.3.1 Saving the Data](#331-saving-the-data)
-    * [3.3.2 Editing the Data File](#332-editing-the-data-file)
-    * [3.3.3 Clearing All Students: `clear`](#333-clearing-all-students-clear)
-  * [3.4 Navigation](#34-navigation)
-    * [3.4.1 Viewing Help: `help`](#341-viewing-help-help)
-    * [3.4.2 Exiting EduManage: `exit`](#342-exiting-edumanage-exit)
+  * [3.1 Student Management](#3-1-student-management)    
+    * [3.1.1 Adding a Student: `add`](#3-1-1-adding-a-student-add)
+    * [3.1.2 Deleting a Student: `delete`](#3-1-2-deleting-a-student-delete)
+    * [3.1.3 Updating a Student: `update`](#3-1-3-updating-a-student-update)
+    * [3.1.4 Finding Students: `find`](#3-1-4-finding-students-find)
+    * [3.1.5 Listing All Students: `list`](#3-1-5-listing-all-students-list)
+    * [3.1.6 Tagging a Student: `tag`](#3-1-6-tagging-a-student-tag)
+    * [3.1.7 Recording Notes: `note`](#3-1-7-recording-notes-note)
+    * [3.1.8 Viewing a Specific Student: `view`](#3-1-8-viewing-a-specific-student-view)
+  * [3.2 Task Management](#3-2-task-management)
+    * [3.2.1 Adding a Task: `addtask`](#3-2-1-adding-a-task-addtask)
+    * [3.2.2 Deleting a Task: `deletetask`](#3-2-2-deleting-a-task-deletetask)
+    * [3.2.3 Updating a Task: `updatetask`](#3-2-3-updating-a-task-updatetask)
+    * [3.2.4 Viewing All Tasks: `viewtasks`](#3-2-4-viewing-all-tasks-viewtasks)
+  * [3.3 Data Management](#3-3-data-management)
+    * [3.3.1 Saving the Data](#3-3-1-saving-the-data)
+    * [3.3.2 Editing the Data File](#3-3-2-editing-the-data-file)
+    * [3.3.3 Clearing All Students: `clear`](#3-3-3-clearing-all-students-clear)
+  * [3.4 Navigation](#3-4-navigation)
+    * [3.4.1 Viewing Help: `help`](#3-4-1-viewing-help-help)
+    * [3.4.2 Exiting EduManage: `exit`](#3-4-2-exiting-edumanage-exit)
 
 [4. FAQ](#4-faq)
 
@@ -76,7 +76,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
    * `exit` : Exits the app.
 
-   * Refer to [Section 2.1 - Command Table](#21-command-table) for more examples.
+   * Refer to [Section 2.1 - Command Table](#2-1-command-table) for more examples.
 
 6. Refer to [Section 3 - Features](#3-features) below for details of each command.
 
@@ -213,7 +213,7 @@ Updates the details of an existing student in EduManage.
 <box type="tip" seamless>
 
 **Tips:**
-* To remove a note for a student, simply type nt/ without adding any text after it.
+* To remove a note for a student, simply type `nt/` without adding any text after it.
 * To remove all the student’s subjects, simply type `s/` without specifying any subjects after it.
 * To remove all the student’s lesson times, simply type `lt/` without specifying any lesson times after it.
 </box>
@@ -252,7 +252,6 @@ Find students by either their name, level or subject(s).
 * `find s/MATH` returns all students tagged with subject `MATH`.
 * `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.
 * `find n/alex david` returns `Alex Yeoh`, `David Li`.<br>
-
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
