@@ -170,11 +170,11 @@ public class ParserUtil {
      */
     public static LocalDateTime parseAppointmentDateTime(String appointmentDateTime) throws ParseException {
         requireNonNull(appointmentDateTime);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             return LocalDateTime.parse(appointmentDateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date-time format. Expected format: YYYY-MM-DD HH:mm:ss", e);
+            throw new ParseException("Invalid date-time format. Expected format: yyyy-MM-dd HH:mm", e);
         }
     }
 

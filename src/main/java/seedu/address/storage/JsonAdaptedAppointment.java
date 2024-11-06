@@ -24,7 +24,7 @@ public class JsonAdaptedAppointment {
     public static final String INTEGER_CHECK_MESSAGE_FORMAT = "Person ID must be a non-negative integer.";
     public static final String PERSON_CHECK_MESSAGE_FORMAT = "Person with person ID exist in address book";
     public static final String DATE_TIME_CONSTRAINTS =
-            "Appointment DateTime must be in the format yyyy-MM-dd'T'HH:mm:ss";
+            "Appointment DateTime must be in the format yyyy-MM-dd HH:mm";
     private final Integer appointmentId;
     private final String appointmentType;
     private final String appointmentDateTime;
