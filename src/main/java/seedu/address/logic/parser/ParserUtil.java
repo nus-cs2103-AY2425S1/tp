@@ -127,7 +127,9 @@ public class ParserUtil {
         if (!Tag.isValidTagName(tag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tag);
+
+        String trimmedTag = StringUtil.capitaliseString(tag.trim());
+        return new Tag(trimmedTag);
     }
 
     /**

@@ -60,8 +60,7 @@ public class TagAddCommandTest {
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
-                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson),
-                Messages.getName(editedPerson), Messages.tagSetToString(stubTagList));
+                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -105,7 +104,7 @@ public class TagAddCommandTest {
 
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
-        String nonDuplicateMessage = String.format(TagAddCommand.MESSAGE_WEDDING_DOESNT_EXIST + "\n",
+        String nonDuplicateMessage = String.format(TagAddCommand.MESSAGE_WEDDING_DOESNT_EXIST,
                 VALID_TAG_WEDDING2, VALID_TAG_WEDDING2);
         String duplicatesMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
                 Messages.getName(editedPerson), VALID_TAG_WEDDING1);
@@ -134,8 +133,7 @@ public class TagAddCommandTest {
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
-                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson), Messages.getName(editedPerson),
-                Messages.tagSetToString(stubTagList));
+                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
