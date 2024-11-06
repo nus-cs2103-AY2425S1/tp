@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalTags.PHOTOGRAPHER;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -144,5 +148,44 @@ public class TagCommandTest {
         String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND + '\n' + Messages.MESSAGE_FORCE_TAG_TO_CONTACT;
 
         CommandTestUtil.assertCommandFailure(tagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void equals() {
+        // Create some tags for testing
+        Tag tag1 = FLORIST;
+        Tag tag2 = PHOTOGRAPHER;
+
+        // Create TagCommand instances
+        TagCommand tagCommand1 = new TagCommand(Index.fromOneBased(1), new HashSet<>() {{
+                add(tag1);
+                add(tag2);
+            }});
+
+        TagCommand tagCommand2 = new TagCommand(Index.fromOneBased(1), new HashSet<>() {{
+                add(tag1);
+                add(tag2);
+            }});
+
+        TagCommand tagCommand3 = new TagCommand(Index.fromOneBased(2), new HashSet<>() {{
+                add(tag1);
+                add(tag2);
+            }});
+
+        TagCommand tagCommand4 = new TagCommand(Index.fromOneBased(1), new HashSet<>() {{
+                add(tag1);
+            }});
+
+        // Same index and same tags -> should be equal
+        assertEquals(tagCommand1, tagCommand2);
+
+        // Different index -> should not be equal
+        assertNotEquals(tagCommand1, tagCommand3);
+
+        // Same index but different set of tags -> should not be equal
+        assertNotEquals(tagCommand1, tagCommand4);
+
+        // Comparing with itself -> should be equal
+        assertEquals(tagCommand1, tagCommand1);
     }
 }
