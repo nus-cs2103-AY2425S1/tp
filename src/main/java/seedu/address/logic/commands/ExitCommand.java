@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
@@ -23,10 +22,5 @@ public class ExitCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
-    }
-
-    @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
     }
 }

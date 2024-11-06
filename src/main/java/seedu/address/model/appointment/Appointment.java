@@ -1,37 +1,48 @@
 package seedu.address.model.appointment;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
+import java.util.Locale;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 
 /**
- * Represents an appointment with a person in SocialBook.
+ * Represents an appointment with a person in the address book.
  * Guarantees: immutable; field values are validated
  */
 public record Appointment(Name name, LocalDate date, LocalTime startTime, LocalTime endTime) {
+
+    public static final String MESSAGE_INVALID_TIME_INTERVAL = "Appointment start time must be before end time";
+
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("h:mm a", Locale.US);
+
+    public Appointment {
+        checkArgument(isValidTimeInterval(startTime, endTime), MESSAGE_INVALID_TIME_INTERVAL);
+    }
+
+    public static boolean isValidTimeInterval(LocalTime startTime, LocalTime endTime) {
+        return startTime.isBefore(endTime);
+    }
 
     public Appointment withName(Name name) {
         return new Appointment(name, date, startTime, endTime);
     }
 
     public String getFormattedDate() {
-        return date.format(DateTimeFormatter.ofPattern(
-                date.getYear() == LocalDate.now().getYear() ? "EEEE, MMMM d" : "EEEE, MMMM d, yyyy"));
+        return date.format(DATE_FORMATTER);
     }
 
     public String getFormattedStartTime() {
-        return startTime.format(DateTimeFormatter.ofPattern(isSamePeriod() ? "h:mm" : "h:mm a"));
+        return startTime.format(TIME_FORMATTER);
     }
 
     public String getFormattedEndTime() {
-        return endTime.format(DateTimeFormatter.ofPattern("h:mm a"));
-    }
-
-    public boolean isSamePeriod() {
-        return startTime.get(ChronoField.AMPM_OF_DAY) == endTime.get(ChronoField.AMPM_OF_DAY);
+        return endTime.format(TIME_FORMATTER);
     }
 
     /**
@@ -63,7 +74,11 @@ public record Appointment(Name name, LocalDate date, LocalTime startTime, LocalT
 
     @Override
     public String toString() {
-        return String.format("%s, %s %s – %s",
-                name, getFormattedDate(), getFormattedStartTime(), getFormattedEndTime());
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("date", date)
+                .add("startTime", startTime)
+                .add("endTime", endTime)
+                .toString();
     }
 }

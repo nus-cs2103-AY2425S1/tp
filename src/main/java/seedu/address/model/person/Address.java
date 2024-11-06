@@ -15,7 +15,7 @@ public class Address {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "\\S.*";
 
     public final String value;
 
@@ -49,11 +49,10 @@ public class Address {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Address)) {
+        if (!(other instanceof Address otherAddress)) {
             return false;
         }
 
-        Address otherAddress = (Address) other;
         return value.equals(otherAddress.value);
     }
 
@@ -61,5 +60,4 @@ public class Address {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

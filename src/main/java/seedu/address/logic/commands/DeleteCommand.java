@@ -11,13 +11,10 @@ import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -36,13 +33,13 @@ public class DeleteCommand extends Command {
                 + "Parameters: INDEXES (must be positive integers)\n"
                 + "Example: " + COMMAND_WORD + " 1, 2";
 
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People:\n%s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted people:\n%s";
+
+    private final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
 
     private final Index[] targetIndexes;
     private final List<Person> personsToDelete = new ArrayList<>();
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-    private ObservableList<Appointment> deletedAppointments;
-
+    private final List<Appointment> deletedAppointments = new ArrayList<>();
 
     /**
      * Takes in the array of indexes to be used for deletion.
@@ -77,18 +74,15 @@ public class DeleteCommand extends Command {
                 + Arrays.stream(targetIndexes)
                 .map(index -> String.valueOf(index.getOneBased())) // Convert to String
                 .collect(Collectors.joining(", ")) + "]");
-        deletedAppointments = FXCollections.observableArrayList(personsToDelete.stream()
-                .map(person -> model.getPersonsAppointments(person))
-                .flatMap(List::stream)
-                .collect(Collectors.toList()));
 
-        String s = personsToDelete.stream().map(person -> {
-            model.deleteAppointments(person.getName());
+        StringBuilder sb = new StringBuilder();
+        for (Person person : personsToDelete) {
+            deletedAppointments.addAll(model.deleteAppointments(person.getName()));
             model.deletePerson(person);
-            return Messages.format(person);
-        }).collect(Collectors.joining("\n\n"));
+            sb.append(person.getName()).append("\n");
+        }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
+        return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, sb.toString().trim()));
     }
 
     @Override

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
@@ -11,10 +10,10 @@ import seedu.address.model.Model;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "lista";
+    public static final String COMMAND_WORD = "listappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all appointments in SocialBook as a list with index numbers.\n"
+            + ": Lists all appointments in the address book as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
@@ -29,10 +28,5 @@ public class ListAppointmentCommand extends Command {
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
-    }
-
-    @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
     }
 }
