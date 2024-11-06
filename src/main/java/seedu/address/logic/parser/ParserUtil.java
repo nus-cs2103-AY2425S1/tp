@@ -36,9 +36,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not in the following accepted "
-            + "formats:\ndd/MM/yyyy\n"
-            + "dd-MM-yyyy\n"
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not a valid calendar date "
+            + "or is not in the following accepted formats:\ndd/MM/yyyy or "
+            + "dd-MM-yyyy or "
             + "dd MM yyyy";
 
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format o/HH:mm or c/HH:mm.";

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -9,13 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
-           "Age should only contain numbers and should be between 1 to 3 digits long inclusive";
+           "Age should only contain numbers and should be between 1 to 999 inclusive";
 
     /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "\\d{1,3}";
+    public static final String REMOVE_STARTING_ZEROES_REGEX = "^0+(?!$)";
 
     public final String value;
 
@@ -26,15 +28,18 @@ public class Age {
      */
     public Age(String age) {
         requireNonNull(age);
-        checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
-        value = age;
+
+        String toAdd = age.replaceFirst(REMOVE_STARTING_ZEROES_REGEX, "");
+        checkArgument(isValidAge(toAdd), MESSAGE_CONSTRAINTS);
+        value = toAdd;
     }
 
     /**
      * Returns true if a given string is a valid age.
      */
     public static boolean isValidAge(String test) {
-        return test.matches(VALIDATION_REGEX);
+        String toTest = test.replaceFirst(REMOVE_STARTING_ZEROES_REGEX, "");
+        return toTest.matches(VALIDATION_REGEX) && parseInt(toTest) > 0 && parseInt(toTest) <= 999;
     }
 
 
