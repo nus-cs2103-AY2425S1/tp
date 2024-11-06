@@ -194,6 +194,19 @@ If your changes to the data file makes its format invalid, SupplyCentral will di
 Furthermore, certain edits can cause SupplyCentral to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+### Resizing UI elements
+
+SupplyCental allows you to resize the UI elements to better fit your screen. You can resize the UI elements by clicking and dragging the dividers as highlighted below.
+
+![Draggable UI elements](images/DraggableUI.png)
+
+The elements will resize according to the position of the divider, allocating more space for the output to be displayed, or more space for the suppliers/goods to be displayed.
+
+### Delivery status
+
+The delivery status of the goods can be easily seen through the color of the goods name. The color of the goods name will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
+
+![Goods Name Color UI](images/GoodsNameColorUi.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
