@@ -33,12 +33,12 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
      */
     private int getStatusOrder(Status status) {
         switch (status) {
-        case PENDING:
+        case CANCELLED:
             return 0;
+        case PENDING:
+            return 2;
         case DELIVERED:
             return 1;
-        case CANCELLED:
-            return 2;
         default:
             throw new IllegalArgumentException("Unknown status: " + status);
         }
