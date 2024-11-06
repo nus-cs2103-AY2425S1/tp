@@ -43,7 +43,7 @@ public class MarkSupplierCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
 
-        Supplier supplierToMark = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        Supplier supplierToMark = model.getModifiedSupplierList().get(targetIndex.getZeroBased());
         if (supplierToMark.getStatus().equals(status)) {
             throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_SUPPLIER_STATUS,
                     Messages.formatWithoutStatus(supplierToMark), status));
