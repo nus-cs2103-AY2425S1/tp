@@ -9,6 +9,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.SortCommandParser.MESSAGE_ID_MUST_BE_EMPTY;
+import static seedu.address.logic.parser.SortCommandParser.MESSAGE_NAME_MUST_BE_EMPTY;
+import static seedu.address.logic.parser.SortCommandParser.MESSAGE_ONLY_ONE_TUT;
+import static seedu.address.logic.parser.SortCommandParser.MESSAGE_TUT_MUST_NOT_BE_EMPTY;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL_ONE;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL_TWO;
 
@@ -94,5 +98,29 @@ public class SortCommandParserTest {
     @Test
     public void parse_whitespaceInput_failure() {
         assertParseFailure(parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nameFieldPresent_failure() {
+        String userInput = generateSortNameInput(SortCommand.ASCENDING) + "abc";
+        assertParseFailure(parser, userInput, MESSAGE_NAME_MUST_BE_EMPTY);
+    }
+
+    @Test
+    public void parse_idFieldPresent_failure() {
+        String userInput = generateSortIdInput(SortCommand.ASCENDING) + "123";
+        assertParseFailure(parser, userInput, MESSAGE_ID_MUST_BE_EMPTY);
+    }
+
+    @Test
+    public void parse_tutorialNotProvided_failure() {
+        String userInput = generateSortTutorialInput(SortCommand.DESCENDING, "");
+        assertParseFailure(parser, userInput, MESSAGE_TUT_MUST_NOT_BE_EMPTY);
+    }
+
+    @Test
+    public void parse_multipleTutorialProvided_failure() {
+        String userInput = generateSortTutorialInput(SortCommand.DESCENDING, "1-12");
+        assertParseFailure(parser, userInput, MESSAGE_ONLY_ONE_TUT);
     }
 }
