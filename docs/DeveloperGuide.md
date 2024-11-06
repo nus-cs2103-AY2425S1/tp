@@ -86,8 +86,7 @@ The command execution flow:
    - The command is added to the `CommandHistory` for tracking previous commands
    - The text field is cleared
 4. If a `CommandException` or `ParseException` occurs:
-   - The command box styling is updated to indicate the error
-   - The error style class is added to the text field
+   - The error style class is added to the text field to indicate error.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
