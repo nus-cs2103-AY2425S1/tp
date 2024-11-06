@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
 import java.util.HashSet;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,28 +56,14 @@ public class CreateTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        StringBuilder sb = new StringBuilder();
         for (Task task : tasksToAdd) {
             if (model.hasTask(task)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             model.addTask(task);
-
-            if (task instanceof Todo) {
-                sb.append("\nTodo: ").append(task.getDescription());
-            } else if (task instanceof Deadline deadline) {
-                // Cast to Deadline to access its specific methods
-                sb.append("\nDeadline: ").append(deadline.getDescription())
-                        .append(" by ").append(deadline.getBy());
-            } else if (task instanceof Event event) {
-                // Cast to Event to access its specific methods
-                sb.append("\nEvent: ").append(event.getDescription())
-                        .append(" from ").append(event.getFrom())
-                        .append(" to ").append(event.getTo());
-            }
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, sb));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd)));
     }
 
     @Override

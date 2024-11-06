@@ -50,8 +50,8 @@ public class Index {
     /**
      * Creates a new {@code Index} using a zero-based index, bypassing non-positive checks (only used for delete-task).
      */
-    public static Index zeroBasedNoConstraints(int index) {
-        return new Index(index, false);
+    public static Index oneBasedNoConstraints(int index) {
+        return new Index(index - 1, false);
     }
 
     @Override

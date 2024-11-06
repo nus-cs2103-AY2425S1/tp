@@ -12,6 +12,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -39,7 +40,7 @@ public class CreateTaskCommandTest {
         // Create a CreateTaskCommand with valid tasks
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
 
-        String expectedMessage = String.format(CreateTaskCommand.MESSAGE_SUCCESS, tasksToAdd);
+        String expectedMessage = String.format(CreateTaskCommand.MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd));
 
         CommandResult result = command.execute(model);
 

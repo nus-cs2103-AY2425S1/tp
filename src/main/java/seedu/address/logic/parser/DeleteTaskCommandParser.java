@@ -18,7 +18,7 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
      */
     public DeleteTaskCommand parse(String args) throws ParseException {
         try {
-            Index index = Index.zeroBasedNoConstraints(Integer.parseInt(args.trim()));
+            Index index = Index.oneBasedNoConstraints(Integer.parseInt(args.trim()));
             return new DeleteTaskCommand(index);
         } catch (NumberFormatException e) {
             throw new ParseException(
