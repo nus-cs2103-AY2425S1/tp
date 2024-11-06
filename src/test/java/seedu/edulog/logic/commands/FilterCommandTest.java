@@ -9,6 +9,8 @@ import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import java.util.Collections;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulog.model.Model;
@@ -23,6 +25,22 @@ import seedu.edulog.testutil.TypicalStudents;
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEduLog(), new UserPrefs());
+
+    /*
+     * Each test receives a fresh model for independence.
+     */
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalEduLog(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalEduLog(), new UserPrefs());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        model = null;
+        expectedModel = null;
+    }
 
     @Test
     public void equals() {
@@ -55,7 +73,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_paid_noStudentFound() {
-        // no typical student has paid
+        // no student has paid
+        expectedModel.unmarkAllStudents();
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         StudentHasPaidPredicate predicate = preparePredicate(true);
         FilterCommand command = new FilterCommand(predicate);
