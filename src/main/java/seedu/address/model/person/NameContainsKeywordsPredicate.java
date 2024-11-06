@@ -1,11 +1,12 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -13,18 +14,20 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) throws ParseException {
-        if (!areValidNameKeywords(keywords)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-
+    /**
+     * Constructs a {@code NameContainsKeywordsPredicate}.
+     *
+     * @param keywords A list of keywords used to check the address book.
+     */
+    public NameContainsKeywordsPredicate(List<String> keywords) {
+        checkArgument(areValidNameKeywords(keywords), Name.MESSAGE_CONSTRAINTS);
         this.keywords = keywords;
     }
 
     /**
      * Checks all keywords for invalid characters
      */
-    private boolean areValidNameKeywords(List<String> keywords) {
+    public static boolean areValidNameKeywords(List<String> keywords) {
         for (String s : keywords) {
             if (!isValidKeyword(s)) {
                 return false;
