@@ -233,9 +233,32 @@ If your changes to the data file makes its format invalid, DorManagerPro will di
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+--------------------------------------------------------------------------------------------------------------------
+## Field Constraints
 
-_Details coming soon ..._
+### INDEX
+
+### NAME
+
+### PHONE_NUMBER
+
+### EMAIL
+
+### ROOM_NUMBER
+
+### ADDRESS
+
+### EMERGENCY_NAME
+
+### EMERGENCY_PHONE
+
+### GRADUATION_YEAR
+
+### TAG
+
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
