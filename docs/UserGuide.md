@@ -193,7 +193,8 @@ The following commands can be used in Searchmode:
 Format: `search [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
 
-<Br>For each field, you can either specify multiple keywords _or_ multiple partial keywords
+<Br>For each field, you can either specify multiple keywords _or_ multiple partial keywords.
+<Br>Persons whose name that match at least one of the keywords or contains ALL the partial keywords will be returned.
 <Br>For example:
 - `search n/Alex Yeoh` will return all persons whose name matches `Alex Yeoh` OR persons whose name contains `"Alex"`or 
 `"Yeoh"`
@@ -216,6 +217,9 @@ Example:
   - `search n/Char` will add people who have `Char` in their name to the list!
 ![ChainSearchExample1.png](images%2FChainSearchExample1.png)
 
+
+Note: A flag parameter should not be empty (e.g. `n/` or `t/`), as it will not return any results.
+Flag parameters should also not be repeated (e.g. `n/Alex n/John`).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If looking for a specific person, try to be as specific as possible to get the best results!
