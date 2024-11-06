@@ -18,8 +18,15 @@
     --box-border-color: rgba(255, 130, 21, 0.75);
     --warn-bg-color: rgba(255, 0, 0, 0.2);
     --warn-border-color: rgba(255, 0, 0, 0.4);
+    --info-bg-color: rgba(100, 150, 255, 0.2);
+    --info-border-color: rgba(100, 150, 255, 0.4);
     --border-color: rgb(220, 220, 220);
     --black-color: rgb(0, 0, 0);
+  }
+
+  img {
+    pointer-events: none;
+    scale: 0.85;
   }
 
   .ug {
@@ -35,9 +42,15 @@
     border: 2px solid var(--box-border-color);
   }
 
+  .box-info {
+    background-color: var(--info-bg-color) !important;
+    padding: 16px 16px;
+    border: none;
+  }
+
   .box-warn {
     background-color: var(--warn-bg-color) !important;
-    padding: 16px 32px;
+    padding: 16px 24px;
     border: 2px solid var(--warn-border-color);
   }
 
@@ -47,6 +60,7 @@
 
   .headers {
     font-weight: 900;
+    margin-top: 64px;
   }
 
   .headers-first {
@@ -75,6 +89,7 @@
     border-top: 1px solid var(--border-color);
     background-color: var(--white-bg-color);
     border-radius: 0px;
+    transition: 0.2s ease;
   }
 
   .content-droppable:hover {
@@ -91,11 +106,10 @@
     padding: 8px;
   }
 
-  summary {
+  .command-titles, summary {
     cursor: pointer;
     margin-bottom: 8px;
     display: flex;
-    transition: 0s ease;
     font-size: 1.2em;
   }
 
@@ -114,6 +128,7 @@
     background-color: transparent !important;
     margin: auto;
     margin-right: 0;
+    transition: 0.2s ease;
   }
 
   .command-content {
@@ -192,7 +207,7 @@
 <h1 class="headers headers-first">StaffSync User Guide</h1>
 
 <p class="content content-special">
-  StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a  Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
+  StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
 </p>
 
 <br>
@@ -274,11 +289,11 @@
 
 <div class="content content-special">
 
-**Notes about the command format:**
+**Notes about the command **format**:**
 
 <br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
+* Words in `UPPER_CASE` are the compulsory parameters to be supplied by the user.
   e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
   <br>
 * Items in square brackets are optional.
@@ -290,7 +305,7 @@
 * Parameters and commands are case-sensitive
   e.g. the command `Help` and `edit 1 N/John Doe` will return an error
   <br>
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
+* Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   <br>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
@@ -300,7 +315,7 @@
 
 <div class="content content-droppable content-droppable-first">
 
-<details>
+<details open>
   <summary>
     <strong>Clearing all entries<br><code>clear</code></strong>
     <span class="material-symbols-outlined chevrons">
@@ -314,15 +329,25 @@
   <br>
   <br>
 
-  Format: `clear`
+  <div class="box box-info">
+
+  **Format**: `clear`
+  </div>
+  <br>
+
+  <div class="box box-warn" type="warning" seamless>
+
+  **Warning:** There is **NO confirmation prompt** when using this command and is irreversible.
+  </div>
   </div>
 </details>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Deleting a person<br><code>delete</code></strong>
+<details open>
+  <summary>
+    <strong>Deleting a person<br><code>delete</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -334,23 +359,43 @@
   <br>
   <br>
 
-  Format: `delete ph INDEX` or `delete e INDEX` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
 
-  * Deletes the potential hire/employee at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-  * The index **must be within the size of the list** of potential hires/employees shown.
+  <div class="box box-info">
+
+  **Format**: `delete PARAMETER INDEX`
+  </div>
+  <br>
+
+  Deletes the potential hire/employee at the specified `INDEX`.
+
+  `PARAMETER`:
+  * `e` for employees
+  * `ph` for potential hires.
+
+  `INDEX`: The index number shown in the displayed person list.
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
+  * `INDEX` **must be within the size of the list** shown.
 
   Examples:
-  * `list` followed by `delete e 2` deletes the 2nd person in the employee list.
-  * `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
+  * `list ph` followed by `delete ph 2` deletes the 2nd person in the potential hire list.
+  * `find e n/Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
+
+  <div class="box box-warn" type="warning" seamless>
+
+  **Common Mistakes:**
+  * `delete E 1` - You should type `e` instead of `E` as it is case-sensitive
+  * `delete 1` - You forgot to specify the person type
   </div>
-</details>
+  </div>
+  </details>
+</div>
 
 </div>
 <div class="content content-droppable">
-<details>
-  <summary><strong>Demoting a person<br><code>demote</code></strong>
+
+<details open>
+  <summary>
+    <strong>Demoting a person<br><code>demote</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -362,17 +407,21 @@
   <br>
   <br>
 
-  Format: `demote INDEX`
 
-  * Demote the employee at the specified `INDEX` to a potential hire.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-  * The index **must be within the size of the list** shown.
-  * The person at the index must be an employee
+  <div class="box box-info">
+
+  **Format**: `demote INDEX`
+  </div>
+  <br>
+
+  `INDEX`: The index number shown in the displayed person list.
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
+  * `INDEX` **must be within the size of the list** shown.
+  * The person at the `INDEX` must be an employee.
 
   Examples:
   * `list e` followed by `demote 2` demotes the 2nd person in the employee list.
-  * `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
+  * `find e n/Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
 
   <div class="box box-warn" type="warning" seamless>
 
@@ -380,7 +429,7 @@
   * `list ph` followed by `demote 2` - cannot demote a potential hire
   * `demote 0` - invalid index number
   * `demote 3` but only have 2 entries - invalid index number, index out of list size
-  </div class="box">
+  </div>
   </div>
 
 </details>
@@ -388,8 +437,9 @@
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Editing a person<br><code>edit</code></strong>
+<details open>
+  <summary>
+    <strong>Editing a person<br><code>edit</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -401,16 +451,27 @@
   <br>
   <br>
 
-  Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]`
 
-  * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+  <div class="box box-info">
+
+  **Format**: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]`
+  </div>
+  <br>
+
+  Edits the person at the specified `INDEX`.
+
+  `INDEX`: The index number shown in the displayed person list.
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
+  * `INDEX` **must be within the size of the list** shown.
+
+  Other Fields:
   * At least one of the optional fields must be provided.
   * Existing values will be updated to the input values.
 
   <div class="box" type="tip" seamless>
 
   **Tip:** It is not possible to edit the contract end date of a potential hire
-  </div class="box">
+  </div>
 
   Examples:
   *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -421,8 +482,9 @@
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Adding an employee<br><code>employee</code></strong>
+<details open>
+  <summary>
+    <strong>Adding an employee<br><code>employee</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -435,12 +497,17 @@
   <br>
   <br>
 
-  Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
+
+  <div class="box box-info">
+
+  **Format**: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
+  </div>
+  <br>
 
   <div class="box" type="tip" seamless>
 
   **Tip:** All fields are mandatory
-  </div class="box">
+  </div>
 
   Examples:
   * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
@@ -450,8 +517,9 @@
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Exiting the program<br><code>exit</code></strong>
+<details open>
+  <summary>
+    <strong>Exiting the program<br><code>exit</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -463,15 +531,21 @@
   <br>
   <br>
 
-  Format: `exit`
+
+  <div class="box box-info">
+
+  **Format**: `exit`
+  </div>
+  <br>
   </div>
 </details>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Locating persons by name<br><code>find</code></strong>
+<details open>
+  <summary>
+    <strong>Locating persons by name<br><code>find</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -483,29 +557,38 @@
   <br>
   <br>
 
-  Format: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
 
->Parameter: `e` for employees, `ph` for potential hires, `all` for both employees and potential hires
->
->Keywords: `n/[NAMES]` `p/[PHONE NUMBERS]` `e/[EMAILS]` `d/[DEPARTMENTS]` `r/[ROLES]`
+  <div class="box box-info">
 
-<div class="box" type="tip" seamless>
+  **Format**: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
+  </div>
+  <br>
 
-**Tip:** At least one keyword is required.
-  </div class="box">
+  `PARAMETER`:
+  * `e` for employees.
+  * `ph` for potential hires.
+  * `all` for both employees and potential hires.
 
-* Only name, phone number, email, department and role can be searched.
-* Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
-* The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
-* Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
-with name `alice`, with phone number `123445678` and with email `alice@example.com`.
-* The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
-`find all e/bob@example.com alice@example.com`.
-* The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match
-`find all e/john@example.com n/john`.
-* Persons matching at least one keyword in every field specified will be returned.
-e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
-and with phone number either `12345678` or `87654321`.
+  `KEYWORD`:
+  * `n/[NAMES]` `p/[PHONE NUMBERS]` `e/[EMAILS]` `d/[DEPARTMENTS]` `r/[ROLES]`
+
+  <div class="box" type="tip" seamless>
+
+  **Tip:** At least one keyword is required.
+  </div>
+
+  * Only name, phone number, email, department and role can be searched.
+  * Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
+  * The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
+  * Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
+  with name `alice`, with phone number `123445678` and with email `alice@example.com`.
+  * The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
+  `find all e/bob@example.com alice@example.com`.
+  * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match
+  `find all e/john@example.com n/john`.
+  * Persons matching at least one keyword in every field specified will be returned.
+  e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
+  and with phone number either `12345678` or `87654321`.
 
 
   Examples:
@@ -514,16 +597,16 @@ and with phone number either `12345678` or `87654321`.
   email either `john@example.com` or `alice@example.com`
   * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
 
-Example: "find ph n/John".
-![result for 'find ph n/John'](images/findjohnResult.png)
+  Example: "find ph n/John".
+  ![result for 'find ph n/John'](images/findjohnResult.png)
 
-   <div class="box box-warn" type="warning" seamless>
+  <div class="box box-warn" type="warning" seamless>
 
-**Common Mistakes:**
-* `find a n/John`: Invalid parameter
-* `find all a/John`: Invalid keyword prefix
-* `find all n/John n/John`: Duplicate keyword prefix
-  </div class="box">
+  **Common Mistakes:**
+  * `find a n/John`: Invalid parameter
+  * `find all a/John`: Invalid keyword prefix
+  * `find all n/John n/John`: Duplicate keyword prefix
+  </div>
 
   </div>
 </details>
@@ -531,8 +614,9 @@ Example: "find ph n/John".
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Viewing help<br><code>help</code></strong>
+<details open>
+  <summary>
+    <strong>Viewing help<br><code>help</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -544,17 +628,21 @@ Example: "find ph n/John".
   <br>
   <br>
 
-  ![Ui](images/helpWindow.png)
+  <div class="box box-info">
 
-  Format:`help`
+  **Format**: `help`
+  </div>
+
+  ![Ui](images/helpWindow.png)
   </div>
 </details>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Listing all persons<br><code>list</code></strong>
+<details open>
+  <summary>
+    <strong>Listing all persons<br><code>list</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -566,16 +654,32 @@ Example: "find ph n/John".
   <br>
   <br>
 
-  Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
-  * Lists type of persons based on the parameter given.
+  <div class="box box-info">
+
+  **Format**: `list KEYWORD`
+  </div>
+  <br>
+
+  Lists type of persons based on the parameter given.
+
+  `KEYWORD`:
+  * `all` for all persons.
+  * `ph` for potential hires.
+  * `e` for employees.
+
+  Examples:
+  * `list all`
+  * `list e`
+  * `list ph`
   </div>
 </details>
 
 </div>
 <div class="content content-droppable">
 
-<details>
-  <summary><strong>Adding a potential hire<br><code>potential</code></strong>
+<details open>
+  <summary>
+    <strong>Adding a potential hire<br><code>potential</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -587,12 +691,17 @@ Example: "find ph n/John".
   <br>
   <br>
 
-  Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
+
+  <div class="box box-info">
+
+  **Format**: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
+  </div>
+  <br>
 
   <div class="box" type="tip" seamless>
 
   **Tip:** All fields are mandatory
-  </div class="box">
+  </div>
 
   Examples:
   * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
@@ -602,31 +711,38 @@ Example: "find ph n/John".
 </div>
 <div class="content content-droppable content-droppable">
 
-<details>
-  <summary><strong>Promoting a person<br><code>promote</code></strong>
+<details open>
+  <summary>
+    <strong>Promoting a person<br><code>promote</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
   </summary>
 
   <div class="command-content">
-  Promotes the specified potential hire from StaffSync into an employee.
+  Promotes the specified potential hire from StaffSync into an employee with a specific contract end date.
 
   <br>
   <br>
 
-  Format: `promote INDEX CONTRACT_END_DATE`
 
-  * Promote the potential hire at the specified `INDEX` to an employee with the specified `CONTRACT_END_DATE`.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-  * The index **must be within the size of the list** shown.
-  * The person at the index must be a potential hire
-  * The contract end date must be of **valid format** of yyyy-MM-dd
+  <div class="box box-info">
+
+  **Format**: `promote INDEX CONTRACT_END_DATE`
+  </div>
+  <br>
+
+  `INDEX`: The index number shown in the displayed person list.
+
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
+  * `INDEX` **must be within the size of the list** shown.
+  * The person at the `INDEX` must be a potential hire
+
+  `CONTRACT_END_DATE`: The contract end date of the employee in the format of yyyy-MM-dd.
 
   Examples:
-  * `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
-  * `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
+  * `list ph` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
+  * `find ph n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
 
   <div class="box box-warn" type="warning" seamless>
 
@@ -636,15 +752,16 @@ Example: "find ph n/John".
   * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee
   * `promote 0 2025-12-20` - invalid index number
   * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
-  </div class="box">
+  </div>
   </div>
 </details>
 
 </div>
 <div class="content content-droppable content-droppable-last">
 
-<details>
-  <summary><strong>Sorting the list<br><code>sort</code></strong>
+<details open>
+  <summary>
+    <strong>Sorting the list<br><code>sort</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
@@ -656,30 +773,40 @@ Example: "find ph n/John".
   <br>
   <br>
 
-  Format: `sort FIELD [ORDER]`
+
+  <div class="box box-info">
+
+  **Format**: `sort FIELD [ORDER]`
+  </div>
+  <br>
 
   Sorts the list by the given parameter in the given order.
-  * FIELD `name` will sort the list based on the names of the contacts in alphabetical order.
-  * FIELD `date` will sort the list based on the contract end dates of the employees.
-  * FIELD `dept` will sort the list based on the department of the contacts in alphabetical order.
-  * FIELD `role` will sort the list based on the roles of the contacts in alphabetical order.
-  * ORDER `asc` will sort the list in ascending order.
-  * ORDER `desc` will sort the list in descending order.
+
+  `FIELD`: The type of data you want to sort by.
+  * `name` will sort the list based on the names of the contacts in alphabetical order.
+  * `date` will sort the list based on the contract end dates of the employees.
+  * `dept` will sort the list based on the department of the contacts in alphabetical order.
+  * `role` will sort the list based on the roles of the contacts in alphabetical order.
+
+  `[ORDER]`: The order you wish to sort the list in. Defaults to ascending order if not specified.
+  * `asc` will sort the list in ascending order.
+  * `desc` will sort the list in descending order.
 
   <div class="box" type="tip" seamless>
 
-  **Tips:** 
+  **Tips:**
   * Sort only sorts the contacts show at the current point in time.
   * When sort date is used, potential hires show up at the bottom as they do not have a contract end date.
   * If the order is left out StaffSync will sort in ascending order by default.
-  </div class="box">
+  </div>
 
   Examples:
   * `sort name` sorts all contacts by name in alphabetical order.
   * `sort date desc` sorts by contract end date with potential hires at the bottom.
   * `sort role asc` sorts contacts by role in alphabetical order.
-</details>
+</div>
 
+</details>
 </div>
 
 <br>
@@ -736,7 +863,7 @@ StaffSync data are saved in the hard disk automatically after any command that c
 **Caution:**
 If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the StaffSync to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div class="box">
+</div>
 
 </div>
 <br>
@@ -756,11 +883,9 @@ _Details coming soon ..._
 
 <div class="content content-qna">
 
-<details>
-  <summary><strong>Q: How do I transfer my data to another Computer?</strong>
-    <span class="material-symbols-outlined chevrons">
-      chevron_right
-    </span>
+<div>
+  <summary>
+    <strong>Q: How do I transfer my data to another Computer?</strong>
   </summary>
 
   <div class="qna-content">
@@ -768,7 +893,7 @@ _Details coming soon ..._
   <strong>A: </strong>Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StaffSync home folder.
 
   </div>
-</details>
+</div>
 
 </div>
 
