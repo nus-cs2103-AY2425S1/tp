@@ -47,7 +47,7 @@ public class AttendanceContainer extends UiPart<Region> {
 
         //listener to trigger UI update when participationList changes
         participationList.addListener((ListChangeListener<Participation>) change -> {
-            logger.info("Change observed in participation list");
+            logger.info("Change observed in participation list: " + change);
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     setAttendanceList();
