@@ -24,12 +24,13 @@ public class HelpWindow extends UiPart<Stage> {
             + "6. find\n"
             + "7. help\n"
             + "8. list\n"
-            + "9. group\n"
-            + "10. groups\n"
-            + "11. findGroup\n"
-            + "12. deleteGroup\n"
-            + "13. export\n"
-            + "14. import\n";
+            + "9. clear\n"
+            + "10. group\n"
+            + "11. groups\n"
+            + "12. findGroup\n"
+            + "13. deleteGroup\n"
+            + "14. export\n"
+            + "15. import\n";
     public static final String GUIDE_REFERENCE_STRING = "Refer to the user guide for more details: " + USERGUIDE_URL;
     public static final String HELP_MESSAGE = COMMANDS_DESCRIPTION + "\n" + GUIDE_REFERENCE_STRING;
 
