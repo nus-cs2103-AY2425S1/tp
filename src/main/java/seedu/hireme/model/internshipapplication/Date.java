@@ -9,14 +9,23 @@ import seedu.hireme.commons.util.AppUtil;
 import seedu.hireme.logic.validator.DateValidator;
 
 /**
- * Represents a Date in the internship book.
+ * Represents a Date.
  * Guarantees: immutable; the date is valid as declared in the constructor.
  */
 public class Date implements Comparable<Date> {
 
+    /**
+     * Message to indicate the constraints on Date format and validity.
+     * A valid Date must be in the format "dd/MM/yy", must represent a real calendar date,
+     * and must not be a future date.
+     */
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates must not be in the future, should be in the format 'dd/MM/yy', and must be valid.";
+            "Dates must not be in the future, should be in the format 'dd/MM/yy', "
+                    + "and must represent a valid calendar date.";
 
+    /**
+     * Message to indicate that only the date should be provided without additional text.
+     */
     public static final String MESSAGE_TOO_MANY_ARGUMENTS = "Date should only be DD/MM/YY with no other words";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
@@ -39,7 +48,7 @@ public class Date implements Comparable<Date> {
      *
      * @param dateString A string representing a date in the format 'dd/MM/yy'.
      * @throws NullPointerException if the {@code dateString} is null.
-     * @throws IllegalArgumentException if the {@code dateString} does not satisfy the format or is invalid.
+     * @throws IllegalArgumentException if the {@code dateString} does not follow the expected format or is invalid.
      */
     public Date(String dateString) {
         requireNonNull(dateString);
@@ -63,7 +72,7 @@ public class Date implements Comparable<Date> {
      * Compares this {@code Date} to another object for equality.
      *
      * @param other The object to compare with.
-     * @return True if the object is an instance of {@code Date} and has the same value, false otherwise.
+     * @return True if the object is an instance of {@code Date} and has the same date value, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -80,11 +89,10 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Compares this {@code Date} to another object for ordering.
+     * Compares this {@code Date} with another for ordering.
      *
-     * @param other The date object to compare with.
-     * @return 0 if this date object occurs at the same date as the other date object, a negative number if this date
-     *     object occurs before the other date object and a positive number otherwise.
+     * @param other The date to compare with.
+     * @return 0 if the dates are the same, a negative number if this date is before, and a positive number if after.
      */
     @Override
     public int compareTo(Date other) {

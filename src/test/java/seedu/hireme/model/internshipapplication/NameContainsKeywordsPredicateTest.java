@@ -35,7 +35,7 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different keyword lists -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -56,22 +56,33 @@ public class NameContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new InternshipApplicationBuilder().withName("Alice Bob").build()));
-    }
 
+        // Keywords in different positions
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Alice"));
+        assertTrue(predicate.test(new InternshipApplicationBuilder().withName("Alice Bob").build()));
+
+        // Multiple matching keywords with extra text in name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        assertTrue(predicate.test(new InternshipApplicationBuilder().withName("Alice Bob Carol").build()));
+    }
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new InternshipApplicationBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new InternshipApplicationBuilder().withName("Google").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new InternshipApplicationBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Google"));
+        assertFalse(predicate.test(new InternshipApplicationBuilder().withName("Microsoft").build()));
 
-        // Keywords match role, email and date, but does not match name
+        // Keywords match role, email and date, but not the name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("SWE", "alice@email.com", "12/02/24"));
         assertFalse(predicate.test(new InternshipApplicationBuilder().withName("Alice").withRole("SWE")
                 .withEmail("alice@email.com").withDate("12/02/24").build()));
+
+        // Similar but non-matching words
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Googler", "SWE"));
+        assertFalse(predicate.test(new InternshipApplicationBuilder().withName("Google").withRole("SWE").build()));
     }
 
     @Test

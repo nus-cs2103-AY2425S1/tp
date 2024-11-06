@@ -7,8 +7,9 @@ import java.util.Objects;
 import seedu.hireme.commons.util.ToStringBuilder;
 
 /**
- * Represents an InternshipApplication in the system.
- * Guarantees: details are present and not null, field values are validated, and the object is immutable.
+ * Represents an internship application.
+ * Each instance of {@code InternshipApplication} contains details about the company, date of application,
+ * role applied for, and the current status of the application. This class is immutable except for the status field.
  */
 public class InternshipApplication {
 
@@ -20,11 +21,11 @@ public class InternshipApplication {
 
     /**
      * Constructs an {@code InternshipApplication} with the specified company, date of application, and role.
-     * All fields must be present and not null.
+     * The initial status is set to PENDING by default.
      *
      * @param company The company offering the internship.
-     * @param dateOfApplication The date of application for the internship.
-     * @param role The role applied for in the internship.
+     * @param dateOfApplication The date when the application was submitted.
+     * @param role The position applied for in the internship.
      * @throws NullPointerException if any of the provided arguments are null.
      */
     public InternshipApplication(Company company, Date dateOfApplication, Role role) {
@@ -40,11 +41,10 @@ public class InternshipApplication {
 
     /**
      * Constructs an {@code InternshipApplication} with the specified company, date of application, role, and status.
-     * All fields must be present and not null.
      *
      * @param company The company offering the internship.
-     * @param dateOfApplication The date of application for the internship.
-     * @param role The role applied for in the internship.
+     * @param dateOfApplication The date when the application was submitted.
+     * @param role The position applied for in the internship.
      * @param status The current status of the internship application.
      * @throws NullPointerException if any of the provided arguments are null.
      */
@@ -63,52 +63,52 @@ public class InternshipApplication {
     /**
      * Returns the company associated with the internship application.
      *
-     * @return The {@code Company} object.
+     * @return The {@code Company} object representing the internship provider.
      */
     public Company getCompany() {
         return company;
     }
 
     /**
-     * Returns the name of the company.
+     * Returns the name of the company as a {@code Name} object.
      *
-     * @return The {@code Name} object of the company.
+     * @return The company's name.
      */
     public Name getCompanyName() {
         return company.getName();
     }
 
     /**
-     * Returns the string value of the company's name.
+     * Returns the string representation of the company's name.
      *
-     * @return The company name as a string.
+     * @return The name of the company as a string.
      */
     public String getCompanyNameValue() {
         return company.getNameValue();
     }
 
     /**
-     * Returns the date of application for the internship.
+     * Returns the date when the application was submitted.
      *
-     * @return The {@code Date} of application.
+     * @return The {@code Date} object representing the application date.
      */
     public Date getDateOfApplication() {
         return dateOfApplication;
     }
 
     /**
-     * Returns the role applied for in the internship.
+     * Returns the position applied for in the internship.
      *
-     * @return The {@code Role} object.
+     * @return The {@code Role} object representing the applied position.
      */
     public Role getRole() {
         return role;
     }
 
     /**
-     * Returns the status of the internship.
+     * Returns the current status of the internship application.
      *
-     * @return The {@code Status} enum.
+     * @return The {@code Status} enum representing the application status.
      */
     public Status getStatus() {
         return status;
@@ -117,7 +117,7 @@ public class InternshipApplication {
     /**
      * Updates the status of the internship application.
      *
-     * @param status The new status to be set.
+     * @param status The new status to set.
      */
     public void setStatus(Status status) {
         requireNonNull(status);
@@ -125,11 +125,10 @@ public class InternshipApplication {
     }
 
     /**
-     * Returns true if both internship applications have the same company, date of application, and role.
-     * This defines a weaker notion of equality between two internship applications.
+     * Checks if this application is the same as another application by comparing company, date, and role.
      *
      * @param otherInternship The other internship application to compare.
-     * @return True if the specified internship application is the same as the current one, false otherwise.
+     * @return True if the specified internship application matches the company, date, and role; false otherwise.
      */
     public boolean isSame(InternshipApplication otherInternship) {
         if (otherInternship == this) {
@@ -143,11 +142,10 @@ public class InternshipApplication {
     }
 
     /**
-     * Returns true if both internship applications have the same identity and data fields.
-     * This defines a stronger notion of equality between two internship applications.
+     * Checks if this application is equal to another object based on company, date, role, and status.
      *
      * @param other The other object to compare.
-     * @return True if the specified object is equal to the current internship application, false otherwise.
+     * @return True if both internship applications have the same fields, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -167,9 +165,9 @@ public class InternshipApplication {
     }
 
     /**
-     * Returns the hash code of the internship application based on the company, date of application, role, and status.
+     * Returns the hash code for this internship application, based on its fields.
      *
-     * @return The hash code of the internship application.
+     * @return The hash code of this internship application.
      */
     @Override
     public int hashCode() {
@@ -177,9 +175,9 @@ public class InternshipApplication {
     }
 
     /**
-     * Returns a string representation of the internship application, including conditional checks for null fields.
+     * Returns a string representation of the internship application, including company, date, role, and status.
      *
-     * @return A formatted string representing the internship application.
+     * @return A formatted string describing this internship application.
      */
     @Override
     public String toString() {
@@ -202,22 +200,17 @@ public class InternshipApplication {
     }
 
     /**
-     * Creates and returns a deep copy of this {@code InternshipApplication}.
-     * <p>
-     * The deep copy ensures that the new {@code InternshipApplication} is a completely independent
-     * copy, meaning any changes to the new object will not affect the original object.
-     * This method creates a new {@code Company} instance to avoid sharing mutable state, but since
-     * {@code String} and {@code Status} are immutable, those are shared directly.
-     * </p>
+     * Creates a deep copy of this {@code InternshipApplication}.
+     * The new instance is independent of the original, meaning modifications to it do not affect the original.
      *
-     * @return A new {@code InternshipApplication} instance with the same values as this instance.
+     * @return A new {@code InternshipApplication} with the same values as this instance.
      */
     public InternshipApplication deepCopy() {
         return new InternshipApplication(
                 new Company(this.company.getEmail(), this.company.getName()), // Deep copy of mutable Company
-                this.dateOfApplication, // String is immutable, safe to share reference
-                this.role, // String is immutable, safe to share reference
-                this.status // Status is immutable (enum), safe to share reference
+                this.dateOfApplication,
+                this.role,
+                this.status
         );
     }
 }

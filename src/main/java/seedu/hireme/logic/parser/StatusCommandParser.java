@@ -9,20 +9,28 @@ import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.internshipapplication.Status;
 
 /**
- * Parses input arguments and creates a new StatusCommand object
+ * Parses input arguments and creates a new {@code StatusCommand} object.
  */
 public class StatusCommandParser implements Parser<StatusCommand> {
 
     private final Status status;
 
+    /**
+     * Constructs a {@code StatusCommandParser} with the specified status.
+     *
+     * @param status The status to set (e.g., PENDING, ACCEPTED, REJECTED).
+     */
     public StatusCommandParser(Status status) {
         this.status = status;
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the StatusCommand
-     * and returns a StatusCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * Parses the given {@code String} of arguments in the context of the {@code StatusCommand}
+     * and returns a {@code StatusCommand} object for execution.
+     *
+     * @param args The input arguments for parsing.
+     * @return A {@code StatusCommand} object.
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public StatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
