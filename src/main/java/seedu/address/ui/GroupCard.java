@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.group.Group;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Group}.
  */
 public class GroupCard extends UiPart<Region> {
 
@@ -36,7 +36,7 @@ public class GroupCard extends UiPart<Region> {
     private FlowPane members;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code GroupCode} with the given {@code Group} and index to display.
      */
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
