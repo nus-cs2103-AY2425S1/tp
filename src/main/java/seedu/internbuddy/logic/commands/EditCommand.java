@@ -51,7 +51,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited company: %1$s";
+    public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited company: %1$s\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book.";
 
@@ -81,13 +81,16 @@ public class EditCommand extends Command {
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
         Company editedCompany = createEditedCompany(companyToEdit, editCompanyDescriptor);
+        String name = companyToEdit.getName().fullName;
 
         if (!companyToEdit.isSameCompany(editedCompany) && model.hasCompany(editedCompany)) {
             throw new CommandException(MESSAGE_DUPLICATE_COMPANY);
         }
         model.setCompany(companyToEdit, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedCompany)));
+
+        String edits = getEdits(companyToEdit, editedCompany);
+        return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, name, edits));
     }
 
     /**
@@ -102,13 +105,49 @@ public class EditCommand extends Command {
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-        Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
-        List<Application> updatedApplications = editCompanyDescriptor.getApplications()
-                .orElse(companyToEdit.getApplications());
+        Status updatedStatus = companyToEdit.getStatus();
+        List<Application> updatedApplications = companyToEdit.getApplications();
         Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedStatus, updatedApplications, updatedIsFavourite);
+    }
+
+    /**
+     * Creates a formatted {@code String} containing the changes made to the company.
+     */
+    public static String getEdits(Company companyToEdit, Company editedCompany) {
+        assert companyToEdit != null;
+        assert editedCompany != null;
+
+        StringBuilder sb = new StringBuilder();
+
+        if (!Objects.equals(companyToEdit.getName().fullName, editedCompany.getName().fullName)) {
+            sb.append(getEditString("name",
+                    companyToEdit.getName().fullName, editedCompany.getName().fullName));
+        }
+        if (!companyToEdit.getEmail().equals(editedCompany.getEmail())) {
+            sb.append(getEditString("email",
+                    companyToEdit.getEmail().value, editedCompany.getEmail().value));
+        }
+        if (!companyToEdit.getAddress().equals(editedCompany.getAddress())) {
+            sb.append(getEditString("address",
+                    companyToEdit.getAddress().getValue(), editedCompany.getAddress().getValue()));
+        }
+        if (!companyToEdit.getPhone().equals(editedCompany.getPhone())) {
+            sb.append(getEditString("phone",
+                    companyToEdit.getPhone().getValue(), editedCompany.getPhone().getValue()));
+        }
+        if (!companyToEdit.getTags().equals(editedCompany.getTags())) {
+            sb.append(getEditString("tags",
+                    companyToEdit.getTagsListString(), editedCompany.getTagsListString()));
+        }
+
+        return sb.toString();
+    }
+
+    private static String getEditString(String field, String oldValue, String newOldValue) {
+        return String.format("%s: %s -> %s\n", field, oldValue, newOldValue);
     }
 
     public static Company setStatusApplied(Company companyToEdit) {

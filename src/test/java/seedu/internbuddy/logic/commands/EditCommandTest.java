@@ -37,15 +37,17 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Company editedcompany = new CompanyBuilder().build();
-        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedcompany).build();
+        Company editedCompany = new CompanyBuilder().build();
+        EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, descriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
-                Messages.format(editedcompany));
+        Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        String name = companyToEdit.getName().fullName;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedcompany);
+        expectedModel.setCompany(companyToEdit, editedCompany);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
+                name, EditCommand.getEdits(companyToEdit, editedCompany));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -54,9 +56,10 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastCompany = Index.fromOneBased(model.getFilteredCompanyList().size());
         Company lastCompany = model.getFilteredCompanyList().get(indexLastCompany.getZeroBased());
+        String name = lastCompany.getName().fullName;
 
         CompanyBuilder companyInList = new CompanyBuilder(lastCompany);
-        Company editedcompany = companyInList.withName(VALID_NAME_MICROSOFT).withPhone(VALID_PHONE_MICROSOFT)
+        Company editedCompany = companyInList.withName(VALID_NAME_MICROSOFT).withPhone(VALID_PHONE_MICROSOFT)
                 .withTags(VALID_TAG_TECH).build();
 
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT)
@@ -64,10 +67,10 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(indexLastCompany, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
-                Messages.format(editedcompany));
+                name, EditCommand.getEdits(lastCompany, editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCompany(lastCompany, editedcompany);
+        expectedModel.setCompany(lastCompany, editedCompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -76,9 +79,10 @@ public class EditCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, new EditCompanyDescriptor());
         Company editedCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        String name = editedCompany.getName().fullName;
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
-                Messages.format(editedCompany));
+                name, EditCommand.getEdits(editedCompany, editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -90,15 +94,16 @@ public class EditCommandTest {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
         Company companyInFilteredList = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        Company editedcompany = new CompanyBuilder(companyInFilteredList).withName(VALID_NAME_MICROSOFT).build();
+        String name = companyInFilteredList.getName().fullName;
+        Company editedCompany = new CompanyBuilder(companyInFilteredList).withName(VALID_NAME_MICROSOFT).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY,
                 new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_COMPANY_SUCCESS,
-                Messages.format(editedcompany));
+                name, EditCommand.getEdits(companyInFilteredList, editedCompany));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedcompany);
+        expectedModel.setCompany(model.getFilteredCompanyList().get(0), editedCompany);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
