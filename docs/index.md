@@ -16,7 +16,7 @@ title: ClinicConnect
 >  
 > *Tired* of manually scanning each individual appointment for the next week to ensure sufficient health screening materials for those health screenings?  
 
-Try out **ClinicConnect**, our revolutionary system that integrates **patient management** and **appointment tracking** into simple, cohesive package.
+Try out **ClinicConnect**, our revolutionary system that integrates **patient management** and **appointment tracking** into one simple, cohesive package.
 
 With ClinicConnect, you can:  
 - Access all relevant patient details at a glance in a consolidated view
