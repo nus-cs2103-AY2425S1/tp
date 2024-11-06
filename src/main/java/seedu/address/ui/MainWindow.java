@@ -70,8 +70,9 @@ public class MainWindow extends UiPart<Stage> {
         // Load the saved theme from GuiSettings
         GuiSettings guiSettings = logic.getGuiSettings();
         String savedTheme = guiSettings.getTheme();
-        helpWindow = new HelpWindow(savedTheme != null ? savedTheme : "light");
-        applyTheme(savedTheme != null ? savedTheme : "light");
+        isLightMode = savedTheme.equals("light");
+        helpWindow = new HelpWindow(isLightMode ? "light" : "dark");
+        applyTheme(isLightMode ? "light" : "dark");
 
         setAccelerators();
     }
@@ -119,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getGuiSettings().getTheme());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getGuiSettings().getTheme(), 0);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -184,7 +185,9 @@ public class MainWindow extends UiPart<Stage> {
             applyTheme("light");
             isLightMode = true;
         }
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), isLightMode ? "light" : "dark");
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(),
+            isLightMode ? "light" : "dark", personListPanel.getScrollPosition());
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 

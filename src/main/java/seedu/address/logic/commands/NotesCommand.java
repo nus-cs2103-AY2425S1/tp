@@ -50,8 +50,9 @@ public class NotesCommand extends Command {
     /**
      * Represents the different modes of operation for the NotesCommand.
      * VIEW - displays the notes of a person
-     * ADD - adds or updates the notes of a person
+     * ADD - adds or replaces the notes of a person
      * DELETE - removes the notes of a person
+     * EDIT - uses a pop-up window to edit
      */
     public enum Mode {
         /**
@@ -60,7 +61,7 @@ public class NotesCommand extends Command {
         VIEW,
 
         /**
-         * Adds or updates the notes of the specified person.
+         * Adds or replaces the notes of the specified person.
          */
         ADD,
 
