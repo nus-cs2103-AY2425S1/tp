@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+box UI UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant "event:KeyEvent" as KeyEvent UI_COLOR
+participant ":CommandHistory" as CommandHistory UI_COLOR
+participant ":TextField" as TextField UI_COLOR
+
+[-> CommandBox: handleKeyPressed(KeyEvent event)
+activate CommandBox
+CommandBox -> KeyEvent : getCode()
+activate KeyEvent
+KeyEvent --> CommandBox : returns KeyCode
+deactivate KeyEvent
+alt KeyCode == KeyCode.UP
+CommandBox -> CommandHistory : getPreviousCommand()
+activate CommandHistory
+CommandHistory --> CommandBox : return command
+deactivate CommandHistory
+else KeyCode == KeyCode.DOWN
+CommandBox -> CommandHistory : getNextCommand()
+activate CommandHistory
+CommandHistory --> CommandBox : return command
+deactivate CommandHistory
+end
+alt command != null
+CommandBox -> CommandBox : updateCommandField()
+activate CommandBox
+        CommandBox -> TextField : setText(command)
+        CommandBox -> TextField : positionCaret(command.length())
+CommandBox --> CommandBox
+deactivate CommandBox
+end
+
+[<--CommandBox
+deactivate CommandBox
+
+@enduml
