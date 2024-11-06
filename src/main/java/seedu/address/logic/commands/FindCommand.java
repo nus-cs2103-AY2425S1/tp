@@ -55,8 +55,8 @@ public class FindCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_TAG + "friend "
-            + PREFIX_TAG + "colleague "
+            + PREFIX_TAG + "Scholar "
+            + PREFIX_TAG + "SessionB "
             + PREFIX_ATTENDANCE + "24/10/2024:27/10/2024";
     private final List<Predicate<Person>> personPredicates;
     private final List<Predicate<Participation>> participationPredicates;

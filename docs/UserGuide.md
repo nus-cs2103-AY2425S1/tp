@@ -2,7 +2,6 @@
 layout: page
 title: User Guide
 ---
-# EduVault User Guide
 
 **EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
@@ -18,22 +17,57 @@ A person can have any number of tags (including 0)
 A person can have any number of tags (including 0)
 </div>
 
-### **1. Quick Start** 
+### **1. Quick Start**
 
-1. Ensure you have Java `17` or above installed in your Computer.
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-2/tp/releases).
-3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eduvault.jar` command to run the application.  
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.  
-   ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
-   Some example commands you can try:
-    1. `list` : Lists all contacts.
-    2. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/false attend/true` : Adds a student named `John Doe` to the Address Book, where he has not made payment but has attended the tuition classes.
-    3. `delete 3` : Deletes the 3rd contact shown in the current list.
-    4. `clear` : Deletes all contacts.
-    5. `exit` : Exits the app.
-6. Refer to the table below for the general command format
+
+#### **1.1 Installation Guide**
+
+  1. Open the Terminal:
+     * On Windows laptop, open Command Prompt.
+     * On Mac or Linux laptop, open Terminal.
+  2. Ensure you have `Java 17` or above installed in your Computer. You can type `java –version` in the Terminal to verify the version.
+  3. To install `Java 17`, you can click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) and install the one for your operating system. Skip this step if you already have `Java 17` installed.
+  4. Click on [this link](https://github.com/AY2425S1-CS2103T-W08-2/tp/releases) and download the latest `EduVault.jar` file.
+  5. After downloading it, move the  `EduVault.jar` file to the folder you want to use for the EduVault application.
+  6. Using the Terminal from Step 1, use `cd` command to go to the folder you put the jar file in.
+  7. Refer [here](https://tutorials.codebar.io/command-line/introduction/tutorial.html) for the usage of `cd` command in Terminal if you are unsure.
+  8. Type `java -jar eduvault.jar` in the Terminal to start the application.
+  9. An EduVault interface similar to the [below](#12-introduction-to-the-interface) should appear in a few seconds. Note that the app will contain some sample data.
+
+<br>
+
+#### **1.2 Introduction to the interface**
+
+When EduVault is first started, you will see an interface like the one below, made up of multiple components. Here’s a breakdown of each section and its functionality:
+
+![Ui](images/Ui.png)
+
+* **Options Box:**  Provides basic options like exiting the application or accessing the user guide
+* **Command Box:** An input box where users can type in commands to execute specific actions within EduVault
+* **Message Box:** Displays messages in response to the commands. (An example of the message is shown in the sample interface above
+* **Student Summary Box:** Provides an overview of students
+* **Student Information Box:** Includes the personal information of the student like name, phone number, email, etc
+* **Payment Box:** Displays the payment details of each student
+* **Tutorial Summary Box:** Provides a summary of tutorials or classes being offered
+* **Tutorial Box:** Displays the tutorials or classes that each student is currently enrolled in, along with their attendance
+
+<br>
+
+#### **1.3 Brief Walkthrough**
+
+As a start, type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+
+Some example commands you can try:
+
+1. `list` : Lists all contacts.
+  2. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/false attend/true` : Adds a student named `John Doe` to the Address Book, where he has not made payment but has attended the tuition classes.
+  3. `delete 3` : Deletes the 3rd contact shown in the current list.
+  4. `clear` : Deletes all contacts.
+  5. `exit` : Exits the app.
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+Continue reading this guide to learn about the full functionalities of EduVault.
+</div>
 
 ---
 ### **2. General Command Format**
@@ -47,7 +81,7 @@ The commands in EduVault follow a general format of `COMMAND INDEX PREFIX/...` .
 
 <br>
 
-#### Example
+#### **Example**
 ![GeneralCommandFormatExample](images/GeneralCommandFormatExample.png)
 
 For example,  `edit 1 n/Benjamin` edits the student name at index 1(Alex Yeoh, in this case) to Benjamin.
@@ -289,6 +323,7 @@ The commands in this section are used edit records on the system, such as studen
 - [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)  
 - [Unmarking attendance of student](#56-unmarking-attendance-of-student)
 - [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
+
 #### **5.1 Editing a student**
 
 Edit the personal information of students within EduVault
@@ -300,6 +335,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TA
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
 Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
+</div>
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
 </div>
 
 {% raw %}
@@ -316,10 +356,6 @@ Fields:
 * `PAYMENT`: Field not editable within edit
 </div>
 {% endraw %}
-
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-More information about other prefixes can be found here
-</div>
 
 Example Usage:
 
@@ -650,7 +686,11 @@ Invalid usages
 
 Command:  `clear`
 
+Clears all entries from Eduvault.
 
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+Eduvault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
+</div>
 
 ---
 
@@ -672,10 +712,21 @@ Command: `exit`
 ---
 
 ### **9. Saving data** 
+Eduvault data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ---
 
 ### **10. Editing the data file**
+Eduvalt data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
+Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+If your changes to the data file make its format invalid, Eduvault will discard all data and start with an empty data file at the next run. Hence, it is recommended to create a backup of the file before editing it.
+Furthermore, certain edits can cause Eduvault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-implementation) for more details on editing the JSON file.
 
 ---
 
@@ -819,13 +870,64 @@ dd/MM/yyyy</code>
 
 ### **12. Format Errors**
 
-| Error Message                                                           | Most Likely Cause                                                                                                                                                                                                                                                                                           |
-|:------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *Unknown Command….*                                                     | <ul><li>Command misspelled</li><li>Command not available in the current release</li></ul>                                                                                                                                                                                                                   |
-| *Invalid Command format…*                                               | <ul><li>Command word is correct but the format entered is wrong</li> <ul><li>Index is missing, or is a negative number</li> <li>Prefix is missing or misspelled</li> <li>Unidentified inputs after the command word and before the first prefix</li><li>Keywords of the prefix is incorrect</li> </ul></ul> |
-| *The student’s index provided is invalid…*                              | <ul><li>Index provided is out of range for the current displayed list</li></ul>                                                                                                                                                                                                                             |
-| *Multiple values specified for the following single-valued field(s)...* | <ul><li>Duplicated prefix usage when it is not allowed</li></ul>                                                                                                                                                                                                                                            |                                                                                                                                                                                                                           
-| *At least one of the dates is not in the right format…* | <ul><li>The date format used is incorrect</li></ul>                                                                                                                                                                                                               
+<table>
+    <thead>
+        <tr>
+            <th>Error Message</th>
+            <th>Most Likely Cause</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><em>Unknown Command….</em></td>
+            <td>
+                <ul>
+                    <li>Command misspelled</li>
+                    <li>Command not available in the current release</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>Invalid Command format…</em></td>
+            <td>
+                <ul>
+                    <li>Command word is correct but the format entered is wrong
+                        <ul>
+                            <li>Index is missing, or is a negative number</li>
+                            <li>Prefix is missing or misspelled</li>
+                            <li>Unidentified inputs after the command word and before the first prefix</li>
+                            <li>Keywords of the prefix are incorrect</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>The student’s index provided is invalid…</em></td>
+            <td>
+                <ul>
+                    <li>Index provided is out of range for the current displayed list</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>Multiple values specified for the following single-valued field(s)...</em></td>
+            <td>
+                <ul>
+                    <li>Duplicated prefix usage when it is not allowed</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><em>At least one of the dates is not in the right format…</em></td>
+            <td>
+                <ul>
+                    <li>The date format used is incorrect</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ---
 

@@ -155,6 +155,89 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+* stores the address book data i.e.,
+    * all `Person` objects (which are contained in a `UniquePersonList` object).
+    * all Tutorial objects (contained in a UniqueTutorialList object)
+    * all Participation objects (contained in a UniqueParticipationList object)![][image1]
+* Participation is an association class and contains the relationship between Person and Tutorial, as well as an List\<Attendance\> object
+
+<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
+
+### Storage implementation
+Eduvault stores data in JSON file using the Jackson library.
+
+Eduvault stores four types of objects:
+* Student (person)
+* Tutorial
+* Participation
+* Attendance
+
+```dtd
+{
+  "persons" : [...],
+  "tutorials" : [...],
+  "participations" : [...]
+}
+```
+
+`Student`
+```dtd
+"persons" :
+[
+    {
+        "name" : "Alex Yeoh",
+        "phone" : "87438807",
+        "email" : "alexyeoh@example.com",
+        "address" : "Blk 30 Geylang Street 29, #06-40",
+        "payment" : "189",
+        "tags" : [ "Scholar" ]
+    },
+  ...
+]
+```
+There may be no duplicate `Students`.
+Two `Students` are considered to be duplicates if they have matching `NAME` and `PHONE`.
+
+
+`Tutorial`
+```dtd
+"tutorials" :
+[
+    {
+        "subject" : "Mathematics"
+    },
+  ...
+]
+```
+There may be no duplicate `Tutorials`.
+Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
+
+`Participation`
+```dtd
+"participations" :
+[
+    {
+        "student" : "Alex Yeoh",
+        "phone" : "87438807",
+        "tutorial" : "a",
+        "attendances" : [...]
+    },
+]
+```
+
+`Attendance`
+```dtd
+"attendances" : [ {
+      "attendanceDate" : "02/02/2024"
+    } ]
+```
+Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
+
+There may be no duplicate `Participations`.
+Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -474,50 +557,7 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
-
-### Launch and shutdown
-
-1. Initial launch
-
-   1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ### Launch and shutdown
 
@@ -686,3 +726,70 @@ testers are expected to do more *exploratory* testing.
       
    2. Test case: `mas 1 tut/Math attend/12/12/2024`<br>
    Expected: Attendance of first student is not marked. Error message is shown in the message box.
+
+### Unmarking attendance of student
+
+### Marking payment
+
+### Logging payment
+
+### Finding students
+
+
+---------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+**Effort Report for Project**
+
+**Difficulty Level**:
+The project was moderately challenging due to the integration of additional entities and the complexity of building and maintaining relationships between them.
+
+**Challenges Faced**:
+
+* **Entity Expansion**: Unlike AB3, which manages a single entity type (Person), our project introduces a new entity,
+*Tutorial*, and connects it with the existing *Person* entity through an intermediary *Participation* entity.
+This additional entity required designing and implementing a relationship model that could effectively manage student
+enrollment and attendance across multiple tutorials.
+* **Feature Development**: To fully support the new *Tutorial* entity, we had to build several new core features, such
+as *enrollment*, *payment*, and *attendance tracking*. Additionally, we enhanced existing features, including the *find*
+functionality, to work seamlessly across both *Person* and *Tutorial* entities.
+* **Data Storage**: The introduction of *Tutorial* and *Participation* entities required an update to the JSON storage
+architecture. We modified the storage layer to accommodate both the *tutorial list* and *participation list*
+while ensuring data consistency and easy retrieval.
+* **User Interface Enhancements**: To make the system more intuitive and user-friendly, we upgraded the GUI,
+introducing new elements for tutorial management and enhancing the overall design.
+
+**Effort Required**:
+We estimate that the project required more than double the expected effort due to the additional entities and feature
+expansions. We prioritized extensive testing and compliance with coding standards to ensure the robustness and
+maintainability of our code. We went the extra mile for passion and our own learning.
+
+---------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+
+1. **Automatic AddFees Command Based on Tutorial Enrollment**: Currently, fees must be manually added for each student.
+We plan to automate this process based on time period so that fees will be added automatically for students based on
+their tutorial enrollments. This feature will reduce manual effort for administrators.
+2. **Fee Limit Warning**: Currently, there is no cap on the total fees that can be added for a student. To enhance user
+awareness, we plan to introduce a warning message if a student’s total fees exceed $1,000, allowing the user to confirm
+before proceeding. This will help prevent unintentional overcharging or overpaying.
+3. **Integrate Tutorial Fees with Payment**: Currently, tutorial fees are not directly connected to a student’s payment
+status. We aim to integrate tutorial fees with the payment system, so any fees associated with a tutorial will
+automatically update a student’s overdue amount through enhancement 1, simplifying the tracking process for administrators.
+4. **Add Timing for Tutorials**: Tutorials currently lack a time attribute, making scheduling difficult. We plan to add
+a “Timing” attribute to tutorials, enabling administrators to view and manage class schedules more effectively.
+5. **Support for Education Levels in Tutorials**: Tutorials currently do not distinguish between education levels. To
+improve categorization and management, we plan to add an “Education Level” (eg, Secondary 1-Math, Junior College
+2-Chemistry), allowing administrators to group tutorials by levels such as primary, secondary, or advanced.
+6. **Improve UI for Screen Resizing**: The current UI can experience errors when resizing the screen. We plan to enhance
+UI responsiveness, particularly in handling smaller or larger window sizes, to improve usability across various screen configurations.
+7. **Batch Enroll/Unenroll for Multiple Students**: The current system allows enrolling or unenrolling one student at a
+time. We plan to add functionality for batch enrollments and unenrollments, allowing administrators to enroll or unenroll
+multiple students from a tutorial at once.
+8. **Batch Enroll/Unenroll for Multiple Tutorials**: Currently, students can only be enrolled or unenrolled from one
+tutorial at a time. We plan to add functionality to support enrolling or unenrolling a student from multiple tutorials
+simultaneously, improving efficiency.
+9. **Prevent Duplicate Attendance Records**: Currently, attendance can be added multiple times even if it’s within the
+same week for the same tutorial participation. We plan to add a check to prevent duplicate attendance within the same week, ensuring accurate attendance tracking.
+10. **Enhance Find Command with OR Logic for Tags**: The current “Find” command uses AND logic to combine multiple
+conditions, which can limit search results when looking for contacts with any one of multiple tags. We plan to enhance the command by allowing OR logic, which would broaden the search results when users search for contacts with multiple tags, making it more flexible.
