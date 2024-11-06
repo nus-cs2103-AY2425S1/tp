@@ -24,7 +24,7 @@ public class FindEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT NAME: View list of persons in an event.\n"
             + "e.g. view sumobot festival";
 
-    public static final String MESSAGE_SUCCESS = "Viewing event: %1$s";
+    public static final String MESSAGE_SUCCESS = "Listing contacts of event: %1$s";
 
     private final Index targetIndex;
 

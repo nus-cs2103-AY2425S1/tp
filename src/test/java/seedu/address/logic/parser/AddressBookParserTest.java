@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.SPORTS_FESTIVAL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -31,7 +30,7 @@ import seedu.address.logic.commands.contact.commands.ListCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
-import seedu.address.logic.commands.event.commands.FindEventCommand;
+import seedu.address.logic.commands.event.commands.EventAddAllCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
@@ -167,15 +166,22 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseFindRoleCommand_unrecognisedInput_throwsParseException() {
+    public void parseFindRoleCommand_eventAddAllCommand() throws ParseException {
+        Command expected = new EventAddAllCommand(INDEX_FIRST_EVENT);
+        assertEquals(expected, new AddressBookParser()
+                .parseFindRoleCommand(EventAddAllCommand.COMMAND_WORD + " 1"));
+    }
+
+    @Test
+    public void parseFindRoleCommand_emptyInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parseFindRoleCommand(""));
     }
 
-    public void parseCommand_viewEvent() throws ParseException {
-        Command expected = new FindEventCommand(INDEX_FIRST_EVENT);
-        assertEquals(expected, new AddressBookParser()
-                .parseCommand(FindEventCommand.COMMAND_WORD + " " + SPORTS_FESTIVAL.getName()));
+    @Test
+    public void parseFindRoleCommand_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse "
+                + "only search, exitsearch (es), add-all or exit", () -> parser.parseFindRoleCommand("random"));
     }
 
     @Test

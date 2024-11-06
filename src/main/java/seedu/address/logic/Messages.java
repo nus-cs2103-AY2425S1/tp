@@ -22,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EMPTY_CONTACTS_ON_ADDALL = "There needs to be at least one contact in the "
+            + "search panel to add to the event";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -60,7 +60,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(name, phone, email, address, telegramUsername, roleList);
 
-
         return new AddCommand(person);
     }
 
