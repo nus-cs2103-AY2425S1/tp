@@ -31,13 +31,17 @@ public class SeeScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd-MM-yyyy");
-        System.out.println(predicate.getStartDateOfWeek());
-        System.out.println(predicate.getStartDateOfWeek().format(formatter));
-
         model.changeWeeklySchedule(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW,
                         predicate.getStartDateOfWeek().format(formatter),
                         predicate.getLastDateOfWeek().format(formatter)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SeeScheduleCommand // instanceof handles nulls
+                && predicate.equals(((SeeScheduleCommand) other).predicate)); // state check
     }
 }

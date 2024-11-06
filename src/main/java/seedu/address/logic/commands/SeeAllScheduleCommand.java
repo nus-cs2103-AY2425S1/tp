@@ -21,4 +21,10 @@ public class SeeAllScheduleCommand extends Command {
         model.changeWeeklySchedule(PREDICATE_SHOW_ALL_MEETINGS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || other instanceof SeeAllScheduleCommand; // instanceof handles
+    }
 }
