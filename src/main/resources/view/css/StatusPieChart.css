@@ -9,6 +9,7 @@
     -fx-text-fill: white;
     -fx-font-size: 16px;
     -fx-padding: 0 0 -2 0;
+    -fx-font-weight: bold;
 }
 
 /* General pie chart styles */
