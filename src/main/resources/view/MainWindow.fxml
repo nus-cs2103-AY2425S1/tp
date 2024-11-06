@@ -51,22 +51,28 @@
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
           <!-- Contact Panel with Label -->
-          <VBox spacing="5" HBox.hgrow="ALWAYS">
-            <Label text="Contacts" styleClass="label-contacts"/>
-            <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-          </VBox>
+          <StackPane HBox.hgrow="ALWAYS">
+            <VBox>
+              <Label text="Contacts" styleClass="label-contacts"/>
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
 
           <!-- Job Panel with Label -->
-          <VBox spacing="5" HBox.hgrow="ALWAYS">
-            <Label text="Jobs" styleClass="label-jobs"/>
-            <StackPane fx:id="jobListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-          </VBox>
+          <StackPane HBox.hgrow="ALWAYS">
+            <VBox>
+              <Label text="Jobs" styleClass="label-jobs"/>
+              <StackPane fx:id="jobListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
 
           <!-- Company Panel with Label -->
-          <VBox spacing="5" HBox.hgrow="ALWAYS">
-            <Label text="Companies" styleClass="label-companies"/>
-            <StackPane fx:id="companyListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-          </VBox>
+          <StackPane HBox.hgrow="ALWAYS">
+            <VBox>
+              <Label text="Companies" styleClass="label-companies"/>
+              <StackPane fx:id="companyListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
         </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
