@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalMeetings.TEAM_SYNC_1;
 import static seedu.address.testutil.TypicalMeetings.TEAM_SYNC_2;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetings;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,26 +25,20 @@ import seedu.address.model.ScheduleList;
 
 public class JsonScheduleStorageTest {
 
-    private final Path TEST_DATA_FOLDER = Paths
+    private static final Path TEST_DATA_FOLDER = Paths
             .get("src", "test", "data", "JsonScheduleStorageTest");
 
     @TempDir
     public Path testFolder;
 
-    private java.util.Optional<ReadOnlyScheduleList> readScheduleList(String filePath) throws Exception {
-        return new JsonScheduleStorage(Paths.get(filePath))
-                .readScheduleList(TEST_DATA_FOLDER.resolve(filePath));
-    }
-
-    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
-        return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-                : null;
-    }
-
     @Test
     public void readScheduleList_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readScheduleList(null));
+    }
+
+    private java.util.Optional<ReadOnlyScheduleList> readScheduleList(String filePath) throws Exception {
+        return new JsonScheduleStorage(Paths.get(filePath))
+                .readScheduleList(TEST_DATA_FOLDER.resolve(filePath));
     }
 
     @Test
@@ -55,7 +48,7 @@ public class JsonScheduleStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> 
+        assertThrows(DataLoadingException.class, () ->
                 readScheduleList("notJsonFormatSchedule.json"));
     }
 

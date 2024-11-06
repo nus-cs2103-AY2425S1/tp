@@ -52,7 +52,7 @@ public class StorageManagerTest {
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
-        assertTrue(Pattern.matches("/tmp/junit\\d+/prefs", 
+        assertTrue(Pattern.matches("/tmp/junit\\d+/prefs",
                 storageManager.getUserPrefsFilePath().toString()));
     }
 
