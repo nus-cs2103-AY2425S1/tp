@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
@@ -43,6 +44,8 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ABSENT_DATE = "2024-10-32"; // Invalid date
     private static final String INVALID_ABSENT_REASON = "";
+    private static final String INVALID_EXAM = "Midterm#";
+    private static final String INVALID_EXAMSCORE = "101.0";
     private static final String INVALID_SORT_ATTRIBUTE = "names";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -58,6 +61,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_ABSENT_DATE = "20-10-2024";
     private static final String VALID_ABSENT_REASON = "Sick";
+    private static final String VALID_EXAM = "Midterm";
+    private static final String VALID_EXAMSCORE = "70.0";
     private static final String VALID_SORT_ATTRIBUTE = "register number";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -383,6 +388,50 @@ public class ParserUtilTest {
                         + PREFIX_ABSENT_DATE + VALID_ABSENT_DATE + " "
                         + PREFIX_ABSENT_REASON + INVALID_ABSENT_REASON
         ));
+    }
+
+    @Test
+    public void parseExam_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExam((String) null));
+    }
+
+    @Test
+    public void parseExam_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExam(INVALID_EXAM));
+    }
+
+    @Test
+    public void parseExam_validValueWithoutWhitespace_returnsExam() throws Exception {
+        Exam expectedExam = new Exam(VALID_EXAM);
+        assertEquals(expectedExam, ParserUtil.parseExam(VALID_EXAM));
+    }
+
+    @Test
+    public void parseExam_validValueWithWhitespace_returnsTrimmedExam() throws Exception {
+        String examWithWhitespace = WHITESPACE + VALID_EXAM + WHITESPACE;
+        Exam expectedExam = new Exam(VALID_EXAM);
+        assertEquals(expectedExam, ParserUtil.parseExam(examWithWhitespace));
+    }
+
+    @Test
+    public void parseExamScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExamScore((String) null));
+    }
+
+    @Test
+    public void parseExamScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExamScore(INVALID_EXAMSCORE));
+    }
+
+    @Test
+    public void parseExamScore_validValueWithoutWhitespace_returnsExamScore() throws Exception {
+        assertEquals(VALID_EXAMSCORE, ParserUtil.parseExamScore(VALID_EXAMSCORE));
+    }
+
+    @Test
+    public void parseExamScore_validValueWithWhitespace_returnsTrimmedExamScore() throws Exception {
+        String examScoreWithWhitespace = WHITESPACE + VALID_EXAMSCORE + WHITESPACE;
+        assertEquals(VALID_EXAMSCORE, ParserUtil.parseExamScore(examScoreWithWhitespace));
     }
 
     @Test

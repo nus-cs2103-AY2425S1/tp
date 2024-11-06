@@ -5,6 +5,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddAttendanceCommand;
@@ -13,9 +17,11 @@ import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 
 /**
- * Parses input arguments and creates a new AddAttendanceCommand object
+ * Parses input arguments and creates a new AddAttendanceCommand object.
  */
 public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(AddAttendanceCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddAttendanceCommand
@@ -32,6 +38,7 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
 
         if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()
                 || !argMultimap.getValue(PREFIX_ABSENT_REASON).isPresent()) {
+            logger.log(Level.WARNING, "Prefix for absent date or absent reason is missing.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAttendanceCommand.MESSAGE_USAGE));
         }
@@ -49,6 +56,8 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }
+
+        logger.log(Level.INFO, "parsed addAttendance command without exception");
 
         return new AddAttendanceCommand(index, absentDate, absentReason);
     }

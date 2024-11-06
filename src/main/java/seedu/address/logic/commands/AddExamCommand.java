@@ -42,17 +42,16 @@ public class AddExamCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
 
-        boolean update = false;
-        boolean skip = false;
+        boolean hasUpdates = false;
+        boolean hasSkips = false;
 
         for (Person personToEdit : lastShownList) {
-            // If a student is added to the address book after an exam is added, adding the same exam will result in
-            // the exam being added to the new student without duplicates in existing students.
+            // check if exam has already been added to each student
             if (personToEdit.getExams().contains(exam)) {
-                skip = true;
+                hasSkips = true;
                 continue;
             }
-            update = true;
+            hasUpdates = true;
             Set<Exam> updatedExams = personToEdit.getExams();
             updatedExams.add(exam);
             Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -62,10 +61,10 @@ public class AddExamCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
-        if (!update) {
+        if (!hasUpdates) {
             // No updates, exam is a duplicate
             throw new CommandException(MESSAGE_DUPLICATE_EXAM);
-        } else if (!skip) {
+        } else if (!hasSkips) {
             // No skips, exam is a new exam
             return new CommandResult(String.format(MESSAGE_ADDEXAM_SUCCESS, exam));
         }
