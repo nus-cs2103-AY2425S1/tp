@@ -21,7 +21,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
     * It is **well-designed and documented**.
 * It is named `Murphy's List` (`ML` for short) because it was named after the medical prodigy `Sean Murphy` from the popular show `The Good Doctor`
 * For the detailed documentation of this project, see our **[Developer Guide](https://github.com/AY2425S1-CS2103T-W11-1a/tp/blob/master/docs/DeveloperGuide.md)**.
-* For a comprehensive list of instructions on how to use the app, see our **[User Guide](docs/UserGuide.md)**
+* For a comprehensive list of instructions on how to use the app, see our **[User Guide](./UserGuide.md)**
 
 
 **Acknowledgements**
