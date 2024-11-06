@@ -1044,6 +1044,23 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Editing a student
+
+1. Editing a student while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `edit 1 c/1A`<br>
+       Expected: First student's class is changed. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `edit 1 c/A1`<br>
+       Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 0`, `edit c/1A c/2A`<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
 ### Adding EcNumber for a student
 
 1. Adding EcNumber for a student in the list
