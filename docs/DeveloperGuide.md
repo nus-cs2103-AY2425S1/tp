@@ -1025,7 +1025,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
        Expected: No student is added. Error detail regarding class is shown in the status message. Status bar remains the same.
 
-    5. Other incorrect add commands to try: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/ s/M c/2A`, `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
+    5. Other incorrect add commands to try:<br>
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`<br>
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/ s/M c/2A`<br>
+       `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1042,7 +1045,10 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try:<br>
+      `delete`<br>
+      `delete x`<br>
+      `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1059,7 +1065,11 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit 1 c/A1`<br>
        Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect edit commands to try: `edit`, `edit 0`, `edit c/1A c/2A`, `edit x c/1A` (where x is larger than the list size)<br>
+    4. Other incorrect edit commands to try:<br>
+       `edit`<br>
+       `edit 0`<br>
+       `edit c/1A c/2A`<br>
+       `edit x c/1A` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1079,7 +1089,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `addEcNumber 1 ep/123`<br>
        Expected: No emergency contact number is changed. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect addEcNumber commands to try: `addEcNumber`, `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
+    5. Other incorrect addEcNumber commands to try:<br> 
+       `addEcNumber`<br>
+       `addEcNumber abc ep/91234567`
+       `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
@@ -1232,7 +1245,9 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `sort abc`<br>
       Expected: List is not sorted, Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect sort commands to try: `sort`, `sort 1`<br>
+   4. Other incorrect sort commands to try:<br> 
+      `sort`<br>
+      `sort 1`<br>
       Expected: Similar to previous
 
 2. _{ more test cases …​ }_
