@@ -64,7 +64,7 @@ If you plan to use Intellij IDEA (highly recommended):
 4. **Learn the design**
 
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading
-   about [AddressBook’s architecture](DeveloperGuide.md#architecture).
+   about [Spleetwaise’s architecture](DeveloperGuide.md#architecture).
 
 5. **Do the tutorials**
    These tutorials will help you get acquainted with the codebase.
