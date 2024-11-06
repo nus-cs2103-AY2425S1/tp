@@ -21,15 +21,19 @@ public class HelpWindow extends UiPart<Stage> {
         Commands:
             ▪ Viewing Help: help
 
-            ▪ Adding a Person: add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…
+            ▪ Adding a Person: add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [i/INCOME] [age/AGE]...
 
-            ▪ Listing All Persons: list
+            ▪ Listing All Persons: list [s/SORT_FIELD] [r/]
 
-            ▪ Editing a Person: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
+            ▪ Editing a Person: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG][i/INCOME] [age/AGE]...
 
             ▪ Locating Persons: find KEYWORD [MORE_KEYWORDS]
 
+            ▪ Filter Persons List: filter [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/INCOME_GROUP] [age/AGE_CRITERIA]...
+
             ▪ Deleting a Person: delete NAME or delete INDEX
+
+            ▪ Notes: View: notes view/NAME Add: notes add/NAME Edit: notes edit/NAME Delete: notes delete/NAME
 
             ▪ Clearing All Entries: clear
 
