@@ -5,10 +5,10 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>> {
-    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyPawPatrol" as ReadOnlyPawPatrol
     Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
     Class "<<interface>>\nModel" as Model
-    Class AddressBook
+    Class PawPatrol
     Class ModelManager
     Class UserPrefs
 
@@ -35,17 +35,17 @@ Package Model as ModelPackage <<Rectangle>> {
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+PawPatrol .up.|> ReadOnlyPawPatrol
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -down-> "1" AddressBook
+Model .left.> ReadOnlyPawPatrol
+ModelManager -down-> "1" PawPatrol
 ModelManager -down-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueOwnerList
-AddressBook *--> "1" UniquePetList
+PawPatrol *--> "1" UniqueOwnerList
+PawPatrol *--> "1" UniquePetList
 
 UniqueOwnerList -down-> "~* all" Owner
 UniquePetList -down-> "~* all" Pet
