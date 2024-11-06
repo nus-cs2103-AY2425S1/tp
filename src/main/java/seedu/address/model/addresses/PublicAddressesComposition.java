@@ -14,6 +14,10 @@ import java.util.stream.Collectors;
  * Represents a composition of public addresses categorized by network.
  */
 public class PublicAddressesComposition {
+
+    public static final String MESSAGE_LABELS_CONSTRAINTS =
+            "Public addresses must have unique labels within a network.";
+
     private final Map<Network, Set<PublicAddress>> publicAddresses;
 
     /**
@@ -31,10 +35,35 @@ public class PublicAddressesComposition {
     public PublicAddressesComposition(Map<Network, Set<PublicAddress>> publicAddresses) {
         //assert that for each network there is no empty set of public addresses;
         assert publicAddresses != null;
-        assert !publicAddresses.values().stream().anyMatch(Set::isEmpty);
+        assert publicAddresses.values().stream().noneMatch(Set::isEmpty);
+
+        if (!areValidPublicAddressLabels(publicAddresses)) {
+            throw new IllegalArgumentException(MESSAGE_LABELS_CONSTRAINTS);
+        }
 
         this.publicAddresses = publicAddresses.entrySet().stream()
             .collect(HashMap::new, (m, e) -> m.put(e.getKey(), new HashSet<>(e.getValue())), HashMap::putAll);
+    }
+
+    /**
+     * Checks whether labels within in a network are unique.
+     * Case is ignored.
+     *
+     * @param publicAddresses A map of networks to sets of public addresses.
+     * @return True if labels within a network are unique, false otherwise.
+     */
+    private boolean areValidPublicAddressLabels(Map<Network, Set<PublicAddress>> publicAddresses) {
+        assert publicAddresses != null;
+        assert publicAddresses.values().stream().noneMatch(Set::isEmpty);
+
+        return publicAddresses.values().stream()
+                .allMatch(addresses -> {
+                    Set<String> labels = new HashSet<>();
+                    return addresses.stream()
+                            .map(PublicAddress::getLabel)
+                            .map(String::toLowerCase)
+                            .allMatch(labels::add);
+                });
     }
 
     /**
@@ -119,8 +148,6 @@ public class PublicAddressesComposition {
             .filter(entry -> entry.getKey().equals(network))
             .flatMap(entry -> entry.getValue().stream())
             .anyMatch(publicAddress -> publicAddress.getLabel().equals(label));
-
-
     }
 
     /**
