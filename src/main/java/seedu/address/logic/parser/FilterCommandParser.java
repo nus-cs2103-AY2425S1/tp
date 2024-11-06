@@ -35,8 +35,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String lowercaseArgs = args.toLowerCase();
         String trimmedArgs = args.trim();
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(lowercaseArgs, PREFIX_TAG, PREFIX_RSVP_STATUS, PREFIX_EMAIL,
-                PREFIX_NAME, PREFIX_PHONE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(lowercaseArgs, PREFIX_TAG, PREFIX_RSVP_STATUS,
+                PREFIX_EMAIL, PREFIX_NAME, PREFIX_PHONE);
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
