@@ -19,14 +19,14 @@ than traditional GUI apps.
 - [Quick Start](#quick-start)
 - [Features](#features)
     - [Viewing Help](#viewing-help--help)
-    - [Adding a Person](#adding-a-person-add)
+    - [Adding a Person](#adding-a-person--add)
     - [Listing All Persons](#listing-all-persons--list)
     - [Editing a Person](#editing-a-person--edit)
-    - [Finding Persons](#finding-persons-find)
+    - [Finding Persons](#finding-persons--find)
     - [Deleting People](#deleting-people--delete)
-    - [Getting Parameters](#getting-the-parameters-of-these-people-get)
+    - [Getting Parameters](#getting-the-parameters-of-these-people--get)
     - [Clearing All Entries](#clearing-all-entries--clear)
-    - [Undo the Previous Command](#undo-the-previous-command-undo)
+    - [Undo the Previous Command](#undo-the-previous-command--undo)
     - [Displaying Statistics](#displaying-overall-statistics--statistics)
     - [Displaying Eligible Schemes](#displaying-eligible-schemes--scheme)
     - [Exiting the Program](#exiting-the-program--exit)
@@ -41,16 +41,16 @@ than traditional GUI apps.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
-   *  [How To Install Java](https://www.java.com/en/download/help/download_options.html)
+1. Ensure you have **Java 17 or above** installed in your Computer.
+   *  How To Install Java ([Windows](https://www.oracle.com/sg/java/technologies/downloads/#jdk23-windows) | [MacOS](https://www.oracle.com/sg/java/technologies/downloads/#jdk23-mac) | [Linux](https://www.oracle.com/sg/java/technologies/downloads/#jdk23-linux)
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
    * Under the **Assests** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
 
-1. Copy this file to the folder you want to use as the _home folder_ for SocialBook.
-   * Ensure that the _home folder_ is **empty**.
+1. Copy this file into the _folder_ you want to use for SocialBook.
+   * Ensure that this _folder_ is **empty**.
 
-1. Open a command terminal, `cd` into the empty folder you put the jar file in. After which enter the `java -jar socialbook.jar` in the command terminal to run the application.
+1. Open a command terminal, `cd` into the folder you put the `.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
    * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
    * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [MacOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
    
@@ -115,7 +115,7 @@ Examples:
 * `help add`
 * `help edit`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to SocialBook.
 
@@ -156,7 +156,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Finding persons: `find`
+### Finding persons : `find`
 
 Finds persons that match the specified filters.
 
@@ -192,7 +192,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
-### Getting the parameters of these people: `get` 
+### Getting the parameters of these people : `get` 
 Gets the specified parameters of each individual person in current person list.
 
 Format: `get PARAMETERS`
@@ -214,7 +214,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Undo the previous command: `undo`
+### Undo the previous command : `undo`
 Undoes the previous command from SocialBook.
 
 Format: `undo`
