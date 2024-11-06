@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.address.testutil.Assert.assertDoesNotThrow;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -46,15 +47,26 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidVolunteerAddressBook_throwDataLoadingException() {
+        assertDoesNotThrow(() -> readAddressBook("oneInvalidPersonAddressBook.json"));
+    }
+
+
+    @Test
+    public void readAddressBook_invalidAndValidVolunteerAddressBook_throwDataLoadingException() {
+        assertDoesNotThrow(() -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    }
+
+
+    @Test
+    public void readAddressBook_invalidEventAddressBook_throwDataLoadingException() {
+        assertDoesNotThrow(() -> readAddressBook("oneInvalidEventAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidEventAddressBook_throwDataLoadingException() {
+        assertDoesNotThrow(() -> readAddressBook("invalidAndValidEventAddressBook.json"));
     }
-
 
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
