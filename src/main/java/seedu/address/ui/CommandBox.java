@@ -18,6 +18,7 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
     private final HintHandler hintHandler;
+    private final MainWindow mainWindow;
 
     @FXML
     private TextField commandTextField;
@@ -25,15 +26,18 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor} and {@code HintHandler}.
      */
-    public CommandBox(CommandExecutor commandExecutor, HintHandler hintHandler) {
+    public CommandBox(CommandExecutor commandExecutor, HintHandler hintHandler, MainWindow mainWindow) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.hintHandler = hintHandler;
+        this.mainWindow = mainWindow;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             setStyleToDefault();
             if (!newValue.trim().isEmpty()) {
                 hintHandler.handleRealTimeHint(newValue);
+            } else if (mainWindow.isHintDisplayed()) {
+                mainWindow.clearResultDisplay();
             }
         });
     }

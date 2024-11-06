@@ -138,7 +138,13 @@ public class AddressBookParser {
         } else if (userInput.startsWith("d")) {
             return getDeleteHint(userInput);
         } else if (userInput.startsWith("e")) {
-            return getEditHint(userInput);
+            if (userInput.startsWith("ed")) {
+                return getEditHint(userInput);
+            } else if (userInput.startsWith("ex")) {
+                return ExitCommand.MESSAGE_USAGE;
+            } else {
+                return EditCommand.MESSAGE_USAGE + "\n" + ExitCommand.MESSAGE_USAGE;
+            }
         } else if (userInput.startsWith("f")) {
             return getFindHint(userInput);
         } else if (userInput.startsWith("s")) {
@@ -147,7 +153,7 @@ public class AddressBookParser {
             } else if (userInput.startsWith("sc")) {
                 return ScheduleCommand.MESSAGE_USAGE;
             } else {
-                return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_USAGE;
+                return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_HINT;
             }
         } else if (userInput.startsWith("l")) {
             if (userInput.startsWith("lis")) {
@@ -155,14 +161,12 @@ public class AddressBookParser {
             } else if (userInput.startsWith("lin")) {
                 return LinkPersonCommand.MESSAGE_USAGE;
             } else {
-                return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_USAGE;
+                return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_HINT;
             }
         } else if (userInput.startsWith("c")) {
             return getClearHint(userInput);
-        } else if (userInput.startsWith("h")) {
-            return HelpCommand.MESSAGE_USAGE;
         } else {
-            return "";
+            return HelpCommand.MESSAGE_USAGE;
         }
     }
 

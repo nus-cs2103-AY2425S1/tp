@@ -146,7 +146,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, this::handleRealTimeHint);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::handleRealTimeHint, this);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         navBar = new NavBar(this::handleNav);
@@ -276,9 +276,28 @@ public class MainWindow extends UiPart<Stage> {
         // Assuming AddressBookParser can parse usage hints based on partial input
         String hint = logic.getCommandHint(inputText);
         resultDisplay.setFeedbackToUser(hint);
+        resultDisplay.setHint(hint);
     }
 
+    /**
+     * Checks if a hint is being displayed.
+     */
+    public boolean isHintDisplayed() {
+        return resultDisplay.getHint();
+    }
+
+    /**
+     * Clears the result display when no hint is shown.
+     */
+    public void clearResultDisplay() {
+        resultDisplay.clearFeedback();
+    }
+
+    /**
+     * Refresh person list.
+     */
     public void handleRefresh() {
         personListPanel.refreshPersonListView();
     }
+
 }
