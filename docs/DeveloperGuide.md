@@ -165,7 +165,7 @@ The sequence diagram below models the interactions between the different compone
 ![ScheduleSequenceDiagram](images/ScheduleSequenceDiagram.png)
 
 #### Details
-1. The user executes the command `schedule John Doe d/2024-10-28 1200 note/First Appointment` to schedule a new appointment for a client named John Doe.
+1. The user executes the command `schedule John Doe d/2024-10-28 1200 note/First Appointment` to schedule a new appointment for a client named john doe.
 2. The `ScheduleCommandParser` object calls its `parse` method to interpret the user input.
 3. A `ScheduleCommand` object is created.
 4. The `ScheduleCommandParser` object returns the `ScheduleCommand` object.
@@ -176,8 +176,8 @@ The sequence diagram below models the interactions between the different compone
 
 #### Example Usage
 1. User inputs the command `schedule Alice Tan d/2024-10-29 1200 note/Second Appointment`.
-2. This creates an appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached.
-3. The new appointment is then displayed in the UI, reflecting the updated schedule for "Alice Tan".
+2. This creates an appointment for a person named "alice tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached.
+3. The new appointment is then displayed in the UI, reflecting the updated schedule for "alice tan".
 
 ### View Client Feature
 
@@ -189,10 +189,10 @@ The sequence diagram below models the interactions between the different compone
 ![ViewClientSequenceDiagram](images/ViewSequenceDiagram.png)
 
 #### Details
-1. The user executes the command `view John Doe` to display the details of a client named John Doe.
+1. The user executes the command `view John Doe` to display the details of a client named john doe.
 2. The `LogicManager` object receives this command and calls the `parseCommand` method of `AddressBookParser` to interpret the input.
 3. The `AddressBookParser` then creates a `ViewClientCommandParser` object to handle parsing.
-4. The `ViewClientCommandParser` object calls its `parse` method to extract the client name, and the `ClientUtil` utility class is used to confirm the full name "John Doe."
+4. The `ViewClientCommandParser` object calls its `parse` method to extract the client name, and the `ClientUtil` utility class is used to confirm the full name "john doe."
 5. The `ViewClientCommandParser` creates a `ViewClientCommand` object.
 6. The `ViewClientCommandParser` returns the `ViewClientCommand` object to `AddressBookParser`, which then returns it to `LogicManager`.
 7. The `LogicManager` object invokes the `execute` method of `ViewClientCommand`.
@@ -202,7 +202,7 @@ The sequence diagram below models the interactions between the different compone
 
 #### Example Usage
 1. User inputs the command `view Alice Tan`.
-2. The system displays the details of "Alice Tan," including name, contact information, address, condition, and any scheduled appointments.
+2. The system displays the details of "alice tan," including name, contact information, address, condition, and any scheduled appointments.
 3. This information is shown in a pop-up or a designated UI section for easy access by the user.
 
 ### Reminder Feature
@@ -215,7 +215,7 @@ The reminder diagram below models the interaction between the different componen
 ![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
 
 #### Details
-1. The user executes the command `reminder John Doe r/1 day` to set a reminder for a client named John Doe's appointment.
+1. The user executes the command `reminder John Doe r/1 day` to set a reminder for a client named john doe's appointment.
 2. The `ReminderCommandParser` object calls its parse method to interpret the user input.
 3. A `ReminderCommand` object is created.
 4. The `ReminderCommandParser` object returns the `ReminderCommand` object.
@@ -226,8 +226,8 @@ The reminder diagram below models the interaction between the different componen
 
 #### Example Usage
 1. User inputs the command `reminder Alice Tan r/3 hours`.
-2. This creates a reminder for a person named "Alice Tan", with reminder time "3 hours".
-3. The reminder is then displayed in the UI, reflecting that a reminder has been set for "Alice Tan"'s appointment.
+2. This creates a reminder for a person named "alice tan", with reminder time "3 hours".
+3. The reminder is then displayed in the UI, reflecting that a reminder has been set for "alice tan"'s appointment.
 
 ### Delete Appointment Feature
 
@@ -239,7 +239,7 @@ The sequence diagram below models the interactions between the different compone
 ![DeleteAppointmentSequenceDiagram](images/DeleteAppointmentSequenceDiagram.png)
 
 #### Details
-1. The user executes the command `appointment-delete John Doe d/2024-10-28 1200` to delete a specified appointment for a client named John Doe.
+1. The user executes the command `appointment-delete John Doe d/2024-10-28 1200` to delete a specified appointment for a client named john doe.
 2. The `DeleteAppointmentCommandParser` object calls its `parse` method to interpret the user input.
 3. A `DeleteAppointmentCommand` object is created.
 4. The `DeleteAppointmentCommandParser` object returns the `DeleteAppointmentCommand` object.
@@ -250,8 +250,8 @@ The sequence diagram below models the interactions between the different compone
 
 #### Example Usage
 1. User inputs the command `appointment-delete Alice Tan d/2024-10-29 1200`.
-2. This deletes the appointment for a person named "Alice Tan" on October 29, 2024, at 12:00pm.
-3. The updated schedule for "Alice Tan" is then displayed in the UI.
+2. This deletes the appointment for a person named "alice tan" on October 29, 2024, at 12:00pm.
+3. The updated schedule for "alice tan" is then displayed in the UI.
 
 
 
@@ -689,26 +689,26 @@ testers are expected to do more *exploratory* testing.
 
 1. Locating a person by name while all clients are being shown.
 
-    1. **Prerequisites**: Ensure at least one contact with the name "John Doe" exists in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. **Prerequisites**: Ensure at least one contact with the name "john doe" exists in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
-    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "John" (case-insensitive) should appear in the results, e.g., "John Doe." The search should be able to display "john" and "John Doe" regardless of casing.
+    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "john" (case-insensitive) should appear in the results, e.g., "john doe." The search should be able to display "john" and "john doe" regardless of casing.
 
-    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "Alex Yeoh" and "David Li." The results should display all contacts that match at least one keyword in a case-insensitive manner.
+    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "alex yeoh" and "david li." The results should display all contacts that match at least one keyword in a case-insensitive manner.
 
-    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if only partial matches exist, such as "Hans," since the system only matches full words.
+    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if only partial matches exist, such as "hans," since the system only matches full words.
 
 2. Locating a person by phone number while all clients are being shown.
 
-    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "John Doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches.
+    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "john doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches.
 
     
 ### Scheduling an appointment
 
 1. Scheduling an appointment for a client while all clients are being shown.
 
-    1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. Prerequisites: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
-    1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named John Doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
+    1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named john doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
 
     1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
 
@@ -720,7 +720,7 @@ testers are expected to do more *exploratory* testing.
 
     1. **Prerequisites**: Ensure that the contact with the exact name exists in PhysioPal. And that he or she has a scheduled appointment. If not, add the required contact or appointment using a command similar to:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` and `schedule John Doe d/2024-10-29 1200 note/First Appointment` respectively
 
-    2. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for John Doe, including:
+    2. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for john doe, including:
         - Name
         - Phone Number
         - Email
@@ -729,7 +729,7 @@ testers are expected to do more *exploratory* testing.
         - Schedule
         - Reminder
 
-    3. **Test case**: `view Betsy Crowe`<br>**Expected**: A pop-up window displays Betsy Crowe’s details with all specified fields shown.
+    3. **Test case**: `view Betsy Crowe`<br>**Expected**: A pop-up window displays betsy crowe’s details with all specified fields shown.
 
     4. **Test case**: `view John`<br>**Expected**: An error message appears, as the name entered does not match the full name exactly.
 
@@ -743,9 +743,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting an appointment for a client while all clients are being shown.
 
-    1. Prerequisites: Name John Doe should exist in the contact list. At least **one** appointment should exist for the client John Doe. If not, run the appropriate command to schedule an appointment for John Doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
+    1. Prerequisites: Name john doe should exist in the contact list. At least **one** appointment should exist for the client john doe. If not, run the appropriate command to schedule an appointment for john doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
 
-    1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: Contact named John Doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
+    1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: Contact named john doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
 
     1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: No contact is updated. Error details shown in the status message.
 
@@ -755,31 +755,23 @@ testers are expected to do more *exploratory* testing.
 
 1. Setting a reminder for a scheduled appointment for a client while all clients are being shown.
 
-    1. Prerequisites: Only **one** contact with the name John Doe should exist in PhysioPal. If not, run the appropriate command to add John Doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name John Doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. Prerequisites: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
         
-        At **least one** appointment must be scheduled for John Doe. If not, run the appropriate command to add an appointment for John Doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
+        At **least one** appointment must be scheduled for john doe. If not, run the appropriate command to add an appointment for john doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
 
-    1. Test case: `reminder John Doe r/1 hour`<br>Expected: Contact name John Doe will be updated with a reminder set for 1 hour before Oct 29 2024, 12:00pm
+    1. Test case: `reminder John Doe r/1 hour`<br>Expected: Contact name john doe will be updated with a reminder set for 1 hour before Oct 29 2024, 12:00pm
 
     1. Test case: `reminder John Doee r/1 hour`<br>Expected: No contact is updated with the corresponding reminder time. Error details shown in the status message.
 
     1. Test case: `reminder John Doe r/1 cycle`<br>Expected: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
 
-    1. Test case: `reminder John Doe r/1 days`<br>Expected: Similar to previous.
-
-    1. Test case: `reminder John Doe r/3 day`<br>Expected: Similar to previous.
-
-    1. Test case: `reminder John Doe r/8 days`<br>Expected: Similar to previous.
-
-    1. Test case: `reminder John Doe r/25 hours`<br>Expected: Similar to previous.
-
 ### Deleting a reminder
 
 1. Deleting a reminder for a client while all clients are being shown.
 
-    1. Prerequisites: Name John Doe should exist in the contact list. A reminder should be set for the client John Doe. If not, run the appropriate command to set a reminder for John Doe.<br>`reminder John Doe r/1 day`<br>
+    1. Prerequisites: Name john doe should exist in the contact list. A reminder should be set for the client john doe. If not, run the appropriate command to set a reminder for john doe.<br>`reminder John Doe r/1 day`<br>
 
-    1. Test case: `reminder-delete John Doe`<br>Expected: Contact named John Doe will be updated without the reminder. Success message of the reminder deletion shown in the status message.
+    1. Test case: `reminder-delete John Doe`<br>Expected: Contact named john doe will be updated without the reminder. Success message of the reminder deletion shown in the status message.
 
     1. Test case: `reminder-delete John Doe`<br>Expected: No contact is updated. Error details shown in the status message.
 
@@ -806,13 +798,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking payment as paid
     1. Test case: `payment John Doe d/2024-10-14 1200 pay/paid`<br>
-       Expected: Payment status for John Doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
+       Expected: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
        Details of the status change shown in the status message.
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
       Expected: No payment made. Error details shown in the status message.
 2. Marking payment as unpaid
     1. Test case: `payment John Doe d/2024-10-14 1200 pay/unpaid`<br>
-       Expected: Payment status for John Doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
+       Expected: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
        Details of the status change shown in the status message.
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
        Expected: No payment made. Error details shown in the status message.

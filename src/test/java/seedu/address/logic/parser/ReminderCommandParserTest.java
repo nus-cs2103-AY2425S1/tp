@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_REMINDER_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.model.person.Name;
 
@@ -45,7 +46,7 @@ public class ReminderCommandParserTest {
     public void parse_multipleReminderPrefixes_failure() {
         String userInput = VALID_NAME + " r/" + VALID_REMINDER_TIME + " r/3 days";
 
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_REMINDER_FORMAT);
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMINDER));
     }
 
     @Test
