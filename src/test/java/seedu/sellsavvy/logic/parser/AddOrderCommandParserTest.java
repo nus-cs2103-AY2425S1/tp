@@ -23,7 +23,7 @@ import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 
 import org.junit.jupiter.api.Test;
@@ -46,20 +46,20 @@ public class AddOrderCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + VALID_ORDER_STRING;
 
-        assertParseSuccess(parser, userInput, new AddOrderCommand(INDEX_FIRST_PERSON, ATLAS));
+        assertParseSuccess(parser, userInput, new AddOrderCommand(INDEX_FIRST, ATLAS));
     }
 
     @Test
     public void parse_quantityFieldMissing_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + ITEM_DESC_ATLAS + DATE_DESC_ATLAS;
         Order expectedOrder = new OrderBuilder().withItem(VALID_ITEM_ATLAS)
                 .withDate(VALID_DATE_ATLAS).withQuantity("1").build();
 
-        assertParseSuccess(parser, userInput, new AddOrderCommand(INDEX_FIRST_PERSON, expectedOrder));
+        assertParseSuccess(parser, userInput, new AddOrderCommand(INDEX_FIRST, expectedOrder));
     }
 
     @Test
@@ -135,7 +135,7 @@ public class AddOrderCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String validUserInput = targetIndex.getOneBased() + VALID_ORDER_STRING;
 
         // multiple item names

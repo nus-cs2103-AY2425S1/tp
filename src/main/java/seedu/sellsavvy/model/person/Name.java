@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.AppUtil.checkArgument;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 /**
  * Represents a Person's name in the address book.
@@ -46,6 +47,13 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the name is similar to {@code otherName}.
+     * Two names are considered similar if they are the same without considering space and casing.
+     */
+    public boolean isSimilarTo(Name otherName) {
+        return normalise(this.fullName).equals(normalise(otherName.fullName));
+    }
 
     @Override
     public String toString() {

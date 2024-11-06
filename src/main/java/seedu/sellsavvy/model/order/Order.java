@@ -68,6 +68,16 @@ public class Order {
     }
 
     /**
+     * Returns if the order has identical details and similar item.
+     */
+    public boolean isSimilarTo(Order otherOrder) {
+        return this.item.isSimilarTo(otherOrder.item)
+                && quantity.equals(otherOrder.quantity)
+                && date.equals(otherOrder.date)
+                && status.equals(otherOrder.status);
+    }
+
+    /**
      * Returns true if both orders have the same identity and data fields.
      * This defines a stronger notion of equality between two orders.
      */

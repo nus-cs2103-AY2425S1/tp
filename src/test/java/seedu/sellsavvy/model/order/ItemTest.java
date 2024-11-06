@@ -57,4 +57,31 @@ public class ItemTest {
         // different values -> returns false
         assertFalse(item.equals(new Item("Other Valid Item")));
     }
+
+    @Test
+    public void isSimilarTo() {
+        Item item = new Item("Valid Item");
+
+        // same values -> returns true
+        assertTrue(item.isSimilarTo(new Item("Valid Item")));
+
+        // same object -> returns true
+        assertTrue(item.isSimilarTo(item));
+
+        // null -> throws exception
+        assertThrows(NullPointerException.class, () -> item.isSimilarTo(null));
+
+        // different values -> returns false
+        assertFalse(item.isSimilarTo(new Item("Other Valid Item")));
+
+        // Only different in casing -> returns true
+        assertTrue(item.isSimilarTo(new Item("valid item")));
+
+        // Only different in space -> returns true
+        assertTrue(item.isSimilarTo(new Item("ValidItem")));
+
+        // different in both casing and space
+        assertTrue(item.isSimilarTo(new Item("validitem")));
+
+    }
 }

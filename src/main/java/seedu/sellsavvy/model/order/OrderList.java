@@ -37,6 +37,14 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
+     * Returns if the order list contains an order with identical details and similar item.
+     */
+    public boolean containsSimilarOrder(Order toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(order -> toCheck.isSimilarTo(order) && toCheck != order);
+    }
+
+    /**
      * Replaces the {@code target} order in the list with {@code editedOrder}.
      * {@code target} must exist in the list.
      */

@@ -1,5 +1,6 @@
 package seedu.sellsavvy.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
@@ -138,6 +139,54 @@ public class StringUtilTest {
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+    //---------------- Tests for normalise --------------------------------------
+
+    /*
+     * Equivalence Partitions:
+     *  -null
+     *  -empty String
+     *  -String with all lowercase and space
+     *  -String with all uppercase and space
+     *  -String with all lowercase and no space
+     *  -String with all uppercase and no space
+     *  -String with upper case, lower case and space
+     *  -String with numbers and non-alphanumeric characters
+     */
+
+    @Test
+    public void normalise_correctResult() {
+
+        // null
+        assertThrows(NullPointerException.class, () -> StringUtil.normalise(null));
+
+        // empty String
+        assertEquals(StringUtil.normalise(""), "");
+        assertEquals(StringUtil.normalise(" "), "");
+
+        // String with all lowercase and space
+        assertEquals(StringUtil.normalise("ba na na"), "banana");
+        assertEquals(StringUtil.normalise("aa ron"), "aaron");
+
+        // String with all uppercase and space
+        assertEquals(StringUtil.normalise("PINE APPLE"), "pineapple");
+        assertEquals(StringUtil.normalise("YU SUTONG"), "yusutong");
+
+        // String with all lowercase and no space
+        assertEquals(StringUtil.normalise("hi"), "hi");
+
+        // String with all uppercase and no space
+        assertEquals(StringUtil.normalise("BYE"), "bye");
+
+        // String with upper case, lower case and space
+        assertEquals(StringUtil.normalise("Hello John"), "hellojohn");
+        assertEquals(StringUtil.normalise("Hi I am back"), "hiiamback");
+
+        // String with numbers and alphanumeric characters
+        assertEquals(StringUtil.normalise("!@#$%^&*()_+"), "!@#$%^&*()_+");
+        assertEquals(StringUtil.normalise("123"), "123");
+        assertEquals(StringUtil.normalise("123 Want to tree!"), "123wanttotree!");
     }
 
 }

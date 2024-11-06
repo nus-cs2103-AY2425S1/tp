@@ -3,9 +3,16 @@ package seedu.sellsavvy.logic.commands.personcommands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_SIMILAR_NAME_WARNING;
+import static seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand.MESSAGE_SIMILAR_TAGS_WARNING;
+import static seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand.MESSAGE_SUCCESS;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
+import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,8 +30,10 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
+import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
 import seedu.sellsavvy.model.ReadOnlyUserPrefs;
+import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
@@ -44,7 +53,7 @@ public class AddPersonCommandTest {
 
         CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -57,6 +66,41 @@ public class AddPersonCommandTest {
 
         assertThrows(CommandException.class,
                 AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_similarTags_givesWarning() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().withTags("friends", "Friends").build();
+
+        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
+
+        assertEquals(MESSAGE_SIMILAR_TAGS_WARNING
+                        + String.format(MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_similarCustomer_givesWarning() {
+        // creates a similar person that is not identical
+        Person validCustomer = new PersonBuilder().build();
+        String normalisedName = normalise(validCustomer.getName().fullName);
+        Person similarCustomer = new PersonBuilder().withName(normalisedName).build();
+        assertNotEquals(validCustomer, similarCustomer);
+
+        // an actual model was used because of the need for actual interaction of ModelManger
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addPerson(validCustomer);
+        Model expectedModel = model.createCopy();
+        expectedModel.addPerson(similarCustomer);
+
+        AddPersonCommand addPersonCommand = new AddPersonCommand(similarCustomer);
+
+        String expectedMessage = MESSAGE_SIMILAR_NAME_WARNING
+                + String.format(MESSAGE_SUCCESS, Messages.format(similarCustomer));
+
+        assertCommandSuccess(addPersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -145,6 +189,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean hasSimilarPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -226,6 +275,11 @@ public class AddPersonCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasSimilarPerson(Person person) {
+            return this.person.isSimilarTo(person);
+        }
     }
 
     /**
@@ -238,6 +292,12 @@ public class AddPersonCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasSimilarPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSimilarTo);
         }
 
         @Override

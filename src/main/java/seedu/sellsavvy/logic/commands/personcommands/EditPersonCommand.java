@@ -1,6 +1,7 @@
 package seedu.sellsavvy.logic.commands.personcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_SIMILAR_NAME_WARNING;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_NAME;
@@ -42,7 +43,7 @@ public class EditPersonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the customer identified "
             + "by the index number used in the displayed customer list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: CUSTOMER_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -55,6 +56,9 @@ public class EditPersonCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
+            + "This customer has 2 or more similar tags after editing tags, "
+            + "verify if this is a mistake.\n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -94,7 +98,15 @@ public class EditPersonCommand extends Command {
             model.updateSelectedPerson(editedPerson);
         }
 
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        String feedbackToUser = editPersonDescriptor.isNameEdited() && model.hasSimilarPerson(editedPerson)
+                ? MESSAGE_SIMILAR_NAME_WARNING
+                : "";
+        feedbackToUser += editPersonDescriptor.isTagsEdited() && editedPerson.hasSimilarTags()
+                ? MESSAGE_SIMILAR_TAGS_WARNING
+                : "";
+
+        return new CommandResult(feedbackToUser
+                + String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
@@ -201,6 +213,14 @@ public class EditPersonCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public boolean isTagsEdited() {
+            return tags != null;
+        }
+
+        public boolean isNameEdited() {
+            return name != null;
         }
 
         /**

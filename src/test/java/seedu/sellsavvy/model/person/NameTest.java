@@ -62,4 +62,30 @@ public class NameTest {
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
     }
+
+    @Test
+    public void isSimilarTo() {
+        Name name = new Name("Valid Name");
+
+        // same values -> returns true
+        assertTrue(name.isSimilarTo(new Name("Valid Name")));
+
+        // same object -> returns true
+        assertTrue(name.isSimilarTo(name));
+
+        // null -> returns false
+        assertThrows(NullPointerException.class, () -> name.isSimilarTo(null));
+
+        // different values -> returns false
+        assertFalse(name.isSimilarTo(new Name("Other Valid Name")));
+
+        // Only different in casing -> returns true
+        assertTrue(name.isSimilarTo(new Name("valid name")));
+
+        // Only different in space -> returns true
+        assertTrue(name.isSimilarTo(new Name("ValidName")));
+
+        // different in both casing and space
+        assertTrue(name.isSimilarTo(new Name("validName")));
+    }
 }

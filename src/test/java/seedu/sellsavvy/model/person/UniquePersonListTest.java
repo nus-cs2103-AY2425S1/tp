@@ -49,6 +49,37 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void hasSimilarPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.hasSimilarPerson(null));
+    }
+
+    @Test
+    public void hasSimilarPerson_similarPersonNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_onlySamePersonInList_returnsFalse() {
+        uniquePersonList.add(ALICE);
+        assertFalse(uniquePersonList.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_similarPersonInList_returnsTrue() {
+        Person aliceDuplicate = new PersonBuilder().withName(ALICE.getName().fullName.toUpperCase()).build();
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.hasSimilarPerson(aliceDuplicate));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }

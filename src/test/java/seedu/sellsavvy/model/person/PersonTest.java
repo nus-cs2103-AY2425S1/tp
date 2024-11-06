@@ -101,6 +101,74 @@ public class PersonTest {
     }
 
     @Test
+    public void isSimilarTo() {
+        // same values -> returns true
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertTrue(ALICE.isSimilarTo(aliceCopy));
+
+        // same object -> returns true
+        assertTrue(ALICE.isSimilarTo(ALICE));
+
+        // null -> throws
+        assertThrows(NullPointerException.class, () -> ALICE.isSimilarTo(null));
+
+        // different person -> returns false
+        assertFalse(ALICE.isSimilarTo(BOB));
+
+        // totally different name -> returns false
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSimilarTo(editedAlice));
+
+        // similar name -> returns false
+        // Note: we did not excessively test all kinds of similar name as they are already handled in NameTest
+        editedAlice = new PersonBuilder(ALICE).withName(ALICE.getName().fullName.toUpperCase()).build();
+        assertTrue(ALICE.isSimilarTo(editedAlice));
+
+        // different phone -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.isSimilarTo(editedAlice));
+
+        // different email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSimilarTo(editedAlice));
+
+        // different address -> returns true
+        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertTrue(ALICE.isSimilarTo(editedAlice));
+
+        // different tags -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSimilarTo(editedAlice));
+    }
+
+    @Test
+    public void hasSimilarTags() {
+        // only 1 tag
+        Person customer = new PersonBuilder().withTags("Friends").build();
+        assertFalse(customer.hasSimilarTags());
+
+        // only totally different tags
+        customer = new PersonBuilder().withTags("Friends", "Friendly").build();
+        assertFalse(customer.hasSimilarTags());
+
+        // two identical tags
+        customer = new PersonBuilder().withTags("Friends", "Friends", "Criminal").build();
+        assertFalse(customer.hasSimilarTags()); // duplicate tags are ignored
+
+        // two similar tags only
+        customer = new PersonBuilder().withTags("Friends", "friends").build();
+        assertTrue(customer.hasSimilarTags());
+
+        // two similar tags with totally different tags
+        customer = new PersonBuilder().withTags("Friends", "Friendly", "friends").build();
+        assertTrue(customer.hasSimilarTags());
+
+        // three similar tags
+        customer = new PersonBuilder().withTags("Friends", "Friendly", "friends", "fRiEnDs").build();
+        assertTrue(customer.hasSimilarTags());
+    }
+
+    @Test
     public void getFilteredOrderList() {
         // identical person -> same order list
         FilteredList<Order> expectedOrders = HOON.getFilteredOrderList();

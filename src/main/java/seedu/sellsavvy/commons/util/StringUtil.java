@@ -65,4 +65,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Normalises the {@code String} by removing spaces and converting to lowercase.
+     */
+    public static String normalise(String str) {
+        requireNonNull(str);
+        return str.replaceAll(" ", "").toLowerCase();
+    }
 }

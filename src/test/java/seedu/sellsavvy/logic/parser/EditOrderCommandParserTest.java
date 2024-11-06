@@ -26,10 +26,9 @@ import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +41,7 @@ import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
+import seedu.sellsavvy.testutil.TypicalIndexes;
 
 public class EditOrderCommandParserTest {
 
@@ -98,7 +98,7 @@ public class EditOrderCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_ORDER;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + QUANTITY_DESC_BOTTLE + DATE_DESC_BOTTLE + ITEM_DESC_ATLAS;
 
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withItem(VALID_ITEM_ATLAS)
@@ -111,21 +111,21 @@ public class EditOrderCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // item
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + ITEM_DESC_BOTTLE;
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withItem(VALID_ITEM_BOTTLE).build();
         EditOrderCommand expectedCommand = new EditOrderCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // quantity
-        targetIndex = INDEX_SECOND_ORDER;
+        targetIndex = INDEX_SECOND;
         userInput = targetIndex.getOneBased() + QUANTITY_DESC_BOTTLE;
         descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_QUANTITY_BOTTLE).build();
         expectedCommand = new EditOrderCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // date
-        targetIndex = INDEX_FIRST_ORDER;
+        targetIndex = TypicalIndexes.INDEX_FIRST;
         userInput = targetIndex.getOneBased() + DATE_DESC_ATLAS;
         descriptor = new EditOrderDescriptorBuilder().withDate(VALID_DATE_ATLAS).build();
         expectedCommand = new EditOrderCommand(targetIndex, descriptor);
@@ -136,7 +136,7 @@ public class EditOrderCommandParserTest {
     public void parse_multipleRepeatedFields_failure() {
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + QUANTITY_DESC_ATLAS + INVALID_QUANTITY_NEGATIVE;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_QUANTITY));

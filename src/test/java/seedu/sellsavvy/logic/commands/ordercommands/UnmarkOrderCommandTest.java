@@ -7,9 +7,9 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderListByIndex;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,20 +34,20 @@ public class UnmarkOrderCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        personToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
+        personToUnmarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
         model.updateSelectedPerson(personToUnmarkOrderUnder);
     }
 
     @Test
     public void execute_validIndexUnfilteredOrderList_success() {
-        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_SECOND_ORDER);
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_SECOND);
 
         Model expectedModel = model.createCopy();
-        Order orderToBeUnmarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_SECOND_ORDER);
+        Order orderToBeUnmarkedInUnfilteredList = getOrderByIndex(expectedModel, INDEX_SECOND);
         OrderBuilder orderBuilder = new OrderBuilder(orderToBeUnmarkedInUnfilteredList);
         Order unmarkedOrder = orderBuilder.withStatus(Status.PENDING).build();
 
-        getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON)
+        getOrderListByIndex(expectedModel, INDEX_FOURTH)
                 .setOrder(orderToBeUnmarkedInUnfilteredList, unmarkedOrder);
         String expectedMessage = String.format(UnmarkOrderCommand.MESSAGE_UNMARK_ORDER_SUCCESS,
                 Messages.format(unmarkedOrder));
@@ -58,14 +58,14 @@ public class UnmarkOrderCommandTest {
     @Test
     public void execute_validIndexFilteredOrderList_success() {
         personToUnmarkOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
-        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST);
 
         Model expectedModel = model.createCopy();
-        Order orderToBeUnmarkedInFilteredList = getOrderByIndex(expectedModel, INDEX_FIRST_ORDER);
+        Order orderToBeUnmarkedInFilteredList = getOrderByIndex(expectedModel, INDEX_FIRST);
         OrderBuilder orderBuilder = new OrderBuilder(orderToBeUnmarkedInFilteredList);
         Order unmarkedOrder = orderBuilder.withStatus(Status.PENDING).build();
 
-        getOrderListByIndex(expectedModel, INDEX_FOURTH_PERSON)
+        getOrderListByIndex(expectedModel, INDEX_FOURTH)
                 .setOrder(orderToBeUnmarkedInFilteredList, unmarkedOrder);
         String expectedMessage = String.format(UnmarkOrderCommand.MESSAGE_UNMARK_ORDER_SUCCESS,
                 Messages.format(unmarkedOrder));
@@ -96,7 +96,7 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void execute_noOrderListDisplayed_throwsCommandException() {
-        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST);
         model.updateSelectedPerson(null);
 
         assertCommandFailure(unmarkOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
@@ -104,7 +104,7 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void execute_orderAlreadyUnmarked_throwsCommandException() {
-        Index targetIndex = INDEX_FIRST_ORDER;
+        Index targetIndex = INDEX_FIRST;
         UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(targetIndex);
 
         assertCommandFailure(unmarkOrderCommand, model, UnmarkOrderCommand.MESSAGE_ORDER_ALREADY_UNMARKED);
@@ -112,14 +112,14 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void equals() {
-        UnmarkOrderCommand unmarkFirstCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
-        UnmarkOrderCommand unmarkSecondCommand = new UnmarkOrderCommand(INDEX_SECOND_ORDER);
+        UnmarkOrderCommand unmarkFirstCommand = new UnmarkOrderCommand(INDEX_FIRST);
+        UnmarkOrderCommand unmarkSecondCommand = new UnmarkOrderCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
 
         // same values -> returns true
-        UnmarkOrderCommand unmarkFirstCommandCopy = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
+        UnmarkOrderCommand unmarkFirstCommandCopy = new UnmarkOrderCommand(INDEX_FIRST);
         assertTrue(unmarkFirstCommand.equals(unmarkFirstCommandCopy));
 
         // different types -> returns false
@@ -134,8 +134,8 @@ public class UnmarkOrderCommandTest {
 
     @Test
     public void toStringMethod() {
-        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST_ORDER);
-        String expected = UnmarkOrderCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST_ORDER + "}";
+        UnmarkOrderCommand unmarkOrderCommand = new UnmarkOrderCommand(INDEX_FIRST);
+        String expected = UnmarkOrderCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST + "}";
         assertEquals(expected, unmarkOrderCommand.toString());
     }
 }
