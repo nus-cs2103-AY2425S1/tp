@@ -33,8 +33,9 @@ public class Amount {
      */
     public Amount(String amount) {
         requireNonNull(amount);
-        AppUtil.checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        this.amount = new BigDecimal(amount).setScale(MAX_DECIMAL_PLACES, RoundingMode.HALF_UP);
+        String trimmedAmount = amount.trim();
+        AppUtil.checkArgument(isValidAmount(trimmedAmount), MESSAGE_CONSTRAINTS);
+        this.amount = new BigDecimal(trimmedAmount).setScale(MAX_DECIMAL_PLACES, RoundingMode.HALF_UP);
     }
 
     /**
@@ -44,7 +45,7 @@ public class Amount {
      * @return Returns true if the test string passes the regex check and is non-zero value
      */
     public static boolean isValidAmount(String test) {
-        return test.matches(VALIDATION_REGEX) && new BigDecimal(test).compareTo(BigDecimal.ZERO) != 0;
+        return test.trim().matches(VALIDATION_REGEX) && new BigDecimal(test.trim()).compareTo(BigDecimal.ZERO) != 0;
     }
 
     public BigDecimal getAmount() {

@@ -30,8 +30,9 @@ public class Date {
      */
     public Date(String date) {
         requireNonNull(date);
-        AppUtil.checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, VALIDATION_FORMATTER);
+        String trimmedDate = date.trim();
+        AppUtil.checkArgument(isValidDate(trimmedDate), MESSAGE_CONSTRAINTS);
+        this.date = LocalDate.parse(trimmedDate, VALIDATION_FORMATTER);
     }
 
     /**
@@ -39,7 +40,7 @@ public class Date {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test, VALIDATION_FORMATTER);
+            LocalDate.parse(test.trim(), VALIDATION_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;

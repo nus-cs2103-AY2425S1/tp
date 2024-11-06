@@ -19,15 +19,16 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        AppUtil.checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
-        value = remark;
+        String trimmedRemark = remark.trim();
+        AppUtil.checkArgument(isValidRemark(trimmedRemark), MESSAGE_CONSTRAINTS);
+        value = trimmedRemark;
     }
 
     /**
      * Returns true if a given string is a valid remark (allows empty string "").
      */
     public static boolean isValidRemark(String test) {
-        return test.length() <= MAX_LENGTH;
+        return test.trim().length() <= MAX_LENGTH;
     }
 
     @Override
