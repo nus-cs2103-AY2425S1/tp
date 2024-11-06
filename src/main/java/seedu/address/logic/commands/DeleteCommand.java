@@ -41,10 +41,6 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Client> lastShownList = model.getFilteredClientList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
-        }
-
         Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteClient(clientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, Messages.format(clientToDelete)));
@@ -54,6 +50,10 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model, Boolean confirmationReceived) throws CommandException {
         if (confirmationReceived.equals(requiresConfirmation)) {
             return this.execute(model);
+        }
+
+        if (targetIndex.getZeroBased() >= model.getFilteredClientList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
         return new CommandResult(MESSAGE_DELETE_CONFIRMATION, false, false, false, null, true);
     }
