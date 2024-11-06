@@ -58,7 +58,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing BuyerList ]===========================");
+        logger.info("=============================[ Initializing ABCLI ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());

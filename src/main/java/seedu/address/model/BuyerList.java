@@ -10,7 +10,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.UniqueBuyerList;
-import seedu.address.model.meetup.MeetUp;
 
 /**
  * Wraps all data at the address-book level
