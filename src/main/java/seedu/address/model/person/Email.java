@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
     public static final String MESSAGE_CONSTRAINTS =
-            "NUS Net ID should be 8 characters long, in the format 'eXXXXXXX', where 'X' can be any number. Example: " +
-                    "e1234567";
+            "NUS Net ID should be 8 characters long, in the format 'eXXXXXXX', where 'X' can be any number. Example: "
+                    + "e1234567";
     public static final String DOMAIN = "@u.nus.edu";
     public static final String EMAIL_VALIDATION_REGEX = "e\\d{7}" + DOMAIN;
     public static final String NETID_VALIDATION_REGEX = "[eE]\\d{7}";

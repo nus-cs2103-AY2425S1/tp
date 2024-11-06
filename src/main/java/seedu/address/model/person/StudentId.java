@@ -11,8 +11,8 @@ public class StudentId {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Student ID (NUS Matriculation Number) should be 9 characters long, in the format 'AXXXXXXXC' where 'X' " +
-                    "can be any number and 'C' can be any letter. Example: A1234567L";
+            "Student ID (NUS Matriculation Number) should be 9 characters long, in the format 'AXXXXXXXC' where 'X' "
+                    + "can be any number and 'C' can be any letter. Example: A1234567L";
     public static final String VALIDATION_REGEX = "[aA]\\d{7}[a-zA-Z]";
     public final String value;
 

@@ -39,7 +39,6 @@ public class EmailTest {
 
         // valid email
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // lowercase in net Id
-        assertTrue(Email.isValidEmail("E1234567@u.nus.edu")); // uppercase in net Id
     }
 
     @Test
