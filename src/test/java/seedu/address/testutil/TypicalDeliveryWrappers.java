@@ -10,10 +10,9 @@ public class TypicalDeliveryWrappers {
 
     public static final DeliveryWrapper APPLE_WRAPPER = new DeliveryWrapper(TypicalDeliveries.APPLE,
             new SupplierIndex("1"));
-    public static final DeliveryWrapper APPLE_NULL_SENDER_WRAPPER = new DeliveryWrapper(
-            new DeliveryBuilder().withSender(null).build(), new SupplierIndex("1"));
+
     public static final DeliveryWrapper BREAD_WRAPPER = new DeliveryWrapper(TypicalDeliveries.BREAD,
-            new SupplierIndex("2"));
+            new SupplierIndex("1"));
 
 
     public static final DeliveryWrapper CAN_WRAPPER = new DeliveryWrapper((TypicalDeliveries.CAN),
