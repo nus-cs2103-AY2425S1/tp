@@ -31,7 +31,7 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
      */
     public boolean contains(GoodsReceipt toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(x -> x.isSameReceipt(toCheck));
+        return internalList.stream().anyMatch(x -> x.equals(toCheck));
     }
 
     /**
@@ -59,7 +59,7 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
             throw new ReceiptNotFoundException();
         }
 
-        if (!target.isSameReceipt(editedReceipt) && contains(editedReceipt)) {
+        if (!target.equals(editedReceipt) && contains(editedReceipt)) {
             throw new DuplicateReceiptException();
         }
 
@@ -151,7 +151,7 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
     private boolean receiptsAreUnique(List<GoodsReceipt> receipts) {
         for (int i = 0; i < receipts.size() - 1; i++) {
             for (int j = i + 1; j < receipts.size(); j++) {
-                if (receipts.get(i).isSameReceipt(receipts.get(j))) {
+                if (receipts.get(i).equals(receipts.get(j))) {
                     return false;
                 }
             }

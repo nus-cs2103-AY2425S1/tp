@@ -5,11 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -18,7 +19,9 @@ import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.DeliveredPredicate;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
+import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -38,7 +41,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyUserPrefs userPrefs,
                         ReadOnlyReceiptLog goodsList) {
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, userPrefs, goodsList);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -47,6 +50,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
         DeliveredPredicate deliveredPredicate = new DeliveredPredicate(false);
+        filterIllegalSupplierNames();
         filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
         filteredReceipts.setPredicate(deliveredPredicate);
     }
@@ -144,6 +148,31 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable observable view of the list of filtered person with goods category tags added
+     */
+    @Override
+    public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
+        ObservableList<Person> mappedFilteredPersons = FXCollections.observableArrayList();
+        Runnable updateList = () -> {
+            mappedFilteredPersons.clear();
+            mappedFilteredPersons.addAll(getFilteredPersonsWithGoodsCategoryTagsAdded());
+        };
+        filteredPersons.addListener((ListChangeListener<Person>) c -> updateList.run());
+        goodsList.getReceiptList().addListener((ListChangeListener<GoodsReceipt>) c -> updateList.run());
+        updateList.run();
+        return mappedFilteredPersons;
+    }
+
+    private List<Person> getFilteredPersonsWithGoodsCategoryTagsAdded() {
+        return filteredPersons.stream().map(p -> p
+                .addTags(goodsList.getReceiptList()
+                        .stream()
+                        .filter(g -> g.isFromSupplier(p.getName()))
+                        .map(g -> new Tag(g.getGoods().getCategory().name()))
+                        .toList())).toList();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -162,6 +191,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
@@ -182,7 +212,8 @@ public class ModelManager implements Model {
     @Override
     public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
         requireNonNull(goodsReceipts);
-        this.goodsList.resetData(goodsReceipts);
+        goodsList.resetData(goodsReceipts);
+        updateFilteredReceiptsList(x -> false); //No goodsReceipt will satisfy this condition
     }
 
     @Override
@@ -192,7 +223,13 @@ public class ModelManager implements Model {
 
     @Override
     public void addGoods(GoodsReceipt goodsReceipt) {
-        goodsList.addReceipt(goodsReceipt);
+        requireNonNull(goodsReceipt);
+
+        if (hasExistingSupplier(goodsReceipt)) {
+            goodsList.addReceipt(goodsReceipt);
+        } else {
+            throw new IllegalSupplierNameException();
+        }
     }
 
     @Override
@@ -213,8 +250,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteGoods(GoodsName goodsName) {
-        goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getGoodsName(), goodsName));
+    public void deleteGoods(GoodsReceipt goodsReceipt) {
+        requireNonNull(goodsReceipt);
+        goodsList.deleteReceipt(goodsReceipt);
+    }
+
+    @Override
+    public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
+        return goodsList.getReceiptList().stream().filter(predicate).findAny();
     }
 
     @Override
@@ -225,5 +268,16 @@ public class ModelManager implements Model {
     @Override
     public double getFilteredGoodsCostStatistics() {
         return GoodsReceiptUtil.sumTotals(filteredReceipts);
+    }
+
+    private boolean hasExistingSupplier(GoodsReceipt goodsReceipt) {
+        return addressBook.getPersonList()
+                .stream()
+                .map(Person::getName)
+                .anyMatch(personName -> personName.equals(goodsReceipt.getSupplierName()));
+    }
+
+    private void filterIllegalSupplierNames() {
+        goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
     }
 }
