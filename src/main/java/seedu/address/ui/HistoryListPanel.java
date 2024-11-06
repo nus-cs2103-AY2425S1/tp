@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of call history.
@@ -16,6 +18,8 @@ public class HistoryListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<ContactRecord> callHistoryView;
+    @FXML
+    private VBox profileView;
     private ObservableList<ContactRecord> items;
 
     /**
@@ -47,5 +51,14 @@ public class HistoryListPanel extends UiPart<Region> {
     public void initializeCallHistory(ObservableList<ContactRecord> history) {
         items.clear();
         items.addAll(FXCollections.observableArrayList(history));
+    }
+
+    /**
+     * Sets the profile view to display the profile of the given {@code Person}.
+     */
+    public void setProfile(Person person) {
+        profileView.getChildren().clear();
+        ProfileView newProfileView = new ProfileView(person);
+        profileView.getChildren().add(newProfileView.getRoot());
     }
 }
