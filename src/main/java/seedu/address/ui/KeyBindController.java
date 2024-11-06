@@ -70,10 +70,12 @@ public class KeyBindController {
 
         KeyBind focusPersonListView = new KeyBind(KeyCode.ESCAPE, personListView::requestFocus);
 
-        KeyBind undoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(UndoCommand.COMMAND_WORD, false),
+        KeyBind undoCommand = new KeyBind(KeyCode.Z, () ->
+                commandBox.handleCommand(UndoCommand.LONG_COMMAND_WORD, false),
                 event -> event.isControlDown() && !event.isShiftDown());
 
-        KeyBind redoCommand = new KeyBind(KeyCode.Z, () -> commandBox.handleCommand(RedoCommand.COMMAND_WORD, false),
+        KeyBind redoCommand = new KeyBind(KeyCode.Z, () ->
+                commandBox.handleCommand(RedoCommand.LONG_COMMAND_WORD, false),
                 event -> event.isControlDown() && event.isShiftDown());
 
         resultTextArea.addEventFilter(KeyEvent.KEY_PRESSED, event ->

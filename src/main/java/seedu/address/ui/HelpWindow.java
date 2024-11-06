@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -26,18 +25,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-
+import seedu.address.commons.util.CommandSummaryUtil;
 
 /**
  * Controller for a help page
@@ -48,30 +36,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String NAVIGATE_INSTRUCTIONS = "Press Tab to navigate between the table and the buttons.";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-    final ObservableList<String[]> data = FXCollections.observableArrayList(
-            new String[]{AddCommand.COMMAND_SUMMARY_ACTION, AddCommand.COMMAND_SUMMARY_FORMAT,
-                         AddCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{ClearCommand.COMMAND_SUMMARY_ACTION, ClearCommand.COMMAND_SUMMARY_FORMAT,
-                         ClearCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{DeleteCommand.COMMAND_SUMMARY_ACTION, DeleteCommand.COMMAND_SUMMARY_FORMAT,
-                         DeleteCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{EditCommand.COMMAND_SUMMARY_ACTION, EditCommand.COMMAND_SUMMARY_FORMAT,
-                         EditCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{ExitCommand.COMMAND_SUMMARY_ACTION, ExitCommand.COMMAND_SUMMARY_FORMAT,
-                         ExitCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{ExportCommand.COMMAND_SUMMARY_ACTION, ExportCommand.COMMAND_SUMMARY_FORMAT,
-                         ExportCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{FindCommand.COMMAND_SUMMARY_ACTION, FindCommand.COMMAND_SUMMARY_FORMAT,
-                         FindCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{HelpCommand.COMMAND_SUMMARY_ACTION, HelpCommand.COMMAND_SUMMARY_FORMAT,
-                         HelpCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{ListCommand.COMMAND_SUMMARY_ACTION, ListCommand.COMMAND_SUMMARY_FORMAT,
-                         ListCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{RedoCommand.COMMAND_SUMMARY_ACTION, RedoCommand.COMMAND_SUMMARY_FORMAT,
-                         RedoCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{UndoCommand.COMMAND_SUMMARY_ACTION, UndoCommand.COMMAND_SUMMARY_FORMAT,
-                         UndoCommand.COMMAND_SUMMARY_EXAMPLES}
-    );
+    final ObservableList<String[]> data = CommandSummaryUtil.getCommandSummaryData();
 
     @FXML
     private TableView table = new TableView();

@@ -22,10 +22,10 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.QuitCommand;
 import seedu.address.logic.commands.util.FieldQuery;
 import seedu.address.logic.commands.util.SearchField;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -49,8 +49,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.LONG_COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.LONG_COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
@@ -71,8 +71,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(QuitCommand.LONG_COMMAND_WORD) instanceof QuitCommand);
+        assertTrue(parser.parseCommand(QuitCommand.LONG_COMMAND_WORD + " 3") instanceof QuitCommand);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class AddressBookParserTest {
                 new FieldQuery(SearchField.LOCATION, "location"),
                 new FieldQuery(SearchField.REMARK, "remark"));
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " name " + PREFIX_PHONE + " phone "
+                FindCommand.LONG_COMMAND_WORD + " " + PREFIX_NAME + " name " + PREFIX_PHONE + " phone "
                         + PREFIX_EMAIL + " email " + PREFIX_LOCATION + " location "
                         + PREFIX_REMARK + " remark");
         assertEquals(new FindCommand(new PersonSearchPredicate(fieldQueryList)), command);
@@ -92,8 +92,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.LONG_COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.LONG_COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
@@ -148,16 +148,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_invalidExitCommandVariant_throwsParseException() {
-        String parseExceptionMessage = ExitCommand.generateInvalidVariantMessage(ExitCommand.INVALID_VARIANTS.get(0),
-                ExitCommand.COMMAND_WORD);
+        String parseExceptionMessage = QuitCommand.generateInvalidVariantMessage(QuitCommand.INVALID_VARIANTS.get(0),
+                QuitCommand.LONG_COMMAND_WORD);
         assertThrows(ParseException.class, parseExceptionMessage, () ->
-                parser.parseCommand(ExitCommand.INVALID_VARIANTS.get(0)));
+                parser.parseCommand(QuitCommand.INVALID_VARIANTS.get(0)));
     }
 
     @Test
     public void parseCommand_invalidHelpCommandVariant_throwsParseException() {
         String parseExceptionMessage = HelpCommand.generateInvalidVariantMessage(HelpCommand.INVALID_VARIANTS.get(0),
-                HelpCommand.COMMAND_WORD);
+                HelpCommand.LONG_COMMAND_WORD);
         assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(HelpCommand.INVALID_VARIANTS.get(0)));
     }

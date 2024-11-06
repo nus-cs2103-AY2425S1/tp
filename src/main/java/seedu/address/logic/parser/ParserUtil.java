@@ -16,10 +16,10 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.QuitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -212,15 +212,15 @@ public class ParserUtil {
         } else if (EditCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
                     EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD));
-        } else if (ExitCommand.INVALID_VARIANTS.contains(commandWord)) {
+        } else if (QuitCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                    ExitCommand.COMMAND_WORD));
+                    QuitCommand.LONG_COMMAND_WORD));
         } else if (FindCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                    FindCommand.COMMAND_WORD));
+                    FindCommand.LONG_COMMAND_WORD));
         } else if (HelpCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                    HelpCommand.COMMAND_WORD));
+                    HelpCommand.LONG_COMMAND_WORD));
         } else if (ListCommand.INVALID_VARIANTS.contains(commandWord)) {
             throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
                     ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD));

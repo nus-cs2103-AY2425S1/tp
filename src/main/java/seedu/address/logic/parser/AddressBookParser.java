@@ -15,11 +15,11 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.QuitCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -77,27 +77,28 @@ public class AddressBookParser {
         case DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case ClearCommand.SHORT_COMMAND_WORD, ClearCommand.LONG_COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindCommand.SHORT_COMMAND_WORD, FindCommand.LONG_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD:
             return new ListCommand();
 
-        case UndoCommand.COMMAND_WORD:
+        case UndoCommand.SHORT_COMMAND_WORD, UndoCommand.LONG_COMMAND_WORD:
             return new UndoCommand();
 
-        case RedoCommand.COMMAND_WORD:
+        case RedoCommand.SHORT_COMMAND_WORD, RedoCommand.LONG_COMMAND_WORD:
             return new RedoCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        case QuitCommand.SHORT_COMMAND_WORD, QuitCommand.LONG_COMMAND_WORD:
+            return new QuitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HelpCommand.SHORT_COMMAND_WORD, HelpCommand.LONG_COMMAND_WORD:
             return new HelpCommand();
-        case ExportCommand.COMMAND_WORD:
+
+        case ExportCommand.SHORT_COMMAND_WORD, ExportCommand.LONG_COMMAND_WORD:
             return new ExportCommand();
 
         default:

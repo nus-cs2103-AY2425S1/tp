@@ -21,9 +21,10 @@ import seedu.address.model.person.PersonSearchPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = ":find";
+    public static final String SHORT_COMMAND_WORD = ":f";
+    public static final String LONG_COMMAND_WORD = ":find";
 
-    public static final String MESSAGE_USAGE = "\"" + COMMAND_WORD + "\"" + ": Finds all persons whose specified "
+    public static final String MESSAGE_USAGE = "\"" + LONG_COMMAND_WORD + "\"" + ": Finds all persons whose specified "
             + "fields contain "
             + "the keywords in the given parameters (case-insensitive).\n"
             + "Parameters are optional but there must be at least one.\n"
@@ -33,14 +34,16 @@ public class FindCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_REMARK + "REMARK\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe "
+            + "Example: " + LONG_COMMAND_WORD + " " + PREFIX_NAME + "John Doe "
             + PREFIX_LOCATION + "serangoon";
 
     public static final String COMMAND_SUMMARY_ACTION = "Find";
     public static final String COMMAND_SUMMARY_FORMAT =
-            ":find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\u200B";
+            ":find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\n"
+                    + ":f [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…";
     public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":find -n david -l serangoon";
+            ":find -n david -l serangoon\n"
+                    + ":f -n david -l serangoon";
 
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("find", "search", ":search", ":query",
