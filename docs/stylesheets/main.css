@@ -161,10 +161,15 @@ mark {
   }
 }
 
-h2,
+h1 {
+    color: #5FA8D3;
+}
+h2 {
+       color: #62B6CB;
+}
 h3,
 h4,
 h5,
 h6 {
-  color: #e46c0a;
+  color: #1B4965;
 }
