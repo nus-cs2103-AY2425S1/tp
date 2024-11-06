@@ -1,0 +1,67 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "restaurants" : [ {
+    "name" : "Alice Pauline Restaurant",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "italian" ],
+    "price" : "$$",
+    "isFavourite" : false,
+    "rating" : null
+  }, {
+    "name" : "Benson Meier Restaurant",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "western", "outdoors" ],
+    "price" : "$$$",
+    "isFavourite" : false,
+    "rating" : 5
+  }, {
+    "name" : "Carl Kurz Restaurant",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "tags" : [ ],
+    "price" : "$$",
+    "isFavourite" : false,
+    "rating" : null
+  }, {
+    "name" : "Daniel Meier Restaurant",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tags" : [ "friends" ],
+    "price" : "$$$",
+    "isFavourite" : false,
+    "rating" : null
+  }, {
+    "name" : "Elle Meyer Restaurant",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "tags" : [ ],
+    "price" : "$$$",
+    "isFavourite" : false,
+    "rating" : null
+  }, {
+    "name" : "Fiona Kunz Restaurant",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "tags" : [ ],
+    "price" : "$",
+    "isFavourite" : false,
+    "rating" : null
+  }, {
+    "name" : "George Best Restaurant",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "tags" : [ ],
+    "price" : "$",
+    "isFavourite" : false,
+    "rating" : null
+  } ]
+}

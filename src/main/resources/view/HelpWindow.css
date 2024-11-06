@@ -14,6 +14,18 @@
     -fx-background-color: #578b4a;
 }
 
+#exitButton {
+    -fx-background-color: #88B07E;
+}
+
+#exitButton:hover {
+    -fx-background-color: #67aa56;
+}
+
+#exitButton:armed {
+    -fx-background-color: #578b4a;
+}
+
 #helpMessageContainer {
     -fx-background-color: #DBDBDB;
 }
