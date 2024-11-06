@@ -42,8 +42,14 @@ public class SearchModeSearchCommand extends Command {
         Predicate<Person> currPredicate = model.getLastPredicate();
         Predicate<Person> predicate = predicates.stream().reduce(Predicate::and).orElse(x -> true);
         Predicate<Person> newPredicate = currPredicate.or(predicate);
+
+        //Exclude the currently removed persons
+        Predicate<Person> excludeRemovedPersons = person -> !model.getExcludedPersons().contains(person);
+        newPredicate = excludeRemovedPersons.and(newPredicate);
+
         model.updateFilteredPersonList(newPredicate);
         return new CommandResult(MESSAGE_SUCCESS);
+
     }
 
     public Set<Predicate<Person>> getPredicates() {

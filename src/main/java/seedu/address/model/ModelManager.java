@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -27,6 +29,11 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final EventManager eventManager;
     private final FilteredList<Person> filteredPersons;
+
+    /**
+     * The set of persons that are excluded from the search. Reset upon exiting searchmode or clear command
+     */
+    private final Set<Person> excludedPersons = new HashSet<>();
 
     private BooleanProperty searchMode = new SimpleBooleanProperty(false);
     private Predicate<Person> lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
@@ -209,6 +216,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getAllPersons() {
         return addressBook.getPersonList();
+    }
+
+    /**
+     * Gets the set of persons that are excluded from the search.
+     * @return copy of excludedPersons
+     */
+    @Override
+    public Set<Person> getExcludedPersons() {
+        return new HashSet<>(excludedPersons);
     }
 
 }
