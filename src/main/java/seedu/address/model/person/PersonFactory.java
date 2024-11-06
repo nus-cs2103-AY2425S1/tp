@@ -5,7 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DONATED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTNERSHIP_END_DATE;
 
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,6 +28,11 @@ import seedu.address.model.tag.Tag;
  * {@code ArgumentMultimap} to supply role-specific fields.
  */
 public class PersonFactory {
+
+    public static final Function<String, CommandException> COMMAND_EXCEPTION_FUNCTION =
+            message -> new CommandException(message);
+    public static final Function<String, ParseException> PARSE_EXCEPTION_FUNCTION =
+            message -> new ParseException(message);
     private static final String MISSING_HOURS_MESSAGE = "Missing hours! For a Volunteer, you must specify hours "
             + "contributed by the volunteer using the h/ prefix.";
     private static final String MISSING_DONATED_AMOUNT_MESSAGE = "Missing donated amount! "
@@ -39,6 +46,7 @@ public class PersonFactory {
     private static final String HOURS_EXIST_ERROR = "Hours field should not exist for role: ";
     private static final String AMOUNT_EXIST_ERROR = "Donated Amount field should not exist for role: ";
     private static final String END_DATE_EXIST_ERROR = "Partnership End Date field should not exist for role: ";
+
     /**
      * Creates a {@code Person} instance based on the specified {@code Role}.
      *
@@ -57,22 +65,40 @@ public class PersonFactory {
         switch (role) {
         case VOLUNTEER:
             String hoursValue = checkRequiredField(argMultimap, PREFIX_HOURS, MISSING_HOURS_MESSAGE);
+            checkDoesNotExist(role, DONATED_AMOUNT, argMultimap.getValue(PREFIX_DONATED_AMOUNT),
+                    PARSE_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, END_DATE, argMultimap.getValue(PREFIX_PARTNERSHIP_END_DATE),
+                    PARSE_EXCEPTION_FUNCTION);
             Hours hours = ParserUtil.parseHours(hoursValue);
             return new Volunteer(name, phone, email, address, tags, hours);
 
         case DONOR:
             String donatedAmountValue = checkRequiredField(argMultimap, PREFIX_DONATED_AMOUNT,
                     MISSING_DONATED_AMOUNT_MESSAGE);
+            checkDoesNotExist(role, HOURS, argMultimap.getValue(PREFIX_HOURS),
+                    PARSE_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, END_DATE, argMultimap.getValue(PREFIX_PARTNERSHIP_END_DATE),
+                    PARSE_EXCEPTION_FUNCTION);
             DonatedAmount donatedAmount =
                     ParserUtil.parseDonatedAmount(donatedAmountValue);
             return new Donor(name, phone, email, address, tags, donatedAmount);
         case PARTNER:
             String partnershipEndDateValue = checkRequiredField(argMultimap, PREFIX_PARTNERSHIP_END_DATE,
                     MISSING_END_DATE_MESSAGE);
+            checkDoesNotExist(role, HOURS, argMultimap.getValue(PREFIX_HOURS),
+                    PARSE_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, DONATED_AMOUNT, argMultimap.getValue(PREFIX_DONATED_AMOUNT),
+                    PARSE_EXCEPTION_FUNCTION);
             Date partnershipEndDate =
                     ParserUtil.parsePartnershipEndDate(partnershipEndDateValue);
             return new Partner(name, phone, email, address, tags, partnershipEndDate);
         case PERSON:
+            checkDoesNotExist(role, HOURS, argMultimap.getValue(PREFIX_HOURS),
+                    PARSE_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, DONATED_AMOUNT, argMultimap.getValue(PREFIX_DONATED_AMOUNT),
+                    PARSE_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, END_DATE, argMultimap.getValue(PREFIX_PARTNERSHIP_END_DATE),
+                    PARSE_EXCEPTION_FUNCTION);
             return new Person(name, phone, email, address, tags);
         default:
             throw new ParseException("Unknown role:" + role);
@@ -99,27 +125,30 @@ public class PersonFactory {
             throws CommandException {
         switch (role) {
         case VOLUNTEER:
-            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor);
-            checkDoesNotExist(role, END_DATE, editPersonDescriptor);
+            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor.getDonatedAmount(),
+                    COMMAND_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, END_DATE, editPersonDescriptor.getEndDate(), COMMAND_EXCEPTION_FUNCTION);
             Hours hours = retrieveVolunteerHours(editPersonDescriptor, personToEdit);
             return new Volunteer(name, phone, email, address, tags, hours);
 
         case DONOR:
-            checkDoesNotExist(role, HOURS, editPersonDescriptor);
-            checkDoesNotExist(role, END_DATE, editPersonDescriptor);
+            checkDoesNotExist(role, HOURS, editPersonDescriptor.getHours(), COMMAND_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, END_DATE, editPersonDescriptor.getEndDate(), COMMAND_EXCEPTION_FUNCTION);
             DonatedAmount donatedAmount = retrieveDonorAmount(editPersonDescriptor, personToEdit);
             return new Donor(name, phone, email, address, tags, donatedAmount);
 
         case PARTNER:
-            checkDoesNotExist(role, HOURS, editPersonDescriptor);
-            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor);
+            checkDoesNotExist(role, HOURS, editPersonDescriptor.getHours(), COMMAND_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor.getDonatedAmount(),
+                    COMMAND_EXCEPTION_FUNCTION);
             Date endDate = retrievePartnerEndDate(editPersonDescriptor, personToEdit);
             return new Partner(name, phone, email, address, tags, endDate);
 
         case PERSON:
-            checkDoesNotExist(role, HOURS, editPersonDescriptor);
-            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor);
-            checkDoesNotExist(role, END_DATE, editPersonDescriptor);
+            checkDoesNotExist(role, HOURS, editPersonDescriptor.getHours(), COMMAND_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor.getDonatedAmount(),
+                    COMMAND_EXCEPTION_FUNCTION);
+            checkDoesNotExist(role, END_DATE, editPersonDescriptor.getEndDate(), COMMAND_EXCEPTION_FUNCTION);
             return new Person(name, phone, email, address, tags);
 
         default:
@@ -127,26 +156,25 @@ public class PersonFactory {
         }
     }
 
-    private static void checkDoesNotExist(Role role, String field, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
+    private static <T extends Exception> void checkDoesNotExist(Role role, String field, Optional<?> op,
+                                                                Function<String, T> exceptionFunction)
+            throws T {
+        String message;
         switch(field) {
         case "hours":
-            if (!editPersonDescriptor.getHours().isEmpty()) {
-                throw new CommandException(HOURS_EXIST_ERROR + role);
-            }
+            message = HOURS_EXIST_ERROR + role;
             break;
         case "donatedAmount":
-            if (!editPersonDescriptor.getDonatedAmount().isEmpty()) {
-                throw new CommandException(AMOUNT_EXIST_ERROR + role);
-            }
+            message = AMOUNT_EXIST_ERROR + role;
             break;
         case "partnershipEndDate":
-            if (!editPersonDescriptor.getEndDate().isEmpty()) {
-                throw new CommandException(END_DATE_EXIST_ERROR + role);
-            }
+            message = END_DATE_EXIST_ERROR + role;
             break;
         default:
-            throw new CommandException("Unknown field: " + field);
+            message = "Unkown field" + role;
+        }
+        if (op.isPresent()) {
+            throw exceptionFunction.apply(message);
         }
     }
 
