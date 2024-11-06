@@ -1,22 +1,42 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "personEvents": [{
-      "name": "IFG"
-    }],
-    "roles": [ "friends" ]
-  } ],
-  "events": [ {
-    "name": "IFG"
-  }, {
-    "name": "IFG"
-  }, {
-    "name": "AUG"
-  }, {
-    "name": "SUNIG"
-  }, {
-    "name": "IVP"
-  } ]
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "email": "alice@example.com",
+      "phone": "94351253",
+      "roles": [ ]
+    }
+  ],
+  "events": [
+    {
+      "name": "IFG",
+      "sport": "Volleyball Men",
+      "venue": "Stadium",
+      "persons": []
+    },
+    {
+      "name": "IFG",
+      "sport": "Volleyball Men",
+      "venue": "Stadium",
+      "persons": []
+    },
+    {
+      "name": "AUG",
+      "sport": "Basketball Women",
+      "venue": "Arena",
+      "persons": []
+    },
+    {
+      "name": "SUNIG",
+      "sport": "Swimming Women",
+      "venue": "Pool",
+      "persons": []
+    },
+    {
+      "name": "IVP",
+      "sport": "Chess",
+      "venue": "Court",
+      "persons": []
+    }
+  ]
 }

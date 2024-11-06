@@ -351,8 +351,16 @@
     -fx-font-size: 11;
 }
 
-#roles .label {
-    -fx-text-fill: #ff7700;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 13;
+#persons {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#persons .label {
+    -fx-text-fill: #333333;
+    -fx-background-color: #ff7700;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
 }

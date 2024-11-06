@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.Role;
 
@@ -42,8 +41,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private VBox events;
-    @FXML
     private VBox roles;
 
     /**
@@ -57,12 +54,6 @@ public class PersonCard extends UiPart<Region> {
         name.setWrapText(true);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        person.getEvents().stream()
-                .sorted(Comparator.comparing(event -> event.getName().toString()))
-                .forEach(event -> {
-                    Label eventTitle = new Label(event.getName().toString());
-                    events.getChildren().add(eventTitle);
-                });
         person.getRoles().stream()
                 .sorted(Comparator.comparing(Role::getRoleName))
                 .forEach(role -> {
