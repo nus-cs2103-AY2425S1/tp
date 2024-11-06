@@ -40,6 +40,9 @@ public class AddPersonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
+            + "This customer has 2 or more similar tags, "
+            + "verify if this is a mistake.\n";
 
     private final Person toAdd;
 
@@ -59,8 +62,12 @@ public class AddPersonCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        String feedbackToUser = toAdd.hasSimilarTags()
+                ? MESSAGE_SIMILAR_TAGS_WARNING
+                : "";
+
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(feedbackToUser + String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

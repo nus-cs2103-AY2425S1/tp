@@ -92,6 +92,18 @@ public class Person {
     }
 
     /**
+     * Returns true if any of the tags is similar to other tags of the same person.
+     * Two tag names are considered similar if they are same without considering space and casing.
+     */
+    public boolean hasSimilarTags() {
+        return tags.stream().anyMatch(
+                tag -> tags.stream().anyMatch(
+                        otherTag -> otherTag.isSimilarTo(tag) && tag != otherTag
+                )
+        );
+    }
+
+    /**
      * Returns the order list as an unmodifiable {@code FilteredList}.
      */
     public FilteredList<Order> getFilteredOrderList() {

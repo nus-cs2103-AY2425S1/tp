@@ -49,10 +49,7 @@ public class Date {
      * Returns if a given string is of a valid date regex.
      */
     public static boolean isValidDateRegex(String test) {
-        if (!test.matches(REGEX_DATE)) {
-            return false;
-        }
-        return true;
+        return test.matches(REGEX_DATE);
     }
 
     /**

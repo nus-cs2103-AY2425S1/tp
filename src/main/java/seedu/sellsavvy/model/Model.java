@@ -62,6 +62,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the similar name as {@code person} exists in the address book.
+     */
+    boolean hasSimilarPerson(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

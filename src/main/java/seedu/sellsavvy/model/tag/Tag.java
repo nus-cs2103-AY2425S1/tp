@@ -32,6 +32,21 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the current tag name is similar to other tag name.
+     * Two tag names are considered similar if they are same without considering space and casing.
+     */
+    public boolean isSimilarTo(Tag otherTag) {
+        return normalise(this.tagName).equals(normalise(otherTag.tagName));
+    }
+
+    /**
+     * Normalises the tag name by removing spaces and converting to lowercase.
+     */
+    private String normalise(String tagName) {
+        return tagName.replaceAll(" ", "").toLowerCase();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -55,6 +70,7 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + tagName + ']';
     }
