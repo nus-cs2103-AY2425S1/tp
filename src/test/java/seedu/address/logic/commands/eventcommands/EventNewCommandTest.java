@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -55,7 +55,8 @@ public class EventNewCommandTest {
         EventNewCommand eventNewCommand = new EventNewCommand(validEvent);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
-        assertThrows(CommandException.class, EventNewCommand.MESSAGE_DUPLICATE_EVENT, () -> eventNewCommand.execute(modelStub));
+        assertThrows(CommandException.class, EventNewCommand.MESSAGE_DUPLICATE_EVENT, () ->
+                eventNewCommand.execute(modelStub));
     }
 
     @Test
@@ -224,12 +225,14 @@ public class EventNewCommandTest {
         }
 
         @Override
-        public void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws VolunteerDuplicateDateException {
+        public void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws
+                VolunteerDuplicateDateException {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws VolunteerDeleteMissingDateException {
+        public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
+                VolunteerDeleteMissingDateException {
             throw new AssertionError("This method should not be called.");
         }
     }
