@@ -12,7 +12,6 @@ public class JsonAdaptedCategoryTest {
 
     private static final String VALID_CATEGORY = "FOOD";
     private static final String INVALID_CATEGORY1 = " ";
-    private static final String INVALID_CATEGORY2 = " FOOD";
 
     @Test
     public void testConstructor_string_category() {
@@ -24,7 +23,6 @@ public class JsonAdaptedCategoryTest {
     public void testConstructor_string_invalidCategory() {
         // Test creating an instance with a valid string amount
         assertThrows(IllegalValueException.class, () -> (new JsonAdaptedCategory(INVALID_CATEGORY1)).toModelType());
-        assertThrows(IllegalValueException.class, () -> (new JsonAdaptedCategory(INVALID_CATEGORY2)).toModelType());
     }
 
     @Test
@@ -41,6 +39,4 @@ public class JsonAdaptedCategoryTest {
         Category modelCategory = (new JsonAdaptedCategory(VALID_CATEGORY)).toModelType();
         assertEquals(VALID_CATEGORY, modelCategory.toString());
     }
-
-
 }

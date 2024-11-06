@@ -9,9 +9,8 @@ import spleetwaise.commons.util.AppUtil;
  */
 public class Category {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Category should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_CONSTRAINTS = "Categories should be alphanumeric";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String category;
 
@@ -22,15 +21,16 @@ public class Category {
      */
     public Category(String category) {
         requireNonNull(category);
-        AppUtil.checkArgument(isValidCatName(category), MESSAGE_CONSTRAINTS);
-        this.category = category;
+        String trimmedCategory = category.trim();
+        AppUtil.checkArgument(isValidCatName(trimmedCategory), MESSAGE_CONSTRAINTS);
+        this.category = trimmedCategory;
     }
 
     /**
      * Returns true if a given string is a valid category format.
      */
     public static boolean isValidCatName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     @Override
