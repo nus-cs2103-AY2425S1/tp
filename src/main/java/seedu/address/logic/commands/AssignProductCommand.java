@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUPPLIERS;
 
 import java.util.HashSet;
@@ -78,9 +79,14 @@ public class AssignProductCommand extends Command {
             throw new CommandException(MESSAGE_PRODUCT_ALREADY_ASSIGNED);
         }
 
-        // Create a new supplier with the updated product list
         Set<Product> updatedProductList = new HashSet<>(supplierToAssign.getProducts());
-        updatedProductList.add(productToAssign);
+        Product updatedProduct = new Product(
+                productToAssign.getName(),
+                productToAssign.getStockLevel(),
+                productToAssign.getTags()
+        );
+        updatedProduct.setSupplierName(supplierName);
+        updatedProductList.add(updatedProduct);
         Supplier updatedSupplier = new Supplier(
                 supplierToAssign.getName(),
                 supplierToAssign.getPhone(),
@@ -89,11 +95,11 @@ public class AssignProductCommand extends Command {
                 supplierToAssign.getTags(),
                 updatedProductList
         );
-        // Update the product to contain the supplierName too
-        productToAssign.setSupplierName(supplierName);
 
+        model.setProduct(productToAssign, updatedProduct);
         model.setSupplier(supplierToAssign, updatedSupplier);
         model.updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
+        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, productToAssign.getName(), supplierToAssign.getName()));
     }
     @Override

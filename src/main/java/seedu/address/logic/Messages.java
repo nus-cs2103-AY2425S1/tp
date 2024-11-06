@@ -15,6 +15,7 @@ import seedu.address.model.supplier.Supplier;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_EMPTY_INPUT = "Empty input! \n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX = "The supplier index provided is invalid";
     public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a non-negative integer.";

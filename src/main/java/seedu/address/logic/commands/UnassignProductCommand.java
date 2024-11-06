@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -69,14 +70,18 @@ public class UnassignProductCommand extends Command {
         }
 
         updatedProductList.remove(productToUnassign);
-
-        productToUnassign.unsetSupplier();
-
+        Product updatedProduct = new Product(
+                productToUnassign.getName(),
+                productToUnassign.getStockLevel(),
+                productToUnassign.getTags()
+        );
         Supplier updatedSupplier = new Supplier(supplierToUnassign.getName(), supplierToUnassign.getPhone(),
                 supplierToUnassign.getEmail(), supplierToUnassign.getAddress(),
                 supplierToUnassign.getTags(), updatedProductList);
 
+        model.setProduct(productToUnassign, updatedProduct);
         model.setSupplier(supplierToUnassign, updatedSupplier);
+        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         model.updateFilteredSupplierList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, productToUnassign.getName(),
