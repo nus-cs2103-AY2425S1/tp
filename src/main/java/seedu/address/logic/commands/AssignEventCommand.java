@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 public abstract class AssignEventCommand extends Command {
     public static final String COMMAND_WORD = "assign_event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns an event from a person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns an event to a person identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_PERSON + "PERSON_INDEX (must be a positive integer) or PERSON_NAME (must start with an alphabet) "
