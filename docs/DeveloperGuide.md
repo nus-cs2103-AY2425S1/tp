@@ -46,7 +46,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -71,16 +71,17 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete  person 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"></puml>
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the 
+  corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300"></puml>
 
 The sections below give more details of each component.
 
@@ -90,7 +91,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"></puml>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `AppointmentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -111,11 +112,11 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"></puml>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command"></puml>
 
 <box type="info" seamless>
 
@@ -125,14 +126,14 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"></puml>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -164,7 +165,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list (the `UniqueTagList`) in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. Similarly, the `Appointment` objects are shown as such as well.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450"></puml>
 
 </box>
 
@@ -174,7 +175,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550"></puml>
 
 The `Storage` component,
 * can save patient data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
@@ -331,7 +332,7 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
---- 
+---
 
 <br>
 
@@ -388,13 +389,15 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 **Target user profile**:
 * General Practitioners (GPs) at small clinics
 
-**Value proposition**: Time spent looking through paper medical documents should be spent in other life-saving activities. Our product resolves this issue by creating fast access to patient contact details as well as their relevant appointment/treatment details, allowing GPs to contact and monitor their patients easily.
+**Value proposition**: 
+- Time spent looking through paper medical documents should be spent in other life-saving activities. 
+- Our product, DocTrack, resolves this issue by creating fast access to patient contact details as well as their relevant appointment details, allowing GPs to contact and monitor their patients easily.
 
 <br>
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High `* * *` (must have), Medium `* *` (nice to have) , Low `*` (unlikely to have)
 
 | Priority | As a …​              | I want to …​                                       | So that I can…​                                                      |
 |----------|----------------------|----------------------------------------------------|----------------------------------------------------------------------|
@@ -441,246 +444,291 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `DocTrack` application and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, unless specified otherwise, 
+- The **System** is the `DocTrack` application
+- The **Actor** is the `user`
 
-**Use case: Update a patient**
+<br>
+
+#### Use case (UC01): Add a patient
 
 **MSS**
 
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to update a specific patient in the list with new details
-4.  DocTrack updates the patient.
+1. User requests to add a patient.
+2. DocTrack adds the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters invalid parameters.
 
-  Use case ends.
+    * 1a1. DocTrack shows an error message.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
+* 1b. User enters a patient that already exists.
 
-    * 3a1. DocTrack shows an error message.
+    * 1b1. DocTrack shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The new patient details are invalid.
+<br>
 
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Delete a patient**
+#### Use case (UC02): Edit a patient
 
 **MSS**
-
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to delete a specific patient in the list.
-4.  DocTrack deletes the patient.
+1. DocTrack <ins>shows a list of patients [(UC04)](#use-case-uc04-view-all-patients)</ins>.
+2. User requests to edit a specific patient in the list with new details. 
+3. DocTrack updates the patient with the new details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
+    * 2a1. DocTrack shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Find appointments for a specific patient**
+* 2b. The new patient details are invalid.
 
-**MSS**
-
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to list appoinments for a specific patient in the list.
-4.  DocTrack shows a list of appointments for that patient.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Add an appointment**
-
-**MSS**
-
-1.  User requests to list patients.
-2.  DocTrack shows a list of patients.
-3.  User requests to add an appoinment for a specific patient in the list.
-4.  DocTrack adds appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Duplicate an appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to duplicate a specific appointment in the list on a new date.
-4.  DocTrack duplicates appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The appointment details are invalid (i.e. wrongly formatted or overlap with existing appointment)
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Update an appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to update a specific appointment in the list with new details
-4.  DocTrack updates the appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The new details are invalid (i.e. wrongly formatted).
-
-    * 3b1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Delete an appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to delete a specific appointment in the list.
-4.  DocTrack deletes the appointment.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Find patient for a specific appointment**
-
-**MSS**
-
-1.  User requests to list appointments.
-2.  DocTrack shows a list of appointments.
-3.  User requests to find patient for a specific appointment in the list.
-4.  DocTrack shows patient details.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. DocTrack shows an error message.
+    * 2b1. DocTrack shows an error message.
 
       Use case resumes at step 2.
 
 <br>
 
+#### Use case (UC03): Delete a patient
+
+**MSS**
+
+1. DocTrack <ins>shows a list of patients [(UC04)](#use-case-uc04-view-all-patients)</ins>.
+2. User requests to delete a specific patient in the list.
+3. DocTrack deletes the patient.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+#### Use case (UC04): View all patients
+
+**MSS**
+
+1. User requests to list all patients.
+2. DocTrack shows a list of patients.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC05): Find a patient by name
+
+**MSS**
+
+1. User requests to find a patient by name.
+2. DocTrack shows the patient details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The patient is not found.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC06): Clear all patients 
+
+**MSS**
+
+1. User requests to clear all patients.
+2. DocTrack clears all patients.
+
+    Use case ends.
+
+<br>
+
+#### Use case (UC07): Add an appointment
+
+**MSS**
+
+1. User requests to add an appointment.
+2. DocTrack adds the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. User enters an appointment with the same date and time.
+
+    * 1b1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+    
+<br>
+
+#### Use case (UC08): Edit an appointment
+
+**MSS**
+
+1. DocTrack <ins>shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments)</ins>.
+2. User requests to edit a specific appointment in the list with new details.
+3. DocTrack updates the appointment with the new details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+* 2b. The new appointment details are invalid.
+
+    * 2b1. DocTrack shows an error message.
+
+      Use case resumes at step 2.
+
+<br>
+
+#### Use case (UC09): Delete an appointment
+
+**MSS**
+
+1. DocTrack <ins>shows a list of appointments [(UC10)](#use-case-uc10-view-all-appointments)</ins>.
+2. User requests to delete a specific appointment in the list.
+3. DocTrack deletes the appointment.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+
+<br>
+
+#### Use case (UC10): View all appointments
+
+**MSS**
+
+1. User requests to list all appointments.
+2. DocTrack shows a list of appointments.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC11): Find an appointment by patient name or date
+
+**MSS**
+
+1. User requests to find an appointment by patient name or date.
+2. DocTrack shows the appointment details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid parameters.
+
+    * 1a1. DocTrack shows an error message.
+
+      Use case resumes at step 1.
+* 2a. The appointment is not found.
+
+  Use case ends.
+
+<br>
+
+#### Use case (UC12): Clear all appointments
+
+**MSS**
+
+1. User requests to clear all appointments.
+2. DocTrack clears all appointments.
+
+    Use case ends.
+
+<br>
+
+
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should not require installation
-5.  Must not operate with dependency on any remote server
-6.  No usage of DBMS
-7.  Main product file must not exceed 100MB
-8.  Documentation must not exceed 15MB
-9.  Product should be designed for typing-preferred consumers, offering a CLI experience
-10. Product should be designed for a single user.
-11. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
-12. Data must be persistent, with all changes saved immediately to local storage
-13. Data files must be in a format that can be edited manually by advanced users
-14. Data file must remain usable and intact even with invalid input from the application
-15. Errors must trigger clear, user-friendly messages
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should work on any _reasonable system_ with good performance: common operation such as retrieving patient data must complete within 1 second, and complex operations must complete within 3 seconds.
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. Should not require installation of additional packages.
+6. Must not operate with dependency on any remote server.
+7. No usage of DBMS.
+8. Main product file must not exceed 100MB.
+9. Documentation must not exceed 15MB.
+10. Product should be designed for typing-preferred consumers, offering a CLI experience.
+11. Product should be designed for a single user.
+12. Product must function correctly on _standard resolutions_ and support scaling of 100%, 125%, 150%.
+13. Data must be persistent, with all changes saved immediately to local storage.
+14. Data files must be in a format that can be edited manually by advanced users.
+15. Data file must remain usable and intact even with invalid input from the application.
+16. Errors must trigger clear, user-friendly messages.
+17. The software architecture must follow a modular design pattern, ensuring separation of concerns (UI, logic, storage) to facilitate future development and maintenance.
+18. The codebase must be well-documented, with appropriate comments and adherence to coding standards.
+19. A comprehensive technical guide should be provided for future developers, including instructions for maintenance and extension.
+20. The product should be designed for users who prefer typing commands, offering a CLI or text-based interface.
+21. The application is designed for a single user. Multi-user or shared usage on the same computer is not allowed, and data files must not be shared between users.
 
 <br>
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Reasonable system**: A system with an OS matching the criteria above, with parts with a release date maximum 10 years from the current date
 * **Standard resolutions**: 1920x1080 and 1080x720
+* **Patient**: A person with details such as name, phone number, email, address, and status
+* **Appointment**: A scheduled meeting between a patient and the user, with details such as date, time, sickness, and medicine
+* **Appointment Type**: The type of appointment, such as consultation, follow-up, etc.
+* **Status**: The status of the patient, such as recovered, hospitalised, etc.
+* **User**: The person using the application
+* **CLI**: Command Line Interface
 
 #### GUI
 
