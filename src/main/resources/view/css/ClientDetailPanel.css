@@ -1,0 +1,39 @@
+.cell_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #a0a0a0;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+
+.name-label {
+    -fx-font-weight: bold;
+}
+
+.detail-tier-label {
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-font-size: 12px;
+}
+
+/* Tier-specific styles for the detail panel */
+.detail-tier-label.gold-tier {
+    -fx-background-color: #B59410;
+}
+
+.detail-tier-label.silver-tier {
+    -fx-background-color: #71706e;
+}
+
+.detail-tier-label.bronze-tier {
+}
+
+.detail-tier-label.reject-tier {
+    -fx-background-color: #8B0000;
+}

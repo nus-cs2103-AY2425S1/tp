@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
@@ -7,6 +9,10 @@
 <?import javafx.geometry.Insets?>
 
 <ScrollPane fitToWidth="true" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@css/ClientDetailPanel.css" />
+    </stylesheets>
+
     <VBox spacing="10" alignment="TOP_CENTER">
         <padding>
             <Insets top="20" right="20" bottom="20" left="20" />
