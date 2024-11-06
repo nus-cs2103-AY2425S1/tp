@@ -12,7 +12,7 @@ public class Sickness {
     public static final String MESSAGE_CONSTRAINTS = "Sicknesses should contain at least one letter "
             + "(alphabetic character), and it should not be blank";
 
-    public static final String VALIDATION_REGEX = "(?=.*[a-zA-Z]).+";
+    public static final String VALIDATION_REGEX = "^(?=\\S)(?=.*[a-zA-Z]).*(?<=\\S)$";
 
     public final String value;
 
