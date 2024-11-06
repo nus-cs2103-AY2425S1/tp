@@ -179,6 +179,7 @@ public class CommandTestUtil {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
+
     /**
      * Executes the given {@code command}, confirms that:
      * - A {@code CommandException} is thrown
