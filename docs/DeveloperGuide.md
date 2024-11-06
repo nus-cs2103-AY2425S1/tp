@@ -211,9 +211,25 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
-### Owe feature
+### Owe tuition fees
+
+The owe command is part of UGTeach's payment tracking feature. It is used to track the amount of tuition fee owed by a student. The `OweCommandParser` is responsible for parsing the user input and creating an `OweCommand` object. The `OweCommand` object is then executed by the `Logic` component.
+
+`OweCommandParser` obtains the `INDEX` of the student and the values corresponding to the prefix `hr/` from the user input. The `OweCommandParser` will enforce the following constraints:
+* The `INDEX` must be a positive integer.
+* The prefix `hr/` must be provided.
+* If the prefixes are provided, they must appear for only once.
+* Value corresponding to the prefix that is provided must be non-empty and valid (positive multiple of 0.5).
+
+If the constraints are not met, the `OweCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
+Otherwise, a new instance of `OweCommand` is then created with the values of `INDEX` and `HOURS_OWED` parsed by `OweCommandParser`.
+
+On execution, `OweCommand` first queries the supplied model for the student to be updated using the `INDEX`. 
+
+Then, `OweCommand` calculates the amount of tuition fee owed and checks if the total amount owed by the student exceeds the limit of `9999999.99`. If it exceeds, `OweCommand` will throw a `CommandException` with an error message indicating that limit was violated.
+
+Finally, `OweCommand` updates the total amount of tuition fee owed by the student by creating a new `Student` instance with updated fields to replace the outdated `Student` instance in the model.
 
 The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
 <puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
@@ -290,7 +306,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
 | `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -310,13 +325,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays error message and does not clear command line.
     * 1a2. User enters new command.
 * Steps 1a1-1a2 are repeated until all details entered are correct.
-* Use case resumes from step 2.
-
-
-* 1b. System detects error in parameters.
-    * 1b1. System displays error message and does not clear command line.
-    * 1b2. User enters command with correct parameters.
-* Steps 1b1-1b2 are repeated until all details entered are correct.
 * Use case resumes from step 2.
 
 
@@ -369,17 +377,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters command with new index.
-* Steps 2a1-2a2 are repeated until index entered is correct.
-* Use case resumes from step 3.
-
-
-* 2b. System detects error in format of entered command.
-    * 2b1. System displays error message and does not clear command line.
-    * 2b2. User enters new command.
-* Steps 2b1-2b2 are repeated until all details entered are correct.
+    * 2a2. User enters new command.
+* Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
 
 
@@ -448,8 +449,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User enters new command.
 * Steps 2a1-2a2 are repeated until all details entered are correct.
 * Use case resumes from step 3.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -631,4 +630,3 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
