@@ -138,7 +138,7 @@ Format: `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<
 
 - **Parameters**:
     * Birthday should be in `yyyy-mm-dd`
-    * Appointment should be in `yyyy-mm-dd HH:mm`
+    * Appointment should be in `yyyy-mm-dd HH:mm` and accept both past and future dates
     * Phone number can only be 3 to 8 digits long
     * Clients with the same name and address are considered as duplicates
     * The system standardises addresses by removing commas, spaces, and hyphens and making

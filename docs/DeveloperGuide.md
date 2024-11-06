@@ -562,22 +562,44 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
 
-1. Deleting a person while all persons are being shown
+### Adding a Client
+1. Adding a client
+   1. Prerequisites: None 
+   2. Test case: `add n/John Doe p/98765432 e/johnd@example.com addr/311, Clementi Ave 2, #02-25 b/1990-10-10 appt/2024-12-12 12:00`
+   3. Expected: A new contact has been added into the list. 
+      - Status Message: "New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Birthday: 1990-10-10; Appointment: 2024-12-12 12:00; Tags:"
+   4. The list view should now have the new contact inside. 
+### Deleting a Client
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Deleting a Client while all contacts are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Assigning Policies
+1. Creating and Assigning policies to client
+   1. Prerequisites: There must be at least one client showing in the list with no Policy Name "PolicyOne".
+   2. Test Case: `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+      - Expected: "Policy successfully assigned to Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Birthday: 1990-05-20; Appointment: 2024-10-15 14:00; Tags: [friends]"
+
+   3. Test Case: `assign 1 pon/PoicyOne pos/2025-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+      - Expected: "End date cannot be before start date!"
+   4. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2023-12-12 paydate/2021-11-01 amt/300.00`
+      - Expected: "Premium due date cannot be before start date!"
+   5. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2022-12-12 paydate/2022-01-01 amt/300.00`
+      - Expected: "Start date and end date cannot be the same!"
+
 
 ### Saving data
 
