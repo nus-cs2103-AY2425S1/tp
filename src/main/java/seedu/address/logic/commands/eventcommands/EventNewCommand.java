@@ -23,14 +23,14 @@ public class EventNewCommand extends Command {
     public static final String COMMAND_WORD = "new";
     public static final String MESSAGE_SUCCESS = "Event added successfully!";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calander. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the calander.\n"
             + "Parameters: "
             + EVENT_PREFIX_NAME + "NAME "
             + EVENT_PREFIX_LOCATION + "LOCATION "
             + EVENT_PREFIX_DATE + "DATE "
             + EVENT_PREFIX_START_TIME + "START TIME "
             + EVENT_PREFIX_END_TIME + "END TIME "
-            + EVENT_PREFIX_DESCRIPTION + "DESCRIPTION "
+            + "[" + EVENT_PREFIX_DESCRIPTION + "DESCRIPTION]\n"
             + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " "
             + EVENT_PREFIX_NAME + "Food collection "
             + EVENT_PREFIX_LOCATION + "NTUC "
