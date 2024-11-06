@@ -13,7 +13,7 @@ public class Status {
      * Patient are classified into High, Low, Discharged
      */
     public enum StatusType {
-        HIGH, LOW, DISCHARGED
+        HIGH, LOW, MEDIUM, DISCHARGED
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Status should only be one of the following: "

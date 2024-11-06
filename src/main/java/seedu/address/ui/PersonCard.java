@@ -13,14 +13,6 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
-
     public final Person person;
 
     @FXML
@@ -39,6 +31,7 @@ public class PersonCard extends UiPart<Region> {
     private Label identification;
     @FXML
     private Label status;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -52,5 +45,30 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        setStatusStyle(person.getStatus().toString());
+    }
+
+    /**
+     * Sets the color of the status label.
+     */
+    private void setStatusStyle(String statusText) {
+        // Remove any previously set style classes
+        status.getStyleClass().removeAll("status-low", "status-medium", "status-high");
+
+        // Add the correct style class based on the status value
+        switch (statusText) {
+        case "LOW":
+            status.getStyleClass().add("status-low");
+            break;
+        case "MEDIUM":
+            status.getStyleClass().add("status-medium");
+            break;
+        case "HIGH":
+            status.getStyleClass().add("status-high");
+            break;
+        default:
+            // Do nothing, field will remain grey
+        }
     }
 }
