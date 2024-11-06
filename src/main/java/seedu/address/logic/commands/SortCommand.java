@@ -57,7 +57,7 @@ public class SortCommand extends Command {
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_STUDENT_ID + "] "
             + "[" + PREFIX_TUTORIAL + "TUTORIAL] \n"
-            + "Examples: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "\n"
+            + "Examples: " + COMMAND_WORD + " 1 " + PREFIX_NAME + ", "
             + COMMAND_WORD + " -1 " + PREFIX_TUTORIAL + "4";
 
     private final Comparator<Person> sortingComparator;
