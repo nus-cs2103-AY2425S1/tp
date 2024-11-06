@@ -47,35 +47,30 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (modules.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            editPersonDescriptor.setModuleChanges(new Module(ParserUtil.makeUppercase(modules[0])),
-                    new Module(ParserUtil.makeUppercase(modules[1])));
+            editPersonDescriptor.setModuleChanges(new Module(modules[0].toUpperCase()),
+                    new Module(modules[1].toUpperCase()));
         } else {
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editPersonDescriptor.setName(ParserUtil.parseName(ParserUtil
-                                .makeCapitalise(argMultimap.getValue(PREFIX_NAME).get())
+                editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()
                         ));
             }
             if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
                 editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
             }
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                editPersonDescriptor.setEmail(ParserUtil.parseEmail(ParserUtil
-                                .makeLowercase(argMultimap.getValue(PREFIX_EMAIL).get())
+                editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()
                         ));
             }
             if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-                editPersonDescriptor.setAddress(ParserUtil.parseAddress(ParserUtil
-                                .makeUppercase(argMultimap.getValue(PREFIX_ADDRESS).get())
+                editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()
                         ));
             }
             if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
-                editPersonDescriptor.setCourse(ParserUtil.parseCourse(ParserUtil
-                                .makeCapitalise(argMultimap.getValue(PREFIX_COURSE).get())
+                editPersonDescriptor.setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()
                         ));
             }
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-                editPersonDescriptor.setTag(ParserUtil.parseTag(ParserUtil
-                        .makeCapitalise(argMultimap.getValue(PREFIX_TAG).get())));
+                editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
             }
         }
 

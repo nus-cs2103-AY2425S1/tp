@@ -35,8 +35,8 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_GRADE);
 
         StudentId studentId = ParserUtil.parseStudentId(preamble);
-        Grade grade = ParserUtil.parseGrade(ParserUtil.makeUppercase(argMultimap.getValue(PREFIX_GRADE).get()));
-        Module module = ParserUtil.parseModule(ParserUtil.makeUppercase(argMultimap.getValue(PREFIX_MODULE).get()));
+        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
+        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
 
         return new GradeCommand(studentId, module, grade);
     }

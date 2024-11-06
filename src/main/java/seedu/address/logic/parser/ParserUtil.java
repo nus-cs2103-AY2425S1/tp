@@ -66,6 +66,7 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        trimmedName = makeCapitalise(trimmedName);
         return new Name(trimmedName);
     }
 
@@ -96,6 +97,7 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        trimmedAddress = makeUppercase(trimmedAddress);
         return new Address(trimmedAddress);
     }
 
@@ -111,6 +113,7 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+        trimmedEmail = makeLowercase(trimmedEmail);
         return new Email(trimmedEmail);
     }
 
@@ -126,6 +129,7 @@ public class ParserUtil {
         if (!Tag.isValidTag(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        trimmedTag = makeCapitalise(trimmedTag);
         return new Tag(trimmedTag);
     }
 
@@ -153,6 +157,7 @@ public class ParserUtil {
         if (!Course.isValidCourse(trimmedCourse)) {
             throw new ParseException(Course.MESSAGE_CONSTRAINTS);
         }
+        trimmedCourse = makeCapitalise(trimmedCourse);
         return new Course(trimmedCourse);
     }
 
@@ -168,6 +173,7 @@ public class ParserUtil {
         if (!Module.isValidModule(trimmedModule)) {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
+        trimmedModule = makeUppercase(trimmedModule);
         return new Module(trimmedModule);
     }
 
@@ -183,6 +189,7 @@ public class ParserUtil {
         if (!Grade.isValidGrade(trimmedGrade)) {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
+        trimmedGrade = makeUppercase(trimmedGrade);
         return new Grade(trimmedGrade);
     }
 
