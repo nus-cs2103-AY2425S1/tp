@@ -14,39 +14,43 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 ## Table of Contents
 <page-nav-print />
 
-- [Quick Start](#quick-start)
-- [Command Summary](#command-summary)
-    * [Command Table](#command-table)
-    * [Parameter Table](#parameter-table)
-    * [Notes on the Command Format](#notes-on-the-command-format)
-- [Features](#features)
-    * [Student Management](#student-management)
-        * [Adding a Student: `add`](#adding-a-student-add)
-        * [Deleting a Student: `delete`](#deleting-a-student-delete)
-        * [Updating a Student: `update`](#updating-a-student-update)
-        * [Finding Students: `find`](#finding-students-find)
-        * [Listing All Students: `list`](#listing-all-students-list)
-        * [Tagging a Student: `tag`](#tagging-a-student-tag)
-        * [Recording Notes: `note`](#recording-notes-note)
-        * [Viewing a Specific Student: `view`](#viewing-a-specific-student-view)
-    * [Task Management](#task-management)
-        * [Adding a Task: `addtask`](#adding-a-task-addtask)
-        * [Deleting a Task: `deletetask`](#deleting-a-task-deletetask)
-        * [Updating a Task: `updatetask`](#updating-a-task-updatetask)
-        * [Viewing All Tasks: `viewtasks`](#viewing-all-tasks-viewtasks)
-    * [Data Management](#data-management)
-        * [Saving the Data](#saving-the-data)
-        * [Editing the Data File](#editing-the-data-file)
-        * [Clearing All Students: `clear`](#clearing-all-students-clear)
-    * [Navigation](#navigation)
-       * [Viewing Help: `help`](#viewing-help-help)
-       * [Exiting EduManage: `exit`](#exiting-edumanage-exit) 
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
+[1. Quick Start](#1-quick-start)
+
+[2. Command Summary](#2-command-summary)
+  * [2.1 Command Table](#21-command-table)
+  * [2.2 Parameter Table](#22-parameter-table)
+  * [2.3 Notes on the Command Format](#23-notes-on-the-command-format)
+
+[3. Features](#3-features)
+  * [3.1 Student Management](#31-student-management)
+    * [3.1.1 Adding a Student: `add`](#311-adding-a-student-add)
+    * [3.1.2 Deleting a Student: `delete`](#312-deleting-a-student-delete)
+    * [3.1.3 Updating a Student: `update`](#313-updating-a-student-update)
+    * [3.1.4 Finding Students: `find`](#314-finding-students-find)
+    * [3.1.5 Listing All Students: `list`](#315-listing-all-students-list)
+    * [3.1.6 Tagging a Student: `tag`](#316-tagging-a-student-tag)
+    * [3.1.7 Recording Notes: `note`](#317-recording-notes-note)
+    * [3.1.8 Viewing a Specific Student: `view`](#318-viewing-a-specific-student-view)
+  * [3.2 Task Management](#32-task-management)
+    * [3.2.1 Adding a Task: `addtask`](#321-adding-a-task-addtask)
+    * [3.2.2 Deleting a Task: `deletetask`](#322-deleting-a-task-deletetask)
+    * [3.2.3 Updating a Task: `updatetask`](#323-updating-a-task-updatetask)
+    * [3.2.4 Viewing All Tasks: `viewtasks`](#324-viewing-all-tasks-viewtasks)
+  * [3.3 Data Management](#33-data-management)
+    * [3.3.1 Saving the Data](#331-saving-the-data)
+    * [3.3.2 Editing the Data File](#332-editing-the-data-file)
+    * [3.3.3 Clearing All Students: `clear`](#333-clearing-all-students-clear)
+  * [3.4 Navigation](#34-navigation)
+    * [3.4.1 Viewing Help: `help`](#341-viewing-help-help)
+    * [3.4.2 Exiting EduManage: `exit`](#342-exiting-edumanage-exit)
+
+[4. FAQ](#4-faq)
+
+[5. Known Issues](#4-known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## 1. Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -80,9 +84,9 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## 2. Command Summary
 
-### Command Table
+### 2.1 Command Table
 
 | Index |                           Action                            |                                                        Format                                                        |                                               Example(s)                                               |
 |:-----:|:-----------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:|
@@ -102,7 +106,9 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 |  14   |                [`Help`](#viewing-help-help)                 |                                                        `help`                                                        |                                                 `help`                                                 |
 |  15   |              [`Exit`](#exiting-edumanage-exit)              |                                                        `exit`                                                        |                                                 `exit`                                                 |
 
-### Parameter Table
+***
+
+### 2.2 Parameter Table
 
 | Index |     Parameter     |                     Format                     | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 |:-----:|:-----------------:|:----------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -119,9 +125,10 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 |  11   | Task Description  |              `t/TASK_DESCRIPTION`              | Can take any values, but should not be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 |  12   |    Task Index     |                 `t/TASK_INDEX`                 | Should be a positive integer equal to or less than the size of the specified student's task list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-<box type="info" seamless>
+***
 
-### Notes on the Command Format
+### 2.3 Notes on the Command Format
+<box type="info" seamless>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -155,11 +162,11 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 3. Features
 
-### Student Management
+### 3.1 Student Management
 
-#### Adding a Student: `add`
+#### 3.1.1 Adding a Student: `add`
 
 Adds a student to EduManage.
 
@@ -176,7 +183,7 @@ Adds a student to EduManage.
 
 ***
 
-#### Deleting a Student: `delete`
+#### 3.1.2 Deleting a Student: `delete`
 
 Deletes the specified student from EduManage.
 
@@ -192,7 +199,7 @@ Deletes the specified student from EduManage.
 
 ***
 
-#### Updating a Student: `update`
+#### 3.1.3 Updating a Student: `update`
 
 Updates the details of an existing student in EduManage.
 
@@ -201,7 +208,6 @@ Updates the details of an existing student in EduManage.
 * Updates the student with the specified `NAME`. The name refers to the full name shown in the displayed student list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When updating subjects, the existing subjects of the student will be removed i.e adding of subjects is not cumulative.
 
 <box type="tip" seamless>
 
@@ -211,6 +217,12 @@ Updates the details of an existing student in EduManage.
 * To remove all the student’s lesson times, simply type `lt/` without specifying any lesson times after it.
 </box>
 
+<box type="warning" seamless>
+
+**Caution:**
+When updating subjects or lesson times, the existing subjects or lesson times of the student will be removed i.e. adding of subjects or lesson times is not cumulative.
+</box>
+
 **Examples:**
 * `update Alex Yeoh p/91234567 e/99999999` updates the phone number and emergency contact of `Alex Yeoh` to be `91234567` and `99999999` respectively.
 * `update Alex Yeoh n/Betsy Crower s/` updates the name of `Alex Yeoh` to be `Betsy Crower` and clears all existing subjects.
@@ -218,7 +230,7 @@ Updates the details of an existing student in EduManage.
 
 ***
 
-#### Finding Students: `find`
+#### 3.1.4 Finding Students: `find`
 
 Find students by either their name, level or subject(s).
 
@@ -244,7 +256,7 @@ Find students by either their name, level or subject(s).
 
 ***
 
-#### Listing All Students: `list`
+#### 3.1.5 Listing All Students: `list`
 
 Shows a list of all students in EduManage.
 
@@ -252,7 +264,7 @@ Shows a list of all students in EduManage.
 
 ***
 
-#### Tagging a Student: `tag`
+#### 3.1.6 Tagging a Student: `tag`
 
 Allows tagging a student by their level and subject. A student must have a level assigned before they can be tagged with a subject.
 
@@ -277,7 +289,7 @@ the subject(s) tagged must be valid for the previously assigned level.
 
 ***
 
-#### Recording Notes: `note`
+#### 3.1.7 Recording Notes: `note`
 
 Records a note for the specified student.
 
@@ -289,7 +301,7 @@ Records a note for the specified student.
 
 ***
 
-#### Viewing a Specific Student: `view`
+#### 3.1.8 Viewing a Specific Student: `view`
 
 Views a specific student on the right side window.
 
@@ -304,9 +316,9 @@ Views a specific student on the right side window.
 
 ***
 
-### Task Management
+### 3.2 Task Management
 
-#### Adding a Task: `addtask`
+#### 3.2.1 Adding a Task: `addtask`
 
 Adds a task to the task list of the specified student.
 
@@ -320,7 +332,7 @@ Adds a task to the task list of the specified student.
 
 ***
 
-#### Deleting a Task: `deletetask`
+#### 3.2.2 Deleting a Task: `deletetask`
 
 Deletes a task from the specified student's task list.
 
@@ -331,7 +343,7 @@ Deletes a task from the specified student's task list.
 
 ***
 
-#### Updating a Task: `updatetask`
+#### 3.2.3 Updating a Task: `updatetask`
 
 Updates the details of an existing task in a student's task list.
 
@@ -347,7 +359,7 @@ Updates the details of an existing task in a student's task list.
 
 ***
 
-#### Viewing All Tasks: `viewtasks`
+#### 3.2.4 Viewing All Tasks: `viewtasks`
 
 Views all tasks, organized by student.
 
@@ -357,15 +369,15 @@ Views all tasks, organized by student.
 
 ***
 
-### Data Management
+### 3.3 Data Management
 
-#### Saving the Data
+#### 3.3.1 Saving the Data
 
 EduManage data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ***
 
-#### Editing the Data File
+#### 3.3.2 Editing the Data File
 
 EduManage data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -378,7 +390,7 @@ Furthermore, certain edits can cause the EduManage to behave in unexpected ways 
 
 ***
 
-#### Clearing All Students: `clear`
+#### 3.3.3 Clearing All Students: `clear`
 
 Clears all students from EduManage.
 
@@ -394,9 +406,9 @@ This action is irreversible and will permanently delete all students from EduMan
 
 ***
 
-### Navigation
+### 3.4 Navigation
 
-#### Viewing Help: `help`
+#### 3.4.1 Viewing Help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -406,7 +418,7 @@ Shows a message explaining how to access the help page.
 
 ***
 
-#### Exiting EduManage: `exit`
+#### 3.4.2 Exiting EduManage: `exit`
 
 Exits EduManage.
 
@@ -416,7 +428,7 @@ Exits EduManage.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduManage home folder.
@@ -425,7 +437,7 @@ Exits EduManage.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues
+## 5. Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
