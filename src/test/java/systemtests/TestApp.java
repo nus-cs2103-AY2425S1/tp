@@ -129,7 +129,7 @@ public class TestApp extends MainApp {
      * Creates and returns a copy of the current model for testing, with the same address book and filtered person
      * list.
      *
-     * @return A {@code CommonModel} object representing the current state of the address book.
+     * @return An {@code AddressBookModel} object representing the current state of the address book.
      */
     public AddressBookModel getAddrModel() {
         AddressBookModel copy = new AddressBookModelManager((addressBookModel.getAddressBook()));
