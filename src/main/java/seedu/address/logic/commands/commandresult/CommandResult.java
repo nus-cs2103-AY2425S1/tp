@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.commandresult;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,7 +10,7 @@ import seedu.address.model.patient.Patient;
 /**
  * Represents the result of a command execution.
  */
-public class CommandResult {
+public abstract class CommandResult {
 
     private final String feedbackToUser;
 
@@ -40,23 +40,6 @@ public class CommandResult {
         this.showPatientInfo = showPatientInfo;
         this.exit = exit;
     }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, null, false, null, false, false);
-    }
-
-    public CommandResult(String feedbackToUser, String keyword) {
-        this(feedbackToUser, keyword, false, null, false, false);
-    }
-
-    public CommandResult(String feedbackToUser, Patient patient) {
-        this(feedbackToUser, null, false, patient, false, false);
-    }
-
 
     public String getFeedbackToUser() {
         return feedbackToUser;

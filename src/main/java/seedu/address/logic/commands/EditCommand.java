@@ -11,6 +11,8 @@ import java.util.Optional;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
@@ -42,7 +44,8 @@ public class EditCommand extends Command {
             + "record in the system\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s\n"
+            + "Input \"home\" to return to home page";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
 
@@ -82,7 +85,8 @@ public class EditCommand extends Command {
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, Messages.format(editedPatient)));
+        return new ShowPatientInfoCommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient.getName()),
+                editedPatient, true);
     }
 
     /**
@@ -366,7 +370,6 @@ public class EditCommand extends Command {
             return Objects.equals(nric, otherEditPatientDescriptor.nric);
         }
 
-        //change this
         @Override
         public String toString() {
             return new ToStringBuilder(this)

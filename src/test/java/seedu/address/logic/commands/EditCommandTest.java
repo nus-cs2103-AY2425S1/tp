@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.model.ClinicConnectSystem;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -42,14 +44,15 @@ public class EditCommandTest {
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditCommand editCommand = new EditCommand(targetPatient.getNric(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
-                Messages.format(editedPatient));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient.getName());
+        CommandResult expectedCommandResult =
+                new ShowPatientInfoCommandResult(expectedMessage, editedPatient, true);
 
         Model expectedModel = new ModelManager(
                 new ClinicConnectSystem(model.getClinicConnectSystem()), new UserPrefs());
         expectedModel.setPatient(targetPatient, editedPatient);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -65,14 +68,14 @@ public class EditCommandTest {
                 .build();
         EditCommand editCommand = new EditCommand(targetPatient.getNric(), descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS,
-                Messages.format(editedPatient));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient.getName());
+        CommandResult expectedCommandResult = new ShowPatientInfoCommandResult(expectedMessage, editedPatient, true);
 
         Model expectedModel = new ModelManager(
                 new ClinicConnectSystem(model.getClinicConnectSystem()), new UserPrefs());
         expectedModel.setPatient(targetPatient, editedPatient);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

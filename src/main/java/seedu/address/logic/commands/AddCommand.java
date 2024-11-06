@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
@@ -18,7 +20,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new patient record into the system\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s\n"
+            + "Input \"home\" to return to home page";
+
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
 
     private final Patient toAdd;
@@ -40,7 +44,8 @@ public class AddCommand extends Command {
         }
 
         model.addPatient(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), toAdd);
+        return new ShowPatientInfoCommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
+                toAdd, true);
     }
 
     @Override

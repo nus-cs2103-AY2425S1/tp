@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.KeywordCommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -27,7 +29,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, keyword, true, null, false, false);
+        return new KeywordCommandResult(SHOWING_HELP_MESSAGE, keyword);
     }
 
     @Override

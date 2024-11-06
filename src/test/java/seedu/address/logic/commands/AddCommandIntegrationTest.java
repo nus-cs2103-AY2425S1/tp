@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -33,8 +35,8 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
         expectedModel.addPatient(validPatient);
         CommandResult expectedCommandResult =
-                new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
-                        null, false, validPatient, false, false);
+                new ShowPatientInfoCommandResult(String.format(
+                        AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)), validPatient, true);
         assertCommandSuccess(new AddCommand(validPatient), model, expectedCommandResult, expectedModel);
     }
 

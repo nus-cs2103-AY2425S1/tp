@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.address.testutil.TypicalPatients.KEANU;
 import static seedu.address.testutil.TypicalPatients.getTypicalClinicConnectSystem;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,10 +31,10 @@ public class ViewCommandTest {
 
     @Test
     public void execute_validPatient_success() {
-        Patient patientToView = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        Patient patientToView = KEANU;
         ModelManager expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
-        CommandResult expectedCommandResult = new CommandResult(String.format(ViewCommand.MESSAGE_VIEW_SUCCESS,
-                patientToView.getName()), null, false, patientToView, true, false);
+        CommandResult expectedCommandResult = new ShowPatientInfoCommandResult(String.format(
+                ViewCommand.MESSAGE_VIEW_SUCCESS, patientToView.getName()), patientToView, true);
 
         assertCommandSuccess(new ViewCommand(patientToView.getNric()), model, expectedCommandResult, expectedModel);
     }

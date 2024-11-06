@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.DefaultCommandResult;
 import seedu.address.model.ClinicConnectSystem;
 import seedu.address.model.Model;
 
@@ -18,6 +20,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setClinicConnectSystem(new ClinicConnectSystem());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new DefaultCommandResult(MESSAGE_SUCCESS);
     }
 }
