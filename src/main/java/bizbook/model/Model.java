@@ -115,6 +115,11 @@ public interface Model {
     void unpinPerson(Person person);
 
     /**
+     * Checks if there is a newer version that can be reverted to or not.
+     */
+    boolean canRedo();
+
+    /**
      * Checks if there is a version that can be reverted to or not.
      */
     boolean canUndo();
@@ -128,6 +133,11 @@ public interface Model {
      * Reverts the {@code AddressBook} to the most recent saved version.
      */
     void revertAddressBookVersion();
+
+    /**
+     * Reverts the {@code AddressBook} to the most recent saved version.
+     */
+    void redoAddressBookVersion();
 
     /**
      * Sets the focus person to {@code person}.
