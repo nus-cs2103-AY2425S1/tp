@@ -255,7 +255,7 @@ _Details coming soon ..._
 | **Undo**          | `undo`                                                                                                                    
 | **Markat**        | `markat n/NAME d/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`     |
 | **Markpresentall** | `markpresentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                  |
-| **Markabsentall** | `Markabsentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `markabsentall tg/G17 d/2021-10-10`                                    |
+| **Markabsentall** | `Markabsentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `markabesentall tg/G17 d/2021-10-10`                                   |
 | **Deleteat**      | `deleteat n/NAME d/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                    |
 | **Deleteatall**   | `deleteatall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                        |
 | **Getat**         | `getat n/NAME d/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                          |
