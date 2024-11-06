@@ -543,17 +543,56 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Editing a person
+Success action: Details of edited contact shown in the status message, person in person list is edited.
+
+#### Editing by INDEX
 
 1. Editing a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
-    1. Test case: `edit 1 n/NAME`<br>
-       Expected: First contact has name field edited to NAME. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `edit`<br>
+      Test case: `edit 1`<br>
+      Expected: No person is edited. Status message shows Edit Command Format.<br><br>
+    
+   1. Test case: `edit 0 [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]`<br>
+      Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is a negative number) <br>
+      Expected: No wedding added. Error message on x is not a non-zero unsigned integer.<br><br>
 
-    1. Test case: `edit Alice n/Alice Teo`<br>
-       Expected (No duplicated Alice): Contact with name field containing Alice has name field edited to Alice Teo. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
-       Expected (Duplicated Alice): No contact edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.
+   1. Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is larger than the size of the wedding list)<br>
+      Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
+
+    1. Test case: `edit 1 n/NEW NAME`<br>
+       Expected (Valid Name): First person has name field edited to NEW NAME. Success action will be carried out.<br>
+       Expected (Invalid Name): No person is edited. Error message shows name restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 p/NEW PHONE`<br>
+      Expected (Valid Phone): First contact has phone field edited to NEW PHONE. Success action will be carried out.<br>
+      Expected (Invalid Phone): No person is edited. Error message shows phone restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 e/NEW EMAIL`<br>
+      Expected (Valid Email): First contact has email field edited to NEW EMAIL. Success action will be carried out.<br>
+      Expected (Invalid Email): No person is edited. Error message shows email restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 a/NEW ADDRESS`<br>
+      Expected (Valid Address): First contact has address field edited to NEW ADDRESS. Success action will be carried out.<br>
+      Expected (Invalid Address): No person is edited. Error message shows address restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 n/EXISTING NAME p/EXITING PHONE e/EXISTING EMAIL a/EXISTING ADDRESS`<br>
+      Expected: No person is edited. Error message shows person already exist in status message.<br><br>
+
+   1. Test case: `edit 1 p/EXITING PHONE`<br>
+      Expected: No person is edited. Error message shows phone already exist in status message.<br><br>
+
+   1. Test case: `edit 1 e/EXISTING EMAIL`<br>
+      Expected: No person is edited. Error message shows email already exist in status message.<br><br>
+
+
+#### Editing by NAME
+   1. Test case: `edit Alice n/Alice Teo`<br>
+       Expected (No duplicated Alice): Person with name field containing Alice has name field edited to Alice Teo. Success action will be carried out.<br>
+       Expected (Duplicated Alice): No person edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.<br>
+       Expected (No Alice): No person edited. Error message shows this person do not exist in the address book.<br><br>
 
 ### Viewing a person
 1. Viewing a person while all persons are being shown
@@ -650,66 +689,69 @@ testers are expected to do more *exploratory* testing.
 ### Adding a Wedding
 Success action: When wedding is successfully added, the details of the added wedding is shown in the status message and reflected in the wedding list.
 
+#### Inputting CLIENT using INDEX
 1. Adding a wedding while all persons and weddings are shown.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
     1. Test case: `addw n/Church Wedding c/1 d/2024-12-12 v/Church of the Holy Spirit`<br>
-       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Success action will be carried out.
+       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Success action will be carried out.<br><br>
 
    1. Test case: `addw n/Church Wedding c/1`<br>
-      Expected: Wedding added with first person in the persons list set as client, with no date and venue. Success action will be carried out.
+      Expected: Wedding added with first person in the persons list set as client, with no date and venue. Success action will be carried out.<br><br>
 
-   1. Test case: `addw`
+   1. Test case: `addw`<br>
       Test case: `addw n/Church Wedding`<br>
       Test case: `addw c/1`<br>
-      Expected: No wedding added. Addw Command format is shown in the status messgae.
+      Expected: No wedding added. Addw Command format is shown in the status message.<br><br>
 
     1. Test case: `addw n/Wedding 1 c/1`<br>
-       Expected: No wedding is added. Restrictions on WEDDING NAME is shown in the status message.
+       Expected: No wedding is added. Restrictions on WEDDING NAME is shown in the status message.<br><br>
 
    1. Test case: `addw n/Wedding c/1.5`<br>
-      Expected: No wedding is added. CLIENT input options are shown in the status message.
+      Expected: No wedding is added. CLIENT input options are shown in the status message.<br><br>
 
    1. Test case: `addw n/Wedding c/1 d/2024-13-50`<br>
-      Expected: No wedding is added. Restrictions on DATE is shown in the status message.
+      Expected: No wedding is added. Restrictions on DATE is shown in the status message.<br><br>
 
    1. Test case: `addw n/Wedding c/1 v/`<br>
-      Expected: No wedding is added. Restrictions on VENUE is shown in the status message.
+      Expected: No wedding is added. Restrictions on VENUE is shown in the status message.<br><br>
 
     1. Test case: `addw n/Church Wedding c/0`<br>
        Test case: `addw n/Church Wedding c/x` (where x is a negative number) <br>
-        Expected: No wedding added. Error message on x is not a non-zero unsigned integer.
+        Expected: No wedding added. Error message on x is not a non-zero unsigned integer.<br><br>
 
-    1. Test case: `addw n/Church Wedding c/x` (where x is larger than the size of the wedding list)
-        Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.
+    1. Test case: `addw n/Church Wedding c/x` (where x is larger than the size of the wedding list)<br>
+        Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
+
+#### Inputting CLIENT using NAME
 
     1. Test case: `addw n/Church Wedding c/Alice`
-       Expected (No duplicated Alice): Wedding added with contact having name field containing Alice set to be client. Details of the added wedding is displayed on the status message.
-       Expected (Duplicated Alice): No wedding added. Person list is filtered to show contacts with names containing Alice. Status message prompts user to re-input CLIENT using index shown in the newly filtered list.
-       Expected (No Alice): No wedding added. Error message states that the person inputted does not exist in the address book.
+       Expected (No duplicated Alice): Wedding added with contact having name field containing Alice set to be client. Details of the added wedding is displayed on the status message.<br>
+       Expected (Duplicated Alice): No wedding added. Person list is filtered to show contacts with names containing Alice. Status message prompts user to re-input CLIENT using index shown in the newly filtered list.<br>
+       Expected (No Alice): No wedding added. Error message states that the person inputted does not exist in the address book.<br><br>
 
 ### Editing a Wedding
 Success action: When wedding is successfully edited, the details of the updated wedding is shown in the status message and reflected in the wedding list.
 
-1. Editing a Wedding with all persons and weddings shown.
+1. Editing a Wedding with all persons and weddings shown.<br>
 
-    1. Prerequisites: List all contacts and weddings using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts and weddings using the `list` command. Multiple persons in the list.<br><br>
 
     1. Test case: `editw w/1 [n/NAME] [d/DATE] [v/VENUE]`<br>
-       Expected: First wedding in list is edited with the given inputs. Success action will be carried out.
+       Expected: First wedding in list is edited with the given inputs. Success action will be carried out.<br><br>
 
     1. Test case: `editw`<br>
        Test case: `editw w/1`<br>
        Test case: `editw w/1 c/1` <br>
-       Expected: No wedding added. Editw Command format is shown in the status messgae.
+       Expected: No wedding added. Editw Command format is shown in the status messgae.<br><br>
 
     1. Test case: `editw w/0 [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]`<br>
        Test case: `editw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is a negative number) <br>
-       Expected: No wedding added. Error message on x is not a non-zero unsigned integer.
+       Expected: No wedding added. Error message on x is not a non-zero unsigned integer.<br><br>
 
-    1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)
-       Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.
+    1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)<br>
+       Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
 
 ### Saving data
 
