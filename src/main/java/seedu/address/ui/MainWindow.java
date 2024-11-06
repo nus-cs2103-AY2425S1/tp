@@ -174,6 +174,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Provides a convenient avenue to reset filteres in the restaurant list panel.
+     * It's pretty much an alias for the "list" command.
+     */
+    @FXML
+    private void handleResetFilters() {
+        try {
+            executeCommand("list");
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: list");
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
     public RestaurantListPanel getPersonListPanel() {
         return restaurantListPanel;
     }
