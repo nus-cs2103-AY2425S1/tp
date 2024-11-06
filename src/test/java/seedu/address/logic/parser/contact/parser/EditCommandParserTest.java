@@ -9,14 +9,24 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ATTENDEE;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_SPONSOR;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_VENDOR;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_VOLUNTEER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATTENDEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_SPONSOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VENDOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VOLUNTEER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -158,33 +168,44 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB;
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB
+                + VALID_TELEGRAM_AMY + VALID_ROLE_ATTENDEE;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_ROLE_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
     }
 
-
-
     @Test
     public void parseRolesforEdit_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + " r/attendee";
+        String userInput = targetIndex.getOneBased() + " " + ROLE_DESC_ATTENDEE;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    @Test
+    public void parseMultipleRolesforEdit_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + " " + ROLE_DESC_ATTENDEE + " "
+                            + ROLE_DESC_SPONSOR + " " + ROLE_DESC_VENDOR + " " + ROLE_DESC_VOLUNTEER;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withRoles(VALID_ROLE_ATTENDEE, VALID_ROLE_SPONSOR, VALID_ROLE_VENDOR, VALID_ROLE_VOLUNTEER).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }

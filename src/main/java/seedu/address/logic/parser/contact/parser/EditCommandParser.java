@@ -52,8 +52,9 @@ public class EditCommandParser implements Parser<EditCommand> {
                     EditCommand.MESSAGE_USAGE), pe);
         }
 
+        // Disallow duplicates for all prefixes except roles, since one person can have multiple roles
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TELEGRAM, PREFIX_ROLE);
+                PREFIX_TELEGRAM);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
