@@ -244,10 +244,15 @@ The sequence diagram shows how an entity command is executed:
 
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
+<br>
 
-### Edit Person feature
+### General Design Considerations
 
-#### Design considerations
+<br>
+
+### Command-Specific Design Considerations
+
+#### Edit Person feature
 
 **Aspect: Check if the person with `personId` exists before editing**
 - This is to ensure no unwanted errors occur while editing the person and helps to maintain data integrity.
@@ -261,11 +266,9 @@ The sequence diagram shows how an entity command is executed:
   
 <br>
 
-### Clear Person feature
+#### Clear Person feature
 
-#### Design considerations
-
-**Aspect: Should the `clear person` command also delete all the appointments**
+**Aspect: Whether the `clear person` command also delete all the appointments**
 - **Alternative 1 (current choice):** The `clear person` command should also clear all appointments.
   - Pros: This prevents the case where the appointments are linked to deleted personIds which do not exist. Hence, this prevents confusion for users.
 - **Alternative 2 :** The `clear person` command does not clear all appointments.
@@ -273,11 +276,9 @@ The sequence diagram shows how an entity command is executed:
   
 <br>
 
-### Add appointment feature
+#### Add appointment feature
 
-#### Design considerations
-
-**Aspect: Should we implement as `addAppt` or `add appt`**
+**Aspect: Whether we implement as `addAppt` or `add appt`**
 - **Alternative 1 (Current choice):** Implement the add appointment feature as `add appt`
   - Pros: Allows us to use the existing infrastructure, just have to add code to detect whether the entity is `appt` or not.
   - Cons: Adds extra code to the file since more arguments need to be parsed, hence there is a chance of SLAP being violated.
@@ -288,18 +289,14 @@ Later, we decided to you the same infrastructure for all the command types.
 
 <br>
 
-### Edit Appointment feature
-
-#### Design considerations
+#### Edit Appointment feature
 
 **Aspect: Check if the appointment with appointment id exists before editing**
 - This is to ensure no unwanted errors occur while editing the appointment.
 
 <br>
 
-### Find Appointment feature
-
-#### Design considerations
+#### Find Appointment feature
 
 **Aspect: How to show find appointment.**
 
@@ -313,9 +310,7 @@ Later, we decided to you the same infrastructure for all the command types.
 
 <br>
 
-### Clear Appointment feature
-
-#### Design considerations
+#### Clear Appointment feature
 
 **Aspect**: How appointments are cleared
 
