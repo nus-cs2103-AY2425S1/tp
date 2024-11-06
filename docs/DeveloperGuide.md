@@ -155,11 +155,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -228,16 +228,16 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Current Implementation:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 1:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+
 
 ### \[Proposed\] Data archiving
 
@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
 | `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
 | `* * *`  | user    | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
-*{More to be added}*
+
 
 ### Use cases
 
@@ -549,18 +549,24 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
+    2. Open up a terminal, and run the following command: java -jar AgentConnect.jar   
+       - Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. Saving window preferences
 
-1. Saving window preferences
+   i. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   ii. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person with all fields filled
+
+    1. Prerequisites: None
+    2. Test case: `add n/Jason Cheng p/98765432 e/jasoncheng@gmail.com addr/311, Clementi Ave 2, #02-25 b/1990-10-10 appt/2024-12-12 12:00`
+
 
 ### Deleting a person
 
