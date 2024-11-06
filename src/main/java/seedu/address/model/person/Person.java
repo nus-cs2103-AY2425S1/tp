@@ -81,7 +81,7 @@ public abstract class Person {
 
     public String getRole() {
         return "Person";
-    }
+    };
 
     public int getId() {
         return id;
@@ -163,7 +163,15 @@ public abstract class Person {
                 .anyMatch(s -> s.subject.equalsIgnoreCase(subject.getSubject()));
     }
 
+    /**
+     * Adds a subject to the person's list of subjects.
+     *
+     * @param subject
+     */
     public void setSubject(Subject subject) {
+        if (subject == null) {
+            throw new NullPointerException();
+        }
         subjects.add(subject);
     }
 
