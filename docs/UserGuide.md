@@ -243,13 +243,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                          |
-|------------|---------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`    |
-| **Clear**  | `deleteall`                                                                                                               |
-| **Delete** | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                          |
-| **Edit**   | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678` |
-| **View**   | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                |
-| **List**   | `list`                                                                                                                    |
-| **Help**   | `help`                                                                                                                    |
-| **Undo**   | `undo`                                                                                                                    |
+| Action            | Format, Examples                                                                                                         |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`   |
+| **Clear**         | `deleteall`                                                                                                              |
+| **Delete**        | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                         |
+| **Edit**          | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678` |
+| **View**          | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                               |
+| **List**          | `list`                                                                                                                   |
+| **Help**          | `help`                                                                                                                   |
+| **Undo**          | `undo`                                                                                                                   
+| **Markat**        | `markat n/NAME d/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`    |
+| **Markpresentall** | `markpresentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                 |
+| **Markabsentall** | `Markabsentall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `unmarkpresentall tg/G17 d/2021-10-10`                                |
+| **Deleteat**      | `deleteat n/NAME d/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                   |
+| **Deleteatall**   | `deleteatall tg/TUTORIAL_GROUP d/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                       |
+| **Getat**         | `getat n/NAME d/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                         |
+| **Getattg**       | `getattg tg/TUTORIAL_GROUP d/DATE`<br> e.g., `getattg tg/G17 d/2021-10-10`                                               |
+| **Closeat**       | `closeat`                                                                                                                |

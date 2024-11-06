@@ -20,9 +20,9 @@ import seedu.address.model.student.TutorialGroup;
 /**
  * Marks the attendance of all students in a specified tutorial group as absent for a specified date.
  */
-public class UnmarkPresentAllCommand extends Command {
+public class MarkAbsentAllCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmarkpresentall";
+    public static final String COMMAND_WORD = "markabsentall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all students in the specified tutorial group "
             + "as absent for the specified date.\n"
@@ -42,7 +42,7 @@ public class UnmarkPresentAllCommand extends Command {
      * @param tutorialGroup Tutorial group for which attendance is being marked.
      * @param date Date that students are marked absent for.
      */
-    public UnmarkPresentAllCommand(TutorialGroup tutorialGroup, LocalDate date) {
+    public MarkAbsentAllCommand(TutorialGroup tutorialGroup, LocalDate date) {
         requireNonNull(tutorialGroup);
         requireNonNull(date);
         this.tutorialGroup = tutorialGroup;
@@ -99,11 +99,11 @@ public class UnmarkPresentAllCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UnmarkPresentAllCommand)) {
+        if (!(other instanceof MarkAbsentAllCommand)) {
             return false;
         }
 
-        UnmarkPresentAllCommand otherUnmarkPresentAllCommand = (UnmarkPresentAllCommand) other;
+        MarkAbsentAllCommand otherUnmarkPresentAllCommand = (MarkAbsentAllCommand) other;
         return tutorialGroup.equals(otherUnmarkPresentAllCommand.tutorialGroup)
                 && date.equals(otherUnmarkPresentAllCommand.date);
     }

@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new CloseWindowCommand object
  */
-public class CloseWindowCommandParser {
+public class CloseWindowCommandParser implements Parser<CloseWindowCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the CloseWindowCommand
      */
