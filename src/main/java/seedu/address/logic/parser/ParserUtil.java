@@ -186,6 +186,19 @@ public class ParserUtil {
         return new Grade(trimmedGrade);
     }
 
+    /**
+     * Capitalizes the first letter of each word in the given input string
+     * and converts all other letters to lowercase.
+     *
+     * This method splits the input string by spaces, then processes each word
+     * to ensure that the first character is uppercase while the remaining characters
+     * are lowercase. The modified words are then joined back into a single string.
+     *
+     * @param input The input string to be capitalized. Each word's first letter will be capitalized,
+     *              and the remaining letters will be in lowercase.
+     * @return A string with the first letter of each word capitalized and the rest in lowercase.
+     *         Leading and trailing whitespace is removed.
+     */
     public static String makeCapitalise(String input) {
         String[] words = input.split(" ");
         StringBuilder capitalised = new StringBuilder();
