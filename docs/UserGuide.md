@@ -63,6 +63,8 @@ AgentAssist is the **definitive desktop tool for credit card sales agents**. Mer
 
 Maximize your productivity, minimize your response time, and amplify your sales performance. With AgentAssist, you're not just keeping up with the competitive world of credit card sales — _you're setting the pace_.
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -81,6 +83,8 @@ AgentAssist is designed to enhance speed and efficiency, with a strong focus on 
 AgentAssist allows you to manage client data like names, phone numbers, emails, and job information. A basic understanding of these data fields will make it easier to add, edit, and filter client information.
 
 🎉 **By meeting these prerequisites, you'll be ready to make the most of AgentAssist’s fast, keyboard-driven interface and powerful data management features.** 🎉
+
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -145,6 +149,8 @@ Move the .jar file you downloaded into this folder.
 <img src="images/UiSplitView.png" alt="UISplitView">
 
 To learn more about how to use commands in AgentAssist, proceed to the next section.
+
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -229,19 +235,19 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
-| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                | **Case Sensitivity** |
-|----------|-----------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|----------------------|
-| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                 | ❌                    |
-| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                    |
-| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                      | ❌                    |
-| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                    |
-| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                   |
-| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                               | ❌                    |
+| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                 | **Case Sensitivity** |
+|----------|-----------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|----------------------|
+| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                  | ❌                    |
+| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                    | ❌                    |
+| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                       | ❌                    |
+| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                        | ❌                    |
+| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                        | ❌                    |
+| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive integer or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                    |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                         | ✔️                   |
+| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                        | ❌                    |
+| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                        | ❌                    |
+| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                        | ❌                    |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                                | ❌                    |
 
 > 💡 **Pro Tip:**
 >
@@ -285,6 +291,8 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 > 💡 **Pro Tip:**  
 > Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.  
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
+
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -725,6 +733,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 >
 > Incorrect data modifications may also cause unexpected behavior. **Only modify the data file if you're confident in doing so correctly.**
 
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -747,6 +756,8 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 ### What do the different status colors represent in the UI?
 Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Known issues
@@ -754,6 +765,8 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran' 
+
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -773,3 +786,5 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 | **Undo Command**           | `undo`                                                                                                                                    | `undo`                                                                                                              |
 | **Exit Application**       | `exit`                                                                                                                                    | `exit`                                                                                                              |
 | **Clear All Data**         | `clear`                                                                                                                                   | `clear`                                                                                                             |
+
+[↑ Return to Table of Contents](#table-of-contents)
