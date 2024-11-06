@@ -334,3 +334,115 @@ remark INDEX r/REMARK
 remark 1 r/Regular customer
 ```
 ![remarkcommandui.png](images/remarkcommandui.png)
+
+### **Remove Ingredient Command**
+Removes an existing ingredient from the bakery's ingredient catalogue.
+
+```bash
+removeIngredient NAME
+```
+- **Parameters:**
+    - `NAME`: The name of the ingredient to remove. This is a case-insensitive match for an existing ingredient in the ingredient catalogue.
+
+**Example:**
+```bash
+removeIngredient Flour
+```
+![removeIngredient.png](images%2FremoveIngredient.png)
+The Remove Ingredient Command enables bakery owners to delete an ingredient from their catalogue. This is useful for removing ingredients no longer used or mistakenly added. After execution, the system confirms the removal by displaying a success message.
+
+For instance, entering removeIngredient Flour will delete the ingredient "Flour" from the catalogue. Attempting to remove an ingredient that does not exist will result in an error message.
+![removeIngredientFail.png](images%2FremoveIngredientFail.png)
+
+
+### **Remove Pastry Command**
+Removes an exisiting pastry from the bakery's pastry catalogue.
+
+```bash
+removePastry NAME
+```
+- **Parameters:**
+    - `NAME`: The name of the pastry to remove. This is a case-insensitive match for an existing pastry in the pastry catalogue.
+
+**Example:**
+```bash
+removePastry Croissant
+```
+![removePastry.png](images%2FremovePastry.png)
+The Remove Pastry Command allows the bakery to maintain an up-to-date catalogue by removing pastries that are discontinued or incorrectly added. On successful removal, the system displays a confirmation message.
+
+For example, entering removePastry Croissant will remove "Croissant" from the catalogue. If the pastry does not exist, an error message will be shown.
+![removePastryFail.png](images%2FremovePastryFail.png)
+
+
+### **View IngredientCatalogue Command**
+Displays the current list of ingredients available in the bakery’s ingredient catalogue.
+
+```bash
+viewIngredientCatalogue
+```
+
+**Example:**
+```bash
+viewIngredientCatalogue
+```
+![viewIngredientCatalogue.png](images%2FviewIngredientCatalogue.png)
+The View Ingredient Catalogue Command provides a detailed list of all ingredients, including their IDs, names, and costs. This command ensures that bakery owners have a complete overview of the ingredients, helping in efficient decision-making.
+
+For instance, typing viewIngredientCatalogue displays the full catalogue for ingredient, enabling the bakery to verify all available ingredients in the catalogue.
+
+### **View PastryCatalogue Command**
+Displays the current list of pastries available in the bakery’s pastry catalogue.
+
+```bash
+viewPastryCatalogue
+```
+
+**Example:**
+```bash
+viewPastryCatalogue
+```
+![viewPastryCatalogue.png](images%2FviewPastryCatalogue.png)
+The View Pastry Catalogue Command provides a comprehensive view of all pastries in the bakery in one-go, including their IDs, names, price and ingredients with the costs. This command is vital for keeping track of the pastries offered to customers and ingredients needed to produce them. 
+
+For example, entering viewPastryCatalogue shows the complete list of pastries, ensuring that bakery owners are aware of the available pastries.
+
+### **View Inventory Command**
+Displays the current list of ingredients available in the bakery’s inventory. It is in the format of "ID, Name, Units".
+
+```bash
+viewInventory
+```
+
+**Example:**
+```bash
+viewInventory
+```
+![viewInventory.png](images%2FviewInventory.png)
+The View Inventory Command provides a detailed overview of the current inventory, including the stock levels of each ingredient. This command helps bakery owners manage stock efficiently, avoiding shortages or overstocking.
+
+For instance, typing viewInventory displays the inventory with the ingredient names, IDs, and available quantities, offering a clear snapshot of the bakery's stock levels.
+
+----------------------------------------------------------------------------------------------------------------------
+## Key New Features Summary
+
+Action | Format, Examples
+-------|------------------
+**Add Customer** | addCustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INFORMATION [t/TAG] <br> e.g., addCustomer n/John Doe p/12345678 e/john@example.com a/456 Pastry Street i/Allergic to dairy
+**Add Supplier** | addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG] <br> e.g., addSupplier n/Tim p/81234567 e=tim@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
+**Add Ingredient** | addIngredient NAME COST <br> e.g., addIngredient Flour 1.50
+**Add Pastry** | addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...] <br> e.g., addPastry Croissant 3.50 Flour Cream Sugar
+**Remove Ingredient** | removeIngredient NAME <br> e.g., removeIngredient Flour
+**Remove Pastry** | removePastry NAME <br> e.g., removePastry Croissant
+**Add Customer Order** | addCustomerOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addCustomerOrder 12345678 1 2 3
+**Delete Customer Order** | deleteCustomerOrder INDEX <br> e.g., deleteCustomerOrder 1
+**Add Supply Order** | addSupplyOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addSupplyOrder 98765432 1 2 3
+**Delete Supply Order** | deleteSupplyOrder INDEX <br> e.g., deleteSupplyOrder 1
+**View Orders** | viewOrder
+**View Ingredient Catalogue** | viewIngredientCatalogue
+**View Pastry Catalogue** | viewPastryCatalogue
+**View Inventory** | viewInventory
+**Check Pastry Stock** | checkPastryStock PASTRY <br> e.g., checkPastryStock Croissant
+**Check Ingredient Stock** | checkIngredientStock INGREDIENT <br> e.g., checkIngredientStock Flour
+**Mark Customer Order** | markCustomerOrder INDEX <br> e.g., markCustomerOrder 1
+**Mark Supplier Order** | markSupplierOrder INDEX <br> e.g., markSupplierOrder 1
