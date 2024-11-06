@@ -22,7 +22,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
   * [2.3 Notes on the Command Format](#2-3-notes-on-the-command-format)
 
 [3. Features](#3-features)
-  * [3.1 Student Management](#3-1-student-management)    
+  * [3.1 Student Management](#3-1-student-management)
     * [3.1.1 Adding a Student: `add`](#3-1-1-adding-a-student-add)
     * [3.1.2 Deleting a Student: `delete`](#3-1-2-deleting-a-student-delete)
     * [3.1.3 Updating a Student: `update`](#3-1-3-updating-a-student-update)
