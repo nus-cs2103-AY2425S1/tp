@@ -1,28 +1,28 @@
 package seedu.edulog.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.edulog.commons.util.ToStringBuilder;
 import seedu.edulog.logic.Messages;
 import seedu.edulog.model.Model;
-import seedu.edulog.model.student.NameContainsKeywordsPredicate;
 import seedu.edulog.model.student.StudentHasPaidPredicate;
 
 /**
- * Finds and lists all students in edulog book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Filters the students based on their payment status.
  */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the students and lists them based on "
+            + "specified payment status\n"
+            + "Parameters:  PAID\n"
+            + "OR UNPAID\n"
+            + "Example: " + COMMAND_WORD + "paid";
 
     private final StudentHasPaidPredicate predicate;
 
-    public FilterCommand(NameContainsKeywordsPredicate predicate) {
+    public FilterCommand(StudentHasPaidPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -45,8 +45,8 @@ public class FilterCommand extends Command {
             return false;
         }
 
-        FilterCommand otherFindCommand = (FilterCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FilterCommand otherFilterCommand = (FilterCommand) other;
+        return predicate.equals(otherFilterCommand.predicate);
     }
 
     @Override
