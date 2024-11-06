@@ -21,7 +21,7 @@ title: Developer Guide
     3. [Edit Person Feature](#edit-person-feature)
     4. [List Feature](#list-feature)
     5. [Find Person Feature](#find-person-feature)
-    6. [Filter Person Feature](#filter-person-feature)
+    6. [Filter Status Feature](#filter-status-feature)
     7. [View Person Feature](#view-person-feature)
     8. [Summary Feature](#summary-feature)
     9. [Help Feature](#help-feature)
@@ -473,7 +473,7 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 ---
 
-### Filter Person Feature
+### Filter Status Feature
 
 #### **Command Feature**
 
@@ -481,15 +481,15 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 #### **Command Feature Purpose**
 
-The `filter` command allows users to filter specific people in the `HRPlatform` based on their application status.
+The `filter` command allows users to filter people in the `HRPlatform` based on their application status.
 
 #### Key Components
-- `FilterCommand`: Executes the filter operation based on the user's input.
-- `FilterCommandParser`: Parses user input to create an `FilterCommand` object.
-- `LogicManager`: Invokes the `FilterCommand` to execute the filter operation.
+- `FilterStatusCommand`: Executes the filter operation based on the user's input.
+- `FilterStatusCommandParser`: Parses user input to create an `FilterStatusCommand` object.
+- `LogicManager`: Invokes the `FilterStatusCommand` to execute the filter operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Predicate`: Represents the status for finding persons whose status matches in TalentSG.
-- `HRPlatformParser`: Creates an `FilterCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `FilterStatusCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -498,21 +498,21 @@ To help you understand how the `filter` command works, here is a list of steps i
 We will be using the user input `filter Interviewed` as an example.
 
 1. The user executes the command `filter Interviewed`, intending to find all persons whose name contains the keyword.
-2. The `FilterCommandParser` interprets the input.
-3. An `FilterCommand` object is created.
+2. The `FilterStatusCommandParser` interprets the input.
+3. An `FilterStatusCommand` object is created.
 4. The `LogicManager` invokes the execute method of FindCommand.
-5. The execute method of `FilterCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
-6. The execute method of `FilterCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
+5. The execute method of `FilterStatusCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
+6. The execute method of `FilterStatusCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FilterStatusCommand`.
 7. The UI reflects this updated filtered `Person` list.
 
 :information_source: **Note**:
 
 - At step 2, if an invalid status is detected after `filter` (e.g. `filter Helloo`), an error will be shown and the sequence of action is terminated.
 
-#### `FindCommand` Implementation Sequence Diagram
+#### `FilterStatusCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
-<img src="images/FilterCommandSequenceDiagram.png" width="800" />
+<img src="images/FilterStatusCommandSequenceDiagram.png" width="800" />
 
 ---
 
@@ -550,7 +550,7 @@ We will be using the user input `delete 2` as an example.
 
 - At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
 
-#### `View Command` Implementation Sequence Diagram
+#### `ViewCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
 
 <img src="images/ViewCommandSequenceDiagram.png" width="800" />
@@ -668,8 +668,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | recruiter         | delete candidate profiles                                         | remove candidates who are no longer considered for positions                |
 | `* * *` | HR professional   | view a list of all candidates                                     | easily access any candidate’s details on demand                             |
 | `* * *` | recruiter         | search for candidates by specific criteria (e.g., skills)         | quickly find suitable candidates for various roles                          |
-| `* * *` | HR professional   | schedule and manage interviews                                    | organise the recruitment process efficiently                                |
-| `* * *` | recruiter         | set reminders for interviews                                      | ensure no interview is missed                                               |
 | `* *`  | recruiter         | track the status of a candidate through different recruitment stages | maintain an organised overview of the recruitment pipeline                  |
 | `* *`  | HR professional   | import candidate data from external sources                       | streamline the process of adding new candidates                             |
 | `* *`  | recruiter         | export data on candidates                                         | prepare reports or share data with colleagues                               |
@@ -1143,6 +1141,8 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
+
+We intend to accommodate interview scheduling in the future.
 
 ---
 
