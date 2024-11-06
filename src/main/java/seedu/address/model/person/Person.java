@@ -79,9 +79,7 @@ public abstract class Person {
         return hours;
     }
 
-    public String getRole() {
-        return "Person";
-    }
+    public abstract String getRole();
 
     public int getId() {
         return id;
@@ -109,25 +107,25 @@ public abstract class Person {
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && hours.equals(otherPerson.hours)
-                && subjects.equals(otherPerson.subjects);
-    }
+//    @Override
+//    public boolean equals(Object other) {
+//        if (other == this) {
+//            return true;
+//        }
+//
+//        // instanceof handles nulls
+//        if (!(other instanceof Person)) {
+//            return false;
+//        }
+//
+//        Person otherPerson = (Person) other;
+//        return name.equals(otherPerson.name)
+//                && phone.equals(otherPerson.phone)
+//                && email.equals(otherPerson.email)
+//                && address.equals(otherPerson.address)
+//                && hours.equals(otherPerson.hours)
+//                && subjects.equals(otherPerson.subjects);
+//    }
 
     @Override
     public int hashCode() {
@@ -164,6 +162,9 @@ public abstract class Person {
     }
 
     public void setSubject(Subject subject) {
+        if (subject == null) {
+            throw new NullPointerException();
+        }
         subjects.add(subject);
     }
 
