@@ -67,10 +67,10 @@ public class StringUtil {
     }
 
     /**
-     * Normalises the tag name by removing spaces and converting to lowercase.
+     * Normalises the {@code String} by removing spaces and converting to lowercase.
      */
-    public static String normalise(String tagName) {
-        requireNonNull(tagName);
-        return tagName.replaceAll(" ", "").toLowerCase();
+    public static String normalise(String str) {
+        requireNonNull(str);
+        return str.replaceAll(" ", "").toLowerCase();
     }
 }
