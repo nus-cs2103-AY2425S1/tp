@@ -8,6 +8,8 @@ title: User Guide
 
 ---
 
+{:toc}
+
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 A person can have any number of tags (including 0)
 </div>
@@ -530,7 +532,7 @@ Example usages
 Invalid usages
 
 * Unmarking attendance of student who does not take specified tutorial
-    * Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial
+    * *Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial*
 * Format errors, check [here](#12-format-errors)
 
 </div>
