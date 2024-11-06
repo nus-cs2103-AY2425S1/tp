@@ -21,14 +21,33 @@ public class RedoCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_undo_throwsCommandException() {
+    public void execute_redo_throwsCommandException() {
         RedoCommand redoCommand = new RedoCommand();
 
         assertThrows(CommandException.class, RedoCommand.MESSAGE_REDO_FAILURE, () -> redoCommand.execute(model));
     }
 
     @Test
-    public void execute_undo_success() throws CommandException {
+    public void redoList_clear_afterCommit() throws CommandException {
+        RedoCommand redoCommand = new RedoCommand();
+
+        // Here we need to call undo function and then call another function for this test case
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+
+        deleteCommand.execute(model);
+        model.saveAddressBookVersion();
+
+        UndoCommand undoCommand = new UndoCommand();
+        undoCommand.execute(model);
+
+        deleteCommand.execute(model);
+        model.saveAddressBookVersion();
+
+        assertThrows(CommandException.class, RedoCommand.MESSAGE_REDO_FAILURE, () -> redoCommand.execute(model));
+    }
+
+    @Test
+    public void execute_redo_success() throws CommandException {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         deleteCommand.execute(model);
