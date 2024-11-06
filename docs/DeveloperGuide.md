@@ -310,57 +310,21 @@ Priorities:
 
 (For all use cases below, the **System** is *Bridal Boss* and the **Actor** is the *Wedding Organizer*.)
 
-#### **Use Case: Add a New Vendor to a Wedding**
-
-**MSS:**
-
-1. Wedding Organizer selects the wedding they are managing.
-2. Bridal Boss displays the details of the selected wedding.
-3. Wedding Organizer requests to add a new vendor.
-4. Bridal Boss prompts for vendor details.
-5. Wedding Organizer enters the vendor's details (e.g., name, contact information, services provided).
-6. Bridal Boss saves the vendor information and associates it with the selected wedding.
-7. Bridal Boss confirms that the vendor has been added.
-
-   Use case ends.
+#### **Use Case: Delete a Contact**
+1. Wedding Organizer displays person list containing contacts that they wish to set as client for wedding.
+2. Wedding Organizer deletes a contact using the delete command.
 
 **Extensions:**
 
-- **4a.** Wedding Organizer cancels the operation.
-    - **4a1.** Bridal Boss returns to the wedding details view.
+- **2a.** Person name/index is not in the displayed list.
+    - **2a1.** Error message displayed in result display.
         - Use case ends.
-
-- **5a.** Wedding Organizer enters incomplete or invalid vendor details.
-    - **5a1.** Bridal Boss displays an error message indicating the problem.
-    - **5a2.** Wedding Organizer re-enters the vendor's details.
-        - Steps 5a1-5a2 are repeated until the data entered are valid.
-        - Use case resumes from step 6.
-
-#### **Use Case: Update Client Preferences**
-
-**MSS:**
-
-1. Wedding Organizer selects the client's wedding profile.
-2. Bridal Boss displays the client's current preferences.
-3. Wedding Organizer requests to update client preferences.
-4. Bridal Boss prompts for the updated preferences.
-5. Wedding Organizer enters the updated preferences.
-6. Bridal Boss saves the updated preferences.
-7. Bridal Boss confirms that the preferences have been updated.
-
-   Use case ends.
-
-**Extensions:**
-
-- **4a.** Wedding Organizer cancels the operation.
-    - **4a1.** Bridal Boss returns to the client's wedding profile without making changes.
+- **2b.** Duplicate person name
+    - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **2b2.** Use case resumes from step 2.
+- **2c.** Person is a client of a wedding.
+    - **2c1.** Error message is displayed in result display.
         - Use case ends.
-
-- **5a.** Wedding Organizer enters invalid preference data.
-    - **5a1.** Bridal Boss displays an error message indicating the issue.
-    - **5a2.** Wedding Organizer re-enters the updated preferences.
-        - Steps 5a1-5a2 are repeated until the data entered are valid.
-        - Use case resumes from step 6.
 
 #### **Use Case: Filter Contacts by Tags**
 
@@ -388,6 +352,39 @@ Priorities:
     - **3b2.** Wedding Organizer re-enters the tag(s).
         - Steps 3b1-3b2 are repeated until valid tag(s) are entered.
         - Use case resumes from step 4.
+
+#### **Use Case: Add a Wedding**
+
+**MSS:**
+
+1. Wedding Organizer displays person list containing contacts that they wish to set as client for wedding.
+2. Wedding Organizer adds a wedding using the addw command.
+   Use case ends.
+
+**Extensions:**
+
+- **2a.** Person/Wedding name/index is not in the displayed list.
+    - **2a1.** Error message displayed in result display.
+        - Use case ends.
+- **2b.** Duplicate client name
+    - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **2b2.** Use case resumes from step 2.
+
+#### **Use Case: Assign a contact to a Wedding**
+
+**MSS:**
+
+1. Wedding Organizer displays person and wedding list containing contact and wedding that they need.
+2. Wedding Organizer assigns the person (by name or index) to the wedding (by index) using the assign command.
+   Use case ends.
+
+**Extensions:**
+- **2a.** Person/Wedding name/index is not in the displayed list.
+    - **2a1.** Error message displayed in result display.
+        - Use case ends.
+- **2b.** Duplicate name
+    - **2b1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **2b2.** Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
