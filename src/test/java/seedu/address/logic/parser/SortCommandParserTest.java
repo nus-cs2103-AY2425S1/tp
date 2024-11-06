@@ -29,7 +29,7 @@ public class SortCommandParserTest {
     @Test
     public void parse_invalidTagFormat_throwsParseException() {
         assertParseFailure(parser, "t\\n@me ASC",
-                String.format(Tag.MESSAGE_CONSTRAINTS));
+                String.format(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC));
     }
     //Invalid Order
     @Test

@@ -106,16 +106,21 @@ public class ParserUtil {
         String trimmedTag = tag.trim();
         if (trimmedTag.contains(":")) {
             String[] tagKeyValue = trimmedTag.split(":");
+            // Account for the possibility that the tag is just a lone colon.
+            // i.e. edit 1 t\:
+            if (tagKeyValue.length == 0) {
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY);
+            }
             if (!Tag.isValidTagName(tagKeyValue[0])) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
             }
             if (!Tag.isValidTagName(tagKeyValue[1])) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
             }
             return new Tag(tagKeyValue[0], tagKeyValue[1]);
         } else {
             if (!Tag.isValidTagName(trimmedTag)) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
             }
             return new Tag(trimmedTag);
         }
