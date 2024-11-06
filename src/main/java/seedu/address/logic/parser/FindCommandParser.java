@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Subject;
 import seedu.address.model.student.predicate.LevelContainsKeywordsPredicate;
 import seedu.address.model.student.predicate.NameContainsKeywordsPredicate;
@@ -43,23 +45,44 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (isByName) {
             String toFind = argMultimap.getValue(PREFIX_NAME).get();
-            String[] nameKeywords = toFind.split("\\s+");
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+
+            // Code below conducts checks usually done in parse,
+            // but ParserUtil is not used as Name objects are not needed.
+            requireNonNull(toFind);
+            String[] trimmedNames = toFind.trim().split("\\s+");
+            if (Arrays.stream(trimmedNames).anyMatch(name -> !Name.isValidName(name))) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(trimmedNames)));
         } else if (isByLevel) {
             String toFind = argMultimap.getValue(PREFIX_LEVEL).get();
-            String[] levelKeywords = {toFind};
 
-            if (Arrays.stream(levelKeywords).anyMatch(level -> !Level.isValidLevelName(level))) {
+            // Code below conducts checks usually done in parse,
+            // but ParserUtil is not used as Level object is not needed.
+            requireNonNull(toFind);
+            String trimmedLevel = toFind.trim();
+            if (!Level.isValidLevelName(trimmedLevel)) {
                 throw new ParseException(Level.MESSAGE_CONSTRAINTS);
             }
-            return new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList(levelKeywords)));
+
+            // Remove spaces within and make all upper case
+            trimmedLevel = String.join(" ", trimmedLevel.split("\\s+")).toUpperCase();
+
+            String[] trimmedLevels = {trimmedLevel};
+            return new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList(trimmedLevels)));
         } else {
             String toFind = argMultimap.getValue(PREFIX_SUBJECT).get();
-            String[] subjectKeywords = toFind.split("\\s+");
-            if (Arrays.stream(subjectKeywords).anyMatch(subject -> !Subject.isValidSubjectName(subject))) {
+
+            // Code below conducts checks usually done in parse,
+            // but ParserUtil is not used as Subject objects are not needed.
+            requireNonNull(toFind);
+            String[] trimmedSubjects = toFind.trim().split("\\s+");
+            if (Arrays.stream(trimmedSubjects).anyMatch(subject -> !Subject.isValidSubjectName(subject))) {
                 throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
             }
-            return new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList(subjectKeywords)));
+
+            return new FindCommand(new SubjectContainsKeywordsPredicate(Arrays.asList(trimmedSubjects)));
         }
     }
 }
