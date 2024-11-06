@@ -19,4 +19,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_VIEW = new Prefix("view/");
     public static final Prefix PREFIX_DELETE = new Prefix("del/");
     public static final Prefix PREFIX_ADD = new Prefix("add/");
+    public static final Prefix PREFIX_EDIT = new Prefix("edit/");
 }

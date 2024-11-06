@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,22 +36,26 @@ public class NotesWindow {
 
         TextArea notesTextArea = new TextArea(person.getNotes().toString());
         notesTextArea.setWrapText(true);
-        notesTextArea.setStyle("-fx-font-size: 13px; -fx-background-color: #f5f5f5;");
+        notesTextArea.setStyle("-fx-control-inner-background: #C0C0C0; -fx-font-size: 13px;");
 
         VBox layout = new VBox(10, instructionLabel, notesTextArea);
         layout.setPadding(new Insets(15, 15, 15, 15));
-        layout.setStyle("-fx-background-color: #ffffff;");
+        layout.setStyle("-fx-background-color: #C0C0C0;");
 
-        notesTextArea.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER && event.isShiftDown()) {
-                int caretPosition = notesTextArea.getCaretPosition();
-                notesTextArea.insertText(caretPosition, "\n");
-                event.consume();
-            } else if (event.getCode() == KeyCode.ENTER) {
-                updatedNotes = notesTextArea.getText();
-                stage.close();
+        notesTextArea.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (event.isShiftDown()) {
+                    int caretPosition = notesTextArea.getCaretPosition();
+                    notesTextArea.insertText(caretPosition, "\n");
+                    event.consume();
+                } else {
+                    updatedNotes = notesTextArea.getText();
+                    stage.close();
+                    event.consume();
+                }
             }
         });
+
 
         Scene scene = new Scene(layout, 400, 250);
         stage.setScene(scene);
