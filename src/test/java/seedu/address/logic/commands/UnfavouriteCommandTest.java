@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -26,11 +25,10 @@ public class UnfavouriteCommandTest {
     @Test
     public void execute_unfavouriteSuccessful() {
         Restaurant restaurantToUnfavourite = model.getFilteredRestaurantList()
-                .get(INDEX_SECOND_RESTAURANT.getZeroBased());
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
 
         model.favouriteRestaurant(restaurantToUnfavourite);
 
-        // Un-favourites the first restaurant which is the restaurantToUnfavourite
         UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_FIRST_RESTAURANT);
 
         Restaurant expectedRestaurantToUnfavourite = new Restaurant(
@@ -53,8 +51,8 @@ public class UnfavouriteCommandTest {
         // Verify that the restaurant is not marked as favourite anymore
         assertFalse(restaurantToUnfavourite.isFavourite());
 
-        // Verify that the restaurant is no longer at index 0 in the actual model's list
-        assertNotEquals(restaurantToUnfavourite, model.getFilteredRestaurantList().get(0));
+        // Verify that the recently un-favourite restaurant is in its correct position in alphabetical order
+        assertEquals(restaurantToUnfavourite, model.getFilteredRestaurantList().get(0));
     }
 
     @Test
