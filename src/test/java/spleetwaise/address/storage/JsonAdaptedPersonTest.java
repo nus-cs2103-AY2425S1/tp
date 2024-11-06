@@ -17,6 +17,7 @@ import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.exceptions.IllegalValueException;
 import spleetwaise.commons.testutil.Assert;
+import spleetwaise.commons.util.IdUtil;
 
 public class JsonAdaptedPersonTest {
 
@@ -47,6 +48,15 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
                 null, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidIdFormat_throwsIllegalValueException() {
+        // Test an invalid ID format scenario
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                "invalid-id", VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK, VALID_TAGS);
+        String expectedMessage = IdUtil.MESSAGE_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
