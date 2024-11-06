@@ -24,5 +24,21 @@ public class BookmarkTest {
         // different values -> returns false
         assertFalse(bookmarked.equals(new Bookmark(false)));
         assertFalse(notBookmarked.equals(new Bookmark(true)));
+
+        // different types -> returns false
+        assertFalse(bookmarked.equals(1));
+        assertFalse(notBookmarked.equals(2));
+    }
+
+    @Test
+    public void prettyStringTest() {
+        String EXPECTED_BOOKMARKED_INDICATOR = "Bookmarked";
+        String EXPECTED_NOT_BOOKMARKED_INDICATOR = "Not bookmarked";
+
+        Bookmark bookmarked = new Bookmark(true);
+        Bookmark notBookmarked = new Bookmark(false);
+
+        assertTrue(bookmarked.prettyString().equals(EXPECTED_BOOKMARKED_INDICATOR));
+        assertTrue(notBookmarked.prettyString().equals(EXPECTED_NOT_BOOKMARKED_INDICATOR));
     }
 }
