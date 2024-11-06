@@ -346,10 +346,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. KonTActs identifies that there is no such contact.
 
   - 3a1. KonTActs requests for the correct data.
-  - 3a2. TA enters the correct data.
+  - 3a2. TA enters the new data.
   - Steps 3a1-3a2 are repeated until the data entered are correct.
 
     Use case resumes from step 4.
+  
+- 4a. KonTActs identifies that the data to be updated is invalid.
+
+    - 4a1. KonTActs requests for the correct data.
+    - 4a2. TA enters new data
+    - Steps 4a1-4a2 are repeated until the data entered are correct.
+
+      Use case resumes from step 5.
 
 <br>
 
@@ -430,26 +438,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User chooses to sort the students based on their proficiency.
 2. User enters the sort command.
 3. KonTActs returns the list of students in the sorted order.
+
    Use case ends.
 
    <br>
 
 **Use case: UC09 - Export contacts**
 
+**Precondition**
+
+1. User have permission to write to the provided path
+
 **MSS**
 
 1. User chooses to export the contact list.
-2. KonTActs requests for the file path.
-3. User gives the file path.
-4. KonTActs exports the contact list in CSV format and shows successful export.
+2. User provides the file path. 
+3. KonTActs exports the contact list in CSV format and shows the number of people successfully exported.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. User selects an unsupported format.
+- 2a. User enters an invalid path (e.g .pdf).
 
-  - 2a1. KonTActs displays an error message and provides the list of formats that are supported.
+  - 2a1. KonTActs displays an error message and request for user to provide a valid file path (e.g. must end with .csv)
+  - 2a2. User provides new file path
+  - Step 2a1-2a2 are repeated until file path is valid
 
     Use case resumes from step 3.
 
@@ -478,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Precondition**
 
-1. The student that the user wants to tag exists.
+1. The student that the user wants to tag is in KonTActs.
 
 **MSS**
 
@@ -522,27 +536,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
-**Use case: UC13 - Import contacts**
+**Use case: UC13 - Import contacts from CSV file**
+
+**Precondition**
+
+1. The file is in CSV format and ends with .csv
+2. The file contains valid data of at least 1 person
+3. The header of the file is in a specific sequence 
+("Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent")
 
 **MSS**
 
 1. User chooses to import the contact list.
-2. KonTActs requests for the file path.
-3. User gives the desired file (by its path).
-4. KonTActs import the contact list from the specified file path and shows successful import.
+2. User gives the desired file (by its path).
+3. KonTActs import the contact list from the specified file path and shows successful import.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs detects an unsupported, corrupted file or a file without the valid headers.
+- 2a. KonTActs detects an unsupported, corrupted file or a file without the valid headers.
 
-  - 3a1. KonTActs indicates it is unable to import from that file and requests for a new file.
-  - 3a2. User gives a new file.
-  - Steps 3a1 - 3a2 are repeated until KonTActs is able to import contacts from the file.
+  - 2a1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+  - 2a2. User provides a new file path
+  - Steps 2a1 - 2a2 are repeated until KonTActs is able to import contacts from the file.
 
-    Use case resumes from step 4.
+    Use case resumes from step 3.
 
+- 2b. KonTActs detects invalid content in CSV file (e.g. Name/Email that does not comply with requirement, 
+Duplicate names)
+
+    - 2b1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+    - 2b2. User provides a new file path or update their CSV file
+    - Steps 2b1 - 2b2 are repeated until KonTActs is able to import contacts from the file.
+
+      Use case resumes from step 3.
 - \*a. At any time, User chooses to cancel the import.
 
   - \*a1. KonTActs stops the import.
@@ -583,11 +611,11 @@ Actor: TA
 
 * **Contact**: An individual (e.g. student) stored in the system, typically having details regarding them such as their name, github username and etc.
 
-* **Easy to use for new users**: intuitive commands that are easy to understand and UI that is easy to navigate.
+* **Easy to use for new users**: Intuitive commands that are easy to understand and UI that is easy to navigate.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 
-* **Average typing speed**: about 40 words per minute.
+* **Average typing speed**: About 40 words per minute.
 
 * **Uptime**: The system should be operational during that period of time.
 
