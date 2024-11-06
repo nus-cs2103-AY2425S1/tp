@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -70,18 +71,6 @@ public class UniqueLessonListTest {
     }
 
     @Test
-    public void getSubject_null_throwsNullPointerException() {
-        UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        assertThrows(NullPointerException.class, () -> uniqueLessonList.getSubject(null, null));
-    }
-
-    @Test
-    public void getSubject_lessonNotInList_returnsNull() {
-        UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        assertNull(uniqueLessonList.getSubject(ALICE, DANIEL));
-    }
-
-    @Test
     public void getAssociatedPeople_null_throwsNullPointerException() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         assertThrows(NullPointerException.class, () -> uniqueLessonList.getAssociatedPeople(null));
@@ -90,20 +79,23 @@ public class UniqueLessonListTest {
     @Test
     public void getAssociatedPeople_singleLesson_returnsAssociatedPeople() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
-        ArrayList<Person> expected = new ArrayList<>();
-        expected.add(DANIEL);
+        Subject subject =  new Subject("Math");
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, subject));
+        ArrayList<Map.Entry<Person, Subject>> expected = new ArrayList<>();
+        expected.add(Map.entry(DANIEL, subject));
         assertEquals(uniqueLessonList.getAssociatedPeople(ALICE), expected);
     }
 
     @Test
     public void getAssociatedPeople_multipleLessons_returnsAssociatedPeople() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
-        uniqueLessonList.add(new Lesson(ALICE, CLARA, new Subject("English")));
-        ArrayList<Person> expected = new ArrayList<>();
-        expected.add(DANIEL);
-        expected.add(CLARA);
+        Subject math =  new Subject("Math");
+        Subject english =  new Subject("English");
+        uniqueLessonList.add(new Lesson(ALICE, DANIEL, math));
+        uniqueLessonList.add(new Lesson(ALICE, CLARA, english));
+        ArrayList<Map.Entry<Person, Subject>> expected = new ArrayList<>();
+        expected.add(Map.entry(DANIEL, math));
+        expected.add(Map.entry(CLARA, english));
         assertEquals(uniqueLessonList.getAssociatedPeople(ALICE), expected);
     }
 

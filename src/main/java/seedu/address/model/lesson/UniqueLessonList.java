@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -14,7 +15,6 @@ import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -46,17 +46,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
         internalList.add(toAdd);
     }
 
-    public Subject getSubject(Person tutor, Person tutee) {
-        requireAllNonNull(tutor, tutee);
-        if (tutor instanceof Tutor) {
-            return internalList.stream().filter(item -> item.getTutor().equals(tutor) && item.getTutee().equals(tutee))
-                    .map(Lesson::getSubject).findFirst().orElse(null);
-        } else {
-            return internalList.stream().filter(item -> item.getTutor().equals(tutee) && item.getTutee().equals(tutor))
-                    .map(Lesson::getSubject).findFirst().orElse(null);
-        }
-    }
-
     /**
      * Removes the equivalent lesson from the list.
      * The lesson must exist in the list.
@@ -82,23 +71,25 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns a list of associated people (Tutors or Tutees) for the given person.
-     * If the given person is a Tutor, it returns all associated Tutees.
-     * If the given person is a Tutee, it returns all associated Tutors.
+     * Retrieves a list of associated people and their subjects based on the specified person.
      *
-     * @param person The person for whom the associated people are to be retrieved.
-     *               Must be non-null and either a Tutor or Tutee.
-     * @return A list of associated persons.
-     * @throws PersonNotFoundException If the given person is neither a Tutor nor a Tutee.
+     * @param person the person whose associated people are to be retrieved.
+     * @return a list of map entries where each entry contains a person and their associated subject.
+     *         If the person is a tutor, each entry will contain a tutee and the subject taught.
+     *         If the person is a tutee, each entry will contain a tutor and the subject studied.
      */
-    public List<Person> getAssociatedPeople(Person person) {
+    public List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person) {
         requireAllNonNull(person);
         if (person instanceof Tutor) {
-            return internalList.stream().filter(item -> item.getTutor().equals(person))
-                    .map(Lesson::getTutee).collect(Collectors.toList());
+            return internalList.stream()
+                    .filter(item -> item.getTutor().equals(person))
+                    .map(item -> Map.entry(item.getTutee(), item.getSubject()))
+                    .collect(Collectors.toList());
         } else {
-            return internalList.stream().filter(item -> item.getTutee().equals(person))
-                    .map(Lesson::getTutor).collect(Collectors.toList());
+            return internalList.stream()
+                    .filter(item -> item.getTutee().equals(person))
+                    .map(item -> Map.entry(item.getTutor(), item.getSubject()))
+                    .collect(Collectors.toList());
         }
     }
 

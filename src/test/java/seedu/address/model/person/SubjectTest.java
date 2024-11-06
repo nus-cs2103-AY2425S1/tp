@@ -62,7 +62,7 @@ public class SubjectTest {
     @Test
     public void toString_validSubject_correctStringRepresentation() {
         Subject subject = new Subject("English");
-        assertTrue(subject.toString().equals("English "));
+        assertTrue(subject.toString().equals("English"));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,7 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Tutor;
+import seedu.address.model.person.Subject;
 
 /**
  * Container for user visible messages.
@@ -51,26 +52,25 @@ public class Messages {
                 .append(person.getHours());
 
         builder.append("\n Subjects: ");
-        person.getSubjects().forEach(builder::append);
-
+        person.getSubjects().forEach(p -> builder.append(p).append("; "));
         return builder.toString();
     }
 
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String format(Person person, List<Person> associatedPeople) {
+    public static String format(Person person, List<Map.Entry<? extends Person, Subject>> associatedPeople) {
         final StringBuilder builder = new StringBuilder();
-
         builder.append(format(person));
 
-        if (person instanceof Tutor) {
-            builder.append("\n Tutees: ");
+        if (person.isTutor()) {
+            builder.append("\n Tutees:\n");
         } else {
-            builder.append("\n Tutors: ");
+            builder.append("\n Tutors:\n");
         }
 
-        associatedPeople.forEach(p -> builder.append(p.getName()).append("; "));
+        associatedPeople.forEach(p -> builder.append("\t").append(p.getKey().getName()).append(" - ")
+                .append(p.getValue()).append("\n"));
         return builder.toString();
     }
 
@@ -82,7 +82,9 @@ public class Messages {
         builder.append("\n Tutor: ")
                 .append(lesson.getTutorName())
                 .append("\n Tutee: ")
-                .append(lesson.getTuteeName());
+                .append(lesson.getTuteeName())
+                .append("\n Subject: ")
+                .append(lesson.getSubject());
         return builder.toString();
     }
 }

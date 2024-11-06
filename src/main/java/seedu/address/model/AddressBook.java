@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Map;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
@@ -152,9 +153,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code person} must exist in the address book.
      */
     public void removeAssociatedLessons(Person person) {
-        List<Person> associations = getAssociatedPeople(person);
-        for (Person associate : associations) {
-            Subject subject = lessons.getSubject(person, associate);
+        List<Map.Entry<? extends Person, Subject>> associations = getAssociatedPeople(person);
+
+        for (Map.Entry<? extends Person, Subject> associate : associations) {
+            Subject subject = associate.getValue();
+
             if (person.isTutor()) {
                 removeLesson(new Lesson((Tutor) person, (Tutee) associate, subject));
             } else {
@@ -202,7 +205,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.asUnmodifiableObservableList();
     }
 
-    public List<Person> getAssociatedPeople(Person person) {
+    public List<Map.Entry<? extends Person, Subject>> getAssociatedPeople(Person person) {
         return lessons.getAssociatedPeople(person);
     }
 

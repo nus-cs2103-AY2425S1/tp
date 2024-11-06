@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -10,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 
 /**
  * Views a person identified using it's displayed index from VolunTier.
@@ -38,7 +40,7 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        List<Person> associatedPeople = model.getAssociatedPeople(personToView);
+        List<Map.Entry<? extends Person, Subject>> associatedPeople = model.getAssociatedPeople(personToView);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView, associatedPeople)));
     }
 
