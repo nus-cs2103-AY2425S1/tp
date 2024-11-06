@@ -15,12 +15,7 @@ public class DateRecentToDistantComparator implements Comparator<Person> {
             return lastSeenResult;
         }
 
-        // If same priority, compare by name for tie-breaker
-        int nameResult = o1.getName().compareTo(o2.getName());
-
-        if (nameResult != 0) {
-            return nameResult;
-        }
+        // If same priority, compare by email for tie-breaker
 
         return o1.getEmail().compareTo(o2.getEmail());
     }
