@@ -110,7 +110,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_listevent() throws Exception {
+    public void parseCommand_listEvent() throws Exception {
         assertTrue(parser.parseCommand(ListEventCommand.COMMAND_WORD) instanceof ListEventCommand);
         assertTrue(parser.parseCommand(ListEventCommand.COMMAND_WORD + " 3") instanceof ListEventCommand);
     }
