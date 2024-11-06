@@ -4,6 +4,7 @@
   pageNav: 3
 ---
 
+![wardwatch-logo](images/wardwatch_banner.png)
 # WardWatch User Guide
 
 WardWatch (WW) is a **desktop app for managing patients information in hospitals**, optimized for use via a [Command Line Interface (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, WW can get your patient management tasks done faster than traditional GUI apps.
@@ -11,8 +12,9 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 <!-- * Table of Contents -->
 # Table of Contents
 1. [Quick Start](#quick-start)
-2. [Input Parameters](#Input-parameters)
-3. [Features](#features)
+2. [General Guidelines](#general-guidelines)
+3. [Input Parameters](#Input-parameters)
+4. [Features](#features)
     - **General Commands**
       - [Viewing help](#viewing-help-help)
       - [Saving the data](#saving-the-data)
@@ -34,14 +36,14 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
       - [Deleting an appointment from a patient](#deleting-an-appointment-from-a-patient-delappt)
       - [List all patient appointments on a specific date](#show-appointments-on-a-specific-date-scheduledate)
       - [List all patient appointments](#list-all-patient-appointment-scheduleall)
-4. [FAQ](#faq)
-5. [Glossary](#glossary)
-6. [Known Issues](#known-issues)
-7. [Command Summary](#command-summary)
+5. [FAQ](#faq)
+6. [Glossary](#glossary)
+7. [Known Issues](#known-issues)
+8. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -75,7 +77,7 @@ GUI similar to the below should appear in a few seconds. Note how the app contai
 
 --------------------------------------------------------------------------------------------------------------------
 
-## General Guidelines
+# General Guidelines
 
 As a [CLI-based](#glossary) application, users will interact with WardWatch by typing commands.<br> Commands typically begin with a `COMMAND_WORD`, followed by its relevant `PARAMETERS` as necessary.
 
@@ -120,11 +122,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Back to Table of Contents](#table-of-contents)
 
-[Back to Table of Contents](#table-of-contents)
-
 --------------------------------------------------------------------------------------------------------------------
 
-## Input parameters
+# Input parameters
 
 <box type="info" seamless>
 
@@ -154,7 +154,7 @@ Symbol     | Parameter                        | Constraints
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 ### Viewing help : `help`
 
@@ -398,28 +398,9 @@ Format: `exit`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-[Back to Table of Contents](#table-of-contents)
-
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
-
-[Back to Table of Contents](#table-of-contents)
-
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -428,7 +409,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+# Glossary
 
 1. **Command Line Interface (CLI):** A user interface where users interact with a computer or software by typing text-based commands. Instead of clicking on icons or buttons, users enter specific commands in a terminal or command prompt window to perform tasks.
 
@@ -440,7 +421,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+# Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -449,7 +430,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
