@@ -18,7 +18,8 @@ public class LessonTimeContainsKeywordsPredicateTest {
     @Test
     public void test_lessonMatchesTimeRangeKeyword_returnsTrue() {
         List<String> keywordsStartBefore = List.of("1700-1800");
-        LessonTimeContainsKeywordsPredicate predicateStartBefore = new LessonTimeContainsKeywordsPredicate(keywordsStartBefore);
+        LessonTimeContainsKeywordsPredicate predicateStartBefore =
+                new LessonTimeContainsKeywordsPredicate(keywordsStartBefore);
         assertTrue(predicateStartBefore.test(personWithLesson));
 
         List<String> keywordsSame = List.of("1730-1830");
@@ -26,7 +27,8 @@ public class LessonTimeContainsKeywordsPredicateTest {
         assertTrue(predicateSame.test(personWithLesson));
 
         List<String> keywordsEndAfter = List.of("1730-1900");
-        LessonTimeContainsKeywordsPredicate predicateEndAfter = new LessonTimeContainsKeywordsPredicate(keywordsEndAfter);
+        LessonTimeContainsKeywordsPredicate predicateEndAfter =
+                new LessonTimeContainsKeywordsPredicate(keywordsEndAfter);
         assertTrue(predicateEndAfter.test(personWithLesson));
 
         List<String> keywordsStartBeforeAndEndAfter = List.of("1700-1900");
