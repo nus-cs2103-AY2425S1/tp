@@ -3,7 +3,7 @@ layout: default.md
 title: "NovaCare User Guide"
 pageNav: 3
 ---
-<h1 style="color: #FF6347;">NovaCare</h1>
+<h2 style="color: #FF6347;">NovaCare</h2>
 
 A **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
@@ -194,17 +194,31 @@ Otherwise, the command will not be executed and display an error message in Resu
 | **DESCRIPTION** | Description of task | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                            | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                        |
 |**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `1`<br/>:x: `4`                                                      |
 
+
 ### Patient Management
 
 #### Adding a patient: `add`
 
-Adds a patient to the address book.
+Adds a patient details to the system.
 
 :pencil: Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+<box type="info" seamless>
+
+**Note:**
+* Upon adding a patient the default priority is set to *3*. 
+  * Users can change the priority level using the [`priority` command](#adding-priority-level--priority).
+* To update emergency contact details, use the [`emergency` command](#adding-emergency-contact--emergency).
+* A person will not be added if the name and phone number is already in the system.
+* Refer to [Parameter Information](#parameter-information) for the limitations of each parameter.
+</box>
+
 <box type="tip" seamless>
 
-**Tip:** A patient can have any number of tags (including 0)
+**Tip:**
+* A patient can have any number of tags (including 0)
+* A patient can have multiple tags with no spaces between them.
+* Use `edit` command if you made a mistake in adding a patient.
 </box>
 
 Examples:
@@ -213,22 +227,26 @@ Examples:
 
 #### Listing all patients : `list`
 
-Shows a list of all patients in the address book.
+Shows a list of all patients in the system.
 
 :pencil: Format: `list`
 
 #### Editing a patient : `edit`
 
-Edits an existing patient in the address book.
+Edits an existing patient in the system.
 
 :pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<box type="info" seamless>
+
+**Note:**
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
 * You can remove all the patient’s tags by typing `t/` without
   specifying any tags after it.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
@@ -240,12 +258,16 @@ Finds patients whose names contain any of the given keywords.
 
 :pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<box type="info" seamless>
+
+**Note:**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+</box>
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -254,16 +276,20 @@ Examples:
 
 #### Deleting a patient : `delete`
 
-Deletes the specified patient and tasks associated to that patient from the address book.
+Deletes the specified patient and tasks associated to that patient from the system.
 
 :pencil: Format: `delete INDEX`
 
+<box type="info" seamless>
+
+**Note:**
 * Deletes the patient and task associated to that patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
+* `list` followed by `delete 2` deletes the 2nd patient in the system.
 * `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 
@@ -271,26 +297,34 @@ Examples:
 
 #### Adding emergency contact : `emergency`
 
-Adds an emergency contact and details to a patient in the address book.
+Adds an emergency contact and details to a patient in the system.
 
 :pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
+<box type="info" seamless>
+
+**Note:**
 * Adds an emergency contact and details at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
 
 #### Deleting emergency contact : `delemergency`
 
-Deletes an emergency contact and its details from a patient in the address book.
+Deletes an emergency contact and its details from a patient in the system.
 
 :pencil: Format: `delemergency INDEX
 
+<box type="info" seamless>
+
+**Note:**
 * Deletes an emergency contact and its details at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
@@ -300,59 +334,76 @@ Examples:
 
 #### Adding priority level : `priority`
 
-Adds an priority level to a patient in the address book.
+Adds an priority level to a patient in the system.
 
-:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
+:pencil: Format: `priority INDEX /level PRIORITY_LEVEL`
 
+<box type="info" seamless>
+
+**Note:**
 * Adds a priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The priority level **must be a positive integer** and only from **1, 2, 3**
+</box>
 
 Examples:
-* `priority /id 1 /level 2` adds priority level `2` to 1st index in patient list.
+* `priority 1 /level 2` adds priority level `2` to 1st index in patient list.
 
 #### Deleting priority level : `deletelevel`
 
-Delete a priority level to a patient in the address book, resetting it to the default value **3**.
+Delete a priority level to a patient in the system, resetting it to the default value **3**.
 
-:pencil: Format: `deletelevel INDEX`
+:pencil: Format: `deletelevel INDEX` or `priority INDEX l/reset`
 
+<box type="info" seamless>
+
+**Note:**
 * Delete the current priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
+* `priority 1 l/reset` resets the priority level of the 1st indexed patient in the patient list.
 
 
 ### Task Management
 
 #### Adding a task : `addtask`
 
-Adds a task to a patient in the address book.
+Adds a task to a patient in the system.
 
 :pencil: Format: `addtask INDEX d/DESCRIPTION`
 
+<box type="info" seamless>
+
+**Note:**
 * Adds a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
-* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the address book.
+* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the system.
 * `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
-  ![Patient List](images/PersonListExample.png)
-  ![Task List](images/TaskListExample.png)
+![Patient List](images/PersonListExample.png)
+![Task List](images/TaskListExample.png)
 
 #### Deleting a task : `deletetask`
 
-Deletes a task for a patient in the address book.
+Deletes a task for a patient in the system.
 
 :pencil: Format: `deletetask INDEX`
 
+<box type="info" seamless>
+
+**Note:**
 * Deletes a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `deletetask 1` deletes the 1st task in the task list.
@@ -363,12 +414,42 @@ Marks a task at a specific index.
 
 :pencil: Format: `marktask INDEX`
 
+<box type="info" seamless>
+
+**Note:**
 * Marks a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
+
+#### Find Task : `findtask`
+
+Finds all task for a particular Patient specific index.
+
+:pencil: Format: `findtask INDEX`
+
+<box type="info" seamless>
+
+**Note:**
+</box>
+
+Examples:
+* `marktask 1` marks a task of the 1st index in task list.
+
+#### List Task : `listtask`
+
+List all tasks for all patients in the system.
+
+:pencil: Format: `listtask`
+
+#### List Incomplete Task : `listincomplete`
+
+List all incomplete tasks for all patients in the system.
+
+:pencil: Format: `listincomplete`
 
 ### Other Commands
 
@@ -377,12 +458,27 @@ Examples:
 Shows a message explaning how to access the help page.
 
 Format: `help`
+<box type="Note" seamless>
+
+**Note:**
+* Due to the amount of commands, the Help Window is made such that it will still be displayed at foreground despite clicking back to NovaCare.
+* The hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
+* To close it, click the `close button` on the top right hand corner of the Help Window as shown below.
+</box>
+![helpMessage](images/helpMessage.png)
 
 ### Clearing all entries : `clear`
 
 Clears all patient and tasks entry from NovaCare.
 
 :pencil: Format: `clear`
+
+<box type="warning" seamless>
+
+**Warning:**
+Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare. 
+**This action is irreversible!**
+</box>
 
 ### Exiting the program : `exit`
 
@@ -442,8 +538,6 @@ _Details coming soon ..._
 | **List**                  | `list`                                                                                                                                                   |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
-| **Clear**                 | `clear`                                                                                                                                                  |
-
 
 ### Task-Related Commands:
 | Action              | Format, Examples                                                                   |
@@ -460,4 +554,5 @@ _Details coming soon ..._
 | Action                | Format, Examples       |
 |-----------------------|------------------------|
 |**Help**               | `help`                 |
+|**Clear**              | `clear`                |
 |**Exit**               | `exit`                 |
