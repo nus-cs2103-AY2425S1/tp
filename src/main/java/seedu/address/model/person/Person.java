@@ -115,7 +115,7 @@ public class Person {
      */
     public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
         for (EmergencyContact emergencyContact : emergencyContacts) {
-            if (emergencyContact.equals((emergencyContactToCheck))) {
+            if (emergencyContact.isSamePerson((emergencyContactToCheck))) {
                 return true;
             }
         }
