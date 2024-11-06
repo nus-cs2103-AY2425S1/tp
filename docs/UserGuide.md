@@ -454,6 +454,8 @@ _Details coming soon ..._
 | **List Task**       | `listtask`                                                                         |
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
 | **List Incomplete** | `listincomplete`                                                                   |
+
+
 ### Other Commands:
 | Action                | Format, Examples       |
 |-----------------------|------------------------|
