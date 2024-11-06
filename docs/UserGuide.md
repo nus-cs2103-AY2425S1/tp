@@ -72,9 +72,9 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 
    - `clear` : Deletes all contacts.
 
-   - `findp n/alice bob charlie r/organiser` : Finds person(s) named either `Alice`, `Bob` or `Charlie` with an `organiser` role from the ConcertPhoneBook.
+   - `findp n/alice bob charlie r/organiser` : Finds person(s) named either `Alice`, `Bob` or `Charlie` with an `organiser` role from the ConcertPhonebook.
 
-   - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the ConcertPhoneBook.
+   - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the ConcertPhonebook.
 
    - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
    
@@ -170,7 +170,7 @@ Adds a Concert to the ConcertPhonebook.
 Format: `addc n/NAME a/ADDRESS d/DATE`
 
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
-- FYI: If user were to add a date that does not exist where the day is less than 32, closest date in the same month will be added
+- **FYI**: If user were to add a date that does not exist where the day is less than 32, closest date in the same month will be added
   e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
 
 Examples:
@@ -218,7 +218,7 @@ Deletes the specified concertContact from the ConcertPhonebook.
 Format: `deletecc INDEX`
 
 - Deletes the concertContact at the specified `INDEX`
-- The index refers to the index number shown in the displayed person / concert list.
+- The index refers to the index number shown in the displayed concertContacts list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
 ### Clearing all entries : `clear`
@@ -284,7 +284,7 @@ Format: `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]�
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be **removed** i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
