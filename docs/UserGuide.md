@@ -242,6 +242,10 @@ Displays a window that shows how many students are taking each of the 4 subjects
 
 Format: `tracksubject`
 
+*Note*: Track subject displays the number of students based on the filtered list. For example,
+filtering by year 2 students followed by a `tracksubject` command will only show how many year 2 students 
+are taking each of the subjects. 
+
 ![TrackSubject Success Message](/images/tracksubject.png)
 
 ### Clearing all entries : `clear`
