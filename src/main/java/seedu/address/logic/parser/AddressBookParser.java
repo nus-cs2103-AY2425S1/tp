@@ -13,6 +13,7 @@ import seedu.address.logic.commands.CancelCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -20,7 +21,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListEventsCommand;
 import seedu.address.logic.commands.ListPersonsCommand;
-import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
