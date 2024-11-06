@@ -89,7 +89,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX].
 
 <box type="tip" seamless>
 
-**Tips:** 
+**Tips:**
 * A person can have either 0 or 1 role.
 * A person can have any number of wedding jobs (including 0).
 </box>
@@ -113,7 +113,7 @@ If you know the index of the specific contact you want to edit:
 
 Format #1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -383,6 +383,7 @@ _Details coming soon ..._
 
 **Q**: Can I assign multiple roles to a person?<br>
 **A**: No, each person can only have one role at a time. Assigning a new role will replace the existing one.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -408,5 +409,6 @@ Action     | Format, Examples
 **Addw**   | `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]` <br> e.g., `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
 **Editw**  | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`
 **Vieww**  | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`
-**Assign** | `assign INDEX r/ROLE` or `assign NAME r/ROLE`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer`
+**Assign** | `assign INDEX r/ROLE w/WEDDING...` or `assign NAME r/ROLE w/WEDDING...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/2`
 **Help**   | `help`
+**Exit**   | `exit`

@@ -54,6 +54,8 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_ASSIGN_EMPTY_PERSON_LIST_ERROR = "There is no person to assign.";
 
+    public static final String MESSAGE_CLIENT_ASSIGN_ERROR = "Person is already a client of the wedding";
+
     public static final String MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR =
             "There is no wedding to assign as the wedding list is empty.\n"
             + "Please refresh the list with a command (e.g. list, vieww).";
@@ -98,6 +100,19 @@ public class AssignCommand extends Command {
         Person assignedPerson;
         if (weddingIndices != null) {
             checkValidWeddingIndices(model);
+            // Check if person is client of any of the weddings they're being assigned to
+            List<Wedding> weddings = model.getFilteredWeddingList();
+            for (Index index : weddingIndices) {
+                Wedding wedding = weddings.get(index.getZeroBased());
+                // Check if person is client of the wedding
+                if (personToAssign.getOwnWedding() != null && personToAssign.getOwnWedding().isSameWedding(wedding)) {
+                    throw new CommandException(MESSAGE_CLIENT_ASSIGN_ERROR);
+                }
+                // Check if person is already assigned to the wedding
+                if (personToAssign.isAssignedToWedding(wedding)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+                }
+            }
             generateWeddingJobs(model);
             assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
             model.setPerson(personToAssign, assignedPerson);
@@ -108,7 +123,6 @@ public class AssignCommand extends Command {
                     Messages.format(assignedPerson),
                     Messages.format(assignedPerson.getWeddingJobs()))
             );
-
         } else {
             assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
             if (personToAssign.getRole().equals(assignedPerson.getRole())) {
@@ -165,6 +179,36 @@ public class AssignCommand extends Command {
     }
 
     /**
+     * Creates and returns a {@code Person} with the role added to {@code personToAddRole}
+     * with {@code personWithRoleDescriptor}.
+     */
+    private static Person createPersonWithRole(Person personToAddRole,
+                                               PersonWithRoleDescriptor personWithRoleDescriptor)
+            throws CommandException {
+        assert personToAddRole != null;
+
+        Name updatedName = personWithRoleDescriptor.getName().orElse(personToAddRole.getName());
+        Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
+        Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
+        Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
+        Optional<Role> updatedRole = personWithRoleDescriptor.getRole().or(personToAddRole::getRole);
+        Wedding ownWedding = personToAddRole.getOwnWedding();
+
+        Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
+                ownWedding);
+        person.setWeddingJobs(personToAddRole.getWeddingJobs());
+
+        for (Wedding wedding : personWithRoleDescriptor.getWeddingJobs()) {
+            if (person.isAssignedToWedding(wedding)) {
+                throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+            }
+        }
+
+        person.setWeddingJobs(personWithRoleDescriptor.getWeddingJobs());
+        return person;
+    }
+
+    /**
      * Check if wedding indices inputs are valid
      *
      * @param model {@code Model} which the command should operate on
@@ -186,31 +230,6 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the role added to {@code personToAddRole}
-     * with {@code personWithRoleDescriptor}.
-     */
-    private static Person createPersonWithRole(Person personToAddRole,
-                                               PersonWithRoleDescriptor personWithRoleDescriptor)
-                                                throws CommandException {
-        assert personToAddRole != null;
-
-        Name updatedName = personWithRoleDescriptor.getName().orElse(personToAddRole.getName());
-        Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
-        Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
-        Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
-        Optional<Role> updatedRole = personWithRoleDescriptor.getRole().or(personToAddRole::getRole);
-        Wedding ownWedding = personToAddRole.getOwnWedding();
-        Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
-                ownWedding);
-        person.setWeddingJobs(personToAddRole.getWeddingJobs());
-        if (person.getWeddingJobs().stream().anyMatch(personWithRoleDescriptor.weddingJobs::contains)) {
-            throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
-        }
-        person.setWeddingJobs(personWithRoleDescriptor.getWeddingJobs());
-        return person;
-    }
-
-    /**
      * Associates the person with wedding jobs based on the provided indices.
      *
      * @param model The model containing the list of weddings.
@@ -225,33 +244,23 @@ public class AssignCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        // Check if the same object
         if (this == other) {
             return true;
         }
 
-        // Check if other is an instance of AssignCommand
         if (!(other instanceof AssignCommand)) {
             return false;
         }
 
         AssignCommand otherCommand = (AssignCommand) other;
 
-        // Check for equality in person index, descriptor, and wedding indices
-        boolean indexEqual = (this.index == null && otherCommand.index == null)
-                || (this.index != null && this.index.equals(otherCommand.index));
+        boolean indexEqual = Objects.equals(this.index, otherCommand.index);
+        boolean predicateEqual = Objects.equals(this.predicate, otherCommand.predicate);
+        boolean descriptorEqual = Objects.equals(this.personWithRoleDescriptor, otherCommand.personWithRoleDescriptor);
+        boolean weddingIndicesEqual = Objects.equals(this.weddingIndices, otherCommand.weddingIndices);
 
-        boolean descriptorEqual = (this.personWithRoleDescriptor == null
-                && otherCommand.personWithRoleDescriptor == null)
-                || (this.personWithRoleDescriptor != null
-                && this.personWithRoleDescriptor.equals(otherCommand.personWithRoleDescriptor));
-
-        boolean weddingIndicesEqual = (this.weddingIndices == null && otherCommand.weddingIndices == null)
-                || (this.weddingIndices != null && this.weddingIndices.equals(otherCommand.weddingIndices));
-
-        return indexEqual && descriptorEqual && weddingIndicesEqual;
+        return indexEqual && predicateEqual && descriptorEqual && weddingIndicesEqual;
     }
-
 
     @Override
     public String toString() {
