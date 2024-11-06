@@ -55,7 +55,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         List<String> classes = new ArrayList<>();
         List<String> ecNames = new ArrayList<>();
         List<String> ecNumbers = new ArrayList<>();
-        List<String> tags;
+        List<String> tags = new ArrayList<>();
 
         for (String rawName : FilterCommandParserHelper.parseNames(argMultimap)) {
             if (rawName.isEmpty()) {
@@ -156,7 +156,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             }
         }
 
-        tags = FilterCommandParserHelper.parseTags(argMultimap);
+        for (String rawTag : FilterCommandParserHelper.parseTags(argMultimap)) {
+            if (rawTag.isEmpty()) {
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND);
+            }
+            tags.add(rawTag);
+        }
 
         // if all predicates are empty
         if (names.isEmpty() && phones.isEmpty() && emails.isEmpty() && addresses.isEmpty()
