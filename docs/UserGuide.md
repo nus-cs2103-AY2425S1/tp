@@ -203,7 +203,7 @@ Format: `view n/NAME j/JOB`
 * Details of the candidate being viewed will be displayed in the display panel.
 
 Examples:
-* `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel.
+* `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel, as shown below:
 
 ![display-panel](images/Display-Panel.png)
 <br><br>
