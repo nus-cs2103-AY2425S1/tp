@@ -17,10 +17,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddBuyerProfile;
-import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
+import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.ShowClientsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Listings;
@@ -115,12 +115,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_listCommandWhenClientsExist_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
+        String listCommand = ShowClientsCommand.COMMAND_WORD;
 
         Person expectedPerson = new PersonBuilder(AMY).buildBuyer();
         model.addPerson(expectedPerson);
 
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, ShowClientsCommand.MESSAGE_SUCCESS, model);
     }
     @Test
     public void execute_listCommandWhenNoClients_throwsCommandException() {
@@ -131,9 +131,9 @@ public class LogicManagerTest {
                 new JsonListingsStorage(temporaryFolder.resolve("listings.json")))
         );
 
-        String listCommand = ListCommand.COMMAND_WORD;
+        String listCommand = ShowClientsCommand.COMMAND_WORD;
 
-        assertCommandException(listCommand, ListCommand.MESSAGE_NO_CLIENT_IN_LIST);
+        assertCommandException(listCommand, ShowClientsCommand.MESSAGE_NO_CLIENT_IN_LIST);
     }
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
