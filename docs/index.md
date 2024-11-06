@@ -8,7 +8,7 @@
 [![CI Status](https://github.com/AY2425S1-CS2103-F12-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103-F12-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103-F12-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2425S1-CS2103-F12-1/tp/)
 
-![Ui](images/Ui.png)
+![Ui](images/appScreenshot.png)
 
 **InSUREance is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
