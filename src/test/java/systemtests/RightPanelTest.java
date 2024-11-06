@@ -121,7 +121,7 @@ public class RightPanelTest {
             when(mockTxnUndone.getStatus()).thenReturn(mockStatusUndone);
             when(mockTxnUndone.getStatus().isDone()).thenReturn(false);
 
-            return predicate.test(mockTxnUndone) && !predicate.test(mockTxnDone);
+            return !predicate.test(mockTxnUndone) && predicate.test(mockTxnDone);
         }));
     }
 }
