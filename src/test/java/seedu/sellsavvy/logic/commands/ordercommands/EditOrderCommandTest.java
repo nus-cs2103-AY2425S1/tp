@@ -224,7 +224,7 @@ public class EditOrderCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        // get original size before filtering
+        // gets index of last order before filtering
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
 
         selectedPerson.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.PENDING));
