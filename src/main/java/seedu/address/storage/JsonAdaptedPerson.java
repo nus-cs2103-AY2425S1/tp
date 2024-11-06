@@ -89,7 +89,7 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone != null && !Phone.isValidPhone(phone)) {
+        if (phone != null && !Phone.isValidPhoneField(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = phone != null ? new Phone(phone) : null;
