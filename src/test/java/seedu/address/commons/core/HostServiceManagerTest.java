@@ -19,7 +19,8 @@ public class HostServiceManagerTest {
             hostServicesField.setAccessible(true);
             hostServicesField.set(null, null);
 
-            java.lang.reflect.Field hasSetHostServicesField = HostServiceManager.class.getDeclaredField("hasSetHostServices");
+            java.lang.reflect.Field hasSetHostServicesField = HostServiceManager.class
+                    .getDeclaredField("hasSetHostServices");
             hasSetHostServicesField.setAccessible(true);
             hasSetHostServicesField.set(null, false);
         } catch (Exception e) {
