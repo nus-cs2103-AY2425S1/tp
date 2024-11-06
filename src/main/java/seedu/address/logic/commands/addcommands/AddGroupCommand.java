@@ -34,7 +34,8 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) entered, only 1 will be added:";
-    public static final String MESSAGE_GROUP_EXISTS_IN_MODEL = "Group(s) already exists in model";
+    public static final String MESSAGE_GROUPS_EXIST_IN_MODEL = "All group(s) entered exist in the model";
+    public static final String MESSAGE_GROUP_IN_MODEL = "The following group(s) already exist and will not be added:";
 
     private final List<Group> toAdd;
 
@@ -51,29 +52,46 @@ public class AddGroupCommand extends Command {
         requireNonNull(model);
         String resultMessage = "";
         int count = 0;
-        Stream<Group> checkForDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1).distinct();
-        long numDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1).distinct().count();
+        Stream<Group> checkForDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1)
+                .filter(x -> !model.hasGroup(x))
+                .distinct();
+        long numDuplicates = toAdd.stream().filter(x -> Collections.frequency(toAdd, x) > 1)
+                .filter(x -> !model.hasGroup(x))
+                .distinct()
+                .count();
         String duplicateMessage = checkForDuplicates.map(a -> a.getGroupName().getGroupName()).reduce(
                 MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y);
+        if (numDuplicates == 0) {
+            duplicateMessage = "";
+        }
         List<Group> noDuplicateGroupList = toAdd.stream().distinct().toList();
         if (noDuplicateGroupList.size() > 1) {
             resultMessage += "\n";
         }
+        int countGroupsInModel = 0;
+        String messageGroupInModel = MESSAGE_GROUP_IN_MODEL;
         for (Group g: noDuplicateGroupList) {
             if (model.hasGroup(g)) {
-                throw new CommandException(MESSAGE_GROUP_EXISTS_IN_MODEL);
+                countGroupsInModel++;
+                messageGroupInModel += "\n" + g.getGroupName().getGroupName();
+                toAdd.removeAll(List.of(g));
+            } else {
+                count++;
+                resultMessage += Messages.format(g);
+                resultMessage = count < noDuplicateGroupList.size() ? resultMessage + "\n" : resultMessage;
+                model.addGroup(g);
             }
-            count++;
-            resultMessage += Messages.format(g);
-            if (count < toAdd.size()) {
-                resultMessage += "\n";
-            }
-            model.addGroup(g);
+        }
+        if (countGroupsInModel == noDuplicateGroupList.size()) {
+            throw new CommandException(MESSAGE_GROUPS_EXIST_IN_MODEL);
+        }
+        if (0 < countGroupsInModel && countGroupsInModel < noDuplicateGroupList.size()) {
+            duplicateMessage = messageGroupInModel + "\n" + duplicateMessage;
         }
         model.updateFilteredGroupList(x ->
                 toAdd.stream().anyMatch(y -> y.getGroupName().equals(x.getGroupName())));
         model.setStateGroups();
-        if (numDuplicates > 0) {
+        if (numDuplicates > 0 || countGroupsInModel > 0) {
             return new CommandResult(duplicateMessage
                     + "\n" + String.format(MESSAGE_SUCCESS, resultMessage), LIST_GROUP_MARKER);
         }
