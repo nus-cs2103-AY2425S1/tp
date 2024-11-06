@@ -89,7 +89,6 @@ public class VolunteerDates {
         for (LocalDate d: arrayListOfDates) {
             this.removeDateFromAvailList(d);
         }
-
         this.datesListAsObservableString.set(this.toString());
     }
 
