@@ -21,11 +21,18 @@ alt commandText is empty
     CommandBox --> CommandBox: return
 else else
     CommandBox -> CommandExecutor: execute(commandText)
+
     activate CommandExecutor
+    note right of CommandExecutor
+              If a CommandException or ParseException
+              occurs when executing the commandText,
+                the CommandExecutor deactivates and
+                an error style is applied to the text field.
+    end note
     CommandExecutor --> CommandBox: return CommandResult
     deactivate CommandExecutor
     CommandBox -> CommandHistory: add(commandText)
-    CommandBox -> TextField: setText("")
+    CommandBox -> TextField: clear the text field
 end
 [<--CommandBox
 deactivate CommandBox
