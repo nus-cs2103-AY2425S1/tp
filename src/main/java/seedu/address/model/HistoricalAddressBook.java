@@ -1,7 +1,8 @@
 package seedu.address.model;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
@@ -14,8 +15,10 @@ import seedu.address.model.person.Person;
  */
 public class HistoricalAddressBook implements ReadOnlyAddressBook {
 
-    private final Stack<ReadOnlyAddressBook> addressBookHistory;
-    private final Stack<ReadOnlyAddressBook> addressBookUndoHistory;
+    private static final int HISTORY_LIMIT = 200;
+
+    private final Deque<ReadOnlyAddressBook> addressBookHistory;
+    private final Deque<ReadOnlyAddressBook> addressBookUndoHistory;
     private final AddressBook currentAddressBook;
 
     /**
@@ -24,10 +27,10 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
      * @param initialAddressBook The first recorded AddressBook
      */
     public HistoricalAddressBook(ReadOnlyAddressBook initialAddressBook) {
-        addressBookHistory = new Stack<>();
-        addressBookUndoHistory = new Stack<>();
+        addressBookHistory = new ArrayDeque<>();
+        addressBookUndoHistory = new ArrayDeque<>();
         currentAddressBook = new AddressBook(initialAddressBook);
-        addressBookHistory.push(currentAddressBook.copy());
+        addressBookHistory.add(currentAddressBook.copy());
     }
 
     /**
@@ -35,22 +38,22 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
      * Initializes with no data.
      */
     public HistoricalAddressBook() {
-        addressBookHistory = new Stack<>();
-        addressBookUndoHistory = new Stack<>();
+        addressBookHistory = new ArrayDeque<>();
+        addressBookUndoHistory = new ArrayDeque<>();
         currentAddressBook = new AddressBook();
-        addressBookHistory.push(currentAddressBook.copy());
+        addressBookHistory.add(currentAddressBook.copy());
     }
 
     /**
      * Constructor for a {@code HistoricalAddressBook} object.
      * Initializes all data with data given.
      */
-    public HistoricalAddressBook(Stack<ReadOnlyAddressBook> addressBookHistory,
-                                 Stack<ReadOnlyAddressBook> addressBookUndoHistory, AddressBook currentAddressBook) {
-        this.addressBookHistory = new Stack<>();
+    public HistoricalAddressBook(Deque<ReadOnlyAddressBook> addressBookHistory,
+                                 Deque<ReadOnlyAddressBook> addressBookUndoHistory, AddressBook currentAddressBook) {
+        this.addressBookHistory = new ArrayDeque<>();
         this.addressBookHistory.addAll(addressBookHistory);
 
-        this.addressBookUndoHistory = new Stack<>();
+        this.addressBookUndoHistory = new ArrayDeque<>();
         this.addressBookUndoHistory.addAll(addressBookUndoHistory);
 
         this.currentAddressBook = currentAddressBook.copy();
@@ -62,7 +65,10 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
      */
     public void save() {
         addressBookUndoHistory.clear();
-        addressBookHistory.push(currentAddressBook.copy());
+        addressBookHistory.add(currentAddressBook.copy());
+        if (addressBookHistory.size() > HISTORY_LIMIT) {
+            addressBookHistory.removeFirst();
+        }
     }
 
     /**
@@ -72,8 +78,8 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
         if (!canUndo()) {
             throw new RuntimeException("There is no command to undo.");
         }
-        addressBookUndoHistory.push(addressBookHistory.pop());
-        currentAddressBook.resetData(addressBookHistory.peek());
+        addressBookUndoHistory.add(addressBookHistory.removeLast());
+        currentAddressBook.resetData(addressBookHistory.getLast());
     }
 
     /**
@@ -83,8 +89,8 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
         if (!canRedo()) {
             throw new RuntimeException("There is no command to redo.");
         }
-        addressBookHistory.push(addressBookUndoHistory.pop());
-        currentAddressBook.resetData(addressBookHistory.peek());
+        addressBookHistory.add(addressBookUndoHistory.removeLast());
+        currentAddressBook.resetData(addressBookHistory.getLast());
     }
 
     /**
@@ -105,11 +111,11 @@ public class HistoricalAddressBook implements ReadOnlyAddressBook {
         return currentAddressBook;
     }
 
-    public Stack<ReadOnlyAddressBook> getAddressBookHistory() {
+    public Deque<ReadOnlyAddressBook> getAddressBookHistory() {
         return addressBookHistory;
     }
 
-    public Stack<ReadOnlyAddressBook> getAddressBookUndoHistory() {
+    public Deque<ReadOnlyAddressBook> getAddressBookUndoHistory() {
         return addressBookUndoHistory;
     }
 

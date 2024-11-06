@@ -3,7 +3,8 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,10 +21,10 @@ public class ClearCommandTest {
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
-        Stack<ReadOnlyAddressBook> expectedHistoryStack = new Stack<>();
-        expectedHistoryStack.add(new HistoricalAddressBook());
+        Deque<ReadOnlyAddressBook> expectedHistoryDeque = new ArrayDeque<>();
+        expectedHistoryDeque.add(new HistoricalAddressBook());
         HistoricalAddressBook expectedHistoricalAddressBook = new HistoricalAddressBook(
-                expectedHistoryStack, new Stack<>(), new AddressBook()
+                expectedHistoryDeque, new ArrayDeque<>(), new AddressBook()
         );
         Model expectedModel = new ModelManager();
         expectedModel.setAddressBook(expectedHistoricalAddressBook);
