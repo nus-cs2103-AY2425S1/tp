@@ -221,9 +221,11 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 <br>
 
-## **Implementation of main features (using entity commands)**
+## **Implementation of entity command features**
 
 Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. Hence, `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
+
+The sequence diagram shows how an entity command is executed:
 
 <puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
 - The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand`. There are two entities, **person** and **appointment**, on which operations can be performed.
@@ -244,6 +246,9 @@ Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` com
 
 
 ### Edit Person feature
+
+#### Design considerations
+
 **Aspect: Check if the person with `personId` exists before editing**
 - This is to ensure no unwanted errors occur while editing the person and helps to maintain data integrity.
 
@@ -257,6 +262,9 @@ Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` com
 <br>
 
 ### Clear Person feature
+
+#### Design considerations
+
 **Aspect: Should the `clear person` command also delete all the appointments**
 - **Alternative 1 (current choice):** The `clear person` command should also clear all appointments.
   - Pros: This prevents the case where the appointments are linked to deleted personIds which do not exist. Hence, this prevents confusion for users.
@@ -266,6 +274,9 @@ Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` com
 <br>
 
 ### Add appointment feature
+
+#### Design considerations
+
 **Aspect: Should we implement as `addAppt` or `add appt`**
 - **Alternative 1 (Current choice):** Implement the add appointment feature as `add appt`
   - Pros: Allows us to use the existing infrastructure, just have to add code to detect whether the entity is `appt` or not.
@@ -279,12 +290,17 @@ Later, we decided to you the same infrastructure for all the command types.
 
 ### Edit Appointment feature
 
+#### Design considerations
+
 **Aspect: Check if the appointment with appointment id exists before editing**
 - This is to ensure no unwanted errors occur while editing the appointment.
 
 <br>
 
 ### Find Appointment feature
+
+#### Design considerations
+
 **Aspect: How to show find appointment.**
 
 - **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
@@ -299,6 +315,8 @@ Later, we decided to you the same infrastructure for all the command types.
 
 ### Clear Appointment feature
 
+#### Design considerations
+
 **Aspect**: How appointments are cleared
 
 - **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
@@ -309,7 +327,7 @@ Later, we decided to you the same infrastructure for all the command types.
 
 <br>
 
-## Implementation of general features
+## Implementation of general command features
 General commands include the `exit` and `help` commands.
 
 The sequence diagram shows how a general command (`ExitCommand` or `HelpCommand`) is executed:
@@ -353,7 +371,7 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 <br>
 
@@ -371,10 +389,23 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
-## **Appendix: Data storage and files**
-- The data of the patients and appointments is stored in the `data` folder.
-  - Patient data is stored in `data/addressbook.json`.
-  - Appointment data is stored in `data/appointmentbook.json`.
+## **Appendix: Miscellaneous Design Considerations**
+
+### Data storage and files
+
+**Aspect: Save patient and appointment data in:**
+* **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
+    * Pros: 
+        * More organised file management
+        * Quicker read and write times for each file
+    * Cons: 
+        * Higher chance of inconsistencies between patient and appointment data
+
+* **Alternative 2:** one single file named `data/addressbook.json`
+    * Pros:
+        * Simplicity and convenience of one file for all information
+    * Cons:
+        * Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
 
 <box type="warning" seamless>
 
@@ -383,7 +414,8 @@ For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
 
-#### Design Considerations
+<br>
+
 **Aspect: When the data is updated in the `.json` file:**
 
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
@@ -397,13 +429,7 @@ is not specified, it would be represented as `"null"`, in the `appointmentbook.j
 
 <br>
 
---------------------------------------------------------------------------------------------------------------------
-
-<br>
-
-## **Appendix: Parsing**
-
-### Design considerations
+### Parsing
 
 **Aspect: How to parse the commands:**
 <br>
@@ -462,6 +488,44 @@ Context: The `ArgumentMultimap` is used across different entities.
     * Cons:
         * More code duplication, as there are shared prefixes
         * Might be harder to track shared prefixes, causing confusion to users
+
+<br>
+
+### User Interface
+
+**Aspect: How to show appointment and person lists**
+<br>
+Context: There are two entity types (appointment and person) being managed in DocTrack
+<br>
+* **Alternative 1 (current choice):** Show lists as two separate panels side by side
+    * Pros:
+        * Easier to see all information at once
+        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
+    * Cons:
+        * More verbose and could result in information overload
+* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
+    * Pros:
+        * Information is simpler to digest
+    * Cons:
+        * More overhead of handling switching between lists
+        * Difficult to cross reference when typing certain commands
+
+<br>
+
+**Aspect: Color Scheme**
+<br>
+* **Alternative 1 (current choice):** Create new red, white and gray color scheme
+    * Pros:
+        * Creates brand identity
+        * Makes the GUI more appealling to the target audience
+    * Cons:
+        * Constant oversight needed to maintain color scheme in future feature enhancements
+* **Alternative 2:** Use the original AB3 gray color schee
+    * Pros:
+        * No extra effort needed
+    * Cons:
+        * Colors are not appealing
+        * Colors are not professional and do not suit target audience
 
 <br>
 
@@ -989,50 +1053,6 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1.
-
-<br>
-
---------------------------------------------------------------------------------------------------------------------
-
-<br>
-
-## **Appendix: UI**
-
-### Design considerations
-
-**Aspect: How to show appointment and person lists**
-<br>
-Context: There are two entity types (appointment and person) being managed in DocTrack
-<br>
-* **Alternative 1 (current choice):** Show lists as two separate panels side by side
-    * Pros:
-        * Easier to see all information at once
-        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
-    * Cons:
-        * More verbose and could result in information overload
-* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
-    * Pros:
-        * Information is simpler to digest
-    * Cons:
-        * More overhead of handling switching between lists
-        * Difficult to cross reference when typing certain commands
-
-<br>
-
-**Aspect: Color Scheme**
-<br>
-* **Alternative 1 (current choice):** Create new red, white and gray color scheme
-    * Pros:
-        * Creates brand identity
-        * Makes the GUI more appealling to the target audience
-    * Cons:
-        * Constant oversight needed to maintain color scheme in future feature enhancements
-* **Alternative 2:** Use the original AB3 gray color schee
-    * Pros:
-        * No extra effort needed
-    * Cons:
-        * Colors are not appealing
-        * Colors are not professional and do not suit target audience
 
 <br>
 
