@@ -322,7 +322,9 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AcademyAssist folder.
+the data of your previous AcademyAssist folder.<br><br>
+**Q**: Why is there a gap in the studentID after I deleted a student?<br>
+**A**: This is an intentional design, kindly refer to the note under [Features](#features) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
