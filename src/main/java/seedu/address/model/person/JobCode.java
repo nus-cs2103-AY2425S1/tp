@@ -11,19 +11,24 @@ import java.util.Comparator;
  */
 public class JobCode {
 
-    public static final String MESSAGE_CONSTRAINTS = "Job code should have length of 2 to 12 characters inclusive,"
-            + " consisting of only alphanumeric characters and cannot have whitespace.\nFor example: XYZ123";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Invalid job code: only alphanumeric characters and dash are allowed. Two consecutive dashes " +
+                    "is not allowed. \nExample: SWE2023, HR-2023-intern";
 
-    /*
-     * The first character of the JobCode must not be a whitespace. There is no whitespace
-     * otherwise " " (a blank string) becomes a valid input.
+    public static final String MESSAGE_LENGTH_CONSTRAINTS =
+            "Job code cannot have more than 50 characters.";
+
+    /**
+     * The input string must follow these rules:
+     * - Only allows alphanumeric characters (A-Z, a-z, 0-9) and single dashes ("-").
+     * - The first character must be alphanumeric or a dash.
+     * - There must not be two consecutive dashes ("--").
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
-    public static final int MAX_LENGTH = 12;
-    public static final int MIN_LENGTH = 2;
+    public static final String VALIDATION_REGEX = "^(?!.*--)[A-Za-z0-9]([-]?[A-Za-z0-9])*$";
+    public static final int MAX_LENGTH = 50;
 
     public static final Comparator<JobCode> JOBCODE_COMPARATOR = Comparator
-            .comparing(jobCode -> jobCode.value.toLowerCase());
+            .comparing(jobCode -> jobCode.value);
 
 
     public final String value;
@@ -34,23 +39,26 @@ public class JobCode {
      */
     public JobCode(String jobCode) {
         requireNonNull(jobCode);
-        jobCode = jobCode.trim();
-        checkArgument(isValidJobCode(jobCode), MESSAGE_CONSTRAINTS);
-        value = jobCode.trim();
+        jobCode = jobCode.trim().replaceAll("\\s", "");
 
+        checkArgument(isValidJobCode(jobCode), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLengthJobCode(jobCode), MESSAGE_LENGTH_CONSTRAINTS);
+        value = jobCode.toUpperCase();
+    }
+
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidJobCode(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns true if a given string is a valid email.
-     * Tests against minimum and maximum length, presence of whitespace, and if it is fully alphanumeric.
+     * Returns true if a given string have a valid length.
      */
-    public static boolean isValidJobCode(String test) {
-        // Check that the string has no whitespace and its length is between 2 and 12
-        return test.length() >= MIN_LENGTH
-                && test.length() <= MAX_LENGTH
-                && !test.contains(" ")
-                && test.matches(VALIDATION_REGEX);
-
+    public static boolean isValidLengthJobCode(String test) {
+        return test.length() <= MAX_LENGTH;
     }
 
     @Override
