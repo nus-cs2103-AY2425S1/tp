@@ -69,7 +69,7 @@ class JsonAdaptedPerson {
         telegramHandle = source.getTelegramHandle().map(TelegramHandle::toString).orElse(null);
         contactType = source.getContactType().value.toString();
         moduleName = source.getModuleName().map(ModuleName::toString).orElse(null);
-        remark = source.getRemark().toString();
+        remark = source.getRemark().map(Remark::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -133,14 +133,12 @@ class JsonAdaptedPerson {
                 ? Optional.empty()
                 : Optional.of(new ModuleName(moduleName));
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Remark.class.getSimpleName()));
-        }
-        if (!Remark.isValidRemark(remark)) {
+        if (remark != null && !Remark.isValidRemark(remark)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final Remark modelRemark = new Remark(remark);
+        final Optional<Remark> modelRemark = remark == null || remark.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new Remark(remark));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle,

@@ -9,6 +9,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 
 
@@ -52,7 +53,7 @@ public class Messages {
                 .append("; Module Name: ")
                 .append(person.getModuleName().map(ModuleName::toString).orElse("N/A"))
                 .append(": Remark: ")
-                .append(person.getRemark())
+                .append(person.getRemark().map(Remark::toString).orElse("N/A"))
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

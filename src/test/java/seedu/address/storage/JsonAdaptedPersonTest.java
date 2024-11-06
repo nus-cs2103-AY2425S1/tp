@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 
 
@@ -38,7 +39,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_CONTACTTYPE = BENSON.getContactType().toString();
     private static final String VALID_MODULENAME = BENSON.getModuleName().map(ModuleName::toString)
             .orElse("");
-    private static final String VALID_REMARK = BENSON.getRemark().toString();
+    private static final String VALID_REMARK = BENSON.getRemark().map(Remark::toString)
+            .orElse("");
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

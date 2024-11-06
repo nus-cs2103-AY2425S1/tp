@@ -34,7 +34,7 @@ public class PersonBuilder {
     private Optional<Email> email;
     private Optional<TelegramHandle> telegramHandle;
     private Optional<ModuleName> moduleName;
-    private Remark remark;
+    private Optional<Remark> remark;
     private Set<Tag> tags;
 
     /**
@@ -47,7 +47,7 @@ public class PersonBuilder {
         email = Optional.of(new Email(DEFAULT_EMAIL));
         telegramHandle = Optional.of(new TelegramHandle(DEFAULT_TELEHANDLE));
         moduleName = Optional.of(new ModuleName(DEFAULT_MODULENAME));
-        remark = new Remark(DEFAULT_REMARK);
+        remark = Optional.of(new Remark(DEFAULT_REMARK));
         tags = new HashSet<>();
     }
 
@@ -128,7 +128,9 @@ public class PersonBuilder {
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
-        this.remark = new Remark(remark);
+        this.remark = (remark == null || remark.isEmpty())
+                ? Optional.empty()
+                : Optional.of(new Remark(remark));
         return this;
     }
 

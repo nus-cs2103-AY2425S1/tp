@@ -41,7 +41,8 @@ public class PersonUtil {
                 + telegramHandle.value + " "));
         person.getModuleName().ifPresent(moduleName -> sb.append(PREFIX_MOD
                 + moduleName.getModuleName() + " "));
-        sb.append(PREFIX_REMARK + person.getRemark().toString() + " ");
+        person.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK
+                + remark.value + " "));
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
