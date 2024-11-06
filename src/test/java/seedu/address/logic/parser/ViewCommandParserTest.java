@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalStudents.AMY;
@@ -27,19 +26,16 @@ public class ViewCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
 
         // no parameters
-        assertParseFailure(parser, ViewCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
 
         // no name specified
         assertParseFailure(parser, PHONE_DESC_AMY, expectedMessage);
 
-        // no index and no field specified
-        assertParseFailure(parser, "", expectedMessage);
-
-        // no preamble
-        assertParseFailure(parser, PREFIX_NAME + AMY.getName().fullName, expectedMessage);
+        // non-empty preamble
+        assertParseFailure(parser, " asdasdadcad" + NAME_DESC_AMY, expectedMessage);
 
         // duplicate prefixes
-        assertParseFailure(parser, NAME_DESC_AMY + " " + NAME_DESC_BOB + "",
+        assertParseFailure(parser, NAME_DESC_AMY + " " + NAME_DESC_BOB,
                 "Multiple values specified for the following single-valued field(s): n/");
     }
 }
