@@ -27,6 +27,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.company.StatusType;
 import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
@@ -36,8 +37,6 @@ import seedu.internbuddy.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String STATUS_APPLIED = "APPLIED";
-    public static final String STATUS_CLOSED = "CLOSED";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the company identified "
             + "by the index number used in the displayed company list. "
@@ -118,7 +117,7 @@ public class EditCommand extends Command {
         Email updatedEmail = companyToEdit.getEmail();
         Address updatedAddress = companyToEdit.getAddress();
         Set<Tag> updatedTags = companyToEdit.getTags();
-        Status updatedStatus = new Status(STATUS_APPLIED);
+        Status updatedStatus = new Status(StatusType.APPLIED);
         List<Application> applications = companyToEdit.getApplications();
         Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
 
@@ -132,7 +131,7 @@ public class EditCommand extends Command {
         Email updatedEmail = companyToEdit.getEmail();
         Address updatedAddress = companyToEdit.getAddress();
         Set<Tag> updatedTags = companyToEdit.getTags();
-        Status updatedStatus = new Status(STATUS_CLOSED);
+        Status updatedStatus = new Status(StatusType.CLOSED);
         List<Application> updatedApplications = companyToEdit.getApplications();
         Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
 

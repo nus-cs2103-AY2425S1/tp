@@ -5,7 +5,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.company.StatusType;
 import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS);
+                        PREFIX_ADDRESS, PREFIX_TAG);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(null));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("INTERESTED"));
+        Status status = new Status(StatusType.INTERESTED);
         ArrayList<Application> applications = new ArrayList<>();
 
         Company company = new Company(name, phone, email, address, tagList, status, applications, false);

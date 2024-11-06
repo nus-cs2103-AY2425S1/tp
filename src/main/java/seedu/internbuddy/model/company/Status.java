@@ -8,35 +8,43 @@ import static seedu.internbuddy.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
  */
 public class Status {
-    public static final String MESSAGE_CONSTRAINTS = "Status should be either 'INTERESTED', 'APPLIED' or 'CLOSED'";
+    public static final String MESSAGE_CONSTRAINTS = "Status should be either '" + StatusType.INTERESTED + "', '"
+            + StatusType.APPLIED + "', or'" + StatusType.CLOSED + "'.";
 
-    public final String value;
+    public final StatusType value;
 
     /**
-     * Constructs a {@code Status}.
+     * Constructs a {@code Status} using a {@link StatusType}.
+     *
+     * @param status A valid status.
+     */
+    public Status(StatusType status) {
+        requireNonNull(status);
+        value = status;
+    }
+
+    /**
+     * Constructs a {@code Status} using an input {@code String}.
      *
      * @param status A valid status.
      */
     public Status(String status) {
         requireNonNull(status);
         checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
-        value = status.toUpperCase();
+        value = StatusType.valueOf(status);
     }
 
     /**
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        return test.equals("INTERESTED") || test.equals("APPLIED") || test.equals("CLOSED");
-    }
-
-    public Status applied() {
-        return new Status("APPLIED");
+        requireNonNull(test);
+        return StatusType.hasStatusType(test);
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.name();
     }
 
     @Override

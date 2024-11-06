@@ -7,7 +7,6 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_GOOG
 import static seedu.internbuddy.logic.commands.CommandTestUtil.EMAIL_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.NAME_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_GOOGLE;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.STATUS_DESC_GOOGLE;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
 import static seedu.internbuddy.testutil.TypicalCompanies.GOOGLE;
 
@@ -167,8 +166,9 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_GOOGLE + PHONE_DESC_GOOGLE
-                + EMAIL_DESC_GOOGLE + ADDRESS_DESC_GOOGLE + STATUS_DESC_GOOGLE;
-        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications().build();
+                + EMAIL_DESC_GOOGLE + ADDRESS_DESC_GOOGLE;
+        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications()
+                .withStatus("INTERESTED").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCompany(expectedcompany);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

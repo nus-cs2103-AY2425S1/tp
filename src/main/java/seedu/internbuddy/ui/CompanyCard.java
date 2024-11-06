@@ -2,6 +2,7 @@ package seedu.internbuddy.ui;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.StatusType;
 
 /**
  * An UI component that displays information of a {@code company}.
@@ -90,12 +92,12 @@ public class CompanyCard extends UiPart<Region> {
     }
 
     private void setStatus() {
-        status.setText(company.getStatus().value);
-        if ("INTERESTED".equals(status.getText())) {
+        status.setText(company.getStatus().toString());
+        if (Objects.equals(status.getText(), StatusType.INTERESTED.name())) {
             status.setStyle("-fx-background-color: purple;");
-        } else if ("APPLIED".equals(status.getText())) {
+        } else if (Objects.equals(status.getText(), StatusType.APPLIED.name())) {
             status.setStyle("-fx-background-color: green;");
-        } else if ("CLOSED".equals(status.getText())) {
+        } else if (Objects.equals(status.getText(), StatusType.CLOSED.name())) {
             status.setStyle("-fx-background-color: #db0303;");
         }
         tags.getChildren().add(status);

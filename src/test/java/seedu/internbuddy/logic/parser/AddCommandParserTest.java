@@ -16,7 +16,6 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_GOOGLE
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PHONE_DESC_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.internbuddy.logic.commands.CommandTestUtil.STATUS_DESC_GOOGLE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.STATUS_DESC_MICROSOFT;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_SOFTWARE;
 import static seedu.internbuddy.logic.commands.CommandTestUtil.TAG_DESC_TECH;
@@ -56,7 +55,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
-                        + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
+                        + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + TAG_DESC_TECH,
                 new AddCommand(expectedcompany));
 
 
@@ -65,8 +64,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
-                        + TAG_DESC_SOFTWARE + TAG_DESC_TECH + STATUS_DESC_MICROSOFT,
-                new AddCommand(expectedcompanyMultipleTags));
+                        + TAG_DESC_SOFTWARE + TAG_DESC_TECH, new AddCommand(expectedcompanyMultipleTags));
     }
 
     @Test
@@ -137,10 +135,10 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // todo: add test for the other optional fields
         // zero tags
-        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications().build();
+        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications()
+                .withStatus("INTERESTED").build();
         assertParseSuccess(parser, NAME_DESC_GOOGLE + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE
-                        + ADDRESS_DESC_GOOGLE + STATUS_DESC_GOOGLE,
-                new AddCommand(expectedcompany));
+                        + ADDRESS_DESC_GOOGLE, new AddCommand(expectedcompany));
     }
 
     @Test
