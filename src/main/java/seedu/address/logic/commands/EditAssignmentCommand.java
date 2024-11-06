@@ -93,7 +93,8 @@ public class EditAssignmentCommand extends Command {
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_SUCCESS, assignmentIndex.getOneBased(),
-                studentToEdit.getName().fullName, editedAssignment.getName(), editedAssignment.getMaxScore()));
+                studentToEdit.getName().fullName, editedAssignment.getName(), editedAssignment.getMaxScore()),
+                studentToEdit, studentIndex.getZeroBased());
     }
 
     private static Assignment createEditedAssignment(Assignment assignmentToEdit,
