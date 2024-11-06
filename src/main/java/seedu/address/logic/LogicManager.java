@@ -62,7 +62,7 @@ public class LogicManager implements Logic {
             storage.saveCampusConnect(model.getCampusConnect());
         } catch (CommandException e) {
             if (!(command instanceof RedoCommand)) {
-                model.undoCampusConnect();
+                model.undoExceptionalCommand();
             }
             throw e;
         } catch (AccessDeniedException e) {

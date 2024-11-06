@@ -134,7 +134,7 @@ The structure is simple:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the CampusConnect data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -155,7 +155,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both CampusConnect data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `CampusConnectStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -169,16 +169,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `history` and `future`. Additionally, it implements the following operations:
 
-* `VersionedCampusConnect#saveCurrentData()` — Saves the current address book state in its future.
-*  `VersionedCampusConnect#saveOldData()` — Saves the current address book state in its history.
-* `VersionedCampusConnect#extractOldData()` — Restores the previous address book state from its history.
-* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone address book state from its history.
+* `VersionedCampusConnect#saveCurrentData()` — Saves the current CampusConnect state in its future.
+*  `VersionedCampusConnect#saveOldData()` — Saves the current CampusConnect state in its history.
+* `VersionedCampusConnect#extractOldData()` — Restores the previous CampusConnect state from its history.
+* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone CampusConnect state from its history.
 
 These operations are exposed in the `Model` interface as `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` and `Model#redoCampusConnect()` respectively.
 
@@ -188,7 +188,7 @@ Step 1. The user launches the application for the first time. The `VersionedCamp
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
+Step 2. The user executes `delete 5` command to delete the 5th person in the CampusConnect. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -236,7 +236,7 @@ The `redo` command does the opposite — it calls `Model#redoCampusConnect()
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `campusConnectStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CampusConnect, such as `list`, will usually not call `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `history` and `future` remain unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
@@ -252,7 +252,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire CampusConnect.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -302,19 +302,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                    | So that I can…​                                                               |
-|----------|-------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | new user                | see usage instructions                                          | refer to instructions when I forget how to use the App                        |
-| `* * *`  | user                    | add a new contact                                               | easily connect with them                                                      |
-| `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                          |
-| `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list        |
-| `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                         |
-| `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                       |
-| `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members |
-| `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                |
-| `*`      | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                            |
-
-*{More to be added}*
+| Priority | As a …​                 | I want to …​                                                    | So that I can…​                                                                    |
+|----------|-------------------------|-----------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user                | see usage instructions                                          | refer to instructions when I forget how to use the App                             |
+| `* * *`  | user                    | add a new contact                                               | easily connect with them                                                           |
+| `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                               |
+| `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list             |
+| `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                              |
+| `* *`    | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                                 |
+| `* *`    | user                    | redo my latest undone action                                    | prevent the accidental undoing of certain actions                                  |    
+| `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                            |
+| `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members      |
+| `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                     |
+| `*`      | user with many tags     | categorize tags into different groups                           | easily organize contacts and locate individuals such as classmates or club members |
 
 ### Use cases
 
@@ -398,13 +398,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add tags to a contact**\
+**Use case: UC04 - Add tags to a contact**
 **Precondition**: Contact to add tags to already exists
 
 **MSS**
 1. User requests to add tags to a contact.
 2. CampusConnect searches the contact list and finds the correct contact.
-3. CampusConnect add tags to the contact.
+3. CampusConnect adds tags to the contact.
 4. CampusConnect displays success message.
 
    Use case ends.
@@ -419,65 +419,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-* 1b. Tag already exists for the contact
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again
-        
-      Steps 1b1-1b2 repeat until non-duplicate tags are input
+* 3a. Tag already exists for the contact
+    * 3a1. CampusConnect shows error message.
       
       Use case ends.
 
-
-**Use case: UC05 - Sort contacts by criterion**
+**Use cases: UC05 - Delete a tag from a contact**
+**Precondition**: Contact to delete a tag from already exists
 
 **MSS**
-1. User requests to sort list by criterion.
-2. CampusConnect sorts the list.
-3. CampusConnect displays the sorted list.
+1. User requests to delete a specific tag from a contact
+2. CampusConnect searches the contact list and finds the correct contact.
+3. CampusConnect deletes the specific tag from the contact
+4. CampusConnect displays success message
 
-   Use case ends.
+   Use case ends
 
 **Extensions**
-* 1a. Contact list is empty
+* 1a. Input format is invalid
+    * 1a1. CampusConnect shows error message.
+    * 1a2 User enters input again.
 
-  Use case ends.
-
-
-* 1b. Input format is invalid.
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again.
-
-      Steps 1b1-1b2 repeat until input format is valid.
+      Steps 1a1-1a2 repeat until input format is valid.
 
       Use case ends.
 
-
-* 1c. Invalid criterion input.
-    * 1c1. CampusConnect shows error message.
-    * 1c2. User enters input again.
-
-      Steps 1c1-1c2 repeat until input format is valid.
-
+* 3a. The contact does not contain the tag user wants to delete
+    * 3a1. CampusConnect shows error message.
+  
       Use case ends.
 
-
-**Use case: UC06 - Pin contacts to the top of the list**\
-**Precondition**: Contact list is not empty
+**Use cases: UC06 - Undo an execution of command**
+**Precondition**: At least one valid command has been executed by the user.
 
 **MSS**
-1. User requests to pin contact to the top of the list.
-2. CampusConnect marks contact as pinned.
-3. CampusConnect displays success message.
+1. User requests to undo the most recent command execution.
+2. CampusConnect reverts the most recent command, restoring the data to its previous state 
+before the command was executed.
 
-   Use case ends.
+   Use case ends
 
 **Extensions**
-
 * 1a. Input format is invalid.
     * 1a1. CampusConnect shows error message.
     * 1a2. User enters input again.
 
       Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+* 1b. No earlier data to revert.
+    * 1b1. CampusConnect shows error message.
+
+      Use cases ends.
+
+**Use Case: UC07 - Redo Command Execution**
+
+**Precondition: The user has previously undone at least one command.**
+
+**MSS:**
+1. The user requests to redo the most recently undone command.
+2. CampusConnect restores the data to the state it was in immediately before the undo.
+
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid Input Format:
+    * 1a1. CampusConnect displays an error message indicating the input format is invalid.
+    * 1a2. The user re-enters the input.
+
+      Steps 1a1-1a2 repeat until the input format is valid.
+
+      Use case ends.
+
+* 1b. No More Commands to Redo:
+    * 1b1. CampusConnect displays an error message indicating that there are no more commands to redo.
 
       Use case ends.
 
