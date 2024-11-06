@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -105,6 +107,13 @@ public interface Model {
      */
     void linkPersonToEvent(Person person, Event event);
 
+    /**
+     * Unlinks the given person {@code person} with {@code event}.
+     * {@code person} must exist in the address book.
+     * {@code event} must exist in the address book.
+     */
+    void unlinkPersonFromEvent(Person person, Event event);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -155,4 +164,8 @@ public interface Model {
     /** Resorts Events */
     void reSortEvents();
 
+    /**
+     * Return person event association mapping
+     */
+    public Map<Event, ArrayList<Person>> getPersonEventAssociationMap();
 }

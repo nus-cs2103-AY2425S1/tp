@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -154,6 +155,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         personEventManager.addPersonToEvent(person, event);
     }
 
+    /**
+     * Unlinks a person from an event.
+     */
+    public void unlinkPersonFromEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        personEventManager.removePersonFromEvent(person, event);
+    }
+
     //// event-level operations
 
     /**
@@ -272,5 +281,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return Objects.hash(persons, events);
     }
 
+    public void removePersonFromAllEvents(Person person) {
+        personEventManager.removePersonFromAllEvents(person);
+    }
+
+    public Map<Event, ArrayList<Person>> getPersonEventAssociationMap() {
+        return personEventManager.getEventPersonMap();
+    }
 
 }

@@ -75,7 +75,7 @@ public class LinkPersonCommand extends Command {
 
         model.linkPersonToEvent(personToLink, eventToLink);
 
-        return new CommandResult(String.format(MESSAGE_LINK_SUCCESS, Messages.format(eventToLink)));
+        return new CommandResult(String.format(MESSAGE_LINK_SUCCESS, Messages.format(eventToLink)), false, false, true);
     }
 
     /**

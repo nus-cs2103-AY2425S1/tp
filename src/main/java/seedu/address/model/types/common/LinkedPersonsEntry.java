@@ -38,4 +38,17 @@ public class LinkedPersonsEntry {
     public ArrayList<Person> getPersons() {
         return persons;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (other instanceof LinkedPersonsEntry) {
+            LinkedPersonsEntry otherEntry = (LinkedPersonsEntry) other;
+            return otherEntry.getEvent().equals(this.getEvent())
+                    && otherEntry.getPersons().equals(this.getPersons());
+        } else {
+            return false;
+        }
+    }
 }

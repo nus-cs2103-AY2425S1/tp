@@ -42,12 +42,12 @@ public class ClearCommand extends Command {
         return isConfirmed;
     }
 
-    public void setConfirmed(boolean confirmed) {
+    public static void setConfirmed(boolean confirmed) {
         isConfirmed = confirmed;
         setPrompted(true);
     }
 
-    public void setPrompted(boolean prompted) {
+    public static void setPrompted(boolean prompted) {
         isPrompted = prompted;
     }
 

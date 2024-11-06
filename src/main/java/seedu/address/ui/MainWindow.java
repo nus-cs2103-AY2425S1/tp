@@ -134,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getPersonEventAssociationMap());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
@@ -255,6 +255,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isRefresh()) {
+                handleRefresh();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -287,6 +291,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void clearResultDisplay() {
         resultDisplay.clearFeedback();
+    }
+
+    /**
+     * Refresh person list.
+     */
+    public void handleRefresh() {
+        personListPanel.refreshPersonListView();
     }
 
 }
