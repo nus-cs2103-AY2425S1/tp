@@ -1,10 +1,12 @@
 package seedu.sellsavvy.model.order;
 
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 import java.util.Objects;
 
 import seedu.sellsavvy.commons.util.ToStringBuilder;
+import seedu.sellsavvy.model.tag.Tag;
 
 /**
  * Represents an Order made by a Person in the address book.
@@ -65,6 +67,18 @@ public class Order {
      */
     public boolean hasDateElapsed() {
         return date.hasDateElapsed();
+    }
+
+    /**
+     * Returns true if the order is similar to given order.
+     * Two order names are considered similar if they have similar/identical name
+     * and identical quantity, date and status as the given argument.
+     */
+    public boolean isSimilarTo(Order otherOrder) {
+        return this.item.isSimilarTo(otherOrder.item)
+                && quantity.equals(otherOrder.quantity)
+                && date.equals(otherOrder.date)
+                && status.equals(otherOrder.status);
     }
 
     /**
