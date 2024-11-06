@@ -1,5 +1,7 @@
 package seedu.address.model.person.role.referee;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,7 @@ public class Referee extends Role {
     public Referee(Faculty faculty, List<Sport> sports) {
         super("Athlete - " + faculty + " - " + sports.stream().map(SportString::getSportString)
                 .collect(Collectors.joining(", ")));
+        requireAllNonNull(faculty, sports);
         this.faculty = faculty;
         this.sports = sports;
     }
