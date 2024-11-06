@@ -17,7 +17,7 @@ public class DetailCommand extends Command {
     public static final String COMMAND_WORD = "detail";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the details of a student. "
-            + "Parameters: Student ID (S followed by 5-digit number)\n"
+            + "Parameters: Student ID (S followed by a 5-digit number between 00001 and 99999)\n"
             + "Example: " + COMMAND_WORD + " S12345";
 
     public static final String MESSAGE_DETAIL_SUCCESS = "Viewing details of student %1$s";
