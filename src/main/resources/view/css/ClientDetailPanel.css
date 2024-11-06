@@ -1,5 +1,3 @@
-@import url("LabelColors.css");
-
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
@@ -16,10 +14,12 @@
     -fx-font-weight: bold;
 }
 
-.detail-tier-label {
-    -fx-text-fill: blue;
-    -fx-padding: 2 5 2 5;
-    -fx-border-radius: 3;
-    -fx-background-radius: 3;
-    -fx-font-size: 12px;
+.detail-tier -label {
+    -fx-padding: 3 6 4 6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
 }
+
+

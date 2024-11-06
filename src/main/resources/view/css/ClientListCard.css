@@ -1,5 +1,3 @@
-@import url("LabelColors.css");
-
 /** Container containing all the cards **/
 #cardPane {
     -fx-background-color: transparent;
@@ -58,10 +56,41 @@
 
 /** Styling for Tier Tag/Label **/
 #assignedTier .label, #assignedStatus .label {
-    -fx-text-fill: white;
     -fx-padding: 3 6 4 6;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
     -fx-font-size: 11;
     -fx-font-weight: bold;
+}
+
+/* Colors for tiers */
+#assignedTier .gold-tier {
+    -fx-background-color: #B59410;
+    -fx-text-fill: #1A1A1A;
+}
+
+#assignedTier .silver-tier {
+    -fx-background-color: #C0C0C0;
+    -fx-text-fill: #1A1A1A;
+}
+
+#assignedTier .bronze-tier {
+    -fx-background-color:  #804a00;
+    -fx-text-fill: white;
+}
+
+#assignedTier .reject-tier {
+    -fx-background-color: #5C0002;
+    -fx-text-fill: white;
+}
+
+/* Colors for statuses */
+#assignedStatus .urgent-status {
+    -fx-background-color: #C46210;
+    -fx-text-fill: white;
+}
+
+#assignedStatus .nonUrgent-status {
+    -fx-background-color: #B22222;
+    -fx-text-fill: white;
 }
