@@ -49,16 +49,16 @@ ClinicConnectSystem Level 3 (AB3) is a **desktop app for managing contacts, opti
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [al/ALLERGY` can be used as `n/John Doe al/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/Nuts`, `al/Wheat al/Penicillin` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -101,7 +101,7 @@ For more information on each individual parameter click here
 Adds a new patient record into the system with additional information.
 
 Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE] 
-[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]... [rl/RISK_LEVEL] [ec/EXISTING_CONDITIONS] [no/NOTES]`
+[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rl/RISK_LEVEL] [ec/EXISTING_CONDITIONS] [no/NOTES]`
 
 
 <div markdown="block" class="alert alert-info">
@@ -151,7 +151,7 @@ For more information on each individual parameter click here
 Edit the information of an existing patient in the system.
 
 Format: `edit NRIC [n/NAME] [i/NRIC] [s/SEX] [d/DATE_OF_BIRTH] [p/PHONE_NO] [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE]
-[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]... [rmal/ALLERGY_TO_BE_REMOVED]... [rl/RISK_LEVEL]
+[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rmal/ALLERGY_TO_BE_REMOVED]…​ [rl/RISK_LEVEL]
 [ec/EXISTING_CONDITIONS] [no/NOTES]`
 
 
@@ -185,8 +185,6 @@ Edits the name and date-of-birth of the patient with NRIC S9758366N.
 </li>
 </ul>
 </li>
-</ol>
-<ol start="2">
 <li>
 `edit S9758366N p/91234123 a/Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918`
 </li>
@@ -196,6 +194,31 @@ Edits the phone and address of the patient with NRIC S9758366N.
 </li>
 </ul>
 </ol>
+For more information on each individual parameter click here
+
+### Booking an appointment: `bookappt`
+
+Book an appointment for an existing patient in the system for a health service provided by the clinic.
+
+Format: `bookappt NRIC dt/APPOINTMENT_DATE_TIME h/HEALTH_SERVICE`
+
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC in the system.
+</li>
+<li>
+All paramters are compulsory
+</li></ul>
+</div>
+
+
+Example: `bookappt S9758366N dt/2024-12-29 h/Vaccination`
+<br>
+Books a Vaccination appointment for the given patient by NRIC at the specified time.
+
 For more information on each individual parameter click here
 
 ### Listing all patients : `list`
