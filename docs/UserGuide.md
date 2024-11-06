@@ -652,7 +652,11 @@ Invalid usages
 
 Command:  `clear`
 
+Clears all entries from Eduvault.
 
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+Eduvault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
+</div>
 
 ---
 
@@ -683,10 +687,12 @@ There is no need to save manually.
 Eduvalt data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
-For reference, please refer to the Developer Guide for more details.
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
+If your changes to the data file make its format invalid, Eduvault will discard all data and start with an empty data file at the next run. Hence, it is recommended to create a backup of the file before editing it.
+Furthermore, certain edits can cause Eduvault to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
 
-
-
+For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-implementation) for more details on editing the JSON file.
 
 ---
 
