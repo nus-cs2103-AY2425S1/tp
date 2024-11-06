@@ -51,7 +51,7 @@ public class Messages {
                 .append(" | Address: ")
                 .append(person.getAddress())
                 .append(" | Role: ")
-                .append(person.getRole().map(Role::toString).orElse(null));
+                .append(person.getRole().map(Role::toString).orElse("NA"));
         return builder.toString();
     }
 

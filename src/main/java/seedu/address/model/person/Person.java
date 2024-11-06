@@ -241,7 +241,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("roles", role)
+                .add("roles", role.isPresent() ? role : "NA")
                 .add("wedding", ownWedding == null ? "NA" : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
