@@ -125,10 +125,6 @@ Shows the details of a contact.
 
 **Format**: `view INDEX`
 
-<div markdown="span" class="alert alert-primary">💡 **Tip:**
-Tag labelled with "paid" will have green background to indicate student has paid their membership fee.
-</div>
-
 **Example**:
 
 - `view 1` shows the details of the first contact in the list.
@@ -343,6 +339,8 @@ Examples:
 - `track student` finds contacts with category `student`
 - `track company` finds contacts with category `company`
 
+![track UI](images/trackUI.png)
+
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
@@ -394,6 +392,11 @@ Format: `tag INDEX t/TAG [t/MORE_TAG]`
 Examples:
 
 - `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
+
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
+Tag labelled with "paid" will have green background to indicate student has paid their membership fee.
+</div>
+![View Contact UI](images/paidTag.png)
 
 #### Deleting tag(s) from contact: `deletetag`
 
