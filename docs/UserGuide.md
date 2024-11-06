@@ -6,9 +6,9 @@
 
 # CampusConnect User Guide
 
-**CampusConnect** is the ultimate contact management app for NUS students looking to socialise. Our
-contact tagging, finding, and organisation features ensure that with a few keystrokes, you never forget
-who you meet and why.
+**CampusConnect** is the ultimate contact management app for NUS students with speedy typing skills. Our
+contact tagging, finding, and organisation features ensure that with just a few keystrokes, you never forget
+who you meet, where you met them, and what their contact details are.
 
 **CampusConnect** offers a seamless and quick contact management experience using our *Command Line Interface* style of
 input, where commands are processed in the blink of an eye. If you can type quickly, we can get it done faster than 
@@ -127,13 +127,13 @@ Finds persons whose names, email address, contact number, or tag contain any of 
 
 Format: 
 
-`find n/KEYWORD [MORE_KEYWORDS]`
+`find n/KEYWORD [MORE_KEYWORDS]…​`
 
-`find p/KEYWORD [MORE_KEYWORDS]`
+`find p/KEYWORD [MORE_KEYWORDS]…​`
 
-`find e/KEYWORD [MORE_KEYWORDS]`
+`find e/KEYWORD [MORE_KEYWORDS]…​`
 
-`find t/KEYWORD [MORE_KEYWORDS]`
+`find t/KEYWORD [MORE_KEYWORDS]…​`
 
 
 * Only one field type can be specified per command.
