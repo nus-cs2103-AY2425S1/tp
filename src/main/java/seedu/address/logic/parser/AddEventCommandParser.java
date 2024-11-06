@@ -16,7 +16,6 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.athlete.Sport;
-import seedu.address.model.person.role.athlete.SportString;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object.

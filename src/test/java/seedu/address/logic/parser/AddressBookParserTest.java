@@ -75,7 +75,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new PersonContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -83,7 +83,7 @@ public class AddressBookParserTest {
     public void parseCommand_findEvent() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindEventCommand command = (FindEventCommand) parser.parseCommand(
-                FindEventCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindEventCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindEventCommand(new EventContainsKeywordsPredicate(keywords)), command);
     }
 

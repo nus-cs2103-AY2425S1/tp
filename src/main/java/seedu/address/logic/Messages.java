@@ -22,42 +22,64 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_HELP = """
-            EventfulNUS allows you to manage a list of people and events, for easier event planning.
+            EventfulNUS allows you to manage a list of people and events, for easier event planning for\s
+            NUS Inter-Faculty Games.
 
             These are the available commands:
 
             help - Display this help page.
-            usage: help
+            Usage: help
 
-            add - Add a Person to the list. They have a name, phone number, email and an event tied to them.
-            usage: add n/<name> p/<phone number> m/<email> {e/<event>} {r/<role>}
-            examples:
-            1. add ... r/athlete - <faculty> - <sport>
-            2. add ... r/committee - <branch> - <position>
-            3. add ... r/committee - Sports - <position> - <faculty>
-            4. add ... r/sponsor - <description>
-            5. add ... r/volunteer - <volunteerRole>
+            add - Add a Person to the list. They must have a name, phone number, email and an event tied to them.
+            Usage: add n/<name> p/<phone number> m/<email> {r/<role1>} {r/<role2>} {r/<role3>} ...
+
+            You can find a list of the available roles below in the examples,\s
+            and you can add multiple roles to a person.
+
+            You can find a list of the available faculties, sports, branches, positions, and volunteer roles\s
+            at the bottom of this help page.
+            
+            Note: The hyphens between the fields are NOT necessary for the program to work, they are there for\s
+            readability purposes.
+
+            Examples:
+            1. add ... r/athlete - <faculty> - <sport1>, {sport2}, {sport3}...
+            2. add ... r/referee - <faculty> - <sport1>, {sport2}, {sport3}...
+            3. add ... r/committee - <branch> - <position>
+            4. add ... r/committee - Sports - <position> - <faculty>
+            5. add ... r/sponsor - <company name>
+            6. add ... r/volunteer - <volunteerRole>
 
             clear - Delete all entries in the list. But be careful, the deleted entries are gone forever.
-            usage: clear
+            Usage: clear
 
-            find - Show all entries containing a case-insensitive query in the Person's name, phone, email, or events.
-            usage: find <query>
+            find - Show all Persons containing a case-insensitive keyword in their name, phone, email, or roles.
+            Usage: find <keyword1> {<keyword2>} {<keyword3>} ...
+            
+            findevent - Show all Events containing a case-insensitive keyword in their name, sport,\s
+            venue, or participants.
+            Usage: findevent <keyword1> {<keyword2>} {<keyword3>} ...
 
-            filter - Show all entries containing a case-insensitive keyword in the Person's roles.
-            usage: filter <keyword>
+            list - List all Persons registered to EventfulNUS.
+            Usage: list
+            
+            listevents - List all Events registered to EventfulNUS.
+            Usage: listevents
 
-            list - List all entries registered to EventfulNUS.
-            usage: list
+            edit - Update a Person's information.
+            Usage: edit <id> {n/<name>} {p/<phone number>} {m/<email>} {r/<role1>} {r/<role2>}\s
+            {r/<role3>} ...
+            
+            WARNING: You must specify at least one field to update. Otherwise, an error will be shown.
+            WARNING: Editing the event will remove the person from the previous event and add them to the new event.
+            WARNING: These edits are OVERWRITING changes, not additive. Be careful when editing.
+            Note: You can update multiple fields at once, and you can add multiple roles to a person.
 
-            edit - Update the information in an entry.
-            usage: edit <id> n/<name> p/<phone number> m/<email> e/<event> {r/<role>}
-
-            delete - Delete an entry with the given ID.
-            usage: delete <id>
+            delete - Delete a Person with the given ID.
+            Usage: delete <id>
 
             exit - Exit the program.
-            usage: exit
+            Usage: exit
 
             Input data is automatically saved when you exit EventfulNUS, and will be loaded the next time you run it.
 

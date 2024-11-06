@@ -23,7 +23,6 @@ import seedu.address.model.person.role.Faculty;
 import seedu.address.model.person.role.Role;
 import seedu.address.model.person.role.athlete.Athlete;
 import seedu.address.model.person.role.athlete.Sport;
-import seedu.address.model.person.role.athlete.SportString;
 import seedu.address.model.person.role.committee.Branch;
 import seedu.address.model.person.role.committee.CommitteeMember;
 import seedu.address.model.person.role.committee.FacultySportCommitteeMember;

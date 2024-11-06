@@ -7,7 +7,6 @@ import java.util.Set;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.role.athlete.Sport;
-import seedu.address.model.person.role.athlete.SportString;
 
 /**
  * Represents an {@code Event} in the address book.
