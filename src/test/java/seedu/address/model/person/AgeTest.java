@@ -29,12 +29,15 @@ public class AgeTest {
         assertFalse(Age.isValidAge("-1")); // negative
         assertFalse(Age.isValidAge("abc")); // alphabets
         assertFalse(Age.isValidAge("1000")); // over 999
+        assertFalse(Age.isValidAge("0"));
+        assertFalse(Age.isValidAge("0 10"));
 
 
         // valid age
-        assertTrue(Age.isValidAge("0"));
+        assertTrue(Age.isValidAge("1"));
         assertTrue(Age.isValidAge("12"));
         assertTrue(Age.isValidAge("999"));
+        assertTrue(Age.isValidAge("00999"));
     }
 
     @Test

@@ -145,7 +145,7 @@ public class Appointment {
             return this.dateTime.equals(otherAppointment.dateTime);
         }
 
-        // checks if other start time is within the 15 minute interval
+        // checks if other start time is within the 15-minute interval
         LocalDateTime time = LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME);
         LocalDateTime otherTime = LocalDateTime.parse(otherAppointment.dateTime, ENGLISH_FORMAT_WITH_TIME);
 
