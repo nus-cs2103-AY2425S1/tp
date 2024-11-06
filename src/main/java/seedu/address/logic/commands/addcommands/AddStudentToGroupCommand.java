@@ -5,7 +5,6 @@ import static seedu.address.logic.ListMarkers.LIST_GROUP_MARKER;
 import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_STUDENT_NO_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.List;
