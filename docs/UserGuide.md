@@ -195,8 +195,8 @@ The commands in this section are used edit records on the system, such as studen
 - [Editing student’s details](#51-editing-a-student)  
 - [Logging fees](#52-logging-fees-for-tutorial)  
 - [Marking payment](#53-marking-a-students-payment)
-- Marking attendance of student
-- Marking attendance of tutorial  
+- [Marking attendance of student](#54-marking-attendance-of-a-student)
+- [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)  
 - [Unmarking attendance of student](#56-unmarking-attendance-of-student)
 - [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
 #### **5.1 Editing a student**
@@ -337,9 +337,13 @@ Fields
 </div>
 {% endraw %}
 
-<div markdown="span" class="alert alert-success">:bulb: **Tip:**
-If you want to mark the attendance of all students in a tutorial, use the command mat instead.
+{% raw %}
+<div markdown="1" class="alert alert-success">:bulb: **Tip:**
+If you want to mark the attendance of all students in a tutorial, 
+use the command mat [here](#55-marking-attendance-of-a-tutorial instead.
 </div>
+{% endraw %}
+
 
 Example usages
 
