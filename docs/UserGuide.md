@@ -422,10 +422,19 @@ Format: `exit`
 ---
 
 ### **9. Saving data** 
+Eduvault data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ---
 
 ### **10. Editing the data file**
+Eduvalt data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
+Advanced users are welcome to update data directly by editing that data file.
+
+For reference, please refer to the Developer Guide for more details.
+
+
+
 
 ---
 
