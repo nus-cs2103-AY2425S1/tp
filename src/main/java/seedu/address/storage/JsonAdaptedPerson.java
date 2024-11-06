@@ -124,14 +124,15 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final PublicAddressesComposition modelPublicAddresses = new PublicAddressesComposition();
+        Map<Network, Set<PublicAddress>> publicAddressesMap = new HashMap<>();
         for (Map.Entry<Network, List<JsonAdaptedPublicAddress>> entry : publicAddresses.entrySet()) {
-            final Set<PublicAddress> personPublicAddresses = new HashSet<>();
+            Set<PublicAddress> networkPublicAddresses = new HashSet<>();
             for (JsonAdaptedPublicAddress publicAddress : entry.getValue()) {
-                personPublicAddresses.add(publicAddress.toModelType(entry.getKey()));
+                networkPublicAddresses.add(publicAddress.toModelType(entry.getKey()));
             }
-            modelPublicAddresses.setPublicAddressForNetwork(entry.getKey(), personPublicAddresses);
+            publicAddressesMap.put(entry.getKey(), networkPublicAddresses);
         }
+        final PublicAddressesComposition modelPublicAddresses = new PublicAddressesComposition(publicAddressesMap);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

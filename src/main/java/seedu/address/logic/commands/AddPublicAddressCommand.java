@@ -9,8 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.addresses.Network;
-import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -64,21 +62,13 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        PublicAddressesComposition currentPublicAddresses = personToEdit.getPublicAddressesComposition().copy();
+        PublicAddressesComposition currentPublicAddresses = personToEdit.getPublicAddressesComposition();
         PublicAddressesComposition addedPublicAddresses =
             editPersonDescriptor.getPublicAddresses().orElse(new PublicAddressesComposition());
+        PublicAddressesComposition combinedPublicAddresses = currentPublicAddresses.combineWith(addedPublicAddresses);
 
-        PublicAddress publicAddress = addedPublicAddresses.getAnyPublicAddress();
-        Network network = publicAddress.getNetwork();
-
-        if (currentPublicAddresses.containsPublicAddressStringAmongAllNetworks(publicAddress)) {
-            throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-                updatedName, publicAddress, network));
-        }
-
-        currentPublicAddresses.addPublicAddress(network, publicAddress);
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, currentPublicAddresses, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, combinedPublicAddresses,
+                updatedTags);
     }
 
     @Override
