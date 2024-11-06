@@ -174,7 +174,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * **Keyword order does not matter**: You can enter keywords in any order. e.g. `Hans Bo` will match `Bo Hans`
 * **Only names are searched**: The search only looks at the contact's name, not other details like phone number or address.
 * **Matches full words only**: e.g. `Han` will not match `Hans`
-* **"OR" search**: If a contact's name matches any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* **"OR" search**: If a contact's name contains any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -189,50 +189,54 @@ Find command does not work in the inspect window.
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
 
-Archives the specified contact from the contacts list. Archived items will have its visibility reduced and be moved to the end of the list.
+Archives the specified contact(s) from the contacts list.<br>
+Archived contact(s) will be less visible and moved to the bottom of the list.
 
 Format: `archive [INDEXES]...`
 
 * Archive the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `archive 1 2 2 4` is not allowed.
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
+* The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
 
 Examples:
-* `list` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+* `back` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
 Note:
-* `inspect INDEX` and `edit INDEX` would not work for archived contact.
+* You will not be able to use `inspect` and `edit` for archived contacts.
 
 **<ins>When in the inspect window**
 
-Archives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Archives the specified delivery or deliveries from the delivery list of a contact.
+* The same rules apply as in the main window section.
 
 Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
 Note:
-* `edit INDEX` would not work for archived delivery.
+* You will not be able to use `edit` for archived deliveries.
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
 
-Unarchive the specified contact from the contacts list if they are archived, the visibility of the contact would be restored.
+Unarchives the specified contact(s) to restore their visibility in the contacts list, if they were previously archived.
 
 Format: `unarchive [INDEXES]...`
 
-* Undo the archive command the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `unarchive 1 2 2 4 ` is not allowed.
+* Undoes the archive action for the contact(s) at the specified `INDEXES`.
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
+* The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+
 
 Examples:
-* `list` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
-Unarchives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Unarchives the specified delivery or deliveries to restore their visibility in the delivery list of a contact, if they were previously archived.
+* The same rules apply as in the main window section.
 
 Examples:
 * `unarchive 2` unarchives the 2nd delivery in the delivery list of the inspected contact.
