@@ -62,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        GoodsStorage goodsStorage = new CsvGoodsStorage(userPrefs.getGoodsFilePath());
+        GoodsStorage goodsStorage =
+                new CsvGoodsStorage(userPrefs.getGoodsFilePath(), userPrefs.getFilterGoodsFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, goodsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -101,16 +102,18 @@ public class MainApp extends Application {
             goodsReceiptList = storage.readGoods();
             if (goodsReceiptList.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getGoodsFilePath()
-                        + " populated with no Goods.");
+                        + " populated with a sample goodsReceiptList.");
             }
-            // TODO: Add Sample Data for Goods
-            initialGoodsData = goodsReceiptList.orElseGet(ReceiptLog::new);
+
+            initialGoodsData = goodsReceiptList.orElse(SampleDataUtil.getSampleReceiptLog(initialData));
+            System.out.println("Running");
         } catch (DataLoadingException e) {
             logger.warning("Creating a new data file " + storage.getGoodsFilePath()
-                    + " populated with no Goods.");
+                    + " populated with an empty goodsReceiptList.");
             initialGoodsData = new ReceiptLog();
         }
 
+        System.out.println("Initial Data: " + initialGoodsData.getReceiptList());
         return new ModelManager(initialData, userPrefs, initialGoodsData);
     }
 

@@ -114,6 +114,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public Boolean getExportFilterGoodsStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExportFilterGoodsToTrue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExportFilterGoodsToFalse() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -186,6 +201,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyReceiptLog getGoods() {
             return new ReceiptLog();
+        }
+
+        @Override
+        public ReadOnlyReceiptLog getGoodsFiltered() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

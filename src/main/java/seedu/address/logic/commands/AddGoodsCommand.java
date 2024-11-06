@@ -59,7 +59,7 @@ public class AddGoodsCommand extends Command {
         if (model.findPerson(p -> goodsReceipt.isFromSupplier(p.getName())).isEmpty()) {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
-        if (model.findGoodsReceipt(goodsReceipt::isSameReceipt).isPresent()) {
+        if (model.findGoodsReceipt(goodsReceipt::equals).isPresent()) {
             throw new CommandException(MESSAGE_DUPLICATE_RECEIPT);
         }
         model.addGoods(goodsReceipt);

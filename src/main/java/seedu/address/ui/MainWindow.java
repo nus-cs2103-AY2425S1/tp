@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
@@ -48,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private SplitPane personGoodsSplitPanePlaceholder;
+
+    @FXML
+    private SplitPane resultBoxPersonGoodsSplitPanePlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,15 +118,17 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
+    @SuppressWarnings("checkstyle:SingleSpaceSeparator")
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getObservableFilteredPersonsWithGoodsCategoryTagsAdded());
-        personGoodsSplitPanePlaceholder.getItems().add(personListPanel.getRoot());
-
         goodsListPanel = new GoodsListPanel(logic.getFilteredReceiptsList());
-        personGoodsSplitPanePlaceholder.getItems().add(goodsListPanel.getRoot());
+        personGoodsSplitPanePlaceholder.getItems().addAll(personListPanel.getRoot(), goodsListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        resultBoxPersonGoodsSplitPanePlaceholder.setOrientation(Orientation.VERTICAL);
+        resultBoxPersonGoodsSplitPanePlaceholder.setDividerPosition(0, 0.8);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());

@@ -38,4 +38,6 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, GoodsStor
 
     @Override
     void saveGoods(ReadOnlyReceiptLog goods) throws IOException;
+
+    void saveFilteredGoods(ReadOnlyReceiptLog goods) throws IOException;
 }

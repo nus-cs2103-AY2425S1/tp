@@ -29,11 +29,13 @@ public class CsvGoodsStorageTest {
 
     private CsvGoodsStorage csvGoodsStorage;
     private Path filePath;
+    private Path tempSavePath;
 
     @BeforeEach
     public void setUp() {
         filePath = testFolder.resolve("TempGoods.csv");
-        csvGoodsStorage = new CsvGoodsStorage(filePath);
+        tempSavePath = testFolder.resolve("TempExportGoods.csv");
+        csvGoodsStorage = new CsvGoodsStorage(filePath, tempSavePath);
     }
 
     @Test
@@ -78,9 +80,7 @@ public class CsvGoodsStorageTest {
         Path nonExistentFile = Paths.get("nonExistentFile.csv");
         Optional<ReadOnlyReceiptLog> optionalReceiptLog = csvGoodsStorage.readGoods(nonExistentFile);
 
-        assertTrue(optionalReceiptLog.isPresent());
-        ReadOnlyReceiptLog receiptLog = optionalReceiptLog.get();
-        assertTrue(receiptLog.getReceiptList().isEmpty());
+        assertTrue(optionalReceiptLog.isEmpty());
     }
 
     @Test
@@ -116,7 +116,7 @@ public class CsvGoodsStorageTest {
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
         GoodsReceipt expected = new GoodsReceiptBuilder().build();
-        assertTrue(expected.isSameReceipt(goodsReceipt));
+        assertTrue(expected.equals(goodsReceipt));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class CsvGoodsStorageTest {
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
         GoodsReceipt expected = new GoodsReceiptBuilder().withSupplierName(new Name("Supplier")).build();
-        assertTrue(expected.isSameReceipt(goodsReceipt));
+        assertTrue(expected.equals(goodsReceipt));
     }
 
     @Test
@@ -190,7 +190,7 @@ public class CsvGoodsStorageTest {
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
         GoodsReceipt expected = new GoodsReceiptBuilder().withSupplierName(new Name("Supplier")).build();
-        assertTrue(expected.isSameReceipt(goodsReceipt));
+        assertTrue(expected.equals(goodsReceipt));
     }
 
     @Test
@@ -227,7 +227,7 @@ public class CsvGoodsStorageTest {
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
         GoodsReceipt expected = new GoodsReceiptBuilder().build();
-        assertTrue(expected.isSameReceipt(goodsReceipt));
+        assertTrue(expected.equals(goodsReceipt));
     }
 
     @Test
@@ -256,6 +256,6 @@ public class CsvGoodsStorageTest {
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
         GoodsReceipt expected = new GoodsReceiptBuilder().build();
-        assertTrue(expected.isSameReceipt(goodsReceipt));
+        assertTrue(expected.equals(goodsReceipt));
     }
 }
