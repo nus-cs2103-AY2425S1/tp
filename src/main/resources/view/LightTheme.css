@@ -160,7 +160,7 @@
 .cell_id_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 12px;
-    -fx-background-color: -color-accent-light;
+    -fx-background-color: -color-accent-dark;
     -fx-text-fill: -color-background;
     -fx-background-radius: 5px;
     -fx-font-weight: bold;
