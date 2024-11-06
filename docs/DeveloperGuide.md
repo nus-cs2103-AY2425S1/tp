@@ -569,5 +569,5 @@ is used as the error message. This can be lengthy and too general. Instead, a mo
 exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work 
 because there is a missing `organisation` field, an error like `missing organisation field` can be shown instead.
 2. **Automate deletion of reminders for planned events that are over**: Currently, events that are over will show negative
-date for the time remaining field. Users will have to delete unwanted reminders themselves which can be troublesome. This
-process can be automated such that reminders that have expired can be archived or deleted according to the user's preference.
+date for the time remaining field. Users will have to delete unwanted reminders themselves which can be troublesome. 
+This process can be automated such that reminders that have expired can be archived or deleted according to the user's preference.
