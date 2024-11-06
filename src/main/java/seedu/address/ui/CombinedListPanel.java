@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -29,11 +30,15 @@ public class CombinedListPanel extends UiPart<Region> {
      */
     public CombinedListPanel(ObservableList<Owner> ownerList, ObservableList<Pet> petList) {
         super(FXML);
+
+        ownerListView.setPlaceholder(new Label("No Owners"));
         ownerListView.setItems(ownerList);
         ownerListView.setCellFactory(listView -> new OwnerListViewCell());
 
+        petListView.setPlaceholder(new Label("No Pets"));
         petListView.setItems(petList);
         petListView.setCellFactory(listView -> new PetListViewCell());
+
     }
 
     /**
