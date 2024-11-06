@@ -32,9 +32,6 @@ public class PublicAddressesComposition {
         assert publicAddresses != null : "Public addresses map cannot be null.";
         assert !publicAddresses.values().stream().anyMatch(Set::isEmpty)
             : "Public addresses map cannot contain empty sets.";
-        if (publicAddresses == null || publicAddresses.values().stream().anyMatch(Set::isEmpty)) {
-            throw new IllegalArgumentException("Public addresses map cannot be null or contain empty sets.");
-        }
         this.publicAddresses = publicAddresses.entrySet().stream()
             .collect(HashMap::new, (m, e) -> m.put(e.getKey(),
                 new HashSet<>(e.getValue())), HashMap::putAll);
@@ -48,9 +45,6 @@ public class PublicAddressesComposition {
     public void addPublicAddress(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
         assert publicAddress.getNetwork() != null : "Network cannot be null.";
-        if (publicAddress == null || publicAddress.getNetwork() == null) {
-            throw new IllegalArgumentException("Public address and its network cannot be null.");
-        }
         publicAddresses.computeIfAbsent(publicAddress.getNetwork(), k -> new HashSet<>());
         publicAddresses.get(publicAddress.getNetwork()).add(publicAddress);
     }
@@ -64,9 +58,6 @@ public class PublicAddressesComposition {
     public void setPublicAddressForNetwork(Network network, Set<PublicAddress> publicAddresses) {
         assert network != null : "Network cannot be null.";
         assert publicAddresses != null : "Public addresses cannot be null.";
-        if (network == null || publicAddresses == null) {
-            throw new IllegalArgumentException("Network and public addresses cannot be null.");
-        }
         this.publicAddresses.put(network, new HashSet<>(publicAddresses));
     }
 
@@ -87,9 +78,6 @@ public class PublicAddressesComposition {
      */
     public Set<PublicAddress> getByNetwork(Network network) {
         assert network != null : "Network cannot be null.";
-        if (network == null) {
-            throw new IllegalArgumentException("Network cannot be null.");
-        }
         return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
     }
 
@@ -102,9 +90,6 @@ public class PublicAddressesComposition {
     public void addPublicAddressesToNetwork(Network network, Set<PublicAddress> addresses) {
         assert network != null : "Network cannot be null.";
         assert addresses != null : "Addresses cannot be null.";
-        if (network == null || addresses == null) {
-            throw new IllegalArgumentException("Network and addresses cannot be null.");
-        }
         this.publicAddresses.computeIfAbsent(network, k -> new HashSet<>()).addAll(addresses);
     }
 
@@ -116,9 +101,6 @@ public class PublicAddressesComposition {
      */
     public Boolean hasPublicAddress(String publicAddressString) {
         assert publicAddressString != null : "Public address string cannot be null.";
-        if (publicAddressString == null) {
-            throw new IllegalArgumentException("Public address string cannot be null.");
-        }
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
             .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
@@ -134,9 +116,6 @@ public class PublicAddressesComposition {
     public boolean hasPublicAddressWithLabelWithinNetwork(Network network, String label) {
         assert network != null : "Network cannot be null.";
         assert label != null : "Label cannot be null.";
-        if (network == null || label == null) {
-            throw new IllegalArgumentException("Network and label cannot be null.");
-        }
         return publicAddresses.entrySet().stream()
             .filter(entry -> entry.getKey().equals(network))
             .flatMap(entry -> entry.getValue().stream())
@@ -152,9 +131,6 @@ public class PublicAddressesComposition {
     public PublicAddressesComposition filterByPublicAddress(String publicAddressString) {
         assert publicAddressString != null : "Public address string cannot be null.";
         assert !publicAddressString.isEmpty() : "Public address string cannot be empty.";
-        if (publicAddressString == null || publicAddressString.isEmpty()) {
-            throw new IllegalArgumentException("Public address string cannot be null or empty.");
-        }
         Map<Network, Set<PublicAddress>> filteredPublicAddresses = publicAddresses.entrySet().stream()
             .map(entry -> {
                 Set<PublicAddress> filteredAddresses = entry.getValue().stream()
@@ -175,9 +151,6 @@ public class PublicAddressesComposition {
      */
     public PublicAddressesComposition copyAndAdd(PublicAddress newPublicAddress) {
         assert newPublicAddress != null : "New public address cannot be null.";
-        if (newPublicAddress == null) {
-            throw new IllegalArgumentException("New public address cannot be null.");
-        }
         Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
             .map(entry -> {
                 Set<PublicAddress> updatedAddresses = entry.getValue().stream()
@@ -198,9 +171,6 @@ public class PublicAddressesComposition {
      */
     public void removePublicAddress(PublicAddress existingPublicAddress) {
         assert existingPublicAddress != null : "Existing public address cannot be null.";
-        if (existingPublicAddress == null) {
-            throw new IllegalArgumentException("Existing public address cannot be null.");
-        }
         publicAddresses.get(existingPublicAddress.getNetwork())
             .stream().filter(pa -> pa.equals(existingPublicAddress)).findFirst()
             .ifPresent(pa -> {
@@ -226,9 +196,6 @@ public class PublicAddressesComposition {
             : "Public addresses must contain the specified network.";
         assert publicAddresses.get(existingPublicAddress.getNetwork()).contains(existingPublicAddress)
             : "Existing public address must be present in the public addresses.";
-        if (existingPublicAddress == null || updatedPublicAddress == null) {
-            throw new IllegalArgumentException("Existing and updated public addresses cannot be null.");
-        }
         publicAddresses.get(existingPublicAddress.getNetwork())
             .stream().filter(pa -> pa.equals(existingPublicAddress)).findFirst()
             .ifPresent(pa -> {
@@ -294,9 +261,6 @@ public class PublicAddressesComposition {
      */
     public Boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
-        if (publicAddress == null) {
-            throw new IllegalArgumentException("Public address cannot be null.");
-        }
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
             .anyMatch(pa -> pa.isPublicAddressStringEquals(
@@ -313,10 +277,6 @@ public class PublicAddressesComposition {
         assert !publicAddresses.isEmpty() : "Public addresses map cannot be empty.";
         assert !publicAddresses.values().stream().anyMatch(Set::isEmpty)
             : "Public addresses map cannot contain empty sets.";
-        if (publicAddresses == null || publicAddresses.isEmpty() || publicAddresses.values()
-            .stream().anyMatch(Set::isEmpty)) {
-            throw new IllegalStateException("Public addresses map cannot be null, empty, or contain empty sets.");
-        }
         return publicAddresses.values().stream().flatMap(Set::stream).findFirst().orElse(null);
     }
 
