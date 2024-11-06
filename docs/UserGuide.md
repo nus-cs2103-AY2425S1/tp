@@ -150,6 +150,70 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Listing all members for attendance : `attendance`
+
+Lists all contacts that have the role “Member” in the address book, making it easier to check and mark attendance for them directly.
+
+Format: `attendance` or `atd` (alias)
+
+* The command must be in lowercase. Variations (e.g., capitalized or mixed-case) will not be recognized.
+* This command does not take any additional parameters. If any extra input is provided, an error message will be displayed.
+
+
+![result for 'attendance'](images/ListAttendanceResult.png)
+
+### Marking attendance : `mark`
+
+Marks attendance for **members** with specified Telegram handles on a specific date.
+
+
+Format: `mark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+
+Alternative Format: `m t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+
+* Each Telegram handle must begin with t/, followed by an alphanumeric or _ string with no spaces, e.g., t/berniceyu123.
+* The command is not case-sensitive (e.g., t/alexyeoh is the same as t/ALEXYEOH) except command keyword `mark` itself.
+* The command does not allow spaces between the prefix t/ or d/ and the argument.
+
+Command Parameters:
+- Telegram Handles (`t/telegram`):
+  * Accepts multiple handles separated by spaces, each beginning with t/.
+  * Handles must be alphanumeric or include _ (e.g., t/alex_yeoh123).
+  * Invalid input: Spaces within or after the prefix (e.g., t/ alexyeoh) result in an error.
+  * Telegram handle should belong to a contact with `Member` role.
+
+- Date (`d/date`)
+  * Takes in one string value with format d/YYYY-MM-DD (eg. d/2024-01-22 not d/2024/1/22)
+  * Only accept one date, if multiple dates are input, only the last one will be recorded as the attendance date.
+  * Date must not be later than current date (eg. 2090-11-02 is an invalid datetime)
+
+Examples:
+
+* `mark t/toom t/maary d/2024-11-02`
+
+  ![result of command `mark t/toom t/maary d/2024-11-02`](images/MarkCommandResult.png)
+
+* Mark attendance of contact with telegram `toom` first, then input command `mark t/toom t/maary d/2024-11-02`
+
+  ![img_3.png](images/RepeatedMarkCommandResult.png)  
+
+* Mark attendance of a non-member contact `mark t/jerry d/2024-11-02`
+
+  ![result of command `mark t/jerry d/2024-11-02`](images/MarkNonMemberCommandResult.png)
+
+
+### Unmarking attendance : `unmark`
+
+Unmarks attendance for **members** with specified Telegram handles on a specific date.
+
+
+Format: `unmark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`
+
+Alternative Format: `um t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` 
+
+* All parameter constraints and error messages are the same as `mark` command, except `mark` is replaced by `unmark`
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -206,3 +270,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Attendance** | `attendance` or `atd`
+**Mark Attendance** | `mark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` or `m t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` <br> e.g., `mark t/berniceYu t/alexYeoh d/2024-11-02`
+**Unmark Attendance** | `unmark t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE` or `um t/TELEGRAM1 [t/TELEGRAM2] [...] d/DATE`

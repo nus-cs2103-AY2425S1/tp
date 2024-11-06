@@ -1,15 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.profile.Profile.extractProfileNameFromPathOrThrow;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.profile.Profile;
+import seedu.address.model.profile.exceptions.IllegalProfileNameException;
+import seedu.address.model.profile.exceptions.IllegalProfilePathException;
 
 
 /**
@@ -28,45 +31,59 @@ public class SwitchCommand extends Command {
             + "Parameters: PROFILE_NAME\n"
             + "Example: " + COMMAND_WORD + " john-doe";
     public static final String MESSAGE_SUCCESS = "Switched to the profile '%1$s'";
-    public static final String MESSAGE_SHOW_PROFILES = "Other profiles: %1$s";
+    public static final String MESSAGE_SHOW_PROFILES = "Switch to one of the other profiles in this list: [%1$s]\n"
+            + "Example: " + COMMAND_WORD + " %2$s";
     public static final String MESSAGE_NO_SWITCH = "Already on: %1$s";
     public static final String MESSAGE_ILLEGAL_MODIFICATION =
-            "We do not support illegal file modifications. Please ensure the profile name fits our constraints:\n"
+            "switch command does not support illegal file modifications."
+                    + " Please ensure the existing profile name fits our constraints before switching.\n"
                     + Profile.MESSAGE_CONSTRAINTS;
 
-    private final Profile profileName;
-    public SwitchCommand(Profile profileName) {
-        this.profileName = (profileName);
+    private final Profile profile;
+    public SwitchCommand(Profile profile) {
+        this.profile = profile;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // display all available commands
-        if (profileName instanceof Profile.EmptyProfile) {
+        // display help usage or all other profiles
+        if (profile instanceof Profile.EmptyProfile) {
             Set<Profile> profiles = model.getProfiles();
             if (profiles.isEmpty()) {
-                throw new CommandException(MESSAGE_USAGE);
+                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
             }
-            String profilesList = profiles.stream()
-                    .map(Profile::toString)
-                    .collect(Collectors.joining(", "));
-            return new CommandResult(String.format(MESSAGE_SHOW_PROFILES, profilesList));
+            List<String> profilesList = profiles.stream()
+                    .map(Profile::toPath)
+                    .flatMap(Profile::extractNameFromPathOrIgnore)
+                    .toList();
+            assert !profilesList.isEmpty() : "There is no profile to switch to. Message usage should have been thrown";
+            throw new CommandException(String.format(
+                    MESSAGE_SHOW_PROFILES,
+                    String.join(", ", profilesList),
+                    profilesList.get(0)
+            ));
+
         }
 
-        Path filePath = Paths.get("data", profileName + ".json");
+        Path filePath = profile.toPath();
         // updates the model to track the profile switch
-        String curProfileName = getProfileName(model.getAddressBookFilePath());
-        if (!Profile.isValidProfile(curProfileName)) {
+        String curProfileName;
+        try {
+            curProfileName = extractProfileNameFromPathOrThrow(model.getAddressBookFilePath());
+        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
             throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
         }
-        if (curProfileName.equals(profileName.toString())) {
-            return new CommandResult(String.format(MESSAGE_NO_SWITCH, profileName));
+        if (curProfileName.equals(profile.toString())) {
+            throw new CommandException(String.format(MESSAGE_NO_SWITCH, profile));
         }
+
+        //add curProfile to other profiles, then update cur file path.
         model.addToProfiles(new Profile(curProfileName));
         model.setAddressBookFilePath(filePath);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, profileName)).markProfileSwitched();
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, profile)).markProfileSwitched();
     }
 
     @Override
@@ -76,20 +93,11 @@ public class SwitchCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SwitchCommand)) {
+        if (!(other instanceof SwitchCommand otherSwitchCommand)) {
             return false;
         }
 
-        SwitchCommand otherSwitchCommand = (SwitchCommand) other;
-        return profileName.equals(otherSwitchCommand.profileName);
+        return profile.equals(otherSwitchCommand.profile);
     }
 
-    private static String getProfileName(Path filePath) {
-        boolean startsWithData = filePath.startsWith("data");
-        boolean singleNameFile = filePath.getNameCount() == 2;
-        boolean endsWithJson = filePath.toString().endsWith(".json");
-        assert startsWithData && singleNameFile && endsWithJson : "This file path is not supported";
-        String fileName = filePath.getFileName().toString();
-        return fileName.substring(0, fileName.length() - 5);
-    }
 }

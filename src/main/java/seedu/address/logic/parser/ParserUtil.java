@@ -156,7 +156,7 @@ public class ParserUtil {
     public static Profile parseProfileName(String profileName) throws ParseException {
         requireNonNull(profileName);
         String trimmedProfileName = profileName.trim();
-        if (!Profile.isValidProfile(trimmedProfileName)) {
+        if (!Profile.isValidProfileName(trimmedProfileName)) {
             throw new ParseException(Profile.MESSAGE_CONSTRAINTS);
         }
         return new Profile(trimmedProfileName);

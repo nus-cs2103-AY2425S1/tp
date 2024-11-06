@@ -35,8 +35,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return profiles;
     }
 
+    public void setProfiles(HashSet<Profile> profiles) {
+        this.profiles.clear();
+        if (profiles != null) {
+            this.profiles.addAll(profiles);
+        }
+    }
+
     public void addToProfiles(Profile profile) {
         this.profiles.add(profile);
+    }
+
+    public void removeFromProfiles(Profile profile) {
+        this.profiles.remove(profile);
     }
 
     /**
@@ -46,6 +57,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setProfiles(newUserPrefs.getProfiles());
     }
 
     public GuiSettings getGuiSettings() {
