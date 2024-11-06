@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -25,8 +26,11 @@ public class PetListPanel extends UiPart<Region> {
      */
     public PetListPanel(ObservableList<Pet> petList) {
         super(FXML);
+
+        petListView.setPlaceholder(new Label("No Pets"));
         petListView.setItems(petList);
         petListView.setCellFactory(listView -> new PetListViewCell());
+
     }
 
     /**
