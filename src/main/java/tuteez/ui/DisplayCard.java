@@ -91,7 +91,8 @@ public class DisplayCard extends UiPart<Region> {
         IntStream.range(0, person.getRemarkList().getRemarks().size())
                 .forEach(i -> {
                     String remark = person.getRemarkList().getRemarks().get(i).toString();
-                    displayRemarks.getChildren().add(new Label((i + 1) + ". " + remark));
+                    String remarkText = (i + 1) + ".\u00A0" + remark;
+                    displayRemarks.getChildren().add(new Label(remarkText));
                 });
     }
 }

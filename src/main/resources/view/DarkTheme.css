@@ -84,14 +84,15 @@
 
 .cell_big_label {
     -fx-font-family: "Raleway Semibold";
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
     -fx-text-fill: derive(#757575, -50%);
 }
 
 .cell_small_label {
     -fx-font-family: "Raleway";
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-text-fill: derive(#757575, -50%);
+
 }
 
 .card_big_label {
@@ -321,7 +322,7 @@
 }
 
 #tags {
-    -fx-hgap: 7;
+    -fx-hgap: 3;
     -fx-vgap: 3;
     -fx-margin-top: 10px;
     -fx-padding: 5 0 5 0;
@@ -333,7 +334,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 16;
+    -fx-font-size: 14px;
 }
 
 #nextLesson {
@@ -342,7 +343,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 16;
+    -fx-font-size: 14px;
 }
 
 #displayTags {
@@ -357,7 +358,7 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 24;
+    -fx-font-size: 20px;
 }
 
 .display-scroll-pane {
@@ -378,7 +379,7 @@
 }
 
 .header-container {
-    -fx-padding: 32px;
+    -fx-padding: 24px;
     -fx-background-color: white;
     -fx-border-color: derive(#757575, 90%);
     -fx-border-radius: 5 5 0 0;
@@ -387,14 +388,14 @@
 }
 
 .section-container {
-    -fx-padding: 32px;
+    -fx-padding: 24px;
     -fx-background-color: white;
     -fx-border-color: derive(#757575, 90%);
     -fx-border-width: 0 1 0 1;
 }
 
 .bottom-container {
-    -fx-padding: 32px;
+    -fx-padding: 24px;
     -fx-background-color: white;
     -fx-border-color: derive(#757575, 90%);
     -fx-border-radius: 0 0 5 5;
@@ -417,7 +418,7 @@
 
 .content-label {
     -fx-text-fill: #555555;
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
     -fx-opacity: 0.9;
 }
 
@@ -437,9 +438,11 @@
 
 /* Style for each remark label with numbering */
 #displayRemarks .label {
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
     -fx-padding: 5 10;
     -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+    -fx-wrap-text: true;
 }
 
 #displayLessons {
@@ -450,7 +453,8 @@
 #displayLessons .label{
     -fx-padding: 5 10;
     -fx-text-fill: #555555;
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
+    -fx-opacity: 0.9;
 }
 
 #displayCardContainer {
