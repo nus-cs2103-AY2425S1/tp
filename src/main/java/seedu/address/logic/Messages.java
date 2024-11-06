@@ -31,7 +31,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE = "At least one of the dates is not in the right format."
             + " Please check the correct usage. \n%1$s";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "No student with the name %1$s is found.";
+    public static final String MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT = "%1$s is not enrolled in any " +
+            "tutorial, hence there is no fees to be paid.";
     public static final String MESSAGE_LOGGER_FOR_EXCEPTION = "An exception is thrown in: %s";
     public static final String MESSAGE_PREFIX_NOT_ALLOWED = "%s cannot be used in this command";
 
