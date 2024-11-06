@@ -39,11 +39,9 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        // Check if it matches the blood type pattern when `+` or `-` is present
         if (test.contains("+") || test.contains("-")) {
             return test.matches(BLOOD_TYPE_REGEX);
         }
-        // Otherwise, allow any alphanumeric string with spaces
         return test.matches(VALIDATION_REGEX);
     }
     @Override
