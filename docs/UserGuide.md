@@ -32,9 +32,9 @@ To get started,
 
 3. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
 
-4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application.<br>
+4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application and type `view name/Alex Yeoh`.<br>
    A interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/loadingPageOfUi.png)
+   ![quick start GUI on launch](images/quickStartLaunchScreenshot.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -43,15 +43,14 @@ To get started,
 
     * `mark name/Alex Yeoh week/0` : Marks `Alex Yeoh` attendance in KonTActs.
 
-    * `delete n/Bernice Yu` : Deletes `Bernice Yu` from KonTActs.
+    * `delete name/Bernice Yu` : Deletes `Bernice Yu` from KonTActs.
 
     * `addGrade name/Alex Yeoh assignment/Ex01 score/9` : Assigns and adds `Ex01` with a score of 9 to `Alex Yeoh`.
 
-    * `view n/Alex Yeoh`: Views the added grade and assignment for `Alex Yeoh`.
+   * The GUI should now look something like this.<br>
+   ![quick start GUI after commands](images/quickStartResultScreenshot.png)
 
    * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
    <br><br>
@@ -80,7 +79,47 @@ To get started,
 | [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE` <br> e.g. `addGrade n/JohnDoe asgn/Ex01 s/5`                                                                             |
 | [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade n/NAME asgn/ASSIGNMENT_NAME` <br> e.g. `removeGrade n/John Doe asgn/Ex01`                                                                                  |
 
-<br><br>
+--------------------------------------------------------------------------------------------------------------------
+## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
+
+All parameters in KonTActs come equipped with their equivalent shortcuts.
+
+| Parameter     | Shortcut |
+|---------------|----------|
+| `name/`       | `n/`     |
+| `email/`      | `e/`     |
+| `tag/`        | `t/`     |
+| `assignment/` | `a/`     |
+| `score/`      | `s/`     |
+| `telegram/`   | `tele/`  |
+| `github/`     | `g/`     |
+| `week/`       | `w/`     |
+| `order/`      | `o/`     |
+| `path/`       | `p/`     |
+
+--------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------
+## <i class="fa-solid fa-bolt-lightning"></i> Command shortcuts
+
+All commands in KonTActs come equipped with their equivalent shortcuts.
+
+| Command       | Shortcut |
+|---------------|----------|
+| `mark`        | `m`      |
+| `unmark`        | `um`     |
+| `import`        | `im`     |
+| `export`        | `ex`     |
+| `find`        | `fd`     |
+| `filter`        | `f`      |
+| `view`        | `v`      |
+| `addGrade`        | `ag`     |
+| `removeGrade`        | `rg`     |
+| `delete`        | `rm`     |
+| `edit`        | `e`      |
+| `GitHub`        | `git`    |
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fa-solid fa-address-book"></i> Features
 
