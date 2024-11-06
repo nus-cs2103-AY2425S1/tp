@@ -12,6 +12,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -42,11 +46,13 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_INCOMPLETE_COMMAND = "Filter predicate cannot be empty.";
 
+    private static final Logger logger = LogsCenter.getLogger(FilterCommand.class);
     private final PersonPredicate predicate;
 
     public FilterCommand(PersonPredicate predicate) {
         assert predicate != null;
         this.predicate = predicate;
+        logger.log(Level.FINE, "FilterCommand initialized with predicate");
     }
 
     @Override
@@ -55,6 +61,10 @@ public class FilterCommand extends Command {
         model.updateFilteredPersonList(predicate);
 
         assert model.getFilteredPersonList() != null;
+
+        int filterCount = model.getFilteredPersonList().size();
+        logger.log(Level.INFO, "FilterCommand execution completed. Number of persons listed: {0}", filterCount);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

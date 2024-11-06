@@ -5,7 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,6 +32,7 @@ public class AddEcNameCommand extends Command {
             + "New Emergency Contact Name: %2$s";
     public static final String MESSAGE_DELETE_ECNAME_SUCCESS = "Removed emergency contact name for %1$s\n";
 
+    private static final Logger logger = LogsCenter.getLogger(AddEcNameCommand.class);
     private final Index index;
     private final EcName ecName;
 
@@ -49,6 +53,7 @@ public class AddEcNameCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Invalid index: {0}. No person at this index.", index);
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

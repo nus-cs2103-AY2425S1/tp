@@ -15,7 +15,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -34,6 +37,8 @@ import seedu.address.model.person.StudentClass;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
+    private static final Logger logger = LogsCenter.getLogger(FilterCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
@@ -41,6 +46,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         assert args != null;
+
+        logger.log(Level.INFO, "Parsing arguments for FilterCommand: {0}", args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -167,12 +174,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (names.isEmpty() && phones.isEmpty() && emails.isEmpty() && addresses.isEmpty()
                 && registerNumbers.isEmpty() && sexes.isEmpty() && classes.isEmpty()
                 && ecNames.isEmpty() && ecNumbers.isEmpty() && tags.isEmpty()) {
+            logger.log(Level.WARNING, "No predicates provided, all filter predicates are empty.");
+
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
         PersonPredicate predicate = new PersonPredicate(names, phones, emails, addresses, registerNumbers, sexes,
                 classes, ecNames, ecNumbers, tags);
+
+        logger.log(Level.INFO, "FilterCommand created with predicate: {0}", predicate);
 
         return new FilterCommand(predicate);
     }
