@@ -19,7 +19,7 @@ import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
 /**
- * Adds a Lesson to the address book.
+ * Adds a Lesson to VolunTier.
  */
 public class AddLessonCommand extends Command {
 
@@ -27,9 +27,9 @@ public class AddLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a lesson taught by the tutor to the tutee identified by their respective index numbers "
-            + "in the displayed persons list.\n"
-            + "Parameters: TUTORINDEX TUTEEINDEX (must be positive integers)\n"
-            + "Example: " + COMMAND_WORD + " 1 3" + " " + PREFIX_SUBJECT + "Math";
+            + "in the displayed persons list, along with the subject of the lesson.\n"
+            + "Parameters: TUTOR_INDEX TUTEE_INDEX (must be positive integers) " + PREFIX_SUBJECT + " SUBJECT\n"
+            + "Example: " + COMMAND_WORD + " 1 3 " + PREFIX_SUBJECT + " Math";
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added Lesson: %1$s";
 
@@ -37,7 +37,7 @@ public class AddLessonCommand extends Command {
 
     public static final String MESSAGE_INVALID_TUTEE_INDEX = "The person index provided is not a Tutee";
 
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in VolunTier";
 
     public static final String MESSAGE_INVALID_SUBJECT = "The tutor, tutee and the lesson to be added "
             + "must have the same subject";

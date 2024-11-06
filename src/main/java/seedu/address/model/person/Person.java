@@ -146,10 +146,6 @@ public abstract class Person {
                 .toString();
     }
 
-    public void addSubject(Subject subject) {
-        subjects.add(subject);
-    }
-
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
     }

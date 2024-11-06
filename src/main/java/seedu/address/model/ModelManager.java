@@ -130,13 +130,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setLesson(Lesson target, Lesson editedLesson) {
-        requireAllNonNull(target, editedLesson);
-
-        versionedAddressBook.setLesson(target, editedLesson);
-    }
-
-    @Override
     public List<Person> getAssociatedPeople(Person person) {
         return versionedAddressBook.getAssociatedPeople(person);
     }
@@ -159,6 +152,8 @@ public class ModelManager implements Model {
     }
 
     //=========== Undo/Redo =================================================================================
+    //@@author estellelim-reused
+    //Reused from https://github.com/se-edu/addressbook-level4.git
     @Override
     public boolean canUndoAddressBook() {
         return versionedAddressBook.canUndo();
@@ -179,6 +174,7 @@ public class ModelManager implements Model {
     public void commitAddressBook() {
         versionedAddressBook.commit();
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
@@ -192,12 +188,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        boolean check1 = versionedAddressBook.equals(otherModelManager.versionedAddressBook);
-        boolean check2 = userPrefs.equals(otherModelManager.userPrefs);
-        boolean check3 = filteredPersons.equals(otherModelManager.filteredPersons);
         return versionedAddressBook.equals(otherModelManager.versionedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

@@ -4,7 +4,6 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Class I #FFFFFF
 Class "{abstract}\nPerson" as Person
 
 AddressBook *--> "1" UniquePersonList

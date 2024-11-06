@@ -8,6 +8,8 @@ import java.util.Collections;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 /**
  * Lists all the commands entered by user from the start of app launch.
  */
@@ -15,7 +17,7 @@ public class HistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "history";
     public static final String MESSAGE_SUCCESS = "Entered commands (from most recent to earliest):\n %1$s";
-    public static final String MESSAGE_NO_HISTORY = "You have not yet entered any commands.";
+    public static final String MESSAGE_NO_HISTORY = "You have not entered any commands yet.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
@@ -30,3 +32,4 @@ public class HistoryCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, String.join("\n", previousCommands)));
     }
 }
+//@@author
