@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalRestaurants.FIONA;
 import static seedu.address.testutil.TypicalRestaurants.GEORGE;
+import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
