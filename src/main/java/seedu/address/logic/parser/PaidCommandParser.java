@@ -4,15 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 
+import java.time.LocalDate;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.PaidCommand.PaidPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.LastPaidDate;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 /**

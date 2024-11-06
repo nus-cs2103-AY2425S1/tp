@@ -73,7 +73,8 @@ public class UnpaidCommand extends Command {
 
         Boolean updatedHasNotPaid = unpaidPersonDescriptor.getHasPaid().orElse(personToPay.getHasPaid());
         Frequency updatedFrequency = unpaidPersonDescriptor.getFrequency().orElse(personToPay.getFrequency());
-        LastPaidDate updatedLastPaidDate = unpaidPersonDescriptor.getLastPaidDate().orElse(personToPay.getLastPaidDate());
+        LastPaidDate updatedLastPaidDate = unpaidPersonDescriptor.getLastPaidDate()
+                .orElse(personToPay.getLastPaidDate());
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
                 personToPay.getAddress(), personToPay.getBirthday(),
