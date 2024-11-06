@@ -8,8 +8,12 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Attendee;
 import seedu.address.model.role.Role;
 import seedu.address.model.role.RoleHandler;
+import seedu.address.model.role.Sponsor;
+import seedu.address.model.role.Vendor;
+import seedu.address.model.role.Volunteer;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.ui.Observer;
 
@@ -268,7 +272,13 @@ public class Event {
      */
     public void editPerson(Person personToEdit, Person editedPerson) {
         requireAllNonNull(personToEdit, editedPerson);
+
+        removeContactFromEventRoleOnEdit(personToEdit, editedPerson);
         // check each set and see it contains the person to edit
+        editContactAcrossAllRoles(personToEdit, editedPerson);
+    }
+
+    private void editContactAcrossAllRoles(Person personToEdit, Person editedPerson) {
         if (attendees.contains(personToEdit)) {
             attendees.remove(personToEdit);
             attendees.add(editedPerson);
@@ -289,6 +299,22 @@ public class Event {
             volunteers.add(editedPerson);
         }
     }
+
+    private void removeContactFromEventRoleOnEdit(Person personToEdit, Person editedPerson) {
+        if (!editedPerson.hasRole(new Attendee())) {
+            attendees.remove(personToEdit);
+        }
+        if (!editedPerson.hasRole(new Volunteer())) {
+            volunteers.remove(personToEdit);
+        }
+        if (!editedPerson.hasRole(new Vendor())) {
+            vendors.remove(personToEdit);
+        }
+        if (!editedPerson.hasRole(new Sponsor())) {
+            sponsors.remove(personToEdit);
+        }
+    }
+
     @Override
     public boolean equals(Object other) { // equality of 2 events defined only by the event name
         return other == this // short circuit if same object

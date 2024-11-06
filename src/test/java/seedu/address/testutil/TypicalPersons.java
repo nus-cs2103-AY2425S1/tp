@@ -28,6 +28,12 @@ public class TypicalPersons {
 
             .withPhone("94351253")
             .withTelegramUsername("alice").withRoles("attendee").build();
+
+    public static final Person EDITED_ALICE = new PersonBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+
+            .withPhone("94351253")
+            .withTelegramUsername("alice").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
