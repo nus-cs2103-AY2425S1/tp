@@ -199,7 +199,8 @@ public class DeleteCommand extends Command {
         }
         DeleteCommand otherCommand = (DeleteCommand) other;
         return (targetIndex != null ? targetIndex.equals(otherCommand.targetIndex) : otherCommand.targetIndex == null)
-                && (policyIndex != null ? policyIndex.equals(otherCommand.policyIndex) : otherCommand.policyIndex == null)
+                && (policyIndex != null ? policyIndex.equals(otherCommand.policyIndex)
+                : otherCommand.policyIndex == null)
                 && (targetName != null ? targetName.equals(otherCommand.targetName) : otherCommand.targetName == null);
     }
 

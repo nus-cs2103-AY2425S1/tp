@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -9,8 +10,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.mockito.MockedStatic;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,12 +20,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Policy;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.MainWindow;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DeleteCommandTest {
 
@@ -99,7 +96,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_deletePersonByName_personNotFound_throwsCommandException() {
+    public void executeDeletePersonByName_personNotFoundThrowsException() {
         DeleteCommand deleteCommand = new DeleteCommand(new Name("Nonexistent Person"));
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
@@ -113,14 +110,15 @@ public class DeleteCommandTest {
         model.addPerson(person2);
         DeleteCommand deleteCommand = new DeleteCommand(new Name("John Doe"));
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DUPLICATE_NAMES, "John Doe", "1. John Doe\n2. John Doe\n");
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DUPLICATE_NAMES,
+                "John Doe", "1. John Doe\n2. John Doe\n");
         CommandResult result = deleteCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test
-    public void execute_deletePolicyFromPerson_policyNotFound_throwsCommandException() {
+    public void executeDeletePolicyFromPerson_policyNotFoundThrowsException() {
         Person person = new PersonBuilder().withName("John Doe").withPolicies("Policy 1").build();
         model.addPerson(person);
         Index personIndex = Index.fromOneBased(model.getFilteredPersonList().indexOf(person) + 1);
@@ -157,7 +155,8 @@ public class DeleteCommandTest {
         Index policyIndex = Index.fromOneBased(1); // Valid policy index
         DeleteCommand deleteCommand = new DeleteCommand(personIndex, policyIndex);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_POLICY_SUCCESS, policyIndex.getOneBased(), person.getName());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_POLICY_SUCCESS,
+                policyIndex.getOneBased(), person.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
