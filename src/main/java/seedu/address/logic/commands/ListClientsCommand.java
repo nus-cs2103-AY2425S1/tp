@@ -40,7 +40,18 @@ public class ListClientsCommand extends ListCommand {
         model.setDisplayClients();
         logger.info("Client display set to show all clients");
 
-        return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
+        // Check if the resulting filtered list is empty and set response message accordingly
+        boolean isListEmpty = model.isFilteredClientListEmpty();
+        String responseMessage = String.format(
+                isListEmpty ? ListCommand.MESSAGE_SUCCESS_EMPTY_LIST : ListCommand.MESSAGE_SUCCESS,
+                KEY_WORD
+        );
+
+        // Log the state of the filtered client list and the response message
+        logger.info(String.format("Filtered client list is %s. Sending response: %s",
+                isListEmpty ? "empty" : "not empty", responseMessage));
+
+        return new CommandResult(responseMessage);
     }
 
     /**

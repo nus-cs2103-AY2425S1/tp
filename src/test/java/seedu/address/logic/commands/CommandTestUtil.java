@@ -36,6 +36,8 @@ import seedu.address.model.property.Property;
 public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
+
+    public static final String VALID_NAME_TEST = "Amy s/o Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "91111111";
     public static final String VALID_PHONE_BOB = "92222222";

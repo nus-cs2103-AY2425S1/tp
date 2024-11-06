@@ -28,7 +28,9 @@ public class ParserUtilTest {
     private static final String INVALID_ASK = "11.00";
     private static final String INVALID_BID = "11.00";
 
-    private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_NAME = "Rachel s/o Walker O'neil";
+
+    private static final String VALID_TEST_NAME = "Bobby Lee";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
@@ -89,6 +91,13 @@ public class ParserUtilTest {
         seedu.address.model.client.NameWithoutNumber expectedName =
                 new seedu.address.model.client.NameWithoutNumber(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseClientNameWithoutNumber(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseClientComplexName_returnsParseSuccess() throws Exception {
+        seedu.address.model.client.NameWithoutNumber expectedName =
+                new seedu.address.model.client.NameWithoutNumber(VALID_TEST_NAME);
+        assertEquals(expectedName, ParserUtil.parseClientNameWithoutNumber(VALID_TEST_NAME));
     }
 
     // Tests for client Phone

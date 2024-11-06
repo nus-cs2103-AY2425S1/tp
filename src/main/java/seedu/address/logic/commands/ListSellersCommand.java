@@ -39,13 +39,24 @@ public class ListSellersCommand extends ListCommand {
 
         // Filter the client list to only show sellers
         model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_SELLERS_ONLY);
+        logger.info("Filtered client list updated to show sellers only");
 
         // Set the model to display the clients
         model.setDisplayClients();
         logger.info("Display updated to show all sellers");
 
-        // Return success message with the appropriate entity type
-        return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
+        // Check if the resulting filtered list is empty and set response message accordingly
+        boolean isListEmpty = model.isFilteredClientListEmpty();
+        String responseMessage = String.format(
+                isListEmpty ? ListCommand.MESSAGE_SUCCESS_EMPTY_LIST : ListCommand.MESSAGE_SUCCESS,
+                KEY_WORD
+        );
+
+        // Log the state of the filtered client list and the response message
+        logger.info(String.format("Filtered client list is %s. Sending response: %s",
+                isListEmpty ? "empty" : "not empty", responseMessage));
+
+        return new CommandResult(responseMessage);
     }
 
     /**
