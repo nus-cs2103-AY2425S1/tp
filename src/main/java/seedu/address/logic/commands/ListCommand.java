@@ -27,7 +27,7 @@ public class ListCommand extends Command {
             + "Examples: " + COMMAND_WORD + ", " + COMMAND_WORD + " archive/, " + COMMAND_WORD + " all/";
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all persons";
-    public static final String MESSAGE_SUCCESS_CURRENT = "Listed all current persons";
+    public static final String MESSAGE_SUCCESS_CURRENT = "Listed all current persons (i.e. not archived)";
     public static final String MESSAGE_SUCCESS_ARCHIVE = "Listed all archived persons";
 
     private final Predicate<Person> predicate;
