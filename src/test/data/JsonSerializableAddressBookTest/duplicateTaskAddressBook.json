@@ -13,6 +13,7 @@
   "tasks": [
     {
       "description": "Buy medication",
+      "isComplete": true,
       "patient": {
         "name": "Alice Pauline",
         "phone": "94351253",
@@ -25,6 +26,7 @@
     },
     {
       "description": "Buy medication",
+      "isComplete": true,
       "patient": {
         "name": "Alice Pauline",
         "phone": "94351253",

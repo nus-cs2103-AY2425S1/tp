@@ -22,6 +22,7 @@
   "tasks": [
     {
       "description": "Buy medication",
+      "isComplete": true,
       "patient": {
         "name": "Alice Pauline",
         "phone": "94351253",
@@ -34,6 +35,7 @@
     },
     {
       "description": "Visit doctor",
+      "isComplete": true,
       "patient": {
         "name": "Benson Meier",
         "phone": "98765432",

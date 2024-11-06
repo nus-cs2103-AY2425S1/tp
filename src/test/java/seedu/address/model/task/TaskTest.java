@@ -130,4 +130,11 @@ public class TaskTest {
                 + "}";
         assertEquals(expected, task.toString());
     }
+
+    @Test
+    public void hashCode_consistentWithEquals() {
+        Task taskOne = new Task(ALICE, VALID_DESCRIPTION_ONE);
+        Task taskTwo = new Task(ALICE, VALID_DESCRIPTION_ONE);
+        assertEquals(taskOne.hashCode(), taskTwo.hashCode());
+    }
 }
