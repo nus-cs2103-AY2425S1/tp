@@ -20,11 +20,6 @@
     <FlowPane fx:id="tags" />
 
     <HBox>
-        <Label id="fieldLabel" text="Phone Number: "/>
-        <Label fx:id="phone"  text="\$phone" />
-    </HBox>
-
-    <HBox>
         <Label id="fieldLabel" text="Telegram: "/>
         <Label fx:id="telegram" text="\$telegram"/>
     </HBox>

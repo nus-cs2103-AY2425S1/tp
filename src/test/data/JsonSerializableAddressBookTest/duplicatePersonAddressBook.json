@@ -1,7 +1,6 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
-    "phone": "94351253",
     "email": "alice@example.com",
     "telegram": "@alice",
     "tags": [ "friends" ],
@@ -9,7 +8,6 @@
     "attendance" : [ ]
   }, {
     "name": "Alice Pauline",
-    "phone": "94351253",
     "email": "pauline@example.com",
     "telegram": "@aliceepauline",
     "github" : "Alice",

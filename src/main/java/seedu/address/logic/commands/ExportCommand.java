@@ -61,7 +61,7 @@ public class ExportCommand extends Command {
      */
     private CommandResult writeData(CSVWriter writer, List<Person> persons) {
         // Define CSV header.
-        String[] header = {"Name", "Phone", "Email", "Telegram", "Tags", "Github", "Assignments", "WeeksPresent"};
+        String[] header = {"Name", "Email", "Telegram", "Tags", "Github", "Assignments", "WeeksPresent"};
         writer.writeNext(header);
 
         // Write each person data to CSV file.
@@ -74,7 +74,6 @@ public class ExportCommand extends Command {
             // Prepare the person's data as a string array for CSV.
             String[] record = {
                 person.getName().toString(),
-                person.getPhone().toString(),
                 person.getEmail().toString(),
                 person.getTelegram().toString(),
                 String.join(",", person.getTags().stream().map(Tag::toString).toArray(String[]::new)),
