@@ -1,3 +1,5 @@
+@import url("TagColors.css");
+
 /** Container containing all the cards **/
 #cardPane {
     -fx-background-color: transparent;
@@ -64,24 +66,6 @@
     -fx-font-weight: bold;
 }
 
-#assignedTier .gold-tier {
-    -fx-background-color: #B59410;
-    -fx-text-fill: #1A1A1A;
-}
-
-#assignedTier .silver-tier {
-    -fx-background-color: #C0C0C0;
-    -fx-text-fill: #1A1A1A;
-}
-
-#assignedTier .bronze-tier {
-    -fx-background-color: #804a00;
-}
-
-#assignedTier .reject-tier {
-    -fx-background-color: #5C0002;
-}
-
 /** Styling for Status Tag/Label **/
 #assignedStatus .label {
     -fx-text-fillx: white;
@@ -92,10 +76,3 @@
     -fx-font-weight: bold;
 }
 
-#assignedStatus .urgent-status {
-    -fx-background-color: #B22222;
-}
-
-#assignedStatus .nonUrgent-status {
-    -fx-background-color: #C46210;
-}

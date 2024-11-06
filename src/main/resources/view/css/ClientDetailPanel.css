@@ -1,3 +1,5 @@
+@import url("TagColors.css");
+
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
@@ -15,25 +17,9 @@
 }
 
 .detail-tier-label {
-    -fx-text-fill: white;
+    -fx-text-fill: blue;
     -fx-padding: 2 5 2 5;
     -fx-border-radius: 3;
     -fx-background-radius: 3;
     -fx-font-size: 12px;
-}
-
-/* Tier-specific styles for the detail panel */
-.detail-tier-label.gold-tier {
-    -fx-background-color: #B59410;
-}
-
-.detail-tier-label.silver-tier {
-    -fx-background-color: #71706e;
-}
-
-.detail-tier-label.bronze-tier {
-}
-
-.detail-tier-label.reject-tier {
-    -fx-background-color: #8B0000;
 }
