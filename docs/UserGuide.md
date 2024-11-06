@@ -129,6 +129,23 @@ Assigns vendors to events.
 * `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
 
+### Viewing Vendors & Events: `view`
+
+Views the details of a vendor or event.
+
+#### Format: `view v/INDEX` or `view e/INDEX`
+
+* Views the details of the vendor/event at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed vendor/event list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+* The details page include assigned events/vendors as well as a list of assignable events/vendors.
+  * The vendor details also include name, phone number, description, and tags.
+  * The event details also include name, date, and tags.
+
+#### Examples:
+* `view v/2` will show the details of the 2nd vendor.
+* `view e/1` will show the details of the 1st event.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
