@@ -684,11 +684,12 @@ Use case ends.
 
 ### Glossary
 
-| Key Terms      | Definition                                             |
-|----------------|--------------------------------------------------------|
-| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
-| Prefix         | Keyword used in commands to specify the parameter type |
-| Student Number | Unique identifier for a student                        |
+| Key Terms      | Definition                                                   |
+|----------------|--------------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
+| JAR            | Executable file containing Java classes and other resources. |
+| Prefix         | Keyword used in commands to specify the parameter type       |
+| Student Number | Unique identifier for a student                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -746,3 +747,23 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+[To be updated.]
+
+### Challenges Faced
+
+### Achievements
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Group size:** 4
+
+**Total Enhancements:** x/8 (`2x4`)
+
+[To be updated.]

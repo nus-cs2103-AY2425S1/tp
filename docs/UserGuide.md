@@ -867,11 +867,12 @@ the data of your previous T_Assistant home folder and also copy over `versionHis
 
 ## Glossary
 
-| Key Terms      | Definition                                             |
-|----------------|--------------------------------------------------------|
-| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
-| Prefix         | Keyword used in commands to specify the parameter type |
-| Student Number | Unique identifier for a student                        |
+| Key Terms      | Definition                                                   |
+|----------------|--------------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
+| JAR            | Executable file containing Java classes and other resources. |
+| Prefix         | Keyword used in commands to specify the parameter type       |
+| Student Number | Unique identifier for a student                              |
 
 ### Command Parameters
 
