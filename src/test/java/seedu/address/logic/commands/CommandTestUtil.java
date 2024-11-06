@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerNameContainsKeywordsPredicate;
 
 /**
  * Contains helper methods for testing commands.
@@ -202,8 +203,12 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates the {@code model}'s filtered event list to show only the event at the specified {@code targetIndex}
+     * in the {@code model}'s address book.
+     *
+     * @param model The model containing the filtered event list.
+     * @param targetIndex The index of the event to display in the filtered list.
+     * @throws AssertionError if the {@code targetIndex} is out of bounds for the filtered event list.
      */
     public static void showEventAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
@@ -213,5 +218,22 @@ public class CommandTestUtil {
         model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitEventName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
+    }
+    /**
+     * Updates the {@code model}'s filtered volunteer list to show only the volunteer at the
+     * specified {@code targetIndex} in the {@code model}'s address book.
+     *
+     * @param model The model containing the filtered volunteer list.
+     * @param targetIndex The index of the volunteer to display in the filtered list.
+     * @throws AssertionError if the {@code targetIndex} is out of bounds for the filtered volunteer list.
+     */
+    public static void showVolunteerAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredVolunteerList().size());
+
+        Volunteer volunteer = model.getFilteredVolunteerList().get(targetIndex.getZeroBased());
+        final String[] splitVolunteerName = volunteer.getName().fullName.split("\\s+");
+        model.updateFilteredVolunteerList(new VolunteerNameContainsKeywordsPredicate(Arrays.asList(splitVolunteerName[0])));
+
+        assertEquals(1, model.getFilteredVolunteerList().size());
     }
 }
