@@ -103,6 +103,10 @@ public class UniqueTagList implements Iterable<Tag> {
         return internalUnmodifiableList;
     }
 
+    public Tag getTag(Tag target) {
+        requireNonNull(target);
+        return internalList.stream().filter(target::isSameTag).findFirst().orElse(null);
+    }
     /**
      * Returns true if {@code tags} contains only unique tags.
      */
@@ -146,4 +150,6 @@ public class UniqueTagList implements Iterable<Tag> {
     public String toString() {
         return internalList.toString();
     }
+
+
 }

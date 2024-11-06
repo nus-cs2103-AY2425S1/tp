@@ -152,6 +152,9 @@ public interface Model {
      */
     void deleteTag(Tag toDelete);
 
+    /** Returns a target tag from the model. */
+    Tag getTag(Tag tag);
+
     /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
      */
@@ -198,7 +201,19 @@ public interface Model {
      */
     void addWedding(Wedding toAdd);
 
+    /**
+     * Sets the target {@code Wedding} with an updated {@code Wedding}.
+     * @param target The initial {@code Wedding}.
+     * @param editedWedding The updated {@code Wedding}
+     */
     void setWedding(Wedding target, Wedding editedWedding);
+
+    /**
+     * Get the target {@code Wedding}.
+     *
+     * @return
+     */
+    Wedding getWedding(Wedding target);
 
     /**
      * Deletes the given wedding.

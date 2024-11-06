@@ -102,6 +102,7 @@ public class UnassignWeddingCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
 
         return new CommandResult(generateSuccessMessage(personToEdit));
     }
