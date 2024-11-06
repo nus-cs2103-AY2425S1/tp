@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_WEDDING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -12,6 +14,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookFilterW
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -29,20 +33,28 @@ import seedu.address.testutil.WeddingBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for ViewwCommand.
  */
 public class ViewwCommandTest {
+    private static Model model;
+    @BeforeAll
+    public static void setUp() {
+        model = new ModelManager(getTypicalAddressBookFilterWithWeddings(), new UserPrefs());
+    }
 
-    private Model model = new ModelManager(getTypicalAddressBookFilterWithWeddings(), new UserPrefs());
+    @BeforeEach
+    public void setUpEach() {
+        model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
     @Test
     public void execute_validIndex_success() {
         Wedding weddingToView = model.getFilteredWeddingList().get(INDEX_FIRST_WEDDING.getZeroBased());
         ViewwCommand viewwCommand = new ViewwCommand(INDEX_FIRST_WEDDING, null);
-
         String expectedMessage = String.format(ViewwCommand.MESSAGE_VIEW_WEDDING_SUCCESS,
                 Messages.format(weddingToView));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredPersonList(new PersonMatchesWeddingPredicate(weddingToView));
-
+        expectedModel.updateFilteredWeddingList(p -> p.equals(weddingToView));
         assertCommandSuccess(viewwCommand, model, expectedMessage, expectedModel);
     }
 
