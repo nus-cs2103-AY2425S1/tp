@@ -4,7 +4,7 @@ import static hallpointer.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the hall pointer.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

@@ -42,12 +42,12 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' hall pointer file path.
      */
     Path getHallPointerFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' hall pointer file path.
      */
     void setHallPointerFilePath(Path hallPointerFilePath);
 
@@ -57,30 +57,30 @@ public interface Model {
     ReadOnlyHallPointer getHallPointer();
 
     /**
-     * Replaces address book data with the data in {@code hallPointer}.
+     * Replaces hall pointer data with the data in {@code hallPointer}.
      */
     void setHallPointer(ReadOnlyHallPointer hallPointer);
 
     /**
-     * Returns true if a member with the same identity as {@code member} exists in the address book.
+     * Returns true if a member with the same identity as {@code member} exists in the hall pointer.
      */
     boolean hasMember(Member member);
 
     /**
      * Deletes the given member.
-     * The member must exist in the address book.
+     * The member must exist in the hall pointer.
      */
     void deleteMember(Member target);
     /**
      * Adds the given member.
-     * {@code member} must not already exist in the address book.
+     * {@code member} must not already exist in the hall pointer.
      */
     void addMember(Member member);
 
     /**
      * Replaces the given member {@code target} with {@code updatedMember}.
-     * {@code target} must exist in the address book.
-     * The identity of {@code updatedMember} must not be the same as another existing member in the address book.
+     * {@code target} must exist in the hall pointer.
+     * The identity of {@code updatedMember} must not be the same as another existing member in the hall pointer.
      */
     void setMember(Member target, Member updatedMember);
 

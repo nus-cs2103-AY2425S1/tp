@@ -4,7 +4,7 @@ import hallpointer.address.model.member.Member;
 import javafx.collections.ObservableList;
 
 /**
- * Unmodifiable view of an address book.
+ * Unmodifiable view of an hall pointer.
  */
 public interface ReadOnlyHallPointer {
 
