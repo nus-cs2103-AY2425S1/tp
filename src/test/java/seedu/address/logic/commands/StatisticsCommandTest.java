@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.StatisticsCommand.appointmentsSoon;
 import static seedu.address.logic.commands.StatisticsCommand.eligibleForScheme;
 import static seedu.address.logic.commands.StatisticsCommand.highPriorityPeople;
-import static seedu.address.logic.commands.StatisticsCommand.incomeFourThousandOrLess;
 import static seedu.address.logic.commands.StatisticsCommand.lowPriorityPeople;
 import static seedu.address.logic.commands.StatisticsCommand.mediumPriorityPeople;
 import static seedu.address.logic.commands.StatisticsCommand.nbOfPeople;
@@ -48,7 +47,6 @@ public class StatisticsCommandTest {
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
                 + lowPriorityPeople(personList) + "\n"
-                + incomeFourThousandOrLess(personList) + "\n"
                 + appointmentsSoon(appointmentList) + "\n"
                 + eligibleForScheme(personList));
 
@@ -69,7 +67,6 @@ public class StatisticsCommandTest {
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
                 + lowPriorityPeople(personList) + "\n"
-                + incomeFourThousandOrLess(personList) + "\n"
                 + appointmentsSoon(appointmentList) + "\n"
                 + eligibleForScheme(personList));
 
