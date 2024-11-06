@@ -2,8 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PARENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_PERSONS;
+
+import java.util.function.Predicate;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * Lists all persons in the address book to the user.
@@ -18,7 +22,8 @@ public class ListParentsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PARENTS);
+        model.updateFilteredPersonList(
+                PREDICATE_SHOW_ALL_PARENTS.and(PREDICATE_SHOW_UNARCHIVED_PERSONS));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
