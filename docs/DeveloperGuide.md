@@ -511,23 +511,27 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `view 1` <br>
-       Expected: First contact from the list is viewed. Success action will be carried out for that contact.
+   1. #### Viewing using INDEX
+   
+       1. Test case: `view 1` <br>
+          Expected: First contact from the list is viewed. Success action will be carried out for that contact.
 
-    1. Test case: `view 0`<br>
-       Expected: No person is viewed. Error details shown in the status message. 
+       1. Test case: `view 0`<br>
+          Expected: No person is viewed. Error details shown in the status message. 
 
-    1. Test case: `view x` (where x is larger than the size of person list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.
+       1. Test case: `view x` (where x is larger than the size of person list)<br>
+          Expected: Error message prompting the user to choose an index within the range shown.
 
-    1. Other incorrect view commands to try: `view`, `view x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).
+       1. Other incorrect view commands to try: `view`, `view x` (where x is a negative integer)<br>
+          Expected: Similar to point #1(iii).
+   
+   2. #### Viewing using NAME
 
-    1. Test case: `view Alice Tan` <br>
-       Expected (Unique Alice Tan): The contact of `Alice Tan` is viewed. Success action will be carried out for that contact.<br>
-       Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. Status message shows number of contacts shown.
-       Message will be shown to prompt the user to specify which `Alice Tan` they want to view.<br>
-       Expected (No Alice Tan): No person is viewed. Error details is shown in the status message.
+       1. Test case: `view Alice Tan` <br>
+          Expected (Unique Alice Tan): The contact of `Alice Tan` is viewed. Success action will be carried out for that contact.<br>
+          Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. Status message shows number of contacts shown.
+          Message will be shown to prompt the user to specify which `Alice Tan` they want to view.<br>
+          Expected (No Alice Tan): No person is viewed. Error details is shown in the status message.
 
 1. Viewing a person while a filtered list of contacts is shown
 
@@ -543,23 +547,27 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. #### Deleting using INDEX
+   
+      1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      1. Test case: `delete 0`<br>
+         Expected: No person is deleted. Error details shown in the status message.
 
-   1. Test case: `delete x` (where x is larger than the size of person list)<br>
-      Expected: Error message prompting the user to choose an index within the range shown.
+      1. Test case: `delete x` (where x is larger than the size of person list)<br>
+         Expected: Error message prompting the user to choose an index within the range shown.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is a negative integer)<br>
-      Expected: Similar to point #1(iii).
+      1. Other incorrect delete commands to try: `delete`, `delete x` (where x is a negative integer)<br>
+         Expected: Similar to point #1(iii).
 
-   1. Test case: `delete Alice Tan` <br>
-      Expected (Unique Alice Tan): The contact of `Alice Tan` will be deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br>
-      Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. 
-      Message will be shown to prompt the user to specify which `Alice Tan` they want to delete. <br>
-      Expected (No Alice Tan): No person is deleted. Error details is shown in the status message.
+   1. #### Deleting using NAME
+
+      1. Test case: `delete Alice Tan` <br>
+         Expected (Unique Alice Tan): The contact of `Alice Tan` will be deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br>
+         Expected (Duplicated Alice Tan): Contacts with name field containing `Alice Tan` exactly will be shown. 
+         Message will be shown to prompt the user to specify which `Alice Tan` they want to delete. <br>
+         Expected (No Alice Tan): No person is deleted. Error details is shown in the status message.
 
 1. Deleting a person while a filtered list of contacts is shown
 
@@ -576,35 +584,42 @@ Timestamp in the status bar is updated. The weddings involved of the person will
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `filter n/John`<br>
-       Expected: All persons with exact name match "John" (case-insensitive) are shown.
+       Expected: All the contacts with the exact name match "John" (case-insensitive matching) are shown.
 
     3. Test case: `filter r/vendor e/gmail`<br>
-       Expected: All persons who have role "vendor" OR have "gmail" in their email are shown.
+       Expected: All the contacts who have the role "vendor" OR have "gmail" in their email are shown.
 
     4. Test case: `filter n/Alex Tan`<br>
-       Expected: Error shown. Error details shown in the status message as name must be a single word.
+       Expected: Error message is shown as the name field must be a single word. Error details shown in the status message.
 
 2. Invalid filter commands to try:
 
     1. Test case: `filter`<br>
-       Expected: Error shown. At least one filter criteria must be provided.
+       Expected: Error message is shown as at least one filter criteria must be provided. Error details shown in the status message.
 
     2. Test case: `filter n/`<br>
-       Expected: Error shown. Parameter cannot be empty.
+       Expected: Error message is shown as parameter cannot be left empty. Error details shown in the status message.
 
     3. Test case: `filter x/value`<br>
-       Expected: Error shown. Unknown prefix.
+       Expected: Error message is shown due to unknown prefix. Error details shown in the status message.
 
 3. Edge cases to test:
 
     1. Test case: `filter n/john`<br>
-       Expected: Shows matches regardless of case (e.g., "John", "JOHN").
+       Expected: The names of contacts will be matched and shown regardless of case (e.g., "John", "JOHN", "JoHn").
 
     2. Test case: `filter e/gmail a/street`<br>
-       Expected: Shows all contacts with either "gmail" in email OR "street" in address.
+       Expected: All the contacts with either "gmail" in email OR "street" in address will be shown.
 
     3. Test case: `filter p/91234567`<br>
-       Expected: Shows only exact phone number matches.
+       Expected: Only the contacts with the exact phone number will be shown.
+
+4. Filtering a person while a filtered list of contacts is shown
+
+    1. Prerequisite: A partial list of contacts is shown.
+
+    1. Test cases used can be the same since `filter` searches from the entire list of contacts, rather than only the partial list.
+
 
 ### Viewing weddings
 
@@ -615,23 +630,27 @@ The persons involved in the viewed wedding will be shown in the person list. Tim
 
     1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.
 
-    1. Test case: `vieww 1` <br>
-       Expected: First wedding from the wedding list is viewed. Success action will be carried out for that wedding.
+    1. #### Viewing weddings using INDEX
 
-    1. Test case: `vieww 0`<br>
-       Expected: No wedding is viewed. Error details shown in the status message.
+       1. Test case: `vieww 1` <br>
+          Expected: First wedding from the wedding list is viewed. Success action will be carried out for that wedding.
 
-    1. Test case: `vieww x` (where x is larger than the size of wedding list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.
+       1. Test case: `vieww 0`<br>
+          Expected: No wedding is viewed. Error details shown in the status message.
 
-    1. Other incorrect vieww commands to try: `vieww`, `vieww x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).
+       1. Test case: `vieww x` (where x is larger than the size of wedding list)<br>
+          Expected: Error message prompting the user to choose an index within the range shown.
 
-    1. Test case: `vieww Alice` <br>
-       Expected (Unique Alice): The wedding of `Alice` will be shown. Success action will be carried out for that wedding.<br>
-       Expected (Duplicated Alice): Weddings with name field matching `Alice` exactly will be shown.
-       Message will be shown to prompt the user to specify which wedding of `Alice` they want to view.<br>
-       Expected (No Alice): No wedding is viewed. Error details is shown in the status message.
+       1. Other incorrect vieww commands to try: `vieww`, `vieww x` (where x is a negative integer)<br>
+          Expected: Similar to point #1(iii).
+
+    1. #### Viewing weddings using NAME
+
+       1. Test case: `vieww Alice` <br>
+          Expected (Unique Alice): The wedding of `Alice` will be shown. Success action will be carried out for that wedding.<br>
+          Expected (Duplicated Alice): Weddings with name field matching `Alice` exactly will be shown.
+          Message will be shown to prompt the user to specify which wedding of `Alice` they want to view.<br>
+          Expected (No Alice): No wedding is viewed. Error details is shown in the status message.
 
 1. Viewing a wedding while a filtered list of weddings is shown
 
@@ -652,23 +671,27 @@ Persons who are involved in the wedding will also be unassigned. Timestamp in th
 
     1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.
 
-    1. Test case: `deletew 1`<br>
-       Expected: First wedding is deleted from the list. Success action will be carried out for that wedding.
+    1. #### Deleting wedding using INDEX
 
-    1. Test case: `deletew 0`<br>
-       Expected: No wedding is deleted. Error details shown in the status message.
+       1. Test case: `deletew 1`<br>
+          Expected: First wedding is deleted from the list. Success action will be carried out for that wedding.
 
-    1. Test case: `deletew x` (where x is larger than the size of wedding list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.
+       1. Test case: `deletew 0`<br>
+          Expected: No wedding is deleted. Error details shown in the status message.
 
-    1. Other incorrect deletew commands to try: `deletew`, `deletew x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).
+       1. Test case: `deletew x` (where x is larger than the size of wedding list)<br>
+          Expected: Error message prompting the user to choose an index within the range shown.
 
-    1. Test case: `deletew Alice` <br>
-       Expected (Unique Alice): The wedding of `Alice` will be deleted. Success action will be carried out for that wedding.<br>
-       Expected (Duplicated Alice): Weddings with name field containing `Alice` exactly will be shown.
-       Message will be shown to prompt the user to specify which wedding of `Alice` they want to delete. <br>
-       Expected (No Alice): No wedding is deleted. Error details is shown in the status message.
+       1. Other incorrect deletew commands to try: `deletew`, `deletew x` (where x is a negative integer)<br>
+          Expected: Similar to point #1(iii).
+
+    1. #### Deleting wedding using NAME
+
+       1. Test case: `deletew Alice` <br>
+          Expected (Unique Alice): The wedding of `Alice` will be deleted. Success action will be carried out for that wedding.<br>
+          Expected (Duplicated Alice): Weddings with name field containing `Alice` exactly will be shown.
+          Message will be shown to prompt the user to specify which wedding of `Alice` they want to delete. <br>
+          Expected (No Alice): No wedding is deleted. Error details is shown in the status message.
 
 1. Deleting a wedding while a filtered list of contacts is shown
 
