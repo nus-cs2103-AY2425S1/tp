@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ListAppointmentsCommand;
 
 public class ListAppointmentsCommandParserTest {
@@ -36,6 +38,12 @@ public class ListAppointmentsCommandParserTest {
                 Optional.of(LocalDate.of(2024, 10, 15)),
                 Optional.of(LocalTime.of(14, 30)));
         assertParseSuccess(parser, " d/2024-10-15 1430", expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleValidDateArgs_throwsParseException() {
+        assertParseFailure(parser, " d/2024-10-15 d/2024-10-15 1430",
+                String.format(Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE)));
     }
 
     @Test
