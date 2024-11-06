@@ -2,7 +2,8 @@ package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,8 +31,9 @@ public class FindCommand extends Command {
             + "[" + PREFIX_NAME + "NAME_KEYWORDS...] "
             + "[" + PREFIX_ADDRESS + "ADDRESS_KEYWORDS...] "
             + "[" + PREFIX_TAG + "TAG_KEYWORDS...] "
-            + "[" + PREFIX_LESSON + "LESSON_KEYWORDS...]\n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + " alice charlie" + PREFIX_ADDRESS + "jurong";
+            + "[" + PREFIX_LESSON_DAY + "LESSON_DAY_KEYWORDS...]"
+            + "[" + PREFIX_LESSON_TIME + "LESSON_TIME_KEYWORDS...]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice charlie " + PREFIX_ADDRESS + "jurong";
 
     private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
