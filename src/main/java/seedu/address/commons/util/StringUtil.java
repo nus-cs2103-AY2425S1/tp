@@ -95,4 +95,18 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns a truncated string if {@code s} exceeds than 50 characters
+     * @param s cannot be null
+     * @return the string truncated at 50 characters if {@code s} exceeds 50 characters
+     */
+    public static String truncateText(String s) {
+        assert s != null;
+        if (s.length() <= 80) {
+            return s;
+        } else {
+            return s.substring(0, 80) + "...";
+        }
+    }
 }

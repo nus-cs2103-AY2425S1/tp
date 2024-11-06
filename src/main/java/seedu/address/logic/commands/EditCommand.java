@@ -40,12 +40,7 @@ import seedu.address.model.tier.Tier;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
-            + "by the index number used in the displayed client list. "
-            + "Existing values will be overwritten by the input values. Any fields unspecified will not be modified.\n"
-            + "Required Parameters: INDEX (must be a positive integer)\n"
-            + "Optional Parameters: "
+    public static final String MESSAGE_USAGE_OPTIONAL_PARAMETERS = "Optional Parameters: "
             + "[" + PREFIX_NAME + " NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
@@ -59,6 +54,12 @@ public class EditCommand extends Command {
             + "Example Usage: '" + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com'";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+            + "by the index number used in the displayed client list. "
+            + "Existing values will be overwritten by the input values. Any fields unspecified will not be modified.\n"
+            + "Required Parameters: INDEX (must be a positive integer)\n"
+            + MESSAGE_USAGE_OPTIONAL_PARAMETERS;
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

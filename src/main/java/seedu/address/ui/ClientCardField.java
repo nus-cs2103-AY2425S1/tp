@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.StringUtil.truncateText;
+
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.geometry.Pos;
@@ -17,6 +19,7 @@ public class ClientCardField extends HBox {
     public static final String ICON_LITERAL_EMAIL = "fas-envelope";
     public static final String ICON_LITERAL_JOB = "fas-briefcase";
     public static final String ICON_LITERAL_INCOME = "fas-dollar-sign";
+    public static final String ICON_LITERAL_REMARK = "far-comment-dots";
 
     private FontIcon icon;
     private Label value;
@@ -48,6 +51,7 @@ public class ClientCardField extends HBox {
      */
     public void setFields(String iconLiteral, String valueText) {
         this.icon.setIconLiteral(iconLiteral);
-        this.value.setText(valueText);
+        this.value.setText(truncateText(valueText));
     }
+
 }

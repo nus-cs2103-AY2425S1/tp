@@ -75,6 +75,6 @@ class ViewCommandTest {
     public void testCommandUsageMessage() {
         assertEquals("view: Views the client identified by the index number used in the displayed client list.\n"
                 + "Parameters: INDEX (must be a positive integer)\n"
-                + "Example: view 1", ViewCommand.MESSAGE_USAGE);
+                + "Example: 'view 1'", ViewCommand.MESSAGE_USAGE);
     }
 }

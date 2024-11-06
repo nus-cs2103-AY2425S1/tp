@@ -38,7 +38,6 @@
             </FlowPane>
       </HBox>
       <VBox fx:id="cardFields" alignment="CENTER_LEFT" minHeight="100" spacing="0" VBox.vgrow="ALWAYS" />
-      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
       <rowConstraints>
          <RowConstraints />
