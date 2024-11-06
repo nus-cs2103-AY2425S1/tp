@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -16,7 +17,12 @@ import seedu.address.model.person.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that evaluates to true if the person is a student */
     Predicate<Person> PREDICATE_SHOW_ALL_STUDENTS = person -> person instanceof Student;
+
+    /** {@code Predicate} that evaluates to true if the person is a parent */
+    Predicate<Person> PREDICATE_SHOW_ALL_PARENTS = person -> person instanceof Parent;
 
     /** {@code Predicate} that finds unarchived persons*/
     Predicate<Person> PREDICATE_SHOW_UNARCHIVED_PERSONS = person -> !person.isArchived();

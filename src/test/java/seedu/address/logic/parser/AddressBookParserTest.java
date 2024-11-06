@@ -26,6 +26,7 @@ import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListParentsCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.commands.UnpinCommand;
@@ -142,6 +143,13 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListStudentsCommand.COMMAND_WORD) instanceof ListStudentsCommand);
         assertTrue(parser.parseCommand(
                 ListStudentsCommand.COMMAND_WORD + " 3") instanceof ListStudentsCommand);
+    }
+
+    @Test
+    public void parseCommand_listParents() throws Exception {
+        assertTrue(parser.parseCommand(ListParentsCommand.COMMAND_WORD) instanceof ListParentsCommand);
+        assertTrue(parser.parseCommand(
+                ListParentsCommand.COMMAND_WORD + " 3") instanceof ListParentsCommand);
     }
 
     @Test
