@@ -23,22 +23,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Job("Software Engineer"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"),
-                    getSkillSet("python", "react js"), new InterviewScore("5"), getTagSet("friends")),
+                    getSkillSet("Python", "React js"), new InterviewScore("5"), getTagSet("Remote")),
             new Person(new Name("Bernice Yu"), new Job("Software Engineer"), new Phone("99272758"),
                     new Email("berniceyu@example.com"),
-                    getSkillSet("python", "java"), new InterviewScore("6.5"), getTagSet("colleagues", "friends")),
+                    getSkillSet("Python", "Java"), new InterviewScore("6.5"), getTagSet("Contract", "Hybrid")),
             new Person(new Name("Charlotte Oliveiro"), new Job("Frontend Developer"), new Phone("93210283"),
                     new Email("charlotte@example.com"),
-                    getSkillSet("java" , "C sharp"), new InterviewScore("5.0"), getTagSet("neighbours")),
+                    getSkillSet("Java" , "C sharp"), new InterviewScore("5.0"), getTagSet("Referral")),
             new Person(new Name("David Li"), new Job("UIUX Developer"), new Phone("91031282"),
                     new Email("lidavid@example.com"),
-                    getSkillSet("javascript" , "html", "css"), new InterviewScore("10.0"), getTagSet("family")),
+                    getSkillSet("Javascript" , "HTML", "CSS"), new InterviewScore("10.0"), getTagSet("Remote")),
             new Person(new Name("Irfan Ibrahim"), new Job("Backend Developer"), new Phone("92492021"),
                     new Email("irfan@example.com"),
-                    getSkillSet("java", "swift"), new InterviewScore("0"), getTagSet("classmates")),
+                    getSkillSet("Java", "Swift"), new InterviewScore("0"), getTagSet("Hybrid")),
             new Person(new Name("Roy Balakrishnan"), new Job("Devops Engineer"), new Phone("92624417"),
                     new Email("royb@example.com"),
-                    getSkillSet("java", "python"), new InterviewScore("9.8"), getTagSet("colleagues"))
+                    getSkillSet("Java", "Python"), new InterviewScore("9.8"), getTagSet("Contract"))
         };
     }
 

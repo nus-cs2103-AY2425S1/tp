@@ -65,7 +65,7 @@ Parameter     | Notes
 **`INTERVIEW_SCORE`**   | should be a number ranging from 0.0 to 10.0 with a maximum of a single decimal place
 **`TAG`**   | should be alphanumeric and should not contain any spaces
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
-**`ORDER`**   | should be either 'a' (ascending) or 'd' (descending)
+**`ORDER`**   | should be either `a` (ascending) or `d` (descending)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -212,9 +212,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* candidates matching at least one keyword will be returned (i.e. `OR` search).
+* Candidates matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
