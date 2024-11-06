@@ -179,7 +179,11 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 <box type="tip" seamless>
 
 **Tip 1:** A company can have any number of tags (including 0) <br>
-**Tip 2:** A company requires a name and email at the minimum <br>
+**Tip 2:** A company requires a name and email at the minimum
+</box>
+
+<box type="warning" seamless>
+
 **Caution:** Due to the nature of prefix commands, company names are restricted to alphanumeric characters only
 </box>
 
@@ -221,6 +225,11 @@ Format: `list`
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
+
+<box type="warning" seamless>
+
+**Caution:** Using clear will permanently remove all data saved in the AddressBook
+</box>
 
 <span style="color:red">**Deletes all entries**</span> from the address book.
 
