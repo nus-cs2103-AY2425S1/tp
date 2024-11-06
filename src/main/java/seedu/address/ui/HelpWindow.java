@@ -56,9 +56,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     private void setHelpText() {
         helpTextFlow.getChildren().addAll(
-                createHeader("BA€ 1.4 Help                                                    "),
+                createHeader("BA€ 1.6 Help                                                    "),
                 createParagraph(
-                        "Welcome to BA€ 1.4, your powerful ally in optimizing recurring sales.",
+                        "Welcome to BA€ 1.6, your powerful ally in optimizing recurring sales.",
                         "This guide will help you navigate the key features and commands of BA€."
                 ),
                 createHeader("Key Features and Commands"),
@@ -107,6 +107,12 @@ public class HelpWindow extends UiPart<Stage> {
                         "Organize your client list based on custom priority metrics.",
                         "advfilter t\\tag [OPERATOR] [VALUE]",
                         "advfilter t\\age <= 50 "
+                ),
+                createFeature(
+                        "Sorting by tags: sort",
+                        "Sort your client list based on tag values",
+                        "sort t\\tag asc/desc",
+                        "sort t\\age asc "
                 ),
                 createFeature(
                         "Data Export: export",
