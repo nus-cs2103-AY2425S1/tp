@@ -36,8 +36,7 @@ public class ResultDisplay extends UiPart<Region> {
         resultVisitUG.setVisible(false);
     }
 
-    public void setHyperlink(String hyperlink) {
-        // show resultVisitUG
+    public void setUserGuideButton(String hyperlink) {
         resultVisitUG.setVisible(true);
         resultVisitUG.setOnAction(e -> hostServices.showDocument(hyperlink));
     }
