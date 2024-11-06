@@ -48,6 +48,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SCHEDULE, PREFIX_SUBJECT, PREFIX_RATE, PREFIX_PAID_AMOUNT, PREFIX_OWED_AMOUNT);
+
+        // get fields from argMultimap
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -55,6 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Schedule schedule = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_SCHEDULE).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
+
+        // set optional fields
         PaidAmount paidAmount = null;
         OwedAmount owedAmount = null;
         if (argMultimap.getValue(PREFIX_PAID_AMOUNT).isPresent()) {
@@ -67,6 +71,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             owedAmount = new OwedAmount();
         }
+
+        // create student object
         Student student = new Student(name, phone, email, address, schedule, subject, rate, paidAmount, owedAmount);
 
         return new AddCommand(student);
