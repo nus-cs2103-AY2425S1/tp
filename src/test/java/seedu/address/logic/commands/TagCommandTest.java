@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -18,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -43,8 +42,9 @@ public class TagCommandTest {
 
     @Test
     public void execute_addNewTagStudent_success() {
+        Tag newTag = new Tag("newTag");
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(new Tag("newTag"));
+        tagsToAdd.add(newTag);
 
         TagCommand addTagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
 
@@ -52,23 +52,24 @@ public class TagCommandTest {
 
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.addAll(tagsToAdd);
-
         String[] tagNames = updatedTags.stream().map(tag -> tag.tagName).toArray(String[]::new);
 
         Person updatedPerson = new StudentBuilder((Student) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, newTag,
+                Messages.format(updatedPerson));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
-
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_addNewTagCompany_success() {
+        Tag newTag = new Tag("newTag");
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(new Tag("newTag"));
+        tagsToAdd.add(newTag);
 
         TagCommand addTagCommand = new TagCommand(INDEX_FOURTH_PERSON, tagsToAdd);
 
@@ -76,15 +77,15 @@ public class TagCommandTest {
 
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         updatedTags.addAll(tagsToAdd);
-
         String[] tagNames = updatedTags.stream().map(tag -> tag.tagName).toArray(String[]::new);
 
         Person updatedPerson = new CompanyBuilder((Company) personToEdit)
                 .withTags(tagNames).build();
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, updatedPerson);
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, newTag,
+                Messages.format(updatedPerson));
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, updatedPerson);
-
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
     }
@@ -92,24 +93,30 @@ public class TagCommandTest {
     @Test
     public void execute_addDuplicateTag_failure() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
         Set<Tag> existingTags = personToEdit.getTags();
 
+        // Add duplicate tag
         Set<Tag> tagsToAdd = new HashSet<>(existingTags);
+        Tag duplicateTag = existingTags.iterator().next();
+        String duplicateTagName = duplicateTag.tagName;
 
-        String duplicateTagName = existingTags.iterator().next().tagName;
+        // Add duplicate tag with case-insensitivity
+        Tag upperDuplicateTag = new Tag(duplicateTagName.toUpperCase());
+        Set<Tag> upperTagsToAdd = Set.of(upperDuplicateTag);
 
         TagCommand addTagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
+        TagCommand upperAddTagCommand = new TagCommand(INDEX_FIRST_PERSON, upperTagsToAdd);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, duplicateTagName);
+        String expectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, duplicateTag);
+        String lowerExpectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, upperDuplicateTag);
 
         assertCommandFailure(addTagCommand, model, expectedMessage);
+        assertCommandFailure(upperAddTagCommand, model, lowerExpectedMessage);
     }
 
     @Test
     public void execute_invalidPersonIndex_failure() throws CommandException {
-        Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(new Tag("newTag"));
+        Set<Tag> tagsToAdd = Set.of(new Tag("newTag"));
 
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         TagCommand addTagCommand = new TagCommand(invalidIndex, tagsToAdd);
@@ -134,16 +141,16 @@ public class TagCommandTest {
         assertTrue(command1.equals(command1));
 
         // different objects, same fields -> returns true
-        assertEquals(command1, command2);
+        assertTrue(command1.equals(command2));
 
         // different tags -> returns false
-        assertNotEquals(command1, command3);
+        assertFalse(command1.equals(command3));
 
         // different index -> returns false
-        assertNotEquals(command1, command4);
+        assertFalse(command1.equals(command4));
 
         // null -> returns false
-        assertNotEquals(null, command1);
+        assertFalse(command1.equals(null));
 
         // different type -> returns false
         assertFalse(command1.equals("friend"));
