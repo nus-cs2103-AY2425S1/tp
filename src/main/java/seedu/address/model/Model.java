@@ -107,6 +107,13 @@ public interface Model {
      */
     void linkPersonToEvent(Person person, Event event);
 
+    /**
+     * Unlinks the given person {@code person} with {@code event}.
+     * {@code person} must exist in the address book.
+     * {@code event} must exist in the address book.
+     */
+    void unlinkPersonFromEvent(Person person, Event event);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

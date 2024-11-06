@@ -155,6 +155,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         personEventManager.addPersonToEvent(person, event);
     }
 
+    /**
+     * Unlinks a person from an event.
+     */
+    public void unlinkPersonFromEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        personEventManager.removePersonFromEvent(person, event);
+    }
+
     //// event-level operations
 
     /**
@@ -280,4 +288,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Map<Event, ArrayList<Person>> getPersonEventAssociationMap() {
         return personEventManager.getEventPersonMap();
     }
+
 }
