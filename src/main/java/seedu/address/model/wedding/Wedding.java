@@ -33,10 +33,11 @@ public class Wedding {
     public Wedding(Name name, Client client, Date date, Venue venue) {
         requireAllNonNull(name);
         this.name = name;
-        if (client.getPerson().getOwnWedding() == null || client.getPerson().getOwnWedding()!= this) {
+        this.client = client;
+        if (client != null
+                && (client.getPerson().getOwnWedding() == null || client.getPerson().getOwnWedding() != this)) {
             client.getPerson().setOwnWedding(this);
         }
-        this.client = client;
         this.date = date;
         this.venue = venue;
     }
@@ -44,7 +45,7 @@ public class Wedding {
     public void setClient(Person person) {
         this.client = new Client(person);
         if (person.getOwnWedding() == null || person.getOwnWedding() != this) {
-            throw new IllegalArgumentException("client in Wedding does not match ownWedding in Client");
+            person.setOwnWedding(this);
         }
     }
 
@@ -82,11 +83,11 @@ public class Wedding {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("client", client == null ? "NA" : client)
-                .add("date", date == null ? "NA" : date)
-                .add("venue", venue == null ? "NA" : venue)
-                .toString();
+                        .add("name", name)
+                        .add("client", client == null ? "NA" : client)
+                        .add("date", date == null ? "NA" : date)
+                        .add("venue", venue == null ? "NA" : venue)
+                        .toString();
     }
     @Override
     public boolean equals(Object other) {

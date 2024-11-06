@@ -40,11 +40,9 @@ public class ViewwCommandParser implements Parser<ViewwCommand> {
 
                 return new ViewwCommand(null, predicate);
             }
-        } catch (ParseException pe) {
+        } catch (ParseException | IllegalArgumentException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE), pe);
-        } catch (IllegalArgumentException ae) {
-            throw new ParseException(ae.getMessage());
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE), e);
         }
     }
 

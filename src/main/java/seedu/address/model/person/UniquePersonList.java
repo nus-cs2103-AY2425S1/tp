@@ -85,6 +85,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.set(index, editedPerson);
     }
 
+    /**
+     * Updates the person involve in the edited wedding.
+     */
     public void updatePersonInvolveInEditedWedding(Wedding target, Wedding editedWedding) {
         requireAllNonNull(target, editedWedding);
         for (Person person : internalList) {

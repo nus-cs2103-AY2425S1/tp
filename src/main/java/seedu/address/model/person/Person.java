@@ -65,14 +65,6 @@ public class Person {
         }
     }
 
-    /**
-     * Sets ownWedding to null.
-     * Used for test cases.
-     */
-    public void resetOwnWedding() {
-        this.ownWedding = null;
-    }
-
     public Name getName() {
         return name;
     }
