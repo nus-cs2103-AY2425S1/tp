@@ -387,7 +387,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff calls the elderly at the top of the list.  
-3. Staff marks the elderly as called and takes notes of the call with mark command.
+3. Staff requests to mark the elderly as called and takes notes of the call, selecting the elderly by INDEX or NRIC.
 4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
@@ -414,7 +414,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff inputs list command to view elderly contacts.  
+1. Staff requests to view elderly contacts.  
 2. ContactMate updates view to show contacts sorted based on priority (date to be called).
 
       Use case ends.
@@ -429,7 +429,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.
+2. Staff requests for the call history of the elderly, selecting the elderly by INDEX or NRIC.
 3. ContactMate updates view to show a list of calls along with their corresponding notes made to a specific elderly. 
 
 	Use case ends.
@@ -454,7 +454,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs the NRIC or INDEX of elderly they want to delete.
+2. Staff requests to delete an elderly, selecting the elderly by INDEX or NRIC.
 3. ContactMate deletes the elderly and shows the updated list with the elderly removed.
 
     Use case ends.
@@ -478,7 +478,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**
 
-1. Staff inputs details for the elderly they want to add to the system.  
+1. Staff requests to add an elderly, entering the relevant details.  
 1. ContactMate adds the new elderly and shows the updated list with the newly added elderly.
 
       Use case ends.
@@ -507,7 +507,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.
-1. Staff inputs INDEX or NRIC of elderly, along with the details for the elderly they want to edit.
+1. Staff requests to edit an elderly, selecting the elderly by INDEX or NRIC, and entering the relevant details.
 1. ContactMate edits the elderly and shows the updated list with the edited elderly.
 
    Use case ends.
@@ -540,7 +540,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 **MSS:**    
 
-1. Staff inputs the name or NRIC of the elderly they want to search.
+1. Staff requests to search for an elderly, entering names and/or NRICs.
 2. ContactMate shows the filtered list of elderly that matches the name or NRIC.
 
     Use case ends.
@@ -555,13 +555,24 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>searches the elderly by name (UC07)</u>.
-2. Staff <u>marks the elderly as called (UC01)</u>.
+2. Staff calls that elderly.
+3. Staff requests to mark the elderly as called and takes notes of the call, selecting the elderly by INDEX or NRIC.
+4. ContactMate updates the elderly as marked and displays a success message.
 
     Use case ends.
 
 **Extensions:**
 * 1a. The filtered list is empty.
     * Use case resumes from step 1\.
+* 3a. ContactMate detects an incorrect command format.
+    * 3a1. ContactMate shows an error message with the correct command format.
+    * Use case resumes from step 3\.
+* 3b. ContactMate detects an INDEX out of bounds of the list or an NRIC that does not exist in the list.
+    * 3b1. ContactMate shows an error message, explaining that the elderly does not exist.
+    * Use case resumes from step 3\.
+* 3c. ContactMate detects an invalid date format.
+    * 3c1. ContactMate shows an error message with the correct date format.
+    * Use case resumes from step 3\.
 
 ### Non-Functional Requirements
 
