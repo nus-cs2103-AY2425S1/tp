@@ -56,8 +56,7 @@
             <Insets left="10" right="10" top="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-   
-           <StackPane fx:id="statusbarPlaceholder" styleClass="status-bar-with-border" VBox.vgrow="NEVER" />
+          <StackPane fx:id="statusbarPlaceholder" styleClass="status-bar-with-border" VBox.vgrow="NEVER" />
         </VBox>
       </VBox>
     </Scene>
