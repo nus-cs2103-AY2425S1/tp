@@ -260,10 +260,10 @@ Adds a customer order by providing the customer's name, phone number and the pas
 
 <div class="alert alert-info">
 ⚠️ **Important Information**  
-To view the new order in the customer's contact details:
-1. Add the customer order using the command above
-2. Click the refresh button in the UI
-3. The order will now appear under the customer's contact information
+To view the new order in the customer's contact details:<br>
+1. Add the customer order using the command above <br>
+2. Click the refresh button in the UI <br>
+3. The order will now appear under the customer's contact information <br> <br>
 </div>
 
 ```bash
@@ -340,11 +340,11 @@ of supplier contacts and ingredient sources, helping bakery owners efficiently m
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
 <div class="alert alert-info">
-⚠️ **Important Information**  
-To view the new order in the supplier's contact details:
-1. Add the supplier order using the command above
-2. Click the refresh button in the UI
-3. The order will now appear under the supplier's contact information
+⚠️ **Important Information**  <br>
+To view the new order in the supplier's contact details: <br>
+1. Add the supplier order using the command above <br> 
+2. Click the refresh button in the UI <br>
+3. The order will now appear under the supplier's contact information <br> <br>
 </div>
 
 ```bash
