@@ -2,7 +2,6 @@ package seedu.sellsavvy.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.sellsavvy.commons.util.StringUtil.normalise;
 
 import java.util.Collections;
 import java.util.HashSet;
