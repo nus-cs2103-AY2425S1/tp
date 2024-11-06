@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.DEFAULT_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_DEFAULT_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -51,7 +51,7 @@ public class AddressBookParser {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             logger.finer("No input found");
-            throw new ParseException(String.format(MESSAGE_EMPTY_COMMAND_FORMAT, DEFAULT_OVERVIEW));
+            throw new ParseException(String.format(MESSAGE_EMPTY_COMMAND_FORMAT, MESSAGE_DEFAULT_OVERVIEW));
         }
 
         final String commandWord = matcher.group("commandWord").toLowerCase();
@@ -117,7 +117,7 @@ public class AddressBookParser {
 
         default:
             logger.finer("This user input is invalid: " + userInput);
-            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, DEFAULT_OVERVIEW));
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, MESSAGE_DEFAULT_OVERVIEW));
         }
     }
 
