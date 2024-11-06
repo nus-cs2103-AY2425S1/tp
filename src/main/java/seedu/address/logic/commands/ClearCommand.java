@@ -49,6 +49,6 @@ public class ClearCommand extends Command {
      * @return true if the user confirms clear, false otherwise.
      */
     private boolean isDeletionConfirmed() {
-        return confirmationController.isConfirmed("Confirm Delete", String.format(MESSAGE_CONFIRMATION));
+        return confirmationController.isConfirmed("Confirm Clear", String.format(MESSAGE_CONFIRMATION));
     }
 }

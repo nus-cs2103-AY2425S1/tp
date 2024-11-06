@@ -116,16 +116,22 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+> [!WARNING]
+> After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
+
+* Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting the data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
+* You can directly delete the addressbook.json file which can be found in data folder or in the data directory if you want to recover the sample data.
 
 **Confirmation Requirement:**
 
-A confirmation window will appear before clearing all contacts in MediContact, 
+* A confirmation window will appear before clearing all contacts in MediContact, 
 asking you to confirm if you are sure you want to proceed. 
 You must select “OK” to clear the address book. If you select “Cancel,” 
 the action will be aborted, and the address book will remain unchanged.
+* Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
-![clearConfirmation.png](images%2FclearConfirmation.png)
 
+<img src="images/clearConfirmation.png" width="450">
 
 
 ### Deleting a person : `delete`
@@ -133,6 +139,9 @@ the action will be aborted, and the address book will remain unchanged.
 Deletes the specified person from the address book.
 
 Format: `delete INDEX` / `delete NAME`
+
+> [!WARNING]
+> After confirmation, any deleted data or contact cannot be retrieved. This action is IRREVERSIBLE.
 
 * Deletes the person at the specified `INDEX` or with the specified `NAME`.
 * The name refers to the full name as shown in the displayed person list.
@@ -149,11 +158,12 @@ Examples:
 
 **Confirmation Requirement:**
 
-A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
+* A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
 You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted, 
 and the person will not be deleted.
+* Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
-![deleteConfirmation.png](images%2FdeleteConfirmation.png)
+<img src="images/deleteConfirmation.png" width="450">
 
 
 
@@ -245,7 +255,7 @@ Shows you a help window with useful resources which includes:
 
 Format: `help`
 
-![helpWindow.png](images%2FhelpWindow.png)
+<img src="images/helpWindow.png" width="800">
 
 
 
@@ -358,10 +368,11 @@ The following is an example of a valid JSON file content.
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows an alphabetically sorted list of all persons in the address book.
 
 Format: `list`
 
+* No other parameters should be supplied.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
 
