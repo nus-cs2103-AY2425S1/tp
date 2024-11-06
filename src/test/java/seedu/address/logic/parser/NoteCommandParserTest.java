@@ -48,6 +48,9 @@ public class NoteCommandParserTest {
                 "Multiple values specified for the following single-valued field(s): nt/");
 
         // no name
-        assertParseFailure(parser, " " + nonEmptyNote, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_NOTE+ nonEmptyNote, expectedMessage);
+
+        // no note
+        assertParseFailure(parser, NAME_DESC_AMY, expectedMessage);
     }
 }
