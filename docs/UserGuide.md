@@ -26,6 +26,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
     - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
     - [Adding a module to a student: `module`](#adding-a-module-to-a-student-module)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
+    - [Finding a person: `find`](#finding-a-person--find)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
 3. [FAQ](#faq)
@@ -239,6 +240,15 @@ Examples:
 * `filter n/alex david` returns `Alex Yeoh`, `David Li`
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
+<br>
+
+<box type="info" seamless>
+
+**Note:**  After using `filter`, only the persons displayed in the filtered list can be edited or deleted, and persons not shown in this truncated list cannot be modified.  
+
+To return to display the full list of persons, use `list` command.
+
+</box>
 
 ### Adding a module to a student: `module`
 
@@ -277,7 +287,7 @@ Format: `find ID`
 * Finds student with the specified `ID`.
 
 Examples:
-* `find 12345678` will find student contact with `ID: 12345678` and display their details.
+* `find 12345678` will find student contact with `ID: 12345678` and display their details
 
 ### Clearing all entries : `clear`
 
