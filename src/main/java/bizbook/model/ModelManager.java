@@ -157,6 +157,18 @@ public class ModelManager implements Model {
         addressBook.undo();
     }
 
+    @Override
+    public void setFocusPerson(Person person) {
+        focusedPerson.set(person);
+    }
+
+    @Override
+    public void updateFocusPerson(Person previousPerson, Person currentPerson) {
+        if (previousPerson.equals(focusedPerson.get())) {
+            setFocusPerson(currentPerson);
+        }
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -191,4 +203,5 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && Objects.equals(focusedPerson.get(), otherModelManager.focusedPerson.get());
     }
+
 }

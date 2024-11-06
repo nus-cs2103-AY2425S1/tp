@@ -14,6 +14,7 @@ import ezvcard.Ezvcard;
 import ezvcard.VCard;
 import ezvcard.property.Address;
 import ezvcard.property.Categories;
+import ezvcard.property.StructuredName;
 
 /**
  * Represents a class that can export to VCF
@@ -46,18 +47,29 @@ public class VcfExporter implements Exporter {
 
     private VCard convertToVcf(Person person) {
         // Convert attributes to vCard representable properties
+        // Since we have no indication of which parts of the name is which, set
+        // the given name as full name
+        StructuredName structuredName = new StructuredName();
+        structuredName.setGiven(person.getName().fullName);
+
         Address address = new Address();
         address.setStreetAddress(person.getAddress().value);
 
         Categories categories = new Categories();
         person.getTags().forEach(tag -> categories.getValues().add(tag.tagName));
 
+        // Create vCard
         VCard vCard = new VCard();
         vCard.setFormattedName(person.getName().fullName);
+        vCard.setStructuredName(structuredName);
         vCard.addTelephoneNumber(person.getPhone().value);
         vCard.addEmail(person.getEmail().value);
         vCard.addAddress(address);
-        vCard.setCategories(categories);
+
+        if (!categories.getValues().isEmpty()) {
+            vCard.setCategories(categories);
+        }
+
         person.getNotes()
                 .forEach(note -> vCard.addNote(note.getNote()));
 

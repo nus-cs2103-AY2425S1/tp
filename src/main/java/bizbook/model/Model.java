@@ -128,4 +128,16 @@ public interface Model {
      * Reverts the {@code AddressBook} to the most recent saved version.
      */
     void revertAddressBookVersion();
+
+    /**
+     * Sets the focus person to {@code person}.
+     */
+    void setFocusPerson(Person person);
+
+    /**
+     * Cheks if the focus person needs to be updated.
+     * If {@code previousPerson} is the focused person then update it with {@code currentPerson}.
+     */
+    void updateFocusPerson(Person previousPerson, Person currentPerson);
+
 }
