@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This app is based on AddressBook-Level3, courtesy of [SE-EDU](https://se-education.org/)
+
+Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,6 +128,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), as well as Wedding objects (contained in a `UniqueWeddingList` Object)
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `ActiveTags` object that represents a collection of the current active tags in the AddressBook.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -282,7 +285,11 @@ Wedding planners who:
 * are comfortable using CLI apps for managing tasks such as adding, deleting, tagging, and finding contacts
 * require flexible contact management, including categorization by tags
 
-**Value proposition**: Wedding planners frequently manage a large number of contacts, including vendors, clients, and service providers, which can become overwhelming. PlanPerfect simplifies this process by allowing users to categorize contacts using tags, making it easy to organize and retrieve important information such as clients, caterers, photographers, and others. With its fast and efficient Command Line Interface (CLI), PlanPerfect enables users to manage their contacts significantly faster than traditional mouse/GUI-driven apps, providing greater flexibility and speed for busy wedding planners.
+**Value proposition**: Wedding planners frequently manage a large number of contacts which can become overwhelming. PlanPerfect simplifies this process through 2 main core functionalities:
+* **Tags**: Allows users to categorize contacts using tags, making it easy to organise and retrieve important contacts
+* **Weddings**: Allows users to categorize contacts around wedding events, allowing for easy tracking of who is involved in which wedding
+
+With its fast and efficient Command Line Interface (CLI), PlanPerfect enables users to manage their contacts significantly faster than traditional mouse/GUI-driven apps, providing greater flexibility and speed for busy wedding planners.
 
 ### User stories
 
@@ -322,11 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Use cases
-
-(For all use cases below, the **System** is the `PlanPerfect App` and the **Actor** is the `Wedding Planner`, unless specified otherwise)
-
 <br/><br/>
-
 **Use case: UC01 - List all contacts**
 
 **MSS**
@@ -551,6 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Contact Details**: Info about a contact: name, email, address, phone number etc.
 * **Contact/Person**: Used Interchangeably. Contact is used for contextual descriptions in the User/Developer Guides. A contact is modelled as a Person class in code.
+* **Active tag**: Refers to the tags which are currently in use. Once the last occurrence of a tag is deleted, that tag is no longer active.
 * **CLI**: Command Line Interface
 * **GUI**: Graphic User Interface
 
