@@ -44,6 +44,12 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_validDuplicateArgs_returnsDeleteCommand() {
+        ArrayList<Index> targetIndexes = new ArrayList<>(Arrays.asList(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, " " + PREFIX_ID + "1, 1", new DeleteCommand(targetIndexes));
+    }
+
+    @Test
     public void parse_invalidMultipleArgs_throwsParseException() {
         assertParseFailure(parser, " " + PREFIX_ID + "1, a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));

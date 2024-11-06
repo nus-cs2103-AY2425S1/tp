@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant "ParserUtil" as ParserUtil <<class>> LOGIC_COLOR
+participant "Tag" as Tag <<class>> LOGIC_COLOR
+participant "t:Tag" as t LOGIC_COLOR
+
+end box
+
+[-> ParserUtil : parseTags(tags)
+activate ParserUtil
+
+
+
+loop for each tag
+
+    ParserUtil -> ParserUtil: parseTag("Friend")
+    activate ParserUtil
+
+    ParserUtil -> Tag : isValidTag
+    activate Tag
+    Tag --> ParserUtil
+    deactivate Tag
+    alt tag is valid
+
+
+        create t
+        ParserUtil -> t
+        activate t
+        t --> ParserUtil
+        deactivate t
+
+        ParserUtil --> ParserUtil : t
+
+
+    else tag is invalid
+        ParserUtil --> ParserUtil : ParseException
+        deactivate ParserUtil
+
+    end
+    [<--ParserUtil : t or ParseException
+    deactivate ParserUtil
+
+
+end

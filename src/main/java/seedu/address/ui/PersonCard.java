@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -49,6 +53,9 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        ArrayList<ImageView> icons = new ArrayList<>();
+        String[] iconPaths = {"phone_icon.png", "location_icon.png", "email_icon.png", "remark_icon.png"};
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().getDisplayableName());
         phone.setText(person.getPhone().getDisplayablePhone());
@@ -58,5 +65,24 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Defining a for loop to add icons to the labels
+        for (String iconPath : iconPaths) {
+            InputStream iconStream = this.getClass().getResourceAsStream("/images/" + iconPath);
+            if (iconStream != null) {
+                ImageView icon = new ImageView(new Image(iconStream));
+                icon.setFitWidth(12);
+                icon.setPreserveRatio(true);
+                icons.add(icon);
+            } else {
+                System.err.println("Resource not found: " + iconPath);
+            }
+        }
+        if (icons.size() == iconPaths.length) {
+            phone.setGraphic(icons.get(0));
+            address.setGraphic(icons.get(1));
+            email.setGraphic(icons.get(2));
+            remark.setGraphic(icons.get(3));
+        }
     }
 }

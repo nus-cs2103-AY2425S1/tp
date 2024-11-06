@@ -38,7 +38,7 @@ public class Phone {
      * Returns value if nonempty, otherwise returns "Phone unspecified".
      */
     public String getDisplayablePhone() {
-        return value.isEmpty() ? "Phone unspecified" : value;
+        return value.isEmpty() ? "-" : value;
     }
 
 

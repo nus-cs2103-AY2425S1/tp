@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,4 +49,12 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the list of {@code people} for display to the user.
+     */
+    public static String format(List<Person> people) {
+        return people.stream()
+                .map(Messages::format)
+                .collect(Collectors.joining("\n", "\n", ""));
+    }
 }
