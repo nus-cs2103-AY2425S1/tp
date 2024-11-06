@@ -295,7 +295,7 @@ Freelance wedding planners with many client and vendor contacts
 * Likes flexibility in scheduling
 * Works alone
 
-**Value proposition**: Provide a way to easily select suitable vendors for a wedding event given specific parameters such as budget, time, commission, client needs (e.g. culture, style), location. 
+**Value proposition**: Provide a way to easily select suitable vendors for a wedding event given specific parameters such as budget, time, commission, client needs (e.g. culture, style), location.
 
 
 ### User stories
@@ -352,17 +352,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. System detects an error in the entered data (e.g., invalid phone number). 
-  
+* 3a. System detects an error in the entered data (e.g., invalid phone number).
+
   * 3a1. System requests the correct data.
-  * 3a2. Wedding planner enters new data. 
-    
+  * 3a2. Wedding planner enters new data.
+
     Use case resumes from step 4.
 
 * 5a. The contact already exists in the system (duplicate contact).
-  
+
   * 5a1. System displays a message that the contact already exists.
-    
+
     Use case ends.
 
 **Guarantees:**
@@ -374,13 +374,13 @@ ___
 **Name: UC02 - Delete Contact (Vendor/Client)**
 
 **Main Success Scenario (MSS):**
-1. Wedding planner requests to list all contacts. 
-2. System displays a list of contacts. 
-3. Wedding planner specifies which contact he wishes to delete. 
-4. System requests for confirmation. 
-5. Wedding planner confirms the deletion of contact. 
+1. Wedding planner requests to list all contacts.
+2. System displays a list of contacts.
+3. Wedding planner specifies which contact he wishes to delete.
+4. System requests for confirmation.
+5. Wedding planner confirms the deletion of contact.
 6. System displays a message for the successful deletion of contact.
-   
+
    Use case ends.
 
 **Extensions**
@@ -392,13 +392,13 @@ ___
 * 3a. System is unable to locate the contact to be deleted.
 
   * 3a1. System displays an error message.
-    
+
     Use case ends.
-  
+
 * 4a. The wedding planner chooses to abort the deletion of contact.
-  
+
   * 4a1. System displays a message for aborting the deletion.
-  
+
     Use case ends.
 
 **Guarantees**
@@ -421,18 +421,18 @@ ___
 
 **Extensions**
 
-* 2a. System is unable to get saved contacts. 
-  
+* 2a. System is unable to get saved contacts.
+
   * 2a1. System informs the user that the file is corrupted.
-    
+
     Use case ends.
 
 * 2b. The list is empty.
-  
+
   * 2b1. System informs the user that there are no saved contacts.
-    
+
     Use case ends.
-    
+
 **Name: UC04 - Save Contact (Client/Vendor)**
 
 **Preconditions:**
@@ -453,18 +453,18 @@ ___
 **Extensions**
 
 * 1a. The directory does not exist.
-  
+
   * 1a1. System prompts the user that the target directory does not exist.
 
-  Use case ends. 
- 
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1. Compatibility: Should work on any mainstream OS (Windows/macOS/Linux) as long as Java `17` or above is installed.
 2. Compatibility: The system should work on both 32-bit and 64-bit environments.
 3. User Experience: Should be able to hold up to 1000 contacts and events without a noticeable sluggishness in performance for typical usage.
 4. User Experience: The system should respond within two seconds.
-5. User Experience: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+5. User Experience: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 6. Privacy: User data must remain on the local machine and not be shared or transmitted to any external services unless explicitly requested by the user (e.g., exporting contacts).
 
 --------------------------------------------------------------------------------------------------------------------
