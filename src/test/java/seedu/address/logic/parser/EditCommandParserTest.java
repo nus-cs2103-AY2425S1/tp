@@ -84,20 +84,25 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
+
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
+        // Negative index should trigger invalid format
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // zero index
+        // Zero index should trigger invalid format
         assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // invalid arguments being parsed as preamble
+        // Invalid arguments being parsed as preamble should trigger invalid format
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
-        // invalid prefix being parsed as preamble
+        // Invalid prefix being parsed as preamble should trigger invalid format
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
+
+
+
+
 
     @Test
     public void parse_invalidValue_failure() {
