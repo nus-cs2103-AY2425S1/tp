@@ -36,7 +36,6 @@ class GetAttendanceByTgCommandTest {
             .withStudentNumber("A7654321M")
             .withTutorialGroup("A01").build();
 
-
     @Test
     void execute_validTutorialGroupWithStub_success() throws CommandException {
         Model model = new ModelManager();
@@ -49,11 +48,11 @@ class GetAttendanceByTgCommandTest {
 
         GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(validTutorialGroup);
         command.setAttendanceWindow(attendanceWindowStub);
-
         CommandResult result = command.execute(model);
 
         String expectedMessage = "Attendance window opened for Tutorial Group: " + validTutorialGroup;
         assertEquals(expectedMessage, result.getFeedbackToUser());
+
 
 
     }
@@ -73,9 +72,13 @@ class GetAttendanceByTgCommandTest {
         TutorialGroup tg1 = new TutorialGroup("A01");
         TutorialGroup tg2 = new TutorialGroup("A02");
 
+        AttendanceWindowStub attendanceWindowStub = new AttendanceWindowStub(tg1);
         GetAttendanceByTgCommand command1 = new GetAttendanceByTgCommand(tg1);
+        command1.setAttendanceWindow(attendanceWindowStub);
         GetAttendanceByTgCommand command2 = new GetAttendanceByTgCommand(tg1);
+        command2.setAttendanceWindow(attendanceWindowStub);
         GetAttendanceByTgCommand command3 = new GetAttendanceByTgCommand(tg2);
+        command3.setAttendanceWindow(attendanceWindowStub);
 
         // Same object
         assertEquals(command1, command1);
@@ -96,7 +99,9 @@ class GetAttendanceByTgCommandTest {
     @Test
     public void toStringMethod() {
         TutorialGroup tg = new TutorialGroup("A01");
+        AttendanceWindowStub attendanceWindowStub = new AttendanceWindowStub(tg);
         GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(tg);
+        command.setAttendanceWindow(attendanceWindowStub);
         String expectedString = GetAttendanceByTgCommand.class.getCanonicalName() + "{tutorialGroup=" + tg + "}";
         assertEquals(expectedString, command.toString());
     }
@@ -115,13 +120,19 @@ class GetAttendanceByTgCommandTest {
         @Override
         public void show(Model model) {
             // Simulate showing the attendance window
-            System.out.println("Showing attendance window for: " + super.getTutorialGroup());
+            System.out.println("Showing attendance window " + super.getTutorialGroup());
             for (Student student : students) {
                 System.out.println("Student: " + student.getName());
                 for (AttendanceRecord record : student.getAttendanceRecord()) {
                     System.out.println("Date: " + record.getDate() + ", Attendance: " + record.getAttendance());
                 }
             }
+        }
+
+        @Override
+        public void close() {
+            // Simulate closing the attendance window
+            System.out.println("Closing attendance window for: " + super.getTutorialGroup());
         }
 
         public void addStudent(Student student) {

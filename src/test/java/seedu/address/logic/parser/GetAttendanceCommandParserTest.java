@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 public class GetAttendanceCommandParserTest {
 

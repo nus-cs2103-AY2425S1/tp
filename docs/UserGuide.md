@@ -85,7 +85,7 @@ Format: `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/STUDENT_NUMBER`
 
 Examples:
 * `adds n/John Doe p/98765432 tg/G69 sn/E1234567I`
-* `adds n/Betsy Crowe tg/G16 p/23456789 sn/A1234567Z`
+* `adds n/Betsy Crowe tg/G16 p/23456789 sn/a1234567z`
 
 ### Listing all students : `list`
 
@@ -117,7 +117,7 @@ Format: `undo`
 
 View student(s) whose name matches the specified name exactly.
 
-Format: `view n/NAME`
+Format: `view NAME`
 
 * The given name must match the student's name exactly. e.g `view John` will not return `John Doe`'s details.
 * Name is case-sensitive. e.g. `view mary` will not return `Mary`'s details.
@@ -138,7 +138,7 @@ Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
 * Deletes the student with the specified details.
 * The student name refers to the student name shown in the displayed list of students.
 * The student number refers to the student number shown in the displayed list of students.
-* If a student number is provided, it **must be in the following format** A1234567B …​
+* If a student number is provided, it **must be in the following format** A1234567B, a1234567B, A1234567b, a1234567b, ...​
 * If there is more than one student with the exact same name, the student number must be provided to differentiate between them when deleting.
 
 Examples:
@@ -198,8 +198,12 @@ Format: `exit`
 ### Getting Tutorial Group Attendance : `getattg`
 
 * Opens an attendance window for all students in a tutorial group for a particular date
+  * Executing `undo` will close the last window opened by this command 
 
 * Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+
+### Closing Attendance Window : `closeat`
+* Closes all attendance windows if any is currently open.
 
 
 ### Saving the data
@@ -239,13 +243,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`
-**Clear**   | `clear`
-**Delete** | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`
-**Edit**   | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Undo**   | `undo`
+| Action     | Format, Examples                                                                                                          |
+|------------|---------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`    |
+| **Clear**  | `deleteall`                                                                                                               |
+| **Delete** | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                          |
+| **Edit**   | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678` |
+| **View**   | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                |
+| **List**   | `list`                                                                                                                    |
+| **Help**   | `help`                                                                                                                    |
+| **Undo**   | `undo`                                                                                                                    |
