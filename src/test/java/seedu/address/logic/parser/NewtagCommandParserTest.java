@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.NewtagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.tag.Tag.MAX_CHARACTER_LENGTH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,20 @@ public class NewtagCommandParserTest {
         assertParseSuccess(parser, " t/bride's side", new NewtagCommand(expectedTags));
     }
 
+    /**
+     * EP: Single valid argument of the maximum allowable length.
+     */
     @Test
     public void parse_maximumLengthArgs_returnsNewtagCommand() {
-        String maxName = "a".repeat(50);
+        String maxName = "a".repeat(MAX_CHARACTER_LENGTH);
         Tag maxTag = new Tag(maxName);
         List<Tag> expectedTags = List.of(maxTag);
         assertParseSuccess(parser, " t/" + maxName, new NewtagCommand(expectedTags));
     }
 
+    /**
+     * EP: Single valid argument with leading and trailing spaces.
+     */
     @Test
     public void parse_leadingAndTrailingSpaces_returnsNewtagCommand() {
         Tag expectedTag = TypicalTags.BRIDES_SIDE;
@@ -44,7 +51,7 @@ public class NewtagCommandParserTest {
     }
 
     /**
-     * EP: Multiple valid lowercase arguments.
+     * EP: Multiple valid arguments.
      */
     @Test
     public void parse_multipleValidArgs_returnsNewtagCommand() {
@@ -56,15 +63,37 @@ public class NewtagCommandParserTest {
         assertParseSuccess(parser, " t/bride's side t/colleagues", new NewtagCommand(expectedTags));
     }
 
+    /**
+     * EP: Multiple valid arguments, each of the maximum allowable length.
+     */
     @Test
     public void parse_multipleMaximumLengthArgs_returnsNewtagCommand() {
-        String maxNameA = "a".repeat(50);
-        String maxNameB = "b".repeat(50);
+        String maxNameA = "a".repeat(MAX_CHARACTER_LENGTH);
+        String maxNameB = "b".repeat(MAX_CHARACTER_LENGTH);
         Tag maxTagA = new Tag(maxNameA);
         Tag maxTagB = new Tag(maxNameB);
         List<Tag> expectedTags = List.of(maxTagA, maxTagB);
         assertParseSuccess(parser, " t/" + maxNameA + " t/" + maxNameB,
                 new NewtagCommand(expectedTags));
+    }
+
+    /**
+     * EP: Single tag name exceeding maximum length.
+     */
+    @Test
+    public void parse_exceedsMaxLength_throwsParseException() {
+        String longTag = " t/" + "a".repeat(MAX_CHARACTER_LENGTH + 1);
+        assertParseFailure(parser, longTag, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    /**
+     * EP: Single tag name with invalid characters.
+     */
+    @Test
+    public void parse_invalidCharacters_throwsParseException() {
+        assertParseFailure(parser, " t/;%<>}{", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/¡£™", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/¶¢", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     /**
@@ -78,7 +107,7 @@ public class NewtagCommandParserTest {
 
     @Test
     public void parse_multipleArgsOneExceedsMaxLength_throwsParseException() {
-        assertParseFailure(parser, " t/bride's side t/" + "a".repeat(51),
+        assertParseFailure(parser, " t/bride's side t/" + "a".repeat(MAX_CHARACTER_LENGTH + 1),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
     }
 
@@ -100,35 +129,24 @@ public class NewtagCommandParserTest {
     public void parse_emptyString_throwsParseException() {
         assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
+
     @Test
     public void parse_emptyArgs_throwsParseException() {
+        assertParseFailure(parser, " t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_spacesAsArgs_throwsParseException() {
         assertParseFailure(parser, " t/    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgsNoLeadingSpace_throwsParseException() {
+        assertParseFailure(parser, "t/bride's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingPrefix_throwsParseException() {
         assertParseFailure(parser, "bride's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_multipleValidArgsWithoutSpace_throwsParseException() {
-        assertParseFailure(parser, " t/bride's sidet/groom's side",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
-    }
-
-    /**
-     * EP: Single invalid tag name.
-     */
-    @Test
-    public void parse_exceedsMaxLength_throwsParseException() {
-        String longTag = "a".repeat(51); // 51 characters, exceeding the 50-character limit.
-        assertParseFailure(parser, longTag, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidCharacters_throwsParseException() {
-        assertParseFailure(parser, ";%<>}{", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        assertParseFailure(parser, "¡£™", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-        assertParseFailure(parser, "¶¢", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }
