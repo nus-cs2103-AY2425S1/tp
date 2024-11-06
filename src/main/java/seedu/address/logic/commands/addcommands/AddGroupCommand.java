@@ -80,7 +80,7 @@ public class AddGroupCommand extends Command {
         int countGroupsInModel = 0;
         String messageGroupInModel = MESSAGE_GROUP_IN_MODEL;
 
-        // iterate through the list of groups, incrementing count if group does not exist in the moel and deleting it
+        // iterate through the list of groups, incrementing count if group does not exist in the model and deleting it
         // from the original list if it does
         for (Group g: noDuplicateGroupList) {
             if (model.hasGroup(g)) {

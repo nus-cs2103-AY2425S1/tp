@@ -9,10 +9,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -48,10 +51,10 @@ public class AddTaskToGroupCommand extends Command {
 
     public static final String MESSAGE_OVERDUE_WARNING = "WARNING: Task will be marked as overdue";
 
-    public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
-
     public static final String MESSAGE_TASK_EXISTS_GLOBAL = "This task (%1$s) already exists.\n"
         + " Please use the add existing task command instead.";
+
+    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) entered, only 1 will be added:";
 
     private final TaskName taskName;
 
@@ -79,36 +82,68 @@ public class AddTaskToGroupCommand extends Command {
         }
         List<GroupName> groups = toAddInto.stream().toList();
         int lastIndex = groups.size() - 1;
-        StringBuilder groupsAdded = new StringBuilder();
+        String resultMessage = "";
 
-        for (GroupName groupName : groups) {
+        // create a stream consisting of all groups which are entered more than once by the user
+        Stream<GroupName> checkForDuplicates = groups.stream().filter(x -> Collections.frequency(groups, x) > 1)
+                .distinct();
+
+        // count the number of duplicated groups entered
+        long numDuplicates = groups.stream().filter(x -> Collections.frequency(groups, x) > 1)
+                .distinct()
+                .count();
+
+        // create duplicate message for duplicate groups, if none will just return an empty string
+        String duplicateMessage = checkForDuplicates.map(a -> a.getGroupName()).reduce(
+                MESSAGE_DUPLICATE_GROUP, (x, y) -> x + "\n" + y);
+        if (numDuplicates == 0) {
+            duplicateMessage = "";
+        }
+
+        //  create a list without duplicate groups
+        List<GroupName> noDuplicateGroupList = toAddInto.stream().distinct().toList();
+        if (noDuplicateGroupList.size() > 1) {
+            resultMessage += "\n";
+        }
+
+        int countModelDoesNotContainGroup = 0;
+        String modelDoesNotContainGroup = MESSAGE_GROUP_NAME_NOT_FOUND;
+
+        for (GroupName groupName : noDuplicateGroupList) {
             if (!model.containsGroupName(groupName)) {
-                throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
+                countModelDoesNotContainGroup++;
+                modelDoesNotContainGroup += "\n" + groupName.getGroupName();
+                continue;
             }
             Group group = model.getGroupByName(groupName);
 
-            if (model.hasTaskInGroup(task, group)) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
-            }
             model.addTaskToGroup(task, group);
             if (!model.hasTask(task)) {
                 model.addTask(task);
             } else {
                 model.increaseGroupWithTask(task);
             }
-            groupsAdded.append(groupName).append("\n");
+            resultMessage += groupName.getGroupName() + "\n";
+        }
+        if (countModelDoesNotContainGroup == noDuplicateGroupList.size()) {
+            throw new CommandException(modelDoesNotContainGroup);
         }
         model.setMostRecentGroupTaskDisplay(groups.get(lastIndex).getGroupName());
         model.updateFilteredGroupList(x -> x.getGroupName().equals(groups.get(lastIndex)));
         model.setStateGroupTask();
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
-        if (deadline.getTime().isBefore(currentTime)) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS + "\n" + MESSAGE_OVERDUE_WARNING,
-                task.getTaskName().getTaskName(), groupsAdded), LIST_GROUP_TASK_MARKER);
+        String finalOutput = "";
+        if (numDuplicates > 0) {
+            finalOutput = duplicateMessage + String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(),
+                resultMessage);
+        } else {
+            finalOutput = String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(), resultMessage);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().getTaskName(),
-            groupsAdded), LIST_GROUP_TASK_MARKER);
+        if (deadline.getTime().isBefore(currentTime)) {
+            return new CommandResult(finalOutput + MESSAGE_OVERDUE_WARNING, LIST_GROUP_TASK_MARKER);
+        }
+        return new CommandResult(finalOutput, LIST_GROUP_TASK_MARKER);
     }
 
     @Override
