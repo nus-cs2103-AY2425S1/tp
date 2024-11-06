@@ -27,11 +27,25 @@ public class DeleteAppointmentCommand extends DeleteCommand {
         super(targetIndex);
     }
 
+    /**
+     * Retrieves the list of filtered appointments from the model.
+     *
+     * @param model The model containing the filtered list.
+     * @return A list of filtered appointments.
+     */
     @Override
     protected List<Appointment> getFilteredList(Model model) {
         return model.getFilteredAppointmentList();
     }
 
+    /**
+     * Deletes the specified appointment entity from the model.
+     *
+     * @param model The model to delete the appointment from.
+     * @param entity The appointment entity to be deleted.
+     * @throws NullPointerException if the specified entity is null.
+     * @throws AssertionError if the entity is not an instance of Appointment.
+     */
     @Override
     protected void deleteEntity(Model model, Object entity) {
         requireNonNull(entity);
@@ -41,16 +55,33 @@ public class DeleteAppointmentCommand extends DeleteCommand {
         model.deleteAppointment((Appointment) entity);
     }
 
+    /**
+     * Returns the success message to display after a successful appointment deletion.
+     *
+     * @return A string indicating the success of the deletion operation.
+     */
     @Override
     protected String getSuccessMessage() {
         return MESSAGE_DELETE_APPOINTMENT_SUCCESS;
     }
 
+    /**
+     * Returns the message to display when an invalid appointment index is provided.
+     *
+     * @return A string indicating that the appointment index is invalid.
+     */
     @Override
     protected String getInvalidIndexMessage() {
         return Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX;
     }
 
+    /**
+     * Formats the given appointment entity into a string representation.
+     *
+     * @param entity The entity to format.
+     * @return A string representation of the given appointment entity.
+     * @throws AssertionError if the entity is not an instance of Appointment.
+     */
     @Override
     protected String formatEntity(Object entity) {
         assert entity instanceof Appointment;
@@ -65,11 +96,10 @@ public class DeleteAppointmentCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteAppointmentCommand)) {
+        if (!(other instanceof DeleteAppointmentCommand otherDeleteAppointmentCommand)) {
             return false;
         }
 
-        DeleteAppointmentCommand otherDeleteAppointmentCommand = (DeleteAppointmentCommand) other;
         return targetIndex.equals(otherDeleteAppointmentCommand.targetIndex);
     }
 

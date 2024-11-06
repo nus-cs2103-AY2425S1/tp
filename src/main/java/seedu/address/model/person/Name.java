@@ -51,13 +51,14 @@ public class Name implements Comparable<Name> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Name otherName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
+
         return fullName.replaceAll("\\s+", "")
                 .equalsIgnoreCase(otherName.fullName.replaceAll("\\s+", ""));
+
     }
 
     @Override
