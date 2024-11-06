@@ -14,6 +14,9 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
     private final PersonContainsKeywordsPredicate personContainsKeywordsPredicate;
 
+    /**
+     * Constructs an {@code EventContainsKeywordsPredicate} with the given {@code keywords}.
+     */
     public EventContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
         this.personContainsKeywordsPredicate = new PersonContainsKeywordsPredicate(keywords);

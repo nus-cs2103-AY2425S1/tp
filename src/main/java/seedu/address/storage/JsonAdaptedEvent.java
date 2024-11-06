@@ -8,11 +8,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.role.athlete.SportString;
+import seedu.address.model.person.role.athlete.Sport;
 
 
 /**
@@ -91,7 +92,7 @@ public class JsonAdaptedEvent {
         }
         final EventName eventName = new EventName(name);
 
-        final SportString eventSport = new SportString(sport);
+        final Sport eventSport = ParserUtil.parseSport(sport);
 
         final Venue eventVenue = new Venue(venue);
 

@@ -38,7 +38,7 @@ public class Messages {
 
             You can find a list of the available faculties, sports, branches, positions, and volunteer roles\s
             at the bottom of this help page.
-            
+
             Note: The hyphens between the fields are NOT necessary for the program to work, they are there for\s
             readability purposes.
 
@@ -55,21 +55,21 @@ public class Messages {
 
             find - Show all Persons containing a case-insensitive keyword in their name, phone, email, or roles.
             Usage: find <keyword1> {<keyword2>} {<keyword3>} ...
-            
+
             findevent - Show all Events containing a case-insensitive keyword in their name, sport,\s
             venue, or participants.
             Usage: findevent <keyword1> {<keyword2>} {<keyword3>} ...
 
             list - List all Persons registered to EventfulNUS.
             Usage: list
-            
+
             listevents - List all Events registered to EventfulNUS.
             Usage: listevents
 
             edit - Update a Person's information.
             Usage: edit <id> {n/<name>} {p/<phone number>} {m/<email>} {r/<role1>} {r/<role2>}\s
             {r/<role3>} ...
-            
+
             WARNING: You must specify at least one field to update. Otherwise, an error will be shown.
             WARNING: Editing the event will remove the person from the previous event and add them to the new event.
             WARNING: These edits are OVERWRITING changes, not additive. Be careful when editing.
