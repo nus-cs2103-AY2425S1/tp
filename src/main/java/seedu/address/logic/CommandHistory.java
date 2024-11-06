@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 /**
  * Stores the history of commands executed.
  */
@@ -55,5 +57,5 @@ public class CommandHistory {
     public int hashCode() {
         return userInputHistory.hashCode();
     }
-
 }
+//@@author

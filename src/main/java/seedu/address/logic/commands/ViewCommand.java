@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Views a person identified using it's displayed index from the address book.
+ * Views a person identified using it's displayed index from VolunTier.
  */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";

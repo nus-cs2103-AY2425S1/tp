@@ -35,6 +35,9 @@ public class LogicManager implements Logic {
     private final CommandHistory commandHistory;
     private boolean addressBookModified;
 
+    //@@author estellelim-reused
+    //Reused from https://github.com/se-edu/addressbook-level4.git
+    // with minor modifications
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -74,6 +77,7 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
+    //@@author
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {

@@ -16,33 +16,30 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Tutor;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to VolunTier.
  */
 public class AddTutorCommand extends Command {
 
     public static final String COMMAND_WORD = "addTutor";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor to the address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutor to VolunTier. \n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-
-            + PREFIX_HOURS + "HOURS "
-            + PREFIX_SUBJECT + "SUbJECT \n"
-
+            + PREFIX_NAME + " NAME "
+            + PREFIX_PHONE + " PHONE_NUMBER "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_ADDRESS + " ADDRESS "
+            + "[" + PREFIX_HOURS + " HOURS] "
+            + "[" + PREFIX_SUBJECT + " SUBJECT]… \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_HOURS + "6 "
-            + PREFIX_SUBJECT + "Math";
-
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_EMAIL + " johndoe@example.com "
+            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
+            + PREFIX_HOURS + " 6 "
+            + PREFIX_SUBJECT + " Science";
 
     public static final String MESSAGE_SUCCESS = "New tutor added: \n %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This tutor already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This tutor already exists in VolunTier";
 
     private final Tutor toAdd;
 
