@@ -80,6 +80,9 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY …​`
 
+**NAME**
+- Can be any alphanumeric string of any length. The following special characters are allowed. '-' and '/'.
+
 **PHONE NUMBER**
 - Must be exactly 8 digits long and start with 3, 6, 8 or 9.
 - Only numeric characters are allowed
