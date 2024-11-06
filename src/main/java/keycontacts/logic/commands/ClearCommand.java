@@ -18,11 +18,8 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setStudentDirectory(new StudentDirectory());
+        model.commitStudentDirectory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    @Override
-    public boolean shouldCommitModel() {
-        return true;
-    }
 }

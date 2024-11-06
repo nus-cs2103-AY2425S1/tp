@@ -82,14 +82,11 @@ public class MakeupLessonCommand extends Command {
                             .findFirst().get().toDisplay()));
         }
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, makeupLesson.toDisplay(),
                 Messages.format(studentToUpdate)));
     }
 
-    @Override
-    public boolean shouldCommitModel() {
-        return true;
-    }
 
     @Override
     public boolean equals(Object other) {

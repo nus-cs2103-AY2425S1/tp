@@ -19,8 +19,4 @@ public class HelpCommand extends Command {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, null, false);
     }
 
-    @Override
-    public boolean shouldCommitModel() {
-        return false;
-    }
 }

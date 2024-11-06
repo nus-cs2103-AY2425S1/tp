@@ -106,7 +106,6 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-1. If the command's `Command#shouldCommitModel` method returns true, `LogicManager` will also commit the current student directory state. (More on this below under implementation)
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -173,13 +172,13 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the stu
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command's `Command#shouldCommitModel` method returns true, so the `LogicManager` runs `Model#commitStudentDirectory()`, causing another modified student directory state to be saved into the `studentDirectoryStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command calls `Model#commitStudentDirectory()`, causing another modified student directory state to be saved into the `studentDirectoryStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, `LogicManager` will not call `Model#commitStudentDirectory()`, so the student directory state will not be saved into the `studentDirectoryStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitStudentDirectory()`, so the student directory state will not be saved into the `studentDirectoryStateList`.
 
 </box>
 
@@ -217,11 +216,11 @@ The `redo` command does the opposite — it calls `Model#redoStudentDirector
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the student directory, such as `list`, have their `Command#shouldCommitModel` method returning false, so `LogicManager` will not call `Model#commitStudentDirectory()`. Thus, the `studentDirectoryStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the student directory, such as `list`, will not call `Model#commitStudentDirectory()`. Thus, the `studentDirectoryStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which causes `LogicManager` to call `Model#commitStudentDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `studentDirectoryStateList`, all student directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitStudentDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `studentDirectoryStateList`, all student directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 

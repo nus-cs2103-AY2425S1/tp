@@ -27,8 +27,4 @@ public class RedoCommand extends Command {
         model.redoStudentDirectory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
-    @Override
-    public boolean shouldCommitModel() {
-        return false;
-    }
 }

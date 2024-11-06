@@ -27,8 +27,4 @@ public class UndoCommand extends Command {
         model.undoStudentDirectory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
-    @Override
-    public boolean shouldCommitModel() {
-        return false;
-    }
 }

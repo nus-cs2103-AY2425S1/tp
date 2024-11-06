@@ -104,13 +104,10 @@ public class EditCommand extends Command {
         }
 
         model.filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }
 
-    @Override
-    public boolean shouldCommitModel() {
-        return true;
-    }
 
     @Override
     public boolean equals(Object other) {

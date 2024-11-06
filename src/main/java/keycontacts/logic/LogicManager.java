@@ -49,9 +49,6 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = keyContactsParser.parseCommand(commandText);
         commandResult = command.execute(model);
-        if (command.shouldCommitModel()) {
-            model.commitStudentDirectory();
-        }
 
         try {
             storage.saveStudentDirectory(model.getStudentDirectory());
