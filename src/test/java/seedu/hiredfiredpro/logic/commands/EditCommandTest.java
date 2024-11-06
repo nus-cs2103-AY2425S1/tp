@@ -1,5 +1,8 @@
 package seedu.hiredfiredpro.logic.commands;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,7 +28,14 @@ import seedu.hiredfiredpro.model.HiredFiredPro;
 import seedu.hiredfiredpro.model.Model;
 import seedu.hiredfiredpro.model.ModelManager;
 import seedu.hiredfiredpro.model.UserPrefs;
+import seedu.hiredfiredpro.model.person.Email;
+import seedu.hiredfiredpro.model.person.InterviewScore;
+import seedu.hiredfiredpro.model.person.Job;
+import seedu.hiredfiredpro.model.person.Name;
 import seedu.hiredfiredpro.model.person.Person;
+import seedu.hiredfiredpro.model.person.Phone;
+import seedu.hiredfiredpro.model.skill.Skill;
+import seedu.hiredfiredpro.model.tag.Tag;
 import seedu.hiredfiredpro.testutil.EditPersonDescriptorBuilder;
 import seedu.hiredfiredpro.testutil.PersonBuilder;
 
@@ -85,8 +95,15 @@ public class EditCommandTest {
 
     @Test
     public void execute_emptyTagRetainsHired() {
-        Person hiredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        hiredPerson.markAsHired();
+        Person hiredPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Software Engineer"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
+                new HashSet<>(Set.of(new Tag("hired")))
+        );
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
         descriptor.setTags(null);
         Person editedPerson = createEditedPerson(hiredPerson, descriptor);
@@ -96,8 +113,15 @@ public class EditCommandTest {
 
     @Test
     public void execute_emptyTagRetainsRejected() {
-        Person rejectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        rejectedPerson.markAsRejected();
+        Person rejectedPerson = new Person(
+                new Name("Amy Bee"),
+                new Job("Software Engineer"),
+                new Phone("85355255"),
+                new Email("amy@gmail.com"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
+                new HashSet<>(Set.of(new Tag("rejected")))
+        );
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
         descriptor.setTags(null);
         Person editedPerson = createEditedPerson(rejectedPerson, descriptor);
