@@ -69,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        isPinned.set(person.getPinned());
+        isPinned.set(person.isPinned());
         pinIcon.visibleProperty().bind(isPinned);
         this.model = model;
     }

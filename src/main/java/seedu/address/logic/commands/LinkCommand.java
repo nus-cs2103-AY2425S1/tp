@@ -108,7 +108,7 @@ public class LinkCommand extends Command {
         Grade grade = child.getGrade();
         Name parentName = parent.getName();
         Set<Tag> tags = child.getTags();
-        boolean isPinned = child.getPinned();
+        boolean isPinned = child.isPinned();
         boolean isArchived = child.isArchived();
 
         return new Student(name, phone, email, address, lessonTime, education, grade, parentName, tags,
@@ -123,7 +123,7 @@ public class LinkCommand extends Command {
         Address address = parent.getAddress();
         Name childName = child.getName();
         Set<Tag> tags = parent.getTags();
-        boolean isPinned = parent.getPinned();
+        boolean isPinned = parent.isPinned();
         boolean isArchived = parent.isArchived();
 
         return new Parent(name, phone, email, address, childName, tags, isPinned, isArchived);

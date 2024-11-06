@@ -51,6 +51,7 @@ public class Student extends Person {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
                 person.isPinned(), person.isArchived());
         this.lessonTime = lessonTime;
+
         this.education = education;
         this.grade = grade;
         this.parentName = parentName;
