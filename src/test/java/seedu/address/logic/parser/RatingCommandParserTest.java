@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RatingCommand;
 import seedu.address.model.restaurant.Rating;
 
@@ -20,10 +22,10 @@ public class RatingCommandParserTest {
         assertParseFailure(parser, "r/5", MESSAGE_INVALID_FORMAT);
 
         // no rating specified
-        // assertParseFailure(parser, "1", Rating.MESSAGE_CONSTRAINTS);
+         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no rating specified
-        // assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -46,14 +48,4 @@ public class RatingCommandParserTest {
         // invalid rating (e.g., out of expected bounds or format)
         assertParseFailure(parser, "1 r/invalid_rating", Rating.MESSAGE_CONSTRAINTS);
     }
-
-    //    @Test
-    //    public void parse_optionalRating_success() {
-    //        // valid index but no rating specified
-    //        Index targetIndex = Index.fromOneBased(1);
-    //        String userInput = targetIndex.getOneBased() + " ";
-    //        RatingCommand expectedCommand = new RatingCommand(targetIndex, new Rating(null));
-    //
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //    }
 }
