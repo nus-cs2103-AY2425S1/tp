@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.VolunteerParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -17,12 +18,12 @@ public class FindVolunteerCommandParser implements Parser<FindVolunteerCommand> 
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public FindVolunteerCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        try {
+            String searchTerm = VolunteerParserUtil.parseSearchTerm(args);
+            return new FindVolunteerCommand(searchTerm);
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindVolunteerCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindVolunteerCommand.MESSAGE_USAGE), pe);
         }
-
-        return new FindVolunteerCommand(trimmedArgs);
     }
 }
