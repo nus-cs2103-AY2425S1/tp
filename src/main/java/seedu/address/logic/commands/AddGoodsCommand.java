@@ -21,7 +21,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
 public class AddGoodsCommand extends Command {
     public static final String COMMAND_WORD = "addgoods";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds linked goods to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds linked goods to the address book. \n"
             + "Parameters: "
             + PREFIX_GOODS_NAME + "GOODS_NAME "
             + PREFIX_QUANTITY + "QUANTITY "
