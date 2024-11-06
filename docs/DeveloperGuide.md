@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `KnottyPlanner` and the **Actor** is the `User`, unless specified otherwise)
+(For all use cases below, the **System** is the `KnottyPlanners` and the **Actor** is the `User`, unless specified otherwise)
 
 
 **Use case: UC01 - Delete a contact**
@@ -313,11 +313,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlanner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to delete a specific contact in the list
-4.  KnottyPlanner shows a confirmation prompt
+4.  KnottyPlanners shows a confirmation prompt
 5.  User confirms the deletion
-6.  KnottyPlanner deletes the contact
+6.  KnottyPlanners deletes the contact
 
     Use case ends.
 
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given contact name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -338,9 +338,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlaner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to add a wedding tag to a specific contact in the list
-4.  KnottyPlanner adds the wedding tag to that contact
+4.  KnottyPlanners adds the wedding tag to that contact
 
     Use case ends.
 
@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given tag name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -361,9 +361,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlanner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to delete a tag from a specific contact in the list
-4.  KnottyPlanner deletes the tag from that contact
+4.  KnottyPlanners deletes the tag from that contact
 
     Use case ends.
 
@@ -375,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -384,9 +384,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  KnottyPlanner shows a list of contacts
+2.  KnottyPlanners shows a list of contacts
 3.  User requests to view all tags for a specific contact
-4.  KnottyPlanner shows all tags for that contact
+4.  KnottyPlanners shows all tags for that contact
 
     Use case ends.
 
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -407,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to search for contacts by name criteria
-2. KnottyPlanner shows a list of contacts that matches the name criteria
+2. KnottyPlanners shows a list of contacts that matches the name criteria
 
     Use case ends.
 
@@ -415,13 +415,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given criterion is invalid.
 
-    * 2a1. KnottyPlanner shows an error message.
+    * 2a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. There are no contacts that matches the name.
 
-    * 2ba1. KnottyPlanner shows an empty list.
+    * 2ba1. KnottyPlanners shows an empty list.
 
   Use case ends.
 
@@ -430,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to search for contacts by job criteria
-2. KnottyPlanner shows a list of contacts that match the job criteria
+2. KnottyPlanners shows a list of contacts that match the job criteria
 
    Use case ends.
 
@@ -438,13 +438,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given criterion is invalid.
 
-    * 2a1. KnottyPlanner shows an error message.
+    * 2a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
 * 2b. There are no contacts that matches the job.
 
-    * 2ba1. KnottyPlanner shows an empty list.
+    * 2ba1. KnottyPlanners shows an empty list.
 
   Use case ends.
 
@@ -453,9 +453,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list contacts
-2. KnottyPlanner shows a list of contacts
+2. KnottyPlanners shows a list of contacts
 3. User requests to edit details of a specific contact
-4. KnottyPlanner updates the details for that contact
+4. KnottyPlanners updates the details for that contact
 
    Use case ends.
 
@@ -467,13 +467,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given contact name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The new contact details given are invalid.
 
-  * 3b1. KnottyPlanner shows an error message.
+  * 3b1. KnottyPlanners shows an error message.
 
     Use case resumes at step 2.
 
@@ -482,9 +482,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list weddings
-2. KnottyPlanner shows a list of weddings
+2. KnottyPlanners shows a list of weddings
 3. User requests to add a new wedding
-4. KnottyPlanner adds the new wedding
+4. KnottyPlanners adds the new wedding
 
    Use case ends.
 
@@ -496,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given wedding name is invalid or fields are missing/invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -505,11 +505,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list weddings
-2. KnottyPlanner shows a list of weddings
+2. KnottyPlanners shows a list of weddings
 3. User requests to delete a specific wedding in the list
-4. KnottyPlanner shows a confirmation prompt
+4. KnottyPlanners shows a confirmation prompt
 5. User confirms the deletion
-6. KnottyPlanner deletes the wedding
+6. KnottyPlanners deletes the wedding
 
    Use case ends.
 
@@ -521,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given wedding name is invalid.
 
-    * 3a1. KnottyPlanner shows an error message.
+    * 3a1. KnottyPlanners shows an error message.
 
       Use case resumes at step 2.
 
@@ -594,5 +594,5 @@ testers are expected to do more *exploratory* testing.
 
    2. To simulate a corrupted file, locate the addressbok.json or weddingbook.json file in the data folder.
 
-   3. Delete a random line in the .json file, and relaunch KnottyPlanner.
-        Expected: KnottyPlanner will launch with all previous data wiped and cleared.
+   3. Delete a random line in the .json file, and relaunch KnottyPlanners.
+        Expected: KnottyPlanners will launch with all previous data wiped and cleared.
