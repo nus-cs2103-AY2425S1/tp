@@ -27,6 +27,9 @@ public class TrackSubjectWindow extends UiPart<Stage> {
     private static final String FXML = "TrackSubjectWindow.fxml";
 
     @FXML
+    private Label headerLabel;
+
+    @FXML
     private VBox subjectStatsBox;
 
     @FXML

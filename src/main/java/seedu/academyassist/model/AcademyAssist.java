@@ -178,7 +178,6 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
             person = person.addSubject(s);
         }
         persons.add(person);
-
     }
 
     //// student count operations
