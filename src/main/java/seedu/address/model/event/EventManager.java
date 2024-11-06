@@ -164,4 +164,10 @@ public class EventManager implements ReadOnlyEventManager {
             event.updateUi();
         }
     }
+
+    public void clearAllContactsFromAllEvents() {
+        for (Event event : this.eventList) {
+            event.clearAllContacts();
+        }
+    }
 }

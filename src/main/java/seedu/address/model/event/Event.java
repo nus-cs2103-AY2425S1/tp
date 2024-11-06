@@ -365,4 +365,11 @@ public class Event {
     public Observer getObserver() {
         return this.observer;
     }
+
+    public void clearAllContacts() {
+        this.attendees.clear();
+        this.volunteers.clear();
+        this.vendors.clear();
+        this.sponsors.clear();
+    }
 }
