@@ -35,6 +35,13 @@
         <!-- Contact Section -->
         <Label styleClass="cell_header_label" text="Background" style="-fx-font-size: 14pt; -fx-font-weight: bold;" />
 
+        <!-- Tags -->
+        <Label fx:id="tags" styleClass="cell_small_label" text="Tags: \$tags"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
+
         <!-- Interview Score -->
         <Label fx:id="interviewScore" styleClass="cell_small_label" text="interviewScore: \$interviewScore" />
 

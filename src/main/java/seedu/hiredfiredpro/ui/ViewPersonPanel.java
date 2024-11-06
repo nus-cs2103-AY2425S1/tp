@@ -35,6 +35,9 @@ public class ViewPersonPanel extends UiPart<Region> {
     private Label skills;
 
     @FXML
+    private Label tags;
+
+    @FXML
     private Label interviewScore;
     /**
      * Details to include inside the panel
@@ -67,10 +70,26 @@ public class ViewPersonPanel extends UiPart<Region> {
         }
         skills.setText("Skills: " + skillsText.toString());
 
-        Set<Tag> tags = person.getTags();
-        if (tags.contains(Person.DEFAULT_TAG_PENDING)) {
+        Set<Tag> tagsSet = person.getTags();
+        StringBuilder tagsText = new StringBuilder();
+
+        for (Tag tag : tagsSet) {
+            if (!tag.equals(Person.DEFAULT_TAG_PENDING) & !tag.equals(Person.TAG_HIRED)
+                    & !tag.equals(Person.TAG_REJECTED)) {
+                tagsText.append(tag.tagName).append(", ");
+            }
+        }
+        if (!tagsText.isEmpty()) {
+            tagsText.setLength(tagsText.length() - 2);
+        } else {
+            tagsText.append("None");
+        }
+
+        tags.setText("Tags: " + tagsText.toString());
+
+        if (tagsSet.contains(Person.DEFAULT_TAG_PENDING)) {
             status.setText("Status: " + Person.DEFAULT_TAG_PENDING.tagName);
-        } else if (tags.contains(Person.TAG_HIRED)) {
+        } else if (tagsSet.contains(Person.TAG_HIRED)) {
             status.setText("Status: " + Person.TAG_HIRED.tagName);
         } else {
             status.setText("Status: " + Person.TAG_REJECTED.tagName);
