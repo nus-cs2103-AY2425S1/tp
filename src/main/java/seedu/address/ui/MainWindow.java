@@ -215,7 +215,7 @@ public class MainWindow extends UiPart<Stage> {
             return lastCommandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setErrorFeedbackToUser(e.getMessage());
             throw e;
         }
     }
@@ -288,7 +288,7 @@ public class MainWindow extends UiPart<Stage> {
 
             break;
         }
-        resultDisplay.setFeedbackToUser(lastCommandResult.getFeedbackToUser());
+        resultDisplay.setSuccessFeedbackToUser(lastCommandResult.getFeedbackToUser());
         commandBox.setFeedbackToUser(lastCommandResult.getHistory());
     }
 
