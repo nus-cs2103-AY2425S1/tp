@@ -12,13 +12,14 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class UniqueStudentList
+Class Student
+
+Class UniqueGroupList
+Class Group
+
+Class UniqueTaskList
+Class Task
 
 Class I #FFFFFF
 }
@@ -35,20 +36,25 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueStudentList
+AddressBook *--> "1" UniqueGroupList
+AddressBook *--> "1" UniqueTaskList
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+UniqueStudentList --> "~* all" Student
+UniqueGroupList --> "~* all" Group
+UniqueTaskList --> "~* all" Task
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Student
+ModelManager --> "~* filtered" Group
+ModelManager --> "~* filtered" Task
+
+Student -[hidden]up--> I
+UniqueStudentList -[hidden]right-> I
+Group -[hidden]up--> I
+UniqueGroupList -[hidden]down-> I
+Task -[hidden]down--> I
+UniqueTaskList -[hidden]down-> I
+
+
 @enduml
