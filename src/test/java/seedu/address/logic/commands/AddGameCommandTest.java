@@ -35,7 +35,7 @@ public class AddGameCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withGames(VALID_GAME).build();
+        Person editedPerson = new PersonBuilder(personInFilteredList).withGames("LoL", VALID_GAME).build();
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
