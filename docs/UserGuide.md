@@ -84,7 +84,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs.
-  * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), commas (`,`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
+  * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
     - `John Doe` (letters and space)
     - `Betsy O'Connor` (apostrophe)
     - `Jean-Luc` (hyphen)
@@ -100,7 +100,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
     - `X Æ A-12` (non-Latin characters like `Æ` or Arabic `عبد العزيز`)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person with an Indian name containing "d/o" denoting "daughter of" can be added as `add n/Genevieve d/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -115,11 +118,11 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [status/STATUS] [cat/CATEGORY]...`
+Format: `addTxn INDEX amt/AMOUNT desc/DESC [date/DATE] [status/STATUS] [cat/CATEGORY]...`
 
-* The `INDEX` refers to the index of the person currently displayed in the address book panel.
-* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
-  amount.
+* The `INDEX` refers to the index of the person currently displayed in the address book panel (as we are adding the transaction related to the person).
+* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index.
+* The `DESC` accepts a string of words with a limit of 120 characters.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
@@ -142,11 +145,17 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+:bulb: **Tip:** This command can be used to reset the filter applied on the person list caused by a `find` command 
+operation.
+
 ### Listing all transactions : `listTxn`
 
 Shows a list of all transactions in the transaction book.
 
 Format: `listTxn`
+
+:bulb: **Tip:** This command can be used to reset the filter applied on transaction list caused by a `fitlerTxn` 
+command operation.
 
 ### Editing a person : `edit`
 
@@ -159,8 +168,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* You can remove the person’s remark by typing `r/` without specifying any remark after it.
 
 Examples:
 
@@ -181,20 +190,15 @@ Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/TEST] [date/DATE] [ca
 * Existing values will be updated to the input values.
 * When editing categories, the existing categories of the transaction will be removed i.e adding of categories is not
   cumulative.
-* You can remove all the person’s categories by typing `cat/` without
-  specifying any categories after it.
+* You can remove all the person’s categories by typing `cat/` without specifying any categories after it.
 * When editing the person related to the transaction through specifying `[p/PHONE_NUMBER]`, the person with the input phone number must be in the address book.
+
+:bulb: **Tip:** Status can be edited via `markDone` or `markUndone` command. Support for editing status through `editTxn` may be considered by the devs in future releases.
 
 Examples:
 
-* `editTxn 1 p/91234567 desc/Hello world` Edits the 1st transaction to be related to the person with phone number `91234567` and edits the description of the 1st transaction to be `Hello world`.
+* `editTxn 1 p/92624417 desc/Hello world` Edits the 1st transaction to be related to the person with phone number `92624417` and edits the description of the 1st transaction to be `Hello world` (ensure that the phone number is valid, i.e. it exists in the address book).
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
-
-====
-*Future consideration*
-
-* Support editing status field in `editTxn` command. Currently, similar result can be done via `markDone` or `markUndone` command.
-====
 
 ### Locating persons by name: `find`
 
@@ -225,30 +229,27 @@ Filter transactions with a any combination of the following parameters:
 * and/or status
 * and/or positive/negative amount
 
-Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]`]`
+Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]`
 
 * The command requires at least one of the above optional prefixes to be provided.
 * As more prefixes are provided, the filter becomes more specific.
 * The `INDEX` refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
-* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
-  amount.
+* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index. Results will display transactions with the exact amount if it exists.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `DESCRIPTION` accepts a string of words.
     * The description filter is case-insensitive. e.g `hans` will match `Hans`
 * The `STATUS` accepts either `Done` or `Not Done` to indicate filtering for transactions that are done or not done.
 * The `AMOUNT_SIGN` accepts either `Pos` or `Neg` to indicate filtering for transactions with amount that are 
-  positive or negative.
+  positive or negative respectively.
 
 Examples:<br>
 
 * Given the example transaction book:<br>
   ![Given the example transaction book](images/filterTxnExample.png)
-* `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in 
-  the displayed person list.<br>
+* `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in the displayed person list.<br>
   ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
-* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Givent that `2` is 
-  the index of `Bernice Yu` in the displayed person list.<br>
+* `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Given that `2` is the index of `Bernice Yu` in the displayed person list.<br>
   ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
 ### Adding/Deleting Remarks for a person : `remark`
@@ -291,7 +292,7 @@ Deletes the specified transaction from the transaction book.
 Format: `deleteTxn INDEX`
 
 * Deletes the transaction at the specified `INDEX`.
-* The index refers to the index number shown in the displayed transaction list.
+* The `INDEX` refers to the index number shown in the displayed transaction list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -328,7 +329,7 @@ If a transaction is marked as done, a done icon appears for the transaction in G
 Examples:
 
 * `listTxn` followed by `markDone 2` marks the 2nd transaction in the transaction book as done.
-* if a done transaction is marked as done again, the transaction remains done.
+* If a done transaction is marked as done again, the transaction remains done.
 
 ### Unmarking a transaction as done : `markUndone`
 
@@ -358,8 +359,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook and Transaction data are saved in the hard disk automatically after any command that changes the data. There is no need to
-save manually.
+AddressBook and Transaction data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -370,7 +370,7 @@ save manually.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SpleetWaise will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Transactions with invalid person IDs will not be loaded into the TransactionBook.<br>
-Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -388,12 +388,8 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
-   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
-   application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
-   `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
-   manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut`F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 

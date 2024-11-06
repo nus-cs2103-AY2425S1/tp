@@ -2,6 +2,11 @@
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 
+> **Disclaimer:** Our team has decided to add the `spleetwaise.commons` package as a common package for classes 
+> that are used by multiple components, in our case, `address` and `transaction`. This is an enhancement for 
+> modularity on top of the original design of the AddressBook-Level3 project, which only have a `seedu.address` 
+> package. The refactoring is almost 90% complete, and we are working on the remaining 10%.
+
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
@@ -23,7 +28,7 @@ Packages follow this general package structure: <br>
 
 **Main application**
 
-The entry-point to the app, **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)), lives in the `common` package, and is in charge of managing the app's lifecycle.
+The entry-point to the app, **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/MainApp.java)), lives in the `common` package, and is in charge of managing the app's lifecycle.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
