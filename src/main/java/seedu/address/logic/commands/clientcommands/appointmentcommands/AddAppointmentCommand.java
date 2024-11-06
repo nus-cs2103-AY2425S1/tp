@@ -40,6 +40,8 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment scheduled for %1$s on:\n"
                                                                     + "%2$s";
     public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book.";
+    public static final String MESSAGE_INVALID_PERIOD =
+            "Invalid from and to timings! From timing cannot be after to timing.";
 
     private final Name name;
     private final Appointment appointment;

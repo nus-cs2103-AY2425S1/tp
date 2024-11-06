@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.SIMEI;
+import static seedu.address.testutil.TypicalListings.TAMPINES;
 import static seedu.address.testutil.TypicalListings.getTypicalListings;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -32,6 +33,7 @@ public class AddBuyersToListingCommandTest {
 
     private static final Listing VALID_LISTING = PASIR_RIS;
     private static final Name VALID_LISTING_NAME = VALID_LISTING.getName();
+    private static final Name OTHER_LISTING_NAME = TAMPINES.getName();
     private static final Name INVALID_LISTING_NAME = SIMEI.getName();
     private static final Name SELLER_NAME = ALICE.getName();
     private static final Set<Name> SELLER = Set.of(SELLER_NAME);
@@ -124,5 +126,10 @@ public class AddBuyersToListingCommandTest {
 
         // different person -> returns false
         assertFalse(addAliceToListingCommand.equals(addBobToListingCommand));
+
+        // different listingName -> returns false
+        AddBuyersToListingCommand addToDifferentListing =
+                new AddBuyersToListingCommand(OTHER_LISTING_NAME, setBuyer1);
+        assertFalse(addAliceToListingCommand.equals(addToDifferentListing));
     }
 }

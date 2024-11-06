@@ -30,6 +30,7 @@ import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
+import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ListingBuilder;
@@ -192,10 +193,35 @@ public class AddListingCommandTest {
         assertFalse(addPasirRisCommand.equals(null));
 
         // any one value is different -> return false
-        AddListingCommand differentArea = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+        AddListingCommand different = new AddListingCommand(PASIR_RIS.getName(), TAMPINES.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertFalse(addPasirRisCommand.equals(different));
+
+        different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 new Area("50"), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
                 new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
-        assertFalse(addPasirRisCommand.equals(differentArea));
+        assertFalse(addPasirRisCommand.equals(different));
+
+        different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), TAMPINES.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertFalse(addPasirRisCommand.equals(different));
+
+        different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), Region.WEST, ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertFalse(addPasirRisCommand.equals(different));
+
+        different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), BENSON.getName(),
+                new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
+        assertFalse(addPasirRisCommand.equals(different));
+
+        different = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new HashSet<>(List.of(DANIEL.getName())));
+        assertFalse(addPasirRisCommand.equals(different));
     }
 
     @Test

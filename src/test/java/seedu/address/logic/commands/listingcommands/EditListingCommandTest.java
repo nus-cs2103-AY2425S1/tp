@@ -99,9 +99,20 @@ public class EditListingCommandTest {
     }
 
     @Test
-    public void execute_duplicateListingFilteredList_failure() {
+    public void execute_duplicateListingName_failure() {
         Listing editedListing = PASIR_RIS;
-        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing)
+                .withAddress(SENGKANG.getAddress()).build();
+        EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), descriptor);
+
+        assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_DUPLICATE_LISTING);
+    }
+
+    @Test
+    public void execute_duplicateListingAddress_failure() {
+        Listing editedListing = PASIR_RIS;
+        EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing)
+                .withName(SENGKANG.getName()).build();
         EditListingCommand editListingCommand = new EditListingCommand(SENGKANG.getName(), descriptor);
 
         assertCommandFailure(editListingCommand, model, EditListingCommand.MESSAGE_DUPLICATE_LISTING);

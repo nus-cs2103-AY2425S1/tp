@@ -154,8 +154,7 @@ public class Listing {
         }
 
         Listing otherListing = (Listing) other;
-        return name.equals(otherListing.name) && address.equals(otherListing.address)
-                && seller.equals(otherListing.seller);
+        return name.equals(otherListing.name) || address.equals(otherListing.address);
     }
 
     @Override

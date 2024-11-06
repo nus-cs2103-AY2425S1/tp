@@ -44,6 +44,18 @@ public class AddAppointmentCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPeriod_throwsParseException() {
+        String userInput = ALICE.getName() + " "
+                + PREFIX_DATE + VALID_DATE + " "
+                + PREFIX_FROM + VALID_TO + " "
+                + PREFIX_TO + VALID_FROM;
+
+        String expectedMessage = AddAppointmentCommand.MESSAGE_INVALID_PERIOD;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
+    }
+
+    @Test
     public void parse_missingFields_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE);
 

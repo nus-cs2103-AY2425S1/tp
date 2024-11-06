@@ -335,7 +335,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return  addressBook.equals(otherModelManager.addressBook)
+        return addressBook.equals(otherModelManager.addressBook)
                 && listings.equals(otherModelManager.listings)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
