@@ -419,7 +419,7 @@ Priorities:
 
 **MSS:**
 
-1Wedding Organizer assigns the person (by name or index) to the wedding (by index) using the assign command.
+1. Wedding Organizer assigns the person (by name or index) to the wedding (by index) using the assign command.
    Use case ends.
 
 **Extensions:**
