@@ -59,7 +59,6 @@ public class TypicalPastCommands {
             createPastCommands(EXAMPLE_CLEAR, EXAMPLE_ADD, EXAMPLE_DELETE, EXAMPLE_DELETEA);
 
 
-    private static CommandHistory currentPastCommands = new CommandHistory();
     /**
      * Helper function to create CommandHistory with specified past commands.
      *
@@ -67,7 +66,7 @@ public class TypicalPastCommands {
      * @return CommandHistory with past commands.
      */
     public static CommandHistory createPastCommands(Command... pastCommands) {
-        currentPastCommands = new CommandHistory();
+        CommandHistory currentPastCommands = new CommandHistory();
         for (int i = 0; i < pastCommands.length; i++) {
             currentPastCommands.add(pastCommands[i]);
         }
