@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -30,12 +32,21 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    private final ListChangeListener<Client> clientListListener = change -> {
+        while (change.next()) {
+            if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
+                updateStatusChart();
+            }
+        }
+    };
+
     private Stage primaryStage;
     private Logic logic;
 
     private ClientListPanel clientListPanel;
     private ClientDetailPanel clientDetailPanel;
     private ResultDisplay resultDisplay;
+    private StatusPieChart statusPieChart;
     private HelpWindow helpWindow;
 
     @FXML
@@ -43,6 +54,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+    @FXML
+    private SplitPane topSplitPane;
 
     @FXML
     private SplitPane splitPane;
@@ -55,6 +68,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+    @FXML
+    private StackPane statusChartPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -76,6 +91,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
         setAccelerators();
         helpWindow = new HelpWindow();
+        logic.getFilteredClientList().addListener(clientListListener);
     }
 
     /**
@@ -128,14 +144,48 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        splitPane.setDividerPositions(0.6);
+        statusPieChart = new StatusPieChart();
+        statusChartPlaceholder.getChildren().add(statusPieChart.getRoot());
+
+        setupSplitPanes();
+        splitPane.setDividerPositions(0.5);
 
         splitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> {
-            splitPane.setDividerPositions(0.6);
+            splitPane.setDividerPositions(0.5);
         });
 
         splitPane.getItems().remove(clientDetailsPanelPlaceholder);
+        topSplitPane.getStyleClass().add("top-split-pane");
+        statusChartPlaceholder.getStyleClass().add("chart-container");
+        updateStatusChart();
     }
+
+    /**
+     * Updates the status pie chart with current data
+     */
+    private void updateStatusChart() {
+        final int[] counts = new int[3]; // [none, nonUrgent, urgent]
+
+        for (Client client : logic.getFilteredClientList()) {
+            switch (client.getStatus().status) {
+            case NONE -> counts[0]++;
+            case NON_URGENT -> counts[1]++;
+            case URGENT -> counts[2]++;
+            default -> {
+                logger.warning("Unexpected status value: " + client.getStatus().status);
+            }
+            }
+        }
+
+        Platform.runLater(() -> {
+            statusPieChart.updateChartData(counts[0], counts[1], counts[2]);
+
+            int total = counts[0] + counts[1] + counts[2];
+            logger.info(String.format("Chart updated - None: %d, Non-Urgent: %d, Urgent: %d (Total: %d)",
+                    counts[0], counts[1], counts[2], total));
+        });
+    }
+
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -244,5 +294,18 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Sets up the split panes and their divider positions
+     */
+    private void setupSplitPanes() {
+        topSplitPane.setDividerPositions(0.8);
+
+        topSplitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> {
+            if (Math.abs(newValue.doubleValue() - 0.8) > 0.05) {
+                Platform.runLater(() -> topSplitPane.setDividerPositions(0.8));
+            }
+        });
     }
 }
