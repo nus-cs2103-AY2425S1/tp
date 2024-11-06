@@ -22,6 +22,7 @@ import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
+import bizbook.logic.commands.ToggleCommand;
 import bizbook.logic.commands.UndoCommand;
 import bizbook.logic.commands.UnpinCommand;
 import bizbook.logic.commands.ViewCommand;
@@ -108,6 +109,9 @@ public class AddressBookParser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
+
+        case ToggleCommand.COMMAND_WORD:
+            return new ToggleCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
