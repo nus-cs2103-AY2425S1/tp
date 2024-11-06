@@ -36,7 +36,9 @@ public class StudentListPanel extends UiPart<Region> {
      * Updates UI state of list panel.
      */
     public void updateUiState(UiState uiState) {
-        this.uiState = uiState;
+        if (uiState != UiState.NO_CHANGE) {
+            this.uiState = uiState;
+        }
 
         // Reset the items to force ListView to update
         ObservableList<Student> currentItems = studentListView.getItems();

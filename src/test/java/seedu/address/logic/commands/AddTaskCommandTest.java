@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.model.student.task.Task;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TaskBuilder;
@@ -54,12 +55,13 @@ public class AddTaskCommandTest {
         Student updatedStudent = new StudentBuilder(student).build(); // Create a deep copy
         updatedStudent.getTaskList().add(validTask); // Modify the deep copy
         expectedModel.setStudent(student, updatedStudent);
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
         // Checks that initial and expected state of model is correct
         assertEquals(model, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
         assertNotEquals(expectedModel, model);
 
-        assertCommandSuccess(addTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+        assertCommandSuccess(addTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
 
     @Test
