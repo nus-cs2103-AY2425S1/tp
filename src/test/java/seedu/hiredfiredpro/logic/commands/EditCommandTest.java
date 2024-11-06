@@ -11,6 +11,7 @@ import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.VALID_TAG_HUSBA
 import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.hiredfiredpro.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.hiredfiredpro.logic.commands.EditCommand.createEditedPerson;
 import static seedu.hiredfiredpro.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.hiredfiredpro.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.hiredfiredpro.testutil.TypicalPersons.getTypicalHiredFiredPro;
@@ -80,6 +81,28 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new HiredFiredPro(model.getHiredFiredPro()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyTagRetainsHired() {
+        Person hiredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        hiredPerson.markAsHired();
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setTags(null);
+        Person editedPerson = createEditedPerson(hiredPerson, descriptor);
+
+        assertTrue(editedPerson.isHired());
+    }
+
+    @Test
+    public void execute_emptyTagRetainsRejected() {
+        Person rejectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        rejectedPerson.markAsRejected();
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setTags(null);
+        Person editedPerson = createEditedPerson(rejectedPerson, descriptor);
+
+        assertTrue(editedPerson.isRejected());
     }
 
     @Test
