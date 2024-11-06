@@ -13,7 +13,6 @@
 
         <HBox spacing="10" styleClass="total-balance">
             <VBox alignment="CENTER_LEFT" spacing="5">
-                <Label text="Total balance"/>
                 <Label fx:id="youOwnLabel"  text="You owe $97.32" styleClass="label, owed-text"/>
                 <Label fx:id="ownYouLabel" text="You are owed $1550.50" styleClass="label, owes-you-text"/>
             </VBox>
