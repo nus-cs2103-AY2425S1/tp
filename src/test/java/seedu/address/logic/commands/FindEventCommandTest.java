@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEvents.IFG;
 import static seedu.address.testutil.TypicalEvents.IVP;
-import static seedu.address.testutil.TypicalEvents.SUNIG;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +18,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 public class FindEventCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

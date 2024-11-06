@@ -23,7 +23,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         || (StringUtil.containsSubstringIgnoreCase(event.getSport().toString(), keyword))
                         || (StringUtil.containsSubstringIgnoreCase(event.getVenue().toString(), keyword))
                         || event.getParticipants().stream()
-                            .anyMatch(person -> StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
+                            .anyMatch(person ->
+                                    StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
                                     || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
                                     || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)));
     }
