@@ -398,7 +398,7 @@
     -fx-padding: 10 0;
 }
 
-.transaction-month, .transaction-day {
+.transaction-month, .transaction-year {
     -fx-font-size: 16px;
     -fx-text-fill: #515151;
 }
