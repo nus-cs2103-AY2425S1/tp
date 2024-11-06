@@ -51,7 +51,7 @@ public class UpdateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Event has been updated: %1$s";
 
-    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "There is no event at this index";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The event index provided is invalid";
 
     private final String newName;
     private final LocalDate newStartDate;
