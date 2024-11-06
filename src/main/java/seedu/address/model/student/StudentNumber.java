@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentNumber {
     public static final String MESSAGE_CONSTRAINTS =
             """
-            Student numbers should only two alphabets (one at the beginning and one at the end",
+            Student numbers should only have two alphabets (one at the beginning and one at the end)",
             and there should be strictly 7 digits in between these alphabets
             """;
 
@@ -29,7 +29,11 @@ public class StudentNumber {
     public StudentNumber(String studentNumber) {
         requireNonNull(studentNumber);
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
-        this.value = studentNumber;
+
+        StringBuilder sb = new StringBuilder(studentNumber);
+        sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
+        sb.setCharAt(sb.length() - 1, Character.toUpperCase(sb.charAt(sb.length() - 1)));
+        this.value = sb.toString();
     }
 
     /**
