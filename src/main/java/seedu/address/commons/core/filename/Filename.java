@@ -31,7 +31,6 @@ public class Filename {
      */
     public Filename(String filename) {
         requireNonNull(filename);
-        checkArgument(!filename.isBlank(), MESSAGE_CONSTRAINTS_BLANK);
         checkArgument(isValidFilename(filename), MESSAGE_CONSTRAINTS);
         this.filename = filename;
     }

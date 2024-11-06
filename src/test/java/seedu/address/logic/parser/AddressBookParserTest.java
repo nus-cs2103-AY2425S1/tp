@@ -118,6 +118,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_archive() throws Exception {
         assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
+        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD + " test") instanceof ArchiveCommand);
     }
 
     @Test
@@ -128,12 +129,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_loadArchive() throws Exception {
-        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD) instanceof LoadArchiveCommand);
+        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD + " test.json") instanceof LoadArchiveCommand);
     }
 
     @Test
     public void parseCommand_deleteArchive() throws Exception {
-        assertTrue(parser.parseCommand(DeleteArchiveCommand.COMMAND_WORD) instanceof DeleteArchiveCommand);
+        assertTrue(parser.parseCommand(DeleteArchiveCommand.COMMAND_WORD + " test.json") instanceof DeleteArchiveCommand);
     }
 
     @Test

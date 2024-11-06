@@ -21,6 +21,10 @@ public class ArchiveCommand extends Command {
 
     private final Filename filename;
 
+    public ArchiveCommand() {
+        this.filename = new Filename("");
+    }
+
     public ArchiveCommand(Filename filename) {
         this.filename = filename;
     }
