@@ -46,6 +46,10 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
             throw new ParseException("The cost must be a valid number.");
         }
 
+        if (cost <= 0) {
+            throw new ParseException("The cost must be a positive number.");
+        }
+
         // Extract the pastry name, which is everything before the cost
         String name = String.join(" ", List.of(splitArgs).subList(0, costIndex));
 
