@@ -5,34 +5,34 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name or attributes contains any of the argument keywords.
+ * Finds and lists all events in address book whose name or attributes contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindCommand extends Command {
+public class FindEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findevent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names or attributes contain any of "
+            + ": Finds all events whose names or attributes contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " volleyball usc roy";
 
-    private final PersonContainsKeywordsPredicate predicate;
+    private final EventContainsKeywordsPredicate predicate;
 
-    public FindCommand(PersonContainsKeywordsPredicate predicate) {
+    public FindEventCommand(EventContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredEventList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }
 
     @Override
@@ -42,11 +42,11 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand otherFindCommand)) {
+        if (!(other instanceof FindEventCommand otherFindEventCommand)) {
             return false;
         }
 
-        return predicate.equals(otherFindCommand.predicate);
+        return predicate.equals(otherFindEventCommand.predicate);
     }
 
     @Override
