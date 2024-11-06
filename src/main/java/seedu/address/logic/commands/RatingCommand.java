@@ -29,6 +29,7 @@ public class RatingCommand extends Command {
             + PREFIX_RATING + "10";
 
     public static final String MESSAGE_ADD_RATING_SUCCESS = "You've rate %1$s: %2$s/10!";
+    public static final String MESSAGE_REMOVE_RATING_SUCCESS = "You've removed %1$s rating!";
 
     private final Index index;
     private final Rating rating;
@@ -73,6 +74,9 @@ public class RatingCommand extends Command {
     public String generateSuccessMessage(Restaurant restaurantToEdit) {
         Name name = restaurantToEdit.getName();
         Rating rating = restaurantToEdit.getRating();
+        if (rating.value == null) {
+            return String.format(MESSAGE_REMOVE_RATING_SUCCESS, name);
+        }
         return String.format(MESSAGE_ADD_RATING_SUCCESS, name, rating);
     }
 
