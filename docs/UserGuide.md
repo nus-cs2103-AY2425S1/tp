@@ -128,6 +128,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * As for phone numbers and emergency phone numbers, the entire number does not have to be provided to filter. 
   e.g. `99` will return `99999999`, `99278888`
 * As for register numbers and class, the entire number or class name must be provided in the command to filter
+* For emergency contact names and numbers, if a student does not have existing values in these fields, filtering for those with no emergency contact names or numbers using `filter en/` or `filter ep/` will not return results.
 * Support for Multiple Predicates: The filter command allows users to specify multiple values for a single attribute (e.g.multiple names) or combine multiple attributes for more refined filtering. 
   e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice.
   e.g. `filter s/F p/99999999` will display details of a female student with the phone number 99999999.

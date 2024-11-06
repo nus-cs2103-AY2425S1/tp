@@ -150,12 +150,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String ecName} into a {@code EmergencyContactName}.
+     * Parses a {@code String ecName} into a {@code EcName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code ecName} is invalid.
      */
-    public static EcName parseEmergencyContactName(String ecName) throws ParseException {
+    public static EcName parseEcName(String ecName) throws ParseException {
         requireNonNull(ecName);
         String trimmedEcName = ecName.trim();
         if (!EcName.isValidEcName(trimmedEcName)) {

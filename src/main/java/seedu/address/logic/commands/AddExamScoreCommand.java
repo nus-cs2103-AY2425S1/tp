@@ -24,7 +24,7 @@ public class AddExamScoreCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exam score to a student identified by index.\n"
             + "Parameters: [INDEX] ex/EXAM_NAME sc/EXAM_SCORE\n"
-            + "Example: " + COMMAND_WORD + " 1 ex/Midterm sc/70";
+            + "Example: " + COMMAND_WORD + " 1 ex/Midterm sc/70.0";
 
     public static final String MESSAGE_ADDEXAMSCORE_SUCCESS = "Added exam score for person: %1$s\n"
             + "Exam: %2$s\n"
@@ -57,13 +57,16 @@ public class AddExamScoreCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Exam> updatedExams = personToEdit.getExams();
+        Exam updatedExam = new Exam(exam.examName, examScore);
+
         // throw an error if the input exam score is the same as in the system
         for (Exam examInSet : updatedExams) {
             if (examInSet.equals(exam) && examInSet.examScore.equals(examScore)) {
                 throw new CommandException(MESSAGE_EXAMSCORE_NOT_EDITED);
             }
         }
-        Exam updatedExam = new Exam(exam.examName, examScore);
+
+        // removes the exam from the set of exams and throws an error if it is not in the set
         if (!updatedExams.remove(exam)) {
             throw new CommandException(MESSAGE_EXAM_NOT_FOUND);
         }
