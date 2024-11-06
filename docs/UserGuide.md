@@ -56,7 +56,7 @@ operate than graphical user interfaces commonly found in smartphones.
 
 - A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-![Ui](images/Ui.png)
+![Ui](images/developer-guide-images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -174,7 +174,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`.
 * `find s/Alex Yeoh s/23 Smith Street` returns `Alex Yeoh` who has `23 Smith Street` as his address.
 
-![Find Command](images/findCommand.png)
+![Find Command](images/developer-guide-images/findCommand.png)
 
 ### Locating persons by tag: `findtag`
 
@@ -192,7 +192,7 @@ Examples:
 - `findtag HDB` returns persons tagged with `HDB`.
 - `findtag HDB buyer` returns persons tagged with either `HDB` or `buyer`.
 
-![Find tag command](images/findtagCommand.png)
+![Find tag command](images/developer-guide-images/findtagCommand.png)
 
 ### Deleting a person : `delete`
 
@@ -228,8 +228,8 @@ Format: `exit`
 
 Shows commands in a help menu for quick reference during use of PROperty.
 
-![help message](images/helpMessage.png)
-![help message](images/helpMessage2.png)
+![help message](images/developer-guide-images/helpMessage.png)
+![help message](images/developer-guide-images/helpMessage2.png)
 
 Format: `help`
 
@@ -273,7 +273,7 @@ Examples:
 
 - `show 2` shows the name, contact information, tags, and property listings of the second person in the PROperty.
 
-![Show Command](images/showCommand.png)
+![Show Command](images/developer-guide-images/showCommand.png)
 
 ### Adding a property listing : `listing add`
 
