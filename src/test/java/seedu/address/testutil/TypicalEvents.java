@@ -62,7 +62,7 @@ public class TypicalEvents {
                     .withEndTime("18:00")
                     .withDescription("Annual tech conference").build();
 
-            EVENT_E = new EventBuilder().withEventName("Volunteer Meeting")
+            EVENT_E = new EventBuilder().withEventName("Volunteer Planning")
                     .withLocation("Community Hall")
                     .withDate("2025-02-20")
                     .withStartTime("14:00")

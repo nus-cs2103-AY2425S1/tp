@@ -28,13 +28,16 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("alice*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("a".repeat(101))); // 101 characters
 
         // valid name
         assertTrue(Name.isValidName("alice wong")); // alphabets only
         assertTrue(Name.isValidName("12")); // numbers only
         assertTrue(Name.isValidName("alice the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Wong")); // with capital letters
+        assertTrue(Name.isValidName("A")); // minimum valid length (1 character)
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("a".repeat(100))); // 100 characters
     }
 
     @Test

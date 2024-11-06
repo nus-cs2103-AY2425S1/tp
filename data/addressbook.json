@@ -1,34 +1,16 @@
 {
   "volunteers" : [ {
-    "name" : "Alice Wong",
-    "phone" : "91234567",
-    "email" : "alicewong@example.com",
-    "availableDate" : "2023-05-10, 2022-10-11",
-    "involvedIn" : [ "Beach Cleanup", "Charity Run", "Food Donation Drive", "beach clean2" ]
-  }, {
-    "name" : "Bob Tan",
-    "phone" : "98765432",
-    "email" : "bobtan@example.com",
-    "availableDate" : "2023-06-15, 2022-10-11",
-    "involvedIn" : [ "Beach Cleanup", "beach clean2" ]
-  }, {
-    "name" : "Cathy Lee",
-    "phone" : "92345678",
-    "email" : "cathylee@example.com",
-    "availableDate" : "2023-07-20, 2023-08-09",
-    "involvedIn" : [ "Beach Cleanup" ]
-  }, {
     "name" : "David Ng",
     "phone" : "93456789",
     "email" : "davidng@example.com",
     "availableDate" : "2023-08-12",
-    "involvedIn" : [ ]
+    "involvedIn" : [ "Beach Cleanup", "Charity Run" ]
   }, {
     "name" : "Emily Lim",
     "phone" : "94567890",
     "email" : "emilylim@example.com",
     "availableDate" : "2023-09-01",
-    "involvedIn" : [ ]
+    "involvedIn" : [ "Food Donation Drive" ]
   }, {
     "name" : "John Doe",
     "phone" : "98765432",
@@ -36,28 +18,16 @@
     "availableDate" : "2020-10-10",
     "involvedIn" : [ ]
   }, {
-    "name" : "bby",
-    "phone" : "12341234",
-    "email" : "bby@b.com",
+    "name" : "Alice Wong",
+    "phone" : "99117846",
+    "email" : "Alice@gmail.com",
     "availableDate" : "2022-01-02",
-    "involvedIn" : [ ]
+    "involvedIn" : [ "Charity Run" ]
   }, {
-    "name" : "bby2",
+    "name" : "Jason Wang",
     "phone" : "12341234",
     "email" : "lol@lol.com",
     "availableDate" : "2022-10-15",
-    "involvedIn" : [ ]
-  }, {
-    "name" : "bby3",
-    "phone" : "12341234",
-    "email" : "123@mail.com",
-    "availableDate" : "2022-10-15, 2022-10-16",
-    "involvedIn" : [ ]
-  }, {
-    "name" : "bby4",
-    "phone" : "12341234",
-    "email" : "123@mail.com",
-    "availableDate" : "2022-10-15, 2022-10-16, 2022-11-02, 2022-11-03",
     "involvedIn" : [ ]
   } ],
   "events" : [ {
@@ -67,7 +37,7 @@
     "endTime" : "12:00",
     "location" : "East Coast Park",
     "description" : "Annual beach cleaning event",
-    "volunteers" : [ "Alice Wong", "Bob Tan", "Cathy Lee" ]
+    "volunteers" : [ "David Ng" ]
   }, {
     "eventName" : "Charity Run",
     "date" : "2023-11-05",
@@ -75,7 +45,7 @@
     "endTime" : "11:00",
     "location" : "Marina Bay",
     "description" : "5km run to raise funds for charity",
-    "volunteers" : [ "Alice Wong" ]
+    "volunteers" : [ "David Ng", "Alice Wong" ]
   }, {
     "eventName" : "Food Donation Drive",
     "date" : "2023-12-12",
@@ -83,7 +53,7 @@
     "endTime" : "15:00",
     "location" : "City Hall",
     "description" : "",
-    "volunteers" : [ "Alice Wong" ]
+    "volunteers" : [ "Emily Lim" ]
   }, {
     "eventName" : "Tree Planting",
     "date" : "2024-01-25",
@@ -107,6 +77,6 @@
     "endTime" : "10:00",
     "location" : "here",
     "description" : "",
-    "volunteers" : [ "Alice Wong", "Bob Tan" ]
+    "volunteers" : [ ]
   } ]
 }

@@ -25,7 +25,7 @@ public class EventDeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted event successfully!";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted event successfully!";
 
     private final Index targetIndex;
 

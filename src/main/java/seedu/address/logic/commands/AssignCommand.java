@@ -18,7 +18,8 @@ import seedu.address.model.exceptions.VolunteerNotAvailableException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
- * Adds a volunteer to the system.
+ * Assigns a volunteer from an event.
+ * This command assigns a volunteer from an event in the system using their respective indices.
  */
 public class AssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
@@ -26,26 +27,22 @@ public class AssignCommand extends Command {
     private static final String MESSAGE_OVERLAP_ASSIGN = "This volunteer is already assigned to another event"
             + " during this time slot.";
     private static final String MESSAGE_SUCCESS = "Volunteer assigned successfully!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event.\n"
             + "Parameters: "
-            + ASSIGN_VOLUNTEER_PREFIX_NAME + "Volunteer Index "
-            + ASSIGN_EVENT_PREFIX_NAME + "Event Index "
+            + ASSIGN_VOLUNTEER_PREFIX_NAME + "VOLUNTEER_INDEX "
+            + ASSIGN_EVENT_PREFIX_NAME + "EVENT_INDEX "
             + "Example: " + COMMAND_WORD + " "
             + ASSIGN_VOLUNTEER_PREFIX_NAME + "2 "
             + ASSIGN_EVENT_PREFIX_NAME + "3 ";
 
-    /**
-     * Creates a {@code VolunteerNewCommand} to add the specified {@code Volunteer}.
-     *
-     * @param volunteer The volunteer to be added.
-     */
     private final Index volunteerIndex;
     private final Index eventIndex;
 
     /**
-     * Constructs a {@code VolunteerNewCommand} that adds the specified {@code Volunteer} to the system.
+     * Creates an AssignCommand to assign a volunteer from an event.
      *
-     * @param volunteerIndex The volunteer to be added. Must not be null.
+     * @param volunteerIndex The index of the volunteer in the currently displayed list.
+     * @param eventIndex The index of the event in the currently displayed list.
      */
     public AssignCommand(Index volunteerIndex, Index eventIndex) {
         requireAllNonNull(volunteerIndex, eventIndex);

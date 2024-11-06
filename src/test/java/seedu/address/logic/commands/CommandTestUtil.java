@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_END_TIME;
@@ -12,9 +13,18 @@ import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DA
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
+import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Arrays;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
+import seedu.address.model.volunteer.Volunteer;
 
 /**
  * Contains helper methods for testing commands.
@@ -168,5 +178,40 @@ public class CommandTestUtil {
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that:
+     * - A {@code CommandException} is thrown
+     * - The CommandException message matches {@code expectedMessage}
+     * - The address book, filtered volunteer list, and filtered event list in {@code actualModel} remain unchanged
+     */
+    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // Create defensive copies of the model's address book and filtered lists
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        ObservableList<Volunteer> expectedFilteredVolunteerList = actualModel.getFilteredVolunteerList();
+        ObservableList<Event> expectedFilteredEventList = actualModel.getFilteredEventList();
+
+        // Assert that a CommandException is thrown with the expected message
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+
+        // Assert that the address book and filtered lists remain unchanged
+        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedFilteredVolunteerList, actualModel.getFilteredVolunteerList());
+        assertEquals(expectedFilteredEventList, actualModel.getFilteredEventList());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitEventName = event.getName().eventName.split("\\s+");
+        model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitEventName[0])));
+
+        assertEquals(1, model.getFilteredEventList().size());
     }
 }

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.UNASSIGN_EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.UNASSIGN_VOLUNTEER_PREFIX_NAME;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -23,10 +24,10 @@ public class UnassignCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
     public static final String MESSAGE_NOT_ASSIGNED = "Volunteer is not assigned to this event!";
     private static final String MESSAGE_SUCCESS = "Volunteer unassigned successfully!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a volunteer from an event."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a volunteer from an event.\n"
             + " Parameters: "
-            + UNASSIGN_VOLUNTEER_PREFIX_NAME + "Volunteer Index "
-            + UNASSIGN_EVENT_PREFIX_NAME + "Event Index "
+            + UNASSIGN_VOLUNTEER_PREFIX_NAME + "VOLUNTEER_INDEX "
+            + UNASSIGN_EVENT_PREFIX_NAME + "EVENT_INDEX "
             + "Example: " + COMMAND_WORD + " "
             + UNASSIGN_VOLUNTEER_PREFIX_NAME + "2 "
             + UNASSIGN_EVENT_PREFIX_NAME + "3 ";
@@ -51,7 +52,8 @@ public class UnassignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
 
-        System.out.println("We are assigning volunteer " + this.volunteerIndex + " to event " + this.eventIndex);
+        Logger.getLogger("UnassignCommand").fine("Unassigning volunteer " + this.volunteerIndex
+                + " from event " + this.eventIndex);
 
         List<Volunteer> lastShownVolunteerList = model.getFilteredVolunteerList();
         List<Event> lastShownEventList = model.getFilteredEventList();
