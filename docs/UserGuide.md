@@ -89,7 +89,7 @@ The address and email address fields are also optional!
 
 Examples:
 
-- `add person n/Sydney Sweeney p/98765432 e/syd@celebrity.com t/Celebrity`
+- `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity`
 - `add person n/Betsy Crowe e/betsycrowe@example.com a/Crowe Apartment p/1234567 t/CameraMan`
 
 ![result for 'add person'](images/add_person.png)
