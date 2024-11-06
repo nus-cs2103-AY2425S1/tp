@@ -35,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_BIRTHDAY, PREFIX_TAG);
+                        PREFIX_BIRTHDAY, PREFIX_TAG, PREFIX_FREQUENCY);
 
         Index index;
 
@@ -67,7 +67,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_FREQUENCY).isPresent()) {
-            throw new ParseException("Frequency cannot be edited from the edit command.");
+            throw new ParseException("Frequency cannot be edited from the edit command. Please use the paid command.");
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
