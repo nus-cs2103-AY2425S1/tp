@@ -132,12 +132,15 @@ public class EditAppointmentCommand extends EditCommand {
     protected Object createEditedEntity(Model model, Object appointmentToEdit,
                                         EditEntityDescriptor editAppointmentDescriptor) throws CommandException {
         assert appointmentToEdit != null;
-        EditAppointmentDescriptor editAppointmentDescriptorCasted = (EditAppointmentDescriptor) editAppointmentDescriptor;
+        EditAppointmentDescriptor editAppointmentDescriptorCasted =
+                (EditAppointmentDescriptor) editAppointmentDescriptor;
         Appointment appointmentToEditCasted = (Appointment) appointmentToEdit;
 
         Person updatedPerson = getUpdatedPerson(model, editAppointmentDescriptorCasted, appointmentToEditCasted);
-        AppointmentType updatedAppointmentType = getUpdatedAppointmentType(editAppointmentDescriptorCasted, appointmentToEditCasted);
-        LocalDateTime updatedAppointmentDateTime = getUpdatedAppointmentDateTime(editAppointmentDescriptorCasted, appointmentToEditCasted);
+        AppointmentType updatedAppointmentType = getUpdatedAppointmentType(
+                editAppointmentDescriptorCasted, appointmentToEditCasted);
+        LocalDateTime updatedAppointmentDateTime = getUpdatedAppointmentDateTime(
+                editAppointmentDescriptorCasted, appointmentToEditCasted);
         Medicine updatedMedicine = getUpdatedMedicine(editAppointmentDescriptorCasted, appointmentToEditCasted);
         Sickness updatedSickness = getUpdatedSickness(editAppointmentDescriptorCasted, appointmentToEditCasted);
 

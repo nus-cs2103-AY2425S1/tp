@@ -13,6 +13,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Edits the details of an existing entity (person or appointment) in the address book.
@@ -72,7 +73,12 @@ public abstract class EditCommand extends Command {
             throw new CommandException(getDuplicateMessage());
         }
 
-        editEntity(model, editedEntity, entityToEdit);
+        try {
+            editEntity(model, editedEntity, entityToEdit);
+        } catch (DuplicatePersonException e) {
+            throw new CommandException(getDuplicateMessage());
+        }
+
         return new CommandResult(String.format(getSuccessMessage(), formatEntity(editedEntity)));
     }
 
