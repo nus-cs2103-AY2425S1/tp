@@ -107,23 +107,6 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Viewing a person : `view`
-
-Toggles the contact card on the specified person, switching between more and less information. <br>
-The default view for all contact cards will display less information to avoid visually overwhelming users, but users may decide to toggle the `view` for all information on one or more persons.
-
-Format: `view INDEX`
-
-* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
-* Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
-
-Examples:
-* `view 2` will expand the contact card for the second person in the contact list. <br>
- ![result of `view 2`](images/viewTwoResult.png)
-* Using `view 2` again will collapse the contact card back down to its default view. <br>
- ![result of second `view 2`](images/secondViewTwoResult.png)
-
-
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -207,6 +190,30 @@ Format: `sort parameter/order`
 Examples:
 * `sort n/` sorts by name in ascending order.
 * `sort d/desc` sorts by date of last visit in descending order.
+
+### Viewing a person : `view`
+
+Toggles the contact card on the specified person, switching between more and less information. <br>
+The default view for all contact cards will display less information to avoid visually overwhelming users, but users may decide to toggle the `view` for all information on one or more persons.
+
+Format: `view INDEX`
+
+* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
+* Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
+
+Examples:
+* `view 2` will expand the contact card for the second person in the contact list. <br>
+  ![result of `view 2`](images/viewTwoResult.png =600x)
+* Using `view 2` again will collapse the contact card back down to its default view. <br>
+  ![result of second `view 2`](images/secondViewTwoResult.png =600x)
+
+<box type="tip" seamless>
+
+**Take Note:** Viewing is executed based on the currently displayed list. 
+Executing any commands that alter the displayed list (such as `delete`, `sort`, or `find`) may change the person being viewed.
+For this reason, it is recommended to execute `view` commands after the displayed list has been modified as intended. 
+
+</box>
 
 ### Clearing all entries : `clear`
 
