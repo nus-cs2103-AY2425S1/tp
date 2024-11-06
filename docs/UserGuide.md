@@ -143,12 +143,6 @@ Here are some **key points** to keep in mind when using commands:
 - You can add fields in **any order**. <br>
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
-- Format of `DATE_TIME` is `YYYY:MM:DD hh:mm:ss`. <br>
-  _**Example:** `2024-12-01 09:30:00`._
-
-- Format of `DATE` is `YYYY-MM-DD`. <br>
-  _**Example:** `2024-12-01`._
-
 - If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, 
   `list appt`, `exit` and `clear`), they will be ignored. <br>
  _**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
@@ -171,13 +165,16 @@ The following sections describe the various commands available in the DocTrack p
 
 <br>
 
-
-### Person Commands
-
-A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. DocTrack allows you interact with patient information through different commands, which can be seen below.
+---
 
 <br>
 
+### Person Commands
+
+A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and 
+optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. 
+DocTrack allows you to interact with patient information through different commands, which can be seen below.
+=======
 | Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
 |--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
@@ -189,8 +186,6 @@ A **person** is a patient with several fields: a name, a phone number, an email,
 
 <br>
 
-
-<br>
 
 ##### Adding a person: `add person`
 
@@ -206,8 +201,10 @@ Adds a person to the address book.
 
 **Examples**:
 
-- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering`
-- `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal`
+- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering` 
+  adds a person named `John Doe` with phone number `98765432`, email `johnd@example.com`, and address `John street, block 123, #01-01`, and status `recovering`.
+- `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal` adds a person named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate 
+  Prison`, phone number `1234567`, status `recovered`, and the tags `friend` and `criminal`.
 
 <br>
 
@@ -228,14 +225,16 @@ Edits an existing person in the address book.
 - Edits the person at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
 **Examples**:
 
-- `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `list` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
+  address of the first person in the list to be `91234567` and `johndoe@example.com` respectively.
+- `list` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
+  be `Betsy Crower` and clears all existing tags.
 
 <br>
 
@@ -246,7 +245,7 @@ Finds persons whose **names** contain any of the given keywords.
 **Format**: `find person KEYWORD [MORE_KEYWORDS]`
 
 - Use the prefix `n/` to search for names.
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -277,8 +276,8 @@ Deletes the specified person from the address book.
 
 **Examples**:
 
-- `list` followed by `delete person 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete person 2` deletes the second person in the list.
+- `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
 
 <br>
 
@@ -303,7 +302,8 @@ Deletes all entries from the address book.
 
 ### Appointment Commands
 
-- An **appointment** is defined by several fields: an appointment type, appointment date & time, ID of the person who is associated with the appointment, sickness, and medicine.  
+- An **appointment** is defined by several fields: an appointment type, appointment date and time, ID of the 
+  person associated with the appointment, sickness, and medicine.  
 - You can interact with appointments in DocTrack using the instructions below:
 
 <br>
@@ -324,13 +324,18 @@ Deletes all entries from the address book.
 
 Adds an appointment to the DocTrack. 
 
-**Format**: `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
-- The format of `DATE_TIME` is `YYYY/MM/DD HH:mm:ss`. For example, `29/03/2025 10:30:00`.
+**Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
+- The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
-- `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`
-- `add appt i/2 d/30/01/2024-12-01 16:40:00 ty/Follow-up s/Asthma m/Inhaler`
+- `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
+- `add appt i/2 ty/Follow-up d/2024-02-01 16:40 s/Asthma m/Inhaler` adds an appointment to the person with personId `2`. The appointment has appointment type `Follow-up`, date and time `2024-02-01 16:40`, sickness `Asthma`, and medicine `Inhaler`.
+
+<box type="tip" seamless>
+
+**Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, it will be displayed as `Month Date, Year, Time`. For example, `2024-12-10 12:30` will be displayed as `December 10, 2024, 12:30 PM`.
+</box>
 
 <br>
 
@@ -351,10 +356,11 @@ Edits an existing appointment in DocTrack.
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+- The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
 **Examples**:
 
-- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date and time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
+- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` edits the date and time and the medicine to be `2024-12-05 13:00` and `Budesonide` respectively.
 
 <br>
 
@@ -366,7 +372,7 @@ Finds appointments whose person names and / or dates contain any of the given ke
 - Use the prefix `n/` to search for patient names.
 - Use the prefix `d/` to search for dates.
 - At least one keyword must be provided.
-- The format of `DATE` is `YYYY/MM/DD`. For example, `2024-10-16`.
+- The format of `DATE` is `YYYY-MM-DD`. For example, `2024-10-16`.
 
 **Examples**:
 - `find appt n/John` returns appointments with patients named `John`.
@@ -391,7 +397,9 @@ Deletes the specified appointment from DocTrack.
 
 **Examples**:
 
-- `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
+- `list appt` followed by `delete appt 2` deletes the second appointment in the list of appointments.
+- `find appt d/2024-12-05` followed by `delete appt 1` deletes the first appointment in the results of the 
+  `find` command.
 
 <br>
 
