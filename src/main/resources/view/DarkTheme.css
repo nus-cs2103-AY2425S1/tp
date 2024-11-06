@@ -349,3 +349,12 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#favourite {
+    -fx-fill: #000000;
+}
+
+#favourite:favourite {
+    -fx-fill: #ffff00;
+}
+
