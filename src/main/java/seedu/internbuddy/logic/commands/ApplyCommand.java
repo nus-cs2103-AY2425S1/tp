@@ -32,7 +32,7 @@ public class ApplyCommand extends Command {
             + PREFIX_NAME + "Full Stack Engineer "
             + PREFIX_DESCRIPTION + "Requires knowledge in ReactJS and ExpressJS";
 
-    public static final String MESSAGE_SUCCESS = "New application added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New application added to %1$s: %2$s";
 
     private final Application toAdd;
     private final Index index;
@@ -65,7 +65,7 @@ public class ApplyCommand extends Command {
                 editedApplications, companyToEdit.getIsFavourite());
 
         model.setCompany(companyToEdit, editedCompany);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedCompany.getName(), Messages.format(toAdd)));
     }
 
     @Override

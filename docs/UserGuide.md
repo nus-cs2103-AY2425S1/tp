@@ -9,28 +9,85 @@
     InternBuddy User Guide
 </h1>
 
-InternBuddy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InternBuddy can get your contact management tasks done faster than traditional GUI apps.
+## Welcome to InternBuddy!
+
+Calling out to all [STEM](#stem) students!
+
+We know that finding internships can be very tough and stressful! We know how hard it is to manage to process of applying for a single internship, 
+let alone trying to manage applications for many different companies. This is not even considering the fact that many of you
+are juggling this along with schoolwork and other commitments.
+
+This is why we are excited to introduce **InternBuddy**! &ndash; the all-in-one application for all your internship
+applications management needs. **InternBuddy** offers a convenient, intuitive and easy to use way to keep track of your interested
+companies, internship applications, and critical information &mdash; all tailored for you to ace your internship journey effectively by
+making internship application management easier and more efficient!
+
+This user guide will be the key to [start your journey](#how-to-use-our-user-guide) with **InternBuddy**! We provide you with step-by-step instructions on installing
+and using our application; giving you a head start on your internship journey!
+Or if you are already an existing user, this guide will act as a [refresher](#command-summary) of the various features **InternBuddy** has to offer!
+**InternBuddy** is designed to be intuitive, easy to use, and easy to master!
+
+_From the InternBuddy Team!_
+
+[go to overview & tutorial](#overview) <br>
+[go to command summary & features](#command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+
+Refer to the sidebar if you are on the website.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Overview
 
-## Command summary
+**InternBuddy** is an offline desktop application for university students studying a STEM major to manage 
+the contacts of companies that they are potentially applying or have already applied for internships. 
 
-| Action       | Format, Examples                                                                                                                                                                  |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software`  |
-| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
-| **Clear**    | `clear`                                                                                                                                                                           |
-| **Delete**   | `delete INDEX`                                                                                                                                                                    |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                          |
-| **Exit**     | `exit`                                                                                                                                                                            |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
-| **Help**     | `help`                                                                                                                                                                            |
-| **List**     | `list`                                                                                                                                                                            |
-| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                            |
-| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
+**InternBuddy** allows users to:
+* store and manage companies' contact information for various internship applications.
+* easy add and remove companies and their various internship applications
+* keep track of information of the applications for the various companies such as name of position, stage of application, and notes about the position.
+* and much more!
+
+**InternBuddy** is an [AddressBook](#address-book) optimized for use via a Command Line Interface ([CLI](#cli)) while still having the benefits of a Graphical User Interface ([GUI](#gui)). If you can type fast,
+**InternBuddy** can get your company contacts and internship application management tasks done faster than traditional GUI apps.
+
+[back to top](#internbuddy-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
+## How to use our User Guide
+
+First time using **InternBuddy**? Don't worry! We've got you covered! This tutorial will help maximise your usage of **InternBuddy**.
+* To get started, refer to the [Quick Start](#quick-start), which will walk you through getting **InternBuddy** all set up!
+* Is there a specific section of the User Guide you want to view? Check out the [Table of Contents](#table-of-contents) &ndash; where all the sections are linked nicely!
+* Need a quick refresher of the commands available for you? Check out our [Command Summary](#command-summary)!
+* For any terms that you are unsure of, the [Glossary](#glossary) might have an explanation for it.
+* Is there a burning question you want answers for? The [FAQ](#faq) might have the answer.
+
+Before continuing, here are some important information you need to know about the User Guide:
+1. There are 3 different kinds of boxes that provide extra information.
+    * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
+      <box type="tip" seamless>
+      **Tip:** This is a tip box.
+      </box>
+    * *Notice boxes* provide important information that you should take note of.
+      <box type="info" seamless>
+      **Notice:** This is a notice box.
+      </box>
+    * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
+      <box type="warning" seamless>
+      **Warning:** This is a warning box.
+      </box>
+2. Words that are in <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different
+   part of the User Guide or an external link when you click on them. For instance, [this hyperlink](#internbuddy-user-guide)
+   brings you back to the top of the User Guide.
+   <box type="tip" seamless>
+   **Tip:** If you are viewing this guide on our website, you can hover over links to see where the hyperlink takes you!
+   </box>
+3. Refer to [Features](#features) for detailed explanations of each feature of **InternBuddy**!
 
 [back to top](#internbuddy-user-guide)
 
@@ -50,22 +107,40 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/Jane Street p/91234567 e/careers@janestreet.com a/Jane Street, block 123, #01-01` : Adds a company named `Company` to the Address Book.
+    * `add n/Jane Street p/91234567 e/careers@janestreet.com a/Jane Street, block 123, #01-01` : Adds a company named `Company` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+## Command summary
 
+| Action       | Format, Examples                                                                                                                                                                  |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software`  |
+| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
+| **Clear**    | `clear`                                                                                                                                                                           |
+| **Delete**   | `delete INDEX`                                                                                                                                                                    |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                          |
+| **Exit**     | `exit`                                                                                                                                                                            |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
+| **Help**     | `help`                                                                                                                                                                            |
+| **List**     | `list`                                                                                                                                                                            |
+| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                            |
+| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
+
+[back to top](#internbuddy-user-guide)
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <box type="info" seamless>
@@ -259,7 +334,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
@@ -302,9 +377,10 @@ _Details coming soon ..._
 
 
 ## Glossary
-- **CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
-- **GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
-- **Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app.
+- <a id="stem"/>**STEM**: An acronym for the four related fields of study; **S**cience, **T**echnology, **E**ngineering, and **M**athematics.
+- <a id="cli"/>**CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
+- <a id="gui"/>**GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
+- <a id="address-book"/>**Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app.
 - **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
 - **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
 - **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., n/NAME).

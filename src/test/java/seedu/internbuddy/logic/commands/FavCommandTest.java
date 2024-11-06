@@ -24,7 +24,7 @@ public class FavCommandTest {
         FavCommand favCommand = new FavCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(FavCommand.MESSAGE_FAV_COMPANY_SUCCESS,
-                Messages.format(companyToFav));
+                companyToFav.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setCompany(companyToFav, new Company(companyToFav.getName(),
