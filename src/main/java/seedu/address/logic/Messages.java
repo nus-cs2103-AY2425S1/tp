@@ -1,6 +1,6 @@
 package seedu.address.logic;
 
-import static seedu.address.commons.util.DateUtil.formatDateTimeForDisplay;
+import static seedu.address.commons.util.DateUtil.FORMATTER;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -84,7 +84,7 @@ public class Messages {
     public static String formatAppointment(AppointmentDescriptor appointmentDescriptor) {
         return "\n" + "Appointment Type: "
                 + appointmentDescriptor.getAppointmentType() + "\n"
-                + "Date and Time: " + formatDateTimeForDisplay(appointmentDescriptor.getAppointmentDateTime())
+                + "Date and Time: " + appointmentDescriptor.getAppointmentDateTime().format(FORMATTER)
                 + "\n" + "Sickness: " + appointmentDescriptor.getSickness() + "\n"
                 + "Medicine: " + appointmentDescriptor.getMedicine() + "\n";
     }

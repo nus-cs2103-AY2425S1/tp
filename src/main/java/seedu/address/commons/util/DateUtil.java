@@ -16,6 +16,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DateUtil {
 
     /**
+     * The date time formatter for displaying dates.
+     */
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a")
+            .withLocale(Locale.US);
+
+    /**
      * Returns true if the given dates are the same day, month and year.
      */
     public static boolean isSameDate(LocalDate date, LocalDate otherDate) {
@@ -39,14 +45,4 @@ public class DateUtil {
         return dateList;
     }
 
-    /**
-     * Returns a formatted local date in the form of month date, year, time.
-     *
-     * @param appointmentDateTime the date and time to be formatted.
-     * @return a formatted string.
-     */
-    public static String formatDateTimeForDisplay(LocalDateTime appointmentDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm a").withLocale(Locale.US);
-        return appointmentDateTime.format(formatter);
-    }
 }

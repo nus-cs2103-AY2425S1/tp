@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.util.DateUtil.formatDateTimeForDisplay;
+import static seedu.address.commons.util.DateUtil.FORMATTER;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -56,7 +56,7 @@ public class AppointmentCard extends UiPart<Region> {
         appointmentId.setText(String.valueOf(appointment.getAppointmentId()));
         personId.setText(String.valueOf(appointment.getPersonId()));
         appointmentType.setText(appointment.getAppointmentType().value);
-        dateTime.setText(formatDateTimeForDisplay(appointment.getAppointmentDateTime()));
+        dateTime.setText(appointment.getAppointmentDateTime().format(FORMATTER));
         personName.setText(appointment.getPerson().getName().fullName);
         sickness.setText(appointment.getSickness() != null ? appointment.getSickness().value : "null");
         medicine.setText(appointment.getMedicine() != null ? appointment.getMedicine().value : "null");
