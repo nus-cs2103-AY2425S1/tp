@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTA
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +40,7 @@ public class AssignWeddingCommand extends Command {
             + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025.";
 
     private final Index index;
-    private final HashSet<Wedding> weddingsToAdd;
+    private HashSet<Wedding> weddingsToAdd;
     private Map<Wedding, String> weddingsToAdd2;
     private boolean force = false;
 
@@ -101,7 +102,8 @@ public class AssignWeddingCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        for (Wedding wedding : weddingsToAdd) {
+        for (Map.Entry<Wedding, String> entry : weddingsToAdd2.entrySet()) {
+            Wedding wedding = entry.getKey();
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
@@ -111,7 +113,19 @@ public class AssignWeddingCommand extends Command {
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
+            Wedding editedWedding = wedding.clone();
+            String type = entry.getValue();
+            switch (type) {
+            case "p1" -> editedWedding.setPartner1(personToEdit);
+            case "p2" -> editedWedding.setPartner2(personToEdit);
+            case "g" -> editedWedding.addToGuestList(personToEdit);
+            default -> { }
+            }
             wedding.increasePeopleCount();
+            model.setWedding(wedding, editedWedding);
+        }
+        if (weddingsToAdd2 != null) {
+            weddingsToAdd = new HashSet<>(weddingsToAdd2.keySet());
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
