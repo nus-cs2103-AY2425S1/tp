@@ -562,7 +562,6 @@ _Similar to UC10 except without extension 2b._
   - 1b1. System shows an error message.
 
     Use case ends.
-    
 
 **Use case: UC14 - Toggle application's theme** 
 
