@@ -78,12 +78,12 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `addcustomer`
+### Adding a customer: `addcustomer`
 
-Adds a person to the address book.
+Adds a customer to the address book.
 
 Command aliases: `addc`<br>
-Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>
 Examples:
 * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
@@ -93,11 +93,11 @@ Examples:
 ##### Constraints
 
 * `NAME` can only contain alphanumeric characters, spaces, and one of the following symbols: hyphen, comma, and apostrophe.
-* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator preceded "S/O" or "D/O" can be included, but must be followed with the name of person with stated relationship.
+* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator preceded "S/O" or "D/O" can be included, but must be followed with the name of customer with stated relationship.
 * Duplicated `NAME` is not allowed.
-* If there is already a person with similar `NAME` (same name excluding space and casing), a warning will be given.
+* If there is already a customer with similar `NAME` (same name excluding space and casing), a warning will be given.
 * `PHONE_NUMBER` should only contains numbers, and it should at least be 3 digits long.
-* `EMAIL` should be of the format `local-part`@`domain` and adhere to the following constraints:
+* `EMAIL` should be of the format `local-part` `@` `domain` and adhere to the following constraints:
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
   * The `local-part` may not start or end with any special characters.
   * This is followed by a '@' and then a `domain` name.
@@ -117,189 +117,238 @@ Examples:
 
 #### Tips
 
-* A person can have any number of tags (including 0).
+* A customer can have any number of tags (including 0).
 
 </box>
 
-### Listing all persons : `listcustomer`
+### Listing all customers : `listcustomer`
 
-Shows a list of all persons in the address book.
+Shows a list of all customers in the address book.
 
 Command aliases: `listc`<br>
 Format: `listcustomer`
 
-### Editing a person : `editcustomer`
+### Editing a customer : `editcustomer`
 
-Edits an existing person in the address book.
+Edits an existing customer in the address book.
 
 Command aliases: `editc`<br>
-Format: `editcustomer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>
+Examples:
+*  `editcustomer 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
+*  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+<box type="important">
+
+##### Constraints
+
+* Edits the customer at the specified `CUSTOMER_INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* You may refer to [Constraints of Addcustomer command](#constraints) for acceptable values of each field.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the customer will be removed i.e adding of tags is not cumulative.
+* You can remove all the customer’s tags by typing `t/` without
     specifying any tags after it.
 
-Examples:
-*  `editcustomer 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+</box>
 
-### Locating persons by name: `findcustomer`
+### Locating customers by name: `findcustomer`
 
-Finds persons whose names contain any of the given keywords.
+Finds customers whose names contain any of the given keywords.
 
 Command aliases: `findc`<br>
-Format: `findcustomer KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
+Format: `findcustomer KEYWORD [MORE_KEYWORDS]`<br>
 Examples:
 * `findcustomer John` returns `john` and `John Doe`
 * `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `deletecustomer`
+<box type="important">
 
-Deletes the specified person from the address book.
+##### Constraints
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Customers matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+</box>
+
+### Deleting a customer : `deletecustomer`
+
+Deletes the specified customer from the address book.
 
 Command aliases: `deletec`<br>
-Format: `deletecustomer INDEX`
+Format: `deletecustomer CUSTOMER_INDEX`
+Examples:
+* `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer in the address book.
+* `findcustomer Betsy` followed by `deletec 1` deletes the 1st customer in the results of the `find` command.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+<box type="important">
+
+##### Constraints
+* Deletes the customer at the specified `CUSTOMER_INDEX`.
+* The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `listcustomer` followed by `deletecustomer 2` deletes the 2nd person in the address book.
-* `findcustomer Betsy` followed by `deletec 1` deletes the 1st person in the results of the `find` command.
+</box>
 
-### Adding an order under a Person : `addorder`
+### Adding an order under a customer : `addorder`
 
-Adds an order under a specified person from the address book.
+Adds an order under a specified customer from the address book.
 
 Command aliases: `addo`<br>
-Format: `addorder INDEX i/ITEM d/DATE [q/QUANTITY]`
+Format: `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br>
+Examples:
+* `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd customer in the address book.
+* `addo 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first customer in the address book.
+* `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st customer in the results of the `find` command.
 
-* Add an order under the person at the specified `INDEX`, with a default `pending` status.
-* The index refers to the index number shown in the displayed person list.
-* The index and quantity **must be a positive integer** 1, 2, 3, …​
+<box type="important">
+
+<a id="order-constraints"></a>
+##### Constraints
+
+* Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `pending` status.
+* The index refers to the index number shown in the displayed customer list.
+* The index and quantity **must be a positive integer** 1, 2, 3, …​\
+* 'ITEM' can contain any printable characters, but it should not be blank.
 * Date must follow the following format: `DD-MM-YYYY`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
-* If there already exists a pending order with identical parameters under that person, a warning will be given.
+* If there already exists a pending order with similar item(same item excluding space and casing), identical quantity and date under that customer, a warning will be given.
 * If the order `DATE` has elapsed the current date, a warning will be given.
 
-Examples:
-* `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
-* `addo 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
-* `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st person in the results of the `find` command.
+</box>
 
-### Listing all orders under a Person : `listorder`
+### Listing all orders under a customer : `listorder`
 
-List all orders of a specified person from the address book.
+List all orders of a specified customer from the address book.
 
 Command aliases: `listo`<br>
-Format: `listorder INDEX`
+Format: `listorder INDEX`<br>
+Examples:
+* `listcustomer` followed by `listorder 2` lists all orders of the 2nd customer in the address book.
+* `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st customer from the list of customers found with "Betsy".
 
-* List all orders of the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+<box type="important">
+
+##### Constraints
+
+* List all orders of the customer at the specified `INDEX`.
+* The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `listcustomer` followed by `listorder 2` lists all orders of the 2nd person in the address book.
-* `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st person from the list of persons found with "Betsy".
+</box>
 
-### Deleting an order under a Person : `deleteorder`
+### Deleting an order under a customer : `deleteorder`
 
-Deletes an order from the selected person's displayed order list.
+Deletes an order from the selected customer's displayed order list.
 
 Command aliases: `deleteo`<br>
-Format: `deleteorder ORDER_INDEX`
+Format: `deleteorder ORDER_INDEX`<br>
+Examples:
+* `deleteorder 1` deletes the order with index 1 from the selected customer.
+* `listorder 1` followed by `deleteo 2` selects the 1st customer in the address book and deletes the 2nd order under the 1st customer.
 
-* A person's order list must first be displayed before deleting an order from that person.
-* Deletes an order under the selected person at the specified `ORDER_INDEX`.
-* The order index refers to the index number shown in the displayed **order** list of the selected person.
+<box type="important">
+
+##### Constraints
+
+* A customer's order list must first be displayed before deleting an order from that customer.
+* Deletes an order under the selected customer at the specified `ORDER_INDEX`.
+* The order index refers to the index number shown in the displayed **order** list of the selected customer.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `deleteorder 1` deletes the order with index 1 from the selected person.
-* `listorder 1` followed by `deleteo 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
+</box>
 
 ### Editing an order : `editorder`
 
-Edits an order from the selected person's displayed order list.
+Edits an order from the selected customer's displayed order list.
 
 Command aliases: `edito`<br>
-Format: `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`
-
-* A person's order list must first be displayed before editing an order from that person.
-* Edits the order at the specified `ORDER_INDEX`. The order index refers to the index number shown in the displayed order list.
-* The order index and quantity **must be a positive integer** 1, 2, 3, …​
-* Date must follow the following format: `DD-MM-YYYY`
-* At least one of the optional fields must be provided, and order status cannot be edited by this command.
-* Existing values will be updated to the input values. 
-* If there already exists an order with all parameters identical under that person, a warning will be given.
-* If the order `DATE` has elapsed the current date, a warning will be given.
-
+Format: `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`<br>
 Examples:
 *  `editorder 1 i/Light bulb d/21-11-2025` edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
 *  `edito 2 q/22` edits the quantity of the 2nd order to be `22`.
-*  `listorder 1` followed by `editorder 3 i/Wallet` selects the 1st person in the address book and edits the item of the 3rd order under the 1st person to be `Wallet`.
+*  `listorder 1` followed by `editorder 3 i/Wallet` selects the 1st customer in the address book and edits the item of the 3rd order under the 1st customer to be `Wallet`.
+
+<box type="important">
+
+##### Constraints
+
+* A customer's order list must first be displayed before editing an order from that customer.
+* Edits the order at the specified `ORDER_INDEX`. The order index refers to the index number shown in the displayed order list.
+* The order index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided, and order status cannot be edited by this command.
+* You may refer to [Constraints of Addorder command](#order-constraints) for acceptable values of each field.
+* Existing values will be updated to the input values.
+
+</box>
 
 ### Mark an order as completed : `markorder`
 
-Marks an order from the selected person's displayed order list as completed.
+Marks an order from the selected customer's displayed order list as completed.
 
 Command aliases: `marko`<br>
-Format: `markorder ORDER_INDEX`
+Format: `markorder ORDER_INDEX`<br>
+Examples:
+* `markorder 1` marks the order with index 1 from the displayed order list as completed.
+* `listorder 1` followed by `marko 2` selects the 1st customer in the address book and marks the 2nd order under the 1st customer as completed.
 
-* A person's order list must first be displayed before marking an order from that person.
-* Marks a pending order under the selected person at the specified `ORDER_INDEX` as completed.
+<box type="important">
+
+##### Constraints
+
+* A customer's order list must first be displayed before marking an order from that customer.
+* Marks a pending order under the selected customer at the specified `ORDER_INDEX` as completed.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `markorder 1` marks the order with index 1 from the displayed order list as completed.
-* `listorder 1` followed by `marko 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
+</box>
 
 ### Reverts an order to pending status : `unmarkorder`
 
-Reverts an order from the selected person's displayed order list to pending.
+Reverts an order from the selected customer's displayed order list to pending.
 
 Command aliases: `unmarko`<br>
-Format: `unmarkorder ORDER_INDEX`
+Format: `unmarkorder ORDER_INDEX`<br>
+Examples:
+* `unmarkorder 1` reverts the order with index 1 from the displayed order list to pending.
+* `listorder 1` followed by `unmarko 2` selects the 1st customer in the address book and reverts the 2nd order under the 1st customer to pending.
 
-* A person's order list must first be displayed before unmarking an order from that person.
-* Reverts a completed order under the selected person at the specified `ORDER_INDEX` to pending.
+<box type="important">
+
+##### Constraints
+
+* A customer's order list must first be displayed before unmarking an order from that customer.
+* Reverts a completed order under the selected customer at the specified `ORDER_INDEX` to pending.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `unmarkorder 1` reverts the order with index 1 from the displayed order list to pending.
-* `listorder 1` followed by `unmarko 2` selects the 1st person in the address book and reverts the 2nd order under the 1st person to pending.
+</box>
 
 ### Filter orders by order status : `filterorder`
 
-Filters orders by the specified order status, under a selected person from their displayed order list.
+Filters orders by the specified order status, under a selected customer from their displayed order list.
 
 Command aliases: `filtero`<br>
-Format: `filterorder ORDER_STATUS`
+Format: `filterorder ORDER_STATUS`<br>
+Examples:
+* `filterorder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected customer being displayed.
+* `listorder 1` followed by `filtero completed` displays the list of all completed orders under the 1st customer in the address book.
+  ![result for filtering completed order'](images/filterCompletedOrders.png)
+* 
+* <box type="important">
 
-* A person's order list must first be displayed before filtering their order list.
-* Filters the selected person's order list for orders that match the `ORDER_STATUS`.
+##### Constraints
+A customer's order list must first be displayed before filtering their order list.
+* Filters the selected customer's order list for orders that match the `ORDER_STATUS`.
 * The order status **must be a valid status**. e.g. Completed, Pending.
 * `ORDER_STATUS` is case-insensitive. e.g. `completed` is the same as `Completed`.
 
-Examples:
-* `filterorder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected person being displayed.
-* `listorder 1` followed by `filtero completed` displays the list of all completed orders under the 1st person in the address book.
-  ![result for filtering completed order'](images/filterCompletedOrders.png)
+</box>
 
 ### Clearing all entries : `clear`
 
@@ -352,18 +401,18 @@ _Details coming soon ..._
 
 | Action                                | Command                     | Format and Examples                                                                                                                                                                 |
 |---------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a person**                      | `addcustomer`, `addc`       | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `addcustomer n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add a customer**                    | `addcustomer`, `addc`       | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `addcustomer n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Clear**                             | `clear`                     |                                                                                                                                                                                     |
-| **Delete a person**                   | `deletecustomer`, `deletec` | `deletecustomer INDEX`<br> e.g., `deletecustomer 3`                                                                                                                                 |
-| **Edit a person**                     | `editcustomer`, `editc`     | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                         |
-| **Find person(s)**                    | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
-| **List all persons**                  | `listcustomer`, `listc`     |                                                                                                                                                                                     |
-| **Add an order**                      | `addorder`, `addo`          | `addorder INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                           |
-| **List all orders**                   | `listorder`, `listo`        | `listorder INDEX`<br> e.g. `listorder 3`                                                                                                                                            |
+| **Delete a customer**                 | `deletecustomer`, `deletec` | `deletecustomer CUSTOMER_INDEX`<br> e.g., `deletecustomer 3`                                                                                                                        |
+| **Edit a customer**                   | `editcustomer`, `editc`     | `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                |
+| **Find customer(s)**                  | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
+| **List all customers**                | `listcustomer`, `listc`     |                                                                                                                                                                                     |
+| **Add an order**                      | `addorder`, `addo`          | `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                  |
+| **List all orders**                   | `listorder`, `listo`        | `listorder CUSTOMER_INDEX`<br> e.g. `listorder 3`                                                                                                                                   |
 | **Delete an order**                   | `deleteorder`, `deleteo`    | `deleteorder ORDER_INDEX`<br> e.g. `deleteorder 2`                                                                                                                                  |
 | **Edit an order**                     | `editorder`, `edito`        | `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> e.g. `editorder 1 i/Light bulb d/21-11-2025`                                                                            |
 | **Mark an order as completed**        | `markorder`, `marko`        | `markorder ORDER_INDEX`<br> e.g. `markorder 2`                                                                                                                                      |                                                                                                                                                                                                                                           
 | **Revert an order to pending status** | `unmarkorder`, `unmarko`    | `unmarkorder ORDER_INDEX`<br> e.g., `unmarkorder 2`                                                                                                                                 |
 | **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
 | **Help**                              | `help`                      |                                                                                                                                                                                     |
-| **Exit**                              | `exit`                       |                                                                                                                                                                                     |
+| **Exit**                              | `exit`                      |                                                                                                                                                                                     |
