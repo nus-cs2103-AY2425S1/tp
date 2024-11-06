@@ -77,6 +77,6 @@ public class PersonCard extends UiPart<Region> {
      * Formats the attendance list to display properly in the UI.
      */
     private String formatAttendances(String attendanceList) {
-        return "Attendances:\n" + (attendanceList.isEmpty() ? "No attendance records" : attendanceList);
+        return "Attendances:\n" + attendanceList;
     }
 }

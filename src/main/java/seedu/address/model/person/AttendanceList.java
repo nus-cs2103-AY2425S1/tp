@@ -96,6 +96,9 @@ public class AttendanceList {
 
     @Override
     public String toString() {
+        if (this.attendanceList.isEmpty()) {
+            return "No attendance records";
+        }
         StringBuilder sb = new StringBuilder();
         attendanceList.forEach((date, attendance) -> {
             sb.append(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT).format(date));
