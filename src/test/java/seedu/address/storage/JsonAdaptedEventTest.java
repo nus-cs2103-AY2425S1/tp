@@ -15,6 +15,7 @@ public class JsonAdaptedEventTest {
     private static final String INVALID_EVENT_NAME = "+meeting";
     private static final String INVALID_EVENT_START_DATE = "2024-10-01";
     private static final String INVALID_EVENT_END_DATE = "2023-10-01";
+    private static final String INVALID_EVENT_DATE_FORMAT = "20231001";
 
     private static final String VALID_EVENT_NAME = MEETING.getEventName().toString();
     private static final String VALID_EVENT_DESCRIPTION = MEETING.getEventDescription().toString();
@@ -46,11 +47,20 @@ public class JsonAdaptedEventTest {
     }
 
     @Test
+    public void toModelType_invalidEventDate_throwsIllegalValueException() {
+        JsonAdaptedEvent event =
+                new JsonAdaptedEvent(VALID_EVENT_NAME, VALID_EVENT_DESCRIPTION, INVALID_EVENT_DATE_FORMAT,
+                        VALID_EVENT_END_DATE, VALID_EVENT_ID);
+        String expectedMessage = EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING;
+        assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidEventDuration_throwsIllegalValueException() {
         JsonAdaptedEvent event =
                 new JsonAdaptedEvent(VALID_EVENT_NAME, VALID_EVENT_DESCRIPTION, INVALID_EVENT_START_DATE,
                         INVALID_EVENT_END_DATE, VALID_EVENT_ID);
-        String expectedMessage = EventDuration.MESSAGE_CONSTRAINTS;
+        String expectedMessage = EventDuration.MESSAGE_CONSTRAINTS_DATE_ORDER;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
