@@ -43,11 +43,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(DeleteCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
         }
 
+        final String regexNumber = "^-*?[0-9]+$";
         try { // afford to SLAP better
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new DeleteCommand(index);
         } catch (Exception exp) {
-            if (isInteger(trimmedArgs) || trimmedArgs.matches("^-*?[0-9]+$")
+            if (isInteger(trimmedArgs) || trimmedArgs.matches(regexNumber)
                     /*|| trimmedArgs.matches("^[^a-zA-Z]*$")*/) {
                 throw new ParseException(exp.getMessage()); // no invalid command format
                 // -1, 0

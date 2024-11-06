@@ -23,7 +23,7 @@ public class Messages {
             + "accepted as the first word of the command:\n" + MESSAGE_COMMAND_LIST;
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! %1$s";
-    public static final String MESSAGE_BLANK_FIELD = "field cannot be blank!";
+    public static final String MESSAGE_BLANK_FIELD = "Field cannot be blank!";
 
     public static final String MESSAGE_DUPLICATE_PREFIXES_COMMAND = "Multiple prefixes of the same type "
             + "specified as follows: %s  which is not allowed";

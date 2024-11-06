@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_FUNCTION = COMMAND_WORD
             + ": Adds a contact to the address book.";
     public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE
-            + PREFIX_NAME + "NAME" + WHITESPACE
+            + PREFIX_NAME + "FULL_NAME" + WHITESPACE
             + PREFIX_TELEGRAM_HANDLE + "TELEGRAM" + WHITESPACE
             + PREFIX_EMAIL + "EMAIL" + WHITESPACE
             + PREFIX_STUDENT_STATUS + "STUDENT_STATUS" + WHITESPACE

@@ -46,9 +46,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD + WHITESPACE
             + "[INDEX OR FULL_NAME_OF_CONTACT_TO_EDIT]" + WHITESPACE + "[PREFIX] [new description]");
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example One: " + COMMAND_WORD + " 1 "
-            + PREFIX_TELEGRAM_HANDLE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com\n"
-            + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Jane Doe\n"
+            + PREFIX_TELEGRAM_HANDLE + "johnny_9876_haha "
+            + PREFIX_EMAIL + "johnd@example.com\n"
+            + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "John Doe\n"
             + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " "
             + "johnny";
     public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT =

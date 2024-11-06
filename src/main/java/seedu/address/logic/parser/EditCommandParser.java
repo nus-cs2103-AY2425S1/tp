@@ -82,12 +82,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // parse the index to edit, else parse the name
+        final String regexNumber = "^-*?[0-9]+$";
         try {
             index = ParserUtil.parseIndex(strPreamble);
             return new EditCommand(index, editContactDescriptor);
         } catch (ParseException pe) {
             assert index == null;
-            if (isInteger(strPreamble) || strPreamble.matches("^-*?[0-9]+$")
+            if (isInteger(strPreamble) || strPreamble.matches(regexNumber)
                     /*|| strPreamble.matches("^[^a-zA-Z]*$")*/) {
                 throw new ParseException(pe.getMessage());
                 // -1, 0
