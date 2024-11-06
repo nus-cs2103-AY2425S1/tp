@@ -59,7 +59,7 @@ public class FindDeliveryCommand extends FindCommand {
 
         // If supplier index is provided, retrieve the supplier and filter by that supplier
         if (supplierIndex.isPresent()) {
-            List<Supplier> lastShownList = model.getFilteredSupplierList();
+            List<Supplier> lastShownList = model.getModifiedSupplierList();
             SupplierIndex index = supplierIndex.get();
             if (index.getZeroBased() >= lastShownList.size()) {
                 return new CommandResult(MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
