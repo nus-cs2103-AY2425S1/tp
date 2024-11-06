@@ -41,7 +41,7 @@ public class Address {
      * Returns value if nonempty, otherwise returns "Address unspecified".
      */
     public String getDisplayableAddress() {
-        return value.isEmpty() ? "Address unspecified" : value;
+        return value.isEmpty() ? "-" : value;
     }
 
     @Override

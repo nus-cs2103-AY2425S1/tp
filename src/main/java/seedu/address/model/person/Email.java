@@ -55,7 +55,7 @@ public class Email {
      * Returns value if nonempty, otherwise returns "Email unspecified".
      */
     public String getDisplayableEmail() {
-        return value.isEmpty() ? "Email unspecified" : value;
+        return value.isEmpty() ? "-" : value;
     }
 
     @Override
