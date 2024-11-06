@@ -423,5 +423,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **List Command** ignores any extraneous parameters after the `list` command. This is a feature, not a bug.
+4. **Filter Command** returns the largest range of matches based on your input. This is a feature, not a bug.
+5. **Names and Wedding Names** are automatically formatted to have the first letter of each word capitalized. This is a feature, not a bug.
 
 --------------------------------------------------------------------------------------------------------------------
