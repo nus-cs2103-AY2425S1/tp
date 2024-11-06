@@ -20,7 +20,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListEventsCommand;
 import seedu.address.logic.commands.ListPersonsCommand;
-import seedu.address.logic.commands.UpdateCommand;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -92,7 +92,7 @@ public class AddressBookParser {
         case EventCommand.COMMAND_WORD:
             return new EventCommandParser().parse(arguments);
 
-        case UpdateCommand.COMMAND_WORD:
+        case EditEventCommand.COMMAND_WORD:
             return new UpdateCommandParser().parse(arguments);
 
         default:

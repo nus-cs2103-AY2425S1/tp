@@ -16,14 +16,14 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.UpdateCommand;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 
 /**
  * Parses input arguments and creates a new UpdateCommand object
  */
-public class UpdateCommandParser implements Parser<UpdateCommand> {
+public class UpdateCommandParser implements Parser<EditEventCommand> {
 
     /**
      * List of valid arguments for the {@code update} command.
@@ -43,7 +43,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
      * and returns an UpdateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public UpdateCommand parse(String args) throws ParseException {
+    public EditEventCommand parse(String args) throws ParseException {
         // Tokenize and check for duplicate prefixes
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, VALID_ARG_LIST);
@@ -54,14 +54,14 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UpdateCommand.MESSAGE_USAGE));
+                    EditEventCommand.MESSAGE_USAGE));
         }
 
         // Throw an error if user specified index of event to update but
         // did not provide any new fields
         if (hasNoPrefixesSupplied(argMultimap)) {
             throw new ParseException(String.format("No new field was provided. \n%1$s",
-                    UpdateCommand.MESSAGE_USAGE));
+                    EditEventCommand.MESSAGE_USAGE));
         }
 
         // Parse input and create an UpdateCommand
@@ -73,7 +73,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         Set<Index> addIndices = parseAttendeeIndices(argMultimap, PREFIX_ATTENDEES);
         Set<Index> removeIndices = parseAttendeeIndices(argMultimap, PREFIX_REMOVE_ATTENDEE);
 
-        return new UpdateCommand(name, startDate, endDate, location, addIndices, removeIndices, indexToUpdate);
+        return new EditEventCommand(name, startDate, endDate, location, addIndices, removeIndices, indexToUpdate);
     }
 
     /**
@@ -116,7 +116,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
             if (name.isEmpty()) {
                 throw new ParseException(String.format("Event name cannot be empty. \n%1$s",
-                        UpdateCommand.MESSAGE_USAGE));
+                        EditEventCommand.MESSAGE_USAGE));
             }
         }
         return name;
@@ -136,7 +136,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                 startDate = LocalDate.parse(argMultimap.getValue(PREFIX_START_DATE).get().trim());
             } catch (DateTimeParseException e) {
                 throw new ParseException(String.format("Invalid date format. \n%1$s",
-                        UpdateCommand.MESSAGE_USAGE));
+                        EditEventCommand.MESSAGE_USAGE));
             }
         }
         return startDate;
@@ -156,7 +156,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                 endDate = LocalDate.parse(argMultimap.getValue(PREFIX_END_DATE).get().trim());
             } catch (DateTimeParseException e) {
                 throw new ParseException(String.format("Invalid date format. \n%1$s",
-                        UpdateCommand.MESSAGE_USAGE));
+                        EditEventCommand.MESSAGE_USAGE));
             }
         }
         return endDate;
@@ -175,7 +175,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                 return ParserUtil.parseAddress(argMultimap.getValue(PREFIX_LOCATION).get());
             } catch (ParseException e) {
                 throw new ParseException(String.format("Invalid location format. \n%1$s",
-                        UpdateCommand.MESSAGE_USAGE), e);
+                        EditEventCommand.MESSAGE_USAGE), e);
             }
         }
         return null;
@@ -196,7 +196,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             attendeeIndices.addAll(ParserUtil.parseIndexes(argMultimap.getValue(prefix).orElse("")));
             if (attendeeIndices.isEmpty()) {
                 throw new ParseException(String.format("Attendee list cannot be empty. \n%1$s",
-                        UpdateCommand.MESSAGE_USAGE));
+                        EditEventCommand.MESSAGE_USAGE));
             }
         }
         return attendeeIndices;
