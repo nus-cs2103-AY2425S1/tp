@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -49,7 +48,6 @@ public class RemarkCommandTest {
     }
 
     @Test
-    @Disabled
     public void execute_removeRemarkUnfilteredList_success() throws Exception {
         Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         Remark emptyRemark = new Remark(""); // Removing remark

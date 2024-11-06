@@ -5,17 +5,19 @@
       "phone" : "00000001",
       "email" : "google@example.com",
       "address" : "123, Jurong West Ave 6, #08-111",
-      "url" : "careers.com",
+      "careerPageUrl" : "www.google-careers.com",
+      "applicationStatus" : "",
       "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
       "bookmark" : false,
-      "remark" : "Leading tech company"
+      "remark" : "Leading Tech company"
     },
     {
       "name" : "Meta",
       "phone" : "00000002",
       "email" : "meta@example.com",
       "address" : "311, Clementi Ave 2, #02-25",
-      "url" : "careers.com",
+      "careerPageUrl" : "www.meta-careers.com",
+      "applicationStatus" : "",
       "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
       "bookmark" : false,
       "remark" : "Social media giant"
@@ -25,7 +27,8 @@
       "phone" : "00000003",
       "email" : "grab@example.com",
       "address" : "wall street",
-      "url" : "careers.com",
+      "careerPageUrl" : "www.grab-jobs.com",
+      "applicationStatus" : "",
       "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
       "bookmark" : false,
       "remark" : "Leading ride-hailing service in Southeast Asia"
@@ -35,7 +38,8 @@
       "phone" : "00000004",
       "email" : "shopee@example.com",
       "address" : "10th street",
-      "url" : "careers.com",
+      "careerPageUrl" : "www.shopee-careers.com",
+      "applicationStatus" : "",
       "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
       "bookmark" : false,
       "remark" : "E-commerce platform"
@@ -44,8 +48,9 @@
       "name" : "Apple",
       "phone" : "00000005",
       "email" : "apple@example.com",
-      "address" : "michegan ave",
-      "url" : "careers.com",
+      "address" : "Michigan Ave",
+      "careerPageUrl" : "www.apple-careers.com",
+      "applicationStatus" : "",
       "tags" : [ ],
       "bookmark" : false,
       "remark" : "Creators of the iPhone"
@@ -54,8 +59,9 @@
       "name" : "ByteDance",
       "phone" : "00000006",
       "email" : "bytedance@example.com",
-      "address" : "little tokyo",
-      "url" : "careers.com",
+      "address" : "Little Tokyo",
+      "careerPageUrl" : "www.bytedance-jobs.com",
+      "applicationStatus" : "",
       "tags" : [ ],
       "bookmark" : false,
       "remark" : "TikTok parent company"
@@ -64,8 +70,9 @@
       "name" : "Amazon",
       "phone" : "00000007",
       "email" : "amazon@example.com",
-      "address" : "4th street",
-      "url" : "careers.com",
+      "address" : "4th Street",
+      "careerPageUrl" : "www.amazon-jobs.com",
+      "applicationStatus" : "",
       "tags" : [ ],
       "bookmark" : false,
       "remark" : "E-commerce and cloud computing leader"
