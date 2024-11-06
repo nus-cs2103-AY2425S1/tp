@@ -26,7 +26,7 @@ public class EventViewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_VIEW_EVENT_SUCCESS = "Viewing details of volunteers involved in %s";
+    public static final String MESSAGE_VIEW_EVENT_SUCCESS = "Viewing details of volunteers involved in %s";
 
     private final Index targetIndex;
 

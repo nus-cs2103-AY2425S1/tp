@@ -154,13 +154,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        //@@ author ytw - adapted
         // method to open a web browser from javafx app was sourced from the following source and adapted to be used
         // in the project.
-        // source:
         // https://forums.oracle.com/ords/apexds/post/opening-an-external-web-browser-from-a-javafx-application-4429
         HostServiceManager.getHostServices().showDocument(MainApp.USERGUIDE_URL);
-        //@@ author
 
         logger.fine("Showing user guide of VolunSync.");
     }
