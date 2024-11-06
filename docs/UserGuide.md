@@ -18,7 +18,8 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
 - **CLI**: Command Line Interface, where you type commands to interact with the application.
 - **GUI**: Graphical User Interface, where you interact with the application through visual elements like buttons and windows.
-- **Index**: A number representing the position of a person in the list. It is used to specify which contact to interact with.
+- **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list.
+
 
 
 ## Quick start
