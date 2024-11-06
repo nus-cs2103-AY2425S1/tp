@@ -165,7 +165,7 @@ Format: `deletetag INDEX t/[TAG]`
 Examples:
 
 - `deletetag 1 t/friends`
-- `editnotes 2 t/Client`
+- `deletetag 2 t/Client`
 
 ### Adding Notes to an existing contact: `addnotes`
 
