@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags should be High Risk, Medium Risk or Low Risk";
-    public static final String VALIDATION_REGEX = "High Risk|Medium Risk|Low Risk";
+    public static final String VALIDATION_REGEX = "high risk|medium risk|low risk";
     public static final String MESSAGE_FIELD_MESSAGE_FORMAT = "Person's Tag field is missing!";
     public final String tagName;
 
@@ -21,16 +21,37 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        tagName = tagName.strip();
+        tagName = tagName.strip().toLowerCase();
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = standardizeTagName(tagName);
     }
+
+    /**
+     * Standardizes the input tag name to a predefined format.
+     *
+     * <p>This method takes a tag name as input and standardizes it based on predefined mappings:
+     * "low risk" becomes "Low Risk", "medium risk" becomes "Medium Risk", and any other input
+     * is considered as "High Risk". This ensures consistent formatting of risk tags.</p>
+     *
+     * @param tag The input tag to be standardized.
+     * @return A standardized version of the input tag, either "Low Risk", "Medium Risk", or "High Risk".
+     */
+    public static String standardizeTagName(String tag) {
+        if (tag.equals("low risk")) {
+            return "Low Risk";
+        }
+        if (tag.equals("medium risk")) {
+            return "Medium Risk";
+        }
+        return "High Risk";
+    }
+
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toLowerCase().matches(VALIDATION_REGEX);
     }
 
     @Override
@@ -44,7 +65,7 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equalsIgnoreCase(otherTag.tagName);
     }
 
     @Override
@@ -56,7 +77,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return tagName;
+       return tagName;
     }
 
 }
