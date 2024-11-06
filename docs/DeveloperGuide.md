@@ -515,12 +515,12 @@ testers are expected to do more *exploratory* testing.
    3.  `addressbook.json`
        1. Corrupted:
           1. Manually modify `addressbook.json`
-          2. Relaunch the App 
+          2. Relaunch the app 
           
-          Expected: App fails to read from the file and loads without any data.
+          Expected: Application fails to read from the file and loads without any data.
        
        2. Missing:
           1. Move `data` folder to another directory.
           2. Relaunch the app. 
           
-          Expected: App loads with last saved data.
+          Expected: Application loads with last saved data.
