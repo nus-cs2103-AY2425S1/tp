@@ -177,7 +177,7 @@ needing their own `Tag` objects.<br>
 **API** : [
 `Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="800" />
 
 The `Storage` component,
 
