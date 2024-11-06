@@ -4,9 +4,12 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# EventTory - User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+EventTory is a **desktop app for managing vendors and events**.
+
+It is **optimized for use** via a Command-Line Interface (CLI) while still retaining the benefits of a Graphical User Interface (GUI).<br>
+If you can type fast, EventTory can get your **event management tasks** done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,26 +20,30 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for the EventTory application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EventTory.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note that the application contains some sample data on initial boot.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open a help window.<br>
+   Example commands to try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all events and vendors.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew` : Creates a vendor named `Hong Lim Trading Pte. Ltd.` and saves it to EventTory.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `assign v/1 e/2` : Assigns the 1st vendor in the vendor list to the 2nd event in the event list.
+   
+   * `view e/4` : View more information about the 4th event in the event list.
 
-   * `clear` : Deletes all contacts.
+   * `delete v/1` : Deletes the 1st vendor shown in the vendor list.
 
-   * `exit` : Exits the app.
+   * `clear` : Deletes all vendors and events stored in EventTory.
+
+   * `exit` : Exits the application.
 
 1. Refer to the [Features](#features) below for details of each command.
 
