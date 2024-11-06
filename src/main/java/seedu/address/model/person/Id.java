@@ -75,6 +75,20 @@ public class Id {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * reset the patientIdCounter
+     */
+    public static void resetPatientIdCounter() {
+        patientIdCounter = 0;
+    }
+
+    /**
+     * reset the doctorIdCounter
+     */
+    public static void resetDoctorIdCounter() {
+        doctorIdCounter = 1;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(idValue);
