@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Student numbers should be of the format A01234567X"
+        "Student numbers should be of the format A01234567X "
             + "and adhere to the following constraints:\n"
             + "1. The student number should start with A0.\n"
             + "2. This is followed by exactly 7 numerical digits.\n"
