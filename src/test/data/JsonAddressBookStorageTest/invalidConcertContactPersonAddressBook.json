@@ -1,0 +1,36 @@
+{
+  "persons": [
+    {
+      "name": "John Doe",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "role": "ORGANISER",
+      "tags": ["owesMoney", "friends"]
+    }
+  ],
+  "concerts": [
+    {
+      "name": "Coachella",
+      "address": "81800 51st Ave, Indio, Southern California, United States",
+      "date": "20 Dec 2024 1010"
+    }
+  ],
+  "concertContacts": [
+    {
+      "concert": {
+        "name": "Coachella",
+        "address": "81800 51st Ave, Indio, Southern California, United States",
+        "date": "20 Dec 2024 1010"
+      },
+      "person": {
+        "name": "John Doe123",
+        "phone": "98765432",
+        "email": "johnd@example.com",
+        "address": "311, Clementi Ave 2, #02-25",
+        "role": "ORGANISER",
+        "tags": ["owesMoney", "friends"]
+      }
+    }
+  ]
+}
