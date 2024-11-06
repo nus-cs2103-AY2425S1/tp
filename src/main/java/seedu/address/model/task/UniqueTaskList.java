@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,6 +96,22 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         internalList.setAll(tasks);
+    }
+
+    /**
+     * Retrieves the specified task if it exists in the list.
+     *
+     * @param task The task to retrieve.
+     * @return The task if found.
+     * @throws NoSuchElementException if the task is not found.
+     */
+    public Task getTask(Task task) {
+        for (Task eachTask : internalList) {
+            if (eachTask.isSameTask(task)) {
+                return eachTask;
+            }
+        }
+        throw new NoSuchElementException("Task not found in UniqueTaskList.");
     }
 
     /**

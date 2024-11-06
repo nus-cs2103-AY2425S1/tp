@@ -152,6 +152,10 @@ public interface Model {
      */
     void deleteTag(Tag toDelete);
 
+    void markTask(Task task);
+
+    void unmarkTask(Task task);
+
     /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
      */

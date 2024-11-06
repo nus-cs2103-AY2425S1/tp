@@ -26,7 +26,7 @@ import seedu.address.model.task.Task;
 public class UnassignTaskCommand extends Command {
     public static final String COMMAND_WORD = "unassign-task";
 
-    public static final String COMMAND_KEYWORD = "utask";
+    public static final String COMMAND_KEYWORD = "unatask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple tasks from the person identified "

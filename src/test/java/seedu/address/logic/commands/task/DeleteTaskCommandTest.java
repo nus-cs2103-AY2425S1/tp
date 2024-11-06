@@ -53,9 +53,8 @@ public class DeleteTaskCommandTest {
     public void execute_taskAssignedToPerson_taskRemovedFromPerson() throws Exception {
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
-
         deleteTaskCommand.execute(model);
-
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         // Verify the task is removed from each person's task list
         for (Person person : model.getFilteredPersonList()) {
             assertFalse(person.hasTask(taskToDelete), "Person should no longer have the deleted task.");

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -66,6 +67,18 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns a task if it exists in this person's task list.
+     */
+    public Task getTask(Task task) throws NoSuchElementException {
+        for (Task eachTask : tasks) {
+            if (eachTask.isSameTask(task)) {
+                return eachTask;
+            }
+        }
+        throw new NoSuchElementException("Task not found in this person's assigned tasks.");
     }
 
     /**
