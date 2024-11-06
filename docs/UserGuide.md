@@ -233,7 +233,14 @@ that they have at least one click on the pagination before using keyboard to mak
 Pagination UI:
 ![ui of pagination](images/pagination_ui.png)
 
-### Status Bar
+### Footer status bar
+
+A status bar that contains information about the number of contacts in the list and the address book data file path is attached as a footer
+at the bottom of the app. It shows the total number of contacts being listed in the app.
+
+Examples:
+* `find n/Adam` may show only 1 contact out of 19.
+  ![ui of footer status bar](images/footer_status_bar_ui.png)
 
 ### Saving the data
 
