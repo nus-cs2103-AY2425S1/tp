@@ -44,323 +44,395 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 
 ## Features
 
-<box type="info" seamless>
+### General Command Format
 
-**Notes about the command format:**<br>
+- **Parameters** in `UPPER_CASE` are to be supplied by the user.
+    - e.g., `add n/NAME` can be used as `add n/John Doe`.
+- **Optional parameters** are enclosed in square brackets `[]`.
+    - e.g., `n/NAME [r/ROLE]` can be `n/John Doe r/florist` or `n/John Doe`.
+- **Multiple entries** for a parameter are indicated by `...` after the parameter.
+    - e.g., `[w/WEDDING_INDEX]...` can be omitted or used multiple times: `w/1`, `w/1 w/2`, etc.
+- **Order of parameters** is flexible.
+    - e.g., `n/NAME p/PHONE_NUMBER` is the same as `p/PHONE_NUMBER n/NAME`.
+- **Extraneous parameters** for commands without parameters (e.g., `help`, `list`) are ignored.
+    - e.g., `help 123` is interpreted as `help`.
+- **Client parameter (`c/`)** in wedding commands accepts either an index or a name.
+    - e.g., `c/1` or `c/John Doe`.
+- **Dates** must be in `YYYY-MM-DD` format.
+    - e.g., `d/2024-12-31`.
+- **Roles (`r/`)** must be single-word alphanumeric.
+    - e.g., `r/photographer` (valid), `r/wedding planner` (invalid).
+- **Copying commands**: Be cautious when copying multi-line commands, as line-breaks may affect spacing.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+### Validation Rules
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/florist` or as `n/John Doe`.
+#### Names
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[w/WEDDING_INDEX]…​` can be used as ` ` (i.e. 0 times), `w/1`, `w/1 w/2` etc.
+- **Allowed characters**: Alphabets, spaces, apostrophes, hyphens.
+- **Restrictions**: Cannot be blank; max 70 characters.
+- **Examples**: `John Doe`, `Mary-Jane`, `O'Connor`.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+#### Phone Numbers
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- **Format**: Starts with 8 or 9; exactly 8 digits; numbers only.
+- **Uniqueness**: Each number must be unique.
+- **Examples**: `91234567`, `82345678`.
 
-* The client parameter (c/) in wedding commands can accept either an index number or a name.<br>
-  e.g. `c/1` or `c/John Doe` are both valid formats.
+#### Email Addresses
 
-* Dates must be specified in YYYY-MM-DD format.<br>
-  e.g. `d/2024-12-31` for December 31st, 2024.
+- **Format**: `local-part@domain`.
+- **Local-part**: Alphanumeric and `+ _ . -`; cannot start/end with special characters.
+- **Domain**: At least two characters; cannot start/end with hyphens.
+- **Uniqueness**: Each email must be unique.
+- **Examples**: `john@example.com`, `user.name+tag@domain.com`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+#### Roles
 
-### Viewing help : `help`
+- **Format**: Single-word alphanumeric; no spaces or special characters.
+- **Case-insensitive** for matching.
+- **Examples**: `photographer`, `florist`, `coordinator`.
 
-Shows a message explaning how to access the help page.
+#### Wedding Fields
 
-![help message](images/helpMessage.png)
+- **Wedding Name**: Cannot be blank.
+- **Date**: `YYYY-MM-DD` format.
+- **Venue**: Cannot be blank or whitespace if provided.
+- **Client**: One wedding per client.
+
+#### Addresses
+
+- **Restrictions**: Cannot be blank; any characters except leading/trailing spaces.
+
+### Index vs. Name-based Commands
+
+Commands like `edit`, `delete`, `view`, and `assign` support both index and name-based formats.
+
+- **Index Format**: Uses list position number.
+    - e.g., `edit 1`, `delete 1`.
+- **Name Format**: Uses the person's name.
+    - e.g., `edit John Doe`, `delete John`.
+
+**Using Name-based Commands**:
+
+- **Case-insensitive** matching.
+- **Full name matching**: Searches for names containing the entire keyword.
+- **Single Match**: Command executes immediately.
+- **Multiple Matches**:
+    - System displays matching entries with indices.
+    - User must re-enter the command using the index. ***INSERT PICTURE***
+    - **Example**:
+      ```
+      > delete John
+      Multiple matches found:
+      1. John Doe
+      2. Johnny Lee
+      3. John Smith
+      Please specify the index of the contact you want to delete.
+  
+      > delete 1
+      Deleted Person: John Doe
+      ```
+- **No Matches**: Displays "No matches found" message.
+
+### Cross-Reference Validations
+
+- **Client-Wedding Relationship**:
+    - One wedding per client.
+    - Cannot delete a client with an active wedding.
+    - Cannot assign a client as a vendor to their own wedding.
+- **Person-Wedding Relationships**:
+    - A person can be a vendor for multiple weddings.
+    - Cannot assign the same person to the same wedding multiple times.
+    - Vendor assignments are removed when a wedding is deleted.
+- **Role-Person Relationship**:
+    - One role per person.
+    - New role assignments replace existing roles.
+
+---
+
+### Viewing Help: `help`
+
+Displays instructions on accessing the help page.
 
 Format: `help`
 
+---
 
-### Adding a person: `add`
+### Adding a Person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]...​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]...`
 
-<box type="tip" seamless>
+- **Roles**: Optional; one role per person.
+- **Weddings**: Optional; can assign to multiple weddings.
+- **Validation**: Refer to [Validation Rules](#validation-rules).
 
-**Tips:**
-* A person can have either 0 or 1 role.
-* A person can have any number of wedding jobs (including 0).
-</box>
+**Examples**:
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 r/Florist`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Tanglin Mall #03-11 p/12345678 w/1`
+- `add n/John Doe p/98765432 e/johnd@example.com a/123 Street`
+- `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall r/florist`
+- `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall w/1`
 
-### Listing all persons : `list`
+**Common Errors**:
 
-Shows a list of all persons in the address book.
+- Duplicate phone: "This number already exists in the address book."
+- Duplicate email: "This email already exists in the address book."
+- Duplicate contact: "This contact already exists in the address book."
+- Invalid wedding index: "Wedding [index] is not in the list."
+
+---
+
+### Listing All Persons: `list`
+
+Displays all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+---
 
-Edits an existing person in the address book. Fields that can be edited: name, phone, address, email.
+### Editing a Person: `edit`
 
-If you know the index of the specific contact you want to edit:
+Edits an existing person's details.
 
-Format #1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
+Format:
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+- **By Index**: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+- **By Name**: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` edits the name of the 2nd person to be `Betsy Crower`.
+- **At least one field** must be provided.
+- **Existing values** are updated.
+- **Name-based**:
+    - If multiple matches, system displays options; re-enter command with index.
 
-If you do not know the index but know the name of the contact you want to edit:
+**Examples**:
 
-Format #2: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] …​`
+- `edit 1 p/91234567 e/johndoe@example.com`
+- `edit John Doe n/John Smith`
+- If multiple "Alex", `edit Alex n/Alex Tan` will prompt for index.
 
-* Filters a list of contacts with names that contains the entire NAME keyword
-* If there is only one contact that matches, the contact will be edited directly
-* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `edit INDEX …​` to specify the contact they want to edit
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
+---
 
+### Finding Persons by Name: `find`
 
-Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` edits the phone number and email address of `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit Betsy n/Betsy Crower` edits the name of `Betsy` to be `Betsy Crower`.
-* `edit Chris p/99998888` returns a filtered list of contacts whose names contain `Chris` and user need to edit their existing command to become
-  `edit [INDEX of specific person] p/99998888` to specify the `Chris` they want to edit.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
+Searches for persons whose names contain the keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- **Case-insensitive**.
+- **Full-word matching**.
+- **Returns** persons matching any keyword.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+**Examples**:
 
-### Viewing a contact : `view`
+- `find John` returns `John`, `John Doe`.
+- `find alex david` returns `Alex Yeoh`, `David Li`.
 
-View the contact of a specified person from the address book.
+---
+
+### Viewing a Contact: `view`
+
+Displays details of a specified person.
 
 Format: `view NAME`
 
-* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* Returns a filtered list made out of the contacts with names that contains the ENTIRE name keyword
-* Only the name can be used for viewing
+- **Case-insensitive** matching.
+- **Multiple Matches**: Displays options; re-enter command with index.
 
-Examples:
-* `view John` returns `john` and `John Doe`
-* `view Alex Yeo` return `Alex Yeo` and `Alex Yeo Jun Jie`
+**Examples**:
 
-### Deleting a person : `delete`
+- `view John` shows details for `John` or prompts if multiple.
+- `view Alex Yeo` shows details for `Alex Yeo`.
 
-Deletes the specified person from the address book.
+**Displays**:
 
-If you know the index of the specific contact you want to delete:
+- Personal details.
+- Current role.
+- Own wedding (if client).
+- Assigned weddings as vendor.
+- Related contacts through shared weddings.
 
-Format #1: `delete INDEX`
+---
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+### Deleting a Person: `delete`
 
-Example:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+Removes a person from the address book.
 
-If you do not know the index but know the name of the contact you want to delete:
+Format:
 
-Format #2: `delete KEYWORD`
+- **By Index**: `delete INDEX`
+- **By Name**: `delete NAME`
 
-* Filters a list of contacts with names that contains the ENTIRE name keyword
-* If there is only one contact that matches, the contact will be edited directly
-* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `delete INDEX …​` to specify the contact they want to delete
-* This command is case-insensitive. e.g. `alex tan` will match `Alex Tan`
+- **Cannot delete** a client with an active wedding.
+- **Name-based**:
+    - Multiple matches prompt for index.
 
-Examples:
+**Examples**:
 
-* `delete Betsy` will delete the contact of Betsy Tan directly if there are no duplicates.
-* `delete Alex Tan` will give a list of contacts whose names contains `Alex Tan`. User will then edit their command into `delete INDEX …​` to specify the `Alex Tan` they want to delete.
+- `delete 2` removes the second person.
+- `delete Betsy` removes Betsy if only one match.
 
-### Clearing all entries : `clear`
+---
 
-Clears all entries from the address book.
+### Clearing All Entries: `clear`
+
+Removes all entries from the address book.
 
 Format: `clear`
 
-### Filtering persons : `filter`
+---
 
-Filters and lists all persons in address book whose fields (name, role, email, phone, address) match any of the
-specified keywords (case-insensitive).
+### Filtering Persons: `filter`
+
+Lists persons matching specified fields.
 
 Format: `filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]`
 
-* At least one field must be provided.
-* Parameters can be in any order.
-* Each field can only contain single word keywords (except address which can contain multiple words and
-* email which allows partial matches).
-* The search is case-insensitive. e.g. `n/john` will match `John`
-* Different fields are matched with different precision:
-    * Name: Exact match only (must be single word)
-    * Role: Exact match only
-    * Email: Partial match allowed
-    * Phone: Exact match only
-    * Address: Partial match allowed
-* When multiple fields are provided, persons matching ANY of the fields will be returned (i.e. `OR` search).
+- **At least one field** must be provided.
+- **Case-insensitive**.
+- **Field-specific matching**:
+    - **Name**: Exact full-word match.
+    - **Role**: Exact match.
+    - **Email/Address**: Partial match.
+    - **Phone**: Exact number match.
+- **Returns** persons matching any field.
 
-Examples:
-* `filter n/John` returns `john` and `John`
-* `filter r/vendor` returns persons with role `vendor` (case-insensitive)
-* `filter e/gmail` returns all persons whose email contains "gmail"
-* `filter p/91234567` returns person with exact phone number
-* `filter n/John r/vendor` returns persons who either have name `John` OR role `vendor`
-* `filter e/gmail a/jurong` returns persons whose email contains "gmail" OR address contains "jurong"
+**Examples**:
+
+- `filter n/John` returns persons named `John`.
+- `filter r/vendor` returns all vendors.
+- `filter e/gmail a/jurong` returns persons with "gmail" in email or "jurong" in address.
+
+---
 
 ### Managing Weddings
 
-### Adding a wedding : `addw`
+#### Adding a Wedding: `addw`
 
 Adds a wedding to the address book.
 
 Format: `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]`
 
-* The wedding name must be specified
-* The client must be specified either by their index in the displayed list (e.g., `c/1`) or by their name (e.g., `c/John Doe`)
-* A client can only have one wedding at a time
-* Date must be in YYYY-MM-DD format when provided
-* Venue cannot be blank when provided
+- **Client**: Specified by index or name.
+- **Date**: Optional; `YYYY-MM-DD`.
+- **Venue**: Optional; cannot be blank if provided.
+- **Client Restrictions**: One wedding per client.
 
-Examples:
-* `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach` adds a wedding for the first contact in the list
-* `addw n/Garden Wedding c/John Doe v/Botanical Gardens` adds a wedding for John Doe (if there's only one contact with this name)
-* `addw n/Church Wedding c/Alex` will show a list of all contacts named Alex if there are multiple matches
+**Examples**:
 
-### Editing a wedding : `editw`
+- `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
+- `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
 
-Edits an existing wedding in the address book.
+**Notes**:
+
+- **Duplicate Client**: Error if client already has a wedding.
+- **Multiple Matches**: Client name prompts for index.
+
+---
+
+#### Editing a Wedding: `editw`
+
+Modifies wedding details.
 
 Format: `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`
 
-* Edits the wedding at the specified `INDEX`. The index refers to the index number shown in the displayed wedding list.
-* At least one of the optional fields must be provided.
-* The index must be a positive integer (1, 2, 3, ...)
-* Existing values will be updated to the input values
-* The client of a wedding cannot be changed after creation
-* Date must be in YYYY-MM-DD format when provided
-* Venue cannot be blank when provided
+- **At least one field** must be provided.
+- **Client cannot be changed** after creation.
 
-Examples:
-* `editw w/1 n/Sunset Wedding` changes the name of the first wedding to "Sunset Wedding"
-* `editw w/2 d/2025-01-01 v/Grand Hotel` updates both the date and venue of the second wedding
-* `editw w/1 v/` will show an error as venue cannot be blank
+**Examples**:
 
-### Viewing wedding details : `vieww`
+- `editw w/1 n/Sunset Wedding`
+- `editw w/2 d/2025-01-01 v/Grand Hotel`
 
-Views the details of a wedding from the address book.
+---
 
-Format: `vieww INDEX` or `vieww KEYWORD`
+#### Viewing Wedding Details: `vieww`
 
-* Can view a wedding using either its index number or the client's name
-* When using index: must be a positive integer (1, 2, 3, ...)
-* When using name: matches are case-insensitive
-* If multiple weddings match the name keyword, a list will be shown and you'll be prompted to use the index
+Displays wedding details.
 
-Examples:
-* `vieww 1` shows details of the first wedding in the list
-* `vieww John` shows John's wedding if there's only one matching client named John
-* `vieww Alex` will show a list of all weddings where the client's name contains "Alex" if there are multiple matches
+Format:
 
+- **By Index**: `vieww INDEX`
+- **By Keyword**: `vieww KEYWORD`
 
-### Assigning a person : `assign`
+- **Keyword**: Can be wedding name or client name.
+- **Multiple Matches**: Prompts for index.
 
-Assigns a person to a role and/or to existing wedding(s) in the address book.
+**Examples**:
 
-If you know the index of the specific contact you want to assign:
+- `vieww 1` shows the first wedding.
+- `vieww John` shows John's wedding if unique.
 
-Format #1: `assign INDEX [r/ROLE] [w/WEDDING_INDEX]…​`
+---
 
-* Assigns the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* When assigning roles:
-    * Each person can only have one role at a time
-    * Assigning a new role will replace the existing role
-    * Assigning blank roles e.g `r/` is not allowed
-* When assigning a person to wedding(s):
-    * The wedding(s) can be specified by `INDEX`. The index refers to the index number shown in the displayed wedding list.
-    * The index **must be a positive integer** 1, 2, 3, …​
-    * A person can be assigned to multiple weddings
+#### Deleting a Wedding: `deletew`
 
-Examples:
-* `assign 1 r/florist` assigns the 1st person to have the role of a `florist`
-* `assign 1 w/1` assigns the 1st person to the 1st wedding
-* `assign 2 r/vendor w/1 w/2` assigns the 2nd person to have the role of a `vendor` as well as to be associated with the 1st and 2nd wedding
+Removes a wedding.
 
-If you do not know the index but know the name of the contact you want to assign:
+Format:
 
-Format #2: `assign NAME [r/ROLE] [w/WEDDING_INDEX]…​`
+- **By Index**: `deletew INDEX`
+- **By Keyword**: `deletew KEYWORD`
 
-* Filters a list of contacts with names that contains the entire NAME keyword
-* If there is only one contact that matches, the contact will be assigned directly
-* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* If there is more than one contact that matches, a filtered list of those contacts will be returned. User will then need to edit their command into `assign INDEX …​` to specify the contact they want to assign
-* At least one of the optional fields must be provided
-* The same role and wedding assignment rules from Format #1 apply
+- **Removes** client relationship and vendor assignments.
 
-Examples:
-* `assign John Doe r/florist` assigns `John Doe` to have the role of a `florist`
-* `assign Betsy Crower w/1` assigns `Betsy Crower` to the 1st wedding
-* `assign Chris r/vendor w/1 w/2` if there are more than 1 name that contains `Chris`, a filtered list of contacts whose names contain `Chris` is returned and user will need to edit their existing command to become `assign [INDEX of specific person] r/vendor w/1 w/2` to specify which `Chris` they want to assign
+**Examples**:
 
-<box type="tip" seamless>
+- `deletew 2` deletes the second wedding.
+- `deletew Beach Wedding` deletes if unique match.
 
-**Tip:** Roles are useful for filtering contacts later using the `filter` command with the `r/` prefix.
-</box>
+---
 
-### Exiting the program : `exit`
+### Assigning a Person: `assign`
 
-Exits the program.
+Assigns a role and/or weddings to a person.
+
+Format:
+
+- **By Index**: `assign INDEX [r/ROLE] [w/WEDDING_INDEX]...`
+- **By Name**: `assign NAME [r/ROLE] [w/WEDDING_INDEX]...`
+
+- **At least one field** must be provided.
+- **Role Assignment**:
+    - Replaces existing role.
+    - Must be non-blank, single-word alphanumeric.
+- **Wedding Assignment**:
+    - Assigns person to one or more weddings.
+    - Cannot assign to the same wedding multiple times.
+- **Restrictions**:
+    - Cannot assign a client to their own wedding.
+
+**Examples**:
+
+- `assign 1 r/florist`
+- `assign John Doe w/1 w/2`
+- `assign 2 r/vendor w/1 w/2`
+
+---
+
+### Exiting the Program: `exit`
+
+Closes the application.
 
 Format: `exit`
 
-### Saving the data
+---
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+### Saving the Data
 
-### Editing the data file
+Data is automatically saved after any changes. No manual saving required.
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+---
 
-<box type="warning" seamless>
+### Editing the Data File
 
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
-</box>
+Data is stored as a JSON file at `[JAR file location]/data/addressbook.json`.
 
-### Archiving data files `[coming in v2.0]`
+**Caution**:
 
-_Details coming soon ..._
+- **Backup** before editing.
+- **Invalid formats** may cause data loss.
+- **Out-of-range values** may cause unexpected behavior.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -373,7 +445,7 @@ _Details coming soon ..._
 **A**: First use `list` to see all contacts. Then use either `addw n/WEDDING_NAME c/INDEX` using the client's index number, or `addw n/WEDDING_NAME c/CLIENT_NAME` using the client's name.
 
 **Q**: What happens if I try to delete a client who has a wedding?<br>
-**A**: The system will prevent you from deleting the client and show an error message. You must first handle the client's wedding before deleting the contact.
+**A**: The system will prevent you from deleting the client and show an error message. You must first delete the client's wedding before deleting the contact.
 
 **Q**: Can I change a wedding's client after creation?<br>
 **A**: No, a wedding's client cannot be changed after creation. You would need to create a new wedding for the different client.
@@ -383,6 +455,33 @@ _Details coming soon ..._
 
 **Q**: Can I assign multiple roles to a person?<br>
 **A**: No, each person can only have one role at a time. Assigning a new role will replace the existing one.
+
+**Q**: What happens when I delete a wedding?<br>
+**A**: Deleting a wedding will remove all vendor assignments to that wedding and remove the client-wedding relationship. The contacts themselves are not deleted.
+
+**Q**: Can I use the same phone number or email for different contacts?<br>
+**A**: No, phone numbers and email addresses must be unique in the system. You'll receive an error message if you try to add or edit a contact with duplicate information.
+
+**Q**: What happens if I find multiple contacts with the same name?<br>
+**A**: When using name-based commands, if multiple matches are found, the system will show you a list of matching contacts with their indices. You'll need to use the index number to specify which contact you want to work with.
+
+**Q**: How can I see all weddings a vendor is assigned to?<br>
+**A**: Use the `view` command with the vendor's name or index. The system will show all weddings they are assigned to as part of their contact details.
+
+**Q**: Can I search for contacts by partial name match?<br>
+**A**: Yes, use the `find` command which matches partial names. However, note that it matches whole words only (e.g., "John" will match "John Doe" but not "Johnny").
+
+**Q**: What's the difference between `find` and `filter` commands?<br>
+**A**: `find` searches only names and supports partial word matches. `filter` can search across multiple fields (name, role, email, phone, address) but requires exact word matches for names and roles.
+
+**Q**: How do I remove a role from a contact?<br>
+**A**: Currently, roles cannot be removed once assigned. You can only change them to a different role using the `assign` command.
+
+**Q**: What happens to wedding assignments if I edit a contact's details?<br>
+**A**: Editing a contact's basic details (name, phone, email, address) does not affect their wedding assignments or role. These relationships remain intact.
+
+**Q**: Can I export my contact and wedding data?<br>
+**A**: While there's no direct export command, you can copy the data file (addressbook.json) which contains all your data. This file is located in the same folder as the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -409,6 +508,7 @@ Action     | Format, Examples
 **Addw**   | `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]` <br> e.g., `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
 **Editw**  | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`
 **Vieww**  | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`
+**Deletew**| #1: `deletew INDEX` or <br> #2: `deletew KEYWORD`<br> e.g., `deletew 1`, `deletew Beach Wedding`
 **Assign** | `assign INDEX r/ROLE w/WEDDING...` or `assign NAME r/ROLE w/WEDDING...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/2`
 **Help**   | `help`
 **Exit**   | `exit`
