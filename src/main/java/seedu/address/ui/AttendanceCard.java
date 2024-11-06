@@ -75,31 +75,24 @@ public class AttendanceCard extends UiPart<Region> {
 
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
         if (attendanceList.isEmpty()) {
-            logger.info("No attendance to display");
-
             attendance.setText("not attended");
             setAttendanceLabelNotAttendedStyle();
 
             otherAttendance.setText("No more attendance to show");
         } else if (currentWeekAttendance == null) {
-            logger.info("No attendance for current week to display");
-
             attendance.setText("not attended");
             setAttendanceLabelNotAttendedStyle();
 
             otherAttendance.setText(formatOtherAttendance(attendanceList));
-            logger.info("Successfully set display for other weeks' attendance");
         } else {
             attendance.setText(currentWeekAttendance.toDisplayString());
             setAttendanceLabelAttendedStyle();
-            logger.info("Successfully set display for current week attendance");
 
             List<Attendance> otherAttendanceList = attendanceList
                     .stream()
                     .filter(attendance -> !attendance.equals(currentWeekAttendance))
                     .toList();
             otherAttendance.setText(formatOtherAttendance(otherAttendanceList));
-            logger.info("Successfully set display for other weeks' attendance");
         }
     }
 
