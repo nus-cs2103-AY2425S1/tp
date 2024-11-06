@@ -179,8 +179,10 @@ Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 * Adds a transaction to the client at the specified `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The amount should be a number of up to 2 decimal places with no commas in between 
+* The amount should be a number of up to two decimal places containing only digits (`0 - 9`) and one decimal point (`.`) if needed.
 e.g. `10, 100.5, 1000.55`
+* If the amount includes a decimal point, there should be at least one digit before the decimal point. 
+e.g. `0.5`
 * The date should be in the format `YYYY-MM-DD` e.g. `2024-12-20`
 
 Examples:
