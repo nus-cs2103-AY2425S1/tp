@@ -319,25 +319,49 @@ Examples:
 
 #### Tracking contacts by category: `track`
 
-Tracks and lists all contacts who are in the category of the specified keywords.
+Tracks and lists all contacts who are in the category of the specified keyword.
 
-Format: `track CATEGORY`
-* Allows users to filter or sort contacts by `CATEGORY`, such as students or companies, making it easier to track specific groups.
+
+* Allows users to filter or sort contacts by `CATEGORY` (student or company), making it easier to track specific groups.
 
 Examples:
 * `track student` finds contacts with category `student`
 * `track company` finds contacts with category `company`
 
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+* `CATEGORY` must be from the predefined list of categories (student or company).
+
+* `CATEGORY` is case-insensitive. For example, `student` will match `Student`.
+
+* Only full words will be matched e.g. `student` will not match `students`.
+
+</div>
+
 #### Adding tag(s) to contact: `tag`
-Adds additional tags to the specified contact.
+Adds additional specified tag(s) to the specified contact without overwriting existing tags.
 
 Format: `tag INDEX t/TAG [t/MORE_TAG]`
  * Add specified `TAG` or more `TAG` to the contact at specified `INDEX`.
  * The index refers to the index number shown in the displayed person list.
  * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
+* The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+
+* Only full words will be matched e.g. `partner` will not match `partners`.
+
+* The added tags are displayed on the contact in alphabetical order. <br>
+  e.g. `t/partner t/education` will display `education` before `partner`.
+
+</div>
+
 Examples:
-* `tag 1 t/year2 t/computerScience` adds the tags `year2` and `computerScience` to the first contact in the list
+* `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
 
 #### Deleting tag(s) from contact: `deletetag`
 
@@ -417,9 +441,6 @@ If your changes to the data file makes its format invalid, AdminNUS will discard
 Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
