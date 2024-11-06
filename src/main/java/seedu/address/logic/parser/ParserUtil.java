@@ -258,6 +258,12 @@ public class ParserUtil {
             if (res < 0 || res > 100) {
                 throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
             }
+
+            // Check for a maximum of 2 decimal places
+            if (trimmedValue.contains(".") && trimmedValue.split("\\.")[1].length() > 2) {
+                throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+            }
+
             return res;
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
