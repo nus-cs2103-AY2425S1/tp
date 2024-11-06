@@ -18,10 +18,11 @@ import seedu.address.model.preferredtime.PreferredTimeOverlapsRangesPredicate;
 public class FindTimeCommand extends Command {
     public static final String COMMAND_WORD = "findtime";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose preferred time ranges"
-            + "overlap with the specified time ranges"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose preferred time ranges "
+            + "overlap with the specified time ranges "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Tips: RANGE has format HHmm, same ending time as starting time is allowed.\n"
+            + "Parameters: RANGE [MORE_RANGES]...\n"
             + "Example: " + COMMAND_WORD + " 1100-1230 2130-2245";
 
     private final PreferredTimeOverlapsRangesPredicate predicate;

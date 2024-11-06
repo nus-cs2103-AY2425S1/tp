@@ -74,6 +74,11 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+
+        this.getRoot().setResizable(true);
+        this.getRoot().setMinHeight(500);
+        this.getRoot().setMinWidth(600);
+
         helpTable(helpTable);
         helpMessage.setText(HELP_MESSAGE);
         // Add key event filter for ESC key to close the window
@@ -136,6 +141,7 @@ public class HelpWindow extends UiPart<Stage> {
         table.setEditable(false);
         table.setSelectionModel(null);
         ObservableList<HelpCommand> data =
+ Update-PopUp-and-HelpWindow
                 FXCollections.observableArrayList(
                         new HelpCommand("Help", "`help`"),
                         new HelpCommand("List", "`list`"),

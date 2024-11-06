@@ -11,9 +11,9 @@ import seedu.address.model.game.Username;
 public class GameBuilder {
 
     public static final String DEFAULT_GAME_NAME = "LoL";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_USERNAME = "lmao";
+    public static final String DEFAULT_SKILL_LEVEL = "nub";
+    public static final String DEFAULT_ROLE = "npc";
 
     private String gameName;
     private Role role;
@@ -24,9 +24,9 @@ public class GameBuilder {
      */
     public GameBuilder() {
         gameName = DEFAULT_GAME_NAME;
-        role = new Role("");
-        skillLevel = new SkillLevel("");
-        username = new Username("");
+        role = new Role(DEFAULT_ROLE);
+        skillLevel = new SkillLevel(DEFAULT_SKILL_LEVEL);
+        username = new Username(DEFAULT_USERNAME);
     }
 
     /**

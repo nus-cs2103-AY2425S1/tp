@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Map;
@@ -86,7 +85,6 @@ public class AddGameCommand extends Command {
         Game editedGame = createNewGame(gameName, addGameDescriptor);
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_ADD_GAME_SUCCESS, Messages.format(editedGame)));
     }
@@ -99,7 +97,6 @@ public class AddGameCommand extends Command {
         gameMap.remove(gameName);
 
         model.setPerson(personToEdit, personToEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     /**
@@ -198,6 +195,10 @@ public class AddGameCommand extends Command {
 
         public boolean getFavouriteStatus() {
             return this.isFavourite;
+        }
+
+        public void setFavouriteStatus(boolean isFavourite) {
+            this.isFavourite = isFavourite;
         }
 
         @Override

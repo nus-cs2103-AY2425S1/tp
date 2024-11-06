@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
@@ -38,7 +39,11 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         this.entries = new TreeSet<>();
         commandTextField.setCommandBox(this);
-        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+
+        // Request initial focus for commandTextField when CommandBox is initialized
+        Platform.runLater(() -> commandTextField.requestFocus());
+
+        // Calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
