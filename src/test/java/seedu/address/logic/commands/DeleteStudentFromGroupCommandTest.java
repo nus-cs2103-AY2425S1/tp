@@ -52,8 +52,7 @@ public class DeleteStudentFromGroupCommandTest {
         model.addPerson(validStudent);
         model.addGroup(validGroup);
         model.addPersonToGroup(validStudent, validGroup);
-        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
-            validStudent.getStudentNumber());
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validStudent.getStudentNumber());
         CommandResult commandResult = command.execute(model);
         assertEquals(String.format(DeleteStudentFromGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS,
             validStudent.getStudentNumber(), validGroup.getGroupName()), commandResult.getFeedbackToUser());
@@ -62,17 +61,16 @@ public class DeleteStudentFromGroupCommandTest {
 
     @Test
     public void execute_studentDoesNotExistInGroup_throwsCommandException() {
-        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
-            new StudentNumber("A0123456Q"));
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new StudentNumber("A0123456Q"));
 
         assertThrows(CommandException.class, Messages.MESSAGE_STUDENT_NO_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
-    public void execute_groupDoesNotExist_throwsCommandException() {
-        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(new GroupName("CS2103-F12-5"),
-            validStudent.getStudentNumber());
-        assertThrows(CommandException.class, Messages.MESSAGE_GROUP_NAME_NOT_FOUND, () -> command.execute(model));
+    public void execute_studentNotInAGroup_throwsCommandException() {
+        DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validStudent.getStudentNumber());
+        assertThrows(CommandException.class, DeleteStudentFromGroupCommand.MESSAGE_STUDENT_NOT_IN_GROUP, ()
+                -> command.execute(model));
     }
 
     @Test
@@ -83,15 +81,15 @@ public class DeleteStudentFromGroupCommandTest {
         StudentNumber studentNumberTwo = new StudentNumber("A0654321Z");
 
         DeleteStudentFromGroupCommand deleteStudentOneFromTeamOneCommand =
-            new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
+            new DeleteStudentFromGroupCommand(studentNumberOne);
         DeleteStudentFromGroupCommand deleteStudentTwoFromTeamOneCommand =
-            new DeleteStudentFromGroupCommand(teamOneName, studentNumberTwo);
+            new DeleteStudentFromGroupCommand(studentNumberTwo);
         DeleteStudentFromGroupCommand deleteStudentOneFromTeamTwoCommand =
-            new DeleteStudentFromGroupCommand(teamTwoName, studentNumberOne);
+            new DeleteStudentFromGroupCommand(studentNumberOne);
 
         assertTrue(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamOneCommand));
         DeleteStudentFromGroupCommand deleteStudentOneFromTeamOneCommandCopy =
-            new DeleteStudentFromGroupCommand(teamOneName, studentNumberOne);
+            new DeleteStudentFromGroupCommand(studentNumberOne);
         assertTrue(deleteStudentOneFromTeamOneCommand.equals(deleteStudentOneFromTeamOneCommandCopy));
         assertFalse(deleteStudentOneFromTeamOneCommand.equals(1));
         assertFalse(deleteStudentOneFromTeamOneCommand.equals(null));
