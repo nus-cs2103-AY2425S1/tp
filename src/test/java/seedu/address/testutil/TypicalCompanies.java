@@ -2,12 +2,14 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CAREER_PAGE_URL_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BIGTECH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COMPANY;
 
@@ -72,13 +74,13 @@ public class TypicalCompanies {
     public static final Company TESLA = new CompanyBuilder().withName(VALID_NAME_TESLA)
             .withPhone(VALID_PHONE_TESLA).withEmail(VALID_EMAIL_TESLA)
             .withAddress(VALID_ADDRESS_TESLA).withTags(VALID_TAG_COMPANY)
-            .withCareerPageUrl("www.tesla-careers.com").withRemark("Electric vehicle leader")
+            .withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA).withRemark(VALID_REMARK)
             .build();
 
     public static final Company MICROSOFT = new CompanyBuilder().withName(VALID_NAME_MICROSOFT)
             .withPhone(VALID_PHONE_MICROSOFT).withEmail(VALID_EMAIL_MICROSOFT)
             .withAddress(VALID_ADDRESS_MICROSOFT).withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY)
-            .withCareerPageUrl("www.microsoft-careers.com").withRemark("Software giant")
+            .withCareerPageUrl(VALID_ADDRESS_MICROSOFT).withRemark(VALID_REMARK)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
