@@ -30,6 +30,13 @@ public class AddNotesCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        AddNotesCommand notesCommand = new AddNotesCommand(outOfBoundIndex, new Notes(VALID_NOTES_BOB));
+        assertCommandFailure(notesCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void execute_addNotesUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNotes(NOTES_STUB).build();
@@ -65,12 +72,6 @@ public class AddNotesCommandTest {
         assertCommandSuccess(notesCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        AddNotesCommand notesCommand = new AddNotesCommand(outOfBoundIndex, new Notes(VALID_NOTES_BOB));
-        assertCommandFailure(notesCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
