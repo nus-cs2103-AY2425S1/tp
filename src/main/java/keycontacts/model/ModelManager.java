@@ -15,7 +15,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
-import keycontacts.model.exceptions.StateNotFoundException;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
@@ -125,27 +124,26 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean undo() {
-        try {
-            studentDirectory.undo();
-            return true;
-        } catch (StateNotFoundException e) {
-            return false;
-        }
+    public void undoStudentDirectory() {
+        studentDirectory.undo();
     }
 
     @Override
-    public boolean redo() {
-        try {
-            studentDirectory.redo();
-            return true;
-        } catch (StateNotFoundException e) {
-            return false;
-        }
+    public void redoStudentDirectory() {
+        studentDirectory.redo();
     }
 
     @Override
-    public void commit() {
+    public boolean canUndoStudentDirectory() {
+        return studentDirectory.canUndo();
+    }
+    @Override
+    public boolean canRedoStudentDirectory() {
+        return studentDirectory.canRedo();
+    }
+
+    @Override
+    public void commitStudentDirectory() {
         studentDirectory.commit();
     }
 

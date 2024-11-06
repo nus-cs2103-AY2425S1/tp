@@ -106,6 +106,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. If the command's `Command#shouldCommitModel` method returns true, `LogicManager` will also commit the current student directory state. (More on this below under implementation)
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -118,23 +119,15 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T08-2/tp/tree/master/src/main/java/keycontacts/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
 
-* stores the student directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the versioned student directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object) for every version of the student directory.
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Piece` list in the `StudentDirectory`, which `Student` references. This allows `StudentDirectory` to only require one `Piece` object per unique piece, instead of each `Student` needing their own `Piece` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 
 ### Storage component
@@ -158,46 +151,46 @@ Classes used by multiple components are in the `keycontacts.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedStudentDirectory`. It extends `StudentDirectory` with an undo/redo history, stored internally as an `studentDirectoryStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedStudentDirectory#commit()` — Saves the current student directory state in its history.
+* `VersionedStudentDirectory#undo()` — Restores the previous student directory state from its history.
+* `VersionedStudentDirectory#redo()` — Restores a previously undone student directory state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitStudentDirectory()`, `Model#undoStudentDirectory()` and `Model#redoStudentDirectory()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application. The `VersionedStudentDirectory` will be initialized with the initial student directory state, and the `currentStatePointer` pointing to that single student directory state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the student directory. The `delete` command calls `Model#commitStudentDirectory()`, causing the modified state of the student directory after the `delete 5` command executes to be saved in the `studentDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted student directory state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command's `Command#shouldCommitModel` method returns true, so the `LogicManager` runs `Model#commitStudentDirectory()`, causing another modified student directory state to be saved into the `studentDirectoryStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, `LogicManager` will not call `Model#commitStudentDirectory()`, so the student directory state will not be saved into the `studentDirectoryStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoStudentDirectory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous student directory state, and restores the student directory to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial StudentDirectory state, then there are no previous StudentDirectory states to restore. The `undo` command uses `Model#canUndoStudentDirectory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -216,19 +209,19 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoStudentDirectory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the student directory to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `studentDirectoryStateList.size() - 1`, pointing to the latest student directory state, then there are no undone StudentDirectory states to restore. The `redo` command uses `Model#canRedoStudentDirectory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the student directory, such as `list`, have their `Command#shouldCommitModel` method returning false, so `LogicManager` will not call `Model#commitStudentDirectory()`. Thus, the `studentDirectoryStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which causes `LogicManager` to call `Model#commitStudentDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `studentDirectoryStateList`, all student directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -240,20 +233,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Current:** Saves the entire student directory.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -292,36 +279,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                   | So that I can…​                              |
-|----------|------------------|----------------------------------------------------------------|----------------------------------------------|
-| `* * *`  | user             | cancel a particular lesson session                             | respond to special circumstances effectively |
-| `* * *`  | user             | schedule a make-up lesson for students who missed              | manage lesson rescheduling efficiently       |
-| `* * *`  | user             | save a student’s lesson timing                                 | know when I will meet them                   |
-| `* * *`  | user             | save the data and retrieve them after restarting the app       | ensure my data is persistent                 |
-| `* * *`  | user             | view a list of all my students                                 | keep track of all my students                |
-| `* * *`  | user             | delete a student when they stop taking lessons                 | keep my records clean                        |
-| `* * *`  | new user         | view the list of commands                                      | know what commands I can run                 |
-| `* * *`  | user             | add a piano piece to a student                                 | track what piece they are working on         |
-| `* * *`  | user             | save a student’s address                                       | know where to travel for tutoring            |
-| `* * *`  | user             | see the grade level of a student                               | be more prepared for lessons                 |
-| `* * *`  | user             | save a person's contact                                        | contact them easily for tutoring             |
-| `* *`    | user             | modify the details of each record                              | change particulars when needed               |
-| `* *`    | user             | sort the record by student name, lesson day, contact, etc.     | find specific records easily                 |
-| `* *`    | user             | see students scheduled for a particular day                    | know my schedule for the day                 |
-| `* *`    | user             | search students based on name, day of lesson, or category      | locate a student efficiently                 |
-| `* *`    | user             | export my student data to a CSV file                           | back up my records or share them with others |
-| `*`      | user             | track the purchase and sale of learning materials              | manage inventory and ensure reimbursement    |
-| `*`      | user             | generate reports on each student’s progress                    | share them with parents or guardians         |
-| `*`      | user             | view a timetable for the week                                  | prepare my schedule                          |
-| `*`      | new user         | receive prompts/suggestions when I type a command wrongly      | get help using the system                    |
-| `*`      | experienced user | use shortcuts/aliases for commands                             | perform common tasks faster                  |
-| `*`      | user             | group my students together if they are in the same class       | view their information easier                |
-| `*`      | user             | track whether each student has paid for the month              | collect my fees on time                      |
-| `*`      | user             | keep track of how much each student should pay for lessons     | manage fees easier                           |
-| `*`      | user             | write down miscellaneous notes for each student                | recall them before each lesson               |
-| `*`      | user             | view a summary of my income for the month                      | track my earnings                            |
-| `*`      | user             | track attendance for each student                              | see how consistent they are with lessons     |
-| `*`      | user             | track the progress of each student on their assigned pieces    | monitor their improvement                    |
+| Priority | As a …​          | I want to …​                                                | So that I can…​                              |
+|----------|------------------|-------------------------------------------------------------|----------------------------------------------|
+| `* * *`  | user             | cancel a particular lesson session                          | respond to special circumstances effectively |
+| `* * *`  | user             | schedule a make-up lesson for students who missed           | manage lesson rescheduling efficiently       |
+| `* * *`  | user             | save a student’s lesson timing                              | know when I will meet them                   |
+| `* * *`  | user             | save the data and retrieve them after restarting the app    | ensure my data is persistent                 |
+| `* * *`  | user             | view a list of all my students                              | keep track of all my students                |
+| `* * *`  | user             | delete a student when they stop taking lessons              | keep my records clean                        |
+| `* * *`  | new user         | view the list of commands                                   | know what commands I can run                 |
+| `* * *`  | user             | add a piano piece to a student                              | track what piece they are working on         |
+| `* * *`  | user             | save a student’s address                                    | know where to travel for tutoring            |
+| `* * *`  | user             | see the grade level of a student                            | be more prepared for lessons                 |
+| `* * *`  | user             | save a person's contact                                     | contact them easily for tutoring             |
+| `* * *`  | user             | undo my last command                                        | revert the effects of a wrong command        |
+| `* * *`  | user             | revert the effects of an undo                               | revert the effects of a wrong undo           |
+| `* *`    | user             | modify the details of each record                           | change particulars when needed               |
+| `* *`    | user             | sort the record by student name, lesson day, contact, etc.  | find specific records easily                 |
+| `* *`    | user             | see students scheduled for a particular day                 | know my schedule for the day                 |
+| `* *`    | user             | search students based on name, day of lesson, or category   | locate a student efficiently                 |
+| `* *`    | user             | export my student data to a CSV file                        | back up my records or share them with others |
+| `*`      | user             | track the purchase and sale of learning materials           | manage inventory and ensure reimbursement    |
+| `*`      | user             | generate reports on each student’s progress                 | share them with parents or guardians         |
+| `*`      | user             | view a timetable for the week                               | prepare my schedule                          |
+| `*`      | new user         | receive prompts/suggestions when I type a command wrongly   | get help using the system                    |
+| `*`      | experienced user | use shortcuts/aliases for commands                          | perform common tasks faster                  |
+| `*`      | user             | group my students together if they are in the same class    | view their information easier                |
+| `*`      | user             | track whether each student has paid for the month           | collect my fees on time                      |
+| `*`      | user             | keep track of how much each student should pay for lessons  | manage fees easier                           |
+| `*`      | user             | write down miscellaneous notes for each student             | recall them before each lesson               |
+| `*`      | user             | view a summary of my income for the month                   | track my earnings                            |
+| `*`      | user             | track attendance for each student                           | see how consistent they are with lessons     |
+| `*`      | user             | track the progress of each student on their assigned pieces | monitor their improvement                    |
 
 ### Use cases
 

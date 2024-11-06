@@ -20,10 +20,15 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.undo()) {
+        if (!model.canUndoStudentDirectory()) {
             throw new CommandException(MESSAGE_LAST_VERSION);
         }
 
+        model.undoStudentDirectory();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+    @Override
+    public boolean shouldCommitModel() {
+        return false;
     }
 }

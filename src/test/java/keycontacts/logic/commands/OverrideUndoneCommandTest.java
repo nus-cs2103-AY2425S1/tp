@@ -23,23 +23,41 @@ public class OverrideUndoneCommandTest {
         Model expectedModelCarl = new ModelManager(new StudentDirectory(), new UserPrefs());
         expectedModelCarl.addStudent(CARL);
 
-        Command addAliceCommand = new AddCommand(ALICE);
-        addAliceCommand.execute(model);
-        Command addBensonCommand = new AddCommand(BENSON);
-        addBensonCommand.execute(model);
+        model.addStudent(ALICE);
+        model.commitStudentDirectory();
+
+        model.addStudent(BENSON);
+        model.commitStudentDirectory();
+
+        // State should look like this:
+        // [ ], [ALICE], [ALICE, BENSON]
+        //                      ^
 
         Command undoCommand = new UndoCommand();
         undoCommand.execute(model);
         undoCommand.execute(model);
 
+        // State should look like this:
+        // [ ], [ALICE], [ALICE, BENSON]
+        //  ^
+
         // Executing a command after undoing should clear the states
-        Command addCarlCommand = new AddCommand(CARL);
-        addCarlCommand.execute(model);
+        model.addStudent(CARL);
+        model.commitStudentDirectory();
+
+        // State should look like this:
+        // [ ], [CARL]
+        //  ^
 
         Command redoCommand = new RedoCommand();
 
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModelEmpty);
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModelCarl);
+
+        // State should look like this:
+        // [ ], [CARL]
+        //         ^
+
         assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_LAST_VERSION);
     }
 }

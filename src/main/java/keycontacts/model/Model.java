@@ -21,20 +21,28 @@ public interface Model {
 
     /**
      * Reverts the student directory to the state before the latest command that edits it
-     * @return true if succeeds
      */
-    boolean undo();
+    void undoStudentDirectory();
 
     /**
      * Reverts the latest undo command if no other command has modified the student directory
-     * @return true if succeeds
      */
-    boolean redo();
+    void redoStudentDirectory();
 
     /**
      * Commits the current state of the student directory
      */
-    void commit();
+    void commitStudentDirectory();
+
+    /**
+     * Returns true if there is a state to undo to
+     */
+    boolean canUndoStudentDirectory();
+
+    /**
+     * Returns true if there is a state to redo to
+     */
+    boolean canRedoStudentDirectory();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

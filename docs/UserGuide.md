@@ -244,6 +244,18 @@ Clears all entries from the student directory.
 
 Format: `clear`
 
+### Undoing the last command : `undo`
+
+Undoes the last command that modified the student directory.
+
+Format: `undo`
+
+### Undoing the last undo command: `redo`
+
+Reverts the effects of the undo command if it was the last command run.
+
+Format: `redo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -264,10 +276,6 @@ Student directory data is saved automatically as a JSON file `[JAR file location
 If your changes to the data file makes its format invalid, KeyContacts will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause KeyContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -303,4 +311,6 @@ Action     | Format, Examples
 **Find**   | `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD] [g/GROUP_KEYWORD]`<br> e.g. `find n/James gl/ABRSM`
 **Sort**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **Clear**  | `clear`
+**Undo**   | `undo`
+**Redo**   | `redo`
 **Exit**   | `exit`

@@ -70,10 +70,14 @@ public class AssignPiecesCommand extends Command {
         Student updatedStudent = studentToUpdate.withAddedPianoPieces(pianoPieces);
 
         model.setStudent(studentToUpdate, updatedStudent);
-        model.commit();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.format(pianoPieces), Messages.format(updatedStudent)));
+    }
+
+    @Override
+    public boolean shouldCommitModel() {
+        return true;
     }
 
     @Override

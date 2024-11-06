@@ -21,4 +21,8 @@ public class ListCommand extends Command {
         model.filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    @Override
+    public boolean shouldCommitModel() {
+        return false;
+    }
 }

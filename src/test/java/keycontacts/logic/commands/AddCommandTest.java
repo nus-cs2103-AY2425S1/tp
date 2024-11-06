@@ -93,18 +93,28 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public boolean undo() {
+        public void undoStudentDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean redo() {
+        public void redoStudentDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commit() {
+        public void commitStudentDirectory() {
             // Do nothing
+        }
+
+        @Override
+        public boolean canUndoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

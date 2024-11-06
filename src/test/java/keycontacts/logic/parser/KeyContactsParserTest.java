@@ -15,8 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import keycontacts.logic.commands.RedoCommand;
-import keycontacts.logic.commands.UndoCommand;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.index.Index;
@@ -31,8 +29,10 @@ import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
+import keycontacts.logic.commands.RedoCommand;
 import keycontacts.logic.commands.ScheduleCommand;
 import keycontacts.logic.commands.UnassignPiecesCommand;
+import keycontacts.logic.commands.UndoCommand;
 import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.Date;
@@ -155,14 +155,12 @@ public class KeyContactsParserTest {
 
     @Test
     public void parseCommand_undo() throws Exception {
-        UndoCommand command = (UndoCommand) parser.parseCommand(UndoCommand.COMMAND_WORD);
-        assertEquals(new UndoCommand(), command);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
     }
 
     @Test
     public void parseCommand_redo() throws Exception {
-        RedoCommand command = (RedoCommand) parser.parseCommand(RedoCommand.COMMAND_WORD);
-        assertEquals(new RedoCommand(), command);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
     }
 
     @Test

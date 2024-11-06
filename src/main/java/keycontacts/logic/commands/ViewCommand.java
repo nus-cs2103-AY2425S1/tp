@@ -35,6 +35,10 @@ public class ViewCommand extends Command {
     }
 
     @Override
+    public boolean shouldCommitModel() {
+        return false;
+    }
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

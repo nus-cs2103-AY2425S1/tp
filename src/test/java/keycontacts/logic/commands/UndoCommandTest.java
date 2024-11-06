@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import keycontacts.model.Model;
 import keycontacts.model.ModelManager;
+import keycontacts.model.StudentDirectory;
 import keycontacts.model.UserPrefs;
 
 public class UndoCommandTest {
@@ -15,12 +16,11 @@ public class UndoCommandTest {
     private final Model expectedModel = new ModelManager(getTypicalStudentDirectory(), new UserPrefs());
 
     @Test
-    public void execute_afterClearCommand_success() throws Exception {
-        Command clearCommand = new ClearCommand();
-        clearCommand.execute(model);
+    public void execute_afterClearCommand_success() {
+        model.setStudentDirectory(new StudentDirectory());
+        model.commitStudentDirectory();
 
         Command undoCommand = new UndoCommand();
-
         assertCommandSuccess(undoCommand, model, new CommandResult(UndoCommand.MESSAGE_SUCCESS), expectedModel);
     }
 

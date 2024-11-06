@@ -82,12 +82,15 @@ public class UnassignPiecesCommand extends Command {
         Student updatedStudent = studentToUpdate.withRemovedPianoPieces(piecesToRemove);
 
         model.setStudent(studentToUpdate, updatedStudent);
-        model.commit();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.format(piecesToRemove), Messages.format(updatedStudent)));
     }
 
+    @Override
+    public boolean shouldCommitModel() {
+        return true;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

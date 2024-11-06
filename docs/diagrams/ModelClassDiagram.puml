@@ -9,6 +9,7 @@ Class "<<interface>>\nReadOnlyStudentDirectory" as ReadOnlyStudentDirectory
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class StudentDirectory
+Class VersionedStudentDirectory
 Class ModelManager
 Class UserPrefs
 Class PianoPiece
@@ -34,11 +35,13 @@ StudentDirectory .up.|> ReadOnlyStudentDirectory
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyStudentDirectory
-ModelManager -left-> "1" StudentDirectory
+ModelManager -left-> "1" VersionedStudentDirectory
+VersionedStudentDirectory -left-|> StudentDirectory
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 StudentDirectory *--> "1" UniqueStudentList
+VersionedStudentDirectory *-left-> "1..*" StudentDirectory
 UniqueStudentList --> Student
 Student *--> Name
 Student *--> Phone

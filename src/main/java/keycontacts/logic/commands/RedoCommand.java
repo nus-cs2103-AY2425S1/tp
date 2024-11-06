@@ -20,10 +20,15 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.redo()) {
+        if (!model.canRedoStudentDirectory()) {
             throw new CommandException(MESSAGE_LAST_VERSION);
         }
 
+        model.redoStudentDirectory();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+    @Override
+    public boolean shouldCommitModel() {
+        return false;
     }
 }

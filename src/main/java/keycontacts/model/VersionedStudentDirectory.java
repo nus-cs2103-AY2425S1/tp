@@ -3,62 +3,68 @@ package keycontacts.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import keycontacts.model.exceptions.StateNotFoundException;
-import keycontacts.model.student.Student;
-
 /**
  * Stores various states of the StudentDirectory that can be navigated between
  */
 public class VersionedStudentDirectory extends StudentDirectory {
 
-    private final List<List<Student>> studentDirectoryStateList;
-    private int currentPointer = 0;
+    private final List<StudentDirectory> studentDirectoryStateList = new ArrayList<>();
+    private int currentStatePointer = -1;
 
     /**
      * Creates a VersionedStudentDirectory using the Students in the {@code toBeCopied}
      */
     public VersionedStudentDirectory(ReadOnlyStudentDirectory toBeCopied) {
         super(toBeCopied);
-
-        studentDirectoryStateList = new ArrayList<>();
-        studentDirectoryStateList.add(new ArrayList<>(super.getStudentList()));
+        commit();
     }
 
     /**
      * Commits the current state of the {@code StudentDirectory} to the state list
      */
     public void commit() {
-        for (int i = studentDirectoryStateList.size() - 1; i >= currentPointer + 1; i--) {
+        for (int i = studentDirectoryStateList.size() - 1; i >= currentStatePointer + 1; i--) {
             studentDirectoryStateList.remove(i);
         }
-        studentDirectoryStateList.add(new ArrayList<>(super.getStudentList()));
 
-        currentPointer = currentPointer + 1;
-        super.setStudents(studentDirectoryStateList.get(currentPointer));
+        studentDirectoryStateList.add(new StudentDirectory(this));
+
+        currentStatePointer = currentStatePointer + 1;
+        this.resetData(studentDirectoryStateList.get(currentStatePointer));
     }
 
     /**
      * Moves to the previous state
-     * @throws StateNotFoundException if it is already the earliest state
      */
-    public void undo() throws StateNotFoundException {
-        changeState(currentPointer - 1);
+    public void undo() {
+        changeState(currentStatePointer - 1);
     }
 
     /**
      * Moves to the next state
-     * @throws StateNotFoundException if it is already the latest state
      */
-    public void redo() throws StateNotFoundException {
-        changeState(currentPointer + 1);
+    public void redo() {
+        changeState(currentStatePointer + 1);
     }
 
-    private void changeState(int index) throws StateNotFoundException {
-        if (index < 0 || index >= studentDirectoryStateList.size()) {
-            throw new StateNotFoundException("Invalid state index");
-        }
+    /**
+     * Returns true if there is a successor state to redo to
+     */
+    public boolean canRedo() {
+        return currentStatePointer != studentDirectoryStateList.size() - 1;
+    }
 
-        currentPointer = index;
-        super.setStudents(studentDirectoryStateList.get(index));
+    /**
+     * Returns true if there is a predecessor state to undo to
+     */
+    public boolean canUndo() {
+        return currentStatePointer != 0;
+    }
+
+    private void changeState(int index) {
+        assert index >= 0 && index < studentDirectoryStateList.size() : "There is no state with that index";
+
+        currentStatePointer = index;
+        super.resetData(studentDirectoryStateList.get(index));
     }
 }

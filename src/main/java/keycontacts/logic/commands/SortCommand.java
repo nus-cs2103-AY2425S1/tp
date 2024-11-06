@@ -48,6 +48,10 @@ public class SortCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS + comparator.getSortDescription());
     }
 
+    @Override
+    public boolean shouldCommitModel() {
+        return false;
+    }
     public StudentComparator getComparator() {
         return comparator;
     }

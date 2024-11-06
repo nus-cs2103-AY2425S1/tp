@@ -42,8 +42,12 @@ public class DeleteCommand extends Command {
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudent(studentToDelete);
-        model.commit();
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
+    }
+
+    @Override
+    public boolean shouldCommitModel() {
+        return true;
     }
 
     @Override

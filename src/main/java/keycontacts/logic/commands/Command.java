@@ -17,4 +17,8 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    /**
+     * Returns true if the command should cause a commit in the model
+     */
+    public abstract boolean shouldCommitModel();
 }

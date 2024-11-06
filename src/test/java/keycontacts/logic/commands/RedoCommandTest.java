@@ -17,14 +17,13 @@ public class RedoCommandTest {
 
     @Test
     public void execute_afterUndoCommand_success() throws Exception {
-        Command clearCommand = new ClearCommand();
-        clearCommand.execute(model);
+        model.setStudentDirectory(new StudentDirectory());
+        model.commitStudentDirectory();
 
         Command undoCommand = new UndoCommand();
         undoCommand.execute(model);
 
         Command redoCommand = new RedoCommand();
-
         assertCommandSuccess(redoCommand, model, new CommandResult(RedoCommand.MESSAGE_SUCCESS), expectedModel);
     }
 
