@@ -29,6 +29,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
     public static final String MESSAGE_NO_CLIENT = "Event does not have a valid client.";
+    public static final String MESSAGE_NO_VENDOR = "Event does not have a valid vendor.";
     public static final String MESSAGE_CONTACT_NOT_CREATED = "Event contains contact(s) that have not been created.";
     public static final String MESSAGE_ASSOCIATION_MISMATCH = "Association between event and contact do not match.";
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
@@ -99,7 +100,7 @@ class JsonSerializableAddressBook {
                     .filter(Objects::nonNull)
                     .forEach(event::addClient);
 
-            boolean hasClients = jsonAdaptedEvent.getClientIds().stream().anyMatch(Objects::nonNull);//filter(Objects::nonNull).findAny().isPresent();
+            boolean hasClients = jsonAdaptedEvent.getClientIds().stream().anyMatch(Objects::nonNull);
             if (!hasClients) {
                 throw new IllegalValueException(MESSAGE_NO_CLIENT);
             }
@@ -109,6 +110,11 @@ class JsonSerializableAddressBook {
                     .map(contact -> (Vendor) contact)
                     .filter(Objects::nonNull)
                     .forEach(event::addVendor);
+
+            boolean hasVendors = jsonAdaptedEvent.getClientIds().stream().anyMatch(Objects::nonNull);
+            if (!hasVendors) {
+                throw new IllegalValueException(MESSAGE_NO_VENDOR);
+            }
 
             checkAssociation(eventIdsTable, event);
 
