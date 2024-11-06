@@ -90,8 +90,11 @@ public class AddLessonCommand extends LessonCommand {
 
     private String formatFailureMessages(List<String> failureMessages) {
         StringBuilder sb = new StringBuilder();
-        for (String message : failureMessages) {
-            sb.append(message).append("\n");
+        for (int i = 0; i < failureMessages.size(); i++) {
+            sb.append(failureMessages.get(i));
+            if (i < failureMessages.size() - 1) {
+                sb.append("\n");
+            }
         }
         return sb.toString();
     }
@@ -144,10 +147,11 @@ public class AddLessonCommand extends LessonCommand {
 
     private String formatClashMessage(Lesson lesson, Map<Person, ArrayList<Lesson>> clashingLessons) {
         StringBuilder sb = new StringBuilder();
-        sb.append(lesson.toString()).append(" - Clashes with: \n");
+        sb.append(lesson.toString()).append(" - Clashes with:\n");
         clashingLessons.forEach((person, lessons) -> {
             sb.append("•").append(person.getName()).append(": ");
             lessons.forEach(ls -> sb.append(ls.toString()).append(" "));
+            sb.append("\n");
         });
         return sb.toString();
     }

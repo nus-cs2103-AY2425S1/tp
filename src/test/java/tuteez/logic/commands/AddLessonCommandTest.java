@@ -16,6 +16,7 @@ import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static tuteez.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -201,12 +202,13 @@ public class AddLessonCommandTest {
                 .build();
 
         String expectedSuccessful = formatLessonList(Arrays.asList(new Lesson(VALID_LESSON_TUESDAY)));
-        String expectedFailures = formatClashingLessonList(VALID_NAME_BOB,
-                Arrays.asList(CLASHING_LESSON_MONDAY),
-                Arrays.asList(VALID_LESSON_MONDAY))
-                + formatClashingLessonList(VALID_NAME_AMY,
-                Arrays.asList(CLASHING_LESSON_WEDNESDAY),
-                Arrays.asList(VALID_LESSON_WEDNESDAY));
+
+        List<String> failureMessages = new ArrayList<>();
+        failureMessages.add(formatSingleClashMessage(CLASHING_LESSON_MONDAY, VALID_NAME_BOB, VALID_LESSON_MONDAY));
+        failureMessages.add(formatSingleClashMessage(CLASHING_LESSON_WEDNESDAY, VALID_NAME_AMY,
+                VALID_LESSON_WEDNESDAY));
+
+        String expectedFailures = formatFailureMessages(failureMessages);
 
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_PARTIAL_SUCCESS,
                 expectedSuccessful, expectedFailures);
@@ -215,20 +217,6 @@ public class AddLessonCommandTest {
         expectedModel.setPerson(targetPerson, updatedPerson);
 
         assertCommandSuccess(addLessonCommand, model, expectedMessage, expectedModel);
-    }
-
-    /**
-     * Helper method to format list of clashing lessons
-     */
-    private String formatClashingLessonList(String personName, List<String> clashingLessons,
-                                            List<String> existingLessons) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < clashingLessons.size(); i++) {
-            sb.append("[").append(clashingLessons.get(i).toUpperCase()).append("]")
-                    .append(" - Clashes with: \n").append("•").append(personName).append(": [")
-                    .append(existingLessons.get(i).toUpperCase()).append("] \n");
-        }
-        return sb.toString();
     }
 
     @Test
@@ -267,4 +255,43 @@ public class AddLessonCommandTest {
         }
         return sb.toString();
     }
+
+    private String formatClashingLessonList(String personName, List<String> clashingLessons,
+                                            List<String> existingLessons) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < clashingLessons.size(); i++) {
+            if (i > 0) {
+                sb.append("\n");
+            }
+            sb.append("[").append(clashingLessons.get(i).toUpperCase()).append("]")
+                    .append(" - Clashes with:")
+                    .append("\n")
+                    .append("•").append(personName).append(": [")
+                    .append(existingLessons.get(i).toUpperCase()).append("] ")
+                    .append("\n");
+        }
+        return sb.toString();
+    }
+
+    private String formatFailureMessages(List<String> failureMessages) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < failureMessages.size(); i++) {
+            sb.append(failureMessages.get(i));
+            if (i < failureMessages.size() - 1) {
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    private String formatSingleClashMessage(String clashingLesson, String personName, String existingLesson) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[").append(clashingLesson.toUpperCase()).append("]")
+                .append(" - Clashes with:\n")
+                .append("•").append(personName).append(": ")
+                .append("[").append(existingLesson.toUpperCase()).append("] ")
+                .append("\n");
+        return sb.toString();
+    }
+
 }
