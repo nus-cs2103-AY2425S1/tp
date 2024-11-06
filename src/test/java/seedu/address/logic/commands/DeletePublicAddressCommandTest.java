@@ -43,7 +43,7 @@ public class DeletePublicAddressCommandTest {
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 
         // Update actual models with the new address
-        Person personWithAddress = personToDelete.withUpdatedPublicAddress(publicAddressToAdd);
+        Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
         model.setPerson(personToDelete, personWithAddress);
 
         // Create and execute delete command
@@ -70,7 +70,7 @@ public class DeletePublicAddressCommandTest {
         String label = "default";
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 
-        Person personWithAddress = personToDelete.withUpdatedPublicAddress(publicAddressToAdd);
+        Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
         model.setPerson(personToDelete, personWithAddress);
 
         // Create and execute delete command
@@ -98,7 +98,7 @@ public class DeletePublicAddressCommandTest {
         String label = "default";
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 
-        Person personWithAddress = personToDelete.withUpdatedPublicAddress(publicAddressToAdd);
+        Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
         model.setPerson(personToDelete, personWithAddress);
 
         DeletePublicAddressCommand deletePublicAddressCommand =

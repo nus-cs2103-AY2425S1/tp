@@ -102,6 +102,17 @@ public class Person {
     }
 
     /**
+     * Returns a new {@code Person} object with the added public address.
+     *
+     * @param newPublicAddress The new public address to be added
+     * @return A new {@code Person} object with the added public address
+     */
+    public Person withAddedPublicAddress(PublicAddress newPublicAddress) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.add(newPublicAddress);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
      * Returns a new {@code Person} object with the updated public address.
      *
      * @param newPublicAddress The new public address to be replaced
