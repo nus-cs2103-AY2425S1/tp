@@ -678,12 +678,18 @@ testers are expected to do more *exploratory* testing.
       Expected: All contacts in StaffSync are sorted by name in ascending order.
 
    3. Test case: `sort date`<br>
-      Expected: Potential hires are filtered out. Employees are sorted by contract end date in ascending order.
+      Expected: Potential hires are placed at the bottom of the list. Employees are sorted by contract end date in ascending order.
 
-   4. Test case: `sort`<br>
+   4. Test case: `sort role desc`<br>
+      Expected: All contacts in StaffSync are sorted by role in descending order.
+
+   5. Test case: `sort dept asc`<br>
+      Expected: All contacts in StaffSync are sorted by department in ascending order.
+
+   6. Test case: `sort`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-   5. Test case: `sort 1`<br>
+   6. Test case: `sort 1`<br>
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
 
    6. Test case: `sort name 1`
@@ -694,10 +700,17 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List has been filtered using a `find` or `list` command. The list is not empty and not already in order.
 
    2. Test case: `sort name`<br>
-      Expected: The shown contacts are sorted by name in ascending order. contacts that were filtered out will not be shown.
+      Expected: The shown contacts are sorted by name in ascending order. Contacts that were filtered out will not be shown.
 
    3. Test case: `sort date`<br>
-      Expected: List will show all employees. Employees are sorted by contract end date in ascending order.
+      Expected: The shown employees are sorted by contract end date in ascending order. The shown potential hires will be at the bottom of the list.
+      Contacts that were filtered out will not be shown
+
+   4. Test case: `sort role desc`<br>
+      Expected: The shown contacts are sorted by role in descending order. Contacts that were filtered out will not be shown.
+
+   5. Test case: `sort dept asc`<br>
+      Expected: The shown contacts are sorted by department in ascending order. Contacts that were filtered out will not be shown. 
 
    4. Test case: `sort`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
