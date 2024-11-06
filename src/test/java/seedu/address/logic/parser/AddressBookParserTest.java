@@ -130,12 +130,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_loadArchive() throws Exception {
-        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD + " test.json") instanceof LoadArchiveCommand);
+        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD + " test.json")
+                instanceof LoadArchiveCommand);
     }
 
     @Test
     public void parseCommand_deleteArchive() throws Exception {
-        assertTrue(parser.parseCommand(DeleteArchiveCommand.COMMAND_WORD + " test.json") instanceof DeleteArchiveCommand);
+        assertTrue(parser.parseCommand(DeleteArchiveCommand.COMMAND_WORD + " test.json")
+                instanceof DeleteArchiveCommand);
     }
 
     @Test
@@ -151,8 +153,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find_doctor() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(
-                FindDoctorCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(FindDoctorCommand.COMMAND_WORD
+                + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindDoctorCommand(new DoctorNameContainsKeywordsPredicate(keywords)), command);
     }
 
