@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalEvents.TECH_CONFERENCE;
 import static seedu.address.testutil.TypicalEvents.TECH_CONFERENCE_EDITED;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.EDITED_ALICE;
@@ -16,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Attendee;
+import seedu.address.model.role.Role;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalEvents;
 import seedu.address.ui.Observer;
@@ -309,8 +312,12 @@ public class EventTest {
         }
     }
 
-    private class DummyObserver implements Observer {
+    public class DummyObserver implements Observer {
         public void update() {
+
+        }
+
+        public void update(Person person) {
 
         }
     }
@@ -333,5 +340,13 @@ public class EventTest {
         Event event = TypicalEvents.getTypicalEvents().get(0);
         event.editPerson(ALICE, EDITED_ALICE);
         assertEquals(event, TECH_CONFERENCE_EDITED);
+    }
+
+    @Test
+    public void testMakeRoles() {
+        HashSet<Role> roles = TECH_CONFERENCE.makeRoles(ALICE);
+        HashSet<Role> expectedRoles = new HashSet<>();
+        expectedRoles.add(new Attendee());
+        assertEquals(roles, expectedRoles);
     }
 }

@@ -401,4 +401,30 @@ public class Event {
         this.vendors.clear();
         this.sponsors.clear();
     }
+
+    /**
+     * Determines the roles a given person has in this event.
+     * Checks if the specified person is contained within the attendees, volunteers,
+     * vendors, and sponsors sets, and adds the corresponding role to a HashSet.
+     *
+     * @param person the person whose roles in the event are being determined
+     * @return a HashSet of {@code Role} objects that the specified person holds in this event
+     *         (e.g., Attendee, Volunteer, Vendor, Sponsor)
+     */
+    public HashSet<Role> makeRoles(Person person) {
+        HashSet<Role> roles = new HashSet<>();
+        if (this.attendees.contains(person)) {
+            roles.add(new Attendee());
+        }
+        if (this.volunteers.contains(person)) {
+            roles.add(new Volunteer());
+        }
+        if (this.vendors.contains(person)) {
+            roles.add(new Vendor());
+        }
+        if (this.sponsors.contains(person)) {
+            roles.add(new Sponsor());
+        }
+        return roles;
+    }
 }

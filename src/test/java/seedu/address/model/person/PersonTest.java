@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.model.role.exceptions.InvalidRoleException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.Observer;
 
 public class PersonTest {
     @Test
@@ -220,4 +221,20 @@ public class PersonTest {
         assertFalse(BOB.isSameTelegram(editedBob));
     }
 
+    private class DummyObserver implements Observer {
+        public void update() {
+
+        }
+
+        public void update(Person person) {
+
+        }
+    }
+    @Test
+    public void testAddObserver() {
+        Observer dummyObserver = new PersonTest.DummyObserver();
+        Person person = ALICE;
+        person.addObserver(dummyObserver);
+        assertEquals(person.getObserver(), dummyObserver);
+    }
 }

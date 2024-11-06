@@ -2,8 +2,10 @@ package seedu.address.logic.commands.event.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -13,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -50,7 +53,23 @@ public class FindEventCommand extends Command {
 
         model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(eventToView));
 
+        updateContactsUiWithEventSpecificRoles(model, eventToView);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, eventToView.getName()));
+    }
+
+    private static void updateContactsUiWithEventSpecificRoles(Model model, Event eventToView) {
+        ObservableList<Person> persons = model.getFilteredPersonList();
+        ArrayList<Person> tempListOfPersons = new ArrayList<>();
+        for (Person person : persons) {
+            Person personWithEventSpecificRoles = new Person(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getAddress(), person.getTelegramUsername(), eventToView.makeRoles(person));
+            personWithEventSpecificRoles.addObserver(person.getObserver());
+            tempListOfPersons.add(personWithEventSpecificRoles);
+        }
+        for (Person person : tempListOfPersons) {
+            person.showContactWithEventSpecificRoles();
+        }
     }
 
     @Override

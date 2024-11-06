@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.role.Role;
+import seedu.address.ui.Observer;
 
 
 /**
@@ -29,6 +30,8 @@ public class Person implements Comparable<Person> {
     private final TelegramUsername telegramUsername;
     private final Set<Role> roles = new HashSet<>();
     private UUID uniqueId;
+
+    private Observer observer;
 
     /**
      * Every field must be present and not null
@@ -204,5 +207,36 @@ public class Person implements Comparable<Person> {
     @Override
     public int compareTo(Person other) {
         return this.getName().compareTo(other.getName());
+    }
+
+    /**
+     * Adds an observer to this object. The observer will be notified of any changes
+     * through the observer pattern when specific events occur.
+     *
+     * @param observer the {@code Observer} instance to be added
+     */
+    public void addObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    /**
+     * Retrieves the observer currently associated with this object.
+     *
+     * @return the current {@code Observer} instance observing this object, or {@code null}
+     *         if no observer has been added
+     */
+    public Observer getObserver() {
+        return this.observer;
+    }
+
+    /**
+     * Notifies the observer of any changes or updates that are specific to event-specific
+     * roles for a contact. This method checks if an observer exists and, if so, calls
+     * its {@code update} method, passing this instance as a parameter.
+     */
+    public void showContactWithEventSpecificRoles() {
+        if (this.observer != null) {
+            this.observer.update(this);
+        }
     }
 }
