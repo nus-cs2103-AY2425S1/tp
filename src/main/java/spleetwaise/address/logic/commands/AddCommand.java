@@ -13,7 +13,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.ToStringBuilder;
 
 /**
@@ -55,7 +55,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

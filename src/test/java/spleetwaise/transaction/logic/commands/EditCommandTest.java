@@ -10,7 +10,7 @@ import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.logic.commands.EditCommand.EditTransactionDescriptor;
 import spleetwaise.transaction.model.TransactionBookModel;
@@ -29,7 +29,7 @@ public class EditCommandTest {
 
     @BeforeEach
     void setUp() {
-        CommonModel.initialise(abModel, tbModel);
+        CommonModelManager.initialise(abModel, tbModel);
     }
 
     @Test

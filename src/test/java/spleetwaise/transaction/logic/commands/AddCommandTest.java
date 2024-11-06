@@ -19,7 +19,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.testutil.Assert;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -42,7 +42,7 @@ public class AddCommandTest {
 
     @BeforeEach
     void setup() {
-        CommonModel.initialise(
+        CommonModelManager.initialise(
                 new AddressBookModelManager(TypicalPersons.getTypicalAddressBook()),
                 new TransactionBookModelManager()
         );
@@ -69,7 +69,7 @@ public class AddCommandTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, expectedString),
                 cmdRes.getFeedbackToUser()
         );
-        assertTrue(CommonModel.getInstance().hasTransaction(testTxn));
+        assertTrue(CommonModelManager.getInstance().hasTransaction(testTxn));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateTransaction_exceptionThrown() {
-        CommonModel.getInstance().addTransaction(testTxn);
+        CommonModelManager.getInstance().addTransaction(testTxn);
 
         AddCommand cmd = new AddCommand(testTxn);
         Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TXN, cmd::execute);

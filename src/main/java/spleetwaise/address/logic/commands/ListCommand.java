@@ -4,7 +4,7 @@ import static spleetwaise.address.model.AddressBookModel.PREDICATE_SHOW_ALL_PERS
 
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 
 /**
  * Lists all persons in the address book to the user.
@@ -18,7 +18,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);

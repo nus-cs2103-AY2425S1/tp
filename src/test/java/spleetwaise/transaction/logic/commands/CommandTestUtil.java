@@ -10,7 +10,7 @@ import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.testutil.Assert;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
@@ -31,7 +31,7 @@ public class CommandTestUtil {
             TransactionBookModel expectedModel
     ) {
         try {
-            CommonModel.initialise(null, actualModel);
+            CommonModelManager.initialise(null, actualModel);
             CommandResult result = command.execute();
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);

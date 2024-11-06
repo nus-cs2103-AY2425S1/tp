@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.commons.core.index.Index;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
@@ -18,7 +18,7 @@ import spleetwaise.transaction.testutil.TypicalIndexes;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for {@code UnmarkCommand}.
+ * Contains integration tests (interaction with the CommonModel) and unit tests for {@code UnmarkCommand}.
  */
 public class UnmarkCommandTest {
     private final TransactionBookModel transactionBookModel = new TransactionBookModelManager(
@@ -27,7 +27,7 @@ public class UnmarkCommandTest {
 
     @BeforeEach
     void setup() {
-        CommonModel.initialise(null, transactionBookModel);
+        CommonModelManager.initialise(null, transactionBookModel);
     }
 
     @Test

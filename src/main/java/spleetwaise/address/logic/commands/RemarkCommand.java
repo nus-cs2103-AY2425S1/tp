@@ -11,7 +11,7 @@ import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -43,7 +43,7 @@ public class RemarkCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         Person personToEdit = getPersonByFilteredPersonListIndex(model, index);
 

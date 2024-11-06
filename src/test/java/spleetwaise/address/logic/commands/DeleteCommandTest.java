@@ -17,7 +17,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -27,7 +27,7 @@ import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
+ * Contains integration tests (interaction with the CommonModel) and unit tests for {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
 
@@ -37,7 +37,7 @@ public class DeleteCommandTest {
 
     @BeforeEach
     void setup() {
-        CommonModel.initialise(addressBookModel, transactionBookModel);
+        CommonModelManager.initialise(addressBookModel, transactionBookModel);
     }
 
     @Test

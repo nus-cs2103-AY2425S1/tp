@@ -15,10 +15,10 @@ import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the CommonModel) for {@code FindCommand}.
  */
 public class FindCommandTest {
 
@@ -29,7 +29,7 @@ public class FindCommandTest {
 
     @BeforeEach
     void setUp() {
-        CommonModel.initialise(model, null);
+        CommonModelManager.initialise(model, null);
     }
 
     @Test

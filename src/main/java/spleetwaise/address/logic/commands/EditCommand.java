@@ -28,7 +28,7 @@ import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.CollectionUtil;
 import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -97,7 +97,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         Person personToEdit = getPersonByFilteredPersonListIndex(model, index);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
@@ -115,7 +115,7 @@ public class EditCommand extends Command {
     }
 
     private void updatePersonsInTransactions(
-            CommonModel model, Person oldPerson,
+            CommonModelManager model, Person oldPerson,
             Person updatedPerson
     ) {
         requireNonNull(model);

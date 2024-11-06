@@ -20,7 +20,7 @@ import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -48,7 +48,7 @@ public class AddCommandParserTest {
     @BeforeAll
     public static void setUp() {
         abModel.addPerson(testPerson);
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
     }
 
     @Test

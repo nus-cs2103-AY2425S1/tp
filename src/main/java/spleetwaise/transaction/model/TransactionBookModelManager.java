@@ -31,7 +31,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     public TransactionBookModelManager(TransactionBook transactionBook) {
         requireNonNull(transactionBook);
 
-        logger.fine("Initializing Transaction Model...");
+        logger.fine("Initializing Transaction CommonModel...");
 
         this.transactionBook = new TransactionBook(transactionBook);
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
@@ -43,7 +43,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     public TransactionBookModelManager(ReadOnlyTransactionBook transactionBook) {
         requireNonNull(transactionBook);
 
-        logger.fine("Initializing Transaction Model...");
+        logger.fine("Initializing Transaction CommonModel...");
 
         this.transactionBook = new TransactionBook(transactionBook);
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());

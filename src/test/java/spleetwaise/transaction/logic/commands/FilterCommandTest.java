@@ -19,7 +19,7 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.model.FilterCommandPredicate;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
@@ -54,7 +54,7 @@ public class FilterCommandTest {
     public static void setUp() {
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
         txnModel.setTransactionBook(TypicalTransactions.getTypicalTransactionBook());
-        CommonModel.initialise(abModel, txnModel);
+        CommonModelManager.initialise(abModel, txnModel);
     }
 
     @BeforeEach

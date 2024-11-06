@@ -26,7 +26,7 @@ import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.storage.JsonUserPrefsStorage;
 import spleetwaise.commons.storage.StorageManager;
 import spleetwaise.commons.testutil.Assert;
@@ -55,7 +55,7 @@ public class LogicManagerTest {
         JsonTransactionBookStorage transactionBookStorage =
                 new JsonTransactionBookStorage(temporaryFolder.resolve("transactionBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
-        CommonModel.initialise(addressBookModel, transactionModel);
+        CommonModelManager.initialise(addressBookModel, transactionModel);
         logic = new LogicManager(storage);
     }
 
@@ -66,19 +66,19 @@ public class LogicManagerTest {
 
     @Test
     public void getAddressBookFilePath() {
-        assertEquals(CommonModel.getInstance().getAddressBookFilePath(), logic.getAddressBookFilePath());
+        assertEquals(CommonModelManager.getInstance().getAddressBookFilePath(), logic.getAddressBookFilePath());
     }
 
     @Test
     public void getGuiSettings() {
-        assertEquals(CommonModel.getInstance().getGuiSettings(), logic.getGuiSettings());
+        assertEquals(CommonModelManager.getInstance().getGuiSettings(), logic.getGuiSettings());
     }
 
     @Test
     public void setGuiSettings() {
         GuiSettings settings = new GuiSettings();
         logic.setGuiSettings(settings);
-        assertEquals(CommonModel.getInstance().getGuiSettings(), settings);
+        assertEquals(CommonModelManager.getInstance().getGuiSettings(), settings);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class LogicManagerTest {
         String listCommand = ListCommand.COMMAND_WORD;
 
         addressBookModel.addPerson(TypicalPersons.ALICE);
-        CommonModel.initialise(addressBookModel, transactionModel);
+        CommonModelManager.initialise(addressBookModel, transactionModel);
 
         // TODO: add a TransactionUtil class to handle generation of commands and expected messages
         String addTxnCommand = "addTxn 1 amt/12.3 desc/Test date/01012024";
@@ -242,7 +242,7 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
-        CommonModel.initialise(addressBookModel, transactionModel);
+        CommonModelManager.initialise(addressBookModel, transactionModel);
         logic = new LogicManager(storage);
 
         // Triggers the saveAddressBook method by executing an add command

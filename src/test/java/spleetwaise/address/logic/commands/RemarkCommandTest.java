@@ -23,11 +23,11 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.commons.core.index.Index;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.IdUtil;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
+ * Contains integration tests (interaction with the CommonModel) and unit tests for RemarkCommand.
  */
 public class RemarkCommandTest {
 
@@ -37,7 +37,7 @@ public class RemarkCommandTest {
 
     @BeforeEach
     public void setUp() {
-        CommonModel.initialise(model, null);
+        CommonModelManager.initialise(model, null);
     }
 
     @Test

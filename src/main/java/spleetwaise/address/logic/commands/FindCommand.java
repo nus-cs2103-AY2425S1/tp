@@ -4,7 +4,7 @@ import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.ToStringBuilder;
 
 /**
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
