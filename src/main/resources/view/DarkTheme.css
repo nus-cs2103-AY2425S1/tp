@@ -11,9 +11,9 @@
     -status-unsubmitted: #d55050;
 }
 
-.background { /*?*/
+.background {
     -fx-background-color: derive(-blue-dark, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #383838;
 }
 
 .label {
@@ -52,7 +52,7 @@
     -fx-max-height: 0;
 }
 
-.table-view { /* ?*/
+.table-view {
     -fx-base: -blue-dark;
     -fx-control-inner-background: -blue-dark;
     -fx-background-color: -blue-dark;
@@ -89,12 +89,12 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:horizontal .split-pane-divider { /*middle bar btwn 2 planes*/
+.split-pane:horizontal .split-pane-divider {
     -fx-background-color: derive(-white-dark, 20%);
     -fx-border-color: transparent;
 }
 
-.split-pane { /*border arnd list and details panel*/
+.split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
     -fx-background-color: derive(-white-dark, 1%);
@@ -110,7 +110,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: derive(-white-blue,10%);
+    -fx-background-color: derive(-white-dark,30%);
 }
 
 .list-cell:filled:even {
@@ -160,7 +160,7 @@
 
 .details_field_headers {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 15px;
+    -fx-font-size: 20px;
     -fx-text-fill: -text-dark;
 }
 
@@ -168,37 +168,38 @@
     -fx-background-color: -white-light;
     -fx-border-color: derive(-white-dark, 10%);
     -fx-border-top-width: 1px;
+    -fx-alignment: top-left;
 }
 
 .details-pane .viewport {
     -fx-background-color: -white-light;
 }
 
-.stack-pane { /*enter command bar*/
+.stack-pane {
      -fx-background-color: derive(-blue-dark, 20%);
 }
 
-.pane-with-border { /*border arnd command bar and feedback box*/
+.pane-with-border {
      -fx-background-color: derive(-blue-dark, 20%);
      -fx-border-color: derive(-blue-dark, 10%);
      -fx-border-top-width: 1px;
 }
 
-.results-pane { /*border arnd command bar and feedback box*/
+.results-pane {
      -fx-background-color: derive(-blue-dark, 20%);
      -fx-border-color: derive(-white-dark, 10%);
      -fx-border-top-width: 1px;
 }
 
-.status-bar { /*last bar addressbook.json*/
+.status-bar {
     -fx-background-color: derive(-blue-dark, 30%);
 }
 
-.result-display { /*bg color=border arnd feedback box*/
+.result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white; /*feedback text*/
+    -fx-text-fill: white;
 }
 
 .result-display .label {
@@ -222,17 +223,17 @@
     -fx-text-fill: white;
 }
 
-.grid-pane { /*?*/
+.grid-pane {
     -fx-background-color: derive(-blue-dark, 30%);
     -fx-border-color: derive(-white-dark, 30%);
     -fx-border-width: 1px;
 }
 
-.grid-pane .stack-pane { /*?*/
+.grid-pane .stack-pane {
     -fx-background-color: derive(-blue-dark, 30%);
 }
 
-.context-menu { /* file and help popup*/
+.context-menu {
     -fx-background-color: derive(-blue-dark, 50%);
 }
 
@@ -240,7 +241,7 @@
     -fx-text-fill: white;
 }
 
-.menu-bar { /*file, help label*/
+.menu-bar {
     -fx-background-color: derive(-blue-dark, 20%);
 }
 
@@ -304,7 +305,7 @@
     -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
-.dialog-pane { /*?*/
+.dialog-pane {
     -fx-background-color: -blue-dark;
 }
 
@@ -380,7 +381,7 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content { /*1st is ?, 2nd is feedback box*/
+#resultDisplay .content {
     -fx-background-color: transparent, transparent, transparent, -blue-dark;
     -fx-background-radius: 0;
 }

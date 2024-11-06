@@ -23,7 +23,7 @@
                     <padding>
                         <Insets bottom="5" left="15" right="5" top="5" />
                     </padding>
-                    <HBox alignment="CENTER_LEFT" spacing="0.5">
+                    <HBox alignment="TOP_LEFT" spacing="0.5">
                         <Label fx:id="id" styleClass="details_big_label">
                             <minWidth>
                                 <Region fx:constant="USE_PREF_SIZE" />
@@ -45,7 +45,7 @@
                         </padding>
                     </FlowPane>
                     <HBox alignment="CENTER_LEFT">
-                        <VBox minWidth="70" spacing="10">
+                        <VBox minWidth="90" spacing="10">
                             <padding>
                                 <Insets left="8" />
                             </padding>
@@ -57,7 +57,7 @@
                     </HBox>
 
                     <HBox alignment="CENTER_LEFT">
-                        <VBox minWidth="70" spacing="10">
+                        <VBox minWidth="90" spacing="10">
                             <padding>
                                 <Insets left="8" />
                             </padding>
@@ -69,7 +69,7 @@
                     </HBox>
 
                     <HBox alignment="CENTER_LEFT">
-                        <VBox minWidth="70" spacing="10">
+                        <VBox minWidth="90" spacing="10">
                             <padding>
                                 <Insets left="8" />
                             </padding>
