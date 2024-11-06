@@ -139,6 +139,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [dt/
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
+</div>
+
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -159,6 +163,10 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use the `list` or `find` command to determine the `INDEX` of the person you want to delete. 
+</div>
+
 Examples:
 
 * `list` followed by `delete 2` deletes the 2nd person in PROperty.
@@ -174,6 +182,10 @@ Shows a list of all persons in the PROperty.
 
 Format: `list`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `list` after using commands which edit the data to see the updates. 
+</div>
+
 Visual example of correct output:
 
 ![ListCommandShowcase.png](images/user-guide-images/ListCommandShowcase.png)
@@ -183,6 +195,10 @@ Visual example of correct output:
 Sorts the list of all persons in the address book by name in alphabetical order.
 
 Format: `sort`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Sorting is helpful after adding or editing many contacts so that your data remains neat. 
+</div>
 
 Visual example of correct output:
 
@@ -198,6 +214,10 @@ Format: `show INDEX`
 - The `INDEX` refers to the index number shown in the displayed person list.
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `show` to view a person in-depth. 
+</div>
+
 Examples:
 
 - `show 2` shows the name, contact information, tags, and property listings of the second person in the PROperty.
@@ -211,6 +231,10 @@ Visual example of correct output:
 Shows commands in a help menu for quick reference during use of PROperty.
 
 Format: `help`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `help` if you forget the command format. 
+</div>
 
 Visual example of correct output:
 
@@ -235,6 +259,10 @@ the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
   * Format: `find s/KEYWORD [s/MORE_KEYWORDS]`
   * Only individuals who match the keyword(s) one-to-one will be returned. e.g. `find s/Hans Bo` will not match `Bo Hans`. `find s/Hans Bo` will only match `Hans Bo`.
   * Especially useful if there are multiple people with the same name in PROperty and you require a more specific search.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `find s/KEYWORD` if you have contacts with very similar names. 
+</div>
 
 Examples:
 
@@ -262,6 +290,10 @@ Format: `findtag TAG [MORE_TAGS]`
 * Persons with at least one matching tag will be returned (i.e., an `OR` search). 
 * List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Tags make it easy for you to find your target audience. 
+</div>
+
 Examples:
 
 * `findtag HDB` returns persons tagged with `HDB`.
@@ -277,6 +309,10 @@ Clears all entries from the PROperty.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`clear` cannot be undone! 
+</div>
+
 Visual example of correct output:
 
 ![ClearCommandShowcase.png](images/user-guide-images/ClearCommandShowcase.png)
@@ -291,6 +327,10 @@ Format: `remark INDEX r/[REMARKS]`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **Note:** `[REMARKS]` will **delete the remark if left blank**
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Remarks are helpful to add details about a contact in a non-fixated format.
+</div>
 
 Examples:
 
@@ -316,6 +356,10 @@ Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `show` command to see the listings you have added.
+</div>
+
 Examples:
 
 - `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
@@ -335,6 +379,10 @@ Format: `listing delete INDEX LISTING_INDEX`
 * The `LISTING_INDEX` refers to the index number shown in the property listing displayed by the `show` command
 * The `INDEX`/`LISTING_INDEX` **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Use `show` command to see the updated listings.
+</div>
+
 Examples:
 
 - `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
@@ -352,6 +400,10 @@ Format: `export`
 * Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
 * If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
 * By default, the exported CSV file at `[JAR file location]/data/property.csv`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`export` is useful if you want to view your contacts in Excel.
+</div>
 
 Visual example of correct output:
 
