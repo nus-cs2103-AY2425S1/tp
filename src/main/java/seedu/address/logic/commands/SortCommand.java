@@ -16,7 +16,10 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts all persons in the address book according to the given parameter.\n"
+            + ": Sorts all persons in the address book according to the given parameter. "
+            + "Only one parameter can be used.\n"
+            + "Parameters: "
+            + "[name] [address] [priority] [income]\n"
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by %s";
