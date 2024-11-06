@@ -32,7 +32,7 @@ public class SearchCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " n/alice\n" //show single search
             + "Example 2: " + COMMAND_WORD + " g/blood drive\n"
             + "Example 3: " + COMMAND_WORD + " n/alice t/friend p/91234567 r/volunteer\n" // show that can stack search
-            + "Example 4: " + COMMAND_WORD + " r/volunteer t/friend p/91234567 n/alice"; // show that order does not matter
+            + "Example 4: " + COMMAND_WORD + " r/volunteer t/friend p/91234567 n/alice"; // show order does not matter
 
     public static final String MESSAGE_NO_FOUND_GROUP = "There is no such group!";
 
