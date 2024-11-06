@@ -365,7 +365,7 @@ Student CSV format:
 Name,Phone,Email,Courses
 John Doe,12345678,john@example.com,CS2103T;CS2101
 
-Consultation CSV format:  
+Consultation CSV format:
 Date,Time,Students
 2024-10-20,14:00,John Doe;Jane Doe
 ```
