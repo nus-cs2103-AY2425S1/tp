@@ -23,7 +23,7 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_PARAM + "name";
 
-    public static final String MESSAGE_SUCCESS = "Sorted by: %1$s";
+    public static final String MESSAGE_SUCCESS = "Sorted by: %1$s in ascending order";
 
     private SortParam sortParam;
 

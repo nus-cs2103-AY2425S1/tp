@@ -224,9 +224,10 @@ Sorts the list of students based on a specified field.
 
 Format: `sort s/FIELD`
 
-* `FIELD` can be either `name`, `subject` or `yearGroup`.
+* `FIELD` can be either `name`, `subject`, `studentID` or `yearGroup`.
 * Sorting by name will sort students in lexicographical ascending order of their names.
 * Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
+* Sorting by studentID will sort students based in ascending order based on their studentID.
 * Sorting by yearGroup will sort students in ascending order based on their year group.
 
 Examples:
