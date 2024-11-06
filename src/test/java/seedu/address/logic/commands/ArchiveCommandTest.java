@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -106,6 +109,33 @@ public class ArchiveCommandTest {
                 new ArchivePersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(archiveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+
+        // same values -> returns true
+        ArchivePersonDescriptor copyDescriptor = new ArchivePersonDescriptor();
+        final ArchiveCommand standardCommand = new ArchiveCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        ArchiveCommand commandWithSameValues = new ArchiveCommand(INDEX_FIRST_PERSON, copyDescriptor);
+
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new ArchiveCommand(INDEX_SECOND_PERSON, copyDescriptor)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new ArchiveCommand(INDEX_FIRST_PERSON,
+                new ArchivePersonDescriptorBuilder().withName(VALID_NAME_BOB).build())));
     }
 
     @Test
