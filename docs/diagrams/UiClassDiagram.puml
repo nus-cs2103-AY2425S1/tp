@@ -45,9 +45,9 @@ EventListPanel -down-> "*" EventCard
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
+EventListPanel --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
-EventListPanel --|> UiPart
 PersonCard --|> UiPart
 EventCard --|> UiPart
 StatusBarFooter --|> UiPart

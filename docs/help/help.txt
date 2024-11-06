@@ -14,6 +14,21 @@ examples:
 4. add ... r/sponsor - <description>
 5. add ... r/volunteer - <volunteerRole>
 
+edit - Update the information in an entry of Person, via its ID.
+usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
+
+delete - Delete a Person entry with the given ID.
+usage: delete <id>
+
+addevent - Add an Event to the list. It has a name, a sport, a venue and some participants tied to it.
+usage: addevent n/<name> sp/<sport> v/<venue> p/<participants>
+
+editevent - Update the information in an Event entry, via its ID.
+usage: editevent <id> n/<name> sp/<sport> v/<venue> p/<participants>
+
+deleteevent - Delete an Event entry with the given ID.
+usage: deleteevent <id>
+
 clear - Delete all entries in the list. But be careful, the deleted entries are gone forever.
 usage: clear
 
@@ -26,11 +41,7 @@ usage: filter <keyword>
 list - List all entries registered to EventfulNUS.
 usage: list
 
-edit - Update the information in an entry.
-usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
 
-delete - Delete an entry with the given ID.
-usage: delete <id>
 
 exit - Exit the program.
 usage: exit

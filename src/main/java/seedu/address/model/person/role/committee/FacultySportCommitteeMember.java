@@ -1,12 +1,14 @@
 package seedu.address.model.person.role.committee;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.model.person.role.Faculty;
 
 /**
  * Represents a Faculty Sports Committee Member role in the address book.
  */
 public class FacultySportCommitteeMember extends CommitteeMember {
-    private Faculty faculty;
+    private final Faculty faculty;
 
     /**
      * Creates a Faculty Sports Committee Member object with the given {@link Faculty}.
@@ -16,6 +18,7 @@ public class FacultySportCommitteeMember extends CommitteeMember {
      */
     public FacultySportCommitteeMember(Faculty faculty, Position position) {
         super(Branch.SPORTS, position);
+        requireAllNonNull(faculty, position);
         this.faculty = faculty;
         setRoleName(getRoleName() + " - " + faculty);
     }

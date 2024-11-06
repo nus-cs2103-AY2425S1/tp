@@ -4,9 +4,6 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "events": [{
-      "name": "IFG"
-    }],
     "roles" : [
       {
         "name": "Athlete - COM - Volleyball Women, Floorball Women"
@@ -15,9 +12,6 @@
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "events": [{
-      "name": "SUNIG"
-    }],
     "roles" : [
       {
         "name": "Volunteer - Emcee"
@@ -29,17 +23,13 @@
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "events": [{
-      "name": "AUG"
-    }],
-    "roles" : [ ]
+    "roles" : [ {
+      "name": "Referee - MED - Tchoukball, Squash"
+    } ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "events": [{
-      "name": "IVP"
-    }],
     "roles" : [
       {
         "name": "Sponsor - OATSIDE"
@@ -48,17 +38,14 @@
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "events": [{
-      "name": "IFG"
-    }],
-    "roles" : [ ]
+    "roles" : [
+      {
+        "name": "Committee - Marketing - Project Director"
+      } ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "events": [{
-      "name": "SUNIG"
-    }],
     "roles" : [
       {
         "name": "Committee - Publicity - Project Director"
@@ -67,21 +54,104 @@
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "events": [{
-      "name": "IVP"
-    }],
     "roles" : [
       {
         "name": "Committee - Sports - Vice Sports Director - BIZ"
       } ]
   } ],
-  "events": [ {
-    "name": "IFG"
-  }, {
-    "name": "AUG"
-  }, {
-    "name": "SUNIG"
-  }, {
-    "name": "IVP"
-  } ]
+  "events": [
+    {
+      "name": "IFG",
+      "sport": "Chess",
+      "venue": "Stadium",
+      "persons": [
+        {
+          "name" : "Alice Pauline",
+          "phone" : "94351253",
+          "email" : "alice@example.com",
+          "roles" : [
+            {
+              "name": "Athlete - COM - Volleyball Women, Floorball Women"
+            } ]
+        },
+        {
+          "name" : "Elle Meyer",
+          "phone" : "94822224",
+          "email" : "werner@example.com",
+          "roles" : [ {
+            "name": "Committee - Marketing - Project Director"
+          } ]
+        }
+      ]
+    },
+    {
+      "name": "AUG",
+      "sport": "Basketball Women",
+      "venue": "Arena",
+      "persons": [
+        {
+          "name" : "Carl Kurz",
+          "phone" : "95352563",
+          "email" : "heinz@example.com",
+          "roles" : [
+            {
+              "name": "Referee - MED - Tchoukball, Squash"
+            } ]
+        }
+      ]
+    },
+    {
+      "name": "SUNIG",
+      "sport": "Swimming Men",
+      "venue": "Pool",
+      "persons": [
+        {
+          "name" : "Benson Meier",
+          "phone" : "98765432",
+          "email" : "johnd@example.com",
+          "roles" : [
+            {
+              "name": "Volunteer - Emcee"
+            },
+            {
+              "name": "Athlete - FASS - Swimming Men"
+            } ]
+        },
+        {
+          "name" : "Fiona Kunz",
+          "phone" : "94822427",
+          "email" : "lydia@example.com",
+          "roles" : [
+            {
+              "name": "Committee - Publicity - Project Director"
+            } ]
+        }
+      ]
+    },
+    {
+      "name": "IVP",
+      "sport": "Chess",
+      "venue": "Court",
+      "persons": [
+        {
+          "name" : "Daniel Meier",
+          "phone" : "87652533",
+          "email" : "cornelia@example.com",
+          "roles" : [
+            {
+              "name": "Sponsor - OATSIDE"
+            } ]
+        },
+        {
+          "name" : "George Best",
+          "phone" : "94822442",
+          "email" : "anna@example.com",
+          "roles" : [
+            {
+              "name": "Committee - Sports - Vice Sports Director - BIZ"
+            } ]
+        }
+      ]
+    }
+  ]
 }

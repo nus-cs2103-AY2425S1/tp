@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -25,7 +24,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final List<JsonAdaptedEvent> events = new ArrayList<>();
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
 
     /**
@@ -35,14 +33,10 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
-                             @JsonProperty("personEvents") List<JsonAdaptedEvent> events,
                              @JsonProperty("roles") List<JsonAdaptedRole> roles) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        if (events != null) {
-            this.events.addAll(events);
-        }
         if (roles != null) {
             this.roles.addAll(roles);
         }
@@ -55,9 +49,7 @@ class JsonAdaptedPerson {
         name = source.getName().toString();
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        events.addAll(source.getEvents().stream()
-                .map((JsonAdaptedEvent::new))
-                .toList());
+
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .toList());
@@ -72,11 +64,6 @@ class JsonAdaptedPerson {
         final List<Role> personRoles = new ArrayList<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
-        }
-
-        final List<Event> eventList = new ArrayList<>();
-        for (JsonAdaptedEvent event : events) {
-            eventList.add(event.toModelType());
         }
 
         if (name == null) {
@@ -103,13 +90,8 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (eventList.isEmpty()) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Event.class.getSimpleName()));
-        }
-        final Set<Event> modelEvents = new HashSet<>(eventList);
-
         final Set<Role> modelRoles = new HashSet<>(personRoles);
 
-        return new Person(modelName, modelPhone, modelEmail, modelEvents, modelRoles);
+        return new Person(modelName, modelPhone, modelEmail, modelRoles);
     }
 }
