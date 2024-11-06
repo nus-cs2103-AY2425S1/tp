@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.event.ReadOnlyEventManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -227,4 +228,15 @@ public class ModelManager implements Model {
         return new HashSet<>(excludedPersons);
     }
 
+    /**
+     * Excludes a Person from the search.
+     * @param person to be excluded
+     */
+    @Override
+    public void excludePerson(Person person) throws PersonNotFoundException {
+        if (!addressBook.hasPerson(person)) {
+            throw new PersonNotFoundException();
+        }
+        excludedPersons.add(person);
+    }
 }

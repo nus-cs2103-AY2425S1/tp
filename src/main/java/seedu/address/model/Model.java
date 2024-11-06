@@ -137,4 +137,9 @@ public interface Model {
      * Returns the set of persons that are excluded from the search.
      */
     Set<Person> getExcludedPersons();
+
+    /**
+     * Excludes a Person from the search.
+     */
+    void excludePerson(Person person);
 }

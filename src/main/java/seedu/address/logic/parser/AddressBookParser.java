@@ -23,6 +23,7 @@ import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.event.commands.ViewEventCommand;
+import seedu.address.logic.commands.searchmode.ExcludePersonCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.InitSearchModeCommand;
 import seedu.address.logic.commands.searchmode.SearchModeSearchCommand;
@@ -151,6 +152,10 @@ public class AddressBookParser {
             return new ExitSearchModeCommand();
         case SearchModeSearchCommand.COMMAND_WORD:
             return new SearchModeSearchCommandParser().parse(arguments);
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+        case ExcludePersonCommand.COMMAND_WORD:
+            return new ExcludePersonCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

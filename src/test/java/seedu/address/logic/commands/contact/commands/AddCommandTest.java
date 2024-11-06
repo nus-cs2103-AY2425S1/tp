@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -210,6 +211,11 @@ public class AddCommandTest {
 
         @Override
         public Set<Person> getExcludedPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void excludePerson(Person person) throws PersonNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
 

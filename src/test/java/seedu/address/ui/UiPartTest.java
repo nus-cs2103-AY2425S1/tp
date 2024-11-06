@@ -57,7 +57,6 @@ public class UiPartTest {
         assertEquals(VALID_FILE_ROOT, new TestUiPart<TestFxmlObject>(validFileUrl, root).getRoot());
     }
 
-    
 
     @Test
     public void constructor_nullFileName_throwsNullPointerException() {
