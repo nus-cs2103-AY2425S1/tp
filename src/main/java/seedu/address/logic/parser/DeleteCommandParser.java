@@ -23,7 +23,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         String name = trimmedArgs.substring(2).trim();
         if (name.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(DeleteCommand.MESSAGE_MISSING_NAME));
         }
 
         return new DeleteCommand(name);
