@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.commands.SeeScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,12 +29,13 @@ public class SeeScheduleCommandParser implements Parser<SeeScheduleCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SeeScheduleCommand.MESSAGE_USAGE));
         }
-
-        LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get(),
-                DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        return new SeeScheduleCommand(new SameWeekAsDatePredicate(date));
-
+        try {
+            LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get(),
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return new SeeScheduleCommand(new SameWeekAsDatePredicate(date));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SeeScheduleCommand.MESSAGE_USAGE));
+        }
     }
-
-
 }

@@ -16,7 +16,7 @@ import seedu.address.model.schedule.SameWeekAsDatePredicate;
 public class SeeScheduleCommand extends Command {
     public static final String COMMAND_WORD = "see";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": See your schedule for the week. "
-            + "Parameters: d/\n"
+            + "Parameters: d/dd-MM-YYYY\n"
             + "Example: " + COMMAND_WORD + " d/10-10-2024";
 
     public static final String MESSAGE_INVALID_DATE = "Date must be in the format DD-MM-YYYY.";
@@ -31,13 +31,17 @@ public class SeeScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd-MM-yyyy");
-        System.out.println(predicate.getStartDateOfWeek());
-        System.out.println(predicate.getStartDateOfWeek().format(formatter));
-
         model.changeWeeklySchedule(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW,
                         predicate.getStartDateOfWeek().format(formatter),
                         predicate.getLastDateOfWeek().format(formatter)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SeeScheduleCommand // instanceof handles nulls
+                && predicate.equals(((SeeScheduleCommand) other).predicate)); // state check
     }
 }
