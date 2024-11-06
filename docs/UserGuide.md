@@ -38,7 +38,7 @@ A person can have any number of tags (including 0)
 ---
 ### **2. General Command Format**
 
-The commands in EduVault follow q general format of `COMMAND INDEX PREFIX/...` .
+The commands in EduVault follow a general format of `COMMAND INDEX PREFIX/...` .
 
 * `COMMAND` refers to the command that you want to execute.
 * `INDEX` refers to the student whose data you want to alter, specified by the number prepended to the name of the student on the application.
@@ -66,6 +66,37 @@ The commands in this section are used to add new records to the system, such as 
 - [Enrolling student into a tutorial](#33-enrolling-student-into-a-tutorial)
 
 #### **3.1 Adding a student**
+Command: `add`
+
+Usage: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT [t/TAG]…`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+Fields
+
+* `NAME`: Should only contain alphanumeric characters and spaces and it should not be blank
+* `PHONE_NUMBER`: Should only contain numbers and must be at least 3 digits long
+* `EMAIL`: Should be of the format local-part@domain
+* `ADDRESS`: Can take in any values and should not be blank
+* `PAYMENT`: Refers to a number, either negative, zero or positive. This can be 0 when first creating the student to add to EduVault.
+
+</div>
+{% endraw %}
+
+Example usages
+
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/0`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+* Student already exists in EduVault
+  * *Error message: This person already exists in the address book.*
+* Format errors, check [here](#12-format-errors).
+
+</div>
+{% endraw %}
 
 #### **3.2 Creating a new tutorial**
 
@@ -252,10 +283,11 @@ The commands in this section are used edit records on the system, such as studen
 
 - [Editing student’s details](#51-editing-a-student)  
 - [Logging fees](#52-logging-fees-for-tutorial)  
-- [Marking payment](#53-marking-a-students-payment)  
-4.4 Marking attendance of student
-4.5 Marking attendance of tutorial  
-- [Unenroll a student from tutorial](#56-unenrolling-student-from-a-tutorial)
+- [Marking payment](#53-marking-a-students-payment)
+- Marking attendance of student
+- Marking attendance of tutorial  
+- [Unmarking attendance of student](#56-unmarking-attendance-of-student)
+- [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
 #### **5.1 Editing a student**
 
 Edit the personal information of students within EduVault
@@ -376,7 +408,44 @@ Invalid usages
 </div>
 {% endraw %}
 
-#### **5.6 Unenrolling student from a tutorial**
+#### **5.6 Unmarking attendance of student**
+
+Command: `umas`
+
+Usage: `umas INDEX tut/TUTORIAL attend/ATTENDANCE`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Fields
+
+* `INDEX`: Index number as shown in the displayed person list of the student to mark.
+  * Must be a positive integer 1, 2, 3…
+* `TUTORIAL`: Name of the tutorial the student is taking.
+* `ATTENDANCE`: Date to unmark the attendance for.
+  * Must be in format dd/MM/yyyy
+
+</div>
+{% endraw %}
+
+Example usages
+
+* `umas 1 tut/Math attend/30/10/2024`
+* `umas 2 attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+
+* Unmarking attendance of student who does not take specified tutorial
+    * Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial
+* Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
+
+#### **5.7 Unenrolling student from a tutorial**
 
 Command:  `unenroll`
 
