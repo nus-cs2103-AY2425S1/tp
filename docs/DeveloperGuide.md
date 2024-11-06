@@ -647,6 +647,68 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `filter p/91234567`<br>
        Expected: Shows only exact phone number matches.
 
+### Adding a Wedding
+Success action: When wedding is successfully added, the details of the added wedding is shown in the status message and reflected in the wedding list.
+
+1. Adding a wedding using INDEX for client (c/)
+
+    1. Prerequisites: List all contacts using the `list` command. Multiple persons in the list.
+
+    1. Test case: `addw n/Church Wedding c/1 d/2024-12-12 v/Church of the Holy Spirit`<br>
+       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Details of the added wedding is displayed on the status message.
+
+   1. Test case: `addw n/Church Wedding c/1`<br>
+      Expected: Wedding added with first person in the persons list set as client, with no date and venue. Details of the added wedding is displayed on the status message.
+
+   1. Test case: `addw`
+      Test case: `addw n/Church Wedding`<br>
+      Test case: `addw c/1`<br>
+      Expected: No wedding added. Addw Command format is shown in the status messgae.
+
+    1. Test case: `addw n/Wedding 1 c/1`<br>
+       Expected: No wedding is added. Restrictions on WEDDING NAME is shown in the status message.
+
+   1. Test case: `addw n/Wedding c/1.5`<br>
+      Expected: No wedding is added. CLIENT input options are shown in the status message.
+
+   1. Test case: `addw n/Wedding c/1 d/2024-13-50`<br>
+      Expected: No wedding is added. Restrictions on DATE is shown in the status message.
+
+   1. Test case: `addw n/Wedding c/1 v/`<br>
+      Expected: No wedding is added. Restrictions on VENUE is shown in the status message.
+
+    1. Test case: `addw n/Church Wedding c/0`<br>
+       Test case: `addw n/Church Wedding c/x` (where x is a negative number) <br>
+        Expected: No wedding added. Error message on x is not a non-zero unsigned integer.
+
+    1. Test case: `addw n/Church Wedding c/x` (where x is larger than the size of the wedding list)
+        Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.
+
+    1. Test case: `addw n/Church Wedding c/Alice`
+       Expected (No duplicated Alice): Wedding added with contact having name field containing Alice set to be client. Details of the added wedding is displayed on the status message.
+       Expected (Duplicated Alice): No wedding added. Person list is filtered to show contacts with names containing Alice. Status message prompts user to re-input CLIENT using index shown in the newly filtered list.
+       Expected (No Alice): No wedding added. Error message states that the person inputted does not exist in the address book.
+
+### Editing a Wedding
+1. Success action: When wedding is successfully edited, the details of the updated wedding is shown in the status message and reflected in the wedding list.
+
+    1. Prerequisites: List all contacts using the `list` command. Multiple persons in the list.
+
+    1. Test case: `editw w/1 [n/NAME] [d/DATE] [v/VENUE]`<br>
+       Expected: First wedding in list is edited with the given inputs. Details of the edited wedding is displayed on the status message.
+
+    1. Test case: `editw`<br>
+       Test case: `editw w/1`<br>
+       Test case: `editw w/1 c/1` <br>
+       Expected: No wedding added. Editw Command format is shown in the status messgae.
+
+    1. Test case: `editw w/0 [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]`<br>
+       Test case: `editw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is a negative number) <br>
+       Expected: No wedding added. Error message on x is not a non-zero unsigned integer.
+
+    1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)
+       Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
