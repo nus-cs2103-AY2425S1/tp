@@ -11,6 +11,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDateComparator;
+import seedu.address.model.person.PersonDateReverseComparator;
 import seedu.address.model.person.PersonDepartmentComparator;
 import seedu.address.model.person.PersonNameComparator;
 import seedu.address.model.person.PersonRoleComparator;
@@ -83,7 +84,7 @@ public class SortCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_sortsByDateDesc() {
-        expectedModel.updateSortedPersonList(new PersonDateComparator().reversed());
+        expectedModel.updateSortedPersonList(new PersonDateReverseComparator());
         assertCommandSuccess(new SortDateCommand(true), model,
                 SortDateCommand.MESSAGE_SUCCESS + SortCommand.DESCENDING_SUCCESS, expectedModel);
     }

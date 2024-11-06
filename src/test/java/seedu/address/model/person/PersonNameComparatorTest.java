@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class PersonNameComparatorTest {
 
     @Test
-    public void sortsCorrectly() {
+    public void compareTo_unsortedList_sortsCorrectly() {
         //initialize sorted list
         ArrayList<Person> sortedPersons = new ArrayList<>();
         sortedPersons.add(ALICE);
