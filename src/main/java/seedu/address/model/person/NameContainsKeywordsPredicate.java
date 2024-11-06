@@ -20,7 +20,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
      * @param keywords A list of keywords used to check the address book.
      */
     public NameContainsKeywordsPredicate(List<String> keywords) {
+        // Defensive check
         checkArgument(areValidNameKeywords(keywords), Name.MESSAGE_CONSTRAINTS);
+
         this.keywords = keywords;
     }
 
