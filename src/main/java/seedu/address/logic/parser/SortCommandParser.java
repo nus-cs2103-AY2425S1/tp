@@ -17,13 +17,13 @@ import seedu.address.model.person.Tutorial;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-    private static final String MESSAGE_NAME_MUST_BE_EMPTY =
+    public static final String MESSAGE_NAME_MUST_BE_EMPTY =
             "The name field must be left empty when sorting by name.";
-    private static final String MESSAGE_ID_MUST_BE_EMPTY =
+    public static final String MESSAGE_ID_MUST_BE_EMPTY =
             "The student ID field must be left empty when sorting by student ID.";
-    private static final String MESSAGE_TUT_MUST_NOT_BE_EMPTY =
+    public static final String MESSAGE_TUT_MUST_NOT_BE_EMPTY =
             "A tutorial number must be provided for sorting by tutorial attendance.";
-    private static final String MESSAGE_ONLY_ONE_TUT =
+    public static final String MESSAGE_ONLY_ONE_TUT =
             "Only 1 tutorial number should be provided for sorting by tutorial attendance.";
 
     private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_TUTORIAL);
