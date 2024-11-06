@@ -223,14 +223,14 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-padding: 5 22 5 22;
-    -fx-border-color: #56794d;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: #88B07E;
+    -fx-padding: 10 22 10 22;
+    -fx-border-color: #48803b;
+    -fx-border-width: 0;
+    -fx-background-radius: 16;
+    -fx-background-color: #539642;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #3d5237;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
