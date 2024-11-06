@@ -21,6 +21,17 @@ public class To extends DateTime {
         super(to);
     }
 
+    /**
+     * Ret
+     */
+    public boolean isValidToFrom(From from) {
+        if (from == null) {
+            return false;
+        }
+
+        return this.value.isAfter(from.value);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

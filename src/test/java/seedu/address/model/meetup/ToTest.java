@@ -41,6 +41,26 @@ public class ToTest {
     }
 
     @Test
+    public void isValidToFrom() {
+        To to = new To("2024-06-25 14:30");
+
+        // null -> returns false
+        assertFalse(to.isValidToFrom(null));
+
+        // same values -> returns false
+        From from1 = new From("2024-06-25 14:30");
+        assertFalse(to.isValidToFrom(from1));
+
+        // to before from -> returns false
+        From from2 = new From("2024-06-25 15:30");
+        assertFalse(to.isValidToFrom(from2));
+
+        // to after from -> returns true
+        From from3 = new From("2024-06-25 11:30");
+        assertTrue(to.isValidToFrom(from3));
+    }
+
+    @Test
     public void toPrettyString() {
         To to = new To("2024-06-25 14:30");
         String expectedString = "25 Jun 2024 (2:30pm)";
