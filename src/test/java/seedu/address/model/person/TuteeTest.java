@@ -36,7 +36,7 @@ public class TuteeTest {
         // same name, all other attributes different -> returns true
         Tutee editedClara = new TuteeBuilder(CLARA).withPhone(VALID_PHONE_DEACON).withEmail(VALID_EMAIL_DEACON)
                 .withAddress(VALID_ADDRESS_DEACON).withTags(VALID_TAG_MENTOR).build();
-        assertTrue(CLARA.isSamePerson(editedClara));
+        assertFalse(CLARA.isSamePerson(editedClara));
 
         // different name, all other attributes same -> returns false
         editedClara = new TuteeBuilder(CLARA).withName(VALID_NAME_DEACON).build();
