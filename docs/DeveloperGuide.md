@@ -180,9 +180,9 @@ Eduvault stores four types of objects:
 
 ```dtd
 {
-  "persons" : [...],
-  "tutorials" : [...],
-  "participations" : [...]
+    "persons" : [...],
+    "tutorials" : [...],
+    "participations" : [...]
 }
 ```
 
@@ -198,7 +198,7 @@ Eduvault stores four types of objects:
         "payment" : "189",
         "tags" : [ "Scholar" ]
     },
-  ...
+    ...
 ]
 ```
 There may be no duplicate `Students`.
@@ -212,7 +212,7 @@ Two `Students` are considered to be duplicates if they have matching `NAME` and 
     {
         "subject" : "Mathematics"
     },
-  ...
+    ...
 ]
 ```
 There may be no duplicate `Tutorials`.
@@ -233,9 +233,12 @@ Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
 
 `Attendance`
 ```dtd
-"attendances" : [ {
-      "attendanceDate" : "02/02/2024"
-    } ]
+"attendances" :
+[
+    {
+        "attendanceDate" : "02/02/2024"
+    }
+]
 ```
 Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
 
