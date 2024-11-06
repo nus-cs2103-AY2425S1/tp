@@ -30,7 +30,7 @@ public class AddressBookModelManager implements AddressBookModel {
         requireAllNonNull(addressBook);
 
         logger.fine(
-                "Initializing AddressBook CommonModel with address book: " + addressBook);
+                "Initializing AddressBook Model with address book: " + addressBook);
 
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
