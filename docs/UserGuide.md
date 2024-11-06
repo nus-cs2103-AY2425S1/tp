@@ -13,21 +13,21 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 ### Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
-* [Help Command](#viewing-help--help)
+* [Help Command](#viewing-help--help-or-h)
   * [Contact Management](#contact-management)
     * [Adding a contact](#adding-a-person-add-or-a)
-    * [List all contacts](#listing-all-persons--list)
+    * [List all contacts](#listing-all-persons--list-or-l)
     * [Find individuals by name or organisation](#locating-persons-by-name-and-organization-find-or-f)
-    * [Edit a contact](#editing-a-person--edit)
+    * [Edit a contact](#editing-a-person--edit-or-ed)
     * [Sorting contacts](#sorting-persons--sort-or-s)
-    * [Saving your sort preference](#save-sort-preference-save-or-svp)
+    * [Saving your sort preference](#save-sort-preference-save_sort-or-svp)
     * [Delete a contact](#deleting-a-person--delete-or-del)
     * [Add a remark to a contact](#add-a-remark-to-a-person--remark)
     * [Delete all contacts](#clearing-all-entries--clear-or-c)
   * [Reminder Management](#reminder-management)
     * [Create a reminder](#create-a-reminder-remind-or-rem)
     * [Delete a reminder](#deleting-a-reminder-delete_reminder-or-dr)
-  * [Exit NetBook](#exiting-the-program--exit)
+  * [Exit NetBook](#exiting-the-program--exit-or-ex)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
@@ -87,7 +87,7 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help : `help` or `h`
 
 Shows a message explaning how to access the help page.
 
@@ -115,13 +115,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com o/nus`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons : `list` or `l`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person : `edit` or `ed`
 
 Edits an existing person in the address book.
 
@@ -171,11 +171,11 @@ Examples:
 * `sort high`
 * `s recent`
 
-### Save sort preference: `save` or `svp`
+### Save sort preference: `save_sort` or `svp`
 
 Saves the sorting preference specified by the user.
 
-Format: `save PREFERENCE` or `svp PREFERENCE`
+Format: `save_sort PREFERENCE` or `svp PREFERENCE`
 
 Preference types: `default`, `high`, `low`, `distant`, `recent`
 
@@ -184,7 +184,7 @@ Preference types: `default`, `high`, `low`, `distant`, `recent`
 * Changes will only be reflected upon restarting NetBook.
 
 Examples: 
-* `save high`
+* `save_sort high`
 * `svp default`
 
 ### Deleting a person : `delete` or `del`
@@ -253,7 +253,7 @@ Format: `delete_reminder INDEX` or `dr INDEX`
 Examples:
 * `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
 
-### Exiting the program : `exit`
+### Exiting the program : `exit` or `ex`
 
 Exits the program.
 
@@ -299,7 +299,7 @@ Action | Format, Examples
 **Find** | `find [n/NAME…] [o/ORGANIZATION…]`<br> e.g., `find n/James Jake o/TikTok`
 **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 2 r/handsome`
 **Sort** | `sort PREFERENCE` <br> e.g., `sort high`
-**Save Sort** | `save PREFERENCE` <br> e.g., `save distant`
+**Save Sort** | `save_sort PREFERENCE` <br> e.g., `save_sort distant`
 **Create Reminder** | `remind INDEX d/DATE des/DESCRIPTION` <br> e.g., `remind 3 d/22-12-2024 des/Meet up for dinner`
 **Delete Reminder** | `delete_reminder INDEX` <br> e.g., `delete_reminder 4`
 **List** | `list`
