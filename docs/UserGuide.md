@@ -282,8 +282,10 @@ The GUI will dynamically update to show the results of your commands, making it 
 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
-> 💡 **Pro Tip:**  
-> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.  
+> 💡 **Pro Tip:**
+> 
+> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
+> 
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
 --------------------------------------------------------------------------------------------------------------------
