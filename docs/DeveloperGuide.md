@@ -544,7 +544,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **JAR file**: A package file that contains many class files, associated metadata and resources that build the application
 * **RSVP status**: A field on each guest that indicates if the guest has responded, attending or not attending the wedding, which can be used for filtering purposes
 * **Customisable tags**: Tags on guests containing text written by user, which can be used for filtering purposes
-* **Tag list**: A list of tags that can be used to classify guests
+* **Tag list**: A list of tags created using the `newtag` command that can be used to tag guests with
 * **Delete**: Removes a guest and all details regarding the guest from the address book
 * **Add**: Creates and saves a new guest into the address book
 * **Filter**: Only show guests that contains the text input by the user
