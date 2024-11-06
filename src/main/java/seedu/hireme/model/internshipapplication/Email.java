@@ -7,6 +7,7 @@ import seedu.hireme.logic.validator.EmailValidator;
 
 /**
  * Represents a Company's email.
+ * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}.
  */
 public class Email {
 
