@@ -23,8 +23,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Pair p = ParserUtil.parseIndexAndType(args);
             if (p.second().equals("p")) {
                 return new DeletePetCommand(p.first());
-            } else {
+            } else if (p.second().equals("o")) {
                 return new DeleteOwnerCommand(p.first());
+            } else {
+                throw new ParseException("Invalid type to delete");
             }
         } catch (ParseException pe) {
             throw new ParseException(
