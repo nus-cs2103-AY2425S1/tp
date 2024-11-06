@@ -2,6 +2,7 @@ package seedu.address.logic.commands.searchmode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VENDOR;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import java.util.Collections;
@@ -93,7 +94,7 @@ public class SearchModeSearchCommandTest {
     public void execute_combinedPredicate_success() throws InvalidRoleException {
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
-                Collections.singletonList(RoleHandler.getRole("vendor")));
+                Collections.singletonList(RoleHandler.getRole(VALID_ROLE_VENDOR)));
         Predicate<Person> combinedPredicate = namePredicate.and(rolePredicate);
 
         SearchModeSearchCommand command = new SearchModeSearchCommand(combinedPredicate);
@@ -110,10 +111,10 @@ public class SearchModeSearchCommandTest {
     public void execute_chainedPredicates_success() throws InvalidRoleException {
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Amy"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
-                Collections.singletonList(RoleHandler.getRole("vendor")));
+                Collections.singletonList(RoleHandler.getRole(VALID_ROLE_VENDOR)));
         Predicate<Person> combinedPredicate = namePredicate.and(rolePredicate);
 
-        PersonBuilder personBuilder = new PersonBuilder().withName("Amy").withRoles("vendor");
+        PersonBuilder personBuilder = new PersonBuilder().withName("Amy").withRoles(VALID_ROLE_VENDOR);
         model.addPerson(personBuilder.build());
         model.updateFilteredPersonList(person -> false);
         SearchModeSearchCommand command = new SearchModeSearchCommand(combinedPredicate);
@@ -133,7 +134,7 @@ public class SearchModeSearchCommandTest {
                 new UserPrefs());
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
         Predicate<Person> rolePredicate = new PersonIsRolePredicate(
-                Collections.singletonList(RoleHandler.getRole("vendor")));
+                Collections.singletonList(RoleHandler.getRole(VALID_ROLE_VENDOR)));
         Predicate<Person> combinedPredicate = namePredicate.or(rolePredicate);
 
         SearchModeSearchCommand command = new SearchModeSearchCommand(combinedPredicate);

@@ -12,11 +12,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_ATTENDEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -179,9 +181,9 @@ public class EditCommandParserTest {
     @Test
     public void parseRolesforEdit_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + " r/attendee";
+        String userInput = targetIndex.getOneBased() + " " + ROLE_DESC_ATTENDEE;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withRoles("attendee").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

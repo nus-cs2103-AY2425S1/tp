@@ -3,6 +3,9 @@ package seedu.address.model.predicates;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_SPONSOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VENDOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VOLUNTEER;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,15 +52,15 @@ public class PersonIsRolePredicateTest {
     public void test_containsRoles_returnsTrue() {
         // One keyword
         PersonIsRolePredicate predicate = new PersonIsRolePredicate(Collections.singletonList(new Sponsor()));
-        assertTrue(predicate.test(new PersonBuilder().withRoles("sponsor").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRoles(VALID_ROLE_SPONSOR).build()));
 
         // Multiple keywords
         predicate = new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Vendor()));
-        assertTrue(predicate.test(new PersonBuilder().withRoles("sponsor", "vendor").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRoles(VALID_ROLE_SPONSOR, VALID_ROLE_VENDOR).build()));
 
         // Only one matching keyword
         predicate = new PersonIsRolePredicate(Arrays.asList(new Sponsor(), new Volunteer()));
-        assertTrue(predicate.test(new PersonBuilder().withRoles("sponsor", "vendor").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRoles(VALID_ROLE_SPONSOR, VALID_ROLE_VENDOR).build()));
     }
 
     @Test
@@ -68,7 +71,7 @@ public class PersonIsRolePredicateTest {
 
         // Non-matching keyword
         predicate = new PersonIsRolePredicate(Arrays.asList(new Sponsor()));
-        assertFalse(predicate.test(new PersonBuilder().withRoles("volunteer").build()));
+        assertFalse(predicate.test(new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build()));
     }
 
     @Test

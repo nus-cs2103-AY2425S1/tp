@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATTENDEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_SPONSOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VENDOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VOLUNTEER;
 import static seedu.address.testutil.TypicalEvents.TECH_CONFERENCE;
 import static seedu.address.testutil.TypicalEvents.TECH_CONFERENCE_EDITED;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -49,13 +53,13 @@ public class EventTest {
     @Test
     public void equals_sameEventDifferentConstructorEmptySet() {
         Set<Person> attendees = new HashSet<>();
-        attendees.add(new PersonBuilder().withRoles("attendee").build());
+        attendees.add(new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build());
         Set<Person> vendors = new HashSet<>();
-        vendors.add(new PersonBuilder().withRoles("vendor").build());
+        vendors.add(new PersonBuilder().withRoles(VALID_ROLE_VENDOR).build());
         Set<Person> sponsors = new HashSet<>();
-        sponsors.add(new PersonBuilder().withRoles("sponsor").build());
+        sponsors.add(new PersonBuilder().withRoles(VALID_ROLE_SPONSOR).build());
         Set<Person> volunteers = new HashSet<>();
-        volunteers.add(new PersonBuilder().withRoles("volunteer").build());
+        volunteers.add(new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build());
         Event event1 = new Event("Event1", attendees, vendors, sponsors, volunteers);
         Event event2 = new Event("Event1", attendees, vendors, sponsors, volunteers);
         assertEquals(event1, event2);
@@ -78,8 +82,8 @@ public class EventTest {
     public void addAttendee() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("attendee").build();
-            event.addPerson(person, "attendee");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
+            event.addPerson(person, VALID_ROLE_ATTENDEE);
             Set<Person> attendees = new HashSet<>();
             attendees.add(person);
             assertEquals(attendees, event.getAttendees());
@@ -94,15 +98,15 @@ public class EventTest {
 
         Event event = new Event("Event1");
         Person person = new PersonBuilder().build();
-        assertThrows(IllegalValueException.class, () -> event.addPerson(person, "attendee"));
+        assertThrows(IllegalValueException.class, () -> event.addPerson(person, VALID_ROLE_ATTENDEE));
 
     }
     @Test
     public void addVendor() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("vendor").build();
-            event.addPerson(person, "vendor");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_VENDOR).build();
+            event.addPerson(person, VALID_ROLE_VENDOR);
             Set<Person> vendors = new HashSet<>();
             vendors.add(person);
             assertEquals(vendors, event.getVendors());
@@ -116,8 +120,8 @@ public class EventTest {
     public void addSponsor_multipleRole() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("sponsor", "attendee").build();
-            event.addPerson(person, "sponsor");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_SPONSOR, VALID_ROLE_ATTENDEE).build();
+            event.addPerson(person, VALID_ROLE_SPONSOR);
             Set<Person> sponsors = new HashSet<>();
             sponsors.add(person);
             assertEquals(sponsors, event.getSponsors());
@@ -130,8 +134,8 @@ public class EventTest {
     public void addVolunteer() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("volunteer").build();
-            event.addPerson(person, "volunteer");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build();
+            event.addPerson(person, VALID_ROLE_VOLUNTEER);
             Set<Person> volunteers = new HashSet<>();
             volunteers.add(person);
             assertEquals(volunteers, event.getVolunteers());
@@ -143,9 +147,9 @@ public class EventTest {
     public void addVolunteer_alreadyInRole() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("volunteer").build();
-            event.addPerson(person, "volunteer");
-            assertThrows(IllegalValueException.class, () -> event.addPerson(person, "volunteer"));
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build();
+            event.addPerson(person, VALID_ROLE_VOLUNTEER);
+            assertThrows(IllegalValueException.class, () -> event.addPerson(person, VALID_ROLE_VOLUNTEER));
 
         } catch (Exception e) {
             assert false;
@@ -155,7 +159,7 @@ public class EventTest {
     @Test
     public void addPerson_invalidRole() {
         Event event = new Event("Event1");
-        Person person = new PersonBuilder().withRoles("attendee").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         assertThrows(IllegalValueException.class, () -> event.addPerson(person, "invalidRole"));
     }
 
@@ -165,9 +169,9 @@ public class EventTest {
     public void removePerson() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("attendee").build();
-            event.addPerson(person, "attendee");
-            event.removePerson(person, "attendee");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
+            event.addPerson(person, VALID_ROLE_ATTENDEE);
+            event.removePerson(person, VALID_ROLE_ATTENDEE);
             Set<Person> attendees = new HashSet<>();
             assertEquals(attendees, event.getAttendees());
         } catch (Exception e) {
@@ -179,9 +183,9 @@ public class EventTest {
     public void removePerson_vendor() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("vendor").build();
-            event.addPerson(person, "vendor");
-            event.removePerson(person, "vendor");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_VENDOR).build();
+            event.addPerson(person, VALID_ROLE_VENDOR);
+            event.removePerson(person, VALID_ROLE_VENDOR);
             Set<Person> vendors = new HashSet<>();
             assertEquals(vendors, event.getVendors());
         } catch (Exception e) {
@@ -193,9 +197,9 @@ public class EventTest {
     public void removePerson_sponsor_notInRole() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("sponsor", "attendee").build();
-            event.addPerson(person, "attendee");
-            assertThrows(IllegalArgumentException.class, () -> event.removePerson(person, "sponsor"));
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_SPONSOR, VALID_ROLE_ATTENDEE).build();
+            event.addPerson(person, VALID_ROLE_ATTENDEE);
+            assertThrows(IllegalArgumentException.class, () -> event.removePerson(person, VALID_ROLE_SPONSOR));
         } catch (Exception e) {
             assert false;
         }
@@ -205,9 +209,9 @@ public class EventTest {
     public void removePerson_volunteer() {
         try {
             Event event = new Event("Event1");
-            Person person = new PersonBuilder().withRoles("volunteer").build();
-            event.addPerson(person, "volunteer");
-            event.removePerson(person, "volunteer");
+            Person person = new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build();
+            event.addPerson(person, VALID_ROLE_VOLUNTEER);
+            event.removePerson(person, VALID_ROLE_VOLUNTEER);
             Set<Person> volunteers = new HashSet<>();
             assertEquals(volunteers, event.getVolunteers());
         } catch (Exception e) {
@@ -218,7 +222,7 @@ public class EventTest {
     @Test
     public void removePerson_invalidRole() {
         Event event = new Event("Event1");
-        Person person = new PersonBuilder().withRoles("attendee").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         assertThrows(IllegalArgumentException.class, () -> event.removePerson(person, "invalidRole"));
     }
 
@@ -236,18 +240,18 @@ public class EventTest {
     public void getRole_validRole_true() {
         try {
             Event event = new Event("Event1");
-            Person personAttendee = new PersonBuilder().withRoles("attendee").build();
-            event.addPerson(personAttendee, "attendee");
-            assertEquals("attendee", event.getRole(personAttendee));
-            Person personVendor = new PersonBuilder().withRoles("vendor").build();
-            event.addPerson(personVendor, "vendor");
-            assertEquals("vendor", event.getRole(personVendor));
-            Person personSponsor = new PersonBuilder().withRoles("sponsor").build();
-            event.addPerson(personSponsor, "sponsor");
-            assertEquals("sponsor", event.getRole(personSponsor));
-            Person personVolunteer = new PersonBuilder().withRoles("volunteer").build();
-            event.addPerson(personVolunteer, "volunteer");
-            assertEquals("volunteer", event.getRole(personVolunteer));
+            Person personAttendee = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
+            event.addPerson(personAttendee, VALID_ROLE_ATTENDEE);
+            assertEquals(VALID_ROLE_ATTENDEE, event.getRole(personAttendee));
+            Person personVendor = new PersonBuilder().withRoles(VALID_ROLE_VENDOR).build();
+            event.addPerson(personVendor, VALID_ROLE_VENDOR);
+            assertEquals(VALID_ROLE_VENDOR, event.getRole(personVendor));
+            Person personSponsor = new PersonBuilder().withRoles(VALID_ROLE_SPONSOR).build();
+            event.addPerson(personSponsor, VALID_ROLE_SPONSOR);
+            assertEquals(VALID_ROLE_SPONSOR, event.getRole(personSponsor));
+            Person personVolunteer = new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build();
+            event.addPerson(personVolunteer, VALID_ROLE_VOLUNTEER);
+            assertEquals(VALID_ROLE_VOLUNTEER, event.getRole(personVolunteer));
             Person personNoRole = new PersonBuilder().build();
             assertNull(event.getRole(personNoRole));
         } catch (Exception e) {
@@ -258,14 +262,15 @@ public class EventTest {
     @Test
     public void removePerson_fromMultipleRoles_success() {
         Event event = new Event("Event1");
-        Person person = new PersonBuilder().withRoles("attendee", "vendor", "sponsor", "volunteer").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE,
+                VALID_ROLE_VENDOR, VALID_ROLE_SPONSOR, VALID_ROLE_VOLUNTEER).build();
 
         try {
             // Adding person to all roles
-            event.addPerson(person, "attendee");
-            event.addPerson(person, "vendor");
-            event.addPerson(person, "sponsor");
-            event.addPerson(person, "volunteer");
+            event.addPerson(person, VALID_ROLE_ATTENDEE);
+            event.addPerson(person, VALID_ROLE_VENDOR);
+            event.addPerson(person, VALID_ROLE_SPONSOR);
+            event.addPerson(person, VALID_ROLE_VOLUNTEER);
 
             // Removing person from all roles
             event.removePerson(person);
@@ -283,16 +288,17 @@ public class EventTest {
     @Test
     public void editPerson_inMultipleRoles_success() {
         Event event = new Event("Event1");
-        Person personToEdit = new PersonBuilder().withRoles("attendee", "vendor", "sponsor", "volunteer").build();
-        Person editedPerson = new PersonBuilder().withRoles("attendee", "vendor", "sponsor", "volunteer")
-                .withName("Edited Name").build();
+        Person personToEdit = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE,
+                VALID_ROLE_VENDOR, VALID_ROLE_SPONSOR, VALID_ROLE_VOLUNTEER).build();
+        Person editedPerson = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE,
+                VALID_ROLE_VENDOR, VALID_ROLE_SPONSOR, VALID_ROLE_VOLUNTEER).withName("Edited Name").build();
 
         try {
             // Adding person to all roles
-            event.addPerson(personToEdit, "attendee");
-            event.addPerson(personToEdit, "vendor");
-            event.addPerson(personToEdit, "sponsor");
-            event.addPerson(personToEdit, "volunteer");
+            event.addPerson(personToEdit, VALID_ROLE_ATTENDEE);
+            event.addPerson(personToEdit, VALID_ROLE_VENDOR);
+            event.addPerson(personToEdit, VALID_ROLE_SPONSOR);
+            event.addPerson(personToEdit, VALID_ROLE_VOLUNTEER);
 
             // Editing person
             event.editPerson(personToEdit, editedPerson);
