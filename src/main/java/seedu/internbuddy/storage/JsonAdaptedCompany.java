@@ -27,6 +27,7 @@ import seedu.internbuddy.model.tag.Tag;
 public class JsonAdaptedCompany {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Company's %s field is missing!";
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedCompany.class);
+    private static final String INVALID_ISFAVOURITE_MESSAGE = "isFavourite should either be `true` or `false`";
 
     private final String name;
     private final String phone;
@@ -141,11 +142,18 @@ public class JsonAdaptedCompany {
         if (status == null) {
             logger.info("Missing `status` field.");
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        } else if (!Status.isValidStatus(status)) {
+            logger.info("`status` has invalid format.");
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
         final Status modelStatus = new Status(status);
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
 
+        if (isFavourite == null) {
+            logger.info("`isFavourite` is missing or has invalid format.");
+            throw new IllegalValueException(INVALID_ISFAVOURITE_MESSAGE);
+        }
         final Boolean modelIsFavourite = isFavourite;
 
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags,
