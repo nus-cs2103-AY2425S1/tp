@@ -85,6 +85,8 @@ public class EditEventCommand extends EditCommand {
                 updatedCelebrity = model.findPerson(editEventDescriptor.celebrityName);
             } catch (PersonNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
+            } catch (IllegalArgumentException e) {
+                throw new CommandException(Messages.MESSAGE_INVALID_NAME);
             }
             editEventDescriptor.setCelebrity(updatedCelebrity);
         }
@@ -97,6 +99,8 @@ public class EditEventCommand extends EditCommand {
                         .toList());
             } catch (PersonNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
+            } catch (IllegalArgumentException e) {
+                throw new CommandException(Messages.MESSAGE_INVALID_NAME);
             }
             editEventDescriptor.setContacts(newSet);
         }
