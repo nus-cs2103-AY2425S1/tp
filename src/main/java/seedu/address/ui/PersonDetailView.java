@@ -44,6 +44,7 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
     @FXML
     private GridPane eventsAttending;
     private ObservableList<Event> eventsList;
+    private ObservableList<Person> personsList;
     private Person lastUpdatedPerson;
 
     /**
@@ -53,9 +54,18 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
      * in the provided list of {@code Event}s.
      *
      */
-    public PersonDetailView(ObservableList<Event> eventsList) {
+    public PersonDetailView(ObservableList<Person> personsList, ObservableList<Event> eventsList) {
         super(FXML);
         this.eventsList = eventsList;
+        this.personsList = personsList;
+
+        this.personsList.addListener((Observable observable) -> {
+            if (personsList.isEmpty()) {
+                this.getRoot().setVisible(false);
+            } else {
+                this.update(personsList.get(0));
+            }
+        });
 
         // Add listener to update view whenever the event list changes
         this.eventsList.addListener((Observable observable) -> updateAttendingEvents(lastUpdatedPerson));

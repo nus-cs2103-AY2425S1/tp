@@ -21,8 +21,6 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
-    private ObservableList<Person> personList;
-
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList<Person>}
      * and a {@code PersonSelectionHandler} for handling user selections of a person.
@@ -36,16 +34,6 @@ public class PersonListPanel extends UiPart<Region> {
                 personDetailView.update(newValue);
             }
         });
-        this.personList = personList;
-        this.personList.addListener((Observable observable) -> {
-            // set the visibility PersonDetailView to be false when the personList is empty
-            if (personList.isEmpty()) {
-                personDetailView.getRoot().setVisible(false);
-            } else {
-                personDetailView.update(personList.get(0));
-            }
-        });
-
     }
 
     /**

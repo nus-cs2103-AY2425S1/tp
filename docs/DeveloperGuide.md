@@ -662,4 +662,3 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-1. **Make upcoming events in PersonDetailView update automatically when a Person is edited.** Currently, users need to click on another person card then back to view the upcoming events as a result of editing the person.
