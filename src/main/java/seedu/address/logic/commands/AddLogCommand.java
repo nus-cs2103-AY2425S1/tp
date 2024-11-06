@@ -28,6 +28,9 @@ public class AddLogCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
     public static final String MESSAGE_INVALID_ID = "NRIC not found in system, perhaps there was a typo.";
 
+    public static final String MESSAGE_DUPLICATE_LOG = "This log already exists in the person's log list. "
+            + "Are you sure you are adding a new log?";
+
 
     private final IdentityNumber identityNumber;
     private final Log log;
