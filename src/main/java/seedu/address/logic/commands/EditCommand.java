@@ -87,12 +87,12 @@ public class EditCommand extends Command {
         }
 
         List<Participation> participationsToDelete = model.getParticipationList()
-                .filtered(participation -> participation.getStudent().equals(personToEdit));
+                .filtered(participation -> participation.getStudent().equals(personToEdit)).stream().toList();
 
-        for (int i = 0; i < participationsToDelete.size(); i++) {
+        for (Participation participation : participationsToDelete) {
             Participation updated = new Participation(editedPerson,
-                    participationsToDelete.get(i).getTutorial(), participationsToDelete.get(i).getAttendanceList());
-            model.setParticipation(participationsToDelete.get(i), updated);
+                    participation.getTutorial(), participation.getAttendanceList());
+            model.setParticipation(participation, updated);
         }
 
         model.setPerson(personToEdit, editedPerson);
