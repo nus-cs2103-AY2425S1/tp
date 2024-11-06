@@ -177,6 +177,16 @@ Examples:
 * `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
 * `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
 
+### Selecting persons by index: `select`
+Select contacts from the address book by specifying their index numbers in the currently displayed list. Only the specified contacts will remain in view.
+
+Format: select INDEX [MORE_INDEXES]...
+
+Examples:
+
+* `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts.
+* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show only these selected contacts.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from Cher.
