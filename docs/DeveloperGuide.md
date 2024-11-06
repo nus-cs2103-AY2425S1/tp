@@ -383,55 +383,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays error message and prompt for indexes.
     * Use case resumes at step 3.
 
-**Use case 5: Create new tag**
+**Use case 5: Create new tag(s)**
 
 **MSS**
 
-1.  User enters the command to create new tag.
-2.  The system prompts for the description of the new tag.
-3.  User enters the description of the new tag.
-4.  The system verifies the input.
-5.  The system updates the tag list to show the new created tag and shows confirmation message.
+1. User enters the command to create new tag(s).
+2. User enters the description of the new tag(s) to be added.
+3. The system checks if the tag(s) already exist(s), and if attempting to add the tag(s) would exceed the limit.
+4. The system updates the tag list to show the new created tag(s) and shows a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
-    * 3a1. System displays error message and prompt tag description.
-    * Use case resumes at step 3.
-
-* 3b. User enters a duplicate tag description (i.e. tag already exists in the tag list)
-    * 3b1. System displays a message indicating the tag already exists.
+* 2a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
+    * 2a1. System displays error message and the correct usage.
     * Use case ends.
 
-* 5a. Tag list limit has been reached
-    * 5a1. System displays a message indicating the tag list limit has been reached.
+* 3a. Adding the new tag(s) would exceed the limit on the number of predefined tags allowed.
+    * 3a1. System displays a message indicating the limit has been reached.
+    * Use case ends.
+
+* 3b. User enters at least one duplicate tag description (i.e. tag already exists in the tag list)
+    * 3b1. System continues to update the tag list for non-offending tag descriptions (if any).
+    * 3b2. System displays a message indicating the tag(s) that already exist(s).
     * Use case ends.
 
 **Use case 6: Delete tag**
 
 **MSS**
 
-1.  User enters the command to delete tag.
+1. User enters the command to delete tag(s).
+2. User enters the description of the tag(s) to be deleted.
+3. The system checks if the tag(s) to be deleted exist(s).
+4. The system updates the tag list to remove the deleted tag(s) and shows a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
+* 2a1. System displays error message and the correct usage.
+* Use case ends.
+
+* 3a. User enters at least one tag description that does not match any of the predefined tags.
+    * 3a1. System continues to update the tag list for non-offending tag descriptions (if any).
+    * 3a2. System displays a message indicating the tag(s) that already exist(s).
+    * Use case ends.
+
+**Use case 7: Rename tag**
+
+**MSS**
+
+1.  User enters the command to rename tag.
 2.  The system prompts for the description of the tag.
-3.  User enters the description of the tag.
+3.  User enters the description of the tag to be renamed, and the new description.
 4.  The system verifies the input.
-5.  The system updates the tag list to show that the tag no longer exist and shows confirmation message.
+5.  The system updates the tag description and shows confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters an invalid description (e.g. containing non-ASCII characters)
+* 3a. User enters at least one invalid description (e.g. containing non-ASCII characters)
     * 3a1. System displays error message and prompt tag description.
     * Use case resumes at step 3.
 
-* 3b. User enters a description not matching any existing tags (i.e. tag does not exist in the tag list)
-    * 3b1. System displays a message indicating the tag does not exist.
+* 3a. User enters a description not matching any existing tags.
+    * 3b1. System displays a message indicating the tag to rename does not exist.
     * Use case ends.
 
-**Use case 7: Tag guest**
+* 3b. User enters a description already associated with another tag
+    * 3b1. System displays a message indicating the new name is already in use.
+    * Use case ends.
+
+**Use case 8: Tag guest**
 
 **MSS**
 
@@ -458,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case ends.
 
 
-**Use case 8: Untag guest**
+**Use case 9: Untag guest**
 
 **MSS**
 
@@ -485,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case ends.
 
 
-**Use case 9: Filter guest list by tag or RSVP status**
+**Use case 10: Filter guest list by tag or RSVP status**
 
 **MSS**
 
@@ -507,7 +533,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays error message indicating the tag does not exist in tag list and prompts for the corrected predicate.
     * Use case resumes at step 3.
 
-**Use case 10: Undo last action**
+**Use case 11: Undo last action**
 
 **MSS**
 
