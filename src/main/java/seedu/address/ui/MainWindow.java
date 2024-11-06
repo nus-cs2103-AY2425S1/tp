@@ -226,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
 
             String hyperlink = commandResult.getHyperlink();
             if (hyperlink != null) {
-                resultDisplay.setUGButton(hyperlink);
+                resultDisplay.setUserGuideButton(hyperlink);
             }
 
             if (commandResult.isShowHelp()) {
