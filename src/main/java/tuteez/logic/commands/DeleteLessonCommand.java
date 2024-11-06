@@ -58,6 +58,7 @@ public class DeleteLessonCommand extends LessonCommand {
         Person updatedPerson = updatePersonLessons(personToUpdate, currentLessons);
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateLastViewedPerson(updatedPerson);
 
         return new CommandResult(generateResultMessage(personToUpdate, lessonsToDelete));
     }
