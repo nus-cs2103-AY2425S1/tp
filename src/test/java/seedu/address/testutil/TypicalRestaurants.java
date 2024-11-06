@@ -33,6 +33,7 @@ public class TypicalRestaurants {
             .withPhone("94351253")
             .withTags("italian")
             .withPrice("$$")
+            .withIsFavourite(false)
             .build();
     public static final Restaurant BENSON = new RestaurantBuilder()
             .withName("Benson Meier Restaurant")
@@ -42,6 +43,7 @@ public class TypicalRestaurants {
             .withRating(5)
             .withTags("western", "outdoors")
             .withPrice("$$$")
+            .withIsFavourite(false)
             .build();
     public static final Restaurant CARL = new RestaurantBuilder()
             .withName("Carl Kurz Restaurant")

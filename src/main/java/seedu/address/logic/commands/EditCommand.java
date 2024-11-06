@@ -111,7 +111,8 @@ public class EditCommand extends Command {
         Price updatedPrice = editRestaurantDescriptor.getPrice().orElse(restaurantToEdit.getPrice());
 
         return new Restaurant(
-                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRating, updatedTags, updatedPrice);
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRating, updatedTags,
+                updatedIsFavourite, updatedPrice);
     }
 
     @Override

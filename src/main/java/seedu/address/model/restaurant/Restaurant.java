@@ -31,7 +31,8 @@ public class Restaurant {
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags, Price price) {
+    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags,
+                      Price price, boolean isFavourite) {
         requireAllNonNull(name, phone, email, address, rating, tags, price);
         this.name = name;
         this.phone = phone;
@@ -40,9 +41,7 @@ public class Restaurant {
         this.rating = rating;
         this.tags.addAll(tags);
         this.price = price;
-
-        // Default to not favourite
-        this.isFavourite = false;
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {

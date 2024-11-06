@@ -30,6 +30,8 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    private boolean isDarkTheme = false;
+
     // Independent Ui parts residing in this Ui container
     private RestaurantListPanel restaurantListPanel;
     private ResultDisplay resultDisplay;
@@ -156,6 +158,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Toggles the theme of the app between dark and light theme
+     */
+    @FXML
+    public void handleTheme() {
+        if (isDarkTheme) {
+            getRoot().getScene().getStylesheets().setAll(getClass()
+                    .getResource("/view/GrubTheme.css").toExternalForm());
+        } else {
+            getRoot().getScene().getStylesheets().setAll(getClass()
+                    .getResource("/view/AB3/DarkTheme.css").toExternalForm());
+        }
+        isDarkTheme = !isDarkTheme;
+    }
+
+    /**
      * Shows the application window.
      */
     void show() {
@@ -172,6 +189,20 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Provides a convenient avenue to reset filteres in the restaurant list panel.
+     * It's pretty much an alias for the "list" command.
+     */
+    @FXML
+    private void handleResetFilters() {
+        try {
+            executeCommand("list");
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: list");
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
     }
 
     public RestaurantListPanel getPersonListPanel() {

@@ -32,6 +32,7 @@ class JsonAdaptedRestaurant {
     private final String address;
     private final Integer rating;
     private final String price;
+    private final boolean isFavourite;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -42,13 +43,15 @@ class JsonAdaptedRestaurant {
                                  @JsonProperty("email") String email, @JsonProperty("address") String address,
                                  @JsonProperty("rating") Integer rating,
                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                                 @JsonProperty("price") String price) {
+                                 @JsonProperty("price") String price
+                                 @JsonProperty("favourite") boolean isFavourite) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rating = rating;
         this.price = price;
+        this.isFavourite = isFavourite;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -65,6 +68,7 @@ class JsonAdaptedRestaurant {
         address = source.getAddress().value;
         rating = source.getRating().value;
         price = source.getPrice().toString();
+        isFavourite = source.isFavourite();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -129,7 +133,7 @@ class JsonAdaptedRestaurant {
         final Price modelPrice = new Price(price);
 
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
-        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelRating, modelTags, modelPrice);
+        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelRating, modelTags, modelPrice, isFavourite);
     }
 
 }
