@@ -27,7 +27,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListPetCommand();
         } else if (userInput.equals("owners")) {
             return new ListOwnerCommand();
-        } else if (userInput.equals("both")) {
+        } else if (userInput.isEmpty()) {
             return new ListBothCommand();
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
