@@ -24,14 +24,15 @@ public class CreateDoctorCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_ADDRESS + "ADDRESS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
-    public static final String MESSAGE_SUCCESS = "Successfully created a new doctor Doctor#%d : %1$s";
+    public static final String MESSAGE_SUCCESS = "Successfully created a new doctor of id: #%d : \n"
+            + "%2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This doctor already exists";
 
     private final Person toAdd;

@@ -13,24 +13,25 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeletePatientCommand extends Command {
+public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteP";
+    public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a patient. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a person (patient/doctor). "
+            + "based on id provided "
             + COMMAND_WORD + " "
             + PREFIX_ID + "[PATIENT_ID]"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234";
 
-    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Successfully "
-            + "deleted a patient";
-    public static final String MESSAGE_DELETE_PATIENT_FAILURE = "Unable to "
-            + "delete a patient, check the id entered!";
-    private final int patientId;
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully "
+            + "deleted a person";
+    public static final String MESSAGE_DELETE_PERSON_FAILURE = "Unable to "
+            + "delete a person, check the id entered!";
+    private final int personId;
 
-    public DeletePatientCommand(int patientId) {
-        this.patientId = patientId;
+    public DeleteCommand(int personId) {
+        this.personId = personId;
     }
 
     @Override
@@ -39,13 +40,13 @@ public class DeletePatientCommand extends Command {
 
         ObservableList<Person> allPersons = model.getFilteredPersonList();
 
-        Person patientToDelete = model.getFilteredPatientById(allPersons, patientId);
+        Person patientToDelete = model.getFilteredPatientById(allPersons, personId);
         if (patientToDelete == null) {
-            throw new CommandException(MESSAGE_DELETE_PATIENT_FAILURE);
+            throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
         }
         model.deletePerson(patientToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(patientToDelete)));
     }
 
     @Override
@@ -55,18 +56,18 @@ public class DeletePatientCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeletePatientCommand)) {
+        if (!(other instanceof DeleteCommand)) {
             return false;
         }
 
-        DeletePatientCommand otherDeleteCommand = (DeletePatientCommand) other;
-        return patientId == otherDeleteCommand.patientId;
+        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+        return personId == otherDeleteCommand.personId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("patientId", patientId)
+                .add("personId", personId)
                 .toString();
     }
 }
