@@ -117,7 +117,7 @@ Adds a doctor to the address book.
 Format: `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphanumeric characters and spaces. The app will reject the input if it contains any other characters or is blank.
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.
 </div>
 
 **Examples:**
@@ -131,7 +131,7 @@ Adds a patient to the address book.
 Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphanumeric characters and spaces. The app will reject the input if it contains any other characters or is blank.
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -201,6 +201,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only persons matching all keywords will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other character provided will give an invalid argument error.
+</div>
+
 **Examples:**
 * `find jane` returns `Jane Doe`
 * `find doe` returns `John Doe` and `Jane Doe`<br>
@@ -220,7 +224,7 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+Keywords provided must only consist of alphabets. Any other character provided will give an invalid argument error.
 </div>
 
 **Examples:**
@@ -241,7 +245,7 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
+Keywords provided must only consist of alphabets. Any other character provided will give an invalid argument error.
 </div>
 
 **Examples:**
