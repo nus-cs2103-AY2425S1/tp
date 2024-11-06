@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
@@ -17,7 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HIGH_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LOW_RISK;
@@ -127,39 +125,46 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = "Following parameters are missing : ";
 
         // missing name prefix
         assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HIGH_RISK
-                + ALLERGY_DESC1_BOB, expectedMessage);
+                + ALLERGY_DESC1_BOB, expectedMessage + "n/" + "\n"
+                + AddCommand.MESSAGE_USAGE);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HIGH_RISK
-                + ALLERGY_DESC1_BOB, expectedMessage);
+                + ALLERGY_DESC1_BOB, expectedMessage + "p/" + "\n"
+                + + AddCommand.MESSAGE_USAGE);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HIGH_RISK,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HIGH_RISK
+                + ALLERGY_DESC_BOB, expectedMessage + "e/" + "\n" + AddCommand.MESSAGE_USAGE);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HIGH_RISK
-                + ALLERGY_DESC1_BOB, expectedMessage);
+                + ALLERGY_DESC1_BOB, expectedMessage + "a/" + "\n"
+                + AddCommand.MESSAGE_USAGE);
 
         // missing tag prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                + ALLERGY_DESC1_BOB, expectedMessage);
+                + ALLERGY_DESC1_BOB, expectedMessage + "t/" + "\n"
+                + AddCommand.MESSAGE_USAGE);
 
         // missing allergy prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                + TAG_DESC_HIGH_RISK, expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK, expectedMessage + "m/" + "\n"
+                + AddCommand.MESSAGE_USAGE);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                + VALID_ALLERGY1_BOB, expectedMessage);
+                + VALID_ALLERGY1_BOB, expectedMessage + "n/, p/, e/, a/, t/, m/" + "\n"
+                + AddCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void parse_invalidValue_failure() {
+
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HIGH_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Name.MESSAGE_CONSTRAINTS);
@@ -168,7 +173,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HIGH_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Phone.MESSAGE_CONSTRAINTS);
 
-        // invalid email
+        //invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                 + TAG_DESC_LOW_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Email.MESSAGE_CONSTRAINTS);
 
@@ -188,9 +193,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + TAG_DESC_LOW_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Name.MESSAGE_CONSTRAINTS);
 
-        // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + TAG_DESC_HIGH_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
     }
 }

@@ -1,0 +1,45 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "  <<interface>>  \nParser" as Parser<DeleteCommand>
+Class DeleteCommandParser {
+    -
+    parser(String): DeleteCommand
+}
+
+Class DeleteCommand {
+  -name: Optional<String>
+  -phone: Optional<String>
+  -email: Optional<String>
+  execute(Model) : CommandResult
+}
+Class CommandResult
+
+Class ArgumentMultimap
+Class ParserUtil
+
+Class Person {
+  -name : Name
+  -phone : Phone
+  -email: Email
+}
+Class Name
+Class Phone
+Class Email
+
+DeleteCommandParser .up.|> Parser
+
+DeleteCommandParser .down.> DeleteCommand: initialize >
+DeleteCommandParser .right.> ArgumentMultimap: utilizes >
+DeleteCommandParser .right.> ParserUtil: utilizes >
+
+DeleteCommand .down.> CommandResult: outputs >
+
+
+DeleteCommand -right-> Person: Deletes >
+Person *-down-> Name: has >
+Person *-down-> Phone: has >
+Person *-down-> Email: has >
+
+@enduml

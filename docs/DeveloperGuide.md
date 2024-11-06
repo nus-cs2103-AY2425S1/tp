@@ -23,8 +23,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
@@ -91,19 +89,14 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
-
-![Interactions Inside the Logic Component for the `delete n/ Jason p/ 88502457` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
-
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("date n/Alex Yeoh d/31/10/2024")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DateCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>DateCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
 </div>
+
 
 
 How the `Logic` component works:
@@ -136,7 +129,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> An alternative (arguably, a more OOP) model is given below. It includes a <code>Allergy</code> list in the <code>AddressBook</code>, which <code>Person</code> references. This allows <code>AddressBook</code> to store only one <code>Allergy</code> object per unique tag, rather than each <code>Person</code> needing their own <code>Allergy</code> objects.<br>
+</div>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -161,12 +156,100 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
-
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add Feature
+Users can seamlessly add patients to their Health Connect application.
+Patients must have a name, phone number, address, email, tag, and allergy assigned to them.
+#### Features Architechture Design
+1. Parsing handled by AddCommandParser: The logic for parsing is contained within the AddCommandParser to ensure the arguments are consistently handled before passing the
+relevant parameters to the AddCommand class.
 
-#### Proposed Implementation
+    * Benefit: This structure simplifies the command classes, follows the Single responsibility principle.
+   * Challenge: The AddCommandParser needs to handle the parsing extremely carefully and ensure correctness since the parser is the crucial later between the user input and
+the excecution of the command
+2. Avoiding duplicates: The AddCommand checks the person being added and ensures that duplicates are caught early in the ModelManager. This provides immediate feedback
+and prevents incorrect and impossible states in the data model(eg. 2 people with same name, number and email).
+
+    * Benefit: The model is validated every time a new person is added. Hence, this ensures that the date in the Model and in Storage is always correct. This ensures the integrity of data.
+    * Challenge: This requires checks across classes in other components in the architecture. E.g. need to have a isDuplicate method in the person class and access it in the
+AddCommandParser class to check if the person being added already exists in the Health Connect address book.
+
+
+Note:
+Tags must be one of the following: High Risk, Medium Risk or Low Risk. This is to ensure that the doctor can classify each patient and attend to their needs accordingly.
+
+A person must have at least one allergy tag. If the person has no allergies the None allergy tag can be added to them. This is to ensure that the doctor is fully certain of the allergies that each patient has.
+
+The activity diagram below illustrates the sequence of actions users will follow to add a new patient profile into the Health Connect application.
+
+<img src="images/AddPersonActivityDiagram.png" width="450"/>
+
+The sequence diagram below demonstrates the interaction among carious classes to add a new Person into the Health Connect Application.
+
+<img src="images/AddCommandSequenceDiagram.png" width="600"/>
+
+
+### Delete Feature
+Users can easily delete patients from their Health Connect application. To remove a patient, users must specify the patient's unique identifier, such as their name, phone number, or email.
+The Delete feature allows for the removal of outdated or incorrect records, helping to maintain the integrity and relevance of the data within the application.
+
+#### Features Architecture Design
+1. Parsing handled by DeleteCommandParser: The logic for parsing is contained within the DeleteCommandParser to ensure that arguments are consistently handled before passing the relevant parameters to the DeleteCommand class.
+
+    * Benefit: This structure keeps the DeleteCommand class focused on executing the delete operation, following the Single Responsibility Principle.
+    * Challenge: The DeleteCommandParser must ensure the accuracy of input parsing, as it acts as the crucial layer between user input and command execution. Incorrect parsing could result in unintended deletions.
+
+2. Preventing erroneous deletions: The DeleteCommand checks the specified patient against the existing records in the ModelManager to confirm their existence before deletion. This provides immediate feedback if the patient is not found and prevents accidental deletions.
+
+    * Benefit: Validating the existence of the patient before deletion preserves data integrity, ensuring that only valid deletions occur and preventing unintended modifications.
+    * Challenge: This requires checks across classes within the architecture. For example, a method like `matches` in the Delete class could be used by the DeleteCommand to verify the presence of the specified patient in Model's filtered list.
+
+This method would have dependencies on the Model class and the Person class. The class diagram of a delete person command is given
+to demonstrate the interactions among classes.
+
+<img src="images/DeleteClassDiagram.png" width="600"/>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, when executing the delete command in Heath Connect. Take `execute("delete n/Jason p/88502457")` API call as an example.
+
+![Interactions Inside the Logic Component for the `delete n/ Jason p/ 88502457` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
+</div>
+
+### Edit Feature
+Users can easily edit patient information within the Health Connect application. To update a patient's details, users must specify the patient's index in the list, along with the fields to be updated. The Edit feature ensures that patient records remain accurate and up-to-date, maintaining the relevance and integrity of data within the application.
+
+#### Features Architecture Design
+1. Parsing handled by EditCommandParser: The logic for parsing is contained within the EditCommandParser to ensure that arguments, including the specified index and fields to be updated, are consistently handled before passing the relevant parameters to the EditCommand class.
+
+    * **Benefit:** This structure keeps the EditCommand class focused on executing the update operation, adhering to the Single Responsibility Principle.
+    * **Challenge:** The EditCommandParser must ensure precise parsing of input, as it acts as the essential intermediary between user input and command execution. Incorrect parsing could lead to unintended modifications of patient records.
+
+2. Validating index and fields during edits: The EditCommand checks the specified index to confirm the patient’s presence in the ModelManager before proceeding with the updates. This prevents errors and provides immediate feedback if the index is invalid.
+
+    * **Benefit:** Confirming the patient’s existence before editing preserves data integrity, ensuring updates are applied only to valid records.
+    * **Challenge:** This requires coordination across classes within the architecture. In the `execute` method, the index is checked with the `Model`'s filteredPersonList. This is to ensure validity within the Model's current list before applying changes.
+
+3. Checking for duplicate patients: After parsing and validating, the EditCommand verifies that the edited details do not create a duplicate patient entry within the list. If the update would cause the patient to match an existing record, the command will reject the changes and notify the user.
+
+    * **Benefit:** This check prevents duplicate records from being introduced into the system, ensuring data integrity and avoiding redundancy in the patient list.
+    * **Challenge:** This requires cross-checking the modified patient data with existing records in the ModelManager. The method like `isSamePerson` is implemented in the person class, accessible by the EditCommand, to detect and prevent any updates that would result in duplicate patient entries.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, when executing the edit command in Heath Connect. Take `execute("edit 1 p/88991123")` API call as an example.
+
+<img src="images/EditSequenceDiagram.png" width="600"/>
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>EditCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
+</div>
+
+The activity diagram below illustrates the sequence of actions users will follow to edit a patient profile into the Health Connect application.
+
+<img src="images/EditPersonActivityDiagram.png" width="600"/>
+
+## Planned Enhancements
+### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -233,6 +316,56 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+### \[Proposed\] Adding an End Time to the Date Feature with Duplicate/Overlap Prevention
+
+To support effective scheduling, we propose adding an `end time` to the Date feature, along with functionality to prevent overlapping time slots. This will prevent double-booking, ensuring the doctor avoids conflicting appointments and maintains organized time management.
+#### Features Architecture Design
+
+1. **Data Model Update**
+    - Update the `Date` class to include an `endTime` field alongside `startTime`, using `LocalDate` for the date and `LocalTime` for `startTime` and `endTime` to distinguish between date and time clearly.
+      - Introduce an overlap-checking method `isOverlappingDate` within the `Date` class to determine if one `Date` object conflicts with another based on `startTime` and `endTime`.
+
+2. **Command Parsing and Validation**
+    - Modify `AddDateCommandParser` to handle an additional `endTime` parameter, ensuring both `startTime` and `endTime` are correctly formatted.
+    - Validation rules:
+        - Confirm that `endTime` follows the correct format and is after `startTime`.
+        - **Overlap Check:** Ensure that any new date entry does not overlap with existing dates in `ModelManager`. If an overlap is detected, reject the command and provide the user with an error message indicating a scheduling conflict.
+
+3. **ModelManager Update**
+    - Add an `hasOverlappingDate(Date newDate)` method to `ModelManager` to verify against existing entries, ensuring no overlaps occur between appointments. This check maintains scheduling integrity across the application.
+
+4. **Command Class Modification**
+    - Update the `AddDateCommand` class to accommodate the `endTime` parameter. Before adding a new date, validate against `ModelManager` to ensure it does not conflict with current schedules.
+
+5. **User Interface Update**
+    - Adjust the UI to enable users to specify both `startTime` and `endTime` fields.
+    - Display an error message when scheduling conflicts arise, instructing users to select an alternate time slot for their appointment.
+
+6. **Storage Update**
+    - Modify the storage schema to include the `endTime` field, ensuring proper serialization and deserialization so that time data remains consistent when loading and saving appointments.
+
+
+The following class diagram shows the interaction between the classes given the new update
+
+<img src="images/BetterDateClassDiagram.png" width="650" />
+
+The following activity diagram summarizes what happens when a user executes the date command with the new end time improvement.
+
+<img src="images/BetterDateActivityDiagram.png" width="650" />
+
+
+#### Considerations
+
+- **Edge Cases:** Handle cases where `endTime` is equal to or before `startTime`, and verify that appointments on different dates do not incorrectly trigger overlaps.
+- **Testing:** Add unit tests to validate the following scenarios:
+    - Non-overlapping time slots are added successfully.
+    - Overlapping time slots are correctly identified, resulting in command rejection.
+    - Edge cases with adjacent `startTime` and `endTime` that do not overlap are handled as expected.
+
+
+## **Implementation**
+This section describes some noteworthy details on how certain features are implemented.
+
 ### Email Feature
 
 The email feature allows users to add, edit, and view email addresses for each person in the address book.
@@ -256,6 +389,7 @@ The tag feature allows users to add, edit, and view tags for each person in the 
 ### Implementation
 
 A tag is represented by the 'Tag' class and 'JsonAdaptedTag' is used for JSON serialization and deserialization.
+In this version a person can only have 3 possible tags: High Risk, Low Risk and Medium Risk
 
 ### Date Feature
 
@@ -324,39 +458,20 @@ Priorities:
 - Medium (nice to have) - `**`
 - Low (unlikely to have) - `*`
 
-| Priority | As a …​                        | I want to …​                                                           | So that I can…​                                                                              |
-|----------|--------------------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `***`    | home-based healthcare provider | add the data of new clients                                            | register new clients in the system for tracking                                              |
-| `**`     | home-based healthcare provider | tag patients based on their urgency                                    | prioritise higher-risk patients                                                              |
-| `**`     | home-based healthcare provider | tag a client's entry or information                                    | keep track of special instructions, preferences, medical allergies or urgency                |
-| `*`      | home-based healthcare provider | store prescription                                                     | add prescription records to keep track of which medications patients should take             |
-| `*`      | home-based healthcare provider | add relevant reports such as X-rays                                    | access such details for reference when explaining the conditions to patients                 |
-| `**`     | home-based healthcare provider | add notes for reference during future visits                           | recall important details upon next visit                                                     |
-| `*`      | home-based healthcare provider | record patients' feedback                                              | address them in future visits                                                                |
-| `***`    | home-based healthcare provider | be notified of overlapping names and addresses                         | avoid duplicate client entries                                                               |
-| `***`    | home-based healthcare provider | see my patients' records                                               | understand how my patient is doing                                                           |
-| `***`    | home-based healthcare provider | see my patients' allergies                                             | provide the correct prescription for my patients                                             |
-| `**`     | home-based healthcare provider | view my patient's emergency contacts quickly                           | reach them in case of emergency                                                              |
-| `*`      | home-based healthcare provider | view all clients sorted by their last visit date                       | priortise follow up visits                                                                   |
-| `*`      | home-based healthcare provider | track medicine and medical equipment used for each patient's treatment | maintain an accurate log and ensure consistency in care plan                                 |
-| `*`      | home-based healthcare provider | check number of visits for a particular patient in a given time period | ensure balance between patients' needs and my availability                                   |
-| `***`    | home-based healthcare provider | delete the records of patients whom I am not seeing anymore            | keep my address book concise and clutter-free                                                |
-| `***`    | home-based healthcare provider | remove old or inactive clients from the address book                   | keep the list relevant                                                                       |
-| `***`    | home-based healthcare provider | edit the details of my clients' address                                | locate a person easily                                                                       |
-| `***`    | home-based healthcare provider | have the contact details of my patients for easy access                | update the details accordingly if there are any changes                                      |
-| `***`    | home-based healthcare provider | add new appointment details                                            | add appointments in my schedule for tracking later on                                        |
-| `***`    | home-based healthcare provider | see my schedule for the day                                            | organise my time and ensure that there are no clashes in appointments                        |
-| `*`      | home-based healthcare provider | be reminded of my clients' appointments nearer to the date             | organise my time                                                                             |
-| `*`      | home-based healthcare provider | generate the route for the day                                         | efficiently travel to different locations and save time                                      |
-| `*`      | home-based healthcare provider | send notifications to patients                                         | they can expect my arrival                                                                   |
-| `*`      | home-based healthcare provider | schedule recurring visits for clients directly in the address book     | avoid re-entering their information each time                                                |
-| `*`      | home-based healthcare provider | check last month's payment and visits summary                          | track my workload                                                                            |
-| `*`      | home-based healthcare provider | group patients according to address and priority                       | save travel time or focus on more urgent cases                                               |
-| `*`      | home-based healthcare provider | get notifications in the event an emergency occurs                     | respond as quickly as possible and know whether there is a need to go to the patient's house |
-| `**`     | home-based healthcare provider | see the services provided for each patient                             | know how much I should be charging my patients                                               |
-| `*`      | home-based healthcare provider | see which of my patients have paid                                     | keep track of how much my patients owe me                                                    |
-| `*`      | home-based healthcare provider | record when my patients pay for their appointment                      | keep track of which patients have paid for my services                                       |
-| `*`      | home-based healthcare provider | show insurance details for patients                                    | generate patient's bill accordingly                                                          |
+| Priority | As a …​                        | I want to …​                                                       | So that I can…​                                                                              |
+|----------|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `***`    | home-based healthcare provider | add the data of new clients                                        | register new clients in the system for tracking                                              |
+| `**`     | home-based healthcare provider | tag patients based on their urgency                                | prioritise higher-risk patients                                                              |
+| `**`     | home-based healthcare provider | tag a client's entry or information                                | keep track of special instructions, preferences, medical allergies or urgency                |
+| `***`    | home-based healthcare provider | be notified of overlapping names phone numbers and email addresses | avoid duplicate client entries                                                               |
+| `***`    | home-based healthcare provider | see my patients' records                                           | understand how my patient is doing                                                           |
+| `***`    | home-based healthcare provider | see my patients' allergies                                         | provide the correct prescription for my patients                                             |
+| `***`    | home-based healthcare provider | delete the records of patients whom I am not seeing anymore        | keep my address book concise and clutter-free                                                |
+| `***`    | home-based healthcare provider | edit the details of my clients' address                            | locate a person easily                                                                       |
+| `***`    | home-based healthcare provider | have the contact details of my patients for easy access            | update the details accordingly if there are any changes                                      |
+| `***`    | home-based healthcare provider | add new appointment details                                        | add appointments in my schedule for tracking later on                                        |
+| `***`    | home-based healthcare provider | see my schedule for the day                                        | organise my time and ensure that there are no clashes in appointments                        |
+| `*`      | home-based healthcare provider | filter patients according to address and priority                  | save travel time or focus on more urgent cases                                               |
 
 ### Use cases
 
@@ -504,6 +619,9 @@ Priorities:
 11. The system should be customised for operations by a single user and need not handle multiple user-access.
 12. Configuration and data files should use standard formats to ensure compatibility with text editors and other applications.
 13. The system should validate all user inputs to prevent errors when saving the information.
+14. The system’s architecture should support potential future upgrades that might include expanded user capacity, without significant reworking of core components.
+15.  User data should persist across sessions, stored in a reliable format (e.g., JSON or XML) that can be easily backed up and restored.
+16.  The application should be designed in a way that allows new features to be added with minimal disruption to existing functionality.
 
 ### Glossary
 

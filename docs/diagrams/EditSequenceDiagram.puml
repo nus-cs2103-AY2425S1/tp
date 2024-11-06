@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "d:EditCommand" as EditCommand LOGIC_COLOR
+participant "e:Person" as Person LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 p/88991123")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit 1 p/88991123")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommand: EditPersonDescriptor()
+activate EditCommand
+
+EditCommand -> AddressBookParser: EditPersonDescriptor
+deactivate EditCommand
+
+AddressBookParser -> EditCommandParser : parse("1 p/88991123")
+activate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser :
+deactivate EditCommand
+
+EditCommandParser --> AddressBookParser : d
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> EditCommand : execute(m)
+activate EditCommand
+
+create Person
+EditCommand -> Person
+activate Person
+
+Person --> EditCommand
+deactivate Person
+
+EditCommand -> Model : setPerson(p, e)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : r
+deactivate EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
