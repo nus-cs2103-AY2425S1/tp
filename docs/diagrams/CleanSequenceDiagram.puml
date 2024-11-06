@@ -15,7 +15,7 @@ end box
 [-> LogicManager : execute(clean)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(clean)
+LogicManager -> AddressBookParser : parseCommand("clean")
 activate AddressBookParser
 
 create CleanCommand
@@ -28,7 +28,7 @@ deactivate CleanCommand
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
-LogicManager -> CleanCommand : execute()
+LogicManager -> CleanCommand : execute(model)
 activate CleanCommand
 
 create GradYearPredicate
@@ -38,25 +38,7 @@ activate GradYearPredicate
 GradYearPredicate --> CleanCommand : p
 deactivate GradYearPredicate
 
-CleanCommand -> Model : updateFilteredList(p)
-activate Model
-Model --> CleanCommand
-deactivate Model
-
-
-CleanCommand -> Model : getFilteredList()
-activate Model
-Model --> CleanCommand
-deactivate Model
-
-loop until no more persons in filtered list
-CleanCommand -> Model : deletePerson(person)
-activate Model
-Model --> CleanCommand
-deactivate Model
-end loop
-
-CleanCommand -> Model : updateFilteredList()
+CleanCommand -> Model : deletePersonByPredicate(p)
 activate Model
 Model --> CleanCommand
 deactivate Model
