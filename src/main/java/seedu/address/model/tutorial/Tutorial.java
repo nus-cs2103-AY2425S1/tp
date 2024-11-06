@@ -26,6 +26,7 @@ public class Tutorial {
     }
 
     public String getSubject() {
+        assert subject != null : "Subject should never be null";
         return subject;
     }
 

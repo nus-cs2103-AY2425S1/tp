@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -57,6 +59,7 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -72,6 +75,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info(" - Running execute(Model model) in " + EditCommand.class);
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -97,6 +101,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info(" - Successfully edited person in filtered person list");
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
