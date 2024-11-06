@@ -115,10 +115,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
-        supplierListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+        supplierListPanelPlaceholder.getChildren().setAll(supplierListPanel.getRoot());
 
         deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
-        deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
+        deliveryListPanelPlaceholder.getChildren().setAll(deliveryListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
