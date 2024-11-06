@@ -22,9 +22,19 @@ public class Lesson {
             "Days should be one of the following: "
             + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday (case insensitive). \n"
             + "Lesson time should be in the format HHMM-HHMM (24-hour format). "
-            + "Start time must be before end time. \n"
+            + "Start time must be before end time. Start and end time cannot be the same. \n "
+            + "Start time cannot be 2359 and end time cannot be 0000\n"
             + "Lesson input must contain a day and a time range separated by a space. "
             + "Example: " + PREFIX_LESSON + " monday 0900-1000";
+    public static final String MESSAGE_INVALID_LESSON_DAY = "Are you sure you have given a valid day of the week? ⊙▂⊙";
+    public static final String MESSAGE_INVALID_LESSON_TIME = "Are you sure you have given valid "
+            + "start and end times? ⊙▂⊙ \n"
+            + "Please give it in HHMM-HHMM (24-hour format)";
+    public static final String MESSAGE_INVALID_LESSON_END_TIME = "Unfortunately we do not allow lessons to overflow "
+            + "to the next day, the latest a lesson can end is 2359";
+    public static final String MESSAGE_INVALID_LESSON_START_TIME = "Lessons have to start earlier than 2359,"
+            + " we do not allow lessons to overflow to the next day.";
+    public static final String MESSAGE_INVALID_TIME_ORDER = "Invalid time order, start time must be before end time";
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
@@ -40,12 +50,41 @@ public class Lesson {
      */
     public Lesson(String lesson) {
         requireNonNull(lesson);
-        checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLesson(lesson));
         String[] lessonDayTimeArr = lesson.split("\\s+", 2);
         String[] timeArr = lessonDayTimeArr[1].split("-");
         this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
-        this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
-        this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
+        this.startTime = LocalTime.parse(timeArr[0], TIME_FORMATTER);
+        this.endTime = LocalTime.parse(timeArr[1], TIME_FORMATTER);
+
+    }
+
+
+    /**
+     * Checks if the lesson end time is at a valid time.
+     *
+     * <p>A valid lesson end time should not be exactly at midnight (00:00).
+     * This method ensures that lessons do not overflow to the next day.</p>
+     *
+     * @param endTime The {@code LocalTime} representing the lesson's end time.
+     * @return {@code true} if the end time is valid (not 00:00), {@code false} otherwise.
+     */
+    public static boolean isLessonEndAtValidTime(LocalTime endTime) {
+        return !endTime.equals(LocalTime.of(0, 0));
+    }
+
+    /**
+     * Checks if the lesson start time is at a valid time.
+     *
+     * <p>A valid lesson start time must be before the last minute of the day (23:59).
+     * This method ensures that lessons begin within the current day,
+     * and do not start precisely at midnight or the very end of the day.</p>
+     *
+     * @param startTime The {@code LocalTime} representing the lesson's start time.
+     * @return {@code true} if the start time is before 23:59, {@code false} otherwise.
+     */
+    public static boolean isLessonStartAtValidTime(LocalTime startTime) {
+        return startTime.isBefore(LocalTime.of(23, 59));
     }
 
     /**
@@ -54,24 +93,22 @@ public class Lesson {
      * @param timeRange The time range to validate.
      * @return true if the time range is valid.
      */
-    private static boolean isValidTimeRange(String timeRange) {
+    public static boolean isValidTimeRange(String timeRange) {
         return timeRange.matches(VALID_TIME_RANGE_REGEX);
     }
 
     /**
-     * Validates if the start time is before the end time.
+     * Checks if the specified start time is before the specified end time.
      *
-     * @param timeRange The time range to check.
-     * @return true if the start time is before the end time.
+     * <p>This method verifies that the start time occurs earlier than the end time,
+     * ensuring a valid time order.</p>
+     *
+     * @param startTime The start time to check.
+     * @param endTime The end time to compare against the start time.
+     * @return {@code true} if the start time is before the end time; {@code false} otherwise.
      */
-    private static boolean isValidTimeOrder(String timeRange) {
-        if (isValidTimeRange(timeRange)) {
-            String[] times = timeRange.split("-");
-            LocalTime startTime = LocalTime.parse(times[0], TIME_FORMATTER);
-            LocalTime endTime = LocalTime.parse(times[1], TIME_FORMATTER);
-            return startTime.isBefore(endTime);
-        }
-        return false;
+    public static boolean isValidTimeOrder(LocalTime startTime, LocalTime endTime) {
+        return startTime.isBefore(endTime);
     }
 
 
@@ -86,14 +123,23 @@ public class Lesson {
      * @return true if the lesson is valid in terms of day, time range format, and time order;
      *          false otherwise.
      */
-    public static boolean isValidLesson(String lesson) {
-        String[] parts = lesson.split("\\s+", 2);
-        if (parts.length != 2) {
+    public static boolean isValidLesson(String lesson) throws IllegalArgumentException {
+        assert lesson != null;
+        String[] lessonDayTimeArr = lesson.split("\\s+", 2);
+        if (lessonDayTimeArr.length != 2) {
             return false;
         }
-        String day = parts[0];
-        String timeRange = parts[1];
-        return Day.isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
+
+        String dayString = lessonDayTimeArr[0];
+        String timeRange = lessonDayTimeArr[1];
+
+        String[] timeArr = lessonDayTimeArr[1].split("-");
+        LocalTime startTime = LocalTime.parse(timeArr[0], TIME_FORMATTER);
+        LocalTime endTime = LocalTime.parse(timeArr[1], TIME_FORMATTER);
+
+        return Day.isValidDay(dayString) && isValidTimeRange(timeRange)
+                && isLessonStartAtValidTime(startTime) && isLessonEndAtValidTime(endTime)
+                && isValidTimeOrder(startTime, endTime);
     }
 
     /**
@@ -132,6 +178,7 @@ public class Lesson {
      *         {@code false} otherwise.
      */
     public static boolean hasClashingLessonWithinList(List<Lesson> lessons) {
+        assert lessons != null;
         return IntStream.range(0, lessons.size())
                 .anyMatch(i -> IntStream.range(i + 1, lessons.size())
                         .anyMatch(j -> isClashingWithOtherLesson(lessons.get(i), lessons.get(j))));
@@ -205,6 +252,25 @@ public class Lesson {
 
     public LocalTime getEndTime() {
         return endTime;
+    }
+
+    /**
+     * Checks if this lesson's time range falls within a specified time range.
+     *
+     * @param otherTimeRange A time range in the format "HHmm-HHmm".
+     * @return true if this lesson's time range is overlapping the specified time range.
+     */
+    public boolean checkOverlappingTimeRange(String otherTimeRange) {
+        String[] times = otherTimeRange.split("-");
+        LocalTime otherStartTime = LocalTime.parse(times[0], TIME_FORMATTER);
+        LocalTime otherEndTime = LocalTime.parse(times[1], TIME_FORMATTER);
+
+        return ((startTime.equals(otherStartTime) || startTime.isBefore(otherStartTime))
+                && endTime.isAfter(otherStartTime))
+                || (startTime.isBefore(otherEndTime)
+                && (endTime.equals(otherEndTime) || endTime.isAfter(otherEndTime)))
+                || ((startTime.equals(otherStartTime) || (startTime.isAfter(otherStartTime))
+                && (endTime.equals(otherEndTime) || endTime.isBefore(otherEndTime))));
     }
 
     /**

@@ -75,4 +75,19 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Checks if the argument map contains any prefixes (indicating multiple keys).
+     *
+     * <p>This method checks whether the {@code argMultimap} has more than one entry.
+     * There is always a single entry in {@code argMultimap} where the key is an empty
+     * string and the value is an empty array, so a size greater than 1 implies the presence
+     * of other prefixes.</p>
+     *
+     * @return {@code true} if {@code argMultimap} contains more than one entry, indicating
+     *         the presence of prefixes; {@code false} otherwise.
+     */
+    public boolean hasPrefixes() {
+        return argMultimap.size() > 1;
+    }
 }
