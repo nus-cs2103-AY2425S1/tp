@@ -58,9 +58,8 @@ public class AddGoodsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // TODO: Implement the check for duplicate goods
-
         model.addGoods(linkToGoods);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
     }
 

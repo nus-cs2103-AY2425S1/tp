@@ -1,46 +1,85 @@
 package seedu.address.logic.commands;
 
-// import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.DeleteGoodsCommand.MESSAGE_SUCCESS;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.goods.GoodsName;
+import seedu.address.model.goods.Goods;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.testutil.GoodsBuilder;
+import seedu.address.testutil.GoodsReceiptBuilder;
 
-/**
- * Contains integration tests for the {@code DeleteGoodsCommand}.
- */
 public class DeleteGoodsCommandTest {
 
-    private Model getDefaultModel() {
-        return new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
+    @Test
+    public void execute_nonExistingSupplierNameAndExistingGoodsName_failure() {
+        Model model = new ModelManager();
+        model.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        model.addGoods(appleReceipt);
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(BOB.getName(), apple.getGoodsName());
+        assertCommandFailure(cmd, model, Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
     }
 
     @Test
-    public void execute_existingGoodsReceipt_success() {
-        // TODO: Expand to ensure no unncessary deletions for goods of the same name
-        Model expectedModel = getDefaultModel();
-        GoodsReceipt toBeDeleted = expectedModel.getGoods().getReceiptList().get(0);
-        GoodsName refGoodsName = toBeDeleted.getGoods().getGoodsName();
-        DeleteGoodsCommand cmd = new DeleteGoodsCommand(refGoodsName.toString());
-        expectedModel.deleteGoods(refGoodsName);
-
-        assertCommandSuccess(cmd, getDefaultModel(),
-                String.format(DeleteGoodsCommand.MESSAGE_SUCCESS, refGoodsName), expectedModel);
+    public void execute_existingSupplierNameAndNonExistingGoodsName_failure() {
+        Model model = new ModelManager();
+        model.addPerson(ALICE);
+        model.addPerson(BOB);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        Goods banana = new GoodsBuilder()
+                .withName("Banana")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        GoodsReceipt bananaReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(BOB.getName())
+                .withGoods(banana)
+                .build();
+        model.addGoods(appleReceipt);
+        model.addGoods(bananaReceipt);
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), banana.getGoodsName());
+        assertCommandFailure(cmd, model, Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
     }
 
-    // @Test
-    // public void execute_nonExistingGoodsReceipt_throwsCommandException() {
-    //     // TODO: Expand to include duplicate case
-    //     GoodsName goodsName = new GoodsName("Alex");
-    //     DeleteGoodsCommand cmd = new DeleteGoodsCommand(goodsName.toString());
-    //     assertCommandFailure(cmd, getDefaultModel(),
-    //         String.format(DeleteGoodsCommand.MESSAGE_FAILURE, goodsName.toString()));
-    // }
+    @Test
+    public void execute_existingSupplierNameAndExistingGoodsName_success() {
+        ModelManager model = new ModelManager();
+        model.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        model.addGoods(appleReceipt);
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), apple.getGoodsName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS, apple.getGoodsName());
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(ALICE);
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
 }

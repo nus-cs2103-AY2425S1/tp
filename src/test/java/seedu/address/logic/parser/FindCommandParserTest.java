@@ -5,15 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -27,8 +26,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        FindCommand expectedFindCommand = new FindCommand(List.of("Alice", "Bob"));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -53,8 +51,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgsWithCategory_returnsFindCommand() {
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-                new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        List<String> keywords = List.of("Alice", "Bob");
         List<String> categoryArgs = List.of("CONSUMABLES", "LIFESTYLE", "SPECIALTY");
         for (String categoryArg : categoryArgs) {
             GoodsCategories category;
@@ -63,8 +60,7 @@ public class FindCommandParserTest {
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-            FindCommand expectedFindCommand = new FindCommand(
-                    nameContainsKeywordsPredicate, category);
+            FindCommand expectedFindCommand = new FindCommand(keywords, Set.of(category));
             String userInput = " \n Alice \n \t Bob  \t " + PREFIX_CATEGORY + categoryArg;
             assertParseSuccess(parser, userInput, expectedFindCommand);
         }

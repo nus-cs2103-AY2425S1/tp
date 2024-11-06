@@ -69,17 +69,39 @@ public class TypicalGoods {
 
         ReceiptLog receiptLog = new ReceiptLog();
 
+
+
         List<GoodsReceipt> g = new ArrayList<>(Arrays.asList(
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Apple")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Banana")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Carrot")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Dragonfruit")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Eggplant")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Fish")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Grape")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Ham")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Icecream")).build(),
-            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Jam")).build()
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Apple"))
+                    .withSupplierName(TypicalPersons.ALICE.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Banana"))
+                    .withSupplierName(TypicalPersons.BENSON.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Carrot"))
+                    .withSupplierName(TypicalPersons.CARL.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Dragonfruit"))
+                    .withSupplierName(TypicalPersons.DANIEL.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Eggplant"))
+                    .withSupplierName(TypicalPersons.ELLE.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Fish"))
+                    .withSupplierName(TypicalPersons.FIONA.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Grape"))
+                    .withSupplierName(TypicalPersons.ALICE.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Ham"))
+                    .withSupplierName(TypicalPersons.BENSON.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Icecream"))
+                    .withSupplierName(TypicalPersons.CARL.getName())
+                    .build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Jam"))
+                    .withSupplierName(TypicalPersons.DANIEL.getName())
+                    .build()
         ));
 
         receiptLog.setReceipts(g);

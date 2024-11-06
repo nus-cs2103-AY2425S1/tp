@@ -19,6 +19,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReceiptLog;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
 public class CsvGoodsStorageTest {
@@ -63,7 +64,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"";
+                + "\"Amy Bee\"";
         assertTrue(lines.contains(expectedLine));
     }
 
@@ -103,7 +104,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"\n";
+                + "\"Amy Bee\"\n";
         Files.write(filePath, headerLine.getBytes());
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
@@ -151,7 +152,7 @@ public class CsvGoodsStorageTest {
         List<GoodsReceipt> goodsReceiptList = receiptLog.getReceiptList();
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
-        GoodsReceipt expected = new GoodsReceiptBuilder().build();
+        GoodsReceipt expected = new GoodsReceiptBuilder().withSupplierName(new Name("Supplier")).build();
         assertTrue(expected.isSameReceipt(goodsReceipt));
     }
 
@@ -188,7 +189,7 @@ public class CsvGoodsStorageTest {
         List<GoodsReceipt> goodsReceiptList = receiptLog.getReceiptList();
         assertEquals(1, goodsReceiptList.size());
         GoodsReceipt goodsReceipt = goodsReceiptList.get(0);
-        GoodsReceipt expected = new GoodsReceiptBuilder().build();
+        GoodsReceipt expected = new GoodsReceiptBuilder().withSupplierName(new Name("Supplier")).build();
         assertTrue(expected.isSameReceipt(goodsReceipt));
     }
 
@@ -207,7 +208,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"\n";
+                + "\"Amy Bee\"\n";
         String missingContent = "\"2022-02-02T00:00\","
                 + "\"Banana\","
                 + "\"true\","
@@ -244,7 +245,7 @@ public class CsvGoodsStorageTest {
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
-                + "\"Supplier\"\n";
+                + "\"Amy Bee\"\n";
         Files.write(filePath, headerLine.getBytes());
         Files.write(filePath, content.getBytes(), java.nio.file.StandardOpenOption.APPEND);
 
