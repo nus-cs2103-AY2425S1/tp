@@ -5,13 +5,17 @@ import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -120,25 +124,32 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
         contactDisplay = new ContactDisplay();
         contactDisplay.showHelpDisplay();
         scrollableContactDisplay = contactDisplay.getScrollPane();
 
         splitPane = new SplitPane();
         splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay.getRoot());
-        splitPane.setDividerPositions(0.6);
+        splitPane.setDividerPositions(0.55);
 
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(splitPane);
 
+        SplitPane resultDisplaySplitPane = new SplitPane();
+        resultDisplaySplitPane.setOrientation(Orientation.VERTICAL);
         resultDisplay = new ResultDisplay();
+        resultDisplaySplitPane.getItems().addAll(resultDisplay.getRoot(), splitPane);
+        resultDisplaySplitPane.setDividerPositions(0.25);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        VBox.setVgrow(resultDisplaySplitPane, Priority.ALWAYS);
+        VBox.setVgrow(splitPane, Priority.ALWAYS);
+        AnchorPane.setBottomAnchor(splitPane, 0.0);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         personListPanel.getPersonListView().getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldSelection, newSelection) -> {
