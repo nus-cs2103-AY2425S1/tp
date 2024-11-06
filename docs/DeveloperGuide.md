@@ -159,27 +159,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Feature
-Users can seamlessly add patients to their Health Connect application. 
+Users can seamlessly add patients to their Health Connect application.
 Patients must have a name, phone number, address, email, tag, and allergy assigned to them.
 #### Features Architechture Design
-1. Parsing handled by AddCommandParser: The logic for parsing is contained within the AddCommandParser to ensure the arguments are consistently handled before passing the 
+1. Parsing handled by AddCommandParser: The logic for parsing is contained within the AddCommandParser to ensure the arguments are consistently handled before passing the
 relevant parameters to the AddCommand class.
 
-    * Benefit: This structure simplifies the command classes, follows the Single responsibility principle. 
-   * Challenge: The AddCommandParser needs to handle the parsing extremely carefully and ensure correctness since the parser is the crucial later between the user input and 
+    * Benefit: This structure simplifies the command classes, follows the Single responsibility principle.
+   * Challenge: The AddCommandParser needs to handle the parsing extremely carefully and ensure correctness since the parser is the crucial later between the user input and
 the excecution of the command
 2. Avoiding duplicates: The AddCommand checks the person being added and ensures that duplicates are caught early in the ModelManager. This provides immediate feedback
 and prevents incorrect and impossible states in the data model(eg. 2 people with same name, number and email).
 
     * Benefit: The model is validated every time a new person is added. Hence, this ensures that the date in the Model and in Storage is always correct. This ensures the integrity of data.
-    * Challenge: This requires checks across classes in other components in the architecture. E.g. need to have a isDuplicate method in the person class and access it in the 
+    * Challenge: This requires checks across classes in other components in the architecture. E.g. need to have a isDuplicate method in the person class and access it in the
 AddCommandParser class to check if the person being added already exists in the Health Connect address book.
 
 
 Note:
 Tags must be one of the following: High Risk, Medium Risk or Low Risk. This is to ensure that the doctor can classify each patient and attend to their needs accordingly.
 
-A person must have at least one allergy tag. If the person has no allergies the None allergy tag can be added to them. This is to ensure that the doctor is fully certain of the allergies that each patient has. 
+A person must have at least one allergy tag. If the person has no allergies the None allergy tag can be added to them. This is to ensure that the doctor is fully certain of the allergies that each patient has.
 
 The activity diagram below illustrates the sequence of actions users will follow to add a new patient profile into the Health Connect application.
 
@@ -236,7 +236,7 @@ Users can easily edit patient information within the Health Connect application.
 
     * **Benefit:** This check prevents duplicate records from being introduced into the system, ensuring data integrity and avoiding redundancy in the patient list.
     * **Challenge:** This requires cross-checking the modified patient data with existing records in the ModelManager. The method like `isSamePerson` is implemented in the person class, accessible by the EditCommand, to detect and prevent any updates that would result in duplicate patient entries.
-    
+
 The sequence diagram below illustrates the interactions within the `Logic` component, when executing the edit command in Heath Connect. Take `execute("edit 1 p/88991123")` API call as an example.
 
 <img src="images/EditSequenceDiagram.png" width="600"/>
