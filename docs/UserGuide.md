@@ -13,36 +13,18 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## About This Document
 
-1. Ensure you have Java `17` or above installed in your Computer.
+This section introduces the HiredFiredPro layout, command format and commonly used parameters to help you understand the document.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-1/tp/releases).
+* If you are interested in setting up and using HiredFiredPro, head over to the [Quick Start](#quick-start) section.
+* If you are interested in learning more about the features, you can visit the [Features](#features) section.
 
-1. Copy the file to the folder you want to use as the _home folder_ for HiredFiredPro.
+### HiredFiredPro Layout
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hiredfiredpro.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+The image below shows the different components of HiredFiredPro.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe j/Software Developer p/98765432 e/johnd@example.com i/7.5` : Adds a candidate named `John Doe` to HiredFiredPro.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Features
+### Command Format
 
 <box type="info" seamless>
 
@@ -57,14 +39,67 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+
+### Commonly Used Parameters
+
+<box type="info" seamless>
+
+**Notes about the parameters:**<br>
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  </box>
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+Parameter     | Notes
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**`NAME`**   | restrictions
+**`JOB`**    | restrictions
+**`PHONE_NUMBER`**   | restrictions
+**`EMAIL`** | restrictions
+**`SKILL`**   | restrictions
+**`INTERVIEW_SCORE`**   | restrictions
+**`TAG`**   | restrictions
+**`INDEX`**   | restrictions
+**`ORDER`**   | restrictions
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start
+
+1. Ensure you have Java `17` or above installed in your Computer.
+
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-1/tp/releases).
+
+3. Copy the file to the folder you want to use as the _home folder_ for HiredFiredPro.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hiredfiredpro.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+   ![Ui](images/Ui.png) 
+
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
+
+   * `list` : Lists all candidates.
+
+   * `add n/John Doe j/Software Developer p/98765432 e/johnd@example.com i/7.5` : Adds a candidate named `John Doe` to HiredFiredPro.
+
+   * `delete 3` : Deletes the 3rd candidate shown in the current list.
+
+   * `clear` : Deletes all candidates.
+
+   * `exit` : Exits the HiredFiredPro app.
+
+6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
 
 ### Viewing help : `help`
 
@@ -235,10 +270,6 @@ HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/d
 If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
