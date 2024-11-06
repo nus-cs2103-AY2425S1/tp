@@ -244,44 +244,44 @@ providing users a one-stop solution to help manage CCA manpower related consider
 ### User stories
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …        | I want to …                                                                 | So that I can…                                                       |
-|----------|---------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | user          | add multiple contacts with one command                                      | add in multiple contacts at one time                                 |
-| `* * *`  | user          | search for a contact by querying the saved name                             | get the information of the contact when needed                       |
-| `* * *`  | user          | easily view the available commands on the app                               | quickly find the usage for a command I had forgotten                 |
-| `* * *`  | user          | quickly duplicate a contact's information                                   | add similar contacts without re-entering details                     |
-| `* * *`  | user          | add new contacts with the fewest possible keystrokes                        | add new contacts quickly                                             |
-| `* * *`  | user          | add individual contacts                                                     | save the information of the contact and retrieve it when I want it   |
-| `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current           |
-| `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation |
-| `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                   |
-| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity          |
-| `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role |
-| `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                |
-| `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                     |
-| `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine         |
-| `* *`    | user          | undo a recent delete                                                        | recover from a mistake                                               |
-| `* *`    | user          | add notes to any contact                                                    | remember important details about them                                |
-| `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others            |
-| `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally               |
-| `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                  |
-| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities       |
-| `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities       |
-| `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                 |
-| `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                           |
-| `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations          |
-| `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands              |
-| `*`      | user          | customise commands to manage the contacts                                   | add, remove, modify, search contacts with greater efficiency         |
-| `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                     |
-| `*`      | user          | back up my contacts regularly                                               | not lose important contact information                               |
-| `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                  |
-| `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                              |
-| `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                 |
-| `*`      | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                      |
-| `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts             |
-| `*`      | user          | set up quick actions (e.g. call, message…)                                  | reach out with a single click                                        |
-| `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                            |
-| `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                   |
+| Priority | As a …        | I want to …                                                                 | So that I can…                                                          |
+|----------|---------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | user          | add multiple contacts with one command                                      | add in multiple contacts at one time                                    |
+| `* * *`  | user          | view all the information of a particular contact                            | focus on that one sole contact without distractions from other contacts |
+| `* * *`  | user          | search for a contact by querying the saved name                             | get the information of the contact when needed                          |
+| `* * *`  | user          | easily view the available commands on the app                               | quickly find the usage for a command I had forgotten                    |
+| `* * *`  | user          | quickly duplicate a contact's information                                   | add similar contacts without re-entering details                        |
+| `* * *`  | user          | add new contacts with the fewest possible keystrokes                        | add new contacts quickly                                                |
+| `* * *`  | user          | add individual contacts                                                     | save the information of the contact and retrieve it when I want it      |
+| `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current              |
+| `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation    |
+| `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                      |
+| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity             |
+| `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role    |
+| `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                   |
+| `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                        |
+| `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine            |
+| `* *`    | user          | add notes to any contact                                                    | remember important details about them                                   |
+| `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others               |
+| `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally                  |
+| `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                     |
+| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities          |
+| `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities          |
+| `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                    |
+| `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                              |
+| `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations             |
+| `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands                 |
+| `*`      | user          | customise commands to manage the contacts                                   | add, remove, modify, search contacts with greater efficiency            |
+| `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                        |
+| `*`      | user          | back up my contacts regularly                                               | not lose important contact information                                  |
+| `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                     |
+| `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                                 |
+| `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                    |
+| `*`      | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                         |
+| `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts                |
+| `*`      | user          | set up quick actions (e.g. call, message…)                                  | reach out with a single click                                           |
+| `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
+| `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 
 *{More to be added}*
 
