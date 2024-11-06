@@ -54,7 +54,5 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of transactions */
     ObservableList<Transaction> getFilteredTransactionList();
-
-    /** Checks if a command string is transaction command **/
-    boolean isTransactionCommand(String commandText);
+    
 }
