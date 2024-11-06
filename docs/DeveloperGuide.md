@@ -398,13 +398,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add tags to a contact**\
+**Use case: UC04 - Add tags to a contact**
 **Precondition**: Contact to add tags to already exists
 
 **MSS**
 1. User requests to add tags to a contact.
 2. CampusConnect searches the contact list and finds the correct contact.
-3. CampusConnect add tags to the contact.
+3. CampusConnect adds tags to the contact.
 4. CampusConnect displays success message.
 
    Use case ends.
@@ -419,14 +419,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-* 1b. Tag already exists for the contact
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again
-        
-      Steps 1b1-1b2 repeat until non-duplicate tags are input
+* 3a. Tag already exists for the contact
+    * 3a1. CampusConnect shows error message.
       
       Use case ends.
 
+**Use cases: UC05 - Delete a tag from a contact**
+**Precondition**: Contact to delete a tag from already exists
+
+**MSS**
+1. User requests to delete a specific tag from a contact
+2. CampusConnect searches the contact list and finds the correct contact.
+3. CampusConnect deletes the specific tag from the contact
+4. CampusConnect displays success message
+
+   Use case ends
+
+**Extensions**
+* 1a. Input format is invalid
+    * 1a1. CampusConnect shows error message.
+    * 1a2 User enters input again.
+
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+* 3a. The contact does not contain the tag user wants to delete
+    * 3a1. CampusConnect shows error message.
+  
+      Use case ends.
+
+**Use cases: UC06 - Undo an execution of command**
+**Precondition**: At least one valid command has been executed by the user.
+
+**MSS**
+1. User requests to undo the most recent command execution.
+2. CampusConnect reverts the most recent command, restoring the data to its previous state 
+before the command was executed.
+
+   Use case ends
+
+**Extensions**
+* 1a. Input format is invalid.
+    * 1a1. CampusConnect shows error message.
+    * 1a2. User enters input again.
+
+      Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+* 1b. No earlier data to revert.
+    * 1b1. CampusConnect shows error message.
+
+      Use cases ends.
+
+**Use Case: UC07 - Redo Command Execution**
+
+**Precondition: The user has previously undone at least one command.**
+
+**MSS:**
+1. The user requests to redo the most recently undone command.
+2. CampusConnect restores the data to the state it was in immediately before the undo.
+
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid Input Format:
+    * 1a1. CampusConnect displays an error message indicating the input format is invalid.
+    * 1a2. The user re-enters the input.
+
+      Steps 1a1-1a2 repeat until the input format is valid.
+
+      Use case ends.
+
+* 1b. No More Commands to Redo:
+    * 1b1. CampusConnect displays an error message indicating that there are no more commands to redo.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
