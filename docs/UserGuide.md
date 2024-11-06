@@ -283,13 +283,14 @@ Action             | Format, Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**          | `clear`
-**Delete**         | `delete INDEX`<br> e.g., `delete 3`
+**Delete**         | `delete INDEX` or `delete CONTACT_NAME`<br> e.g., `delete 3`, `delete john doe`
 **Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
 **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Search**         | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
 **List**           | `list`
 **Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
+**Delete Event**   | `del_event INDEX` or `del_event EVENT_NAME`<br> e.g., `del_event 1` or `del_event meeting`
 **List Events**    | `list_events`
 **Help**           | `help`
 **Export**         | `export`
