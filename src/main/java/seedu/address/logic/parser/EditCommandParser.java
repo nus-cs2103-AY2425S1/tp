@@ -16,7 +16,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Role;
@@ -103,7 +102,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
     }
 
-    private EditCommand createEditCommandByName(String strPreamble, EditContactDescriptor editContactDescriptor) throws ParseException {
+    private EditCommand createEditCommandByName(String strPreamble, EditContactDescriptor editContactDescriptor)
+            throws ParseException {
         try {
             Name name = ParserUtil.parseName(strPreamble);
             return new EditCommand(name, editContactDescriptor);
@@ -115,7 +115,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private boolean isInteger(String args) {
         try {
-            Integer.parseInt( args); // can pass negative integers as well
+            Integer.parseInt(args); // can pass negative integers as well
             return true;
         } catch (Exception exp) {
             return false;

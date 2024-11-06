@@ -68,7 +68,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     private boolean isInteger(String args) {
         try {
-            Integer.parseInt( args); // can pass negative integers as well
+            Integer.parseInt(args); // can pass negative integers as well
             return true;
         } catch (Exception exp) {
             return false;

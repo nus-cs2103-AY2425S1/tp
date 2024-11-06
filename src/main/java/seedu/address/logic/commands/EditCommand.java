@@ -51,8 +51,8 @@ public class EditCommand extends Command {
             + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Jane Doe\n"
             + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " "
             + "johnny";
-    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT
-            = COMMAND_FORMAT_PREAMBLE + WHITESPACE
+    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT =
+            COMMAND_FORMAT_PREAMBLE + WHITESPACE
             + EditCommand.MESSAGE_COMMAND_FORMAT + "\n"
             + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD);

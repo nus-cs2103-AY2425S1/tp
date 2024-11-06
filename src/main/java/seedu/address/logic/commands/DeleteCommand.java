@@ -46,8 +46,8 @@ public class DeleteCommand extends Command {
             + "Example Two: " + COMMAND_WORD + WHITESPACE + "John Doe" + LINE_BREAK
             + "Example Three: " + COMMAND_WORD + WHITESPACE + PREFIX_NAME + WHITESPACE + "John Doe";
 
-    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT
-            = COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE
+    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT =
+            COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE
             + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
             + String.format(MESSAGE_HELP_PROMPT,
             HelpCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD);

@@ -58,9 +58,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CONTACT =
             String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "Contact to add", "the contact to add");
     public static final String MESSAGE_DUPLICATE_FIELD_CONTACT =
-            (String.format(MESSAGE_DUPLICATE_FIELDS_CONTACT,
+            String.format(MESSAGE_DUPLICATE_FIELDS_CONTACT,
                     "If the details of the contact for adding is correct, please rectify the existing "
-                            + "contacts details before adding the new contact."));
+                            + "contacts details before adding the new contact.");
     public static final String MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     String.format(MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX_GENERAL,

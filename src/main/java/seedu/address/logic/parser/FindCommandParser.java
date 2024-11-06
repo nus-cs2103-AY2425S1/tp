@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -63,13 +62,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             String arg = argMultimap.getValue(PREFIX_NAME).get();
             nameKeywords = getKeywords(arg);
             String invalidInput = nameKeywords.stream().map(word -> {
-                        try {
-                            ParserUtil.parseName(word);
-                            return ""; // successful
-                        } catch (ParseException e) {
-                            return e.getMessage(); // fail
-                        }
-                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                try {
+                    ParserUtil.parseName(word);
+                    return ""; // successful
+                } catch (ParseException e) {
+                    return e.getMessage(); // fail
+                }
+            }).filter(inputValidity -> !inputValidity.isEmpty())
                     .limit(1) // to standardise throughout that 1 error at the time is only shown
                     .reduce("", (toReturn, errorMessage) -> errorMessage);
             if (!invalidInput.isEmpty()) {
@@ -80,13 +79,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             String arg = argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get();
             telegramKeywords = getKeywords(arg);
             String invalidInput = telegramKeywords.stream().map(word -> {
-                        try {
-                            ParserUtil.parseTelegramHandle(word);
-                            return ""; // successful
-                        } catch (ParseException e) {
-                            return e.getMessage(); // fail
-                        }
-                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                try {
+                    ParserUtil.parseTelegramHandle(word);
+                    return ""; // successful
+                } catch (ParseException e) {
+                    return e.getMessage(); // fail
+                }
+            }).filter(inputValidity -> !inputValidity.isEmpty())
                     .limit(1) // to standardise throughout that 1 error at the time is only shown
                     .reduce("", (toReturn, errorMessage) -> errorMessage);
             if (!invalidInput.isEmpty()) {
@@ -97,13 +96,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             String arg = argMultimap.getValue(PREFIX_EMAIL).get();
             emailKeywords = getKeywords(arg);
             String invalidInput = emailKeywords.stream().map(word -> {
-                        try {
-                            ParserUtil.parseEmail(word);
-                            return ""; // successful
-                        } catch (ParseException e) {
-                            return e.getMessage(); // fail
-                        }
-                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                try {
+                    ParserUtil.parseEmail(word);
+                    return ""; // successful
+                } catch (ParseException e) {
+                    return e.getMessage(); // fail
+                }
+            }).filter(inputValidity -> !inputValidity.isEmpty())
                     .limit(1) // to standardise throughout that 1 error at the time is only shown
                     .reduce("", (toReturn, errorMessage) -> errorMessage);
             if (!invalidInput.isEmpty()) {
@@ -114,13 +113,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             String arg = argMultimap.getValue(PREFIX_STUDENT_STATUS).get();
             studentStatusKeywords = getKeywords(arg);
             String invalidInput = studentStatusKeywords.stream().map(word -> {
-                        try {
-                            ParserUtil.parseStudentStatus(word);
-                            return ""; // successful
-                        } catch (ParseException e) {
-                            return e.getMessage(); // fail
-                        }
-                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                try {
+                    ParserUtil.parseStudentStatus(word);
+                    return ""; // successful
+                } catch (ParseException e) {
+                    return e.getMessage(); // fail
+                }
+            }).filter(inputValidity -> !inputValidity.isEmpty())
                     .limit(1) // to standardise throughout that 1 error at the time is only shown
                     .reduce("", (toReturn, errorMessage) -> errorMessage);
             if (!invalidInput.isEmpty()) {
@@ -136,13 +135,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
             roleKeywords = roleList.stream().map(role -> role.roleName).toList();
             String invalidInput = roleKeywords.stream().map(word -> {
-                        try {
-                            ParserUtil.parseRole(word);
-                            return ""; // successful
-                        } catch (ParseException e) {
-                            return e.getMessage(); // fail
-                        }
-                    }).filter(inputValidity -> !inputValidity.isEmpty())
+                try {
+                    ParserUtil.parseRole(word);
+                    return ""; // successful
+                } catch (ParseException e) {
+                    return e.getMessage(); // fail
+                }
+            }).filter(inputValidity -> !inputValidity.isEmpty())
                     .limit(1) // to standardise throughout that 1 error at the time is only shown
                     .reduce("", (toReturn, errorMessage) -> errorMessage);
             if (!invalidInput.isEmpty()) {

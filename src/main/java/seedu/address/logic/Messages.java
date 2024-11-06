@@ -17,6 +17,7 @@ public class Messages {
     public static final String LINE_BREAK = "\n";
     public static final String WHITESPACE = " ";
     public static final String COMMAND_FORMAT_PREAMBLE = "Command Format:";
+
     public static final String MESSAGE_COMMAND_LIST = "add, edit, delete, find, list, help, clear, exit";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. " + "Only the following will be "
             + "accepted as the first word of the command:\n" + MESSAGE_COMMAND_LIST;
@@ -58,10 +59,6 @@ public class Messages {
             MESSAGE_INVALID_COMMAND_FORMAT, "Missing index or Full name. " + LINE_BREAK + "%1$s");
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is "
             + "invalid";
-    /*
-    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Invalid Index or full name given. "
-            + "Index must be a positive Integer only. " + "Full name must follow the constraints given for "
-            + "names. ";*/
     public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK = "This contact is not in address book. "
             + "Check if Full Name is used. Check contact's full name or " + "if it exists by finding. "
             + "Example: " + MESSAGE_FIND_NAME_SUGGESTION;

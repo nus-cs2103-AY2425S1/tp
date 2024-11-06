@@ -24,6 +24,22 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_NAME_FIELD_CANNOT_BLANK = "Name " + MESSAGE_BLANK_FIELD;
+    public static final String MESSAGE_EMAIL_FIELD_CANNOT_BLANK = "Email " + MESSAGE_BLANK_FIELD;
+    public static final String MESSAGE_TELEGRAM_HANDLE_FILED_CANNOT_BLANK =
+            "Telegram Handle " + MESSAGE_BLANK_FIELD;
+    public static final String MESSAGE_STUDENT_STATUS_FIELD_CANNOT_BLANK =
+            "Student Status " + MESSAGE_BLANK_FIELD;
+    public static final String MESSAGE_ROLE_FIELD_CANNOT_BLANK = "Role " + MESSAGE_BLANK_FIELD;
+
+    public static final String MESSAGE_INVALID_NAME_FIELD = "Invalid Name!\n" + Name.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_EMAIL_FIELD = "Invalid Email!\n" + Email.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_TELEGRAM_HANDLE_FIELD =
+            "Invalid Telegram Handle!\n" + TelegramHandle.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_STUDENT_STATUS_FIELD =
+            "Invalid Student Status!\n" + StudentStatus.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_ROLE_FIELD = "Invalid Role!\n" + Role.MESSAGE_CONSTRAINTS;
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -47,10 +63,10 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (trimmedName.isEmpty()) {
-            throw new ParseException("Name " + MESSAGE_BLANK_FIELD);
+            throw new ParseException(MESSAGE_NAME_FIELD_CANNOT_BLANK);
         }
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException("Invalid Name!\n" + Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_NAME_FIELD);
         }
         return new Name(trimmedName);
     }
@@ -65,10 +81,10 @@ public class ParserUtil {
         requireNonNull(telegramHandle);
         String trimmedTelegramHandle = telegramHandle.trim();
         if (trimmedTelegramHandle.isEmpty()) {
-            throw new ParseException("Telegram Handle " + MESSAGE_BLANK_FIELD);
+            throw new ParseException(MESSAGE_TELEGRAM_HANDLE_FILED_CANNOT_BLANK);
         }
         if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
-            throw new ParseException("Invalid Telegram Handle!\n" + TelegramHandle.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_TELEGRAM_HANDLE_FIELD);
         }
         return new TelegramHandle(trimmedTelegramHandle);
     }
@@ -83,10 +99,10 @@ public class ParserUtil {
         requireNonNull(studentStatus);
         String trimmedStudentStatus = studentStatus.trim();
         if (trimmedStudentStatus.isEmpty()) {
-            throw new ParseException("Student Status " + MESSAGE_BLANK_FIELD);
+            throw new ParseException(MESSAGE_STUDENT_STATUS_FIELD_CANNOT_BLANK);
         }
         if (!StudentStatus.isValidStudentStatus(trimmedStudentStatus)) {
-            throw new ParseException("Invalid Student Status!\n" + StudentStatus.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_STUDENT_STATUS_FIELD);
         }
         return new StudentStatus(trimmedStudentStatus);
     }
@@ -101,10 +117,10 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (trimmedEmail.isEmpty()) {
-            throw new ParseException("Email " + MESSAGE_BLANK_FIELD);
+            throw new ParseException(MESSAGE_EMAIL_FIELD_CANNOT_BLANK);
         }
         if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException("Invalid Email!\n" + Email.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_EMAIL_FIELD);
         }
         return new Email(trimmedEmail);
     }
@@ -119,10 +135,10 @@ public class ParserUtil {
         requireNonNull(role);
         String trimmedRole = role.trim();
         if (trimmedRole.isEmpty()) {
-            throw new ParseException(MESSAGE_BLANK_FIELD);
+            throw new ParseException(MESSAGE_ROLE_FIELD_CANNOT_BLANK);
         }
         if (!Role.isValidRoleName(trimmedRole)) {
-            throw new ParseException("Invalid Role!\n" + Role.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_ROLE_FIELD);
         }
         return new Role(trimmedRole);
     }

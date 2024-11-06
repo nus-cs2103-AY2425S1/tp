@@ -5,12 +5,12 @@ import static seedu.address.logic.Messages.LINE_BREAK;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.Messages.styleCommand;
 
+import java.util.Arrays;
+
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
-
-import java.util.Arrays;
 
 /**
  * Format full help instructions for every command for display.
@@ -27,13 +27,12 @@ public class HelpCommand extends Command {
             String.format(MESSAGE_REFER_USERGUIDE, "Alternatively,");
     public static final String MESSAGE_REFER_USERGUIDE_DETAIL_HELP =
             String.format(MESSAGE_REFER_USERGUIDE, DETAIL_PREAMBLE_START);
-    
     public static final String MESSAGE_USAGE = "See " + styleCommand(COMMAND_WORD) + ": Shows program "
             + "usage instructions." + LINE_BREAK + COMMAND_FORMAT_PREAMBLE + WHITESPACE + styleCommand(COMMAND_WORD);
     public static final String SHOWING_HELP_MESSAGE = "List of other commands: "
             + Messages.MESSAGE_COMMAND_LIST.replace("help, ", "") + LINE_BREAK
             + DETAIL_PREAMBLE_START + WHITESPACE + "type " + styleCommand(COMMAND_FORMAT_DETAIL) + WHITESPACE
-            + "with the words found in the command list above." + LINE_BREAK 
+            + "with the words found in the command list above." + LINE_BREAK
             + MESSAGE_REFER_USERGUIDE_GENERAL_HELP;
     // + "\nAlternatively, visit our complete user guide on the popup screen";
 
@@ -42,9 +41,9 @@ public class HelpCommand extends Command {
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + AddCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
             + AddCommand.MESSAGE_COMMAND_EXAMPLE + LINE_BREAK
             + formatAcceptedString("Student Status",
-            new String[] { StudentStatus.UNDERGRADUATE_OFFICAL_CASE + WHITESPACE
-                    + StudentStatus.UNDERGRADUATE_START_YEAR + WHITESPACE + "to"
-                    + WHITESPACE + StudentStatus.UNDERGRADUATE_END_YEAR,
+                new String[] { StudentStatus.UNDERGRADUATE_OFFICAL_CASE + WHITESPACE
+                        + StudentStatus.UNDERGRADUATE_START_YEAR + WHITESPACE + "to"
+                        + WHITESPACE + StudentStatus.UNDERGRADUATE_END_YEAR,
                     StudentStatus.MASTERS_OFFICIAL_CASE, StudentStatus.PHD_OFFICIAL_CASE }) + LINE_BREAK
             + formatAcceptedString("Role", Role.AVAILABLE_ROLES) + LINE_BREAK
             + "Multiple roles are allowed and only Nicknames are optional" + LINE_BREAK
@@ -132,7 +131,7 @@ public class HelpCommand extends Command {
     private static String formatAcceptedString(String fieldName, String[] strings) {
         int stringArraySize = strings.length;
         String toReturn = String.format("For %s, the accepted ones are:", fieldName);
-        String partialListedString = Arrays.stream(strings).limit(stringArraySize -1)
+        String partialListedString = Arrays.stream(strings).limit(stringArraySize - 1)
                 .reduce("", (listedString, string) -> listedString + string + "," + WHITESPACE);
         toReturn += WHITESPACE + partialListedString + "or" + WHITESPACE + strings[stringArraySize - 1];
         return toReturn;
