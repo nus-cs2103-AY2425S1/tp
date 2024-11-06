@@ -14,9 +14,8 @@ public class Transaction {
     public static final String MESSAGE_CONSTRAINTS =
             """
             Amount should have at most 2 decimal places.
-            It should contain only digits(0-9) and one optional decimal point(.)
-            with no other symbols. There should be at least 1 digit before
-            the decimal point.
+            It should contain only digits (0-9) and one optional decimal point (.) with no other symbols.
+            There should be at least 1 digit before the decimal point.
             """;
     public static final String VALIDATION_REGEX = "^-?\\d+(,\\d{3})*(\\.\\d{1,2})?$";
     private final String description;

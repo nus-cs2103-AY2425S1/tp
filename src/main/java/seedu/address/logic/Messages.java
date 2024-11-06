@@ -25,8 +25,9 @@ public class Messages {
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "Listed %1$d transaction(s) of %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_AMOUNT = "Invalid amount!\n"
-            + "Amount should be a number up to 2 decimals places and should not contain any commas.";
+    public static final String MESSAGE_INVALID_AMOUNT = "Incorrect amount format or invalid amount!\n"
+            + "Amount should be a number of up to 2 decimal places containing only digits (0-9) and 1 decimal point. "
+            + "There should be at least 1 digit before the decimal point.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Incorrect date format or invalid date!\n"
             + "Date format: YYYY-MM-DD";
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Incorrect month format or invalid month!\n"
