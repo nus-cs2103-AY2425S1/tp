@@ -95,11 +95,10 @@ public class DeletePersonCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeletePersonCommand)) {
+        if (!(other instanceof DeletePersonCommand otherDeletePersonCommand)) {
             return false;
         }
 
-        DeletePersonCommand otherDeletePersonCommand = (DeletePersonCommand) other;
         return targetIndex.equals(otherDeletePersonCommand.targetIndex);
     }
 

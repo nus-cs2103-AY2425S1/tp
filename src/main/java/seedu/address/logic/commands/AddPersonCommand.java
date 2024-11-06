@@ -40,44 +40,42 @@ public class AddPersonCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final PersonDescriptor personDescriptor;
+    private final PersonDescriptor toAdd;
     private int personId;
 
     /**
      * Creates an AddPersonCommand to add the specified {@code Person}
-     *
-     * @param personDescriptorToAdd Person to add.
      */
-    public AddPersonCommand(PersonDescriptor personDescriptorToAdd) {
-        requireNonNull(personDescriptorToAdd);
-        personDescriptor = personDescriptorToAdd;
+    public AddPersonCommand(PersonDescriptor personDescriptor) {
+        requireNonNull(personDescriptor);
+        toAdd = personDescriptor;
     }
 
     /**
-     * Checks if the entity being added to model already exists.
+     * Checks if the person already exists in the model.
      *
-     * @param model Model to check if entity exists in.
-     * @return True if entity already exists in model, false otherwise.
+     * @param model The model containing the list of persons.
+     * @return true if the person already exists in the model, false otherwise.
      */
     @Override
     protected boolean alreadyExists(Model model) {
-        return model.hasPerson(personDescriptor);
+        return model.hasPerson(toAdd);
     }
 
     /**
-     * Adds the entity to the model.
+     * Adds the person entity to the model.
      *
-     * @param model Model to add entity to.
+     * @param model The model to add the person to.
      */
     @Override
     protected void addEntity(Model model) {
-        personId = model.addPerson(personDescriptor).getPersonId();
+        personId = model.addPerson(toAdd).getPersonId();
     }
 
     /**
-     * Returns the success message of the command.
+     * Returns the message to be displayed upon successfully adding the person.
      *
-     * @return Success message of the command.
+     * @return A success message indicating that the person was added.
      */
     @Override
     protected String getSuccessMessage() {
@@ -85,9 +83,9 @@ public class AddPersonCommand extends AddCommand {
     }
 
     /**
-     * Returns the message to display when the person ID does not exist.
+     * Returns the message to be displayed if the person already exists.
      *
-     * @return Message to display when the person ID does not exist.
+     * @return A message indicating that the person is a duplicate.
      */
     @Override
     protected String getDuplicateEntityMessage() {
@@ -95,13 +93,13 @@ public class AddPersonCommand extends AddCommand {
     }
 
     /**
-     * Formats the entity for displaying in the success message.
+     * Formats the entity details into a string representation.
      *
-     * @return Formatted entity.
+     * @return A formatted string representing the person.
      */
     @Override
     protected String formatEntity() {
-        return Messages.formatPerson(personDescriptor);
+        return Messages.formatPerson(toAdd);
     }
 
     @Override
@@ -115,13 +113,13 @@ public class AddPersonCommand extends AddCommand {
             return false;
         }
 
-        return personDescriptor.equals(otherAddPersonCommand.personDescriptor);
+        return toAdd.equals(otherAddPersonCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("personDescriptor", personDescriptor)
+            .add("toAdd", toAdd)
             .toString();
     }
 }

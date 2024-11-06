@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalAppointments.getTypicalAppointmentBook;
@@ -56,6 +58,47 @@ public class AppointmentBookTest {
         appointmentBook.addAppointment(new AppointmentBuilder().build());
         assertTrue(appointmentBook.hasAppointment(new AppointmentBuilder().build().getAppointmentDescriptor()));
     }
+
+    @Test
+    public void addAppointment_withPersonAndDescriptor_success() {
+        AppointmentDescriptor descriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
+        Appointment addedAppointment = appointmentBook.addAppointment(BENSON_P, descriptor);
+
+        assertEquals(0, addedAppointment.getAppointmentId()); // Assuming IDs start from 0
+        assertTrue(appointmentBook.hasAppointment(addedAppointment));
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(appointmentBook.equals(appointmentBook));
+    }
+
+    @Test
+    public void equals_differentObjectSameData_returnsTrue() {
+        AppointmentBook anotherAppointmentBook = new AppointmentBook();
+        assertTrue(appointmentBook.equals(anotherAppointmentBook));
+    }
+
+    @Test
+    public void equals_differentObject_returnsFalse() {
+        assertFalse(appointmentBook.equals(new Object()));
+    }
+
+    @Test
+    public void hashCode_sameData_returnsSameHashCode() {
+        AppointmentBook anotherAppointmentBook = new AppointmentBook();
+        assertEquals(appointmentBook.hashCode(), anotherAppointmentBook.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentData_returnsDifferentHashCode() {
+        AppointmentDescriptor descriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
+        AppointmentBook anotherAppointmentBook = new AppointmentBook();
+        appointmentBook.addAppointment(BENSON_P, descriptor);
+
+        assertNotEquals(appointmentBook.hashCode(), anotherAppointmentBook.hashCode());
+    }
+
 
 
     /**

@@ -17,15 +17,16 @@ public class ClearPersonCommand extends ClearCommand {
 
     /**
      * Returns success message to display upon adding entity.
-     *
-     * @return success message
      */
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
     }
 
     @Override
-    public boolean equals(Object otherCommand) {
-        return (otherCommand instanceof ClearPersonCommand);
+    public boolean equals(Object other) {
+        boolean isSameInstance = other == this;
+        boolean isClearPersonCommand = other instanceof ClearPersonCommand;
+
+        return isSameInstance || isClearPersonCommand;
     }
 }

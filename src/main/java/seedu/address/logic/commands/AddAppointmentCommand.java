@@ -57,9 +57,6 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Checks if the entity being added to model already exists.
-     *
-     * @param model Model to check if entity already exists in.
-     * @return True if entity already exists in model, false otherwise.
      */
     @Override
     protected boolean alreadyExists(Model model) {
@@ -68,9 +65,6 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Adds the entity to the model.
-     *
-     * @param model Model to add entity to.
-     * @throws CommandException If the person ID does not exist in the model.
      */
     @Override
     protected void addEntity(Model model) throws CommandException {
@@ -83,8 +77,6 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Returns success message to display upon adding entity.
-     *
-     * @return Success message.
      */
     @Override
     protected String getSuccessMessage() {
@@ -93,8 +85,6 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Returns the message to display when there is a duplicate.
-     *
-     * @return Duplicate message.
      */
     @Override
     protected String getDuplicateEntityMessage() {
@@ -103,8 +93,6 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Returns the message to display when the person ID does not exist.
-     *
-     * @return Person ID does not exist message.
      */
     protected String getPersonIdDoesNotExistMessage() {
         return MESSAGE_PERSON_NOT_FOUND;
@@ -112,8 +100,6 @@ public class AddAppointmentCommand extends AddCommand {
 
     /**
      * Formats the entity for displaying in the success message.
-     *
-     * @return Formatted entity.
      */
     @Override
     protected String formatEntity() {
@@ -132,6 +118,9 @@ public class AddAppointmentCommand extends AddCommand {
         return new CommandResult(String.format(getSuccessMessage(), formatEntity()));
     }
 
+    /**
+     * Checks if this AddAppointmentCommand is equal to another AddAppointmentCommand object .
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -149,7 +138,7 @@ public class AddAppointmentCommand extends AddCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("appointmentDescriptor", appointmentDescriptor)
+                .add("toAdd", appointmentDescriptor)
                 .toString();
     }
 }

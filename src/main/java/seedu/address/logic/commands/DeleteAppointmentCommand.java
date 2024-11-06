@@ -28,10 +28,10 @@ public class DeleteAppointmentCommand extends DeleteCommand {
     }
 
     /**
-     * Gets the filtered list of appointments in the model.
+     * Retrieves the list of filtered appointments from the model.
      *
-     * @param model Model to get the list from.
-     * @return Filtered list of appointments.
+     * @param model The model containing the filtered list.
+     * @return A list of filtered appointments.
      */
     @Override
     protected List<Appointment> getFilteredList(Model model) {
@@ -39,10 +39,12 @@ public class DeleteAppointmentCommand extends DeleteCommand {
     }
 
     /**
-     * Deletes the appointment from the model.
+     * Deletes the specified appointment entity from the model.
      *
-     * @param model Model to delete the appointment from.
-     * @param entity Appointment to be deleted.
+     * @param model The model to delete the appointment from.
+     * @param entity The appointment entity to be deleted.
+     * @throws NullPointerException if the specified entity is null.
+     * @throws AssertionError if the entity is not an instance of Appointment.
      */
     @Override
     protected void deleteEntity(Model model, Object entity) {
@@ -54,9 +56,9 @@ public class DeleteAppointmentCommand extends DeleteCommand {
     }
 
     /**
-     * Gets the success message for deleting an appointment.
+     * Returns the success message to display after a successful appointment deletion.
      *
-     * @return Success message for deleting an appointment.
+     * @return A string indicating the success of the deletion operation.
      */
     @Override
     protected String getSuccessMessage() {
@@ -64,9 +66,9 @@ public class DeleteAppointmentCommand extends DeleteCommand {
     }
 
     /**
-     * Gets the invalid index message for deleting an appointment.
+     * Returns the message to display when an invalid appointment index is provided.
      *
-     * @return Invalid index message for deleting an appointment.
+     * @return A string indicating that the appointment index is invalid.
      */
     @Override
     protected String getInvalidIndexMessage() {
@@ -74,10 +76,11 @@ public class DeleteAppointmentCommand extends DeleteCommand {
     }
 
     /**
-     * Formats the appointment entity to be displayed.
+     * Formats the given appointment entity into a string representation.
      *
-     * @param entity Appointment entity to be displayed.
-     * @return Formatted appointment entity.
+     * @param entity The entity to format.
+     * @return A string representation of the given appointment entity.
+     * @throws AssertionError if the entity is not an instance of Appointment.
      */
     @Override
     protected String formatEntity(Object entity) {
@@ -93,11 +96,10 @@ public class DeleteAppointmentCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteAppointmentCommand)) {
+        if (!(other instanceof DeleteAppointmentCommand otherDeleteAppointmentCommand)) {
             return false;
         }
 
-        DeleteAppointmentCommand otherDeleteAppointmentCommand = (DeleteAppointmentCommand) other;
         return targetIndex.equals(otherDeleteAppointmentCommand.targetIndex);
     }
 

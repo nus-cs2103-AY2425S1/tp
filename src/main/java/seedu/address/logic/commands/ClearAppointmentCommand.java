@@ -21,7 +21,10 @@ public class ClearAppointmentCommand extends ClearCommand {
     }
 
     @Override
-    public boolean equals(Object otherCommand) {
-        return (otherCommand instanceof ClearAppointmentCommand);
+    public boolean equals(Object other) {
+        boolean isSameInstance = other == this;
+        boolean isClearAppointmentCommand = other instanceof ClearAppointmentCommand;
+
+        return isSameInstance || isClearAppointmentCommand;
     }
 }
