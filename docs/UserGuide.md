@@ -155,13 +155,12 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
-  For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
-  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
-  and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-  If the resulting role does not have the specified field, the edit will be invalid.
+  * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
+  * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
+  * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+* If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -239,16 +238,9 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
 * There cannot be two groups with the same name. If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
 
-### Editing a group's name : `editGroupName`
-
-Edits the name of a group that currently exists.
-
-Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-
-* Changes the group with the name `OLD_GROUP_NAME`'s name to
-`NEW_GROUP_NAME`.
-* The old group name must exist, and the new group name must not already be in use.
-* If either of the above conditions are not met, the command will fail.
+Example:
+* `createGroup g/blood drive 2024 m/3 4` creates a new group named `blood drive 2024`
+  with the 3rd and 4th persons in the current list in view as members.
 
 ### Adding new members to a existing group : `addToGroup`
 
@@ -263,7 +255,23 @@ must be valid indices.
 * If either of the above conditions are not met, the command will fail.
 
 Example:
-* `addToGroup g/blood drive 2024 m/1 2 5 6`
+* `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 of
+  the current list in view as members to the existing group named `blood drive`.
+
+### Editing a group's name : `editGroupName`
+
+Edits the name of a group that currently exists.
+
+Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
+
+* Changes the group with the name `OLD_GROUP_NAME`'s name to
+  `NEW_GROUP_NAME`.
+* The old group name must exist, and the new group name must not already be in use.
+* If either of the above conditions are not met, the command will fail.
+
+Example:
+* `editGroupName g/blood drive 2024 g/charity run` renames an existing group called
+  `blood drive 2024` into `charity run`.
 
 ### Deleting a group: `deleteGroup`
 
@@ -273,6 +281,9 @@ Format: `deleteGroup g/GROUP_NAME`
 
 * Deletes group named `GROUP_NAME`
 * Group named `GROUP_NAME` must exist.
+
+Example:
+* `deleteGroup g/blood drive 2024`
 
 ### Listing groups: `listGroups`
 
@@ -342,8 +353,8 @@ Action     | Format, Examples
 **Help**   | `help`
 **Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
+**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
+**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
 **Get Emails**   | `email`
-**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`

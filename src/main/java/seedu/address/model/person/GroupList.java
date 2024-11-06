@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateGroupException;
 import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.storage.JsonAdaptedGroup;
 
 /**
@@ -141,6 +142,22 @@ public class GroupList {
     public void set(GroupList toCopy) {
         internalList.clear();
         internalList.addAll(toCopy.internalList);
+    }
+
+    /**
+     * Update all instances of the existing {@code Person} in any groups to the edited {@code Person}.
+     *
+     * @param oldPerson the existing instance of the person.
+     * @param editedPerson the new, edited instance of the person.
+     */
+    public void updatePersonInAllGroups(Person oldPerson, Person editedPerson) {
+        internalList.forEach(group -> {
+            try {
+                group.setPerson(oldPerson, editedPerson);
+            } catch (PersonNotFoundException pnfe) {
+                // Intentionally ignoring exception, as no action need to be taken if the person isn't in any groups.
+            }
+        });
     }
 
     @Override

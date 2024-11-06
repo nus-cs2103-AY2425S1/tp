@@ -20,6 +20,18 @@ public class Group extends UniquePersonList {
     }
 
     /**
+     * Creates a group with the same {@code name} and people as the existing group.
+     *
+     * @param existingGroup the existing group to be copied.
+     */
+    public Group(Group existingGroup) {
+        super();
+        requireNonNull(existingGroup);
+        this.name = existingGroup.name;
+        this.setPersons(existingGroup.asUnmodifiableObservableList());
+    }
+
+    /**
      * @return Name of the group.
      */
     public String getName() {
