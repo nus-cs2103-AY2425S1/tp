@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.FlowPane?>
 
 <VBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" styleClass="pinned-person-item">
-
     <HBox alignment="CENTER">
         <Label fx:id="id" styleClass="cell_small_label">
             <minWidth>
