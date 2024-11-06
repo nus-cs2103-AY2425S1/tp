@@ -111,7 +111,7 @@ class JsonSerializableAddressBook {
                     .filter(Objects::nonNull)
                     .forEach(event::addVendor);
 
-            boolean hasVendors = jsonAdaptedEvent.getClientIds().stream().anyMatch(Objects::nonNull);
+            boolean hasVendors = jsonAdaptedEvent.getVendorIds().stream().anyMatch(Objects::nonNull);
             if (!hasVendors) {
                 throw new IllegalValueException(MESSAGE_NO_VENDOR);
             }
