@@ -120,8 +120,9 @@ public class ModelManager implements Model {
         Path source = this.getAddressBookFilePath();
         assert source != null : "Address book file path is null";
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-        String timestamp = LocalDateTime.now().format(formatter);
+        String timestamp = LocalDateTime.now()
+                .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                .replace(":", "-"); // : is not allowed in filenames in Windows
         String archiveFilename = source.getFileName().toString().replace(".json", "") + "-"
                 + timestamp + (filename.toString().isEmpty() ? "" : "-" + filename) + ".json";
         Path destination = Paths.get(this.getArchiveDirectoryPath().toString(), archiveFilename);
