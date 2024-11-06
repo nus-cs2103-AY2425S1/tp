@@ -66,7 +66,7 @@ public class AddCommand extends Command {
         }
 
         //check if specified NRIC already exists in database
-        List<Person> existingPersons = model.getFilteredPersonList();
+        List<Person> existingPersons = model.getAddressBook().getPersonList();
         Optional<Person> existingPersonWithSameNric = existingPersons.stream()
                         .filter(person -> person.getNric().equals(toAdd.getNric()))
                         .findAny();
