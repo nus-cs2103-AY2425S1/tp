@@ -27,6 +27,8 @@ public abstract class DeleteCommand extends Command {
     protected final Index targetIndex;
 
     /**
+     * Constructs a DeleteCommand with the specified index.
+     *
      * @param targetIndex Index of entity to be deleted.
      */
     public DeleteCommand(Index targetIndex) {

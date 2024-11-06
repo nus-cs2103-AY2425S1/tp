@@ -9,6 +9,11 @@ import seedu.address.model.Model;
 public class ClearAppointmentCommand extends ClearCommand {
     public static final String MESSAGE_SUCCESS = "Appointment has been cleared!";
 
+    /**
+     * Clears the appointment book in the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     */
     protected void clearEntity(Model model) {
         model.setAppointmentBook(new AppointmentBook());
     }

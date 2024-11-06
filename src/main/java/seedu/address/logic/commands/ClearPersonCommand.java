@@ -10,6 +10,11 @@ import seedu.address.model.Model;
 public class ClearPersonCommand extends ClearCommand {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
+    /**
+     * Clears the address book in the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     */
     protected void clearEntity(Model model) {
         model.setAppointmentBook(new AppointmentBook());
         model.setAddressBook(new AddressBook());
@@ -17,6 +22,8 @@ public class ClearPersonCommand extends ClearCommand {
 
     /**
      * Returns success message to display upon adding entity.
+     *
+     * @return success message
      */
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
