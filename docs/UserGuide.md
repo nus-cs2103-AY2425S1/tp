@@ -193,7 +193,7 @@ Search for students that match the condition specified by the given prefix.
 <div markdown="span" class="alert alert-success">:bulb:
 **Tip:**
 
-This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table-)
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
 </div>
 
 
@@ -444,9 +444,9 @@ Example usages
 
 Invalid usages
 * Marking attendance of student who does not take specified tutorial
-    * Error message: Student STUDENT_NAME does not take TUTORIAL tutorial
+    * *Error message: Student STUDENT_NAME does not take TUTORIAL tutorial*
 * Marking attendance of student who already has attendance marked for the corresponding week
-    * Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE
+    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
 
 </div>
@@ -487,7 +487,7 @@ Example usages
 Invalid usages
 * Marking attendance of a tutorial with no students enrolled
     * *Error message: No students are enrolled in TUTORIAL tutorial*
-  * Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
+* Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
     * *Error message: All students in TUTORIAL tutorial has attendance marked 
     for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
