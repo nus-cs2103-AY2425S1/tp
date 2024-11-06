@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -50,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
         Allergy allergy = ParserUtil.parseAllergy(argMultimap.getValue(PREFIX_ALLERGY).get());
-        Date date = new Date(LocalDateTime.MIN); // add command does not allow adding an appointment date straight away
+        Date date = Date.NO_DATE; // add command does not allow adding an appointment date straight away
         Person person = new Person(name, phone, email, address, tag, allergy, date);
         return new AddCommand(person);
     }

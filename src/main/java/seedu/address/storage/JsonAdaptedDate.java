@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -43,7 +41,7 @@ class JsonAdaptedDate {
      */
     public Date toModelType() throws IllegalValueException {
         if (dateString == null || dateString.isEmpty()) {
-            return new Date(LocalDateTime.MIN); // Treat as no appointment
+            return Date.NO_DATE; // Treat as no appointment
         }
         return new Date(Date.parseDateTime(dateString));
     }

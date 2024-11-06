@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +23,6 @@ import seedu.address.model.person.Person;
  * Changes the date of an existing person in the address book.
  */
 public class DateCommand extends Command {
-    public static final Date NO_DATE = new Date(LocalDateTime.MIN);
     public static final String COMMAND_WORD = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date and time of the person identified "
@@ -92,7 +90,7 @@ public class DateCommand extends Command {
         List<Person> matchingPersonsWithDate = lastShownList.stream()
                 .filter(person -> person.getDate().equals(this.date))
                 .collect(Collectors.toList());
-        if (!matchingPersonsWithDate.isEmpty() && !date.equals(NO_DATE)) {
+        if (!matchingPersonsWithDate.isEmpty() && !date.equals(Date.NO_DATE)) {
             DatePredicate predicate = new DatePredicate(date);
             model.updateFilteredPersonList(predicate);
             throw new CommandException(MESSAGE_OVERLAPPING_DATES);
@@ -135,7 +133,7 @@ public class DateCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToAdd) {
-        String message = !(date.value == LocalDateTime.MIN) ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
+        String message = !(date.value == Date.NO_DATE.value) ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
         return String.format(message, Messages.format(personToAdd));
     }
 

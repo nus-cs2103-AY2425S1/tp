@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ScheduleCommand;
@@ -40,7 +39,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             String dateString = argMultimap.getValue(PREFIX_DATE).get();
             date = ParserUtil.parseDate(dateString);
         } else {
-            date = new Date(LocalDateTime.MIN); // Default constructor if no date is provided
+            date = Date.NO_DATE; // Default if no date is provided
         }
 
         return new ScheduleCommand(new SchedulePredicate(date));

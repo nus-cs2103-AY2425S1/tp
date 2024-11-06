@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable; is always valid
  */
 public class Date {
-
+    public static final Date NO_DATE = new Date(LocalDateTime.MIN);
     private static final String DATE_AND_TIME_PATTERN =
           "^(0[1-9]|[1-9]|[12][0-9]|3[01])/(0[1-9]|[1-9]|1[0-2])/\\d{4} ([01][0-9]|2[0-3])[0-5][0-9]$";
     private static final String DATE_PATTERN =
@@ -206,7 +206,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return value != LocalDateTime.MIN ? value.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) : "";
+        return value != Date.NO_DATE.value ? value.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) : "";
     }
 
     @Override

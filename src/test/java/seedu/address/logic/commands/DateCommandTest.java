@@ -78,7 +78,7 @@ public class DateCommandTest {
     @Test
     public void execute_deleteDate_success() {
         Person personToEdit = ALICE;
-        Person editedPerson = new PersonBuilder(personToEdit).withDate(LocalDateTime.MIN).build();
+        Person editedPerson = new PersonBuilder(personToEdit).withDate(Date.NO_DATE.value).build();
         DateCommand dateCommand = new DateCommand(Optional.of(editedPerson.getName().toString()),
                 Optional.of(editedPerson.getPhone().toString()), Optional.of(editedPerson.getEmail().toString()),
                 new Date(editedPerson.getDate().value));

@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Date EMPTY_DATE = new Date(LocalDateTime.MIN);
+    public static final Date EMPTY_DATE = Date.NO_DATE;
 
     public static Person[] getSamplePersons() {
         return new Person[] {
