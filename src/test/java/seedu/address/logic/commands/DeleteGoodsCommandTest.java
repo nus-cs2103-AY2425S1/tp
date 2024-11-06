@@ -17,8 +17,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
@@ -27,25 +25,6 @@ public class DeleteGoodsCommandTest {
     private Model getDefaultModel() {
         return new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
     }
-
-//    @Test
-//    public void execute_existingName_success() {
-//        for (Person person : getDefaultModel().getPersonList()) {
-//            Name name = person.getName();
-//            DeleteCommand cmd = new DeleteCommand(name);
-//            Model expectedModel = getDefaultModel();
-//            expectedModel.deletePerson(person);
-//            String expectedMessage = String.format("Deleted Person: %s", person.getName());
-//            assertCommandSuccess(cmd, getDefaultModel(), expectedMessage, expectedModel);
-//        }
-//    }
-//
-//    @Test
-//    public void execute_nonExistingName_throwsCommandException() {
-//        Name name = new Name("Apple");
-//        DeleteCommand cmd = new DeleteCommand(name);
-//        assertCommandFailure(cmd, getDefaultModel(), Messages.MESSAGE_PERSON_NOT_FOUND);
-//    }
 
     @Test
     public void execute_nonExistingSupplierNameAndExistingGoodsName_failure() {
