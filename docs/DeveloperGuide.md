@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# DorManagerPro Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -232,9 +232,53 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Clean feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+
+The `clean` command extends `ConcreteCommand`. The `clean` command deletes the contacts whose `GradYear` field is earlier
+than the current year, deleting contacts who have graduated from the address book.
+The `clean` command is undoable.
+
+Given below is an example usage scenario and how the `clean` command behaves at each step.
+
+Step 1. The user executes `clean` in 2024.
+
+<box type="info" seamless>
+
+**Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
+
+</box>
+
+
+Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
+
+
+The following sequence diagram shows how a `clean` command goes through the `Logic` component:
+
+<puml src="diagrams/CleanSequenceDiagram.puml" alt="CleanSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+
+**Note:** There are no destroy markers (X) for `CleanCommand` and `GradYearPredicate` as they are preserved in the `undo` command stack.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a `clean` command:
+
+<puml src="diagrams/CleanActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: UI display when `clean` executes after a `find` command:**
+
+* **Alternative 1:** Display all contacts.
+    * Pros: Shows users the full result of `clean`.
+    * Cons: Forgets the results of the `find` command.
+
+* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts. 
+    * Pros: Allow users to retain their serach results from `find`.
+    * Cons: Users cannot see the full extent of `clean` until they return to the default view with `list`.
 
 ### Update Find Command
 
