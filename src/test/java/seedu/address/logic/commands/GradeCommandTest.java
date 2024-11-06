@@ -248,5 +248,15 @@ public class GradeCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            //do nothing, but needed since it is called in the default stub.
+        }
+
+        @Override
+        public void saveAddressBook() {
+            //do nothing, but needed since it is called in the default stub.
+        }
     }
 }
