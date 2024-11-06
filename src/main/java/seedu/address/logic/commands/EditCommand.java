@@ -18,6 +18,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Date;
@@ -87,15 +88,18 @@ public class EditCommand extends Command {
 
         //making sure gradual changes in person attributes will not lead to duplicate persons
         if (personToEdit.isSamePerson(editedPerson)) {
-            // Filter persons based on provided criteria
-            List<Person> matchingPersons = model.getAddressBook()
-                    .getPersonList()
-                    .stream()
-                    .filter(editedPerson::isSamePerson)
-                    .toList();
+            //Make A New Temporary Model to allow modifications without causing error
+            Model tempModel = new ModelManager(model.getAddressBook(),
+                    model.getUserPrefs());
 
-            // Handle different cases of matches
-            if (matchingPersons.size() > 1) {
+            //Delete person that is to be edited from the temporary model
+            //This is because one small change in the person attribute will mean that
+            //The edited person is the same as the personToEdit and we cannot check if there is any other
+            //person in the address book that is the same as edited person
+            tempModel.deletePerson(personToEdit);
+
+            //Check for duplicate persons other than personToEdit
+            if (tempModel.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
         }
