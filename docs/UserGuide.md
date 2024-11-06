@@ -13,7 +13,7 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 # Table of Contents
 1. [Quick Start](#quick-start)
 2. [General Guidelines](#general-guidelines)
-3. [Input Parameters](#Input-parameters)
+3. [Input Parameters](#input-parameters)
 4. [Features](#features)
     - **General Commands**
       - [Viewing help](#viewing-help-help)
