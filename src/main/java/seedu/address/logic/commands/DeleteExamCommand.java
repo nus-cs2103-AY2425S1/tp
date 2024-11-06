@@ -42,12 +42,12 @@ public class DeleteExamCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getUnfilteredPersonList();
 
-        boolean isUpdated = false;
+        boolean hasUpdates = false;
 
         for (Person personToEdit : lastShownList) {
             Set<Exam> updatedExams = personToEdit.getExams();
             if (updatedExams.remove(exam)) {
-                isUpdated = true;
+                hasUpdates = true;
             }
             Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
@@ -56,7 +56,7 @@ public class DeleteExamCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
-        if (!isUpdated) {
+        if (!hasUpdates) {
             // No updates, exam not found in any students
             throw new CommandException(MESSAGE_EXAM_NOT_FOUND);
         }
