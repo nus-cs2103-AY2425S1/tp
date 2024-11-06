@@ -203,7 +203,7 @@ You can identify these patients uniquely by their **patient ID (PID)** for easy 
 
 <br>
 
- You can manage the patient information through different commands, which can be seen in the table below:
+ You can also manage the patient information through different commands, which can be seen in the table below:
 
 | Action                                                      | Format                                                                                    | Examples                                                                                                       |
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|

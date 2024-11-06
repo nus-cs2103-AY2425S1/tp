@@ -221,9 +221,11 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 <br>
 
-## **Implementation of main features (using entity commands)**
+## **Implementation of entity command features**
 
 Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands. Hence, `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
+
+The sequence diagram shows how an entity command is executed:
 
 <puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
 - The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand`. There are two entities, **person** and **appointment**, on which operations can be performed.
@@ -242,74 +244,98 @@ Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` com
 
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
+<br>
 
-### Edit Person feature
-**Aspect: Check if the person with `personId` exists before editing**
-- This is to ensure no unwanted errors occur while editing the person and helps to maintain data integrity.
+### General Design Considerations
 
-**Aspect: Deleting a person should also remove appointments linked to the person**
+**Aspect: Whether to implement entity commands as separate commands or through an abstract base command**
+- **Alternative 1 (Current choice):** Implement an abstract EntityCommand class that specific entity commands (e.g., AddPersonCommand, AddAppointmentCommand, DeletePersonCommand, DeleteAppointmentCommand) inherit from.
+  - Pros: Allows for reuse of code logic between entity commands
+  - Cons: Requires additonal parsing logic since entity in command must be distinguished (person or appointment), which can add complexity
+- **Alternative 2:** Implement each entity command as entirely separate classes.
+  - Pros: Creates a separate command, so the implementations of each command are separated and less coupled
+  - Cons: Results in significant code duplication
 
-- **Alternative 1 (Current choice):** Deleting a person will also remove an appointments with the `personId` of that person.
+<br>
+
+**Aspect: What constitutes duplicate person that should not be added or edited into the address book**
+- **Alternative 1 (Current choice):** Duplicate person is one that has same name (case-insensitive) and same phone number as an existing person
+  - Pros: Name and phone numbers are identifiers that are commonly recognized by users
+  - Cons: Extra logic required to determine equality of different people
+- **Alternative 2:** A duplicate person is defined more loosely or strictly (e.g., by name only)
+  - Pros: Less logic required to determine equality of different people
+  - Cons: Different people could have the same name, but cannot be added into the address book
+
+<br>
+
+**Aspect: What constitutes duplicate appointment that should not be added or edited into the appointment book**
+- **Alternative 1 (Current choice):** Duplicate appointment is one that has same person, date and time of an existing appointment
+  - Pros: Provides a rule to avoid scheduling conflicts of same person
+  - Cons: Extra logic required to determine equality of different appointments
+- **Alternative 2:** Define duplicates with only the date and time
+  - Pros: Less logic required to determine equality of different appointments
+  - Cons: Different appointments with different persons could have the same date time, but cannot be added into the appointment book
+
+<br>
+
+### Command-Specific Design Considerations
+
+#### Delete/Clear Person feature
+
+**Aspect: Deleting person and clearing person list should:**
+
+- **Alternative 1 (Current choice):** remove appointments with the `personId` of that person.
   - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
-- **Alternative 2:** Deleting a person will not remove any appointments with the `personId` of that person.
+- **Alternative 2:** not remove any appointments with the `personId` of that person.
   - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
   
 <br>
 
-### Clear Person feature
-**Aspect: Should the `clear person` command also delete all the appointments**
-- **Alternative 1 (current choice):** The `clear person` command should also clear all appointments.
-  - Pros: This prevents the case where the appointments are linked to deleted personIds which do not exist. Hence, this prevents confusion for users.
-- **Alternative 2 :** The `clear person` command does not clear all appointments.
-  - Cons: This assumes the user will always run `clear appt` after running `clear person`
-  
-<br>
+#### Edit Person/Appointment feature
 
-### Add appointment feature
-**Aspect: Should we implement as `addAppt` or `add appt`**
-- **Alternative 1 (Current choice):** Implement the add appointment feature as `add appt`
-  - Pros: Allows us to use the existing infrastructure, just have to add code to detect whether the entity is `appt` or not.
-  - Cons: Adds extra code to the file since more arguments need to be parsed, hence there is a chance of SLAP being violated.
-- **Alternative 2:** Implement the add appointment function as `addAppt`
-  - Pros: Creates a separate command, so the implementations of `add person` and `add appointment` will be separated from each other.
-  - Cons: Implementation requires a different parser, so we will be adding a huge amount of additional lines of code.
-Later, we decided to you the same infrastructure for all the command types.
+**Aspect: During Edit Appointment, check if new person ID associated with edited appointment corresponds to an existing person in the address book**
+- This is to ensure no unwanted errors occur while editing the appointment and helps to maintain data integrity.
 
 <br>
 
-### Edit Appointment feature
+#### Find Person/Appointment feature
 
-**Aspect: Check if the appointment with appointment id exists before editing**
-- This is to ensure no unwanted errors occur while editing the appointment.
+**Aspect: How to show find person/appointment based on different criteria**
 
-<br>
-
-### Find Appointment feature
-**Aspect: How to show find appointment.**
-
-- **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
+- **Alternative 1 (Current choice)**: Create one find command that supports filtering by multiple criteria (name, date) using prefixes.
   - Pros: Fast and easy to find by date and name
   - Cons: Confusing syntax from user's perspective
 
 - **Alternative 2**: Create different find commands, find by date, find by name etc.
   - Pros: Much easy in terms of user experience
-  - Cons: Harder to implement as more code needs to be written.
+  - Cons: More repeated code for each command
 
 <br>
 
-### Clear Appointment feature
+**Aspect: How to combine multiple prefixes when finding results**
 
-**Aspect**: How appointments are cleared
+- **Alternative 1 (Current choice)**: Prefixes should be combined using an AND condition.
+  - Pros: Ensures more specific search results, as all conditions must be met
+  - Cons: May be too restrictive
 
-- **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
+- **Alternative 2**: Prefixes should be combined using an OR condition
+  - Pros: Allows for more flexible and broader search results, as any one of the conditions can yield matches.
+  - Cons: May return too many results
 
 <br>
+
+<box type="tip" theme="success" seamless>
+
+**Tip:**
+To add a new predicate, navigate the corresponding entity folder in the model package. There, you can create a new class that implements `Predicate<Entity>`. Ensure that this method has a test method which defines the specific condition for a predicate.
+
+</box>
 
 ---
 
 <br>
 
-## Implementation of general features
+## Implementation of general command features
 General commands include the `exit` and `help` commands.
 
 The sequence diagram shows how a general command (`ExitCommand` or `HelpCommand`) is executed:
@@ -353,7 +379,7 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 <br>
 
@@ -371,10 +397,23 @@ When a user types a `help` command, the DocTrack application will display a `Hel
 
 <br>
 
-## **Appendix: Data storage and files**
-- The data of the patients and appointments is stored in the `data` folder.
-  - Patient data is stored in `data/addressbook.json`.
-  - Appointment data is stored in `data/appointmentbook.json`.
+## **Appendix: Miscellaneous Design Considerations**
+
+### Data storage and files
+
+**Aspect: Save patient and appointment data in:**
+<br>
+* **Alternative 1 (current choice):** two different files, patient data in `data/addressbook.json` and appointment data in `data/appointmentbook.json`.
+    * Pros: 
+        * More organised file management
+        * Quicker read and write times for each file
+    * Cons: 
+        * Higher chance of inconsistencies between patient and appointment data
+* **Alternative 2:** one single file named `data/addressbook.json`
+    * Pros:
+        * Simplicity and convenience of one file for all information
+    * Cons:
+        * Slower read and write times for file, especially if the user is only accessing one of patient or appointment data.
 
 <box type="warning" seamless>
 
@@ -383,27 +422,20 @@ For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if 
 is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
 
-#### Design Considerations
-**Aspect: When the data is updated in the `.json` file:**
+<br>
 
+**Aspect: When the data is updated in the `.json` file:**
+<br>
 * **Alternative 1 (current choice):** Automatically save all changes after any command that changes the data. 
     * Pros: Simplifies the process for the user, without needing to save manually.
     * Cons: May be slow if there are many changes to save.
-
-
 * **Alternative 2:** Prompt the user to save changes before exiting.
     * Pros: Gives the user more control over the saving process.
     * Cons: May be annoying for users who do not want an additional step to save changes.
 
 <br>
 
---------------------------------------------------------------------------------------------------------------------
-
-<br>
-
-## **Appendix: Parsing**
-
-### Design considerations
+### Parsing
 
 **Aspect: How to parse the commands:**
 <br>
@@ -462,6 +494,44 @@ Context: The `ArgumentMultimap` is used across different entities.
     * Cons:
         * More code duplication, as there are shared prefixes
         * Might be harder to track shared prefixes, causing confusion to users
+
+<br>
+
+### User Interface
+
+**Aspect: How to show appointment and person lists**
+<br>
+Context: There are two entity types (appointment and person) being managed in DocTrack
+<br>
+* **Alternative 1 (current choice):** Show lists as two separate panels side by side
+    * Pros:
+        * Easier to see all information at once
+        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
+    * Cons:
+        * More verbose and could result in information overload
+* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
+    * Pros:
+        * Information is simpler to digest
+    * Cons:
+        * More overhead of handling switching between lists
+        * Difficult to cross reference when typing certain commands
+
+<br>
+
+**Aspect: Color Scheme**
+<br>
+* **Alternative 1 (current choice):** Create new red, white and gray color scheme
+    * Pros:
+        * Creates brand identity
+        * Makes the GUI more appealling to the target audience
+    * Cons:
+        * Constant oversight needed to maintain color scheme in future feature enhancements
+* **Alternative 2:** Use the original AB3 gray color schee
+    * Pros:
+        * No extra effort needed
+    * Cons:
+        * Colors are not appealing
+        * Colors are not professional and do not suit target audience
 
 <br>
 
@@ -989,50 +1059,6 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1.
-
-<br>
-
---------------------------------------------------------------------------------------------------------------------
-
-<br>
-
-## **Appendix: UI**
-
-### Design considerations
-
-**Aspect: How to show appointment and person lists**
-<br>
-Context: There are two entity types (appointment and person) being managed in DocTrack
-<br>
-* **Alternative 1 (current choice):** Show lists as two separate panels side by side
-    * Pros:
-        * Easier to see all information at once
-        * Easier to cross reference when doing `add appt` or `edit appt` commands, which may need information about person ID
-    * Cons:
-        * More verbose and could result in information overload
-* **Alternative 2**: Show only one list at a time, but toggle between the two using a `list appt` or `list person` command
-    * Pros:
-        * Information is simpler to digest
-    * Cons:
-        * More overhead of handling switching between lists
-        * Difficult to cross reference when typing certain commands
-
-<br>
-
-**Aspect: Color Scheme**
-<br>
-* **Alternative 1 (current choice):** Create new red, white and gray color scheme
-    * Pros:
-        * Creates brand identity
-        * Makes the GUI more appealling to the target audience
-    * Cons:
-        * Constant oversight needed to maintain color scheme in future feature enhancements
-* **Alternative 2:** Use the original AB3 gray color schee
-    * Pros:
-        * No extra effort needed
-    * Cons:
-        * Colors are not appealing
-        * Colors are not professional and do not suit target audience
 
 <br>
 
