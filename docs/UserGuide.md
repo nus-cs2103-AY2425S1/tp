@@ -122,7 +122,8 @@ Adds a student to T_Assistant.
 ##### Notes
 
 1. `Student Number` is the unique identifier for each student, so no 2 students can have the same student number.
-2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first instance of the repeated tag.
+2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first
+   instance of the repeated tag.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -334,7 +335,7 @@ This screenshot shows the result of executing `list_g`.
 
 Explanation of what command does.
 
-**Format**: `add_g gn/GROUP_NAME`
+**Format**: `add_g/ag gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 ##### Notes
 
@@ -454,7 +455,6 @@ This screenshot shows the result of executing `sort_g`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ### Task Commands
 
 --------------------------------------------------------------------------------------------------------------------
@@ -549,7 +549,8 @@ The command will stop running the moment it hits an error.
 
 For example `add_et_g i/1 gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
 
-If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not `CS2103-F13-1`.
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
+`CS2103-F13-1`.
 
 </box>
 
@@ -876,14 +877,14 @@ All parameters are case-insensitive when used for comparison unless stated other
 
 ### Group
 
-| Action           | Format, Examples                                                    |
-|------------------|---------------------------------------------------------------------|
-| **List Groups**  | `list_g/lg`                                                         |
-| **Add Group**    | `add_g/ag gn/GROUP_NAME`<br>e.g., `ag gn/CS2103-F12-2`              |
-| **Delete Group** | `del_g/dg gn/GROUP_NAME`<br>e.g., `dg gn/CS2103-F12-2`              |
-| **Edit Group**   | `edit_g/eg i/INDEX gn/GROUP_NAME`<br>e.g., `eg i/1 gn/CS2103-F12-3` |
-| **Find Group**   | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`       |
-| **Sort Groups**  | `sort_g/sg`                                                         |
+| Action           | Format, Examples                                                                          |
+|------------------|-------------------------------------------------------------------------------------------|
+| **List Groups**  | `list_g/lg`                                                                               |
+| **Add Group**    | `add_g/ag gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `ag gn/CS2103-F12-2 gn/CS2103-F12-1` |
+| **Delete Group** | `del_g/dg gn/GROUP_NAME`<br>e.g., `dg gn/CS2103-F12-2`                                    |
+| **Edit Group**   | `edit_g/eg i/INDEX gn/GROUP_NAME`<br>e.g., `eg i/1 gn/CS2103-F12-3`                       |
+| **Find Group**   | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`                             |
+| **Sort Groups**  | `sort_g/sg`                                                                               |
 
 ### Task
 
