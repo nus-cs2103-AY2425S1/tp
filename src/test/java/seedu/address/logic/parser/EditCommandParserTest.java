@@ -206,9 +206,10 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
     }
     @Test
-    public void parse_frequency_Failure() {
+    public void parse_frequency_failure() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_FREQUENCY + "weekly";
-        assertParseFailure(parser, userInput, "Frequency cannot be edited from the edit command. Please use the paid command.");
+        assertParseFailure(parser, userInput, "Frequency cannot be edited from the "
+                + "edit command. Please use the paid command.");
     }
 
     @Test
