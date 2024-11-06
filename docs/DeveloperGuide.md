@@ -975,6 +975,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Project Grouping**: The arrangement of students into smaller groups for project purposes
 * **Tags**: Labels assigned to students to indicate specific roles or characteristics
 * **Student Profile**: A record within the system that contains information about a specific student
+* **EcName**: Emergency contact name of a student
+* **EcNumber**: Emergency contact number of a student
+* **SortAttribute**: Particular attribute of a student that can be compared for sorting purposes
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1038,6 +1041,43 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Editing a student
+
+1. Editing a student while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `edit 1 c/1A`<br>
+       Expected: First student's class is changed. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `edit 1 c/A1`<br>
+       Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 0`, `edit c/1A c/2A`, `edit x c/1A` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Adding EcNumber for a student
+
+1. Adding EcNumber for a student in the list
+
+    1. Prerequisites: List must not be empty, student for which EcNumber is added should already be in the list.
+
+    2. Test case: `addEcNumber 1 ep/91234567`<br>
+       Expected: First student will have his emergency contact number added. Name and emergency contact number will be shown in the status message.
+
+    3. Test case: `addEcNumber 1 ep/`<br>
+       Expected: First student will have his emergency contact number deleted. Name of student with the emergency contact number deleted will be shown in the status message.
+    
+    4. Test case: `addEcNumber 1 ep/123`<br>
+       Expected: No emergency contact number is changed. Error details shown in the status message. Status bar remains the same.
+
+    5. Other incorrect addEcNumber commands to try: `addEcNumber`, `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 
@@ -1123,6 +1163,23 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect deleteSubmission commands to try: `deleteSubmission`, `deleteSubmission sm/`, `deleteSubmission sm/#@*`<br>
        Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Sorting students
+
+1. Sorts all students currently in the list based on the specified attribute
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+   2. Test case: `sort register number`<br>
+      Expected: List of students is sorted according to register number. Confirmation message shown in the status message.
+
+   3. Test case: `sort abc`<br>
+      Expected: List is not sorted, Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect sort commands to try: `sort`, `sort 1`<br>
+      Expected: Similar to previous
 
 2. _{ more test cases …​ }_
 
