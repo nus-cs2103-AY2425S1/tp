@@ -8,9 +8,9 @@
     "tags" : [ "friends" ],
     "games" : [ {
       "gameName" : "LoL",
-      "username" : "nil",
-      "skillLevel" : "nil",
-      "role" : "nil",
+      "username" : "",
+      "skillLevel" : "",
+      "role" : "",
       "isFavourite" : false
     } ],
     "preferred times": ["1200-1400", "2100-2230"]
@@ -20,6 +20,13 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
+    "games" : [ {
+      "gameName" : "LoL",
+      "username" : "",
+      "skillLevel" : "",
+      "role" : "",
+      "isFavourite" : true
+    } ],
     "preferred times": ["1800-2000"]
   }, {
     "name" : "Carl Kurz",
@@ -57,9 +64,9 @@
     "tags" : [ ],
     "games" : [ {
       "gameName" : "LoL",
-      "username" : "nil",
-      "skillLevel" : "nil",
-      "role" : "nil",
+      "username" : "",
+      "skillLevel" : "",
+      "role" : "",
       "isFavourite" : false
     } ],
     "preferred times": [ ]

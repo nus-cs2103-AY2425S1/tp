@@ -14,11 +14,13 @@ public class GameBuilder {
     public static final String DEFAULT_USERNAME = "lmao";
     public static final String DEFAULT_SKILL_LEVEL = "nub";
     public static final String DEFAULT_ROLE = "npc";
+    public static final Boolean DEFAULT_FAVOURITE_STATUS = false;
 
     private String gameName;
     private Role role;
     private SkillLevel skillLevel;
     private Username username;
+    private boolean isFavourite;
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -27,6 +29,7 @@ public class GameBuilder {
         role = new Role(DEFAULT_ROLE);
         skillLevel = new SkillLevel(DEFAULT_SKILL_LEVEL);
         username = new Username(DEFAULT_USERNAME);
+        isFavourite = DEFAULT_FAVOURITE_STATUS;
     }
 
     /**
@@ -37,6 +40,7 @@ public class GameBuilder {
         role = gameToCopy.getRole();
         skillLevel = gameToCopy.getSkillLevel();
         username = gameToCopy.getUsername();
+        isFavourite = gameToCopy.getFavouriteStatus();
     }
 
     /**
@@ -72,7 +76,7 @@ public class GameBuilder {
     }
 
     public Game build() {
-        return new Game(gameName, username, skillLevel, role, false);
+        return new Game(gameName, username, skillLevel, role, isFavourite);
     }
 
 }
