@@ -76,6 +76,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds all the people from the provided {@Code addressBook} to this address book.
+     * @param addressBook
+     */
+    public void addAllPersons(AddressBook addressBook) {
+        for (Person p: addressBook.persons) {
+            this.addPerson(p);
+        }
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

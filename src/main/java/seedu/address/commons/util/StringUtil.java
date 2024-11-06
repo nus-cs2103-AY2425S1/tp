@@ -65,4 +65,32 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Converts a string into its camel case version
+     * @param input a String with at least one uppercase letter
+     * @return the camel case version of the string
+     */
+    public static String toCamelCase(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        StringBuilder camelCaseString = new StringBuilder();
+        boolean firstCapitalFound = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+
+            // Convert the first capital letter to lowercase
+            if (Character.isUpperCase(c) && !firstCapitalFound) {
+                camelCaseString.append(Character.toLowerCase(c));
+                firstCapitalFound = true;
+            } else {
+                camelCaseString.append(c);
+            }
+        }
+
+        return camelCaseString.toString();
+    }
 }
