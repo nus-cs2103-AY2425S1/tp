@@ -20,10 +20,10 @@ public class RatingCommandParserTest {
         assertParseFailure(parser, "r/5", MESSAGE_INVALID_FORMAT);
 
         // no rating specified
-        // assertParseFailure(parser, "1", Rating.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no rating specified
-        // assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -46,14 +46,4 @@ public class RatingCommandParserTest {
         // invalid rating (e.g., out of expected bounds or format)
         assertParseFailure(parser, "1 r/invalid_rating", Rating.MESSAGE_CONSTRAINTS);
     }
-
-    //    @Test
-    //    public void parse_optionalRating_success() {
-    //        // valid index but no rating specified
-    //        Index targetIndex = Index.fromOneBased(1);
-    //        String userInput = targetIndex.getOneBased() + " ";
-    //        RatingCommand expectedCommand = new RatingCommand(targetIndex, new Rating(null));
-    //
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //    }
 }
