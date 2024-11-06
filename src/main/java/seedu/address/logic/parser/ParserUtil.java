@@ -225,7 +225,7 @@ public class ParserUtil {
     public static String removeUnwantedPrefix(String arg, boolean name) {
         Pattern pattern;
         if (name) {
-            pattern = Pattern.compile("^(.*) [a-zA-Z0-9]/(?:[a-zA-Z0-9]{2,}|$)");
+            pattern = Pattern.compile("^(.*) [a-zA-Z0-9]/\\s*(?:[a-zA-Z0-9]{2,}|$)");
         } else {
             pattern = Pattern.compile("^(.*) [a-zA-Z0-9]/[a-zA-Z0-9]{0,}");
         }
