@@ -38,6 +38,7 @@ import seedu.address.model.person.Priority;
 public class DeleteApptCommand extends Command {
 
     public static final String COMMAND_WORD = "delAppt";
+    public static final String COMMAND_WORD_INSENSITIVE = "delappt";
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Deletes a patient's appointment identified by the NRIC number of the patient.\n"

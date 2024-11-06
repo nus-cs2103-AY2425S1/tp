@@ -38,6 +38,7 @@ import seedu.address.model.person.Priority;
 public class AddApptCommand extends Command {
 
     public static final String COMMAND_WORD = "addAppt";
+    public static final String COMMAND_WORD_INSENSITIVE = "addappt";
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Adds an appointment to a patient\n"

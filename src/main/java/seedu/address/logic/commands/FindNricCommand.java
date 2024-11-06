@@ -13,6 +13,7 @@ import seedu.address.model.person.NricMatchesPredicate;
 public class FindNricCommand extends Command {
 
     public static final String COMMAND_WORD = "findNric";
+    public static final String COMMAND_WORD_INSENSITIVE = "findnric";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a patient whose nric matches "
             + "the specified nric (case-insensitive) and displays them.\n"
