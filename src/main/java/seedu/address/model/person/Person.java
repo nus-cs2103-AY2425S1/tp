@@ -114,8 +114,11 @@ public class Person {
             return true;
         }
 
+        String thisLowerCase = this.getFullName().toLowerCase();
+        String otherLowerCase = otherPerson.getFullName().toLowerCase();
+
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
+                && otherLowerCase.equals(thisLowerCase)
                 && otherPerson.getPhone().equals(getPhone());
     }
 
