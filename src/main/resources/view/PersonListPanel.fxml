@@ -2,7 +2,11 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.control.TextField?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox fx:id="studentHeader" VBox.vgrow="NEVER" style="-fx-border-color: black; -fx-border-width: 3;">
+    <TextField fx:id="studentHeaderText" alignment="CENTER" text="Student List" editable="false" styleClass = "style_big_label"
+             style="-fx-font-weight: bold; -fx-font-size: 24px;"/>
+  </VBox>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
 </VBox>
