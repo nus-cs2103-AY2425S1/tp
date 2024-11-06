@@ -175,9 +175,8 @@ Usage: `find [n/NAME] [e/EMAIL] [p/PHONE] [a/ADDRESS] [pay/PAYMENT] [a/ATTENDANC
 Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
 </div>
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-Search is by partial matching for keyword(s) of prefixes `n/`, `e/`, `p/`, `a/`, `t/`.
-</div>
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+Search is by partial matching for keyword(s) of prefixes `n/`, `e/`, `p/`, `a/`, `t/`.</div>
 
 
 {% raw %}
