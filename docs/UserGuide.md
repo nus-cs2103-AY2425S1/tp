@@ -16,7 +16,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -102,20 +102,22 @@ Shows a message explaining how to access the help page.
 
 #### Format: `help`
 
-### Adding a person: `add`
+### Creating a Vendor or Event: `create`
 
-Adds a person to the address book.
+Creates a person or event in EventTory.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+#### Format:
+* To create a vendor: `create v/ n/VENDOR_NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]…​`
+* To create en event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
+**Note:** If parameters are provided for the `v/` and `e/` flags, they will be ignored.
+<box type="tip" seamless><br>
+**Tip:** A vendor or event can have any number of tags (including 0).
 </box>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+#### Examples:
+* `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
+* `create e/ n/Jubilee Concert on/24 Jan 2025 t/annual`
 
 ### Listing all persons : `list`
 
