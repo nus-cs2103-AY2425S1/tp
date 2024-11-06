@@ -15,7 +15,7 @@ import seedu.address.model.person.UniquePersonList;
  * Represents the different states of the Address Book for the user.
  */
 public class VersionedAddressBook extends AddressBook {
-    public static final String MESSAGE_NO_MORE_HISTORY = "This is the earliest version that user can retrieve";
+    public static final String MESSAGE_NO_MORE_HISTORY = "No more past data changes to undo.";
     public static final String MESSAGE_UNSAVED_CHANGES = "There are unsaved changes in the current state. "
             + "Please commit or discard the changes before undoing.";
     private final ArrayList<AddressBook> addressBookStateList;
