@@ -14,14 +14,14 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 ## Table of Contents
 <page-nav-print />
 
-[1. Quick Start](#1-quick-start)
+[1 Quick Start](#1-quick-start)
 
-[2. Command Summary](#2-command-summary)
+[2 Command Summary](#2-command-summary)
   * [2.1 Command Table](#21-command-table)
   * [2.2 Parameter Table](#22-parameter-table)
   * [2.3 Notes on the Command Format](#23-notes-on-the-command-format)
 
-[3. Features](#3-features)
+[3 Features](#3-features)
   * [3.1 Student Management](#31-student-management)
     * [3.1.1 Adding a Student: `add`](#311-adding-a-student-add)
     * [3.1.2 Deleting a Student: `delete`](#312-deleting-a-student-delete)
@@ -44,13 +44,13 @@ This detailed guide will walk you through how to make the most of **EduManage** 
     * [3.4.1 Viewing Help: `help`](#341-viewing-help-help)
     * [3.4.2 Exiting EduManage: `exit`](#342-exiting-edumanage-exit)
 
-[4. FAQ](#4-faq)
+[4 FAQ](#4-faq)
 
-[5. Known Issues](#5-known-issues)
+[5 Known Issues](#5-known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 1. Quick Start
+## 1 Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -84,7 +84,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 2. Command Summary
+## 2 Command Summary
 
 ### 2.1 Command Table
 
@@ -163,7 +163,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Features
+## 3 Features
 
 ### 3.1 Student Management
 
@@ -429,7 +429,7 @@ Exits EduManage.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. FAQ
+## 4 FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduManage home folder.
@@ -438,7 +438,7 @@ Exits EduManage.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. Known Issues
+## 5 Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.

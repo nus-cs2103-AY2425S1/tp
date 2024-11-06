@@ -28,15 +28,15 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
-  * [1. Quick Start]({{ baseUrl }}/UserGuide.html#1-quick-start)
-  * [2. Command Summary]({{ baseUrl }}/UserGuide.html#2-command-summary)
-  * [3. Features]({{ baseUrl }}/UserGuide.html#3-features)
+  * [1 Quick Start]({{ baseUrl }}/UserGuide.html#1-quick-start)
+  * [2 Command Summary]({{ baseUrl }}/UserGuide.html#2-command-summary)
+  * [3 Features]({{ baseUrl }}/UserGuide.html#3-features)
     * [3.1 Student Management]({{ baseUrl }}/UserGuide.html#31-student-management)
     * [3.2 Task Management]({{ baseUrl }}/UserGuide.html#32-task-management)
     * [3.3 Data Management]({{ baseUrl }}/UserGuide.html#33-data-management)
     * [3.4 Navigation]({{ baseUrl }}/UserGuide.html#34-navigation)
-  * [4. FAQ]({{ baseUrl }}/UserGuide.html#4-faq)
-  * [5. Known Issues]({{ baseUrl }}/UserGuide.html#5-known-issues)
+  * [4 FAQ]({{ baseUrl }}/UserGuide.html#4-faq)
+  * [5 Known Issues]({{ baseUrl }}/UserGuide.html#5-known-issues)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
