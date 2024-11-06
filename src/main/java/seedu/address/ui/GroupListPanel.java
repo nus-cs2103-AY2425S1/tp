@@ -33,7 +33,6 @@ public class GroupListPanel extends UiPart<Region> implements PersonListObserver
      * Refreshes the group list to reflect any updates in the person list.
      */
     public void refreshGroupList() {
-        System.out.println("refresh called");
         groupListView.refresh();
     }
 
