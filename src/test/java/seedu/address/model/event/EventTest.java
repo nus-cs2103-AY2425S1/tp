@@ -8,6 +8,8 @@ import static seedu.address.testutil.EventBuilder.DEFAULT_ATTENDEES;
 import static seedu.address.testutil.TypicalEvents.EVENT_MULTIPLE_ATTENDEE;
 import static seedu.address.testutil.TypicalEvents.EVENT_NO_ATTENDEE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -22,6 +24,8 @@ import seedu.address.testutil.PersonBuilder;
 
 
 public class EventTest {
+    private Event eventNoAttendee;
+    private Event eventMultipleAttendee;
     private Event event;
     private Person person1;
     private Person person2;
@@ -29,9 +33,13 @@ public class EventTest {
 
     @BeforeEach
     public void setUp() {
+        eventNoAttendee = eventDeepCopy(EVENT_NO_ATTENDEE);
+        eventMultipleAttendee = eventDeepCopy(EVENT_MULTIPLE_ATTENDEE);
+
         person1 = new PersonBuilder().withName("John Doe").build();
         person2 = new PersonBuilder().withName("Jane Doe").build();
         address = new Address("123 Main St, City");
+
         Set<Person> attendees = new HashSet<>();
         attendees.add(person1);
         attendees.add(person2);
@@ -43,27 +51,27 @@ public class EventTest {
 
     @Test
     public void getEventName_returnsCorrectName() {
-        assertEquals("Workshop", EVENT_NO_ATTENDEE.getEventName());
+        assertEquals("Workshop", eventNoAttendee.getEventName());
     }
 
     @Test
     public void getStartDate_returnsCorrectDate() {
-        assertEquals(LocalDate.of(2023, 10, 01), EVENT_NO_ATTENDEE.getStartDate());
+        assertEquals(LocalDate.of(2023, 10, 01), eventNoAttendee.getStartDate());
     }
 
     @Test
     public void getEndDate_returnsCorrectDate() {
-        assertEquals(LocalDate.of(2023, 10, 01), EVENT_NO_ATTENDEE.getEndDate());
+        assertEquals(LocalDate.of(2023, 10, 01), eventNoAttendee.getEndDate());
     }
 
     @Test
     public void getLocation_returnsCorrectLocation() {
-        assertEquals(new Address("123 Main Street"), EVENT_NO_ATTENDEE.getLocation());
+        assertEquals(new Address("123 Main Street"), eventNoAttendee.getLocation());
     }
 
     @Test
     public void getAttendees_returnsUnmodifiableSet() {
-        Set<Person> attendees = EVENT_MULTIPLE_ATTENDEE.getAttendees();
+        Set<Person> attendees = eventMultipleAttendee.getAttendees();
         assertTrue(attendees.contains(PERSON_ALEX));
         assertFalse(attendees.contains(ALICE));
     }
@@ -71,39 +79,58 @@ public class EventTest {
     @Test
     public void isPersonAttending() {
         // Event with no attendees
-        assertFalse(EVENT_NO_ATTENDEE.isPersonAttending(ALICE));
+        assertFalse(eventNoAttendee.isPersonAttending(ALICE));
 
         // Event with attendees
         // person in attendees -> returns true
         assertTrue(event.isPersonAttending(person1));
 
         // person not in attendees -> returns false
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.isPersonAttending(ALICE));
+        assertFalse(eventMultipleAttendee.isPersonAttending(ALICE));
     }
 
     @Test
     public void removeAttendee() {
         // Event with no attendees
-        EVENT_NO_ATTENDEE.removeAttendee(ALICE);
-        assertFalse(EVENT_NO_ATTENDEE.isPersonAttending(ALICE));
+        eventNoAttendee.removeAttendee(ALICE);
+        assertFalse(eventNoAttendee.isPersonAttending(ALICE));
 
         // Event with attendees
         // person in attendees, removed successfully
-        EVENT_MULTIPLE_ATTENDEE.removeAttendee(PERSON_ALEX);
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.isPersonAttending(PERSON_ALEX));
+        eventMultipleAttendee.removeAttendee(PERSON_ALEX);
+        assertFalse(eventMultipleAttendee.isPersonAttending(PERSON_ALEX));
 
         // person not in attendees, no effect
-        EVENT_MULTIPLE_ATTENDEE.removeAttendee(ALICE);
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.isPersonAttending(ALICE));
+        eventMultipleAttendee.removeAttendee(ALICE);
+        assertFalse(eventMultipleAttendee.isPersonAttending(ALICE));
+    }
+
+    @Test
+    public void editAttendee() {
+        // Event with no attendees
+        eventNoAttendee.removeAttendee(PERSON_ALEX);
+        assertFalse(eventNoAttendee.isPersonAttending(PERSON_ALEX));
+
+        // Event with attendees
+        // person in attendees, updated successfully
+        eventMultipleAttendee.editAttendee(PERSON_ALEX, ALICE);
+        assertFalse(eventMultipleAttendee.isPersonAttending(PERSON_ALEX));
+        assertTrue(eventMultipleAttendee.isPersonAttending(ALICE));
+
+        // person in attendees, no effect
+
+        eventMultipleAttendee.editAttendee(BOB, BENSON);
+        assertFalse(eventMultipleAttendee.isPersonAttending(BENSON));
+        assertFalse(eventMultipleAttendee.isPersonAttending(BOB));
     }
 
     @Test
     public void isSameEvent() {
         // same object -> returns true
-        assertTrue(EVENT_NO_ATTENDEE.isSameEvent(EVENT_NO_ATTENDEE));
+        assertTrue(eventNoAttendee.isSameEvent(eventNoAttendee));
 
         // null -> returns false
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(null));
+        assertFalse(eventNoAttendee.isSameEvent(null));
 
         Set<Person> attendees = new HashSet<>();
         Address location = new Address("123 Main Street");
@@ -112,32 +139,32 @@ public class EventTest {
         Event otherEvent = new Event("Family Gathering", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 new Address("89 City Hall"), DEFAULT_ATTENDEES);
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventMultipleAttendee.isSameEvent(otherEvent));
 
         // different name -> returns false
         otherEvent = new Event("Conference", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 location, attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
 
         // different date -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 11, 1),
                 LocalDate.of(2023, 11, 1),
                 location, attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
 
         // different location -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 new Address("456 Other St, City"), attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
 
         // different attendees -> returns false
         attendees.add(ALICE);
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 location, attendees);
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventMultipleAttendee.isSameEvent(otherEvent));
     }
 
     @Test
@@ -146,19 +173,19 @@ public class EventTest {
         Event eventCopy = new Event("Family Gathering", LocalDate.of(2023, 10, 03),
                 LocalDate.of(2023, 10, 03),
                 new Address("89 City Hall"), DEFAULT_ATTENDEES);
-        assertTrue(EVENT_MULTIPLE_ATTENDEE.equals(eventCopy));
+        assertTrue(eventMultipleAttendee.equals(eventCopy));
 
         // same object -> returns true
-        assertTrue(EVENT_MULTIPLE_ATTENDEE.equals(EVENT_MULTIPLE_ATTENDEE));
+        assertTrue(eventMultipleAttendee.equals(eventMultipleAttendee));
 
         // null -> returns false
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.equals(null));
+        assertFalse(eventMultipleAttendee.equals(null));
 
         // different type -> returns false
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.equals(5));
+        assertFalse(eventMultipleAttendee.equals(5));
 
         // different event -> returns false
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.equals(EVENT_NO_ATTENDEE));
+        assertFalse(eventMultipleAttendee.equals(eventNoAttendee));
 
         Set<Person> attendees = new HashSet<>();
         Address location = new Address("123 Main Street");
@@ -167,50 +194,56 @@ public class EventTest {
         Event otherEvent = new Event("Family Gathering", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 new Address("89 City Hall"), DEFAULT_ATTENDEES);
-        assertFalse(EVENT_MULTIPLE_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventMultipleAttendee.isSameEvent(otherEvent));
 
         // different name -> returns false
         otherEvent = new Event("Conference", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 location, attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
 
         // different date -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 11, 01),
                 LocalDate.of(2023, 11, 01),
                 location, attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
 
         // different location -> returns false
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 new Address("456 Other St, City"), attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
 
         // different attendees -> returns false
         attendees.add(ALICE);
         otherEvent = new Event("Workshop", LocalDate.of(2023, 10, 01),
                 LocalDate.of(2023, 10, 01),
                 location, attendees);
-        assertFalse(EVENT_NO_ATTENDEE.isSameEvent(otherEvent));
+        assertFalse(eventNoAttendee.isSameEvent(otherEvent));
     }
 
     @Test
     public void toString_containsEventDetails() {
-        String expected = "Event{name='" + EVENT_MULTIPLE_ATTENDEE.getEventName()
-                + "', startDate=" + EVENT_MULTIPLE_ATTENDEE.getStartDate()
-                + ", endDate=" + EVENT_MULTIPLE_ATTENDEE.getEndDate()
-                + ", location=" + EVENT_MULTIPLE_ATTENDEE.getLocation().value
+        String expected = "Event{name='" + eventMultipleAttendee.getEventName()
+                + "', startDate=" + eventMultipleAttendee.getStartDate()
+                + ", endDate=" + eventMultipleAttendee.getEndDate()
+                + ", location=" + eventMultipleAttendee.getLocation().value
                 + ", \nattendees=";
 
         // Build the string for each attendee, adding a newline after each one
-        for (Person attendee : EVENT_MULTIPLE_ATTENDEE.getAttendees()) {
+        for (Person attendee : eventMultipleAttendee.getAttendees()) {
             expected += "\n" + attendee.toString();
         }
 
         expected += "}";
 
-        assertEquals(expected, EVENT_MULTIPLE_ATTENDEE.toString());
+        assertEquals(expected, eventMultipleAttendee.toString());
     }
+
+    public Event eventDeepCopy(Event eventToCopy) {
+        return new Event(eventToCopy.getEventName(), eventToCopy.getStartDate(), eventToCopy.getEndDate(),
+                eventToCopy.getLocation(), eventToCopy.getAttendees());
+    }
+
 
 }
