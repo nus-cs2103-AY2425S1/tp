@@ -43,6 +43,19 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         nameLabel.setText(person.getName().fullName);
         categoryLabel.setText(person.getCategoryDisplayName());
+        addCategoryColor(person.getCategoryDisplayName());
         phoneLabel.setText("Phone: " + person.getPhone().value);
+    }
+
+    /**
+     * Adds background color for category.
+     * @param value The value of the category.
+     */
+    public void addCategoryColor(String value) {
+        if ("Student".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("student-background");
+        } else if ("Company".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("company-background");
+        }
     }
 }

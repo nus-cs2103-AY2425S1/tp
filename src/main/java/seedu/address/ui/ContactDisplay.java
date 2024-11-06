@@ -125,6 +125,7 @@ public class ContactDisplay extends UiPart<Region> {
         person.getTags().stream()
         .sorted(Comparator.comparing(tag -> tag.tagName))
         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        checkIsNullTags();
         if (person instanceof Company) {
             Company company = (Company) person;
             industryStudentIdLabel.setText("Industry: " + company.getIndustry().value);
@@ -148,9 +149,7 @@ public class ContactDisplay extends UiPart<Region> {
         emailLabel.setText("Email: " + company.getEmail().value);
         addressLabel.setText("Address: " + company.getAddress().value);
         tags.getChildren().clear();
-        company.getTags().stream()
-        .sorted(Comparator.comparing(tag -> tag.tagName))
-        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        checkIsNullTags();
     }
 
     /**
@@ -165,10 +164,7 @@ public class ContactDisplay extends UiPart<Region> {
         phoneLabel.setText("Phone: " + student.getPhone().value);
         emailLabel.setText("Email: " + student.getEmail().value);
         addressLabel.setText("Address: " + student.getAddress().value);
-        tags.getChildren().clear();
-        student.getTags().stream()
-        .sorted(Comparator.comparing(tag -> tag.tagName))
-        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        checkIsNullTags();
     }
 
     /**
@@ -259,34 +255,48 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void checkIsNullCategory() {
         categoryLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.isEmpty()) {
-                categoryLabel.getStyleClass().remove("with-background");
-            } else {
-                if (!categoryLabel.getStyleClass().contains("with-background")) {
-                    categoryLabel.getStyleClass().add("with-background");
-                }
+            categoryLabel.getStyleClass().removeAll("student-background", "company-background");
+            if (newValue != null || !newValue.isEmpty()) {
+                addCategoryColor(newValue);
             }
         });
+    }
+
+    /**
+     * Adds background color for category.
+     * @param value The value of the category.
+     */
+    public void addCategoryColor(String value) {
+        if ("Student".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("student-background");
+        } else if ("Company".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("company-background");
+        }
     }
 
     /**
      * Removes the background colour of the tags flowpane if it is null.
      */
     public void checkIsNullTags() {
-        for (javafx.scene.Node node : tags.getChildren()) {
+        for (int i = 0; i < tags.getChildren().size(); i++) {
+            javafx.scene.Node node = tags.getChildren().get(i);
             if (node instanceof Label tagLabel) {
                 String text = tagLabel.getText();
+                tagLabel.getStyleClass().remove("with-background-1");
+                tagLabel.getStyleClass().remove("with-background-2");
                 if (text == null || text.isEmpty()) {
-                    tagLabel.getStyleClass().remove("with-background");
+                    continue;
                 } else {
-                    if (!tagLabel.getStyleClass().contains("with-background")) {
-                        tagLabel.getStyleClass().add("with-background");
+                    if (text.equalsIgnoreCase("paid")) {
+                        tagLabel.getStyleClass().add("paid");
+                    } else if (i % 2 == 0) {
+                        tagLabel.getStyleClass().add("with-background-1");
+                    } else {
+                        tagLabel.getStyleClass().add("with-background-2");
                     }
                 }
             }
         }
     }
-
-
 }
 
