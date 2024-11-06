@@ -44,7 +44,7 @@
     "moduleName" : "CS2103T",
     "remark" : "Head TA",
     "tags" : [ ],
-    "contactType" : "PERSONAL"
+    "contactType" : "SCHOOL"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -53,7 +53,7 @@
     "moduleName" : "CS2101",
     "remark" : "research assistant for a language model project",
     "tags" : [ ],
-    "contactType" : "PERSONAL"
+    "contactType" : "SCHOOL"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
