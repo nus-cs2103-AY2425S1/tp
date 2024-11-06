@@ -15,5 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUBJECT = new Prefix("/subject");
     public static final Prefix PREFIX_CLASSES = new Prefix("/classes");
     public static final Prefix PREFIX_ATTENDANCE = new Prefix("/attendance");
+    public static final Prefix PREFIX_NEXT_OF_KIN = new Prefix("/nok");
+    public static final Prefix PREFIX_EMERGENCY_CONTACT = new Prefix("/emergency");
 
 }

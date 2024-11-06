@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_CHRIS;
@@ -23,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHRIS;
@@ -181,14 +183,16 @@ public class PersonTest {
             new Gender(VALID_GENDER_CHRIS), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
             new Address(VALID_ADDRESS_CHRIS), SampleDataUtil.getTagSet("friends"),
             SampleDataUtil.getSubjectSet(VALID_SUBJECT_CHRIS),
-            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null);
+            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS),
+                null, null, null);
         assertEquals(TEACHER_CHRIS, createdChris);
 
         Person createdMichael = Person.createPerson(STUDENT_TYPE, new Name(VALID_NAME_MICHAEL),
             new Gender(VALID_GENDER_MICHAEL), new Phone(VALID_PHONE_MICHAEL), new Email(VALID_EMAIL_MICHAEL),
             new Address(VALID_ADDRESS_MICHAEL), SampleDataUtil.getTagSet(),
             SampleDataUtil.getSubjectSet(VALID_SUBJECT_MICHAEL),
-            SampleDataUtil.getClassSet(VALID_CLASSES_MICHAEL), new DaysAttended(VALID_ATTENDANCE_MICHAEL));
+            SampleDataUtil.getClassSet(VALID_CLASSES_MICHAEL), new DaysAttended(VALID_ATTENDANCE_MICHAEL),
+                new Name(VALID_NEXT_OF_KIN_MICHAEL), new Phone(VALID_EMERGENCY_CONTACT_MICHAEL));
         assertEquals(STUDENT_MICHAEL, createdMichael);
 
         assertThrows(InvalidPersonTypeException.class, () -> Person.createPerson("INVALID_TYPE",
@@ -196,7 +200,7 @@ public class PersonTest {
             new Gender(VALID_GENDER_CHRIS), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
             new Address(VALID_ADDRESS_CHRIS), SampleDataUtil.getTagSet("friends"),
             SampleDataUtil.getSubjectSet(VALID_SUBJECT_CHRIS),
-            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null));
+            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null, null, null));
     }
 
     @Test

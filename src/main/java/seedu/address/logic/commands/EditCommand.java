@@ -107,14 +107,18 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        DaysAttended updatedDaysAttended = editPersonDescriptor.getDaysAttended().orElse(personToEdit
-            .getDaysAttended());
+        DaysAttended updatedDaysAttended = editPersonDescriptor.getDaysAttended()
+                .orElse(personToEdit.getDaysAttended());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
         Set<String> updatedClasses = editPersonDescriptor.getClasses().orElse(personToEdit.getClasses());
+        Name updatedNextOfKin = editPersonDescriptor.getNextOfKin().orElse(personToEdit.getNextOfKinName());
+        Phone updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
+                .orElse(personToEdit.getEmergencyContact());
 
         return Person.createPerson(personToEdit.getType(), updatedName, updatedGender, updatedPhone, updatedEmail,
-            updatedAddress, updatedTags, updatedSubjects, updatedClasses, updatedDaysAttended);
+                updatedAddress, updatedTags, updatedSubjects, updatedClasses, updatedDaysAttended,
+                updatedNextOfKin, updatedEmergencyContact);
     }
 
     @Override
@@ -156,6 +160,8 @@ public class EditCommand extends Command {
         private Set<Subject> subjects;
         private Set<String> classes;
         private DaysAttended daysAttended;
+        private Name nextOfKin;
+        private Phone emergencyContact;
 
         public EditPersonDescriptor() {}
 
@@ -173,6 +179,8 @@ public class EditCommand extends Command {
             setSubjects(toCopy.subjects);
             setClasses(toCopy.classes);
             setDaysAttended(toCopy.daysAttended);
+            setNextOfKin(toCopy.nextOfKin);
+            setEmergencyContact(toCopy.emergencyContact);
         }
 
 
@@ -183,6 +191,23 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, classes, subjects, gender);
         }
+
+        public void setNextOfKin(Name nextOfKin) {
+            this.nextOfKin = nextOfKin;
+        }
+
+        public Optional<Name> getNextOfKin() {
+            return Optional.ofNullable(nextOfKin);
+        }
+
+        public void setEmergencyContact(Phone emergencyContact) {
+            this.emergencyContact = emergencyContact;
+        }
+
+        public Optional<Phone> getEmergencyContact() {
+            return Optional.ofNullable(emergencyContact);
+        }
+
 
         public void setName(Name name) {
             this.name = name;

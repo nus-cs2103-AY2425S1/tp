@@ -103,7 +103,7 @@ public class Teacher extends Person {
      */
     public Person withIncrementedAttendance() {
         return Person.createPerson(getType(), getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), getDaysAttended());
+                getTags(), getSubjects(), getClasses(), getDaysAttended(), getNextOfKinName(), getEmergencyContact());
     }
 
     /**
@@ -124,7 +124,7 @@ public class Teacher extends Person {
      */
     public Person withResetAttendance() {
         return Person.createPerson(getType(), getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), getDaysAttended());
+                getTags(), getSubjects(), getClasses(), getDaysAttended(), getNextOfKinName(), getEmergencyContact());
     }
 
     /**
