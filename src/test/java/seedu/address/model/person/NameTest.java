@@ -38,7 +38,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("José García")); // contains diacritics
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr")); // long names
-        assertTrue(Name.isValidName("David s/o Raja, Alexander'e")); // contains acceptable special characters "/" "," "'"
+        assertTrue(Name.isValidName("Bob s/o Raja, Alexand'er")); // contains acceptable special characters "/" "," "'"
     }
 
     @Test
