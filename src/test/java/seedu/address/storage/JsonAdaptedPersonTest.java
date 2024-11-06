@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -26,6 +27,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_GENDER = BENSON.getGender().toString();
+    private static final String VALID_MODULE = BENSON.getModules().stream().toList().get(0).getModule();
+    private static final Integer VALID_GRADE = 75;
     private static final List<JsonAdaptedModule> VALID_MODULES = BENSON.getModules().stream()
             .map(JsonAdaptedModule::new)
             .collect(Collectors.toList());
@@ -94,6 +97,21 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_GENDER, invalidModules, VALID_TAGS);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
+
+    @Test
+    public void toModelType_nullModule_throwsIllegalValueException() {
+        JsonAdaptedModule module = new JsonAdaptedModule(null, VALID_GRADE);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullGrade_throwsIllegalValueException() {
+        JsonAdaptedModule module = new JsonAdaptedModule(VALID_MODULE, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Grade");
+        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
+    }
+
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
