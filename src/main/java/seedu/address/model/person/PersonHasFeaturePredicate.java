@@ -31,7 +31,7 @@ public class PersonHasFeaturePredicate implements Predicate<Person> {
      * Tests if a {@code Person}'s tag and phone number meet specific criteria.
      *
      * @param person The {@code Person} to test.
-     * @return {@code true} if both tag and phone satisfy the conditions, {@code false} otherwise.
+     * @return {@code true} if both tag, phone, email and address satisfy the conditions, {@code false} otherwise.
      */
     @Override
     public boolean test(Person person) {
