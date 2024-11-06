@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.OperatingHours;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
@@ -21,14 +22,20 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    @JsonProperty("persons")
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+    @JsonProperty("operatingHours")
+    private final JsonAdaptedOperatingHours operatingHours;
+
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and operatingHours.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("operatingHours") JsonAdaptedOperatingHours operatingHours) {
         this.persons.addAll(persons);
+        this.operatingHours = operatingHours;
     }
 
     /**
@@ -38,6 +45,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        operatingHours = new JsonAdaptedOperatingHours(source.getOperatingHours());
     }
 
     /**
@@ -54,6 +62,8 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+        OperatingHours tmpOperatingHours = operatingHours.toModelType();
+        addressBook.setOperatingHours(tmpOperatingHours);
         return addressBook;
     }
 

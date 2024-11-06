@@ -1,26 +1,27 @@
 package seedu.address.model;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.ParserUtil.parseDateTime;
+import static seedu.address.logic.parser.ParserUtil.parseTime;
 
 import java.time.LocalTime;
 import java.util.List;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.exceptions.TimeParseException;
-
-
-
 
 /**
  * Contains the opening and closing hours of the clinic.
  * Default opening and closing hours are 00:00 and 23:59 respectively.
  */
 public class OperatingHours {
+    public static final String MESSAGE_CONSTRAINTS = "Both opening time and closing time should be in format HH:mm.";
     private static final LocalTime DEFAULT_OPENING_HOURS = LocalTime.of(0, 0);
     private static final LocalTime DEFAULT_CLOSING_HOURS = LocalTime.of(23, 59);
 
-    private LocalTime openingHour;
-    private LocalTime closingHour;
+    private final LocalTime openingHour;
+    private final LocalTime closingHour;
 
     /**
      * Creates default operating hours
@@ -29,6 +30,24 @@ public class OperatingHours {
         this.openingHour = DEFAULT_OPENING_HOURS;
         this.closingHour = DEFAULT_CLOSING_HOURS;
     }
+
+    /**
+     * Creates operating hours with given string
+     */
+    public OperatingHours(String source) {
+        checkArgument(isValidOperatingHours(source), MESSAGE_CONSTRAINTS);
+
+        String[] tmp = source.split(" to ", 2);
+
+        try {
+            this.openingHour = parseTime(tmp[0]);
+            this.closingHour = parseTime(tmp[1]);
+        } catch (ParseException ignored) {
+            // should not occur since isValidOperatingHours ensures that source can be parsed.
+            throw new TimeParseException();
+        }
+    }
+
     /**
      * Creates operating hours given {@code openingHour} and {@code closingHour}
      */
@@ -52,8 +71,14 @@ public class OperatingHours {
     public boolean isWithinOperatingHours(Appointment appointment) {
         try {
             LocalTime dateTime = parseDateTime(appointment.dateTime).toLocalTime();
-            System.out.println(dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour));
-            return dateTime.isBefore(this.closingHour) && dateTime.isAfter(this.openingHour);
+
+            // to account for underflow - 00:12 becomes 23:58
+            if (this.closingHour.minusMinutes(14).isAfter(this.closingHour)) {
+                return false;
+            }
+
+            return dateTime.isBefore(this.closingHour.minusMinutes(14))
+                    && (dateTime.isAfter(this.openingHour) || dateTime.equals(this.openingHour));
 
         } catch (TimeParseException e) {
             // if patient has no appointments
@@ -63,7 +88,7 @@ public class OperatingHours {
     }
 
     /**
-     * Checks if all appointments are within operting hours
+     * Checks if all appointments are within operating hours
      */
     public boolean isCalenderValid(List<Appointment> appointments) {
         for (Appointment appointment : appointments) {
@@ -72,6 +97,26 @@ public class OperatingHours {
             }
         }
         return true;
+    }
+
+    /**
+     * check if a given string a valid OperatingHours
+     */
+    public static boolean isValidOperatingHours(String test) {
+        String[] tmp = test.split(" to ", 2);
+
+        if (tmp.length != 2) {
+            return false;
+        }
+
+        try {
+            parseTime(tmp[0]);
+            parseTime(tmp[1]);
+            return true;
+
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     /**
@@ -106,7 +151,6 @@ public class OperatingHours {
 
     @Override
     public String toString() {
-        // to be changed
-        return openingHour.toString() + " " + closingHour.toString();
+        return openingHour.toString() + " to " + closingHour.toString();
     }
 }

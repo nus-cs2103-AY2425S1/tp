@@ -1,19 +1,42 @@
-#copyButton, #helpMessage {
+#copyButton {
     -fx-text-fill: white;
 }
 
+#helpMessage {
+    -fx-text-fill: black;
+}
+
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #292d42;
+    -fx-border-radius: 10 10 10 10;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10 10 10 10;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #485485;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #3d476b;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#d3d3d3, 20%);
+}
+
+#helpMessage {
+    -fx-text-alignment: CENTER;
+    -fx-padding: 10px;
+
+}
+
+#commandUsageLabel {
+    -fx-padding: 10px 0px 10px 0px;
+
+}
+
+.label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 10pt;
 }

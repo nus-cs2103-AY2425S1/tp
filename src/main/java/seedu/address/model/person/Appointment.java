@@ -12,12 +12,13 @@ import java.time.LocalDateTime;
 import seedu.address.model.person.exceptions.TimeParseException;
 
 /**
- * Represents a Person's Appointment in the address book.
+ * Represents a Person's Appointment in the address book. An appointment is a 15-minute interval starting
+ * from given date
  * Guarantees: immutable; is valid as declared in {@link #isValidAppointment(String)}
  */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in a format of \n"
+    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the calendar and in a format of \n"
             + "dd/MM/yyyy HH:mm or dd MM yyyy HH:mm or dd-MM-yyyy HH:mm";
 
     public static final LocalDate TODAY = LocalDate.now();
@@ -114,6 +115,20 @@ public class Appointment {
         }
     }
 
+    /**
+     * Checks if appointment overlaps with given appointment.
+     */
+    public boolean isWithinInterval(Appointment other) {
+        if (dateTime.equals("-") || other.dateTime.equals("-")) {
+            return false;
+        }
+        LocalDateTime time = LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME);
+        LocalDateTime otherTime = LocalDateTime.parse(other.dateTime, ENGLISH_FORMAT_WITH_TIME);
+        return time.toLocalDate().isEqual(otherTime.toLocalDate())
+                && (otherTime.isAfter(time.minusMinutes(15))
+                && otherTime.isBefore(time.plusMinutes(15)));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -130,12 +145,12 @@ public class Appointment {
             return this.dateTime.equals(otherAppointment.dateTime);
         }
 
-        // checks if time is within 15 min intervals
+        // checks if other start time is within the 15-minute interval
         LocalDateTime time = LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME);
         LocalDateTime otherTime = LocalDateTime.parse(otherAppointment.dateTime, ENGLISH_FORMAT_WITH_TIME);
+
         return time.toLocalDate().isEqual(otherTime.toLocalDate())
-                && (otherTime.isAfter(time.minusMinutes(15))
-                && otherTime.isBefore(time.plusMinutes(15)));
+                && time.plusMinutes(15).isAfter(otherTime) && time.isBefore(otherTime.plusMinutes(1));
 
 
     }

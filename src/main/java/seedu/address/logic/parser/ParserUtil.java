@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
@@ -35,35 +36,35 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not in the following accepted "
-            + "formats:\ndd/MM/yyyy\n"
-            + "dd-MM-yyyy\n"
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not a valid calendar date "
+            + "or is not in the following accepted formats:\ndd/MM/yyyy or "
+            + "dd-MM-yyyy or "
             + "dd MM yyyy";
 
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format HH:mm";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format o/HH:mm or c/HH:mm.";
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern(
-            "dd MMMM yyyy",
-            Locale.ENGLISH);
+            "dd MMMM uuuu",
+            Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
 
     public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
-            "dd MMMM yyyy HH:mm",
-            Locale.ENGLISH);
+            "dd MMMM uuuu HH:mm",
+            Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
 
     public static final DateTimeFormatter[] DATE_FORMATTERS = new DateTimeFormatter[]{
         ENGLISH_FORMAT,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-        DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-        DateTimeFormatter.ofPattern("dd MM yyyy")
+        DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT)
     };
 
     public static final DateTimeFormatter[] DATE_TIME_FORMATTERS = new DateTimeFormatter[] {
         ENGLISH_FORMAT_WITH_TIME,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
-        DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
-        DateTimeFormatter.ofPattern("dd MM yyyy HH:mm")
+        DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd MM uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
     };
 
 

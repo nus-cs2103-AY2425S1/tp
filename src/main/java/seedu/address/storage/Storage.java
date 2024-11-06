@@ -10,25 +10,62 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * API of the Storage component, handling storage operations for user preferences, address book data,
+ * and backup management.
  */
 public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
+    /**
+     * Reads user preferences from the storage.
+     *
+     * @return An Optional containing UserPrefs if present, or empty if unavailable.
+     * @throws DataLoadingException If there is an error during data loading.
+     */
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 
+    /**
+     * Saves the provided user preferences to the storage.
+     *
+     * @param userPrefs The user preferences to save.
+     * @throws IOException If there is an error during saving.
+     */
     @Override
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
+    /**
+     * Gets the file path where the address book data is stored.
+     *
+     * @return The path to the address book file.
+     */
     @Override
     Path getAddressBookFilePath();
 
+    /**
+     * Reads the address book data from the storage.
+     *
+     * @return An Optional containing the ReadOnlyAddressBook if present, or empty if unavailable.
+     * @throws DataLoadingException If there is an error during data loading.
+     */
     @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
+    /**
+     * Saves the provided address book data to the default storage path.
+     *
+     * @param addressBook The address book data to save.
+     * @throws IOException If there is an error during saving.
+     */
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    /**
+     * Saves the provided address book data to the specified file path.
+     *
+     * @param addressBook The address book data to save.
+     * @param filePath    The file path where the address book data should be saved.
+     * @throws IOException If there is an error during saving.
+     */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
     /**

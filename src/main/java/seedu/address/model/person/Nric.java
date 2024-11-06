@@ -25,17 +25,16 @@ public class Nric {
      * @param nric A valid NRIC.
      */
     public Nric(String nric) {
-        String newNric = nric.toUpperCase();
-        requireNonNull(newNric);
-        checkArgument(isValidNric(newNric), MESSAGE_CONSTRAINTS);
-        fullNric = nric;
+        requireNonNull(nric);
+        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
+        fullNric = nric.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid NRIC.
      */
     public static boolean isValidNric(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
     @Override

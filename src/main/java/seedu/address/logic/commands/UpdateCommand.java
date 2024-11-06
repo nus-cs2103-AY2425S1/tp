@@ -49,7 +49,7 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the person identified "
-            + "by the NRIC number or name used in the displayed person list. "
+            + "by the NRIC number or INDEX number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NRIC OR INDEX (must be a positive integer)"
             + "[" + PREFIX_NAME + "NAME] "
@@ -157,8 +157,7 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!personToEdit.getAppointment().equals(editedPerson.getAppointment())
-                && model.hasAppointment(editedPerson)) {
+        if (model.hasAppointment(editedPerson) && editedPerson.getAppointment() != personToEdit.getAppointment()) {
             throw new CommandException(MESSAGE_APPOINTMENT_TAKEN);
         }
 
@@ -247,7 +246,7 @@ public class UpdateCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, age, gender, nric,
-                    phone, email, address, tags);
+                    phone, email, address, appointment, tags);
         }
 
         public Optional<Name> getName() {

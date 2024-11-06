@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT_WITH_TIME;
+import static seedu.address.model.person.Appointment.TODAY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -53,19 +55,52 @@ public class AppointmentTest {
     public void hasPassed() {
         assertTrue(new Appointment("01/01/2024 10:30").hasPassed());
         assertFalse(new Appointment("12/12/2100 23:59").hasPassed());
+        assertFalse(new Appointment("-").hasPassed());
     }
 
     @Test
     public void hasNotPassed() {
         assertTrue(new Appointment("12/12/2100 23:50").hasNotPassed());
         assertFalse(new Appointment("01/01/2024 10:30").hasNotPassed());
+        assertFalse(new Appointment("-").hasNotPassed());
     }
 
     @Test
     public void isOn() {
         Appointment validAppointment = new Appointment("12/12/2024 12:30");
+        Appointment noAppointment = new Appointment("-");
         assertTrue(validAppointment.isOn(LocalDate.of(2024, 12, 12)));
         assertFalse(validAppointment.isOn(LocalDate.of(2024, 12, 11)));
+        assertFalse(noAppointment.isOn(LocalDate.of(2024, 12, 11)));
+
+    }
+
+    @Test
+    public void isToday() {
+        Appointment validAppointment = new Appointment("12/12/2021 12:30");
+        Appointment todayAppointment = new Appointment(TODAY.atTime(10, 30)
+                                                            .format(ENGLISH_FORMAT_WITH_TIME));
+        assertTrue(todayAppointment.isToday());
+        assertFalse(new Appointment("-").isToday());
+        assertFalse(validAppointment.isToday());
+    }
+
+    @Test
+    public void isWithinInterval() {
+        Appointment validAppointment = new Appointment("12/12/2024 12:30");
+
+        // within interval -> false
+        assertTrue(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:16")));
+        assertTrue(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:44")));
+
+        // outside interval or empty interval -> true
+        assertFalse(validAppointment.isWithinInterval(new Appointment("11/12/2024 12:30")));
+        assertFalse(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:45")));
+        assertFalse(validAppointment.isWithinInterval(new Appointment("12/12/2024 12:45")));
+        assertFalse(new Appointment("-").isWithinInterval(validAppointment));
+        assertFalse(validAppointment.isWithinInterval(new Appointment("-")));
+        assertFalse(validAppointment.isWithinInterval(new Appointment(null)));
+
     }
 
     @Test
@@ -85,11 +120,17 @@ public class AppointmentTest {
 
         assertTrue(new Appointment("-").equals(new Appointment(null)));
 
+        // Other appointment within 15 minute interval but same date
+        assertTrue(validAppointment.equals(new Appointment("12/12/2024 12:31")));
+
+        // Other appointment not within 15 minute interval but same date
+        assertFalse(validAppointment.equals(new Appointment("12/12/2024 12:29")));
+
         // different types
         assertFalse(validAppointment.equals(new Appointment(null)));
 
-        // different times same date
-        assertFalse(validAppointment.equals(new Appointment("12/12/2024 16:30")));
+        assertFalse(new Appointment("-").equals(validAppointment));
+
     }
 
 }
