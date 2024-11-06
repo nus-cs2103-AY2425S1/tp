@@ -16,10 +16,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -93,7 +91,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editContactDescriptor.setNickname(
                     ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).get()));
         }
-        parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editContactDescriptor::setRoles);
+        parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editContactDescriptor::setAndSortRoles);
 
         if (!editContactDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_MISSING_PREFIX); // Fields missing or at least 1....in

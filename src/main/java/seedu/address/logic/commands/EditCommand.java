@@ -6,20 +6,15 @@ import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -156,6 +151,10 @@ public class EditCommand extends Command {
         StudentStatus updatedStudentStatus =
                 editContactDescriptor.getStudentStatus().orElse(contactToEdit.getStudentStatus());
         Set<Role> updatedRoles = editContactDescriptor.getRoles().orElse(contactToEdit.getRoles());
+        //Stream<Role> checkpoint = placeholderRoles.stream()
+          //      .sorted(Comparator.comparing(role -> role.getRoleIndex()));
+
+        //List<Role> updatedRoles = checkpoint.toList();
         Nickname updatedNickname = editContactDescriptor.getNickname().orElse(contactToEdit.getNickname());
         return new Contact(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
                 updatedNickname);
@@ -235,7 +234,7 @@ public class EditCommand extends Command {
             setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
             setStudentStatus(toCopy.studentStatus);
-            setRoles(toCopy.roles);
+            setAndSortRoles(toCopy.roles);
             setNickname(toCopy.nickname);
         }
 
@@ -282,15 +281,12 @@ public class EditCommand extends Command {
          * Sets {@code roles} to this object's {@code roles}.
          * A defensive copy of {@code roles} is used internally.
          */
-        public void setRoles(Set<Role> roles) {
-            this.roles = (roles != null) ? new HashSet<>(roles) : null;
-            ///Set<Role> placeholder = new HashSet<>(); //(Comparator.comparing(role -> role.getRoleIndex()));
-            //placeholder.addAll(roles);
-            //this.roles = (roles != null) ? placeholder : null;
+        public void setAndSortRoles(Set<Role> roles) {
+            this.roles = (roles != null) ? new TreeSet<>(roles) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable roles set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code roles} is null.
          */

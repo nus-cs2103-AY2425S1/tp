@@ -38,7 +38,7 @@ public class EditContactDescriptorBuilder {
         descriptor.setTelegramHandle(contact.getTelegramHandle());
         descriptor.setEmail(contact.getEmail());
         descriptor.setStudentStatus(contact.getStudentStatus());
-        descriptor.setRoles(contact.getRoles());
+        descriptor.setAndSortRoles(contact.getRoles());
         descriptor.setNickname(contact.getNickname());
     }
 
@@ -80,7 +80,7 @@ public class EditContactDescriptorBuilder {
      */
     public EditContactDescriptorBuilder withRoles(String... roles) {
         Set<Role> roleSet = Stream.of(roles).map(Role::new).collect(Collectors.toSet());
-        descriptor.setRoles(roleSet);
+        descriptor.setAndSortRoles(roleSet);
         return this;
     }
 
