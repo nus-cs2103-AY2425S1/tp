@@ -325,13 +325,13 @@
 #cardPane {
     -fx-background-color: derive(#88B07E, 30%);
     -fx-border-width: 0;
-    -fx-border-radius: 16;
+    -fx-border-radius: 10;
     -fx-background-radius: 16;
 }
 
 #cardPane.favourite {
     -fx-border-color: #F5B01B;
-    -fx-border-width: 2;
+    -fx-border-width: 4;
 }
 
 #commandTypeLabel {

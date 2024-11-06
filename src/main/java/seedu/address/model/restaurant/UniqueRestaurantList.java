@@ -3,6 +3,7 @@ package seedu.address.model.restaurant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
             throw new DuplicateRestaurantException();
         }
         internalList.add(toAdd);
+        sortRestaurants();
     }
 
     /**
@@ -69,6 +71,7 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
         }
 
         internalList.set(index, editedRestaurant);
+        sortRestaurants();
     }
 
     /**
@@ -97,10 +100,11 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
 
         internalList.remove(index);
         internalList.add(0, restaurant);
+        sortRestaurants();
     }
 
     /**
-     * Unfavourites the equivalent restaurant from the list.
+     * Un-favourites the equivalent restaurant from the list.
      * The restaurant must exist in the list.
      */
     public void unfavourite(Restaurant restaurant) {
@@ -114,6 +118,14 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
 
         internalList.remove(index);
         internalList.add(restaurant);
+        sortRestaurants();
+    }
+
+    private void sortRestaurants() {
+        internalList.sort(Comparator.comparing(Restaurant::isFavourite).reversed()
+                .thenComparing(restaurant -> restaurant.getName().toString(),
+                        String.CASE_INSENSITIVE_ORDER));
+
     }
 
     public void setRestaurants(UniqueRestaurantList replacement) {
