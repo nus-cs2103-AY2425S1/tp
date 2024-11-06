@@ -53,7 +53,8 @@ public class FindVolunteerCommandTest {
         String searchString = ""; // Empty search string
         FindVolunteerCommand command = new FindVolunteerCommand(searchString);
 
-        assertCommandFailure(command, model, String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
+        assertCommandFailure(command, model, String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_NOT_FOUND,
+                searchString));
     }
 
     @Test
