@@ -650,6 +650,18 @@ The following sequence diagram illustrates how the password management process o
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Known Issues**
+
+### Failing tests on Windows when run more than once
+
+1. In `EncryptionManagerTest.java`, temporary files are created before and deleted after each test.
+2. However, on Windows machine, the test will throw a `java.nio.file.FileSystemException` exception.
+3. A current workaround is to check if the OS is Windows, and skip the file deletion on cleanup.
+4. However, before starting subsequent tests, you will need to manually delete the temporary `*.key` files created.
+5. If the files are not deleted, the program fails the test cases.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
