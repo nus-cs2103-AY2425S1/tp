@@ -17,7 +17,6 @@ public class Birthday {
     public static final String BIRTHDAY_REMINDER_EMPTY = "No upcoming birthdays.\n";
     public static final String CUSTOM_BIRTHDAY_FORMAT = "'s birthday is on "; //Used for displaying a person's birthday
     public static final Birthday EMPTY_BIRTHDAY = Birthday.of("");
-    public static final int FAILED_BIRTHDAY_PARSE_INDEX = 0;
     public final LocalDate value;
 
     /**
