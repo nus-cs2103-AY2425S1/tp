@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_DELETE_EMPTY_ERROR);
         }
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_DELETE_UPPERBOUND_ERROR);
+            throw new CommandException(Messages.MESSAGE_INDEX_UPPERBOUND_ERROR);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());

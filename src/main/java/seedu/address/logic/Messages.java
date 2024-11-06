@@ -34,7 +34,7 @@ public class Messages {
                 + " The largest possible value is 2147483647.";
     public static final String MESSAGE_MAXLEADINGZEROS = "Error: The index has too many digits!"
             + " The maximum amount of digits is 10 including leading zeros to be ignored";
-    public static final String MESSAGE_DELETE_UPPERBOUND_ERROR = "Sorry but the index was too large "
+    public static final String MESSAGE_INDEX_UPPERBOUND_ERROR = "Sorry but the index was too large "
                 + "compared to your list size!";
     public static final String MESSAGE_DELETE_EMPTY_ERROR = "Sorry but you cannot delete from an empty list.";
     public static final String MESSAGE_EDIT_EMPTY_ERROR = "Sorry but you cannot edit from an empty list.";

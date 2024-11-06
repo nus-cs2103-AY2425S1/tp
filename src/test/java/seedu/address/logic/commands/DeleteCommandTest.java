@@ -59,7 +59,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DELETE_UPPERBOUND_ERROR);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INDEX_UPPERBOUND_ERROR);
     }
 
     @Test
@@ -89,7 +89,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_DELETE_UPPERBOUND_ERROR);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INDEX_UPPERBOUND_ERROR);
     }
 
     @Test
