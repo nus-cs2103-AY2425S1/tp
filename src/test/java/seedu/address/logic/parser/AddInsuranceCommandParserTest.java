@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddInsuranceCommand;
 
 /**
@@ -39,7 +40,7 @@ public class AddInsuranceCommandParserTest {
     public void parse_invalidIndex_throwsParseException() {
         String invalidUserInput = "invalidIndex " + PREFIX_INSURANCE_ID + VALID_INSURANCE_ID;
         assertParseFailure(parser, invalidUserInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInsuranceCommand.MESSAGE_USAGE));
+                Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -63,7 +64,7 @@ public class AddInsuranceCommandParserTest {
     public void parse_invalidInsuranceId_throwsParseException() {
         String invalidInsuranceIdInput = INDEX_FIRST_CLIENT.getOneBased() + " " + PREFIX_INSURANCE_ID + "invalidId";
         assertParseFailure(parser, invalidInsuranceIdInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInsuranceCommand.MESSAGE_USAGE));
+                Messages.MESSAGE_INVALID_INSURANCE_ID);
     }
 
     /**
