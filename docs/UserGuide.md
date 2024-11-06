@@ -344,15 +344,16 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 
 * The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
 * The search is case-insensitive. e.g `condo` will match `Condo`
-* The order of the keywords does not matter. e.g. `condo #02-205` will match `#02-205 condo`
+* The order of the keywords does not matter. e.g. `condo 02-205` will match `02-205 condo`
 * All the criterias for a property are searched.
-* No need for full keywords to be matched e.g. `cond` will match `condo`
+* No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
+* Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo #02-05` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` condo 02-05` will return `Alex Yeah`, `Bernice Yu`
 
 Examples:
-* `findBuy condo` returns `Alex Yeah`
-* `findp condo #02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findBuy condo` returns `Alex Yeoh`
+* `findp condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
   
 
 ## Finding persons based on properties to sell: `findSell`
@@ -365,15 +366,16 @@ Format: `findSell KEYWORD [MORE_KEYWORDS]`
 
 * The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
 * The search is case-insensitive. e.g `condo` will match `Condo`
-* The order of the keywords does not matter. e.g. `condo #02-205` will match `#02-205 condo`
+* The order of the keywords does not matter. e.g. `condo 02-205` will match `02-205 condo`
 * All the criterias for a property are searched.
-* No need for full keywords to be matched e.g. `cond` will match `condo`
+* No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
+* Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo #02-05` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` condo 02-05` will return `Alex Yeah`, `Bernice Yu`
 
 Examples:
-* `findSell condo` returns `Alex Yeah`
-* `findSell condo #02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findSell condo` returns `Alex Yeoh`
+* `findSell condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
   
 ## Listing Entries Commands
 
