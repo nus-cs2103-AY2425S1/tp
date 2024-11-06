@@ -12,7 +12,7 @@ public abstract class AddCommand<T> extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Add the entity identified by argument 'contact', 'company' or 'job'\n"
-                    + "Parameters: [contact/job/company] ENTITY PARAMETERS \nExample: " + COMMAND_WORD + " contact ...";
+                    + "Parameters: [contact/job/company] PARAMETERS \nExample: " + COMMAND_WORD + " contact ...";
 
     protected T toAdd;
 

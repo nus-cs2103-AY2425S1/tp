@@ -65,7 +65,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, EditCommand.ENTITY_WORD + " 1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no entity specified
-        assertParseFailure(parser, "1 " + VALID_NAME_AMY, EditCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1 " + VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, EditCommand.ENTITY_WORD, MESSAGE_INVALID_FORMAT);
