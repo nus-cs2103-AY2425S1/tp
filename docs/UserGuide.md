@@ -263,8 +263,58 @@ There must not be duplicate fields. For example, if there is a contact with the 
    * **Fail:** `n/Jane Hoe th/janehoe e/janeh@example.com ss/undergraduate 3 r/Admin r/President nn/jane`
 
 
-## Available fields
+## Available Contact Fields
 
+| Field                                   | Prefix | Valid examples
+|-----------------------------------------|--------|---------------
+| [**NAME**](#name)                       | `n/`   | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)`
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`  | `ginatan123`<br/> `jane_smith28` 
+| [**EMAIL**](#email)                     | `e/`   | `gina_tan@example-website.com.sg`
+| [**STUDENT STATUS**](#student-status)   | `ss/`  | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/> 
+| [**ROLE**](#role)                       | `r/`   | `President`<br/> `Events (External)`
+| [**NICKNAME**](#nickname)               | `nn/`  | `genie34 ;)`
+
+### Name
+- Should contain alphabets and spaces only (with exceptions).
+    - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
+    - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
+- Should not be blank
+
+### Telegram Handle
+- Should contain alphabets, numbers and underscores only.
+- Should have a length between 5 and 32 characters inclusive.
+- Should not include `@`.
+
+### Email
+- Emails should be of the format `LOCAL_PART@DOMAIN`.
+- LOCAL_PART 
+  - Should only contain alphabets, numbers, and special characters `+_.-`.
+  - Should not start or end with any special characters.
+- DOMAIN 
+  - Domains should be made up of domain labels separated by periods.
+  - Domains should end with a domain label at least 2 characters long.
+  - Each domain label should only contain alphabets, numbers, and `-`, if any.
+  - Each domain label should not start or end with `-`.
+
+### Student Status
+- Should take one of the values below:
+  1. `Undergraduate x` (where x is an integer between 1 and 6 inclusive).
+  2. `Masters`
+  3. `PhD`
+
+### Role
+- Should take one of the values below:
+  1. `President`
+  2. `Vice President`
+  3. `Admin`
+  4. `Marketing`
+  5. `Events (Internal)`
+  6. `Events (External)`
+  7. `External Relations`
+
+### Nickname
+- Optional field.
+- Should not be empty if prefix `nn/` is used.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
