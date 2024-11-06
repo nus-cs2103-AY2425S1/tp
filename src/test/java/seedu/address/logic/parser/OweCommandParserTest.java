@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.OweCommand;
-import seedu.address.logic.commands.PayCommand;
 
 public class OweCommandParserTest {
 
@@ -22,13 +21,13 @@ public class OweCommandParserTest {
             MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE);
 
     private OweCommandParser parser = new OweCommandParser();
-    
+
     @Test
     public void parse_validInput_success() {
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_HOUR + 1;
         OweCommand expectedCommand = new OweCommand(targetIndex, Double.parseDouble("1"));
-        
+
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

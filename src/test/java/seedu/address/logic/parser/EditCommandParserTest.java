@@ -65,9 +65,7 @@ import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
-import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
-import seedu.address.testutil.StudentBuilder;
 
 public class EditCommandParserTest {
 
@@ -241,10 +239,10 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY_MIXED_CASE + NAME_DESC_AMY_MIXED_CASE
                 + SCHEDULE_DESC_AMY_MIXED_CASE + RATE_DESC_AMY_MIXED_CASE + OWED_AMOUNT_DESC_AMY_MIXED_CASE
                 + SUBJECT_DESC_AMY_MIXED_CASE + PAID_AMOUNT_DESC_AMY_MIXED_CASE;
-        
+
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-        
+
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

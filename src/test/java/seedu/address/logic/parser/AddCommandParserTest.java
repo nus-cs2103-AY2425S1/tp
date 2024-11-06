@@ -93,10 +93,10 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsMixedCasePrefixes_success() {
         Student expectedStudent = new StudentBuilder(AMY).build();
-        
+
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY_MIXED_CASE + PHONE_DESC_AMY_MIXED_CASE
-        + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY_MIXED_CASE + SCHEDULE_DESC_AMY_MIXED_CASE
+            + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY_MIXED_CASE + SCHEDULE_DESC_AMY_MIXED_CASE
                 + SUBJECT_DESC_AMY_MIXED_CASE + RATE_DESC_AMY_MIXED_CASE + PAID_AMOUNT_DESC_AMY_MIXED_CASE
                 + OWED_AMOUNT_DESC_AMY_MIXED_CASE,
                 new AddCommand(expectedStudent));
@@ -105,7 +105,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresentSomeMixedCasePrefixes_success() {
         Student expectedStudent = new StudentBuilder(AMY).build();
-        
+
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + PHONE_DESC_AMY_MIXED_CASE
                         + EMAIL_DESC_AMY_MIXED_CASE + ADDRESS_DESC_AMY + SCHEDULE_DESC_AMY_MIXED_CASE

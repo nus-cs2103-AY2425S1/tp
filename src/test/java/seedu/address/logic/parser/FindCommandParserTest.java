@@ -112,13 +112,13 @@ public class FindCommandParserTest {
                 schedulePredicateKeywords,
                 namePredicateKeywords)
         );
-        
+
         // mixed-case prefix n/
         assertParseSuccess(parser, " N/Alice1 Bob d/Monday Tuesday", expectedFindCommand);
-        
+
         // mixed-case prefix d/
         assertParseSuccess(parser, " n/Alice1 Bob D/Monday Tuesday", expectedFindCommand);
-        
+
         // mixed-case both prefixes
         assertParseSuccess(parser, " N/Alice1 Bob D/Monday Tuesday", expectedFindCommand);
     }

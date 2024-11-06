@@ -77,9 +77,9 @@ public class SettleCommandParserTest {
     public void parse_validValueMixedCase_success() {
         SettleAmount settleAmount = new SettleAmount("5.00");
         String userInput = INDEX_FIRST_STUDENT.getOneBased() + " " + VALID_AMOUNT_DESC_MIXED_CASE;
-        
+
         SettleCommand expectedCommand = new SettleCommand(INDEX_FIRST_STUDENT, settleAmount);
-        
+
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

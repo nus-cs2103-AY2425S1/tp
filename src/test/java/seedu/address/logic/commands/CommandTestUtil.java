@@ -188,7 +188,7 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
-    
+
     /**
      * Creates a mixed-case version of {@code s}.
      * For example: "paidAmount/" becomes "PaIdAmOuNt/".
