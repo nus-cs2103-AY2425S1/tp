@@ -5,7 +5,7 @@ title: User Guide
 
 Welcome to ResearchRoster! **Your Research, Simplified.**
 
-Designed with researchers in mind. ResearchRoster simplifies participant management so you can focus on what matters most: your research. Easily add and delete participants as required, conduct random sampling with a simple command, and export contacts for seamless communication.
+Designed with researchers in mind. ResearchRoster simplifies participant management so you can focus on what matters most: your research. Easily add and delete participants as required, conduct random study group assignment with a simple command, and export contacts for seamless communication.
 
 This user guide will walk you through:
 - [Setting up](#quick-start) your ResearchRoster application​
@@ -154,7 +154,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD-TAG] [-t/DELETE-TAG]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -178,7 +178,7 @@ Examples:
 
 Deletes the specified persons from the address book.
 
-Format: `delete INDEX [INDEX...] [INDEX-INDEX]...`
+Format: `delete [INDEX | INDEX-INDEX]…`
 
 * Deletes the person at the specified `INDEX` or range of indices
 * The index must be within the range
@@ -199,7 +199,7 @@ Format: `exit`
 
 Finds persons whose fields contain the given keywords.
 
-Format: `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`
+Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`
 
 * At least one of the optional criteria must be provided.
 * Each criteria can have more than one keyword. e.g. `n/alice bob hans`
@@ -207,7 +207,7 @@ Format: `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ..
 * The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `n/Han` will not match `Hans`
 * Persons matching at least one keyword for **every specified criteria** will be returned.
-  e.g. `n/Alice Bob g/f` will return `{Alice Wang, ..., Female, ...}` but not `{Bob Tan, ..., Male, ...}`
+  e.g. `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -250,7 +250,7 @@ Examples:
 
 Assigns persons in the list to given Study Groups (randomly).
 
-Format: `assign STUDY_GROUP [STUDY_GROUP ...]`
+Format: `assign STUDY_GROUP [STUDY_GROUP …]`
 
 * Randomly assigns persons in the displayed list to the given `STUDY_GROUP`s.
 * No person in the displayed list can be tagged with any of the given study group name before assigning.
@@ -303,9 +303,9 @@ Action | Format, Examples
 **Help** | `help`
 **Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
 **List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
-**Delete** | `delete INDEX [INDEX...] [INDEX-INDEX]...`<br> e.g., `delete 3 6 10-15 20 30-40`
-**Find** | `find [n/NAME ...] [e/EMAIL ...] [g/GENDER ...] [a/AGE ...] [d/DETAIL ...] [t/STUDY_GROUP_TAGS ...]`<br> e.g., `find n/James Jake`
+**Edit** | ``edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`
+**Delete** | `delete [INDEX | INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`
+**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`
 **Clear** | `clear` then `confirm`
 **Export** | `export FILENAME`<br> e.g., `export exported_email`
-**Assign** | `assign STUDY_GROUP [STUDY_GROUP ...]`<br> e.g., `assign P90-Control P90-Experiment`
+**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`

@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added `assign` command to (randomly) assign persons to study group(s) [\#125]()
   * What it does: allows the user to randomly assign a list of persons into study groups.
   * Justification: As our product is targeted at researchers, we anticipate the need to quickly and fairly assign participants to study groups. This feature allows the user to assign an entire list of participants in one command call.
-  * Highlight: a bonus feature of this command is the ability to assign all persons in the displayed list to a single study group by inputting only one staudy group name.
+  * Highlight: a bonus feature of this command is the ability to assign all persons in the displayed list to a single study group by inputting only one study group name.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
