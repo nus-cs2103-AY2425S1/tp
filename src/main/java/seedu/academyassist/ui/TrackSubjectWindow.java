@@ -1,11 +1,15 @@
 package seedu.academyassist.ui;
 
+import static seedu.academyassist.ui.PersonDetailWindow.LOGGER;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academyassist.commons.core.LogsCenter;
@@ -23,7 +27,16 @@ public class TrackSubjectWindow extends UiPart<Stage> {
     private static final String FXML = "TrackSubjectWindow.fxml";
 
     @FXML
+    private Label headerLabel;
+
+    @FXML
     private VBox subjectStatsBox;
+
+    @FXML
+    private Label closeWindowMessage;
+
+    @FXML
+    private Scene scene;
 
     private final Model model;
 
@@ -37,6 +50,7 @@ public class TrackSubjectWindow extends UiPart<Stage> {
         super(FXML, root);
         this.model = model;
         updateSubjectStats();
+        addKeyEventHandler(root);
     }
 
     /**
@@ -88,6 +102,8 @@ public class TrackSubjectWindow extends UiPart<Stage> {
     public void show() {
         logger.fine("Showing subject statistics.");
         updateSubjectStats();
+        closeWindowMessage.setText("Press 'B' to close this window.");
+
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -113,5 +129,32 @@ public class TrackSubjectWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Close the subject statistics window.
+     */
+    private void closeWindow() {
+        getRoot().close();
+    }
+
+    /**
+     * Add key event handler to the root stage.
+     * @param root The root stage to add the key event handler to.
+     */
+    private void addKeyEventHandler(Stage root) {
+        if (root.getScene() == null) {
+            root.setScene(scene);
+        } else {
+            scene = root.getScene();
+        }
+
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.B) {
+                LOGGER.fine("Closing subject statistics window with key press");
+                closeWindow();
+                event.consume();
+            }
+        });
     }
 }

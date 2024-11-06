@@ -109,10 +109,17 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     }
 
     /**
-     * Sorts persons in this address book by class, in alphabetical order.
+     * Sorts persons in this address book by subject, in alphabetical order.
      */
-    public void sortPersonsByClass() {
-        persons.sortPersonsByClass();
+    public void sortPersonsBySubject() {
+        persons.sortPersonsBySubject();
+    }
+
+    /**
+     * Sorts persons in this address book by year group, in ascending order.
+     */
+    public void sortPersonsByYearGroup() {
+        persons.sortPersonsByYearGroup();
     }
 
     /**
@@ -171,7 +178,6 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
             person = person.addSubject(s);
         }
         persons.add(person);
-
     }
 
     //// student count operations
@@ -228,6 +234,7 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     public int hashCode() {
         return persons.hashCode();
     }
+
 
 
 }

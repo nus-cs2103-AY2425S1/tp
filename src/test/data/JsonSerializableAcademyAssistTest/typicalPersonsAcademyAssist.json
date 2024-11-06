@@ -7,7 +7,7 @@
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
       "ic": "F2234567X",
-      "year group": "1",
+      "year group": "2",
       "student id": "S10001",
       "subjects": ["English"]
     },
@@ -37,33 +37,33 @@
       "email": "cornelia@example.com",
       "address": "10th street",
       "ic": "F1234569X",
-      "year group": "1",
+      "year group": "3",
       "student id": "S10004",
       "subjects": ["English"]
     },
     {
       "name": "Elle Meyer",
-      "phone": "9482224",
+      "phone": "94822240",
       "email": "werner@example.com",
       "address": "michegan ave",
       "ic": "F2238567X",
-      "year group": "1",
+      "year group": "2",
       "student id": "S10005",
       "subjects": ["English"]
     },
     {
       "name": "Fiona Kunz",
-      "phone": "9482427",
+      "phone": "94824270",
       "email": "lydia@example.com",
       "address": "little tokyo",
       "ic": "F1334567X",
-      "year group": "1",
+      "year group": "4",
       "student id": "S10006",
       "subjects": ["English"]
     },
     {
       "name": "George Best",
-      "phone": "9482442",
+      "phone": "76425642",
       "email": "anna@example.com",
       "address": "4th street",
       "ic": "F1294667X",

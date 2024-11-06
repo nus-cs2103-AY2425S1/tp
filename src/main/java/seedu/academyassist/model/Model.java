@@ -121,13 +121,19 @@ public interface Model {
      * Sorts the academy assist management system managed by model, based on alphabetical order of classes of
      * persons inside it.
      */
-    void sortAcademyAssistByClass();
+    void sortAcademyAssistBySubject();
 
     /**
      * Sorts the academy assist management system managed by model, based on numerical order of studentIds of
      * persons inside it.
      */
     void sortAcademyAssistById();
+
+    /**
+     * Sorts the academy assist management system managed by model, based on numerical order of yearGroup of
+     * persons inside it.
+     */
+    void sortAcademyAssistByYearGroup();
 
     /**
      * Increment {@code idGeneratedCount} by 1.
@@ -148,5 +154,6 @@ public interface Model {
      * Returns person from academy assist management system with given {@code student id}.
      */
     Person getPersonWithStudentId(StudentId studentId);
+
 
 }
