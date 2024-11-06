@@ -64,7 +64,8 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         // Check if the command is consecutive
-        if (commandWord.equals(lastCommandWord) & arguments.equals(lastArgument)) {
+        if (commandWord.equals(lastCommandWord) & arguments.equals(lastArgument)
+            && !commandWord.equals("delete") && !commandWord.equals("help")) {
             return new ConsecutiveCommand(commandWord, arguments);
         }
         Command command;
