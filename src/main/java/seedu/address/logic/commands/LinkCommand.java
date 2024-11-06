@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -102,6 +103,7 @@ public class LinkCommand extends Command {
         Phone phone = child.getPhone();
         Email email = child.getEmail();
         Address address = child.getAddress();
+        LessonTime lessonTime = child.getLessonTime();
         Education education = child.getEducation();
         Grade grade = child.getGrade();
         Name parentName = parent.getName();
@@ -109,7 +111,8 @@ public class LinkCommand extends Command {
         boolean isPinned = child.getPinned();
         boolean isArchived = child.isArchived();
 
-        return new Student(name, phone, email, address, education, grade, parentName, tags, isPinned, isArchived);
+        return new Student(name, phone, email, address, lessonTime, education, grade, parentName, tags,
+                isPinned, isArchived);
 
     }
 

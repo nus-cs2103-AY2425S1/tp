@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -99,10 +100,12 @@ public class UnlinkCommand extends Command {
         boolean isArchived = person.isArchived();
 
         if (person instanceof Student student) {
+            LessonTime lessonTime = student.getLessonTime();
             Education education = student.getEducation();
             Grade grade = student.getGrade();
 
-            return new Student(name, phone, email, address, education, grade, null, tags, isPinned, isArchived);
+            return new Student(name, phone, email, address, lessonTime, education, grade, null,
+                    tags, isPinned, isArchived);
         }
 
         if (person instanceof Parent parent) {

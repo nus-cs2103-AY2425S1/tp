@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Education;
@@ -10,9 +11,11 @@ import seedu.address.model.tag.Grade;
  */
 public class StudentBuilder extends PersonBuilder {
 
+    public static final String DEFAULT_LESSON_TIME = "mon:00:00";
     public static final String DEFAULT_EDUCATION = "Primary";
     public static final String DEFAULT_GRADE = "0";
 
+    private LessonTime lessonTime;
     private Education education;
     private Grade grade;
     private Name parentName;
@@ -22,6 +25,7 @@ public class StudentBuilder extends PersonBuilder {
      */
     public StudentBuilder() {
         super();
+        lessonTime = new LessonTime(DEFAULT_LESSON_TIME);
         education = new Education(DEFAULT_EDUCATION);
         grade = new Grade(DEFAULT_GRADE);
         parentName = null;
@@ -32,9 +36,18 @@ public class StudentBuilder extends PersonBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         super(studentToCopy);
+        lessonTime = studentToCopy.getLessonTime();
         education = studentToCopy.getEducation();
         grade = studentToCopy.getGrade();
         parentName = studentToCopy.getParentName();
+    }
+
+    /**
+     * Sets the {@code LessonTime} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withLessonTime(String lessonTime) {
+        this.lessonTime = new LessonTime(lessonTime);
+        return this;
     }
 
     /**
@@ -95,8 +108,8 @@ public class StudentBuilder extends PersonBuilder {
      * Builds the student.
      */
     public Student build() {
-        return new Student(getName(), getPhone(), getEmail(), getAddress(), education, grade, parentName, getTags(),
-                isPinned(), isArchived());
+        return new Student(getName(), getPhone(), getEmail(), getAddress(), lessonTime, education, grade, parentName,
+                getTags(), isPinned(), isArchived());
     }
 
 }

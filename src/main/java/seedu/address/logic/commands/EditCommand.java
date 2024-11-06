@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -48,6 +50,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_LESSON_TIME + "LESSON TIME] "
             + "[" + PREFIX_EDUCATION + "EDUCATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -58,6 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_ADD_EDUCATION_TO_NON_STUDENT = "Unable to add education to non-student!";
+    public static final String MESSAGE_ADD_LESSON_TIME_TO_NON_STUDENT = "Unable to add lesson time to non-student!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -88,6 +92,10 @@ public class EditCommand extends Command {
 
         if (!(personToEdit instanceof Student) && editPersonDescriptor.containsEducationField()) {
             throw new CommandException(MESSAGE_ADD_EDUCATION_TO_NON_STUDENT);
+        }
+
+        if (!(personToEdit instanceof Student) && editPersonDescriptor.containsLessonTimeField()) {
+            throw new CommandException(MESSAGE_ADD_LESSON_TIME_TO_NON_STUDENT);
         }
 
         Person editedPerson;
@@ -130,12 +138,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        LessonTime updatedLessonTime = editPersonDescriptor.getLessonTime().orElse(personToEdit.getLessonTime());
         Education updatedEducation = editPersonDescriptor.getEducation().orElse(personToEdit.getEducation());
         Grade updatedGrade = personToEdit.getGrade(); // edit command does not allow editing grade
         Name updatedParentName = personToEdit.getParentName(); // edit command does not allow editing parent name
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedEducation, updatedGrade,
-                updatedParentName, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLessonTime, updatedEducation,
+                updatedGrade, updatedParentName, updatedTags);
     }
 
     @Override
@@ -172,6 +181,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private LessonTime lessonTime;
         private Education education;
 
         public EditPersonDescriptor() {}
@@ -186,6 +196,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setLessonTime(toCopy.lessonTime);
             setEducation(toCopy.education);
         }
 
@@ -193,9 +204,12 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, education);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, lessonTime, education);
         }
 
+        public boolean containsLessonTimeField() {
+            return lessonTime != null;
+        }
         public boolean containsEducationField() {
             return education != null;
         }
@@ -249,6 +263,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setLessonTime(LessonTime lessonTime) {
+            this.lessonTime = lessonTime;
+        }
+
+        public Optional<LessonTime> getLessonTime() {
+            return Optional.ofNullable(lessonTime);
+        }
+
         public void setEducation(Education education) {
             this.education = education;
         }
@@ -274,6 +296,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(lessonTime, otherEditPersonDescriptor.lessonTime)
                     && Objects.equals(education, otherEditPersonDescriptor.education);
         }
 
@@ -284,6 +307,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("lesson time", lessonTime)
                     .add("education", education)
                     .add("tags", tags)
                     .toString();
