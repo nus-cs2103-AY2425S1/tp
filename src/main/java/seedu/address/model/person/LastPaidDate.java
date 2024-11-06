@@ -70,9 +70,6 @@ public class LastPaidDate {
 
     @Override
     public int hashCode() {
-        if (value == null) {
-            return 0;
-        }
         return value.hashCode();
     }
 }

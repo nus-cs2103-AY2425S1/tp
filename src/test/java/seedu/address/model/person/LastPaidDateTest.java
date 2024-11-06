@@ -48,9 +48,22 @@ public class LastPaidDateTest {
         LastPaidDate lastPaidDate2 = new LastPaidDate("08 11 2024");
         assertEquals(false, lastPaidDate1.equals(lastPaidDate2));
     }
+
+    @Test
+    public void equals_differentObjectDifferentType_returnsFalse() {
+        LastPaidDate lastPaidDate = new LastPaidDate("07 11 2024");
+        Frequency frequency = new Frequency("3");
+        assertEquals(false, lastPaidDate.equals(frequency));
+    }
     @Test
     public void toStringMethod() {
         LastPaidDate lastPaidDate = new LastPaidDate("07 11 2024");
         assertEquals("07 11 2024", lastPaidDate.toString());
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        LastPaidDate lastPaidDate = new LastPaidDate("07 11 2024");
+        assertEquals("07 11 2024".hashCode(), lastPaidDate.hashCode());
     }
 }
