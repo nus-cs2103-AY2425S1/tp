@@ -27,6 +27,8 @@ public class DeleteSubmissionCommandParser implements Parser<DeleteSubmissionCom
                     DeleteSubmissionCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBMISSION);
+
         Submission submission = ParserUtil.parseSubmission(argMultimap.getValue(PREFIX_SUBMISSION).get());
         return new DeleteSubmissionCommand(submission);
     }
