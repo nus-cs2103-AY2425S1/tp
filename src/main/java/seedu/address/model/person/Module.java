@@ -36,6 +36,20 @@ public class Module {
     }
 
     /**
+     * Constructs an {@code Module}. Only used in grading.
+     *
+     * @param module a valid Module.
+     */
+    public Module(String module, String grade) {
+        requireNonNull(module);
+        checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLength(module), MESSAGE_CONSTRAINTS);
+        this.module = module;
+        this.grade = grade.equals("Ungraded") ? UNGRADED : Integer.parseInt(grade);
+        this.isGraded = this.grade >= 0;
+    }
+
+    /**
      * Constructs an {@code Module} with grade.
      * @param grade a valid grade (0 - 100).
      */

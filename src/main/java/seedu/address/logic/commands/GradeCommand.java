@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,12 +63,17 @@ public class GradeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToGrade = lastShownList.get(targetIndex.getZeroBased());
-        Set<Module> personModules = new HashSet<>(personToGrade.getModules());
+        Set<Module> personModules = new HashSet<>();
+        for (Module mod : personToGrade.getModules()) {
+            // Make a copy of each Module to avoid modifying the original
+            personModules.add(new Module(mod.getModule(), mod.getGrade()));
+        }
+
         List<String> gradeResults = new ArrayList<>();
 
         for (Map.Entry<String, Integer> entry : moduleGrades.entrySet()) {
             String moduleName = entry.getKey();
-            int grade = entry.getValue();
+            Integer grade = entry.getValue();
 
             if (grade < 0 || grade > 100) {
                 throw new CommandException(MESSAGE_INVALID_GRADE);
@@ -81,14 +87,19 @@ public class GradeCommand extends Command {
                 throw new CommandException(MESSAGE_INVALID_MODULE + " (" + moduleName + ")");
             }
 
-            Module module = moduleToGrade.get();
-            module.assignGrade(grade);
+            // Replace the module with a new instance containing the grade
+            Module updatedModule = new Module(moduleName, grade.toString());
+            personModules.remove(moduleToGrade.get());
+            personModules.add(updatedModule);
+
             gradeResults.add(String.format("%s: %d", moduleName, grade));
         }
 
         Person updatedPerson = new Person(personToGrade.getName(), personToGrade.getPhone(),
                 personToGrade.getGender(), personModules, personToGrade.getTags());
         model.setPerson(personToGrade, updatedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.saveAddressBook();
 
         String gradeResultsString = String.join("\n", gradeResults);
         return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, personToGrade.getName(), gradeResultsString));
