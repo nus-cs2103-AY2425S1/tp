@@ -24,6 +24,7 @@ public class UnpaidCommandParser implements Parser<UnpaidCommand> {
             UnpaidPersonDescriptor unpaidPersonDescriptor = new UnpaidPersonDescriptor();
             unpaidPersonDescriptor.setHasNotPaid(); // Change this to false for Unpaid
             unpaidPersonDescriptor.setFrequencyToZero();
+            unpaidPersonDescriptor.setLastPaidDate();
             return new UnpaidCommand(index, unpaidPersonDescriptor);
         } catch (ParseException pe) {
             throw new ParseException(
