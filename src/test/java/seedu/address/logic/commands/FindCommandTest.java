@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -72,7 +73,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleCompaniesFound() {
         String expectedMessage = String.format("Found %d companies!", 3)
-                + "\n" + Arrays.asList(GRAB, APPLE, BYTEDANCE);
+                + "\n" + Arrays.asList(GRAB, APPLE, BYTEDANCE).stream().map(Messages::format).toList();
         NameContainsKeywordsPredicate predicate = preparePredicate("Grab Apple Bytedance");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredCompanyList(predicate);
