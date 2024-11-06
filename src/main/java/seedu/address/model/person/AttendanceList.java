@@ -58,7 +58,7 @@ public class AttendanceList {
      * @throws AttendanceNotFoundException If the attendance record for the specified
      *                                  date does not exist.
      */
-    public AttendanceList removeAttendance(LocalDateTime date) {
+    public AttendanceList removeAttendance(LocalDateTime date) throws AttendanceNotFoundException {
         requireNonNull(date);
         if (!attendanceList.containsKey(date)) {
             throw new AttendanceNotFoundException();
