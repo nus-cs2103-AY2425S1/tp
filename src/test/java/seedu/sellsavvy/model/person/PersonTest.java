@@ -142,6 +142,33 @@ public class PersonTest {
     }
 
     @Test
+    public void hasSimilarTags() {
+        // only 1 tag
+        Person customer = new PersonBuilder().withTags("Friends").build();
+        assertFalse(customer.hasSimilarTags());
+
+        // only totally different tags
+        customer = new PersonBuilder().withTags("Friends", "Friendly").build();
+        assertFalse(customer.hasSimilarTags());
+
+        // two identical tags
+        customer = new PersonBuilder().withTags("Friends", "Friends", "Criminal").build();
+        assertFalse(customer.hasSimilarTags()); // duplicate tags are ignored
+
+        // two similar tags only
+        customer = new PersonBuilder().withTags("Friends", "friends").build();
+        assertTrue(customer.hasSimilarTags());
+
+        // two similar tags with totally different tags
+        customer = new PersonBuilder().withTags("Friends", "Friendly", "friends").build();
+        assertTrue(customer.hasSimilarTags());
+
+        // three similar tags
+        customer = new PersonBuilder().withTags("Friends", "Friendly", "friends", "fRiEnDs").build();
+        assertTrue(customer.hasSimilarTags());
+    }
+
+    @Test
     public void getFilteredOrderList() {
         // identical person -> same order list
         FilteredList<Order> expectedOrders = HOON.getFilteredOrderList();
