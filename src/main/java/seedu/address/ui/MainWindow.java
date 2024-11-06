@@ -192,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            
+
             String hyperlink = commandResult.getHyperlink();
             if (hyperlink != null) {
                 resultDisplay.setHyperlink(hyperlink);

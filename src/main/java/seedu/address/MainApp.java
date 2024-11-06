@@ -182,7 +182,7 @@ public class MainApp extends Application {
 
     /**
      * Returns an instance of HostServices.
-     * 
+     *
      * @return HostServices instance
      */
     public HostServices getHostServicesInstance() {

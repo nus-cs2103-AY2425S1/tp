@@ -22,6 +22,9 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private Button resultVisitUG;
 
+    /**
+     * Creates a {@code ResultDisplay}.
+     */
     public ResultDisplay(HostServices hostServices) {
         super(FXML);
         this.hostServices = hostServices;
