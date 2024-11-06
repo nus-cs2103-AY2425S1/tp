@@ -31,11 +31,16 @@ public class PasswordManager {
      *
      * @return The stored hashed password, or null if the file does not exist.
      */
-    public static String readPassword() {
-        File file = new File(PASSWORD_FILE);
+    public static String readPassword(String path) {
+        if (path == null) {
+            path = PASSWORD_FILE;
+        }
+
+        File file = new File(path);
         if (!file.exists()) {
             return null; // No password set
         }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.readLine();
         } catch (IOException e) {
@@ -49,9 +54,13 @@ public class PasswordManager {
      *
      * @param password The plaintext password to hash and store.
      */
-    public static void savePassword(String password) {
+    public static void savePassword(String password, String path) {
+        if (path == null) {
+            path = PASSWORD_FILE;
+        }
+
         try {
-            File file = new File(PASSWORD_FILE);
+            File file = new File(path);
             // Create a new file if it doesn't exist
             file.createNewFile();
 
@@ -71,8 +80,12 @@ public class PasswordManager {
      * @param inputPassword The plaintext password to verify.
      * @return True if the password matches, false otherwise.
      */
-    public static boolean isPasswordCorrect(String inputPassword) {
-        String storedPasswordHash = readPassword();
+    public static boolean isPasswordCorrect(String inputPassword, String path) {
+        if (path == null) {
+            path = PASSWORD_FILE;
+        }
+
+        String storedPasswordHash = readPassword(path);
         if (storedPasswordHash == null) {
             return false; // No password set
         }
