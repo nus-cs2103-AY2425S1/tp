@@ -461,36 +461,59 @@ This screenshot shows the result of executing `list_t`.
 
 #### Adding a Task to a Group: `add_t_g`, `atg`
 
-Explanation of what command does.
+Adds a task to a group or multiple groups.
 
 **Format**: `add_t_g tn/TASK_NAME td/TASK_DEADLINE (YYYY-MM-DD HHmm) gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. This command allows only the addition of a single task to one or multiple groups at the same time.
+2. The group name inputs are case-insensitive. `cs2103-f11-1` will yield the same result as `CS2103-F11-1`.
+3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names. 
+   The application simply ignores the duplicates and adds the task to the desired group.
+4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is 
+   equal to another task when it has the same task name and deadline as it.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-<box type="warning" seamless>
+##### Usage Scenario
 
-**Caution:**
-The command will stop running the moment it hits an error.
+###### Scenario #1: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+`CS2103-F12-2` and `CS2103-F11-1`. This is the default scenario where the task does not already exist and both 
+groups exist. 
 
-For example `insert your own example`
+1. You can begin this command on any panel.
+2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 
-If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
-`CS2103-F13-1`.
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 
-</box>
+###### Scenario #2: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+`CS2103-F12-2` and `CS2103-F11-1` when `Do Homework` already exists.
 
-##### Usage Scenario (for commands that can be overloaded)
+1. You can begin this command on any panel.
+2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+3. This will yield an error message.
 
-Add more scenarios if necessary
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
 
-###### Scenario #1
+###### Scenario #3: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+`CS2103-F13-2` and `CS2103-F11-1` when `CS2103-F13-1` does not exist.
 
-This screenshot shows the result of executing `add_t_g tn/v1.5 Release td/2024-11-07 2359 gn/CS2103-F12-2`.
+1. You can begin this command on any panel.
+2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
+3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will display
+   an additional warning message regarding the input `CS2103-F13-1` which does not exist.
+
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
+
+###### Scenario #4: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+`CS2103-F13-2` and `CS2103-F14-1` when both groups do not exist.
+
+1. You can begin this command on any panel.
+2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
+3. Now, the command should throw an error message because both groups are non-existent.
+
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F11-2 gn/CS2103-F11-1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
