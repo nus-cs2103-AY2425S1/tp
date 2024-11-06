@@ -22,7 +22,7 @@ public class ConfirmCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        ConfirmClearCommand.setIsClear(true);
+        ClearCommand.setIsClear(true);
 
         assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
     }
@@ -32,7 +32,7 @@ public class ConfirmCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
-        ConfirmClearCommand.setIsClear(true);
+        ClearCommand.setIsClear(true);
 
         assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
     }
@@ -41,7 +41,7 @@ public class ConfirmCommandTest {
     public void execute_nonEmptyAddressBookFilteredList_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ConfirmClearCommand.setIsClear(true);
+        ClearCommand.setIsClear(true);
 
         model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
         expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
@@ -56,7 +56,7 @@ public class ConfirmCommandTest {
     @Test
     public void execute_notIsClear_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ConfirmClearCommand.setIsClear(false);
+        ClearCommand.setIsClear(false);
         ConfirmCommand confirmCommand = new ConfirmCommand();
 
         assertCommandFailure(confirmCommand, model,
