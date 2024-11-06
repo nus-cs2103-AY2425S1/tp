@@ -62,8 +62,8 @@ public class AddWorkExperienceCommandTest {
 
         // Execute command and verify output
         CommandResult result = command.execute(model);
-        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_ADDED, personWithoutWorkExp.getName(), VALID_WORK_EXP),
-                result.getFeedbackToUser());
+        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_ADDED, personWithoutWorkExp.getName(),
+                        VALID_WORK_EXP), result.getFeedbackToUser());
 
         // Verify that the person in the model has been updated
         assertEquals(editedPerson, model.getFilteredPersonList().get(index.getZeroBased()));
