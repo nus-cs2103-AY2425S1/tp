@@ -513,7 +513,26 @@ This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12
 2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
 3. Now, the command should throw an error message because both groups are non-existent.
 
-This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F11-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
+
+##### Scenario #5: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+`CS2103-F12-1` and `CS2103-F12-1` when the group exists.
+
+1. You can begin this command on any panel.
+2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
+3. The command functionally ignores the duplicates and add the task into the group specified. It will also display a 
+   warning message to you.
+
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
+
+##### Scenario #6: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+`CS2103-F14-1` and `CS2103-F14-1` when the group does not exist.
+
+1. You can begin this command on any panel.
+2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
+3. The command should yield an error message.
+
+This screenshot shows the result of executing `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F14-1 gn/CS2103-F14-1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
