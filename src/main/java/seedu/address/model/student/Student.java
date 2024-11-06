@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.task.TaskList;
@@ -27,7 +29,7 @@ public class Student {
     private final Set<Subject> subjects = new HashSet<>();
     private final Level level;
     private final TaskList taskList;
-    private final Set<LessonTime> lessonTimes = new HashSet<>();
+    private final SortedSet<LessonTime> lessonTimes = new TreeSet<>();
 
     /**
      * Every field must be present and not null.

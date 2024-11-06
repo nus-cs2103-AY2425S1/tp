@@ -94,7 +94,36 @@ public class LessonTimeTest {
         assertFalse(lt.canMerge(new LessonTime("SUN-14:00-15:30")));
     }
 
+    @Test
+    public void compareTo() {
+        LessonTime lt = new LessonTime("SUN-11:00-13:00");
 
+        //Same value -> 0
+        assertEquals(lt.compareTo(lt), 0);
+        assertEquals(lt.compareTo(new LessonTime("SUN-11:00-13:00")), 0);
+
+        //LessonTime same day, earlier start -> 1
+        LessonTime ltEarlyStart = new LessonTime("SUN-09:00-10:00");
+        assertEquals(lt.compareTo(ltEarlyStart), 1);
+
+        //LessonTime same day, later start time and end time -> -1
+        LessonTime ltLateStart = new LessonTime("SUN-13:00-14:00");
+        assertEquals(lt.compareTo(ltLateStart), -1);
+
+        //LessonTime same day and same start time later end time -> -1
+        LessonTime ltSameStart = new LessonTime("SUN-11:00-14:00");
+        assertEquals(lt.compareTo(ltSameStart), -1);
+
+        //LessonTime different day -> x > 1
+        LessonTime ltDifferentDay = new LessonTime("MON-11:00-14:00");
+        assertEquals(lt.compareTo(ltDifferentDay), 6);
+
+        //Edge cases
+        LessonTime ltMidnight = new LessonTime("SUN-23:00-23:59");
+        LessonTime ltEarlyMorning = new LessonTime("SUN-00:00-01:00");
+
+        assertEquals(ltMidnight.compareTo(ltEarlyMorning), 1);
+    }
 
     @Test
     public void toStringTest() {
