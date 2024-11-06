@@ -547,69 +547,155 @@ testers are expected to do more *exploratory* testing.
 ### Adding an elderly
 
 1. Adding an elderly without a tag
-   1. Test case: `add i/S6516486H n/James Lim p/91234567 e/james.lim@hotmail.com a/432, Clementi East Ave 4, #13-42 c/7`<br>
+   1. Prerequisite: There must **not** be an elderly with NRIC S6516486H in the list.
+   2. Test case: `add i/S6516486H n/James Lim p/91234567 e/james.lim@hotmail.com a/432, Clementi East Ave 4, #13-42 c/7`<br>
       Expected: A new elderly is added to the list. The details of the elderly are shown in the list.
 
 2. Adding an elderly with a tag
-   1. Test case: `add i/S1486256J n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 t/wheelchairBound c/7`<br>
+   1. Prerequisite: There must **not** be an elderly with NRIC S1486256J in the list.
+   2. Test case: `add i/S1486256J n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 t/wheelchairBound c/7`<br>
       Expected: A new elderly is added to the list. The details of the elderly are shown in the list and the "wheelchairBound" tag is shown.
 
 3. Adding an elderly with a duplicate NRIC
-   1. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
+   1. Prerequisite: There must be an elderly with NRIC S6516486H in the list.
+   2. Test case: `add i/S6516486H n/Bernard Lim p/98375489 e/b.lim@me.com a/80, Lorong 4 Toa Payoh, #12-34 c/7`<br>
       Expected: No new elderly is added. Error message is shown in the status bar.
+
+4. Adding an elderly with duplicate name, phone number, email, address but different NRIC
+   1. Prerequisite: There must be an elderly with `name: Alice Tan, phone number: 98765432, email: alice.tan@gmail.com, address: 123, Jurong West Ave 6, #08-111 & call frequency: 7` in the list.
+   2. Test case: `add i/S3198054B n/Alice Tan p/98765432 e/alice.tan@gmail.com a/123, Jurong West Ave 6, #08-111 c/7`<br>
+      Expected: Elderly is added but warning that duplicate elderly added is given.
+
+### Editing an elderly's details
+
+1. Editing an elderly details using INDEX
+   1. Prerequisite: List all elderly using the `list` command. There must be at least one elderly in the list.
+   2. Test case: `edit 1 n/Jamus Lim p/97758933`<br>
+   Expected: The elderly at index 1 is updated with the new name (Jamus Lim) and phone number (97758933). The updated details are shown in the list.
+
+2. Editing an elderly details using INDEX but with a used NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must be at least one elderly in the list and an elderly with NRIC S1486256J in the list.
+   2. Test case: `edit 1 i/S1486256J`<br>
+   Expected: The elderly at index 1 fails to update as the NRIC is already in use. Error message is shown in the status bar.
+   
+3. Editing an elderly details using NRIC
+   3. Prerequisite: There must be an elderly with NRIC S1486256J in the list.
+   4. Test case: `edit S1486256J a/Lorong 3 Toa Payoh, #12-34`<br>
+   Expected: The elderly with NRIC S1486256J is updated with the new address (Lorong 3 Toa Payoh, #12-34). The updated details are shown in the list.
+   
+4. Editing an elderly details using NRIC but with a non-existent NRIC
+   1. Prerequisite: There must **not** be an elderly with NRIC S3916784J in the list.
+   2. Test case: `edit S3916784J n/Tan Ah Kow`<br>
+   Expected: The elderly with NRIC S3916784J is not found. Error message is shown in the status bar.
+   
 
 ### Deleting an elderly
 
 1. Deleting an elderly while all elderly are listed in the `personList`.
-
-   1. Prerequisites: List all elderly using the `list` command. There must be at least one elderly in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
-
+   1. Prerequisite: List all elderly using the `list` command. There must be at least one elderly in the list.
+   2. Test case: `delete 1`<br>
+   Expected: First elderly shown in the list is deleted from the list. Details of the deleted elderly are displayed in the status message. Timestamp in the status bar is updated.
+   
+2. Deleting an elderly with an invalid INDEX
    1. Test case: `delete 0`<br>
-      Expected: No elderly is deleted. Error details is displayed in the status message. Status bar remains the same.
+   Expected: No elderly is deleted. Error details is displayed in the status message. The list remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
-      Expected: Similar to the previous case.
+3. Deleting an elderly using NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must be an elderly with NRIC S1486256J in the list.
+   2. Test case: `delete S1486256J`<br>
+   Expected: The elderly with NRIC S1486256J is deleted from the list. Details of the deleted elderly are displayed in the status message.
+
+4. Deleting an elderly with a non-existent NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC S3916784J is in the list.
+   2. Test case: `delete S3916784J`<br>
+   Expected: No elderly with the NRIC S3916784J is found. The list remains the same.
+
+5. Other incorrect delete commands to try: 
+   1. Prerequisite for `delete x`: There must be less than `x` elderly in the list.
+   2. Test case: `delete`, `delete x`, `...` (where x is an integer larger than the size of the list)<br>
+   Expected: Similar to the previous case.
 
 ### Finding an elderly
-1. Finding an elderly by name
-    1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
+1. Finding an elderly by NAME
+    1. Prerequisite: List all elderly using the `list` command. Elderly with the name `Alice` is in the list.
     2. Test case: `find Alice`<br>
        Expected: Elderly with the name `Alice` are shown in the list. Other elderly are hidden.
 
 2. Finding an elderly by NRIC
-   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
+   1. Prerequisite: List all elderly using the `list` command. Elderly with the NRIC `S1486256J` is in the list.
    2. Test case: `find S6516486H`<br>
         Expected: The elderly with the NRIC `S6516486H` is shown in the list. Other elderly are hidden.
+   
+3. Finding an elderly with a non-existent NAME
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the name `John` is in the list.
+   2. Test case: `find John`<br>
+      Expected: No elderly with the name `John` is found. The list is empty.
+   
+4. Finding an elderly with a non-existent NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC `S3916784J` is in the list.
+   2. Test case: `find S3916784J`<br>
+      Expected: No elderly with the NRIC `S3916784J` is found. The list is empty.
 
 ### Marking an elderly as called
-1. Mark an elderly as called by index
-   1. Prerequisites: List all elderly using the `list` command.
+1. Mark an elderly as called by INDEX
+   1. Prerequisite: List all elderly using the `list` command. There must be at least one elderly in the list.
    2. Test case: `mark 1`<br>
-    Expected: The elderly at index 1 is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
-2. Mark an elderly as called by NRIC
-    1. Test case: `mark S1486256J o/My test note`<br>
-       Expected: The elderly with NRIC `S1486256J` is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
+   Expected: The elderly at index 1 is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
+
+2. Mark an elderly with an invalid INDEX
+   1. Test case: `mark 0`<br>
+   Expected: No elderly is marked as called. Error message is shown in the status bar. The list remains the same.
+
+3. Mark an elderly as called by NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must be an elderly with NRIC `S1486256J` in the list.
+   2. Test case: `mark S1486256J`<br>
+      Expected: The elderly with NRIC `S1486256J` is marked as called. The status message shows the details of the elderly marked as called. Their next call date should be updated.
+
+4. Mark an elderly with a non-existent NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC `S3916784J` is in the list.
+   2. Test case: `mark S3916784J`<br>
+      Expected: No elderly with the NRIC `S3916784J` is marked as call. Error message is shown in the status bar. The list remains the same.
+
+5. Mark an elderly using INDEX/NRIC with notes
+   1. Prerequisite: List all elderly using the `list` command. There must be at least one elderly or elderly with NRIC `S1486256J` in the list.
+   2. Test case: `mark 1 o/My test note`, `mark S1486256J o/My test note`<br>
+      Expected: The elderly at index 1 is marked as called with the note "My test note". The status message shows the details of the elderly marked as called.
+
+6. Other incorrect mark commands to try: 
+   1. Prerequisite for `mark x`: There must be less than `x` elderly in the list.
+   2. Test case: `mark`, `mark x`, `...` (where x is an integer larger than the size of the list)<br>
+   Expected: Similar to the previous case.
 
 ### Call history of an elderly
-1. Viewing call history of an elderly by index
-   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
+1. Viewing call history of an elderly by INDEX
+   1. Prerequisite: List all elderly using the `list` command. There must be at least two elderly in the list.
    2. Test case: `history 2`<br>
       Expected: The list is updated to show the call history of the elderly at index 2.
-2. Viewing call history of an elderly by NRIC
-   1. Test case: `history S1486256J`<br>
+
+2. Viewing call history of an elderly with an invalid INDEX
+   1. Test case: `history 0`<br>
+      Expected: Error message is shown in the status bar.
+
+3. Viewing call history of an elderly by NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must be an elderly with NRIC `S1486256J` in the list.
+   2. Test case: `history S1486256J`<br>
       Expected: The list is updated to show the call history of the elderly with NRIC `S1486256J`. One of which contains the note "My test note".
+
+4. Viewing call history of an elderly with a non-existent NRIC
+   1. Prerequisite: List all elderly using the `list` command. There must **not** be an elderly with the NRIC `S3916784J` is in the list.
+   2. Test case: `history S3916784J`<br>
+      Expected: Error message is shown in the status bar.
 
 ### Navigating through command history
 1. Navigating to previous command
-   1. Test case: Press the `UP` arrow key<br>
-      Expected: The command history is shown in the command box. Pressing `UP` again will show the previous command in the command history. (`history S1486256J` if followed in order)
+   1. Prerequisite: There must be at least 1 command previously entered.
+   2. Test case: Press the `UP` arrow key<br>
+      Expected: The command history is shown in the command box. Pressing `UP` again will show the previous command in the command history. (`history S3916784J` if followed in order)
 
 2. Navigating to next command
-   1. Test case: Press the `UP` arrow key followed by the `DOWN` arrow key<br>
-      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history 2` followed by `history S1486256J` in the status bar.
+   1. Prerequisite: There must be at least 1 command previously entered.
+   2. Test case: Press the `UP` arrow key followed by the `DOWN` arrow key<br>
+      Expected: The command history is shown in the command box. Pressing `UP` followed by `DOWN` will show `history S1486256J` followed by `history S3916784J` in the status bar.
 
 ### Data management
 
