@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
@@ -50,6 +51,18 @@ public class VolunteerManager {
     public boolean hasVolunteer(Volunteer volunteer) {
         requireNonNull(volunteer);
         return volunteers.contains(volunteer);
+    }
+
+    /**
+     * Returns true if a volunteer with the same name as {@code volunteerName} exists in the volunteer book.
+     */
+    public boolean hasVolunteer(String volunteerName) {
+        for (Volunteer volunteer : volunteers) {
+            if (volunteer.getName().toString().equals(volunteerName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

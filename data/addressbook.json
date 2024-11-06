@@ -4,7 +4,7 @@
     "phone" : "93456789",
     "email" : "davidng@example.com",
     "availableDate" : "2023-08-12",
-    "involvedIn" : [ "Beach Cleanup", "Charity Run" ]
+    "involvedIn" : [ "Beach Cleanup", "Charity Run", "Tree Planting" ]
   }, {
     "name" : "Emily Lim",
     "phone" : "94567890",
@@ -61,7 +61,7 @@
     "endTime" : "13:00",
     "location" : "Bishan Park",
     "description" : "Tree planting event to promote sustainability",
-    "volunteers" : [ ]
+    "volunteers" : [ "!!", "David Ng" ]
   }, {
     "eventName" : "Blood Donation Drive",
     "date" : "2024-02-14",
@@ -73,7 +73,7 @@
   }, {
     "eventName" : "beach clean2",
     "date" : "2023-10-15",
-    "startTime" : "09:00",
+    "startTime" : "00:00",
     "endTime" : "10:00",
     "location" : "here",
     "description" : "",

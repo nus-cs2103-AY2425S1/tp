@@ -79,6 +79,21 @@ public class EventManager {
         throw new EventNotFoundException();
     }
 
+    /**
+     * Returns true if an event with the same identity as {@code eventName} exists in the address book.
+     * Used as a more lightweight version of getEventFromName to check if an event exists.
+     *
+     * @param eventName Name of event to search for.
+     */
+    public boolean hasEvent(String eventName) {
+        for (Event e : events) {
+            if (e.getName().toString().equals(eventName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Returns a list of event objects using a provided list of event names.
@@ -105,6 +120,21 @@ public class EventManager {
             throw new NotAssignedException();
         }
         event.unassignVolunteer(volunteer.getName().fullName);
+    }
+
+    /**
+     * Unassigns a volunteer from an event. Used when loading data from json file to remove any volunteers not present
+     * in the .json file.
+     * Unlike the method above, it does not throw an exception if the volunteer is not assigned to the event, as
+     * it is only used when the volunteer is assigned to the event in the json file.
+     *
+     * @param volunteerName Name of volunteer to be unassigned
+     * @param event Event to unassign volunteer from
+     */
+    public void unassignVolunteerFromEvent(String volunteerName, Event event) {
+        if (event.getVolunteers().contains(volunteerName)) {
+            event.unassignVolunteer(volunteerName);
+        }
     }
 
     public void unassignVolunteerFromAllEvents(Volunteer volunteer) {
