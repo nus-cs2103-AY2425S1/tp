@@ -20,7 +20,7 @@ public class AddSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWords.ADD_SUPPLIER_COMMAND;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a supplier to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a supplier to InvenTrack. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

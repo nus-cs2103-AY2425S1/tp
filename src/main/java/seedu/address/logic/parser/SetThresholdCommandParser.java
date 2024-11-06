@@ -1,12 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
-
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SetThresholdCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,12 +32,8 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
                         PREFIX_MIN_STOCK_LEVEL,
                         PREFIX_MAX_STOCK_LEVEL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PRODUCT_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, SetThresholdCommand.MESSAGE_USAGE));
-        }
-
+        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_PRODUCT_NAME},
+                SetThresholdCommand.MESSAGE_USAGE);
         argMultimap.verifyNoDuplicatePrefixesFor(
                 PREFIX_PRODUCT_NAME,
                 PREFIX_MIN_STOCK_LEVEL,
@@ -95,14 +88,5 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
         } catch (NumberFormatException e) {
             throw new ParseException("Invalid stock level: " + errorMessage);
         }
-    }
-
-    /**
-     * Returns true if the specified prefixes contain non-empty values in the given {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(
-            ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes)
-                .allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

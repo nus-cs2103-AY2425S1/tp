@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
+import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
@@ -56,7 +57,7 @@ public class SetThresholdCommandParserTest {
 
     @Test
     public void parse_compulsoryAndMissingField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        String expectedMessage = String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
                 SetThresholdCommand.MESSAGE_USAGE);
 
         // missing product name prefix
@@ -123,11 +124,11 @@ public class SetThresholdCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // non-empty preamble
         assertParseFailure(parser, "some random string pr/Product1 min/50",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetThresholdCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_UNEXPECTED_PREAMBLE, SetThresholdCommand.MESSAGE_USAGE));
 
         // preamble with numbers
         assertParseFailure(parser, "123 pr/Product1 min/50",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetThresholdCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_UNEXPECTED_PREAMBLE, SetThresholdCommand.MESSAGE_USAGE));
     }
 
     @Test

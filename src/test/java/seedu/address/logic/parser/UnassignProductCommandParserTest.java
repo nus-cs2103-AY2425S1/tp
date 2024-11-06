@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
+import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.commands.CommandTestUtil.PRODUCT_DESC_APPLE_PIE;
 import static seedu.address.logic.commands.CommandTestUtil.SUPPLIER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -34,7 +36,7 @@ public class UnassignProductCommandParserTest {
     public void parse_missingProductPrefix_failure() {
         // missing pr/ prefix
         String userInput = VALID_PRODUCT_APPLE_PIE + SUPPLIER_DESC_AMY;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, userInput, String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
                 UnassignProductCommand.MESSAGE_USAGE));
     }
 
@@ -42,7 +44,7 @@ public class UnassignProductCommandParserTest {
     public void parse_missingSupplierPrefix_failure() {
         // missing su/ prefix
         String userInput = PRODUCT_DESC_APPLE_PIE + VALID_NAME_AMY;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, userInput, String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
                 UnassignProductCommand.MESSAGE_USAGE));
     }
 
@@ -50,7 +52,7 @@ public class UnassignProductCommandParserTest {
     public void parse_missingBothPrefixes_failure() {
         // missing both pr/ and su/ prefixes
         String userInput = VALID_PRODUCT_APPLE_PIE + VALID_NAME_AMY;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, userInput, String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
                 UnassignProductCommand.MESSAGE_USAGE));
     }
 
@@ -58,7 +60,7 @@ public class UnassignProductCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // preamble should not exist
         String userInput = "extra " + PRODUCT_DESC_APPLE_PIE + SUPPLIER_DESC_AMY;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, userInput, String.format(MESSAGE_UNEXPECTED_PREAMBLE,
                 UnassignProductCommand.MESSAGE_USAGE));
     }
 
