@@ -18,8 +18,8 @@ import seedu.address.model.event.EventManager;
 /**
  * View the list of persons who are in an event.
  */
-public class ViewEventCommand extends Command {
-    public static final String COMMAND_WORD = "view";
+public class FindEventCommand extends Command {
+    public static final String COMMAND_WORD = "find-event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT INDEX: View list of persons "
             + "in the event identified by the "
@@ -31,9 +31,9 @@ public class ViewEventCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates a ViewEventCommand.
+     * Creates a FindEventCommand.
      */
-    public ViewEventCommand(Index targetIndex) {
+    public FindEventCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -60,12 +60,12 @@ public class ViewEventCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewEventCommand)) {
+        if (!(other instanceof FindEventCommand)) {
             return false;
         }
 
-        ViewEventCommand otherViewEventCommand = (ViewEventCommand) other;
-        return targetIndex.equals(otherViewEventCommand.targetIndex);
+        FindEventCommand otherFindEventCommand = (FindEventCommand) other;
+        return targetIndex.equals(otherFindEventCommand.targetIndex);
     }
 
     @Override
