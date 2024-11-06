@@ -1,94 +1,68 @@
 package seedu.address.model.person;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Class to store statistics for each job code
  */
 public class JobCodeStatistics {
-    private int n;
-    private int tp;
-    private int tc;
-    private int bp;
-    private int bc;
-    private int a;
-    private int r;
-    private int totalApplicants;
+    private final Map<String, Integer> tagCounts = createTagCounts();
 
-    /**
-     * Initiallises class with 0 applicants for each tag, and 0 total applicants
-     */
-    public JobCodeStatistics() {
-        n = 0;
-        tp = 0;
-        tc = 0;
-        bp = 0;
-        bc = 0;
-        a = 0;
-        r = 0;
-        totalApplicants = 0;
+    // Initialize the tagCounts map with all tag codes set to 0
+    private static HashMap<String, Integer> createTagCounts() {
+        HashMap<String, Integer> tagCounts = new HashMap<>();
+        tagCounts.put("N", 0);
+        tagCounts.put("BP", 0);
+        tagCounts.put("BC", 0);
+        tagCounts.put("TP", 0);
+        tagCounts.put("TC", 0);
+        tagCounts.put("A", 0);
+        tagCounts.put("R", 0);
+        return tagCounts;
     }
 
     /**
-     * Increments the number of applicants in each interview stage.
-     * @param tagValue
+     * Increases a specific tag in the tagCode dictionary
+     * @param tagCode tagCode String
      */
-    public void incrementTag(String tagValue) {
-        totalApplicants++;
-
-        switch (tagValue) {
-        case "New":
-            n++;
-            break;
-        case "Technical Interview in Progress":
-            tp++;
-            break;
-        case "Technical Interview Confirmed":
-            tc++;
-            break;
-        case "Behavioral Interview in Progress":
-            bp++;
-            break;
-        case "Behavioral Interview Confirmed":
-            bc++;
-            break;
-        case "Accepted":
-            a++;
-            break;
-        case "Rejected":
-            r++;
-            break;
-        default:
-            throw new IllegalArgumentException("Invalid Tag Value: " + tagValue);
-        }
+    // Increment the count for a specific tag
+    public void incrementTag(String tagCode) {
+        tagCode = tagCode.toUpperCase();
+        tagCounts.put(tagCode, tagCounts.getOrDefault(tagCode, 0) + 1);
     }
+
+    // Get the total count of applicants across all tags
     public int getTotalApplicants() {
-        return totalApplicants;
+        return tagCounts.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public int getN() {
-        return n;
+        return tagCounts.getOrDefault("N", 0);
     }
-
-    public int getTP() {
-        return tp;
-    }
-
-    public int getTC() {
-        return tc;
-    }
-
     public int getBP() {
-        return bp;
+        return tagCounts.getOrDefault("BP", 0);
     }
-
     public int getBC() {
-        return bc;
+        return tagCounts.getOrDefault("BC", 0);
     }
-
+    public int getTP() {
+        return tagCounts.getOrDefault("TP", 0);
+    }
+    public int getTC() {
+        return tagCounts.getOrDefault("TC", 0);
+    }
     public int getA() {
-        return a;
+        return tagCounts.getOrDefault("A", 0);
+    }
+    public int getR() {
+        return tagCounts.getOrDefault("R", 0);
     }
 
-    public int getR() {
-        return r;
+    @Override
+    public String toString() {
+        return String.format("N: %d, TP: %d, TC: %d, BP: %d, BC: %d, A: %d, R: %d",
+                getN(), getTP(), getTC(), getBP(), getBC(), getA(), getR());
     }
 }
+
