@@ -22,12 +22,14 @@ public class RestaurantBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final Integer DEFAULT_RATING = null;
+    public static final boolean DEFAULT_ISFAVOURITE = false;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Rating rating;
+    private boolean isFavourite;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +41,7 @@ public class RestaurantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         rating = new Rating(DEFAULT_RATING);
+        isFavourite = DEFAULT_ISFAVOURITE;
         tags = new HashSet<>();
     }
 
@@ -51,6 +54,7 @@ public class RestaurantBuilder {
         email = restaurantToCopy.getEmail();
         address = restaurantToCopy.getAddress();
         rating = restaurantToCopy.getRating();
+        isFavourite = restaurantToCopy.isFavourite();
         tags = new HashSet<>(restaurantToCopy.getTags());
     }
 
@@ -102,8 +106,16 @@ public class RestaurantBuilder {
         return this;
     }
 
+    /**
+     * Sets the boolean isFavourite of the {@code Restaurant} that we are building.
+     */
+    public RestaurantBuilder withIsFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+        return this;
+    }
+
     public Restaurant build() {
-        return new Restaurant(name, phone, email, address, rating, tags);
+        return new Restaurant(name, phone, email, address, rating, tags, isFavourite);
     }
 
 }

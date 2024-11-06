@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Restaurant restaurant = new Restaurant(name, phone, email, address, rating, tagList);
+        Restaurant restaurant = new Restaurant(name, phone, email, address, rating, tagList, false);
 
         return new AddCommand(restaurant);
     }
