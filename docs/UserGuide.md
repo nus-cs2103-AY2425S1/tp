@@ -222,14 +222,38 @@ Deletes the specified event from the address book.
 Format: `del_event INDEX` / `del_event EVENT_NAME`
 
 * Deletes the event at the specified `INDEX` / with event name `EVENT_NAME`.
-* `EVENT_NAME` refers to the name of the event (Case-insensitive).
+* `EVENT_NAME` refers to the name of the event (case-insensitive).
 * If there are multiple events with the same name, `del_event EVENT_NAME` will fail.
-* The index refers to the index number shown in the displayed event list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* `INDEX` refers to the index number shown in the displayed event list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list_events` followed by `del_event 2` deletes the 2nd event in the address book.
-* `del_event meeting` will delete the event with name `meeting` (Case-insensitive) if there is only one event with that name.
+* `del_event meeting` will delete the event with name `meeting` (case-insensitive) if there is only one event with that name.
+
+### Assigning an event: `assign_event`
+
+To be completed by Nicholas
+
+### Unassigning an event: `unassign_event`
+
+Unassigns a specified event from a specified person stored in ClubConnect's contact list.
+
+Format: `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` / `unassign_event p/PERSON_NAME ev/EVENT_INDEX` / `unassign_event p/PERSON_INDEX ev/EVENT_NAME` / `unassign_event p/PERSON_NAME ev/EVENT_NAME`
+
+* Unassigns the event specified by `EVENT_INDEX` or `EVENT_NAME` from the person specified by `PERSON_INDEX` or `PERSON_NAME`.
+* `EVENT_INDEX` refers to the index number shown in the displayed event list.
+* `EVENT_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `PERSON_INDEX` refers to the index number shown in the displayed contact list.
+* `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_NAME` refers to the name of the event (case-insensitive).
+* `PERSON_NAME` refers to the name of the person (case-insensitive).
+
+Examples:
+* `unassign_event p/1 ev/2` will unassign the 2nd event in ClubConnect's event list from the 1st person in ClubConnect's contact list.
+* `unassign_event p/Alice ev/2` will unassign the 2nd event in ClubConnect's event list from a person named `Alice` (case-insensitive) in ClubConnect's contact list.
+* `unassign_event p/1 ev/Meeting` will unassign an event named `Meeting` (case-insensitive) in ClubConnect's event list from the 1st person in ClubConnect's contact list.
+* `unassign_event p/Alice ev/Meeting` will unassign an event named `Meeting` (case-insensitive) in ClubConnect's event list from a person named `Alice` (case-insensitive) in ClubConnect's contact list.
 
 ### Clearing all entries : `clear`
 
@@ -291,8 +315,10 @@ Action             | Format, Examples
 **Search**         | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
 **List**           | `list`
 **Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
-**Delete Event**   | `del_event INDEX` or `del_event EVENT_NAME`<br> e.g., `del_event 1` or `del_event meeting`
 **List Events**    | `list_events`
+**Delete Event**   | `del_event INDEX` or `del_event EVENT_NAME`<br> e.g., `del_event 1` or `del_event meeting`
+**Assign Event**   | To be completed by Nicholas
+**Unassign Event** | `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` or `unassign_event p/PERSON_NAME ev/EVENT_INDEX` or `unassign_event p/PERSON_INDEX ev/EVENT_NAME` or `unassign_event p/PERSON_NAME ev/EVENT_NAME` <br> e.g., `unassign_event p/1 ev/2` or `unassign_event p/Alice ev/2` or `unassign_event p/1 ev/Meeting` or `unassign_event p/Alice ev/Meeting`
 **Help**           | `help`
 **Export**         | `export`
 **Import**         | `import FILENAME`<br> e.g., `import contacts.csv`
