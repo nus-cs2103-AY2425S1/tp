@@ -61,16 +61,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private FilterCommand createFilterCommandByName(ArgumentMultimap argMultimap) {
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() : "PREFIX_NAME should be present";
         List<String> nameKeywords = Arrays.asList(argMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
         return new FilterCommand(new NameContainsKeywordsPredicate(nameKeywords));
     }
 
     private FilterCommand createFilterCommandByModule(ArgumentMultimap argMultimap) {
+        assert argMultimap.getValue(PREFIX_MODULE).isPresent() : "PREFIX_MODULE should be present";
         String moduleKeyword = argMultimap.getValue(PREFIX_MODULE).get();
         return new FilterCommand(new ModuleContainsKeywordsPredicate(moduleKeyword));
     }
 
     private FilterCommand createFilterCommandByCourse(ArgumentMultimap argMultimap) {
+        assert argMultimap.getValue(PREFIX_COURSE).isPresent() : "PREFIX_COURSE should be present";
         List<String> courseKeywords = Arrays.asList(argMultimap.getValue(PREFIX_COURSE).get().split("\\s+"));
         return new FilterCommand(new CourseContainsKeywordsPredicate(courseKeywords));
     }
