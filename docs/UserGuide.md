@@ -65,18 +65,18 @@ ClientHub is a **desktop app for managing contacts, optimized for use via a Comm
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a client: `add`
 
-Adds a person to the Client Hub.
+Adds a client to Client Hub.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE…​`
 
 A **valid** `NAME` should:
 * Not be empty.
@@ -106,6 +106,14 @@ A **valid** `ADDRESS` should:
 * Can only have one address.
     * For eg. Typing `a/John street, block 123, #01-01 a/John street, block 123, #01-02` will throw an error.
 
+A **valid** `DESCRIPTION` should:
+* Not be empty.
+  * For eg. Just typing `d/` without providing any `DESCRIPTION` will throw an error.
+  * Be limited to 500 characters
+  * For eg. Typing `d/Imagine this is a very long description that is more than 500 characters long` will throw an error.
+* Can only have one description.
+  * For eg. Typing `d/likes bubble tea d/likes bubble tea` will throw an error.
+
 A **valid** `CLIENT_TYPE` should:
 * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `CLIENT_TYPE` will always be in alphanumeric format.
@@ -113,28 +121,44 @@ A **valid** `CLIENT_TYPE` should:
     * For eg. Just typing `c/` without providing any `CLIENT_TYPE` will throw an error.
 * Can have multiple client types.
     * For eg. Typing `c/Plan A c/Plan B` is valid.
-
-A **valid** `DESCRIPTION` should:
-* Not be empty.
-    * For eg. Just typing `d/` without providing any `DESCRIPTION` will throw an error.
-    * Be limited to 500 characters
-    * For eg. Typing `d/Imagine this is a very long description that is more than 500 characters long` will throw an error.
-* Can only have one description.
-    * For eg. Typing `d/likes bubble tea d/likes bubble tea` will throw an error.
-
+* Not have duplicates.
+    * For eg. Typing `c/Plan A c/Plan A` will combine the client types into `Plan A`.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Investment d/likes bubble tea`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Investment c/Healthcare d/Loves travelling`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01  d/likes bubble tea c/Investment`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
+
+Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes bubble tea c/Investment`:
+![result for 'add'](images/result_for_add.png)
 
 
-### Deleting a person : `delete`
+### Editing a client: `edit`
+
+Edits an existing client in  Client Hub.
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
+
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+  * At most 1 of each field can be edited at a time.(excluding CLIENT_TYPE)
+* Existing values will be updated to the input values.
+* When editing `CLIENT_TYPE`, the existing `CLIENT_TYPE` of the person will be removed i.e adding of `CLIENT_TYPE` is not cumulative.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower c/investment c/healthcare` Edits the name of the 2nd person to be `Betsy Crower` and add 2 client types of `investment` and `healthcare`.
+
+result for `edit 1 p/91234567`:
+![result for 'edit 1 p/91234567'](images/result_for_edit.png)
+
+
+### Deleting a client: `delete`
 
 Deletes the specified person from ClientHub.
 
 Format: `delete NAME` or `d NAME` or `delete NAME/`
 
-* Deletes the person with specified NAME
+* Deletes the client with specified `NAME`
 * / is used to indicate specific name to delete
     * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
     * However, deleting David Lim does not require / as it is already the **MOST** specific name.
@@ -151,35 +175,21 @@ Examples:
 * `delete John Doe` deletes the person named `John Doe`
 * `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
 
+Result for `delete John Doe`:
+![result for 'delete John Doe'](images/result_for_delete.png)
 
-### Editing a person : `edit`
 
-Edits an existing person in the Client Hub.
+### Locating clients by key information: `find`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
+Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`. 
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-  * At most 1 of each field can be edited at a time.(excluding CLIENT_TYPE)
-* Existing values will be updated to the input values.
-* When editing client types, the existing client types of the person will be removed i.e adding of client type is not cumulative.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower c/investment c/healthcare` Edits the name of the 2nd person to be `Betsy Crower` and add 2 client types of `investment` and `healthcare`.
-
-### Locating persons by key information: `find`
-
-Finds persons by name, phone number, address or client type.
-
-Format: `find n/NAME` or `find p/PHONE_NUMBER` or `find a/ADDRESS` or `find c/CLIENT_TYPE`
-
-#### Locating by name: `find n/NAME`
+#### Locating by `NAME`
+Format: `find n/NAME` or `fn NAME`
   * Only the name is searched.
   * The search is case-insensitive. e.g `hans` will match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
-  * Persons matching all keyword prefix will be returned (i.e. `AND` search).
+  * Clients matching all keyword prefix will be returned (i.e. `AND` search).
     e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
 A **valid** `NAME` should:
@@ -188,16 +198,20 @@ A **valid** `NAME` should:
 * Be a valid name that exists in the list of contacts.
     * For eg. Typing `find n/John Doe` when there is no contact with the name `John Doe` will throw an error.
 
-
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex yeo` returns `Alex Yeoh`
+* `fn John` returns `John`, `John Doe`, `Doe John`, `Doe John Eng`
+* `fn Ale Yeo` returns `Alex Yeoh`
+* `fn Yeoh Alex` returns `Alex Yeoh`
+* `fn aLex yEOh` returns `Alex Yeoh`
 
 Result for `find n/roy`:
-![result for 'find n/roy'](images/FindRoyResult.png)
+![result for 'find n/roy'](images/result_for_find_name.png)
 
 
-#### Locating by phone number: `find p/PHONE_NUMBER`
+#### Locating by `PHONE_NUMBER`
+Format: `find p/PHONE_NUMBER` or `fp PHONE_NUMBER`
   *  Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
 
 A **valid** `PHONE_NUMBER` should:
@@ -208,15 +222,17 @@ A **valid** `PHONE_NUMBER` should:
 
 Examples:
 * `find p/9103` returns `91031282`
+* `fp 8433` returns `8433 4567`
 
 Result for `find p/9103`:
-![result for 'find 9103'](images/Find9103Result.png)
+![result for 'find 9103'](images/result_for_find_phone.png)
 
 
-#### Locating by address: `find a/ADDRESS`
+#### Locating by `ADDRESS`
+Format: `find a/ADDRESS` or `fa ADDRESS`
   * The search is case-insensitive. e.g `tampines` will match `Tampines`
   * Only the address of the contact is searched.
-  * Persons with address with any matching substring to the keyword will be returned.
+  * Clients with address with any matching substring to the keyword will be returned.
 
 A **valid** `ADDRESS` should:
 * Not be empty.
@@ -224,72 +240,37 @@ A **valid** `ADDRESS` should:
 
 Examples:
 * `find a/Blk 47` returns `Blk 47 Tampines Street 20`
+* `fa Blk 47` returns `Blk 47 Tampines Street 20`
 
 Result for `find a/tampines`:
-![result for 'fa tampines`](images/FindTampinesResult.png)
+![result for 'fa tampines`](images/result_for_find_address.png)
 
 
-#### Locating by client type: `find c/CLIENT_TYPE`
+#### Locating by `CLIENT_TYPE` 
+Format: `find c/CLIENT_TYPE…​` or `fc CLIENT_TYPE…​`
 * The search is case-insensitive. e.g `investment` will match `Investment`
 * Only the `CLIENT_TYPE` of the person is searched.
-* Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
-* Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+* Clients whose `CLIENT_TYPE` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
+* Client with `CLIENT_TYPE` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+* Duplicate `CLIENT_TYPE` will be combined into 1 (No way to have duplicate client types showing)
 
 A **valid** `CLIENT_TYPE` should:
 * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `client_type` will always be in alphanumeric format.
 * Not be empty.
     * For eg. Just typing `find c/` without providing any `CLIENT_TYPE` will throw an error.
+* Not have duplicates.
+    * For eg. Typing `c/Plan A c/Plan A` will combine the client types into `Plan A`.
 
 Examples:
 * `find c/Investment` returns every contact that has a `client_type` beginning with `Investment`
 * `find c/Invest` returns every contact that has `client_type` beginning with `Invest`
-
-Result for `find c/Investment`:
-![result for 'find c/Investment`](images/FindInvestmentResult.png)
-
-
-### Shortcuts for `find` command
-All constraints for `find` command apply to the shortcuts as well.
-
-#### Locating persons by name: `fn`
-Shortcut command for `find n/NAME`
-
-Format: `fn KEYWORD`
-
-Examples:
-* `fn John` returns `John`, `John Doe`, `Doe John`, `Doe John Eng`
-* `fn Ale Yeo` returns `Alex Yeoh`
-* `fn Yeoh Alex` returns `Alex Yeoh`
-* `fn aLex yEOh` returns `Alex Yeoh`
-
-
-#### Locating persons by phone number: `fp`
-* Shortcut command for `find p/PHONE_NUMBER`
-
-Format: `fp KEYWORD`
-
-Examples:
-* `fp 8433` returns `8433 4567`
-
-
-#### Locating persons by address : `fa`
-* Shortcut command for `find a/ADDRESS`
-
-Format: `fa ADDRESS`
-
-Examples:
-* `fa Blk 47` returns `Blk 47 Tampines Street 20`
-
-
-#### Locating persons by client type: `fc`
-* Shortcut command for `find c/CLIENT_TYPE`
-
-Format: `fc CLIENT_TYPE`
-
-Examples:
 * `fc Investment` returns `Investment Plan`
 * `fc Investment Healthcare` returns `Investment Plan` and `Healthcare Plan`
+
+Result for `find c/Investment`:
+![result for 'find c/Investment`](images/result_for_find_clienttypes.png)
+
 
 ### Reminder Features
 ClientHub has a basic reminder list that keeps track of a users commitments to
@@ -310,46 +291,26 @@ A **valid** `NAME` for add should:
 * Be a valid name that exists in the list of clients.
 * For eg. Typing `radd John Doe` when there is no client with the name `John Doe` will throw an error.
 * Be a prefix match of the client name.
-  * Typing `radd John Doe` will **add a reminder** for `John Doe` if there is `John Doe` and `John Doey` in the contact list.
-  * Typing `radd John Doe` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
+  * `n/John Doe` will **add a reminder** for `John Doe` if there is `John Doe` and `John Doey` in the contact list.
+  * `n/John Doe` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
   * to add a reminder for `John Doe`, type `radd John Doe/`
 
 A **valid** `DATETIME` for add should:
-
 * Not be empty.
 * Be a valid date and time in the format `yyyy-MM-dd HH:mm`.
-* For eg. Typing `radd John Doe dt/2022-10-10 12:00 d/lunch` will add a reminder for `John Doe` for `lunch` at `2022-10-10 12:00`.
+* For eg. Typing `radd n/John Doe dt/2022-10-10 12:00 d/lunch` will add a reminder for `John Doe` for `lunch` at `2022-10-10 12:00`.
 
 A **valid** `REMINDER_DESCRIPTION` for add should:
-
 * Not be empty.
 * Be limited to 300 characters
-* For eg. Typing `radd John Doe dt/2022-10-10 12:00 d/` will throw an error.
-* For eg. Typing `radd John Doe dt/2022-10-10 12:00 d/Meeting with John at 12pm` will add a reminder for `John Doe` for `Meeting with John at 12pm` at `2022-10-10 12:00`.
+* For eg. Typing `radd n/John Doe dt/2022-10-10 12:00 d/` will throw an error.
+* For eg. Typing `radd n/John Doe dt/2022-10-10 12:00 d/Meeting with John at 12pm` will add a reminder for `John Doe` for `Meeting with John at 12pm` at `2022-10-10 12:00`.
+
+Result for `radd n/John Doe dt/2022-10-10 12:00 d/lunch`:
+![result for 'radd`](images/result_for_add_reminder.png)
 
 
-#### Deleting Reminder: `rdelete`
-
-Deletes a reminder from the reminder list.
-
-Format:
-`rdelete INDEX` or
-`rd INDEX`
-
-* Deletes the person with specified INDEX. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
-
-A **valid** `INDEX` for delete should:
-* Not be empty.
-* For eg. Just typing `delete` without providing any `INDEX` will throw an error.
-* Be a valid index that exists in the list of contacts.
-* For eg. Typing `rdelete 1` when there is no contact at index 1 will throw an error
-
-Examples:
-* `rdelete 1` deletes the person at index 1 of the list
-* `rd 2` will delete the person at index 2 of the list
-
-
-#### Editing Reminder: `redit`
+#### Editing a Reminder: `redit`
 
 Edits an existing reminder in the reminder list.
 
@@ -371,15 +332,42 @@ A **valid** `DATETIME`/`REMINDER_DESCRIPTION` for edit should:
 * Existing values will be updated to the input values.
 
 Examples:
-* `redit 1 dt/2022-10-10 12:00 d/Meeting with John` Edits the date and time and description of the 1st reminder to be `2022-10-10 12:00` and `Meeting with John` respectively.
+* `redit 1 dt/2022-10-10 12:00 d/Meeting for lunch` Edits the date and time and description of the 1st reminder to be `2022-10-10 12:00` and `Meeting for lunch` respectively.
 * `re 2 dt/2022-10-10 12:00` Edits the date and time of the 2nd reminder to be `2022-10-10 12:00`
+
+Result for `redit 1 dt/2022-10-10 12:00 d/Meeting for lunch`:
+![result for 'redit`](images/result_for_edit_reminder.png)
+
+
+#### Deleting a Reminder: `rdelete`
+
+Deletes a reminder from the reminder list.
+
+Format:
+`rdelete INDEX` or
+`rd INDEX`
+
+* Deletes the person with specified INDEX. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
+
+A **valid** `INDEX` for delete should:
+* Not be empty.
+* For eg. Just typing `delete` without providing any `INDEX` will throw an error.
+* Be a valid index that exists in the list of contacts.
+* For eg. Typing `rdelete 1` when there is no contact at index 1 will throw an error
+
+Examples:
+* `rdelete 1` deletes the person at index 1 of the list
+* `rd 2` will delete the person at index 2 of the list
+
+Result for `rdelete 1`:
+![result for 'rdelete`](images/result_for_delete_reminder.png)
 
 
 ### Viewing a client: `view`
 
 Creates a popup view of the specified client from ClientHub.
 
-Format: `view CLIENT_NAME` or `v CLIENT_NAME` or `view CLIENT_NAME/`
+Format: `view NAME` or `v NAME` or `view NAME/`
 * The command is case-insensitive. eg. `alice` will match `Alice`
 * The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
 * If duplicates are found, `view` will throw an error telling user to specify the name further.
@@ -387,12 +375,12 @@ Format: `view CLIENT_NAME` or `v CLIENT_NAME` or `view CLIENT_NAME/`
 * / is used to indicate **specific** name to view
     * If there are two contacts named `David Li` and `David Lim`, typing `view David Li/` will show the contact with the name `David Li`.
     * For contacts with names that are already unique, like `David Lim`, the `/` is not required.
-    * The `CLIENT_NAME` before the `/` must match the contact's name **exactly**.
-    * The order of the `CLIENT_NAME` and `/` matters - `David Li/` is different from `Li/David`.
+    * The `NAME` before the `/` must match the contact's name **exactly**.
+    * The order of the `NAME` and `/` matters - `David Li/` is different from `Li/David`.
 
-A **valid** `CLIENT_NAME` for view should:
+A **valid** `NAME` for view should:
 * Not be empty.
-    * For eg. Just typing `view` without providing any `CLIENT_NAME` will throw an error.
+    * For eg. Just typing `view` without providing any `NAME` will throw an error.
 * Be a valid name that exists in the list of contacts.
     * For eg. Typing `view John Doe` when there is no contact with the name `John Doe` will throw an error.
 * Be a prefix match of the contact name.
@@ -404,36 +392,32 @@ Examples:
 * `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
 
 Result for `view jeremy`:
-![result for 'view jeremy`](images/ViewCommandExample.png)
+![result for 'view jeremy`](images/result_for_view.png)
 
 
 ### Sort by name : `sort`
-
-Sort the current list on ClientHub according to their name.
+Sort the current list of clients on Client Hub according to their `NAME`.
 
 Format: `sort`
 
-* Sorts the list according to their name
+* The list of clients is sorted alphabetically by their full names in ascending order, where no duplicate names are allowed.
 
 Examples:
 * `sort` sorts the list
-* `sort n` sorts the list
+
 
 ### Listing all persons : `list`
-
 Shows a list of all persons in the Client Hub.
 
 Format: `list`
 
 
 ### Clearing all entries : `clear`
-
 Clears all entries from ClientHub.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
-
 Exits the program.
 
 Format: `exit`
@@ -449,11 +433,12 @@ This feature enables efficient command recall, streamlining the process of repea
 
 ### Saving the data
 
-* ClientHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClientHub data is saved in the hard disk automatically after any command that changes
+the data. There is no need to save manually.
 
 ### Editing the data file
 
-* ClientHub data is saved automatically as a JSON file `[JAR file location]/data/clienthub.json`. Advanced users are welcome to update data directly by editing that data file.
+ClientHub data is saved automatically as a JSON file `[JAR file location]/data/clienthub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ClientHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
