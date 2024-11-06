@@ -37,6 +37,25 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns String array with first field that is the same as the given argument, 2nd is value of field.
+     * Only called after confirmed person in list
+     */
+    public String[] findSameField(Person toCheck) {
+        requireNonNull(toCheck);
+        for (Person person : internalList) {
+            if (person.isSamePhone(toCheck)) {
+                return new String[] {"phone", person.getPhone().value};
+            } else if (person.isSameEmail(toCheck)) {
+                return new String[] {"email", person.getEmail().value};
+            } else if (person.isSameTelegram(toCheck)) {
+                return new String[] {"telegram", person.getTelegramUsername().telegramUsername};
+            }
+        }
+        //should not reach here
+        return null;
+    }
+
+    /**
      * Returns the number of same persons as the given argument.
      */
     public int countSamePerson(Person toCheck) {

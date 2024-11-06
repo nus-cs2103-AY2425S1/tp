@@ -146,4 +146,7 @@ public interface Model {
     void clearExcludedPersons();
 
     void updateFilteredListWithExclusions(Predicate<Person> predicate);
+
+
+    String[] findSameField(Person person);
 }

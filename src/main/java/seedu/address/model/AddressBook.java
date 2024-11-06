@@ -76,6 +76,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns the fields that are the same as the given person.
+     */
+    public String[] findSameField(Person person) {
+        requireNonNull(person);
+        return persons.findSameField(person);
+    }
+
+    /**
      * Returns true if a person with the same phone number as {@code person} exists in the address book.
      */
     public boolean hasPhone(Person person) {

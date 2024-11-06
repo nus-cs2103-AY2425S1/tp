@@ -119,6 +119,7 @@ public class Person implements Comparable<Person> {
                 || otherPerson.getTelegramUsername().equals(getTelegramUsername());
     }
 
+
     /**
      * Returns true if both persons have the same phone number.
      */
@@ -141,6 +142,16 @@ public class Person implements Comparable<Person> {
         return otherPerson != null && otherPerson.getEmail().equals(getEmail());
     }
 
+    /**
+     * Returns true if both persons have the same telegram handle.
+     */
+    public boolean isSameTelegram(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null && otherPerson.getTelegramUsername().equals(getTelegramUsername());
+    }
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

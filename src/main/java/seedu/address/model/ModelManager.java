@@ -236,6 +236,7 @@ public class ModelManager implements Model {
     @Override
     public void excludePerson(Person person) throws PersonNotFoundException {
         if (!addressBook.hasPerson(person)) {
+
             throw new PersonNotFoundException();
         }
         excludedPersons.add(person);
@@ -257,6 +258,12 @@ public class ModelManager implements Model {
             lastPredicate = lastPredicate.or(predicate);
         }
         updateFilteredPersonList(excludeRemovedPersons.and(lastPredicate));
+    }
+
+    @Override
+    public String[] findSameField(Person person) {
+        requireNonNull(person);
+        return addressBook.findSameField(person);
     }
 
 }
