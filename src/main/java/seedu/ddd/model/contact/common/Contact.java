@@ -111,7 +111,7 @@ public abstract class Contact implements Displayable {
     }
 
     /**
-     * Returns true if both persons have the same name and phone number.
+     * Returns true if both persons have the same name or phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameContact(Contact otherContact) {
