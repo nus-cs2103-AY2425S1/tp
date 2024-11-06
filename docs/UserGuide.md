@@ -378,16 +378,25 @@ If your changes to the data file makes its format invalid, PROperty will discard
 Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PROperty home folder.
+**A**: To transfer your data to another computer, follow these steps:
+
+1. **Install PROperty**: Place the `PROperty.jar` file in your preferred location on the new computer.
+2. **Set Up the Data Folder**: If you have already run the application, skip to step 3. Otherwise, manually create a `data` folder in the same directory as `PROperty.jar`.
+3. **Transfer Your Data**: If the application has been run previously, simply replace the existing `property.json` file in the `data` folder with your data-containing `property.json` file from the original computer. Otherwise, add your `property.json` file directly into the `data` folder you just created.
+4. **Launch PROperty**: Run the app to load your transferred data, giving you access to all your previous contacts and property listings.
+
+
+**Q**: Can I customise the tags or categories for contacts and properties?<br>
+**A**: Customising tags is not currently supported. Users can only use the predefined tags listed in the table provided in this guide.
+
+**Q**: Is there a way to restore a deleted contact?<br>
+**A**: Unfortunately, it is not possible to restore a deleted contact. We strongly recommend that users regularly save a backup of their contacts to prevent accidental data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 
