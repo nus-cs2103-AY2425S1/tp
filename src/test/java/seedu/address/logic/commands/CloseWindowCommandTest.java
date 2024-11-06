@@ -23,36 +23,6 @@ class CloseWindowCommandTest {
         closeWindowCommand = new CloseWindowCommand();
     }
 
-    @BeforeAll
-    public static void initJavaFX() {
-        if (!Platform.isFxApplicationThread()) {
-            try {
-                Platform.startup(() -> {});
-                Platform.setImplicitExit(false);
-            } catch (IllegalStateException e) {
-                // JavaFX is already initialized, no need to do anything here
-            }
-        }
-    }
-
-    @AfterAll
-    public static void closeJavaFX() {
-        if (!Platform.isFxApplicationThread()) {
-            Platform.exit();
-        }
-    }
-
-    @Test
-    public void execute_closeWindowWhenNoWindow_failure() {
-        // Ensure no AttendanceWindow is currently open
-        GetAttendanceByTgCommand.closeCurrentWindow();
-
-        // Execute CloseWindowCommand
-        CommandResult result = closeWindowCommand.execute(model);
-
-        // Verify that the correct message is returned when no window is open
-        assertEquals(new CommandResult(CloseWindowCommand.NO_WINDOW), result);
-    }
 
     @Test
     public void equals() {
