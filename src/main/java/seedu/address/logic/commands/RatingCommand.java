@@ -56,7 +56,8 @@ public class RatingCommand extends Command {
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
         Restaurant editedRestaurant = new Restaurant(restaurantToEdit.getName(),
                 restaurantToEdit.getPhone(), restaurantToEdit.getEmail(),
-                restaurantToEdit.getAddress(), rating, restaurantToEdit.getTags(), restaurantToEdit.isFavourite());
+                restaurantToEdit.getAddress(), rating, restaurantToEdit.getTags(),
+                restaurantToEdit.getPrice(), restaurantToEdit.isFavourite());
 
         this.name = restaurantToEdit.getName();
         model.setRestaurant(restaurantToEdit, editedRestaurant);

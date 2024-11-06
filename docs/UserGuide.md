@@ -74,16 +74,20 @@ Format: `help`
 
 Adds a restaurant to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/RATING] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The rating is an integer value between 0 to 10. Rating can be empty.
 A restaurant can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The price is a string value that can be one of the following: `$`, `$$`, `$$$`, `$$$$`.
+</div>
+
 Examples:
-* `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01`
-* `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal`
+* `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01 pr/$`
+* `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal pr/$$`
 
 ### Listing all restaurants : `list`
 
@@ -95,7 +99,7 @@ Format: `list`
 
 Edits an existing restaurant in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATING] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`
 
 * Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -242,10 +246,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -276,3 +276,4 @@ Action | Format, Examples
 **Tag** | `tags KEYWORD [MORE_KEYWORDS]`<br> e.g., `tags Chinese`
 **List** | `list`
 **Help** | `help`
+**Price** | `price PRICE_LABEL [MORE_PRICE_LABELS]`<br> e.g., `price $ $$`

@@ -52,9 +52,9 @@ public class FindPriceCommandTest {
     @Test
     public void toStringMethod() {
         PriceContainsKeywordsPredicate predicate = new PriceContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindPriceCommand FindPriceCommand = new FindPriceCommand(predicate);
+        FindPriceCommand findPriceCommand = new FindPriceCommand(predicate);
         String expected = FindPriceCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, FindPriceCommand.toString());
+        assertEquals(expected, findPriceCommand.toString());
     }
 
     /**
