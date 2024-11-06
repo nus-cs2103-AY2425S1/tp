@@ -65,6 +65,7 @@ public class StatisticsCommand extends Command {
 
         int totalApplicantsInSystem = 0;
         // Convert the jobStatisticsMap entries into a list
+        // The sorting algorithm below was written with the aid of ChatGPT.
         List<Map.Entry<JobCode, JobCodeStatistics>> sortedEntries = new ArrayList<>(jobStatisticsMap.entrySet());
         sortedEntries.sort((entry1, entry2) -> {
             int result = entry1.getKey().value.toLowerCase().compareTo(entry2.getKey().value.toLowerCase());
@@ -125,6 +126,7 @@ public class StatisticsCommand extends Command {
         stringToInsert.append("Percentages of applicant(s) in each interview stage:\n");
 
         // Correct order of tags
+        // The code from this line onwards was written with the aid of ChatGPT
         String[] tagOrder = {"N", "TP", "TC", "BP", "BC", "A", "R"};
 
         // Iterate over the tag order and append the % of each tag
