@@ -11,14 +11,14 @@ import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name or job contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Filters all persons whose names or jobs contain any of the specified "
-            + "keywords (case-insensitive)";
+            + "keywords (case-insensitive).";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "

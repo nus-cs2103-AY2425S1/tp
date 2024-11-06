@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddWeddingCommand;
+import seedu.address.logic.commands.ClearWeddingBookCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteNCommand;
 import seedu.address.logic.commands.DeleteWeddingCommand;
@@ -228,7 +229,8 @@ public class MainWindow extends UiPart<Stage> {
         String firstWord = commandText.split("\\s+")[0];
         return firstWord.equals(ListWeddingCommand.COMMAND_WORD)
                 || firstWord.equals(AddWeddingCommand.COMMAND_WORD)
-                || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD);
+                || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(ClearWeddingBookCommand.COMMAND_WORD);
     }
 
     /**
