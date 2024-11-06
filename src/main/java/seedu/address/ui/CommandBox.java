@@ -31,6 +31,19 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
+    void handleCommand(String commandText, boolean shouldResetCommandBox) {
+        try {
+            commandExecutor.execute(commandText);
+
+            if (shouldResetCommandBox) {
+                commandTextField.setText("");
+            }
+
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -41,12 +54,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        try {
-            commandExecutor.execute(commandText);
-            commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
-        }
+        handleCommand(commandText, true);
     }
 
     /**
@@ -89,5 +97,9 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.requestFocus();
     }
 
+
+    TextField getCommandTextField() {
+        return this.commandTextField;
+    }
 
 }

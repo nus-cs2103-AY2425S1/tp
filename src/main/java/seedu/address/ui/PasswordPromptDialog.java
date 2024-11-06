@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.security.PasswordManager;
 
+
 /**
  * The PasswordPromptDialog class provides a modal dialog for users to enter
  * or set their password. It interacts with the PasswordManager to handle
@@ -25,7 +26,7 @@ public class PasswordPromptDialog {
      */
     public static boolean display(Stage owner) {
         // Read the existing password, if any
-        String existingPassword = PasswordManager.readPassword();
+        String existingPassword = PasswordManager.readPassword(null);
 
         try {
             FXMLLoader loader = new FXMLLoader(PasswordPromptDialog.class.getResource(
@@ -47,7 +48,7 @@ public class PasswordPromptDialog {
             dialog.showAndWait();
             // Return true if the password is correct or if the user set a new password
             return existingPassword == null
-                    || PasswordManager.isPasswordCorrect(controller.getPasswordField().getText());
+                    || PasswordManager.isPasswordCorrect(controller.getPasswordField().getText(), null);
         } catch (IOException e) {
             e.printStackTrace();
             return false;

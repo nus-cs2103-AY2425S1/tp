@@ -1,11 +1,16 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.KeyBindController.handleKeyEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.security.PasswordManager;
+
 
 /**
  * Controller class for the PasswordPromptDialog.
@@ -36,16 +41,6 @@ public class PasswordPromptDialogController {
         }
     }
 
-    /**
-     * Allows the user to press "Enter" to confirm the password.
-     * If the password is correct, the dialog will close.
-     * If the password is incorrect, an alert will be shown.
-     */
-    @FXML
-    private void initialize() {
-        // Set the action for pressing "Enter" while focused on the password field
-        passwordField.setOnAction(event -> handleConfirm());
-    }
 
     /**
      * Handles the confirm button press.
@@ -54,9 +49,9 @@ public class PasswordPromptDialogController {
     private void handleConfirm() {
         String inputPassword = passwordField.getText();
         if (existingPassword == null) {
-            PasswordManager.savePassword(inputPassword);
+            PasswordManager.savePassword(inputPassword, null);
             dialog.close();
-        } else if (PasswordManager.isPasswordCorrect(inputPassword)) {
+        } else if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
             dialog.close();
         } else {
             showAlert("Incorrect Password!", "Please try again.");
@@ -66,6 +61,13 @@ public class PasswordPromptDialogController {
     @FXML
     private void handleCancel() {
         dialog.close();
+    }
+
+    @FXML
+    private void handleKeyPress(KeyEvent event) {
+        KeyBind confirmPasswordKeyBind = new KeyBind(KeyCode.ENTER, ()
+                -> handleConfirm());
+        handleKeyEvent(event, confirmPasswordKeyBind);
     }
 
     private void showAlert(String title, String message) {
@@ -83,4 +85,5 @@ public class PasswordPromptDialogController {
     public PasswordField getPasswordField() {
         return passwordField;
     }
+
 }
