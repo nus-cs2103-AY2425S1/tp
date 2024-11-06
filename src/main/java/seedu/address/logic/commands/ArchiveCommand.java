@@ -14,7 +14,7 @@ public class ArchiveCommand extends Command {
 
     public static final String COMMAND_WORD = "archive";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archives the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archives the address book.\n\n"
             + "Example: " + COMMAND_WORD + " " + "1st Quarter 2021";
     public static final String MESSAGE_SUCCESS = "Address book has been archived successfully!";
     public static final String MESSAGE_FAILURE = "Address book failed to be archived. Please try again later.";

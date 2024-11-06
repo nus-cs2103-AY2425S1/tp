@@ -20,8 +20,8 @@ import seedu.address.storage.JsonAddressBookStorage;
  */
 public class LoadArchiveCommand extends Command {
     public static final String COMMAND_WORD = "loadarchive";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads an archive file.\n"
-            + "Parameters: FILENAME\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads an archive file.\n\n"
+            + "Parameters: FILENAME\n\n"
             + "Example: " + COMMAND_WORD + " addressbook-2024-11-06T20-29-05.7609475-example.json";
 
     public static final String MESSAGE_SUCCESS = "Loaded archive file: %1$s";

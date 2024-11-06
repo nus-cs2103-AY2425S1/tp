@@ -56,7 +56,7 @@
             <Insets bottom="10" /> <!-- Adds padding below the label -->
           </VBox.margin>
         </Label>
-        <StackPane fx:id="emergencyContactListPanelPlaceholder" maxHeight="180" VBox.vgrow="ALWAYS"/>
+        <StackPane fx:id="emergencyContactListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
       </VBox>
     </VBox>
   </GridPane>

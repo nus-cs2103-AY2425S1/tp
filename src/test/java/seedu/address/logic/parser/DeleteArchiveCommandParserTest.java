@@ -21,12 +21,12 @@ public class DeleteArchiveCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                Filename.MESSAGE_CONSTRAINTS + "\n" + DeleteArchiveCommand.MESSAGE_USAGE));
+                Filename.MESSAGE_CONSTRAINTS + "\n\n" + DeleteArchiveCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_blankArgs_throwsParseException() {
         assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                Filename.MESSAGE_CONSTRAINTS_BLANK + "\n" + DeleteArchiveCommand.MESSAGE_USAGE));
+                Filename.MESSAGE_CONSTRAINTS_BLANK + "\n\n" + DeleteArchiveCommand.MESSAGE_USAGE));
     }
 }

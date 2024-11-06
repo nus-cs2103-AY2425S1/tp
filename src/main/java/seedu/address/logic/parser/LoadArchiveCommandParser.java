@@ -23,7 +23,7 @@ public class LoadArchiveCommandParser implements Parser<LoadArchiveCommand> {
             filename = ParserUtil.parseFilename(args);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    pe.getMessage() + "\n" + LoadArchiveCommand.MESSAGE_USAGE), pe);
+                    pe.getMessage() + "\n\n" + LoadArchiveCommand.MESSAGE_USAGE), pe);
         }
         return new LoadArchiveCommand(filename);
     }

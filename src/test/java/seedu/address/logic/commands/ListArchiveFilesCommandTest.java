@@ -16,8 +16,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class ListArchiveFilesCommandTest {
-    private Path archiveDir;
     private final Model model = new ModelManager();
+    private Path archiveDir;
 
     @BeforeEach
     public void setUp() throws IOException {
