@@ -23,7 +23,7 @@ import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.testutil.Assert;
 
 public class AddCommandTest {
@@ -38,7 +38,7 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommonModel.initialise(modelStub, null);
+        CommonModelManager.initialise(modelStub, null);
         CommandResult commandResult = new AddCommand(validPerson).execute();
 
         assertEquals(
@@ -54,7 +54,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        CommonModel.initialise(modelStub, null);
+        CommonModelManager.initialise(modelStub, null);
         Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, addCommand::execute);
     }
 

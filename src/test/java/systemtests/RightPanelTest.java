@@ -20,7 +20,7 @@ import org.mockito.MockedStatic;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.ui.CommandBox;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
@@ -33,21 +33,21 @@ import spleetwaise.transaction.ui.RightPanel;
 public class RightPanelTest {
 
     private RightPanel rightPanel;
-    private CommonModel mockCommonModel;
+    private CommonModelManager mockCommonModel;
     private CommandBox mockCommandBox;
     private ObservableList<Transaction> mockTransactionList;
     private ReadOnlyTransactionBook mockReadOnlyTransactionBook;
-    private MockedStatic<CommonModel> mockedCommonModelStatic;
+    private MockedStatic<CommonModelManager> mockedCommonModelStatic;
 
     @BeforeEach
     public void setUp() {
         mockCommandBox = mock(CommandBox.class);
         mockTransactionList = TypicalTransactions.getTypicalTransactionBook().getTransactionList();
 
-        mockedCommonModelStatic = mockStatic(CommonModel.class);
-        mockCommonModel = mock(CommonModel.class);
+        mockedCommonModelStatic = mockStatic(CommonModelManager.class);
+        mockCommonModel = mock(CommonModelManager.class);
 
-        mockedCommonModelStatic.when(CommonModel::getInstance).thenReturn(mockCommonModel);
+        mockedCommonModelStatic.when(CommonModelManager::getInstance).thenReturn(mockCommonModel);
         when(mockCommonModel.getFilteredTransactionList()).thenReturn(mockTransactionList);
         mockReadOnlyTransactionBook = mock(ReadOnlyTransactionBook.class);
         when(mockCommonModel.getTransactionBook()).thenReturn(mockReadOnlyTransactionBook);

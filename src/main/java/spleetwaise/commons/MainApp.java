@@ -24,7 +24,7 @@ import spleetwaise.commons.core.Version;
 import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.logic.Logic;
 import spleetwaise.commons.logic.LogicManager;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.commons.storage.JsonUserPrefsStorage;
 import spleetwaise.commons.storage.Storage;
@@ -81,7 +81,7 @@ public class MainApp extends Application {
         transactionBookModel = initTransactionModelManager(storage, addressBookModel);
 
         // Initialise Common Model
-        CommonModel.initialise(addressBookModel, transactionBookModel, userPrefs);
+        CommonModelManager.initialise(addressBookModel, transactionBookModel, userPrefs);
 
         logic = new LogicManager(storage);
 
@@ -221,7 +221,7 @@ public class MainApp extends Application {
         if (!isStopped) {
             logger.info("Cleaning up resources...");
             try {
-                storage.saveUserPrefs(CommonModel.getInstance().getUserPrefs());
+                storage.saveUserPrefs(CommonModelManager.getInstance().getUserPrefs());
                 storage.saveAddressBook(addressBookModel.getAddressBook());
                 storage.saveTransactionBook(transactionBookModel.getTransactionBook());
                 logger.info("Resources saved...");

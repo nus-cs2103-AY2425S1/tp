@@ -9,10 +9,10 @@ Class "<<interface>>\nAddressBookModel" as AbModel
 Class "<<interface>>\nTransactionBookModel" as TbModel
 Class "AddressBookModelManager" as AbModelManager
 Class "TransactionBookModelManager" as TbModelManager
-Class "<<interface>>\nModel" as Model
+Class "<<interface>>\nCommonModel" as Model
 Class "<<interface>>\nReadOnlyUserPrefs" as IUserPrefs
 Class "UserPrefs" as UserPrefs
-Class "<<facade>>\n<<singleton>>\nCommonModel" as CommonModel
+Class "<<facade>>\n<<singleton>>\nCommonModelManager" as CommonModel
 
 
 Class I #FFFFFF

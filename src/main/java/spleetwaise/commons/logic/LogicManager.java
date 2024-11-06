@@ -19,8 +19,9 @@ import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.storage.Storage;
-import spleetwaise.transaction.logic.parser.TransactionParser;
+import spleetwaise.transaction.logic.parser.TransactionBookParser;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -36,7 +37,7 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final TransactionParser transactionParser;
+    private final TransactionBookParser transactionParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -44,7 +45,7 @@ public class LogicManager implements Logic {
     public LogicManager(Storage storage) {
         this.storage = storage;
         this.addressBookParser = new AddressBookParser();
-        this.transactionParser = new TransactionParser();
+        this.transactionParser = new TransactionBookParser();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class LogicManager implements Logic {
 
         // Update storage
         try {
-            CommonModel model = CommonModel.getInstance();
+            CommonModel model = CommonModelManager.getInstance();
             storage.saveTransactionBook(model.getTransactionBook());
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
@@ -80,31 +81,31 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return CommonModel.getInstance().getAddressBook();
+        return CommonModelManager.getInstance().getAddressBook();
     }
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return CommonModel.getInstance().getFilteredPersonList();
+        return CommonModelManager.getInstance().getFilteredPersonList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
-        return CommonModel.getInstance().getAddressBookFilePath();
+        return CommonModelManager.getInstance().getAddressBookFilePath();
     }
 
     @Override
     public GuiSettings getGuiSettings() {
-        return CommonModel.getInstance().getGuiSettings();
+        return CommonModelManager.getInstance().getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
-        CommonModel.getInstance().setGuiSettings(guiSettings);
+        CommonModelManager.getInstance().setGuiSettings(guiSettings);
     }
 
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
-        return CommonModel.getInstance().getFilteredTransactionList();
+        return CommonModelManager.getInstance().getFilteredTransactionList();
     }
 }

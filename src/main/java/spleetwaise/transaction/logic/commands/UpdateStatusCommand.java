@@ -9,7 +9,7 @@ import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -44,7 +44,7 @@ public abstract class UpdateStatusCommand extends Command {
                 new Object[]{ this.getClass().getSimpleName(), targetIndex.getZeroBased() }
         );
 
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         List<Transaction> lastShownList = model.getFilteredTransactionList();
 

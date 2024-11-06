@@ -17,15 +17,15 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.IdUtil;
 
 public class CommandUtilTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize CommonModel with a typical address book for consistent test data
-        CommonModel.initialise(new AddressBookModelManager(getTypicalAddressBook()), null);
+        // Initialize CommonModelManager with a typical address book for consistent test data
+        CommonModelManager.initialise(new AddressBookModelManager(getTypicalAddressBook()), null);
         IdUtil.setDeterminate(true); // Ensures determinism in tests
     }
 
@@ -37,7 +37,7 @@ public class CommandUtilTest {
 
     @Test
     void getPersonAtIndex_validIndex_returnsPerson() throws CommandException {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         // Retrieve the expected person using the first typical index
         Person expectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -52,7 +52,7 @@ public class CommandUtilTest {
 
     @Test
     void getPersonAtIndex_secondValidIndex_returnsCorrectPerson() throws CommandException {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         // Retrieve the expected person using the second typical index
         Person expectedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
@@ -67,7 +67,7 @@ public class CommandUtilTest {
 
     @Test
     void getPersonAtIndex_outOfBoundsIndex_throwsCommandException() {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         // Create an index that is out of bounds
         Index outOfBoundsIndex = Index.fromZeroBased(model.getFilteredPersonList().size());
@@ -83,9 +83,9 @@ public class CommandUtilTest {
 
     @Test
     void getPersonAtIndex_emptyList_throwsCommandException() {
-        // Reinitialize CommonModel with an empty address book
-        CommonModel.initialise(new AddressBookModelManager(new AddressBook()), null);
-        CommonModel model = CommonModel.getInstance();
+        // Reinitialize CommonModelManager with an empty address book
+        CommonModelManager.initialise(new AddressBookModelManager(new AddressBook()), null);
+        CommonModelManager model = CommonModelManager.getInstance();
 
         // Assert that CommandUtil throws a CommandException for an empty list
         CommandException exception = assertThrows(CommandException.class, () ->

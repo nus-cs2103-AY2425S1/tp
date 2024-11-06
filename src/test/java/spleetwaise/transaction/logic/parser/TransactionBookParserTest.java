@@ -12,7 +12,7 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.logic.commands.ClearCommand;
 import spleetwaise.transaction.logic.commands.EditCommand;
@@ -22,25 +22,25 @@ import spleetwaise.transaction.testutil.TransactionUtil;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 
-public class TransactionParserTest {
+public class TransactionBookParserTest {
 
     private final TransactionBookModel tbModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook());
     private final AddressBookModel abModel = new AddressBookModelManager(
             TypicalPersons.getTypicalAddressBook());
-    private final TransactionParser parser = new TransactionParser();
+    private final TransactionBookParser parser = new TransactionBookParser();
 
 
     @BeforeEach
     void setUp() {
-        CommonModel.initialise(abModel, tbModel);
+        CommonModelManager.initialise(abModel, tbModel);
     }
 
     @Test
     public void parseCommand_add() throws Exception {
         AddressBookModelManager aBModel = new AddressBookModelManager();
         aBModel.addPerson(TypicalPersons.ALICE);
-        CommonModel.initialise(aBModel, null);
+        CommonModelManager.initialise(aBModel, null);
         AddCommand command = (AddCommand) parser.parseCommand(TransactionUtil.getAddCommand());
         assertNotNull(command);
     }

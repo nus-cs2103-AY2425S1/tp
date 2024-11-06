@@ -10,7 +10,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -60,7 +60,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResult execute() throws CommandException {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         if (model.hasTransaction(transaction)) {
             throw new CommandException(MESSAGE_DUPLICATE_TXN);

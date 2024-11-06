@@ -18,7 +18,7 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.BaseParserUtil;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.testutil.Assert;
 import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -171,7 +171,7 @@ public class ParserUtilTest {
     @Test
     public void getPersonFromPhone_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
 
         Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonFromPhone(TEST_PHONE));
     }
@@ -179,7 +179,7 @@ public class ParserUtilTest {
     @Test
     public void getPersonFromPhone_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
         abModel.addPerson(TypicalPersons.ALICE);
 
         Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromPhone(TEST_PHONE));
@@ -195,7 +195,7 @@ public class ParserUtilTest {
     @Test
     public void getPersonByFilteredPersonListIndex_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
 
         Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
     }
@@ -203,7 +203,7 @@ public class ParserUtilTest {
     @Test
     public void getPersonByFilteredPersonListIndex_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
         abModel.addPerson(TypicalPersons.ALICE);
 
         Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
@@ -214,11 +214,11 @@ public class ParserUtilTest {
     public void getPersonByFilteredPersonListIndexAfterFilter_personNotFound_exceptionThrown() {
         AddressBookModel abModel = new AddressBookModelManager();
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
 
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("none"));
 
-        CommonModel.getInstance().updateFilteredPersonList(predicate);
+        CommonModelManager.getInstance().updateFilteredPersonList(predicate);
 
         Assert.assertThrows(ParseException.class, () -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
     }
@@ -227,11 +227,11 @@ public class ParserUtilTest {
     public void getPersonByFilteredPersonListIndexAfterFilter_personFound_success() {
         AddressBookModel abModel = new AddressBookModelManager();
         abModel.setAddressBook(TypicalPersons.getTypicalAddressBook());
-        CommonModel.initialise(abModel, null);
+        CommonModelManager.initialise(abModel, null);
 
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Elle"));
 
-        CommonModel.getInstance().updateFilteredPersonList(predicate);
+        CommonModelManager.getInstance().updateFilteredPersonList(predicate);
 
         Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonByFilteredPersonListIndex(TEST_INDEX));
         assertEquals(TypicalPersons.ELLE, testPerson);

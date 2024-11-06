@@ -27,18 +27,18 @@ The  `AddressBookModel` component:
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
-#### `Model`
+#### `CommonModel`
 
-**API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/model/Model.java)
+**API** : [`CommonModel.java`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/model/CommonModel.java)
 
 <img src="images/CommonModelClassDiagram.png" width="450" />
 
-The common `Model` component:
+The `CommonModel` component:
 
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 
-#### `CommonModel`
+#### `CommonModelManager`
 
-Singleton class that extends `Model`. The singleton instance of this class contains an instance of both `AddressBookModel` and `TransactionBookModel`. The singleton instance acts as a facade, exposing the APIs of both `AddressBookModel` and `TransactionBookModel`.
+Singleton `CommonModel` class. The singleton instance of this class contains an instance of both `AddressBookModel` and `TransactionBookModel`. The singleton instance acts as a facade, exposing the APIs of both `AddressBookModel` and `TransactionBookModel`.
 
-Certain transaction-related features need access to data from both the address and transaction book from different areas of the codebase. For this reason, we decided to go with the `CommonModel` class design described above.
+Certain transaction-related features need access to data from both the address and transaction book from different areas of the codebase. For this reason, we decided to go with the `CommonModelManager` class design described above.

@@ -24,7 +24,7 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.ui.CommandBox;
 import spleetwaise.commons.ui.UiPart;
 import spleetwaise.transaction.logic.commands.FilterCommand;
@@ -64,7 +64,7 @@ public class RightPanel extends UiPart<Region> {
         super(FXML);
 
         commandBox = cb;
-        CommonModel commonModel = CommonModel.getInstance();
+        CommonModelManager commonModel = CommonModelManager.getInstance();
 
         ObservableList<Transaction> txns = commonModel.getFilteredTransactionList();
         // Add listener to automatically update balances when the list changes
@@ -89,7 +89,7 @@ public class RightPanel extends UiPart<Region> {
      * Updates the balance labels based on the current transactions.
      */
     public void updateBalances() {
-        ObservableList<Transaction> txns = CommonModel.getInstance().getFilteredTransactionList();
+        ObservableList<Transaction> txns = CommonModelManager.getInstance().getFilteredTransactionList();
         youOwnLabel.setText(
                 "You Owe $" + calculateBalance(txns, new AmountSignFilterPredicate(NEGATIVE_SIGN)).toString());
         ownYouLabel.setText(
@@ -167,14 +167,16 @@ public class RightPanel extends UiPart<Region> {
     private void filterTransactionsByAmount() {
         // toggle between positive or negative amounts only
         resetFilter();
-        CommonModel.getInstance().updateFilteredTransactionList(new AmountSignFilterPredicate(amountSignForFilter));
+        CommonModelManager.getInstance()
+                .updateFilteredTransactionList(new AmountSignFilterPredicate(amountSignForFilter));
         amountSignForFilter = amountSignForFilter.equals(POSITIVE_SIGN) ? NEGATIVE_SIGN : POSITIVE_SIGN;
     }
 
     private void filterTransactionsByDoneStatus() {
         // toggle between undone or done transactions only
         resetFilter();
-        CommonModel.getInstance().updateFilteredTransactionList(new StatusFilterPredicate(new Status(statusForFilter)));
+        CommonModelManager.getInstance()
+                .updateFilteredTransactionList(new StatusFilterPredicate(new Status(statusForFilter)));
         statusForFilter = statusForFilter.equals(DONE_STATUS) ? NOT_DONE_STATUS : DONE_STATUS;
     }
 
@@ -182,6 +184,6 @@ public class RightPanel extends UiPart<Region> {
      * Resets the filter to show all transactions. public for testability.
      */
     public void resetFilter() {
-        CommonModel.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
+        CommonModelManager.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
     }
 }

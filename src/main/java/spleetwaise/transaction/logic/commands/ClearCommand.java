@@ -2,7 +2,7 @@ package spleetwaise.transaction.logic.commands;
 
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.model.TransactionBook;
 
 /**
@@ -15,7 +15,7 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
         model.setTransactionBook(new TransactionBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }

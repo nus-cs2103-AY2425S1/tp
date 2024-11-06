@@ -4,7 +4,7 @@ import static spleetwaise.transaction.model.TransactionBookModelManager.PREDICAT
 
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 
 /**
  * Lists all transactions in the transaction book to the user.
@@ -18,7 +18,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
         model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TXNS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

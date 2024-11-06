@@ -9,7 +9,7 @@ import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute() throws CommandException {
         logger.log(Level.INFO, "Executing DeleteCommand with index: {0}", targetIndex.getZeroBased());
 
-        CommonModel model = CommonModel.getInstance();
+        CommonModelManager model = CommonModelManager.getInstance();
 
         List<Transaction> lastShownList = model.getFilteredTransactionList();
 

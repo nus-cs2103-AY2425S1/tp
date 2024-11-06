@@ -14,7 +14,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.BaseParserUtil;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.model.filterpredicate.AmountSignFilterPredicate;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
@@ -119,7 +119,7 @@ public class ParserUtil extends BaseParserUtil {
      */
     public static Person getPersonFromPhone(Phone phone) throws ParseException {
         requireNonNull(phone);
-        Optional<Person> p = CommonModel.getInstance().getPersonByPhone(phone);
+        Optional<Person> p = CommonModelManager.getInstance().getPersonByPhone(phone);
         if (p.isEmpty()) {
             throw new ParseException(MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
         }
@@ -136,7 +136,7 @@ public class ParserUtil extends BaseParserUtil {
     public static Person getPersonByFilteredPersonListIndex(Index index)
             throws ParseException {
         requireNonNull(index);
-        List<Person> lastShownList = CommonModel.getInstance().getFilteredPersonList();
+        List<Person> lastShownList = CommonModelManager.getInstance().getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

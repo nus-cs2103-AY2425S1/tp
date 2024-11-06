@@ -19,7 +19,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
-import spleetwaise.commons.model.CommonModel;
+import spleetwaise.commons.model.CommonModelManager;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.logic.commands.EditCommand;
 import spleetwaise.transaction.model.TransactionBookModel;
@@ -44,7 +44,7 @@ public class EditCommandParserTest {
 
     @BeforeEach
     void setUp() {
-        CommonModel.initialise(abModel, tbModel);
+        CommonModelManager.initialise(abModel, tbModel);
     }
 
     @Test
