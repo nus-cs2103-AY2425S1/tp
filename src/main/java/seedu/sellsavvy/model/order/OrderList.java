@@ -37,8 +37,7 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Returns true if the list contains a different order with similar/identical name
-     * and identical quantity, date and status as the given argument.
+     * Returns if the order list contains an order with identical details and similar item.
      */
     public boolean containsSimilarOrder(Order toCheck) {
         requireNonNull(toCheck);

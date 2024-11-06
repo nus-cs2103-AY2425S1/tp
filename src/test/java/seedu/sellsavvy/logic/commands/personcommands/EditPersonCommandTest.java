@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.commons.util.StringUtil.normalise;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_SIMILAR_NAME_WARNING;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.DESC_AMY;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.DESC_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
@@ -118,7 +119,7 @@ public class EditPersonCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditPersonCommand editPersonCommand = new EditPersonCommand(indexLastCustomer, descriptor);
 
-        String expectedMessage = EditPersonCommand.MESSAGE_SIMILAR_NAME_WARNING
+        String expectedMessage = MESSAGE_SIMILAR_NAME_WARNING
                 + String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedCustomer));
 

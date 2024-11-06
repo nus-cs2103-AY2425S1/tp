@@ -88,7 +88,7 @@ public class AddOrderCommandTest {
         //ensures it is not equal to ABACUS
         assertNotEquals(toAdd, ABACUS);
 
-        model.getFilteredPersonList().get(0).getOrderList().add(toAdd.createCopy());
+        model.getFilteredPersonList().get(0).getOrderList().add(ABACUS);
 
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
@@ -100,6 +100,10 @@ public class AddOrderCommandTest {
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Ensures that when there is an {@code Order} with identical fields but different {@code Status} is present,
+     * no error or warning will be thrown because of it.
+     */
     @Test
     public void execute_duplicateCompletedOrder_success() {
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);

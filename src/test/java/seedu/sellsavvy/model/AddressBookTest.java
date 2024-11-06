@@ -84,7 +84,7 @@ public class AddressBookTest {
 
     @Test
     public void hasSimilarPerson_noSimilar_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasSimilarPerson(ALICE));
     }
 
     @Test

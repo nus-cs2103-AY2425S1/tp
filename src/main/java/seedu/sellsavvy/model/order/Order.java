@@ -68,9 +68,7 @@ public class Order {
     }
 
     /**
-     * Returns true if the order is similar to given order.
-     * Two order names are considered similar if they have similar/identical name
-     * and identical quantity, date and status as the given argument.
+     * Returns if the order has identical details and similar item.
      */
     public boolean isSimilarTo(Order otherOrder) {
         return this.item.isSimilarTo(otherOrder.item)

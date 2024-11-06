@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.commons.util.StringUtil.normalise;
-import static seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand.MESSAGE_SIMILAR_NAME_WARNING;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_SIMILAR_NAME_WARNING;
 import static seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand.MESSAGE_SIMILAR_TAGS_WARNING;
 import static seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand.MESSAGE_SUCCESS;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;

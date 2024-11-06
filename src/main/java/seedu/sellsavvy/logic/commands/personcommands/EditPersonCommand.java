@@ -1,6 +1,7 @@
 package seedu.sellsavvy.logic.commands.personcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_SIMILAR_NAME_WARNING;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_NAME;
@@ -58,9 +59,6 @@ public class EditPersonCommand extends Command {
     public static final String MESSAGE_SIMILAR_TAGS_WARNING = "Note: "
             + "This customer has 2 or more similar tags after editing tags, "
             + "verify if this is a mistake.\n";
-    public static final String MESSAGE_SIMILAR_NAME_WARNING = "Note: "
-            + "A person with similar name already exists in the address book, "
-            + "verify if this is a mistake.\n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -100,7 +98,7 @@ public class EditPersonCommand extends Command {
             model.updateSelectedPerson(editedPerson);
         }
 
-        String feedbackToUser = model.hasSimilarPerson(editedPerson)
+        String feedbackToUser = editPersonDescriptor.isNameEdited() && model.hasSimilarPerson(editedPerson)
                 ? MESSAGE_SIMILAR_NAME_WARNING
                 : "";
         feedbackToUser += editPersonDescriptor.isTagsEdited() && editedPerson.hasSimilarTags()
@@ -219,6 +217,10 @@ public class EditPersonCommand extends Command {
 
         public boolean isTagsEdited() {
             return tags != null;
+        }
+
+        public boolean isNameEdited() {
+            return name != null;
         }
 
         /**
