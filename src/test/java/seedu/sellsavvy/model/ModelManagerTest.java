@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
@@ -103,6 +105,32 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_onlyIdenticalPerson_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        assertFalse(modelManager.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(modelManager.hasSimilarPerson(editedAlice));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSimilarNameInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withName(ALICE.getName()
+                        .fullName.toUpperCase())
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(modelManager.hasSimilarPerson(editedAlice));
     }
 
     @Test

@@ -83,6 +83,37 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasSimilarPerson_noSimilar_returnsFalse() {
+        assertFalse(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_onlyIdenticalPerson_returnsFalse() {
+        addressBook.addPerson(ALICE);
+        assertFalse(addressBook.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasSimilarPerson(editedAlice));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSimilarNameInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withName(ALICE.getName()
+                        .fullName.toUpperCase())
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasSimilarPerson(editedAlice));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
