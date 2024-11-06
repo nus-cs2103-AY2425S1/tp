@@ -54,22 +54,22 @@ public class EditPersonCommand extends EditCommand {
 
 
     /**
-     * Creates an EditPersonCommand to add the specified {@code Person}
+     * Creates {@code EditPersonCommand} with the specified index and descriptor.
      */
     public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         super(index, editPersonDescriptor);
     }
 
     @Override
-    protected boolean hasEntity(Model model, Object entity) throws CommandException {
+    protected boolean hasEntity(Model model, Object entity) {
         return model.hasPerson((Person) entity);
     }
 
     @Override
-    protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
-            throws CommandException {
+    protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit) {
         Person entityToEditCasted = (Person) entityToEdit;
-        return !(entityToEditCasted.isSamePerson((Person) editedEntity));
+        Person editedEntityCasted = (Person) editedEntity;
+        return entityToEditCasted.isSamePerson(editedEntityCasted);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class EditPersonCommand extends EditCommand {
     }
 
     @Override
-    protected void editEntity(Model model, Object editedPerson, Object personToEdit) throws CommandException {
+    protected void editEntity(Model model, Object editedPerson, Object personToEdit) {
         model.setPerson((Person) personToEdit, (Person) editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -89,7 +89,7 @@ public class EditPersonCommand extends EditCommand {
      */
     @Override
     protected Object createEditedEntity(Model model, Object personToEdit,
-                                                 EditEntityDescriptor editPersonDescriptor) throws CommandException {
+                                                 EditEntityDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         EditPersonDescriptor editPersonDescriptorCasted = (EditPersonDescriptor) editPersonDescriptor;
         Person personToEditCasted = (Person) personToEdit;
