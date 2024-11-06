@@ -9,7 +9,10 @@ import java.util.HashSet;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
  * Adds a Task to the address book.
@@ -28,7 +31,7 @@ public class CreateTaskCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_TASK + "deadline Submit proposal /by 2024-10-31";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
     private final HashSet<Task> tasksToAdd;
@@ -52,15 +55,28 @@ public class CreateTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        StringBuilder sb = new StringBuilder();
         for (Task task : tasksToAdd) {
             if (model.hasTask(task)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);
             }
             model.addTask(task);
+
+            if (task instanceof Todo) {
+                sb.append("\nTodo: ").append(task.getDescription());
+            } else if (task instanceof Deadline deadline) {
+                // Cast to Deadline to access its specific methods
+                sb.append("\nDeadline: ").append(deadline.getDescription())
+                        .append(" by ").append(deadline.getBy());
+            } else if (task instanceof Event event) {
+                // Cast to Event to access its specific methods
+                sb.append("\nEvent: ").append(event.getDescription())
+                        .append(" from ").append(event.getFrom())
+                        .append(" to ").append(event.getTo());
+            }
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tasksToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sb));
     }
 
     @Override
