@@ -131,6 +131,33 @@ public class UniqueEventList implements Iterable<Event> {
         setEvent(event, replacement);
     }
 
+    /**
+     * Replaces the given person from all events.
+     */
+    public void replacePersonInEvents(Person personToEdit, Person editedPerson) {
+        requireAllNonNull(personToEdit, editedPerson);
+        internalList.forEach(e -> replacePersonInEvent(e, personToEdit, editedPerson));
+    }
+
+    /**
+     * Replaces the given person from the contacts of the given event.
+     */
+    public void replacePersonInEvent(Event event, Person personToEdit, Person editedPerson) {
+        requireAllNonNull(event, personToEdit, editedPerson);
+        if (event.getCelebrity().equals(personToEdit)) {
+            Event replacement = Event.createEvent(event.getName(), event.getTime(), event.getVenue().orElse(null),
+                    editedPerson, event.getContacts());
+            setEvent(event, replacement);
+        } else if (event.getContacts().contains(personToEdit)) {
+            Set<Person> newContacts = new HashSet<>(event.getContacts());
+            newContacts.remove(personToEdit);
+            newContacts.add(editedPerson);
+            Event replacement = Event.createEvent(event.getName(), event.getTime(), event.getVenue().orElse(null),
+                    event.getCelebrity(), newContacts);
+            setEvent(event, replacement);
+        }
+    }
+
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

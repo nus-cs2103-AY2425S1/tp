@@ -94,6 +94,7 @@ public class EditPersonCommand extends EditCommand {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        model.replacePersonInEvents(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
                             false , false, CommandTabChange.PERSON, CommandDetailChange.NONE);
     }
