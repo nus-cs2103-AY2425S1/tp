@@ -31,8 +31,8 @@ public class SearchCommand extends Command {
             + " If multiple prefixes are provided, only persons who match all prefixes will be shown.\n"
             + "Example 1: " + COMMAND_WORD + " n/alice\n" //show single search
             + "Example 2: " + COMMAND_WORD + " g/blood drive\n"
-            + "Example 3: " + COMMAND_WORD + " n/alice t/friend p/91234567\n" // show that can stack search
-            + "Example 4: " + COMMAND_WORD + " t/friend p/91234567 n/alice"; // show that order does not matter
+            + "Example 3: " + COMMAND_WORD + " n/alice t/friend p/91234567 r/volunteer\n" // show that can stack search
+            + "Example 4: " + COMMAND_WORD + " r/volunteer t/friend p/91234567 n/alice"; // show that order does not matter
 
     public static final String MESSAGE_NO_FOUND_GROUP = "There is no such group!";
 
