@@ -25,6 +25,7 @@ public class DeleteRemarkCommand extends Command {
             + "\nParameters: INDEX (must be a positive integer) " + PREFIX_REMARK_INDEX
             + "REMARK_INDEX (must be a positive integer)\n"
             + "Example to add remark: " + COMMAND_WORD + " 2 " + PREFIX_REMARK_INDEX + "1\n";
+    public static final String MESSAGE_SUCCESS = "Deleted remark at index %1$s from %2$s";
 
     private static final Logger logger = LogsCenter.getLogger(DeleteRemarkCommand.class);
 
@@ -55,7 +56,7 @@ public class DeleteRemarkCommand extends Command {
         // Update the last viewed person in the model after updating remarks
         model.updateLastViewedPerson(updatedPerson);
 
-        return new CommandResult(String.format("Deleted remark at index %1$s from %2$s", remarkIndex.getOneBased(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, remarkIndex.getOneBased(),
                 updatedPerson.getName()));
     }
 

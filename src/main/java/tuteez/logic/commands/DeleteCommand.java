@@ -23,11 +23,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD_ALT = "del";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
-            + ": Deletes the person identified by the index number used in the displayed person list or by name.\n"
-            + "Parameters: INDEX (must be a positive integer) or NAME (must be a valid name in the addressbook)\n"
+            + ": Deletes the student identified by the index number used in the displayed student list or by name.\n"
+            + "Parameters: INDEX (must be a positive integer) or NAME (must be a valid name in tuteez)\n"
             + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " John Doe";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted student: %1$s";
 
     private final Index targetIndex;
     private final Name targetName;
