@@ -44,7 +44,7 @@ public class DateCommand extends Command {
     public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple patients with the same details found."
             + " Use more attributes (name, phone number, email) to identify the exact person.";
     public static final String MESSAGE_NO_PERSON_FOUND = "No matching person found. Please check the details.";
-    public static final String MESSAGE_OVERLAPPING_DATES = "Given date and time coincides with another appointment below."
+    public static final String MESSAGE_OVERLAPPING_DATES = "Given date & time coincides with another appointment below."
             + " Please choose another date and time.";
 
     private final Optional<String> name;
