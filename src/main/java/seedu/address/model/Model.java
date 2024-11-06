@@ -4,11 +4,14 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * The API of the Model component.
@@ -46,6 +49,8 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    ObservableMap<String, String> getTagColorMap();
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -144,6 +149,21 @@ public interface Model {
      */
 
     ActiveTags getActiveTags();
+
+    /**
+     * Returns a WeddingName of the currently displayed wedding, or null if no wedding is being viewed
+     * WeddingName is used because Wedding objects are immutable could change when a wedding is edited,
+     * while WeddingName is used to determine uniqueness of weddings
+     *
+     * @return currently displayed wedding, or null
+     */
+
+    ObjectProperty<WeddingName> getCurrentWeddingName();
+
+    /**
+     * Sets currentWeddingName attribute to a specified WeddingName or null
+     */
+    void setCurrentWeddingName(WeddingName weddingName);
 
     /**
      * Sorts the list of persons in the address book according to the given comparator.

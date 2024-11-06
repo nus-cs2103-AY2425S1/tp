@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -49,6 +50,18 @@ public class PersonTest {
         // String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         // editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         // assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void hasTag() {
+        Tag t1 = new Tag("friends");
+        assertTrue(ALICE.hasTag(t1));
+
+        Tag t2 = new Tag("FRIENDS");
+        assertTrue(ALICE.hasTag(t2));
+
+        Tag t3 = new Tag("notHere");
+        assertFalse(ALICE.hasTag(t3));
     }
 
     @Test

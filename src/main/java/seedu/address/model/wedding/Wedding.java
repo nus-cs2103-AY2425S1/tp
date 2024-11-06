@@ -10,7 +10,8 @@ import seedu.address.model.person.PersonId;
  */
 public class Wedding {
 
-    public static final String MESSAGE_CONSTRAINTS = "You can only reference contacts through their index.";
+    public static final String MESSAGE_CONSTRAINTS = "You can only reference contacts through their index "
+            + "which must be a positive integer.";
     private final WeddingName name;
     private final WeddingDate date;
     private final List<PersonId> assignees; //Stores a list of UserIDs

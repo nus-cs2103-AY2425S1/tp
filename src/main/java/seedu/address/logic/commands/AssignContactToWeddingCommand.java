@@ -26,7 +26,7 @@ public class AssignContactToWeddingCommand extends Command {
     public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns contacts to a specific wedding "
-            + "where the wedding and contacts are identified by their index number. \n"
+            + "where the wedding & contacts are identified by their index number. \n"
             + "Parameters: assign WeddingIndex (must be a positive integer) "
             + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -65,7 +65,6 @@ public class AssignContactToWeddingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
 
-
         Wedding weddingToModify = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
 
         // get a list of all the Persons that the user is trying to assign to the wedding
@@ -75,8 +74,7 @@ public class AssignContactToWeddingCommand extends Command {
 
         for (Index i : assignedPersonIndexList) {
             if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + " "
-                        + Messages.MESSAGE_TRY_PERSON_LIST_MODE);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
             } else {
                 Person personToAdd = lastShownList.get(i.getZeroBased());
                 newContactsAssignedToWedding.add(personToAdd);

@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This app is based on AddressBook-Level3, courtesy of [SE-EDU](https://se-education.org/)
+
+Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,6 +128,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), as well as Wedding objects (contained in a `UniqueWeddingList` Object)
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `ActiveTags` object that represents a collection of the current active tags in the AddressBook.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -282,7 +285,11 @@ Wedding planners who:
 * are comfortable using CLI apps for managing tasks such as adding, deleting, tagging, and finding contacts
 * require flexible contact management, including categorization by tags
 
-**Value proposition**: Wedding planners frequently manage a large number of contacts, including vendors, clients, and service providers, which can become overwhelming. PlanPerfect simplifies this process by allowing users to categorize contacts using tags, making it easy to organize and retrieve important information such as clients, caterers, photographers, and others. With its fast and efficient Command Line Interface (CLI), PlanPerfect enables users to manage their contacts significantly faster than traditional mouse/GUI-driven apps, providing greater flexibility and speed for busy wedding planners.
+**Value proposition**: Wedding planners frequently manage a large number of contacts which can become overwhelming. PlanPerfect simplifies this process through 2 main core functionalities:
+* **Tags**: Allows users to categorize contacts using tags, making it easy to organise and retrieve important contacts
+* **Weddings**: Allows users to categorize contacts around wedding events, allowing for easy tracking of who is involved in which wedding
+
+With its fast and efficient Command Line Interface (CLI), PlanPerfect enables users to manage their contacts significantly faster than traditional mouse/GUI-driven apps, providing greater flexibility and speed for busy wedding planners.
 
 ### User stories
 
@@ -322,11 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### Use cases
-
-(For all use cases below, the **System** is the `PlanPerfect App` and the **Actor** is the `Wedding Planner`, unless specified otherwise)
-
 <br/><br/>
-
 **Use case: UC01 - List all contacts**
 
 **MSS**
@@ -551,6 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Contact Details**: Info about a contact: name, email, address, phone number etc.
 * **Contact/Person**: Used Interchangeably. Contact is used for contextual descriptions in the User/Developer Guides. A contact is modelled as a Person class in code.
+* **Active tag**: Refers to the tags which are currently in use. Once the last occurrence of a tag is deleted, that tag is no longer active.
 * **CLI**: Command Line Interface
 * **GUI**: Graphic User Interface
 
@@ -571,40 +575,77 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+   - Download the jar file and copy it into an empty folder. 
+   - Double-click the jar file.<br>
+       **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.<br>
+     <br></br>
+2. Saving window preferences
+   - Resize the window to an optimum size. Move the window to a different location. Close the window. 
+   - Re-launch the app by double-clicking the jar file.<br>
+          **Expected:** The most recent window size and location are retained.
+     <br></br>
+### Contact Management
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+1. Adding a contact
+   - **Prerequisites:** Enter the all contacts view using the `list` command. You can add contacts while in a wedding view, but you will not be able to see the contact added to the addressbook unless you enter the all contacts view. 
+   - Test case: `add n/John Doe p/91234567 e/johnd@example.com a/123 John St.`<br>
+          **Expected:** A new contact with the specified details is added to the list. Confirmation is shown in the status message.<br>
+     <br></br>
+2. Deleting a contact
 
-1. Saving window preferences
+   - **Prerequisites:** Enter the all contacts view using the `list` command. For optimal testing, multiple contacts should already be present in the contact list. You can delete contacts from a wedding view, but only the contacts in that wedding. 
+   - Test case: `delete 1`<br>
+         **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
+   - Test case: `delete 0`<br>
+         **Expected:** No contact is deleted. Error details are shown in the status message. 
+   - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+         **Expected:** Similar to the previous case, an error message appears.<br>
+     <br></br>
+3. Editing a contact
+   - **Prerequisites:** Ensure the contact you want to edit is in the current view.
+   - Test case: `edit 2 n/Jane Smith p/98765432`<br>
+       **Expected:** The name and phone number of the second contact in view are updated. Confirmation is shown in the status message.
+    <br></br>
+4. Tagging a contact
+   - **Prerequisites:** The contact should not already have the tag you want to add. You may add multiple tags at once.
+   - Test case: `tag 2 t/florist`<br>
+        **Expected:** The contact at index 2 in the current contacts view will now have the florist tag.
+    <br></br>
+5. Untagging a contact
+   - **Prerequisites:** The contact should currently have the tag you want to remove.
+   - Test case: `untag 2 t/photographer`<br>
+        **Expected:** The contact at index 2 will no longer have the photographer tag.
+   <br></br>
+### Wedding Management
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+1. Adding a wedding
+   - **Prerequisites:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal. To have complete flexibility/access in assigning contacts while adding a wedding, you are recommended to be in the all contacts view. 
+   - Test case: `addw n/Emily and John Wedding d/25/12/2024 c/1 2`<br>
+          **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.
+     <br></br>
+2. Viewing wedding details
+   - Test case: `view 1`<br>
+       **Expected:** Displays the contacts assigned to the wedding at index 1.<br>
+     <br></br>
+3. Assigning and unassigning contacts to/from a wedding
+   - Assigning: `assign 1 c/3`<br>
+       **Expected:** Contact at index 3 is assigned to Wedding 1. A confirmation message is displayed.
+   - Unassigning: `unassign c/3`<br>
+       **Expected:** Contact at index 3 is removed from Wedding 1. A confirmation message is displayed.
+     <br></br>
+### Error Handling and Data Integrity
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. Handling invalid commands
+   - Test case: Enter invalid commands, such as `edit`, `delete abc`, `add n/` (missing parameters).<br>
+          **Expected:** Clear error message appears, with no unintended changes to the data.<br>
+     <br></br>
+2. Testing data persistence
+   - After making several changes, close and reopen the application.<br>
+          **Expected:** All recent changes persist, confirming successful data saving.<br>
+     <br></br>
+3. Dealing with missing/corrupted data files
+   - To simulate a missing data file, go into the folder where your jar file is stored, and delete the folder named 'data'. 
+   - To simulate a corrupted data file, go into the folder where you jar file is stored, click into the data folder, and edit the addressbook.json in a way that it contains syntax error(s). <br>
+   **Expected:** The application will start with an empty contact list there is no data available or if the data has been corrupted.
+     <br></br>
 
-1. _{ more test cases …​ }_
-
-### Deleting a contact
-
-1. Deleting a contact while all contacts are being shown
-
-    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
-
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
-       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

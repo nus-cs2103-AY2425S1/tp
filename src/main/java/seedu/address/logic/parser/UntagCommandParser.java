@@ -37,6 +37,10 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             throw new ParseException("Error: More than one 't/' detected. Please use only one 't/' for untagging.");
         }
 
+        if (argMultimap.getValue(PREFIX_TAG).orElse("").trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+        }
+
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -44,11 +48,6 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             throw new ParseException("Error: " + Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
         }
 
-        if (argMultimap.getValue(PREFIX_TAG).orElse("").trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
-        }
-
-        // Handle the case where the user inputs "all" to remove all tags where null set signifies removing all tags
         if (argMultimap.getAllValues(PREFIX_TAG).size() == 1
                 && argMultimap.getAllValues(PREFIX_TAG).get(0).equalsIgnoreCase("all")) {
 

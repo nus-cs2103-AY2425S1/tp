@@ -10,8 +10,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.person.PersonTaggedWithPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Displays a list of contacts who have been tagged with the specified tag.
@@ -22,13 +25,13 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": filters contacts by one or more tags. \n"
             + "Parameters: " + PREFIX_TAG + "TAG1 [TAG2] [TAG3] ..\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "friends colleagues";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "photographer videographer";
 
     public static final String MESSAGE_SUCCESS =
             "Listed all contacts with tags: %1$s \n"
             + "Type \"list\" to see all contacts.";
 
-    public static final String MESSAGE_DUPLICATE_PREFIXES = "Please only include one prefix t/ !";
+    public static final String MESSAGE_DUPLICATE_PREFIXES = "Please only include one prefix " + PREFIX_TAG + " !";
 
     public final Predicate<Person> predicatePersonTaggedWithTag;
 
@@ -46,8 +49,18 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicatePersonTaggedWithTag);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tagSet));
+        WeddingName currentWeddingName = model.getCurrentWeddingName().get();
+        if (currentWeddingName == null) {
+            model.updateFilteredPersonList(predicatePersonTaggedWithTag);
+        } else {
+            Wedding currentWedding = model.getFilteredWeddingList().filtered(
+                    w -> w.getWeddingName().equals(currentWeddingName)).get(0);
+            PersonInWeddingPredicate personInWeddingPredicate = new PersonInWeddingPredicate(currentWedding);
+            model.updateFilteredPersonList(p -> predicatePersonTaggedWithTag.test(p)
+                    && personInWeddingPredicate.test(p));
+        }
+        String tagSetString = Tag.tagSetToString(tagSet);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tagSetString));
     }
 
     @Override

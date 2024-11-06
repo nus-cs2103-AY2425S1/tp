@@ -12,6 +12,7 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
+Class ActiveTags
 
 Class UniqueWeddingList
 Class Wedding
@@ -41,20 +42,23 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -down-> ActiveTags
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *-down-> "1" UniquePersonList
 AddressBook *-down-> "1" UniqueWeddingList
-UniquePersonList --> "~* all" Person
+UniquePersonList ---> "~* all" Person
 UniqueWeddingList ---> "~* all" Wedding
-Person *--> PersonId
+Person *-right-> PersonId
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
-Wedding *--> "*" PersonId
+ActiveTags ----> "~* active" Tag
+
+Wedding *--left--> "*" PersonId
 Wedding --> "1" WeddingName
 Wedding --> "1" WeddingDate
 
@@ -62,7 +66,7 @@ Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 ModelManager --> "~* filtered" Wedding
-ModelManager --> "~* filtered" Person
+ModelManager ---> "~* filtered" Person
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

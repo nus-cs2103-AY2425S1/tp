@@ -26,21 +26,21 @@ public class HelpWindow extends UiPart<Stage> {
                 3. edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]: Edit a contact’s personal detail(s).
                 4. tag INDEX t/TAG1 TAG2 ... : Add between 1 to 6 tag(s) to a contact.
                 5. untag INDEX t/TAG1 TAG2 ... : Remove the specified tag(s) from a contact.
-                6. find KEYWORD1 KEYWORD2 ... : Find contacts with any of the given keywords in their name.
-                7. filter t/TAG1 TAG2 ... : Filter contacts by the specified tag(s).
-                8. delete INDEX: Delete the contact in the specified index.
-                9. sort: Sort the contacts in the list by name.
-                10. clear: Clear all contacts (following a confirmation message).\n
+                6. taglist: List all tags currently in use in PlanPerfect.
+                7. find KEYWORD1 KEYWORD2 ... : Find contacts with any of the given keywords in their name.
+                8. filter t/TAG1 TAG2 ... : Filter contacts by the specified tag(s).
+                9. delete INDEX: Delete the contact in the specified index.
+                10. sort: Sort the contacts in the list by name.
+                11. clear: Clear all contacts (following a confirmation message).\n
             Wedding Commands:
                 1. addw n/WEDDING_NAME d/DATE [c/CONTACT1_INDEX ...]: Add wedding with 0 or more contacts.
                 2. view WEDDING_INDEX: List the contacts assigned to the wedding at the specified index.
                 3. editw WEDDING_INDEX [n/WEDDING_NAME] [d/DATE]: Edit a wedding's detail(s).
                 4. assign WEDDING_INDEX c/CONTACT1_INDEX ... : Assign 1 or more contacts to the specified wedding.
-                5. unassign WEDDING_INDEX c/CONTACT1_INDEX ... : Unassign 1 or more contacts from the specified wedding.
+                5. unassign c/CONTACT1_INDEX ... : Unassign 1 or more contacts from inside a wedding view.
                 6. deletew WEDDING_INDEX: Delete the specified wedding from PlanPerfect (contacts are not deleted).\n
             Other Commands:
-                1. taglist: List all tags currently in use in PlanPerfect.
-                2. exit: Exit the program.\n
+                1. exit: Exit the program.\n
         For more detailed help, refer to the PlanPerfect User Guide:""" + ' ' + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);

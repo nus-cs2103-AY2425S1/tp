@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Map;
 
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -41,10 +44,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    private Map<String, String> tagColorMap;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, ObservableMap<String, String> tagColorMap) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -55,5 +60,17 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        this.tagColorMap = tagColorMap;
+
+        // Test. Sets all tags to respective color
+        for (Node tag : tags.getChildren()) {
+            setTagColor(tag);
+        }
+    }
+
+    private void setTagColor(Node tag) {
+        Label label = (Label) tag;
+        String tagName = label.getText();
+        tag.setStyle(String.format("-fx-text-fill: #383838; -fx-background-color: %s", tagColorMap.get(tagName)));
     }
 }

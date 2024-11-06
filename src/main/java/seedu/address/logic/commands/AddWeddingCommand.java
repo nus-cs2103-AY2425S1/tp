@@ -30,7 +30,7 @@ public class AddWeddingCommand extends Command {
             + PREFIX_DATE + "DATE "
             + "[" + PREFIX_CONTACT + "CONTACT_INDEX...]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Wedding1 "
+            + PREFIX_NAME + "Jack and Jill "
             + PREFIX_DATE + "12/12/2024 "
             + PREFIX_CONTACT + "1 2 3";
 

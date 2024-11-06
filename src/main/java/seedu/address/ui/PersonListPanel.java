@@ -2,7 +2,9 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -16,6 +18,7 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final ObservableMap<String, String> tagColorMap;
 
     @FXML
     private ListView<Person> personListView;
@@ -23,10 +26,14 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableMap<String, String> tagColorMap) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.tagColorMap = tagColorMap;
+        tagColorMap.addListener((MapChangeListener<? super String, ? super String>) (change) -> {
+            personListView.refresh();
+        });
     }
 
     /**
@@ -41,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(person, getIndex() + 1, tagColorMap).getRoot());
             }
         }
     }

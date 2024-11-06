@@ -180,9 +180,6 @@ public class ParserUtil {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
             LocalDate parsedDate = LocalDate.parse(trimmedDate, formatter);
-            if (!parsedDate.isAfter(LocalDate.now())) {
-                throw new ParseException("Wedding date must be after current date.");
-            }
             return new WeddingDate(parsedDate);
         } catch (DateTimeParseException e) {
             throw new ParseException(WeddingDate.MESSAGE_CONSTRAINTS);
@@ -204,6 +201,11 @@ public class ParserUtil {
         try {
             personIndexSet = Arrays.stream(personIndexString.split("\\s+"))
                     .map(Integer::parseInt)
+                    .peek(i -> {
+                        if (i < 1) {
+                            throw new IllegalArgumentException("Negative or zero index.");
+                        }
+                    })
                     .map(i -> Index.fromOneBased(i))
                     .collect(Collectors.toSet());
 

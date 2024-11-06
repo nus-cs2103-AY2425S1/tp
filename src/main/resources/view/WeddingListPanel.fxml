@@ -2,7 +2,11 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="weddingListView" />
-</StackPane>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10">
+    <!-- Container for the current wedding name card -->
+    <VBox fx:id="currentWeddingNameCardContainer"/>
+    <!-- List of weddings -->
+    <ListView fx:id="weddingListView" VBox.vgrow="ALWAYS"/>
+</VBox>

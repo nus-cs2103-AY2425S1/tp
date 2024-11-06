@@ -9,13 +9,17 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +32,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Wedding> filteredWeddings;
     private ActiveTags activeTags; //Stores all currently used tags
+    private ObjectProperty<WeddingName> currentWeddingName; //Stores currently viewed wedding, null if not in wedding
+    // view
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -40,7 +46,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
-        activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
+        activeTags = new ActiveTags(this.addressBook.findTagOccurrences(), userPrefs.getTagColors());
+        currentWeddingName = new SimpleObjectProperty<>();
     }
 
     public ModelManager() {
@@ -80,6 +87,11 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public ObservableMap<String, String> getTagColorMap() {
+        return activeTags.getTagColorMap();
     }
 
     //=========== AddressBook ================================================================================
@@ -191,6 +203,16 @@ public class ModelManager implements Model {
     @Override
     public ActiveTags getActiveTags() {
         return activeTags;
+    }
+
+    @Override
+    public ObjectProperty<WeddingName> getCurrentWeddingName() {
+        return currentWeddingName;
+    }
+
+    @Override
+    public void setCurrentWeddingName(WeddingName currentWeddingName) {
+        this.currentWeddingName.set(currentWeddingName);
     }
 
     @Override

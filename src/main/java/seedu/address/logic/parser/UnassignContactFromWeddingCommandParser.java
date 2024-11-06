@@ -24,6 +24,12 @@ public class UnassignContactFromWeddingCommandParser implements Parser<UnassignC
         requireNonNull(args);
         ArgumentMultimap multimap = ArgumentTokenizer.tokenize(args, PREFIX_CONTACT);
 
+        if (!multimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Wedding indexes are not required in the unassign command, "
+                            + "view a wedding to unassign contacts from it."));
+        }
+
         //Reformatting error message for duplicate c/ instances
         try {
             multimap.verifyNoDuplicatePrefixesFor(PREFIX_CONTACT);
@@ -38,14 +44,6 @@ public class UnassignContactFromWeddingCommandParser implements Parser<UnassignC
                     UnassignContactFromWeddingCommand.MESSAGE_USAGE));
         }
 
-        Index weddingIndex;
-        try {
-            weddingIndex = ParserUtil.parseIndex(multimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UnassignContactFromWeddingCommand.MESSAGE_USAGE));
-        }
-
         String personIndexs = multimap.getValue(PREFIX_CONTACT).orElse("");
 
         if (personIndexs.isEmpty()) {
@@ -55,7 +53,7 @@ public class UnassignContactFromWeddingCommandParser implements Parser<UnassignC
 
         Set<Index> personIndexSet = parsePersonIndexString(personIndexs);
 
-        return new UnassignContactFromWeddingCommand(weddingIndex, personIndexSet);
+        return new UnassignContactFromWeddingCommand(personIndexSet);
     }
 
 }

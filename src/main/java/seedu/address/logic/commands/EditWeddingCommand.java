@@ -27,9 +27,10 @@ public class EditWeddingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits wedding \n"
-            + "Parameters: INDEX (must be a positive integer) " + PREFIX_NAME + "NAME "
-            + PREFIX_DATE + "DATE\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Pb&J " + PREFIX_DATE + "21/03/2024";
+            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_DATE + "DATE]\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Paul and Jean Wedding " + PREFIX_DATE
+            + "21/03/2025";
 
     public static final String MESSAGE_SUCCESS = "Edited Wedding: %1$s \n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -77,6 +78,12 @@ public class EditWeddingCommand extends Command {
         }
 
         model.setWedding(weddingToEdit, editedWedding);
+
+        // check if wedding currently viewed is the wedding being edited, if it is set current wedding name
+        // to be the same as the edited wedding's name
+        if (weddingToEdit.getWeddingName().equals(model.getCurrentWeddingName().getValue())) {
+            model.setCurrentWeddingName(editedWedding.getWeddingName());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatWedding(editedWedding)));
 
 
@@ -91,7 +98,7 @@ public class EditWeddingCommand extends Command {
         assert updatedWeddingName != null : "Updated name should not be null";
         assert updatedWeddingDate != null : "Updated phone should not be null";
 
-        return new Wedding(updatedWeddingName, updatedWeddingDate);
+        return new Wedding(updatedWeddingName, updatedWeddingDate, weddingToEdit.getAssignees());
     }
 
     @Override

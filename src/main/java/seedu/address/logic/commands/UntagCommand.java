@@ -24,7 +24,7 @@ public class UntagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": untags specific contact \n"
             + "Parameters: 'index t/[TAGS TO REMOVE]' OR 'index t/all' (this removes everything)\n"
-            + "Examples: " + COMMAND_WORD + " 1 t/friends colleagues," + " " + COMMAND_WORD + " 1 t/all";
+            + "Examples: " + COMMAND_WORD + " 1 t/florist designer," + " " + COMMAND_WORD + " 1 t/all";
 
     public static final String MESSAGE_UNTAG_SUCCESS = "Untagged the person: %1$s";
     private final Index index;
@@ -87,6 +87,7 @@ public class UntagCommand extends Command {
     public Set<Tag> removeTags(Set<Tag> originalTags, Set<Tag> tagsToRemove) throws CommandException {
         Set<Tag> modifiedTags = new HashSet<>(originalTags);
 
+        //Collecting Tags from tagsToRemove which don't exist in originalTags
         Set<Tag> nonExistentTags = tagsToRemove.stream()
                 .filter(tag -> !originalTags.contains(tag))
                 .collect(Collectors.toSet());
