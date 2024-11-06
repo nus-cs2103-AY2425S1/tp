@@ -165,7 +165,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A CommonModel stub that always accept the person being added.
+     * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
 
