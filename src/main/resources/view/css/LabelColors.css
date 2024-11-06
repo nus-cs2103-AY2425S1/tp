@@ -5,7 +5,7 @@
 }
 
 .silver-tier {
-    -fx-background-color: var(-silver-tier-color);
+    -fx-background-color: #C0C0C0;
     -fx-text-fill: #1A1A1A;
 }
 
