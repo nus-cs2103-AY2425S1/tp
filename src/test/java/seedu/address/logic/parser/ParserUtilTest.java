@@ -365,6 +365,12 @@ public class ParserUtilTest {
         AddModuleRoleOperation expected = new AddModuleRoleOperation(expectedDescriptor);
 
         assertEquals(expected, result);
+
+        // with whitespaces and tabs
+        String input2 = " + CS1101S   MA1521-TA ";
+        EditModuleRoleOperation result2 = ParserUtil.parseEditModuleRoleOperation(input2);
+
+        assertEquals(expected, result2);
     }
 
     @Test
