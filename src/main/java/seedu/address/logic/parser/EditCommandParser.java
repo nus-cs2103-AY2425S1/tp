@@ -16,7 +16,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Event;
 import seedu.address.model.person.role.Role;
 
 /**
@@ -78,15 +77,5 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> roleSet = roles.size() == 1 && roles.contains("") ? Collections.emptySet() : roles;
         return Optional.of(ParserUtil.parseRoles(roleSet));
-    }
-
-    private Optional<Set<Event>> parseEventsForEdit(Collection<String> events) throws ParseException {
-        assert events != null;
-
-        if (events.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> eventSet = events.size() == 1 && events.contains("") ? Collections.emptySet() : events;
-        return Optional.of(ParserUtil.parseEvents(eventSet));
     }
 }

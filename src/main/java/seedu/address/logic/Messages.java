@@ -51,7 +51,7 @@ public class Messages {
             usage: list
 
             edit - Update the information in an entry.
-            usage: edit <id> n/<name> p/<phone number> e/<email> s/<subevent> {r/<role>}
+            usage: edit <id> n/<name> p/<phone number> m/<email> e/<event> {r/<role>}
 
             delete - Delete an entry with the given ID.
             usage: delete <id>

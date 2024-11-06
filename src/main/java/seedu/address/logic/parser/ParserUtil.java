@@ -40,9 +40,14 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     private static FilteredList<Person> personList;
+    private static FilteredList<Event> eventList;
 
     public static void setPersonList(FilteredList<Person> personsList) {
         personList = personsList;
+    }
+
+    public static void setEventList(FilteredList<Event> eventsList) {
+        eventList = eventsList;
     }
 
     /**
@@ -86,33 +91,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@link String} {@code eventName} into a {@link EventName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code eventName} is invalid.
-     */
-    public static EventName parseEventName(String eventName) {
-        requireNonNull(eventName);
-        String trimmedName = eventName.trim();
-        if (!EventName.isValidEventName(trimmedName)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
-        }
-        return new EventName(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String event} into a {@code Event}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code Event} is invalid.
-     */
-    public static Event parseEvent(String event) throws ParseException {
-        requireNonNull(event);
-        EventName eventName = parseEventName(event);
-        return new Event(eventName, null, null, null);
     }
 
     /**
@@ -307,16 +285,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> events} into a {@code Set<Event>}.
+     * Parses a {@link String} {@code eventName} into a {@link EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
      */
-
-    public static Set<Event> parseEvents(Collection<String> events) throws ParseException {
-        requireNonNull(events);
-        final Set<Event> eventSet = new HashSet<>();
-        for (String eventName: events) {
-            eventSet.add(parseEvent(eventName));
+    public static EventName parseEventName(String eventName) {
+        requireNonNull(eventName);
+        String trimmedName = eventName.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
         }
-        return eventSet;
+        return new EventName(trimmedName);
     }
 
     /**
@@ -352,7 +332,7 @@ public class ParserUtil {
                     break;
                 }
             }
-            if (isParticipantValid == false) {
+            if (!isParticipantValid) {
                 throw new ParseException("Participant " + participantName + " does not exist in the address book.");
             }
         }

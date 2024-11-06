@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
 
         ParserUtil.setPersonList(filteredPersons);
-
+        ParserUtil.setEventList(filteredEvents);
     }
 
     public ModelManager() {

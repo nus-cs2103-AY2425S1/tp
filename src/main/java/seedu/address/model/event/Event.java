@@ -16,6 +16,7 @@ public class Event {
     private final EventName name;
     private final SportString sport;
     private final Venue venue;
+    // private final LocalDateTime dateTime;
     private final Set<Person> participants = new HashSet<>();
 
     /**
