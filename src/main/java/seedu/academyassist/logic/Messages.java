@@ -43,20 +43,15 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Student ID: ")
+                .append("\nStudent ID: ")
                 .append(person.getStudentId())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; NRIC: ")
+                .append("\nNRIC: ")
                 .append(person.getIc())
-                .append("; Year group: ")
+                .append("\nYear group: ")
                 .append(person.getYearGroup())
-                .append("; Subjects: ");
+                .append("\nSubject(s) taken: ");
         person.getSubjects().forEach(s -> builder.append(s + " "));
+        builder.append("\nUse the command `detail " + person.getStudentId() + "` to view more details");
         return builder.toString();
     }
 
