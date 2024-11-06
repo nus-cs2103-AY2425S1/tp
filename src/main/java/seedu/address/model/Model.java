@@ -8,7 +8,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
-import seedu.address.ui.DetailPanel;
 import seedu.address.ui.ModelClearObserver;
 
 /**
