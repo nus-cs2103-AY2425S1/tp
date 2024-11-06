@@ -91,6 +91,7 @@ _Refer to the [Features](#features) section for details of each command!_
   * [Listing all persons : `list`](#listing-all-persons--list)
   * [Editing a person : `edit`](#editing-a-person--edit)
   * [Deleting persons : `delete`](#deleting-persons--delete)
+  * [Exiting the program : `exit`](#exiting-the-program--exit)
 
 #### Advanced Commands
   * [Locating persons by criteria: `find`](#locating-persons-by-criteria-find)
@@ -128,7 +129,7 @@ Shows a popup window with a clickable link to the User Guide.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -194,7 +195,7 @@ Displays an exit message, then exits the program.
 
 Format: `exit`
 
-### Locating persons by criteria: `find`
+### Locating persons by criteria : `find`
 
 Finds persons whose fields contain the given keywords.
 
