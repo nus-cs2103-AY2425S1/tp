@@ -11,10 +11,13 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class Dashboard
 Class StatusBarFooter
 Class CommandBox
+Class PersonListPanel
+Class PersonCard
+Class TutorialCard
+Class PaymentCard
 Class AttendanceContainer
 Class AttendanceCard
 }
@@ -32,34 +35,44 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+MainWindow -down-> "0..1" HelpWindow
+MainWindow *-down->  "1" Dashboard
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
 
+Dashboard -down-> "*" TutorialCard
 PersonListPanel -down-> "*" PersonCard
-PersonCard -down-> "1" AttendanceContainer
-AttendanceContainer -down-> "0..1" AttendanceCard
+PersonCard --down-> "1" PaymentCard
+PersonCard --down-> "1" AttendanceContainer
+AttendanceContainer *-down-> "*" AttendanceCard
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 AttendanceContainer --|> UiPart
 AttendanceCard --|> UiPart
+PaymentCard --|> UiPart
+Dashboard --|> UiPart
+TutorialCard --|> UiPart
+PersonListPanel --|> UiPart
 
+Dashboard ..> Model
 PersonCard ..> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
+TutorialCard -[hidden]left- PersonCard
+PaymentCard -[hidden]left- AttendanceContainer
+PersonListPanel -[hidden]left- Dashboard
+Dashboard -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+StatusBarFooter -[hidden]left- HelpWindow
 
 MainWindow -[hidden]-|> UiPart
 @enduml
