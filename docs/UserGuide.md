@@ -172,12 +172,13 @@ Usage: `find [n/NAME] [e/EMAIL] [p/PHONE] [a/ADDRESS] [pay/PAYMENT] [a/ATTENDANC
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
-1. Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
-2. All searches are case-insensitive.
-3. Search is by partial matching for keyword(s) of prefixes `n/`, `e/`, `p/`, `a/`, `t/`.
-4. Search is by exact matching for keyword(s) of prefix `tut/`.
-
+Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
 </div>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Search is by partial matching for keyword(s) of prefixes `n/`, `e/`, `p/`, `a/`, `t/`.
+</div>
+
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -264,15 +265,17 @@ Command: `edit`
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Fields wrapped in square brackets `[]` are optional, but at least one of the optional fields must be provided.
+</div>
+
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields:
 
 * `INDEX`: Index number shown in the displayed person list
     * Must be a positive integer 1, 2, 3, …​
-* `[ ]:` Fields wrapped in square brackets are optional
-    * At least one of the optional fields must be provided
-    * Existing values will be updated to the input values
 * `PAYMENT`: Updates the absolute value of a student’s overdue amount
 * `TAG:` Existing tag will be replaced by the new tag
     * Remove a student’s tag by typing  `t/` without specifying any tags
