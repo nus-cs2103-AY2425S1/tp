@@ -68,7 +68,7 @@ public class CommandTextHistory {
      * Returns the history of command texts.
      */
     public List<String> getCommandTextList() {
-        return commandTextList;
+        return new ArrayList<>(commandTextList);
     }
 
     /**
