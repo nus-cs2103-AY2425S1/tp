@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -160,6 +161,25 @@ public class ModelManager implements Model {
     @Override
     public void deleteTag(Tag target) {
         addressBook.removeTag(target);
+
+        // No need to check force as this is not accessed through commands, but must remove from person
+        for (Person person : getFilteredPersonList()) {
+            HashSet<Tag> personTags = new HashSet<>(person.getTags());
+            if (personTags.contains(target)) {
+                personTags.remove(target);
+                Person newPerson = new Person(
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        personTags,
+                        person.getWeddings(),
+                        person.getTasks()
+                );
+                setPerson(person, newPerson);
+            }
+        }
+        updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

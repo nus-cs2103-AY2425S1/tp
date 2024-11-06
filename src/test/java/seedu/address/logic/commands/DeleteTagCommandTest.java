@@ -22,7 +22,7 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_validDeleteTagCommand_success() {
         Tag tagToDelete = model.getFilteredTagList().get(0);
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete, true);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.format(tagToDelete));

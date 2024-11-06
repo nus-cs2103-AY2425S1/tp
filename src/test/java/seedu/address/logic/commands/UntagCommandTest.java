@@ -137,8 +137,8 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
                 new HashSet<>(), // No tags
-                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Jiazhen's Wedding")),
-                        new Wedding(new WeddingName("Wedding 29th August")))),
+                new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Carla's Wedding")),
+                        new Wedding(new WeddingName("Amy's Wedding")))),
                         new HashSet<>()
         );
 

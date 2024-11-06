@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -105,13 +104,17 @@ public class AddressBookTest {
 
     @Test
     public void hasVendor_vendorInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
         addressBook.addVendor(ALICE);
         assertTrue(addressBook.hasVendor(ALICE));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
+                + ", tags=" + addressBook.getTagList()
+                + ", tasks=" + addressBook.getTaskList()
+                + ", weddings=" + addressBook.getWeddingList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
