@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,13 +41,18 @@ public class DeleteCommand extends Command {
 
         ObservableList<Person> allPersons = model.getFilteredPersonList();
 
-        Person patientToDelete = model.getFilteredPatientById(allPersons, personId);
-        if (patientToDelete == null) {
+        Person personToDelete = model.getFilteredPatientById(allPersons, personId);
+        if (personToDelete == null) {
             throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
         }
-        model.deletePerson(patientToDelete);
-
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(patientToDelete)));
+        model.deletePerson(personToDelete);
+        if (personId == Id.getCurrentPatientIdCounter() - 2) {
+            Id.reduceCurrentPatientIdCounter();
+        }
+        if (personId == Id.getCurrentDoctorIdCounter() - 2) {
+            Id.reduceCurrentDoctorIdCounter();
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
