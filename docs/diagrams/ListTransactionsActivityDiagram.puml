@@ -10,13 +10,18 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([execute deletet command])
-    :Delete transaction;
+if () then ([deletet or summary command])
     :Model updates transaction list;
-else([execute summary command])
-    :Model filters transaction list;
+    :GUI displays transactions list;
+else ([else])
+    if () then ([list command])
+        :Model clears transactions list;
+        :Model updates person list;
+        :GUI displays person list;
+    else ([other commands])
+        :Exception thrown;
+    endif
 endif
 
-:GUI displays transaction list;
 stop
 @enduml
