@@ -30,3 +30,4 @@ deactivate FindCommandParser
 FindCommandParser -[hidden]-> PredicateFactory
 destroy FindCommandParser
 @enduml
+
