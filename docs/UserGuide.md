@@ -81,7 +81,7 @@ The commands in EduVault follow a general format of `COMMAND INDEX PREFIX/...` .
 
 <br>
 
-#### Example
+#### **Example**
 ![GeneralCommandFormatExample](images/GeneralCommandFormatExample.png)
 
 For example,  `edit 1 n/Benjamin` edits the student name at index 1(Alex Yeoh, in this case) to Benjamin.
