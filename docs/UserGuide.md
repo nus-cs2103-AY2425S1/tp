@@ -44,26 +44,26 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Summary of commands
 
-| Action                                                          | Format, Examples                                                                                                                                                       |
-|-----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                                                          | Format, Examples                                                                                                                                                        |
+|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-person-add)                                 | `add n/NAME e/EMAIL telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                |
-| [**Delete**](#deleting-a-person-delete)                         | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                             |
-| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [n/NAME] [e/EMAIL] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
-| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
-| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                  |
-| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                 |
-| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                 |
-| [**View**](#viewing-a-contact-s-full-details-view)              | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                            |
-| [**Github**](#launching-github-repository-github)               | `github n/NAME`  <br> e.g., `github n/Harry`                                                                                                                           |
-| [**Mark**](#marking-a-student-as-present-mark)                  | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                            |
-| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                        |
-| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                               |
-| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                   |
-| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                        |
-| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                          |## Features
-| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE` <br> e.g. `addGrade n/JohnDoe asgn/Ex01 s/5`                                                                            |
-| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade n/NAME asgn/ASSIGNMENT_NAME` <br> e.g. `removeGrade n/John Doe asgn/Ex01`                                                                                 |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                 |
+| [**Delete**](#deleting-a-person-delete)                         | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                              |
+| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [n/NAME] [e/EMAIL] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
+| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                              |
+| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                   |
+| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                  |
+| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                  |
+| [**View**](#viewing-a-contact-s-full-details-view)              | `view [n/NAME]` <br> e.g., `view n/John Doe`                                                                                                                            |
+| [**Github**](#launching-github-repository-github)               | `github n/NAME`  <br> e.g., `github n/Harry`                                                                                                                            |
+| [**Mark**](#marking-a-student-as-present-mark)                  | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                             |
+| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                         |
+| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                |
+| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                    |
+| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                         |
+| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                           |## Features
+| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE` <br> e.g. `addGrade n/JohnDoe asgn/Ex01 s/5`                                                                             |
+| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade n/NAME asgn/ASSIGNMENT_NAME` <br> e.g. `removeGrade n/John Doe asgn/Ex01`                                                                                  |
 
 <br><br>
 
@@ -308,7 +308,8 @@ Launches GitHub repository of the specified person on the browser from the addre
 
 <md>**Examples:**</md>
 
-* `github n/Betsy` launches the GitHub repository of the person named `Betsy`, using the GitHub username assigned to `Betsy`.
+* `github n/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned to `Harry`.
+  ![github use case for launching Harry's repository](images/githubUsage.png)
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -325,7 +326,7 @@ Opens a window at the side with the full details of the specified person from th
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * View the full details of the selected contact.
-* The name refers to the full name of the person shown in the displayed person list.
+* `NAME` refers to the full name of the person shown in the displayed person list.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
   </box>
 
@@ -333,8 +334,9 @@ Opens a window at the side with the full details of the specified person from th
 
 <md>**Examples:**</md>
 
-* `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
-* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`.
+* `view n/John Doe` opens a window at the side showing the full details of the person named `John Doe`.
+* Calling `view n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`.
+  ![viewing John Doe's contact detail in the view window](images/viewWindowScreenshot.png)
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -677,5 +679,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **When using excel to edit telegram username**, typing "@" will trigger the command function which will output a "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the command function. For example: typing `'@james`.
+![excel known issue](images/excelKnownIssue.png)
 --------------------------------------------------------------------------------------------------------------------
