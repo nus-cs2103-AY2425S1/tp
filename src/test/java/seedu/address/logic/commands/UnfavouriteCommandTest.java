@@ -26,10 +26,11 @@ public class UnfavouriteCommandTest {
     @Test
     public void execute_unfavouriteSuccessful() {
         Restaurant restaurantToUnfavourite = model.getFilteredRestaurantList()
-                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
+                .get(INDEX_SECOND_RESTAURANT.getZeroBased());
 
         model.favouriteRestaurant(restaurantToUnfavourite);
 
+        // Un-favourites the first restaurant which is the restaurantToUnfavourite
         UnfavouriteCommand unfavouriteCommand = new UnfavouriteCommand(INDEX_FIRST_RESTAURANT);
 
         Restaurant expectedRestaurantToUnfavourite = new Restaurant(
