@@ -142,7 +142,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Name("Sample Listing"),
                 new Address("123 Main St"),
                 new Price("500000", new BigDecimal(500000)),
-                new Area(100),
+                new Area("100"),
                 Region.NORTH,
                 sampleSeller,
                 buyersSet

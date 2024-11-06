@@ -27,7 +27,7 @@ public class ClearListingCommandTest {
     private static final Address VALID_ADDRESS = new Address("Valid Address");
     private static final Price VALID_PRICE = new Price("500k",
             new BigDecimal(5000000));
-    private static final Area VALID_AREA = new Area(999);
+    private static final Area VALID_AREA = new Area("999");
     private static final Region VALID_REGION = Region.WEST;
     private static final Person VALID_SELLER = new PersonBuilder().buildSeller();
     private static final Set<Person> VALID_BUYERS = Set.of(new PersonBuilder().buildBuyer());

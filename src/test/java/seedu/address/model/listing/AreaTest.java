@@ -29,10 +29,10 @@ public class AreaTest {
 
     @Test
     public void equals() {
-        Area area = new Area(3);
+        Area area = new Area("3");
 
         // same values -> returns true
-        assertTrue(area.equals(new Area(3)));
+        assertTrue(area.equals(new Area("3")));
 
         // same object -> returns true
         assertTrue(area.equals(area));
@@ -44,6 +44,6 @@ public class AreaTest {
         assertFalse(area.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(area.equals(new Area(1)));
+        assertFalse(area.equals(new Area("1")));
     }
 }

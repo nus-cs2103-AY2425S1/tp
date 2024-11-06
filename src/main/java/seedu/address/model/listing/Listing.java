@@ -106,6 +106,27 @@ public class Listing {
     }
 
     /**
+     * Replaces a buyer from this listing's buyers.
+     * @param buyerToRemove The buyer to be removed.
+     * @param buyerToAdd The new buyer to add to the listing.
+     */
+    public void replaceBuyer(Person buyerToRemove, Person buyerToAdd) {
+        if (buyers.contains(buyerToRemove)) {
+            buyers.remove(buyerToRemove);
+            buyers.add(buyerToAdd);
+        }
+    }
+
+    /**
+     * Returns a new Listing with a different seller
+     * @param sellerToAdd The new buyer to add to the listing.
+     * @return Listing with a modified seller.
+     */
+    public Listing modifyListingWithSeller(Person sellerToAdd) {
+        return new Listing(name, address, price, area, region, sellerToAdd, buyers);
+    }
+
+    /**
      * Checks if the given listing is the same listing as the current listing.
      * Two listings are considered the same if they have the same address or name.
      *

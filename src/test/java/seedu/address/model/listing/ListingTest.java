@@ -78,4 +78,18 @@ public class ListingTest {
                 + ", seller=" + PASIR_RIS.getSeller() + "}";
         assertEquals(expected, PASIR_RIS.toString());
     }
+    @Test
+    public void hashCodeTest() {
+        int initialHashCode = PASIR_RIS.hashCode();
+        assertEquals(initialHashCode, PASIR_RIS.hashCode(), "Hash code should be consistent across multiple calls");
+
+        Listing listingCopy = new ListingBuilder(PASIR_RIS).build();
+        assertTrue(PASIR_RIS.equals(listingCopy), "Objects should be equal");
+        assertEquals(PASIR_RIS.hashCode(), listingCopy.hashCode(), "Equal objects should have the same hash code");
+
+        Listing differentListing = new ListingBuilder(TAMPINES).build();
+        assertFalse(PASIR_RIS.equals(differentListing), "Objects should not be equal");
+        assertFalse(PASIR_RIS.hashCode() == differentListing.hashCode(),
+                "Unequal objects should ideally have different hash codes");
+    }
 }

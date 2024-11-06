@@ -417,13 +417,13 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### Delete Client Command
-    - **Format:** `delete NAME`
+    - **Format:** `deleteclient NAME`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Delete `Bob` from the address book
       >
-      > **Input**: `delete Bob`
+      > **Input**: `deleteclient Bob`
       >
       > **Output**: `Successfully deleted Bob with the number: 97774444 and email: bobby123@gmail.com`
       >
@@ -450,7 +450,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
       > **Use Case #1**: No name found
       >
-      > **Input**: `delete`
+      > **Input**: `deleteclient`
       >
       > **Output**: 
       <br> Invalid command format! 
@@ -461,7 +461,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
       > **Use Case #2**: Entering invalid name 
       > 
-      > **Input**: `delete $$`
+      > **Input**: `deleteclient $$`
       > 
       > **Output**:
       <br> Invalid command format!
@@ -472,7 +472,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
       > **Use Case #3**: Deleting a name that does not exist in the address book
       > 
-      > **Input**: `delete notInAddressBook`
+      > **Input**: `deleteclient notInAddressBook`
       > 
       > **Output**:
       <br> Invalid command format!
@@ -979,38 +979,39 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Opens a chatbot that answers basic queries.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Valid Greeting
       >
       > **Input**:
-      >
-      > **Output**:
-      >
+      ![validGreeting.png](images%2FvalidGreeting.png)
+      **Output**:
+      ![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
       > ---
       >
-      > **Use Case #2**:
+      > **Use Case #2**: Valid Query
       >
       > **Input**:
-      >
-      > **Output**:
-      >
+      ![validQuery.png](images%2FvalidQuery.png)
+       **Output**:
+      ![outputFromValidQuery.png](images%2FoutputFromValidQuery.png)
       > ---
       >
-      > **Use Case #3**:
+      > **Use Case #3**: Valid Farewell
       >
       > **Input**:
-      >
-      > **Output**:
-      >
+      ![validGoodbye.png](images%2FvalidGoodbye.png)
+      **Output**:
+      ![outputFromValidGoodbye.png](images%2FoutputFromValidGoodbye.png)
       > ---
 
-    - **Failed Execution:**
+      - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Invalid Query
       >
       > **Input**:
+      ![invalidInput.png](images%2FinvalidInput.png)
       >
       > **Output**:
-      >
+      ![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
       > ---
 
 

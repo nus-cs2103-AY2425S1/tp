@@ -40,7 +40,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
     @Test
     void testShowDeleteConfirmation_acceptsAndRejectsConfirmationCorrectly() {
         robot.clickOn("#commandTextField");
-        robot.write("delete Tester");
+        robot.write("deleteclient Tester");
         robot.type(KeyCode.ENTER);
 
         WaitForAsyncUtils.waitForFxEvents(20);
@@ -55,7 +55,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         commandTextField.setText("");
 
         robot.clickOn("#commandTextField");
-        robot.write("delete Tester");
+        robot.write("deleteclient Tester");
         robot.type(KeyCode.ENTER);
 
         WaitForAsyncUtils.waitForFxEvents(20);
@@ -63,7 +63,8 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         robot.clickOn("Yes");
 
         String deletionMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                "Tester", "98765432", "test@testing.com");
+                "Tester.\nPhone number: 98765432 and Email: test@testing.com");
+
         resultDisplay = robot.lookup("#resultDisplay").query();
         assertTrue(resultDisplay.getText().contains(deletionMessage));
     }

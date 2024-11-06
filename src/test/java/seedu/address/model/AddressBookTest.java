@@ -84,6 +84,42 @@ public class AddressBookTest {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
+    @Test
+    public void equals() {
+        assertTrue(addressBook.equals(addressBook));
+
+        assertFalse(addressBook.equals(null));
+
+        assertFalse(addressBook.equals(5));
+
+        AddressBook addressBookCopy = new AddressBook();
+        assertTrue(addressBook.equals(addressBookCopy));
+
+        addressBook.addPerson(ALICE);
+        addressBookCopy.addPerson(new PersonBuilder(ALICE).buildBuyer());
+        assertTrue(addressBook.equals(addressBookCopy));
+
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.addPerson(new PersonBuilder().withName("Bob").buildBuyer());
+        assertFalse(addressBook.equals(differentAddressBook));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(addressBook.hashCode(), addressBook.hashCode());
+
+        AddressBook addressBookCopy = new AddressBook();
+        assertEquals(addressBook.hashCode(), addressBookCopy.hashCode());
+
+        addressBook.addPerson(ALICE);
+        addressBookCopy.addPerson(new PersonBuilder(ALICE).buildBuyer());
+        assertEquals(addressBook.hashCode(), addressBookCopy.hashCode());
+
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.addPerson(new PersonBuilder().withName("Bob").buildBuyer());
+        assertFalse(addressBook.hashCode() == differentAddressBook.hashCode());
+    }
+
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
@@ -100,5 +136,4 @@ public class AddressBookTest {
             return persons;
         }
     }
-
 }

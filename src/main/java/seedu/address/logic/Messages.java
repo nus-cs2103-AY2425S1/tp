@@ -55,7 +55,9 @@ public class Messages {
                 .append(person.getAppointment())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        return builder.toString();
+        return String.format("%1s.\nPhone number: %2s and Email: %3s",
+                        person.getName(), person.getPhone(), person.getEmail());
+        //return builder.toString();
     }
 
     /**

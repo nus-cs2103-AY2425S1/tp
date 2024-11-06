@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LISTINGS;
 
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +45,7 @@ public class EditListingCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REGION + "REGION]...\n"
             + "Example: " + COMMAND_WORD + " ListingName "
-            + PREFIX_PRICE + "4500 "
+            + PREFIX_PRICE + "450000 "
             + PREFIX_AREA + "1200";
 
     public static final String MESSAGE_EDIT_LISTING_SUCCESS = "Successfully edited listing: %1$s";
@@ -102,6 +103,7 @@ public class EditListingCommand extends Command {
         }
 
         model.setListing(listingToEdit, editedListing);
+        model.updateFilteredListingList(PREDICATE_SHOW_ALL_LISTINGS);
         return new CommandResult(String.format(MESSAGE_EDIT_LISTING_SUCCESS, Messages.format(editedListing)));
     }
 

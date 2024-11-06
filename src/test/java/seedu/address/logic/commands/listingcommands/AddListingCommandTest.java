@@ -193,7 +193,7 @@ public class AddListingCommandTest {
 
         // any one value is different -> return false
         AddListingCommand differentArea = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                new Area(50), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
+                new Area("50"), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), ALICE.getName(),
                 new HashSet<>(List.of(DANIEL.getName(), GEORGE.getName())));
         assertFalse(addPasirRisCommand.equals(differentArea));
     }

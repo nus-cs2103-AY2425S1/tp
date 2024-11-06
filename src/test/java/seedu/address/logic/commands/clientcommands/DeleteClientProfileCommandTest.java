@@ -45,7 +45,7 @@ public class DeleteClientProfileCommandTest {
                 new DeleteClientProfileCommand(personToDelete.getName(), true); // skipConfirmation = true
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
+                Messages.format(personToDelete));
 
         Model expectedModel =
                 new ModelManager(model.getAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
@@ -64,7 +64,7 @@ public class DeleteClientProfileCommandTest {
                 new DeleteClientProfileCommand(personToDelete.getName(), true); // skipConfirmation = true
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
+                Messages.format(personToDelete));
 
         Model expectedModel =
                 new ModelManager(model.getAddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
@@ -96,7 +96,7 @@ public class DeleteClientProfileCommandTest {
         DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
 
         String expectedMessage = String.format(DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail());
+                Messages.format(personToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.deletePerson(personToDelete);
