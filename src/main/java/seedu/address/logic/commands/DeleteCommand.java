@@ -7,12 +7,14 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.controller.ConfirmationController;
-import seedu.address.logic.commands.controller.ConfirmationWindowController;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.ui.controller.ConfirmationController;
+import seedu.address.ui.controller.ConfirmationWindowController;
+
+
 
 
 /**

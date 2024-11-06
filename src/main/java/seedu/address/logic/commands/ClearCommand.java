@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.controller.ConfirmationController;
-import seedu.address.logic.commands.controller.ConfirmationWindowController;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.ui.controller.ConfirmationController;
+import seedu.address.ui.controller.ConfirmationWindowController;
 
 /**
  * Clears the address book.
