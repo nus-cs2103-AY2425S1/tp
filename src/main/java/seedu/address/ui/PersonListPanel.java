@@ -133,13 +133,15 @@ public class PersonListPanel extends UiPart<Region> {
                         if (maxContentWidth.get() > containerWidth) {
                             double translation = -scrollValue * (maxContentWidth.get() - containerWidth);
                             contentContainer.getContent().setTranslateX(translation);
+                        } else {
+                            // Scroll by an arbitrary and small amount
+                            // This is honestly to just give the scrollbar a purpose when there is no overflow
+                            contentContainer.getContent().setTranslateX(-scrollValue * 5.5);
                         }
                     }
                 }
             }
         };
-        // TODO: Enhancement: Make the visible area value more accurate,
-        //  then conditionally render the scrollbar only when needed
 
         // Add the new listener to the ScrollBar's valueProperty
         horizontalSb.valueProperty().addListener(scrollListener);
@@ -201,7 +203,6 @@ public class PersonListPanel extends UiPart<Region> {
             }
             // Recalculate and set
             // This in turn triggers the registered listener on maxContentWidth
-            System.out.println(currentMaxWidth);
             maxContentWidth.set(currentMaxWidth);
         });
     }
