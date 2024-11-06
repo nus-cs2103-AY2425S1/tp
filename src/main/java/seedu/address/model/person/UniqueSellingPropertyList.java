@@ -36,6 +36,13 @@ public class UniqueSellingPropertyList {
         return uniqueSellingPropertiesCount;
     }
 
+    /**
+     * Returns an unmodifiable {@code uniqueSellingProperties} list.
+     */
+    public ObservableList<Property> getUnmodifiableUniqueSellingPropertyList() {
+        return FXCollections.unmodifiableObservableList(uniqueSellingProperties);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

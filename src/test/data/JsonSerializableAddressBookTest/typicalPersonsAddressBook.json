@@ -11,6 +11,7 @@
       "postalCode" : "587977",
       "unitNumber" : "16-65",
       "price" : "6500000",
+      "actualPrice" : "1010101",
       "tags" : [ "nice scenery" ]
     } ],
     "buyProperties" : [ {

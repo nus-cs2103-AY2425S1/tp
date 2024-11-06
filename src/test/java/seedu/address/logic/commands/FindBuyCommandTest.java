@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BILL;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.CARRINE;
 import static seedu.address.testutil.TypicalPersons.DANIELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -71,7 +71,7 @@ public class FindBuyCommandTest {
         FindBuyCommand command = new FindBuyCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BILL, CARRINE, DANIELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, CARRINE, DANIELLE), model.getFilteredPersonList());
     }
 
     @Test
