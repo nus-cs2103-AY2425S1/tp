@@ -219,6 +219,6 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Add Goods** | `addgoods`
-**Delete Goods** | `deletegoods`
+**Delete Goods** | `deletegoods n/NAME gn/GOODS_NAME` <br> e.g. `deletegoods n/John Doe gn/Gardenia Milk Bread`
 **View Statistics** | `viewgoods`
 **Export Data** | `export`
