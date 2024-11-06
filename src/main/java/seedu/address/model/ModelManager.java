@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -166,15 +165,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addLog(Person personToUpdate, Log log) throws CommandException {
+    public void addLog(Person personToUpdate, Log log) {
         requireAllNonNull(personToUpdate, log);
         // Create a new Set of logs that includes the new log
         Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
-
-        if (updatedLogs.contains(log)) {
-            throw new CommandException(AddLogCommand.MESSAGE_DUPLICATE_LOG);
-        }
-
         updatedLogs.add(log);
 
         // Create a new updated person with the additional log
@@ -192,11 +186,6 @@ public class ModelManager implements Model {
         this.setPerson(personToUpdate, updatedPerson);
     }
 
-    @Override
-    public boolean hasLog(Person target, Log log) {
-        requireAllNonNull(target, log);
-        return target.getLogs().contains(log);
-    }
 
     //========== Util Methods ================================================================================
 
