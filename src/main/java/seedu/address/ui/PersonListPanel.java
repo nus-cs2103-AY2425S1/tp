@@ -21,10 +21,11 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
     private final String currentTheme;
+
     private double previousScrollPosition = 0;
 
     @FXML
-    public ListView<Person> personListView;
+    private ListView<Person> personListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
