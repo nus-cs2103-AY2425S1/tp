@@ -9,22 +9,26 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.goods.GoodsName;
+import seedu.address.model.goods.Goods;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -109,6 +113,66 @@ public class ModelManagerTest {
         List<GoodsReceipt> goodsList = modelManager
                 .getFilteredGoods(r -> r.isFromSupplier(ALICE.getName()));
         assertEquals(goodsList.size(), 0);
+    }
+
+    @Test
+    public void deleteGoods_existingGoods_removedGoods() {
+        modelManager.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        modelManager.addGoods(appleReceipt);
+        modelManager.deleteGoods(appleReceipt);
+        List<GoodsReceipt> goodsList = modelManager.getGoods().getReceiptList();
+        assertEquals(goodsList.size(), 0);
+    }
+
+    @Test
+    public void findGoodsReceipt_existingGoods_returnGoodsReceipt() {
+        modelManager.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        modelManager.addGoods(appleReceipt);
+        Optional<GoodsReceipt> goodsReceipt = modelManager
+                .findGoodsReceipt(appleReceipt::equals);
+        assertEquals(goodsReceipt, Optional.of(appleReceipt));
+    }
+
+    @Test
+    public void findGoodsReceipt_nonExistingGoods_returnNoGoodsReceipt() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        Goods banana = new GoodsBuilder()
+                .withName("Banana")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        GoodsReceipt bananaReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(BOB.getName())
+                .withGoods(banana)
+                .build();
+        modelManager.addGoods(appleReceipt);
+        Optional<GoodsReceipt> goodsReceipt = modelManager
+                .findGoodsReceipt(bananaReceipt::equals);
+        assertEquals(goodsReceipt, Optional.empty());
     }
 
     @Test
@@ -201,19 +265,5 @@ public class ModelManagerTest {
     @Test
     public void getFilteredGoods() {
         // TODO: Implement this
-    }
-
-    @Test
-    public void deleteGoods_removedGoods() {
-        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
-                .withGoodsName(new GoodsName("Calbee"))
-                .withSupplierName(ALICE.getName())
-                .build();
-        modelManager.addPerson(ALICE);
-        modelManager.addGoods(goodsReceipt);
-        modelManager.deleteGoods(goodsReceipt.getGoods().getGoodsName());
-        List<GoodsReceipt> goodsList = modelManager
-                .getFilteredGoods(r -> r.getGoods().getGoodsName().equals("Calbee"));
-        assertEquals(goodsList.size(), 0);
     }
 }
