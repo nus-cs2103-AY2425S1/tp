@@ -12,6 +12,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RENTAL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -42,10 +45,15 @@ public class DeleteRentalCommandTest {
                 Messages.formatRentalInformation(rentalToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
         Client editedClient = new PersonBuilder(secondClient)
                 .withRentalInformation(secondClient.getRentalInformation().get(INDEX_SECOND_RENTAL.getZeroBased()))
                 .build();
         expectedModel.setPerson(secondClient, editedClient);
+        expectedModel.setLastViewedClient(editedClient);
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandPromptsSuccess(deleteRentalCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }
@@ -81,8 +89,10 @@ public class DeleteRentalCommandTest {
                 Messages.formatRentalInformation(rentalToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
         Client editedClient = new PersonBuilder(firstClient).withRentalInformation().build();
         expectedModel.setPerson(firstClient, editedClient);
+        expectedModel.setLastViewedClient(editedClient);
 
         assertCommandPromptsSuccess(deleteRentalCommand, model, expectedPrompt, expectedMessage, expectedModel);
     }

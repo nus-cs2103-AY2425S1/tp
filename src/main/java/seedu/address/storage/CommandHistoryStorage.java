@@ -187,4 +187,18 @@ public class CommandHistoryStorage {
     public void setCommandHistoryFilePath(Path path) {
         commandHistoryFilePath = path;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CommandHistoryStorage)) {
+            return false;
+        }
+        CommandHistoryStorage other = (CommandHistoryStorage) obj;
+
+        return currentLineNumber == other.currentLineNumber
+                && previousTotalLines == other.previousTotalLines;
+    }
 }

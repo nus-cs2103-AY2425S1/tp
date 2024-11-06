@@ -17,6 +17,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RENTAL;
 import static seedu.address.testutil.TypicalPersons.ALICE_WITH_RENTAL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -48,9 +51,14 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         Client editedClient = new PersonBuilder(ALICE_WITH_RENTAL).withRentalInformation(editedRentalInformation)
                 .build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
+        expectedModel.setLastViewedClient(editedClient);
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
@@ -76,7 +84,12 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         expectedModel.setPerson(lastClient, editedClient);
+        expectedModel.setLastViewedClient(editedClient);
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
@@ -93,6 +106,11 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editedRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        expectedModel.setLastViewedClient(editedClient);
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
@@ -117,7 +135,12 @@ public class EditRentalCommandTest {
                 Messages.formatRentalInformation(editeRentalInformation));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedClient);
+        expectedModel.setLastViewedClient(editedClient);
+
+        List<RentalInformation> editedRentalInformationList = new ArrayList<>(editedClient.getRentalInformation());
+        expectedModel.updateVisibleRentalInformationList(editedRentalInformationList);
 
         assertCommandSuccess(editRentalCommand, model, expectedMessage, expectedModel);
     }
