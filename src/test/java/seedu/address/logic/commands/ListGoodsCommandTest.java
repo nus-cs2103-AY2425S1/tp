@@ -53,10 +53,10 @@ public class ListGoodsCommandTest {
 
     @Test
     public void execute_supplierNameKeyword_matchingGoodsReturned() {
-        Predicate<GoodsReceipt> predicate = new SupplierNamePredicate(new Name("Supplier"));
+        Predicate<GoodsReceipt> predicate = new SupplierNamePredicate(new Name("Alice Pauline"));
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
-        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 10, 100.00);
+        String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 2, 20.00);
         CommandResult expectedCommandResult = new CommandResult(ListGoodsCommand.MESSAGE_SUCCESS + statisticsString);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
@@ -74,7 +74,7 @@ public class ListGoodsCommandTest {
     @Test
     public void execute_multipleKeywords_matchingGoodsReturned() {
         Predicate<GoodsReceipt> predicate1 = new GoodsNamePredicate("Apple");
-        Predicate<GoodsReceipt> predicate2 = new SupplierNamePredicate(new Name("Supplier"));
+        Predicate<GoodsReceipt> predicate2 = new SupplierNamePredicate(new Name("Alice Pauline"));
         Predicate<GoodsReceipt> predicate = predicate1.and(predicate2);
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);

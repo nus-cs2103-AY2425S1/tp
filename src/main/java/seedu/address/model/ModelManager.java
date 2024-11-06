@@ -19,6 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
+import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -40,7 +41,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyUserPrefs userPrefs,
                         ReadOnlyReceiptLog goodsList) {
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, userPrefs, goodsList);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -48,6 +49,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
+        filterIllegalSupplierNames();
         filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
     }
 
@@ -207,7 +209,7 @@ public class ModelManager implements Model {
     @Override
     public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
         requireNonNull(goodsReceipts);
-        this.goodsList.resetData(goodsReceipts);
+        goodsList.resetData(goodsReceipts);
     }
 
     @Override
@@ -217,7 +219,13 @@ public class ModelManager implements Model {
 
     @Override
     public void addGoods(GoodsReceipt goodsReceipt) {
-        goodsList.addReceipt(goodsReceipt);
+        requireNonNull(goodsReceipt);
+
+        if (hasExistingSupplier(goodsReceipt)) {
+            goodsList.addReceipt(goodsReceipt);
+        } else {
+            throw new IllegalSupplierNameException();
+        }
     }
 
     @Override
@@ -250,5 +258,16 @@ public class ModelManager implements Model {
     @Override
     public double getFilteredGoodsCostStatistics() {
         return GoodsReceiptUtil.sumTotals(filteredReceipts);
+    }
+
+    private boolean hasExistingSupplier(GoodsReceipt goodsReceipt) {
+        return addressBook.getPersonList()
+                .stream()
+                .map(Person::getName)
+                .anyMatch(personName -> personName.equals(goodsReceipt.getSupplierName()));
+    }
+
+    private void filterIllegalSupplierNames() {
+        goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
     }
 }
