@@ -1,69 +1,92 @@
 /* ContactDisplay.css */
 
-#scrollPane {
-    -fx-background: #B5D4F5;
+.scrollpane {
+    -fx-background: #383838;
     width: 100%;
 }
 
 #scrollPane .viewport {
-    -fx-background-color: #B5D4F5;
+    -fx-background-color: #383838;
 }
 
 .vbox {
-    -fx-padding: 20;
-    -fx-background-color: #B5D4F5;
-    -fx-border-color: #B5D4F5;
+    -fx-padding: 25;
     -fx-font-family: 'Garamond';
     -fx-spacing: 20;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    width: 100%;
+    alignment: center;
+}
+
+.header {
+    -fx-background-color: #B5D4F5;
+    -fx-font-family: 'Garamond';
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-padding: 20;
     width: 100%;
 }
 
-#contactHeader #contactBody {
+.body {
+    -fx-background-color: #fed4a8;
     -fx-padding: 20;
-    -fx-background-color: #B5D4F5;
-    -fx-border-color: #B5D4F5;
     -fx-font-family: 'Garamond';
     -fx-spacing: 20;
+    -fx-alignment: center;
+    width: 100%;
 }
 
 .label {
     -fx-font-family: 'Garamond';
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: #333;
+    -fx-alignment: center;
+    width: 100%;
 }
 
 #helpLabel {
-    -fx-font-family: monospace;
+    -fx-font-family: 'Garamond';
     -fx-font-size: 16px;
     -fx-text-fill: #333;
+    width: 100%;
 }
 
 #nameLabel {
     -fx-font-weight: bold;
-    -fx-font-size: 18px;
+    -fx-padding: 20;
+    -fx-font-size: 36px;
+    -fx-alignment: center;
+    width: 100%;
 }
 
 .category-label {
     -fx-text-fill: white;
+    -fx-font-size: 28px;
     -fx-padding: 5px 10px;
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-font-weight: bold;
     -fx-alignment: center;
+    width: 100%;
 }
 
-.category-label.with-background {
+.category-label.student-background {
+    -fx-background-color: #EF7C00;
+}
+
+.category-label.company-background {
     -fx-background-color: #EF7C00;
 }
 
 #tags {
-    -fx-background-color: #e9b279;
     -fx-padding: 5px 10px;
     -fx-hgap: 15px;
     -fx-vgap: 15px;
     -fx-font-family: 'Garamond';
     -fx-alignment: center;
+    width: 100%;
 }
 
 #tags .label {
@@ -72,8 +95,19 @@
     -fx-vgap: 15px;
     -fx-font-family: 'Garamond';
     -fx-alignment: center;
+    -fx-font-size: 18px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
 }
 
-#tags .label.with-background {
-    -fx-background-color: #EF7C00;
+#tags .label.with-background-1 {
+    -fx-background-color: #003D7C;
+}
+
+#tags .label.with-background-2 {
+    -fx-background-color: #2d5f92;
+}
+
+#tags .label.paid {
+    -fx-background-color: #1acc4d;
 }

@@ -29,14 +29,21 @@ public class DeleteTagCommand extends Command {
             + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 t/Y3 t/Engineering";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags from Contact: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tags %1$s from Contact: %2$s";
+    public static final String MESSAGE_DELETE_TAG_FROM_ALL_SUCCESS = "Deleted the tag(s) %1$s "
+            + "from all contacts in the list.";
+
     public static final String MESSAGE_INVALID_TAG = "The tag %1$s does not exist.";
+    public static final String INVALID_INDEX_OR_STRING = "The person index provided is invalid. Index must either be:\n"
+            + "1. Within the size of the list\n"
+            + "2. 'all' if you want to delete the tag from all contacts in the list.";
     private final Index targetIndex;
     private final Set<Tag> tagsToDelete;
+    private final boolean deleteFromAll;
 
     /**
-     * @param targetIndex of the person in the filtered person list to add tags to
-     * @param tagsToDelete the tags to be added to the person
+     * @param targetIndex of the person in the filtered person list to delete tags from
+     * @param tagsToDelete the tags to be deleted from the person
      */
     public DeleteTagCommand(Index targetIndex, Set<Tag> tagsToDelete) {
         requireNonNull(targetIndex);
@@ -44,6 +51,19 @@ public class DeleteTagCommand extends Command {
 
         this.targetIndex = targetIndex;
         this.tagsToDelete = tagsToDelete;
+        this.deleteFromAll = false;
+    }
+
+    /**
+     * @param all string to indicate that the tag is to be deleted from all contacts in the list
+     * @param tagsToDelete the tags to be deleted from all contacts in the list
+     */
+    public DeleteTagCommand(String all, Set<Tag> tagsToDelete) {
+        requireNonNull(tagsToDelete);
+
+        this.targetIndex = null;
+        this.tagsToDelete = tagsToDelete;
+        this.deleteFromAll = true;
     }
 
     @Override
@@ -51,16 +71,26 @@ public class DeleteTagCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        if (deleteFromAll) {
+            for (Person p : lastShownList) {
+                Person editedPerson = deleteTagsFromPerson(p, tagsToDelete);
+                model.setPerson(p, editedPerson);
+                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            }
+            return new CommandResult(String.format(MESSAGE_DELETE_TAG_FROM_ALL_SUCCESS, tagsToDelete));
+        } else {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(INVALID_INDEX_OR_STRING);
+            }
 
-        assert targetIndex.getOneBased() > 0;
-        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Person editedPerson = deleteTagsFromPerson(personToEdit, tagsToDelete);
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPerson));
+            assert targetIndex.getOneBased() > 0;
+            Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
+            Person editedPerson = deleteTagsFromPerson(personToEdit, tagsToDelete);
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS,
+                    tagsToDelete, Messages.format(editedPerson)));
+        }
     }
 
     /**
@@ -82,12 +112,14 @@ public class DeleteTagCommand extends Command {
 
         if (personToEdit instanceof Student) {
             Student studentToEdit = (Student) personToEdit;
-            return new Student(studentToEdit.getName(), studentToEdit.getStudentId(), studentToEdit.getPhone(),
-                    studentToEdit.getEmail(), studentToEdit.getAddress(), currentTags);
+            return new Student(studentToEdit.getName(), studentToEdit.getStudentId(),
+                    studentToEdit.getPhone(), studentToEdit.getEmail(),
+                    studentToEdit.getAddress(), currentTags);
         } else {
             Company companyToEdit = (Company) personToEdit;
-            return new Company(companyToEdit.getName(), companyToEdit.getIndustry(), companyToEdit.getPhone(),
-                    companyToEdit.getEmail(), companyToEdit.getAddress(), currentTags);
+            return new Company(companyToEdit.getName(), companyToEdit.getIndustry(),
+                    companyToEdit.getPhone(), companyToEdit.getEmail(),
+                    companyToEdit.getAddress(), currentTags);
         }
     }
 
@@ -103,7 +135,8 @@ public class DeleteTagCommand extends Command {
         }
 
         DeleteTagCommand otherCommand = (DeleteTagCommand) other;
-        return targetIndex.equals(otherCommand.targetIndex) && tagsToDelete.equals(otherCommand.tagsToDelete);
+        return (targetIndex == null || targetIndex.equals(otherCommand.targetIndex))
+                && tagsToDelete.equals(otherCommand.tagsToDelete);
     }
 
     @Override

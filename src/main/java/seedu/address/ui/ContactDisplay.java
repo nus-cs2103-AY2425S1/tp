@@ -17,49 +17,58 @@ import seedu.address.model.person.student.Student;
  */
 public class ContactDisplay extends UiPart<Region> {
     @FXML
+    public static final String LINE_BREAK = "_____________________________________________________________";
+    @FXML
     public static final String CONDENSED_HELP_MESSAGE = "Link to the user guide: helpwindow\n"
             + "Pops up a link to the user guide for the user to easily access.\n"
-            + "\n" + "Format: helpwindow\n---\n"
+            + "\n" + "Format: helpwindow\n"
+            + LINE_BREAK + "\n"
             + "Adding a contact : student OR company\n"
             + "Adds either a student or a company to the address book.\n"
             + "\n" + "Format: student n/NAME s/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B"
-            + "\n" + "Format: company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B" + "\n---\n"
+            + "\n" + "Format: company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B"
+            + "\n" + LINE_BREAK + "\n"
             + "Listing all persons : list\n"
             + "Shows a list of all persons in the address book.\n"
-            + "\n" + "Format: list\n---\n"
+            + "\n" + "Format: list"
+            + "\n" + LINE_BREAK + "\n"
             + "Viewing a contact : view\n"
             + "Shows the details of a contact.\n"
-            + "\n" + "Format: view INDEX\n---\n"
+            + "\n" + "Format: view INDEX"
+            + "\n" + LINE_BREAK + "\n"
             + "Editing a person : edit\n"
             + "Edits an existing person in the address book.\n" + "\n"
-            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B \n---\n"
+            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B"
+            + "\n" + LINE_BREAK + "\n"
             + "Locating persons by name : find\n"
             + "Finds persons whose names contain any of the given keywords.\n"
-            + "\n" + "Format: find KEYWORD [MORE_KEYWORDS]\n---\n"
+            + "\n" + "Format: find KEYWORD [MORE_KEYWORDS]" + "\n" + LINE_BREAK + "\n"
             + "Filtering contacts by tags : filtertag\n"
             + "Finds contacts whose tags are the same as the specified keyword.\n"
-            + "\n" + "Format: filtertag KEYWORD\n---\n"
+            + "\n" + "Format: filtertag KEYWORD" + "\n" + LINE_BREAK + "\n"
             + "Track contacts by category : track\n"
-            + "Tracks and lists all contacts who are in the category of the specified keywords.\n"
-            + "\n" + "Format: track CATEGORY\n---\n"
+            + "Tracks and lists all contacts who are in the category of the \nspecified keywords.\n"
+            + "\n" + "Format: track CATEGORY" + "\n" + LINE_BREAK + "\n"
             + "Deleting a contact : delete\n"
             + "Deletes the specified person from the address book.\n"
-            + "\n" + "Format: delete INDEX\n---\n"
+            + "\n" + "Format: delete INDEX" + "\n" + LINE_BREAK + "\n"
             + "Adding tag(s) to a contact: tag\n"
             + "Adds additional tags to the specified contact.\n"
-            + "\n" + "Format: tag INDEX t/TAG [t/MORE_TAGS]\n---\n"
+            + "\n" + "Format: tag INDEX t/TAG [t/MORE_TAGS]" + "\n" + LINE_BREAK + "\n"
             + "Deleting tag(s) from contact: deletetag\n"
             + "Deletes the specified tag(s) from the specified contact.\n"
-            + "\n" + "Format: deletetag INDEX t/TAG [t/MORE_TAGS]\n---\n"
+            + "\n" + "Format: deletetag INDEX t/TAG [t/MORE_TAGS]\n"
+            + "OR\n"
+            + "Format: deletetag all t/TAG [t/MORE_TAGS]" + "\n" + LINE_BREAK + "\n"
             + "Importing CSV files: import\n"
             + "Imports data from a CSV file, based on the path to the CSV file.\n"
-            + "\n" + "Format: import /path/to/data/File.csv\n---\n"
+            + "\n" + "Format: import /path/to/data/File.csv" + "\n" + LINE_BREAK + "\n"
             + "Exporting CSV files: export\n"
-            + "Exports the current data to a CSV file, based on the desired path and filename for the CSV.\n"
-            + "\n" + "Format: export /path/to/data/File.csv\n---\n"
+            + "Exports the current data to a CSV file, based on the desired \npath and filename for the CSV.\n"
+            + "\n" + "Format: export /path/to/data/File.csv" + "\n" + LINE_BREAK + "\n"
             + "Clearing all entries : clear\n"
             + "Clears all entries from the address book.\n"
-            + "\n" + "Format: clear\n---\n"
+            + "\n" + "Format: clear" + "\n" + LINE_BREAK + "\n"
             + "Exiting the program : exit\n"
             + "Exits the program.\n" + "\n" + "Format: exit\n";
     public static final String FXML = "ContactDisplay.fxml";
@@ -109,7 +118,7 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void updateContactDetails(Person person) {
         helpLabel.setText(null);
-        nameLabel.setText("Name: " + person.getName().fullName);
+        nameLabel.setText(person.getName().fullName);
         categoryLabel.setText(person.getCategoryDisplayName());
         phoneLabel.setText("Phone: " + person.getPhone().value);
         emailLabel.setText("Email: " + person.getEmail().value);
@@ -118,6 +127,7 @@ public class ContactDisplay extends UiPart<Region> {
         person.getTags().stream()
         .sorted(Comparator.comparing(tag -> tag.tagName))
         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        checkIsNullTags();
         if (person instanceof Company) {
             Company company = (Company) person;
             industryStudentIdLabel.setText("Industry: " + company.getIndustry().value);
@@ -141,9 +151,7 @@ public class ContactDisplay extends UiPart<Region> {
         emailLabel.setText("Email: " + company.getEmail().value);
         addressLabel.setText("Address: " + company.getAddress().value);
         tags.getChildren().clear();
-        company.getTags().stream()
-        .sorted(Comparator.comparing(tag -> tag.tagName))
-        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        checkIsNullTags();
     }
 
     /**
@@ -158,10 +166,7 @@ public class ContactDisplay extends UiPart<Region> {
         phoneLabel.setText("Phone: " + student.getPhone().value);
         emailLabel.setText("Email: " + student.getEmail().value);
         addressLabel.setText("Address: " + student.getAddress().value);
-        tags.getChildren().clear();
-        student.getTags().stream()
-        .sorted(Comparator.comparing(tag -> tag.tagName))
-        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        checkIsNullTags();
     }
 
     /**
@@ -187,8 +192,8 @@ public class ContactDisplay extends UiPart<Region> {
         helpLabel.setText(CONDENSED_HELP_MESSAGE);
         nameLabel.setText(null);
         industryStudentIdLabel.setText(null);
-        phoneLabel.setText(null);
-        emailLabel.setText(null);
+        phoneLabel.setText("You can also click on the contacts to view their details!");
+        emailLabel.setText("User Guide: https://ay2425s1-cs2103t-t14-2.github.io/tp/UserGuide.html");
         addressLabel.setText(null);
         categoryLabel.setText(null);
         tags.getChildren().clear();
@@ -252,34 +257,48 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void checkIsNullCategory() {
         categoryLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.isEmpty()) {
-                categoryLabel.getStyleClass().remove("with-background");
-            } else {
-                if (!categoryLabel.getStyleClass().contains("with-background")) {
-                    categoryLabel.getStyleClass().add("with-background");
-                }
+            categoryLabel.getStyleClass().removeAll("student-background", "company-background");
+            if (newValue != null || !newValue.isEmpty()) {
+                addCategoryColor(newValue);
             }
         });
+    }
+
+    /**
+     * Adds background color for category.
+     * @param value The value of the category.
+     */
+    public void addCategoryColor(String value) {
+        if ("Student".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("student-background");
+        } else if ("Company".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("company-background");
+        }
     }
 
     /**
      * Removes the background colour of the tags flowpane if it is null.
      */
     public void checkIsNullTags() {
-        for (javafx.scene.Node node : tags.getChildren()) {
+        for (int i = 0; i < tags.getChildren().size(); i++) {
+            javafx.scene.Node node = tags.getChildren().get(i);
             if (node instanceof Label tagLabel) {
                 String text = tagLabel.getText();
+                tagLabel.getStyleClass().remove("with-background-1");
+                tagLabel.getStyleClass().remove("with-background-2");
                 if (text == null || text.isEmpty()) {
-                    tagLabel.getStyleClass().remove("with-background");
+                    continue;
                 } else {
-                    if (!tagLabel.getStyleClass().contains("with-background")) {
-                        tagLabel.getStyleClass().add("with-background");
+                    if (text.equalsIgnoreCase("paid")) {
+                        tagLabel.getStyleClass().add("paid");
+                    } else if (i % 2 == 0) {
+                        tagLabel.getStyleClass().add("with-background-1");
+                    } else {
+                        tagLabel.getStyleClass().add("with-background-2");
                     }
                 }
             }
         }
     }
-
-
 }
 
