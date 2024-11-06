@@ -31,9 +31,6 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
-    /**
-     * Handles the Enter button pressed event.
-     */
     @FXML
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
@@ -41,6 +38,32 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
+        if (isAddLogCommand(commandText) && !commandText.contains("l/")) {
+            // Disable commandTextField and trigger the popup for log entry
+            commandTextField.setDisable(true);
+            AddLogPopup.display(
+                    logEntry -> {
+                        // Replace actual newline characters with \n
+                        String encodedLogEntry = logEntry.replace("\n", "\\n");
+                        String commandWithLog = commandText + " l/" + encodedLogEntry;
+                        executeCommand(commandWithLog);
+                        commandTextField.setDisable(false);
+                    },
+                    () -> {
+                        // Callback for cancel action
+                        commandTextField.setDisable(false);
+                    }
+            );
+        } else {
+            // Handle command normally if l/ is present or if it's not an addlog command
+            executeCommand(commandText);
+        }
+    }
+
+    /**
+     * Executes the given command text through the command executor and handles exceptions.
+     */
+    private void executeCommand(String commandText) {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
@@ -48,6 +71,18 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
         }
     }
+
+    /**
+     * Validates if the input command is an addlog command with the required format.
+     * Basic regex can be customized based on the exact expected format.
+     */
+    private boolean isAddLogCommand(String input) {
+
+        //TODO: Instead of using a hardcoded regex, change it to use actual validation of both date and NRIC
+        // Regex to match "addlog i/NRIC d/DATE" format where DATE is in "dd MMM yyyy" format
+        return input.matches("addlog i/S7783844i d/21 jan 2024");
+    }
+
 
     /**
      * Sets the command box style to use the default style.
