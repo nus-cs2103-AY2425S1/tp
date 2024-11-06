@@ -168,7 +168,7 @@ Examples:
 
 ### Deleting in a batch : `batch-delete`
 
-Delete all contacts from cher with containing **all** the specified tags.
+Delete all contacts from Cher that contain **all** the specified tags.
 
 Format: `batch-delete t/TAG [t/TAG]...`
 
