@@ -39,9 +39,9 @@ public class TransactionCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label month;
+    private Label year;
     @FXML
-    private Label day;
+    private Label dayMonth;
     @FXML
     private FlowPane categories;
 
@@ -51,8 +51,8 @@ public class TransactionCard extends UiPart<Region> {
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
-        month.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("MMM")));
-        day.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("d")));
+        dayMonth.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("d MMM")));
+        year.setText(transaction.getDate().getDate().format(DateTimeFormatter.ofPattern("uuuu")));
         name.setText(displayedIndex + ". " + transaction.getPerson().getName().fullName);
         if (transaction.getStatus().isDone()) {
             Image doneIcon = new Image(

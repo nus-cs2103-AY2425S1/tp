@@ -20,9 +20,9 @@
         <padding>
             <Insets top="5" right="5" bottom="5" left="15"/>
         </padding>
-        <VBox alignment="CENTER" spacing="5" minWidth="50" maxWidth="50" GridPane.columnIndex="0">
-            <Label fx:id="month" styleClass="transaction-month"/>
-            <Label fx:id="day" styleClass="transaction-day"/>
+        <VBox alignment="CENTER" spacing="5" minWidth="70" maxWidth="50" GridPane.columnIndex="0">
+            <Label fx:id="dayMonth" styleClass="transaction-month"/>
+            <Label fx:id="year" styleClass="transaction-year"/>
         </VBox>
 
         <VBox alignment="CENTER_LEFT" minWidth="80" GridPane.columnIndex="1">
