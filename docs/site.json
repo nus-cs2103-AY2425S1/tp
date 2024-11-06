@@ -4,7 +4,7 @@
   "titleSuffix": "AddressBook Level-3",
   "faviconPath": "images/LegacyLink.png",
   "style": {
-    "codeTheme": "bootswatch-lux"
+    "bootstrapTheme": "bootswatch-lux"
   },
   "ignore": [
     "_markbind/layouts/*",
