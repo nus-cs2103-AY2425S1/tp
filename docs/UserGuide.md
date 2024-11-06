@@ -54,7 +54,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 | [**Filter**](#filtering-persons-by-tag-filter)                  | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                             |
 | [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                                            |
 | [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                            |
-| [**View**](#viewing-a-contact-s-full-details-view)              | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                       |
+| [**View**](#viewing-a-contact-s-full-details-view)              | `view [n/NAME]` <br> e.g., `view n/John Doe`                                                                                                                                                      |
 | [**Github**](#launching-github-repository-github)               | `github n/NAME`  <br> e.g., `github n/Harry`                                                                                                                                                      |
 | [**Mark**](#marking-a-student-as-present-mark)                  | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                       |
 | [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                   |
@@ -334,8 +334,8 @@ Opens a window at the side with the full details of the specified person from th
 
 <md>**Examples:**</md>
 
-* `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
-* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`.
+* `view n/John Doe` opens a window at the side showing the full details of the person named `John Doe`.
+* Calling `view n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`.
   ![viewing John Doe's contact detail in the view window](images/viewWindowScreenshot.png)
   </box>
 
