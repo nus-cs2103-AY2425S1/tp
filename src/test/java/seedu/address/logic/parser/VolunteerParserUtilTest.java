@@ -21,14 +21,11 @@ public class VolunteerParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DATE_FORMAT = "2020/10/10";
     private static final String INVALID_DATE = "2020-32-32";
-    private static final String INVALID_TIME_24H_FORMAT = "0000";
-    private static final String INVALID_TIME = "11:69";
 
     private static final String VALID_VOLUNTEER_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DATE = "2020-10-10";
-    private static final String VALID_TIME = "12:00";
 
     private static final String WHITESPACE = " \t\r\n";
 

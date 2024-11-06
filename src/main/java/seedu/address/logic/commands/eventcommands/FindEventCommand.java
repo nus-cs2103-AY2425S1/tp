@@ -20,8 +20,8 @@ public class FindEventCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds events whose names start with the specified prefix (case-insensitive).\n"
-            + "Parameters: PREFIX (must be a non-empty string)\n"
+            + ": Finds events with names containing the specified keyword (case-insensitive).\n"
+            + "Parameters: KEYWORD (must be a non-empty string)\n"
             + "Example: " + COMMAND_WORD + " eventSearchString";
 
     public static final String MESSAGE_EVENT_FOUND = "Found %d event(s) containing '%s':";
@@ -58,9 +58,6 @@ public class FindEventCommand extends Command {
         }
 
         String resultMessage = String.format(MESSAGE_EVENT_FOUND, filteredEvents.size(), searchString);
-        for (Event event : filteredEvents) {
-            resultMessage += "\n" + event.getName().toString();
-        }
 
         return new CommandResult(resultMessage);
     }
