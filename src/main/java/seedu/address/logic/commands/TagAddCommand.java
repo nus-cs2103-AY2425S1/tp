@@ -136,8 +136,7 @@ public class TagAddCommand extends Command {
             } else { // if there are some duplicates
                 // gets the tags that we actually want to add
                 String nonDuplicateTagsExist = String.format(MESSAGE_ADD_TAG_SUCCESS + "\n",
-                        Messages.tagSetToString(tagsInNeither), Messages.getName(editedPerson),
-                        Messages.getName(editedPerson), Messages.tagSetToString(tagsInNeither));
+                        Messages.tagSetToString(tagsInNeither), Messages.getName(editedPerson));
                 // gets the duplicate tags that we dont want to add
                 String duplicateTagsExist = String.format(MESSAGE_DUPLICATE_TAGS,
                         Messages.getName(editedPerson), Messages.tagSetToString(tagsInBoth));

@@ -60,8 +60,7 @@ public class TagAddCommandTest {
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
-                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson),
-                Messages.getName(editedPerson), Messages.tagSetToString(stubTagList));
+                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -134,8 +133,7 @@ public class TagAddCommandTest {
         TagAddCommand tagAddCommand = new TagAddCommand(editedPerson.getName(), stubTagList);
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
-                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson), Messages.getName(editedPerson),
-                Messages.tagSetToString(stubTagList));
+                Messages.tagSetToString(stubTagList), Messages.getName(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
