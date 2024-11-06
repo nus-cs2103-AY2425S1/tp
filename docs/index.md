@@ -8,10 +8,10 @@
 [![Java CI](https://github.com/AY2425S1-CS2103T-T12-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T12-3/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T12-3/tp/graph/badge.svg?token=QBLKQW7MA6)](https://codecov.io/gh/AY2425S1-CS2103T-T12-3/tp)
 
-**Main Window**  
+**Main Window**
 ![Ui](images/Ui.png)
 
-**Inspect Window**  
+**Inspect Window**
 ![Ui2](images/Ui2.png)
 
 **LogiLink is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).

@@ -75,7 +75,7 @@ The UI consists of a `MainWindow` and `InspectWindow` that is made up of parts e
 
 The `MainWindow` and `InspectWindow` are toggleable, meaning that if `MainWindow` is currently being displayed, then the `InspectWindow` will be hidden, and vice versa.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
 For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml), while the layout of the [`InspectWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/InspectWindow.java) is specified in [`InspectWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/InspectWindow.fxml).
 
@@ -179,7 +179,7 @@ Given below is an example usage scenario of switching from the `MainWindow` to `
 3. The `LogicManager` then executes this `InspectCommand` to return a `CommandResult`. This `CommandResult` stores the boolean `isInspect = true` to indicate that it was created by executing an `InspectCommand`, as well as the contact
 to inspect.
 4. The `executeCommand()` method within `MainWindow.java` checks if `isInspect = true`, and changes the window view from `MainWindow` to `InspectWindow` using the `handleInspect()` method if so.
-5. Additionally, within the `handleInspect()` method, a separate `isInspect` boolean within `AddressBookParser` is set to `true`. Certain `XYZCommandParser` classes use this boolean to decide what user inputs are valid during parsing. This 
+5. Additionally, within the `handleInspect()` method, a separate `isInspect` boolean within `AddressBookParser` is set to `true`. Certain `XYZCommandParser` classes use this boolean to decide what user inputs are valid during parsing. This
 allows the same commands to have different functionality depending on the current window view.
 --------------------------------------------------------------------------------------------------------------------
 
