@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":KeyContactParser" as KeyContactParser LOGIC_COLOR
+participant ":KeyContactsParser" as KeyContactsParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +17,17 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> KeyContactParser : parseCommand("delete 1")
-activate KeyContactParser
+LogicManager -> KeyContactsParser : parseCommand("delete 1")
+activate KeyContactsParser
 
 create DeleteCommandParser
-KeyContactParser -> DeleteCommandParser
+KeyContactsParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> KeyContactParser
+DeleteCommandParser --> KeyContactsParser
 deactivate DeleteCommandParser
 
-KeyContactParser -> DeleteCommandParser : parse("1")
+KeyContactsParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -37,14 +37,14 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser :
 deactivate DeleteCommand
 
-DeleteCommandParser --> KeyContactParser : d
+DeleteCommandParser --> KeyContactsParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> KeyContactParser
+DeleteCommandParser -[hidden]-> KeyContactsParser
 destroy DeleteCommandParser
 
-KeyContactParser --> LogicManager : d
-deactivate KeyContactParser
+KeyContactsParser --> LogicManager : d
+deactivate KeyContactsParser
 
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
