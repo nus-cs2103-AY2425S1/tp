@@ -275,6 +275,7 @@ public class EditCommand extends Command {
                     .add("company", company)
                     .add("tags", tags)
                     .add("products", products)
+                    .add("status", status)
                     .toString();
         }
     }

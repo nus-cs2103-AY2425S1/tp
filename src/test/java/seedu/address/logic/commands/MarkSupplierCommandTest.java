@@ -28,13 +28,13 @@ public class MarkSupplierCommandTest {
     private static final String SUPPLIER_STATUS_STUB = "active";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_markUnfilteredList_success() {
         Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         Supplier editedSupplier = new SupplierBuilder(firstSupplier).withStatus(SUPPLIER_STATUS_STUB).build();
         MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                INDEX_FIRST_SUPPLIER.getOneBased(), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
@@ -49,7 +49,7 @@ public class MarkSupplierCommandTest {
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                INDEX_FIRST_SUPPLIER.getOneBased(), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -102,5 +102,21 @@ public class MarkSupplierCommandTest {
         // different status -> returns false
         assertFalse(standardCommand.equals(new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(VALID_STATUS_BOB))));
+    }
+    @Test
+    public void duplicateStatus_failure() {
+        Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier editedSupplier = new SupplierBuilder(firstSupplier).withStatus(SUPPLIER_STATUS_STUB).build();
+        MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
+                new SupplierStatus(editedSupplier.getStatus().status));
+        String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setSupplier(firstSupplier, editedSupplier);
+        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+        MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
+                new SupplierStatus(editedSupplier.getStatus().status));
+        assertCommandFailure(remarkCommand, model, String.format(Messages.MESSAGE_DUPLICATE_SUPPLIER_STATUS,
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status));
     }
 }

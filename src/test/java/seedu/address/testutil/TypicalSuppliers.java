@@ -32,7 +32,7 @@ public class TypicalSuppliers {
             .withPhone("94351253")
             .withTags("friends")
             .withProducts("bread")
-            .withStatus("active")
+            .withStatus("inactive")
             .build();
     public static final Supplier BENSON = new SupplierBuilder().withName("Benson Meier")
             .withCompany("company B")

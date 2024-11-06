@@ -11,6 +11,7 @@ import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Phone;
 import seedu.address.model.supplier.Supplier;
+import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +40,7 @@ public class EditSupplierDescriptorBuilder {
         descriptor.setCompany(supplier.getCompany());
         descriptor.setTags(supplier.getTags());
         descriptor.setProducts(supplier.getProducts());
+        descriptor.setStatus(supplier.getStatus());
     }
 
     /**
@@ -92,7 +94,13 @@ public class EditSupplierDescriptorBuilder {
         descriptor.setProducts(productSet);
         return this;
     }
-
+    /**
+     * Sets the {@code SupplierStatus} of the {@code EditSupplierDescriptor} that we are building.
+     */
+    public EditSupplierDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new SupplierStatus(status));
+        return this;
+    }
     public EditSupplierDescriptor build() {
         return descriptor;
     }

@@ -17,7 +17,7 @@ public class DeleteSupplierCommand extends Command {
             + ": Deletes the supplier identified by the index number used in the displayed supplier list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " -s 1";
-    public static final String MESSAGE_DELETE_SUPPLIER_SUCCESS = "Supplier index %1$s has been deleted successfully";
+    public static final String MESSAGE_DELETE_SUPPLIER_SUCCESS = "Deleted Supplier: %1$s";
     private final Index targetIndex;
     public DeleteSupplierCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -31,7 +31,7 @@ public class DeleteSupplierCommand extends Command {
         }
         Supplier supplierToDelete = model.getModifiedSupplierList().get(targetIndex.getZeroBased());
         model.deleteSupplier(supplierToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, Messages.format(supplierToDelete)));
     }
     @Override
     public boolean equals(Object other) {
