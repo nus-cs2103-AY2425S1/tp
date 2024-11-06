@@ -48,8 +48,7 @@
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <!-- Horizontally Scrollable PinWindow section -->
-                <StackPane fx:id="pinnedListPanelPlaceholder" minHeight="90" maxHeight="90"/>
-
+            <StackPane fx:id="pinnedListPanelPlaceholder" minHeight="90" maxHeight="90"/>
             <StackPane fx:id="contactDetailsPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
