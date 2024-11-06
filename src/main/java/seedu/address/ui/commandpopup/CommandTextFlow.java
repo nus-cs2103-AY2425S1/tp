@@ -92,9 +92,6 @@ public class CommandTextFlow extends TextFlow {
         case "save" -> "save - Saves the gamer address book data";
         case "load" -> "load - Loads the gamer address book data";
         case "exit" -> "exit - Closes the gamer address book";
-        case "findtime" -> "findtime TIME_RANGE [MORE_RANGES] "
-                        + "- Finds persons whose preferred times overlap with any of the time ranges";
-        // TODO: #201 description for 'undo', 'favgame', 'unfavgame', and 'findgame'
         default -> "No additional information available";
         };
     }
