@@ -1,5 +1,8 @@
 package seedu.address.logic;
 
+
+import static seedu.address.model.person.PersonUtil.getRoleSpecificInfoString;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -48,8 +51,12 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        String roleSpecificInfo = getRoleSpecificInfoString(person);
+        builder.append(roleSpecificInfo);
         return builder.toString();
     }
+
+
 
     /**
      * Formats the updated {@code volunteer}'s new hours for display to the user.

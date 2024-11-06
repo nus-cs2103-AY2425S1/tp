@@ -13,7 +13,7 @@ import seedu.address.model.person.Group;
 /**
  * Panel containing the list of groups.
  */
-public class GroupListPanel extends UiPart<Region> {
+public class GroupListPanel extends UiPart<Region> implements PersonListObserver {
     private static final String FXML = "GroupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(GroupListPanel.class);
 
@@ -30,11 +30,25 @@ public class GroupListPanel extends UiPart<Region> {
     }
 
     /**
+     * Refreshes the group list to reflect any updates in the person list.
+     */
+    public void refreshGroupList() {
+        System.out.println("refresh called");
+        groupListView.refresh();
+    }
+
+    @Override
+    public void onPersonListChanged() {
+        refreshGroupList();
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Group} using a {@code GroupCard}.
      */
     class GroupListViewCell extends ListCell<Group> {
         @Override
         protected void updateItem(Group group, boolean empty) {
+            System.out.println("update in group called");
             super.updateItem(group, empty);
 
             if (empty || group == null) {

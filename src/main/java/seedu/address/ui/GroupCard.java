@@ -41,7 +41,7 @@ public class GroupCard extends UiPart<Region> {
 
         // Retrieve the list of members in the group
         List<Person> members = group.asUnmodifiableObservableList();
-
+        System.out.println("group card constructor called" + group.getName() +  members);
         groupSize.setText(String.valueOf(members.size()));
         groupSize.getStyleClass().add("groupList");
 
