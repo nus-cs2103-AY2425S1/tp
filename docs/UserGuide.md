@@ -75,7 +75,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
   e.g `sn/STUDENT_NAME [t/TAG]` can be used as `sn/John Doe t/TD9` or as `sn/John Doe`.
 
 * Items with `…`​ after them can **be used multiple times including zero times**.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/Good at UI t/Team Lead` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/GoodatUI t/TeamLead` etc.
 
 * Parameters can be in **any order**.<br>
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
@@ -142,93 +142,104 @@ This screenshot shows the result of executing `add_s sno/A0123456A sn/James Ho e
 
 #### Deleting a Student: `del_s`, `ds`
 
-Explanation of what command does.
+Deletes a student from T_Assistant.
 
 **Format**: `del_s sno/STUDENT_NUMBER`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. A student with the `Student Number` must exist in T_Assistant.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Deleting `James Ho` from T_Assistant
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `del_s sno/A0123456A`
 
 This screenshot shows the result of executing `del_s sno/A0123456A`.
+
+![delete_student](images/screenshots/del_s.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Student: `edit_s`, `es`
 
-Explanation of what command does.
+Edits the details of a student.
 
-**Format**: `edit_s sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]`
+**Format**: `edit_s i/INDEX [sn/NAME] [e/EMAIL] [t/TAG]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. `edit_s` edits the student identified by the index. It only accepts a valid index
+   based on the list when list_s is called.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario (for commands that can be overloaded)
 
-Add more scenarios if necessary
+###### Scenario #1: Editing `Bernice Yu`'s Name
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `edit_s i/2 sn/Bernice Yu Ting Kang`
 
-This screenshot shows the result of executing `edit_s sno/A0123456A sn/James Ho Ting Kang`.
+This screenshot shows the result of executing `edit_s i/2 sn/Bernice Yu Ting Kang`.
+
+![edit_student](images/screenshots/edit_s.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Student to a Group: `add_s_g`, `asg`
 
-Explanation of what command does.
+Adds a student to a group.
 
 **Format**: `add_s_g sno/STUDENT_NUMBER gn/GROUP_NAME`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. The group with the `Group Name` and student with the `Student Number` must both exist in T_Assistant.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Adding `James Ho` to `CS2103-F11-1`
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `add_s_g sno/A0123456A gn/CS2103-F11-1`
 
-This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F12-2`.
+This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F11-1`.
+
+![add_s_g](images/screenshots/add_s_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Student from a Group: `del_s_g`, `dsg`
 
-Explanation of what command does.
+Deletes a student from its assigned group.
 
 **Format**: `del_s_g sno/STUDENT_NUMBER`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. This feature only removes a student from a group, not from T_Assistant.
+2. The student and group must exist in T_Assistant.
+3. The student must be in that group.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Deleting `James Ho` from `CS2103-F11-1`
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `del_s_g gn/CS2103-F11-1 sno/A0123456A`
 
-This screenshot shows the result of executing `del_s_g sno/A0123456A`.
+This screenshot shows the result of executing `del_s_g gn/CS2103-F11-1 sno/A0123456A`.
+
+![del_s_g](images/screenshots/del_s_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,24 +294,13 @@ This screenshot shows the result of executing `find_s q/!nogroup`.
 
 #### Sorting Students: `sort_s`, `ss`
 
-Explanation of what command does.
+Sorts the list of students in alphabetical order.
 
 **Format**: `sort_s`
 
-##### Notes
-
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
 This screenshot shows the result of executing `sort_s`.
+
+![sort_s](images/screenshots/sort_s.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
