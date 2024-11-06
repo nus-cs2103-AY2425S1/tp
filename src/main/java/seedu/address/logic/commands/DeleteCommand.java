@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
 import static seedu.address.logic.Messages.LINE_BREAK;
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX_OR_NAME;
+import static seedu.address.logic.Messages.MESSAGE_MULTIPLE_WAYS_FORBIDDEN;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -25,20 +29,33 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
     public static final String MESSAGE_FUNCTION = COMMAND_WORD
-            + ": Deletes the contact identified by the displayed index number or "
-            + "by Full name.";
-
-
-
+            + ": Deletes the contact identified by the displayed index number or by Full name.";
+    public static final String MESSAGE_COMMAND_FORMAT_VERSION_ONE =
+            styleCommand(COMMAND_WORD + WHITESPACE + "INDEX (positive integer)");
+    public static final String MESSAGE_COMMAND_FORMAT_VERSION_TWO =
+            styleCommand(COMMAND_WORD + WHITESPACE + "FULL_NAME_OF_CONTACT_TO_DELETE");
+    public static final String MESSAGE_COMMAND_FORMAT_VERSION_THREE =
+            styleCommand(COMMAND_WORD + WHITESPACE + PREFIX_NAME
+                    + "FULL_NAME_OF_CONTACT_TO_DELETE");
     public static final String MESSAGE_COMMAND_FORMAT = "3 possible formats as follow:" + LINE_BREAK
-            + "1. " + styleCommand(COMMAND_WORD + WHITESPACE + "INDEX (positive integer)") + LINE_BREAK
-            + "2. " + styleCommand(COMMAND_WORD + WHITESPACE + "FULL_NAME_OF_CONTACT_TO_DELETE") + LINE_BREAK
-            + "3. " + styleCommand(COMMAND_WORD + WHITESPACE + PREFIX_NAME
-            + "FULL_NAME_OF_CONTACT_TO_DELETE");
+            + "1. " + MESSAGE_COMMAND_FORMAT_VERSION_ONE + LINE_BREAK
+            + "2. " + MESSAGE_COMMAND_FORMAT_VERSION_TWO + LINE_BREAK
+            + "3. " + MESSAGE_COMMAND_FORMAT_VERSION_THREE;
     public static final String MESSAGE_COMMAND_EXAMPLE = "Example One:" + WHITESPACE
             + COMMAND_WORD + WHITESPACE + "1" + LINE_BREAK
             + "Example Two: " + COMMAND_WORD + WHITESPACE + "John Doe" + LINE_BREAK
             + "Example Three: " + COMMAND_WORD + WHITESPACE + PREFIX_NAME + WHITESPACE + "John Doe";
+
+    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT
+            = COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE
+            + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
+            + String.format(MESSAGE_HELP_PROMPT,
+            HelpCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD);
+
+    public static final String MESSAGE_MISSING_INDEX_OR_FULL_NAME =
+            String.format(MESSAGE_MISSING_INDEX_OR_NAME, MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT);
+    public static final String MESSAGE_DELETE_MULTIPLE_WAYS_FORBIDDEN =
+            String.format(MESSAGE_MULTIPLE_WAYS_FORBIDDEN, DeleteCommand.COMMAND_WORD);
 
     private static final int invalidTargetIndex = -1;
 
@@ -94,8 +111,8 @@ public class DeleteCommand extends Command {
         if (hasDuplicate) {
             throw new CommandException(
                     String.format(
-                            Messages.MESSAGE_DUPLICATE_NAME,
-                            COMMAND_WORD, targetName.fullName));
+                            Messages.MESSAGE_DUPLICATE_NAME, targetName.fullName,
+                            COMMAND_WORD));
         }
     }
 

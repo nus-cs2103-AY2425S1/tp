@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.COMMAND_FORMAT_PREAMBLE;
+import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_INDEX_OR_NAME;
 import static seedu.address.logic.Messages.WHITESPACE;
 import static seedu.address.logic.Messages.styleCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -48,11 +51,29 @@ public class EditCommand extends Command {
             + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Jane Doe\n"
             + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " "
             + "johnny";
+    public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT
+            = COMMAND_FORMAT_PREAMBLE + WHITESPACE
+            + EditCommand.MESSAGE_COMMAND_FORMAT + "\n"
+            + String.format(MESSAGE_HELP_PROMPT,
+            HelpCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD);
+
     public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Contact edited successfully! Edited "
             + "Contact: %1$s\nThe display index of the contact may be reassigned if the name or nickname "
             + "is edited. ";
-    public static final String MESSAGE_MISSING_PREFIX = "Prefix(es) for editing is missing, at least one must "
-            + "be provided. Ensure correct spelling of prefix too (e.g. n/ and not /n)";
+    public static final String MESSAGE_MISSING_PREFIX =
+            String.format(Messages.MESSAGE_MISSING_PREFIX, "editing");
+
+    public static final String MESSAGE_DUPLICATE_CONTACT =
+            String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "This will result in a contact",
+                    "that edits to make");
+    public static final String MESSAGE_DUPLICATE_FIELDS_CONTACT =
+            String.format(Messages.MESSAGE_DUPLICATE_FIELDS_CONTACT,
+                    "If you are sure these are the changes to make, please edit the conflicting "
+                            + "fields of the other contact(s) to something else first prior to prevent conflicts");
+
+    public static final String MESSAGE_MISSING_INDEX_OR_FULL_NAME =
+            String.format(MESSAGE_MISSING_INDEX_OR_NAME, MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT);
+
 
     private static final int invalidTargetIndex = -1;
 
@@ -108,15 +129,12 @@ public class EditCommand extends Command {
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
-            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_CONTACT,
-                    "This will result in a contact that", "edits to make"));
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
         if (contactToEdit.isSameContact(editedContact)
                 && model.hasDuplicateFieldsWithException(contactToEdit, editedContact)) {
-            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_FIELDS_CONTACT,
-                    "If you are sure these are the changes to make, please edit the conflicting "
-                            + "fields of the other contact(s) to something else first prior to prevent conflicts"));
+            throw new CommandException(MESSAGE_DUPLICATE_FIELDS_CONTACT);
         }
 
         model.setContact(contactToEdit, editedContact);
@@ -202,8 +220,8 @@ public class EditCommand extends Command {
         if (hasDuplicate) {
             throw new CommandException(
                     String.format(
-                            Messages.MESSAGE_DUPLICATE_NAME,
-                            COMMAND_WORD, targetName.fullName));
+                            Messages.MESSAGE_DUPLICATE_NAME, targetName.fullName,
+                            COMMAND_WORD));
         }
     }
 

@@ -24,39 +24,53 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! %1$s";
     public static final String MESSAGE_BLANK_FIELD = "field cannot be blank!";
 
-    public static final String MESSAGE_DUPLICATE_FIELDS_COMMAND = "Multiple values specified for the "
-            + "following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_PREFIXES_COMMAND = "Multiple prefixes of the same type "
+            + "specified as follows: %s  which is not allowed";
 
     public static final String MESSAGE_HELP_PROMPT = "Type `%1$s` for examples and details";
 
-    // find and list
+    public static final String MESSAGE_FIND_NAME_SUGGESTION = "Command to" + WHITESPACE + FindCommand.COMMAND_WORD + ":"
+            + WHITESPACE + styleCommand(FindCommand.COMMAND_WORD + WHITESPACE + PREFIX_NAME + WHITESPACE + "%1$s");
+
+    // list and find
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
 
-    // edit and delete
-    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is "
-            + "invalid";
-    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Invalid Index or full name given. "
-            + "Index must be a positive Integer only. " + "Full name must follow the constraints given for "
-            + "names. ";
-    public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK = "This contact is not in address book. "
-            + "Check if Full Name is used. Check contact's full name or " + "if it exists by finding. Example"
-            + " Command to " + FindCommand.COMMAND_WORD
-            + ": `" + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %1$s`";
-    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "%1$s by both index and full name is not "
-            + "allowed";
-    public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same "
-            + "full name. Please %1$s by index.\nTip: find the contact's name to obtain their "
-            + "corresponding displayed index, and %1$s by the displayed index directly on the page. "
-            + "Command to find :\n`" + FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " %2$s`";
+    // find and add
+    public static final String MESSAGE_MISSING_DESCRIPTION_INPUT = "Please enter something for me to %s.";
+    public static final String MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX_GENERAL =
+            "There must be a valid prefix immediately after" + WHITESPACE
+                            + "%1$s without any non-whitespace characters";
+
+    // find and edit
+    public static final String MESSAGE_MISSING_PREFIX = "Prefix(es) for %s is missing, at least one must "
+            + "be provided. Ensure correct spelling of prefix too (e.g. n/ and not /n)";
 
     // edit and add
-    //edits to make, contacts to add // This will result in a contact that
     public static final String MESSAGE_DUPLICATE_CONTACT = "%1$s already " + "exists in the address book. "
             + "Check if there are any errors in %2$s or in the " + "details of the existing contacts";
     public static final String MESSAGE_DUPLICATE_FIELDS_CONTACT = "This will result in more than 1 contact "
             + "having same President roles," + " or having same Telegram handles/mobile number/nicknames, or "
-            + "having the same full " + "names" + " without distinct nicknames, which are not allowed." + "\n"
+            + "having the same full names" + " without distinct nicknames, which are not allowed." + LINE_BREAK
             + "%1$s";
+
+    // edit and delete
+    public static final String MESSAGE_MISSING_INDEX_OR_NAME = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "Missing index or Full name. " + LINE_BREAK + "%1$s");
+    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is "
+            + "invalid";
+    /*
+    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "Invalid Index or full name given. "
+            + "Index must be a positive Integer only. " + "Full name must follow the constraints given for "
+            + "names. ";*/
+    public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK = "This contact is not in address book. "
+            + "Check if Full Name is used. Check contact's full name or " + "if it exists by finding. "
+            + "Example: " + MESSAGE_FIND_NAME_SUGGESTION;
+    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "%1$s by both index and full name is not "
+            + "allowed";
+    public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same "
+            + "full name. Please %2$s by index.\nTip: find the contact's name to obtain their "
+            + "corresponding displayed index, and %2$s by the displayed index directly on the page. "
+            + MESSAGE_FIND_NAME_SUGGESTION;
 
     public static String styleCommand(String command) {
         return "`" + command + "`";
@@ -71,8 +85,7 @@ public class Messages {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_DUPLICATE_FIELDS_COMMAND + String.join(" ", duplicateFields)
-                + "\nwhich is not allowed.";
+        return String.format(MESSAGE_DUPLICATE_PREFIXES_COMMAND, String.join(" ", duplicateFields));
     }
 
     /**

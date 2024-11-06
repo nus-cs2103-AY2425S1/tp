@@ -51,9 +51,9 @@ public class HelpCommand extends Command {
             + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_DELETE = DeleteCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE.replace(":", " -") + WHITESPACE
-            + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK + DeleteCommand.MESSAGE_COMMAND_EXAMPLE
-            + "\nUsers can delete by full name of contact via `delete n/<FULL_NAME_TO_DELETE>` OR `delete "
-            + "<FULL_NAME_TO_DELETE>`" + LINE_BREAK
+            + DeleteCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK + DeleteCommand.MESSAGE_COMMAND_EXAMPLE + LINE_BREAK
+            + "Users can delete by full name of contact via " + DeleteCommand.MESSAGE_COMMAND_FORMAT_VERSION_THREE
+            + WHITESPACE + "OR" + WHITESPACE + DeleteCommand.MESSAGE_COMMAND_FORMAT_VERSION_TWO + LINE_BREAK
             + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_EDIT = EditCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + EditCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
@@ -65,10 +65,10 @@ public class HelpCommand extends Command {
             + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;;
     public static final String HELP_LIST = ListCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
-            + "No other fields is required for the command but alternatives are allowed as follows:\n"
-            + "Alternative One: `list all`\n"
-            + "Alternative Two: `list contacts`\n"
-            + "Alternative Three: `list all contacts`" + LINE_BREAK
+            + "No other fields is required for the command but alternatives are allowed as follows:" + LINE_BREAK
+            + "Alternative One:" + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT_ALT_VERSION_ONE + LINE_BREAK
+            + "Alternative Two:" + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT_ALT_VERSION_TWO + LINE_BREAK
+            + "Alternative Three:" + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT_ALT_VERSION_THREE + LINE_BREAK
             + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_CLEAR = ClearCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ClearCommand.MESSAGE_COMMAND_FORMAT;
