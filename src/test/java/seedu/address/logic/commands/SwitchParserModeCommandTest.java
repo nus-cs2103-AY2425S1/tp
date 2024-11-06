@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPropertyAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
@@ -13,7 +16,6 @@ import static seedu.address.testutil.property.TypicalProperties.getTypicalProper
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.buyer.ViewCommand;
 import seedu.address.logic.parser.ParserMode;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

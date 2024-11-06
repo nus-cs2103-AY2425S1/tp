@@ -6,10 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.ParserMode;
-import seedu.address.logic.parser.buyer.BuyerCommandParser;
 import seedu.address.logic.parser.exceptions.InvalidParserModeException;
-import seedu.address.logic.parser.meetup.MeetUpCommandParser;
-import seedu.address.logic.parser.property.PropertyCommandParser;
 import seedu.address.model.Model;
 
 /**
