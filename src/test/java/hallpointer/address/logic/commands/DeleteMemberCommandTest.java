@@ -5,7 +5,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSu
 import static hallpointer.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
-import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,7 +25,7 @@ import hallpointer.address.model.member.Member;
  */
 public class DeleteMemberCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalHallPointer(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -39,7 +39,7 @@ public class DeleteMemberCommandTest {
                 memberToDelete.getTelegram().value
         );
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getHallPointer(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
 
         assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);
@@ -67,7 +67,7 @@ public class DeleteMemberCommandTest {
                 memberToDelete.getTelegram().value
         );
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getHallPointer(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
         showNoMember(expectedModel);
 
@@ -80,7 +80,7 @@ public class DeleteMemberCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_MEMBER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getHallPointer().getMemberList().size());
 
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(outOfBoundIndex);
 

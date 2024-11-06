@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import hallpointer.address.commons.exceptions.DataLoadingException;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends HallPointerStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getHallPointerFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyHallPointer> readHallPointer() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveHallPointer(ReadOnlyHallPointer hallPointer) throws IOException;
 
 }

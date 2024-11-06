@@ -44,22 +44,22 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getHallPointerFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setHallPointerFilePath(Path hallPointerFilePath);
 
     /**
-     * Returns the AddressBook
+     * Returns the HallPointer
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyHallPointer getHallPointer();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code hallPointer}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setHallPointer(ReadOnlyHallPointer hallPointer);
 
     /**
      * Returns true if a member with the same identity as {@code member} exists in the address book.

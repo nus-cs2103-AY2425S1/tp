@@ -3,7 +3,7 @@ package hallpointer.address.logic.commands;
 import static hallpointer.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static hallpointer.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalHallPointer(), new UserPrefs());
+        expectedModel = new ModelManager(model.getHallPointer(), new UserPrefs());
     }
 
     @Test

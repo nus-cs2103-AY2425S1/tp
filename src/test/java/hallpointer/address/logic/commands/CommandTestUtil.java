@@ -18,7 +18,7 @@ import java.util.List;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.exceptions.CommandException;
-import hallpointer.address.model.AddressBook;
+import hallpointer.address.model.HallPointer;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
@@ -126,11 +126,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        HallPointer expectedHallPointer = new HallPointer(actualModel.getHallPointer());
         List<Member> expectedFilteredList = new ArrayList<>(actualModel.getFilteredMemberList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedHallPointer, actualModel.getHallPointer());
         assertEquals(expectedFilteredList, actualModel.getFilteredMemberList());
     }
     /**

@@ -13,15 +13,15 @@ import hallpointer.address.commons.util.ConfigUtil;
 import hallpointer.address.commons.util.StringUtil;
 import hallpointer.address.logic.Logic;
 import hallpointer.address.logic.LogicManager;
-import hallpointer.address.model.AddressBook;
+import hallpointer.address.model.HallPointer;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ModelManager;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.UserPrefs;
 import hallpointer.address.model.util.SampleDataUtil;
-import hallpointer.address.storage.AddressBookStorage;
-import hallpointer.address.storage.JsonAddressBookStorage;
+import hallpointer.address.storage.HallPointerStorage;
+import hallpointer.address.storage.JsonHallPointerStorage;
 import hallpointer.address.storage.JsonUserPrefsStorage;
 import hallpointer.address.storage.Storage;
 import hallpointer.address.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing HallPointer ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        HallPointerStorage hallPointerStorage = new JsonHallPointerStorage(userPrefs.getHallPointerFilePath());
+        storage = new StorageManager(hallPointerStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -73,21 +73,21 @@ public class MainApp extends Application {
      * and an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getHallPointerFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyHallPointer> hallPointerOptional;
+        ReadOnlyHallPointer initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            hallPointerOptional = storage.readHallPointer();
+            if (!hallPointerOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getHallPointerFilePath()
+                        + " populated with a sample HallPointer.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = hallPointerOptional.orElseGet(SampleDataUtil::getSampleHallPointer);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getHallPointerFilePath() + " could not be loaded."
+                    + " Will be starting with an empty HallPointer.");
+            initialData = new HallPointer();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,13 +170,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting HallPointer " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping HallPointer ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

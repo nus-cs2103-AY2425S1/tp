@@ -19,26 +19,26 @@ import javafx.collections.transformation.FilteredList;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final HallPointer hallPointer;
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
 
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given hallPointer and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyHallPointer hallPointer, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(hallPointer, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + hallPointer + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.hallPointer = new HallPointer(hallPointer);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+        filteredMembers = new FilteredList<>(this.hallPointer.getMemberList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new HallPointer(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,52 +66,52 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getHallPointerFilePath() {
+        return userPrefs.getHallPointerFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setHallPointerFilePath(Path hallPointerFilePath) {
+        requireNonNull(hallPointerFilePath);
+        userPrefs.setHallPointerFilePath(hallPointerFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== HallPointer ================================================================================
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyHallPointer getHallPointer() {
+        return hallPointer;
     }
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        requireNonNull(addressBook);
-        this.addressBook.resetData(addressBook);
+    public void setHallPointer(ReadOnlyHallPointer hallPointer) {
+        requireNonNull(hallPointer);
+        this.hallPointer.resetData(hallPointer);
     }
 
     @Override
     public boolean hasMember(Member member) {
         requireNonNull(member);
-        return addressBook.hasMembers(member);
+        return hallPointer.hasMembers(member);
     }
 
     @Override
     public void deleteMember(Member target) {
         requireNonNull(target);
-        addressBook.removeMember(target);
+        hallPointer.removeMember(target);
     }
 
     @Override
     public void addMember(Member member) {
         requireNonNull(member);
-        addressBook.addMember(member);
+        hallPointer.addMember(member);
         updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
     @Override
     public void setMember(Member target, Member updatedMember) {
         requireAllNonNull(target, updatedMember);
-        addressBook.setMember(target, updatedMember);
+        hallPointer.setMember(target, updatedMember);
         updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
@@ -119,7 +119,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Member} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedHallPointer}
      */
     @Override
     public ObservableList<Member> getFilteredMemberList() {
@@ -143,7 +143,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return hallPointer.equals(otherModelManager.hallPointer)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredMembers.equals(otherModelManager.filteredMembers);
     }
