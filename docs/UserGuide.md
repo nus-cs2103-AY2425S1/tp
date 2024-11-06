@@ -150,14 +150,14 @@ Here are some **key points** to keep in mind when using the commands:
 - You can add fields in **any order**. <br>
   _**Example:** If the command specifies `n/NAME p/PHONE_NUMBER`, then `p/PHONE_NUMBER n/NAME` is also acceptable._
 
-<box type="tip" theme="success">
+<box type="tip" theme="success" light seamless style="border: 1px solid">
 
 **Tip:** If you add extraneous fields for commands that do not take in fields (such as `help`, `list person`, `list appt`, `exit` and `clear`), they will be ignored. <br>
 _**Example:** If the command specifies `help 123`, then it will be interpreted as `help`._
 
 </box>
 
-<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+<box type="warning" light seamless style="border: 1px solid red">
 
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
 
