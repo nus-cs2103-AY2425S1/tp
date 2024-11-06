@@ -234,13 +234,25 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-## Field Constraints
+## Field Formatting and Constraints
 
 ### INDEX
 
 ### NAME
 
 ### PHONE_NUMBER
+
+Format: `+c a d`, where `c` is an optional country code, `a` is an optional area code, and `d` is a compulsory number.
+
+Constraints:
+* Start the phone number with `+` only if there is a country code.
+* `c` is an optional country code 1 to 3 digits long.
+* `a` is an optional area code 1 to 4 digits long. `a` can only be specified when `c` is specified. 
+* `d` is a compulsory number 3 to 15 digits long.
+* Separate `c`, `a` and `d` with a single space.
+
+> [!Note]
+> Constraint rationales: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
 
 ### EMAIL
 
