@@ -88,4 +88,21 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
     public int size() {
         return receipts.size();
     }
+
+    @Override
+    public int hashCode() {
+        return receipts.hashCode();
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ReceiptLog otherReceiptLog)) {
+            return false;
+        }
+
+        return receipts.equals(otherReceiptLog.receipts);
+    }
 }
