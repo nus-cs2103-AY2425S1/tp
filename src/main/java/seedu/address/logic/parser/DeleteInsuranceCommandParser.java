@@ -28,9 +28,9 @@ public class DeleteInsuranceCommandParser implements Parser<DeleteInsuranceComma
         int insuranceId;
         try {
             Optional<String> insuranceIdOptional = argMultimap.getValue(PREFIX_INSURANCE_ID);
-            if (argMultimap.getPreamble().isEmpty() ||
-                    insuranceIdOptional.isEmpty() ||
-                    insuranceIdOptional.get().trim().isEmpty()) {
+            if (argMultimap.getPreamble().isEmpty()
+                    || insuranceIdOptional.isEmpty()
+                    || insuranceIdOptional.get().trim().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         DeleteInsuranceCommand.MESSAGE_USAGE));
             }
