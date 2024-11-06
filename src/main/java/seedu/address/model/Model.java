@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
@@ -133,10 +134,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
     /**
      * Updates the filter of the logs list to filter by the given {@code identityNumber}.
      * @param identityNumber
      */
     void updateFilteredPersonListById(IdentityNumber identityNumber);
+
+    /**
+     * Updates the filter of the logs list to filter by the given {@code predicate}.
+     */
+    boolean validateIdentityNumber(IdentityNumber identityNumber);
+
+    /**
+     * Validates the appointment date.
+     * @param appointmentDate
+     */
+    boolean validateAppointmentDate(AppointmentDate appointmentDate);
 }

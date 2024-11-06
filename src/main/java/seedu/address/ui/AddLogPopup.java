@@ -6,46 +6,50 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.util.function.Consumer;
 
-public class AddLogPopup {
+public class AddLogPopup extends UiPart<Stage> {
 
-    public static void display(Consumer<String> onSave, Runnable onCancel) {
+    private static final String FXML = "AddLogPopup.fxml";
+    /**
+     * Constructs a UiPart using the specified FXML file within {@link #FXML_FILE_FOLDER}.
+     *
+     * @param fxmlFileName
+     */
+    public AddLogPopup(String fxmlFileName) {
+        super(FXML);
+    }
+
+    public static String display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Add Log Entry");
 
-        // Ensure that the onCancel action runs if the window is closed directly
-        window.setOnCloseRequest(e -> onCancel.run());
-
         TextArea logEntryArea = new TextArea();
         logEntryArea.setPromptText("Enter your log entry here...");
 
-        // Save button initially disabled
+        VBox.setVgrow(logEntryArea, Priority.ALWAYS);
+
         Button saveButton = new Button("Save");
         saveButton.setDisable(true);
 
-        // Enable the Save button only if the TextArea has text
         logEntryArea.textProperty().addListener((observable, oldValue, newValue) -> {
             saveButton.setDisable(newValue.trim().isEmpty());
         });
 
+        final String[] logEntry = {null}; // Capture log entry result
+
         saveButton.setOnAction(e -> {
-            String logEntry = logEntryArea.getText();
-            onSave.accept(logEntry);  // Pass logEntry to onSave callback
+            logEntry[0] = logEntryArea.getText();
             window.close();
         });
 
         Button cancelButton = new Button("Cancel");
-        cancelButton.setOnAction(e -> {
-            onCancel.run();  // Run onCancel callback
-            window.close();
-        });
+        cancelButton.setOnAction(e -> window.close());
 
-        // HBox to align buttons to the right
         HBox buttonLayout = new HBox(10);
         buttonLayout.setAlignment(Pos.CENTER_RIGHT);
         buttonLayout.getChildren().addAll(saveButton, cancelButton);
@@ -57,5 +61,7 @@ public class AddLogPopup {
         Scene scene = new Scene(layout, 300, 250);
         window.setScene(scene);
         window.showAndWait();
+
+        return logEntry[0];
     }
 }

@@ -33,34 +33,19 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private void handleCommandEntered() {
+        // Get the command text from the command box
         String commandText = commandTextField.getText();
+
+        // Do nothing if the command text is empty
         if (commandText.equals("")) {
             return;
         }
 
-        //TODO: Do proper validation for 1) addlog command 2) Validate NRIC and date
-        // before popup window is allowed. Throw correct exceptions as well
-        if (isAddLogCommand(commandText) && !commandText.contains("l/")
-                && commandText.contains("i/") && commandText.contains("d/")) {
-            // Disable commandTextField and trigger the popup for log entry
-            commandTextField.setDisable(true);
-            AddLogPopup.display(
-                    logEntry -> {
-                        // Replace actual newline characters with \n
-                        String encodedLogEntry = logEntry.replace("\n", "\\n");
-                        String commandWithLog = commandText + " l/" + encodedLogEntry;
-                        executeCommand(commandWithLog);
-                        commandTextField.setDisable(false);
-                    },
-                    () -> {
-                        // Callback for cancel action
-                        commandTextField.setDisable(false);
-                    }
-            );
-        } else {
-            // Handle command normally if l/ is present or if it's not an addlog command
-            executeCommand(commandText);
-        }
+        executeCommand(commandText);
+    }
+
+    private String displayAddLogPopup() {
+        return AddLogPopup.display(); // Returns the log entry as a string
     }
 
     /**
@@ -79,10 +64,9 @@ public class CommandBox extends UiPart<Region> {
      * Validates if the input command is an addlog command with the required format.
      * Basic regex can be customized based on the exact expected format.
      */
-    private boolean isAddLogCommand(String input) {
+    private boolean isAddLogCommand(String commandText) {
         //TODO: Instead of using a hardcoded regex, change it to use actual validation of both date and NRIC
-        input = input.toLowerCase();
-        return input.matches("^addlog.*");
+        return commandText.trim().toLowerCase().startsWith("addlog");
     }
 
 

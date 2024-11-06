@@ -32,6 +32,11 @@ public class UiManager implements Ui {
         this.logic = logic;
     }
 
+    // Prompt users to enter log entry
+    public String promptForLogEntryInput() {
+        return mainWindow.displayAddLogPopup();
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");

@@ -18,6 +18,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+import seedu.address.ui.UiManager;
 
 /**
  * The main LogicManager of the app.
@@ -77,14 +78,14 @@ public class LogicManager implements Logic {
                 message = "\nCancelled command: " + model.getSavedCommand().toString();
                 model.clearSavedCommand();
             }
-            throw new CommandException(ce.getMessage() + message , ce);
+            throw new CommandException(ce.getMessage() + message, ce);
         } catch (ParseException pe) {
             String message = "";
             if (model.hasSavedCommand()) {
                 message = "\nCancelled command: " + model.getSavedCommand().toString();
                 model.clearSavedCommand();
             }
-            throw new ParseException(pe.getMessage() + message , pe);
+            throw new ParseException(pe.getMessage() + message, pe);
         }
     }
 
@@ -116,5 +117,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    /**
+     * Prompts the user for additional input required to complete a command.
+     *
+     * @return the input received from the user.
+     */
+    @Override
+    public String promptForLogEntryInput() {
+        return null;
     }
 }

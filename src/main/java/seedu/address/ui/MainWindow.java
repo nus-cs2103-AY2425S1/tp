@@ -217,6 +217,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            // need to edit this and add log to accomodate for AddLogCommand
             if (commandResult.isList()) {
                 handleShowSessionLogs(commandResult.getPersonIndex());
             } else {
@@ -228,5 +229,12 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Displays the AddLogPopup and returns the user's input.
+     */
+    public String displayAddLogPopup() {
+        return AddLogPopup.display(); // Assumes AddLogPopup returns a log entry string
     }
 }
