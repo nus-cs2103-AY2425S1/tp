@@ -13,7 +13,7 @@
 <fx:root resizable="false" title="Group" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
          xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" />
+    <Image url="@/images/gb.png" />
   </icons>
   <scene>
     <Scene>
@@ -23,7 +23,8 @@
 
       <HBox alignment="CENTER" fx:id="groupWindowContainer">
         <children>
-          <VBox fx:id="groupList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+          <VBox fx:id="groupList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
+                VBox.vgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>

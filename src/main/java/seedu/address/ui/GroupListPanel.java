@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of groups.
  */
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "GroupListPanel.fxml";
@@ -21,7 +21,7 @@ public class GroupListPanel extends UiPart<Region> {
     private ListView<Group> groupListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code GroupListPanel} with the given {@code ObservableList}.
      */
     public GroupListPanel(ObservableList<Group> groupList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class GroupListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Group} using a {@code GroupCard}.
      */
     class GroupListViewCell extends ListCell<Group> {
         @Override
