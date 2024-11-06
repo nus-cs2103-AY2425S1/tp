@@ -34,7 +34,8 @@ public class SubjectContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        SubjectContainsKeywordsPredicate otherSubjectContainsKeywordsPredicate = (SubjectContainsKeywordsPredicate) other;
+        SubjectContainsKeywordsPredicate otherSubjectContainsKeywordsPredicate =
+                (SubjectContainsKeywordsPredicate) other;
         return keywords.equals(otherSubjectContainsKeywordsPredicate.keywords);
     }
 
