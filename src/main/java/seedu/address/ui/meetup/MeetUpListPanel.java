@@ -72,8 +72,7 @@ public class MeetUpListPanel extends UiPart<Region> {
         LocalDateTime end2 = meetUp2.getTo().getDateTime();
 
         // Check if the date ranges overlap
-        return (start1.isBefore(end2) || start1.isEqual(end2))
-                && (end1.isAfter(start2) || end1.isEqual(start2));
+        return start1.isBefore(end2) && end1.isAfter(start2);
     }
 
     /**
