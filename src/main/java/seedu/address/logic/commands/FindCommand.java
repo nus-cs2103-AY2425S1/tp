@@ -17,14 +17,13 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a record with the specified NRICs "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a record with the specified NRIC "
             + "(case insensitive) OR \n"
-            + "all records matching the specified names (case insensitive), \n"
+            + "all records matching the specified names (case insensitive), "
             + "before displaying as a list with index numbers.\n"
             + "Parameters: NRIC | NAME [MORE_NAMES]...\n"
-            + "Examples:\n"
-            + COMMAND_WORD + " S1234567Z\n"
-            + COMMAND_WORD + " bob alice charlie\n";
+            + "Example 1: " + COMMAND_WORD + " S1234567Z\n"
+            + "Example 2: " + COMMAND_WORD + " bob alice charlie\n";
 
     private final Predicate<Person> predicate;
 

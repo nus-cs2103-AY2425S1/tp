@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBackupsCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RestoreCommand;
+import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateOperatingHoursCommand;
 import seedu.address.model.CommandInfo;
 
@@ -34,7 +35,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f11-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE =
-            "For a full explanation of each command, refer to our user guide!\n" + USERGUIDE_URL;
+            "For a full explanation of each command, refer to our user guide:\n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -65,15 +66,16 @@ public class HelpWindow extends UiPart<Stage> {
         helpListPanel = new HelpListPanel(FXCollections.observableArrayList(
                 new CommandInfo(AddCommand.MESSAGE_USAGE),
                 new CommandInfo(DeleteCommand.MESSAGE_USAGE),
-                new CommandInfo(ClearCommand.MESSAGE_USAGE),
-                new CommandInfo(FindCommand.MESSAGE_USAGE),
+                new CommandInfo(UpdateCommand.MESSAGE_USAGE),
                 new CommandInfo(ListCommand.MESSAGE_USAGE),
+                new CommandInfo(FindCommand.MESSAGE_USAGE),
+                new CommandInfo(BookingsCommand.MESSAGE_USAGE),
                 new CommandInfo(DeleteAppointmentCommand.MESSAGE_USAGE),
                 new CommandInfo(UpdateOperatingHoursCommand.MESSAGE_USAGE),
-                new CommandInfo(BookingsCommand.MESSAGE_USAGE),
-                new CommandInfo(RestoreCommand.MESSAGE_USAGE),
+                new CommandInfo(ClearCommand.MESSAGE_USAGE),
                 new CommandInfo(BackupCommand.MESSAGE_USAGE),
                 new CommandInfo(ListBackupsCommand.MESSAGE_USAGE),
+                new CommandInfo(RestoreCommand.MESSAGE_USAGE),
                 new CommandInfo(HelpCommand.MESSAGE_USAGE),
                 new CommandInfo(ExitCommand.MESSAGE_USAGE))
         );
