@@ -21,7 +21,9 @@ public class MedicineTest {
     public void isValidMedicine_invalidMedicineNames_returnsFalse() {
         assertFalse(Medicine.isValidMedicine(""));
         assertFalse(Medicine.isValidMedicine(" "));
-        assertFalse(Medicine.isValidMedicine(" Aspirin"));
+        assertFalse(Medicine.isValidMedicine(" 1"));
+        assertFalse(Medicine.isValidMedicine("1"));
+        assertFalse(Medicine.isValidMedicine("!"));
     }
 
     @Test
@@ -34,7 +36,9 @@ public class MedicineTest {
     public void constructor_invalidMedicineName_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Medicine(""));
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" "));
-        assertThrows(IllegalArgumentException.class, () -> new Medicine(" Aspirin"));
+        assertThrows(IllegalArgumentException.class, () -> new Medicine("!"));
+        assertThrows(IllegalArgumentException.class, () -> new Medicine(" 1"));
+        assertThrows(IllegalArgumentException.class, () -> new Medicine("1"));
     }
 
     @Test
