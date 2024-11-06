@@ -444,14 +444,15 @@ List all incomplete tasks for all patients in the system.
 Shows a message explaning how to access the help page.
 
 Format: `help`
-<box type="Note" seamless>
+<box type="info" seamless>
 
 **Note:**
 * Due to the amount of commands, the Help Window is made such that it will still be displayed at foreground despite clicking back to NovaCare.
-* The hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
+* To hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
 * To close it, click the `close button` on the top right hand corner of the Help Window as shown below.
 </box>
-![helpMessage](images/helpMessage.png)
+
+![helpWindow](images/helpWindow.png)
 
 ### Clearing all entries : `clear`
 
