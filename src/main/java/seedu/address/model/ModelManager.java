@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -106,6 +108,22 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    public boolean getClearCommandPrompted() {
+        return clearCommandPrompted;
+    }
+
+    public void setClearCommandPrompted(boolean isPrompted) {
+        ClearCommand.setPrompted(isPrompted);
+    }
+
+    public boolean getClearCommandConfirmed() {
+        return clearCommandPrompted;
+    }
+
+    public void setClearCommandConfirmed(boolean isConfirmed) {
+        ClearCommand.setConfirmed(isConfirmed);
+    }
+
     //=========== Person Methods==============================================================================
     @Override
     public boolean hasPerson(Person person) {
@@ -140,6 +158,7 @@ public class ModelManager implements Model {
     @Override
     public void linkPersonToEvent(Person person, Event event) {
         requireAllNonNull(person, event);
+        addressBook.removePersonFromAllEvents(person);
         addressBook.linkPersonToEvent(person, event);
     }
 
@@ -236,4 +255,8 @@ public class ModelManager implements Model {
                 && clearCommandConfirmed == otherModelManager.clearCommandConfirmed;
     }
 
+    @Override
+    public Map<Event, ArrayList<Person>> getPersonEventAssociationMap() {
+        return addressBook.getPersonEventAssociationMap();
+    }
 }

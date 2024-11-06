@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -279,4 +280,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return Objects.hash(persons, events);
     }
+
+    public void removePersonFromAllEvents(Person person) {
+        personEventManager.removePersonFromAllEvents(person);
+    }
+
+    public Map<Event, ArrayList<Person>> getPersonEventAssociationMap() {
+        return personEventManager.getEventPersonMap();
+    }
+
 }
