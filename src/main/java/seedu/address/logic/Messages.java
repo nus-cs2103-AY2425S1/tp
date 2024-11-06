@@ -24,7 +24,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_CONTACTS_ON_ADDALL = "There needs to be at least one contact in the "
             + "search panel to add to the event";
-    public static final String MESSAGE_USER_SEARCH_QUERY = "Displaying search results for all persons "
+    public static final String MESSAGE_USER_SEARCH_QUERY_ROLES = "Displaying search results for all persons "
             + "with the roles: %s";
 
     /**

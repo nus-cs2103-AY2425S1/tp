@@ -33,7 +33,7 @@ public class FindRoleCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_USER_SEARCH_QUERY, predicate.getRolesAsString()) + "\n"
+                String.format(Messages.MESSAGE_USER_SEARCH_QUERY_ROLES, predicate.getRolesAsString()) + "\n"
                     + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
