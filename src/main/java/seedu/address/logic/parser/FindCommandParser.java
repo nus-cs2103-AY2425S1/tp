@@ -75,6 +75,19 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasWeddingPrefix = argMultimap.getValue(PREFIX_WEDDING).isPresent();
         boolean hasTaskPrefix = argMultimap.getValue(PREFIX_TASK).isPresent();
 
+        int prefixCount = 0;
+        if (hasNamePrefix) prefixCount++;
+        if (hasPhonePrefix) prefixCount++;
+        if (hasEmailPrefix) prefixCount++;
+        if (hasAddressPrefix) prefixCount++;
+        if (hasTagPrefix) prefixCount++;
+        if (hasWeddingPrefix) prefixCount++;
+        if (hasTaskPrefix) prefixCount++;
+
+        if (prefixCount > 1) {
+            throw new ParseException("You can only specify one prefix at a time.");
+        }
+
         if (hasNamePrefix) {
             String nameInput = argMultimap.getValue(PREFIX_NAME).get().trim(); // Get the actual name input
             if (nameInput.isEmpty()) {
