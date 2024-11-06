@@ -39,6 +39,12 @@ public class DeleteCommand extends Command {
             }
         }
     }
+
+    private void deletePersonsFromModel(Model model, List<Person> personToDeleteList) {
+        for (Person personToDelete : personToDeleteList) {
+            model.deletePerson(personToDelete);
+        }
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -52,9 +58,7 @@ public class DeleteCommand extends Command {
             personToDeleteList.add(personToDelete);
             commandResultString += Messages.format(personToDelete) + "\n";
         }
-        for (Person personToDelete : personToDeleteList) {
-            model.deletePerson(personToDelete);
-        }
+        deletePersonsFromModel(model, personToDeleteList);
         return new CommandResult(commandResultString);
     }
 

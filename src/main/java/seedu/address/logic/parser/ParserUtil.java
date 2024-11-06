@@ -58,7 +58,6 @@ public class ParserUtil {
      * @throws ParseException If the format is invalid or bounds are incorrect.
      */
     public static List<Index> parseInterval(String range) throws ParseException {
-        int lastHyphenIndex = range.lastIndexOf("-");
         String[] bounds = range.split("-");
         System.out.println(bounds.toString());
         // Validate that the range contains exactly two parts
@@ -99,7 +98,6 @@ public class ParserUtil {
                     .collect(Collectors.toList());
         } catch (RuntimeException e) {
             String causeMessage = e.getCause().getMessage();
-            System.out.println(causeMessage);
             // Catch any ParseExceptions wrapped in RuntimeExceptions
             throw new ParseException(causeMessage, e);
         }
