@@ -56,7 +56,10 @@ public class CommandTestUtil {
     public static final String VALID_OWED_AMOUNT_AMY = "500.00";
     public static final String VALID_OWED_AMOUNT_BOB = "300.25";
     public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + VALID_HOUR_AMY;
+    public static final String VALID_HOUR_DESC_MIXED_CASED = " " + createMixedCase(PREFIX_HOUR.getPrefix())
+            + VALID_HOUR_AMY;
     public static final String VALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "5.00";
+    public static final String VALID_AMOUNT_DESC_MIXED_CASE = " " + createMixedCase(PREFIX_AMOUNT.getPrefix()) + "5.00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_AMY_MIXED_CASE = " " + createMixedCase(PREFIX_NAME.getPrefix())
