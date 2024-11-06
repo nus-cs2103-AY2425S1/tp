@@ -349,11 +349,11 @@ public class ParserUtil {
         switch (moduleRoleOperations.charAt(0)) {
         case '+':
             List<String> moduleRolesToAdd =
-                    Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
+                    Arrays.asList(moduleRoleOperations.substring(1).trim().split("\\s+"));
             return new AddModuleRoleOperation(parseAddModuleRoleDescriptor(moduleRolesToAdd));
         case '-':
             List<String> moduleRolesToRemove =
-                    Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
+                    Arrays.asList(moduleRoleOperations.substring(1).trim().split("\\s+"));
             return new DeleteModuleRoleOperation(parseDeleteModuleRoleDescriptor(moduleRolesToRemove));
         default:
             throw new RuntimeException();
