@@ -23,7 +23,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Marking a person as attended: mark INDEX tut/TUTORIAL\n"
             + "Marking a person as absent: unmark INDEX tut/TUTORIAL\n"
             + "Resetting a person's attendance: reset INDEX tut/TUTORIAL\n"
-            + "Locating a person: find [n/NAME] [t/TAG]\n"
+            + "Locating a person: find [NAME] [t/TAG]\n"
             + "Sorting contacts: sort ORDER [n/] [i/] [tut/TUTORIAL]\n"
             + "Deleting a person: delete INDEX\n"
             + "Clearing all entries: clear\n"
