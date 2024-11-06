@@ -245,25 +245,25 @@ public class ParserUtilTest {
 
     @Test
     public void parseEcName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmergencyContactName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEcName(null));
     }
 
     @Test
     public void parseEcName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContactName(INVALID_EMERGENCY_CONTACT_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEcName(INVALID_EMERGENCY_CONTACT_NAME));
     }
 
     @Test
     public void parseEcName_validValueWithoutWhitespace_returnsEcName() throws Exception {
         EcName expectedEcName = new EcName(VALID_EMERGENCY_CONTACT_NAME);
-        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(VALID_EMERGENCY_CONTACT_NAME));
+        assertEquals(expectedEcName, ParserUtil.parseEcName(VALID_EMERGENCY_CONTACT_NAME));
     }
 
     @Test
     public void parseEcName_validValueWithWhitespace_returnsTrimmedEcName() throws Exception {
         String ecNameWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NAME + WHITESPACE;
         EcName expectedEcName = new EcName(VALID_EMERGENCY_CONTACT_NAME);
-        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(ecNameWithWhitespace));
+        assertEquals(expectedEcName, ParserUtil.parseEcName(ecNameWithWhitespace));
     }
 
     @Test

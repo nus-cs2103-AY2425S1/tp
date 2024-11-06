@@ -79,7 +79,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_ECNAME).isPresent()) {
             editPersonDescriptor
-                    .setEcName(ParserUtil.parseEmergencyContactName(argMultimap.getValue(PREFIX_ECNAME).get()));
+                    .setEcName(ParserUtil.parseEcName(argMultimap.getValue(PREFIX_ECNAME).get()));
         }
         if (argMultimap.getValue(PREFIX_ECNUMBER).isPresent()) {
             editPersonDescriptor.setEcNumber(ParserUtil.parseEcNumber(argMultimap.getValue(PREFIX_ECNUMBER).get()));
