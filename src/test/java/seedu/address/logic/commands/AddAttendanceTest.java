@@ -76,7 +76,7 @@ public class AddAttendanceTest {
 
     @Test
     public void execute_deleteAttendanceUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person secondPerson = model.getUnfilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         HashMap<AbsentDate, AbsentReason> attendances = secondPerson.getAttendances();
 
         List<AbsentDate> absentDateList = new ArrayList<>(attendances.keySet());
@@ -119,7 +119,7 @@ public class AddAttendanceTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredPersonList().size() + 1);
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(outOfBoundIndex,
                 new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

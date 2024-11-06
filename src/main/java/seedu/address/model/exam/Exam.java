@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Exam that all students in the address book have taken.
+ * Represents an Exam that students in the address book have taken.
  * Guarantees: immutable; name is valid as declared in {@link #isValidExamName(String)}
- * Exam Score is null until initialised to a specific student by {@code AddExamScore}
+ * Exam Score is initialised as NIL and an actual score can be added by {@code AddExamScore}
  */
 public class Exam {
 
@@ -88,6 +88,7 @@ public class Exam {
             return false;
         }
 
+        // an exam is equal to another exam if they have the same name, the score is not considered
         Exam otherExam = (Exam) other;
         return examName.equals(otherExam.examName);
     }
