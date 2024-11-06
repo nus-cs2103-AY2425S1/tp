@@ -26,11 +26,11 @@ public class FindCommand extends Command {
             + "specified keywords (case-insensitive) that a field (as denoted by the prefix) must satisfy.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME ...]\n"
-            + "[" + PREFIX_EMAIL + "EMAIL ...]\n"
-            + "[" + PREFIX_GENDER + "GENDER ...]\n"
-            + "[" + PREFIX_AGE + "AGE ...]\n"
-            + "[" + PREFIX_DETAIL + "DETAIL ...]\n"
-            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG ...]\n"
+            + " [" + PREFIX_EMAIL + "EMAIL ...]\n"
+            + " [" + PREFIX_GENDER + "GENDER ...]\n"
+            + " [" + PREFIX_AGE + "AGE ...]\n"
+            + " [" + PREFIX_DETAIL + "DETAIL ...]\n"
+            + " [" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG ...]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER + "M "
             + PREFIX_STUDY_GROUP_TAG + "Control 1A";
 
