@@ -287,22 +287,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                                  |
-|----------|-------------------|---------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user          | view the help page                                                  | refer to instructions when I forget how to use the App                           |
-| `* * *`  | basic user        | add a client                                                        | keep track of a client's contact details                                         |
-| `* * *`  | basic user        | delete a client                                                     | remove a client's contact details that I no longer need                          |
-| `* *`    | intermediate user | edit a client                                                       | update a client's contact when necessary                                         |
-| `* * *`  | basic user        | list all my clients                                                 | view all my clients in my address book                                           |
-| `* * *`  | efficient user    | find a client by name                                               | quickly retrieve a client's contact when required                                |
-| `* * *`  | basic user        | add an insurance plan to a client                                   | keep track of the insurance plan the client has purchased                        |
-| `* * *`  | basic user        | delete an insurance plan from a client                              | remove an insurance plan that was previously purchased by the client             |
-| `* *`    | intermediate user | add a claim to an insurance plan purchased by a client              | keep track of a claim filed against the insurance plan                           |
-| `* *`    | intermediate user | view a claim filed against an insurance plan purchased by a client  | view the details of the claim                                                    |
-| `* *`    | intermediate user | close a claim filed against an insurance plan purchased by a client | mark the claim as closed                                                         |
-| `* *`    | intermediate user | edit a claim filed against an insurance plan purchased by a client  | modify details of the claim                                                      |
-| `* *`    | intermediate user | view all claims of a client                                         | see all the claims filed for the various insurance plans purchased by the client |
-| `* * *`  | basic user        | exit the app                                                        | close the app when I am done using it                                            |
+| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                               |
+|----------|-------------------|---------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | new user          | view the help page                                                  | refer to instructions when I forget how to use the app                        |
+| `* * *`  | basic user        | add a client                                                        | keep track of client's contact details                                        |
+| `* * *`  | basic user        | delete a client                                                     | remove client's contact details that I no longer need                         |
+| `* *`    | intermediate user | edit a client                                                       | update client's contact when necessary                                        |
+| `* * *`  | basic user        | list all clients                                                    | view all clients in the app                                                   |
+| `* * *`  | efficient user    | find a client by name                                               | quickly retrieve client's contact without looking through all my contacts     |
+| `* * *`  | basic user        | add an insurance plan to a client                                   | keep track of the insurance plan the client has purchased                     |
+| `* * *`  | basic user        | delete an insurance plan from a client                              | remove an insurance plan that was previously purchased by the client          |
+| `* *`    | intermediate user | add a claim to an insurance plan purchased by a client              | keep track of a claim filed against an insurance plan                         |
+| `* *`    | intermediate user | delete a claim from an insurance plan purchased by a client         | remove a wrongly-added claim from an insurance plan                           |
+| `* *`    | intermediate user | close a claim filed against an insurance plan purchased by a client | mark the claim as closed                                                      |
+| `* *`    | intermediate user | list all claims of a client                                         | view all claims filed for the various insurance plans purchased by the client |
+| `*`      | frequent user     | customise the theme of the app                                      | change the theme according to my mood and liking                              |
+| `* *`    | basic user        | clear all contacts from the app                                     | quickly reset my app to an empty state                                        |
+| `* * *`  | basic user        | exit the app                                                        | close the app when I am done using it                                         |
 
 *{More to be added}*
 
