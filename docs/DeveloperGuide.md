@@ -1036,6 +1036,10 @@ testers are expected to do more *exploratory* testing.
    Expected: No Students Found. Displays 0 students.
 4. Test case: `find c/1234`
    Expected: No Students Found. Error details shown.
+5. Test case: `find c/CS2103T;CS2109S`
+   Expected: Displays students enrolled in either CS2103T or CS2109S.
+6. Test case: `find c/CS2103T c/CS2109S`
+   Expected: Displays students enrolled in both CS2103T and CS2109S.
 
 
 ### Finding a student (by name)
@@ -1047,6 +1051,10 @@ testers are expected to do more *exploratory* testing.
    Expected: No Students Found. Displays 0 students.
 4. Test case: `find n/Test1`
    Expected: No Students Found. Error details shown.
+5.	Test case: `find n/John;Doe`
+   Expected: Displays students with either John or Doe in their names.
+6.	Test case: `find n/John n/Doe`
+   Expected: Displays students with both John and Doe in their names.
 
 ### Editing a student
 1. Prerequisites: List all students using the `list` command. Multiple students in the list.
@@ -1057,6 +1065,10 @@ testers are expected to do more *exploratory* testing.
    Expected: 2nd student is edited. Details of the edited student is shown.
 4. Test case: `edit 2 n/Test 2`<br>
    Expected: No student is edited. Error details shown.
+5. Test case: `edit 1 c/CS2103T;CS2109S`
+   Expected: The first student’s courses are updated to include both CS2103T and CS2109S.
+6. Test case: `edit 1 c/CS2103T c/CS2109S`
+   Expected: The first student’s courses are updated to include both CS2103T and CS2109S.
 5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
    Expected: No student is edited. Error details shown.
 
@@ -1069,6 +1081,9 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is deleted. Error details shown in the status message.
 4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: No student is deleted. Error details shown in the status message.
+5. Test case: `delete 1;2`
+   Expected: Both the 1st and 2nd students are deleted from the list. Confirmation message is shown.
+
 
 2. { more test cases …​ }_
 
@@ -1152,6 +1167,9 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is added. Error message about student not found shown.
 5. Test case: `addtolesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
    Expected: No student is added. Error details shown.
+6.	Test case: `addtolesson 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are added to the first lesson. Confirmation message is shown.
+
 
 ### Removing a student from a lesson: `removefromlesson`
 
@@ -1165,6 +1183,8 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is removed. Error message about student not found shown.
 5. Test case: `removefromlesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
    Expected: No student is removed. Error details shown.
+6. Test case: `removefromlesson 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are removed from the first lesson. Confirmation message is shown.
 
 ### Marking attendance in a lesson: `marka`
 
@@ -1198,16 +1218,18 @@ testers are expected to do more *exploratory* testing.
 7. Test case: `markp 1 n/TestOne pt/-1`  
    Expected: No participation is marked. Error message about invalid participation score is shown (as the score is below the valid range of 0-100).
 
-### Removing a lesson: `removelesson`
+### Removing a lesson: `deletelesson`
 
 1. Prerequisites: At least one lesson exists in the list.
 
-2. Test case: `removelesson 1`  
+2. Test case: `deletelesson 1`
    Expected: The first lesson is removed from the list. Confirmation message is shown.
-3. Test case: `removelesson 0`  
+3. Test case: `deletelesson 0`  
    Expected: No lesson is removed. Error details shown.
-4. Other incorrect remove commands: `removelesson`, `removelesson x` (where x is larger than the list size)  
+4. Other incorrect remove commands: `deletelesson`, `deletelesson x` (where x is larger than the list size)  
    Expected: No lesson is removed. Error details shown.
+5. Test case: `deletelesson 1;2`
+   Expected: Both the 1st and 2nd lessons are deleted from the list. Confirmation message is shown.
 
 ### Consultation Test Cases
 
@@ -1240,6 +1262,8 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is added. Error message about student not found shown.
 5. Test case: `addtoconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
    Expected: No student is added. Error details shown.
+6.	Test case: `addtoconsult 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are added to the first consultation. Confirmation message is shown.
 
 ### Removing students from a consultation: `removefromconsult`
 
@@ -1253,6 +1277,8 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is removed. Error message about student not found shown.
 5. Test case: `removefromconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
    Expected: No student is removed. Error details shown.
+6. Test case: `removefromconsult 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are removed from the first consultation. Confirmation message is shown.
 
 ### Deleting consultations: `deleteconsult`
 
@@ -1264,6 +1290,8 @@ testers are expected to do more *exploratory* testing.
    Expected: No consultation is deleted. Error details shown.
 4. Other incorrect delete commands: `deleteconsult`, `deleteconsult x` (where x is larger than the list size)  
    Expected: No consultation is deleted. Error details shown.
+5. Test case: `deleteconsult 1;2`
+   Expected: Both the 1st and 2nd consultations are deleted from the list. Confirmation message is shown.
 
 ### Saving data
 
