@@ -60,7 +60,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-  
+
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -278,8 +278,8 @@ Allows tagging a student by their level and subject. A student must have a level
 
 <box type="warning" seamless>
 
-**Caution:** Tagging with only subject(s) will only work if the student has a level assigned previously. Additionally, 
-the subject(s) tagged must be valid for the previously assigned level. 
+**Caution:** Tagging with only subject(s) will only work if the student has a level assigned previously. Additionally,
+the subject(s) tagged must be valid for the previously assigned level.
 
 </box>
 
@@ -399,7 +399,7 @@ Clears all students from EduManage.
 
 <box type="warning" seamless>
 
-**Caution:** 
+**Caution:**
 This action is irreversible and will permanently delete all students from EduManage. Ensure that you have backed up any important data before proceeding.
 </box>
 
@@ -414,7 +414,7 @@ This action is irreversible and will permanently delete all students from EduMan
 Shows a message explaining how to access the help page.
 
 **Format:** `help`
-  
+
   ![help message](images/helpMessage.png)
 
 ***

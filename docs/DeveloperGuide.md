@@ -165,13 +165,13 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
 **Treatment of clashing timings**
 
 - **Current Implementation (Alternative 1):**
-    - **Description**: Clashing lesson timings across and within students are not rejected. 
-    - **Pros**: Promotes greater user flexibility, as there could be different schedules for alternate weeks, 
+    - **Description**: Clashing lesson timings across and within students are not rejected.
+    - **Pros**: Promotes greater user flexibility, as there could be different schedules for alternate weeks,
       and all the timings should be stored in EduManage.
     - **Cons**: Wrong lesson timings would not be flagged out to the user.
 
 - **Alternative 2:**
-    - **Description**: Reject clashing lesson timings across and within students. 
+    - **Description**: Reject clashing lesson timings across and within students.
     - **Pros**: Flags out wrong lesson timings input by the user.
     - **Cons**: Reduces user flexibility in storing lesson times.
 
@@ -179,7 +179,7 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
 
 - **Current Implementation (Alternative 1):**
     - **Description**: Each lesson timing is not associated with any subject.
-    - **Pros**: Promotes greater user flexibility, as users might be asked to teach different subjects within 
+    - **Pros**: Promotes greater user flexibility, as users might be asked to teach different subjects within
       a lesson timing.
     - **Cons**: Users might prefer to have the association made clear.
 
@@ -189,20 +189,20 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
     - **Cons**: Reduces user flexibility in arranging lesson times for different subjects.
 
 ### Tag Feature - Level and Subject Tagging
-This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and 
-subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can 
+This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and
+subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can
 manage student profiles more efficiently.
 
-- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified 
+- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified
   tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
-- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and 
+- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and
   guidelines for tag parameters.
-- **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in 
-  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary 
+- **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in
+  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary
   duplication.
 
 #### Implementation - Sequence Diagrams
-The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note 
+The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note
 that while the TagCommandParser lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
 lifeline till the diagram's end.
 
@@ -214,9 +214,9 @@ lifeline till the diagram's end.
 **Parsing Tag Input**
 
 - **Current Implementation (Alternative 1):**
-    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved 
+    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved
       maintainability and modularity.
-    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a 
+    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a
       consistent approach across commands.
     - **Cons**: Adds a layer of abstraction, which may slightly increase the system’s complexity.
 
@@ -227,14 +227,14 @@ lifeline till the diagram's end.
 
 **Design of Tag Constraints**
 - **Current Implementation (Alternative 1)**:
-    - **Description**: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1 NA` and 
+    - **Description**: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1 NA` and
       `s1 na` are treated as identical, and `math` and `MATH` are treated as identical).
     - **Pros**: Enforces a standardized format for tags, ensuring brevity and uniformity.
     - **Cons**: Reduces user flexibility in customizing tags.
 
 - **Alternative 2**:
     - **Description**: Users can create tags without specific constraints.
-    - **Pros**: Provides greater flexibility for users to create custom tags. 
+    - **Pros**: Provides greater flexibility for users to create custom tags.
     - **Cons**: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
 
 ***
@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tuition teacher requests to add a student by inputting the student's name, phone number, emergency contact, address and any optional fields.
-2. EduManage adds the student's information and indicates success. 
+2. EduManage adds the student's information and indicates success.
 
    Use case ends.
 
@@ -402,10 +402,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. EduManage shows an error message indicating that the student already exists in EduManage.
 
       Use case resumes at step 1.
-  
+
 * 1b. The inputted student's information is missing fields that are not optional.
   * 1b1. EduManage shows an error message and informs the user of the correct command format.
-  
+
     Use case resumes at step 1.
 
 ***
@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions** 
+**Extensions**
 
 * 2a. The list is empty.
 
@@ -494,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Tuition teacher requests to list students.
 2. EduManage shows a list of students.
-    
+
     Use case ends.
 
 ***
@@ -812,29 +812,29 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
 
     2. **Valid Test Cases**
-   
+
         1. Add a student with only compulsory fields:`add n/alice lee p/91234567 e/91234567 a/123 Clementi`<br>
-           Expected: New student with name `Alice Lee`, phone and emergency number `91234567`, 
+           Expected: New student with name `Alice Lee`, phone and emergency number `91234567`,
            and address `123 Clementi` is added. There are no notes, tasks, subjects or lesson times stated.
-       
-        2. Add a student with compulsory fields, level, subject and lesson times: 
+
+        2. Add a student with compulsory fields, level, subject and lesson times:
            `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
            Expected: New student with name `Alice Lee`, phone and emergency number `91234567`,
            address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
-       
+
         3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
            any of the above test cases.<br>
            Expected: The expected result is the same as the unaltered test case.
-       
+
     3. **Invalid Test Cases**
-   
+
         1. Add a student with subject without level: `add n/Alice Lee p/91234567 e/91234567 a/123 Clementi s/MATH`<br>
            Expected: No student is added. Error details shown in the status message. Status bar remains the same.
        
         2. Add an existing student: `add n/Alex Yeoh p/91234567 e/91234567 a/123 Clementi`<br>
            Expected: No student is added. Error details shown in the status message. Status bar remains the same.
-       
-        3. Other invalid test cases: Add a student without compulsory fields or with invalid values for any field. 
+
+        3. Other invalid test cases: Add a student without compulsory fields or with invalid values for any field.
            The valid value range can be found in the User guide.<br>
            Expected: No student is added. Error details shown in the status message. Status bar remains the same.
 
@@ -881,7 +881,7 @@ testers are expected to do more *exploratory* testing.
 
        2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
           Expected: Similar to previous.
-    
+
        3. Find by subject: `find s/ENGINEERING`, `find s/?@!@#a`, `...`<br>
           Expected: Similar to previous.
 
@@ -891,7 +891,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a task for a specific student
 
-    1. Prerequisites: Ensure that student `Alex Yeoh` exists.  
+    1. Prerequisites: Ensure that student `Alex Yeoh` exists.
 
     2. Test case: `addtask n/alex yeoh t/Mark homework d/2024-11-06`<br>
        Expected: New task with description `Mark homework` and deadline `2024-11-06` is added to student `Alex Yeoh`
@@ -901,4 +901,3 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `addtask n/alex yeoh t/  d/2024-11-06`<br>
        Expected: No task is added. Error details shown in the status message. Status bar remains the same.
-       
