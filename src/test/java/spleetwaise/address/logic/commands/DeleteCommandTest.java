@@ -3,6 +3,7 @@ package spleetwaise.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.util.HashSet;
 
@@ -22,6 +23,7 @@ import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -74,7 +76,7 @@ public class DeleteCommandTest {
 
         // Add some txn for this person
         transactionBookModel.addTransaction(new Transaction(personToDelete, new Amount("10.00"),
-                new Description("foo"), new Date("01012024"), new HashSet<>()
+                new Description("foo"), new Date("01012024"), new HashSet<>(), new Status(NOT_DONE_STATUS)
         ));
 
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);

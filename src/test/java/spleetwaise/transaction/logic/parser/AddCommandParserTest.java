@@ -7,6 +7,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static spleetwaise.transaction.model.transaction.Date.getNowDate;
+import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 public class AddCommandParserTest {
@@ -38,6 +40,7 @@ public class AddCommandParserTest {
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date(getNowDate());
     private static final Set<Category> testCategories = new HashSet<>(List.of(new Category("FOOD")));
+    private static final Status testStatus = new Status(NOT_DONE_STATUS);
     private static final AddressBookModel abModel = new AddressBookModelManager();
 
     private final AddCommandParser parser = new AddCommandParser();
@@ -52,7 +55,8 @@ public class AddCommandParserTest {
     public void parse_allFieldsPresent_success() {
         String userInput =
                 " 1 amt/1.23 desc/description " + PREFIX_CATEGORY + "FOOD";
-        Transaction txn = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories);
+        Transaction txn = new Transaction(
+                testPerson, testAmount, testDescription, testDate, testCategories, testStatus);
         assertParseSuccess(parser, userInput, new AddCommand(txn));
     }
 
@@ -60,7 +64,8 @@ public class AddCommandParserTest {
     public void parse_withOptionalDateField_success() {
         String userInput =
                 " 1 amt/1.23 desc/description " + PREFIX_DATE + getNowDate() + " " + PREFIX_CATEGORY + "FOOD";
-        Transaction txn = new Transaction(testPerson, testAmount, testDescription, testDate, testCategories);
+        Transaction txn = new Transaction(
+                testPerson, testAmount, testDescription, testDate, testCategories, testStatus);
         assertParseSuccess(parser, userInput, new AddCommand(txn));
     }
 
@@ -95,6 +100,12 @@ public class AddCommandParserTest {
     public void parse_invalidDate_exceptionThrown() {
         String userInput = " 1 amt/1.23 desc/test date/2024";
         assertParseFailure(parser, userInput, Date.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidStatus_exceptionThrown() {
+        String userInput = " 1 amt/1.23 desc/test status/invalid";
+        assertParseFailure(parser, userInput, Status.MESSAGE_CONSTRAINTS);
     }
 
     @Test

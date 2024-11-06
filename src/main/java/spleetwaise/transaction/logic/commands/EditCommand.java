@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         Status status = editTransactionDescriptor.getStatus().orElse(txnToEdit.getStatus());
         Set<Category> categories = editTransactionDescriptor.getCategories().orElse(txnToEdit.getCategories());
 
-        return new Transaction(id, person, amount, description, date, categories).setStatus(status);
+        return new Transaction(id, person, amount, description, date, categories, status);
     }
 
     public EditTransactionDescriptor getDescriptor() {

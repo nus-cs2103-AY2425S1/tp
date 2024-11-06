@@ -36,16 +36,9 @@ public class Transaction {
      */
     public Transaction(
             String id, Person person, Amount amount, Description description, Date date,
-            Set<Category> categories
-    ) {
-        this(id, person, amount, description, date, categories, new Status(false));
-    }
-
-    private Transaction(
-            String id, Person person, Amount amount, Description description, Date date,
             Set<Category> categories, Status status
     ) {
-        CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
+        CollectionUtil.requireAllNonNull(person, amount, description, date, categories, status);
         this.id = id;
         this.person = person;
         this.amount = amount;
@@ -64,8 +57,11 @@ public class Transaction {
      * @param date        The date the transaction has taken place.
      * @param categories  The categories the transaction has.
      */
-    public Transaction(Person person, Amount amount, Description description, Date date, Set<Category> categories) {
-        this(IdUtil.getId(), person, amount, description, date, categories);
+    public Transaction(
+            Person person, Amount amount, Description description, Date date, Set<Category> categories,
+            Status status
+    ) {
+        this(IdUtil.getId(), person, amount, description, date, categories, status);
     }
 
     public String getId() {

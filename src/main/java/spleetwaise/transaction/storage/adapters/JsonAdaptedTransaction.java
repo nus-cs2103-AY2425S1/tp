@@ -204,7 +204,6 @@ public class JsonAdaptedTransaction {
         s = new Status(isDone);
         Set<Category> mc = new HashSet<>(txnCategories);
 
-        Transaction txn = new Transaction(id, p, a, d, dt, mc);
-        return txn.setStatus(s);
+        return new Transaction(id, p, a, d, dt, mc, s);
     }
 }

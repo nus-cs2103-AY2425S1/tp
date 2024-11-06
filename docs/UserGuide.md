@@ -115,12 +115,13 @@ Examples:
 
 Adds a transaction to the transaction book.
 
-Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [cat/CATEGORY]...`
+Format: `addTxn INDEX amt/AMOUNT desc/TEST [date/DATE] [status/STATUS] [cat/CATEGORY]...`
 
 * The `INDEX` refers to the index of the person currently displayed in the address book panel.
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` can be added as prefix to indicate negative
   amount.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
+* The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
 :bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
@@ -188,6 +189,12 @@ Examples:
 
 * `editTxn 1 p/91234567 desc/Hello world` Edits the 1st transaction to be related to the person with phone number `91234567` and edits the description of the 1st transaction to be `Hello world`.
 * `editTxn 2 cat/` Edits the 2nd transaction by removing all existing categories.
+
+====
+*Future consideration*
+
+* Support editing status field in `editTxn` command. Currently, similar result can be done via `markDone` or `markUndone` command.
+====
 
 ### Locating persons by name: `find`
 
@@ -409,8 +416,8 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                                                                             |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN`                                   |
+| **Add**    | `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [cat/CATEGORY]` <br> e.g., `addTxn 1 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 status/Done cat/LOAN`       |
 | **Edit**   | `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY]` <br> e.g., `editTxn 1 p/99999999 amt/9999999999.99 desc/Sean owes me a lot for a plot of land in sentosa date/10102024 cat/LOAN` |
 | **List**   | `listTxn`                                                                                                                                                                                                                    |
-| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]` <br> e.g. `filterTxn 1`                                                                                                        |
+| **Filter** | `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/STATUS] [amtsign/AMOUNT_SIGN]` <br> e.g. `filterTxn 1`                                                                                                |
 | **Clear**  | `clearTxn`                                                                                                                                                                                                                   |

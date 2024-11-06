@@ -18,6 +18,7 @@ import spleetwaise.commons.exceptions.IllegalValueException;
 import spleetwaise.commons.util.IdUtil;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.testutil.DateUtil;
 import spleetwaise.transaction.testutil.TransactionBuilder;
@@ -60,7 +61,8 @@ public class JsonAdaptedTransactionTest {
         Transaction t = new Transaction(jTrans.getId(), jPerson.toModelType(), VALID_AMT.toModelType(),
                 new Description(VALID_DESCRIPTION),
                 new Date(DateUtil.VALID_DATE),
-                TransactionBuilder.DEFAULT_CATEGORY_SET
+                TransactionBuilder.DEFAULT_CATEGORY_SET,
+                new Status(VALID_STAT)
         );
 
         assertEquals(t, jTrans.toModelType(addressBookModel));
