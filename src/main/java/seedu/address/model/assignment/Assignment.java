@@ -39,7 +39,21 @@ public class Assignment {
         checkArgument(isValidMaxScore(maxScore), MAX_SCORE_MESSAGE_CONSTRAINTS);
         this.maxScore = maxScore;
     }
-
+    /**
+     * Constructs a new {@code Assignment} by copying the fields from another {@code Assignment}.
+     * This creates a new instance with the same values for assignment name, maximum score,
+     * score, submission status, and graded status as the provided {@code other} assignment.
+     *
+     * @param other The {@code Assignment} to copy. Must not be null.
+     * @throws NullPointerException if {@code other} is null.
+     */
+    public Assignment(Assignment other) {
+        this.assignmentName = other.assignmentName;
+        this.maxScore = other.maxScore;
+        this.score = other.score;
+        this.hasSubmitted = other.hasSubmitted;
+        this.isGraded = other.isGraded;
+    }
     /**
      * Returns true if a given maxScore is a valid score.
      */
@@ -140,4 +154,5 @@ public class Assignment {
                 .add("isGraded", isGraded)
                 .toString();
     }
+
 }
