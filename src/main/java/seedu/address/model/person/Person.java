@@ -112,7 +112,9 @@ public class Person implements Appointmentable {
         return remark;
     }
 
-    public List<Appointment> getAllAppointments() { return this.appointments; }
+    public List<Appointment> getAllAppointments() {
+        return this.appointments;
+    }
 
     /**
      * Adds additional remarks to a person
