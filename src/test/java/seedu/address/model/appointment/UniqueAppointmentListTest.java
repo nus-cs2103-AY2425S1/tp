@@ -36,10 +36,14 @@ public class UniqueAppointmentListTest {
     public void contains_existingAndNonExistingAppointment_returnsCorrect() {
         // EP: non-existing appointment
         assertFalse(uniqueAppointmentList.containsAppointment(appointment1));
+        assertFalse(uniqueAppointmentList.containsAppointment(appointment1.getAppointmentDescriptor(),
+            appointment1.getPerson()));
 
         // EP: existing appointment
         uniqueAppointmentList.addAppointment(appointment1);
         assertTrue(uniqueAppointmentList.containsAppointment(appointment1));
+        assertTrue(uniqueAppointmentList.containsAppointment(appointment1.getAppointmentDescriptor(),
+            appointment1.getPerson()));
     }
 
     @Test

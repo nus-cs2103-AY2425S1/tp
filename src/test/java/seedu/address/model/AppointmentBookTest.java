@@ -51,6 +51,8 @@ public class AppointmentBookTest {
     public void hasAppointment_appointment_returnsTrue() {
         appointmentBook.addAppointment(new AppointmentBuilder().build());
         assertTrue(appointmentBook.hasAppointment(new AppointmentBuilder().build()));
+        assertTrue(appointmentBook.hasAppointment(new AppointmentBuilder().build().getAppointmentDescriptor(),
+            new AppointmentBuilder().build().getPerson()));
     }
 
     @Test
