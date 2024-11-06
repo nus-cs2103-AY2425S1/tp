@@ -224,7 +224,7 @@ public class ParserUtil {
     /**
      * Parses a {@code List<String> keywords} into a {@code NameContainsKeywordPredicate}.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if any of the keywords in {@code keywords} is invalid.
      */
     public static NameContainsKeywordsPredicate parseNameKeywords(List<String> keywords) throws ParseException {
         requireNonNull(keywords);
