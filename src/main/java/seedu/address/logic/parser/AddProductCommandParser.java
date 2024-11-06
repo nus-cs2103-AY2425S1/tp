@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -46,11 +45,7 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
                 PREFIX_PRODUCT_SUPPLIER_NAME,
                 PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, AddProductCommand.MESSAGE_USAGE));
-        }
+        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_NAME}, AddProductCommand.MESSAGE_USAGE);
 
         // Ensure no duplicate prefixes are used
         argMultimap.verifyNoDuplicatePrefixesFor(

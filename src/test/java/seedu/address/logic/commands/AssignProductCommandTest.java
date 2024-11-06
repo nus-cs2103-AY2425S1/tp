@@ -37,8 +37,12 @@ public class AssignProductCommandTest {
 
         String expectedMessage = String.format(AssignProductCommand.MESSAGE_SUCCESS, VALID_PRODUCT_APPLE_PIE,
                 VALID_NAME_AMY);
+        Product updatedProduct = new ProductBuilder(product).withSupplierName(VALID_NAME_AMY).build();
+        Supplier updatedSupplier = new SupplierBuilder(supplier).withProducts(Set.of(updatedProduct)).build();
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setSupplier(supplier, new SupplierBuilder(supplier).withProducts(Set.of(product)).build());
+        expectedModel.setProduct(product, updatedProduct);
+        expectedModel.setSupplier(supplier, updatedSupplier);
 
         assertCommandSuccess(assignProductCommand, model, expectedMessage, expectedModel);
     }

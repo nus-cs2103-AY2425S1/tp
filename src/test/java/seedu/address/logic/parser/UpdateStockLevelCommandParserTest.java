@@ -1,8 +1,9 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_STOCK_LEVEL;
+import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
+import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -44,7 +45,7 @@ public class UpdateStockLevelCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        String expectedMessage = String.format(MESSAGE_MISSING_REQUIRED_PREFIXES,
                 UpdateStockLevelCommand.MESSAGE_USAGE);
 
         // missing product name prefix
@@ -92,11 +93,11 @@ public class UpdateStockLevelCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // non-empty preamble
         assertParseFailure(parser, "some random string pr/Product1 stk/1000",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateStockLevelCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_UNEXPECTED_PREAMBLE, UpdateStockLevelCommand.MESSAGE_USAGE));
 
         // preamble with numbers
         assertParseFailure(parser, "123 pr/Product1 stk/1000",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateStockLevelCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_UNEXPECTED_PREAMBLE, UpdateStockLevelCommand.MESSAGE_USAGE));
     }
 
     @Test
