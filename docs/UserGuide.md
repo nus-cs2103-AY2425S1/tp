@@ -195,9 +195,7 @@ Otherwise, the command will not be executed and display an error message in Resu
 |**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `1`<br/>:x: `4`                                                      |
 
 
-### Patient Management
-
-#### Adding a patient: `add`
+### Adding a patient: `add`
 
 Adds a patient details to the system.
 
@@ -225,13 +223,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-#### Listing all patients : `list`
+### Listing all patients : `list`
 
 Shows a list of all patients in the system.
 
 :pencil: Format: `list`
 
-#### Editing a patient : `edit`
+### Editing a patient : `edit`
 
 Edits an existing patient in the system.
 
@@ -252,7 +250,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-#### Locating patients by name: `find`
+### Locating patients by name: `find`
 
 Finds patients whose names contain any of the given keywords.
 
@@ -274,7 +272,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### Deleting a patient : `delete`
+### Deleting a patient : `delete`
 
 Deletes the specified patient and tasks associated to that patient from the system.
 
@@ -293,9 +291,7 @@ Examples:
 * `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 
-### Emergency Contact Management
-
-#### Adding emergency contact : `emergency`
+### Adding emergency contact : `emergency`
 
 Adds an emergency contact and details to a patient in the system.
 
@@ -312,7 +308,7 @@ Adds an emergency contact and details to a patient in the system.
 Examples:
 * `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
 
-#### Deleting emergency contact : `delemergency`
+### Deleting emergency contact : `delemergency`
 
 Deletes an emergency contact and its details from a patient in the system.
 
@@ -330,9 +326,8 @@ Examples:
 * `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
 
 
-### Priority Level Management
 
-#### Adding priority level : `priority`
+### Adding priority level : `priority`
 
 Adds an priority level to a patient in the system.
 
@@ -350,7 +345,7 @@ Adds an priority level to a patient in the system.
 Examples:
 * `priority 1 /level 2` adds priority level `2` to 1st index in patient list.
 
-#### Deleting priority level : `deletelevel`
+### Deleting priority level : `deletelevel`
 
 Delete a priority level to a patient in the system, resetting it to the default value **3**.
 
@@ -369,9 +364,7 @@ Examples:
 * `priority 1 l/reset` resets the priority level of the 1st indexed patient in the patient list.
 
 
-### Task Management
-
-#### Adding a task : `addtask`
+### Adding a task : `addtask`
 
 Adds a task to a patient in the system.
 
@@ -391,7 +384,7 @@ Examples:
 ![Patient List](images/PersonListExample.png)
 ![Task List](images/TaskListExample.png)
 
-#### Deleting a task : `deletetask`
+### Deleting a task : `deletetask`
 
 Deletes a task for a patient in the system.
 
@@ -408,7 +401,7 @@ Deletes a task for a patient in the system.
 Examples:
 * `deletetask 1` deletes the 1st task in the task list.
 
-#### Mark Task : `marktask`
+### Mark Task : `marktask`
 
 Marks a task at a specific index.
 
@@ -425,47 +418,42 @@ Marks a task at a specific index.
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
 
-#### Find Task : `findtask`
+### Find Task : `findtask`
 
 Finds all task for a particular Patient specific index.
 
 :pencil: Format: `findtask INDEX`
 
-<box type="info" seamless>
-
-**Note:**
-</box>
-
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
 
-#### List Task : `listtask`
+### List Task : `listtask`
 
 List all tasks for all patients in the system.
 
 :pencil: Format: `listtask`
 
-#### List Incomplete Task : `listincomplete`
+### List Incomplete Task : `listincomplete`
 
 List all incomplete tasks for all patients in the system.
 
 :pencil: Format: `listincomplete`
 
-### Other Commands
 
-#### Viewing help : `help`
+### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
 Format: `help`
-<box type="Note" seamless>
+
+<box type="info" seamless>
 
 **Note:**
 * Due to the amount of commands, the Help Window is made such that it will still be displayed at foreground despite clicking back to NovaCare.
 * The hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
 * To close it, click the `close button` on the top right hand corner of the Help Window as shown below.
 </box>
-![helpMessage](images/helpMessage.png)
+![Help Message](images/helpMessage.png)
 
 ### Clearing all entries : `clear`
 
@@ -476,7 +464,7 @@ Clears all patient and tasks entry from NovaCare.
 <box type="warning" seamless>
 
 **Warning:**
-Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare. 
+Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.<br>
 **This action is irreversible!**
 </box>
 
