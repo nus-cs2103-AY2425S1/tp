@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddGradeCommand extends Command {
     public static final String COMMAND_WORD = "addGrade";
+    public static final String COMMAND_WORD_LOWER_CASE = "addgrade";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a grade of an assignment to the person.\n"
                     + "Parameters: "
                     + PREFIX_NAME
