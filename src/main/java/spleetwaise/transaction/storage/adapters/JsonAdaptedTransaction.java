@@ -23,46 +23,23 @@ import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
- * Adapter for serializing and deserializing Transaction objects into JSON.
+ * Adapter for serializing and deserializing {@link Transaction} objects into JSON.
  */
 public class JsonAdaptedTransaction {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Transaction's %s field is missing!";
     public static final String PERSON_ID_NOT_FOUND = "Person with id %s not found!";
 
-    /**
-     * The unique identifier of the transaction.
-     */
     private final String id;
-    /**
-     * Id of the person involved in the transaction.
-     */
     private final String personId;
-    /**
-     * The amount of money transferred.
-     */
-    private final JsonAdaptedAmount amount;
-    /**
-     * A description of the transaction.
-     */
-    private final String description;
-    /**
-     * The date of the transaction.
-     */
-    private final String date;
-    /**
-     * The done status of the transaction.
-     */
+    private final JsonAdaptedAmount jsonAmount;
+    private final String jsonDescription;
+    private final String jsonDate;
     private final boolean isDone;
-    /**
-     * The List of the categories.
-     */
-    private final List<JsonAdaptedCategory> categories = new ArrayList<>();
+    private final List<JsonAdaptedCategory> jsonCategories = new ArrayList<>();
 
     /**
-     * Constructor for creating a JsonAdaptedTransaction from a Transaction object, which serializes the given
-     * transaction into JSON format. This constructor validates the input data to ensure that all required fields are
-     * present in the provided Transaction object.
+     * Constructs a {@code JsonAdaptedTransaction} with the given transaction details.
      */
     @JsonCreator
     public JsonAdaptedTransaction(
@@ -76,94 +53,66 @@ public class JsonAdaptedTransaction {
     ) {
         this.id = id;
         this.personId = personId;
-        this.amount = amount;
-        this.description = description;
-        this.date = date;
+        this.jsonAmount = amount;
+        this.jsonDescription = description;
+        this.jsonDate = date;
         this.isDone = isDone;
         if (categories != null) {
-            this.categories.addAll(categories);
+            this.jsonCategories.addAll(categories);
         }
     }
 
     /**
-     * Constructor for creating a JsonAdaptedTransaction from a Transaction object.
-     *
-     * @param transaction the transaction to create the adapter for
+     * Converts a given {@code Transaction} into this class for Jackson use.
      */
     public JsonAdaptedTransaction(Transaction transaction) {
         this.id = transaction.getId();
         this.personId = transaction.getPerson().getId();
-        this.amount = new JsonAdaptedAmount(transaction.getAmount());
-        this.description = transaction.getDescription().toString();
-        this.date = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
+        this.jsonAmount = new JsonAdaptedAmount(transaction.getAmount());
+        this.jsonDescription = transaction.getDescription().toString();
+        this.jsonDate = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
         this.isDone = transaction.getStatus().isDone();
-        this.categories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
+        this.jsonCategories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
                 .toList());
     }
 
-    /**
-     * Retrieves the unique identifier of the transaction.
-     *
-     * @return The ID of the transaction
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * Retrieves the amount of money transferred.
-     *
-     * @return The amount of money transferred
-     */
     public JsonAdaptedAmount getAmount() {
-        return amount;
+        return jsonAmount;
     }
 
-    /**
-     * Retrieves a description of the transaction.
-     *
-     * @return A description of the transaction
-     */
     public String getDescription() {
-        return description;
+        return jsonDescription;
     }
 
-    /**
-     * Retrieves the date of the transaction.
-     *
-     * @return The date of the transaction
-     */
     public String getDate() {
-        return date;
+        return jsonDate;
     }
 
-    /**
-     * Retrieves the done status of the transaction.
-     *
-     * @return The done status of the transaction
-     */
     public boolean getIsDone() {
         return isDone;
     }
 
     /**
-     * Converts the JSON adapter back into a Transaction object.
+     * Converts this Jackson-friendly adapted transaction object into the model's {@code Transaction} object.
      *
-     * @return the deserialized Transaction object
-     * @throws IllegalValueException if any of the fields are missing or invalid
+     * @throws IllegalValueException if there were any data constraints violated in the adapted transaction.
      */
     public Transaction toModelType(AddressBookModel addressBookModel) throws IllegalValueException {
         requireNonNull(addressBookModel);
 
-        final Person p;
-        final Amount a;
-        final Description d;
-        final Date dt;
-        final Status s;
-        final List<Category> txnCategories = new ArrayList<>();
+        final Person person;
+        final Amount amount;
+        final Description description;
+        final Date date;
+        final Status status;
+        final List<Category> transactionCategories = new ArrayList<>();
 
-        for (JsonAdaptedCategory cat : categories) {
-            txnCategories.add(cat.toModelType());
+        for (JsonAdaptedCategory category : jsonCategories) {
+            transactionCategories.add(category.toModelType());
         }
 
         // Check missing fields
@@ -178,38 +127,40 @@ public class JsonAdaptedTransaction {
         if (personId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "personId"));
         }
-        if (amount == null) {
+
+        if (jsonAmount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Amount.class.getSimpleName()));
         }
-        if (description == null) {
+
+        if (jsonDescription == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if (date == null) {
+
+        if (jsonDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
 
-        // Validate
-        if (!Description.isValidDescription(description)) {
+        if (!Description.isValidDescription(jsonDescription)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        if (!Date.isValidDate(date)) {
+
+        if (!Date.isValidDate(jsonDate)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
 
-        Optional<Person> opPerson = addressBookModel.getPersonById(personId);
-
-        if (opPerson.isEmpty()) {
+        Optional<Person> optionalPerson = addressBookModel.getPersonById(personId);
+        if (optionalPerson.isEmpty()) {
             throw new IllegalValueException(String.format(PERSON_ID_NOT_FOUND, personId));
         }
 
-        p = opPerson.get();
-        a = amount.toModelType();
-        d = new Description(description);
-        dt = new Date(date);
-        s = new Status(isDone);
-        Set<Category> mc = new HashSet<>(txnCategories);
+        person = optionalPerson.get();
+        amount = jsonAmount.toModelType();
+        description = new Description(jsonDescription);
+        date = new Date(jsonDate);
+        status = new Status(isDone);
+        Set<Category> categories = new HashSet<>(transactionCategories);
 
-        return new Transaction(id.trim(), p, a, d, dt, mc, s);
+        return new Transaction(id.trim(), person, amount, description, date, categories, status);
     }
 }
