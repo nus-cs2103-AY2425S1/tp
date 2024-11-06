@@ -105,7 +105,7 @@ public class EditNoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditNotesCommand otherEditNotesCommand)) {
+        if (!(other instanceof EditNoteCommand otherEditNotesCommand)) {
             return false;
         }
 
