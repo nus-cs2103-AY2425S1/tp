@@ -30,12 +30,13 @@ public class Company {
     private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
     private final Boolean isFavourite;
+    private final Boolean isLong;
 
     /**
      * Every field must be present and not null.
      */
     public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status,
-               List<Application> applications, Boolean isFavourite) {
+               List<Application> applications, Boolean isFavourite, Boolean isLong) {
         requireAllNonNull(name, phone, email, address, tags, status, isFavourite);
         this.name = name;
         this.phone = phone;
@@ -45,6 +46,7 @@ public class Company {
         this.status = status;
         this.applications = applications;
         this.isFavourite = isFavourite;
+        this.isLong = isLong;
     }
 
     /**
@@ -61,6 +63,7 @@ public class Company {
         this.status = status;
         this.applications = applications;
         this.isFavourite = false;
+        this.isLong = false;
     }
 
     public Name getName() {
@@ -97,6 +100,10 @@ public class Company {
 
     public List<Application> getApplications() {
         return Collections.unmodifiableList(applications);
+    }
+
+    public Boolean getIsLong() {
+        return isLong;
     }
 
     public String getAppNameString() {

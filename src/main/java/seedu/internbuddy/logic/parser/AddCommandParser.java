@@ -51,7 +51,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("INTERESTED"));
         ArrayList<Application> applications = new ArrayList<>();
 
-        Company company = new Company(name, phone, email, address, tagList, status, applications, false);
+        Company company = new Company(name, phone, email, address, tagList, status,
+                applications, false, false);
 
         return new AddCommand(company);
     }

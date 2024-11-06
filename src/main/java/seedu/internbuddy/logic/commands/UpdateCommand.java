@@ -76,7 +76,7 @@ public class UpdateCommand extends Command {
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getTags(),
-                companyToEdit.getStatus(), applicationList, companyToEdit.getIsFavourite());
+                companyToEdit.getStatus(), applicationList, companyToEdit.getIsFavourite(), false);
         model.setCompany(companyToEdit, editedCompany);
 
         return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS, editedApplication));

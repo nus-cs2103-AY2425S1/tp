@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.internbuddy.commons.core.LogsCenter;
 import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
@@ -15,7 +16,7 @@ import seedu.internbuddy.model.company.NameContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private static Logger logger = Logger.getLogger("Foo");
+    private static Logger logger = LogsCenter.getLogger(FindCommand.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

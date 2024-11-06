@@ -21,6 +21,7 @@ import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
 import seedu.internbuddy.logic.commands.UnfavCommand;
 import seedu.internbuddy.logic.commands.UpdateCommand;
+import seedu.internbuddy.logic.commands.ViewCommand;
 import seedu.internbuddy.logic.commands.WithdrawCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 
@@ -96,6 +97,9 @@ public class AddressBookParser {
 
         case UnfavCommand.COMMAND_WORD:
             return new UnfavCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
