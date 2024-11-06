@@ -7,7 +7,7 @@
 # DorManagerPro User Guide
 
 DorManagerPro (DMP) is a desktop app tailored for **university dorm managers who prefer to work with a Command Line Interface (CLI)**, 
-designed to allow easy management of dormitory resident details within an address book.
+designed to allow easy and efficient management of dormitory resident details within an address book.
 
 Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
@@ -251,8 +251,11 @@ Constraints:
 * `d` is a compulsory number 3 to 15 digits long.
 * Separate `c`, `a` and `d` with a single space.
 
+Duplicate handling:
+* Two resident student contacts with the same phone numbers are not allowed.
 > [!Note]
-> Constraint rationales: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> Duplicate handling rationale: Phone numbers are unique to each individual
 
 ### EMAIL
 
