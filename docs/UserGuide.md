@@ -221,6 +221,13 @@ Format: `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]
 
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+When performing the [`search`](#search-persons-by-schedule-range--search) command, contacts with an existing schedule,
+but no `SCHEDULE_TIME` provided will have their schedule time's treated as `00:00`.
+
+</div>
+
 Examples:
 * Schedules an appointment on 2024-10-22 at 16:00 for the contact at index 1 <br>
 `schedule 1 sn/appointment sd/2024-10-22 st/16:00` <br> 
@@ -276,6 +283,13 @@ For commands that involve providing an `INDEX`, such as `edit`, `schedule`, `soc
 
 Shows a list of all persons in the address book.
 Perfect for viewing all contacts after performing [`filter`](#filter-persons-by-tag--filter), [`search`](#search-persons-by-schedule-range--search) or [`find`](#locating-persons-by-name--find)!
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** Sometimes some of the commands in this section can return an empty list.
+Use the [`list`](#listing-all-persons--list) command to view all contacts again!
+
+</div>
 
 Format: `list`
 
@@ -374,17 +388,17 @@ Examples:
 Need to know who you have a schedule with this week?
 Use our `search` feature, which searches for a list of persons within a given range of schedule.
 
-Format: `search [b/START_TIME] [en/END_TIME]`
+Format: `search [b/START_DATETIME] [en/END_DATETIME]`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the `search` command:**<br>
 
-* `START_TIME` and `END_TIME` must adhere to the datetime format yyyy-MM-dd HH:mm
-* Either `[b/START_TIME]` or `[en/END_TIME]` or both has to be provided
-* It will search for schedules between the given `[b/START_TIME]` and `[en/END_TIME]`
-* If `[b/START_TIME]` is not provided, it will search for all schedules that is before `[en/END_TIME]`
-* If `[en/END_TIME]` is not provided, it will search for all schedules that is after `[b/START_TIME]`
+* `START_DATETIME` and `END_DATETIME` must adhere to the datetime format yyyy-MM-dd HH:mm
+* Either `[b/START_DATETIME]` or `[en/END_DATETIME]` or both has to be provided
+* It will search for schedules between the given `[b/START_DATETIME]` and `[en/END_DATETIME]`
+* If `[b/START_DATETIME]` is not provided, it will search for all schedules that is before or equals to `[en/END_DATETIME]`
+* If `[en/END_DATETIME]` is not provided, it will search for all schedules that is after or equals to `[b/START_DATETIME]`
 * Persons with no schedule given will not appear in the search results
 * Persons with only a date as a schedule but not time will be searched under the assumption that time is 00:00
 * Search result will be inclusive of the beginning time and end time
@@ -514,7 +528,7 @@ _Details coming soon ..._
 | **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort asc`                                                                                                                                                                                                                                               |
 | **[Filter](#filter-persons-by-tag--filter)**            | `filter [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                                   |
 | **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                        |
-| **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_TIME] [en/END_TIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                                   |
+| **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_DATETIME] [en/END_DATETIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                           |
 | **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                                                                                                                                            |
 | **[Restore](#restoring-a-deleted-person--restore)**     | `restore`                                                                                                                                                                                                                                                                                         |
 | **[Backup](#backing-up-save-file--backup)**             | `backup`                                                                                                                                                                                                                                                                                          |
