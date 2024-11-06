@@ -59,7 +59,8 @@ public class MarkSupplierCommand extends Command {
 
         model.setSupplier(supplierToMark, markedSupplier);
         model.updateFilteredSupplierList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
-        return new CommandResult(String.format(MESSAGE_MARK_SUPPLIER_SUCCESS, Messages.format(supplierToMark), status));
+        return new CommandResult(String.format(MESSAGE_MARK_SUPPLIER_SUCCESS,
+                Messages.formatWithoutStatus(supplierToMark), status));
     }
 
     @Override

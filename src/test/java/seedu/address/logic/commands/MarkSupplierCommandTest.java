@@ -34,7 +34,7 @@ public class MarkSupplierCommandTest {
         MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                Messages.format(firstSupplier), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
@@ -49,7 +49,7 @@ public class MarkSupplierCommandTest {
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                Messages.format(firstSupplier), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -110,7 +110,7 @@ public class MarkSupplierCommandTest {
         MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
                 new SupplierStatus(editedSupplier.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                Messages.format(firstSupplier), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
