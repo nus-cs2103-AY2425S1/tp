@@ -13,8 +13,9 @@ public class WeddingName {
             + "It should only contain alphanumeric characters and spaces, and it should not be blank.\n"
             + "Example: Charlie & Hannah";
     public static final String VALIDATION_REGEX =
-            "^\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)*(?:\\s+(?:s/o|d/o)\\s+[\\p{Alnum}]"
-                    + "+(?:\\s+[\\p{Alnum}]+)?)?)\\s*&\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)*(?:\\s+(?:s/o|d/o)\\s"
+            "^\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)*(?:\\s+(?:s/o|d/o|S/O|D/O)\\s+[\\p{Alnum}]"
+                    + "+(?:\\s+[\\p{Alnum}]+)?)?)\\s*&\\s*([\\p{Alnum}]"
+                    + "+(?:\\s+[\\p{Alnum}]+)*(?:\\s+(?:s/o|d/o|S/O|D/O)\\s"
                     + "+[\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)?)\\s*$";
     public final String value;
     /**
