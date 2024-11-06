@@ -42,12 +42,15 @@ public class GroupCard extends UiPart<Region> {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(group.getGroupName().getGroupName());
+        name.setWrapText(true);
         String studentList = "";
         for (Student student : group.getStudents()) {
             studentList += student.toDisplayString();
             studentList += "\n";
         }
         students.setText(studentList);
+        students.setWrapText(true);
     }
 }
