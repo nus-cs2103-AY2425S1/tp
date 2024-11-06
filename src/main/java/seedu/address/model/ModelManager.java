@@ -169,7 +169,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
-    //=========== Undo/Redo ================================================================================
+    //=========== Undo ================================================================================
 
     @Override
     public void pushToUndoStack(ConcreteCommand command) {
