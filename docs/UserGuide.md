@@ -201,6 +201,11 @@ Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="warning" seamless>
+
+**Note:** `addt` can only be used in person list view.
+</box>
+
 Examples:
 * `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024`
 * `list` followed by `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
@@ -233,6 +238,11 @@ Format: `deletet INDEX`
 * The index refers to the index number of the transaction when using `listt` command.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="warning" seamless>
+
+**Note:** `deletet` can only be used in transaction list view.
+</box>
+
 Examples:
 * `listt 1` followed by `deletet 1` loads the transaction list for the first client, then deletes the first transaction.
 * `findt 1 flowers` followed by `deletet 1` loads the list of transactions containing 'flowers' for the first client, then deletes the first transaction
@@ -256,6 +266,11 @@ Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g.  `invest` will not match `investing`
 * clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `investing material` will return `material purchase`, `future investing`
+
+<box type="warning" seamless>
+
+**Note:** `findt` can only be used in person list view.
+</box>
 
 Examples:
 * `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
