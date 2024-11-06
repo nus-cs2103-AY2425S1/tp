@@ -19,6 +19,8 @@ public class EditModuleRoleOperationTest {
         assertTrue(isValidModuleRoleOperation("-GESS1025"));
         assertTrue(isValidModuleRoleOperation("+MA1522 cs1101s"));
         assertTrue(isValidModuleRoleOperation("+   ma1521-PROf   cs2109s-StUdeNt"));
+        assertTrue(isValidModuleRoleOperation(" +cs1231s"));
+        assertTrue(isValidModuleRoleOperation("+cs1231s "));
     }
 
     @Test
@@ -31,7 +33,6 @@ public class EditModuleRoleOperationTest {
         assertFalse(isValidModuleRoleOperation("cs1231s"));
         assertFalse(isValidModuleRoleOperation(" "));
         assertFalse(isValidModuleRoleOperation("=cs1231s"));
-        assertFalse(isValidModuleRoleOperation(" +cs1231s"));
         assertFalse(isValidModuleRoleOperation("+cs1101s +ma1522 -ma1521"));
         assertFalse(isValidModuleRoleOperation("+cs1101sma1521"));
     }
