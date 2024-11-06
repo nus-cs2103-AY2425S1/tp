@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Blank;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -42,10 +43,10 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("games") List<JsonAdaptedGame> games,
-            @JsonProperty("preferred times") List<JsonAdaptedPreferredTime> preferredTimes) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("games") List<JsonAdaptedGame> games,
+                             @JsonProperty("preferred times") List<JsonAdaptedPreferredTime> preferredTimes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -95,7 +96,7 @@ class JsonAdaptedPerson {
             personGames.put(game.getGameName(), game.toModelType());
         }
         final List<PreferredTime> personPreferredTimes = new ArrayList<>();
-        for (JsonAdaptedPreferredTime preferredTime: preferredTimes) {
+        for (JsonAdaptedPreferredTime preferredTime : preferredTimes) {
             personPreferredTimes.add(preferredTime.toModelType());
         }
 
@@ -107,29 +108,38 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        final Phone modelPhone;
+        if (phone.isEmpty()) {
+            modelPhone = new Phone(new Blank());
+        } else {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        final Email modelEmail;
+        if (email.isEmpty()) {
+            System.out.println("help");
+            modelEmail = new Email(new Blank());
+        } else {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            System.out.println("uh oh");
+            modelEmail = new Email(email);
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+
+        final Address modelAddress;
+        if (address.isEmpty()) {
+            modelAddress = new Address(new Blank());
+        } else {
+            if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            }
+            modelAddress = new Address(address);
         }
-        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Map<String, Game> modelGames = new HashMap<>(personGames);
