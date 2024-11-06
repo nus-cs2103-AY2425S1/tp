@@ -54,16 +54,16 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for EduManage.
+3. Copy the file to the folder you want to use as the _home folder_ for EduManage.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
   
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all students.
@@ -78,7 +78,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
    * Refer to [Section 2.1 - Command Table](#21-command-table) for more examples.
 
-1. Refer to [Section 3 - Features](#3-features) below for details of each command.
+6. Refer to [Section 3 - Features](#3-features) below for details of each command.
 
 [(Back to Top)](#edumanage-user-guide)
 
