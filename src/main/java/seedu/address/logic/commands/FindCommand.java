@@ -22,8 +22,8 @@ public class FindCommand extends Command {
             + "contain any of the specified keywords (case-insensitive) and "
             + "displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]... \n"
-            + "Example: " + COMMAND_WORD + " alice bob 123456 \n"
-            + "Note: any 6 digit number will be identified as a postal code only";
+            + "Example: " + COMMAND_WORD + " alice bob S123456 \n"
+            + "Note: To search by postal code, ensure the 'Sxxxxxx' is present";
 
     private final Predicate<Person> predicate;
 
