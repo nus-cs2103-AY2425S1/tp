@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Person;
 
 public class PaidCommandTest {
@@ -49,7 +50,8 @@ public class PaidCommandTest {
         Person paidPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
                 personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
                 personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true,
-                personToMarkPaid.getFrequency(), personToMarkPaid.getProfilePicFilePath());
+                personToMarkPaid.getLastPaidDate(), personToMarkPaid.getFrequency(),
+                personToMarkPaid.getProfilePicFilePath());
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
                 Messages.format(paidPerson));
@@ -114,10 +116,13 @@ public class PaidCommandTest {
         descriptor.setHasPaid();
         Frequency frequency = new Frequency("3");
         descriptor.setFrequency(frequency);
+        LastPaidDate lastPaidDate = new LastPaidDate("07 11 2024");
+        descriptor.setLastPaidDate(lastPaidDate);
 
         String expected = new ToStringBuilder(descriptor)
                 .add("hasPaid", true)
                 .add("frequency", frequency)
+                .add("lastPaidDate", lastPaidDate)
                 .toString();
 
         assertEquals(expected, descriptor.toString());
