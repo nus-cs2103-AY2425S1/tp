@@ -21,34 +21,6 @@ public class FromTest {
     }
 
     @Test
-    public void isValidFrom() {
-        // null from
-        assertThrows(NullPointerException.class, () -> From.isValidFrom(null));
-
-        // invalid from
-        assertFalse(From.isValidFrom("")); // empty string
-        assertFalse(From.isValidFrom(" ")); // spaces only
-        assertFalse(From.isValidFrom("123456Hi")); // invalid format
-        assertFalse(From.isValidFrom("2024-01-01 23:59 hello")); // invalid format
-        assertFalse(From.isValidFrom("12 Jan 2024")); // invalid format
-        assertFalse(From.isValidFrom("2024 01 01 23:59")); // invalid format
-        assertFalse(From.isValidFrom("2024/01/01 23:59")); // invalid format
-        assertFalse(From.isValidFrom("01-01-2024 23:59")); // invalid format
-        assertFalse(From.isValidFrom("23:59 2024-01-01")); // invalid format
-        assertFalse(From.isValidFrom("23:59")); // missing date
-        assertFalse(From.isValidFrom("2024-01-01")); // missing time
-        assertFalse(From.isValidFrom("2024-15-01 23:59")); // invalid month
-        assertFalse(From.isValidFrom("2024-01-32 23:59")); // invalid day
-        assertFalse(From.isValidFrom("2024-01-01 24:59")); // invalid time
-
-        // valid from
-        assertTrue(From.isValidFrom("2024-12-31 23:59")); // last day of the year
-        assertTrue(From.isValidFrom("2024-01-01 00:00")); // first day of the year
-        assertTrue(From.isValidFrom("2022-06-25 14:30")); // past date
-        assertTrue(From.isValidFrom("2050-10-01 10:28")); // future date
-    }
-
-    @Test
     public void equals() {
         From from = new From("2024-06-25 14:30");
 

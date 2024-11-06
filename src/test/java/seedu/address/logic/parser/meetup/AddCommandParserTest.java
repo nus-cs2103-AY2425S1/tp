@@ -166,12 +166,12 @@ public class AddCommandParserTest {
         // invalid from
         assertParseFailure(parser, MEETUP_SUBJECT_DESC_PITCH + MEETUP_INFO_DESC_PITCH
                 + INVALID_MEETUP_FROM_DESC + MEETUP_TO_DESC_PITCH
-                + MEETUP_ADDED_BUYER_DESC_PITCH, From.MESSAGE_CONSTRAINTS);
+                + MEETUP_ADDED_BUYER_DESC_PITCH, From.MESSAGE_CONSTRAINTS_FORMAT);
 
         // invalid to
         assertParseFailure(parser, MEETUP_SUBJECT_DESC_PITCH + MEETUP_INFO_DESC_PITCH
                 + MEETUP_FROM_DESC_PITCH + INVALID_MEETUP_TO_DESC
-                + MEETUP_ADDED_BUYER_DESC_PITCH, To.MESSAGE_CONSTRAINTS);
+                + MEETUP_ADDED_BUYER_DESC_PITCH, To.MESSAGE_CONSTRAINTS_FORMAT);
 
         // invalid added buyer
         assertParseFailure(parser, MEETUP_SUBJECT_DESC_PITCH + MEETUP_INFO_DESC_PITCH

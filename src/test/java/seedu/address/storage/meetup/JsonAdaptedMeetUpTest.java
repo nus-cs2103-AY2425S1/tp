@@ -20,8 +20,8 @@ import seedu.address.model.meetup.To;
 public class JsonAdaptedMeetUpTest {
     private static final String INVALID_NAME = "Z!x!n";
     private static final String INVALID_INFO = " ";
-    private static final String INVALID_FROM = "2023213-0231-03";
-    private static final String INVALID_TO = "2023-02-31 37:78";
+    private static final String INVALID_DATETIME_FORMAT = "2023213-0231-03";
+    private static final String INVALID_DATETIME = "2023-02-31 37:78";
     private static final String INVALID_ADDED_BUYER = "A!l*x";
 
     private static final String VALID_NAME = FIRST_MEETUP.getSubject().toString();
@@ -69,12 +69,21 @@ public class JsonAdaptedMeetUpTest {
     }
 
     @Test
-    public void toModelType_invalidFrom_throwsIllegalValueException() {
-        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, INVALID_FROM, VALID_TO,
+    public void toModelType_invalidFromFormat_throwsIllegalValueException() {
+        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, INVALID_DATETIME_FORMAT, VALID_TO,
                 VALID_ADDED_BUYER);
-        String expectedMessage = From.MESSAGE_CONSTRAINTS;
+        String expectedMessage = From.MESSAGE_CONSTRAINTS_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
     }
+
+    @Test
+    public void toModelType_invalidFromDateTime_throwsIllegalValueException() {
+        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, INVALID_DATETIME, VALID_TO,
+                VALID_ADDED_BUYER);
+        String expectedMessage = From.MESSAGE_CONSTRAINTS_DATETIME;
+        assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
+    }
+
 
     @Test
     public void toModelType_nullFrom_throwsIllegalValueException() {
@@ -84,10 +93,18 @@ public class JsonAdaptedMeetUpTest {
     }
 
     @Test
-    public void toModelType_invalidTo_throwsIllegalValueException() {
-        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, VALID_FROM, INVALID_TO,
+    public void toModelType_invalidToFormat_throwsIllegalValueException() {
+        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, VALID_FROM, INVALID_DATETIME_FORMAT,
                 VALID_ADDED_BUYER);
-        String expectedMessage = To.MESSAGE_CONSTRAINTS;
+        String expectedMessage = To.MESSAGE_CONSTRAINTS_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidToDateTime_throwsIllegalValueException() {
+        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, VALID_FROM, INVALID_DATETIME,
+                VALID_ADDED_BUYER);
+        String expectedMessage = To.MESSAGE_CONSTRAINTS_DATETIME;
         assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
     }
 
