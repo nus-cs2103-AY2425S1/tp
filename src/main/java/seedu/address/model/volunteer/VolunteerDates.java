@@ -32,9 +32,9 @@ public class VolunteerDates {
      * @param listOfDates A valid list of dates.
      */
     public VolunteerDates(String listOfDates) throws DateTimeParseException, VolunteerDuplicateDateException {
-        listOfDates = listOfDates.replaceAll("\\s+", "");
-        String[] strings = listOfDates.split(",");
-        this.addStringOfDatesToAvailList(strings);
+        listOfDates = listOfDates.replaceAll("\\s+", "").trim();
+        String[] dates = listOfDates.split(",");
+        this.addStringOfDatesToAvailList(dates);
     }
 
     public StringProperty getDatesListAsObservableString() {
@@ -51,6 +51,7 @@ public class VolunteerDates {
             VolunteerDuplicateDateException {
         ArrayList<LocalDate> arrayListOfDates = new ArrayList<>();
         for (String date : dates) {
+            date.replaceAll("\\s+", "");
             requireNonNull(date);
             date = date.replaceAll("\\s+", "");
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);

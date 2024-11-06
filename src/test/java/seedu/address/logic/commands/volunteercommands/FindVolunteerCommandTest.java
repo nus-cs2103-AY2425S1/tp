@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.volunteer.Volunteer;
 
 public class FindVolunteerCommandTest {
 
@@ -31,10 +30,6 @@ public class FindVolunteerCommandTest {
 
         String expectedMessage = String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_FOUND, expectedModel
                 .getFilteredVolunteerList().size(), searchString);
-        for (Volunteer volunteer : expectedModel.getFilteredVolunteerList()) {
-            expectedMessage += "\n" + volunteer.getName().toString();
-        }
-
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
