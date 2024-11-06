@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Invalid address format. Please ensure your address includes " +
-            "any text followed by a comma and a 6-digit postal code. For example: 'Clementi, 123456'.";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid address format. Please ensure your address includes "
+            + "any text followed by a comma and a 6-digit postal code. For example: 'Clementi, 123456'.";
 
     /*
      * The first character of the address must not be a whitespace,
