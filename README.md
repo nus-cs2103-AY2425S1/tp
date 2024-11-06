@@ -1,8 +1,3 @@
----
-layout: default.md
-title: "Knotty Planner - Your Ultimate Wedding Planning Companion"
----
-
 # Knotty Planner 💍🎀
 ## Making Wedding Planning a Breeze! 🎉
 
