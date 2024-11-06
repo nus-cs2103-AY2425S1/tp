@@ -2,18 +2,14 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.DownloadCommand.MESSAGE_NO_ROWS;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -121,24 +117,6 @@ public class UniquePersonList implements Iterable<Person> {
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList} filtered by the given tag list.
-     */
-    public ObservableList<Person> asUnmodifiableFilteredObservableList(Set<Tag> tagList) throws CommandException {
-        if (tagList.isEmpty()) {
-            return asUnmodifiableObservableList();
-        }
-
-        ObservableList<Person> filteredList = internalUnmodifiableList.filtered(person -> person.hasAllTags(tagList));
-
-        if (filteredList.isEmpty()) {
-            throw new CommandException(MESSAGE_NO_ROWS);
-        }
-
-        return FXCollections.unmodifiableObservableList(filteredList);
-    }
-
 
     @Override
     public Iterator<Person> iterator() {
