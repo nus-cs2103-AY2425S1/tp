@@ -135,7 +135,7 @@ Examples:
 
 Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
 
-Format: `search {FIELD_PREFIX}/FIELD KEYWORD [MORE_KEYWORDS]`
+Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Only the specified field is searched.
