@@ -19,7 +19,6 @@ public class RoleContainsKeywordsPredicate implements Predicate<Person> {
      */
     public RoleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
-        System.out.println(keywords);
     }
 
     @Override

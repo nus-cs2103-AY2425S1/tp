@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.event.Event;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -51,11 +50,4 @@ public class SampleDataUtil {
                 .map(ParserUtil::parseRole)
                 .collect(Collectors.toSet());
     }
-
-    public static Set<Event> getEventSet(String ... strings) {
-        return Arrays.stream(strings)
-                .map(ParserUtil::parseEvent)
-                .collect(Collectors.toSet());
-    }
-
 }
