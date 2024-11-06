@@ -232,6 +232,7 @@ Parameters:
 <box type="tip" seamless>
 
 **Warnings**:
+- A spacing between `add` and `-d` is compulsory
 - All prefixes and parameters must be given
 - No duplicate prefix can be used
 - Parameters used are **case-sensitive**
