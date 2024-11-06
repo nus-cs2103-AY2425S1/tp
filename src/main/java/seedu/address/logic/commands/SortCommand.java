@@ -9,9 +9,7 @@ public abstract class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": sorts owners or pets in the address book whose "
-            + "relevant fields contain the specified keywords (case-insensitive) and displays them as a list with "
-            + "index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": sorts owners or pets by name alphabetically.\n"
             + "To sort owners: sort owners\n"
             + "To sort pets: sort pets\n";
 
