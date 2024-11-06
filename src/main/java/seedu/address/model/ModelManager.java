@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -17,6 +19,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
 import seedu.address.model.goodsreceipt.exceptions.IllegalSupplierNameException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -139,6 +142,31 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    /**
+     * Returns an unmodifiable observable view of the list of filtered person with goods category tags added
+     */
+    @Override
+    public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
+        ObservableList<Person> mappedFilteredPersons = FXCollections.observableArrayList();
+        Runnable updateList = () -> {
+            mappedFilteredPersons.clear();
+            mappedFilteredPersons.addAll(getFilteredPersonsWithGoodsCategoryTagsAdded());
+        };
+        filteredPersons.addListener((ListChangeListener<Person>) c -> updateList.run());
+        goodsList.getReceiptList().addListener((ListChangeListener<GoodsReceipt>) c -> updateList.run());
+        updateList.run();
+        return mappedFilteredPersons;
+    }
+
+    private List<Person> getFilteredPersonsWithGoodsCategoryTagsAdded() {
+        return filteredPersons.stream().map(p -> p
+                .addTags(goodsList.getReceiptList()
+                        .stream()
+                        .filter(g -> g.isFromSupplier(p.getName()))
+                        .map(g -> new Tag(g.getGoods().getCategory().name()))
+                        .toList())).toList();
     }
 
     @Override
