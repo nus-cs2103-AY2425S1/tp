@@ -18,7 +18,7 @@ import seedu.address.model.event.Event;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code FindEventCommand}.
  */
-public class EventFindCommandTest {
+public class FindEventCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());

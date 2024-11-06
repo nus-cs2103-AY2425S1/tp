@@ -19,8 +19,8 @@ import seedu.address.model.volunteer.Volunteer;
  */
 public class VolunteerNewCommand extends Command {
     public static final String COMMAND_WORD = "new";
-    private static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
-    private static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
+    public static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
+    public static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a volunteer to the system. "
             + "Parameters: "
             + VOLUNTEER_PREFIX_NAME + "NAME "

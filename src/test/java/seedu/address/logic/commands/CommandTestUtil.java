@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.volunteer.Volunteer;
+
 /**
  * Contains helper methods for testing commands.
  */

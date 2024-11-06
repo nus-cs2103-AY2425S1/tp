@@ -383,9 +383,12 @@ This diagram shows the main actor (Management Staff) and their interactions with
 4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
 5. System response time for any action should be less than 1 second for all operations.
 6. The system should be able to support concurrent users without data corruption or errors.
-7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+8. The system must comply with Personal Data Protection Act (PDPA) to protect volunteer information.
+9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance. 
+10. The system should be capable of running efficiently on devices with limited resources (e.g., 8GB RAM, 4-core CPU).
 
-*{More to be added}*
+11. *{More to be added}*
 
 ### Glossary
 
@@ -398,7 +401,6 @@ This diagram shows the main actor (Management Staff) and their interactions with
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -449,3 +451,56 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+## Appendix: Effort
+
+### Project Scope and Difficulty
+This project was significantly more challenging than the Address Book 3 (AB3) reference project due to its broader scope and the complexity of managing multiple entity types. While AB3 focuses on a single entity type (Persons), our project, **VolunSync**, had to manage and integrate multiple entities such as **Volunteers** and **Events**. This increased the difficulty of implementing features such as assignment, scheduling, and cross-entity dependencies, requiring a robust data model and additional logic.
+
+### Challenges Faced
+- **Entity Relationships**: Implementing relationships between entities (e.g., assigning volunteers to events, tracking event participants) posed significant challenges, especially when ensuring data consistency and avoiding duplication.
+- **User Experience**: Developing a command-line interface that is both intuitive and efficient for users with varying technical skills was a considerable effort.
+- **Testing and Coverage**: Achieving high test coverage for a complex system with multiple interdependent features added to the project workload.
+
+### Effort Required
+The project involved **approximately 1.5x the effort required for AB3**, primarily due to the increased complexity of handling multiple entities and implementing advanced features such as:
+- Filtering of volunteers based on availability
+- Volunteer assignment with overlap checks.
+- Listing information of volunteers involved in events and vice versa.
+- Restructuring of UI to handle dynamic updating of information and new commands.
+
+### Achievements
+Despite the challenges, the team successfully:
+- Developed a scalable and efficient system that meets the needs of nonprofit organizations.
+- Achieved high test coverage for core functionalities.
+- Implemented a user-friendly interface while maintaining fast response times for all operations.
+- Added additional features like volunteer tracking and reporting, going beyond the base functionality of AB3.
+
+### Reuse and Libraries
+To save effort, the project reused several libraries, which provided critical functionality:
+1. **JavaFX**: For building the graphical user interface. This significantly reduced the time required to implement the UI from scratch.
+2. **Jackson**: For handling JSON serialization and deserialization, enabling faster development of the storage module.
+3. **JUnit 5**: For unit testing, which streamlined the testing process and improved overall code quality.
+
+For example, the **storage module** leverages Jackson for JSON parsing. Our work involved adapting Jackson to our specific data model (e.g., custom serializers/deserializers), as seen in classes like `JsonAdaptedVolunteer` and `JsonAdaptedEvent`. This saved an estimated **10-15% of effort** compared to building a storage parser from scratch.
+
+### Conclusion
+The project demonstrated a high level of effort and collaboration, resulting in a feature-rich and robust application that addresses the real-world challenges faced by nonprofit organizations. It serves as a testament to the team’s ability to deliver a product that is both scalable and user-focused.
+
+## Appendix: Planned Enhancements
+
+**Team size: 5**
+
+The following planned enhancements address known feature flaws identified during the PE-D phase. Each enhancement specifically describes the feature flaw and the proposed solution, providing details on how the feature will be improved. This section lists 3 planned enhancements, adhering to the team size x 2 limit.
+
+1. **Enhance Event List Sorting**
+    - **Feature Flaw**: Events are currently displayed in the order they were added, making it difficult to find upcoming events.
+    - **Proposed Fix**: Add sorting options to the event list, such as sorting by date, time, or location. Command example: `/e list sort/date`.
+    - **Expected Outcome**: Improved usability for managing events.
+
+2. **Enhance Search Functionality**
+    - **Feature Flaw**: The current search command does not support searching for email or phone number.
+    - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
+    - **Expected Outcome**: More flexible search results.
+
+These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **VolunSync**.
