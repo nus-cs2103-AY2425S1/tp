@@ -25,8 +25,6 @@ public class FindSessionCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Matching sessions displayed: \n%1$s";
     public static final String MESSAGE_NO_MATCHES = "Error: No sessions found matching the keywords.";
-    public static final String MESSAGE_INVALID_KEYWORD_FORMAT = "Error: Invalid keyword format.";
-
     private final SessionContainsKeywordsPredicate predicate;
 
     public FindSessionCommand(SessionContainsKeywordsPredicate predicate) {
@@ -48,7 +46,7 @@ public class FindSessionCommand extends Command {
             return new CommandResult(MESSAGE_NO_MATCHES);
         }
 
-        String resultMessage = matchingSessions.stream()
+        String resultMessage = matchingSessions.stream().distinct()
                 .map(session -> session.getSessionName().toString())
                 .collect(Collectors.joining("\n"));
         return new CommandResult(String.format(MESSAGE_SUCCESS, resultMessage));
