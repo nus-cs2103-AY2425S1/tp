@@ -137,7 +137,7 @@ public class MarkPresentAllCommandTest {
         model.addStudent(student1);
         model.addStudent(student2);
         MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
-        UnmarkPresentAllCommand unmarkCommand = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
+        MarkAbsentAllCommand unmarkCommand = new MarkAbsentAllCommand(validTutorialGroup, validDate);
         Attendance attendance = new Attendance("a");
         unmarkCommand.execute(model);
         markCommand.execute(model);
