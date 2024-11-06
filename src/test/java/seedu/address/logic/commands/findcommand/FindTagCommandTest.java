@@ -66,12 +66,12 @@ public class FindTagCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends");
+        TagContainsKeywordsPredicate predicate = preparePredicate("florist");
         String expectedMessage = String.format(MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString());
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonListByTag(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     /**
