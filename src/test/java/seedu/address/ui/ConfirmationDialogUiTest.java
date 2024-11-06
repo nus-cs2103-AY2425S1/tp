@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.clientcommands.DeleteClientProfileCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

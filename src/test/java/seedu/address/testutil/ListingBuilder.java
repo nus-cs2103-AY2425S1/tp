@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building Listing objects.
+ * Used ChatGPT to assist in writing JavaDocs
  */
 public class ListingBuilder {
 
