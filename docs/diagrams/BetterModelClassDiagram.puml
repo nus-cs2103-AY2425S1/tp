@@ -18,6 +18,6 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "1..3" PriorityLevel
+Person *--> "1" PriorityLevel
 Person *--> EmergencyContact
 @enduml
