@@ -91,8 +91,7 @@ public class Listing {
         }
         return otherListing != null
                 && otherListing.name.equals(this.name)
-                && otherListing.address.equals(this.address)
-                && otherListing.seller.equals(this.seller);
+                || otherListing.address.equals(this.address);
     }
 
     @Override

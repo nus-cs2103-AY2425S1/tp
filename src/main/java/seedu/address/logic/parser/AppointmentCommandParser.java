@@ -40,10 +40,13 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
 
-
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         From from = ParserUtil.parseFrom(argMultimap.getValue(PREFIX_FROM).get());
         To to = ParserUtil.parseTo(argMultimap.getValue(PREFIX_TO).get());
+
+        if (!Appointment.isValidPeriod(from, to)) {
+            throw new ParseException("Invalid from and to timings! From timing cannot be after to timing.");
+        }
         return new AppointmentCommand(name, new Appointment(date, from, to));
     }
 

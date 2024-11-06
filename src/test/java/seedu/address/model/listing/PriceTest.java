@@ -11,20 +11,20 @@ import org.junit.jupiter.api.Test;
 public class PriceTest {
 
     @Test
-    public void isValidArea() {
+    public void isValidPrice() {
         // null area
         assertThrows(NullPointerException.class, () -> Area.isValidArea(null));
 
         // invalid area
         assertFalse(Price.isValidPrice("")); // empty string
         assertFalse(Price.isValidPrice(" ")); // spaces only
-        assertFalse(Price.isValidPrice("911")); // less than 4 digits
+        assertFalse(Price.isValidPrice("91111")); // less than 6 digits
         assertFalse(Price.isValidPrice("price")); // non-numeric
         assertFalse(Price.isValidPrice("9011p041")); // alphabets within digits
         assertFalse(Price.isValidPrice("9312 1534")); // spaces within digits
 
         // valid area
-        assertTrue(Price.isValidPrice("9111")); // exactly 4 digits
+        assertTrue(Price.isValidPrice("911111")); // exactly 4 digits
         assertTrue(Price.isValidPrice("5000000"));
         assertTrue(Price.isValidPrice("124293842033123")); // large area
     }

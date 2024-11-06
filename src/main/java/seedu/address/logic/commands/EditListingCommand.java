@@ -96,7 +96,7 @@ public class EditListingCommand extends Command {
                 seller.orElse(listingToEdit.getSeller())
         );
 
-        if (!listingToEdit.isSameListing(editedListing) && model.hasListing(editedListing)) {
+        if (!listingToEdit.isSameListing(editedListing) || model.hasListing(editedListing)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
         }
 

@@ -33,6 +33,10 @@ public class Appointment {
         this.to = to;
     }
 
+    public static boolean isValidPeriod(From from, To to) {
+        return !from.value.isAfter(to.value);
+    }
+
     public Date getDate() {
         return date;
     }
