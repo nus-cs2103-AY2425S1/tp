@@ -414,12 +414,24 @@
     -fx-font-family: "Futura";
 }
 
-.members-pane {
-    -fx-background-color: #FF8A5B;
+.members-label {
+    -fx-background-color: #F9A620;
     -fx-text-fill: white;
     -fx-padding: 0 3 0 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 15;
     -fx-font-family: "Futura";
+    -fx-font-size: 12pt;
+}
+
+.membersList {
+    -fx-text-fill: #2E4057;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+
+.groupList {
+    -fx-text-fill: #2E4057;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
 }
