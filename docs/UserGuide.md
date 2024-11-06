@@ -198,8 +198,12 @@ Format: `exit`
 ### Getting Tutorial Group Attendance : `getattg`
 
 * Opens an attendance window for all students in a tutorial group for a particular date
+  * Executing `undo` will close the last window opened by this command 
 
 * Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+
+### Closing Attendance Window : `closeat`
+* Closes all attendance windows if any is currently open.
 
 
 ### Saving the data
