@@ -141,7 +141,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON,
                 deleteCommandDescriptor);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_LAST_EMERGENCY_CONTACT_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EMERGENCY_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
