@@ -316,7 +316,6 @@ Examples:
 * `find hardware SWE` returns `Google`, `Apple` <br>
   ![result for 'find hardware SWE'](images/findhardwareSWEResult.png)
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help : `help`
