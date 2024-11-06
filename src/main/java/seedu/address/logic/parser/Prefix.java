@@ -8,7 +8,7 @@ public class Prefix {
     private final String prefix;
 
     public Prefix(String prefix) {
-        this.prefix = prefix;
+        this.prefix = prefix.toLowerCase(); // prefix must be in lowercase
     }
 
     public String getPrefix() {
