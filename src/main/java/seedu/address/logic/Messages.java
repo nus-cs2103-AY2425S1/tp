@@ -59,7 +59,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; MonthsPaid: ")
-                .append(person.getMonthsPaid().toString());
+                .append(person.getMonthsPaidToString());
         return builder.toString();
     }
 
