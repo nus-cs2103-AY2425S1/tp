@@ -35,7 +35,7 @@ public class SampleDataUtil {
                                 new Phone("97645132"),
                                 new Relationship("Son"))),
                 new Doctor(new DoctorName("Tan Wei Ming"), new Phone("99119919"), new Email("drtan@gmail.com")),
-                getTagSet("Mandarin speaking", "hard of hearing")),
+                getTagSet("Mandarin-speaking", "hard of hearing")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getEmergencyContactSet(
@@ -49,7 +49,7 @@ public class SampleDataUtil {
                                 new Relationship("Cousin")
                         )),
                 new Doctor(new DoctorName("Lim Heng Seng"), new Phone("80987123"), new Email("drlim@gmail.com")),
-                getTagSet("short term patient")),
+                getTagSet("short-term patient")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getEmergencyContactSet(
@@ -70,7 +70,7 @@ public class SampleDataUtil {
                         new EmergencyContact(new Name("Amanda Lee"), new Phone("98762341"), new Relationship("Cousin"))
                 ),
                 new Doctor(new DoctorName("Jessica Loh"), new Phone("99119919"), new Email("jloh@gmail.com")),
-                getTagSet("short term residential address")),
+                getTagSet("short-term residential address")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getEmergencyContactSet(
