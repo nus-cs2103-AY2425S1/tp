@@ -35,7 +35,6 @@ public class AssignContactToWeddingCommandTest {
         model.addWedding(WEDDING_ONE);
         model.addWedding(WEDDING_TWO);
 
-        // Add some test persons to the model
         Person person1 = new Person(new PersonId(), new Name("Alice"), new Phone("123456"),
                 new Email("alice@example.com"),
                 new Address("123 Wonderland"), Set.of());
