@@ -31,6 +31,8 @@ The  `AddressBookModel` component:
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/src/main/java/spleetwaise/commons/model/Model.java)
 
+<img src="images/CommonModelClassDiagram.png" width="450" />
+
 The common `Model` component:
 
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
