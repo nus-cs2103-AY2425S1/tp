@@ -501,7 +501,7 @@
 with name `alice`, with phone number `123445678` and with email `alice@example.com`.
 * The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
 `find all e/bob@example.com alice@example.com`.
-* The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
+* The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match
 `find all e/john@example.com n/john`.
 * Persons matching at least one keyword in every field specified will be returned.
 e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
