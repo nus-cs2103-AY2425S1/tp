@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PREFIX;
 import static seedu.address.logic.Messages.MESSAGE_MAXLEADINGZEROS;
 import static seedu.address.logic.Messages.MESSAGE_OVERFLOW_INDEX;
 
@@ -26,9 +27,6 @@ import seedu.address.model.person.Year;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Error: Index is not a single non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TAG_ADD = "If you are trying to use a prefix (eg. '/n'), ensure there "
-            + "is a space before the prefix and that it is in this list."
-            + "\nSupported prefixes: %1$s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -82,7 +80,7 @@ public class ParserUtil {
 
             if (trimmedStudentId.contains("/")) {
                 errorMsg = errorMsg + "\n"
-                        + String.format(MESSAGE_INVALID_TAG_ADD, AddCommand.SUPPORTED_PREFIXES);
+                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
             }
 
             throw new ParseException(errorMsg);
@@ -136,7 +134,7 @@ public class ParserUtil {
 
             if (trimmedNetId.contains("/")) {
                 errorMsg = errorMsg + "\n"
-                        + String.format(MESSAGE_INVALID_TAG_ADD, AddCommand.SUPPORTED_PREFIXES);
+                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
             }
 
             throw new ParseException(errorMsg);
@@ -183,7 +181,7 @@ public class ParserUtil {
 
             if (trimmedYear.contains("/")) {
                 errorMsg = errorMsg + "\n"
-                        + String.format(MESSAGE_INVALID_TAG_ADD, AddCommand.SUPPORTED_PREFIXES);
+                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
             }
 
             throw new ParseException(errorMsg);

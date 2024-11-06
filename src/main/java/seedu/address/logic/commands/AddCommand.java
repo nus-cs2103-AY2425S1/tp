@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "\n"
-            + "Ensure there is a space before tags (eg. '/n')."
+            + "Ensure there is a space before prefixes (eg. '/n')."
             + "\n"
             + "Required Parameters: "
             + PREFIX_NAME + "NAME "
@@ -45,6 +45,13 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String SUPPORTED_PREFIXES = PREFIX_NAME + ", "
+            + PREFIX_STUDENTID + ", "
+            + PREFIX_NETID + ", "
+            + PREFIX_MAJOR + ", "
+            + PREFIX_YEAR + ", "
+            + PREFIX_GROUP;
+
 
     private final Person toAdd;
 
