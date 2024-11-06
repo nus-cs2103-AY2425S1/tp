@@ -6,6 +6,8 @@ import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.DefaultCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
@@ -43,7 +45,8 @@ public class DeleteCommand extends Command {
         }
 
         model.deletePatient(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
+        return new DefaultCommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS,
+                Messages.format(patientToDelete)));
     }
 
     @Override

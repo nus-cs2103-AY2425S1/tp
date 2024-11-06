@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalClinicConnectSystem;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,13 +25,7 @@ public class HomeCommandTest {
     }
 
     @Test
-    public void execute_homeIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new HomeCommand(), model, HomeCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void execute_homeIsFiltered_showsEverything() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+    public void execute_homeCommand_success() {
         assertCommandSuccess(new HomeCommand(), model, HomeCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

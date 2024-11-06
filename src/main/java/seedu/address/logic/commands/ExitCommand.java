@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ExitCommandResult;
 import seedu.address.model.Model;
 
 /**
@@ -13,8 +15,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, null, false, null,
-                false, true);
+        return new ExitCommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, true);
     }
 
 }

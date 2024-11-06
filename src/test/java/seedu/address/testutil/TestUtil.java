@@ -5,10 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.Model;
-import seedu.address.model.patient.Patient;
-
 /**
  * A utility class for test cases.
  */
@@ -30,26 +26,5 @@ public class TestUtil {
             throw new RuntimeException(e);
         }
         return SANDBOX_FOLDER.resolve(fileName);
-    }
-
-    /**
-     * Returns the middle index of the patient in the {@code model}'s patient list.
-     */
-    public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPatientList().size() / 2);
-    }
-
-    /**
-     * Returns the last index of the patient in the {@code model}'s patient list.
-     */
-    public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPatientList().size());
-    }
-
-    /**
-     * Returns the patient in the {@code model}'s patient list at {@code index}.
-     */
-    public static Patient getPatient(Model model, Index index) {
-        return model.getFilteredPatientList().get(index.getZeroBased());
     }
 }
