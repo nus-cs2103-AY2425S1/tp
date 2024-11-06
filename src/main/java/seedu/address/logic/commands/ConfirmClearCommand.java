@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 /**
  * Permanently removes the listed participants from the address book.
  */
-public class ConfirmCommand extends Command {
+public class ConfirmClearCommand extends Command {
 
     public static final String COMMAND_WORD = "confirm";
     public static final String MESSAGE_SUCCESS_FULL_CLEAR = "Address book has been cleared";

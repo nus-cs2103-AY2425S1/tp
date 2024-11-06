@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.GenderMatchesKeywordsPredicate;
 
-public class ConfirmCommandTest {
+public class ConfirmClearCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
@@ -24,7 +24,7 @@ public class ConfirmCommandTest {
         Model expectedModel = new ModelManager();
         ClearCommand.setIsClear(true);
 
-        assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ConfirmCommandTest {
         expectedModel.setAddressBook(new AddressBook());
         ClearCommand.setIsClear(true);
 
-        assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
     }
 
     @Test
@@ -50,16 +50,16 @@ public class ConfirmCommandTest {
             expectedModel.deletePerson(personToDelete);
         }
 
-        assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FILTERED_CLEAR, expectedModel);
+        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_SUCCESS_FILTERED_CLEAR, expectedModel);
     }
 
     @Test
     public void execute_notIsClear_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ClearCommand.setIsClear(false);
-        ConfirmCommand confirmCommand = new ConfirmCommand();
+        ConfirmClearCommand confirmClearCommand = new ConfirmClearCommand();
 
-        assertCommandFailure(confirmCommand, model,
+        assertCommandFailure(confirmClearCommand, model,
                 Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 }
