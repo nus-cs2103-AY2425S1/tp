@@ -65,7 +65,8 @@ public class HelpWindow extends UiPart<Stage> {
                 createFeature(
                         "Adding a Client: add",
                         "Add a new client to your database with detailed information.",
-                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [t/TAG]...",
+                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS fi\\FINANCIALINFO \n s\\SOCIALMEDIAHANDLE"
+                        + "[t\\TAG] [t\\TAG:value]…\u200B",
                         "add n\\Acme Corp p\\91234567 e\\contact@acme.com a\\123 Business Ave, Suite 100, "
                                 + "\n Metropolis t\\industry:tech t\\size:enterprise "
                                 + "fi\\Annual contract: €50,000 s\\@acmecorp"
@@ -78,20 +79,21 @@ public class HelpWindow extends UiPart<Stage> {
                 ),
                 createFeature(
                         "Finding Clients: find",
-                        "Search for clients using keywords.                                                          ",
+                        "Search for clients by name using keywords.                                                          ",
                         "find KEYWORD [MORE_KEYWORDS]",
                         "find Acme Corp"
                 ),
                 createFeature(
                         "Smart Filtering: filter",
                         "Quickly identify client groups based on tags or name.",
-                        "filter [CRITERIA]",
+                        "filter [n\\NAME] [t\\TAG]…\u200B",
                         "filter t\\friend n\\John"
                 ),
                 createFeature(
                         "Editing Client Information: edit",
                         "Update existing client details.",
-                        "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [t\\TAG]...",
+                        "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [fi\\FINANCIALINFO]"
+                                + " \n [s\\SOCIALMEDIAHANDLE] " + "[t\\TAG] [t\\TAG:value]…\u200B",
                         "edit 1 p\\98765432 e\\newemail@acme.com"
                 ),
                 createFeature(
@@ -103,19 +105,19 @@ public class HelpWindow extends UiPart<Stage> {
                 createFeature(
                         "Advanced Filtering: advfilter",
                         "Organize your client list based on custom priority metrics.",
-                        "advfilter [t\\tag] [OPERATOR] [VALUE]",
-                        "advfilter t\\renewal_date <= 90days "
+                        "advfilter t\\tag [OPERATOR] [VALUE]",
+                        "advfilter t\\age <= 50 "
                 ),
                 createFeature(
                         "Data Export: export",
                         "Export your client data for analysis or reporting.",
-                        "export format/[file format]",
-                        "export format/csv                                               "
+                        "export format\\[file format]",
+                        "export format\\csv                                                                   "
                 ),
                 createFeature(
                         "Clearing All Entries: clear",
                         "Remove all clients from your database.",
-                        "clear                                                 ",
+                        "clear                                                                             ",
                         null
                 ),
                 createFeature(
