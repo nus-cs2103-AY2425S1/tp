@@ -25,9 +25,9 @@ Click the links to find out more about each command type:
 1. [Event-related Commands](#event-related-commands)
    1. [Adding an event](#adding-an-event-e-new)
    1. [Locating events by name](#locating-events-by-name--e-find)
-   1. [Deleting an event](#deleting-an-event--e-del-) 
+   1. [Deleting an event](#deleting-an-event--e-del-)
    1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
-      
+
 #### Command Format Guidelines can be found [here](#command-format-guidelines).
 
 #### A summary of all available commands' format can be found [here](#command-summary).
@@ -175,7 +175,7 @@ If there are no volunteers whose names match the keyword in the database, the en
 
 ### Deleting a volunteer : `/v del`
 
-Deletes the volunteer at the specified __VOLUNTEER_INDEX__ from the database. 
+Deletes the volunteer at the specified __VOLUNTEER_INDEX__ from the database.
 
 Format: `/v del VOLUNTEER_INDEX`
 
@@ -310,7 +310,7 @@ VolunSync's data are saved in the hard disk automatically after any command that
     - After deleting the file, restart the application, and the GUI will open correctly on the primary screen.
 
 2. **Help Window Remaining Minimized**
-   **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening. 
+   **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.
    **Solution:**
     - Manually restore the Help Window from your taskbar or dock.
     - Alternatively, close the minimized window and run the `help` command again to open a new Help Window.

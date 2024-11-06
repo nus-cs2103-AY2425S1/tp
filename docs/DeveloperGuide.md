@@ -100,7 +100,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command. 
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command.
    - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
