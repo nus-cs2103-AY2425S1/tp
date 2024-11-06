@@ -9,10 +9,48 @@
 ![](images/doctrack.png)
 # User Guide
 
-> DocTrack is a desktop application for **general practitioners (GPs)** to quickly access patient contact 
+<box type="info" light theme="primary">
+<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient contact 
 details, appointments, and treatment records.
+</box>
 
-_If you type fast, this application can serve as an excellent substitute for your large medical files._
+With DocTrack, you can take the first step towards digitalisation of your practice!
+DocTrack aims to simplify your patient and appointment tracking process, by allowing you to
+- easily add and update patient and appointment records
+- delete records for regulation purposes
+- search for records based on important criteria such as dates and names
+with an intuitive and user-friendly interface!
+
+To get started, you can read the introduction below, which shows all the different sections
+in this user guide.
+
+---
+
+## Introduction
+
+[Quick start](#quick-start):
+Navigate to this section to quickly get started with DocTrack.
+
+[Interacting with DocTrack](#interacting-with-doctrack):
+Navigate here for more information on how DocTrack works.
+
+[Command Overview](#command-overview):
+Navigate here for information on how the commands work.
+- [Summary of Commands](#summary-of-commands):
+  - for a general summary of all the commands
+- [Person Commands](#person-commands):
+  - for more information on the person commands
+- [Appointment Commands](#appointment-commands):
+  - for more information on the appointment commands
+- [General Commands](#general-commands):
+  - for more information on general commands
+
+[FAQ](#faq): 
+Navigate here for answers to common questions asked by users.
+
+[Known issues](#known-issues):
+Navigate here for common issues that may arise during use of DocTrack.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -127,27 +165,6 @@ The following sections describe the various commands available in the DocTrack p
 
 <br>
 
-### Summary of commands
-
-| Action                                                                   | Format                                                                                                                   | Examples                                                                                                       |
-|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                 | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
-| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                          | `list person`                                                                                                  |
-| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                | `edit person 2 n/James Lee e/jameslee@example.com`                                                             |
-| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                    | `find person n/James Jake`                                                                                     |
-| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                    | `delete person 3`                                                                                              |
-| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                           | `clear person`                                                                                                 |
-| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin`                                          |
-| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                              | `list appt`                                                                                                    |
-| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                     |
-| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                      | `find appt d/2024-12-05`                                                                                       |
-| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                      | `delete appt 2`                                                                                                |
-| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                   | `clear appt`                                                                                                   |
-| **[Help](#viewing-help-help)**                                           | `help`                                                                                                                   | `help`                                                                                                         |
-| **[Exit](#exiting-the-program-exit)**                                    | `exit`                                                                                                                   | `exit`                                                                                                         |
-
-<br>
-
 ---
 
 <br>
@@ -157,8 +174,18 @@ The following sections describe the various commands available in the DocTrack p
 A **person** is a patient with several fields: a name, a phone number, an email, an address, a status, and 
 optional tags. These patients can be uniquely identified by their **patient ID (PID)** for easy reference. 
 DocTrack allows you to interact with patient information through different commands, which can be seen below.
+=======
+| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
+|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| **[Add person](#adding-a-person-add-person)**                            | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`                                                  | `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 st/recovering t/friend` |
+| **[List all persons](#listing-all-persons-list-person)**                 | `list person`                                             <br/>                                                           | `list person`                                                                                                           |
+| **[Edit person](#editing-a-person-edit-person)**                         | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/STATUS] [t/TAG]…​`                                 | `edit person 2 n/James Lee e/jameslee@example.com`                                                                      |
+| **[Find person](#finding-persons-by-name-find-person)**                  | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person n/James Jake`                                                                                              |
+| **[Delete person](#deleting-a-person-delete-person)**                    | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                                       |
+| **[Clear all persons](#clearing-all-persons-clear-person)**              | `clear person`                                                                                                            | `clear person`                                                                                                          |
 
 <br>
+
 
 ##### Adding a person: `add person`
 
@@ -166,9 +193,10 @@ Adds a person to the address book.
 
 **Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/STATUS [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" theme="primary">
 
 **Tip:** A person can have any number of tags (including 0). For example, `t/friend t/likes coding` has 2 tags and it is valid. 
+
 </box>
 
 **Examples**:
@@ -280,6 +308,18 @@ Deletes all entries from the address book.
 
 <br>
 
+| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
+|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| **[Add appointment](#adding-an-appointment-add-appt)**                   | `add appt i/PERSON_ID d/DATE_TIME ty/APPOINTMENT_TYPE [s/SICKNESS] [m/MEDICINE]`                   <br/>           <br/> | `add appt i/1 d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`                                            |
+| **[List all appointments](#listing-all-appointments-list-appt)**         | `list appt`                                                                                                               | `list appt`                                                                                                             |
+| **[Edit appointment](#editing-an-appointment-edit-appt)**                | `edit appt INDEX [i/PERSON_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                              |
+| **[Find appointment](#finding-appointments-by-name-and-date-find-appt)** | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                  | `find appt d/2024-12-05`                                                                                                |
+| **[Delete appointment](#deleting-an-appointment-delete-appt)**           | `delete appt INDEX`                                                                                                       | `delete appt 2`                                                                                                         |
+| **[Clear all appointments](#clearing-all-appointments-clear-appt)**      | `clear appt`                                                                     <br/>                                    | `clear appt`                                                                                                            |
+---
+
+<br>
+
 ##### Adding an appointment: `add appt`
 
 Adds an appointment to the DocTrack. 
@@ -384,6 +424,12 @@ Deletes all entries from the appointment book.
 ### General Commands
 
 **General commands** can help you with miscellaneous tasks related to patient and appointment management.
+
+| Action                                                                   | Format                                                                                                                    | Examples                                                                                                                |
+|--------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help-help)**                                           | `help`                                                                                                                    | `help`                                                                                                                  |
+| **[Exit](#exiting-the-program-exit)**   
+
 
 <br>
 

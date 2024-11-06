@@ -24,7 +24,9 @@ public class SicknessTest {
     void isValidSickness_invalidSicknessNames_returnsFalse() {
         assertFalse(Sickness.isValidSickness(""));
         assertFalse(Sickness.isValidSickness(" "));
-        assertFalse(Sickness.isValidSickness(" Headache"));
+        assertFalse(Sickness.isValidSickness(" 1"));
+        assertFalse(Sickness.isValidSickness("1"));
+        assertFalse(Sickness.isValidSickness("!"));
     }
 
     @Test
@@ -37,7 +39,9 @@ public class SicknessTest {
     void constructor_invalidSicknessName_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Sickness(""));
         assertThrows(IllegalArgumentException.class, () -> new Sickness(" "));
-        assertThrows(IllegalArgumentException.class, () -> new Sickness(" Cough"));
+        assertThrows(IllegalArgumentException.class, () -> new Sickness(" 1"));
+        assertThrows(IllegalArgumentException.class, () -> new Sickness("1"));
+        assertThrows(IllegalArgumentException.class, () -> new Sickness("!"));
     }
 
     @Test
