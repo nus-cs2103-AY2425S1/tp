@@ -266,7 +266,7 @@ Edits an existing patient in DocTrack.
 - `list` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
   be `Betsy Crower` and clears all existing tags.
 
-<box type="tip" theme="success">
+<box type="tip" light>
 
 **Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags
 </box>
