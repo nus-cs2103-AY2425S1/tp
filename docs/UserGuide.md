@@ -223,7 +223,7 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
+addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
 ```
 - **Parameters:**
   - `n/NAME`: The customer's name.
@@ -271,7 +271,7 @@ addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REM
 ```bash
 addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm 
 ```
-![screenshot](images/Screenshot-1.png)
+![screenshot](images/Screenshot-4.png)
 
 ### **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
