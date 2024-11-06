@@ -188,8 +188,8 @@ public class AddressBookParserTest {
     @Test
     public void parseSearchModeCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse "
-                + "only search, exitsearch (es), add-all or exit",
-                () -> parser.parseSearchModeCommand("random"));
+                + "only search, exitsearch (es), add-all or exit", () ->
+                parser.parseSearchModeCommand("random"));
     }
 
     @Test
