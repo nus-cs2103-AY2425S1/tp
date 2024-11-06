@@ -67,15 +67,22 @@ public class FindByWorkExperienceCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_WORKEXP, 2, "Intern,Google,2024");
+        // Update the expected message to match the new formatted output
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_WORKEXP, 2, "as Intern at Google in 2024");
+
         WorkExperienceContainsKeywordsPredicate predicate = new WorkExperienceContainsKeywordsPredicate("Intern",
                 "Google", "2024");
         FindByWorkExperienceCommand command = new FindByWorkExperienceCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
 
+        expectedModel.updateFilteredPersonList(predicate);
+
+        // Assert that the command succeeds with the expected message
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        // Assert that the filtered list contains only ALICE and BENSON
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
     }
+
     /**
      * Parses {@code role}, {@code company}, and {@code year} into a {@code WorkExpContainsKeywordsPredicate}.
      */

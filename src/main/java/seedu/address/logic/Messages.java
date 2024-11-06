@@ -24,8 +24,9 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_FOUND_INTEREST = "Found %d people that have similar interest";
     public static final String MESSAGE_PERSON_FOUND_INTEREST = "Found 1 person that have similar interest";
-    public static final String MESSAGE_PERSON_FOUND_WORKEXP = "Found 1 person has worked or is working as %s";
-    public static final String MESSAGE_PERSONS_FOUND_WORKEXP = "Found %d people that have worked or are working as %s";
+    public static final String MESSAGE_PERSON_FOUND_WORKEXP = "Found 1 person who has worked or is working %s";
+    public static final String MESSAGE_PERSONS_FOUND_WORKEXP = "Found %d people who have worked or are working %s";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
