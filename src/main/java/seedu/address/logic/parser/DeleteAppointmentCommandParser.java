@@ -31,6 +31,7 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE);
         Name name = ParserUtil.parseName(argMultimap.getPreamble());
 
         Schedule appointment = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_DATE).orElse(""));
