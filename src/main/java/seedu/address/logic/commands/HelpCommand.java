@@ -14,10 +14,27 @@ public class HelpCommand extends Command {
             + "There should be no parameters!\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String MESSAGE_SUCCESS = "Success. Opened help window" + "\n";
 
+    private String message;
+
+    /**
+     * Creates a HelpCommand .
+     */
+    public HelpCommand() {
+        this.message = "";
+    }
+
+    /**
+     * Creates a HelpCommand with an additional warning message to display to the user.
+     *
+     * @param message Warning message to be displayed to the user
+     */
+    public HelpCommand(String message) {
+        this.message = message;
+    }
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(MESSAGE_SUCCESS + message, true, false);
     }
 }
