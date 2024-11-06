@@ -64,13 +64,14 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 </div>
 
 ## Accepted values by field
+
 Field | Accepted input values | Examples | Exceptions
 ----------|-----------------------|----------|-----------
 `NAME` | Any valid English name. Alphanumeric characters, spaces and dashes are allowed. | `John Doe`, `Jean Mary-Jane`, `Jackie  Chan` | None
 `PHONE_NUMBER` | Must consist of digits (0 to 9), but spaces and dashes are allowed. | `9143 9032`, `872-233-8554`, `987223414` | None
 `EMAIL` | Must be a in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
 `ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
-`DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 2-digit or 4-digit<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (\|) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), `29\|2\|28` (represents "February 29, 2028") | None
+`DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 2-digit or 4-digit<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (&#124;) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), <code>29&#124;2&#124;28</code> (represents "February 29, 2028") | None
 `TAG` | Any non-empty alphanumeric string (spaces allowed) | `friends`, `CEO of IMB`, `Born 2017` | None
 `CLIENT_STATUS` | Must be `old`, `potential`, `unresponsive` or `active`. | `old`, `potential`, `unresponsive`, `active` | `blacklisted` is a also valid client status but can only be set using the `blacklist` command ([see here](#blacklist-a-client-blacklist)).
 `PROJECT_STATUS` | Must be `in progress` or `completed` (note the past tense) | `in progress`, `completed` | None
