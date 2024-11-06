@@ -30,6 +30,7 @@ public class ScreenJobCommand extends ScreenCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Job> jobList = model.getFilteredJobList();
+        List<Person> fullPersonList = model.getFullPersonList();
 
         // Convert jobIndex to zero-based and check if it's valid
         if (targetIndex.getZeroBased() >= jobList.size()) {
@@ -42,7 +43,7 @@ public class ScreenJobCommand extends ScreenCommand {
                 .and(person -> !person.isMatchPresent());
 
         // Filter persons by checking if their role is present in the job requirements (case-insensitive)
-        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+        List<Person> matchingPersons = fullPersonList.stream()
                 .filter(filterCriteria)
                 .collect(Collectors.toList());
 

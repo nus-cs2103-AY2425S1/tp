@@ -364,3 +364,15 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.label-contacts {
+    -fx-text-fill: #3498db;
+}
+
+.label-jobs {
+    -fx-text-fill: #2ecc71;
+}
+
+.label-companies {
+    -fx-text-fill: #e74c3c;
+}
