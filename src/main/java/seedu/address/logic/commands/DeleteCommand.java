@@ -197,10 +197,10 @@ public class DeleteCommand extends Command {
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return (targetIndex != null && targetIndex.equals(otherDeleteCommand.targetIndex))
-                || (targetName != null && targetName.equals(otherDeleteCommand.targetName))
-                || (policyIndex != null && policyIndex.equals(otherDeleteCommand.policyIndex));
+        DeleteCommand otherCommand = (DeleteCommand) other;
+        return (targetIndex != null ? targetIndex.equals(otherCommand.targetIndex) : otherCommand.targetIndex == null)
+                && (policyIndex != null ? policyIndex.equals(otherCommand.policyIndex) : otherCommand.policyIndex == null)
+                && (targetName != null ? targetName.equals(otherCommand.targetName) : otherCommand.targetName == null);
     }
 
     @Override
