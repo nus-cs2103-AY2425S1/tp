@@ -99,6 +99,9 @@ Adds a student to the app.
 Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> 
 Constraints: 
 * Tags must be at most 40 characters long, and must be alphanumeric
+* Maximum length for a name is 256 characters long
+* Maximum phone number is 16 numbers.
+* Maximum email length is 256 characters
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags (including 0)
@@ -107,7 +110,7 @@ Constraints:
 Examples:
 * `add_student n/John Doe p/98765432 e/johnd@example.com`
 * `add_student n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/likesMath`
-
+![Example for Add Student Command](images/addStudentExample.png)
 ### Viewing a student: `view_student`
 
 Displays all the details of a student in the details panel.
@@ -181,6 +184,7 @@ Format: `delete_student INDEX`
 
 Examples:
 * `list` followed by `delete_student 2` deletes the 2nd student in the app.
+![Example for Delete Student Command](images/deleteStudentExample.png)
 * `find Betsy` followed by `delete_student 1` deletes the 1st student in the results of the `find` command.
 
 ### Adding an assignment: `add_assignment`
@@ -247,6 +251,10 @@ Examples:
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
 
+Constraints: 
+- The assignment must not have been submitted prior to the Mark Command.
+- The assignment must already exist and belong to a particular student.<br>
+
 Format: `mark si/INDEX ai/INDEX`
 
 Examples:
@@ -256,6 +264,10 @@ Examples:
 ### Unmarking an assignment: `unmark`
 
 Unmarks an existing assignment belonging to a student, resetting its status to not submitted.
+
+Constraints:
+- The assignment must already have been submitted prior to the Unmark Command.
+- The assignment must already exist and belong to a particular student.<br>
 
 Format: `unmark si/INDEX ai/INDEX`
 
@@ -267,11 +279,13 @@ Examples:
 Edits the score of an assignment belonging to a student and marks it as submitted.
 
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
-
 * Grades the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student 
-  list and the assignment list on the student detail panel respectively. The index **must be a positive integer** 1, 2, 3, …​
+  list and the assignment list on the student detail panel respectively. 
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …​
 * The score must be a positive integer that is in bounds of the minimum and maximum scores of the assignment.
-* The score can be regraded multiple times by using the `grade` command again.
+* The score can be regraded multiple times by using the `grade` command again. If the assignment was already assigned a grade previously, it will be overwritten, and a warning is shown to the user.
 
 Examples:
 * `view_student 1` followed by `grade si/1 ai/1 s/80` grades the 1st assignment of the 1st
