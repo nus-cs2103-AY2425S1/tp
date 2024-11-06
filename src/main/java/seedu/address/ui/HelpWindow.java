@@ -152,7 +152,8 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Undo", "`undo`"),
                         new HelpCommand("Help", "`help`"),
                         new HelpCommand("Save", "`save`"),
-                        new HelpCommand("Load", "`load`")
+                        new HelpCommand("Load", "`load`"),
+                        new HelpCommand("Exit", "`exit`")
                 );
 
         // Add data to the table
