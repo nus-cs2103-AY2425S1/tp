@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete Alice`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -154,6 +154,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Reminder Feature
+
+#### Implementation
+
 
 ### \[Proposed\] Undo/redo feature
 

@@ -80,11 +80,13 @@ public class AddReminderCommand extends Command {
             // Creates a new reminder with the full name of the person
             Reminder reminderWithFullName = toAdd.getReminderWithFullName(person.getName().fullName);
             person.addReminder(reminderWithFullName);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(reminderWithFullName)));
         } else if (matchingPersons.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_PERSON);
         } else {
+            model.updateFilteredPersonList(predicate);
             throw new CommandException(MESSAGE_MORE_THAN_ONE_PERSON);
         }
     }
