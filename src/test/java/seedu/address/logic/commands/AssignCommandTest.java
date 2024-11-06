@@ -164,7 +164,7 @@ public class AssignCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ConfirmClearCommand()));
+        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new AssignCommand(Collections.singletonList(DESC_3B))));

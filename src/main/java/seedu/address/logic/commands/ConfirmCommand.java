@@ -21,7 +21,7 @@ public class ConfirmCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!ConfirmClearCommand.getIsClear()) {
+        if (!ClearCommand.getIsClear()) {
             throw new CommandException(MESSAGE_UNKNOWN_COMMAND);
         }
 
@@ -31,14 +31,14 @@ public class ConfirmCommand extends Command {
 
         if (participantList.equals(unfilteredList)) {
             model.setAddressBook(new AddressBook());
-            ConfirmClearCommand.setIsClear(false);
+            ClearCommand.setIsClear(false);
             return new CommandResult(MESSAGE_SUCCESS_FULL_CLEAR);
         } else {
             while (!participantList.isEmpty()) {
                 Person personToDelete = participantList.get(0);
                 model.deletePerson(personToDelete);
             }
-            ConfirmClearCommand.setIsClear(false);
+            ClearCommand.setIsClear(false);
             return new CommandResult(MESSAGE_SUCCESS_FILTERED_CLEAR);
         }
     }

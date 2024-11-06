@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
-public class ConfirmClearCommandTest {
+public class ClearCommandTest {
 
     @Test
     public void execute_clearPromptsConfirmationCheck_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        ConfirmClearCommand.setIsClear(false);
+        ClearCommand.setIsClear(false);
 
-        assertCommandSuccess(new ConfirmClearCommand(), model, ConfirmClearCommand.MESSAGE_CHECK, expectedModel);
-        assertTrue(ConfirmClearCommand.getIsClear());
+        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_CHECK, expectedModel);
+        assertTrue(ClearCommand.getIsClear());
     }
 
 }

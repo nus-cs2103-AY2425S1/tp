@@ -4,7 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class ConfirmCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        ConfirmClearCommand.setIsClear(true);
+        ClearCommand.setIsClear(true);
 
         assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
     }
@@ -32,7 +32,7 @@ public class ConfirmCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
-        ConfirmClearCommand.setIsClear(true);
+        ClearCommand.setIsClear(true);
 
         assertCommandSuccess(new ConfirmCommand(), model, ConfirmCommand.MESSAGE_SUCCESS_FULL_CLEAR, expectedModel);
     }
@@ -41,10 +41,10 @@ public class ConfirmCommandTest {
     public void execute_nonEmptyAddressBookFilteredList_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ConfirmClearCommand.setIsClear(true);
+        ClearCommand.setIsClear(true);
 
-        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
-        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Arrays.asList("m")));
+        model.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Set.of("m")));
+        expectedModel.updateFilteredPersonList(new GenderMatchesKeywordsPredicate(Set.of("m")));
         while (!expectedModel.getFilteredPersonList().isEmpty()) {
             Person personToDelete = expectedModel.getFilteredPersonList().get(0);
             expectedModel.deletePerson(personToDelete);
@@ -56,7 +56,7 @@ public class ConfirmCommandTest {
     @Test
     public void execute_notIsClear_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        ConfirmClearCommand.setIsClear(false);
+        ClearCommand.setIsClear(false);
         ConfirmCommand confirmCommand = new ConfirmCommand();
 
         assertCommandFailure(confirmCommand, model,
