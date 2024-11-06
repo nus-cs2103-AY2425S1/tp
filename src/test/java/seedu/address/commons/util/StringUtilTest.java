@@ -140,4 +140,15 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void capitalizeFirstLetter_validInput_correctResult() {
+        // Empty string
+        assertTrue(StringUtil.capitalizeFirstLetter("").equals(""));
+
+        // Single word
+        assertTrue(StringUtil.capitalizeFirstLetter("hello").equals("Hello"));
+
+        // Multiple words
+        assertTrue(StringUtil.capitalizeFirstLetter("hello world").equals("Hello world"));
+    }
 }
