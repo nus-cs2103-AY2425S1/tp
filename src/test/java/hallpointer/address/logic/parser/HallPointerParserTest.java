@@ -29,9 +29,9 @@ import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.MemberUtil;
 import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class HallPointerParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final HallPointerParser parser = new HallPointerParser();
 
     @Test
     public void parseCommand_addMember() throws Exception {

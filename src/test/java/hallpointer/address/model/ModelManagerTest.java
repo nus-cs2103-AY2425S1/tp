@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
-import hallpointer.address.testutil.AddressBookBuilder;
+import hallpointer.address.testutil.HallPointerBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new HallPointer(), new HallPointer(modelManager.getHallPointer()));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setHallPointerFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setHallPointerFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +61,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setHallPointerFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setHallPointerFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setHallPointerFilePath_validPath_setsHallPointerFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setHallPointerFilePath(path);
+        assertEquals(path, modelManager.getHallPointerFilePath());
     }
 
     @Test
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasMember_memberNotInAddressBook_returnsFalse() {
+    public void hasMember_memberNotInHallPointer_returnsFalse() {
         assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void hasMember_memberInAddressBook_returnsTrue() {
+    public void hasMember_memberInHallPointer_returnsTrue() {
         modelManager.addMember(ALICE);
         assertTrue(modelManager.hasMember(ALICE));
     }
@@ -95,13 +95,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withMember(ALICE).withMember(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        HallPointer hallPointer = new HallPointerBuilder().withMember(ALICE).withMember(BENSON).build();
+        HallPointer differentHallPointer = new HallPointer();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(hallPointer, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(hallPointer, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +113,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different hallPointer -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentHallPointer, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().value.split("\\s+");
         modelManager.updateFilteredMemberList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(hallPointer, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setHallPointerFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(hallPointer, differentUserPrefs)));
     }
 }

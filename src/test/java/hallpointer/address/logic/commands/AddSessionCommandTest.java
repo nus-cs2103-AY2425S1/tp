@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.exceptions.CommandException;
-import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.HallPointer;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.session.Session;
@@ -231,8 +231,8 @@ class AddSessionCommandTest {
             members.setMember(target, updatedMember);
         }
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyHallPointer getHallPointer() {
+            return new HallPointer();
         }
     }
 }

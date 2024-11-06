@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
  * Duplicates are not allowed (by .isSameMember comparison)
  */
 @SuppressWarnings("checkstyle:Regexp")
-public class AddressBook implements ReadOnlyAddressBook {
+public class HallPointer implements ReadOnlyHallPointer {
 
     private final UniqueMemberList members;
     /*
@@ -28,13 +28,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         members = new UniqueMemberList();
     }
 
-    public AddressBook() {
+    public HallPointer() {
     }
 
     /**
-     * Creates an AddressBook using the Members in the {@code toBeCopied}
+     * Creates an HallPointer using the Members in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public HallPointer(ReadOnlyHallPointer toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.members.setMembers(members);
     }
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code HallPointer} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyHallPointer newData) {
         requireNonNull(newData);
 
         setMembers(newData.getMemberList());
@@ -87,7 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code member} from this {@code AddressBook}.
+     * Removes {@code member} from this {@code HallPointer}.
      * {@code member} must exist in the address book.
      */
     public void removeMember(Member member) {
@@ -114,12 +114,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof HallPointer)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return members.equals(otherAddressBook.members);
+        HallPointer otherHallPointer = (HallPointer) other;
+        return members.equals(otherHallPointer.members);
     }
 
     @Override

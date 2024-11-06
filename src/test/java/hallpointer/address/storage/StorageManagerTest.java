@@ -1,6 +1,6 @@
 package hallpointer.address.storage;
 
-import static hallpointer.address.testutil.TypicalMembers.getTypicalAddressBook;
+import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import hallpointer.address.commons.core.GuiSettings;
-import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.ReadOnlyAddressBook;
+import hallpointer.address.model.HallPointer;
+import hallpointer.address.model.ReadOnlyHallPointer;
 import hallpointer.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonHallPointerStorage hallPointerStorage = new JsonHallPointerStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(hallPointerStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void hallPointerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonHallPointerStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonHallPointerStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        HallPointer original = getTypicalHallPointer();
+        storageManager.saveHallPointer(original);
+        ReadOnlyHallPointer retrieved = storageManager.readHallPointer().get();
+        assertEquals(original, new HallPointer(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getHallPointerFilePath() {
+        assertNotNull(storageManager.getHallPointerFilePath());
     }
 
 }
