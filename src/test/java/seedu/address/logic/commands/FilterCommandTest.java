@@ -75,7 +75,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = "No patients align with the provided details.";
         FilterCommand command = new FilterCommand(mediumTagOnlyPredicate);
         expectedModel.updateFilteredPersonList(mediumTagOnlyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
