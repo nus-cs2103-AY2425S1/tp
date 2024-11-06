@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setHallPointerFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setHallPointerFilePath(Paths.get("hall/pointer/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setHallPointerFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setHallPointerFilePath(Paths.get("new/hall/pointer/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -67,7 +67,7 @@ public class ModelManagerTest {
 
     @Test
     public void setHallPointerFilePath_validPath_setsHallPointerFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("hall/pointer/file/path");
         modelManager.setHallPointerFilePath(path);
         assertEquals(path, modelManager.getHallPointerFilePath());
     }
