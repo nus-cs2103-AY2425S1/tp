@@ -249,6 +249,8 @@ There must not be duplicate fields. For example, if there is a contact with the 
 
 `n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny`
 
+![example john doe](images/examplejohndoe.png)
+
 1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
    * **Fail:** `n/John Doe nn/Johnny...`
    * **Fail:** `n/Jane Hoe nn/Johnny...` there is already a Nickname Johnny
