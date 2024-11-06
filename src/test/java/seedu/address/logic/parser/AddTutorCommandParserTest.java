@@ -204,4 +204,11 @@ public class AddTutorCommandParserTest {
                 + ADDRESS_DESC_BOB + HOURS_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTutorCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_noHoursSpecified_success() {
+        Tutor expectedTutor = new TutorBuilder(BOB).withHours("0").build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+                new AddTutorCommand(expectedTutor));
+    }
 }
