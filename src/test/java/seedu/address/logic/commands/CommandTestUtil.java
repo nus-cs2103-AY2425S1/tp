@@ -97,8 +97,8 @@ public class CommandTestUtil {
     public static final int VALID_PERSON_ID = 0;
     public static final LocalDateTime VALID_APPOINTMENT_DATE_TIME_AMY = LocalDateTime.of(2024, 10, 20, 10, 30);
     public static final LocalDateTime VALID_APPOINTMENT_DATE_TIME_BOB = LocalDateTime.of(2024, 10, 31, 10, 30);
-    public static final String VALID_APPOINTMENT_DATE_TIME_STRING_AMY = "2024-10-20 10:30:00";
-    public static final String VALID_APPOINTMENT_DATE_TIME_STRING_BOB = "2024-10-31 10:30:00";
+    public static final String VALID_APPOINTMENT_DATE_TIME_STRING_AMY = "2024-10-20 10:30";
+    public static final String VALID_APPOINTMENT_DATE_TIME_STRING_BOB = "2024-10-31 10:30";
 
     public static final String APPOINTMENT_TYPE_DESC_AMY = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_AMY;
     public static final String APPOINTMENT_TYPE_DESC_BOB = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_BOB;
