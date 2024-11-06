@@ -43,7 +43,7 @@ The commands in EduVault follow a general format of `COMMAND INDEX PREFIX/...` .
 * `COMMAND` refers to the command that you want to execute.
 * `INDEX` refers to the student whose data you want to alter, specified by the number prepended to the name of the student on the application.
 * `PREFIX` specifies the type of data we want to alter.
-    * Refer to the [Prefix Table](#11-prefix-table-) below for the usage of each prefix.
+    * Refer to the [Prefix Table](#11-prefix-table) below for the usage of each prefix.
 
 <br>
 
@@ -193,7 +193,7 @@ Search for students that match the condition specified by the given prefix.
 <div markdown="span" class="alert alert-success">:bulb:
 **Tip:**
 
-This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table-)
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
 </div>
 
 
@@ -285,8 +285,8 @@ The commands in this section are used edit records on the system, such as studen
 - [Editing student’s details](#51-editing-a-student)  
 - [Logging fees](#52-logging-fees-for-tutorial)  
 - [Marking payment](#53-marking-a-students-payment)
-- Marking attendance of student
-- Marking attendance of tutorial  
+- [Marking attendance of student](#54-marking-attendance-of-a-student)
+- [Marking attendance of tutorial](#55-marking-attendance-of-a-tutorial)  
 - [Unmarking attendance of student](#56-unmarking-attendance-of-student)
 - [Unenroll a student from tutorial](#57-unenrolling-student-from-a-tutorial)
 #### **5.1 Editing a student**
@@ -409,6 +409,92 @@ Invalid usages
 </div>
 {% endraw %}
 
+#### **5.4 Marking attendance of a student**
+
+Command: `mas`
+
+Usage: `mas INDEX tut/TUTORIAL attend/ATTENDANCE`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Fields
+
+* `INDEX`: Index number as shown in the displayed person list of the student to mark
+    * Must be a positive integer 1, 2, 3…
+* `TUTORIAL`: Name of the tutorial the student is taking
+* `ATTENDANCE`: Date to mark the attendance for
+    * Must be in format dd/MM/yyyy
+
+</div>
+{% endraw %}
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+If you want to mark the attendance of all students in a tutorial, 
+use the command mat [here](#55-marking-attendance-of-a-tutorial) instead.
+</div>
+
+Example usages
+
+* `mas 1 tut/Math attend/30/10/2024`
+* `mas 2 attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+* Marking attendance of student who does not take specified tutorial
+    * *Error message: Student STUDENT_NAME does not take TUTORIAL tutorial*
+* Marking attendance of student who already has attendance marked for the corresponding week
+    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE*
+* Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
+
+#### **5.5 Marking attendance of a tutorial**
+*Marks the attendance of all students enrolled in the tutorial for the specified date*
+
+Command: `mat`
+
+Usage: `mat tut/TUTORIAL attend/ATTENDANCE`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Fields
+
+* `TUTORIAL`: Name of the tutorial to mark the attendance for all students
+* `ATTENDANCE`: Date to mark the attendance for
+    * Must be in format dd/MM/yyyy
+
+</div>
+{% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+If at least one student does not have their attendance marked for the corresponding week, those students will 
+have their attendance marked while those students with corresponding weekly attendance will be skipped. 
+</div>
+
+Example usages
+
+* `mat tut/Math attend/30/10/2024`
+* `mat attend/10/10/2024 tut/Chemistry`
+
+{% raw %}
+<div markdown="1" class="smaller-text">
+
+Invalid usages
+* Marking attendance of a tutorial with no students enrolled
+    * *Error message: No students are enrolled in TUTORIAL tutorial*
+* Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
+    * *Error message: All students in TUTORIAL tutorial has attendance marked 
+    for the corresponding week of date ATTENDANCE*
+* Format errors, check [here](#12-format-errors)
+
+</div>
+{% endraw %}
+
 #### **5.6 Unmarking attendance of student**
 
 Command: `umas`
@@ -420,7 +506,7 @@ Usage: `umas INDEX tut/TUTORIAL attend/ATTENDANCE`
 
 Fields
 
-* `INDEX`: Index number as shown in the displayed person list of the student to mark.
+* `INDEX`: Index number as shown in the displayed person list of the student to unmark.
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
