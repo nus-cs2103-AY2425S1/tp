@@ -36,6 +36,6 @@ public class CompanyToViewPredicate implements Predicate<Company> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("company", companyToView).toString();
+        return new ToStringBuilder(this).add("companyToView", companyToView).toString();
     }
 }

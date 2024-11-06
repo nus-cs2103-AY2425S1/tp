@@ -2,11 +2,7 @@ package seedu.internbuddy.logic.parser;
 
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.logging.Logger;
-
-import seedu.internbuddy.commons.core.LogsCenter;
 import seedu.internbuddy.commons.core.index.Index;
-import seedu.internbuddy.logic.commands.FavCommand;
 import seedu.internbuddy.logic.commands.ViewCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 
@@ -14,8 +10,6 @@ import seedu.internbuddy.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new FindCommand object
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
-
-    private static Logger logger = LogsCenter.getLogger(ViewCommand.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -28,7 +22,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             return new ViewCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
         }
     }
 
