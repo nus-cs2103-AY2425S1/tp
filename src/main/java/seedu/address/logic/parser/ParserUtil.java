@@ -8,7 +8,10 @@ import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +30,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes.
  */
 public class ParserUtil {
 
@@ -35,10 +39,12 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_FLOAT = "Value is not a valid float.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be
      * trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero
+     *                        unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -144,7 +150,11 @@ public class ParserUtil {
     public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT);
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern(AttendanceList.DATE_TIME_FORMAT)
+                .parseDefaulting(ChronoField.ERA, 1)
+                .toFormatter()
+                .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDateTime.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
@@ -200,7 +210,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String value} into a valid score  float
+     * Parses {@code String value} into a valid score float
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if value is invalid or out of bounds
