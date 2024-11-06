@@ -18,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicateMeetingException;
 import seedu.address.model.schedule.Meeting;
 
 /**
@@ -83,7 +84,11 @@ public class EditScheduleCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
-        model.setMeeting(meetingToEdit, updatedMeeting);
+        try {
+            model.setMeeting(meetingToEdit, updatedMeeting);
+        } catch (DuplicateMeetingException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
+        }
 
         return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS,
                 updatedName, updatedDate.toString(), updatedTime.toString()));
