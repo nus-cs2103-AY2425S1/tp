@@ -27,6 +27,7 @@ public class Person {
     private final Optional<Role> role;
     private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
+    private boolean isClient = false;
 
     /**
      * Every field, except tag and wedding, must be present and not null.
@@ -63,6 +64,14 @@ public class Person {
         if (this.ownWedding.equals(wedding)) {
             this.ownWedding = null;
         }
+    }
+
+    public void setClient(boolean isClient) {
+        this.isClient = isClient;
+    }
+
+    public boolean isClient() {
+        return isClient;
     }
 
     public Name getName() {
