@@ -47,7 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_IC + "IC] "
             + "[" + PREFIX_YEARGROUP + "YEARGROUP] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... \n"
             + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
