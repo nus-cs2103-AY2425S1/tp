@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -58,6 +59,9 @@ public class Dashboard extends UiPart<Region> {
 
 
     private void initializeTutorialCards() {
+        if (tutorialList.isEmpty()) {
+            setEmptyTutorialsPlaceholder();
+        }
         for (Tutorial tutorial : tutorialList) {
             createAndAddTutorialCard(tutorial);
         }
@@ -70,6 +74,10 @@ public class Dashboard extends UiPart<Region> {
     }
 
     private void createAndAddTutorialCard(Tutorial tutorial) {
+        if (tutorialList.size() == 1) {
+            tutorials.getChildren().clear();
+        }
+
         List<Participation> initialParticipationList = getParticipationListForTutorial(tutorial);
         TutorialCard card = new TutorialCard(tutorial.getSubject(), initialParticipationList);
         tutorials.getChildren().add(card.getRoot());
@@ -112,6 +120,9 @@ public class Dashboard extends UiPart<Region> {
                             tutorials.getChildren().remove(card.getRoot());
                         }
                     }
+                    if (tutorialList.isEmpty()) {
+                        setEmptyTutorialsPlaceholder();
+                    }
                 }
             }
         });
@@ -136,6 +147,21 @@ public class Dashboard extends UiPart<Region> {
         int studentsWithFeesOverdue = personList.filtered(person ->
                 Integer.parseInt(person.getPayment().overdueAmount) > 0).size();
         feesOverdue.setText(String.valueOf(studentsWithFeesOverdue));
+    }
+
+    /**
+     * Sets the tutorials container to show a message if there are no tutorials offered.
+     */
+    private void setEmptyTutorialsPlaceholder() {
+        Label label = new Label("No classes offered yet");
+        label.setStyle("-fx-background-color: #F3F8FB; -fx-background-radius: 5; -fx-padding: 10 15"
+                + "-fx-text-fill: #262626");
+
+        HBox emptyState = new HBox(label);
+        emptyState.setAlignment(Pos.CENTER);
+
+        tutorials.getChildren().clear();
+        tutorials.getChildren().add(emptyState);
     }
 
 }
