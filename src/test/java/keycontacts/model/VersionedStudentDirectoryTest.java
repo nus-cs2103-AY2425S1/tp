@@ -1,9 +1,11 @@
 package keycontacts.model;
 
-import org.junit.jupiter.api.Test;
-
 import static keycontacts.testutil.TypicalStudents.getTypicalStudentDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 public class VersionedStudentDirectoryTest {
 
@@ -16,8 +18,16 @@ public class VersionedStudentDirectoryTest {
     }
 
     @Test
-    public void commit() {
+    public void test() throws Exception {
+        versionedStudentDirectory.setStudents(List.of());
         versionedStudentDirectory.commit();
 
+        // test undo
+        versionedStudentDirectory.undo();
+        assertEquals(getTypicalStudentDirectory(), versionedStudentDirectory);
+
+        // test redo
+        versionedStudentDirectory.redo();
+        assertEquals(new StudentDirectory(), versionedStudentDirectory);
     }
 }
