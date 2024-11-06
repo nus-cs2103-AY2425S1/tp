@@ -70,7 +70,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the given {@code ArgumentMultimap} and creates a PersonDescriptor object.
      *
      * @param argMultimap Contains the field-value pairs for creating a person, where fields are indicated by prefixes
-     *                    (PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_STATUS, PREFIX_EMAIL, and optionally PREFIX_TAG)
+     *                    (PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_STATUS, PREFIX_EMAIL,
+     *                    and optionally PREFIX_TAG)
      * @return A new PersonDescriptor object with the parsed name, phone, email, address, status, and tags
      * @throws ParseException If:
      *         - Any of the required fields (name, address, phone, status, email) is missing, or
@@ -104,10 +105,12 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code ArgumentMultimap} and creates an AppointmentDescriptor object.
      *
-     * @param argMultimap Contains the field-value pairs for creating an appointment, where fields are indicated by prefixes:
+     * @param argMultimap Contains the field-value pairs for creating an appointment, where fields are
+     *                    indicated by prefixes:
      *                    Required: PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE
      *                    Optional: PREFIX_SICKNESS, PREFIX_MEDICINE
-     * @return A new AppointmentDescriptor object with the parsed appointment type, datetime, and optional sickness and medicine details
+     * @return A new AppointmentDescriptor object with the parsed appointment type, datetime, and optional sickness
+     *          and medicine details
      * @throws ParseException If:
      *         - Any of the required fields (person ID, datetime, appointment type) is missing, or
      *         - Any field has duplicate prefixes, or
