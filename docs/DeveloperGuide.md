@@ -169,11 +169,11 @@ Step 1. The user launches the application. The `VersionedStudentDirectory` will 
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the student directory. The `delete` command calls `Model#commitStudentDirectory()`, causing the modified state of the student directory after the `delete 5` command executes to be saved in the `studentDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted student directory state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the student directory. The `delete` command's `Command#shouldCommitModel` method returns true, so the `LogicManager` calls `Model#commitStudentDirectory()`, causing the modified state of the student directory after the `delete 5` command executes to be saved in the `studentDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted student directory state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command's `Command#shouldCommitModel` method returns true, so the `LogicManager` runs `Model#commitStudentDirectory()`, causing another modified student directory state to be saved into the `studentDirectoryStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command's `Command#shouldCommitModel` method returns true, so the `LogicManager` calls `Model#commitStudentDirectory()`, causing another modified student directory state to be saved into the `studentDirectoryStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -221,7 +221,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which causes `LogicManager` to call `Model#commitStudentDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `studentDirectoryStateList`, all student directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`. Since the clear command's `Command#shouldCommitModel` method returns true, `LogicManager` calls `Model#commitStudentDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `studentDirectoryStateList`, all student directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
