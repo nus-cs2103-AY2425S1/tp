@@ -619,10 +619,10 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with corrupted data files
 
-   1. Add `"p"` to a `"phone"` field in data file. Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contact still exists.
+   1. Add `"p"` to a `"phone"` field in data file. Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
 
-   2. Add a new field `"newField" : "newField"` to a person. Expected: The person with the new field is lost. The rest of the contact still exists.
+   2. Add a new field `"newField" : "newField"` to a person. Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
 
-   3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contact still exists.
+   3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
 
    4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
