@@ -278,6 +278,19 @@ Examples:
 - `export f/csv` exports the contact list into a csv file.
 - `export f/vcf` exports the contact list into a vcf file.
 
+### Changing the application's theme : `toggle`
+
+Changes the application theme from light to dark or from dark to light.
+
+Format: `toggle`
+
+- If application is currently in light mode, toggle command will set it to dark mode.
+- If application is currently in dark mode, toggle command will set it to light mode.
+
+Examples:
+
+- `toggle` changes the application theme.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -300,7 +313,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -325,20 +338,22 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                      |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
-| **List**     | `list`                                                                                                                                                                |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
-| **Editnotes** | `editnotes INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnotes 1 i/1 n/Customer 1`                                                                                     |
-| **Deletenotes** | `deletenotes INDEX i/[NOTE_INDEX]` <br> e.g. `deletenotes 1 i/1`                                                                                                   |
-| **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
-| **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
-| **Unpin**    | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                     |
-| **Undo**     | `undo`                                                                                                                                                                |
-| **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
-| **Clear**    | `clear`                                                                                                                                                               |
-| **Help**     | `help`                                                                                                                                                                |
+| Action          | Format, Examples                                                                                                                                                      |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **List**        | `list`                                                                                                                                                                |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Addnotes**    | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
+| **Editnotes**   | `editnotes INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnotes 1 i/1 n/Customer 1`                                                                                      |
+| **Deletenotes** | `deletenotes INDEX i/[NOTE_INDEX]` <br> e.g. `deletenotes 1 i/1`                                                                                                      |
+| **View**        | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
+| **Pin**         | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
+| **Unpin**       | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                     |
+| **Undo**        | `undo`                                                                                                                                                                |
+| **Export**      | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
+| **Toggle**      | `toggle`                                                                                                                                                              |
+|
+| **Clear**       | `clear`                                                                                                                                                               |
+| **Help**        | `help`                                                                                                                                                                |
