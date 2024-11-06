@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.storage.Storage;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -123,6 +124,44 @@ public class CommandTestUtil {
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     * - Modified for file access commands to fit Storage parameter
+     */
+    public static void assertFileAccessCommandSuccess(FileAccessCommand command, Model actualModel,
+                                                      Storage actualStorage, CommandResult expectedCommandResult,
+                                                      Model expectedModel, Storage expectedStorage) {
+        try {
+            CommandResult result = command.execute(actualModel, actualStorage);
+            assertEquals(expectedCommandResult, result);
+            assertEquals(expectedModel, actualModel);
+            assertEquals(expectedStorage, actualStorage);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - Modified for file access commands to fit Storage parameter
+     */
+    public static void assertFileAccessCommandFailure(FileAccessCommand command, Model actualModel,
+                                                      Storage actualStorage, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel, actualStorage));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
