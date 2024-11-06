@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
@@ -34,10 +33,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // Verify nameKeywords are valid Name inputs
         List<String> nameKeywords = Arrays.asList(nameKeyArg.split("\\s+"));
-        if (!nameKeyArg.isEmpty() && !NameContainsKeywordsPredicate.areValidNameKeywords(nameKeywords)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-
         Set<Tag> tagKeyWords = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new FindCommand(
