@@ -71,7 +71,6 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-
         <Label fx:id="address" styleClass="cell_small_label" style="-fx-text-overrun: ellipsis;" />
       </HBox>
 
@@ -83,7 +82,6 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-
         <Label fx:id="email" styleClass="cell_small_label" />
       </HBox>
 
