@@ -138,7 +138,8 @@ public class FilterCommandParserTest {
     void parse_validArgs_returnsFilterCommandMultipleEcNumbers() {
         PersonPredicate expectedPredicate = new PersonPredicate(
                 emptyList(), emptyList(), emptyList(),
-                emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), List.of("91112222", "92223333"), emptyList());
+                emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), List.of("91112222", "92223333"),
+                emptyList());
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
 
         assertParseSuccess(parser, "filter ep/91112222 ep/92223333", expectedCommand);
