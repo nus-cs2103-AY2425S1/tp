@@ -128,6 +128,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 ***
 
 ### 2.3 Notes on the Command Format
+
 <box type="info" seamless>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -191,7 +192,7 @@ Deletes the specified student from EduManage.
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ .
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in EduManage.
@@ -249,8 +250,8 @@ Find students by either their name, level or subject(s).
 * `find n/John` returns `john` and `John Doe`.
 * `find l/S3 NA` returns all students tagged with level `S3 NA`.
 * `find s/MATH` returns all students tagged with subject `MATH`.
-* `find n/alex david` returns `Alex Yeoh`, `David Li`.
-* `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.<br>
+* `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.
+* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br>
 
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
@@ -349,13 +350,13 @@ Updates the details of an existing task in a student's task list.
 
 **Format:** `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`
 * The task index refers to the index number shown in the student's task list.
-* The task index **must be a positive integer** 1, 2, 3, …​
+* The task index **must be a positive integer** 1, 2, 3, …​ .
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 **Examples:**
-* `updatetask n/John Doe ti/2 t/Mark homework` updates the 2nd task in John Doe's task list to be `Mark homework`
-* `updatetask n/Jane Smith ti/1 t/Handle MC d/2024-10-13` updates the 1st task in Jane Smith's task list to be `Handle MC` with a deadline `2024-10-13`
+* `updatetask n/John Doe ti/2 t/Mark homework` updates the 2nd task in John Doe's task list to be `Mark homework`.
+* `updatetask n/Jane Smith ti/1 t/Handle MC d/2024-10-13` updates the 1st task in Jane Smith's task list to be `Handle MC` with a deadline `2024-10-13`.
 
 ***
 
@@ -412,9 +413,9 @@ This action is irreversible and will permanently delete all students from EduMan
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 **Format:** `help`
+  
+  ![help message](images/helpMessage.png)
 
 ***
 
@@ -441,6 +442,7 @@ Exits EduManage.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Names** with `/` are not allowed as `/` is reserved for internal use. As such, valid names such as `Aditi D/O Ramesh` will be considered invalid. To work around this issue, we recommend simply omitting the `/` (e.g. `Aditi DO Ramesh`).
 
 [(Back to Top)](#edumanage-user-guide)
 
