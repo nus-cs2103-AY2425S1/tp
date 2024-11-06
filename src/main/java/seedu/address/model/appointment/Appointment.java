@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Appointment {
     public static final String MESSAGE_CONSTRAINTS = "Appointment description cannot be empty and has a "
-            + "character limit of 100";
-    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,50}$";
+            + "character limit of 40";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,40}$";
     private final String description;
     private final LocalDateTime start;
     private final LocalDateTime end;
