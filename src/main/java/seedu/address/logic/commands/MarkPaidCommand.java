@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
