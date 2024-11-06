@@ -601,7 +601,17 @@ testers are expected to do more *exploratory* testing.
    - **Prerequisites:** Ensure the contact you want to edit is in the current view.
    - Test case: `edit 2 n/Jane Smith p/98765432`<br>
        **Expected:** The name and phone number of the second contact in view are updated. Confirmation is shown in the status message.
-
+    <br></br>
+4. Tagging a contact
+   - **Prerequisites:** The contact should not already have the tag you want to add. You may add multiple tags at once.
+   - Test case: `tag 2 t/florist`<br>
+        **Expected:** The contact at index 2 in the current contacts view will now have the florist tag.
+    <br></br>
+5. Untagging a contact
+   - **Prerequisites:** The contact should currently have the tag you want to remove.
+   - Test case: `untag 2 t/photographer`<br>
+        **Expected:** The contact at index 2 will no longer have the photographer tag.
+   <br></br>
 ### Wedding Management
 
 1. Adding a wedding
