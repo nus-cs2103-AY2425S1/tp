@@ -127,6 +127,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeFromProfiles(Profile profileName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addToProfiles(Profile profileName) {
             throw new AssertionError("This method should not be called.");
         }

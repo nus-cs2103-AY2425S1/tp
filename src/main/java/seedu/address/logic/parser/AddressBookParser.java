@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteProfileCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -64,54 +65,59 @@ public class AddressBookParser {
         case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_ALIAS:
-            return new EditCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_ALIAS:
+            return new ClearCommand();
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-        case ClearCommand.COMMAND_ALIAS:
-            return new ClearCommand();
+        case DeleteProfileCommand.COMMAND_WORD:
+        case DeleteProfileCommand.COMMAND_ALIAS:
+            return new DeleteProfileCommandParser().parse(arguments);
+
+
+        case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_ALIAS:
+            return new EditCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
         case FindCommand.COMMAND_WORD:
         case FindCommand.COMMAND_ALIAS:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS:
-            return new ListCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         case ListAttendanceCommand.COMMAND_WORD:
         case ListAttendanceCommand.COMMAND_ALIAS:
             return new ListAttendanceCommandParser().parse(arguments);
 
+        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_ALIAS:
+            return new ListCommand();
+
         case MarkAttendanceCommand.COMMAND_WORD:
         case MarkAttendanceCommand.COMMAND_ALIAS:
             return new AttendanceMarkingCommandParser(MarkAttendanceCommand.COMMAND_WORD).parse(arguments);
 
-        case UnmarkAttendanceCommand.COMMAND_WORD:
-        case UnmarkAttendanceCommand.COMMAND_ALIAS:
-            return new AttendanceMarkingCommandParser(UnmarkAttendanceCommand.COMMAND_WORD).parse(arguments);
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.COMMAND_ALIAS:
+            return new SortCommandParser().parse(arguments);
 
         case SwitchCommand.COMMAND_WORD:
         case SwitchCommand.COMMAND_ALIAS:
             return new SwitchCommandParser().parse(arguments);
 
-        case SortCommand.COMMAND_WORD:
-        case SortCommand.COMMAND_ALIAS:
-            return new SortCommandParser().parse(arguments);
+        case UnmarkAttendanceCommand.COMMAND_WORD:
+        case UnmarkAttendanceCommand.COMMAND_ALIAS:
+            return new AttendanceMarkingCommandParser(UnmarkAttendanceCommand.COMMAND_WORD).parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
