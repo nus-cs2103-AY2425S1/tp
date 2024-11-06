@@ -14,9 +14,9 @@ import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
+import seedu.address.model.company.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagBuilder;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
@@ -28,8 +28,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
-     * and trailing whitespaces will be
-     * trimmed.
+     * and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the specified index is invalid (not non-zero
      *                        unsigned integer).
@@ -135,7 +134,6 @@ public class ParserUtil {
         }
     }
 
-
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -146,5 +144,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     * If no remark is provided (empty string), returns an empty Remark.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 }

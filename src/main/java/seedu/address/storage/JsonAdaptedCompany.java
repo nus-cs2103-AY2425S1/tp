@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
+import seedu.address.model.company.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +33,8 @@ class JsonAdaptedCompany {
     private final String email;
     private final String address;
     private final String careerPageUrl;
+    private final String remark;
+    private final String applicationStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     private final Bookmark isBookmark;
@@ -42,13 +46,17 @@ class JsonAdaptedCompany {
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("careerPageUrl") String careerPageUrl,
+                              @JsonProperty("applicationStatus") String status,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                              @JsonProperty("bookmark") Bookmark isBookmark) {
+                              @JsonProperty("bookmark") Bookmark isBookmark,
+                              @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.careerPageUrl = careerPageUrl;
+        this.applicationStatus = status;
         this.address = address;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -63,7 +71,9 @@ class JsonAdaptedCompany {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         careerPageUrl = source.getCareerPageUrl().value;
+        applicationStatus = source.getApplicationStatus().value;
         address = source.getAddress().value;
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(tag -> new JsonAdaptedTag(tag))
                 .collect(Collectors.toList()));
@@ -119,10 +129,21 @@ class JsonAdaptedCompany {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CareerPageUrl.class.getSimpleName()));
         }
-        if (!CareerPageUrl.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!CareerPageUrl.isValidAddress(careerPageUrl)) {
+            throw new IllegalValueException(CareerPageUrl.MESSAGE_CONSTRAINTS);
         }
         final CareerPageUrl modelCareerPageUrl = new CareerPageUrl(careerPageUrl);
+
+        if (applicationStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApplicationStatus.class.getSimpleName()));
+        }
+        final ApplicationStatus modelApplicationStatus = new ApplicationStatus(applicationStatus);
+
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -132,8 +153,7 @@ class JsonAdaptedCompany {
         }
         final Bookmark modelBookmark = new Bookmark(isBookmark.getIsBookmarkValue());
 
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl, modelTags,
-                modelBookmark);
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl,
+                modelApplicationStatus, modelTags, modelBookmark, modelRemark);
     }
-
 }

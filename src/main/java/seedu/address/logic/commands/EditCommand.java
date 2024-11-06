@@ -23,12 +23,14 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
+import seedu.address.model.company.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,11 +108,14 @@ public class EditCommand extends Command {
         CareerPageUrl updatedCareerPageUrl = editCompanyDescriptor.getCareerPageUrl()
                 .orElse(companyToEdit.getCareerPageUrl());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-        // Edit command does not allow editing bookmark
+        // Edit command does not allow editing bookmark and application status
         Bookmark updatedBookmark = companyToEdit.getIsBookmark();
+        ApplicationStatus updatedApplicationStatus = companyToEdit.getApplicationStatus();
+        Remark updatedRemark = editCompanyDescriptor.getRemark().orElse(companyToEdit.getRemark());
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl, updatedTags,
-                updatedBookmark);
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl,
+                updatedApplicationStatus, updatedTags, updatedBookmark, updatedRemark);
     }
 
     @Override
@@ -149,6 +154,7 @@ public class EditCommand extends Command {
         private Address address;
         private CareerPageUrl careerPageUrl;
         private Set<Tag> tags;
+        private Remark remark;
 
         public EditCompanyDescriptor() {
         }
@@ -164,13 +170,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setCareerPageUrl(toCopy.careerPageUrl);
             setTags(toCopy.tags);
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, careerPageUrl, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, careerPageUrl, tags, remark);
         }
 
         public void setName(Name name) {
@@ -205,30 +212,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setCareerPageUrl(CareerPageUrl url) {
-            this.careerPageUrl = url;
+        public void setCareerPageUrl(CareerPageUrl careerPageUrl) {
+            this.careerPageUrl = careerPageUrl;
         }
 
         public Optional<CareerPageUrl> getCareerPageUrl() {
             return Optional.ofNullable(careerPageUrl);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws
-         * {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         @Override
@@ -237,6 +242,7 @@ public class EditCommand extends Command {
                 return true;
             }
 
+            // instanceof handles nulls
             if (!(other instanceof EditCompanyDescriptor)) {
                 return false;
             }
@@ -252,14 +258,13 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return "EditCompanyDescriptor{"
-                    + "name=" + name
-                    + ", phone=" + phone
-                    + ", email=" + email
-                    + ", address=" + address
-                    + ", careerPageUrl=" + careerPageUrl
-                    + ", tags=" + tags
-                    + '}';
+            return EditCompanyDescriptor.class.getSimpleName() + "{name=" + getName().orElse(null)
+                    + ", phone=" + getPhone().orElse(null)
+                    + ", email=" + getEmail().orElse(null)
+                    + ", address=" + getAddress().orElse(null)
+                    + ", career page url=" + getCareerPageUrl().orElse(null)
+                    + ", tags=" + getTags().orElse(null)
+                    + ", remark=" + getRemark().orElse(null) + "}";
         }
     }
 }

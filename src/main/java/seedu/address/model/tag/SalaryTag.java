@@ -38,6 +38,7 @@ public class SalaryTag extends Tag {
      * @return true if the Salary level is "low", "medium", or "high".
      */
     private static boolean isValidSalary(String salaryLevel) {
+        assert salaryLevel != null : "salaryLevel should not be null";
         try {
             // Attempt to convert the input string to a valid Level enum value.
             Level.valueOf(salaryLevel.toUpperCase(Locale.ROOT));

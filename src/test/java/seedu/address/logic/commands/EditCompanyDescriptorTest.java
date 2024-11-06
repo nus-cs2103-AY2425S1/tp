@@ -65,9 +65,10 @@ public class EditCompanyDescriptorTest {
                 + editCompanyDescriptor.getName().orElse(null) + ", phone="
                 + editCompanyDescriptor.getPhone().orElse(null) + ", email="
                 + editCompanyDescriptor.getEmail().orElse(null) + ", address="
-                + editCompanyDescriptor.getAddress().orElse(null) + ", careerPageUrl="
+                + editCompanyDescriptor.getAddress().orElse(null) + ", career page url="
                 + editCompanyDescriptor.getCareerPageUrl().orElse(null) + ", tags="
-                + editCompanyDescriptor.getTags().orElse(null) + "}";
+                + editCompanyDescriptor.getTags().orElse(null) + ", remark="
+                + editCompanyDescriptor.getRemark().orElse(null) + "}";
         assertEquals(expected, editCompanyDescriptor.toString());
     }
 }

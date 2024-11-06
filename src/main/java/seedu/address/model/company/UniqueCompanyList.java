@@ -69,7 +69,6 @@ public class UniqueCompanyList implements Iterable<Company> {
         if (!target.isSameCompany(editedCompany) && contains(editedCompany)) {
             throw new DuplicateCompanyException();
         }
-
         internalList.set(index, editedCompany);
     }
 
