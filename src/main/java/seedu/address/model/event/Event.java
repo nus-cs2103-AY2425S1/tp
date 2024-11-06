@@ -130,6 +130,6 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getEventName().equals(getEventName());
+                && otherEvent.getEventName().equalsLowerCase(getEventName());
     }
 }
