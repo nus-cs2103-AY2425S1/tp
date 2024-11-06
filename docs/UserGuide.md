@@ -104,7 +104,7 @@ Action | Format (with examples)
 
 ### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -117,11 +117,11 @@ Adds a doctor to the address book.
 Format: `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphabets and spaces. The app will reject the input if it contains any other characters.
+The parameter `NAME` only accepts alphanumeric characters and spaces. The app will reject the input if it contains any other characters or is blank.
 </div>
 
 **Examples:**
-* `add-doctor n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 s/Orthopedics`
+* `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`
 * `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 
 ### Adding a patient: `add-patient`
@@ -131,13 +131,16 @@ Adds a patient to the address book.
 Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphabets and spaces. The app will reject the input if it contains any other characters.
-The parameter `DATE` must take in a valid day, which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (i.e. 30-02-1994), will be automatically corrected.
+The parameter `NAME` only accepts alphanumeric characters and spaces. The app will reject the input if it contains any other characters or is blank.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (e.g. 30-02-1994), will be automatically corrected.
 </div>
 
 **Examples:**
 * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`
-* `add-patient n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 d/01-05-1990 g/F t/friend`
+* `add-patient n/John Doe p/91234567 e/johndoe@example.com a/456 Clementi Ave 3 d/01-05-1950 g/M t/elderly`
 
 ### Adding an appointment: `add-appt`
 
@@ -147,11 +150,14 @@ Format: `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be an exact match of respective names in the address book. The app will reject the input if it contains unknown doctors or patients.
-The parameter `DATE` must take in a valid day, which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (i.e. 30-02-1994), will be automatically corrected.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 (e.g. 30-02-1994), will be automatically corrected.
 </div>
 
 **Examples:**
-* `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`
+* `add-appt pn/John Doe dn/Jane Doe d/23-04-2024 t/1100`
 
 ### Deleting an appointment: `delete-appt`
 
@@ -188,21 +194,17 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only the name is searched.
+* The app will only search for persons with matching names.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * Partial words will be matched e.g. `Hans B` will match `Hans Bo`
-* Persons matching all keywords will be returned (i.e. `AND` search).
-  e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
-</div>
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
+* Only persons matching all keywords will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 **Examples:**
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find jane` returns `Jane Doe`
+* `find doe` returns `John Doe` and `Jane Doe`<br>
+  ![result for 'find john jane'](images/findJohnJaneResult.png)
 
 ### Finding doctors by name: `find-doctor`
 
@@ -210,20 +212,20 @@ Finds doctors whose names contain any of the given keywords.
 
 Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The app will only search for doctors with matching names.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only the name is searched.
-* Partial words will be matched. e.g. `Hans B` will match `Hans Bo`
-* Only doctors matching all keywords provided will be returned (i.e. `AND` search).
-  e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
+* Only doctors matching all keywords will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 </div>
 
 **Examples:**
-* `find-doctor John` returns `John Doe`.
-* `find-doctor Alex Yeoh` returns `Alex Yeoh`.
+* `find-doctor jane` returns `Jane Doe`.
+* `find-doctor jane doe` returns `Jane Doe`.
 
 ### Finding patients by name: `find-patient`
 
@@ -231,20 +233,20 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The app will only search for patients with matching names.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only the name is searched.
-* Partial words will be matched. e.g. `Hans B` will match `Hans Bo`
-* Patients matching all keywords provided will be returned (i.e. `AND` search).
-  e.g. `Hans Bo` will not return `Hans Gruber`, `Bo Yang`
+* Only patients matching all keywords will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Keywords provided must only consist of alphabets. Any other characters provided will give an invalid argument error.
 </div>
 
 **Examples:**
-* `find-patient John` returns `John Doe`.
-* `find-patient Alex Yeoh` returns `Alex Yeoh`.
+* `find-patient john` returns `John Doe`.
+* `find-patient john doe` returns `John Doe`.
 
 ### Deleting a person: `delete`
 
@@ -253,12 +255,12 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the currently displayed list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 **Examples:**
 * `list-patient` followed by `delete 2` deletes the 2nd patient in the address book.
-* `find-doctor Betsy` followed by `delete 1` deletes the 1st doctor in the results of the `find-doctor` command.
+* `find-doctor Jane` followed by `delete 1` deletes the 1st doctor in the results of the `find-doctor` command.
 
 ### Clearing all entries: `clear`
 
@@ -274,15 +276,15 @@ Format: `exit`
 
 ### Saving the data
 
-MediContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediContacts data are saved in the hard disk automatically after any command modifies the data. There is no need for users to save manually.
 
 ### Editing the data file
 
-MediContacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediContacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcomed to update the data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the app to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you will update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
