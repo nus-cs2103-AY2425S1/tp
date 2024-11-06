@@ -22,7 +22,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.role.athlete.SportString;
+import seedu.address.model.person.role.athlete.Sport;
 
 /**
  * Edits the details of an existing {@link Event} in the address book.
@@ -87,7 +87,7 @@ public class EditEventCommand extends Command {
         assert eventToEdit != null;
 
         EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
-        SportString updatedSport = editEventDescriptor.getSport().orElse(eventToEdit.getSport());
+        Sport updatedSport = editEventDescriptor.getSport().orElse(eventToEdit.getSport());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Set<Person> updatedParticipants = editEventDescriptor.getParticipants().orElse(eventToEdit.getParticipants());
 
@@ -122,10 +122,8 @@ public class EditEventCommand extends Command {
      */
     public static class EditEventDescriptor {
         private EventName name;
-        private SportString sport;
-
+        private Sport sport;
         private Venue venue;
-
         private Set<Person> participants;
 
         public EditEventDescriptor() {}
@@ -135,6 +133,9 @@ public class EditEventCommand extends Command {
          */
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
+            setSport(toCopy.sport);
+            setVenue(toCopy.venue);
+            setParticipants(toCopy.participants);
         }
 
         public boolean isAnyFieldEdited() {
@@ -149,11 +150,11 @@ public class EditEventCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setSport(SportString sport) {
+        public void setSport(Sport sport) {
             this.sport = sport;
         }
 
-        public Optional<SportString> getSport() {
+        public Optional<Sport> getSport() {
             return Optional.ofNullable(sport);
         }
 

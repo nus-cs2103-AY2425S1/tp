@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.role.athlete.Sport;
 import seedu.address.model.person.role.athlete.SportString;
 
 /**
@@ -14,7 +15,8 @@ import seedu.address.model.person.role.athlete.SportString;
 public class Event {
     // Identity fields
     private final EventName name;
-    private final SportString sport;
+    private final Sport sport;
+    // private final List<Faculty> teams;
     private final Venue venue;
     // private final LocalDateTime dateTime;
     private final Set<Person> participants = new HashSet<>();
@@ -22,7 +24,7 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName name, SportString sport, Venue venue, Set<Person> participants) {
+    public Event(EventName name, Sport sport, Venue venue, Set<Person> participants) {
         requireAllNonNull(name);
         this.name = name;
         this.sport = sport;
@@ -40,7 +42,7 @@ public class Event {
     /**
      * Returns the sport of the event.
      */
-    public SportString getSport() {
+    public Sport getSport() {
         return sport;
     }
 

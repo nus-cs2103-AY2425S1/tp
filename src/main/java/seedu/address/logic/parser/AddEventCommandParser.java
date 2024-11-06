@@ -15,6 +15,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.role.athlete.Sport;
 import seedu.address.model.person.role.athlete.SportString;
 
 /**
@@ -37,7 +38,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
-        SportString sport = ParserUtil.parseSportString(argMultimap.getValue(PREFIX_SPORT).get());
+        Sport sport = ParserUtil.parseSport(argMultimap.getValue(PREFIX_SPORT).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         Set<Person> participants = ParserUtil.parseParticipants(argMultimap.getAllValues(PREFIX_PARTICIPANTS));
 

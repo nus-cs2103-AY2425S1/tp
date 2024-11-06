@@ -173,18 +173,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String sport} into a {@code SportString}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code sport} is invalid.
-     */
-    public static SportString parseSportString(String sport) throws ParseException {
-        requireNonNull(sport);
-        String trimmedSport = sport.trim();
-        return new SportString(trimmedSport);
-    }
-
-    /**
      * Parses a {@code String branch} into a {@code Branch}.
      * Leading and trailing whitespaces will be trimmed.
      *

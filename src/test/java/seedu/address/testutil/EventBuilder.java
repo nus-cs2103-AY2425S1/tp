@@ -3,10 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.role.athlete.Sport;
 import seedu.address.model.person.role.athlete.SportString;
 
 /**
@@ -15,14 +17,11 @@ import seedu.address.model.person.role.athlete.SportString;
 public class EventBuilder {
     public static final String DEFAULT_NAME = "IFG";
     public static final String DEFAULT_VENUE = "UTown";
-
-    public static final String DEFAULT_SPORT = "Chess";
+    public static final Sport DEFAULT_SPORT = Sport.CHESS;
 
     private EventName name;
     private Venue venue;
-
-    private SportString sport;
-
+    private Sport sport;
     private Set<Person> participants;
 
     /**
@@ -31,7 +30,7 @@ public class EventBuilder {
     public EventBuilder() {
         name = new EventName(DEFAULT_NAME);
         venue = new Venue(DEFAULT_VENUE);
-        sport = new SportString(DEFAULT_SPORT);
+        sport = DEFAULT_SPORT;
         participants = new HashSet<>();
     }
 
@@ -65,7 +64,7 @@ public class EventBuilder {
      * Sets the {@link SportString} of the {@link Event} that we are building.
      */
     public EventBuilder withSport(String sport) {
-        this.sport = new SportString(sport);
+        this.sport = ParserUtil.parseSport(sport);
         return this;
     }
 
@@ -76,7 +75,6 @@ public class EventBuilder {
         this.participants = Set.of(participants);
         return this;
     }
-
 
     public Event build() {
         return new Event(name, sport, venue, participants);
