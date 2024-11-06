@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `WeddingListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -123,14 +123,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` and `Wedding` objects (which are contained in a `UniquePersonList` and `UniqueWeddingList` object).
+* stores the currently 'selected' `Person` and/or `Wedding` objects (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -274,7 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Target User Profile
 
-A **wedding organizer** responsible for planning and managing weddings. They coordinate with vendors, clients (brides, grooms, and their families), and participants (guests, photographers, caterers, etc.). Their work involves juggling multiple tasks and deadlines to ensure that each wedding runs smoothly. They may need to manage multiple weddings simultaneously and prefer efficient tools that help streamline their workflow. They are comfortable using desktop applications and can type quickly, preferring typing over mouse interactions.
+A small to medium scale **wedding organizer** responsible for planning and managing weddings. They coordinate with vendors, clients (brides, grooms, and their families), and participants (guests, photographers, caterers, etc.). Their work involves juggling multiple tasks and deadlines to ensure that each wedding runs smoothly. They may need to manage multiple weddings simultaneously and prefer efficient tools that help streamline their workflow. They are comfortable using desktop applications and can type quickly, preferring typing over mouse interactions.
 
 ### Value Proposition
 
@@ -288,26 +286,25 @@ Priorities:
 - Medium (nice to have) - `* *`
 - Low (unlikely to have) - `*`
 
-| Priority | As a...                    | I want to...                                       | So that I can...                                                        |
-|----------|----------------------------|----------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | Wedding organizer          | create separate profiles for each wedding          | manage multiple weddings without confusion                              |
-| `* * *`  | Wedding organizer          | view an overview of all ongoing weddings           | manage multiple events at once without losing track                     |
-| `* * *`  | Wedding organizer          | add and categorize vendors                         | keep track of service providers for each wedding                        |
-| `* * *`  | Wedding organizer          | view stakeholders related to each specific wedding | easily check their schedules                                            |
-| `* * *`  | Wedding organizer          | update client preferences easily                   | accommodate last-minute changes and keep everything up to date          |
-| `* * *`  | Wedding organizer          | access previous client details                     | refer back to past weddings when planning new ones                      |
-| `* * *`  | Wedding organizer          | delete profiles and tags                           | remove outdated or incorrect information                                |
-| `* * *`  | Wedding organizer          | quickly search for specific contacts or vendors    | access critical information without delays                              |
-| `* * *`  | Wedding organizer          | filter contacts based on tags                      | retrieve contacts of stakeholders involved in a wedding or of a specific type |
-| `* *`    | Wedding organizer          | archive completed weddings                         | focus on current and upcoming events without clutter                    |
-| `* *`    | Wedding organizer          | track expenses for each wedding                    | manage the overall wedding budget efficiently                           |
-| `* *`    | Wedding organizer          | set reminders for important tasks or deadlines     | ensure critical milestones are not missed                               |
-| `* *`    | Wedding organizer          | track RSVPs from clients                           | keep an accurate guest count for each wedding                           |
-| `* *`    | Wedding organizer          | generate reports on completed tasks                | review progress and share updates with clients                          |
-| `* *`    | Wedding organizer          | assign tasks to team members                       | delegate responsibilities and track progress efficiently                |
-| `*`      | Wedding organizer          | upload important documents (e.g., contracts)       | access them quickly during planning                                     |
-| `*`      | Wedding organizer          | send automated reminders to vendors and clients    | ensure they stay informed of upcoming deadlines                         |
-| `*`      | Wedding organizer          | set up recurring tasks for common preparations     | avoid manually creating the same tasks for each event                   |
+| Priority | As a...                    | I want to...                                       | So that I can...                                                              |
+|----------|----------------------------|----------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | Wedding organizer          | create separate profiles for each wedding          | manage multiple weddings without confusion                                    |
+| `* * *`  | Wedding organizer          | view an overview of all ongoing weddings           | manage multiple events at once without losing track                           |
+| `* * *`  | Wedding organizer          | add and categorize vendors                         | keep track of service providers for each wedding                              |
+| `* * *`  | Wedding organizer          | view stakeholders related to each specific wedding | easily check their schedules                                                  |
+| `* * *`  | Wedding organizer          | update client preferences easily                   | accommodate last-minute changes and keep everything up to date                |
+| `* * *`  | Wedding organizer          | delete profiles and roles                          | remove outdated or incorrect information                                      |
+| `* * *`  | Wedding organizer          | quickly search for specific contacts or vendors    | access critical information without delays                                    |
+| `* * *`  | Wedding organizer          | filter contacts based on roles                     | retrieve contacts of stakeholders involved in a wedding or of a specific role |
+| `* *`    | Wedding organizer          | archive completed weddings                         | focus on current and upcoming events without clutter                          |
+| `* *`    | Wedding organizer          | track expenses for each wedding                    | manage the overall wedding budget efficiently                                 |
+| `* *`    | Wedding organizer          | set reminders for important tasks or deadlines     | ensure critical milestones are not missed                                     |
+| `* *`    | Wedding organizer          | track RSVPs from clients                           | keep an accurate guest count for each wedding                                 |
+| `* *`    | Wedding organizer          | generate reports on completed tasks                | review progress and share updates with clients                                |
+| `* *`    | Wedding organizer          | assign tasks to team members                       | delegate responsibilities and track progress efficiently                      |
+| `*`      | Wedding organizer          | upload important documents (e.g., contracts)       | access them quickly during planning                                           |
+| `*`      | Wedding organizer          | send automated reminders to vendors and clients    | ensure they stay informed of upcoming deadlines                               |
+| `*`      | Wedding organizer          | set up recurring tasks for common preparations     | avoid manually creating the same tasks for each event                         |
 
 ### Use Cases
 
@@ -456,7 +453,7 @@ These non-functional requirements ensure that **Bridal Boss** remains a reliable
 - **Vendor:** A service provider involved in the wedding (e.g., florist, caterer, photographer).
 - **Client:** The individuals who have hired the wedding organizer, typically the bride and groom.
 - **Stakeholders:** All parties involved in the wedding event, including clients, vendors, and participants.
-- **Tag:** A label assigned to contacts or events to categorize and filter them (e.g., "Florist", "Wedding A").
+- **Role:** A role assigned to contacts to categorize and filter them (e.g., "Florist", "Photographer").
 - **Contact:** An entry in the system containing information about a person or vendor.
 - **Event Timeline:** A schedule outlining all tasks and deadlines related to a wedding event.
 - **RSVP:** A confirmation from an invited guest about their attendance at the wedding.
