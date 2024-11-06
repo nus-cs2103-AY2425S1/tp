@@ -69,7 +69,7 @@ public class GradeList {
             throw new IllegalStateException("Total weightage exceeds 100%");
         }
 
-        newGrades.merge(normalizedTestName, grade, (oldGrade, newGrade) -> newGrade);
+        newGrades.put(normalizedTestName, grade);
 
         return new GradeList(newGrades);
     }
@@ -83,7 +83,12 @@ public class GradeList {
      */
     public Grade getGrade(String testName) {
         requireNonNull(testName);
-        return this.grades.get(testName);
+        String normalizedTestName = testName.toLowerCase();
+        return this.grades.entrySet().stream()
+                .filter(entry -> entry.getKey().toLowerCase().equals(normalizedTestName))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -96,7 +101,9 @@ public class GradeList {
         requireNonNull(testName);
         Map<String, Grade> newList = new HashMap<>(this.grades);
 
-        newList.remove(testName);
+        newList.keySet().stream()
+                .filter(key -> key.equalsIgnoreCase(testName))
+                .findFirst().ifPresent(newList::remove);
 
         return new GradeList(newList);
     }
