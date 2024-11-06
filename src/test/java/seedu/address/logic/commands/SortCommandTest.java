@@ -97,7 +97,7 @@ public class SortCommandTest {
         Model model = getShuffledModelWithTutorials();
         SortCommand command = SortCommand.sortByTutorialAttendance(SortCommand.ASCENDING, TUTORIAL_ONE);
         CommandResult result = command.execute(model);
-        String expectedMessage = "Sorted by Tutorial Attendance in Ascending order.";
+        String expectedMessage = String.format("Sorted by Tutorial Attendance %s in Ascending order.", TUTORIAL_ONE);
 
         List<Person> sortedList = model.getFilteredPersonList();
         List<Person> expectedList = List.of(ADAM, BETTY, CLAIRE);
@@ -111,7 +111,7 @@ public class SortCommandTest {
         Model model = getShuffledModelWithTutorials();
         SortCommand command = SortCommand.sortByTutorialAttendance(SortCommand.DESCENDING, TUTORIAL_ONE);
         CommandResult result = command.execute(model);
-        String expectedMessage = "Sorted by Tutorial Attendance in Descending order.";
+        String expectedMessage = String.format("Sorted by Tutorial Attendance %s in Descending order.", TUTORIAL_ONE);
 
         List<Person> sortedList = model.getFilteredPersonList();
         List<Person> expectedList = List.of(BETTY, ADAM, CLAIRE);

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.AttendanceStatus;
@@ -62,19 +63,28 @@ public class SortCommand extends Command {
     private final Comparator<Person> sortingComparator;
     private final boolean isAscendingOrder;
     private final SortField sortField;
+    private final Optional<Tutorial> tutorial;
+
+    private SortCommand(Comparator<Person> personComparator, boolean isAscendingOrder, SortField field) {
+        this(personComparator, isAscendingOrder, field, Optional.empty());
+    }
 
     /**
-     * Constructs a {@code SortCommand} with the given comparator and order.
+     * Constructs a {@code SortCommand} with an optional tutorial for tutorial-specific sorting.
      *
-     * @param personComparator Comparator to sort persons.
+     * @param personComparator Comparator for sort persons.
      * @param isAscendingOrder {@code true} for ascending, {@code false} for descending.
+     * @param field The field by which to sort.
+     * @param tutorial An {@code Optional} tutorial for tutorial-specific sorting, or {@code Optional.empty()}.
      * @throws NullPointerException if {@code personComparator} is null.
      */
-    private SortCommand(Comparator<Person> personComparator, boolean isAscendingOrder, SortField field) {
+    private SortCommand(Comparator<Person> personComparator, boolean isAscendingOrder, SortField field,
+                        Optional<Tutorial> tutorial) {
         requireNonNull(personComparator);
         this.sortingComparator = personComparator;
         this.isAscendingOrder = isAscendingOrder;
         this.sortField = field;
+        this.tutorial = tutorial;
     }
 
     /**
@@ -109,9 +119,10 @@ public class SortCommand extends Command {
      */
     public static SortCommand sortByTutorialAttendance(Integer order, Tutorial tutorial) {
         requireNonNull(order);
+        requireNonNull(tutorial);
         boolean isAscendingOrder = (order.equals(ASCENDING));
-        return new SortCommand(
-                new TutorialComparator(tutorial, isAscendingOrder), isAscendingOrder, SortField.TUTORIAL_ATTENDANCE);
+        return new SortCommand(new TutorialComparator(tutorial, isAscendingOrder),
+                isAscendingOrder, SortField.TUTORIAL_ATTENDANCE, Optional.of(tutorial));
     }
 
     /**
@@ -124,7 +135,8 @@ public class SortCommand extends Command {
         // Ensure sortField is not null
         assert sortField != null : "sortField should never be null";
 
-        return String.format("Sorted by %s in %s order.", sortField, order);
+        return String.format("Sorted by %s%s in %s order.",
+                sortField, this.tutorial.map(t-> " " + t).orElse(""), order);
     }
 
     @Override
