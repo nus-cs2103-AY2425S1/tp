@@ -28,10 +28,29 @@ public class AddToGroupCommandParser implements Parser<AddToGroupCommand> {
 
     public static final String MEMBER_MESSAGE_DUPLICATES = "There should not be duplicated indices:\n";
 
+    /**
+     * Given the list of new members to be added to the group, find if there are any duplicate indices.
+     *
+     * @param members The list of member indices.
+     * @return A set containing the duplicated members' indices.
+     */
     private static Set<Index> findDuplicates(List<Index> members) {
         return members.stream()
                 .filter(index -> Collections.frequency(members, index) > 1)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Converts the set of duplicates to a string that can be printed to the user.
+     *
+     * @param duplicates The set of duplicated indices.
+     * @return the string that represents the set of duplicates.
+     */
+    private static String duplicatesSetToString(Set<Index> duplicates) {
+        return duplicates.stream()
+                .map(Index::getOneBased)
+                .map(String::valueOf)
+                .collect(Collectors.joining(" "));
     }
 
     @Override
@@ -56,10 +75,7 @@ public class AddToGroupCommandParser implements Parser<AddToGroupCommand> {
         }
         Set<Index> duplicates = findDuplicates(members);
         if (!duplicates.isEmpty()) {
-            String duplicatesAsString = duplicates.stream()
-                    .map(Index::getOneBased)
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(" "));
+            String duplicatesAsString = duplicatesSetToString(duplicates);
             throw new ParseException(MEMBER_MESSAGE_DUPLICATES + duplicatesAsString);
         }
         return new AddToGroupCommand(groupName, members);

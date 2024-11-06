@@ -59,23 +59,16 @@ public class AddToGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getPersonList();
-        Group existingGroup;
-        try {
-            existingGroup = model.getGroup(groupName);
-        } catch (GroupNotFoundException gnfe) {
-            throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXISTS, groupName));
-        }
 
+        Group existingGroup;
         Group newGroup;
         try {
+            existingGroup = model.getGroup(groupName);
             newGroup = this.createGroupWithNewMembers(existingGroup, members, lastShownList);
-        } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(e.getMessage());
-        }
-
-        try {
             model.setGroup(existingGroup, newGroup);
-        } catch (DuplicateGroupException e) {
+        } catch (GroupNotFoundException gnfe) {
+            throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXISTS, groupName));
+        } catch (IndexOutOfBoundsException | DuplicateGroupException e) {
             throw new CommandException(e.getMessage());
         }
         return new CommandResult(formatSuccessCommandResultMessage());
