@@ -758,3 +758,38 @@ testers are expected to do more *exploratory* testing.
 
    2. **Test case:** `edit 10 n/John Doe p/98765432`<br>
       **Expected:** No client is edited. Error details shown in the status message.
+
+### Viewing a Client
+
+1. **Viewing a client's details**
+
+   1. **Prerequisites:** Ensure that client to view exists.
+
+   1. **Test case:** `view 1`<br>
+      **Expected:** Popup window of the clients details displayed. Details of client is showed in the window
+
+   1. **Test case:** `view -1`<br>
+      **Expected:** No client is viewed. Error details shown in the status message.
+
+
+### Finding a Client
+
+1. **Finding a specific client from the list using their name**
+
+   1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Ensure that client to find exists.
+
+   1. **Test case:** `find John`<br>
+      **Expected:** All clients with the name John is listed.
+
+   2. **Test case:** `find Pablo`<br> (Pablo doesn't exist)
+      **Expected:** No clients are Listed. List will not be populated
+
+2. **Finding a specific client from the list using their car VRN**
+
+   1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Ensure that the client with the specific car to find exists.
+
+   1. **Test case:** `find SJH9514P`<br>
+      **Expected:** All clients with the car VRN SJH9514P is listed.
+   
+   2. **Test case:** `find SJH9514L`<br> (SJH9514L car doesn't exist)
+      **Expected:** No clients are Listed. List will not be populated
