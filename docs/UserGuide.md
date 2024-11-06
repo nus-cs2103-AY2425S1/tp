@@ -306,8 +306,8 @@ Format: `view INDEX`
 * Displays additional information such as a patient's `diagnosis`, `medication`, `notes` and `appointments`.
 
 Examples:
-* `view 2` to view the 2nd patient's details.
-![result for 'view 2'](images/viewResult.png)
+* `view 1` to view the 1st patient's details.
+![result for 'view 1'](images/viewResult.png)
 
 [View Parameters Guide](#input-parameters)<br>
 [Back to Table of Contents](#table-of-contents)
