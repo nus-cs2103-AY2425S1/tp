@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,16 +36,19 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    // need to double confirm this
     @Test
-    public void parse_invalidNameArgs_throwsParseException() {
-        assert false;
-        assertParseFailure(parser, INVALID_NAME_DESC,
-                ParserUtil.MESSAGE_INVALID_NAME_FIELD); // this should not have passed
+    public void parse_validNameArgsNoPrefix_returnsDeleteCommand() {
+        // does not look if input matches address book
+        String input = "a";
+        Name name = new Name(input);
+        DeleteCommand expectedCommand = new DeleteCommand(name);
+        assertParseSuccess(parser, input, expectedCommand);
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", DeleteCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
+    public void parse_invalidNameArgs_throwsParseException() {
+        assertParseFailure(parser, INVALID_NAME_DESC,
+                ParserUtil.MESSAGE_INVALID_NAME_FIELD);
     }
+
 }

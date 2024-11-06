@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -88,14 +87,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditCommand(index, editContactDescriptor);
         } catch (ParseException pe) {
             assert index == null;
-            if (isInteger(strPreamble)) {
+            if (isInteger(strPreamble) || strPreamble.matches("^-*?[0-9]+$")
+                    /*|| strPreamble.matches("^[^a-zA-Z]*$")*/) {
                 throw new ParseException(pe.getMessage());
                 // -1, 0
             }
             return createEditCommandByName(strPreamble, editContactDescriptor);
-            // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand
-            // .MESSAGE_FUNCTION), pe);
-
         }
     }
 

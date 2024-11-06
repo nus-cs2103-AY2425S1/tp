@@ -58,7 +58,7 @@ public class Messages {
     public static final String MESSAGE_MISSING_INDEX_OR_NAME = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "Missing index or Full name. " + LINE_BREAK + "%1$s");
     public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is "
-            + "invalid";
+            + "invalid. Note: index refers to the number being found in the pages displayed";
     public static final String MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK = "This contact is not in address book. "
             + "Check if Full Name is used. Check contact's full name or " + "if it exists by finding. "
             + "Example: " + MESSAGE_FIND_NAME_SUGGESTION;

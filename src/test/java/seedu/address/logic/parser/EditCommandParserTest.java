@@ -38,11 +38,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
-import seedu.address.model.contact.Role;
-import seedu.address.model.contact.StudentStatus;
-import seedu.address.model.contact.TelegramHandle;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -142,7 +138,7 @@ public class EditCommandParserTest {
     public void parse_invalidNameToEdit_failure() {
         String userInput = DEFAULT_NAME + "&" + NAME_DESC_AMY;
         assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_INVALID_NAME_FIELD));
+                ParserUtil.MESSAGE_INVALID_NAME_FIELD);
     }
 
     @Test

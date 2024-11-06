@@ -22,12 +22,15 @@ public class HelpCommand extends Command {
     public static final String COMMAND_FORMAT_DETAIL = "help [COMMAND_WORD]";
 
     public static final String DETAIL_PREAMBLE_START = "For more details,";
-    public static final String MESSAGE_REFER_USERGUIDE = "%s visit " + USERGUIDE_URL + WHITESPACE
-            + "for complete user guide";
+    public static final String MESSAGE_REFER_USERGUIDE =
+            "%1$s visit our complete user guide on the popup window %2$s";
+    // "%s visit " + USERGUIDE_URL + WHITESPACE
+    //            + "for complete user guide"
     public static final String MESSAGE_REFER_USERGUIDE_GENERAL_HELP =
-            String.format(MESSAGE_REFER_USERGUIDE, "Alternatively,");
+            String.format(MESSAGE_REFER_USERGUIDE, "Alternatively,", "");
     public static final String MESSAGE_REFER_USERGUIDE_DETAIL_HELP =
-            String.format(MESSAGE_REFER_USERGUIDE, DETAIL_PREAMBLE_START);
+            String.format(MESSAGE_REFER_USERGUIDE, DETAIL_PREAMBLE_START, "which will be shown "
+                    + "after typing " + styleCommand(COMMAND_WORD));
     public static final String MESSAGE_USAGE = "See " + styleCommand(COMMAND_WORD) + ": Shows program "
             + "usage instructions." + LINE_BREAK + COMMAND_FORMAT_PREAMBLE + WHITESPACE + styleCommand(COMMAND_WORD);
     public static final String SHOWING_HELP_MESSAGE = "List of other commands: "
@@ -35,8 +38,6 @@ public class HelpCommand extends Command {
             + DETAIL_PREAMBLE_START + WHITESPACE + "type " + styleCommand(COMMAND_FORMAT_DETAIL) + WHITESPACE
             + "with the words found in the command list above." + LINE_BREAK
             + MESSAGE_REFER_USERGUIDE_GENERAL_HELP;
-    // + "\nAlternatively, visit our complete user guide on the popup screen";
-
     // studentStatus and Role can magic number
     public static final String HELP_ADD = AddCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + AddCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK

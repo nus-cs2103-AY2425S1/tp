@@ -92,6 +92,10 @@ public class Name {
         if (word.equalsIgnoreCase("s/o") || word.equalsIgnoreCase("d/o")) {
             return word.toUpperCase();
         }
+        if (word.substring(0, 1).equals("(")) {
+            return word.substring(0, 1) + Character.toUpperCase(word.charAt(1))
+                    + word.substring(2, word.length());
+        }
         return Character.toUpperCase(word.charAt(0)) + word.substring(1, word.length());
     }
 

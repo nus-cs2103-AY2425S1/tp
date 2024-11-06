@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
@@ -48,7 +47,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new DeleteCommand(index);
         } catch (Exception exp) {
-            if (isInteger(trimmedArgs)) {
+            if (isInteger(trimmedArgs) || trimmedArgs.matches("^-*?[0-9]+$")
+                    /*|| trimmedArgs.matches("^[^a-zA-Z]*$")*/) {
                 throw new ParseException(exp.getMessage()); // no invalid command format
                 // -1, 0
             }
