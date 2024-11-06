@@ -16,7 +16,8 @@ import seedu.address.model.person.Policy;
 import seedu.address.ui.MainWindow;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person or policy identified using it's displayed index from the address book.
+ * Also allows deletion by name.
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
@@ -36,6 +37,7 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Name targetName;
     private final Index policyIndex;
+
     /**
      * Creates a DeleteCommand to delete the person at the specified {@code Index}.
      *
@@ -71,6 +73,13 @@ public class DeleteCommand extends Command {
         this.policyIndex = policyIndex;
     }
 
+    /**
+     * Executes the delete command.
+     *
+     * @param model The model in which the command is executed.
+     * @return The result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -83,6 +92,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Executes the delete command.
+     *
+     * @param model The model in which the command is executed.
+     * @return The result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
     private CommandResult executeByIndex(Model model, List<Person> lastShownList) throws CommandException {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             logger.log(Level.WARNING, "Invalid person index: " + targetIndex.getOneBased());
@@ -97,6 +113,14 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Executes the delete command by name.
+     *
+     * @param model The model in which the command is executed.
+     * @param lastShownList The list of persons currently displayed.
+     * @return The result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
     private CommandResult executeByName(Model model, List<Person> lastShownList) throws CommandException {
         List<Person> personsWithName = lastShownList.stream()
                 .filter(person -> person.getName().equals(targetName))
@@ -112,6 +136,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Deletes a policy from a person.
+     *
+     * @param personToDelete The person from whom the policy is to be deleted.
+     * @return The result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
     private CommandResult deletePolicyFromPerson(Person personToDelete) throws CommandException {
         if (policyIndex.getZeroBased() >= personToDelete.getPolicies().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
@@ -122,6 +153,14 @@ public class DeleteCommand extends Command {
                 .getOneBased(), personToDelete.getName()));
     }
 
+    /**
+     * Deletes a person from the model.
+     *
+     * @param model The model in which the command is executed.
+     * @param personToDelete The person to be deleted.
+     * @return The result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     */
     private CommandResult deletePerson(Model model, Person personToDelete) throws CommandException {
         boolean isConfirmed = MainWindow.showConfirmationDialog("Are you sure you want to delete "
                 + personToDelete.getName() + "?");
@@ -133,6 +172,13 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
+    /**
+     * Handles the case where multiple persons with the same name are found.
+     *
+     * @param model The model in which the command is executed.
+     * @param personsWithName The list of persons with the same name.
+     * @return The result of the command execution.
+     */
     private CommandResult handleDuplicateNames(Model model, List<Person> personsWithName) {
         model.updateFilteredPersonList(person -> person.getName().equals(targetName));
         StringBuilder duplicatesList = new StringBuilder();
@@ -142,6 +188,7 @@ public class DeleteCommand extends Command {
         String message = String.format(MESSAGE_DUPLICATE_NAMES, targetName, duplicatesList.toString());
         return new CommandResult(message);
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
