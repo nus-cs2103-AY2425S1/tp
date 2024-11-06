@@ -44,7 +44,7 @@ public class ViewCommand extends Command {
         Person person = personList.get(targetIndex.getZeroBased());
         model.setFocusPerson(person);
 
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()), false, false);
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override
