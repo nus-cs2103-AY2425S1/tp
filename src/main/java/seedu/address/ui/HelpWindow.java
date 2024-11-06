@@ -22,25 +22,32 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String ADD_HELP_2 = "a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]";
 
     public static final String LIST_HELP_HEADER = "List all contacts in ClientHub: ";
-    public static final String LIST_HELP = "list    or   li";
+    public static final String LIST_HELP = "list";
     public static final String EDIT_HELP_HEADER = "Edit contacts: ";
     public static final String EDIT_HELP = "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE";
     public static final String DELETE_HELP_HEADER = "Delete contacts by name: ";
-    public static final String DELETE_HELP = "delete NAME   or   " + "d NAME   or   " + "delete NAME/";
+    public static final String DELETE_HELP_1 = "delete NAME";
+    public static final String DELETE_HELP_2 = "d NAME";
+    public static final String DELETE_HELP_3 = "delete NAME/";
     public static final String CLEAR_HELP_HEADER = "Delete all contacts from ClientHub: ";
     public static final String CLEAR_HELP = "clear";
     public static final String FN_HELP_HEADER = "Find contacts by name: ";
-    public static final String FN_HELP = "find n/NAME   or   " + "fn NAME";
+    public static final String FN_HELP_1 = "find n/NAME";
+    public static final String FN_HELP_2 = "fn NAME";
     public static final String FP_HELP_HEADER = "Find contacts by phone number: ";
-    public static final String FP_HELP = "find p/PHONE   or   " + "fp PHONE";
+    public static final String FP_HELP_1 = "find p/PHONE";
+    public static final String FP_HELP_2 = "fp PHONE";
     public static final String FA_HELP_HEADER = "Find contacts by address: ";
-    public static final String FA_HELP = "find a/ADDRESS   or   " + "fa ADDRESS";
+    public static final String FA_HELP_1 = "find a/ADDRESS";
+    public static final String FA_HELP_2 = "fa ADDRESS";
     public static final String FC_HELP_HEADER = "Find contacts by Client Type: ";
-    public static final String FC_HELP = "find c/CLIENT_TYPE   or   " + "fc CLIENT_TYPE";
+    public static final String FC_HELP_1 = "find c/CLIENT_TYPE";
+    public static final String FC_HELP_2 = "fc CLIENT_TYPE";
     public static final String SORT_HELP_HEADER = "Sort contacts by name: ";
-    public static final String SORT_HELP = "sort    or   s";
+    public static final String SORT_HELP = "sort";
     public static final String VIEW_HELP_HEADER = "View a contact's full information: ";
-    public static final String VIEW_HELP = "view NAME   or   v NAME";
+    public static final String VIEW_HELP_1 = "view NAME";
+    public static final String VIEW_HELP_2 = "v NAME";
     public static final String RA_HELP_HEADER = "Add a reminder for a contact: ";
     public static final String RA_HELP_1 = "radd n/NAME dt/DATE and TIME d/DESCRIPTION";
     public static final String RA_HELP_2 = "ra n/NAME dt/DATE and TIME d/DESCRIPTION";
@@ -48,7 +55,8 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String RE_HELP_1 = "redit INDEX dt/DATE and TIME d/DESCRIPTION";
     public static final String RE_HELP_2 = "re INDEX dt/DATE and TIME d/DESCRIPTION";
     public static final String RD_HELP_HEADER = "Delete a reminder for a contact: ";
-    public static final String RD_HELP = "rdelete INDEX    or    " + "rd INDEX";
+    public static final String RD_HELP_1 = "rdelete INDEX";
+    public static final String RD_HELP_2 = "rd INDEX";
     public static final String EXIT_HELP_HEADER = "Exit and close ClientHub: ";
     public static final String EXIT_HELP = "exit";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -84,9 +92,14 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label deleteHelpHeader;
 
+    @FXML
+    private Label deleteHelp1;
 
     @FXML
-    private Label deleteHelp;
+    private Label deleteHelp2;
+
+    @FXML
+    private Label deleteHelp3;
 
     @FXML
     private Label clearHelpHeader;
@@ -98,25 +111,37 @@ public class HelpWindow extends UiPart<Stage> {
     private Label fnHelpHeader;
 
     @FXML
-    private Label fnHelp;
+    private Label fnHelp1;
+
+    @FXML
+    private Label fnHelp2;
 
     @FXML
     private Label fpHelpHeader;
 
     @FXML
-    private Label fpHelp;
+    private Label fpHelp1;
+
+    @FXML
+    private Label fpHelp2;
 
     @FXML
     private Label faHelpHeader;
 
     @FXML
-    private Label faHelp;
+    private Label faHelp1;
+
+    @FXML
+    private Label faHelp2;
 
     @FXML
     private Label fcHelpHeader;
 
     @FXML
-    private Label fcHelp;
+    private Label fcHelp1;
+
+    @FXML
+    private Label fcHelp2;
 
     @FXML
     private Label sortHelpHeader;
@@ -128,7 +153,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label viewHelpHeader;
 
     @FXML
-    private Label viewHelp;
+    private Label viewHelp1;
+
+    @FXML
+    private Label viewHelp2;
 
     @FXML
     private Label raHelpHeader;
@@ -152,7 +180,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label rdHelpHeader;
 
     @FXML
-    private Label rdHelp;
+    private Label rdHelp1;
+
+    @FXML
+    private Label rdHelp2;
 
     @FXML
     private Label exitHelpHeader;
@@ -189,19 +220,27 @@ public class HelpWindow extends UiPart<Stage> {
         addHelp2.setText(ADD_HELP_2);
         listHelp.setText(LIST_HELP);
         editHelp.setText(EDIT_HELP);
-        deleteHelp.setText(DELETE_HELP);
+        deleteHelp1.setText(DELETE_HELP_1);
+        deleteHelp2.setText(DELETE_HELP_2);
+        deleteHelp3.setText(DELETE_HELP_3);
         clearHelp.setText(CLEAR_HELP);
-        fnHelp.setText(FN_HELP);
-        fpHelp.setText(FP_HELP);
-        faHelp.setText(FA_HELP);
-        fcHelp.setText(FC_HELP);
+        fnHelp1.setText(FN_HELP_1);
+        fnHelp2.setText(FN_HELP_2);
+        fpHelp1.setText(FP_HELP_1);
+        fpHelp2.setText(FP_HELP_2);
+        faHelp1.setText(FA_HELP_1);
+        faHelp2.setText(FA_HELP_2);
+        fcHelp1.setText(FC_HELP_1);
+        fcHelp2.setText(FC_HELP_2);
         sortHelp.setText(SORT_HELP);
-        viewHelp.setText(VIEW_HELP);
+        viewHelp1.setText(VIEW_HELP_1);
+        viewHelp2.setText(VIEW_HELP_2);
         raHelp1.setText(RA_HELP_1);
         raHelp2.setText(RA_HELP_2);
         reHelp1.setText(RE_HELP_1);
         reHelp2.setText(RE_HELP_2);
-        rdHelp.setText(RD_HELP);
+        rdHelp1.setText(RD_HELP_1);
+        rdHelp2.setText(RD_HELP_2);
         exitHelp.setText(EXIT_HELP);
     }
 
