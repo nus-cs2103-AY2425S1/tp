@@ -45,8 +45,7 @@ public class AddEcNameCommandParser implements Parser<AddEcNameCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             ecName = ParserUtil.parseEcName(argMultimap.getValue(PREFIX_ECNAME).get());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddEcNameCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(ive.getMessage(), ive);
         }
 
         return new AddEcNameCommand(index, ecName);
