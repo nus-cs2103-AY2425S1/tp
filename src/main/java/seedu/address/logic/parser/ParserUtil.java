@@ -231,10 +231,8 @@ public class ParserUtil {
         }
         Matcher matcher = pattern.matcher(arg);
         if (matcher.find()) {
-            System.out.println(matcher.group(1).trim());
             return matcher.group(1).trim();
         }
-        System.out.println(arg);
         return arg.trim();
     }
 

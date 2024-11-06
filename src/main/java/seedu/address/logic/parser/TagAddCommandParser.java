@@ -23,10 +23,6 @@ public class TagAddCommandParser implements Parser<TagAddCommand> {
     public TagAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
 
-//        if (ParserUtil.isInvalidPrefix(argMultimap)) {
-//            throw new ParseException(String.format("Wrong"));
-//        }
-
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagAddCommand.MESSAGE_USAGE));
         }
