@@ -57,7 +57,8 @@ public class Person {
                   ObservableList<Property> sellingProperties,
                   ObservableList<Property> buyingProperties,
                   ObservableList<Property> propertiesSold,
-                  ObservableList<Property> propertiesBought) {
+                  ObservableList<Property> propertiesBought,
+                  boolean isPinned) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -68,6 +69,7 @@ public class Person {
         this.buyingProperties = buyingProperties;
         this.propertiesSold = propertiesSold;
         this.propertiesBought = propertiesBought;
+        this.isPinned = isPinned;
     }
 
     public Name getName() {
