@@ -193,7 +193,7 @@ public class ModelManager implements Model {
     public void addGoods(GoodsReceipt goodsReceipt) {
         requireNonNull(goodsReceipt);
 
-        if (hasSupplierName(goodsReceipt)) {
+        if (hasExistingSupplier(goodsReceipt)) {
             goodsList.addReceipt(goodsReceipt);
         } else {
             throw new IllegalSupplierNameException();
@@ -232,7 +232,7 @@ public class ModelManager implements Model {
         return GoodsReceiptUtil.sumTotals(filteredReceipts);
     }
 
-    private boolean hasSupplierName(GoodsReceipt goodsReceipt) {
+    private boolean hasExistingSupplier(GoodsReceipt goodsReceipt) {
         return addressBook.getPersonList()
                 .stream()
                 .map(Person::getName)
@@ -240,6 +240,6 @@ public class ModelManager implements Model {
     }
 
     private void filterIllegalSupplierNames() {
-        goodsList.removeIf(receipt -> !hasSupplierName(receipt));
+        goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
     }
 }
