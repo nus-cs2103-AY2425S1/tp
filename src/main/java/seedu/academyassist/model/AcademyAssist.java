@@ -173,11 +173,11 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
      * Adds {@code subject} to {@code person}
      */
     public void addSubjectsToPerson(Set<Subject> subjects, Person person) {
-        persons.remove(person);
+        Person updatedPerson = person;
         for (Subject s: subjects) {
-            person = person.addSubject(s);
+            updatedPerson = updatedPerson.addSubject(s);
         }
-        persons.add(person);
+        persons.setPerson(person, updatedPerson);
     }
 
     //// student count operations
