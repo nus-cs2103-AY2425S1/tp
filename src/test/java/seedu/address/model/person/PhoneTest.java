@@ -24,10 +24,12 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("9312 1534 9312 1534")); // more than 15 digits
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("")); // empty string (if user provided another contact detail)
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertFalse(Phone.isValidPhone("9312 1534 9312 153")); // exactly 15 digits
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }

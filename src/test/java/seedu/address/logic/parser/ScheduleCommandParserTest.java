@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_EXCEED_MAXINT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE_TIME;
@@ -168,6 +170,8 @@ public class ScheduleCommandParserTest {
                 + " " + INVALID_SCHEDULE_TIME;
 
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+        //index greater than MAX INT
+        assertParseFailure(parser, INVALID_INDEX_EXCEED_MAXINT, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

@@ -241,7 +241,7 @@ Format: `sort {n/[ORDER], sch/[ORDER]}`
 * `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive).
 * If no order is provided, persons will be sorted in ascending order by default.
 * Contact list will be sorted alphabetically by name with `n/` and by schedule with `sch/`.
-* If the list is filtered before executing the sort command, it will display the sorted filter list.
+* If the list is filtered/searched before executing the sort command, it will display the sorted filter/search list.
 * Executing the `list` function after will show the sorted full list.
 * When sorting by schedules:
   1. Contacts with no schedules will appear at the end of the list.
@@ -266,13 +266,14 @@ Searches for a list of persons within a given range of schedule
 Format: `search [b/START_TIME] [en/END_TIME]`
 
 * `START_TIME` and `END_TIME` must adhere to the datetime format yyyy-MM-dd HH:mm
-* Either `[b/START_TIME]` or `[en/END_TIME]` has to be provided
+* Either `[b/START_TIME]` or `[en/END_TIME]` or both has to be provided
 * It will search for schedules between the given `[b/START_TIME]` and `[en/END_TIME]`
 * If `[b/START_TIME]` is not provided, it will search for all schedules that is before `[en/END_TIME]`
 * If `[en/END_TIME]` is not provided, it will search for all schedules that is after `[b/START_TIME]`
 * Persons with no schedule given will not appear in the search results
 * Persons with only a date as a schedule but not time will be searched under the assumption that time is 00:00
 * Search result will be inclusive of the begin and end time
+* If no matching result, an empty list will be provided.
 
 Examples:
 * `search b/2024-11-11 12:00` will search for the list of persons with schedules after 2024-11-11 12:00
