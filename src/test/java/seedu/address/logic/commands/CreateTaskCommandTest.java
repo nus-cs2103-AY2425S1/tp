@@ -36,6 +36,7 @@ public class CreateTaskCommandTest {
         HashSet<Task> tasksToAdd = new HashSet<>();
         tasksToAdd.add(TODO_TASK);
         tasksToAdd.add(DEADLINE_TASK);
+        tasksToAdd.add(EVENT_TASK);
 
         // Create a CreateTaskCommand with valid tasks
         CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);

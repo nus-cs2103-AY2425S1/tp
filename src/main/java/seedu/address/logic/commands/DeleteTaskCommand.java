@@ -55,11 +55,10 @@ public class DeleteTaskCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteTaskCommand)) {
+        if (!(other instanceof DeleteTaskCommand otherDeleteTaskCommand)) {
             return false;
         }
 
-        DeleteTaskCommand otherDeleteTaskCommand = (DeleteTaskCommand) other;
         return targetIndex.equals(otherDeleteTaskCommand.targetIndex);
     }
 
