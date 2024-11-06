@@ -10,13 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Birthday;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Frequency;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +27,7 @@ class JsonAdaptedPerson {
     private final String birthday;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String hasPaid;
+    private final String lastPaidDate;
     private final String frequency;
 
     /**
@@ -42,7 +37,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("frequency") String frequency) {
+            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("lastPaidDate") String lastPaidDate,
+            @JsonProperty("frequency") String frequency) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,6 +48,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.hasPaid = hasPaid;
+        this.lastPaidDate = lastPaidDate;
         this.frequency = frequency;
     }
 
@@ -68,6 +65,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         hasPaid = source.getHasPaid().toString();
+        lastPaidDate = source.getLastPaidDate().value.toString();
         frequency = source.getFrequency().value;
     }
 
@@ -131,6 +129,15 @@ class JsonAdaptedPerson {
 
         Boolean modelHasPaid = hasPaid.equals("true");
 
+        if (lastPaidDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LastPaidDate.class.getSimpleName()));
+        }
+        if (!LastPaidDate.isValidDate(lastPaidDate)) {
+            throw new IllegalValueException(LastPaidDate.MESSAGE_CONSTRAINTS);
+        }
+        final LastPaidDate modelLastPaidDate = new LastPaidDate(lastPaidDate);
+
         if (frequency == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Frequency.class.getSimpleName()));
@@ -141,7 +148,7 @@ class JsonAdaptedPerson {
         final Frequency modelFrequency = new Frequency(frequency);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday,
-                modelTags, modelHasPaid, modelFrequency);
+                modelTags, modelHasPaid, modelLastPaidDate, modelFrequency);
     }
 
 }
