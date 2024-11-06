@@ -24,6 +24,10 @@ public class Messages {
             "Cannot mark attendance for contact that is not a member. "
                     + "Remove non-member contact from the list and try again.";
     public static final String MESSAGE_NO_ADDITIONAL_PARAMS = "Warning: %1$s command takes in no additional parameters";
+    public static final String MESSAGE_INVALID_FAVOURITE_LABEL = "Invalid format: "
+            + "'f/' should not be followed by any other characters.";
+    public static final String MESSAGE_INVALID_NOT_FAVOURITE_LABEL = "Invalid format: "
+            + "'nf/' should not be followed by any other characters.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

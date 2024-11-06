@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FAVOURITE_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -36,6 +37,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (argumentMultimap.getValue(PREFIX_FAVOURITE).isPresent()
+                && !argumentMultimap.getAllValues(PREFIX_FAVOURITE).get(0).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FAVOURITE_LABEL);
         }
 
         List<String> nameKeywords = argumentMultimap.getAllValues(PREFIX_NAME);

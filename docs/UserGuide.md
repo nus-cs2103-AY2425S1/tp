@@ -118,23 +118,63 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Search for contact(s) whose contact details satisfy either of the following:
+1. Name contains any of the given name keyword(s)
+2. Has a role stated by any of the role keyword(s)
+3. Telegram handle which matches exactly with any of the given telegram keyword(s)
+4. Is a favourite contact
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/name1] [r/role1] [t/telegram1] [f/] ... [MORE KEYWORDS WITH ITS PREFIX]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+#### By name: `find [n/name] ...`
+
+Search for contact(s) whose name contain any of the given keywords.
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords matters. e.g. `Hans Bo` will not match `Bo Hans`.
+* The keyword(s) provided does not have to be a full word. e.g. `melia` will match `Amelia`.
+* The keyword(s) provided can span across multiple words. e.g. `melia dan` will match `Amelia Danger`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `aniel` will return `Daniel`, `Anielle`.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Example:
+* `find n/john` returns `John Doe`, `John`, `Bob Johnson`<br>
+  ![result for 'find n/john'](images/findJohnDoeJohnBobJohnson.png)
+
+#### By role: `find [r/role] ...`
+
+Search for contact(s) who has a role that matches any of the role keywords.
+
+* The search is case-insensitive. e.g `member` will match `MEMBER`.
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `John` is both an `exco` and `member`, `find r/member` returns `John`.
+
+Example:
+* `find r/exco` returns `Michael` who has the role `exco`<br>
+  ![result for 'find r/exco'](images/findExcoResult.png)
+
+#### By telegram: `find [t/telegram] ...`
+
+Search for contact(s) who has a telegram handle that matches exactly with any of the telegram keywords.
+
+* The search is case-insensitive. e.g `david` will match `DAVID`.
+* Contacts will need to match the telegram keywords exactly (case-insensitive) to be searched successfully.
+
+Example:
+* `find t/eveadams` returns `Eve Adams` who has a telegram handle `eveadams`<br>
+  ![result for 'find t/eveadams'](images/findeveadamsResult.png)
+
+#### By favourite: `find f/`
+
+Search for favourite contact(s).
+
+Example:
+* `find f/` returns all 4 favourite contacts<br>
+  ![result for 'find f/'](images/findFavouriteResult.png)
+
+Composing all 4 types of search will give an `OR` search, a contact that has at least one matching criteria will be returned.
 
 ### Deleting a person : `delete`
 
