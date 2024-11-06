@@ -345,9 +345,9 @@ This diagram shows the main actor (Management Staff) and their interactions with
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
 * **MSS**: Main Success Scenario, the primary flow of events in a use case.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -363,33 +363,117 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file to launch VolunSync. <br/>
+   Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
+   <br/><img src="images/ui.png" width="400" />
+
+   3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start) 
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file. <br/>
+   Expected: The most recent window size and location should be retained.
 
-3. _{ more test cases …​ }_
+3. Exiting the app
 
-### Deleting a person
+   1. Click the close button in the top right corner of the window or using the `exit` command.<br/>
+    Expected: The application should close without any errors.
 
-1. Deleting a person while all persons are being shown
+   2. Upon re-launching the application, the window should appear in the same size and location as when the app was last closed.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding an event
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Adding an event while all events are being shown
 
-   3. Test case: `delete 0`<br>
+    1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
+
+    2. Test case: `/e new n/ Sail the Seven Seas s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ Changi Beach des/ on board Queen Ann's Revenge`<br>
+       Expected: The new event is added to the end of the list. The status message should reflect the successful creation of the event.
+
+    3. Test case: `/e new`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect add commands to try: `new`, `/e new [missing fields]`, `...`, where missing fields represents user inputs with some fields (e.g. `n/`, `d/`) missing or left empty.<br>
+       Expected: Similar to previous.
+
+### Adding a volunteer
+
+1. Adding an volunteer while all events are being shown
+
+    1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+
+    2. Test case: `/v new n/ Aramado Salazar p/ 91234567 em/ getjaggusbarrow@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`<br>
+       Expected: The new volunteer is added to the end of the list. The status message should reflect the successful creation of the volunteer.
+
+    3. Test case: `/v new`<br>
+       Expected: No volunteer is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect add commands to try: `new`, `/v new [missing fields]`, `...`, where missing fields represents user inputs with some fields (e.g. `n/`, `d/`) missing or left empty.<br>
+       Expected: Similar to previous.
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
+
+    2. Test case: `/e del 1`<br>
+       Expected: First event is deleted from the list. The status message should reflect the successful deletion of the event.
+
+    3. Test case: `/e del 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `del 1`, `/e del x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Deleting a volunteer
+
+1. Deleting a volunteer while all volunteers are being shown
+
+   1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+
+   2. Test case: `/v del 1`<br>
+      Expected: First volunteer is deleted from the list. The status message should reflect the successful deletion of the volunteer.
+
+   3. Test case: `/v del 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `del 1`, `/v del x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+### Assigning a volunteer to an event
+
+1. Assigning a volunteer to an event while all volunteers and events are being shown
+
+   1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
+   
+   2. Test case: `assign e/ 1 v/ 1`<br>
+       Expected: The volunteer is assigned to the event. The status message should reflect the successful assignment of the volunteer to the event. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
+       ![Assign Volunteer To Event](images/AssignVolunteerToEvent.png)\
+   
+   3. Test case: `assign e/ 1 v/ 0`<br>
+         Expected: The volunteer is not assigned to the event. Error details remains the same. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
+
+    4. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
+       Expected: Similar to previous.
+
+### Un-assigning a volunteer from an event
+
+1. Un-assigning a volunteer from an event while all volunteers and events are being shown
+
+    1. Prerequisites: LIst all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
+
+    2. Test case: `unassign e/ 1 v/ 1`<br>
+       Expected: The volunteer is unassigned from the event. The status message should reflect the successful unassignment of the volunteer from the event. The event should be removed from the list of events of the volunteer, and the volunteer should be removed from the list of volunteers of the event as shown below.<br/>
+       ![Unassign Volunteer From Event](images/UnassignVolunteerFromEvent.png)
+
+   3. Test case: `unassign e/ 1 v/ 0`<br>
+      Expected: The volunteer is not assigned to the event. Error details remains the same. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
+
+   4. Other incorrect assign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
