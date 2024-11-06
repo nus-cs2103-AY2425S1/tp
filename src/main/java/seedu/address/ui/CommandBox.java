@@ -90,6 +90,28 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Returns true if the command input is a sold or bought command.
+     */
+    public boolean isSoldOrBoughtCommand(String input) {
+        return (input.contains("sold ") && input.contains(" ap/"))
+                || (input.contains("bought ") && input.contains(" ap/"));
+    }
+
+    /**
+     * Returns the tag content that exceeds the length limit.
+     */
+    public String moreThanTagLengthLimit(ArrayList<String> tagContents) {
+        assert !tagContents.isEmpty() : "tagContents should not be empty here";
+        for (String tagContent : tagContents) {
+            assert !tagContent.isEmpty() : "tagContent should not be empty here";
+            if (tagContent.length() > 10) {
+                return tagContent;
+            }
+        }
+        return "";
+    }
+
+    /**
      * Highlights the error location in the command box.
      */
     public void highlightErrorLocation(Exception e, String input) {
@@ -142,8 +164,7 @@ public class CommandBox extends UiPart<Region> {
             errorIndexStart = commandText.indexOf(" ") + 1;
             break;
         case MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX:
-            if ((commandText.contains("sold ") && commandText.contains(" ap/"))
-                    || (commandText.contains("bought ") && commandText.contains(" ap/"))) {
+            if (isSoldOrBoughtCommand(commandText)) {
                 errorIndexStart = commandText.substring(0, commandText.trim().lastIndexOf(" "))
                         .trim().lastIndexOf(" ") + 1;
             } else {
@@ -169,15 +190,10 @@ public class CommandBox extends UiPart<Region> {
         case AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT:
             assert !tagContents.isEmpty() : "tagContents should not be empty here";
             isTagError = true;
-            for (String tagContent : tagContents) {
-                assert !tagContent.isEmpty() : "tagContent should not be empty here";
-                if (tagContent.length() > 10) {
-                    // Highlight the tag that exceeds the length limit
-                    errorIndexStart = commandText.indexOf(tagContent) - 2;
-                    tagLength = tagContent.length();
-                    break;
-                }
-            }
+            // Highlight the tag that exceeds the length limit
+            String tagContent = moreThanTagLengthLimit(tagContents);
+            errorIndexStart = commandText.indexOf(tagContent) - 2;
+            tagLength = tagContent.length();
             break;
         case MESSAGE_UNKNOWN_COMMAND:
             break;

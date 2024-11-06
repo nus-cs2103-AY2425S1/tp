@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTUAL_PRICE;
+
+import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.BoughtPropertyCommand;
@@ -23,18 +27,28 @@ public class BoughtPropertyCommandParser implements Parser<BoughtPropertyCommand
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ACTUAL_PRICE);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
+
         Index personIndex;
         Index propertyIndex;
+        ArrayList<String> parameters = ParserUtil.getParametersList(argMultimap.getPreamble());
 
-        try {
-            personIndex = ParserUtil.parsePersonIndex(argMultimap.getPreamble());
-            propertyIndex = ParserUtil.parsePropertyIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (parameters.size() != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    BoughtPropertyCommand.MESSAGE_USAGE));
+        }
+        try {
+            personIndex = ParserUtil.parseIndex(parameters.get(0));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                     BoughtPropertyCommand.MESSAGE_USAGE), pe);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
+        try {
+            propertyIndex = ParserUtil.parseIndex(parameters.get(1));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX,
+                    BoughtPropertyCommand.MESSAGE_USAGE), pe);
+        }
 
         if (!argMultimap.getValue(PREFIX_ACTUAL_PRICE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX;
+
+import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeletePropertyToSellCommand;
@@ -22,12 +26,22 @@ public class DeletePropertyToSellCommandParser implements Parser<DeletePropertyT
         requireNonNull(args);
         Index personIndex;
         Index propertyIndex;
+        ArrayList<String> parameters = ParserUtil.getParametersList(args);
 
-        try {
-            personIndex = ParserUtil.parsePersonIndex(args);
-            propertyIndex = ParserUtil.parsePropertyIndex(args);
-        } catch (ParseException pe) {
+        if (parameters.size() != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeletePropertyToSellCommand.MESSAGE_USAGE));
+        }
+        try {
+            personIndex = ParserUtil.parseIndex(parameters.get(0));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    DeletePropertyToSellCommand.MESSAGE_USAGE), pe);
+        }
+        try {
+            propertyIndex = ParserUtil.parseIndex(parameters.get(1));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX,
                     DeletePropertyToSellCommand.MESSAGE_USAGE), pe);
         }
         EditPersonPropertyToSellDescriptor editPersonPropertyDescriptor = new EditPersonPropertyToSellDescriptor();

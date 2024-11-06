@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -32,10 +33,10 @@ public class DeletePropertyToBuyCommandParserTest {
     @Test
     public void parse_invalidParts_failure() {
         // wrong input specified, should be int
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // wrong input specified, should be int
-        assertParseFailure(parser, "a b", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "a b", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
