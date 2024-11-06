@@ -108,8 +108,7 @@ public class AddressBookParserTest {
 
         // Create the user input string for the edit command
         String userInput = EditCommand.COMMAND_WORD + " n/" + person.getName().fullName
-                + " p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111 j/Caterer "
-                + PREFIX_TAG + VALID_TAG_WEDDING3;
+                + " p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111 j/Caterer";
 
         // Parse the command using the parser
         EditCommand command = (EditCommand) parser.parseCommand(userInput);
