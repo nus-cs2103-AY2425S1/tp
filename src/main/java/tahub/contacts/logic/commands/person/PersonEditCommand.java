@@ -3,6 +3,7 @@ package tahub.contacts.logic.commands.person;
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
@@ -15,7 +16,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.CollectionUtil;
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
@@ -25,6 +25,7 @@ import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
@@ -38,33 +39,33 @@ public class PersonEditCommand extends Command {
     public static final String COMMAND_WORD = "person-edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the matriculation number. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: MATRICULATION_NUMBER (must be matriculation number of an existing student) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + PREFIX_MATRICULATION_NUMBER + "A1234567M "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
-    private final Index index;
+    private final MatriculationNumber matriculationNumber;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param matriculationNumber of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public PersonEditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public PersonEditCommand(MatriculationNumber matriculationNumber, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(matriculationNumber);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.matriculationNumber = matriculationNumber;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -73,11 +74,11 @@ public class PersonEditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (!containsStudentInPersonList(lastShownList, matriculationNumber)) {
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = getStudentFromPersonList(lastShownList, matriculationNumber);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.setPerson(personToEdit, editedPerson);
@@ -102,6 +103,16 @@ public class PersonEditCommand extends Command {
                 updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
+    private static boolean containsStudentInPersonList(List<Person> personList,
+                                                       MatriculationNumber matriculationNumber) {
+        return personList.stream().anyMatch(person -> person.getMatricNumber().equals(matriculationNumber));
+    }
+
+    private static Person getStudentFromPersonList(List<Person> personList, MatriculationNumber matriculationNumber) {
+        return personList.stream().filter(person -> person.getMatricNumber()
+                .equals(matriculationNumber)).findFirst().get();
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -115,14 +126,14 @@ public class PersonEditCommand extends Command {
         }
 
         PersonEditCommand otherPersonEditCommand = (PersonEditCommand) other;
-        return index.equals(otherPersonEditCommand.index)
+        return matriculationNumber.equals(otherPersonEditCommand.matriculationNumber)
                 && editPersonDescriptor.equals(otherPersonEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("matriculationNumber", matriculationNumber)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
