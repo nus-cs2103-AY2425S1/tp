@@ -44,7 +44,7 @@ class JsonAdaptedProject {
      */
     public JsonAdaptedProject(Project source) {
         name = source.getName().fullName;
-        id = source.getId().fullId;
+        id = source.getId().value;
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
