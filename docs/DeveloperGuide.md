@@ -330,9 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### UC6: View Goods
 
--Precondition: -
--Postcondition: Goods information is displayed.
--Actors: User
+- Precondition: -
+- Postcondition: Goods information is displayed.
+- Actors: User
 
 ### MSS
 
