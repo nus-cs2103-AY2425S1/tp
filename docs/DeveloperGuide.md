@@ -667,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-# Glossary
+### Glossary
 
 - **Application Status**:
     - **PENDING**: The internship application is currently in progress.
