@@ -19,6 +19,7 @@ class JsonAdaptedAssignment {
     private final int maxScore;
     private final int score;
     private final boolean hasSubmitted;
+    private final boolean isGraded;
 
     /**
      * Constructs a {@code JsonAdaptedAssignment} with the given assignment details.
@@ -27,11 +28,13 @@ class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(@JsonProperty("assignmentName") String assignmentName,
                                  @JsonProperty("maxScore") int maxScore,
                                  @JsonProperty("score") int score,
-                                 @JsonProperty("hasSubmitted") boolean hasSubmitted) {
+                                 @JsonProperty("hasSubmitted") boolean hasSubmitted,
+                                 @JsonProperty("isGraded") boolean isGraded) {
         this.assignmentName = assignmentName;
         this.maxScore = maxScore;
         this.score = score;
         this.hasSubmitted = hasSubmitted;
+        this.isGraded = isGraded;
     }
 
     /**
@@ -42,6 +45,7 @@ class JsonAdaptedAssignment {
         this.maxScore = source.getMaxScore();
         this.score = source.getScore();
         this.hasSubmitted = source.getHasSubmitted();
+        this.isGraded = source.getIsGraded();
     }
 
     /**
@@ -65,6 +69,7 @@ class JsonAdaptedAssignment {
         Assignment assignment = new Assignment(modelAssignmentName, maxScore);
         assignment.setScore(score);
         assignment.setHasSubmitted(hasSubmitted);
+        assignment.setIsGraded(isGraded);
         return assignment;
     }
 }
