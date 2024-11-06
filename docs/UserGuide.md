@@ -64,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Opens a new window that displays a list of all available commands along with their usage instructions.
 
 ![help message](images/helpMessage.png)
 
@@ -180,15 +180,16 @@ Composing all 4 types of search will give an `OR` search, a contact that has at 
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `d INDEX`
+- Deletes the person at the specified `INDEX`.
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Valid `INDEX` Requirements:
+- The index must refer to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/alex` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Listing all members for attendance : `attendance`
 
@@ -266,6 +267,50 @@ Exits the program.
 
 Format: `exit`
 
+### Switching a profile : `switch`
+The `switch` command allows you to change the current session to a specified profile.
+- If a valid profile name is provided, the session will switch to that profile.
+  - If the profile already exists, it will switch to the existing profile.
+  - If the profile does not exist, a new profile with that name will be created.
+
+
+- If no profile name is provided (empty input) and multiple profiles exist, the command will display a list of
+available profiles to switch to.
+- Attempting to switch to the currently active profile will not perform a switch.
+
+Format: `switch PROFILE` or `sw PROFILE`
+  - `switch` or its alias `sw` switches the session to the profile specified by `PROFILE`.
+
+Valid `PROFILE` Requirements: 
+  - Must be between 1 and 30 characters.
+  - Can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).
+  - `Profile` names are **case-insensitive** and treated as lowercase.
+    - For example, `ALICE` and `alice` are considered the same profile.
+
+Examples:
+  - `switch john-doe` switches to a profile named 'john-doe'
+  - `sw ALICE` switches to a profile named 'alice'
+  - `switch` lists all available profiles that you can switch to, if they exist.
+
+### Deleting a profile: `deleteProfile`
+
+The `deleteProfile` command removes an existing profile from the system.
+  
+Format: `deleteProfile PROFILE` or `delp PROFILE`
+- `deleteProfile` or its alias `delp` deletes the specified `PROFILE` 
+
+Valid `PROFILE` Requirements:
+- Must meet all requirements from the [`switch`](#switching-a-profile--switch) command.
+- Must be an existing profile
+- Must not be the currently active profile
+
+Examples:
+- Assuming your current profile is 'addressbook' then 
+    - `deleteProfile addressbook` is not allowed because 'addressbook' is the active profile.
+    - `sw alice` switches the current profile to 'alice'
+    - `delp addressbook` deletes the 'addressbook' profile after switching to 'alice'
+
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -306,8 +351,10 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Profile** | `deleteProfile PROFILE` <br> e.g. `deleteProfile alice`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Switch** | `switch PROFILE` <br> e.g. `switch alice`
 **List** | `list`
 **Help** | `help`
 **Attendance** | `attendance` or `atd`
