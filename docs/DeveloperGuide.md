@@ -21,7 +21,7 @@ title: Developer Guide
     3. [Edit Person Feature](#edit-person-feature)
     4. [List Feature](#list-feature)
     5. [Find Person Feature](#find-person-feature)
-    6. [Filter Person Feature](#filter-person-feature)
+    6. [Filter Status Feature](#filter-status-feature)
     7. [View Person Feature](#view-person-feature)
     8. [Summary Feature](#summary-feature)
     9. [Help Feature](#help-feature)
@@ -208,7 +208,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `HRPlatformParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `HRPlatformParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HRPlatformParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -317,7 +317,7 @@ The `delete` command allows users to delete a `Person` from the `HRPlatform`.
 - `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `DeleteCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -361,7 +361,7 @@ The `edit` command allows users to edit a `Person` in the `HRPlatform`.
 - `LogicManager`: Invokes the `EditCommand` to execute the edit operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `EditCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -413,7 +413,7 @@ To help you understand how the `list` command works, here is a list of steps ill
 We will be using the user input `list` as an example.
 
 1. The user executes the command `list`, intending to list all persons in the address book.
-2. The `AddressBookParser` interprets the input and creates a `ListCommand` object.
+2. The `HRPlatformParser` interprets the input and creates a `ListCommand` object.
 3. The `LogicManager` invokes the execute method of `ListCommand`.
 4. The execute method of `ListCommand` calls `updateFilteredPersonList` in the `Model` to apply a filter to show all persons.
 5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
@@ -446,7 +446,7 @@ The `find` command allows users to find specific people in the `HRPlatform` base
 - `LogicManager`: Invokes the `FindCommand` to execute the find operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Predicate`: Represents the keyword for finding persons whose name contains any of the argument keyword in TalentSG.
-- `AddressBookParser`: Creates an `FindCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `FindCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -473,7 +473,7 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 ---
 
-### Filter Person Feature
+### Filter Status Feature
 
 #### **Command Feature**
 
@@ -481,15 +481,15 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 #### **Command Feature Purpose**
 
-The `filter` command allows users to filter specific people in the `HRPlatform` based on their application status.
+The `filter` command allows users to filter people in the `HRPlatform` based on their application status.
 
 #### Key Components
-- `FilterCommand`: Executes the filter operation based on the user's input.
-- `FilterCommandParser`: Parses user input to create an `FilterCommand` object.
-- `LogicManager`: Invokes the `FilterCommand` to execute the filter operation.
+- `FilterStatusCommand`: Executes the filter operation based on the user's input.
+- `FilterStatusCommandParser`: Parses user input to create an `FilterStatusCommand` object.
+- `LogicManager`: Invokes the `FilterStatusCommand` to execute the filter operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Predicate`: Represents the status for finding persons whose status matches in TalentSG.
-- `HRPlatformParser`: Creates an `FilterCommand` object based on the user input.
+- `HRPlatformParser`: Creates an `FilterStatusCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -498,21 +498,21 @@ To help you understand how the `filter` command works, here is a list of steps i
 We will be using the user input `filter Interviewed` as an example.
 
 1. The user executes the command `filter Interviewed`, intending to find all persons whose name contains the keyword.
-2. The `FilterCommandParser` interprets the input.
-3. An `FilterCommand` object is created.
+2. The `FilterStatusCommandParser` interprets the input.
+3. An `FilterStatusCommand` object is created.
 4. The `LogicManager` invokes the execute method of FindCommand.
-5. The execute method of `FilterCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
-6. The execute method of `FilterCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
+5. The execute method of `FilterStatusCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
+6. The execute method of `FilterStatusCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FilterStatusCommand`.
 7. The UI reflects this updated filtered `Person` list.
 
 :information_source: **Note**:
 
 - At step 2, if an invalid status is detected after `filter` (e.g. `filter Helloo`), an error will be shown and the sequence of action is terminated.
 
-#### `FindCommand` Implementation Sequence Diagram
+#### `FilterStatusCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
-<img src="images/FilterCommandSequenceDiagram.png" width="800" />
+<img src="images/FilterStatusCommandSequenceDiagram.png" width="800" />
 
 ---
 
@@ -550,7 +550,7 @@ We will be using the user input `delete 2` as an example.
 
 - At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
 
-#### `View Command` Implementation Sequence Diagram
+#### `ViewCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
 
 <img src="images/ViewCommandSequenceDiagram.png" width="800" />
@@ -668,8 +668,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | recruiter         | delete candidate profiles                                         | remove candidates who are no longer considered for positions                |
 | `* * *` | HR professional   | view a list of all candidates                                     | easily access any candidate’s details on demand                             |
 | `* * *` | recruiter         | search for candidates by specific criteria (e.g., skills)         | quickly find suitable candidates for various roles                          |
-| `* * *` | HR professional   | schedule and manage interviews                                    | organise the recruitment process efficiently                                |
-| `* * *` | recruiter         | set reminders for interviews                                      | ensure no interview is missed                                               |
 | `* *`  | recruiter         | track the status of a candidate through different recruitment stages | maintain an organised overview of the recruitment pipeline                  |
 | `* *`  | HR professional   | import candidate data from external sources                       | streamline the process of adding new candidates                             |
 | `* *`  | recruiter         | export data on candidates                                         | prepare reports or share data with colleagues                               |
@@ -1143,6 +1141,8 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
+
+We intend to accommodate interview scheduling in the future.
 
 ---
 
