@@ -692,7 +692,7 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `del-car 0`<br>
          **Expected:** No car is deleted. Error details shown in the status message.
    
-   1. **Other incorrect delete commands to try:** `del-client`, `del-client x`, `...` (where x is larger than the list size)<br>
+   1. **Other incorrect delete commands to try:** `del-car`, `del-car x`, `...` (where x is larger than the list size)<br>
          **Expected:** Similar to previous.
    
 2. **Deleting a client with a car**
@@ -704,7 +704,7 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `del-car 0`<br>
       **Expected:** No car is deleted. Error details shown in the status message.
    
-   1. **Other incorrect delete commands to try:** `del-client`, `del-client x`, `...` (where x is larger than the list size)<br>
+   1. **Other incorrect delete commands to try:** `del-car`, `del-car x`, `...` (where x is larger than the list size)<br>
       **Expected:** Similar to previous.
 
 3. **Attempting to delete a client with a checked-in car**
@@ -716,7 +716,7 @@ testers are expected to do more *exploratory* testing.
     1. **Test case:** `del-car 0`<br>
        **Expected:** No car is deleted. Error details shown in the status message.
    
-    1. **Other incorrect delete commands to try:** `del-client`, `del-client x`, `...` (where x is larger than the list size)<br>
+    1. **Other incorrect delete commands to try:** `del-car`, `del-car x`, `...` (where x is larger than the list size)<br>
        **Expected:** Similar to previous.
 
 ### Checking in/ out a Client
