@@ -23,7 +23,6 @@ Given below are my contributions to the project.
 1. Initiated in the documentation updates (Developer Guide, User Guide, README)
 2. Added all milestones and issues with relation to MVP
 2. Made Releases for v1.3 and v1.4 along with release notes formatting
-    
 
 * **Enhancements to existing features**:
 1. Enhanced `find` Function: Improved the search functionality with prefix matching to enable more precise and faster lookups.
@@ -33,7 +32,6 @@ Given below are my contributions to the project.
 1. Authored the introduction section, Quick Start section, shortcut features, filter feature and overall formatting of the User Guide, ensuring it was accessible and informative for new users
 2. Added UML diagram for addShortCutCommand, DelShortCutCommand, ListShortCutCommand, FilterCommand
 3. Added majority of User stories, NFR, Glossary into Developer Guide
-    
 
 * **Community**:
 1. Reviewed Pull Requests
@@ -44,5 +42,3 @@ Given below are my contributions to the project.
 1. Development: Java, JavaFX 
 2. Version Control: Git, GitHub 
 3. Testing: JUnit for automated testing; manual alpha testing
-   
-

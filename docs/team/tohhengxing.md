@@ -30,5 +30,3 @@ Given below are my contributions to the project.
     * Managed deadlines for team
 
 * **Tools**:
-   
-

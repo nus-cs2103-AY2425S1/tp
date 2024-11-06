@@ -532,7 +532,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. Manager requests to add customer
 2. AddressBook adds the person
-
     Use Case Ends
 
 **Extension**
@@ -551,7 +550,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AddressBook shows a list of customers
 3. Manager requests to search for customer by name/phone number
 4. AddressBook shows the customer
-
    Use Case Ends 
 
 **Extension**
@@ -590,7 +588,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Manager requests to add shortcut
 2. AddressBook adds the shortcut with alias and tag name to UniqueShortcut list
-    
     Use Case ends
 
 **Extension**
@@ -620,12 +617,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. 	Command Response Time: All operations (add, delete, search) should respond within 1 second 
-3. Bulk Operations: Bulk actions (e.g., adding multiple customers) should handle up to 100 records and complete within 2 seconds
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Error Handling: Meaningful error messages should be provided for invalid inputs (e.g., invalid email or phone number).
-   •	Command Documentation: Provide help text for each command and clear usage instructions.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed. 
+2. Command Response Time: All operations (add, delete, search) should respond within 1 second 
+3. Bulk Operations: Bulk actions (e.g., adding multiple customers) should handle up to 100 records and complete within 2 seconds 
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Error Handling: Meaningful error messages should be provided for invalid inputs (e.g., invalid email or phone number). 
+5. Command Documentation: Provide help text for each command and clear usage instructions.
 
 ### Glossary
 
