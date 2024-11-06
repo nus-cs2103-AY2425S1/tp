@@ -18,10 +18,14 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Client {
+
+    private static int numOfClients = 0;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final int id;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -36,6 +40,8 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
+        this.id = numOfClients;
+        numOfClients++;
         this.rentalInformationList.addAll(rentalInformationList);
     }
 
@@ -48,6 +54,8 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
+        this.id = numOfClients;
+        numOfClients++;
     }
 
     public Name getName() {
@@ -60,6 +68,10 @@ public class Client {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public List<RentalInformation> getRentalInformation() {
