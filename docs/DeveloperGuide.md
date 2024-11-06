@@ -221,13 +221,15 @@ The activity diagram shows the general sequence of steps when a user interacts w
 
 <br>
 
-## **Implementation of main features**
+## **Implementation of main features (using entity commands)**
 
-## **Implementation of Entity Commands**
-Entity commands include `add`, `delete`, `find`, `clear` commands.
+Entity commands include `add`, `delete`, `find`, `clear`, `edit`, and `list` commands.
 So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
-**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity `person` or `appt`. This is followed by appropriate arguments and prefixes.
+<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
+- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand`. There are two entities, **person** and **appointment**, on which operations can be performed.
+
+**Step 1**. The user types an `xyz` command in the `CommandBox`, followed by the type of entity, `person` or `appt`. This is followed by appropriate arguments and prefixes.
 
 
 **Step 2**. The command is passed to the `LogicManager`. `LogicManager` then calls the `AddressBookParser::parseCommand` method to parse the command.
@@ -238,13 +240,52 @@ So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
 **Step 4**. The `LogicManager` calls the `xyzCommand : execute` method which creates a `CommandResult` Object.
 
+
 **Step 5**. The `CommandResult` object is returned to the `LogicManager`.
 
-<puml src="diagrams/EntityCommandSequenceDiagram.puml" alt="EntityCommandSequenceDiagram"></puml>
-- The entity referred in `FindEntityCommand` etc, refers to `FindPersonCommand` and `FindAppointmentCommand` because we have two entities called person and appointment on which operations can be performed.
 
+### Edit Person feature
+**Aspect: Check if the person with `personId` exists before editing**
+- This is to ensure no unwanted errors occur while editing the person and helps to maintain data integrity.
 
-#### Find Appointment Command
+**Aspect: Deleting a person should also remove appointments linked to the person**
+
+- **Alternative 1 (Current choice):** Deleting a person will also remove an appointments with the `personId` of that person.
+  - Pros: This prevents the case where appointments are linked to personIds that are non-existent.
+- **Alternative 2:** Deleting a person will not remove any appointments with the `personId` of that person.
+  - Cons: This assumes the user would delete the appointments linked to the deleted person's `personId`. However, the user might forget to do so. 
+  
+<br>
+
+### Clear Person feature
+**Aspect: Should the `clear person` command also delete all the appointments**
+- **Alternative 1 (current choice):** The `clear person` command should also clear all appointments.
+  - Pros: This prevents the case where the appointments are linked to deleted personIds which do not exist. Hence, this prevents confusion for users.
+- **Alternative 2 :** The `clear person` command does not clear all appointments.
+  - Cons: This assumes the user will always run `clear appt` after running `clear person`
+  
+<br>
+
+### Add appointment feature
+**Aspect: Should we implement as `addAppt` or `add appt`**
+- **Alternative 1 (Current choice):** Implement the add appointment feature as `add appt`
+  - Pros: Allows us to use the existing infrastructure, just have to add code to detect whether the entity is `appt` or not.
+  - Cons: Adds extra code to the file since more arguments need to be parsed, hence there is a chance of SLAP being violated.
+- **Alternative 2:** Implement the add appointment function as `addAppt`
+  - Pros: Creates a separate command, so the implementations of `add person` and `add appointment` will be separated from each other.
+  - Cons: Implementation requires a different parser, so we will be adding a huge amount of additional lines of code.
+Later, we decided to you the same infrastructure for all the command types.
+
+<br>
+
+### Edit Appointment feature
+
+**Aspect: Check if the appointment with appointment id exists before editing**
+- This is to ensure no unwanted errors occur while editing the appointment.
+
+<br>
+
+### Find Appointment feature
 **Aspect: How to show find appointment.**
 
 - **Alternative 1 (Current choice)**: Find the information based on what the user has provided (name, date).
@@ -257,27 +298,9 @@ So `xyzCommand` can be `addPersonCommand`, `addCommandParser` and so on.
 
 <br>
 
-### List appointment feature
+### Clear Appointment feature
 
-#### Implementation
-
-**Aspect**: How to show list 
-
-- **Alternative 1 (Current choice)**: Print them out individually on the listpanel
-  - Pros: Easy to scroll through
-  - Cons: Might look cluttered to some users
-
-
-#### Design considerations
-
-<br>
-
-### Clear appointment feature
-
-
-#### Design considerations
-
-**Aspect**: How to show list
+**Aspect**: How appointments are cleared
 
 - **Alternative 1 (Current choice)**: Replace the appointment book with a new appointment book.
 
@@ -441,10 +464,13 @@ Context: The `ArgumentMultimap` is used across different entities.
         * More code duplication, as there are shared prefixes
         * Might be harder to track shared prefixes, causing confusion to users
 
+<br>
 
-## **Appendix: Requirements**
+--------------------------------------------------------------------------------------------------------------------
 
 <br>
+
+## **Appendix: Requirements**
 
 ### Product scope
 
@@ -955,6 +981,10 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 <br>
 
