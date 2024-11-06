@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Ward {
     public static final String MESSAGE_CONSTRAINTS =
-            "WARD field cannot be an empty text";
-    public static final String VALIDATION_REGEX = ".+";
+            "WARD field must have at least 1 alphanumeric character and has a character limit of 50.";
+    public static final String VALIDATION_REGEX = "^(?=.*[A-Za-z0-9]).{1,50}$";
     public final String value;
 
     /**
