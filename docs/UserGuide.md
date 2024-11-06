@@ -979,38 +979,39 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     - **Description:** Opens a chatbot that answers basic queries.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Valid Greeting
       >
       > **Input**:
-      >
-      > **Output**:
-      >
+      ![validGreeting.png](images%2FvalidGreeting.png)
+      **Output**:
+      ![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
       > ---
       >
-      > **Use Case #2**:
+      > **Use Case #2**: Valid Query
       >
       > **Input**:
-      >
-      > **Output**:
-      >
+      ![validQuery.png](images%2FvalidQuery.png)
+       **Output**:
+      ![outputFromValidQuery.png](images%2FoutputFromValidQuery.png)
       > ---
       >
-      > **Use Case #3**:
+      > **Use Case #3**: Valid Farewell
       >
       > **Input**:
-      >
-      > **Output**:
-      >
+      ![validGoodbye.png](images%2FvalidGoodbye.png)
+      **Output**:
+      ![outputFromValidGoodbye.png](images%2FoutputFromValidGoodbye.png)
       > ---
 
-    - **Failed Execution:**
+      - **Failed Execution:**
       > ---
-      > **Use Case #1**:
+      > **Use Case #1**: Invalid Query
       >
       > **Input**:
+      ![invalidInput.png](images%2FinvalidInput.png)
       >
       > **Output**:
-      >
+      ![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
       > ---
 
 
