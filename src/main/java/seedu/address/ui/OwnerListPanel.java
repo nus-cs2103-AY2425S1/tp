@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -25,8 +26,10 @@ public class OwnerListPanel extends UiPart<Region> {
      */
     public OwnerListPanel(ObservableList<Owner> ownerList) {
         super(FXML);
+        ownerListView.setPlaceholder(new Label("No Owners"));
         ownerListView.setItems(ownerList);
         ownerListView.setCellFactory(listView -> new OwnerListViewCell());
+
     }
 
     /**
