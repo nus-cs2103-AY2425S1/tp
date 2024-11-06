@@ -61,7 +61,7 @@ public class EditAssignmentCommandParserTest {
                 + " " + PREFIX_ASSIGNMENT_INDEX + INDEX_SECOND_STUDENT.getOneBased()
                 + " " + PREFIX_ASSIGNMENT_NAME + VALID_ASSIGNMENT_NAME_MATH
                 + " " + PREFIX_ASSIGNMENT_MAX_SCORE + VALID_MAX_SCORE_MATH;
-
+      
         assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
     }
 

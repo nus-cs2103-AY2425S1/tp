@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 
 public class ViewStudentCommandParserTest {
@@ -20,20 +22,21 @@ public class ViewStudentCommandParserTest {
 
     @Test
     public void parse_missingArg_throwsParseException() {
-        assertParseFailure(parser, "", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // Input is a non-numeric string
+        // EP: Input is a non-numeric string
         assertParseFailure(parser, "a", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input contains special characters
+        // EP: Input contains special characters
         assertParseFailure(parser, "(!12", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input is a floating-point number
+        // EP: Input is a floating-point number
         assertParseFailure(parser, "0.5", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input is a negative number
+        // EP: Input is a negative number
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
-        // Input is zero, which is not a valid index
+        // EP: Input is zero, which is not a valid index
         assertParseFailure(parser, "0", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 }
