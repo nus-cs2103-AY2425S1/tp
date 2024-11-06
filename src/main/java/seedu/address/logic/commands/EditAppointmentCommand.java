@@ -27,7 +27,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Edits the details of an existing apppointment in the appointment book.
+ * Edits the details of an existing appointment in the appointment book.
  */
 public class EditAppointmentCommand extends EditCommand {
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
@@ -51,6 +51,7 @@ public class EditAppointmentCommand extends EditCommand {
 
     /**
      * Creates an EditPersonCommand to add the specified {@code Person}
+     *
      * @param index The index of the appointment to edit.
      * @param editAppointmentDescriptor Details to edit the appointment with.
      */
@@ -60,6 +61,7 @@ public class EditAppointmentCommand extends EditCommand {
 
     /**
      * Returns the message to display when the person ID does not exist.
+     *
      * @return A string indicating that the person ID does not exist.
      */
     protected String getPersonIdDoesNotExistMessage() {
@@ -72,10 +74,9 @@ public class EditAppointmentCommand extends EditCommand {
      * @param model The model to check against.
      * @param entity The entity to verify its existence.
      * @return true if the model contains the specified entity, false otherwise.
-     * @throws CommandException if there is an error during the existence check.
      */
     @Override
-    protected boolean hasEntity(Model model, Object entity) throws CommandException {
+    protected boolean hasEntity(Model model, Object entity) {
         return model.hasAppointment((Appointment) entity);
     }
 
@@ -85,14 +86,13 @@ public class EditAppointmentCommand extends EditCommand {
      * @param model The model that contains the entities.
      * @param editedEntity The entity after the edit.
      * @param entityToEdit The original entity to be edited.
-     * @return true if the edited entity is different from the entity to edit, false otherwise.
-     * @throws CommandException if there is an error during the comparison.
+     * @return true if the edited entity is same as the entity to edit, false otherwise.
      */
     @Override
-    protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
-            throws CommandException {
+    protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit) {
         Appointment entityToEditCasted = (Appointment) entityToEdit;
-        return !(entityToEditCasted.isSameAppointment((Appointment) editedEntity));
+        Appointment editedEntityCasted = (Appointment) editedEntity;
+        return entityToEditCasted.isSameAppointment(editedEntityCasted);
     }
 
     /**
@@ -106,49 +106,43 @@ public class EditAppointmentCommand extends EditCommand {
         return model.getFilteredAppointmentList();
     }
 
+    /**
+     * Edits the entity in the model.
+     *
+     * @param model The model to edit the entity in.
+     * @param editedAppointment The appointment after editing.
+     * @param appointmentToEdit The original appointment to edit.
+     */
     @Override
-    protected void editEntity(
-            Model model,
-            Object editedAppointment,
-            Object appointmentToEdit) throws CommandException {
+    protected void editEntity(Model model, Object editedAppointment, Object appointmentToEdit) {
         model.setAppointment((Appointment) appointmentToEdit, (Appointment) editedAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Appointment} with the details of {@code appointmentToEdit}
+     * edited with {@code editAppointmentDescriptor}.
+     *
+     * @param model The model to create the edited entity in.
+     * @param appointmentToEdit The original appointment to edit.
+     * @param editAppointmentDescriptor The descriptor for editing the appointment.
+     * @return The appointment after editing.
      */
     @Override
     protected Object createEditedEntity(Model model, Object appointmentToEdit,
-            EditEntityDescriptor editAppointmentDescriptor) throws CommandException {
+                                        EditEntityDescriptor editAppointmentDescriptor) throws CommandException {
         assert appointmentToEdit != null;
         EditAppointmentDescriptor editAppointmentDescriptorCasted =
                 (EditAppointmentDescriptor) editAppointmentDescriptor;
         Appointment appointmentToEditCasted = (Appointment) appointmentToEdit;
 
-        int appointmentId = appointmentToEditCasted.getAppointmentId();
-        Optional<Integer> personId = editAppointmentDescriptorCasted.getPersonId();
-        Person updatedPerson = appointmentToEditCasted.getPerson();
-        if (personId.isPresent()) {
-            Optional<Person> person = model.findPerson(personId.get());
-            if (person.isEmpty()) {
-                throw new CommandException(getPersonIdDoesNotExistMessage());
-            } else {
-                updatedPerson = person.get();
-            }
-        }
-
-        AppointmentType updatedAppointmentType =
-                editAppointmentDescriptorCasted.getAppointmentType()
-                        .orElse(appointmentToEditCasted.getAppointmentType());
-        LocalDateTime updatedAppointmentDateTime =
-                editAppointmentDescriptorCasted.getAppointmentDateTime()
-                        .orElse(appointmentToEditCasted.getAppointmentDateTime());
-        Medicine updatedMedicine = editAppointmentDescriptorCasted.getMedicine()
-                .orElse(appointmentToEditCasted.getMedicine());
-        Sickness updatedSickness = editAppointmentDescriptorCasted.getSickness()
-                .orElse(appointmentToEditCasted.getSickness());
+        Person updatedPerson = getUpdatedPerson(model, editAppointmentDescriptorCasted, appointmentToEditCasted);
+        AppointmentType updatedAppointmentType = getUpdatedAppointmentType(
+                editAppointmentDescriptorCasted, appointmentToEditCasted);
+        LocalDateTime updatedAppointmentDateTime = getUpdatedAppointmentDateTime(
+                editAppointmentDescriptorCasted, appointmentToEditCasted);
+        Medicine updatedMedicine = getUpdatedMedicine(editAppointmentDescriptorCasted, appointmentToEditCasted);
+        Sickness updatedSickness = getUpdatedSickness(editAppointmentDescriptorCasted, appointmentToEditCasted);
 
         return new Appointment(
                 updatedAppointmentType,
@@ -156,8 +150,77 @@ public class EditAppointmentCommand extends EditCommand {
                 updatedPerson,
                 updatedSickness,
                 updatedMedicine,
-                appointmentId
+                appointmentToEditCasted.getAppointmentId()
         );
+    }
+
+    /**
+     * Retrieves the updated person from the model.
+     *
+     * @param model The model to retrieve the person from.
+     * @param editAppointmentDescriptorCasted The descriptor for editing the appointment.
+     * @param appointmentToEditCasted The original appointment to edit.
+     * @return The person after editing.
+     */
+    private Person getUpdatedPerson(Model model, EditAppointmentDescriptor editAppointmentDescriptorCasted,
+                                    Appointment appointmentToEditCasted) throws CommandException {
+        Optional<Integer> personId = editAppointmentDescriptorCasted.getPersonId();
+        Person updatedPerson = appointmentToEditCasted.getPerson();
+        if (personId.isPresent()) {
+            updatedPerson = model.findPerson(personId.get())
+                    .orElseThrow(() -> new CommandException(getPersonIdDoesNotExistMessage()));
+        }
+        return updatedPerson;
+    }
+
+    /**
+     * Retrieves the updated appointment type from the model.
+     *
+     * @param editAppointmentDescriptorCasted The descriptor for editing the appointment.
+     * @param appointmentToEditCasted The original appointment to edit.
+     * @return The appointment type after editing.
+     */
+    private AppointmentType getUpdatedAppointmentType(EditAppointmentDescriptor editAppointmentDescriptorCasted,
+                                                      Appointment appointmentToEditCasted) {
+        return editAppointmentDescriptorCasted.getAppointmentType()
+                .orElse(appointmentToEditCasted.getAppointmentType());
+    }
+
+    /**
+     * Retrieves the updated appointment date time from the model.
+     *
+     * @param editAppointmentDescriptorCasted The descriptor for editing the appointment.
+     * @param appointmentToEditCasted The original appointment to edit.
+     * @return The appointment date time after editing.
+     */
+    private LocalDateTime getUpdatedAppointmentDateTime(EditAppointmentDescriptor editAppointmentDescriptorCasted,
+                                                        Appointment appointmentToEditCasted) {
+        return editAppointmentDescriptorCasted.getAppointmentDateTime()
+                .orElse(appointmentToEditCasted.getAppointmentDateTime());
+    }
+
+    /**
+     * Retrieves the updated medicine from the model.
+     *
+     * @param editAppointmentDescriptorCasted The descriptor for editing the appointment.
+     * @param appointmentToEditCasted The original appointment to edit.
+     * @return The medicine after editing.
+     */
+    private Medicine getUpdatedMedicine(EditAppointmentDescriptor editAppointmentDescriptorCasted,
+                                        Appointment appointmentToEditCasted) {
+        return editAppointmentDescriptorCasted.getMedicine().orElse(appointmentToEditCasted.getMedicine());
+    }
+
+    /**
+     * Retrieves the updated sickness from the model.
+     *
+     * @param editAppointmentDescriptorCasted The descriptor for editing the appointment.
+     * @param appointmentToEditCasted The original appointment to edit.
+     * @return The sickness after editing.
+     */
+    private Sickness getUpdatedSickness(EditAppointmentDescriptor editAppointmentDescriptorCasted,
+                                        Appointment appointmentToEditCasted) {
+        return editAppointmentDescriptorCasted.getSickness().orElse(appointmentToEditCasted.getSickness());
     }
 
     @Override

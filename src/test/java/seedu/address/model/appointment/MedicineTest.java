@@ -25,9 +25,14 @@ public class MedicineTest {
 
         // EP: only whitespaces
         assertFalse(Medicine.isValidMedicine(" "));
+      
+        // EP: invalid characters
+        assertFalse(Medicine.isValidMedicine("1"));
+        assertFalse(Medicine.isValidMedicine("!"));
 
         // EP: leading/trailing whitespaces
         assertFalse(Medicine.isValidMedicine(" Aspirin"));
+        assertFalse(Medicine.isValidMedicine(" 1"));
     }
 
     @Test
@@ -43,9 +48,15 @@ public class MedicineTest {
 
         // EP: only whitespaces
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" "));
-
+      
         // EP: leading/trailing whitespaces
         assertThrows(IllegalArgumentException.class, () -> new Medicine(" Aspirin"));
+        assertThrows(IllegalArgumentException.class, () -> new Medicine(" 1"));
+        
+      
+        // EP: invalid characters
+        assertThrows(IllegalArgumentException.class, () -> new Medicine("!"));
+        assertThrows(IllegalArgumentException.class, () -> new Medicine("1"));
     }
 
     @Test

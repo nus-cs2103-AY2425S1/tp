@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -92,10 +94,11 @@ public class CommandTestUtil {
     public static final String VALID_MEDICINE_BOB = "Ibuprofen";
     public static final String VALID_SICKNESS_AMY = "Flu";
     public static final String VALID_SICKNESS_BOB = "Toothache";
+    public static final int VALID_PERSON_ID = 0;
     public static final LocalDateTime VALID_APPOINTMENT_DATE_TIME_AMY = LocalDateTime.of(2024, 10, 20, 10, 30);
     public static final LocalDateTime VALID_APPOINTMENT_DATE_TIME_BOB = LocalDateTime.of(2024, 10, 31, 10, 30);
-
-
+    public static final String VALID_APPOINTMENT_DATE_TIME_STRING_AMY = "2024-10-20 10:30";
+    public static final String VALID_APPOINTMENT_DATE_TIME_STRING_BOB = "2024-10-31 10:30";
 
     public static final String APPOINTMENT_TYPE_DESC_AMY = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_AMY;
     public static final String APPOINTMENT_TYPE_DESC_BOB = " " + PREFIX_APPOINTMENT_TYPE + VALID_APPOINTMENT_TYPE_BOB;
@@ -103,6 +106,11 @@ public class CommandTestUtil {
     public static final String MEDICINE_DESC_BOB = " " + PREFIX_MEDICINE + VALID_MEDICINE_BOB;
     public static final String SICKNESS_DESC_AMY = " " + PREFIX_SICKNESS + VALID_SICKNESS_AMY;
     public static final String SICKNESS_DESC_BOB = " " + PREFIX_SICKNESS + VALID_SICKNESS_BOB;
+    public static final String PERSON_ID_DESC = " " + PREFIX_PERSON_ID + VALID_PERSON_ID;
+    public static final String APPOINTMENT_DATE_TIME_DESC_AMY =
+            " " + PREFIX_DATETIME + VALID_APPOINTMENT_DATE_TIME_STRING_AMY;
+    public static final String APPOINTMENT_DATE_TIME_DESC_BOB =
+            " " + PREFIX_DATETIME + VALID_APPOINTMENT_DATE_TIME_STRING_BOB;
 
     public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_AMY_APPOINTMENT;
     public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_BOB_APPOINTMENT;

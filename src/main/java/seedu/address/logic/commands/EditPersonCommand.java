@@ -20,7 +20,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -54,22 +53,22 @@ public class EditPersonCommand extends EditCommand {
 
 
     /**
-     * Creates an EditPersonCommand to add the specified {@code Person}
+     * Creates {@code EditPersonCommand} with the specified index and descriptor.
      */
     public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         super(index, editPersonDescriptor);
     }
 
     @Override
-    protected boolean hasEntity(Model model, Object entity) throws CommandException {
+    protected boolean hasEntity(Model model, Object entity) {
         return model.hasPerson((Person) entity);
     }
 
     @Override
-    protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
-            throws CommandException {
+    protected boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit) {
         Person entityToEditCasted = (Person) entityToEdit;
-        return !(entityToEditCasted.isSamePerson((Person) editedEntity));
+        Person editedEntityCasted = (Person) editedEntity;
+        return entityToEditCasted.isSamePerson(editedEntityCasted);
     }
 
     @Override
@@ -78,7 +77,7 @@ public class EditPersonCommand extends EditCommand {
     }
 
     @Override
-    protected void editEntity(Model model, Object editedPerson, Object personToEdit) throws CommandException {
+    protected void editEntity(Model model, Object editedPerson, Object personToEdit) {
         model.setPerson((Person) personToEdit, (Person) editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -86,10 +85,15 @@ public class EditPersonCommand extends EditCommand {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param personToEdit The person to be edited.
+     * @param editPersonDescriptor The descriptor with the details to edit the person.
+     * @return The edited person.
      */
     @Override
     protected Object createEditedEntity(Model model, Object personToEdit,
-                                                 EditEntityDescriptor editPersonDescriptor) throws CommandException {
+                                                 EditEntityDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         EditPersonDescriptor editPersonDescriptorCasted = (EditPersonDescriptor) editPersonDescriptor;
         Person personToEditCasted = (Person) personToEdit;
@@ -150,7 +154,7 @@ public class EditPersonCommand extends EditCommand {
         public EditPersonDescriptor() {}
 
         /**
-         * Copy constructor.
+         * Constructs an {@code EditPersonDescriptor} with the specified fields.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             super(toCopy);
@@ -237,12 +241,14 @@ public class EditPersonCommand extends EditCommand {
                 return false;
             }
 
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(status, otherEditPersonDescriptor.status)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            boolean isSameName = Objects.equals(name, otherEditPersonDescriptor.name);
+            boolean isSamePhone = Objects.equals(phone, otherEditPersonDescriptor.phone);
+            boolean isSameEmail = Objects.equals(email, otherEditPersonDescriptor.email);
+            boolean isSameAddress = Objects.equals(address, otherEditPersonDescriptor.address);
+            boolean isSameStatus = Objects.equals(status, otherEditPersonDescriptor.status);
+            boolean isSameTags = Objects.equals(tags, otherEditPersonDescriptor.tags);
+
+            return isSameName && isSamePhone && isSameEmail && isSameAddress && isSameStatus && isSameTags;
         }
 
         @Override
