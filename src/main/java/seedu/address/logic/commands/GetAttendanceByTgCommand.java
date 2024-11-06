@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.util.List;
+import java.util.Stack;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,6 +30,8 @@ public class GetAttendanceByTgCommand extends Command {
     public static final String MESSAGE_NO_STUDENTS = "No students found in tutorial group %1$s.";
     private static AttendanceWindow currentWindow;
 
+    private static Stack<AttendanceWindow> openWindows = new Stack<>();
+
     private final TutorialGroup tutorialGroup;
 
 
@@ -39,6 +42,9 @@ public class GetAttendanceByTgCommand extends Command {
      */
     public GetAttendanceByTgCommand(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
+        AttendanceWindow newWindow = new AttendanceWindow(tutorialGroup);
+        openWindows.push(newWindow);
+        currentWindow = newWindow;
     }
 
     @Override
@@ -49,11 +55,6 @@ public class GetAttendanceByTgCommand extends Command {
         if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
-
-        if (currentWindow != null) {
-            currentWindow.close();
-        }
-        currentWindow = new AttendanceWindow(this.tutorialGroup);
         currentWindow.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
@@ -80,11 +81,9 @@ public class GetAttendanceByTgCommand extends Command {
         this.currentWindow = window;
     }
 
-    /**
-     * Closes the currently opened attendance window.
-     * @return true if the window was closed, false if no window was open.
-     */
-    public static boolean closeCurrentWindow() {
+    @Override
+    public boolean undo(Model model) {
+        currentWindow = openWindows.pop();
         if (currentWindow != null) {
             currentWindow.close();
             currentWindow = null;
@@ -93,8 +92,18 @@ public class GetAttendanceByTgCommand extends Command {
         return false;
     }
 
-    @Override
-    public boolean undo(Model model) {
-        return closeCurrentWindow();
+    /**
+     * Closes all currently opened attendance windows.
+     * @return true if windows were closed, false otherwise
+     */
+    public static boolean closeAllWindows() {
+        if (!openWindows.isEmpty()) {
+            openWindows.forEach(AttendanceWindow::close);
+            openWindows.clear();
+            return true;
+        }
+        return false;
     }
+
+
 }

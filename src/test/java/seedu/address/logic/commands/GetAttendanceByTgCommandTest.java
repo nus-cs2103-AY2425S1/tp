@@ -12,7 +12,6 @@ import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,9 +38,6 @@ class GetAttendanceByTgCommandTest {
 
     @Test
     void execute_validTutorialGroupWithStub_success() throws CommandException {
-        Platform.startup(() -> {
-            System.out.println("Platform started");
-        });
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
@@ -52,13 +48,11 @@ class GetAttendanceByTgCommandTest {
 
         GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(validTutorialGroup);
         command.setAttendanceWindow(attendanceWindowStub);
-
         CommandResult result = command.execute(model);
 
         String expectedMessage = "Attendance window opened for Tutorial Group: " + validTutorialGroup;
         assertEquals(expectedMessage, result.getFeedbackToUser());
 
-        Platform.exit();
 
 
     }
@@ -126,7 +120,7 @@ class GetAttendanceByTgCommandTest {
         @Override
         public void show(Model model) {
             // Simulate showing the attendance window
-            System.out.println("Showing attendance window for: " + super.getTutorialGroup());
+            System.out.println("Showing attendance window " + super.getTutorialGroup());
             for (Student student : students) {
                 System.out.println("Student: " + student.getName());
                 for (AttendanceRecord record : student.getAttendanceRecord()) {
