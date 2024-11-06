@@ -2,7 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -77,6 +79,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with GradYear earlier than {@code year} exists in the address book.
+     */
+    public boolean hasGraduatedPeople(String year) {
+        return persons.containsGraduatedBefore(year);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -109,6 +118,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code person} from this {@code AddressBook} if {@code person} fulfils the predicate test.
+     * @param predicate Predicate to test whether to remove the Person.
+     */
+    public void removePersonByPredicate(Predicate<Person> predicate) {
+        Iterator<Person> personIterator = persons.iterator();
+        while (personIterator.hasNext()) {
+            Person p = personIterator.next();
+            if (predicate.test(p)) {
+                personIterator.remove();
+            }
+        }
     }
 
     //// util methods

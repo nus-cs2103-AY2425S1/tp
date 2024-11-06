@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,6 +30,7 @@ public class DeleteCommand extends ConcreteCommand {
     public static final String MESSAGE_UNDO_SUCCESS = "Reverted deletion of person: %1$s";
 
     private final Index targetIndex;
+    private boolean isConfirmed;
     private Person deletedPerson;
 
     /**
@@ -36,6 +39,7 @@ public class DeleteCommand extends ConcreteCommand {
     public DeleteCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
+        this.isConfirmed = false;
     }
 
     @Override
@@ -50,24 +54,31 @@ public class DeleteCommand extends ConcreteCommand {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        /*
-        this part of code should only exist in javafx file so remove it so far
-        Show confirmation dialog
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Confirmation");
-        alert.setHeaderText("Are you sure you want to delete this person?");
-        alert.setContentText(String.format("Name: %s", personToDelete.getName()));
+        if (!isConfirmed) {
+            assert isConfirmed == true;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setHeaderText("Are you sure you want to delete this person?");
+            alert.setContentText(String.format("Name: %s", personToDelete.getName()));
 
-        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
-        if (result != ButtonType.OK) {
-            return new CommandResult("Deletion cancelled.");
+            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+            if (result != ButtonType.OK) {
+                return new CommandResult("Deletion cancelled.");
+            }
         }
-         */
 
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         isExecuted = true;
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    /**
+     * set the is Confirmed value for the test cases to jump over the delete popout
+     */
+    public void setConfirmed(boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 
     @Override

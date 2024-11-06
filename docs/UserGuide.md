@@ -4,9 +4,16 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# DorManagerPro User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+DorManagerPro (DMP) is a desktop app tailored for **university dorm managers who prefer to work with a Command Line Interface (CLI)**, 
+designed to allow easy and efficient management of dormitory resident details within an address book.
+
+Created for busy university dorm managers looking to increase their efficiency, DorManagerPro provides unique features to streamline
+the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
+
+**Note:** If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -164,10 +171,15 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* After user enters the command, the window will show a confirmation popout, 
+click 'OK' to continue, 'cancel' to abort the deletion.
+
+![delete popout](images/deleteConfirmation.png)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 
 ### Clearing all entries : `clear`
 
@@ -177,13 +189,22 @@ Format: `clear`
 
 ### Cleaning graduated students : `clean`
 
-Removes all graduated students from the address book based on the current year and their graduation date.
+Removes all graduated students from the address book based on the current year and their graduation year.
 
 Format: `clean`
+
+Examples of usage:
+
+`clean`, executed in 2024.
+
+This deletes all students who graduate in 2023 or earlier.  
+![img.png](images/CleanCommandExampleUsage.png)
+
 
 ### Undoing the previous command : `undo`
 
 Undoes the previous command that changes the data in the address book.
+
 Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`.
 
 Format: `undo`
@@ -255,8 +276,9 @@ Action     | Format, Examples
 **Add**    | `add [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [r/ROOM_NUMBER] [t/Tags]`<br> e.g., `find p/test_number n/test_name r/08-1234 t/friends colleagues` `n/, p/, r/ or t/ with no parameters following means list every one out`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
 **List**   | `list`
 **Help**   | `help`
-**View**   |
+**Clean**  | `clean`
+**Undo**   | `undo`

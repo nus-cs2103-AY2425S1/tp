@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.Year;
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -30,17 +28,19 @@ public class CleanCommand extends ConcreteCommand {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_CLEAN_SUCCESS = "Deleted graduated people";
+    public static final String MESSAGE_ALREADY_CLEANED = "All graduated people have already been deleted";
     public static final String MESSAGE_UNDO_SUCCESS = "Restored deleted graduated people";
 
     private final Predicate<Person> predicate;
+    private final String gradYear;
     private AddressBook initialAddressBook;
 
     /**
      * Creates a CleanCommand to delete the people whose graduation dates have past
      */
     public CleanCommand() {
-        String year = String.valueOf(Year.now().getValue());
-        this.predicate = new GradYearPredicate(new GradYear(year));
+        this.gradYear = String.valueOf(Year.now().getValue());
+        this.predicate = new GradYearPredicate(new GradYear(gradYear));
     }
 
     @Override
@@ -48,16 +48,13 @@ public class CleanCommand extends ConcreteCommand {
         requireNotExecuted();
         requireNonNull(model);
         initialAddressBook = new AddressBook(model.getAddressBook());
-        Predicate<? super Person> originalPredicate = model.getFilteredPersonListPredicate();
-        model.updateFilteredPersonList(predicate);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        for (int i = lastShownList.size() - 1; i >= 0; i--) {
-            model.deletePerson(lastShownList.get(i));
+        if (model.hasGraduatedBefore(gradYear)) {
+            model.deletePersonByPredicate(predicate);
+            isExecuted = true;
+            return new CommandResult(MESSAGE_CLEAN_SUCCESS);
+        } else {
+            throw new CommandException(MESSAGE_ALREADY_CLEANED);
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS.and(originalPredicate));
-
-        isExecuted = true;
-        return new CommandResult(MESSAGE_CLEAN_SUCCESS);
     }
 
     @Override

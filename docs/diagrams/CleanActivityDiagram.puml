@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes clean command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([at least 1 contact has GradYear earlier than current year])
+    :Delete all contacts with GradYear earlier than current year from the address book;
+else ([else])
+    :Display error message;
+
+endif
+stop
+@enduml

@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# DorManagerPro Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -232,28 +232,74 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Clean feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
-### \[Proposed\] Update Find Command
+The `clean` command extends `ConcreteCommand`. The `clean` command deletes the contacts whose `GradYear` field is earlier
+than the current year, deleting contacts who have graduated from the address book.
+The `clean` command is undoable.
 
-#### Proposed Implementation
+Given below is an example usage scenario and how the `clean` command behaves at each step.
 
-Enhance the `find` command to enable searching profiles using additional attributes such as 'tags', 
-'roomNumber', and 'contactNumber'. These new features will create predicates similar to the existing 'name' feature, 
-allowing for more comprehensive search capabilities.
+Step 1. The user executes `clean` in 2024.
+
+<box type="info" seamless>
+
+**Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
+
+</box>
+
+
+Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
+
+
+The following sequence diagram shows how a `clean` command goes through the `Logic` component:
+
+<puml src="diagrams/CleanSequenceDiagram.puml" alt="CleanSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+
+**Note:** There are no destroy markers (X) for `CleanCommand` and `GradYearPredicate` as they are preserved in the `undo` command stack.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a `clean` command:
+
+<puml src="diagrams/CleanActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: UI display when `clean` executes after a `find` command:**
+
+* **Alternative 1:** Display all contacts.
+    * Pros: Shows users the full result of `clean`.
+    * Cons: Forgets the results of the `find` command.
+
+* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts. 
+    * Pros: Allow users to retain their serach results from `find`.
+    * Cons: Users cannot see the full extent of `clean` until they return to the default view with `list`.
+
+### Update Find Command
+
+#### Implementation
+
+* the findCommand is enhanced by new Predicates 
+* RoomNumber predicates, PhonePredicate, and TagContainsKeywordsPredicate allows
+the a wider range of searching based on more features
 
 Below is a detailed process illustration using a sequential diagram:
 
-Step 1: The user issues a `find` command followed by specific parameters, 
-for example: `t/friends n/Alex r/08-0805 p/9124 6892`.
+Step 1. The user issues a `find` command followed by specific parameters, 
+for example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a 
+tag of friends, a name called Alex, a roomNumber of 08-0805, and a phone call of 9124 6842
  
 **Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
 
-Step 2, The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
+Step 2. The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
 
-Step 3, The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+
 results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />

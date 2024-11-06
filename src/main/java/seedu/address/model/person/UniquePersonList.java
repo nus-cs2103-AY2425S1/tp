@@ -47,6 +47,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with GradYear earlier than {@code year}.
+     */
+    public boolean containsGraduatedBefore(String year) {
+        requireNonNull(year);
+        return internalList.stream().anyMatch(new GradYearPredicate(new GradYear(year)));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      * Another person with the same number and/or name must not already exist in the list.
