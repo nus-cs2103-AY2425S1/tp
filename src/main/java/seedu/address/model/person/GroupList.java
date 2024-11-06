@@ -176,7 +176,7 @@ public class GroupList {
                 // Intentionally ignoring exception, as no action need to be taken if the person isn't in any groups.
             }
         });
-        for(String groupName : groupsToDelete) {
+        for (String groupName : groupsToDelete) {
             remove(groupName);
         }
     }
