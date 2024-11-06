@@ -162,14 +162,29 @@ Refer to the [Features](#features) below for details of each command.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+## General Commands
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### Clearing all entries : `clear`
+
+Clears all patient and tasks entry from NovaCare.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+## Patient-Related Commands
 
 ### Adding a patient: `add`
 
@@ -186,47 +201,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all patients : `list`
-
-Shows a list of all patients in the address book.
-
-Format: `list`
-
-### Editing a patient : `edit`
-
-Edits an existing patient in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
-* You can remove all the patient’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
-
-### Locating patients by name: `find`
-
-Finds patients whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a patient : `delete`
 
 Deletes the specified patient and tasks associated to that patient from the address book.
@@ -241,34 +215,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the address book.
 * `find john doe` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
-### Adding a task : `addtask`
+### Editing a patient : `edit`
 
-Adds a task to a patient in the address book.
+Edits an existing patient in the address book.
 
-Format: `addtask INDEX d/DESCRIPTION`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Adds a task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the address book.
-* `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
-![Patient List](images/PersonListExample.png)
-![Task List](images/TaskListExample.png)
-
-### Deleting a task : `deletetask`
-
-Deletes a task for a patient in the address book.
-
-Format: `deletetask INDEX`
-
-* Deletes a task at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient’s tags by typing `t/` without
+  specifying any tags after it.
 
 Examples:
-* `deletetask 1` deletes the 1st task in the task list.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
 ### Adding emergency contact : `emergency`
 
@@ -323,6 +285,77 @@ Format: `deletelevel INDEX`
 Examples:
 * `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
 
+### Listing all patients : `list`
+
+Shows a list of all patients in the address book.
+
+Format: `list`
+
+### Locating patients by name: `find`
+
+Finds patients whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+## Task-Related Commands
+
+### Adding a task : `addtask`
+
+Adds a task to a patient in the address book.
+
+Format: `addtask INDEX d/DESCRIPTION`
+
+* Adds a task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the address book.
+* `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
+![Patient List](images/PersonListExample.png)
+![Task List](images/TaskListExample.png)
+
+### Deleting a task : `deletetask`
+
+Deletes a task for a patient in the address book.
+
+Format: `deletetask INDEX`
+
+* Deletes a task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletetask 1` deletes the 1st task in the task list.
+
+### Locating tasks by patient: `findtask`
+
+Finds all tasks whose patient matches specified patient id
+
+Format: `findtask INDEX`
+
+Examples:
+* `findtask 1` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+### Listing all tasks : `listtask`
+
+Shows a list of all tasks.
+
+Format: `listtask`
+
 ### Mark Task : `marktask`
 
 Marks a task at a specific index.
@@ -336,17 +369,13 @@ Format: `marktask INDEX`
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
 
-### Clearing all entries : `clear`
+### Listing all incomplete tasks : `listincomplete`
 
-Clears all patient and tasks entry from NovaCare.
+Shows a list of all incomplete tasks.
 
-Format: `clear`
+Format: `listincomplete`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
@@ -400,8 +429,6 @@ _Details coming soon ..._
 | **List**                  | `list`                                                                                                                                                   |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
-| **Clear**                 | `clear`                                                                                                                                                  |
-
 
 ### Task-related commands:
 | Action              | Format, Examples                                                                   |
@@ -413,7 +440,10 @@ _Details coming soon ..._
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
 | **List Incomplete** | `listincomplete`                                                                   |
 ### Other commands:
-| Action                | Format, Examples       |
-|-----------------------|------------------------|
-|**Help**               | `help`                 |
-|**Exit**               | `exit`                 |
+| Action    | Format, Examples |
+|-----------|------------------|
+| **Help**  | `help`           |
+| **Clear** | `clear`          |
+| **Exit**  | `exit`           |
+
+
