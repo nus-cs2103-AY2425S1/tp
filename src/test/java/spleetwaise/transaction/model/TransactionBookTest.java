@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static spleetwaise.transaction.model.transaction.Status.NOT_DONE_STATUS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.model.transaction.exceptions.DuplicateTransactionException;
 import spleetwaise.transaction.model.transaction.exceptions.TransactionNotFoundException;
@@ -33,13 +35,14 @@ public class TransactionBookTest {
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date("01012024");
     private static final Set<Category> testCategories = new HashSet<>(List.of(new Category("FOOD")));
+    private static final Status testStatus = new Status(NOT_DONE_STATUS);
 
     private static final Transaction testTxn = new Transaction(
-            testPerson, testAmount, testDescription, testDate, testCategories);
+            testPerson, testAmount, testDescription, testDate, testCategories, testStatus);
     private static final Transaction testTxn2 = new Transaction(
-            testPerson, testAmount, new Description("2"), testDate, testCategories);
+            testPerson, testAmount, new Description("2"), testDate, testCategories, testStatus);
     private static final Transaction testTxn3 = new Transaction(
-            testPerson, testAmount, new Description("3"), testDate, testCategories);
+            testPerson, testAmount, new Description("3"), testDate, testCategories, testStatus);
 
     @Test
     public void constructor_noParams_success() {

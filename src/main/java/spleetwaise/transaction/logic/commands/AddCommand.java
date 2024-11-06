@@ -5,6 +5,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
@@ -35,9 +36,10 @@ public class AddCommand extends Command {
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a new transaction.\n"
             + "Parameters: " + "INDEX (must be a positive integer) " + PREFIX_AMOUNT + "AMOUNT " + PREFIX_DESCRIPTION
-            + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE] " + PREFIX_CATEGORY + "FOOD\n" + "Example: " + COMMAND_WORD
+            + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE] " + "[" + PREFIX_STATUS
+            + "STATUS] " + PREFIX_CATEGORY + "FOOD\n" + "Example: " + COMMAND_WORD
             + " 1 " + PREFIX_AMOUNT + "10.00 " + PREFIX_DESCRIPTION + "Paid John for lunch " + PREFIX_DATE
-            + "23012024 " + PREFIX_CATEGORY + "FOOD";
+            + "23012024 " + PREFIX_CATEGORY + "FOOD " + PREFIX_STATUS + "Not Done";
 
     private final Transaction transaction;
 

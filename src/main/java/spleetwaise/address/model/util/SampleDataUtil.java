@@ -20,6 +20,7 @@ import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Status;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -62,20 +63,22 @@ public class SampleDataUtil {
     public static Transaction[] getSampleTransactions() {
         Set<Category> emptyCategories = new HashSet<>();
         return new Transaction[]{ new Transaction(alexYeoh, new Amount("10.00"), new Description("Mc Donald's"),
-                new Date("01012024"), emptyCategories
+                new Date("01012024"), emptyCategories, new Status("Not Done")
         ), new Transaction(
-                berniceYu, new Amount("5.50"), new Description("Starbucks"), new Date("02022024"), emptyCategories
+                berniceYu, new Amount("5.50"), new Description("Starbucks"), new Date("02022024"), emptyCategories,
+                new Status("Not Done")
         ), new Transaction(
                 charlotteOliveiro, new Amount("8.25"), new Description("Pizza Hut"), new Date("03032024"),
-                emptyCategories
+                emptyCategories, new Status("Not Done")
         ), new Transaction(
-                davidLi, new Amount("12.00"), new Description("NTUC FairPrice"), new Date("04042024"), emptyCategories
+                davidLi, new Amount("12.00"), new Description("NTUC FairPrice"), new Date("04042024"), emptyCategories,
+                new Status("Not Done")
         ), new Transaction(
                 irfanIbrahim, new Amount("-9.50"), new Description("Cold Storage"), new Date("05052024"),
-                emptyCategories
+                emptyCategories, new Status("Not Done")
         ), new Transaction(
                 royBalakrishnan, new Amount("11.25"), new Description("Old Chang Kee"), new Date("06062024"),
-                emptyCategories
+                emptyCategories, new Status("Not Done")
         )
         };
     }
