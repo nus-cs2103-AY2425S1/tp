@@ -14,6 +14,8 @@ public class Tag {
     public static final String BLOOD_TYPE_PREFIX = "Blood type ";
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}-+ ]+";
+    public static final String BLOOD_TYPE_REGEX = "^(A|B|AB|O)[+-]$";
+
     public final String tagName;
     public final boolean isBloodType;
 
@@ -37,9 +39,13 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
+        // Check if it matches the blood type pattern when `+` or `-` is present
+        if (test.contains("+") || test.contains("-")) {
+            return test.matches(BLOOD_TYPE_REGEX);
+        }
+        // Otherwise, allow any alphanumeric string with spaces
         return test.matches(VALIDATION_REGEX);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
