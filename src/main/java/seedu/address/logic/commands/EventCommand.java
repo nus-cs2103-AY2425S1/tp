@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ATTENDEE_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -47,7 +48,7 @@ public class EventCommand extends Command {
             + PREFIX_ATTENDEES + "1 2 4 5";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+
 
     private final String eventName;
     private final LocalDate eventStartDate;
