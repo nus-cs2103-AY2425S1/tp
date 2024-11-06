@@ -205,13 +205,16 @@ Adds a patient details to the system.
 <box type="info" seamless>
 
 **Note:**
+* Upon adding a patient the default priority is set to *3*. 
+  * Users can change the priority level using the [`priority` command](#adding-priority-level--priority).
+* To update emergency contact details, use the [`emergency` command](#adding-emergency-contact--emergency).
 * A person will not be added if the name and phone number is already in the system.
 * Refer to [Parameter Information](#parameter-information) for the limitations of each parameter.
 </box>
 
 <box type="tip" seamless>
 
-**Tip:** 
+**Tip:**
 * A patient can have any number of tags (including 0)
 * A patient can have multiple tags with no spaces between them.
 * Use `edit` command if you made a mistake in adding a patient.
@@ -276,9 +279,13 @@ Deletes the specified patient and tasks associated to that patient from the syst
 
 :pencil: Format: `delete INDEX`
 
+<box type="info" seamless>
+
+**Note:**
 * Deletes the patient and task associated to that patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the system.
@@ -293,9 +300,13 @@ Adds an emergency contact and details to a patient in the system.
 
 :pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
+<box type="info" seamless>
+
+**Note:**
 * Adds an emergency contact and details at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
@@ -306,9 +317,13 @@ Deletes an emergency contact and its details from a patient in the system.
 
 :pencil: Format: `delemergency INDEX
 
+<box type="info" seamless>
+
+**Note:**
 * Deletes an emergency contact and its details at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
@@ -320,28 +335,37 @@ Examples:
 
 Adds an priority level to a patient in the system.
 
-:pencil: Format: `priority /id INDEX /level PRIORITY_LEVEL`
+:pencil: Format: `priority INDEX /level PRIORITY_LEVEL`
 
+<box type="info" seamless>
+
+**Note:**
 * Adds a priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The priority level **must be a positive integer** and only from **1, 2, 3**
+</box>
 
 Examples:
-* `priority /id 1 /level 2` adds priority level `2` to 1st index in patient list.
+* `priority 1 /level 2` adds priority level `2` to 1st index in patient list.
 
 #### Deleting priority level : `deletelevel`
 
 Delete a priority level to a patient in the system, resetting it to the default value **3**.
 
-:pencil: Format: `deletelevel INDEX`
+:pencil: Format: `deletelevel INDEX` or `priority INDEX l/reset`
 
+<box type="info" seamless>
+
+**Note:**
 * Delete the current priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
+* `priority 1 l/reset` resets the priority level of the 1st indexed patient in the patient list.
 
 
 ### Task Management
@@ -352,15 +376,19 @@ Adds a task to a patient in the system.
 
 :pencil: Format: `addtask INDEX d/DESCRIPTION`
 
+<box type="info" seamless>
+
+**Note:**
 * Adds a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd patient in the system.
 * `find John doe` followed by `addtask 1 d/Clear diapers` deletes the 1st patient in the results of the `find` command.
-  ![Patient List](images/PersonListExample.png)
-  ![Task List](images/TaskListExample.png)
+![Patient List](images/PersonListExample.png)
+![Task List](images/TaskListExample.png)
 
 #### Deleting a task : `deletetask`
 
@@ -368,9 +396,13 @@ Deletes a task for a patient in the system.
 
 :pencil: Format: `deletetask INDEX`
 
+<box type="info" seamless>
+
+**Note:**
 * Deletes a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `deletetask 1` deletes the 1st task in the task list.
@@ -381,12 +413,42 @@ Marks a task at a specific index.
 
 :pencil: Format: `marktask INDEX`
 
+<box type="info" seamless>
+
+**Note:**
 * Marks a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+</box>
 
 Examples:
 * `marktask 1` marks a task of the 1st index in task list.
+
+#### Find Task : `findtask`
+
+Finds all task for a particular Patient specific index.
+
+:pencil: Format: `findtask INDEX`
+
+<box type="info" seamless>
+
+**Note:**
+</box>
+
+Examples:
+* `marktask 1` marks a task of the 1st index in task list.
+
+#### List Task : `listtask`
+
+List all tasks for all patients in the system.
+
+:pencil: Format: `listtask`
+
+#### List Incomplete Task : `listincomplete`
+
+List all incomplete tasks for all patients in the system.
+
+:pencil: Format: `listincomplete`
 
 ### Other Commands
 
