@@ -103,7 +103,7 @@ public class EditPersonCommand extends Command {
         String feedbackToUser = model.hasSimilarPerson(editedPerson)
                 ? MESSAGE_SIMILAR_NAME_WARNING
                 : "";
-        feedbackToUser += editedPerson.hasSimilarTags() && editPersonDescriptor.isTagsEdited()
+        feedbackToUser += editPersonDescriptor.isTagsEdited() && editedPerson.hasSimilarTags()
                 ? MESSAGE_SIMILAR_TAGS_WARNING
                 : "";
 
