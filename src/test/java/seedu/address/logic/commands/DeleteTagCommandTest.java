@@ -40,13 +40,14 @@ public class DeleteTagCommandTest {
 
         Person expectedPerson = new StudentBuilder().withName("Alice Pauline")
                 .withStudentID("A1234567X")
-                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
                 .withPhone("94351253").build();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, expectedPerson);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                expectedPerson);
+                tagsToDelete, Messages.format(expectedPerson));
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -62,12 +63,13 @@ public class DeleteTagCommandTest {
         Person expectedPerson = new StudentBuilder().withName("Benson Meier")
                 .withStudentID("A7654321X")
                 .withAddress("311, Clementi Ave 2, #02-25")
-                .withEmail("benson@example.com").withPhone("98765432").build();
+                .withEmail("benson@example.com")
+                .withPhone("98765432").build();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, expectedPerson);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                expectedPerson);
+                tagsToDelete, Messages.format(expectedPerson));
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -82,12 +84,14 @@ public class DeleteTagCommandTest {
         Person expectedPerson = new CompanyBuilder().withName("Amazing Bank")
                 .withIndustry("Banking")
                 .withPhone("84871319")
-                .withEmail("abank@example.com").withAddress("Money Fly").withTags("loyalPartner").build();
+                .withEmail("abank@example.com")
+                .withAddress("Money Fly")
+                .withTags("loyalPartner").build();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(contactToEdit, expectedPerson);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
-                expectedPerson);
+                tagsToDelete, Messages.format(expectedPerson));
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
