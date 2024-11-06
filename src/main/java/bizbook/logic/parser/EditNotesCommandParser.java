@@ -7,14 +7,14 @@ import static java.util.Objects.requireNonNull;
 
 import bizbook.commons.core.index.Index;
 import bizbook.commons.exceptions.IllegalValueException;
-import bizbook.logic.commands.EditNotesCommand;
+import bizbook.logic.commands.EditNoteCommand;
 import bizbook.logic.parser.exceptions.ParseException;
 import bizbook.model.person.Note;
 
 /**
  * Parses input arguments and returns a new EditNotesCommand object
  */
-public class EditNotesCommandParser implements Parser<EditNotesCommand> {
+public class EditNotesCommandParser implements Parser<EditNoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditNotesCommand
@@ -22,7 +22,7 @@ public class EditNotesCommandParser implements Parser<EditNotesCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditNotesCommand parse(String args) throws ParseException {
+    public EditNoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NOTES_INDEX, PREFIX_NOTES);
@@ -40,9 +40,9 @@ public class EditNotesCommandParser implements Parser<EditNotesCommand> {
 
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditNotesCommand.MESSAGE_USAGE), ive);
+                    EditNoteCommand.MESSAGE_USAGE), ive);
         }
 
-        return new EditNotesCommand(personIndex, noteIndex, note);
+        return new EditNoteCommand(personIndex, noteIndex, note);
     }
 }
