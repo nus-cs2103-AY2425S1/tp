@@ -259,7 +259,7 @@ predicates to create a `FindCommand` object.
 
 `participationPredicates` is of type `Predicate<Participation>`
 
-`Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` before being reduced to a single `Predicate<Person>`
+`Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
 
 ### \[Proposed\] Undo/redo feature
