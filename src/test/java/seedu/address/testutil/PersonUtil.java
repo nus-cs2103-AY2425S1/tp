@@ -39,8 +39,10 @@ public class PersonUtil {
         person.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL + email.value + " "));
         person.getTelegramHandle().ifPresent(telegramHandle -> sb.append(PREFIX_TELEHANDLE
                 + telegramHandle.value + " "));
-        sb.append(PREFIX_MOD + person.getModuleName().toString() + " ");
-        sb.append(PREFIX_REMARK + person.getRemark().toString() + " ");
+        person.getModuleName().ifPresent(moduleName -> sb.append(PREFIX_MOD
+                + moduleName.getModuleName() + " "));
+        person.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK
+                + remark.value + " "));
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

@@ -68,8 +68,8 @@ class JsonAdaptedPerson {
         email = source.getEmail().map(Email::toString).orElse(null);
         telegramHandle = source.getTelegramHandle().map(TelegramHandle::toString).orElse(null);
         contactType = source.getContactType().value.toString();
-        moduleName = source.getModuleName().toString();
-        remark = source.getRemark().toString();
+        moduleName = source.getModuleName().map(ModuleName::toString).orElse(null);
+        remark = source.getRemark().map(Remark::toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -126,23 +126,19 @@ class JsonAdaptedPerson {
         }
         final ContactType modelContactType = new ContactType(contactType);
 
-        if (moduleName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ModuleName.class.getSimpleName()));
-        }
-        if (!ModuleName.isValidModName(moduleName)) {
+        if (moduleName != null && !ModuleName.isValidModName(moduleName)) {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
         }
-        final ModuleName modelModuleName = new ModuleName(moduleName);
+        final Optional<ModuleName> modelModuleName = moduleName == null || moduleName.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new ModuleName(moduleName));
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Remark.class.getSimpleName()));
-        }
-        if (!Remark.isValidRemark(remark)) {
+        if (remark != null && !Remark.isValidRemark(remark)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final Remark modelRemark = new Remark(remark);
+        final Optional<Remark> modelRemark = remark == null || remark.isEmpty()
+                ? Optional.empty()
+                : Optional.of(new Remark(remark));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle,

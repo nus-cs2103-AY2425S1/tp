@@ -111,8 +111,9 @@ public class EditCommand extends Command {
         Optional<Email> updatedEmail = editPersonDescriptor.getEmail().or(() -> personToEdit.getEmail());
         Optional<TelegramHandle> updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
                 .or(() -> personToEdit.getTelegramHandle());
-        ModuleName updatedModuleName = editPersonDescriptor.getModuleName().orElse(personToEdit.getModuleName());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        Optional<ModuleName> updatedModuleName = editPersonDescriptor.getModuleName()
+                .or(() -> personToEdit.getModuleName());
+        Optional<Remark> updatedRemark = editPersonDescriptor.getRemark().or(() -> personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedContactType, updatedName, updatedPhone, updatedEmail, updatedTelegramHandle,
                 updatedModuleName, updatedRemark, updatedTags);
