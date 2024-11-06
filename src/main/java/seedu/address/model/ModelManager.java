@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -107,8 +106,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasGraduatedBefore(String year) {
+        return addressBook.hasGraduatedPeople(year);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void deletePersonByPredicate(Predicate<Person> predicate) {
+        addressBook.removePersonByPredicate(predicate);
     }
 
     @Override
@@ -145,11 +154,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public Predicate<? super Person> getFilteredPersonListPredicate() {
-        return Optional.ofNullable(filteredPersons.getPredicate()).orElse(p -> true);
     }
 
     @Override

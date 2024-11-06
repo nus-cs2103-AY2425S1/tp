@@ -183,7 +183,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasGraduatedBefore(String year) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonByPredicate(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -199,11 +209,6 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Predicate<? super Person> getFilteredPersonListPredicate() {
             throw new AssertionError("This method should not be called.");
         }
 
