@@ -509,7 +509,7 @@ Command: `help`
 
 Exits the program.
 
-Format: `exit`
+Command: `exit`
 
 ---
 
