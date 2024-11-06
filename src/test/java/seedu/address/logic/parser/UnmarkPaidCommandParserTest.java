@@ -11,12 +11,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.MarkPaidCommand;
+import seedu.address.logic.commands.UnmarkPaidCommand;
 import seedu.address.model.person.MonthPaid;
 
-public class MarkPaidCommandParserTest {
+public class UnmarkPaidCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkPaidCommand.MESSAGE_USAGE);
 
     private static final String VALID_MONTHPAID1 = "2024-01";
     private static final String VALID_MONTHPAID2 = "2024-02";
@@ -26,7 +26,7 @@ public class MarkPaidCommandParserTest {
     private static final String INVALID_MONTHPAID_YYYY_RANGE_UPPER = "2201-12";
     private static final String INVALID_MONTHPAID_YYYY_RANGE_LOWER = "1899-12";
 
-    private MarkPaidCommandParser parser = new MarkPaidCommandParser();
+    private UnmarkPaidCommandParser parser = new UnmarkPaidCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -40,7 +40,7 @@ public class MarkPaidCommandParserTest {
     public void parse_missingField_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased());
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkPaidCommand.MESSAGE_USAGE);
 
         // Since no prefixes are provided, we expect a parse failure
         assertParseFailure(parser, userInput, expectedMessage);
@@ -64,7 +64,8 @@ public class MarkPaidCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased()) + " " + withPrefix(VALID_MONTHPAID1);
         // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex),
+        UnmarkPaidCommand expectedCommand = new UnmarkPaidCommand(
+                UnmarkPaidCommand.UnmarkPaidTarget.fromIndex(targetIndex),
                 Set.of(new MonthPaid(VALID_MONTHPAID1)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -76,8 +77,8 @@ public class MarkPaidCommandParserTest {
         String userInput = String.valueOf(targetIndex.getOneBased()) + " " + withPrefix(VALID_MONTHPAID1)
                 + " " + withPrefix(VALID_MONTHPAID2);
         // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(
-                MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex), Set.of(new MonthPaid(VALID_MONTHPAID1),
+        UnmarkPaidCommand expectedCommand = new UnmarkPaidCommand(
+                UnmarkPaidCommand.UnmarkPaidTarget.fromIndex(targetIndex), Set.of(new MonthPaid(VALID_MONTHPAID1),
                     new MonthPaid(VALID_MONTHPAID2)));
 
         assertParseSuccess(parser, userInput, expectedCommand);

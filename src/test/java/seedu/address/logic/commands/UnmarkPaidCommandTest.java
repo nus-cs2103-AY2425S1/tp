@@ -30,66 +30,66 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 
-public class MarkPaidCommandTest {
+public class UnmarkPaidCommandTest {
     private static final Set<MonthPaid> VALID_MONTHSPAID = Set.of(new MonthPaid("2024-01"));
     private static final String VALID_MONTHPAID_STRING = "2024-01";
 
     @Test
-    public void execute_markPaidPerson_success() {
+    public void execute_unmarkPaidPerson_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Index index = INDEX_FIRST_PERSON;
-        MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(index);
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        Person modifiedPerson = createMarkedPerson(
+        UnmarkPaidCommand.UnmarkPaidTarget target = UnmarkPaidCommand.UnmarkPaidTarget.fromIndex(index);
+        UnmarkPaidCommand command = new UnmarkPaidCommand(target, VALID_MONTHSPAID);
+        Person modifiedPerson = createUnmarkedPerson(
                 model.getFilteredPersonList().get(index.getZeroBased()), VALID_MONTHSPAID);
-        String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_PERSON_SUCCESS,
-                Messages.markPaidFormat(modifiedPerson));
+        String expectedMessage = String.format(UnmarkPaidCommand.MESSAGE_UNMARKPAID_PERSON_SUCCESS,
+                Messages.unmarkPaidFormat(modifiedPerson));
         expectedModel.setPerson(model.getFilteredPersonList().get(index.getZeroBased()),
                 modifiedPerson);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_markPaidAll_success() {
+    public void execute_unmarkPaidAll_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
-        MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.all();
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
+        UnmarkPaidCommand.UnmarkPaidTarget target = UnmarkPaidCommand.UnmarkPaidTarget.all();
+        UnmarkPaidCommand command = new UnmarkPaidCommand(target, VALID_MONTHSPAID);
         for (int i = 0; i < model.getFilteredPersonList().size(); i++) {
-            Person modifiedPerson = createMarkedPerson(
+            Person modifiedPerson = createUnmarkedPerson(
                     model.getFilteredPersonList().get(i), VALID_MONTHSPAID);
             expectedModel.setPerson(model.getFilteredPersonList().get(i),
                     modifiedPerson);
         }
         String expectedMonthPaidString = "[" + VALID_MONTHPAID_STRING + "]";
-        String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_ALL_SUCCESS,
+        String expectedMessage = String.format(UnmarkPaidCommand.MESSAGE_UNMARKPAID_ALL_SUCCESS,
                 expectedMonthPaidString);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
     @Test
     public void toStringMethod() {
-        MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
-        MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        assertEquals("seedu.address.logic.commands.MarkPaidCommand{target="
+        UnmarkPaidCommand.UnmarkPaidTarget target = UnmarkPaidCommand.UnmarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
+        UnmarkPaidCommand command = new UnmarkPaidCommand(target, VALID_MONTHSPAID);
+        assertEquals("seedu.address.logic.commands.UnmarkPaidCommand{target="
                         + target.toString()
                         + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
                 command.toString());
     }
     @Test
     public void equals() {
-        MarkPaidCommand.MarkPaidTarget target = MarkPaidCommand.MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
-        MarkPaidCommand command1 = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        MarkPaidCommand command2 = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        MarkPaidCommand command3 = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        MarkPaidCommand command4 = new MarkPaidCommand(target, Collections.emptySet());
+        UnmarkPaidCommand.UnmarkPaidTarget target = UnmarkPaidCommand.UnmarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
+        UnmarkPaidCommand command1 = new UnmarkPaidCommand(target, VALID_MONTHSPAID);
+        UnmarkPaidCommand command2 = new UnmarkPaidCommand(target, VALID_MONTHSPAID);
+        UnmarkPaidCommand command3 = new UnmarkPaidCommand(target, VALID_MONTHSPAID);
+        UnmarkPaidCommand command4 = new UnmarkPaidCommand(target, Collections.emptySet());
         assertTrue(command1.equals(command2));
         assertFalse(command1.equals(command4));
         assertTrue(command1.equals(command3));
         assertTrue(command3.equals(command1));
     }
 
-    private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthsPaid) {
+    private static Person createUnmarkedPerson(Person personToMark, Set<MonthPaid> monthsPaid) {
         assert personToMark != null;
         assert monthsPaid != null;
         // TODO: should we use editPersonDescriptor here instead?
@@ -100,7 +100,7 @@ public class MarkPaidCommandTest {
         Fees fees = personToMark.getFees();
         ClassId classId = personToMark.getClassId();
         Set<MonthPaid> updatedMonthsPaid = new HashSet<>(personToMark.getMonthsPaid());
-        updatedMonthsPaid.addAll(monthsPaid);
+        updatedMonthsPaid.removeAll(monthsPaid);
         Set<Tag> tags = personToMark.getTags();
 
         return new Person(name, phone, email, address, fees, classId,

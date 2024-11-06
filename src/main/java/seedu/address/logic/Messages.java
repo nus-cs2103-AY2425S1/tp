@@ -58,9 +58,19 @@ public class Messages {
     public static String markPaidFormat(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; MonthsPaid: ");
-        person.getMonthsPaid().forEach(builder::append);
+                .append("; MonthsPaid: ")
+                .append(person.getMonthsPaidToString());
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code person} for display to the user when unmarking paid
+     */
+    public static String unmarkPaidFormat(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getName())
+                .append("; MonthsPaid: ")
+                .append(person.getMonthsPaidToString());
+        return builder.toString();
+    }
 }
