@@ -1,11 +1,13 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -192,5 +194,22 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Displays a confirmation dialog with the specified message.
+     * The dialog prompts the user to confirm an action by typing "y".
+     *
+     * @param message The message to display in the confirmation dialog.
+     * @return {@code true} if the user types "y" to confirm, {@code false} otherwise.
+     */
+    public static boolean showConfirmationDialog(String message) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Confirmation");
+        dialog.setHeaderText(null);
+        dialog.setContentText(message + "\n( \"y\" to confirm or any other key to cancel)");
+
+        Optional<String> result = dialog.showAndWait();
+        return result.isPresent() && result.get().trim().equalsIgnoreCase("y");
     }
 }

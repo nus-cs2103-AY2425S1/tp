@@ -37,7 +37,6 @@ public class AddressTest {
     @Test
     public void equals() {
         Address address = new Address("Valid Address");
-
         // same values -> returns true
         assertTrue(address.equals(new Address("Valid Address")));
 

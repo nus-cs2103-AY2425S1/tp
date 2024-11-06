@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SearchPolicyCommandParser" as SearchPolicyCommandParser LOGIC_COLOR
+participant "s:SearchPolicyCommand" as SearchPolicyCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("search p/Health Insurance")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("search p/Health Insurance")
+activate AddressBookParser
+
+create SearchPolicyCommandParser
+AddressBookParser -> SearchPolicyCommandParser
+activate SearchPolicyCommandParser
+
+SearchPolicyCommandParser --> AddressBookParser
+deactivate SearchPolicyCommandParser
+
+AddressBookParser -> SearchPolicyCommandParser : parse("Health Insurance")
+activate SearchPolicyCommandParser
+
+create SearchPolicyCommand
+SearchPolicyCommandParser -> SearchPolicyCommand
+activate SearchPolicyCommand
+
+SearchPolicyCommand --> SearchPolicyCommandParser
+deactivate SearchPolicyCommand
+
+SearchPolicyCommandParser --> AddressBookParser : s
+deactivate SearchPolicyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SearchPolicyCommandParser -[hidden]-> AddressBookParser
+destroy SearchPolicyCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SearchPolicyCommand : execute(m)
+activate SearchPolicyCommand
+
+alt Invalid policy name
+    SearchPolicyCommand -> LogicManager : throw CommandException
+    deactivate SearchPolicyCommand
+else No policies found
+    SearchPolicyCommand -> Model : updateFilteredPersonList(predicate)
+    activate Model
+
+    Model --> SearchPolicyCommand
+    deactivate Model
+
+    SearchPolicyCommand -> LogicManager : CommandResult("No policies found.")
+    deactivate SearchPolicyCommand
+else Policies found
+    SearchPolicyCommand -> Model : updateFilteredPersonList(predicate)
+    activate Model
+
+    Model --> SearchPolicyCommand
+    deactivate Model
+
+    create CommandResult
+    SearchPolicyCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> SearchPolicyCommand
+    deactivate CommandResult
+
+    SearchPolicyCommand --> LogicManager : r
+    deactivate SearchPolicyCommand
+end
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

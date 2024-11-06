@@ -4,9 +4,13 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,7 +43,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label birthday;
+    @FXML
+    private Label appointment;
+    @FXML
+    private GridPane policies;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private Circle profilePic;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,13 +59,31 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        setProfilePic("/images/profile_icon.png");
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        birthday.setText("Birthday: " + person.getBirthday().toString());
+        appointment.setText("Next Appointment: " + person.getAppointment().value);
+        person.getPolicies().forEach(policy -> {
+            int index = policies.getChildren().size();
+            String policyLabel = (index + 1) + ". " + policy;
+
+            policies.add(new Label(policyLabel), 0, index);
+        });
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Sets profile picture with the given image URL.
+     */
+    private void setProfilePic(String imageUrl) {
+        Image img = new Image(imageUrl);
+        ImagePattern imgPattern = new ImagePattern(img);
+        profilePic.setFill(imgPattern);
     }
 }
