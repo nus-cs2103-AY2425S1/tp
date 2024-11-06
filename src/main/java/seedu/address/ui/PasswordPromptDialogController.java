@@ -61,6 +61,7 @@ public class PasswordPromptDialogController {
     @FXML
     private void handleCancel() {
         dialog.close();
+        System.exit(0);
     }
 
     @FXML
