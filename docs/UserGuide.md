@@ -107,7 +107,7 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADD
 * If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
 * `ADDRESS` can take any values and can not be blank.
 * `TAG` can take any alphanumeric values and can not be blank.
-* `DESCRIPTION` can take any values.
+* `DESCRIPTION` can take any values but cannot exceed 500 characters.
 
 <box type="tip" seamless>
 
