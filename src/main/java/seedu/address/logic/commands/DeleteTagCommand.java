@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,9 +31,14 @@ public class DeleteTagCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "Deleted successfully.";
     public static final String MESSAGE_SUCCESS_FORCE = "Force deleted successfully.";
+
     public static final String MESSAGE_TAGS_IN_USE = "The following tags are in use and cannot be deleted:\n%s\n"
             + "Use 'deletetag -force' to delete tags that are in use.";
-    public static final String MESSAGE_NONEXISTENT = "tag(s) have not been added before.\n";
+
+    public static final String MESSAGE_ALL_NONEXISTENT = "The following tag(s) has/have not been created before:\n";
+
+    public static final String MESSAGE_SOME_NONEXISTENT = "Existing tag(s) has/have been deleted successfully.\n"
+            + "The following tag(s) has/have not been created before:\n";
 
     private final List<Tag> tags;
     private final Map<Tag, Set<Person>> deletedSet = new HashMap<>();
@@ -52,97 +58,69 @@ public class DeleteTagCommand extends UndoableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-        StringBuilder errorMsg = new StringBuilder();
-        StringBuilder successMsg = new StringBuilder();
-        boolean showErrorMsg = false;
-        boolean showSuccessMsg = false;
 
-        // Check if tags exist and populate error message
-        showErrorMsg = addNonExistentTagsToError(model, errorMsg);
+        if (!isForceDelete) {
+            checkForTagsInUse(model);
+        }
 
-        // Proceed with force deletion logic
+        Set<Tag> tagsSuccessfullyDeleted = handleDelete(model);
+        return createCommandResult(tagsSuccessfullyDeleted);
+    }
+
+    /**
+     * Checks whether the tags to be deleted are currently tagged to guests (in use).
+     *
+     * @throws CommandException if any of the tags are currently in use.
+     */
+    private void checkForTagsInUse(Model model) throws CommandException {
+        Set<Tag> tagsInUse = model.getTagsInUse();
+        Set<Tag> matchingTags = tagsInUse.stream().filter(tags::contains).collect(Collectors.toSet());
+
+        if (!matchingTags.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_TAGS_IN_USE, matchingTags));
+        }
+    }
+
+    /**
+     * Generates a CommandResult message based on the success or failure of tag deletion.
+     * Determines whether to display messages for tags not successfully deleted or tags successfully deleted.
+     *
+     * @param tagsSuccessfullyDeleted Set of tags that were deleted successfully.
+     * @return A CommandResult containing the appropriate success or failure message.
+     */
+    private CommandResult createCommandResult(Set<Tag> tagsSuccessfullyDeleted) {
+        requireAllNonNull(tagsSuccessfullyDeleted);
+        List<Tag> tagsNotSuccessfullyDeleted = new ArrayList<>(tags);
+
+        // Tags that were not deleted successfully
+        tagsNotSuccessfullyDeleted.removeAll(tagsSuccessfullyDeleted);
+
+        if (!tagsNotSuccessfullyDeleted.isEmpty()) {
+            if (tagsSuccessfullyDeleted.isEmpty()) {
+                return new CommandResult(MESSAGE_ALL_NONEXISTENT + tagsNotSuccessfullyDeleted);
+            }
+            return new CommandResult(MESSAGE_SOME_NONEXISTENT + tagsNotSuccessfullyDeleted);
+        }
+
         if (isForceDelete) {
-            showSuccessMsg = deleteTagsAndSuccess(model, successMsg, MESSAGE_SUCCESS_FORCE);
-        } else {
-            // If not force delete, check for tags in use and handle accordingly
-            Set<Tag> tagsInUse = model.getTagsInUse();
-            Set<Tag> matchingTags = tagsInUse.stream().filter(tag -> tags.contains(tag)).collect(Collectors.toSet());
-
-            if (!matchingTags.isEmpty()) {
-                return new CommandResult(String.format(MESSAGE_TAGS_IN_USE, matchingTags));
-            }
-
-            // Perform standard deletion and build success message
-            showSuccessMsg = deleteTagsAndSuccess(model, successMsg, MESSAGE_SUCCESS);
+            return new CommandResult(MESSAGE_SUCCESS_FORCE);
         }
-        return constructFinalMessage(showErrorMsg, errorMsg, showSuccessMsg, successMsg);
+
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     /**
-     * Helper to add non-existent tags to the error message
+     * Deletes tags from the model, and removes each tag from all associated persons.
      *
-     * @param model
-     * @param errorMsg
-     * @return
+     * @param model The Model instance containing tags and persons.
+     * @return A set of tags that were successfully deleted.
      */
-    private boolean addNonExistentTagsToError(Model model, StringBuilder errorMsg) {
-        boolean hasErrors = false;
+    private Set<Tag> handleDelete(Model model) {
+        Set<Tag> tagsSuccessfullyDeleted = model.deleteTags(tags);
         for (Tag tag : tags) {
-            if (!model.hasTag(tag)) {
-                errorMsg.append(tag.toString()).append(" ");
-                hasErrors = true;
-            }
+            model.removeTagFromPersons(tag); // Remove from all persons
         }
-        if (hasErrors) {
-            errorMsg.append(MESSAGE_NONEXISTENT);
-        }
-        return hasErrors;
-    }
-
-
-    /**
-     * Helper method to delete tags and add to success message
-     *
-     * @param model
-     * @param successMsg
-     * @param successMessage
-     * @return
-     */
-    private boolean deleteTagsAndSuccess(Model model, StringBuilder successMsg, String successMessage) {
-        boolean hasSuccess = false;
-        for (Tag tag : tags) {
-            if (model.hasTag(tag)) {
-                model.deleteTags(List.of(tag)); // Remove from model tags
-                deletedSet.put(tag, model.removeTagFromPersons(tag)); // Remove from all persons
-                hasSuccess = true;
-            }
-        }
-
-        if (hasSuccess) {
-            successMsg.append(successMessage);
-        }
-        return hasSuccess;
-
-    }
-
-    /**
-     * Helper method to construct the final CommandResult message based on flags
-     *
-     * @param showErrorMsg
-     * @param errorMsg
-     * @param showSuccessMsg
-     * @param successMsg
-     * @return
-     */
-    private CommandResult constructFinalMessage(boolean showErrorMsg, StringBuilder errorMsg,
-                                                boolean showSuccessMsg, StringBuilder successMsg) {
-        if (showErrorMsg && showSuccessMsg) {
-            return new CommandResult(successMsg.toString() + " " + errorMsg.toString());
-        } else if (showErrorMsg) {
-            return new CommandResult(errorMsg.toString());
-        } else {
-            return new CommandResult(successMsg.toString());
-        }
+        return tagsSuccessfullyDeleted;
     }
 
     @Override

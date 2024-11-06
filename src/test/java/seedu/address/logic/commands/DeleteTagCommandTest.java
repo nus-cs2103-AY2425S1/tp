@@ -1,7 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_ALL_NONEXISTENT;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_SOME_NONEXISTENT;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_SUCCESS_FORCE;
+import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_TAGS_IN_USE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalTags.BRIDES_SIDE;
 import static seedu.address.testutil.TypicalTags.COLLEAGUES;
@@ -19,7 +25,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TypicalTags;
 
 /**
  * Contains tests for DeleteTagCommand.
@@ -46,7 +51,7 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = MESSAGE_SUCCESS;
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -65,7 +70,7 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = MESSAGE_SUCCESS;
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -79,7 +84,7 @@ public class DeleteTagCommandTest {
         List<Tag> nonExistentTags = List.of(nonExistentTag);
 
         DeleteTagCommand newTagCommand = new DeleteTagCommand(nonExistentTags, false);
-        String expectedMessage = BRIDES_SIDE + " " + DeleteTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = MESSAGE_ALL_NONEXISTENT + nonExistentTags;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -91,15 +96,14 @@ public class DeleteTagCommandTest {
      */
     @Test
     public void execute_mixedExistingAndNonExistentTags_withError() {
-        Tag existingTag = TypicalTags.BRIDES_SIDE;
-        Tag newColleaguesTag = TypicalTags.COLLEAGUES;
-        Tag newFriendsTag = TypicalTags.FRIENDS;
+        Tag existingTag = BRIDES_SIDE;
+        Tag newColleaguesTag = COLLEAGUES;
+        Tag newFriendsTag = FRIENDS;
         List<Tag> mixedTags = List.of(newFriendsTag, existingTag, newColleaguesTag);
         model.addTag(existingTag);
 
         DeleteTagCommand newTagCommand = new DeleteTagCommand(mixedTags, false);
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS + " " + FRIENDS + " " + COLLEAGUES
-                + " " + DeleteTagCommand.MESSAGE_NONEXISTENT;
+        String expectedMessage = MESSAGE_SOME_NONEXISTENT + List.of(newFriendsTag, newColleaguesTag);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTags(mixedTags);
@@ -123,7 +127,7 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS_FORCE;
+        String expectedMessage = MESSAGE_SUCCESS_FORCE;
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
@@ -143,10 +147,9 @@ public class DeleteTagCommandTest {
 
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(List.of(existingTag), false);
 
-        String expectedMessage = String.format(DeleteTagCommand.MESSAGE_TAGS_IN_USE, model.getTagsInUse());
+        String expectedMessage = String.format(MESSAGE_TAGS_IN_USE, model.getTagsInUse());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(deleteTagCommand, model, expectedMessage);
     }
 
     /**
@@ -156,7 +159,7 @@ public class DeleteTagCommandTest {
     public void execute_tagInUseForceDelete_success() {
         // Arrange
         // Set up the existing tag and associate it with ALICE
-        Tag existingTag = TypicalTags.BRIDES_SIDE;
+        Tag existingTag = BRIDES_SIDE;
         Person aliceWithTag = new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
                 ALICE.getRsvpStatus(), Set.of(existingTag));
 
@@ -171,7 +174,7 @@ public class DeleteTagCommandTest {
         expectedModel.setPerson(aliceWithTag, new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
                 ALICE.getRsvpStatus(), Set.of())); // ALICE with tag removed
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS_FORCE;
+        String expectedMessage = MESSAGE_SUCCESS_FORCE;
 
         // Act & Assert
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
@@ -190,7 +193,7 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS;
+        String expectedMessage = MESSAGE_SUCCESS;
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
 

@@ -1,28 +1,28 @@
 @startuml
 skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 12
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 20
+title Activity: Create new tag
 start
-:Check if command format is valid;
+repeat :User inputs command and name of new tag;
+:System checks if input is valid;
 if () then ([invalid command format])
-:Notify user and specify its usage;
+    :System shows error and specifies command usage;
+else ([else])
+    :System extracts tag name from input;
+    :System checks if tag name is valid;
+    if () then ([invalid name])
+        :System shows error and specifies command usage;
+
+    else ([else])
+        :System checks if the tag is in tag list;
+        if () then ([in tag list])
+            :System notifies that the tag is already in tag list;
+            ->
+        else ([else])
+            :System adds the tag into the tag list;
+            :System notifies that the tag has been successfully created;
+            ->
+        endif
 stop
-else ([valid command format])
-:Extract tag name from command;
-:Check if tag name is valid;
-if () then ([invalid name])
-    :Notify user and specify its usage;
-    stop
-else ([valid name])
-    :Check if the tag has been added before;
-if () then ([added before])
-    :Notify the user that the tag has already been added;
-    stop
-else ([not added before])
-    :Add the specified tag;
-    :Notify the user that the tag has been added;
-    stop
-
-
-@enduml
 @enduml

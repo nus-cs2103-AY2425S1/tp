@@ -42,6 +42,9 @@ public class TagCommandTest {
         model.addTag(new Tag("anotherTag"));
     }
 
+    /**
+     * EP: Valid tag successfully tagged on person (i.e. Tag is in tag list but not on person).
+     */
     @Test
     public void execute_tagExistsAndNotOnPerson_success() {
         Tag validTag = new Tag("uniqueTag");
@@ -68,6 +71,9 @@ public class TagCommandTest {
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Valid tag successfully tagged on multiple people (i.e. Tag is in tag list but not on multiple people).
+     */
     @Test
     public void execute_tagExistsAndNotOnMultiplePersons_success() {
         Tag validTag = new Tag("uniqueTag");
@@ -105,6 +111,10 @@ public class TagCommandTest {
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Valid tag successfully tagged on some people but not on others (i.e. Tag is in tag list, is not already on
+     * some but on others).
+     */
     @Test
     public void execute_bulkTagging_someGuestsAlreadyHaveTagReportsProperly() {
         // Guests at indexes 1 and 2 has the tag "friends", but guest at index 3 does not
@@ -134,6 +144,9 @@ public class TagCommandTest {
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Some tags are invalid (i.e. Some tags already in tag list, some tags are not).
+     */
     @Test
     public void execute_bulkTagging_someTagsNotCreatedReportsProperly() {
         // Tags "bride's side" and "friends" are created, but not "nonexistent" tag
@@ -170,6 +183,9 @@ public class TagCommandTest {
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * EP: Index out of bounds (i.e. Index greater than list size).
+     */
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -182,6 +198,9 @@ public class TagCommandTest {
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    /**
+     * EP: Undo a successful tag command (i.e. Previous successful tag command is undone).
+     */
     @Test
     public void execute_undoTagCommand_success() {
         Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -211,6 +230,81 @@ public class TagCommandTest {
         model.updatePreviousCommand(tagCommand);
         UndoCommand undoCommand = new UndoCommand();
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
+    /**
+     * EP: Attempting to undo an unsuccessful tag command involving invalid tag.
+     */
+    @Test
+    public void execute_undoTagCommandWithTagNotCreated_failure() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag nonExistentTag = new Tag("nonExistentTag");
+        assertFalse(model.hasTag(nonExistentTag));
+
+        Set<Tag> tags = new HashSet<>();
+        List<Index> indexes = new ArrayList<>();
+        tags.add(nonExistentTag);
+        indexes.add(INDEX_FIRST_PERSON);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
+
+        String expectedFailureMessage = TagCommand.MESSAGE_TAG_NOT_CREATED + nonExistentTag;
+        assertCommandSuccess(tagCommand, model, expectedFailureMessage, originalModel);
+
+        UndoCommand undoCommand = new UndoCommand();
+        String expectedUndoMessage = UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
+        assertCommandFailure(undoCommand, model, expectedUndoMessage);
+    }
+
+    /**
+     * EP: Attempting to undo an unsuccessful tag command involving invalid index.
+     */
+    @Test
+    public void execute_undoTagCommandWithInvalidIndex_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        List<Index> indexList = new ArrayList<>();
+        indexList.add(outOfBoundIndex);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(BRIDES_SIDE);
+        TagCommand tagCommand = new TagCommand(indexList, tags);
+
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        UndoCommand undoCommand = new UndoCommand();
+        String expectedUndoMessage = UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
+        assertCommandFailure(undoCommand, model, expectedUndoMessage);
+    }
+
+    /**
+     * EP: Undo a partially successful tag command involving some invalid tags.
+     */
+    @Test
+    public void execute_undoTagCommandWithMixedValidityTags_successfullyUndone() {
+        Tag nonExistentTag = new Tag("nonexistent");
+
+        model.addTag(BRIDES_SIDE);
+        assertFalse(model.hasTag(nonExistentTag));
+
+        List<Index> indexes = List.of(INDEX_FIRST_PERSON);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(BRIDES_SIDE);
+        tags.add(nonExistentTag);
+        TagCommand tagCommand = new TagCommand(indexes, tags);
+
+        Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
+        updatedTags.add(BRIDES_SIDE);
+        Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
+                personToTag.getRsvpStatus(), updatedTags);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToTag, updatedPerson);
+
+        String expectedMessage = TagCommand.MESSAGE_TAG_PERSON_SUCCESS + Messages.format(updatedPerson)
+                + "\n" + TagCommand.MESSAGE_TAG_NOT_CREATED + nonExistentTag;
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+
+        model.updatePreviousCommand(tagCommand);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
