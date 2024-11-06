@@ -68,7 +68,7 @@ public class StarCommand extends Command {
 
         if (targetName != null) {
             Optional<Person> personOptional = lastShownList.stream()
-                    .filter(person -> person.getName().equals(targetName))
+                    .filter(person -> person.getName().toString().equalsIgnoreCase(targetName.toString()))
                     .findFirst();
 
             if (personOptional.isEmpty()) {

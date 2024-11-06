@@ -87,7 +87,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToEdit = lastShownList.stream()
-                .filter(person -> person.getName().equals(name))
+                .filter(person -> person.getName().toString().equalsIgnoreCase(name.toString()))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
