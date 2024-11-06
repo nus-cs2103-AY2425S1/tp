@@ -185,10 +185,6 @@ Examples:
 If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
-##### Replace existing module-role pairs
-
-TODO
-
 #### All other fields
 
 Except for the module-role pairs, all other fields can only be edited by complete replacement.
@@ -277,6 +273,23 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undo latest change to contact data: `undo`
+Undoes the effect done by the latest data-modifying command, if any.
+
+Format: `undo`
+
+* Data-modifying commands refers to those who has direct manipulation over the contact data,
+such as add, edit, delete or clear.
+* Commands that does not modify contact data in the address book(list, help, find etc.)
+are not considered by the undo command.
+
+Examples:
+* If you accidentally delete a contact using the `delete` command,
+you can revert this change by input `undo` command.
+* Similarly, if you accidentally clear the whole address book using the `clear` command,
+you can restore the whole address book using `undo` command as well.
+* Wrong adding/editing of contact info can be reverted by inputting `undo` as well.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -351,6 +364,7 @@ Action     | Format, Examples
 **Clear**  | `clear`                                                                                                                                                                                                     
 **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/+(MODULECODE[-ROLETYPE])+]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  
+**Undo**   | `undo`                                                                                                                                                                                                      
 **Find**   | `find (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find n/James n/Jake r/CS1101S r/MA1521`                                                                                                                         
 **List**   | `list`                                                                                                                                                                                                      
 **Help**   | `help`                                                                                                                                                                                                      
