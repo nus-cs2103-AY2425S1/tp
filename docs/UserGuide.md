@@ -237,10 +237,10 @@ Views all the contact information of the specified contact.
 Format: `view t/TELEGRAM_HANDLE`
 
 * Displays all contact information of the person with specified `TELEGRAM_HANDLE`
-* `TELEGRAM_HANDLE` must be more than 4 characters, and can only contain letters, numbers and underscores.
+* `TELEGRAM_HANDLE` must contain 5 - 32 characters, and can only contain letters, numbers and underscores.
 
 Examples:
-* `view` followed by `t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
+* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
 ![result for `view t/bob12`](images/viewBob12.png)
 
 ### Exiting the program : `exit`
