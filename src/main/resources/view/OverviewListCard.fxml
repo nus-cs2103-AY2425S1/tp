@@ -31,35 +31,35 @@
             </HBox>
             <FlowPane fx:id="tags" />
             <TextFlow>
-                <Text text="Phone: " styleClass="cell_detail"/>
+                <Text text="Phone:              " styleClass="cell_detail"/>
                 <Text fx:id="phone" styleClass="cell_small_text"/>
             </TextFlow>
             <TextFlow>
-                <Text text="Address: " styleClass="cell_detail" />
+                <Text text="Address:           " styleClass="cell_detail" />
                 <Text fx:id="address" styleClass="cell_small_text"/>
             </TextFlow>
             <TextFlow>
-                <Text text="Email: " styleClass="cell_detail" />
+                <Text text="Email:                " styleClass="cell_detail" />
                 <Text fx:id="email" styleClass="cell_small_text"/>
             </TextFlow>
             <TextFlow>
-                <Text text="Skills: " styleClass="cell_detail" />
+                <Text text="Skills:                " styleClass="cell_detail" />
                 <Text fx:id="skills" styleClass="cell_small_text"/>
             </TextFlow>
             <TextFlow>
-                <Text text="Experience: " styleClass="cell_detail" />
+                <Text text="Experience:      " styleClass="cell_detail" />
                 <Text fx:id="experience" styleClass="cell_small_text "/>
             </TextFlow>
             <TextFlow>
-                <Text text="Status: " styleClass="cell_detail" />
+                <Text text="Status:              " styleClass="cell_detail" />
                 <Text fx:id="status" styleClass="cell_small_text"/>
             </TextFlow>
             <TextFlow>
-                <Text text="Role: " styleClass="cell_detail" />
+                <Text text="Desired Role:   " styleClass="cell_detail" />
                 <Text fx:id="desiredRole" styleClass="cell_small_text "/>
             </TextFlow>
             <TextFlow>
-                <Text text="Note: " styleClass="cell_detail" />
+                <Text text="Note:                " styleClass="cell_detail" />
                 <Text fx:id="note" styleClass="cell_small_text"/>
             </TextFlow>
         </VBox>
