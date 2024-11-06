@@ -159,6 +159,12 @@ Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * If more than one fields are specified, contacts will be matched by multiple fields (i.e. `AND` search).
 
+<box type="tip" seamless>
+
+**Take Note:** using an `edit` command on a contact after a `find` operation may remove them from the displayed list, if the contact is edited to no longer match the `find` requirements. Use the `list` command to return to the view of all contacts, or `find` them again with new parameters.
+
+</box>
+
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
