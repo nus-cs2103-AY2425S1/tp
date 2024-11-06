@@ -155,6 +155,81 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Storage implementation
+Eduvault stores data in JSON file using the Jackson library.
+
+Eduvault stores four types of objects:
+* Student (person)
+* Tutorial
+* Participation
+* Attendance
+
+```dtd
+{
+  "persons" : [...],
+  "tutorials" : [...],
+  "participations" : [...]
+}
+```
+
+`Student`
+```dtd
+"persons" :
+[
+    {
+        "name" : "Alex Yeoh",
+        "phone" : "87438807",
+        "email" : "alexyeoh@example.com",
+        "address" : "Blk 30 Geylang Street 29, #06-40",
+        "payment" : "189",
+        "tags" : [ "friends" ]
+    },
+  ...
+]
+```
+There may be no duplicate `Students`.
+Two `Students` are considered to be duplicates if they have matching `NAME` and `PHONE`.
+
+
+`Tutorial`
+```dtd
+"tutorials" :
+[
+    {
+        "subject" : "Mathematics"
+    }, 
+  ...
+]
+```
+There may be no duplicate `Tutorials`.
+Two `Tutorials` are considered to be duplicates if they have matching `Subject`.
+
+`Participation`
+```dtd
+"participations" :
+[
+    {
+        "student" : "Alex Yeoh",
+        "phone" : "87438807",
+        "tutorial" : "a",
+        "attendances" : [...]
+    },
+]
+```
+
+`Attendance`
+```dtd
+"attendances" : [ {
+      "attendanceDate" : "02/02/2024"
+    } ]
+```
+Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
+
+There may be no duplicate `Participations`.
+Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
