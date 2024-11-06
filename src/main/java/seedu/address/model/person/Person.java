@@ -75,7 +75,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the phone number and name.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -84,6 +84,7 @@ public class Person {
         }
 
         return otherPerson != null
+                && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getName().equals(getName());
     }
 

@@ -1,8 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -14,8 +11,7 @@ import seedu.address.model.person.PriorityLevel;
 public class PriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "priority";
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Sets the priority level for a patient identified by "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the priority level for a patient identified by "
             + "the index number used in the displayed person list.\n"
             + "Parameters: INDEX l/LEVEL (LEVEL must be 1, 2, or 3 or 'reset' for default level)\n"
             + "Example: priority 1 l/2\n"
@@ -35,12 +31,11 @@ public class PriorityCommand extends Command {
     private final boolean isReset;
 
     /**
-     * Constructs a new {@code PriorityCommand} with the specified index and priority level.
+     * Constructs a new {@code PriorityCommand} to update the specified person's priority level.
      *
-     * @param index the index of the person in the list to which the priority level will be assigned.
-     * @param priorityLevel the priority level to be assigned to the person.
-     *                      This should be a valid priority level as per the application's standards.
-     * @param isReset whether the priority level is to be reset to the default level.
+     * @param index the index of the person to update in the list.
+     * @param priorityLevel the priority level to assign.
+     * @param isReset true if the priority level should be reset to the default level.
      */
     public PriorityCommand(int index, int priorityLevel, boolean isReset) {
         this.index = index;
@@ -51,47 +46,50 @@ public class PriorityCommand extends Command {
     /**
      * Executes the priority level update on the specified person in the address book.
      *
-     * @param model the model in which the person will be updated.
-     * @return a command result that includes a success message.
-     * @throws CommandException if the index provided is out of bounds or the priority level is invalid.
+     * @param model the model containing the person data.
+     * @return a CommandResult with a success message.
+     * @throws CommandException if the index is out of bounds or priority level is invalid.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        Person personToEdit = getPersonToEdit(model);
+        Person editedPerson = createEditedPerson(personToEdit);
+
+        model.updatePersonAndTasks(personToEdit, editedPerson);
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    private Person getPersonToEdit(Model model) throws CommandException {
         try {
-            Person personToEdit = model.getFilteredPersonList().get(index - 1);
-            int updatedPriorityLevel = isReset ? DEFAULT_PRIORITY_LEVEL : priorityLevel;
-
-            Person editedPerson = new Person(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getEmergencyContact(),
-                    personToEdit.getTags(),
-                    new PriorityLevel(updatedPriorityLevel));
-
-            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            model.setPerson(personToEdit, editedPerson);
-            model.updateTasksForPerson(personToEdit, editedPerson);
-
-            // Dynamic success message based on reset or custom priority level
-            String successMessage = isReset
-                    ? String.format(MESSAGE_SUCCESS_RESET, editedPerson.getName())
-                    : String.format(MESSAGE_SUCCESS_SET, priorityLevel, editedPerson.getName());
-            return new CommandResult(successMessage);
-
+            return model.getFilteredPersonList().get(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException(MESSAGE_INVALID_PATIENT_ID);
-        } catch (IllegalArgumentException e) {
-            throw new CommandException(MESSAGE_INVALID_PRIORITY_LEVEL);
         }
     }
 
+    private Person createEditedPerson(Person personToEdit) {
+        int updatedPriorityLevel = isReset ? DEFAULT_PRIORITY_LEVEL : priorityLevel;
+        return new Person(
+                personToEdit.getName(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                personToEdit.getEmergencyContact(),
+                personToEdit.getTags(),
+                new PriorityLevel(updatedPriorityLevel)
+        );
+    }
+
+    private String generateSuccessMessage(Person editedPerson) {
+        return isReset
+                ? String.format(MESSAGE_SUCCESS_RESET, editedPerson.getName())
+                : String.format(MESSAGE_SUCCESS_SET, priorityLevel, editedPerson.getName());
+    }
+
     /**
-     * Compares this object with another for equality, based on index and priority level.
+     * Checks if two PriorityCommand objects are equal based on their data fields.
      *
-     * @param other the object to compare this command against.
+     * @param other the other object to compare against.
      * @return true if both objects have the same data fields.
      */
     @Override
