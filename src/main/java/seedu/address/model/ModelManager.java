@@ -244,4 +244,17 @@ public class ModelManager implements Model {
     public void clearExcludedPersons() {
         excludedPersons.clear();
     }
+
+    /**
+     * Updates the filtered list of persons with the excluded persons.
+     */
+    @Override
+    public void updateFilteredListWithExclusions(Predicate<Person> predicate) {
+
+        Predicate<Person> excludeRemovedPersons = person -> !excludedPersons.contains(person);
+        if (predicate != null) {
+            lastPredicate = lastPredicate.or(predicate);
+        }
+        updateFilteredPersonList(excludeRemovedPersons.and(lastPredicate));
+    }
 }

@@ -144,4 +144,6 @@ public interface Model {
     void excludePerson(Person person);
 
     void clearExcludedPersons();
+
+    void updateFilteredListWithExclusions(Predicate<Person> predicate);
 }
