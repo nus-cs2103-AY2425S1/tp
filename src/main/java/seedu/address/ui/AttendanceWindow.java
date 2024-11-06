@@ -68,6 +68,9 @@ public class AttendanceWindow {
         });
     }
 
+    /**
+     * Closes the attendance window.
+     */
     public void close() {
         Platform.runLater(() -> {
             Stage stage = (Stage) table.getScene().getWindow();

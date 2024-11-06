@@ -5,7 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.CloseWindowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+/**
+ * Parses input arguments and creates a new CloseWindowCommand object
+ */
 public class CloseWindowCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the CloseWindowCommand
