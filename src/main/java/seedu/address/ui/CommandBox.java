@@ -38,7 +38,10 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        if (isAddLogCommand(commandText) && !commandText.contains("l/")) {
+        //TODO: Do proper validation for 1) addlog command 2) Validate NRIC and date
+        // before popup window is allowed. Throw correct exceptions as well
+        if (isAddLogCommand(commandText) && !commandText.contains("l/")
+                && commandText.contains("i/") && commandText.contains("d/")) {
             // Disable commandTextField and trigger the popup for log entry
             commandTextField.setDisable(true);
             AddLogPopup.display(
@@ -77,10 +80,9 @@ public class CommandBox extends UiPart<Region> {
      * Basic regex can be customized based on the exact expected format.
      */
     private boolean isAddLogCommand(String input) {
-
         //TODO: Instead of using a hardcoded regex, change it to use actual validation of both date and NRIC
-        // Regex to match "addlog i/NRIC d/DATE" format where DATE is in "dd MMM yyyy" format
-        return input.matches("addlog i/S7783844i d/21 jan 2024");
+        input = input.toLowerCase();
+        return input.matches("^addlog.*");
     }
 
 
