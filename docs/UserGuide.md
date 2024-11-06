@@ -218,8 +218,6 @@ adds the transaction to the 1st client in the application.
 * `find David` followed by `addt 1 d/sell raw materials amt/200 o/Company XYZ dt/2024-09-01` 
 adds the transaction to the 1st client in the results of the `find` command.
 
-![result for 'find David' followed by addt](images/addtExample.png)
-
 #### Listing Transactions for a specified client: `listt`
 
 Format: `listt INDEX`
