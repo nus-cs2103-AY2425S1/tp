@@ -297,7 +297,7 @@ public class PersonPredicateBuilder {
     }
 
     private static boolean regexMatch(String value, String keyword) {
-        Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(Pattern.quote(keyword), Pattern.CASE_INSENSITIVE);
         return pattern.matcher(value).find();
     }
 
