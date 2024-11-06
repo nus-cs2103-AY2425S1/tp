@@ -530,15 +530,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
 4.  The system should return a response to commands that are inputted by the user within three seconds.
-5.  The codebase should be compliant with AB3 architecture and logic to faclilitate easier testing and debugging.
+5.  The codebase should be compliant with AB3 architecture and logic to facilitate easier testing and debugging.
 6.  The system should be operational and responsive 24/7.
 
 ### Glossary
 
-* **Contact**: An individual or organization associated with wedding planning, such as a client or vendor.
-* **Job:**: A service provider for weddings, e.g., caterers, florists, or photographers.
+* **Contact:** An individual or organization associated with wedding planning, such as a client or vendor.
+* **Job:** A service provider for weddings, e.g., caterers, florists, or photographers.
 * **Wedding Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
+* **AddressBook:** The main data model that represents the collection of all 'Person' objects within KnottyPlanners.
+* **WeddingBook:** The data model that represents the collection of all 'Wedding' objects within KnottyPlanners.
 * **Priority:** The relative importance of a user story or task, often categorized as must-have, should-have,
 or could-have.
 * **Success/Failure Messages:** Feedback provided to the user indicating the outcome of a command
