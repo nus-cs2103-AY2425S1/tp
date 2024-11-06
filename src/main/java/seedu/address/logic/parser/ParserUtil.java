@@ -3,14 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_MAXLEADINGZEROS;
 import static seedu.address.logic.Messages.MESSAGE_OVERFLOW_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -30,16 +26,9 @@ import seedu.address.model.person.Year;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Error: Index is not a single non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TAG_ADD = "If you are trying to use a tag (eg. '/n'), ensure the tag "
-            + "is valid for this command and there is a space before it."
-            + "\n"
-            + "Supported tags: "
-            + PREFIX_NAME + ", "
-            + PREFIX_STUDENTID + ", "
-            + PREFIX_NETID + ", "
-            + PREFIX_MAJOR + ", "
-            + PREFIX_YEAR + ", "
-            + PREFIX_GROUP;
+    public static final String MESSAGE_INVALID_TAG_ADD = "If you are trying to use a prefix (eg. '/n'), ensure there "
+            + "is a space before the prefix and that it is in this list."
+            + "\nSupported prefixes: %1$s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -93,7 +82,7 @@ public class ParserUtil {
 
             if (trimmedStudentId.contains("/")) {
                 errorMsg = errorMsg + "\n"
-                        + MESSAGE_INVALID_TAG_ADD;
+                        + String.format(MESSAGE_INVALID_TAG_ADD, AddCommand.SUPPORTED_PREFIXES);
             }
 
             throw new ParseException(errorMsg);
@@ -147,7 +136,7 @@ public class ParserUtil {
 
             if (trimmedNetId.contains("/")) {
                 errorMsg = errorMsg + "\n"
-                        + MESSAGE_INVALID_TAG_ADD;
+                        + String.format(MESSAGE_INVALID_TAG_ADD, AddCommand.SUPPORTED_PREFIXES);
             }
 
             throw new ParseException(errorMsg);
@@ -181,12 +170,20 @@ public class ParserUtil {
     public static Year parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
+
+
+        Pattern yearFormat = Pattern.compile("(?<leadingZeroes>0+)(?<year>[1-9]\\d*)");
+        Matcher matcher = yearFormat.matcher(trimmedYear);
+        if (matcher.matches()) {
+            trimmedYear = matcher.group("year");
+        }
+
         if (!Year.isValidYear(trimmedYear)) {
             String errorMsg = Year.MESSAGE_CONSTRAINTS;
 
             if (trimmedYear.contains("/")) {
                 errorMsg = errorMsg + "\n"
-                        + MESSAGE_INVALID_TAG_ADD;
+                        + String.format(MESSAGE_INVALID_TAG_ADD, AddCommand.SUPPORTED_PREFIXES);
             }
 
             throw new ParseException(errorMsg);
