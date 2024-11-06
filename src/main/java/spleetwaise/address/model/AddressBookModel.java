@@ -8,7 +8,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 
 /**
- * The API of the CommonModel component.
+ * The API of the AddressBookModel component.
  */
 public interface AddressBookModel {
     /** {@code Predicate} that always evaluate to true */
