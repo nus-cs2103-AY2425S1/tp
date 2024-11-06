@@ -45,6 +45,22 @@ public class GoodsReceiptTest {
     }
 
     @Test
+    public void constructor_negativePrice_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new GoodsReceipt(
+                VALID_GOODS,
+                new Name("Alex Yeoh"), new Date(DATETIME_VALID),
+                new Date(DATETIME_VALID), false, 1, -5.22));
+    }
+
+    @Test
+    public void constructor_negativeQuantity_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new GoodsReceipt(
+                VALID_GOODS,
+                new Name("Alex Yeoh"), new Date(DATETIME_VALID),
+                new Date(DATETIME_VALID), false, -1, 5.22));
+    }
+
+    @Test
     public void getGoods_success() {
         GoodsReceipt goodsReceipt = new GoodsReceipt(
                 VALID_GOODS,

@@ -26,7 +26,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReceiptLog;
-import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -160,6 +159,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -190,7 +194,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteGoods(GoodsName goodsName) {
+        public void deleteGoods(GoodsReceipt goodsReceipt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @SuppressWarnings("checkstyle:SingleSpaceSeparator")
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getObservableFilteredPersonsWithGoodsCategoryTagsAdded());
         goodsListPanel = new GoodsListPanel(logic.getFilteredReceiptsList());
         personGoodsSplitPanePlaceholder.getItems().addAll(personListPanel.getRoot(), goodsListPanel.getRoot());
 
