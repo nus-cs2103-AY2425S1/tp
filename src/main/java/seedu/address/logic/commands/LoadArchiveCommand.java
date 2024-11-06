@@ -19,7 +19,7 @@ import seedu.address.storage.JsonAddressBookStorage;
  * Loads an archive file and sets it as the current address book.
  */
 public class LoadArchiveCommand extends Command {
-    public static final String COMMAND_WORD = "loadArchive";
+    public static final String COMMAND_WORD = "loadarchive";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads an archive file.\n"
             + "Parameters: FILENAME\n"
             + "Example: " + COMMAND_WORD + "addressbook-20241023_114324-example.json";
