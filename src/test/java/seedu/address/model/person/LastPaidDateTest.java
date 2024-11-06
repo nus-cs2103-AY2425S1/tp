@@ -3,7 +3,10 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
+
 
 public class LastPaidDateTest {
     @Test
@@ -17,6 +20,13 @@ public class LastPaidDateTest {
         String validDate = "07 11 2024";
         LastPaidDate lastPaidDate = new LastPaidDate(validDate);
         assertEquals(validDate, lastPaidDate.toString());
+    }
+    @Test
+    public void constructor_validLocalDate_createsLastPaidDate() {
+        LocalDate validDate = LocalDate.of(2024, 11, 7);
+        LastPaidDate lastPaidDate = new LastPaidDate(validDate);
+        assertEquals(validDate.toString(), lastPaidDate.toString());
+        assertEquals(validDate, lastPaidDate.date);
     }
 
     @Test
@@ -37,5 +47,10 @@ public class LastPaidDateTest {
         LastPaidDate lastPaidDate1 = new LastPaidDate("07 11 2024");
         LastPaidDate lastPaidDate2 = new LastPaidDate("08 11 2024");
         assertEquals(false, lastPaidDate1.equals(lastPaidDate2));
+    }
+    @Test
+    public void toStringMethod() {
+        LastPaidDate lastPaidDate = new LastPaidDate("07 11 2024");
+        assertEquals("07 11 2024", lastPaidDate.toString());
     }
 }

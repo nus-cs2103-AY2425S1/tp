@@ -54,9 +54,6 @@ public class LastPaidDate {
     }
     @Override
     public String toString() {
-        if (value == null) {
-            return "No date";
-        }
         return value;
     }
     @Override
