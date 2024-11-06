@@ -15,12 +15,6 @@ import seedu.address.model.pet.Pet;
  * Deletes a person identified using it's displayed index from PawPatrol.
  */
 public class DeletePetCommand extends DeleteCommand {
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the Pet identified by the index number used in the displayed Pet list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
-
     public static final String MESSAGE_DELETE_PET_SUCCESS = "Deleted Pet: %1$s";
 
     private final Index targetIndex;
